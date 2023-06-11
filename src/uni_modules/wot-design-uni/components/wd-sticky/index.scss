@@ -1,0 +1,12 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(sticky) {
+  display: inline-block;
+  @include e(container) {
+    display: inline-block;
+    @include m(wrapper) {
+      display: inline-block;
+    }
+  }
+}

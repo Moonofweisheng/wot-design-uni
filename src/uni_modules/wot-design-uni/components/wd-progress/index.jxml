@@ -1,0 +1,18 @@
+<view class="wd-progress custom-class">
+  <!--进度条-->
+  <view class="wd-progress__outer">
+    <view
+      class="wd-progress__inner {{progressClass}}"
+      style="background:{{showColor}}; width:{{showPercent}}%;transition-duration:{{changeCount * duration * 0.001}}s;"
+    >
+    </view>
+  </view>
+  <!--文案、图标-->
+  <view v-if="{{!hideText}}" class="wd-progress__label">{{ percentage }}%</view>
+  <wd-icon
+    jd:elif="{{status}}"
+    class="wd-progress__label wd-progress__icon {{progressClass}}"
+    name="{{status == 'danger' ? 'close-outline' : 'check-outline'}}"
+    style="color:{{color}}">
+  </wd-icon>
+</view>

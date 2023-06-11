@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "wd-picker-view": "../pickerView/index"
+  }
+}

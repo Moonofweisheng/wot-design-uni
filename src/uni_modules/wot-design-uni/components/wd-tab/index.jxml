@@ -1,0 +1,9 @@
+<view class="wd-tab custom-class">
+  <view
+    v-if="{{painted}}"
+    class="wd-tab__body"
+    style="{{ isShow ? '' : 'display: none;' }}"
+  >
+    <slot/>
+  </view>
+</view>

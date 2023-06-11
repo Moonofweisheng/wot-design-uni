@@ -1,0 +1,82 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(popover) {
+  position: relative;
+  display: inline-block;
+
+  @include e(icon) {
+    vertical-align: middle;
+    font-size: 18px;
+    margin-right: 5px;
+  }
+
+  @include e(menu-inner) {
+    position: relative;
+    padding: $-popover-padding 0;
+
+    @include halfPixelBorder("top", 0, $-popover-border-color);
+
+    &:first-child::after {
+      display: none;
+    }
+  }
+
+  @include e(menu) {
+    display: inline-block;
+    padding: 0 $-popover-padding;
+    white-space: nowrap;
+    z-index: $-popover-z-index;
+    position: relative;
+    background: $-popover-bg;
+    border-radius: $-popover-radius;
+  }
+
+  @include e(pos) {
+    position: absolute;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    text-align: center;
+    min-height: 36px;
+    z-index: $-popover-z-index;
+    line-height: $-popover-line-height;
+    font-size: $-popover-fs;
+    border-radius: $-popover-radius;
+    transition: opacity 0.2s;
+    background: $-popover-bg;
+    box-shadow: $-popover-box-shadow;
+    color: $-popover-color;
+  }
+
+  @include e(hidden) {
+    left: -100vw;
+    visibility: hidden;
+  }
+
+  @include e(container) {
+    position: relative;
+    line-height: $-tooltip-line-height;
+    font-size: $-tooltip-fs;
+  }
+
+  @include e(inner) {
+    position: relative;
+    white-space: nowrap;
+    padding: $-popover-padding;
+    line-height: $-popover-line-height;
+    z-index: $-popover-z-index;
+    background-color: $-popover-bg;
+    border-radius: $-popover-radius;
+  }
+
+  @include e(close-icon) {
+    font-size: 12px;
+    position: absolute;
+    right: -8px;
+    top: -10px;
+    transform: scale(0.5);
+    padding: 10px;
+  }
+
+  @include squareArrow($-popover-arrow-size, $-popover-bg, $-popover-z-index - 1, $-popover-arrow-box-shadow);
+}

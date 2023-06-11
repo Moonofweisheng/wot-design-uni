@@ -1,0 +1,199 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(step) {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+
+  @include e(header) {
+    position: relative;
+    font-size: 0;
+
+    @include when(dot) {
+      .wd-step__line {
+        margin-top: -1px;
+      }
+    }
+  }
+  @include e(icon) {
+    display: inline-block;
+    position: relative;
+    width: $-steps-icon-size;
+    height: $-steps-icon-size;
+    background: #fff;
+    z-index: 1;
+
+    @include when(icon) {
+      width: $-steps-is-icon-width;
+      text-align: center;
+    }
+    @include when(dot) {
+      width: $-steps-dot-size;
+      height: $-steps-dot-size;
+      border: 1px solid transparent;
+      margin-left: -1px;
+      border-radius: 50%;
+      background: transparent;
+    }
+  }
+  @include e(icon-inner) {
+    font-size: $-steps-icon-size;
+    color: $-steps-inactive-color;
+  }
+  @include e(icon-outer) {
+    width: $-steps-icon-size - 2px;
+    height: $-steps-icon-size - 2px;
+    border: 1px solid $-steps-inactive-color;
+    color: $-steps-inactive-color;
+    text-align: center;
+    line-height: $-steps-icon-size - 2px;
+    border-radius: 50%;
+    font-size: $-steps-icon-text-fs;
+  }
+  @include e(line) {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: $-steps-line-color;
+    transform: scaleY(0.5);
+    top: 50%;
+    left: 0;
+  }
+  @include e(dot) {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: $-steps-line-color;
+  }
+  @include e(content){
+    margin-top: 7px;
+    color: $-steps-inactive-color;
+    font-size: $-steps-label-fs;
+  }
+  @include e(title) {
+    font-weight: $-steps-title-fw;
+    line-height: 1.43;
+
+    @include when(description) {
+      font-size: $-steps-title-fs;
+    }
+  }
+  @include e(description) {
+    margin-top: 5px;
+    padding: 0 2px;
+    color: $-steps-description-color;
+  }
+  @include when(wait) {
+    .wd-step__description {
+      color: $-steps-inactive-color;
+    }
+  }
+  @include when(finished) {
+    .wd-step__icon-inner {
+      color: $-steps-finished-color;
+    }
+    .wd-step__icon-outer {
+      color: $-steps-finished-color;
+      border-color: $-steps-finished-color;
+    }
+    .wd-step__title {
+      color: $-steps-finished-color;
+    }
+    .wd-step__dot {
+      background: $-steps-finished-color;
+    }
+  }
+  @include when(process) {
+    .wd-step__icon.is-icon {
+      .wd-step__icon-inner {
+        color: $-steps-finished-color;
+      }
+    }
+    .wd-step__icon-outer {
+      color: #fff;
+      background: $-steps-finished-color;
+      border-color: $-steps-finished-color;
+    }
+    .wd-step__title {
+      color: $-steps-finished-color;
+    }
+    .wd-step__icon {
+      border-color: $-steps-finished-color;
+
+      &.is-dot {
+        &::after {
+          position: absolute;
+          content: '';
+          width: $-steps-dot-size + 10px;
+          height: $-steps-dot-size + 10px;
+          left: -5px;
+          top: -5px;
+          border-radius: 50%;
+          background: $-steps-finished-color;
+          opacity: 0.2;
+        }
+      }
+    }
+    .wd-step__dot {
+      background: $-steps-finished-color;
+    }
+  }
+  @include when(error) {
+    .wd-step__icon-inner, .wd-step__title {
+      color: $-steps-error-color;
+    }
+    .wd-step__icon-outer {
+      color: $-steps-error-color;
+      border-color: $-steps-error-color;
+    }
+    .wd-step__dot {
+      background: $-steps-error-color;
+    }
+  }
+  @include when(center) {
+    text-align: center;
+
+    .wd-step__line {
+      left: 50%;
+      right: -50%;
+    }
+  }
+  @include when(vertical) {
+    display: block;
+
+    .wd-step__header {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+
+      &.is-dot {
+        top: 6px;
+
+        .wd-step__line {
+          margin-left: -1px;
+          margin-top: 0;
+        }
+      }
+    }
+    .wd-step__content {
+      margin-left: 30px;
+      margin-top: 0;
+      padding-bottom: 20px;
+    }
+    .wd-step__line {
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 100%;
+      transform: scaleX(0.5);
+    }
+    .wd-step__icon.is-dot {
+      margin-left: 0;
+      margin-top: -1px;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+<view
+  id="wd-img-cropper custom-class"
+  v-if="{{show}}"
+  class="wd-img-cropper"
+  catchtouchmove='preventTouchMove'
+>
+  <!-- 展示在用户面前的裁剪框 -->
+  <view class="wd-img-cropper__wrapper">
+    <!-- 画出裁剪框 -->
+    <view class="wd-img-cropper__cut">
+      <!-- 上方阴影块 -->
+      <view class="wd-img-cropper__cut--top {{ IS_TOUCH_END ? '' : 'is-hightlight' }}" style="height: {{cutTop}}px;"></view>
+      <view class="wd-img-cropper__cut--middle">
+        <!-- 左侧阴影块 -->
+        <view class="wd-img-cropper__cut--left {{ IS_TOUCH_END ? '' : 'is-hightlight' }}" style="width: {{cutLeft}}px; height: {{cutWidth}}px;"></view>
+        <!-- 裁剪框 -->
+        <view class="wd-img-cropper__cut--body" style="width: {{cutWidth}}px; height: {{cutHeight}}px;">
+          <!-- 内部网格线 -->
+          <view class="is-gridlines-x"></view>
+          <view class="is-gridlines-y"></view>
+          <!-- 裁剪窗体四个对角 -->
+          <view class="is-left-top"></view>
+          <view class="is-left-bottom"></view>
+          <view class="is-right-top"></view>
+          <view class="is-right-bottom"></view>
+        </view>
+        <!-- 右侧阴影块 -->
+        <view class="wd-img-cropper__cut--right {{ IS_TOUCH_END ? '' : 'is-hightlight' }}"></view>
+      </view>
+
+      <!-- 底部阴影块 --> 
+      <view class="wd-img-cropper__cut--bottom {{ IS_TOUCH_END ? '' : 'is-hightlight' }}"></view>
+    </view>
+    <!-- 展示的传过来的图片: 控制图片的旋转角度(rotate)、缩放程度(imgScale)、移动位置(translate) -->
+    <image
+      class="wd-img-cropper__img"
+      src="{{ imgSrc }}"
+      style="width: {{picWidth ? picWidth + 'px' : 'auto'}}; height: {{picHeight ? picHeight + 'px' : 'auto'}}; transform: translate({{imgLeft - picWidth / 2}}px, {{imgTop - picHeight / 2}}px) scale({{imgScale}}) rotate({{imgAngle}}deg); transition-duration:{{isAnimation?.4:0}}s"
+      lazy-load="false"
+      bind:touchstart="handleImgTouchStart"
+      bind:touchmove="handleImgTouchMove"
+      bind:touchend="handleImgTouchEnd"
+      bind:error="handleImgLoadError"
+      bind:load="handleImgLoaded"
+    />
+  </view>
+  <!-- 绘制的图片canvas -->
+  <canvas
+    canvas-id="wd-img-cropper-canvas"
+    class="wd-img-cropper__canvas"
+    disable-scroll="true"
+    style="width: {{canvasWidth * canvasScale}}px; height: {{canvasHeight * canvasScale}}px;"
+  />
+  <!-- 下方按钮 -->
+  <view class="wd-img-cropper__footer">
+    <wd-icon v-if="{{!disabledRotate}}" name="rotate" size="24px" color="#fff" bindtap="handleRotate"></wd-icon>
+    <view class="wd-img-cropper__footer--button">
+      <view class="is-cancel" bindtap="handleCancel">{{cancelButtonText}}</view>
+      <wd-button size="small" custom-class="is-confirm" bindtap="handleConfirm">{{confirmButtonText}}</wd-button>
+    </view>
+  </view>
+</view>
+

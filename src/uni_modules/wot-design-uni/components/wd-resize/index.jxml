@@ -1,0 +1,32 @@
+<view
+  class="wd-resize custom-class"
+  style="width:{{width}}px;height:{{height}}px;"
+>
+  <!--插槽需要脱离父容器文档流，防止父容器固宽固高，进而导致插槽大小被被父容器限制-->
+  <view class="wd-resize__container custom-container-class">
+    <!--被监听的插槽-->
+    <slot/>
+    <!--监听插槽变大-->
+    <scroll-view
+      class="wd-resize__wrapper"
+      scroll-y="{{true}}"
+      scroll-top="{{expandScrollTop}}"
+      scroll-x="{{true}}"
+      scroll-left="{{expandScrollLeft}}"
+      bindscroll="onScrollHandler"
+    >
+      <view class="wd-resize__wrapper--placeholder" style="height:100000px;width:100000px;"></view>
+    </scroll-view>
+    <!--监听插槽变小-->
+    <scroll-view
+      class="wd-resize__wrapper"
+      scroll-y="{{true}}"
+      scroll-top="{{shrinkScrollTop}}"
+      scroll-x="{{true}}"
+      scroll-left="{{shrinkScrollLeft}}"
+      bindscroll="onScrollHandler"
+    >
+      <view class="wd-resize__wrapper--placeholder" style="height:250%;width:250%;"></view>
+    </scroll-view>
+  </view>
+</view>

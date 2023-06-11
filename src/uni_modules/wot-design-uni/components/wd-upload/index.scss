@@ -1,0 +1,120 @@
+@import "../common/abstracts/variable.scss";
+@import "../common/abstracts/_mixin.scss";
+
+@include b(upload) {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  @include e(evoke) {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: $-upload-size;
+    height: $-upload-size;
+    font-size: $-upload-evoke-icon-size;
+    background-color: $-upload-evoke-bg;
+    color: $-upload-evoke-color;
+    margin-bottom: 12px;
+
+    @include when(disabled) {
+      color: $-upload-evoke-disabled-color;
+    }
+
+    @include when(slot-default) {
+      width: auto;
+      height: auto;
+      background-color: transparent;
+    }
+  }
+
+  @include e(evoke-num) {
+    font-size: 14px;
+    line-height: 14px;
+    margin-top: 8px;
+  }
+
+  @include e(evoke-icon) {
+    width: 32px;
+    height: 32px;
+  }
+
+  @include e(input) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  @include e(preview) {
+    position: relative;
+    width: $-upload-size;
+    height: $-upload-size;
+    margin: 0 12px 12px 0;
+  }
+
+  @include e(preview-list) {
+    display: flex;
+  }
+
+  @include e(picture) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(close) {
+    position: absolute;
+    right: -$-upload-close-icon-size / 2;
+    top: -$-upload-close-icon-size / 2;
+    font-size: $-upload-close-icon-size;
+    z-index: 1;
+    color: $-upload-close-icon-color;
+    width: $-upload-close-icon-size;
+    height: $-upload-close-icon-size;
+    
+    &::after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: $-color-white;
+      left: 0;
+      z-index: -1;
+    }
+  }
+
+  @include e(mask) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $-upload-preview-name-bg;
+  }
+
+  @include e(progress-txt) {
+    font-size: $-upload-progress-fs;
+    line-height: $-upload-progress-fs;
+    margin-top: 9px;
+    color: $-color-white;
+  }
+
+  @include e(icon) {
+    font-size: $-upload-preview-icon-size;
+    color: $-color-white;
+  }
+
+  @include e(status-content) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+}

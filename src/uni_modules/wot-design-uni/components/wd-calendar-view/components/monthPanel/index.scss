@@ -1,0 +1,62 @@
+@import '../../../common/abstracts/variable';
+@import '../../../common/abstracts/mixin';
+
+@include b(month-panel) {
+  font-size: $-calendar-fs;
+
+  @include e(title) {
+    padding: 5px 0;
+    text-align: center;
+    font-size: $-calendar-panel-title-fs;
+    color: $-calendar-panel-title-color;
+    padding: $-calendar-panel-padding;
+  }
+  @include e(weeks) {
+    display: flex;
+    height: $-calendar-week-height;
+    line-height: $-calendar-week-height;
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.02);
+    color: $-calendar-week-color;
+    font-size: $-calendar-week-fs;
+    padding: $-calendar-panel-padding;
+  }
+  @include e(week) {
+    flex: 1;
+    text-align: center;
+  }
+  @include e(container) {
+    padding: $-calendar-panel-padding;
+    box-sizing: border-box;
+  }
+  @include e(time) {
+    display: flex;
+    box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.02);
+  }
+  @include e(time-label) {
+    position: relative;
+    flex: 1;
+    font-size: $-picker-column-fs;
+    text-align: center;
+    line-height: 125px;
+    color: $-picker-column-color;
+
+    &::after {
+      position: absolute;
+      content: '';
+      height: 35px;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      background: $-picker-column-select-bg;
+      z-index: 0;
+    }
+  }
+  @include e(time-text) {
+    position: relative;
+    z-index: 1;
+  }
+  @include e(time-picker) {
+    flex: 3;
+  }
+}

@@ -1,0 +1,18 @@
+<wd-modal
+  v-if="{{ modal }}"
+  show="{{ show }}"
+  z-index="{{ zIndex }}"
+  duration="{{ duration }}"
+  custom-style="{{ modalStyle }}"
+  bind:click="handleClickModal"
+  catchtouchmove="noop"
+/>
+<view
+  v-if="{{ !lazyRender || inited }}"
+  class="wd-popup wd-popup--{{ position }} custom-class {{ classes }}"
+  style="z-index: {{ zIndex }}; padding-bottom: {{ safeBottom }}px; -webkit-transition-duration: {{ currentDuration }}ms; transition-duration: {{ currentDuration }}ms; {{ (display || !hideWhenClose) ? '' : 'display: none;' }} {{ customStyle }}"
+  bind:transitionend="onTransitionEnd"
+>
+  <slot/>
+  <wd-icon v-if="{{ closable }}" class="wd-popup__close" name="add" bind:tap="close"/>
+</view>

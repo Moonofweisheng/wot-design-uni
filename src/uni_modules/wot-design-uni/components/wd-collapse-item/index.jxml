@@ -1,0 +1,21 @@
+<view class="wd-collapse-item {{ disabled ? 'is-disabled' : '' }} custom-class">
+	<view 
+		class="wd-collapse-item__header {{ firstItem ? 'wd-collapse-item__header-first' : '' }} " 
+		bindtap="toggle"
+		>
+		<text class="wd-collapse-item__title">{{ title }}</text>
+		<wd-icon 
+			name="arrow-down" 
+			class="wd-collapse-item__arrow {{ isExpand ? 'is-retract' : '' }}"
+			/>
+	</view>
+	<view 
+		class="wd-collapse-item__wrapper" 
+		style="height: {{ height }}; position: {{ show ? 'relative' : 'absolute' }}; visibility: {{ show ? 'show' :'hidden' }}; transition-duration: {{ transD }}" 
+		bindtransitionend="onTransitionend"
+		>
+		<view class="wd-collapse-item__body">
+			<slot />
+		</view>
+	</view>
+</view>

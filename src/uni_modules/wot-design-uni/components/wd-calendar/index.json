@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "wd-action-sheet": "../actionSheet/index",
+    "wd-icon": "../icon/index",
+    "wd-calendar-view": "../calendarView/index",
+    "wd-button": "../button/index",
+    "wd-tabs": "../tabs/index",
+    "wd-tab": "../tab/index",
+    "wd-tag": "../tag/index"
+  }
+}

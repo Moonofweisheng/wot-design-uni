@@ -1,0 +1,30 @@
+<button
+  hover-class="wd-button--active"
+  class="wd-button custom-class is-{{type}} is-{{size}} {{ plain ? 'is-plain' : '' }} {{ disabled ? 'is-disabled' : '' }} {{ round ? 'is-round' : '' }} {{ suck ? 'is-suck' : '' }} {{ block ? 'is-block' : '' }} {{ loading ? 'is-loading' : '' }}"
+  open-type="{{ openType }}"
+  send-message-title="{{sendMessageTitle}}"
+  send-message-path="{{sendMessagePath}}"
+  send-message-img="{{sendMessageImg}}"
+  app-parameter="{{appParameter}}"
+  show-message-card="{{showMessageCard}}"
+  session-from="{{sessionFrom}}"
+  session-message-title="{{sessionMessageTitle}}"
+  session-message-path="{{sessionMessagePath}}"
+  session-message-img="{{sessionMessageImg}}"
+  lang="{{lang}}"
+  hover-stop-propagation="{{hoverStopPropagation}}"
+  form-type="{{formType}}"
+  bindtap="handleClick"
+  bindgetuserinfo="handleGetuserinfo"
+  bindcontact="handleConcat"
+  bindgetphonenumber="handleGetphonenumber"
+  binderror="handleError"
+  bindlaunchapp="handleLaunchapp"
+  bindopensetting="handleOpensetting"
+>
+  <view v-if="{{loading}}" class="wd-button__loading">
+    <view class="wd-button__loading-svg" style="background-image: url({{loadingIconSvg}});"></view>
+  </view>
+  <wd-icon v-if="{{icon}}" class="wd-button__icon" name="{{icon}}" ></wd-icon>
+  <view class="wd-button__text"><slot/></view>
+</button>

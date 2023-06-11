@@ -1,0 +1,3 @@
+<view class="wd-steps custom-class {{ vertical ? 'is-vertical' : '' }}">
+  <slot/>
+</view>

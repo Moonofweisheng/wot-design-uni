@@ -1,0 +1,47 @@
+{
+    "pages": [
+      {
+        "path": "pages/button/Button",
+        "name": "button",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+  
+          "navigationBarTitleText": "Button 按钮"
+        }
+      },
+      {
+        "path": "pages/icon/Icon",
+        "name": "icon",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+  
+          "navigationBarTitleText": "Icon 图标"
+        }
+      },
+      {
+        "path": "pages/badge/Badge",
+        "name": "badge",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Badge 徽标"
+        }
+      }
+    ],
+    "tabBar": {
+      "color": "#7a7e83",
+      "selectedColor": "#1C64FD",
+      "backgroundColor": "#ffffff",
+      "list": [ ]
+    },
+    "globalStyle": {
+      "navigationBarTextStyle": "black",
+      "navigationBarBackgroundColor": "#FFF",
+      "backgroundColor": "#F8F8F8"
+    }
+  }

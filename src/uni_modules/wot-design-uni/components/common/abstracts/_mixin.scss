@@ -1,0 +1,265 @@
+/**
+ * 混合宏
+ */
+@import "config";
+@import "function";
+
+/**
+  * BEM，定义块（b)
+  */
+@mixin b($block) {
+  $B: $namespace + "-" + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+/* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
+@mixin e($element...) {
+  $selector: &;
+  $selectors: "";
+
+  @if containsPseudo($selector) {
+    @each $item in $element {
+      $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
+    }
+    @at-root {
+      #{$selector} {
+        #{$selectors} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @each $item in $element {
+      $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
+    }
+    @at-root {
+      #{$selectors} {
+        @content;
+      }
+    }
+  }
+}
+/* 定义状态（m） */
+@mixin m($modifier...) {
+  $selectors: "";
+  @each $item in $modifier {
+    $selectors: #{$selectors + & + $modifierSeparator + $item + ","};
+  }
+
+  @at-root {
+    #{$selectors} {
+      @content;
+    }
+  }
+}
+/* 对于需要需要嵌套在 m 底下的 e，调用这个混合宏，一般在切换整个组件的状态，如切换颜色的时候 */
+@mixin me($element...) {
+  $selector: &;
+  $selectors: "";
+
+  @if containsModifier($selector) {
+    @each $item in $element {
+      $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
+    }
+    @at-root {
+      #{$selector} {
+        #{$selectors} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @each $item in $element {
+      $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
+    }
+    @at-root {
+      #{$selectors} {
+        @content;
+      }
+    }
+  }
+}
+
+/* 状态，生成 is-$state 类名 */
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+/**
+  * 常用混合宏
+  */
+
+/* 单行超出隐藏 */
+@mixin lineEllipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 多行超出隐藏 */
+@mixin multiEllipsis($lineNumber: 3) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lineNumber;
+  overflow: hidden;
+}
+
+/* 清除浮动 */
+@mixin clearFloat {
+  &::after {
+    display: block;
+    content: "";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
+
+/* 0.5px 边框 */
+@mixin halfPixelBorder($direction: "bottom", $left: 0, $color: $-color-border-light) {
+  &::after {
+    position: absolute;
+    display: block;
+    content: "";
+    @if ($left == 0) {
+      width: 100%;
+    } @else {
+      width: calc(100% - #{$left});
+    }
+    height: 1px;
+    left: $left;
+    @if ($direction == "bottom") {
+      bottom: 0;
+    } @else {
+      top: 0;
+    }
+    transform: scaleY(0.5);
+    background: $color;
+  }
+}
+@mixin buttonClear {
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background: transparent;
+}
+
+/**
+  * 三角形实现尖角样式，适用于背景透明情况
+  * @param $size 三角形高，底边为 $size * 2
+  * @param $bg 三角形背景颜色
+  */
+@mixin triangleArrow($size, $bg) {
+  @include e(arrow) {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+  @include e(arrow-down) {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $bg;
+    transform: translateX(-50%);
+    bottom: -$size;
+  }
+  @include e(arrow-up) {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $bg;
+    transform: translateX(-50%);
+    top: -$size;
+  }
+  @include e(arrow-left) {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $bg;
+    transform: translateY(-50%);
+    left: -$size;
+  }
+  @include e(arrow-right) {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $bg;
+    transform: translateY(-50%);
+    right: -$size;
+  }
+}
+
+/**
+  * 正方形实现尖角样式，适用于背景不透明情况
+  * @param $size 正方形边长
+  * @param $bg 正方形背景颜色
+  * @param $z-index z-index属性值，不得大于外部包裹器
+  * @param $box-shadow 阴影
+*/
+@mixin squareArrow($size, $bg, $z-index, $box-shadow) {
+  @include e(arrow) {
+    position: absolute;
+    width: $size;
+    height: $size;
+    z-index: $z-index;
+  }
+
+  @include e(arrow-down) {
+    transform: translateX(-50%);
+    bottom: 0;
+
+    &:after {
+      content: "";
+      width: $size;
+      height: $size;
+      background-color: $bg;
+      position: absolute;
+      bottom: -$size/2;
+      transform: rotateZ(45deg);
+      box-shadow: $box-shadow;
+    }
+  }
+  @include e(arrow-up) {
+    transform: translateX(-50%);
+    &:after {
+      content: "";
+      width: $size;
+      height: $size;
+      background-color: $bg;
+      position: absolute;
+      top: -$size/2;
+      transform: rotateZ(45deg);
+      box-shadow: $box-shadow;
+    }
+  }
+  @include e(arrow-left) {
+    transform: translateY(-50%);
+    &:after {
+      content: "";
+      width: $size;
+      height: $size;
+      background-color: $bg;
+      position: absolute;
+      left: -$size/2;
+      transform: rotateZ(45deg);
+      box-shadow: $box-shadow;
+    }
+  }
+  @include e(arrow-right) {
+    transform: translateY(-50%);
+    &:after {
+      content: "";
+      width: $size;
+      height: $size;
+      background-color: $bg;
+      position: absolute;
+      right: -$size/2;
+      transform: rotateZ(45deg);
+      box-shadow: $box-shadow;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+@import '../popup/index.scss';
+
+@include b(drop-item) {
+  position: fixed;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  font-size: $-drop-menu-item-fs;
+  color: $-drop-menu-item-color;
+  width: 100%;
+  z-index: 101;
+  
+  .wd-drop-item__popup {
+    position: absolute;
+    max-height: 80%;
+  }
+
+  @include e(option) {
+    display: flex;
+    height: $-drop-menu-item-height;
+    line-height: $-drop-menu-item-height;
+    padding: 0 $-drop-menu-side-padding;
+    justify-content: space-between;
+    align-items: center;
+    transition: color .2s;
+
+    @include when(active) {
+      color: $-drop-menu-item-color-active;
+    }
+  }
+
+  @include e(title){
+    display: block;
+  }
+
+  @include e(tip) {
+    display: inline-block;
+    color: $-drop-menu-item-color-tip;
+    font-size: $-drop-menu-item-fs-tip;
+    margin-left: 2px;
+  }
+
+  @include e(icon){
+    display: block;
+    font-size: $-drop-menu-option-check-size;
+  }
+
+  @include e(modal) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+  }
+}

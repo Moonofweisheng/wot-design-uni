@@ -1,0 +1,18 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(img) {
+  position: relative;
+  display: inline-block;
+
+  image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  @include when(round) {
+    overflow: hidden;
+    border-radius: 50%;
+  }
+}

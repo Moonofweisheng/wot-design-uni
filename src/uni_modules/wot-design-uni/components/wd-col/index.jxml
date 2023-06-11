@@ -1,0 +1,4 @@
+<view class=" wd-col {{ span && 'wd-col__' + span }} {{ offset && 'wd-col__offset-' + offset }} custom-class" style="{{ style }}">
+	<!-- 每一列 -->
+	<slot  />
+</view>

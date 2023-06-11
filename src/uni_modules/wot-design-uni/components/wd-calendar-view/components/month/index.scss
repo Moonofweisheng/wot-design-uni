@@ -1,0 +1,114 @@
+@import '../../../common/abstracts/variable';
+@import '../../../common/abstracts/mixin';
+
+@include b(month) {
+  @include e(title) {
+    padding: 13px 0;
+    text-align: center;
+    font-size: $-calendar-panel-title-fs;
+    color: $-calendar-panel-title-color;
+  }
+  @include e(days) {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: $-calendar-day-fs;
+    color: $-calendar-day-color;
+  }
+  @include e(day) {
+    position: relative;
+    width: 14.285%;
+    height: $-calendar-day-height;
+    line-height: $-calendar-day-height;
+    text-align: center;
+
+    @include when(disabled) {
+      .wd-month__day-text {
+        color: $-calendar-disabled-color;
+      }
+    }
+    @include when(current) {
+      color: $-calendar-active-color;
+    }
+    @include when(selected) {
+      .wd-month__day-container {
+        border-radius: $-calendar-active-border;
+        background: $-calendar-active-color;
+        color: #fff;
+      }
+    }
+    @include when(middle) {
+      .wd-month__day-container {
+        background: $-calendar-range-color;
+      }
+    }
+    @include when(start) {
+      &::after {
+        position: absolute;
+        content: '';
+        height: $-calendar-day-height;
+        top: 0;
+        right: 0;
+        left: 50%;
+        background: $-calendar-range-color;
+        z-index: 1;
+      }
+      &.is-without-end::after {
+        display: none;
+      }
+      .wd-month__day-container {
+        background: $-calendar-active-color;
+        color: #fff;
+        border-radius: $-calendar-active-border;
+      }
+    }
+    @include when(end) {
+      &::after {
+        position: absolute;
+        content: '';
+        height: $-calendar-day-height;
+        top: 0;
+        left: 0;
+        right: 50%;
+        background: $-calendar-range-color;
+        z-index: 1;
+      }
+      .wd-month__day-container {
+        background: $-calendar-active-color;
+        color: #fff;
+        border-radius: $-calendar-active-border;
+      }
+    }
+    @include when(same) {
+      .wd-month__day-container {
+        background: $-calendar-active-color;
+        color: #fff;
+        border-radius: $-calendar-active-border;
+      }
+    }
+  }
+  @include e(day-container) {
+    position: relative;
+    z-index: 2;
+  }
+  @include e(day-text) {
+    font-weight: $-calendar-day-fw;
+  }
+  @include e(day-top) {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    line-height: 1.1;
+    font-size: $-calendar-info-fs;
+    text-align: center;
+  }
+  @include e(day-bottom) {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    line-height: 1.1;
+    font-size: $-calendar-info-fs;
+    text-align: center;
+  }
+}

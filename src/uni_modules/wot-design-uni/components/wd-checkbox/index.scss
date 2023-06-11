@@ -1,0 +1,203 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(checkbox) {
+  display: block;
+  margin-bottom: $-checkbox-margin;
+  font-size: 0;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.2;
+
+  @include when(last-child) {
+    margin-bottom: 0;
+  }
+
+  @include e(shape) {
+    position: relative;
+    display: inline-block;
+    width: $-checkbox-size;
+    height: $-checkbox-size;
+    border: 2px solid $-checkbox-border-color;
+    border-radius: 50%;
+    color: $-checkbox-check-color;
+    background: $-checkbox-bg;
+    vertical-align: middle;
+    transition: background 0.2s;
+    box-sizing: border-box;
+
+    @include when(square) {
+      border-radius: $-checkbox-square-radius;
+    }
+  }
+  @include e(input) {
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    opacity: 0;
+  }
+  @include e(btn-check) {
+    display: inline-block;
+    font-size: $-checkbox-icon-size;
+    margin-right: 4px;
+    height: $-checkbox-icon-size;
+    width: $-checkbox-icon-size;
+    vertical-align: middle;
+  }
+  @include e(txt) {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 20px;
+    @include lineEllipsis;
+  }
+  @include e(label) {
+    position: relative;
+    display: inline-block;
+    margin-left: $-checkbox-label-margin;
+    vertical-align: middle;
+    font-size: $-checkbox-label-fs;
+    color: $-checkbox-label-color;
+  }
+  @include e(check) {
+    color: $-checkbox-check-color;
+    font-size: $-checkbox-icon-size;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  @include when(checked) {
+    .wd-checkbox__shape {
+      color: $-checkbox-checked-color;
+      background: currentColor;
+      border-color: currentColor;
+    }
+    .wd-checkbox__check {
+      opacity: 1;
+      position: absolute;
+      left: 0;
+      top: -1px;
+      transform: translateX(-4.5%);
+    }
+  }
+
+  @include when(button) {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: $-checkbox-margin;
+    vertical-align: top;
+    font-size: $-checkbox-button-font-size;
+
+    @include when(last-child) {
+      margin-right: 0;
+    }
+    .wd-checkbox__shape {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      border: none;
+    }
+    .wd-checkbox__label {
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      min-width: $-checkbox-button-min-width;
+      height: $-checkbox-button-height;
+      font-size: $-checkbox-button-font-size;
+      margin-left: 0;
+      padding: 5px 15px;
+      border: 1px solid $-checkbox-button-border;
+      background-color: $-checkbox-button-bg;
+      border-radius: $-checkbox-button-radius;
+      transition: color 0.2s, border 0.2s;
+      box-sizing: border-box;
+    }
+    @include when(checked) {
+      .wd-checkbox__label {
+        color: $-checkbox-checked-color;
+        background-color: $-checkbox-bg;
+        border-color: $-checkbox-checked-color;
+        border-color: currentColor;
+      }
+    }
+  }
+
+  @include when(inline) {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: $-checkbox-margin;
+
+    @include when(last-child) {
+      margin-right: 0;
+    }
+  }
+
+  @include when(disabled) {
+    .wd-checkbox__shape {
+      border-color: $-checkbox-border-color;
+      background: $-checkbox-disabled-check-bg;
+    }
+    .wd-checkbox__label {
+      color: $-checkbox-disabled-label-color;
+    }
+    @include when(checked) {
+      .wd-checkbox__shape {
+        color: $-checkbox-disabled-check-color;
+      }
+      .wd-checkbox__label {
+        color: $-checkbox-disabled-label-color;
+      }
+    }
+    @include when(button) {
+      .wd-checkbox__label {
+        background: $-checkbox-disabled-color;
+        border-color: $-checkbox-button-border;
+        color: $-checkbox-disabled-label-color;
+      }
+      @include when(checked) {
+        .wd-checkbox__label {
+          border-color: $-checkbox-button-disabled-border;
+        }
+      }
+    }
+  }
+  // 以下内容用于解决父子组件样式隔离的问题 —— START
+  @include when(cell-box) {
+    padding: 13px 15px;
+    margin: 0;
+
+    @include when(large) {
+      padding: 14px 15px;
+    }
+  }
+  @include when(button-box) {
+    display: inline-flex;
+    width: 33.3333%;
+    padding: 12px 12px 0 0;
+    box-sizing: border-box;
+
+    .wd-checkbox__label {
+      width: 100%;
+    }
+
+    &:last-child::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+  @include when(large) {
+    .wd-checkbox__shape {
+      width: $-checkbox-large-size;
+      height: $-checkbox-large-size;
+      font-size: $-checkbox-large-size;
+    }
+    .wd-checkbox__label {
+      font-size: $-checkbox-large-label-fs;
+    }
+    .wd-checkbox__check {
+      top: 0;
+      left: 1px;
+    }
+  }
+}

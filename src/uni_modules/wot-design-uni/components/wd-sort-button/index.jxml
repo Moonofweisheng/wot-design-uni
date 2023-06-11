@@ -1,0 +1,21 @@
+<view class="wd-sort-button {{ line ? 'wd-sort-button--line' : '' }} custom-class" bindtap="handleClick">
+  <view class="wd-sort-button__wrapper">
+    <view class="wd-sort-button__left {{ value !== 0 ? 'is-active' : '' }}">
+      {{title}}
+    </view>
+    <view class="wd-sort-button__right {{ value !== 0 ? 'is-active' : '' }}">
+      <wd-icon
+        v-if="{{ value !== 1 }}"
+        name="arrow-up"
+        color="{{top.color}}"
+        custom-class="wd-sort-button__icon-up"
+      />
+      <wd-icon
+        v-if="{{ value !== -1 }}"
+        name="arrow-down"
+        color="{{bottom.color}}"
+        custom-class="wd-sort-button__icon-down"
+      />
+    </view>
+  </view>
+</view>

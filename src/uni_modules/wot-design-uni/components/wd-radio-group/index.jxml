@@ -1,0 +1,5 @@
+<view
+  class="wd-radio-group custom-class {{ cell && shape === 'button' ? 'is-button' : '' }}"
+>
+  <slot/>
+</view>

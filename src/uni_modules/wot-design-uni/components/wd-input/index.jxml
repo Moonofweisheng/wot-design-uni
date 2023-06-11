@@ -1,0 +1,145 @@
+<view class="wd-input {{ type === 'textarea' ? 'is-textarea' : '' }} {{ (label || useLabelSlot) ? 'is-cell' : '' }} {{ center ? 'is-center' : '' }} {{ border ? 'is-border' : '' }} {{ size ? 'is-' + size : '' }} {{ error ? 'is-error' : '' }} {{ disabled ? 'is-disabled' : '' }} {{ autoHeight ? 'is-auto-height' : '' }} {{ value && value.length > 0 ? 'is-not-empty' : '' }} {{ noBorder ? 'is-no-border' : '' }} custom-class">
+  <view
+    v-if="{{ label || useLabelSlot }}"
+    class="wd-input__label custom-label-class {{ required ? 'is-required' : '' }}"
+    style="{{ labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : '' }}"
+  >
+    <view v-if="{{ prefixIcon || usePrefixSlot }}" class="wd-input__prefix">
+      <wd-icon v-if="{{ prefixIcon && !usePrefixSlot }}" custom-class="wd-input__icon" name="{{ prefixIcon }}" bind:tap="onClickPrefixIcon" />
+      <slot v-else name="prefix"></slot>
+    </view>
+    <block>
+      <view class="wd-input__label-inner">
+        <block v-if="{{label}}">{{ label }}</block>
+        <slot v-else name="label"></slot>
+      </view>
+    </block>
+  </view>
+  <!-- 文本域 -->
+  <view v-if="{{ type === 'textarea' }}" class="wd-input__textarea custom-textarea-container-class {{ showWordCount ? 'is-show-limit' : '' }}">
+    <!-- readonly -->
+    <view v-if="{{ readonly }}" class="wd-input__textarea-inner">{{ value }}</view>
+    <block v-else>
+      <textarea
+        class="wd-input__textarea-inner {{ showClear ? 'is-suffix' : '' }} custom-textarea-class"
+        value="{{ value }}"
+        placeholder="{{ placeholder }}"
+        disabled="{{ disabled }}"
+        minlength="{{ minlength }}"
+        maxlength="{{ maxlength }}"
+        focus="{{ focus }}"
+        placeholder-style="{{ placeholderStyle }}"
+        placeholder-class="wd-input__placeholder {{ placeholderClass }}"
+        auto-height="{{ autoHeight }}"
+        cursor-spacing="{{ cursorSpacing }}"
+        fixed="{{ fixed }}"
+        cursor="{{ cursor }}"
+        show-confirm-barb="{{ showConfirmBar }}"
+        selection-start="{{ selectionStart }}"
+        selection-end="{{ selectionEnd }}"
+        adjust-position="{{ adjustPosition }}"
+        hold-keyboard="{{ holdKeyboard }}"
+        bindinput="handleInput"
+        bindfocus="handleFocus"
+        bindblur="handleBlur"
+        bindconfirm="handleConfirm"
+        bindlinechange="handleLineChange"
+        bindkeyboardheightchange="handleKeyboardheightchange"
+      />
+      <view class="wd-input__textarea-suffix">
+        <wd-icon v-if="{{ showClear }}" custom-class="wd-input__textarea-icon" name="error-fill" catchtap="clear"/>
+        <view v-if="{{ showWordCount }}" class="wd-input__textarea-count">
+          <text
+            class="{{ value && value.length > 0 ? 'wd-input__textarea-count-current' : '' }} {{ value.length > parseInt(maxlength) ? 'is-error' : '' }}"
+          >{{ value.length }}</text>/{{ maxlength }}
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- 输入域 -->
+  <view v-else class="wd-input__block">
+    <view v-if="{{ (prefixIcon || usePrefixSlot) && !label }}" class="wd-input__prefix">
+      <wd-icon v-if="{{ prefixIcon }}" custom-class="wd-input__icon" name="{{ prefixIcon }}" bind:tap="onClickPrefixIcon" />
+      <slot name="prefix"></slot>
+    </view>
+    <!-- readonly -->
+    <view v-if="{{ readonly }}" class="wd-input__inner wd-input__readonly">{{ value }}</view>
+    <!-- 密码隐藏 -->
+    <block v-else>
+      <input
+        v-if="{{ showPassword && !isPwdVisible }}"
+        class="wd-input__inner {{ prefixIcon ? 'wd-input__inner--prefix' : '' }} {{ showWordCount ? 'wd-input__inner--count' : '' }} {{alignRight? 'is-align-right' : ''}}  custom-input-class"
+        type="password"
+        password="{{ isPwdVisible }}"
+        value="{{ value }}"
+        placeholder="{{ placeholder }}"
+        readonly="{{ readonly }}"
+        disabled="{{ disabled }}"
+        minlength="{{ minlength }}"
+        maxlength="{{ maxlength }}"
+        focus="{{ focus }}"
+        confirm-type="{{ confirmType }}"
+        confirm-hold="{{ confirmHold }}"
+        cursor="{{ cursor }}"
+        cursor-spacing="{{ cursorSpacing }}"
+        placeholder-style="{{ placeholderStyle }}"
+        selection-start="{{ selectionStart }}"
+        selection-end="{{ selectionEnd }}"
+        adjust-position="{{ adjustPosition }}"
+        hold-keyboard="{{ holdKeyboard }}"
+        placeholder-class="wd-input__placeholder {{ placeholderClass }}"
+        bindinput="handleInput"
+        bindfocus="handleFocus"
+        bindblur="handleBlur"
+        bindconfirm="handleConfirm"
+        bindkeyboardheightchange="handleKeyboardheightchange"
+      >
+      </input>
+      <!-- 密码不隐藏 -->
+      <input
+        v-else
+        class="wd-input__inner {{ prefixIcon ? 'wd-input__inner--prefix' : '' }} {{ showWordCount ? 'wd-input__inner--count' : '' }} {{alignRight? 'is-align-right' : ''}} custom-input-class"
+        type="{{ type }}"
+        value="{{ value }}"
+        placeholder="{{ placeholder }}"
+        readonly="{{ readonly }}"
+        disabled="{{ disabled }}"
+        minlength="{{ minlength }}"
+        maxlength="{{ maxlength }}"
+        focus="{{ focus }}"
+        confirm-type="{{ confirmType }}"
+        confirm-hold="{{ confirmHold }}"
+        cursor="{{ cursor }}"
+        cursor-spacing="{{ cursorSpacing }}"
+        placeholder-style="{{ placeholderStyle }}"
+        selection-start="{{ selectionStart }}"
+        selection-end="{{ selectionEnd }}"
+        adjust-position="{{ adjustPosition }}"
+        hold-keyboard="{{ holdKeyboard }}"
+        placeholder-class="wd-input__placeholder {{ placeholderClass }}"
+        bindinput="handleInput"
+        bindfocus="handleFocus"
+        bindblur="handleBlur"
+        bindconfirm="handleConfirm"
+        bindkeyboardheightchange="handleKeyboardheightchange"
+      >
+      </input>
+      <view v-if="{{ showClear || showPassword || suffixIcon || showWordCount || useSuffixSlot }}" class="wd-input__suffix">
+        <wd-icon v-if="{{ showClear }}" custom-class="wd-input__clear" name="error-fill"  bindtap="clear"/>
+        <wd-icon
+          v-if="{{ showPassword }}"
+          class="wd-input__icon"
+          name="{{ isPwdVisible ? 'view' : 'eye-close' }}"
+          bindtap="togglePwdVisible"
+        />
+        <view v-if="{{ showWordCount }}" class="wd-input__count">
+          <text
+            class="{{ value && value.length > 0 ? 'wd-input__count-current' : '' }} {{  value.length > maxlength ?  'is-error' : '' }}"
+          >{{ value.length }}</text>/{{ maxlength }}
+        </view>
+        <wd-icon v-if="{{ suffixIcon }}" custom-class="wd-input__icon " name="{{ suffixIcon }}" bind:tap="onClickSuffixIcon"/>
+        <slot name="suffix"></slot>
+      </view>
+    </block>
+  </view>
+</view>

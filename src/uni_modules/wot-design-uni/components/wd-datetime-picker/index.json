@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "wd-datetime-picker-view": "../datetimePickerView/index",
+    "wd-popup": "../popup/index",
+    "wd-icon": "../icon/index"
+  }
+}

@@ -1,0 +1,77 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(sort-button){
+  display: inline-block;
+  height: $-sort-button-height;
+  line-height: $-sort-button-height;
+
+  @include m(line) {
+    .wd-sort-button__left{
+      &::after {
+        position: absolute;
+        content: '';
+        width: 19px;
+        height: 3px;
+        bottom: 6px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background: $-sort-button-line-color;
+        border-radius: $-sort-button-line-height / 2;
+        transition: opacity .15s;
+        opacity: 0;
+      }
+
+      &.is-active::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  @include e(wrapper){
+    font-size: $-sort-button-fs;
+    color: $-sort-button-color;
+    word-break: break-all;
+    white-space: nowrap;
+  }
+
+  @include e(left) {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    @include when(active) {
+      font-weight: $-fw-medium;
+
+      .wd-sort-button__right {
+        justify-content: center;
+      }
+
+    }
+  }
+
+  @include e(right){
+    display: inline-block;
+    min-width: 14px;
+    margin-left: 2px;
+    vertical-align: middle;
+    line-height: 1.1;
+
+    @include when(active) {
+      .wd-sort-button__icon-up, .wd-sort-button__icon-down {
+        transform: scale((10/14));
+      }
+    }
+  }
+
+  @include e(icon-up){
+    display: block !important;
+    line-height: 1.1;
+    transform: scale((10/14)) translate(0, 7px);
+  }
+  @include e(icon-down) {
+    display: block !important;
+    line-height: 1.1;
+    transform: scale((10/14)) translate(0, -7px);
+  }
+}

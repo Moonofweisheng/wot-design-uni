@@ -1,0 +1,43 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(pager) {
+  user-select: none;
+  background-color: #fff;
+  @include e(content) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: $-pagination-content-padding;
+  }
+  @include e(message) {
+    text-align: center;
+    color:$-pagination-message-color;
+    font-size: $-pagination-message-fs;
+    padding: $-pagination-message-padding;
+  }
+  @include e(nav) {
+    min-width: $-pagination-nav-width;
+    @include m(active){
+      color: rgba(0,0,0,0.65)      
+    }
+    @include m(disabled){
+      color: rgba(0,0,0,0.15)      
+    }
+  }
+  @include e(size){
+    flex: 1;
+    text-align: center;
+    font-size: $-pagination-nav-content-fs;
+  }
+  @include e(separator){
+    padding: $-pagination-nav-sepatator-padding;
+  }
+  @include e(left){
+    transform: rotate(180deg) translateY(1px);
+    display: inline-block;
+  }
+  @include e(current){
+    color: $-pagination-nav-current-color;
+  }
+}

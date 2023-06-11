@@ -1,0 +1,45 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+@include b(collapse) {
+  background: $-color-white;
+
+  @include when(viewmore) {
+    padding: $-collapse-side-padding;
+  }
+  @include e(content) {
+    font-size: $-collapse-body-fs;
+    color: $-collapse-body-color;
+
+    @include when(retract) {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-size: $-collapse-retract-fs;
+    }
+  }
+  @include e(more) {
+    display: inline-block;
+    font-size: $-collapse-retract-fs;
+    margin-top: 8px;
+    color: $-collapse-more-color;
+    user-select: none;
+  }
+  @include e(more-txt) {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  @include e(arrow) {
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 0.1s;
+    font-size: $-collapse-arrow-size;
+    height: $-collapse-arrow-size;
+    line-height: $-collapse-arrow-size;
+
+    @include when(retract) {
+      transform: rotate(-180deg);
+    }
+  }
+}

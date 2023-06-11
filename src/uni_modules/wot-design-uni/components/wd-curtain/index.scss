@@ -1,0 +1,79 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+@import "../modal/index.scss";
+@import "../popup/index.scss";
+
+@include b(curtain) {
+  display: inline-block;
+  border-radius: $-curtain-content-radius;
+  overflow-y: visible;
+  background: transparent;
+  font-size: 0;
+  @include e(content) {
+    position: relative;
+    display: inline-block;
+    background: transparent;
+    border-radius: $-curtain-content-radius;
+  }
+  @include e(content-link) {
+    display: block;
+    border-radius: $-curtain-content-radius;
+  }
+  @include e(content-img) {
+    display: block;
+    width: auto;
+    height: auto;
+    border-radius: $-curtain-content-radius;
+  }
+  @include e(content-close) {
+    position: absolute;
+    margin: 0;
+    padding: 6px;
+    top: 10px;
+    right: 10px;
+    color: $-curtain-content-close-color;
+    -webkit-tap-highlight-color: transparent;
+    &.top {
+      margin: 0 0 0 -18px;
+      top: -62px;
+      right: unset;
+      left: 50%;
+      bottom: unset;
+    }
+    &.top-left {
+      margin: 0;
+      top: -62px;
+      right: unset;
+      left: -6px;
+      bottom: unset;
+    }
+    &.top-right {
+      margin: 0;
+      top: -62px;
+      right: -6px;
+      left: unset;
+      bottom: unset;
+    }
+    &.bottom {
+      margin: 0 0 0 -18px;
+      top: unset;
+      right: unset;
+      left: 50%;
+      bottom: -62px;
+    }
+    &.bottom-left {
+      margin: 0;
+      top: unset;
+      right: unset;
+      left: -6px;
+      bottom: -62px;
+    }
+    &.bottom-right {
+      margin: 0;
+      top: unset;
+      right: -6px;
+      left: unset;
+      bottom: -62px;
+    }
+  }
+}

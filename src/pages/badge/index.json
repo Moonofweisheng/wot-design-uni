@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Badge 角标",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-badge": "../../wot-design/badge/index",
+    "wd-button": "../../wot-design/button/index"
+  }
+}

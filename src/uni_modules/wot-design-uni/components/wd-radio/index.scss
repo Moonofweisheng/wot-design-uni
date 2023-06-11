@@ -1,0 +1,228 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(radio) {
+  display: flex;
+  margin-top: $-radio-margin;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  line-height: 1.2;
+
+  @include when(first) {
+    margin-top: 0;
+  }
+  @include e(shape) {
+    position: relative;
+    display: inline-block;
+    width: $-radio-size;
+    height: $-radio-size;
+    font-size: $-radio-size;
+    color: transparent;
+    display: none;
+    background: $-radio-bg;
+    vertical-align: middle;
+    transition: background 0.2s;
+  }
+  @include e(input) {
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    opacity: 0;
+  }
+  @include e(label) {
+    display: inline-block;
+    vertical-align: top;
+    font-size: $-radio-label-fs;
+    color: $-radio-label-color;
+    line-height: 20px;
+  }
+  @include when(checked) {
+    .wd-radio__shape {
+      color: $-radio-checked-color;
+      border-color: currentColor;
+      display: inline-block;
+    }
+    .wd-radio__check {
+      color: $-radio-checked-color;
+      opacity: 1;
+    }
+  }
+
+  @include when(dot) {
+    .wd-radio__shape {
+      border: 2px solid $-radio-dot-border-color;
+      border-radius: 50%;
+      position: relative;
+      display: inline-block;
+      box-sizing: border-box;
+      transition: none;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: $-radio-dot-size;
+        height: $-radio-dot-size;
+        left: 2px;
+        top: 2px;
+        border-radius: 50%;
+        background-color: #fff;
+        transform: scale(0);
+        transition: transform .2s ease-in;
+      }
+    }
+    @include when(checked) {
+      .wd-radio__shape {
+        background-color: $-radio-dot-checked-bg;
+        border-color: $-radio-dot-checked-border-color;
+        &::before {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  @include when(button) {
+    display: inline-block;
+    margin-top: 0;
+    margin-right: 10px;
+
+    .wd-radio__shape {
+      display: none;
+    }
+    .wd-radio__label {
+      height: $-radio-button-height;
+      min-width: $-radio-button-min-width;
+      max-width: $-radio-button-max-width;
+      padding: 5px 15px;
+      margin-right: 0;
+      border-radius: $-radio-button-radius;
+      background-color: $-radio-button-bg;
+      font-size: $-radio-button-fs;
+      box-sizing: border-box;
+      border: 1px solid $-radio-button-border;
+      transition: all 0.2s;
+      @include lineEllipsis;
+    }
+    @include when(checked) {
+      .wd-radio__label {
+        color: $-radio-checked-color;
+        border-color: currentColor;
+        background-color: $-radio-bg;
+      }
+    }
+  }
+
+  @include when(inline) {
+    display: inline-block;
+    margin-top: 0;
+    margin-right: $-radio-margin;
+
+    @include when(first) {
+      margin-left: 0;
+    }
+    .wd-radio__shape {
+      display: block;
+      margin-right: 4px;
+      float: left;
+      &::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+
+    @include when(dot) {
+      .wd-radio__shape {
+        margin-top: 2px;
+      }
+      @include when(large) {
+        .wd-radio__shape {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  @include when(disabled) {
+    .wd-radio__label {
+      color: $-radio-disabled-label-color;
+    }
+    @include when(checked) {
+      .wd-radio__shape {
+        color: $-radio-disabled-label-color;
+      }
+      .wd-radio__check {
+        color: $-radio-disabled-label-color;
+      }
+      .wd-radio__label {
+        color: $-radio-disabled-label-color;
+      }
+    }
+
+    @include when(button) {
+      .wd-radio__label {
+        border-color: $-radio-disabled-color;
+        background: $-radio-disabled-color;
+        border-color: $-radio-button-border;
+        color: $-radio-disabled-label-color;
+      }
+      @include when(checked) {
+        .wd-radio__label {
+          border-color: $-radio-button-disabled-border;
+          background: $-radio-disabled-color;
+        }
+      }
+    }
+
+    @include when(dot) {
+      .wd-radio__shape {
+        background: $-radio-dot-disabled-bg;
+        border-color: $-radio-dot-disabled-border;
+      }
+    }
+  }
+
+  // 以下内容用于解决父子组件样式隔离的问题 —— START
+  @include when(cell-radio) {
+    padding: 13px 15px;
+    margin: 0;
+
+    @include when(large) {
+      padding: 14px 15px;
+    }
+  }
+
+  @include when(button-radio) {
+    display: inline-flex;
+    width: 33.3333%;
+    padding: 12px 12px 0px 0px;
+    box-sizing: border-box;
+
+    .wd-radio__label {
+      width: 100%;
+      max-width: inherit;
+    }
+  }
+  @include when(large) {
+    .wd-radio__shape {
+      width: $-radio-large-size;
+      height: $-radio-large-size;
+      font-size: $-radio-large-size;
+    }
+    .wd-radio__label {
+      font-size: $-radio-large-label-fs;
+    }
+
+    @include when(dot) {
+      .wd-radio__shape {
+        &::before {
+          width: $-radio-dot-large-size;
+          height: $-radio-dot-large-size;
+        }
+      }
+    }
+  }
+  // 以下内容用于解决父子组件样式隔离的问题 —— END
+}

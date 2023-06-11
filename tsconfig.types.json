@@ -1,0 +1,15 @@
+{
+  // 继承 tsconfig.json 中的通用配置
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "removeComments": false,
+    "skipLibCheck": true,
+    "declaration": true /* 生成相应的 '.d.ts' file. */,
+    "declarationDir": "./src/uni_modules/fant-mini-plus/types" /* 类型声明文件输出目录 */,
+    "emitDeclarationOnly": true /* 只生成声明文件，不生成 js 文件*/,
+    "rootDir": "./src/uni_modules/fant-mini-plus/" /* 指定输出文件目录（用于输出），用于控制输出目录结构 */,
+  },
+  "include": [ 
+    "src/uni_modules/fant-mini-plus/*.ts",/* 指定编译处理的文件列表 */
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule":true,
+    "noImplicitAny": false,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators":true,
+    "sourceMap": false,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "types": [
+      "@dcloudio/types",
+      "miniprogram-api-typings",
+      "mini-types"
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "unpackage",
+    "src/**/*.nvue"
+  ],
+}

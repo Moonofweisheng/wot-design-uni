@@ -1,0 +1,51 @@
+<template>
+  <view class="wd-row custom-class" :style="style">
+    <!-- 每一行 -->
+    <slot />
+  </view>
+</template>
+<script lang="ts" setup>
+import { getCurrentInstance, provide, reactive, ref, watch } from 'vue'
+
+interface Props {
+  gutter?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  gutter: 0
+})
+
+watch(
+  () => props.gutter,
+  () => {
+    setGutter()
+  }
+)
+
+const style = ref<string>('')
+
+const { proxy } = getCurrentInstance() as any
+provide('$row', proxy)
+
+function setGutter() {
+  const { gutter } = props
+  if (gutter < 0) {
+    console.warn('[wot design] warning(wd-row): attribute gutter must be greater than or equal to 0')
+  }
+  const margin = `${gutter / 2}px`
+  const customStyle = gutter ? `margin-left: -${margin}; margin-right: -${margin};` : ''
+  style.value = customStyle
+}
+</script>
+<style lang="scss" scoped>
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(row) {
+  &::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+}
+</style>

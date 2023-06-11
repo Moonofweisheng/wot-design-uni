@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "wd-icon": "../icon/index",
+    "wd-sticky": "../sticky/index",
+    "wd-sticky-box": "../stickyBox/index"
+  }
+}

@@ -1,0 +1,9 @@
+<view class="wd-img {{ round ? 'is-round' : '' }} custom-class" bindtap="handleClick" style="{{ style }}">
+	<image 
+    class="custom-image"
+    src="{{ src }}" 
+    mode="{{ mode }}" 
+    lazy-load="{{ lazyLoad }}" 
+    bindload="handleLoad" 
+    binderror="handleError"/>
+</view>
