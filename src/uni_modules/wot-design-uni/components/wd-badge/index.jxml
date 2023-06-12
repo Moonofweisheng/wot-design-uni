@@ -1,9 +1,0 @@
-<div class="wd-badge custom-class">
-  <slot></slot>
-  <view
-    v-if="{{!hidden && (content || content === 0 || isDot)}}"
-    class="wd-badge__content is-fixed {{type ? 'wd-badge__content--' + type : ''}} {{isDot?'is-dot':'' }}"
-    style="background-color: {{bgColor}}; top: {{top || 0}}px; right: {{right || 0}}px">
-    {{content}}
-  </view>
-</div>

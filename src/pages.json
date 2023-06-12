@@ -31,6 +31,26 @@
           },
           "navigationBarTitleText": "Badge 徽标"
         }
+      },
+      {
+        "path": "pages/cell/Cell",
+        "name": "cell",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Cell 单元格"
+        }
+      },
+      {
+        "path": "pages/rate/Rate",
+        "name": "rate",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Rate 单元格"
+        }
       }
     ],
     "tabBar": {

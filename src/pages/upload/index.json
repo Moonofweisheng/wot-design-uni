@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "Upload 上传",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-toast": "../../wot-design/toast/index",
+    "wd-button": "../../wot-design/button/index",
+    "wd-message-box": "../../wot-design/messageBox/index",
+    "wd-upload": "../../wot-design/upload/index"
+  }
+}

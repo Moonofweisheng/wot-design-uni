@@ -1,0 +1,85 @@
+<wd-message-box id="wd-message-box"></wd-message-box>
+<wd-toast id="wd-toast"></wd-toast>
+<demo-block title="基本用法">
+  <wd-upload
+    file-list="{{fileList1}}"
+    action="{{action}}"
+    bind:change="handleChange1"
+  ></wd-upload>
+</demo-block>
+<demo-block title="多选上传">
+  <wd-upload
+    file-list="{{fileList2}}"
+    multiple
+    action="{{action}}"
+    bind:change="handleChange2"
+  ></wd-upload>
+</demo-block>
+<demo-block title="最大上传数限制">
+  <wd-upload
+    file-list="{{fileList3}}"
+    limit="{{3}}"
+    action="{{action}}"
+    bind:change="handleChange3"
+  ></wd-upload>
+</demo-block>
+<demo-block title="拦截预览图片操作">
+  <wd-upload
+    file-list="{{fileList4}}"
+    action="{{action}}"
+    bind:change="handleChange4"
+    before-preview="{{beforePreview}}"
+  ></wd-upload>
+</demo-block>
+<demo-block title="上传前置处理">
+  <wd-upload
+    file-list="{{fileList5}}"
+    action="{{action}}"
+    bind:change="handleChange5"
+    before-upload="{{beforeUpload}}"
+  ></wd-upload>
+</demo-block>
+<demo-block title="移除图片前置处理">
+  <wd-upload
+    file-list="{{fileList6}}"
+    action="{{action}}"
+    bind:change="handleChange6"
+    before-remove="{{beforeRemove}}"
+  ></wd-upload>
+</demo-block>
+<demo-block title="上传状态钩子">
+  <wd-upload
+    file-list="{{fileList7}}"
+    action="{{action}}"
+    bind:change="handleChange7"
+    bindsuccess="handleSuccess"
+    bindfail="handleFail"
+    bindprogress="handleProgess"
+  ></wd-upload>
+</demo-block>
+<demo-block title="禁用">
+  <wd-upload
+    file-list="{{fileList8}}"
+    disabled
+    action="{{action}}"
+    bind:change="handleChange8"
+  ></wd-upload>
+</demo-block>
+<demo-block title="自定义唤起上传样式">
+  <wd-upload
+    file-list="{{fileList9}}"
+    action="{{action}}"
+    bind:change="handleChange9"
+    use-default-slot
+  >
+  <wd-button>自定义唤起样式</wd-button>
+  </wd-upload>
+</demo-block>
+<demo-block title="选择文件前置处理">
+  <wd-upload
+    file-list="{{fileList10}}"
+    action="{{action}}"
+    bind:change="handleChange10"
+    before-choose="{{beforeChoose}}"
+  ></wd-upload>
+</demo-block>

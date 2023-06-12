@@ -1,0 +1,21 @@
+<view>
+  <demo-block title="基本用法">
+    <wd-button bind:click="handleClick1">弹出层</wd-button>
+  </demo-block>
+  <demo-block title="弹出位置">
+    <wd-button bind:click="handleClick2">顶部</wd-button>
+    <wd-button bind:click="handleClick3">右侧</wd-button>
+    <wd-button bind:click="handleClick4">底部</wd-button>
+    <wd-button bind:click="handleClick5">左侧</wd-button>
+  </demo-block>
+  <demo-block title="关闭按钮">
+    <wd-button bind:click="handleClick6">关闭按钮</wd-button>
+  </demo-block>
+
+  <wd-popup show="{{ show1 }}" custom-style="padding: 30px 40px;" bind:close="handleClose1">内容</wd-popup>
+  <wd-popup show="{{ show2 }}" position="top" custom-style="height: 200px;" bind:close="handleClose2"></wd-popup>
+  <wd-popup show="{{ show3 }}" position="right" custom-style="width: 200px;" bind:close="handleClose3"></wd-popup>
+  <wd-popup show="{{ show4 }}" position="bottom" custom-style="height: 200px;" bind:close="handleClose4"></wd-popup>
+  <wd-popup show="{{ show5 }}" position="left" custom-style="width: 200px;" bind:close="handleClose5"></wd-popup>
+  <wd-popup show="{{ show6 }}" position="bottom" closable custom-style="height: 200px;" bind:close="handleClose6"></wd-popup>
+</view>

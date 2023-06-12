@@ -1,0 +1,24 @@
+
+.custom-item{
+  height: 80px!important;
+  color: #e2231a;
+  text-align: left!important;
+  padding: 0 10px;
+  background: #fff;
+}
+.img{
+  width: 100%;
+  height: 90px;
+  display:inline-block;
+  background-size: cover;
+  vertical-align: middle;
+}
+.slot-img{
+  height: 36px;
+  width: 36px;
+  border-radius: 4px;
+}
+.text{
+  color: #ffb300;
+  margin-top: 8px;
+}

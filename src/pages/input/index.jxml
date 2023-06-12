@@ -1,0 +1,53 @@
+<view>
+	<demo-block title="基本用法">
+		<wd-input type="text" value="{{ value }}" placeholder="请输入用户名" bind:change="handleChange" bind:blur="handleBlur" />
+	</demo-block>
+	<demo-block title="禁用状态">
+		<wd-input type="text" value="{{ value1 }}" disabled="true" />
+	</demo-block>
+	<demo-block title="只读状态">
+		<wd-input type="text" value="{{ value2 }}" readonly />
+	</demo-block>
+	<demo-block title="错误状态">
+		<wd-input type="text" value="{{ value3 }}" placeholder="请输入用户名" error />
+	</demo-block>
+	<demo-block title="清空按钮">
+		<wd-input type="text" value="{{ value4 }}" clearable bind:change="handleChange1" />
+	</demo-block>
+	<demo-block title="密码框">
+		<wd-input type="text" value="{{ value5 }}" clearable show-password bind:change="handleChange2" />
+	</demo-block>
+	<demo-block title="设置前后Icon">
+		<wd-input type="text" value="{{ value6 }}" prefix-icon="dong" suffix-icon="list" clearable bind:change="handleChange3" />
+	</demo-block>
+	<demo-block title="字数限制">
+		<wd-input type="text" value="{{ value7 }}" maxlength="20" show-word-limit />
+	</demo-block>
+	<demo-block title="取消底部边框，自定义使用">
+		<wd-input value="{{value8}}" no-border placeholder="请输入价格" style="display: inline-block; width: 70px; vertical-align: middle;" />
+		<text style="display: inline-block; vertical-align: middle; font-size: 14px;">元</text>
+	</demo-block>
+	<demo-block title="textarea" transparent>
+		<wd-input type="textarea" value="{{ value9 }}" placeholder="请填写评价" bind:blur="handleBlur" />
+	</demo-block>
+	<demo-block title="textarea 清空按钮 和 字数限制" transparent>
+		<wd-input type="textarea" value="{{ value10 }}" maxlength="120" clearable show-word-limit />
+	</demo-block>
+	<demo-block title="textarea 高度自适应">
+		<wd-input type="textarea" value="{{value11}}" auto-height='true' clearable></wd-input>
+	</demo-block>
+	<demo-block title="cell 类型" transparent>
+		<wd-cell-group border>
+			<wd-input type="text" label="基本用法" value="{{ value12 }}" placeholder="请输入..." />
+			<wd-input type="text" label="禁用" value="{{ value13 }}" disabled placeholder="用户名" />
+			<wd-input type="text" label="清除、密码" value="{{ value14 }}" placeholder="密码" clearable show-password />
+			<wd-input type="text" label="错误状态" value="{{ value15 }}" placeholder="请输入用户名" error />
+			<wd-input type="text" label="必填" value="{{ value16 }}" placeholder="请输入用户名" required />
+			<wd-input type="text" label="图标" value="{{ value17 }}" placeholder="请输入..." prefix-icon="dong" suffix-icon="list" />
+			<wd-input type="text" label="自定义插槽" value="{{ value18 }}" placeholder="请输入..." use-suffix-slot clearable>
+				<wd-button slot="suffix" size="small" custom-class="button">获取验证码</wd-button>
+			</wd-input>
+			<wd-input type="text" label="大尺寸" size="large" value="{{ value19 }}" placeholder="请输入..." />
+		</wd-cell-group>
+	</demo-block>
+</view>

@@ -41,6 +41,15 @@
   </button>
 </template>
 
+<script lang="ts">
+export default {
+  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, watch } from 'vue'
 import { ref } from 'vue'

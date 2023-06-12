@@ -1,0 +1,95 @@
+<demo-block title="基本用法">
+  <wd-checkbox value="{{true}}">京麦</wd-checkbox>
+</demo-block>
+
+<demo-block title="修改形状: square">
+  <wd-checkbox value="{{true}}" shape="square">京麦</wd-checkbox>
+</demo-block>
+
+<demo-block title="修改形状: button">
+  <wd-checkbox value="{{true}}" shape="button">京麦</wd-checkbox>
+</demo-block>
+
+<demo-block title="修改选中颜色">
+  <wd-checkbox value="{{true}}" checked-color="rgb(52, 209, 157)">京麦</wd-checkbox>
+</demo-block>
+
+<demo-block title="禁用状态">
+  <view style="margin-bottom: 10px;">
+    <wd-checkbox-group value="{{[1,3]}}" disabled>
+      <wd-checkbox value="{{1}}">京麦</wd-checkbox>
+      <wd-checkbox value="{{2}}" disabled="{{false}}">商家后台</wd-checkbox>
+      <wd-checkbox value="{{3}}" shape="square">京麦</wd-checkbox>
+      <wd-checkbox value="{{4}}" shape="square">商家后台</wd-checkbox>
+    </wd-checkbox-group>
+  </view>
+  <wd-checkbox-group value="{{[1]}}" disabled>
+    <wd-checkbox value="{{1}}" shape="button">京麦</wd-checkbox>
+    <wd-checkbox value="{{2}}" shape="button">商家后台</wd-checkbox>
+  </wd-checkbox-group>
+</demo-block>
+
+
+<demo-block title="修改 true-value 和 false-value {{value1}}">
+  <wd-checkbox
+    value="{{value1}}"
+    true-value="京麦"
+    false-value="商家后台"
+    bind:change="handleChange1"
+  >
+    复选框
+  </wd-checkbox>
+</demo-block>
+
+<demo-block title="同行展示">
+  <wd-checkbox-group value="{{[1]}}" inline>
+    <wd-checkbox value="{{1}}">京麦</wd-checkbox>
+    <wd-checkbox value="{{2}}">商家后台</wd-checkbox>
+  </wd-checkbox-group>
+</demo-block>
+
+<demo-block title="复选框组">
+  <wd-checkbox-group>
+    <wd-checkbox value="{{1}}">京麦</wd-checkbox>
+    <wd-checkbox value="{{2}}">商家后台</wd-checkbox>
+  </wd-checkbox-group>
+</demo-block>
+
+<demo-block title="表单模式---复选框组" transparent>
+  <wd-checkbox-group value="{{[1]}}" cell>
+    <wd-checkbox value="{{1}}">京麦</wd-checkbox>
+    <wd-checkbox value="{{2}}">商家后台</wd-checkbox>
+  </wd-checkbox-group>
+</demo-block>
+
+<demo-block title="表单模式---复选框按钮组" transparent>
+  <wd-checkbox-group value="{{[1]}}" cell shape="button">
+    <wd-checkbox value="{{1}}" disabled>选项一</wd-checkbox>
+    <wd-checkbox value="{{2}}">选项二</wd-checkbox>
+    <wd-checkbox value="{{3}}">选项三</wd-checkbox>
+    <wd-checkbox value="{{4}}">选项四</wd-checkbox>
+    <wd-checkbox value="{{5}}">选项五</wd-checkbox>
+    <wd-checkbox value="{{6}}">选项六</wd-checkbox>
+    <wd-checkbox value="{{7}}">选项七</wd-checkbox>
+  </wd-checkbox-group>
+</demo-block>
+
+<demo-block title="设置最小选中数量和最大选中数量" transparent>
+  <wd-checkbox-group value="{{[1]}}" min="{{1}}" max="{{3}}" cell>
+    <wd-checkbox value="{{1}}">京东</wd-checkbox>
+    <wd-checkbox value="{{2}}">京麦</wd-checkbox>
+    <wd-checkbox value="{{3}}">商家后台</wd-checkbox>
+    <wd-checkbox value="{{4}}">营销中心</wd-checkbox>
+  </wd-checkbox-group>
+</demo-block>
+
+<demo-block title="大尺寸">
+  <wd-checkbox-group value="{{jingmai}}" inline size="large">
+    <wd-checkbox value="jingmai">京麦</wd-checkbox>
+    <wd-checkbox value="shop">商家后台</wd-checkbox>
+  </wd-checkbox-group>
+  <wd-checkbox-group value="{{jingmai}}" size="large" class="group">
+    <wd-checkbox value="jingmai">京麦</wd-checkbox>
+    <wd-checkbox value="shop">商家后台</wd-checkbox>
+  </wd-checkbox-group>
+</demo-block>

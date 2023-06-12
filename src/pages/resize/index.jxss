@@ -1,0 +1,13 @@
+.tip-item {
+  margin-top: 15px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+}
+.tip-label {
+  display: inline-block;
+  width: 70px;
+}
+.icon {
+  margin: 0 4px;
+  transform: rotate(90deg);
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "NoticeBar 通知栏",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-notice-bar": "../../wot-design/noticeBar/index",
+    "wd-icon": "../../wot-design/icon/index"
+  }
+}

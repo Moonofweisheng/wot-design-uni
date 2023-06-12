@@ -41,18 +41,7 @@
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
-    "clean:lib": "rimraf lib",
-    "release-lib": "node build/release.js",
-    "build:types": "tsc -b ./tsconfig.types.json && node ./typesCopy.js",
-    "compiler": "npm run clean:lib && node build/compiler.js",
-    "publish-lib": "cd lib && npm publish",
-    "install:fant-doc": "cd fant-doc && yarn",
-    "docs:generate": "yarn compiler && node build/docs.js",
-    "docs:dev": "yarn docs:generate && cd fant-doc && yarn serve",
-    "docs:build": "yarn docs:generate && cd fant-doc && yarn build",
-    "deploy": "yarn docs:build && node build/deploy.js",
-    "component:generate": "node build/generate.js",
-    "changelog": "node build/changelog.js"
+    "clean:lib": "rimraf lib"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-alpha-3080220230511001",

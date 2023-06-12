@@ -11,32 +11,30 @@
         :style="titleWidth ? 'min-width:' + titleWidth + ';max-width:' + titleWidth + ';' : ''"
       >
         <!--左侧icon部位-->
-        <block>
-          <wd-icon v-if="icon" :name="icon" class="wd-cell__icon custom-icon-class"></wd-icon>
-          <slot v-else name="icon" />
-        </block>
+        <wd-icon v-if="icon" :name="icon" class="wd-cell__icon custom-icon-class"></wd-icon>
+        <slot v-else name="icon" />
 
         <view class="wd-cell__title">
           <!--title BEGIN-->
-          <block>
+          <view>
             <view v-if="title" class="custom-title-class">{{ title }}</view>
             <slot v-else name="title"></slot>
-          </block>
+          </view>
           <!--title END-->
 
           <!--label BEGIN-->
-          <block>
+          <view>
             <view v-if="label" class="wd-cell__label custom-label-class">{{ label }}</view>
             <slot v-else name="label" />
-          </block>
+          </view>
           <!--label END-->
         </view>
       </view>
       <!--right content BEGIN-->
       <view class="wd-cell__right">
         <!--文案内容-->
-        <view class="wd-cell__value custom-value-class">
-          <block v-if="value">{{ value }}</block>
+        <view :class="['wd-cell__value', ['custom-value-class']]">
+          <template v-if="value">{{ value }}</template>
           <slot v-else></slot>
         </view>
         <!--箭头-->
@@ -46,6 +44,15 @@
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  options: {
+    virtualHost: true
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { getCurrentInstance, inject, nextTick, onMounted, ref, watch } from 'vue'
@@ -176,6 +183,7 @@ function onClick() {
     position: relative;
     flex: 1;
     display: flex;
+    align-items: center;
     margin-right: $-cell-padding;
     font-size: $-cell-title-fs;
     box-sizing: border-box;

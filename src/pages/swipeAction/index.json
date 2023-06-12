@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "SwipeAction 滑动操作",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-swipe-action": "../../wot-design/swipeAction/index",
+    "wd-cell": "../../wot-design/cell/index",
+    "wd-button": "../../wot-design/button/index",
+    "wd-toast": "../../wot-design/toast/index"
+  }
+}

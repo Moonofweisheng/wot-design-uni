@@ -1,0 +1,10 @@
+.prefix {
+  font-size: 18px;
+  padding-right: 4px;
+  width: 18px;
+  height: 18px;
+}
+
+.space{
+  margin-bottom: 10px;
+}

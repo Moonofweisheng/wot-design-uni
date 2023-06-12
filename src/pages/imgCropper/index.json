@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "裁剪图片",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-img-cropper": "../../wot-design/imgCropper/index",
+    "wd-button": "../../wot-design/button/index",
+    "wd-img": "../../wot-design/img/index",
+    "wd-icon": "../../wot-design/icon/index"
+  }
+}

@@ -1,0 +1,18 @@
+<demo-block title="基本用法" style="text-align: center">
+  <wd-img-cropper
+    id="wd-img-cropper"
+    show="{{show}}"
+    img-src="{{src}}"
+    bind:confirm="handleConfirm"
+    bind:cancel="handleCancel"
+    bind:imgloaderror="imgLoaderror"
+    bind:imgloaded="imgLoaded">
+  </wd-img-cropper>
+  <view class="profile">
+    <view jd:if="{{ !imgSrc }}" class="img" bindtap="upload">
+      <wd-icon name="fill-camera" custom-class="img-icon"></wd-icon>
+    </view>
+    <wd-img jd:if="{{ imgSrc }}" round width="200px" height="200px" src="{{ imgSrc }}" mode="aspectFit" custom-class="profile-img" bindtap="upload" />
+    <view style="font-size: 14px;">点击上传头像</view>
+  </view>
+</demo-block>

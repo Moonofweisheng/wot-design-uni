@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "picker 选择器",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-picker": "../../wot-design/picker/index",
+    "wd-button": "../../wot-design/button/index",
+    "wd-cell-group": "../../wot-design/cellGroup/index",
+    "wd-toast": "../../wot-design/toast/index"
+  }
+}

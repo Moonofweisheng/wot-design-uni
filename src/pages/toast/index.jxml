@@ -1,0 +1,19 @@
+<wd-toast id="wd-toast"/>
+<demo-block title="基本用法">
+  <wd-button bind:click="showToast">toast</wd-button>
+  <wd-button bind:click="showLongToast">长文案</wd-button>
+</demo-block>
+<demo-block title="类型toast">
+  <wd-button bind:click="showSuccessToast">成功toast</wd-button>
+  <wd-button bind:click="showErrorToast">错误toast</wd-button>
+  <wd-button bind:click="showWarnToast">警告toast</wd-button>
+  <wd-button bind:click="showNormalToast">常规toast</wd-button>
+</demo-block>
+<demo-block title="提示位置">
+  <wd-button bind:click="showTopToast">顶部toast</wd-button>
+  <wd-button bind:click="showBottomToast">底部toast</wd-button>
+</demo-block>
+<demo-block title="Loading">
+  <wd-button bind:click="showLoadingToast">Loading加载</wd-button>
+  <wd-button bind:click="showLoadingToast2">ring类型loading</wd-button>
+</demo-block>

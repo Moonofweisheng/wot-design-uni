@@ -1,0 +1,31 @@
+<demo-block title="基本用法">
+  <wd-rate value="{{value1}}" bind:change="changeValue1"/>
+</demo-block>
+
+<demo-block title="只读状态 readonly">
+  <wd-rate value="{{3}}" readonly/>
+</demo-block>
+
+<demo-block title="禁用状态">
+  <wd-rate value="{{2}}" disabled/>
+</demo-block>
+
+<demo-block title="修改选中颜色">
+  <view style="margin-bottom: 10px;">
+    <wd-rate value="{{value2}}" active-color="linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)" bind:change="changeValue2"/>
+  </view>
+  <wd-rate value="{{4}}" active-color="{{['linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)', 'linear-gradient(315deg, rgba(245,34,34,1) 0%,rgba(255,117,102,1) 100%)']}}" />
+</demo-block>
+
+<demo-block title="修改icon和选中颜色">
+  <wd-rate
+    value="{{3}}"
+    icon="dong"
+    active-icon="dong"
+    active-color="#4D80F0"
+  />
+</demo-block>
+
+<demo-block title="修改size、space">
+  <wd-rate value="{{5}}" space="10px" size="30px"/>
+</demo-block>

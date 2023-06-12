@@ -30,10 +30,10 @@
   </demo-block>
 
   <demo-block title="自定义内容">
-    <wd-badge custom-class="badge" model:modelValue="new">
+    <wd-badge custom-class="badge" modelValue="new">
       <wd-button :round="false" type="info" size="small">评论</wd-button>
     </wd-badge>
-    <wd-badge custom-class="badge" model:modelValue="hot">
+    <wd-badge custom-class="badge" modelValue="hot">
       <wd-button :round="false" type="info" size="small">回复</wd-button>
     </wd-badge>
   </demo-block>

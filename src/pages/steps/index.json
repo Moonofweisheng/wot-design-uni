@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "Steps 步骤条",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-steps": "../../wot-design/steps/index",
+    "wd-step": "../../wot-design/step/index",
+    "wd-button": "../../wot-design/button/index"
+  }
+}

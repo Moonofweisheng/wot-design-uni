@@ -1,0 +1,51 @@
+.position-wrap {
+  position: relative;
+}
+.center {
+  text-align: center;
+}
+.left {
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+.right {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  margin-bottom: 20px;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.bottom {
+  clear: both;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.demo-left {
+  text-align: left;
+}
+.button-control {
+  float: left;
+}
+.demo-control {
+  text-align: center;
+  display: block;
+  padding-top: 18px;
+  clear: both;
+  margin-bottom: 10px;
+}
+.lines-demo {
+  padding: 30px 0;
+}
+.lines-content {
+  color: #fff;
+  padding: 5px;
+  width: 90px;
+}

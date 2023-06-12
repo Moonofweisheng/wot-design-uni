@@ -1,0 +1,26 @@
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 300px;
+}
+
+.profile-img {
+  border: 1px solid rgba(0,0,0,0.09);
+}
+.img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.04);
+  position: relative;
+}
+.img-icon {
+  font-size: 60px;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

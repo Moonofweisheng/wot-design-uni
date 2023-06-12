@@ -1,5 +1,5 @@
 <template>
-  <view class="wd-badge custom-class">
+  <view :class="['wd-badge', customClass]">
     <slot></slot>
     <view
       v-if="!hidden && (content || content === 0 || isDot)"
@@ -10,6 +10,15 @@
     </view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 
@@ -22,6 +31,7 @@ interface Props {
   type?: string
   top?: number
   right?: number
+  customClass?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   modelValue: null
@@ -37,7 +47,7 @@ watch(
 )
 
 const contentStyle = computed(() => {
-  return `'background-color': ${props.bgColor};top:${props.top || 0}px; right: ${props.right || 0} px`
+  return `background-color: ${props.bgColor};top:${props.top || 0}px;right:${props.right || 0}px`
 })
 
 function notice() {

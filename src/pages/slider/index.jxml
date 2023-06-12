@@ -1,0 +1,15 @@
+<demo-block title="基础用法">
+	<wd-slider value="{{ value1 }}" bind:dragend="handleChange1"/>
+</demo-block>
+<demo-block title="指定选择范围">
+	<wd-slider value="{{ value2 }}" min="{{ 4 }}" max="{{ 1000 }}"  bind:dragend="handleChange2"/>
+</demo-block>
+<demo-block title="指定步长">
+	<wd-slider value="{{ value4 }}" hide-min-max step="{{ 10 }}" bind:dragend="handleChange4"/>
+</demo-block>
+<demo-block title="禁用状态">
+	<wd-slider value="{{ value5 }}" disabled bind:dragend="handleChange5"/>
+</demo-block>
+<demo-block title="双向滑块">
+	<wd-slider value="{{ value6 }}"  bind:dragend="handleChange6"/>
+</demo-block>
