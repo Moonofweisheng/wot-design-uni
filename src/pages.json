@@ -1,13 +1,22 @@
 {
     "pages": [
       {
+        "path": "pages/index/Index",
+        "name": "index",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Wot Design Uni"
+        }
+      },
+      {
         "path": "pages/button/Button",
         "name": "button",
         "style": {
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-  
           "navigationBarTitleText": "Button 按钮"
         }
       },
@@ -50,6 +59,26 @@
             "allowsBounceVertical": "NO"
           },
           "navigationBarTitleText": "Rate 单元格"
+        }
+      },
+      {
+        "path": "pages/slider/Slider",
+        "name": "slider",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Slider 单元格"
+        }
+      },
+      {
+        "path": "pages/layout/Layout",
+        "name": "layout",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Layout 单元格"
         }
       }
     ],

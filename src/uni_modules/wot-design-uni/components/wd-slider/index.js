@@ -85,7 +85,7 @@ VueComponent({
         // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
         if (newValue === null || newValue === undefined) {
           this.setData({ value: oldValue })
-          console.warn("[wot design] warning(wd-slider): value can't be null or undefined")
+          console.warn('[wot design] warning(wd-slider): value can not be null or undefined')
         } else if (this.checkType(newValue) === 'Array' && newValue.length !== 2) {
           throw Error('[wot design] warning(wd-slider): value must be dyadic array')
         } else if (this.checkType(newValue) !== 'Number' && this.checkType(newValue) !== 'Array') {

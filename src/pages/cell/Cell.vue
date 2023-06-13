@@ -66,7 +66,7 @@
         <wd-rate v-model="rate" icon="dong" active-icon="dong" @change="handleRateChange" />
       </wd-cell>
       <wd-cell title="上下结构" vertical>
-        <wd-slider :value="slider" @change="handleSliderChange" />
+        <wd-slider v-model="slider" @change="handleSliderChange" />
       </wd-cell>
     </wd-cell-group>
   </demo-block>

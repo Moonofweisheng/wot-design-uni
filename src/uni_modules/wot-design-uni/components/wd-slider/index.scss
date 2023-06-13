@@ -26,9 +26,9 @@
   @include e(bar-wrapper) {
     flex: 1;
     position: relative;
-    border-radius: $-slider-axie-height / 2;
+    border-radius: calc($-slider-axie-height / 2);
     background-color: #e5e5e5;
-    margin: ($-slider-handle-radius - $-slider-axie-height / 2) 0;
+    margin: ($-slider-handle-radius - calc($-slider-axie-height / 2)) 0;
   }
   @include e(bar) {
     position: relative;

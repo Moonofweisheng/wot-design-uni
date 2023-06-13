@@ -15,14 +15,18 @@ const props = withDefaults(defineProps<Props>(), {
   gutter: 0
 })
 
+const style = ref<string>('')
+
 watch(
   () => props.gutter,
   () => {
     setGutter()
+  },
+  {
+    deep: true,
+    immediate: true
   }
 )
-
-const style = ref<string>('')
 
 const { proxy } = getCurrentInstance() as any
 provide('$row', proxy)

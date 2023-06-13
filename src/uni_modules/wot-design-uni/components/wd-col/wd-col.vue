@@ -29,7 +29,8 @@ watch(
   () => row.gutter,
   (newVal) => {
     setGutter(newVal || 0)
-  }
+  },
+  { deep: true, immediate: true }
 )
 
 function check() {
@@ -64,10 +65,10 @@ $i: 1;
 
 @while $i <= 24 {
   .wd-col__#{$i} {
-    width: 100% / 24 * $i;
+    width: calc(100% / 24 * $i);
   }
   .wd-col__offset-#{$i} {
-    margin-left: 100% / 24 * $i;
+    margin-left: calc(100% / 24 * $i);
   }
   $i: $i + 1;
 }

@@ -1,6 +1,6 @@
 <template>
   <view :class="['wd-card', type == 'rectangle' ? 'is-rectangle' : '', 'custom-class']">
-    <view class="wd-card__title-content custom-title-class">
+    <view :class="['wd-card__title-content', ['custom-title-class']]">
       <view class="wd-card__title">
         <text v-if="title">{{ title }}</text>
         <slot v-else name="title"></slot>
