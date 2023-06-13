@@ -109,7 +109,7 @@ function handleGetuserinfo(event) {
 }
 </script>
 <style lang="scss" scoped>
-button {
+:deep(button) {
   margin: 0 10px 10px 0;
 }
 .button-block {

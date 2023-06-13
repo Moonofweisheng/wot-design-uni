@@ -1,5 +1,14 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-06-13 11:34:35
+ * @LastEditTime: 2023-06-13 12:42:43
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-col\wd-col.vue
+ * 记得注释
+-->
 <template>
-  <view :class="['wd-col', span && 'wd-col__' + span, offset && 'wd-col__offset-' + offset, 'custom-class']" :style="style">
+  <view :class="['wd-col', span && 'wd-col__' + span, offset && 'wd-col__offset-' + offset, customClass]" :style="style">
     <!-- 每一列 -->
     <slot />
   </view>
@@ -11,6 +20,7 @@ import { ref } from 'vue'
 interface Props {
   span?: number
   offset?: number
+  customClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

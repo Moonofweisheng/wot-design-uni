@@ -1,9 +1,10 @@
 <template>
   <button
     hover-class="wd-button--active"
+    :style="customStyle"
     :class="[
       'wd-button',
-      'custom-class',
+      customClass,
       'is-' + type,
       'is-' + size,
       plain ? 'is-plain' : '',
@@ -91,6 +92,8 @@ interface Props {
   sendMessageImg: string
   appParameter: string
   showMessageCard: boolean
+  customClass: string
+  customStyle: string
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'primary',

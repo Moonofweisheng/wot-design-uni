@@ -7,7 +7,7 @@
         <view class="inline">Wot Design Uni</view>
       </view>
       <view class="page__desc">
-        该组件库基于小程序构建，根据京东商家侧的UI设计规范（京麦移动端设计规范）开发，旨在给商家提供统一的UI交互，同时提高研发的开发效率。
+        Wot Design Uni 是移动端 Vue 组件库 Wot Design 的 uni-app 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建 uni-app 应用。
       </view>
     </view>
     <view class="page__bd">
@@ -20,7 +20,7 @@
           <view :class="['kind-list__item-bd', item.open ? 'kind-list__item-bd_show' : '']">
             <view :class="['wd-cells', item.open ? 'wd-cells_show' : '']">
               <block v-for="(page, j) in item.pages" :key="j">
-                <navigator :url="`../${page.id}/index`" class="wd-cell wd-flex wd-cell_access">
+                <navigator :url="`/pages/${page.id}/Index`" class="wd-cell wd-flex wd-cell_access">
                   <view class="wd-flex__item page-name">{{ page.name }}</view>
                   <view class="wd-cell__ft wd-tool-right-line-angle"></view>
                 </navigator>

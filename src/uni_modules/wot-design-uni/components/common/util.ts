@@ -207,3 +207,57 @@ export function getRect(selector: string, all: boolean, scope?: any) {
       .exec()
   })
 }
+
+/**
+ * 驼峰转短横线
+ * @param word 待转换词条
+ * @returns
+ */
+export function kebabCase(word) {
+  const newWord = word
+    .replace(RegExp('[A-Z]', 'g'), function (i) {
+      return '-' + i
+    })
+    .toLowerCase()
+  return newWord
+}
+
+/**
+ * 是否数组
+ */
+function isArray(value: any) {
+  if (typeof Array.isArray === 'function') {
+    return Array.isArray(value)
+  }
+  return Object.prototype.toString.call(value) === '[object Array]'
+}
+
+/**
+ * 外部传入样式格式化为css可读样式
+ * @param styles 外部传入样式
+ * @returns
+ */
+export function objToStyle(styles) {
+  if (isArray(styles)) {
+    return styles
+      .filter(function (item) {
+        return item != null && item !== ''
+      })
+      .map(function (item) {
+        return objToStyle(item)
+      })
+      .join(';')
+  }
+
+  if (isObj(styles)) {
+    return Object.keys(styles)
+      .filter(function (key) {
+        return styles[key] != null && styles[key] !== ''
+      })
+      .map(function (key) {
+        return [kebabCase(key), [styles[key]]].join(':')
+      })
+      .join(';')
+  }
+  return styles
+}

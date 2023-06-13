@@ -11,7 +11,7 @@
         }
       },
       {
-        "path": "pages/button/Button",
+        "path": "pages/button/Index",
         "name": "button",
         "style": {
           "mp-alipay": {
@@ -21,7 +21,7 @@
         }
       },
       {
-        "path": "pages/icon/Icon",
+        "path": "pages/icon/Index",
         "name": "icon",
         "style": {
           "mp-alipay": {
@@ -32,7 +32,7 @@
         }
       },
       {
-        "path": "pages/badge/Badge",
+        "path": "pages/badge/Index",
         "name": "badge",
         "style": {
           "mp-alipay": {
@@ -42,7 +42,7 @@
         }
       },
       {
-        "path": "pages/cell/Cell",
+        "path": "pages/cell/Index",
         "name": "cell",
         "style": {
           "mp-alipay": {
@@ -52,7 +52,7 @@
         }
       },
       {
-        "path": "pages/rate/Rate",
+        "path": "pages/rate/Index",
         "name": "rate",
         "style": {
           "mp-alipay": {
@@ -62,7 +62,7 @@
         }
       },
       {
-        "path": "pages/slider/Slider",
+        "path": "pages/slider/Index",
         "name": "slider",
         "style": {
           "mp-alipay": {
@@ -72,7 +72,7 @@
         }
       },
       {
-        "path": "pages/layout/Layout",
+        "path": "pages/layout/Index",
         "name": "layout",
         "style": {
           "mp-alipay": {
@@ -80,14 +80,34 @@
           },
           "navigationBarTitleText": "Layout 单元格"
         }
+      },
+      {
+        "path": "pages/card/Index",
+        "name": "card",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Card 单元格"
+        }
+      },
+      {
+        "path": "pages/tag/Index",
+        "name": "tag",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Tag 单元格"
+        }
       }
     ],
-    "tabBar": {
-      "color": "#7a7e83",
-      "selectedColor": "#1C64FD",
-      "backgroundColor": "#ffffff",
-      "list": [ ]
-    },
+    // "tabBar": {
+    //   "color": "#7a7e83",
+    //   "selectedColor": "#1C64FD",
+    //   "backgroundColor": "#ffffff",
+    //   "list": [ ]
+    // },
     "globalStyle": {
       "navigationBarTextStyle": "black",
       "navigationBarBackgroundColor": "#FFF",
