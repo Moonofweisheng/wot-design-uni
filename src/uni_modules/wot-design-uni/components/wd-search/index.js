@@ -28,7 +28,7 @@ VueComponent({
     },
     value: {
       type: String,
-      observer (s) {
+      observer(s) {
         this.setData({ str: s })
       }
     },
@@ -44,7 +44,7 @@ VueComponent({
     clearing: false
   },
   methods: {
-    closeCover () {
+    closeCover() {
       if (this.data.disabled) return
       this.requestAnimationFrame()
         .then(() => this.requestAnimationFrame())
@@ -60,7 +60,7 @@ VueComponent({
      * @description input的input事件handle
      * @param value
      */
-    inputValue ({ detail: { value } }) {
+    inputValue({ detail: { value } }) {
       this.setData({ str: value }, () => {
         this.$emit('change', {
           value
@@ -70,7 +70,7 @@ VueComponent({
     /**
      * @description 点击清空icon的handle
      */
-    clearSearch () {
+    clearSearch() {
       this.data.clearing = true
       this.setData({ str: '' })
       this.requestAnimationFrame()
@@ -94,7 +94,7 @@ VueComponent({
      * @description 点击搜索按钮时的handle
      * @param value
      */
-    search ({ detail: { value } }) {
+    search({ detail: { value } }) {
       // 组件触发search事件
       this.$emit('search', {
         value
@@ -103,29 +103,30 @@ VueComponent({
     /**
      * @description 输入框聚焦时的handle
      */
-    searchFocus () {
+    searchFocus() {
       if (this.data.clearing) {
         this.data.clearing = false
         return
       }
-      this.setData({
-        showPlaceHolder: false,
-        focus: true
-      },
-      () => this.$emit('focus', {
-        value: this.data.str
-      })
+      this.setData(
+        {
+          showPlaceHolder: false,
+          focus: true
+        },
+        () =>
+          this.$emit('focus', {
+            value: this.data.str
+          })
       )
     },
     /**
      * @description 输入框失焦的handle
      */
-    searchBlur () {
+    searchBlur() {
       if (this.data.clearing) return
       // 组件触发blur事件
-      this.setData(
-        { showPlaceHolder: !this.data.str },
-        () => this.$emit('blur', {
+      this.setData({ showPlaceHolder: !this.data.str }, () =>
+        this.$emit('blur', {
           value: this.data.str
         })
       )
@@ -133,7 +134,7 @@ VueComponent({
     /**
      * @description 点击取消搜索按钮的handle
      */
-    handleCancel () {
+    handleCancel() {
       // 组件触发cancel事件
       this.$emit('cancel', {
         value: this.data.str

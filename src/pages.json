@@ -100,6 +100,76 @@
           },
           "navigationBarTitleText": "Tag 单元格"
         }
+      },
+      {
+        "path": "pages/search/Index",
+        "name": "search",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Search 单元格"
+        }
+      },
+      {
+        "path": "pages/transition/Index",
+        "name": "transition",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Transition 单元格"
+        }
+      },
+      {
+        "path": "pages/popup/Index",
+        "name": "popup",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Popup 单元格"
+        }
+      },
+      {
+        "path": "pages/divider/Index",
+        "name": "divider",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Divider 单元格"
+        }
+      },
+      {
+        "path": "pages/switch/Index",
+        "name": "switch",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Switch 单元格"
+        }
+      },
+      {
+        "path": "pages/input/Index",
+        "name": "input",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Input 单元格"
+        }
+      },
+      {
+        "path": "pages/messageBox/Index",
+        "name": "messageBox",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "MessageBox 单元格"
+        }
       }
     ],
     // "tabBar": {

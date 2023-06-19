@@ -1,8 +1,18 @@
 <template>
-  <view v-if="inited" :class="'wd-transition custom-class ' + classes" :style="style" @transitionend="onTransitionEnd">
+  <view v-if="inited" :class="rootClass" :style="style" @transitionend="onTransitionEnd" @click="handleClick">
     <slot />
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj } from '../common/util'
@@ -57,6 +67,7 @@ interface Props {
   name: TransitionName
   customStyle: string
   lazyRender: boolean
+  customClass?: string
   // 定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。
   enterClass?: string
   // 定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡/动画完成之后移除。这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。
@@ -99,6 +110,10 @@ const style = computed(() => {
   }${props.customStyle}`
 })
 
+const rootClass = computed(() => {
+  return `wd-transition ${props.customClass} ${classes.value}`
+})
+
 onBeforeMount(() => {
   if (props.show) {
     enter()
@@ -109,8 +124,13 @@ watch(
   () => props.show,
   (newVal) => {
     observerShow(newVal)
-  }
+  },
+  { deep: true, immediate: true }
 )
+
+function handleClick() {
+  emit('click')
+}
 
 function observerShow(value: boolean) {
   value ? enter() : leave()

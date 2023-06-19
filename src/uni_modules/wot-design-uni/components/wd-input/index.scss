@@ -188,10 +188,10 @@
       right: 0;
     }
   }
+
   @include e(inner) {
     flex: 1;
     height: $-input-inner-height;
-    padding: $-input-inner-padding;
     font-size: $-input-fs;
     color: $-input-color;
     outline: none;
@@ -206,6 +206,14 @@
       text-align: right;
     }
   }
+
+  @include e(readonly){
+    padding: $-input-inner-padding;
+  }
+  @include e(textarea-inner){
+    width: 100%;
+  }
+
   @include e(icon) {
     margin-left: 8px;
     font-size: $-input-icon-size;
@@ -255,7 +263,7 @@
   }
   @include e(textarea-inner) {
     flex: 1;
-    width: 1px;
+    // width: 1px;
     padding: 0;
     font-size: $-input-fs;
     line-height: 1.43;
@@ -311,7 +319,7 @@
   .wd-input__textarea-count,
   .wd-input__count,
   .wd-input__count-current {
-    display: inline-block;
+    display: inline-flex;
   }
   @include e(textarea-map) {
     position: absolute;

@@ -1,4 +1,4 @@
-import { onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj } from '../common/util'
 
 const getClassNames = (name) => {
@@ -51,6 +51,7 @@ interface Props {
   name: TransitionName
   customStyle: string
   lazyRender: boolean
+  customClass?: string
   // 定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。
   enterClass?: string
   // 定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡/动画完成之后移除。这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。
@@ -87,6 +88,16 @@ const classes = ref<string>('')
 
 const emit = defineEmits(['click', 'before-enter', 'enter', 'before-leave', 'leave', 'after-leave', 'after-enter'])
 
+const style = computed(() => {
+  return `-webkit-transition-duration:${currentDuration.value}ms;transition-duration:${currentDuration.value}ms;${
+    display.value ? '' : 'display: none;'
+  }${props.customStyle}`
+})
+
+const rootClass = computed(() => {
+  return `wd-transition ${props.customClass} ${classes.value}`
+})
+
 onBeforeMount(() => {
   if (props.show) {
     enter()
@@ -97,7 +108,8 @@ watch(
   () => props.show,
   (newVal) => {
     observerShow(newVal)
-  }
+  },
+  { deep: true, immediate: true }
 )
 
 function observerShow(value: boolean) {
@@ -158,3 +170,5 @@ function onTransitionEnd() {
     display.value = false
   }
 }
+
+export function useTransition() {}

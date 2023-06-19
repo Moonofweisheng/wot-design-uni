@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-03-09 19:23:03
- * @LastEditTime: 2023-06-11 13:23:52
+ * @LastEditTime: 2023-06-18 23:54:22
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\App.vue
@@ -20,6 +20,10 @@ onHide(() => {
 })
 </script>
 <style lang="scss">
+@import './uni_modules/wot-design-uni/components/wd-modal/custom.scss';
+@import './uni_modules/wot-design-uni/components/wd-input/custom.scss';
+@import './uni_modules/wot-design-uni/components/wd-search/custom.scss';
+
 page {
   margin: 0;
   padding: 0;

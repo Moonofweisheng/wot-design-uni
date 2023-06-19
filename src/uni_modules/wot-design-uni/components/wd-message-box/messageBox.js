@@ -40,17 +40,29 @@ const parseOptions = (msg) => {
  */
 const MessageBox = (MessageBoxOptions) => {
   if (MessageBoxOptions.type === 'alert' || !MessageBoxOptions.type) {
-    MessageBoxOptions = Object.assign({}, {
-      closeOnClickModal: false
-    }, MessageBoxOptions)
+    MessageBoxOptions = Object.assign(
+      {},
+      {
+        closeOnClickModal: false
+      },
+      MessageBoxOptions
+    )
   } else if (MessageBoxOptions.type === 'confirm') {
-    MessageBoxOptions = Object.assign({}, {
-      showCancelButton: true
-    }, MessageBoxOptions)
+    MessageBoxOptions = Object.assign(
+      {},
+      {
+        showCancelButton: true
+      },
+      MessageBoxOptions
+    )
   } else if (MessageBoxOptions.type === 'prompt') {
-    MessageBoxOptions = Object.assign({}, {
-      showCancelButton: true
-    }, MessageBoxOptions)
+    MessageBoxOptions = Object.assign(
+      {},
+      {
+        showCancelButton: true
+      },
+      MessageBoxOptions
+    )
   }
 
   // 覆盖模板中的选项

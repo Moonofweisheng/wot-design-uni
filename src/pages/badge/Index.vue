@@ -47,7 +47,7 @@
 </template>
 <script setup lang="ts"></script>
 <style lang="scss" scoped>
-.badge {
+:deep(.badge) {
   margin: 0 30px 20px 0;
   display: inline-block;
 }

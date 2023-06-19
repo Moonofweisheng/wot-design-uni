@@ -9,12 +9,8 @@
  */
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
-import TransformPages from 'uni-read-pages-vite'
 
 export default defineConfig({
   base: './',
-  plugins: [uni()],
-  define: {
-    ROUTES: new TransformPages().routes
-  }
+  plugins: [uni()]
 })

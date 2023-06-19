@@ -71,10 +71,7 @@ type ButtonSize = 'small' | 'medium' | 'large'
 interface Props {
   plain: boolean
   disabled: boolean
-  round: {
-    type: boolean
-    value: true
-  }
+  round: boolean
   suck: boolean
   block: boolean
   type: ButtonType
@@ -97,7 +94,13 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'primary',
-  size: 'medium'
+  size: 'medium',
+  round: true,
+  plain: false,
+  loading: false,
+  suck: false,
+  block: false,
+  disabled: false
 })
 
 const hoverStartTime = ref<number>(20)

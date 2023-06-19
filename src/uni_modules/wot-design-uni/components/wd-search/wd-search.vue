@@ -1,6 +1,306 @@
 <template>
-        </template>
-        <script>
-        </script>
-        <style lang="scss" scoped>
-        </style>
+  <view :class="rootClass">
+    <!--自定义label插槽-->
+    <!--搜索框主体-->
+    <view class="wd-search__block">
+      <slot name="prefix"></slot>
+      <view class="wd-search__field">
+        <view
+          v-if="!placeholderLeft"
+          :style="{ display: str === '' && showPlaceHolder ? 'flex' : 'none' }"
+          class="wd-search__cover"
+          @click="closeCover"
+        >
+          <wd-icon name="search" size="18px" custom-class="wd-search__search-icon"></wd-icon>
+          <text class="wd-search__placeholder-txt">{{ placeholder || '搜索' }}</text>
+        </view>
+        <!--icon:search-->
+        <wd-icon name="search" size="18px" custom-class="wd-search__search-left-icon"></wd-icon>
+        <!--搜索框-->
+        <input
+          :placeholder="placeholder || '搜索'"
+          placeholder-class="wd-search__placeholder-txt"
+          confirm-type="search"
+          v-model="str"
+          class="wd-search__input"
+          @focus="searchFocus"
+          @input="inputValue"
+          @blur="searchBlur"
+          @confirm="search"
+          :disabled="disabled"
+          :maxlength="maxlength"
+          :focus="focus"
+        />
+        <!--icon:clear-->
+        <wd-icon v-if="str" custom-class="wd-search__clear-icon" name="error-fill" size="16px" class="wd-search__clear" @click="clearSearch" />
+      </view>
+    </view>
+    <!--the button behind input,care for hideCancel without displaying-->
+    <block v-if="!hideCancel">
+      <!--有插槽就不用默认的按钮了-->
+      <slot v-if="userSuffixSlot" name="suffix"></slot>
+      <!--默认button-->
+      <view v-else class="wd-search__cancel" @click="handleCancel">
+        {{ cancelTxt || '取消' }}
+      </view>
+    </block>
+  </view>
+</template>
+
+<script lang="ts">
+export default {
+  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
+<script lang="ts" setup>
+import { computed, ref, watch } from 'vue'
+import { requestAnimationFrame } from '../common/util'
+
+interface Props {
+  useActionSlot: boolean
+  useLabelSlot: boolean
+  userSuffixSlot: boolean
+  placeholder: string
+  cancelTxt: string
+  light: boolean
+  hideCancel: boolean
+  disabled: boolean
+  maxlength: number
+  modelValue: string
+  placeholderLeft: boolean
+  customClass: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
+  useActionSlot: false,
+  useLabelSlot: false,
+  userSuffixSlot: false,
+  hideCancel: false,
+  disabled: false,
+  maxlength: -1,
+  placeholderLeft: false
+})
+
+const focus = ref<boolean>(false)
+const str = ref('')
+const showPlaceHolder = ref<boolean>(true)
+const clearing = ref<boolean>(false)
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    str.value = newValue
+  }
+)
+
+const rootClass = computed(() => {
+  return `wd-search  ${props.light ? 'is-light' : ''}  ${props.hideCancel ? 'is-without-cancel' : ''} ${props.customClass}`
+})
+
+const emit = defineEmits(['update:modelValue', 'change', 'clear', 'search', 'focus', 'blur', 'cancel'])
+
+function closeCover() {
+  if (props.disabled) return
+  requestAnimationFrame()
+    .then(() => requestAnimationFrame())
+    .then(() => requestAnimationFrame())
+    .then(() => {
+      showPlaceHolder.value = false
+      focus.value = true
+    })
+}
+/**
+ * @description input的input事件handle
+ * @param value
+ */
+function inputValue({ detail: { value } }) {
+  str.value = value
+  emit('update:modelValue', value)
+  emit('change', {
+    value
+  })
+}
+/**
+ * @description 点击清空icon的handle
+ */
+function clearSearch() {
+  clearing.value = true
+  str.value = ''
+  requestAnimationFrame()
+    .then(() => requestAnimationFrame())
+    .then(() => {
+      showPlaceHolder.value = false
+      return requestAnimationFrame()
+    })
+    .then(() => {
+      focus.value = true
+      emit('clear')
+      emit('change', {
+        value: ''
+      })
+      emit('update:modelValue', '')
+    })
+}
+/**
+ * @description 点击搜索按钮时的handle
+ * @param value
+ */
+function search({ detail: { value } }) {
+  // 组件触发search事件
+  emit('search', {
+    value
+  })
+}
+/**
+ * @description 输入框聚焦时的handle
+ */
+function searchFocus() {
+  if (clearing.value) {
+    clearing.value = false
+    return
+  }
+  showPlaceHolder.value = false
+  focus.value = true
+  emit('focus', {
+    value: str.value
+  })
+}
+/**
+ * @description 输入框失焦的handle
+ */
+function searchBlur() {
+  if (clearing.value) return
+  // 组件触发blur事件
+  showPlaceHolder.value = !str.value
+  emit('blur', {
+    value: str.value
+  })
+}
+/**
+ * @description 点击取消搜索按钮的handle
+ */
+function handleCancel() {
+  // 组件触发cancel事件
+  emit('cancel', {
+    value: str.value
+  })
+}
+</script>
+<style lang="scss" scoped>
+@import '../common/abstracts/_mixin.scss';
+@import '../common/abstracts/variable.scss';
+
+@include b(search) {
+  display: flex;
+  padding: $-search-padding;
+  align-items: center;
+  background: #fff;
+
+  @include e(block) {
+    flex: 1;
+    background-color: $-search-input-bg;
+    border-radius: $-search-input-radius;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+  }
+  @include e(field) {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+  }
+  @include e(input) {
+    flex: 1;
+    height: $-search-input-height;
+    box-sizing: border-box;
+    padding: $-search-input-padding;
+    border: none;
+    background: transparent;
+    font-size: $-search-input-fs;
+    -webkit-appearance: none;
+    outline: none;
+    color: $-search-input-color;
+    z-index: 0;
+
+    @include lineEllipsis;
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+  }
+  @include e(cover) {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: $-search-input-height;
+    background-color: $-search-input-bg;
+    line-height: $-search-input-height;
+    font-size: $-search-input-fs;
+    border-radius: $-search-input-radius;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  @include e(search-icon) {
+    margin-right: 8px;
+    color: $-search-icon-color;
+    font-size: $-search-input-fs;
+    height: $-search-input-height;
+  }
+  @include e(search-left-icon) {
+    position: absolute;
+    display: inline-block;
+    height: $-search-input-height;
+    line-height: $-search-input-height;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: $-search-icon-color;
+    font-size: $-search-input-fs;
+  }
+  @include e(placeholder-txt) {
+    color: $-search-placeholder-color;
+    font-size: $-search-input-fs;
+  }
+  @include e(clear) {
+    position: absolute;
+    right: 0;
+    padding: 6px 9px 6px 7px;
+    color: $-search-cancel-color;
+  }
+  @include e(clear-icon) {
+    vertical-align: middle;
+  }
+  @include e(cancel) {
+    padding: $-search-cancel-padding;
+    height: $-search-input-height;
+    line-height: $-search-input-height;
+    font-size: $-search-cancel-fs;
+    color: $-search-cancel-color;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @include when(light) {
+    background: $-search-light-bg;
+
+    .wd-search__block {
+      background: #fff;
+    }
+
+    .wd-search__cover {
+      background: #fff;
+    }
+  }
+  @include when(without-cancel) {
+    padding-right: $-search-side-padding;
+  }
+}
+</style>

@@ -41,7 +41,7 @@
     &::-webkit-scrollbar-thumb {
       width: $-message-box-content-scrollbar-width;
       background: $-message-box-content-scrollbar-color;
-      border-radius: $-message-box-content-scrollbar-width / 2;
+      border-radius: calc($-message-box-content-scrollbar-width / 2);
     }
   }
 

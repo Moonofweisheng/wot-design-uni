@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import debounce from './lodash/debounce'
 
 /**
@@ -260,4 +261,71 @@ export function objToStyle(styles) {
       .join(';')
   }
   return styles
+}
+
+export const requestAnimationFrame = (cb = () => void 0) => {
+  return new Promise((resolve, reject) => {
+    uni
+      .createSelectorQuery()
+      .selectViewport()
+      .boundingClientRect()
+      .exec(() => {
+        resolve(true)
+        cb()
+      })
+  })
+}
+
+/**
+ * 深拷贝
+ * @param obj 深度拷贝的对象
+ * @param cache
+ * @returns
+ */
+export function deepClone(obj, cache: any = []) {
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+
+  if (Object.prototype.toString.call(obj) === '[object Date]') return new Date(obj)
+  if (Object.prototype.toString.call(obj) === '[object RegExp]') return new RegExp(obj)
+  if (Object.prototype.toString.call(obj) === '[object Error]') return new Error(obj)
+
+  const item: any = cache.filter((item: any) => item.original === obj)[0]
+  if (item) return item.copy
+
+  const copy = Array.isArray(obj) ? [] : {}
+  cache.push({
+    original: obj,
+    copy
+  })
+
+  Object.keys(obj).forEach((key) => {
+    copy[key] = deepClone(obj[key], cache)
+  })
+
+  return copy
+}
+
+// JS对象深度合并
+export function deepMerge(target = {}, source = {}) {
+  target = deepClone(target)
+  if (typeof target !== 'object' || typeof source !== 'object') return false
+  for (const prop in source) {
+    if (!source.hasOwnProperty(prop)) continue
+    if (prop in target) {
+      if (typeof target[prop] !== 'object') {
+        target[prop] = source[prop]
+      } else if (typeof source[prop] !== 'object') {
+        target[prop] = source[prop]
+      } else if (target[prop].concat && source[prop].concat) {
+        target[prop] = target[prop].concat(source[prop])
+      } else {
+        target[prop] = deepMerge(target[prop], source[prop])
+      }
+    } else {
+      target[prop] = source[prop]
+    }
+  }
+  return target
 }

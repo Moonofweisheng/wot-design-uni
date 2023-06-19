@@ -1,24 +1,32 @@
 <template>
-  <view
-    :class="['wd-icon', 'custom-class', isImageUrl ? 'wd-icon--image' : 'wd-icon-' + name]"
-    :style="`color: ${color}; font-size: ${size}; ${customStyle}`"
-  >
+  <view @click="handleClick" :class="rootClass" :style="rootStyle">
     <image v-if="isImageUrl" class="wd-icon__image" :src="name"></image>
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { objToStyle } from '../common/util'
 
 interface Props {
   name: string
   color?: string
   size?: string
   customStyle?: string
+  customClass?: string
 }
 const props = withDefaults(defineProps<Props>(), {
-  color: 'inherit',
-  size: 'inherit'
+  customStyle: '',
+  customClass: ''
 })
 
 const isImageUrl = ref<boolean>(false)
@@ -29,6 +37,27 @@ watch(
     isImageUrl.value = val.indexOf('/') > -1
   }
 )
+
+const rootClass = computed(() => {
+  return `wd-icon ${props.customClass} ${isImageUrl.value ? 'wd-icon--image' : 'wd-icon-' + props.name}`
+})
+
+const rootStyle = computed(() => {
+  const style: Record<string, any> = {}
+  if (props.color) {
+    style['color'] = props.color
+  }
+  if (props.size) {
+    style['font-size'] = props.size
+  }
+  return `${objToStyle(style)}; ${props.customStyle}`
+})
+
+const emit = defineEmits(['click'])
+
+function handleClick(e) {
+  emit('click', e)
+}
 </script>
 
 <style lang="scss" scoped>

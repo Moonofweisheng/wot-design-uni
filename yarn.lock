@@ -7213,11 +7213,6 @@ unbox-primitive@^1.0.2:
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
 
-uni-mini-router@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.npmmirror.com/uni-mini-router/-/uni-mini-router-0.0.12.tgz#3be55f5968044554b8ba1b13322d136a19865c29"
-  integrity sha512-b6nvpa3RfCGhOloIALo7+jLjuDztOpfC0M8tzp4kUzlexx2etDTPDLxRFRUeu5F4kQp1YQXJtC4xa9ezK6RHjg==
-
 uni-read-pages-vite@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmmirror.com/uni-read-pages-vite/-/uni-read-pages-vite-0.0.6.tgz#cb3f3d753acf30684a7707e80cf7eb2d8d5b17af"

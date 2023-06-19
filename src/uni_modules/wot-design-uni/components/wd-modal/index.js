@@ -16,9 +16,9 @@ VueComponent({
     customStyle: String
   },
   methods: {
-    handleClick () {
+    handleClick() {
       this.$emit('click')
     },
-    noop () {}
+    noop() {}
   }
 })

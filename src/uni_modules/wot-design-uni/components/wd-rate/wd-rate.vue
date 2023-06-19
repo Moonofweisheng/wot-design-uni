@@ -1,5 +1,5 @@
 <template>
-  <view class="wd-rate custom-class">
+  <view :class="`wd-rate ${customClass}`">
     <view
       v-for="(rate, index) in rateList"
       :key="index"
@@ -21,6 +21,7 @@
 import { computed, ref, watch } from 'vue'
 
 interface Props {
+  customClass?: string
   num: number
   modelValue: string | number | null
   readonly: boolean
@@ -35,6 +36,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   num: 5,
   modelValue: null,
   readonly: false,

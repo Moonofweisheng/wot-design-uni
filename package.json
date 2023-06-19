@@ -91,7 +91,6 @@
     "sass": "^1.59.3",
     "standard-version": "^9.5.0",
     "typescript": "^4.9.4",
-    "uni-mini-router": "^0.0.12",
     "uni-read-pages-vite": "^0.0.6",
     "vite": "4.0.3",
     "vitest": "^0.30.1",
