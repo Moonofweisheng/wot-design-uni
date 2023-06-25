@@ -1,0 +1,16 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(loadmore) {
+
+  @include e(loading) {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align:  middle;
+  }
+  @include e(refresh) {
+    display: inline-block;
+    color: $-loadmore-error-color;
+    vertical-align: middle;
+  }
+}

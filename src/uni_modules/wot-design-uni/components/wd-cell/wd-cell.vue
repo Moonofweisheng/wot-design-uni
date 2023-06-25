@@ -103,7 +103,9 @@ const emit = defineEmits(['click'])
 
 onMounted(() => {
   nextTick(() => {
-    cellList.value = [...cellList.value.concat([{ title: props.title, uid: proxy.$.uid }])]
+    if (cellList) {
+      cellList.value = [...cellList.value.concat([{ title: props.title, uid: proxy.$.uid }])]
+    }
   })
 })
 

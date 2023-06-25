@@ -1,5 +1,5 @@
-@import "../common/abstracts/_mixin.scss";
-@import "../common/abstracts/variable.scss";
+@import '../common/abstracts/_mixin.scss';
+@import '../common/abstracts/variable.scss';
 
 @include b(search) {
   display: flex;
@@ -55,7 +55,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
+  }
   @include e(search-icon) {
     margin-right: 8px;
     color: $-search-icon-color;

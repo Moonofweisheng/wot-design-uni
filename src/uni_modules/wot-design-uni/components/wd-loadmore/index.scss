@@ -1,8 +1,8 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
-@import '../divider/index.scss';
-@import '../icon/index.scss';
-@import '../loading/index.scss';
+@import '../wd-divider/index.scss';
+@import '../wd-icon/index.scss';
+@import '../wd-loading/index.scss';
 
 @include b(loadmore) {
   width: 100%;

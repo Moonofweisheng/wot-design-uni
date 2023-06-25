@@ -170,6 +170,126 @@
           },
           "navigationBarTitleText": "MessageBox 单元格"
         }
+      },
+      {
+        "path": "pages/toast/Index",
+        "name": "toast",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Toast 单元格"
+        }
+      },
+      {
+        "path": "pages/loading/Index",
+        "name": "loading",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Loading 单元格"
+        }
+      },
+      {
+        "path": "pages/progress/Index",
+        "name": "progress",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "progress 单元格"
+        }
+      },
+      {
+        "path": "pages/statusTip/Index",
+        "name": "statusTip",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "statusTip 单元格"
+        }
+      },
+      {
+        "path": "pages/inputNumber/Index",
+        "name": "inputNumber",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "inputNumber 单元格"
+        }
+      },
+      {
+        "path": "pages/loadmore/Index",
+        "name": "loadmore",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "loadmore 单元格"
+        }
+      },
+      {
+        "path": "pages/resize/Index",
+        "name": "resize",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "resize 单元格"
+        }
+      },
+      {
+        "path": "pages/sticky/Index",
+        "name": "sticky",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "sticky 单元格"
+        }
+      },
+      {
+        "path": "pages/img/Index",
+        "name": "img",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "img 单元格"
+        }
+      },
+      {
+        "path": "pages/imgCropper/Index",
+        "name": "imgCropper",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "imgCropper 单元格"
+        }
+      },
+      {
+        "path": "pages/pagination/Index",
+        "name": "pagination",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "pagination 单元格"
+        }
+      },
+      {
+        "path": "pages/sortButton/Index",
+        "name": "sortButton",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "sortButton 单元格"
+        }
       }
     ],
     // "tabBar": {

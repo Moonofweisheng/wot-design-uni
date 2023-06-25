@@ -5,19 +5,19 @@ VueComponent({
   relations: {
     '../sticky/index': {
       type: 'child',
-      unlinked (child) {
+      unlinked(child) {
         this.deleteObserver(child)
       }
     }
   },
-  beforeCreate () {
+  beforeCreate() {
     this.observerMap = new Map()
   },
   methods: {
     /**
      * @description wd-sticky-box 尺寸发生变化时，重新监听所有的viewport
      */
-    resizeHandler (e) {
+    resizeHandler(e) {
       // 相对的容器大小改变后，同步设置 wd-sticky-box 的大小
       renderData(this, {
         width: e.detail.width,
@@ -29,7 +29,7 @@ VueComponent({
       for (const [child] of temp) {
         this.observerForChild(child)
       }
-      temp.forEach(observer => {
+      temp.forEach((observer) => {
         observer.disconnect()
       })
       temp.clear()
@@ -38,7 +38,7 @@ VueComponent({
      * @description 删除 wd-sticky 废弃的监听器
      * @param child
      */
-    deleteObserver (child) {
+    deleteObserver(child) {
       const observer = this.observerMap.get(child)
       if (!observer) return
       observer.disconnect()
@@ -48,7 +48,7 @@ VueComponent({
      * @description 为 wd-sticky 创建监听器
      * @param child
      */
-    createObserver (child) {
+    createObserver(child) {
       const observer = this.createIntersectionObserver()
       this.observerMap.set(child, observer)
       return observer
@@ -57,7 +57,7 @@ VueComponent({
      * @description 为单个 wd-sticky 监听 viewport
      * @param child sticky
      */
-    observerForChild (child) {
+    observerForChild(child) {
       const offset = child.data.height + child.data.offsetTop
       this.deleteObserver(child)
       const observer = this.createObserver(child)
@@ -69,9 +69,8 @@ VueComponent({
           top: 0
         })
       }
-      observer.relativeToViewport({ top: -offset })
-        .observe('.wd-sticky-box', this.scrollHandler.bind(this, child))
-      this.getRect('.wd-sticky-box').then(res => {
+      observer.relativeToViewport({ top: -offset }).observe('.wd-sticky-box', this.scrollHandler.bind(this, child))
+      this.getRect('.wd-sticky-box').then((res) => {
         // 当 wd-sticky-box 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
         if (res.bottom <= offset) this.scrollHandler(child, { boundingClientRect: res })
       })
@@ -81,7 +80,7 @@ VueComponent({
      * @param {Object} child wd-sticky实例
      * @param {Object} boundingClientRect 目标节点各个边在viewport中的坐标
      */
-    scrollHandler (child, { boundingClientRect }) {
+    scrollHandler(child, { boundingClientRect }) {
       const offset = child.data.height + child.data.offsetTop
       if (boundingClientRect.bottom <= offset) {
         // 父元素即将被吸顶元素遮盖，将吸顶元素固定到父元素底部
@@ -92,13 +91,10 @@ VueComponent({
           position: 'absolute',
           top: boundingClientRect.height - child.data.height
         })
-      } else if (
-        boundingClientRect.top <= offset &&
-        boundingClientRect.bottom > offset
-      ) {
+      } else if (boundingClientRect.top <= offset && boundingClientRect.bottom > offset) {
         // wd-sticky 已经完全呈现了 viewport 中了，
         // 此时没有必要再相对 wd-sticky-box 吸顶了
-        if (child.data.state === 'normal') return
+        if (child.state.value === 'normal') return
         // 顶元素开始遮盖不住父元素了，将吸顶元素恢复到吸顶模式
         renderData(child, {
           openBox: false,

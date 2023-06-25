@@ -139,28 +139,5 @@ function changeRate(index: number) {
 }
 </script>
 <style lang="scss" scoped>
-@import './../common/abstracts/_mixin.scss';
-@import './../common/abstracts/variable.scss';
-
-@include b(rate) {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1;
-
-  @include e(item) {
-    position: relative;
-    display: inline-block;
-  }
-  @include e(item-star) {
-    display: inline-block;
-    vertical-align: top;
-
-    @include m(active) {
-      position: absolute;
-      left: 0;
-      top: 0;
-      overflow: hidden;
-    }
-  }
-}
+@import './index.scss';
 </style>

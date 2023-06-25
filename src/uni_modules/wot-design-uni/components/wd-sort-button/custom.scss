@@ -1,0 +1,26 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(sort-button){
+
+
+  @include e(right){
+
+    @include when(active) {
+      .wd-sort-button__icon-up, .wd-sort-button__icon-down {
+        transform: scale(calc(10 / 14));
+      }
+    }
+  }
+
+  @include e(icon-up){
+    display: block !important;
+    line-height: 1.1;
+    transform: scale(calc(10 / 14)) translate(0, 7px);
+  }
+  @include e(icon-down) {
+    display: block !important;
+    line-height: 1.1;
+    transform: scale(calc(10 / 14)) translate(0, -7px);
+  }
+}

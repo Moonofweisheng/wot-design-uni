@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2023-06-12 18:40:58
+ * @LastEditTime: 2023-06-24 17:28:59
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-img-cropper\index.js
+ * 记得注释
+ */
 import VueComponent from '../common/component'
 
 // 延时动画设置

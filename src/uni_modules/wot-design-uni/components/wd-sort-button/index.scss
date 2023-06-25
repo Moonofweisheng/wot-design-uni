@@ -17,7 +17,7 @@
         left: 50%;
         transform: translate(-50%, 0);
         background: $-sort-button-line-color;
-        border-radius: $-sort-button-line-height / 2;
+        border-radius: calc($-sort-button-line-height / 2);
         transition: opacity .15s;
         opacity: 0;
       }
@@ -59,7 +59,7 @@
 
     @include when(active) {
       .wd-sort-button__icon-up, .wd-sort-button__icon-down {
-        transform: scale((10/14));
+        transform: scale(calc((10 / 14)));
       }
     }
   }
@@ -67,11 +67,11 @@
   @include e(icon-up){
     display: block !important;
     line-height: 1.1;
-    transform: scale((10/14)) translate(0, 7px);
+    transform: scale(calc((10 / 14))) translate(0, 7px);
   }
   @include e(icon-down) {
     display: block !important;
     line-height: 1.1;
-    transform: scale((10/14)) translate(0, -7px);
+    transform: scale(calc((10 / 14))) translate(0, -7px);
   }
 }

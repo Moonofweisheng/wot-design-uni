@@ -188,7 +188,7 @@ export const context = {
  * @returns
  */
 export function getRect(selector: string, all: boolean, scope?: any) {
-  return new Promise((resolve) => {
+  return new Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>((resolve) => {
     let query: UniNamespace.SelectorQuery | null = null
     // #ifndef MP-ALIPAY
     query = uni.createSelectorQuery().in(scope)
@@ -226,7 +226,7 @@ export function kebabCase(word) {
 /**
  * 是否数组
  */
-function isArray(value: any) {
+export function isArray(value: any) {
   if (typeof Array.isArray === 'function') {
     return Array.isArray(value)
   }

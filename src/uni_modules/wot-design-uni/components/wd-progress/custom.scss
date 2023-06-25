@@ -2,31 +2,8 @@
 @import "./../common/abstracts/variable.scss";
 
 @include b(progress) {
-  width: 100%;
-  height: $-progress-height;
-  display: flex;
-  align-items: center;
-  padding: $-progress-padding;
 
-  @include e(outer) {
-    display: block;
-    position: relative;
-    flex: 1;
-    height: $-progress-height;
-    border-radius: calc($-progress-height / 2);
-    background: $-progress-bg;
-  }
   @include e(inner) {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    border-radius: calc($-progress-height / 2);
-    background: $-progress-color;
-    transition-property: width;
-    transition-timing-function: linear;
-    font-size: $-progress-icon-fs;
 
     @include when(danger) {
       background: $-progress-linear-danger-color;

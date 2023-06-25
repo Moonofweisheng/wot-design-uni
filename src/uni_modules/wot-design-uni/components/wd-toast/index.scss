@@ -13,14 +13,6 @@
   box-sizing: border-box;
   box-shadow: $-toast-box-shadow;
 
-  @include e(container) {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    transform: translate(0, -50%);
-    text-align: center;
-  }
   @include e(msg) {
     font-size: $-toast-fs;
     line-height: 20px;
