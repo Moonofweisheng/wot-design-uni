@@ -329,3 +329,20 @@ export function deepMerge(target = {}, source = {}) {
   }
   return target
 }
+
+/**
+ * 设置参数
+ * @param path 路径（无参数）
+ * @param params （参数）
+ * @returns
+ */
+export function setUrlParams(path: string, params: Record<string, string>) {
+  for (const key in params) {
+    if (path.indexOf('?') > -1) {
+      path = path + `&${key}=${params[key]}`
+    } else {
+      path = path + `?${key}=${params[key]}`
+    }
+  }
+  return path
+}

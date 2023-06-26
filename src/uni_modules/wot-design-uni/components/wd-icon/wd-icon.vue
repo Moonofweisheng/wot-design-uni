@@ -1,5 +1,5 @@
 <template>
-  <view @click="handleClick" :class="rootClass" :style="rootStyle">
+  <view @click="handleClick" data-eventsync="true" :class="rootClass" :style="rootStyle">
     <image v-if="isImageUrl" class="wd-icon__image" :src="name"></image>
   </view>
 </template>

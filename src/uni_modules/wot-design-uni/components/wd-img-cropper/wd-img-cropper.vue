@@ -1,4 +1,5 @@
 <template>
+  <!-- 绘制的图片canvas -->
   <view id="wd-img-cropper" v-if="modelValue" :class="`wd-img-cropper ${customClass}`" @touchmove="preventTouchMove">
     <!-- 展示在用户面前的裁剪框 -->
     <view class="wd-img-cropper__wrapper">
@@ -32,11 +33,11 @@
       </view>
       <!-- 展示的传过来的图片: 控制图片的旋转角度(rotate)、缩放程度(imgScale)、移动位置(translate) -->
       <image
+        :prop="isAnimation"
+        :change:prop="animation ? animation.setAnimation : ''"
         class="wd-img-cropper__img"
         :src="imgSrc"
-        :style="`width: ${picWidth ? picWidth + 'px' : 'auto'}; height: ${picHeight ? picHeight + 'px' : 'auto'}; transform: translate(${
-          imgLeft - picWidth / 2
-        }px, ${imgTop - picHeight / 2}px) scale(${imgScale}) rotate(${imgAngle}deg); transition-duration:${isAnimation ? 0.4 : 0}s`"
+        :style="imageStyle"
         :lazy-load="false"
         @touchstart="handleImgTouchStart"
         @touchmove="handleImgTouchMove"
@@ -48,13 +49,14 @@
     <!-- 绘制的图片canvas -->
     <canvas
       canvas-id="wd-img-cropper-canvas"
+      id="wd-img-cropper-canvas"
       class="wd-img-cropper__canvas"
-      disable-scroll="true"
+      :disable-scroll="true"
       :style="`width: ${Number(canvasWidth) * canvasScale}px; height: ${Number(canvasHeight) * canvasScale}px;`"
     />
     <!-- 下方按钮 -->
     <view class="wd-img-cropper__footer">
-      <wd-icon v-if="!disabledRotate" name="rotate" size="24px" color="#fff" @click="handleRotate"></wd-icon>
+      <wd-icon v-if="!disabledRotate" name="rotate" size="24px" color="#fff" data-eventsync="true" @click="handleRotate"></wd-icon>
       <view class="wd-img-cropper__footer--button">
         <view class="is-cancel" @click="handleCancel">{{ cancelButtonText }}</view>
         <wd-button size="small" :custom-style="buttonStyle" @click="handleConfirm">{{ confirmButtonText }}</wd-button>
@@ -65,7 +67,7 @@
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, ref, watch } from 'vue'
-import { objToStyle } from '../common/util'
+import { addUnit, objToStyle } from '../common/util'
 
 // 延时动画设置
 let CHANGE_TIME: any | null = null
@@ -230,15 +232,15 @@ watch(
     immediate: true
   }
 )
-
 watch(
   () => isAnimation.value,
   (newValue) => {
     // 开启过渡300毫秒之后自动关闭
-    clearTimeout(CHANGE_TIME)
+    CHANGE_TIME && clearTimeout(CHANGE_TIME)
     if (newValue) {
       CHANGE_TIME = setTimeout(() => {
-        isAnimation.value = false
+        revertIsAnimation(false)
+        clearTimeout(CHANGE_TIME)
       }, 300)
     }
   },
@@ -261,7 +263,26 @@ const buttonStyle = computed(() => {
   return objToStyle(style)
 })
 
+const imageStyle = computed(() => {
+  const style: Record<string, string | number> = {
+    width: picWidth.value ? addUnit(picWidth.value) : 'auto',
+    height: picHeight.value ? addUnit(picHeight.value) : 'auto',
+    transform: `translate(${addUnit(imgLeft.value - picWidth.value / 2)}, ${addUnit(imgTop.value - picHeight.value / 2)}) scale(${
+      imgScale.value
+    }) rotate(${imgAngle.value}deg)`,
+    'transition-duration': (isAnimation.value ? 0.4 : 0) + 's'
+  }
+  return objToStyle(style)
+})
+
 const emit = defineEmits(['imgloaded', 'imgloaderror', 'cancel', 'confirm', 'update:modelValue'])
+
+/**
+ * 逆转是否使用动画
+ */
+function revertIsAnimation(animation: boolean) {
+  isAnimation.value = animation
+}
 
 /**
  * @description 对外暴露：控制旋转角度
@@ -269,7 +290,7 @@ const emit = defineEmits(['imgloaded', 'imgloaderror', 'cancel', 'confirm', 'upd
  */
 function setRoate(angle: number) {
   if (!angle || props.disabledRotate) return
-  isAnimation.value = true
+  revertIsAnimation(true)
   imgAngle.value = angle
   // 设置旋转后需要判定旋转后宽高是否不符合贴边的标准
   detectImgPosIsEdge()
@@ -382,28 +403,30 @@ function detectImgPosIsEdge(scale?: number) {
   const currentScale = scale || imgScale.value
   let currentImgLeft = imgLeft.value
   let currentImgTop = imgTop.value
+  let currentPicWidth = picWidth.value
+  let currentPicHeight = picHeight.value
 
   // 翻转后宽高切换
-  if ((currentScale / 90) % 2) {
-    picWidth.value = picHeight.value
-    picHeight.value = picWidth.value
+  if ((imgAngle.value / 90) % 2) {
+    currentPicWidth = picHeight.value
+    currentPicHeight = picWidth.value
   }
   // 左
   currentImgLeft =
-    (picWidth.value * currentScale) / 2 + cutLeft.value >= currentImgLeft ? currentImgLeft : (picWidth.value * imgScale.value) / 2 + cutLeft.value
+    (currentPicWidth * currentScale) / 2 + cutLeft.value >= currentImgLeft ? currentImgLeft : (currentPicWidth * imgScale.value) / 2 + cutLeft.value
   // 右
   currentImgLeft =
-    cutLeft.value + cutWidth.value - (picWidth.value * currentScale) / 2 <= currentImgLeft
+    cutLeft.value + cutWidth.value - (currentPicWidth * currentScale) / 2 <= currentImgLeft
       ? currentImgLeft
-      : cutLeft.value + cutWidth.value - (picWidth.value * currentScale) / 2
+      : cutLeft.value + cutWidth.value - (currentPicWidth * currentScale) / 2
   // 上
   currentImgTop =
-    (picHeight.value * currentScale) / 2 + cutTop.value >= currentImgTop ? currentImgTop : (picHeight.value * currentScale) / 2 + cutTop.value
+    (currentPicHeight * currentScale) / 2 + cutTop.value >= currentImgTop ? currentImgTop : (currentPicHeight * currentScale) / 2 + cutTop.value
   // 下
   currentImgTop =
-    cutTop.value + cutHeight.value - (picHeight.value * currentScale) / 2 <= currentImgTop
+    cutTop.value + cutHeight.value - (currentPicHeight * currentScale) / 2 <= currentImgTop
       ? currentImgTop
-      : cutTop.value + cutHeight.value - (picHeight.value * currentScale) / 2
+      : cutTop.value + cutHeight.value - (currentPicHeight * currentScale) / 2
 
   imgScale.value = currentScale
   imgTop.value = currentImgTop
@@ -541,29 +564,32 @@ function handleConfirm(event) {
  */
 function canvasToImage() {
   const { fileType, quality, exportScale } = props
-  uni.canvasToTempFilePath(
-    {
-      width: cutWidth.value * exportScale,
-      height: Math.round(cutHeight.value * exportScale),
-      destWidth: cutWidth.value * exportScale,
-      destHeight: Math.round(cutHeight.value * exportScale),
-      fileType,
-      quality,
-      canvasId: 'wd-img-cropper-canvas',
-      success(res) {
-        emit('update:modelValue', false)
-        emit('confirm', {
-          tempFilePath: res.tempFilePath,
-          width: cutWidth.value * exportScale,
-          height: cutHeight.value * exportScale
-        })
+  try {
+    uni.canvasToTempFilePath(
+      {
+        width: cutWidth.value * exportScale,
+        height: Math.round(cutHeight.value * exportScale),
+        destWidth: cutWidth.value * exportScale,
+        destHeight: Math.round(cutHeight.value * exportScale),
+        fileType,
+        quality,
+        canvasId: 'wd-img-cropper-canvas',
+        success: (res) => {
+          emit('confirm', {
+            tempFilePath: res.tempFilePath,
+            width: cutWidth.value * exportScale,
+            height: cutHeight.value * exportScale
+          })
+        },
+        complete: () => {
+          emit('update:modelValue', false)
+        }
       },
-      fail() {
-        emit('update:modelValue', false)
-      }
-    },
-    proxy
-  )
+      proxy
+    )
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 /**
@@ -587,6 +613,9 @@ function draw() {
     }
     // drawImage 的 旋转是根据以当前图片的图片水平垂直方向为x、y轴，并在x y轴上移动
     ctx.value!.drawImage(props.imgSrc, -width / 2, -height / 2, width, height)
+
+    ctx.value!.restore()
+
     // 绘制图片
     ctx.value!.draw(false, () => {
       canvasToImage()
@@ -598,7 +627,30 @@ function draw() {
   draw()
 }
 function preventTouchMove() {}
+
+defineExpose({
+  revertIsAnimation
+})
 </script>
+
+<!-- #ifdef MP-WEIXIN || MP-QQ  -->
+<script module="animation" lang="wxs">
+
+function setAnimation(newValue, oldValue, ownerInstance){
+  if (newValue) {
+    var id = ownerInstance.setTimeout(function() {
+    ownerInstance.callMethod('revertIsAnimation',false)
+    ownerInstance.clearTimeout(id)
+  },300)
+  }
+
+}
+
+module.exports= {
+  setAnimation:setAnimation,
+}
+</script>
+<!-- #endif -->
 
 <style lang="scss" scoped>
 @import './index.scss';

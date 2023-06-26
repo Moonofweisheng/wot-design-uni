@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-06-13 11:47:12
+ * @LastEditTime: 2023-06-26 23:22:26
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\imgCropper\Index.vue
+ * 记得注释
+-->
 <template>
   <demo-block title="基本用法" style="text-align: center">
     <wd-img-cropper
@@ -28,16 +37,10 @@ const show = ref<boolean>(false)
 function upload() {
   uni.chooseImage({
     count: 1,
-    sizeType: ['original', 'compressed'],
-    sourceType: ['album', 'camera'],
-    success(res) {
+    success: (res) => {
       const tempFilePaths = res.tempFilePaths[0]
       src.value = tempFilePaths
       show.value = true
-      // that.setData({
-      //   show: true,
-      //   src: tempFilePaths
-      // })
     }
   })
 }
