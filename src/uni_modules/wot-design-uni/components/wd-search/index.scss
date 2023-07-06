@@ -56,13 +56,13 @@
     justify-content: center;
     align-items: center;
   }
-  @include e(search-icon) {
+  @include edeep(search-icon) {
     margin-right: 8px;
     color: $-search-icon-color;
     font-size: $-search-input-fs;
     height: $-search-input-height;
   }
-  @include e(search-left-icon) {
+  @include edeep(search-left-icon) {
     position: absolute;
     display: inline-block;
     height: $-search-input-height;
@@ -77,13 +77,13 @@
     color: $-search-placeholder-color;
     font-size: $-search-input-fs;
   }
-  @include e(clear) {
+  @include edeep(clear) {
     position: absolute;
     right: 0;
     padding: 6px 9px 6px 7px;
     color: $-search-cancel-color;
   }
-  @include e(clear-icon) {
+  @include edeep(clear-icon) {
     vertical-align: middle;
   }
   @include e(cancel) {

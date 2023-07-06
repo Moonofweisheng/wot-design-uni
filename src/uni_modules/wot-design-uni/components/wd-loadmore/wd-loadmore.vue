@@ -18,6 +18,15 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 

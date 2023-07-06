@@ -5,7 +5,7 @@
   position: relative;
   display: inline-block;
 
-  @include e(icon) {
+  @include edeep(icon) {
     vertical-align: middle;
     font-size: 18px;
     margin-right: 5px;
@@ -14,6 +14,8 @@
   @include e(menu-inner) {
     position: relative;
     padding: $-popover-padding 0;
+    display: flex;
+    align-items: center;
 
     @include halfPixelBorder("top", 0, $-popover-border-color);
 
@@ -69,7 +71,7 @@
     border-radius: $-popover-radius;
   }
 
-  @include e(close-icon) {
+  @include edeep(close-icon) {
     font-size: 12px;
     position: absolute;
     right: -8px;

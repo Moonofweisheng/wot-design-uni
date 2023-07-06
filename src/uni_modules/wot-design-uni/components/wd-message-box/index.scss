@@ -1,7 +1,7 @@
 @import "../common/abstracts/variable.scss";
 @import "../common/abstracts/_mixin.scss";
 
-@include b(message-box) {
+@include bdeep(message-box) {
   border-radius: $-message-box-radius;
   overflow: hidden;
 

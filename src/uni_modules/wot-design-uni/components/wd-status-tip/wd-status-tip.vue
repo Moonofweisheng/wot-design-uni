@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-06-12 10:04:19
+ * @LastEditTime: 2023-07-01 18:14:00
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-status-tip\wd-status-tip.vue
+ * 记得注释
+-->
 <template>
   <div :class="`wd-status-tip  ${customClass}`" :style="customStyle">
     <image v-if="imgUrl" class="wd-status-tip__image" :src="imgUrl"></image>

@@ -1,5 +1,5 @@
 <template>
-  <view :class="['demo-block', transparent ? '' : 'is-white', 'custom-class']">
+  <view :class="['demo-block', transparent ? '' : 'is-white', customClass]">
     <view class="demo-title">{{ title }}</view>
     <view class="demo-container" :style="transparent ? '' : style">
       <slot />
@@ -10,6 +10,7 @@
 import { ref, watch } from 'vue'
 
 interface Props {
+  customClass?: string
   title: string
   ver: number
   hor: number
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   ver: 10,
   hor: 15
 })

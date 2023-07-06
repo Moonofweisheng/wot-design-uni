@@ -1,5 +1,5 @@
-@import "./../common/abstracts/_mixin.scss";
-@import "./../common/abstracts/variable.scss";
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
 
 @mixin button-type-style($color, $normal, $active, $disabled, $disabledcolor) {
   background: $normal;
@@ -158,13 +158,7 @@
     );
   }
   @include when(success) {
-    @include button-type-style(
-      $-color-white,
-      $-button-success-color,
-      $-button-success-active-color,
-      $-button-success-disabled-color,
-      $-color-white
-    );
+    @include button-type-style($-color-white, $-button-success-color, $-button-success-active-color, $-button-success-disabled-color, $-color-white);
   }
   @include when(info) {
     @include button-type-style(
@@ -176,22 +170,10 @@
     );
   }
   @include when(warning) {
-    @include button-type-style(
-      $-color-white,
-      $-button-warning-color,
-      $-button-warning-active-color,
-      $-button-warning-disabled-color,
-      $-color-white
-    );
+    @include button-type-style($-color-white, $-button-warning-color, $-button-warning-active-color, $-button-warning-disabled-color, $-color-white);
   }
   @include when(error) {
-    @include button-type-style(
-      $-color-white,
-      $-button-error-color,
-      $-button-error-active-color,
-      $-button-error-disabled-color,
-      $-color-white
-    );
+    @include button-type-style($-color-white, $-button-error-color, $-button-error-active-color, $-button-error-disabled-color, $-color-white);
   }
 
   @include when(small) {
@@ -347,12 +329,7 @@
       transform-origin: left top;
     }
     @include when(primary) {
-      @include button-plain-style(
-        $-button-primary-color,
-        $-button-primary-color,
-        $-button-primary-active-color,
-        $-button-primary-disabled-color
-      );
+      @include button-plain-style($-button-primary-color, $-button-primary-color, $-button-primary-active-color, $-button-primary-disabled-color);
       &.wd-button--active {
         background-color: $-button-primary-plain-active-bg-color;
       }
@@ -366,20 +343,10 @@
       }
     }
     @include when(success) {
-      @include button-plain-style(
-        $-button-success-color,
-        $-button-success-color,
-        $-button-success-active-color,
-        $-button-success-disabled-color
-      );
+      @include button-plain-style($-button-success-color, $-button-success-color, $-button-success-active-color, $-button-success-disabled-color);
     }
     @include when(info) {
-      @include button-plain-style(
-        $-button-info-plain-normal-color,
-        $-button-info-bg-color,
-        $-button-info-active-color,
-        $-button-info-disabled-color
-      );
+      @include button-plain-style($-button-info-plain-normal-color, $-button-info-bg-color, $-button-info-active-color, $-button-info-disabled-color);
       &::after {
         border-color: $-button-info-plain-border-color;
       }
@@ -408,20 +375,10 @@
       }
     }
     @include when(warning) {
-      @include button-plain-style(
-        $-button-warning-color,
-        $-button-warning-color,
-        $-button-warning-active-color,
-        $-button-warning-disabled-color
-      );
+      @include button-plain-style($-button-warning-color, $-button-warning-color, $-button-warning-active-color, $-button-warning-disabled-color);
     }
     @include when(error) {
-      @include button-plain-style(
-        $-button-error-color,
-        $-button-error-color,
-        $-button-error-active-color,
-        $-button-error-disabled-color
-      );
+      @include button-plain-style($-button-error-color, $-button-error-color, $-button-error-active-color, $-button-error-disabled-color);
     }
     @include when(suck) {
       &.wd-button--active {
@@ -462,7 +419,7 @@
     &.wd-button--active {
       background: $-button-icon-active-color;
     }
-    .wd-button__icon {
+    :deep(.wd-button__icon){
       margin-right: 0;
     }
     @include when(disabled) {
@@ -475,7 +432,7 @@
     }
   }
 
-  @include e(icon) {
+  @include edeep(icon) {
     display: block;
     margin-right: 6px;
     font-size: $-button-icon-fs;

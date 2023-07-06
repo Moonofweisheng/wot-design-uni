@@ -1,6 +1,6 @@
 <template>
   <view :class="rootClass">
-    <view class="wd-slider__label-min custom-min-class" v-if="!hideMinMax">
+    <view :class="`wd-slider__label-min ${customMinClass}`" v-if="!hideMinMax">
       {{ minValue }}
     </view>
     <view class="wd-slider__bar-wrapper" :style="barWrapperStyle">
@@ -35,11 +35,21 @@
         <view class="wd-slider__button" />
       </view>
     </view>
-    <view class="wd-slider__label-max custom-max-class" v-if="!hideMinMax">
+    <view :class="`wd-slider__label-max ${customMaxClass}`" v-if="!hideMinMax">
       {{ maxValue }}
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 import { getRect, isDef } from '../common/util'
@@ -47,9 +57,9 @@ import { useTouch } from '../mixins/useTouch'
 import { watch } from 'vue'
 
 interface Props {
-  'custom-min-class': string
-  'custom-max-class': string
-  'custom-class': string
+  customMinClass?: string
+  customMaxClass?: string
+  customClass?: string
   hideMinMax: boolean
   hideLabel: boolean
   disabled: boolean
@@ -62,6 +72,9 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customMinClass: '',
+  customMaxClass: '',
+  customClass: '',
   disabled: false,
   inactiveColor: '#e5e5e5',
   activeColor: '',
@@ -174,9 +187,7 @@ watch(
 const { proxy } = getCurrentInstance() as any
 
 const rootClass = computed(() => {
-  const rootClass = `wd-slider ${!props.hideLabel ? 'wd-slider__has-label' : ''} ${props.disabled ? 'wd-slider--disabled' : ''} ${
-    props['custom-class']
-  }`
+  const rootClass = `wd-slider ${!props.hideLabel ? 'wd-slider__has-label' : ''} ${props.disabled ? 'wd-slider--disabled' : ''} ${props.customClass}`
   return rootClass
 })
 

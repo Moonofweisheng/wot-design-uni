@@ -26,6 +26,7 @@ export const defaultOptions: ToastOptions = {
 }
 
 export function useToast(selector: string = ''): Toast {
+  let timer: NodeJS.Timeout | null = null
   const toastOption = ref<ToastOptions>(defaultOptions) // Toast选项
   const toastOptionKey = selector ? '__TOAST_OPTION__' + selector : toastDefaultOptionKey
   provide(toastOptionKey, toastOption)
@@ -44,8 +45,9 @@ export function useToast(selector: string = ''): Toast {
     }) as ToastOptions
     // 开始渲染，并在 duration ms之后执行清除
     if (toastOption.value.duration && toastOption.value.duration > 0) {
-      const timer = setTimeout(() => {
-        clearTimeout(timer)
+      timer && clearTimeout(timer)
+      timer = setTimeout(() => {
+        timer && clearTimeout(timer)
         close()
       }, options.duration)
     }

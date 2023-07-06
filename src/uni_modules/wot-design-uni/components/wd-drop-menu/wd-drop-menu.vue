@@ -1,8 +1,25 @@
 <template>
+  <view class="wd-drop-menu custom-class" catchtap="noop">
+    <view class="wd-drop-menu__list">
+      <view
+        jd:for="{{ titleList }}"
+        jd:key="index"
+        bindtap="toggle"
+        data-index="{{ index }}"
+        class="wd-drop-menu__item {{ item.disabled ? 'is-disabled' : '' }} {{ currentIndex === index ? 'is-active' : '' }}"
+      >
+        <view class="wd-drop-menu__item-title">
+          <view class="wd-drop-menu__item-title-text">{{ item.title }}</view>
+          <wd-icon name="arrow-down" size="14px" custom-class="wd-drop-menu__arrow" />
+        </view>
+      </view>
+    </view>
+    <slot />
+  </view>
 </template>
 
-<script>
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
+@import './index.scss';
 </style>

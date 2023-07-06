@@ -58,18 +58,18 @@
     line-height: 1.1;
 
     @include when(active) {
-      .wd-sort-button__icon-up, .wd-sort-button__icon-down {
+      :deep(.wd-sort-button__icon-up, .wd-sort-button__icon-down) {
         transform: scale(calc((10 / 14)));
       }
     }
   }
 
-  @include e(icon-up){
+  @include edeep(icon-up){
     display: block !important;
     line-height: 1.1;
     transform: scale(calc((10 / 14))) translate(0, 7px);
   }
-  @include e(icon-down) {
+  @include edeep(icon-down) {
     display: block !important;
     line-height: 1.1;
     transform: scale(calc((10 / 14))) translate(0, -7px);

@@ -21,13 +21,16 @@
     background: $-notice-bar-danger-bg;
     color: $-notice-bar-danger-color;
   }
-  @include e(prefix) {
+  @include edeep(prefix) {
     padding-right: 4px;
     width: $-notice-bar-prefix-size;
     height: $-notice-bar-prefix-size;
     line-height: $-notice-bar-prefix-size;
   }
-  @include e(suffix) {
+
+
+
+  @include edeep(suffix) {
     text-align: center;
     width: $-notice-bar-close-size;
     height: $-notice-bar-close-size;
@@ -40,13 +43,6 @@
     position: absolute;
     right: 0;
     top: 0;
-
-    i {
-      font-size: 14px;
-      line-height: $-notice-bar-close-size;
-      display: inline-block;
-      vertical-align: bottom;
-    }
   }
   @include e(wrap) {
     position: relative;

@@ -2,7 +2,7 @@
 @import "./../common/abstracts/variable.scss";
 
 
-@include b(modal) {
+@include bdeep(modal) {
   position: fixed;
   left: 0;
   top: 0;

@@ -79,7 +79,7 @@
     z-index: 0;
   }
 
-  @include e(action-icon) {
+  @include edeep(action-icon) {
     position: absolute;
     display: inline-block;
     font-size: $-input-number-icon-size;

@@ -11,9 +11,9 @@
 </template>
 <script lang="ts">
 export default {
-  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
   options: {
-    virtualHost: true
+    virtualHost: true,
+    styleIsolation: 'shared'
   }
 }
 </script>
@@ -40,17 +40,6 @@ function handleClick() {
 function noop() {}
 </script>
 
-<style lang="scss" scoped>
-@import './../common/abstracts/_mixin.scss';
-@import './../common/abstracts/variable.scss';
-// @import './index.scss';
-
-:deep(.wd-modal) {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: $-modal-bg;
-}
+<style lang="scss">
+@import './index.scss';
 </style>

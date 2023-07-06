@@ -14,6 +14,16 @@
     ></wd-icon>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import { checkNumRange, isArray, objToStyle } from '../common/util'

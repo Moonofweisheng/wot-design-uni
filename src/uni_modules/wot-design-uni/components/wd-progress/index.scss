@@ -35,13 +35,13 @@
       background: $-progress-linear-success-color;
     }
   }
-  @include e(label) {
+  @include edeep(label) {
     width: 30px;
     margin-left: 9px;
     color: $-progress-label-color;
     font-size: $-progress-label-fs;
   }
-  @include e(icon) {
+  @include edeep(icon) {
     font-size: $-progress-icon-fs;
 
     @include when(danger) {

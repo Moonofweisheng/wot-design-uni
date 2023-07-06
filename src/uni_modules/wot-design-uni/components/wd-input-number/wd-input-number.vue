@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-input-number custom-class ${disabled ? 'is-disabled' : ''} ${withoutInput ? 'is-without-input' : ''}`">
+  <view :class="`wd-input-number ${customClass} ${disabled ? 'is-disabled' : ''} ${withoutInput ? 'is-without-input' : ''}`">
     <view :class="`wd-input-number__action ${minDisabled ? 'is-disabled' : ''}`" @click="sub">
       <wd-icon name="decrease" custom-class="wd-input-number__action-icon"></wd-icon>
     </view>
@@ -23,6 +23,15 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { debounce, getType } from '../common/util'
@@ -44,6 +53,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   min: 1,
   max: Number.MAX_SAFE_INTEGER,
   step: 1,

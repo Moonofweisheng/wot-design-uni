@@ -1,7 +1,7 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
-@import "../modal/index.scss";
-@import "../popup/index.scss";
+@import "../wd-modal/index.scss";
+@import "../wd-popup/index.scss";
 
 @include b(curtain) {
   display: inline-block;
@@ -25,7 +25,7 @@
     height: auto;
     border-radius: $-curtain-content-radius;
   }
-  @include e(content-close) {
+  @include edeep(content-close) {
     position: absolute;
     margin: 0;
     padding: 6px;

@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-03-09 19:23:03
- * @LastEditTime: 2023-06-25 13:32:05
+ * @LastEditTime: 2023-07-01 18:32:26
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\App.vue
@@ -20,16 +20,6 @@ onHide(() => {
 })
 </script>
 <style lang="scss">
-@import './uni_modules/wot-design-uni/components/wd-modal/custom.scss';
-@import './uni_modules/wot-design-uni/components/wd-input/custom.scss';
-@import './uni_modules/wot-design-uni/components/wd-search/custom.scss';
-@import './uni_modules/wot-design-uni/components/wd-progress/custom.scss';
-@import './uni_modules/wot-design-uni/components/wd-input-number/custom.scss';
-@import './uni_modules/wot-design-uni/components/wd-loadmore/custom.scss';
-@import './uni_modules/wot-design-uni/components/wd-pagination/custom.scss';
-@import './uni_modules/wot-design-uni/components/wd-sort-button/custom.scss';
-
-
 page {
   margin: 0;
   padding: 0;

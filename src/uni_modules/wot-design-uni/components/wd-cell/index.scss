@@ -1,5 +1,5 @@
-@import "../common/abstracts/variable.scss";
-@import "../common/abstracts/_mixin.scss";
+@import '../common/abstracts/variable.scss';
+@import '../common/abstracts/_mixin.scss';
 
 @include b(cell) {
   position: relative;
@@ -40,6 +40,7 @@
     position: relative;
     flex: 1;
     display: flex;
+    align-items: center;
     margin-right: $-cell-padding;
     font-size: $-cell-title-fs;
     box-sizing: border-box;
@@ -74,7 +75,7 @@
     color: $-cell-label-color;
     @include lineEllipsis;
   }
-  @include e(icon) {
+  @include edeep(icon) {
     display: block;
     position: relative;
     width: $-cell-icon-size;
@@ -92,7 +93,7 @@
     line-height: $-cell-value-line-height;
     vertical-align: top;
   }
-  @include e(arrow-right) {
+  @include edeep(arrow-right) {
     display: inline-block;
     margin-left: 8px;
     width: $-cell-arrow-size;

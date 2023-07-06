@@ -32,7 +32,7 @@
           :focus="focus"
         />
         <!--icon:clear-->
-        <wd-icon v-if="str" custom-class="wd-search__clear-icon" name="error-fill" size="16px" class="wd-search__clear" @click="clearSearch" />
+        <wd-icon v-if="str" custom-class="wd-search__clear wd-search__clear-icon" name="error-fill" size="16px" @click="clearSearch" />
       </view>
     </view>
     <!--the button behind input,care for hideCancel without displaying-->
@@ -49,13 +49,12 @@
 
 <script lang="ts">
 export default {
-  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
   options: {
-    virtualHost: true
+    virtualHost: true,
+    styleIsolation: 'shared'
   }
 }
 </script>
-
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import { requestAnimationFrame } from '../common/util'

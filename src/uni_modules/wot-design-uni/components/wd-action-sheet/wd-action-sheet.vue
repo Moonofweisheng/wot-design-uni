@@ -1,323 +1,193 @@
 <template>
   <wd-popup
     custom-class="wd-action-sheet__popup"
-    custom-style="{{ (actions && actions.length || panels && panels.length) ? 'background: transparent;' : '' }}"
-    show="{{ show }}"
-    duration="{{ duration }}"
+    :custom-style="`${(actions && actions.length) || (panels && panels.length) ? 'background: transparent;' : ''}`"
+    v-model="showPopup"
+    :duration="duration"
     position="bottom"
-    close-on-click-modal="{{ closeOnClickModal }}"
-    safe-area-inset-bottom="{{ safeAreaInsetBottom }}"
-    lazy-render="{{ lazyRender }}"
-    bind:enter="handleOpen"
-    bind:close="close"
-    bind:afterenter="handleOpened"
-    bind:afterleave="handleClosed"
-    z-index="{{ zIndex }}"
+    :close-on-click-modal="closeOnClickModal"
+    :safe-area-inset-bottom="safeAreaInsetBottom"
+    :lazy-render="lazyRender"
+    @enter="handleOpen"
+    @close="close"
+    @afterenter="handleOpened"
+    @afterleave="handleClosed"
+    @clickmodal="handleClickModal"
+    :z-index="zIndex"
   >
     <view
       class="wd-action-sheet"
-      style="{{ (actions && actions.length || panels && panels.length) ? 'margin: 0 10px 10px; border-radius: 16px;' : '' }}"
+      :style="`${(actions && actions.length) || (panels && panels.length) ? 'margin: 0 10px 10px; border-radius: 16px;' : ''}`"
     >
-      <view v-if="{{ title }}" class="wd-action-sheet__header custom-header-class">
+      <view v-if="title" :class="`wd-action-sheet__header ${customHeaderClass}`">
         {{ title }}
-        <wd-icon custom-class="wd-action-sheet__close" name="add" bind:tap="close" />
+        <wd-icon custom-class="wd-action-sheet__close" name="add" @click="close" />
       </view>
-      <view class="wd-action-sheet__actions" v-if="{{ actions && actions.length }}">
+      <view class="wd-action-sheet__actions" v-if="actions && actions.length">
         <button
           jd:for="{{ actions }}"
-          jd:key="rowIndex"
-          class="wd-action-sheet__action {{ item.disabled ? 'wd-action-sheet__action--disabled' : '' }} {{ item.loading ? 'wd-action-sheet__action--loading' : '' }}"
-          style="color: {{ item.color }}"
-          jd:for-index="rowIndex"
-          data-row-index="{{ rowIndex }}"
-          data-type="action"
-          bind:tap="select"
+          v-for="(action, rowIndex) in actions"
+          :key="rowIndex"
+          :class="`wd-action-sheet__action ${action.disabled ? 'wd-action-sheet__action--disabled' : ''}  ${
+            action.loading ? 'wd-action-sheet__action--loading' : ''
+          }`"
+          :style="`color: ${action.color}`"
+          @click="select(rowIndex, 'action')"
         >
-          <wd-loading v-if="{{ item.loading }}" size="20px" />
-          <view v-else class="wd-action-sheet__name">{{ item.name }}</view>
-          <view v-if="{{ !item.loading && item.subname }}" class="wd-action-sheet__subname">{{ item.subname }}</view>
+          <wd-loading v-if="action.loading" size="20px" />
+          <view v-else class="wd-action-sheet__name">{{ action.name }}</view>
+          <view v-if="!action.loading && action.subname" class="wd-action-sheet__subname">{{ action.subname }}</view>
         </button>
       </view>
-      <view v-if="{{ formatPanels && formatPanels.length }}">
-        <view
-          jd:for="{{ formatPanels }}"
-          data-index="{{ rowIndex }}"
-          jd:for-item="item"
-          jd:for-index="rowIndex"
-          jd:key="rowIndex"
-          class="wd-action-sheet__panels"
-        >
+      <view v-if="formatPanels && formatPanels.length">
+        <view v-for="(panel, rowIndex) in formatPanels" :key="rowIndex" class="wd-action-sheet__panels">
           <view class="wd-action-sheet__panels-content">
-            <view
-              jd:for="{{ item }}"
-              data-col-index="{{ colIndex }}"
-              data-row-index="{{ rowIndex }}"
-              data-type="panels"
-              jd:for-item="panel"
-              jd:for-index="colIndex"
-              jd:key="colIndex"
-              class="wd-action-sheet__panel"
-              bind:tap="select"
-            >
-              <image class="wd-action-sheet__panel-img" src="{{ panel.iconUrl }}" />
-              <view class="wd-action-sheet__panel-title">{{ panel.title }}</view>
+            <view v-for="(col, colIndex) in panel" :key="colIndex" class="wd-action-sheet__panel" @click="select(rowIndex, 'panels', colIndex)">
+              <image class="wd-action-sheet__panel-img" :src="(col as any).iconUrl" />
+              <view class="wd-action-sheet__panel-title">{{ (col as any).title }}</view>
             </view>
           </view>
         </view>
       </view>
       <slot />
-      <button v-if="{{ cancelText }}" class="wd-action-sheet__cancel" bind:tap="handleCancel">{{ cancelText }}</button>
+      <button v-if="cancelText" class="wd-action-sheet__cancel" @click="handleCancel">{{ cancelText }}</button>
     </view>
   </wd-popup>
 </template>
-
-<script>
+<script lang="ts">
 export default {
-  props: {
-    show: Boolean,
-    actions: {
-      type: Array,
-      value: []
-    },
-    panels: {
-      type: Array,
-      value: [],
-      observer: 'computedValue'
-    },
-    title: String,
-    cancelText: String,
-    closeOnClickAction: {
-      type: Boolean,
-      value: true
-    },
-    closeOnClickModal: {
-      type: Boolean,
-      value: true
-    },
-    duration: {
-      type: Number,
-      value: 200
-    },
-    zIndex: {
-      type: Number,
-      value: 10
-    },
-    lazyRender: {
-      type: Boolean,
-      value: true
-    },
-    safeAreaInsetBottom: {
-      type: Boolean,
-      value: true
-    }
-  },
-  data() {
-    return {
-      formatPanels: []
-    }
-  },
-  methods: {
-    isArray() {
-      return this.data.panels.length && !(this.data.panels[0] instanceof Array)
-    },
-    computedValue() {
-      this.setData({
-        formatPanels: this.isArray() ? [this.data.panels] : this.data.panels
-      })
-    },
-    select(event) {
-      const { rowIndex, colIndex, type } = event.currentTarget.dataset
-      if (type === 'action') {
-        this.$emit('select', {
-          item: this.data.actions[rowIndex],
-          index: rowIndex
-        })
-      } else if (this.isArray()) {
-        this.$emit('select', {
-          item: this.data.panels[colIndex],
-          index: colIndex
-        })
-      } else {
-        this.$emit('select', {
-          item: this.data.panels[rowIndex][colIndex],
-          rowIndex,
-          colIndex
-        })
-      }
-      this.close()
-    },
-    handleClickModal() {
-      this.$emit('clickmodal')
-      if (this.data.closeOnClickModal) {
-        this.close()
-      }
-    },
-    handleCancel() {
-      this.$emit('cancel')
-      this.close()
-    },
-    close() {
-      this.$emit('close')
-    },
-    handleOpen() {
-      this.$emit('open')
-    },
-    handleOpened() {
-      this.$emit('opened')
-    },
-    handleClosed() {
-      this.$emit('closed')
-    }
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
   }
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../common/abstracts/variable';
-@import '../common/abstracts/mixin';
+<script lang="ts" setup>
+import { watch } from 'vue'
+import { ref } from 'vue'
 
-@include b(action-sheet) {
-  background-color: #fff;
-  padding-bottom: 1px;
+interface Action {
+  // 选项名称
+  name: string
+  // 描述信息
+  subname: string
+  // 颜色
+  color: string
+  // 禁用
+  disabled: boolean
+  // 加载中状态
+  loading: boolean
+}
 
-  @include e(popup) {
-    border-radius: $-action-sheet-radius $-action-sheet-radius 0 0;
+interface Panel {
+  // 图片地址
+  iconUrl: string
+  // 标题内容
+  title: string
+}
+
+interface Props {
+  customClass?: string
+  customHeaderClass?: string
+  show: boolean
+  actions: Array<Action>
+  panels: Array<Panel>
+  title: string
+  cancelText: string
+  closeOnClickAction: boolean
+  closeOnClickModal: boolean
+  duration: number
+  zIndex: number
+  lazyRender: boolean
+  safeAreaInsetBottom: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
+  customHeaderClass: '',
+  show: false,
+  actions: () => [] as Array<Action>,
+  panels: () => [] as Array<Panel>,
+  closeOnClickAction: true,
+  closeOnClickModal: true,
+  duration: 200,
+  lazyRender: false,
+  safeAreaInsetBottom: true
+})
+const formatPanels = ref<Array<Panel> | Array<Array<Panel>>>([])
+
+const showPopup = ref<boolean>(false)
+
+watch(
+  () => props.panels,
+  () => {
+    computedValue()
+  },
+  { deep: true, immediate: true }
+)
+
+watch(
+  () => props.show,
+  (newValue) => {
+    showPopup.value = newValue
+  },
+  { deep: true, immediate: true }
+)
+
+const emit = defineEmits(['select', 'clickmodal', 'cancel', 'closed', 'close', 'open', 'opened'])
+
+function isArray() {
+  return props.panels.length && !(props.panels[0] instanceof Array)
+}
+function computedValue() {
+  formatPanels.value = isArray() ? [props.panels] : props.panels
+}
+
+function select(rowIndex: number, type: string, colIndex?: number) {
+  if (type === 'action') {
+    emit('select', {
+      item: props.actions[rowIndex],
+      index: rowIndex
+    })
+  } else if (isArray()) {
+    emit('select', {
+      item: props.panels[Number(colIndex)],
+      index: colIndex
+    })
+  } else {
+    emit('select', {
+      item: props.panels[rowIndex][Number(colIndex)],
+      rowIndex,
+      colIndex
+    })
   }
-  @include e(actions) {
-    padding: 8px 0;
-    max-height: 50vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  @include e(action) {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: $-action-sheet-action-height;
-    line-height: $-action-sheet-action-height;
-    color: $-action-sheet-color;
-    font-size: $-action-sheet-fs;
-    text-align: center;
-    border: none;
-    background: $-action-sheet-bg;
-    outline: none;
-
-    &:after {
-      display: none;
-    }
-
-    &:active {
-      background: $-action-sheet-active-color;
-    }
-
-    @include m(disabled) {
-      color: $-action-sheet-disabled-color;
-    }
-
-    @include m(loading) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: initial;
-    }
-  }
-
-  @include e(name) {
-    display: inline-block;
-  }
-
-  @include e(subname) {
-    display: inline-block;
-    margin-left: 4px;
-    font-size: $-action-sheet-subname-fs;
-    color: $-action-sheet-subname-color;
-  }
-
-  @include e(cancel) {
-    display: block;
-    width: calc(100% - 48px);
-    line-height: $-action-sheet-cancel-height;
-    padding: 0;
-    color: $-action-sheet-cancel-color;
-    font-size: $-action-sheet-fs;
-    text-align: center;
-    border-radius: $-action-sheet-cancel-radius;
-    border: none;
-    background: $-action-sheet-cancel-bg;
-    outline: none;
-    margin: 0 auto 24px;
-    font-weight: $-action-sheet-weight;
-
-    &:active {
-      background: $-action-sheet-active-color;
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  @include e(header) {
-    color: $-action-sheet-color;
-    position: relative;
-    height: $-action-sheet-title-height;
-    line-height: $-action-sheet-title-height;
-    text-align: center;
-    font-size: $-action-sheet-title-fs;
-    font-weight: $-action-sheet-weight;
-  }
-
-  @include e(close) {
-    position: absolute;
-    top: $-action-sheet-close-top;
-    right: $-action-sheet-close-right;
-    color: $-action-sheet-close-color;
-    font-size: $-action-sheet-close-fs;
-    transform: rotate(-45deg);
-    line-height: 1.1;
-  }
-
-  @include e(panels) {
-    height: 84px;
-    overflow-y: hidden;
-
-    &:first-of-type {
-      margin-top: 20px;
-    }
-
-    &:last-of-type {
-      margin-bottom: 12px;
-    }
-  }
-
-  @include e(panels-content) {
-    display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  @include e(panel) {
-    width: 88px;
-    flex: 0 0 auto;
-    display: inline-block;
-    padding: $-action-sheet-panel-padding;
-  }
-
-  @include e(panel-img) {
-    display: block;
-    width: $-action-sheet-panel-img-fs;
-    height: $-action-sheet-panel-img-fs;
-    margin: 0 auto;
-    margin-bottom: 7px;
-    border-radius: $-action-sheet-panel-img-radius;
-  }
-
-  @include e(panel-title) {
-    font-size: $-action-sheet-subname-fs;
-    line-height: 1.2;
-    text-align: center;
-    color: $-action-sheet-color;
-    @include lineEllipsis;
+  close()
+}
+function handleClickModal() {
+  emit('clickmodal')
+  if (props.closeOnClickModal) {
+    close()
   }
 }
+function handleCancel() {
+  emit('cancel')
+  close()
+}
+function close() {
+  emit('close')
+}
+function handleOpen() {
+  emit('open')
+}
+function handleOpened() {
+  emit('opened')
+}
+function handleClosed() {
+  emit('closed')
+}
+</script>
+
+<style lang="scss" scoped>
+@import './index.scss';
 </style>

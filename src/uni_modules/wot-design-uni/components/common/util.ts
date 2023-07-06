@@ -150,7 +150,7 @@ export const gradient = (startColor, endColor, step = 2) => {
 }
 
 /** @description 保证num不超出min和max的范围 */
-export const range = (num, min, max) => Math.min(Math.max(num, min), max)
+export const range = (num: number, min: number, max: number) => Math.min(Math.max(Number(num), Number(min)), Number(max))
 
 /** @description 比较数值是否相等 */
 export const isEqual = (value1, value2) => {
@@ -187,7 +187,7 @@ export const context = {
  * @param scope 作用域（支付宝小程序无效）
  * @returns
  */
-export function getRect(selector: string, all: boolean, scope?: any) {
+export function getRect(selector: string, all: boolean = false, scope?: any) {
   return new Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>((resolve) => {
     let query: UniNamespace.SelectorQuery | null = null
     // #ifndef MP-ALIPAY
@@ -265,14 +265,15 @@ export function objToStyle(styles) {
 
 export const requestAnimationFrame = (cb = () => void 0) => {
   return new Promise((resolve, reject) => {
-    uni
-      .createSelectorQuery()
-      .selectViewport()
-      .boundingClientRect()
-      .exec(() => {
-        resolve(true)
-        cb()
-      })
+    // nextTick(() => {
+    //   resolve(true)
+    //   cb()
+    // })
+    const timer = setInterval(() => {
+      clearInterval(timer)
+      resolve(true)
+      cb()
+    }, 1000 / 60)
   })
 }
 

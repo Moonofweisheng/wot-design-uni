@@ -1,5 +1,5 @@
-@import "../common/abstracts/variable.scss";
-@import "../common/abstracts/_mixin.scss";
+@import '../common/abstracts/variable.scss';
+@import '../common/abstracts/_mixin.scss';
 
 @include b(cell-group) {
   background-color: $-color-white;

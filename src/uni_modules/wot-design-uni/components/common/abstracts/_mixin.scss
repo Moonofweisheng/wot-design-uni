@@ -14,6 +14,7 @@
     @content;
   }
 }
+
 /* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
 @mixin e($element...) {
   $selector: &;
@@ -41,6 +42,50 @@
     }
   }
 }
+
+
+/* 此方法用于生成穿透样式 */
+/**
+  * BEM，定义块（b)
+  */
+  @mixin bdeep($block) {
+    $B: $namespace + "-" + $block !global;
+  
+    .#{$B}{
+      @content;
+    }
+  }
+/* 此方法用于生成穿透样式 */
+
+/* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
+@mixin edeep($element...) {
+  $selector: &;
+  $selectors: "";
+
+  @if containsPseudo($selector) {
+    @each $item in $element {
+      $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
+    }
+    @at-root {
+      #{$selector} {
+        :deep(#{$selectors}) {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @each $item in $element {
+      $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
+    }
+    @at-root {
+      :deep(#{$selectors}) {
+        @content;
+      }
+    }
+  }
+}
+
+
 /* 定义状态（m） */
 @mixin m($modifier...) {
   $selectors: "";
@@ -218,7 +263,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      bottom: -$size/2;
+      bottom: - calc($size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
@@ -231,7 +276,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      top: -$size/2;
+      top: - calc($size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
@@ -244,7 +289,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      left: -$size/2;
+      left: - calc($size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
@@ -257,7 +302,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      right: -$size/2;
+      right: - calc($size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }

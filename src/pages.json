@@ -58,7 +58,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Rate 单元格"
+          "navigationBarTitleText": "Rate 评分"
         }
       },
       {
@@ -68,7 +68,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Slider 单元格"
+          "navigationBarTitleText": "Slider 滑块"
         }
       },
       {
@@ -78,7 +78,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Layout 单元格"
+          "navigationBarTitleText": "Layout 布局"
         }
       },
       {
@@ -88,7 +88,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Card 单元格"
+          "navigationBarTitleText": "Card 卡片"
         }
       },
       {
@@ -98,7 +98,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Tag 单元格"
+          "navigationBarTitleText": "Tag 标签"
         }
       },
       {
@@ -108,7 +108,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Search 单元格"
+          "navigationBarTitleText": "Search 搜索框"
         }
       },
       {
@@ -118,7 +118,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Transition 单元格"
+          "navigationBarTitleText": "Transition 动画"
         }
       },
       {
@@ -128,7 +128,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Popup 单元格"
+          "navigationBarTitleText": "Popup 弹出层"
         }
       },
       {
@@ -138,7 +138,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Divider 单元格"
+          "navigationBarTitleText": "Divider 分割线"
         }
       },
       {
@@ -148,7 +148,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Switch 单元格"
+          "navigationBarTitleText": "Switch 开关"
         }
       },
       {
@@ -158,7 +158,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Input 单元格"
+          "navigationBarTitleText": "Input 输入框"
         }
       },
       {
@@ -168,7 +168,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "MessageBox 单元格"
+          "navigationBarTitleText": "MessageBox 弹框"
         }
       },
       {
@@ -178,7 +178,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Toast 单元格"
+          "navigationBarTitleText": "Toast 轻提示"
         }
       },
       {
@@ -188,7 +188,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Loading 单元格"
+          "navigationBarTitleText": "Loading 加载指示器"
         }
       },
       {
@@ -198,7 +198,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "progress 单元格"
+          "navigationBarTitleText": "Progress 进度条"
         }
       },
       {
@@ -208,7 +208,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "statusTip 单元格"
+          "navigationBarTitleText": "StatusTip 缺省提示"
         }
       },
       {
@@ -218,7 +218,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "inputNumber 单元格"
+          "navigationBarTitleText": "InputNumber 计数器"
         }
       },
       {
@@ -228,7 +228,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "loadmore 单元格"
+          "navigationBarTitleText": "loadmore 加载更多"
         }
       },
       {
@@ -238,7 +238,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "resize 单元格"
+          "navigationBarTitleText": "Resize 监听元素尺寸变化"
         }
       },
       {
@@ -248,7 +248,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "sticky 单元格"
+          "navigationBarTitleText": "Sticky 粘性布局"
         }
       },
       {
@@ -258,7 +258,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "img 单元格"
+          "navigationBarTitleText": "Img 图片"
         }
       },
       {
@@ -268,7 +268,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "imgCropper 单元格"
+          "navigationBarTitleText": "ImgCropper 图片裁剪"
         }
       },
       {
@@ -278,7 +278,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "pagination 单元格"
+          "navigationBarTitleText": "Pagination 分页"
         }
       },
       {
@@ -288,7 +288,87 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "sortButton 单元格"
+          "navigationBarTitleText": "SortButton 排序按钮"
+        }
+      },
+      {
+        "path": "pages/actionSheet/Index",
+        "name": "actionSheet",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "ActionSheet 动作面板"
+        }
+      },
+      {
+        "path": "pages/curtain/Index",
+        "name": "curtain",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Curtain 幕帘"
+        }
+      },
+      {
+        "path": "pages/noticeBar/Index",
+        "name": "noticeBar",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "NoticeBar 通知栏"
+        }
+      },
+      {
+        "path": "pages/popover/Index",
+        "name": "popover",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "popover"
+        }
+      },
+      {
+        "path": "pages/tooltip/Index",
+        "name": "tooltip",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Tooltip 文字提示"
+        }
+      },
+      {
+        "path": "pages/pickerView/Index",
+        "name": "pickerView",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "PickerView 选择器视图"
+        }
+      },
+      {
+        "path": "pages/picker/Index",
+        "name": "picker",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Picker 选择器视图"
+        }
+      },
+      {
+        "path": "pages/tabs/Index",
+        "name": "tabs",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Tab 标签页"
         }
       }
     ],

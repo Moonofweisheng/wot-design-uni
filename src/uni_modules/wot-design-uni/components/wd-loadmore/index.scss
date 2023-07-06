@@ -11,7 +11,7 @@
   text-align: center;
   color: $-loadmore-color;
 
-  @include e(loading) {
+  @include edeep(loading) {
     display: inline-block;
     margin-right: 8px;
     vertical-align:  middle;
@@ -26,7 +26,7 @@
       color: $-loadmore-error-color;
     }
   }
-  @include e(refresh) {
+  @include edeep(refresh) {
     display: inline-block;
     color: $-loadmore-error-color;
     vertical-align: middle;

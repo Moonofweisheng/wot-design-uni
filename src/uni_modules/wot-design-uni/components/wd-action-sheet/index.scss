@@ -5,7 +5,7 @@
   background-color: #fff;
   padding-bottom: 1px;
 
-  @include e(popup) {
+  @include edeep(popup) {
     border-radius: $-action-sheet-radius $-action-sheet-radius 0 0;
   }
   @include e(actions) {
@@ -92,7 +92,7 @@
     font-weight: $-action-sheet-weight;
   }
 
-  @include e(close) {
+  @include edeep(close) {
     position: absolute;
     top: $-action-sheet-close-top;
     right: $-action-sheet-close-right;

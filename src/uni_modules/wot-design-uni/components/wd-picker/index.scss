@@ -2,7 +2,7 @@
 @import "./../common/abstracts/variable.scss";
 
 @include b(picker) {
-  @include e(popup) {
+  @include edeep(popup) {
     border-radius: 16px 16px 0px 0px;
   }
 
@@ -15,13 +15,13 @@
     .wd-picker__field {
       font-size: $-cell-title-fs-large;
     }
-    .wd-picker__arrow {
+    :deep(.wd-picker__arrow) {
       font-size: $-cell-icon-size-large;
     }
   }
   @include when(error) {
     .wd-picker__value,
-    .wd-picker__arrow {
+    :deep(.wd-picker__arrow) {
       color: $-input-error-color;
     }
   }
@@ -94,7 +94,7 @@
     color: $-input-placeholder-color;
   }
 
-  @include e(arrow) {
+  @include edeep(arrow) {
     display: block;
     margin-top: $-cell-wrapper-padding;
     font-size: $-cell-icon-size;

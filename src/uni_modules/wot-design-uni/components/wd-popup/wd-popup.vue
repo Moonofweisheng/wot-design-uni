@@ -10,21 +10,21 @@
   />
   <view v-if="!lazyRender || inited" :class="rootClass" :style="style" @transitionend="onTransitionEnd">
     <slot />
-    <wd-icon v-if="closable" class="wd-popup__close" name="add" @click="close" />
+    <wd-icon v-if="closable" custom-class="wd-popup__close" name="add" @click="close" />
   </view>
 </template>
+
 <script lang="ts">
 export default {
-  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
   options: {
-    virtualHost: true
+    styleIsolation: 'shared'
   }
 }
 </script>
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { isObj } from '../common/util'
+import { isObj, requestAnimationFrame } from '../common/util'
 
 interface Props {
   transition: string
@@ -44,6 +44,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   position: 'center',
   closeOnClickModal: true,
   modal: true,
@@ -72,19 +73,6 @@ const getClassNames = (name) => {
     leave: `wd-${name}-leave wd-${name}-leave-active`,
     'leave-to': `wd-${name}-leave-to wd-${name}-leave-active`
   }
-}
-
-const requestAnimationFrame = (cb = () => void 0) => {
-  return new Promise((resolve, reject) => {
-    uni
-      .createSelectorQuery()
-      .selectViewport()
-      .boundingClientRect()
-      .exec(() => {
-        resolve(true)
-        cb()
-      })
-  })
 }
 
 // 初始化是否完成
@@ -128,6 +116,11 @@ const rootClass = computed(() => {
 })
 
 onBeforeMount(() => {
+  observerTransition()
+  if (props.safeAreaInsetBottom) {
+    const { safeArea, screenHeight } = uni.getSystemInfoSync()
+    safeBottom.value = screenHeight - safeArea!.bottom || 0
+  }
   if (props.modelValue) {
     enter()
   }
@@ -137,6 +130,14 @@ watch(
   () => props.modelValue,
   (newVal) => {
     observermodelValue(newVal)
+  },
+  { deep: true, immediate: true }
+)
+
+watch(
+  [() => props.position, () => props.transition],
+  () => {
+    observerTransition()
   },
   { deep: true, immediate: true }
 )
@@ -179,7 +180,10 @@ function leave() {
 
     requestAnimationFrame(() => {
       transitionEnded.value = false
-      setTimeout(() => onTransitionEnd(), currentDuration.value)
+      const timer = setTimeout(() => {
+        onTransitionEnd()
+        clearTimeout(timer)
+      }, currentDuration.value)
       classes.value = classNames['leave-to']
     })
   })
@@ -201,6 +205,11 @@ function onTransitionEnd() {
   }
 }
 
+function observerTransition() {
+  const { transition, position } = props
+  name.value = transition || position
+}
+
 function handleClickModal() {
   emit('clickmodal')
   if (props.closeOnClickModal) {
@@ -215,101 +224,5 @@ function close() {
 function noop() {}
 </script>
 <style lang="scss" scoped>
-@import './../common/abstracts/_mixin.scss';
-@import './../common/abstracts/variable.scss';
-@import '../wd-modal/index.scss';
-
-@include b(popup) {
-  position: fixed;
-  max-height: 100%;
-  overflow-y: auto;
-  background: #fff;
-
-  @include e(close) {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: $-popup-close-color;
-    font-size: $-popup-close-size;
-    transform: rotate(-45deg);
-  }
-  @include m(center) {
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-  }
-  @include m(left) {
-    top: 0;
-    bottom: 0;
-    left: 0;
-  }
-  @include m(right) {
-    top: 0;
-    right: 0;
-    bottom: 0;
-  }
-  @include m(top) {
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-  @include m(bottom) {
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-}
-
-.wd-center-enter-active,
-.wd-center-leave-active {
-  transition-property: opacity;
-}
-
-.wd-center-enter,
-.wd-center-leave-to {
-  opacity: 0;
-}
-
-.wd-top-enter-active,
-.wd-top-leave-active,
-.wd-bottom-enter-active,
-.wd-bottom-leave-active,
-.wd-left-enter-active,
-.wd-left-leave-active,
-.wd-right-enter-active,
-.wd-right-enter-active {
-  transition-property: transform;
-}
-
-.wd-top-enter,
-.wd-top-leave-to {
-  transform: translate3d(0, -100%, 0);
-}
-
-.wd-bottom-enter,
-.wd-bottom-leave-to {
-  transform: translate3d(0, 100%, 0);
-}
-
-.wd-left-enter,
-.wd-left-leave-to {
-  transform: translate3d(-100%, 0, 0);
-}
-
-.wd-right-enter,
-.wd-right-leave-to {
-  transform: translate3d(100%, 0, 0);
-}
-
-.wd-zoom-in-enter-active,
-.wd-zoom-in-leave-active {
-  transition-property: opacity, transform;
-  transform-origin: center center;
-}
-
-.wd-zoom-in-enter,
-.wd-zoom-in-leave-to {
-  opacity: 0;
-  transform: translate3d(-50%, -50%, 0) scale(0.7);
-}
+@import './index.scss';
 </style>

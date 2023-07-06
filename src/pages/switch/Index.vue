@@ -1,5 +1,14 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-06-13 11:47:12
+ * @LastEditTime: 2023-07-03 16:23:26
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\switch\Index.vue
+ * 记得注释
+-->
 <template>
-  <!-- <wd-message-box id="wd-message-box"></wd-message-box> -->
+  <wd-message-box id="wd-message-box"></wd-message-box>
   <view>
     <demo-block title="基本用法">
       <wd-switch v-model="checked1" @change="handleChange1" />
@@ -26,6 +35,7 @@
   </view>
 </template>
 <script lang="ts" setup>
+import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-box'
 import { ref } from 'vue'
 
 const checked1 = ref<boolean>(true)
@@ -36,17 +46,17 @@ const checked5 = ref<boolean>(true)
 const checked6 = ref<boolean>(false)
 const checked7 = ref<boolean>(false)
 
-const beforeChange = ({ value, resolve }) => {
-  console.log(value)
+const message = useMessage()
 
-  resolve(true)
-  // MessageBox.confirm('是否切换开关')
-  //   .then(() => {
-  //     resolve(true)
-  //   })
-  //   .catch(() => {
-  //     resolve(false)
-  //   })
+const beforeChange = ({ value, resolve }) => {
+  message
+    .confirm('是否切换开关')
+    .then(() => {
+      resolve(true)
+    })
+    .catch(() => {
+      resolve(false)
+    })
 }
 function handleChange1({ value }) {
   console.log(value)

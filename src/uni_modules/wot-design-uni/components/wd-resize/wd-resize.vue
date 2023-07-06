@@ -29,6 +29,16 @@
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 import { addUnit, objToStyle } from '../common/util'

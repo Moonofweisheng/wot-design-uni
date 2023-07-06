@@ -68,8 +68,7 @@
     margin-right: $-input-icon-margin;
     font-size: $-input-fs;
 
-    .wd-input__icon,
-    .wd-input__clear {
+    :deep(.wd-input__icon,.wd-input__clear) {
       margin-left: 0;
     }
   }
@@ -114,8 +113,7 @@
     .wd-input__block {
       flex: 1;
     }
-    .wd-input__icon,
-    .wd-input__clear {
+    :deep(.wd-input__icon,.wd-input__clear) {
       height: $-input-cell-height;
       line-height: $-input-cell-height;
     }
@@ -166,13 +164,12 @@
     .wd-input__textarea-count {
       font-size: $-input-count-fs-large;
     }
-    .wd-input__icon,
-    .wd-input__clear {
+    :deep(.wd-input__icon,.wd-input__clear) {
       height: $-input-cell-height-large;
       font-size: $-input-icon-size-large;
       line-height: $-input-cell-height-large;
     }
-    .wd-input__textarea-icon {
+    :deep(.wd-input__textarea-icon) {
       font-size: $-input-icon-size-large;
     }
   }
@@ -214,14 +211,14 @@
     width: 100%;
   }
 
-  @include e(icon) {
+  @include edeep(icon) {
     margin-left: 8px;
     font-size: $-input-icon-size;
     color: $-input-icon-color;
     vertical-align: middle;
     background: $-input-bg;
   }
-  @include e(clear) {
+  @include edeep(clear) {
     margin-left: 8px;
     font-size: $-input-icon-size;
     color: $-input-clear-color;
@@ -254,7 +251,7 @@
       padding-bottom: 36px;
     }
   }
-  @include e(textarea-icon) {
+  @include edeep(textarea-icon) {
     margin-left: 8px;
     font-size: $-input-icon-size;
     line-height: 20px;
@@ -286,7 +283,7 @@
     top: $-input-textarea-padding;
     bottom: 0;
   }
-  @include e(textarea-icon) {
+  @include edeep(textarea-icon) {
     margin-left: 8px;
     font-size: $-input-icon-size;
     line-height: 20px;
@@ -316,7 +313,9 @@
       color: $-input-error-color;
     }
   }
-  .wd-input__textarea-count,
+  :deep(.wd-input__textarea-count){
+    display: inline-flex;
+  }
   .wd-input__count,
   .wd-input__count-current {
     display: inline-flex;

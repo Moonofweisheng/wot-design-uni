@@ -15,7 +15,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { isObj } from '../common/util'
+import { isObj, requestAnimationFrame } from '../common/util'
 
 const getClassNames = (name) => {
   if (!name) {
@@ -33,19 +33,6 @@ const getClassNames = (name) => {
     leave: `wd-${name}-leave wd-${name}-leave-active`,
     'leave-to': `wd-${name}-leave-to wd-${name}-leave-active`
   }
-}
-
-const requestAnimationFrame = (cb = () => void 0) => {
-  return new Promise((resolve, reject) => {
-    uni
-      .createSelectorQuery()
-      .selectViewport()
-      .boundingClientRect()
-      .exec(() => {
-        resolve(true)
-        cb()
-      })
-  })
 }
 
 type TransitionName =
@@ -83,6 +70,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   show: false,
   name: 'fade',
   duration: 300,
@@ -111,7 +99,7 @@ const style = computed(() => {
 })
 
 const rootClass = computed(() => {
-  return `wd-transition ${props.customClass} ${classes.value}`
+  return `wd-transition ${props.customClass}  ${classes.value}`
 })
 
 onBeforeMount(() => {
@@ -192,95 +180,5 @@ function onTransitionEnd() {
 }
 </script>
 <style lang="scss" scoped>
-.wd-transition {
-  transition-timing-function: ease;
-}
-
-.wd-fade-enter-active,
-.wd-fade-leave-active {
-  transition-property: opacity;
-}
-
-.wd-fade-enter,
-.wd-fade-leave-to {
-  opacity: 0;
-}
-
-.wd-fade-up-enter-active,
-.wd-fade-up-leave-active,
-.wd-fade-down-enter-active,
-.wd-fade-down-leave-active,
-.wd-fade-left-enter-active,
-.wd-fade-left-leave-active,
-.wd-fade-right-enter-active,
-.wd-fade-right-enter-active {
-  transition-property: opacity, transform;
-}
-
-.wd-fade-up-enter,
-.wd-fade-up-leave-to {
-  transform: translate3d(0, 100%, 0);
-  opacity: 0;
-}
-
-.wd-fade-down-enter,
-.wd-fade-down-leave-to {
-  transform: translate3d(0, -100%, 0);
-  opacity: 0;
-}
-
-.wd-fade-left-enter,
-.wd-fade-left-leave-to {
-  transform: translate3d(-100%, 0, 0);
-  opacity: 0;
-}
-
-.wd-fade-right-enter,
-.wd-fade-right-leave-to {
-  transform: translate3d(100%, 0, 0);
-  opacity: 0;
-}
-
-.wd-slide-up-enter-active,
-.wd-slide-up-leave-active,
-.wd-slide-down-enter-active,
-.wd-slide-down-leave-active,
-.wd-slide-left-enter-active,
-.wd-slide-left-leave-active,
-.wd-slide-right-enter-active,
-.wd-slide-right-enter-active {
-  transition-property: transform;
-}
-
-.wd-slide-up-enter,
-.wd-slide-up-leave-to {
-  transform: translate3d(0, 100%, 0);
-}
-
-.wd-slide-down-enter,
-.wd-slide-down-leave-to {
-  transform: translate3d(0, -100%, 0);
-}
-
-.wd-slide-left-enter,
-.wd-slide-left-leave-to {
-  transform: translate3d(-100%, 0, 0);
-}
-
-.wd-slide-right-enter,
-.wd-slide-right-leave-to {
-  transform: translate3d(100%, 0, 0);
-}
-
-.wd-zoom-in-enter-active,
-.wd-zoom-in-leave-active {
-  transition-property: opacity, transform;
-  transform-origin: center center;
-}
-
-.wd-zoom-in-enter,
-.wd-zoom-in-leave-to {
-  opacity: 0;
-  transform: scale(0.7);
-}
+@import './index.scss';
 </style>

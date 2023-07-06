@@ -45,6 +45,14 @@
     </view>
   </wd-popup>
 </template>
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { computed, inject, ref, watch } from 'vue'

@@ -1,5 +1,5 @@
 <template>
-  <view class="wd-divider custom-class">
+  <view :class="`wd-divider ${customClass}`">
     <view class="wd-divider__line" :style="color ? 'background: ' + color : ''"></view>
     <view class="wd-divider__content" :style="color ? 'color: ' + color : ''">
       <slot></slot>
@@ -10,11 +10,13 @@
 
 <script lang="ts" setup>
 interface Props {
+  customClass?: string
   color: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  color: ''
+  color: '',
+  customClass: ''
 })
 </script>
 

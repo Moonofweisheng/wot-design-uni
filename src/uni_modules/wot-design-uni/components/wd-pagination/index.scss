@@ -16,7 +16,7 @@
     font-size: $-pagination-message-fs;
     padding: $-pagination-message-padding;
   }
-  @include e(nav) {
+  @include edeep(nav) {
     min-width: $-pagination-nav-width;
     @include m(active){
       color: rgba(0,0,0,0.65)      
@@ -33,7 +33,7 @@
   @include e(separator){
     padding: $-pagination-nav-sepatator-padding;
   }
-  @include e(left){
+  @include edeep(left){
     transform: rotate(180deg) translateY(1px);
     display: inline-block;
   }

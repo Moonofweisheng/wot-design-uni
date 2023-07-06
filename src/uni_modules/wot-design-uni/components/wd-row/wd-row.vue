@@ -1,17 +1,19 @@
 <template>
-  <view class="wd-row custom-class" :style="style">
+  <view :class="`wd-row ${customClass}`" :style="style">
     <!-- 每一行 -->
     <slot />
   </view>
 </template>
 <script lang="ts" setup>
-import { getCurrentInstance, provide, reactive, ref, watch } from 'vue'
+import { getCurrentInstance, provide, ref, watch } from 'vue'
 
 interface Props {
+  customClass?: string
   gutter?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   gutter: 0
 })
 

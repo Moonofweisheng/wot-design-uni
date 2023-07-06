@@ -5,19 +5,15 @@ import pickerViewProps from '../pickerView/props'
 import cell from '../mixins/cell'
 
 VueComponent({
-  externalClasses: [
-    'custom-view-class',
-    'custom-label-class',
-    'custom-value-class'
-  ],
+  externalClasses: ['custom-view-class', 'custom-label-class', 'custom-value-class'],
   behaviors: [cell, 'jd://form-field'],
   relations: {
     '../cellGroup/index': {
       type: 'ancestor',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -27,15 +23,11 @@ VueComponent({
     // 外部展示格式化函数
     displayFormat: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of displayFormat must be Function')
         }
-        if (
-          this.picker &&
-          this.picker.data.selectedIndex &&
-          this.picker.data.selectedIndex.length !== 0
-        ) {
+        if (this.picker && this.picker.data.selectedIndex && this.picker.data.selectedIndex.length !== 0) {
           if (this.data.value) {
             this.setShowValue(this.picker.getSelects())
           } else {
@@ -49,18 +41,20 @@ VueComponent({
     /* 参考pickerView组件 */
     value: {
       type: null,
-      observer (value) {
+      observer(value) {
         this.setData({
           pickerValue: value
         })
         // 为picker的displayFormat设置默认值
-        this.data.displayFormat || this.setData({
-          displayFormat: defaultDisplayFormat
-        })
+        this.data.displayFormat ||
+          this.setData({
+            displayFormat: defaultDisplayFormat
+          })
         // JM小程序无法透传function类型的props，此处手动透传
-        this.data.columnChange && this.picker.setData({
-          columnChange: this.data.columnChange
-        })
+        this.data.columnChange &&
+          this.picker.setData({
+            columnChange: this.data.columnChange
+          })
         // 获取初始选中项,并展示初始选中文案
         if (value) {
           this.setShowValue(this.picker.getSelects())
@@ -73,19 +67,21 @@ VueComponent({
     },
     columns: {
       type: Array,
-      observer (val) {
+      observer(val) {
         this.setData({
           displayColumns: val,
           resetColumns: val
         })
         // 为picker的displayFormat设置默认值
-        this.data.displayFormat || this.setData({
-          displayFormat: defaultDisplayFormat
-        })
+        this.data.displayFormat ||
+          this.setData({
+            displayFormat: defaultDisplayFormat
+          })
         // JM小程序无法透传function类型的props，此处手动透传
-        this.data.columnChange && this.picker.setData({
-          columnChange: this.data.columnChange
-        })
+        this.data.columnChange &&
+          this.picker.setData({
+            columnChange: this.data.columnChange
+          })
         // 获取初始选中项,并展示初始选中文案
         if (this.data.value) {
           this.setShowValue(this.picker.getSelects())
@@ -99,7 +95,7 @@ VueComponent({
     ...pickerViewProps,
     columnChange: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of columnChange must be Function')
         }
@@ -129,17 +125,17 @@ VueComponent({
   },
   methods: {
     // 对外暴露方法，打开弹框
-    open () {
+    open() {
       this.showPopup()
     },
     // 对外暴露方法，关闭弹框
-    close () {
+    close() {
       this.onCancel()
     },
     /**
      * @description 展示popup，小程序有个bug，在picker-view弹出时设置value，会触发change事件，而且会将picker-view的value多次触发change重置为第一项
      */
-    showPopup () {
+    showPopup() {
       if (this.data.disabled || this.data.readonly) return
 
       this.$emit('open')
@@ -153,7 +149,7 @@ VueComponent({
     /**
      * @description 点击取消按钮触发。关闭popup，触发cancel事件。
      */
-    onCancel () {
+    onCancel() {
       this.setData({
         popupShow: false
       })
@@ -162,7 +158,7 @@ VueComponent({
     /**
      * @description 点击确定按钮触发。展示选中值，触发cancel事件。
      */
-    onConfirm () {
+    onConfirm() {
       if (this.data.loading) return
 
       // 如果当前还在滑动且未停止下来，则锁住先不确认，等滑完再自动确认，避免pickview值未更新
@@ -175,14 +171,18 @@ VueComponent({
 
       const { beforeConfirm } = this.data
       if (beforeConfirm && getType(beforeConfirm) === 'function') {
-        beforeConfirm(this.data.pickerValue, isPass => {
-          isPass && this.handleConfirm()
-        }, this)
+        beforeConfirm(
+          this.data.pickerValue,
+          (isPass) => {
+            isPass && this.handleConfirm()
+          },
+          this
+        )
       } else {
         this.handleConfirm()
       }
     },
-    handleConfirm () {
+    handleConfirm() {
       if (this.data.loading || this.data.disabled) {
         this.setData({
           popupShow: false
@@ -209,7 +209,7 @@ VueComponent({
      * @description 初始change事件
      * @param event
      */
-    pickerViewChange ({ detail }) {
+    pickerViewChange({ detail }) {
       this.setData({
         pickerValue: detail.value
       })
@@ -218,7 +218,7 @@ VueComponent({
      * @description 设置展示值
      * @param {Array<String>} items
      */
-    setShowValue (items) {
+    setShowValue(items) {
       // 避免值为空时调用自定义展示函数
       if ((items instanceof Array && !items.length) || !items) return
 
@@ -227,13 +227,13 @@ VueComponent({
         showValue: this.data.displayFormat(items, { valueKey, labelKey })
       })
     },
-    noop () { },
-    onPickStart () {
+    noop() {},
+    onPickStart() {
       this.setData({
         isPicking: true
       })
     },
-    onPickEnd () {
+    onPickEnd() {
       this.setData({
         isPicking: false
       })
@@ -246,19 +246,21 @@ VueComponent({
       }
     }
   },
-  beforeCreate () {
+  beforeCreate() {
     // pickerView挂载到全局
     this.picker = this.selectComponent(`#${this.data.pickerId}`)
   },
-  created () {
+  created() {
     // 为picker的displayFormat设置默认值
-    this.data.displayFormat || this.setData({
-      displayFormat: defaultDisplayFormat
-    })
+    this.data.displayFormat ||
+      this.setData({
+        displayFormat: defaultDisplayFormat
+      })
     // JM小程序无法透传function类型的props，此处手动透传
-    this.data.columnChange && this.picker.setData({
-      columnChange: this.data.columnChange
-    })
+    this.data.columnChange &&
+      this.picker.setData({
+        columnChange: this.data.columnChange
+      })
     this.setData({
       displayColumns: this.data.columns,
       resetColumns: this.data.columns

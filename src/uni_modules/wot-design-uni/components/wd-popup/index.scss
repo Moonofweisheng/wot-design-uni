@@ -1,6 +1,6 @@
-@import "./../common/abstracts/_mixin.scss";
-@import "./../common/abstracts/variable.scss";
-@import "../modal/index.scss";
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
+@import '../wd-modal/index.scss';
 
 @include b(popup) {
   position: fixed;
@@ -8,7 +8,7 @@
   overflow-y: auto;
   background: #fff;
 
-  @include e(close) {
+  @include edeep(close) {
     position: absolute;
     top: 10px;
     right: 10px;
