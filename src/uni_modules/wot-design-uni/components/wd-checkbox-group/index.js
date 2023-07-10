@@ -6,7 +6,7 @@ VueComponent({
   relations: {
     '../checkbox/index': {
       type: 'descendant',
-      linked (target) {
+      linked(target) {
         this.children = this.children || []
         this.children.push(target)
         const index = this.children.indexOf(target)
@@ -25,8 +25,8 @@ VueComponent({
           prevChild && renderData(prevChild, { isLast: false })
         }
       },
-      unlinked (target) {
-        this.children = this.children.filter(child => child !== target)
+      unlinked(target) {
+        this.children = this.children.filter((child) => child !== target)
         const index = this.children.indexOf(target)
 
         if (this.children.length === 0) return
@@ -49,16 +49,16 @@ VueComponent({
     value: {
       type: Array,
       value: [],
-      observer (value, oldVal) {
+      observer(value, oldVal) {
         // 传入的value数组中包括重复的元素，这种情况非法。
         if (new Set(value).size !== value.length) {
-          throw Error('checkboxGroup\'s bound value includes same value')
+          throw Error("checkboxGroup's bound value includes same value")
         }
         if (value.length < this.data.min) {
-          throw Error('checkboxGroup\'s bound value\'s length can\'t be less than min')
+          throw Error("checkboxGroup's bound value's length can't be less than min")
         }
         if (this.data.max !== 0 && value.length > this.data.max) {
-          throw Error('checkboxGroup\'s bound value\'s length can\'t be large than max')
+          throw Error("checkboxGroup's bound value's length can't be large than max")
         }
         // 每次value变化都会触发重新匹配选中项
         this.children && this.children.length > 0 && this.resetChildren()
@@ -68,37 +68,39 @@ VueComponent({
       type: Boolean,
       value: false,
       // 以下内容用于解决父子组件样式隔离的问题 —— START
-      observer (value) {
-        this.children && this.children.forEach(child => {
-          child.setData({ cellBox: value })
-        })
+      observer(value) {
+        this.children &&
+          this.children.forEach((child) => {
+            child.setData({ cellBox: value })
+          })
       }
       // 以下内容用于解决父子组件样式隔离的问题 —— END
     },
     shape: {
       type: String,
       value: 'circle',
-      observer (value) {
+      observer(value) {
         const type = ['circle', 'square', 'button']
         if (type.indexOf(value) === -1) throw Error(`shape must be one of ${type.toString()}`)
         this.updateAllChild({ shape: value })
         // 以下内容用于解决父子组件样式隔离的问题 —— START
-        this.children && this.children.forEach(child => {
-          child.setData({ buttonBox: value === 'button' })
-        })
+        this.children &&
+          this.children.forEach((child) => {
+            child.setData({ buttonBox: value === 'button' })
+          })
         // 以下内容用于解决父子组件样式隔离的问题 —— END
       }
     },
     checkedColor: {
       type: String,
-      observer (value) {
+      observer(value) {
         this.updateAllChild({ checkedColor: value })
       }
     },
     disabled: {
       type: Boolean,
       value: null,
-      observer () {
+      observer() {
         // 当值修改时需要重新检测
         this.resetChildren()
       }
@@ -106,7 +108,7 @@ VueComponent({
     min: {
       type: Number,
       value: 0,
-      observer (value) {
+      observer(value) {
         checkNumRange(value, 'min')
         // 当值修改时需要重新检测
         this.resetChildren()
@@ -115,7 +117,7 @@ VueComponent({
     max: {
       type: Number,
       value: 0,
-      observer (value) {
+      observer(value) {
         checkNumRange(value, 'max')
         // 当值修改时需要重新检测
         this.resetChildren()
@@ -124,13 +126,13 @@ VueComponent({
     inline: {
       type: Boolean,
       value: false,
-      observer (value) {
+      observer(value) {
         this.updateAllChild({ inline: value })
       }
     },
     size: {
       type: String,
-      observer (value) {
+      observer(value) {
         this.updateAllChild({ size: value })
       }
     }
@@ -140,27 +142,24 @@ VueComponent({
      * @description 当和child建立relation后，用checkboxGroup的props覆盖checkbox中props值为null的属性。
      * @param {Object} data 属性键值对
      */
-    updateAllChild (data) {
+    updateAllChild(data) {
       const keys = Object.keys(data)
-      this.children && this.children.forEach(child => {
-        const will = {}
-        keys.forEach(key => {
-          if (
-            data[key] !== null &&
-            data[key] !== undefined &&
-            child.data[key] === null
-          ) {
-            will[key] = data[key]
-          }
+      this.children &&
+        this.children.forEach((child) => {
+          const will = {}
+          keys.forEach((key) => {
+            if (data[key] !== null && data[key] !== undefined && child.data[key] === null) {
+              will[key] = data[key]
+            }
+          })
+          renderData(child, will)
         })
-        renderData(child, will)
-      })
     },
     /**
      * @description 子节点通知父节点修改子节点选中状态
      * @param {any} value 子组件的标识符
      */
-    changeSelectState (value) {
+    changeSelectState(value) {
       const temp = this.data.value
       const index = temp.indexOf(value)
       if (index > -1) {
@@ -183,17 +182,18 @@ VueComponent({
      * @description 修正子组件的 isChecked 和 finalDisabled
      * @param {array} values
      */
-    resetChildren (values) {
+    resetChildren(values) {
       values = values || this.data.value
-      this.children && this.children.forEach(child => {
-        // value 对应的节点直接选中
-        const isChecked = values.indexOf(child.data.value) > -1
-        renderData(child, { isChecked })
-        child.checkDisabled()
-      })
+      this.children &&
+        this.children.forEach((child) => {
+          // value 对应的节点直接选中
+          const isChecked = values.indexOf(child.data.value) > -1
+          renderData(child, { isChecked })
+          child.checkDisabled()
+        })
     }
   },
-  beforeCreate () {
+  beforeCreate() {
     // 设置防抖，避免修改 props(min, max, disabled) 触发多次
     this.resetChildren = debounce(this.resetChildren, 50)
   }

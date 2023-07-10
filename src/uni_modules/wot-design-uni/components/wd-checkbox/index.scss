@@ -36,7 +36,7 @@
     margin: 0;
     opacity: 0;
   }
-  @include e(btn-check) {
+  @include edeep(btn-check) {
     display: inline-block;
     font-size: $-checkbox-icon-size;
     margin-right: 4px;
@@ -58,7 +58,7 @@
     font-size: $-checkbox-label-fs;
     color: $-checkbox-label-color;
   }
-  @include e(check) {
+  @include edeep(check) {
     color: $-checkbox-check-color;
     font-size: $-checkbox-icon-size;
     opacity: 0;
@@ -70,7 +70,7 @@
       background: currentColor;
       border-color: currentColor;
     }
-    .wd-checkbox__check {
+    :deep(.wd-checkbox__check) {
       opacity: 1;
       position: absolute;
       left: 0;
@@ -195,7 +195,7 @@
     .wd-checkbox__label {
       font-size: $-checkbox-large-label-fs;
     }
-    .wd-checkbox__check {
+    :deep(.wd-checkbox__check) {
       top: 0;
       left: 1px;
     }

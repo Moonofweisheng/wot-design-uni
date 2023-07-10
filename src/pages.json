@@ -370,6 +370,26 @@
           },
           "navigationBarTitleText": "Tab 标签页"
         }
+      },
+      {
+        "path": "pages/radio/Index",
+        "name": "radio",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Radio 单选框"
+        }
+      },
+      {
+        "path": "pages/checkbox/Index",
+        "name": "checkbox",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Checkbox 复选框"
+        }
       }
     ],
     // "tabBar": {
