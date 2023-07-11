@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-popover ${customClass}`" id="popover" @click="popover.noop">
+  <view :class="`wd-popover ${customClass}`" id="popover" @click.stop="popover.noop">
     <!-- TODO 插槽情况监听会有问题 待调整， 用于为渲染获取宽高的元素 -->
     <view class="wd-popover__pos wd-popover__hidden" id="pos">
       <view :class="`wd-popover__container ${customPop}`">
@@ -61,8 +61,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onBeforeMount, onMounted, watch } from 'vue'
+import { getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue'
 import { usePopover } from '../mixins/usePopover'
+import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 
 type PlacementType =
   | 'top'
@@ -112,6 +113,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const selector: string = 'popover'
 const emit = defineEmits(['update:show', 'menuclick', 'change', 'open', 'close'])
+const { proxy } = getCurrentInstance() as any
 
 watch(
   () => props.content,
@@ -135,11 +137,11 @@ watch(
   (newValue) => {
     if (newValue) {
       popover.control(props.placement, props.offset)
-      // closeOther(this)
+      closeOther(proxy)
     }
     popover.showStyle.value = newValue ? 'display: inline-block;' : 'display: none;'
-    // emit('change', { show: newValue })
-    // emit(`${newValue ? 'open' : 'close'}`)
+    emit('change', { show: newValue })
+    emit(`${newValue ? 'open' : 'close'}`)
   }
 )
 
@@ -148,8 +150,12 @@ onMounted(() => {
 })
 
 onBeforeMount(() => {
-  // pushToQueue(this)
+  pushToQueue(proxy)
   popover.showStyle.value = props.show ? 'opacity: 1;' : 'opacity: 0;'
+})
+
+onBeforeUnmount(() => {
+  removeFromQueue(proxy)
 })
 
 const popover = usePopover()
@@ -162,10 +168,23 @@ function menuClick(index: number) {
   })
 }
 
-function toggle(event) {
+function toggle() {
   if (props.disabled) return
   emit('update:show', !props.show)
 }
+
+function open() {
+  emit('update:show', true)
+}
+
+function close() {
+  emit('update:show', false)
+}
+
+defineExpose({
+  open,
+  close
+})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

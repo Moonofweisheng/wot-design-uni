@@ -390,6 +390,26 @@
           },
           "navigationBarTitleText": "Checkbox 复选框"
         }
+      },
+      {
+        "path": "pages/colPicker/Index",
+        "name": "colPicker",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "ColPicker 多列选择器"
+        }
+      },
+      {
+        "path": "pages/selectPicker/Index",
+        "name": "selectPicker",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "SelectPicker 单复选选择器"
+        }
       }
     ],
     // "tabBar": {

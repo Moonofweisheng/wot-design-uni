@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2023-06-12 18:40:59
+ * @LastEditTime: 2023-07-11 13:23:56
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\colPicker\index.js
+ * 记得注释
+ */
 import areaData from '../../utils/area'
 import Toast from '../../wot-design/toast/toast.js'
 

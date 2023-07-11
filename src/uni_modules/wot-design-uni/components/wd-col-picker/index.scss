@@ -1,6 +1,6 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
-@import '../actionSheet/index.scss';
+@import '../wd-action-sheet/index.scss';
 
 @include b(col-picker) {
   @include when(border) {
@@ -35,14 +35,14 @@
       .wd-col-picker__value {
         color: $-input-error-color;
       }
-      .wd-col-picker__arrow {
+      :deep(.wd-col-picker__arrow) {
         color: $-input-error-color;
       }
     }
     @include when(large) {
       font-size: $-cell-title-fs-large;
 
-      .wd-col-picker__arrow {
+      :deep(.wd-col-picker__arrow) {
         font-size: $-cell-icon-size-large;
       }
     }
@@ -81,7 +81,7 @@
       color: $-input-placeholder-color;
     }
   }
-  @include e(arrow) {
+  @include edeep(arrow) {
     display: block;
     margin-top: $-cell-wrapper-padding;
     font-size: $-cell-icon-size;
@@ -117,7 +117,7 @@
     height: $-col-picker-line-height;
     background: $-col-picker-line-color;
     z-index: 1;
-    border-radius: $-col-picker-line-height / 2;
+    border-radius: calc($-col-picker-line-height / 2);
     box-shadow: $-col-picker-line-box-shadow;
   }
   @include e(list-container){
@@ -140,7 +140,7 @@
     @include when(selected) {
       color: $-col-picker-list-color-checked;
 
-      .wd-col-picker__checked {
+      :deep(.wd-col-picker__checked) {
         opacity: 1;
       }
     }
@@ -156,7 +156,7 @@
     font-size: $-col-picker-list-fs-tip;
     color: $-col-picker-list-color-tip;
   }
-  @include e(checked) {
+  @include edeep(checked) {
     display: block;
     margin-left: 4px;
     font-size: $-col-picker-list-checked-icon-size;

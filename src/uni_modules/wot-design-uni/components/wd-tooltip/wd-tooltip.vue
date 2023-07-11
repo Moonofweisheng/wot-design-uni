@@ -1,14 +1,14 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2023-07-03 15:53:51
+ * @LastEditTime: 2023-07-10 23:54:38
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-tooltip\wd-tooltip.vue
  * 记得注释
 -->
 <template>
-  <view :class="`wd-tooltip ${customClass}`" id="tooltip" @click="popover.noop">
+  <view :class="`wd-tooltip ${customClass}`" id="tooltip" @click.stop="popover.noop">
     <!-- 用于为渲染获取宽高的元素 -->
     <view class="wd-tooltip__pos wd-tooltip__hidden" id="pos">
       <view class="wd-tooltip__container custom-pop">
@@ -33,8 +33,9 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { onBeforeMount, onMounted, watch } from 'vue'
+import { getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue'
 import { usePopover } from '../mixins/usePopover'
+import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 
 type PlacementType =
   | 'top'
@@ -82,6 +83,7 @@ const popover = usePopover()
 
 const selector: string = 'tooltip'
 const emit = defineEmits(['update:show', 'menuclick', 'change', 'open', 'close'])
+const { proxy } = getCurrentInstance() as any
 
 watch(
   () => props.content,
@@ -99,11 +101,11 @@ watch(
   (newValue) => {
     if (newValue) {
       popover.control(props.placement, props.offset)
-      // closeOther(this)
+      closeOther(proxy)
     }
     popover.showStyle.value = newValue ? 'display: inline-block;' : 'display: none;'
-    // emit('change', { show: newValue })
-    // emit(`${newValue ? 'open' : 'close'}`)
+    emit('change', { show: newValue })
+    emit(`${newValue ? 'open' : 'close'}`)
   }
 )
 
@@ -112,14 +114,31 @@ onMounted(() => {
 })
 
 onBeforeMount(() => {
-  // pushToQueue(this)
+  pushToQueue(proxy)
   popover.showStyle.value = props.show ? 'opacity: 1;' : 'opacity: 0;'
+})
+
+onBeforeUnmount(() => {
+  removeFromQueue(proxy)
 })
 
 function toggle(event) {
   if (props.disabled) return
   emit('update:show', !props.show)
 }
+
+function open() {
+  emit('update:show', true)
+}
+
+function close() {
+  emit('update:show', false)
+}
+
+defineExpose({
+  open,
+  close
+})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

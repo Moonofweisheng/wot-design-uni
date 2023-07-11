@@ -34,14 +34,14 @@
       .wd-select-picker__value {
         color: $-input-error-color;
       }
-      .wd-select-picker__arrow {
+      :deep(.wd-select-picker__arrow) {
         color: $-input-error-color;
       }
     }
     @include when(large) {
       font-size: $-cell-title-fs-large;
 
-      .wd-select-picker__arrow {
+      :deep(.wd-select-picker__arrow ){
         font-size: $-cell-icon-size-large;
       }
     }
@@ -80,7 +80,7 @@
       color: $-input-placeholder-color;
     }
   }
-  @include e(arrow) {
+  @include edeep(arrow) {
     display: block;
     margin-top: $-cell-wrapper-padding;
     font-size: $-cell-icon-size;
@@ -116,7 +116,7 @@
     height: $-col-picker-line-height;
     background: $-col-picker-line-color;
     z-index: 1;
-    border-radius: $-col-picker-line-height / 2;
+    border-radius: calc($-col-picker-line-height / 2);
     box-shadow: $-col-picker-line-box-shadow;
   }
   @include e(list-container){
@@ -175,7 +175,7 @@
     background: $-picker-loading-bg;
   }
   // selectPiceker多出的样式
-  @include e(header) {
+  @include edeep(header) {
     height: 72px;
     line-height: 72px;
   }
@@ -188,6 +188,10 @@
     @include when(filterable) {
       height: 314px;
       max-height: 314px;
+    }
+
+    @include when(loading) {
+      overflow: hidden;
     }
   }
   @include e(text-active) {

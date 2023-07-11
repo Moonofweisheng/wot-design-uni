@@ -1,6 +1,6 @@
 <template>
   <wd-toast id="wd-toast" />
-  <view @click="clickoutside">
+  <view @click.stop="clickOutside">
     <demo-block title="基本用法">
       <view class="top">
         <wd-tooltip v-model:show="show1" placement="bottom-start" content="bottom-start 提示文字" @change="handleChange1">
@@ -26,8 +26,10 @@
       </view>
       <view class="right">
         <wd-tooltip v-model:show="show7" placement="left-start" content="left-start 提示文字" @change="handleChange7">
-          <wd-icon name="setting" />
-          <!-- <wd-button :round="false">left-start</wd-button> -->
+          <wd-button :round="false">
+            left-start
+            <wd-icon name="setting" />
+          </wd-button>
         </wd-tooltip>
         <wd-tooltip v-model:show="show8" placement="left" content="left 提示文字" style="margin: 20px 0" @change="handleChange8">
           <wd-button :round="false">left</wd-button>
@@ -94,6 +96,7 @@
   </view>
 </template>
 <script lang="ts" setup>
+import clickoutside from '@/uni_modules/wot-design-uni/components/common/clickoutside'
 import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
 import { ref } from 'vue'
 
@@ -178,8 +181,8 @@ function handleChange16(event) {
 function handleChange17(event) {
   // this.setData({ show17: event.detail.show })
 }
-function clickoutside(event) {
-  // clickoutside()
+function clickOutside(event) {
+  clickoutside()
 }
 </script>
 <style lang="scss" scoped>

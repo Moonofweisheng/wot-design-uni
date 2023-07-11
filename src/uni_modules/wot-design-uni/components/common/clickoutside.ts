@@ -1,36 +1,34 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-02 22:51:06
- * @LastEditTime: 2023-07-02 22:51:15
+ * @LastEditTime: 2023-07-10 23:55:07
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\common\clickoutside.ts
  * 记得注释
  */
 let queue: any[] = []
-let outsideId: number = 1
 
 export function pushToQueue(comp) {
-  comp.outsideId = ++outsideId
   queue.push(comp)
 }
 
 export function removeFromQueue(comp) {
   queue = queue.filter((item) => {
-    return item.outsideId !== comp.outsideId
+    return item.$.uid !== comp.$.uid
   })
 }
 
 export function closeOther(comp) {
   queue.forEach((item) => {
-    if (item.outsideId !== comp.outsideId) {
-      item.close()
+    if (item.$.uid !== comp.$.uid) {
+      item.$.exposed.close()
     }
   })
 }
 
 export default function closeOutside() {
   queue.forEach((item) => {
-    item.close()
+    item.$.exposed.close()
   })
 }

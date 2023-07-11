@@ -5,7 +5,7 @@
     <demo-block custom-class="pop" title="基本用法">
       <view class="center">
         <wd-popover id="pop1" content="这是一段内容。" v-model:show="show1" @change="handleChange1">
-          <wd-button @click="showPop(1)" data-id="pop1">点击展示</wd-button>
+          <wd-button data-id="pop1">点击展示</wd-button>
         </wd-popover>
       </view>
     </demo-block>
@@ -16,7 +16,7 @@
           <template #content>
             <view class="pop-content">这是一段自定义样式的内容。</view>
           </template>
-          <wd-button @click="showPop(2)" data-id="pop2">点击展示</wd-button>
+          <wd-button data-id="pop2">点击展示</wd-button>
         </wd-popover>
       </view>
     </demo-block>
@@ -24,13 +24,14 @@
     <demo-block custom-class="pop" title="列表展示">
       <view class="center list">
         <wd-popover id="pop3" v-model:show="show3" mode="menu" :content="menu" @menuclick="link" @change="handleChange3">
-          <wd-button @click="showPop(3)" data-id="pop3">列表</wd-button>
+          <wd-button data-id="pop3">列表</wd-button>
         </wd-popover>
       </view>
     </demo-block>
   </view>
 </template>
 <script lang="ts" setup>
+import closeOutside from '@/uni_modules/wot-design-uni/components/common/clickoutside'
 import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
 import { ref } from 'vue'
 
@@ -65,18 +66,10 @@ function link(e) {
 }
 
 function clickOutside() {
-  closeOtherPop()
-}
-
-function closeOtherPop() {
-  // if (pop && pop.data.show) {
-  //   pop.close()
-  //   pop = null
-  // }
+  closeOutside()
 }
 
 function showPop(index: number) {
-  console.log(index)
   // if (pop && pop.id !== id) {
   //   closeOtherPop()
   // }
