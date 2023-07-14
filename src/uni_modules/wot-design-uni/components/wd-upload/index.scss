@@ -36,7 +36,7 @@
     margin-top: 8px;
   }
 
-  @include e(evoke-icon) {
+  @include edeep(evoke-icon) {
     width: 32px;
     height: 32px;
   }
@@ -68,10 +68,10 @@
     height: 100%;
   }
 
-  @include e(close) {
+  @include edeep(close) {
     position: absolute;
-    right: -$-upload-close-icon-size / 2;
-    top: -$-upload-close-icon-size / 2;
+    right: - calc($-upload-close-icon-size / 2);
+    top: - calc($-upload-close-icon-size / 2);
     font-size: $-upload-close-icon-size;
     z-index: 1;
     color: $-upload-close-icon-color;
@@ -104,7 +104,7 @@
     color: $-color-white;
   }
 
-  @include e(icon) {
+  @include edeep(icon) {
     font-size: $-upload-preview-icon-size;
     color: $-color-white;
   }

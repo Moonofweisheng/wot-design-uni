@@ -21,14 +21,14 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-
+type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 interface Props {
   modelValue: number | null
   bgColor?: string
   max?: number
   isDot?: boolean
   hidden?: boolean
-  type?: string
+  type?: BadgeType
   top?: number
   right?: number
   customClass?: string

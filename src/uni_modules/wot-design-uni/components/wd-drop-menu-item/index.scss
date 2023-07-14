@@ -1,6 +1,6 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
-@import '../popup/index.scss';
+@import '../wd-popup/index.scss';
 
 @include b(drop-item) {
   position: fixed;
@@ -42,7 +42,7 @@
     margin-left: 2px;
   }
 
-  @include e(icon){
+  @include edeep(icon){
     display: block;
     font-size: $-drop-menu-option-check-size;
   }

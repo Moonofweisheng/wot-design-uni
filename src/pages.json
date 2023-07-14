@@ -410,6 +410,56 @@
           },
           "navigationBarTitleText": "SelectPicker 单复选选择器"
         }
+      },
+      {
+        "path": "pages/dropMenu/Index",
+        "name": "dropMenu",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "DropMenu 下拉菜单"
+        }
+      },
+      {
+        "path": "pages/grid/Index",
+        "name": "grid",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Grid 宫格"
+        }
+      },
+      {
+        "path": "pages/swipeAction/Index",
+        "name": "swipeAction",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "SwipeAction 滑动操作"
+        }
+      },
+      {
+        "path": "pages/steps/Index",
+        "name": "steps",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Steps 标签页"
+        }
+      },
+      {
+        "path": "pages/upload/Index",
+        "name": "upload",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Upload 上传"
+        }
       }
     ],
     // "tabBar": {

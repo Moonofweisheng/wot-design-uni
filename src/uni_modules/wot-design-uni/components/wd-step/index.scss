@@ -37,7 +37,7 @@
       background: transparent;
     }
   }
-  @include e(icon-inner) {
+  @include edeep(icon-inner) {
     font-size: $-steps-icon-size;
     color: $-steps-inactive-color;
   }
@@ -92,7 +92,7 @@
     }
   }
   @include when(finished) {
-    .wd-step__icon-inner {
+    :deep(.wd-step__icon-inner) {
       color: $-steps-finished-color;
     }
     .wd-step__icon-outer {
@@ -108,7 +108,7 @@
   }
   @include when(process) {
     .wd-step__icon.is-icon {
-      .wd-step__icon-inner {
+      :deep(.wd-step__icon-inner) {
         color: $-steps-finished-color;
       }
     }
@@ -142,7 +142,7 @@
     }
   }
   @include when(error) {
-    .wd-step__icon-inner, .wd-step__title {
+    :deep(.wd-step__icon-inner), .wd-step__title {
       color: $-steps-error-color;
     }
     .wd-step__icon-outer {

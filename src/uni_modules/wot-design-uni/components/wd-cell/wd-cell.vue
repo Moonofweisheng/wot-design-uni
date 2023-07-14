@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="['wd-cell', border ? 'is-border' : '', size ? 'is-' + size : '', center ? 'is-center' : '', customClass]"
+    :class="['wd-cell', cell.border.value ? 'is-border' : '', size ? 'is-' + size : '', center ? 'is-center' : '', customClass]"
     :hover-class="isLink || clickable ? 'is-hover' : 'none'"
     hover-stay-time="70"
     @click="onClick"
@@ -55,7 +55,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, inject, nextTick, onMounted, ref, watch } from 'vue'
+import { getCurrentInstance } from 'vue'
+import { useCell } from '../mixins/useCell'
 
 interface Props {
   title: string
@@ -92,46 +93,9 @@ const props = withDefaults(defineProps<Props>(), {
   vertical: false
 })
 
-const border = ref<boolean>(false) // 是否展示边框
-const cellGroup: any = inject('cell-group')
-const cellList: any = inject('cell-list')
-
-watch(
-  () => cellGroup.border,
-  (newVal) => {
-    setIndexAndStatus(newVal)
-  }
-)
-const { proxy } = getCurrentInstance() as any
+const cell = useCell()
 
 const emit = defineEmits(['click'])
-
-onMounted(() => {
-  nextTick(() => {
-    if (cellList) {
-      cellList.value = [...cellList.value.concat([{ title: props.title, uid: proxy.$.uid }])]
-    }
-  })
-})
-
-/**
- * @description 从cellGroup获取此组件的索引
- * @return {Number} 此组件的索引
- */
-function getIndex() {
-  if (!cellList || cellList.value) return
-  return cellList.value.findIndex((cell) => {
-    return cell.uid === proxy.$.uid
-  })
-}
-
-/**
- * @description 为所有索引非0的组件设置刘海线，此方法由cellGroup调用
- */
-function setIndexAndStatus(isBorder: boolean) {
-  const index = getIndex()
-  border.value = isBorder && index
-}
 
 /**
  * @description 点击cell的handle

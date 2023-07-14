@@ -1,8 +1,36 @@
 <template>
+  <view class="wd-collapse {{ viewmore ? 'is-viewmore' : '' }} custom-class">
+    <!-- 普通或手风琴 -->
+    <block v-if="{{ !viewmore }}">
+      <slot></slot>
+    </block>
+    <!-- 查看更多模式 -->
+    <view v-else>
+      <view
+        class="wd-collapse__content {{ !value ? 'is-retract' : '' }} "
+        style="-webkit-line-clamp: {{ contentLineNum }}; -webkit-box-orient: vertical"
+      >
+        <slot></slot>
+      </view>
+      <view class="wd-collapse__more" bindtap="switchValue">
+        <!-- 自定义展开按钮 -->
+        <view v-if="{{ useMoreSlot }}" class="custom-more-slot-class">
+          <slot name="more"></slot>
+        </view>
+        <!-- 显示展开或折叠按钮 -->
+        <block v-else>
+          <span class="wd-collapse__more-txt">{{ !value ? '展开' : '折叠' }}</span>
+          <view class="wd-collapse__arrow {{ value ? 'is-retract' : '' }}">
+            <wd-icon name="arrow-down"></wd-icon>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
 </template>
 
-<script>
-</script>
+<script></script>
 
 <style lang="scss" scoped>
+@import './index.scss';
 </style>

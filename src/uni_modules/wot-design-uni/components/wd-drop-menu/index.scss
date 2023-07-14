@@ -25,7 +25,7 @@
       .wd-drop-menu__item-title::after {
         opacity: 1;
       }
-      .wd-drop-menu__arrow {
+      :deep(.wd-drop-menu__arrow) {
         transform: scale(0.6) rotate(-180deg);
         transform-origin: center center;
       }
@@ -62,7 +62,7 @@
     @include lineEllipsis;
   }
 
-  @include e(arrow) {
+  @include edeep(arrow) {
     position: absolute;
     display: inline-block;
     top: 0;

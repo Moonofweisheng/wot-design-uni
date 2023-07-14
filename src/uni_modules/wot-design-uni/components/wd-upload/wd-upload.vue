@@ -20,10 +20,10 @@
         </view>
       </view>
       <!-- 上传状态为上传中时不展示移除按钮 -->
-      <wd-icon v-if="file.status !== 'loading' && !disabled" name="error-fill" class="wd-upload__close" @clcik="removeFile(index)"></wd-icon>
+      <wd-icon v-if="file.status !== 'loading' && !disabled" name="error-fill" custom-class="wd-upload__close" @click="removeFile(index)"></wd-icon>
     </view>
 
-    <view bindtap="handleChoose">
+    <view @click="handleChoose">
       <slot v-if="useDefaultSlot"></slot>
       <!-- 唤起项 -->
       <view
@@ -38,16 +38,25 @@
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { context } from '../common/util'
+import { ref, watch } from 'vue'
+import { context, getType, isDef, isEqual } from '../common/util'
 import { chooseFile } from './utils'
 
 interface Props {
   customClass: string
   customEvokeClass: string
   customPreviewClass: string
-
   // 多选
   multiple: boolean
   // 接受类型 暂定接受类型为图片，视频后续添加
@@ -85,18 +94,119 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   fileList: () => [] as Record<string, any>[],
-  showLimitMum: false,
+  accept: 'image',
+  showLimitMum: true,
   sourceType: () => ['album', 'camera'],
   sizeType: () => ['original', 'compressed'],
   name: 'file',
-  loadingType: 'circular-ring',
+  loadingType: 'ring',
   loadingColor: '#ffffff',
   loadingSize: '24px',
   useDefaultSlot: false,
-  statusKey: 'status'
+  statusKey: 'status',
+  maxSize: Number.MAX_VALUE
 })
 
 const uploadFiles = ref<Record<string, any>[]>([])
+
+watch(
+  () => props.fileList,
+  (val) => {
+    const { statusKey } = props
+    if (isEqual(val, uploadFiles.value)) return
+    const uploadFileList = val.map((item) => {
+      item.uid = context.id++
+      item[statusKey] = item[statusKey] || 'success'
+      item.size = item.size || ''
+      item.action = props.action || ''
+      item.response = item.response || ''
+      return item
+    })
+    uploadFiles.value = uploadFileList
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
+  () => props.limit,
+  (val) => {
+    if (val && val < uploadFiles.value.length) {
+      throw Error('[wot-design]Error: props limit must less than fileList.length')
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
+  () => props.beforePreview,
+  (fn) => {
+    if (fn && getType(fn) !== 'function') {
+      throw Error('The type of beforePreview must be Function')
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
+  () => props.onPreviewFail,
+  (fn) => {
+    if (fn && getType(fn) !== 'function') {
+      throw Error('The type of onPreviewFail must be Function')
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
+  () => props.beforeRemove,
+  (fn) => {
+    if (fn && getType(fn) !== 'function') {
+      throw Error('The type of beforeRemove must be Function')
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
+  () => props.beforeUpload,
+  (fn) => {
+    if (fn && getType(fn) !== 'function') {
+      throw Error('The type of beforeUpload must be Function')
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
+  () => props.beforeChoose,
+  (fn) => {
+    if (fn && getType(fn) !== 'function') {
+      throw Error('The type of beforeChoose must be Function')
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 
 const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
 
@@ -169,11 +279,13 @@ function handleProgress(res, file) {
  * @param {Object} file 上传的文件
  */
 function handleUpload(file) {
-  const { action, name, formData = {}, header = {} } = props
+  const { action, name, formData = {}, header = {}, accept } = props
   const uploadTask = uni.uploadFile({
     url: action,
     header,
     name,
+    fileName: name,
+    fileType: accept as 'image' | 'video' | 'audio',
     formData,
     filePath: file.url,
     success(res) {
@@ -202,7 +314,6 @@ function handleUpload(file) {
  */
 function onChooseFile() {
   const { multiple, maxSize, accept, sizeType, limit, sourceType, beforeUpload } = props
-
   // 设置为只选择图片的时候使用 chooseImage 来实现
   if (accept === 'image') {
     // 文件选择
@@ -223,7 +334,10 @@ function onChooseFile() {
 
         // 遍历列表逐个初始化上传参数
         const mapFiles = (files) => {
-          files.forEach((file) => {
+          files.forEach(async (file) => {
+            if (!isDef(file.size)) {
+              file.size = await getImageInfo(file.path)
+            }
             file.size <= maxSize ? initFile(file) : emit('oversize', { file })
           })
         }
@@ -255,11 +369,30 @@ function onChooseFile() {
 }
 
 /**
+ * 获取图片信息
+ * @param src 图片地址
+ */
+function getImageInfo(src: string) {
+  return new Promise<number>((resolve, reject) => {
+    uni.getImageInfo({
+      src: src,
+      success: (res) => {
+        resolve(res.height * res.width)
+      },
+      fail: () => {
+        reject(0)
+      }
+    })
+  })
+}
+
+/**
  * @description 选择文件，内置拦截选择操作
  */
 function handleChoose() {
   if (props.disabled) return
   const { beforeChoose } = props
+
   // 选择图片前的钩子
   if (beforeChoose) {
     // 向下兼容原来的参数写法，2.2.0 向下兼容 2.1.0
@@ -367,124 +500,5 @@ function onPreviewImage(index) {
 }
 </script>
 <style lang="scss" scoped>
-@import '../common/abstracts/variable.scss';
-@import '../common/abstracts/_mixin.scss';
-
-@include b(upload) {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-
-  @include e(evoke) {
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: $-upload-size;
-    height: $-upload-size;
-    font-size: $-upload-evoke-icon-size;
-    background-color: $-upload-evoke-bg;
-    color: $-upload-evoke-color;
-    margin-bottom: 12px;
-
-    @include when(disabled) {
-      color: $-upload-evoke-disabled-color;
-    }
-
-    @include when(slot-default) {
-      width: auto;
-      height: auto;
-      background-color: transparent;
-    }
-  }
-
-  @include e(evoke-num) {
-    font-size: 14px;
-    line-height: 14px;
-    margin-top: 8px;
-  }
-
-  @include e(evoke-icon) {
-    width: 32px;
-    height: 32px;
-  }
-
-  @include e(input) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    opacity: 0;
-  }
-
-  @include e(preview) {
-    position: relative;
-    width: $-upload-size;
-    height: $-upload-size;
-    margin: 0 12px 12px 0;
-  }
-
-  @include e(preview-list) {
-    display: flex;
-  }
-
-  @include e(picture) {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  @include e(close) {
-    position: absolute;
-    right: -$-upload-close-icon-size / 2;
-    top: -$-upload-close-icon-size / 2;
-    font-size: $-upload-close-icon-size;
-    z-index: 1;
-    color: $-upload-close-icon-color;
-    width: $-upload-close-icon-size;
-    height: $-upload-close-icon-size;
-
-    &::after {
-      position: absolute;
-      content: '';
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background-color: $-color-white;
-      left: 0;
-      z-index: -1;
-    }
-  }
-
-  @include e(mask) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: $-upload-preview-name-bg;
-  }
-
-  @include e(progress-txt) {
-    font-size: $-upload-progress-fs;
-    line-height: $-upload-progress-fs;
-    margin-top: 9px;
-    color: $-color-white;
-  }
-
-  @include e(icon) {
-    font-size: $-upload-preview-icon-size;
-    color: $-color-white;
-  }
-
-  @include e(status-content) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-}
+@import './index.scss';
 </style>

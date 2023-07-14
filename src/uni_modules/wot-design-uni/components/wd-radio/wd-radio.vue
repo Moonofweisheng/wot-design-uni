@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2023-07-10 10:55:11
+ * @LastEditTime: 2023-07-12 13:11:38
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-radio\wd-radio.vue
@@ -61,7 +61,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const isChecked = ref<boolean>(false) // 是否被选中
-const parent = inject<any>('radioGroup') || {}
+const parent = inject<any>('radioGroup')
 const { proxy } = getCurrentInstance() as any
 
 const innerShape = computed(() => {
