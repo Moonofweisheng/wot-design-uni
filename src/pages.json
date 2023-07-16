@@ -460,6 +460,26 @@
           },
           "navigationBarTitleText": "Upload 上传"
         }
+      },
+      {
+        "path": "pages/calendarView/Index",
+        "name": "calendarView",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "CalendarView 日历面板组件"
+        }
+      },
+      {
+        "path": "pages/calendar/Index",
+        "name": "calendar",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Calendar 日历选择器"
+        }
       }
     ],
     // "tabBar": {

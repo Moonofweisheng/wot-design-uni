@@ -432,6 +432,8 @@ function getActiveIndex(value) {
 defineExpose({
   setActive,
   updateItems,
+  scrollIntoView,
+  updateLineStyle,
   children
 })
 </script>

@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-06-12 18:40:59
+ * @LastEditTime: 2023-07-15 16:21:15
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-badge\wd-badge.vue
+ * 记得注释
+-->
 <template>
   <view :class="['wd-badge', customClass]">
     <slot></slot>
@@ -34,6 +43,7 @@ interface Props {
   customClass?: string
 }
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   modelValue: null
 })
 const content = ref<number | null>(null)

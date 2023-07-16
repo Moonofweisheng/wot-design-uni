@@ -33,21 +33,21 @@
       .wd-calendar__value {
         color: $-input-error-color;
       }
-      .wd-calendar__arrow {
+      :deep(.wd-calendar__arrow) {
         color: $-input-error-color;
       }
     }
     @include when(large) {
       font-size: $-cell-title-fs-large;
 
-      .wd-calendar__arrow {
+      :deep(.wd-calendar__arrow) {
         font-size: $-cell-icon-size-large;
       }
     }
     @include when(center) {
       align-items: center;
 
-      .wd-calendar__arrow {
+      :deep(.wd-calendar__arrow) {
         margin-top: 0;
       }
     }
@@ -87,7 +87,7 @@
       color: $-input-placeholder-color;
     }
   }
-  @include e(arrow) {
+  @include edeep(arrow) {
     display: block;
     margin-top: $-cell-wrapper-padding;
     font-size: $-cell-icon-size;
@@ -107,7 +107,7 @@
     font-size: $-action-sheet-title-fs;
     font-weight: $-action-sheet-weight;
   }
-  @include e(close) {
+  @include edeep(close) {
     position: absolute;
     top: $-action-sheet-close-top;
     right: $-action-sheet-close-right;
@@ -124,7 +124,7 @@
     padding: 20px 0;
     text-align: center;
   }
-  @include e(tag) {
+  @include edeep(tag) {
     margin-right: 8px;
   }
   @include e(view) {

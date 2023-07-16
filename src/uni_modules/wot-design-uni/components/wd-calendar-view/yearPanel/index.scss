@@ -1,5 +1,5 @@
-@import '../../../common/abstracts/variable';
-@import '../../../common/abstracts/mixin';
+@import '../../common/abstracts/variable';
+@import '../../common/abstracts/mixin';
 
 @include b(year-panel) {
   font-size: $-calendar-fs;
