@@ -129,7 +129,8 @@ export default {
   options: {
     virtualHost: true,
     styleIsolation: 'shared'
-  }
+  },
+  behaviors: ['uni://form-field']
 }
 </script>
 

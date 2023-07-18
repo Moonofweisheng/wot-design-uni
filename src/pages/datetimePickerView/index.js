@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2023-06-12 18:40:59
+ * @LastEditTime: 2023-07-17 13:41:22
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\datetimePickerView\index.js
+ * 记得注释
+ */
 import Toast from '../../wot-design/toast/toast'
 
 Page({

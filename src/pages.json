@@ -480,6 +480,36 @@
           },
           "navigationBarTitleText": "Calendar 日历选择器"
         }
+      },
+      {
+        "path": "pages/datetimePickerView/Index",
+        "name": "datetimePickerView",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "DatetimePickerView 日期时间选择器视图"
+        }
+      },
+      {
+        "path": "pages/datetimePicker/Index",
+        "name": "datetimePicker",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "DatetimePicker 日期时间选择器"
+        }
+      },
+      {
+        "path": "pages/form/Index",
+        "name": "form",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Form 表单组合"
+        }
       }
     ],
     // "tabBar": {

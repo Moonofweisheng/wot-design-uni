@@ -19,7 +19,7 @@
     <view style="margin-bottom: 10px">
       <wd-checkbox-group v-model="value1" disabled>
         <wd-checkbox :value="1">京麦</wd-checkbox>
-        <wd-checkbox :value="2" disabled="{{false}}">商家后台</wd-checkbox>
+        <wd-checkbox :value="2" :disabled="false">商家后台</wd-checkbox>
         <wd-checkbox :value="3" shape="square">京麦</wd-checkbox>
         <wd-checkbox :value="4" shape="square">商家后台</wd-checkbox>
       </wd-checkbox-group>

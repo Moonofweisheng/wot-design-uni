@@ -29,7 +29,7 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { getCurrentInstance, ref, watch } from 'vue'
+import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isEqual, range } from '../common/util'
 
 interface Props {
@@ -44,7 +44,7 @@ interface Props {
   // 选项对象中，展示的文本对应的 key
   labelKey: string
   // 初始值
-  modelValue: string | number | boolean
+  modelValue: string | number | boolean | Array<string | number | boolean>
   // 选择器数据
   columns: Array<string | string[]>
   // 多级联动
@@ -188,6 +188,7 @@ function selectWithIndex(columnIndex, rowIndex) {
   if (!col || !col[rowIndex]) {
     throw Error(`The value to select with Col:${columnIndex} Row:${rowIndex} is correct`)
   }
+  const select: number[] = deepClone(selectedIndex.value)
   // 被禁用的无法选中，选中距离它最近的未被禁用的
   if (col[rowIndex].disabled) {
     // 寻找值为0或最最近的未被禁用的节点的索引
@@ -197,15 +198,16 @@ function selectWithIndex(columnIndex, rowIndex) {
       .findIndex((s) => !s.disabled)
     const next = col.slice(rowIndex + 1).findIndex((s) => !s.disabled)
     if (prev !== -1) {
-      selectedIndex.value[columnIndex] = rowIndex - 1 - prev
+      select[columnIndex] = rowIndex - 1 - prev
     } else if (next !== -1) {
-      selectedIndex.value[columnIndex] = rowIndex + 1 + next
-    } else if (selectedIndex.value[columnIndex] === undefined) {
-      selectedIndex.value[columnIndex] = 0
+      select[columnIndex] = rowIndex + 1 + next
+    } else if (select[columnIndex] === undefined) {
+      select[columnIndex] = 0
     }
   } else {
-    selectedIndex.value[columnIndex] = rowIndex
+    select[columnIndex] = rowIndex
   }
+  selectedIndex.value = deepClone(select)
   return selectedIndex.value
 }
 
@@ -279,23 +281,27 @@ function onChange({ detail: { value } }) {
   value = value.map((v) => {
     return Number(v || 0)
   })
-  const index = getChangeDiff(value)
-  // 执行多级联动
-  if (props.columnChange) {
-    // columnsChange 可能有异步操作，需要添加 resolve 进行回调通知，形参小于4个则为同步
-    if (props.columnChange.length < 4) {
-      props.columnChange(proxy.$.exposed, getSelects(), index)
-      handleChange(index)
-    } else {
-      props.columnChange(proxy.$.exposed, getSelects(), index, () => {
-        // 如果selectedIndex只有一列，返回此项；如果是多项，返回所有选中项。
+  selectedIndex.value = deepClone(value)
+
+  nextTick(() => {
+    const index = getChangeDiff(value)
+    // 执行多级联动
+    if (props.columnChange) {
+      // columnsChange 可能有异步操作，需要添加 resolve 进行回调通知，形参小于4个则为同步
+      if (props.columnChange.length < 4) {
+        props.columnChange(proxy.$.exposed, getSelects(), index)
         handleChange(index)
-      })
+      } else {
+        props.columnChange(proxy.$.exposed, getSelects(), index, () => {
+          // 如果selectedIndex只有一列，返回此项；如果是多项，返回所有选中项。
+          handleChange(index)
+        })
+      }
+    } else {
+      // 如果selectedIndex只有一列，返回此项；如果是多项，返回所有选中项。
+      handleChange(index)
     }
-  } else {
-    // 如果selectedIndex只有一列，返回此项；如果是多项，返回所有选中项。
-    handleChange(index)
-  }
+  })
 }
 
 function getChangeIndex(now, origin) {

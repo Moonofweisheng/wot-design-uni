@@ -2,6 +2,20 @@
 import debounce from './lodash/debounce'
 
 /**
+ * 生成uuid
+ * @returns string
+ */
+export function uuid() {
+  return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4()
+}
+
+function s4() {
+  return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1)
+}
+
+/**
  * @description 对num自动填充px
  * @param {Number} num
  * @return {string} num+px
