@@ -13,7 +13,8 @@ VueComponent({
       type: Number,
       observer: 'updateTotalPage'
     },
-    pageSize: { // 分页大小
+    pageSize: {
+      // 分页大小
       type: Number,
       value: 10
     },
@@ -31,21 +32,21 @@ VueComponent({
     }
   },
   methods: {
-    add () {
+    add() {
       const { value, totalPage } = this.data
       if (value > totalPage - 1) {
         return
       }
       this.$emit('change', { value: value + 1 })
     },
-    sub () {
+    sub() {
       const { value } = this.data
       if (value < 2) {
         return
       }
       this.$emit('change', { value: value - 1 })
     },
-    updateTotalPage () {
+    updateTotalPage() {
       const { total, pageSize } = this.data
       if (total) {
         this.setData({

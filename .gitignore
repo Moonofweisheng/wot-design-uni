@@ -4,7 +4,6 @@ unpackage/
 dist/
 lib/
 website/
-/docs
 .temp
 .cache
 # src/uni_modules/fant-mini-plus/components/hd-*/API.md

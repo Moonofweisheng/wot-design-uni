@@ -59,32 +59,34 @@ Page({
       {
         text: '近7天',
         id: 7
-      }, {
+      },
+      {
         text: '近15天',
         id: 15
-      }, {
+      },
+      {
         text: '近30天',
         id: 30
       }
     ],
-    onShortcutsClick ({ item }) {
+    onShortcutsClick({ item }) {
       const dayDiff = item.id
       const endDate = Date.now() - 24 * 60 * 60 * 1000
       const startDate = endDate - dayDiff * 24 * 60 * 60 * 1000
 
       return [startDate, endDate]
     },
-    displayFormat (value) {
+    displayFormat(value) {
       return dayjs(value[0]).format('YY年MM月DD日') + ' - ' + dayjs(value[1]).format('YY年MM月DD日')
     },
-    innerDisplayFormat (value, rangeType) {
+    innerDisplayFormat(value, rangeType) {
       if (!value) {
         return rangeType === 'start' ? '活动开始时间' : '活动结束时间'
       }
 
       return dayjs(value).format('YY年MM月DD日')
     },
-    beforeConfirm ({ value, resolve }) {
+    beforeConfirm({ value, resolve }) {
       if (value > Date.now()) {
         Toast.error('该日期暂无数据')
         resolve(false)
@@ -93,22 +95,22 @@ Page({
       }
     }
   },
-  handleConfirm1 (event) {
+  handleConfirm1(event) {
     this.setData({
       value1: event.detail.value
     })
   },
-  handleConfirm2 (event) {
+  handleConfirm2(event) {
     this.setData({
       value2: event.detail.value
     })
   },
-  handleConfirm3 (event) {
+  handleConfirm3(event) {
     this.setData({
       value12: event.detail.value
     })
   },
-  handleConfirm4 (event) {
+  handleConfirm4(event) {
     this.setData({
       formatValue: new Date(event.detail.value).toString()
     })

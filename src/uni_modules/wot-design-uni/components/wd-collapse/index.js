@@ -8,7 +8,7 @@ VueComponent({
     // [String, Array, Boolean]
     value: {
       type: null,
-      observer (newVal, oldVal) {
+      observer(newVal, oldVal) {
         const { viewmore, accordion } = this.data
         // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
         if (newVal === null || newVal === undefined) {
@@ -48,7 +48,7 @@ VueComponent({
     lineNum: {
       type: Number,
       value: 2,
-      observer (newVal) {
+      observer(newVal) {
         if (newVal <= 0) {
           this.setData({ lineNum: 2 })
           throw Error('lineNum must greater than 0')
@@ -59,7 +59,7 @@ VueComponent({
   relations: {
     '../collapseItem/index': {
       type: 'child',
-      linked (target) {
+      linked(target) {
         this.children = this.children || []
         const repeat = this.checkRepeat(this.children, target.data.name, 'name')
         if (repeat === -1) {
@@ -69,17 +69,17 @@ VueComponent({
           throw Error('Name attribute cannot be defined repeatedly')
         }
       },
-      unlinked (target) {
-        this.children = this.children.filter(child => child !== target)
+      unlinked(target) {
+        this.children = this.children.filter((child) => child !== target)
       }
     }
   },
-  created () {
+  created() {
     const { lineNum, viewmore, value } = this.data
     this.setData({ contentLineNum: viewmore && !value ? lineNum : '' })
   },
   methods: {
-    checkType (value) {
+    checkType(value) {
       return Object.prototype.toString.call(value).slice(8, -1)
     },
     /**
@@ -88,20 +88,18 @@ VueComponent({
      * @param {String} checkValue 比较的重复值
      * @param {String} key 键名
      */
-    checkRepeat (currentList, checkValue, key) {
-      return currentList.findIndex(item => item.data[key] === checkValue)
+    checkRepeat(currentList, checkValue, key) {
+      return currentList.findIndex((item) => item.data[key] === checkValue)
     },
     /**
      * 折叠控制
      * @param {String} name 当前选中的 item name
      * @param {Boolean} expanded 是否展开 false: 开->关(删除)；true: 关->开(添加)
      */
-    switchValue (name, expanded) {
+    switchValue(name, expanded) {
       const { accordion, viewmore, value } = this.data
       if (!accordion && !viewmore && this.checkType(value) === 'Array') {
-        name = expanded
-          ? value.concat(name)
-          : value.filter(item => item !== name)
+        name = expanded ? value.concat(name) : value.filter((item) => item !== name)
       } else if (viewmore) {
         name = !value
       }

@@ -38,7 +38,7 @@ VueComponent({
     },
     defaultTime: {
       type: [String, Array],
-      observer (val) {
+      observer(val) {
         this.setData({
           formatDefauleTime: getDefaultTime(val)
         })
@@ -53,15 +53,15 @@ VueComponent({
   },
   methods: {
     // 对外暴露方法
-    scrollIntoView (thresholds) {
+    scrollIntoView(thresholds) {
       const panel = this.getPanel()
       panel.initRect && panel.initRect(thresholds)
       panel.scrollIntoView()
     },
-    getPanel () {
+    getPanel() {
       return this.data.type.indexOf('month') > -1 ? this.selectComponent('#yearPanel') : this.selectComponent('#monthPanel')
     },
-    handleChange ({ detail: { value } }) {
+    handleChange({ detail: { value } }) {
       this.setData({
         value
       })
@@ -69,10 +69,10 @@ VueComponent({
         value
       })
     },
-    handlePickStart () {
+    handlePickStart() {
       this.$emit('pickstart')
     },
-    handlePickEnd () {
+    handlePickEnd() {
       this.$emit('pickend')
     }
   }

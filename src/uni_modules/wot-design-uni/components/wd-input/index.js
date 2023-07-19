@@ -2,20 +2,15 @@ import VueComponent from '../common/component'
 import cell from '../mixins/cell'
 
 VueComponent({
-  externalClasses: [
-    'custom-textarea-container-class',
-    'custom-textarea-class',
-    'custom-input-class',
-    'custom-label-class'
-  ],
+  externalClasses: ['custom-textarea-container-class', 'custom-textarea-class', 'custom-input-class', 'custom-label-class'],
   behaviors: [cell, 'jd://form-field'],
   relations: {
     '../cellGroup/index': {
       type: 'ancestor',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -93,7 +88,7 @@ VueComponent({
     // 原生属性结束
     value: {
       type: null,
-      observer (newVal) {
+      observer(newVal) {
         const { disabled, readonly, clearable } = this.data
         // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
         if (newVal === null || newVal === undefined) {
@@ -148,15 +143,15 @@ VueComponent({
     noBorder: Boolean,
     required: Boolean
   },
-  created () {
+  created() {
     this.initState()
   },
   methods: {
     // 状态初始化
-    initState () {
+    initState() {
       const { showPassword, disabled, readonly, value, clearable, maxlength, showWordLimit } = this.data
       let newVal
-      if (showWordLimit && maxlength && (value.toString().length > maxlength)) {
+      if (showWordLimit && maxlength && value.toString().length > maxlength) {
         newVal = value.toString().substring(0, maxlength)
       }
       this.setData({
@@ -166,11 +161,11 @@ VueComponent({
         value: newVal || value
       })
     },
-    togglePwdVisible () {
+    togglePwdVisible() {
       // password属性设置false不生效，置空生效
       this.setData({ isPwdVisible: !this.data.isPwdVisible })
     },
-    clear () {
+    clear() {
       this.setData({ value: '' })
       this.requestAnimationFrame()
         .then(() => this.requestAnimationFrame())
@@ -185,7 +180,7 @@ VueComponent({
         })
     },
     // 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur
-    handleBlur ({ detail }) {
+    handleBlur({ detail }) {
       this.setData({ focus: false })
       this.$emit('change', {
         value: this.data.value
@@ -196,34 +191,31 @@ VueComponent({
         cursor: detail.cursor ? detail.cursor : null
       })
     },
-    handleFocus ({ detail }) {
+    handleFocus({ detail }) {
       if (this.data.clearing) {
         this.data.clearing = false
         return
       }
-      this.setData(
-        { focus: true },
-        () => this.$emit('focus', detail)
-      )
+      this.setData({ focus: true }, () => this.$emit('focus', detail))
     },
     // input事件需要传入
-    handleInput ({ detail }) {
+    handleInput({ detail }) {
       this.setData({ value: detail.value })
       this.$emit('input', detail)
     },
-    handleKeyboardheightchange (event) {
+    handleKeyboardheightchange(event) {
       this.$emit('keyboardheightchange', event.detail)
     },
-    handleConfirm ({ detail }) {
+    handleConfirm({ detail }) {
       this.$emit('confirm', detail)
     },
-    handleLineChange (event) {
+    handleLineChange(event) {
       this.$emit('linechange', event.detail)
     },
-    onClickSuffixIcon () {
+    onClickSuffixIcon() {
       this.$emit('clicksuffixicon')
     },
-    onClickPrefixIcon () {
+    onClickPrefixIcon() {
       this.$emit('clickprefixicon')
     }
   }

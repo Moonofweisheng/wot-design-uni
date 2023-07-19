@@ -38,7 +38,7 @@ VueComponent({
     defaultTime: Array
   },
   methods: {
-    setMonths () {
+    setMonths() {
       const months = []
       const date = new Date(this.data.date)
       const year = date.getFullYear()
@@ -65,7 +65,7 @@ VueComponent({
         months
       })
     },
-    getMonthType (date) {
+    getMonthType(date) {
       if (this.data.type === 'monthrange') {
         const [startDate, endDate] = this.data.value || []
 
@@ -89,34 +89,34 @@ VueComponent({
         }
       }
     },
-    handleDateClick (event) {
+    handleDateClick(event) {
       const { index } = event.currentTarget.dataset
       const date = this.data.months[index]
 
       if (date.disabled) return
 
       switch (this.data.type) {
-      case 'month':
-        this.handleMonthChange(date)
-        break
-      case 'monthrange':
-        this.handleMonthRangeChange(date)
-        break
-      default:
-        this.handleMonthChange(date)
+        case 'month':
+          this.handleMonthChange(date)
+          break
+        case 'monthrange':
+          this.handleMonthRangeChange(date)
+          break
+        default:
+          this.handleMonthChange(date)
       }
     },
-    getDate (date) {
+    getDate(date) {
       return this.data.defaultTime && this.data.defaultTime.length > 0 ? getDateByDefaultTime(date, this.data.defaultTime[0]) : date
     },
-    handleMonthChange (date) {
+    handleMonthChange(date) {
       if (date.type !== 'selected') {
         this.$emit('change', {
           value: this.getDate(date.date)
         })
       }
     },
-    handleMonthRangeChange (date) {
+    handleMonthRangeChange(date) {
       let value
       const [startDate, endDate] = this.data.value || []
       const compare = compareMonth(date.date, startDate)
@@ -142,7 +142,7 @@ VueComponent({
         value
       })
     },
-    getFormatterDate (date, month, type) {
+    getFormatterDate(date, month, type) {
       let monthObj = {
         date: date,
         text: month + 1,

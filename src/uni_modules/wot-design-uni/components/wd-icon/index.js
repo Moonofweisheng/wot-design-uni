@@ -4,7 +4,7 @@ VueComponent({
   props: {
     name: {
       type: String,
-      observer (val) {
+      observer(val) {
         this.setData({
           isImageUrl: val.indexOf('/') > -1
         })

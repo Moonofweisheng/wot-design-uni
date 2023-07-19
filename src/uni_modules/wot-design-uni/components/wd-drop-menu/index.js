@@ -17,7 +17,7 @@ VueComponent({
     direction: {
       type: String,
       value: 'down',
-      observer (newValue) {
+      observer(newValue) {
         if (newValue !== 'up' && newValue !== 'down') {
           this.setData({ direction: 'down' })
           console.warn('[wot design] warning(wd-drop-menu): direction must be \'up\' or \'down\'')
@@ -40,26 +40,26 @@ VueComponent({
   relations: {
     '../dropMenuItem/index': {
       type: 'child',
-      linked (target) {
+      linked(target) {
         this.children = this.children || []
         this.children.push(target)
       },
-      unlinked (target) {
-        this.children = this.children.filter(child => child !== target)
+      unlinked(target) {
+        this.children = this.children.filter((child) => child !== target)
       }
     }
   },
-  created () {
+  created() {
     const { windowHeight } = jd.getSystemInfoSync()
     this.windowHeight = windowHeight
     this.children = []
   },
-  mounted () {
+  mounted() {
     this.updateTitle()
   },
   methods: {
-    noop () { },
-    toggle (event) {
+    noop() {},
+    toggle(event) {
       // 如果重复展开相同的选项，则折叠选项卡
       const { index } = event.currentTarget.dataset
       const child = this.children[index]
@@ -74,7 +74,7 @@ VueComponent({
      * 控制菜单内容是否展开
      * @param {Number} currentIndex 当前选的索引
      */
-    fold (currentIndex) {
+    fold(currentIndex) {
       this.setData({ currentIndex })
 
       if (currentIndex === -1) {
@@ -84,7 +84,7 @@ VueComponent({
         return
       }
 
-      this.getRect('.wd-drop-menu').then(rect => {
+      this.getRect('.wd-drop-menu').then((rect) => {
         if (!rect) return
         const { top, bottom } = rect
 
@@ -105,7 +105,7 @@ VueComponent({
       })
     },
     // 重设选中的 value 菜单列表
-    updateTitle () {
+    updateTitle() {
       const titleList = []
       this.children.forEach((item, index) => {
         const { displayTitle, disabled } = item.data

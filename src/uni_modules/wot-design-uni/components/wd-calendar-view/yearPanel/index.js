@@ -22,12 +22,12 @@ VueComponent({
     title: '',
     scrollIntoView: ''
   },
-  mounted () {
+  mounted() {
     this.initRect()
     this.scrollIntoView()
   },
   methods: {
-    initRect (thresholds = [0, 0.15, 0.7, 0.8, 0.9, 1]) {
+    initRect(thresholds = [0, 0.15, 0.7, 0.8, 0.9, 1]) {
       if (!this.data.showPanelTitle) return
 
       if (this.contentObserver != null) {
@@ -50,7 +50,7 @@ VueComponent({
         }
       })
     },
-    scrollIntoView () {
+    scrollIntoView() {
       this.requestAnimationFrame().then(() => {
         let activeDate
         const type = getType(this.data.value)
@@ -78,7 +78,7 @@ VueComponent({
         })
       })
     },
-    handleDateChange ({ detail: { value } }) {
+    handleDateChange({ detail: { value } }) {
       this.$emit('change', {
         value
       })

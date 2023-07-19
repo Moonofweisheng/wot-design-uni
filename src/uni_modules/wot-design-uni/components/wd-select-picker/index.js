@@ -5,21 +5,17 @@ import cellProps from './cellProps'
 import selectProps from './selectProps'
 
 VueComponent({
-  externalClasses: [
-    'custom-content-class',
-    'custom-label-class',
-    'custom-value-class'
-  ],
+  externalClasses: ['custom-content-class', 'custom-label-class', 'custom-value-class'],
 
   behaviors: [cell, 'jd://form-field'],
 
   relations: {
     '../cellGroup/index': {
       type: 'ancestor',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -38,7 +34,7 @@ VueComponent({
   props: {
     value: {
       type: null,
-      observer (val) {
+      observer(val) {
         if (val === this.data.selectList) return
         this.setData({
           selectList: this.valueFormat(val),
@@ -52,7 +48,7 @@ VueComponent({
     columns: {
       type: Array,
       value: [],
-      observer (val) {
+      observer(val) {
         if (this.data.filterable && this.data.filterVal) {
           this.formatFilterColumns(val, this.data.filterVal)
         } else {
@@ -82,7 +78,7 @@ VueComponent({
     // 外部展示格式化函数
     displayFormat: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of displayFormat must be Function')
         }
@@ -90,7 +86,7 @@ VueComponent({
     },
     beforeConfirm: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of beforeConfirm must be Function')
         }
@@ -109,7 +105,7 @@ VueComponent({
     ellipsis: Boolean
   },
 
-  created () {
+  created() {
     this.setData({
       selectList: this.valueFormat(this.data.value),
       filterColumns: this.data.columns
@@ -117,10 +113,10 @@ VueComponent({
   },
 
   methods: {
-    getSelectedItem (value) {
+    getSelectedItem(value) {
       const { valueKey, labelKey, columns } = this.data
 
-      const selecteds = columns.filter(item => {
+      const selecteds = columns.filter((item) => {
         return item[valueKey] === value
       })
 
@@ -134,18 +130,18 @@ VueComponent({
       }
     },
 
-    valueFormat (value) {
+    valueFormat(value) {
       return this.data.type === 'checkbox' ? Array.prototype.slice.call(value) : value
     },
 
-    handleChange (event) {
+    handleChange(event) {
       this.setData({
         selectList: event.detail.value
       })
       this.$emit('change', event.detail)
     },
 
-    close () {
+    close() {
       this.setData({
         pickerShow: false
       })
@@ -158,7 +154,7 @@ VueComponent({
       this.$emit('cancel')
     },
 
-    open () {
+    open() {
       if (this.data.disabled || this.data.readonly) return
       this.setData({
         selectList: this.valueFormat(this.data.value),
@@ -167,7 +163,7 @@ VueComponent({
       })
     },
 
-    onConfirm () {
+    onConfirm() {
       if (this.data.loading) {
         this.setData({
           pickerShow: false
@@ -176,7 +172,7 @@ VueComponent({
         return
       }
       if (this.data.beforeConfirm) {
-        this.data.beforeConfirm(this.data.selectList, isPass => {
+        this.data.beforeConfirm(this.data.selectList, (isPass) => {
           isPass && this.handleConfirm()
         })
       } else {
@@ -184,7 +180,7 @@ VueComponent({
       }
     },
 
-    handleConfirm () {
+    handleConfirm() {
       this.setData({
         isConfirm: true,
         pickerShow: false,
@@ -192,7 +188,7 @@ VueComponent({
       })
       let selectedItems
       if (this.data.type === 'checkbox') {
-        selectedItems = this.data.lastSelectList.map(item => {
+        selectedItems = this.data.lastSelectList.map((item) => {
           return this.getSelectedItem(item)
         })
       } else {
@@ -205,7 +201,7 @@ VueComponent({
       this.setShowValue(this.data.lastSelectList)
     },
 
-    setShowValue (value) {
+    setShowValue(value) {
       let showValue = ''
 
       if (this.data.displayFormat) {
@@ -213,12 +209,14 @@ VueComponent({
       } else {
         const { type, labelKey } = this.data
         if (type === 'checkbox') {
-          const selectedItems = value.map(item => {
+          const selectedItems = value.map((item) => {
             return this.getSelectedItem(item)
           })
-          showValue = selectedItems.map(item => {
-            return item[labelKey]
-          }).join(', ')
+          showValue = selectedItems
+            .map((item) => {
+              return item[labelKey]
+            })
+            .join(', ')
         } else if (type === 'radio') {
           const selectedItem = this.getSelectedItem(value)
           showValue = selectedItem[labelKey]
@@ -231,7 +229,7 @@ VueComponent({
       })
     },
 
-    getFilterText (label, filterVal) {
+    getFilterText(label, filterVal) {
       const reg = new RegExp(`(${filterVal})`, 'g')
 
       return label.split(reg).map((text) => {
@@ -242,16 +240,19 @@ VueComponent({
       })
     },
 
-    handleFilterChange ({ detail: { value } }) {
+    handleFilterChange({ detail: { value } }) {
       if (value === '') {
-        this.setData({
-          filterColumns: [],
-          filterVal: value
-        }, () => {
-          this.setData({
-            filterColumns: this.data.columns
-          })
-        })
+        this.setData(
+          {
+            filterColumns: [],
+            filterVal: value
+          },
+          () => {
+            this.setData({
+              filterColumns: this.data.columns
+            })
+          }
+        )
       } else {
         this.setData({
           filterVal: value
@@ -260,7 +261,7 @@ VueComponent({
       }
     },
 
-    formatFilterColumns (columns, filterVal) {
+    formatFilterColumns(columns, filterVal) {
       const filterColumns = columns.filter((item) => {
         return item[this.data.labelKey].indexOf(filterVal) > -1
       })
@@ -272,13 +273,16 @@ VueComponent({
         }
       })
 
-      this.setData({
-        filterColumns: []
-      }, () => {
-        this.setData({
-          filterColumns: formatFilterColumns
-        })
-      })
+      this.setData(
+        {
+          filterColumns: []
+        },
+        () => {
+          this.setData({
+            filterColumns: formatFilterColumns
+          })
+        }
+      )
     }
   }
 })

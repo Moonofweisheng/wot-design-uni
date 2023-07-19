@@ -10,47 +10,47 @@ Page({
     value8: 2,
     value9: ''
   },
-  handleChange1 ({ detail }) {
+  handleChange1({ detail }) {
     this.setData({
       value1: detail.value
     })
   },
-  handleChange2 ({ detail }) {
+  handleChange2({ detail }) {
     this.setData({
       value2: detail.value
     })
   },
-  handleChange3 ({ detail }) {
+  handleChange3({ detail }) {
     this.setData({
       value3: detail.value
     })
   },
-  handleChange4 ({ detail }) {
+  handleChange4({ detail }) {
     this.setData({
       value4: detail.value
     })
   },
-  handleChange5 ({ detail }) {
+  handleChange5({ detail }) {
     this.setData({
       value5: detail.value
     })
   },
-  handleChange6 ({ detail }) {
+  handleChange6({ detail }) {
     this.setData({
       value6: detail.value
     })
   },
-  handleChange7 ({ detail }) {
+  handleChange7({ detail }) {
     this.setData({
       value7: detail.value
     })
   },
-  handleChange8 ({ detail }) {
+  handleChange8({ detail }) {
     this.setData({
       value8: detail.value
     })
   },
-  handleChange9 ({ detail }) {
+  handleChange9({ detail }) {
     this.setData({
       value9: detail.value
     })

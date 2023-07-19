@@ -10,55 +10,60 @@ Page({
     show2: false,
     show3: false,
     show4: false
-
   },
-  showActions1 () {
+  showActions1() {
     this.setData({
       show: true,
       actions: [
         {
           name: '选项1'
-        }, {
+        },
+        {
           name: '选项2'
-        }, {
+        },
+        {
           name: '选项3',
           subname: '描述信息'
         }
       ]
     })
   },
-  showActions2 () {
+  showActions2() {
     this.setData({
       show: true,
       actions: [
         {
           name: '颜色',
           color: '#0083ff'
-        }, {
+        },
+        {
           name: '禁用',
           disabled: true
-        }, {
+        },
+        {
           loading: true
         }
       ]
     })
   },
-  showActions3 () {
+  showActions3() {
     this.setData({
       show1: true,
       actions: [
         {
           name: '选项1'
-        }, {
+        },
+        {
           name: '选项2'
-        }, {
+        },
+        {
           name: '选项3',
           subname: '描述信息'
         }
       ]
     })
   },
-  showActions4 () {
+  showActions4() {
     this.setData({
       show2: true,
       panels: [
@@ -89,7 +94,7 @@ Page({
       ]
     })
   },
-  showActions5 () {
+  showActions5() {
     this.setData({
       show3: true,
       panels: [
@@ -144,40 +149,40 @@ Page({
       ]
     })
   },
-  showActions6 () {
+  showActions6() {
     this.setData({
       show4: true
     })
   },
-  close () {
+  close() {
     this.setData({
       show: false
     })
   },
-  close1 () {
+  close1() {
     this.setData({
       show1: false
     })
   },
-  close2 () {
+  close2() {
     this.setData({
       show2: false
     })
   },
-  close3 () {
+  close3() {
     this.setData({
       show3: false
     })
   },
-  close4 () {
+  close4() {
     this.setData({
       show4: false
     })
   },
-  select ({ detail: { item, index } }) {
+  select({ detail: { item, index } }) {
     Toast(`当前选中项: ${item.title}, 下标: ${index}`, 1)
   },
-  select1 ({ detail: { item, rowIndex, colIndex } }) {
+  select1({ detail: { item, rowIndex, colIndex } }) {
     Toast(`当前选中项: ${item.title}, 行下标: ${rowIndex}, 列下标: ${colIndex}`)
   }
 })

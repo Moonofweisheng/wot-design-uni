@@ -4,7 +4,7 @@ import clickoutside from '../../wot-design/common/clickoutside'
 Page({
   data: {
     value: 'close',
-    beforeClose (reason, position) {
+    beforeClose(reason, position) {
       if (reason === 'click') {
         Toast(`${reason} ${position}导致滑动按钮关闭`)
       } else {
@@ -12,20 +12,20 @@ Page({
       }
     }
   },
-  changeState (event) {
+  changeState(event) {
     const { value } = event.target.dataset
     this.setData({ value: value })
   },
 
-  handleClick (event) {
+  handleClick(event) {
     Toast(`点击${event.detail.value}关闭操作按钮`)
   },
 
-  handleAction (event) {
+  handleAction(event) {
     Toast(`点击了${event.target.dataset.action}`)
   },
 
   clickoutside: clickoutside,
 
-  noop () {}
+  noop() {}
 })

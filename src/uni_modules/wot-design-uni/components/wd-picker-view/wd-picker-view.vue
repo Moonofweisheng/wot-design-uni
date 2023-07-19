@@ -117,6 +117,8 @@ watch(
 watch(
   () => props.columnChange,
   (newValue) => {
+    console.log(newValue, 'columnChange')
+
     if (newValue && getType(newValue) !== 'function') {
       throw Error('The type of columnChange must be Function')
     }
@@ -281,10 +283,10 @@ function onChange({ detail: { value } }) {
   value = value.map((v) => {
     return Number(v || 0)
   })
+  const index = getChangeDiff(value)
   selectedIndex.value = deepClone(value)
 
   nextTick(() => {
-    const index = getChangeDiff(value)
     // 执行多级联动
     if (props.columnChange) {
       // columnsChange 可能有异步操作，需要添加 resolve 进行回调通知，形参小于4个则为同步

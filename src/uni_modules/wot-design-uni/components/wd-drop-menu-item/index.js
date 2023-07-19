@@ -20,7 +20,7 @@ VueComponent({
     // 当前选中的value
     value: {
       type: null,
-      observer (val) {
+      observer(val) {
         if (typeof val !== 'number' && typeof val !== 'string') {
           console.warn('[wot-design] warning(wd-drop-menu-item): the type of value should be a number or a string.')
           return
@@ -32,7 +32,7 @@ VueComponent({
     // 可能是 array || String
     options: {
       type: Array,
-      observer () {
+      observer() {
         this.updateTitle()
       }
     },
@@ -44,7 +44,7 @@ VueComponent({
     },
     title: {
       type: String,
-      observer () {
+      observer() {
         this.updateTitle()
       }
     },
@@ -64,26 +64,26 @@ VueComponent({
   relations: {
     '../dropMenu/index': {
       type: 'parent',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
   },
-  beforeCreate () {
+  beforeCreate() {
     pushToQueue(this)
     this.updateTitle = debounce(this.updateTitle, 50)
   },
-  destroyed () {
+  destroyed() {
     removeFromQueue(this)
   },
-  mounted () {
+  mounted() {
     this.setDisplayTitle()
   },
   methods: {
-    setDisplayTitle () {
+    setDisplayTitle() {
       const { title, value, options, valueKey, labelKey } = this.data
 
       if (title) {
@@ -103,7 +103,7 @@ VueComponent({
 
       console.warn('[wot-design] warning(wd-drop-menu-item): no value is matched in the options option.')
     },
-    updateTitle () {
+    updateTitle() {
       this.setDisplayTitle()
       this.parent && this.parent.updateTitle()
     },
@@ -112,33 +112,33 @@ VueComponent({
      * @param {string} key 键名
      * @param {null} value 键值
      */
-    set (key, value) {
+    set(key, value) {
       this.setData({
         [key]: value
       })
     },
     // 模拟单选操作 默认根据 value 选中操作
-    choose (event) {
+    choose(event) {
       if (this.data.disabled) return
       const index = event.currentTarget.dataset.index
       const { valueKey } = this.data
       const item = this.data.options[index]
       this.setData({
-        value: (item[valueKey] !== '' && item[valueKey] !== undefined) ? item[valueKey] : item
+        value: item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item
       })
       this.close()
       this.$emit('change', {
-        value: (item[valueKey] !== '' && item[valueKey] !== undefined) ? item[valueKey] : item,
+        value: item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item,
         selectedItem: item
       })
       this.parent.updateTitle()
     },
     // 外部关闭弹出框
-    close () {
+    close() {
       this.setData({ showPop: false })
       this.parent.fold(-1)
     },
-    open () {
+    open() {
       const { direction, modal, closeOnClickModal, duration, offset } = this.parent.data
       this.setData({
         showWrapper: true,
@@ -151,19 +151,19 @@ VueComponent({
       })
       this.$emit('open')
     },
-    onPopupClose () {
+    onPopupClose() {
       this.setData({
         showWrapper: false
       })
       this.$emit('closed')
     },
-    handleOpen () {
+    handleOpen() {
       this.$emit('open')
     },
-    handleOpened () {
+    handleOpened() {
       this.$emit('opened')
     },
-    handleClose () {
+    handleClose() {
       this.$emit('close')
     }
   }

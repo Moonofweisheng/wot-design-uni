@@ -118,8 +118,18 @@ const rootClass = computed(() => {
 onBeforeMount(() => {
   observerTransition()
   if (props.safeAreaInsetBottom) {
-    const { safeArea, screenHeight } = uni.getSystemInfoSync()
-    safeBottom.value = screenHeight - safeArea!.bottom || 0
+    const { safeArea, screenHeight, safeAreaInsets } = uni.getSystemInfoSync()
+
+    if (safeArea) {
+      // #ifdef MP-WEIXIN
+      safeBottom.value = screenHeight - safeArea!.bottom || 0
+      // #endif
+      // #ifndef MP-WEIXIN
+      safeBottom.value = safeAreaInsets ? safeAreaInsets.bottom : 0
+      // #endif
+    } else {
+      safeBottom.value = 0
+    }
   }
   if (props.modelValue) {
     enter()

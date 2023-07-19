@@ -69,7 +69,7 @@
         @change="pickerViewChange"
         @pickstart="onPickStart"
         @pickend="onPickEnd"
-        :columnChange="columnChange"
+        :column-change="columnChange"
       />
     </wd-popup>
   </view>

@@ -5,15 +5,15 @@ VueComponent({
   relations: {
     '../radio/index': {
       type: 'descendant',
-      linked (child) {
+      linked(child) {
         this.children = this.children || []
         // 在建立relations时radioGroup保存radio实例中的value，注意value的唯一性。
         this.checkValue(child)
         this.children.push(child)
       },
-      unlinked (target) {
+      unlinked(target) {
         const index = this.children.indexOf(target)
-        this.children = this.children.filter(child => child !== target)
+        this.children = this.children.filter((child) => child !== target)
 
         if (index === 0 && this.children.length > 0) {
           this.children[0].setData({
@@ -26,7 +26,7 @@ VueComponent({
   props: {
     value: {
       type: null,
-      observer (value, old) {
+      observer(value, old) {
         // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
         if (value === null || value === undefined) {
           throw Error('value can\'t be null or undefined')
@@ -41,7 +41,7 @@ VueComponent({
     shape: {
       type: String,
       value: 'check',
-      observer (value) {
+      observer(value) {
         // type: 'dot', 'button', 'check'
         const type = ['check', 'dot', 'button']
         if (type.indexOf(value) === -1) throw Error(`shape must be one of ${type.toString()}`)
@@ -51,34 +51,34 @@ VueComponent({
     checkedColor: {
       type: String,
       value: '#4d80f0',
-      observer (value) {
+      observer(value) {
         this.updateAllChild({ checkedColor: value })
       }
     },
     disabled: {
       type: Boolean,
       value: false,
-      observer (value) {
+      observer(value) {
         this.updateAllChild({ disabled: value })
       }
     },
     cell: {
       type: Boolean,
       value: false,
-      observer (value) {
+      observer(value) {
         this.updateAllChild({ cell: value })
       }
     },
     size: {
       type: String,
-      observer (value) {
+      observer(value) {
         this.updateAllChild({ size: value })
       }
     },
     inline: {
       type: Boolean,
       value: false,
-      observer (value) {
+      observer(value) {
         this.updateAllChild({ inline: value })
       }
     }
@@ -87,13 +87,10 @@ VueComponent({
     /**
      * @description 检测radio绑定的value是否已经被其他节点绑定
      */
-    checkValue (child) {
-      this.children.forEach(node => {
+    checkValue(child) {
+      this.children.forEach((node) => {
         const value = child.data.value
-        if (
-          node !== child &&
-          node.data.value === value
-        ) {
+        if (node !== child && node.data.value === value) {
           throw Error(`The radio's bound value: ${value} has been used `)
         }
       })
@@ -103,16 +100,12 @@ VueComponent({
      * @param value - radio绑定的value
      * @param old - 老节点，默认为已经被选中的节点
      */
-    changeSelect (value) {
+    changeSelect(value) {
       // 没有radio子元素，不执行任何操作
-      if (
-        !this.children ||
-        this.children.length === 0 ||
-        value === null
-      ) {
+      if (!this.children || this.children.length === 0 || value === null) {
         return
       }
-      this.children.forEach(child => {
+      this.children.forEach((child) => {
         child.setData({
           isChecked: child.data.value === value
         })
@@ -122,28 +115,25 @@ VueComponent({
      * @description 使用父元素的Props覆盖子元素Props中值为null的key
      * @param Props
      */
-    updateAllChild (data) {
+    updateAllChild(data) {
       const keys = Object.keys(data)
       if (!data || keys.length === 0) return
 
-      this.children && this.children.forEach(child => {
-        const will = {}
-        keys.forEach(key => {
-          if (
-            data[key] !== null &&
-            data[key] !== undefined &&
-            child.data[key] === null
-          ) {
-            will[key] = data[key]
-          }
+      this.children &&
+        this.children.forEach((child) => {
+          const will = {}
+          keys.forEach((key) => {
+            if (data[key] !== null && data[key] !== undefined && child.data[key] === null) {
+              will[key] = data[key]
+            }
+          })
+          child.setData(will)
         })
-        child.setData(will)
-      })
     },
     /**
      * @description 处理radio子节点通知
      */
-    handleClick (value) {
+    handleClick(value) {
       this.$emit('change', {
         value
       })

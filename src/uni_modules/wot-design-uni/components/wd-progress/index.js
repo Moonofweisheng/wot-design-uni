@@ -6,7 +6,7 @@ VueComponent({
     percentage: {
       type: Number,
       value: 0,
-      observer (percent) {
+      observer(percent) {
         // 校验类型
         if (Number.isNaN(percent) || percent < 0 || percent > 100) {
           throw Error('The value of percentage must be between 0 and 100')
@@ -21,7 +21,7 @@ VueComponent({
     color: {
       type: null,
       value: [''],
-      observer (color) {
+      observer(color) {
         const type = getType(color)
         const canUse = ['string', 'array']
         // 类型判断
@@ -55,7 +55,7 @@ VueComponent({
     progressClass: ''
   },
   methods: {
-    computeProgressClass () {
+    computeProgressClass() {
       const { status } = this.data
       let progressClass = []
       status && progressClass.push(`is-${status}`)
@@ -67,7 +67,7 @@ VueComponent({
      * @param {Number} targetPercent 目标值
      * @param {String} showColor 目标颜色
      */
-    update (targetPercent, showColor) {
+    update(targetPercent, showColor) {
       // 需要等上一个定时器跑完
       if (this.timer) return
       const { showPercent: nowPercent, duration } = this.data
@@ -91,7 +91,7 @@ VueComponent({
     /**
      * @description 控制进度条的进度和每段的颜色
      */
-    controlProgress () {
+    controlProgress() {
       const {
         // 当前百分比
         showPercent,
@@ -106,15 +106,12 @@ VueComponent({
        * 数组边界安全判断
        */
       if (colorArray.length === 0) throw Error('The colorArray is empty')
-      const isStrArray = colorArray.every(item => typeof item === 'string')
-      const isObjArray = colorArray.every(color => color.hasOwnProperty('color') && color.hasOwnProperty('percentage'))
+      const isStrArray = colorArray.every((item) => typeof item === 'string')
+      const isObjArray = colorArray.every((color) => color.hasOwnProperty('color') && color.hasOwnProperty('percentage'))
       if (!isStrArray && !isObjArray) {
         throw Error('Color must be String or Object with color and percentage')
       }
-      if (
-        isObjArray &&
-        colorArray.some(({ percentage }) => Number.isNaN(parseInt(percentage)))
-      ) {
+      if (isObjArray && colorArray.some(({ percentage }) => Number.isNaN(parseInt(percentage)))) {
         throw Error('All the percentage must can be formatted to Number')
       }
       /**
@@ -124,32 +121,32 @@ VueComponent({
       const partList = isObjArray
         ? colorArray.sort((a, b) => a.percentage - b.percentage)
         : colorArray.map((item, index) => {
-          return {
-            color: item,
-            percentage: (index + 1) * partNum
-          }
-        })
+            return {
+              color: item,
+              percentage: (index + 1) * partNum
+            }
+          })
       /**
        * 找到当前目标
        */
       showPercent > percentage
-        // 减小不加动画，找到第一个比target大的锚点，取锚点颜色并设置target值
-        ? partList.some(part => {
-          if (percentage <= part.percentage) {
-            this.update(percentage, part.color)
-            return true
-          }
-        })
-        // 增加使用分段动画
-        : partList.some((part, index) => {
-          if (showPercent < part.percentage && part.percentage <= percentage) {
-            // 找到第一个比now大的点，如果这个点比target小或等，就把这个点设置为下一个即将展示的点
-            this.update(part.percentage, part.color)
-            return true
-          } else if (index === partList.length - 1) {
-            this.update(percentage, part.color)
-          }
-        })
+        ? // 减小不加动画，找到第一个比target大的锚点，取锚点颜色并设置target值
+          partList.some((part) => {
+            if (percentage <= part.percentage) {
+              this.update(percentage, part.color)
+              return true
+            }
+          })
+        : // 增加使用分段动画
+          partList.some((part, index) => {
+            if (showPercent < part.percentage && part.percentage <= percentage) {
+              // 找到第一个比now大的点，如果这个点比target小或等，就把这个点设置为下一个即将展示的点
+              this.update(part.percentage, part.color)
+              return true
+            } else if (index === partList.length - 1) {
+              this.update(percentage, part.color)
+            }
+          })
     }
   }
 })

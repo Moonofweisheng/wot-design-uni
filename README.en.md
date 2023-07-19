@@ -1,7 +1,7 @@
 # wot-design-uni
 
 #### Description
-uni-app版本的wot-design-mini组件库
+uni-app版本的wot-design-uni组件库
 
 #### Software Architecture
 Software architecture description

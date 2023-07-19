@@ -14,7 +14,7 @@ Page({
     value10: 1,
     value11: 1
   },
-  change (event) {
+  change(event) {
     const index = event.target.dataset.index
     this.setData({
       [`value${index}`]: event.detail.value

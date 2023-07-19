@@ -15,7 +15,7 @@ VueComponent({
     }
   },
   methods: {
-    handleClick () {
+    handleClick() {
       let { value, allowReset, descFirst } = this.data
       if (descFirst) {
         if (value === 0) {

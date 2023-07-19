@@ -14,18 +14,18 @@ VueComponent({
   relations: {
     '../col/index': {
       type: 'descendant',
-      linked (target) {
+      linked(target) {
         this.children = this.children || []
         this.children.push(target)
         target.setGutter(this.data.gutter)
       },
-      unlinked (target) {
-        this.children = this.children.filter(child => child !== target)
+      unlinked(target) {
+        this.children = this.children.filter((child) => child !== target)
       }
     }
   },
   methods: {
-    setGutter () {
+    setGutter() {
       const { gutter } = this.data
       if (gutter < 0) {
         console.warn('[wot design] warning(wd-row): attribute gutter must be greater than or equal to 0')
@@ -33,9 +33,11 @@ VueComponent({
       const margin = `${gutter / 2}px`
       const style = gutter ? `margin-left: -${margin}; margin-right: -${margin};` : ''
       this.setData({ style })
-      gutter && this.children && this.children.forEach(item => {
-        item.setGutter(gutter)
-      })
+      gutter &&
+        this.children &&
+        this.children.forEach((item) => {
+          item.setGutter(gutter)
+        })
     }
   }
 })

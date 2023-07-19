@@ -16,11 +16,11 @@ VueComponent({
   relations: {
     '../stickyBox/index': {
       type: 'parent',
-      linked (target) {
+      linked(target) {
         this.parent = target
         this.setData({ parent: false })
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -37,7 +37,7 @@ VueComponent({
     /**
      * @description 清除无用的 viewport 观察者
      */
-    clearObserver () {
+    clearObserver() {
       const { observerList } = this.data
       while (observerList.length !== 0) {
         observerList.pop().disconnect()
@@ -46,7 +46,7 @@ VueComponent({
     /**
      * @description 创建新的 viewport 观察者
      */
-    createObserver () {
+    createObserver() {
       const { observerList } = this.data
       observerList.push(this.createIntersectionObserver())
       return observerList.slice(-1)[0]
@@ -54,7 +54,7 @@ VueComponent({
     /**
      * @description 监听到吸顶元素尺寸大小变化时，立即重新模拟吸顶
      */
-    resizeHandler ({ detail: { width, height } }) {
+    resizeHandler({ detail: { width, height } }) {
       // 当吸顶内容处于absolute、fixed时，为了防止父容器坍塌，需要手动设置父容器高宽。
       renderData(this, {
         width,
@@ -68,16 +68,18 @@ VueComponent({
     /**
      * @description 模拟吸顶逻辑
      */
-    observerContentScroll () {
+    observerContentScroll() {
       const { offsetTop, height, width } = this.data
       // 视图在 render tree 中未呈现，吸顶无任何意义。
       if (height === 0 && width === 0) return
       const offset = offsetTop + height
       this.clearObserver()
-      this.createObserver().relativeToViewport({
-        top: -offset // viewport上边界往下拉
-      }).observe('.wd-sticky', this.scrollHandler.bind(this))
-      this.getRect('.wd-sticky').then(res => {
+      this.createObserver()
+        .relativeToViewport({
+          top: -offset // viewport上边界往下拉
+        })
+        .observe('.wd-sticky', this.scrollHandler.bind(this))
+      this.getRect('.wd-sticky').then((res) => {
         // 当 wd-sticky 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
         if (res.bottom <= offset) this.scrollHandler({ boundingClientRect: res })
       })
@@ -85,7 +87,7 @@ VueComponent({
     /**
      * @description 根据位置进行吸顶
      */
-    scrollHandler ({ boundingClientRect }) {
+    scrollHandler({ boundingClientRect }) {
       const { offsetTop, height } = this.data
       // sticky 高度大于或等于 wd-sticky-box，使用 wd-sticky-box 无任何意义
       if (this.parent && height >= this.parent.data.height) {

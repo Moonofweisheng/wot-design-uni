@@ -9,21 +9,17 @@ VueComponent({
   /**
    * 注意，datetimePickerView和datetimePicker有公共逻辑，抽离成/mixins/datetimePickerView，通过mixins options注入
    */
-  externalClasses: [
-    'custom-view-class',
-    'custom-label-class',
-    'custom-value-class'
-  ],
+  externalClasses: ['custom-view-class', 'custom-label-class', 'custom-value-class'],
 
   behaviors: [cell, 'jd://form-field'],
 
   relations: {
     '../cellGroup/index': {
       type: 'ancestor',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -35,7 +31,7 @@ VueComponent({
     // 选中项，当 type 为 time 时，类型为字符串，否则为 时间戳
     value: {
       type: null,
-      observer (val, oldVal) {
+      observer(val, oldVal) {
         if (isEqual(val, oldVal)) return
 
         if (getType(val) === 'array') {
@@ -96,7 +92,7 @@ VueComponent({
     // 自定义过滤选项的函数，返回列的选项数组
     filter: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         // 每次变化需要重置picker的filter
         this.updateFn('filter', fn)
       }
@@ -104,7 +100,7 @@ VueComponent({
     // 自定义弹出层选项文案的格式化函数，返回一个字符串
     formatter: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         // 每次变化需要重置picker的formatter
         this.updateFn('formatter', fn)
       }
@@ -112,7 +108,7 @@ VueComponent({
     // 自定义展示文案的格式化函数，返回一个字符串
     displayFormat: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of displayFormat must be Function')
         }
@@ -123,7 +119,7 @@ VueComponent({
     // 自定义展示文案的格式化函数，返回一个字符串
     beforeConfirm: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of beforeConfirm must be Function')
         }
@@ -134,7 +130,7 @@ VueComponent({
     // 自定义展示文案的格式化函数，返回一个字符串
     displayFormatTabLabel: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of displayFormatTabLabel must be Function')
         }
@@ -144,7 +140,7 @@ VueComponent({
     },
     defaultValue: {
       type: null,
-      observer (val) {
+      observer(val) {
         if (getType(val) === 'array') {
           this.setData({
             innerValue: this.getDefaultInnerValue({
@@ -187,9 +183,9 @@ VueComponent({
   },
 
   methods: {
-    noop () { },
+    noop() {},
 
-    getDefaultInnerValue ({ isRegion, isEnd } = {}) {
+    getDefaultInnerValue({ isRegion, isEnd } = {}) {
       const { value, defaultValue } = this.data
 
       if (isRegion) {
@@ -204,12 +200,12 @@ VueComponent({
     },
 
     // 对外暴露接口，打开弹框
-    open () {
+    open() {
       this.showPopup()
     },
 
     // 对外暴露接口，关闭弹框
-    close () {
+    close() {
       this.onCancel()
     },
 
@@ -218,22 +214,24 @@ VueComponent({
      * @param {String} key 修改的键名
      * @param {Function} fn 修改的函数主体
      */
-    updateFn (key, fn) {
-      this.picker && this.picker.setData({
-        [key]: fn
-      })
-
-      if (this.data.region) {
-        this.picker1 && this.picker1.setData({
+    updateFn(key, fn) {
+      this.picker &&
+        this.picker.setData({
           [key]: fn
         })
+
+      if (this.data.region) {
+        this.picker1 &&
+          this.picker1.setData({
+            [key]: fn
+          })
       }
     },
 
     /**
      * @description 展示popup，小程序有个bug，在picker-view弹出时设置value，会触发change事件，而且会将picker-view的value多次触发change重置为第一项
      */
-    showPopup () {
+    showPopup() {
       if (this.data.disabled || this.data.readonly) return
 
       this.$emit('open')
@@ -261,7 +259,7 @@ VueComponent({
     /**
      * @description 区域选择时tab标签切换时触发
      */
-    tabChange (event) {
+    tabChange(event) {
       this.setData({
         showStart: !this.data.showStart
       })
@@ -277,7 +275,7 @@ VueComponent({
     /**
      * @description datetimePickerView change 事件
      */
-    onChangeStart ({ detail: { value } }) {
+    onChangeStart({ detail: { value } }) {
       this.setData({
         innerValue: value
       })
@@ -304,7 +302,7 @@ VueComponent({
     /**
      * @description 区域选择 下方 datetimePickerView change 事件
      */
-    onChangeEnd ({ detail: { value } }) {
+    onChangeEnd({ detail: { value } }) {
       this.setData({
         endInnerValue: value,
         showTabLabel: [this.data.showTabLabel[0], this.setTabLabel(1)]
@@ -323,7 +321,7 @@ VueComponent({
     /**
      * @description 点击取消按钮触发。关闭popup，触发cancel事件。
      */
-    onCancel () {
+    onCancel() {
       this.setData({
         popupShow: false
       })
@@ -349,7 +347,7 @@ VueComponent({
     },
 
     /** picker触发confirm事件，同步触发confirm事件 */
-    onConfirm () {
+    onConfirm() {
       if (this.data.loading) return
 
       // 如果当前还在滑动且未停止下来，则锁住先不确认，等滑完再自动确认，避免pickview值未更新
@@ -362,21 +360,25 @@ VueComponent({
 
       const { beforeConfirm } = this.data
       if (beforeConfirm) {
-        beforeConfirm(this.data.innerValue, isPass => {
-          isPass && this.handleConfirm()
-        }, this)
+        beforeConfirm(
+          this.data.innerValue,
+          (isPass) => {
+            isPass && this.handleConfirm()
+          },
+          this
+        )
       } else {
         this.handleConfirm()
       }
     },
 
-    onPickStart () {
+    onPickStart() {
       this.setData({
         isPicking: true
       })
     },
 
-    onPickEnd () {
+    onPickEnd() {
       this.setData({
         isPicking: false
       })
@@ -392,7 +394,7 @@ VueComponent({
       }, 50)
     },
 
-    handleConfirm () {
+    handleConfirm() {
       if (this.data.loading || this.data.disabled) {
         this.setData({
           popupShow: false
@@ -415,7 +417,7 @@ VueComponent({
      * @param {Number} index 索引标志位，有三个有效值; 0(默认):上方picker索引; 1:下方picker索引;
      * @return {String} showTabLabel
      */
-    setTabLabel (index = 0) {
+    setTabLabel(index = 0) {
       if (this.data.region) {
         const items = index === 0 ? this.picker.picker.getSelects() : this.picker1.picker.getSelects()
         return this.defaultDisplayFormat(items, true)
@@ -427,7 +429,7 @@ VueComponent({
      * @param {Boolean} tab 是否修改tab展示值（尽在区域选择情况下生效）
      * @param {Boolean} isConfirm 是否提交当前修改
      */
-    setShowValue (tab = false, isConfirm = false) {
+    setShowValue(tab = false, isConfirm = false) {
       const { value, region } = this.data
       if (region) {
         const items = this.picker.picker.getSelects()
@@ -435,13 +437,13 @@ VueComponent({
         this.setData({
           showValue: tab
             ? this.data.showValue
-            : [(value[0] || isConfirm ? this.defaultDisplayFormat(items) : ''), (value[1] || isConfirm ? this.defaultDisplayFormat(endItems) : '')],
+            : [value[0] || isConfirm ? this.defaultDisplayFormat(items) : '', value[1] || isConfirm ? this.defaultDisplayFormat(endItems) : ''],
           showTabLabel: [this.defaultDisplayFormat(items, true), this.defaultDisplayFormat(endItems, true)]
         })
       } else {
         const items = this.picker.picker.getSelects()
         this.setData({
-          showValue: (value || isConfirm) ? this.defaultDisplayFormat(items) : ''
+          showValue: value || isConfirm ? this.defaultDisplayFormat(items) : ''
         })
       }
     },
@@ -452,7 +454,7 @@ VueComponent({
      * @param {Boolean} tabLabel 当前返回的是否是展示tab上的标签
      * @return {String} showValue / showTabLabel
      */
-    defaultDisplayFormat (items, tabLabel = false) {
+    defaultDisplayFormat(items, tabLabel = false) {
       if (items.length === 0) return ''
 
       if (tabLabel && this.data.displayFormatTabLabel) {
@@ -485,14 +487,14 @@ VueComponent({
       }
 
       switch (this.data.type) {
-      case 'date':
-        return `${items[0].label}-${items[1].label}-${items[2].label}`
-      case 'year-month':
-        return `${items[0].label}-${items[1].label}`
-      case 'time':
-        return `${items[0].label}:${items[1].label}`
-      case 'datetime':
-        return `${items[0].label}-${items[1].label}-${items[2].label} ${items[3].label}:${items[4].label}`
+        case 'date':
+          return `${items[0].label}-${items[1].label}-${items[2].label}`
+        case 'year-month':
+          return `${items[0].label}-${items[1].label}`
+        case 'time':
+          return `${items[0].label}:${items[1].label}`
+        case 'datetime':
+          return `${items[0].label}-${items[1].label}-${items[2].label} ${items[3].label}:${items[4].label}`
       }
     },
 
@@ -506,7 +508,7 @@ VueComponent({
      * @param {Array} boundary 当前变量的限制值，决定禁用的边界值
      * @return {Boolean} disabled
      */
-    columnDisabledRules (isStart, columns, cIndex, value, currentValue, boundary) {
+    columnDisabledRules(isStart, columns, cIndex, value, currentValue, boundary) {
       const { type } = this.data
       // 0年 1月 2日 3時 4分
       // startPicker 除最小值外 还需要有一个时间限制, endPicker 时间选择后, startPicker 的 添加一个时间限制boundary min->boundary
@@ -526,13 +528,19 @@ VueComponent({
         if (column.type === 'month' && currentValue[0] === year) {
           return isStart ? value > month : value < month
         }
-        if (column.type === 'date' && (currentValue[0] === year && currentValue[1] === month)) {
+        if (column.type === 'date' && currentValue[0] === year && currentValue[1] === month) {
           return isStart ? value > date : value < date
         }
         if (column.type === 'hour' && currentValue[0] === year && currentValue[1] === month && currentValue[2] === date) {
           return isStart ? value > hour : value < hour
         }
-        if (column.type === 'minute' && currentValue[0] === year && currentValue[1] === month && currentValue[2] === date && currentValue[3] === hour) {
+        if (
+          column.type === 'minute' &&
+          currentValue[0] === year &&
+          currentValue[1] === month &&
+          currentValue[2] === date &&
+          currentValue[3] === hour
+        ) {
           return isStart ? value > minute : value < minute
         }
       } else if (type === 'year-month') {
@@ -579,7 +587,7 @@ VueComponent({
      * @param {Component} picker datetimePickerView对象
      * @return {Array} columns
      */
-    customColumnFormatter (picker) {
+    customColumnFormatter(picker) {
       const { type, innerValue, endInnerValue } = this.data
       const { startSymbol, formatter } = picker.data
       // 校准上下方picker的value值，与内部innerValue对应
@@ -611,13 +619,13 @@ VueComponent({
     }
   },
 
-  beforeCreate () {
+  beforeCreate() {
     // pickerView挂载到全局
     this.picker = this.selectComponent(`#${this.data.pickerId}`)
     this.picker1 = this.selectComponent(`#${this.data.pickerId1}`)
   },
 
-  created () {
+  created() {
     const { value } = this.data
 
     if (getType(value) === 'array') {

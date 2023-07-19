@@ -41,21 +41,21 @@ VueComponent({
   relations: {
     '../grid/index': {
       type: 'parent',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
   },
 
-  mounted () {
+  mounted() {
     this.init()
   },
 
   methods: {
-    init () {
+    init() {
       if (!this.parent) return
       const { children, data } = this.parent
       const { column, gutter, square, border, bgColor } = data
@@ -65,7 +65,8 @@ VueComponent({
       // 单独定义正方形
       const squareStyle = square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
       // 间隔+正方形
-      const gutterContentStyle = (gutter && square) ? `right: ${gutter}px; bottom:${gutter}px;height: auto; background-color: ${bgColor}` : `background-color: ${bgColor}`
+      const gutterContentStyle =
+        gutter && square ? `right: ${gutter}px; bottom:${gutter}px;height: auto; background-color: ${bgColor}` : `background-color: ${bgColor}`
       this.setData({
         border,
         square,
@@ -74,7 +75,7 @@ VueComponent({
         style: `width: ${width}; ${squareStyle || gutterStyle}`
       })
     },
-    click (event) {
+    click(event) {
       if (!this.parent.data.clickable) return
       const { url, linkType } = this.data
       if (url) {
@@ -82,7 +83,7 @@ VueComponent({
       }
       this.$emit('itemclick')
     },
-    set (key, value) {
+    set(key, value) {
       this.setData({ [key]: value })
     }
   }

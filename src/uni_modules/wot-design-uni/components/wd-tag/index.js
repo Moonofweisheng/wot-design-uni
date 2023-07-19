@@ -9,7 +9,7 @@ VueComponent({
     },
     type: {
       type: String,
-      observer (s) {
+      observer(s) {
         if (!s) return
         // type: 'primary', 'danger', 'warning', 'success'
         const type = ['primary', 'danger', 'warning', 'success']
@@ -53,12 +53,12 @@ VueComponent({
     dynamicInput: false
   },
   observers: {
-    'dynamicInput' () {
+    dynamicInput() {
       this.computeTagClass()
     }
   },
   methods: {
-    computeTagClass () {
+    computeTagClass() {
       const { type, plain, round, mark, dynamic, dynamicInput, icon, useIconSlot } = this.data
       let tagClass = []
       type && tagClass.push(`is-${type}`)
@@ -71,28 +71,28 @@ VueComponent({
       tagClass = tagClass.join(' ')
       this.setData({ tagClass })
     },
-    handleClick () {
+    handleClick() {
       this.$emit('click')
     },
-    handleClose () {
+    handleClose() {
       this.$emit('close')
     },
-    handleAdd () {
+    handleAdd() {
       this.setData({
         dynamicInput: true,
         dynamicValue: ''
       })
     },
-    handleBlur () {
+    handleBlur() {
       this.setDynamicInput()
     },
-    handleConfirm (event) {
+    handleConfirm(event) {
       this.setDynamicInput()
       this.$emit('confirm', {
         value: event.detail.value
       })
     },
-    setDynamicInput () {
+    setDynamicInput() {
       this.setData({
         dynamicInput: false
       })

@@ -8,17 +8,17 @@ Page({
     total3: 160,
     pageSize3: 20
   },
-  handleChange1 ({ detail }) {
+  handleChange1({ detail }) {
     this.setData({
       page1: detail.value
     })
   },
-  handleChange2 ({ detail }) {
+  handleChange2({ detail }) {
     this.setData({
       page2: detail.value
     })
   },
-  handleChange3 ({ detail }) {
+  handleChange3({ detail }) {
     this.setData({
       page3: detail.value
     })

@@ -4,37 +4,37 @@ Page({
     name: '',
     customShow: false
   },
-  fade () {
+  fade() {
     this.transition('fade')
   },
-  fadeUp () {
+  fadeUp() {
     this.transition('fade-up')
   },
-  fadeDown () {
+  fadeDown() {
     this.transition('fade-down')
   },
-  fadeLeft () {
+  fadeLeft() {
     this.transition('fade-left')
   },
-  fadeRight () {
+  fadeRight() {
     this.transition('fade-right')
   },
-  slideUp () {
+  slideUp() {
     this.transition('slide-up')
   },
-  slideDown () {
+  slideDown() {
     this.transition('slide-down')
   },
-  slideLeft () {
+  slideLeft() {
     this.transition('slide-left')
   },
-  slideRight () {
+  slideRight() {
     this.transition('slide-right')
   },
-  zoomIn () {
+  zoomIn() {
     this.transition('zoom-in')
   },
-  custom () {
+  custom() {
     this.setData({
       customShow: true
     })
@@ -44,7 +44,7 @@ Page({
       })
     }, 1200)
   },
-  transition (name) {
+  transition(name) {
     this.setData({
       name,
       show: true

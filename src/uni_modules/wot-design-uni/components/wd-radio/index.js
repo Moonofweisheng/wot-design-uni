@@ -4,7 +4,7 @@ VueComponent({
   props: {
     value: {
       type: null,
-      observer (value, old) {
+      observer(value, old) {
         // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
         if (value === null || value === undefined) {
           throw Error('value can\'t be null or undefined')
@@ -25,7 +25,7 @@ VueComponent({
     shape: {
       type: String,
       value: null,
-      observer (target) {
+      observer(target) {
         // type: 'dot', 'button', 'check'
         const type = ['check', 'dot', 'button']
         if (type.indexOf(target) === -1) throw Error(`shape must be one of ${type.toString()}`)
@@ -56,7 +56,7 @@ VueComponent({
   relations: {
     '../radioGroup/index': {
       type: 'ancestor',
-      linked (target) {
+      linked(target) {
         this.parent = target
 
         const { shape, checkedColor, disabled, inline, size, cell } = this.parent.data
@@ -70,12 +70,8 @@ VueComponent({
         }
         const keys = Object.keys(data)
         const will = {}
-        keys.forEach(key => {
-          if (
-            data[key] !== null &&
-            data[key] !== undefined &&
-            this.data[key] === null
-          ) {
+        keys.forEach((key) => {
+          if (data[key] !== null && data[key] !== undefined && this.data[key] === null) {
             will[key] = data[key]
           }
         })
@@ -84,7 +80,7 @@ VueComponent({
           isChecked: this.data.value === this.parent.data.value
         })
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -96,14 +92,9 @@ VueComponent({
     /**
      * 点击子元素，通知父元素触发change事件
      */
-    handleClick () {
+    handleClick() {
       const { value, disabled } = this.data
-      if (
-        !disabled &&
-        this.parent &&
-        value !== null &&
-        value !== undefined
-      ) {
+      if (!disabled && this.parent && value !== null && value !== undefined) {
         this.parent.handleClick(value)
         this.parent.setData({ value })
       }

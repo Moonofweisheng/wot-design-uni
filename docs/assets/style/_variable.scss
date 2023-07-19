@@ -1,0 +1,136 @@
+/**
+ * 文档变量
+ */
+
+/* 背景颜色 */
+$color-bg: #fefefe;
+
+/* 白色 */
+$color-white: #fff;
+
+/* 黑色 */
+$color-black: #000;
+$color-black-l1: mix($color-white, $color-black, 10%);
+$color-black-l2: mix($color-white, $color-black, 20%);
+$color-black-l3: mix($color-white, $color-black, 30%);
+$color-black-l4: mix($color-white, $color-black, 40%);
+$color-black-l5: mix($color-white, $color-black, 50%);
+$color-black-l6: mix($color-white, $color-black, 60%);
+$color-black-l7: mix($color-white, $color-black, 70%);
+$color-black-l8: mix($color-white, $color-black, 80%);
+$color-black-l9: mix($color-white, $color-black, 90%);
+
+/* 主题色 */
+$color-theme: #0083ff;
+$color-theme-l1: mix($color-white, $color-theme, 10%);
+$color-theme-l2: mix($color-white, $color-theme, 20%);
+$color-theme-l3: mix($color-white, $color-theme, 30%);
+$color-theme-l4: mix($color-white, $color-theme, 40%);
+$color-theme-l5: mix($color-white, $color-theme, 50%);
+$color-theme-l6: mix($color-white, $color-theme, 60%);
+$color-theme-l7: mix($color-white, $color-theme, 70%);
+$color-theme-l8: mix($color-white, $color-theme, 80%);
+$color-theme-l9: mix($color-white, $color-theme, 90%);
+
+$color-theme-e1: mix($color-black, $color-theme, 10%);
+$color-theme-e2: mix($color-black, $color-theme, 20%);
+$color-theme-e3: mix($color-black, $color-theme, 30%);
+$color-theme-e4: mix($color-black, $color-theme, 40%);
+$color-theme-e5: mix($color-black, $color-theme, 50%);
+$color-theme-e6: mix($color-black, $color-theme, 60%);
+$color-theme-e7: mix($color-black, $color-theme, 70%);
+$color-theme-e8: mix($color-black, $color-theme, 80%);
+$color-theme-e9: mix($color-black, $color-theme, 90%);
+
+/* 辅助色 */
+$color-aid: #e2231a;
+$color-aid-l1: mix($color-white, $color-aid, 10%);
+$color-aid-l2: mix($color-white, $color-aid, 20%);
+$color-aid-l3: mix($color-white, $color-aid, 30%);
+$color-aid-l4: mix($color-white, $color-aid, 40%);
+$color-aid-l5: mix($color-white, $color-aid, 50%);
+$color-aid-l6: mix($color-white, $color-aid, 60%);
+$color-aid-l7: mix($color-white, $color-aid, 70%);
+$color-aid-l8: mix($color-white, $color-aid, 80%);
+$color-aid-l9: mix($color-white, $color-aid, 90%);
+
+$color-aid-e1: mix($color-black, $color-aid, 10%);
+$color-aid-e2: mix($color-black, $color-aid, 20%);
+$color-aid-e3: mix($color-black, $color-aid, 30%);
+$color-aid-e4: mix($color-black, $color-aid, 40%);
+$color-aid-e5: mix($color-black, $color-aid, 50%);
+$color-aid-e6: mix($color-black, $color-aid, 60%);
+$color-aid-e7: mix($color-black, $color-aid, 70%);
+$color-aid-e8: mix($color-black, $color-aid, 80%);
+$color-aid-e9: mix($color-black, $color-aid, 90%);
+
+/* 警告色 */
+$color-warn: #ff9900;
+$color-warn-l1: mix($color-white, $color-warn, 10%);
+$color-warn-l2: mix($color-white, $color-warn, 20%);
+$color-warn-l3: mix($color-white, $color-warn, 30%);
+$color-warn-l4: mix($color-white, $color-warn, 40%);
+$color-warn-l5: mix($color-white, $color-warn, 50%);
+$color-warn-l6: mix($color-white, $color-warn, 60%);
+$color-warn-l7: mix($color-white, $color-warn, 70%);
+$color-warn-l8: mix($color-white, $color-warn, 80%);
+$color-warn-l9: mix($color-white, $color-warn, 90%);
+
+/* 错误色 */
+$color-error: #ff3333;
+$color-error-l1: mix($color-white, $color-error, 10%);
+$color-error-l2: mix($color-white, $color-error, 20%);
+$color-error-l3: mix($color-white, $color-error, 30%);
+$color-error-l4: mix($color-white, $color-error, 40%);
+$color-error-l5: mix($color-white, $color-error, 50%);
+$color-error-l6: mix($color-white, $color-error, 60%);
+$color-error-l7: mix($color-white, $color-error, 70%);
+$color-error-l8: mix($color-white, $color-error, 80%);
+$color-error-l9: mix($color-white, $color-error, 90%);
+
+/* 代码颜色 */
+$color-code-bg: #f6f6f6;
+$color-code: #2d3c4a;
+$color-js-keyword: $color-theme;
+$color-js-string: $color-aid-l2;
+$color-html-tag: #464646;
+$color-html-attr: #0083ff;
+$color-html-attr-value: #429606;
+$color-html-tag-name: $color-aid;
+$color-html-comment: #999;
+$color-js-comment: mix($color-white, $color-code, 50%);
+$color-js-number: #ae81ff;
+$color-js-literal: #ae81ff;
+$color-js-built_in: #429606;
+$color-js-attr: $color-aid;
+$color-css-selector: $color-theme;
+$color-css-attr: $color-code;
+$color-css-number: $color-aid;
+$color-json-attr: $color-aid;
+$color-json-string: #429606;
+$color-json-type: $color-theme;
+$color-bash-built: $color-theme;
+
+/* 代码字体 */
+$code-family: ("Roboto Mono", Monaco, courier, monospace);
+
+/* 字体 */
+$font-family: ('Helvetica Neue','PingFang SC','Microsoft YaHei',Helvetica,'Hiragino Sans GB',SimSun,sans-serif);
+
+/* 字体大小 */
+$fs-large-title: 20px;            // 大标题
+$fs-title: 16px;                  // 小标题
+$fs-text: 14px;                   // 正文
+
+/* 字体颜色 */
+$color-important: #2b2b2b;      // 重要文字
+$color-text: #34495e;           // 正文
+$color-text-light: #666;
+$color-text-aid: #adadad;       // 辅助性文字
+
+/* 边框颜色 */
+$color-line: #ddd;
+$color-line-light: #eee;
+
+/* 头部高度 */
+$layout-header-height: 60px;

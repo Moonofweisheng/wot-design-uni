@@ -5,7 +5,7 @@ import pickerViewProps from '../pickerView/props'
 // 本地时间戳
 const currentYear = new Date().getFullYear()
 /** @description 判断时间戳是否合法 */
-const isValidDate = date => isDef(date) && !Number.isNaN(date)
+const isValidDate = (date) => isDef(date) && !Number.isNaN(date)
 /**
  * @description 生成n个元素，并使用iterator接口进行填充
  * @param n
@@ -39,7 +39,7 @@ VueComponent({
   props: {
     value: {
       type: null,
-      observer (val, oldVal) {
+      observer(val, oldVal) {
         if (val === oldVal) return
         // 外部传入值更改时 更新picker数据
         const value = this.correctValue(val)
@@ -51,7 +51,7 @@ VueComponent({
     type: {
       type: String,
       value: 'datetime',
-      observer (target) {
+      observer(target) {
         const type = ['date', 'year-month', 'time', 'datetime']
         if (type.indexOf(target) === -1) {
           throw Error(`type must be one of ${type}`)
@@ -63,7 +63,7 @@ VueComponent({
     // 自定义过滤选项的函数，返回列的选项数组
     filter: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of filter must be Function')
         }
@@ -73,7 +73,7 @@ VueComponent({
     // 自定义弹出层选项文案的格式化函数，返回一个字符串
     formatter: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of formatter must be Function')
         }
@@ -83,7 +83,7 @@ VueComponent({
     // 自定义列筛选条件
     columnFormatter: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of columnFormatter must be Function')
         }
@@ -144,7 +144,7 @@ VueComponent({
 
   methods: {
     /** pickerView触发change事件，同步修改pickerValue */
-    onChange ({ detail }) {
+    onChange({ detail }) {
       // 更新pickerView的value
       this.setData({
         pickerValue: detail.value
@@ -158,21 +158,20 @@ VueComponent({
     /**
      * @description updateValue 防抖函数的占位符
      */
-    updateValue () {
-    },
+    updateValue() {},
 
     /**
      * @description 使用formatter格式化getOriginColumns的结果
      * @return {Array<Array<Number>>} 用于传入picker的columns
      */
-    updateColumns () {
+    updateColumns() {
       const { formatter, columnFormatter } = this.data
 
       if (columnFormatter) {
         return columnFormatter(this)
       } else {
-        return this.getOriginColumns().map(column => {
-          return column.values.map(value => {
+        return this.getOriginColumns().map((column) => {
+          return column.values.map((value) => {
             return {
               label: formatter ? formatter(column.type, padZero(value)) : padZero(value),
               value
@@ -186,10 +185,10 @@ VueComponent({
      * @description 根据getRanges得到的范围计算所有的列的数据
      * @return {{values: any[], type: String}[]} 年
      */
-    getOriginColumns () {
+    getOriginColumns() {
       const { filter } = this.data
       return this.getRanges().map(({ type, range }) => {
-        let values = times(range[1] - range[0] + 1, index => {
+        let values = times(range[1] - range[0] + 1, (index) => {
           return range[0] + index
         })
 
@@ -208,7 +207,7 @@ VueComponent({
      * @description 根据时间戳生成年月日时分的边界范围
      * @return {Array<{type:String,range:Array<Number>}>}
      */
-    getRanges () {
+    getRanges() {
       const { data } = this
       if (data.type === 'time') {
         return [
@@ -223,20 +222,8 @@ VueComponent({
         ]
       }
 
-      const {
-        maxYear,
-        maxDate,
-        maxMonth,
-        maxHour,
-        maxMinute
-      } = this.getBoundary('max', data.innerValue)
-      const {
-        minYear,
-        minDate,
-        minMonth,
-        minHour,
-        minMinute
-      } = this.getBoundary('min', data.innerValue)
+      const { maxYear, maxDate, maxMonth, maxHour, maxMinute } = this.getBoundary('max', data.innerValue)
+      const { minYear, minDate, minMonth, minHour, minMinute } = this.getBoundary('min', data.innerValue)
 
       const result = [
         {
@@ -271,7 +258,7 @@ VueComponent({
      * @param {String | Number} value
      * @return {String | Number} innerValue
      */
-    correctValue (value) {
+    correctValue(value) {
       const { data } = this
       const isDateType = data.type !== 'time'
       if (isDateType && !isValidDate(value)) {
@@ -303,7 +290,7 @@ VueComponent({
      * @param {'min'|'max'} type 类型
      * @param {Number} innerValue 时间戳
      */
-    getBoundary (type, innerValue) {
+    getBoundary(type, innerValue) {
       const value = new Date(innerValue)
       const boundary = new Date(this.data[`${type}Date`])
       const year = boundary.getFullYear()
@@ -346,7 +333,7 @@ VueComponent({
      * @param type picker类型
      * @return {Array} pickerValue
      */
-    getPickerValue (value, type) {
+    getPickerValue(value, type) {
       const values = []
       const date = new Date(value)
       if (type === 'time') {
@@ -368,7 +355,7 @@ VueComponent({
      * @param value
      * @return {Array}
      */
-    updateColumnValue (value) {
+    updateColumnValue(value) {
       const values = this.getPickerValue(value, this.data.type)
       // 更新pickerView的value,columns
       if (this.data.value !== value) {
@@ -387,7 +374,7 @@ VueComponent({
      * @description 根据当前的选中项 处理innerValue
      * @return {date} innerValue
      */
-    updateInnerValue () {
+    updateInnerValue() {
       const { type } = this.data
       let values = ''
       let innerValue = ''
@@ -408,7 +395,7 @@ VueComponent({
       // 处理 date 日期 索引位2
       let date = 1
       if (type !== 'year-month') {
-        date = (values[2] && parseInt(values[2])) > maxDate ? maxDate : (values[2] && parseInt(values[2]))
+        date = (values[2] && parseInt(values[2])) > maxDate ? maxDate : values[2] && parseInt(values[2])
       }
 
       // 处理 时分 索引位3，4
@@ -428,13 +415,10 @@ VueComponent({
     /**
      * @description 选中项改变，多级联动
      */
-    columnChange (picker) {
+    columnChange(picker) {
       const { type } = this.data
       // time 和 year-mouth 无需联动
-      if (
-        type === 'time' ||
-        type === 'year-month'
-      ) {
+      if (type === 'time' || type === 'year-month') {
         return
       }
       /** 重新计算年月日时分秒，修正时间。 */
@@ -475,21 +459,19 @@ VueComponent({
         picker.setColumnData(
           nextColumnIndex,
           nextColumnData,
-          (selectedIndex[nextColumnIndex] <= nextColumnData.length - 1)
-            ? selectedIndex[nextColumnIndex]
-            : 0
+          selectedIndex[nextColumnIndex] <= nextColumnData.length - 1 ? selectedIndex[nextColumnIndex] : 0
         )
       })
     },
-    onPickStart () {
+    onPickStart() {
       this.$emit('pickstart')
     },
-    onPickEnd () {
+    onPickEnd() {
       this.$emit('pickend')
     }
   },
 
-  beforeCreate () {
+  beforeCreate() {
     /**
      * @description observer触发选项重计算，防抖50秒
      * 防抖函数必须要在实例初始化的时候手动挂载到this上
@@ -510,7 +492,7 @@ VueComponent({
     this.picker = this.selectComponent(`#${this.data.pickerId}`)
   },
 
-  created () {
+  created() {
     // 小程序基础库v1.9.91无法初始化时兼容JM客户端props传入function
     const { filter, formatter, columnFormatter } = this.data
     this.setData({

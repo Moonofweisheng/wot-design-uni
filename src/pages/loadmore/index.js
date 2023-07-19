@@ -4,7 +4,7 @@ Page({
     num: 0,
     max: 60
   },
-  onReachBottom () {
+  onReachBottom() {
     const { num, max } = this.data
     if (num === 45) {
       this.setData({
@@ -18,7 +18,7 @@ Page({
       })
     }
   },
-  loadmore () {
+  loadmore() {
     const { num } = this.data
     setTimeout(() => {
       this.setData({
@@ -27,7 +27,7 @@ Page({
       })
     }, 200)
   },
-  onLoad () {
+  onLoad() {
     this.loadmore()
   }
 })

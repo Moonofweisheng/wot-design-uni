@@ -47,27 +47,27 @@ Page({
       return day
     }
   },
-  handleTypeChange1 (event) {
+  handleTypeChange1(event) {
     this.setData({
       type1: event.detail.value
     })
   },
-  handleTypeChange2 (event) {
+  handleTypeChange2(event) {
     this.setData({
       type2: event.detail.value
     })
   },
-  handleChange1 (event) {
+  handleChange1(event) {
     this.setData({
       value1: event.detail.value
     })
   },
-  handleChange2 (event) {
+  handleChange2(event) {
     this.setData({
       value2: event.detail.value
     })
   },
-  handleChange3 (event) {
+  handleChange3(event) {
     this.setData({
       value3: event.detail.value
     })

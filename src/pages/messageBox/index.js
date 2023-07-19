@@ -6,45 +6,47 @@ Page({
     value: 1,
     value1: ''
   },
-  changeValue ({ detail }) {
+  changeValue({ detail }) {
     this.setData({ value: detail })
   },
-  alert () {
+  alert() {
     MessageBox.alert('操作成功')
   },
-  alertWithTitle () {
+  alertWithTitle() {
     MessageBox.alert({
       msg: '提示文案',
       title: '标题'
     })
   },
-  confirm () {
+  confirm() {
     MessageBox.confirm({
       msg: '是否删除',
       title: '提示'
     })
   },
-  prompt () {
+  prompt() {
     MessageBox.prompt({
       title: '请输入邮箱',
       inputValue: this.data.value1,
       inputPattern: /.+@.+\..+/i
-    }).then(({ value }) => {
-      this.setData({
-        value1: value
-      })
-      Toast('当前值' + this.data.value1)
-    }).catch(e => {
-      Toast.error(e)
     })
+      .then(({ value }) => {
+        this.setData({
+          value1: value
+        })
+        Toast('当前值' + this.data.value1)
+      })
+      .catch((e) => {
+        Toast.error(e)
+      })
   },
-  alertWithLongChar () {
+  alertWithLongChar() {
     MessageBox.alert({
       msg: '以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文',
       title: '标题'
     })
   },
-  withSlot () {
+  withSlot() {
     MessageBox({
       title: '评分',
       selector: '#wd-message-box-slot'

@@ -37,14 +37,14 @@ VueComponent({
     safeBottom: 0
   },
   methods: {
-    handleClickModal () {
+    handleClickModal() {
       this.$emit('clickmodal')
 
       if (this.data.closeOnClickModal) {
         this.close()
       }
     },
-    observerTransition () {
+    observerTransition() {
       const { transition, position } = this.data
 
       const data = {
@@ -57,17 +57,15 @@ VueComponent({
 
       this.setData(data)
     },
-    close () {
+    close() {
       this.setData({
         show: false
       })
       this.$emit('close')
     },
-    noop () {
-
-    }
+    noop() {}
   },
-  created () {
+  created() {
     this.observerTransition()
 
     if (this.data.safeAreaInsetBottom) {

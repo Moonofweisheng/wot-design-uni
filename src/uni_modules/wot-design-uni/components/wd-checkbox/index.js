@@ -3,14 +3,11 @@ import { renderData } from '../common/util'
 
 VueComponent({
   behaviors: ['jd://form-field'],
-  externalClasses: [
-    'custom-label-class',
-    'custom-shape-class'
-  ],
+  externalClasses: ['custom-label-class', 'custom-shape-class'],
   relations: {
     '../checkboxGroup/index': {
       type: 'ancestor',
-      linked (target) {
+      linked(target) {
         this.parent = target
         this.checkName(this, this.data.value)
 
@@ -23,24 +20,23 @@ VueComponent({
         }
         const keys = Object.keys(data)
         const will = {}
-        keys.forEach(key => {
-          if (
-            data[key] !== null &&
-            data[key] !== undefined &&
-            this.data[key] === null
-          ) {
+        keys.forEach((key) => {
+          if (data[key] !== null && data[key] !== undefined && this.data[key] === null) {
             will[key] = data[key]
           }
         })
-        renderData(this, Object.assign(will, {
-          isChecked: this.parent.data.value.indexOf(this.data.value) > -1,
-          cellBox: cell,
-          buttonBox: cell && shape === 'button'
-        }))
+        renderData(
+          this,
+          Object.assign(will, {
+            isChecked: this.parent.data.value.indexOf(this.data.value) > -1,
+            cellBox: cell,
+            buttonBox: cell && shape === 'button'
+          })
+        )
         // disabled 单独设置
         this.checkDisabled()
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -48,11 +44,8 @@ VueComponent({
   props: {
     value: {
       type: null,
-      observer (value) {
-        if (
-          value === null ||
-          value === undefined
-        ) {
+      observer(value) {
+        if (value === null || value === undefined) {
           throw Error('checkbox\'s value can\'t be null or undefined')
         }
         if (!this.data.inited) return
@@ -68,7 +61,7 @@ VueComponent({
     shape: {
       type: String,
       value: null,
-      observer (target) {
+      observer(target) {
         const type = ['circle', 'square', 'button']
         if (type.indexOf(target) === -1) throw Error(`shape must be one of ${type.toString()}`)
       }
@@ -80,7 +73,7 @@ VueComponent({
     disabled: {
       type: Boolean,
       value: null,
-      observer () {
+      observer() {
         this.checkDisabled()
       }
     },
@@ -117,20 +110,18 @@ VueComponent({
      * @param {Object} self 自身
      * @param  myName 自己的标识符
      */
-    checkName (self = this, myName = this.data.value) {
-      this.parent && this.parent.children.forEach(node => {
-        if (
-          node !== self &&
-          node.data.value === myName
-        ) {
-          throw Error(`The checkbox's bound value: ${myName} has been used`)
-        }
-      })
+    checkName(self = this, myName = this.data.value) {
+      this.parent &&
+        this.parent.children.forEach((node) => {
+          if (node !== self && node.data.value === myName) {
+            throw Error(`The checkbox's bound value: ${myName} has been used`)
+          }
+        })
     },
     /**
      * @description 点击checkbox的Event handle
      */
-    toggle () {
+    toggle() {
       const { value, finalDisabled, trueValue, falseValue, isChecked } = this.data
       if (finalDisabled) return
       // 复选框单独使用时点击反选，并且在checkbox上触发change事件
@@ -153,7 +144,7 @@ VueComponent({
      * @description 检查设置实际 disabled 情况，需要考虑父组件的 min, max 和 value.length 的关系
      *
      */
-    checkDisabled () {
+    checkDisabled() {
       // 不管 this.data.disabled 是啥，我先设置上
       const config = {}
       config.finalDisabled = this.data.disabled
@@ -168,7 +159,7 @@ VueComponent({
         // min 生效时，group 选中的节点数量仅满足最小值，禁止取消已选中的节点。
         (min && value.length <= min && this.data.isChecked) ||
         // 只要子节点自己要求 disabled，那就 disabled。
-        (this.data.disabled === true) ||
+        this.data.disabled === true ||
         // 父节点要求全局 disabled，子节点没吱声，那就 disabled。
         (disabled && this.data.disabled === null)
       ) {
@@ -177,11 +168,11 @@ VueComponent({
       renderData(this, config)
     }
   },
-  created () {
+  created() {
     if (this.data.value === null) throw Error('checkbox\'s value must be set')
     this.setData({ inited: true })
   },
-  mounted () {
+  mounted() {
     // 如果没有父组件，设置 isChecked
     if (!this.parent) {
       this.setData({

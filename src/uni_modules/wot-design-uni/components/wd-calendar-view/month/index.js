@@ -39,7 +39,7 @@ VueComponent({
     defaultTime: Array
   },
   methods: {
-    setDays () {
+    setDays() {
       const days = []
       const date = new Date(this.data.date)
       const year = date.getFullYear()
@@ -67,32 +67,32 @@ VueComponent({
         days
       })
     },
-    getDayType (date, value) {
+    getDayType(date, value) {
       switch (this.data.type) {
-      case 'date':
-      case 'datetime':
-        return this.getDateType(date)
-      case 'dates':
-        return this.getDatesType(date)
-      case 'daterange':
-      case 'datetimerange':
-        return this.getDatetimeType(date, value)
-      case 'week':
-        return this.getWeektimeType(date, value)
-      case 'weekrange':
-        return this.getWeektimeType(date, value)
-      default:
-        return this.getDateType(date)
+        case 'date':
+        case 'datetime':
+          return this.getDateType(date)
+        case 'dates':
+          return this.getDatesType(date)
+        case 'daterange':
+        case 'datetimerange':
+          return this.getDatetimeType(date, value)
+        case 'week':
+          return this.getWeektimeType(date, value)
+        case 'weekrange':
+          return this.getWeektimeType(date, value)
+        default:
+          return this.getDateType(date)
       }
     },
-    getDateType (date) {
+    getDateType(date) {
       if (this.data.value && compareDate(date, this.data.value) === 0) {
         return 'selected'
       }
 
       return ''
     },
-    getDatesType (date) {
+    getDatesType(date) {
       if (!this.data.value) return ''
 
       let type = ''
@@ -109,7 +109,7 @@ VueComponent({
 
       return type
     },
-    getDatetimeType (date, value) {
+    getDatetimeType(date, value) {
       const [startDate, endDate] = value || []
 
       if (startDate && compareDate(date, startDate) === 0) {
@@ -125,7 +125,7 @@ VueComponent({
         return ''
       }
     },
-    getWeektimeType (date, value) {
+    getWeektimeType(date, value) {
       const [startDate, endDate] = value || []
 
       if (startDate && compareDate(date, startDate) === 0) {
@@ -138,7 +138,7 @@ VueComponent({
         return ''
       }
     },
-    getWeekValue () {
+    getWeekValue() {
       if (this.data.type === 'week') {
         return getWeekRange(this.data.value, this.data.firstDayOfWeek)
       } else {
@@ -159,36 +159,37 @@ VueComponent({
         return []
       }
     },
-    handleDateClick (event) {
+    handleDateClick(event) {
       const { index } = event.currentTarget.dataset
       const date = this.data.days[index]
 
       switch (this.data.type) {
-      case 'date':
-      case 'datetime':
-        this.handleDateChange(date)
-        break
-      case 'dates':
-        this.handleDatesChange(date)
-        break
-      case 'daterange':
-      case 'datetimerange':
-        this.handleDateRangeChange(date)
-        break
-      case 'week':
-        this.handleWeekChange(date)
-        break
-      case 'weekrange':
-        this.handleWeekRangeChange(date)
-        break
-      default:
-        this.handleDateChange(date)
+        case 'date':
+        case 'datetime':
+          this.handleDateChange(date)
+          break
+        case 'dates':
+          this.handleDatesChange(date)
+          break
+        case 'daterange':
+        case 'datetimerange':
+          this.handleDateRangeChange(date)
+          break
+        case 'week':
+          this.handleWeekChange(date)
+          break
+        case 'weekrange':
+          this.handleWeekRangeChange(date)
+          break
+        default:
+          this.handleDateChange(date)
       }
     },
-    getDate (date, isEnd) {
-      date = this.data.defaultTime && this.data.defaultTime.length > 0
-        ? getDateByDefaultTime(date, isEnd ? this.data.defaultTime[1] : this.data.defaultTime[0])
-        : date
+    getDate(date, isEnd) {
+      date =
+        this.data.defaultTime && this.data.defaultTime.length > 0
+          ? getDateByDefaultTime(date, isEnd ? this.data.defaultTime[1] : this.data.defaultTime[0])
+          : date
 
       if (date < this.data.minDate) return this.data.minDate
 
@@ -196,7 +197,7 @@ VueComponent({
 
       return date
     },
-    handleDateChange (date) {
+    handleDateChange(date) {
       if (date.disabled) return
 
       if (date.type !== 'selected') {
@@ -206,7 +207,7 @@ VueComponent({
         })
       }
     },
-    handleDatesChange (date) {
+    handleDatesChange(date) {
       if (date.disabled) return
 
       const value = this.data.value || []
@@ -219,7 +220,7 @@ VueComponent({
         value
       })
     },
-    handleDateRangeChange (date) {
+    handleDateRangeChange(date) {
       if (date.disabled) return
 
       let value
@@ -264,7 +265,7 @@ VueComponent({
         type: type || (value[1] ? 'end' : 'start')
       })
     },
-    handleWeekChange (date) {
+    handleWeekChange(date) {
       const [weekStart] = getWeekRange(date.date, this.data.firstDayOfWeek)
 
       // 周的第一天如果是禁用状态，则不可选中
@@ -274,7 +275,7 @@ VueComponent({
         value: this.getDate(weekStart) + 24 * 60 * 60 * 1000
       })
     },
-    handleWeekRangeChange (date) {
+    handleWeekRangeChange(date) {
       const [weekStartDate] = getWeekRange(date.date, this.data.firstDayOfWeek)
 
       // 周的第一天如果是禁用状态，则不可选中
@@ -297,7 +298,7 @@ VueComponent({
         value
       })
     },
-    getFormatterDate (date, day, type) {
+    getFormatterDate(date, day, type) {
       let dayObj = {
         date: date,
         text: day,

@@ -24,27 +24,27 @@ Page({
     value18: '',
     value19: ''
   },
-  handleChange (event) {
+  handleChange(event) {
     this.setData({
       value: event.detail.value
     })
   },
-  handleChange1 (event) {
+  handleChange1(event) {
     this.setData({
       value4: event.detail.value
     })
   },
-  handleChange2 (event) {
+  handleChange2(event) {
     this.setData({
       value5: event.detail.value
     })
   },
-  handleChange3 (event) {
+  handleChange3(event) {
     this.setData({
       value6: event.detail.value
     })
   },
-  handleBlur (event) {
+  handleBlur(event) {
     console.log('失焦', event.detail.value)
   }
 })

@@ -27,7 +27,7 @@ VueComponent({
     imgScale: '1'
   },
   methods: {
-    computedShowImg () {
+    computedShowImg() {
       if (this.data.value && this.data.imgSucc) {
         this.setData({ show: true })
       } else {
@@ -35,7 +35,7 @@ VueComponent({
         this.close()
       }
     },
-    computeImgStyle () {
+    computeImgStyle() {
       let style = ''
       if (this.data.width) {
         style += `width: ${this.data.width}px ;`
@@ -43,41 +43,38 @@ VueComponent({
       }
       this.setData({ imgStyle: style })
     },
-    beforeenter () {
+    beforeenter() {
       this.$emit('beforeenter')
     },
-    enter () {
+    enter() {
       this.$emit('enter')
     },
-    afterenter () {
+    afterenter() {
       this.$emit('afterenter')
     },
-    beforeleave () {
+    beforeleave() {
       this.$emit('beforeleave')
     },
-    leave () {
+    leave() {
       this.$emit('leave')
     },
-    afterleave () {
+    afterleave() {
       this.$emit('afterleave')
     },
-    close () {
+    close() {
       this.setData({
         show: false
       })
       this.$emit('close')
     },
-    closed () {
+    closed() {
       this.$emit('closed')
     },
-    clickModal () {
+    clickModal() {
       this.$emit('clickmodal')
     },
-    imgLoad (event) {
-      const {
-        height,
-        width
-      } = event.detail
+    imgLoad(event) {
+      const { height, width } = event.detail
       this.setData({
         imgScale: width / height,
         imgSucc: true
@@ -85,11 +82,11 @@ VueComponent({
       this.computeImgStyle()
       this.$emit('load')
     },
-    imgErr () {
+    imgErr() {
       this.setData({ imgSucc: false })
       this.$emit('error')
     },
-    clickImage () {
+    clickImage() {
       if (this.data.to) {
         jd.navigateTo({
           url: this.data.to

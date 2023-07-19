@@ -23,87 +23,87 @@ Page({
     content: '显示内容'
   },
 
-  control () {
+  control() {
     this.setData({ show15: !this.data.show15 })
   },
 
-  onShow () {
+  onShow() {
     console.log('显示')
   },
 
-  onHide () {
+  onHide() {
     Toast('文字提示关闭')
   },
 
-  handleChange1 (event) {
+  handleChange1(event) {
     this.setData({ show1: event.detail.show })
   },
 
-  handleChange2 (event) {
+  handleChange2(event) {
     this.setData({ show2: event.detail.show })
   },
 
-  handleChange3 (event) {
+  handleChange3(event) {
     this.setData({ show3: event.detail.show })
   },
 
-  handleChange4 (event) {
+  handleChange4(event) {
     this.setData({ show4: event.detail.show })
   },
 
-  handleChange5 (event) {
+  handleChange5(event) {
     this.setData({ show5: event.detail.show })
   },
 
-  handleChange6 (event) {
+  handleChange6(event) {
     this.setData({ show6: event.detail.show })
   },
 
-  handleChange7 (event) {
+  handleChange7(event) {
     this.setData({ show7: event.detail.show })
   },
 
-  handleChange8 (event) {
+  handleChange8(event) {
     this.setData({ show8: event.detail.show })
   },
 
-  handleChange9 (event) {
+  handleChange9(event) {
     this.setData({ show9: event.detail.show })
   },
 
-  handleChange10 (event) {
+  handleChange10(event) {
     this.setData({ show10: event.detail.show })
   },
 
-  handleChange11 (event) {
+  handleChange11(event) {
     this.setData({ show11: event.detail.show })
   },
 
-  handleChange12 (event) {
+  handleChange12(event) {
     this.setData({ show12: event.detail.show })
   },
 
-  handleChange13 (event) {
+  handleChange13(event) {
     this.setData({ show13: event.detail.show })
   },
 
-  handleChange14 (event) {
+  handleChange14(event) {
     this.setData({ show14: event.detail.show })
   },
 
-  handleChange15 (event) {
+  handleChange15(event) {
     this.setData({ show15: event.detail.show })
   },
 
-  handleChange16 (event) {
+  handleChange16(event) {
     this.setData({ show16: event.detail.show })
   },
 
-  handleChange17 (event) {
+  handleChange17(event) {
     this.setData({ show17: event.detail.show })
   },
 
-  clickoutside (event) {
+  clickoutside(event) {
     console.log(event)
     clickoutside()
   }

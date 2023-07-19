@@ -12,7 +12,7 @@ VueComponent({
   props: {
     value: {
       type: null,
-      observer (value, oldValue) {
+      observer(value, oldValue) {
         this.splitDisabled(value)
       }
     },
@@ -37,7 +37,7 @@ VueComponent({
     },
     disabled: {
       type: Boolean,
-      observer (val) {
+      observer(val) {
         this.setData({
           minDisabled: val,
           maxDisabled: val
@@ -51,7 +51,7 @@ VueComponent({
   },
 
   methods: {
-    updateBoundary () {
+    updateBoundary() {
       const _this = this
       debounce(function () {
         const value = _this.formatValue(_this.data.value)
@@ -60,7 +60,7 @@ VueComponent({
       }, 30)()
     },
 
-    splitDisabled (value) {
+    splitDisabled(value) {
       const { disabled, min, max, step } = this.data
       this.setData({
         minDisabled: disabled || value <= min || this.changeStep(value, -step) < min,
@@ -68,11 +68,11 @@ VueComponent({
       })
     },
 
-    toPrecision (value) {
+    toPrecision(value) {
       return parseFloat(Math.round(value * Math.pow(10, this.data.precision)) / Math.pow(10, this.data.precision)).toFixed(this.data.precision)
     },
 
-    getPrecision (value) {
+    getPrecision(value) {
       if (value === undefined) return 0
       const valueString = value.toString()
       const dotPosition = valueString.indexOf('.')
@@ -83,13 +83,13 @@ VueComponent({
       return precision
     },
 
-    toStrictlyStep (value) {
+    toStrictlyStep(value) {
       const stepPrecision = this.getPrecision(this.data.step)
       const precisionFactory = Math.pow(10, stepPrecision)
-      return Math.round(value / this.data.step) * precisionFactory * this.data.step / precisionFactory
+      return (Math.round(value / this.data.step) * precisionFactory * this.data.step) / precisionFactory
     },
 
-    setValue (value, change = true) {
+    setValue(value, change = true) {
       const type = getType(value)
 
       if (this.data.allowNull && (type === 'null' || type === 'undefined' || value === '')) {
@@ -109,7 +109,7 @@ VueComponent({
       this.dispatchChangeEvent(value, change)
     },
 
-    changeStep (val, step) {
+    changeStep(val, step) {
       val = Number(val)
 
       if (isNaN(val)) {
@@ -120,30 +120,30 @@ VueComponent({
       return this.toPrecision((val * precisionFactory + step * precisionFactory) / precisionFactory)
     },
 
-    sub () {
+    sub() {
       if (this.data.minDisabled) return
 
       const newValue = this.changeStep(this.data.value, -this.data.step)
       this.dispatchChangeEvent(newValue)
     },
 
-    add () {
+    add() {
       if (this.data.maxDisabled) return
 
       const newValue = this.changeStep(this.data.value, this.data.step)
       this.dispatchChangeEvent(newValue)
     },
 
-    handleInput (event) {
+    handleInput(event) {
       const value = event.detail.value || ''
       this.dispatchChangeEvent(value)
     },
 
-    handleFocus (event) {
+    handleFocus(event) {
       this.$emit('focus', event.detail)
     },
 
-    handleBlur () {
+    handleBlur() {
       const value = this.formatValue(this.data.value)
       this.setValue(value)
       this.$emit('blur', {
@@ -151,12 +151,12 @@ VueComponent({
       })
     },
 
-    dispatchChangeEvent (value, change = true) {
+    dispatchChangeEvent(value, change = true) {
       this.setData({ value })
       change && this.$emit('change', { value })
     },
 
-    formatValue (value) {
+    formatValue(value) {
       const type = getType(value)
 
       if (this.data.allowNull && (type === 'null' || type === 'undefined' || value === '')) {
@@ -181,7 +181,7 @@ VueComponent({
     }
   },
 
-  created () {
+  created() {
     this.dispatchChangeEvent(this.formatValue(this.data.value))
   }
 })

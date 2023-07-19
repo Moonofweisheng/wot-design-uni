@@ -2,10 +2,10 @@ Page({
   data: {
     show: false
   },
-  display () {
+  display() {
     this.setData({ show: true })
   },
-  insert () {
+  insert() {
     this.display()
   }
 })

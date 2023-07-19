@@ -15,7 +15,7 @@ VueComponent({
     content: null
   },
   methods: {
-    menuClick (event) {
+    menuClick(event) {
       const { index } = event.currentTarget.dataset
       this.setData({ show: false })
       this.$emit('menuclick', {

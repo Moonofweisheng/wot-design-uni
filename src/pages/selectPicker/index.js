@@ -86,9 +86,9 @@ Page({
     value17: ['102'],
     customShow: '奢侈品',
 
-    displayFormat (items, columns) {
+    displayFormat(items, columns) {
       let showValue = ''
-      columns.forEach(column => {
+      columns.forEach((column) => {
         items.forEach((item, index) => {
           if (column.value === item) {
             showValue += `${item}: ${column.label} ${index + 1 < items.length ? '--' : ''} `
@@ -98,7 +98,7 @@ Page({
       return showValue
     },
 
-    beforeConfirm (value, resolve) {
+    beforeConfirm(value, resolve) {
       if (value.length > 0) {
         Toast.error('暂时无法选择商品')
         resolve(false)
@@ -108,95 +108,97 @@ Page({
     }
   },
 
-  handleChange ({ detail }) {
+  handleChange({ detail }) {
     Toast('选择了' + detail)
   },
-  handleConfirm1 ({ detail }) {
+  handleConfirm1({ detail }) {
     this.setData({
       value1: detail.value
     })
   },
-  handleConfirm2 ({ detail }) {
+  handleConfirm2({ detail }) {
     this.setData({
       value2: detail.value
     })
   },
-  handleConfirm3 ({ detail }) {
+  handleConfirm3({ detail }) {
     this.setData({
       value3: detail.value
     })
   },
-  handleConfirm4 ({ detail }) {
+  handleConfirm4({ detail }) {
     this.setData({
       value4: detail.value
     })
   },
-  handleConfirm5 ({ detail }) {
+  handleConfirm5({ detail }) {
     this.setData({
       value5: detail.value
     })
   },
-  handleConfirm6 ({ detail }) {
+  handleConfirm6({ detail }) {
     this.setData({
       value6: detail.value
     })
   },
-  handleConfirm7 ({ detail }) {
+  handleConfirm7({ detail }) {
     this.setData({
       value7: detail.value
     })
   },
-  handleConfirm8 ({ detail }) {
+  handleConfirm8({ detail }) {
     this.setData({
       value8: detail.value
     })
   },
-  handleConfirm9 ({ detail }) {
+  handleConfirm9({ detail }) {
     this.setData({
       value9: detail.value
     })
   },
-  handleConfirm10 ({ detail }) {
+  handleConfirm10({ detail }) {
     this.setData({
       value10: detail.value
     })
   },
-  handleConfirm11 ({ detail }) {
+  handleConfirm11({ detail }) {
     this.setData({
       value11: detail.value
     })
   },
-  handleConfirm12 ({ detail }) {
+  handleConfirm12({ detail }) {
     this.setData({
       value12: detail.value
     })
   },
-  handleConfirm13 ({ detail }) {
+  handleConfirm13({ detail }) {
     this.setData({
       value13: detail.value
     })
   },
-  handleConfirm14 ({ detail }) {
+  handleConfirm14({ detail }) {
     this.setData({
       value14: detail.value
     })
   },
-  handleConfirm15 ({ detail }) {
+  handleConfirm15({ detail }) {
     this.setData({
       value15: detail.value
     })
   },
-  handleConfirm16 ({ detail }) {
+  handleConfirm16({ detail }) {
     this.setData({
       value16: detail.value
     })
   },
-  handleConfirm17 ({ detail }) {
+  handleConfirm17({ detail }) {
     this.setData({
       value17: detail.value,
-      customShow: detail.selectedItems.map(item => {
-        return item.label
-      }).join(', ')
+      customShow: detail.selectedItems
+        .map((item) => {
+          return item.label
+        })
+        .join(', ')
     })
   }
 })

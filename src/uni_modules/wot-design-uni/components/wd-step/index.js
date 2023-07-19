@@ -26,27 +26,27 @@ VueComponent({
   relations: {
     '../steps/index': {
       type: 'parent',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
   },
   methods: {
-    getIndex () {
+    getIndex() {
       return this.parent.children.indexOf(this)
     },
-    getStyles () {
+    getStyles() {
       const { vertical, space } = this.parent.data
       if (vertical) {
         return space ? `height: ${space}` : ''
       } else {
-        return `width: ${space || (100 / this.parent.children.length + '%')}`
+        return `width: ${space || 100 / this.parent.children.length + '%'}`
       }
     },
-    getCurrentStatus (index) {
+    getCurrentStatus(index) {
       if (this.data.status) {
         return this.data.status
       }
@@ -61,22 +61,22 @@ VueComponent({
         return 'wait'
       }
     },
-    getCurrentTitle (currentStatus) {
+    getCurrentTitle(currentStatus) {
       if (this.data.title) return this.data.title
 
       switch (currentStatus) {
-      case 'finished':
-        return '已完成'
-      case 'error':
-        return '失败'
-      case 'process':
-        return '进行中'
-      case 'wait':
-      default:
-        return '未开始'
+        case 'finished':
+          return '已完成'
+        case 'error':
+          return '失败'
+        case 'process':
+          return '进行中'
+        case 'wait':
+        default:
+          return '未开始'
       }
     },
-    setIndexAndStatus () {
+    setIndexAndStatus() {
       const index = this.getIndex()
       const currentStatus = this.getCurrentStatus(index)
       const currentTitle = this.getCurrentTitle(currentStatus)

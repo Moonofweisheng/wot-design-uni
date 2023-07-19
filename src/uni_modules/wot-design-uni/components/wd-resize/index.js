@@ -13,9 +13,8 @@ VueComponent({
     scrollEventCount: 0
   },
   methods: {
-    onScrollHandler () {
-    },
-    scrollToBottom ({ width, height }) {
+    onScrollHandler() {},
+    scrollToBottom({ width, height }) {
       renderData(this, {
         expandScrollTop: 100000 + height,
         shrinkScrollTop: 3 * this.data.height + height,
@@ -24,11 +23,8 @@ VueComponent({
       })
     }
   },
-  mounted () {
-    this.query = this.createSelectorQuery()
-      .in(this)
-      .select('.wd-resize__container')
-      .boundingClientRect()
+  mounted() {
+    this.query = this.createSelectorQuery().in(this).select('.wd-resize__container').boundingClientRect()
     this.query.exec(([res]) => {
       const { width, height } = res
       // 闭包记录容器高度
@@ -44,8 +40,8 @@ VueComponent({
         this.query.exec(([res]) => {
           // 前两次滚动事件被触发，说明 created 的修改已渲染，通知用户代码当前容器大小
           if (this.data.scrollEventCount++ === 0) {
-            const result = {};
-            ['bottom', 'top', 'left', 'right', 'height', 'width'].forEach(propName => {
+            const result = {}
+            ;['bottom', 'top', 'left', 'right', 'height', 'width'].forEach((propName) => {
               result[propName] = res[propName]
             })
             this.$emit('resize', result)
@@ -72,8 +68,8 @@ VueComponent({
             emitStack.push(1)
           }
           if (emitStack.length !== 0) {
-            const result = {};
-            ['bottom', 'top', 'left', 'right', 'height', 'width'].forEach(propName => {
+            const result = {}
+            ;['bottom', 'top', 'left', 'right', 'height', 'width'].forEach((propName) => {
               result[propName] = res[propName]
             })
             this.$emit('resize', result)

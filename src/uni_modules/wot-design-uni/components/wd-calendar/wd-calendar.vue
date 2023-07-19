@@ -446,9 +446,7 @@ function setShowValue() {
     showValue.value = ''
   }
 }
-function handleShortcutClick(event) {
-  const { index } = event.target.dataset
-
+function handleShortcutClick(index) {
   if (props.onShortcutsClick && typeof props.onShortcutsClick === 'function') {
     calendarValue.value = deepClone(
       props.onShortcutsClick({
@@ -456,7 +454,11 @@ function handleShortcutClick(event) {
         index
       })
     )
-    confirmBtnDisabled.value = getConfirmBtnStatus(calendarValue)
+    confirmBtnDisabled.value = getConfirmBtnStatus(calendarValue.value)
+
+    if (props.type.indexOf('range') > -1) {
+      setInnerLabel()
+    }
   }
 
   if (!props.showConfirm) {

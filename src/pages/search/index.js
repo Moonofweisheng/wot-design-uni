@@ -9,28 +9,30 @@ Page({
     menu: [
       {
         content: '全部'
-      }, {
+      },
+      {
         content: '订单号'
-      }, {
+      },
+      {
         content: '退款单号'
       }
     ]
   },
-  search (e) {
+  search(e) {
     Toast('搜索' + e.detail.value)
   },
-  clear () {
+  clear() {
     Toast('清空')
   },
-  cancel () {
+  cancel() {
     Toast('取消')
   },
-  change (e) {
+  change(e) {
     this.setData({
       value1: e.detail.value
     })
   },
-  changeSearchType (e) {
+  changeSearchType(e) {
     this.setData({
       searchType: e.detail.item.content
     })

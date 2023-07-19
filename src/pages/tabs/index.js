@@ -5,10 +5,10 @@ Page({
     tab: 0,
     val: 0
   },
-  handleClick ({ detail: { index } }) {
+  handleClick({ detail: { index } }) {
     Toast(`点击了标签${index}`)
   },
-  handleChange (event) {
+  handleChange(event) {
     console.log('change', event)
   }
 })

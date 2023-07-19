@@ -8,7 +8,7 @@ Page({
   options: {
     multipleSlots: true
   },
-  click (event) {
+  click(event) {
     Toast('成功跳转')
   }
 })

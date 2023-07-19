@@ -3,7 +3,7 @@
  * @Date: 2023-06-12 18:40:59
  * @LastEditTime: 2023-07-17 13:41:22
  * @LastEditors: weisheng
- * @Description: 
+ * @Description:
  * @FilePath: \wot-design-uni\src\pages\datetimePickerView\index.js
  * 记得注释
  */
@@ -17,56 +17,56 @@ Page({
     value4: '11:12',
     value5: Date.now(),
     value6: Date.now(),
-    formatter (type, value) {
+    formatter(type, value) {
       switch (type) {
-      case 'year':
-        return value + '年'
-      case 'month':
-        return value + '月'
-      case 'date':
-        return value + '日'
-      case 'hour':
-        return value + '时'
-      case 'minute':
-        return value + '分'
-      default:
-        return value
+        case 'year':
+          return value + '年'
+        case 'month':
+          return value + '月'
+        case 'date':
+          return value + '日'
+        case 'hour':
+          return value + '时'
+        case 'minute':
+          return value + '分'
+        default:
+          return value
       }
     },
-    filter (type, values) {
+    filter(type, values) {
       if (type === 'minute') {
-        return values.filter(value => value % 5 === 0)
+        return values.filter((value) => value % 5 === 0)
       }
       return values
     }
   },
-  onChange1 (event) {
+  onChange1(event) {
     Toast('选择了' + new Date(event.detail.value))
     this.setData({
       value1: event.detail.value
     })
   },
-  onChange2 (event) {
+  onChange2(event) {
     this.setData({
       value2: event.detail.value
     })
   },
-  onChange3 (event) {
+  onChange3(event) {
     this.setData({
       value3: event.detail.value
     })
   },
-  onChange4 (event) {
+  onChange4(event) {
     this.setData({
       value4: event.detail.value
     })
   },
-  onChange5 (event) {
+  onChange5(event) {
     this.setData({
       value5: event.detail.value
     })
   },
-  onChange6 (event) {
+  onChange6(event) {
     this.setData({
       value6: event.detail.value
     })

@@ -1,8 +1,5 @@
-<template>
-</template>
+<template></template>
 
-<script>
-</script>
+<script></script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

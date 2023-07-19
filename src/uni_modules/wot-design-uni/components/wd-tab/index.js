@@ -5,12 +5,12 @@ VueComponent({
   relations: {
     '../tabs/index': {
       type: 'parent',
-      linked (target) {
+      linked(target) {
         this.parent = target
         // 和tabs建立关系式，主动检测一下自己的name和别的tab的name是否冲突
         this.checkName(this)
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -19,7 +19,7 @@ VueComponent({
     // 唯一标识符
     name: {
       type: null,
-      observer (name) {
+      observer(name) {
         if (name === '' || name === undefined) {
           console.error('[wot design] error(wd-tab): name must be set !')
           return
@@ -39,7 +39,7 @@ VueComponent({
     // tab的label
     title: {
       type: String,
-      observer () {
+      observer() {
         if (this.parent) {
           this.parent.updateItems()
         }
@@ -48,7 +48,7 @@ VueComponent({
     // tab禁用，无法点击
     disabled: {
       type: Boolean,
-      observer () {
+      observer() {
         if (this.parent) {
           this.parent.updateItems()
         }
@@ -65,23 +65,17 @@ VueComponent({
      * @description 检测tab绑定的name是否和其它tab的name冲突
      * @param {Object} self 自身
      */
-    checkName (self) {
+    checkName(self) {
       const { name: myName } = this.data
-      if (
-        myName === undefined ||
-        myName === null ||
-        myName === ''
-      ) {
+      if (myName === undefined || myName === null || myName === '') {
         return
       }
-      this.parent && this.parent.children.forEach(node => {
-        if (
-          node !== self &&
-          node.data.name === myName
-        ) {
-          throw Error(`The tab's bound value: ${myName} has been used`)
-        }
-      })
+      this.parent &&
+        this.parent.children.forEach((node) => {
+          if (node !== self && node.data.name === myName) {
+            throw Error(`The tab's bound value: ${myName} has been used`)
+          }
+        })
     }
   }
 })

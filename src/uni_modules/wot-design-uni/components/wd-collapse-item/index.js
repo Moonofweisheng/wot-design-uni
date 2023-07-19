@@ -15,7 +15,7 @@ VueComponent({
     disabled: Boolean,
     name: {
       type: String,
-      observer (newVal) {
+      observer(newVal) {
         const condition = this.parent && this.parent.checkRepeat(this.parent.children, newVal, 'name')
         // 比较数组中是否存在重复数据
         if (condition > -1) {
@@ -27,19 +27,19 @@ VueComponent({
   relations: {
     '../collapse/index': {
       type: 'parent',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
   },
-  mounted () {
+  mounted() {
     this.initState()
   },
   methods: {
-    initState () {
+    initState() {
       const { isExpand, name } = this.data
       const { accordion, value } = this.parent.data
       if (!value) {
@@ -57,7 +57,7 @@ VueComponent({
      * @param {String} key 键值
      * @param String value 键名
      */
-    stateControl (key, value) {
+    stateControl(key, value) {
       this.setData({ [key]: value })
     },
     /**
@@ -65,10 +65,10 @@ VueComponent({
      * @param {String} select 选择器名称
      * @param {Boolean} firstRender 是否首次渲染
      */
-    scrollHeight (select, firstRender = false) {
+    scrollHeight(select, firstRender = false) {
       const transD = firstRender ? '0s' : '0.3s'
 
-      this.getRect(select).then(rect => {
+      this.getRect(select).then((rect) => {
         if (!rect) return
         const { height } = rect
         if (this.data.isExpand) {
@@ -94,13 +94,13 @@ VueComponent({
       })
     },
     // 点击触发
-    toggle () {
+    toggle() {
       const { disabled, name, isExpand } = this.data
       const { accordion } = this.parent.data
       if (disabled) return
       // 如果是手风琴模式, 那么只展开一个，其余全部折叠
       if (accordion) {
-        this.parent.children.forEach(item => {
+        this.parent.children.forEach((item) => {
           item.stateControl('isExpand', item.data.name === name)
           item.scrollHeight($body)
         })
@@ -112,7 +112,7 @@ VueComponent({
       this.parent.switchValue(name, !isExpand)
     },
     // 动画结束时触发
-    onTransitionend (event) {
+    onTransitionend(event) {
       if (!this.data.isExpand) {
         this.setData({ show: false })
       } else {

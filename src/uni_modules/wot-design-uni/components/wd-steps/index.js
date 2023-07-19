@@ -5,9 +5,9 @@ VueComponent({
     active: {
       type: Number,
       value: 0,
-      observer () {
+      observer() {
         if (this.children && this.children.length) {
-          this.children.forEach(child => child.setIndexAndStatus())
+          this.children.forEach((child) => child.setIndexAndStatus())
         }
       }
     },
@@ -19,7 +19,7 @@ VueComponent({
   relations: {
     '../step/index': {
       type: 'child',
-      linked (target) {
+      linked(target) {
         this.children = this.children || []
         this.children.push(target)
         setTimeout(() => {
@@ -30,12 +30,12 @@ VueComponent({
             dot,
             canAlignCenter
           })
-          this.children.forEach(child => child.setIndexAndStatus())
+          this.children.forEach((child) => child.setIndexAndStatus())
         }, 30)
       },
-      unlinked (target) {
-        this.children = this.children.filter(child => child !== target)
-        this.children.forEach(child => child.setIndexAndStatus())
+      unlinked(target) {
+        this.children = this.children.filter((child) => child !== target)
+        this.children.forEach((child) => child.setIndexAndStatus())
       }
     }
   }

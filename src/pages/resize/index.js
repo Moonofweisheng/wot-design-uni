@@ -15,7 +15,7 @@ Page({
     sizeBottom: '',
     sizeLeft: ''
   },
-  handleResize ({ detail }) {
+  handleResize({ detail }) {
     const { height, width, top, right, bottom, left } = detail
     const { sizeWidth, sizeHeight, sizeTop, sizeRight, sizeBottom, sizeLeft } = this.data
     this.setData({
@@ -33,7 +33,7 @@ Page({
       sizeLeft: left
     })
   },
-  onReady () {
+  onReady() {
     setTimeout(() => {
       this.setData({
         width: '100px',

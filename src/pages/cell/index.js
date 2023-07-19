@@ -5,20 +5,20 @@ Page({
     slider: 0,
     value: true
   },
-  toast () {
+  toast() {
     Toast('点击')
   },
-  handleRateChange ({ detail }) {
+  handleRateChange({ detail }) {
     this.setData({
       rate: detail
     })
   },
-  handleSliderChange ({ detail }) {
+  handleSliderChange({ detail }) {
     this.setData({
       slider: detail
     })
   },
-  handleSwitchChange ({ detail }) {
+  handleSwitchChange({ detail }) {
     this.setData({
       switch: detail
     })

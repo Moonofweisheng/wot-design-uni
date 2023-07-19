@@ -3,7 +3,7 @@
   <view class="page__hd">
     <view class="page__title">
       <view class="logo"></view>
-      <view class="inline">Wot Design Mini</view>
+      <view class="inline">Wot Design Uni</view>
     </view>
     <view class="page__desc">该组件库基于小程序构建，根据京东商家侧的UI设计规范（京麦移动端设计规范）开发，旨在给商家提供统一的UI交互，同时提高研发的开发效率。</view>
   </view>

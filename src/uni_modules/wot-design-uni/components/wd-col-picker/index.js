@@ -6,19 +6,15 @@ const $container = '.wd-col-picker__selected-container'
 const $item = '.wd-col-picker__selected-item'
 
 VueComponent({
-  externalClasses: [
-    'custom-view-class',
-    'custom-label-class',
-    'custom-value-class'
-  ],
+  externalClasses: ['custom-view-class', 'custom-label-class', 'custom-value-class'],
   behaviors: [cell, 'jd://form-field'],
   relations: {
     '../cellGroup/index': {
       type: 'ancestor',
-      linked (target) {
+      linked(target) {
         this.parent = target
       },
-      unlinked () {
+      unlinked() {
         this.parent = null
       }
     }
@@ -40,7 +36,7 @@ VueComponent({
   props: {
     value: {
       type: Array,
-      observer (val) {
+      observer(val) {
         if (val === this.data.pickerColSelected) return
 
         this.setData({
@@ -56,7 +52,7 @@ VueComponent({
     },
     columns: {
       type: Array,
-      observer (val, oldVal) {
+      observer(val, oldVal) {
         if (val.length && !(val[0] instanceof Array)) {
           console.error('[wot design] error(wd-col-picker): the columns props of wd-col-picker should be a two-dimensional array')
           return
@@ -91,7 +87,7 @@ VueComponent({
     title: String,
     columnChange: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of columnChange must be Function')
         }
@@ -100,7 +96,7 @@ VueComponent({
     // 外部展示格式化函数
     displayFormat: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of displayFormat must be Function')
         }
@@ -108,7 +104,7 @@ VueComponent({
     },
     beforeConfirm: {
       type: null,
-      observer (fn) {
+      observer(fn) {
         if (getType(fn) !== 'function') {
           throw Error('The type of beforeConfirm must be Function')
         }
@@ -151,14 +147,14 @@ VueComponent({
   },
   methods: {
     // 对外暴露方法，打开弹框
-    open () {
+    open() {
       this.showPicker()
     },
     // 对外暴露方法，关闭弹框
-    close () {
+    close() {
       this.handlePickerClose()
     },
-    handlePickerClose () {
+    handlePickerClose() {
       this.setData({
         pickerShow: false
       })
@@ -179,26 +175,29 @@ VueComponent({
       }
       this.$emit('close')
     },
-    showPicker () {
+    showPicker() {
       const { disabled, readonly } = this.data
 
       if (disabled || readonly) return
 
-      this.setData({
-        pickerShow: true,
-        lastPickerColSelected: this.data.pickerColSelected.slice(0),
-        lastSelectList: this.data.selectList.slice(0)
-      }, () => {
-        setTimeout(() => {
-          this.updateLineAndScroll()
-        }, 30)
-      })
+      this.setData(
+        {
+          pickerShow: true,
+          lastPickerColSelected: this.data.pickerColSelected.slice(0),
+          lastSelectList: this.data.selectList.slice(0)
+        },
+        () => {
+          setTimeout(() => {
+            this.updateLineAndScroll()
+          }, 30)
+        }
+      )
     },
-    getSelectedItem (value, colIndex, selectList) {
+    getSelectedItem(value, colIndex, selectList) {
       const { valueKey, labelKey } = this.data
 
       if (selectList[colIndex]) {
-        const selecteds = selectList[colIndex].filter(item => {
+        const selecteds = selectList[colIndex].filter((item) => {
           return item[valueKey] === value
         })
 
@@ -212,7 +211,7 @@ VueComponent({
         [labelKey]: ''
       }
     },
-    chooseItem (event) {
+    chooseItem(event) {
       const { colIndex, index } = event.currentTarget.dataset
       const item = this.data.selectList[colIndex][index]
       if (item.disabled) return
@@ -231,7 +230,7 @@ VueComponent({
       })
       this.handleColChange(colIndex, item, index)
     },
-    handleColChange (colIndex, item, index, callback) {
+    handleColChange(colIndex, item, index, callback) {
       this.setData({
         loading: true
       })
@@ -248,26 +247,28 @@ VueComponent({
 
           const newSelectList = this.data.selectList.slice(0)
           newSelectList[colIndex + 1] = nextColumn
-          this.setData({
-            selectList: newSelectList,
-            loading: false,
-            currentCol: colIndex + 1
-
-          }, () => {
-            this.updateLineAndScroll(true)
-            if (typeof callback === 'function') {
-              this.isCompleting = false
-              this.setData({
-                selectShowList: this.data.pickerColSelected.map((item, colIndex) => {
-                  return this.getSelectedItem(item, colIndex, this.data.selectList)[this.data.labelKey]
+          this.setData(
+            {
+              selectList: newSelectList,
+              loading: false,
+              currentCol: colIndex + 1
+            },
+            () => {
+              this.updateLineAndScroll(true)
+              if (typeof callback === 'function') {
+                this.isCompleting = false
+                this.setData({
+                  selectShowList: this.data.pickerColSelected.map((item, colIndex) => {
+                    return this.getSelectedItem(item, colIndex, this.data.selectList)[this.data.labelKey]
+                  })
                 })
-              })
-              callback()
+                callback()
+              }
             }
-          })
+          )
         },
         finish: (isOk) => {
-        // 每设置展示数据回显
+          // 每设置展示数据回显
           if (typeof callback === 'function') {
             this.setData({
               loading: false
@@ -275,7 +276,7 @@ VueComponent({
             this.isCompleting = false
             return
           }
-          if ((getType(isOk) === 'boolean' && !isOk)) {
+          if (getType(isOk) === 'boolean' && !isOk) {
             this.setData({
               loading: false
             })
@@ -283,24 +284,28 @@ VueComponent({
           }
 
           if (beforeConfirm) {
-            beforeConfirm(this.data.pickerColSelected, this.data.pickerColSelected.map((item, colIndex) => {
-              return this.getSelectedItem(item, colIndex, this.data.selectList)
-            }), (isPass) => {
-              if (isPass) {
-                this.onConfirm()
-              } else {
-                this.setData({
-                  loading: false
-                })
+            beforeConfirm(
+              this.data.pickerColSelected,
+              this.data.pickerColSelected.map((item, colIndex) => {
+                return this.getSelectedItem(item, colIndex, this.data.selectList)
+              }),
+              (isPass) => {
+                if (isPass) {
+                  this.onConfirm()
+                } else {
+                  this.setData({
+                    loading: false
+                  })
+                }
               }
-            })
+            )
           } else {
             this.onConfirm()
           }
         }
       })
     },
-    onConfirm () {
+    onConfirm() {
       this.setData({
         isChange: false,
         loading: false,
@@ -315,19 +320,26 @@ VueComponent({
         })
       })
     },
-    handleColClick ({ target: { dataset: { index } } }) {
-      this.setData({
-        isChange: true,
-        currentCol: index
-      }, () => {
-        this.updateLineAndScroll(true)
-      })
+    handleColClick({
+      target: {
+        dataset: { index }
+      }
+    }) {
+      this.setData(
+        {
+          isChange: true,
+          currentCol: index
+        },
+        () => {
+          this.updateLineAndScroll(true)
+        }
+      )
     },
     /**
      * @description 更新navBar underline的偏移量
      * @param {Boolean} animation 是否伴随动画
      */
-    setLineStyle (animation = true) {
+    setLineStyle(animation = true) {
       if (!this.inited) return
       const { currentCol } = this.data
       this.getRect($item, true).then((rects) => {
@@ -336,9 +348,7 @@ VueComponent({
         const width = 16
         let left = rects.slice(0, currentCol).reduce((prev, curr) => prev + curr.width, 0)
         left += (rect.width - width) / 2
-        const transition = animation
-          ? 'transition: width 300ms ease, transform 300ms ease;'
-          : ''
+        const transition = animation ? 'transition: width 300ms ease, transform 300ms ease;' : ''
 
         const lineStyle = `
           transform: translateX(${left}px);
@@ -351,13 +361,10 @@ VueComponent({
     /**
      * @description scroll-view滑动到active的tab_nav
      */
-    lineScrollIntoView () {
+    lineScrollIntoView() {
       if (!this.inited) return
       const { currentCol } = this.data
-      Promise.all([
-        this.getRect($item, true),
-        this.getRect($container)
-      ]).then(([navItemsRects, navRect]) => {
+      Promise.all([this.getRect($item, true), this.getRect($container)]).then(([navItemsRects, navRect]) => {
         if (navItemsRects.length === 0) return
         // 选中元素
         const selectItem = navItemsRects[currentCol]
@@ -368,7 +375,7 @@ VueComponent({
         this.setData({ scrollLeft })
       })
     },
-    setShowValue (value) {
+    setShowValue(value) {
       const selectedItems = value.map((item, colIndex) => {
         return this.getSelectedItem(item, colIndex, this.data.selectList)
       })
@@ -379,14 +386,16 @@ VueComponent({
         })
       } else {
         this.setData({
-          showValue: selectedItems.map(item => {
-            return item[this.data.labelKey]
-          }).join('')
+          showValue: selectedItems
+            .map((item) => {
+              return item[this.data.labelKey]
+            })
+            .join('')
         })
       }
     },
     // 递归列数据补齐
-    diffColumns (colIndex) {
+    diffColumns(colIndex) {
       // colIndex 为 -1 时，item 为空对象，>=0 时则具有 value 属性
       const item = colIndex === -1 ? {} : { [this.data.valueKey]: this.data.value[colIndex] }
       this.handleColChange(colIndex, item, -1, () => {
@@ -398,14 +407,14 @@ VueComponent({
         }
       })
     },
-    handleAutoComplete () {
+    handleAutoComplete() {
       if (this.data.autoComplete) {
         // 如果 columns 数组长度为空，或者长度小于 value 的长度，自动触发 columnChange 来补齐数据
         if (this.data.selectList.length < this.data.value.length || this.data.selectList.length === 0) {
           // isCompleting 是否在自动补全，锁操作
           if (!this.isCompleting) {
             // 如果 columns 长度为空，则传入的 colIndex 为 -1
-            const colIndex = this.data.selectList.length === 0 ? -1 : (this.data.selectList.length - 1)
+            const colIndex = this.data.selectList.length === 0 ? -1 : this.data.selectList.length - 1
             this.diffColumns(colIndex)
           }
           this.isCompleting = true
@@ -413,13 +422,13 @@ VueComponent({
       }
     }
   },
-  beforeCreate () {
+  beforeCreate() {
     this.updateLineAndScroll = debounce(function (animation = true) {
       this.setLineStyle(animation)
       this.lineScrollIntoView()
     }, 50)
   },
-  mounted () {
+  mounted() {
     this.inited = true
   }
 })

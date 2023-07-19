@@ -31,7 +31,7 @@ VueComponent({
     activeColor: {
       type: [String, Array],
       value: 'linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)',
-      observer (value) {
+      observer(value) {
         if (Array.isArray(value) && !value.length) {
           throw Error('activeColor cannot be an empty array')
         }
@@ -63,7 +63,7 @@ VueComponent({
     /**
      * @description 计算当前应当展示的rate数量
      */
-    computeRateList () {
+    computeRateList() {
       const { value, num } = this.data
       // value和num都准备好才能计算
       if (value === null || !num) return
@@ -77,7 +77,7 @@ VueComponent({
         if (i < fullLength) {
           rateList.push('100%')
         } else if (i === fullLength) {
-          const rate = (value - fullLength) > 0.5 ? 1 : 0.5
+          const rate = value - fullLength > 0.5 ? 1 : 0.5
           rateList.push(rate * 100 + '%')
         } else {
           rateList.push('0')
@@ -89,7 +89,7 @@ VueComponent({
     /**
      * @description 计算当前应当展示的rate颜色
      */
-    computeActiveValue () {
+    computeActiveValue() {
       const { activeColor, value, num } = this.data
       let activeValue = ''
       if (Array.isArray(activeColor) && activeColor.length) {
@@ -103,7 +103,11 @@ VueComponent({
      * @description 点击icon触发组件的change事件
      * @param Event
      */
-    changeRate ({ currentTarget: { dataset: { index } } }) {
+    changeRate({
+      currentTarget: {
+        dataset: { index }
+      }
+    }) {
       if (this.data.readonly || this.data.disabled) return
       this.setData({
         value: index + 1

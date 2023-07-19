@@ -6,15 +6,18 @@ VueComponent({
   props: {
     type: {
       type: String,
-      observer (val) {
-        if ((val === 'datetime' && this.data.value) || (val === 'datetimerange' && this.data.value && this.data.value.length > 0 && this.data.value[0])) {
+      observer(val) {
+        if (
+          (val === 'datetime' && this.data.value) ||
+          (val === 'datetimerange' && this.data.value && this.data.value.length > 0 && this.data.value[0])
+        ) {
           this.setTime(this.data.value, 'start')
         }
       }
     },
     value: {
       type: [null, Number, Array],
-      observer (val, oldVal) {
+      observer(val, oldVal) {
         if (isEqual(val, this.data.innerValue)) return
 
         if ((this.data.type === 'datetime' && val) || (this.data.type === 'datetimerange' && val && val.length > 0 && val[0])) {
@@ -43,12 +46,12 @@ VueComponent({
     timeType: '', // 当前时间类型，是开始还是结束
     innerValue: '' // 内部保存一个值，用于判断新老值，避免监听器触发
   },
-  mounted () {
+  mounted() {
     this.initRect()
     this.scrollIntoView()
   },
   methods: {
-    initRect (thresholds = [0, 0.7, 0.8, 0.9, 1]) {
+    initRect(thresholds = [0, 0.7, 0.8, 0.9, 1]) {
       if (!this.data.showPanelTitle) return
 
       if (this.contentObserver != null) {
@@ -71,7 +74,7 @@ VueComponent({
         }
       })
     },
-    scrollIntoView () {
+    scrollIntoView() {
       setTimeout(() => {
         let activeDate
         const type = getType(this.data.value)
@@ -104,7 +107,7 @@ VueComponent({
      * @param {timestamp|array} value 当前时间
      * @param {string} type 类型，是开始还是结束
      */
-    getTimeData (value, type) {
+    getTimeData(value, type) {
       if (this.data.type === 'datetime') {
         return getTimeData({
           date: value,
@@ -138,7 +141,7 @@ VueComponent({
      * @param {timestamp} date 时间
      * @param {string} type 类型，是开始还是结束
      */
-    getTimeValue (date, type) {
+    getTimeValue(date, type) {
       if (this.data.type === 'datetime') {
         date = new Date(date)
       } else {
@@ -155,21 +158,24 @@ VueComponent({
 
       return this.data.hideSecond ? [hour, minute] : [hour, minute, second]
     },
-    setTime (value, type) {
+    setTime(value, type) {
       if (getType(value) === 'array' && value[0] && value[1] && type === 'start' && this.data.timeType === 'start') {
         type = 'end'
       }
 
-      this.setData({
-        timeData: this.getTimeData(value, type),
-        timeValue: this.getTimeValue(value, type),
-        timeType: type
-      }, () => {
-        // 重新设置 thresholds
-        this.initRect([0, 0.58, 0.69, 0.83, 1])
-      })
+      this.setData(
+        {
+          timeData: this.getTimeData(value, type),
+          timeValue: this.getTimeValue(value, type),
+          timeType: type
+        },
+        () => {
+          // 重新设置 thresholds
+          this.initRect([0, 0.58, 0.69, 0.83, 1])
+        }
+      )
     },
-    handleDateChange ({ detail: { value, type } }) {
+    handleDateChange({ detail: { value, type } }) {
       if (!isEqual(value, this.data.value)) {
         // 内部保存一个值，用于判断新老值，避免监听器触发
         this.setData({
@@ -182,12 +188,12 @@ VueComponent({
         this.setTime(value, type)
       }
     },
-    handleChange (value) {
+    handleChange(value) {
       this.$emit('change', {
         value
       })
     },
-    handleTimeChange (event) {
+    handleTimeChange(event) {
       const { value } = event.detail
 
       if (this.data.type === 'datetime') {
@@ -229,14 +235,14 @@ VueComponent({
         this.handleChange(finalValue)
       }
     },
-    handlePickStart () {
+    handlePickStart() {
       this.$emit('pickstart')
     },
-    handlePickEnd () {
+    handlePickEnd() {
       this.$emit('pickend')
     }
   },
-  beforeCreate () {
+  beforeCreate() {
     this.handleChange = debounce(this.handleChange, 50)
   }
 })
