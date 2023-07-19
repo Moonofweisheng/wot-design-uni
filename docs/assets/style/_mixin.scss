@@ -1,0 +1,11 @@
+/* 清除浮动 */
+@mixin clearFloat {
+  &::after {
+    display: block;
+    content: '';
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}

@@ -1,0 +1,165 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(calendar) {
+  @include when(border) {
+    .wd-calendar__cell {
+      @include halfPixelBorder('top', $-cell-padding);
+    }
+  }
+  @include e(cell) {
+    position: relative;
+    display: flex;
+    padding: 0 $-cell-padding;
+    background-color: $-color-white;
+    text-decoration: none;
+    color: $-cell-title-color;
+    font-size: $-cell-title-fs;
+    overflow: hidden;
+    line-height: $-cell-ling-height;
+  }
+  @include e(cell) {
+    @include when(disabled) {
+      .wd-calendar__value {
+        color: $-input-disabled-color;
+      }
+    }
+    @include when(align-right) {
+      .wd-calendar__value {
+        text-align: right;
+      }
+    }
+    @include when(error) {
+      .wd-calendar__value {
+        color: $-input-error-color;
+      }
+      :deep(.wd-calendar__arrow) {
+        color: $-input-error-color;
+      }
+    }
+    @include when(large) {
+      font-size: $-cell-title-fs-large;
+
+      :deep(.wd-calendar__arrow) {
+        font-size: $-cell-icon-size-large;
+      }
+    }
+    @include when(center) {
+      align-items: center;
+
+      :deep(.wd-calendar__arrow) {
+        margin-top: 0;
+      }
+    }
+  }
+  @include e(label) {
+    position: relative;
+    width: $-input-cell-label-width;
+    padding: $-cell-wrapper-padding 0;
+    margin-right: $-cell-padding;
+    box-sizing: border-box;
+
+    @include when(required) {
+      padding-left: 12px;
+
+      &::after {
+        position: absolute;
+        left: 0;
+        top: $-cell-wrapper-padding + 2px;
+        content: '*';
+        font-size: $-cell-required-size;
+        line-height: 1.1;
+        color: $-cell-required-color;
+      }
+    }
+  }
+  @include e(value) {
+    flex: 1;
+    padding: $-cell-wrapper-padding 0;
+    margin-right: 10px;
+    color: $-cell-value-color;
+    white-space: pre-wrap;
+
+    @include when(ellipsis) {
+      @include lineEllipsis;
+    }
+    @include m(placeholder) {
+      color: $-input-placeholder-color;
+    }
+  }
+  @include edeep(arrow) {
+    display: block;
+    margin-top: $-cell-wrapper-padding;
+    font-size: $-cell-icon-size;
+    color: $-cell-arrow-color;
+    line-height: 1.25;
+  }
+
+  @include e(header) {
+    position: relative;
+    overflow: hidden;
+  }
+  @include e(title) {
+    color: $-action-sheet-color;
+    height: $-action-sheet-title-height;
+    line-height: $-action-sheet-title-height;
+    text-align: center;
+    font-size: $-action-sheet-title-fs;
+    font-weight: $-action-sheet-weight;
+  }
+  @include edeep(close) {
+    position: absolute;
+    top: $-action-sheet-close-top;
+    right: $-action-sheet-close-right;
+    color: $-action-sheet-close-color;
+    font-size: $-action-sheet-close-fs;
+    transform: rotate(-45deg);
+    line-height: 1.1;
+  }
+  @include e(tabs) {
+    width: 222px;
+    margin: 10px auto 12px;
+  }
+  @include e(shortcuts) {
+    padding: 20px 0;
+    text-align: center;
+  }
+  @include edeep(tag) {
+    margin-right: 8px;
+  }
+  @include e(view) {
+    @include when(show-confirm) {
+      height: 394px;
+
+      @include when(range) {
+        height: 384px;
+      }
+    }
+  }
+  @include e(range-label) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+
+    @include when(monthrange) {
+      padding-bottom: 10px;
+      box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.02);
+    }
+  }
+  @include e(range-label-item) {
+    flex: 1;
+    color: rgba(0, 0, 0, 0.85);
+
+    @include when(placeholder) {
+      color: rgba(0, 0, 0, 0.25);
+    }
+  }
+  @include e(range-sperator) {
+    margin: 0 24px;
+    color: rgba(0, 0, 0, 0.25);
+  }
+  @include e(confirm) {
+    padding: 12px 25px 14px;
+  }
+}

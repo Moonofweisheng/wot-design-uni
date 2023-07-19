@@ -1,0 +1,292 @@
+
+  <urlset 
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/introduction</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/quickUse</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/customTheme</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/typography</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/changelog</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/commonProblems</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/button</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/icon</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/layout</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/popup</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/resize</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/transition</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/pagination</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/popover</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/tabs</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/calendar</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/calendarView</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/checkbox</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/colPicker</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/datetimePicker</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/datetimePickerView</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/form</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/input</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/inputNumber</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/picker</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/pickerView</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/radio</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/rate</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/search</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/selectPicker</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/slider</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/switch</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/upload</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/actionSheet</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/dropMenu</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/loading</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/messageBox</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/noticeBar</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/progress</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/sortButton</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/statusTip</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/swipeAction</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/toast</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/tooltip</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/badge</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/card</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/cell</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/collapse</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/curtain</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/divider</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/img</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/imgCropper</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/grid</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/loadmore</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/steps</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/sticky</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/tag</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+  </urlset>
+  

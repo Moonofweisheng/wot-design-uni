@@ -1,0 +1,32 @@
+<wd-toast id="wd-toast" />
+
+<view style="margin: 20px 0">
+  <wd-cell-group border>
+    <wd-calendar label="单个日期选择" value="{{ value1 }}" bind:confirm="handleConfirm1" />
+    <wd-calendar label="多个日期选择" type="dates" value="{{ value2 }}" bind:confirm="handleConfirm2" />
+    <wd-calendar label="日期范围选择" type="daterange" value="{{ value3 }}" />
+    <wd-calendar label="日期时间选择" type="datetime" value="{{ value4 }}" />
+    <wd-calendar label="日期时间范围选择" type="datetimerange" value="{{ value5 }}" />
+    <wd-calendar label="周选择" type="week" value="{{ value6 }}" />
+    <wd-calendar label="月选择" type="month" value="{{ value7 }}" />
+    <wd-calendar label="周范围选择" first-day-of-week="{{ 1 }}" type="weekrange" value="{{ value8 }}" />
+    <wd-calendar label="月范围选择" type="monthrange" value="{{ value9 }}" />
+    <wd-calendar label="日周月切换" first-day-of-week="{{ 1 }}" show-type-switch value="{{ value10 }}" />
+    <wd-calendar label="快捷操作" show-confirm="{{ false }}" />
+    <wd-calendar label="日期格式化" type="daterange" value="{{ value11 }}" formatter="{{ formatter }}" />
+    <wd-calendar label="快捷选项" shortcuts="{{ shortcuts }}" on-shortcuts-click="{{ onShortcutsClick }}" type="daterange" value="{{ value12 }}" bind:confirm="handleConfirm3" />
+    <wd-calendar label="自定义展示" type="daterange" value="{{ value13 }}" display-format="{{ displayFormat }}" inner-display-format="{{ innerDisplayFormat }}" />
+    <wd-calendar label="before-confirm" value="{{ value14 }}" before-confirm="{{ beforeConfirm }}" />
+  </wd-cell-group>
+</view>
+
+<demo-block transparent title="自定义选择器">
+  <view style="margin: 0 15px">
+    <view style="margin-bottom: 10px;">
+      当前选中日期：{{ formatValue }}
+    </view>
+    <wd-calendar use-default-slot bind:confirm="handleConfirm4">
+      <wd-button>选择日期</wd-button>
+    </wd-calendar>
+  </view>
+</demo-block>

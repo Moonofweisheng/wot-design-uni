@@ -1,0 +1,328 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+@include b(input) {
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+
+  &::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $-input-border-color;
+    transform: scaleY(0.5);
+    transition: background-color 0.2s ease-in-out;
+  }
+  @include when(not-empty) {
+    &:not(.is-disabled) {
+      &::after {
+        background-color: $-input-not-empty-border-color;
+      }
+    }
+  }
+  @include when(textarea) {
+    &::after {
+      display: none;
+    }
+  }
+  @include e(label) {
+    position: relative;
+    width: $-input-cell-label-width;
+    color: $-cell-title-color;
+    margin-right: $-cell-padding;
+    box-sizing: border-box;
+    font-size: $-input-fs;
+    flex-shrink: 0;
+    line-height: $-cell-ling-height;
+
+    @include when(required) {
+      padding-left: 12px;
+
+      &::after {
+        position: absolute;
+        left: 0;
+        top: $-cell-wrapper-padding + 2px;
+        content: "*";
+        font-size: $-cell-required-size;
+        line-height: 1.1;
+        color: $-cell-required-color;
+      }
+    }
+  }
+  @include e(label-inner) {
+    display: inline-block;
+    padding: $-cell-wrapper-padding 0;
+    font-size: $-input-fs;
+  }
+  @include e(block) {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  @include e(prefix) {
+    margin-right: $-input-icon-margin;
+    font-size: $-input-fs;
+
+    :deep(.wd-input__icon,.wd-input__clear) {
+      margin-left: 0;
+    }
+  }
+  @include e(suffix) {
+    flex-shrink: 0;
+    margin-left: $-input-icon-margin;
+  }
+  @include when(disabled) {
+    .wd-input__inner,
+    .wd-input__textarea-inner {
+      color: $-input-disabled-color;
+      background: transparent;
+    }
+  }
+  @include when(error) {
+    .wd-input__inner,
+    .wd-input__textarea-inner {
+      color: $-input-error-color;
+      background: transparent;
+    }
+  }
+  @include when(no-border) {
+    &::after {
+      display: none;
+    }
+    .wd-input__inner {
+      height: $-input-inner-height-no-border;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+  @include when(cell) {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 $-input-cell-padding;
+    background-color: $-input-cell-bg;
+
+    &.is-error::after {
+      background: $-input-cell-border-color;
+    }
+    .wd-input__textarea,
+    .wd-input__block {
+      flex: 1;
+    }
+    :deep(.wd-input__icon,.wd-input__clear) {
+      height: $-input-cell-height;
+      line-height: $-input-cell-height;
+    }
+    .wd-input__prefix {
+      display: inline-block;
+      margin-right: $-cell-icon-right;
+    }
+    .wd-input__inner {
+      height: $-input-cell-height;
+    }
+    &.wd-input::after {
+      display: none;
+    }
+    .wd-input__textarea {
+      padding: 13px 0 36px 0;
+    }
+    .wd-input__textarea-inner {
+      padding-right: 24px;
+    }
+    .wd-input__textarea-suffix {
+      right: 0;
+    }
+
+    @include when(center) {
+      align-items: center;
+    }
+    @include when(border) {
+      @include halfPixelBorder("top", $-input-cell-padding);
+    }
+  }
+  @include when(large) {
+    .wd-input__prefix {
+      font-size: $-input-fs-large;
+    }
+    .wd-input__label-inner {
+      font-size: $-input-fs-large;
+    }
+    .wd-input__inner {
+      font-size: $-input-fs-large;
+      height: $-input-cell-height-large;
+    }
+    .wd-input__textarea-inner {
+      font-size: $-input-fs-large;
+    }
+    .wd-input__count {
+      font-size: $-input-count-fs-large;
+    }
+    .wd-input__textarea-count {
+      font-size: $-input-count-fs-large;
+    }
+    :deep(.wd-input__icon,.wd-input__clear) {
+      height: $-input-cell-height-large;
+      font-size: $-input-icon-size-large;
+      line-height: $-input-cell-height-large;
+    }
+    :deep(.wd-input__textarea-icon) {
+      font-size: $-input-icon-size-large;
+    }
+  }
+  @include when(auto-height) {
+    &::after {
+      display: block;
+    }
+    .wd-input__textarea {
+      padding: $-input-inner-padding;
+    }
+    .wd-input__textarea-suffix {
+      top: 8px;
+      right: 0;
+    }
+  }
+
+  @include e(inner) {
+    flex: 1;
+    height: $-input-inner-height;
+    font-size: $-input-fs;
+    color: $-input-color;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+
+    &::-webkit-input-placeholder {
+      color: $-input-placeholder-color;
+    }
+
+    @include when(align-right) {
+      text-align: right;
+    }
+  }
+
+  @include e(readonly){
+    padding: $-input-inner-padding;
+  }
+  @include e(textarea-inner){
+    width: 100%;
+  }
+
+  @include edeep(icon) {
+    margin-left: 8px;
+    font-size: $-input-icon-size;
+    color: $-input-icon-color;
+    vertical-align: middle;
+    background: $-input-bg;
+  }
+  @include edeep(clear) {
+    margin-left: 8px;
+    font-size: $-input-icon-size;
+    color: $-input-clear-color;
+    vertical-align: middle;
+    background: $-input-bg;
+  }
+  @include e(count) {
+    margin-left: 15px;
+    font-size: $-input-count-fs;
+    color: $-input-count-color;
+    vertical-align: middle;
+    background: $-input-bg;
+  }
+  @include e(count-current) {
+    color: $-input-count-current-color;
+
+    @include when(error) {
+      color: $-input-error-color;
+    }
+  }
+
+  @include e(textarea) {
+    position: relative;
+    padding: $-input-textarea-padding;
+    font-size: 0;
+    display: flex;
+    background: $-input-bg;
+
+    @include when(show-limit) {
+      padding-bottom: 36px;
+    }
+  }
+  @include edeep(textarea-icon) {
+    margin-left: 8px;
+    font-size: $-input-icon-size;
+    line-height: 20px;
+    color: $-input-icon-color;
+    background: #fff;
+  }
+  @include e(textarea-inner) {
+    flex: 1;
+    // width: 1px;
+    padding: 0;
+    font-size: $-input-fs;
+    line-height: 1.43;
+    color: $-input-color;
+    outline: none;
+    box-sizing: border-box;
+    border: none;
+    word-break: break-word;
+
+    &::-webkit-input-placeholder {
+      color: $-input-placeholder-color;
+    }
+    @include when(suffix) {
+      padding-right: $-input-textarea-padding + $-input-icon-size;
+    }
+  }
+  @include e(textarea-suffix) {
+    position: absolute;
+    right: 14px;
+    top: $-input-textarea-padding;
+    bottom: 0;
+  }
+  @include edeep(textarea-icon) {
+    margin-left: 8px;
+    font-size: $-input-icon-size;
+    line-height: 20px;
+    color: $-input-clear-color;
+    background: $-input-bg;
+  }
+  @include e(textarea-count) {
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    font-size: $-input-count-fs;
+    color: $-input-count-color;
+    background: $-input-bg;
+    line-height: 20px;
+  }
+  @include e(textarea-count-current) {
+    color: $-input-count-current-color;
+
+    @include when(error) {
+      color: $-input-error-color;
+    }
+  }
+  @include e(placeholder) {
+    color: $-input-placeholder-color;
+
+    &.is-error {
+      color: $-input-error-color;
+    }
+  }
+  :deep(.wd-input__textarea-count){
+    display: inline-flex;
+  }
+  .wd-input__count,
+  .wd-input__count-current {
+    display: inline-flex;
+  }
+  @include e(textarea-map) {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}

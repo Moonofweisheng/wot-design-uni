@@ -1,0 +1,15 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+$i: 1;
+
+@include b(col) {
+  float: left;
+  box-sizing: border-box;
+}
+
+@while $i <= 24 {
+  .wd-col__#{$i} { width: 100% / 24 * $i; }
+  .wd-col__offset-#{$i} { margin-left: 100% / 24 * $i; }
+  $i : $i + 1;
+}

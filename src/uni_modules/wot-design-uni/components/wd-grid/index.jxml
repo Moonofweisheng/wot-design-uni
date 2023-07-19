@@ -1,0 +1,4 @@
+<view class="wd-grid custom-class" style="{{ gutter ? 'padding-left:' + gutter + 'px;' + 'padding-bottom:' + gutter + 'px;' : '' }}">
+	<!-- 默认插入的 item -->
+	<slot  />
+</view>

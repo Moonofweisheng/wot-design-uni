@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Layout 布局",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-row": "../../wot-design/row/index",
+    "wd-col": "../../wot-design/col/index"
+  }
+}

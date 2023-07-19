@@ -1,0 +1,36 @@
+<wd-toast id="wd-toast"/>
+<demo-block title="基本用法" transparent>
+  <wd-search value="{{value1}}" bind:search="search" bind:change="change" bind:cancel="cancel" bind:clear="clear"/>
+</demo-block>
+
+<demo-block title="白色输入框" transparent>
+  <wd-search light/>
+</demo-block>
+
+<demo-block title="搜索占位符居左" transparent>
+  <wd-search placeholder-left/>
+</demo-block>
+
+<demo-block title="禁用且隐藏取消按钮" transparent>
+  <wd-search disabled hide-cancel/>
+</demo-block>
+
+<view style="margin: 15px 0; color: #666;">
+  <view style="padding: 0 15px;margin: 10px 0;font-size: 13px;">自定义左侧插槽</view>
+  <wd-search value="{{value3}}">
+    <wd-popover slot="prefix" mode="menu" content="{{menu}}" bind:menuclick="changeSearchType">
+      <view class="search-type">
+        <text>{{ searchType }}</text>
+        <wd-icon class="icon-arrow" name="fill-arrow-down"></wd-icon>
+      </view>
+    </wd-popover>
+  </wd-search>
+</view>
+  
+<demo-block title="自定义右侧文案" transparent>
+  <wd-search placeholder="请输入订单号/订单名称" cancel-txt="搜索"/>
+</demo-block>
+
+<demo-block title="设置最大长度" transparent>
+  <wd-search value="{{value2}}" maxlength="4"/>
+</demo-block>

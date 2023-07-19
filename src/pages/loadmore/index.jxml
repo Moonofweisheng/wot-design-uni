@@ -1,0 +1,10 @@
+<view class="container">
+  <view jd:for="{{num}}" jd:key="$this" class="list-item">
+    <image src="https://img10.360buyimg.com/jmadvertisement/jfs/t1/70325/36/14954/36690/5dcd3e3bEee5006e0/aed1ccf6d5ffc764.png" />
+    <view class="right">这是一条测试{{index + 1}}</view>
+  </view>
+  <wd-loadmore
+    state="{{state}}"
+    bind:reload="loadmore"
+  />
+</view>

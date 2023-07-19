@@ -1,0 +1,93 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(notice-bar) {
+  display: flex;
+  padding: $-notice-bar-padding;
+  align-items: center;
+  font-size: $-notice-bar-fs;
+  border-radius: $-notice-bar-border-radius;
+  position: relative;
+  box-sizing: border-box;
+  @include when(warning) {
+    background: $-notice-bar-warning-bg;
+    color: $-notice-bar-warning-color;
+  }
+  @include when(info) {
+    background: $-notice-bar-info-bg;
+    color: $-notice-bar-info-color;
+  }
+  @include when(danger) {
+    background: $-notice-bar-danger-bg;
+    color: $-notice-bar-danger-color;
+  }
+  @include edeep(prefix) {
+    padding-right: 4px;
+    width: $-notice-bar-prefix-size;
+    height: $-notice-bar-prefix-size;
+    line-height: $-notice-bar-prefix-size;
+  }
+
+
+
+  @include edeep(suffix) {
+    text-align: center;
+    width: $-notice-bar-close-size;
+    height: $-notice-bar-close-size;
+    line-height: $-notice-bar-close-size;
+    display: inline-block;
+    background-color: $-notice-bar-close-bg;
+    color: $-notice-bar-close-color;
+    padding: 0;
+    border-radius: 0px 8px 0px 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  @include e(wrap) {
+    position: relative;
+    flex: 1;
+    height: $-notice-bar-line-height;
+    overflow: hidden;
+    line-height: $-notice-bar-line-height;
+  }
+  @include e(content) {
+    position: absolute;
+    white-space: nowrap;
+
+    @include m(play) {
+      animation: notice-bar-play linear both;
+    }
+    @include m(play-infinite) {
+      animation: notice-bar-play-infinite linear infinite both;
+    }
+  }
+  @include m(ellipse) {
+    .wd-notice-bar__content {
+      position: static;
+      @include lineEllipsis;
+    }
+  }
+  @include m(wrap) {
+
+    .wd-notice-bar__wrap {
+      height: auto;
+    }
+    .wd-notice-bar__content {
+      position: static;
+      white-space: normal;
+    }
+  }
+}
+
+@keyframes notice-bar-play {
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes notice-bar-play-infinite {
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Checkbox 复选框",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-checkbox": "../../wot-design/checkbox/index",
+    "wd-checkbox-group": "../../wot-design/checkboxGroup/index"
+  }
+}

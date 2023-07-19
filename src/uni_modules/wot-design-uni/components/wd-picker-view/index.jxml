@@ -1,0 +1,37 @@
+<view class="wd-picker-view custom-class">
+  <view
+    class="wd-picker-view__loading"
+    v-if="{{loading}}"
+  >
+    <wd-loading color="{{ loadingColor }}" />
+  </view>
+  <picker-view
+    mask-class="wd-picker-view__mask"
+    indicator-class="wd-picker-view__roller"
+    indicator-style="height: {{itemHeight}}px;"
+    style="height: {{columnsHeight - 20}}px;"
+    value="{{selectedIndex}}"
+    bindchange="onChange"
+    bindpickstart="onPickStart"
+    bindpickend="onPickEnd"
+  >
+    <picker-view-column
+      jd:for="{{formatColumns}}"
+      jd:for-index="colIndex"
+      jd:for-item="col"
+      jd:key="$this"
+      class="wd-picker-view-column"
+    >
+      <view
+        jd:for="{{col}}"
+        jd:for-index="rowIndex"
+        jd:for-item="row"
+        jd:key="$this"
+        class="wd-picker-view-column__item {{row['disabled']?'wd-picker-view-column__item--disabled':''}} {{selectedIndex[colIndex] == rowIndex ? 'wd-picker-view-column__item--active' : ''}}"
+        style="line-height: {{itemHeight}}px;"
+      >
+        {{row[labelKey]}}
+      </view>
+    </picker-view-column>
+  </picker-view>
+</view>

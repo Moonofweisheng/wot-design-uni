@@ -1,0 +1,24 @@
+button {
+  margin: 0 10px 10px 0;
+}
+.block {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin: -50px 0 0 -50px;
+  width: 100px;
+  height: 100px;
+  background: #0083ff;
+}
+
+.custom-enter-active, .custom-leave-active {
+  transition-property: background, transform;
+}
+.custom-enter {
+  transform: translate3d(-100px, -100px, 0) rotate(-180deg);
+  background: #ff0000;
+}
+.custom-leave-to {
+  transform: translate3d(100px, 100px, 0) rotate(180deg);
+  background: #ff0000;
+}

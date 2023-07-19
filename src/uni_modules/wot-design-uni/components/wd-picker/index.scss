@@ -1,0 +1,139 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(picker) {
+  @include edeep(popup) {
+    border-radius: 16px 16px 0px 0px;
+  }
+
+  @include when(border) {
+    .wd-picker__field {
+      @include halfPixelBorder('top', $-cell-padding);
+    }
+  }
+  @include when(large) {
+    .wd-picker__field {
+      font-size: $-cell-title-fs-large;
+    }
+    :deep(.wd-picker__arrow) {
+      font-size: $-cell-icon-size-large;
+    }
+  }
+  @include when(error) {
+    .wd-picker__value,
+    :deep(.wd-picker__arrow) {
+      color: $-input-error-color;
+    }
+  }
+  @include when(align-right) {
+    .wd-picker__value {
+      text-align: right;
+    }
+  }
+  @include e(field) {
+    position: relative;
+    display: flex;
+    padding: 0 $-cell-padding;
+    align-items: flex-start;
+    background-color: $-color-white;
+    text-decoration: none;
+    color: $-cell-title-color;
+    font-size: $-cell-title-fs;
+    overflow: hidden;
+    line-height: $-cell-ling-height;
+
+    @include when(disabled) {
+      .wd-picker__value {
+        color: $-input-disabled-color;
+      }
+    }
+  }
+
+  @include when(disabled) {
+    .wd-picker__value {
+      color: $-picker-column-disabled-color;
+    }
+  }
+
+  @include e(label) {
+    position: relative;
+    width: $-input-cell-label-width;
+    padding: $-cell-wrapper-padding 0;
+    margin-right: $-cell-padding;
+    color: $-cell-title-color;
+    box-sizing: border-box;
+
+    @include when(required) {
+      padding-left: 12px;
+
+      &::after {
+        position: absolute;
+        left: 0;
+        top: $-cell-wrapper-padding + 2px;
+        content: '*';
+        font-size: $-cell-required-size;
+        line-height: 1.1;
+        color: $-cell-required-color;
+      }
+    }
+  }
+
+  @include e(value) {
+    width: 0;
+    flex: 1;
+    padding: $-cell-wrapper-padding 0;
+    margin-right: 10px;
+    color: $-cell-value-color;
+    
+    @include when(ellipsis) {
+      @include lineEllipsis;
+    }
+  }
+
+  @include e(placeholder) {
+    color: $-input-placeholder-color;
+  }
+
+  @include edeep(arrow) {
+    display: block;
+    margin-top: $-cell-wrapper-padding;
+    font-size: $-cell-icon-size;
+    color: $-cell-arrow-color;
+    line-height: 1.25;
+  }
+
+  @include e(toolbar) {
+    position: relative;
+    display: flex;
+    font-size: $-picker-toolbar-fs;
+    height: $-picker-toolbar-height;
+    line-height: $-picker-action-height;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  @include e(action) {
+    display: block;
+    border: none;
+    outline: none;
+    font-size: $-picker-toolbar-fs;
+    color: $-picker-toolbar-finish-color;
+    background: transparent;
+    padding: 24px 15px 14px 15px;
+
+    @include m(cancel) {
+      color: $-picker-toolbar-cancel-color;
+    }
+
+    @include when(loading) {
+      color: $-picker-loading-button-color;
+    }
+  }
+  @include e(title) {
+    display: block;
+    padding-top: 10px;
+    color: $-picker-toolbar-title-color;
+    font-weight: $-action-sheet-weight;
+  }
+}

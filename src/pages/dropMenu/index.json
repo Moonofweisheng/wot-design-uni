@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "drop-menu 下拉列表",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-drop-menu": "../../wot-design/dropMenu/index",
+    "wd-cell": "../../wot-design/cell/index",
+    "wd-sort-button": "../../wot-design/sortButton/index",
+    "wd-button": "../../wot-design/button/index",
+    "wd-drop-menu-item": "../../wot-design/dropMenuItem/index"
+  }
+}

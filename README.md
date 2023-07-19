@@ -1,7 +1,7 @@
 # wot-design-uni
 
 #### 介绍
-uni-app版本的wot-design-mini组件库
+uni-app版本的wot-design-uni组件库
 
 #### 软件架构
 软件架构说明

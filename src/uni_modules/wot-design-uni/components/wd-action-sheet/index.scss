@@ -1,0 +1,147 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(action-sheet) {
+  background-color: #fff;
+  padding-bottom: 1px;
+
+  @include edeep(popup) {
+    border-radius: $-action-sheet-radius $-action-sheet-radius 0 0;
+  }
+  @include e(actions) {
+    padding: 8px 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  @include e(action) {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: $-action-sheet-action-height;
+    line-height: $-action-sheet-action-height;
+    color: $-action-sheet-color;
+    font-size: $-action-sheet-fs;
+    text-align: center;
+    border: none;
+    background: $-action-sheet-bg;
+    outline: none;
+
+    &:after {
+      display: none;
+    }
+
+    &:active {
+      background: $-action-sheet-active-color;
+    }
+
+    @include m(disabled) {
+      color: $-action-sheet-disabled-color;
+    }
+
+    @include m(loading) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: initial;
+    }
+  }
+
+  @include e(name) {
+    display: inline-block;
+  }
+
+  @include e(subname) {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: $-action-sheet-subname-fs;
+    color: $-action-sheet-subname-color;
+  }
+
+  @include e(cancel) {
+    display: block;
+    width: calc(100% - 48px);
+    line-height: $-action-sheet-cancel-height;
+    padding: 0;
+    color: $-action-sheet-cancel-color;
+    font-size: $-action-sheet-fs;
+    text-align: center;
+    border-radius: $-action-sheet-cancel-radius;
+    border: none;
+    background: $-action-sheet-cancel-bg;
+    outline: none;
+    margin: 0 auto 24px;
+    font-weight: $-action-sheet-weight;
+
+    &:active {
+      background: $-action-sheet-active-color;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  @include e(header) {
+    color: $-action-sheet-color;
+    position: relative;
+    height: $-action-sheet-title-height;
+    line-height: $-action-sheet-title-height;
+    text-align: center;
+    font-size: $-action-sheet-title-fs;
+    font-weight: $-action-sheet-weight;
+  }
+
+  @include edeep(close) {
+    position: absolute;
+    top: $-action-sheet-close-top;
+    right: $-action-sheet-close-right;
+    color: $-action-sheet-close-color;
+    font-size: $-action-sheet-close-fs;
+    transform: rotate(-45deg);
+    line-height: 1.1;
+  }
+
+  @include e(panels) {
+    height: 84px;
+    overflow-y: hidden;
+
+    &:first-of-type {
+      margin-top: 20px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 12px;
+    }
+  }
+
+  @include e(panels-content) {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  @include e(panel) {
+    width: 88px;
+    flex: 0 0 auto;
+    display: inline-block;
+    padding: $-action-sheet-panel-padding;
+  }
+
+  @include e(panel-img) {
+    display: block;
+    width: $-action-sheet-panel-img-fs;
+    height: $-action-sheet-panel-img-fs;
+    margin: 0 auto;
+    margin-bottom: 7px;
+    border-radius: $-action-sheet-panel-img-radius;
+  }
+
+  @include e(panel-title) {
+    font-size: $-action-sheet-subname-fs;
+    line-height: 1.2;
+    text-align: center;
+    color: $-action-sheet-color;
+    @include lineEllipsis;
+  }
+}

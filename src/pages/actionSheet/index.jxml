@@ -1,0 +1,49 @@
+<wd-toast id="wd-toast"/>
+<view>
+  <demo-block title="基本用法">
+    <wd-button bind:click="showActions1">弹出菜单</wd-button>
+    <wd-action-sheet
+      show="{{ show }}"
+      actions="{{ actions }}"
+      bind:close="close"
+    />
+  </demo-block>
+  <demo-block title="选项状态">
+    <wd-button bind:click="showActions2">弹出菜单</wd-button>
+  </demo-block>
+  <demo-block title="取消按钮">
+    <wd-button bind:click="showActions3">弹出菜单</wd-button>
+    <wd-action-sheet
+      show="{{ show1 }}"
+      actions="{{ actions }}"
+      cancel-text="取消"
+      bind:close="close1"
+    />
+  </demo-block>
+  <demo-block title="自定义面板单行">
+    <wd-button bind:click="showActions4">弹出菜单</wd-button>
+    <wd-action-sheet
+      show="{{ show2 }}"
+      panels="{{ panels }}"
+      cancel-text="取消"
+      bind:close="close2"
+      bind:select="select"
+    />
+  </demo-block>
+  <demo-block title="自定义面板多行">
+    <wd-button bind:click="showActions5">弹出菜单</wd-button>
+     <wd-action-sheet
+      show="{{ show3 }}"
+      panels="{{ panels }}"
+      cancel-text="取消"
+      bind:close="close3"
+      bind:select="select1"
+    />
+  </demo-block>
+  <demo-block title="标题">
+    <wd-button bind:click="showActions6">弹出菜单</wd-button>
+  </demo-block>
+  <wd-action-sheet show="{{ show4 }}" title="标题" bind:close="close4">
+    <view style="padding: 15px 15px 150px 15px;">内容</view>
+  </wd-action-sheet>
+</view>

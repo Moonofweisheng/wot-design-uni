@@ -1,0 +1,53 @@
+<view class="wd-search {{ light ? 'is-light': ''}} {{ hideCancel ? 'is-without-cancel': '' }} custom-class">
+  <!--自定义label插槽-->
+  <!--搜索框主体-->
+  <view class="wd-search__block">
+    <slot name="prefix"></slot>
+    <view class="wd-search__field">
+      <view
+        v-if="{{!placeholderLeft}}"
+        style="display: {{ (str === '' && showPlaceHolder) ? 'flex' : 'none' }}"
+        class="wd-search__cover"
+        bindtap="closeCover"
+      >
+        <wd-icon name="search" size="18px" class="wd-search__search-icon"></wd-icon>
+        <text class="wd-search__placeholder-txt">{{ placeholder || '搜索' }}</text>
+      </view>
+      <!--icon:search-->
+      <wd-icon name="search" size="18px" class="wd-search__search-left-icon"></wd-icon>
+      <!--搜索框-->
+      <input
+        placeholder="{{ placeholder || '搜索' }}"
+        placeholder-class="wd-search__placeholder-txt"
+        confirm-type="search"
+        value="{{str}}"
+        class="wd-search__input"
+        bindfocus="searchFocus"
+        bindinput="inputValue"
+        bindblur="searchBlur"
+        bindconfirm="search"
+        disabled="{{disabled}}"
+        maxlength="{{maxlength}}"
+        focus="{{focus}}"
+      />
+      <!--icon:clear-->
+      <wd-icon
+        v-if="{{str}}"
+        custom-class="wd-search__clear-icon"
+        name="error-fill"
+        size="16px"
+        class="wd-search__clear"
+        bindtap="clearSearch"
+      />
+    </view>
+  </view>
+  <!--the button behind input,care for hideCancel without displaying-->
+  <block v-if="{{!hideCancel}}">
+    <!--有插槽就不用默认的按钮了-->
+    <slot v-if="{{userSuffixSlot}}" name="suffix"></slot>
+    <!--默认button-->
+    <view v-else class="wd-search__cancel" bindtap="handleCancel">
+      {{ cancelTxt || '取消' }}
+    </view>
+  </block>
+</view>

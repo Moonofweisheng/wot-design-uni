@@ -1,0 +1,15 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(checkbox-group) {
+  background-color: $-checkbox-bg;
+
+  // 上下20px 左右15px 内部间隔12px
+  @include when(button) {
+    width: 100%;
+    padding: 8px 3px 20px 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: auto;
+  }
+}

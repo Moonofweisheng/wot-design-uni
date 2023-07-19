@@ -1,0 +1,78 @@
+<view class="wd-col-picker {{ border ? 'is-border' : '' }} custom-class">
+  <view class="wd-col-picker__field" bind:tap="showPicker">
+    <slot v-if="{{ useDefaultSlot }}"></slot>
+    <view v-else class="wd-col-picker__cell {{ disabled && 'is-disabled' }} {{ readonly && 'is-readonly' }} {{ alignRight && 'is-align-right' }} {{ error && 'is-error' }} {{ size && ('is-' + size) }}">
+      <view
+        v-if="{{ label || useLabelSlot }}"
+        class="wd-col-picker__label {{ required && 'is-required' }} custom-label-class"
+        style="{{ labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : '' }}"
+      >
+        <block v-if="{{ label }}">{{ label }}</block>
+        <slot v-else name="label"></slot>
+      </view>
+      <view class="wd-col-picker__value {{ ellipsis && 'is-ellipsis' }} custom-value-class {{ showValue ? '' : 'wd-col-picker__value--placeholder'  }}">{{ showValue || placeholder || '请选择' }}</view>
+      <wd-icon
+        v-if="{{!disabled && !readonly}}"
+        custom-class="wd-col-picker__arrow"
+        name="arrow-right"
+      />
+    </view>
+  </view>
+  <wd-action-sheet
+    show="{{ pickerShow }}"
+    duration="{{ 250 }}"
+    title="{{ title || '请选择' }}"
+    close-on-click-modal="{{ closeOnClickModal }}"
+    z-index="{{ zIndex }}"
+    safe-area-inset-bottom="{{ safeAreaInsetBottom }}"
+    bind:close="handlePickerClose"
+  >
+    <view class="wd-col-picker__selected">
+      <scroll-view
+        scroll-x="true"
+        scroll-with-animation
+        scroll-left="{{scrollLeft}}"
+      >
+        <view class="wd-col-picker__selected-container">
+          <view
+            jd:for="{{ selectList }}"
+            jd:for-index="colIndex"
+            jd:key="colIndex"
+            class="wd-col-picker__selected-item {{ colIndex === currentCol && 'is-selected' }}"
+            data-index="{{ colIndex }}"
+            bind:tap="handleColClick"
+          >{{ selectShowList[colIndex] || '请选择' }}</view>
+          <view class="wd-col-picker__selected-line" style="{{ lineStyle }}"></view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="wd-col-picker__list-container">
+      <view
+        jd:for="{{ selectList }}"
+        jd:for-index="colIndex"
+        jd:for-item="col"
+        jd:key="colIndex"
+        class="wd-col-picker__list"
+        style="{{ colIndex === currentCol ? 'display: block;' : 'display: none;' }}"
+      >
+        <view
+          jd:for="{{ col }}"
+          jd:key="index"
+          class="wd-col-picker__list-item {{ pickerColSelected[colIndex] && item[valueKey] === pickerColSelected[colIndex] && 'is-selected' }} {{ item.disabled && 'is-disabled' }}"
+          data-col-index="{{ colIndex }}"
+          data-index="{{ index }}"
+          bind:tap="chooseItem"
+        >
+          <view>
+            <view class="wd-col-picker__list-item-label">{{ item[labelKey] }}</view>
+            <view v-if="{{ item[tipKey] }}" class="wd-col-picker__list-item-tip">{{ item[tipKey] }}</view>
+          </view>
+          <wd-icon custom-class="wd-col-picker__checked" name="check"></wd-icon>
+        </view>
+        <view v-if="{{ loading }}" class="wd-col-picker__loading">
+          <wd-loading color="{{ loadingColor }}" />
+        </view>
+      </view>
+    </view>
+  </wd-action-sheet>
+</view>

@@ -1,0 +1,31 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(loadmore) {
+  width: 100%;
+  height: $-loadmore-height;
+  line-height: $-loadmore-height;
+  text-align: center;
+  color: $-loadmore-color;
+
+  @include edeep(loading) {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align:  middle;
+  }
+  @include e(text) {
+    display: inline-block;
+    font-size: $-loadmore-fs;
+    vertical-align: middle;
+
+    @include when(light) {
+      margin: 0 6px;
+      color: $-loadmore-error-color;
+    }
+  }
+  @include edeep(refresh) {
+    display: inline-block;
+    color: $-loadmore-error-color;
+    vertical-align: middle;
+  }
+}

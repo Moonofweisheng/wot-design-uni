@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "DatetimePickerView 时间选择器视图",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-datetime-picker-view": "../../wot-design/datetimePickerView/index",
+    "wd-toast": "../../wot-design/toast/index"
+  }
+}

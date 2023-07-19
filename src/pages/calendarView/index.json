@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "CalendarView 日历面板",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-calendar-view": "../../wot-design/calendarView/index",
+    "wd-radio": "../../wot-design/radio/index",
+    "wd-radio-group": "../../wot-design/radioGroup/index"
+  }
+}

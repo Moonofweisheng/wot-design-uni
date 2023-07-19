@@ -1,0 +1,44 @@
+<view
+  class="wd-tag custom-class {{tagClass}}"
+  style="{{(!plain && bgColor)?'background :'+bgColor+';':''}}{{bgColor?'border-color:'+bgColor:''}}"
+  bindtap="handleClick"
+>
+  <view v-if="{{useIconSlot}}" class="wd-tag__icon">
+    <slot name="icon"/>
+  </view>
+  <wd-icon
+    jd:elif="{{icon}}"
+    name="{{icon}}"
+    custom-class="wd-tag__icon"
+  />
+  <view class="wd-tag__text" style="{{color?'color:'+color:''}}">
+    <slot/>
+  </view>
+  <wd-icon
+    v-if="{{closable && round}}"
+    class="wd-tag__close"
+    name="error-fill"
+    catchtap="handleClose"/>
+  <input
+    v-if="{{ dynamicInput && dynamic }}"
+    class="wd-tag__add-text"
+    placeholder="请输入"
+    type="text"
+    focus="true"
+    value="{{ dynamicValue }}"
+    bindblur="handleBlur"
+    bindconfirm="handleConfirm">
+  </input>
+  <view
+    jd:elif="{{ dynamic }}"
+    class="wd-tag__text"
+    style="{{color?'color:'+color:''}}"
+    catchtap="handleAdd">
+    <wd-icon
+      class="wd-tag__add"
+      size="12px"
+      name="add"
+      custom-class="wd-tag__icon"
+    />新增标签
+  </view>
+</view>

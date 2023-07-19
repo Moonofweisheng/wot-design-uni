@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Slider 滑块",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-slider": "../../wot-design/slider/index"
+  }
+}

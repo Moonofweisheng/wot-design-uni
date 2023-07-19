@@ -1,0 +1,73 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(drop-menu) {
+  box-sizing: border-box;
+  color: $-drop-menu-color;
+  font-size: $-drop-menu-fs;
+  position: relative;
+
+  @include e(list) {
+    display: flex;
+    text-align: center;
+    background-color: #fff;
+  }
+  @include e(item) {
+    flex: 1;
+    min-width: 0;
+    height: $-drop-menu-height;
+    line-height: $-drop-menu-height;
+    text-align: center;
+
+    @include when(active) {
+      font-weight: $-fw-medium;
+
+      .wd-drop-menu__item-title::after {
+        opacity: 1;
+      }
+      :deep(.wd-drop-menu__arrow) {
+        transform: scale(0.6) rotate(-180deg);
+        transform-origin: center center;
+      }
+    }
+    @include when(disabled) {
+      color: $-drop-menu-disabled-color;
+    }
+  }
+
+  @include e(item-title) {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    padding: 0 $-drop-menu-side-padding;
+    box-sizing: border-box;
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 19px;
+      height: $-drop-menu-line-height;
+      bottom: 6px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      background: $-drop-menu-line-color;
+      border-radius: $-drop-menu-line-height;
+      transition: opacity .15s;
+      opacity: 0;
+    }
+  }
+
+  @include e(item-title-text) {
+    position: relative;
+    @include lineEllipsis;
+  }
+
+  @include edeep(arrow) {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: -4px;
+    transition: transform 0.3s;
+    transform: scale(0.6);
+  }
+}

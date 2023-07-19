@@ -1,0 +1,4 @@
+<view class="wd-icon custom-class {{isImageUrl ? 'wd-icon--image' : ('wd-icon-' + name)}}"
+      style="color: {{color}}; font-size: {{size}}; {{customStyle}}">
+  <image v-if="{{isImageUrl}}" class="wd-icon__image" src="{{name}}"></image>
+</view>

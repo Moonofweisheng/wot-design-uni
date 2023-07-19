@@ -1,0 +1,87 @@
+<jds src="../calendarView/utils.jds" module="utils" />
+
+<view class="wd-calendar {{ border ? 'is-border' : '' }} custom-class">
+  <view class="wd-calendar__field" bind:tap="open">
+    <slot v-if="{{ useDefaultSlot }}"></slot>
+    <view v-else class="wd-calendar__cell {{ disabled && 'is-disabled' }} {{ readonly && 'is-readonly' }} {{ alignRight && 'is-align-right' }} {{ error && 'is-error' }} {{ size && ('is-' + size) }} {{ center && 'is-center' }}">
+      <view
+        v-if="{{ label || useLabelSlot }}"
+        class="wd-calendar__label {{ required && 'is-required' }} custom-label-class"
+        style="{{ labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : '' }}"
+      >
+        <block v-if="{{ label }}">{{ label }}</block>
+        <slot v-else name="label"></slot>
+      </view>
+      <view class="wd-calendar__value {{ ellipsis && 'is-ellipsis' }} custom-value-class {{ showValue ? '' : 'wd-calendar__value--placeholder'  }}">{{ showValue || placeholder || '请选择' }}</view>
+      <wd-icon
+        v-if="{{!disabled && !readonly}}"
+        custom-class="wd-calendar__arrow"
+        name="arrow-right"
+      />
+    </view>
+  </view>
+  <wd-action-sheet
+    show="{{ pickerShow }}"
+    duration="{{ 250 }}"
+    close-on-click-modal="{{ closeOnClickModal }}"
+    safe-area-inset-bottom="{{ safeAreaInsetBottom }}"
+    z-index="{{ zIndex }}"
+    bind:close="close"
+  >
+    <view class="wd-calendar__header">
+      <view v-if="{{ !showTypeSwitch && shortcuts.length === 0 }}" class="wd-calendar__title">{{ title || '选择日期' }}</view>
+      <view v-if="{{ showTypeSwitch }}" class="wd-calendar__tabs">
+        <wd-tabs id="tabs" value="{{ currentTab }}" bind:change="handleTypeChange">
+          <wd-tab title="日" />
+          <wd-tab title="周" />
+          <wd-tab title="月" />
+        </wd-tabs>
+      </view>
+      <view v-if="{{ shortcuts.length > 0 }}" class="wd-calendar__shortcuts">
+        <wd-tag
+          jd:for="{{ shortcuts }}"
+          jd:key="index"
+          custom-class="wd-calendar__tag"
+          type="primary"
+          plain
+          round
+          data-index="{{ index }}"
+          bind:click="handleShortcutClick"
+        >{{ item.text }}</wd-tag>
+      </view>
+      <wd-icon custom-class="wd-calendar__close" name="add" bind:tap="close"/>
+    </view>
+    <view v-if="{{ inited }}" class="wd-calendar__view {{ currentType.indexOf('range') > -1 && 'is-range' }} {{ showConfirm && 'is-show-confirm' }}">
+      <view v-if="{{ utils.isRange(type) }}" class="wd-calendar__range-label {{ type === 'monthrange' && 'is-monthrange' }}">
+        <view class="wd-calendar__range-label-item {{ (!calendarValue || !calendarValue[0]) && 'is-placeholder' }}" style="text-align: right;">
+          {{ rangeLabel[0] }}
+        </view>
+        <view class="wd-calendar__range-sperator">/</view>
+        <view class="wd-calendar__range-label-item {{ (!calendarValue || !calendarValue[1]) && 'is-placeholder' }}">
+          {{ rangeLabel[1] }}
+        </view>
+      </view>
+      <wd-calendar-view
+        id="calendarView"
+        value="{{ calendarValue }}"
+        type="{{ currentType }}"
+        min-date="{{ minDate }}"
+        max-date="{{ maxDate }}"
+        first-day-of-week="{{ firstDayOfWeek }}"
+        formatter="{{ formatter }}"
+        panel-height="{{ panelHeight }}"
+        max-range="{{ maxRange }}"
+        range-prompt="{{ rangePrompt }}"
+        allow-same-day="{{ allowSameDay }}"
+        default-time="{{ defaultTime }}"
+        time-filter="{{ timeFilter }}"
+        hide-second="{{ hideSecond }}"
+        show-panel-title="{{ !utils.isRange(type) }}"
+        bind:change="handleChange"
+      />
+    </view>
+    <view v-if="{{ showConfirm }}" class="wd-calendar__confirm">
+      <wd-button block disabled="{{ confirmBtnDisabled }}" bind:click="handleConfirm">{{ confirmText || '确定' }}</wd-button>
+    </view>
+  </wd-action-sheet>
+</view>

@@ -1,0 +1,50 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(tooltip) {
+  position: relative;
+  display: inline-block;
+
+  @include e(pos) {
+    position: absolute;
+    min-width: 138px;
+    min-height: 36px;
+    font-size: $-tooltip-fs;
+    backdrop-filter: blur($-tooltip-blur);
+    background-clip: padding-box;
+    border-radius: $-tooltip-radius;
+    background: $-tooltip-bg;
+    color: $-tooltip-color;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+  }
+
+  @include e(hidden) {
+    left: -100vw;
+    bottom: -100vh;
+    visibility: hidden;
+  }
+
+  @include e(container) {
+    line-height: $-tooltip-line-height;
+    font-size: $-tooltip-fs;
+  }
+
+  @include e(inner) {
+    padding: $-tooltip-padding;
+    white-space: nowrap;
+    line-height: $-tooltip-line-height;
+  }
+
+  @include e(close-icon) {
+    font-size: 12px;
+    position: absolute;
+    right: -8px;
+    top: -10px;
+    transform: scale(0.5);
+    padding: 10px;
+  }
+
+  @include triangleArrow($-tooltip-arrow-size, $-tooltip-bg);
+}

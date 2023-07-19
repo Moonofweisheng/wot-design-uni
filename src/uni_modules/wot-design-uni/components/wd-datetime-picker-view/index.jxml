@@ -1,0 +1,14 @@
+<wd-picker-view
+  custom-class="custom-class"
+  id="{{pickerId}}"
+  value="{{pickerValue}}"
+  columns="{{columns}}"
+  columns-height="{{columnsHeight}}"
+  cancel-button-text="{{cancelButtonText}}"
+  confirm-button-text="{{confirmButtonText}}"
+  loading="{{loading}}"
+  loading-color="{{loadingColor}}"
+  bind:change="onChange"
+  bind:pickstart="onPickStart"
+  bind:pickend="onPickEnd"
+></wd-picker-view>

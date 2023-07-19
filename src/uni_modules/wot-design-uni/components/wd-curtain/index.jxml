@@ -1,0 +1,28 @@
+<wd-popup
+  show="{{ show }}"
+  transition="zoom-in"
+  position="center" 
+  close-on-click-modal="{{closeOnClickModal}}"
+  hide-when-close="hideWhenClose"
+  bind:beforeenter="beforeenter"
+  bind:enter="enter"
+  bind:afterenter="afterenter"
+  bind:beforeleave="beforeleave"
+  bind:leave="leave"
+  bind:afterleave="afterleave"
+  bind:close="close"
+  bind:closed="closed"
+  bind:clickmodal="clickModal"
+  custom-class="wd-curtain custom-class">
+  <view class="wd-curtain__content">
+    <image
+      src="{{ src }}"
+      class="wd-curtain__content-img"
+      style="{{ imgStyle }}"
+      bind:tap="clickImage"
+      bind:error="imgErr"
+      bind:load="imgLoad">
+    </image>
+    <wd-icon name="close-outline" size="24px" class="wd-curtain__content-close {{ closePosition }}" bind:tap="close"/>
+  </view>
+</wd-popup>

@@ -1,0 +1,35 @@
+@import "../common/abstracts/_mixin.scss";
+@import "../common/abstracts/variable.scss";
+
+@include b(loading) {
+  font-size: 0;
+  line-height: 0;
+  vertical-align: middle;
+  display: inline-block;
+
+  @include e(body) {
+    width: 100%;
+    height: 100%;
+    animation: wd-rotate 0.8s linear infinite;
+    animation-duration: 2s;
+
+  }
+  @include e(svg) {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+@keyframes wd-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+

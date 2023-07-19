@@ -1,0 +1,15 @@
+page{
+  height: 250vh;
+}
+.demo-block {
+  margin: 15px 0;
+  color: #666;
+}
+.is-white {
+  background: #fff;
+}
+.demo-title {
+  padding: 0 15px;
+  margin: 10px 0;
+  font-size: 13px;
+}

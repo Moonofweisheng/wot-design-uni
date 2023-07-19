@@ -1,0 +1,192 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(tabs) {
+  position: relative;
+  background: #fff;
+  width: 100%;
+
+  @include e(nav) {
+    left: 0;
+    right: 0;
+    height: $-tabs-nav-height;
+    background-color: #fff;
+    width: 100%;
+    position: relative;
+
+    @include m(wrap) {
+      height: 100%;
+      overflow: hidden;
+    }
+    @include m(sticky) {
+      width: 100vw;
+    }
+  }
+  @include e(nav-container) {
+    position: relative;
+    display: flex;
+    user-select: none;
+  }
+  @include e(nav-item) {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    height: $-tabs-nav-height;
+    line-height: $-tabs-nav-height;
+    font-size: $-tabs-nav-fs;
+    color: $-tabs-nav-color;
+    transition: color .3s;
+
+    @include when(active) {
+      font-weight: 500;
+    }
+    @include when(disabled) {
+      color: $-tabs-nav-disabled-color;
+    }
+  }
+  @include e(line) {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    height: $-tabs-nav-line-height;
+    background: $-tabs-nav-line-bg-color;
+    z-index: 1;
+    border-radius: 1.5px;
+  }
+  @include e(container) {
+    overflow: hidden;
+  }
+  @include e(body) {
+    position: relative;
+  }
+  @include e(map) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+  @include e(map-btn) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: $-tabs-nav-height;
+    height: $-tabs-nav-height;
+    line-height: $-tabs-nav-height;
+    text-align: center;
+    color: $-tabs-nav-map-arrow-color;
+    z-index: 1;
+    background: $-tabs-nav-bg;
+    -webkit-tap-highlight-color: transparent;
+
+    &::before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: -24px;
+      width: 24px;
+      height: $-tabs-nav-height - 1;
+      background: $-tabs-nav-map-btn-before-bg;
+    }
+  }
+  @include e(map-arrow) {
+    display: block;
+    transition: transform .3s;
+
+    @include when(open) {
+      transform: rotate(180deg);
+    }
+  }
+  @include e(map-header) {
+    position: relative;
+    padding-left: 17px;
+    height: $-tabs-nav-height;
+    line-height: $-tabs-nav-height;
+    font-size: $-tabs-nav-map-fs;
+    color: $-tabs-nav-map-color;
+    transition: opacity .3s;
+    background: #fff;
+    opacity: 0;
+
+    @include halfPixelBorder;
+
+    &::after {
+      z-index: 3;
+    }
+  }
+  @include e(map-body) {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 15px 10px;
+    background: #fff;
+    transition: transform .3s;
+    transform: scaleY(0);
+    transform-origin: center top;
+
+    @include when(open) {
+      transform: scaleY(1);
+    }
+  }
+  @include e(map-nav-item) {
+    flex-basis: 33%;
+
+    &:nth-child(3n + 2) {
+      text-align: center;
+    }
+    &:nth-child(3n + 3) {
+      text-align: right;
+    }
+  }
+  @include e(map-nav-btn) {
+    @include buttonClear;
+    @include lineEllipsis;
+    display: inline-block;
+    width: 107px;
+    height: 32px;
+    line-height: 32px;
+    background-color: $-tabs-nav-map-button-back-color;
+    border-color: transparent;
+    margin-bottom: 10px;
+    border-radius: $-tabs-nav-map-button-radius;
+    color: $-tabs-nav-map-color;
+    font-size: $-tabs-nav-map-fs;
+    text-align: center;
+    transition: color .3s, border-color .3s;
+
+    @include when(active) {
+      color: $-tabs-nav-active-color;
+      border: 1px solid $-tabs-nav-active-color;
+      background-color: $-tabs-nav-bg
+    }
+    @include when(disabled) {
+      color: $-tabs-nav-disabled-color;
+      border-color: #f4f4f4;
+    }
+  }
+  @include e(mask) {
+    position: absolute;
+    top: $-tabs-nav-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $-tabs-nav-map-modal-bg;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  @include when(slide) {
+    .wd-tabs__nav-item {
+      flex: 0 0 auto;
+      padding: 0 17px;
+    }
+  }
+  @include when(map) {
+    .wd-tabs__nav--wrap{
+      padding-right: 40px;
+    }
+  }
+}
+@media screen and (max-width: 330px) {
+  .wd-tabs__map-nav-btn {
+    width: 90px;
+  }
+}

@@ -1,0 +1,40 @@
+<demo-block title="单个日期选择" hor="{{ 0 }}">
+  <view style="margin: 0 15px 10px;">
+    <view style="margin-bottom: 10px; font-size: 13px;">切换类型：</view>
+    <wd-radio-group value="{{ type1 }}" shape="button" bind:change="handleTypeChange1">
+      <wd-radio value="date">date</wd-radio>
+      <wd-radio value="week">week</wd-radio>
+      <wd-radio value="month">month</wd-radio>
+    </wd-radio-group>
+  </view>
+  <wd-calendar-view type="{{ type1 }}" value="{{ value1 }}" bind:change="handleChange1"></wd-calendar-view>
+</demo-block>
+<demo-block title="多个日期选择" hor="{{ 0 }}">
+  <wd-calendar-view type="dates" value="{{ value2 }}" bind:change="handleChange2"></wd-calendar-view>
+</demo-block>
+<demo-block title="日期范围选择" hor="{{ 0 }}">
+  <view style="margin: 0 15px 10px;">
+    <view style="margin-bottom: 10px; font-size: 13px;">切换类型：</view>
+    <wd-radio-group value="{{ type2 }}" shape="button" bind:change="handleTypeChange2">
+      <wd-radio value="daterange">daterange</wd-radio>
+      <wd-radio value="weekrange">weekrange</wd-radio>
+      <wd-radio value="monthrange">monthrange</wd-radio>
+    </wd-radio-group>
+  </view>
+  <wd-calendar-view type="{{ type2 }}" allow-same-day value="{{ value3 }}" bind:change="handleChange3"></wd-calendar-view>
+</demo-block>
+<demo-block title="时间类型" hor="{{ 0 }}">
+  <wd-calendar-view type="datetime" value="{{ value4 }}"></wd-calendar-view>
+</demo-block>
+<demo-block title="时间范围类型" hor="{{ 0 }}">
+  <wd-calendar-view type="datetimerange" value="{{ value5 }}"></wd-calendar-view>
+</demo-block>
+<demo-block title="限制最大选择范围" hor="{{ 0 }}">
+  <wd-calendar-view type="daterange" max-range="{{ 3 }}"></wd-calendar-view>
+</demo-block>
+<demo-block title="自定义日期" hor="{{ 0 }}">
+  <wd-calendar-view type="daterange" allow-same-day value="{{ value6 }}" formatter="{{ formatter }}"></wd-calendar-view>
+</demo-block>
+<demo-block title="设置周起始日" hor="{{ 0 }}">
+  <wd-calendar-view first-day-of-week="{{ 1 }}"></wd-calendar-view>
+</demo-block>

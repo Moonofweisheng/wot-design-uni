@@ -1,0 +1,86 @@
+@import "../common/abstracts/variable.scss";
+@import "../common/abstracts/_mixin.scss";
+
+@include bdeep(message-box) {
+  border-radius: $-message-box-radius;
+  overflow: hidden;
+
+  @include e(container) {
+    width: $-message-box-width;
+    box-sizing: border-box;
+  }
+  @include e(body) {
+    background-color: $-message-box-bg;
+    padding: $-message-box-padding;
+
+    @include when(no-title) {
+      padding: 25px 24px 0px;
+    }
+  }
+  @include e(title) {
+    text-align: center;
+    font-size: $-message-box-title-fs;
+    color: $-message-box-title-color;
+    line-height: 20px;
+    font-weight: 500;
+    padding-top: 5px;
+    padding-bottom: 10px;
+  }
+  @include e(content) {
+    max-height: $-message-box-content-max-height;
+    color: $-message-box-content-color;
+    font-size: $-message-box-content-fs;
+    text-align: center;
+    overflow: auto;
+    word-break: break-all;
+    line-height: 20px;
+
+    &::-webkit-scrollbar {
+      width: $-message-box-content-scrollbar-width;
+    }
+    &::-webkit-scrollbar-thumb {
+      width: $-message-box-content-scrollbar-width;
+      background: $-message-box-content-scrollbar-color;
+      border-radius: calc($-message-box-content-scrollbar-width / 2);
+    }
+  }
+
+  @include e(input-error) {
+    min-height: 18px;
+    margin-top: 2px;
+    color: $-message-box-input-error-color;
+    text-align: left;
+
+    @include when(hidden) {
+      visibility: hidden;
+    }
+  }
+  @include e(actions) {
+    padding: 24px;
+  }
+  @include e(flex) {
+    display: flex;
+  }
+  @include e(block) {
+    display: block;
+  }
+  @include e(cancel) {
+    margin-right: 16px;
+  }
+}
+
+.zoomIn-enter-active, .zoomIn-leave-active{
+  opacity: 1;
+  transform: translate3d(-50%, -50%, 0) scale(1);
+  transition: all .2s;
+}
+.zoomIn-enter{
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0.7);
+  transition: all .2s ease-out;
+}
+.zoomIn-leave-to{
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0.9);
+  transition: all .2s ease-out;
+}

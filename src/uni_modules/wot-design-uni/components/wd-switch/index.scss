@@ -1,0 +1,57 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(switch) {
+  display: inline-block;
+  position: relative;
+  width: $-switch-width;
+  height: $-switch-height;
+  border-radius: $-switch-circle-size;
+  background: $-switch-inactive-color;
+  transition: all .3s;
+
+  @include e(checkbox) {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+  }
+  @include e(circle) {
+    box-sizing: border-box;
+    position: absolute;
+    display: inline-block;
+    width: $-switch-circle-size;
+    height: $-switch-circle-size;
+    top: 2px;
+    left: 2px;
+    background: #fff;
+    border-radius: 50%;
+    transition: left .3s ease-out;
+    box-shadow: 0 2px 4px 0 $-switch-inactive-shadow-color;
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: calc(200% - 2px);
+      height: calc(200% - 2px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      border: 1px solid $-switch-border-color;
+      border-radius: 50%;
+    }
+  }
+  @include when(checked) {
+    background: $-switch-active-color;
+    border-color: $-switch-active-color;
+
+    .wd-switch__circle {
+      left: calc(#{$-switch-width - $-switch-circle-size} - 2px);
+      box-shadow: 0 2px 4px 0 $-switch-active-shadow-color
+    }
+  }
+  @include when(disabled) {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "month": "../month/index",
+    "wd-picker-view": "../../../pickerView/index"
+  }
+}

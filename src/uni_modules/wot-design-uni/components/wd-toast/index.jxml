@@ -1,0 +1,26 @@
+<wd-transition
+  name="fade"
+  show="{{ show }}"
+  custom-class="wd-toast__container"
+  custom-style="z-index: {{ zIndex }};"
+>
+  <view
+    class="wd-toast custom-class wd-toast--{{position}} {{ (iconName !== 'loading' || msg) && (iconName || customIcon) ? 'wd-toast--with-icon' : '' }} {{ (iconName === 'loading' && !msg) ? 'wd-toast--loading' : '' }}"
+  >
+    <!--iconName优先级更高-->
+    <wd-loading
+      v-if="{{iconName === 'loading'}}"
+      type="{{ loadingType }}"
+      color="{{ loadingColor }}"
+      custom-class="wd-toast__icon"
+    />
+    <view class="wd-toast__iconWrap wd-toast__icon" jd:elif="{{ iconName === 'success' || iconName === 'warning' || iconName === 'info' || iconName === 'error' }}" style="width:{{ iconSize }}px; height:{{ iconSize }}px">
+      <view class="wd-toast__iconBox">
+        <view class="wd-toast__iconSvg" style="background-image: url({{svgStr}}); width:{{ iconSize }}px; height:{{ iconSize }}px"></view>
+      </view>
+    </view>
+    <view jd:elif="{{customIcon}}" class="wd-toast__icon custom-icon-class"/>
+    <!--文本-->
+    <view v-if="{{ msg }}" class="wd-toast__msg">{{ msg }}</view>
+  </view>
+</wd-transition>

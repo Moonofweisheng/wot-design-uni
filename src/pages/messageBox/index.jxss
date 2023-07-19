@@ -1,0 +1,4 @@
+.custom-rate-class{
+  display: block;
+  height: 22px;
+}

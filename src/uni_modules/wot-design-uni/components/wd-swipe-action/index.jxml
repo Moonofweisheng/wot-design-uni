@@ -1,0 +1,24 @@
+<!--注意阻止横向滑动的穿透：横向移动时阻止冒泡-->
+<view
+  class="wd-swipe-action custom-class"
+  catchtap="onClick"
+  bindtouchstart="startDrag"
+  catchtouchmove="{{stopPropagation ? 'nothing' :''}}"
+  capture-bind:touchmove="onDrag"
+  catchtouchend="endDrag"
+  catchtouchcancel="endDrag"
+>
+  <!--容器-->
+  <view class="wd-swipe-action__wrapper" style="{{wrapperStyle}}">
+    <!--左侧操作-->
+    <view class="wd-swipe-action__left" data-key="left" catchtap="onClick">
+      <slot name="left"/>
+    </view>
+    <!--内容-->
+    <slot/>
+    <!--右侧操作-->
+    <view class="wd-swipe-action__right" data-key="right" catchtap="onClick">
+      <slot name="right"/>
+    </view>
+  </view>
+</view>

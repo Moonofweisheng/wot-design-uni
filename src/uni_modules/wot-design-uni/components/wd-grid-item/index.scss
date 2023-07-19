@@ -1,0 +1,113 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+@include b(grid-item) {
+  height: 100%;
+  font-size: $-grid-item-fs;
+  box-sizing: border-box;
+
+  position: relative;
+  float: left;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+
+  @include when(border) {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      transform: scaleY(0.5);
+      background-color: $-grid-item-border-color;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      transform: scaleX(0.5);
+      height: 100%;
+      background-color: $-grid-item-border-color;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  // 第一行元素
+  @include when(first) {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      transform: scaleX(0.5);
+      height: 100%;
+      background-color: $-grid-item-border-color;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  // 每行右侧的元素
+  @include when(right) {
+    &::after {
+      display: none;
+    }
+  }
+
+  @include when(last) {
+    &::after {
+      display: none;
+    }
+  }
+  @include e(wrapper) {
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  @include e(content) {
+    height: 100%;
+    padding: $-grid-item-padding;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @include when(square) {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    @include when(round) {
+      &::after {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        border: 1px solid $-grid-item-border-color;
+        transform-origin: top left;
+        transform: scale(0.5);
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  @include e(text) {
+    margin-top: 8px;
+    font-size: $-grid-item-fs;
+    line-height: $-grid-item-fs;
+    @include lineEllipsis;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "wd-icon": "../icon/index",
+    "wd-divider": "../divider/index",
+    "wd-loading": "../loading/index"
+  }
+}

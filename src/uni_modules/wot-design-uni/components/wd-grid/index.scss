@@ -1,0 +1,9 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(grid) {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: auto;
+}

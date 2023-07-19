@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "wd-action-sheet": "../actionSheet/index",
+    "wd-icon": "../icon/index",
+    "wd-loading": "../loading/index"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "Radio 单选框",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-cell-group": "../../wot-design/cellGroup/index",
+    "wd-cell": "../../wot-design/cell/index",
+    "wd-radio": "../../wot-design/radio/index",
+    "wd-radio-group": "../../wot-design/radioGroup/index"
+  }
+}

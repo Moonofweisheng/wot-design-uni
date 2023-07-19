@@ -1,0 +1,111 @@
+@import '../common/abstracts/_mixin.scss';
+@import '../common/abstracts/variable.scss';
+
+@include b(search) {
+  display: flex;
+  padding: $-search-padding;
+  align-items: center;
+  background: #fff;
+
+  @include e(block) {
+    flex: 1;
+    background-color: $-search-input-bg;
+    border-radius: $-search-input-radius;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+  }
+  @include e(field) {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+  }
+  @include e(input) {
+    flex: 1;
+    height: $-search-input-height;
+    box-sizing: border-box;
+    padding: $-search-input-padding;
+    border: none;
+    background: transparent;
+    font-size: $-search-input-fs;
+    -webkit-appearance: none;
+    outline: none;
+    color: $-search-input-color;
+    z-index: 0;
+
+    @include lineEllipsis;
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+  }
+  @include e(cover) {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: $-search-input-height;
+    background-color: $-search-input-bg;
+    line-height: $-search-input-height;
+    font-size: $-search-input-fs;
+    border-radius: $-search-input-radius;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  @include edeep(search-icon) {
+    margin-right: 8px;
+    color: $-search-icon-color;
+    font-size: $-search-input-fs;
+    height: $-search-input-height;
+  }
+  @include edeep(search-left-icon) {
+    position: absolute;
+    display: inline-block;
+    height: $-search-input-height;
+    line-height: $-search-input-height;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: $-search-icon-color;
+    font-size: $-search-input-fs;
+  }
+  @include e(placeholder-txt) {
+    color: $-search-placeholder-color;
+    font-size: $-search-input-fs;
+  }
+  @include edeep(clear) {
+    position: absolute;
+    right: 0;
+    padding: 6px 9px 6px 7px;
+    color: $-search-cancel-color;
+  }
+  @include edeep(clear-icon) {
+    vertical-align: middle;
+  }
+  @include e(cancel) {
+    padding: $-search-cancel-padding;
+    height: $-search-input-height;
+    line-height: $-search-input-height;
+    font-size: $-search-cancel-fs;
+    color: $-search-cancel-color;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @include when(light) {
+    background: $-search-light-bg;
+
+    .wd-search__block {
+      background: #fff;
+    }
+
+    .wd-search__cover {
+      background: #fff;
+    }
+  }
+  @include when(without-cancel) {
+    padding-right: $-search-side-padding;
+  }
+}

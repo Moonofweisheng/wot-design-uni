@@ -1,0 +1,270 @@
+<template>
+  <view @click="handleClick" data-eventsync="true" :class="rootClass" :style="rootStyle">
+    <image v-if="isImageUrl" class="wd-icon__image" :src="name"></image>
+  </view>
+</template>
+
+<script lang="ts">
+export default {
+  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
+<script lang="ts" setup>
+import { computed, ref, watch } from 'vue'
+import { objToStyle } from '../common/util'
+
+interface Props {
+  name: string
+  color?: string
+  size?: string
+  customStyle?: string
+  customClass?: string
+}
+const props = withDefaults(defineProps<Props>(), {
+  customStyle: '',
+  customClass: ''
+})
+
+const isImageUrl = ref<boolean>(false)
+
+watch(
+  () => props.name,
+  (val) => {
+    isImageUrl.value = val.indexOf('/') > -1
+  }
+)
+
+const rootClass = computed(() => {
+  return `wd-icon ${props.customClass} ${isImageUrl.value ? 'wd-icon--image' : 'wd-icon-' + props.name}`
+})
+
+const rootStyle = computed(() => {
+  const style: Record<string, any> = {}
+  if (props.color) {
+    style['color'] = props.color
+  }
+  if (props.size) {
+    style['font-size'] = props.size
+  }
+  return `${objToStyle(style)}; ${props.customStyle}`
+})
+
+const emit = defineEmits(['click'])
+
+function handleClick(e) {
+  emit('click', e)
+}
+</script>
+
+<style lang="scss" scoped>
+@font-face {
+  font-family: 'wd-icons';
+  src: url('./wd-icons.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.wd-icon {
+  display: inline-block;
+  font-family: 'wd-icons' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wd-icon-keyboard-collapse:before {
+  content: '\e900';
+}
+.wd-icon-keyboard-delete:before {
+  content: '\e901';
+}
+.wd-icon-arrow-thin-up:before {
+  content: '\e898';
+}
+.wd-icon-arrow-thin-down:before {
+  content: '\e899';
+}
+.wd-icon-rotate:before {
+  content: '\e902';
+}
+.wd-icon-setting:before {
+  content: '\e903';
+}
+.wd-icon-arrow-right:before {
+  content: '\e904';
+}
+.wd-icon-arrow-down:before {
+  content: '\e905';
+}
+.wd-icon-arrow-up:before {
+  content: '\e906';
+}
+.wd-icon-arrow-left:before {
+  content: '\e907';
+}
+.wd-icon-fill-camera:before {
+  content: '\e908';
+}
+.wd-icon-star-on:before {
+  content: '\e909';
+}
+.wd-icon-check-bold:before {
+  content: '\e90a';
+}
+.wd-icon-error-fill:before {
+  content: '\e90b';
+}
+.wd-icon-warn-bold:before {
+  content: '\e90c';
+}
+.wd-icon-close-outline:before {
+  content: '\e90d';
+}
+.wd-icon-close-bold:before {
+  content: '\e90e';
+}
+.wd-icon-check-outline:before {
+  content: '\e90f';
+}
+.wd-icon-wifi-error:before {
+  content: '\e910';
+}
+.wd-icon-subscribe:before {
+  content: '\e911';
+}
+.wd-icon-detection:before {
+  content: '\e912';
+}
+.wd-icon-read:before {
+  content: '\e913';
+}
+.wd-icon-fill-arrow-down:before {
+  content: '\e914';
+}
+.wd-icon-dong:before {
+  content: '\e915';
+}
+.wd-icon-edit-outline:before {
+  content: '\e916';
+}
+.wd-icon-add-circle:before {
+  content: '\e917';
+}
+.wd-icon-copy:before {
+  content: '\e918';
+}
+.wd-icon-bags:before {
+  content: '\e919';
+}
+.wd-icon-decrease:before {
+  content: '\e91a';
+}
+.wd-icon-jdm:before {
+  content: '\e91b';
+}
+.wd-icon-spool:before {
+  content: '\e91c';
+}
+.wd-icon-download:before {
+  content: '\e91d';
+}
+.wd-icon-phone-compute:before {
+  content: '\e91e';
+}
+.wd-icon-computer:before {
+  content: '\e91f';
+}
+.wd-icon-clock:before {
+  content: '\e920';
+}
+.wd-icon-view:before {
+  content: '\e921';
+}
+.wd-icon-eye-close:before {
+  content: '\e922';
+}
+.wd-icon-picture:before {
+  content: '\e923';
+}
+.wd-icon-evaluation:before {
+  content: '\e924';
+}
+.wd-icon-goods:before {
+  content: '\e925';
+}
+.wd-icon-lenovo:before {
+  content: '\e926';
+}
+.wd-icon-list:before {
+  content: '\e927';
+}
+.wd-icon-note:before {
+  content: '\e928';
+}
+.wd-icon-video:before {
+  content: '\e929';
+}
+.wd-icon-warning:before {
+  content: '\e92a';
+}
+.wd-icon-camera:before {
+  content: '\e92b';
+}
+.wd-icon-transfer:before {
+  content: '\e92c';
+}
+.wd-icon-keywords:before {
+  content: '\e92e';
+}
+.wd-icon-chat:before {
+  content: '\e931';
+}
+.wd-icon-delete-thin:before {
+  content: '\e932';
+}
+.wd-icon-add:before {
+  content: '\e933';
+}
+.wd-icon-scan:before {
+  content: '\e934';
+}
+.wd-icon-translate-bold:before {
+  content: '\e935';
+}
+.wd-icon-close:before {
+  content: '\e936';
+}
+.wd-icon-search:before {
+  content: '\e937';
+}
+.wd-icon-delete:before {
+  content: '\e939';
+}
+.wd-icon-more:before {
+  content: '\e93a';
+}
+.wd-icon-thin-arrow-left:before {
+  content: '\e93b';
+}
+.wd-icon-filter:before {
+  content: '\e93c';
+}
+.wd-icon-phone:before {
+  content: '\e93d';
+}
+.wd-icon-refresh:before {
+  content: '\e93e';
+}
+.wd-icon-check:before {
+  content: '\e93f';
+}
+</style>

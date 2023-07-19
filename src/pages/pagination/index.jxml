@@ -1,0 +1,11 @@
+<view>
+  <demo-block title="基本用法" transparent>
+    <wd-pagination value="{{page1}}" total="{{total1}}" bind:change="handleChange1"></wd-pagination>
+  </demo-block>
+  <demo-block title="Icon图标" transparent>
+    <wd-pagination value="{{page2}}" total="{{total2}}" show-icon bind:change="handleChange2"></wd-pagination>
+  </demo-block>
+  <demo-block title="文字提示" transparent>
+    <wd-pagination value="{{page3}}" total="{{total3}}" page-size="{{pageSize3}}" bind:change="handleChange3" show-icon show-message></wd-pagination>
+  </demo-block>
+</view>

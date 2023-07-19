@@ -1,0 +1,4 @@
+.default-slot {
+  background: #fff;
+  padding: 15px;
+}

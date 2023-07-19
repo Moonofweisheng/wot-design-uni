@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "Grid 宫格",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "wd-toast": "../../wot-design/toast/index",
+    "wd-grid": "../../wot-design/grid/index",
+    "wd-grid-item": "../../wot-design/gridItem/index"
+  }
+}

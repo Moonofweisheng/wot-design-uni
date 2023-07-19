@@ -1,0 +1,108 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+@include b(input-number) {
+  display: inline-block;
+  font-size: 0;
+  user-select: none;
+  line-height: 1.15;
+
+  @include e(action) {
+    position: relative;
+    display: inline-block;
+    width: $-input-number-btn-width;
+    height: $-input-number-height;
+    vertical-align: middle;
+    color: $-input-number-icon-color;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+
+    // 左右加减号的边框
+    &::after {
+      position: absolute;
+      content: "";
+      width: calc(200% - 2px);
+      height: calc(200% - 2px);
+      left: 0;
+      top: 0;
+      border: 1px solid $-input-number-border-color;
+      border-top-left-radius: $-input-number-radius * 2;
+      border-bottom-left-radius: $-input-number-radius * 2;
+      transform: scale(0.5);
+      transform-origin: left top;
+    }
+    &:last-child::after {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: $-input-number-radius * 2;
+      border-bottom-right-radius: $-input-number-radius * 2;
+    }
+    @include when(disabled) {
+      color: $-input-number-disabled-color;
+    }
+  }
+
+  @include e(inner) {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  @include e(input) {
+    position: relative;
+    display: block;
+    width: $-input-number-input-width;
+    height: $-input-number-height;
+    padding: 0 2px;
+    box-sizing: border-box;
+    z-index: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    text-align: center;
+    color: $-input-number-color;
+    font-size: $-input-number-fs;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @include e(input-border) {
+    position: absolute;
+    width: 100%;
+    height: calc(200% - 2px);
+    left: 0;
+    top: 0;
+    border-top: 1px solid $-input-number-border-color;
+    border-bottom: 1px solid $-input-number-border-color;
+    transform: scaleY(0.5);
+    transform-origin: left top;
+    z-index: 0;
+  }
+
+  @include edeep(action-icon) {
+    position: absolute;
+    display: inline-block;
+    font-size: $-input-number-icon-size;
+    width: $-input-number-icon-size;
+    height: $-input-number-icon-size;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @include when(disabled) {
+    .wd-input-number__input {
+      color: $-input-number-disabled-color;
+      z-index: inherit;
+    }
+    .wd-input-number__sub,
+    .wd-input-number__add {
+      color: $-input-number-disabled-color;
+    }
+  }
+  @include when(without-input) {
+    .wd-input-number__action:last-child::after {
+      border-left: none;
+    }
+  }
+}

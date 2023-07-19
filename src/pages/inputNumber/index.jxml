@@ -1,0 +1,30 @@
+<demo-block title="基本用法">
+	<wd-input-number value="{{ value1 }}" bind:change="handleChange1"/>
+</demo-block>
+<demo-block title="设置步长">
+	<wd-input-number value="{{ value2 }}" bind:change="handleChange2" step="{{ 2 }}" />
+</demo-block>
+<demo-block title="限制最大最小值">
+	<wd-input-number value="{{ value3 }}" bind:change="handleChange3" min="{{ 3 }}" max="{{ 10 }}" />
+</demo-block>
+<demo-block title="禁用">
+	<wd-input-number value="{{ value4 }}" bind:change="handleChange4" disabled />
+</demo-block>
+<demo-block title="无输入框">
+	<view class="flex">
+		<view>数量：{{ value5 }}</view>
+		<wd-input-number value="{{ value5 }}" bind:change="handleChange5" without-input />
+	</view>
+</demo-block>
+<demo-block title="设置小数精度">
+	<wd-input-number value="{{ value6 }}" bind:change="handleChange6" precision="{{ 2 }}" step="{{ 0.1 }}" />
+</demo-block>
+<demo-block title="输入严格为步数的倍数">
+	<wd-input-number value="{{ value7 }}" bind:change="handleChange7" step-strictly step="{{ 2 }}" />
+</demo-block>
+<demo-block title="修改输入框宽度">
+	<wd-input-number value="{{ value8 }}" input-width="70px" bind:change="handleChange8" />
+</demo-block>
+<demo-block title="允许空值，并设置 placeholder">
+	<wd-input-number value="{{ value9 }}" allow-null placeholder="不限" input-width="70px" bind:change="handleChange9" />
+</demo-block>

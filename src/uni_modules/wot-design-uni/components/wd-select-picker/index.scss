@@ -1,0 +1,204 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(select-picker) {
+  @include when(border) {
+    .wd-select-picker__cell {
+      @include halfPixelBorder('top', $-cell-padding);
+    }
+  }
+  @include e(cell) {
+    position: relative;
+    display: flex;
+    padding: 0 $-cell-padding;
+    align-items: flex-start;
+    background-color: $-color-white;
+    text-decoration: none;
+    color: $-cell-title-color;
+    font-size: $-cell-title-fs;
+    overflow: hidden;
+    line-height: $-cell-ling-height;
+  }
+  @include e(cell) {
+    @include when(disabled) {
+      .wd-select-picker__value {
+        color: $-input-disabled-color;
+      }
+    }
+    @include when(align-right) {
+      .wd-select-picker__value {
+        text-align: right;
+      }
+    }
+    @include when(error) {
+      .wd-select-picker__value {
+        color: $-input-error-color;
+      }
+      :deep(.wd-select-picker__arrow) {
+        color: $-input-error-color;
+      }
+    }
+    @include when(large) {
+      font-size: $-cell-title-fs-large;
+
+      :deep(.wd-select-picker__arrow ){
+        font-size: $-cell-icon-size-large;
+      }
+    }
+  }
+  @include e(label) {
+    position: relative;
+    width: $-input-cell-label-width;
+    padding: $-cell-wrapper-padding 0;
+    margin-right: $-cell-padding;
+    box-sizing: border-box;
+
+    @include when(required) {
+      padding-left: 12px;
+
+      &::after {
+        position: absolute;
+        left: 0;
+        top: $-cell-wrapper-padding + 2px;
+        content: '*';
+        font-size: $-cell-required-size;
+        line-height: 1.1;
+        color: $-cell-required-color;
+      }
+    }
+  }
+  @include e(value) {
+    flex: 1;
+    padding: $-cell-wrapper-padding 0;
+    margin-right: 10px;
+    color: $-cell-value-color;
+    
+    @include when(ellipsis) {
+      @include lineEllipsis;
+    }
+    @include m(placeholder) {
+      color: $-input-placeholder-color;
+    }
+  }
+  @include edeep(arrow) {
+    display: block;
+    margin-top: $-cell-wrapper-padding;
+    font-size: $-cell-icon-size;
+    color: $-cell-arrow-color;
+    line-height: 1.25;
+  }
+  @include e(selected) {
+    height: $-col-picker-selected-height;
+    font-size: $-col-picker-selected-fs;
+    color: $-col-picker-selected-color;
+    overflow: hidden;
+  }
+  @include e(selected-container){
+    position: relative;
+    display: flex;
+    user-select: none;
+  }
+  @include e(selected-item) {
+    flex: 0 0 auto;
+    height: $-col-picker-selected-height;
+    line-height: $-col-picker-selected-height;
+    padding: $-col-picker-selected-padding;
+
+    @include when(selected) {
+      font-weight: $-col-picker-selected-fw;
+    }
+  }
+  @include e(selected-line) {
+    position: absolute;
+    bottom: 5px;
+    width: $-col-picker-line-width;
+    left: 0;
+    height: $-col-picker-line-height;
+    background: $-col-picker-line-color;
+    z-index: 1;
+    border-radius: calc($-col-picker-line-height / 2);
+    box-shadow: $-col-picker-line-box-shadow;
+  }
+  @include e(list-container){
+    position: relative;
+  }
+  @include e(list) {
+    height: $-col-picker-list-height;
+    padding-bottom: $-col-picker-list-padding-bottom;
+    box-sizing: border-box;
+    overflow: auto;
+    color: $-col-picker-list-color;
+    font-size: $-col-picker-list-fs;
+    -webkit-overflow-scrolling: touch;
+  }
+  @include e(list-item) {
+    display: flex;
+    padding: $-col-picker-list-item-padding;
+    align-items: flex-start;
+
+    @include when(selected) {
+      color: $-col-picker-list-color-checked;
+
+      .wd-select-picker__checked {
+        opacity: 1;
+      }
+    }
+    @include when(disabled) {
+      color: $-col-picker-list-color-disabled;
+    }
+  }
+  @include e(list-item-label) {
+    line-height: 1.285;
+  }
+  @include e(list-item-tip) {
+    margin-top: 2px;
+    font-size: $-col-picker-list-fs-tip;
+    color: $-col-picker-list-color-tip;
+  }
+  @include e(checked) {
+    display: block;
+    margin-left: 4px;
+    font-size: $-col-picker-list-checked-icon-size;
+    color: $-col-picker-list-color-checked;
+    opacity: 0;
+  }
+  @include e(loading) {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    background: $-picker-loading-bg;
+  }
+  // selectPiceker多出的样式
+  @include edeep(header) {
+    height: 72px;
+    line-height: 72px;
+  }
+  @include e(wrapper) {
+    padding: 0 10px;
+    position: relative;
+    max-height: 356px;
+    overflow: auto;
+
+    @include when(filterable) {
+      height: 314px;
+      max-height: 314px;
+    }
+
+    @include when(loading) {
+      overflow: hidden;
+    }
+  }
+  @include e(text-active) {
+    color: $-color-theme;
+  }
+
+  @include e(footer) {
+    padding: 24px 15px;
+  }
+}
