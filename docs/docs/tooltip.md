@@ -2,15 +2,6 @@
 
 常用于展示提示信息。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-tooltip": "/wot-design/tooltip/index"
-  }
-}
-```
 
 ### 基本用法
 

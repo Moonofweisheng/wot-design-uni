@@ -1,15 +1,5 @@
 # DropMenu 下拉菜单
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-drop-menu": "/wot-design/dropMenu/index",
-    "wd-drop-menu-item": "/wot-design/dropMenuItem/index"
-  }
-}
-```
 
 ## 代码演示
 

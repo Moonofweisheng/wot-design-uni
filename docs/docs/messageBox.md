@@ -2,15 +2,6 @@
 
 弹框有三种：alert、confirm 和 prompt。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-message-box": "/wot-design/messageBox/index"
-  }
-}
-```
 
 ### Alert 弹框
 

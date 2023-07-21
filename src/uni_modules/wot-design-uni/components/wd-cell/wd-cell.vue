@@ -55,7 +55,6 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance } from 'vue'
 import { useCell } from '../mixins/useCell'
 
 interface Props {

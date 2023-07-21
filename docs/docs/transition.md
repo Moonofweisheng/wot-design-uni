@@ -1,14 +1,5 @@
 ## Transition 动画
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-transition": "/wot-design/transition/index"
-  }
-}
-```
 
 ### 基本用法
 

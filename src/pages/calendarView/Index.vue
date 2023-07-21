@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-07-16 15:55:37
+ * @LastEditTime: 2023-07-21 15:50:41
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\pages\calendarView\Index.vue
@@ -23,8 +23,8 @@
     <wd-calendar-view type="dates" v-model="value2" @change="handleChange2"></wd-calendar-view>
   </demo-block>
   <demo-block title="日期范围选择" :hor="0">
-    <view style="margin: 0 15px 10px">
-      <view style="margin-bottom: 10px; font-size: 13px">切换类型：</view>
+    <view style="margin: 0 24rpx 20rpx">
+      <view style="margin-bottom: 20rpx; font-size: 26rpx">切换类型：</view>
       <wd-radio-group v-model="type2" shape="button" @change="handleTypeChange2">
         <wd-radio value="daterange">daterange</wd-radio>
         <wd-radio value="weekrange">weekrange</wd-radio>

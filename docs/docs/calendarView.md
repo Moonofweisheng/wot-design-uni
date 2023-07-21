@@ -1,18 +1,8 @@
 ## CalendarView 日历面板组件
 
-**2.3.0版本新增**
 
 提供日历单选、多选、范围选择、周维度、月维度等功能。可以根据实际业务场景基于该组件进行封装高度定制化组件。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-calendar-view": "/wot-design/calendarView/index"
-  }
-}
-```
 
 ### 基本使用
 

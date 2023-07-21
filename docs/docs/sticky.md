@@ -1,17 +1,5 @@
 ## Sticky 粘性布局
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    // 全局吸顶
-    "wd-sticky": "/wot-design/sticky/index",
-    // 指定容器时引入
-    "wd-sticky-box": "/wot-design/stickyBox/index",
-  }
-}
-```
 
 ### 基本用法
 

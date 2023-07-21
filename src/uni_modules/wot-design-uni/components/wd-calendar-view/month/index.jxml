@@ -1,6 +1,6 @@
 <jds src="../../utils.jds" module="utils" />
 
-<wd-toast id="wd-toast" />
+<wd-toast />
 
 <view class="wd-month">
   <view class="wd-month__title">{{ utils.formatMonthTitle(date) }}</view>

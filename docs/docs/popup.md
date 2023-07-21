@@ -1,14 +1,5 @@
 ## Popup 弹出层
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-popup": "/wot-design/popup/index"
-  }
-}
-```
 
 ### 基本用法
 

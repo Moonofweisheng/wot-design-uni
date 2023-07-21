@@ -122,6 +122,15 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onMounted, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
@@ -294,14 +303,6 @@ watch(
     deep: true,
     immediate: true
   }
-)
-
-watch(
-  () => showValue.value,
-  (newValue) => {
-    console.log(newValue, 'showValue')
-  },
-  { deep: true }
 )
 
 watch(

@@ -1,14 +1,5 @@
 ## Search 搜索框
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-search": "/wot-design/search/index"
-  }
-}
-```
 
 ### 基本用法
 

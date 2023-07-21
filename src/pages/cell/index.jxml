@@ -1,4 +1,4 @@
-<wd-toast id="wd-toast" />
+<wd-toast />
 <demo-block title="基本用法" transparent>
   <wd-cell-group>
     <wd-cell title="标题文字" value="内容" />

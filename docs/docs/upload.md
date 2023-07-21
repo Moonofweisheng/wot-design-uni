@@ -2,16 +2,6 @@
 
 图片上传组件
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-upload": "/wot-design/upload/index"
-  }
-}
-```
-
 ### 基本用法
 
 `file-list` 设置上传列表，数据类型为数组；

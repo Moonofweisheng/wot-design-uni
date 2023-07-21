@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2023-07-20 00:34:54
+ * @LastEditTime: 2023-07-20 19:40:03
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: \wot-design-uni\docs\route.js
+ * 记得注释
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 import MainLayout from './layout/main'
@@ -6,7 +15,7 @@ import routesConfig from './routes.yml'
 Vue.use(Router)
 
 function getSideTabs(menu, parentName, sideTabs = []) {
-  menu.children.forEach(item => {
+  menu.children.forEach((item) => {
     if (item.type === 'module' || item.type === 'group') {
       sideTabs = sideTabs.concat(getSideTabs(item, parentName))
     } else if (item.type === 'page') {
@@ -38,7 +47,7 @@ function getSideTabs(menu, parentName, sideTabs = []) {
 }
 
 let pages = []
-routesConfig.forEach(menu => {
+routesConfig.forEach((menu) => {
   if (menu.type === 'link') return
 
   if (menu.type === 'page') {
@@ -60,14 +69,12 @@ routesConfig.forEach(menu => {
     pages.push({
       path: `/${menu.name}`,
       name: menu.name,
-      component: () => import(`./layout/sideTabs`),
+      component: () => import('./layout/sideTabs'),
       redirect: sideTabs[0].path,
       children: sideTabs
     })
   }
 })
-
-console.log(pages)
 
 const router = new Router({
   routes: [

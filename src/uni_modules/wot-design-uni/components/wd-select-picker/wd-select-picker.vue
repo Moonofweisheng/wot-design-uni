@@ -85,6 +85,15 @@
     </wd-action-sheet>
   </view>
 </template>
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { onBeforeMount, ref, watch } from 'vue'
 import { useCell } from '../mixins/useCell'

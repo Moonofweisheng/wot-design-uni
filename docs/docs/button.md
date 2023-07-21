@@ -1,14 +1,5 @@
 ## Button 按钮
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-button": "/wot-design/button/index"
-  }
-}
-```
 
 ### 基本用法
 

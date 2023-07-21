@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <demo-block :title="`基本用法，数值: ${value1}`" transparent>
     <wd-picker-view v-model="value1" :columns="columns1" @change="(e) => onChange(1, e)" />
   </demo-block>

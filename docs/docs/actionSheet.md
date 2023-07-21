@@ -1,14 +1,5 @@
 ## ActionSheet 动作面板
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-action-sheet": "/wot-design/actionSheet/index"
-  }
-}
-```
 
 ### 基本用法
 

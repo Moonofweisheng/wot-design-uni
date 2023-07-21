@@ -1,4 +1,4 @@
-<wd-toast id="wd-toast" />
+<wd-toast />
 <view catchtap="clickoutside">
   <demo-block title="基本用法">
     <view class="top">

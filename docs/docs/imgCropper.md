@@ -1,21 +1,11 @@
 ## ImgCropper 图片裁剪
 
-**2.3.0版本新增**
 
 - 1、图片裁剪
 - 2、支持拖拽，用于移动图片使其位于对应位置
 - 3、支持缩放，用于截取限定区域
 - 4、支持旋转，用于截取对应角度
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-img-cropper": "/wot-design/imgCropper/index"
-  }
-}
-```
 
 ### 基本用法
 

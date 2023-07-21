@@ -1,14 +1,5 @@
 ## NoticeBar 通知栏
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-notice-bar": "/wot-design/noticeBar/index"
-  }
-}
-```
 
 ### 基本用法
 

@@ -1,15 +1,5 @@
 ## Cell单元格
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-cell": "/wot-design/cell/index",
-    "wd-cell-group": "/wot-design/cellGroup/index"
-  }
-}
-```
 
 ### 基本用法
 

@@ -2,15 +2,6 @@
 
 Picker 组件为 popup 和 pickerView 的组合。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-picker": "/wot-design/picker/index"
-  }
-}
-```
 
 ### 基本用法
 

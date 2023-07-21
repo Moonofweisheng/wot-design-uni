@@ -122,6 +122,7 @@ onBeforeMount(() => {
   pushToQueue(proxy)
   if (parent) {
     parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
+    updateTitle()
   }
 })
 

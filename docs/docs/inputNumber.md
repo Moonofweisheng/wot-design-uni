@@ -1,14 +1,5 @@
 ## InputNumber 计数器
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-input-number": "/wot-design/inputNumber/index"
-  }
-}
-```
 
 ### 基本用法
 

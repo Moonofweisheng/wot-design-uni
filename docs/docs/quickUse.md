@@ -1,6 +1,15 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-07-20 00:34:54
+ * @LastEditTime: 2023-07-20 19:04:58
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\docs\docs\quickUse.md
+ * 记得注释
+-->
 ## 快速上手
 
-本节介绍如何在小程序中使用 `Wot Design Uni`
+本节介绍如何在`uni-app`项目中使用 `Wot Design Uni`
 
 ### 下载组件库项目
 

@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <demo-block transparent>
     <wd-cell-group border>
       <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />

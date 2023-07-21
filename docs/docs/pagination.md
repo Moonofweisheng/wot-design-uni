@@ -1,14 +1,5 @@
 ## Pagination 分页
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-pagination": "/wot-design/pagination/index"
-  }
-}
-```
 
 ### 基本用法
 

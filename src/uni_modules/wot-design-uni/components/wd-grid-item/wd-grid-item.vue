@@ -1,11 +1,13 @@
 <template>
   <view :class="`wd-grid-item ${border && !gutter ? itemClass : ''} ${customClass}`" @click="click" :style="style">
-    <view :class="`wd-grid-item__content ${square ? 'is-square' : ''} ${border && gutter > 0 ? 'is-round' : ''}`" style="{{ gutterContentStyle }}">
+    <view :class="`wd-grid-item__content ${square ? 'is-square' : ''} ${border && gutter > 0 ? 'is-round' : ''}`" :style="gutterContentStyle">
       <slot v-if="useSlot" />
       <block v-else>
         <view :style="'width:' + iconSize + '; height: ' + iconSize" class="wd-grid-item__wrapper">
           <wd-badge custom-class="badge" :is-dot="isDot" :modelValue="value" :max="max" :type="type">
-            <slot v-if="useIconSlot" name="icon" />
+            <template v-if="useIconSlot">
+              <slot name="icon" />
+            </template>
             <wd-icon v-else :name="icon" :size="iconSize" :custom-class="customIcon" />
           </wd-badge>
         </view>
@@ -15,9 +17,17 @@
     </view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, inject, onBeforeMount, onMounted, ref } from 'vue'
+import { getCurrentInstance, inject, onBeforeMount, onMounted, ref, nextTick, computed, Ref, watch } from 'vue'
 
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 type LinkType = 'navigateTo' | 'switchTab' | 'reLaunch'
@@ -56,16 +66,33 @@ const props = withDefaults(defineProps<Props>(), {
 
 const style = ref<string>('')
 const gutterContentStyle = ref<string>('')
-const iconStyle = ref<string>('')
 const itemClass = ref<string>('')
 const gutter = ref<number>(0)
 const square = ref<boolean>(false)
 const border = ref<boolean>(true)
 
 const parent = inject<any>('wdgrid')
+const childCount = inject<Ref<null | number>>('childCount') || ref(0)
 const { proxy } = getCurrentInstance() as any
 
 const emit = defineEmits(['itemclick'])
+
+watch(
+  () => childCount.value,
+  () => {
+    if (!parent) return
+    const width = parent.column ? 100 / parent.column + '%' : 100 / (childCount.value || 1) + '%'
+    // 单独定义间隔
+    const gutterStyle = parent.gutter ? `padding:${parent.gutter}px ${parent.gutter}px 0 0; background-color: transparent;` : ''
+    // 单独定义正方形
+    const squareStyle = parent.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
+    style.value = `width: ${width}; ${squareStyle || gutterStyle}`
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 
 onBeforeMount(() => {
   if (parent) {

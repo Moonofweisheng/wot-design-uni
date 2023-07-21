@@ -1,14 +1,5 @@
 ## loadmore 加载更多
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-loadmore": "/wot-design/loadmore/index"
-  }
-}
-```
 
 ### 基本用法
 

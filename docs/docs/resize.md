@@ -2,15 +2,6 @@
 
 当组件包裹的文档流尺寸发生变化时，触发 `size` 事件。一般用于监听 dom 内容更新时导致的 dom 尺寸位置的变化，重新获取 dom 尺寸和位置，进行内容展示的计算操作。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-resize": "/wot-design/resize/index"
-  }
-}
-```
 
 ### 基本用法
 

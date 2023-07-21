@@ -1,14 +1,5 @@
 ## Switch 开关
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-switch": "/wot-design/switch/index"
-  }
-}
-```
 
 ### 基本用法
 

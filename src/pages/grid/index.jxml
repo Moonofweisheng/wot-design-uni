@@ -1,4 +1,4 @@
-<wd-toast id="wd-toast" />
+<wd-toast />
 <view>
 	<demo-block title="基本用法" transparent>
 		<wd-grid>

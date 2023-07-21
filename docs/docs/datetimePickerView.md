@@ -1,14 +1,5 @@
 ## DatetimePickerView 日期时间选择器视图
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-datetime-picker-view": "/wot-design/datetimePickerView/index"
-  }
-}
-```
 
 ### 基本用法
 

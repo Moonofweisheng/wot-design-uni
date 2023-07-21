@@ -35,6 +35,11 @@
     </url>
 
     <url>
+      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/reward</loc>
+      <changefreq>weekly</changefreq>
+    </url>
+
+    <url>
       <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/button</loc>
       <changefreq>weekly</changefreq>
     </url>

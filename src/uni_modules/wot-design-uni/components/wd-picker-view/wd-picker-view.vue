@@ -117,8 +117,6 @@ watch(
 watch(
   () => props.columnChange,
   (newValue) => {
-    console.log(newValue, 'columnChange')
-
     if (newValue && getType(newValue) !== 'function') {
       throw Error('The type of columnChange must be Function')
     }

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance, provide, watch } from 'vue'
+import { computed, getCurrentInstance, provide, ref, watch } from 'vue'
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 20))
 
 interface Props {
@@ -63,6 +63,9 @@ watch(
   }
 )
 
+// 子元素个数
+const childCount = ref<number>(0)
+
 /**
  * 设置子项
  * @param child
@@ -73,6 +76,7 @@ function setChild(child) {
   })
   if (hasChild <= -1) {
     children.push(child)
+    childCount.value = childCount.value + 1
   } else {
     children[hasChild] = child
   }
@@ -106,6 +110,7 @@ defineExpose({
 })
 
 provide('wdgrid', proxy)
+provide('childCount', childCount)
 </script>
 
 <style lang="scss" scoped>

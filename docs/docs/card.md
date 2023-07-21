@@ -1,14 +1,5 @@
 ## Card 卡片
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-card": "/wot-design/card/index"
-  }
-}
-```
 
 ### 基本使用
 

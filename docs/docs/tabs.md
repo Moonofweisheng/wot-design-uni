@@ -1,15 +1,5 @@
 ## Tab 标签页
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-tab": "/wot-design/tab/index",
-    "wd-tabs": "/wot-design/tabs/index"
-  }
-}
-```
 
 ### 基本用法
 

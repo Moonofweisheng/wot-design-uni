@@ -1,6 +1,6 @@
 ## 介绍
 
-该组件库基于小程序构建，根据京东商家侧的UI设计规范（京麦移动端设计规范）开发，旨在给商家提供统一的UI交互，同时提高研发的开发效率。
+该组件库基于`uni-app`+`vue3`构建，根据`wot desing mini`的设计规范进行开发，旨在给开发者提供统一的UI交互，同时提高研发的开发效率。
 
 ### 快速上手
 
@@ -14,16 +14,17 @@
 </div>
 
 <div style="display: inline-block;">
-  <img style="width: 150px; height: 150px;" :src="JmQrcode" />
-  <div style="text-align: center;">京麦app扫码</div>
+  <img style="width: 150px; height: 150px;" :src="AlipayQrcode" />
+  <div style="text-align: center;">支付宝扫码</div>
 </div>
 
 ### 特性
 
 * 50+ 组件
-* 京东小程序和微信小程序2个版本
+* Vue3 + TypeScript 开发
+* 支持 APP、H5、微信小程序、支付宝小程序、钉钉小程序 等平台
 
-> 京东系app都可以使用，如京东app、京麦app、京东金融app
+> 使用Vue3最新特性开发，持续优化体验
 
 ### 链接
 
@@ -37,13 +38,13 @@
 
 <script>
 import WxQrcode from '../assets/img/wx.jpg'
-import JmQrcode from '../assets/img/jm.jpg'
+import AlipayQrcode from '../assets/img/alipay.png'
 
 export default {
   data () {
     return {
       WxQrcode,
-      JmQrcode
+      AlipayQrcode
     }
   }
 }

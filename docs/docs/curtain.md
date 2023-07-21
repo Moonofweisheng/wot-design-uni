@@ -2,15 +2,6 @@
 
 一般用于公告类的图片弹窗。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-curtain": "/wot-design/curtain/index"
-  }
-}
-```
 
 ### 基本用法
 

@@ -3,7 +3,7 @@
     <div class="header-container">
       <router-link :to="{ path: '/' }" class="logo-block">
         <img class="wot-design-logo" src="../assets/img/wot-design.png" alt="wot design mini" />
-        <h1 class="wot-design-title">京麦 Wot Design Uni</h1>
+        <h1 class="wot-design-title">Wot Design Uni</h1>
       </router-link>
       <survey></survey>
       <ul class="header-tab">
