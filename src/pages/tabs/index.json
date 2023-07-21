@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "Tabs 标签页",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-tabs": "../../wot-design/tabs/index",
-    "wd-tab": "../../wot-design/tab/index",
-    "wd-toast": "../../wot-design/toast/index"
-  }
-}

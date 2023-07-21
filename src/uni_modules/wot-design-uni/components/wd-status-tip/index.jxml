@@ -1,4 +1,0 @@
-<div class="wd-status-tip custom-class">
-	<image v-if="{{ imgUrl }}" class="wd-status-tip__image" src="{{ imgUrl }}"></image>
-	<view v-if="{{ tip }}" class="wd-status-tip__text">{{tip}}</view>
-</div>

@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "wd-icon": "../icon/index",
-    "wd-button": "../button/index"
-  }
-}

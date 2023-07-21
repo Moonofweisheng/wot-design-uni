@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "Img 图片",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-img": "../../wot-design/img/index"
-  }
-}

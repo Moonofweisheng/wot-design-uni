@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "Loading 加载",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-loading": "../../wot-design/loading/index"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Resize 监听元素尺寸变化",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-resize": "../../wot-design/resize/index",
-    "wd-icon": "../../wot-design/icon/index"
-  }
-}

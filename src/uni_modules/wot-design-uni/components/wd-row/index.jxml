@@ -1,4 +1,0 @@
-<view class="wd-row custom-class" style="{{ style }}">
-	<!-- 每一行 -->
-	<slot  />
-</view>

@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "wd-popup": "../popup/index",
-    "wd-icon": "../icon/index"
-  }
-}

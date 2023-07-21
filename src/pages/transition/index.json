@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Transition 动画",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-button": "../../wot-design/button/index",
-    "wd-transition": "../../wot-design/transition/index"
-  }
-}
