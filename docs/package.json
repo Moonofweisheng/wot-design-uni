@@ -65,8 +65,5 @@
     "webpack-merge": "^4.2.2",
     "webpack-serve": "^3.2.0",
     "yml-loader": "^2.1.0"
-  },
-  "engines" : { 
-    "node" : ">=14.0.0 <17.0.0"
   }
 }
