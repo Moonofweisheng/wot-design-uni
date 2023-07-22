@@ -212,11 +212,11 @@
 #### Bug 修复
 
 - Search
-  - Search 组件点击清除按钮后，出现两个“搜索”文案 [#193](https://github.com/jd-ftf/wot-design-uni/issues/193) (by [@HXCStudio123](https://github.com/HXCStudio123) )
+  - Search 组件点击清除按钮后，出现两个“搜索”文案 [#193](https://github.com/Moonofweisheng/wot-design-uni/issues/193) (by [@HXCStudio123](https://github.com/HXCStudio123) )
 - SortButton
-  - 修复文档中 SortButton 的事件未对齐组件实际触发的事件 [#192](https://github.com/jd-ftf/wot-design-uni/issues/192) (by [@awjing](https://github.com/awjing) )
+  - 修复文档中 SortButton 的事件未对齐组件实际触发的事件 [#192](https://github.com/Moonofweisheng/wot-design-uni/issues/192) (by [@awjing](https://github.com/awjing) )
 - Input
-  - 修复 label 插槽未生效问题 [#191](https://github.com/jd-ftf/wot-design-uni/issues/191) (by [@HXCStudio123](https://github.com/HXCStudio123) )
+  - 修复 label 插槽未生效问题 [#191](https://github.com/Moonofweisheng/wot-design-uni/issues/191) (by [@HXCStudio123](https://github.com/HXCStudio123) )
 
 ### 2.0.0
 
@@ -427,10 +427,10 @@
   - 修复绑定值更改后，未更新绑定数据 （by [@HXCStudio123](https://github.com/HXCStudio123) ）
   - type类型为 `time` 时，修复绑定值以及展示值 （by [@HXCStudio123](https://github.com/HXCStudio123) ）
 - Input
-  - Input 输入时不显示文字，仅在失焦后显示文字(不支持rgba色值) [#176](https://github.com/jd-ftf/wot-design-uni/issues/176) (by [@yawuling](https://github.com/yawuling)） )
+  - Input 输入时不显示文字，仅在失焦后显示文字(不支持rgba色值) [#176](https://github.com/Moonofweisheng/wot-design-uni/issues/176) (by [@yawuling](https://github.com/yawuling)） )
   - 修复input 清空后无法再次弹起 （by [@Gkxie](https://github.com/Gkxie) ）
 - MessageBox
-  - MessageBox.prompt 获取不到value值 [#166](https://github.com/jd-ftf/wot-design-uni/issues/166)（by [@HXCStudio123](https://github.com/HXCStudio123) ）
+  - MessageBox.prompt 获取不到value值 [#166](https://github.com/Moonofweisheng/wot-design-uni/issues/166)（by [@HXCStudio123](https://github.com/HXCStudio123) ）
 - Popup
   - 修复按需引入popup和messageBox缺少modal样式问题 (by [@yawuling](https://github.com/yawuling)） )
 

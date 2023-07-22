@@ -28,7 +28,7 @@
 
 ### 链接
 
-* [意见反馈](https://github.com/jd-ftf/wot-design-uni/issues)
+* [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
 * [更新日志](#/components/changelog)
 * [常见问题](#/components/commonProblems)
 
