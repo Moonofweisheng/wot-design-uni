@@ -3,10 +3,10 @@
     <template>
       <div class="side-bar__link">关于我们</div>
       <div class="side-bar__github-info">
-        <a href="https://github.com/jd-ftf/wot-design-uni" target="_blank"><i class="github-logo"></i></a>
+        <a href="https://github.com/Moonofweisheng/wot-design-uni" target="_blank"><i class="github-logo"></i></a>
         <github-button
           class="github-star"
-          href="https://github.com/jd-ftf/wot-design-uni"
+          href="https://github.com/Moonofweisheng/wot-design-uni"
           data-icon="octicon-star"
           data-show-count="true"
           aria-label="Star jd-ftf/wot-design on GitHub"

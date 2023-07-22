@@ -123,7 +123,7 @@ Wot Design Uni 每1个组件基本都有自定义类名 custom-class，可以在
 小程序组件库需要将工程clone到本地，开发者自己修改 `packages/common/abstracts/_variable.scss` 文件中的scss变量，通过本地打包重新构建一份自定义主题的组件库代码。
 
 ```bash
-git clone https://github.com/jd-ftf/wot-design-uni.git
+git clone https://github.com/Moonofweisheng/wot-design-uni.git
 cd wot-design-uni
 npm i
 ```
