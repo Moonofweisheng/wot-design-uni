@@ -5,292 +5,292 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/introduction</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/introduction</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/quickUse</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/quickUse</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/customTheme</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/customTheme</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/typography</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/typography</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/changelog</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/changelog</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/commonProblems</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/commonProblems</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/reward</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/reward</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/button</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/button</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/icon</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/icon</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/layout</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/layout</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/popup</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/popup</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/resize</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/resize</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/transition</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/transition</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/pagination</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/pagination</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/popover</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/popover</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/tabs</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/tabs</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/calendar</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/calendar</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/calendarView</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/calendarView</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/checkbox</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/checkbox</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/colPicker</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/colPicker</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/datetimePicker</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/datetimePicker</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/datetimePickerView</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/datetimePickerView</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/form</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/form</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/input</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/input</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/inputNumber</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/inputNumber</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/picker</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/picker</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/pickerView</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/pickerView</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/radio</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/radio</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/rate</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/rate</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/search</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/search</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/selectPicker</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/selectPicker</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/slider</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/slider</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/switch</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/switch</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/upload</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/upload</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/actionSheet</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/actionSheet</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/dropMenu</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/dropMenu</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/loading</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/loading</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/messageBox</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/messageBox</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/noticeBar</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/noticeBar</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/progress</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/progress</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/sortButton</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/sortButton</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/statusTip</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/statusTip</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/swipeAction</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/swipeAction</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/toast</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/toast</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/tooltip</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/tooltip</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/badge</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/badge</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/card</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/card</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/cell</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/cell</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/collapse</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/collapse</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/curtain</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/curtain</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/divider</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/divider</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/img</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/img</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/imgCropper</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/imgCropper</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/grid</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/grid</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/loadmore</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/loadmore</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/steps</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/steps</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/sticky</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/sticky</loc>
       <changefreq>weekly</changefreq>
     </url>
 
     <url>
-      <loc>https://ftf.jd.com/wot-design-uni/2.3.1/#/components/tag</loc>
+      <loc>https://wot-design-uni.netlify.app/2.3.1/#/components/tag</loc>
       <changefreq>weekly</changefreq>
     </url>
   </urlset>

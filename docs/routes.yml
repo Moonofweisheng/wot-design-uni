@@ -6,12 +6,8 @@
 #   - module: module title type, not route
 #   - group: group title type, not route
 # demo: string|boolean, if demo is false, will not display demo, if null, will use "name" property as demo path, if string, will use the value as demo path
-- type: link
-  name: vue-components
-  title: Vue组件
-  link: //ftf.jd.com/wot-design/
 - name: components
-  title: 小程序
+  title: Wot Design Uni
   children:
     - name: introduction
       title: 介绍
@@ -31,8 +27,10 @@
       demo: /
     - name: commonProblems
       title: 常见问题
+      demo: /
     - name: reward
       title: 打赏作者
+      demo: /
     - type: module
       title: 组件
       children:
