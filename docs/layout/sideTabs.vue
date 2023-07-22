@@ -14,7 +14,7 @@
                 <input readonly v-model="demoLink" class="phone-link" />
               </div>
               <div class="wrapper">
-                <iframe frameborder="0" :src="demoLink" ref="iframe"></iframe>
+                <iframe class="iframe" frameborder="0" :src="demoLink" ref="iframe"></iframe>
               </div>
             </div>
           </div>
@@ -29,7 +29,7 @@ import SideBar from './sidebar'
 import PageController from './pageController'
 
 export default {
-  data () {
+  data() {
     return {
       bodyContent: null
     }
@@ -39,21 +39,23 @@ export default {
     PageController
   },
   computed: {
-    demoLink () {
-      return `https://ftf.jd.com/wot-design/demo.html#${this.$route.meta.demo}`
+    demoLink() {
+      return process.env.NODE_ENV === 'dev'
+        ? `http://localhost:5173/#${this.$route.meta.demo}`
+        : `https://wot-design-uni.netlify.app/demo/#${this.$route.meta.demo}`
     }
   },
   methods: {
-    renderAnchorHref () {
+    renderAnchorHref() {
       const anchors = document.querySelectorAll('h2 a,h3 a,h4 a,h5 a')
       const basePath = location.href.split('#').splice(0, 2).join('#')
 
-      Array.prototype.slice.call(anchors).forEach(a => {
+      Array.prototype.slice.call(anchors).forEach((a) => {
         const href = a.getAttribute('href')
-        a.href = href.indexOf(basePath) > -1 ? href : (basePath + href)
+        a.href = href.indexOf(basePath) > -1 ? href : basePath + href
       })
     },
-    goAnchor () {
+    goAnchor() {
       if (location.href.match(/#/g).length > 1) {
         const anchor = location.href.match(/#[^#]+$/g)
         if (!anchor) return
@@ -66,12 +68,12 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.bodyContent = document.querySelector('.body-content')
     this.renderAnchorHref()
     this.goAnchor()
   },
-  beforeRouteUpdate (to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     next()
     const toPath = to.path
     const fromPath = from.path
@@ -190,6 +192,10 @@ export default {
     iframe {
       height: 100%;
       width: 100%;
+      &::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+      }
     }
     .wrapper {
       position: relative;

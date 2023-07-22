@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-03-09 19:23:03
- * @LastEditTime: 2023-07-01 18:32:26
+ * @LastEditTime: 2023-07-22 17:56:50
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\App.vue
@@ -20,6 +20,10 @@ onHide(() => {
 })
 </script>
 <style lang="scss">
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 page {
   margin: 0;
   padding: 0;

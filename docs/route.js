@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-20 00:34:54
- * @LastEditTime: 2023-07-20 19:40:03
+ * @LastEditTime: 2023-07-22 18:02:12
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\docs\route.js
@@ -24,7 +24,7 @@ function getSideTabs(menu, parentName, sideTabs = []) {
         name: `${parentName}-${item.name}`,
         component: () => import(`./pages/${item.name}`),
         meta: {
-          demo: typeof item.demo !== 'boolean' && (item.demo || `/${item.name}`),
+          demo: typeof item.demo !== 'boolean' && (item.demo || `/pages/${item.name}/Index`),
           title: item.title,
           parentName
         }
@@ -35,7 +35,7 @@ function getSideTabs(menu, parentName, sideTabs = []) {
         name: `${parentName}-${item.name}`,
         component: () => import(`./docs/${item.name}`),
         meta: {
-          demo: typeof item.demo !== 'boolean' && (item.demo || `/${item.name}`),
+          demo: typeof item.demo !== 'boolean' && (item.demo || `/pages/${item.name}/Index`),
           title: item.title,
           parentName
         }

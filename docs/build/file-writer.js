@@ -29,7 +29,7 @@ const versionWriter = () => {
 
 // 写入 sitemap.xml 文件
 const sitemapWriter = () => {
-  const originUrl = 'https://ftf.jd.com/wot-design-uni/' + pkg.version + '/#'
+  const originUrl = 'https://wot-design-uni.netlify.app/' + pkg.version + '/#'
   const sitemapUrl = siteMapUrls(routesConfig, originUrl)
   const sitemapXml = createSitemapXml(sitemapUrl)
 
