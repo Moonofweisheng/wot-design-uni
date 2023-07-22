@@ -4,7 +4,7 @@
   "description": "A ui component library for mini program",
   "scripts": {
     "dev:docs": "webpack-dev-server --progress --config build/webpack.docs.conf.js",
-    "build:docs": "rimraf docs/dist && cross-env NODE_ENV=production webpack --progress --config build/webpack.docs.conf.js"
+    "build:docs": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config build/webpack.docs.conf.js"
   },
   "license": "ISC",
   "devDependencies": {
