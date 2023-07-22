@@ -1,15 +1,5 @@
 # Grid 宫格
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-grid": "/wot-design/grid/index",
-    "wd-grid-item": "/wot-design/gridItem/index"
-  }
-}
-```
 
 ## 代码演示
 

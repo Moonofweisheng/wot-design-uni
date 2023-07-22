@@ -1,7 +1,0 @@
-<view
-  class="wd-sticky-box custom-class"
->
-  <wd-resize bind:resize="resizeHandler">
-    <slot/>
-  </wd-resize>
-</view>

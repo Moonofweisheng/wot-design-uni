@@ -1,14 +1,6 @@
 ## Icon 图标
 
-### 引入
 
-```json
-{
-  "usingComponents": {
-    "wd-icon": "/wot-design/icon/index"
-  }
-}
-```
 
 ### 基本用法
 

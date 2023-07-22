@@ -6,12 +6,12 @@
 ### 扫码捐赠
 
 <div style="display: inline-block; margin-right: 120px;">
-  <img style="width: 250px; height: 250px;" src="http://fant-mini-plus.top/img/weixinQrcode.jpg" />
+  <img style="width: 250px; height: 250px;" src="https://fant-mini-plus.top/img/weixinQrcode.jpg" />
   <div style="text-align: center;">微信</div>
 </div>
 
 <div style="display: inline-block;">
-  <img style="width: 250px; height: 250px;" src="http://fant-mini-plus.top/img/alipayQrcode.jpg" />
+  <img style="width: 250px; height: 250px;" src="https://fant-mini-plus.top/img/alipayQrcode.jpg" />
   <div style="text-align: center;">支付宝</div>
 </div>
 

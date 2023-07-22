@@ -1,15 +1,5 @@
 ## Collapse 折叠面板
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-collapse": "/wot-design/collapse/index",
-    "wd-collapse-item": "/wot-design/collapseItem/index"
-  }
-}
-```
 
 ### 基本使用
 

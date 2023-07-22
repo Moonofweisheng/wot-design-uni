@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <view style="margin: 20px 0">
     <wd-cell-group border>
       <wd-col-picker label="选择地址" v-model="value1" :columns="areaData1" :column-change="columnChange1" @confirm="handleValue" />

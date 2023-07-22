@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <demo-block title="基本用法" transparent>
     <wd-tabs v-model="tab1" @change="handleChange">
       <block v-for="item in 4" :key="item">

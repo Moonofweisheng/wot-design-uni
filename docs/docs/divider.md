@@ -1,14 +1,5 @@
 ## Divider 分割线
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-divider": "/wot-design/divider/index"
-  }
-}
-```
 
 ### 基本使用
 

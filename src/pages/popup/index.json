@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Popup 弹出层",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-button": "../../wot-design/button/index",
-    "wd-popup": "../../wot-design/popup/index"
-  }
-}

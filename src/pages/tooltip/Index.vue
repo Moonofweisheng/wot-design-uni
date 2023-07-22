@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <view @click.stop="clickOutside">
     <demo-block title="基本用法">
       <view class="top">

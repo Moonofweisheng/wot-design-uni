@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "pickerView 选择器视图",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-picker-view": "../../wot-design/pickerView/index",
-    "wd-toast": "../../wot-design/toast/index"
-  }
-}

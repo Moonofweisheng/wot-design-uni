@@ -36,7 +36,7 @@
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "type-check": "vue-tsc --noEmit",
     "dev:docs": "cd docs && npm run dev:docs",
-    "prepare": "husky install",
+    "prepare": "husky install && cd docs && yarn install || npm install",
     "lint": "eslint --fix --ext .js,.vue,.ts src",
     "commit": "git-cz",
     "release-major": "standard-version --release-as major",

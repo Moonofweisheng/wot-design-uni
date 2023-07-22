@@ -1,8 +1,0 @@
-.content{
-  line-height: 120px;
-  text-align: center;
-}
-.large{
-  line-height: 320px;
-  text-align: center;
-}

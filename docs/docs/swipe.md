@@ -2,16 +2,6 @@
 
 <p style="color: #ff0000;">！！！该组件尚未开发，不可使用</p>
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-swipe": "/wot-design/swipe/index",
-    "wd-swipe-item": "/wot-design/swipe-item/index"
-  }
-}
-```
 
 ### 基本用法
 

@@ -2,15 +2,6 @@
 
 增强版的 img 标签，提供多种图片填充模式，支持图片懒加载、加载完成、加载失败
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-img": "/wot-design/img/index"
-  }
-}
-```
 
 ### 基本用法
 

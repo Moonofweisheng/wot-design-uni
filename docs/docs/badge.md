@@ -1,14 +1,5 @@
 ## Badge 标记
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-badge": "/wot-design/badge/index"
-  }
-}
-```
 
 出现在按钮、图标旁的数字或状态标记。
 

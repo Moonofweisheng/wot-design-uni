@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Curtain 幕帘",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-button": "../../wot-design/button/index",
-    "wd-curtain": "../../wot-design/curtain/index"
-  }
-}

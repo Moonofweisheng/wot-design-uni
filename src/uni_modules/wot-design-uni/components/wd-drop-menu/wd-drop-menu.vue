@@ -16,6 +16,14 @@
     <slot />
   </view>
 </template>
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onMounted, provide, ref, watch } from 'vue'
@@ -116,7 +124,12 @@ function fold(child?: any) {
     const { top, bottom } = rect
 
     if (props.direction === 'down') {
-      offset.value = bottom
+      offset.value = bottom + 44
+      // #ifdef H5
+      // H5端，导航栏为普通元素，需要将组件移动到导航栏的下边沿
+      // H5的导航栏高度为44px
+      offset.value = bottom + 44
+      // #endif
     } else {
       offset.value = windowHeight.value - top
     }

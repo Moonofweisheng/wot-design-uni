@@ -2,16 +2,6 @@
 
 为 Picker 组件的封装，在其内部构建好日期时间选项。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-datetime-picker": "/wot-design/datetimePicker/index"
-  }
-}
-```
-
 ### 基本用法
 
 `value` 设置绑定值，默认为 'datetime' 类型，展示年月日时分，绑定值为 `时间戳` 类型，如果为 'time' 类型，绑定值为字符串。通过绑定 `bind:confirm` 事件获取当前选中的时间，并赋值给绑定的value变量。label 可以不传。可以通过 `label-width` 设置标题宽度，默认为 '33%'。

@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "Rate 评分",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-rate": "../../wot-design/rate/index"
-  }
-}

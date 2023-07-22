@@ -1,15 +1,5 @@
 ## SortButton 排序按钮
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-sort-button": "/wot-design/sortButton/index"
-  }
-}
-
-```
 
 ### 基本用法
 

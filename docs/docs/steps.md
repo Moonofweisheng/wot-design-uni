@@ -1,15 +1,5 @@
 ## Steps 标签页
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-step": "/wot-design/step/index",
-    "wd-steps": "/wot-design/steps/index"
-  }
-}
-```
 
 ### 基本用法
 

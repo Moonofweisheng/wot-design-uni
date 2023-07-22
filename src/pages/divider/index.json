@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "Divider 分割线",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-divider": "../../wot-design/divider/index"
-  }
-}

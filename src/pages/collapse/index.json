@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Collapse 折叠面板",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-collapse": "../../wot-design/collapse/index",
-    "wd-collapse-item": "../../wot-design/collapseItem/index"
-  }
-}

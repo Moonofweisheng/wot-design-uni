@@ -1,14 +1,5 @@
 ## SelectPicker 单复选选择器
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-select-picker": "/wot-design/selectPicker/index"
-  }
-}
-```
 
 ### 基本用法
 

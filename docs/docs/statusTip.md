@@ -4,15 +4,6 @@
 
 > 若图片显示安全域名问题，需将 img11.360buyimg.com 域名添加为业务域名。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-status-tip": "/wot-design/statusTip/index"
-  }
-}
-```
 
 ### 基本用法
 

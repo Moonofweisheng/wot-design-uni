@@ -1,6 +1,6 @@
 <template>
   <wd-message-box id="wd-message-box" />
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <form @submit="formSubmit">
     <wd-cell-group custom-class="group" title="基础信息" border>
       <wd-input

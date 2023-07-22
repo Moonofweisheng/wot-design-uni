@@ -1,14 +1,5 @@
 ## Loading 加载指示器
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-loading": "/wot-design/loading/index"
-  }
-}
-```
 
 ### 基本用法
 

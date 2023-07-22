@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "wd-transition": "../transition/index",
-    "wd-modal": "../modal/index",
-    "wd-icon": "../icon/index"
-  }
-}

@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <demo-block transparent>
     <wd-cell-group border>
       <wd-picker label="单列选项" :columns="columns0" />

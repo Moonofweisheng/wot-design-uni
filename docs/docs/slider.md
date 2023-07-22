@@ -2,15 +2,6 @@
 
 支持单向滑块和双向滑块。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-slider": "/wot-design/slider/index"
-  }
-}
-```
 
 ### 基本用法
 

@@ -6,15 +6,6 @@
 如果坚持要使用滑动操作组件，建议在用户进入页面时加上操作提示以提示用户列表项可以左右滑动。
 :::
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-swipe-action": "/wot-design/swipeAction/index"
-  }
-}
-```
 
 ### 基本用法
 

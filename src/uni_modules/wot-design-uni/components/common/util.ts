@@ -63,7 +63,8 @@ export function getType(target) {
  * @param labelKey
  * @return {*}
  */
-export const defaultDisplayFormat = function (items, { labelKey = 'value' }) {
+export const defaultDisplayFormat = function (items, kv: Record<string, any>) {
+  const labelKey: string = kv ? kv['labelKey'] || 'value' : 'value'
   // 在props中，this被指向了全局data
   if (items instanceof Array) {
     return items.map((item) => item[labelKey]).toString()

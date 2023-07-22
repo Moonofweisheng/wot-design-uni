@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "InputNumber 计数器",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-input-number": "../../wot-design/inputNumber/index"
-  }
-}

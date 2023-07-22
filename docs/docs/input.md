@@ -1,14 +1,5 @@
 ## Input 输入框
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-input": "/wot-design/input/index"
-  }
-}
-```
 
 ### 基本用法
 

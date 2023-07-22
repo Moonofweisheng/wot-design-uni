@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <demo-block title="日期选择" transparent>
     <wd-datetime-picker-view v-model="value1" @change="onChange1" />
   </demo-block>

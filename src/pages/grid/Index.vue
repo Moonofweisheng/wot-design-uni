@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
   <view>
     <demo-block title="基本用法" transparent>
       <wd-grid>
@@ -54,17 +54,17 @@
       <wd-grid>
         <wd-grid-item use-icon-slot text="文字" icon-size="36px">
           <template #icon>
-            <image class="slot-img" :src="joy" />
+            <image class="slot-img" :src="img" />
           </template>
         </wd-grid-item>
         <wd-grid-item use-icon-slot text="文字" icon-size="36px">
           <template #icon>
-            <image class="slot-img" :src="joy" />
+            <image class="slot-img" :src="img" />
           </template>
         </wd-grid-item>
         <wd-grid-item use-icon-slot text="文字" icon-size="36px">
           <template #icon>
-            <image class="slot-img" :src="joy" />
+            <image class="slot-img" :src="img" />
           </template>
         </wd-grid-item>
       </wd-grid>
@@ -139,6 +139,9 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
 import { joy } from '../images/joy'
+import { ref } from 'vue'
+
+const img = ref<string>(joy)
 
 const toast = useToast()
 function click() {

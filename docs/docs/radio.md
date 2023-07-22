@@ -1,15 +1,5 @@
 ## Radio 单选框
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-radio": "/wot-design/radio/index",
-    "wd-radio-group": "/wot-design/radioGroup/index"
-  }
-}
-```
 
 ### 基本用法
 

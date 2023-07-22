@@ -1,12 +1,12 @@
 <template>
   <div class="survey" @mouseover="show = true" @mouseout="show = false">
     <i class="survey-line-1"></i>
-    <span>使用反馈</span>
+    <span>打赏作者</span>
     <i class="survey-line-2"></i>
     <transition name="slide-fade">
       <div v-show="show" class="survey-img">
-        <img src="//img10.360buyimg.com/jmadvertisement/jfs/t1/101794/39/13010/8696/5e533835Eeb4c4a8a/ecb878b8392014b4.jpg" />
-        <p>您的反馈可以使 Wot Design 更好～</p>
+        <img style="width: 160px; height: 160px; padding: 32px" src="https://fant-mini-plus.top/img/weixinQrcode.jpg" />
+        <p>打赏作者，助力他的工作～</p>
       </div>
     </transition>
   </div>
@@ -15,7 +15,7 @@
 <script>
 export default {
   name: 'Survey',
-  data () {
+  data() {
     return {
       show: false
     }
@@ -42,8 +42,9 @@ export default {
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 0 20px #ccc;
-    transition: transform .2s, opacity .2s;
+    transition: transform 0.2s, opacity 0.2s;
     line-height: 1.2;
+    padding-bottom: 16px;
 
     &::after {
       position: absolute;
@@ -111,7 +112,8 @@ export default {
     }
   }
 }
-.slide-fade-enter, .slide-fade-leave-active {
+.slide-fade-enter,
+.slide-fade-leave-active {
   transform: translate(0, 30px);
   opacity: 0;
 }

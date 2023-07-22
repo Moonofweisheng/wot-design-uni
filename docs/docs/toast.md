@@ -1,14 +1,5 @@
 ## Toast 轻提示
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-toast": "/wot-design/toast/index"
-  }
-}
-```
 
 ### 基本用法
 

@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "ActionSheet 动作面板",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-action-sheet": "../../wot-design/actionSheet/index",
-    "wd-toast": "../../wot-design/toast/index",
-    "wd-button": "../../wot-design/button/index"
-  }
-}

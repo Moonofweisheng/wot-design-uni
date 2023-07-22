@@ -1,14 +1,5 @@
 ## Rate 评分
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-rate": "/wot-design/rate/index"
-  }
-}
-```
 
 ### 基本用法
 

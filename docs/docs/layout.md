@@ -2,16 +2,6 @@
 
 `Layout` 组件由 `wd-col` 组件和 `wd-row` 组成。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-col": "/wot-design/col/index",
-    "wd-row": "/wot-design/row/index",
-  }
-}
-```
 
 ## 代码演示
 

@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "loadmore 加载组件",
-  "usingComponents": {
-    "demo-block": "../../components/demo-block/index",
-    "wd-loadmore": "../../wot-design/loadmore/index"
-  }
-}

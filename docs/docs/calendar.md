@@ -1,18 +1,7 @@
 ## Calendar 日历选择器
 
-**2.3.0版本新增**
 
 提供日历单选、多选、范围选择、周维度、月维度等功能。
-
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-calendar": "/wot-design/calendar/index"
-  }
-}
-```
 
 ### 基本使用
 
@@ -344,7 +333,7 @@ Page({
 设置 `before-confirm` 函数，在用户点击`确定`按钮时，会执行 `before-confirm` 函数，并传入 `value` 和 `resolve` 参数，可以对 `value` 进行校验，并通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受1个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会关闭弹窗。
 
 ```html
-<wd-toast id="wd-toast" />
+<wd-toast />
 
 <wd-calendar label="before-confirm" value="{{ value }}" before-confirm="{{ beforeConfirm }}" />
 ```

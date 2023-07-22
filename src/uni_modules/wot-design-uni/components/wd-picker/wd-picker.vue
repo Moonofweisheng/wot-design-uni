@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2023-07-04 18:00:35
+ * @LastEditTime: 2023-07-20 17:20:13
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-picker\wd-picker.vue
@@ -174,7 +174,6 @@ const props = withDefaults(defineProps<Props>(), {
   valueKey: 'value',
   labelKey: 'label',
   columns: () => [],
-  displayFormat: defaultDisplayFormat,
   zIndex: 15
 })
 
@@ -200,7 +199,7 @@ const isLoading = computed(() => {
 watch(
   () => props.displayFormat,
   (fn) => {
-    if (getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function') {
       throw Error('The type of displayFormat must be Function')
     }
     if (pickerViewWd.value && pickerViewWd.value.selectedIndex && pickerViewWd.value.selectedIndex.length !== 0) {
@@ -366,7 +365,7 @@ function setShowValue(items) {
   if ((items instanceof Array && !items.length) || !items) return
 
   const { valueKey, labelKey } = props
-  showValue.value = props.displayFormat(items, { valueKey, labelKey })
+  showValue.value = (props.displayFormat || defaultDisplayFormat)(items, { valueKey, labelKey })
 }
 function noop() {}
 function onPickStart() {

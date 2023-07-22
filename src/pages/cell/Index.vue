@@ -1,5 +1,5 @@
 <template>
-  <!-- <wd-toast id="wd-toast" /> -->
+  <wd-toast />
   <demo-block title="基本用法" transparent>
     <wd-cell-group>
       <wd-cell title="标题文字" value="内容" />
@@ -42,14 +42,14 @@
 
   <demo-block title="点击事件" transparent>
     <wd-cell-group>
-      <wd-cell title="标题文字" value="内容" clickable />
+      <wd-cell title="标题文字" value="内容" clickable @click="showToast" />
     </wd-cell-group>
   </demo-block>
 
   <demo-block title="页面跳转" transparent>
     <wd-cell-group>
-      <wd-cell title="帮助与反馈" is-link to="/pages/index/index" />
-      <wd-cell title="设置" value="内容" is-link to="/pages/button/index" replace></wd-cell>
+      <wd-cell title="帮助与反馈" is-link to="/pages/index/Index" />
+      <wd-cell title="设置" value="内容" is-link to="/pages/button/Index" replace></wd-cell>
     </wd-cell-group>
   </demo-block>
 
@@ -84,7 +84,7 @@
       </wd-cell>
       <wd-cell title="标题文字" center>
         <view class="custom-value" style="height: 32px">
-          <wd-switch :value="switchValue" @change="handleSwitchChange" />
+          <wd-switch v-model="switchValue" @change="handleSwitchChange" />
         </view>
       </wd-cell>
       <wd-cell title="标题文字" is-link to="/pages/index/index">
@@ -102,6 +102,7 @@
   </demo-block>
 </template>
 <script lang="ts" setup>
+import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
 import { ref } from 'vue'
 const rate = ref(0)
 const slider = ref('')
@@ -115,6 +116,11 @@ function handleSliderChange({ detail }) {
 }
 function handleSwitchChange({ detail }) {
   switchValue.value = detail
+}
+const toast = useToast()
+
+function showToast() {
+  toast.show('点击')
 }
 </script>
 <style lang="scss" scoped>

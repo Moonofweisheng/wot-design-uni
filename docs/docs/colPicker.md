@@ -2,16 +2,6 @@
 
 使用多列选择器来做级联，交互效果较好，多列选择器支持无限级选择。
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-col-picker": "/wot-design/colPicker/index"
-  }
-}
-```
-
 ### 基本用法
 
 `label` 设置左侧文本内容；

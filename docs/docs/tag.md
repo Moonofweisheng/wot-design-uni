@@ -1,14 +1,6 @@
 ## Tag 标签
 
-### 引入
 
-```json
-{
-  "usingComponents": {
-    "wd-tag": "/wot-design/tag/index"
-  }
-}
-```
 
 ### 基本用法
 

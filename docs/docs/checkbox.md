@@ -1,17 +1,5 @@
 ## Checkbox 复选框
 
-### 按需引入
-
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-checkbox": "/wot-design/checkbox/index",
-    "wd-checkbox-group": "/wot-design/checkboxGroup/index"
-  }
-}
-```
 
 ### 基本用法
 

@@ -1,14 +1,5 @@
 ## Progress 进度条
 
-### 引入
-
-```json
-{
-  "usingComponents": {
-    "wd-progress": "/wot-design/progress/index"
-  }
-}
-```
 
 ### 基本用法
 

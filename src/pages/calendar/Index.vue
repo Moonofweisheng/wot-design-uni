@@ -1,5 +1,5 @@
 <template>
-  <wd-toast id="wd-toast" />
+  <wd-toast />
 
   <view style="margin: 20px 0">
     <wd-cell-group border>

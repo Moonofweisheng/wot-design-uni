@@ -12,6 +12,7 @@
           class="year"
           :type="type"
           :date="item"
+          :data-date="item"
           :value="value"
           :min-date="minDate"
           :max-date="maxDate"
