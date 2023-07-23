@@ -39,6 +39,8 @@
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :z-index="zIndex"
       @close="onCancel"
+      @enter="setShowPicker(true)"
+      @leave="setShowPicker(false)"
       custom-class="wd-picker__popup"
     >
       <!--toolBar-->
@@ -87,6 +89,7 @@
           :max-minute="maxMinute"
           :min-minute="minMinute"
           :start-symbol="true"
+          :show-picker="showPicker"
           @change="onChangeStart"
           @pickstart="onPickStart"
           @pickend="onPickEnd"
@@ -113,6 +116,7 @@
           :max-minute="maxMinute"
           :min-minute="minMinute"
           :start-symbol="false"
+          :show-picker="showPicker"
           @change="onChangeEnd"
           @pickstart="onPickStart"
           @pickend="onPickEnd"
@@ -133,7 +137,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onMounted, ref, watch, nextTick } from 'vue'
-import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
+import { debounce, deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
 import { useCell } from '../mixins/useCell'
 
 interface Props {
@@ -264,10 +268,9 @@ const props = withDefaults(defineProps<Props>(), {
 const datetimePickerView = ref()
 const datetimePickerView1 = ref()
 
-const child = null
 const showValue = ref<string | Date | Array<string | Date>>([])
 const popupShow = ref<boolean>(false)
-const tabLabel = ref<boolean>(false)
+const showPicker = ref<boolean>(false)
 const showStart = ref<boolean>(true)
 const region = ref<boolean>(false)
 const showTabLabel = ref<string[]>([])
@@ -282,6 +285,10 @@ const { proxy } = getCurrentInstance() as any
 
 const cell = useCell()
 
+const setShowPicker = debounce(function (show: boolean) {
+  showPicker.value = show
+}, 100)
+
 watch(
   () => props.modelValue,
   (val, oldVal) => {
@@ -294,8 +301,6 @@ watch(
     } else {
       // 每次value更新时都需要刷新整个列表
       innerValue.value = deepClone(getDefaultInnerValue())
-      console.log(val, 'props.modelValue')
-      console.log(innerValue.value, 'innerValue.value')
     }
     setShowValue()
   },

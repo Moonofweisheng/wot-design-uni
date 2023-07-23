@@ -11,6 +11,7 @@
       :columnChange="columnChange"
       :loading="loading"
       :loading-color="loadingColor"
+      :show-picker="showPicker"
       @change="onChange"
       @pickstart="onPickStart"
       @pickend="onPickEnd"
@@ -57,6 +58,8 @@ interface Props {
   // 选中项，当 type 为 time 时，类型为字符串，否则为 Date
   modelValue: string | Date
   // PickerView的Props 开始
+  // 是否展示picker（兼容支付宝和钉钉）
+  showPicker: boolean
   // 加载中
   loading: boolean
   loadingColor: string
@@ -100,6 +103,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   // PickerView的Props 开始
+  showPicker: true,
   // 加载中
   loading: false,
   loadingColor: '#4D80F0',
@@ -152,10 +156,6 @@ watch(
     if (val === oldVal) return
     // 外部传入值更改时 更新picker数据
     const value = correctValue(val)
-    console.log(new Date(props.modelValue), 'props.modelValue')
-
-    console.log(new Date(value), 'value')
-
     updateColumnValue(value)
   },
   { deep: true, immediate: true }

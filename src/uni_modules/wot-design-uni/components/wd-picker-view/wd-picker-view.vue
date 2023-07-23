@@ -3,29 +3,32 @@
     <view class="wd-picker-view__loading" v-if="loading">
       <wd-loading :color="loadingColor" />
     </view>
-    <picker-view
-      mask-class="wd-picker-view__mask"
-      indicator-class="wd-picker-view__roller"
-      :indicator-style="`height: ${itemHeight}px;`"
-      :style="`height: ${columnsHeight - 20}px;`"
-      :value="selectedIndex"
-      @change="onChange"
-      @pickstart="onPickStart"
-      @pickend="onPickEnd"
-    >
-      <picker-view-column v-for="(col, colIndex) in formatColumns" :key="colIndex" class="wd-picker-view-column">
-        <view
-          v-for="(row, rowIndex) in col"
-          :key="rowIndex"
-          :class="`wd-picker-view-column__item ${row['disabled'] ? 'wd-picker-view-column__item--disabled' : ''}  ${
-            selectedIndex[colIndex] == rowIndex ? 'wd-picker-view-column__item--active' : ''
-          }`"
-          :style="`line-height: ${itemHeight}px;`"
-        >
-          {{ row[labelKey] }}
-        </view>
-      </picker-view-column>
-    </picker-view>
+    <view :style="`height: ${columnsHeight - 20}px;`">
+      <picker-view
+        v-if="showPicker"
+        mask-class="wd-picker-view__mask"
+        indicator-class="wd-picker-view__roller"
+        :indicator-style="`height: ${itemHeight}px;`"
+        :style="`height: ${columnsHeight - 20}px;`"
+        :value="selectedIndex"
+        @change="onChange"
+        @pickstart="onPickStart"
+        @pickend="onPickEnd"
+      >
+        <picker-view-column v-for="(col, colIndex) in formatColumns" :key="colIndex" class="wd-picker-view-column">
+          <view
+            v-for="(row, rowIndex) in col"
+            :key="rowIndex"
+            :class="`wd-picker-view-column__item ${row['disabled'] ? 'wd-picker-view-column__item--disabled' : ''}  ${
+              selectedIndex[colIndex] == rowIndex ? 'wd-picker-view-column__item--active' : ''
+            }`"
+            :style="`line-height: ${itemHeight}px;`"
+          >
+            {{ row[labelKey] }}
+          </view>
+        </picker-view-column>
+      </picker-view>
+    </view>
   </view>
 </template>
 <script lang="ts" setup>
@@ -34,6 +37,8 @@ import { deepClone, getType, isEqual, range } from '../common/util'
 
 interface Props {
   customClass?: string
+  // 是否展示picker（兼容支付宝和钉钉）
+  showPicker: boolean
   // 加载中
   loading: boolean
   loadingColor: string
@@ -55,6 +60,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   loading: false,
+  showPicker: true,
   loadingColor: '#4D80F0',
   columnsHeight: 217,
   valueKey: 'value',

@@ -10,8 +10,8 @@
     :lazy-render="lazyRender"
     @enter="handleOpen"
     @close="close"
-    @afterenter="handleOpened"
-    @afterleave="handleClosed"
+    @after-enter="handleOpened"
+    @after-leave="handleClosed"
     @clickmodal="handleClickModal"
     :z-index="zIndex"
   >

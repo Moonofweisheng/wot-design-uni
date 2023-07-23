@@ -33,6 +33,7 @@
       :panel-height="panelHeight"
       :time-filter="timeFilter"
       :hide-second="hideSecond"
+      :show-picker="showPicker"
       @change="handleChange"
       @pickstart="handlePickStart"
       @pickend="handlePickEnd"
@@ -80,6 +81,8 @@ interface Props {
   timeFilter: Function
   // type 为 'datetime' 或 'datetimerange' 时有效，是否不展示秒修改
   hideSecond: boolean
+  // 是否展示picker（兼容支付宝和钉钉）
+  showPicker: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
@@ -91,7 +94,8 @@ const props = withDefaults(defineProps<Props>(), {
   showPanelTitle: true,
   defaultTime: '00:00:00',
   panelHeight: 378,
-  hideSecond: false
+  hideSecond: false,
+  showPicker: true
 })
 
 const formatDefauleTime = ref<number[]>([])
