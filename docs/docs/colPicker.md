@@ -61,7 +61,7 @@ Page({
 ```
 
 :::info
-如果想在data定义中的函数获取到小程序页面 this 对象，可以在小程序的生命周期里将 this 赋值给一个临时变量，也可以在生命周期的时候setData设置函数，并通过 bind 修改上下文，如下，详见 [在 data 定义的函数变量获取 this](https://ftf.jd.com/wot-design-uni/#/components/commonProblems#zai-data-ding-yi-de-han-shu-bian-liang-huo-qu-this)
+如果想在data定义中的函数获取到小程序页面 this 对象，可以在小程序的生命周期里将 this 赋值给一个临时变量，也可以在生命周期的时候setData设置函数，并通过 bind 修改上下文，如下，详见 [在 data 定义的函数变量获取 this](http://fant-mini-plus.top/wot-design-uni/#/components/commonProblems#zai-data-ding-yi-de-han-shu-bian-liang-huo-qu-this)
 :::
 
 ### 异步加载

@@ -21,7 +21,7 @@ Page({
    columns1: [
       {
         value: '1',
-        label: '京麦'
+        label: '沃特'
       },
       {
         value: '2',
@@ -61,7 +61,7 @@ Page({
    columns1: [
       {
         value: '1',
-        label: '京麦'
+        label: '沃特'
       },
       {
         value: '2',
@@ -112,7 +112,7 @@ Page({
    columns1: [
       {
         value: '1',
-        label: '京麦',
+        label: '沃特',
         disabled: true
       },
       {
@@ -148,7 +148,7 @@ Page({
    columns1: [
       {
         value: '1',
-        label: '京麦'
+        label: '沃特'
       },
       {
         value: '2',
@@ -195,7 +195,7 @@ Page({
    columns1: [
       {
         value: '1',
-        label: '京麦'
+        label: '沃特'
       },
       {
         value: '2',
@@ -290,7 +290,7 @@ Page({
    columns: [
       {
         value: '1',
-        label: '京麦'
+        label: '沃特'
       },
       {
         value: '2',

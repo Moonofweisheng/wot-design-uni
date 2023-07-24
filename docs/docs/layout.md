@@ -85,7 +85,7 @@
 
 ### flex 布局
 
-*注意：由于微信小程序使用插槽时，插槽会渲染到当前标签外部，因此在组件上设置flex布局属性，对插槽内部并不生效，因此flex布局效果需要用户参考[H5组件库 Layout](https://ftf.jd.com/wot-design/#/components/layout)自行实现。*
+*注意：由于微信小程序使用插槽时，插槽会渲染到当前标签外部，因此在组件上设置flex布局属性，对插槽内部并不生效，因此flex布局效果需要用户参考[H5组件库 Layout](http://fant-mini-plus.top/wot-design/#/components/layout)自行实现。*
 
 ### Row Attributes
 

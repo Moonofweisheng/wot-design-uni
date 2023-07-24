@@ -9,7 +9,7 @@
           href="https://github.com/Moonofweisheng/wot-design-uni"
           data-icon="octicon-star"
           data-show-count="true"
-          aria-label="Star jd-ftf/wot-design on GitHub"
+          aria-label="Star wot-design-uni on GitHub"
         >
           Star
         </github-button>

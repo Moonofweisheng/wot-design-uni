@@ -16,21 +16,21 @@
 
   <demo-block title="修改形状--button">
     <wd-radio-group shape="button" v-model="value1" @change="change">
-      <wd-radio :value="1">京麦</wd-radio>
+      <wd-radio :value="1">沃特</wd-radio>
       <wd-radio :value="2">商家后台</wd-radio>
     </wd-radio-group>
   </demo-block>
 
   <demo-block title="修改形状--dot">
     <wd-radio-group shape="dot" v-model="value2" @change="change">
-      <wd-radio :value="1">京麦</wd-radio>
+      <wd-radio :value="1">沃特</wd-radio>
       <wd-radio :value="2">商家后台</wd-radio>
     </wd-radio-group>
   </demo-block>
 
   <demo-block title="表单---单选组" transparent>
     <wd-radio-group cell v-model="value3" @change="change">
-      <wd-radio :value="1">京麦</wd-radio>
+      <wd-radio :value="1">沃特</wd-radio>
       <wd-radio :value="2">商家后台</wd-radio>
     </wd-radio-group>
   </demo-block>
@@ -61,24 +61,24 @@
 
   <demo-block title="修改选中颜色">
     <wd-radio-group v-model="value7" @change="change">
-      <wd-radio :value="1" checked-color="#fa4350">京麦</wd-radio>
+      <wd-radio :value="1" checked-color="#fa4350">沃特</wd-radio>
       <wd-radio :value="2" checked-color="#fa4350">商家后台</wd-radio>
     </wd-radio-group>
   </demo-block>
 
   <demo-block title="禁用">
     <wd-radio-group v-model="value1" disabled shape="dot">
-      <wd-radio :value="1">京麦</wd-radio>
+      <wd-radio :value="1">沃特</wd-radio>
       <wd-radio :value="2">商家后台</wd-radio>
     </wd-radio-group>
     <view class="divider"></view>
     <wd-radio-group v-model="value1" disabled>
-      <wd-radio :value="1">京麦</wd-radio>
+      <wd-radio :value="1">沃特</wd-radio>
       <wd-radio :value="2">商家后台</wd-radio>
     </wd-radio-group>
     <view class="divider"></view>
     <wd-radio-group v-model="value1" disabled shape="button">
-      <wd-radio :value="1">京麦</wd-radio>
+      <wd-radio :value="1">沃特</wd-radio>
       <wd-radio :value="2">商家后台</wd-radio>
     </wd-radio-group>
   </demo-block>
@@ -103,7 +103,7 @@
   <demo-block title="radio的props比radioGroup的优先级高">
     <wd-radio-group hape="button" disabled checked-color="#fa4350" v-model="value11" @change="change">
       <wd-radio :value="1" checked-color="#000" :disabled="false">商家前端</wd-radio>
-      <wd-radio :value="2" :disabled="false">京麦</wd-radio>
+      <wd-radio :value="2" :disabled="false">沃特</wd-radio>
       <wd-radio :value="3">商家智能</wd-radio>
     </wd-radio-group>
   </demo-block>
