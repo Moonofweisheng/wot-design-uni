@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, ref } from 'vue'
+import { computed, getCurrentInstance, onMounted, ref, nextTick } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
 import { getType } from '../../common/util'
 import Year from '../year/year.vue'
@@ -122,7 +122,10 @@ function scrollIntoView() {
 
     years.some((year, index) => {
       if (compareYear(year, activeDate) === 0) {
-        scrollIntoViewValue.value = `year${index}`
+        scrollIntoViewValue.value = ''
+        nextTick(() => {
+          scrollIntoViewValue.value = `year${index}`
+        })
         return true
       }
 

@@ -15,10 +15,23 @@ export default {
     }
   },
   mounted() {
+    console.log(
+      docsearch({
+        indexName: 'wot-design-uni',
+        inputSelector: '#search_input',
+        apiKey: 'a11cbee9214ed36f4ddd5e87323eff30',
+        appId: 'C7S10T5C4B',
+        algoliaOptions: {
+          hitsPerPage: 10
+        },
+        debug: false // Set debug to true if you want to inspect the dropdown
+      })
+    )
     docsearch({
-      apiKey: '2e031c5218bf2d41b5b9aa75aec4f725',
       indexName: 'wot-design-uni',
       inputSelector: '#search_input',
+      apiKey: 'a11cbee9214ed36f4ddd5e87323eff30',
+      appId: 'C7S10T5C4B',
       algoliaOptions: {
         hitsPerPage: 10
       },

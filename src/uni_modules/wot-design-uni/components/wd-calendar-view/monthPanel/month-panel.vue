@@ -188,7 +188,10 @@ function scrollIntoView() {
 
     months.some((month, index) => {
       if (compareMonth(month, activeDate) === 0) {
-        scrollIntoViewValue.value = `month${index}`
+        scrollIntoViewValue.value = ''
+        nextTick(() => {
+          scrollIntoViewValue.value = `month${index}`
+        })
         return true
       }
       return false
