@@ -1,10 +1,19 @@
+/*
+ * @Author: weisheng
+ * @Date: 2023-07-20 00:34:54
+ * @LastEditTime: 2023-07-24 10:10:45
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: \wot-design-uni\docs\build\file-writer.js
+ * 记得注释
+ */
 const fs = require('fs')
 const path = require('path')
 const readYaml = require('read-yaml')
 const routesConfig = readYaml.sync(path.resolve(__dirname, '../routes.yml'))
 const { siteMapUrls, createSitemapXml } = require('./sitemap')
 const versions = require('../build/deploy/change-log')
-const pkg = require('../package.json')
+const pkg = require('../../package.json')
 
 // 写入 version.json 文件
 const versionWriter = () => {

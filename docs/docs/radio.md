@@ -35,7 +35,7 @@ Page({
 ```html
 <!-- button 按钮式单选 -->
 <wd-radio-group value="{{value}}" shape="button" bind:change="change">
-  <wd-radio value="{{1}}">京麦</wd-radio>
+  <wd-radio value="{{1}}">沃特</wd-radio>
   <wd-radio value="{{2}}">商家后台</wd-radio>
 </wd-radio-group>
 ```
@@ -59,7 +59,7 @@ Page({
 ```html
 <!-- dot 点状单选 -->
 <wd-radio-group value="{{value}}" shape="dot" bind:change="change">
-  <wd-radio value="{{1}}">京麦</wd-radio>
+  <wd-radio value="{{1}}">沃特</wd-radio>
   <wd-radio value="{{2}}">商家后台</wd-radio>
 </wd-radio-group>
 ```
@@ -113,7 +113,7 @@ Page({
 
 ```html
 <wd-radio-group value="1" checked-color="#fa4350">
-  <wd-radio value="1">京麦</wd-radio>
+  <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
 ```
@@ -124,7 +124,7 @@ Page({
 
 ```html
 <wd-radio-group value="1" disabled>
-  <wd-radio value="1">京麦</wd-radio>
+  <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
 ```
@@ -135,7 +135,7 @@ Page({
 
 ```html
 <wd-radio-group value="1" size="large">
-  <wd-radio value="1">京麦</wd-radio>
+  <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
 ```
@@ -147,7 +147,7 @@ radio设置的props优先级比radioGroup上设置的props优先级更高
 ```html
   <wd-radio-group value="1" shape="button" disabled checked-color="#f00">
     <wd-radio value="1" disabled="{{false}}" checked-color="#000">商家后台</wd-radio>
-    <wd-radio value="2" disabled="{{false}}">京麦</wd-radio>
+    <wd-radio value="2" disabled="{{false}}">沃特</wd-radio>
     <wd-radio value="3">商家智能</wd-radio>
   </wd-radio-group>
 ```

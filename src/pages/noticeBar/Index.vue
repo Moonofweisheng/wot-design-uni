@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-06-29 23:23:01
+ * @LastEditTime: 2023-07-24 10:30:30
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\pages\noticeBar\Index.vue
@@ -21,7 +21,7 @@
       />
       <wd-notice-bar
         type="info"
-        text="pc-win京麦已登录，可在“设备管理”中查看详情。pc-win京麦已登录，可在“设备管理”中查看详情。"
+        text="pc-win沃特已登录，可在“设备管理”中查看详情。pc-win沃特已登录，可在“设备管理”中查看详情。"
         prefix="check-outline"
       />
     </demo-block>

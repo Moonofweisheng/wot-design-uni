@@ -26,8 +26,8 @@ Page({
 修改 `shape` 属性，可选值为 'circle'、'square'、'button'，默认为 'circle'。
 
 ```html
-<wd-checkbox value="{{true}}" shape="square">京麦</wd-checkbox>
-<wd-checkbox value="{{true}}" shape="button">京麦</wd-checkbox>
+<wd-checkbox value="{{true}}" shape="square">沃特</wd-checkbox>
+<wd-checkbox value="{{true}}" shape="button">沃特</wd-checkbox>
 ```
 
 ### 修改选中的颜色
@@ -40,7 +40,7 @@ Page({
    checked-color="#f00"
    bind:change="handleChange"
 >
-  京麦
+  沃特
 </wd-checkbox>
 ```
 ```javascript
@@ -63,7 +63,7 @@ Page({
 ```html
 <wd-checkbox
   value="{{true}}"
-  true-value="京麦"
+  true-value="沃特"
   false-value="商家后台"
   bind:change="handleChange"
 >
@@ -84,7 +84,7 @@ Page({
 
 ```html
 <wd-checkbox-group value="{{value}}"  bind:change="handleChange">
-  <wd-checkbox value="jingmai">京麦</wd-checkbox>
+  <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
@@ -94,7 +94,7 @@ Page({
 ```html
 
 <wd-checkbox-group value="{{value1}}" cell>
-  <wd-checkbox value="jingmai">京麦</wd-checkbox>
+  <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
@@ -134,7 +134,7 @@ Page({
 
 ```html
 <wd-checkbox-group value="{{value}}" inline bind:change="handleChange">
-  <wd-checkbox value="jingmai">京麦</wd-checkbox>
+  <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
@@ -158,7 +158,7 @@ Page({
 
 ```html
 <wd-checkbox-group value="{{value}}" disabled bind:change="handleChange">
-  <wd-checkbox value="jingmai">京麦</wd-checkbox>
+  <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
@@ -182,7 +182,7 @@ Page({
 ```html
 <wd-checkbox-group value="{{value}}" min="{{1}}" max="{{3}}" bind:change="handleChange">
   <wd-checkbox value="jd">京东</wd-checkbox>
-  <wd-checkbox value="jingmai">京麦</wd-checkbox>
+  <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
   <wd-checkbox value="market">营销中心</wd-checkbox>
 </wd-checkbox-group>
@@ -206,7 +206,7 @@ Page({
 
 ```html
 <wd-checkbox-group value="1" size="large">
-  <wd-checkbox value="1">京麦</wd-checkbox>
+  <wd-checkbox value="1">沃特</wd-checkbox>
   <wd-checkbox value="2">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```

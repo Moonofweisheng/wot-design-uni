@@ -27,7 +27,7 @@ Page({
 通过 `active-value` 属性修改开关打开时的值，`inactive-value` 属性修改开关关闭时的值。
 
 ```html
-<wd-switch value="{{ checked }}" active-value="京麦" inactive-value="商家后台" />
+<wd-switch value="{{ checked }}" active-value="沃特" inactive-value="商家后台" />
 ```
 
 ### 修改颜色

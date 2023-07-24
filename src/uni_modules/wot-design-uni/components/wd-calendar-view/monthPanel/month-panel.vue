@@ -41,6 +41,7 @@
           v-model="timeValue"
           :columns="timeData"
           :columns-height="125"
+          :show-picker="showPicker"
           @change="handleTimeChange"
           @pickstart="handlePickStart"
           @pickend="handlePickEnd"
@@ -73,8 +74,11 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   timeFilter: Function
   hideSecond: boolean
+  // 是否展示picker（兼容支付宝和钉钉）
+  showPicker: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
+  showPicker: true,
   allowSameDay: false,
   showPanelTitle: false,
   hideSecond: false
@@ -155,8 +159,9 @@ function initRect(thresholds = [0, 0.7, 0.8, 0.9, 1]) {
 
   contentObserver = uni.createIntersectionObserver(instance, {
     thresholds,
-    observeAll: true
-  })
+    observeAll: true,
+    dataset: true
+  } as any)
 
   contentObserver.relativeTo('.wd-month-panel__container')
   contentObserver.observe('.month', (res: any) => {

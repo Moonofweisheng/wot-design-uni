@@ -15,7 +15,7 @@
     </demo-block>
     <demo-block title="修改值 active-value 、 inactive-value">
       <view style="margin-bottom: 10px">{{ checked2 }}</view>
-      <wd-switch v-model="checked2" active-value="京麦" inactive-value="商家后台" @change="handleChange2" />
+      <wd-switch v-model="checked2" active-value="沃特" inactive-value="商家后台" @change="handleChange2" />
     </demo-block>
     <demo-block title="自定义颜色 active-color 、 inactive-color">
       <wd-switch v-model="checked3" active-color="#13ce66" inactive-color="#f00" @change="handleChange3" />
@@ -39,7 +39,7 @@ import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-b
 import { ref } from 'vue'
 
 const checked1 = ref<boolean>(true)
-const checked2 = ref<string>('京麦')
+const checked2 = ref<string>('沃特')
 const checked3 = ref<boolean>(true)
 const checked4 = ref<boolean>(true)
 const checked5 = ref<boolean>(true)
