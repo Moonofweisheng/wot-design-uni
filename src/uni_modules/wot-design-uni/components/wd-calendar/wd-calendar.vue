@@ -1,6 +1,6 @@
 <template>
   <view :class="`wd-calendar ${cell.border.value ? 'is-border' : ''} ${customClass}`">
-    <view class="wd-calendar__field" @tap="open">
+    <view class="wd-calendar__field" @click="open">
       <slot v-if="useDefaultSlot"></slot>
       <view
         v-else
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, nextTick, computed, watch } from 'vue'
+import { ref, nextTick, computed, watch, onMounted } from 'vue'
 import dayjs from '../common/dayjs'
 import { debounce, deepClone, isEqual, padZero } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
@@ -284,10 +284,6 @@ watch(
     if (isEqual(val, oldVal)) return
     calendarValue.value = deepClone(val)
     confirmBtnDisabled.value = getConfirmBtnStatus(val)
-    nextTick(() => {
-      scrollIntoView()
-    })
-
     setShowValue()
 
     if (props.type.indexOf('range') > -1) {
@@ -323,16 +319,6 @@ watch(
     immediate: true
   }
 )
-// watch(
-//   () => props.defaultTime,
-//   (val) => {
-//     getDefaultTime(val)
-//   },
-//   {
-//     deep: true,
-//     immediate: true
-//   }
-// )
 
 watch(
   () => props.showConfirm,
@@ -371,20 +357,19 @@ function open() {
   lastCalendarValue.value = deepClone(calendarValue.value)
   lastTab.value = currentTab.value
   lastCurrentType.value = currentType.value
+  scrollIntoView()
 
-  nextTick(() => {
-    setTimeout(() => {
-      scrollIntoView()
-      if (props.showTypeSwitch) {
-        calendarTabs.value.scrollIntoView()
-        calendarTabs.value.updateLineStyle(false)
-      }
-    }, 250)
-  })
+  setTimeout(() => {
+    if (props.showTypeSwitch) {
+      calendarTabs.value.scrollIntoView()
+      calendarTabs.value.updateLineStyle(false)
+    }
+  }, 250)
 }
 // 对外暴露方法
 function close() {
   pickerShow.value = false
+  scrollIntoView()
   setTimeout(() => {
     calendarValue.value = deepClone(lastCalendarValue.value)
     currentTab.value = lastTab.value
