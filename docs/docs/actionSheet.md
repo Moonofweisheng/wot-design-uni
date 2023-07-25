@@ -3,7 +3,7 @@
 
 ### 基本用法
 
-通过 `show` 属性设置显示隐藏，监听 `bind:close` 事件，隐藏菜单。
+通过 `show` 属性设置显示隐藏，监听 `close` 事件，隐藏菜单。
 
 `actions` 类型为 `Array`，数组内部对象结构如下：
 
@@ -14,8 +14,8 @@
 | color | string | 颜色 | - |
 
 ```html
-<wd-button bind:click="showActions">弹出菜单</wd-button>
-<wd-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="close" />
+<wd-button @click="showActions">弹出菜单</wd-button>
+<wd-action-sheet :show="show" :actions="actions" @close="close" />
 ```
 
 ```javascript
@@ -54,8 +54,8 @@ page({
 可以设置 颜色、禁用、加载 等状态。
 
 ```html
-<wd-button bind:click="showActions">弹出菜单</wd-button>
-<wd-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="close" />
+<wd-button @click="showActions">弹出菜单</wd-button>
+<wd-action-sheet :show="show" :actions="actions" @close="close" />
 ```
 
 ```javascript
@@ -93,9 +93,9 @@ page({
 
 ```html
 <wd-action-sheet
-  show="{{ show }}"
-  actions="{{ actions }}"
-  bind:close="close"
+  :show="show"
+  :actions="actions"
+  @close="close"
   cancel-text="取消" />
 ```
 
@@ -110,8 +110,8 @@ page({
 
 
 ```html
-<wd-button bind:click="showActions">弹出菜单</wd-button>
-<wd-action-sheet show="{{ show }}" panels="{{ panels }}" bind:close="close" bind:select="select" />
+<wd-button @click="showActions">弹出菜单</wd-button>
+<wd-action-sheet :show="show" :panels="panels" @close="close" @select="select" />
 ```
 
 ```javascript
@@ -151,8 +151,8 @@ page({
 | title | string | 标题 | - |
 
 ```html
-<wd-button bind:click="showActions">弹出菜单</wd-button>
-<wd-action-sheet show="{{ show }}" panels="{{ panels }}" bind:close="close" bind:select="select" />
+<wd-button @click="showActions">弹出菜单</wd-button>
+<wd-action-sheet :show="show" :panels="panels" @close="close" @select="select" />
 ```
 
 ```javascript
@@ -195,7 +195,7 @@ page({
 设置 `title` 展示标题。
 
 ```html
-<wd-action-sheet show="{{ show }}" title="标题" bind:close="close">
+<wd-action-sheet :show="show" title="标题" @close="close">
   <view style="padding: 15px 15px 150px 15px;">内容</view>
 </wd-action-sheet>
 ```
@@ -220,13 +220,13 @@ page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:select | 点击选项时触发 | 菜单选项或自定义面板一维数组 （item: 选项对象, index: 选项下标），自定义面板二维数组（item: 选项对象, rowIndex: 选项行下标, colIndex选项列下标）| - |
-| bind:open | 弹出层打开时触发 | - | - |
-| bind:opened | 弹出层打开动画结束时触发 | - | - |
-| bind:close | 弹出层关闭时触发 | - | - |
-| bind:closed | 弹出层关闭动画结束时触发 | - | - |
-| bind:clickmodal | 点击遮罩时触发 | - | - |
-| bind:cancel | 点击取消按钮时触发 | - | - |
+| select | 点击选项时触发 | 菜单选项或自定义面板一维数组 （item: 选项对象, index: 选项下标），自定义面板二维数组（item: 选项对象, rowIndex: 选项行下标, colIndex选项列下标）| - |
+| open | 弹出层打开时触发 | - | - |
+| opened | 弹出层打开动画结束时触发 | - | - |
+| close | 弹出层关闭时触发 | - | - |
+| closed | 弹出层关闭动画结束时触发 | - | - |
+| clickmodal | 点击遮罩时触发 | - | - |
+| cancel | 点击取消按钮时触发 | - | - |
 
 ### Action 数据结构
 

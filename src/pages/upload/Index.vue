@@ -52,7 +52,7 @@
 </template>
 <script lang="ts" setup>
 import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-box'
-import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
+import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const action: string = 'https://ftf.jd.com/api/uploadImg'

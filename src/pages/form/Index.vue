@@ -106,7 +106,7 @@
 </template>
 <script lang="ts" setup>
 import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-box'
-import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
+import { useToast } from '@/uni_modules/wot-design-uni'
 import { areaData } from '@/utils/area'
 import { ref } from 'vue'
 

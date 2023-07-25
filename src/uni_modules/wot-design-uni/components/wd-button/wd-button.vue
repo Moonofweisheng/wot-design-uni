@@ -4,7 +4,6 @@
     :style="customStyle"
     :class="[
       'wd-button',
-      customClass,
       'is-' + type,
       'is-' + size,
       plain ? 'is-plain' : '',
@@ -12,7 +11,8 @@
       round ? 'is-round' : '',
       suck ? 'is-suck' : '',
       block ? 'is-block' : '',
-      loading ? 'is-loading' : ''
+      loading ? 'is-loading' : '',
+      customClass
     ]"
     :hover-start-time="hoverStartTime"
     :hover-stay-time="hoverStayTime"

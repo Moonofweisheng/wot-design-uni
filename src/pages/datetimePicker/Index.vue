@@ -32,7 +32,7 @@
   </demo-block>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
+import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const type = ref<string>('date')
