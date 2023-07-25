@@ -100,8 +100,8 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
-import closeOutside from '@/uni_modules/wot-design-uni/components/common/clickoutside'
+import { useToast } from '@/uni_modules/wot-design-uni'
+import { clickOut } from '@/uni_modules/wot-design-uni'
 
 import { ref } from 'vue'
 const toast = useToast()
@@ -116,7 +116,7 @@ const beforeClose = (reason, position) => {
 }
 
 function clickoutside() {
-  closeOutside()
+  clickOut.closeOutside()
 }
 
 function changeState(position: string) {

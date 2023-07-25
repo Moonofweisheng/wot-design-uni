@@ -108,8 +108,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, nextTick, computed, watch, onMounted } from 'vue'
-import dayjs from '../common/dayjs'
+import { ref, computed, watch } from 'vue'
+import { dayjs } from '../common/dayjs'
 import { debounce, deepClone, isEqual, padZero } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
 import { useCell } from '../mixins/useCell'

@@ -52,7 +52,8 @@ export function getType(target) {
   // 得到原生类型
   const typeStr = Object.prototype.toString.call(target)
   // 拿到类型值
-  const type = typeStr.match(/\[object (\w+)\]/)[1]
+  const match = typeStr.match(/\[object (\w+)\]/)
+  const type = match && match.length ? match[1] : ''
   // 类型值转小写并返回
   return type.toLowerCase()
 }
@@ -126,13 +127,13 @@ export const renderData = (node, data, delay = 0) => {
   delay ? setTimeout(render, delay) : render()
 }
 
-function rgbToHex(r, g, b) {
+function rgbToHex(r: number, g: number, b: number) {
   const hex = ((r << 16) | (g << 8) | b).toString(16)
   return '#' + new Array(Math.abs(hex.length - 7)).join('0') + hex
 }
 
 function hexToRgb(hex) {
-  const rgb = []
+  const rgb: number[] = []
   for (let i = 1; i < 7; i += 2) {
     rgb.push(parseInt('0x' + hex.slice(i, i + 2)))
   }
@@ -148,18 +149,20 @@ function hexToRgb(hex) {
  */
 export const gradient = (startColor, endColor, step = 2) => {
   // 将hex转换为rgb
-  const sColor = hexToRgb(startColor)
-  const eColor = hexToRgb(endColor)
+  const sColor: number[] = hexToRgb(startColor)
+  const eColor: number[] = hexToRgb(endColor)
 
   // 计算R\G\B每一步的差值
   const rStep = (eColor[0] - sColor[0]) / step
   const gStep = (eColor[1] - sColor[1]) / step
   const bStep = (eColor[2] - sColor[2]) / step
 
-  const gradientColorArr = []
+  const gradientColorArr: string[] = []
   for (let i = 0; i < step; i++) {
     // 计算每一步的hex值
-    gradientColorArr.push(rgbToHex(parseInt(rStep * i + sColor[0]), parseInt(gStep * i + sColor[1]), parseInt(bStep * i + sColor[2])))
+    gradientColorArr.push(
+      rgbToHex(parseInt(String(rStep * i + sColor[0])), parseInt(String(gStep * i + sColor[1])), parseInt(String(bStep * i + sColor[2])))
+    )
   }
   return gradientColorArr
 }

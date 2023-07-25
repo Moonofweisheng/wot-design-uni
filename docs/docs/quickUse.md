@@ -1,54 +1,22 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-07-20 00:34:54
- * @LastEditTime: 2023-07-20 19:04:58
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\docs\docs\quickUse.md
- * 记得注释
--->
 ## 快速上手
 
 本节介绍如何在`uni-app`项目中使用 `Wot Design Uni`
 
-### 下载组件库项目
+### 安装
 
-通过 `github`下载组件库源码：
+`Wot Design Uni` 支持 uni_modules 规范，已经上架到 uni-app 的插件市场，故我们推荐使用 uni_modules 的方式引入，方便更新。
 
-* 进入[下载页面](https://github.com/Moonofweisheng/wot-design-uni/releases)，选择合适版本的源码。
-
-* 将下载的源码解压缩，将解压后得到到`wot-design` 文件夹复制到你的小程序工程中如下结构：
-
-```node
-.
-├── app.js
-├── app.json
-├── app.wxss
-├── wot-design               # wot-design 组件库源码文件夹
-|   └── button               # button 组件源码
-|       ├── index.js
-|       ├── index.json
-|       ├── index.jxml
-|       └── index.jxss
-├── pages                    # 小程序项目页面使用目录
-├── project.config.json
-└── sitemap.json
+在`uni-app插件市场`选择使用`HBuildX`导入，或者选择手动在src目录下创建uni_modules文件夹并将Wot Design Uni解压到uni_modules中，结构如下:
+``` 
+- uni_modules
+- - - wot-design-uni 
 ```
 
-在页面的 index.json 文件中引入需要使用的组件：
+下载地址：<a href="https://ext.dcloud.net.cn/plugin?id=11489"><span >wot-design-uni</span></a>
 
-```json
-{
-  "usingComponents": {
-    "wd-button": "/wot-design/button/index"
-  }
-}
-```
 
-在页面中就可以使用该组件：
-
-```html
-<view>
-  <wd-button>按钮</wd-button>
-</view>
+### 使用
+完成前四步之后就可以开始使用`Wot Design Uni`了。`Wot Design Uni`的组件支持easycom规范，故可以直接在.vue中使用，无需在页面内import，也不需要在components内声明，即可在任意页面使用。值得注意的是，uni-app平台不支持全局挂载组件，所以```Message```、```Toast```等组件仍需在SFC中显式使用，例如:
+``` html
+<wd-toast></wd-toast>
 ```

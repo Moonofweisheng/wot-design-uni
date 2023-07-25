@@ -27,7 +27,7 @@ export function closeOther(comp) {
   })
 }
 
-export default function closeOutside() {
+export function closeOutside() {
   queue.forEach((item) => {
     item.$.exposed.close()
   })

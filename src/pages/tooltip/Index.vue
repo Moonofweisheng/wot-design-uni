@@ -96,8 +96,8 @@
   </view>
 </template>
 <script lang="ts" setup>
-import clickoutside from '@/uni_modules/wot-design-uni/components/common/clickoutside'
-import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
+import { clickOut } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const show1 = ref<boolean>(false)
@@ -182,7 +182,7 @@ function handleChange17(event) {
   // this.setData({ show17: event.detail.show })
 }
 function clickOutside(event) {
-  clickoutside()
+  clickOut.closeOutside()
 }
 </script>
 <style lang="scss" scoped>

@@ -31,8 +31,7 @@
   </view>
 </template>
 <script lang="ts" setup>
-import closeOutside from '@/uni_modules/wot-design-uni/components/common/clickoutside'
-import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
+import { clickOut, useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const toast = useToast()
@@ -66,7 +65,7 @@ function link(e) {
 }
 
 function clickOutside() {
-  closeOutside()
+  clickOut.closeOutside()
 }
 
 function showPop(index: number) {

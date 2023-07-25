@@ -137,7 +137,7 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
+import { useToast } from '@/uni_modules/wot-design-uni'
 import { joy } from '../images/joy'
 import { ref } from 'vue'
 

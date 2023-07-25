@@ -45,7 +45,7 @@
   </view>
 </template>
 <script lang="ts" setup>
-import closeOutside from '@/uni_modules/wot-design-uni/components/common/clickoutside'
+import { clickOut } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const dropMenu = ref()
@@ -72,7 +72,7 @@ const option2 = ref<Record<string, any>>([
 ])
 
 function clickoutside() {
-  closeOutside()
+  clickOut.closeOutside()
 }
 
 function handleChange1({ value }) {

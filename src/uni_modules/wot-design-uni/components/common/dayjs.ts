@@ -141,4 +141,6 @@ class Dayjs {
   }
 }
 
-export default (dateStr) => new Dayjs(dateStr)
+export  function dayjs(dateStr?: string | number | Date) {
+ return new Dayjs(dateStr)
+}

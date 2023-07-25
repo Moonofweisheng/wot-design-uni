@@ -118,22 +118,12 @@ Wot Design Uni 每1个组件基本都有自定义类名 custom-class，可以在
   <li class="color-group-line" style="background: rgba(255,255,255,0.02);color: rgba(255,255,255,0.65)">2%<div>表头填充色</div></li>
 </ul>
 
-#### clone 组件库工程
+#### 自定义 Sass 变量
 
-小程序组件库需要将工程clone到本地，开发者自己修改 `packages/common/abstracts/_variable.scss` 文件中的scss变量，通过本地打包重新构建一份自定义主题的组件库代码。
+开发者自己参考 `@/uni_modules/wot-design-uni/components/common/abstracts/variable.scss` 文件中的scss变量`uni.scss`文件中重新定义一份自定义主题变量。
+例如：
+```scss
+// uni.scss
+$-color-success: red !default;
 
-```bash
-git clone https://github.com/Moonofweisheng/wot-design-uni.git
-cd wot-design-uni
-npm i
 ```
-
-安装完依赖后，修改 _variable.scss 文件，之后进行打包：
-
-```bash
-npm run build:jd
-```
-
-之后会在工程的根目录下生成 `lib` 文件夹，将文件夹名字改为 `wot-design`，将其复制到你的工程中即可。
-
-> 如果要构建微信版本，执行 `npm run build:wx`，生成的文件夹名字为 `lib-wx`

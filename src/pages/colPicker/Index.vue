@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { areaData } from '../../utils/area'
-import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast'
+import { useToast } from '@/uni_modules/wot-design-uni'
 
 const value1 = ref<any[]>([])
 const value2 = ref<any[]>(['150000', '150100', '150121'])
