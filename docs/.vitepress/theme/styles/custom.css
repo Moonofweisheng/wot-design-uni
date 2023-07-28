@@ -1,0 +1,163 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a,
+a:active {
+  color: #34495e;
+}
+
+
+.style-block {
+  display: inline-block;
+  width: 180px;
+  padding: 15px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.style-block p {
+  margin: 0;
+  color: #fff;
+}
+
+.a-dot,
+.b-dot {
+  position: absolute;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background: #668df8;
+  z-index: 10;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .09);
+}
+
+.a-dot {
+  left: -6px;
+  top: -6px;
+}
+
+.a-dot:before {
+  content: "A";
+  display: inline-block;
+  color: rgba(0, 0, 0, .85);
+  font-size: 17px;
+  -webkit-transform: translate(14px, -22px);
+  transform: translate(14px, -22px);
+}
+
+.b-dot {
+  right: -6px;
+  bottom: -6px;
+}
+
+.b-dot:before {
+  content: "B";
+  display: inline-block;
+  color: rgba(0, 0, 0, .85);
+  font-size: 17px;
+  -webkit-transform: translate(14px, -22px);
+  transform: translate(14px, -22px);
+}
+
+.liner-color {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.liner-color:after {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 250px;
+  right: 79px;
+  top: 50%;
+  background-color: #fff;
+  -webkit-transform: translateY(-50%) rotate(-45deg);
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.color-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.color-block {
+  width: 65px;
+  vertical-align: middle;
+  display: inline-block;
+  text-align: center;
+  height: 20px;
+  color: #fff;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.liner-color1:after {
+  -webkit-transform: translateY(-50%) rotate(45deg);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.liner-color1 .a-dot {
+  right: -6px;
+  top: -6px;
+  left: inherit;
+}
+
+.liner-color1 .b-dot {
+  left: -6px;
+  bottom: -6px;
+}
+
+.liner-color1 .b-dot:before {
+  -webkit-transform: translate(25px, -15px);
+  transform: translate(25px, -15px);
+}
+
+.demo-right {
+  position: absolute;
+  left: 250px;
+}
+
+.color-group {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0 !important;
+  box-sizing: border-box;
+}
+
+.color-group.dark {
+  background: #262626;
+  border: 3px solid #262626;
+  border-radius: 4px;
+}
+
+.color-group li {
+  width: 120px;
+  height: 120px;
+  list-style: none;
+  display: inline-block;
+  padding: 8px 0 0 8px;
+}
+.color-group-line{
+  margin-top:0 !important;
+  margin-bottom: 8px;
+}
+
+.color-group li div {
+  font-weight: 500;
+}
