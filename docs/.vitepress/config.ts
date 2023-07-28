@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-07-28 10:16:39
+ * @LastEditTime: 2023-07-28 23:18:59
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-docs\docs\.vitepress\config.ts
+ * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
  * 记得注释
  */
 import { defineConfig } from 'vitepress';
@@ -14,6 +14,15 @@ export default defineConfig({
   description: '一个基于Vue3构建的uni-app组件库',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['script', {}, `
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?18377b8bd73d88647503887f67ccf27f";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  `]
   ],
   themeConfig: {
     logo: '/wot-design.png',
