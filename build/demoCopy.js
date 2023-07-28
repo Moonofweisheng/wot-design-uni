@@ -1,16 +1,7 @@
-/*
- * @Author: weisheng
- * @Date: 2022-12-02 14:34:18
- * @LastEditTime: 2023-07-22 15:27:13
- * @LastEditors: weisheng
- * @Description: .d.ts移动到制品
- * @FilePath: \wot-design-uni\build\demoCopy.js
- * 记得注释
- */
 const fs = require('fs')
 const path = require('path')
 const srcRoot = path.join(__dirname, '../dist/build/h5')
-const targetSrcRoot = path.join(__dirname, '../docs/dist/demo')
+const targetSrcRoot = path.join(__dirname, '../docs/.vitepress/dist/demo')
 
 function copyFolder(sourceDir, targetDir) {
   // 创建目标文件夹
