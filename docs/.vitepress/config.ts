@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-07-29 18:29:33
+ * @LastEditTime: 2023-07-30 00:40:37
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -27,7 +27,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/wot-design.png',
     editLink: {
-      pattern: 'https://github.com/Moonofweisheng/wot-design-uni/edit/main/docs/:path',
+      pattern: 'https://github.com/Moonofweisheng/wot-design-uni/edit/master/docs/:path',
       text: '为此页提供修改建议',
     },
     socialLinks: [
