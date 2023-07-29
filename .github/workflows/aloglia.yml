@@ -12,10 +12,11 @@ jobs:
         run: echo "::set-output name=config::$(cat algolia.json | jq -r tostring)"
       - name: Algolia Crawler Automatic Crawl
         uses: algolia/algoliasearch-crawler-github-actions@v1.1.0
-
-        env:
-          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
-          API_KEY: ${{ secrets.API_KEY }}
-          CONFIG: ${{ steps.algolia_config.outputs.config }}
-          
+        id: algolia_crawler
+        with: # mandatory parameters
+          crawler-user-id: ${{ secrets.CRAWLER_USER_ID }}
+          crawler-api-key: ${{ secrets.CRAWLER_API_KEY }}
+          algolia-app-id: ${{ secrets.ALGOLIA_APP_ID }}
+          algolia-api-key: ${{ secrets.ALGOLIA_API_KEY }}
+          site-url: 'https://wot-design-uni.netlify.app'
   
