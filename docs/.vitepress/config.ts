@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-07-29 17:26:43
+ * @LastEditTime: 2023-07-29 18:29:33
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -33,13 +33,12 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Moonofweisheng/wot-design-uni' },
     ],
-
-    algolia: {
-      appId: '9CEEWI3F01',
-      apiKey: '3438300c571ea1bc2948444ef8ace807',
-      indexName: 'wot-design-uni',
-      searchParameters: {
-        facetFilters: ['tags:en'],
+    search: {
+      provider: 'algolia',
+      options: {
+        appId: '9CEEWI3F01',
+        apiKey: '3438300c571ea1bc2948444ef8ace807',
+        indexName: 'netlify_0991d8a9-0fb0-483b-8961-5bde066bbd50_master_all',
       },
     },
 
