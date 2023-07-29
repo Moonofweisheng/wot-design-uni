@@ -10,9 +10,12 @@ jobs:
       - name: Get the content of algolia.json as config
         id: algolia_config
         run: echo "::set-output name=config::$(cat algolia.json | jq -r tostring)"
-      - name: Push indices to Algolia
-        uses: iChochy/Algolia-Upload-Records@main
+      - name: Algolia Crawler Automatic Crawl
+        uses: algolia/algoliasearch-crawler-github-actions@v1.1.0
+
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           API_KEY: ${{ secrets.API_KEY }}
           CONFIG: ${{ steps.algolia_config.outputs.config }}
+          
+  
