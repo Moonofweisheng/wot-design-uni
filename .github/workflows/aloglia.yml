@@ -11,7 +11,7 @@ jobs:
         id: algolia_config
         run: echo "::set-output name=config::$(cat algolia.json | jq -r tostring)"
       - name: Push indices to Algolia
-        uses: signcl/docsearch-scraper-action@master
+        uses: iChochy/Algolia-Upload-Records@main
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           API_KEY: ${{ secrets.API_KEY }}
