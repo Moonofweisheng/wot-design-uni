@@ -3,4 +3,3 @@ package = "@algolia/netlify-plugin-crawler"
   [plugins.inputs]
   branches = ['master']
   template = "hierarchical"
-  customDomain = "https://wot-design-uni.netlify.app"
