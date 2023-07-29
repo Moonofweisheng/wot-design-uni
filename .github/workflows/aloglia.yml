@@ -1,22 +1,22 @@
 
-name: Algolia Upload Records
-on:
-  [push] #推送时执行
-jobs:
-  algolia:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Get the content of algolia.json as config
-        id: algolia_config
-        run: echo "::set-output name=config::$(cat algolia.json | jq -r tostring)"
-      - name: Algolia Crawler Automatic Crawl
-        uses: algolia/algoliasearch-crawler-github-actions@v1.1.0
-        id: algolia_crawler
-        with: # mandatory parameters
-          crawler-user-id: ${{ secrets.CRAWLER_USER_ID }}
-          crawler-api-key: ${{ secrets.CRAWLER_API_KEY }}
-          algolia-app-id: ${{ secrets.ALGOLIA_APP_ID }}
-          algolia-api-key: ${{ secrets.ALGOLIA_API_KEY }}
-          site-url: 'https://wot-design-uni.netlify.app'
+# name: Algolia Upload Records
+# on:
+#   [push] #推送时执行
+# jobs:
+#   algolia:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Get the content of algolia.json as config
+#         id: algolia_config
+#         run: echo "::set-output name=config::$(cat algolia.json | jq -r tostring)"
+#       - name: Algolia Crawler Automatic Crawl
+#         uses: algolia/algoliasearch-crawler-github-actions@v1.1.0
+#         id: algolia_crawler
+#         with: # mandatory parameters
+#           crawler-user-id: ${{ secrets.CRAWLER_USER_ID }}
+#           crawler-api-key: ${{ secrets.CRAWLER_API_KEY }}
+#           algolia-app-id: ${{ secrets.ALGOLIA_APP_ID }}
+#           algolia-api-key: ${{ secrets.ALGOLIA_API_KEY }}
+#           site-url: 'https://wot-design-uni.netlify.app'
   
