@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-07-28 23:18:59
+ * @LastEditTime: 2023-07-29 17:26:43
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -35,10 +35,11 @@ export default defineConfig({
     ],
 
     algolia: {
-      appId: 'C7S10T5C4B',
-      apiKey: 'a11cbee9214ed36f4ddd5e87323eff30',
+      appId: '9CEEWI3F01',
+      apiKey: '3438300c571ea1bc2948444ef8ace807',
       indexName: 'wot-design-uni',
       searchParameters: {
+        facetFilters: ['tags:en'],
       },
     },
 
