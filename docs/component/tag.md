@@ -119,7 +119,7 @@
 ></wd-tag>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     tags: ['标签一', '标签二']
@@ -161,7 +161,7 @@ Page({
 </wd-tag>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     tags: [
@@ -206,7 +206,7 @@ Page({
 |---------|-----|-----|---------|
 | bind:click | 标签点击时触发 | event | - |
 | bind:close | 点击关闭按钮时触发 | event | - |
-| bind:confirm | 新增标签输入内容确定后触发 | event.detail = { value } | - |
+| bind:confirm | 新增标签输入内容确定后触发 | `{ value }` | - |
 
 ## Slots
 

@@ -12,7 +12,7 @@
 <wd-button bind:click="showToast">toast</wd-button>
 ```
 
-```javascript
+```typescript
 import Toast from '/wot-design/toast/toast.js'
 
 Page({
@@ -24,7 +24,7 @@ Page({
 
 ## 成功、异常、警告、常规
 
-```javascript
+```typescript
 Toast.success('操作成功')
 Toast.error('手机验证码输入错误，请重新输入')
 Toast.warning('提示信息')
@@ -33,7 +33,7 @@ Toast.info('常规提示信息')
 
 ## 提示位置
 
-```javascript
+```typescript
 // 顶部提示
 Toast({
   position: 'top',
@@ -49,7 +49,7 @@ Toast({
 
 ## 关闭提示
 
-```javascript
+```typescript
 Toast.close()
 ```
 
@@ -57,13 +57,13 @@ Toast.close()
 
 `loading` 开启后需要用户手动关闭，关闭可以调用 `close`，或者再调用一次 toast 提示，因为 toast 只会存在一个，新的 toast 会自动顶掉旧的 toast。
 
-```javascript
+```typescript
 Toast.loading('加载中...')
 ```
 
 修改 loading 指示器类型：
 
-```javascript
+```typescript
 Toast.loading({
   loadingType: 'ring',
   msg: '加载中...'
@@ -72,7 +72,7 @@ Toast.loading({
 
 手动关闭 loading：
 
-```javascript
+```typescript
 Toast.close()
 ```
 

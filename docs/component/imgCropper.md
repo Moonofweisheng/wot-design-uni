@@ -31,7 +31,7 @@
 </view>
 ```
 
-```JavaScript
+```typescript
 Page({
   data: {
     src: '',

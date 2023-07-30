@@ -20,7 +20,7 @@
 ></wd-upload>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     fileList: [{
@@ -87,7 +87,7 @@ Page({
 ></wd-upload>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     fileList: [{
@@ -126,7 +126,7 @@ Page({
 ></wd-upload>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     fileList: [{
@@ -165,7 +165,7 @@ Page({
 </wd-upload>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     fileList: [{
@@ -204,7 +204,7 @@ Page({
 </wd-upload>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     fileList: [{

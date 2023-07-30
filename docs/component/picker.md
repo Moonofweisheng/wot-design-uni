@@ -13,7 +13,7 @@ Picker 组件为 popup 和 pickerView 的组合。
 <wd-picker columns="{{columns1}}" label="单列选项" value="{{value}}" bind:confirm="handleConfirm" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     columns: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
@@ -42,7 +42,7 @@ Page({
 ```html
 <wd-picker columns="{{columns}}" label="禁用" value="{{value}}" disabled />
 ```
-```javascript
+```typescript
 Page({
   data: {
     columns: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
@@ -81,7 +81,7 @@ Page({
 ```html
 <wd-picker columns="{{columns}}" label="多列" value="{{value}}" />
 ```
-```javascript
+```typescript
 Page({
   data: {
    value: ['中南大学', '软件工程'],
@@ -109,7 +109,7 @@ Page({
  />
 ```
 
-```javascript
+```typescript
 const district = {
   '0': [{ label: '北京', value: '110000' }, { label: '广东省', value: '440000' }],
   '110000': [{ label: '北京', value: '110100' }],
@@ -191,7 +191,7 @@ Page({
 <wd-picker label="before-confirm" columns="{{columns}}" value="{{value}}" before-confirm="{{beforeConfirm}}" bind:confirm="handleConfirm" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     columns: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],

@@ -7,7 +7,7 @@
 
 `value` 为绑定值，可以为 array 类型（普通折叠）、 string 类型（手风琴）和 boolean 类型（收起展开查看更多）。CollapseItem 的 `title` 和 `name` 为必填。`name` 用于标识该折叠栏。
 ##由于微信小程序非双向绑定，因此需要事件手动赋值到当前页面##
-```javascript
+```typescript
 page({
   data: {
     value: [ 'item1' ]
@@ -114,7 +114,7 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 绑定值变化时触发 | event.detail = { value } | - |
+| bind:change | 绑定值变化时触发 | `{ value }` | - |
 
 ## Collapse Slot
 

@@ -11,7 +11,7 @@
 <wd-switch value="{{ checked }}" bind:change="handleChange" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     checked: true
@@ -60,7 +60,7 @@ Page({
 <wd-switch value="{{ checked }}" before-change="{{ beforeChange }}" bind:change="handleChange" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     checked: true
@@ -91,7 +91,7 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| bind:change | 值修改事件 | event.detail = { value } | - |
+| bind:change | 值修改事件 | `{ value }` | - |
 
 ## 外部样式类
 

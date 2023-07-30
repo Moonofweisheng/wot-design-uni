@@ -11,7 +11,7 @@
 ```html
 <wd-slider value="{{ value }}" bind:dragend="handleChange"/>
 ```
-```javascript
+```typescript
 page({
   data: {
    value: 30,
@@ -30,7 +30,7 @@ page({
 ```html
 <wd-slider value="{{ value }}" bind:dragend="handleChange"/>
 ```
-```javascript
+```typescript
 page({
   data: {
    value: [10, 30],
@@ -90,9 +90,9 @@ page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:dragstart | 开始移动时触发 | event.detail = { value } | - |
-| bind:dragmove | 移动滑块时触发 | event.detail = { value } | - |
-| bind:dragend | 移动结束时触发 | event.detail = { value } | - |
+| bind:dragstart | 开始移动时触发 | `{ value }` | - |
+| bind:dragmove | 移动滑块时触发 | `{ value }` | - |
+| bind:dragend | 移动结束时触发 | `{ value }` | - |
 
 ## 外部样式类
 | 类名 | 说明 | 最低版本 |

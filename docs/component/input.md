@@ -9,7 +9,7 @@
 `bindChange`为绑定change事件。
 **小程序非双向绑定，需要手动赋值到当前页面。**
 
-```javascript
+```typescript
 page({
   data: {
     value: '',

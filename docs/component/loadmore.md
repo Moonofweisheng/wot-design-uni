@@ -65,7 +65,7 @@
 </view>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     state: 'loading',

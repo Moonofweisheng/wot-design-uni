@@ -9,14 +9,14 @@
 
 展示新消息数量。
 
-定义`value`属性，它接受`Number`或者`String`。
+定义`modelValue`属性，它接受`Number`或者`String`。
 
 ```html
-<wd-badge value="12">
+<wd-badge modelValue="12">
   <wd-button size="small">评论</wd-button>
 </wd-badge>
 
-<wd-badge value="12px">
+<wd-badge modelValue="12px">
   <wd-button size="small">评论</wd-button>
 </wd-badge>
 ```
@@ -26,25 +26,25 @@
 设置 `type` 属性，也可以自定义背景色 `bg-color`，也可以通过`custom-class`定义组件样式。
 
 ```html
-<wd-badge custom-class="badge" value="3" bg-color="pink">
+<wd-badge custom-class="badge" modelValue="3" bg-color="pink">
   <wd-button size="small">回复</wd-button>
 </wd-badge>
-<wd-badge custom-class="badge" value="1" type="primary">
+<wd-badge custom-class="badge" modelValue="1" type="primary">
   <wd-button size="small">评论</wd-button>
 </wd-badge>
-<wd-badge custom-class="badge" value="2" type="warning">
+<wd-badge custom-class="badge" modelValue="2" type="warning">
   <wd-button size="small">回复</wd-button>
 </wd-badge>
-<wd-badge custom-class="badge" value="1" type="success">
+<wd-badge custom-class="badge" modelValue="1" type="success">
   <wd-button size="small">评论</wd-button>
 </wd-badge>
-<wd-badge custom-class="badge" value="2" type="info">
+<wd-badge custom-class="badge" modelValue="2" type="info">
   <wd-button size="small">回复</wd-button>
 </wd-badge>
 ```
 
 ```css
-.badge {
+:deep(.badge) {
     margin: 0 30px 20px 0;
     display: inline-block;
 }
@@ -54,13 +54,13 @@
 
 可自定义最大值。
 
-由`max`属性定义，它接受一个`Number`，需要注意的是，只有当`value`为`Number`时，它才会生效。
+由`max`属性定义，它接受一个`Number`，需要注意的是，只有当`modelValue`为`Number`时，它才会生效。
 
 ```html
-<wd-badge value="200" max="99">
+<wd-badge modelValue="200" max="99">
   <wd-button size="small">评论</wd-button>
 </wd-badge>
-<wd-badge value="100" max="10">
+<wd-badge modelValue="100" max="10">
   <wd-button size="small">回复</wd-button>
 </wd-badge>
 ```
@@ -70,13 +70,13 @@
 
 可以显示数字以外的文本内容。
 
- 定义`value`为`String`类型是时可以用于显示自定义文本。
+ 定义`modelValue`为`String`类型是时可以用于显示自定义文本。
 
 ```html
-<wd-badge value="new">
+<wd-badge modelValue="new">
   <wd-button size="small">评论</wd-button>
 </wd-badge>
-<wd-badge value="hot">
+<wd-badge modelValue="hot">
   <wd-button size="small">回复</wd-button>
 </wd-badge>
 ```

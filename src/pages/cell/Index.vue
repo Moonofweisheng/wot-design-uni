@@ -111,11 +111,11 @@ const switchValue = ref('')
 function handleRateChange({ value }) {
   console.log(value)
 }
-function handleSliderChange({ detail }) {
-  slider.value = detail
+function handleSliderChange({ value }) {
+  console.log(value)
 }
-function handleSwitchChange({ detail }) {
-  switchValue.value = detail
+function handleSwitchChange({ value }) {
+  console.log(value)
 }
 const toast = useToast()
 

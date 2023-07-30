@@ -20,7 +20,7 @@
 />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
    value: ''
@@ -100,7 +100,7 @@ Page({
 </wd-search>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: '',
@@ -171,12 +171,12 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| bind:focus | 输入框聚焦事件 | event.detail = { value } | - |
-| bind:blur | 监听输入框失焦事件 | event.detail = { value } | - |
-| bind:search | 监听输入框搜索事件 | event.detail = { value } | - |
+| bind:focus | 输入框聚焦事件 | `{ value }` | - |
+| bind:blur | 监听输入框失焦事件 | `{ value }` | - |
+| bind:search | 监听输入框搜索事件 | `{ value }` | - |
 | bind:clear | 监听输入框清空按钮事件 | - | - |
-| bind:cancel | 监听输入框右侧文本点击事件 | event.detail = { value } | - |
-| bind:change | 监听输入框内容变化事件 | event.detail = { value } | - |
+| bind:cancel | 监听输入框右侧文本点击事件 | `{ value }` | - |
+| bind:change | 监听输入框内容变化事件 | `{ value }` | - |
 
 ## Slots
 

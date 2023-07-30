@@ -48,7 +48,7 @@
   <wd-progress percentage="{{percentage}}" color="{{colorObject}}"/>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     colorObject: [

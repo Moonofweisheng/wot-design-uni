@@ -11,7 +11,7 @@
 <wd-rate value="{{value}}" bind:change="handleChange" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: 1
@@ -86,7 +86,7 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 点击icon，修改分值事件 | event.detail = { value } | - |
+| bind:change | 点击icon，修改分值事件 | `{ value }` | - |
 
 ## 外部样式类
 

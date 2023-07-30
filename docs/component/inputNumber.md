@@ -11,7 +11,7 @@
 <wd-input-number value="{{ value }}" bind:change="handleChange" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: 1
@@ -88,7 +88,7 @@ Page({
 <wd-input-number value="{{ value }}" allow-null placeholder="不限" bind:change="handleChange" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: ''

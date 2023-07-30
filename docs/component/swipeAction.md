@@ -31,7 +31,7 @@
   </wd-swipe-action>
 </view>
 ```
-```javascript
+```typescript
 import Toast from '/wot-design/toast/toast'
 import clickoutside from '/wot-design/common/clickoutside'
 
@@ -100,7 +100,7 @@ Page({
   <wd-button data-value='right' bindclick="changeState">打开右边</wd-button>
 </view>
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: 'close'
@@ -143,7 +143,7 @@ Page({
   </view>
 </demo-block>
 ```
-```javascript
+```typescript
 import Toast from '../../dist/toast/toast'
 
 Page({
@@ -176,7 +176,7 @@ Page({
     </view>
   </wd-swipe-action>
 ```
-```javascript
+```typescript
 import Toast from '../../dist/toast/toast'
 
 Page({

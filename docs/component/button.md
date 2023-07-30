@@ -111,13 +111,13 @@
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:click | 点击事件 | - | - |
-| bind:getuserinfo | 获取用户信息 | - | - |
-| bind:contact | 客服消息回调，open-type="contact"时有效 | - | - |
-| bind:getphonenumber | 获取用户手机号回调，open-type=getPhoneNumber时有效 | - | - |
-| bind:error | 当使用开放能力时，发生错误的回调，open-type=launchApp时有效 | - | - |
-| bind:launchapp | 打开 APP 成功的回调，open-type=launchApp时有效 | - | - |
-| bind:opensetting | 在打开授权设置页后回调，open-type=openSetting时有效 | - | - |
+| click | 点击事件 | - | - |
+| getuserinfo | 获取用户信息 | - | - |
+| contact | 客服消息回调，open-type="contact"时有效 | - | - |
+| getphonenumber | 获取用户手机号回调，open-type=getPhoneNumber时有效 | - | - |
+| error | 当使用开放能力时，发生错误的回调，open-type=launchApp时有效 | - | - |
+| launchapp | 打开 APP 成功的回调，open-type=launchApp时有效 | - | - |
+| opensetting | 在打开授权设置页后回调，open-type=openSetting时有效 | - | - |
 
 ## 外部样式类
 

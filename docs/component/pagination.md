@@ -63,7 +63,7 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|------|--------|
-| bind:change | 值修改事件 | event.detail = { value },value为当前值 |
+| bind:change | 值修改事件 | `{ value }`,value为当前值 |
 
 ## 外部样式类
 

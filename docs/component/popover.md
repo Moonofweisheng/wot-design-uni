@@ -23,7 +23,7 @@ Popover 的属性与 [Tooltip](/#/components/tooltip) 很类似，因此对于�
 </view>
 ```
 
-```javascript
+```typescript
 import clickoutside from '/wot-design/common/clickoutside'
 
 Page({
@@ -65,7 +65,7 @@ Page({
 </wd-popover>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     show: false,

@@ -84,7 +84,7 @@
           :range-prompt="rangePrompt"
           :allow-same-day="allowSameDay"
           :default-time="defaultTime"
-          time-filter="timeFilter"
+          :time-filter="timeFilter"
           :hide-second="hideSecond"
           :show-picker="showPicker"
           :show-panel-title="!range(type)"

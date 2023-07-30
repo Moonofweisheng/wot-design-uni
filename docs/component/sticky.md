@@ -30,7 +30,7 @@
 </view>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     show: false

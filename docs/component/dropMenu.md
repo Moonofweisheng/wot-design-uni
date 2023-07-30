@@ -28,7 +28,7 @@
 </view>
 ```
 
-```JavaScript
+```typescript
 import clickoutside from '/wot-design/common/clickoutside'
 
 Page({
@@ -81,7 +81,7 @@ Page({
 </wd-drop-menu>
 ```
 
-```JavaScript
+```typescript
 Page({
   data: {
     value: 0,

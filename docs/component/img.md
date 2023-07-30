@@ -25,7 +25,7 @@
 />
 ```
 
-```JavaScript
+```typescript
 const joy = 'data:image/jpeg;base64,...'  // 图片文件base64
 // const joy = '../../pages/images/jd.png'
 page({

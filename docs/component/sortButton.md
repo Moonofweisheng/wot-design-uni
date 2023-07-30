@@ -11,7 +11,7 @@
 <wd-sort-button title="价格" value="{{value}}" bind:change="handleChange" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: 0
@@ -62,7 +62,7 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 监听排序修改 | event.detail = { value } | - |
+| bind:change | 监听排序修改 | `{ value }` | - |
 
 ## 外部样式类
 | 类名 | 说明 | 最低版本 |

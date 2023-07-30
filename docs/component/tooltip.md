@@ -35,7 +35,7 @@
 </view>
 ```
 
-```javascript
+```typescript
 import clickoutside from '/wot-design/common/clickoutside'
 
 Page({
@@ -68,7 +68,7 @@ Page({
 </wd-tooltip>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     show: false
@@ -89,7 +89,7 @@ Tooltip 组件通过属性`show-close` 控制是否显示关闭按钮。
 </wd-tooltip>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     show: false

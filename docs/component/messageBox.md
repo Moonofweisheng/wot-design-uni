@@ -13,7 +13,7 @@ alert 弹框只有确定按钮，用于强提醒。
 <wd-message-box id="wd-message-box" />
 <wd-button bind:click="alert">alert</wd-button>
 ```
-```javascript
+```typescript
 import MessageBox from '/wot-design/messageBox/messageBox'
 
 Page({
@@ -29,7 +29,7 @@ Page({
 <wd-message-box id="wd-message-box" />
 <wd-button bind:click="alert">alert</wd-button>
 ```
-```javascript
+```typescript
 import MessageBox from '/wot-design/messageBox/messageBox'
 
 Page({
@@ -48,7 +48,7 @@ Page({
 <wd-message-box id="wd-message-box" />
 <wd-button bind:click="alert">alert</wd-button>
 ```
-```javascript
+```typescript
 import MessageBox from '/wot-design/messageBox/messageBox'
 
 Page({
@@ -69,7 +69,7 @@ Page({
 <wd-message-box id="wd-message-box" />
 <wd-button bind:click="confirm">confirm</wd-button>
 ```
-```javascript
+```typescript
 import MessageBox from '/wot-design/messageBox/messageBox'
 
 Page({
@@ -92,7 +92,7 @@ prompt 会展示一个输入框，并可以进行输入校验。
 <wd-message-box id="wd-message-box" />
 <wd-button bind:click="prompt">prompt</wd-button>
 ```
-```javascript
+```typescript
 import MessageBox from '/wot-design/messageBox/messageBox'
 
 Page({
@@ -120,7 +120,7 @@ Page({
   />
 </wd-message-box>
 ```
-```javascript
+```typescript
 import MessageBox from '/wot-design/messageBox/messageBox'
 
 Page({
@@ -152,7 +152,7 @@ Page({
 
 `MessageBox(msg)`在调用时直接传入字符串，`MessageBox(options)` 在调用时，需传入 options 参数。alert、confirm 和 prompt 都支持快捷调用：
 
-```javascript
+```typescript
 MessageBox(msg)
 
 MessageBox(options)
@@ -172,7 +172,7 @@ MessageBox.prompt(options)
 // 某个在 Page 中使用的自定义组件封装了 wd-message-box 。
 <wd-message-box id="wd-message-box" />
 ```
-```javascript
+```typescript
 import MessageBox from '/wot-design/messageBox/messageBox'
 
 Page({

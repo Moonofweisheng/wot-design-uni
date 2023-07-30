@@ -17,7 +17,7 @@
 <wd-select-picker label="基本用法" value="{{ value }}" columns="{{ columns }}" bindchange="handleChange" binconfirm="handleConfirm"></wd-select-picker>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
    columns1: [
@@ -57,7 +57,7 @@ Page({
 <wd-select-picker label="类型切换" value="{{ value }}" columns="{{ columns }}" type="radio" binconfirm="handleConfirm"></wd-select-picker>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
    columns1: [
@@ -108,7 +108,7 @@ Page({
 <wd-select-picker label="禁用选项" value="{{ value }}" columns="{{ columns }}" binconfirm="handleConfirm"></wd-select-picker>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
    columns1: [
@@ -144,7 +144,7 @@ Page({
 <wd-select-picker label="展示格式化" value="{{ value }}" columns="{{ columns }}" :display-format="displayFormat" binconfirm="handleConfirm"></wd-select-picker>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
    columns1: [
@@ -191,7 +191,7 @@ Page({
 <wd-select-picker label="确定前校验" value="{{ value }}" columns="{{ columns }}" :before-confirm="beforeConfirm" binconfirm="handleConfirm"></wd-select-picker>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
    columns1: [
@@ -286,7 +286,7 @@ Page({
 </wd-select-picker>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
    columns: [
@@ -368,7 +368,7 @@ Page({
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|-----|-------|--------|
 | bind:confirm | 点击确认时触发 | event.detail = { value, selectedItems }, checkbox 类型时 value 和 selectedItems 为数组，radio 类型为非数组 | - |
-| bind:change | picker内选项更改时触发 |  event.detail = { value }, checkbox 类型时 value 为数组，radio 类型为非数组 | - |
+| bind:change | picker内选项更改时触发 |  `{ value }`, checkbox 类型时 value 为数组，radio 类型为非数组 | - |
 | bind:cancel | 点击关闭按钮或者蒙层时触发 | - | - |
 
 ## Methods

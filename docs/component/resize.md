@@ -15,7 +15,7 @@
 </wd-resize>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     width: '',

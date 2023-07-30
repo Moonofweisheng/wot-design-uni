@@ -10,7 +10,7 @@
 ```html
 <wd-datetime-picker-view value="{{value}}" label="日期选择" bind:change="handleChange" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -30,7 +30,7 @@ Page({
 ```html
 <wd-datetime-picker-view type="date" value="{{value}}" label="年月日" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -44,7 +44,7 @@ Page({
 ```html
 <wd-datetime-picker-view type="year-month" value="{{value}}" label="年月" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -59,7 +59,7 @@ Page({
 ```html
 <wd-datetime-picker-view type="time" value="{{value}}" label="时分" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -78,7 +78,7 @@ Page({
 <wd-datetime-picker-view value="{{value}}" label="内部格式" formatter="{{formatter}}" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -109,7 +109,7 @@ Page({
 ```html
 <wd-datetime-picker-view value="{{value}}" label="过滤选项" filter="{{filter}}" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -144,6 +144,6 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| bind:change | 切换选项时触发 | 选中的值 event.detail = { value }，value 为当前选中日期的时间戳，'time' 类型则为字符串 | - |
+| bind:change | 切换选项时触发 | 选中的值 `{ value }`，value 为当前选中日期的时间戳，'time' 类型则为字符串 | - |
 | bind:pickstart | 当滚动选择开始时候触发事件 | - | - | 2.3.0 |
 | bind:pickend | 当滚动选择结束时候触发事件 | - | - | 2.3.0 |

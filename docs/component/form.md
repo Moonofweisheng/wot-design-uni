@@ -109,7 +109,7 @@ html 文件代码：
 
 index.js 文件代码：
 
-```javascript
+```typescript
 import Toast from '../../dist/toast/toast.js'
 import MessageBox from '../../dist/messageBox/messageBox.js'
 import areaData from '../../utils/area'

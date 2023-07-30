@@ -81,7 +81,7 @@
   </block>
 </wd-tabs>
 ```
-```javascript
+```typescript
 Page({
   data: {
     tab: 0

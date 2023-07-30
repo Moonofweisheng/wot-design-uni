@@ -12,7 +12,7 @@
 <wd-datetime-picker value="{{value}}" label="日期选择" bind:confirm="handleConfirm" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -33,7 +33,7 @@ Page({
 <wd-datetime-picker value="{{value}}" default-value="{{defaultValue}}" label="日期选择" bind:confirm="handleConfirm" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: '',
@@ -54,7 +54,7 @@ Page({
 ```html
 <wd-datetime-picker type="date" value="{{value}}" label="年月日" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -68,7 +68,7 @@ Page({
 ```html
 <wd-datetime-picker type="year-month" value="{{value}}" label="年月" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -83,7 +83,7 @@ Page({
 ```html
 <wd-datetime-picker type="time" value="{{value}}" label="时分" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: Date.now(),
@@ -99,7 +99,7 @@ Page({
 ```html
 <wd-datetime-picker value="{{value}}" label="展示格式" display-format="{{displayFormat}}" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: new Date(),
@@ -118,7 +118,7 @@ Page({
 ```html
 <wd-datetime-picker value="{{value}}" label="内部格式" formatter="{{formatter}}" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: new Date(),
@@ -148,7 +148,7 @@ Page({
 ```html
 <wd-datetime-picker value="{{value}}" label="过滤选项" filter="{{filter}}" />
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: new Date(),
@@ -202,7 +202,7 @@ Page({
 <wd-datetime-picker label="before-confirm" value="{{value}}" before-confirm="{{beforeConfirm}}" bind:confirm="handleConfirm" />
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: '',
@@ -250,7 +250,7 @@ Page({
 
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: ['', Date.now()]
@@ -272,7 +272,7 @@ Page({
 <wd-datetime-picker value="{{value}}" label="范围tab展示格式" display-format-tab-label="{{displayFormatTabLabel}}" bind:confirm="handleConfirm"></wd-datetime-picker>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: ['', Date.now()],
@@ -333,7 +333,7 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| bind:confirm | 点击右侧按钮触发 | event.detail = { value }, value 为当前选中日期的时间戳，'time' 类型则为字符串 | - |
+| bind:confirm | 点击右侧按钮触发 | `{ value }`, value 为当前选中日期的时间戳，'time' 类型则为字符串 | - |
 | bind:cancel | 点击左侧按钮触发 | - | - |
 | bind:toggle | 在区域选择模式下，tab标签切换时触发 | 切换到当前picker选中的值 | - |
 

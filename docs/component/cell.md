@@ -79,15 +79,15 @@
 
 ```html
 <wd-toast id="wd-toast"/>
-<wd-cell title="标题文字" value="内容" clickable bind:click="toast" />
+<wd-cell title="标题文字" value="内容" clickable click="toast" />
 ```
-```javascript
-import Toast from '../../dist/toast/toast'
-Page({
-  onClick (event) {
-    Toast('点击')
-  }
-})
+```typescript
+import { useToast } from '@/uni_modules/wot-design-uni'
+const toast = useToast()
+
+function showToast() {
+  toast.show('点击')
+}
 ```
 
 ## 页面跳转
@@ -121,8 +121,15 @@ Page({
 
 ```html
 <wd-cell title="必填" required>
-  <wd-rate value="{{rate}}" bind:change="handleRateChange"></wd-rate>
+  <wd-rate v-model="rate" change="handleRateChange"></wd-rate>
 </wd-cell>
+```
+```typescript
+const rate = ref(0)
+
+function handleRateChange({ value }) {
+  console.log(value)
+}
 ```
 
 ## 表单属性 - 上下结构
@@ -131,8 +138,14 @@ Page({
 
 ```html
 <wd-cell title="上下结构" vertical>
-  <wd-slider value="{{slider}}" bind:change="handleSliderChange"></wd-slider>
+  <wd-slider v-model="slider"  change="handleSliderChange"></wd-slider>
 </wd-cell>
+```
+```typescript
+const slider = ref('')
+function handleSliderChange({ value }) {
+  console.log(value)
+}
 ```
 
 ## 设置左侧宽度
@@ -154,7 +167,7 @@ Page({
   </wd-cell>
   <wd-cell title="标题文字" center>
     <view class="custom-value" style="height: 32px;">
-      <wd-switch value="{{switch}}" bind:change="handleSwitchChange" />
+      <wd-switch v-model="switchValue" change="handleSwitchChange" />
     </view>
   </wd-cell>
   <wd-cell title="标题文字" is-link to="/pages/index/index">
@@ -169,6 +182,13 @@ Page({
 </wd-cell-group>
 ```
 
+```typescript
+const switchValue = ref('')
+function handleSwitchChange({ value }) {
+  console.log(value)
+}
+```
+
 ```css
 .cell-icon {
   display: block;
@@ -179,7 +199,7 @@ Page({
   background: url('https://img10.360buyimg.com/jmadvertisement/jfs/t1/71075/7/3762/1820/5d1f26d1E0d600b9e/a264c901943080ac.png') no-repeat;
   background-size: cover;
 }
-.custom-value {
+:deep(.custom-value) {
   position: absolute;
   top: 50%;
   right: 0;
@@ -230,7 +250,7 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| bind:click | 当 clickable 或 is-link 为 true 时点击单元格触发 | - | - |
+| click | 当 clickable 或 is-link 为 true 时点击单元格触发 | - | - |
 
 ## CellGroup Slot
 

@@ -17,7 +17,7 @@
   <view>当前选中的值为:{{value}}</view>
 </demo-block>
 ```
-```javascript
+```typescript
 Page({
   data: {
     value: 1
@@ -42,7 +42,7 @@ Page({
 </wd-radio-group>
 ```
 
-```javascript
+```typescript
 Page({
   data: {
     value: 1
@@ -67,7 +67,7 @@ Page({
 ```
 
 
-```javascript
+```typescript
 Page({
   data: {
     value: 1
@@ -172,7 +172,7 @@ radio设置的props优先级比radioGroup上设置的props优先级更高
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 绑定值变化时触发 | event.detail = { value }  | - |
+| bind:change | 绑定值变化时触发 | `{ value }`  | - |
 
 ## Radio Attributes
 

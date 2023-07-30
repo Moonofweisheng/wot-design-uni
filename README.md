@@ -16,7 +16,7 @@ yarn add wot-design-uni
 
 ## 快速上手
 
-```javascript
+```typescript
 import Vue from 'vue'
 import WotDesign from 'wot-design'
 

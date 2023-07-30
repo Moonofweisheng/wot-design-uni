@@ -28,7 +28,7 @@
   <view style="height: 40px;" class="content">
     <image src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg" width="40" height="40" alt="joy" style="border-radius: 4px; margin-right: 12px;" />
     <view>
-      <view style="color: rgba(0,0,0,0.85); font-size: 16px;">智云好客CRM短信_催评营销</view>
+      <view style="color: rgba(0,0,0,0.85); font-size: 16px;">智催评营销</view>
       <view style="color: rgba(0,0,0,0.25); font-size: 12px;">高级版-快速吸粉 | 周期一年 </view>
     </view>
   </view>
@@ -75,7 +75,7 @@
 
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
-| custom-class | 根节点自定义样式 | 2.3.0 |
-| custom-title-class | 标题自定义样式 | 2.3.0 |
-| custom-content-class | 内容自定义样式 | 2.3.0 |
-| custom-footer-class | 底部自定义样式 | 2.3.0 |
+| custom-class | 根节点自定义样式 | - |
+| custom-title-class | 标题自定义样式 | - |
+| custom-content-class | 内容自定义样式 | - |
+| custom-footer-class | 底部自定义样式 | - |

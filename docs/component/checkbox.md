@@ -5,22 +5,17 @@
 
 ## 基本用法
 
-`value` 为绑定值，是否选中，单独使用时值为 `boolean` 类型。
+`value` 为绑定值，通过 `v-model:value` 绑定复选框的勾选状态，单独使用时值为 `boolean` 类型。
 
 ```html
-<wd-checkbox value="{{value}}" bind:change="handleChange">单选框1</wd-checkbox>
+<wd-checkbox v-model:value="value" @change="handleChange">单选框1</wd-checkbox>
 ```
-```javascript
-Page({
-  data: {
-    value: true
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+```typescript
+const value = ref<boolean>(true)
+
+function handleChange1({value}) {
+  console.log(value)
+}
 ```
 
 ## 修改图标形状
@@ -28,8 +23,8 @@ Page({
 修改 `shape` 属性，可选值为 'circle'、'square'、'button'，默认为 'circle'。
 
 ```html
-<wd-checkbox value="{{true}}" shape="square">沃特</wd-checkbox>
-<wd-checkbox value="{{true}}" shape="button">沃特</wd-checkbox>
+<wd-checkbox :value="true" shape="square">沃特</wd-checkbox>
+<wd-checkbox :value="true" shape="button">沃特</wd-checkbox>
 ```
 
 ## 修改选中的颜色
@@ -38,24 +33,15 @@ Page({
 
 ```html
 <wd-checkbox
-   value="{{value}}"
+   v-model:value="value"
    checked-color="#f00"
-   bind:change="handleChange"
 >
   沃特
 </wd-checkbox>
 ```
-```javascript
-Page({
-  data: {
-    value: true
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+```typescript
+const value = ref<boolean>(true)
+
 ```
 
 ## 修改选中和非选中的值
@@ -64,38 +50,33 @@ Page({
 
 ```html
 <wd-checkbox
-  value="{{true}}"
+  :value="true"
   true-value="沃特"
   false-value="商家后台"
-  bind:change="handleChange"
 >
   复选框
 </wd-checkbox>
 ```
-```javascript
-Page({
-  handleChange (event) {
-    console.log(event.detail.value)
-  }
-})
-```
 
 ## 复选框组
 
-`value` 为数组，单个复选框的值通过 `value` 进行设置。通过监听 `change` 事件获取当前选中值。
+通过 `v-model` 绑定复选框的勾选状态。
 
 ```html
-<wd-checkbox-group value="{{value}}"  bind:change="handleChange">
+<wd-checkbox-group v-model="value">
   <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
+```
+```typescript
+const value = ref<number[]>([])
 ```
 
 设置 `cell` 属性，开启表单模式复选框组。
 
 ```html
 
-<wd-checkbox-group value="{{value1}}" cell>
+<wd-checkbox-group v-model="value1" cell>
   <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
@@ -104,7 +85,7 @@ Page({
 开启表单模式时，如果同时设置 `shape` 为 `button` 自动开启表单复选按钮组模式。
 
 ```html
-<wd-checkbox-group value="{{value2}}" cell shape="button">
+<wd-checkbox-group v-model="value2" cell shape="button">
   <wd-checkbox value="1" disabled>选项一</wd-checkbox>
   <wd-checkbox value="2">选项二</wd-checkbox>
   <wd-checkbox value="3">选项三</wd-checkbox>
@@ -115,19 +96,10 @@ Page({
 </wd-checkbox-group>
 ```
 
-```javascript
-Page({
-  data: {
-    value: ['jingmai'],
-    value1: ['jingmai'],
-    value2: ['1']
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+```typescript
+const value = ref(['jingmai'])
+const value1 = ref(['jingmai'])
+const value2 = ref(['1'])
 ```
 
 ## 同行展示
@@ -135,23 +107,14 @@ Page({
 设置 `inline` 属性，使复选框在同一行展示。
 
 ```html
-<wd-checkbox-group value="{{value}}" inline bind:change="handleChange">
+<wd-checkbox-group v-model="value" inline>
   <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
 
-```javascript
-Page({
-  data: {
-    value: ['jingmai']
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+```typescript
+const value = ref(['jingmai'])
 ```
 
 ## 禁用
@@ -159,47 +122,30 @@ Page({
 可以在 `checkbox-group` 上面设置 `disabled`，禁用所有复选框，也可以在单个复选框上面设置 `disabled` 属性，禁用某个复选框。
 
 ```html
-<wd-checkbox-group value="{{value}}" disabled bind:change="handleChange">
+<wd-checkbox-group v-model="value" disabled>
   <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
 
-```javascript
-Page({
-  data: {
-    value: ['jingmai']
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+```typescript
+const value = ref(['jingmai'])
 ```
 ## 设置选中数量的上限和下限
 
 `min` 属性设置最小选中的数量，`max` 属性设置最大选中的数量。如果要默认设置某个选项固定被选中，则给该复选框设置 disabled，且 `value` 中有该选项的值。
 
 ```html
-<wd-checkbox-group value="{{value}}" min="{{1}}" max="{{3}}" bind:change="handleChange">
+<wd-checkbox-group v-model="value" :min="1" :max="3">
   <wd-checkbox value="jd">京东</wd-checkbox>
   <wd-checkbox value="jingmai">沃特</wd-checkbox>
   <wd-checkbox value="shop">商家后台</wd-checkbox>
   <wd-checkbox value="market">营销中心</wd-checkbox>
 </wd-checkbox-group>
 ```
-```javascript
-Page({
-  data: {
-    value: ['jd']
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+```typescript
+const value = ref(['jd'])
+
 ```
 
 ## 尺寸
@@ -207,7 +153,7 @@ Page({
 设置 `size` 属性，可选 `large`。
 
 ```html
-<wd-checkbox-group value="1" size="large">
+<wd-checkbox-group v-model="value" size="large">
   <wd-checkbox value="1">沃特</wd-checkbox>
   <wd-checkbox value="2">商家后台</wd-checkbox>
 </wd-checkbox-group>
@@ -252,13 +198,13 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 绑定值变化时触发，当为复选框组时参数为boolean，表示该复选框是否选中 | event.detail = { value } | - |
+| change | 绑定值变化时触发，当为复选框组时参数为boolean，表示该复选框是否选中 | `{ value }` | - |
 
 ## CheckboxGroup Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 绑定值变化时触发 | event.detail = { value } | - |
+| change | 绑定值变化时触发 | `{ value }` | - |
 
 ## Checkbox 外部样式类
 

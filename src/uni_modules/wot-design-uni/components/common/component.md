@@ -1,5 +1,5 @@
 ### 使用方法
-```javascript
+```typescript
 
 import VueComponent from '/packages/common/component.js'
 
