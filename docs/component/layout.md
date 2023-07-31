@@ -15,26 +15,26 @@
 
 ```html
 <wd-row>
-  <wd-col span="24"><view class="bg-dark1">span: 24</view></wd-col>
+  <wd-col :span="24"><view class="bg-dark1">span: 24</view></wd-col>
 </wd-row>
 <wd-row>
-  <wd-col span="12"><view class="bg-dark">span: 12</view></wd-col>
-  <wd-col span="12"><view class="bg-light">span: 12</view></wd-col>
+  <wd-col :span="12"><view class="bg-dark">span: 12</view></wd-col>
+  <wd-col :span="12"><view class="bg-light">span: 12</view></wd-col>
 </wd-row>
 <wd-row>
-  <wd-col span="8"><view class="bg-dark">span: 8</view></wd-col>
-  <wd-col span="8"><view class="bg-light">span: 8</view></wd-col>
-  <wd-col span="8"><view class="bg-dark">span: 8</view></wd-col>
+  <wd-col :span="8"><view class="bg-dark">span: 8</view></wd-col>
+  <wd-col :span="8"><view class="bg-light">span: 8</view></wd-col>
+  <wd-col :span="8"><view class="bg-dark">span: 8</view></wd-col>
 </wd-row>
 <wd-row>
-  <wd-col span="6"><view class="bg-dark">span: 6</view></wd-col>
-  <wd-col span="6"><view class="bg-light">span: 6</view></wd-col>
-  <wd-col span="6"><view class="bg-dark">span: 6</view></wd-col>
-  <wd-col span="6"><view class="bg-light">span: 6</view></wd-col>
+  <wd-col :span="6"><view class="bg-dark">span: 6</view></wd-col>
+  <wd-col :span="6"><view class="bg-light">span: 6</view></wd-col>
+  <wd-col :span="6"><view class="bg-dark">span: 6</view></wd-col>
+  <wd-col :span="6"><view class="bg-light">span: 6</view></wd-col>
 </wd-row>
 ```
 
-```css
+```scss
 .bg-dark1,
 .bg-dark,
 .bg-light{
@@ -64,12 +64,12 @@
 
 ```html
 <wd-row>
-  <wd-col span="4"><view class="bg-dark">span: 4</view></wd-col>
-  <wd-col span="8" offset="4"><view class="bg-light">span: 8 offset: 4</view></wd-col>
+  <wd-col :span="4"><view class="bg-dark">span: 4</view></wd-col>
+  <wd-col :span="8" :offset="4"><view class="bg-light">span: 8 offset: 4</view></wd-col>
 </wd-row>
 <wd-row>
-  <wd-col span="8" offset="4"><view class="bg-dark">span: 8 offset: 4</view></wd-col>
-  <wd-col span="8" offset="4"><view class="bg-dark">span: 8 offset: 4</view></wd-col>
+  <wd-col :span="8" :offset="4"><view class="bg-dark">span: 8 offset: 4</view></wd-col>
+  <wd-col :span="8" :offset="4"><view class="bg-dark">span: 8 offset: 4</view></wd-col>
 </wd-row>
 ```
 
@@ -79,15 +79,15 @@
 
 ```html
 <wd-row gutter="20">
-  <wd-col span="8"><view class="bg-dark">span: 8</view></wd-col>
-  <wd-col span="8"><view class="bg-light">span: 8</view></wd-col>
-  <wd-col span="8"><view class="bg-dark">span: 8</view></wd-col>
+  <wd-col :span="8"><view class="bg-dark">span: 8</view></wd-col>
+  <wd-col :span="8"><view class="bg-light">span: 8</view></wd-col>
+  <wd-col :span="8"><view class="bg-dark">span: 8</view></wd-col>
 </wd-row>
 ```
 
-## flex 布局
+<!-- ## flex 布局
 
-*注意：由于微信小程序使用插槽时，插槽会渲染到当前标签外部，因此在组件上设置flex布局属性，对插槽内部并不生效，因此flex布局效果需要用户参考[H5组件库 Layout](http://fant-mini-plus.top/wot-design/#/components/layout)自行实现。*
+*注意：由于微信小程序使用插槽时，插槽会渲染到当前标签外部，因此在组件上设置flex布局属性，对插槽内部并不生效，因此flex布局效果需要用户参考[H5组件库 Layout](http://fant-mini-plus.top/wot-design/#/components/layout)自行实现。* -->
 
 ## Row Attributes
 
@@ -99,7 +99,7 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
-| span | 列元素宽度 | number | - | 24 | - |
+| :span | 列元素宽度 | number | - | 24 | - |
 | offset | 列元素偏移距离 | number | - | 0 | - |
 
 ## Row 外部样式类

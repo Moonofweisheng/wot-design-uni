@@ -44,7 +44,7 @@ Page({
 })
 ```
 
-```css
+```scss
 page{
   height: 200vh;
 }
@@ -78,7 +78,7 @@ page{
 </wd-sticky-box>
 ```
 
-```css
+```scss
 .container{
     height: 150px;width: 100vw;
 }

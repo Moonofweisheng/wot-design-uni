@@ -18,7 +18,7 @@
   </block>
 </wd-tabs>
 ```
-```css
+```scss
 .content{
   line-height: 120px;
   text-align: center;

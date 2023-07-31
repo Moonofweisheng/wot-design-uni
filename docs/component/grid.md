@@ -2,7 +2,6 @@
 
 # Grid 宫格
 
-
 ## 代码演示
 
 ## 基础用法
@@ -13,9 +12,9 @@
 
 ```html
 <wd-grid>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
 </wd-grid>
 ```
 
@@ -24,13 +23,13 @@
 `column` 可以用来自定义宫格列数。未定义 `column` 属性时，默认显示为一行，定义该属性后，组件内部根据 `column` 属性自行划分行数。
 
 ```html
-<wd-grid column="3">
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
+<wd-grid :column="3">
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
 </wd-grid>
 ```
 
@@ -40,10 +39,10 @@
 
 ```html
 <wd-grid bg-color="rgba(0, 0, 0, 0.02)">
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
 </wd-grid>
 ```
 
@@ -52,13 +51,13 @@
 `border` 可以用来开启边框线展示。
 
 ```html
-<wd-grid border column="3">
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
+<wd-grid border :column="3">
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
 </wd-grid>
 ```
 
@@ -71,19 +70,19 @@
 ```html
 <wd-grid>
   <wd-grid-item use-slot>
-    <image class="img" src="{{ joy }}" />
+    <image class="img" :src="joy" />
   </wd-grid-item>
   <wd-grid-item use-slot>
-    <image class="img" src="{{ joy }}" />
+    <image class="img" :src="joy" />
   </wd-grid-item>
   <wd-grid-item use-slot>
-    <image class="img" src="{{ joy }}" />
+    <image class="img" :src="joy" />
   </wd-grid-item>
 </wd-grid>
 ```
 
-```css
-.img{
+```scss
+.img {
   width: 100%;
   height: 90px;
 }
@@ -97,30 +96,34 @@
 
 注意:
 
-1. 使用单个插槽或者自定义样式时，需要用户使用 `custom-class` 控制 每一个  `GridItem` 的高度，保证每一个 `GridItem` 的高度相同且符合用户预期。
+1. 使用单个插槽或者自定义样式时，需要用户使用 `custom-class` 控制 每一个 `GridItem` 的高度，保证每一个 `GridItem` 的高度相同且符合用户预期。
 
-2. 使用icon插槽时，如果插槽大小超过`icon-size`设置的值时，需要调整`icon-size`属性使其大小等于插槽尺寸。
+2. 使用 icon 插槽时，如果插槽大小超过`icon-size`设置的值时，需要调整`icon-size`属性使其大小等于插槽尺寸。
 
 ```html
-<wd-grid >
-  <wd-grid-item use-icon-slot text="文字" wx:for="{{ 3 }}" wx:key="*this" icon-size="36px">
-    <image slot="icon" class="slot-img" src="{{ joy }}" />
+<wd-grid>
+  <wd-grid-item use-icon-slot text="文字" v-for="index in 3" :key="index" icon-size="36px">
+    <template #icon>
+      <image class="slot-img" :src="joy" />
+    </template>
   </wd-grid-item>
 </wd-grid>
 <wd-grid>
-  <wd-grid-item use-text-slot icon="picture" wx:for="{{ 3 }}" wx:key="*this" >
-    <view slot="text" class="text">自定义文字插槽</view>
+  <wd-grid-item use-text-slot icon="picture" v-for="index in 3" :key="index">
+    <template #text>
+      <view class="text">自定义文字插槽</view>
+    </template>
   </wd-grid-item>
 </wd-grid>
 ```
 
-```css
-.slot-img{
+```scss
+.slot-img {
   height: 36px;
   width: 36px;
   border-radius: 4px;
 }
-.text{
+.text {
   color: #ffb300;
   margin-top: 8px;
 }
@@ -134,21 +137,25 @@
 
 注意:
 
-* 设定宽高这类可能会影响布局的属性时，请将 `custom-class` 作用到当前 `Grid` 下的所有 `GridItem` 以确保所有 `GridItem` 样式相同。
+- 设定宽高这类可能会影响布局的属性时，请将 `custom-class` 作用到当前 `Grid` 下的所有 `GridItem` 以确保所有 `GridItem` 样式相同。
 
-* **如果想改变 `GridItem` 高度, 不要直接设置 `Grid` 的高度, 修改单独的** `GridItem`。
+- **如果想改变 `GridItem` 高度, 不要直接设置 `Grid` 的高度, 修改单独的** `GridItem`。
 
-* **如果想改变 `icon` 大小设置 `icon-size` 属性, `custom-icon` 不能改变当前icon宽高。**
+- **如果想改变 `icon` 大小设置 `icon-size` 属性, `custom-icon` 不能改变当前 icon 宽高。**
 
 ```html
 <wd-grid>
-  <wd-grid-item custom-class="custom-item" icon="search" text="京东JD.COM-专业的综合网上购物商城，销售超数万品牌、4020万种商品，囊括家电、手机、电脑、母婴、服装等13大品类。" />
+  <wd-grid-item
+    custom-class="custom-item"
+    icon="search"
+    text="京东JD.COM-专业的综合网上购物商城，销售超数万品牌、4020万种商品，囊括家电、手机、电脑、母婴、服装等13大品类。"
+  />
   <wd-grid-item custom-class="custom-item" icon="person" text="秉承客户为先的理念，京东所售商品为正品行货、全国联保、机打发票。" />
 </wd-grid>
 ```
 
-```css
-.custom-item{
+```scss
+:deep(.custom-item) {
   height: 80px !important;
   color: #e2231a;
   padding-left: 20px;
@@ -163,12 +170,12 @@
 注意: 使用 `square` 不要自定义 `GridItem` 的高度样式。
 
 ```html
-<wd-grid square column="3">
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
+<wd-grid square :column="3">
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
 </wd-grid>
 ```
 
@@ -177,12 +184,12 @@
 通过 `gutter` 属性设置格子之间的距离。
 
 ```html
-<wd-grid gutter="10" column="3">
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
-  <wd-grid-item icon="picture" text="文字"/>
+<wd-grid :gutter="10" :column="3">
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
+  <wd-grid-item icon="picture" text="文字" />
 </wd-grid>
 ```
 
@@ -196,8 +203,8 @@
 
 ```html
 <wd-grid clickable>
-  <wd-grid-item link-type="redirectTo" url="/pages/button/index" bind:itemclick="click" icon="search" text="Redirect to ..." />
-  <wd-grid-item link-type="navigateTo" url="/pages/button/index" bind:itemclick="click" icon="setting" text="Navigate to ..." />
+  <wd-grid-item link-type="redirectTo" url="/pages/button/index" @itemclick="click" icon="search" text="Redirect to ..." />
+  <wd-grid-item link-type="navigateTo" url="/pages/button/index" @itemclick="click" icon="setting" text="Navigate to ..." />
 </wd-grid>
 ```
 
@@ -210,68 +217,68 @@
 ```html
 <wd-grid>
   <wd-grid-item is-dot icon="goods" text="文字" />
-  <wd-grid-item value="100" max="99" icon="computer" text="文字" />
+  <wd-grid-item value="100" :max="99" icon="computer" text="文字" />
 </wd-grid>
 ```
 
 ## Grid Attributes
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-|-----|------|-----|-------|-------|---------|
-| column | 列数 | number | - | - | - |
-| border | 是否显示边框 | boolean | - | false | - |
-| gutter | 格子之间的间距，默认单位为`px` | number | - | - | - |
-| square | 是否将格子固定为正方形 | boolean | - | false | - |
-| clickable | 是否开启格子点击反馈 | boolean | - | false | - |
-| bg-color | 背景颜色设置 | string | - | #ffffff | - |
+| 参数      | 说明                           | 类型    | 可选值 | 默认值  | 最低版本 |
+| --------- | ------------------------------ | ------- | ------ | ------- | -------- |
+| column    | 列数                           | number  | -      | -       | -        |
+| border    | 是否显示边框                   | boolean | -      | false   | -        |
+| gutter    | 格子之间的间距，默认单位为`px` | number  | -      | -       | -        |
+| square    | 是否将格子固定为正方形         | boolean | -      | false   | -        |
+| clickable | 是否开启格子点击反馈           | boolean | -      | false   | -        |
+| bg-color  | 背景颜色设置                   | string  | -      | #ffffff | -        |
 
 ## GridItem Attributes
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-|-----|------|-----|-------|-------|--------|
-| text | 文字 value | string | - | - | - |
-| icon | 图标名称，可选值见 `wd-icon` 组件 | string | - | - | - |
-| is-dot | 是否显示图标右上角小红点 | boolean | - | false | - |
-| type | 图标右上角显示的 `badge` 类型 | string | primary / success / warning / danger / info | - | - |
-| value | 图标右上角 `badge` 显示值 | string, number | - | - | - |
-| max | 图标右上角 `badge` 最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型 | number | - | - | - |
-| url | 点击后跳转的链接地址 | string | - | - | - |
-| link-type | 页面跳转方式, 参考[微信小程序路由文档](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html) | string | navigateTo / switchTab / reLaunch | - | - |
-| use-slot | 是否开启 `GridItem` 内容插槽 | boolean | - | false | - |
-| use-icon-slot | 是否开启 `GridItem` icon 插槽 | boolean | - | false | - |
-| use-text-slot | 是否开启 `GridItem` text 内容插槽 | boolean | - | false | - |
-| icon-size | 图标大小 | string | - | 26px | - |
+| 参数          | 说明                                                                                                                      | 类型           | 可选值                                      | 默认值 | 最低版本 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------- | ------ | -------- |
+| text          | 文字 value                                                                                                                | string         | -                                           | -      | -        |
+| icon          | 图标名称，可选值见 `wd-icon` 组件                                                                                         | string         | -                                           | -      | -        |
+| is-dot        | 是否显示图标右上角小红点                                                                                                  | boolean        | -                                           | false  | -        |
+| type          | 图标右上角显示的 `badge` 类型                                                                                             | string         | primary / success / warning / danger / info | -      | -        |
+| value         | 图标右上角 `badge` 显示值                                                                                                 | string, number | -                                           | -      | -        |
+| max           | 图标右上角 `badge` 最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型                                           | number         | -                                           | -      | -        |
+| url           | 点击后跳转的链接地址                                                                                                      | string         | -                                           | -      | -        |
+| link-type     | 页面跳转方式, 参考[微信小程序路由文档](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html) | string         | navigateTo / switchTab / reLaunch           | -      | -        |
+| use-slot      | 是否开启 `GridItem` 内容插槽                                                                                              | boolean        | -                                           | false  | -        |
+| use-icon-slot | 是否开启 `GridItem` icon 插槽                                                                                             | boolean        | -                                           | false  | -        |
+| use-text-slot | 是否开启 `GridItem` text 内容插槽                                                                                         | boolean        | -                                           | false  | -        |
+| icon-size     | 图标大小                                                                                                                  | string         | -                                           | 26px   | -        |
 
 ## GridItem Events
 
-| 方法名 | 说明 | 参数 | 返回值 | 最低版本 |
-|------|------|------|------|---------|
-| bind:itemclick | 点击(跳转)事件 | event | - | - |
+| 方法名         | 说明           | 参数  | 返回值 | 最低版本 |
+| -------------- | -------------- | ----- | ------ | -------- |
+| itemclick | 点击(跳转)事件 | event | -      | -        |
 
 ## Grid Slot
 
-| name | 说明 | 最低版本 |
-|------|-----|---------|
-| default | 宫格内容 | - |
+| name    | 说明     | 最低版本 |
+| ------- | -------- | -------- |
+| default | 宫格内容 | -        |
 
 ## GridItem Slot
 
-| name | 说明 | 最低版本 |
-|------|-----|---------|
-| default | 宫格中每一格的默认显示全部内容 | - |
-| icon | 宫格中图标位内容 | - |
-| text | 宫格中文本位内容 | - |
+| name    | 说明                           | 最低版本 |
+| ------- | ------------------------------ | -------- |
+| default | 宫格中每一格的默认显示全部内容 | -        |
+| icon    | 宫格中图标位内容               | -        |
+| text    | 宫格中文本位内容               | -        |
 
 ## Grid 外部样式类
 
-| 类名 | 说明 | 最低版本 |
-|-----|-----|---------|
-| custom-class | Grid 根结点样式 | - |
+| 类名         | 说明            | 最低版本 |
+| ------------ | --------------- | -------- |
+| custom-class | Grid 根结点样式 | -        |
 
 ## GridItem 外部样式类
 
-| 类名 | 说明 | 最低版本 |
-|-----|------|--------|
-| custom-class | GridItem 根结点样式 | - |
-| custom-text | GridItem 下方文字样式 | - |
-| custom-icon | GridItem 上方icon样式 | - |
+| 类名         | 说明                    | 最低版本 |
+| ------------ | ----------------------- | -------- |
+| custom-class | GridItem 根结点样式     | -        |
+| custom-text  | GridItem 下方文字样式   | -        |
+| custom-icon  | GridItem 上方 icon 样式 | -        |

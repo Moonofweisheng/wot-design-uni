@@ -10,7 +10,7 @@
 <wd-button type="primary">主要按钮</wd-button>
 ```
 
-```css
+```scss
 /* 页面样式 */
 :deep(.wd-button) {
   color: red !important;
@@ -33,7 +33,7 @@ export default {
 </script>
 ```
 
-```css
+```scss
 /* 组件样式 */
 :deep(.wd-button) {
   color: red !important;
@@ -46,7 +46,7 @@ Wot Design Uni 开放了大量的自定义样式类供开发者使用，具体�
 ```vue
 <wd-button custom-class="custom-button" type="primary">主要按钮</wd-button>
 ```
-```css
+```scss
 /* 组件样式 */
 :deep(.custom-button) {
   color: red !important;

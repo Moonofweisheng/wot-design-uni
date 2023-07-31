@@ -38,7 +38,7 @@
   </view>
 </wd-card>
 ```
-```css
+```scss
 .content, .title {
   display: flex;
   flex-direction: row;

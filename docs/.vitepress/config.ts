@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-07-30 00:40:37
+ * @LastEditTime: 2023-07-31 23:03:04
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -36,9 +36,9 @@ export default defineConfig({
     search: {
       provider: 'algolia',
       options: {
-        appId: '9CEEWI3F01',
-        apiKey: '3438300c571ea1bc2948444ef8ace807',
-        indexName: 'netlify_0991d8a9-0fb0-483b-8961-5bde066bbd50_master_all',
+        appId: '38TOUD5WW9',
+        apiKey: '06a0d60d393c7672523382347c8f9d55',
+        indexName: 'wot-design-uni',
       },
     },
 

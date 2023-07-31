@@ -49,7 +49,7 @@
 />
 ```
 
-```css
+```scss
 .block {
   position: fixed;
   left: 50%;

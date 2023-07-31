@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-07-24 10:30:30
+ * @LastEditTime: 2023-07-31 21:27:54
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\pages\noticeBar\Index.vue
@@ -31,7 +31,7 @@
     <demo-block title="插槽">
       <wd-notice-bar :scrollable="false">
         <template #prefix>
-          <wd-icon class="prefix" name="warn-bold">占位符</wd-icon>
+          <wd-icon custom-class="prefix" name="warn-bold">占位符</wd-icon>
         </template>
         通知被禁或时段内消息屏蔽可能造成消…
         <template #suffix>
@@ -61,14 +61,14 @@
 </template>
 <script lang="ts" setup></script>
 <style lang="scss" scoped>
-.prefix {
+:deep(.prefix) {
   font-size: 18px;
   padding-right: 4px;
   width: 18px;
   height: 18px;
 }
 
-.space {
+:deep(.space) {
   margin-bottom: 10px;
 }
 </style>

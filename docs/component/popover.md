@@ -113,7 +113,7 @@ Page({
 
 小程序中组件插槽内部样式不生效，因此需要在外手动设置样式，在content插槽使用过程中，插槽最外层样式需要添加 `position: relative;z-index: 500;border-radius: 4px;` 保证位置不受影响，其余样式可随意添加。
 
-```css
+```scss
 .pop-content {
   /* 必填 开始 */
   position: relative;

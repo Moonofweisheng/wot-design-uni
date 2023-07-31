@@ -32,7 +32,7 @@ VueComponent({
   <wd-button custom-class="custom">确定</wd-button>
 </view>
 ```
-```css
+```scss
 .custom{
     background-color: red;
 }

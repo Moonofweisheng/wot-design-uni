@@ -5,24 +5,16 @@
 
 ## 基本用法
 
-`value` 为绑定值。
-`bindChange`为绑定change事件。
-**小程序非双向绑定，需要手动赋值到当前页面。**
+可以通过 `v-model` 双向绑定输入框的值，通过 `placeholder` 设置占位提示文字。
 
 ```typescript
-page({
-  data: {
-    value: '',
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+const value = ref<string>('')
+function handleChange(event) {
+  console.log(event)
+}
 ```
 ```html
-<wd-input type="text" value="{{ value }}" placeholder="请输入用户名" bind:change="handleChange"/>
+<wd-input type="text" v-model="value" placeholder="请输入用户名" @change="handleChange" />
 ```
 
 ## 禁用
@@ -30,7 +22,7 @@ page({
 设置 `disabled` 属性。
 
 ```html
-<wd-input value="input" disabled />
+<wd-input v-model="value" disabled />
 ```
 
 ## 只读
@@ -38,7 +30,7 @@ page({
 设置 `readonly` 属性。
 
 ```html
-<wd-input value="{{ value }}" readonly />
+<wd-input v-model="value" readonly />
 ```
 
 ## 清空按钮
@@ -46,7 +38,7 @@ page({
 设置 `clearable` 属性。
 
 ```html
-<wd-input value="{{ value }}" clearable bind:change="handleChange"/>
+<wd-input v-model="value" clearable @change="handleChange"/>
 ```
 
 ## 密码输入框
@@ -54,7 +46,7 @@ page({
 设置 `show-password` 属性。
 
 ```html
-<wd-input value="{{ value }}" clearable show-password bind:change="handleChange"/>
+<wd-input v-model="value" clearable show-password @change="handleChange"/>
 ```
 
 ## 前后icon
@@ -63,10 +55,10 @@ page({
 
 ```html
 <wd-input
-  value="{{ value }}"
+  v-model="value"
   prefix-icon="dong"
   suffix-icon="list"
-  bind:change="handleChange"/>
+  @change="handleChange"/>
 ```
 
 ## 限制字数输入
@@ -74,7 +66,7 @@ page({
 设置 `maxlength` 属性，如果要显示字数限制，设置 `show-word-limit` 属性。
 
 ```html
-<wd-input value="{{ value }}" maxlength="20" show-word-limit bind:change="handleChange"/>
+<wd-input v-model="value" :maxlength="20" show-word-limit @change="handleChange"/>
 ```
 
 ## 文本域
@@ -86,7 +78,7 @@ page({
 :::
 
 ```html
-<wd-input type="textarea" value="{{ value }}" placeholder="请输入..." bind:change="handleChange"/>
+<wd-input type="textarea" v-model="value" placeholder="请输入..." @change="handleChange"/>
 ```
 
 设置清空，字数限制。
@@ -94,17 +86,17 @@ page({
 ```html
 <wd-input
   type="textarea"
-  value="{{ value }}"
+  v-model="value"
   placeholder="请输入..."
-  maxlength="120"
+  :maxlength="120"
   clearable
   show-word-limit
-  bind:change="handleChange"/>
+  @change="handleChange"/>
 ```
 也可以设置`auto-height`使高度自增加。
 
 ```html
-<wd-input value="{{ value }}" auto-height bind:change="handleChange" clearable/>
+<wd-input v-model="value" auto-height @change="handleChange" clearable/>
 ```
 
 ## 设置label标题
@@ -112,7 +104,7 @@ page({
 设置 `label` 标题，可以和 `cell-group` 组合使用，形成 `cell` 展示类型。可以通过 `label-width` 设置标题宽度，默认为 '33%'。
 
 ```html
-<wd-input type="text" label="基本用法" value="{{ value }}" placeholder="请输入..." />
+<wd-input type="text" label="基本用法" v-model="value" placeholder="请输入..." />
 ```
 
 ## 必填样式
@@ -120,7 +112,7 @@ page({
 设置了 `label` 的情况下，设置 `required` 属性，展示必填样式。
 
 ```html
-<wd-input value="{{ value }}" placeholder="请输入..." label="必填" required></wd-input>
+<wd-input v-model="value" placeholder="请输入..." label="必填" required></wd-input>
 ```
 
 ## 输入框大小
@@ -128,7 +120,7 @@ page({
 通过设置 `size` 修改输入框大小，将 `size` 设置为 'large' 时字号为 16px。
 
 ```html
-<wd-input type="text" label="基本用法" size="large" value="{{ value }}" placeholder="请输入..." />
+<wd-input type="text" label="基本用法" size="large" v-model="value" placeholder="请输入..." />
 ```
 
 ## 错误状态
@@ -136,7 +128,7 @@ page({
 设置 `error` 属性，输入框的值显示为红色。
 
 ```html
-<wd-input type="text" value="{{ value }}" placeholder="请输入用户名" error />
+<wd-input type="text" v-model="value" placeholder="请输入用户名" error />
 ```
 
 ## 垂直居中
@@ -144,7 +136,7 @@ page({
 当设置 `label` 标题时，默认为顶部居中，设置 `center` 属性可以使标题和输入框垂直居中。
 
 ```html
-<wd-input type="text" label="基本用法" value="{{ value }}" center />
+<wd-input type="text" label="基本用法" v-model="value" center />
 ```
 
 ## Attributes
@@ -188,16 +180,16 @@ page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:input | 监听输入框input事件 | ` {value, cursor, keyCode}` | - |
-| bind:focus | 监听输入框focus事件 | ` { value, height }`, height 为键盘高度 | - |
-| bind:blur | 监听输入框blur事件 | ` { value, cursor }`，仅在type="textarea"时存在cursor | - |
-| bind:change | 监听输入框修改事件 | ` { value }` | - |
-| bind:clear | 监听输入框清空按钮事件 | - | - |
-| bind:linechange | 监听输入框行数变化(仅限textarea) | ` { height: 0, heightRpx: 0, lineCount: 0 }` | - |
-| bind:confirm | 点击完成时， 触发 confirm 事件 | ` { value }` | - |
-| bind:keyboardheightchange | 键盘高度发生变化的时候触发此事件 | ` { height, duration }` | - |
-| bind:clickprefixicon | 点击前置图标时触发 | - | - |
-| bind:clicksuffixicon | 点击后置图标时触发 | - | - |
+| input | 监听输入框input事件 | ` {value, cursor, keyCode}` | - |
+| focus | 监听输入框focus事件 | ` { value, height }`, height 为键盘高度 | - |
+| blur | 监听输入框blur事件 | ` { value, cursor }`，仅在type="textarea"时存在cursor | - |
+| change | 监听输入框修改事件 | ` { value }` | - |
+| clear | 监听输入框清空按钮事件 | - | - |
+| linechange | 监听输入框行数变化(仅限textarea) | ` { height: 0, heightRpx: 0, lineCount: 0 }` | - |
+| confirm | 点击完成时， 触发 confirm 事件 | ` { value }` | - |
+| keyboardheightchange | 键盘高度发生变化的时候触发此事件 | ` { height, duration }` | - |
+| clickprefixicon | 点击前置图标时触发 | - | - |
+| clicksuffixicon | 点击后置图标时触发 | - | - |
 
 ## Slot
 
@@ -212,7 +204,7 @@ page({
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
 | custom-class | 根结点样式 | - |
-| custom-textarea-container-class | textarea 容器外部自定义样式 | 2.3.0 |
+| custom-textarea-container-class | textarea 容器外部自定义样式 | - |
 | custom-textarea-class | textarea 外部自定义样式 | - |
 | custom-input-class | input 外部自定义样式 | - |
 | custom-label-class | label 外部自定义样式 | - |

@@ -15,7 +15,7 @@
 <wd-tag custom-class="space" type="warning">标签</wd-tag>
 <wd-tag custom-class="space" type="success">标签</wd-tag>
 ```
-```css
+```scss
 .space{
   margin: 0 10px;
 }

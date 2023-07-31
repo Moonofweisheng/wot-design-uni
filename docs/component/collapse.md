@@ -80,7 +80,7 @@ Collapse 可以单独使用，通过设置 `viewmore` 属性，将其转化为�
 ```
 ## 查看更多-使用插槽
 Collapse 查看更多的模式下，可以使用插槽定义自己想要的折叠处样式，使用 `use-more-slot` 设置插槽开启。并且可以使用外部样式类 `custom-more-slot-class` 为自定义插槽设置样式。
-```css
+```scss
 .more-slot{
   color: red;
 }

@@ -43,7 +43,7 @@
 </wd-badge>
 ```
 
-```css
+```scss
 :deep(.badge) {
     margin: 0 30px 20px 0;
     display: inline-block;

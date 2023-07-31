@@ -31,7 +31,7 @@
 </wd-cell-group>
 ```
 
-```css
+```scss
 .cell-icon {
   display: block;
   width: 16px;
@@ -189,7 +189,7 @@ function handleSwitchChange({ value }) {
 }
 ```
 
-```css
+```scss
 .cell-icon {
   display: block;
   width: 16px;

@@ -114,7 +114,7 @@ Page({
 })
 ```
 
-```css
+```scss
 .search-type {
   position: relative;
   height: 30px;

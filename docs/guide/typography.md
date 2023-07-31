@@ -119,7 +119,7 @@
 </table>
 
 ## Font-family 代码
-```css
+```scss
 font-family: "San Francisco", Rotobo, arial, "PingFang SC", "Noto SansCJK", "Microsoft Yahei", sans-serif;
 ```
 
@@ -138,7 +138,7 @@ https://static.360buyimg.com/bus/fonts/JDZhengHT/JDZhengHT-Bold.woff
 
 用法：
 
-```css
+```scss
 @font-face {
   font-family: 'JDZhengHT-Bold';
   src: url('https://static.360buyimg.com/bus/fonts/JDZhengHT/JDZhengHT-Bold.woff') format('woff'), /* chrome, firefox */

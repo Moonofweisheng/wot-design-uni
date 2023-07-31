@@ -5,21 +5,17 @@
 
 ## 基本用法
 
-通过监听 `change` 事件获取`value`变化后的值，total设置总条数，page-size设置一页展示条数，默认为10条，总页数通过total和page-size自动计算。
+通过 `v-model` 来绑定当前页码，`total`设置总条数，`page-size`设置一页展示条数，默认为10条，总页数通过`total`和`page-size`自动计算。
 
 ```html
-<wd-pagination value="{{ value }}" bind:change="handleChange" />
+<wd-pagination v-model="value" @change="handleChange" />
+```
 
-Page({
-  data: {
-    value: 1
-  },
-  handleChange ({ detail }) {
-    this.setData({
-      value: detail
-    })
-  }
-})
+```typescript
+const value = ref<number>(1)
+function handleChange({ value }) {
+  console.log(value)
+}
 ```
 
 ## Icon图标
@@ -27,7 +23,7 @@ Page({
 设置 `show-icon` 属性，将分页导航展示为Icon图标。
 
 ```html
-<wd-pagination value="{{ value }}" bind:change="handleChange" show-icon ></wd-pagination>
+<wd-pagination v-model="value" @change="handleChange" show-icon ></wd-pagination>
 ```
 
 ## 文字提示
@@ -36,10 +32,10 @@ Page({
 
 ```html
 <wd-pagination 
-  value="{{ value }}" 
-  total="{{ total }}" 
-  page-size="{{ page }}" 
-  bind:change="handleChange" 
+  v-model="value" 
+  :total="total" 
+  :page-size="page" 
+  @change="handleChange" 
   show-icon 
   show-message
 />
@@ -63,7 +59,7 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|------|--------|
-| bind:change | 值修改事件 | `{ value }`,value为当前值 |
+| change | 值修改事件 | `{ value }`,value为当前值 |
 
 ## 外部样式类
 

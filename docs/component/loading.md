@@ -30,14 +30,14 @@
 ```html
 <wd-loading color="#ffffff" custom-class="loading-black" />
 
-<!-- 错误写法 -->
+<!-- 以下为错误写法 -->
 <wd-loading color="#fff" />
 <wd-loading color="green" />
 <wd-loading color="rgba(255,255,255,1)" />
 ```
 
-```css
-.loading-black {
+```scss
+:deep(.loading-black) {
   background: rgba(0, 0, 0, 0.7);
   padding: 10px;
   border-radius: 4px;
@@ -49,8 +49,8 @@
 通过 `size` 属性设置指示器的大小，默认为大小 '32px'，属性支持 `number`/`string` 类型。
 
 ```html
-<wd-loading size="{{20}}" />
-<wd-loading size="{{30}}" />
+<wd-loading ：size="20" />
+<wd-loading ：size="30" />
 <wd-loading size="50px" />
 ```
 

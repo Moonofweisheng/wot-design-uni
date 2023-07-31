@@ -5,23 +5,17 @@
 
 ## 基本用法
 
-通过监听 `change` 事件获取`value`变化后的值。
+通过 `v-model` 绑定输入值，可以通过 `change` 事件监听到输入值的变化。
 
 ```html
-<wd-input-number value="{{ value }}" bind:change="handleChange" />
+<wd-input-number v-model="value" @change="handleChange" />
 ```
 
 ```typescript
-Page({
-  data: {
-    value: 1
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+const value = ref<number>(1)
+function handleChange1({ value }) {
+  console.log(value)
+}
 ```
 
 ## 设置步长
@@ -29,7 +23,7 @@ Page({
 设置 `step` 步长，即每次value变化的绝对值。
 
 ```html
-<wd-input-number value="{{ value }}" bind:change="handleChange" step="{{ 2 }}" />
+<wd-input-number v-model="value" @change="handleChange" :step="2" />
 ```
 
 ## 设置最小最大值
@@ -37,7 +31,7 @@ Page({
 设置 `min` 最小值，`max` 最大值。`min` 默认为1。
 
 ```html
-<wd-input-number value="{{ value }}" bind:change="handleChange" min="{{ 3 }}" max="{{ 10 }}" />
+<wd-input-number v-model="value" @change="handleChange" :min="3" :max="10" />
 ```
 
 ## 禁用
@@ -45,7 +39,7 @@ Page({
 设置 `disabled` 属性。
 
 ```html
-<wd-input-number value="{{ value }}" bind:change="handleChange" disabled />
+<wd-input-number v-model="value" @change="handleChange" disabled />
 ```
 
 ## 无输入框
@@ -53,7 +47,7 @@ Page({
 设置 `without-input` ，不展示输入框。
 
 ```html
-<wd-input-number value="{{ value }}" bind:change="handleChange" without-input />
+<wd-input-number v-model="value" @change="handleChange" without-input />
 ```
 
 ## 设置小数精度
@@ -61,7 +55,7 @@ Page({
 设置 `precision` 属性，默认为0。
 
 ```html
-<wd-input-number value="{{ value }}" bind:change="handleChange" precision="{{ 2 }}" step="{{ 0.1 }}" />
+<wd-input-number v-model="value" @change="handleChange" :precision="2" :step="0.1" />
 ```
 
 ## 严格步数倍数
@@ -69,7 +63,7 @@ Page({
 设置 `step-strictly` 属性，强制输入框输入内容为 `step` 的倍数（当用户输入完成后触发change时，会更正输入框内容）。
 
 ```html
-<wd-input-number value="{{ value }}" bind:change="handleChange" step-strictly step="{{ 2 }}" />
+<wd-input-number v-model="value" @change="handleChange" step-strictly :step="2" />
 ```
 
 ## 修改输入框宽度
@@ -77,7 +71,7 @@ Page({
 设置 `input-width` 设置宽度，该值接受1个字符串，可以是表示尺寸的任何单位。
 
 ```html
-<wd-input-number value="{{ value }}" bind:change="handleChange" input-width="70px" />
+<wd-input-number v-model="value" @change="handleChange" input-width="70px" />
 ```
 
 ## 允许空值，设置 placeholder
@@ -85,22 +79,14 @@ Page({
 设置 `allow-null` 属性允许空值，设置 `placeholder` 提示填写。
 
 ```html
-<wd-input-number value="{{ value }}" allow-null placeholder="不限" bind:change="handleChange" />
+<wd-input-number v-model="value" allow-null placeholder="不限" @change="handleChange" />
 ```
 
 ```typescript
-Page({
-  data: {
-    value: ''
-  },
-  methods: {
-    handleChange (event) {
-      this.setData({
-        value: event.detail.value
-      })
-    }
-  }
-})
+const value = ref<number|string>('')
+function handleChange1({ value }) {
+  console.log(value)
+}
 ```
 
 ## Attributes
@@ -117,16 +103,16 @@ Page({
 | without-input | 不显示输入框 | boolean | - | false | - |
 | input-width | 输入框宽度 | string | - | 36px | - |
 | name | form 表单中的字段名 | string | - | - | - |
-| allow-null | 允许空值 | boolean | - | false | 2.3.0 |
-| placeholder | 占位文本 | string | - | - | 2.3.0 |
+| allow-null | 允许空值 | boolean | - | false | - |
+| placeholder | 占位文本 | string | - | - | - |
 
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 值修改事件 | ` { value }` | - |
-| bind:focus | 输入框获取焦点事件 | ` { value, height }` | - |
-| bind:blur | 输入框失去焦点事件 | ` { value }` | - |
+| change | 值修改事件 | ` { value }` | - |
+| focus | 输入框获取焦点事件 | ` { value, height }` | - |
+| blur | 输入框失去焦点事件 | ` { value }` | - |
 
 ## 外部样式类
 

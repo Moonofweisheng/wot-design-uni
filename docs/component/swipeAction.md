@@ -42,7 +42,7 @@ Page({
   clickoutside: clickoutside
 })
 ```
-```css
+```scss
 .action {
   height: 100%;
 }
