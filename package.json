@@ -44,7 +44,10 @@
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
-    "clean:lib": "rimraf lib"
+    "clean:lib": "rimraf lib",
+    "upload:mp-weixin": "uni build -p mp-weixin && minici --platform weixin",
+    "upload:mp-alipay": "uni build -p mp-alipay && minici --platform alipay",
+    "upload:mp-dingtalk": "uni build -p mp-dingtalk && minici --platform dd"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-alpha-3080220230511001",
