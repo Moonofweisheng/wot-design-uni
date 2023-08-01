@@ -13,29 +13,25 @@ jobs:
     - uses: actions/checkout@v3
     - shell: bash
       env:
-        PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }}
-        APPID: ${{ secrets.MP_APPID }}
+        TOOLID: ${{ secrets.ALI_TOOL_ID }}
+        APPID: ${{ secrets.ALI_APPID }}
+        PRIVATE_KEY: ${{ secrets.ALI_PRIVATE_KEY }}
       run: |
         if [[ -z $PRIVATE_KEY ]]; then
           echo "##########"
           echo ""
-          echo "Please set 'MP_PRIVATE_KEY' key in actions secrets"
+          echo "Please set 'ALI_PRIVATE_KEY' key in actions secrets"
           echo ""
           echo "##########"
           exit 1
         else
-          echo "$PRIVATE_KEY" > private.key
           echo '{
-            "weixin": {
+            "alipay": {
               "appid": "'$APPID'",
-              "privateKeyPath": "private.key",
-              "projectPath": "dist/build/mp-weixin",
-              "setting": {
-                "minifyJS": true,
-                "minifyWXML": true,
-                "minifyWXSS": true,
-                "minify": true
-              }
+              "toolId":"'$TOOLID'",
+              "privateKey": "'$PRIVATE_KEY'",
+              "projectPath": "dist/build/mp-alipay",
+              "autoincrement":true
             },
             "version": "",
             "desc": ""
@@ -52,4 +48,4 @@ jobs:
       run: |
         npm i uni-mini-ci -g
         yarn install
-        yarn upload:mp-weixin
+        yarn upload:mp-alipay
