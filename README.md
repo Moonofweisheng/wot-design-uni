@@ -29,8 +29,12 @@
 
 手机扫描上的二维码访问演示：
 
+
+
+<p>
 <img src="./docs/public/wx.jpg" width="200" height="200" style="margin-right:30px"/>
 <img src="./docs/public/alipay.png" width="200" height="200" />
+</p>
 
 
 ## 安装
