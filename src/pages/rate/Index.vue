@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-07-29 17:03:39
+ * @LastEditTime: 2023-08-01 23:46:20
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\rate\Index.vue
+ * 记得注释
+-->
 <template>
   <demo-block title="基本用法">
     <wd-rate v-model="value1" @change="changeValue1" />

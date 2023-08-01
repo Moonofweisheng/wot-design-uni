@@ -7,24 +7,19 @@ Picker 组件为 popup 和 pickerView 的组合。
 
 ## 基本用法
 
-`columns` 设置选项数据源，选项可以为字符串，也可以为对象，如果为对象则默认取 `label` 属性为选项内容进行渲染。`label` 设置左侧文本内容，`value` 设置选中项的值。label 可以不传。可以通过 `label-width` 设置标题宽度，默认为 '33%'，监听 `bind:confirm` 事件，获取选中值，传出一个 evnet 对象， `event.detail = { value, selectedItems }`，value 为绑定值，selectedItems 为选中选项的对象。
+`columns` 设置选项数据源，选项可以为字符串，也可以为对象，如果为对象则默认取 `label` 属性为选项内容进行渲染。`label` 设置左侧文本内容，`v-model` 设置选中项的值。label 可以不传。可以通过 `label-width` 设置标题宽度，默认为 '33%'，监听 `confirm` 事件，获取选中值，传出一个 evnet 对象， `event = { value, selectedItems }`，value 为绑定值，selectedItems 为选中选项的对象。
 
 ```html
-<wd-picker columns="{{columns1}}" label="单列选项" value="{{value}}" bind:confirm="handleConfirm" />
+<wd-picker :columns="columns" label="单列选项" v-model="value" @confirm="handleConfirm" />
 ```
 
 ```typescript
-Page({
-  data: {
-    columns: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
-    value: ''
-  },
-  handleConfirm (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const value = ref('选项1')
+
+function handleConfirm({ value }) {
+  value.value = value
+}
 ```
 
 当 `columns` 选项为对象时，其数据结构为：
@@ -40,15 +35,13 @@ Page({
 设置 `disabled` 属性。
 
 ```html
-<wd-picker columns="{{columns}}" label="禁用" value="{{value}}" disabled />
+<wd-picker :columns="columns" label="禁用" v-model="value" disabled />
 ```
 ```typescript
-Page({
-  data: {
-    columns: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
-    value: '选项3'
-  }
-})
+const value = ref('选项3')
+
+const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+
 ```
 
 ## 只读
@@ -56,7 +49,7 @@ Page({
 设置 `readonly` 属性。
 
 ```html
-<wd-picker columns="{{columns}}" label="只读" value="{{value}}" readonly />
+<wd-picker :columns="columns" label="只读" v-model="value" readonly />
 ```
 
 ## 文案标题
@@ -64,14 +57,14 @@ Page({
 设置 `title` 属性。
 
 ```html
-<wd-picker label="标题" columns="{{columns7}}" title="文案标题"/>
+<wd-picker label="标题" :columns="columns" title="文案标题"/>
 ```
 ## 加载中
 
 设置 `loading` 属性。
 
 ```html
-<wd-picker-view columns="{{columns}}" loading />
+<wd-picker-view :columns="columns" loading />
 ```
 
 ## 多列
@@ -79,18 +72,15 @@ Page({
 `columns` 属性设置为二维数组，`value` 为数组。
 
 ```html
-<wd-picker columns="{{columns}}" label="多列" value="{{value}}" />
+<wd-picker :columns="columns" label="多列" v-model="value" />
 ```
 ```typescript
-Page({
-  data: {
-   value: ['中南大学', '软件工程'],
-   columns: [
-     ['中山大学', '中南大学', '华南理工大学'],
-     ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
-   ],
-  }
-})
+const value = ref(['中南大学', '软件工程'])
+
+const columns = ref([
+  ['中山大学', '中南大学', '华南理工大学'],
+  ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
+])
 ```
 
 ## 多级联动
@@ -101,11 +91,11 @@ Page({
 
 ```html
 <wd-picker
-  columns="{{columns}}"
+  :columns="columns"
   label="多列联动"
-  value="{{value}}"
-  column-change="{{onChangeDistrict}}"
-  display-format="{{displayFormat}}"
+  v-model="value"
+  :column-change="onChangeDistrict"
+  :display-format="displayFormat"
  />
 ```
 
@@ -121,34 +111,30 @@ const district = {
   '440400': [{ label: '香洲区', value: '440402' }, { label: '斗门区', value: '440403' }, { label: '金湾区', value: '440404' }],
   '440500': [{ label: '龙湖区', value: '440507' }, { label: '金平区', value: '440511' }]
 }
-Page({
-  data: {
-    value: ['110000', '110100', '110102'],
-    columns: [
-      district[0],
-      district[district[0][0].value],
-      district[district[district[0][0].value][0].value]
-    ],
 
-    onChangeDistrict (pickerView, value, columnIndex, resolve) {
-      const item = value[columnIndex]
-      if (columnIndex === 0) {
-        pickerView.setColumnData(1, district[item.value])
-        pickerView.setColumnData(2, district[district[item.value][0].value])
-        return
-      } else if (columnIndex === 1) {
-        pickerView.setColumnData(2, district[item.value])
-      }
-      resolve()
-    },
+const value = ref(['110000', '110100', '110102'])
 
-    displayFormat (items) {
-      return items.map(item => {
-        return item.label
-      }).join('-')
-    }
+const columns = ref([district[0], district[district[0][0].value], district[district[district[0][0].value][0].value]])
+
+const onChangeDistrict = (pickerView, value, columnIndex, resolve) => {
+  const item = value[columnIndex]
+  if (columnIndex === 0) {
+    pickerView.setColumnData(1, district[item.value])
+    pickerView.setColumnData(2, district[district[item.value][0].value])
+  } else if (columnIndex === 1) {
+    pickerView.setColumnData(2, district[item.value])
   }
-})
+  resolve()
+}
+
+const displayFormat = (items) => {
+  return items
+    .map((item) => {
+      return item.label
+    })
+    .join('-')
+}
+
 ```
 
 ## 选择器大小
@@ -156,7 +142,7 @@ Page({
 通过设置 `size` 修改选择器大小，将 `size` 设置为 'large' 时字号为 16px。
 
 ```html
-<wd-picker label="单列选项" size="large" value="{{value}}" columns="{{columns}}" />
+<wd-picker label="单列选项" size="large" v-model="value" :columns="columns" />
 ```
 
 ## 必填属性
@@ -164,7 +150,7 @@ Page({
 设置 `required` 属性，展示必填样式。
 
 ```html
-<wd-picker label="必填属性" error columns="{{columns}}" value="{{value}}" required/>
+<wd-picker label="必填属性" error :columns="columns" v-model="value" required/>
 ```
 
 ## 错误状态
@@ -172,7 +158,7 @@ Page({
 设置 `error` 属性，选择器的值显示为红色。
 
 ```html
-<wd-picker label="单列选项" error columns="{{columns}}" value="{{value}}"/>
+<wd-picker label="单列选项" error :columns="columns" v-model="value"/>
 ```
 
 ## 值靠右展示
@@ -180,7 +166,7 @@ Page({
 设置 `align-right` 属性，选择器的值靠右展示。
 
 ```html
-<wd-picker label="单列选项" align-right columns="{{columns}}" value="{{value}}"/>
+<wd-picker label="单列选项" align-right :columns="columns" v-model="value"/>
 ```
 
 ## 确定前校验
@@ -188,37 +174,48 @@ Page({
 设置 `before-confirm` 函数，在用户点击`确定`按钮时，会执行 `before-confirm` 函数，并传入 `value` 、 `resolve` 和 `picker` 参数，可以对 `value` 进行校验，并通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受1个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会关闭 `picker`弹窗。可以通过 `picker` 参数直接设置 `loading`、`columns` 等属性。
 
 ```html
-<wd-picker label="before-confirm" columns="{{columns}}" value="{{value}}" before-confirm="{{beforeConfirm}}" bind:confirm="handleConfirm" />
+<wd-toast />
+
+<wd-picker label="before-confirm" :columns="columns" v-model="value" :before-confirm="beforeConfirm" @confirm="handleConfirm" />
 ```
 
 ```typescript
-Page({
-  data: {
-    columns: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
-    value: '',
-    beforeConfirm: function (value, resolve, picker) {
-      picker.setData({
-        loading: true
-      })
-      setTimeout(() => {
-        picker.setData({
-          loading: false
-        })
-        if (['选项2', '选项3'].indexOf(value) > -1) {
-          resolve(false)
-          Toast.error('选项校验不通过，请重新选择')
-        } else {
-          resolve(true)
-        }
-      }, 2000)
+import { useToast } from '@/uni_modules/wot-design-uni'
+
+const toast = useToast()
+
+const beforeConfirm = (value, resolve, picker) => {
+  picker.setLoading(true)
+  setTimeout(() => {
+    picker.setLoading(false)
+    if (['选项2', '选项3'].indexOf(value) > -1) {
+      resolve(false)
+      toast.error('选项校验不通过，请重新选择')
+    } else {
+      resolve(true)
     }
-  },
-  handleConfirm (event) {
-    this.setData({
-      value: event.detail.detail
-    })
-  }
-})
+  }, 2000)
+}
+
+const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const value = ref('')
+
+const beforeConfirm = (value, resolve, picker) => {
+  picker.setLoading(true)
+  setTimeout(() => {
+    picker.setLoading(false)
+    if (['选项2', '选项3'].indexOf(value) > -1) {
+      resolve(false)
+      toast.error('选项校验不通过，请重新选择')
+    } else {
+      resolve(true)
+    }
+  }, 2000)
+}
+
+function handleConfirm({ value }) {
+  value.value = value
+}
 ```
 
 ## 唤起项插槽
@@ -226,7 +223,7 @@ Page({
 开启 `use-default-slot` ，设置默认插槽修改唤起picker组件的形式。
 
 ```html
-<wd-picker columns="{{columns}}" value="{{value}}" use-default-slot>
+<wd-picker :columns="columns" v-model="value" use-default-slot>
   <wd-button>插槽唤起</wd-button>
 </wd-picker>
 ```
@@ -235,7 +232,7 @@ Page({
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
-| value | 选中项，如果为多列选择器，则其类型应为数组 | string / number / boolean / array | - | - |
+| v-model	 | 选中项，如果为多列选择器，则其类型应为数组 | string / number / boolean / array | - | - |
 | columns | 选择器数据，可以为字符串数组，也可以为对象数组，如果为二维数组，则为多列选择器 | array | - | - | - |
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |
@@ -261,17 +258,17 @@ Page({
 | before-confirm | 确定前校验函数，接收 (value, resolve, picker) 参数，通过 resolve 继续执行 picker，resolve 接收1个boolean参数 | function | - | - | - |
 | name | form 表单中的字段名 | string | - | - | - |
 | close-on-click-modal | 点击遮罩是否关闭 | boolean | - | true | - |
-| z-index | 弹窗层级 | number | - | 15 | 2.3.0 |
-| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型） | boolean | - | true | 2.3.0 |
-| ellipsis | 是否超出隐藏 | boolean | - | false | 2.3.0 |
+| z-index | 弹窗层级 | number | - | 15 | - |
+| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型） | boolean | - | true | - |
+| ellipsis | 是否超出隐藏 | boolean | - | false | - |
 
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| bind:confirm | 点击右侧按钮触发 | event.detail = { value, selectedItems }， value 为选中值(多列则为数组)，selectedItems为选中项(多列则为数组) | - |
-| bind:cancel | 点击左侧按钮触发 | - | - |
-| bind:open | 打开选择器弹出层时触发 | - | - |
+| confirm | 点击右侧按钮触发 | event.detail = { value, selectedItems }， value 为选中值(多列则为数组)，selectedItems为选中项(多列则为数组) | - |
+| cancel | 点击左侧按钮触发 | - | - |
+| open | 打开选择器弹出层时触发 | - | - |
 
 ## Methods
 

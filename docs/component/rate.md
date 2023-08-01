@@ -8,20 +8,16 @@
 设置`value`分数，设置`num`总分数，默认为5分，监听 `change` 事件获取新值。
 
 ```html
-<wd-rate value="{{value}}" bind:change="handleChange" />
+<wd-rate v-model="value" bind:change="handleChange" />
 ```
 
 ```typescript
-Page({
-  data: {
-    value: 1
-  },
-  handleChange (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+
+const value = ref<number>(1)
+
+function changeValue({ value }) {
+  console.log(value)
+}
 ```
 
 ## 只读
@@ -29,7 +25,7 @@ Page({
 设置 `readonly` 属性。
 
 ```html
-<wd-rate value="{{3}}" readonly />
+<wd-rate v-model="value" readonly />
 ```
 
 ## 禁用
@@ -45,8 +41,8 @@ Page({
 可以通过 `color` 属性修改未选中的颜色，`active-color` 修改选中的颜色。
 
 ```html
-<wd-rate value="{{3}}" active-color="linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)" />
-<wd-rate value="{{4}}" active-color="{{['linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)', 'linear-gradient(315deg, rgba(245,34,34,1) 0%,rgba(255,117,102,1) 100%)']}}" />
+<wd-rate v-model="value" active-color="linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)" />
+<wd-rate v-model="value" :active-color="['linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)', 'linear-gradient(315deg, rgba(245,34,34,1) 0%,rgba(255,117,102,1) 100%)']" />
 ```
 
 ## 修改icon
@@ -54,7 +50,7 @@ Page({
 可以通过 `icon` 属性修改未选中的图标，`active-icon` 修改选中的图标。
 
 ```html
-<wd-rate value="{{3}}" icon="wd-icon-dong" active-icon="wd-icon-dong" active-color="#4D80F0"/>
+<wd-rate v-model="value" icon="wd-icon-dong" active-icon="wd-icon-dong" active-color="#4D80F0"/>
 ```
 
 ## 修改大小、间隔
@@ -62,7 +58,7 @@ Page({
 可以通过 `size` 属性修改图标的大小，`space` 修改图标之间的间隔。
 
 ```html
-<wd-rate value="{{3}}" size="30px" space="10px"/>
+<wd-rate v-model="value" size="30px" space="10px"/>
 ```
 
 ## Attributes

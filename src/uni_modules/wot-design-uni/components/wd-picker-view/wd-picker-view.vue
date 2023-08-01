@@ -356,7 +356,7 @@ function handleChange(index: number) {
   // 延迟一下，避免组件刚渲染时调用者的事件未初始化好
   setTimeout(() => {
     emit('change', {
-      proxy,
+      picker: proxy.$.exposed,
       value,
       index
     })
