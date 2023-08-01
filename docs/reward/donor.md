@@ -9,9 +9,27 @@
 ## 赠人玫瑰，手有余香
 
 
-| 捐赠者 | 留言 | 链接 |
-|-----|------|--------|
-| 额朋克欧光明  | 喝个咖啡先 | - |
+<table v-if="data&&data.donor">
+  <thead>
+    <tr>
+      <th>捐赠者</th>
+      <th>留言</th>
+      <th>链接</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(donor,index) in data.donor">
+      <td>{{donor.name}}</td>
+      <td>{{donor.message}}</td>
+      <td>{{donor.link}}</td>
+    </tr>
+  </tbody>
+</table>
 
 
 :beers::beers::beers: 再次感谢各位捐赠者的支持，也欢迎大家提出自己的意见和建议。:beers::beers::beers:
+
+<script setup>
+import { useSponsor } from '../.vitepress/theme/composables/sponsor'
+const { data } = useSponsor()
+</script>
