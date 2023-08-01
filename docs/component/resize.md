@@ -11,33 +11,29 @@
 
 ```html
 <wd-resize @resize="handleResize">
-  <view style="background: #4d80f0; width: {{width}};height: {{height}}"></view>
+  <view :style="`background: #4d80f0; width: ${width};height: ${height}`"></view>
 </wd-resize>
 ```
 
 ```typescript
-Page({
-  data: {
-    width: '',
-    height: ''
-  },
-  handleResize ({ detail }) {
-    const { height, width, top, right, bottom, left } = detail
-    console.log(height, width, top, right, bottom, left)
-  },
-  onReady () {
-    setTimeout(() => {
-      this.setData({
-        width: '100px',
-        height: '100px'
-      })
-    }, 1500)
-  }
+const width = ref<string>('')
+const height = ref<string>('')
+
+onReady(() => {
+  setTimeout(() => {
+    width.value = '100px'
+    height.value = '100px'
+  }, 1500)
 })
+
+function handleResize(detail: Record<string, string | number>) {
+  const { height, width, top, right, bottom, left } = detail
+  console.log(height, width, top, right, bottom, left)
+}
 ```
 
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| size | 尺寸发生变化时触发 | `{width: number, height: number, top: number, right: number, bottom: number, left: number}` | - |
+| resize | 尺寸发生变化时触发 | `{width: number, height: number, top: number, right: number, bottom: number, left: number}` | - |

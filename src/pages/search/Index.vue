@@ -69,7 +69,7 @@ function cancel() {
 function change(e) {
   console.log(e.value)
 }
-function changeSearchType(e) {
+function changeSearchType({ item, index }) {
   // this.setData({
   //   searchType: e.detail.item.content
   // })
