@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-08-01 13:09:48
+ * @LastEditTime: 2023-08-01 17:31:40
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -57,7 +57,7 @@ export default defineConfig({
     nav: [
       { text: '指南', link: '/guide/quickUse', activeMatch: '/guide/' },
       { text: '组件', link: '/component/button', activeMatch: '/component/' },
-      { text: '打赏作者', link: '/reward/reward', activeMatch: '/reward/' },
+      { text: '捐赠作者', link: '/reward/reward', activeMatch: '/reward/' },
 
       {
         text: '相关链接',
@@ -96,6 +96,16 @@ export default defineConfig({
             text: '常见问题',
             link: '/guide/commonProblems',
           }
+        ],
+        '/reward/': [
+          {
+            text: '捐赠作者',
+            link: '/reward/reward',
+          },
+          {
+            text: '榜上有名',
+            link: '/reward/donor',
+          },
         ],
       
         '/component/': [
