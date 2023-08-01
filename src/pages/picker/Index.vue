@@ -4,7 +4,7 @@
     <wd-cell-group border>
       <wd-picker label="单列选项" :columns="columns0" />
       <wd-picker label="禁用" disabled v-model="value1" :columns="columns1" />
-      <wd-picker label="只读" readonly v v-model="value2" :columns="columns2" />
+      <wd-picker label="只读" readonly v-model="value2" :columns="columns2" />
       <wd-picker label="loading" loading :columns="columns3" />
       <wd-picker label="多列" v-model="value4" :columns="columns4" />
       <wd-picker label="多级联动" v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />

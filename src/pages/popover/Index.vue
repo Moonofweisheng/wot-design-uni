@@ -12,19 +12,19 @@
 
     <demo-block custom-class="pop" title="嵌套信息">
       <view class="center list">
-        <wd-popover id="pop2" v-model:show="show2" use-content-slot @change="handleChange2">
+        <wd-popover v-model:show="show2" use-content-slot @change="handleChange2">
           <template #content>
             <view class="pop-content">这是一段自定义样式的内容。</view>
           </template>
-          <wd-button data-id="pop2">点击展示</wd-button>
+          <wd-button>点击展示</wd-button>
         </wd-popover>
       </view>
     </demo-block>
 
     <demo-block custom-class="pop" title="列表展示">
       <view class="center list">
-        <wd-popover id="pop3" v-model:show="show3" mode="menu" :content="menu" @menuclick="link" @change="handleChange3">
-          <wd-button data-id="pop3">列表</wd-button>
+        <wd-popover v-model:show="show3" mode="menu" :content="menu" @menuclick="link" @change="handleChange3">
+          <wd-button>列表</wd-button>
         </wd-popover>
       </view>
     </demo-block>

@@ -10,24 +10,19 @@
 
 ```html
 <demo-block title="基本用法">
-  <wd-radio-group value="{{value}}" bind:change="change">
-    <wd-radio value="{{1}}">单选框1</wd-radio>
-    <wd-radio value="{{2}}">单选框2</wd-radio>
+  <wd-radio-group v-model="value" @change="change">
+    <wd-radio :value="1">单选框1</wd-radio>
+    <wd-radio :value="2">单选框2</wd-radio>
   </wd-radio-group>
   <view>当前选中的值为:{{value}}</view>
 </demo-block>
 ```
 ```typescript
-Page({
-  data: {
-    value: 1
-  },
-  change (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+const value = ref<number>(1)
+
+function change(e) {
+  console.log(e)
+}
 ```
 
 ## 修改图标形状
@@ -36,23 +31,18 @@ Page({
 
 ```html
 <!-- button 按钮式单选 -->
-<wd-radio-group value="{{value}}" shape="button" bind:change="change">
-  <wd-radio value="{{1}}">沃特</wd-radio>
-  <wd-radio value="{{2}}">商家后台</wd-radio>
+<wd-radio-group v-model="value" shape="button" @change="change">
+  <wd-radio :value="1">沃特</wd-radio>
+  <wd-radio :value="2">商家后台</wd-radio>
 </wd-radio-group>
 ```
 
 ```typescript
-Page({
-  data: {
-    value: 1
-  },
-  change (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+const value = ref<number>(1)
+
+function change(e) {
+  console.log(e)
+}
 ```
 
 > <div style="color: #FA4350;font-weight: 500;">注意：</div>
@@ -60,24 +50,19 @@ Page({
 
 ```html
 <!-- dot 点状单选 -->
-<wd-radio-group value="{{value}}" shape="dot" bind:change="change">
-  <wd-radio value="{{1}}">沃特</wd-radio>
-  <wd-radio value="{{2}}">商家后台</wd-radio>
+<wd-radio-group v-model="value" shape="dot" @change="change">
+  <wd-radio :value="1">沃特</wd-radio>
+  <wd-radio :value="2">商家后台</wd-radio>
 </wd-radio-group>
 ```
 
 
 ```typescript
-Page({
-  data: {
-    value: 1
-  },
-  change (event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+const value = ref<number>(1)
+
+function change(e) {
+  console.log(e)
+}
 ```
 
 ## 表单模式
@@ -87,7 +72,7 @@ Page({
 开启表单模式时，如果同时设置 `shape` 为 `button` 开启表单复选按钮组模式。
 
 ```html
-<wd-radio-group value="1" cell>
+<wd-radio-group modelValue="1" cell>
   <wd-radio value="1">选项一</wd-radio>
   <wd-radio value="2">选项二</wd-radio>
   <wd-radio value="3">选项三</wd-radio>
@@ -103,7 +88,7 @@ Page({
 设置 `inline` 属性，使单选框在同一行展示。
 
 ```html
-<wd-radio-group value="1" inline>
+<wd-radio-group modelValue="1" inline>
   <wd-radio value="1">单选框1</wd-radio>
   <wd-radio value="2">单选框2</wd-radio>
 </wd-radio-group>
@@ -114,7 +99,7 @@ Page({
 设置 `checked-color` 属性。
 
 ```html
-<wd-radio-group value="1" checked-color="#fa4350">
+<wd-radio-group modelValue="1" checked-color="#fa4350">
   <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
@@ -125,7 +110,7 @@ Page({
 可以在 `radio-group` 上面设置 `disabled`，禁用所有单选框，也可以在单个单选框上面设置 `disabled` 属性，禁用某个单选框。
 
 ```html
-<wd-radio-group value="1" disabled>
+<wd-radio-group modelValue="1" disabled>
   <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
@@ -136,7 +121,7 @@ Page({
 设置 `size` 属性，可选 `large`。
 
 ```html
-<wd-radio-group value="1" size="large">
+<wd-radio-group modelValue="1" size="large">
   <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
@@ -147,9 +132,9 @@ Page({
 radio设置的props优先级比radioGroup上设置的props优先级更高
 
 ```html
-  <wd-radio-group value="1" shape="button" disabled checked-color="#f00">
-    <wd-radio value="1" disabled="{{false}}" checked-color="#000">商家后台</wd-radio>
-    <wd-radio value="2" disabled="{{false}}">沃特</wd-radio>
+  <wd-radio-group modelValue="1" shape="button" disabled checked-color="#f00">
+    <wd-radio value="1" :disabled="false" checked-color="#000">商家后台</wd-radio>
+    <wd-radio value="2" :disabled="false">沃特</wd-radio>
     <wd-radio value="3">商家智能</wd-radio>
   </wd-radio-group>
 ```
@@ -172,7 +157,7 @@ radio设置的props优先级比radioGroup上设置的props优先级更高
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 绑定值变化时触发 | `{ value }`  | - |
+| change | 绑定值变化时触发 | `{ value }`  | - |
 
 ## Radio Attributes
 

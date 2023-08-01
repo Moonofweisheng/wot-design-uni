@@ -16,11 +16,11 @@ hero:
       text: 快速上手
       link: /guide/quickUse
     - theme: alt
+      text: 组件列表
+      link: /component/button
+    - theme: alt
       text: 捐赠作者
       link: /reward/reward
-    - theme: alt
-      text: 查看源码
-      link: https://github.com/Moonofweisheng/wot-design-uni
 
 features:
   - icon: 🚀

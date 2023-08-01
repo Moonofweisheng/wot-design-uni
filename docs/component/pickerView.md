@@ -7,18 +7,17 @@
 单列选择器，给 `columns` 传入一个数值数组，设置 `value` 绑定值。选项可以为字符串，也可以为对象，如果为对象则默认取 `label` 属性为选项内容进行渲染，`value` 获取的值为 `value` 属性的值，如果 `value` 属性不存在，则取 `label` 的值。
 
 ```html
-<wd-picker-view columns="{{columns}}" value="{{value}}" bind:change="onChange" />
+<wd-picker-view :columns="columns" v-model="value" @change="onChange" />
 ```
 ```typescript
-Page({
-  data: {
-    columns: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
-    value: ''
-  },
-  onChange (picker, value, index) {
-    Toast(`当前选中项: ${value}, 下标: ${index}`)
-  }
-})
+import { useToast } from '@/uni_modules/wot-design-uni'
+const toast = useToast()
+const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const value3 = ref<string>('')
+function onChange({picker, value, index}) {
+  toast.show(`当前选中项: ${value}, 下标: ${index}`)
+}
+
 ```
 
 当 `columns` 选项为对象时，其数据结构为：
@@ -34,15 +33,11 @@ Page({
 选项可以为对象，设置 `disabled` 属性。
 
 ```html
-<wd-picker-view columns="{{columns}}" value="{{value}}" disabled />
+<wd-picker-view :columns="columns" v-model="value" disabled />
 ```
 ```typescript
-Page({
-  data: {
-    columns: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
-    value: '选项3'
-  }
-})
+const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const value = ref('选项3')
 ```
 
 ## 加载中
@@ -50,35 +45,31 @@ Page({
 设置 `loading` 属性。
 
 ```html
-<wd-picker-view columns="{{columns}}" loading />
+<wd-picker-view :columns="columns" loading />
 ```
 ## 多列
 
 `columns` 属性设置为二维数组，`value` 为数组。
 
 ```html
-<wd-picker-view columns="{{columns}}" value="{{value}}" />
+<wd-picker-view :columns="columns" v-model="value" />
 ```
 ```typescript
-Page({
-  data: {
-   value: ['中南大学', '软件工程'],
-   columns: [
-     ['中山大学', '中南大学', '华南理工大学'],
-     ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
-   ],
-  }
-})
+const value = ref(['中南大学', '软件工程'])
+
+const columns = ref([
+  ['中山大学', '中南大学', '华南理工大学'],
+  ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
+])
+
 ```
 
 ## 多级联动
 
 传入 `column-change` 属性，其类型为 `function`，接收 pickerView 实例、选中项、当前修改列的下标、resolve 作为入参，根据选中项和列下标进行判断，通过 pickerView 实例暴露出来的 `setColumnData` 方法修改其他列的数据源，当修改完成后需要执行 `resolve()` 告知组件修改完成以继续执行，如果 `column-change` 包含异步操作，也可以使组件按照异步顺序进行执行。
 
-> resolve 参数为 1.4.0 添加，每次修改完后都需要调用 resolve() 通知组件。
-
 ```html
-<wd-picker-view columns="{{columns}}" value="{{value}}" column-change="{{onChangeDistrict}}" />
+<wd-picker-view :columns="columns" v-model="value" :column-change="onChangeDistrict" />
 ```
 
 ```typescript
@@ -93,27 +84,21 @@ const district = {
   '440400': [{ label: '香洲区', value: '440402' }, { label: '斗门区', value: '440403' }, { label: '金湾区', value: '440404' }],
   '440500': [{ label: '龙湖区', value: '440507' }, { label: '金平区', value: '440511' }]
 }
-Page({
-  data: {
-    value: ['110000', '110100', '110102'],
-    columns: [
-      district[0],
-      district[district[0][0].value],
-      district[district[district[0][0].value][0].value]
-    ],
 
-    onChangeDistrict (pickerView, value, columnIndex, resolve) {
-      const item = value[columnIndex]
-      if (columnIndex === 0) {
-        pickerView.setColumnData(1, district[item.value])
-        pickerView.setColumnData(2, district[district[item.value][0].value])
-      } else if (columnIndex === 1) {
-        pickerView.setColumnData(2, district[item.value])
-      }
-      resolve()
-    }
+const value = ref(['110000', '110100', '110102'])
+const columns = ref([district[0], district[district[0][0].value], district[district[district[0][0].value][0].value]])
+
+
+const onChangeDistrict = (pickerView, value, columnIndex, resolve) => {
+  const item = value[columnIndex]
+  if (columnIndex === 0) {
+    pickerView.setColumnData(1, district[item.value])
+    pickerView.setColumnData(2, district[district[item.value][0].value])
+  } else if (columnIndex === 1) {
+    pickerView.setColumnData(2, district[item.value])
   }
-})
+  resolve()
+}
 ```
 
 
@@ -121,7 +106,7 @@ Page({
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
-| value | 选中项，如果为多列选择器，则其类型应为数组 | string / number / boolean / array | - | - | - |
+| v-model | 选中项，如果为多列选择器，则其类型应为数组 | string / number / boolean / array | - | - | - |
 | columns | 选择器数据，可以为字符串数组，也可以为对象数组，如果为二维数组，则为多列选择器 | array | - | - | - |
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |
@@ -144,9 +129,9 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|------|--------|
-| bind:change | 选项值修改时触发 | event.detail = { value, picker, index }, 单列: picker实例, 选中项值, 选中项下标; 多列: picker实例, 所有列选中项值, 当前列的下标 | - |
-| bind:pickstart | 当滚动选择开始时候触发事件 | - | - |
-| bind:pickend | 当滚动选择结束时候触发事件 | - | - |
+| change | 选项值修改时触发 | event = { value, picker, index }, 单列: picker实例, 选中项值, 选中项下标; 多列: picker实例, 所有列选中项值, 当前列的下标 | - |
+| pickstart | 当滚动选择开始时候触发事件 | - | - |
+| pickend | 当滚动选择结束时候触发事件 | - | - |
 
 ## 外部样式类
 
