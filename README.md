@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="logo" src="./docs/public/wot-design.png" width="200">
+    <img alt="logo" src="https://wot-design-uni.netlify.app/wot-design.png" width="200">
 </p>
 <h1 align="center">Wot Design Uni</h1>
 
@@ -32,8 +32,8 @@
 
 
 <p>
-<img src="./docs/public/wx.jpg" width="200" height="200" style="margin-right:30px"/>
-<img src="./docs/public/alipay.png" width="200" height="200" />
+<img src="https://wot-design-uni.netlify.app/wx.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-design-uni.netlify.app/alipay.png" width="200" height="200" />
 </p>
 
 
@@ -45,23 +45,7 @@ yarn add wot-design-uni
 
 ## 快速上手
 
-```typescript
-import Vue from 'vue'
-import WotDesign from 'wot-design'
-
-Vue.use(WotDesign)
-
-// or
-import {
-  Button,
-  Swipe
-} from 'wot-design'
-
-Vue.use(Button)
-Vue.use(Swipe)
-```
-
-详细说明见 [快速上手](https://wot-design-uni.netlify.app/#/components/quickUse) in our documentation.
+详细说明见 [快速上手](https://wot-design-uni.netlify.app/guide/quickUse.html)
 
 ## LICENSE
 
