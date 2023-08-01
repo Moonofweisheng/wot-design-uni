@@ -1,0 +1,59 @@
+name: Upload MiniProgram
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - shell: bash
+      env:
+        PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }}
+        APPID: ${{ secrets.MP_APPID }}
+      run: |
+        if [[ -z $PRIVATE_KEY ]]; then
+          echo "##########"
+          echo ""
+          echo "Please set 'PRIVATE_KEY' key in actions secrets"
+          echo ""
+          echo "##########"
+          exit 1
+        else
+          echo "$PRIVATE_KEY" > private.key
+          echo '{
+            "weixin": {
+              "appid": "'$APPID'",
+              "privateKeyPath": "private.key",
+              "projectPath": "dist/build/mp-weixin",
+              "setting": {
+                "minifyJS": true,
+                "minifyWXML": true,
+                "minifyWXSS": true,
+                "minify": true
+              }
+            },
+            "version": "",
+            "desc": ""
+          }' > .minicirc
+        fi
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: upload
+      run: |
+        npm i uni-mini-ci -g
+        yarn install
+        yarn upload:mp-weixin
