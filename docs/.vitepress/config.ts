@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-08-01 10:09:21
+ * @LastEditTime: 2023-08-01 13:09:48
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -11,7 +11,7 @@ import { defineConfig } from 'vitepress';
 
 export default defineConfig({
   title: `Wot Design Uni`,
-  description: '一个基于Vue3构建的uni-app组件库',
+  description: '一个参照Wot-design打造的uni-app组件库',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['script', {}, `
@@ -65,6 +65,8 @@ export default defineConfig({
           { text: 'uni-mini-router', link: 'https://gitee.com/fant-mini/uni-mini-router' },
           { text: 'uni-mini-ci', link: 'https://gitee.com/fant-mini/uni-mini-ci' },
           { text: 'fant-mini-plus', link: 'https://fant-mini-plus.top/fant-mini-plus/' },
+          { text:'wot-design',  link:'https://ftf.jd.com/wot-design/' },
+          { text:'wot-design-mini', link:'https://ftf.jd.com/wot-design-mini/' }
         ],
       },
     ],
