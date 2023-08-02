@@ -6,7 +6,7 @@
 
 ## 基础用法
 
-基础用法需要绑定 `value` 值以及 `options` 属性。
+基础用法需要绑定 `v-model` 值以及 `options` 属性。
 
 `options` 属性是一个一维对象数组，数组项的数据结构为：label（选项文本），value（选项值），tip（选项说明）。
 
@@ -144,7 +144,7 @@ function confirm() {
 
 | 参数      | 说明                                                                   | 类型            | 可选值 | 默认值 | 最低版本 |
 | --------- | ---------------------------------------------------------------------- | --------------- | ------ | ------ | -------- |
-| value     | 当前选中项对应选中的 value                                             | string / number | -      | -      | -        |
+| v-model     | 当前选中项对应选中的 value                                             | string / number | -      | -      | -        |
 | disabled  | 禁用菜单                                                               | boolean         | -      | false  | -        |
 | options   | 列表数据，对应数据结构 `[{text: '标题', value: '0', tip: '提示文字'}]` | array           | -      | -      | -        |
 | icon-name | 选中的图标名称(可选名称在 wd-icon 组件中)                              | string          | -      | check  | -        |

@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2023-07-10 23:54:38
+ * @LastEditTime: 2023-08-02 13:30:29
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-tooltip\wd-tooltip.vue
@@ -15,7 +15,7 @@
         <view v-if="!useContentSlot" class="wd-tooltip__inner">{{ content }}</view>
       </view>
     </view>
-    <wd-transition :show="show" name="fade">
+    <wd-transition :show="modelValue" name="fade">
       <view class="wd-tooltip__pos" :style="popover.popStyle.value">
         <view class="wd-tooltip__container custom-pop">
           <view v-if="visibleArrow" :class="`wd-tooltip__arrow ${popover.arrowClass.value} ${customArrow}`" :style="popover.arrowStyle.value"></view>
@@ -64,7 +64,7 @@ interface Props {
   useContentSlot: boolean
   disabled: boolean
   showClose: boolean
-  show: boolean
+  modelValue: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
@@ -76,13 +76,13 @@ const props = withDefaults(defineProps<Props>(), {
   useContentSlot: false,
   disabled: false,
   showClose: false,
-  show: false
+  modelValue: false
 })
 
 const popover = usePopover()
 
 const selector: string = 'tooltip'
-const emit = defineEmits(['update:show', 'menuclick', 'change', 'open', 'close'])
+const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
 const { proxy } = getCurrentInstance() as any
 
 watch(
@@ -97,7 +97,7 @@ watch(
 )
 
 watch(
-  () => props.show,
+  () => props.modelValue,
   (newValue) => {
     if (newValue) {
       popover.control(props.placement, props.offset)
@@ -115,7 +115,7 @@ onMounted(() => {
 
 onBeforeMount(() => {
   pushToQueue(proxy)
-  popover.showStyle.value = props.show ? 'opacity: 1;' : 'opacity: 0;'
+  popover.showStyle.value = props.modelValue ? 'opacity: 1;' : 'opacity: 0;'
 })
 
 onBeforeUnmount(() => {
@@ -124,15 +124,15 @@ onBeforeUnmount(() => {
 
 function toggle(event) {
   if (props.disabled) return
-  emit('update:show', !props.show)
+  emit('update:modelValue', !props.modelValue)
 }
 
 function open() {
-  emit('update:show', true)
+  emit('update:modelValue', true)
 }
 
 function close() {
-  emit('update:show', false)
+  emit('update:modelValue', false)
 }
 
 defineExpose({

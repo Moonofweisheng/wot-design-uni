@@ -144,7 +144,7 @@ function handleChange(event) {
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
 | type | 类型 | string | text / textarea / number / digit / idcard | text | - |
-| value |	绑定值 | string / number | - | - | - |
+| v-model |	绑定值 | string / number | - | - | - |
 | placeholder	| 占位文本 |	string | - |	请输入... | - |
 | clearable | 显示清空按钮 | boolean | - | false | - |
 | maxlength | 原生属性，最大长度 | string | - | - | - |

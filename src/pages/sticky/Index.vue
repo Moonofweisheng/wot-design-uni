@@ -65,6 +65,7 @@
   </view>
 </template>
 <script lang="ts" setup>
+import { onShow } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 const show = ref<boolean>(false)
 
@@ -74,6 +75,9 @@ function display() {
 function insert() {
   display()
 }
+onShow(() => {
+  setTimeout(display, 5000)
+})
 </script>
 <style lang="scss" scoped>
 .demo-block {

@@ -16,7 +16,7 @@ Popover 的属性与 [Tooltip](/#/components/tooltip) 很类似，因此对于�
 
 ```html
 <view @click="clickoutside">
-  <wd-popover v-model:show="show" content="这是一段信息。" @change="handleChange">
+  <wd-popover v-model="show" content="这是一段信息。" @change="handleChange">
     <wd-button>点击展示</wd-button>
   </wd-popover>
 </view>
@@ -56,7 +56,7 @@ function handleChange1({ show }) {
 **注意：iconClass 属性值为组件库内部的 icon 图标名。**
 
 ```html
-<wd-popover v-model:show="show" mode="menu" :content="menu" @menu-click="link" @change="handleChange">
+<wd-popover v-model="show" mode="menu" :content="menu" @menu-click="link" @change="handleChange">
   <wd-button>列表</wd-button>
 </wd-popover>
 ```
@@ -124,7 +124,7 @@ function link(e) {
 
 | 参数          | 说明                                       | 类型                                                         | 可选值                                                                                                                          | 默认值 | 最低版本 |
 | ------------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| value         | 手动状态是否可见                           | boolean                                                      | -                                                                                                                               | false  | -        |
+| v-model         | 手动状态是否可见                           | boolean                                                      | -                                                                                                                               | false  | -        |
 | content       | 显示的内容，也可以通过 `slot#content` 传入 | string/array（当模式为菜单模式时，content 属性格式为 Array） | -                                                                                                                               | -      | -        |
 | mode          | 当前显示的模式，决定内容的展现形式         | string                                                       | normal（普通模式）/ menu（菜单模式）                                                                                            | normal | -        |
 | placement     | popover 的出现位置                         | string                                                       | top / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end | bottom | -        |

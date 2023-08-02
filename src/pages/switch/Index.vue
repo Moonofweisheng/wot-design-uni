@@ -1,5 +1,14 @@
 <!--
  * @Author: weisheng
+ * @Date: 2023-08-01 11:12:05
+ * @LastEditTime: 2023-08-02 13:14:32
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\switch\Index.vue
+ * 记得注释
+-->
+<!--
+ * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
  * @LastEditTime: 2023-07-03 16:23:26
  * @LastEditors: weisheng
@@ -35,7 +44,7 @@
   </view>
 </template>
 <script lang="ts" setup>
-import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-box'
+import { useMessage } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const checked1 = ref<boolean>(true)

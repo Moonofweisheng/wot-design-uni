@@ -5,10 +5,10 @@
 
 ## 基本用法
 
-`value` 为绑定值，通过 `v-model:value` 绑定复选框的勾选状态，单独使用时值为 `boolean` 类型。
+`value` 为绑定值，通过 `v-model` 绑定复选框的勾选状态，单独使用时值为 `boolean` 类型。
 
 ```html
-<wd-checkbox v-model:value="value" @change="handleChange">单选框1</wd-checkbox>
+<wd-checkbox v-model="value" @change="handleChange">单选框1</wd-checkbox>
 ```
 ```typescript
 const value = ref<boolean>(true)
@@ -23,8 +23,8 @@ function handleChange1({value}) {
 修改 `shape` 属性，可选值为 'circle'、'square'、'button'，默认为 'circle'。
 
 ```html
-<wd-checkbox :value="true" shape="square">沃特</wd-checkbox>
-<wd-checkbox :value="true" shape="button">沃特</wd-checkbox>
+<wd-checkbox :modelValue="true" shape="square">沃特</wd-checkbox>
+<wd-checkbox :modelValue="true" shape="button">沃特</wd-checkbox>
 ```
 
 ## 修改选中的颜色
@@ -33,7 +33,7 @@ function handleChange1({value}) {
 
 ```html
 <wd-checkbox
-   v-model:value="value"
+   v-model="value"
    checked-color="#f00"
 >
   沃特
@@ -50,7 +50,7 @@ const value = ref<boolean>(true)
 
 ```html
 <wd-checkbox
-  :value="true"
+  :modelValue="true"
   true-value="沃特"
   false-value="商家后台"
 >
@@ -64,8 +64,8 @@ const value = ref<boolean>(true)
 
 ```html
 <wd-checkbox-group v-model="value">
-  <wd-checkbox value="jingmai">沃特</wd-checkbox>
-  <wd-checkbox value="shop">商家后台</wd-checkbox>
+  <wd-checkbox modelValue="jingmai">沃特</wd-checkbox>
+  <wd-checkbox modelValue="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
 ```typescript
@@ -77,8 +77,8 @@ const value = ref<number[]>([])
 ```html
 
 <wd-checkbox-group v-model="value1" cell>
-  <wd-checkbox value="jingmai">沃特</wd-checkbox>
-  <wd-checkbox value="shop">商家后台</wd-checkbox>
+  <wd-checkbox modelValue="jingmai">沃特</wd-checkbox>
+  <wd-checkbox modelValue="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
 
@@ -86,13 +86,13 @@ const value = ref<number[]>([])
 
 ```html
 <wd-checkbox-group v-model="value2" cell shape="button">
-  <wd-checkbox value="1" disabled>选项一</wd-checkbox>
-  <wd-checkbox value="2">选项二</wd-checkbox>
-  <wd-checkbox value="3">选项三</wd-checkbox>
-  <wd-checkbox value="4">选项四</wd-checkbox>
-  <wd-checkbox value="5">选项五</wd-checkbox>
-  <wd-checkbox value="6">选项六</wd-checkbox>
-  <wd-checkbox value="7">选项七</wd-checkbox>
+  <wd-checkbox modelValue="1" disabled>选项一</wd-checkbox>
+  <wd-checkbox modelValue="2">选项二</wd-checkbox>
+  <wd-checkbox modelValue="3">选项三</wd-checkbox>
+  <wd-checkbox modelValue="4">选项四</wd-checkbox>
+  <wd-checkbox modelValue="5">选项五</wd-checkbox>
+  <wd-checkbox modelValue="6">选项六</wd-checkbox>
+  <wd-checkbox modelValue="7">选项七</wd-checkbox>
 </wd-checkbox-group>
 ```
 
@@ -108,8 +108,8 @@ const value2 = ref(['1'])
 
 ```html
 <wd-checkbox-group v-model="value" inline>
-  <wd-checkbox value="jingmai">沃特</wd-checkbox>
-  <wd-checkbox value="shop">商家后台</wd-checkbox>
+  <wd-checkbox modelValue="jingmai">沃特</wd-checkbox>
+  <wd-checkbox modelValue="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
 
@@ -123,8 +123,8 @@ const value = ref(['jingmai'])
 
 ```html
 <wd-checkbox-group v-model="value" disabled>
-  <wd-checkbox value="jingmai">沃特</wd-checkbox>
-  <wd-checkbox value="shop">商家后台</wd-checkbox>
+  <wd-checkbox modelValue="jingmai">沃特</wd-checkbox>
+  <wd-checkbox modelValue="shop">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
 
@@ -137,10 +137,10 @@ const value = ref(['jingmai'])
 
 ```html
 <wd-checkbox-group v-model="value" :min="1" :max="3">
-  <wd-checkbox value="jd">京东</wd-checkbox>
-  <wd-checkbox value="jingmai">沃特</wd-checkbox>
-  <wd-checkbox value="shop">商家后台</wd-checkbox>
-  <wd-checkbox value="market">营销中心</wd-checkbox>
+  <wd-checkbox modelValue="jd">京东</wd-checkbox>
+  <wd-checkbox modelValue="jingmai">沃特</wd-checkbox>
+  <wd-checkbox modelValue="shop">商家后台</wd-checkbox>
+  <wd-checkbox modelValue="market">营销中心</wd-checkbox>
 </wd-checkbox-group>
 ```
 ```typescript
@@ -154,8 +154,8 @@ const value = ref(['jd'])
 
 ```html
 <wd-checkbox-group v-model="value" size="large">
-  <wd-checkbox value="1">沃特</wd-checkbox>
-  <wd-checkbox value="2">商家后台</wd-checkbox>
+  <wd-checkbox modelValue="1">沃特</wd-checkbox>
+  <wd-checkbox modelValue="2">商家后台</wd-checkbox>
 </wd-checkbox-group>
 ```
 
@@ -163,7 +163,7 @@ const value = ref(['jd'])
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|-----|------|-------|-------|--------|
-| value | 单选框选中时的值 | string / number / boolean | - | - | - |
+| v-model | 单选框选中时的值 | string / number / boolean | - | - | - |
 | shape | 单选框形状 | string | circle / square / button | circle | - |
 | checked-color | 选中的颜色 | string | - | #4D80F0 | - |
 | disabled | 禁用 | boolean | - | false | - |
@@ -177,7 +177,7 @@ const value = ref(['jd'])
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|--------|
-| value | 绑定值 | Array | - | - | - |
+| v-model | 绑定值 | Array | - | - | - |
 | shape | 单选框形状 | string | circle / square / button | circle | - |
 | cell | 表单模式 | boolean | - | false | - |
 | checked-color | 选中的颜色 | string | - | #4D80F0 | - |

@@ -10,13 +10,17 @@
 > 当`value`为`number`类型时，`wd-tab`可以不必设置`name`。同时如果value超出了tab数量，会用0自动兜底
 
 ```html
-<wd-tabs value="{{0}}">
-  <block jd:for="{{4}}" jd:key="$this">
-    <wd-tab title="标签{{item + 1}}">
-      <view class="content">内容{{item + 1}}</view>
+<wd-tabs v-model="tab">
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`">
+      <view class="content">内容{{ item}}</view>
     </wd-tab>
   </block>
 </wd-tabs>
+```
+```typescript
+const tab = ref<number>(0)
+
 ```
 ```scss
 .content{
@@ -25,30 +29,30 @@
 }
 ```
 
-## 滑动动画
+<!-- ## 滑动动画
 
 设置 `animated` 属性，开启tab切换动画。
 
 ```html
-<wd-tabs value="{{0}}" animated>
-  <block jd:for="{{4}}" jd:key="$this">
-    <wd-tab title="标签{{item + 1}}">
-      <view class="content">内容{{item + 1}}</view>
+<wd-tabs v-model="tab" animated>
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`">
+      <view class="content">内容{{ item }}</view>
     </wd-tab>
   </block>
 </wd-tabs>
 
-```
+``` -->
 
 ## 粘性布局
 
 设置 `sticky` 属性，使用粘性布局。可以设置 `offset-top` 属性，当距离窗口顶部多少像素时，固定标签头。
 
 ```html
-<wd-tabs value="{{0}}" sticky>
-  <block jd:for="{{4}}" jd:key="$this">
-    <wd-tab title="标签{{item + 1}}">
-      <view class="content">内容{{item + 1}}</view>
+<wd-tabs v-model="tab" sticky>
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`">
+      <view class="content">内容{{ item}}</view>
     </wd-tab>
   </block>
 </wd-tabs>
@@ -59,10 +63,10 @@
 在 `wd-tab` 上设置 `disabled` 属性，禁用某个页签。
 
 ```html
-<wd-tabs value="{{0}}">
-  <block jd:for="{{4}}" jd:key="$this">
-    <wd-tab title="标签{{item + 1}}" disabled="{{item === 1}}">
-      <view class="content">内容{{item + 1}}</view>
+<wd-tabs v-model="tab">
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`" :disabled="item === 1">
+      <view class="content">内容{{ item }}</view>
     </wd-tab>
   </block>
 </wd-tabs>
@@ -73,10 +77,10 @@
 监听页签的点击事件.
 
 ```html
-<wd-tabs value="{{0}}" bind:click="handleClick">
-  <block jd:for="{{4}}" jd:key="$this">
-    <wd-tab title="标签{{item + 1}}">
-      <view class="content">内容{{item + 1}}</view>
+<wd-tabs v-model="tab" @click="handleClick">
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`">
+      <view class="content">内容{{ item }}</view>
     </wd-tab>
   </block>
 </wd-tabs>
@@ -97,10 +101,10 @@ Page({
 设置 `swipeable` 属性，支持手势滑动。
 
 ```html
-<wd-tabs value="{{0}}" swipeable>
-  <block jd:for="{{4}}" jd:key="$this">
-    <wd-tab title="标签{{item + 1}}">
-      <view class="content">内容{{item + 1}}</view>
+<wd-tabs v-model="tab" swipeable>
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`">
+      <view class="content">内容{{ item }}</view>
     </wd-tab>
   </block>
 </wd-tabs>
@@ -114,14 +118,12 @@ Page({
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
-| value | 绑定值 | string / number | - | - | - |
+| v-model | 绑定值 | string / number | - | - | - |
 | slidable-num | 可滑动的标签数阈值 | number | - | 6 | - |
 | map-num | 显示导航地图的标签数阈值 | number | - | 10 | - |
 | sticky | 粘性布局 | boolean | - | false | - |
 | offset-top | 粘性布局时距离窗口顶部距离 | number | - | 0 | - |
-| ~~animated~~ | ~~开启切换动画~~，2.3.0 版本修改 tabs 切换方案，去掉该属性 | boolean | - | false | - |
 | swipeable | 开启手势滑动 | boolean | - | false | - |
-| ~~lazy-render~~ | ~~懒渲染标签页~~，2.3.0 版本修改 tabs 切换方案，去掉该属性 | boolean | - | false | - |
 
 ## Tab Attributes
 
@@ -135,6 +137,6 @@ Page({
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 绑定值变化时触发 | event.detail = { index, name },index为tab下标，name为tab绑定的值 | - |
-| bind:click | 点击标题时触发 | event.detail = { index, name },index为tab下标，name为tab绑定的值 | - |
-| bind:disabled | 点击禁用的标题时触发| event.detail = { index, name },index为tab下标，name为tab绑定的值 | - |
+| change | 绑定值变化时触发 | event = { index, name },index为tab下标，name为tab绑定的值 | - |
+| click | 点击标题时触发 | event = { index, name },index为tab下标，name为tab绑定的值 | - |
+| disabled | 点击禁用的标题时触发| event = { index, name },index为tab下标，name为tab绑定的值 | - |

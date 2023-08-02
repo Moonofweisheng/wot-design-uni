@@ -45,7 +45,7 @@ function handleChange({ value }) {
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|--------|
-| value | 绑定值 | number | - | - | - |
+| v-model | 绑定值 | number | - | - | - |
 | prev-text | 上一页按钮文字 |  string | - | 上一页 | - |
 | next-text | 下一页按钮文字 |  string | - | 下一页 | - |
 | total-page | 总页数，如果有total，则优先使用total计算页数 |  number | - | `根据页数计算` | - |

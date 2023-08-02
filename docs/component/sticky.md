@@ -23,25 +23,24 @@
 
 ```html
 <view style="margin-top: 20px;">
-  <wd-button type="error" jd:if="{{show}}">点击插入</wd-button>
+  <wd-button type="error" v-if="show">点击插入</wd-button>
   <wd-sticky>
-    <wd-button type="success" jd:if="{{show}}">动态插入</wd-button>
+    <wd-button type="success" v-if="show">动态插入</wd-button>
   </wd-sticky>
 </view>
 ```
 
 ```typescript
-Page({
-  data: {
-    show: false
-  },
-  display () {
-    this.setData({ show: true })
-  },
-  onShow () {
-    setTimeout(this.display, 5000)
-  }
+const show = ref<boolean>(false)
+
+function display() {
+  show.value = true
+}
+
+onShow(() => {
+  setTimeout(display, 5000)
 })
+
 ```
 
 ```scss
@@ -56,7 +55,7 @@ page{
 通过 `offset-top` 属性可以设置组件在吸顶时与顶部的距离。
 
 ```html
-<wd-sticky offset-top="{{50}}">
+<wd-sticky :offset-top="50">
   <wd-button>吸顶距离</wd-button>
 </wd-sticky>
 ```

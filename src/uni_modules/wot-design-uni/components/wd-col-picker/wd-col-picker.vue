@@ -79,6 +79,7 @@
 </template>
 <script lang="ts">
 export default {
+  behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
     styleIsolation: 'shared'

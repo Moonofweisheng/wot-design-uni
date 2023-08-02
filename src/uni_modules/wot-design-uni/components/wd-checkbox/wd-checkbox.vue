@@ -32,6 +32,7 @@
 
 <script lang="ts">
 export default {
+  behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
     styleIsolation: 'shared'
@@ -47,7 +48,7 @@ interface Props {
   customLabelClass?: string
   customShapeClass?: string
   customClass?: string
-  value: string | number | boolean
+  modelValue: string | number | boolean
   shape: checkShape
   checkedColor: string
   disabled: boolean | null
@@ -55,7 +56,6 @@ interface Props {
   falseValue: string | number | boolean
   size: string
   maxWidth: string
-  name: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -77,7 +77,7 @@ const parent = inject<any>('checkGroup')
 const { proxy } = getCurrentInstance() as any
 
 watch(
-  () => props.value,
+  () => props.modelValue,
   (newValue) => {
     if (newValue === null || newValue === undefined) {
       // eslint-disable-next-line prettier/prettier
@@ -162,24 +162,24 @@ const innerSize = computed(() => {
 
 onBeforeMount(() => {
   // eslint-disable-next-line quotes
-  if (props.value === null) throw Error("checkbox's value must be set")
+  if (props.modelValue === null) throw Error("checkbox's value must be set")
   inited.value = true
 })
 
 onMounted(() => {
   // 如果没有父组件，设置 isChecked
   if (!parent) {
-    isChecked.value = props.value === props.trueValue
+    isChecked.value = props.modelValue === props.trueValue
     isFirst.value = true
     isLast.value = true
   }
   if (parent) {
     parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
-    isChecked.value = props.value === parent.modelValue
+    isChecked.value = props.modelValue === parent.modelValue
   }
 })
 
-const emit = defineEmits(['change', 'update:value'])
+const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
  * @description 检测checkbox绑定的value是否和其它checkbox的value冲突
@@ -190,8 +190,8 @@ function checkName() {
   parent &&
     parent.$.exposed.children &&
     parent.$.exposed.children.forEach((child) => {
-      if (child.$.uid !== proxy.$.uid && child.value === props.value) {
-        throw Error(`The checkbox's bound value: ${props.value} has been used`)
+      if (child.$.uid !== proxy.$.uid && child.value === props.modelValue) {
+        throw Error(`The checkbox's bound value: ${props.modelValue} has been used`)
       }
     })
 }
@@ -205,10 +205,10 @@ function toggle() {
     emit('change', {
       value: !isChecked.value
     })
-    parent.$.exposed.changeSelectState(props.value)
+    parent.$.exposed.changeSelectState(props.modelValue)
   } else {
-    const newVal = props.value === props.trueValue ? props.falseValue : props.trueValue
-    emit('update:value', newVal)
+    const newVal = props.modelValue === props.trueValue ? props.falseValue : props.trueValue
+    emit('update:modelValue', newVal)
     emit('change', {
       value: newVal
     })

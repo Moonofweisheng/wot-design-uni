@@ -70,16 +70,7 @@
 
   <demo-block title="可关闭">
     <view>
-      <wd-tag
-        v-for="(tag, index) in tags"
-        :key="index"
-        custom-class="space"
-        round
-        closable
-        :data-index="index"
-        @click="handleClick(index)"
-        @close="handleClose(index)"
-      >
+      <wd-tag v-for="(tag, index) in tags" :key="index" custom-class="space" round closable @click="handleClick(index)" @close="handleClose(index)">
         {{ tag.value }}
       </wd-tag>
     </view>

@@ -14,7 +14,7 @@
         </view>
       </view>
     </view>
-    <wd-transition :show="show" name="fade" :duration="200">
+    <wd-transition :show="modelValue" name="fade" :duration="200">
       <view class="wd-popover__pos" :style="popover.popStyle.value">
         <view :class="`wd-popover__container ${customPop}`">
           <view
@@ -94,7 +94,7 @@ interface Props {
   useContentSlot: boolean
   disabled: boolean
   showClose: boolean
-  show: boolean
+  modelValue: boolean
   mode: PopoverMode
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -107,12 +107,12 @@ const props = withDefaults(defineProps<Props>(), {
   useContentSlot: false,
   disabled: false,
   showClose: false,
-  show: false,
+  modelValue: false,
   mode: 'normal'
 })
 
 const selector: string = 'popover'
-const emit = defineEmits(['update:show', 'menuclick', 'change', 'open', 'close'])
+const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
 const { proxy } = getCurrentInstance() as any
 
 watch(
@@ -133,7 +133,7 @@ watch(
 )
 
 watch(
-  () => props.show,
+  () => props.modelValue,
   (newValue) => {
     if (newValue) {
       popover.control(props.placement, props.offset)
@@ -151,7 +151,7 @@ onMounted(() => {
 
 onBeforeMount(() => {
   pushToQueue(proxy)
-  popover.showStyle.value = props.show ? 'opacity: 1;' : 'opacity: 0;'
+  popover.showStyle.value = props.modelValue ? 'opacity: 1;' : 'opacity: 0;'
 })
 
 onBeforeUnmount(() => {
@@ -161,7 +161,7 @@ onBeforeUnmount(() => {
 const popover = usePopover()
 
 function menuClick(index: number) {
-  emit('update:show', false)
+  emit('update:modelValue', false)
   emit('menuclick', {
     item: props.content[index],
     index
@@ -170,15 +170,15 @@ function menuClick(index: number) {
 
 function toggle() {
   if (props.disabled) return
-  emit('update:show', !props.show)
+  emit('update:modelValue', !props.modelValue)
 }
 
 function open() {
-  emit('update:show', true)
+  emit('update:modelValue', true)
 }
 
 function close() {
-  emit('update:show', false)
+  emit('update:modelValue', false)
 }
 
 defineExpose({

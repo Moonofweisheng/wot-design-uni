@@ -94,7 +94,7 @@
       <wd-input label="手机号" label-width="100px" name="phone" placeholder="请输入手机号" clearable v-model="phone" @change="handlePhone" />
     </wd-cell-group>
     <view class="tip">
-      <wd-checkbox :value="read" name="read" @change="handleRead" custom-label-class="label-class">
+      <wd-checkbox v-model="read" name="read" @change="handleRead" custom-label-class="label-class">
         已阅读并同意
         <text style="color: #4d80f0">《借款额度合同及相关授权》</text>
       </wd-checkbox>
@@ -228,7 +228,9 @@ function handleCardId({ value }) {
 function handlePhone({ value }) {
   console.log(value)
 }
-function formSubmit() {
+function formSubmit(event) {
+  console.log(event)
+
   if (!couponName.value) {
     toast.error('请填写优惠券名称')
     return

@@ -77,12 +77,14 @@ function change({ value }) {
 
 ```html
 <wd-search v-model="value">
-  <wd-popover slot="prefix" mode="menu" :content="menu" @menuclick="changeSearchType">
-    <view class="search-type">
-      <text>{{ searchType }}</text>
-      <wd-icon custom-class="icon-arrow" name="fill-arrow-down"></wd-icon>
-    </view>
-  </wd-popover>
+  <template #prefix>
+    <wd-popover mode="menu" :content="menu" @menuclick="changeSearchType">
+      <view class="search-type">
+        <text>{{ searchType }}</text>
+        <wd-icon custom-class="icon-arrow" name="fill-arrow-down"></wd-icon>
+      </view>
+    </wd-popover>
+  </template>
 </wd-search>
 ```
 

@@ -49,7 +49,7 @@
           :max="max"
           @change="handleChange"
         >
-          <wd-checkbox v-for="item in filterColumns" :key="item[valueKey]" :value="item[valueKey]" :disabled="item.disabled">
+          <wd-checkbox v-for="item in filterColumns" :key="item[valueKey]" :modelValue="item[valueKey]" :disabled="item.disabled">
             <block v-if="filterable && filterVal">
               <block v-for="text in item[labelKey]" :key="text.label">
                 <text v-if="text.type === 'active'" class="wd-select-picker__text-active">{{ text.label }}</text>
@@ -87,6 +87,7 @@
 </template>
 <script lang="ts">
 export default {
+  behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
     styleIsolation: 'shared'
@@ -392,6 +393,11 @@ function formatFilterColumns(columns, filterVal) {
     filterColumns.value = formatFilterColumns
   })
 }
+
+defineExpose({
+  close,
+  open
+})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

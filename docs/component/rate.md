@@ -65,7 +65,7 @@ function changeValue({ value }) {
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|-----|------|-------|-------|--------|
-| value |	当前分数 | number | - |	- | - |
+| v-model |	当前分数 | number | - |	- | - |
 | num	| 评分最大值 | number |	- |	5 | - |
 | readonly | 是否只读 | boolean | - | false | - |
 | size | 图标大小 | string | - | 16px | - |

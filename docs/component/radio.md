@@ -143,7 +143,7 @@ radio设置的props优先级比radioGroup上设置的props优先级更高
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|--------|
-| value | 会自动选中value对应的单选框 | string / number / boolean | - | - | - |
+| v-model | 会自动选中value对应的单选框 | string / number / boolean | - | - | - |
 | shape | 单选框形状 | string | dot / button / check | check | - |
 | size | 设置大小 | string | large | - | - |
 | checked-color | 选中的颜色 | string | - | #4D80F0 | - |

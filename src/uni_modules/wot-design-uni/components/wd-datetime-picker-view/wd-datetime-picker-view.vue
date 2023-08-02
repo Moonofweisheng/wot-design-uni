@@ -18,6 +18,11 @@
     ></wd-picker-view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  behaviors: ['uni://form-field']
+}
+</script>
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onMounted, ref, watch } from 'vue'

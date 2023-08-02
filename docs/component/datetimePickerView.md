@@ -109,7 +109,7 @@ const filter = (type, values) => {
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
-| value | 选中项，当 type 为 time 时，类型为字符串，否则为 Date | string / date | - | - |
+| v-model | 选中项，当 type 为 time 时，类型为字符串，否则为 Date | string / date | - | - |
 | type | 选择器类型 | string | date / year-month / time | datetime | - |
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |

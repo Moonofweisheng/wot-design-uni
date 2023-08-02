@@ -3,6 +3,12 @@
     <view class="wd-switch__circle" :style="circleStyle"></view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  behaviors: ['uni://form-field']
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, onBeforeMount } from 'vue'
 import { getType, objToStyle } from '../common/util'

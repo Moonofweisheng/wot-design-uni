@@ -93,7 +93,7 @@ function handleChange1({ value }) {
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|--------|
-| value | 绑定值 | number / string | - | - | - |
+| v-model | 绑定值 | number / string | - | - | - |
 | min | 最小值 | number | - | 1 | - |
 | max | 最大值 | number | - | Infinity | - |
 | step | 步数 | number | - | 1 | - |

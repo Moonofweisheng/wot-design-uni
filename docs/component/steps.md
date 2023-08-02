@@ -8,7 +8,7 @@
 `active` 为步骤进度，为 number 类型，步骤的下标。
 
 ```html
-<wd-steps active="{{ 0 }}">
+<wd-steps :active="0">
   <wd-step />
   <wd-step />
   <wd-step />
@@ -20,7 +20,7 @@
 设置 `align-center` 水平居中，只对横向步骤条有效。
 
 ```html
-<wd-steps active="{{ 0 }}" align-center>
+<wd-steps :active="0" align-center>
   <wd-step />
   <wd-step />
   <wd-step />
@@ -32,7 +32,7 @@
 可以通过 `title` 和 `description` 设置步骤的标题和描述信息。如果不设置标题，则会使用默认的文案。
 
 ```html
-<wd-steps active="{{ 0 }}" align-center>
+<wd-steps :active="0" align-center>
   <wd-step title="步骤1" description="注册1个账号" />
   <wd-step title="步骤2" description="登录账号并绑定手机" />
   <wd-step title="步骤3" description="完善个人信息" />
@@ -44,7 +44,7 @@
 可以通过 `icon` 属性设置步骤的图标，传入图标的名称，也可以通过 `icon` 的 slot 插槽自定义图标，使用插槽需要设置 `icon-slot` 为 `true`。
 
 ```html
-<wd-steps active="{{ 1 }}" align-center>
+<wd-steps :active="1" align-center>
   <wd-step icon="invite" />
   <wd-step icon="link" />
   <wd-step icon="clock" />
@@ -56,7 +56,7 @@
 设置 `vertical` 属性。
 
 ```html
-<wd-steps active="{{ 1 }}" vertical>
+<wd-steps :active="1" vertical>
   <wd-step description="注册1个账号" />
   <wd-step description="登录账号并绑定手机" />
   <wd-step description="完善个人信息" />
@@ -68,7 +68,7 @@
 设置 `dot` 属性。
 
 ```html
-<wd-steps active="{{ 1 }}" vertical dot>
+<wd-steps :active="1" vertical dot>
   <wd-step description="注册1个账号" />
   <wd-step description="登录账号并绑定手机" />
   <wd-step description="完善个人信息" />
@@ -80,7 +80,7 @@
 设置 `status`，支持 'finished'（完成）、'process'（进行中）、'error'（失败） 三种状态。
 
 ```html
-<wd-steps active="{{ 1 }}" align-center>
+<wd-steps :active="1" align-center>
   <wd-step title="绑定手机" status="error" />
   <wd-step title="重新绑定手机" />
   <wd-step title="步骤3" />

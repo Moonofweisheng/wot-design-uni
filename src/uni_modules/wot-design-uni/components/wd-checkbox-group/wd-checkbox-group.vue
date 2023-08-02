@@ -3,6 +3,11 @@
     <slot />
   </view>
 </template>
+<script lang="ts">
+export default {
+  behaviors: ['uni://form-field']
+}
+</script>
 
 <script lang="ts" setup>
 import { getCurrentInstance, provide, watch } from 'vue'
@@ -46,7 +51,7 @@ const resetChildren = debounce(function (values) {
   children &&
     children.forEach((child) => {
       // value 对应的节点直接选中
-      const isChecked = values.indexOf(child.value) > -1
+      const isChecked = values.indexOf(child.modelValue) > -1
       child.$.exposed.setChecked(isChecked)
     })
 }, 50)

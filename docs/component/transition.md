@@ -1,16 +1,13 @@
 <frame/>
 
-#  Transition 动画
-
+# Transition 动画
 
 ## 基本用法
 
 将元素包裹在 `wd-transition` 标签中，并设置 `show` 来切换显隐，设置 `name` 选择动画。
 
 ```html
-<wd-transition show="{{ show }}" name="fade">
-  内容
-</wd-transition>
+<wd-transition :show="show" name="fade">内容</wd-transition>
 ```
 
 ## 动画类型
@@ -18,9 +15,7 @@
 `wd-transition` 内置了常用的动画，如 `fade`、`slide`、`zoom-in` 等。
 
 ```html
-<wd-transition show="{{ show }}" name="slide">
-  内容
-</wd-transition>
+<wd-transition :show="show" name="slide">内容</wd-transition>
 ```
 
 ## 动画时间
@@ -37,8 +32,8 @@
 
 ```html
 <wd-transition
-  show="{{ customShow }}"
-  duration="{{ { enter: 700, leave: 1000 } }}"
+  :show="customShow"
+  :duration="{ enter: 700, leave: 1000 }"
   enter-class="custom-enter"
   enter-active-class="custom-enter-active"
   enter-to-class="custom-enter-to"
@@ -50,7 +45,10 @@
 ```
 
 ```scss
-.block {
+:deep(button) {
+  margin: 0 10px 10px 0;
+}
+:deep(.block) {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -60,14 +58,15 @@
   background: #0083ff;
 }
 
-.custom-enter-active, .custom-leave-active {
+:deep(.custom-enter-active),
+:deep(.custom-leave-active) {
   transition-property: background, transform;
 }
-.custom-enter {
+:deep(.custom-enter) {
   transform: translate3d(-100px, -100px, 0) rotate(-180deg);
   background: #ff0000;
 }
-.custom-leave-to {
+:deep(.custom-leave-to) {
   transform: translate3d(100px, 100px, 0) rotate(180deg);
   background: #ff0000;
 }
@@ -75,32 +74,32 @@
 
 ## Attributes
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-|-----|------|-----|-------|-------|---------|
-| show | 是否展示组件 | boolean | - | - | - |
-| name | 动画类型 | string | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | - | - |
-| duration | 动画执行时间 | number / boolean | - | 300(ms) | - |
-| custom-style | 自定义样式 | string | - | - | - |
+| 参数         | 说明         | 类型             | 可选值                                                                                                           | 默认值  | 最低版本 |
+| ------------ | ------------ | ---------------- | ---------------------------------------------------------------------------------------------------------------- | ------- | -------- |
+| show         | 是否展示组件 | boolean          | -                                                                                                                | -       | -        |
+| name         | 动画类型     | string           | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | -       | -        |
+| duration     | 动画执行时间 | number / boolean | -                                                                                                                | 300(ms) | -        |
+| custom-style | 自定义样式   | string           | -                                                                                                                | -       | -        |
 
 ## Events
 
-| 事件名称 | 说明 | 参数 | 最低版本 |
-|--------|------|-----|---------|
-| bind:beforeenter | 进入前触发 | - | - |
-| bind:enter | 进入时触发 | - | - |
-| bind:afterenter | 进入后触发 | - | - |
-| bind:beforeleave | 离开前触发 | - | - |
-| bind:leave | 离开时触发 | - | - |
-| bind:afterleave | 离开后触发| - | - |
+| 事件名称         | 说明       | 参数 | 最低版本 |
+| ---------------- | ---------- | ---- | -------- |
+| bind:beforeenter | 进入前触发 | -    | -        |
+| bind:enter       | 进入时触发 | -    | -        |
+| bind:afterenter  | 进入后触发 | -    | -        |
+| bind:beforeleave | 离开前触发 | -    | -        |
+| bind:leave       | 离开时触发 | -    | -        |
+| bind:afterleave  | 离开后触发 | -    | -        |
 
 ## 外部样式类
 
-| 类名 | 说明 | 最低版本 |
-|-----|------|--------|
-| custom-class | 根结点样式 | - |
-| enter-class | 定义进入过渡的开始状态，在元素被插入前生效，在插入的下一帧移除 | - |
-| enter-active-class | 定义动画执行期间的状态，在整个进入动画中应用；在元素被插入前生效，在动画结束后移除；可以定义 transition 相关属性 | - |
-| enter-to-class | 定义进入过渡的结束状态，在元素被插入的下一帧生效，在动画结束后移除 | - |
-| leave-class | 定义离开过渡的开始状态，在离开动画触发时立即生效，在下一帧移除 | - |
-| leave-active-class | 定义动画执行期间的状态，在整个离开动画中应用；在离开动画触发时立即生效，在动画结束后移除；可以定义 transition 相关属性 | - |
-| leave-to-class | 定义离开过渡的结束状态，在离开动画触发时的下一帧生效，在动画结束后移除 | - |
+| 类名               | 说明                                                                                                                   | 最低版本 |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------- |
+| custom-class       | 根结点样式                                                                                                             | -        |
+| enter-class        | 定义进入过渡的开始状态，在元素被插入前生效，在插入的下一帧移除                                                         | -        |
+| enter-active-class | 定义动画执行期间的状态，在整个进入动画中应用；在元素被插入前生效，在动画结束后移除；可以定义 transition 相关属性       | -        |
+| enter-to-class     | 定义进入过渡的结束状态，在元素被插入的下一帧生效，在动画结束后移除                                                     | -        |
+| leave-class        | 定义离开过渡的开始状态，在离开动画触发时立即生效，在下一帧移除                                                         | -        |
+| leave-active-class | 定义动画执行期间的状态，在整个离开动画中应用；在离开动画触发时立即生效，在动画结束后移除；可以定义 transition 相关属性 | -        |
+| leave-to-class     | 定义离开过渡的结束状态，在离开动画触发时的下一帧生效，在动画结束后移除                                                 | -        |
