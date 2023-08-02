@@ -4,7 +4,7 @@
       <view
         :class="`wd-tabs ${customClass} ${slidableNum < items.length ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`"
       >
-        <wd-sticky :offset-Top="offsetTop">
+        <wd-sticky :offset-top="offsetTop">
           <!--头部导航容器-->
           <view class="wd-tabs__nav wd-tabs__nav--sticky">
             <view class="wd-tabs__nav--wrap">
