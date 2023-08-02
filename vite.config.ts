@@ -4,7 +4,7 @@
  * @LastEditTime: 2023-03-29 18:44:48
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \fant-mini-plus\vite.config.ts
+ * @FilePath: \wot-design-uni\vite.config.ts
  * 记得注释
  */
 import { defineConfig } from 'vite'

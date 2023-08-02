@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-03-21 21:30:30
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \fant-mini-plus\src\shime-uni.d.ts
+ * @FilePath: \wot-design-uni\src\shime-uni.d.ts
  * 记得注释
  */
 export {}

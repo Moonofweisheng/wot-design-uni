@@ -4,7 +4,7 @@
  * @LastEditTime: 2023-03-21 21:07:02
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \fant-mini-plus\src\env.d.ts
+ * @FilePath: \wot-design-uni\src\env.d.ts
  * 记得注释
  */
 /// <reference types="vite/client" />
