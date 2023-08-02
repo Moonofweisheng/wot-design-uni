@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2022-11-01 17:12:57
- * @LastEditTime: 2023-08-02 17:59:15
+ * @LastEditTime: 2023-08-02 18:35:01
  * @LastEditors: weisheng
  * @Description: 组件发版问答
  * @FilePath: \wot-design-uni\build\release.js
@@ -52,7 +52,7 @@ inquirer
         break
     }
     // 生成日志
-    execSync('node ./changelog.js')
+    execSync('node build/changelog.js')
     // 更新版本
     const file = readFileSync(path.resolve(__dirname, '../package.json'))
     const packageJson = JSON.parse(file.toString())
