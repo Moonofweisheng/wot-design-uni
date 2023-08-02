@@ -12,7 +12,7 @@
 - - - wot-design-uni 
 ```
 
-下载地址：<a href="https://ext.dcloud.net.cn/plugin?id=11489"><span >wot-design-uni</span></a>
+下载地址：<a href="https://ext.dcloud.net.cn/plugin?id=13889"><span >wot-design-uni</span></a>
 
 
 ## 使用
