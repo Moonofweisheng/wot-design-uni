@@ -4,7 +4,7 @@
  * @LastEditTime: 2023-03-28 16:52:32
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \fant-mini-plus\.eslintrc.js
+ * @FilePath: \wot-design-uni\.eslintrc.js
  * 记得注释
  */
 module.exports = {
