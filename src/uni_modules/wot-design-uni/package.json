@@ -1,5 +1,6 @@
 {
   "id": "wot-design-uni",
+  "name": "wot-design-uni",
   "displayName": "wot-design-uni",
   "version": "0.0.0",
   "description": "一个参照Wot-design打造的uni-app组件库，基于Vue3+Typescript开发，提供50+高质量组件，覆盖大量移动端场景",

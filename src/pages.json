@@ -510,6 +510,16 @@
           },
           "navigationBarTitleText": "Form 表单组合"
         }
+      },
+      {
+        "path": "pages/collapse/Index",
+        "name": "collapse",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Collapse 折叠面板"
+        }
       }
     ],
     // "tabBar": {

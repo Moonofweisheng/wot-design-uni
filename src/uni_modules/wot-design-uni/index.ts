@@ -7,7 +7,6 @@
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\index.ts
  * 记得注释
  */
-import type { App } from 'vue'
 
 // Toast
 export { useToast } from './components/wd-toast'
@@ -19,9 +18,3 @@ export { dayjs } from './components/common/dayjs'
 export * as CommonUtil from './components/common/util'
 
 export * as clickOut from './components/common/clickoutside'
-
-const install = (Vue: App) => {}
-
-export default {
-  install
-}

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, provide, ref, watch } from 'vue'
+import { getCurrentInstance, provide, ref, watch } from 'vue'
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 20))
 
 interface Props {
@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
   bgColor: '#ffffff'
 })
 
-const children: any[] = []
+const children: any[] = [] // 子组件
 const { proxy } = getCurrentInstance() as any
 
 watch(
