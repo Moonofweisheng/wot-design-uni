@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-03 23:17:24
+ * @LastEditTime: 2023-08-04 00:28:16
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse\wd-collapse.vue
@@ -40,6 +40,7 @@
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, provide, ref, watch } from 'vue'
+import { deepClone } from '../common/util'
 
 interface Props {
   customClass?: string
@@ -85,7 +86,9 @@ watch(
     if (oldVal && !viewmore && children) {
       children.forEach((item) => {
         const condition = Array.isArray(newVal) ? newVal.indexOf(item.name) > -1 : newVal === item.name
-        if (item.isExpand === condition) return
+        debugger
+        if (item.$.exposed.isExpand.value === condition) return
+        item.$.exposed.setExpend(condition)
         item.$.exposed.scrollHeight('.wd-collapse-item__body')
       })
     }
@@ -146,9 +149,10 @@ function checkRepeat(currentList, checkValue, key) {
  * @param {Boolean} expanded 是否展开 false: 开->关(删除)；true: 关->开(添加)
  */
 function switchValue(name, expanded?) {
-  const { accordion, viewmore, modelValue } = props
-  if (!accordion && !viewmore && modelValue && Array.isArray(modelValue)) {
-    name = expanded ? modelValue.concat(name) : modelValue.filter((item) => item !== name)
+  const { accordion, viewmore } = props
+  const value = deepClone(props.modelValue)
+  if (!accordion && !viewmore && value && Array.isArray(value)) {
+    name = expanded ? value.concat(name) : value.filter((item) => item !== name)
   }
   emit('update:modelValue', name)
   emit('change', {

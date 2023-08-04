@@ -2,7 +2,7 @@
   <view>
     <demo-block title="基础用法" transparent>
       <wd-collapse v-model="value1" @change="handleChange1">
-        <wd-collapse-item title="标签1" name="name">这是一条简单的示例文字。</wd-collapse-item>
+        <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
         <wd-collapse-item title="标签2" name="item2">这是一条简单的示例文字。</wd-collapse-item>
         <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
       </wd-collapse>
@@ -54,23 +54,23 @@ const accordion = ref<boolean>(true)
 const name = ref<string>('item1')
 
 function handleChange1({ value }) {
-  console.log(value)
+  // console.log(value)
 }
 function handleChange2({ value }) {
-  console.log(value)
+  // console.log(value)
 }
 function handleChange3({ value }) {
-  console.log(value)
+  // console.log(value)
 }
 function handleChange4({ value }) {
-  console.log(value)
+  // console.log(value)
 }
 function handleChange5({ value }) {
-  console.log(value)
+  // console.log(value)
 }
 
 function handleChange6({ value }) {
-  console.log(value)
+  // console.log(value)
 }
 </script>
 <style lang="scss" scoped>

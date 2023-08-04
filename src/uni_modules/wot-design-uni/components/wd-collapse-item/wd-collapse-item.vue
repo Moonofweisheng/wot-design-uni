@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-03 14:33:08
+ * @LastEditTime: 2023-08-04 00:24:16
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse-item\wd-collapse-item.vue
@@ -51,16 +51,10 @@ const children = inject<any[]>('collapseChildren')
 const height = ref<string | number>('')
 const show = ref<boolean>(false)
 const firstItem = ref<boolean>(false)
+const isExpand = ref<boolean>(false)
+
 const transD = ref<string>('0.3s')
 const { proxy } = getCurrentInstance() as any
-
-const isExpand = computed(() => {
-  if (!parent.modelValue) {
-    console.warn('[wot-design] warning(wd-collapse-item): there is no v-model with Collapse.')
-    return true
-  }
-  return parent.accordion ? parent.modelValue === props.name : parent.modelValue.indexOf(props.name) > -1
-})
 
 watch(
   () => props.name,
@@ -84,10 +78,12 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-  show.value = isExpand.value
+  initState()
 })
 
 function initState() {
+  show.value = isExpand.value
+  isExpand.value = parent.accordion ? parent.modelValue === props.name : parent.modelValue.indexOf(name) > -1
   scrollHeight($body, true)
 }
 /**
@@ -96,7 +92,7 @@ function initState() {
  * @param {Boolean} firstRender 是否首次渲染
  */
 function scrollHeight(select, firstRender = false) {
-  getRect(select).then((rect: any) => {
+  getRect(select, false, proxy).then((rect: any) => {
     if (!rect) return
     const { height: rectHeight } = rect
     if (isExpand.value) {
@@ -130,16 +126,18 @@ function toggle() {
   if (parent.accordion) {
     children &&
       children.forEach((item) => {
+        item.$.exposed.setExpend(item.name === name)
         item.$.exposed.scrollHeight($body)
       })
   } else {
+    isExpand.value = !isExpand.value
     scrollHeight($body)
   }
   // 调用父组件方法 switchValue 当前选中的是什么，判断当前是否处于选中状态
   parent.$.exposed.switchValue(name, !isExpand.value)
 }
 // 动画结束时触发
-function onTransitionend(event) {
+function onTransitionend() {
   if (!isExpand.value) {
     show.value = false
   } else {
@@ -151,9 +149,15 @@ function setFirstItem(first: boolean) {
   firstItem.value = first
 }
 
+function setExpend(expanded: boolean) {
+  isExpand.value = expanded
+}
+
 defineExpose({
   scrollHeight,
-  setFirstItem
+  setFirstItem,
+  setExpend,
+  isExpand: isExpand
 })
 </script>
 
