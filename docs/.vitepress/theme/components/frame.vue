@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2022-12-16 18:03:21
- * @LastEditTime: 2023-07-28 10:48:01
+ * @LastEditTime: 2023-08-04 15:27:28
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\theme\components\frame.vue
@@ -20,7 +20,7 @@ let props = defineProps({
 const route = useRoute()
 const href = ref('')
 onBeforeMount(() => {
-  const baseUrl = process.env.NODE_ENV === 'production' ? location.origin + '/demo/#/' : 'http://localhost:5173/#/'
+  const baseUrl = process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/#/'
   const path = route.path
   const paths = path ? path.split('.')[0].split('/') : []
   if (paths.length) {
