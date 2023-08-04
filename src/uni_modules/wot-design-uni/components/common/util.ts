@@ -252,6 +252,23 @@ export function isArray(value: any) {
 }
 
 /**
+ * 是否函数方法
+ * @param {Object} value
+ */
+export function isFunction(value): boolean {
+  return typeof value === 'function'
+}
+
+/**
+ * 是否为promise
+ * @param value 函数
+ * @returns
+ */
+export function isPromise(value: any): value is Promise<any> {
+  return Boolean(value) && isObj(value) && isFunction(value.then) && isFunction(value.catch)
+}
+
+/**
  * 外部传入样式格式化为css可读样式
  * @param styles 外部传入样式
  * @returns

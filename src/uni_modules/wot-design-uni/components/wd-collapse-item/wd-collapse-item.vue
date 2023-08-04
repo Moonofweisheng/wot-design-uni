@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-04 00:24:16
+ * @LastEditTime: 2023-08-04 13:34:54
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse-item\wd-collapse-item.vue
@@ -9,17 +9,11 @@
 -->
 <template>
   <view :class="`wd-collapse-item ${disabled ? 'is-disabled' : ''} ${customClass}`">
-    <view :class="`wd-collapse-item__header  ${firstItem ? 'wd-collapse-item__header-first' : ''}`" @click="toggle">
+    <view :class="`wd-collapse-item__header  ${isFirst ? 'wd-collapse-item__header-first' : ''}`" @click="handleClick">
       <text class="wd-collapse-item__title">{{ title }}</text>
-      <wd-icon name="arrow-down" :class="`wd-collapse-item__arrow ${isExpand ? 'is-retract' : ''}`" />
+      <wd-icon name="arrow-down" :class="`wd-collapse-item__arrow ${expanded ? 'is-retract' : ''}`" />
     </view>
-    <view
-      class="wd-collapse-item__wrapper"
-      :style="`height: ${height}; position: ${show ? 'relative' : 'absolute'}; visibility: ${
-        show ? 'show' : 'hidden'
-      }; transition-duration: ${transD}`"
-      @transitionend="onTransitionend"
-    >
+    <view class="wd-collapse-item__wrapper" :style="contentStyle">
       <view class="wd-collapse-item__body">
         <slot />
       </view>
@@ -28,8 +22,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, inject, onBeforeMount, onMounted, ref, watch } from 'vue'
-import { getRect } from '../common/util'
+import { computed, getCurrentInstance, inject, onMounted, ref, watch } from 'vue'
+import { getRect, isArray, isDef, isPromise, objToStyle } from '../common/util'
+import { Ref } from 'vue'
 
 const $body = '.wd-collapse-item__body'
 
@@ -38,6 +33,9 @@ interface Props {
   title: string
   disabled: boolean
   name: string
+  // 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  beforeExpend?: Function
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -46,119 +44,152 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const parent = inject<any>('wdcollapse')
-const children = inject<any[]>('collapseChildren')
+// eslint-disable-next-line @typescript-eslint/ban-types
+const change: Function | undefined = inject('set-change') // 设置子组件是否显示
+// eslint-disable-next-line @typescript-eslint/ban-types
+const setChild: Function | undefined = inject('set-child') // 将子组件上下文放到父组件children中
 
 const height = ref<string | number>('')
-const show = ref<boolean>(false)
-const firstItem = ref<boolean>(false)
-const isExpand = ref<boolean>(false)
+const show = ref<boolean>(true)
+const firstItem = inject<Ref<string>>('firstItem')
+
+const expanded = ref<boolean>(false)
 
 const transD = ref<string>('0.3s')
 const { proxy } = getCurrentInstance() as any
 
+/**
+ * 容器样式，(动画)
+ */
+const isFirst = computed(() => {
+  return firstItem && firstItem.value === props.name
+})
+
+/**
+ * 容器样式，(动画)
+ */
+const contentStyle = computed(() => {
+  let style: Record<string, string> = {
+    height: expanded.value ? height.value + 'px' : '0px',
+    // position: show.value ? 'relative' : 'absolute',
+    // visibility: show.value ? 'show' : 'hidden',
+    'transition-duration': transD.value
+  }
+  return objToStyle(style)
+})
+
+// watch(
+//   () => props.name,
+//   (newVal) => {
+//     // const condition = parent && children && parent.$.exposed.checkRepeat(children, newVal, 'name')
+//     // // 比较数组中是否存在重复数据
+//     // if (condition > -1) {
+//     //   throw Error('Name attribute cannot be defined repeatedly')
+//     // }
+//   },
+//   {
+//     deep: true,
+//     immediate: true
+//   }
+// )
+
 watch(
-  () => props.name,
-  (newVal) => {
-    const condition = parent && children && parent.$.exposed.checkRepeat(children, newVal, 'name')
-    // 比较数组中是否存在重复数据
-    if (condition > -1) {
-      throw Error('Name attribute cannot be defined repeatedly')
+  () => parent.modelValue,
+  (newVal: string | string[]) => {
+    const name = props.name
+    if (isDef(newVal)) {
+      if (typeof newVal === 'string' && newVal === name) {
+        doResetHeight($body)
+        expanded.value = true
+      } else if (isArray(newVal) && newVal.indexOf(name as string) >= 0) {
+        doResetHeight($body)
+        expanded.value = true
+      } else {
+        expanded.value = false
+      }
+    } else {
+      expanded.value = false
     }
-  },
-  {
-    deep: true,
-    immediate: true
   }
 )
 
-onBeforeMount(() => {
-  if (parent) {
-    parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
-  }
-})
-
 onMounted(() => {
-  initState()
+  init()
 })
 
-function initState() {
-  show.value = isExpand.value
-  isExpand.value = parent.accordion ? parent.modelValue === props.name : parent.modelValue.indexOf(name) > -1
-  scrollHeight($body, true)
+/**
+ * 初始化将组件信息注入父组件
+ */
+function init() {
+  doResetHeight($body)
+  updateExpended()
+  let name = props.name
+  setChild && setChild({ name: name, expanded: expanded.value })
 }
+
+/**
+ * 更新展开状态
+ */
+function updateExpended() {
+  if (parent) {
+    let { modelValue } = parent
+    let name = props.name
+    if (modelValue) {
+      if (typeof modelValue === 'string' && modelValue === name) {
+        expanded.value = true
+      } else if (isArray(modelValue) && modelValue.indexOf(name) >= 0) {
+        expanded.value = true
+      }
+    }
+  }
+}
+
 /**
  * 控制折叠面板滚动
  * @param {String} select 选择器名称
  * @param {Boolean} firstRender 是否首次渲染
  */
-function scrollHeight(select, firstRender = false) {
+function doResetHeight(select) {
   getRect(select, false, proxy).then((rect: any) => {
     if (!rect) return
     const { height: rectHeight } = rect
-    if (isExpand.value) {
-      if (rectHeight === 0) {
-        height.value = 'auto'
-        show.value = true
-        transD.value = firstRender ? '0s' : '0.3s'
-        return
-      }
-
-      height.value = 0
-      show.value = true
-      transD.value = firstRender ? '0s' : '0.3s'
-      setTimeout(() => {
-        height.value = rectHeight + 'px'
-      }, 30)
-    } else {
-      height.value = rectHeight + 'px'
-      transD.value = firstRender ? '0s' : '0.3s'
-      setTimeout(() => {
-        height.value = 0
-      }, 30)
-    }
+    height.value = rectHeight
   })
 }
-// 点击触发
-function toggle() {
-  const { disabled, name } = props
-  if (disabled) return
-  // 如果是手风琴模式, 那么只展开一个，其余全部折叠
-  if (parent.accordion) {
-    children &&
-      children.forEach((item) => {
-        item.$.exposed.setExpend(item.name === name)
-        item.$.exposed.scrollHeight($body)
-      })
+
+// 点击子项
+function handleClick() {
+  if (props.disabled) return
+  let name = props.name
+  const nexexpanded = !expanded.value // 执行后展开状态
+  if (nexexpanded) {
+    if (props.beforeExpend) {
+      const response: any = props.beforeExpend(name)
+      if (!response) {
+        return
+      }
+      if (isPromise(response)) {
+        response.then(() => {
+          change && change({ name: name, expanded: !expanded.value })
+        })
+      } else {
+        change && change({ name: name, expanded: !expanded.value })
+      }
+    } else {
+      change && change({ name: name, expanded: !expanded.value })
+    }
   } else {
-    isExpand.value = !isExpand.value
-    scrollHeight($body)
+    change && change({ name: name, expanded: !expanded.value })
   }
-  // 调用父组件方法 switchValue 当前选中的是什么，判断当前是否处于选中状态
-  parent.$.exposed.switchValue(name, !isExpand.value)
 }
 // 动画结束时触发
 function onTransitionend() {
-  if (!isExpand.value) {
+  if (!expanded.value) {
     show.value = false
   } else {
     height.value = ''
   }
 }
-
-function setFirstItem(first: boolean) {
-  firstItem.value = first
-}
-
-function setExpend(expanded: boolean) {
-  isExpand.value = expanded
-}
-
-defineExpose({
-  scrollHeight,
-  setFirstItem,
-  setExpend,
-  isExpand: isExpand
-})
 </script>
 
 <style lang="scss" scoped>
