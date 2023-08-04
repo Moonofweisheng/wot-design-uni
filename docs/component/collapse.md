@@ -4,23 +4,14 @@
 
 ## 基本使用
 
-`value` 为绑定值，可以为 array 类型（普通折叠）、 string 类型（手风琴）和 boolean 类型（收起展开查看更多）。CollapseItem 的 `title` 和 `name` 为必填。`name` 用于标识该折叠栏。 ##由于微信小程序非双向绑定，因此需要事件手动赋值到当前页面##
+`v-model` 为绑定值，可以为 array 类型（普通折叠）、 string 类型（手风琴）和 boolean 类型（收起展开查看更多）。CollapseItem 的 `title` 和 `name` 为必填。`name` 用于标识该折叠栏。
 
 ```typescript
-page({
-  data: {
-    value: ['item1']
-  },
-  handleChange(event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+const value = ref<string[]>(['item1'])
 ```
 
 ```html
-<wd-collapse value="{{ value }}" bind:change="handleChange1">
+<wd-collapse v-model="value">
   <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item title="标签2" name="item2">这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
@@ -32,7 +23,7 @@ page({
 设置 `accordion` 属性。
 
 ```html
-<wd-collapse value="{{ value  }}" accordion>
+<wd-collapse v-model="value" accordion>
   <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item title="标签2" name="item2">这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
@@ -44,11 +35,86 @@ page({
 给 CollapseItem 设置 `disabled` 属性，禁用某个折叠栏。
 
 ```html
-<wd-collapse value="{{ value }}">
+<wd-collapse v-model="value">
   <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item title="标签2" name="item2" disabled>这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
 </wd-collapse>
+```
+
+## 异步更新
+
+通过给`wd-collapse-item`组件传入 `beforeExpend` 函数可以在打开面板前进行校验和处理，返回 true 表示允许打开，返回 false 表示禁止打开。支持返回 Promise 进行例如调用接口获取面板数据的操作。
+
+```html
+<wd-collapse v-model="value">
+  <wd-collapse-item
+    v-for="(item, index) in itemList"
+    :before-expend="beforeExpend"
+    :key="index"
+    :title="item.title"
+    :name="item.name"
+  >
+    {{ item.body }}
+  </wd-collapse-item>
+</wd-collapse>
+```
+
+```ts
+
+import { useToast } from '@/uni_modules/wot-design-uni'
+const toast = useToast()
+const value = ref<string[]>(['item1'])
+
+const itemList = ref<Record<string, any>[]>([
+  {
+    title: '标签1',
+    name: 'item1',
+    body: '如订单处于暂停状态，进入“我的订单”页面，找到要取消的订单，点击“取消订单”按钮；选择订单取消原因后，点击“下一步”提交申请即可。'
+  },
+  {
+    title: '标签1',
+    name: 'item2',
+    body: '一般情况下，买家只能向商户申请退款，商户确认可以退款后，可以通过接口或者商户平台向微信支付发起退款申请。'
+  },
+  {
+    title: '标签1',
+    name: 'item3',
+    body: '将收到的有质量问题的商品照片或者订单截图上传到微信公众账号（微信关注联华华商公众号），我们的工作人员会尽快帮您处理。'
+  },
+  {
+    title: '标签1',
+    name: 'item4',
+    body: '七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。'
+  },
+  {
+    title: '标签1',
+    name: 'item5',
+    body: 'Q1:优惠券使用详情？详情页面【我的】-【我的优惠】-【优惠券规则说明】。'
+  }
+])
+
+/**
+ * 折叠面板展开前回调方法
+ * @param e
+ */
+function beforeExpend(name) {
+  const index = itemList.value.findIndex((item) => {
+    return item.name === name
+  })
+  if (index > -1) {
+    itemList.value[index].body =
+      'Q1:七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。'
+  }
+
+  return new Promise((reslove, reject) => {
+    toast.loading('加载中')
+    setTimeout(() => {
+      toast.close()
+      reslove(true)
+    }, 500)
+  })
+}
 ```
 
 ## 查看更多
@@ -56,7 +122,7 @@ page({
 Collapse 可以单独使用，通过设置 `viewmore` 属性，将其转化为查看更多的折叠类型，同时可以设置 `line-num` 修改收起时的显示行数。这时候的 `value` 为 boolean 类型。
 
 ```html
-<wd-collapse viewmore value="{{ value }}">
+<wd-collapse viewmore v-model="value">
   这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
 </wd-collapse>
 ```
@@ -66,13 +132,13 @@ Collapse 可以单独使用，通过设置 `viewmore` 属性，将其转化为�
 Collapse 查看更多的模式下，可以使用插槽定义自己想要的折叠处样式，使用 `use-more-slot` 设置插槽开启。并且可以使用外部样式类 `custom-more-slot-class` 为自定义插槽设置样式。
 
 ```scss
-.more-slot {
+:deep(.more-slot) {
   color: red;
 }
 ```
 
 ```html
-<wd-collapse viewmore value="{{ value }}" bind:change="handleChange4" use-more-slot custom-more-slot-class="more-slot">
+<wd-collapse viewmore v-model="value" @change="handleChange4" use-more-slot custom-more-slot-class="more-slot">
   具名插槽：这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
   <template #more>
     <view>显示全部</view>
@@ -82,11 +148,18 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 
 ## CollapseItem Attributes
 
-| 参数     | 说明           | 类型    | 可选值 | 默认值 | 最低版本 |
-| -------- | -------------- | ------- | ------ | ------ | -------- |
-| name     | 折叠栏的标识符 | string  | -      | -      | -        |
-| title    | 折叠栏的标题   | string  | -      | -      | -        |
-| disabled | 禁用折叠栏     | boolean | -      | false  | -        |
+| 参数          | 说明                                                        | 类型     | 可选值 | 默认值 | 最低版本 |
+| ------------- | ----------------------------------------------------------- | -------- | ------ | ------ | -------- |
+| name          | 折叠栏的标识符                                              | string   | -      | -      | -        |
+| title         | 折叠栏的标题                                                | string   | -      | -      | -        |
+| disabled      | 禁用折叠栏                                                  | boolean  | -      | false  | -        |
+| before-expend | 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise | Function | -      | false  | -        |
+
+### `before-expend` 执行时会传递以下回调参数：
+
+| 参数名 | 说明       | 类型     |
+| ------ | ---------- | -------- |
+| name   | 唯一标识符 | `String` |
 
 ## Collapse Attributes
 
@@ -100,9 +173,9 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 
 ## Collapse Events
 
-| 事件名称    | 说明             | 参数        | 最低版本 |
-| ----------- | ---------------- | ----------- | -------- |
-| bind:change | 绑定值变化时触发 | `{ value }` | -        |
+| 事件名称 | 说明             | 参数        | 最低版本 |
+| -------- | ---------------- | ----------- | -------- |
+| change   | 绑定值变化时触发 | `{ value }` | -        |
 
 ## Collapse Slot
 
