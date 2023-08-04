@@ -1,36 +1,32 @@
 <!--
  * @Author: weisheng
  * @Date: 2022-12-16 18:03:21
- * @LastEditTime: 2023-08-04 15:27:28
+ * @LastEditTime: 2023-08-04 15:40:12
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\theme\components\frame.vue
  * 记得注释
 -->
 <template>
-  <iframe id="demo-modal" class="iframe demo-model" scrolling="auto" frameborder="0" :src="href"></iframe>
+  <iframe v-if="href" id="demo-modal" class="iframe demo-model" scrolling="auto" frameborder="0" :src="href"></iframe>
 </template>
 
 <script setup>
 import { useRoute } from 'vitepress';
-import {  onBeforeMount, ref } from 'vue'
-let props = defineProps({
-  url: String,
-})
+import { computed  } from 'vue'
+const baseUrl = process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/#/'
 const route = useRoute()
-const href = ref('')
-onBeforeMount(() => {
-  const baseUrl = process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/#/'
+const href = computed(() => {
   const path = route.path
   const paths = path ? path.split('.')[0].split('/') : []
+  let href = ''
   if (paths.length) {
-    href.value = baseUrl + `pages/${paths[paths.length - 1]}/Index`
+    href = baseUrl + `pages/${paths[paths.length - 1]}/Index`
   } else {
-    href.value = baseUrl
+    href = baseUrl
   }
+  return href
 })
-
-
 
 </script>
 <style scoped>
