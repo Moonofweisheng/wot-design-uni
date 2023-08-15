@@ -17,7 +17,7 @@
 html 文件代码：
 
 ```html
-  <wd-message-box id="wd-message-box" />
+  <wd-message-box />
   <wd-toast />
   <form @submit="formSubmit">
     <wd-cell-group custom-class="group" title="基础信息" border>

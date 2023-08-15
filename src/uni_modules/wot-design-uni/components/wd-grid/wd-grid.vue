@@ -5,6 +5,17 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'wd-grid',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { getCurrentInstance, provide, ref, watch } from 'vue'
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 20))
@@ -13,10 +24,10 @@ interface Props {
   customClass?: string
   clickable: boolean
   square: boolean
-  column: number
+  column?: number
   border: boolean
   bgColor: string
-  gutter: number
+  gutter?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -24,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
   clickable: false,
   square: false,
   border: false,
-  bgColor: '#ffffff'
+  bgColor: ''
 })
 
 const children: any[] = [] // 子组件
@@ -34,7 +45,7 @@ watch(
   () => props.column,
   (val, oldVal) => {
     if (val === oldVal) return
-    if (val <= 0) {
+    if (!val || val <= 0) {
       throw Error(
         'The number of columns attribute value is invalid. The attribute must be greater than 0 and it is not recommended to use a larger value attribute.'
       )

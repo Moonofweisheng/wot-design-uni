@@ -1,14 +1,14 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-07-31 21:27:54
+ * @LastEditTime: 2023-08-07 20:24:04
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\pages\noticeBar\Index.vue
  * 记得注释
 -->
 <template>
-  <view>
+  <page-wraper>
     <demo-block title="基本用法">
       <wd-notice-bar text="这是一条消息提示信息这是一条消息提示信息这是一条消息提示信息" prefix="warn-bold" />
     </demo-block>
@@ -57,7 +57,7 @@
         background-color="#f0f9eb"
       ></wd-notice-bar>
     </demo-block>
-  </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup></script>
 <style lang="scss" scoped>

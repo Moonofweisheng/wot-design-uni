@@ -1,6 +1,53 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(picker) {
+    @include e(field) {
+      background-color: $-dark-background2;
+      color: $-dark-color;
+    }
+
+    @include e(label) {
+      color: $-dark-color;
+    }
+    @include e(value) {
+      color: $-dark-color;
+    }
+
+    @include e(placeholder) {
+      color: $-dark-color-gray;
+    }
+  
+
+    @include when(border) {
+      .wd-picker__field {
+        @include halfPixelBorder('top', $-cell-padding, $-dark-border-color);
+      }
+    }
+
+    :deep(.wd-picker__arrow){
+      color: $-dark-color;
+    }
+
+    @include e(action) {
+      @include m(cancel) {
+        color: $-dark-color;
+      }
+    }
+
+    @include e(region) {
+      color: $-dark-color;
+  
+      @include when(active) {
+        background: $-picker-region-bg-active-color;
+        color: $-dark-color;
+      }
+    }
+
+  }
+}
+
 @include b(picker) {
   @include edeep(popup) {
     border-radius: 16px 16px 0px 0px;
@@ -73,7 +120,7 @@
       &::after {
         position: absolute;
         left: 0;
-        top: $-cell-wrapper-padding + 2px;
+        top: calc($-cell-wrapper-padding + 2px);
         content: "*";
         font-size: $-cell-required-size;
         line-height: 1.1;

@@ -1,48 +1,50 @@
 <template>
-  <view class="demo-body" @click="clickoutside">
-    <demo-block title="基本用法" transparent>
-      <wd-drop-menu>
-        <wd-drop-menu-item v-model="value1" :options="option1" @change="handleChange1" />
-        <wd-drop-menu-item v-model="value2" :options="option2" @change="handleChange2" />
-      </wd-drop-menu>
-    </demo-block>
-    <demo-block title="自定义菜单内容" transparent>
-      <wd-drop-menu>
-        <wd-drop-menu-item v-model="value3" :options="option1" @change="handleChange3" />
-        <wd-drop-menu-item ref="dropMenu" title="筛选">
-          <view>
-            <wd-cell title="标题文字" value="内容" />
-            <wd-cell title="标题文字" label="描述信息" value="内容" />
-            <view style="padding: 0 10px 20px; box-sizing: border-box">
-              <wd-button block size="large" @click="confirm">主要按钮</wd-button>
-            </view>
-          </view>
-        </wd-drop-menu-item>
-      </wd-drop-menu>
-    </demo-block>
-    <demo-block title="自定义菜单选项" transparent>
-      <view style="display: flex; background: #fff; text-align: center">
-        <wd-drop-menu style="flex: 1; min-width: 0">
-          <wd-drop-menu-item v-model="value4" :options="option1" @change="handleChange4" />
+  <page-wraper>
+    <view class="demo-body" @click="clickoutside">
+      <demo-block title="基本用法" transparent>
+        <wd-drop-menu>
+          <wd-drop-menu-item v-model="value1" :options="option1" @change="handleChange1" />
+          <wd-drop-menu-item v-model="value2" :options="option2" @change="handleChange2" />
         </wd-drop-menu>
-        <view style="flex: 1">
-          <wd-sort-button v-model="value5" title="上架时间" @change="handleChange5" />
+      </demo-block>
+      <demo-block title="自定义菜单内容" transparent>
+        <wd-drop-menu>
+          <wd-drop-menu-item v-model="value3" :options="option1" @change="handleChange3" />
+          <wd-drop-menu-item ref="dropMenu" title="筛选">
+            <view>
+              <wd-cell title="标题文字" value="内容" />
+              <wd-cell title="标题文字" label="描述信息" value="内容" />
+              <view style="padding: 0 10px 20px; box-sizing: border-box">
+                <wd-button block size="large" @click="confirm">主要按钮</wd-button>
+              </view>
+            </view>
+          </wd-drop-menu-item>
+        </wd-drop-menu>
+      </demo-block>
+      <demo-block title="自定义菜单选项" transparent>
+        <view class="custom-menu">
+          <wd-drop-menu style="flex: 1; min-width: 0">
+            <wd-drop-menu-item v-model="value4" :options="option1" @change="handleChange4" />
+          </wd-drop-menu>
+          <view style="flex: 1">
+            <wd-sort-button v-model="value5" title="上架时间" @change="handleChange5" />
+          </view>
         </view>
-      </view>
-    </demo-block>
-    <demo-block title="向上弹出" transparent>
-      <wd-drop-menu direction="up">
-        <wd-drop-menu-item v-model="value6" :options="option1" @change="handleChange6" />
-        <wd-drop-menu-item v-model="value7" :options="option2" @change="handleChange7" />
-      </wd-drop-menu>
-    </demo-block>
-    <demo-block title="禁用" transparent>
-      <wd-drop-menu direction="up">
-        <wd-drop-menu-item v-model="value8" disabled :options="option1" @change="handleChange8" />
-        <wd-drop-menu-item v-model="value9" :options="option2" @change="handleChange9" />
-      </wd-drop-menu>
-    </demo-block>
-  </view>
+      </demo-block>
+      <demo-block title="向上弹出" transparent>
+        <wd-drop-menu direction="up">
+          <wd-drop-menu-item v-model="value6" :options="option1" @change="handleChange6" />
+          <wd-drop-menu-item v-model="value7" :options="option2" @change="handleChange7" />
+        </wd-drop-menu>
+      </demo-block>
+      <demo-block title="禁用" transparent>
+        <wd-drop-menu direction="up">
+          <wd-drop-menu-item v-model="value8" disabled :options="option1" @change="handleChange8" />
+          <wd-drop-menu-item v-model="value9" :options="option2" @change="handleChange9" />
+        </wd-drop-menu>
+      </demo-block>
+    </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { clickOut } from '@/uni_modules/wot-design-uni'
@@ -60,12 +62,12 @@ const value6 = ref<number>(0)
 const value7 = ref<number>(0)
 const value8 = ref<number>(0)
 const value9 = ref<number>(0)
-const option1 = ref<Record<string, any>>([
+const option1 = ref<Record<string, any>[]>([
   { label: '全部商品', value: 0 },
   { label: '新款商品', value: 1, tip: '这是补充信息' },
   { label: '这是比较长的筛选条件这是比较长的筛选条件', value: 2 }
 ])
-const option2 = ref<Record<string, any>>([
+const option2 = ref<Record<string, any>[]>([
   { label: '综合', value: 0 },
   { label: '销量', value: 1 },
   { label: '上架时间', value: 2 }
@@ -108,7 +110,18 @@ function confirm() {
 }
 </script>
 <style lang="scss" scoped>
+.wot-theme-dark {
+  .custom-menu {
+    background: $-dark-background2;
+  }
+}
 .demo-body {
   height: 100vh;
+}
+
+.custom-menu {
+  display: flex;
+  background: #fff;
+  text-align: center;
 }
 </style>

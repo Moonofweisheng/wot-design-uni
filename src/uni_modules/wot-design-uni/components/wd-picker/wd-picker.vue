@@ -68,9 +68,11 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-picker',
   behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -87,7 +89,7 @@ interface Props {
   customValueClass?: string
   customViewClass?: string
   // 选择器左侧文案
-  label: string
+  label?: string
   // 选择器占位符
   placeholder: string
   // 禁用
@@ -98,21 +100,21 @@ interface Props {
   loadingColor: string
   /* popup */
   // 弹出层标题
-  title: string
+  title?: string
   // 取消按钮文案
   cancelButtonText: string
   // 确认按钮文案
   confirmButtonText: string
   // 是否必填
   required: boolean
-  size: string
-  labelWidth: string
+  size?: string
+  labelWidth?: string
   useDefaultSlot: boolean
   useLabelSlot: boolean
   error: boolean
   alignRight: boolean
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm: Function
+  beforeConfirm?: Function
   closeOnClickModal: boolean
   safeAreaInsetBottom: boolean
   ellipsis: boolean
@@ -129,15 +131,16 @@ interface Props {
   columns: Array<string | string[]>
   // 多级联动
   // eslint-disable-next-line @typescript-eslint/ban-types
-  columnChange: Function
+  columnChange?: Function
   // 外部展示格式化函数
   // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat: Function
+  displayFormat?: Function
   // 自定义层级
   zIndex: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
   customClass: '',
   customViewClass: '',
   // 选择器占位符

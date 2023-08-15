@@ -2,6 +2,16 @@
 @import './../common/abstracts/variable.scss';
 @import '../wd-modal/index.scss';
 
+.wot-theme-dark {
+  @include b(popup) {
+    background: $-dark-background2;
+
+    @include e(close) {
+      color: $-dark-color;
+    }
+  }
+}
+
 @include b(popup) {
   position: fixed;
   max-height: 100%;
@@ -16,26 +26,31 @@
     font-size: $-popup-close-size;
     transform: rotate(-45deg);
   }
+
   @include m(center) {
     left: 50%;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);
   }
+
   @include m(left) {
     top: 0;
     bottom: 0;
     left: 0;
   }
+
   @include m(right) {
     top: 0;
     right: 0;
     bottom: 0;
   }
+
   @include m(top) {
     top: 0;
     left: 0;
     right: 0;
   }
+
   @include m(bottom) {
     right: 0;
     bottom: 0;

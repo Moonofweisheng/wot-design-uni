@@ -1,14 +1,5 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2023-08-02 13:30:29
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-tooltip\wd-tooltip.vue
- * 记得注释
--->
 <template>
-  <view :class="`wd-tooltip ${customClass}`" id="tooltip" @click.stop="popover.noop">
+  <view :class="`wd-tooltip ${customClass}`" :style="customStyle" id="tooltip" @click.stop="popover.noop">
     <!-- 用于为渲染获取宽高的元素 -->
     <view class="wd-tooltip__pos wd-tooltip__hidden" id="pos">
       <view class="wd-tooltip__container custom-pop">
@@ -32,6 +23,18 @@
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'wd-tooltip',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue'
 import { usePopover } from '../mixins/usePopover'
@@ -52,13 +55,14 @@ type PlacementType =
   | 'right-end'
 
 interface Props {
-  customArrow?: string
-  customPop?: string
-  customClass?: string
+  customStyle: string
+  customArrow: string
+  customPop: string
+  customClass: string
   // 是否显示 popover 箭头
   visibleArrow: boolean
   // 显示内容
-  content: Record<string, any>[]
+  content?: Record<string, any>[] | string
   placement: PlacementType
   offset: number
   useContentSlot: boolean
@@ -67,6 +71,7 @@ interface Props {
   modelValue: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
+  customStyle: '',
   customClass: '',
   customPop: '',
   customArrow: '',

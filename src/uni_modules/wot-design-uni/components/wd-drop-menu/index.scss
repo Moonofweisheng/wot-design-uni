@@ -1,6 +1,21 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(drop-menu) {
+    color: $-dark-color;
+    @include e(list) {
+      background-color: $-dark-background2;
+    }
+
+    @include e(item) {
+      @include when(disabled) {
+        color: $-dark-color-gray;
+      }
+    }
+  }
+}
+
 @include b(drop-menu) {
   box-sizing: border-box;
   color: $-drop-menu-color;

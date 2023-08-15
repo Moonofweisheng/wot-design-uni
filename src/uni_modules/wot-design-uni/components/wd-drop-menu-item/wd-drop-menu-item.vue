@@ -15,7 +15,7 @@
       @beforeleave="handleClose"
       @afterleave="onPopupClose"
     >
-      <view v-if="options.length" style="background-color: #fff">
+      <view v-if="options.length">
         <view
           v-for="(item, index) in options"
           :key="index"
@@ -38,6 +38,16 @@
     </wd-popup>
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-drop-menu-item',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
@@ -49,13 +59,13 @@ interface Props {
   customTitle?: string
   customIcon?: string
   // 当前选中的value
-  modelValue: string | number
+  modelValue?: string | number
   // 可能是 array || String
   options: Array<Record<string, any>>
   useDropItemSlot: boolean
   disabled: boolean
   iconName: string
-  title: string
+  title?: string
   valueKey: string
   labelKey: string
   tipKey: string
@@ -78,7 +88,7 @@ const showWrapper = ref<boolean>(false)
 const showPop = ref<boolean>(false)
 const position = ref<string>('')
 const transName = ref<string>('')
-const zIndex = ref<string>('12')
+const zIndex = ref<number>(12)
 const displayTitle = ref<string>('')
 const modal = ref<boolean>(true)
 const closeOnClickModal = ref<boolean>(true)

@@ -51,6 +51,16 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
 import { debounce, getType, isEqual } from '../../common/util'
@@ -64,15 +74,15 @@ interface Props {
   maxDate: number
   firstDayOfWeek: number
   // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter: Function
-  maxRange: number
-  rangePrompt: string
+  formatter?: Function
+  maxRange?: number
+  rangePrompt?: string
   allowSameDay: boolean
   showPanelTitle: boolean
   defaultTime: Array<number>
   panelHeight: number
   // eslint-disable-next-line @typescript-eslint/ban-types
-  timeFilter: Function
+  timeFilter?: Function
   hideSecond: boolean
   // 是否展示picker（兼容支付宝和钉钉）
   showPicker: boolean

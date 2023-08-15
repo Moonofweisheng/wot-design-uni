@@ -1,23 +1,27 @@
 <template>
-  <wd-toast />
-  <demo-block title="基本用法">
-    <wd-button @click="showToast">toast</wd-button>
-    <wd-button @click="showLongToast">长文案</wd-button>
-  </demo-block>
-  <demo-block title="类型toast">
-    <wd-button @click="showSuccessToast">成功toast</wd-button>
-    <wd-button @click="showErrorToast">错误toast</wd-button>
-    <wd-button @click="showWarnToast">警告toast</wd-button>
-    <wd-button @click="showNormalToast">常规toast</wd-button>
-  </demo-block>
-  <demo-block title="提示位置">
-    <wd-button @click="showTopToast">顶部toast</wd-button>
-    <wd-button @click="showBottomToast">底部toast</wd-button>
-  </demo-block>
-  <demo-block title="Loading">
-    <wd-button @click="showLoadingToast">Loading加载</wd-button>
-    <wd-button @click="showLoadingToast2">ring类型loading</wd-button>
-  </demo-block>
+  <view>
+    <page-wraper>
+      <wd-toast />
+      <demo-block title="基本用法">
+        <wd-button @click="showToast">toast</wd-button>
+        <wd-button @click="showLongToast">长文案</wd-button>
+      </demo-block>
+      <demo-block title="类型toast">
+        <wd-button @click="showSuccessToast">成功toast</wd-button>
+        <wd-button @click="showErrorToast">错误toast</wd-button>
+        <wd-button @click="showWarnToast">警告toast</wd-button>
+        <wd-button @click="showNormalToast">常规toast</wd-button>
+      </demo-block>
+      <demo-block title="提示位置">
+        <wd-button @click="showTopToast">顶部toast</wd-button>
+        <wd-button @click="showBottomToast">底部toast</wd-button>
+      </demo-block>
+      <demo-block title="Loading">
+        <wd-button @click="showLoadingToast">Loading加载</wd-button>
+        <wd-button @click="showLoadingToast2">ring类型loading</wd-button>
+      </demo-block>
+    </page-wraper>
+  </view>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'

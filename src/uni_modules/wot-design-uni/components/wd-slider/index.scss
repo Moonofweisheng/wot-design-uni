@@ -1,11 +1,31 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
-@include b(slider){
+.wot-theme-dark {
+  @include b(slider) {
+    @include e(label-min, label-max) {
+      color: $-dark-color;
+    }
+
+    @include e(label) {
+      color: $-dark-color;
+      background-color: rgba($color: $-dark-background2, $alpha: 0.5);
+    }
+
+    @include m(disabled) {
+      @include me(label-min, label-max) {
+        color: $-dark-color-gray;
+      }
+    }
+  }
+}
+
+
+@include b(slider) {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  height: $-slider-handle-radius * 3;
+  height: calc($-slider-handle-radius * 3);
 
   @include e(label-min, label-max) {
     font-size: $-slider-fs;
@@ -13,22 +33,22 @@
   }
   @include e(label) {
     text-align: center;
-    width: $-slider-handle-radius * 2;
-    line-height: $-slider-handle-radius * 2;
+    width: calc($-slider-handle-radius * 2);
+    line-height: calc($-slider-handle-radius * 2);
     font-size: $-slider-fs;
     line-height: 1.2;
     color: $-slider-color;
     background-color: rgba($color: #fff, $alpha: 0.5);
     border-radius: 100%;
     position: absolute;
-    bottom: $-slider-handle-radius * 2 + 8px;
+    bottom: calc($-slider-handle-radius * 2 + 8px);
   }
   @include e(bar-wrapper) {
     flex: 1;
     position: relative;
     border-radius: calc($-slider-axie-height / 2);
     background-color: #e5e5e5;
-    margin: ($-slider-handle-radius - calc($-slider-axie-height / 2)) 0;
+    margin: calc($-slider-handle-radius - $-slider-axie-height / 2) 0;
   }
   @include e(bar) {
     position: relative;
@@ -37,23 +57,23 @@
     background: $-slider-line-color;
   }
   @include e(button-wrapper) {
-    width: $-slider-handle-radius * 2;
+    width: calc($-slider-handle-radius * 2);
     position: absolute;
     right: 0;
     top: 0;
     transform: translate3d(-50%, -50%, 0);
   }
-  @include e(has-label)  {
-    padding-top: $-slider-fs * 1.2 + 8px;
+  @include e(has-label) {
+    padding-top: calc($-slider-fs * 1.2 + 8px);
   }
   @include e(button) {
-    height: $-slider-handle-radius * 2;
-    width: $-slider-handle-radius * 2;
+    height: calc($-slider-handle-radius * 2);
+    width: calc($-slider-handle-radius * 2);
     background: $-slider-handle-bg;
     border-radius: 100%;
     border: 1px solid $-slider-axie-bg;
     box-sizing: border-box;
-    box-shadow: 0 2px 4px 0 rgba($color: #9B9B9B, $alpha: 0.5);
+    box-shadow: 0 2px 4px 0 rgba($color: #9b9b9b, $alpha: 0.5);
   }
   @include e(label-min) {
     margin-right: $-slider-handle-radius + 11px;

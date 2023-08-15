@@ -25,9 +25,11 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-input-number',
   behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -64,7 +66,8 @@ const props = withDefaults(defineProps<Props>(), {
   withoutInput: false,
   inputWidth: 36,
   allowNull: false,
-  placeholder: ''
+  placeholder: '',
+  name: ''
 })
 
 const minDisabled = ref<boolean>(false)
@@ -75,6 +78,7 @@ watch(
   () => props.modelValue,
   (newValue) => {
     inputValue.value = newValue
+    splitDisabled(newValue)
   },
   { immediate: true, deep: true }
 )
@@ -108,8 +112,8 @@ function updateBoundary() {
 
 function splitDisabled(value) {
   const { disabled, min, max, step } = props
-  ;(minDisabled.value = disabled || value <= min || changeStep(value, -step) < min),
-    (maxDisabled.value = disabled || value >= max || changeStep(value, step) > max)
+  minDisabled.value = disabled || value <= min || changeStep(value, -step) < min
+  maxDisabled.value = disabled || value >= max || changeStep(value, step) > max
 }
 
 function toPrecision(value: number) {

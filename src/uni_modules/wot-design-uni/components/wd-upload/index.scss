@@ -1,6 +1,20 @@
 @import "../common/abstracts/variable.scss";
 @import "../common/abstracts/_mixin.scss";
 
+.wot-theme-dark {
+  @include b(upload) {
+    @include e(evoke) {
+      background-color: $-dark-background4;
+      color: $-dark-color3;
+
+      @include when(disabled) {
+        color: $-dark-color-gray;
+      }
+    }
+  }
+
+}
+
 @include b(upload) {
   position: relative;
   display: flex;
@@ -70,14 +84,14 @@
 
   @include edeep(close) {
     position: absolute;
-    right: - calc($-upload-close-icon-size / 2);
-    top: - calc($-upload-close-icon-size / 2);
+    right: calc($-upload-close-icon-size / 2 * -1);
+    top: calc($-upload-close-icon-size / 2 * -1);
     font-size: $-upload-close-icon-size;
     z-index: 1;
     color: $-upload-close-icon-color;
     width: $-upload-close-icon-size;
     height: $-upload-close-icon-size;
-    
+
     &::after {
       position: absolute;
       content: "";

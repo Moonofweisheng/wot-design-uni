@@ -1,10 +1,10 @@
 <template>
-  <view>
+  <page-wraper>
     <demo-block title="基本用法">
       <wd-input type="text" v-model="value" placeholder="请输入用户名" @change="handleChange" @blur="handleBlur" />
     </demo-block>
     <demo-block title="禁用状态">
-      <wd-input type="text" v-model="value1" disabled="true" />
+      <wd-input type="text" v-model="value1" disabled />
     </demo-block>
     <demo-block title="只读状态">
       <wd-input type="text" v-model="value2" readonly />
@@ -22,11 +22,11 @@
       <wd-input type="text" v-model="value6" prefix-icon="dong" suffix-icon="list" clearable @change="handleChange3" />
     </demo-block>
     <demo-block title="字数限制">
-      <wd-input type="text" v-model="value7" maxlength="20" show-word-limit />
+      <wd-input type="text" v-model="value7" :maxlength="20" show-word-limit />
     </demo-block>
     <demo-block title="取消底部边框，自定义使用">
       <wd-input v-model="value8" no-border placeholder="请输入价格" custom-style="display: inline-block; width: 70px; vertical-align: middle;" />
-      <text style="display: inline-block; vertical-align: middle; font-size: 14px">元</text>
+      <text class="custom-txt" style="display: inline-block; vertical-align: middle; font-size: 14px">元</text>
     </demo-block>
     <demo-block title="textarea" transparent>
       <wd-input type="textarea" v-model="value9" placeholder="请填写评价" @blur="handleBlur" />
@@ -35,7 +35,7 @@
       <wd-input type="textarea" v-model="value10" :maxlength="120" clearable show-word-limit />
     </demo-block>
     <demo-block title="textarea 高度自适应">
-      <wd-input type="textarea" v-model="value11" auto-height="true" clearable></wd-input>
+      <wd-input type="textarea" v-model="value11" auto-height clearable></wd-input>
     </demo-block>
     <demo-block title="cell 类型" transparent>
       <wd-cell-group border>
@@ -53,7 +53,7 @@
         <wd-input type="text" label="大尺寸" size="large" v-model="value19" placeholder="请输入..." />
       </wd-cell-group>
     </demo-block>
-  </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
@@ -96,6 +96,11 @@ function handleBlur(event) {
 }
 </script>
 <style lang="scss" scoped>
+.wot-theme-dark {
+  .custom-txt {
+    color: $-dark-color;
+  }
+}
 .flex {
   display: flex;
   justify-content: space-between;

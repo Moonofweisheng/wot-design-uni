@@ -16,7 +16,10 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-popup',
   options: {
+    virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -27,7 +30,7 @@ import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj, requestAnimationFrame } from '../common/util'
 
 interface Props {
-  transition: string
+  transition?: string
   closable: boolean
   position: string
   closeOnClickModal: boolean
@@ -35,10 +38,10 @@ interface Props {
   modal: boolean
   zIndex: number
   hideWhenClose: boolean
-  modalStyle: string
+  modalStyle?: string
   safeAreaInsetBottom: boolean
   modelValue: boolean
-  customStyle: string
+  customStyle?: string
   lazyRender: boolean
   customClass?: string
 }

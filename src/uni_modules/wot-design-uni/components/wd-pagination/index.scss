@@ -1,6 +1,15 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(pager) {
+    background-color: $-dark-background;
+    @include e(message) {
+      color: $-dark-color3;
+    }
+  }
+}
+
 @include b(pager) {
   user-select: none;
   background-color: #fff;

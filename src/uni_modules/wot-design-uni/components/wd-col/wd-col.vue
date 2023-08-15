@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2023-06-13 12:42:43
+ * @LastEditTime: 2023-08-15 13:06:34
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-col\wd-col.vue
@@ -13,6 +13,16 @@
     <slot />
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-col',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { inject, provide, watch } from 'vue'
@@ -63,23 +73,5 @@ provide('setGutter', setGutter) // 将设置子项方法导出
 </script>
 
 <style lang="scss" scoped>
-@import '../common/abstracts/variable';
-@import '../common/abstracts/mixin';
-
-$i: 1;
-
-@include b(col) {
-  float: left;
-  box-sizing: border-box;
-}
-
-@while $i <= 24 {
-  .wd-col__#{$i} {
-    width: calc(100% / 24 * $i);
-  }
-  .wd-col__offset-#{$i} {
-    margin-left: calc(100% / 24 * $i);
-  }
-  $i: $i + 1;
-}
+@import './index.scss';
 </style>

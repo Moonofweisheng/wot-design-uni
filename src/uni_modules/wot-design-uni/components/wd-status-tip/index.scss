@@ -1,6 +1,15 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+.wot-theme-dark {
+  background-color: $-dark-background2;
+  @include b(status-tip) {
+    @include e(text) {
+      color: $-dark-color3;
+    }
+  }
+}
+
 @include b(status-tip) {
   padding: $-statustip-padding;
   width: 100%;

@@ -32,8 +32,10 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-resize',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }

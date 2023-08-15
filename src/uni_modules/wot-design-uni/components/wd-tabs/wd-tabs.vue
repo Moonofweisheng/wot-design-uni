@@ -120,6 +120,16 @@
     </view>
   </template>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-tabs',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 <script lang="ts" setup>
 import { getCurrentInstance, onMounted, provide, ref, watch } from 'vue'
 import { checkNumRange, debounce, getRect, getType } from '../common/util'

@@ -1,17 +1,19 @@
 <template>
-  <view class="container">
-    <view v-for="index in num" :key="index" class="list-item">
-      <image src="https://img10.360buyimg.com/jmadvertisement/jfs/t1/70325/36/14954/36690/5dcd3e3bEee5006e0/aed1ccf6d5ffc764.png" />
-      <view class="right">这是一条测试{{ index + 1 }}</view>
+  <page-wraper>
+    <view class="container">
+      <view v-for="index in num" :key="index" class="list-item">
+        <image src="https://img10.360buyimg.com/jmadvertisement/jfs/t1/70325/36/14954/36690/5dcd3e3bEee5006e0/aed1ccf6d5ffc764.png" />
+        <view class="right">这是一条测试{{ index + 1 }}</view>
+      </view>
+      <wd-loadmore :state="state" @reload="loadmore" />
     </view>
-    <wd-loadmore :state="state" @reload="loadmore" />
-  </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { onLoad, onReachBottom } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 
-const state = ref<string>('loading')
+const state = ref<any>('loading')
 const num = ref<number>(0)
 const max = ref<number>(60)
 
@@ -37,6 +39,16 @@ function loadmore() {
 }
 </script>
 <style lang="scss" scoped>
+.wot-theme-dark {
+  .list-item {
+    background: $-dark-background2;
+    color: $-dark-color;
+  }
+  .list-item:after {
+    background: $-dark-border-color;
+  }
+}
+
 .list-item {
   position: relative;
   display: flex;

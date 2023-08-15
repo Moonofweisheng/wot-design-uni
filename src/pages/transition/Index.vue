@@ -1,45 +1,47 @@
 <template>
   <view>
-    <demo-block title="Fade 动画">
-      <wd-button @click="fade">fade</wd-button>
-      <wd-button @click="fadeUp">fade-up</wd-button>
-      <wd-button @click="fadeDown">fade-down</wd-button>
-      <wd-button @click="fadeLeft">fade-left</wd-button>
-      <wd-button @click="fadeRight">fade-right</wd-button>
-    </demo-block>
-    <demo-block title="Slide 动画">
-      <wd-button @click="slideUp">slide-up</wd-button>
-      <wd-button @click="slideDown">slide-down</wd-button>
-      <wd-button @click="slideLeft">slide-left</wd-button>
-      <wd-button @click="slideRight">slide-right</wd-button>
-    </demo-block>
-    <demo-block title="Zoom 动画">
-      <wd-button @click="zoomIn">zoom-in</wd-button>
-    </demo-block>
-    <demo-block title="自定义动画">
-      <wd-button @click="custom">custom</wd-button>
-    </demo-block>
+    <page-wraper>
+      <demo-block title="Fade 动画">
+        <wd-button @click="fade">fade</wd-button>
+        <wd-button @click="fadeUp">fade-up</wd-button>
+        <wd-button @click="fadeDown">fade-down</wd-button>
+        <wd-button @click="fadeLeft">fade-left</wd-button>
+        <wd-button @click="fadeRight">fade-right</wd-button>
+      </demo-block>
+      <demo-block title="Slide 动画">
+        <wd-button @click="slideUp">slide-up</wd-button>
+        <wd-button @click="slideDown">slide-down</wd-button>
+        <wd-button @click="slideLeft">slide-left</wd-button>
+        <wd-button @click="slideRight">slide-right</wd-button>
+      </demo-block>
+      <demo-block title="Zoom 动画">
+        <wd-button @click="zoomIn">zoom-in</wd-button>
+      </demo-block>
+      <demo-block title="自定义动画">
+        <wd-button @click="custom">custom</wd-button>
+      </demo-block>
 
-    <wd-transition :show="show" :name="name" custom-class="block" />
+      <wd-transition :show="show" :name="name" custom-class="block" />
 
-    <wd-transition
-      :show="customShow"
-      :duration="{ enter: 700, leave: 1000 }"
-      enter-class="custom-enter"
-      enter-active-class="custom-enter-active"
-      enter-to-class="custom-enter-to"
-      leave-class="custom-leave"
-      leave-active-class="custom-leave-active"
-      leave-to-class="custom-leave-to"
-      custom-class="block"
-    />
+      <wd-transition
+        :show="customShow"
+        :duration="{ enter: 700, leave: 1000 }"
+        enter-class="custom-enter"
+        enter-active-class="custom-enter-active"
+        enter-to-class="custom-enter-to"
+        leave-class="custom-leave"
+        leave-active-class="custom-leave-active"
+        leave-to-class="custom-leave-to"
+        custom-class="block"
+      />
+    </page-wraper>
   </view>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
 
 const show = ref<boolean>(false)
-const name = ref<string>('')
+const name = ref<any>('')
 const customShow = ref<boolean>(false)
 function fade() {
   transition('fade')

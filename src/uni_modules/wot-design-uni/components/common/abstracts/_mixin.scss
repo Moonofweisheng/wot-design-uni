@@ -213,28 +213,28 @@
     border-right: $size solid transparent;
     border-top: $size solid $bg;
     transform: translateX(-50%);
-    bottom: -$size;
+    bottom: calc(-1 * $size)
   }
   @include e(arrow-up) {
     border-left: $size solid transparent;
     border-right: $size solid transparent;
     border-bottom: $size solid $bg;
     transform: translateX(-50%);
-    top: -$size;
+    top: calc(-1 * $size)
   }
   @include e(arrow-left) {
     border-top: $size solid transparent;
     border-bottom: $size solid transparent;
     border-right: $size solid $bg;
     transform: translateY(-50%);
-    left: -$size;
+    left: calc(-1 * $size)
   }
   @include e(arrow-right) {
     border-top: $size solid transparent;
     border-bottom: $size solid transparent;
     border-left: $size solid $bg;
     transform: translateY(-50%);
-    right: -$size;
+    right: calc(-1 * $size)
   }
 }
 
@@ -263,7 +263,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      bottom: - calc($size / 2);
+      bottom: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
@@ -276,7 +276,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      top: - calc($size / 2);
+      top: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
@@ -289,7 +289,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      left: - calc($size / 2);
+      left: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
@@ -302,7 +302,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
-      right: - calc($size / 2);
+      right: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }

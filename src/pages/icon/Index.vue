@@ -1,9 +1,13 @@
 <template>
-  <view class="icon-list">
-    <view v-for="(icon, index) in icons" :key="index" class="icon-item">
-      <view><wd-icon :name="icon" size="22px" /></view>
-      <view class="icon-item-name">{{ icon }}</view>
-    </view>
+  <view>
+    <page-wraper>
+      <view class="icon-list">
+        <view v-for="(icon, index) in icons" :key="index" class="icon-item">
+          <view><wd-icon :name="icon" size="22px" custom-class="icon-item-class" /></view>
+          <view class="icon-item-name">{{ icon }}</view>
+        </view>
+      </view>
+    </page-wraper>
   </view>
 </template>
 <script setup lang="ts">
@@ -75,9 +79,22 @@ const icons = ref([
 ])
 </script>
 <style lang="scss" scoped>
+.wot-theme-dark {
+  .icon-list {
+    background: $-dark-background2;
+    :deep(.icon-item-class) {
+      color: $-dark-color;
+    }
+  }
+  .icon-item-name {
+    color: $-dark-color3;
+  }
+}
+
 .icon-list {
+  box-sizing: border-box;
   display: flex;
-  margin: 15px;
+  padding: 15px;
   flex-wrap: wrap;
   background: #fff;
 }

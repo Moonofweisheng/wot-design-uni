@@ -65,6 +65,17 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'wd-img-cropper',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { computed, getCurrentInstance, ref, watch } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
@@ -125,7 +136,9 @@ const props = withDefaults(defineProps<Props>(), {
   // 图片源路径
   imgSrc: '',
   // 最大缩放
-  maxScale: 3
+  maxScale: 3,
+  imgWidth: '',
+  imgHeight: ''
 })
 
 // 旋转角度

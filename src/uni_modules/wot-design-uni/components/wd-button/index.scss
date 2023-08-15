@@ -82,6 +82,67 @@
     }
   }
 }
+
+.wot-theme-dark {
+  @include b(button) {
+    @include when(info) {
+      @include button-type-style($-dark-color,
+        $-dark-background4,
+        $-dark-background5,
+        $-dark-background7,
+        $-dark-color3);
+    }
+
+    @include when(plain) {
+
+      @include when(info) {
+        @include button-plain-style($-dark-color, $-dark-background5, $-dark-color, $-dark-color-gray);
+      }
+
+      @include when(primary) {
+
+        &.wd-button--active {
+          background: transparent;
+          color: themeColor($-color-theme, "light", #9DB9F6);
+        }
+
+        @include when(disabled) {
+          background-color: transparent;
+
+          &.wd-button--active {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    @include when(text) {
+      @include when(disabled) {
+        color: $-dark-color-gray;
+        background: transparent;
+      }
+    }
+
+    @include when(icon) {
+      color: $-dark-color;
+
+      &.wd-button--active {
+        background: $-dark-background4;
+      }
+
+      @include when(disabled) {
+        color: $-dark-color-gray;
+        background: transparent;
+
+        &.wd-button--active {
+          background: transparent;
+        }
+      }
+
+    }
+  }
+}
+
 @include b(button) {
   position: relative;
   display: inline-flex;
@@ -204,7 +265,7 @@
     font-size: $-button-medium-fs;
 
     &::after {
-      border-radius: $-button-medium-radius * 2;
+      border-radius: calc($-button-medium-radius * 2);
     }
     @include when(primary) {
       box-shadow: $-button-medium-box-shadow-size $-button-primary-box-shadow-color;
@@ -256,7 +317,7 @@
     font-size: $-button-large-fs;
 
     &::after {
-      border-radius: $-button-large-radius * 2;
+      border-radius: calc($-button-large-radius * 2);
     }
     &:not(.is-plain) {
       @include when(primary) {

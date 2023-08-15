@@ -24,6 +24,16 @@
     </view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-swipe-action',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 <script lang="ts" setup>
 import { getCurrentInstance, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'

@@ -6,8 +6,6 @@
       v-model="pickerValue"
       :columns="columns"
       :columns-height="columnsHeight"
-      :cancel-button-text="cancelButtonText"
-      :confirm-button-text="confirmButtonText"
       :columnChange="columnChange"
       :loading="loading"
       :loading-color="loadingColor"
@@ -20,7 +18,11 @@
 </template>
 <script lang="ts">
 export default {
-  behaviors: ['uni://form-field']
+  name: 'wd-datetime-picker-view',
+  behaviors: ['uni://form-field'],
+  virtualHost: true,
+  addGlobalClass: true,
+  styleIsolation: 'shared'
 }
 </script>
 
@@ -61,7 +63,7 @@ type DateTimeType = 'date' | 'year-month' | 'time' | 'datetime'
 interface Props {
   customClass?: string
   // 选中项，当 type 为 time 时，类型为字符串，否则为 Date
-  modelValue: string | Date
+  modelValue: string | number | Date
   // PickerView的Props 开始
   // 是否展示picker（兼容支付宝和钉钉）
   showPicker: boolean
@@ -74,22 +76,18 @@ interface Props {
   valueKey: string
   // 选项对象中，展示的文本对应的 key
   labelKey: string
-  // 取消按钮文案
-  cancelButtonText: string
-  // 确认按钮文案
-  confirmButtonText: string
   // PickerView的Props 结束
   // 时间选择器的类型
   type: DateTimeType
   // 自定义过滤选项的函数，返回列的选项数组
   // eslint-disable-next-line @typescript-eslint/ban-types
-  filter: Function
+  filter?: Function
   // 自定义弹出层选项文案的格式化函数，返回一个字符串
   // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter: Function
+  formatter?: Function
   // 自定义列筛选条件
   // eslint-disable-next-line @typescript-eslint/ban-types
-  columnFormatter: Function
+  columnFormatter?: Function
   // 最小日期 20(x-10)年1月1日
   minDate: number
   // 最大日期 20(x+10)年1月1日
@@ -124,7 +122,8 @@ const props = withDefaults(defineProps<Props>(), {
   minHour: 0,
   maxHour: 23,
   minMinute: 0,
-  maxMinute: 59
+  maxMinute: 59,
+  startSymbol: false
 })
 
 // pickerview
@@ -134,7 +133,7 @@ const innerValue = ref<null | number>(null)
 // 传递给pickerView的columns的数据
 const columns = ref<Array<string | string[]>>([])
 // 传递给pickerView的value的数据
-const pickerValue = ref<string | number | boolean | Array<string | number | boolean> | null>(null)
+const pickerValue = ref<string | number | boolean | Array<string | number | boolean>>([])
 // 自定义组件是否已经调用created hook
 const created = ref<boolean>(false)
 

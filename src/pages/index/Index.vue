@@ -1,36 +1,38 @@
 <template>
-  <!--index.jxml-->
-  <view class="page">
-    <view class="page__hd">
-      <view class="page__title">
-        <view class="logo"></view>
-        <view class="inline">Wot Design Uni</view>
+  <page-wraper>
+    <view class="page">
+      <view class="page__hd">
+        <view class="page__title">
+          <view class="logo"></view>
+          <view class="inline">Wot Design Uni</view>
+        </view>
+        <view class="page__desc">
+          Wot Design Uni 是移动端 Vue 组件库 Wot Design 的 uni-app 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建 uni-app
+          应用。
+        </view>
       </view>
-      <view class="page__desc">
-        Wot Design Uni 是移动端 Vue 组件库 Wot Design 的 uni-app 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建 uni-app 应用。
-      </view>
-    </view>
-    <view class="page__bd">
-      <block v-for="(item, index) in list" :key="index">
-        <view class="kind-list__item">
-          <view :id="item.id" class="wd-flex kind-list__item-hd" @click="kindToggle(item.id)">
-            <view class="wd-flex__item title">{{ item.name }}</view>
-            <image class="kind-list__img" :src="item.icon"></image>
-          </view>
-          <view :class="['kind-list__item-bd', item.open ? 'kind-list__item-bd_show' : '']">
-            <view :class="['wd-cells', item.open ? 'wd-cells_show' : '']">
-              <block v-for="(page, j) in item.pages" :key="j">
-                <navigator :url="`/pages/${page.id}/Index`" class="wd-cell wd-flex wd-cell_access">
-                  <view class="wd-flex__item page-name">{{ page.name }}</view>
-                  <view class="wd-cell__ft wd-tool-right-line-angle"></view>
-                </navigator>
-              </block>
+      <view class="page__bd">
+        <block v-for="(item, index) in list" :key="index">
+          <view class="kind-list__item">
+            <view :id="item.id" class="wd-flex kind-list__item-hd" @click="kindToggle(item.id)">
+              <view class="wd-flex__item title">{{ item.name }}</view>
+              <image class="kind-list__img" :src="item.icon"></image>
+            </view>
+            <view :class="['kind-list__item-bd', item.open ? 'kind-list__item-bd_show' : '']">
+              <view :class="['wd-cells', item.open ? 'wd-cells_show' : '']">
+                <block v-for="(page, j) in item.pages" :key="j">
+                  <navigator :url="`/pages/${page.id}/Index`" class="wd-cell wd-flex wd-cell_access">
+                    <view class="wd-flex__item page-name">{{ page.name }}</view>
+                    <view class="wd-cell__ft wd-tool-right-line-angle"></view>
+                  </navigator>
+                </block>
+              </view>
             </view>
           </view>
-        </view>
-      </block>
+        </block>
+      </view>
     </view>
-  </view>
+  </page-wraper>
 </template>
 
 <script lang="ts" setup>
@@ -55,6 +57,10 @@ const list = ref([
       {
         id: 'layout',
         name: 'Layout 布局'
+      },
+      {
+        id: 'configProvider',
+        name: 'configProvider 全局配置'
       },
       {
         id: 'popup',
@@ -298,6 +304,21 @@ function kindToggle(id: string) {
 </script>
 
 <style lang="scss" scoped>
+.wot-theme-dark {
+  .page__hd,
+  .kind-list__item {
+    background: $-dark-background2;
+  }
+  .title {
+    color: $-dark-color;
+  }
+  .page-name {
+    color: $-dark-color3;
+  }
+  .kind-list__img {
+    filter: invert(100%);
+  }
+}
 .page__hd {
   padding: 40px 40px 30px;
   margin-bottom: 30px;

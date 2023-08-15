@@ -5,9 +5,16 @@
 </template>
 <script lang="ts">
 export default {
-  behaviors: ['uni://form-field']
+  name: 'wd-radio-group',
+  behaviors: ['uni://form-field'],
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
 }
 </script>
+
 <script lang="ts" setup>
 import { getCurrentInstance, provide, watch } from 'vue'
 

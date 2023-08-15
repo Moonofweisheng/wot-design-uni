@@ -1,6 +1,47 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
-@import '../wd-action-sheet/index.scss';
+
+.wot-theme-dark {
+  @include b(col-picker) {
+
+    @include when(border) {
+      .wd-col-picker__cell {
+        @include halfPixelBorder('top', $-cell-padding, $-dark-border-color);
+      }
+    }
+
+    @include e(cell) {
+      background-color: $-dark-background2;
+      color: $-dark-color;
+
+      @include when(disabled) {
+        .wd-col-picker__value {
+          color: $-dark-color3;
+        }
+      }
+    }
+
+    @include e(value) {
+      color: $-dark-color;
+  
+      @include m(placeholder) {
+        color: $-dark-color-gray;
+      }
+    }
+
+    :deep(.wd-col-picker__arrow) {
+      color: $-dark-color;
+    }
+
+    @include e(list) {
+      color: $-dark-color;
+    }
+
+    @include e(selected) {
+      color: $-dark-color;
+    }
+  }
+}
 
 @include b(col-picker) {
   @include when(border) {
@@ -60,7 +101,7 @@
       &::after {
         position: absolute;
         left: 0;
-        top: $-cell-wrapper-padding + 2px;
+        top: calc($-cell-wrapper-padding + 2px);
         content: '*';
         font-size: $-cell-required-size;
         line-height: 1.1;

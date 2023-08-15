@@ -100,8 +100,10 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-calendar',
   behaviors: ['uni://form-field'],
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -189,48 +191,48 @@ interface Props {
   customLabelClass?: string
   customValueClass?: string
   modelValue: null | number | Array<number>
-  type: CalendarType
-  minDate: number
-  maxDate: number
-  firstDayOfWeek: number
+  type?: CalendarType
+  minDate?: number
+  maxDate?: number
+  firstDayOfWeek?: number
   // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter: Function
-  maxRange: number
-  rangePrompt: string
-  allowSameDay: boolean
-  defaultTime: string | Array<string>
+  formatter?: Function
+  maxRange?: number
+  rangePrompt?: string
+  allowSameDay?: boolean
+  defaultTime?: string | Array<string>
   // eslint-disable-next-line @typescript-eslint/ban-types
-  timeFilter: Function
-  hideSecond: boolean
-  label: string
-  labelWidth: string
-  useLabelSlot: boolean
-  useDefaultSlot: boolean
-  disabled: boolean
-  readonly: boolean
-  placeholder: string
-  title: string
-  alignRight: boolean
-  error: boolean
-  required: boolean
-  size: string
-  center: boolean
-  closeOnClickModal: boolean
-  zIndex: number
-  showConfirm: boolean
-  confirmText: string
+  timeFilter?: Function
+  hideSecond?: boolean
+  label?: string
+  labelWidth?: string
+  useLabelSlot?: boolean
+  useDefaultSlot?: boolean
+  disabled?: boolean
+  readonly?: boolean
+  placeholder?: string
+  title?: string
+  alignRight?: boolean
+  error?: boolean
+  required?: boolean
+  size?: string
+  center?: boolean
+  closeOnClickModal?: boolean
+  zIndex?: number
+  showConfirm?: boolean
+  confirmText?: string
   // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat: Function
+  displayFormat?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
-  innerDisplayFormat: Function
-  ellipsis: boolean
-  showTypeSwitch: boolean
-  shortcuts: Array<Record<string, any>>
+  innerDisplayFormat?: Function
+  ellipsis?: boolean
+  showTypeSwitch?: boolean
+  shortcuts?: Array<Record<string, any>>
   // eslint-disable-next-line @typescript-eslint/ban-types
-  onShortcutsClick: Function
-  safeAreaInsetBottom: boolean
+  onShortcutsClick?: Function
+  safeAreaInsetBottom?: boolean
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm: Function
+  beforeConfirm?: Function
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
@@ -261,8 +263,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const pickerShow = ref<boolean>(false)
-const calendarValue = ref<null | number | number[]>()
-const lastCalendarValue = ref<null | number | number[]>()
+const calendarValue = ref<null | number | number[]>(null)
+const lastCalendarValue = ref<null | number | number[]>(null)
 const panelHeight = ref<number>(338)
 const confirmBtnDisabled = ref<boolean>(true)
 const showValue = ref<string>('')

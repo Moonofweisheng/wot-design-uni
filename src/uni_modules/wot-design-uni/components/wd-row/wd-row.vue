@@ -4,6 +4,16 @@
     <slot />
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-row',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 <script lang="ts" setup>
 import { getCurrentInstance, provide, ref, watch } from 'vue'
 

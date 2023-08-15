@@ -1,6 +1,12 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(radio-group) {
+    background-color: $-dark-background2;
+  }
+}
+
 @include b(radio-group) {
   background-color: $-radio-bg;
   font-size: 0;

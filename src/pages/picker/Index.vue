@@ -1,40 +1,42 @@
 <template>
-  <wd-toast />
-  <demo-block transparent>
-    <wd-cell-group border>
-      <wd-picker label="单列选项" :columns="columns0" />
-      <wd-picker label="禁用" disabled v-model="value1" :columns="columns1" />
-      <wd-picker label="只读" readonly v-model="value2" :columns="columns2" />
-      <wd-picker label="loading" loading :columns="columns3" />
-      <wd-picker label="多列" v-model="value4" :columns="columns4" />
-      <wd-picker label="多级联动" v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
-      <wd-picker label="分隔符" v-model="value6" :columns="columns6" :display-format="displayFormat" />
-      <wd-picker label="标题" :columns="columns7" title="文案标题" />
-      <wd-picker label="before-confirm" :columns="columns0" v-model="value7" :before-confirm="beforeConfirm" />
-      <wd-picker label="错误" error :columns="columns0" />
-      <wd-picker label="必填" :columns="columns0" required />
-    </wd-cell-group>
-  </demo-block>
-  <demo-block title="label 不传" transparent>
-    <wd-picker :columns="columns0" />
-  </demo-block>
-  <demo-block title="大小" transparent>
-    <wd-picker label="单列选项" size="large" :columns="columns0" />
-  </demo-block>
-  <demo-block title="值靠右显示" transparent>
-    <wd-picker label="单列选项" align-right :columns="columns0" />
-  </demo-block>
-  <demo-block title="默认插槽" transparent>
-    <view class="default-slot">
-      <view style="margin-bottom: 10px; color: rgba(0, 0, 0, 0.45)">
-        选中值：
-        <text style="color: #34d19d">{{ value8 }}</text>
+  <page-wraper>
+    <wd-toast />
+    <demo-block transparent>
+      <wd-cell-group border>
+        <wd-picker label="单列选项" :columns="columns0" />
+        <wd-picker label="禁用" disabled v-model="value1" :columns="columns1" />
+        <wd-picker label="只读" readonly v-model="value2" :columns="columns2" />
+        <wd-picker label="loading" loading :columns="columns3" />
+        <wd-picker label="多列" v-model="value4" :columns="columns4" />
+        <wd-picker label="多级联动" v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
+        <wd-picker label="分隔符" v-model="value6" :columns="columns6" :display-format="displayFormat" />
+        <wd-picker label="标题" :columns="columns7" title="文案标题" />
+        <wd-picker label="before-confirm" :columns="columns0" v-model="value7" :before-confirm="beforeConfirm" />
+        <wd-picker label="错误" error :columns="columns0" />
+        <wd-picker label="必填" :columns="columns0" required />
+      </wd-cell-group>
+    </demo-block>
+    <demo-block title="label 不传" transparent>
+      <wd-picker :columns="columns0" />
+    </demo-block>
+    <demo-block title="大小" transparent>
+      <wd-picker label="单列选项" size="large" :columns="columns0" />
+    </demo-block>
+    <demo-block title="值靠右显示" transparent>
+      <wd-picker label="单列选项" align-right :columns="columns0" />
+    </demo-block>
+    <demo-block title="默认插槽" transparent>
+      <view class="default-slot">
+        <view class="default-slot-txt">
+          选中值：
+          <text style="color: #34d19d">{{ value8 }}</text>
+        </view>
+        <wd-picker :columns="columns0" v-model="value8" use-default-slot @confirm="handleConfirm">
+          <wd-button>插槽唤起</wd-button>
+        </wd-picker>
       </view>
-      <wd-picker :columns="columns0" v-model="value8" use-default-slot @confirm="handleConfirm">
-        <wd-button>插槽唤起</wd-button>
-      </wd-picker>
-    </view>
-  </demo-block>
+    </demo-block>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
@@ -146,8 +148,21 @@ function handleConfirm({ value }) {
 }
 </script>
 <style lang="scss" scoped>
+.wot-theme-dark {
+  .default-slot {
+    background: $-dark-background2;
+  }
+  .default-slot-txt {
+    color: $-dark-color3;
+  }
+}
 .default-slot {
   background: #fff;
   padding: 15px;
+}
+
+.default-slot-txt {
+  margin-bottom: 10px;
+  color: rgba(0, 0, 0, 0.45);
 }
 </style>

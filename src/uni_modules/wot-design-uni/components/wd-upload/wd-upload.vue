@@ -41,8 +41,10 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-upload',
   behaviors: ['uni://form-field'],
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -72,7 +74,7 @@ interface Props {
   fileList: Record<string, any>[]
   statusKey: string
   maxSize: number
-  limit: number
+  limit?: number
   showLimitMum: boolean
   disabled: boolean
   useDefaultSlot: boolean
@@ -81,24 +83,35 @@ interface Props {
   loadingColor: string
   loadingSize: string
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforePreview: Function
+  beforePreview?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
-  onPreviewFail: Function
+  onPreviewFail?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeRemove: Function
+  beforeRemove?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeUpload: Function
+  beforeUpload?: Function
   // 图片预览相关
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeChoose: Function
+  beforeChoose?: Function
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
+  customEvokeClass: '',
+  customPreviewClass: '',
+  multiple: false,
   fileList: () => [] as Record<string, any>[],
   accept: 'image',
   showLimitMum: true,
+  disabled: false,
   sourceType: () => ['album', 'camera'],
   sizeType: () => ['original', 'compressed'],
+  header: () => {
+    return {}
+  },
+  formData: () => {
+    return {}
+  },
   name: 'file',
   loadingType: 'ring',
   loadingColor: '#ffffff',

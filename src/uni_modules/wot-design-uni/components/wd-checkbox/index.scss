@@ -1,6 +1,75 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(checkbox) {
+    @include e(shape) {
+      background: transparent;
+      border-color: $-checkbox-border-color;
+      color: $-checkbox-check-color;
+    }
+
+    @include e(label) {
+      color: $-dark-color;
+    }
+
+    @include when(disabled) {
+      .wd-checkbox__shape {
+        border-color: $-dark-color-gray;
+        background: $-dark-background4;
+      }
+
+      .wd-checkbox__label {
+        color: $-dark-color-gray;
+      }
+
+      :deep(.wd-checkbox__check) {
+        color: $-dark-color-gray;
+      }
+
+      @include when(checked) {
+        .wd-checkbox__shape {
+          color: $-dark-color-gray;
+        }
+
+        .wd-checkbox__label {
+          color: $-dark-color-gray;
+        }
+      }
+
+      @include when(button) {
+
+        .wd-checkbox__label {
+          border-color: #c8c9cc;
+          background: #3a3a3c;
+          color: $-dark-color-gray;
+        }
+
+        @include when(checked) {
+          .wd-checkbox__label {
+            border-color: #c8c9cc;
+            background: #3a3a3c;
+            color: #c8c9cc;
+          }
+        }
+      }
+    }
+
+    @include when(button) {
+      .wd-checkbox__label {
+        background-color: $-dark-background;
+      }
+
+      @include when(checked) {
+        .wd-checkbox__label {
+          background-color: $-dark-background2;
+        }
+      }
+    }
+
+  }
+}
+
 @include b(checkbox) {
   display: block;
   margin-bottom: $-checkbox-margin;
@@ -29,6 +98,7 @@
       border-radius: $-checkbox-square-radius;
     }
   }
+
   @include e(input) {
     position: absolute;
     width: 0;
@@ -36,6 +106,7 @@
     margin: 0;
     opacity: 0;
   }
+
   @include edeep(btn-check) {
     display: inline-block;
     font-size: $-checkbox-icon-size;
@@ -44,12 +115,14 @@
     width: $-checkbox-icon-size;
     vertical-align: middle;
   }
+
   @include e(txt) {
     display: inline-block;
     vertical-align: middle;
     line-height: 20px;
     @include lineEllipsis;
   }
+
   @include e(label) {
     position: relative;
     display: inline-block;
@@ -58,18 +131,21 @@
     font-size: $-checkbox-label-fs;
     color: $-checkbox-label-color;
   }
+
   @include edeep(check) {
     color: $-checkbox-check-color;
     font-size: $-checkbox-icon-size;
     opacity: 0;
     transition: opacity 0.2s;
   }
+
   @include when(checked) {
     .wd-checkbox__shape {
       color: $-checkbox-checked-color;
       background: currentColor;
       border-color: currentColor;
     }
+
     :deep(.wd-checkbox__check) {
       opacity: 1;
       position: absolute;
@@ -89,6 +165,7 @@
     @include when(last-child) {
       margin-right: 0;
     }
+
     .wd-checkbox__shape {
       width: 0;
       height: 0;
@@ -96,6 +173,7 @@
       opacity: 0;
       border: none;
     }
+
     .wd-checkbox__label {
       display: inline-flex;
       flex-direction: row;
@@ -112,6 +190,7 @@
       transition: color 0.2s, border 0.2s;
       box-sizing: border-box;
     }
+
     @include when(checked) {
       .wd-checkbox__label {
         color: $-checkbox-checked-color;
@@ -137,23 +216,28 @@
       border-color: $-checkbox-border-color;
       background: $-checkbox-disabled-check-bg;
     }
+
     .wd-checkbox__label {
       color: $-checkbox-disabled-label-color;
     }
+
     @include when(checked) {
       .wd-checkbox__shape {
         color: $-checkbox-disabled-check-color;
       }
+
       .wd-checkbox__label {
         color: $-checkbox-disabled-label-color;
       }
     }
+
     @include when(button) {
       .wd-checkbox__label {
         background: $-checkbox-disabled-color;
         border-color: $-checkbox-button-border;
         color: $-checkbox-disabled-label-color;
       }
+
       @include when(checked) {
         .wd-checkbox__label {
           border-color: $-checkbox-button-disabled-border;
@@ -161,6 +245,7 @@
       }
     }
   }
+
   // 以下内容用于解决父子组件样式隔离的问题 —— START
   @include when(cell-box) {
     padding: 13px 15px;
@@ -170,6 +255,7 @@
       padding: 14px 15px;
     }
   }
+
   @include when(button-box) {
     display: inline-flex;
     width: 33.3333%;
@@ -186,15 +272,18 @@
       clear: both;
     }
   }
+
   @include when(large) {
     .wd-checkbox__shape {
       width: $-checkbox-large-size;
       height: $-checkbox-large-size;
       font-size: $-checkbox-large-size;
     }
+
     .wd-checkbox__label {
       font-size: $-checkbox-large-label-fs;
     }
+
     :deep(.wd-checkbox__check) {
       top: 0;
       left: 1px;

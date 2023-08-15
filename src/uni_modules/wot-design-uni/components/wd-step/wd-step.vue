@@ -33,7 +33,9 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-step',
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -42,13 +44,15 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, inject, onBeforeMount, ref } from 'vue'
 
+type StepStatus = 'finished' | 'process' | 'error'
+
 interface Props {
   customClass?: string
   customStyle?: string
-  title: string
-  description: string
-  icon: string
-  status: string
+  title?: string
+  description?: string
+  icon?: string
+  status?: StepStatus
   iconSlot: boolean
   titleSlot: boolean
   descriptionSlot: boolean
@@ -56,7 +60,10 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
-  customStyle: ''
+  customStyle: '',
+  iconSlot: false,
+  titleSlot: false,
+  descriptionSlot: false
 })
 
 const index = ref<number>(-1)

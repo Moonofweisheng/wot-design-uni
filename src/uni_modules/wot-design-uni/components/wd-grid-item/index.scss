@@ -1,6 +1,32 @@
 @import "../common/abstracts/variable";
 @import "../common/abstracts/mixin";
 
+.wot-theme-dark {
+  @include b(grid-item) {
+
+    @include when(border) {
+      &::before {
+        background-color: $-dark-border-color;
+      }
+      &::after {
+        background-color: $-dark-border-color;
+      }
+    }
+
+      // 第一行元素
+  @include when(first) {
+    &::after {
+      background-color: $-dark-border-color;
+    }
+  }
+
+
+    @include e(content) {
+      background-color: $-dark-background2;
+    }
+  }
+}
+
 @include b(grid-item) {
   height: 100%;
   font-size: $-grid-item-fs;
@@ -73,6 +99,7 @@
   @include e(content) {
     height: 100%;
     padding: $-grid-item-padding;
+    background-color: $-grid-item-bg;
     position: relative;
     display: flex;
     flex-direction: column;

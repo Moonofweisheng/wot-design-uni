@@ -1,6 +1,95 @@
 @import "../common/abstracts/variable";
 @import "../common/abstracts/mixin";
 
+.wot-theme-dark {
+  @include b(input) {
+
+    &::after {
+      background: $-dark-color-gray;
+    }
+
+    @include when(not-empty) {
+      &:not(.is-disabled) {
+        &::after {
+          background-color: $-dark-color;
+        }
+      }
+    }
+
+    @include e(textarea) {
+      background: $-dark-background2;
+    }
+
+    @include e(inner) {
+      color: $-dark-color;
+
+      &::-webkit-input-placeholder {
+        color: $-dark-color3;
+      }
+    }
+
+    @include e(textarea-inner) {
+      color: $-dark-color;
+
+      &::-webkit-input-placeholder {
+        color: $-dark-color3;
+      }
+    }
+
+    @include e(placeholder) {
+      color: $-dark-color3;
+    }
+
+    @include e(count) {
+      color: $-dark-color3;
+      background: transparent;
+    }
+
+    @include e(count-current) {
+      color: $-dark-color;
+    }
+
+    @include e(textarea-count) {
+      color: $-dark-color3;
+      background: transparent;
+    }
+
+    @include e(textarea-count-current) {
+      color: $-dark-color;
+    }
+
+
+    :deep(.wd-input__icon),
+    :deep(.wd-input__clear),
+    :deep(.wd-input__textarea-icon) {
+      color: $-dark-color;
+      background: transparent;
+    }
+
+    @include when(cell) {
+      background-color: $-dark-background2;
+
+      @include when(border) {
+        @include halfPixelBorder("top", $-input-cell-padding, $-dark-border-color);
+      }
+    }
+
+    @include when(disabled) {
+
+      .wd-input__inner,
+      .wd-input__textarea-inner {
+        color: $-dark-color-gray;
+        background: transparent;
+      }
+    }
+
+
+    @include e(label) {
+      color: $-dark-color;
+    }
+  }
+}
+
 @include b(input) {
   position: relative;
   -webkit-tap-highlight-color: transparent;
@@ -17,6 +106,7 @@
     transform: scaleY(0.5);
     transition: background-color 0.2s ease-in-out;
   }
+
   @include when(not-empty) {
     &:not(.is-disabled) {
       &::after {
@@ -24,11 +114,13 @@
       }
     }
   }
+
   @include when(textarea) {
     &::after {
       display: none;
     }
   }
+
   @include e(label) {
     position: relative;
     width: $-input-cell-label-width;
@@ -45,7 +137,7 @@
       &::after {
         position: absolute;
         left: 0;
-        top: $-cell-wrapper-padding + 2px;
+        top: calc($-cell-wrapper-padding + 2px);
         content: "*";
         font-size: $-cell-required-size;
         line-height: 1.1;
@@ -53,53 +145,65 @@
       }
     }
   }
+
   @include e(label-inner) {
     display: inline-block;
     padding: $-cell-wrapper-padding 0;
     font-size: $-input-fs;
   }
+
   @include e(block) {
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
   }
+
   @include e(prefix) {
     margin-right: $-input-icon-margin;
     font-size: $-input-fs;
 
-    :deep(.wd-input__icon,.wd-input__clear) {
+    :deep(.wd-input__icon),
+    :deep(.wd-input__clear) {
       margin-left: 0;
     }
   }
+
   @include e(suffix) {
     flex-shrink: 0;
     margin-left: $-input-icon-margin;
   }
+
   @include when(disabled) {
+
     .wd-input__inner,
     .wd-input__textarea-inner {
       color: $-input-disabled-color;
       background: transparent;
     }
   }
+
   @include when(error) {
+
     .wd-input__inner,
     .wd-input__textarea-inner {
       color: $-input-error-color;
       background: transparent;
     }
   }
+
   @include when(no-border) {
     &::after {
       display: none;
     }
+
     .wd-input__inner {
       height: $-input-inner-height-no-border;
       padding-top: 0;
       padding-bottom: 0;
     }
   }
+
   @include when(cell) {
     display: flex;
     align-items: flex-start;
@@ -109,30 +213,39 @@
     &.is-error::after {
       background: $-input-cell-border-color;
     }
+
     .wd-input__textarea,
     .wd-input__block {
       flex: 1;
     }
-    :deep(.wd-input__icon,.wd-input__clear) {
+
+    :deep(.wd-input__icon),
+    :deep(.wd-input__clear) {
       height: $-input-cell-height;
       line-height: $-input-cell-height;
     }
+
     .wd-input__prefix {
       display: inline-block;
       margin-right: $-cell-icon-right;
     }
+
     .wd-input__inner {
       height: $-input-cell-height;
     }
+
     &.wd-input::after {
       display: none;
     }
+
     .wd-input__textarea {
       padding: 13px 0 36px 0;
     }
+
     .wd-input__textarea-inner {
       padding-right: 24px;
     }
+
     .wd-input__textarea-suffix {
       right: 0;
     }
@@ -140,46 +253,59 @@
     @include when(center) {
       align-items: center;
     }
+
     @include when(border) {
       @include halfPixelBorder("top", $-input-cell-padding);
     }
   }
+
   @include when(large) {
     .wd-input__prefix {
       font-size: $-input-fs-large;
     }
+
     .wd-input__label-inner {
       font-size: $-input-fs-large;
     }
+
     .wd-input__inner {
       font-size: $-input-fs-large;
       height: $-input-cell-height-large;
     }
+
     .wd-input__textarea-inner {
       font-size: $-input-fs-large;
     }
+
     .wd-input__count {
       font-size: $-input-count-fs-large;
     }
+
     .wd-input__textarea-count {
       font-size: $-input-count-fs-large;
     }
-    :deep(.wd-input__icon,.wd-input__clear) {
+
+    :deep(.wd-input__icon),
+    :deep(.wd-input__clear) {
       height: $-input-cell-height-large;
       font-size: $-input-icon-size-large;
       line-height: $-input-cell-height-large;
     }
+
     :deep(.wd-input__textarea-icon) {
       font-size: $-input-icon-size-large;
     }
   }
+
   @include when(auto-height) {
     &::after {
       display: block;
     }
+
     .wd-input__textarea {
       padding: $-input-inner-padding;
     }
+
     .wd-input__textarea-suffix {
       top: 8px;
       right: 0;
@@ -204,10 +330,11 @@
     }
   }
 
-  @include e(readonly){
+  @include e(readonly) {
     padding: $-input-inner-padding;
   }
-  @include e(textarea-inner){
+
+  @include e(textarea-inner) {
     width: 100%;
   }
 
@@ -218,6 +345,7 @@
     vertical-align: middle;
     background: $-input-bg;
   }
+
   @include edeep(clear) {
     margin-left: 8px;
     font-size: $-input-icon-size;
@@ -225,6 +353,7 @@
     vertical-align: middle;
     background: $-input-bg;
   }
+
   @include e(count) {
     margin-left: 15px;
     font-size: $-input-count-fs;
@@ -232,6 +361,7 @@
     vertical-align: middle;
     background: $-input-bg;
   }
+
   @include e(count-current) {
     color: $-input-count-current-color;
 
@@ -251,6 +381,7 @@
       padding-bottom: 36px;
     }
   }
+
   @include edeep(textarea-icon) {
     margin-left: 8px;
     font-size: $-input-icon-size;
@@ -258,6 +389,7 @@
     color: $-input-icon-color;
     background: #fff;
   }
+
   @include e(textarea-inner) {
     flex: 1;
     // width: 1px;
@@ -273,16 +405,19 @@
     &::-webkit-input-placeholder {
       color: $-input-placeholder-color;
     }
+
     @include when(suffix) {
-      padding-right: $-input-textarea-padding + $-input-icon-size;
+      padding-right: calc($-input-textarea-padding + $-input-icon-size);
     }
   }
+
   @include e(textarea-suffix) {
     position: absolute;
     right: 14px;
     top: $-input-textarea-padding;
     bottom: 0;
   }
+
   @include edeep(textarea-icon) {
     margin-left: 8px;
     font-size: $-input-icon-size;
@@ -290,6 +425,7 @@
     color: $-input-clear-color;
     background: $-input-bg;
   }
+
   @include e(textarea-count) {
     position: absolute;
     bottom: 8px;
@@ -299,6 +435,7 @@
     background: $-input-bg;
     line-height: 20px;
   }
+
   @include e(textarea-count-current) {
     color: $-input-count-current-color;
 
@@ -306,6 +443,7 @@
       color: $-input-error-color;
     }
   }
+
   @include e(placeholder) {
     color: $-input-placeholder-color;
 
@@ -313,13 +451,16 @@
       color: $-input-error-color;
     }
   }
-  :deep(.wd-input__textarea-count){
+
+  :deep(.wd-input__textarea-count) {
     display: inline-flex;
   }
+
   .wd-input__count,
   .wd-input__count-current {
     display: inline-flex;
   }
+
   @include e(textarea-map) {
     position: absolute;
     width: 100%;

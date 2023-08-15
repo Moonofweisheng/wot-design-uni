@@ -1,6 +1,26 @@
 @import "../common/abstracts/variable.scss";
 @import "../common/abstracts/_mixin.scss";
 
+.wot-theme-dark {
+  @include bdeep(message-box) {
+    @include e(body) {
+      background-color: $-dark-background2;
+    }
+
+    @include e(title) {
+      color: $-dark-color;
+    }
+
+    @include e(content) {
+      color: $-dark-color3;
+
+      &::-webkit-scrollbar-thumb {
+        background: $-dark-border-color;
+      }
+    }
+  }
+}
+
 @include bdeep(message-box) {
   border-radius: $-message-box-radius;
   overflow: hidden;
@@ -9,6 +29,7 @@
     width: $-message-box-width;
     box-sizing: border-box;
   }
+
   @include e(body) {
     background-color: $-message-box-bg;
     padding: $-message-box-padding;
@@ -17,6 +38,7 @@
       padding: 25px 24px 0px;
     }
   }
+
   @include e(title) {
     text-align: center;
     font-size: $-message-box-title-fs;
@@ -26,6 +48,7 @@
     padding-top: 5px;
     padding-bottom: 10px;
   }
+
   @include e(content) {
     max-height: $-message-box-content-max-height;
     color: $-message-box-content-color;
@@ -38,6 +61,7 @@
     &::-webkit-scrollbar {
       width: $-message-box-content-scrollbar-width;
     }
+
     &::-webkit-scrollbar-thumb {
       width: $-message-box-content-scrollbar-width;
       background: $-message-box-content-scrollbar-color;
@@ -55,31 +79,38 @@
       visibility: hidden;
     }
   }
+
   @include e(actions) {
     padding: 24px;
   }
+
   @include e(flex) {
     display: flex;
   }
+
   @include e(block) {
     display: block;
   }
+
   @include e(cancel) {
     margin-right: 16px;
   }
 }
 
-.zoomIn-enter-active, .zoomIn-leave-active{
+.zoomIn-enter-active,
+.zoomIn-leave-active {
   opacity: 1;
   transform: translate3d(-50%, -50%, 0) scale(1);
   transition: all .2s;
 }
-.zoomIn-enter{
+
+.zoomIn-enter {
   opacity: 0;
   transform: translate3d(-50%, -50%, 0) scale(0.7);
   transition: all .2s ease-out;
 }
-.zoomIn-leave-to{
+
+.zoomIn-leave-to {
   opacity: 0;
   transform: translate3d(-50%, -50%, 0) scale(0.9);
   transition: all .2s ease-out;

@@ -1,6 +1,27 @@
 @import '../../common/abstracts/variable';
 @import '../../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(year) {
+    @include e(title) {
+      color: $-dark-color;
+    }
+
+    @include e(months) {
+      color: $-dark-color;
+    }
+
+    @include e(month) {
+
+      @include when(disabled) {
+        .wd-year__month-text {
+          color: $-dark-color-gray;
+        }
+      }
+    }
+  }
+}
+
 @include b(year) {
   @include e(title) {
     padding: 13px 0;
@@ -8,12 +29,14 @@
     font-size: $-calendar-panel-title-fs;
     color: $-calendar-panel-title-color;
   }
+
   @include e(months) {
     display: flex;
     flex-wrap: wrap;
     font-size: $-calendar-day-fs;
     color: $-calendar-day-color;
   }
+
   @include e(month) {
     position: relative;
     width: 25%;
@@ -26,9 +49,11 @@
         color: $-calendar-disabled-color;
       }
     }
+
     @include when(current) {
       color: $-calendar-active-color;
     }
+
     @include when(selected) {
       color: #fff;
 
@@ -37,9 +62,11 @@
         background: $-calendar-active-color;
       }
     }
+
     @include when(middle) {
       background: $-calendar-range-color;
     }
+
     @include when(start) {
       color: #fff;
 
@@ -52,14 +79,17 @@
         content: '';
         background: $-calendar-range-color;
       }
+
       .wd-year__month-text {
         background: $-calendar-active-color;
         border-radius: $-calendar-active-border;
       }
+
       &.is-without-end::after {
         display: none;
       }
     }
+
     @include when(end) {
       color: #fff;
 
@@ -72,11 +102,13 @@
         content: '';
         background: $-calendar-range-color;
       }
+
       .wd-year__month-text {
         background: $-calendar-active-color;
         border-radius: $-calendar-active-border;
       }
     }
+
     @include when(same) {
       color: #fff;
 
@@ -86,11 +118,13 @@
       }
     }
   }
+
   @include e(month-text) {
     width: $-calendar-month-width;
     margin: 0 auto;
     text-align: center;
   }
+
   @include e(month-top) {
     position: absolute;
     top: 10px;
@@ -100,6 +134,7 @@
     font-size: $-calendar-info-fs;
     text-align: center;
   }
+
   @include e(month-bottom) {
     position: absolute;
     bottom: 10px;

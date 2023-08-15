@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-08-01 11:12:05
+ * @LastEditTime: 2023-08-15 16:12:36
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-cell-group\wd-cell-group.vue
+ * 记得注释
+-->
 <template>
   <view :class="['wd-cell-group', border ? 'is-border' : '', customClass]">
     <view v-if="title || value || useSlot" class="wd-cell-group__title">
@@ -20,9 +29,11 @@
 
 <script lang="ts">
 export default {
-  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  name: 'wd-cell-group',
   options: {
-    virtualHost: true
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
   }
 }
 </script>
@@ -32,13 +43,14 @@ import { getCurrentInstance, provide, ref } from 'vue'
 
 interface Props {
   customClass?: string
-  title: string
-  value: string
+  title?: string
+  value?: string
   useSlot: boolean
   border: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   useSlot: false,
+  border: false,
   customClass: ''
 })
 

@@ -42,7 +42,13 @@
 </template>
 <script lang="ts">
 export default {
-  behaviors: ['uni://form-field']
+  name: 'wd-calendar-view',
+  behaviors: ['uni://form-field'],
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
 }
 </script>
 
@@ -68,11 +74,11 @@ interface Props {
   firstDayOfWeek: number
   // 日期格式化函数
   // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter: Function
+  formatter?: Function
   // type 为范围选择时有效，最大日期范围
-  maxRange: number
+  maxRange?: number
   // type 为范围选择时有效，选择超出最大日期范围时的错误提示文案
-  rangePrompt: string
+  rangePrompt?: string
   // type 为范围选择时有效，是否允许选择同一天
   allowSameDay: boolean
   // 是否展示面板标题，自动计算当前滚动的日期月份
@@ -83,7 +89,7 @@ interface Props {
   panelHeight: number
   // type 为 'datetime' 或 'datetimerange' 时有效，用于过滤时间选择器的数据
   // eslint-disable-next-line @typescript-eslint/ban-types
-  timeFilter: Function
+  timeFilter?: Function
   // type 为 'datetime' 或 'datetimerange' 时有效，是否不展示秒修改
   hideSecond: boolean
   // 是否展示picker（兼容支付宝和钉钉）

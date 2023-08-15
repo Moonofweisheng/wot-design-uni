@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 10:04:19
- * @LastEditTime: 2023-06-24 17:15:10
+ * @LastEditTime: 2023-08-15 13:11:35
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-img\wd-img.vue
@@ -12,6 +12,16 @@
     <image :class="customImage" :src="src" :mode="mode" :lazy-load="lazyLoad" @load="handleLoad" @error="handleError" />
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-img',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
@@ -25,8 +35,8 @@ interface Props {
   round: boolean
   mode: string
   lazyLoad: boolean
-  width: string
-  height: string
+  width?: string | number
+  height?: string | number
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',

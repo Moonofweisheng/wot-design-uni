@@ -1,6 +1,16 @@
 @import "../common/abstracts/variable";
 @import "../common/abstracts/mixin";
 
+.wot-theme-dark {
+  @include b(collapse) {
+    background: $-dark-background2;
+
+    @include e(content) {
+      color: $-dark-color3;
+    }
+  }
+}
+
 @include b(collapse) {
   background: $-color-white;
 

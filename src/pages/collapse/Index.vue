@@ -1,11 +1,11 @@
 <template>
-  <view>
+  <page-wraper>
     <wd-toast></wd-toast>
     <demo-block title="基础用法" transparent>
       <wd-collapse v-model="value1" @change="handleChange1">
         <wd-collapse-item
           v-for="(item, index) in itemList"
-          :before-expend="index === 2 ? beforeExpend : ''"
+          :before-expend="index === 2 ? beforeExpend : undefined"
           :key="index"
           :title="item.title"
           :name="item.name"
@@ -54,7 +54,7 @@
         </template>
       </wd-collapse>
     </demo-block>
-  </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'

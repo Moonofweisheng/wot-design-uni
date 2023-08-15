@@ -14,7 +14,9 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-sort-button',
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -33,6 +35,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
+  title: '',
   modelValue: 0,
   allowReset: false,
   descFirst: false,

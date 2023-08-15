@@ -1,6 +1,14 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(progress) {
+    @include e(label) {
+      color: $-dark-color3;
+    }
+  }
+}
+
 @include b(progress) {
   width: 100%;
   height: $-progress-height;

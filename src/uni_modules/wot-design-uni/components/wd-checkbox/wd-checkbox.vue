@@ -13,7 +13,7 @@
       :class="`wd-checkbox__shape ${innerShape === 'square' ? 'is-square' : ''} ${customShapeClass}`"
       :style="isChecked && !innerDisabled && innerCheckedColor ? 'color :' + innerCheckedColor : ''"
     >
-      <wd-icon custom-class="wd-checkbox__check" name="check-bold" size="14px" color="#ffffff" />
+      <wd-icon custom-class="wd-checkbox__check" name="check-bold" size="14px" />
     </view>
     <!--shape为button时只保留wd-checkbox__label-->
     <view
@@ -32,8 +32,10 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-checkbox',
   behaviors: ['uni://form-field'],
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -50,21 +52,22 @@ interface Props {
   customClass?: string
   modelValue: string | number | boolean
   shape: checkShape
-  checkedColor: string
-  disabled: boolean | null
+  checkedColor?: string
+  disabled: boolean
   trueValue: string | number | boolean
   falseValue: string | number | boolean
-  size: string
-  maxWidth: string
+  size?: string
+  maxWidth?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   customLabelClass: '',
   customShapeClass: '',
   customClass: '',
+  shape: 'circle',
   trueValue: true,
   falseValue: false,
-  disabled: null
+  disabled: false
 })
 
 const isChecked = ref<boolean>(false) // 是否被选中

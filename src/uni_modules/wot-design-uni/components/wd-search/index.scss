@@ -1,6 +1,49 @@
 @import '../common/abstracts/_mixin.scss';
 @import '../common/abstracts/variable.scss';
 
+.wot-theme-dark {
+  @include b(search) {
+    background: $-dark-background4;
+
+    @include e(block) {
+      background-color: $-dark-background;
+    }
+
+    @include e(input) {
+      color: $-dark-color;
+    }
+
+    @include e(cover) {
+      background-color: $-dark-background;
+    }
+
+    @include e(search-icon) {
+      color: $-dark-color;
+    }
+    @include e(search-left-icon) {
+      color: $-dark-color;
+    }
+    @include e(clear) {
+      color: $-dark-color;
+    }
+    @include e(cancel) {
+      color: $-dark-color;
+    }
+
+    @include when(light) {
+      background: $-dark-background4;
+  
+      .wd-search__block {
+        background: $-dark-background7;
+      }
+  
+      .wd-search__cover {
+        background: $-dark-background7;
+      }
+    }
+  }
+}
+
 @include b(search) {
   display: flex;
   padding: $-search-padding;

@@ -1,14 +1,15 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
-@import "../wd-modal/index.scss";
-@import "../wd-popup/index.scss";
 
-@include b(curtain) {
+:deep(.wd-curtain){
   display: inline-block;
   border-radius: $-curtain-content-radius;
   overflow-y: visible;
   background: transparent;
   font-size: 0;
+}
+@include bdeep(curtain) {
+
   @include e(content) {
     position: relative;
     display: inline-block;

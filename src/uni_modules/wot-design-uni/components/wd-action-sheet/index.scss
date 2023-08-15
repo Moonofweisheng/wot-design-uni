@@ -1,19 +1,62 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(action-sheet) {
+    background-color: $-dark-background2;
+    color: $-dark-color;
+
+    @include e(action) {
+      color: $-dark-color;
+      background: $-dark-background2;
+
+      &:active {
+        background: $-dark-background4;
+      }
+    }
+
+    @include e(subname) {
+      color: $-dark-color3;
+    }
+
+    @include e(cancel) {
+      color: $-dark-color;
+      background: $-dark-background4;
+
+      &:active {
+        background: $-dark-background5;
+      }
+    }
+
+    :deep(.wd-action-sheet__close) {
+      color: $-dark-color3;
+    }
+
+    @include e(panel-title) {
+      color: $-dark-color;
+    }
+
+    @include e(header) {
+      color: $-dark-color;
+    }
+  }
+}
+
 @include b(action-sheet) {
-  background-color: #fff;
+  background-color: $-color-white;
   padding-bottom: 1px;
 
   @include edeep(popup) {
     border-radius: $-action-sheet-radius $-action-sheet-radius 0 0;
   }
+
   @include e(actions) {
     padding: 8px 0;
     max-height: 50vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
+
   @include e(action) {
     position: relative;
     display: block;

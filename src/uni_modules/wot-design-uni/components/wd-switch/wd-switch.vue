@@ -5,7 +5,13 @@
 </template>
 <script lang="ts">
 export default {
-  behaviors: ['uni://form-field']
+  name: 'wd-switch',
+  behaviors: ['uni://form-field'],
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
 }
 </script>
 
@@ -14,15 +20,15 @@ import { computed, onBeforeMount } from 'vue'
 import { getType, objToStyle } from '../common/util'
 
 interface Props {
-  modelValue: boolean
+  modelValue: boolean | string | number
   disabled: boolean
-  activeValue: boolean
-  inactiveValue: boolean
-  activeColor: string
-  inactiveColor: string
+  activeValue: boolean | string | number
+  inactiveValue: boolean | string | number
+  activeColor?: string
+  inactiveColor?: string
   size: string
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeChange: Function
+  beforeChange?: Function
   customClass: string
 }
 

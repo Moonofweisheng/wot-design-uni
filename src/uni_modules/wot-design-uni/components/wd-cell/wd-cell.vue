@@ -47,7 +47,9 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-cell',
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -58,17 +60,16 @@ export default {
 import { useCell } from '../mixins/useCell'
 
 interface Props {
-  title: string
-  value: string
-  icon: string
-  label: string
-  isLabel: string
+  title?: string
+  value?: string
+  icon?: string
+  label?: string
   isLink: boolean
-  to: string
+  to?: string
   replace: boolean
   clickable: boolean
-  size: string
-  titleWidth: string
+  size?: string
+  titleWidth?: string
   center: boolean
   required: boolean
   vertical: boolean

@@ -1,6 +1,77 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(radio) {
+    @include e(shape) {
+      background: transparent;
+    }
+    @include e(label) {
+      color: $-dark-color;
+    }
+    @include when(button) {
+      .wd-radio__label {
+        background-color: $-dark-background;
+      }
+      @include when(checked) {
+        .wd-radio__label {
+          background-color: $-dark-background2;
+        }
+      }
+    }
+
+    @include when(dot) {
+      .wd-radio__shape {
+  
+        &::before {
+          background-color: $-radio-dot-checked-bg;
+        }
+      }
+      @include when(checked) {
+        .wd-radio__shape {
+          background-color: transparent;
+        }
+      }
+    }
+
+    @include when(disabled) {
+      .wd-radio__label {
+        color: $-dark-color-gray;
+      }
+      @include when(checked) {
+        .wd-radio__label {
+          color: $-dark-color-gray;
+        }
+      }
+  
+      @include when(button) {
+        .wd-radio__label {
+          border-color: #c8c9cc;
+          background: #3a3a3c;
+          color: $-dark-color-gray;
+        }
+        @include when(checked) {
+          .wd-radio__label {
+            border-color: #c8c9cc;
+            background: #3a3a3c;
+            color: #c8c9cc;
+          }
+        }
+      }
+  
+      @include when(dot) {
+        .wd-radio__shape {
+          border-color: #c8c9cc;
+          background: #3a3a3c;
+          &::before {
+            background-color: #c8c9cc;
+          }
+        }
+      }
+    }
+  }
+}
+
 @include b(radio) {
   display: flex;
   margin-top: $-radio-margin;

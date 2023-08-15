@@ -17,6 +17,15 @@
     </view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
@@ -31,9 +40,9 @@ interface Props {
   minDate: number
   maxDate: number
   // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter: Function
-  maxRange: number
-  rangePrompt: string
+  formatter?: Function
+  maxRange?: number
+  rangePrompt?: string
   allowSameDay: boolean
   defaultTime: Array<number>
 }

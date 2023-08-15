@@ -79,8 +79,10 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-col-picker',
   behaviors: ['uni://form-field'],
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -102,26 +104,26 @@ interface Props {
   customValueClass?: string
   modelValue: Array<Record<string, any>>
   columns: Array<Array<Record<string, any>>>
-  label: string
+  label?: string
   labelWidth: string
   useLabelSlot: boolean
   useDefaultSlot: boolean
   disabled: boolean
   readonly: boolean
   placeholder: string
-  title: string
+  title?: string
   // 接收当前列的选中项 item、当前列下标、当前列选中项下标下一列数据处理函数 resolve、结束选择 finish
   // eslint-disable-next-line @typescript-eslint/ban-types
-  columnChange: Function
+  columnChange?: Function
   // 外部展示格式化函数
   // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat: Function
+  displayFormat?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm: Function
+  beforeConfirm?: Function
   alignRight: boolean
   error: boolean
   required: boolean
-  size: string
+  size?: string
   valueKey: string
   labelKey: string
   tipKey: string
@@ -138,6 +140,7 @@ const props = withDefaults(defineProps<Props>(), {
   customViewClass: '',
   customLabelClass: '',
   customValueClass: '',
+  columns: () => [],
   useLabelSlot: false,
   useDefaultSlot: false,
   disabled: false,
@@ -214,6 +217,8 @@ watch(
     selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
       return getSelectedItem(item, colIndex, newSelectedList)[props.labelKey]
     })
+    console.log(selectShowList.value, 'watch props.columns')
+
     lastSelectList.value = newSelectedList
 
     if (newSelectedList.length > 0) {
@@ -310,7 +315,6 @@ function showPicker() {
 
 function getSelectedItem(value, colIndex, selectList) {
   const { valueKey, labelKey } = props
-
   if (selectList[colIndex]) {
     const selecteds = selectList[colIndex].filter((item) => {
       return item[valueKey] === value
@@ -337,70 +341,73 @@ function chooseItem(colIndex, index) {
   pickerColSelected.value = newPickerColSelected
   selectList.value = selectList.value.slice(0, colIndex + 1)
   selectShowList.value = newPickerColSelected.map((item, colIndex) => {
-    return getSelectedItem(item, colIndex, selectList)[props.labelKey]
+    return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
   })
   handleColChange(colIndex, item, index)
 }
 function handleColChange(colIndex, item, index, callback?) {
   loading.value = true
   const { columnChange, beforeConfirm } = props
-  columnChange({
-    selectedItem: item,
-    index: colIndex,
-    rowIndex: index,
-    resolve: (nextColumn) => {
-      if (!(nextColumn instanceof Array)) {
-        console.error('[wot design] error(wd-col-picker): the data of each column of wd-col-picker should be an array')
-        return
-      }
+  columnChange &&
+    columnChange({
+      selectedItem: item,
+      index: colIndex,
+      rowIndex: index,
+      resolve: (nextColumn) => {
+        if (!(nextColumn instanceof Array)) {
+          console.error('[wot design] error(wd-col-picker): the data of each column of wd-col-picker should be an array')
+          return
+        }
 
-      const newSelectList = selectList.value.slice(0)
-      newSelectList[colIndex + 1] = nextColumn
+        const newSelectList = selectList.value.slice(0)
+        newSelectList[colIndex + 1] = nextColumn
 
-      selectList.value = newSelectList
-      loading.value = false
-      currentCol.value = colIndex + 1
-
-      updateLineAndScroll(true)
-      if (typeof callback === 'function') {
-        isCompleting.value = false
-        selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
-          return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
-        })
-        callback()
-      }
-    },
-    finish: (isOk) => {
-      // 每设置展示数据回显
-      if (typeof callback === 'function') {
+        selectList.value = newSelectList
         loading.value = false
-        isCompleting.value = false
-        return
-      }
-      if (getType(isOk) === 'boolean' && !isOk) {
-        loading.value = false
-        return
-      }
+        currentCol.value = colIndex + 1
 
-      if (beforeConfirm) {
-        beforeConfirm(
-          pickerColSelected.value,
-          pickerColSelected.value.map((item, colIndex) => {
-            return getSelectedItem(item, colIndex, selectList.value)
-          }),
-          (isPass) => {
-            if (isPass) {
-              onConfirm()
-            } else {
-              loading.value = false
+        updateLineAndScroll(true)
+        if (typeof callback === 'function') {
+          isCompleting.value = false
+          selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
+            return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
+          })
+          console.log(selectShowList.value, 'handleColChange')
+
+          callback()
+        }
+      },
+      finish: (isOk) => {
+        // 每设置展示数据回显
+        if (typeof callback === 'function') {
+          loading.value = false
+          isCompleting.value = false
+          return
+        }
+        if (getType(isOk) === 'boolean' && !isOk) {
+          loading.value = false
+          return
+        }
+
+        if (beforeConfirm) {
+          beforeConfirm(
+            pickerColSelected.value,
+            pickerColSelected.value.map((item, colIndex) => {
+              return getSelectedItem(item, colIndex, selectList.value)
+            }),
+            (isPass) => {
+              if (isPass) {
+                onConfirm()
+              } else {
+                loading.value = false
+              }
             }
-          }
-        )
-      } else {
-        onConfirm()
+          )
+        } else {
+          onConfirm()
+        }
       }
-    }
-  })
+    })
 }
 function onConfirm() {
   isChange.value = false

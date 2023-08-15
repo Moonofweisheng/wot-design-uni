@@ -1,6 +1,60 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+
+.wot-theme-dark {
+  @include b(tabs) {
+    background: $-dark-background2;
+
+    @include e(nav) {
+      background: $-dark-background2;
+    }
+
+    @include e(nav-item) {
+      color: $-dark-color;
+
+      @include when(disabled) {
+        color: $-dark-color-gray;
+      }
+    }
+
+    @include e(map-nav-btn) {
+      background-color: $-dark-background4;
+      color: $-dark-color3;
+
+      @include when(active) {
+        color: $-dark-color;
+        border: 1px solid $-tabs-nav-active-color;
+        background-color: $-dark-background;
+      }
+  
+      @include when(disabled) {
+        color: $-dark-color-gray;
+        border-color: #f4f4f4;
+      }
+    }
+
+    @include e(map-btn) {
+      background: $-dark-background2;
+      color: $-dark-color3;
+    }
+
+    @include e(map-header) {
+      background: $-dark-background2;
+      color: $-dark-color;
+
+      &::after {
+        background: $-dark-background4;
+      }
+    }
+
+    @include e(map-body) {
+      background: $-dark-background2;
+    }
+
+  }
+}
+
 @include b(tabs) {
   position: relative;
   background: #fff;
@@ -18,15 +72,18 @@
       height: 100%;
       overflow: hidden;
     }
+
     @include m(sticky) {
       width: 100vw;
     }
   }
+
   @include e(nav-container) {
     position: relative;
     display: flex;
     user-select: none;
   }
+
   @include e(nav-item) {
     flex: 1;
     min-width: 0;
@@ -40,10 +97,12 @@
     @include when(active) {
       font-weight: 500;
     }
+
     @include when(disabled) {
       color: $-tabs-nav-disabled-color;
     }
   }
+
   @include e(line) {
     position: absolute;
     bottom: 4px;
@@ -53,12 +112,15 @@
     z-index: 1;
     border-radius: 1.5px;
   }
+
   @include e(container) {
     overflow: hidden;
   }
+
   @include e(body) {
     position: relative;
   }
+
   @include e(map) {
     position: absolute;
     top: 0;
@@ -66,6 +128,7 @@
     right: 0;
     z-index: 1;
   }
+
   @include e(map-btn) {
     position: absolute;
     right: 0;
@@ -89,6 +152,7 @@
       background: $-tabs-nav-map-btn-before-bg;
     }
   }
+
   @include e(map-arrow) {
     display: block;
     transition: transform .3s;
@@ -97,6 +161,7 @@
       transform: rotate(180deg);
     }
   }
+
   @include e(map-header) {
     position: relative;
     padding-left: 17px;
@@ -114,6 +179,7 @@
       z-index: 3;
     }
   }
+
   @include e(map-body) {
     display: flex;
     flex-wrap: wrap;
@@ -127,16 +193,19 @@
       transform: scaleY(1);
     }
   }
+
   @include e(map-nav-item) {
     flex-basis: 33%;
 
     &:nth-child(3n + 2) {
       text-align: center;
     }
+
     &:nth-child(3n + 3) {
       text-align: right;
     }
   }
+
   @include e(map-nav-btn) {
     @include buttonClear;
     @include lineEllipsis;
@@ -158,11 +227,13 @@
       border: 1px solid $-tabs-nav-active-color;
       background-color: $-tabs-nav-bg
     }
+
     @include when(disabled) {
       color: $-tabs-nav-disabled-color;
       border-color: #f4f4f4;
     }
   }
+
   @include e(mask) {
     position: absolute;
     top: $-tabs-nav-height;
@@ -173,18 +244,21 @@
     opacity: 0;
     transition: opacity .3s;
   }
+
   @include when(slide) {
     .wd-tabs__nav-item {
       flex: 0 0 auto;
       padding: 0 17px;
     }
   }
+
   @include when(map) {
-    .wd-tabs__nav--wrap{
+    .wd-tabs__nav--wrap {
       padding-right: 40px;
     }
   }
 }
+
 @media screen and (max-width: 330px) {
   .wd-tabs__map-nav-btn {
     width: 90px;

@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <page-wraper>
     <demo-block title="基本用法">
       <wd-button @click="handleClick1">关闭按钮在内部</wd-button>
     </demo-block>
@@ -19,23 +19,23 @@
       <wd-button @click="handleClick8">点击遮罩关闭</wd-button>
     </demo-block>
 
-    <wd-curtain :value="value1" :src="img" :to="link" @close="handleClose1" width="280"></wd-curtain>
-    <wd-curtain :value="value2" :src="img" :to="link" close-position="top-left" width="200" @close="handleClose2"></wd-curtain>
-    <wd-curtain :value="value3" :src="img" :to="link" close-position="top" width="200" @close="handleClose3"></wd-curtain>
-    <wd-curtain :value="value4" :src="img" :to="link" close-position="top-right" width="240" @close="handleClose4"></wd-curtain>
-    <wd-curtain :value="value5" :src="img" :to="link" close-position="bottom-left" width="240" @close="handleClose5"></wd-curtain>
-    <wd-curtain :value="value6" :src="img" :to="link" close-position="bottom" width="240" @close="handleClose6"></wd-curtain>
-    <wd-curtain :value="value7" :src="img" :to="link" close-position="bottom-right" width="240" @close="handleClose7"></wd-curtain>
+    <wd-curtain :value="value1" :src="img" :to="link" @close="handleClose1" :width="280"></wd-curtain>
+    <wd-curtain :value="value2" :src="img" :to="link" close-position="top-left" :width="200" @close="handleClose2"></wd-curtain>
+    <wd-curtain :value="value3" :src="img" :to="link" close-position="top" :width="200" @close="handleClose3"></wd-curtain>
+    <wd-curtain :value="value4" :src="img" :to="link" close-position="top-right" :width="240" @close="handleClose4"></wd-curtain>
+    <wd-curtain :value="value5" :src="img" :to="link" close-position="bottom-left" :width="240" @close="handleClose5"></wd-curtain>
+    <wd-curtain :value="value6" :src="img" :to="link" close-position="bottom" :width="240" @close="handleClose6"></wd-curtain>
+    <wd-curtain :value="value7" :src="img" :to="link" close-position="bottom-right" :width="240" @close="handleClose7"></wd-curtain>
     <wd-curtain
       :value="value8"
       :src="img"
       :to="link"
       close-position="bottom-right"
-      width="240"
+      :width="240"
       @close="handleClose8"
       :close-on-click-modal="true"
     ></wd-curtain>
-  </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'

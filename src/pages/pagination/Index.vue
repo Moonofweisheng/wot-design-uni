@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <page-wraper>
     <demo-block title="基本用法" transparent>
       <wd-pagination v-model="page1" :total="total1" @change="handleChange1"></wd-pagination>
     </demo-block>
@@ -9,7 +9,7 @@
     <demo-block title="文字提示" transparent>
       <wd-pagination v-model="page3" :total="total3" :page-size="pageSize3" @change="handleChange3" show-icon show-message></wd-pagination>
     </demo-block>
-  </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'

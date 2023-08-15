@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 10:04:19
- * @LastEditTime: 2023-07-01 18:14:00
+ * @LastEditTime: 2023-08-15 17:58:23
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-status-tip\wd-status-tip.vue
@@ -13,19 +13,35 @@
     <view v-if="tip" class="wd-status-tip__text">{{ tip }}</view>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'wd-status-tip',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 
+type StatusTipType = 'search' | 'network' | 'content' | 'collect' | 'comment' | 'halo' | 'message'
+
 interface Props {
-  customClass?: string
+  customClass: string
   customStyle: string
-  type: string
+  type: StatusTipType
   tip: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
-  customStyle: ''
+  customStyle: '',
+  type: 'network',
+  tip: ''
 })
 
 const imgUrl = ref<string>('') // 图片地址

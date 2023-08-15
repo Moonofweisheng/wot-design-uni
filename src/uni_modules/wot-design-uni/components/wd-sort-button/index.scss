@@ -1,13 +1,22 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
-@include b(sort-button){
+.wot-theme-dark {
+  @include b(sort-button) {
+    @include e(wrapper) {
+      color: $-dark-color;
+    }
+  }
+
+}
+
+@include b(sort-button) {
   display: inline-block;
   height: $-sort-button-height;
   line-height: $-sort-button-height;
 
   @include m(line) {
-    .wd-sort-button__left{
+    .wd-sort-button__left {
       &::after {
         position: absolute;
         content: '';
@@ -28,7 +37,7 @@
     }
   }
 
-  @include e(wrapper){
+  @include e(wrapper) {
     font-size: $-sort-button-fs;
     color: $-sort-button-color;
     word-break: break-all;
@@ -50,7 +59,7 @@
     }
   }
 
-  @include e(right){
+  @include e(right) {
     display: inline-block;
     min-width: 14px;
     margin-left: 2px;
@@ -64,11 +73,12 @@
     }
   }
 
-  @include edeep(icon-up){
+  @include edeep(icon-up) {
     display: block !important;
     line-height: 1.1;
     transform: scale(calc((10 / 14))) translate(0, 7px);
   }
+
   @include edeep(icon-down) {
     display: block !important;
     line-height: 1.1;

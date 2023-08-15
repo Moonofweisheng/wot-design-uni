@@ -38,6 +38,17 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'wd-collapse',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, provide, ref, watch } from 'vue'
 import { CollapseItem } from './types'

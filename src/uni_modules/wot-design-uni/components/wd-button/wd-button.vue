@@ -44,7 +44,9 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-button',
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -65,7 +67,7 @@ const loadingIcon = (color = '#4D80F0', reverse = true) => {
     reverse ? '#fff' : color
   }"/><path d="M4.599 21c0 9.044 7.332 16.376 16.376 16.376 9.045 0 16.376-7.332 16.376-16.376" stroke="url(#a)" stroke-width="3.5" stroke-linecap="round"/></g></svg>`
 }
-type ButtonType = 'primary' | 'success' | 'info' | 'warning' | 'error' | 'default'
+type ButtonType = 'primary' | 'success' | 'info' | 'warning' | 'error' | 'default' | 'text' | 'icon'
 type ButtonSize = 'small' | 'medium' | 'large'
 
 interface Props {
@@ -76,19 +78,19 @@ interface Props {
   block: boolean
   type: ButtonType
   size: ButtonSize
-  icon: string
+  icon?: string
   loading: boolean
-  loadingColor: string
-  openType: string
-  formType: string
-  hoverStopPropagation: boolean
-  lang: string
-  sessionFrom: string
-  sendMessageTitle: string
-  sendMessagePath: string
-  sendMessageImg: string
-  appParameter: string
-  showMessageCard: boolean
+  loadingColor?: string
+  openType?: string
+  formType?: string
+  hoverStopPropagation?: boolean
+  lang?: string
+  sessionFrom?: string
+  sendMessageTitle?: string
+  sendMessagePath?: string
+  sendMessageImg?: string
+  appParameter?: string
+  showMessageCard?: boolean
   customClass: string
   customStyle: string
 }
@@ -100,7 +102,9 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   suck: false,
   block: false,
-  disabled: false
+  disabled: false,
+  customClass: '',
+  customStyle: ''
 })
 
 const hoverStartTime = ref<number>(20)

@@ -25,7 +25,6 @@
       </view>
       <view class="wd-action-sheet__actions" v-if="actions && actions.length">
         <button
-          jd:for="{{ actions }}"
           v-for="(action, rowIndex) in actions"
           :key="rowIndex"
           :class="`wd-action-sheet__action ${action.disabled ? 'wd-action-sheet__action--disabled' : ''}  ${
@@ -56,7 +55,9 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-action-sheet',
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -93,8 +94,8 @@ interface Props {
   show: boolean
   actions: Array<Action>
   panels: Array<Panel>
-  title: string
-  cancelText: string
+  title?: string
+  cancelText?: string
   closeOnClickAction: boolean
   closeOnClickModal: boolean
   duration: number
@@ -112,6 +113,7 @@ const props = withDefaults(defineProps<Props>(), {
   closeOnClickAction: true,
   closeOnClickModal: true,
   duration: 200,
+  zIndex: 10,
   lazyRender: false,
   safeAreaInsetBottom: true
 })

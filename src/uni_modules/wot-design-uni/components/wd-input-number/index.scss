@@ -1,6 +1,31 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(input-number) {
+    @include e(action) {
+      color: $-dark-color;
+      @include when(disabled) {
+        color: $-dark-color-gray;
+      }
+    }
+
+    @include e(input) {
+      color: $-dark-color;
+    }
+
+    @include when(disabled) {
+      .wd-input-number__input {
+        color: $-dark-color-gray;
+      }
+      .wd-input-number__sub,
+      .wd-input-number__add {
+        color: $-dark-color-gray;
+      }
+    }
+  }
+}
+
 @include b(input-number) {
   display: inline-block;
   font-size: 0;
@@ -26,16 +51,16 @@
       left: 0;
       top: 0;
       border: 1px solid $-input-number-border-color;
-      border-top-left-radius: $-input-number-radius * 2;
-      border-bottom-left-radius: $-input-number-radius * 2;
+      border-top-left-radius: calc($-input-number-radius * 2);
+      border-bottom-left-radius: calc($-input-number-radius * 2);
       transform: scale(0.5);
       transform-origin: left top;
     }
     &:last-child::after {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-top-right-radius: $-input-number-radius * 2;
-      border-bottom-right-radius: $-input-number-radius * 2;
+      border-top-right-radius: calc($-input-number-radius * 2);
+      border-bottom-right-radius: calc($-input-number-radius * 2);
     }
     @include when(disabled) {
       color: $-input-number-disabled-color;

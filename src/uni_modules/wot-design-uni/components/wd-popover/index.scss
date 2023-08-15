@@ -1,6 +1,33 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(popover) {
+
+    @include e(pos) {
+      background: rgb(75, 76, 77);
+      color: $-dark-color;
+      box-shadow: 0px 2px 10px 0px rgba(75, 76, 77, 0.1);
+    }
+
+    @include e(menu) {
+      background: rgb(75, 76, 77);
+    }
+
+    @include e(inner) {
+      background-color: rgb(75, 76, 77);
+    }
+
+    @include e(menu-inner) {
+
+      @include halfPixelBorder("top", 0, $-dark-border-color);
+    }
+
+    @include squareArrow($-popover-arrow-size, rgb(75, 76, 77), $-popover-z-index - 1, $-popover-arrow-box-shadow);
+
+  }
+}
+
 @include b(popover) {
   position: relative;
   display: inline-block;

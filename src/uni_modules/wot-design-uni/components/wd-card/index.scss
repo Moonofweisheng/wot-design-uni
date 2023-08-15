@@ -1,5 +1,27 @@
 @import "../common/abstracts/variable.scss";
 @import "../common/abstracts/_mixin.scss";
+.wot-theme-dark {
+  @include b(card) {
+    background-color: $-dark-background2;
+
+    @include when(rectangle) {
+  
+      .wd-card__content {
+        @include halfPixelBorder('top', 0, $-dark-border-color);
+      }
+      .wd-card__footer {
+        @include halfPixelBorder('top', 0, $-dark-border-color);
+      }
+    }
+
+    @include e(title-content) {
+      color: $-dark-color;
+    }
+    @include e(content) {
+      color: $-dark-color3;
+    }
+  }
+}
 
 @include b(card) {
   padding: $-card-padding;

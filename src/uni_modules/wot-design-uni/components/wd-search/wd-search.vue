@@ -49,13 +49,16 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-search',
   behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
 </script>
+
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import { requestAnimationFrame } from '../common/util'
@@ -69,7 +72,7 @@ interface Props {
   light: boolean
   hideCancel: boolean
   disabled: boolean
-  maxlength: number
+  maxlength: number | string
   modelValue: string
   placeholderLeft: boolean
   customClass: string
@@ -77,9 +80,13 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
+  customClass: '',
   useActionSlot: false,
   useLabelSlot: false,
   userSuffixSlot: false,
+  placeholder: '搜索',
+  cancelTxt: '取消',
+  light: false,
   hideCancel: false,
   disabled: false,
   maxlength: -1,
@@ -118,11 +125,11 @@ function closeCover() {
  * @description input的input事件handle
  * @param value
  */
-function inputValue({ detail: { value } }) {
-  str.value = value
-  emit('update:modelValue', value)
+function inputValue(event: any) {
+  str.value = event.detail.value
+  emit('update:modelValue', event.detail.value)
   emit('change', {
-    value
+    value: event.detail.value
   })
 }
 /**

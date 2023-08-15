@@ -14,8 +14,10 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-notice-bar',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -33,16 +35,16 @@ const $content = '.wd-notice-bar__content'
 type NoticeBarType = 'warning' | 'info' | 'danger' | ''
 interface Props {
   customClass?: string
-  text: string
+  text?: string
   type: NoticeBarType
   scrollable: boolean
   delay: number
   speed: number
   closable: boolean
   wrapable: boolean
-  prefix: string
-  color: string
-  backgroundColor: string
+  prefix?: string
+  color?: string
+  backgroundColor?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

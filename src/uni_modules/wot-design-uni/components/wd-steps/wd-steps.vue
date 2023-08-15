@@ -12,6 +12,16 @@
     <slot />
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-steps',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 <script lang="ts" setup>
 import { getCurrentInstance, provide, watch } from 'vue'
 
@@ -20,13 +30,16 @@ interface Props {
   active: number
   vertical: boolean
   dot: boolean
-  space: string
+  space?: string
   alignCenter: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
-  active: 0
+  active: 0,
+  vertical: false,
+  dot: false,
+  alignCenter: false
 })
 
 const children: any[] = [] // 子组件

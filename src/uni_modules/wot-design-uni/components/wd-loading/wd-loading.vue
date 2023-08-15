@@ -9,6 +9,16 @@
     </view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-loading',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'

@@ -47,8 +47,10 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-message-box',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }

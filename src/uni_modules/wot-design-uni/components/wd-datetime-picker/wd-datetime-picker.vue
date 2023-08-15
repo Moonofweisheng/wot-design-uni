@@ -81,7 +81,7 @@
           :label-key="labelKey"
           :formatter="formatter"
           :filter="filter"
-          :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : null"
+          :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
           :max-hour="maxHour"
           :min-hour="minHour"
           :max-date="maxDate"
@@ -108,7 +108,7 @@
           :label-key="labelKey"
           :formatter="formatter"
           :filter="filter"
-          :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : null"
+          :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
           :max-hour="maxHour"
           :min-hour="minHour"
           :max-date="maxDate"
@@ -128,9 +128,11 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-datetime-picker',
   behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -140,14 +142,14 @@ export default {
 import { getCurrentInstance, onBeforeMount, onMounted, ref, watch, nextTick } from 'vue'
 import { debounce, deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
 import { useCell } from '../mixins/useCell'
-
+type DateTimeType = 'date' | 'year-month' | 'time' | 'datetime'
 interface Props {
   customClass?: string
   customViewClass?: string
   customLabelClass?: string
   customValueClass?: string
   // 选择器左侧文案
-  label: string
+  label?: string
   // 选择器占位符
   placeholder: string
   // 禁用
@@ -158,14 +160,14 @@ interface Props {
   loadingColor: string
   /* popup */
   // 弹出层标题
-  title: string
+  title?: string
   // 取消按钮文案
   cancelButtonText: string
   // 确认按钮文案
   confirmButtonText: string
   // 是否必填
   required: boolean
-  size: string
+  size?: string
   labelWidth: string
   useDefaultSlot: boolean
   useLabelSlot: boolean
@@ -181,9 +183,9 @@ interface Props {
   // 选项对象中，展示的文本对应的 key
   labelKey: string
   // 选中项，当 type 为 time 时，类型为字符串，否则为 时间戳
-  modelValue: string | Date | Array<string | Date>
+  modelValue: string | number | Date | Array<string | number | Date>
   // 时间选择器的类型
-  type: string
+  type: DateTimeType
   // 最小日期 20(x-10)年1月1日
   minDate: number
   // 最大日期 20(x+10)年1月1日
@@ -198,20 +200,20 @@ interface Props {
   maxMinute: number
   // 自定义过滤选项的函数，返回列的选项数组
   // eslint-disable-next-line @typescript-eslint/ban-types
-  filter: Function
+  filter?: Function
   // 自定义弹出层选项文案的格式化函数，返回一个字符串
   // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter: Function
+  formatter?: Function
   // 自定义展示文案的格式化函数，返回一个字符串
   // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat: Function
+  displayFormat?: Function
   // 自定义展示文案的格式化函数，返回一个字符串
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm: Function
+  beforeConfirm?: Function
   // 自定义展示文案的格式化函数，返回一个字符串
   // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormatTabLabel: Function
-  defaultValue: string | Date | Array<string | Date>
+  displayFormatTabLabel?: Function
+  defaultValue?: string | number | Date | Array<string | number | Date>
   zIndex: number
 }
 
@@ -677,7 +679,7 @@ function defaultDisplayFormat(items, tabLabel = false) {
         'year-month': ['year', 'month']
       }
       return items.map((item, index) => {
-        return props.formatter(typeMaps[props.type][index], item.value)
+        return props.formatter!(typeMaps[props.type][index], item.value)
       })
     }
     return map(items).join('')

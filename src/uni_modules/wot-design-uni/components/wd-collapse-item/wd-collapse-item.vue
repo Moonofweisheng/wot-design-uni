@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-04 13:34:54
+ * @LastEditTime: 2023-08-15 16:30:17
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse-item\wd-collapse-item.vue
@@ -20,6 +20,16 @@
     </view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-collapse-item',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, inject, onMounted, ref, watch } from 'vue'
@@ -30,7 +40,7 @@ const $body = '.wd-collapse-item__body'
 
 interface Props {
   customClass?: string
-  title: string
+  title?: string
   disabled: boolean
   name: string
   // 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise

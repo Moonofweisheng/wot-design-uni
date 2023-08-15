@@ -6,7 +6,7 @@
         <view v-if="!useContentSlot && mode === 'normal'" class="wd-popover__inner">
           {{ content }}
         </view>
-        <view v-if="!useContentSlot && mode === 'menu'" class="wd-popover__menu">
+        <view v-if="!useContentSlot && mode === 'menu' && typeof content === 'object'" class="wd-popover__menu">
           <view v-for="(item, index) in content" :key="index" class="wd-popover__menu-inner" @click="menuClick(index)">
             <wd-icon v-if="item.iconClass" :name="item.iconClass" custom-class="wd-popover__icon" />
             <text>{{ item.content }}</text>
@@ -53,8 +53,10 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-popover',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -88,7 +90,7 @@ interface Props {
   // 是否显示 popover 箭头
   visibleArrow: boolean
   // 显示内容
-  content: Record<string, any>[]
+  content: string | Record<string, any>[]
   placement: PlacementType
   offset: number
   useContentSlot: boolean
@@ -103,6 +105,7 @@ const props = withDefaults(defineProps<Props>(), {
   customArrow: '',
   visibleArrow: true,
   placement: 'bottom',
+  content: '',
   offset: 0,
   useContentSlot: false,
   disabled: false,

@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-08-01 11:12:05
+ * @LastEditTime: 2023-08-15 22:13:27
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\components\demo-block\demo-block.vue
+ * 记得注释
+-->
 <template>
   <view :class="['demo-block', transparent ? '' : 'is-white', customClass]">
     <view class="demo-title">{{ title }}</view>
@@ -8,9 +17,10 @@
 </template>
 <script lang="ts">
 export default {
-  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
   options: {
-    virtualHost: true
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
   }
 }
 </script>
@@ -46,14 +56,28 @@ function setStyle() {
 }
 </script>
 <style lang="scss" scoped>
+.wot-theme-dark {
+  .is-white {
+    background: $-dark-background2;
+  }
+  .demo-block {
+    color: $-dark-color3;
+  }
+}
+
 .demo-block {
-  margin: 15px 0;
+  margin-bottom: 15px;
+  &:not(:first-child) {
+    margin: 15px 0;
+  }
   color: #666;
   overflow: hidden;
 }
+
 .is-white {
   background: #fff;
 }
+
 .demo-title {
   padding: 0 15px;
   margin: 10px 0;

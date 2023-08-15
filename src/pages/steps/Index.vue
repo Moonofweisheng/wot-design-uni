@@ -1,14 +1,5 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-07-14 11:37:57
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\pages\steps\Index.vue
- * 记得注释
--->
 <template>
-  <view>
+  <page-wraper>
     <demo-block title="基本用法">
       <wd-steps :active="0">
         <wd-step></wd-step>
@@ -61,7 +52,7 @@
         <wd-step title="步骤3" />
       </wd-steps>
     </demo-block>
-  </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'

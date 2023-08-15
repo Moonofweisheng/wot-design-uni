@@ -17,7 +17,9 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-sticky',
   options: {
+    addGlobalClass: true,
     // virtualHost: true,
     styleIsolation: 'shared'
   }

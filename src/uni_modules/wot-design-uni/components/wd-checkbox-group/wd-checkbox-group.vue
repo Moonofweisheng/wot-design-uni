@@ -5,7 +5,13 @@
 </template>
 <script lang="ts">
 export default {
-  behaviors: ['uni://form-field']
+  name: 'wd-checkbox-group',
+  behaviors: ['uni://form-field'],
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
 }
 </script>
 
@@ -17,20 +23,21 @@ type checkShape = 'circle' | 'square' | 'button'
 interface Props {
   customClass?: string
   modelValue: Array<string | number | boolean>
-  cell: boolean | null
+  cell: boolean
   shape: checkShape
   checkedColor: string
-  disabled: boolean | null
+  disabled: boolean
   min: number
   max: number
-  inline: boolean | null
-  size: string
-  name: string
+  inline: boolean
+  size?: string
+  name?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
-  value: () => [],
+  modelValue: () => [],
+  cell: false,
   shape: 'circle',
   checkedColor: '#4D80F0',
   disabled: false,

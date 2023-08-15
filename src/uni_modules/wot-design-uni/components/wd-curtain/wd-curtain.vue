@@ -1,32 +1,36 @@
 <template>
-  <wd-popup
-    v-model="show"
-    transition="zoom-in"
-    position="center"
-    :close-on-click-modal="closeOnClickModal"
-    :hide-when-close="hideWhenClose"
-    @beforeenter="beforeenter"
-    @enter="enter"
-    @afterenter="afterenter"
-    @beforeleave="beforeleave"
-    @leave="leave"
-    @afterleave="afterleave"
-    @close="close"
-    @closed="closed"
-    @clickmodal="clickModal"
-    :custom-class="`wd-curtain ${customClass}`"
-  >
-    <view class="wd-curtain__content">
-      <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
-      <wd-icon name="close-outline" size="24px" :custom-class="`wd-curtain__content-close ${closePosition}`" @click="close" />
-    </view>
-  </wd-popup>
+  <view>
+    <wd-popup
+      v-model="show"
+      transition="zoom-in"
+      position="center"
+      :close-on-click-modal="closeOnClickModal"
+      :hide-when-close="hideWhenClose"
+      @beforeenter="beforeenter"
+      @enter="enter"
+      @afterenter="afterenter"
+      @beforeleave="beforeleave"
+      @leave="leave"
+      @afterleave="afterleave"
+      @close="close"
+      @closed="closed"
+      @clickmodal="clickModal"
+      :custom-class="`wd-curtain ${customClass}`"
+    >
+      <view class="wd-curtain__content">
+        <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
+        <wd-icon name="close-outline" size="24px" :custom-class="`wd-curtain__content-close ${closePosition}`" @click="close" />
+      </view>
+    </wd-popup>
+  </view>
 </template>
 
 <script lang="ts">
 export default {
+  name: 'wd-curtain',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -34,14 +38,14 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-
+type ClosePosition = 'inset' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 interface Props {
   customClass?: string
   value: boolean
-  closePosition: string
-  src: string
-  to: string
-  width: number
+  closePosition: ClosePosition
+  src?: string
+  to?: string
+  width?: number
   closeOnClickModal: boolean
   hideWhenClose: boolean
 }
@@ -49,6 +53,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   value: false,
+  closePosition: 'inset',
   closeOnClickModal: false,
   hideWhenClose: true
 })

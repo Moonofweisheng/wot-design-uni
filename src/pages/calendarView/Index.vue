@@ -1,62 +1,55 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-07-21 15:50:41
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\pages\calendarView\Index.vue
- * 记得注释
--->
 <template>
-  <demo-block title="单个日期选择" :hor="0">
-    <view style="margin: 0 15px 10px">
-      <view style="margin-bottom: 10px; font-size: 13px">切换类型：</view>
-      <wd-radio-group v-model="type1" shape="button">
-        <wd-radio value="date">date</wd-radio>
-        <wd-radio value="week">week</wd-radio>
-        <wd-radio value="month">month</wd-radio>
-      </wd-radio-group>
-    </view>
-    <wd-calendar-view :type="type1" v-model="value1" @change="handleChange1"></wd-calendar-view>
-  </demo-block>
-  <demo-block title="多个日期选择" :hor="0">
-    <wd-calendar-view type="dates" v-model="value2" @change="handleChange2"></wd-calendar-view>
-  </demo-block>
-  <demo-block title="日期范围选择" :hor="0">
-    <view style="margin: 0 24rpx 20rpx">
-      <view style="margin-bottom: 20rpx; font-size: 26rpx">切换类型：</view>
-      <wd-radio-group v-model="type2" shape="button" @change="handleTypeChange2">
-        <wd-radio value="daterange">daterange</wd-radio>
-        <wd-radio value="weekrange">weekrange</wd-radio>
-        <wd-radio value="monthrange">monthrange</wd-radio>
-      </wd-radio-group>
-    </view>
-    <wd-calendar-view :type="type2" allow-same-day v-model="value3" @change="handleChange3"></wd-calendar-view>
-  </demo-block>
-  <demo-block title="时间类型" :hor="0">
-    <wd-calendar-view type="datetime" v-model="value4"></wd-calendar-view>
-  </demo-block>
-  <demo-block title="时间范围类型" :hor="0">
-    <wd-calendar-view type="datetimerange" v-model="value5"></wd-calendar-view>
-  </demo-block>
-  <demo-block title="限制最大选择范围" :hor="0">
-    <wd-calendar-view type="daterange" :max-range="3" v-model="value7"></wd-calendar-view>
-  </demo-block>
-  <demo-block title="自定义日期" :hor="0">
-    <wd-calendar-view type="daterange" allow-same-day v-model="value6" :formatter="formatter"></wd-calendar-view>
-  </demo-block>
-  <demo-block title="设置周起始日" :hor="0">
-    <wd-calendar-view :first-day-of-week="1" v-model="value8"></wd-calendar-view>
-  </demo-block>
+  <page-wraper>
+    <demo-block title="单个日期选择" :hor="0">
+      <view style="margin: 0 15px 10px">
+        <view style="margin-bottom: 10px; font-size: 13px">切换类型：</view>
+        <wd-radio-group v-model="type1" shape="button">
+          <wd-radio value="date">date</wd-radio>
+          <wd-radio value="week">week</wd-radio>
+          <wd-radio value="month">month</wd-radio>
+        </wd-radio-group>
+      </view>
+      <wd-calendar-view :type="type1" v-model="value1" @change="handleChange1"></wd-calendar-view>
+    </demo-block>
+    <demo-block title="多个日期选择" :hor="0">
+      <wd-calendar-view type="dates" v-model="value2" @change="handleChange2"></wd-calendar-view>
+    </demo-block>
+    <demo-block title="日期范围选择" :hor="0">
+      <view style="margin: 0 24rpx 20rpx">
+        <view style="margin-bottom: 20rpx; font-size: 26rpx">切换类型：</view>
+        <wd-radio-group v-model="type2" shape="button" @change="handleTypeChange2">
+          <wd-radio value="daterange">daterange</wd-radio>
+          <wd-radio value="weekrange">weekrange</wd-radio>
+          <wd-radio value="monthrange">monthrange</wd-radio>
+        </wd-radio-group>
+      </view>
+      <wd-calendar-view :type="type2" allow-same-day v-model="value3" @change="handleChange3"></wd-calendar-view>
+    </demo-block>
+    <demo-block title="时间类型" :hor="0">
+      <wd-calendar-view type="datetime" v-model="value4"></wd-calendar-view>
+    </demo-block>
+    <demo-block title="时间范围类型" :hor="0">
+      <wd-calendar-view type="datetimerange" v-model="value5"></wd-calendar-view>
+    </demo-block>
+    <demo-block title="限制最大选择范围" :hor="0">
+      <wd-calendar-view type="daterange" :max-range="3" v-model="value7"></wd-calendar-view>
+    </demo-block>
+    <demo-block title="自定义日期" :hor="0">
+      <wd-calendar-view type="daterange" allow-same-day v-model="value6" :formatter="formatter"></wd-calendar-view>
+    </demo-block>
+    <demo-block title="设置周起始日" :hor="0">
+      <wd-calendar-view :first-day-of-week="1" v-model="value8"></wd-calendar-view>
+    </demo-block>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const type1 = ref<string>('date')
-const type2 = ref<string>('daterange')
+const type1 = ref<any>('date')
+const type2 = ref<any>('daterange')
 const minDate = ref(Date.now())
 const value1 = ref(Date.now())
-const value2 = ref('')
+const value2 = ref(null)
 const value3 = ref([Date.now() - 24 * 60 * 60 * 1000 * 33, Date.now()])
 const value4 = ref(Date.now())
 const value5 = ref([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() - 24 * 60 * 60 * 1000])

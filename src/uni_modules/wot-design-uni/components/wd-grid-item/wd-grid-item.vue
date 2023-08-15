@@ -19,8 +19,10 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-grid-item',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -30,15 +32,15 @@ export default {
 import { getCurrentInstance, inject, onBeforeMount, onMounted, ref, nextTick, computed, Ref, watch } from 'vue'
 
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
-type LinkType = 'navigateTo' | 'switchTab' | 'reLaunch'
+type LinkType = 'navigateTo' | 'switchTab' | 'reLaunch' | 'redirectTo'
 interface Props {
   customText?: string
   customIcon?: string
   customClass?: string
   icon: string
   iconSize: string
-  text: string
-  url: string
+  text?: string
+  url?: string
   linkType: LinkType
   useSlot: boolean
   useIconSlot: boolean
@@ -46,8 +48,8 @@ interface Props {
   // badge属性
   isDot: boolean
   type?: BadgeType
-  value: string | number
-  max: number
+  value?: number
+  max?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {

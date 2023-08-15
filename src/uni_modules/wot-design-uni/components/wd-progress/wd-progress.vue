@@ -10,15 +10,17 @@
       v-else-if="status"
       :custom-class="`wd-progress__label wd-progress__icon ${progressClass}`"
       :name="status == 'danger' ? 'close-outline' : 'check-outline'"
-      :color="color"
+      :color="typeof color === 'string' ? color : ''"
     ></wd-icon>
   </view>
 </template>
 
 <script lang="ts">
 export default {
+  name: 'wd-progress',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -118,7 +120,7 @@ function computeProgressClass() {
 }
 
 /**
- * @description jd小程序不兼容activeend事件,此处手动模拟
+ * @description
  * @param {Number} targetPercent 目标值
  * @param {String} color 目标颜色
  */

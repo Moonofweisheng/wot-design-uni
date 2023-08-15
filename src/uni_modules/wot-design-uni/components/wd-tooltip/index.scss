@@ -1,6 +1,21 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+
+  @include b(tooltip) {
+
+    @include e(pos) {
+      background: $-dark-background4;
+      color: $-tooltip-color;
+    }
+
+    @include triangleArrow($-tooltip-arrow-size, $-dark-background4);
+
+  }
+
+}
+
 @include b(tooltip) {
   position: relative;
   display: inline-block;

@@ -1,20 +1,11 @@
-<!--
- * @Author: weisheng
- * @Date: 2022-12-16 18:03:21
- * @LastEditTime: 2023-08-04 15:40:12
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\docs\.vitepress\theme\components\frame.vue
- * 记得注释
--->
 <template>
-  <iframe v-if="href" id="demo-modal" class="iframe demo-model" scrolling="auto" frameborder="0" :src="href"></iframe>
+  <iframe v-if="href" id="demo" class="iframe demo-model" scrolling="auto" frameborder="0" :src="href"></iframe>
 </template>
 
-<script setup>
-import { useRoute } from 'vitepress';
-import { computed  } from 'vue'
-const baseUrl = process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/#/'
+<script setup lang="ts">
+import { useRoute, useData } from 'vitepress';
+import { computed, onMounted, ref, watch } from 'vue'
+const baseUrl = process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
 const route = useRoute()
 const href = computed(() => {
   const path = route.path
@@ -27,6 +18,15 @@ const href = computed(() => {
   }
   return href
 })
+
+const vitepressData = useData()
+
+
+watch(() => vitepressData.isDark.value, () => {
+  const iFrame: any = document.getElementById('demo')
+  iFrame && iFrame.contentWindow.postMessage(vitepressData.isDark.value, href.value)
+})
+
 
 </script>
 <style scoped>

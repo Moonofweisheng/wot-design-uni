@@ -1,46 +1,55 @@
 <template>
-  <wd-toast />
-  <demo-block title="基本用法" transparent>
-    <wd-search v-model="value1" @search="search" @change="change" @cancel="cancel" @clear="clear" />
-  </demo-block>
+  <view @click="clickoutside">
+    <wd-toast />
+    <page-wraper>
+      <demo-block title="基本用法" transparent>
+        <wd-search v-model="value1" @search="search" @change="change" @cancel="cancel" @clear="clear" />
+      </demo-block>
 
-  <demo-block title="白色输入框" transparent>
-    <wd-search light />
-  </demo-block>
+      <demo-block title="白色输入框" transparent>
+        <wd-search light />
+      </demo-block>
 
-  <demo-block title="搜索占位符居左" transparent>
-    <wd-search placeholder-left />
-  </demo-block>
+      <demo-block title="搜索占位符居左" transparent>
+        <wd-search placeholder-left />
+      </demo-block>
 
-  <demo-block title="禁用且隐藏取消按钮" transparent>
-    <wd-search disabled hide-cancel />
-  </demo-block>
+      <demo-block title="禁用且隐藏取消按钮" transparent>
+        <wd-search disabled hide-cancel />
+      </demo-block>
 
-  <view style="margin: 15px 0; color: #666">
-    <view style="padding: 0 15px; margin: 10px 0; font-size: 13px">自定义左侧插槽</view>
-    <wd-search v-model="value3">
-      <template #prefix>
-        <wd-popover mode="menu" :content="menu" @menuclick="changeSearchType">
-          <view class="search-type">
-            <text>{{ searchType }}</text>
-            <wd-icon class="icon-arrow" name="fill-arrow-down"></wd-icon>
-          </view>
-        </wd-popover>
-      </template>
-    </wd-search>
+      <view style="margin: 15px 0; color: #666">
+        <view style="padding: 0 15px; margin: 10px 0; font-size: 13px">自定义左侧插槽</view>
+        <wd-search v-model="value3">
+          <template #prefix>
+            <wd-popover v-model="showPopover" mode="menu" :content="menu" @menuclick="changeSearchType">
+              <view class="search-type">
+                <text>{{ searchType }}</text>
+                <wd-icon class="icon-arrow" name="fill-arrow-down"></wd-icon>
+              </view>
+            </wd-popover>
+          </template>
+        </wd-search>
+      </view>
+
+      <demo-block title="自定义右侧文案" transparent>
+        <wd-search placeholder="请输入订单号/订单名称" cancel-txt="搜索" />
+      </demo-block>
+
+      <demo-block title="设置最大长度" transparent>
+        <wd-search v-model="value2" :maxlength="4" />
+      </demo-block>
+    </page-wraper>
   </view>
-
-  <demo-block title="自定义右侧文案" transparent>
-    <wd-search placeholder="请输入订单号/订单名称" cancel-txt="搜索" />
-  </demo-block>
-
-  <demo-block title="设置最大长度" transparent>
-    <wd-search v-model="value2" :maxlength="4" />
-  </demo-block>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { clickOut } from '@/uni_modules/wot-design-uni'
 
+function clickoutside() {
+  clickOut.closeOutside()
+}
+const showPopover = ref<boolean>(false)
 const value1 = ref<string>('')
 const value2 = ref<string>('初始文案')
 const value3 = ref<string>('')
@@ -76,6 +85,20 @@ function changeSearchType({ item, index }) {
 }
 </script>
 <style lang="scss" scoped>
+.wot-theme-dark {
+  .search-type {
+    color: #f5f5f5;
+  }
+
+  .search-type::after {
+    color: #f5f5f5;
+  }
+
+  .search-type .icon-arrow {
+    color: #f5f5f5;
+  }
+}
+
 .search-type {
   position: relative;
   height: 30px;

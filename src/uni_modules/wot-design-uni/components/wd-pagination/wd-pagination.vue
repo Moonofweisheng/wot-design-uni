@@ -42,8 +42,10 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-pagination',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }

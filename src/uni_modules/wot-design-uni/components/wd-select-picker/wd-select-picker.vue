@@ -87,8 +87,10 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-select-picker',
   behaviors: ['uni://form-field'],
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -108,22 +110,22 @@ interface Props {
   customContentClass?: string
   customLabelClass?: string
   customValueClass?: string
-  label: string
+  label?: string
   labelWidth: string
   disabled: boolean
   readonly: boolean
   placeholder: string
-  title: string
+  title?: string
   alignRight: boolean
   error: boolean
   required: boolean
   useLabelSlot: boolean
   useDefaultSlot: boolean
-  size: string
+  size?: string
   checkedColor: string
   min: number
   max: number
-  selectSize: string
+  selectSize?: string
   loading: boolean
   loadingColor: string
   closeOnClickModal: boolean
@@ -135,9 +137,9 @@ interface Props {
   confirmButtonText: string
   // 外部展示格式化函数
   // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat: Function
+  displayFormat?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm: Function
+  beforeConfirm?: Function
   zIndex: number
   safeAreaInsetBottom: boolean
   filterable: boolean
@@ -150,6 +152,7 @@ const props = withDefaults(defineProps<Props>(), {
   customContentClass: '',
   customLabelClass: '',
   customValueClass: '',
+  columns: () => [],
   type: 'checkbox',
   valueKey: 'value',
   labelKey: 'label',

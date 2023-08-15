@@ -126,9 +126,11 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-input',
   behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -148,7 +150,7 @@ interface Props {
   customStyle: string
   // 原生属性
   placeholder: string
-  placeholderStyle: string
+  placeholderStyle?: string
   placeholderClass: string
   autoHeight: boolean
   fixed: boolean
@@ -168,23 +170,23 @@ interface Props {
   alignRight: boolean
   // 原生属性结束
   modelValue: string | number
-  minlength: number
+  minlength?: number
   showPassword: boolean
   clearable: boolean
   showClear: boolean
   readonly: boolean
   useSuffixSlot: boolean
   usePrefixSlot: boolean
-  prefixIcon: string
-  suffixIcon: string
+  prefixIcon?: string
+  suffixIcon?: string
   showWordLimit: boolean
   showWordCount: boolean
-  suffix: string
-  suffixCount: number
-  label: string
+  suffix?: string
+  suffixCount?: number
+  label?: string
   labelWidth: string
   useLabelSlot: boolean
-  size: string
+  size?: string
   error: boolean
   center: boolean
   noBorder: boolean
@@ -202,12 +204,19 @@ const props = withDefaults(defineProps<Props>(), {
   maxlength: -1,
   modelValue: '',
   placeholder: '请输入...',
+  autoHeight: false,
   clearable: false,
   showPassword: false,
   disabled: false,
+  showClear: false,
+  alignRight: false,
   readonly: false,
+  useSuffixSlot: false,
+  usePrefixSlot: false,
   showWordLimit: false,
+  showWordCount: false,
   confirmType: 'done',
+  confirmHold: false,
   placeholderClass: 'textarea-placeholder',
   focus: false,
   cursorSpacing: 0,
@@ -215,8 +224,9 @@ const props = withDefaults(defineProps<Props>(), {
   cursor: -1,
   showConfirmBar: true,
   selectionStart: -1,
-  selectionEndZ: -1,
+  selectionEnd: -1,
   adjustPosition: true,
+  holdKeyboard: false,
   error: false,
   center: false,
   labelWidth: '33%',

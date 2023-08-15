@@ -11,8 +11,10 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-modal',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -21,9 +23,9 @@ export default {
 <script lang="ts" setup>
 interface Props {
   show: boolean
-  duration: Record<string, number> | number
+  duration: Record<string, number> | number | boolean
   zIndex: number
-  customStyle: string
+  customStyle?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

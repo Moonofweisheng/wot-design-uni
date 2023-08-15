@@ -1,34 +1,36 @@
 <template>
-  <wd-toast />
+  <page-wraper>
+    <wd-toast />
 
-  <view @click="clickOutside" class="wrapper">
-    <demo-block custom-class="pop" title="基本用法">
-      <view class="center">
-        <wd-popover id="pop1" content="这是一段内容。" v-model="show1" @change="handleChange1">
-          <wd-button data-id="pop1">点击展示</wd-button>
-        </wd-popover>
-      </view>
-    </demo-block>
+    <view @click="clickOutside" class="wrapper">
+      <demo-block custom-class="pop" title="基本用法">
+        <view class="center">
+          <wd-popover id="pop1" content="这是一段内容。" v-model="show1" @change="handleChange1">
+            <wd-button data-id="pop1">点击展示</wd-button>
+          </wd-popover>
+        </view>
+      </demo-block>
 
-    <demo-block custom-class="pop" title="嵌套信息">
-      <view class="center list">
-        <wd-popover v-model="show2" use-content-slot @change="handleChange2">
-          <template #content>
-            <view class="pop-content">这是一段自定义样式的内容。</view>
-          </template>
-          <wd-button>点击展示</wd-button>
-        </wd-popover>
-      </view>
-    </demo-block>
+      <demo-block custom-class="pop" title="嵌套信息">
+        <view class="center list">
+          <wd-popover v-model="show2" use-content-slot @change="handleChange2">
+            <template #content>
+              <view class="pop-content">这是一段自定义样式的内容。</view>
+            </template>
+            <wd-button>点击展示</wd-button>
+          </wd-popover>
+        </view>
+      </demo-block>
 
-    <demo-block custom-class="pop" title="列表展示">
-      <view class="center list">
-        <wd-popover v-model="show3" mode="menu" :content="menu" @menuclick="link" @change="handleChange3">
-          <wd-button>列表</wd-button>
-        </wd-popover>
-      </view>
-    </demo-block>
-  </view>
+      <demo-block custom-class="pop" title="列表展示">
+        <view class="center list">
+          <wd-popover v-model="show3" mode="menu" :content="menu" @menuclick="link" @change="handleChange3">
+            <wd-button>列表</wd-button>
+          </wd-popover>
+        </view>
+      </demo-block>
+    </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { clickOut, useToast } from '@/uni_modules/wot-design-uni'

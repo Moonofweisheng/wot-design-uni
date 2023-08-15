@@ -1,6 +1,27 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(collapse-item) {
+    @include e(title) {
+      color: $-dark-color;
+    }
+
+    @include e(body) {
+      color: $-dark-color3;
+    }
+
+    @include when(disabled) {
+      .wd-collapse-item__title {
+        color: $-dark-color-gray;
+      }
+      .wd-collapse-item__arrow {
+        color: $-dark-color-gray;
+      }
+    }
+  }
+}
+
 @include b(collapse-item) {
   @include e(header) {
     position: relative;

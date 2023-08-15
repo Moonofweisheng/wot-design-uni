@@ -1,6 +1,42 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(step) {
+    @include e(icon) {
+      background: $-dark-background2;
+    }
+
+    @include e(content){
+      color: $-dark-color3;
+    }
+
+    @include e(line) {
+      background: $-dark-color-gray;
+    }
+
+    @include e(dot) {
+      background: $-dark-color-gray;
+    }
+
+    @include e(description) {
+      color: $-dark-color3;
+    }
+
+    @include when(wait) {
+      .wd-step__description {
+        color: $-dark-color-gray;
+      }
+    }
+
+    :deep(.wd-step__icon-outer),:deep(.wd-step__icon-inner){
+      color: $-dark-color3; 
+      border-color: $-dark-color-gray;
+    }
+  }
+}
+
+
 @include b(step) {
   position: relative;
   display: inline-block;
@@ -42,12 +78,12 @@
     color: $-steps-inactive-color;
   }
   @include e(icon-outer) {
-    width: $-steps-icon-size - 2px;
-    height: $-steps-icon-size - 2px;
+    width: calc($-steps-icon-size - 2px);
+    height: calc($-steps-icon-size - 2px);
     border: 1px solid $-steps-inactive-color;
     color: $-steps-inactive-color;
     text-align: center;
-    line-height: $-steps-icon-size - 2px;
+    line-height: calc($-steps-icon-size - 2px);
     border-radius: 50%;
     font-size: $-steps-icon-text-fs;
   }

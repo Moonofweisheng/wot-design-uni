@@ -31,9 +31,26 @@
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'wd-picker-view',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isEqual, range } from '../common/util'
+
+type ColumnItem = {
+  value?: string | number | boolean
+  label: string
+  disabled?: boolean
+}
 
 interface Props {
   customClass?: string
@@ -51,10 +68,10 @@ interface Props {
   // 初始值
   modelValue: string | number | boolean | Array<string | number | boolean>
   // 选择器数据
-  columns: Array<string | string[]>
+  columns: Array<string | string[] | ColumnItem>
   // 多级联动
   // eslint-disable-next-line @typescript-eslint/ban-types
-  columnChange: Function
+  columnChange?: Function
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -1,6 +1,11 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(checkbox-group) {
+    background-color: $-dark-background2;
+  }
+}
 @include b(checkbox-group) {
   background-color: $-checkbox-bg;
 

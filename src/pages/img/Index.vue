@@ -1,21 +1,23 @@
 <template>
-  <demo-block title="基本用法">
-    <wd-img :width="100" :height="100" :src="joy" />
-    <!-- 以组件位置为定位原点 -->
-    <wd-img :width="100" :height="100" :src="img" custom-class="border" />
-  </demo-block>
-  <demo-block title="填充">
-    <view class="col" v-for="(mode, index) in modes" :key="index">
-      <wd-img width="100%" height="27vw" :src="joy" :mode="mode" />
-      <view class="center">{{ mode }}</view>
-    </view>
-  </demo-block>
-  <demo-block title="圆形">
-    <view class="col" v-for="(mode, index) in modes" :key="index">
-      <wd-img round width="100%" height="27vw" :src="joy" :mode="mode" />
-      <view class="center">{{ mode }}</view>
-    </view>
-  </demo-block>
+  <page-wraper>
+    <demo-block title="基本用法">
+      <wd-img :width="100" :height="100" :src="joy" />
+      <!-- 以组件位置为定位原点 -->
+      <wd-img :width="100" :height="100" :src="img" custom-class="border" />
+    </demo-block>
+    <demo-block title="填充">
+      <view class="col" v-for="(mode, index) in modes" :key="index">
+        <wd-img width="100%" height="27vw" :src="joy" :mode="mode" />
+        <view class="center">{{ mode }}</view>
+      </view>
+    </demo-block>
+    <demo-block title="圆形">
+      <view class="col" v-for="(mode, index) in modes" :key="index">
+        <wd-img round width="100%" height="27vw" :src="joy" :mode="mode" />
+        <view class="center">{{ mode }}</view>
+      </view>
+    </demo-block>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { joy } from '../images/joy'

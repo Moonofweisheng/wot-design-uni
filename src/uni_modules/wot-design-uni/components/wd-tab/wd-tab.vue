@@ -5,6 +5,16 @@
     </view>
   </view>
 </template>
+<script lang="ts">
+export default {
+  name: 'wd-tab',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
 import { getType } from '../common/util'
@@ -13,9 +23,9 @@ import { inject } from 'vue'
 interface Props {
   customClass?: string
   // 唯一标识符
-  name: string
+  name: string | number
   // tab的label
-  title: string
+  title?: string
   // tab禁用，无法点击
   disabled: boolean
 }

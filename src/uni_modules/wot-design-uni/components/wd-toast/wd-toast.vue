@@ -21,7 +21,9 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-toast',
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }

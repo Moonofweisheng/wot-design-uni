@@ -1,47 +1,31 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-02 13:14:32
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\pages\switch\Index.vue
- * 记得注释
--->
-<!--
- * @Author: weisheng
- * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-07-03 16:23:26
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\pages\switch\Index.vue
- * 记得注释
--->
 <template>
-  <wd-message-box id="wd-message-box"></wd-message-box>
-  <view>
-    <demo-block title="基本用法">
-      <wd-switch v-model="checked1" @change="handleChange1" />
-    </demo-block>
-    <demo-block title="修改值 active-value 、 inactive-value">
-      <view style="margin-bottom: 10px">{{ checked2 }}</view>
-      <wd-switch v-model="checked2" active-value="沃特" inactive-value="商家后台" @change="handleChange2" />
-    </demo-block>
-    <demo-block title="自定义颜色 active-color 、 inactive-color">
-      <wd-switch v-model="checked3" active-color="#13ce66" inactive-color="#f00" @change="handleChange3" />
-    </demo-block>
-    <demo-block title="修改大小">
-      <wd-switch v-model="checked4" size="20px" @change="handleChange4" />
-    </demo-block>
-    <demo-block title="选中禁用">
-      <wd-switch v-model="checked5" disabled />
-    </demo-block>
-    <demo-block title="非选中禁用">
-      <wd-switch v-model="checked6" disabled />
-    </demo-block>
-    <demo-block title="before-change 修改前钩子函数">
-      <wd-switch v-model="checked7" :before-change="beforeChange" @change="handleChange5" />
-    </demo-block>
-  </view>
+  <page-wraper>
+    <wd-message-box></wd-message-box>
+    <view>
+      <demo-block title="基本用法">
+        <wd-switch v-model="checked1" @change="handleChange1" />
+      </demo-block>
+      <demo-block title="修改值 active-value 、 inactive-value">
+        <view style="margin-bottom: 10px">{{ checked2 }}</view>
+        <wd-switch v-model="checked2" active-value="沃特" inactive-value="商家后台" @change="handleChange2" />
+      </demo-block>
+      <demo-block title="自定义颜色 active-color 、 inactive-color">
+        <wd-switch v-model="checked3" active-color="#13ce66" inactive-color="#f00" @change="handleChange3" />
+      </demo-block>
+      <demo-block title="修改大小">
+        <wd-switch v-model="checked4" size="20px" @change="handleChange4" />
+      </demo-block>
+      <demo-block title="选中禁用">
+        <wd-switch v-model="checked5" disabled />
+      </demo-block>
+      <demo-block title="非选中禁用">
+        <wd-switch v-model="checked6" disabled />
+      </demo-block>
+      <demo-block title="before-change 修改前钩子函数">
+        <wd-switch v-model="checked7" :before-change="beforeChange" @change="handleChange5" />
+      </demo-block>
+    </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useMessage } from '@/uni_modules/wot-design-uni'

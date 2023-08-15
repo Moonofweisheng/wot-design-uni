@@ -1,6 +1,16 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(divider) {
+    color: $-dark-color3;
+
+    @include e(line) {
+      background: $-dark-color-gray;
+    }
+  }
+}
+
 @include b(divider) {
   position: relative;
   display: flex;

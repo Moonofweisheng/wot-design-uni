@@ -520,6 +520,16 @@
           },
           "navigationBarTitleText": "Collapse 折叠面板"
         }
+      },
+      {
+        "path": "pages/configProvider/Index",
+        "name": "configProvider",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "ConfigProvider 全局配置"
+        }
       }
     ],
     // "tabBar": {
@@ -529,8 +539,17 @@
     //   "list": [ ]
     // },
     "globalStyle": {
-      "navigationBarTextStyle": "black",
-      "navigationBarBackgroundColor": "#FFF",
-      "backgroundColor": "#F8F8F8"
+      "navigationBarBackgroundColor": "@navBgColor",
+      "navigationBarTextStyle": "@navTxtStyle",
+      "navigationBarTitleText": "Wot Design Uni",
+      "backgroundColor": "@bgColor",
+      "backgroundTextStyle": "@bgTxtStyle",
+      "backgroundColorTop": "@bgColorTop",
+      "backgroundColorBottom": "@bgColorBottom",
+      "navigationStyle": "default"
+
+      // "navigationBarTextStyle": "black",
+      // "navigationBarBackgroundColor": "#FFF",
+      // "backgroundColor": "#F8F8F8"
     }
   }

@@ -1,6 +1,29 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
+.wot-theme-dark {
+  @include b(picker-view) {
+    @include e(columns) {
+      background: $-dark-background2;
+    }
+
+    :deep(.wd-picker-view__roller) {
+      background: $-dark-background4;
+    }
+  }
+
+  @include b(picker-view-column) {
+    color: $-dark-color;
+
+    @include e(item) {
+      @include m(disabled) {
+        color: $-dark-color-gray;
+      }
+    }
+  }
+}
+
+
 @include b(picker-view) {
   position: relative;
   padding: 10px 0;
@@ -13,7 +36,7 @@
     align-items: center;
   }
 
-  @include e(mask) {
+  @include edeep(mask) {
     position: absolute;
     top: 0;
     left: 0;
@@ -40,11 +63,12 @@
     background: $-picker-loading-bg;
   }
 
-  @include e(roller) {
-    background: rgba(245,245,245,1);
+  @include edeep(roller) {
+    background: rgba(245, 245, 245, 1);
     z-index: -1;
 
-    &::before, &::after {
+    &::before,
+    &::after {
       display: none;
     }
   }

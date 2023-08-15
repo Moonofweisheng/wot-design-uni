@@ -1,49 +1,50 @@
 <template>
-  <wd-toast />
-
-  <view style="margin: 20px 0">
-    <wd-cell-group border>
-      <wd-calendar label="单个日期选择" v-model="value1" @confirm="handleConfirm1" />
-      <wd-calendar label="多个日期选择" type="dates" v-model="value2" @confirm="handleConfirm2" />
-      <wd-calendar label="日期范围选择" type="daterange" v-model="value3" />
-      <wd-calendar label="日期时间选择" type="datetime" v-model="value4" />
-      <wd-calendar label="日期时间范围选择" type="datetimerange" v-model="value5" />
-      <wd-calendar label="周选择" type="week" v-model="value6" />
-      <wd-calendar label="月选择" type="month" v-model="value7" />
-      <wd-calendar label="周范围选择" :first-day-of-week="1" type="weekrange" v-model="value8" />
-      <wd-calendar label="月范围选择" type="monthrange" v-model="value9" />
-      <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value10" />
-      <wd-calendar label="快捷操作" :show-confirm="false" />
-      <wd-calendar label="日期格式化" type="daterange" v-model="value11" :formatter="formatter" />
-      <wd-calendar
-        label="快捷选项"
-        :shortcuts="shortcuts"
-        :on-shortcuts-click="onShortcutsClick"
-        type="daterange"
-        const
-        v-model="value12"
-        @confirm="handleConfirm3"
-      />
-      <wd-calendar
-        label="自定义展示"
-        type="daterange"
-        const
-        v-model="value13"
-        :display-format="displayFormat"
-        :inner-display-format="innerDisplayFormat"
-      />
-      <wd-calendar label="before-confirm" v-model="value14" :before-confirm="beforeConfirm" />
-    </wd-cell-group>
-  </view>
-
-  <demo-block transparent title="自定义选择器">
-    <view style="margin: 0 15px">
-      <view style="margin-bottom: 10px">当前选中日期：{{ formatValue }}</view>
-      <wd-calendar use-default-slot @confirm="handleConfirm4">
-        <wd-button>选择日期</wd-button>
-      </wd-calendar>
+  <page-wraper>
+    <wd-toast />
+    <view style="margin: 20px 0">
+      <wd-cell-group border>
+        <wd-calendar label="单个日期选择" v-model="value1" @confirm="handleConfirm1" />
+        <wd-calendar label="多个日期选择" type="dates" v-model="value2" @confirm="handleConfirm2" />
+        <wd-calendar label="日期范围选择" type="daterange" v-model="value3" />
+        <wd-calendar label="日期时间选择" type="datetime" v-model="value4" />
+        <wd-calendar label="日期时间范围选择" type="datetimerange" v-model="value5" />
+        <wd-calendar label="周选择" type="week" v-model="value6" />
+        <wd-calendar label="月选择" type="month" v-model="value7" />
+        <wd-calendar label="周范围选择" :first-day-of-week="1" type="weekrange" v-model="value8" />
+        <wd-calendar label="月范围选择" type="monthrange" v-model="value9" />
+        <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value10" />
+        <wd-calendar label="快捷操作" v-model="value10" :show-confirm="false" />
+        <wd-calendar label="日期格式化" type="daterange" v-model="value11" :formatter="formatter" />
+        <wd-calendar
+          label="快捷选项"
+          :shortcuts="shortcuts"
+          :on-shortcuts-click="onShortcutsClick"
+          type="daterange"
+          const
+          v-model="value12"
+          @confirm="handleConfirm3"
+        />
+        <wd-calendar
+          label="自定义展示"
+          type="daterange"
+          const
+          v-model="value13"
+          :display-format="displayFormat"
+          :inner-display-format="innerDisplayFormat"
+        />
+        <wd-calendar label="before-confirm" v-model="value14" :before-confirm="beforeConfirm" />
+      </wd-cell-group>
     </view>
-  </demo-block>
+
+    <demo-block transparent title="自定义选择器">
+      <view style="margin: 0 15px">
+        <view style="margin-bottom: 10px">当前选中日期：{{ formatValue }}</view>
+        <wd-calendar v-model="value15" use-default-slot @confirm="handleConfirm4">
+          <wd-button>选择日期</wd-button>
+        </wd-calendar>
+      </view>
+    </demo-block>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
@@ -61,9 +62,11 @@ const value8 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 14, Date.now()]
 const value9 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 33, Date.now()])
 const value10 = ref<number>(Date.now())
 const value11 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])
-const value12 = ref<string>('')
+const value12 = ref<number | null>(null)
 const value13 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])
-const value14 = ref<string>('')
+const value14 = ref<number | null>(null)
+const value15 = ref<number | null>(null)
+
 const formatValue = ref<string>('')
 const formatter = (day) => {
   const date = new Date(day.date)

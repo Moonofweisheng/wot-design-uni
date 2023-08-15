@@ -1,35 +1,37 @@
 <template>
-  <wd-toast />
-  <demo-block transparent>
-    <wd-cell-group border>
-      <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />
-      <wd-datetime-picker label="年月日" v-model="value2" type="date" @confirm="handleConfirm2" />
-      <wd-datetime-picker label="年月" v-model="value3" type="year-month" @confirm="handleConfirm3" />
-      <wd-datetime-picker label="时分" v-model="value4" type="time" @confirm="handleConfirm4" />
-      <wd-datetime-picker label="展示格式" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
-      <wd-datetime-picker label="内部格式" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
-      <wd-datetime-picker label="过滤选项" v-model="value7" :filter="filter" @confirm="handleConfirm7" />
-      <wd-datetime-picker label="before-confirm" v-model="value8" :before-confirm="beforeConfirm" @confirm="handleConfirm8" />
-      <wd-datetime-picker label="错误" v-model="value9" error @confirm="handleConfirm9" />
-      <wd-datetime-picker label="必填" v-model="value10" required @confirm="handleConfirm10" />
-      <wd-datetime-picker label="默认日期" v-model="value2" :default-value="value2" />
-    </wd-cell-group>
-  </demo-block>
-  <demo-block title="label 不传" transparent>
-    <wd-datetime-picker v-model="value11" @confirm="handleConfirm11" />
-  </demo-block>
-  <demo-block title="大小" transparent>
-    <wd-datetime-picker label="日期选择" size="large" v-model="value12" @confirm="handleConfirm12" />
-  </demo-block>
-  <demo-block title="值靠右展示" transparent>
-    <wd-datetime-picker label="日期选择" align-right v-model="value13" @confirm="handleConfirm13" />
-  </demo-block>
-  <demo-block title="区域选择" transparent>
-    <wd-datetime-picker label="日期选择" v-model="value14" @confirm="handleConfirm14" />
-  </demo-block>
-  <demo-block title="范围tab展示格式" transparent>
-    <wd-datetime-picker label="日期选择" v-model="value15" @confirm="handleConfirm15" :display-format-tab-label="displayFormatTabLabel" />
-  </demo-block>
+  <page-wraper>
+    <wd-toast />
+    <demo-block transparent>
+      <wd-cell-group border>
+        <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />
+        <wd-datetime-picker label="年月日" v-model="value2" type="date" @confirm="handleConfirm2" />
+        <wd-datetime-picker label="年月" v-model="value3" type="year-month" @confirm="handleConfirm3" />
+        <wd-datetime-picker label="时分" v-model="value4" type="time" @confirm="handleConfirm4" />
+        <wd-datetime-picker label="展示格式" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
+        <wd-datetime-picker label="内部格式" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
+        <wd-datetime-picker label="过滤选项" v-model="value7" :filter="filter" @confirm="handleConfirm7" />
+        <wd-datetime-picker label="before-confirm" v-model="value8" :before-confirm="beforeConfirm" @confirm="handleConfirm8" />
+        <wd-datetime-picker label="错误" v-model="value9" error @confirm="handleConfirm9" />
+        <wd-datetime-picker label="必填" v-model="value10" required @confirm="handleConfirm10" />
+        <wd-datetime-picker label="默认日期" v-model="value2" :default-value="value2" />
+      </wd-cell-group>
+    </demo-block>
+    <demo-block title="label 不传" transparent>
+      <wd-datetime-picker v-model="value11" @confirm="handleConfirm11" />
+    </demo-block>
+    <demo-block title="大小" transparent>
+      <wd-datetime-picker label="日期选择" size="large" v-model="value12" @confirm="handleConfirm12" />
+    </demo-block>
+    <demo-block title="值靠右展示" transparent>
+      <wd-datetime-picker label="日期选择" align-right v-model="value13" @confirm="handleConfirm13" />
+    </demo-block>
+    <demo-block title="区域选择" transparent>
+      <wd-datetime-picker label="日期选择" v-model="value14" @confirm="handleConfirm14" />
+    </demo-block>
+    <demo-block title="范围tab展示格式" transparent>
+      <wd-datetime-picker label="日期选择" v-model="value15" @confirm="handleConfirm15" :display-format-tab-label="displayFormatTabLabel" />
+    </demo-block>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'

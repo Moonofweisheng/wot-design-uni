@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-07-20 00:34:54
- * @LastEditTime: 2023-07-20 12:56:29
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-card\wd-card.vue
- * 记得注释
--->
 <template>
   <view :class="['wd-card', type == 'rectangle' ? 'is-rectangle' : '', customClass]">
     <view :class="['wd-card__title-content', customTitleClass]">
@@ -23,6 +14,17 @@
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'wd-card',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 
 <script lang="ts" setup>
 interface Props {

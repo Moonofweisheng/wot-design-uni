@@ -1,6 +1,26 @@
 @import '../../common/abstracts/variable';
 @import '../../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(month-panel) {
+    @include e(title) {
+      color: $-dark-color;
+    }
+
+    @include e(weeks) {
+      box-shadow: 0px 4px 8px 0 rgba(255, 255, 255, 0.02);
+      color: $-dark-color;
+    }
+
+    @include e(time-label) {
+      color: $-dark-color;
+      &::after{
+        background: $-dark-background4;
+      }
+    }
+  }
+}
+
 @include b(month-panel) {
   font-size: $-calendar-fs;
 
@@ -11,6 +31,7 @@
     color: $-calendar-panel-title-color;
     padding: $-calendar-panel-padding;
   }
+
   @include e(weeks) {
     display: flex;
     height: $-calendar-week-height;
@@ -20,18 +41,22 @@
     font-size: $-calendar-week-fs;
     padding: $-calendar-panel-padding;
   }
+
   @include e(week) {
     flex: 1;
     text-align: center;
   }
+
   @include e(container) {
     padding: $-calendar-panel-padding;
     box-sizing: border-box;
   }
+
   @include e(time) {
     display: flex;
     box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.02);
   }
+
   @include e(time-label) {
     position: relative;
     flex: 1;
@@ -52,10 +77,12 @@
       z-index: 0;
     }
   }
+
   @include e(time-text) {
     position: relative;
     z-index: 1;
   }
+
   @include e(time-picker) {
     flex: 3;
   }

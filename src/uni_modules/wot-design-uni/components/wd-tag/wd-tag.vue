@@ -27,7 +27,9 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-tag',
   options: {
+    addGlobalClass: true,
     virtualHost: true,
     styleIsolation: 'shared'
   }
@@ -39,19 +41,20 @@ import { computed, ref, watch } from 'vue'
 
 interface Props {
   useIconSlot: boolean
-  type: string
-  icon: string
+  type?: string
+  icon?: string
   closable: boolean
   plain: boolean
-  dynamic: false
-  color: string
-  bgColor: string
+  dynamic: boolean
+  color?: string
+  bgColor?: string
   round: boolean
   mark: boolean
   customClass: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   useIconSlot: false,
   closable: false,
   plain: false,

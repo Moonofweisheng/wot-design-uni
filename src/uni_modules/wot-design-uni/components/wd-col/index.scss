@@ -9,7 +9,11 @@ $i: 1;
 }
 
 @while $i <= 24 {
-  .wd-col__#{$i} { width: 100% / 24 * $i; }
-  .wd-col__offset-#{$i} { margin-left: 100% / 24 * $i; }
-  $i : $i + 1;
+  .wd-col__#{$i} {
+    width: calc(100% / 24 * $i);
+  }
+  .wd-col__offset-#{$i} {
+    margin-left: calc(100% / 24 * $i);
+  }
+  $i: $i + 1;
 }

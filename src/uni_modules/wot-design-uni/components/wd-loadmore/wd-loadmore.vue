@@ -20,8 +20,10 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-loadmore',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -34,7 +36,7 @@ type LoadMoreState = 'loading' | 'error' | 'finished'
 
 interface Props {
   customClass?: string
-  state: LoadMoreState
+  state?: LoadMoreState
   loadingText?: string
   finishedText?: string
   errorText?: string

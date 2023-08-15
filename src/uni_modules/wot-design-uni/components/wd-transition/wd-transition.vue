@@ -6,9 +6,11 @@
 
 <script lang="ts">
 export default {
-  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，可以去掉微信小程序自定义组件多出的最外层标签
+  name: 'wd-transition',
   options: {
-    virtualHost: true
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
   }
 }
 </script>
@@ -50,8 +52,8 @@ type TransitionName =
 
 interface Props {
   show: boolean
-  duration?: Record<string, number> | number
-  name: TransitionName
+  duration?: Record<string, number> | number | boolean
+  name: TransitionName | ''
   customStyle: string
   lazyRender: boolean
   customClass?: string
@@ -71,6 +73,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
+  customStyle: '',
   show: false,
   name: 'fade',
   duration: 300,

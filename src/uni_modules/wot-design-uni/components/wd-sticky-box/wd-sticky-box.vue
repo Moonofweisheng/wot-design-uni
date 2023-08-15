@@ -10,7 +10,9 @@
 
 <script lang="ts">
 export default {
+  name: 'wd-sticky-box',
   options: {
+    addGlobalClass: true,
     // virtualHost: true,
     styleIsolation: 'shared'
   }

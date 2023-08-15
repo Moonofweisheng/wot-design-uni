@@ -47,7 +47,7 @@
     border-color: $-switch-active-color;
 
     .wd-switch__circle {
-      left: calc(#{$-switch-width - $-switch-circle-size} - 2px);
+      left: calc($-switch-width - $-switch-circle-size - 2px);
       box-shadow: 0 2px 4px 0 $-switch-active-shadow-color
     }
   }

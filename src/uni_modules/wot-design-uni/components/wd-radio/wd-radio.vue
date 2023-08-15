@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2023-07-12 13:11:38
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-radio\wd-radio.vue
- * 记得注释
--->
 <template>
   <view
     :class="`wd-radio ${innerCell ? 'is-cell-radio' : ''} ${innerCell && innerShape == 'button' ? 'is-button-radio' : ''} ${
@@ -31,8 +22,10 @@
 </template>
 <script lang="ts">
 export default {
+  name: 'wd-radio',
   options: {
     virtualHost: true,
+    addGlobalClass: true,
     styleIsolation: 'shared'
   }
 }
@@ -43,14 +36,14 @@ import { computed, getCurrentInstance, inject, onBeforeMount, ref, watch } from 
 type RadioShape = 'dot' | 'button' | 'check'
 interface Props {
   customClass?: string
-  value: string | number | boolean
-  shape: RadioShape
-  checkedColor: string
+  value?: string | number | boolean
+  shape?: RadioShape
+  checkedColor?: string
   disabled: boolean | null
   cell: boolean | null
-  size: string
+  size?: string
   inline: boolean | null
-  maxWidth: string
+  maxWidth?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -139,7 +132,7 @@ watch(
   (newValue) => {
     // type: 'dot', 'button', 'check'
     const type = ['check', 'dot', 'button']
-    if (type.indexOf(newValue) === -1) throw Error(`shape must be one of ${type.toString()}`)
+    if (!newValue || type.indexOf(newValue) === -1) throw Error(`shape must be one of ${type.toString()}`)
   }
 )
 
