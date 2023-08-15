@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-03-09 19:23:03
- * @LastEditTime: 2023-08-15 23:20:15
+ * @LastEditTime: 2023-08-16 00:02:08
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\App.vue
@@ -21,16 +21,16 @@ onLaunch((ctx) => {
   darkMode.setDark(systemInfo.theme === 'dark')
 
   // #ifdef H5
-  process.env.NODE_ENV === 'development' &&
-    window.addEventListener('message', function (event) {
-      if (event.source !== parent) return
-      // 处理收到的消息
-      if (typeof event.data === 'boolean') {
-        darkMode.setDark(event.data)
-      } else {
-        darkMode.setDark(false)
-      }
-    })
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== parent) return
+    // 处理收到的消息
+    if (typeof event.data === 'boolean') {
+      darkMode.setDark(event.data)
+    } else {
+      darkMode.setDark(false)
+    }
+  })
   // #endif
   console.log('App Launch')
 })
