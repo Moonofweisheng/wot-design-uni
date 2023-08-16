@@ -39,6 +39,6 @@ features:
     title: 提供丰富的文档和组件示例
     details: 文档和组件示例为开发者提供稳定的后勤保障。
   - icon: 🍭
-    title: 支持主题定制
+    title: 支持暗黑模式和主题定制
     details: 可以定制scss变量以及组件的样式自定义。
 ---

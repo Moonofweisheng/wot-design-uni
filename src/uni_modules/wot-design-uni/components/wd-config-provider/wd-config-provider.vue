@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2023-08-15 13:07:44
+ * @LastEditTime: 2023-08-16 10:51:08
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-config-provider\wd-config-provider.vue
@@ -78,13 +78,6 @@ const colorRgb = (str: string) => {
 const mapThemeVarsToCSSVars = (themeVars: Record<string, string>) => {
   if (!themeVars) return
   const cssVars: Record<string, string> = {}
-  // const primaryColor = props?.themeVars?.primaryColor
-  // 为了处理一些组件的rgba透明颜色
-  // if (primaryColor) {
-  //   cssVars['--nut-address-region-tab-line'] = `linear-gradient(90deg, ${primaryColor} 0%, rgba(${colorRgb(primaryColor)},0.15) 100%) `
-  //   cssVars['--nut-tabs-horizontal-tab-line-color'] = `linear-gradient(90deg, ${primaryColor} 0%, rgba(${colorRgb(primaryColor)},0.15)100%)`
-  //   cssVars['--nut-tabs-vertical-tab-line-color'] = `linear-gradient(180deg, ${primaryColor} 0%, rgba(${colorRgb(primaryColor)},0.15) 100%) `
-  // }
   Object.keys(themeVars).forEach((key) => {
     cssVars[`--wot-${kebabCase(key)}`] = themeVars[key]
   })

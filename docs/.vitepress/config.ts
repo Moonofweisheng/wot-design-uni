@@ -122,6 +122,9 @@ export default defineConfig({
                 link: "/component/layout",
                 text: "Layout 布局"
               }, {
+                link: "/component/configProvider",
+                text: "ConfigProvider 全局配置"
+              },{
                 link: "/component/popup",
                 text: "Popup 弹出层"
               }, {
