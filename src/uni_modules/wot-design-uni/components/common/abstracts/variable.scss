@@ -253,7 +253,7 @@ $-calendar-day-height: var(--wot-calendar-day-height, 64px) !default;
 $-calendar-month-width: var(--wot-calendar-month-width, 50px) !default;
 $-calendar-active-color: var(--wot-calendar-active-color, $-color-theme) !default;
 $-calendar-disabled-color: var(--wot-calendar-disabled-color, rgba(0, 0, 0, 0.25)) !default;
-$-calendar-range-color: var(--wot-calendar-range-color, rgba($-color-theme, 0.09)) !default;
+$-calendar-range-color: var(--wot-calendar-range-color, rgba(#4d80f0, 0.09)) !default;
 $-calendar-active-border: var(--wot-calendar-active-border, 8px) !default;
 $-calendar-info-fs: var(--wot-calendar-info-fs, 10px) !default;
 
