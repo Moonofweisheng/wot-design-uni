@@ -45,6 +45,7 @@
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
     "release-tag": "node build/release.js",
+    "compiler": "npm run clean:lib && node build/compiler.js",
     "upload:mp-weixin": "uni build -p mp-weixin && minici --platform weixin",
     "upload:mp-alipay": "uni build -p mp-alipay && minici --platform alipay",
     "upload:mp-dingtalk": "uni build -p mp-dingtalk && minici --platform dd"
