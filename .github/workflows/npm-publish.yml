@@ -7,20 +7,20 @@ on:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 jobs:
-  build:
+  install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Install Dependencies
-      - run: npm install
-      - run: npm run compiler
+      - run: yarn
+      - run: yarn compiler
 
-  publish-gpr:
-    needs: build
+  publish:
+    needs: install
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,8 +29,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: '16.x'
           registry-url: https://npm.pkg.github.com/
-      - run: npm publish
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
