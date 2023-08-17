@@ -168,9 +168,9 @@ function handleClose(order) {
 
 | 事件名称     | 说明                       | 参数        | 最低版本 |
 | ------------ | -------------------------- | ----------- | -------- |
-| bind:click   | 标签点击时触发             | event       | -        |
-| bind:close   | 点击关闭按钮时触发         | event       | -        |
-| bind:confirm | 新增标签输入内容确定后触发 | `{ value }` | -        |
+| click   | 标签点击时触发             | event       | -        |
+| close   | 点击关闭按钮时触发         | event       | -        |
+| confirm | 新增标签输入内容确定后触发 | `{ value }` | -        |
 
 ## Slots
 

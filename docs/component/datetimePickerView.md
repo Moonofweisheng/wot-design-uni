@@ -5,12 +5,12 @@
 
 ## 基本用法
 
-`v-model` 设置绑定值，默认为 'datetime' 类型，展示年月日时分，绑定值为 `时间戳` 类型，如果为 'time' 类型，绑定值为字符串。
+`v-model` 设置绑定值，默认为 `datetime` 类型，展示年月日时分，绑定值为 `时间戳` 类型，如果为 `time` 类型，绑定值为字符串。
 
 ```html
 <wd-toast />
 
-<wd-datetime-picker-view v-model="value" label="日期选择" bind:change="handleChange" />
+<wd-datetime-picker-view v-model="value" label="日期选择" @change="handleChange" />
 ```
 ```typescript
 import { useToast } from '@/uni_modules/wot-design-uni'
@@ -24,7 +24,7 @@ function onChange1({ value }) {
 
 ## date 类型
 
-'date' 类型只展示年月日。
+`date` 类型只展示年月日。
 
 ```html
 <wd-datetime-picker-view type="date" v-model="value" label="年月日" />
@@ -34,7 +34,7 @@ const value = ref<number>(Date.now())
 ```
 ## year-month 类型
 
-'year-month' 类型只展示年月。
+`year-month` 类型只展示年月。
 
 ```html
 <wd-datetime-picker-view type="year-month" v-model="value" label="年月" />
@@ -45,13 +45,13 @@ const value = ref<number>(Date.now())
 
 ## time 类型
 
-'time' 类型只展示时分。
+`time` 类型只展示时分。
 
 ```html
 <wd-datetime-picker-view type="time" v-model="value" label="时分" />
 ```
 ```typescript
-const value = ref<number>(Date.now())
+const value4 = ref<string>('11:12')
 ```
 
 ## 修改内部格式
@@ -126,6 +126,6 @@ const filter = (type, values) => {
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| bind:change | 切换选项时触发 | 选中的值 `{ value }`，value 为当前选中日期的时间戳，'time' 类型则为字符串 | - |
-| bind:pickstart | 当滚动选择开始时候触发事件 | - | - | - |
-| bind:pickend | 当滚动选择结束时候触发事件 | - | - | - |
+| change | 切换选项时触发 | 选中的值 `{ value }`，value 为当前选中日期的时间戳，'time' 类型则为字符串 | - |
+| pickstart | 当滚动选择开始时候触发事件 | - | - | - |
+| pickend | 当滚动选择结束时候触发事件 | - | - | - |

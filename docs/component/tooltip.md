@@ -28,7 +28,7 @@
 
 ```html
 <view catchtap="clickoutside">
-  <wd-tooltip v-model="show" bind:change="handleChange" placement="top" content="top 提示文字">
+  <wd-tooltip v-model="show" @change="handleChange" placement="top" content="top 提示文字">
     <wd-button>top</wd-button>
   </wd-tooltip>
 </view>
@@ -136,9 +136,9 @@ Tooltip 组件通过属性`show-close` 控制是否显示关闭按钮。
 
 | 事件名称    | 说明             | 回调参数 | 最低版本 |
 | ----------- | ---------------- | -------- | -------- |
-| bind:open   | 显示时触发       | -        | -        |
-| bind:close  | 隐藏时触发       | -        | -        |
-| bind:change | 显隐值变化时触发 | -        | -        |
+| open   | 显示时触发       | -        | -        |
+| close  | 隐藏时触发       | -        | -        |
+| change | 显隐值变化时触发 | -        | -        |
 
 ## Methods
 

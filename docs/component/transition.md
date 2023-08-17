@@ -85,12 +85,12 @@
 
 | 事件名称         | 说明       | 参数 | 最低版本 |
 | ---------------- | ---------- | ---- | -------- |
-| bind:beforeenter | 进入前触发 | -    | -        |
-| bind:enter       | 进入时触发 | -    | -        |
-| bind:afterenter  | 进入后触发 | -    | -        |
-| bind:beforeleave | 离开前触发 | -    | -        |
-| bind:leave       | 离开时触发 | -    | -        |
-| bind:afterleave  | 离开后触发 | -    | -        |
+| beforeenter | 进入前触发 | -    | -        |
+| enter       | 进入时触发 | -    | -        |
+| afterenter  | 进入后触发 | -    | -        |
+| beforeleave | 离开前触发 | -    | -        |
+| leave       | 离开时触发 | -    | -        |
+| afterleave  | 离开后触发 | -    | -        |
 
 ## 外部样式类
 

@@ -5,10 +5,10 @@
 
 ## 基本用法
 
-设置`value`分数，设置`num`总分数，默认为5分，监听 `change` 事件获取新值。
+设置`v-model`分数，设置`num`总分数，默认为5分，监听 `change` 事件获取新值。
 
 ```html
-<wd-rate v-model="value" bind:change="handleChange" />
+<wd-rate v-model="value" @change="handleChange" />
 ```
 
 ```typescript
@@ -33,7 +33,7 @@ function changeValue({ value }) {
 设置 `disabled` 属性和`disabled-color`
 
 ```html
-<wd-rate value="{{2}}" disabled />
+<wd-rate :modelValue="2" disabled />
 ```
 
 ## 修改颜色
@@ -82,7 +82,7 @@ function changeValue({ value }) {
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| bind:change | 点击icon，修改分值事件 | `{ value }` | - |
+| change | 点击icon，修改分值事件 | `{ value }` | - |
 
 ## 外部样式类
 

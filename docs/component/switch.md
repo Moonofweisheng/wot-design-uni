@@ -48,7 +48,7 @@ const checked = ref<boolean>(true)
 设置 `before-change` 属性，修改前钩子，接收 { value, resolve } 参数，`resolve(true)` 表示修改通过，`resolve(false)` 表示不修改。
 
 ```html
-<wd-switch v-model="checked" :before-change="beforeChange" bind:change="handleChange" />
+<wd-switch v-model="checked" :before-change="beforeChange" @change="handleChange" />
 ```
 
 ```typescript
@@ -86,7 +86,7 @@ const beforeChange = ({ value, resolve }) => {
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| bind:change | 值修改事件 | `{ value }` | - |
+| change | 值修改事件 | `{ value }` | - |
 
 ## 外部样式类
 

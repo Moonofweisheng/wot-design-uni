@@ -8,7 +8,7 @@
 
 ```html
 <wd-toast />
-<wd-button bind:click="showToast">toast</wd-button>
+<wd-button @click="showToast">toast</wd-button>
 ```
 
 ```typescript
