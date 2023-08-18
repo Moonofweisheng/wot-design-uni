@@ -53,7 +53,7 @@ interface Props {
   modelValue: string | number | boolean
   shape: checkShape
   checkedColor?: string
-  disabled: boolean
+  disabled: boolean | null
   trueValue: string | number | boolean
   falseValue: string | number | boolean
   size?: string
@@ -67,7 +67,7 @@ const props = withDefaults(defineProps<Props>(), {
   shape: 'circle',
   trueValue: true,
   falseValue: false,
-  disabled: false
+  disabled: null
 })
 
 const isChecked = ref<boolean>(false) // 是否被选中
