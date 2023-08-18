@@ -44,6 +44,7 @@
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
+    "clean:lib": "rimraf lib",
     "release-tag": "node build/release.js",
     "compiler": "npm run clean:lib && node build/compiler.js",
     "upload:mp-weixin": "uni build -p mp-weixin && minici --platform weixin",
