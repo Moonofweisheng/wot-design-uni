@@ -42,6 +42,10 @@
   }
 }
 
+:deep(.wd-action-sheet__popup){
+  border-radius: $-action-sheet-radius $-action-sheet-radius 0 0;
+}
+
 @include b(action-sheet) {
   background-color: $-color-white;
   padding-bottom: 1px;

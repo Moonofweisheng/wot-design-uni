@@ -6,7 +6,6 @@
 <script lang="ts">
 export default {
   name: 'wd-radio-group',
-  behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
     addGlobalClass: true,

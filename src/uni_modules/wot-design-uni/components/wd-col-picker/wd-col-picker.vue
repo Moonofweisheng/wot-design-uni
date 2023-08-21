@@ -80,7 +80,6 @@
 <script lang="ts">
 export default {
   name: 'wd-col-picker',
-  behaviors: ['uni://form-field'],
   options: {
     addGlobalClass: true,
     virtualHost: true,
@@ -217,8 +216,6 @@ watch(
     selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
       return getSelectedItem(item, colIndex, newSelectedList)[props.labelKey]
     })
-    console.log(selectShowList.value, 'watch props.columns')
-
     lastSelectList.value = newSelectedList
 
     if (newSelectedList.length > 0) {
@@ -372,8 +369,6 @@ function handleColChange(colIndex, item, index, callback?) {
           selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
             return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
           })
-          console.log(selectShowList.value, 'handleColChange')
-
           callback()
         }
       },
@@ -509,6 +504,11 @@ function handleAutoComplete() {
     }
   }
 }
+
+defineExpose({
+  close,
+  open
+})
 </script>
 
 <style lang="scss" scoped>

@@ -24,8 +24,10 @@
 
 @include b(year) {
   @include e(title) {
-    padding: 13px 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
     font-size: $-calendar-panel-title-fs;
     color: $-calendar-panel-title-color;
   }

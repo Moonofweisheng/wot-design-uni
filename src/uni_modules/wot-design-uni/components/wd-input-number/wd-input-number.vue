@@ -26,7 +26,6 @@
 <script lang="ts">
 export default {
   name: 'wd-input-number',
-  behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
     addGlobalClass: true,

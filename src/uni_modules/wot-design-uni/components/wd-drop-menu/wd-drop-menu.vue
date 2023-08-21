@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-drop-menu ${customClass}`" @click.stop="noop">
+  <view :style="customStyle" :class="`wd-drop-menu ${customClass}`" @click.stop="noop">
     <view class="wd-drop-menu__list">
       <view
         v-for="(item, index) in titleList"
@@ -34,7 +34,8 @@ import { getRect } from '../common/util'
 
 type DropDirction = 'up' | 'down'
 interface Props {
-  customClass?: string
+  customClass: string
+  customStyle: string
   zIndex: number
   direction: DropDirction
   modal: boolean
@@ -44,6 +45,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
+  customStyle: '',
   zIndex: 12,
   direction: 'down',
   modal: true,
@@ -126,7 +128,7 @@ function fold(child?: any) {
     const { top, bottom } = rect
 
     if (props.direction === 'down') {
-      offset.value = bottom + 44
+      offset.value = bottom
       // #ifdef H5
       // H5端，导航栏为普通元素，需要将组件移动到导航栏的下边沿
       // H5的导航栏高度为44px

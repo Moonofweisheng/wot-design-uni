@@ -33,14 +33,11 @@
     <wd-popup
       v-model="popupShow"
       position="bottom"
-      :lazyRender="false"
-      :hide-when-close="true"
+      :hide-when-close="false"
       :close-on-click-modal="closeOnClickModal"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :z-index="zIndex"
       @close="onCancel"
-      @enter="setShowPicker(true)"
-      @leave="setShowPicker(false)"
       custom-class="wd-picker__popup"
     >
       <!--toolBar-->
@@ -89,7 +86,6 @@
           :max-minute="maxMinute"
           :min-minute="minMinute"
           :start-symbol="true"
-          :show-picker="showPicker"
           @change="onChangeStart"
           @pickstart="onPickStart"
           @pickend="onPickEnd"
@@ -116,7 +112,6 @@
           :max-minute="maxMinute"
           :min-minute="minMinute"
           :start-symbol="false"
-          :show-picker="showPicker"
           @change="onChangeEnd"
           @pickstart="onPickStart"
           @pickend="onPickEnd"
@@ -129,7 +124,6 @@
 <script lang="ts">
 export default {
   name: 'wd-datetime-picker',
-  behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
     addGlobalClass: true,
@@ -140,14 +134,14 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onMounted, ref, watch, nextTick } from 'vue'
-import { debounce, deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
+import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
 import { useCell } from '../mixins/useCell'
-type DateTimeType = 'date' | 'year-month' | 'time' | 'datetime'
+import { DateTimeType, getPickerValue } from '../wd-datetime-picker-view/type'
 interface Props {
-  customClass?: string
-  customViewClass?: string
-  customLabelClass?: string
-  customValueClass?: string
+  customClass: string
+  customViewClass: string
+  customLabelClass: string
+  customValueClass: string
   // 选择器左侧文案
   label?: string
   // 选择器占位符
@@ -220,7 +214,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   customViewClass: '',
-  customLabelVlass: '',
+  customLabelClass: '',
   customValueClass: '',
   // 选择器占位符
   placeholder: '请选择',
@@ -273,7 +267,6 @@ const datetimePickerView1 = ref()
 
 const showValue = ref<string | Date | Array<string | Date>>([])
 const popupShow = ref<boolean>(false)
-const showPicker = ref<boolean>(false)
 const showStart = ref<boolean>(true)
 const region = ref<boolean>(false)
 const showTabLabel = ref<string[]>([])
@@ -287,10 +280,6 @@ const isLoading = ref<boolean>(false) // 加载
 const { proxy } = getCurrentInstance() as any
 
 const cell = useCell()
-
-const setShowPicker = debounce(function (show: boolean) {
-  showPicker.value = show
-}, 100)
 
 watch(
   () => props.modelValue,
@@ -377,7 +366,7 @@ watch(
 watch(
   () => props.defaultValue,
   (val) => {
-    if (getType(val) === 'array') {
+    if (getType(val) === 'array' || region.value) {
       innerValue.value = deepClone(getDefaultInnerValue(true))
       endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
     } else {
@@ -428,14 +417,11 @@ const customColumnFormatter = (picker) => {
       })
     })
   }
-  console.log(mapColumns(columns))
-
   return mapColumns(columns)
 }
 
 onBeforeMount(() => {
   const { modelValue: value } = props
-
   if (getType(value) === 'array') {
     region.value = true
     innerValue.value = deepClone(getDefaultInnerValue(true))
@@ -446,8 +432,27 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-  setShowValue()
+  setShowValue(false, false, true)
 })
+
+/**
+ * @description 根据传入的picker，picker组件获取当前cell展示值。
+ */
+function getSelects(picker: 'before' | 'after') {
+  let value = picker === 'before' ? innerValue.value : endInnerValue.value
+  let selected: number[] = []
+  if (value) {
+    selected = getPickerValue(value, props.type)
+  }
+
+  let selects = selected.map((value) => {
+    return {
+      [props.labelKey]: padZero(value),
+      [props.valueKey]: value
+    }
+  })
+  return selects
+}
 
 function noop() {}
 
@@ -491,7 +496,7 @@ function showPopup() {
     popupShow.value = true
     innerValue.value = deepClone(getDefaultInnerValue())
   }
-  setShowValue(true, false)
+  setShowValue(true, false, true)
 }
 
 /**
@@ -531,6 +536,7 @@ function onChangeStart({ value }) {
  */
 function onChangeEnd({ value }) {
   endInnerValue.value = deepClone(value)
+
   showTabLabel.value = [deepClone(showTabLabel.value[0]), setTabLabel(1)]
   // emit('update:modelValue', [innerValue.value, value])
   emit('change', {
@@ -620,9 +626,13 @@ function setTabLabel(index: number = 0) {
   if (region.value) {
     let items = []
     if (index === 0) {
-      items = (datetimePickerView.value && datetimePickerView.value.getSelects()) || []
+      items =
+        (datetimePickerView.value && datetimePickerView.value.getSelects && datetimePickerView.value.getSelects()) ||
+        (innerValue.value && getSelects('before'))
     } else {
-      items = (datetimePickerView1.value && datetimePickerView1.value.getSelects()) || []
+      items =
+        (datetimePickerView1.value && datetimePickerView1.value.getSelects && datetimePickerView1.value.getSelects()) ||
+        (endInnerValue.value && getSelects('after'))
     }
     return defaultDisplayFormat(items, true)
   }
@@ -633,16 +643,25 @@ function setTabLabel(index: number = 0) {
  * @param {Boolean} tab 是否修改tab展示值（尽在区域选择情况下生效）
  * @param {Boolean} isConfirm 是否提交当前修改
  */
-function setShowValue(tab = false, isConfirm = false) {
+function setShowValue(tab: boolean = false, isConfirm: boolean = false, beforeMount: boolean = false) {
   if (region.value) {
-    const items = (datetimePickerView.value && datetimePickerView.value.getSelects()) || []
-    const endItems = (datetimePickerView1.value && datetimePickerView1.value.getSelects()) || []
+    const items = beforeMount
+      ? (innerValue.value && getSelects('before')) || []
+      : (datetimePickerView.value && datetimePickerView.value.getSelects && datetimePickerView.value.getSelects()) || []
+
+    const endItems = beforeMount
+      ? (endInnerValue.value && getSelects('after')) || []
+      : (datetimePickerView1.value && datetimePickerView1.value.getSelects && datetimePickerView1.value.getSelects()) || []
+
     showValue.value = tab
       ? showValue.value
       : [props.modelValue[0] || isConfirm ? defaultDisplayFormat(items) : '', props.modelValue[1] || isConfirm ? defaultDisplayFormat(endItems) : '']
     showTabLabel.value = [defaultDisplayFormat(items, true), defaultDisplayFormat(endItems, true)]
   } else {
-    const items = (datetimePickerView.value && datetimePickerView.value.getSelects()) || []
+    const items = beforeMount
+      ? (innerValue.value && getSelects('before')) || []
+      : (datetimePickerView.value && datetimePickerView.value.getSelects && datetimePickerView.value.getSelects()) || []
+
     showValue.value = deepClone(props.modelValue || isConfirm ? defaultDisplayFormat(items) : '')
   }
 }

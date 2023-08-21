@@ -358,7 +358,7 @@
           "mp-alipay": {
             "allowsBounceVertical": "NO"
           },
-          "navigationBarTitleText": "Picker 选择器视图"
+          "navigationBarTitleText": "Picker 选择器"
         }
       },
       {

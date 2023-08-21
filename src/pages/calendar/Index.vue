@@ -9,7 +9,7 @@
         <wd-calendar label="日期时间选择" type="datetime" v-model="value4" />
         <wd-calendar label="日期时间范围选择" type="datetimerange" v-model="value5" />
         <wd-calendar label="周选择" type="week" v-model="value6" />
-        <wd-calendar label="月选择" type="month" v-model="value7" />
+        <wd-calendar label="月选择" type="month" :min-date="minDate" v-model="value7" />
         <wd-calendar label="周范围选择" :first-day-of-week="1" type="weekrange" v-model="value8" />
         <wd-calendar label="月范围选择" type="monthrange" v-model="value9" />
         <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value10" />
@@ -50,6 +50,8 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { dayjs } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
+
+const minDate = ref<number>(new Date(new Date().getFullYear() - 20, new Date().getMonth() - 6, new Date().getDate()).getTime())
 
 const value1 = ref<number>(Date.now())
 const value2 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])

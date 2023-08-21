@@ -31,8 +31,6 @@
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :z-index="zIndex"
       @close="close"
-      @opened="setShowPicker(true)"
-      @closed="setShowPicker(false)"
     >
       <view class="wd-calendar__header">
         <view v-if="!showTypeSwitch && shortcuts.length === 0" class="wd-calendar__title">{{ title || '选择日期' }}</view>
@@ -86,7 +84,6 @@
           :default-time="defaultTime"
           :time-filter="timeFilter"
           :hide-second="hideSecond"
-          :show-picker="showPicker"
           :show-panel-title="!range(type)"
           @change="handleChange"
         />
@@ -101,7 +98,6 @@
 <script lang="ts">
 export default {
   name: 'wd-calendar',
-  behaviors: ['uni://form-field'],
   options: {
     addGlobalClass: true,
     virtualHost: true,
@@ -274,7 +270,6 @@ const currentType = ref<CalendarType>('date')
 const lastCurrentType = ref<CalendarType>('date')
 const inited = ref<boolean>(false)
 const rangeLabel = ref<Array<string>>([])
-const showPicker = ref<boolean>(false)
 
 const cell = useCell()
 
@@ -341,10 +336,6 @@ const range = computed(() => {
 })
 
 const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm'])
-
-const setShowPicker = debounce(function (show: boolean) {
-  showPicker.value = show
-}, 100)
 
 function scrollIntoView() {
   calendarView.value && calendarView.value && calendarView.value.$.exposed.scrollIntoView()

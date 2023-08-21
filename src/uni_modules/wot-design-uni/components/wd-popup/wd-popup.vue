@@ -38,16 +38,18 @@ interface Props {
   modal: boolean
   zIndex: number
   hideWhenClose: boolean
-  modalStyle?: string
+  modalStyle: string
   safeAreaInsetBottom: boolean
   modelValue: boolean
-  customStyle?: string
+  customStyle: string
   lazyRender: boolean
-  customClass?: string
+  customClass: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
+  customStyle: '',
+  modalStyle: '',
   position: 'center',
   closeOnClickModal: true,
   modal: true,

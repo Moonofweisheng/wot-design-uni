@@ -23,7 +23,7 @@
       </demo-block>
       <demo-block title="自定义菜单选项" transparent>
         <view class="custom-menu">
-          <wd-drop-menu style="flex: 1; min-width: 0">
+          <wd-drop-menu custom-style="flex: 1; min-width: 0">
             <wd-drop-menu-item v-model="value4" :options="option1" @change="handleChange4" />
           </wd-drop-menu>
           <view style="flex: 1">

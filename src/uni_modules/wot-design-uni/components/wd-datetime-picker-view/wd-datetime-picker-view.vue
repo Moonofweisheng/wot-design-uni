@@ -9,7 +9,6 @@
       :columnChange="columnChange"
       :loading="loading"
       :loading-color="loadingColor"
-      :show-picker="showPicker"
       @change="onChange"
       @pickstart="onPickStart"
       @pickend="onPickEnd"
@@ -19,7 +18,6 @@
 <script lang="ts">
 export default {
   name: 'wd-datetime-picker-view',
-  behaviors: ['uni://form-field'],
   virtualHost: true,
   addGlobalClass: true,
   styleIsolation: 'shared'
@@ -29,6 +27,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { debounce, getType, isDef, padZero, range } from '../common/util'
+import { DateTimeType, getPickerValue } from './type'
 
 // 本地时间戳
 /** @description 判断时间戳是否合法 */
@@ -58,15 +57,11 @@ const getMonthEndDay = (year, month) => {
   return 32 - new Date(year, month - 1, 32).getDate()
 }
 
-type DateTimeType = 'date' | 'year-month' | 'time' | 'datetime'
-
 interface Props {
   customClass?: string
   // 选中项，当 type 为 time 时，类型为字符串，否则为 Date
   modelValue: string | number | Date
   // PickerView的Props 开始
-  // 是否展示picker（兼容支付宝和钉钉）
-  showPicker: boolean
   // 加载中
   loading: boolean
   loadingColor: string
@@ -106,7 +101,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   // PickerView的Props 开始
-  showPicker: true,
   // 加载中
   loading: false,
   loadingColor: '#4D80F0',
@@ -131,7 +125,7 @@ const datePickerview = ref()
 // 内部保持时间戳的
 const innerValue = ref<null | number>(null)
 // 传递给pickerView的columns的数据
-const columns = ref<Array<string | string[]>>([])
+const columns = ref<Array<string | number>>([])
 // 传递给pickerView的value的数据
 const pickerValue = ref<string | number | boolean | Array<string | number | boolean>>([])
 // 自定义组件是否已经调用created hook
@@ -433,29 +427,6 @@ function getBoundary(type, innerValue) {
 }
 
 /**
- * @description 根据传入的值和类型，获取当前的选项数组，便于传入 pickerView
- * @param value
- * @param type picker类型
- * @return {Array} pickerValue
- */
-function getPickerValue(value, type) {
-  const values: number[] = []
-  const date = new Date(value)
-  if (type === 'time') {
-    const pair = value.split(':')
-    values.push(parseInt(pair[0]), parseInt(pair[1]))
-  } else {
-    values.push(date.getFullYear(), date.getMonth() + 1)
-    if (type === 'date') {
-      values.push(date.getDate())
-    } else if (type === 'datetime') {
-      values.push(date.getDate(), date.getHours(), date.getMinutes())
-    }
-  }
-  return values
-}
-
-/**
  * @description 根据传入的value以及type，初始化innerValue，期间会使用format格式化数据
  * @param value
  * @return {Array}
@@ -571,7 +542,7 @@ function onPickEnd() {
 }
 
 function getSelects() {
-  return datePickerview.value.getSelects()
+  return datePickerview.value && datePickerview.value.getSelects ? datePickerview.value.getSelects() : undefined
 }
 
 defineExpose({

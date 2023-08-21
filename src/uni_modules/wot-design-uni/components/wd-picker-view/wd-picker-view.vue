@@ -5,7 +5,6 @@
     </view>
     <view :style="`height: ${columnsHeight - 20}px;`">
       <picker-view
-        v-if="showPicker"
         mask-class="wd-picker-view__mask"
         indicator-class="wd-picker-view__roller"
         :indicator-style="`height: ${itemHeight}px;`"
@@ -45,17 +44,10 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isEqual, range } from '../common/util'
-
-type ColumnItem = {
-  value?: string | number | boolean
-  label: string
-  disabled?: boolean
-}
+import { ColumnItem, formatArray } from './type'
 
 interface Props {
   customClass?: string
-  // 是否展示picker（兼容支付宝和钉钉）
-  showPicker: boolean
   // 加载中
   loading: boolean
   loadingColor: string
@@ -68,7 +60,7 @@ interface Props {
   // 初始值
   modelValue: string | number | boolean | Array<string | number | boolean>
   // 选择器数据
-  columns: Array<string | string[] | ColumnItem>
+  columns: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>
   // 多级联动
   // eslint-disable-next-line @typescript-eslint/ban-types
   columnChange?: Function
@@ -77,7 +69,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   loading: false,
-  showPicker: true,
   loadingColor: '#4D80F0',
   columnsHeight: 217,
   valueKey: 'value',
@@ -86,7 +77,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 // 格式化之后，用于render 列表的数据
-const formatColumns = ref<Array<Record<string, any>[]>>([])
+const formatColumns = ref<Array<Array<Record<string, any>>>>([])
 const itemHeight = ref<number>(35)
 const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中的下标集合
 const preSelectedIndex = ref<Array<number>>([])
@@ -108,7 +99,7 @@ watch(
   () => props.columns,
   (newValue) => {
     // props初始化的时候格式化formatColumns交给value的observer来做
-    formatColumns.value = formatArray(newValue)
+    formatColumns.value = formatArray(newValue, props.valueKey, props.labelKey)
     /**
      * 每次改变都要重置选中项
      * 1.选中每列的第一个
@@ -172,7 +163,7 @@ function selectWithValue(value) {
   if (type.indexOf(valueType) === -1) throw Error(`value must be one of ${type.toString()}`)
   // 在props初始化的时候有可能会调用此函数，此时需要保证formatColumns已经被设置，关于此问题更多详情参考/ISSUE.md。
   if (formatColumns.value.length === 0) {
-    formatColumns.value = formatArray(props.columns)
+    formatColumns.value = formatArray(props.columns, props.valueKey, props.labelKey)
   }
   /**
    * 1.单key转为Array<key>
@@ -232,67 +223,6 @@ function selectWithIndex(columnIndex, rowIndex) {
   }
   selectedIndex.value = deepClone(select)
   return selectedIndex.value
-}
-
-/**
- * @description 为props的value为array类型时提供format
- * @param {Array<String|Number|Boolean|Object>} array
- */
-function formatArray(array) {
-  array = array instanceof Array ? array : [array]
-  // 检测第一层的type
-  const firstLevelTypeList = new Set(array.map(getType))
-  /**
-   * 存在三种类型的合法数据
-   * 1.数组是一维元素，所有元素都是原始值
-   * 2.数组是一维元素，所有元素都是object
-   * 3.数组是二维元素，二维元素可以是任意内容
-   */
-  if (firstLevelTypeList.size !== 1 && firstLevelTypeList.has('object')) {
-    // 原始值和引用类型不用混用
-    throw Error('The columns are correct')
-  }
-  /**
-   * 数组的所有一维子元素都不是array，说明是它是一个一维数组
-   * 所以需要把一维的转成二维，这样方便统一处理
-   */
-  if (!(array[0] instanceof Array)) {
-    array = [array]
-  }
-  // 经过上述处理，都已经变成了二维数组，再把每一项二维元素包装成object
-  return array.map((col) =>
-    col.map((row) => {
-      const isObj = getType(row)
-      const { valueKey, labelKey } = props
-      /* 针对原始值，包装成{valueKey,labelKey} */
-      if (isObj !== 'object') {
-        return {
-          [valueKey]: row,
-          [labelKey]: row
-        }
-      }
-      /**
-       * 针对已经是object的，修补成{valueKey,labelKey}
-       * 如果没有labelKey，用valueKey代替
-       * 如果没有valueKey，用labelKey代替
-       * valueKey,labelKey都没有，直接抛错
-       */
-      // eslint-disable-next-line no-prototype-builtins
-      if (!row.hasOwnProperty(valueKey) && !row.hasOwnProperty(labelKey)) {
-        // eslint-disable-next-line prettier/prettier
-        throw Error('Can\'t find valueKey and labelKey in columns')
-      }
-      // eslint-disable-next-line no-prototype-builtins
-      if (!row.hasOwnProperty(labelKey)) {
-        row[labelKey] = row[valueKey]
-      }
-      // eslint-disable-next-line no-prototype-builtins
-      if (!row.hasOwnProperty(valueKey)) {
-        row[valueKey] = row[labelKey]
-      }
-      return row
-    })
-  )
 }
 
 /**
@@ -389,7 +319,6 @@ function getSelects() {
   if (selects.length === 1) {
     return selects[0]
   }
-
   return selects
 }
 
@@ -449,7 +378,7 @@ function setColumnData(columnIndex, data, jumpTo = 0) {
   selectedIndex.value = selectWithIndex(columnIndex, jumpTo)
   // 经过formatArray处理的数据会变成二维数组，一定要拍成一维的。
   // ps 小程序基础库v2.9.3才可以用flat
-  formatColumns.value[columnIndex] = formatArray(data).reduce((acc, val) => acc.concat(val), [])
+  formatColumns.value[columnIndex] = formatArray(data, props.valueKey, props.labelKey).reduce((acc, val) => acc.concat(val), [])
 }
 
 function getColumnsData() {

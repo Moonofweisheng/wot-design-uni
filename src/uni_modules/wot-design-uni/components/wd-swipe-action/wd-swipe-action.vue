@@ -3,9 +3,9 @@
   <view
     :class="`wd-swipe-action ${customClass}`"
     @click.stop="onClick()"
-    @touchstart="startDrag"
     @touchmove="stopPropagation ? nothing : ''"
-    @touchmove.capture="onDrag"
+    @touchstart="startDrag"
+    @touchmove.prevent="onDrag"
     @touchend="endDrag"
     @touchcancel="endDrag"
   >
@@ -43,7 +43,7 @@ import { getRect } from '../common/util'
 interface Props {
   customClass?: string
   // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeClose: Function
+  beforeClose?: Function
   disabled: boolean
   modelValue: string
 }
@@ -51,8 +51,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customStyle: '',
   modelValue: 'close',
-  disabled: false,
-  beforeClose: (v) => v
+  disabled: false
 })
 
 const wrapperStyle = ref<string>('')
@@ -280,7 +279,7 @@ function close(reason, position?: string) {
   }
 
   if (reason && position) {
-    props.beforeClose(reason, position)
+    props.beforeClose && props.beforeClose(reason, position)
   }
 
   swipeMove(0)

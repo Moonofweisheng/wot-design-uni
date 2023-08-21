@@ -1,49 +1,51 @@
 <template>
-  <wd-popup
-    transition="zoom-in"
-    v-model="show"
-    :close-on-click-modal="closeOnClickModal"
-    :lazy-render="lazyRender"
-    custom-class="wd-message-box"
-    @clickmodal="toggleModal('modal')"
-    :z-index="zIndex"
-    :duration="200"
-  >
-    <view :class="rootClass">
-      <!--内容部分-->
-      <view :class="bodyClass">
-        <!--公共title-->
-        <view v-if="title" class="wd-message-box__title">
-          {{ title }}
+  <view>
+    <wd-popup
+      transition="zoom-in"
+      v-model="show"
+      :close-on-click-modal="closeOnClickModal"
+      :lazy-render="lazyRender"
+      custom-class="wd-message-box"
+      @clickmodal="toggleModal('modal')"
+      :z-index="zIndex"
+      :duration="200"
+    >
+      <view :class="rootClass">
+        <!--内容部分-->
+        <view :class="bodyClass">
+          <!--公共title-->
+          <view v-if="title" class="wd-message-box__title">
+            {{ title }}
+          </view>
+          <!--其它类型-->
+          <view class="wd-message-box__content">
+            <!--prompt类型-->
+            <block v-if="type === 'prompt'">
+              <!--输入框-->
+              <wd-input v-model="inputValue" :type="inputType" size="large" :placeholder="inputPlaceholder || '请输入'" @input="inputValChange" />
+              <!--错误提示-->
+              <view v-if="showErr" class="wd-message-box__input-error">
+                {{ inputError || '输入的数据不合法' }}
+              </view>
+            </block>
+            <!--使用插槽-->
+            <slot v-if="useSlot"></slot>
+            <!--使用文本-->
+            <block v-else>{{ msg }}</block>
+          </view>
         </view>
-        <!--其它类型-->
-        <view class="wd-message-box__content">
-          <!--prompt类型-->
-          <block v-if="type === 'prompt'">
-            <!--输入框-->
-            <wd-input v-model="inputValue" :type="inputType" size="large" :placeholder="inputPlaceholder || '请输入'" @input="inputValChange" />
-            <!--错误提示-->
-            <view v-if="showErr" class="wd-message-box__input-error">
-              {{ inputError || '输入的数据不合法' }}
-            </view>
-          </block>
-          <!--使用插槽-->
-          <slot v-if="useSlot"></slot>
-          <!--使用文本-->
-          <block v-else>{{ msg }}</block>
+        <!--action按钮组合-->
+        <view :class="`wd-message-box__actions ${showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`">
+          <wd-button type="info" block v-if="showCancelButton" custom-style="margin-right: 16px;" @click="toggleModal('cancel')">
+            {{ cancelButtonText || '取消' }}
+          </wd-button>
+          <wd-button block @click="toggleModal('confirm')">
+            {{ confirmButtonText || '确定' }}
+          </wd-button>
         </view>
       </view>
-      <!--action按钮组合-->
-      <view :class="`wd-message-box__actions ${showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`">
-        <wd-button type="info" block v-if="showCancelButton" custom-style="margin-right: 16px;" @click="toggleModal('cancel')">
-          {{ cancelButtonText || '取消' }}
-        </wd-button>
-        <wd-button block @click="toggleModal('confirm')">
-          {{ confirmButtonText || '确定' }}
-        </wd-button>
-      </view>
-    </view>
-  </wd-popup>
+    </wd-popup>
+  </view>
 </template>
 <script lang="ts">
 export default {

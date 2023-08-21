@@ -94,6 +94,13 @@ onMounted(() => {
     width.value = lastWidth
     // 监听滚动事件
     onScrollHandler = () => {
+      const query = uni
+        .createSelectorQuery()
+        // #ifndef MP-ALIPAY
+        .in(proxy)
+        // #endif
+        .select('.wd-resize__container')
+        .boundingClientRect()
       query.exec(([res]) => {
         // 前两次滚动事件被触发，说明 created 的修改已渲染，通知用户代码当前容器大小
         if (scrollEventCount.value++ === 0) {

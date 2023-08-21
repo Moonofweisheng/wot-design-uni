@@ -33,7 +33,6 @@
       :panel-height="panelHeight"
       :time-filter="timeFilter"
       :hide-second="hideSecond"
-      :show-picker="showPicker"
       @change="handleChange"
       @pickstart="handlePickStart"
       @pickend="handlePickEnd"
@@ -43,7 +42,6 @@
 <script lang="ts">
 export default {
   name: 'wd-calendar-view',
-  behaviors: ['uni://form-field'],
   options: {
     addGlobalClass: true,
     virtualHost: true,
@@ -92,8 +90,6 @@ interface Props {
   timeFilter?: Function
   // type 为 'datetime' 或 'datetimerange' 时有效，是否不展示秒修改
   hideSecond: boolean
-  // 是否展示picker（兼容支付宝和钉钉）
-  showPicker: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
@@ -105,8 +101,7 @@ const props = withDefaults(defineProps<Props>(), {
   showPanelTitle: true,
   defaultTime: '00:00:00',
   panelHeight: 378,
-  hideSecond: false,
-  showPicker: true
+  hideSecond: false
 })
 
 const formatDefauleTime = ref<number[]>([])
@@ -128,9 +123,8 @@ watch(
 const emit = defineEmits(['change', 'update:modelValue', 'pickstart', 'pickend'])
 
 // 对外暴露方法
-function scrollIntoView(thresholds) {
+function scrollIntoView() {
   const panel = getPanel()
-  panel.initRect && panel.initRect(thresholds)
   panel.scrollIntoView && panel.scrollIntoView()
 }
 

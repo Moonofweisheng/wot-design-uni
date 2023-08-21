@@ -82,7 +82,7 @@ const monthTitle = computed(() => {
   }
 })
 const firstDayStyle = computed(() => {
-  return (index, date, firstDayOfWeek) => {
+  return (index: number, date: number, firstDayOfWeek: number) => {
     return getFirstDayStyle(index, date, firstDayOfWeek)
   }
 })

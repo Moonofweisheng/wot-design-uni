@@ -69,6 +69,7 @@ onReady(() => {
 })
 
 function handleResize(detail: Record<string, string | number>) {
+  console.log(detail)
   const { height, width, top, right, bottom, left } = detail
   lastHeight.value = sizeHeight.value
   lastTop.value = sizeTop.value

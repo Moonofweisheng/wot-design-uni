@@ -112,15 +112,14 @@ export function getWeekLabel(index) {
  * @param {timestamp} date
  * @param {number} firstDayOfWeek
  */
-export function getFirstDayStyle(index, date, firstDayOfWeek) {
+export function getFirstDayStyle(index: number, date: number, firstDayOfWeek: number) {
   if (firstDayOfWeek >= 7) {
     firstDayOfWeek = firstDayOfWeek % 7
   }
 
   if (index !== 0) return ''
 
-  date = new Date(date)
-  const offset = (7 + date.getDay() - firstDayOfWeek) % 7
+  const offset = (7 + new Date(date).getDay() - firstDayOfWeek) % 7
 
   return 'margin-left: ' + (100 / 7) * offset + '%'
 }
@@ -129,10 +128,8 @@ export function getFirstDayStyle(index, date, firstDayOfWeek) {
  * 格式化年份
  * @param {timestamp} date
  */
-export function formatYearTitle(date) {
-  date = new Date(date)
-
-  const year = date.getFullYear()
+export function formatYearTitle(date: number) {
+  const year = new Date(date).getFullYear()
 
   return year + '年'
 }
@@ -160,7 +157,7 @@ export function getMonths(minDate, maxDate) {
  * @param {timestamp} minDate
  * @param {timestamp} maxDate
  */
-export function getYears(minDate, maxDate) {
+export function getYears(minDate: number, maxDate: number) {
   const years: number[] = []
   const year = new Date(minDate)
   year.setMonth(0)

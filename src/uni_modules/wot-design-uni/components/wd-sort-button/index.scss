@@ -67,7 +67,9 @@
     line-height: 1.1;
 
     @include when(active) {
-      :deep(.wd-sort-button__icon-up, .wd-sort-button__icon-down) {
+
+      :deep(.wd-sort-button__icon-up),
+      :deep(.wd-sort-button__icon-down) {
         transform: scale(calc((10 / 14)));
       }
     }

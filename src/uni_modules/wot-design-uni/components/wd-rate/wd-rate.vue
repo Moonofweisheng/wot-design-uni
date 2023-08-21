@@ -21,7 +21,6 @@
 <script lang="ts">
 export default {
   name: 'wd-rate',
-  behaviors: ['uni://form-field'],
   options: {
     addGlobalClass: true,
     virtualHost: true,

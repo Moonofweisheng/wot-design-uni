@@ -8,16 +8,17 @@
     </view>
     <scroll-view
       :class="`wd-month-panel__container ${!!timeType ? 'wd-month-panel__container--time' : ''}`"
-      :style="`height: ${!!timeType ? (panelHeight || 378) - 125 : panelHeight || 378}px`"
+      :style="`height: ${scrollHeight}px`"
       scroll-y
-      :scroll-into-view="scrollIntoViewValue"
+      @scroll="monthScroll"
+      :scroll-top="scrollTop"
     >
       <view v-for="(item, index) in months(minDate, maxDate)" :key="index" :id="`month${index}`">
         <month
           class="month"
           :type="type"
-          :date="item"
-          :data-date="item"
+          :date="item.date"
+          :data-date="item.date"
           :value="value"
           :min-date="minDate"
           :max-date="maxDate"
@@ -41,7 +42,6 @@
           v-model="timeValue"
           :columns="timeData"
           :columns-height="125"
-          :show-picker="showPicker"
           @change="handleTimeChange"
           @pickstart="handlePickStart"
           @pickend="handlePickEnd"
@@ -64,8 +64,9 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
 import { debounce, getType, isEqual } from '../../common/util'
-import { compareMonth, formatMonthTitle, getMonths, getTimeData, getWeekLabel } from '../utils'
+import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'
 import Month from '../month/month.vue'
+import { MonthInfo } from './type'
 
 interface Props {
   type: string
@@ -84,35 +85,44 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   timeFilter?: Function
   hideSecond: boolean
-  // 是否展示picker（兼容支付宝和钉钉）
-  showPicker: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
-  showPicker: true,
   allowSameDay: false,
   showPanelTitle: false,
   hideSecond: false
 })
 
 const title = ref<string>('')
-const scrollIntoViewValue = ref<string>('')
+const scrollTop = ref<number>(0) // 滚动位置
 const timeValue = ref<Array<string>>([])
 const timeData = ref<Array<string | string[]>>([])
 const timeType = ref<string>('') // 当前时间类型，是开始还是结束
 const innerValue = ref<string | number[]>('') // 内部保存一个值，用于判断新老值，避免监听器触发
 
-let contentObserver: null | UniApp.IntersectionObserver = null
-const instance = getCurrentInstance() as any
-
 const weekLabel = computed(() => {
   return (index: number) => {
-    return getWeekLabel(index)
+    return getWeekLabel(index - 1)
   }
 })
 
+// 滚动区域的高度
+const scrollHeight = computed(() => {
+  const scrollHeight: number = timeType.value ? (props.panelHeight || 378) - 125 : props.panelHeight || 378
+  return scrollHeight
+})
+
+// 月份日期和月份高度
 const months = computed(() => {
-  return (minDate, maxDate) => {
-    return getMonths(minDate, maxDate)
+  return (minDate: number, maxDate: number): MonthInfo[] => {
+    let months = getMonths(minDate, maxDate).map((month) => {
+      const offset = (7 + new Date(month).getDay() - props.firstDayOfWeek) % 7
+      const totalDay = getMonthEndDay(new Date(month).getFullYear(), new Date(month).getMonth() + 1)
+      return {
+        height: (offset + totalDay > 35 ? 64 * 6 : 64 * 5) + 45,
+        date: month
+      }
+    })
+    return months
   }
 })
 
@@ -148,7 +158,6 @@ watch(
 )
 
 onMounted(() => {
-  initRect()
   scrollIntoView()
 })
 
@@ -160,26 +169,6 @@ const handleChange = debounce((value) => {
   })
 }, 50)
 
-function initRect(thresholds = [0, 0.7, 0.8, 0.9, 1]) {
-  if (!props.showPanelTitle) return
-
-  if (contentObserver != null) {
-    contentObserver.disconnect()
-  }
-
-  contentObserver = uni.createIntersectionObserver(instance, {
-    thresholds,
-    observeAll: true,
-    dataset: true
-  } as any)
-
-  contentObserver.relativeTo('.wd-month-panel__container')
-  contentObserver.observe('.month', (res: any) => {
-    if (res.boundingClientRect.top <= res.relativeRect.top) {
-      title.value = formatMonthTitle(res.dataset.date)
-    }
-  })
-}
 function scrollIntoView() {
   setTimeout(() => {
     let activeDate
@@ -194,17 +183,18 @@ function scrollIntoView() {
       activeDate = Date.now()
     }
 
-    const months = getMonths(props.minDate, props.maxDate)
+    const monthsInfo = months.value(props.minDate, props.maxDate)
 
-    months.some((month, index) => {
-      if (compareMonth(month, activeDate) === 0) {
-        scrollIntoViewValue.value = ''
-        nextTick(() => {
-          scrollIntoViewValue.value = `month${index}`
-        })
-        return true
+    let top: number = 0
+    for (let index = 0; index < monthsInfo.length; index++) {
+      if (compareMonth(monthsInfo[index].date, activeDate) === 0) {
+        break
       }
-      return false
+      top += monthsInfo[index] ? Number(monthsInfo[index].height) : 0
+    }
+    scrollTop.value = 0
+    nextTick(() => {
+      scrollTop.value = top
     })
   }, 50)
 }
@@ -275,10 +265,6 @@ function setTime(value, type) {
   timeData.value = getTime(value, type) || []
   timeValue.value = getTimeValue(value, type)
   timeType.value = type
-
-  nextTick(() => {
-    initRect([0, 0.58, 0.69, 0.83, 1])
-  })
 }
 function handleDateChange({ value, type }) {
   if (!isEqual(value, props.value)) {
@@ -335,8 +321,31 @@ function handlePickEnd() {
   emit('pickend')
 }
 
+const monthScroll = (event: { detail: { scrollTop: number } }) => {
+  const monthsInfo = months.value(props.minDate, props.maxDate)
+  if (monthsInfo.length <= 1) {
+    return
+  }
+  const scrollTop = Math.max(0, event.detail.scrollTop)
+  doSetSubtitle(scrollTop, monthsInfo)
+}
+
+/**
+ * 设置小标题
+ * scrollTop 滚动条位置
+ */
+function doSetSubtitle(scrollTop: number, monthsInfo: MonthInfo[]) {
+  let height: number = 0 // 月份高度和
+  for (let index = 0; index < monthsInfo.length; index++) {
+    height = height + monthsInfo[index].height
+    if (scrollTop < height + 45) {
+      title.value = formatMonthTitle(monthsInfo[index].date)
+      return
+    }
+  }
+}
+
 defineExpose({
-  initRect,
   scrollIntoView
 })
 </script>

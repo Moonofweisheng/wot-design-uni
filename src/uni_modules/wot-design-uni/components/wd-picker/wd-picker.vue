@@ -69,7 +69,6 @@
 <script lang="ts">
 export default {
   name: 'wd-picker',
-  behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
     addGlobalClass: true,
@@ -80,8 +79,9 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted } from 'vue'
-import { deepClone, defaultDisplayFormat, getType } from '../common/util'
+import { deepClone, defaultDisplayFormat, getType, isArray } from '../common/util'
 import { useCell } from '../mixins/useCell'
+import { ColumnItem, formatArray } from '../wd-picker-view/type'
 
 interface Props {
   customClass?: string
@@ -126,9 +126,9 @@ interface Props {
   // 选项对象中，展示的文本对应的 key
   labelKey: string
   // 初始值
-  modelValue: string | number | boolean | Array<string | number | boolean>
+  modelValue: string | number | Array<string | number>
   // 选择器数据
-  columns: Array<string | string[]>
+  columns: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>
   // 多级联动
   // eslint-disable-next-line @typescript-eslint/ban-types
   columnChange?: Function
@@ -182,8 +182,8 @@ const popupShow = ref<boolean>(false)
 // 选定后展示的选中项
 const showValue = ref<string>('')
 const pickerValue = ref<string | number | boolean | (string | number | boolean)[]>('')
-const displayColumns = ref<Array<string | string[]>>([]) // 传入 pickerView 的columns
-const resetColumns = ref<Array<string | string[]>>([]) // 保存之前的 columns，当取消时，将数据源回滚，避免多级联动数据源不正确的情况
+const displayColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 传入 pickerView 的columns
+const resetColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 保存之前的 columns，当取消时，将数据源回滚，避免多级联动数据源不正确的情况
 const isPicking = ref<boolean>(false) // 判断pickview是否还在滑动中
 const hasConfirmed = ref<boolean>(false) // 判断用户是否点击了确认按钮
 
@@ -264,6 +264,7 @@ const { proxy } = getCurrentInstance() as any
 const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
 
 onMounted(() => {
+  props.modelValue && setShowValue(getSelects(props.modelValue))
   if (props.modelValue && pickerViewWd.value && pickerViewWd.value.getSelects) {
     setShowValue(pickerViewWd.value!.getSelects())
   }
@@ -273,6 +274,51 @@ onBeforeMount(() => {
   displayColumns.value = deepClone(props.columns)
   resetColumns.value = deepClone(props.columns)
 })
+
+/**
+ * @description 根据传入的value，picker组件获取当前cell展示值。
+ * @param {String|Number|Array<String|Number|Array<any>>}value
+ */
+function getSelects(value) {
+  const formatColumns = formatArray(props.columns, props.valueKey, props.labelKey)
+  if (props.columns.length === 0) return
+
+  // 使其默认选中首项
+  if (value === '' || value === null || value === undefined || (getType(value) === 'array' && value.length === 0)) {
+    value = formatColumns.map((col) => {
+      return col[0][props.valueKey]
+    })
+  }
+  const valueType = getType(value)
+  const type = ['string', 'number', 'boolean', 'array']
+  if (type.indexOf(valueType) === -1) return []
+  /**
+   * 1.单key转为Array<key>
+   * 2.根据formatColumns的长度截取Array<String>，保证下面的遍历不溢出
+   * 3.根据每列的key值找到选项中value为此key的下标并记录
+   */
+  value = value instanceof Array ? value : [value]
+  value = value.slice(0, formatColumns.length)
+
+  if (value.length === 0) {
+    value = formatColumns.map(() => 0)
+  }
+  let selected: number[] = []
+  value.forEach((target, col) => {
+    let row = formatColumns[col].findIndex((row) => {
+      return row[props.valueKey].toString() === target.toString()
+    })
+    row = row === -1 ? 0 : row
+    selected.push(row)
+  })
+
+  const selects = selected.map((row, col) => formatColumns[col][row])
+  // 单列选择器，则返回单项
+  if (selects.length === 1) {
+    return selects[0]
+  }
+  return selects
+}
 
 // 对外暴露方法，打开弹框
 function open() {

@@ -21,6 +21,11 @@
   }
 }
 
+:deep(.wd-message-box){
+  border-radius: $-message-box-radius;
+  overflow: hidden;
+}
+
 @include bdeep(message-box) {
   border-radius: $-message-box-radius;
   overflow: hidden;

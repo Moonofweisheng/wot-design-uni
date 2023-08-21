@@ -6,7 +6,6 @@
 <script lang="ts">
 export default {
   name: 'wd-checkbox-group',
-  behaviors: ['uni://form-field'],
   options: {
     addGlobalClass: true,
     virtualHost: true,

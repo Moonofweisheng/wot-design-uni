@@ -88,7 +88,6 @@
 <script lang="ts">
 export default {
   name: 'wd-select-picker',
-  behaviors: ['uni://form-field'],
   options: {
     addGlobalClass: true,
     virtualHost: true,

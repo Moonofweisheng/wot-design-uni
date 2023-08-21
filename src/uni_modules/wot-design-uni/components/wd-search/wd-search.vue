@@ -50,7 +50,6 @@
 <script lang="ts">
 export default {
   name: 'wd-search',
-  behaviors: ['uni://form-field'],
   options: {
     virtualHost: true,
     addGlobalClass: true,

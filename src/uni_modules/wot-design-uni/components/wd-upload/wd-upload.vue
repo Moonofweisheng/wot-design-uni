@@ -42,7 +42,6 @@
 <script lang="ts">
 export default {
   name: 'wd-upload',
-  behaviors: ['uni://form-field'],
   options: {
     addGlobalClass: true,
     virtualHost: true,
