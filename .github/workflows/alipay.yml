@@ -1,16 +1,15 @@
-name: Upload MiniProgram
+name: Upload To AlipayMiniProgram
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - shell: bash
       env:
         TOOLID: ${{ secrets.ALI_TOOL_ID }}
