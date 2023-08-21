@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.0.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.3...v0.0.4) (2023-08-21)
+
+
+### ✨ Features | 新功能
+
+* ✨ Picker组件优化性能 ([24dd43f](https://github.com/Moonofweisheng/wot-design-uni/commit/24dd43f3a05b7b4ce6bb897219a215f8198e64ac))
+
 ### [0.0.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.2...v0.0.3) (2023-08-18)
 
 ### [0.0.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.1...v0.0.2) (2023-08-18)
