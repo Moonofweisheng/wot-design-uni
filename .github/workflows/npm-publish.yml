@@ -23,10 +23,9 @@ jobs:
       - name: Run Compiler
         run: yarn compiler
 
-      - name: Navigate to lib directory
-        run: cd lib
-
       - name: Publish Package
-        run: yarn publish
+        run: |
+          cd lib
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
