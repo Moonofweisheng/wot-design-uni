@@ -1,6 +1,6 @@
 {
   "name": "wot-design-uni",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
