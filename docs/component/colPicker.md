@@ -25,56 +25,43 @@
 | finish       | function | 结束 picker 选择，若无法正常关闭如数据获取失败，则执行 `finish(false)` | -        |
 
 ```html
-<wd-col-picker
-  label="选择地址"
-  v-model="value"
-  columns="{{ areaData }}"
-  column-change="{{ columnChange }}"
-  @confirm="handleConfirm"
-></wd-col-picker>
+<wd-col-picker label="选择地址" v-model="value" :columns="area" :column-change="columnChange" @confirm="handleConfirm"></wd-col-picker>
 ```
 
 ```typescript
 // 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
 import areaData from '../utils/area.json'
 
-Page({
-  data: {
-    value: [],
-    areaData: [
-      Object.keys(areaData[86]).map((key) => {
+const value = ref<any[]>([])
+
+const area = ref<any[]>([
+  Object.keys(areaData[86]).map((key) => {
+    return {
+      value: key,
+      label: areaData[86][key]
+    }
+  })
+])
+
+const columnChange = ({ selectedItem, resolve, finish }) => {
+  if (areaData[selectedItem.value]) {
+    resolve(
+      Object.keys(areaData[selectedItem.value]).map((key) => {
         return {
           value: key,
-          label: areaData[86][key]
+          label: areaData[selectedItem.value][key]
         }
       })
-    ],
-    columnChange({ selectedItem, resolve, finish }) {
-      if (areaData[selectedItem.value]) {
-        resolve(
-          Object.keys(areaData[selectedItem.value]).map((key) => {
-            return {
-              value: key,
-              label: areaData[selectedItem.value][key]
-            }
-          })
-        )
-      } else {
-        finish()
-      }
-    }
-  },
-  handleConfirm(event) {
-    this.setData({
-      value: event.detail.value
-    })
+    )
+  } else {
+    finish()
   }
-})
-```
+}
 
-:::info
-如果想在 data 定义中的函数获取到小程序页面 this 对象，可以在小程序的生命周期里将 this 赋值给一个临时变量，也可以在生命周期的时候 setData 设置函数，并通过 bind 修改上下文，如下，详见 [在 data 定义的函数变量获取 this](http://fant-mini-plus.top/wot-design-uni/#/components/commonProblems#zai-data-ding-yi-de-han-shu-bian-liang-huo-qu-this)
-:::
+function handleConfirm({ value }) {
+  console.log(value)
+}
+```
 
 ## 异步加载
 
@@ -90,48 +77,44 @@ Page({
 // 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
 import areaData from '../utils/area.json'
 
-Page({
-  data: {
-    value: [],
-    areaData: [
-      Object.keys(areaData[86]).map((key) => {
-        return {
-          value: key,
-          label: areaData[86][key]
-        }
-      })
-    ],
-    columnChange({ selectedItem, resolve, finish }) {
-      // 模拟异步请求
-      setTimeout(() => {
-        // 模拟请求失败
-        if (Math.random() > 0.7) {
-          finish(false)
-          toast.error.error('数据请求失败，请重试')
-          return
-        }
-        if (areaData[selectedItem.value]) {
-          resolve(
-            Object.keys(areaData[selectedItem.value]).map((key) => {
-              return {
-                value: key,
-                label: areaData[selectedItem.value][key]
-              }
-            })
-          )
-        } else {
-          // 没有下一项时，执行完成
-          finish()
-        }
-      }, 300)
+const value = ref<any[]>([])
+const area = ref<any[]>([
+  Object.keys(areaData[86]).map((key) => {
+    return {
+      value: key,
+      label: areaData[86][key]
     }
-  },
-  handleConfirm(event) {
-    this.setData({
-      value: event.detail.value
-    })
-  }
-})
+  })
+])
+
+const columnChange = ({ selectedItem, resolve, finish }) => {
+  // 模拟异步请求
+  setTimeout(() => {
+    // 模拟请求失败
+    if (Math.random() > 0.7) {
+      finish(false)
+      toast.error.error('数据请求失败，请重试')
+      return
+    }
+    if (areaData[selectedItem.value]) {
+      resolve(
+        Object.keys(areaData[selectedItem.value]).map((key) => {
+          return {
+            value: key,
+            label: areaData[selectedItem.value][key]
+          }
+        })
+      )
+    } else {
+      // 没有下一项时，执行完成
+      finish()
+    }
+  }, 300)
+}
+
+function handleConfirm({ value }) {
+  console.log(value)
+}
 ```
 
 ## 初始选项
@@ -147,51 +130,48 @@ Page({
 ```typescript
 // 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
 import areaData from '../utils/area.json'
+const value = ref<any[]>(['150000', '150100', '150121'])
 
-Page({
-  data: {
-    value: ['150000', '150100', '150121'],
-    areaData: [
-      Object.keys(areaData[86]).map((key) => {
+const area = ref<any[]>([
+  Object.keys(areaData[86]).map((key) => {
+    return {
+      value: key,
+      label: areaData[86][key]
+    }
+  }),
+  Object.keys(areaData[130000]).map((key) => {
+    return {
+      value: key,
+      label: areaData[130000][key]
+    }
+  }),
+  Object.keys(areaData[130200]).map((key) => {
+    return {
+      value: key,
+      label: areaData[130200][key]
+    }
+  })
+])
+
+const columnChange = ({ selectedItem, resolve, finish }) => {
+  if (areaData[selectedItem.value]) {
+    resolve(
+      Object.keys(areaData[selectedItem.value]).map((key) => {
         return {
           value: key,
-          label: areaData[86][key]
-        }
-      }),
-      Object.keys(areaData[150000]).map((key) => {
-        return {
-          value: key,
-          label: areaData[150000][key]
-        }
-      }),
-      Object.keys(areaData[150100]).map((key) => {
-        return {
-          value: key,
-          label: areaData[150100][key]
+          label: areaData[selectedItem.value][key]
         }
       })
-    ],
-    columnChange({ selectedItem, resolve, finish }) {
-      if (areaData[selectedItem.value]) {
-        resolve(
-          Object.keys(areaData[selectedItem.value]).map((key) => {
-            return {
-              value: key,
-              label: areaData[selectedItem.value][key]
-            }
-          })
-        )
-      } else {
-        finish()
-      }
-    }
-  },
-  handleConfirm(event) {
-    this.setData({
-      value: event.detail.value
-    })
+    )
+  } else {
+    finish()
   }
-})
+}
+
+function handleConfirm({ value }) {
+  console.log(value)
+}
+
 ```
 
 2）设置 `auto-complete` 属性，当 `columns` 数组长度小于 `value` 或长度为 0 时，会自动触发 `columnChange` 函数来补齐数据。设置了该属性后，因为数据需要动态补全，因此 传递出来的参数 selectedItem 只有 value 字段，没有 label 字段。
@@ -384,14 +364,7 @@ const displayFormat = (selectedItems) => {
 设置 `title` 属性，修改弹出层的标题。
 
 ```html
-<wd-col-picker
-  label="标题"
-  v-model="value"
-  title="选择地址"
-  :columns="area"
-  :column-change="columnChange"
-  @confirm="handleConfirm"
-></wd-col-picker>
+<wd-col-picker label="标题" v-model="value" title="选择地址" :columns="area" :column-change="columnChange" @confirm="handleConfirm"></wd-col-picker>
 ```
 
 ## 确定前校验
@@ -467,14 +440,7 @@ const beforeConfirm = (value, selectedItems, resolve) => {
 通过设置 `size` 修改选择器大小，将 `size` 设置为 'large' 时字号为 16px。
 
 ```html
-<wd-col-picker
-  label="选择地址"
-  v-model="value"
-  size="large"
-  :columns="area"
-  :column-change="columnChange"
-  @confirm="handleConfirm"
-></wd-col-picker>
+<wd-col-picker label="选择地址" v-model="value" size="large" :columns="area" :column-change="columnChange" @confirm="handleConfirm"></wd-col-picker>
 ```
 
 ## 值靠右展示
@@ -482,14 +448,7 @@ const beforeConfirm = (value, selectedItems, resolve) => {
 设置 `align-right` 属性，选择器的值靠右展示。
 
 ```html
-<wd-col-picker
-  label="选择地址"
-  align-right
-  v-model="value"
-  :columns="area"
-  :column-change="columnChange"
-  @confirm="handleConfirm"
-></wd-col-picker>
+<wd-col-picker label="选择地址" align-right v-model="value" :columns="area" :column-change="columnChange" @confirm="handleConfirm"></wd-col-picker>
 ```
 
 ## 自定义选择器
@@ -539,7 +498,7 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 
 | 参数                   | 说明                                                                                                                           | 类型     | 可选值 | 默认值  | 最低版本 |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------ | ------- | -------- |
-| v-model                  | 选中项                                                                                                                         | array    | -      | -       | -        |
+| v-model                | 选中项                                                                                                                         | array    | -      | -       | -        |
 | columns                | 选择器数据，二维数组                                                                                                           | array    | -      | -       | -        |
 | value-key              | 选项对象中，value 对应的 key                                                                                                   | string   | -      | value   | -        |
 | label-key              | 选项对象中，展示的文本对应的 key                                                                                               | string   | -      | label   | -        |
@@ -563,9 +522,9 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | name                   | form 表单中的字段名                                                                                                            | string   | -      | -       | -        |
 | close-on-click-modal   | 点击遮罩是否关闭                                                                                                               | boolean  | -      | true    | -        |
 | auto-complete          | 自动触发 column-change 事件来补全数据，当 columns 为空数组或者 columns 数组长度小于 value 数组长度时，会自动触发 column-change | -        | false  | -       |
-| z-index                | 弹窗层级                                                                                                                       | number   | -      | 15      | -    |
-| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                                            | boolean  | -      | true    | -    |
-| ellipsis               | 是否超出隐藏                                                                                                                   | boolean  | -      | false   | -    |
+| z-index                | 弹窗层级                                                                                                                       | number   | -      | 15      | -        |
+| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                                            | boolean  | -      | true    | -        |
+| ellipsis               | 是否超出隐藏                                                                                                                   | boolean  | -      | false   | -        |
 
 ## 选项数据结构
 
@@ -578,10 +537,10 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 
 ## Events
 
-| 事件名称     | 说明                       | 参数                                            | 最低版本 |
-| ------------ | -------------------------- | ----------------------------------------------- | -------- |
-| confirm | 最后一列选项选中时触发     | `{ value(选项值数组), selectedItem(选项数组) }` | -        |
-| cancel  | 点击关闭按钮或者蒙层时触发 | -                                               | -        |
+| 事件名称 | 说明                       | 参数                                            | 最低版本 |
+| -------- | -------------------------- | ----------------------------------------------- | -------- |
+| confirm  | 最后一列选项选中时触发     | `{ value(选项值数组), selectedItem(选项数组) }` | -        |
+| cancel   | 点击关闭按钮或者蒙层时触发 | -                                               | -        |
 
 ## Methods
 

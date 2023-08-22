@@ -109,24 +109,6 @@ export const checkPixelRange = (num, label = 'value') => {
   }
 }
 
-/**
- * @default 渲染视图
- * @param {this} node 节点
- * @param {Object} data 需要渲染的数据
- * @param {Number} delay 延迟多久
- */
-export const renderData = (node, data, delay = 0) => {
-  const diff = Object.keys(data).reduce((prev, key) => {
-    if (data[key] !== node.data[key]) {
-      prev[key] = data[key]
-    }
-    return prev
-  }, {})
-  if (Object.keys(diff).length === 0) return
-  const render = () => node.setData(diff)
-  delay ? setTimeout(render, delay) : render()
-}
-
 function rgbToHex(r: number, g: number, b: number) {
   const hex = ((r << 16) | (g << 8) | b).toString(16)
   return '#' + new Array(Math.abs(hex.length - 7)).join('0') + hex

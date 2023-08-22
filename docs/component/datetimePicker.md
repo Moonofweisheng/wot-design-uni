@@ -90,7 +90,7 @@ const displayFormat = (items) => {
 使用自定义`formatter`会关闭内置的默认`display-format`函数。
 
 ```html
-<wd-datetime-picker v-model="value" label="内部格式" formatter="{{formatter}}" />
+<wd-datetime-picker v-model="value" label="内部格式" :formatter="formatter" />
 ```
 ```typescript
 const value = ref<number>(Date.now())

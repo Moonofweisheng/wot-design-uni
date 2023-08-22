@@ -74,7 +74,7 @@ function handleChange(event) {
 设置 `type` 为 'textarea`。
 
 :::warning
-当 `wd-input` 的 `type` 为 'textarea' ，并嵌入 `wd-message-box`、`wd-popup`、`wd-action-sheet` 这类弹层组件时，textarea 的 placeholder 样式会失效，需要手动给 `wd-message-box`、`wd-popup`、`wd-action-sheet` 组件设置 `lazy-render="{{ false }}"` 属性，textarea 原生组件在这块实现有些问题，对于页面非立即渲染的 textarea 无法成功设置 placeholder 样式
+当 `wd-input` 的 `type` 为 'textarea' ，并嵌入 `wd-message-box`、`wd-popup`、`wd-action-sheet` 这类弹层组件时，textarea 的 placeholder 样式会失效，需要手动给 `wd-message-box`、`wd-popup`、`wd-action-sheet` 组件设置 `:lazy-render="false"` 属性，textarea 原生组件在这块实现有些问题，对于页面非立即渲染的 textarea 无法成功设置 placeholder 样式
 :::
 
 ```html

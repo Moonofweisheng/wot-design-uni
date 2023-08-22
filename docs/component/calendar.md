@@ -299,7 +299,7 @@ function handleConfirm({ value }) {
 ```html
 <wd-toast />
 
-<wd-calendar label="before-confirm" v-model="value" before-confirm="{{ beforeConfirm }}" />
+<wd-calendar label="before-confirm" v-model="value" :before-confirm="beforeConfirm" />
 ```
 
 ```typescript
