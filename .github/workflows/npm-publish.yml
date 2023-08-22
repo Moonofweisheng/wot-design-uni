@@ -23,6 +23,9 @@ jobs:
       - name: Run Compiler
         run: yarn compiler
 
+      - name: Navigate to lib directory
+        run: cd lib
+
       - name: Publish Package
         run: yarn publish
         env:
