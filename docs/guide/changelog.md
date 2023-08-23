@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.0.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.6...v0.0.7) (2023-08-23)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复部分组件某些属性必填警告的问题 ([1b866c0](https://github.com/Moonofweisheng/wot-design-uni/commit/1b866c062eb7a4ab894d5b2ecd7b7b3fd50ef864))
+
 ### [0.0.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.5...v0.0.6) (2023-08-22)
 
 ### [0.0.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.4...v0.0.5) (2023-08-22)
