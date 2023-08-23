@@ -27,11 +27,11 @@ import { getCurrentInstance, provide, watch } from 'vue'
 
 interface Props {
   customClass?: string
-  active: number
-  vertical: boolean
-  dot: boolean
+  active?: number
+  vertical?: boolean
+  dot?: boolean
   space?: string
-  alignCenter: boolean
+  alignCenter?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

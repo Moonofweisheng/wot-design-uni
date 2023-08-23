@@ -39,10 +39,10 @@ interface Props {
   value?: string | number | boolean
   shape?: RadioShape
   checkedColor?: string
-  disabled: boolean | null
-  cell: boolean | null
+  disabled?: boolean | null
+  cell?: boolean | null
   size?: string
-  inline: boolean | null
+  inline?: boolean | null
   maxWidth?: string
 }
 

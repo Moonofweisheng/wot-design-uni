@@ -88,16 +88,16 @@ interface Props {
   customPop?: string
   customClass?: string
   // 是否显示 popover 箭头
-  visibleArrow: boolean
+  visibleArrow?: boolean
   // 显示内容
   content: string | Record<string, any>[]
-  placement: PlacementType
-  offset: number
-  useContentSlot: boolean
-  disabled: boolean
-  showClose: boolean
+  placement?: PlacementType
+  offset?: number
+  useContentSlot?: boolean
+  disabled?: boolean
+  showClose?: boolean
   modelValue: boolean
-  mode: PopoverMode
+  mode?: PopoverMode
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',

@@ -143,19 +143,19 @@ interface Props {
   // 绑定值
   modelValue: number
   // 标签数超过阈值可滑动
-  slidableNum: number
+  slidableNum?: number
   // 标签数超过阈值显示导航地图
-  mapNum: number
+  mapNum?: number
   // 粘性布局
-  sticky: boolean
+  sticky?: boolean
   // 粘性布局吸顶位置
-  offsetTop: number
+  offsetTop?: number
   // 开启手势滑动
-  swipeable: boolean
+  swipeable?: boolean
   // 底部条宽度，单位像素
-  lineWidth: number
+  lineWidth?: number
   // 底部条高度，单位像素
-  lineHeight: number
+  lineHeight?: number
   color?: string
   inactiveColor?: string
 }

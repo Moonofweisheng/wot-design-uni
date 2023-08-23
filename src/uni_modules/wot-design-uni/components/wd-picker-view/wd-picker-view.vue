@@ -49,14 +49,14 @@ import { ColumnItem, formatArray } from './type'
 interface Props {
   customClass?: string
   // 加载中
-  loading: boolean
-  loadingColor: string
+  loading?: boolean
+  loadingColor?: string
   // 选项总高度
-  columnsHeight: number
+  columnsHeight?: number
   // 选项对象中，value对应的 key
-  valueKey: string
+  valueKey?: string
   // 选项对象中，展示的文本对应的 key
-  labelKey: string
+  labelKey?: string
   // 初始值
   modelValue: string | number | boolean | Array<string | number | boolean>
   // 选择器数据

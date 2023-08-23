@@ -21,12 +21,12 @@ type RadioShape = 'dot' | 'button' | 'check'
 interface Props {
   customClass?: string
   modelValue: string | number | boolean
-  shape: RadioShape
-  checkedColor: string
-  disabled: boolean
-  cell: boolean
-  size: string
-  inline: boolean
+  shape?: RadioShape
+  checkedColor?: string
+  disabled?: boolean
+  cell?: boolean
+  size?: string
+  inline?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -55,19 +55,19 @@ type PlacementType =
   | 'right-end'
 
 interface Props {
-  customStyle: string
-  customArrow: string
-  customPop: string
-  customClass: string
+  customStyle?: string
+  customArrow?: string
+  customPop?: string
+  customClass?: string
   // 是否显示 popover 箭头
-  visibleArrow: boolean
+  visibleArrow?: boolean
   // 显示内容
   content?: Record<string, any>[] | string
-  placement: PlacementType
-  offset: number
-  useContentSlot: boolean
-  disabled: boolean
-  showClose: boolean
+  placement?: PlacementType
+  offset?: number
+  useContentSlot?: boolean
+  disabled?: boolean
+  showClose?: boolean
   modelValue: boolean
 }
 const props = withDefaults(defineProps<Props>(), {

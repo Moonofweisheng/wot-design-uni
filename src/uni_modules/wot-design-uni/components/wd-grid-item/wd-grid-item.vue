@@ -37,16 +37,16 @@ interface Props {
   customText?: string
   customIcon?: string
   customClass?: string
-  icon: string
-  iconSize: string
+  icon?: string
+  iconSize?: string
   text?: string
   url?: string
-  linkType: LinkType
-  useSlot: boolean
-  useIconSlot: boolean
-  useTextSlot: boolean
+  linkType?: LinkType
+  useSlot?: boolean
+  useIconSlot?: boolean
+  useTextSlot?: boolean
   // badge属性
-  isDot: boolean
+  isDot?: boolean
   type?: BadgeType
   value?: number
   max?: number

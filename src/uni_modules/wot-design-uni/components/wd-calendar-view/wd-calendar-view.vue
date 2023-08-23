@@ -63,13 +63,13 @@ interface Props {
   // 选中值，为 13 位时间戳或时间戳数组
   modelValue: number | Array<number> | null
   // 日期类型
-  type: CalendarType
+  type?: CalendarType
   // 最小日期，为 13 位时间戳
-  minDate: number
+  minDate?: number
   // 最大日期，为 13 位时间戳
-  maxDate: number
+  maxDate?: number
   // 周起始天
-  firstDayOfWeek: number
+  firstDayOfWeek?: number
   // 日期格式化函数
   // eslint-disable-next-line @typescript-eslint/ban-types
   formatter?: Function
@@ -78,18 +78,18 @@ interface Props {
   // type 为范围选择时有效，选择超出最大日期范围时的错误提示文案
   rangePrompt?: string
   // type 为范围选择时有效，是否允许选择同一天
-  allowSameDay: boolean
+  allowSameDay?: boolean
   // 是否展示面板标题，自动计算当前滚动的日期月份
-  showPanelTitle: boolean
+  showPanelTitle?: boolean
   // 选中日期所使用的当日内具体时刻
-  defaultTime: string | Array<string>
+  defaultTime?: string | Array<string>
   // 可滚动面板的高度
-  panelHeight: number
+  panelHeight?: number
   // type 为 'datetime' 或 'datetimerange' 时有效，用于过滤时间选择器的数据
   // eslint-disable-next-line @typescript-eslint/ban-types
   timeFilter?: Function
   // type 为 'datetime' 或 'datetimerange' 时有效，是否不展示秒修改
-  hideSecond: boolean
+  hideSecond?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',

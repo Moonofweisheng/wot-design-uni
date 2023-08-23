@@ -48,8 +48,8 @@ interface Props {
   formatter?: Function
   maxRange?: number
   rangePrompt?: string
-  allowSameDay: boolean
-  showPanelTitle: boolean
+  allowSameDay?: boolean
+  showPanelTitle?: boolean
   defaultTime: Array<number>
   panelHeight: number
 }
@@ -60,11 +60,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const title = ref<string>('')
 const scrollTop = ref<number>(0) // 滚动位置
-
-const scrollIntoViewValue = ref<string>('')
-
-let contentObserver: null | UniApp.IntersectionObserver = null
-const instance = getCurrentInstance() as any
 
 // 滚动区域的高度
 const scrollHeight = computed(() => {

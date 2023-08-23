@@ -21,7 +21,7 @@ export default {
 <script lang="ts" setup>
 interface Props {
   customClass?: string
-  color: string
+  color?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

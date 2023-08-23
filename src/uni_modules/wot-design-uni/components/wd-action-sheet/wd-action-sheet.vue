@@ -94,16 +94,16 @@ interface Props {
   customClass?: string
   customHeaderClass?: string
   show: boolean
-  actions: Array<Action>
-  panels: Array<Panel>
+  actions?: Array<Action>
+  panels?: Array<Panel>
   title?: string
   cancelText?: string
-  closeOnClickAction: boolean
-  closeOnClickModal: boolean
-  duration: number
-  zIndex: number
-  lazyRender: boolean
-  safeAreaInsetBottom: boolean
+  closeOnClickAction?: boolean
+  closeOnClickModal?: boolean
+  duration?: number
+  zIndex?: number
+  lazyRender?: boolean
+  safeAreaInsetBottom?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

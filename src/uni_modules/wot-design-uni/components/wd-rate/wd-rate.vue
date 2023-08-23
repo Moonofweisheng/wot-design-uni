@@ -33,17 +33,17 @@ import { computed, ref, watch } from 'vue'
 
 interface Props {
   customClass?: string
-  num: number
+  num?: number
   modelValue: string | number | null
-  readonly: boolean
-  size: string
-  space: string
-  color: string
-  activeColor: string | Array<string>
-  icon: string
-  activeIcon: string
-  disabled: boolean
-  disabledColor: string
+  readonly?: boolean
+  size?: string
+  space?: string
+  color?: string
+  activeColor?: string | Array<string>
+  icon?: string
+  activeIcon?: string
+  disabled?: boolean
+  disabledColor?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -26,11 +26,11 @@ export default {
 <script lang="ts" setup>
 interface Props {
   customClass?: string
-  title: string
+  title?: string
   modelValue: number
-  allowReset: boolean
-  descFirst: boolean
-  line: boolean
+  allowReset?: boolean
+  descFirst?: boolean
+  line?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -61,14 +61,14 @@ interface Props {
   // 当前选中的value
   modelValue?: string | number
   // 可能是 array || String
-  options: Array<Record<string, any>>
-  useDropItemSlot: boolean
-  disabled: boolean
-  iconName: string
+  options?: Array<Record<string, any>>
+  useDropItemSlot?: boolean
+  disabled?: boolean
+  iconName?: string
   title?: string
-  valueKey: string
-  labelKey: string
-  tipKey: string
+  valueKey?: string
+  labelKey?: string
+  tipKey?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

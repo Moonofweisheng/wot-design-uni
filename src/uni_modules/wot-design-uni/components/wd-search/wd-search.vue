@@ -63,18 +63,18 @@ import { computed, ref, watch } from 'vue'
 import { requestAnimationFrame } from '../common/util'
 
 interface Props {
-  useActionSlot: boolean
-  useLabelSlot: boolean
-  userSuffixSlot: boolean
-  placeholder: string
-  cancelTxt: string
-  light: boolean
-  hideCancel: boolean
-  disabled: boolean
-  maxlength: number | string
-  modelValue: string
-  placeholderLeft: boolean
-  customClass: string
+  useActionSlot?: boolean
+  useLabelSlot?: boolean
+  userSuffixSlot?: boolean
+  placeholder?: string
+  cancelTxt?: string
+  light?: boolean
+  hideCancel?: boolean
+  disabled?: boolean
+  maxlength?: number | string
+  modelValue?: string
+  placeholderLeft?: boolean
+  customClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

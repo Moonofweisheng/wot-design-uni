@@ -35,7 +35,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { useTouch } from '../mixins/useTouch'
 import { getRect } from '../common/util'
@@ -44,8 +44,8 @@ interface Props {
   customClass?: string
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeClose?: Function
-  disabled: boolean
-  modelValue: string
+  disabled?: boolean
+  modelValue?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

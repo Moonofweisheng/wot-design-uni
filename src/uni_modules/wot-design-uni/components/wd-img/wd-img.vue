@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 10:04:19
- * @LastEditTime: 2023-08-15 13:11:35
+ * @LastEditTime: 2023-08-22 22:37:02
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-img\wd-img.vue
@@ -32,9 +32,9 @@ interface Props {
   customStyle?: string
   customImage?: string
   src: string
-  round: boolean
-  mode: string
-  lazyLoad: boolean
+  round?: boolean
+  mode?: string
+  lazyLoad?: boolean
   width?: string | number
   height?: string | number
 }

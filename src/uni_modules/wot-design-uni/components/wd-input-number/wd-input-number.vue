@@ -41,17 +41,17 @@ import { debounce, getType } from '../common/util'
 interface Props {
   customClass?: string
   modelValue: number | string
-  min: number
-  max: number
-  step: number
-  stepStrictly: boolean
-  precision: number
-  disabled: boolean
-  withoutInput: boolean
-  inputWidth: string | number
-  allowNull: boolean
-  placeholder: string
-  name: string
+  min?: number
+  max?: number
+  step?: number
+  stepStrictly?: boolean
+  precision?: number
+  disabled?: boolean
+  withoutInput?: boolean
+  inputWidth?: string | number
+  allowNull?: boolean
+  placeholder?: string
+  name?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

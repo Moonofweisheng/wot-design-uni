@@ -29,16 +29,18 @@ import { ref, watch } from 'vue'
 
 interface Props {
   customClass?: string
-  title: string
-  ver: number
-  hor: number
-  transparent: boolean
+  title?: string
+  ver?: number
+  hor?: number
+  transparent?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  title: '',
   customClass: '',
   ver: 10,
-  hor: 15
+  hor: 15,
+  transparent: false
 })
 
 const style = ref<string>('')

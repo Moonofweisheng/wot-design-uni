@@ -51,11 +51,11 @@ type TransitionName =
   | 'zoom-out'
 
 interface Props {
-  show: boolean
+  show?: boolean
   duration?: Record<string, number> | number | boolean
-  name: TransitionName | ''
-  customStyle: string
-  lazyRender: boolean
+  name?: TransitionName | ''
+  customStyle?: string
+  lazyRender?: boolean
   customClass?: string
   // 定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。
   enterClass?: string

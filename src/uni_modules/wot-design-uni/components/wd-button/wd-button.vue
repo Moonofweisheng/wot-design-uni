@@ -71,15 +71,15 @@ type ButtonType = 'primary' | 'success' | 'info' | 'warning' | 'error' | 'defaul
 type ButtonSize = 'small' | 'medium' | 'large'
 
 interface Props {
-  plain: boolean
-  disabled: boolean
-  round: boolean
-  suck: boolean
-  block: boolean
-  type: ButtonType
-  size: ButtonSize
+  plain?: boolean
+  disabled?: boolean
+  round?: boolean
+  suck?: boolean
+  block?: boolean
+  type?: ButtonType
+  size?: ButtonSize
   icon?: string
-  loading: boolean
+  loading?: boolean
   loadingColor?: string
   openType?: string
   formType?: string
@@ -91,8 +91,8 @@ interface Props {
   sendMessageImg?: string
   appParameter?: string
   showMessageCard?: boolean
-  customClass: string
-  customStyle: string
+  customClass?: string
+  customStyle?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'primary',

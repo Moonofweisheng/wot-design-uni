@@ -138,60 +138,60 @@ import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/
 import { useCell } from '../mixins/useCell'
 import { DateTimeType, getPickerValue } from '../wd-datetime-picker-view/type'
 interface Props {
-  customClass: string
-  customViewClass: string
-  customLabelClass: string
-  customValueClass: string
+  customClass?: string
+  customViewClass?: string
+  customLabelClass?: string
+  customValueClass?: string
   // 选择器左侧文案
   label?: string
   // 选择器占位符
-  placeholder: string
+  placeholder?: string
   // 禁用
-  disabled: boolean
+  disabled?: boolean
   // 只读
-  readonly: boolean
-  loading: boolean
-  loadingColor: string
+  readonly?: boolean
+  loading?: boolean
+  loadingColor?: string
   /* popup */
   // 弹出层标题
   title?: string
   // 取消按钮文案
-  cancelButtonText: string
+  cancelButtonText?: string
   // 确认按钮文案
-  confirmButtonText: string
+  confirmButtonText?: string
   // 是否必填
-  required: boolean
+  required?: boolean
   size?: string
-  labelWidth: string
-  useDefaultSlot: boolean
-  useLabelSlot: boolean
-  error: boolean
-  alignRight: boolean
-  closeOnClickModal: boolean
-  safeAreaInsetBottom: boolean
-  ellipsis: boolean
+  labelWidth?: string
+  useDefaultSlot?: boolean
+  useLabelSlot?: boolean
+  error?: boolean
+  alignRight?: boolean
+  closeOnClickModal?: boolean
+  safeAreaInsetBottom?: boolean
+  ellipsis?: boolean
   // 选项总高度
-  columnsHeight: number
+  columnsHeight?: number
   // 选项对象中，value对应的 key
-  valueKey: string
+  valueKey?: string
   // 选项对象中，展示的文本对应的 key
-  labelKey: string
+  labelKey?: string
   // 选中项，当 type 为 time 时，类型为字符串，否则为 时间戳
   modelValue: string | number | Date | Array<string | number | Date>
   // 时间选择器的类型
-  type: DateTimeType
+  type?: DateTimeType
   // 最小日期 20(x-10)年1月1日
-  minDate: number
+  minDate?: number
   // 最大日期 20(x+10)年1月1日
-  maxDate: number
+  maxDate?: number
   // 最小小时
-  minHour: number
+  minHour?: number
   // 最大小时
-  maxHour: number
+  maxHour?: number
   // 最小分钟
-  minMinute: number
+  minMinute?: number
   // 最大分钟
-  maxMinute: number
+  maxMinute?: number
   // 自定义过滤选项的函数，返回列的选项数组
   // eslint-disable-next-line @typescript-eslint/ban-types
   filter?: Function
@@ -208,7 +208,7 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   displayFormatTabLabel?: Function
   defaultValue?: string | number | Date | Array<string | number | Date>
-  zIndex: number
+  zIndex?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -34,13 +34,13 @@ import { getRect } from '../common/util'
 
 type DropDirction = 'up' | 'down'
 interface Props {
-  customClass: string
-  customStyle: string
-  zIndex: number
-  direction: DropDirction
-  modal: boolean
-  closeOnClickModal: boolean
-  duration: number
+  customClass?: string
+  customStyle?: string
+  zIndex?: number
+  direction?: DropDirction
+  modal?: boolean
+  closeOnClickModal?: boolean
+  duration?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {

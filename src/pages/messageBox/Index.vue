@@ -1,7 +1,6 @@
 <template>
   <page-wraper>
     <wd-message-box></wd-message-box>
-    <wd-toast></wd-toast>
     <wd-message-box selector="wd-message-box-slot" use-slot>
       <wd-rate custom-class="custom-rate-class" v-model="value" />
     </wd-message-box>
@@ -31,7 +30,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-box'
+import { useMessage } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 const value = ref<number>(1)
 const value1 = ref<string>('')

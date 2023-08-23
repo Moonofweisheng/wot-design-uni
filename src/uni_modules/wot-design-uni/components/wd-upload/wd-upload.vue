@@ -56,31 +56,31 @@ import { context, getType, isDef, isEqual } from '../common/util'
 import { chooseFile } from './utils'
 
 interface Props {
-  customClass: string
-  customEvokeClass: string
-  customPreviewClass: string
+  customClass?: string
+  customEvokeClass?: string
+  customPreviewClass?: string
   // 多选
-  multiple: boolean
+  multiple?: boolean
   // 接受类型 暂定接受类型为图片，视频后续添加
-  accept: string
-  sizeType: Array<string>
-  sourceType: Array<string>
-  header: Record<string, any>
-  name: string
-  formData: Record<string, any>
+  accept?: string
+  sizeType?: Array<string>
+  sourceType?: Array<string>
+  header?: Record<string, any>
+  name?: string
+  formData?: Record<string, any>
   // 上传相关
   action: string
-  fileList: Record<string, any>[]
-  statusKey: string
-  maxSize: number
+  fileList?: Record<string, any>[]
+  statusKey?: string
+  maxSize?: number
   limit?: number
-  showLimitMum: boolean
-  disabled: boolean
-  useDefaultSlot: boolean
+  showLimitMum?: boolean
+  disabled?: boolean
+  useDefaultSlot?: boolean
   // loading 相关
-  loadingType: string
-  loadingColor: string
-  loadingSize: string
+  loadingType?: string
+  loadingColor?: string
+  loadingSize?: string
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforePreview?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
