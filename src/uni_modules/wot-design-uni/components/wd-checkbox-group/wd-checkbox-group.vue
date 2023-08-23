@@ -22,13 +22,13 @@ type checkShape = 'circle' | 'square' | 'button'
 interface Props {
   customClass?: string
   modelValue: Array<string | number | boolean>
-  cell: boolean
-  shape: checkShape
-  checkedColor: string
-  disabled: boolean
-  min: number
-  max: number
-  inline: boolean
+  cell?: boolean
+  shape?: checkShape
+  checkedColor?: string
+  disabled?: boolean
+  min?: number
+  max?: number
+  inline?: boolean
   size?: string
   name?: string
 }

@@ -110,40 +110,40 @@ interface Props {
   customLabelClass?: string
   customValueClass?: string
   label?: string
-  labelWidth: string
-  disabled: boolean
-  readonly: boolean
-  placeholder: string
+  labelWidth?: string
+  disabled?: boolean
+  readonly?: boolean
+  placeholder?: string
   title?: string
-  alignRight: boolean
-  error: boolean
-  required: boolean
-  useLabelSlot: boolean
-  useDefaultSlot: boolean
+  alignRight?: boolean
+  error?: boolean
+  required?: boolean
+  useLabelSlot?: boolean
+  useDefaultSlot?: boolean
   size?: string
-  checkedColor: string
-  min: number
-  max: number
+  checkedColor?: string
+  min?: number
+  max?: number
   selectSize?: string
-  loading: boolean
-  loadingColor: string
-  closeOnClickModal: boolean
+  loading?: boolean
+  loadingColor?: string
+  closeOnClickModal?: boolean
   modelValue: Array<number | boolean | string> | number | boolean | string
   columns: Array<Record<string, any>>
-  type: SelectPickerType
-  valueKey: string
-  labelKey: string
-  confirmButtonText: string
+  type?: SelectPickerType
+  valueKey?: string
+  labelKey?: string
+  confirmButtonText?: string
   // 外部展示格式化函数
   // eslint-disable-next-line @typescript-eslint/ban-types
   displayFormat?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeConfirm?: Function
-  zIndex: number
-  safeAreaInsetBottom: boolean
-  filterable: boolean
-  filterPlaceholder: string
-  ellipsis: boolean
+  zIndex?: number
+  safeAreaInsetBottom?: boolean
+  filterable?: boolean
+  filterPlaceholder?: string
+  ellipsis?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

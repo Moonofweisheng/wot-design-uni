@@ -6,14 +6,13 @@
       position="center"
       :close-on-click-modal="closeOnClickModal"
       :hide-when-close="hideWhenClose"
-      @beforeenter="beforeenter"
+      @before-enter="beforeenter"
       @enter="enter"
-      @afterenter="afterenter"
-      @beforeleave="beforeleave"
+      @after-enter="afterenter"
+      @before-leave="beforeleave"
       @leave="leave"
-      @afterleave="afterleave"
+      @after-leave="afterleave"
       @close="close"
-      @closed="closed"
       @clickmodal="clickModal"
       :custom-class="`wd-curtain ${customClass}`"
     >
@@ -42,12 +41,12 @@ type ClosePosition = 'inset' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bo
 interface Props {
   customClass?: string
   value: boolean
-  closePosition: ClosePosition
+  closePosition?: ClosePosition
   src?: string
   to?: string
   width?: number
-  closeOnClickModal: boolean
-  hideWhenClose: boolean
+  closeOnClickModal?: boolean
+  hideWhenClose?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -139,15 +138,12 @@ function leave() {
 
 function afterleave() {
   emit('afterleave')
+  emit('closed')
 }
 
 function close() {
   show.value = false
   emit('close')
-}
-
-function closed() {
-  emit('closed')
 }
 
 function clickModal() {

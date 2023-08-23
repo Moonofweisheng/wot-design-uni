@@ -78,13 +78,13 @@ interface Props {
   formatter?: Function
   maxRange?: number
   rangePrompt?: string
-  allowSameDay: boolean
-  showPanelTitle: boolean
+  allowSameDay?: boolean
+  showPanelTitle?: boolean
   defaultTime: Array<number>
   panelHeight: number
   // eslint-disable-next-line @typescript-eslint/ban-types
   timeFilter?: Function
-  hideSecond: boolean
+  hideSecond?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   allowSameDay: false,

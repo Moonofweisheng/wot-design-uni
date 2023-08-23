@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-04 13:34:15
+ * @LastEditTime: 2023-08-22 22:28:17
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse\wd-collapse.vue
@@ -58,10 +58,10 @@ interface Props {
   customClass?: string
   customMoreSlotClass?: string
   modelValue: string | Array<string> | boolean
-  accordion: boolean
-  viewmore: boolean
-  useMoreSlot: boolean
-  lineNum: number
+  accordion?: boolean
+  viewmore?: boolean
+  useMoreSlot?: boolean
+  lineNum?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {

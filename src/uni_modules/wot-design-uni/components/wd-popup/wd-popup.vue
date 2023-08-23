@@ -31,19 +31,19 @@ import { isObj, requestAnimationFrame } from '../common/util'
 
 interface Props {
   transition?: string
-  closable: boolean
-  position: string
-  closeOnClickModal: boolean
-  duration: number | boolean
-  modal: boolean
-  zIndex: number
-  hideWhenClose: boolean
-  modalStyle: string
-  safeAreaInsetBottom: boolean
+  closable?: boolean
+  position?: string
+  closeOnClickModal?: boolean
+  duration?: number | boolean
+  modal?: boolean
+  zIndex?: number
+  hideWhenClose?: boolean
+  modalStyle?: string
+  safeAreaInsetBottom?: boolean
   modelValue: boolean
-  customStyle: string
-  lazyRender: boolean
-  customClass: string
+  customStyle?: string
+  lazyRender?: boolean
+  customClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

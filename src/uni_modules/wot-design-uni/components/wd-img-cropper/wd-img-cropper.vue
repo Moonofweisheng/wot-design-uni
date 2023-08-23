@@ -96,26 +96,26 @@ const TOP_PERCENT = 0.85
 interface Props {
   customClass?: string
   modelValue: boolean
-  cancelButtonText: string
-  confirmButtonText: string
+  cancelButtonText?: string
+  confirmButtonText?: string
   // 是否禁用旋转
-  disabledRotate: boolean
+  disabledRotate?: boolean
   /** canvas绘图参数 start **/
   // canvasToTempFilePath —— fileType
-  fileType: string
+  fileType?: string
   // canvasToTempFilePath —— quality
-  quality: number
+  quality?: number
   // 设置导出图片尺寸
-  exportScale: number
+  exportScale?: number
   /** canvas绘图参数 end **/
   // 图片源路径
-  imgSrc: string
+  imgSrc?: string
   // 图片宽
-  imgWidth: string | number
+  imgWidth?: string | number
   // 图片高
-  imgHeight: string | number
+  imgHeight?: string | number
   // 最大缩放
-  maxScale: number
+  maxScale?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -646,7 +646,7 @@ defineExpose({
 })
 </script>
 
-<!-- #ifdef MP-WEIXIN || MP-QQ  -->
+<!-- #ifdef MP-WEIXIN || MP-QQ || H5  -->
 <script module="animation" lang="wxs">
 
 function setAnimation(newValue, oldValue, ownerInstance){

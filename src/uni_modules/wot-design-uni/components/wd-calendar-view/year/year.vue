@@ -43,7 +43,7 @@ interface Props {
   formatter?: Function
   maxRange?: number
   rangePrompt?: string
-  allowSameDay: boolean
+  allowSameDay?: boolean
   defaultTime: Array<number>
 }
 const props = withDefaults(defineProps<Props>(), {

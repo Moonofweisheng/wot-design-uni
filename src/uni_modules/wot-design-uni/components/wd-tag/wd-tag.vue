@@ -40,17 +40,17 @@ import { objToStyle } from '../common/util'
 import { computed, ref, watch } from 'vue'
 
 interface Props {
-  useIconSlot: boolean
+  useIconSlot?: boolean
   type?: string
   icon?: string
-  closable: boolean
-  plain: boolean
-  dynamic: boolean
+  closable?: boolean
+  plain?: boolean
+  dynamic?: boolean
   color?: string
   bgColor?: string
-  round: boolean
-  mark: boolean
-  customClass: string
+  round?: boolean
+  mark?: boolean
+  customClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

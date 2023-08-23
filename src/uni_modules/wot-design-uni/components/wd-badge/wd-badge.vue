@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:59
- * @LastEditTime: 2023-08-15 15:47:51
+ * @LastEditTime: 2023-08-22 23:23:37
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-badge\wd-badge.vue
@@ -33,7 +33,7 @@ export default {
 import { computed, ref, watch } from 'vue'
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 interface Props {
-  modelValue: number | string | null
+  modelValue?: number | string | null
   bgColor?: string
   max?: number
   isDot?: boolean
@@ -41,7 +41,7 @@ interface Props {
   type?: BadgeType
   top?: number
   right?: number
-  customClass: string
+  customClass?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',

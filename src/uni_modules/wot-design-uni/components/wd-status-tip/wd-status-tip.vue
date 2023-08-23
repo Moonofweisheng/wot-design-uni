@@ -31,10 +31,10 @@ import { ref, watch } from 'vue'
 type StatusTipType = 'search' | 'network' | 'content' | 'collect' | 'comment' | 'halo' | 'message'
 
 interface Props {
-  customClass: string
-  customStyle: string
-  type: StatusTipType
-  tip: string
+  customClass?: string
+  customStyle?: string
+  type?: StatusTipType
+  tip?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

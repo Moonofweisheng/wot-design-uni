@@ -1,22 +1,24 @@
 <template>
-  <wd-toast selector="wd-month" />
-  <view class="month" :data-date="date">
-    <view class="wd-month">
-      <view class="wd-month__title">{{ monthTitle(date) }}</view>
-      <view class="wd-month__days">
-        <view
-          v-for="(item, index) in days"
-          :key="index"
-          :class="`wd-month__day ${item.disabled ? 'is-disabled' : ''} ${item.type ? itemClass(item.type, value, type) : ''}`"
-          :style="firstDayStyle(index, item.date, firstDayOfWeek)"
-          @click="handleDateClick(index)"
-        >
-          <view class="wd-month__day-container">
-            <view class="wd-month__day-top">{{ item.topInfo }}</view>
-            <view class="wd-month__day-text">
-              {{ item.text }}
+  <view>
+    <wd-toast selector="wd-month" />
+    <view class="month">
+      <view class="wd-month">
+        <view class="wd-month__title">{{ monthTitle(date) }}</view>
+        <view class="wd-month__days">
+          <view
+            v-for="(item, index) in days"
+            :key="index"
+            :class="`wd-month__day ${item.disabled ? 'is-disabled' : ''} ${item.type ? itemClass(item.type, value, type) : ''}`"
+            :style="firstDayStyle(index, item.date, firstDayOfWeek)"
+            @click="handleDateClick(index)"
+          >
+            <view class="wd-month__day-container">
+              <view class="wd-month__day-top">{{ item.topInfo }}</view>
+              <view class="wd-month__day-text">
+                {{ item.text }}
+              </view>
+              <view class="wd-month__day-bottom">{{ item.bottomInfo }}</view>
             </view>
-            <view class="wd-month__day-bottom">{{ item.bottomInfo }}</view>
           </view>
         </view>
       </view>
@@ -61,7 +63,7 @@ interface Props {
   formatter?: Function
   maxRange?: number
   rangePrompt?: string
-  allowSameDay: boolean
+  allowSameDay?: boolean
   defaultTime: Array<number>
 }
 const props = withDefaults(defineProps<Props>(), {

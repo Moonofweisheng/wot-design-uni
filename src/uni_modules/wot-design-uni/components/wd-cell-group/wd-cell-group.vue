@@ -45,8 +45,8 @@ interface Props {
   customClass?: string
   title?: string
   value?: string
-  useSlot: boolean
-  border: boolean
+  useSlot?: boolean
+  border?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   useSlot: false,

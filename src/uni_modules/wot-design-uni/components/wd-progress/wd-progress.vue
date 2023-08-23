@@ -34,10 +34,10 @@ type ProgressStatus = 'success' | 'danger' // 状态类型
 
 interface Props {
   customClass?: string
-  percentage: number
+  percentage?: number
   hideText?: boolean
   color?: string | string[] | Record<string, any>[]
-  duration: number
+  duration?: number
   status?: ProgressStatus
 }
 

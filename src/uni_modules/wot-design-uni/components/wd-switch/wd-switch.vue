@@ -20,15 +20,15 @@ import { getType, objToStyle } from '../common/util'
 
 interface Props {
   modelValue: boolean | string | number
-  disabled: boolean
-  activeValue: boolean | string | number
-  inactiveValue: boolean | string | number
+  disabled?: boolean
+  activeValue?: boolean | string | number
+  inactiveValue?: boolean | string | number
   activeColor?: string
   inactiveColor?: string
-  size: string
+  size?: string
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeChange?: Function
-  customClass: string
+  customClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

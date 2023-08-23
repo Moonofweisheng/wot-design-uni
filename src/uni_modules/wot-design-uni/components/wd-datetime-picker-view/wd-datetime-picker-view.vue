@@ -63,17 +63,17 @@ interface Props {
   modelValue: string | number | Date
   // PickerView的Props 开始
   // 加载中
-  loading: boolean
-  loadingColor: string
+  loading?: boolean
+  loadingColor?: string
   // 选项总高度
-  columnsHeight: number
+  columnsHeight?: number
   // 选项对象中，value对应的 key
-  valueKey: string
+  valueKey?: string
   // 选项对象中，展示的文本对应的 key
-  labelKey: string
+  labelKey?: string
   // PickerView的Props 结束
   // 时间选择器的类型
-  type: DateTimeType
+  type?: DateTimeType
   // 自定义过滤选项的函数，返回列的选项数组
   // eslint-disable-next-line @typescript-eslint/ban-types
   filter?: Function
@@ -84,18 +84,18 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   columnFormatter?: Function
   // 最小日期 20(x-10)年1月1日
-  minDate: number
+  minDate?: number
   // 最大日期 20(x+10)年1月1日
-  maxDate: number
+  maxDate?: number
   // 最小小时
-  minHour: number
+  minHour?: number
   // 最大小时
-  maxHour: number
+  maxHour?: number
   // 最小分钟
-  minMinute: number
+  minMinute?: number
   // 最大分钟
-  maxMinute: number
-  startSymbol: boolean
+  maxMinute?: number
+  startSymbol?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

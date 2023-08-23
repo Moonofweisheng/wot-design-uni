@@ -28,8 +28,8 @@ export default {
 import { computed } from 'vue'
 type ConfigProviderTheme = 'light' | 'dark'
 interface Props {
-  theme: ConfigProviderTheme
-  themeVars: Record<string, any>
+  theme?: ConfigProviderTheme
+  themeVars?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {

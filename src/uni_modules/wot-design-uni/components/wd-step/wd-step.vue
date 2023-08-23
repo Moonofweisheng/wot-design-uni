@@ -53,9 +53,9 @@ interface Props {
   description?: string
   icon?: string
   status?: StepStatus
-  iconSlot: boolean
-  titleSlot: boolean
-  descriptionSlot: boolean
+  iconSlot?: boolean
+  titleSlot?: boolean
+  descriptionSlot?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

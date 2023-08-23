@@ -104,12 +104,12 @@ interface Props {
   modelValue: Array<Record<string, any>>
   columns: Array<Array<Record<string, any>>>
   label?: string
-  labelWidth: string
-  useLabelSlot: boolean
-  useDefaultSlot: boolean
-  disabled: boolean
-  readonly: boolean
-  placeholder: string
+  labelWidth?: string
+  useLabelSlot?: boolean
+  useDefaultSlot?: boolean
+  disabled?: boolean
+  readonly?: boolean
+  placeholder?: string
   title?: string
   // 接收当前列的选中项 item、当前列下标、当前列选中项下标下一列数据处理函数 resolve、结束选择 finish
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -119,19 +119,19 @@ interface Props {
   displayFormat?: Function
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeConfirm?: Function
-  alignRight: boolean
-  error: boolean
-  required: boolean
+  alignRight?: boolean
+  error?: boolean
+  required?: boolean
   size?: string
-  valueKey: string
-  labelKey: string
-  tipKey: string
-  loadingColor: string
-  closeOnClickModal: boolean
-  autoComplete: boolean
-  zIndex: number
-  safeAreaInsetBottom: boolean
-  ellipsis: boolean
+  valueKey?: string
+  labelKey?: string
+  tipKey?: string
+  loadingColor?: string
+  closeOnClickModal?: boolean
+  autoComplete?: boolean
+  zIndex?: number
+  safeAreaInsetBottom?: boolean
+  ellipsis?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

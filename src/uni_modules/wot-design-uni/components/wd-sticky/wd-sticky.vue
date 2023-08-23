@@ -33,8 +33,8 @@ import { addUnit, getRect, objToStyle } from '../common/util'
 interface Props {
   customStyle?: string
   customClass?: string
-  zIndex: number
-  offsetTop: number
+  zIndex?: number
+  offsetTop?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -52,9 +52,9 @@ const width = ref<number>(0)
 const observerList = ref<UniApp.IntersectionObserver[]>([])
 const state = ref<string>('')
 
-const boxHeight: Ref<number> = inject('box-height') || ref(0)
+const boxHeight: Ref<number> = inject('box-height', null) || ref(0)
 // eslint-disable-next-line @typescript-eslint/ban-types
-const observerForChild: Function | null = inject('observerForChild') || null
+const observerForChild: Function | null = inject('observerForChild', null)
 
 const { proxy } = getCurrentInstance() as any
 const instance = getCurrentInstance() as any

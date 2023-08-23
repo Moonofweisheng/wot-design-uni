@@ -23,15 +23,16 @@ export default {
 <script lang="ts" setup>
 interface Props {
   show: boolean
-  duration: Record<string, number> | number | boolean
-  zIndex: number
+  duration?: Record<string, number> | number | boolean
+  zIndex?: number
   customStyle?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   show: false,
   duration: 300,
-  zIndex: 10
+  zIndex: 10,
+  customStyle: ''
 })
 
 const emit = defineEmits(['click'])

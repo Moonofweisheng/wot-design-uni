@@ -2,8 +2,8 @@ import { getCurrentInstance, inject, nextTick, onBeforeMount, onMounted, ref, wa
 
 export function useCell() {
   const border = ref<boolean>(false) // 是否展示边框
-  const cellGroup: any = inject('cell-group') || {}
-  const cellList: any = inject('cell-list') || ref<any[]>([])
+  const cellGroup: any = inject('cell-group', null) || {}
+  const cellList: any = inject('cell-list', null) || ref<any[]>([])
   const { proxy } = getCurrentInstance() as any
 
   watch(

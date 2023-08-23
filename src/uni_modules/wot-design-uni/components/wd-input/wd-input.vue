@@ -141,55 +141,55 @@ import { objToStyle, requestAnimationFrame } from '../common/util'
 import { useCell } from '../mixins/useCell'
 
 interface Props {
-  customTextareaContainerClass: string
-  customTextareaClass: string
-  customInputClass: string
-  customLabelClass: string
-  customClass: string
-  customStyle: string
+  customTextareaContainerClass?: string
+  customTextareaClass?: string
+  customInputClass?: string
+  customLabelClass?: string
+  customClass?: string
+  customStyle?: string
   // 原生属性
-  placeholder: string
+  placeholder?: string
   placeholderStyle?: string
-  placeholderClass: string
-  autoHeight: boolean
-  fixed: boolean
-  cursorSpacing: number
-  cursor: number
-  showConfirmBar: boolean
-  selectionStart: number
-  selectionEnd: number
-  adjustPosition: boolean
-  holdKeyboard: boolean
-  confirmType: string
-  confirmHold: boolean
-  focus: boolean
-  type: string
-  maxlength: number
-  disabled: boolean
-  alignRight: boolean
+  placeholderClass?: string
+  autoHeight?: boolean
+  fixed?: boolean
+  cursorSpacing?: number
+  cursor?: number
+  showConfirmBar?: boolean
+  selectionStart?: number
+  selectionEnd?: number
+  adjustPosition?: boolean
+  holdKeyboard?: boolean
+  confirmType?: string
+  confirmHold?: boolean
+  focus?: boolean
+  type?: string
+  maxlength?: number
+  disabled?: boolean
+  alignRight?: boolean
   // 原生属性结束
   modelValue: string | number
   minlength?: number
-  showPassword: boolean
-  clearable: boolean
-  showClear: boolean
-  readonly: boolean
-  useSuffixSlot: boolean
-  usePrefixSlot: boolean
+  showPassword?: boolean
+  clearable?: boolean
+  showClear?: boolean
+  readonly?: boolean
+  useSuffixSlot?: boolean
+  usePrefixSlot?: boolean
   prefixIcon?: string
   suffixIcon?: string
-  showWordLimit: boolean
-  showWordCount: boolean
+  showWordLimit?: boolean
+  showWordCount?: boolean
   suffix?: string
   suffixCount?: number
   label?: string
-  labelWidth: string
-  useLabelSlot: boolean
+  labelWidth?: string
+  useLabelSlot?: boolean
   size?: string
-  error: boolean
-  center: boolean
-  noBorder: boolean
-  required: boolean
+  error?: boolean
+  center?: boolean
+  noBorder?: boolean
+  required?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

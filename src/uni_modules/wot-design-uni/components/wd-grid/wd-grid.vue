@@ -22,11 +22,11 @@ const nextTick = () => new Promise((resolve) => setTimeout(resolve, 20))
 
 interface Props {
   customClass?: string
-  clickable: boolean
-  square: boolean
+  clickable?: boolean
+  square?: boolean
   column?: number
-  border: boolean
-  bgColor: string
+  border?: boolean
+  bgColor?: string
   gutter?: number
 }
 

@@ -64,15 +64,15 @@ interface Props {
   value?: string
   icon?: string
   label?: string
-  isLink: boolean
+  isLink?: boolean
   to?: string
-  replace: boolean
-  clickable: boolean
+  replace?: boolean
+  clickable?: boolean
   size?: string
   titleWidth?: string
-  center: boolean
-  required: boolean
-  vertical: boolean
+  center?: boolean
+  required?: boolean
+  vertical?: boolean
   customClass?: string
   customIconClass?: string
   customLabelClass?: string
@@ -81,6 +81,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  customClass: '',
   customIconClass: '',
   customLabelClass: '',
   customValueClass: '',

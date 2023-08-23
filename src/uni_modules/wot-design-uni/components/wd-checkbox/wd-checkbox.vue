@@ -50,11 +50,11 @@ interface Props {
   customShapeClass?: string
   customClass?: string
   modelValue: string | number | boolean
-  shape: checkShape
+  shape?: checkShape
   checkedColor?: string
-  disabled: boolean | null
-  trueValue: string | number | boolean
-  falseValue: string | number | boolean
+  disabled?: boolean | null
+  trueValue?: string | number | boolean
+  falseValue?: string | number | boolean
   size?: string
   maxWidth?: string
 }
@@ -75,7 +75,7 @@ const inited = ref<boolean>(false)
 // 相同组件的伪类选择器无效，这里配合类名手动模拟 last-child、first-child
 const isFirst = ref<boolean>(false)
 const isLast = ref<boolean>(false)
-const parent = inject<any>('checkGroup')
+const parent = inject<any>('checkGroup', null)
 const { proxy } = getCurrentInstance() as any
 
 watch(

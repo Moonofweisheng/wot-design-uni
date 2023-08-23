@@ -91,44 +91,44 @@ interface Props {
   // 选择器左侧文案
   label?: string
   // 选择器占位符
-  placeholder: string
+  placeholder?: string
   // 禁用
-  disabled: boolean
+  disabled?: boolean
   // 只读
-  readonly: boolean
-  loading: boolean
-  loadingColor: string
+  readonly?: boolean
+  loading?: boolean
+  loadingColor?: string
   /* popup */
   // 弹出层标题
   title?: string
   // 取消按钮文案
-  cancelButtonText: string
+  cancelButtonText?: string
   // 确认按钮文案
-  confirmButtonText: string
+  confirmButtonText?: string
   // 是否必填
-  required: boolean
+  required?: boolean
   size?: string
   labelWidth?: string
-  useDefaultSlot: boolean
-  useLabelSlot: boolean
-  error: boolean
-  alignRight: boolean
+  useDefaultSlot?: boolean
+  useLabelSlot?: boolean
+  error?: boolean
+  alignRight?: boolean
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeConfirm?: Function
-  closeOnClickModal: boolean
-  safeAreaInsetBottom: boolean
-  ellipsis: boolean
+  closeOnClickModal?: boolean
+  safeAreaInsetBottom?: boolean
+  ellipsis?: boolean
 
   // 选项总高度
-  columnsHeight: number
+  columnsHeight?: number
   // 选项对象中，value对应的 key
-  valueKey: string
+  valueKey?: string
   // 选项对象中，展示的文本对应的 key
-  labelKey: string
+  labelKey?: string
   // 初始值
-  modelValue: string | number | Array<string | number>
+  modelValue?: string | number | Array<string | number>
   // 选择器数据
-  columns: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>
+  columns?: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>
   // 多级联动
   // eslint-disable-next-line @typescript-eslint/ban-types
   columnChange?: Function
@@ -136,13 +136,15 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   displayFormat?: Function
   // 自定义层级
-  zIndex: number
+  zIndex?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   customClass: '',
   customViewClass: '',
+  customLabelClass: '',
+  customValueClass: '',
   // 选择器占位符
   placeholder: '请选择',
   // 禁用

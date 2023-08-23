@@ -27,7 +27,7 @@ interface Props {
   // tab的label
   title?: string
   // tab禁用，无法点击
-  disabled: boolean
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

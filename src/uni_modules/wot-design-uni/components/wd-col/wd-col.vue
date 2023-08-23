@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2023-08-15 13:06:34
+ * @LastEditTime: 2023-08-22 22:26:37
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-col\wd-col.vue
@@ -35,7 +35,8 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   span: 24,
-  offset: 0
+  offset: 0,
+  customClass: ''
 })
 
 const style = ref<string>('')

@@ -36,12 +36,12 @@ type NoticeBarType = 'warning' | 'info' | 'danger' | ''
 interface Props {
   customClass?: string
   text?: string
-  type: NoticeBarType
-  scrollable: boolean
-  delay: number
-  speed: number
-  closable: boolean
-  wrapable: boolean
+  type?: NoticeBarType
+  scrollable?: boolean
+  delay?: number
+  speed?: number
+  closable?: boolean
+  wrapable?: boolean
   prefix?: string
   color?: string
   backgroundColor?: string

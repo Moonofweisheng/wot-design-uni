@@ -44,7 +44,9 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { clickOut } from '@/uni_modules/wot-design-uni'
+import { clickOut, useToast } from '@/uni_modules/wot-design-uni'
+
+const toast = useToast()
 
 function clickoutside() {
   clickOut.closeOutside()

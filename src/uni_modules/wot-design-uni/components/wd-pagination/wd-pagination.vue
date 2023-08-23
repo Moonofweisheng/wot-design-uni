@@ -57,14 +57,14 @@ import { ref, watch } from 'vue'
 interface Props {
   customClass?: string
   modelValue: number // 当前页
-  totalPage: number
-  showIcon: boolean // 是否展示分页为Icon图标
-  showMessage: boolean
-  total: number
-  pageSize: number
-  prevText: string
-  nextText: string
-  hideIfOnePage: boolean
+  totalPage?: number
+  showIcon?: boolean // 是否展示分页为Icon图标
+  showMessage?: boolean
+  total?: number
+  pageSize?: number
+  prevText?: string
+  nextText?: string
+  hideIfOnePage?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

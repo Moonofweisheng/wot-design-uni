@@ -62,14 +62,14 @@ interface Props {
   customMinClass?: string
   customMaxClass?: string
   customClass?: string
-  hideMinMax: boolean
-  hideLabel: boolean
-  disabled: boolean
-  inactiveColor: string
-  activeColor: string
-  max: number
-  min: number
-  step: number
+  hideMinMax?: boolean
+  hideLabel?: boolean
+  disabled?: boolean
+  inactiveColor?: string
+  activeColor?: string
+  max?: number
+  min?: number
+  step?: number
   modelValue: number | number[]
 }
 
