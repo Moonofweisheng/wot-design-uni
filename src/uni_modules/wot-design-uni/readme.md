@@ -73,12 +73,10 @@
 
 <div style="display: inline-block; margin-right: 120px;">
   <img style="width: 250px; height: 250px;" src="https://wot-design-uni.netlify.app/weixinQrcode.jpg" />
-  <div style="text-align: center;">微信</div>
 </div>
 
 <div style="display: inline-block;">
-  <img style="width: 250px; height: 250px;" src="https://wot-design-uni.netlify.app/weixinQrcode.jpg" />
-  <div style="text-align: center;">支付宝</div>
+  <img style="width: 250px; height: 250px;" src="https://wot-design-uni.netlify.app/alipayQrcode.jpg" />
 </div>
 
 ## LICENSE
