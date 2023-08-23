@@ -60,6 +60,27 @@
 
 详细说明见 [快速上手](https://wot-design-uni.netlify.app/guide/quickUse.html)
 
+
+## 捐赠本项目
+
+捐赠本项目，支持组件库的更好的发展。推荐使用爱发电进行订阅，您的头像将出现在本项目中。
+
+### 爱发电捐赠
+
+<a href="https://afdian.net/a/weisheng233">https://afdian.net/a/weisheng233</a>
+
+### 扫码捐赠
+
+<div style="display: inline-block; margin-right: 120px;">
+  <img style="width: 250px; height: 250px;" src="https://wot-design-uni.netlify.app/weixinQrcode.jpg" />
+  <div style="text-align: center;">微信</div>
+</div>
+
+<div style="display: inline-block;">
+  <img style="width: 250px; height: 250px;" src="https://wot-design-uni.netlify.app/weixinQrcode.jpg" />
+  <div style="text-align: center;">支付宝</div>
+</div>
+
 ## LICENSE
 
 [MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/develop/LICENSE)

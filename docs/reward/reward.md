@@ -10,12 +10,25 @@
 
 
 <div style="display: inline-block; margin-right: 120px;">
-  <img style="width: 250px; height: 250px;" src="https://fant-mini-plus.top/img/weixinQrcode.jpg" />
+  <img style="width: 250px; height: 250px;" :src="WxQrcode" />
   <div style="text-align: center;">微信</div>
 </div>
 
 <div style="display: inline-block;">
-  <img style="width: 250px; height: 250px;" src="https://fant-mini-plus.top/img/alipayQrcode.jpg" />
+  <img style="width: 250px; height: 250px;" :src="AlipayQrcode" />
   <div style="text-align: center;">支付宝</div>
 </div>
 
+<script>
+import WxQrcode from '/weixinQrcode.jpg'
+import AlipayQrcode from '/alipayQrcode.jpg'
+
+export default {
+  data () {
+    return {
+      WxQrcode,
+      AlipayQrcode
+    }
+  }
+}
+</script>
