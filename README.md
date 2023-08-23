@@ -71,13 +71,10 @@
 
 ### 扫码捐赠
 
-<div style="display: inline-block; margin-right: 120px;">
-  <img style="width: 250px; height: 250px;" src="https://wot-design-uni.netlify.app/weixinQrcode.jpg" />
-</div>
-
-<div style="display: inline-block;">
-  <img style="width: 250px; height: 250px;" src="https://wot-design-uni.netlify.app/alipayQrcode.jpg" />
-</div>
+<p>
+<img src="https://wot-design-uni.netlify.app/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-design-uni.netlify.app/alipayQrcode.jpg" width="200" height="200" />
+</p>
 
 ## LICENSE
 
