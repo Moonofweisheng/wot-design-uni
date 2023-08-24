@@ -2,7 +2,7 @@
   <page-wraper>
     <wd-message-box />
     <wd-toast />
-    <wd-action-sheet :show="showAction" :actions="actions" @close="closeActions" />
+    <wd-action-sheet v-model="showAction" :actions="actions" />
 
     <wd-cell-group>
       <wd-cell title="弹出菜单" clickable @click="showActions"></wd-cell>
@@ -201,9 +201,6 @@ const phone = ref<string>('')
 const toast = useToast()
 const messageBox = useMessage()
 
-function closeActions() {
-  showAction.value = false
-}
 function showActions() {
   showAction.value = true
   actions.value = [

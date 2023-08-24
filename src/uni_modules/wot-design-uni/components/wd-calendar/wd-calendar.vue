@@ -25,7 +25,7 @@
       </view>
     </view>
     <wd-action-sheet
-      :show="pickerShow"
+      v-model="pickerShow"
       :duration="250"
       :close-on-click-modal="closeOnClickModal"
       :safe-area-inset-bottom="safeAreaInsetBottom"
@@ -54,7 +54,7 @@
             {{ item.text }}
           </wd-tag>
         </view>
-        <wd-icon custom-class="wd-calendar__close" name="add" @tap="close" />
+        <wd-icon custom-class="wd-calendar__close" name="add" @click="close" />
       </view>
       <view
         v-if="inited"

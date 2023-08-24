@@ -25,7 +25,7 @@
       </view>
     </view>
     <wd-action-sheet
-      :show="pickerShow"
+      v-model="pickerShow"
       :duration="250"
       :title="title || '请选择'"
       :close-on-click-modal="closeOnClickModal"

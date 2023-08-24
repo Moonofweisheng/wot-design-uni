@@ -4,7 +4,7 @@
 
 ## 基本用法
 
-通过 `show` 属性设置显示隐藏，监听 `close` 事件，隐藏菜单。
+通过 `v-model` 设置显示隐藏。
 
 `actions` 类型为 `Array`，数组内部对象结构如下：
 
@@ -17,7 +17,7 @@
 ```html
 <wd-toast />
 <wd-button @click="showActions">弹出菜单</wd-button>
-<wd-action-sheet :show="show" :actions="actions" @close="close" @select="select" />
+<wd-action-sheet v-model="show" :actions="actions" @close="close" @select="select" />
 ```
 
 ```typescript
@@ -56,7 +56,7 @@ function select({ item, index }) {
 
 ```html
 <wd-button @click="showActions">弹出菜单</wd-button>
-<wd-action-sheet :show="show" :actions="actions" @close="close" />
+<wd-action-sheet v-model="show" :actions="actions" @close="close" />
 ```
 
 ```typescript
@@ -88,7 +88,7 @@ function close() {
 设置 `cancel-text` 取消按钮文案，展示取消按钮。
 
 ```html
-<wd-action-sheet :show="show" :actions="actions" @close="close" cancel-text="取消" />
+<wd-action-sheet v-model="show" :actions="actions" @close="close" cancel-text="取消" />
 ```
 
 ## 自定义单行面板
@@ -102,7 +102,7 @@ function close() {
 
 ```html
 <wd-button @click="showActions">弹出菜单</wd-button>
-<wd-action-sheet :show="show" :panels="panels" @close="close" @select="select" />
+<wd-action-sheet v-model="show" :panels="panels" @close="close" @select="select" />
 ```
 
 ```typescript
@@ -138,7 +138,7 @@ function select({ item, index }) {
 
 ```html
 <wd-button @click="showActions">弹出菜单</wd-button>
-<wd-action-sheet :show="show" :panels="panels" @close="close" @select="select" />
+<wd-action-sheet v-model="show" :panels="panels" @close="close" @select="select" />
 ```
 
 ```typescript
@@ -177,7 +177,7 @@ function select({ item, index }) {
 设置 `title` 展示标题。
 
 ```html
-<wd-action-sheet :show="show" title="标题" @close="close">
+<wd-action-sheet v-model="show" title="标题" @close="close">
   <view style="padding: 15px 15px 150px 15px;">内容</view>
 </wd-action-sheet>
 ```
@@ -186,7 +186,7 @@ function select({ item, index }) {
 
 | 参数                   | 说明                                                                          | 类型    | 可选值 | 默认值  | 最低版本 |
 | ---------------------- | ----------------------------------------------------------------------------- | ------- | ------ | ------- | -------- |
-| show                   | 设置菜单显示隐藏                                                              | boolean | -      | -       | -        |
+| v-model                | 设置菜单显示隐藏                                                              | boolean | -      | -       | -        |
 | actions                | 菜单选项                                                                      | array   | -      | []      | -        |
 | panels                 | 自定义面板项,可以为字符串数组，也可以为对象数组，如果为二维数组，则为多行展示 | array   | -      | []      | -        |
 | title                  | 标题                                                                          | string  | -      | -       | -        |

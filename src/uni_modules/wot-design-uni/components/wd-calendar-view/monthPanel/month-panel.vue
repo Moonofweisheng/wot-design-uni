@@ -18,7 +18,6 @@
           class="month"
           :type="type"
           :date="item.date"
-          :data-date="item.date"
           :value="value"
           :min-date="minDate"
           :max-date="maxDate"

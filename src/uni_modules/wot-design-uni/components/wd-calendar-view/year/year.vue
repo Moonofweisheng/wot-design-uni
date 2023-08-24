@@ -1,7 +1,7 @@
 <template>
   <wd-toast selector="wd-year" />
 
-  <view class="wd-year year" :data-date="date">
+  <view class="wd-year year">
     <view class="wd-year__title">{{ yearTitle(date) }}</view>
     <view class="wd-year__months">
       <view
