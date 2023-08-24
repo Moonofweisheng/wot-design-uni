@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.0.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.7...v0.0.8) (2023-08-24)
+
+
+### ✨ Features | 新功能
+
+* ✨ 演示项目新增用户隐私保护指引的处理 ([4dd7efe](https://github.com/Moonofweisheng/wot-design-uni/commit/4dd7efe4049c4c815ea1bc57a7fd1819055f10bc))
+* ✨ ActionSheet组件调整为使用v-model设置显示与隐藏 ([aa92332](https://github.com/Moonofweisheng/wot-design-uni/commit/aa92332f3913be000d1aef36a8aed7f34b736ad6))
+
 ### [0.0.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.6...v0.0.7) (2023-08-23)
 
 
