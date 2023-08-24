@@ -172,6 +172,8 @@ function handleChange(event) {
 | center | 当有label属性时，设置标题和输入框垂直居中，默认为顶部居中 | boolean | - | false | - |
 | label-width | 设置左侧标题宽度 | string | - | 33% | - |
 | use-label-slot | 使用 label 插槽 | boolean | - | false | - |
+| use-suffix-slot | 使用 后置图标 插槽 | boolean | - | false | - |
+| use-prefix-slot | 使用 前置图标 插槽 | boolean | - | false | - |
 | required | cell 类型下必填样式 | boolean | - | false | - |
 | name | form 表单中的字段名 | string | - | - | - |
 | no-border | 非 cell 类型下是否隐藏下划线 | boolean | - | false | - | - |
@@ -192,6 +194,9 @@ function handleChange(event) {
 | clicksuffixicon | 点击后置图标时触发 | - | - |
 
 ## Slot
+:::tip 提示
+使用插槽需要配置是否启用对应的插槽，分别对应`use-label-slot`、`use-suffix-slot`、`use-prefix-slot`。
+:::
 
 | name | 说明 | 最低版本 |
 |------|-----|---------|
