@@ -77,7 +77,59 @@ cli项目使用`uni_modules`安装无需配置，对`Volar`的支持自动生效
   }
 }
 ```
+## 配置@uni-helper/vite-plugin-uni-components
+从[unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)派生并修改以适应UniApp。
+::: code-group
+```bash [npm]
+npm i @uni-helper/vite-plugin-uni-components -D
+```
 
+```bash [yarn]
+yarn add @uni-helper/vite-plugin-uni-components -D
+```
+
+```bash [pnpm]
+pnpm add @uni-helper/vite-plugin-uni-components -D
+```
+:::
+```ts
+// vite.config.ts
+import Components, {kebabCase} from '@uni-helper/vite-plugin-uni-components'
+
+export default defineConfig({
+  plugins: [
+    Components({
+      resolvers: [
+        {
+          type: 'component',
+          resolve: (name: string) => {
+            if (name.match(/^Wd[A-Z]/)) {
+              const compName = kebabCase(name)
+
+              return {
+                name,
+                from: `wot-design-uni/components/${compName}/${compName}.vue`,
+              }
+            }
+          },
+        }
+      ]
+    }),
+  ],
+})
+```
+## UI 组件类型提示
+
+如果你使用 `pnpm` ，请在根目录下创建一个 `.npmrc` 文件，参见[issue](https://github.com/antfu/unplugin-vue-components/issues/389)。
+
+```
+// .npmrc
+public-hoist-pattern[]=@vue*
+// or
+// shamefully-hoist = true
+```
+
+see more in [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components#installation)
 
 
 ## 使用
