@@ -93,7 +93,7 @@ interface Panel {
 interface Props {
   customClass?: string
   customHeaderClass?: string
-  show: boolean
+  modelValue: boolean
   actions?: Array<Action>
   panels?: Array<Panel>
   title?: string
@@ -109,7 +109,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   customHeaderClass: '',
-  show: false,
+  modelValue: false,
   actions: () => [] as Array<Action>,
   panels: () => [] as Array<Panel>,
   closeOnClickAction: true,
@@ -132,14 +132,14 @@ watch(
 )
 
 watch(
-  () => props.show,
+  () => props.modelValue,
   (newValue) => {
     showPopup.value = newValue
   },
   { deep: true, immediate: true }
 )
 
-const emit = defineEmits(['select', 'clickmodal', 'cancel', 'closed', 'close', 'open', 'opened'])
+const emit = defineEmits(['select', 'clickmodal', 'cancel', 'closed', 'close', 'open', 'opened', 'update:modelValue'])
 
 function isArray() {
   return props.panels.length && !(props.panels[0] instanceof Array)
@@ -179,6 +179,7 @@ function handleCancel() {
   close()
 }
 function close() {
+  emit('update:modelValue', false)
   emit('close')
 }
 function handleOpen() {
