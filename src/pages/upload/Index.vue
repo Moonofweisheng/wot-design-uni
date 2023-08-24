@@ -1,5 +1,8 @@
 <template>
   <page-wraper>
+    <!-- #ifdef MP-WEIXIN -->
+    <wd-privacy-popup></wd-privacy-popup>
+    <!-- #endif -->
     <wd-message-box></wd-message-box>
     <wd-toast id="wd-toast"></wd-toast>
     <demo-block title="基本用法">
@@ -124,6 +127,12 @@ const beforeRemove = ({ file, fileList, resolve }) => {
     .catch(() => {
       toast.show('取消删除操作')
     })
+}
+
+function getPhoneNumber(e) {
+  console.log(e.detail.errMsg)
+  console.log(e.detail.iv)
+  console.log(e.detail.encryptedData)
 }
 
 function handleSuccess(event) {
