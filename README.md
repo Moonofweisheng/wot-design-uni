@@ -60,6 +60,14 @@
 
 详细说明见 [快速上手](https://wot-design-uni.netlify.app/guide/quickUse.html)
 
+## 贡献者们
+感谢以下所有给 Wot Design Uni 贡献过代码的 [开发者](https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors)。
+
+
+<a href="https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Moonofweisheng/wot-design-uni" />
+</a>
+
 
 ## 捐赠本项目
 
