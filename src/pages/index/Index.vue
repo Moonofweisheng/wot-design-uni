@@ -224,6 +224,10 @@ const list = ref([
         name: 'Toast 轻提示'
       },
       {
+        id: 'notify',
+        name: 'Notify 消息通知'
+      },
+      {
         id: 'tooltip',
         name: 'Tooltip 文字提示'
       }

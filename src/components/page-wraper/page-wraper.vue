@@ -15,6 +15,7 @@
       </wd-cell> -->
       <slot />
     </view>
+    <wd-notify selector="notify" />
   </wd-config-provider>
 </template>
 <script lang="ts">
@@ -27,13 +28,26 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import { setNotifyDefaultOptions } from '@/uni_modules/wot-design-uni'
 import { useDark } from '../../store'
+
 const darkMode = useDark()
 const isDark = ref<boolean>(false)
 
 const theme = computed(() => {
   return darkMode.isDark.value || isDark.value ? 'dark' : 'light'
+})
+
+onMounted(() => {
+  setNotifyDefaultOptions({
+    // #ifdef H5
+    safeHeight: 44,
+    // #endif
+    onClick: (event) => console.log('onClick', event),
+    onClosed: () => console.log('onClosed'),
+    onOpened: () => console.log('onOpened')
+  })
 })
 </script>
 <style lang="scss" scoped>

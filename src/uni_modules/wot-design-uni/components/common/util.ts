@@ -235,10 +235,19 @@ export function isArray(value: any) {
 
 /**
  * 是否函数方法
- * @param {Object} value
+ * @param {Function} value
  */
-export function isFunction(value): boolean {
-  return typeof value === 'function'
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function isFunction<T extends Function>(value: any): value is T {
+  return getType(value) === 'function'
+}
+
+/**
+ * 是否字符串
+ * @param {unknown} value
+ */
+export function isString(value: unknown): value is string {
+  return getType(value) === 'string'
 }
 
 /**

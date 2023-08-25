@@ -12,7 +12,9 @@
 export { useToast } from './components/wd-toast'
 // Messageb
 export { useMessage } from './components/wd-message-box'
-// Loading
+// Notify
+export * from './components/wd-notify'
+
 export { dayjs } from './components/common/dayjs'
 
 export * as CommonUtil from './components/common/util'
