@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.0.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.8...v0.0.9) (2023-08-25)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Cell 单格组件 is-link 不触发 click ([ece5568](https://github.com/Moonofweisheng/wot-design-uni/commit/ece5568ecc03fd8470c2c02120b94c1ee27d55e7))
+
 ### [0.0.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.7...v0.0.8) (2023-08-24)
 
 

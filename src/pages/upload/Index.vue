@@ -129,12 +129,6 @@ const beforeRemove = ({ file, fileList, resolve }) => {
     })
 }
 
-function getPhoneNumber(e) {
-  console.log(e.detail.errMsg)
-  console.log(e.detail.iv)
-  console.log(e.detail.encryptedData)
-}
-
 function handleSuccess(event) {
   console.log('成功', event.detail)
 }
