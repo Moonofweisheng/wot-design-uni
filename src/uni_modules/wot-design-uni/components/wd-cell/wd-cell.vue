@@ -103,11 +103,12 @@ const emit = defineEmits(['click'])
  */
 function onClick() {
   const url = props.to
+
+  if (props.clickable || props.isLink) {
+    emit('click')
+  }
   if (url && props.isLink) {
     ;(uni as any)[props.replace ? 'redirectTo' : 'navigateTo']({ url })
-  }
-  if (props.clickable) {
-    emit('click')
   }
 }
 </script>
