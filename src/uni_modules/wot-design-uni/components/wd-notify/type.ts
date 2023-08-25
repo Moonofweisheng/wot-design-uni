@@ -55,7 +55,7 @@ export const notifyProps = {
     default: ''
   },
   /**
-   * 组件id
+   * 指定唯一标识
    */
   selector: {
     type: String,
@@ -76,7 +76,7 @@ export const notifyProps = {
     default: 'top'
   },
   /**
-   * 顶部安全高度（默认为状态栏高度）
+   * 顶部安全高度（
    */
   safeHeight: {
     type: Number
