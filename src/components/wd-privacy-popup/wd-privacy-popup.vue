@@ -1,6 +1,6 @@
 <template>
   <view>
-    <wd-popup v-model="showPopup" custom-class="wd-privacy-popup">
+    <wd-popup v-model="showPopup" :close-on-click-modal="false" custom-class="wd-privacy-popup" @close="handleClose">
       <view class="wd-privacy-popup__header">
         <!--标题-->
         <view class="wd-picker__title">{{ title }}</view>
@@ -64,7 +64,10 @@ const privacyHandler = (resolve: any) => {
   privacyResolves.value.add(resolve)
 }
 
+const emit = defineEmits(['agree', 'disagree'])
+
 onBeforeMount(() => {
+  // 注册监听
   if ((wx as any).onNeedPrivacyAuthorization) {
     ;(wx as any).onNeedPrivacyAuthorization((resolve: any) => {
       if (typeof privacyHandler === 'function') {
@@ -74,7 +77,10 @@ onBeforeMount(() => {
   }
 })
 
-function handleAgree(e) {
+/**
+ * 同意隐私协议
+ */
+function handleAgree() {
   showPopup.value = false
   privacyResolves.value.forEach((resolve: any) => {
     resolve({
@@ -83,13 +89,13 @@ function handleAgree(e) {
     })
   })
   privacyResolves.value.clear()
+  emit('agree')
 }
 
 /**
  * 拒绝隐私协议
- * @param e
  */
-function handleDisagree(e) {
+function handleDisagree() {
   showPopup.value = false
   privacyResolves.value.forEach((resolve: any) => {
     resolve({
@@ -111,6 +117,13 @@ function openPrivacyContract() {
       console.error('openPrivacyContract fail', res)
     }
   })
+}
+
+/**
+ * 弹出框关闭时清空
+ */
+function handleClose() {
+  privacyResolves.value.clear()
 }
 </script>
 
