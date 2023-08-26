@@ -284,6 +284,9 @@ export default defineConfig({
             link: "/component/toast",
             text: "Toast 轻提示"
           }, {
+            link: "/component/notify",
+            text: "Notify 消息通知"
+          }, {
             link: "/component/tooltip",
             text: "Tooltip 文字提示"
           }]

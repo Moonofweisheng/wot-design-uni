@@ -702,3 +702,13 @@ $-upload-preview-name-height: var(--wot-upload-preview-name-height, 22px) !defau
 $-curtain-content-radius: var(--wot-curtain-content-radius, 24px) !default; // 内容圆角
 $-curtain-content-close-color: var(--wot-curtain-content-close-color, $-color-white) !default; // 关闭按钮颜色
 $-curtain-content-close-fs: var(--wot-curtain-content-close-fs, $-fs-big) !default; // 关闭按钮大小
+
+// Notify
+$notify-text-color: var(--wot-notify-text-color, $-color-white) !default;
+$notify-padding: var(--wot-notify-padding, 8px 16px) !default;
+$notify-font-size: var(--wot-notify-font-size, $-fs-content) !default;
+$notify-line-height: var(--wot-notify-line-height, 20px) !default;
+$notify-primary-background: var(--wot-notify-primary-background, $-color-theme) !default;
+$notify-success-background: var(--wot-notify-success-background, $-color-success) !default;
+$notify-danger-background: var(--wot-notify-danger-background, $-color-danger) !default;
+$notify-warning-background: var(--wot-notify-warning-background, $-color-warning) !default;

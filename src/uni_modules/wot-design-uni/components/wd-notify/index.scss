@@ -1,0 +1,34 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(notify) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: $notify-padding;
+  font-size: $notify-font-size;
+  line-height: $notify-line-height;
+  color: $notify-text-color;
+  
+  // allow newline character
+  white-space: pre-wrap;
+  text-align: center;
+  word-wrap: break-word;
+
+  @include m(primary) {
+    background: $notify-primary-background;
+  }
+
+  @include m(success) {
+    background: $notify-success-background;
+  }
+
+  @include m(danger) {
+    background: $notify-danger-background;
+  }
+
+  @include m(warning) {
+    background: $notify-warning-background;
+  }
+}

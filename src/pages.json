@@ -182,6 +182,17 @@
         }
       },
       {
+        "path": "pages/notify/Index",
+        "name": "toast",
+        "style": {
+          
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Notify 消息通知"
+        }
+      },
+      {
         "path": "pages/loading/Index",
         "name": "loading",
         "style": {
