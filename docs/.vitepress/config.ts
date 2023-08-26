@@ -324,6 +324,9 @@ export default defineConfig({
             link: "/component/loadmore",
             text: "Loadmore 加载更多"
           }, {
+            link: "/component/skeleton",
+            text: "Skeleton 骨架屏"
+          }, {
             link: "/component/steps",
             text: "Steps 步骤条"
           }, {

@@ -453,6 +453,16 @@
         }
       },
       {
+        "path": "pages/skeleton/Index",
+        "name": "skeleton",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Skeleton 骨架屏"
+        }
+      },
+      {
         "path": "pages/steps/Index",
         "name": "steps",
         "style": {

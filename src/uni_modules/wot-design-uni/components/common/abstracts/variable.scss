@@ -712,3 +712,15 @@ $notify-primary-background: var(--wot-notify-primary-background, $-color-theme) 
 $notify-success-background: var(--wot-notify-success-background, $-color-success) !default;
 $notify-danger-background: var(--wot-notify-danger-background, $-color-danger) !default;
 $notify-warning-background: var(--wot-notify-warning-background, $-color-warning) !default;
+
+// Skeleton
+$skeleton-background-color: var(--wot-skeleton-background-color, #eee) !default;
+$skeleton-animation-gradient: var(--wot-skeleton-animation-gradient, rgba(0, 0, 0, 0.04)) !default;
+$skeleton-animation-flashed: var(--wot-skeleton-animation-flashed, rgba(230, 230, 230, 0.3)) !default;
+$skeleton-text-height-default: var(--wot-skeleton-text-height-default, 16px) !default;
+$skeleton-rect-height-default: var(--wot-skeleton-rect-height-default, 16px) !default;
+$skeleton-circle-height-default: var(--wot-skeleton-circle-height-default, 48px) !default;
+$skeleton-row-margin-bottom: var(--wot-skeleton-row-margin-bottom, 16px) !default;
+$skeleton-border-radius-text: var(--wot-skeleton-border-radius-text, 2px) !default;
+$skeleton-border-radius-rect: var(--wot-skeleton-border-radius-rect, 4px) !default;
+$skeleton-border-radius-circle: var(--wot-skeleton-border-radius-circle, 50%) !default;

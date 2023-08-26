@@ -280,6 +280,10 @@ const list = ref([
         name: 'Loadmore 加载更多'
       },
       {
+        id: 'skeleton',
+        name: 'Skeleton 骨架屏'
+      },
+      {
         id: 'steps',
         name: 'Steps 步骤条'
       },
