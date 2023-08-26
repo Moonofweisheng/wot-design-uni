@@ -251,6 +251,14 @@ export function isString(value: unknown): value is string {
 }
 
 /**
+ * 否是数值
+ * @param {*} value
+ */
+export function isNumber(value: any): value is number {
+  return getType(value) === 'number'
+}
+
+/**
  * 是否为promise
  * @param value 函数
  * @returns
