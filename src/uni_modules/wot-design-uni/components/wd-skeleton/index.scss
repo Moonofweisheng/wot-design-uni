@@ -1,6 +1,13 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+.wot-theme-dark {
+  @include b(skeleton) {
+    @include e(col) {
+      background-color: $-dark-background4;
+    }
+  }
+}
 @include b(skeleton) {
   box-sizing: border-box;
 
@@ -65,7 +72,7 @@
       animation: wd-skeleton-flashed 2s linear 2s infinite;
     }
   }
-  
+
   @keyframes wd-skeleton-gradient {
     0% {
       transform: translateX(-100%) skewX(-15deg);
