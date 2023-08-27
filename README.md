@@ -60,6 +60,13 @@
 
 详细说明见 [快速上手](https://wot-design-uni.netlify.app/guide/quickUse.html)
 
+## 链接
+
+* [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
+* [更新日志](https://wot-design-uni.netlify.app/guide/changelog.html)
+* [常见问题](https://wot-design-uni.netlify.app/guide/commonProblems.html)
+* [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
+
 ## 贡献者们
 感谢以下所有给 Wot Design Uni 贡献过代码的 [开发者](https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors)。
 
