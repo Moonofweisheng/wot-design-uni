@@ -50,7 +50,7 @@ import {
   getWeekRange
 } from '../utils'
 import { useToast } from '../../wd-toast'
-import { deepClone, getType } from '../../common/util'
+import { deepClone, getType, isArray } from '../../common/util'
 
 interface Props {
   type: string
@@ -266,8 +266,7 @@ function handleDateChange(date) {
 }
 function handleDatesChange(date) {
   if (date.disabled) return
-
-  const value = deepClone(props.value || [])
+  const value = deepClone(isArray(props.value) ? props.value : [])
   if (date.type !== 'selected') {
     value.push(getDate(date.date))
   } else {
@@ -282,7 +281,7 @@ function handleDateRangeChange(date) {
 
   let value
   let type
-  const [startDate, endDate] = deepClone(props.value || [])
+  const [startDate, endDate] = deepClone(isArray(props.value) ? props.value : [])
   const compare = compareDate(date.date, startDate)
 
   // 禁止选择同个日期
@@ -338,7 +337,7 @@ function handleWeekRangeChange(date) {
   if (getFormatterDate(weekStartDate, new Date(weekStartDate).getDate()).disabled) return
 
   let value
-  const [startDate, endDate] = deepClone(props.value || [])
+  const [startDate, endDate] = deepClone(isArray(props.value) ? props.value : [])
   const [startWeekStartDate] = startDate ? getWeekRange(startDate, props.firstDayOfWeek) : []
   const compare = compareDate(weekStartDate, startWeekStartDate)
 

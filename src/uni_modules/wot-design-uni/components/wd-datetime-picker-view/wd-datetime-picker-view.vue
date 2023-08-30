@@ -25,7 +25,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
 import { debounce, getType, isDef, padZero, range } from '../common/util'
 import { DateTimeType, getPickerValue } from './type'
 

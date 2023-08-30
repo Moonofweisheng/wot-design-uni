@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-22 22:28:17
+ * @LastEditTime: 2023-08-30 21:25:57
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse\wd-collapse.vue
@@ -52,7 +52,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, provide, ref, watch } from 'vue'
 import { CollapseItem } from './types'
-import { deepClone } from '../common/util'
+import { deepClone, isBoolean } from '../common/util'
 
 interface Props {
   customClass?: string
@@ -153,14 +153,17 @@ function checkRepeat(currentList, checkValue, key) {
  * @param child 子项
  */
 function change(child: CollapseItem) {
-  let activeNames: string | string[] = deepClone(props.modelValue || '')
-  if (props.accordion) {
-    activeNames = child.expanded ? child.name : ''
-  } else {
-    activeNames = child.expanded
-      ? Array.from(new Set((activeNames || []).concat(child.name)))
-      : ((activeNames as string[]) || []).filter((activeName: string | number) => activeName !== child.name)
+  let activeNames: string | string[] | boolean = deepClone(props.modelValue || '')
+  if (!isBoolean(activeNames)) {
+    if (props.accordion) {
+      activeNames = child.expanded ? child.name : ''
+    } else {
+      activeNames = child.expanded
+        ? Array.from(new Set((activeNames || []).concat(child.name)))
+        : ((activeNames as string[]) || []).filter((activeName: string | number) => activeName !== child.name)
+    }
   }
+
   emit('update:modelValue', activeNames)
   emit('change', {
     value: activeNames

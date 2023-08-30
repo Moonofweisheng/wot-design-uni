@@ -67,8 +67,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { watch } from 'vue'
-import { ref } from 'vue'
+import { watch, ref } from 'vue'
 
 interface Action {
   // 选项名称
@@ -123,13 +122,7 @@ const formatPanels = ref<Array<Panel> | Array<Array<Panel>>>([])
 
 const showPopup = ref<boolean>(false)
 
-watch(
-  () => props.panels,
-  () => {
-    computedValue()
-  },
-  { deep: true, immediate: true }
-)
+watch(() => props.panels, computedValue, { deep: true, immediate: true })
 
 watch(
   () => props.modelValue,
@@ -148,7 +141,7 @@ function computedValue() {
   formatPanels.value = isArray() ? [props.panels] : props.panels
 }
 
-function select(rowIndex: number, type: string, colIndex?: number) {
+function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) {
   if (type === 'action') {
     emit('select', {
       item: props.actions[rowIndex],
