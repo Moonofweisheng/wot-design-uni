@@ -1,6 +1,10 @@
 {
   "name": "wot-design-uni",
-  "version": "0.0.9",
+  "version": "0.0.11",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Moonofweisheng/wot-design-uni.git"
+  },
   "scripts": {
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",

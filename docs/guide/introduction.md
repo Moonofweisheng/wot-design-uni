@@ -35,6 +35,7 @@
 * [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
 * [更新日志](/guide/changelog)
 * [常见问题](/guide/commonProblems)
+* [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
 
 ## 开源协议
 

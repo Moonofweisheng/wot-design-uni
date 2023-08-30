@@ -133,7 +133,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, onMounted, ref, watch, nextTick } from 'vue'
+import { getCurrentInstance, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
 import { useCell } from '../mixins/useCell'
 import { DateTimeType, getPickerValue } from '../wd-datetime-picker-view/type'

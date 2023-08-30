@@ -60,6 +60,20 @@
 
 详细说明见 [快速上手](https://wot-design-uni.netlify.app/guide/quickUse.html)
 
+## 链接
+
+* [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
+* [更新日志](https://wot-design-uni.netlify.app/guide/changelog.html)
+* [常见问题](https://wot-design-uni.netlify.app/guide/commonProblems.html)
+* [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
+
+
+## 贡献指南
+
+修改代码请阅读我们的 [贡献指南](https://github.com/Moonofweisheng/wot-design-uni/blob/develop/.github/CONTRIBUTING.md)。
+
+使用过程中发现任何问题都可以提 [Issue](https://github.com/Moonofweisheng/wot-design-uni/issues) 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/Moonofweisheng/wot-design-uni/pulls)。
+
 ## 贡献者们
 感谢以下所有给 Wot Design Uni 贡献过代码的 [开发者](https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors)。
 
@@ -71,7 +85,7 @@
 
 ## 捐赠本项目
 
-捐赠本项目，支持组件库的更好的发展，捐赠后你的头像、昵称和主页将会被展示在 `wot design uni` 文档的捐赠榜单上。
+捐赠本项目，支持组件库的更好的发展，捐赠后你的昵称和主页将会被展示在 `wot design uni` 文档的捐赠榜单上。
 
 ### 爱发电捐赠
 

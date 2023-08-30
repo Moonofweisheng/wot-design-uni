@@ -100,7 +100,7 @@ export default {
 import { onBeforeMount, ref, watch } from 'vue'
 import { useCell } from '../mixins/useCell'
 import { nextTick } from 'vue'
-import { getType } from '../common/util'
+import { getType, isArray } from '../common/util'
 
 type SelectPickerType = 'checkbox' | 'radio'
 
