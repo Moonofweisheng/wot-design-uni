@@ -1,6 +1,8 @@
 # 更新日志 
 
 
+### [0.0.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.11...v0.0.12) (2023-08-30)
+
 ### [0.0.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.10...v0.0.11) (2023-08-30)
 
 
