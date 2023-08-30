@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.0.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.10...v0.0.11) (2023-08-30)
+
+
+### ✨ Features | 新功能
+
+* ✨ util工具类提供更好的类型提示 ([4fed439](https://github.com/Moonofweisheng/wot-design-uni/commit/4fed43926f49be6a86ebab54bb36a1a086df4ac6))
+
 ### [0.0.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.9...v0.0.10) (2023-08-27)
 
 
