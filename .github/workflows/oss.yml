@@ -3,7 +3,7 @@ name: Upload Docs to OSS
 on:
   push:
     branches:
-      - develop
+      - release
 
 jobs:
   build_and_upload:
