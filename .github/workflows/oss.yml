@@ -1,0 +1,35 @@
+name: Upload Docs to OSS
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build_and_upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: 设置 Node.js 18.x 环境
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+
+      - name: Install Dependencies and Build Docs
+        run: |
+          yarn install
+          yarn build:docs
+
+      - name: Setup Aliyun OSS
+        uses: manyuanrong/setup-ossutil@master
+        with:
+          endpoint: oss-cn-hongkong.aliyuncs.com
+          access-key-id: ${{ secrets.OSS_KEY }}
+          access-key-secret: ${{ secrets.OSS_SECRET }}
+
+      - name: Upload Docs to OSS
+        run: |
+          ossutil cp -r -f ./docs/.vitepress/dist oss://wot-design-uni
