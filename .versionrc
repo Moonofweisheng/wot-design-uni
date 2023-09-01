@@ -18,7 +18,7 @@
     {
       "type": "docs",
       "section": "✏️ Documentation | 文档",
-      "hidden": true
+      "hidden": false
     },
     {
       "type": "style",
@@ -33,7 +33,7 @@
     {
       "type": "perf",
       "section": "⚡ Performance Improvements | 性能优化",
-      "hidden": true
+      "hidden": false
     },
     {
       "type": "test",
