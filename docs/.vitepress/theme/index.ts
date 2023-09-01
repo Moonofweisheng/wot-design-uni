@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 12:36:30
- * @LastEditTime: 2023-08-24 13:28:59
+ * @LastEditTime: 2023-09-02 01:15:02
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\theme\index.ts
@@ -16,7 +16,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 // import HomeSponsors from './components/HomeSponsors.vue'
-// import AsideSponsors from './components/AsideSponsors.vue'
+import NavBarTitleAfter from './components/NavBarTitleAfter.vue'
 import SvgImage from './components/SvgImage.vue'
 import frame from './components/frame.vue'
 
@@ -27,7 +27,7 @@ export default {
   Layout() {
     return h(Theme.Layout, null, {
       // 'home-features-after': () => h(HomeSponsors),
-      // 'aside-ads-before': () => h(AsideSponsors),
+      'nav-bar-title-after': () => h(NavBarTitleAfter),
     })
   },
   enhanceApp({ app }) {
