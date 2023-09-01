@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.0.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.12...v0.0.13) (2023-09-01)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  官网地址迁移至阿里云oss ([a98868a](https://github.com/Moonofweisheng/wot-design-uni/commit/a98868ae6213c7d7002e5a88893aabe1d0f5d11b))
+
 ### [0.0.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.11...v0.0.12) (2023-08-30)
 
 ### [0.0.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.10...v0.0.11) (2023-08-30)
