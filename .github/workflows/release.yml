@@ -1,0 +1,101 @@
+name: Create Release Tag
+
+on:
+  push:
+    tags:
+      - 'v*' # 推送标签，比如 v1.0, v20.15.10
+
+jobs:
+  build:
+    name: 创建发布
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+
+      - name: 获取当前和上一个标签
+        id: get_tags
+        run: |
+          git fetch --prune --unshallow
+          tags=($(git tag -l --sort=-version:refname))
+          current_tag=${tags[0]}
+          previous_tag=${tags[1]}
+          echo "::set-output name=current_tag::$current_tag"
+          echo "::set-output name=previous_tag::$previous_tag"
+
+      - name: 提取并分类提交消息
+        id: extract_commit_messages
+        run: |
+          set -e
+          current_tag="${{ steps.get_tags.outputs.current_tag }}"
+          previous_tag="${{ steps.get_tags.outputs.previous_tag }}"
+          commit_messages=$(git log --pretty=format:"%s %h" "$previous_tag".."$current_tag" | grep -E 'feat|fix|docs|perf')
+          feat_messages=$(echo "$commit_messages" | grep 'feat' || true)
+          fix_messages=$(echo "$commit_messages" | grep 'fix' || true)
+          docs_messages=$(echo "$commit_messages" | grep 'docs' || true)
+          perf_messages=$(echo "$commit_messages" | grep 'perf' || true)
+          echo "::set-output name=feat_messages::${feat_messages[@]}"
+          echo "::set-output name=fix_messages::${fix_messages[@]}"
+          echo "::set-output name=docs_messages::${docs_messages[@]}"
+          echo "::set-output name=perf_messages::${perf_messages[@]}"
+
+      - name: 获取当前分支名
+        id: get_branch_name
+        run: |
+          branch_name=$(git rev-parse --abbrev-ref HEAD)
+          echo "::set-output name=branch_name::$branch_name"
+
+      - name: 发布说明
+        id: generate_release_notes
+        run: |
+            # 提取提交消息分类
+            feat_messages=("${{ steps.extract_commit_messages.outputs.feat_messages }}")
+            fix_messages=("${{ steps.extract_commit_messages.outputs.fix_messages }}")
+            docs_messages=("${{ steps.extract_commit_messages.outputs.docs_messages }}")
+            perf_messages=("${{ steps.extract_commit_messages.outputs.perf_messages }}")
+        
+            # 生成发布说明的Markdown字符串
+            release_notes="> 请查看 [更新日志](./CHANGELOG.md) 获取所有变更详情。  \n## 更新内容：  \n"
+        
+            if [[ -n "$feat_messages" ]]; then
+              release_notes="$release_notes\n### ✨ Features | 新功能:  \n"
+              for message in "${feat_messages[@]}"; do
+                release_notes="$release_notes\n- $message"
+              done
+            fi
+        
+            if [[ -n "$fix_messages" ]]; then
+              release_notes="$release_notes\n### 🐛 Bug Fixes | Bug 修复:  \n"
+              for message in "${fix_messages[@]}"; do
+                release_notes="$release_notes\n- $message"
+              done
+            fi
+        
+            if [[ -n "$docs_messages" ]]; then
+              release_notes="$release_notes\n### ✏️ Documentation | 文档:  \n"
+              for message in "${docs_messages[@]}"; do
+                release_notes="$release_notes\n- $message"
+              done
+            fi
+        
+            if [[ -n "$perf_messages" ]]; then
+              release_notes="$release_notes\n### ⚡ Performance Improvements | 性能优化:  \n"
+              for message in "${perf_messages[@]}"; do
+                release_notes="$release_notes\n- $message"
+              done
+            fi
+            echo "::set-output name=release_notes::$release_notes"
+        
+
+      - name: 写入生成的发布说明到 changelog.md
+        run: |
+              echo -e "${{ steps.generate_release_notes.outputs.release_notes }}" > changelog.md
+              cat changelog.md
+
+      - name: 创建标签的发布
+        id: release_tag
+        uses: ncipollo/release-action@v1
+        with:
+          generateReleaseNotes: "false"  # 禁用自动生成发布说明
+          bodyfile: changelog.md
