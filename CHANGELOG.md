@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+## [0.1.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.14...v0.1.0) (2023-09-02)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  ConfigProvider组件演示页面增加手动切换暗黑模式 ([e5f55c7](https://github.com/Moonofweisheng/wot-design-uni/commit/e5f55c72fc1ed6e603f22e501d6cff9d8212a976))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Grid组件不展示border的问题 ([819bbbc](https://github.com/Moonofweisheng/wot-design-uni/commit/819bbbca6ab1c999096936da5e9d2dd664e480ce))
+* 🐛 修复MessageBox组件取消按钮不展示的问题 ([d8563d8](https://github.com/Moonofweisheng/wot-design-uni/commit/d8563d833d75b27d0c497c6c945fae8c00ef8dc7))
+
 ### [0.0.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.13...v0.0.14) (2023-09-02)
 
 
