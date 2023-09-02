@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-08-27 18:05:52
+ * @LastEditTime: 2023-09-02 16:12:14
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\docs\component\rate.md
+ * 记得注释
+-->
 <frame/>
 
 #  Rate 评分
@@ -5,7 +14,7 @@
 
 ## 基本用法
 
-设置`v-model`分数，设置`num`总分数，默认为5分，监听 `change` 事件获取新值。
+设置`v-model`分数，设置`num`总分数，默认为5分。
 
 ```html
 <wd-rate v-model="value" @change="handleChange" />

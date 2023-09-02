@@ -5,9 +5,9 @@
 
 ## 基本用法
 
-`value` 为绑定值，可以为 number 类型（选中的tab的下标）和 string 类型（标签名）。
+`v-model` 为绑定值，可以为 number 类型（选中的tab的下标）和 string 类型（标签名）。
 
-> 当`value`为`number`类型时，`wd-tab`可以不必设置`name`。同时如果value超出了tab数量，会用0自动兜底
+> 当`v-model`为`number`类型时，`wd-tab`可以不必设置`name`。同时如果value超出了tab数量，会用0自动兜底。
 
 ```html
 <wd-tabs v-model="tab">
@@ -84,16 +84,6 @@ const tab = ref<number>(0)
     </wd-tab>
   </block>
 </wd-tabs>
-```
-```typescript
-Page({
-  data: {
-    tab: 0
-  },
-  handleClick ({ detail: { index } }) {
-    console.log(`点击了标签${index}`)
-  }
-})
 ```
 
 ## 手势滑动

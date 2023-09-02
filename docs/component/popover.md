@@ -6,12 +6,12 @@
 
 ## 基本用法
 
-Popover 的属性与 [Tooltip](/#/components/tooltip) 很类似，因此对于重复属性，请参考 [Tooltip](/#/components/tooltip) 的文档，在此文档中不做详尽解释。
+Popover 的属性与 [Tooltip](/component/tooltip.html) 很类似，因此对于重复属性，请参考 [Tooltip](/component/tooltip.html) 的文档，在此文档中不做详尽解释。
 
-因为小程序组件无法监听点击自己以外的地方，为了在点击页面其他地方时，可以自动关闭 popover ，建议引入组件库的 clickOut 函数（会关闭所有 dropmenu、popover、toast、swipeAction），在页面的根元素上监听点击事件的冒泡。
+因为`uni-app`组件无法监听点击自己以外的地方，为了在点击页面其他地方时，可以自动关闭 `popover` ，建议引入组件库的 `clickOut` 函数（会关闭所有 dropmenu、popover、toast、swipeAction），在页面的根元素上监听点击事件的冒泡。
 
 :::warning
-如果存在用户手动点击 popover 以外某个地方如按钮弹出 popover 的场景，则需要在点击的元素（在这里上按钮）加上 click 阻止事件冒泡到根元素上，避免触发 clickoutside 把要手动打开的 popover 关闭了。
+如果存在用户手动点击 `popover` 以外某个地方如按钮弹出 `popover` 的场景，则需要在点击的元素（在这里上按钮）加上 click 阻止事件冒泡到根元素上，避免触发 `clickOut` 把要手动打开的 `popover` 关闭了。
 :::
 
 ```html

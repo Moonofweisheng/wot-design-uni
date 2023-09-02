@@ -5,12 +5,11 @@
 
 ## 基本用法
 
-`value` 为绑定值，即选中的 `wd-radio` 的 `value` 值。
-点击radio会触发`change`事件，同时可以通过修改`value`来调整选中的radio。
+`v-model` 为绑定值，即选中的 `wd-radio` 的 `value` 值。
 
 ```html
 <demo-block title="基本用法">
-  <wd-radio-group v-model="value" @change="change">
+  <wd-radio-group v-model="value">
     <wd-radio :value="1">单选框1</wd-radio>
     <wd-radio :value="2">单选框2</wd-radio>
   </wd-radio-group>
@@ -19,10 +18,6 @@
 ```
 ```typescript
 const value = ref<number>(1)
-
-function change(e) {
-  console.log(e)
-}
 ```
 
 ## 修改图标形状
