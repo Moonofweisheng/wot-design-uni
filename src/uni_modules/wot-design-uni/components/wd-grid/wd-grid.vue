@@ -39,6 +39,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const children: any[] = [] // 子组件
+// 子元素个数
+const childCount = ref<number>(0)
 const { proxy } = getCurrentInstance() as any
 
 watch(
@@ -74,9 +76,6 @@ watch(
   }
 )
 
-// 子元素个数
-const childCount = ref<number>(0)
-
 /**
  * 设置子项
  * @param child
@@ -91,11 +90,11 @@ function setChild(child) {
   } else {
     children[hasChild] = child
   }
+  init()
 }
 
 function init() {
   if (!children) return
-
   children.forEach((item, index) => {
     if (props.border) {
       const { column } = props
