@@ -29,7 +29,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, inject, onBeforeMount, onMounted, ref, nextTick, computed, Ref, watch } from 'vue'
+import { getCurrentInstance, inject, onBeforeMount, onMounted, ref, Ref, watch } from 'vue'
 
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 type LinkType = 'navigateTo' | 'switchTab' | 'reLaunch' | 'redirectTo'
@@ -126,7 +126,7 @@ function init() {
   style.value = `width: ${width}; ${squareStyle || gutterStyle}`
 }
 
-function click(event) {
+function click() {
   if (!parent.clickable) return
   const { url, linkType } = props
   if (url) {
