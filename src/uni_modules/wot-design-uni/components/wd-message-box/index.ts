@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2022-12-14 17:33:21
- * @LastEditTime: 2023-06-19 12:52:04
+ * @LastEditTime: 2023-09-02 22:57:02
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\index.ts
@@ -47,7 +47,13 @@ export function useMessage(selector: string = ''): Message {
   const createMethod = (type: MessageType) => {
     // 优先级：options->toastOptions->defaultOptions
     return (options: MessageOptions | string) => {
-      return show(deepMerge({ type: type }, typeof options === 'string' ? { title: options } : options) as MessageOptions)
+      const messageOptions = deepMerge({ type: type }, typeof options === 'string' ? { title: options } : options) as MessageOptions
+      if (messageOptions.type === 'confirm' || messageOptions.type === 'prompt') {
+        messageOptions.showCancelButton = true
+      } else {
+        messageOptions.showCancelButton = false
+      }
+      return show(messageOptions)
     }
   }
 
