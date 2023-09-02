@@ -1,12 +1,9 @@
 <template>
-  <page-wraper>
+  <page-wraper show-dark-mode>
     <wd-message-box />
     <wd-toast />
     <wd-action-sheet v-model="showAction" :actions="actions" />
 
-    <wd-cell-group>
-      <wd-cell title="弹出菜单" clickable @click="showActions"></wd-cell>
-    </wd-cell-group>
     <form @submit="formSubmit">
       <wd-cell-group custom-class="group" title="基础信息" border>
         <wd-input
