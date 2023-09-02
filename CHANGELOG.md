@@ -1,6 +1,23 @@
 # 更新日志 
 
 
+### [0.0.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.13...v0.0.14) (2023-09-02)
+
+
+### ✨ Features | 新功能
+
+* ✨ 优化缺省状态组件StautsTip，增加支持自定义url和图片大小 ([f463d32](https://github.com/Moonofweisheng/wot-design-uni/commit/f463d3258a954e64352df36004d34b0f12be9a8f))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复util中addUnit无法处理有单位的字符串的问题 ([8967540](https://github.com/Moonofweisheng/wot-design-uni/commit/8967540ad0f3f0ad7426ee79571cfc4dee6c4d0c))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  完善和修复文档中不详细不正确的内容 ([d1b118e](https://github.com/Moonofweisheng/wot-design-uni/commit/d1b118ea78a797499f465269d3a838c0770d993a))
+
 ### [0.0.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.12...v0.0.13) (2023-09-01)
 
 
