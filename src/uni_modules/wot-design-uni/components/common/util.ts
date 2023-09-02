@@ -16,13 +16,12 @@ function s4() {
 }
 
 /**
- * @description 将数字自动转换为带有 'px' 单位的字符串
- * @param {number | string} num - 要转换的数字
- * @return {string} 转换后的字符串，带有 'px' 单位
+ * @description 对num自动填充px
+ * @param {Number} num
+ * @return {string} num+px
  */
-export function addUnit(num: number | string): string {
-  const convertedNumber = typeof num === 'number' ? num : parseFloat(num)
-  return isNaN(convertedNumber) ? String(num) : `${convertedNumber}px`
+export function addUnit(num) {
+  return Number.isNaN(Number(num)) ? num : `${num}px`
 }
 
 /**
