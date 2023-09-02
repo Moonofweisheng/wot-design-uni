@@ -5,7 +5,7 @@
 
 ## 基本用法
 
-`v-model` 值，为绑定值，默认为 boolean 类型。
+`v-model` 为绑定值，默认为 boolean 类型。
 
 ```html
 <wd-switch v-model="checked" />

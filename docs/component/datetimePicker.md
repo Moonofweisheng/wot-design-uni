@@ -6,7 +6,7 @@
 
 ## 基本用法
 
-`v-model` 设置绑定值，默认为 'datetime' 类型，展示年月日时分，绑定值为 `时间戳` 类型，如果为 'time' 类型，绑定值为字符串。label 可以不传。可以通过 `label-width` 设置标题宽度，默认为 '33%'。
+`v-model` 设置绑定值，默认为 `datetime` 类型，展示年月日时分，绑定值为 `时间戳` 类型，如果为 `time` 类型，绑定值为字符串。label 可以不传。可以通过 `label-width` 设置标题宽度，默认为 `33%`。
 
 ```html
 <wd-datetime-picker v-model="value" label="日期选择" @confirm="handleConfirm" />
@@ -38,7 +38,7 @@ function handleConfirm({ value }) {
 
 ## date 类型
 
-'date' 类型只展示年月日。
+`date` 类型只展示年月日。
 
 ```html
 <wd-datetime-picker type="date" v-model="value" label="年月日" />
@@ -49,7 +49,7 @@ const value = ref<number>(Date.now())
 ```
 ## year-month 类型
 
-'year-month' 类型只展示年月。
+`year-month` 类型只展示年月。
 
 ```html
 <wd-datetime-picker type="year-month" v-model="value" label="年月" />
@@ -60,7 +60,7 @@ const value = ref<number>(Date.now())
 
 ## time 类型
 
-'time' 类型只展示时分。
+`time` 类型只展示时分。
 
 ```html
 <wd-datetime-picker type="time" v-model="value" label="时分" />
@@ -205,7 +205,7 @@ function handleConfirm({ value }) {
 
 ## 时间范围选择
 
-当 `value` 为 `Array` 类型, 时间范围选择开启。
+当 `v-model` 为 `Array` 类型, 时间范围选择开启。
 
 ```html
 <wd-datetime-picker label="日期选择" v-model="value" @confirm="handleConfirm" />

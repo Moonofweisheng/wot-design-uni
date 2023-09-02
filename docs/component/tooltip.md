@@ -20,10 +20,10 @@
 
 如 `placement="left-end"`，则提示信息出现在目标元素的左侧，且提示信息的底部与目标元素的底部对齐。
 
-因为小程序组件无法监听点击自己以外的地方，为了在点击页面其他地方时，可以自动关闭 tooltip ，建议引入组件库的 clickOut 函数（会关闭所有 dropmenu、popover、toast、swipeAction），在页面的根元素上监听点击事件的冒泡。
+因为`uni-app`组件无法监听点击自己以外的地方，为了在点击页面其他地方时，可以自动关闭 `tooltip` ，建议引入组件库的 `clickOut` 函数（会关闭所有 dropmenu、popover、toast、swipeAction），在页面的根元素上监听点击事件的冒泡。
 
 :::warning
-如果存在用户手动点击 tooltip 以外某个地方如按钮滑出 tooltip 的场景，则需要在点击的元素（在这里上按钮）加上 catchtap 阻止事件冒泡到根元素上，避免触发 clickoutside 把要手动打开的 tooltip 关闭了。
+如果存在用户手动点击 `tooltip` 以外某个地方如按钮滑出 `tooltip` 的场景，则需要在点击的元素（在这里上按钮）加上 click 阻止事件冒泡到根元素上，避免触发 `clickOut` 把要手动打开的 `tooltip` 关闭了。
 :::
 
 ```html

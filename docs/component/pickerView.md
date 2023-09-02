@@ -4,7 +4,7 @@
 
 ## 基本用法
 
-单列选择器，给 `columns` 传入一个数值数组，设置 `value` 绑定值。选项可以为字符串，也可以为对象，如果为对象则默认取 `label` 属性为选项内容进行渲染，`value` 获取的值为 `value` 属性的值，如果 `value` 属性不存在，则取 `label` 的值。
+单列选择器，给 `columns` 传入一个数值数组，设置 `v-model` 绑定值。选项可以为字符串，也可以为对象，如果为对象则默认取选项 `label` 属性为选项内容进行渲染，`v-model` 获取的值为选项 `value` 属性的值，如果选项 `value` 属性不存在，则取选项 `label` 的值。
 
 ```html
 <wd-picker-view :columns="columns" v-model="value" @change="onChange" />

@@ -4,7 +4,7 @@
 
 ## 快速上手
 
-请查看[快速上手](#/components/quickUse)文档。
+请查看[快速上手](/guide/quickUse.html)文档。
 
 ## 扫码体验
 

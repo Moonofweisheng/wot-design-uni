@@ -10,9 +10,9 @@
 
 `columns` 设置数据源，为二维数组，每一列为一个一维数组，每个选项包含 `value`(选项值) 和 `label`(选项名称)。
 
-`value` 设置选中项的值，数据类型为数组；
+`v-model` 设置选中项的值，数据类型为数组；
 
-监听 `change` 事件，获取选中值，`event.detail` 是个对象，包含 `value`(选中值数组)、`selectedItems`（选中项对象数组）两个属性。
+也可以监听 `change` 事件，获取选中值，`event` 是个对象，包含 `value`(选中值数组)、`selectedItems`（选中项对象数组）两个属性。
 
 传入 `column-change` 属性，其类型为 `function`，接收参数 options: object；options 的结构如下：
 
