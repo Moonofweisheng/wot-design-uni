@@ -34,7 +34,8 @@
 </p>
 
 <p align="center">
-  🔥 <a href="https://wot-design-uni.cn/">文档网站 (Netlify)</a>
+  🚀 <a href="https://wot-design-uni.cn/">文档网站 (官网)</a>&nbsp;
+  🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (Netlify)</a>
 </p>
 
 ## ✨ 特性
@@ -58,7 +59,7 @@
 
 ## 快速上手
 
-详细说明见 [快速上手](https://wot-design-uni.cn/guide/quickUse.html)
+详细说明见 [快速上手](https://wot-design-uni.cn/guide/quickUse.html)。
 
 ## 链接
 

@@ -17,12 +17,15 @@
   color: $-statustip-color;
   font-size: $-statustip-fs;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @include e(image) {
     margin: 0 auto;
     display: block;
-    width: 300px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
   }
   @include e(text) {
     margin: 20px auto 0;
