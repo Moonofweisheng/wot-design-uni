@@ -2,7 +2,7 @@
   <page-wraper>
     <wd-message-box></wd-message-box>
     <wd-message-box selector="wd-message-box-slot" use-slot>
-      <wd-rate custom-class="custom-rate-class" v-model="value" />
+      <wd-rate custom-class="custom-rate-class" v-model="rate" />
     </wd-message-box>
     <demo-block title="alert">
       <wd-button @click="alert">alert</wd-button>
@@ -32,7 +32,7 @@
 <script lang="ts" setup>
 import { useMessage } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
-const value = ref<number>(1)
+const rate = ref<number>(1)
 const value1 = ref<string>('')
 
 const message = useMessage()
@@ -48,10 +48,14 @@ function alertWithTitle() {
   })
 }
 function confirm() {
-  message.confirm({
-    msg: '是否删除',
-    title: '提示'
-  })
+  message
+    .confirm({
+      msg: '是否删除',
+      title: '提示'
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 function prompt() {
   message
@@ -74,9 +78,16 @@ function alertWithLongChar() {
   })
 }
 function withSlot() {
-  message1.show({
-    title: '评分'
-  })
+  message1
+    .confirm({
+      title: '评分'
+    })
+    .then(() => {
+      message.alert(`你的评分为：${rate.value}分`)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 </script>
 <style lang="scss" scoped>
