@@ -62,6 +62,7 @@ export default {
 import { computed, inject, ref, watch } from 'vue'
 import { MessageOptions, MessageType } from './types'
 import { defaultOptions, messageDefaultOptionKey } from '.'
+import { isDef } from '../common/util'
 
 interface Props {
   useSlot?: boolean
@@ -262,8 +263,8 @@ function inputValChange(value: string | number) {
  */
 function reset(option: MessageOptions) {
   if (option) {
-    title.value = option.title || title.value
-    showCancelButton.value = option.showCancelButton || showCancelButton.value
+    title.value = isDef(option.title) ? option.title : title.value
+    showCancelButton.value = isDef(option.showCancelButton) ? option.showCancelButton : showCancelButton.value
     show.value = option.show!
     closeOnClickModal.value = option.closeOnClickModal!
     confirmButtonText.value = option.confirmButtonText!

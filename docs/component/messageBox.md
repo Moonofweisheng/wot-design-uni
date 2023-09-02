@@ -82,6 +82,9 @@ function confirm() {
     .then(() => {
       console.log('点击了确定按钮')
     })
+    .catch(() => {
+      console.log('点击了取消按钮')
+    })
 }
 
 ```
@@ -122,7 +125,7 @@ function prompt() {
 
 ```html
 <wd-message-box selector="wd-message-box-slot" use-slot>
-  <wd-rate custom-class="custom-rate-class" v-model="value"/>
+  <wd-rate custom-class="custom-rate-class" v-model="rate"/>
 </wd-message-box>
 
  <wd-button @click="withSlot">custom</wd-button>
@@ -130,13 +133,20 @@ function prompt() {
 
 ```typescript
 import { useMessage } from '@/uni_modules/wot-design-uni'
-const value = ref<number>(1)
+const rate = ref<number>(1)
 const message = useMessage('wd-message-box-slot')
 
 function withSlot() {
-  message1.show({
-    title: '评分'
-  })
+  message1
+    .confirm({
+      title: '评分'
+    })
+    .then(() => {
+      message.alert(`你的评分为：${rate.value}分`)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 ```
