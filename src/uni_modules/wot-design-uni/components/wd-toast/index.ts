@@ -7,8 +7,7 @@ import { deepMerge } from '../common/util'
  *
  * @internal
  */
-export const toastDefaultKey = Symbol('__TOAST__') as InjectionKey<Ref<boolean>>
-export const toastDefaultOptionKey = Symbol('__TOAST_OPTION__') as InjectionKey<Ref<ToastOptions>>
+export const toastDefaultOptionKey = '__TOAST_OPTION__'
 
 // 默认模板
 export const defaultOptions: ToastOptions = {
@@ -28,7 +27,7 @@ export const defaultOptions: ToastOptions = {
 export function useToast(selector: string = ''): Toast {
   let timer: NodeJS.Timeout | null = null
   const toastOption = ref<ToastOptions>(defaultOptions) // Toast选项
-  const toastOptionKey = selector ? '__TOAST_OPTION__' + selector : toastDefaultOptionKey
+  const toastOptionKey = selector ? toastDefaultOptionKey + selector : toastDefaultOptionKey
   provide(toastOptionKey, toastOption)
 
   const createMethod = (toastOptions: ToastOptions) => {

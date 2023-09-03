@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2022-12-14 17:33:21
- * @LastEditTime: 2023-09-02 22:57:02
+ * @LastEditTime: 2023-09-03 15:32:30
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\index.ts
@@ -16,8 +16,7 @@ import { deepMerge } from '../common/util'
  *
  * @internal
  */
-export const messageDefaultKey = Symbol('__MESSAGE__') as InjectionKey<Ref<boolean>>
-export const messageDefaultOptionKey = Symbol('__MESSAGE_OPTION__') as InjectionKey<Ref<MessageOptions>>
+export const messageDefaultOptionKey = '__MESSAGE_OPTION__'
 
 // 默认模板
 export const defaultOptions: MessageOptions = {
@@ -41,7 +40,7 @@ export const defaultOptions: MessageOptions = {
 
 export function useMessage(selector: string = ''): Message {
   const messageOption = ref<MessageOptions>(defaultOptions) // Message选项
-  const messageOptionKey = selector ? '__MESSAGE_OPTION__' + selector : messageDefaultOptionKey
+  const messageOptionKey = selector ? messageDefaultOptionKey + selector : messageDefaultOptionKey
   provide(messageOptionKey, messageOption)
 
   const createMethod = (type: MessageType) => {

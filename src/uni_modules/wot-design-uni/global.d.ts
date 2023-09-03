@@ -66,6 +66,7 @@ declare module '@vue/runtime-core' {
     WdTooltip: typeof import('./components/wd-tooltip/wd-tooltip.vue')['default']
     WdTransition: typeof import('./components/wd-transition/wd-transition.vue')['default']
     WdUpload: typeof import('./components/wd-upload/wd-upload.vue')['default']
+    WdNotify: typeof import('./components/wd-notify/wd-notify.vue')['default']
   }
 }
 

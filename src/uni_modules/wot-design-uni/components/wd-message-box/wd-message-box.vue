@@ -84,8 +84,8 @@ const bodyClass = computed(() => {
   return `wd-message-box__body ${!title.value ? 'is-no-title' : ''} ${type.value === 'prompt' ? 'is-prompt' : ''}`
 })
 
-const messageOptionKey = props.selector ? '__MESSAGE_OPTION__' + props.selector : messageDefaultOptionKey
-const messageOption = inject(messageOptionKey) || ref<MessageOptions>(defaultOptions) // message选项
+const messageOptionKey = props.selector ? messageDefaultOptionKey + props.selector : messageDefaultOptionKey
+const messageOption = inject(messageOptionKey, ref<MessageOptions>(defaultOptions)) // message选项
 
 /**
  * 消息文案

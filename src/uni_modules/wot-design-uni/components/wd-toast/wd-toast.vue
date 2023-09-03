@@ -60,8 +60,8 @@ const loadingColor = ref<string>('#4D80F0')
 const iconSize = ref<number>(42)
 const svgStr = ref<string>('') // 图标
 
-const toastOptionKey = props.selector ? '__TOAST_OPTION__' + props.selector : toastDefaultOptionKey
-const toastOption = inject(toastOptionKey) || ref<ToastOptions>(defaultOptions) // toast选项
+const toastOptionKey = props.selector ? toastDefaultOptionKey + props.selector : toastDefaultOptionKey
+const toastOption = inject(toastOptionKey, ref<ToastOptions>(defaultOptions)) // toast选项
 
 // 监听options变化展示
 watch(
