@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.2...v0.1.3) (2023-09-03)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复通过npm安装时配置自动导入Notify、Toast、Message组件无法打开的问题 ([f45b739](https://github.com/Moonofweisheng/wot-design-uni/commit/f45b73907227c25d9c2fd7b7f0018cc2ab5c47d1))
+
 ### [0.1.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.1...v0.1.2) (2023-09-03)
 
 
