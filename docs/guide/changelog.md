@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.1...v0.1.2) (2023-09-03)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复部分js引入路径问题 ([67cdfae](https://github.com/Moonofweisheng/wot-design-uni/commit/67cdfaebf9478e286758b2ef851e1a44dc8565a6))
+
 ### [0.1.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.0...v0.1.1) (2023-09-02)
 
 ## [0.1.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.0.14...v0.1.0) (2023-09-02)
