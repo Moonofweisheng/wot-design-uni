@@ -1,12 +1,11 @@
 import type { InjectionKey } from 'vue'
-import { ref, provide, reactive } from 'vue'
+import { provide, reactive } from 'vue'
 import type { NotifyProps } from './type'
-import { deepMerge, getType, isString } from '../common/util'
+import { deepMerge, isString } from '../common/util'
 
 let timer: ReturnType<typeof setTimeout>
 let currentOptions = getDefaultOptions()
-const notifyOptionKey = '__NOTIFY_OPTION__'
-const notifyDefaultOptionKey = Symbol(notifyOptionKey) as InjectionKey<NotifyProps>
+const notifyDefaultOptionKey = '__NOTIFY_OPTION__'
 export const setNotifyDefaultOptions = (options: NotifyProps) => {
   currentOptions = deepMerge(currentOptions, options) as NotifyProps
 }
@@ -38,7 +37,7 @@ export const useNotify = (selector: string = '') => {
   }
 }
 export const getNotifyOptionKey = (selector: string) => {
-  return selector ? `${notifyOptionKey}${selector}` : notifyDefaultOptionKey
+  return selector ? `${notifyDefaultOptionKey}${selector}` : notifyDefaultOptionKey
 }
 
 function getDefaultOptions(): NotifyProps {
