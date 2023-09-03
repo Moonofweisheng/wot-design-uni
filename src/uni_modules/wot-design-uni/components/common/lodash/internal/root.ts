@@ -1,4 +1,13 @@
-import freeGlobal from './freeGlobal.js'
+/*
+ * @Author: weisheng
+ * @Date: 2023-09-01 21:42:32
+ * @LastEditTime: 2023-09-03 11:43:06
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\common\lodash\internal\root.ts
+ * 记得注释
+ */
+import freeGlobal from './freeGlobal'
 
 /** Detect free variable `globalThis` */
 // eslint-disable-next-line eqeqeq
