@@ -46,7 +46,7 @@ const tab = ref<number>(0)
 
 ## 粘性布局
 
-设置 `sticky` 属性，使用粘性布局。可以设置 `offset-top` 属性，当距离窗口顶部多少像素时，固定标签头。
+设置 `sticky` 属性，使用粘性布局。可以设置 `offset-top` 属性，当距离窗口顶部多少像素时，固定标签头。在`H5`端使用自定义导航栏时需要参考[sticky的吸顶距离](/component/sticky.html#吸顶距离)进行配置。
 
 ```html
 <wd-tabs v-model="tab" sticky>
