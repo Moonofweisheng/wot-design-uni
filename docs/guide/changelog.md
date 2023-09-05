@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.3...v0.1.4) (2023-09-05)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复CollapseItem组件在微信小程序中展开/收起时指向图标未跟随转动的问题 ([7d0eeae](https://github.com/Moonofweisheng/wot-design-uni/commit/7d0eeae92f2f7b7664a23f7d548187ed8075d5b0))
+
 ### [0.1.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.2...v0.1.3) (2023-09-03)
 
 
