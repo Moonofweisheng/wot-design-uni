@@ -39,7 +39,7 @@
     font-size: $-collapse-title-fs;
   }
 
-  @include e(arrow) {
+  @include edeep(arrow) {
     display: block;
     font-size: $-collapse-arrow-size;
     color: $-collapse-arrow-color;

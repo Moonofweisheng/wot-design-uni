@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-22 22:28:28
+ * @LastEditTime: 2023-09-05 15:36:18
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse-item\wd-collapse-item.vue
@@ -11,7 +11,7 @@
   <view :class="`wd-collapse-item ${disabled ? 'is-disabled' : ''} ${customClass}`">
     <view :class="`wd-collapse-item__header  ${isFirst ? 'wd-collapse-item__header-first' : ''}`" @click="handleClick">
       <text class="wd-collapse-item__title">{{ title }}</text>
-      <wd-icon name="arrow-down" :class="`wd-collapse-item__arrow ${expanded ? 'is-retract' : ''}`" />
+      <wd-icon name="arrow-down" :custom-class="`wd-collapse-item__arrow ${expanded ? 'is-retract' : ''}`" />
     </view>
     <view class="wd-collapse-item__wrapper" :style="contentStyle">
       <view class="wd-collapse-item__body">
