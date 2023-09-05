@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.4...v0.1.5) (2023-09-05)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  增加Stickty和Tabs组件关于H5端自定义导航栏的offset-top的处理方案 ([8a03c4d](https://github.com/Moonofweisheng/wot-design-uni/commit/8a03c4da64296e88a7b3aff5efed4ac04cd039b6))
+
 ### [0.1.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.3...v0.1.4) (2023-09-05)
 
 
