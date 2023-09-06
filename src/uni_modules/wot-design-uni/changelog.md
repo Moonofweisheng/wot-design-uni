@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.1.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.5...v0.1.6) (2023-09-06)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Input组件内置变量showClear和showWordCount定义为props的问题 ([8021a35](https://github.com/Moonofweisheng/wot-design-uni/commit/8021a35ac9d05d549909531ff4f1c7325127833e))
+* 🐛 修复pnpm安装时运行到h5平台Ref导入报错的问题 ([39c68bf](https://github.com/Moonofweisheng/wot-design-uni/commit/39c68bf57720c1a12b99412c96e46b341cf536b5))
+
 ### [0.1.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.4...v0.1.5) (2023-09-05)
 
 
