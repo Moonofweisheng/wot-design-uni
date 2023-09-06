@@ -141,7 +141,7 @@ const $container = '.wd-tabs__nav-container'
 interface Props {
   customClass?: string
   // 绑定值
-  modelValue: number
+  modelValue: number | string
   // 标签数超过阈值可滑动
   slidableNum?: number
   // 标签数超过阈值显示导航地图
@@ -225,11 +225,11 @@ watch(
       // eslint-disable-next-line quotes
       console.error("[wot design] error(wd-tabs): tabs's value cannot be null or undefined")
     }
-    if (getType(newValue) === 'number' && newValue < 0) {
+    if (typeof newValue === 'number' && newValue < 0) {
       // eslint-disable-next-line quotes
       console.error("[wot design] error(wd-tabs): tabs's value cannot be less than zero")
     }
-    setActive && setActive(newValue)
+    // setActive && setActive(newValue)
   },
   {
     immediate: true,
@@ -281,7 +281,7 @@ function setChild(child) {
   updateItems()
 
   // 提前设置好高亮的 tab，避免等到 mounted 时出现闪烁延迟问题
-  if (getType(props.modelValue) === 'number' && props.modelValue >= items.value.length) {
+  if (typeof props.modelValue === 'number' && props.modelValue >= items.value.length) {
     return
   }
   // 如果是字符串直接匹配，匹配不到用0兜底
@@ -289,7 +289,10 @@ function setChild(child) {
     const index = items.value.findIndex((item) => item.name === props.modelValue)
 
     if (index === -1) return
-
+    emit('change', {
+      index: index,
+      name: items.value[index].name
+    })
     emit('update:modelValue', index)
   }
   children[props.modelValue].$.exposed.setShow(true, true)
@@ -356,12 +359,13 @@ function setActiveTab() {
   children.forEach((child, index) => {
     child.$.exposed.setShow(child.$.exposed.painted.value || index === activeIndex.value, index === activeIndex.value)
   })
-
-  emit('change', {
-    index: activeIndex.value,
-    name: items.value[activeIndex.value].name
-  })
-  emit('update:modelValue', activeIndex.value)
+  if (activeIndex.value !== props.modelValue) {
+    emit('change', {
+      index: activeIndex.value,
+      name: items.value[activeIndex.value].name
+    })
+    emit('update:modelValue', activeIndex.value)
+  }
 }
 /**
  * @description scroll-view滑动到active的tab_nav
