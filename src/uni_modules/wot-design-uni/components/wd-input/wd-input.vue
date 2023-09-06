@@ -172,14 +172,12 @@ interface Props {
   minlength?: number
   showPassword?: boolean
   clearable?: boolean
-  showClear?: boolean
   readonly?: boolean
   useSuffixSlot?: boolean
   usePrefixSlot?: boolean
   prefixIcon?: string
   suffixIcon?: string
   showWordLimit?: boolean
-  showWordCount?: boolean
   suffix?: string
   suffixCount?: number
   label?: string
@@ -207,13 +205,11 @@ const props = withDefaults(defineProps<Props>(), {
   clearable: false,
   showPassword: false,
   disabled: false,
-  showClear: false,
   alignRight: false,
   readonly: false,
   useSuffixSlot: false,
   usePrefixSlot: false,
   showWordLimit: false,
-  showWordCount: false,
   confirmType: 'done',
   confirmHold: false,
   placeholderClass: 'textarea-placeholder',
