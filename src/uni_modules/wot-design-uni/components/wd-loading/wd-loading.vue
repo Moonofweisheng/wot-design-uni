@@ -24,7 +24,7 @@ export default {
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import base64 from '../common/base64'
 import { gradient, context, objToStyle, addUnit } from '../common/util'
-import { LoadingType } from './type'
+import type { LoadingType } from './type'
 
 const svgDefineId = context.id++
 const svgDefineId1 = context.id++

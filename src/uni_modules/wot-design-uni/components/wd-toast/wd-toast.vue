@@ -34,7 +34,7 @@ export default {
 import { computed, inject, onBeforeMount, ref, watch } from 'vue'
 import base64 from '../common/base64'
 import { defaultOptions, toastDefaultOptionKey, toastIcon } from '.'
-import { ToastLoadingType, ToastOptions } from './type'
+import type { ToastLoadingType, ToastOptions } from './type'
 import { isDef, objToStyle } from '../common/util'
 
 interface Props {

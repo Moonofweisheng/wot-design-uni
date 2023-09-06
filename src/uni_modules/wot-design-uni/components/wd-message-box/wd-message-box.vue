@@ -60,7 +60,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, inject, ref, watch } from 'vue'
-import { MessageOptions, MessageType } from './types'
+import type { MessageOptions, MessageType } from './types'
 import { defaultOptions, messageDefaultOptionKey } from '.'
 import { isDef } from '../common/util'
 

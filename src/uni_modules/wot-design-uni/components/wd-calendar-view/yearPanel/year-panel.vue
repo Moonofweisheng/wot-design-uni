@@ -36,7 +36,7 @@ import { computed, getCurrentInstance, onMounted, ref, nextTick } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
 import { getType } from '../../common/util'
 import Year from '../year/year.vue'
-import { YearInfo } from './type'
+import type { YearInfo } from './type'
 
 interface Props {
   type: string

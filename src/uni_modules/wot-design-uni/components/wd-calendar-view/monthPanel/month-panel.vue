@@ -65,7 +65,7 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { debounce, getType, isEqual } from '../../common/util'
 import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'
 import Month from '../month/month.vue'
-import { MonthInfo } from './type'
+import type { MonthInfo } from './type'
 
 interface Props {
   type: string

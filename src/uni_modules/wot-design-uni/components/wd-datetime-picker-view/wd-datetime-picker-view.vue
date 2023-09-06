@@ -27,7 +27,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
 import { debounce, getType, isDef, padZero, range } from '../common/util'
-import { DateTimeType, getPickerValue } from './type'
+import { type DateTimeType, getPickerValue } from './type'
 
 // 本地时间戳
 /** @description 判断时间戳是否合法 */

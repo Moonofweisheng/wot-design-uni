@@ -1,13 +1,13 @@
 /*
  * @Author: weisheng
  * @Date: 2023-06-19 12:47:57
- * @LastEditTime: 2023-06-19 16:55:30
+ * @LastEditTime: 2023-09-07 00:34:18
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-toast\type.ts
  * 记得注释
  */
-import { LoadingType } from '../wd-loading/type'
+import type { LoadingType } from '../wd-loading/type'
 
 export type ToastIconType = 'success' | 'error' | 'warning' | 'loading' | 'info' // 图标类型
 
