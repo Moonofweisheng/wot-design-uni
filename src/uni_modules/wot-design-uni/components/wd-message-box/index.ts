@@ -1,13 +1,13 @@
 /*
  * @Author: weisheng
  * @Date: 2022-12-14 17:33:21
- * @LastEditTime: 2023-09-03 15:32:30
+ * @LastEditTime: 2023-09-06 11:28:48
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\index.ts
  * 记得注释
  */
-import { InjectionKey, Ref, provide, ref } from 'vue'
+import { provide, ref } from 'vue'
 import { Message, MessageOptions, MessageResult, MessageType } from './types'
 import { deepMerge } from '../common/util'
 
