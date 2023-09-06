@@ -1,0 +1,89 @@
+name: 向 Wot Design Uni 反馈 Bug
+description: 创建一个 Issue 描述你遇到的问题。
+title: "[Bug 上报] 请在此填写标题"
+labels: ["🐞bug: need confirm"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        在向我们提交 Bug 报告前，请优先使用以下方式尝试解决问题：
+        - 在组件文档 [wot-design-uni](https://www.wot-design-uni.cn/) 确认使用方法是否正确
+        - 尝试在 [Issue](https://github.com/Moonofweisheng/wot-design-uni/issues) 列表中搜索相同问题
+        - 如果不是反馈 Bug，请到 [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions) 发帖。
+
+  - type: input
+    id: version
+    attributes:
+      label: Wot Design Uni 版本号
+      description: 你正在使用的组件库版本号（请填写 wot-design-uni/package.json 里实际安装的版本）
+      placeholder: 例如：0.1.1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 平台
+      multiple: true
+      description: 选择对应的平台
+      options:
+        - h5
+        - 微信小程序
+        - 支付宝小程序
+        - APP
+        - 钉钉小程序
+        - 其他小程序
+    validations:
+      required: true
+
+  - type: input
+    id: reproduce
+    attributes:
+      label: 重现链接
+      description: |
+        请提供一个尽可能简单的 GitHub 仓库链接。不要随便填写一个链接，这会导致你的 issue 被直接关闭。
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: 重现步骤
+      description: |
+        请提供一个最简洁清晰的重现步骤，方便我们快速重现问题。
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望的结果是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: actually-happening
+    attributes:
+      label: 实际的结果是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: uni-app
+    attributes:
+      label: 环境信息
+      description: |
+        在这里填写你的环境信息
+        - 发行平台: [如 微信小程序、H5平台、5+ App等]
+        - 操作系统 [如 iOS 12.1.2、Android 7.0]
+        - HBuilderX版本 [如使用HBuilderX，则需提供 HBuilderX 版本号]
+        - uni-app版本 [如使用Vue-cli创建/运行项目，则提供`npm run info`的运行结果]
+        - 设备信息 [如 iPhone8 Plus]
+
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 其他补充信息
+      description: |
+        根据你的分析，出现这个问题的原因可能在哪里，或者你认为可能产生关联的信息：比如 Vue 版本、vite 版本、Node 版本、采用哪种自动引入方案等，或者进行了哪些配置，使用了哪些插件等信息。
