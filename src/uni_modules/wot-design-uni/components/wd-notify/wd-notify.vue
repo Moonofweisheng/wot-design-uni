@@ -25,7 +25,7 @@ export default {
 
 <script lang="ts" setup>
 import { inject, computed, watch } from 'vue'
-import { notifyProps, NotifyProps } from './type'
+import { notifyProps, type NotifyProps } from './type'
 import { getNotifyOptionKey } from '.'
 import { isDef, addUnit, isFunction } from '../common/util'
 

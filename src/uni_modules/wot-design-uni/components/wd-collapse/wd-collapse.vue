@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-30 21:25:57
+ * @LastEditTime: 2023-09-07 00:29:33
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse\wd-collapse.vue
@@ -51,7 +51,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, provide, ref, watch } from 'vue'
-import { CollapseItem } from './types'
+import type { CollapseItem } from './types'
 import { deepClone, isBoolean } from '../common/util'
 
 interface Props {

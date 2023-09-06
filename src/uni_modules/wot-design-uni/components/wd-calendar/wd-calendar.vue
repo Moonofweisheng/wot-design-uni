@@ -109,7 +109,7 @@ export default {
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { dayjs } from '../common/dayjs'
-import { debounce, deepClone, isEqual, padZero } from '../common/util'
+import { debounce, deepClone, isArray, isEqual, padZero } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
 import { useCell } from '../mixins/useCell'
 
@@ -430,7 +430,7 @@ function onConfirm() {
   setShowValue()
 }
 function setInnerLabel() {
-  const [start, end] = deepClone(calendarValue.value || [])
+  const [start, end] = deepClone(isArray(calendarValue.value) ? calendarValue.value : [])
   rangeLabel.value = [start, end].map((item, index) => {
     return (props.innerDisplayFormat || formatRange)(item, index === 0 ? 'start' : 'end', currentType.value)
   })
