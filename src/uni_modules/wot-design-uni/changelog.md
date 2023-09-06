@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.6...v0.1.7) (2023-09-06)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复tabs组件change事件执行两次的问题 ([819059a](https://github.com/Moonofweisheng/wot-design-uni/commit/819059abe19fcf8f9646703fcc7a472b6ae62d4e))
+
 ### [0.1.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.5...v0.1.6) (2023-09-06)
 
 
