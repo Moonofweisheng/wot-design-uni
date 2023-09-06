@@ -27,7 +27,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { Ref, computed, getCurrentInstance, inject, ref } from 'vue'
+import { type Ref, computed, getCurrentInstance, inject, ref } from 'vue'
 import { addUnit, getRect, objToStyle } from '../common/util'
 
 interface Props {

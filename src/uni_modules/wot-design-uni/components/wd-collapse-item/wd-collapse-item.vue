@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-09-05 15:36:18
+ * @LastEditTime: 2023-09-06 11:28:22
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse-item\wd-collapse-item.vue
@@ -32,9 +32,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, inject, onMounted, ref, watch } from 'vue'
+import { type Ref, computed, getCurrentInstance, inject, onMounted, ref, watch } from 'vue'
 import { getRect, isArray, isDef, isPromise, objToStyle } from '../common/util'
-import { Ref } from 'vue'
 
 const $body = '.wd-collapse-item__body'
 

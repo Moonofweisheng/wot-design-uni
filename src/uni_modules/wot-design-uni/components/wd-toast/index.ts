@@ -1,4 +1,4 @@
-import { InjectionKey, Ref, provide, ref } from 'vue'
+import { provide, ref } from 'vue'
 import { Toast, ToastOptions } from './type'
 import { deepMerge } from '../common/util'
 
