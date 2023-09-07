@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.1.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.7...v0.1.8) (2023-09-07)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复ActionSheet等组件在H5端隐藏导航栏或在tabbar页面高度计算错误的问题 ([39201cb](https://github.com/Moonofweisheng/wot-design-uni/commit/39201cbeddde1c7ea883ad331c0607bced755475))
+* 🐛 修复pmpm安装时ts导入类型信息在H5平台报错的问题 ([237c03c](https://github.com/Moonofweisheng/wot-design-uni/commit/237c03c6ae8d041c565ca6bb984765be4418f9e1))
+
 ### [0.1.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.6...v0.1.7) (2023-09-06)
 
 
