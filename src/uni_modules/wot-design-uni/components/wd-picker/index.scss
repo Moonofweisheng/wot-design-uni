@@ -162,6 +162,10 @@
     line-height: 1.25;
   }
 
+  @include e(body) {
+    padding-bottom: var(--window-bottom);
+  }
+
   @include e(toolbar) {
     position: relative;
     display: flex;

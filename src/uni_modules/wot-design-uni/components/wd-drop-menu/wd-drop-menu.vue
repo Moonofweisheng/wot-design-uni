@@ -129,11 +129,6 @@ function fold(child?: any) {
 
     if (props.direction === 'down') {
       offset.value = bottom
-      // #ifdef H5
-      // H5端，导航栏为普通元素，需要将组件移动到导航栏的下边沿
-      // H5的导航栏高度为44px
-      offset.value = bottom + 44
-      // #endif
     } else {
       offset.value = windowHeight.value - top
     }

@@ -53,6 +53,10 @@
     border-radius: 16px 16px 0px 0px;
   }
 
+  @include e(body) {
+    padding-bottom: var(--window-bottom);
+  }
+
   @include when(border) {
     .wd-picker__field {
       @include halfPixelBorder("top", $-cell-padding);

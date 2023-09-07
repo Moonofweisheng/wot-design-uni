@@ -40,82 +40,84 @@
       @close="onCancel"
       custom-class="wd-picker__popup"
     >
-      <!--toolBar-->
-      <view class="wd-picker__toolbar" @touchmove="noop">
-        <!--取消按钮-->
-        <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
-          {{ cancelButtonText }}
+      <view class="wd-picker__body">
+        <!--toolBar-->
+        <view class="wd-picker__toolbar" @touchmove="noop">
+          <!--取消按钮-->
+          <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
+            {{ cancelButtonText }}
+          </view>
+          <!--标题-->
+          <view v-if="title" class="wd-picker__title">{{ JSON.stringify(title) }}</view>
+          <!--确定按钮-->
+          <view :class="`wd-picker__action ${loading || isLoading ? 'is-loading' : ''}`" @click="onConfirm">
+            {{ confirmButtonText }}
+          </view>
         </view>
-        <!--标题-->
-        <view v-if="title" class="wd-picker__title">{{ JSON.stringify(title) }}</view>
-        <!--确定按钮-->
-        <view :class="`wd-picker__action ${loading || isLoading ? 'is-loading' : ''}`" @click="onConfirm">
-          {{ confirmButtonText }}
+        <!-- 区域选择tab展示 -->
+        <view v-if="region" class="wd-picker__region-tabs">
+          <view :class="`wd-picker__region ${showStart ? 'is-active' : ''} `" @click="tabChange">
+            <view>开始时间</view>
+            <view class="wd-picker__region-time">{{ showTabLabel[0] }}</view>
+          </view>
+          <view :class="`wd-picker__region ${showStart ? '' : 'is-active'}`" @click="tabChange">
+            <view>结束时间</view>
+            <view class="wd-picker__region-time">{{ showTabLabel[1] }}</view>
+          </view>
         </view>
-      </view>
-      <!-- 区域选择tab展示 -->
-      <view v-if="region" class="wd-picker__region-tabs">
-        <view :class="`wd-picker__region ${showStart ? 'is-active' : ''} `" @click="tabChange">
-          <view>开始时间</view>
-          <view class="wd-picker__region-time">{{ showTabLabel[0] }}</view>
+        <!--datetimePickerView-->
+        <view :class="showStart ? 'wd-picker__show' : 'wd-picker__hidden'">
+          <wd-datetime-picker-view
+            :custom-class="customViewClass"
+            ref="datetimePickerView"
+            :type="type"
+            v-model="innerValue"
+            :loading="loading || isLoading"
+            :loading-color="loadingColor"
+            :columns-height="columnsHeight"
+            :value-key="valueKey"
+            :label-key="labelKey"
+            :formatter="formatter"
+            :filter="filter"
+            :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
+            :max-hour="maxHour"
+            :min-hour="minHour"
+            :max-date="maxDate"
+            :min-date="minDate"
+            :max-minute="maxMinute"
+            :min-minute="minMinute"
+            :start-symbol="true"
+            @change="onChangeStart"
+            @pickstart="onPickStart"
+            @pickend="onPickEnd"
+          />
         </view>
-        <view :class="`wd-picker__region ${showStart ? '' : 'is-active'}`" @click="tabChange">
-          <view>结束时间</view>
-          <view class="wd-picker__region-time">{{ showTabLabel[1] }}</view>
+        <view :class="showStart ? 'wd-picker__hidden' : 'wd-picker__show'">
+          <wd-datetime-picker-view
+            :custom-class="customViewClass"
+            ref="datetimePickerView1"
+            :type="type"
+            v-model="endInnerValue"
+            :loading="loading || isLoading"
+            :loading-color="loadingColor"
+            :columns-height="columnsHeight"
+            :value-key="valueKey"
+            :label-key="labelKey"
+            :formatter="formatter"
+            :filter="filter"
+            :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
+            :max-hour="maxHour"
+            :min-hour="minHour"
+            :max-date="maxDate"
+            :min-date="minDate"
+            :max-minute="maxMinute"
+            :min-minute="minMinute"
+            :start-symbol="false"
+            @change="onChangeEnd"
+            @pickstart="onPickStart"
+            @pickend="onPickEnd"
+          />
         </view>
-      </view>
-      <!--datetimePickerView-->
-      <view :class="showStart ? 'wd-picker__show' : 'wd-picker__hidden'">
-        <wd-datetime-picker-view
-          :custom-class="customViewClass"
-          ref="datetimePickerView"
-          :type="type"
-          v-model="innerValue"
-          :loading="loading || isLoading"
-          :loading-color="loadingColor"
-          :columns-height="columnsHeight"
-          :value-key="valueKey"
-          :label-key="labelKey"
-          :formatter="formatter"
-          :filter="filter"
-          :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
-          :max-hour="maxHour"
-          :min-hour="minHour"
-          :max-date="maxDate"
-          :min-date="minDate"
-          :max-minute="maxMinute"
-          :min-minute="minMinute"
-          :start-symbol="true"
-          @change="onChangeStart"
-          @pickstart="onPickStart"
-          @pickend="onPickEnd"
-        />
-      </view>
-      <view :class="showStart ? 'wd-picker__hidden' : 'wd-picker__show'">
-        <wd-datetime-picker-view
-          :custom-class="customViewClass"
-          ref="datetimePickerView1"
-          :type="type"
-          v-model="endInnerValue"
-          :loading="loading || isLoading"
-          :loading-color="loadingColor"
-          :columns-height="columnsHeight"
-          :value-key="valueKey"
-          :label-key="labelKey"
-          :formatter="formatter"
-          :filter="filter"
-          :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
-          :max-hour="maxHour"
-          :min-hour="minHour"
-          :max-date="maxDate"
-          :min-date="minDate"
-          :max-minute="maxMinute"
-          :min-minute="minMinute"
-          :start-symbol="false"
-          @change="onChangeEnd"
-          @pickstart="onPickStart"
-          @pickend="onPickEnd"
-        />
       </view>
     </wd-popup>
   </view>

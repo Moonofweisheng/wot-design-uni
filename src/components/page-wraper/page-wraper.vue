@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-07 18:49:03
- * @LastEditTime: 2023-09-02 21:58:56
+ * @LastEditTime: 2023-09-07 14:09:13
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\components\page-wraper\page-wraper.vue
@@ -49,9 +49,6 @@ const theme = computed(() => {
 
 onMounted(() => {
   setNotifyDefaultOptions({
-    // #ifdef H5
-    safeHeight: 44,
-    // #endif
     onClick: (event) => console.log('onClick', event),
     onClosed: () => console.log('onClosed'),
     onOpened: () => console.log('onOpened')

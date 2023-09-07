@@ -10,10 +10,10 @@
       :modal="modal"
       :close-on-click-modal="closeOnClickModal"
       @clickmodal="close"
-      @beforeenter="handleOpen"
-      @afterenter="handleOpened"
-      @beforeleave="handleClose"
-      @afterleave="onPopupClose"
+      @before-enter="handleOpen"
+      @after-enter="handleOpened"
+      @before-leave="handleClose"
+      @after-leave="onPopupClose"
     >
       <view v-if="options.length">
         <view
@@ -53,6 +53,7 @@ export default {
 import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { debounce } from '../common/util'
+import type { PopupType } from '../wd-popup/type'
 
 interface Props {
   customClass?: string
@@ -86,7 +87,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const showWrapper = ref<boolean>(false)
 const showPop = ref<boolean>(false)
-const position = ref<string>('')
+const position = ref<PopupType>()
 const transName = ref<string>('')
 const zIndex = ref<number>(12)
 const displayTitle = ref<string>('')
@@ -192,7 +193,10 @@ function close() {
 const positionStyle = computed(() => {
   let style: string = ''
   if (showPop.value) {
-    style = parent.direction === 'down' ? `top: ${parent.$.exposed.offset.value}px; bottom: 0;` : `top: 0; bottom: ${parent.$.exposed.offset.value}px`
+    style =
+      parent.direction === 'down'
+        ? `top: calc(var(--window-top) + ${parent.$.exposed.offset.value}px); bottom: 0;`
+        : `top: 0; bottom: calc(var(--window-bottom) + ${parent.$.exposed.offset.value}px)`
   } else {
     style = ''
   }

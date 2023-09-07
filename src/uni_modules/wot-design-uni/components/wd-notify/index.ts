@@ -1,4 +1,3 @@
-import type { InjectionKey } from 'vue'
 import { provide, reactive } from 'vue'
 import type { NotifyProps } from './type'
 import { deepMerge, isString } from '../common/util'
