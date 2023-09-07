@@ -28,11 +28,12 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj, requestAnimationFrame } from '../common/util'
+import type { PopupType } from './type'
 
 interface Props {
   transition?: string
   closable?: boolean
-  position?: string
+  position?: PopupType
   closeOnClickModal?: boolean
   duration?: number | boolean
   modal?: boolean

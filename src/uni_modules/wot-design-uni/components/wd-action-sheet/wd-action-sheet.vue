@@ -18,7 +18,11 @@
     >
       <view
         class="wd-action-sheet"
-        :style="`${(actions && actions.length) || (panels && panels.length) ? 'margin: 0 10px 10px; border-radius: 16px;' : ''}`"
+        :style="`${
+          (actions && actions.length) || (panels && panels.length)
+            ? 'margin: 0 10px calc(var(--window-bottom) + 10px) 10px; border-radius: 16px;'
+            : 'margin-bottom: var(--window-bottom)'
+        }`"
       >
         <view v-if="title" :class="`wd-action-sheet__header ${customHeaderClass}`">
           {{ title }}

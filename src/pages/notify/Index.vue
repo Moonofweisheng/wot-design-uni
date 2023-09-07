@@ -25,20 +25,19 @@
         <wd-cell title="使用 Notify 组件" is-link @click="showNotifyComponent" />
       </wd-cell-group>
     </demo-block>
-    <wd-notify type="success" :safe-height="safeHeight" v-model:visible="visible">
+    <wd-notify type="success" v-model:visible="visible">
       <wd-icon name="check-outline" size="inherit" color="inherit" />
       成功通知
     </wd-notify>
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import type { NotifyType } from '@/uni_modules/wot-design-uni/components/wd-notify/type'
 import { useNotify } from '@/uni_modules/wot-design-uni'
 
 let timer: ReturnType<typeof setTimeout>
 const visible = ref(false)
-const safeHeight = ref(0)
 const { showNotify } = useNotify('notify')
 
 const showType = (type: NotifyType) => {
@@ -74,10 +73,4 @@ const showNotifyComponent = () => {
     visible.value = false
   }, 2000)
 }
-
-onMounted(() => {
-  // #ifdef H5
-  safeHeight.value = 44
-  // #endif
-})
 </script>

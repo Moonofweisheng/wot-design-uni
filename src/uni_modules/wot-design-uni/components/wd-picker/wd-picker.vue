@@ -33,35 +33,37 @@
       @close="onCancel"
       custom-class="wd-picker__popup"
     >
-      <!--toolBar-->
-      <view class="wd-picker__toolbar" @touchmove="noop">
-        <!--取消按钮-->
-        <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
-          {{ cancelButtonText }}
+      <view class="wd-picker__body">
+        <!--toolBar-->
+        <view class="wd-picker__toolbar" @touchmove="noop">
+          <!--取消按钮-->
+          <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
+            {{ cancelButtonText }}
+          </view>
+          <!--标题-->
+          <view v-if="title" class="wd-picker__title">{{ title }}</view>
+          <!--确定按钮-->
+          <view :class="`wd-picker__action ${isLoading ? 'is-loading' : ''}`" @click="onConfirm">
+            {{ confirmButtonText }}
+          </view>
         </view>
-        <!--标题-->
-        <view v-if="title" class="wd-picker__title">{{ title }}</view>
-        <!--确定按钮-->
-        <view :class="`wd-picker__action ${isLoading ? 'is-loading' : ''}`" @click="onConfirm">
-          {{ confirmButtonText }}
-        </view>
+        <!--pickerView-->
+        <wd-picker-view
+          ref="pickerViewWd"
+          :custom-class="customViewClass"
+          v-model="pickerValue"
+          :columns="displayColumns"
+          :loading="isLoading"
+          :loading-color="loadingColor"
+          :columns-height="columnsHeight"
+          :value-key="valueKey"
+          :label-key="labelKey"
+          @change="pickerViewChange"
+          @pickstart="onPickStart"
+          @pickend="onPickEnd"
+          :column-change="columnChange"
+        />
       </view>
-      <!--pickerView-->
-      <wd-picker-view
-        ref="pickerViewWd"
-        :custom-class="customViewClass"
-        v-model="pickerValue"
-        :columns="displayColumns"
-        :loading="isLoading"
-        :loading-color="loadingColor"
-        :columns-height="columnsHeight"
-        :value-key="valueKey"
-        :label-key="labelKey"
-        @change="pickerViewChange"
-        @pickstart="onPickStart"
-        @pickend="onPickEnd"
-        :column-change="columnChange"
-      />
     </wd-popup>
   </view>
 </template>
