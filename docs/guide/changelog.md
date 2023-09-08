@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.1.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.9...v0.1.10) (2023-09-08)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  将驼峰命名的文档文件改为短横线命名便于爬虫爬取及搜索 ([497e991](https://github.com/Moonofweisheng/wot-design-uni/commit/497e991903559c9d62dcb1b00842ee377d70b445))
+* ✏️  优化icon组件文档的体验，支持点击图标复制使用示例 ([ce0526b](https://github.com/Moonofweisheng/wot-design-uni/commit/ce0526b99dcd203d3f1081a8fd6a0551da88b9b8))
+
 ### [0.1.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.8...v0.1.9) (2023-09-08)
 
 
