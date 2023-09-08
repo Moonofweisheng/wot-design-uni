@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.8...v0.1.9) (2023-09-08)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复npm包未配置主入口导致在使用Hbx创建的项目中通过npm安装编译警告的问题 ([fa95a0d](https://github.com/Moonofweisheng/wot-design-uni/commit/fa95a0d19b6e13157154405ddaa2525545bd9f7e))
+
 ### [0.1.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.7...v0.1.8) (2023-09-07)
 
 
