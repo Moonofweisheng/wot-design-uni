@@ -59,13 +59,13 @@
 
 ## 快速上手
 
-详细说明见 [快速上手](https://wot-design-uni.cn/guide/quickUse.html)。
+详细说明见 [快速上手](https://wot-design-uni.cn/guide/quick-use.html)。
 
 ## 链接
 
 * [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
 * [更新日志](https://wot-design-uni.cn/guide/changelog.html)
-* [常见问题](https://wot-design-uni.cn/guide/commonProblems.html)
+* [常见问题](https://wot-design-uni.cn/guide/common-problems.html)
 * [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
 
 

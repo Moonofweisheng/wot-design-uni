@@ -4,7 +4,7 @@
 
 ## 快速上手
 
-请查看[快速上手](/guide/quickUse.html)文档。
+请查看[快速上手](/guide/quick-use.html)文档。
 
 ## 扫码体验
 
@@ -34,7 +34,7 @@
 
 * [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
 * [更新日志](/guide/changelog)
-* [常见问题](/guide/commonProblems)
+* [常见问题](/guide/common-problems)
 * [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
 
 ## 开源协议
