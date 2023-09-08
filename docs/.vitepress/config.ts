@@ -59,7 +59,7 @@ export default defineConfig({
           },
           {
             text: '快速上手',
-            link: '/guide/quickUse',
+            link: '/guide/quick-use',
           },
           {
             text: '定制主题',
@@ -75,7 +75,7 @@ export default defineConfig({
           },
           {
             text: '常见问题',
-            link: '/guide/commonProblems',
+            link: '/guide/common-problems',
           }
         ]
       },

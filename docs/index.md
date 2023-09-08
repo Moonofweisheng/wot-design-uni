@@ -14,7 +14,7 @@ hero:
   actions:
     - theme: brand
       text: 快速上手
-      link: /guide/quickUse
+      link: /guide/quick-use
     - theme: alt
       text: 组件列表
       link: /component/button

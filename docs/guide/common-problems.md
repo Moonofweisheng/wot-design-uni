@@ -9,7 +9,7 @@
 
 ## 如何开启暗黑模式？
 
-`Wot Design Uni`支持深色模式、主题定制等能力，详见[ConfigProvider 全局配置](/component/configProvider.html)组件。
+`Wot Design Uni`支持深色模式、主题定制等能力，详见[ConfigProvider 全局配置](/component/config-provider.html)组件。
 
 
 ## 小程序样式隔离
