@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.10...v0.1.11) (2023-09-08)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复文档中部分页面存在死链问题 ([b3e5cbe](https://github.com/Moonofweisheng/wot-design-uni/commit/b3e5cbef1116d9a356f7c9c18dffc1caec20ea22))
+
 ### [0.1.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.9...v0.1.10) (2023-09-08)
 
 
