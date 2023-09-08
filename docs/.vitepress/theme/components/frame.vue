@@ -12,7 +12,7 @@ const href = computed(() => {
   const paths = path ? path.split('.')[0].split('/') : []
   let href = ''
   if (paths.length) {
-    href = baseUrl + `pages/${paths[paths.length - 1]}/Index`
+    href = baseUrl + `pages/${kebabToCamel(paths[paths.length - 1])}/Index`
   } else {
     href = baseUrl
   }
@@ -26,6 +26,10 @@ watch(() => vitepressData.isDark.value, () => {
   const iFrame: any = document.getElementById('demo')
   iFrame && iFrame.contentWindow.postMessage(vitepressData.isDark.value, href.value)
 })
+
+function kebabToCamel(input: string): string {
+  return input.replace(/-([a-z])/g, (match, group) => group.toUpperCase());
+}
 
 
 </script>

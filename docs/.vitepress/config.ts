@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-08-22 19:02:54
+ * @LastEditTime: 2023-09-08 17:17:03
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -122,11 +122,11 @@ export default defineConfig({
         },
         {
           text: '快速上手',
-          link: '/guide/quickUse',
+          link: '/guide/quick-use',
         },
         {
           text: '定制主题',
-          link: '/guide/customTheme',
+          link: '/guide/custom-theme',
         },
         {
           text: '字体',
@@ -138,7 +138,7 @@ export default defineConfig({
         },
         {
           text: '常见问题',
-          link: '/guide/commonProblems',
+          link: '/guide/common-problems',
         }
       ],
       '/reward/': [
@@ -151,7 +151,7 @@ export default defineConfig({
           link: '/reward/donor',
         },
       ],
-
+    
       '/component/': [
         {
           text: '基础',
@@ -166,7 +166,7 @@ export default defineConfig({
               link: "/component/layout",
               text: "Layout 布局"
             }, {
-              link: "/component/configProvider",
+              link: "/component/config-provider",
               text: "ConfigProvider 全局配置"
             }, {
               link: "/component/popup",
@@ -181,7 +181,7 @@ export default defineConfig({
           ]
         },
         {
-
+    
           text: "导航",
           items: [{
             link: "/component/pagination",
@@ -194,25 +194,25 @@ export default defineConfig({
             text: "Tabs 标签页"
           }]
         }, {
-
+    
           text: "数据输入",
           items: [{
             link: "/component/calendar",
             text: "Calendar 日历选择器"
           }, {
-            link: "/component/calendarView",
+            link: "/component/calendar-view",
             text: "CalendarView 日历面板"
           }, {
             link: "/component/checkbox",
             text: "Checkbox 复选框"
           }, {
-            link: "/component/colPicker",
+            link: "/component/col-picker",
             text: "ColPicker 多列选择器"
           }, {
-            link: "/component/datetimePicker",
+            link: "/component/datetime-picker",
             text: "DatetimePicker 时间选择器"
           }, {
-            link: "/component/datetimePickerView",
+            link: "/component/datetime-picker-view",
             text: "DatetimePickerView 时间选择器视图"
           }, {
             link: "/component/form",
@@ -221,13 +221,13 @@ export default defineConfig({
             link: "/component/input",
             text: "Input 输入框"
           }, {
-            link: "/component/inputNumber",
+            link: "/component/input-number",
             text: "InputNumber 计数器"
           }, {
             link: "/component/picker",
             text: "Picker 选择器"
           }, {
-            link: "/component/pickerView",
+            link: "/component/picker-view",
             text: "PickerView 选择器视图"
           }, {
             link: "/component/radio",
@@ -239,7 +239,7 @@ export default defineConfig({
             link: "/component/search",
             text: "Search 搜索框"
           }, {
-            link: "/component/selectPicker",
+            link: "/component/select-picker",
             text: "SelectPicker 单复选选择器"
           }, {
             link: "/component/slider",
@@ -254,31 +254,31 @@ export default defineConfig({
         }, {
           text: "反馈",
           items: [{
-            link: "/component/actionSheet",
+            link: "/component/action-sheet",
             text: "ActionSheet 动作面板"
           }, {
-            link: "/component/dropMenu",
+            link: "/component/drop-menu",
             text: "DropMenu 下拉菜单"
           }, {
             link: "/component/loading",
             text: "Loading 加载"
           }, {
-            link: "/component/messageBox",
+            link: "/component/message-box",
             text: "MessageBox 弹框"
           }, {
-            link: "/component/noticeBar",
+            link: "/component/notice-bar",
             text: "NoticeBar 通知栏"
           }, {
             link: "/component/progress",
             text: "Progress 进度条"
           }, {
-            link: "/component/sortButton",
+            link: "/component/sort-button",
             text: "SortButton 排序按钮"
           }, {
-            link: "/component/statusTip",
+            link: "/component/status-tip",
             text: "StatusTip 缺省提示"
           }, {
-            link: "/component/swipeAction",
+            link: "/component/swipe-action",
             text: "SwipeAction 滑动操作"
           }, {
             link: "/component/toast",
@@ -291,7 +291,7 @@ export default defineConfig({
             text: "Tooltip 文字提示"
           }]
         }, {
-
+    
           text: "数据展示",
           items: [{
             link: "/component/badge",
@@ -315,7 +315,7 @@ export default defineConfig({
             link: "/component/img",
             text: "Img 图片"
           }, {
-            link: "/component/imgCropper",
+            link: "/component/img-cropper",
             text: "ImgCropper 图片裁剪"
           }, {
             link: "/component/grid",
@@ -339,6 +339,7 @@ export default defineConfig({
         }
       ]
     }
+    
   },
 
 })
