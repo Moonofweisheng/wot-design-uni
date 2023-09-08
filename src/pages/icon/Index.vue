@@ -2,7 +2,7 @@
   <view>
     <page-wraper>
       <view class="icon-list">
-        <view v-for="(icon, index) in icons" :key="index" class="icon-item">
+        <view v-for="(icon, index) in icons" :key="index" class="icon-item" @click="handleClick(icon)">
           <view><wd-icon :name="icon" size="22px" custom-class="icon-item-class" /></view>
           <view class="icon-item-name">{{ icon }}</view>
         </view>
@@ -77,6 +77,18 @@ const icons = ref([
   'refresh',
   'check'
 ])
+
+function handleClick(icon: string) {
+  // #ifdef H5
+  uni.setClipboardData({
+    data: `<wd-icon name="${icon}" size="22px"></wd-icon>`,
+    success: () => {
+      uni.showToast({ icon: 'none', title: '已复制该图标，粘贴后使用' })
+    }
+  })
+
+  // #endif
+}
 </script>
 <style lang="scss" scoped>
 .wot-theme-dark {
