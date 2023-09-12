@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-09-12 19:08:13
+ * @LastEditTime: 2023-09-12 19:10:02
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -40,9 +40,9 @@ export default defineConfig({
     search: {
       provider: 'algolia',
       options: {
-        appId: '38TOUD5WW9',
-        apiKey: '06a0d60d393c7672523382347c8f9d55',
-        indexName: 'wot-design-uni',
+        appId: 'A74X2RFXSU',
+        apiKey: '6961856d63f5181bf71cb4fa3e4398d2',
+        indexName: 'wot-design-uni2',
       },
     },
 
