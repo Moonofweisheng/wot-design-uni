@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-09-08 17:17:03
+ * @LastEditTime: 2023-09-12 19:08:13
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -63,7 +63,7 @@ export default defineConfig({
           },
           {
             text: '定制主题',
-            link: '/guide/customTheme',
+            link: '/guide/custom-theme',
           },
           {
             text: '字体',
@@ -93,7 +93,7 @@ export default defineConfig({
             link: "/component/calendar",
           }, {
             text: "反馈组件",
-            link: "/component/actionSheet",
+            link: "/component/action-sheet",
           }, {
             text: "数据展示",
             link: "/component/badge",
