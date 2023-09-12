@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.1.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.11...v0.1.12) (2023-09-12)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复文档中定制主题和反馈组件404的问题 ([c0302ad](https://github.com/Moonofweisheng/wot-design-uni/commit/c0302ada89ea15039ef516f4a425b5e18512c2d5))
+* ✏️  修复Button组件文档中loading属性重复的问题 ([b26da5a](https://github.com/Moonofweisheng/wot-design-uni/commit/b26da5aba7d698adc75c3e1d143660a698ce5de8))
+
 ### [0.1.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.10...v0.1.11) (2023-09-08)
 
 
