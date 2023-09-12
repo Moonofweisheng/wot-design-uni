@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.12...v0.1.13) (2023-09-12)
+
+
+### ✨ Features | 新功能
+
+* ✨ Tabs组件增加animated属性支持切换动画 ([2572ea4](https://github.com/Moonofweisheng/wot-design-uni/commit/2572ea4c31f834bb9c8776322c24148ca2bda4e2))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Popover组件content属性必填警告的问题 ([4d8f8e6](https://github.com/Moonofweisheng/wot-design-uni/commit/4d8f8e640742b0588b91b0a5b82a062b976f8306))
+
 ### [0.1.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.11...v0.1.12) (2023-09-12)
 
 
