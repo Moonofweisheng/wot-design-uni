@@ -57,7 +57,7 @@
 
         <!--标签页-->
         <view class="wd-tabs__container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchEnd">
-          <view class="wd-tabs__body">
+          <view :class="['wd-tabs__body', animated ? 'is-animated' : '']" :style="bodyStyle">
             <slot />
           </view>
         </view>
@@ -110,7 +110,7 @@
 
       <!--标签页-->
       <view class="wd-tabs__container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchEnd">
-        <view class="wd-tabs__body">
+        <view :class="['wd-tabs__body', animated ? 'is-animated' : '']" :style="bodyStyle">
           <slot />
         </view>
       </view>
@@ -131,8 +131,8 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, onMounted, provide, ref, watch } from 'vue'
-import { checkNumRange, debounce, getRect, getType } from '../common/util'
+import { computed, getCurrentInstance, onMounted, provide, ref, watch } from 'vue'
+import { checkNumRange, debounce, getRect, getType, objToStyle } from '../common/util'
 import { useTouch } from '../mixins/useTouch'
 
 const $item = '.wd-tabs__nav-item'
@@ -158,6 +158,10 @@ interface Props {
   lineHeight?: number
   color?: string
   inactiveColor?: string
+  // 是否开启切换标签内容时的过渡动画
+  animated?: boolean
+  // 切换动画过渡时间，单位毫秒
+  duration?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -169,7 +173,9 @@ const props = withDefaults(defineProps<Props>(), {
   offsetTop: 0,
   swipeable: false,
   lineWidth: 19,
-  lineHeight: 3
+  lineHeight: 3,
+  animated: false,
+  duration: 300
 })
 
 // 选中值的索引，默认第一个
@@ -180,8 +186,6 @@ const lineStyle = ref<string>('')
 const items = ref<Record<string, any>[]>([])
 // map的开关
 const mapShow = ref<boolean>(false)
-// 标签页偏移量
-const bodyStyle = ref<string>('')
 // scroll-view偏移量
 const scrollLeft = ref<number>(0)
 
@@ -195,6 +199,18 @@ const inited = ref<boolean>(false)
 const { proxy } = getCurrentInstance() as any
 
 const touch = useTouch()
+
+const bodyStyle = computed(() => {
+  if (!props.animated) {
+    return ''
+  }
+
+  return objToStyle({
+    left: -100 * activeIndex.value + '%',
+    'transition-duration': props.duration + 'ms',
+    '-webkit-transition-duration': props.duration + 'ms'
+  })
+})
 
 /**
  * @description 修改选中的tab Index

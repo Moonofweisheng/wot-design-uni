@@ -29,20 +29,6 @@ const tab = ref<number>(0)
 }
 ```
 
-<!-- ## 滑动动画
-
-设置 `animated` 属性，开启tab切换动画。
-
-```html
-<wd-tabs v-model="tab" animated>
-  <block v-for="item in 4" :key="item">
-    <wd-tab :title="`标签${item}`">
-      <view class="content">内容{{ item }}</view>
-    </wd-tab>
-  </block>
-</wd-tabs>
-
-``` -->
 
 ## 粘性布局
 
@@ -100,6 +86,20 @@ const tab = ref<number>(0)
 </wd-tabs>
 ```
 
+## 切换动画
+
+设置 `animated` 属性，开启切换标签内容时的过渡动画。
+
+```html
+<wd-tabs v-model="tab" animated>
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`">
+      <view class="content">内容{{ item }}</view>
+    </wd-tab>
+  </block>
+</wd-tabs>
+```
+
 ---
 
 标签页在标签数大于等于6个时，可以滑动；当标签数大于等于10个时，将会显示导航地图，便于快速定位到某个标签。可以通过设置 `slidable-num` 修改可滑动的数量阈值；设置 `map-num` 修改显示导航地图的阈值。
@@ -114,6 +114,12 @@ const tab = ref<number>(0)
 | sticky | 粘性布局 | boolean | - | false | - |
 | offset-top | 粘性布局时距离窗口顶部距离 | number | - | 0 | - |
 | swipeable | 开启手势滑动 | boolean | - | false | - |
+| lineWidth | 底部条宽度，单位像素 | number | - | 19 | - |
+| lineHeight | 底部条高度，单位像素 | number | - | 3 | - |
+| color | 文字颜色 | string | - | - | - |
+| inactiveColor | 非活动标签文字颜色 | string | - | - | - |
+| animated | 是否开启切换标签内容时的转场动画 | boolean | - | false | - |
+| duration | 切换动画过渡时间，单位毫秒 | number | - | 300 | - |
 
 ## Tab Attributes
 
@@ -130,3 +136,10 @@ const tab = ref<number>(0)
 | change | 绑定值变化时触发 | event = { index, name },index为tab下标，name为tab绑定的值 | - |
 | click | 点击标题时触发 | event = { index, name },index为tab下标，name为tab绑定的值 | - |
 | disabled | 点击禁用的标题时触发| event = { index, name },index为tab下标，name为tab绑定的值 | - |
+
+
+## 外部样式类
+
+| 类名 | 说明 | 最低版本 |
+|-----|------|--------|
+| custom-class | 根结点样式 | - |

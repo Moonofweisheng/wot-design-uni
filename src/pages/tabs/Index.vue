@@ -51,6 +51,16 @@
       </wd-tabs>
     </demo-block>
 
+    <demo-block title="切换动画" transparent>
+      <wd-tabs v-model="tab8" animated>
+        <block v-for="item in 4" :key="item">
+          <wd-tab :title="`标签${item}`" :name="item">
+            <view class="content">内容{{ item }}</view>
+          </wd-tab>
+        </block>
+      </wd-tabs>
+    </demo-block>
+
     <demo-block title="数量大于6时可滚动" transparent>
       <wd-tabs v-model="tab6" lazy-render>
         <block v-for="item in 7" :key="item">
@@ -83,6 +93,7 @@ const tab4 = ref<number>(0)
 const tab5 = ref<number>(0)
 const tab6 = ref<number>(0)
 const tab7 = ref<number>(0)
+const tab8 = ref<number>(0)
 const toast = useToast()
 function handleClick({ index, name }) {
   console.log('event', { index, name })
