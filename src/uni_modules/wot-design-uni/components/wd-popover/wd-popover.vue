@@ -35,8 +35,8 @@
               @click="menuClick(index)"
               :style="index === 0 ? 'border-top: none' : ''"
             >
-              <wd-icon v-if="item.iconClass" :name="item.iconClass" custom-class="wd-popover__icon" />
-              <view style="display: inline-block">{{ item.content }}</view>
+              <wd-icon v-if="typeof item === 'object' && item.iconClass" :name="item.iconClass" custom-class="wd-popover__icon" />
+              <view style="display: inline-block">{{ typeof item === 'object' && item.content ? item.content : '' }}</view>
             </view>
           </view>
           <!-- 用户自定义样式 -->
@@ -90,7 +90,7 @@ interface Props {
   // 是否显示 popover 箭头
   visibleArrow?: boolean
   // 显示内容
-  content: string | Record<string, any>[]
+  content?: string | Record<string, any>[]
   placement?: PlacementType
   offset?: number
   useContentSlot?: boolean
