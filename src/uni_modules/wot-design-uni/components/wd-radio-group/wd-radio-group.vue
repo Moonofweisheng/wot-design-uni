@@ -76,7 +76,6 @@ const emit = defineEmits(['change', 'update:modelValue'])
  * @param child
  */
 function setChild(child) {
-  checkValue(child)
   const hasChild = children.findIndex((radio) => {
     return radio.$.uid === child.$.uid
   })
@@ -87,17 +86,6 @@ function setChild(child) {
   }
 }
 
-/**
- * @description 检测radio绑定的value是否已经被其他节点绑定
- */
-function checkValue(child) {
-  children.forEach((radio) => {
-    const value = child.value
-    if (radio.$.uid !== child.$.uid && radio.value === value) {
-      throw Error(`The radio's bound value: ${value} has been used `)
-    }
-  })
-}
 /**
  * 修改选中的radio
  * @param value - radio绑定的value
@@ -126,7 +114,6 @@ defineExpose({
   setChild,
   handleClick,
   changeSelect,
-  checkValue,
   children
 })
 

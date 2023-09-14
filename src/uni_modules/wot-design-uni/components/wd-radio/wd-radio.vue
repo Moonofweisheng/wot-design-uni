@@ -115,8 +115,6 @@ watch(
     }
     // 当建立relations关系之后，radio的value改变,以下内容才能执行
     if (!parent || newValue === null) return
-    // 检查自己绑定的值是否和其它radio冲突
-    parent.$.exposed.checkValue(proxy)
     // 会判断新value是否和radioGroup的value一致，一致就会调用radio的方法选中此节点。
     // 如果之前本节点被选中，匹配不上还要主动关闭自己
     if (newValue === parent.modelValue) {
