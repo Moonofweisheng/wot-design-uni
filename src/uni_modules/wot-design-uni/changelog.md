@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.13...v0.1.14) (2023-09-14)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  增加QQ群沟通渠道 ([80efad9](https://github.com/Moonofweisheng/wot-design-uni/commit/80efad950613d65e7e65d305ad6efe7cd0e201d8))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复SelectPicker 单复选选择器单选可搜索状态搜索报错的问题([#38](https://github.com/Moonofweisheng/wot-design-uni/issues/38)) ([01cf01d](https://github.com/Moonofweisheng/wot-design-uni/commit/01cf01d46fbc4ac35f0c09e3db6f6d18b2d3455e))
+
 ### [0.1.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.12...v0.1.13) (2023-09-12)
 
 
