@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.16](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.15...v0.1.16) (2023-09-18)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 WaterMark 水印组件 ([70d8c25](https://github.com/Moonofweisheng/wot-design-uni/commit/70d8c2546135fce1709edb0e1ba0c3b66c1e9e2e))
+
 ### [0.1.15](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.14...v0.1.15) (2023-09-18)
 
 
