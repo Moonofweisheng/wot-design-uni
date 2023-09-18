@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-09-14 18:48:45
+ * @LastEditTime: 2023-09-18 23:01:04
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -336,6 +336,9 @@ export default defineConfig({
           }, {
             link: "/component/tag",
             text: "Tag 标签"
+          }, {
+            link: "/component/watermark",
+            text: "Watermark 水印"
           }]
         }
       ]

@@ -551,6 +551,16 @@
           },
           "navigationBarTitleText": "ConfigProvider 全局配置"
         }
+      },
+      {
+        "path": "pages/watermark/Index",
+        "name": "watermark",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Watermark 水印"
+        }
       }
     ],
     // "tabBar": {

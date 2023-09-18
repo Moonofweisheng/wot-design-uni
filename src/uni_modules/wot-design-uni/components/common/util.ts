@@ -20,7 +20,7 @@ function s4() {
  * @param {Number} num
  * @return {string} num+px
  */
-export function addUnit(num) {
+export function addUnit(num: number) {
   return Number.isNaN(Number(num)) ? num : `${num}px`
 }
 
@@ -341,6 +341,16 @@ export function isBoolean(value: any): value is boolean {
 }
 
 /**
+ * 是否为base64图片
+ * @param {string} url
+ * @return
+ */
+export function isBase64Image(url: string) {
+  // 使用正则表达式检查URL是否以"data:image"开头，这是Base64图片的常见前缀
+  return /^data:image\/(png|jpg|jpeg|gif|bmp);base64,/.test(url)
+}
+
+/**
  * 将外部传入的样式格式化为可读的 CSS 样式。
  * @param {object | object[]} styles 外部传入的样式对象或数组
  * @returns {string} 格式化后的 CSS 样式字符串
@@ -464,4 +474,23 @@ export function deepMerge<T extends Record<string, any>>(target: T, source: Reco
   }
 
   return target
+}
+
+/**
+ * 构建带参数的URL
+ * @param baseUrl 基础URL
+ * @param params 参数对象，键值对表示要添加到URL的参数
+ * @returns 返回带有参数的URL
+ */
+export function buildUrlWithParams(baseUrl: string, params: Record<string, string>) {
+  // 将参数对象转换为查询字符串
+  const queryString = Object.entries(params)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join('&')
+
+  // 检查基础URL是否已包含查询字符串，并选择适当的分隔符
+  const separator = baseUrl.includes('?') ? '&' : '?'
+
+  // 返回带有参数的URL
+  return `${baseUrl}${separator}${queryString}`
 }
