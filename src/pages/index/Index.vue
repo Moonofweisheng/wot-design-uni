@@ -294,6 +294,10 @@ const list = ref([
       {
         id: 'tag',
         name: 'Tag 标签'
+      },
+      {
+        id: 'watermark',
+        name: 'Watermark 水印'
       }
     ]
   }
