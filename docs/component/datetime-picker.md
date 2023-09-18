@@ -60,13 +60,13 @@ const value = ref<number>(Date.now())
 
 ## time 类型
 
-`time` 类型只展示时分。
+`time` 类型只展示时分，绑定值为 `HH:mm` 格式。
 
 ```html
 <wd-datetime-picker type="time" v-model="value" label="时分" />
 ```
 ```typescript
-const value = ref<number>(Date.now())
+const value4 = ref<string>('09:20')
 ```
 
 ## 修改展示格式
