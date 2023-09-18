@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.15](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.14...v0.1.15) (2023-09-18)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  优化DateTimePicker组件关于time类型选择器绑定值格式的介绍 ([9e958c7](https://github.com/Moonofweisheng/wot-design-uni/commit/9e958c73f1d09ee0e02097e3ca8eeabfcc1bc59b))
+
 ### [0.1.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.13...v0.1.14) (2023-09-14)
 
 
