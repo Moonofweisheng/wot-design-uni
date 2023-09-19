@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.17](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.16...v0.1.17) (2023-09-19)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Slider 滑块组件最大值和最小值不生效的问题([#43](https://github.com/Moonofweisheng/wot-design-uni/issues/43)) ([0fa7f46](https://github.com/Moonofweisheng/wot-design-uni/commit/0fa7f46718e918007491a3d9494292a003924243))
+
 ### [0.1.16](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.15...v0.1.16) (2023-09-18)
 
 
