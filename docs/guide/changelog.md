@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.18](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.17...v0.1.18) (2023-09-19)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  README中增加展示 star-history ([e7cd794](https://github.com/Moonofweisheng/wot-design-uni/commit/e7cd794201435ae8109b562daf70def74ab4ac98))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 PickerView 组件选中框被遮盖的问题([#46](https://github.com/Moonofweisheng/wot-design-uni/issues/46)) ([a60440b](https://github.com/Moonofweisheng/wot-design-uni/commit/a60440b8c52723e4c194b103e9b1b236a7cb29fe))
+
 ### [0.1.17](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.16...v0.1.17) (2023-09-19)
 
 
