@@ -65,7 +65,7 @@
 
   @include edeep(roller) {
     background: rgba(245, 245, 245, 1);
-    z-index: -1;
+    z-index: 0;
 
     &::before,
     &::after {
