@@ -9,6 +9,9 @@
     <demo-block title="指定步长">
       <wd-slider v-model="value4" hide-min-max :step="10" />
     </demo-block>
+    <demo-block title="指定最大值和最小值">
+      <wd-slider v-model="value7" :min="5" :max="50" />
+    </demo-block>
     <demo-block title="禁用状态">
       <wd-slider v-model="value5" disabled />
     </demo-block>
@@ -25,6 +28,7 @@ const value2 = ref<number>(479)
 const value4 = ref<number>(11)
 const value5 = ref<number>(70)
 const value6 = ref<number[]>([20, 40])
+const value7 = ref<number>(20)
 </script>
 
 <style lang="css" scoped></style>
