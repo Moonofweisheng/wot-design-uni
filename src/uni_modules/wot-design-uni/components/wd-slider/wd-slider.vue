@@ -123,8 +123,11 @@ watch(
       maxValue.value = 100
       console.warn('[wot design] warning(wd-slider): max value must be greater than 0')
     } else if (newValue <= props.min) {
-      maxValue.value = 100
+      maxValue.value = props.min // 交换最大值和最小值
+      minValue.value = newValue
       console.warn('[wot design] warning(wd-slider): max value must be greater than min value')
+    } else {
+      maxValue.value = newValue // 更新最大值
     }
   },
   { deep: true, immediate: true }
@@ -136,9 +139,12 @@ watch(
     if (newValue < 0) {
       minValue.value = 0
       console.warn('[wot design] warning(wd-slider): min value must be greater than 0')
-    } else if (newValue <= props.min) {
-      minValue.value = 0
+    } else if (newValue >= props.max) {
+      minValue.value = props.max // 交换最小值和最大值
+      maxValue.value = newValue
       console.warn('[wot design] warning(wd-slider): min value must be less than max value')
+    } else {
+      minValue.value = newValue // 更新最小值
     }
   },
   { deep: true, immediate: true }
