@@ -1,6 +1,21 @@
 # 更新日志 
 
 
+### [0.1.20](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.19...v0.1.20) (2023-09-20)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  恢复展示 Circle 组件的演示Demo ([c2cba05](https://github.com/Moonofweisheng/wot-design-uni/commit/c2cba056578593172998f03592652ab63ed23aef))
+* ✏️  文档演示项目 Circle 页面文件调整为大写 ([fff8de8](https://github.com/Moonofweisheng/wot-design-uni/commit/fff8de8f8d5f829c5b054d863905a7bb116f45f4))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Circle 组件重复创建canvas导致警告的问题 ([6917201](https://github.com/Moonofweisheng/wot-design-uni/commit/69172016ba840458dd40755050929a8231fd4cd5))
+* 🐛 修复 Skeleton 骨架屏组件编译到APP端异常的问题([#52](https://github.com/Moonofweisheng/wot-design-uni/issues/52)) ([7a9a31b](https://github.com/Moonofweisheng/wot-design-uni/commit/7a9a31bd5db76419408a114fbed02c108b972049))
+* 🐛 修复 Tag 组件编译到微信小程序平台样式错误的问题([#53](https://github.com/Moonofweisheng/wot-design-uni/issues/53)) ([6aec241](https://github.com/Moonofweisheng/wot-design-uni/commit/6aec2414a384c68e7b4b09f57d028173be942f7b))
+
 ### [0.1.19](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.18...v0.1.19) (2023-09-20)
 
 
