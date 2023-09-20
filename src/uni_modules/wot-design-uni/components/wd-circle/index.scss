@@ -1,0 +1,18 @@
+@import "../common/abstracts/variable.scss";
+@import "../common/abstracts/_mixin.scss";
+
+@include b(circle) {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+
+  @include e(text) {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    color: $-circle-text-color;
+  }
+}

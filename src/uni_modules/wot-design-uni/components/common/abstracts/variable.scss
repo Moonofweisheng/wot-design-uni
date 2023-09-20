@@ -704,23 +704,26 @@ $-curtain-content-close-color: var(--wot-curtain-content-close-color, $-color-wh
 $-curtain-content-close-fs: var(--wot-curtain-content-close-fs, $-fs-big) !default; // 关闭按钮大小
 
 // Notify
-$notify-text-color: var(--wot-notify-text-color, $-color-white) !default;
-$notify-padding: var(--wot-notify-padding, 8px 16px) !default;
-$notify-font-size: var(--wot-notify-font-size, $-fs-content) !default;
-$notify-line-height: var(--wot-notify-line-height, 20px) !default;
-$notify-primary-background: var(--wot-notify-primary-background, $-color-theme) !default;
-$notify-success-background: var(--wot-notify-success-background, $-color-success) !default;
-$notify-danger-background: var(--wot-notify-danger-background, $-color-danger) !default;
-$notify-warning-background: var(--wot-notify-warning-background, $-color-warning) !default;
+$-notify-text-color: var(--wot-notify-text-color, $-color-white) !default;
+$-notify-padding: var(--wot-notify-padding, 8px 16px) !default;
+$-notify-font-size: var(--wot-notify-font-size, $-fs-content) !default;
+$-notify-line-height: var(--wot-notify-line-height, 20px) !default;
+$-notify-primary-background: var(--wot-notify-primary-background, $-color-theme) !default;
+$-notify-success-background: var(--wot-notify-success-background, $-color-success) !default;
+$-notify-danger-background: var(--wot-notify-danger-background, $-color-danger) !default;
+$-notify-warning-background: var(--wot-notify-warning-background, $-color-warning) !default;
 
 // Skeleton
-$skeleton-background-color: var(--wot-skeleton-background-color, #eee) !default;
-$skeleton-animation-gradient: var(--wot-skeleton-animation-gradient, rgba(0, 0, 0, 0.04)) !default;
-$skeleton-animation-flashed: var(--wot-skeleton-animation-flashed, rgba(230, 230, 230, 0.3)) !default;
-$skeleton-text-height-default: var(--wot-skeleton-text-height-default, 16px) !default;
-$skeleton-rect-height-default: var(--wot-skeleton-rect-height-default, 16px) !default;
-$skeleton-circle-height-default: var(--wot-skeleton-circle-height-default, 48px) !default;
-$skeleton-row-margin-bottom: var(--wot-skeleton-row-margin-bottom, 16px) !default;
-$skeleton-border-radius-text: var(--wot-skeleton-border-radius-text, 2px) !default;
-$skeleton-border-radius-rect: var(--wot-skeleton-border-radius-rect, 4px) !default;
-$skeleton-border-radius-circle: var(--wot-skeleton-border-radius-circle, 50%) !default;
+$-skeleton-background-color: var(--wot-skeleton-background-color, #eee) !default;
+$-skeleton-animation-gradient: var(--wot-skeleton-animation-gradient, rgba(0, 0, 0, 0.04)) !default;
+$-skeleton-animation-flashed: var(--wot-skeleton-animation-flashed, rgba(230, 230, 230, 0.3)) !default;
+$-skeleton-text-height-default: var(--wot-skeleton-text-height-default, 16px) !default;
+$-skeleton-rect-height-default: var(--wot-skeleton-rect-height-default, 16px) !default;
+$-skeleton-circle-height-default: var(--wot-skeleton-circle-height-default, 48px) !default;
+$-skeleton-row-margin-bottom: var(--wot-skeleton-row-margin-bottom, 16px) !default;
+$-skeleton-border-radius-text: var(--wot-skeleton-border-radius-text, 2px) !default;
+$-skeleton-border-radius-rect: var(--wot-skeleton-border-radius-rect, 4px) !default;
+$-skeleton-border-radius-circle: var(--wot-skeleton-border-radius-circle, 50%) !default;
+
+// circle
+$-circle-text-color: var(--wot-circle-text-color, $-color-content) !default; // circle文字颜色

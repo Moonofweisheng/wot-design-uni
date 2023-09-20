@@ -561,6 +561,16 @@
           },
           "navigationBarTitleText": "Watermark 水印"
         }
+      },
+      {
+        "path": "pages/circle/Index",
+        "name": "circle",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Circle 环形进度条"
+        }
       }
     ],
     // "tabBar": {

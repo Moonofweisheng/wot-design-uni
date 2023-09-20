@@ -273,6 +273,9 @@ export default defineConfig({
             link: "/component/progress",
             text: "Progress 进度条"
           }, {
+            link: "/component/circle",
+            text: "Circle 环形进度条"
+          }, {
             link: "/component/sort-button",
             text: "SortButton 排序按钮"
           }, {
