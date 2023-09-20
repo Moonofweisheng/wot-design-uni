@@ -72,11 +72,11 @@
   @include when(dynamic-input) {
     border-color: $-tag-primary-color;
   }
-  @include e(icon) {
+  @include edeep(icon) {
     display: inline-block;
     margin-right: 4px;
-    font-size: $-tag-small-fs;
-    line-height: $-tag-small-fs;
+    font-size: $-tag-fs;
+    line-height: 1.2;
     vertical-align: baseline;
   }
   @include e(text) {
@@ -92,7 +92,7 @@
     vertical-align: middle;
     padding: 0;
   }
-  @include e(close) {
+  @include edeep(close) {
     display: inline-block;
     margin-left: 24px;
     margin-right: -4px;
