@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.19](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.18...v0.1.19) (2023-09-20)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Cell、Grid 组件跳转方法在编译到H5端失效的问题([#49](https://github.com/Moonofweisheng/wot-design-uni/issues/49)) ([51425b1](https://github.com/Moonofweisheng/wot-design-uni/commit/51425b107a8b262bf9c1f0c7ee41bb8d56a12837))
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Circle 环形进度条组件，支持进度渐变动画 ([7c38a6f](https://github.com/Moonofweisheng/wot-design-uni/commit/7c38a6f03e76d91d82a80d2a4cdd875acfb7290b))
+
 ### [0.1.18](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.17...v0.1.18) (2023-09-19)
 
 
