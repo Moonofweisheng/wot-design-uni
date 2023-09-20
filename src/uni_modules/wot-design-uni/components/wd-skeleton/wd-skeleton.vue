@@ -77,7 +77,7 @@ function getColItemStyle(rowCol: SkeletonRowColObj) {
   const styleName = ['size', 'width', 'height', 'margin', 'background', 'marginLeft', 'marginRight', 'borderRadius', 'backgroundColor']
 
   for (const name of styleName) {
-    if (Object.hasOwn(rowCol, name)) {
+    if (Object.prototype.hasOwnProperty.call(rowCol, name)) {
       const px = addUnit(rowCol[name])
 
       if (name === 'size') {
