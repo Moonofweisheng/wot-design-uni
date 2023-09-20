@@ -208,6 +208,10 @@ const list = ref([
         name: 'Progress 进度条'
       },
       {
+        id: 'circle',
+        name: 'Circle 环形进度条'
+      },
+      {
         id: 'sortButton',
         name: 'SortButton 排序按钮'
       },

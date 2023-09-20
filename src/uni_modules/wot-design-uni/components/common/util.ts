@@ -26,11 +26,11 @@ export function addUnit(num: number) {
 
 /**
  * @description 判断target是否对象
- * @param obj
+ * @param value
  * @return {boolean}
  */
-export function isObj(obj: any): boolean {
-  return Object.prototype.toString.call(obj) === '[object Object]' || typeof obj === 'object'
+export function isObj(value: any): value is object {
+  return Object.prototype.toString.call(value) === '[object Object]' || typeof value === 'object'
 }
 
 /**

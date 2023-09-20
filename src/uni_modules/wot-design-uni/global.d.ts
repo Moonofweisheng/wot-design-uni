@@ -67,6 +67,8 @@ declare module '@vue/runtime-core' {
     WdTransition: typeof import('./components/wd-transition/wd-transition.vue')['default']
     WdUpload: typeof import('./components/wd-upload/wd-upload.vue')['default']
     WdNotify: typeof import('./components/wd-notify/wd-notify.vue')['default']
+    WdWatermark: typeof import('./components/wd-watermark/wd-watermark.vue')['default']
+    WdCircle: typeof import('./components/wd-circle/wd-circle.vue')['default']
   }
 }
 
