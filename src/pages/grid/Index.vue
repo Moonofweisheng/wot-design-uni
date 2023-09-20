@@ -126,8 +126,8 @@
         </demo-block>
         <demo-block title="页面导航" transparent>
           <wd-grid clickable>
-            <wd-grid-item link-type="redirectTo" url="/pages/button/index" @itemclick="click" icon="edit-outline" text="Redirect to ..." />
-            <wd-grid-item link-type="navigateTo" url="/pages/button/index" @itemclick="click" icon="edit-outline" text="Navigate to ..." />
+            <wd-grid-item link-type="redirectTo" url="/pages/button/Index" @itemclick="click" icon="edit-outline" text="Redirect to ..." />
+            <wd-grid-item link-type="navigateTo" url="/pages/button/Index" @itemclick="click" icon="edit-outline" text="Navigate to ..." />
           </wd-grid>
         </demo-block>
         <demo-block title="提示信息" transparent>

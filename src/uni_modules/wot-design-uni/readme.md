@@ -103,6 +103,3 @@
 ## LICENSE
 
 [MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/develop/LICENSE)
-
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Moonofweisheng/wot-design-uni&type=Date)](https://star-history.com/#Moonofweisheng/wot-design-uni&Date)

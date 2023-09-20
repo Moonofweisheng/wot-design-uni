@@ -108,7 +108,11 @@ function onClick() {
     emit('click')
   }
   if (url && props.isLink) {
-    ;(uni as any)[props.replace ? 'redirectTo' : 'navigateTo']({ url })
+    if (props.replace) {
+      uni.redirectTo({ url })
+    } else {
+      uni.navigateTo({ url })
+    }
   }
 }
 </script>

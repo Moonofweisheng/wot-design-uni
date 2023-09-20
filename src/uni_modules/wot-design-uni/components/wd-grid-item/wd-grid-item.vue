@@ -129,10 +129,34 @@ function init() {
 function click() {
   if (!parent.clickable) return
   const { url, linkType } = props
-  if (url) {
-    ;(uni as any)[linkType]({ url })
-  }
   emit('itemclick')
+  if (url) {
+    switch (linkType) {
+      case 'navigateTo':
+        uni.navigateTo({
+          url
+        })
+        break
+      case 'reLaunch':
+        uni.reLaunch({
+          url
+        })
+        break
+      case 'redirectTo':
+        uni.redirectTo({
+          url
+        })
+        break
+      case 'switchTab':
+        uni.switchTab({
+          url
+        })
+        break
+      default:
+        console.warn(`[wot-design] warning(wd-grid-item): linkType can not be ${linkType}`)
+        break
+    }
+  }
 }
 /**
  * 设置样式
