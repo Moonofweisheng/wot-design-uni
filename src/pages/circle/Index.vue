@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-09-20 22:32:34
+ * @LastEditTime: 2023-09-20 22:51:55
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\circle\index.vue
+ * 记得注释
+-->
 <template>
   <view class="circle">
     <page-wraper>
@@ -5,11 +14,11 @@
         <wd-circle custom-class="custom-circle" v-model="current" :text="current + '%'" />
       </demo-block>
       <demo-block title="样式定制">
-        <wd-circle custom-class="custom-circle" v-model="current" :stroke-width="6" text="宽度定制" />
+        <!-- <wd-circle custom-class="custom-circle" v-model="current" :stroke-width="6" text="宽度定制" />
         <wd-circle custom-class="custom-circle" v-model="current" layer-color="#eee" color="#ee0a24" text="颜色定制" />
         <wd-circle custom-class="custom-circle" v-model="current" :color="gradientColor" text="渐变色" />
         <wd-circle custom-class="custom-circle" v-model="current" color="#07c160" :clockwise="false" text="逆时针" />
-        <wd-circle custom-class="custom-circle" v-model="current" :size="120" text="大小定制" />
+        <wd-circle custom-class="custom-circle" v-model="current" :size="120" text="大小定制" /> -->
       </demo-block>
 
       <demo-block>
