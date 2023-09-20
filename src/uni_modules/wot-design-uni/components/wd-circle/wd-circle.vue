@@ -105,7 +105,7 @@ const pixel = ref<number>(1) // 设备像素比
 const currentValue = ref<number>(0) // 当前值
 const interval = ref<any>(null) // 定时器
 const canvasId = ref<string>(uuid()) // canvasId
-
+let ctx: UniApp.CanvasContext | null = null
 // canvas渲染大小
 const canvasSize = computed(() => {
   return props.size * pixel.value
@@ -197,7 +197,9 @@ const { proxy } = getCurrentInstance() as any
  * 获取canvas上下文
  */
 function getContext() {
-  const ctx = uni.createCanvasContext(canvasId.value, proxy)
+  if (!ctx) {
+    ctx = uni.createCanvasContext(canvasId.value, proxy)
+  }
   return Promise.resolve(ctx)
 }
 
