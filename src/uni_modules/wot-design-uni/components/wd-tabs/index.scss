@@ -11,11 +11,17 @@
     }
 
     @include e(nav-item) {
-      color: $-dark-color;
+      color: $-dark-color3;
+
+      @include when(active) {
+        font-weight: 600;
+        color: $-dark-color;
+      }
 
       @include when(disabled) {
         color: $-dark-color-gray;
       }
+
     }
 
     @include e(map-nav-btn) {
@@ -95,7 +101,7 @@
     transition: color .3s;
 
     @include when(active) {
-      font-weight: 500;
+      font-weight: 600;
     }
 
     @include when(disabled) {
