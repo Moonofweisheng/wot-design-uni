@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.22](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.21...v0.1.22) (2023-09-25)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Swiper 轮播图组件 ([cf9fe98](https://github.com/Moonofweisheng/wot-design-uni/commit/cf9fe9807efe863e786bc56eedf506647ac143d2))
+
 ### [0.1.21](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.20...v0.1.21) (2023-09-22)
 
 ### [0.1.20](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.19...v0.1.20) (2023-09-20)
