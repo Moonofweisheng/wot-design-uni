@@ -571,6 +571,16 @@
           },
           "navigationBarTitleText": "Circle 环形进度条"
         }
+      },
+      {
+        "path": "pages/swiper/Index",
+        "name": "swiper",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Swiper 轮播图"
+        }
       }
     ],
     // "tabBar": {

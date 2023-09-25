@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-09-18 22:40:18
+ * @LastEditTime: 2023-09-25 11:09:32
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\components\demo-block\demo-block.vue
@@ -69,9 +69,11 @@ function setStyle() {
 
 .demo-block {
   position: relative;
-  margin-bottom: 15px;
   &:not(:first-child) {
-    margin: 15px 0;
+    margin-top: 15px;
+  }
+  &:not(:last-child) {
+    margin-bottom: 15px;
   }
   color: #666;
   overflow: hidden;

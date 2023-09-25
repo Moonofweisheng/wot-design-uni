@@ -20,7 +20,7 @@ function s4() {
  * @param {Number} num
  * @return {string} num+px
  */
-export function addUnit(num: number) {
+export function addUnit(num: number | string) {
   return Number.isNaN(Number(num)) ? num : `${num}px`
 }
 

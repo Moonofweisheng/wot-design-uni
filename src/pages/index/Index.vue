@@ -302,6 +302,10 @@ const list = ref([
       {
         id: 'watermark',
         name: 'Watermark 水印'
+      },
+      {
+        id: 'swiper',
+        name: 'Swiper 轮播图'
       }
     ]
   }

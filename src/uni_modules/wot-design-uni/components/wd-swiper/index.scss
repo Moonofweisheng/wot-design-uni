@@ -1,0 +1,23 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(swiper) {
+  position: relative;
+  @include e(track){
+    border-radius: $-swiper-radius;
+    overflow: hidden;
+    transform: translateY(0);
+  }
+
+  @include e(item){
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: $-swiper-item-padding;
+  }
+
+  @include e(image){
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+}

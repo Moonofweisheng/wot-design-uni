@@ -1,0 +1,159 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(swiper-nav) {
+
+  @include e(btn) {
+    @include m(prev, next) {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: $-swiper-nav-btn-size;
+      height: $-swiper-nav-btn-size;
+      border-radius: 50%;
+      background: $-swiper-nav-btn-bg-color;
+
+      &::after {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: block;
+        content: '';
+        width: 12rpx;
+        height: 12rpx;
+        border-color: $-swiper-nav-btn-color;
+        border-style: solid;
+      }
+    }
+
+    @include m(prev) {
+      left: 30rpx;
+
+      &::after {
+        margin-left: 4rpx;
+        border-width: 2rpx 0 0 2rpx;
+        transform: translate(-50%, -50%) rotateZ(-45deg);
+      }
+    }
+
+    @include m(next) {
+      right: 30rpx;
+
+      &::after {
+        margin-left: -4rpx;
+        border-width: 2rpx 2rpx 0 0;
+        transform: translate(-50%, -50%) rotateZ(45deg);
+      }
+    }
+  }
+
+  @include m(dots, dots-bar) {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @include m(fraction) {
+    padding: 0 16rpx;
+    height: $-swiper-nav-fraction-height;
+    line-height: $-swiper-nav-fraction-height;
+    border-radius: calc($-swiper-nav-fraction-height / 2);
+    background: $-swiper-nav-fraction-bg-color;
+    color: $-swiper-nav-fraction-color;
+    font-size: $-swiper-nav-fraction-font-size;
+  }
+
+
+  @include e(item) {
+    @include m(dots, dots-bar) {
+      width: $-swiper-nav-dot-size;
+      height: $-swiper-nav-dot-size;
+      background: $-swiper-nav-dot-color;
+      border-radius: 50%;
+      margin: 0 10rpx;
+      transition: all 0.4s ease-in;
+
+      @include when(vertical) {
+        margin: 10rpx 0;
+      }
+
+      @include when(active) {
+        background-color: $-swiper-nav-dot-active-color;
+      }
+    }
+
+    @include m(dots-bar) {
+
+      @include when(vertical) {
+        @include when(active) {
+          width: $-swiper-nav-dot-size;
+          height: $-swiper-nav-dots-bar-active-width;
+        }
+      }
+
+      @include when(active) {
+        width: $-swiper-nav-dots-bar-active-width;
+        border-radius: calc($-swiper-nav-dot-size / 2);
+        background-color: $-swiper-nav-dot-active-color;
+      }
+    }
+
+  }
+
+
+  @include m(left) {
+    position: absolute;
+    left: 24rpx;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @include m(right) {
+    position: absolute;
+    right: 24rpx;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @include m(top-left) {
+    position: absolute;
+    top: 24rpx;
+    left: 24rpx;
+  }
+
+  @include m(top) {
+    position: absolute;
+    left: 50%;
+    top: 24rpx;
+    transform: translateX(-50%);
+  }
+
+  @include m(top-right) {
+    position: absolute;
+    top: 24rpx;
+    right: 24rpx;
+  }
+
+  @include m(bottom-left) {
+    position: absolute;
+    left: 24rpx;
+    bottom: 24rpx;
+  }
+
+  @include m(bottom) {
+    position: absolute;
+    left: 50%;
+    bottom: 24rpx;
+    transform: translateX(-50%);
+  }
+
+  @include m(bottom-right) {
+    position: absolute;
+    right: 24rpx;
+    bottom: 24rpx;
+  }
+
+  @include m(vertical) {
+    flex-direction: column;
+  }
+
+}

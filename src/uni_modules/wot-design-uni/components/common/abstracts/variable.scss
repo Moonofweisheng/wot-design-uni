@@ -20,6 +20,16 @@ $-color-blue: var(--wot-color-blue, #2bb3ed) !default; // 蓝色
 
 $-color-info: var(--wot-color-info, #909399) !default;
 
+$-font-gray-1: var(--wot-font-gray-1, rgba(0, 0, 0, 0.9));
+$-font-gray-2: var(--wot-font-gray-2, rgba(0, 0, 0, 0.6));
+$-font-gray-3: var(--wot-font-gray-3, rgba(0, 0, 0, 0.4));
+$-font-gray-4: var(--wot-font-gray-4, rgba(0, 0, 0, 0.26));
+
+$-font-white-1: var(--wot-font-white-1, rgba(255, 255, 255, 1));
+$-font-white-2: var(--wot-font-white-2, rgba(255, 255, 255, 0.55));
+$-font-white-3: var(--wot-font-white-3, rgba(255, 255, 255, 0.35));
+$-font-white-4: var(--wot-font-white-4, rgba(255, 255, 255, 0.22));
+
 
 /* 文字颜色（默认浅色背景下 */
 $-color-title: var(--wot-color-title, $-color-black) !default; // 模块标题/重要正文 000
@@ -727,3 +737,24 @@ $-skeleton-border-radius-circle: var(--wot-skeleton-border-radius-circle, 50%) !
 
 // circle
 $-circle-text-color: var(--wot-circle-text-color, $-color-content) !default; // circle文字颜色
+
+// swiper
+$-swiper-radius: var(--wot-swiper-radius, 8px);
+$-swiper-item-padding: var(--wot-swiper-item-padding, 0);
+
+
+// swiper-nav
+// dot & dots-bar
+$-swiper-nav-dot-color: var(--wot-swiper-nav-dot-color, $-font-white-2) !default;
+$-swiper-nav-dot-active-color: var(--wot-swiper-nav-dot-active-color, $-font-white-1) !default;
+$-swiper-nav-dot-size: var(--wot-swiper-nav-dot-size, 12rpx) !default;
+$-swiper-nav-dots-bar-active-width: var(--wot-swiper-nav-dots-bar-active-width, 40rpx) !default;
+// fraction
+$-swiper-nav-fraction-color: var(--wot-swiper-nav-fraction-color, $-font-white-1) !default;
+$-swiper-nav-fraction-bg-color: var(--wot-swiper-nav-fraction-bg-color, $-font-gray-3) !default;
+$-swiper-nav-fraction-height: var(--wot-swiper-nav-fraction-height, 48rpx) !default;
+$-swiper-nav-fraction-font-size: var(--wot-swiper-nav-fraction-font-size, 24rpx) !default;
+// button
+$-swiper-nav-btn-color: var(--wot-swiper-nav-btn-color, $-font-white-1) !default;
+$-swiper-nav-btn-bg-color: var(--wot-swiper-nav-btn-bg-color, $-font-gray-3) !default;
+$-swiper-nav-btn-size: var(--wot-swiper-nav-btn-size, 48rpx) !default;
