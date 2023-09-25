@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-07 18:49:03
- * @LastEditTime: 2023-09-07 14:09:13
+ * @LastEditTime: 2023-09-25 11:08:33
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\components\page-wraper\page-wraper.vue
@@ -63,5 +63,9 @@ onMounted(() => {
 }
 .page-wraper {
   min-height: calc(100vh - var(--window-top));
+  box-sizing: border-box;
+  padding-bottom: 0;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 </style>

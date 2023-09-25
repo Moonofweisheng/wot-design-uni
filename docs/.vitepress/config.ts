@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-09-18 23:01:04
+ * @LastEditTime: 2023-09-25 16:37:38
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -342,6 +342,9 @@ export default defineConfig({
           }, {
             link: "/component/watermark",
             text: "Watermark 水印"
+          }, {
+            link: "/component/swiper",
+            text: "Swiper 轮播图"
           }]
         }
       ]
