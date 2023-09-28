@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2023-09-25 17:28:12
+ * @LastEditTime: 2023-09-28 10:52:51
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\global.d.ts
+ * 记得注释
+ */
 // For this project development
 import '@vue/runtime-core'
 
@@ -71,6 +80,7 @@ declare module '@vue/runtime-core' {
     WdCircle: typeof import('./components/wd-circle/wd-circle.vue')['default']
     WdSwiper: typeof import('./components/wd-swiper/wd-swiper.vue')['default']
     WdSwiperNav: typeof import('./components/wd-swiper-nav/wd-swiper-nav.vue')['default']
+    WdSegmented: typeof import('./components/wd-segmented/wd-segmented.vue')['default']
   }
 }
 

@@ -31,6 +31,7 @@ $-font-white-3: var(--wot-font-white-3, rgba(255, 255, 255, 0.35));
 $-font-white-4: var(--wot-font-white-4, rgba(255, 255, 255, 0.22));
 
 
+
 /* 文字颜色（默认浅色背景下 */
 $-color-title: var(--wot-color-title, $-color-black) !default; // 模块标题/重要正文 000
 $-color-content: var(--wot-color-content, #262626) !default; // 普通正文 262626
@@ -758,3 +759,11 @@ $-swiper-nav-fraction-font-size: var(--wot-swiper-nav-fraction-font-size, 24rpx)
 $-swiper-nav-btn-color: var(--wot-swiper-nav-btn-color, $-font-white-1) !default;
 $-swiper-nav-btn-bg-color: var(--wot-swiper-nav-btn-bg-color, $-font-gray-3) !default;
 $-swiper-nav-btn-size: var(--wot-swiper-nav-btn-size, 48rpx) !default;
+
+
+// segmented
+$-segmented-item-bg-color: var(--wot-segmented-item-bg-color, #eeeeee) !default;
+$-segmented-item-color: var(--wot-segmented-item-color, rgba(0, 0, 0, 0.85)) !default; // 标题文字颜色
+$-segmented-item-acitve-bg: var(--wot-segmented-item-acitve-bg, #FFFFFF) !default; // 标题文字颜色
+$-segmented-item-disabled-color: var(--wot-segmented-item-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 标题文字禁用颜色
+
