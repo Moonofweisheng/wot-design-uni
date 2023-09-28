@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.23](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.22...v0.1.23) (2023-09-28)
+
+
+### ✨ Features | 新功能
+
+* ✨ 增加 segmented 分段器组件 ([00f52c8](https://github.com/Moonofweisheng/wot-design-uni/commit/00f52c89e0aebc86f70aa8a7391ce1f17412333d))
+
 ### [0.1.22](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.21...v0.1.22) (2023-09-25)
 
 
