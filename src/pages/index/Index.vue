@@ -94,6 +94,10 @@ const list = ref([
       {
         id: 'tabs',
         name: 'Tabs 标签页'
+      },
+      {
+        id: 'segmented',
+        name: 'Segmented 分段器'
       }
     ]
   },

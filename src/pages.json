@@ -581,6 +581,16 @@
           },
           "navigationBarTitleText": "Swiper 轮播图"
         }
+      },
+      {
+        "path": "pages/segmented/Index",
+        "name": "segmented",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Segmented 分段器"
+        }
       }
     ],
     // "tabBar": {

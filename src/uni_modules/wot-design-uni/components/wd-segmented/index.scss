@@ -1,0 +1,101 @@
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
+
+.wot-theme-dark {
+  @include b(segmented) {
+    background: $-dark-background2;
+
+    @include e(item) {
+      color: $-dark-color3;
+
+      @include when(active) {
+        color: $-dark-color;
+
+        @include when(disabled) {
+          color: $-dark-color3;
+        }
+      }
+
+      @include when(disabled) {
+        color: $-dark-color-gray;
+      }
+
+      @include m(active) {
+        background-color: $-color-theme;
+
+        @include when(disabled) {
+          opacity: 0.6;
+        }
+      }
+    }
+
+  }
+}
+
+@include b(segmented) {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-items: flex-start;
+  width: 100%;
+  background-color: $-segmented-item-bg-color;
+  padding: 4px;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+
+  @include e(item) {
+    position: relative;
+    text-align: center;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 0;
+    z-index: 1;
+    min-height: 28px;
+    line-height: 28px;
+    padding: 0 12px;
+    font-size: 14px;
+    color: $-segmented-item-color;
+    font-weight: 400;
+
+    @include when(active) {
+      font-weight: 550;
+    }
+
+    @include when(large) {
+      min-height: 32px;
+      line-height: 32px;
+      padding: 0 12px;
+      font-size: 16px;
+    }
+
+
+    @include when(small) {
+      min-height: 24px;
+      line-height: 24px;
+      padding: 0 7px;
+      font-size: 12px;
+    }
+
+    @include when(disabled) {
+      cursor: no-drop;
+      color: $-segmented-item-disabled-color;
+    }
+
+    @include m(active) {
+      background-color: $-segmented-item-acitve-bg;
+      border-radius: 4px;
+
+      @include when(disabled) {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @include e(item-label) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+}

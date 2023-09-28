@@ -159,30 +159,5 @@ function scrollToBottom({ lastWidth, lastHeight }) {
 }
 </script>
 <style lang="scss" scoped>
-@import '../common/abstracts/variable';
-@import '../common/abstracts/mixin';
-
-@include b(resize) {
-  @include e(container) {
-    position: absolute;
-    min-width: 1px;
-    min-height: 1px;
-  }
-
-  @include e(wrapper) {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -9999;
-    overflow: hidden;
-    visibility: hidden;
-
-    @include m(placeholder) {
-      transition: 0s;
-      animation: none;
-    }
-  }
-}
+@import './index.scss';
 </style>
