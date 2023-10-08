@@ -34,7 +34,6 @@ export default {
 import { computed, getCurrentInstance, onMounted, reactive, ref, watch } from 'vue'
 import { addUnit, getRect, isObj, objToStyle } from '../common/util'
 import { CSSProperties } from 'vue'
-import { fa } from 'element-plus/es/locale'
 const $item = '.wd-segmented__item'
 
 type SegmentedType = 'large' | 'middle' | 'small'
