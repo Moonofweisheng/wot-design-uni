@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.25](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.24...v0.1.25) (2023-10-10)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Silder 滑块组件双向滑动时自定义最大值小于100无法滚动到最大值的问题 ([a70afa4](https://github.com/Moonofweisheng/wot-design-uni/commit/a70afa43239bc233ee0250e26227dbacd5c7021b)), closes [#69](https://github.com/Moonofweisheng/wot-design-uni/issues/69)
+
 ### [0.1.24](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.23...v0.1.24) (2023-10-10)
 
 
