@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.26](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.25...v0.1.26) (2023-10-10)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Slider 滑块组件双向滑动时右边滑块百分比计算错误的问题 ([92db0f2](https://github.com/Moonofweisheng/wot-design-uni/commit/92db0f2c7fb60b04e1562c55f6296b1b2b456144))
+
 ### [0.1.25](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.24...v0.1.25) (2023-10-10)
 
 
