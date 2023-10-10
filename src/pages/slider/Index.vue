@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-10-10 17:02:32
+ * @LastEditTime: 2023-10-10 18:08:19
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\slider\Index.vue
+ * 记得注释
+-->
 <template>
   <page-wraper>
     <demo-block title="基础用法">
@@ -16,7 +25,7 @@
       <wd-slider v-model="value5" disabled />
     </demo-block>
     <demo-block title="双向滑块">
-      <wd-slider v-model="value6" />
+      <wd-slider v-model="value6" :min="10" :max="80" />
     </demo-block>
   </page-wraper>
 </template>
