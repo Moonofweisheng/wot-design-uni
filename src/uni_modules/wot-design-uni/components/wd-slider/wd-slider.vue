@@ -54,7 +54,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
-import { getRect, isDef } from '../common/util'
+import { getRect, isArray, isDef } from '../common/util'
 import { useTouch } from '../mixins/useTouch'
 import { watch } from 'vue'
 
@@ -236,12 +236,11 @@ function onTouchStart(event) {
   const { disabled, modelValue } = props
   if (disabled) return
   touchLeft.touchStart(event)
-  startValue.value =
-    checkType(modelValue) !== 'Array'
-      ? format(modelValue)
-      : leftBarPercent.value < rightBarPercent.value
-      ? format(modelValue[0])
-      : format(modelValue[1])
+  startValue.value = !isArray(modelValue)
+    ? format(modelValue)
+    : leftBarPercent.value < rightBarPercent.value
+    ? format(modelValue[0])
+    : format(modelValue[1])
   emit('dragstart', {
     value: currentValue.value
   })
@@ -299,23 +298,23 @@ function onTouchEndRight() {
  * 控制右侧滑轮滑动， value校验
  * @param {Number} value 当前滑轮绑定值
  */
-function rightBarSlider(value) {
+function rightBarSlider(value: number) {
   value = format(value)
   const rightBarPercentTemp = ((value - minValue.value) / (maxValue.value - minValue.value)) * 100
   rightNewValue.value = value
   emit('update:modelValue', [Math.min(leftNewValue.value, rightNewValue.value), Math.max(leftNewValue.value, rightNewValue.value)])
-  rightBarPercent.value = format(rightBarPercentTemp)
+  rightBarPercent.value = formatPercent(format(rightBarPercentTemp))
   styleControl()
 }
 /**
  * 控制左滑轮滑动，更新渲染数据，对 value 进行校验取整
  * @param {Number} value 当前滑轮绑定值
  */
-function leftBarSlider(value) {
+function leftBarSlider(value: number) {
   value = format(value)
 
   // 把 value 转换成百分比
-  const percent = ((value - minValue.value) / (maxValue.value - minValue.value)) * 100
+  const percent = formatPercent(value)
   if (!showRight.value) {
     emit('update:modelValue', value)
     leftNewValue.value = value
@@ -359,8 +358,15 @@ function equal(arr1, arr2) {
   })
   return i === 2
 }
-function format(value) {
-  return Math.round(Math.max(minValue.value, Math.min(value, maxValue.value)) / stepValue.value) * stepValue.value
+function format(value: number) {
+  const formatValue = Math.round(Math.max(minValue.value, Math.min(value, maxValue.value)) / stepValue.value) * stepValue.value
+  return formatValue
+}
+
+// 计算占比
+function formatPercent(value: number) {
+  const percentage = ((value - minValue.value) / (maxValue.value - minValue.value)) * 100
+  return percentage
 }
 </script>
 <style lang="scss" scoped>
