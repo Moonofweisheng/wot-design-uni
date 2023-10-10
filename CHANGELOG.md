@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.24](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.23...v0.1.24) (2023-10-10)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 优化 Badge 徽标组件超出max的显示并修复分段器组件错误依赖的问题 ([a48adc8](https://github.com/Moonofweisheng/wot-design-uni/commit/a48adc8395ab167bb88a7a647420b467d7e4c46d))
+
 ### [0.1.23](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.22...v0.1.23) (2023-09-28)
 
 
