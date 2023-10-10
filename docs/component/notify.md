@@ -6,7 +6,7 @@
 
 需要在页面中引入该组件，作为挂载点。
 ```html
-<wd-notify selector="notify" />
+<wd-notify />
 ```
 
 ```ts

@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-09-25 11:09:32
+ * @LastEditTime: 2023-10-10 14:39:07
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\components\demo-block\demo-block.vue
@@ -30,8 +30,8 @@ import { ref, watch } from 'vue'
 interface Props {
   customClass?: string
   title?: string
-  ver?: number
-  hor?: number
+  ver?: number | string
+  hor?: number | string
   transparent?: boolean
 }
 
@@ -76,7 +76,6 @@ function setStyle() {
     margin-bottom: 15px;
   }
   color: #666;
-  overflow: hidden;
 }
 
 .is-white {
@@ -84,8 +83,7 @@ function setStyle() {
 }
 
 .demo-title {
-  padding: 0 15px;
-  margin: 10px 0;
+  padding: 10px 15px;
   font-size: 13px;
 }
 </style>

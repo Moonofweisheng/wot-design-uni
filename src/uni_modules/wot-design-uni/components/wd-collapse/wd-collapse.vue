@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-09-07 00:29:33
+ * @LastEditTime: 2023-10-08 16:41:54
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse\wd-collapse.vue
@@ -144,7 +144,7 @@ function checkType(value) {
  * @param {String} checkValue 比较的重复值
  * @param {String} key 键名
  */
-function checkRepeat(currentList, checkValue, key) {
+function checkRepeat(currentList: CollapseItem[], checkValue: string, key: string): number {
   return currentList.findIndex((item) => item[key] === checkValue)
 }
 
@@ -152,7 +152,7 @@ function checkRepeat(currentList, checkValue, key) {
  * 子项状态变更
  * @param child 子项
  */
-function change(child: CollapseItem) {
+function setChange(child: CollapseItem) {
   let activeNames: string | string[] | boolean = deepClone(props.modelValue || '')
   if (!isBoolean(activeNames)) {
     if (props.accordion) {
@@ -183,7 +183,7 @@ function handleMore() {
 provide('wdcollapse', proxy)
 provide('firstItem', firstItem)
 provide('set-child', setChild) // 将设置子项方法导出
-provide('set-change', change) // 将子项状态变更方法导出
+provide('set-change', setChange) // 将子项状态变更方法导出
 
 defineExpose({
   children,
