@@ -176,7 +176,7 @@ watch(
     }
     currentValue.value = newValue
     // 动态传值后修改
-    if (checkType(newValue) === 'Array') {
+    if (isArray(newValue)) {
       if (equal(newValue, oldValue)) return
       showRight.value = true
       if (leftBarPercent.value <= rightBarPercent.value) {
@@ -300,10 +300,9 @@ function onTouchEndRight() {
  */
 function rightBarSlider(value: number) {
   value = format(value)
-  const rightBarPercentTemp = ((value - minValue.value) / (maxValue.value - minValue.value)) * 100
   rightNewValue.value = value
   emit('update:modelValue', [Math.min(leftNewValue.value, rightNewValue.value), Math.max(leftNewValue.value, rightNewValue.value)])
-  rightBarPercent.value = formatPercent(format(rightBarPercentTemp))
+  rightBarPercent.value = formatPercent(value)
   styleControl()
 }
 /**
