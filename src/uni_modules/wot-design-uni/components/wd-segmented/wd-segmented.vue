@@ -33,7 +33,7 @@ export default {
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, reactive, ref, watch } from 'vue'
 import { addUnit, getRect, isObj, objToStyle } from '../common/util'
-import { CSSProperties } from 'vue'
+import type { CSSProperties } from 'vue'
 const $item = '.wd-segmented__item'
 
 type SegmentedType = 'large' | 'middle' | 'small'

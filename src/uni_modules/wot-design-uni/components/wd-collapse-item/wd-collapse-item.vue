@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-09-06 11:28:22
+ * @LastEditTime: 2023-10-08 16:40:39
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse-item\wd-collapse-item.vue
@@ -54,7 +54,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const parent = inject<any>('wdcollapse')
 // eslint-disable-next-line @typescript-eslint/ban-types
-const change: Function | undefined = inject('set-change') // 设置子组件是否显示
+const setChange: Function | undefined = inject('set-change') // 设置子组件是否显示
 // eslint-disable-next-line @typescript-eslint/ban-types
 const setChild: Function | undefined = inject('set-child') // 将子组件上下文放到父组件children中
 
@@ -80,27 +80,10 @@ const isFirst = computed(() => {
 const contentStyle = computed(() => {
   let style: Record<string, string> = {
     height: expanded.value ? height.value + 'px' : '0px',
-    // position: show.value ? 'relative' : 'absolute',
-    // visibility: show.value ? 'show' : 'hidden',
     'transition-duration': transD.value
   }
   return objToStyle(style)
 })
-
-// watch(
-//   () => props.name,
-//   (newVal) => {
-//     // const condition = parent && children && parent.$.exposed.checkRepeat(children, newVal, 'name')
-//     // // 比较数组中是否存在重复数据
-//     // if (condition > -1) {
-//     //   throw Error('Name attribute cannot be defined repeatedly')
-//     // }
-//   },
-//   {
-//     deep: true,
-//     immediate: true
-//   }
-// )
 
 watch(
   () => parent.modelValue,
@@ -179,16 +162,16 @@ function handleClick() {
       }
       if (isPromise(response)) {
         response.then(() => {
-          change && change({ name: name, expanded: !expanded.value })
+          setChange && setChange({ name: name, expanded: !expanded.value })
         })
       } else {
-        change && change({ name: name, expanded: !expanded.value })
+        setChange && setChange({ name: name, expanded: !expanded.value })
       }
     } else {
-      change && change({ name: name, expanded: !expanded.value })
+      setChange && setChange({ name: name, expanded: !expanded.value })
     }
   } else {
-    change && change({ name: name, expanded: !expanded.value })
+    setChange && setChange({ name: name, expanded: !expanded.value })
   }
 }
 // 动画结束时触发

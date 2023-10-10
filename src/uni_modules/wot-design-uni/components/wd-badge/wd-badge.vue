@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:59
- * @LastEditTime: 2023-08-22 23:23:37
+ * @LastEditTime: 2023-10-10 16:38:30
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-badge\wd-badge.vue
@@ -66,7 +66,7 @@ function notice() {
   let value = props.modelValue
   const max = props.max
   if (value && max && typeof value === 'number' && !Number.isNaN(value) && !Number.isNaN(max)) {
-    value = max < value ? max : value
+    value = max < value ? `${max}+` : value
   }
   content.value = value
 }
