@@ -129,5 +129,5 @@ function handleClose() {
 
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
-| custom-class | 根结点样式 | - |
+| custom-class | 根节点样式 | - |
 

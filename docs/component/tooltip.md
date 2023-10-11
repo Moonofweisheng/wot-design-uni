@@ -157,6 +157,6 @@ Tooltip 组件通过属性`show-close` 控制是否显示关闭按钮。
 
 | 类名         | 说明         | 最低版本 |
 | ------------ | ------------ | -------- |
-| custom-class | 根结点样式   | -        |
+| custom-class | 根节点样式   | -        |
 | custom-arrow | 尖角样式     | -        |
 | custom-pop   | 文字提示样式 | -        |

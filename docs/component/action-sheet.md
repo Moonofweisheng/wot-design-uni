@@ -231,5 +231,5 @@ function select({ item, index }) {
 
 | 类名                | 说明            | 最低版本 |
 | ------------------- | --------------- | -------- |
-| custom-class        | 根结点样式      | -        |
+| custom-class        | 根节点样式      | -        |
 | custom-header-class | header 头部样式 | -        |
