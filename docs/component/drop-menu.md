@@ -184,12 +184,12 @@ function confirm() {
 
 | 类名         | 说明                | 最低版本 |
 | ------------ | ------------------- | -------- |
-| custom-class | DropMenu 根结点样式 | -        |
+| custom-class | DropMenu 根节点样式 | -        |
 
 ## DropMenuItem 外部样式类
 
 | 类名         | 说明                        | 最低版本 |
 | ------------ | --------------------------- | -------- |
-| custom-class | DropMenuItem 根结点样式     | -        |
+| custom-class | DropMenuItem 根节点样式     | -        |
 | custom-title | DropMenuItem 左侧文字样式   | -        |
 | custom-icon  | DropMenuItem 右侧 icon 样式 | -        |

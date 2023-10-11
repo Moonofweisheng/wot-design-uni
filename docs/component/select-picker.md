@@ -376,7 +376,7 @@ function handleConfirm({ value, selectedItems }) {
 
 | 类名                 | 说明                     | 最低版本 |
 | -------------------- | ------------------------ | -------- |
-| custom-class         | 根结点样式               | -        |
+| custom-class         | 根节点样式               | -        |
 | custom-label-class   | label 外部自定义样式     | -        |
 | custom-value-class   | value 外部自定义样式     | -        |
 | custom-content-class | 弹出层内容区域自定义样式 | -        |

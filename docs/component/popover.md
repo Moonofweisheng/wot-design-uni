@@ -158,6 +158,6 @@ function link(e) {
 
 | 类名         | 说明         | 最低版本 |
 | ------------ | ------------ | -------- |
-| custom-class | 根结点样式   | -        |
+| custom-class | 根节点样式   | -        |
 | custom-arrow | 尖角样式     | -        |
 | custom-pop   | 文字提示样式 | -        |

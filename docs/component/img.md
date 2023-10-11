@@ -80,5 +80,5 @@ mode为小程序原生属性，参考[微信小程序image官方文档](https://
 
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
-| custom-class | 根结点样式 | - |
+| custom-class | 根节点样式 | - |
 | custom-image| image 外部自定义样式 | - |

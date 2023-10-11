@@ -78,6 +78,6 @@ const value = ref<number[]>([10, 30])
 ## 外部样式类
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
-| custom-class | 根结点样式 | - |
+| custom-class | 根节点样式 | - |
 | custom-min-class | 最小值自定义样式 | - |
 | custom-max-class | 最大值自定义样式 | - |

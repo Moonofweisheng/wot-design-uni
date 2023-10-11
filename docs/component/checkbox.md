@@ -210,7 +210,7 @@ const value = ref(['jd'])
 
 | 类名 | 说明 | 最低版本 |
 |-----|-----|---------|
-| custom-class | 根结点样式 | - |
+| custom-class | 根节点样式 | - |
 | custom-label-class | 文字结点样式 | - |
 | custom-shape-class | 单选图标结点样式 | - |
 
@@ -218,4 +218,4 @@ const value = ref(['jd'])
 
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
-| custom-class | 根结点样式 | - |
+| custom-class | 根节点样式 | - |
