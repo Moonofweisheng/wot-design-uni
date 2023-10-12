@@ -1,0 +1,43 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(tabbar) {
+    background: $-dark-background;
+  }
+}
+
+
+@include b(tabbar) {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: relative;
+  background: $-color-white;
+  height: $-tabbar-height;
+
+  @include m(round){
+    margin-left: 32rpx;
+    margin-right: 32rpx;
+    border-radius: 999px;
+    box-shadow: $-tabbar-box-shadow;
+  }
+
+  @include when(border){
+    @include m(default){
+      @include halfPixelBorder('top');
+    }
+  }
+
+  @include when(fixed) {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 500;
+    @include when(safe) {
+      padding-bottom: constant(safe-area-inset-bottom);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+}
