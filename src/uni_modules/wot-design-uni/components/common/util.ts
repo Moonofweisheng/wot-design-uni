@@ -238,15 +238,10 @@ export const context = {
  * @param scope 作用域（支付宝小程序无效）
  * @returns
  */
-export function getRect(selector: string, all: boolean = false, scope?: any) {
+export function getRect(selector: string, all: boolean = false, scope: any) {
   return new Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>((resolve) => {
     let query: UniNamespace.SelectorQuery | null = null
-    // #ifndef MP-ALIPAY
     query = uni.createSelectorQuery().in(scope)
-    // #endif
-    // #ifdef MP-ALIPAY
-    query = uni.createSelectorQuery()
-    // #endif
     query[all ? 'selectAll' : 'select'](selector)
       .boundingClientRect((rect) => {
         if (all && Array.isArray(rect) && rect.length) {
