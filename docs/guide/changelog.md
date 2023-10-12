@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.28](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.27...v0.1.28) (2023-10-12)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档样式优化 ([f21ecb9](https://github.com/Moonofweisheng/wot-design-uni/commit/f21ecb9dfbfbf0afe49a760d24ebdc08e4799717))
+
 ### [0.1.27](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.26...v0.1.27) (2023-10-12)
 
 
