@@ -69,14 +69,14 @@ const list1 = ref([
     value: '李雷',
     disabled: false,
     payload: {
-      avatar: 'https://cdn.jsdelivr.net/npm/wot-design-uni-assets/redpanda.jpg'
+      avatar: 'https://unpkg.com/wot-design-uni-assets/redpanda.jpg'
     }
   },
   {
     value: '韩梅梅',
     disabled: false,
     payload: {
-      avatar: 'https://cdn.jsdelivr.net/npm/wot-design-uni-assets/capybara.jpg'
+      avatar: 'https://unpkg.com/wot-design-uni-assets/capybara.jpg'
     }
   }
 ])

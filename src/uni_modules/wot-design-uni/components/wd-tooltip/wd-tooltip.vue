@@ -96,7 +96,7 @@ watch(
     // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
     if (newVal === null || newVal === undefined) {
       // eslint-disable-next-line prettier/prettier
-        throw Error('value can\'t be null or undefined')
+        throw Error('[wot-design] warning(wd-tooltip): content can\'t be null or undefined')
     }
   }
 )
