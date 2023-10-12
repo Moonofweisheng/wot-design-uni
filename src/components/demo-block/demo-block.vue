@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-10-10 14:39:07
+ * @LastEditTime: 2023-10-12 12:52:10
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\components\demo-block\demo-block.vue
@@ -84,6 +84,7 @@ function setStyle() {
 
 .demo-title {
   padding: 10px 15px;
+  margin-bottom: 10px;
   font-size: 13px;
 }
 </style>
