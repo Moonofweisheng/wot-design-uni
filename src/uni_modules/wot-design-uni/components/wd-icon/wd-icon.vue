@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-08-14 23:31:08
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-icon\wd-icon.vue
- * 记得注释
--->
 <template>
   <view @click="handleClick" :class="rootClass" :style="rootStyle">
     <image v-if="isImageUrl" class="wd-icon__image" :src="name"></image>
@@ -32,12 +23,14 @@ interface Props {
   name: string
   color?: string
   size?: string
+  classPrefix?: string
   customStyle?: string
   customClass?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   customStyle: '',
-  customClass: ''
+  customClass: '',
+  classPrefix: 'wd-icon'
 })
 
 const isImageUrl = ref<boolean>(false)
@@ -46,11 +39,13 @@ watch(
   () => props.name,
   (val) => {
     isImageUrl.value = val.indexOf('/') > -1
-  }
+  },
+  { deep: true, immediate: true }
 )
 
 const rootClass = computed(() => {
-  return `wd-icon ${props.customClass} ${isImageUrl.value ? 'wd-icon--image' : 'wd-icon-' + props.name}`
+  const prefix = props.classPrefix
+  return `${prefix} ${props.customClass} ${isImageUrl.value ? 'wd-icon--image' : prefix + '-' + props.name}`
 })
 
 const rootStyle = computed(() => {
