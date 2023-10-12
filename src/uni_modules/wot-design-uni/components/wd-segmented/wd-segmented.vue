@@ -131,7 +131,6 @@ function updateActiveStyle() {
     const style: CSSProperties = {
       position: 'absolute',
       width: addUnit(sectionItemInfo.width),
-      height: addUnit(sectionItemInfo.height),
       transition: transition,
       transform: `translateX(${left}px)`,
       'z-index': 0

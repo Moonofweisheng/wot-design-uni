@@ -39,7 +39,7 @@
   justify-items: flex-start;
   width: 100%;
   background-color: $-segmented-item-bg-color;
-  padding: 4px;
+  padding: $-segmented-padding;
   border-radius: 4px;
   box-sizing: border-box;
 
@@ -85,7 +85,7 @@
     @include m(active) {
       background-color: $-segmented-item-acitve-bg;
       border-radius: 4px;
-
+      height: calc(100% - $-segmented-padding * 2);
       @include when(disabled) {
         opacity: 0.8;
       }
