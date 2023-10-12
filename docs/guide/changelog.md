@@ -1,6 +1,25 @@
 # 更新日志 
 
 
+### [0.1.27](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.26...v0.1.27) (2023-10-12)
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* ⚡ Segmented 分段器组件兼容支付宝小程序 ([3fd57a6](https://github.com/Moonofweisheng/wot-design-uni/commit/3fd57a600b537b945a8224bb97344baa9b0929e0))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整文档中图片的CDN地址 ([f704568](https://github.com/Moonofweisheng/wot-design-uni/commit/f704568f0299acbd3cc2d88934bfa1641b6cc792))
+* ✏️  修复文档中根节点错写为根结点的问题 ([6da4145](https://github.com/Moonofweisheng/wot-design-uni/commit/6da414503ceb8b6de680b10332af45dbbbe7229d))
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Tabbar 标签栏组件 ([aa0bf19](https://github.com/Moonofweisheng/wot-design-uni/commit/aa0bf194865e381af41f7afa18e46105e0c812a9))
+* ✨ Icon 组件新增图标并支持第三方iconfont ([bc241ac](https://github.com/Moonofweisheng/wot-design-uni/commit/bc241acfc103309f196f4c04e08288526a056073))
+
 ### [0.1.26](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.25...v0.1.26) (2023-10-10)
 
 
