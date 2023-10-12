@@ -93,11 +93,11 @@
 import { ref } from 'vue'
 
 const swiperList = ref([
-  'https://cdn.jsdelivr.net/npm/wot-design-uni-assets/redpanda.jpg',
-  'https://cdn.jsdelivr.net/npm/wot-design-uni-assets/capybara.jpg',
-  'https://cdn.jsdelivr.net/npm/wot-design-uni-assets/panda.jpg',
+  'https://unpkg.com/wot-design-uni-assets/redpanda.jpg',
+  'https://unpkg.com/wot-design-uni-assets/capybara.jpg',
+  'https://unpkg.com/wot-design-uni-assets/panda.jpg',
   'https://img.yzcdn.cn/vant/cat.jpeg',
-  'https://cdn.jsdelivr.net/npm/wot-design-uni-assets/meng.jpg'
+  'https://unpkg.com/wot-design-uni-assets/meng.jpg'
 ])
 function handleClick(e) {
   console.log(e)

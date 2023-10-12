@@ -1,0 +1,51 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(tabbar-item) {
+    @include e(body) {
+      :deep(){
+        @include when(inactive) {
+          color: $-dark-color-gray;
+        }
+      }
+    }
+  }
+}
+
+
+@include b(tabbar-item) {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include e(body) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    line-height: 1;
+    padding: 0;
+    position: relative;
+    
+    :deep(){
+      @include when(active) {
+        color: $-tabbar-active-color;
+      }
+  
+      @include when(inactive) {
+        color: $-tabbar-inactive-color;
+      }
+    }
+  }
+
+
+  @include e(body-title) {
+    font-size: $-tabbar-item-title-font-size;
+    line-height: $-tabbar-item-title-line-height;
+  }
+  
+}

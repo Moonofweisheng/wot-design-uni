@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-09-28 11:22:30
+ * @LastEditTime: 2023-10-10 22:42:54
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -196,6 +196,9 @@ export default defineConfig({
           }, {
             link: "/component/segmented",
             text: "Segmented 分段器"
+          }, {
+            link: "/component/tabbar",
+            text: "Tabbar 标签栏"
           }]
         }, {
     

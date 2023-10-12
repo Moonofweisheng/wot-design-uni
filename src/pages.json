@@ -591,6 +591,16 @@
           },
           "navigationBarTitleText": "Segmented 分段器"
         }
+      },
+      {
+        "path": "pages/tabbar/Index",
+        "name": "tabbar",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Tabbar 标签栏"
+        }
       }
     ],
     // "tabBar": {

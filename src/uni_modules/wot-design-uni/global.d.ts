@@ -81,6 +81,8 @@ declare module '@vue/runtime-core' {
     WdSwiper: typeof import('./components/wd-swiper/wd-swiper.vue')['default']
     WdSwiperNav: typeof import('./components/wd-swiper-nav/wd-swiper-nav.vue')['default']
     WdSegmented: typeof import('./components/wd-segmented/wd-segmented.vue')['default']
+    WdTabbar: typeof import('./components/wd-tabbar/wd-tabbar.vue')['default']
+    WdTabbarItem: typeof import('./components/wd-tabbar-item/wd-tabbar-item.vue')['default']
   }
 }
 
