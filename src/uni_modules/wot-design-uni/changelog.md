@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.29](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.28...v0.1.29) (2023-10-13)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tabbar 标签栏组件固定底部时不设置placeholder情况下仍占据相应空间的问题 ([b58f9df](https://github.com/Moonofweisheng/wot-design-uni/commit/b58f9dfc8230e9427f2af658c8315c5b022b232c))
+
 ### [0.1.28](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.27...v0.1.28) (2023-10-12)
 
 
