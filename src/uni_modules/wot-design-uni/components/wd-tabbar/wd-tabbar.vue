@@ -63,9 +63,9 @@ const props = withDefaults(defineProps<Props>(), {
   inactiveColor: '',
   activeColor: '',
   placeholder: false,
-  zIndex: 500
+  zIndex: 99
 })
-const height = ref<number>(50) // 占位高度
+const height = ref<number | ''>('') // 占位高度
 const parentData = reactive({
   activeColor: props.activeColor,
   inactiveColor: props.inactiveColor,
