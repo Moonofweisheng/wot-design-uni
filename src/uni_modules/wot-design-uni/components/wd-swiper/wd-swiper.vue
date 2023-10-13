@@ -49,7 +49,7 @@
 import { computed, onBeforeMount, ref } from 'vue'
 import { addUnit, isObj } from '../common/util'
 import type { DirectionType, EasingType, IndicatorPositionType, SwiperList } from './type'
-import { SwiperIndicatorType } from '../wd-swiper-nav/type'
+import type { SwiperIndicatorType } from '../wd-swiper-nav/type'
 
 interface SwiperIndicatorProps {
   /**

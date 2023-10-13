@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import type { DirectionType, IndicatorPositionType } from '../wd-swiper/type'
-import { SwiperIndicatorType } from './type'
+import type { SwiperIndicatorType } from './type'
 
 interface Props {
   /**
