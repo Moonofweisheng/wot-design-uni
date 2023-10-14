@@ -91,7 +91,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onMounted, ref, watch } from 'vue'
 import { debounce, getRect, getType } from '../common/util'
-import { useCell } from '../mixins/useCell'
+import { useCell } from '../composables/useCell'
 
 const $container = '.wd-col-picker__selected-container'
 const $item = '.wd-col-picker__selected-item'

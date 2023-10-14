@@ -98,7 +98,7 @@ export default {
 
 <script lang="ts" setup>
 import { onBeforeMount, ref, watch } from 'vue'
-import { useCell } from '../mixins/useCell'
+import { useCell } from '../composables/useCell'
 import { nextTick } from 'vue'
 import { getType, isArray } from '../common/util'
 

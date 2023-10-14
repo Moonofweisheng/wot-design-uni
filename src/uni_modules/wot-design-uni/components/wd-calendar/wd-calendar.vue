@@ -111,7 +111,7 @@ import { ref, computed, watch } from 'vue'
 import { dayjs } from '../common/dayjs'
 import { debounce, deepClone, isArray, isEqual, padZero } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
-import { useCell } from '../mixins/useCell'
+import { useCell } from '../composables/useCell'
 
 const defaultDisplayFormat = (value, type) => {
   switch (type) {

@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-10-12 12:52:10
+ * @LastEditTime: 2023-10-14 09:47:28
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\components\demo-block\demo-block.vue
@@ -54,7 +54,7 @@ watch(
 )
 
 function setStyle() {
-  style.value = `margin: ${props.ver}px ${props.hor}px`
+  style.value = `margin: 0 ${props.hor}px;padding:${props.ver}px 0;`
 }
 </script>
 <style lang="scss" scoped>
@@ -84,7 +84,6 @@ function setStyle() {
 
 .demo-title {
   padding: 10px 15px;
-  margin-bottom: 10px;
   font-size: 13px;
 }
 </style>

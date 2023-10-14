@@ -82,7 +82,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted } from 'vue'
 import { deepClone, defaultDisplayFormat, getType } from '../common/util'
-import { useCell } from '../mixins/useCell'
+import { useCell } from '../composables/useCell'
 import { type ColumnItem, formatArray } from '../wd-picker-view/type'
 
 interface Props {
