@@ -27,6 +27,52 @@
 <wd-popup v-model="show" position="bottom" closable custom-style="height: 200px;" @close="handleClose"></wd-popup>
 ```
 
+## 禁用遮罩点击
+
+通过设置 `close-on-click-modal` 属性为 `false`，你可以禁用用户点击遮罩层时关闭弹出层的功能。
+
+```html
+<wd-popup v-model="show7" position="bottom" :close-on-click-modal="false" closable custom-style="height: 200px;" @close="handleClose7"></wd-popup>
+```
+
+
+## 禁用遮罩
+
+通过设置 `modal` 属性为 `false`，你可以禁用遮罩层，使用户可以与底层内容进行交互。
+
+```html
+<wd-popup v-model="show8" position="bottom" :modal="false" closable custom-style="height: 200px;" @close="handleClose8"></wd-popup>
+```
+
+
+## 开启底部安全区
+
+通过设置 `safe-area-inset-bottom` 属性为 `true`，你可以确保弹出层在底部显示时不会被底部安全区域遮挡。
+
+```html
+<wd-popup v-model="show9" position="bottom" :safe-area-inset-bottom="true" custom-style="height: 200px;" @close="handleClose9"></wd-popup>
+```
+
+## 禁止滚动穿透
+
+使用组件时，会发现内容部分滚动到底时，继续划动会导致底层页面的滚动，这就是滚动穿透。
+
+目前，组件可以通过 `lock-scroll` 属性处理部分滚动穿透问题。 但由于小程序和APP平台自身原因，弹窗内容区域仍会出现滚动穿透。 不过，我们为开发者提供了一个推荐方案以完整解决滚动穿透：
+
+可以使用 [page-meta](https://uniapp.dcloud.net.cn/component/page-meta#page-meta) 组件动态修改 `page-meta` 的 `overflow` 属性。
+```html
+<!-- page-meta 只能是页面内的第一个节点 -->
+<page-meta :page-style="`overflow:${show10 ? 'hidden' : 'visible'};`"></page-meta>
+
+<wd-popup v-model="show10" lock-scroll position="bottom" :safe-area-inset-bottom="true" custom-style="height: 200px;" @close="handleClose10"></wd-popup>
+```
+
+:::tip 提示
+h5 滚动穿透不需要处理，组件已默认开启 `lock-scroll`。
+:::
+### H5平台
+
+
 ## Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
@@ -43,19 +89,20 @@
 | hide-when-close | 是否当关闭时将弹出层隐藏（display: none) | boolean | - | true | - |
 | lazy-render | 弹层内容懒渲染，触发展示时才渲染内容 | boolean | - | true | - |
 | safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型） | boolean | - | false | - |
+| lockScroll | 是否锁定背景滚动 | boolean | - | true | 0.1.30 |
 
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
 | close | 弹出层关闭时触发 | - | - |
-| clickmodal | 点击遮罩时触发 | - | - |
-| beforeenter | 进入前触发 | - | - |
+| click-modal | 点击遮罩时触发 | - | - |
+| before-enter | 进入前触发 | - | - |
 | enter | 进入时触发 | - | - |
-| afterenter | 进入后触发 | - | - |
-| beforeleave | 离开前触发 | - | - |
+| after-enter | 进入后触发 | - | - |
+| before-leave | 离开前触发 | - | - |
 | leave | 离开时触发 | - | - |
-| afterleave | 离开后触发| - | - |
+| after-leave | 离开后触发| - | - |
 
 ## 外部样式类
 

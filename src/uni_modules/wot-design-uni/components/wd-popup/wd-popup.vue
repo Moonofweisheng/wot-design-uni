@@ -1,8 +1,9 @@
 <template>
-  <wd-modal
+  <wd-overlay
     v-if="modal"
     :show="modelValue"
     :z-index="zIndex"
+    :lock-scroll="lockScroll"
     :duration="duration"
     :custom-style="modalStyle"
     @click="handleClickModal"
@@ -44,6 +45,7 @@ interface Props {
   modelValue: boolean
   customStyle?: string
   lazyRender?: boolean
+  lockScroll?: boolean
   customClass?: string
 }
 
@@ -59,6 +61,7 @@ const props = withDefaults(defineProps<Props>(), {
   zIndex: 10,
   hideWhenClose: true,
   lazyRender: true,
+  lockScroll: true,
   safeAreaInsetBottom: false,
   modelValue: false
 })
@@ -100,14 +103,13 @@ const name = ref<string>('') // 动画名
 
 const emit = defineEmits([
   'update:modelValue',
-  'click',
   'before-enter',
   'enter',
   'before-leave',
   'leave',
   'after-leave',
   'after-enter',
-  'clickmodal',
+  'click-modal',
   'close'
 ])
 
@@ -128,7 +130,7 @@ onBeforeMount(() => {
 
     if (safeArea) {
       // #ifdef MP-WEIXIN
-      safeBottom.value = screenHeight - safeArea!.bottom || 0
+      safeBottom.value = screenHeight - (safeArea!.bottom || 0)
       // #endif
       // #ifndef MP-WEIXIN
       safeBottom.value = safeAreaInsets ? safeAreaInsets.bottom : 0
@@ -227,7 +229,7 @@ function observerTransition() {
 }
 
 function handleClickModal() {
-  emit('clickmodal')
+  emit('click-modal')
   if (props.closeOnClickModal) {
     close()
   }
