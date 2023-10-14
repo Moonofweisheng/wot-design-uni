@@ -276,6 +276,9 @@ export default defineConfig({
             link: "/component/notice-bar",
             text: "NoticeBar 通知栏"
           }, {
+            link: "/component/overlay",
+            text: "Overlay 遮罩层"
+          }, {
             link: "/component/progress",
             text: "Progress 进度条"
           }, {
