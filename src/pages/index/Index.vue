@@ -60,7 +60,7 @@ const list = ref([
       },
       {
         id: 'configProvider',
-        name: 'configProvider 全局配置'
+        name: 'ConfigProvider 全局配置'
       },
       {
         id: 'popup',
