@@ -44,7 +44,7 @@ declare module '@vue/runtime-core' {
     WdLoading: typeof import('./components/wd-loading/wd-loading.vue')['default']
     WdLoadmore: typeof import('./components/wd-loadmore/wd-loadmore.vue')['default']
     WdMessageBox: typeof import('./components/wd-message-box/wd-message-box.vue')['default']
-    WdModal: typeof import('./components/wd-modal/wd-modal.vue')['default']
+    WdModal: typeof import('./components/wd-overlay/wd-overlay.vue')['default']
     WdNoticeBar: typeof import('./components/wd-notice-bar/wd-notice-bar.vue')['default']
     WdPagination: typeof import('./components/wd-pagination/wd-pagination.vue')['default']
     WdPicker: typeof import('./components/wd-picker/wd-picker.vue')['default']

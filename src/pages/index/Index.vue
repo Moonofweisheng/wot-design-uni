@@ -208,6 +208,10 @@ const list = ref([
         name: 'MessageBox 弹框'
       },
       {
+        id: 'overlay',
+        name: 'Overlay 遮罩层'
+      },
+      {
         id: 'noticeBar',
         name: 'NoticeBar 通知栏'
       },

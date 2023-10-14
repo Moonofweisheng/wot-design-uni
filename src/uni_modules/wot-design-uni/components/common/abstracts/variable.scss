@@ -74,9 +74,9 @@ $-color-inlight-title-mask: var(--wot-color-inlight-title-mask, #000000) !defaul
 $-color-icon: var(--wot-color-icon, #d9d9d9) !default; // icon颜色
 $-color-icon-active: var(--wot-color-icon-active, #eee) !default; // icon颜色hover
 $-color-icon-disabled: var(--wot-color-icon-disabled, #a7a7a7) !default; // icon颜色disabled
-/* modal */
-$-modal-bg: rgba(0, 0, 0, 0.65) !default;
-$-modal-bg-dark: rgba(0, 0, 0, 0.75) !default;
+/* overlay */
+$-overlay-bg: rgba(0, 0, 0, 0.65) !default;
+$-overlay-bg-dark: rgba(0, 0, 0, 0.75) !default;
 
 
 /*----------------------------------------- Theme color. end -------------------------------------------*/
@@ -603,7 +603,7 @@ $-tabs-nav-map-arrow-color: var(--wot-tabs-nav-map-arrow-color, rgba(0, 0, 0, 0.
 $-tabs-nav-map-btn-before-bg: var(--wot-tabs-nav-map-btn-before-bg, linear-gradient(270deg, rgba(255, 255, 255, 1) 1%, rgba(255, 255, 255, 0) 100%)) !default; // 左侧map遮罩阴影
 $-tabs-nav-map-button-back-color: var(--wot-tabs-nav-map-button-back-color, rgba(0, 0, 0, 0.04)) !default; // map 类型按钮边框颜色
 $-tabs-nav-map-button-radius: var(--wot-tabs-nav-map-button-radius, 16px) !default; // map 类型按钮圆角大小
-$-tabs-nav-map-modal-bg: var(--wot-tabs-nav-map-modal-bg, $-modal-bg) !default; // map 类型蒙层背景色
+$-tabs-nav-map-modal-bg: var(--wot-tabs-nav-map-modal-bg, $-overlay-bg) !default; // map 类型蒙层背景色
 
 /* tag */
 $-tag-fs: var(--wot-tag-fs, $-fs-secondary) !default; // 字号
@@ -631,7 +631,7 @@ $-tag-close-active-color: var(--wot-tag-close-active-color, rgba(0, 0, 0, 0.45))
 $-toast-padding: var(--wot-toast-padding, 16px 24px) !default; // padding
 $-toast-max-width: var(--wot-toast-max-width, 300px) !default; // 最大宽度
 $-toast-radius: var(--wot-toast-radius, 8px) !default; // 圆角大小
-$-toast-bg: var(--wot-toast-bg, $-modal-bg) !default; // 背景色
+$-toast-bg: var(--wot-toast-bg, $-overlay-bg) !default; // 背景色
 $-toast-fs: var(--wot-toast-fs, $-fs-content) !default; // 字号
 $-toast-with-icon-min-width: var(--wot-toast-with-icon-min-width, 150px) !default; // 有图标的情况下最小宽度
 $-toast-icon-size: var(--wot-toast-icon-size, 39px) !default; // 图标大小

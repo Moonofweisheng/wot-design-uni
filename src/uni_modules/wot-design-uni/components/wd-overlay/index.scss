@@ -2,17 +2,16 @@
 @import "./../common/abstracts/variable.scss";
 
 .wot-theme-dark {
-  @include b(modal) {
-    background: $-modal-bg-dark;
+  @include b(overlay) {
+    background: $-overlay-bg-dark;
   }
 }
 
-
-@include bdeep(modal) {
+@include bdeep(overlay) {
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background: $-modal-bg;
+  background: $-overlay-bg;
 }

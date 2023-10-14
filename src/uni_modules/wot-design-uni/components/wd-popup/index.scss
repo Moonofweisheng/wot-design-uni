@@ -1,6 +1,6 @@
 @import './../common/abstracts/_mixin.scss';
 @import './../common/abstracts/variable.scss';
-@import '../wd-modal/index.scss';
+@import '../wd-overlay/index.scss';
 
 .wot-theme-dark {
   @include b(popup) {
