@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.1.30](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.29...v0.1.30) (2023-10-14)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Overlay 遮罩层组件 ([41b2c4f](https://github.com/Moonofweisheng/wot-design-uni/commit/41b2c4f3677dcce9c3e18875b7a1ec32d02b3d6a))
+* ✨ Popup 弹出层组件增加 lock-scroll 属性 ([a6987e6](https://github.com/Moonofweisheng/wot-design-uni/commit/a6987e65da2f121d4e95c1b5cb271ed8f9a06e58))
+
 ### [0.1.29](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.28...v0.1.29) (2023-10-13)
 
 
