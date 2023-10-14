@@ -57,7 +57,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { useCell } from '../mixins/useCell'
+import { useCell } from '../composables/useCell'
 
 interface Props {
   title?: string

@@ -133,7 +133,7 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, provide, ref, watch } from 'vue'
 import { checkNumRange, debounce, getRect, getType, objToStyle } from '../common/util'
-import { useTouch } from '../mixins/useTouch'
+import { useTouch } from '../composables/useTouch'
 
 const $item = '.wd-tabs__nav-item'
 const $container = '.wd-tabs__nav-container'

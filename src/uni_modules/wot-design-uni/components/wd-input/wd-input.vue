@@ -138,7 +138,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { objToStyle, requestAnimationFrame } from '../common/util'
-import { useCell } from '../mixins/useCell'
+import { useCell } from '../composables/useCell'
 
 interface Props {
   customTextareaContainerClass?: string

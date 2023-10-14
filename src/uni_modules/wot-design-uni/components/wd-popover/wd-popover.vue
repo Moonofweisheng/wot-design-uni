@@ -64,7 +64,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue'
-import { usePopover } from '../mixins/usePopover'
+import { usePopover } from '../composables/usePopover'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 
 type PlacementType =

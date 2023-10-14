@@ -7,7 +7,9 @@
 
 `v-model` 为绑定值，可以为 number 类型（选中的tab的下标）和 string 类型（标签名）。
 
-> 当`v-model`为`number`类型时，`wd-tab`可以不必设置`name`。同时如果value超出了tab数量，会用0自动兜底。
+:::tip 提示
+当`v-model`为`number`类型时，`wd-tab`可以不必设置`name`。同时如果value超出了tab数量，会用0自动兜底。
+:::
 
 ```html
 <wd-tabs v-model="tab">

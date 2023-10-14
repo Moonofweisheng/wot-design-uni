@@ -137,7 +137,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
-import { useCell } from '../mixins/useCell'
+import { useCell } from '../composables/useCell'
 import { type DateTimeType, getPickerValue } from '../wd-datetime-picker-view/type'
 interface Props {
   customClass?: string

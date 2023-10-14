@@ -55,7 +55,7 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 import { getRect, isArray, isDef } from '../common/util'
-import { useTouch } from '../mixins/useTouch'
+import { useTouch } from '../composables/useTouch'
 import { watch } from 'vue'
 
 interface Props {

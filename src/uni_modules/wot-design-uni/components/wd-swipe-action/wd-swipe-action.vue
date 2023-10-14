@@ -37,7 +37,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
-import { useTouch } from '../mixins/useTouch'
+import { useTouch } from '../composables/useTouch'
 import { getRect } from '../common/util'
 
 interface Props {
