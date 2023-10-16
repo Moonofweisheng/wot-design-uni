@@ -245,10 +245,20 @@ watch(
       // eslint-disable-next-line quotes
       console.error("[wot design] error(wd-tabs): tabs's value cannot be less than zero")
     }
-    // setActive && setActive(newValue)
   },
   {
     immediate: true,
+    deep: true
+  }
+)
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    setActive(newValue)
+  },
+  {
+    immediate: false,
     deep: true
   }
 )

@@ -5,7 +5,10 @@
       <wd-tabs v-model="tab1" @change="handleChange">
         <block v-for="item in 4" :key="item">
           <wd-tab :title="`标签${item}`" :name="item">
-            <view class="content">内容{{ item }}</view>
+            <view class="content">
+              内容{{ item }}
+              <wd-button @click="tab1 < 3 ? tab1++ : (tab1 = 0)">下一个</wd-button>
+            </view>
           </wd-tab>
         </block>
       </wd-tabs>
@@ -105,8 +108,11 @@ function handleChange(event) {
 </script>
 <style lang="scss" scoped>
 .content {
-  line-height: 120px;
+  height: 120px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .large {
   line-height: 320px;
