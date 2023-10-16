@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.32](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.31...v0.1.32) (2023-10-16)
+
+
+### ✨ Features | 新功能
+
+* ✨ Tabs 组件调整为受控组件 ([b2a70bc](https://github.com/Moonofweisheng/wot-design-uni/commit/b2a70bc8f32800119924b29283db760af8a3ddb1)), closes [#82](https://github.com/Moonofweisheng/wot-design-uni/issues/82)
+
 ### [0.1.31](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.30...v0.1.31) (2023-10-16)
 
 
