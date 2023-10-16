@@ -207,7 +207,7 @@ function select({ item, index }) {
 | opened     | 弹出层打开动画结束时触发 | -                                                                                                                                                 | -        |
 | close      | 弹出层关闭时触发         | -                                                                                                                                                 | -        |
 | closed     | 弹出层关闭动画结束时触发 | -                                                                                                                                                 | -        |
-| clickmodal | 点击遮罩时触发           | -                                                                                                                                                 | -        |
+| click-modal | 点击遮罩时触发           | -                                                                                                                                                 | -        |
 | cancel     | 点击取消按钮时触发       | -                                                                                                                                                 | -        |
 
 ## Action 数据结构
