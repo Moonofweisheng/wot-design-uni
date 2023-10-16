@@ -9,7 +9,7 @@
       modal-style="position: absolute;"
       :modal="modal"
       :close-on-click-modal="closeOnClickModal"
-      @clickmodal="close"
+      @click-modal="close"
       @before-enter="handleOpen"
       @after-enter="handleOpened"
       @before-leave="handleClose"

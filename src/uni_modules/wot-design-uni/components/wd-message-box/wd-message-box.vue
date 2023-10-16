@@ -6,7 +6,7 @@
       :close-on-click-modal="closeOnClickModal"
       :lazy-render="lazyRender"
       custom-class="wd-message-box"
-      @clickmodal="toggleModal('modal')"
+      @click-modal="toggleModal('modal')"
       :z-index="zIndex"
       :duration="200"
     >

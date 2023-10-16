@@ -13,7 +13,7 @@
       @close="close"
       @after-enter="handleOpened"
       @after-leave="handleClosed"
-      @clickmodal="handleClickModal"
+      @click-modal="handleClickModal"
       :z-index="zIndex"
     >
       <view
