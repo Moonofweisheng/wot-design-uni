@@ -13,7 +13,7 @@
       @leave="leave"
       @after-leave="afterleave"
       @close="close"
-      @clickmodal="clickModal"
+      @click-modal="clickModal"
       :custom-class="`wd-curtain ${customClass}`"
     >
       <view class="wd-curtain__content">
