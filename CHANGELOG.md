@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [0.1.31](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.30...v0.1.31) (2023-10-16)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复wd-popup组件的click-modal方法错误调用的问题 ([224e3e5](https://github.com/Moonofweisheng/wot-design-uni/commit/224e3e53f912a236e8e24f8afef64fa09f6a89aa))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  更新文档中关于组件数量的介绍 ([4fa7355](https://github.com/Moonofweisheng/wot-design-uni/commit/4fa7355e69a8bb32d1c9924cfc717caaf3345ee5))
+* ✏️  增加 Overlay 遮罩层组件的文档 ([3bca4b6](https://github.com/Moonofweisheng/wot-design-uni/commit/3bca4b65c2bc7cd7f90e8b9513c619799f9a438b))
+
 ### [0.1.30](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.29...v0.1.30) (2023-10-14)
 
 
