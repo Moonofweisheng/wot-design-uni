@@ -1,0 +1,82 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+.wot-theme-dark {}
+
+
+@include b(navbar) {
+  position: relative;
+  text-align: center;
+  user-select: none;
+  height: $-navbar-height;
+  line-height: $-navbar-height;
+  background-color: $-navbar-background;
+  box-sizing: border-box;
+  color: $-navbar-color;
+  box-sizing: content-box;
+
+  @include e(content) {
+    position: relative;
+    width: 100%;
+  }
+
+  @include e(title) {
+    max-width: 60%;
+    margin: 0 auto;
+    color: $-navbar-color;
+    font-weight: $-navbar-title-font-weight;
+    font-size: $-navbar-title-font-size;
+    @include lineEllipsis();
+  }
+
+  @include e(text) {
+    display: inline-block;
+    vertical-align: middle;
+    color: $-navbar-desc-font-color;
+  }
+
+  @include e(left, right, capsule) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    font-size: $-navbar-desc-font-size;
+    color: $-navbar-color;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 12px;
+
+    @include when(disabled) {
+      opacity: $-navbar-disabled-opacity;
+    }
+  }
+
+  @include e(left, capsule) {
+    left: 0;
+  }
+
+  @include e(right) {
+    right: 0;
+  }
+
+  @include edeep(arrow) {
+    font-size: $-navbar-arrow-size;
+    color: $-navbar-color;
+  }
+
+  @include when(fixed) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    @include when(safe) {
+      padding-top: constant(safe-area-inset-top);
+      padding-top: env(safe-area-inset-top);
+    }
+  }
+
+  @include when(border) {
+    @include halfPixelBorder('bottom');
+  }
+}

@@ -611,6 +611,16 @@
           },
           "navigationBarTitleText": "Overlay 遮罩层"
         }
+      },
+      {
+        "path": "pages/navbar/Index",
+        "name": "navbar",
+        "style": {
+          "mp-alipay": {
+            "allowsBounceVertical": "NO"
+          },
+          "navigationBarTitleText": "Navbar 导航栏"
+        }
       }
     ],
     // "tabBar": {

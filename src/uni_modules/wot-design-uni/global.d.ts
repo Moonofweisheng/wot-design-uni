@@ -83,6 +83,7 @@ declare module '@vue/runtime-core' {
     WdSegmented: typeof import('./components/wd-segmented/wd-segmented.vue')['default']
     WdTabbar: typeof import('./components/wd-tabbar/wd-tabbar.vue')['default']
     WdTabbarItem: typeof import('./components/wd-tabbar-item/wd-tabbar-item.vue')['default']
+    WdNavbar: typeof import('./components/wd-navbar/wd-navbar.vue')['default']
   }
 }
 

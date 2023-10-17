@@ -102,6 +102,10 @@ const list = ref([
       {
         id: 'tabbar',
         name: 'Tabbar 标签栏'
+      },
+      {
+        id: 'navbar',
+        name: 'Navbar 导航栏'
       }
     ]
   },

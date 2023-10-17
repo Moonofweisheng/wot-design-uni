@@ -777,3 +777,25 @@ $-tabbar-item-title-font-size: var(--wot-tabbar-item-title-font-size, 10px) !def
 $-tabbar-item-title-line-height: var(--wot-tabbar-item-title-line-height, initial) !default; // tabbar选项标题文字行高
 $-tabbar-inactive-color: var(--wot-tabbar-inactive-color, $-color-title) !default; // 标题文字和图标颜色
 $-tabbar-active-color: var(--wot-tabbar-active-color, $-color-theme) !default; // 选中文字和图标颜色
+
+
+// navbar
+$-navbar-height: var(--wot-navbar-height, 44px) !default; // navbar高度
+$-navbar-color: var(--wot-navbar-color, $-font-gray-1) !default; // navbar字体颜色
+$-navbar-background: var(--wot-navbar-background, $-color-white) !default; // navbar背景颜色
+$-navbar-arrow-size: var(--wot-navbar-arrow-size, 24px) !default; // navbar左箭头图标大小
+$-navbar-desc-font-size: var(--wot-navbar-desc-font-size, 16px); // navbar 左箭头字体大小
+$-navbar-desc-font-color: var(--wot-navbar-desc-font-color, $-font-gray-1) !default; // navbar左右两侧字体颜色
+$-navbar-title-font-size: var(--wot-navbar-title-font-size, 18px); // navbar title字体大小
+$-navbar-title-font-weight: var(--wot-navbar-title-font-weight, 600); // navbar title字重
+$-navbar-disabled-opacity: var(--wot-navbar-disabled-opacity, 0.6) !default; // navbar左右两侧字体禁用
+
+// navbar capsule
+$-navbar-capsule-border-color: var(--wot-navbar-capsule-border-color, #e7e7e7);
+$-navbar-capsule-border-radius: var(--wot-navbar-capsule-border-radius, 16px);
+$-navbar-capsule-width: var(--wot-navbar-capsule-width, 88px);
+$-navbar-capsule-height: var(--wot-navbar-capsule-height, 32px);
+
+
+
+
