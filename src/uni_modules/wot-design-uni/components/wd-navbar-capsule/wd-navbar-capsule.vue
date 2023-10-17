@@ -1,7 +1,7 @@
 <template>
   <view class="wd-navbar-capsule">
-    <wd-icon size="20" name="chevron-left" custom-class="wd-navbar-capsule__icon" />
-    <wd-icon size="20" name="home" custom-class="wd-navbar-capsule__icon" />
+    <wd-icon @click="handleBack" size="20px" name="chevron-left" custom-class="wd-navbar-capsule__icon" />
+    <wd-icon @click="handleBackHome" size="20px" name="home" custom-class="wd-navbar-capsule__icon" />
   </view>
 </template>
 <script lang="ts">
@@ -16,14 +16,14 @@ export default {
 </script>
 
 <script lang="ts" setup>
-interface Props {
-  customClass?: string
-  customStyle?: string
+const emit = defineEmits(['back', 'back-home'])
+
+function handleBack() {
+  emit('back')
 }
-
-const props = withDefaults(defineProps<Props>(), {})
-
-const emit = defineEmits(['click-left', 'click-right'])
+function handleBackHome() {
+  emit('back-home')
+}
 </script>
 
 <style lang="scss">

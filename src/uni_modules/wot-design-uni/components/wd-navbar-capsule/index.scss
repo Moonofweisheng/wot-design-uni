@@ -1,7 +1,21 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
-.wot-theme-dark {}
+.wot-theme-dark {
+  @include b(navbar-capsule) {
+    &::before {
+      border: 2rpx solid $-dark-border-color;
+    }
+
+    &::after {
+      background: $-dark-border-color;
+    }
+
+    :deep(.wd-navbar-capsule__icon) {
+      color: $-dark-color;
+    }
+  }
+}
 
 
 @include b(navbar-capsule) {
@@ -16,7 +30,6 @@
   &::before {
     content: '';
     position: absolute;
-    z-index: 1;
     top: 0;
     left: 0;
     width: 200%;
@@ -44,11 +57,9 @@
     display: none;
   }
 
-  :deep() {
-    .wd-navbar-capsule__icon {
-      flex: 1;
-      position: relative;
-      color: $-navbar-desc-font-color;
-    }
+  @include edeep(icon) {
+    flex: 1;
+    position: relative;
+    color: $-navbar-desc-font-color;
   }
 }

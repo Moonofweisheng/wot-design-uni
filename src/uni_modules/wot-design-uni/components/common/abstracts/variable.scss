@@ -55,7 +55,7 @@ $-dark-color: var(--wot-dark-color, $-color-white) !default;
 $-dark-color2: var(--wot-dark-color2, #f2270c) !default;
 $-dark-color3: var(--wot-dark-color3, rgba(232, 230, 227, 0.8)) !default;
 $-dark-color-gray: var(--wot-dark-color-gray, $-color-secondary) !default;
-$-dark-border-color:var(--wot-dark-border-color, #3a3a3c) !default;
+$-dark-border-color: var(--wot-dark-border-color, #3a3a3c) !default;
 
 /* 文字颜色-深背景 */
 $-color-title-indark: var(--wot-color-title-indark, $-color-white) !default; // 模块标题/重要正文 fff
@@ -789,13 +789,10 @@ $-navbar-desc-font-color: var(--wot-navbar-desc-font-color, $-font-gray-1) !defa
 $-navbar-title-font-size: var(--wot-navbar-title-font-size, 18px); // navbar title字体大小
 $-navbar-title-font-weight: var(--wot-navbar-title-font-weight, 600); // navbar title字重
 $-navbar-disabled-opacity: var(--wot-navbar-disabled-opacity, 0.6) !default; // navbar左右两侧字体禁用
+$-navbar-hover-color :var(--wot-navbar-hover-color, #eee) !default; // navbar hover样式
 
 // navbar capsule
 $-navbar-capsule-border-color: var(--wot-navbar-capsule-border-color, #e7e7e7);
 $-navbar-capsule-border-radius: var(--wot-navbar-capsule-border-radius, 16px);
 $-navbar-capsule-width: var(--wot-navbar-capsule-width, 88px);
 $-navbar-capsule-height: var(--wot-navbar-capsule-height, 32px);
-
-
-
-
