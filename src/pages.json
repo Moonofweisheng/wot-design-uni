@@ -1,636 +1,646 @@
 {
-    "pages": [
-      {
-        "path": "pages/index/Index",
-        "name": "index",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Wot Design Uni"
-        }
-      },
-      {
-        "path": "pages/button/Index",
-        "name": "button",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Button 按钮"
-        }
-      },
-      {
-        "path": "pages/icon/Index",
-        "name": "icon",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-  
-          "navigationBarTitleText": "Icon 图标"
-        }
-      },
-      {
-        "path": "pages/badge/Index",
-        "name": "badge",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Badge 徽标"
-        }
-      },
-      {
-        "path": "pages/cell/Index",
-        "name": "cell",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Cell 单元格"
-        }
-      },
-      {
-        "path": "pages/rate/Index",
-        "name": "rate",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Rate 评分"
-        }
-      },
-      {
-        "path": "pages/slider/Index",
-        "name": "slider",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Slider 滑块"
-        }
-      },
-      {
-        "path": "pages/layout/Index",
-        "name": "layout",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Layout 布局"
-        }
-      },
-      {
-        "path": "pages/card/Index",
-        "name": "card",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Card 卡片"
-        }
-      },
-      {
-        "path": "pages/tag/Index",
-        "name": "tag",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Tag 标签"
-        }
-      },
-      {
-        "path": "pages/search/Index",
-        "name": "search",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Search 搜索框"
-        }
-      },
-      {
-        "path": "pages/transition/Index",
-        "name": "transition",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Transition 动画"
-        }
-      },
-      {
-        "path": "pages/popup/Index",
-        "name": "popup",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Popup 弹出层"
-        }
-      },
-      {
-        "path": "pages/divider/Index",
-        "name": "divider",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Divider 分割线"
-        }
-      },
-      {
-        "path": "pages/switch/Index",
-        "name": "switch",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Switch 开关"
-        }
-      },
-      {
-        "path": "pages/input/Index",
-        "name": "input",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Input 输入框"
-        }
-      },
-      {
-        "path": "pages/messageBox/Index",
-        "name": "messageBox",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "MessageBox 弹框"
-        }
-      },
-      {
-        "path": "pages/toast/Index",
-        "name": "toast",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Toast 轻提示"
-        }
-      },
-      {
-        "path": "pages/notify/Index",
-        "name": "toast",
-        "style": {
-          
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Notify 消息通知"
-        }
-      },
-      {
-        "path": "pages/loading/Index",
-        "name": "loading",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Loading 加载指示器"
-        }
-      },
-      {
-        "path": "pages/progress/Index",
-        "name": "progress",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Progress 进度条"
-        }
-      },
-      {
-        "path": "pages/statusTip/Index",
-        "name": "statusTip",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "StatusTip 缺省提示"
-        }
-      },
-      {
-        "path": "pages/inputNumber/Index",
-        "name": "inputNumber",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "InputNumber 计数器"
-        }
-      },
-      {
-        "path": "pages/loadmore/Index",
-        "name": "loadmore",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "loadmore 加载更多"
-        }
-      },
-      {
-        "path": "pages/resize/Index",
-        "name": "resize",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Resize 监听元素尺寸变化"
-        }
-      },
-      {
-        "path": "pages/sticky/Index",
-        "name": "sticky",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Sticky 粘性布局"
-        }
-      },
-      {
-        "path": "pages/img/Index",
-        "name": "img",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Img 图片"
-        }
-      },
-      {
-        "path": "pages/imgCropper/Index",
-        "name": "imgCropper",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "ImgCropper 图片裁剪"
-        }
-      },
-      {
-        "path": "pages/pagination/Index",
-        "name": "pagination",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Pagination 分页"
-        }
-      },
-      {
-        "path": "pages/sortButton/Index",
-        "name": "sortButton",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "SortButton 排序按钮"
-        }
-      },
-      {
-        "path": "pages/actionSheet/Index",
-        "name": "actionSheet",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "ActionSheet 动作面板"
-        }
-      },
-      {
-        "path": "pages/curtain/Index",
-        "name": "curtain",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Curtain 幕帘"
-        }
-      },
-      {
-        "path": "pages/noticeBar/Index",
-        "name": "noticeBar",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "NoticeBar 通知栏"
-        }
-      },
-      {
-        "path": "pages/popover/Index",
-        "name": "popover",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "popover"
-        }
-      },
-      {
-        "path": "pages/tooltip/Index",
-        "name": "tooltip",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Tooltip 文字提示"
-        }
-      },
-      {
-        "path": "pages/pickerView/Index",
-        "name": "pickerView",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "PickerView 选择器视图"
-        }
-      },
-      {
-        "path": "pages/picker/Index",
-        "name": "picker",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Picker 选择器"
-        }
-      },
-      {
-        "path": "pages/tabs/Index",
-        "name": "tabs",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Tab 标签页"
-        }
-      },
-      {
-        "path": "pages/radio/Index",
-        "name": "radio",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Radio 单选框"
-        }
-      },
-      {
-        "path": "pages/checkbox/Index",
-        "name": "checkbox",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Checkbox 复选框"
-        }
-      },
-      {
-        "path": "pages/colPicker/Index",
-        "name": "colPicker",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "ColPicker 多列选择器"
-        }
-      },
-      {
-        "path": "pages/selectPicker/Index",
-        "name": "selectPicker",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "SelectPicker 单复选选择器"
-        }
-      },
-      {
-        "path": "pages/dropMenu/Index",
-        "name": "dropMenu",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "DropMenu 下拉菜单"
-        }
-      },
-      {
-        "path": "pages/grid/Index",
-        "name": "grid",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Grid 宫格"
-        }
-      },
-      {
-        "path": "pages/swipeAction/Index",
-        "name": "swipeAction",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "SwipeAction 滑动操作"
-        }
-      },
-      {
-        "path": "pages/skeleton/Index",
-        "name": "skeleton",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Skeleton 骨架屏"
-        }
-      },
-      {
-        "path": "pages/steps/Index",
-        "name": "steps",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Steps 标签页"
-        }
-      },
-      {
-        "path": "pages/upload/Index",
-        "name": "upload",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Upload 上传"
-        }
-      },
-      {
-        "path": "pages/calendarView/Index",
-        "name": "calendarView",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "CalendarView 日历面板组件"
-        }
-      },
-      {
-        "path": "pages/calendar/Index",
-        "name": "calendar",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Calendar 日历选择器"
-        }
-      },
-      {
-        "path": "pages/datetimePickerView/Index",
-        "name": "datetimePickerView",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "DatetimePickerView 日期时间选择器视图"
-        }
-      },
-      {
-        "path": "pages/datetimePicker/Index",
-        "name": "datetimePicker",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "DatetimePicker 日期时间选择器"
-        }
-      },
-      {
-        "path": "pages/form/Index",
-        "name": "form",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Form 表单组合"
-        }
-      },
-      {
-        "path": "pages/collapse/Index",
-        "name": "collapse",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Collapse 折叠面板"
-        }
-      },
-      {
-        "path": "pages/configProvider/Index",
-        "name": "configProvider",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "ConfigProvider 全局配置"
-        }
-      },
-      {
-        "path": "pages/watermark/Index",
-        "name": "watermark",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Watermark 水印"
-        }
-      },
-      {
-        "path": "pages/circle/Index",
-        "name": "circle",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Circle 环形进度条"
-        }
-      },
-      {
-        "path": "pages/swiper/Index",
-        "name": "swiper",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Swiper 轮播图"
-        }
-      },
-      {
-        "path": "pages/segmented/Index",
-        "name": "segmented",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Segmented 分段器"
-        }
-      },
-      {
-        "path": "pages/tabbar/Index",
-        "name": "tabbar",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Tabbar 标签栏"
-        }
-      },
-      {
-        "path": "pages/overlay/Index",
-        "name": "overlay",
-        "style": {
-          "mp-alipay": {
-            "allowsBounceVertical": "NO"
-          },
-          "navigationBarTitleText": "Overlay 遮罩层"
-        }
+  "pages": [{
+      "path": "pages/index/Index",
+      "name": "index",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Wot Design Uni"
       }
-    ],
-    // "tabBar": {
-    //   "color": "#7a7e83",
-    //   "selectedColor": "#1C64FD",
-    //   "backgroundColor": "#ffffff",
-    //   "list": [ ]
-    // },
-    "globalStyle": {
-      "navigationBarBackgroundColor": "@navBgColor",
-      "navigationBarTextStyle": "@navTxtStyle",
-      "navigationBarTitleText": "Wot Design Uni",
-      "backgroundColor": "@bgColor",
-      "backgroundTextStyle": "@bgTxtStyle",
-      "backgroundColorTop": "@bgColorTop",
-      "backgroundColorBottom": "@bgColorBottom",
-      "navigationStyle": "default"
+    },
+    {
+      "path": "pages/button/Index",
+      "name": "button",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Button 按钮"
+      }
+    },
+    {
+      "path": "pages/icon/Index",
+      "name": "icon",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
 
-      // "navigationBarTextStyle": "black",
-      // "navigationBarBackgroundColor": "#FFF",
-      // "backgroundColor": "#F8F8F8"
+        "navigationBarTitleText": "Icon 图标"
+      }
+    },
+    {
+      "path": "pages/badge/Index",
+      "name": "badge",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Badge 徽标"
+      }
+    },
+    {
+      "path": "pages/cell/Index",
+      "name": "cell",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Cell 单元格"
+      }
+    },
+    {
+      "path": "pages/rate/Index",
+      "name": "rate",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Rate 评分"
+      }
+    },
+    {
+      "path": "pages/slider/Index",
+      "name": "slider",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Slider 滑块"
+      }
+    },
+    {
+      "path": "pages/layout/Index",
+      "name": "layout",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Layout 布局"
+      }
+    },
+    {
+      "path": "pages/card/Index",
+      "name": "card",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Card 卡片"
+      }
+    },
+    {
+      "path": "pages/tag/Index",
+      "name": "tag",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Tag 标签"
+      }
+    },
+    {
+      "path": "pages/search/Index",
+      "name": "search",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Search 搜索框"
+      }
+    },
+    {
+      "path": "pages/transition/Index",
+      "name": "transition",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Transition 动画"
+      }
+    },
+    {
+      "path": "pages/popup/Index",
+      "name": "popup",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Popup 弹出层"
+      }
+    },
+    {
+      "path": "pages/divider/Index",
+      "name": "divider",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Divider 分割线"
+      }
+    },
+    {
+      "path": "pages/switch/Index",
+      "name": "switch",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Switch 开关"
+      }
+    },
+    {
+      "path": "pages/input/Index",
+      "name": "input",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Input 输入框"
+      }
+    },
+    {
+      "path": "pages/messageBox/Index",
+      "name": "messageBox",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "MessageBox 弹框"
+      }
+    },
+    {
+      "path": "pages/toast/Index",
+      "name": "toast",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Toast 轻提示"
+      }
+    },
+    {
+      "path": "pages/notify/Index",
+      "name": "toast",
+      "style": {
+
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Notify 消息通知"
+      }
+    },
+    {
+      "path": "pages/loading/Index",
+      "name": "loading",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Loading 加载指示器"
+      }
+    },
+    {
+      "path": "pages/progress/Index",
+      "name": "progress",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Progress 进度条"
+      }
+    },
+    {
+      "path": "pages/statusTip/Index",
+      "name": "statusTip",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "StatusTip 缺省提示"
+      }
+    },
+    {
+      "path": "pages/inputNumber/Index",
+      "name": "inputNumber",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "InputNumber 计数器"
+      }
+    },
+    {
+      "path": "pages/loadmore/Index",
+      "name": "loadmore",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "loadmore 加载更多"
+      }
+    },
+    {
+      "path": "pages/resize/Index",
+      "name": "resize",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Resize 监听元素尺寸变化"
+      }
+    },
+    {
+      "path": "pages/sticky/Index",
+      "name": "sticky",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Sticky 粘性布局"
+      }
+    },
+    {
+      "path": "pages/img/Index",
+      "name": "img",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Img 图片"
+      }
+    },
+    {
+      "path": "pages/imgCropper/Index",
+      "name": "imgCropper",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "ImgCropper 图片裁剪"
+      }
+    },
+    {
+      "path": "pages/pagination/Index",
+      "name": "pagination",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Pagination 分页"
+      }
+    },
+    {
+      "path": "pages/sortButton/Index",
+      "name": "sortButton",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "SortButton 排序按钮"
+      }
+    },
+    {
+      "path": "pages/actionSheet/Index",
+      "name": "actionSheet",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "ActionSheet 动作面板"
+      }
+    },
+    {
+      "path": "pages/curtain/Index",
+      "name": "curtain",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Curtain 幕帘"
+      }
+    },
+    {
+      "path": "pages/noticeBar/Index",
+      "name": "noticeBar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "NoticeBar 通知栏"
+      }
+    },
+    {
+      "path": "pages/popover/Index",
+      "name": "popover",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "popover"
+      }
+    },
+    {
+      "path": "pages/tooltip/Index",
+      "name": "tooltip",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Tooltip 文字提示"
+      }
+    },
+    {
+      "path": "pages/pickerView/Index",
+      "name": "pickerView",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "PickerView 选择器视图"
+      }
+    },
+    {
+      "path": "pages/picker/Index",
+      "name": "picker",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Picker 选择器"
+      }
+    },
+    {
+      "path": "pages/tabs/Index",
+      "name": "tabs",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Tab 标签页"
+      }
+    },
+    {
+      "path": "pages/radio/Index",
+      "name": "radio",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Radio 单选框"
+      }
+    },
+    {
+      "path": "pages/checkbox/Index",
+      "name": "checkbox",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Checkbox 复选框"
+      }
+    },
+    {
+      "path": "pages/colPicker/Index",
+      "name": "colPicker",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "ColPicker 多列选择器"
+      }
+    },
+    {
+      "path": "pages/selectPicker/Index",
+      "name": "selectPicker",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "SelectPicker 单复选选择器"
+      }
+    },
+    {
+      "path": "pages/dropMenu/Index",
+      "name": "dropMenu",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "DropMenu 下拉菜单"
+      }
+    },
+    {
+      "path": "pages/grid/Index",
+      "name": "grid",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Grid 宫格"
+      }
+    },
+    {
+      "path": "pages/swipeAction/Index",
+      "name": "swipeAction",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "SwipeAction 滑动操作"
+      }
+    },
+    {
+      "path": "pages/skeleton/Index",
+      "name": "skeleton",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Skeleton 骨架屏"
+      }
+    },
+    {
+      "path": "pages/steps/Index",
+      "name": "steps",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Steps 标签页"
+      }
+    },
+    {
+      "path": "pages/upload/Index",
+      "name": "upload",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Upload 上传"
+      }
+    },
+    {
+      "path": "pages/calendarView/Index",
+      "name": "calendarView",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "CalendarView 日历面板组件"
+      }
+    },
+    {
+      "path": "pages/calendar/Index",
+      "name": "calendar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Calendar 日历选择器"
+      }
+    },
+    {
+      "path": "pages/datetimePickerView/Index",
+      "name": "datetimePickerView",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "DatetimePickerView 日期时间选择器视图"
+      }
+    },
+    {
+      "path": "pages/datetimePicker/Index",
+      "name": "datetimePicker",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "DatetimePicker 日期时间选择器"
+      }
+    },
+    {
+      "path": "pages/form/Index",
+      "name": "form",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Form 表单组合"
+      }
+    },
+    {
+      "path": "pages/collapse/Index",
+      "name": "collapse",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Collapse 折叠面板"
+      }
+    },
+    {
+      "path": "pages/configProvider/Index",
+      "name": "configProvider",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "ConfigProvider 全局配置"
+      }
+    },
+    {
+      "path": "pages/watermark/Index",
+      "name": "watermark",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Watermark 水印"
+      }
+    },
+    {
+      "path": "pages/circle/Index",
+      "name": "circle",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Circle 环形进度条"
+      }
+    },
+    {
+      "path": "pages/swiper/Index",
+      "name": "swiper",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Swiper 轮播图"
+      }
+    },
+    {
+      "path": "pages/segmented/Index",
+      "name": "segmented",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Segmented 分段器"
+      }
+    },
+    {
+      "path": "pages/tabbar/Index",
+      "name": "tabbar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Tabbar 标签栏"
+      }
+    },
+    {
+      "path": "pages/overlay/Index",
+      "name": "overlay",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Overlay 遮罩层"
+      }
+    },
+    {
+      "path": "pages/navbar/Index",
+      "name": "navbar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Navbar 导航栏",
+        "navigationStyle": "custom"
+      }
     }
+  ],
+  // "tabBar": {
+  //   "color": "#7a7e83",
+  //   "selectedColor": "#1C64FD",
+  //   "backgroundColor": "#ffffff",
+  //   "list": [ ]
+  // },
+  "globalStyle": {
+    "navigationBarBackgroundColor": "@navBgColor",
+    "navigationBarTextStyle": "@navTxtStyle",
+    "navigationBarTitleText": "Wot Design Uni",
+    "backgroundColor": "@bgColor",
+    "backgroundTextStyle": "@bgTxtStyle",
+    "backgroundColorTop": "@bgColorTop",
+    "backgroundColorBottom": "@bgColorBottom",
+    "navigationStyle": "default"
+
+    // "navigationBarTextStyle": "black",
+    // "navigationBarBackgroundColor": "#FFF",
+    // "backgroundColor": "#F8F8F8"
   }
+}

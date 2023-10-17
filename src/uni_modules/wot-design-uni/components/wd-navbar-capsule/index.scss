@@ -1,0 +1,65 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+.wot-theme-dark {
+  @include b(navbar-capsule) {
+    &::before {
+      border: 2rpx solid $-dark-border-color;
+    }
+
+    &::after {
+      background: $-dark-border-color;
+    }
+
+    :deep(.wd-navbar-capsule__icon) {
+      color: $-dark-color;
+    }
+  }
+}
+
+
+@include b(navbar-capsule) {
+  position: relative;
+  box-sizing: border-box;
+  width: $-navbar-capsule-width;
+  height: $-navbar-capsule-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border-radius: calc($-navbar-capsule-border-radius * 2);
+    border: 2rpx solid $-navbar-capsule-border-color;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 36rpx;
+    background: $-navbar-capsule-border-color;
+  }
+
+  &:empty {
+    display: none;
+  }
+
+  @include edeep(icon) {
+    flex: 1;
+    position: relative;
+    color: $-navbar-desc-font-color;
+  }
+}

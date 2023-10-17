@@ -199,6 +199,9 @@ export default defineConfig({
           }, {
             link: "/component/tabbar",
             text: "Tabbar 标签栏"
+          }, {
+            link: "/component/navbar",
+            text: "Navbar 导航栏"
           }]
         }, {
     

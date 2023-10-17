@@ -1,0 +1,104 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+.wot-theme-dark {
+  @include b(navbar) {
+    background-color: $-dark-background;
+
+    @include e(title) {
+      color: $-dark-color;
+    }
+
+    @include e(text) {
+      color: $-dark-color;
+      @include m(hover){
+        background-color: $-dark-background3;
+      }
+    }
+
+    :deep(.wd-navbar__arrow) {
+      color: $-dark-color;
+    }
+  }
+}
+
+
+@include b(navbar) {
+  position: relative;
+  text-align: center;
+  user-select: none;
+  height: $-navbar-height;
+  line-height: $-navbar-height;
+  background-color: $-navbar-background;
+  box-sizing: content-box;
+
+  @include e(content) {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  @include e(title) {
+    max-width: 60%;
+    height: 100%;
+    margin: 0 auto;
+    color: $-navbar-color;
+    font-weight: $-navbar-title-font-weight;
+    font-size: $-navbar-title-font-size;
+    @include lineEllipsis();
+  }
+
+  @include e(text) {
+    display: inline-block;
+    vertical-align: middle;
+    color: $-navbar-desc-font-color;
+  }
+
+  @include e(left, right, capsule) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    font-size: $-navbar-desc-font-size;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+
+    @include when(disabled) {
+      opacity: $-navbar-disabled-opacity;
+    }
+  }
+
+  @include e(left, capsule) {
+    left: 0;
+  }
+
+  @include e(left) {
+    @include m(hover){
+      background-color: $-navbar-hover-color;
+    }
+  }
+
+  @include e(right) {
+    right: 0;
+    @include m(hover){
+      background-color: $-navbar-hover-color;
+    }
+  }
+
+  @include edeep(arrow) {
+    font-size: $-navbar-arrow-size;
+    color: $-navbar-color;
+  }
+
+  @include when(fixed) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 500;
+  }
+
+  @include when(border) {
+    @include halfPixelBorder('bottom');
+  }
+}
