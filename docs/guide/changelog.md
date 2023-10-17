@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.33](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.32...v0.1.33) (2023-10-17)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Navbar 导航栏组件 ([#86](https://github.com/Moonofweisheng/wot-design-uni/issues/86)) ([5f66f71](https://github.com/Moonofweisheng/wot-design-uni/commit/5f66f713fae9e693fda4a472bc3e0767a1a6d3e8))
+
 ### [0.1.32](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.31...v0.1.32) (2023-10-16)
 
 
