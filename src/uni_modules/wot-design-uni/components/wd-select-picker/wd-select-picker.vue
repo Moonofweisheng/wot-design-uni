@@ -34,50 +34,55 @@
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       @close="close"
+      @opened="scrollIntoView ? setScrollIntoView() : ''"
       custom-header-class="wd-select-picker__header"
     >
       <wd-search v-if="filterable" v-model="filterVal" :placeholder="filterPlaceholder" hide-cancel placeholder-left @change="handleFilterChange" />
-      <view :class="`wd-select-picker__wrapper ${filterable ? 'is-filterable' : ''} ${loading ? 'is-loading' : ''} ${customContentClass}`">
+      <scroll-view
+        :class="`wd-select-picker__wrapper ${filterable ? 'is-filterable' : ''} ${loading ? 'is-loading' : ''} ${customContentClass}`"
+        scroll-y
+        :scroll-top="scrollTop"
+        :scroll-with-animation="true"
+      >
         <!-- 多选 -->
-        <wd-checkbox-group
-          v-if="type === 'checkbox'"
-          v-model="selectList"
-          cell
-          :size="selectSize"
-          :checked-color="checkedColor"
-          :min="min"
-          :max="max"
-          @change="handleChange"
-        >
-          <wd-checkbox v-for="item in filterColumns" :key="item[valueKey]" :modelValue="item[valueKey]" :disabled="item.disabled">
-            <block v-if="filterable && filterVal">
-              <block v-for="text in item[labelKey]" :key="text.label">
-                <text v-if="text.type === 'active'" class="wd-select-picker__text-active">{{ text.label }}</text>
-                <block v-else>{{ text.label }}</block>
-              </block>
-            </block>
-            <block v-else>
-              {{ item[labelKey] }}
-            </block>
-          </wd-checkbox>
-        </wd-checkbox-group>
+        <view v-if="type === 'checkbox'" id="wd-checkbox-group">
+          <wd-checkbox-group v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" :min="min" :max="max" @change="handleChange">
+            <view v-for="item in filterColumns" :key="item[valueKey]" :id="'check' + item[valueKey]">
+              <wd-checkbox :modelValue="item[valueKey]" :disabled="item.disabled">
+                <block v-if="filterable && filterVal">
+                  <block v-for="text in item[labelKey]" :key="text.label">
+                    <text v-if="text.type === 'active'" class="wd-select-picker__text-active">{{ text.label }}</text>
+                    <block v-else>{{ text.label }}</block>
+                  </block>
+                </block>
+                <block v-else>
+                  {{ item[labelKey] }}
+                </block>
+              </wd-checkbox>
+            </view>
+          </wd-checkbox-group>
+        </view>
         <!-- 单选 -->
-        <wd-radio-group v-if="type === 'radio'" v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" @change="handleChange">
-          <wd-radio v-for="(item, index) in filterColumns" :key="index" :value="item[valueKey]" :disabled="item.disabled">
-            <block v-if="filterable && filterVal">
-              <block v-for="text in item[labelKey]" :key="text.label">
-                <text :clsss="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
-              </block>
-            </block>
-            <block v-else>
-              {{ item[labelKey] }}
-            </block>
-          </wd-radio>
-        </wd-radio-group>
+        <view v-if="type === 'radio'" id="wd-radio-group">
+          <wd-radio-group v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" @change="handleChange">
+            <view v-for="(item, index) in filterColumns" :key="index" :id="'radio' + item[valueKey]">
+              <wd-radio :value="item[valueKey]" :disabled="item.disabled">
+                <block v-if="filterable && filterVal">
+                  <block v-for="text in item[labelKey]" :key="text.label">
+                    <text :clsss="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
+                  </block>
+                </block>
+                <block v-else>
+                  {{ item[labelKey] }}
+                </block>
+              </wd-radio>
+            </view>
+          </wd-radio-group>
+        </view>
         <view v-if="loading" class="wd-select-picker__loading" @touchmove="noop">
           <wd-loading :color="loadingColor" />
         </view>
-      </view>
+      </scroll-view>
       <!-- 确认按钮 -->
       <view class="wd-select-picker__footer">
         <wd-button block size="large" @click="onConfirm" :disabled="loading">{{ confirmButtonText }}</wd-button>
@@ -97,10 +102,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onBeforeMount, ref, watch } from 'vue'
+import { getCurrentInstance, onBeforeMount, ref, watch, nextTick } from 'vue'
 import { useCell } from '../composables/useCell'
-import { nextTick } from 'vue'
-import { getType, isArray } from '../common/util'
+import { getRect, getType, isArray, isDef, requestAnimationFrame } from '../common/util'
 
 type SelectPickerType = 'checkbox' | 'radio'
 
@@ -144,6 +148,7 @@ interface Props {
   filterable?: boolean
   filterPlaceholder?: string
   ellipsis?: boolean
+  scrollIntoView?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -175,7 +180,8 @@ const props = withDefaults(defineProps<Props>(), {
   safeAreaInsetBottom: true,
   filterable: false,
   filterPlaceholder: '搜索',
-  ellipsis: false
+  ellipsis: false,
+  scrollIntoView: true
 })
 
 const pickerShow = ref<boolean>(false)
@@ -185,7 +191,7 @@ const isConfirm = ref<boolean>(false)
 const lastSelectList = ref<Array<number | boolean | string>>([])
 const filterVal = ref<string>('')
 const filterColumns = ref<Array<Record<string, any>>>([])
-
+const scrollTop = ref<number | null>(0) // 滚动位置
 const cell = useCell()
 
 watch(
@@ -249,6 +255,48 @@ onBeforeMount(() => {
 })
 
 const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue'])
+
+const { proxy } = getCurrentInstance() as any
+
+function setScrollIntoView() {
+  let wraperSelector: string = ''
+  let selectorPromise: Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>[] = []
+  if (isDef(selectList.value) && !isArray(selectList.value)) {
+    wraperSelector = '#wd-radio-group'
+    selectorPromise = [getRect(`#radio${selectList.value}`, false, proxy)]
+  } else if (isArray(selectList.value) && selectList.value.length > 0) {
+    selectList.value.forEach((value) => {
+      selectorPromise.push(getRect(`#check${value}`, false, proxy))
+    })
+    wraperSelector = '#wd-checkbox-group'
+  }
+  requestAnimationFrame().then(() => {
+    requestAnimationFrame().then(() => {
+      Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise])
+        .then((res: any[]) => {
+          if (isDef(res) && isArray(res)) {
+            const scrollView = res[0]
+            const wraper = res[1]
+            const target = res.slice(2) || []
+            if (isDef(wraper) && isDef(scrollView)) {
+              const index = target.findIndex((item) => {
+                return item.top >= scrollView.top && item.bottom <= scrollView.bottom
+              })
+              if (index < 0) {
+                scrollTop.value = -1
+                nextTick(() => {
+                  scrollTop.value = Math.max(0, target[0].top - wraper.top - scrollView.height / 2)
+                })
+              }
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    })
+  })
+}
 
 function noop() {}
 

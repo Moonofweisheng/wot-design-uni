@@ -1,6 +1,6 @@
 <frame/>
 
-# Navbar 导航栏
+# Navbar 导航栏 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.33</el-tag>
 
 为页面提供导航功能，常用于页面顶部。
 
