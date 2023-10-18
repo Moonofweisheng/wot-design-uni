@@ -238,10 +238,14 @@ export const context = {
  * @param scope 作用域（支付宝小程序无效）
  * @returns
  */
-export function getRect(selector: string, all: boolean = false, scope: any) {
+export function getRect(selector: string, all: boolean = false, scope?: any) {
   return new Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>((resolve) => {
     let query: UniNamespace.SelectorQuery | null = null
-    query = uni.createSelectorQuery().in(scope)
+    if (scope) {
+      query = uni.createSelectorQuery().in(scope)
+    } else {
+      query = uni.createSelectorQuery()
+    }
     query[all ? 'selectAll' : 'select'](selector)
       .boundingClientRect((rect) => {
         if (all && Array.isArray(rect) && rect.length) {
@@ -395,7 +399,7 @@ export const requestAnimationFrame = (cb = () => void 0) => {
       clearInterval(timer)
       resolve(true)
       cb()
-    }, 1000 / 60)
+    }, 1000 / 30)
   })
 }
 

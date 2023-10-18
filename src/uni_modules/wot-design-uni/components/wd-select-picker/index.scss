@@ -220,6 +220,7 @@
     padding: 0 10px;
     position: relative;
     max-height: 356px;
+    box-sizing: border-box;
     overflow: auto;
 
     @include when(filterable) {
