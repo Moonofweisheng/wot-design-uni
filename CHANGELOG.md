@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.34](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.33...v0.1.34) (2023-10-18)
+
+
+### ✨ Features | 新功能
+
+* ✨ SelectPicker 单复选选择器增加 scroll-into-view 属性支持定位到选中值 ([00b27c1](https://github.com/Moonofweisheng/wot-design-uni/commit/00b27c187438426471dab2ea15bc39d627773ab2)), closes [#68](https://github.com/Moonofweisheng/wot-design-uni/issues/68)
+
 ### [0.1.33](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.32...v0.1.33) (2023-10-17)
 
 
