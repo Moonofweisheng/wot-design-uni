@@ -23,7 +23,7 @@ import { inject } from 'vue'
 interface Props {
   customClass?: string
   // 唯一标识符
-  name: string | number
+  name?: string | number
   // tab的label
   title?: string
   // tab禁用，无法点击
@@ -43,18 +43,13 @@ const parent = inject<any>('tabs')
 watch(
   () => props.name,
   (newValue) => {
-    if (newValue === '' || newValue === undefined) {
-      console.error('[wot design] error(wd-tab): name must be set !')
-      return
-    }
-    if (getType(newValue) !== 'number' && getType(newValue) !== 'string') {
+    if (newValue && getType(newValue) !== 'number' && getType(newValue) !== 'string') {
       console.error('[wot design] error(wd-tab): the type of name should be number or string')
       return
     }
     // 当tab与tabs建立relations关系之后，tab的name改变,需要检测一下与其他tab的name是否冲突
     if (parent) {
       checkName(proxy)
-      // parent.setActive(this.parent.data.value)
       parent.updateItems()
     }
   },
