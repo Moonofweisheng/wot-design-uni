@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.35](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.34...v0.1.35) (2023-10-21)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tabs 组件通过name匹配时抛出异常的问题 ([b36fb1f](https://github.com/Moonofweisheng/wot-design-uni/commit/b36fb1f9def0aa99c521ffc20c6cae8074b56838)), closes [#91](https://github.com/Moonofweisheng/wot-design-uni/issues/91)
+
 ### [0.1.34](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.33...v0.1.34) (2023-10-18)
 
 
