@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.36](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.35...v0.1.36) (2023-10-21)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tabs 指定name时双向绑定值仍为index的问题 ([756cad8](https://github.com/Moonofweisheng/wot-design-uni/commit/756cad8d6fcaefb0bf73f1cd2b9f4a24f5827b37)), closes [#91](https://github.com/Moonofweisheng/wot-design-uni/issues/91)
+
 ### [0.1.35](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.34...v0.1.35) (2023-10-21)
 
 
