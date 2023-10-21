@@ -131,8 +131,8 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, provide, ref, watch } from 'vue'
-import { checkNumRange, debounce, getRect, getType, isNumber, objToStyle } from '../common/util'
+import { computed, getCurrentInstance, onMounted, provide, ref, watch, nextTick } from 'vue'
+import { checkNumRange, debounce, getRect, getType, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 
 const $item = '.wd-tabs__nav-item'
@@ -217,18 +217,24 @@ const bodyStyle = computed(() => {
  * @param {String |Number } value - radio绑定的value或者tab索引，默认值0
  * @param {Boolean } init - 是否伴随初始化操作
  */
-const setActive = debounce(function (value = 0, init = false) {
-  // 没有tab子元素，不执行任何操作
-  if (items.value.length === 0) return
+const setActive = debounce(
+  function (value: number = 0, init: boolean = false, setScroll: boolean = true) {
+    // 没有tab子元素，不执行任何操作
+    if (items.value.length === 0) return
 
-  value = getActiveIndex(value)
-  // 被禁用，不执行任何操作
-  if (items.value[value].disabled) return
-  activeIndex.value = value
-  updateLineStyle(init === false)
-  setActiveTab()
-  scrollIntoView()
-}, 100)
+    value = getActiveIndex(value)
+    // 被禁用，不执行任何操作
+    if (items.value[value].disabled) return
+    activeIndex.value = value
+    if (setScroll) {
+      updateLineStyle(init === false)
+      scrollIntoView()
+    }
+    setActiveTab()
+  },
+  100,
+  { leading: true }
+)
 
 watch(
   () => props.modelValue,
@@ -255,7 +261,8 @@ watch(
 watch(
   () => props.modelValue,
   (newValue) => {
-    setActive(newValue)
+    const index = getActiveIndex(newValue)
+    setActive(newValue, false, index !== activeIndex.value)
   },
   {
     immediate: false,
@@ -279,7 +286,9 @@ watch(
 
 onMounted(() => {
   inited.value = true
-  setActive(props.modelValue, true)
+  nextTick(() => {
+    setActive(props.modelValue, true)
+  })
 })
 
 const emit = defineEmits(['change', 'disabled', 'click', 'update:modelValue'])
@@ -315,14 +324,8 @@ function setChild(child) {
   // 如果是字符串直接匹配，匹配不到用0兜底
   if (getType(props.modelValue) === 'string') {
     const index = items.value.findIndex((item) => item.name === props.modelValue)
-
     if (index === -1) return
     active = index
-    emit('change', {
-      index: index,
-      name: items.value[index].name
-    })
-    emit('update:modelValue', index)
   }
   children[active].$.exposed.setShow(true, true)
 }
@@ -348,8 +351,8 @@ function toggleMap() {
  * @description 更新tab items
  */
 function updateItems() {
-  items.value = children.map((child) => {
-    return { disabled: child.disabled, title: child.title, name: child.name }
+  items.value = children.map((child, index) => {
+    return { disabled: child.disabled, title: child.title, name: isDef(child.name) ? child.name : index }
   })
 }
 /**
@@ -388,12 +391,12 @@ function setActiveTab() {
   children.forEach((child, index) => {
     child.$.exposed.setShow(child.$.exposed.painted.value || index === activeIndex.value, index === activeIndex.value)
   })
-  if (activeIndex.value !== props.modelValue) {
+  if (items.value[activeIndex.value].name !== props.modelValue) {
     emit('change', {
       index: activeIndex.value,
       name: items.value[activeIndex.value].name
     })
-    emit('update:modelValue', activeIndex.value)
+    emit('update:modelValue', items.value[activeIndex.value].name)
   }
 }
 /**
@@ -407,7 +410,12 @@ function scrollIntoView() {
     // 选中元素之前的节点的宽度总和
     const offsetLeft = (navItemsRects as any).slice(0, activeIndex.value).reduce((prev, curr) => prev + curr.width, 0)
     // scroll-view滑动到selectItem的偏移量
-    scrollLeft.value = offsetLeft - ((navRect as any).width - selectItem.width) / 2
+    const left = offsetLeft - ((navRect as any).width - selectItem.width) / 2
+    if (left === scrollLeft.value) {
+      scrollLeft.value = left + Math.random() / 10000
+    } else {
+      scrollLeft.value = left
+    }
   })
 }
 /**
@@ -456,15 +464,15 @@ function onTouchEnd() {
     }
   }
 }
-function getActiveIndex(value) {
+function getActiveIndex(value: number | string) {
   // name代表的索引超过了items的边界，自动用0兜底
-  if (getType(value) === 'number' && value >= items.value.length) {
+  if (isNumber(value) && value >= items.value.length) {
     // eslint-disable-next-line prettier/prettier
     console.warn('[wot design] warning(wd-tabs): the type of tabs\' value is Number shouldn\'t be less than its children')
     value = 0
   }
   // 如果是字符串直接匹配，匹配不到用0兜底
-  if (getType(value) === 'string') {
+  if (isString(value)) {
     const index = items.value.findIndex((item) => item.name === value)
     value = index === -1 ? 0 : index
   }
