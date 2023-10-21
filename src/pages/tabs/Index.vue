@@ -13,6 +13,15 @@
         </block>
       </wd-tabs>
     </demo-block>
+    <demo-block title="name匹配" transparent>
+      <wd-tabs v-model="tab">
+        <block v-for="item in tabs" :key="item">
+          <wd-tab :title="`${item}`" :name="item">
+            <view class="content">内容{{ item }}</view>
+          </wd-tab>
+        </block>
+      </wd-tabs>
+    </demo-block>
 
     <demo-block title="粘性布局" transparent>
       <wd-tabs v-model="tab2" sticky>
@@ -88,11 +97,13 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
+const tabs = ref(['这', '是', '一', '个', '例子'])
+const tab = ref('例子')
 
 const tab1 = ref<number>(0)
 const tab2 = ref<number>(0)
 const tab3 = ref<number>(1)
-const tab4 = ref<number>(0)
+const tab4 = ref<number>(2)
 const tab5 = ref<number>(0)
 const tab6 = ref<number>(0)
 const tab7 = ref<number>(0)

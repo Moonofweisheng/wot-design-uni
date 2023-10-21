@@ -132,7 +132,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, provide, ref, watch } from 'vue'
-import { checkNumRange, debounce, getRect, getType, objToStyle } from '../common/util'
+import { checkNumRange, debounce, getRect, getType, isNumber, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 
 const $item = '.wd-tabs__nav-item'
@@ -307,21 +307,24 @@ function setChild(child) {
   updateItems()
 
   // 提前设置好高亮的 tab，避免等到 mounted 时出现闪烁延迟问题
-  if (typeof props.modelValue === 'number' && props.modelValue >= items.value.length) {
+  if (isNumber(props.modelValue) && props.modelValue >= items.value.length) {
     return
   }
+  let active: number = isNumber(props.modelValue) ? props.modelValue : 0
+
   // 如果是字符串直接匹配，匹配不到用0兜底
   if (getType(props.modelValue) === 'string') {
     const index = items.value.findIndex((item) => item.name === props.modelValue)
 
     if (index === -1) return
+    active = index
     emit('change', {
       index: index,
       name: items.value[index].name
     })
     emit('update:modelValue', index)
   }
-  children[props.modelValue].$.exposed.setShow(true, true)
+  children[active].$.exposed.setShow(true, true)
 }
 
 /**
