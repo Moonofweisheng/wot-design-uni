@@ -1,7 +1,5 @@
 import { ref, watch } from 'vue'
 
-const LockScrollClass = 'wd-lock-scroll'
-
 function useLockScroll(shouldLock: () => boolean) {
   const scrollLockCount = ref(0)
 

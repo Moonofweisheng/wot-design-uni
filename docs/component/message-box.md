@@ -194,7 +194,6 @@ MessageBox.prompt(options)
 | confirmButtonText | 确定按钮文案                                                  | string          | -                        | 确定             | -        |
 | cancelButtonText  | 取消按钮文案                                                  | string          | -                        | 取消             | -        |
 | selector          | 组件的 id                                                     | string          | -                        | #wd-message-box  | -        |
-| context           | 引用 `wd-message-box` 的页面实例或自定义组件实例              | object          | -                        | 当前页面实例     | -        |
 | zIndex            | 弹窗层级                                                      | number          | -                        | 99               | -    |
 | lazyRender        | 弹层内容懒渲染，触发展示时才渲染内容                          | boolean         | -                        | true             | -    |
 

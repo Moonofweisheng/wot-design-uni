@@ -103,13 +103,12 @@ export default defineConfig({
         ]
       },
       { text: '捐赠作者', link: '/reward/reward', activeMatch: '/reward/' },
-
       {
         text: '相关链接',
         items: [
-          { text: 'uni-mini-router', link: 'https://gitee.com/fant-mini/uni-mini-router' },
+          { text: 'Vue3路由库', link: 'https://moonofweisheng.gitee.io/uni-mini-router/' },
+          { text: '快速上手项目', link: 'https://github.com/Moonofweisheng/wot-starter' },
           { text: 'uni-mini-ci', link: 'https://gitee.com/fant-mini/uni-mini-ci' },
-          { text: 'fant-mini-plus', link: 'https://fant-mini-plus.top/fant-mini-plus/' },
           { text: 'wot-design', link: 'https://ftf.jd.com/wot-design/' },
           { text: 'wot-design-mini', link: 'https://ftf.jd.com/wot-design-mini/' }
         ],
