@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.38](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.37...v0.1.38) (2023-10-25)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Upload 组件showLimitNum属性名拼写错误的问题 ([301cbff](https://github.com/Moonofweisheng/wot-design-uni/commit/301cbff20facf60b5645108972f22c8c14235f87))
+
 ### [0.1.37](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.36...v0.1.37) (2023-10-25)
 
 
