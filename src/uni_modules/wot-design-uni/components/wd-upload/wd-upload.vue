@@ -33,7 +33,7 @@
         <!-- 唤起项图标 -->
         <wd-icon class="wd-upload__evoke-icon" name="fill-camera"></wd-icon>
         <!-- 有限制个数时确认是否展示限制个数 -->
-        <view v-if="limit && showLimitMum" class="wd-upload__evoke-num">（{{ uploadFiles.length }}/{{ limit }}）</view>
+        <view v-if="limit && showLimitNum" class="wd-upload__evoke-num">（{{ uploadFiles.length }}/{{ limit }}）</view>
       </view>
     </view>
   </view>
@@ -74,7 +74,7 @@ interface Props {
   statusKey?: string
   maxSize?: number
   limit?: number
-  showLimitMum?: boolean
+  showLimitNum?: boolean
   disabled?: boolean
   useDefaultSlot?: boolean
   // loading 相关
@@ -101,7 +101,7 @@ const props = withDefaults(defineProps<Props>(), {
   multiple: false,
   fileList: () => [] as Record<string, any>[],
   accept: 'image',
-  showLimitMum: true,
+  showLimitNum: true,
   disabled: false,
   sourceType: () => ['album', 'camera'],
   sizeType: () => ['original', 'compressed'],
