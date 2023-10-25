@@ -1,0 +1,13 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(table-col) {
+  flex: 0 0 auto;
+
+  @include e(cell){
+
+  }
+
+  @include e(row){
+  }
+}

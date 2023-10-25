@@ -1,0 +1,36 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(table) {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  background: #ffffff;
+
+  @include e(header){
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 80rpx;
+    display: flex;
+    pointer-events: none;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  @include e(body){
+    display: flex;
+    overflow: auto;
+    white-space: nowrap !important;
+    width: 100%;
+  }
+
+  @include e(cell){
+    display: inline-block;
+    flex: 0 0;
+    width: 220rpx;
+  }
+
+  @include e(row){
+  }
+}
