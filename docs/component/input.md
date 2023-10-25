@@ -165,7 +165,7 @@ function handleChange(event) {
 | selectionStart | 原生属性，光标起始位置，自动聚集时有效，需与selection-end搭配使用 | number | - | -1 | - |
 | selectionEnd | 原生属性，光标结束位置，自动聚集时有效，需与selection-start搭配使用 | number | - | -1 | - |
 | adjustPosition | 原生属性，键盘弹起时，是否自动上推页面 | boolean | - | true | - |
-| autoHeight | textarea原生属性，textarea 行数自适应，从1行开始显示 | string | - | - | - |
+| autoHeight | textarea原生属性，textarea 行数自适应，从1行开始显示 | boolean | - | false | - |
 | label | 设置左侧标题 | string | - | - | - |
 | size | 设置输入框大小 | string | - | - | - |
 | error | 设置输入框错误状态，错误状态时为红色 | boolean | - | false | - |

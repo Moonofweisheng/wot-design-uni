@@ -22,7 +22,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { getCurrentInstance, onMounted, provide, reactive, ref, watch, nextTick, computed, type CSSProperties } from 'vue'
-import { TabbarItem } from '../wd-tabbar-item/types'
+import type { TabbarItem } from '../wd-tabbar-item/types'
 import { addUnit, getRect, isDef, objToStyle } from '../common/util'
 
 type TabbarShape = 'default' | 'round'
