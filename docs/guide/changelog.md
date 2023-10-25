@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.1.37](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.36...v0.1.37) (2023-10-25)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复Tabbar组件类型警告的问题并优化文档相关链接 ([28c3cef](https://github.com/Moonofweisheng/wot-design-uni/commit/28c3cefdfc24f3f6f2669de5f93456a0db281f72))
+* ✏️  issues 模板更新 ([e34c5cd](https://github.com/Moonofweisheng/wot-design-uni/commit/e34c5cded1c850d22165c544a3c6a351701479ec))
+
 ### [0.1.36](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.35...v0.1.36) (2023-10-21)
 
 
