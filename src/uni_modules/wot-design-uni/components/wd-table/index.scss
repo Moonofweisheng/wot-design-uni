@@ -8,8 +8,6 @@
   background: #ffffff;
 
   @include e(header){
-    position: sticky;
-    top: 0;
     width: 100%;
     height: 80rpx;
     display: flex;
@@ -20,14 +18,11 @@
 
   @include e(body){
     display: flex;
-    overflow: auto;
-    white-space: nowrap !important;
-    width: 100%;
   }
 
   @include e(cell){
     display: inline-block;
-    flex: 0 0;
+    flex: 0 0 auto;
     width: 220rpx;
   }
 

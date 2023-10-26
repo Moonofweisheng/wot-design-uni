@@ -2,7 +2,7 @@
   <page-wraper>
     <wd-table :data="dataList" :stripe="true" @sort-method="doSort" @row-click="handleRowClick">
       <wd-table-col prop="name" label="姓名" fixed="true" width="320rpx" :sortable="true"></wd-table-col>
-      <wd-table-col prop="grade" label="分数" width="220rpx" :sortable="true">
+      <wd-table-col prop="grade" label="分数" width="280rpx" :sortable="true">
         <!-- <template #default="scope: any">
           <view class="custom-class">
             <text>{{ scope.row.grade }}</text>
@@ -10,7 +10,7 @@
           </view>
         </template> -->
       </wd-table-col>
-      <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true"></wd-table-col>
+      <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true" width="320rpx"></wd-table-col>
       <wd-table-col prop="school" label="求学之所"></wd-table-col>
       <wd-table-col prop="major" label="专业"></wd-table-col>
       <wd-table-col prop="gender" label="性别"></wd-table-col>

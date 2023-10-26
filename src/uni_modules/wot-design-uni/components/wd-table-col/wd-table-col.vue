@@ -45,7 +45,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   fixed: false, // 列是否固定，固定左或者右 取值  true, left, right
   sortable: false, // 是否开启列排序
-  lightHigh: false // 是否高亮
+  lightHigh: false, // 是否高亮
+  width: '200rpx' // 列宽度
 })
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -98,6 +99,8 @@ const column = computed(() => {
   let column: any[] = $props.value.data.map((item) => {
     return item[props.prop]
   })
+  console.log(column)
+  console.log(props.prop)
 
   return column
 })

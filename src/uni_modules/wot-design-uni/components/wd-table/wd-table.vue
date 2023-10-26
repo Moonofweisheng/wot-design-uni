@@ -1,14 +1,19 @@
 <template>
-  <view class="wd-table" :style="rootStyle">
-    <scroll-view class="wd-table__header" :scroll-left="left" enable-flex="true" scroll-x>
-      <view :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''}`" v-for="(column, index) in columns" :key="index">
+  <scroll-view class="wd-table" :style="rootStyle" :scroll-x="true">
+    <view class="wd-table__header" :style="rowStyle" v-if="showHeader">
+      <view
+        :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''}`"
+        :style="headerCellStyle(column.width)"
+        v-for="(column, index) in columns"
+        :key="index"
+      >
         <text>{{ column.label }}</text>
       </view>
-    </scroll-view>
-    <scroll-view class="wd-table__body" scroll-x="true" scroll-y="true" enable-flex="true" @scroll="doScroll">
+    </view>
+    <scroll-view class="wd-table__body" :style="bodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" @scroll="doScroll">
       <slot></slot>
     </scroll-view>
-  </view>
+  </scroll-view>
 </template>
 
 <script lang="ts">
@@ -23,7 +28,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, nextTick, onMounted, provide, ref, watch } from 'vue'
+import { type CSSProperties, computed, getCurrentInstance, nextTick, onMounted, provide, ref, watch } from 'vue'
 import { addUnit, debounce, deepClone, getRect, isDef, objToStyle } from '../common/util'
 
 interface Props {
@@ -37,6 +42,8 @@ interface Props {
   height?: string
   // 行高
   rowHeight?: number | string
+  // 是否显示表头
+  showHeader?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -48,7 +55,9 @@ const props = withDefaults(defineProps<Props>(), {
   // table高度
   height: '80vh',
   // 行高
-  rowHeight: '80rpx'
+  rowHeight: '80rpx',
+  // 是否显示表头
+  showHeader: true
 })
 
 // 监听数据源变化改变privide出去的$dataSource
@@ -71,33 +80,38 @@ const scroll = debounce(doScroll, 100, false) // 滚动事件
  * 根节点样式
  */
 const rootStyle = computed(() => {
-  const style: Record<string, string | number> = {}
+  const style: CSSProperties = {}
   if (isDef(props.height)) {
     style['height'] = addUnit(props.height)
   }
   return objToStyle(style)
 })
 
-/**
- * 根节点样式
- */
-const headerStyle = computed(() => {
-  return (width: string | number) => {
-    const style: Record<string, string | number> = {}
-    if (isDef(width)) {
-      style['width'] = addUnit(width)
-    }
+const rowStyle = computed(() => {
+  const style: CSSProperties = {}
+  let width: string | number = ''
+  columns.value.forEach((column) => {
+    width = width ? `${width} + ${addUnit(column.width)}` : addUnit(column.width)
+  })
+  style['width'] = `calc(${width})`
+  return objToStyle(style)
+})
 
-    return objToStyle(style)
+const headerHeight = ref<string | number>('80rpx') // 表格header高度
+const bodyStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (props.showHeader) {
+    style['height'] = `calc(${props.height} - ${headerHeight.value})`
   }
+  return `${objToStyle(style)};${rowStyle.value}`
 })
 
 const { proxy } = getCurrentInstance() as any
 onMounted(() => {
   nextTick(() => {
-    getRect('.header-container', false, proxy).then((data: any) => {
-      if (data && data.width) {
-        scrollWidth.value = addUnit(data.width)
+    getRect('.wd-table__header', false, proxy).then((data: any) => {
+      if (data && data.height) {
+        headerHeight.value = addUnit(data.height)
       }
     })
   })
@@ -109,6 +123,17 @@ onMounted(() => {
  */
 function setColumns(column: Record<string, any>) {
   columns.value = deepClone([...columns.value, column])
+}
+
+/**
+ * 表头单元格样式
+ */
+function headerCellStyle(width?: string | number) {
+  const style: Record<string, string | number> = {}
+  if (isDef(width)) {
+    style['width'] = addUnit(width)
+  }
+  return objToStyle(style)
 }
 
 /**
@@ -133,6 +158,9 @@ function doSort(column, index) {
  * 滚动事件
  */
 function doScroll(event) {
+  if (!props.showHeader) {
+    return
+  }
   left.value = event.detail.scrollLeft
   if (scrollWidth.value !== event.detail.scrollWidth) {
     scrollWidth.value = addUnit(event.detail.scrollWidth)
