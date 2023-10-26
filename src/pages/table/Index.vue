@@ -1,7 +1,9 @@
 <template>
   <page-wraper>
     <wd-table :data="dataList" :stripe="true" @sort-method="doSort" @row-click="handleRowClick">
-      <wd-table-col prop="name" label="姓名" fixed="true" width="320rpx" :sortable="true"></wd-table-col>
+      <template #fixed>
+        <wd-table-col prop="name" label="姓名" fixed="true" width="320rpx" :sortable="true"></wd-table-col>
+      </template>
       <wd-table-col prop="grade" label="分数" width="280rpx" :sortable="true">
         <!-- <template #default="scope: any">
           <view class="custom-class">

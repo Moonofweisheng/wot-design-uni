@@ -7,7 +7,15 @@
   overflow: auto;
   background: #ffffff;
 
-  @include e(header){
+  @include m(fixed) {
+    position: absolute;
+    left: 0;
+    background: #ffffff;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @include e(header) {
     width: 100%;
     height: 80rpx;
     display: flex;
@@ -16,16 +24,17 @@
     white-space: nowrap;
   }
 
-  @include e(body){
+  @include e(body) {
     display: flex;
+    box-sizing: border-box;
   }
 
-  @include e(cell){
+  @include e(cell) {
     display: inline-block;
     flex: 0 0 auto;
     width: 220rpx;
+    text-align: center;
   }
 
-  @include e(row){
-  }
+  @include e(row) {}
 }

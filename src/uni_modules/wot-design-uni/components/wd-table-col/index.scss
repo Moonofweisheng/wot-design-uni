@@ -1,12 +1,11 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
 
+@import '../wd-table/index';
+
 @include b(table-col) {
   flex: 0 0 auto;
 
-  @include e(cell){
-
-  }
 
   @include e(row){
   }

@@ -1,19 +1,38 @@
 <template>
-  <scroll-view class="wd-table" :style="rootStyle" :scroll-x="true">
-    <view class="wd-table__header" :style="rowStyle" v-if="showHeader">
-      <view
-        :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''}`"
-        :style="headerCellStyle(column.width)"
-        v-for="(column, index) in columns"
-        :key="index"
-      >
-        <text>{{ column.label }}</text>
+  <view style="position: relative; overflow: hidden">
+    <view class="wd-table--fixed" :style="fixedStyle">
+      <view class="wd-table__header" v-if="showHeader">
+        <view
+          :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''}`"
+          :style="headerCellStyle(column.width)"
+          v-for="(column, index) in columns"
+          :key="index"
+        >
+          <text>{{ column.label }}</text>
+        </view>
       </view>
+
+      <scroll-view class="wd-table__body" :style="fixedBodyStyle" :enable-flex="true" :scroll-y="true" :scroll-top="scrollTop">
+        <view id="fixed-body"><slot name="fixed"></slot></view>
+      </scroll-view>
     </view>
-    <scroll-view class="wd-table__body" :style="bodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" @scroll="doScroll">
-      <slot></slot>
+    <scroll-view class="wd-table" :style="rootStyle" :scroll-x="true">
+      <view class="wd-table__header" :style="rowStyle" v-if="showHeader">
+        <view
+          :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''}`"
+          :style="headerCellStyle(column.width)"
+          v-for="(column, index) in columns"
+          :key="index"
+        >
+          <text>{{ column.label }}</text>
+        </view>
+      </view>
+      <scroll-view class="wd-table__body" :style="bodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" @scroll="doScroll">
+        <view :style="{ width: addUnit(fixedWidth) }"></view>
+        <slot></slot>
+      </scroll-view>
     </scroll-view>
-  </scroll-view>
+  </view>
 </template>
 
 <script lang="ts">
@@ -69,12 +88,12 @@ watch(
   { deep: true }
 )
 
-const left = ref<number>(0) // scroll-view 滚动距离
+const scrollTop = ref<number>(0) // scroll-view 滚动距离
 const scrollWidth = ref<number | string>('auto') // 动态设置滚动宽度，兼容微信scroll-view中sticky失效的问题
 const columns = ref<Array<Record<string, any>>>([]) // 数据列
 const $props = ref<Props>(props)
 const emit = defineEmits(['click', 'sort-method', 'row-click'])
-const scroll = debounce(doScroll, 100, false) // 滚动事件
+const fixedWidth = ref<number | string>(0) // 固定列宽度
 
 /**
  * 根节点样式
@@ -84,6 +103,15 @@ const rootStyle = computed(() => {
   if (isDef(props.height)) {
     style['height'] = addUnit(props.height)
   }
+  return objToStyle(style)
+})
+
+/**
+ * 根节点样式
+ */
+const fixedStyle = computed(() => {
+  const style: CSSProperties = {}
+  style['width'] = addUnit(fixedWidth.value)
   return objToStyle(style)
 })
 
@@ -98,6 +126,15 @@ const rowStyle = computed(() => {
 })
 
 const headerHeight = ref<string | number>('80rpx') // 表格header高度
+
+const fixedBodyStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (props.showHeader) {
+    style['height'] = `calc(${props.height} - ${headerHeight.value})`
+  }
+  return `${objToStyle(style)}`
+})
+
 const bodyStyle = computed(() => {
   const style: CSSProperties = {}
   if (props.showHeader) {
@@ -109,9 +146,10 @@ const bodyStyle = computed(() => {
 const { proxy } = getCurrentInstance() as any
 onMounted(() => {
   nextTick(() => {
-    getRect('.wd-table__header', false, proxy).then((data: any) => {
-      if (data && data.height) {
-        headerHeight.value = addUnit(data.height)
+    getRect('#fixed-body', false, proxy).then((data: any) => {
+      console.log(data)
+      if (data && data.width) {
+        fixedWidth.value = data.width
       }
     })
   })
@@ -161,7 +199,7 @@ function doScroll(event) {
   if (!props.showHeader) {
     return
   }
-  left.value = event.detail.scrollLeft
+  scrollTop.value = event.detail.scrollTop
   if (scrollWidth.value !== event.detail.scrollWidth) {
     scrollWidth.value = addUnit(event.detail.scrollWidth)
   }
