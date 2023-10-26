@@ -5,6 +5,7 @@
 
 @include b(table-col) {
   flex: 0 0 auto;
+  display: inline-block;
 
 
   @include e(row){

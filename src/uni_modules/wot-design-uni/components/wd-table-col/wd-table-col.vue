@@ -99,9 +99,6 @@ const column = computed(() => {
   let column: any[] = $props.value.data.map((item) => {
     return item[props.prop]
   })
-  console.log(column)
-  console.log(props.prop)
-
   return column
 })
 

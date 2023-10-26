@@ -13,7 +13,7 @@
       </view>
 
       <scroll-view class="wd-table__body" :style="fixedBodyStyle" :enable-flex="true" :scroll-y="true" :scroll-top="scrollTop">
-        <view id="fixed-body"><slot name="fixed"></slot></view>
+        <view id="fixed-body" style="display: inline-block"><slot name="fixed"></slot></view>
       </scroll-view>
     </view>
     <scroll-view class="wd-table" :style="rootStyle" :scroll-x="true">
@@ -28,7 +28,7 @@
         </view>
       </view>
       <scroll-view class="wd-table__body" :style="bodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" @scroll="doScroll">
-        <view :style="{ width: addUnit(fixedWidth) }"></view>
+        <view :style="{ width: addUnit(fixedWidth), display: 'inline-block' }"></view>
         <slot></slot>
       </scroll-view>
     </scroll-view>
@@ -111,7 +111,9 @@ const rootStyle = computed(() => {
  */
 const fixedStyle = computed(() => {
   const style: CSSProperties = {}
-  style['width'] = addUnit(fixedWidth.value)
+  if (fixedWidth.value) {
+    style['width'] = addUnit(fixedWidth.value)
+  }
   return objToStyle(style)
 })
 
