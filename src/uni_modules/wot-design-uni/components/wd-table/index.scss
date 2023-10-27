@@ -19,7 +19,7 @@
   overflow: auto;
   background: #ffffff;
 
-  :deep(){
+  :deep() {
     .wd-table-col:last-child {
       .wd-table__cell {
         @include when(border) {

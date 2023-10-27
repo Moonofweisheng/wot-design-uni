@@ -1,7 +1,7 @@
 <template>
-  <view :class="`wd-table-col ${fixed ? 'is-fixed' : ''}`" :style="rootStyle">
+  <view :class="`wd-table-col`" :style="rootStyle">
     <view
-      :class="`wd-table__cell ${stripe && isOdd(index) ? 'is-stripe' : ''} ${border ? 'is-border' : ''}`"
+      :class="`wd-table__cell ${stripe && isOdd(index) ? 'is-stripe' : ''} ${border ? 'is-border' : ''} is-${align}`"
       v-for="(row, index) in column"
       :key="index"
       :style="rowStyle"
@@ -27,26 +27,28 @@ export default {
 import { Ref, computed, inject, onMounted, ref } from 'vue'
 import { addUnit, isDef, objToStyle, isOdd } from '../common/util'
 
+type AlignType = 'left' | 'center' | 'right'
+
 interface Props {
   // 列对应字段
   prop: string
   // 列对应字段标题
   label: string
   // 列宽度
-  width?: string
-  // 列是否固定，固定左或者右 取值  true, left, right
-  fixed?: string | boolean
+  width?: number
   // 是否开启列排序
   sortable?: boolean
   // 是否高亮
   lightHigh?: boolean
+  // 列的对齐方式，可选值left,center,right
+  align?: AlignType
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  fixed: false, // 列是否固定，固定左或者右 取值  true, left, right
   sortable: false, // 是否开启列排序
   lightHigh: false, // 是否高亮
-  width: '200rpx' // 列宽度
+  width: 100, // 列宽度，单位px
+  align: 'left'
 })
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -60,6 +62,9 @@ const stripe = computed(() => {
   return $props.value.stripe || false
 })
 
+/**
+ * 是否有边框
+ */
 const border = computed(() => {
   return $props.value.border || false
 })
@@ -107,17 +112,14 @@ const column = computed(() => {
 })
 
 onMounted(() => {
-  setColumns(
-    {
-      prop: props.prop,
-      label: props.label,
-      width: props.width,
-      fixed: props.fixed,
-      sortable: props.sortable,
-      sortDirection: '',
-      lightHigh: props.lightHigh
-    } // sortDirection代表排序的方向
-  )
+  setColumns({
+    prop: props.prop,
+    label: props.label,
+    width: props.width,
+    sortable: props.sortable,
+    lightHigh: props.lightHigh,
+    align: props.align
+  })
 })
 
 function handleRowClick(index: number) {
