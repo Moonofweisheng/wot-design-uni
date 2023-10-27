@@ -1,9 +1,9 @@
 <template>
-  <view style="position: relative; overflow: hidden">
-    <view class="wd-table--fixed" :style="fixedStyle">
+  <view :class="`wd-table-content ${border ? 'is-border' : ''}`">
+    <view :class="`wd-table--fixed ${isShadow ? 'is-shadow' : ''}`" :style="fixedStyle">
       <view class="wd-table__header" v-if="showHeader">
         <view
-          :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''}`"
+          :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''} ${border ? 'is-border' : ''} ${stripe ? 'is-stripe' : ''}`"
           :style="headerCellStyle(column.width)"
           v-for="(column, index) in columns"
           :key="index"
@@ -16,10 +16,10 @@
         <view id="fixed-body" style="display: inline-block"><slot name="fixed"></slot></view>
       </scroll-view>
     </view>
-    <scroll-view class="wd-table" :style="rootStyle" :scroll-x="true">
-      <view class="wd-table__header" :style="rowStyle" v-if="showHeader">
+    <scroll-view :class="`wd-table is-border`" :style="wraperStyle" :scroll-x="true" :throttle="false" @scroll="handleWraperScroll">
+      <view class="wd-table__header" id="table-header" :style="rowStyle" v-if="showHeader">
         <view
-          :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''}`"
+          :class="`wd-table__cell ${column.fixed ? 'is-fixed' : ''} ${border ? 'is-border' : ''} ${stripe ? 'is-stripe' : ''}`"
           :style="headerCellStyle(column.width)"
           v-for="(column, index) in columns"
           :key="index"
@@ -27,9 +27,11 @@
           <text>{{ column.label }}</text>
         </view>
       </view>
-      <scroll-view class="wd-table__body" :style="bodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" @scroll="doScroll">
-        <view :style="{ width: addUnit(fixedWidth), display: 'inline-block' }"></view>
-        <slot></slot>
+      <scroll-view class="wd-table__body" :style="bodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" @scroll="handleBodyScroll">
+        <view style="display: flex">
+          <view :style="{ width: addUnit(fixedWidth) }"></view>
+          <slot></slot>
+        </view>
       </scroll-view>
     </scroll-view>
   </view>
@@ -54,7 +56,7 @@ interface Props {
   // 显示的数据
   data: Array<any>
   // 是否带有边框
-  bordered?: boolean
+  border?: boolean
   // 是否为斑马纹 table
   stripe?: boolean
   // Table 的高度
@@ -70,11 +72,11 @@ const props = withDefaults(defineProps<Props>(), {
   data: () => [],
   // table行是否为斑马纹
   stripe: false,
-  bordered: true,
+  border: true,
   // table高度
   height: '80vh',
   // 行高
-  rowHeight: '80rpx',
+  rowHeight: '48px',
   // 是否显示表头
   showHeader: true
 })
@@ -92,13 +94,26 @@ const scrollTop = ref<number>(0) // scroll-view 滚动距离
 const scrollWidth = ref<number | string>('auto') // 动态设置滚动宽度，兼容微信scroll-view中sticky失效的问题
 const columns = ref<Array<Record<string, any>>>([]) // 数据列
 const $props = ref<Props>(props)
-const emit = defineEmits(['click', 'sort-method', 'row-click'])
 const fixedWidth = ref<number | string>(0) // 固定列宽度
+const isShadow = ref<boolean>(false) // 是否展示shadow
+
+const emit = defineEmits(['click', 'sort-method', 'row-click'])
 
 /**
  * 根节点样式
  */
 const rootStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (isDef(props.height)) {
+    style['height'] = addUnit(props.height)
+  }
+  return objToStyle(style)
+})
+
+/**
+ * 容器样式
+ */
+const wraperStyle = computed(() => {
   const style: CSSProperties = {}
   if (isDef(props.height)) {
     style['height'] = addUnit(props.height)
@@ -127,12 +142,12 @@ const rowStyle = computed(() => {
   return objToStyle(style)
 })
 
-const headerHeight = ref<string | number>('80rpx') // 表格header高度
+const headerHeight = ref<string | number>(48) // 表格header高度
 
 const fixedBodyStyle = computed(() => {
   const style: CSSProperties = {}
   if (props.showHeader) {
-    style['height'] = `calc(${props.height} - ${headerHeight.value})`
+    style['height'] = `calc(${props.height} - ${addUnit(headerHeight.value)})`
   }
   return `${objToStyle(style)}`
 })
@@ -140,7 +155,7 @@ const fixedBodyStyle = computed(() => {
 const bodyStyle = computed(() => {
   const style: CSSProperties = {}
   if (props.showHeader) {
-    style['height'] = `calc(${props.height} - ${headerHeight.value})`
+    style['height'] = `calc(${props.height} - ${addUnit(headerHeight.value)})`
   }
   return `${objToStyle(style)};${rowStyle.value}`
 })
@@ -148,8 +163,14 @@ const bodyStyle = computed(() => {
 const { proxy } = getCurrentInstance() as any
 onMounted(() => {
   nextTick(() => {
+    if (props.showHeader) {
+      getRect('#table-header', false, proxy).then((data: any) => {
+        if (data && data.height) {
+          headerHeight.value = data.height
+        }
+      })
+    }
     getRect('#fixed-body', false, proxy).then((data: any) => {
-      console.log(data)
       if (data && data.width) {
         fixedWidth.value = data.width
       }
@@ -197,13 +218,24 @@ function doSort(column, index) {
 /**
  * 滚动事件
  */
-function doScroll(event) {
+function handleBodyScroll(event) {
   if (!props.showHeader) {
     return
   }
   scrollTop.value = event.detail.scrollTop
   if (scrollWidth.value !== event.detail.scrollWidth) {
     scrollWidth.value = addUnit(event.detail.scrollWidth)
+  }
+}
+
+/**
+ * 滚动事件
+ */
+function handleWraperScroll(event) {
+  if (event.detail.scrollLeft) {
+    isShadow.value = true
+  } else {
+    isShadow.value = false
   }
 }
 

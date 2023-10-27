@@ -340,6 +340,22 @@ export function isBoolean(value: any): value is boolean {
 }
 
 /**
+ * 检查给定的值是否为奇数
+ * @param value 要检查的值
+ * @returns
+ */
+export function isOdd(value: number): boolean {
+  if (typeof value !== 'number') {
+    throw new Error('输入必须为数字')
+  }
+
+  // 使用取模运算符来判断是否为奇数
+  // 如果 number 除以 2 的余数为 1，就是奇数
+  // 否则是偶数
+  return value % 2 === 1
+}
+
+/**
  * 是否为base64图片
  * @param {string} url
  * @return

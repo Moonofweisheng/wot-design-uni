@@ -1,7 +1,7 @@
 <template>
   <view :class="`wd-table-col ${fixed ? 'is-fixed' : ''}`" :style="rootStyle">
     <view
-      :class="`wd-table__cell ${stripe ? 'is-stripe' : ''}`"
+      :class="`wd-table__cell ${stripe && isOdd(index) ? 'is-stripe' : ''} ${border ? 'is-border' : ''}`"
       v-for="(row, index) in column"
       :key="index"
       :style="rowStyle"
@@ -25,7 +25,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { Ref, computed, inject, onMounted, ref } from 'vue'
-import { addUnit, isDef, objToStyle } from '../common/util'
+import { addUnit, isDef, objToStyle, isOdd } from '../common/util'
 
 interface Props {
   // 列对应字段
@@ -58,6 +58,10 @@ const $props = inject<Ref>('$props') || ref({}) // table数据
 // 是否开启斑马纹
 const stripe = computed(() => {
   return $props.value.stripe || false
+})
+
+const border = computed(() => {
+  return $props.value.border || false
 })
 
 /**

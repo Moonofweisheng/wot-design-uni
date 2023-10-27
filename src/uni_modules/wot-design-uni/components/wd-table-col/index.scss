@@ -5,9 +5,10 @@
 
 @include b(table-col) {
   flex: 0 0 auto;
-  display: inline-block;
 
-
-  @include e(row){
+  .wd-table__cell:last-child {
+    @include when(border) {
+      border-bottom: none;
+    }
   }
 }
