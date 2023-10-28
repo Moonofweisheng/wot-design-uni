@@ -1,32 +1,48 @@
 <template>
   <view :class="`wd-table-content ${border ? 'is-border' : ''}`">
-    <view :class="`wd-table--fixed ${isShadow ? 'is-shadow' : ''}`" :style="fixedStyle">
+    <view :class="`wd-table--fixed ${isShadow ? 'is-shadow' : ''}`" :style="fixedStyle" v-if="$slots.fixed">
       <view class="wd-table__header" v-if="showHeader">
         <view
-          :class="`wd-table__cell ${border ? 'is-border' : ''} ${stripe ? 'is-stripe' : ''}`"
+          :class="`wd-table__cell ${border ? 'is-border' : ''} ${stripe ? 'is-stripe' : ''} is-${column.align}`"
           :style="headerCellStyle(column.width)"
           v-for="(column, index) in columns"
           :key="index"
         >
-          <text>{{ column.label }}</text>
+          <wd-sort-button
+            v-model="column.sortDirection"
+            allow-reset
+            :line="false"
+            :title="column.label"
+            @change="({ value }) => handleSortChange(value, index)"
+            v-if="column.sortable"
+          />
+          <text v-else :class="`wd-table__value  ${ellipsis ? 'is-ellipsis' : ''}`">{{ column.label }}</text>
         </view>
       </view>
 
-      <scroll-view class="wd-table__body" :style="fixedBodyStyle" :enable-flex="true" :scroll-y="true" :scroll-top="scrollTop">
+      <scroll-view class="wd-table__body" :style="fixedBodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" :scroll-top="scrollTop">
         <view style="display: inline-flex" id="fixed-body">
           <slot name="fixed"></slot>
         </view>
       </scroll-view>
     </view>
-    <scroll-view :class="`wd-table is-border`" :style="wraperStyle" :scroll-x="true" :throttle="false" @scroll="handleWraperScroll">
+    <scroll-view class="wd-table" :style="wraperStyle" :scroll-x="true" :throttle="false" @scroll="handleWraperScroll">
       <view class="wd-table__header" id="table-header" :style="rowStyle" v-if="showHeader">
         <view
-          :class="`wd-table__cell ${border ? 'is-border' : ''} ${stripe ? 'is-stripe' : ''}`"
+          :class="`wd-table__cell ${border ? 'is-border' : ''} ${stripe ? 'is-stripe' : ''} is-${column.align}`"
           :style="headerCellStyle(column.width)"
           v-for="(column, index) in columns"
           :key="index"
         >
-          <text>{{ column.label }}</text>
+          <wd-sort-button
+            v-model="column.sortDirection"
+            allow-reset
+            :line="false"
+            :title="column.label"
+            @change="({ value }) => handleSortChange(value, index)"
+            v-if="column.sortable"
+          />
+          <text v-else :class="`wd-table__value ${ellipsis ? 'is-ellipsis' : ''}`">{{ column.label }}</text>
         </view>
       </view>
       <scroll-view class="wd-table__body" :style="bodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" @scroll="handleBodyScroll">
@@ -51,9 +67,11 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { type CSSProperties, computed, getCurrentInstance, nextTick, onMounted, provide, ref, watch } from 'vue'
+import { type CSSProperties, computed, getCurrentInstance, nextTick, onMounted, provide, ref, watch, reactive } from 'vue'
 import { addUnit, deepClone, getRect, isDef, objToStyle } from '../common/util'
-import type { TableColumn } from '../wd-table-col/types'
+import type { SortDirection, TableColumn } from '../wd-table-col/types'
+
+const a = ref(0)
 
 interface Props {
   // 显示的数据
@@ -68,6 +86,8 @@ interface Props {
   rowHeight?: number | string
   // 是否显示表头
   showHeader?: boolean
+  // 是否超出2行隐藏
+  ellipsis?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -79,16 +99,18 @@ const props = withDefaults(defineProps<Props>(), {
   // table高度
   height: '80vh',
   // 行高
-  rowHeight: '48px',
+  rowHeight: 50,
   // 是否显示表头
-  showHeader: true
+  showHeader: true,
+  // 是否超出2行隐藏
+  ellipsis: true
 })
 
 // 监听数据源变化改变privide出去的$dataSource
 watch(
-  props,
-  () => {
-    $props.value = props
+  () => props.data,
+  (newValue) => {
+    parentData.data = newValue
   },
   { deep: true }
 )
@@ -96,22 +118,24 @@ watch(
 const scrollTop = ref<number>(0) // scroll-view 滚动距离
 const scrollWidth = ref<number | string>('auto') // 动态设置滚动宽度，兼容微信scroll-view中sticky失效的问题
 const columns = ref<TableColumn[]>([]) // 数据列
-const $props = ref<Props>(props)
 const fixedWidth = ref<number | string>(0) // 固定列宽度
 const isShadow = ref<boolean>(false) // 是否展示shadow
 
-const emit = defineEmits(['click', 'sort-method', 'row-click'])
-
-/**
- * 根节点样式
- */
-const rootStyle = computed(() => {
-  const style: CSSProperties = {}
-  if (isDef(props.height)) {
-    style['height'] = addUnit(props.height)
-  }
-  return objToStyle(style)
+const parentData = reactive({
+  data: props.data,
+  stripe: props.stripe,
+  border: props.border,
+  height: props.height,
+  rowHeight: props.rowHeight,
+  showHeader: props.showHeader,
+  ellipsis: props.ellipsis,
+  setRowClick,
+  setColumns
 })
+
+provide('wdTable', parentData)
+
+const emit = defineEmits(['click', 'sort-method', 'row-click'])
 
 /**
  * 容器样式
@@ -145,7 +169,7 @@ const rowStyle = computed(() => {
   return objToStyle(style)
 })
 
-const headerHeight = ref<string | number>(48) // 表格header高度
+const headerHeight = ref<string | number>(50) // 表格header高度
 
 const fixedBodyStyle = computed(() => {
   const style: CSSProperties = {}
@@ -193,31 +217,23 @@ function setColumns(column: TableColumn) {
  * 表头单元格样式
  */
 function headerCellStyle(width?: string | number) {
-  const style: Record<string, string | number> = {}
+  const style: CSSProperties = {}
   if (isDef(width)) {
     style['width'] = addUnit(width)
   }
   return objToStyle(style)
 }
 
-/**
- * 排序事件
- */
-function doSort(column, index) {
-  if (column.sortDirection === 'asc') {
-    columns.value[index].sortDirection = 'desc'
-  } else if (columns.value[index].sortDirection === 'desc') {
-    columns.value[index].sortDirection = ''
-  } else {
-    columns.value[index].sortDirection = 'asc'
-  }
+function handleSortChange(value: SortDirection, index: number) {
+  columns.value[index].sortDirection = value
   columns.value.forEach((col, i) => {
     if (index != i) {
-      col.sortDirection = ''
+      col.sortDirection = 0
     }
   })
   emit('sort-method', columns.value[index])
 }
+
 /**
  * 滚动事件
  */
@@ -245,11 +261,30 @@ function handleWraperScroll(event) {
 function setRowClick(index: number) {
   emit('row-click', { rowIndex: index })
 }
-
-provide('$props', $props) // 行高provide
-provide('setRowClick', setRowClick)
-provide('setColumns', setColumns)
 </script>
+
+<!-- <script module="touch" lang="wxs">
+
+function touchstart(event, ins) {
+  console.log(event);
+  console.log(ins);
+}
+function touchend(event, ins) {
+  console.log(event);
+  console.log(ins);
+}
+
+function transitionend(event, ins) {
+  console.log(event);
+  console.log(ins);
+}
+
+module.exports= {
+  touchstart,
+  touchend,
+  transitionend
+}
+</script> -->
 <style lang="scss" scoped>
 @import './index.scss';
 

@@ -55,7 +55,6 @@
     width: 100%;
     height: 48px;
     display: flex;
-    pointer-events: none;
     overflow-x: auto;
     white-space: nowrap;
   }
@@ -66,13 +65,15 @@
   }
 
   @include e(cell) {
-    flex: 0 0 auto;
-    width: 220rpx;
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    padding: 10px;
-
+    flex: 0 0 auto;
+    width: 220rpx;
+    min-height: 50px;
+    padding: 8px 10px;
+    font-size: 13px;
+    color: $-table-color;
 
     @include when(border) {
       border-right: 1px solid #ececec;
@@ -82,6 +83,24 @@
     @include when(stripe) {
       background: #f3f3f3;
     }
+
+    @include when(left) {
+      justify-content: flex-start;
+    }
+
+    @include when(center) {
+      justify-content: center;
+    }
+
+    @include when(right) {
+      justify-content: flex-end;
+    }
   }
 
+
+  @include e(value) {
+    @include when(ellipsis) {
+      @include multiEllipsis(2);
+    }
+  }
 }

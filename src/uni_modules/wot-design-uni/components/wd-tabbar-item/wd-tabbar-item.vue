@@ -24,7 +24,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { type CSSProperties, computed, inject, onMounted, ref, watch, getCurrentInstance, reactive } from 'vue'
+import { type CSSProperties, computed, inject, onMounted, ref, watch, getCurrentInstance } from 'vue'
 import { isDef, objToStyle } from '../common/util'
 
 interface Props {
