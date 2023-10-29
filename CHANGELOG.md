@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [0.1.39](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.38...v0.1.39) (2023-10-29)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 DateTimePicker 日期选择器组件双向绑定错误的问题 ([1b13873](https://github.com/Moonofweisheng/wot-design-uni/commit/1b13873cef4b7c760698abce7dca500cd548c660))
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Table 表格组件 ([#98](https://github.com/Moonofweisheng/wot-design-uni/issues/98)) ([c8395f8](https://github.com/Moonofweisheng/wot-design-uni/commit/c8395f8a7e1ad041b003672081b715a7c755adc1))
+* ✨ Collpase 折叠面板组件增加分割线 ([adc6633](https://github.com/Moonofweisheng/wot-design-uni/commit/adc6633ad80b74e801a48a50917c9a2d378de9e0)), closes [#97](https://github.com/Moonofweisheng/wot-design-uni/issues/97)
+
 ### [0.1.38](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.37...v0.1.38) (2023-10-25)
 
 
