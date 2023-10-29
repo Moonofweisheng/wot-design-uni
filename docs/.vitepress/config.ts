@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-10-10 22:42:54
+ * @LastEditTime: 2023-10-29 16:14:07
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -356,6 +356,9 @@ export default defineConfig({
           }, {
             link: "/component/swiper",
             text: "Swiper 轮播图"
+          }, {
+            link: "/component/table",
+            text: "Table 表格"
           }]
         }
       ]

@@ -11,10 +11,10 @@ export interface TableColumn {
   width: string
   // 是否开启列排序
   sortable?: boolean
-  // 是否高亮
-  lightHigh?: boolean
   // 列的对齐方式，可选值left,center,right
   align?: AlignType
   // 列的排序方向
   sortDirection: SortDirection
+  // 是否i固定列
+  fixed?: boolean
 }

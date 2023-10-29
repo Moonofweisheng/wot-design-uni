@@ -798,4 +798,10 @@ $-navbar-capsule-width: var(--wot-navbar-capsule-width, 88px);
 $-navbar-capsule-height: var(--wot-navbar-capsule-height, 32px);
 
 // table
-$-table-color: var(--wot-table-color, $-font-gray-1);
+$-table-color: var(--wot-table-color, $-font-gray-1); // 表格字体颜色
+$-table-bg: var(--wot-table-bg, #FFFFFF); // 表格背景颜色
+$-table-stripe-bg: var(--wot-table-stripe-bg, #f3f3f3); // 表格背景颜色
+$-table-border-color: var(--wot-table-border-color, #ececec); // 表格边框颜色
+$-table-font-size: var(--wot-table-font-size, 13px); // 表格字体大小
+
+

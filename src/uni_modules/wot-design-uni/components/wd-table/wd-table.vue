@@ -1,37 +1,21 @@
 <template>
-  <view :class="`wd-table-content ${border ? 'is-border' : ''}`">
-    <view :class="`wd-table--fixed ${isShadow ? 'is-shadow' : ''}`" :style="fixedStyle" v-if="$slots.fixed">
-      <view class="wd-table__header" v-if="showHeader">
+  <view :class="`wd-table ${border ? 'is-border' : ''}`" :style="tableStyle">
+    <scroll-view
+      :enable-flex="true"
+      :throttle="false"
+      :scrollLeft="reactiveState.scrollLeft"
+      :scroll-x="true"
+      class="wd-table__header"
+      @scroll="scroll"
+      v-if="showHeader"
+    >
+      <view id="table-header" class="wd-table__content" :style="realWidthStyle" style="position: sticky; top: 0; z-index: 2">
         <view
-          :class="`wd-table__cell ${border ? 'is-border' : ''} ${stripe ? 'is-stripe' : ''} is-${column.align}`"
-          :style="headerCellStyle(column.width)"
-          v-for="(column, index) in columns"
-          :key="index"
-        >
-          <wd-sort-button
-            v-model="column.sortDirection"
-            allow-reset
-            :line="false"
-            :title="column.label"
-            @change="({ value }) => handleSortChange(value, index)"
-            v-if="column.sortable"
-          />
-          <text v-else :class="`wd-table__value  ${ellipsis ? 'is-ellipsis' : ''}`">{{ column.label }}</text>
-        </view>
-      </view>
-
-      <scroll-view class="wd-table__body" :style="fixedBodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" :scroll-top="scrollTop">
-        <view style="display: inline-flex" id="fixed-body">
-          <slot name="fixed"></slot>
-        </view>
-      </scroll-view>
-    </view>
-    <scroll-view class="wd-table" :style="wraperStyle" :scroll-x="true" :throttle="false" @scroll="handleWraperScroll">
-      <view class="wd-table__header" id="table-header" :style="rowStyle" v-if="showHeader">
-        <view
-          :class="`wd-table__cell ${border ? 'is-border' : ''} ${stripe ? 'is-stripe' : ''} is-${column.align}`"
-          :style="headerCellStyle(column.width)"
-          v-for="(column, index) in columns"
+          :class="`wd-table__cell ${border ? 'is-border' : ''} ${column.fixed ? 'is-fixed' : ''} ${stripe ? 'is-stripe' : ''} is-${column.align} ${
+            isLastFixed(column) && reactiveState.scrollLeft ? 'is-shadow' : ''
+          }`"
+          :style="headerCellStyle(index)"
+          v-for="(column, index) in reactiveState.columns"
           :key="index"
         >
           <wd-sort-button
@@ -45,12 +29,19 @@
           <text v-else :class="`wd-table__value ${ellipsis ? 'is-ellipsis' : ''}`">{{ column.label }}</text>
         </view>
       </view>
-      <scroll-view class="wd-table__body" :style="bodyStyle" :enable-flex="true" :throttle="false" :scroll-y="true" @scroll="handleBodyScroll">
-        <view style="display: flex">
-          <view :style="{ width: addUnit(fixedWidth) }"></view>
-          <slot></slot>
-        </view>
-      </scroll-view>
+    </scroll-view>
+    <scroll-view
+      class="wd-table__body"
+      :style="bodyStyle"
+      :enable-flex="true"
+      :throttle="false"
+      :scroll-x="true"
+      @scroll="scroll"
+      :scrollLeft="reactiveState.scrollLeft"
+    >
+      <view id="table-body" class="wd-table__content" :style="realWidthStyle">
+        <slot></slot>
+      </view>
     </scroll-view>
   </view>
 </template>
@@ -67,11 +58,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { type CSSProperties, computed, getCurrentInstance, nextTick, onMounted, provide, ref, watch, reactive } from 'vue'
-import { addUnit, deepClone, getRect, isDef, objToStyle } from '../common/util'
+import { type CSSProperties, computed, provide, watch, reactive } from 'vue'
+import { addUnit, debounce, deepClone, isDef, objToStyle } from '../common/util'
 import type { SortDirection, TableColumn } from '../wd-table-col/types'
-
-const a = ref(0)
 
 interface Props {
   // 显示的数据
@@ -94,7 +83,8 @@ const props = withDefaults(defineProps<Props>(), {
   // 显示的数据
   data: () => [],
   // table行是否为斑马纹
-  stripe: false,
+  stripe: true,
+  // 是否显示边框
   border: true,
   // table高度
   height: '80vh',
@@ -106,22 +96,62 @@ const props = withDefaults(defineProps<Props>(), {
   ellipsis: true
 })
 
-// 监听数据源变化改变privide出去的$dataSource
 watch(
   () => props.data,
   (newValue) => {
-    parentData.data = newValue
+    reactiveState.data = newValue
   },
   { deep: true }
 )
 
-const scrollTop = ref<number>(0) // scroll-view 滚动距离
-const scrollWidth = ref<number | string>('auto') // 动态设置滚动宽度，兼容微信scroll-view中sticky失效的问题
-const columns = ref<TableColumn[]>([]) // 数据列
-const fixedWidth = ref<number | string>(0) // 固定列宽度
-const isShadow = ref<boolean>(false) // 是否展示shadow
+watch(
+  () => props.stripe,
+  (newValue) => {
+    reactiveState.stripe = newValue
+  },
+  { deep: true }
+)
 
-const parentData = reactive({
+watch(
+  () => props.border,
+  (newValue) => {
+    reactiveState.border = newValue
+  },
+  { deep: true }
+)
+
+watch(
+  () => props.height,
+  (newValue) => {
+    reactiveState.height = newValue
+  },
+  { deep: true }
+)
+
+watch(
+  () => props.rowHeight,
+  (newValue) => {
+    reactiveState.rowHeight = newValue
+  },
+  { deep: true }
+)
+watch(
+  () => props.showHeader,
+  (newValue) => {
+    reactiveState.showHeader = newValue
+  },
+  { deep: true }
+)
+
+watch(
+  () => props.ellipsis,
+  (newValue) => {
+    reactiveState.ellipsis = newValue
+  },
+  { deep: true }
+)
+
+const reactiveState = reactive({
   data: props.data,
   stripe: props.stripe,
   border: props.border,
@@ -129,133 +159,121 @@ const parentData = reactive({
   rowHeight: props.rowHeight,
   showHeader: props.showHeader,
   ellipsis: props.ellipsis,
+  scrollLeft: 0,
+  columns: [] as TableColumn[],
   setRowClick,
   setColumns
 })
 
-provide('wdTable', parentData)
+const scroll = debounce(handleScroll, 100, false) // 滚动事件
+
+provide('wdTable', reactiveState)
 
 const emit = defineEmits(['click', 'sort-method', 'row-click'])
 
 /**
  * 容器样式
  */
-const wraperStyle = computed(() => {
+const tableStyle = computed(() => {
   const style: CSSProperties = {}
   if (isDef(props.height)) {
-    style['height'] = addUnit(props.height)
+    style['max-height'] = addUnit(props.height)
   }
   return objToStyle(style)
 })
 
-/**
- * 根节点样式
- */
-const fixedStyle = computed(() => {
-  const style: CSSProperties = {}
-  if (fixedWidth.value) {
-    style['width'] = addUnit(fixedWidth.value)
+const realWidthStyle = computed(() => {
+  const style: CSSProperties = {
+    display: 'flex'
   }
-  return objToStyle(style)
-})
-
-const rowStyle = computed(() => {
-  const style: CSSProperties = {}
   let width: string | number = ''
-  columns.value.forEach((column) => {
+  reactiveState.columns.forEach((column) => {
     width = width ? `${width} + ${addUnit(column.width)}` : addUnit(column.width)
   })
   style['width'] = `calc(${width})`
   return objToStyle(style)
 })
 
-const headerHeight = ref<string | number>(50) // 表格header高度
-
-const fixedBodyStyle = computed(() => {
-  const style: CSSProperties = {}
-  if (props.showHeader) {
-    style['height'] = `calc(${props.height} - ${addUnit(headerHeight.value)})`
-  }
-  return `${objToStyle(style)}`
-})
-
 const bodyStyle = computed(() => {
   const style: CSSProperties = {}
-  if (props.showHeader) {
-    style['height'] = `calc(${props.height} - ${addUnit(headerHeight.value)})`
+  if (isDef(props.height)) {
+    style['height'] = isDef(props.rowHeight) ? `calc(${props.data.length} * ${addUnit(props.rowHeight)})` : `calc(${props.data.length} * 50px)`
   }
-  return `${objToStyle(style)};${rowStyle.value}`
+  return `${objToStyle(style)};`
 })
 
-const { proxy } = getCurrentInstance() as any
-onMounted(() => {
-  nextTick(() => {
-    if (props.showHeader) {
-      getRect('#table-header', false, proxy).then((data: any) => {
-        if (data && data.height) {
-          headerHeight.value = data.height
-        }
-      })
-    }
-    getRect('#fixed-body', false, proxy).then((data: any) => {
-      if (data && data.width) {
-        fixedWidth.value = data.width
-      }
+/**
+ * 是否最后一个固定元素
+ * @param column 列数据
+ */
+function isLastFixed(column: TableColumn) {
+  let isLastFixed: boolean = false
+  if (column.fixed && isDef(reactiveState.columns)) {
+    const columns = reactiveState.columns.filter((column) => {
+      return column.fixed
     })
-  })
-})
+    if (columns.length && columns[columns.length - 1].prop === column.prop) {
+      isLastFixed = true
+    }
+  }
+  return isLastFixed
+}
 
 /**
  * 设置列
  * @param column 列
  */
 function setColumns(column: TableColumn) {
-  columns.value = deepClone([...columns.value, column])
+  reactiveState.columns = deepClone([...reactiveState.columns, column])
 }
 
 /**
  * 表头单元格样式
  */
-function headerCellStyle(width?: string | number) {
+function headerCellStyle(columnIndex: number) {
   const style: CSSProperties = {}
-  if (isDef(width)) {
-    style['width'] = addUnit(width)
+  if (isDef(reactiveState.columns[columnIndex].width)) {
+    style['width'] = addUnit(reactiveState.columns[columnIndex].width)
+  }
+  if (reactiveState.columns[columnIndex].fixed) {
+    if (columnIndex > 0) {
+      let left: string | number = ''
+      reactiveState.columns.forEach((column, index) => {
+        if (index < columnIndex) {
+          left = left ? `${left} + ${addUnit(column.width)}` : addUnit(column.width)
+        }
+      })
+      style['left'] = `calc(${left})`
+    } else {
+      style['left'] = 0
+    }
   }
   return objToStyle(style)
 }
 
+/**
+ * 排序
+ * @param value
+ * @param index
+ */
 function handleSortChange(value: SortDirection, index: number) {
-  columns.value[index].sortDirection = value
-  columns.value.forEach((col, i) => {
+  reactiveState.columns[index].sortDirection = value
+  reactiveState.columns.forEach((col, i) => {
     if (index != i) {
       col.sortDirection = 0
     }
   })
-  emit('sort-method', columns.value[index])
+  emit('sort-method', reactiveState.columns[index])
 }
 
 /**
  * 滚动事件
  */
-function handleBodyScroll(event) {
+function handleScroll(event) {
   if (!props.showHeader) {
     return
   }
-  scrollTop.value = event.detail.scrollTop
-  if (scrollWidth.value !== event.detail.scrollWidth) {
-    scrollWidth.value = addUnit(event.detail.scrollWidth)
-  }
-}
-
-/**
- * 滚动事件
- */
-function handleWraperScroll(event) {
-  if (event.detail.scrollLeft) {
-    isShadow.value = true
-  } else {
-    isShadow.value = false
-  }
+  reactiveState.scrollLeft = event.detail.scrollLeft
 }
 
 function setRowClick(index: number) {
@@ -264,14 +282,80 @@ function setRowClick(index: number) {
 </script>
 
 <!-- <script module="touch" lang="wxs">
+var xDown = null;
+var yDown = null;
 
-function touchstart(event, ins) {
-  console.log(event);
-  console.log(ins);
+function touchstart(event) {
+  xDown = event.touches[0].clientX;
+  yDown = event.touches[0].clientY;
 }
-function touchend(event, ins) {
-  console.log(event);
-  console.log(ins);
+
+function touchmove(event , ownerInstance) {
+    if (!xDown || !yDown) {
+        return;
+    }
+    var xUp = event.touches[0].clientX;
+    var yUp = event.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        // 沿着x轴移动
+        if (xDiff > 0) {
+            // 向左移动
+            disableScrollY(ownerInstance);
+        } else {
+            // 向右移动
+            disableScrollY(ownerInstance);
+        }
+    } else {
+        // 沿着y轴移动
+        if (yDiff > 0) {
+            // 向上移动
+            disableScrollX(ownerInstance);
+        } else {
+            // 向下移动
+            disableScrollX(ownerInstance);
+        }
+    }
+}
+
+function touchend(event , ownerInstance) {
+    enableScroll(ownerInstance);
+}
+
+function disableScrollX(ins) {
+  ins.setStyle({
+    'overflow-x':"hidden",
+    "color":"red"
+  })
+  // console.log(ins,'disableScrollX');
+    // document.documentElement.style.overflowX = "hidden";
+}
+
+function disableScrollY(ins) {
+  // console.log(ins,'disableScrollY');
+  ins.setStyle({
+    'overflow-y':"hidden"
+  })
+    // document.documentElement.style.overflowY = "hidden";
+}
+
+function enableScroll(ins) {
+  // console.log(ins,'enableScroll');
+  ins.setStyle({
+    'overflow-x':"auto",
+    'overflow-y':"auto"
+  })
+  console.log(ins,'enableScroll');
+    // document.documentElement.style.overflowX = "auto";
+    // document.documentElement.style.overflowY = "auto";
+}
+
+
+function scroll(event, ins) {
+  const scrollLeft = event.detail.scrollLeft
 }
 
 function transitionend(event, ins) {
@@ -280,9 +364,10 @@ function transitionend(event, ins) {
 }
 
 module.exports= {
-  touchstart,
-  touchend,
-  transitionend
+  scroll:scroll,
+  touchstart:touchstart,
+  touchend:touchend,
+  touchmove:touchmove
 }
 </script> -->
 <style lang="scss" scoped>

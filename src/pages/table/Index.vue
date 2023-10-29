@@ -1,26 +1,62 @@
 <template>
   <page-wraper>
-    <view style="width: 96vw; margin: 0 auto; padding-top: 32rpx">
-      <wd-table :data="dataList" :stripe="true" @sort-method="doSort" @row-click="handleRowClick">
-        <template #fixed>
-          <view style="display: inline-flex">
-            <wd-table-col prop="name" label="姓名" fixed="true" :sortable="true" align="center"></wd-table-col>
-            <wd-table-col prop="grade" label="分数" :sortable="true" align="center"></wd-table-col>
-          </view>
-        </template>
-        <!-- <template #default="scope: any">
-          <view class="custom-class">
-            <text>{{ scope.row.grade }}</text>
-            <text>同比{{ scope.row.compare }}</text>
-          </view>
-        </template> -->
+    <demo-block title="基本用法">
+      <wd-table :data="dataList" @sort-method="doSort" height="328px" @row-click="handleRowClick">
+        <wd-table-col prop="name" label="姓名" align="center" width="50%"></wd-table-col>
+        <wd-table-col prop="grade" label="分数" align="center" width="50%"></wd-table-col>
+      </wd-table>
+    </demo-block>
+
+    <demo-block title="无边框">
+      <wd-table :data="dataList" @sort-method="doSort" height="328px" :border="false" @row-click="handleRowClick">
+        <wd-table-col prop="name" label="姓名" align="center" width="50%"></wd-table-col>
+        <wd-table-col prop="grade" label="分数" align="center" width="50%"></wd-table-col>
+      </wd-table>
+    </demo-block>
+
+    <demo-block title="无斑马纹">
+      <wd-table :data="dataList" @sort-method="doSort" height="328px" :stripe="false" @row-click="handleRowClick">
+        <wd-table-col prop="name" label="姓名" align="center" width="50%"></wd-table-col>
+        <wd-table-col prop="grade" label="分数" align="center" width="50%"></wd-table-col>
+      </wd-table>
+    </demo-block>
+
+    <demo-block title="不展示表头">
+      <wd-table :data="dataList" @sort-method="doSort" height="328px" :show-header="false" @row-click="handleRowClick">
+        <wd-table-col prop="name" label="姓名" align="center" width="50%"></wd-table-col>
+        <wd-table-col prop="grade" label="分数" align="center" width="50%"></wd-table-col>
+      </wd-table>
+    </demo-block>
+
+    <demo-block title="固定列">
+      <wd-table :data="dataList" @sort-method="doSort" @row-click="handleRowClick" height="328px">
+        <wd-table-col prop="name" label="姓名" fixed :sortable="true" align="center"></wd-table-col>
+        <wd-table-col prop="grade" label="分数" fixed :sortable="true" align="center"></wd-table-col>
+        <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true" :width="160"></wd-table-col>
+        <wd-table-col prop="school" label="求学之所" :width="180"></wd-table-col>
+        <wd-table-col prop="major" label="专业"></wd-table-col>
+        <wd-table-col prop="gender" label="性别"></wd-table-col>
+      </wd-table>
+    </demo-block>
+
+    <demo-block title="自定义列模板">
+      <wd-table :data="dataList" @sort-method="doSort" @row-click="handleRowClick" height="328px">
+        <wd-table-col prop="name" label="姓名" fixed :sortable="true" align="center"></wd-table-col>
+        <wd-table-col prop="grade" label="分数" fixed :sortable="true" align="center">
+          <template #value="{ row }">
+            <view class="custom-class">
+              <text>{{ row.grade }}</text>
+              <text>同比{{ row.compare }}</text>
+            </view>
+          </template>
+        </wd-table-col>
         <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true" :width="160"></wd-table-col>
         <wd-table-col prop="school" label="求学之所" :width="180"></wd-table-col>
         <wd-table-col prop="major" label="专业"></wd-table-col>
         <wd-table-col prop="gender" label="性别"></wd-table-col>
         <wd-table-col prop="graduation" label="学成时间"></wd-table-col>
       </wd-table>
-    </view>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -58,6 +94,16 @@ const dataList = ref<Record<string, any>[]>([
     hobby: '子龙，子龙，世无双'
   },
   {
+    name: '赵云',
+    school: '武汉市阳逻妇幼保健学院',
+    major: '计算机科学与技术专业',
+    gender: '男',
+    graduation: '2022年1月12日',
+    grade: 91,
+    compare: '12%',
+    hobby: '子龙，子龙，世无双'
+  },
+  {
     name: '孔明',
     school: '武汉市阳逻卧龙学院',
     major: '计算机科学与技术专业',
@@ -66,196 +112,6 @@ const dataList = ref<Record<string, any>[]>([
     grade: 99,
     compare: '18%',
     hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '18%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 56,
-    compare: '10%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '11%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '1%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 69,
-    compare: '14%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '21%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 87,
-    compare: '32%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 76,
-    compare: '44%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '14%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 71,
-    compare: '38%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 96,
-    compare: '8%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 86,
-    compare: '84%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 26,
-    compare: '10%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 96,
-    compare: '8%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 86,
-    compare: '84%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 26,
-    compare: '10%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '16%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '6%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 76,
-    compare: '38%',
-    hobby: '我得空明，如鱼得水也'
   },
   {
     name: '赵云',
@@ -266,36 +122,6 @@ const dataList = ref<Record<string, any>[]>([
     grade: 36,
     compare: '48%',
     hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '1%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '21%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 77,
-    compare: '33%',
-    hobby: '燕人张飞在此！'
   },
   {
     name: '关羽',
@@ -338,166 +164,6 @@ const dataList = ref<Record<string, any>[]>([
     hobby: '兴汉讨贼，克复中原'
   },
   {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '18%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 56,
-    compare: '10%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '11%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '1%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 69,
-    compare: '14%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '21%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 87,
-    compare: '32%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 76,
-    compare: '44%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '14%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 71,
-    compare: '38%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 96,
-    compare: '8%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 86,
-    compare: '84%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 26,
-    compare: '10%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '16%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '6%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 76,
-    compare: '38%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
     name: '赵云',
     school: '武汉市阳逻妇幼保健学院',
     major: '计算机科学与技术专业',
@@ -506,36 +172,6 @@ const dataList = ref<Record<string, any>[]>([
     grade: 36,
     compare: '48%',
     hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '1%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '21%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 77,
-    compare: '33%',
-    hobby: '燕人张飞在此！'
   },
   {
     name: '关羽',
@@ -576,496 +212,6 @@ const dataList = ref<Record<string, any>[]>([
     grade: 99,
     compare: '18%',
     hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '18%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 56,
-    compare: '10%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '11%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '1%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 69,
-    compare: '14%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '21%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 87,
-    compare: '32%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 76,
-    compare: '44%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '14%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 71,
-    compare: '38%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 96,
-    compare: '8%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 86,
-    compare: '84%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 26,
-    compare: '10%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '16%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '6%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 76,
-    compare: '38%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 36,
-    compare: '48%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '1%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '21%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 77,
-    compare: '33%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '48%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 68,
-    compare: '21%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 91,
-    compare: '12%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '18%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '18%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 56,
-    compare: '10%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '11%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '1%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 69,
-    compare: '14%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '18%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 56,
-    compare: '10%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 66,
-    compare: '11%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '1%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 69,
-    compare: '14%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '21%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 87,
-    compare: '32%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 76,
-    compare: '44%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '14%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 71,
-    compare: '38%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 96,
-    compare: '8%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 86,
-    compare: '84%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 26,
-    compare: '10%',
-    hobby: '我计不成，乃天命也！'
-  },
-  {
-    name: '张飞',
-    school: '武汉市阳逻杀猪学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 45,
-    compare: '16%',
-    hobby: '燕人张飞在此！'
-  },
-  {
-    name: '关羽',
-    school: '武汉市阳逻绿豆学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '6%',
-    hobby: '颜良文丑，以吾观之，如土鸡瓦犬耳。'
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 76,
-    compare: '38%',
-    hobby: '我得空明，如鱼得水也'
-  },
-  {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 36,
-    compare: '48%',
-    hobby: '子龙，子龙，世无双'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '1%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 99,
-    compare: '18%',
-    hobby: '兴汉讨贼，克复中原'
-  },
-  {
-    name: '姜维',
-    school: '武汉市阳逻停水停电技术学院',
-    major: '计算机科学与技术专业',
-    gender: '男',
-    graduation: '2022年1月12日',
-    grade: 88,
-    compare: '18%',
-    hobby: '我计不成，乃天命也！'
   }
 ])
 
@@ -1081,4 +227,12 @@ function handleRowClick({ rowIndex }) {
   console.log(rowIndex)
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.custom-class {
+  height: 80rpx;
+  width: 220rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
