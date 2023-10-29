@@ -296,7 +296,7 @@ watch(
       // 每次value更新时都需要刷新整个列表
       innerValue.value = deepClone(getDefaultInnerValue())
     }
-    setShowValue()
+    setShowValue(false, false, true)
   },
   {
     deep: true,
