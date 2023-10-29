@@ -85,6 +85,8 @@ declare module '@vue/runtime-core' {
     WdTabbarItem: typeof import('./components/wd-tabbar-item/wd-tabbar-item.vue')['default']
     WdNavbar: typeof import('./components/wd-navbar/wd-navbar.vue')['default']
     WdNavbarCapsule: typeof import('./components/wd-navbar-capsule/wd-navbar-capsule.vue')['default']
+    WdTable: typeof import('./components/wd-table/wd-table.vue')['default']
+    WdTableCol: typeof import('./components/wd-table-col/wd-table-col.vue')['default']
   }
 }
 

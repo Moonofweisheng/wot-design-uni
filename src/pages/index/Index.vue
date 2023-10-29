@@ -322,6 +322,10 @@ const list = ref([
       {
         id: 'swiper',
         name: 'Swiper 轮播图'
+      },
+      {
+        id: 'table',
+        name: 'Table 表格'
       }
     ]
   }

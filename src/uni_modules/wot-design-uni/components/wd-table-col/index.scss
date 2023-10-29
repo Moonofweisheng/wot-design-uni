@@ -1,0 +1,46 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@import '../wd-table/index';
+
+.wot-theme-dark {
+  @include b(table-col) {
+    @include when(shadow) {
+      &::after {
+        background: linear-gradient(270deg, rgba(17, 17, 17, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+      }
+    }
+  }
+}
+
+
+@include b(table-col) {
+  .wd-table__cell {
+    width: 100%;
+  }
+
+  @include m(fixed) {
+    position: sticky;
+    z-index: 1;
+    left: 0;
+  }
+
+  @include when(shadow) {
+    &::after {
+      content: ' ';
+      position: absolute;
+      height: 100%;
+      right: -30rpx;
+      top: 0;
+      width: 30rpx;
+      height: 100%;
+      background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.04) 100%);
+    }
+  }
+
+  .wd-table__cell:last-child {
+    @include when(border) {
+      border-bottom: none;
+    }
+  }
+}

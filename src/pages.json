@@ -621,6 +621,16 @@
         "navigationBarTitleText": "Navbar 导航栏",
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/table/Index",
+      "name": "table",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Table 表格"
+      }
     }
   ],
   // "tabBar": {

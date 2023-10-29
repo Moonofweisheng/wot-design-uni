@@ -340,6 +340,22 @@ export function isBoolean(value: any): value is boolean {
 }
 
 /**
+ * 检查给定的值是否为奇数
+ * @param value 要检查的值
+ * @returns
+ */
+export function isOdd(value: number): boolean {
+  if (typeof value !== 'number') {
+    throw new Error('输入必须为数字')
+  }
+
+  // 使用取模运算符来判断是否为奇数
+  // 如果 number 除以 2 的余数为 1，就是奇数
+  // 否则是偶数
+  return value % 2 === 1
+}
+
+/**
  * 是否为base64图片
  * @param {string} url
  * @return
@@ -492,4 +508,32 @@ export function buildUrlWithParams(baseUrl: string, params: Record<string, strin
 
   // 返回带有参数的URL
   return `${baseUrl}${separator}${queryString}`
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function throttle(func: Function, wait: number): Function {
+  let timeout: NodeJS.Timeout | null
+  let previous = 0
+
+  const throttled = function (this: any, ...args: any[]) {
+    const now = Date.now()
+    const remaining = wait - (now - previous)
+
+    if (remaining <= 0) {
+      if (timeout) {
+        clearTimeout(timeout)
+        timeout = null
+      }
+      previous = now
+      func.apply(this, args)
+    } else if (!timeout) {
+      timeout = setTimeout(() => {
+        previous = Date.now()
+        timeout = null
+        func.apply(this, args)
+      }, remaining)
+    }
+  }
+
+  return throttled
 }
