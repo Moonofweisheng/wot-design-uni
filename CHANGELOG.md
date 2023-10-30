@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.40](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.39...v0.1.40) (2023-10-30)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  移除文档中 Search 组件未支持的插槽 ([325e140](https://github.com/Moonofweisheng/wot-design-uni/commit/325e14046de38eb7c4e792a64a290c9997af5cba))
+
 ### [0.1.39](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.38...v0.1.39) (2023-10-29)
 
 
