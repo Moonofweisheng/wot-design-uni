@@ -63,8 +63,8 @@ import { computed, ref, watch } from 'vue'
 import { requestAnimationFrame } from '../common/util'
 
 interface Props {
-  useActionSlot?: boolean
-  useLabelSlot?: boolean
+  // useActionSlot?: boolean
+  // useLabelSlot?: boolean
   userSuffixSlot?: boolean
   placeholder?: string
   cancelTxt?: string
@@ -80,8 +80,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   customClass: '',
-  useActionSlot: false,
-  useLabelSlot: false,
+  // useActionSlot: false,
+  // useLabelSlot: false,
   userSuffixSlot: false,
   placeholder: '搜索',
   cancelTxt: '取消',
