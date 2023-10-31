@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.41](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.40...v0.1.41) (2023-10-31)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Popover、Tooltip 组件展开切换动画不流畅的问题 ([c765b08](https://github.com/Moonofweisheng/wot-design-uni/commit/c765b085a6018433bb95fd7647c091393e2e6e7c)), closes [#101](https://github.com/Moonofweisheng/wot-design-uni/issues/101)
+
 ### [0.1.40](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.39...v0.1.40) (2023-10-30)
 
 
