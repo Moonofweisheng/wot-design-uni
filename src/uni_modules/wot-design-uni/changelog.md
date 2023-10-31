@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.42](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.41...v0.1.42) (2023-10-31)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Popover、Tooltip 组件展开过程中无法遮盖图片的问题 ([db009c1](https://github.com/Moonofweisheng/wot-design-uni/commit/db009c1229413f7ecc446e3e3a1db4d7678268b3))
+
 ### [0.1.41](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.40...v0.1.41) (2023-10-31)
 
 
