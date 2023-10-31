@@ -32,8 +32,14 @@
     color: $-tooltip-color;
     text-align: center;
     box-sizing: border-box;
-    z-index: 10;
+    z-index: $-tooltip-z-index;
   }
+
+  @include edeep(transition) {
+    position: relative;
+    z-index: $-tooltip-z-index;
+  }
+
 
   @include e(hidden) {
     left: -100vw;

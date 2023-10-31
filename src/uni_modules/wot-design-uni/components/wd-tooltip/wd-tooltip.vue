@@ -6,7 +6,7 @@
         <view v-if="!useContentSlot" class="wd-tooltip__inner">{{ content }}</view>
       </view>
     </view>
-    <wd-transition :show="modelValue" name="fade">
+    <wd-transition custom-class="wd-tooltip__transition" :show="modelValue" name="fade" :duration="200">
       <view class="wd-tooltip__pos" :style="popover.popStyle.value">
         <view class="wd-tooltip__container custom-pop">
           <view v-if="visibleArrow" :class="`wd-tooltip__arrow ${popover.arrowClass.value} ${customArrow}`" :style="popover.arrowStyle.value"></view>
