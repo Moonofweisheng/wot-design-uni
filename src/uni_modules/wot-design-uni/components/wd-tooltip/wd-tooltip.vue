@@ -14,7 +14,7 @@
         <!-- 用户自定义样式 -->
         <slot name="content" v-else />
       </view>
-      <wd-icon v-if="showClose" name="close" class="wd-tooltip__close-icon" @click="toggle"></wd-icon>
+      <wd-icon v-if="showClose" name="close" custom-class="wd-tooltip__close-icon" @click="toggle"></wd-icon>
     </wd-transition>
     <view @click="toggle" class="wd-tooltip__target" id="target">
       <slot />
