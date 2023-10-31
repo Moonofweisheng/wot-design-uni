@@ -14,7 +14,7 @@
         </view>
       </view>
     </view>
-    <wd-transition :show="modelValue" name="fade" :duration="200">
+    <wd-transition custom-class="wd-popover__transition" :show="modelValue" name="fade" :duration="200">
       <view class="wd-popover__pos" :style="popover.popStyle.value">
         <view :class="`wd-popover__container ${customPop}`">
           <view
