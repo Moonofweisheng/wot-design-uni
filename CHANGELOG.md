@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.43](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.42...v0.1.43) (2023-10-31)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tooltip 文字提示组件微信端关闭按钮样式错误的问题 ([ec1b949](https://github.com/Moonofweisheng/wot-design-uni/commit/ec1b9490b9517d0e4ebe4a5130a418a684b1a589))
+
 ### [0.1.42](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.41...v0.1.42) (2023-10-31)
 
 
