@@ -53,7 +53,7 @@
     line-height: $-tooltip-line-height;
   }
 
-  @include e(close-icon) {
+  @include edeep(close-icon) {
     font-size: 12px;
     position: absolute;
     right: -8px;
