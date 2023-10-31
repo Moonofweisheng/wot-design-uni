@@ -20,7 +20,7 @@
   position: relative;
   display: inline-block;
 
-  @include e(pos) {
+  @include edeep(pos) {
     position: absolute;
     min-width: 138px;
     min-height: 36px;
@@ -32,11 +32,6 @@
     color: $-tooltip-color;
     text-align: center;
     box-sizing: border-box;
-    z-index: $-tooltip-z-index;
-  }
-
-  @include edeep(transition) {
-    position: relative;
     z-index: $-tooltip-z-index;
   }
 
