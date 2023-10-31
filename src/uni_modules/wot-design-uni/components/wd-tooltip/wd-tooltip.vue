@@ -6,17 +6,15 @@
         <view v-if="!useContentSlot" class="wd-tooltip__inner">{{ content }}</view>
       </view>
     </view>
-    <wd-transition :show="modelValue" name="fade">
-      <view class="wd-tooltip__pos" :style="popover.popStyle.value">
-        <view class="wd-tooltip__container custom-pop">
-          <view v-if="visibleArrow" :class="`wd-tooltip__arrow ${popover.arrowClass.value} ${customArrow}`" :style="popover.arrowStyle.value"></view>
-          <!-- 普通模式 -->
-          <view v-if="!useContentSlot" class="wd-tooltip__inner">{{ content }}</view>
-          <!-- 用户自定义样式 -->
-          <slot name="content" v-else />
-        </view>
-        <wd-icon v-if="showClose" name="close" class="wd-tooltip__close-icon" @click="toggle"></wd-icon>
+    <wd-transition custom-class="wd-tooltip__pos" :custom-style="popover.popStyle.value" :show="modelValue" name="fade" :duration="200">
+      <view class="wd-tooltip__container custom-pop">
+        <view v-if="visibleArrow" :class="`wd-tooltip__arrow ${popover.arrowClass.value} ${customArrow}`" :style="popover.arrowStyle.value"></view>
+        <!-- 普通模式 -->
+        <view v-if="!useContentSlot" class="wd-tooltip__inner">{{ content }}</view>
+        <!-- 用户自定义样式 -->
+        <slot name="content" v-else />
       </view>
+      <wd-icon v-if="showClose" name="close" custom-class="wd-tooltip__close-icon" @click="toggle"></wd-icon>
     </wd-transition>
     <view @click="toggle" class="wd-tooltip__target" id="target">
       <slot />

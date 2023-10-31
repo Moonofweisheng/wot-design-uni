@@ -1,105 +1,103 @@
 <template>
-  <view>
+  <page-wraper>
     <wd-toast />
-    <page-wraper>
-      <view @click.stop="clickOutside">
-        <demo-block title="基本用法">
-          <view class="top">
-            <wd-tooltip v-model="show1" placement="bottom-start" content="bottom-start 提示文字" @change="handleChange1">
-              <wd-button :round="false">bottom-start</wd-button>
-            </wd-tooltip>
-            <wd-tooltip v-model="show2" placement="bottom" content="bottom 提示文字" @change="handleChange2">
-              <wd-button :round="false">bottom</wd-button>
-            </wd-tooltip>
-            <wd-tooltip v-model="show3" placement="bottom-end" content="bottom-end 提示文字" @change="handleChange3">
-              <wd-button :round="false">bottom-end</wd-button>
-            </wd-tooltip>
-          </view>
-          <view class="left">
-            <wd-tooltip v-model="show4" placement="right-start" content="right-start 提示文字" @change="handleChange4">
-              <wd-button :round="false">right-start</wd-button>
-            </wd-tooltip>
-            <wd-tooltip v-model="show5" placement="right" content="right 提示文字" customStyle="margin: 20px 0" @change="handleChange5">
-              <wd-button :round="false">right</wd-button>
-            </wd-tooltip>
-            <wd-tooltip v-model="show6" placement="right-end" content="right-end 提示文字" @change="handleChange6">
-              <wd-button :round="false">right-end</wd-button>
-            </wd-tooltip>
-          </view>
-          <view class="right">
-            <wd-tooltip v-model="show7" placement="left-start" content="left-start 提示文字" @change="handleChange7">
-              <wd-button :round="false">
-                left-start
-                <wd-icon name="setting" />
-              </wd-button>
-            </wd-tooltip>
-            <wd-tooltip v-model="show8" placement="left" content="left 提示文字" customStyle="margin: 20px 0" @change="handleChange8">
-              <wd-button :round="false">left</wd-button>
-            </wd-tooltip>
-            <wd-tooltip v-model="show9" placement="left-end" content="left-end 提示文字" @change="handleChange9">
-              <wd-button :round="false">left-end</wd-button>
-            </wd-tooltip>
-          </view>
-          <view class="bottom">
-            <wd-tooltip v-model="show10" placement="top-start" content="top-start 提示文字" @change="handleChange10">
-              <wd-button :round="false">top-start</wd-button>
-            </wd-tooltip>
-            <wd-tooltip v-model="show11" placement="top" content="top 提示文字" @change="handleChange11">
-              <wd-button :round="false">top</wd-button>
-            </wd-tooltip>
-            <wd-tooltip v-model="show12" placement="top-end" content="top-end 提示文字" @change="handleChange12">
-              <wd-button :round="false">top-end</wd-button>
-            </wd-tooltip>
-          </view>
-        </demo-block>
-        <demo-block title="显示关闭按钮">
-          <view class="demo-left">
-            <wd-tooltip v-model="show13" content="显示关闭按钮" placement="right" show-close @change="handleChange13">
-              <wd-button :round="false">显示关闭按钮</wd-button>
-            </wd-tooltip>
-          </view>
-        </demo-block>
-        <demo-block title="多行文本">
-          <view class="demo-left lines-demo">
-            <wd-tooltip v-model="show14" placement="right" use-content-slot @change="handleChange14">
-              <wd-button :round="false">多行文本</wd-button>
-              <template #content>
-                <view class="lines-content">
-                  <view>多行文本1</view>
-                  <view>多行文本2</view>
-                  <view>多行文本3</view>
-                </view>
-              </template>
-            </wd-tooltip>
-          </view>
-        </demo-block>
-        <demo-block title="控制显隐">
-          <view @click.stop="control">
-            <wd-button plain size="small" class="button-control">{{ show15 ? '关闭' : '打开' }}</wd-button>
-          </view>
-          <view class="demo-left demo-control">
-            <wd-tooltip placement="top" content="控制显隐" v-model="show15">
-              <wd-button :round="false">top</wd-button>
-            </wd-tooltip>
-          </view>
-        </demo-block>
-        <demo-block title="绑定事件">
-          <view class="demo-left">
-            <wd-tooltip v-model="show16" placement="right-end" :content="content" @open="onShow" @close="onHide" @change="handleChange16">
-              <wd-button :round="false">事件</wd-button>
-            </wd-tooltip>
-          </view>
-        </demo-block>
-        <demo-block title="禁用">
-          <view class="demo-left">
-            <wd-tooltip v-model="show17" placement="right-end" content="禁用" disabled @change="handleChange17">
-              <wd-button :round="false">禁用</wd-button>
-            </wd-tooltip>
-          </view>
-        </demo-block>
-      </view>
-    </page-wraper>
-  </view>
+    <view style="overflow: hidden" @click.stop="clickOutside">
+      <demo-block title="基本用法">
+        <view class="top">
+          <wd-tooltip v-model="show1" placement="bottom-start" content="bottom-start 提示文字" @change="handleChange1">
+            <wd-button :round="false">bottom-start</wd-button>
+          </wd-tooltip>
+          <wd-tooltip v-model="show2" placement="bottom" content="bottom 提示文字" @change="handleChange2">
+            <wd-button :round="false">bottom</wd-button>
+          </wd-tooltip>
+          <wd-tooltip v-model="show3" placement="bottom-end" content="bottom-end 提示文字" @change="handleChange3">
+            <wd-button :round="false">bottom-end</wd-button>
+          </wd-tooltip>
+        </view>
+        <view class="left">
+          <wd-tooltip v-model="show4" placement="right-start" content="right-start 提示文字" @change="handleChange4">
+            <wd-button :round="false">right-start</wd-button>
+          </wd-tooltip>
+          <wd-tooltip v-model="show5" placement="right" content="right 提示文字" customStyle="margin: 20px 0" @change="handleChange5">
+            <wd-button :round="false">right</wd-button>
+          </wd-tooltip>
+          <wd-tooltip v-model="show6" placement="right-end" content="right-end 提示文字" @change="handleChange6">
+            <wd-button :round="false">right-end</wd-button>
+          </wd-tooltip>
+        </view>
+        <view class="right">
+          <wd-tooltip v-model="show7" placement="left-start" content="left-start 提示文字" @change="handleChange7">
+            <wd-button :round="false">
+              left-start
+              <wd-icon name="setting" />
+            </wd-button>
+          </wd-tooltip>
+          <wd-tooltip v-model="show8" placement="left" content="left 提示文字" customStyle="margin: 20px 0" @change="handleChange8">
+            <wd-button :round="false">left</wd-button>
+          </wd-tooltip>
+          <wd-tooltip v-model="show9" placement="left-end" content="left-end 提示文字" @change="handleChange9">
+            <wd-button :round="false">left-end</wd-button>
+          </wd-tooltip>
+        </view>
+        <view class="bottom">
+          <wd-tooltip v-model="show10" placement="top-start" content="top-start 提示文字" @change="handleChange10">
+            <wd-button :round="false">top-start</wd-button>
+          </wd-tooltip>
+          <wd-tooltip v-model="show11" placement="top" content="top 提示文字" @change="handleChange11">
+            <wd-button :round="false">top</wd-button>
+          </wd-tooltip>
+          <wd-tooltip v-model="show12" placement="top-end" content="top-end 提示文字" @change="handleChange12">
+            <wd-button :round="false">top-end</wd-button>
+          </wd-tooltip>
+        </view>
+      </demo-block>
+      <demo-block title="显示关闭按钮">
+        <view class="demo-left">
+          <wd-tooltip v-model="show13" content="显示关闭按钮" placement="right" show-close @change="handleChange13">
+            <wd-button :round="false">显示关闭按钮</wd-button>
+          </wd-tooltip>
+        </view>
+      </demo-block>
+      <demo-block title="多行文本">
+        <view class="demo-left lines-demo">
+          <wd-tooltip v-model="show14" placement="right" use-content-slot @change="handleChange14">
+            <wd-button :round="false">多行文本</wd-button>
+            <template #content>
+              <view class="lines-content">
+                <view>多行文本1</view>
+                <view>多行文本2</view>
+                <view>多行文本3</view>
+              </view>
+            </template>
+          </wd-tooltip>
+        </view>
+      </demo-block>
+      <demo-block title="控制显隐">
+        <view @click.stop="control">
+          <wd-button plain size="small" class="button-control">{{ show15 ? '关闭' : '打开' }}</wd-button>
+        </view>
+        <view class="demo-left demo-control">
+          <wd-tooltip placement="top" content="控制显隐" v-model="show15">
+            <wd-button :round="false">top</wd-button>
+          </wd-tooltip>
+        </view>
+      </demo-block>
+      <demo-block title="绑定事件">
+        <view class="demo-left">
+          <wd-tooltip v-model="show16" placement="right-end" :content="content" @open="onShow" @close="onHide" @change="handleChange16">
+            <wd-button :round="false">事件</wd-button>
+          </wd-tooltip>
+        </view>
+      </demo-block>
+      <demo-block title="禁用">
+        <view class="demo-left">
+          <wd-tooltip v-model="show17" placement="right-end" content="禁用" disabled @change="handleChange17">
+            <wd-button :round="false">禁用</wd-button>
+          </wd-tooltip>
+        </view>
+      </demo-block>
+    </view>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
 import { clickOut } from '@/uni_modules/wot-design-uni'

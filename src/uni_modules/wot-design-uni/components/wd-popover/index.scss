@@ -61,7 +61,7 @@
     border-radius: $-popover-radius;
   }
 
-  @include e(pos) {
+  @include edeep(pos) {
     position: absolute;
     box-sizing: border-box;
     background-clip: padding-box;
@@ -76,6 +76,11 @@
     box-shadow: $-popover-box-shadow;
     color: $-popover-color;
   }
+
+  // @include edeep(transition) {
+  //   position: relative;
+  //   z-index: $-popover-z-index;
+  // }
 
   @include e(hidden) {
     left: -100vw;

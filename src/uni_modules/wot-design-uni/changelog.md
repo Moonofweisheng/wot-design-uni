@@ -1,6 +1,34 @@
 # 更新日志 
 
 
+### [0.1.43](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.42...v0.1.43) (2023-10-31)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tooltip 文字提示组件微信端关闭按钮样式错误的问题 ([ec1b949](https://github.com/Moonofweisheng/wot-design-uni/commit/ec1b9490b9517d0e4ebe4a5130a418a684b1a589))
+
+### [0.1.42](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.41...v0.1.42) (2023-10-31)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Popover、Tooltip 组件展开过程中无法遮盖图片的问题 ([db009c1](https://github.com/Moonofweisheng/wot-design-uni/commit/db009c1229413f7ecc446e3e3a1db4d7678268b3))
+
+### [0.1.41](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.40...v0.1.41) (2023-10-31)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Popover、Tooltip 组件展开切换动画不流畅的问题 ([c765b08](https://github.com/Moonofweisheng/wot-design-uni/commit/c765b085a6018433bb95fd7647c091393e2e6e7c)), closes [#101](https://github.com/Moonofweisheng/wot-design-uni/issues/101)
+
+### [0.1.40](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.39...v0.1.40) (2023-10-30)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  移除文档中 Search 组件未支持的插槽 ([325e140](https://github.com/Moonofweisheng/wot-design-uni/commit/325e14046de38eb7c4e792a64a290c9997af5cba))
+
 ### [0.1.39](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.38...v0.1.39) (2023-10-29)
 
 
