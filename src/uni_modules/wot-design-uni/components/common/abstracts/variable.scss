@@ -575,9 +575,10 @@ $-steps-dot-size: var(--wot-steps-dot-size, 7px) !default; // 点状大小
 $-steps-dot-active-size: var(--wot-steps-dot-active-size, 9px) !default; // 点状高亮大小
 
 /* switch */
-$-switch-width: var(--wot-switch-width, 51px) !default; // 宽度
-$-switch-height: var(--wot-switch-height, 32px) !default; // 高度
-$-switch-circle-size: var(--wot-switch-circle-size, 28px) !default; // 圆点大小
+$-switch-size: var(--wot-switch-size, 28px) !default; // switch大小
+$-switch-width: var(--wot-switch-width, calc(1.8em + 4px)) !default; // 宽度
+$-switch-height: var(--wot-switch-height, calc(1em + 4px)) !default; // 高度
+$-switch-circle-size: var(--wot-switch-circle-size, 1em) !default; // 圆点大小
 $-switch-border-color: var(--wot-switch-border-color, #e5e5e5) !default; // 边框颜色选中状态背景颜色
 $-switch-active-color: var(--wot-switch-active-color, resultColor($open-linear, 315deg, $-color-theme, "light""dark", #4f7cf8 #668df8, 0% 100%)) !default; // 选中状态背景
 $-switch-active-shadow-color: var(--wot-switch-active-shadow-color, rgba(0, 83, 162, 0.5)) !default; // 选中状态shadow颜色

@@ -12,8 +12,8 @@
       <demo-block title="自定义颜色 active-color 、 inactive-color">
         <wd-switch v-model="checked3" active-color="#13ce66" inactive-color="#f00" @change="handleChange3" />
       </demo-block>
-      <demo-block title="修改大小">
-        <wd-switch v-model="checked4" size="20px" @change="handleChange4" />
+      <demo-block title="自定义大小">
+        <wd-switch v-model="checked4" :size="24" @change="handleChange4" />
       </demo-block>
       <demo-block title="选中禁用">
         <wd-switch v-model="checked5" disabled />

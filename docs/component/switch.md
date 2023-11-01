@@ -31,12 +31,12 @@ const checked = ref<boolean>(true)
 <wd-switch v-model="checked" active-color="#13ce66" inactive-color="#f00" />
 ```
 
-## 修改大小
+## 自定义大小
 
 设置 `size` 修改开关大小。
 
 ```html
-<wd-switch v-model="checked" size="20px" />
+<wd-switch v-model="checked" size="24px" />
 ```
 
 ## 禁用
@@ -78,7 +78,7 @@ const beforeChange = ({ value, resolve }) => {
 | inactive-value | 关闭时的值 | boolean / string / number | - | false | - |
 | active-color | 打开时的背景色 | string | - | #4D80F0 | - |
 | inactive-color | 关闭时的背景色，默认为白色，所以有灰色边框，如果设置了该值，则会自动去除灰色边框 | string | - | #fff | - |
-| size | 开关大小，可以为任何单位的字符串尺寸 | string | - | 28px | - |
+| size | 开关大小，可以为任何单位的字符串尺寸 | string/number | - | 28px | - |
 | name | form 表单中的字段名 | string | - | - | - |
 | before-change | 修改前钩子 | function | - | - | - |
 
