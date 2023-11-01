@@ -2,7 +2,7 @@
   <page-wraper>
     <wd-toast />
 
-    <view @click.stop="clickoutside">
+    <view @click.stop="closeOutside">
       <demo-block transparent title="基本用法">
         <wd-swipe-action>
           <wd-cell title="标题文字" value="内容" />
@@ -102,8 +102,9 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import { clickOut } from '@/uni_modules/wot-design-uni'
+import { useToast, useQueue } from '@/uni_modules/wot-design-uni'
+
+const { closeOutside } = useQueue()
 
 import { ref } from 'vue'
 const toast = useToast()
@@ -115,10 +116,6 @@ const beforeClose = (reason, position) => {
   } else {
     toast.show(`${reason}导致${position}滑动按钮关闭`)
   }
-}
-
-function clickoutside() {
-  clickOut.closeOutside()
 }
 
 function changeState(position: string) {

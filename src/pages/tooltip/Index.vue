@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <wd-toast />
-    <view style="overflow: hidden" @click.stop="clickOutside">
+    <view style="overflow: hidden" @click.stop="closeOutside">
       <demo-block title="基本用法">
         <view class="top">
           <wd-tooltip v-model="show1" placement="bottom-start" content="bottom-start 提示文字" @change="handleChange1">
@@ -100,8 +100,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { clickOut } from '@/uni_modules/wot-design-uni'
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast, useQueue } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const show1 = ref<boolean>(false)
@@ -124,6 +123,8 @@ const show17 = ref<boolean>(false)
 const content = ref<string>('显示内容')
 
 const toast = useToast()
+
+const { closeOutside } = useQueue()
 
 function control() {
   show15.value = !show15.value
@@ -185,9 +186,6 @@ function handleChange16(event) {
 }
 function handleChange17(event) {
   // this.setData({ show17: event.detail.show })
-}
-function clickOutside(event) {
-  clickOut.closeOutside()
 }
 </script>
 <style lang="scss" scoped>

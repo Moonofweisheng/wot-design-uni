@@ -28,8 +28,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, onMounted, provide, ref, watch } from 'vue'
+import { getCurrentInstance, inject, onBeforeMount, onMounted, provide, ref, watch } from 'vue'
 import { closeOther } from '../common/clickoutside'
+import { type Queue, queueKey } from '../composables/useQueue'
 import { getRect } from '../common/util'
 
 type DropDirction = 'up' | 'down'
@@ -52,6 +53,7 @@ const props = withDefaults(defineProps<Props>(), {
   closeOnClickModal: true,
   duration: 200
 })
+const queue = inject<Queue | null>(queueKey, null)
 
 // 保存的永远是当前选中的值
 const titleList = ref<Record<string, any>[]>([])
@@ -106,7 +108,11 @@ function toggle(uid: string) {
   })
   // 点击当前 menu, 关闭其他 menu
   if (child && !child.disabled) {
-    closeOther(child)
+    if (queue && queue.closeOther) {
+      queue.closeOther(child)
+    } else {
+      closeOther(child)
+    }
     fold(child)
   }
 }

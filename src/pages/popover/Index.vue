@@ -2,7 +2,7 @@
   <page-wraper>
     <wd-toast />
 
-    <view @click="clickOutside" class="wrapper">
+    <view @click="closeOutside" class="wrapper">
       <demo-block custom-class="pop" title="基本用法">
         <view class="center">
           <wd-popover id="pop1" content="这是一段内容。" v-model="show1" @change="handleChange1">
@@ -33,9 +33,11 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { clickOut, useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
+import { useQueue } from '@/uni_modules/wot-design-uni'
 
+const { closeOutside } = useQueue()
 const toast = useToast()
 
 const show = ref<boolean>(false)
@@ -64,10 +66,6 @@ const menu = ref<Array<Record<string, any>>>([
 
 function link(e) {
   toast.show('选择了' + e.item.content)
-}
-
-function clickOutside() {
-  clickOut.closeOutside()
 }
 
 function showPop(index: number) {

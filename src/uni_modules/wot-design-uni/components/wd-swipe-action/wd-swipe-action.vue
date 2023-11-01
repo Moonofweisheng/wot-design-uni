@@ -35,8 +35,9 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
+import { type Queue, queueKey } from '../composables/useQueue'
 import { useTouch } from '../composables/useTouch'
 import { getRect } from '../common/util'
 
@@ -53,6 +54,8 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: 'close',
   disabled: false
 })
+
+const queue = inject<Queue | null>(queueKey, null)
 
 const wrapperStyle = ref<string>('')
 const stopPropagation = ref<boolean>(false)
@@ -79,7 +82,11 @@ watch(
 )
 
 onBeforeMount(() => {
-  pushToQueue(proxy)
+  if (queue && queue.pushToQueue) {
+    queue.pushToQueue(proxy)
+  } else {
+    pushToQueue(proxy)
+  }
   // 滑动开始时，wrapper的偏移量
   originOffset.value = 0
   // wrapper现在的偏移量
@@ -95,7 +102,11 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  removeFromQueue(proxy)
+  if (queue && queue.removeFromQueue) {
+    queue.removeFromQueue(proxy)
+  } else {
+    removeFromQueue(proxy)
+  }
 })
 
 const emit = defineEmits(['click', 'update:modelValue'])
@@ -177,7 +188,11 @@ function startDrag(event) {
 
   originOffset.value = wrapperOffset.value
   touch.touchStart(event)
-  closeOther(proxy)
+  if (queue && queue.closeOther) {
+    queue.closeOther(proxy)
+  } else {
+    closeOther(proxy)
+  }
 }
 /**
  * @description 滑动时，逐渐展示按钮

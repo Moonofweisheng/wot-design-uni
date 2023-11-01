@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2022-11-01 17:12:57
- * @LastEditTime: 2023-08-16 17:01:25
+ * @LastEditTime: 2023-10-31 21:36:16
  * @LastEditors: weisheng
  * @Description: 组件发版问答
  * @FilePath: \wot-design-uni\build\release.js
@@ -62,8 +62,6 @@ inquirer
     package.version = version
     writeFileSync(path.resolve(src, 'package.json'), JSON.stringify(package))
     // 生成制品
-    execSync('yarn compiler')
-    console.log('√ compiler complete')
     execSync('yarn lint')
     execSync('git add -A ')
     execSync(`git commit -am "build: compile ${version}"`)
