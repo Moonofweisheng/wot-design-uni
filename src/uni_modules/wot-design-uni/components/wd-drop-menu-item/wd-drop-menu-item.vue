@@ -52,6 +52,7 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
+import { type Queue, queueKey } from '../composables/useQueue'
 import { debounce } from '../common/util'
 import type { PopupType } from '../wd-popup/type'
 
@@ -85,6 +86,7 @@ const props = withDefaults(defineProps<Props>(), {
   tipKey: 'tip'
 })
 
+const queue = inject<Queue | null>(queueKey, null)
 const showWrapper = ref<boolean>(false)
 const showPop = ref<boolean>(false)
 const position = ref<PopupType>()
@@ -130,7 +132,11 @@ watch(
 )
 
 onBeforeMount(() => {
-  pushToQueue(proxy)
+  if (queue && queue.pushToQueue) {
+    queue.pushToQueue(proxy)
+  } else {
+    pushToQueue(proxy)
+  }
   if (parent) {
     parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
     updateTitle()
@@ -138,7 +144,11 @@ onBeforeMount(() => {
 })
 
 onBeforeUnmount(() => {
-  removeFromQueue(proxy)
+  if (queue && queue.removeFromQueue) {
+    queue.removeFromQueue(proxy)
+  } else {
+    removeFromQueue(proxy)
+  }
 })
 
 onMounted(() => {

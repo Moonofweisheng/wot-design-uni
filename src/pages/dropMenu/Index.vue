@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <view class="demo-body" @click="clickoutside">
+    <view class="demo-body" @click="closeOutside">
       <demo-block title="基本用法" transparent>
         <wd-drop-menu>
           <wd-drop-menu-item v-model="value1" :options="option1" @change="handleChange1" />
@@ -47,8 +47,11 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { clickOut } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
+
+import { useQueue } from '@/uni_modules/wot-design-uni'
+
+const { closeOutside } = useQueue()
 
 const dropMenu = ref()
 
@@ -72,10 +75,6 @@ const option2 = ref<Record<string, any>[]>([
   { label: '销量', value: 1 },
   { label: '上架时间', value: 2 }
 ])
-
-function clickoutside() {
-  clickOut.closeOutside()
-}
 
 function handleChange1({ value }) {
   console.log(value)

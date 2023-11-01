@@ -34,9 +34,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue'
+import { getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue'
 import { usePopover } from '../composables/usePopover'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
+import { type Queue, queueKey } from '../composables/useQueue'
 
 type PlacementType =
   | 'top'
@@ -83,6 +84,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const popover = usePopover()
+const queue = inject<Queue | null>(queueKey, null)
 
 const selector: string = 'tooltip'
 const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
@@ -104,7 +106,11 @@ watch(
   (newValue) => {
     if (newValue) {
       popover.control(props.placement, props.offset)
-      closeOther(proxy)
+      if (queue && queue.closeOther) {
+        queue.closeOther(proxy)
+      } else {
+        closeOther(proxy)
+      }
     }
     popover.showStyle.value = newValue ? 'display: inline-block;' : 'display: none;'
     emit('change', { show: newValue })
@@ -117,12 +123,20 @@ onMounted(() => {
 })
 
 onBeforeMount(() => {
-  pushToQueue(proxy)
+  if (queue && queue.pushToQueue) {
+    queue.pushToQueue(proxy)
+  } else {
+    pushToQueue(proxy)
+  }
   popover.showStyle.value = props.modelValue ? 'opacity: 1;' : 'opacity: 0;'
 })
 
 onBeforeUnmount(() => {
-  removeFromQueue(proxy)
+  if (queue && queue.removeFromQueue) {
+    queue.removeFromQueue(proxy)
+  } else {
+    removeFromQueue(proxy)
+  }
 })
 
 function toggle(event) {

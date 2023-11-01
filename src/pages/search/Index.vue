@@ -1,5 +1,5 @@
 <template>
-  <view @click="clickoutside">
+  <view @click="closeOutside">
     <wd-toast />
     <page-wraper>
       <demo-block title="基本用法" transparent>
@@ -44,13 +44,12 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { clickOut, useToast } from '@/uni_modules/wot-design-uni'
+import { useToast, useQueue } from '@/uni_modules/wot-design-uni'
+
+const { closeOutside } = useQueue()
 
 const toast = useToast()
 
-function clickoutside() {
-  clickOut.closeOutside()
-}
 const showPopover = ref<boolean>(false)
 const value1 = ref<string>('')
 const value2 = ref<string>('初始文案')
