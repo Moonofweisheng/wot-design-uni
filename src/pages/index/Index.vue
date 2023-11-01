@@ -377,7 +377,7 @@ function kindToggle(id: string) {
   font-size: 12px;
 }
 .page__bd {
-  padding: 0 15px;
+  padding: 0 15px 30px 20px;
   user-select: none;
 }
 .logo {
@@ -417,13 +417,12 @@ function kindToggle(id: string) {
 }
 
 .kind-list__item {
-  margin: 20px 0;
   border-radius: 30px;
   background: #fff;
   overflow: hidden;
-}
-.kind-list__item:first-child {
-  margin-top: 0;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
 }
 
 .kind-list__img {
