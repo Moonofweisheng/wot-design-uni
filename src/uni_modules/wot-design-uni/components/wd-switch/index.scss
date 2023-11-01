@@ -8,6 +8,7 @@
   height: $-switch-height;
   border-radius: $-switch-circle-size;
   background: $-switch-inactive-color;
+  font-size: $-switch-size;
   transition: all .3s;
 
   @include e(checkbox) {

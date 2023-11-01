@@ -16,7 +16,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount } from 'vue'
-import { getType, objToStyle } from '../common/util'
+import { addUnit, getType, objToStyle } from '../common/util'
 
 interface Props {
   modelValue: boolean | string | number
@@ -25,7 +25,7 @@ interface Props {
   inactiveValue?: boolean | string | number
   activeColor?: string
   inactiveColor?: string
-  size?: string
+  size?: string | number
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeChange?: Function
   customClass?: string
@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: false,
   activeValue: true,
   inactiveValue: false,
-  size: '28px'
+  size: 28
 })
 
 const rootClass = computed(() => {
@@ -46,7 +46,7 @@ const rootClass = computed(() => {
 
 const rootStyle = computed(() => {
   const rootStyle: Record<string, any> = {
-    'font-size': props.size,
+    'font-size': addUnit(props.size),
     background: props.modelValue === props.activeValue ? props.activeColor : props.inactiveColor,
     'border-color': props.modelValue === props.activeValue ? props.activeColor : props.inactiveColor
   }
