@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.45](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.44...v0.1.45) (2023-11-01)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Switch 开关组件自定义大小无效的问题 ([15ffa1f](https://github.com/Moonofweisheng/wot-design-uni/commit/15ffa1f9172d3c11722c71ca370c1016e25f2b41))
+
 ### [0.1.44](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.43...v0.1.44) (2023-11-01)
 
 
