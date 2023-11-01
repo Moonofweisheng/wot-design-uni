@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.44](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.43...v0.1.44) (2023-11-01)
+
+
+### ✨ Features | 新功能
+
+* ✨ 使用 useQueue hook替换clickOut实现关闭多个气泡等组件的功能 ([3a24999](https://github.com/Moonofweisheng/wot-design-uni/commit/3a24999c1e28414b12806cad3c3bc6f7a445593f))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  优化演示项目首页样式 ([e98f30e](https://github.com/Moonofweisheng/wot-design-uni/commit/e98f30e0125e287d2bc5cdbcfff69a35cb7436d8))
+
 ### [0.1.43](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.42...v0.1.43) (2023-10-31)
 
 
