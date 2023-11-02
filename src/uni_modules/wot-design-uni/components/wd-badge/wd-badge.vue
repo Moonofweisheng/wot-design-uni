@@ -8,7 +8,7 @@
  * 记得注释
 -->
 <template>
-  <view :class="['wd-badge', customClass]">
+  <view :class="['wd-badge', customClass]" :style="customStyle">
     <slot></slot>
     <view
       v-if="!hidden && (content || content === 0 || isDot)"
@@ -42,9 +42,11 @@ interface Props {
   top?: number
   right?: number
   customClass?: string
+  customStyle?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
+  customStyle: '',
   modelValue: null
 })
 const content = ref<number | string | null>(null)
