@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-10-14 09:47:28
+ * @LastEditTime: 2023-11-02 19:01:52
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\components\demo-block\demo-block.vue
@@ -54,7 +54,7 @@ watch(
 )
 
 function setStyle() {
-  style.value = `margin: 0 ${props.hor}px;padding:${props.ver}px 0;overflow: hidden;`
+  style.value = `margin: 0 ${props.hor}px;padding:${props.ver}px 0;`
 }
 </script>
 <style lang="scss" scoped>

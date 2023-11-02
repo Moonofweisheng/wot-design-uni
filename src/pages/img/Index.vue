@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-11-02 18:57:41
+ * @LastEditTime: 2023-11-02 19:02:24
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\img\Index.vue
+ * 记得注释
+-->
 <template>
   <page-wraper>
     <demo-block title="基本用法">
@@ -48,7 +57,7 @@ const modes = [
 
 <style lang="scss" scoped>
 .col {
-  float: left;
+  display: inline-block;
   width: 33.333%;
   box-sizing: border-box;
   min-height: 1px;
