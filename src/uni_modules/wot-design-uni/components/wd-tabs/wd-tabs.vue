@@ -233,7 +233,7 @@ const setActive = debounce(
     setActiveTab()
   },
   100,
-  { leading: true }
+  { leading: false }
 )
 
 watch(
