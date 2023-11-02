@@ -1,0 +1,12 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(sidebar) {
+
+  }
+
+}
+
+@include b(sidebar) {
+}
