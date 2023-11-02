@@ -54,7 +54,7 @@ watch(
 )
 
 function setStyle() {
-  style.value = `margin: 0 ${props.hor}px;padding:${props.ver}px 0;`
+  style.value = `margin: 0 ${props.hor}px;padding:${props.ver}px 0;overflow: hidden;`
 }
 </script>
 <style lang="scss" scoped>
@@ -62,6 +62,7 @@ function setStyle() {
   .is-white {
     background: $-dark-background2;
   }
+
   .demo-block {
     color: $-dark-color3;
   }
@@ -69,12 +70,15 @@ function setStyle() {
 
 .demo-block {
   position: relative;
+
   &:not(:first-child) {
     margin-top: 15px;
   }
+
   &:not(:last-child) {
     margin-bottom: 15px;
   }
+
   color: #666;
 }
 
