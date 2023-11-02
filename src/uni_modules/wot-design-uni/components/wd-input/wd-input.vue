@@ -32,7 +32,7 @@
           :cursor-spacing="cursorSpacing"
           :fixed="fixed"
           :cursor="cursor"
-          :show-confirm-barb="showConfirmBar"
+          :show-confirm-bar="showConfirmBar"
           :selection-start="selectionStart"
           :selection-end="selectionEnd"
           :adjust-position="adjustPosition"
