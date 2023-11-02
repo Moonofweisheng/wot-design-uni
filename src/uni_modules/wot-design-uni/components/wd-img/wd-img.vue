@@ -37,6 +37,7 @@ interface Props {
   lazyLoad?: boolean
   width?: string | number
   height?: string | number
+  radius?: string | number
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
@@ -54,6 +55,10 @@ const rootStyle = computed(() => {
   }
   if (isDef(props.width)) {
     style['width'] = addUnit(props.width)
+  }
+  if (isDef(props.radius)) {
+    style['border-radius'] = addUnit(props.radius)
+    style['overflow'] = 'hidden'
   }
   return `${objToStyle(style)};${props.customStyle}`
 })

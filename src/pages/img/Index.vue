@@ -17,6 +17,12 @@
         <view class="center">{{ mode }}</view>
       </view>
     </demo-block>
+    <demo-block title="圆角">
+      <view class="col" v-for="(mode, index) in modes" :key="index">
+        <wd-img width="100%" height="27vw" :radius="5" :src="joy" :mode="mode" />
+        <view class="center">{{ mode }}</view>
+      </view>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
