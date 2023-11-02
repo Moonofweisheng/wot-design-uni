@@ -1,6 +1,25 @@
 # 更新日志 
 
 
+### [0.1.47](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.46...v0.1.47) (2023-11-02)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复 Image 图片组件演示demo样式不友好的问题 ([cbdab19](https://github.com/Moonofweisheng/wot-design-uni/commit/cbdab1959efff642a60a351ffd6454dcd173b9a4))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Input 组件为textarea类型时show-confirm-bar不生效的问题 ([eebec8a](https://github.com/Moonofweisheng/wot-design-uni/commit/eebec8a74fa9399bfd305cadb1a9b6a526e88568))
+* 🐛 img 预览demo布局错位 ([0397809](https://github.com/Moonofweisheng/wot-design-uni/commit/0397809d81010e109c238eefea56c82bd06a50cb))
+
+
+### ✨ Features | 新功能
+
+* ✨ 图片添加圆角大小设置 ([98edaed](https://github.com/Moonofweisheng/wot-design-uni/commit/98edaed6cb1c81b9ed6e05561814aaa51b31b2b3))
+* ✨ Badge 徽标组件增加customStyle自定义样式 ([d194106](https://github.com/Moonofweisheng/wot-design-uni/commit/d194106f07fb46f6a979967ba327dee1b41ca70e))
+
 ### [0.1.46](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.45...v0.1.46) (2023-11-02)
 
 
