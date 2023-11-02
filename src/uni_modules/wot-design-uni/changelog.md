@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.46](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.45...v0.1.46) (2023-11-02)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tabs 组件在微信小程序端有概率不绘制下划线的问题 ([d70ec65](https://github.com/Moonofweisheng/wot-design-uni/commit/d70ec65998d1ca1fbdbd3b4ef1af4a292a597f55))
+
 ### [0.1.45](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.44...v0.1.45) (2023-11-01)
 
 
