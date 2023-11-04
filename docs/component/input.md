@@ -155,7 +155,9 @@ function handleChange(event) {
 | suffixIcon | 后置图标，icon组件中的图标类名 | string | - | - | - |
 | showWordLimit | 显示字数限制，需要同时设置 maxlength | boolean | - | false | - |
 | confirm-type | 设置键盘右下角按钮的文字，仅在type='text'时生效 | string | done / go / next / search / send | done | - |
-| placeholderStyle | 原生属性，指定 placeholder 的样式，目前仅支持color,font-size和font-weight | string | - | - | - |
+| confirm-hold | 点击键盘右下角按钮时是否保持键盘不收起	 | Boolean | - | false | - |
+| always-embed	 | 微信小程序原生属性，强制 input 处于同层状态，默认 focus 时 input 会切到非同层状态 (仅在 iOS 下生效)	 | Boolean | - | false | - |
+| placeholderStyle | 原生属，指定 placeholder 的样式，目前仅支持color,font-size和font-weight | string | - | - | - |
 | placeholderClass | textarea指定 placeholder 的样式类 | string | - | textarea-placeholder | - |
 | focus | 原生属性，获取焦点 | boolean | - | false | - |
 | cursorSpacing | 原生属性，指定光标与键盘的距离。取textarea距离底部的距离和cursor-spacing指定的距离的最小值作为光标与键盘的距离 | number | - | 0 | - |
