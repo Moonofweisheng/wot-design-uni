@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.48](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.47...v0.1.48) (2023-11-04)
+
+
+### ✨ Features | 新功能
+
+* ✨ Input 输入框增加支持微信小程序原生属性always-embed ([57d00ec](https://github.com/Moonofweisheng/wot-design-uni/commit/57d00ececd9849a2d21f59fc863b6ad8933419d8))
+
 ### [0.1.47](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.46...v0.1.47) (2023-11-02)
 
 
