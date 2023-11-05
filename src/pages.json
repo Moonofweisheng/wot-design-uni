@@ -631,6 +631,46 @@
         },
         "navigationBarTitleText": "Table 表格"
       }
+    },
+    {
+      "path": "pages/sidebar/Index",
+      "name": "sidebar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Sidebar 侧边栏"
+      }
+    },
+    {
+      "path": "pages/sidebar/demo1",
+      "name": "sidebar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Sidebar 锚点用法"
+      }
+    },
+    {
+      "path": "pages/sidebar/demo2",
+      "name": "sidebar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Sidebar 切换页面"
+      }
+    },
+    {
+      "path": "pages/sidebar/demo3",
+      "name": "sidebar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Sidebar 自定义图标"
+      }
     }
   ],
   // "tabBar": {

@@ -1,0 +1,25 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(sidebar) {
+    background: $-dark-background;
+    @include e(padding){
+      background: $-dark-background2;
+    }
+  }
+}
+
+@include b(sidebar) {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: $-sidebar-width;
+  height: $-sidebar-height;
+  background: $-color-white;
+  
+  @include e(padding){
+    flex: 1 1 auto;
+    background: $-sidebar-bg;
+  }
+}

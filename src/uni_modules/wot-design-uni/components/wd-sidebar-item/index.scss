@@ -1,0 +1,107 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(sidebar-item) {
+    background: $-dark-background2;
+    color: $-dark-color;
+
+    &:active {
+      background-color: $-dark-background4;
+    }
+
+    @include m(active) {
+      background: $-dark-background;
+      color: $-sidebar-active-color;
+    }
+
+    @include m(disabled) {
+      color: $-dark-color-gray;
+  
+      &:active {
+        background-color: $-dark-background2;;
+      }
+    }
+  }
+
+}
+
+@include b(sidebar-item) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 32rpx;
+  font-size: $-sidebar-font-size;
+  color: $-sidebar-color;
+  background: $-sidebar-bg;
+  min-height: $-sidebar-item-height;
+  box-sizing: border-box;
+  white-space: wrap;
+  line-height: $-sidebar-item-line-height;
+
+  &:active {
+    background-color: $-sidebar-hover-bg;
+  }
+
+  @include m(active) {
+    font-weight: 600;
+    background: $-sidebar-active-bg;
+    color: $-sidebar-active-color;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: $-sidebar-active-border-width;
+      height: $-sidebar-active-border-height;
+      background: $-sidebar-active-color;
+      transform: translateY(-50%);
+      content: '';
+      border-radius: $-sidebar-active-border-width;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+
+  @include m(prefix) {
+    border-bottom-right-radius: $-sidebar-border-radius;
+  }
+
+  @include m(suffix) {
+    border-top-right-radius: $-sidebar-border-radius;
+  }
+
+
+  @include m(disabled) {
+    color: $-sidebar-disabled-color;
+    cursor: not-allowed;
+
+    &:active {
+      background-color: $-sidebar-bg;
+    }
+  }
+
+  @include edeep(badge) {
+    z-index: 2;
+  }
+
+  @include edeep(icon) {
+    font-size: $-sidebar-icon-size;
+    margin-right: 2px;
+  }
+
+  // @include e(line) {
+  //   width: 6rpx;
+  //   height: 28rpx;
+  //   position: absolute;
+  //   left: 0;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  //   background: $-sidebar-active-color;
+  //   border-radius: 8rpx;
+  // }
+
+}

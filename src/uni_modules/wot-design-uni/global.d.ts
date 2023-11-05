@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-09-25 17:28:12
- * @LastEditTime: 2023-09-28 10:52:51
+ * @LastEditTime: 2023-11-03 23:21:14
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\global.d.ts
@@ -87,6 +87,8 @@ declare module '@vue/runtime-core' {
     WdNavbarCapsule: typeof import('./components/wd-navbar-capsule/wd-navbar-capsule.vue')['default']
     WdTable: typeof import('./components/wd-table/wd-table.vue')['default']
     WdTableCol: typeof import('./components/wd-table-col/wd-table-col.vue')['default']
+    WdSidebar: typeof import('./components/wd-sidebar/wd-sidebar.vue')['default']
+    WdSidebarItem: typeof import('./components/wd-sidebar-item/wd-sidebar-item.vue')['default']
   }
 }
 

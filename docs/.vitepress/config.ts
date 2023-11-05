@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-10-29 16:14:07
+ * @LastEditTime: 2023-11-05 21:37:15
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -201,6 +201,9 @@ export default defineConfig({
           }, {
             link: "/component/navbar",
             text: "Navbar 导航栏"
+          }, {
+            link: "/component/sidebar",
+            text: "Sidebar 侧边栏"
           }]
         }, {
     
