@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.49](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.48...v0.1.49) (2023-11-05)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Sidebar 侧边栏组件 ([#113](https://github.com/Moonofweisheng/wot-design-uni/issues/113)) ([d189378](https://github.com/Moonofweisheng/wot-design-uni/commit/d189378a02aeb36c275218358849a187e88ce687))
+
 ### [0.1.48](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.47...v0.1.48) (2023-11-04)
 
 
