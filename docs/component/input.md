@@ -51,7 +51,7 @@ function handleChange(event) {
 
 ## 前后icon
 
-设置前置icon `prefix-icon`，设置后置icon `suffix-icon`，icon 为 [icon](/#/components/icon) 章节中的图标，如果没有你需要的图标，则使用 `prefix`、`suffix` 插槽进行自定义插入。
+设置前置icon `prefix-icon`，设置后置icon `suffix-icon`，icon 为 [icon](/component/icon) 章节中的图标，如果没有你需要的图标，则使用 `prefix`、`suffix` 插槽进行自定义插入。
 
 ```html
 <wd-input

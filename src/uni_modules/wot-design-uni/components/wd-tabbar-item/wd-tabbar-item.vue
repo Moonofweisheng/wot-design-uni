@@ -1,6 +1,6 @@
 <template>
   <view class="wd-tabbar-item" :style="customStyle" @click="handleClick">
-    <wd-badge :modelValue="value" :isDot="isDot" :max="max" type="danger">
+    <wd-badge :modelValue="value" v-bind="badgeProps" :is-dot="isDot" :max="max">
       <view class="wd-tabbar-item__body">
         <slot name="icon" :active="active"></slot>
         <template v-if="!$slots.icon && icon">
@@ -26,6 +26,21 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, inject, onMounted, ref, watch, getCurrentInstance } from 'vue'
 import { isDef, objToStyle } from '../common/util'
+import { badgeProps } from 'element-plus'
+
+type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
+interface BadgeProps {
+  modelValue?: number | string | null
+  bgColor?: string
+  max?: number
+  isDot?: boolean
+  hidden?: boolean
+  type?: BadgeType
+  top?: number
+  right?: number
+  customClass?: string
+  customStyle?: string
+}
 
 interface Props {
   // 自定义样式类
@@ -44,13 +59,14 @@ interface Props {
   isDot?: boolean
   // 徽标最大值
   max?: number
+  // 徽标属性，透传给 Badge 组件
+  badgeProps?: BadgeProps
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  max: 99,
   customClass: '',
-  customStyle: '',
-  isDot: false,
-  max: 99
+  customStyle: ''
 })
 const { proxy } = getCurrentInstance() as any
 
