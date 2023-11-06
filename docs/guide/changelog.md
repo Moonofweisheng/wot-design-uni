@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.51](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.50...v0.1.51) (2023-11-06)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复引入错误依赖的问题 ([15bc876](https://github.com/Moonofweisheng/wot-design-uni/commit/15bc876a3026319c88ce4b757593243f9869ce39))
+
 ### [0.1.50](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.49...v0.1.50) (2023-11-06)
 
 
