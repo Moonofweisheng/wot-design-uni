@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-11-05 21:37:15
+ * @LastEditTime: 2023-11-06 20:48:43
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -313,7 +313,7 @@ export default defineConfig({
           text: "数据展示",
           items: [{
             link: "/component/badge",
-            text: "Badge 角标"
+            text: "Badge 徽标"
           }, {
             link: "/component/card",
             text: "Card 卡片"

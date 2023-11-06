@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-11-06 20:08:34
+ * @LastEditTime: 2023-11-06 20:32:06
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\sidebar\Index.vue
+ * 记得注释
+-->
 <template>
   <page-wraper>
     <demo-block title="基础用法" transparent>
@@ -10,7 +19,7 @@
         <wd-sidebar v-model="active2">
           <wd-sidebar-item :value="0" label="标签名称" is-dot />
           <wd-sidebar-item :value="1" label="标签名称" badge="5" />
-          <wd-sidebar-item :value="2" label="标签名称" />
+          <wd-sidebar-item :value="2" label="标签名称" badge="2" :badge-props="{ type: 'warning', modelValue: 55, max: 99 }" />
         </wd-sidebar>
         <wd-sidebar v-model="active3">
           <wd-sidebar-item :value="0" label="标签名称" />

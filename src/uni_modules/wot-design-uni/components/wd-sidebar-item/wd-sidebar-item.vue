@@ -10,7 +10,7 @@
     <template v-if="!$slots.icon && icon">
       <wd-icon custom-class="wd-sidebar-item__icon" :name="icon" size="20px"></wd-icon>
     </template>
-    <wd-badge :model-value="badge" :is-dot="isDot" :max="max" custom-class="wd-sidebar-item__badge">
+    <wd-badge :model-value="badge" :is-dot="isDot" :max="max" v-bind="badgeProps" custom-class="wd-sidebar-item__badge">
       {{ label }}
     </wd-badge>
   </view>
@@ -31,6 +31,20 @@ export default {
 import { computed, getCurrentInstance } from 'vue'
 import { inject, onBeforeUnmount, onMounted } from 'vue'
 
+type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
+interface BadgeProps {
+  modelValue?: number | string | null
+  bgColor?: string
+  max?: number
+  isDot?: boolean
+  hidden?: boolean
+  type?: BadgeType
+  top?: number
+  right?: number
+  customClass?: string
+  customStyle?: string
+}
+
 interface Props {
   // 当前选项标题
   label: string
@@ -38,6 +52,8 @@ interface Props {
   value: number | string
   // 徽标显示值
   badge?: number | string | null
+  // 徽标属性，透传给 Badge 组件
+  badgeProps?: BadgeProps
   // 图标
   icon?: string
   // 是否点状徽标
@@ -54,10 +70,9 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: 0,
   disabled: false,
-  isDot: false,
+  max: 99,
   customStyle: '',
-  customClass: '',
-  max: 99
+  customClass: ''
 })
 
 const parent = inject<any>('wdSidebar', null) // 父组件
