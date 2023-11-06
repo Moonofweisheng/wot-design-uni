@@ -26,7 +26,6 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, inject, onMounted, ref, watch, getCurrentInstance } from 'vue'
 import { isDef, objToStyle } from '../common/util'
-import { badgeProps } from 'element-plus'
 
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 interface BadgeProps {
