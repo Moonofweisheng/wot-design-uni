@@ -1,0 +1,9 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+.wot-theme-dark {
+  @include b(fab) {}
+}
+
+@include b(fab) {
+}
