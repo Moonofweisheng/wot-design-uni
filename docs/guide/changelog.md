@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.50](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.49...v0.1.50) (2023-11-06)
+
+
+### ✨ Features | 新功能
+
+* ✨ SidebarItem、TabbarItem、GridItem组件增加徽标自定义属性badge-props ([7143098](https://github.com/Moonofweisheng/wot-design-uni/commit/71430989bff81a137fc5199eeeefe0a4da3ce31d))
+
 ### [0.1.49](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.48...v0.1.49) (2023-11-05)
 
 
