@@ -89,6 +89,7 @@ declare module '@vue/runtime-core' {
     WdTableCol: typeof import('./components/wd-table-col/wd-table-col.vue')['default']
     WdSidebar: typeof import('./components/wd-sidebar/wd-sidebar.vue')['default']
     WdSidebarItem: typeof import('./components/wd-sidebar-item/wd-sidebar-item.vue')['default']
+    WdFab: typeof import('./components/wd-fab/wd-fab.vue')['default']
   }
 }
 

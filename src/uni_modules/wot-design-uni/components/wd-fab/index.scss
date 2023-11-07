@@ -6,4 +6,17 @@
 }
 
 @include b(fab) {
+  position: relative;
+
+  @include edeep(trigger){
+    min-width: auto !important;
+    box-sizing: border-box;
+    width: $-fab-trigger-width !important;
+    height: $-fab-trigger-height !important;
+    border-radius: calc($-fab-trigger-height / 2) !important;
+  }
+
+  @include edeep(icon){
+    font-size: 20px;
+  }
 }
