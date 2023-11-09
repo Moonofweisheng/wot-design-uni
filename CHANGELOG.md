@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.52](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.51...v0.1.52) (2023-11-09)
+
+
+### ✨ Features | 新功能
+
+* ✨ Input绑定值为null时的警告从error改为warn ([70f1407](https://github.com/Moonofweisheng/wot-design-uni/commit/70f1407eec057668da0117c9861b523ab667da70))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Badge 徽标组件暗黑模式下边框颜色未兼容的问题 ([c0a0b5a](https://github.com/Moonofweisheng/wot-design-uni/commit/c0a0b5aaea238f144978a3a9b2ab6db202dfdc21)), closes [#115](https://github.com/Moonofweisheng/wot-design-uni/issues/115)
+
 ### [0.1.51](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.50...v0.1.51) (2023-11-06)
 
 
