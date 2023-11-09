@@ -1,5 +1,7 @@
 <template>
   <view :class="rootClass" :style="customStyle" name="test">
+    {{ inputValue }}
+    {{ modelValue }}
     <view v-if="label || useLabelSlot" :class="labelClass" :style="labelStyle">
       <view v-if="prefixIcon || usePrefixSlot" class="wd-input__prefix">
         <wd-icon v-if="prefixIcon && !usePrefixSlot" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
@@ -255,7 +257,8 @@ watch(
     const { disabled, readonly, clearable } = props
     // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
     if (newValue === null || newValue === undefined) {
-      throw Error('value can not be null or undefined')
+      newValue = ''
+      console.warn('[wot-design] warning(wd-input): value can not be null or undefined.')
     }
     inputValue.value = newValue
     showClear.value = Boolean(clearable && !disabled && !readonly && newValue)
