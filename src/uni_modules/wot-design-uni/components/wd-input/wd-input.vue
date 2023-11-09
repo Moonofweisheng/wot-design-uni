@@ -1,7 +1,5 @@
 <template>
   <view :class="rootClass" :style="customStyle" name="test">
-    {{ inputValue }}
-    {{ modelValue }}
     <view v-if="label || useLabelSlot" :class="labelClass" :style="labelStyle">
       <view v-if="prefixIcon || usePrefixSlot" class="wd-input__prefix">
         <wd-icon v-if="prefixIcon && !usePrefixSlot" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
