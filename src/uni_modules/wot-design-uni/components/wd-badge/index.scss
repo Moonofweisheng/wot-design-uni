@@ -1,6 +1,15 @@
 @import './../common/abstracts/_mixin.scss';
 @import './../common/abstracts/variable.scss';
 
+.wot-theme-dark {
+  @include b(badge) {
+    @include e(content) {
+      border-color: $-dark-background2;
+    }
+  }
+}
+
+
 @include b(badge) {
   position: relative;
   vertical-align: middle;
