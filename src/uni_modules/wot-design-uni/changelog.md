@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.53](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.52...v0.1.53) (2023-11-09)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Input 输入框组件包含无用显示内容的问题 ([13a3106](https://github.com/Moonofweisheng/wot-design-uni/commit/13a3106055d66083d640912bfff67f2e08781f03))
+
 ### [0.1.52](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.51...v0.1.52) (2023-11-09)
 
 
