@@ -92,6 +92,8 @@ interface Props {
   // 图片预览相关
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeChoose?: Function
+  // 自定义上传方法
+  httpRequest?: Function
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -159,7 +161,7 @@ watch(
 watch(
   () => props.beforePreview,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' &&getType(fn) !== 'asyncfunction') {
       throw Error('The type of beforePreview must be Function')
     }
   },
@@ -172,7 +174,7 @@ watch(
 watch(
   () => props.onPreviewFail,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' &&getType(fn) !== 'asyncfunction') {
       throw Error('The type of onPreviewFail must be Function')
     }
   },
@@ -185,7 +187,7 @@ watch(
 watch(
   () => props.beforeRemove,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' &&getType(fn) !== 'asyncfunction') {
       throw Error('The type of beforeRemove must be Function')
     }
   },
@@ -198,8 +200,21 @@ watch(
 watch(
   () => props.beforeUpload,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' &&getType(fn) !== 'asyncfunction') {
       throw Error('The type of beforeUpload must be Function')
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
+  () => props.httpRequest,
+  (fn) => {
+    if (fn && getType(fn) !== 'function'&&getType(fn) !== 'asyncfunction') {
+      throw Error('The type of httpRequest must be Function')
     }
   },
   {
@@ -239,7 +254,15 @@ function initFile(file) {
   }
 
   uploadFiles.value.push(initState)
-  handleUpload(initState)
+  const { httpRequest } = props
+  if(httpRequest)
+  {
+    httpRequest(file);
+  }
+  else
+  {
+    handleUpload(initState);
+  }
 }
 
 /**
