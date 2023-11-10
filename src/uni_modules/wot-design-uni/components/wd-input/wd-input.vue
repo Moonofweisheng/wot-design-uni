@@ -15,50 +15,51 @@
     <!-- 文本域 -->
     <view v-if="type === 'textarea'" :class="`wd-input__textarea ${customTextareaContainerClass} ${showWordCount ? 'is-show-limit' : ''}`">
       <!-- readonly -->
-      <view v-if="readonly" class="wd-input__textarea-inner">{{ inputValue }}</view>
-      <template v-else>
-        <textarea
-          :class="`wd-input__textarea-inner ${showClear ? 'is-suffix' : ''} ${customTextareaClass}`"
-          v-model="inputValue"
-          :show-count="false"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          :minlength="minlength"
-          :maxlength="maxlength"
-          :focus="isFocus"
-          :placeholder-style="placeholderStyle"
-          :placeholder-class="inputPlaceholderClass"
-          :auto-height="autoHeight"
-          :cursor-spacing="cursorSpacing"
-          :fixed="fixed"
-          :cursor="cursor"
-          :show-confirm-bar="showConfirmBar"
-          :selection-start="selectionStart"
-          :selection-end="selectionEnd"
-          :adjust-position="adjustPosition"
-          :hold-keyboard="holdKeyboard"
-          @input="handleInput"
-          @focus="handleFocus"
-          @blur="handleBlur"
-          @confirm="handleConfirm"
-          @linechange="handleLineChange"
-          @keyboardheightchange="handleKeyboardheightchange"
-        />
-        <view class="wd-input__textarea-suffix">
-          <wd-icon v-if="showClear" custom-class="wd-input__textarea-icon" name="error-fill" @click="clear" />
-          <view v-if="showWordCount" class="wd-input__textarea-count">
-            <text
-              :class="[
-                inputValue && String(inputValue).length > 0 ? 'wd-input__textarea-count-current' : '',
-                String(inputValue).length > parseInt(String(maxlength)) ? 'is-error' : ''
-              ]"
-            >
-              {{ String(inputValue).length }}
-            </text>
-            /{{ maxlength }}
-          </view>
+      <view v-if="readonly" class="wd-input__textarea-inner" :class="{ 'wd-input__textarea-inner--placeholder': !inputValue }">
+        {{ inputValue ? inputValue : placeholder }}
+      </view>
+      <textarea
+        v-else
+        :class="`wd-input__textarea-inner ${showClear ? 'is-suffix' : ''} ${customTextareaClass}`"
+        v-model="inputValue"
+        :show-count="false"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :minlength="minlength"
+        :maxlength="maxlength"
+        :focus="isFocus"
+        :placeholder-style="placeholderStyle"
+        :placeholder-class="inputPlaceholderClass"
+        :auto-height="autoHeight"
+        :cursor-spacing="cursorSpacing"
+        :fixed="fixed"
+        :cursor="cursor"
+        :show-confirm-bar="showConfirmBar"
+        :selection-start="selectionStart"
+        :selection-end="selectionEnd"
+        :adjust-position="adjustPosition"
+        :hold-keyboard="holdKeyboard"
+        @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @confirm="handleConfirm"
+        @linechange="handleLineChange"
+        @keyboardheightchange="handleKeyboardheightchange"
+      />
+      <view class="wd-input__textarea-suffix">
+        <wd-icon v-if="showClear" custom-class="wd-input__textarea-icon" name="error-fill" @click="clear" />
+        <view v-if="showWordCount" class="wd-input__textarea-count">
+          <text
+            :class="[
+              inputValue && String(inputValue).length > 0 ? 'wd-input__textarea-count-current' : '',
+              String(inputValue).length > parseInt(String(maxlength)) ? 'is-error' : ''
+            ]"
+          >
+            {{ String(inputValue).length }}
+          </text>
+          /{{ maxlength }}
         </view>
-      </template>
+      </view>
     </view>
     <!-- 输入域 -->
     <view v-else class="wd-input__block">
@@ -67,60 +68,61 @@
         <slot name="prefix"></slot>
       </view>
       <!-- readonly -->
-      <view v-if="readonly" class="wd-input__inner wd-input__readonly">{{ inputValue }}</view>
-      <template v-else>
-        <input
-          :class="[
-            'wd-input__inner',
-            prefixIcon ? 'wd-input__inner--prefix' : '',
-            showWordCount ? 'wd-input__inner--count' : '',
-            alignRight ? 'is-align-right' : '',
-            customInputClass
-          ]"
-          :type="type"
-          :password="showPassword && !isPwdVisible"
-          v-model="inputValue"
-          :placeholder="placeholder"
-          :readonly="readonly"
-          :disabled="disabled"
-          :minlength="minlength"
-          :maxlength="maxlength"
-          :focus="isFocus"
-          :confirm-type="confirmType"
-          :confirm-hold="confirmHold"
-          :cursor="cursor"
-          :cursor-spacing="cursorSpacing"
-          :placeholder-style="placeholderStyle"
-          :selection-start="selectionStart"
-          :selection-end="selectionEnd"
-          :adjust-position="adjustPosition"
-          :hold-keyboard="holdKeyboard"
-          :always-embed="alwaysEmbed"
-          :placeholder-class="inputPlaceholderClass"
-          @input="handleInput"
-          @focus="handleFocus"
-          @blur="handleBlur"
-          @confirm="handleConfirm"
-          @keyboardheightchange="handleKeyboardheightchange"
-        />
-        <view v-if="showClear || showPassword || suffixIcon || showWordCount || useSuffixSlot" class="wd-input__suffix">
-          <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="clear" />
-          <wd-icon v-if="showPassword" custom-class="wd-input__icon" :name="isPwdVisible ? 'view' : 'eye-close'" @click="togglePwdVisible" />
-          <view v-if="showWordCount" class="wd-input__count">
-            <text
-              :class="[
-                inputValue && String(inputValue).length > 0 ? 'wd-input__count-current' : '',
-                String(inputValue).length > maxlength ? 'is-error' : ''
-              ]"
-            >
-              {{ String(inputValue).length }}
-            </text>
-            /{{ maxlength }}
-          </view>
-          <wd-icon v-if="suffixIcon" custom-class="wd-input__icon" :name="suffixIcon" @click="onClickSuffixIcon" />
-          <slot name="suffix"></slot>
+      <view v-if="readonly" class="wd-input__inner wd-input__readonly" :class="{ 'wd-input__inner--placeholder': !inputValue }">
+        {{ inputValue ? inputValue : placeholder }}
+      </view>
+      <input
+        v-else
+        :class="[
+          'wd-input__inner',
+          prefixIcon ? 'wd-input__inner--prefix' : '',
+          showWordCount ? 'wd-input__inner--count' : '',
+          alignRight ? 'is-align-right' : '',
+          customInputClass
+        ]"
+        :type="type"
+        :password="showPassword && !isPwdVisible"
+        v-model="inputValue"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        :disabled="disabled"
+        :minlength="minlength"
+        :maxlength="maxlength"
+        :focus="isFocus"
+        :confirm-type="confirmType"
+        :confirm-hold="confirmHold"
+        :cursor="cursor"
+        :cursor-spacing="cursorSpacing"
+        :placeholder-style="placeholderStyle"
+        :selection-start="selectionStart"
+        :selection-end="selectionEnd"
+        :adjust-position="adjustPosition"
+        :hold-keyboard="holdKeyboard"
+        :always-embed="alwaysEmbed"
+        :placeholder-class="inputPlaceholderClass"
+        @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @confirm="handleConfirm"
+        @keyboardheightchange="handleKeyboardheightchange"
+      />
+      <view v-if="showClear || showPassword || suffixIcon || showWordCount || useSuffixSlot" class="wd-input__suffix">
+        <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="clear" />
+        <wd-icon v-if="showPassword" custom-class="wd-input__icon" :name="isPwdVisible ? 'view' : 'eye-close'" @click="togglePwdVisible" />
+        <view v-if="showWordCount" class="wd-input__count">
+          <text
+            :class="[
+              inputValue && String(inputValue).length > 0 ? 'wd-input__count-current' : '',
+              String(inputValue).length > maxlength ? 'is-error' : ''
+            ]"
+          >
+            {{ String(inputValue).length }}
+          </text>
+          /{{ maxlength }}
         </view>
-      </template>
+        <wd-icon v-if="suffixIcon" custom-class="wd-input__icon" :name="suffixIcon" @click="onClickSuffixIcon" />
+        <slot name="suffix"></slot>
+      </view>
     </view>
   </view>
 </template>

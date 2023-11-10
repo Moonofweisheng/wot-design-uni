@@ -325,6 +325,10 @@
       color: $-input-placeholder-color;
     }
 
+    &--placeholder {
+      color: $-input-placeholder-color;
+    }
+
     @include when(align-right) {
       text-align: right;
     }
@@ -403,6 +407,10 @@
     word-break: break-word;
 
     &::-webkit-input-placeholder {
+      color: $-input-placeholder-color;
+    }
+
+    &--placeholder {
       color: $-input-placeholder-color;
     }
 
