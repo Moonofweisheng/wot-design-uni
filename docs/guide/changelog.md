@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.54](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.53...v0.1.54) (2023-11-10)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修正ColPicker多列选择器v-model类型提示使用Record<string, any>[]实际上的数据是单维数组的问题 ([c490ac6](https://github.com/Moonofweisheng/wot-design-uni/commit/c490ac607e6f9eb7207b90943b83ce1696a30fd4))
+
 ### [0.1.53](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.52...v0.1.53) (2023-11-09)
 
 
