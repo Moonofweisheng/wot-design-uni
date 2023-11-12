@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.56](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.55...v0.1.56) (2023-11-12)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tabbar 标签栏组件 bordered 属性无效的问题 ([69c2656](https://github.com/Moonofweisheng/wot-design-uni/commit/69c265638c6fc36a1479a37c052a572da333006f))
+
 ### [0.1.55](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.54...v0.1.55) (2023-11-12)
 
 
