@@ -22,7 +22,7 @@
           :src="isObj(item) ? item.value : item"
           :class="`wd-swiper__image ${customImageClass} ${getCustomImageClass(navCurrent, index, list)}`"
           :style="{ height: addUnit(height) }"
-          mode="aspectFill"
+          :mode="imageMode"
         />
       </swiper-item>
     </swiper>
@@ -165,6 +165,10 @@ interface Props {
    */
   indicator?: SwiperIndicatorProps | boolean
   /**
+   * 图片裁剪、缩放的模式
+   */
+  imageMode?: number | string
+  /**
    * 外部自定义样式
    */
   customStyle?: string
@@ -214,7 +218,8 @@ const props = withDefaults(defineProps<Props>(), {
   nextMargin: '0',
   indicatorPosition: 'bottom',
   previousMargin: '0',
-  snapToEdge: false
+  snapToEdge: false,
+  imageMode: 'aspectFill'
 })
 
 const navCurrent = ref<number>(0) // 当前滑块
