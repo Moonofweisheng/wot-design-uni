@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.55](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.54...v0.1.55) (2023-11-12)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修正README.md 中[贡献指南]链接错误，跳转失败的问题。 ([071de88](https://github.com/Moonofweisheng/wot-design-uni/commit/071de88f98fa90492032193606941fbcdfe9283d))
+
+
+### ✨ Features | 新功能
+
+* ✨ Swiper 轮播图组件增加imageMode属性支持自定义图片裁剪缩放模式 ([4205c01](https://github.com/Moonofweisheng/wot-design-uni/commit/4205c0149d3224e318ef21563e96f0a843ad13bc))
+
 ### [0.1.54](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.53...v0.1.54) (2023-11-10)
 
 
