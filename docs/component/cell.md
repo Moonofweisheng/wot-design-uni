@@ -80,7 +80,7 @@
 
 ```html
 <wd-toast id="wd-toast" />
-<wd-cell title="标题文字" value="内容" clickable click="toast" />
+<wd-cell title="标题文字" value="内容" clickable @click="toast" />
 ```
 
 ```typescript
