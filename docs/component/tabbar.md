@@ -168,7 +168,7 @@ function handleChange1({ value }: { value: string }) {
 | value        | 徽标显示值     | number / string         | -              | -        | 0.1.27     |
 | isDot        | 是否点状徽标   | boolean                 | -              | false    | 0.1.27     |
 | max          | 徽标最大值     | number                  | -              | 99       | 0.1.27     |
-
+| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes)	| BadgeProps    | -      | -  | 0.1.50   |
 ## TabbarItem Slots
 | name   | 说明                 | 参数                    | 最低版本 |
 | ------ | -------------------- | ----------------------- | -------- |

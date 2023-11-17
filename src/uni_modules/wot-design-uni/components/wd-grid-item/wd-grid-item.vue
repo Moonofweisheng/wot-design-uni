@@ -4,7 +4,7 @@
       <slot v-if="useSlot" />
       <block v-else>
         <view :style="'width:' + iconSize + '; height: ' + iconSize" class="wd-grid-item__wrapper">
-          <wd-badge custom-class="badge" :is-dot="isDot" :modelValue="value" :max="max" :type="type">
+          <wd-badge custom-class="badge" :is-dot="isDot" :modelValue="value" :max="max" :type="type" v-bind="badgeProps">
             <template v-if="useIconSlot">
               <slot name="icon" />
             </template>
@@ -32,6 +32,18 @@ export default {
 import { getCurrentInstance, inject, onBeforeMount, onMounted, ref, type Ref, watch } from 'vue'
 
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
+interface BadgeProps {
+  modelValue?: number | string | null
+  bgColor?: string
+  max?: number
+  isDot?: boolean
+  hidden?: boolean
+  type?: BadgeType
+  top?: number
+  right?: number
+  customClass?: string
+  customStyle?: string
+}
 type LinkType = 'navigateTo' | 'switchTab' | 'reLaunch' | 'redirectTo'
 interface Props {
   customText?: string
@@ -50,6 +62,8 @@ interface Props {
   type?: BadgeType
   value?: number
   max?: number
+  // 徽标属性，透传给 Badge 组件
+  badgeProps?: BadgeProps
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -61,9 +75,7 @@ const props = withDefaults(defineProps<Props>(), {
   linkType: 'navigateTo',
   useSlot: false,
   useIconSlot: false,
-  useTextSlot: false,
-  // badge属性
-  isDot: false
+  useTextSlot: false
 })
 
 const style = ref<string>('')

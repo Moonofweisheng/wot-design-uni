@@ -1,6 +1,65 @@
 # 更新日志 
 
 
+### [0.1.56](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.55...v0.1.56) (2023-11-12)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tabbar 标签栏组件 bordered 属性无效的问题 ([69c2656](https://github.com/Moonofweisheng/wot-design-uni/commit/69c265638c6fc36a1479a37c052a572da333006f))
+
+### [0.1.55](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.54...v0.1.55) (2023-11-12)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修正README.md 中[贡献指南]链接错误，跳转失败的问题。 ([071de88](https://github.com/Moonofweisheng/wot-design-uni/commit/071de88f98fa90492032193606941fbcdfe9283d))
+
+
+### ✨ Features | 新功能
+
+* ✨ Swiper 轮播图组件增加imageMode属性支持自定义图片裁剪缩放模式 ([4205c01](https://github.com/Moonofweisheng/wot-design-uni/commit/4205c0149d3224e318ef21563e96f0a843ad13bc))
+
+### [0.1.54](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.53...v0.1.54) (2023-11-10)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修正ColPicker多列选择器v-model类型提示使用Record<string, any>[]实际上的数据是单维数组的问题 ([c490ac6](https://github.com/Moonofweisheng/wot-design-uni/commit/c490ac607e6f9eb7207b90943b83ce1696a30fd4))
+
+### [0.1.53](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.52...v0.1.53) (2023-11-09)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Input 输入框组件包含无用显示内容的问题 ([13a3106](https://github.com/Moonofweisheng/wot-design-uni/commit/13a3106055d66083d640912bfff67f2e08781f03))
+
+### [0.1.52](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.51...v0.1.52) (2023-11-09)
+
+
+### ✨ Features | 新功能
+
+* ✨ Input绑定值为null时的警告从error改为warn ([70f1407](https://github.com/Moonofweisheng/wot-design-uni/commit/70f1407eec057668da0117c9861b523ab667da70))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Badge 徽标组件暗黑模式下边框颜色未兼容的问题 ([c0a0b5a](https://github.com/Moonofweisheng/wot-design-uni/commit/c0a0b5aaea238f144978a3a9b2ab6db202dfdc21)), closes [#115](https://github.com/Moonofweisheng/wot-design-uni/issues/115)
+
+### [0.1.51](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.50...v0.1.51) (2023-11-06)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复引入错误依赖的问题 ([15bc876](https://github.com/Moonofweisheng/wot-design-uni/commit/15bc876a3026319c88ce4b757593243f9869ce39))
+
+### [0.1.50](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.49...v0.1.50) (2023-11-06)
+
+
+### ✨ Features | 新功能
+
+* ✨ SidebarItem、TabbarItem、GridItem组件增加徽标自定义属性badge-props ([7143098](https://github.com/Moonofweisheng/wot-design-uni/commit/71430989bff81a137fc5199eeeefe0a4da3ce31d))
+
 ### [0.1.49](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.48...v0.1.49) (2023-11-05)
 
 
