@@ -671,6 +671,16 @@
         },
         "navigationBarTitleText": "Sidebar 自定义图标"
       }
+    },
+    {
+      "path": "pages/fab/Index",
+      "name": "fab",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Fab 悬浮按钮"
+      }
     }
   ],
   // "tabBar": {

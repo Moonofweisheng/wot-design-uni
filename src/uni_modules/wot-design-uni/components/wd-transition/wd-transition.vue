@@ -22,10 +22,10 @@ import { isObj, requestAnimationFrame } from '../common/util'
 const getClassNames = (name) => {
   if (!name) {
     return {
-      enter: 'enter-class enter-active-class',
-      'enter-to': 'enter-to-class enter-active-class',
-      leave: 'leave-class leave-active-class',
-      'leave-to': 'leave-to-class leave-active-class'
+      enter: `${props.enterClass} ${props.enterActiveClass}`,
+      'enter-to': `${props.enterToClass} ${props.enterActiveClass}`,
+      leave: `${props.leaveClass} ${props.leaveActiveClass}`,
+      'leave-to': `${props.leaveToClass} ${props.leaveActiveClass}`
     }
   }
 

@@ -25,6 +25,7 @@
 
       <wd-transition
         :show="customShow"
+        name=""
         :duration="{ enter: 700, leave: 1000 }"
         enter-class="custom-enter"
         enter-active-class="custom-enter-active"

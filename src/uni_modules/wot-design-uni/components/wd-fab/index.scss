@@ -1,0 +1,154 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+.wot-theme-dark {
+  @include b(fab) {}
+}
+
+@include b(fab) {
+  position: fixed;
+  z-index: 99;
+
+
+  @include edeep(trigger) {
+    min-width: auto !important;
+    box-sizing: border-box;
+    width: $-fab-trigger-width !important;
+    height: $-fab-trigger-height !important;
+    border-radius: calc($-fab-trigger-height / 2) !important;
+  }
+
+  :deep() {
+    @include e(actions) {
+      position: absolute;
+      z-index: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: $-fab-actions-padding 0;
+
+      @include m(left, right) {
+        height: 100%;
+        top: 0;
+        padding: 0 $-fab-actions-padding;
+      }
+
+      @include m(left) {
+        flex-direction: row-reverse;
+        right: 100%;
+      }
+
+      @include m(right) {
+        flex-direction: row;
+        left: 100%;
+      }
+
+      @include m(top, bottom) {
+        width: 100%;
+        left: 0;
+      }
+
+      @include m(top) {
+        flex-direction: column-reverse;
+        bottom: 100%;
+      }
+
+      @include m(bottom) {
+        flex-direction: column;
+        top: 100%;
+      }
+    }
+
+    // 动画
+    @include e(transition-enter-active, transition-leave-active) {
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+
+    @include e(transition-enter) {
+      @include m(top) {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      @include m(bottom) {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+
+      @include m(left) {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+
+      @include m(right) {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+    }
+
+    @include e(transition-leave-to) {
+      @include m(top) {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      @include m(bottom) {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+
+      @include m(left) {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+
+      @include m(right) {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+    }
+
+
+  }
+
+  @include edeep(icon) {
+    font-size: 20px;
+  }
+
+  @include m(left-top) {
+    top: $-fab-top;
+    left: $-fab-left;
+    /* #ifdef H5 */
+    top: calc($-fab-top + var(--window-top));
+    left: calc($-fab-left + var(--window-left));
+    /* #endif */
+  }
+
+  @include m(right-top) {
+    top: $-fab-top;
+    right: $-fab-right;
+    /* #ifdef H5 */
+    top: calc($-fab-top + var(--window-top));
+    right: calc($-fab-right + var(--window-right));
+    /* #endif */
+  }
+
+  @include m(left-bottom) {
+    bottom: $-fab-bottom;
+    left: $-fab-left;
+    /* #ifdef H5 */
+    bottom: calc($-fab-bottom + var(--window-bottom));
+    left: calc($-fab-left + var(--window-left));
+    /* #endif */
+  }
+
+  @include m(right-bottom) {
+    bottom: $-fab-bottom;
+    right: $-fab-right;
+    /* #ifdef H5 */
+    bottom: calc($-fab-bottom + var(--window-bottom));
+    right: calc($-fab-right + var(--window-right));
+    /* #endif */
+  }
+}

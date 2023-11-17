@@ -73,6 +73,10 @@ const list = ref([
       {
         id: 'transition',
         name: 'Transition 动画'
+      },
+      {
+        id: 'fab',
+        name: 'Fab 悬浮按钮'
       }
     ]
   },
