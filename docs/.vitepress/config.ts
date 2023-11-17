@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-11-05 21:37:15
+ * @LastEditTime: 2023-11-17 13:25:10
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -177,6 +177,9 @@ export default defineConfig({
             }, {
               link: "/component/transition",
               text: "Transition 动画"
+            }, {
+              link: "/component/fab",
+              text: "Fab 悬浮按钮"
             }
           ]
         },
