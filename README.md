@@ -74,7 +74,7 @@
 
 ## 贡献指南
 
-修改代码请阅读我们的 [贡献指南](https://github.com/Moonofweisheng/wot-design-uni/blob/develop/.github/CONTRIBUTING.md)。
+修改代码请阅读我们的 [贡献指南](./.github/CONTRIBUTING.md)。
 
 使用过程中发现任何问题都可以提 [Issue](https://github.com/Moonofweisheng/wot-design-uni/issues) 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/Moonofweisheng/wot-design-uni/pulls)。
 

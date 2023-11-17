@@ -101,7 +101,7 @@ interface Props {
   customViewClass?: string
   customLabelClass?: string
   customValueClass?: string
-  modelValue: Array<Record<string, any>>
+  modelValue: Array<string | number>
   columns: Array<Array<Record<string, any>>>
   label?: string
   labelWidth?: string
@@ -163,13 +163,13 @@ const props = withDefaults(defineProps<Props>(), {
 const pickerShow = ref<boolean>(false)
 const currentCol = ref<number>(0)
 const selectList = ref<Record<string, any>[]>([])
-const pickerColSelected = ref<Record<string, any>[]>([])
+const pickerColSelected = ref<(string | number)[]>([])
 const selectShowList = ref<Record<string, any>[]>([])
 const loading = ref<boolean>(false)
 const showValue = ref<string>('')
 const isChange = ref<boolean>(false)
 const lastSelectList = ref<Record<string, any>[]>([])
-const lastPickerColSelected = ref<Record<string, any>[]>([])
+const lastPickerColSelected = ref<(string | number)[]>([])
 const lineStyle = ref<string>('')
 const scrollLeft = ref<number>(0)
 const inited = ref<boolean>(false)

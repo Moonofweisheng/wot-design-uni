@@ -461,11 +461,13 @@ function onScroll(e) {
 | -------- | ---------------------- | -------------------------- | ------ | ------ | -------- |
 | label    | 当前选项标题           | string                     | -      | -      | 0.1.49   |
 | value    | 当前选项的值，唯一标识 | `number \| string`         | -      | -      | 0.1.49   |
-| badge    | 徽标显示值             | `number \| string \| null` | -      | -      | 0.1.49   |
 | icon     | 图标                   | string                     | -      | -      | 0.1.49   |
-| isDot    | 是否点状徽标           | boolean                    | -      | false  | 0.1.49   |
-| max      | 徽标最大值             | number                     | -      | 99     | 0.1.49   |
+| badge    | 徽标属性，徽标显示值             | `number \| string \| null` | -      | -      | 0.1.49   |
+| isDot    | 徽标属性，是否点状徽标           | boolean                    | -      | false  | 0.1.49   |
+| max      | 徽标属性，徽标最大值             | number                     | -      | 99     | 0.1.49   |
 | disabled | 是否禁用               | boolean                    | -      | false  | 0.1.49   |
+| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes)	| BadgeProps    | -      | -  | 0.1.50   |
+
 
 ## SidebarItem Slots
 

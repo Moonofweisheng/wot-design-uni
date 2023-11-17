@@ -203,6 +203,7 @@ function onChange(e) {
 | previousMargin       | 前边距                                                 | `string \| number`          | -          | 0          | 0.1.22   |
 | snapToEdge           | 边距是否应用到第一个、最后一个元素                     | `boolean`                   | -          | false      | 0.1.22   |
 | indicator           | 指示器全部配置                                         | `SwiperIndicatorProps \| boolean` | -          | true       | 0.1.22   |
+| imageMode           | 图片裁剪、缩放的模式                                    | `string` | 参考官方文档[mode](https://uniapp.dcloud.net.cn/component/image.html#mode-%E6%9C%89%E6%95%88%E5%80%BC)          | `aspectFill`       | 0.1.55   |
 | customStyle          | 外部自定义样式                                         | `string`                    | -          | ''         | 0.1.22   |
 
 

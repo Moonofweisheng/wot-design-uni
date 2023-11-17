@@ -316,7 +316,7 @@ export default defineConfig({
           text: "数据展示",
           items: [{
             link: "/component/badge",
-            text: "Badge 角标"
+            text: "Badge 徽标"
           }, {
             link: "/component/card",
             text: "Card 卡片"
