@@ -1,6 +1,23 @@
 # 更新日志 
 
 
+### [0.1.57](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.56...v0.1.57) (2023-11-17)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Fab 悬浮动作按钮组件 ([3c526fe](https://github.com/Moonofweisheng/wot-design-uni/commit/3c526feb102ccf17da0678a6e1c004bb82d57f0f))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复 Cell 组件点击反馈的介绍错误的问题 ([9096d81](https://github.com/Moonofweisheng/wot-design-uni/commit/9096d81f514348d6103f33590387d0406b217198))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Table 表格组件数字英文换行失效的问题 ([47ac339](https://github.com/Moonofweisheng/wot-design-uni/commit/47ac3390cb58d250129a9db6ade8d90f980855a1))
+
 ### [0.1.56](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.55...v0.1.56) (2023-11-12)
 
 
