@@ -130,6 +130,7 @@
 
   @include e(value) {
     @include when(ellipsis) {
+      word-break: break-all;
       @include multiEllipsis(2);
     }
   }
