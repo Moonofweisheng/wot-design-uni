@@ -1,6 +1,6 @@
 <template>
   <view class="wd-count-down">
-    <slot v-bind="current" v-if="$slots.default" />
+    <slot :current="current" v-if="$slots.default" />
     <block v-else>{{ timeText }}</block>
   </view>
 </template>

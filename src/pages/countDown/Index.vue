@@ -15,12 +15,12 @@
 
     <demo-block title="自定义样式">
       <wd-count-down :time="time">
-        <template #default="timeData">
-          <span class="custom-count-down">{{ timeData.hours }}</span>
+        <template #default="{ current }">
+          <span class="custom-count-down">{{ current.hours }}</span>
           <span class="custom-count-down-colon">:</span>
-          <span class="custom-count-down">{{ timeData.minutes }}</span>
+          <span class="custom-count-down">{{ current.minutes }}</span>
           <span class="custom-count-down-colon">:</span>
-          <span class="custom-count-down">{{ timeData.seconds }}</span>
+          <span class="custom-count-down">{{ current.seconds }}</span>
         </template>
       </wd-count-down>
     </demo-block>
