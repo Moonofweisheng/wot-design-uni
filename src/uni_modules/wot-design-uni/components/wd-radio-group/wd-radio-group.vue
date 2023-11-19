@@ -45,10 +45,10 @@ const { proxy } = getCurrentInstance() as any
 watch(
   () => props.modelValue,
   (newValue, oldValue) => {
-    // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
-    if (newValue === null || newValue === undefined) {
+    // 类型校验，支持所有值(除null)
+    if (newValue === null) {
       // eslint-disable-next-line quotes
-      throw Error("value can't be null or undefined")
+      throw Error("value can't be null")
     }
     // prop初始化watch执行时，relations关系还没有建立，所以ready之后手动执行一下
     if (oldValue !== null) {
