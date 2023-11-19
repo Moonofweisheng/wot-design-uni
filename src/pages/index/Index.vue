@@ -258,6 +258,10 @@ const list = ref([
       {
         id: 'tooltip',
         name: 'Tooltip 文字提示'
+      },
+      {
+        id: 'countDown',
+        name: 'CountDown 倒计时'
       }
     ]
   },

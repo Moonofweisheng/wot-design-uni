@@ -310,6 +310,9 @@ export default defineConfig({
           }, {
             link: "/component/tooltip",
             text: "Tooltip 文字提示"
+          }, {
+            link: "/component/count-down",
+            text: "CountDown 倒计时"
           }]
         }, {
     
