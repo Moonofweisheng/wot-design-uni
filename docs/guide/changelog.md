@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.1.58](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.57...v0.1.58) (2023-11-19)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 CountDown 倒计时组件 ([a805d04](https://github.com/Moonofweisheng/wot-design-uni/commit/a805d04827600525c08fbc1848cb3a524b48e81a))
+* ✨ CountDown 倒计时组件支持小程序 ([22f249a](https://github.com/Moonofweisheng/wot-design-uni/commit/22f249ae5bdedea1ecebfe31350c7b5a1e394f2e))
+
 ### [0.1.57](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.56...v0.1.57) (2023-11-17)
 
 
