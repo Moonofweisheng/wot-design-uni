@@ -1,0 +1,15 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(count-down) {
+    color: $-dark-color;
+  }
+}
+
+
+@include b(count-down) {
+  color: $-count-down-text-color;
+  font-size: $-count-down-font-size;
+  line-height: $-count-down-line-height;
+}

@@ -844,3 +844,9 @@ $-fab-top: var(--wd-fab-top, 16px);
 $-fab-left: var(--wd-fab-left, 16px);
 $-fab-right: var(--wd-fab-right, 16px);
 $-fab-bottom: var(--wd-fab-bottom, 16px);
+
+
+// count-down
+$-count-down-text-color: var(--wd-count-down-text-color, $-color-gray-8);
+$-count-down-font-size: var(--wd-count-down-font-size, $-fs-content);
+$-count-down-line-height: var(--wd-count-down-line-height, 20px);

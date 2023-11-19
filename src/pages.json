@@ -681,6 +681,16 @@
         },
         "navigationBarTitleText": "Fab 悬浮按钮"
       }
+    },
+    {
+      "path": "pages/countDown/Index",
+      "name": "countDown",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "CountDown 倒计时"
+      }
     }
   ],
   // "tabBar": {
