@@ -20,7 +20,7 @@ import { getCurrentInstance, provide, watch } from 'vue'
 type RadioShape = 'dot' | 'button' | 'check'
 interface Props {
   customClass?: string
-  modelValue: string | number | boolean
+  modelValue: string | number | boolean | undefined
   shape?: RadioShape
   checkedColor?: string
   disabled?: boolean
