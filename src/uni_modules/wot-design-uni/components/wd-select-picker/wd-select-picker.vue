@@ -40,7 +40,7 @@
       <wd-search v-if="filterable" v-model="filterVal" :placeholder="filterPlaceholder" hide-cancel placeholder-left @change="handleFilterChange" />
       <scroll-view
         :class="`wd-select-picker__wrapper ${filterable ? 'is-filterable' : ''} ${loading ? 'is-loading' : ''} ${customContentClass}`"
-        scroll-y
+        :scroll-y="!loading"
         :scroll-top="scrollTop"
         :scroll-with-animation="true"
       >
@@ -227,7 +227,7 @@ watch(
   () => props.displayFormat,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of displayFormat must be Function')
+      console.error('The type of displayFormat must be Function')
     }
   },
   {
@@ -240,7 +240,7 @@ watch(
   () => props.beforeConfirm,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of beforeConfirm must be Function')
+      console.error('The type of beforeConfirm must be Function')
     }
   },
   {
@@ -270,32 +270,34 @@ function setScrollIntoView() {
     })
     wraperSelector = '#wd-checkbox-group'
   }
-  requestAnimationFrame().then(() => {
+  if (wraperSelector) {
     requestAnimationFrame().then(() => {
-      Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise])
-        .then((res: any[]) => {
-          if (isDef(res) && isArray(res)) {
-            const scrollView = res[0]
-            const wraper = res[1]
-            const target = res.slice(2) || []
-            if (isDef(wraper) && isDef(scrollView)) {
-              const index = target.findIndex((item) => {
-                return item.top >= scrollView.top && item.bottom <= scrollView.bottom
-              })
-              if (index < 0) {
-                scrollTop.value = -1
-                nextTick(() => {
-                  scrollTop.value = Math.max(0, target[0].top - wraper.top - scrollView.height / 2)
+      requestAnimationFrame().then(() => {
+        Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise])
+          .then((res: any[]) => {
+            if (isDef(res) && isArray(res)) {
+              const scrollView = res[0]
+              const wraper = res[1]
+              const target = res.slice(2) || []
+              if (isDef(wraper) && isDef(scrollView)) {
+                const index = target.findIndex((item) => {
+                  return item.top >= scrollView.top && item.bottom <= scrollView.bottom
                 })
+                if (index < 0) {
+                  scrollTop.value = -1
+                  nextTick(() => {
+                    scrollTop.value = Math.max(0, target[0].top - wraper.top - scrollView.height / 2)
+                  })
+                }
               }
             }
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      })
     })
-  })
+  }
 }
 
 function noop() {}
