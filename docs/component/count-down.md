@@ -86,9 +86,9 @@ const time = ref<number>(30 * 60 * 60 * 1000)
 ```html
 <wd-count-down ref="countDown" :time="3000" millisecond :auto-start="false" format="ss:SSS" @finish="onFinish"></wd-count-down>
 <wd-grid clickable border>
-  <wd-grid-item text="开始" icon="play-circle-stroke" @click="start" />
-  <wd-grid-item text="暂停" icon="pause-circle" @click="pause" />
-  <wd-grid-item text="重置" icon="refresh" @click="reset" />
+  <wd-grid-item text="开始" icon="play-circle-stroke" @itemclick="start" />
+  <wd-grid-item text="暂停" icon="pause-circle" @itemclick="pause" />
+  <wd-grid-item text="重置" icon="refresh" @itemclick="reset" />
 </wd-grid>
 ```
 
