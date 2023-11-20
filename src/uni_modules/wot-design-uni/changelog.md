@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.60](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.59...v0.1.60) (2023-11-20)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复 CountDown 倒计时组件默认slot用法的介绍错误的问题 ([2fbb88f](https://github.com/Moonofweisheng/wot-design-uni/commit/2fbb88fcd9fe21de09637d48149278d9aef5e1d9))
+
 ### [0.1.59](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.58...v0.1.59) (2023-11-19)
 
 ### [0.1.58](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.57...v0.1.58) (2023-11-19)
