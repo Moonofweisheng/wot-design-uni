@@ -1,5 +1,17 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-09-20 11:10:41
+ * @LastEditTime: 2023-11-20 18:35:28
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\imgCropper\Index.vue
+ * 记得注释
+-->
 <template>
   <page-wraper>
+    <!-- #ifdef MP-WEIXIN -->
+    <wd-privacy-popup></wd-privacy-popup>
+    <!-- #endif -->
     <demo-block title="基本用法" style="text-align: center">
       <wd-img-cropper
         id="wd-img-cropper"
