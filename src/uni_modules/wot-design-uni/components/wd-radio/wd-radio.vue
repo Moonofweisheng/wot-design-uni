@@ -36,7 +36,7 @@ import { computed, getCurrentInstance, inject, onBeforeMount, ref, watch } from 
 type RadioShape = 'dot' | 'button' | 'check'
 interface Props {
   customClass?: string
-  value?: string | number | boolean
+  value: string | number | boolean
   shape?: RadioShape
   checkedColor?: string
   disabled?: boolean | null
@@ -108,11 +108,6 @@ const innerCell = computed(() => {
 watch(
   () => props.value,
   (newValue) => {
-    // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
-    if (newValue === null || newValue === undefined) {
-      // eslint-disable-next-line quotes
-      throw Error("value can't be null or undefined")
-    }
     // 当建立relations关系之后，radio的value改变,以下内容才能执行
     if (!parent || newValue === null) return
     // 会判断新value是否和radioGroup的value一致，一致就会调用radio的方法选中此节点。
@@ -130,7 +125,7 @@ watch(
   (newValue) => {
     // type: 'dot', 'button', 'check'
     const type = ['check', 'dot', 'button']
-    if (!newValue || type.indexOf(newValue) === -1) throw Error(`shape must be one of ${type.toString()}`)
+    if (!newValue || type.indexOf(newValue) === -1) console.error(`shape must be one of ${type.toString()}`)
   }
 )
 

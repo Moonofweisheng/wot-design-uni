@@ -73,7 +73,7 @@ watch(
   (newValue) => {
     // 校验类型
     if (Number.isNaN(newValue) || newValue < 0 || newValue > 100) {
-      throw Error('The value of percentage must be between 0 and 100')
+      console.error('The value of percentage must be between 0 and 100')
     }
     controlProgress()
   }

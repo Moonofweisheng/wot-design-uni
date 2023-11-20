@@ -109,7 +109,7 @@ watch(
   () => props.modelValue,
   (newValue) => {
     if (typeof newValue !== 'number' && typeof newValue !== 'string') {
-      console.warn('[wot-design] warning(wd-drop-menu-item): the type of value should be a number or a string.')
+      console.error('[wot-design] warning(wd-drop-menu-item): the type of value should be a number or a string.')
       return
     }
     updateTitle()
@@ -170,7 +170,7 @@ function setDisplayTitle() {
       return
     }
   }
-  console.warn('[wot-design] warning(wd-drop-menu-item): no value is matched in the options option.')
+  console.error('[wot-design] warning(wd-drop-menu-item): no value is matched in the options option.')
 }
 
 /**

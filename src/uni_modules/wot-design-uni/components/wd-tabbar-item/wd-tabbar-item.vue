@@ -112,7 +112,7 @@ function init() {
   if (parent.children && isDef(props.name)) {
     const repeat = checkRepeat(parent.children, props.name, 'name')
     if (repeat > -1) {
-      throw Error('[wot-design] warning(wd-tabbar-item): name attribute cannot be defined repeatedly')
+      console.error('[wot-design] warning(wd-tabbar-item): name attribute cannot be defined repeatedly')
     }
   }
   parent.setChild && parent.setChild(proxy)

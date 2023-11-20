@@ -103,7 +103,7 @@ function checkName(self) {
   parent &&
     parent.children.forEach((child) => {
       if (child.$.uid !== self.$.uid && child.name === myName) {
-        throw Error(`The tab's bound value: ${myName} has been used`)
+        console.error(`The tab's bound value: ${myName} has been used`)
       }
     })
 }

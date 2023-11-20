@@ -123,15 +123,10 @@ watch(
   () => props.content,
   (newVal) => {
     const { mode } = props
-    // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
-    if (newVal === null || newVal === undefined) {
-      // eslint-disable-next-line prettier/prettier
-        throw Error('value can\'t be null or undefined')
-    }
     if (selector === 'popover' && mode === 'normal' && typeof newVal !== 'string') {
-      throw Error('The value type must be a string type in normal mode')
+      console.error('The value type must be a string type in normal mode')
     } else if (selector === 'popover' && mode === 'menu' && popover.checkType(newVal) !== 'Array') {
-      throw Error('The value type must be a Array type in menu mode')
+      console.error('The value type must be a Array type in menu mode')
     }
   }
 )

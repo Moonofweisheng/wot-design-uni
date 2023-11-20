@@ -132,7 +132,7 @@ watch(
   () => props.columnChange,
   (newValue) => {
     if (newValue && getType(newValue) !== 'function') {
-      throw Error('The type of columnChange must be Function')
+      console.error('The type of columnChange must be Function')
     }
   },
   {
@@ -160,7 +160,7 @@ function selectWithValue(value) {
   }
   const valueType = getType(value)
   const type = ['string', 'number', 'boolean', 'array']
-  if (type.indexOf(valueType) === -1) throw Error(`value must be one of ${type.toString()}`)
+  if (type.indexOf(valueType) === -1) console.error(`value must be one of ${type.toString()}`)
   // 在props初始化的时候有可能会调用此函数，此时需要保证formatColumns已经被设置，关于此问题更多详情参考/ISSUE.md。
   if (formatColumns.value.length === 0) {
     formatColumns.value = formatArray(props.columns, props.valueKey, props.labelKey)

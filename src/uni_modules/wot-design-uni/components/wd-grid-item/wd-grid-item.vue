@@ -165,7 +165,7 @@ function click() {
         })
         break
       default:
-        console.warn(`[wot-design] warning(wd-grid-item): linkType can not be ${linkType}`)
+        console.error(`[wot-design] warning(wd-grid-item): linkType can not be ${linkType}`)
         break
     }
   }

@@ -164,7 +164,7 @@ watch(
   (target) => {
     const type = ['date', 'year-month', 'time', 'datetime']
     if (type.indexOf(target) === -1) {
-      throw Error(`type must be one of ${type}`)
+      console.error(`type must be one of ${type}`)
     }
     // 每次type更新时都需要刷新整个列表
     updateValue()
@@ -176,7 +176,7 @@ watch(
   () => props.filter,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of filter must be Function')
+      console.error('The type of filter must be Function')
     }
     updateValue()
   },
@@ -187,7 +187,7 @@ watch(
   () => props.formatter,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of formatter must be Function')
+      console.error('The type of formatter must be Function')
     }
     updateValue()
   },
@@ -198,7 +198,7 @@ watch(
   () => props.columnFormatter,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of columnFormatter must be Function')
+      console.error('The type of columnFormatter must be Function')
     }
     updateValue()
   },

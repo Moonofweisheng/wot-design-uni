@@ -77,7 +77,7 @@ watch(
   () => props.activeColor,
   (newVal) => {
     if (Array.isArray(newVal) && !newVal.length) {
-      throw Error('activeColor cannot be an empty array')
+      console.error('activeColor cannot be an empty array')
     }
     computeActiveValue()
   },

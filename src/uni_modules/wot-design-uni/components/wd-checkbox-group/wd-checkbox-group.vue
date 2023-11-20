@@ -68,15 +68,15 @@ watch(
     // 传入的value数组中包括重复的元素，这种情况非法。
     if (new Set(newValue).size !== newValue.length) {
       // eslint-disable-next-line quotes
-      throw Error("checkboxGroup's bound value includes same value")
+      console.error("checkboxGroup's bound value includes same value")
     }
     if (newValue.length < props.min) {
       // eslint-disable-next-line quotes
-      throw Error("checkboxGroup's bound value's length can't be less than min")
+      console.error("checkboxGroup's bound value's length can't be less than min")
     }
     if (props.max !== 0 && newValue.length > props.max) {
       // eslint-disable-next-line quotes
-      throw Error("checkboxGroup's bound value's length can't be large than max")
+      console.error("checkboxGroup's bound value's length can't be large than max")
     }
     // 每次value变化都会触发重新匹配选中项
     children && children.length > 0 && resetChildren()
@@ -88,7 +88,7 @@ watch(
   () => props.shape,
   (newValue) => {
     const type = ['circle', 'square', 'button']
-    if (type.indexOf(newValue) === -1) throw Error(`shape must be one of ${type.toString()}`)
+    if (type.indexOf(newValue) === -1) console.error(`shape must be one of ${type.toString()}`)
   },
   { deep: true, immediate: true }
 )

@@ -16,11 +16,12 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, provide, watch } from 'vue'
+import { isDef } from '../common/util'
 
 type RadioShape = 'dot' | 'button' | 'check'
 interface Props {
   customClass?: string
-  modelValue: string | number | boolean
+  modelValue?: string | number | boolean
   shape?: RadioShape
   checkedColor?: string
   disabled?: boolean
@@ -45,13 +46,7 @@ const { proxy } = getCurrentInstance() as any
 watch(
   () => props.modelValue,
   (newValue, oldValue) => {
-    // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
-    if (newValue === null || newValue === undefined) {
-      // eslint-disable-next-line quotes
-      throw Error("value can't be null or undefined")
-    }
-    // prop初始化watch执行时，relations关系还没有建立，所以ready之后手动执行一下
-    if (oldValue !== null) {
+    if (isDef(oldValue)) {
       // radioGroup绑定的value变化，，立即切换到此value对应的radio
       changeSelect(newValue)
     }
@@ -64,7 +59,7 @@ watch(
   (newValue) => {
     // type: 'dot', 'button', 'check'
     const type = ['check', 'dot', 'button']
-    if (type.indexOf(newValue) === -1) throw Error(`shape must be one of ${type.toString()}`)
+    if (type.indexOf(newValue) === -1) console.error(`shape must be one of ${type.toString()}`)
   },
   { deep: true, immediate: true }
 )

@@ -39,9 +39,11 @@ export default {
 import { objToStyle } from '../common/util'
 import { computed, ref, watch } from 'vue'
 
+type TagType = 'primary' | 'success' | 'warning' | 'danger'
+
 interface Props {
   useIconSlot?: boolean
-  type?: string
+  type?: TagType
   icon?: string
   closable?: boolean
   plain?: boolean
@@ -81,7 +83,7 @@ watch(
     if (!newValue) return
     // type: 'primary', 'danger', 'warning', 'success'
     const type = ['primary', 'danger', 'warning', 'success']
-    if (type.indexOf(newValue) === -1) throw Error(`type must be one of ${type.toString()}`)
+    if (type.indexOf(newValue) === -1) console.error(`type must be one of ${type.toString()}`)
     computeTagClass()
   },
   { deep: true, immediate: true }

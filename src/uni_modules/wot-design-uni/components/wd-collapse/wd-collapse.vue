@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-10-08 16:41:54
+ * @LastEditTime: 2023-11-20 13:33:11
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse\wd-collapse.vue
@@ -84,15 +84,11 @@ watch(
   () => props.modelValue,
   (newVal) => {
     const { viewmore, accordion } = props
-    // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
-    if (newVal === null || newVal === undefined) {
-      throw Error('value can not be null or undefined')
-    }
     // 手风琴状态下 value 类型只能为 string
     if (accordion && typeof newVal !== 'string') {
-      throw Error('accordion value must be string')
+      console.error('accordion value must be string')
     } else if (!accordion && !viewmore && checkType(newVal) !== 'Array') {
-      throw Error('value must be Array')
+      console.error('value must be Array')
     }
   },
   { deep: true, immediate: true }
@@ -102,7 +98,7 @@ watch(
   () => props.lineNum,
   (newVal) => {
     if (newVal <= 0) {
-      throw Error('lineNum must greater than 0')
+      console.error('lineNum must greater than 0')
     }
   },
   { deep: true, immediate: true }
@@ -124,7 +120,7 @@ function setChild(child: CollapseItem) {
   if (hasChild === -1) {
     const repeat = checkRepeat(children, child.name, 'name')
     if (repeat > -1) {
-      throw Error('Name attribute cannot be defined repeatedly')
+      console.error('Name attribute cannot be defined repeatedly')
     }
     children.push(child)
   } else {

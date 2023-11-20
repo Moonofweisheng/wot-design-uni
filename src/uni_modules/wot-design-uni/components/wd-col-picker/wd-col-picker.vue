@@ -233,7 +233,7 @@ watch(
   () => props.columnChange,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of columnChange must be Function')
+      console.error('The type of columnChange must be Function')
     }
   },
   {
@@ -246,7 +246,7 @@ watch(
   () => props.displayFormat,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of displayFormat must be Function')
+      console.error('The type of displayFormat must be Function')
     }
   },
   {
@@ -259,7 +259,7 @@ watch(
   () => props.beforeConfirm,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of beforeConfirm must be Function')
+      console.error('The type of beforeConfirm must be Function')
     }
   },
   {

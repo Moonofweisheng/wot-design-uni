@@ -93,10 +93,9 @@ const { proxy } = getCurrentInstance() as any
 watch(
   () => props.content,
   (newVal) => {
-    // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
     if (newVal === null || newVal === undefined) {
       // eslint-disable-next-line prettier/prettier
-        throw Error('[wot-design] warning(wd-tooltip): content can\'t be null or undefined')
+      console.error('[wot-design] warning(wd-tooltip): content can\'t be null or undefined')
     }
   }
 )

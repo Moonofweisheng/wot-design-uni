@@ -308,7 +308,7 @@ watch(
   () => props.displayFormat,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of displayFormat must be Function')
+      console.error('The type of displayFormat must be Function')
     }
   },
   {
@@ -320,7 +320,7 @@ watch(
   () => props.filter,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of filter must be Function')
+      console.error('The type of filter must be Function')
     }
   },
   {
@@ -332,7 +332,7 @@ watch(
   () => props.formatter,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of formatter must be Function')
+      console.error('The type of formatter must be Function')
     }
   },
   {
@@ -344,7 +344,7 @@ watch(
   () => props.beforeConfirm,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of beforeConfirm must be Function')
+      console.error('The type of beforeConfirm must be Function')
     }
   },
   {
@@ -356,7 +356,7 @@ watch(
   () => props.displayFormatTabLabel,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of displayFormatTabLabel must be Function')
+      console.error('The type of displayFormatTabLabel must be Function')
     }
   },
   {

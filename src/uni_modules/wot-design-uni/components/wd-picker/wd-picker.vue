@@ -199,7 +199,7 @@ watch(
   () => props.displayFormat,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of displayFormat must be Function')
+      console.error('The type of displayFormat must be Function')
     }
     if (pickerViewWd.value && pickerViewWd.value.selectedIndex && pickerViewWd.value.selectedIndex.length !== 0) {
       if (props.modelValue) {
@@ -254,7 +254,7 @@ watch(
   () => props.columnChange,
   (newValue) => {
     if (newValue && getType(newValue) !== 'function') {
-      throw Error('The type of columnChange must be Function')
+      console.error('The type of columnChange must be Function')
     }
   },
   {

@@ -253,7 +253,6 @@ watch(
   () => props.modelValue,
   (newValue) => {
     const { disabled, readonly, clearable } = props
-    // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
     if (newValue === null || newValue === undefined) {
       newValue = ''
       console.warn('[wot-design] warning(wd-input): value can not be null or undefined.')

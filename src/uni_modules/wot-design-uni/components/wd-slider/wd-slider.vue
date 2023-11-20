@@ -169,7 +169,7 @@ watch(
       emit('update:modelValue', oldValue)
       console.warn('[wot design] warning(wd-slider): value can nott be null or undefined')
     } else if (checkType(newValue) === 'Array' && (newValue as any).length !== 2) {
-      throw Error('[wot design] warning(wd-slider): value must be dyadic array')
+      console.warn('[wot design] warning(wd-slider): value must be dyadic array')
     } else if (checkType(newValue) !== 'Number' && checkType(newValue) !== 'Array') {
       emit('update:modelValue', oldValue)
       console.warn('[wot design] warning(wd-slider): value must be dyadic array Or Number')

@@ -468,7 +468,7 @@ function getActiveIndex(value: number | string) {
   // name代表的索引超过了items的边界，自动用0兜底
   if (isNumber(value) && value >= items.value.length) {
     // eslint-disable-next-line prettier/prettier
-    console.warn('[wot design] warning(wd-tabs): the type of tabs\' value is Number shouldn\'t be less than its children')
+    console.error('[wot design] warning(wd-tabs): the type of tabs\' value is Number shouldn\'t be less than its children')
     value = 0
   }
   // 如果是字符串直接匹配，匹配不到用0兜底

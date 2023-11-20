@@ -57,7 +57,7 @@ watch(
   (newValue) => {
     if (!newValue) return
     const state = ['loading', 'error', 'finished']
-    if (state.indexOf(newValue) === -1) throw Error(`state must be one of ${state.toString()}`)
+    if (state.indexOf(newValue) === -1) console.error(`state must be one of ${state.toString()}`)
     switch (newValue) {
       case 'loading':
         showText.value = props.loadingText

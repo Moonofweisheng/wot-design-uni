@@ -70,7 +70,7 @@ watch(
   (newValue) => {
     if (newValue !== 'up' && newValue !== 'down') {
       // eslint-disable-next-line quotes
-      console.warn("[wot design] warning(wd-drop-menu): direction must be 'up' or 'down'")
+      console.error("[wot design] warning(wd-drop-menu): direction must be 'up' or 'down'")
     }
   },
   { deep: true, immediate: true }

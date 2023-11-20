@@ -48,7 +48,7 @@ watch(
   (val, oldVal) => {
     if (val === oldVal) return
     if (!val || val <= 0) {
-      throw Error(
+      console.error(
         'The number of columns attribute value is invalid. The attribute must be greater than 0 and it is not recommended to use a larger value attribute.'
       )
     }

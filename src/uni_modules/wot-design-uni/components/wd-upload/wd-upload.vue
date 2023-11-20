@@ -147,7 +147,7 @@ watch(
   () => props.limit,
   (val) => {
     if (val && val < uploadFiles.value.length) {
-      throw Error('[wot-design]Error: props limit must less than fileList.length')
+      console.error('[wot-design]Error: props limit must less than fileList.length')
     }
   },
   {
@@ -160,7 +160,7 @@ watch(
   () => props.beforePreview,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of beforePreview must be Function')
+      console.error('The type of beforePreview must be Function')
     }
   },
   {
@@ -173,7 +173,7 @@ watch(
   () => props.onPreviewFail,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of onPreviewFail must be Function')
+      console.error('The type of onPreviewFail must be Function')
     }
   },
   {
@@ -186,7 +186,7 @@ watch(
   () => props.beforeRemove,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of beforeRemove must be Function')
+      console.error('The type of beforeRemove must be Function')
     }
   },
   {
@@ -199,7 +199,7 @@ watch(
   () => props.beforeUpload,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of beforeUpload must be Function')
+      console.error('The type of beforeUpload must be Function')
     }
   },
   {
@@ -212,7 +212,7 @@ watch(
   () => props.beforeChoose,
   (fn) => {
     if (fn && getType(fn) !== 'function') {
-      throw Error('The type of beforeChoose must be Function')
+      console.error('The type of beforeChoose must be Function')
     }
   },
   {

@@ -81,10 +81,6 @@ const { proxy } = getCurrentInstance() as any
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (newValue === null || newValue === undefined) {
-      // eslint-disable-next-line prettier/prettier
-      throw Error('checkbox\'s value can\'t be null or undefined')
-    }
     if (!inited.value) return
     // 组合使用走这个逻辑
     if (parent && parent.$.exposed.resetChildren) {
@@ -99,7 +95,7 @@ watch(
   () => props.shape,
   (newValue) => {
     const type = ['circle', 'square', 'button']
-    if (type.indexOf(newValue) === -1) throw Error(`shape must be one of ${type.toString()}`)
+    if (type.indexOf(newValue) === -1) console.error(`shape must be one of ${type.toString()}`)
   }
 )
 
@@ -164,7 +160,7 @@ const innerSize = computed(() => {
 
 onBeforeMount(() => {
   // eslint-disable-next-line quotes
-  if (props.modelValue === null) throw Error("checkbox's value must be set")
+  if (props.modelValue === null) console.error("checkbox's value must be set")
   inited.value = true
 })
 
@@ -193,7 +189,7 @@ function checkName() {
     parent.$.exposed.children &&
     parent.$.exposed.children.forEach((child) => {
       if (child.$.uid !== proxy.$.uid && child.value === props.modelValue) {
-        throw Error(`The checkbox's bound value: ${props.modelValue} has been used`)
+        console.error(`The checkbox's bound value: ${props.modelValue} has been used`)
       }
     })
 }
