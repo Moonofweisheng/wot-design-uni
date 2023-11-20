@@ -1,6 +1,26 @@
 # 更新日志 
 
 
+### [0.1.61](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.60...v0.1.61) (2023-11-20)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复 Tag 标签组件文档错乱的问题 ([502203b](https://github.com/Moonofweisheng/wot-design-uni/commit/502203bebf08d7e6851b8dd2f94768f6c620da26))
+* ✏️  ImgCropper 组件演示页面增加微信小程序隐私协议弹框 ([3af9246](https://github.com/Moonofweisheng/wot-design-uni/commit/3af9246d1f1876ba3c83f6829a9716ad37ae5829))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Calendar 日历组件存在未定义属性导致警告的问题 ([d0d3152](https://github.com/Moonofweisheng/wot-design-uni/commit/d0d3152a5ca1a3e06135b12f4565211258619d1f))
+* 🐛 修复 CountDown 倒计时组件文档手动控制示例错误的问题 ([3c373fb](https://github.com/Moonofweisheng/wot-design-uni/commit/3c373fbf3af02c8a73ddd3a4063f9408ec4f33ff))
+* 🐛 修复 SelectPicker 组件loading状态仍可以滚动的问题 ([c5a1bff](https://github.com/Moonofweisheng/wot-design-uni/commit/c5a1bfff576aad8a6f03288a6a12a8ed24f776f2))
+
+
+### ✨ Features | 新功能
+
+* ✨ Upload 上传组件支持上传至云存储 ([523a6be](https://github.com/Moonofweisheng/wot-design-uni/commit/523a6be40b065c4cc28cfe81fdcb200142d9a455))
+
 ### [0.1.60](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.59...v0.1.60) (2023-11-20)
 
 
