@@ -47,12 +47,12 @@ const time = ref<number>(30 * 60 * 60 * 1000)
 
 ```html
 <wd-count-down :time="time">
-  <template #default="timeData">
-    <span class="custom-count-down">{{ timeData.hours }}</span>
+  <template #default="{ current }">
+    <span class="custom-count-down">{{ current.hours }}</span>
     <span class="custom-count-down-colon">:</span>
-    <span class="custom-count-down">{{ timeData.minutes }}</span>
+    <span class="custom-count-down">{{ current.minutes }}</span>
     <span class="custom-count-down-colon">:</span>
-    <span class="custom-count-down">{{ timeData.seconds }}</span>
+    <span class="custom-count-down">{{ current.seconds }}</span>
   </template>
 </wd-count-down>
 ```
@@ -91,6 +91,7 @@ const time = ref<number>(30 * 60 * 60 * 1000)
   <wd-grid-item text="重置" icon="refresh" @click="reset" />
 </wd-grid>
 ```
+
 ```ts
 const { show: showToast } = useToast()
 
@@ -109,34 +110,32 @@ const onFinish = () => showToast('倒计时结束')
 ```
 
 ## Attributes
-| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| time | 倒计时时长，单位毫秒 | Number | — | 0 | 0.1.58 |
-| millisecond | 是否开启毫秒级渲染 | Boolean | — | false | 0.1.58 |
-| auto-start | 是否自动开始倒计时 | Boolean | — | true | 0.1.58 |
-| format | 倒计时格式化字符串 | String | — | `HH:mm:ss` | 0.1.58 |
+
+| 参数        | 说明                 | 类型    | 可选值 | 默认值     | 最低版本 |
+| ----------- | -------------------- | ------- | ------ | ---------- | -------- |
+| time        | 倒计时时长，单位毫秒 | Number  | —      | 0          | 0.1.58   |
+| millisecond | 是否开启毫秒级渲染   | Boolean | —      | false      | 0.1.58   |
+| auto-start  | 是否自动开始倒计时   | Boolean | —      | true       | 0.1.58   |
+| format      | 倒计时格式化字符串   | String  | —      | `HH:mm:ss` | 0.1.58   |
 
 ## Events
 
-| 事件名称 | 说明 | 参数 | 最低版本 |
-| ---- | ---- | ---- | ---- |
-| finish | 倒计时结束时触发 | — | 0.1.58 |
-| change | 倒计时变化时触发	 | currentTime: TimeData| 0.1.58 |
-
-
+| 事件名称 | 说明             | 参数                  | 最低版本 |
+| -------- | ---------------- | --------------------- | -------- |
+| finish   | 倒计时结束时触发 | —                     | 0.1.58   |
+| change   | 倒计时变化时触发 | current: TimeData | 0.1.58   |
 
 ## Slots
-| 名称 | 说明 | 最低版本 |
-| ---- | ---- | ---- |
-| — | 默认插槽 | 0.1.58 |
+
+| 名称 | 说明     | 最低版本 |
+| ---- | -------- | -------- |
+| —    | 默认插槽 | 0.1.58   |
 
 ## 外部样式类
 
-| 类名 | 说明 | 最低版本 |
-|-----|------|--------|
-| custom-class | 根节点样式 | - |
-
-
+| 类名         | 说明       | 最低版本 |
+| ------------ | ---------- | -------- |
+| custom-class | 根节点样式 | -        |
 
 ### format 格式
 
