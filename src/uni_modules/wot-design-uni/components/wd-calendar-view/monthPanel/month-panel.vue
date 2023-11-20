@@ -15,7 +15,6 @@
     >
       <view v-for="(item, index) in months(minDate, maxDate)" :key="index" :id="`month${index}`">
         <month
-          class="month"
           :type="type"
           :date="item.date"
           :value="value"

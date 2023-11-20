@@ -4,7 +4,6 @@
     <scroll-view class="wd-year-panel__container" :style="`height: ${scrollHeight}px`" scroll-y @scroll="yearScroll" :scroll-top="scrollTop">
       <view v-for="(item, index) in years(minDate, maxDate)" :key="index" :id="`year${index}`">
         <year
-          class="year"
           :type="type"
           :date="item.date"
           :value="value"
@@ -32,7 +31,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, ref, nextTick } from 'vue'
+import { computed, onMounted, ref, nextTick } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
 import { getType } from '../../common/util'
 import Year from '../year/year.vue'
