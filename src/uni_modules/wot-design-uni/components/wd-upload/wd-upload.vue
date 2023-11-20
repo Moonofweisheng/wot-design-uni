@@ -92,6 +92,8 @@ interface Props {
   // 图片预览相关
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeChoose?: Function
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  buildFormData?: Function
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -221,6 +223,19 @@ watch(
   }
 )
 
+watch(
+  () => props.buildFormData,
+  (fn) => {
+    if (fn && getType(fn) !== 'function') {
+      console.error('The type of buildFormData must be Function')
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
 const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
 
 /**
@@ -239,7 +254,20 @@ function initFile(file) {
   }
 
   uploadFiles.value.push(initState)
-  handleUpload(initState)
+
+  const { buildFormData, formData = {} } = props
+
+  if (buildFormData) {
+    buildFormData({
+      file: initState,
+      formData,
+      resolve: (formData: Record<string, any>) => {
+        formData && handleUpload(initState, formData)
+      }
+    })
+  } else {
+    handleUpload(initState, formData)
+  }
 }
 
 /**
@@ -291,8 +319,9 @@ function handleProgress(res, file) {
  * @description 上传操作
  * @param {Object} file 上传的文件
  */
-function handleUpload(file) {
-  const { action, name, formData = {}, header = {}, accept } = props
+function handleUpload(file, formData: Record<string, any>) {
+  const { action, name, header = {}, accept } = props
+
   const uploadTask = uni.uploadFile({
     url: action,
     header,
@@ -302,8 +331,13 @@ function handleUpload(file) {
     formData,
     filePath: file.url,
     success(res) {
-      // 上传成功进行文件列表拼接
-      handleSuccess(res, file)
+      if (res.statusCode === 200) {
+        // 上传成功进行文件列表拼接
+        handleSuccess(res, file)
+      } else {
+        // 上传失败处理
+        handleError(res, file)
+      }
     },
     fail(err) {
       // 上传失败处理

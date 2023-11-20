@@ -44,6 +44,10 @@
     <demo-block title="选择文件前置处理">
       <wd-upload :file-list="fileList10" :action="action" @change="handleChange10" :before-choose="beforeChoose"></wd-upload>
     </demo-block>
+
+    <!-- <demo-block title="上传至oss">
+      <wd-upload :file-list="fileList11" action="https://xxx.aliyuncs.com" :build-form-data="buildFormData" @change="handleChange11"></wd-upload>
+    </demo-block> -->
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -127,6 +131,35 @@ const beforeRemove = ({ file, fileList, resolve }) => {
     .catch(() => {
       toast.show('取消删除操作')
     })
+}
+
+const buildFormData = ({ file, formData, resolve }) => {
+  const imageName = file.url.substring(file.url.lastIndexOf('/') + 1)
+  const signature = 'your <signatureString>'
+  const ossAccessKeyId = 'your ossAccessKeyId'
+  const policy = 'your <policyBase64Str>'
+  const key = `20231120/${imageName}`
+  const success_action_status = '200' // 将上传成功状态码设置为200，默认状态码为204
+
+  formData = {
+    ...formData,
+    key: key,
+    OSSAccessKeyId: ossAccessKeyId,
+    policy: policy,
+    signature: signature,
+    success_action_status: success_action_status
+  }
+  resolve(formData)
+}
+
+const handleSuccess1 = (res) => {
+  console.log('成功', res)
+}
+const handleFail1 = (res) => {
+  console.log('失败', res)
+}
+const handleProgess1 = (res) => {
+  console.log('加载中', res)
 }
 
 function handleSuccess(event) {
