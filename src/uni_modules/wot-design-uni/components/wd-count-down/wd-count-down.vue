@@ -1,5 +1,5 @@
 <template>
-  <view class="wd-count-down">
+  <view :class="`wd-count-down ${customClass}`" :style="customStyle">
     <slot :current="current" v-if="$slots.default" />
     <block v-else>{{ timeText }}</block>
   </view>
@@ -32,6 +32,8 @@ interface Props {
   autoStart?: boolean
   // 自定义样式类
   customClass?: string
+  // 自定义样式
+  customStyle?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
