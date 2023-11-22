@@ -134,7 +134,11 @@ const beforeRemove = ({ file, fileList, resolve }) => {
 }
 
 const buildFormData = ({ file, formData, resolve }) => {
-  const imageName = file.url.substring(file.url.lastIndexOf('/') + 1)
+  let imageName = file.url.substring(file.url.lastIndexOf('/') + 1)
+  // #ifdef H5
+  // h5端url中不包含扩展名，可以拼接一下name
+  imageName = imageName + file.name
+  // #endif
   const signature = 'your <signatureString>'
   const ossAccessKeyId = 'your ossAccessKeyId'
   const policy = 'your <policyBase64Str>'
@@ -163,13 +167,13 @@ const handleProgess1 = (res) => {
 }
 
 function handleSuccess(event) {
-  console.log('成功', event.detail)
+  console.log('成功', event)
 }
 function handleFail(event) {
-  console.log('失败')
+  console.log('失败', event)
 }
 function handleProgess(event) {
-  console.log('加载中')
+  console.log('加载中', event)
 }
 function handleChange1({ fileList }) {
   fileList1.value = fileList

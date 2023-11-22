@@ -161,7 +161,7 @@ watch(
 watch(
   () => props.beforePreview,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforePreview must be Function')
     }
   },
@@ -174,7 +174,7 @@ watch(
 watch(
   () => props.onPreviewFail,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
       console.error('The type of onPreviewFail must be Function')
     }
   },
@@ -187,7 +187,7 @@ watch(
 watch(
   () => props.beforeRemove,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeRemove must be Function')
     }
   },
@@ -200,7 +200,7 @@ watch(
 watch(
   () => props.beforeUpload,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeUpload must be Function')
     }
   },
@@ -213,7 +213,7 @@ watch(
 watch(
   () => props.beforeChoose,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeChoose must be Function')
     }
   },
@@ -226,7 +226,7 @@ watch(
 watch(
   () => props.buildFormData,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
       console.error('The type of buildFormData must be Function')
     }
   },
@@ -246,6 +246,8 @@ function initFile(file) {
   // 状态初始化
   const initState = {
     uid: context.id++,
+    // 仅h5支持 name
+    name: file.name || '',
     status: 'loading',
     size: file.size,
     url: file.path,
@@ -275,14 +277,14 @@ function initFile(file) {
  * @param {Object} err 错误返回信息
  * @param {Object} file 上传的文件
  */
-function handleError(err, file) {
+function handleError(err, file, formData: Record<string, any>) {
   const { statusKey } = props
   const index = uploadFiles.value.findIndex((item) => item.uid === file.uid)
   if (index > -1) {
     uploadFiles.value[index][statusKey] = 'fail'
     uploadFiles.value[index].error = err.message
     uploadFiles.value[index].response = err
-    emit('fail', { error: err, file })
+    emit('fail', { error: err, file, formData })
   }
 }
 
@@ -291,14 +293,14 @@ function handleError(err, file) {
  * @param {Object} res 接口返回信息
  * @param {Object} file 上传的文件
  */
-function handleSuccess(res, file) {
+function handleSuccess(res, file, formData: Record<string, any>) {
   const { statusKey } = props
   const index = uploadFiles.value.findIndex((item) => item.uid === file.uid)
   if (index > -1) {
     uploadFiles.value[index][statusKey] = 'success'
     uploadFiles.value[index].response = res.data
     emit('change', { fileList: uploadFiles.value })
-    emit('success', { file, fileList: uploadFiles.value })
+    emit('success', { file, fileList: uploadFiles.value, formData })
   }
 }
 
@@ -333,15 +335,15 @@ function handleUpload(file, formData: Record<string, any>) {
     success(res) {
       if (res.statusCode === 200) {
         // 上传成功进行文件列表拼接
-        handleSuccess(res, file)
+        handleSuccess(res, file, formData)
       } else {
         // 上传失败处理
-        handleError(res, file)
+        handleError(res, file, formData)
       }
     },
     fail(err) {
       // 上传失败处理
-      handleError(err, file)
+      handleError(err, file, formData)
     }
   })
 

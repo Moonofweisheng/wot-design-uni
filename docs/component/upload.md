@@ -243,7 +243,11 @@ function handleChange({ fileList }) {
  * @return {Object} formData
  * */
 const buildFormData = ({ file, formData, resolve }) => {
-  const imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
+    let imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
+  // #ifdef H5
+  // h5端url中不包含扩展名，可以拼接一下name
+  imageName = imageName + file.name
+  // #endif
   const signature = 'your <signatureString>' // 签名信息
   const ossAccessKeyId = 'your <accessKey>' // 你的AccessKey ID
   const policy = 'your <policyBase64Str>' // policy信息
@@ -277,7 +281,11 @@ function handleChange({ fileList }) {
  * @return {Object} formData
  * */
 const buildFormData = ({ file, formData, resolve }) => {
-  const imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
+  let imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
+  // #ifdef H5
+  // h5端url中不包含扩展名，可以拼接一下name
+  imageName = imageName + file.name
+  // #endif
   const policy = 'your policy' // policy信息
   const key = `20231120/${imageName}` // 图片上传到oss的路径(拼接你的文件夹和文件名)
   const qAk = 'your qAk'
@@ -314,7 +322,11 @@ function handleChange({ fileList }) {
  * @return {Object} formData
  * */
 const buildFormData = ({ file, formData, resolve }) => {
-  const imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
+    let imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
+  // #ifdef H5
+  // h5端url中不包含扩展名，可以拼接一下name
+  imageName = imageName + file.name
+  // #endif
   const signature = 'your <signature>' // 签名信息
   const accessKeyId = 'your <accessKeyId>' // 你的AccessKey ID
   const policy = 'your <policyBase64Str>' // policy信息
@@ -406,8 +418,8 @@ const fileList = ref<any[]>([
 
 | 事件名称    | 说明                   | 参数                                                                        | 最低版本 |
 | ----------- | ---------------------- | --------------------------------------------------------------------------- | -------- |
-| success     | 上传成功时触发         | event = { file, fileList } file 为当前选上传的文件，'fileList' 上传图片列表 | -        |
-| fail        | 上传失败时触发         | event = { error, file } error 错误信息，file 上传失败的文件                 | -        |
+| success     | 上传成功时触发         | event = { file, fileList,formData } file 为当前选上传的文件，'fileList' 上传图片列表 | -        |
+| fail        | 上传失败时触发         | event = { error, file,formData } error 错误信息，file 上传失败的文件                 | -        |
 | progress    | 上传中时触发           | event = { response, file } response 上传中响应信息，file 为当前选上传的文件 | -        |
 | chooseerror | 选择图片失败时触发     | event = { error } error 选择图片失败的错误信息                              | -        |
 | change      | 上传列表修改时触发     | 选中的值 event = { fileList } 'fileList' 上传图片列表                       | -        |
