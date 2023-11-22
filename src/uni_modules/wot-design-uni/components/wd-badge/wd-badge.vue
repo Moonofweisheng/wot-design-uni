@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:59
- * @LastEditTime: 2023-10-10 16:38:30
+ * @LastEditTime: 2023-11-22 13:11:29
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-badge\wd-badge.vue
@@ -11,7 +11,7 @@
   <view :class="['wd-badge', customClass]" :style="customStyle">
     <slot></slot>
     <view
-      v-if="!hidden && (content || content === 0 || isDot)"
+      v-if="isBadgeShow"
       :class="['wd-badge__content', 'is-fixed', type ? 'wd-badge__content--' + type : '', isDot ? 'is-dot' : '']"
       :style="contentStyle"
     >
@@ -34,6 +34,8 @@ import { computed, ref, watch } from 'vue'
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 interface Props {
   modelValue?: number | string | null
+  /** 当数值为 0 时，是否展示徽标 */
+  showZero?: boolean
   bgColor?: string
   max?: number
   isDot?: boolean
@@ -47,7 +49,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   customStyle: '',
-  modelValue: null
+  modelValue: null,
+  showZero: false
 })
 const content = ref<number | string | null>(null)
 
@@ -61,6 +64,15 @@ watch(
 
 const contentStyle = computed(() => {
   return `background-color: ${props.bgColor};top:${props.top || 0}px;right:${props.right || 0}px`
+})
+
+// 是否展示徽标数字
+const isBadgeShow = computed(() => {
+  let isBadgeShow: boolean = false
+  if (!props.hidden && (content.value || (content.value === 0 && props.showZero) || props.isDot)) {
+    isBadgeShow = true
+  }
+  return isBadgeShow
 })
 
 function notice() {

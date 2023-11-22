@@ -66,6 +66,21 @@
 ```
 
 
+## 展示 0 值
+
+可使用`show-zero`属性，自定义是否展示 `0` 值。需要注意的是，`is-dot` 属性优先级高于 `show-zero` 属性，`is-dot`为`true`时将始终显示红点。
+
+
+```html
+<wd-badge modelValue="0" max="99" show-zero>
+  <wd-button size="small">评论</wd-button>
+</wd-badge>
+<wd-badge modelValue="0" max="10">
+  <wd-button size="small">回复</wd-button>
+</wd-badge>
+```
+
+
 ## 自定义内容
 
 可以显示数字以外的文本内容。
@@ -106,6 +121,8 @@
 | hidden | 隐藏 badge | boolean | - | false | - |
 | type | 类型 | string | primary / success / warning / danger / info | - | - |
 | bg-color | 背景色 | string | 各种颜色的css写法 | - | - |
+| show-zero | 是否显示0 | boolean | - | false | 0.1.62 |
+
 
 ## 外部样式类
 

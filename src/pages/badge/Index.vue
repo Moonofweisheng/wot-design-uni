@@ -46,6 +46,18 @@
           <wd-button :round="false" type="info" size="small">回复</wd-button>
         </wd-badge>
       </demo-block>
+
+      <demo-block title="显示0值">
+        <wd-badge custom-class="badge" :modelValue="0" show-zero>
+          <wd-button :round="false" type="info" size="small">评论</wd-button>
+        </wd-badge>
+        <wd-badge custom-class="badge" :modelValue="0">
+          <wd-button :round="false" type="info" size="small">回复</wd-button>
+        </wd-badge>
+        <wd-badge custom-class="badge" :modelValue="0" is-dot>
+          <wd-button :round="false" type="info" size="small">回复</wd-button>
+        </wd-badge>
+      </demo-block>
     </page-wraper>
   </view>
 </template>
