@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [0.1.62](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.61...v0.1.62) (2023-11-22)
+
+
+### ✨ Features | 新功能
+
+* ✨ Badge 徽标组件支持控制是否显示0值 ([65cfb2c](https://github.com/Moonofweisheng/wot-design-uni/commit/65cfb2ca15c29783f6de48de0bda4ddc3d43664a))
+* ✨ Upload 上传组件支持h5端获取文件后缀名 ([59fe70c](https://github.com/Moonofweisheng/wot-design-uni/commit/59fe70c0d0c55c7ecca26902b41599be94e34fe3))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  优化 Upload 文档中关于云存储内容的样式 ([607ce05](https://github.com/Moonofweisheng/wot-design-uni/commit/607ce05100ffef9c5c98b503e580a718551f5552))
+
 ### [0.1.61](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.60...v0.1.61) (2023-11-20)
 
 
