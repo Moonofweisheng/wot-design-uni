@@ -243,7 +243,7 @@ function handleChange({ fileList }) {
  * @return {Object} formData
  * */
 const buildFormData = ({ file, formData, resolve }) => {
-    let imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
+  let imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
   // #ifdef H5
   // h5端url中不包含扩展名，可以拼接一下name
   imageName = imageName + file.name
@@ -322,7 +322,7 @@ function handleChange({ fileList }) {
  * @return {Object} formData
  * */
 const buildFormData = ({ file, formData, resolve }) => {
-    let imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
+  let imageName = file.url.substring(file.url.lastIndexOf('/') + 1) // 从图片路径中截取图片名称
   // #ifdef H5
   // h5端url中不包含扩展名，可以拼接一下name
   imageName = imageName + file.name
