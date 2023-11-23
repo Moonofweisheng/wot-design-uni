@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [0.1.63](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.62...v0.1.63) (2023-11-23)
+
+
+### ✨ Features | 新功能
+
+* ✨ CountDown 倒计时组件支持custom-class和custom-style ([dd60d6d](https://github.com/Moonofweisheng/wot-design-uni/commit/dd60d6df855cc49eba36beb7bcfb9eeb96ed0c82))
+* ✨ Search 搜索组件支持自动聚焦和清空后自动聚焦 ([2e3ab63](https://github.com/Moonofweisheng/wot-design-uni/commit/2e3ab63d3dad582c44d9d9f8d2b57e21ee22f380))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复文档中config-provider等页面的错误 ([f71e641](https://github.com/Moonofweisheng/wot-design-uni/commit/f71e6412e770f2043e4cb9a35950a68aacf0e542))
+
 ### [0.1.62](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.61...v0.1.62) (2023-11-22)
 
 
