@@ -1,23 +1,19 @@
 <template>
-  <view :class="rootClass">
+  <view :class="rootClass" :style="customStyle">
     <!--自定义label插槽-->
     <!--搜索框主体-->
     <view class="wd-search__block">
       <slot name="prefix"></slot>
       <view class="wd-search__field">
-        <view
-          v-if="!placeholderLeft"
-          :style="{ display: str === '' && showPlaceHolder ? 'flex' : 'none' }"
-          class="wd-search__cover"
-          @click="closeCover"
-        >
+        <view v-if="!placeholderLeft" :style="coverStyle" class="wd-search__cover" @click="closeCover">
           <wd-icon name="search" size="18px" custom-class="wd-search__search-icon"></wd-icon>
           <text class="wd-search__placeholder-txt">{{ placeholder || '搜索' }}</text>
         </view>
         <!--icon:search-->
-        <wd-icon name="search" size="18px" custom-class="wd-search__search-left-icon"></wd-icon>
+        <wd-icon v-if="showInput || str || placeholderLeft" name="search" size="18px" custom-class="wd-search__search-left-icon"></wd-icon>
         <!--搜索框-->
         <input
+          v-if="showInput || str || placeholderLeft"
           :placeholder="placeholder || '搜索'"
           placeholder-class="wd-search__placeholder-txt"
           confirm-type="search"
@@ -29,7 +25,7 @@
           @confirm="search"
           :disabled="disabled"
           :maxlength="maxlength"
-          :focus="focus"
+          :focus="isFocused"
         />
         <!--icon:clear-->
         <wd-icon v-if="str" custom-class="wd-search__clear wd-search__clear-icon" name="error-fill" size="16px" @click="clearSearch" />
@@ -59,12 +55,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
-import { requestAnimationFrame } from '../common/util'
+import { type CSSProperties, computed, onMounted, ref, watch } from 'vue'
+import { objToStyle, requestAnimationFrame } from '../common/util'
 
 interface Props {
-  // useActionSlot?: boolean
-  // useLabelSlot?: boolean
   userSuffixSlot?: boolean
   placeholder?: string
   cancelTxt?: string
@@ -74,25 +68,30 @@ interface Props {
   maxlength?: number | string
   modelValue?: string
   placeholderLeft?: boolean
+  focus?: boolean
+  focusWhenClear?: boolean
   customClass?: string
+  customStyle?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   customClass: '',
-  // useActionSlot: false,
-  // useLabelSlot: false,
+  customStyle: '',
   userSuffixSlot: false,
   placeholder: '搜索',
   cancelTxt: '取消',
   light: false,
+  focus: false,
+  focusWhenClear: false,
   hideCancel: false,
   disabled: false,
   maxlength: -1,
   placeholderLeft: false
 })
 
-const focus = ref<boolean>(false)
+const isFocused = ref<boolean>(false) // 是否聚焦中
+const showInput = ref<boolean>(false) // 是否显示输入框 用于实现聚焦的hack
 const str = ref('')
 const showPlaceHolder = ref<boolean>(true)
 const clearing = ref<boolean>(false)
@@ -101,14 +100,49 @@ watch(
   () => props.modelValue,
   (newValue) => {
     str.value = newValue
+    if (newValue) {
+      showInput.value = true
+    }
+  },
+  { immediate: true }
+)
+
+watch(
+  () => props.focus,
+  (newValue) => {
+    if (newValue) {
+      if (props.disabled) return
+      closeCover()
+    }
   }
 )
+
+onMounted(() => {
+  if (props.focus) {
+    closeCover()
+  }
+})
 
 const rootClass = computed(() => {
   return `wd-search  ${props.light ? 'is-light' : ''}  ${props.hideCancel ? 'is-without-cancel' : ''} ${props.customClass}`
 })
 
+const coverStyle = computed(() => {
+  const coverStyle: CSSProperties = {
+    display: str.value === '' && showPlaceHolder.value ? 'flex' : 'none'
+  }
+
+  return objToStyle(coverStyle)
+})
+
 const emit = defineEmits(['update:modelValue', 'change', 'clear', 'search', 'focus', 'blur', 'cancel'])
+
+function hackFocus(focus: boolean) {
+  showInput.value = focus
+  requestAnimationFrame(() => {
+    isFocused.value = focus
+  })
+}
 
 function closeCover() {
   if (props.disabled) return
@@ -117,7 +151,7 @@ function closeCover() {
     .then(() => requestAnimationFrame())
     .then(() => {
       showPlaceHolder.value = false
-      focus.value = true
+      hackFocus(true)
     })
 }
 /**
@@ -135,16 +169,22 @@ function inputValue(event: any) {
  * @description 点击清空icon的handle
  */
 function clearSearch() {
-  clearing.value = true
   str.value = ''
+  clearing.value = true
+  if (props.focusWhenClear) {
+    isFocused.value = false
+  }
   requestAnimationFrame()
     .then(() => requestAnimationFrame())
+    .then(() => requestAnimationFrame())
     .then(() => {
-      showPlaceHolder.value = false
-      return requestAnimationFrame()
-    })
-    .then(() => {
-      focus.value = true
+      if (props.focusWhenClear) {
+        showPlaceHolder.value = false
+        hackFocus(true)
+      } else {
+        showPlaceHolder.value = true
+        hackFocus(false)
+      }
       emit('clear')
       emit('change', {
         value: ''
@@ -171,7 +211,6 @@ function searchFocus() {
     return
   }
   showPlaceHolder.value = false
-  focus.value = true
   emit('focus', {
     value: str.value
   })
@@ -183,6 +222,8 @@ function searchBlur() {
   if (clearing.value) return
   // 组件触发blur事件
   showPlaceHolder.value = !str.value
+  showInput.value = !showPlaceHolder.value
+  isFocused.value = false
   emit('blur', {
     value: str.value
   })

@@ -39,6 +39,14 @@
       <demo-block title="设置最大长度" transparent>
         <wd-search v-model="value2" :maxlength="4" />
       </demo-block>
+
+      <demo-block title="清空后自动聚焦" transparent>
+        <wd-search v-model="value4" focus-when-clear />
+      </demo-block>
+
+      <demo-block title="自动聚焦" transparent>
+        <wd-search v-model="value5" focus />
+      </demo-block>
     </page-wraper>
   </view>
 </template>
@@ -54,6 +62,9 @@ const showPopover = ref<boolean>(false)
 const value1 = ref<string>('')
 const value2 = ref<string>('初始文案')
 const value3 = ref<string>('')
+const value4 = ref<string>('')
+const value5 = ref<string>('')
+
 const searchType = ref<string>('全部')
 const menu = ref([
   {

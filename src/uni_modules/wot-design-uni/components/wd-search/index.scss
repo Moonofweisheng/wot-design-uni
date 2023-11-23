@@ -86,9 +86,6 @@
     }
   }
   @include e(cover) {
-    position: absolute;
-    top: 0;
-    z-index: 1;
     width: 100%;
     height: $-search-input-height;
     background-color: $-search-input-bg;

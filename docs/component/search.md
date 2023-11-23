@@ -167,6 +167,8 @@ function changeSearchType({ item, index }) {
 | maxlength        | 原生属性，设置最大长度。-1 表示无限制 | string / number | -      | -1     | -        |
 | v-model          | 输入框内容，双向绑定                  | string          | -      | -      | -        |
 | use-suffix-slot  | 是否使用输入框右侧插槽                | boolean         | -      | false  | -        |
+| focus            | 是否自动聚焦                      | boolean         | -      | false  | 0.1.63        |
+| focusWhenClear   | 是否在点击清除按钮时聚焦输入框       | boolean         | -      | false  | 0.1.63        |
 | name             | form 表单中的字段名                   | string          | -      | -      | -        |
 
 ## Events
