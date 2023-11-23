@@ -95,9 +95,9 @@ import { ref, reactive } from 'vue'
 export default {
   setup() {
     // themeVars 内的值会被转换成对应 CSS 变量
-    // 比如 buttonPrimaryBg 会转换成 `--wot-button-primary-bg`
+    // 比如 buttonPrimaryBg 会转换成 `--wot-button-primary-bg-color`
     const themeVars = reactive({
-      buttonPrimaryBg: '#07c160',
+      buttonPrimaryBgColor: '#07c160',
       buttonPrimaryColor: '#07c160'
     })
     return {
