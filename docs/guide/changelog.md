@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.64](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.63...v0.1.64) (2023-11-25)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复DateTimePicker标题展示和模式为区间时before-confirm参数错误的问题 ([7bcd12b](https://github.com/Moonofweisheng/wot-design-uni/commit/7bcd12ba633224dd42b160f0b43fadc99ac76707))
+
 ### [0.1.63](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.62...v0.1.63) (2023-11-23)
 
 
