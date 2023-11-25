@@ -26,7 +26,7 @@
       <wd-datetime-picker label="日期选择" align-right v-model="value13" @confirm="handleConfirm13" />
     </demo-block>
     <demo-block title="区域选择" transparent>
-      <wd-datetime-picker label="日期选择" v-model="value14" @confirm="handleConfirm14" />
+      <wd-datetime-picker label="日期选择" title="请选择区间" v-model="value14" @confirm="handleConfirm14" />
     </demo-block>
     <demo-block title="范围tab展示格式" transparent>
       <wd-datetime-picker label="日期选择" v-model="value15" @confirm="handleConfirm15" :display-format-tab-label="displayFormatTabLabel" />

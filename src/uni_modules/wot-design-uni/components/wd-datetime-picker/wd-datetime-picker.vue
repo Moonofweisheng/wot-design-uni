@@ -48,7 +48,7 @@
             {{ cancelButtonText }}
           </view>
           <!--标题-->
-          <view v-if="title" class="wd-picker__title">{{ JSON.stringify(title) }}</view>
+          <view v-if="title" class="wd-picker__title">{{ title }}</view>
           <!--确定按钮-->
           <view :class="`wd-picker__action ${loading || isLoading ? 'is-loading' : ''}`" @click="onConfirm">
             {{ confirmButtonText }}
@@ -578,8 +578,8 @@ function onConfirm() {
   const { beforeConfirm } = props
   if (beforeConfirm) {
     beforeConfirm(
-      innerValue.value,
-      (isPass) => {
+      region.value ? [innerValue.value, endInnerValue.value] : innerValue.value,
+      (isPass: boolean) => {
         isPass && handleConfirm()
       },
       proxy.$.exposed
