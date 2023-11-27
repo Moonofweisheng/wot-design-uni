@@ -1,0 +1,76 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+.wot-theme-dark {
+  @include b(number-keyboard) {
+  }
+}
+
+@include b(number-keyboard) {
+  // position: fixed;
+  // bottom: 0;
+  // left: 0;
+  // z-index: $-number-keyboard-z-index;
+  width: 100%;
+  padding-bottom: 22px;
+  background: $-number-keyboard-background;
+  user-select: none;
+
+  @include m(with-title) {
+    border-radius: 20px 20px 0 0;
+  }
+
+  @include e(header) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: content-box;
+    height: $-number-keyboard-title-height;
+    padding-top: 6px;
+    color: $-number-keyboard-title-color;
+    font-size: $-number-keyboard-title-font-size;
+  }
+
+  @include e(title) {
+    display: inline-block;
+    font-weight: normal;
+
+    &-left {
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  @include e(body) {
+    display: flex;
+    padding: 6px 0 0 6px;
+  }
+
+  @include e(keys) {
+    display: flex;
+    flex: 3;
+    flex-wrap: wrap;
+  }
+
+  &__close {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    padding: $-number-keyboard-close-padding;
+    color: $-number-keyboard-close-color;
+    font-size: $-number-keyboard-close-font-size;
+    background-color: transparent;
+    border: none;
+  }
+
+  @include e(sidebar) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  &--unfit {
+    padding-bottom: 0;
+  }
+}

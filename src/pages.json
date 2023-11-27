@@ -691,6 +691,16 @@
         },
         "navigationBarTitleText": "CountDown 倒计时"
       }
+    },
+    {
+      "path": "pages/numberKeyboard/Index",
+      "name": "numberKeyboard",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "NumberKeyboard 数字键盘"
+      }
     }
   ],
   // "tabBar": {

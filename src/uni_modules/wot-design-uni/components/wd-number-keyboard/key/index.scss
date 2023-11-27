@@ -1,0 +1,70 @@
+@import "./../../common/abstracts/_mixin.scss";
+@import "./../../common/abstracts/variable.scss";
+
+.wot-theme-dark {
+  @include b(key) {}
+}
+
+.wd-key-wrapper {
+  position: relative;
+  flex: 1;
+  flex-basis: 33%;
+  box-sizing: border-box;
+  padding: 0 6px 6px 0;
+
+  @include m(wider){
+    flex-basis: 66%;
+  }
+}
+
+@include b(key) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $-number-keyboard-key-height;
+  font-size: $-number-keyboard-key-font-size;
+  line-height: 1.5;
+  background: $-number-keyboard-key-background;
+  border-radius: $-number-keyboard-key-border-radius;
+  cursor: pointer;
+
+  @include m(large) {
+    position: absolute;
+    top: 0;
+    right: 6px;
+    bottom: 6px;
+    left: 0;
+    height: auto;
+  }
+
+  @include m(delete,confirm) {
+    font-size: $-number-keyboard-delete-font-size;
+  }
+
+  @include m(active) {
+    background-color: $-number-keyboard-key-active-color;
+  }
+
+  @include m(confirm) {
+    color: $-number-keyboard-button-text-color;
+    background: $-number-keyboard-button-background;
+
+    &.wd-key--active {
+      opacity: $-number-keyboard-button-active-opacity;
+    }
+  }
+
+  @include edeep(delete-icon) {
+    width: 32px;
+    height: 22px;
+  }
+
+  @include edeep(collapse-icon) {
+    width: 30px;
+    height: 24px;
+  }
+
+  @include edeep(loading-icon) {
+    color: $-number-keyboard-button-text-color;
+  }
+}
