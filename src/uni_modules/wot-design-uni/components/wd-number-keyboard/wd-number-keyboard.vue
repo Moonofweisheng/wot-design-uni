@@ -1,13 +1,24 @@
 <template>
-  <wd-popup v-model="show" position="bottom" :safe-area-inset-bottom="safeAreaInsetBottom" :modal="false">
-    <view class="wd-number-keyboard">
+  <wd-popup
+    v-model="show"
+    position="bottom"
+    :z-index="zIndex"
+    :safe-area-inset-bottom="safeAreaInsetBottom"
+    :modal-style="modal ? '' : 'opacity: 0;'"
+    :modal="hideOnClickOutside"
+    :lockScroll="lockScroll"
+    @click-modal="onClose"
+  >
+    <view :class="`wd-number-keyboard ${customClass}`" :style="customStyle">
       <view class="wd-number-keyboard__header" v-if="showTitle">
         <text class="wd-number-keyboard__title">{{ title }}</text>
-        <text class="wd-number-keyboard__close" v-if="showClose">{{ closeText }}</text>
+        <view class="wd-number-keyboard__close" hover-class="wd-number-keyboard__close--hover" v-if="showClose" @click="onClose">
+          <text>{{ closeText }}</text>
+        </view>
       </view>
       <view class="wd-number-keyboard__body">
         <view class="wd-number-keyboard__keys">
-          <key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" :color="key.color" @press="handlePress"></key>
+          <key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" @press="handlePress"></key>
         </view>
         <view class="wd-number-keyboard__sidebar" v-if="mode === 'custom'">
           <key v-if="showDeleteKey" large :text="deleteText" type="delete" @press="handlePress"></key>
@@ -36,10 +47,9 @@ type KeyboardMode = 'default' | 'custom'
 type KeyType = '' | 'delete' | 'extra' | 'close'
 
 interface Key {
-  text?: number | string
-  type?: KeyType
-  color?: string
-  wider?: boolean
+  text?: number | string // key文本
+  type?: KeyType // key的类型
+  wider?: boolean // 是否占2个key的宽度
 }
 
 interface Props {
@@ -55,8 +65,6 @@ interface Props {
   zIndex?: number
   // 最大长度
   maxlength?: number
-  // 关闭时是否失去焦点
-  blurOnClose?: boolean
   // 是否显示删除键
   showDeleteKey?: boolean
   // 是否随机键盘按键顺序
@@ -67,8 +75,12 @@ interface Props {
   deleteText?: string
   // 关闭按钮是否显示加载状态
   closeButtonLoading?: boolean
-  // 点击外部区域是否隐藏键盘
+  // 是否显示蒙层
+  modal?: boolean
+  // 是否在点击外部时收起键盘
   hideOnClickOutside?: boolean
+  // 是否锁定滚动
+  lockScroll?: boolean
   // 是否在底部安全区域内
   safeAreaInsetBottom?: boolean
   // 额外按键
@@ -86,13 +98,14 @@ const props = withDefaults(defineProps<Props>(), {
   mode: 'default',
   zIndex: 100,
   maxlength: Infinity,
-  blurOnClose: true,
   showDeleteKey: true,
   randomKeyOrder: false,
-  closeText: '完成',
+  closeText: '',
   deleteText: '',
   closeButtonLoading: false,
+  modal: false,
   hideOnClickOutside: true,
+  lockScroll: true,
   safeAreaInsetBottom: true,
   extraKey: '',
   customClass: '',
@@ -117,7 +130,7 @@ const showTitle = computed(() => {
   return props.title || showClose.value
 })
 
-const emit = defineEmits(['update:visible', 'blur', 'input', 'close', 'delete', 'update:modelValue'])
+const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue'])
 
 /**
  * 随机打乱数组的顺序
@@ -171,26 +184,14 @@ const genCustomKeys = () => {
   return keys
 }
 
-const onBlur = () => {
-  if (props.visible) {
-    emit('blur')
-  }
-}
-
 const onClose = () => {
   emit('close')
-
-  if (props.blurOnClose) {
-    onBlur()
-  }
+  emit('update:visible', false)
 }
 
 const handlePress = (text: string, type: KeyType) => {
-  if (text === '') {
-    if (type === 'extra') {
-      onBlur()
-    }
-    return
+  if (text === '' && type === 'extra') {
+    return onClose()
   }
 
   const value = props.modelValue
