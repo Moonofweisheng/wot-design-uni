@@ -38,7 +38,6 @@ type KeyType = '' | 'delete' | 'extra' | 'close'
 interface Props {
   type?: KeyType
   text?: number | string
-  color?: string
   wider?: boolean
   large?: boolean
   loading?: boolean
@@ -47,7 +46,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   type: '',
   text: '',
-  color: '',
   wider: false,
   large: false,
   loading: false
