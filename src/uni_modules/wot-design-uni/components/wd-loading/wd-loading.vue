@@ -57,7 +57,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const svg = ref<string>('')
 const intermediateColor = ref<string>('')
-const iconSize = ref<string>('32px')
+const iconSize = ref<string | number>('32px')
 
 watch(
   () => props.size,
