@@ -19,10 +19,6 @@ $-color-yellow: var(--wot-color-yellow, #f0cd1d) !default; // 黄色
 $-color-blue: var(--wot-color-blue, #2bb3ed) !default; // 蓝色
 $-color-info: var(--wot-color-info, #909399) !default;
 
-$-color-theme: var(--wot-color-theme, $default-theme) !default; // 品牌色
-$-color-white: var(--wot-color-white, rgb(255, 255, 255)) !default; // 用于mix的白色
-$-color-black: var(--wot-color-black, rgb(0, 0, 0)) !default; // 用于mix的黑色
-
 $-color-gray-1: var(--wot-color-gray-1, #f7f8fa) !default;
 $-color-gray-2: var(--wot-color-gray-2, #f2f3f5) !default;
 $-color-gray-3: var(--wot-color-gray-3, #ebedf0) !default;
