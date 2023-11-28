@@ -20,7 +20,9 @@
     />
     <view v-else-if="dynamic" class="wd-tag__text" :style="textStyle" @click="handleAdd">
       <wd-icon name="add" class="wd-tag__add" custom-class="wd-tag__icon" />
-      <text>新增标签</text>
+      <slot name="add">
+        <text>新增标签</text>
+      </slot>
     </view>
   </view>
 </template>

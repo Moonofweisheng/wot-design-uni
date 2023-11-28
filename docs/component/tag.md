@@ -177,6 +177,7 @@ function handleClose(order) {
 | name | 说明 | 最低版本 |
 | ---- | ---- | -------- |
 | icon | 图标 | -        |
+| add | 新增标签内容 | -        |
 
 ## 外部样式类
 
