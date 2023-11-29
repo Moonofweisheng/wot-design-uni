@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-09-25 17:28:12
- * @LastEditTime: 2023-11-18 21:32:13
+ * @LastEditTime: 2023-11-27 17:32:58
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\global.d.ts
@@ -91,6 +91,7 @@ declare module '@vue/runtime-core' {
     WdSidebarItem: typeof import('./components/wd-sidebar-item/wd-sidebar-item.vue')['default']
     WdFab: typeof import('./components/wd-fab/wd-fab.vue')['default']
     WdCountDown: typeof import('./components/wd-count-down/wd-count-down.vue')['default']
+    WdNumberKeyboard: typeof import('./components/wd-number-keyboard/wd-number-keyboard.vue')['default']
   }
 }
 

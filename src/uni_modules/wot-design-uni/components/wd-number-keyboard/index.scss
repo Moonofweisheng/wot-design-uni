@@ -1,0 +1,72 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+.wot-theme-dark {
+  @include b(number-keyboard) {
+  }
+}
+
+@include b(number-keyboard) {
+  width: 100%;
+  background: $-number-keyboard-background;
+  user-select: none;
+
+  @include m(with-title) {
+    border-radius: 20px 20px 0 0;
+  }
+
+  @include e(header) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: content-box;
+    height: $-number-keyboard-title-height;
+    padding-top: 6px;
+    color: $-number-keyboard-title-color;
+    font-size: $-number-keyboard-title-font-size;
+  }
+
+  @include e(title) {
+    display: inline-block;
+    font-weight: normal;
+
+    &-left {
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  @include e(body) {
+    display: flex;
+    padding: 6px 0 0 6px;
+  }
+
+  @include e(keys) {
+    display: flex;
+    flex: 3;
+    flex-wrap: wrap;
+  }
+
+  @include e(close) {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: 0;
+    height: 100%;
+    padding: $-number-keyboard-close-padding;
+    color: $-number-keyboard-close-color;
+    font-size: $-number-keyboard-close-font-size;
+    background-color: transparent;
+    border: none;
+    @include m(hover){
+      opacity: 0.6; 
+    }
+  }
+
+  @include e(sidebar) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+}
