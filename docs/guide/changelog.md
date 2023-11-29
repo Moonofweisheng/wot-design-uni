@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [0.1.65](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.64...v0.1.65) (2023-11-29)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 NumberKeyboard 数字键盘组件 ([#139](https://github.com/Moonofweisheng/wot-design-uni/issues/139)) ([7bb4455](https://github.com/Moonofweisheng/wot-design-uni/commit/7bb4455c6d9eca179ba174b8ad0da6ae8a09defc))
+* Tag新增类型标签添加slot ([7977dbb](https://github.com/Moonofweisheng/wot-design-uni/commit/7977dbbe3565eb06b700f2c55a31803647760fa9))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  新增关于 Tag 组件的add插槽的介绍 ([537fa5e](https://github.com/Moonofweisheng/wot-design-uni/commit/537fa5ebf8dcdc14ee12fc1f1e5a5f829653a14a))
+
 ### [0.1.64](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.63...v0.1.64) (2023-11-25)
 
 
