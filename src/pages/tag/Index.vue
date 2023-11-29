@@ -87,18 +87,16 @@
       </demo-block>
       <demo-block title="新增标签">
         <view>
-          <wd-tag
-            v-for="(tag, index) in dynamicTags"
-            :key="index"
-            custom-class="space"
-            round
-            closable
-            :data-index="index"
-            @close="handleClose1(index)"
-          >
+          <wd-tag v-for="(tag, index) in dynamicTags" :key="index" custom-class="space" round closable @close="handleClose1(index)">
             {{ tag }}
           </wd-tag>
           <wd-tag custom-class="space" round dynamic @confirm="handleConfirm"></wd-tag>
+          <wd-tag custom-class="space" round dynamic @confirm="handleConfirm">
+            <template #add>
+              <wd-icon name="pin" size="12px"></wd-icon>
+              <text style="margin-left: 4px">自定义</text>
+            </template>
+          </wd-tag>
         </view>
       </demo-block>
     </page-wraper>

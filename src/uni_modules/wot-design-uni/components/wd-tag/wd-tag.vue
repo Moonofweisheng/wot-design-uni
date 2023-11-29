@@ -19,10 +19,11 @@
       @confirm="handleConfirm"
     />
     <view v-else-if="dynamic" class="wd-tag__text" :style="textStyle" @click="handleAdd">
-      <wd-icon name="add" class="wd-tag__add" custom-class="wd-tag__icon" />
-      <slot name="add">
+      <slot name="add" v-if="$slots.add"></slot>
+      <template v-else>
+        <wd-icon name="add" custom-class="wd-tag__add wd-tag__icon" />
         <text>新增标签</text>
-      </slot>
+      </template>
     </view>
   </view>
 </template>

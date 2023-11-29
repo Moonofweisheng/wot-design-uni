@@ -107,6 +107,15 @@
 <wd-tag v-for="(tag, index) in tags" :key="index" custom-class="space" round closable @close="handleClose(index)">{{item}}</wd-tag>
 <wd-tag custom-class="space" round dynamic @confirm="handleConfirm"></wd-tag>
 ```
+如果想自定义新增样式的话，可以使用`add`插槽实现。
+```html
+<wd-tag custom-class="space" round dynamic @confirm="handleConfirm">
+  <template #add>
+    <wd-icon name="pin" size="12px"></wd-icon>
+    <text style="margin-left: 4px">自定义</text>
+  </template>
+</wd-tag>
+```
 
 ```typescript
 const tags = ref(['标签一', '标签二'])
@@ -125,9 +134,7 @@ function handleConfirm({ value }) {
 ## 事件
 
 ```html
-<wd-tag v-for="(tag, index) in tags" :key="index" round closable @click="handleClick(index)" @close="handleClose(index)">
-  {{tag.value}}
-</wd-tag>
+<wd-tag v-for="(tag, index) in tags" :key="index" round closable @click="handleClick(index)" @close="handleClose(index)">{{tag.value}}</wd-tag>
 ```
 
 ```typescript
@@ -151,33 +158,33 @@ function handleClose(order) {
 
 ## Attributes
 
-| 参数          | 说明                     | 类型    | 可选值                               | 默认值 | 最低版本 |
-| ------------- | ------------------------ | ------- | ------------------------------------ | ------ | -------- | 
+| 参数          | 说明                     | 类型    | 可选值                                       | 默认值 | 最低版本 |
+| ------------- | ------------------------ | ------- | -------------------------------------------- | ------ | -------- |
 | type          | 标签类型                 | string  | `primary` / `danger` / `warning` / `success` | -      | -        |
-| plain         | 幽灵类型                 | boolean | -                                    | false  | -        |
-| mark          | 标记类型                 | boolean | -                                    | false  | -        |
-| round         | 圆角类型                 | boolean | -                                    | false  | -        |
-| icon          | 左侧图标                 | string  | -                                    | -      | -        |
-| color         | 文字颜色                 | string  | -                                    | -      | -        |
-| bg-color      | 背景色和边框色           | string  | -                                    | -      | -        |
-| closable      | 可关闭(只对圆角类型支持) | boolean | -                                    | false  | -        |
-| use-icon-slot | 开启图标插槽             | boolean | -                                    | false  | -        |
-| dynamic       | 新增标签                 | boolean | -                                    | false  | -        |
+| plain         | 幽灵类型                 | boolean | -                                            | false  | -        |
+| mark          | 标记类型                 | boolean | -                                            | false  | -        |
+| round         | 圆角类型                 | boolean | -                                            | false  | -        |
+| icon          | 左侧图标                 | string  | -                                            | -      | -        |
+| color         | 文字颜色                 | string  | -                                            | -      | -        |
+| bg-color      | 背景色和边框色           | string  | -                                            | -      | -        |
+| closable      | 可关闭(只对圆角类型支持) | boolean | -                                            | false  | -        |
+| use-icon-slot | 开启图标插槽             | boolean | -                                            | false  | -        |
+| dynamic       | 是否为新增标签           | boolean | -                                            | false  | -        |
 
 ## Events
 
-| 事件名称     | 说明                       | 参数        | 最低版本 |
-| ------------ | -------------------------- | ----------- | -------- |
-| click   | 标签点击时触发             | event       | -        |
-| close   | 点击关闭按钮时触发         | event       | -        |
-| confirm | 新增标签输入内容确定后触发 | `{ value }` | -        |
+| 事件名称 | 说明                       | 参数        | 最低版本 |
+| -------- | -------------------------- | ----------- | -------- |
+| click    | 标签点击时触发             | event       | -        |
+| close    | 点击关闭按钮时触发         | event       | -        |
+| confirm  | 新增标签输入内容确定后触发 | `{ value }` | -        |
 
 ## Slots
 
-| name | 说明 | 最低版本 |
-| ---- | ---- | -------- |
-| icon | 图标 | -        |
-| add | 新增标签内容 | -        |
+| name | 说明                                        | 最低版本 |
+| ---- | ------------------------------------------- | -------- |
+| icon | 图标                                        | -        |
+| add  | 自定义新增标签插槽，`dynamic`为`true`时生效 | -        |
 
 ## 外部样式类
 

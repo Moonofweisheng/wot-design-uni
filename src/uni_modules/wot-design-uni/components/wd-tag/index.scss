@@ -106,7 +106,7 @@
       color: $-tag-close-active-color;
     }
   }
-  @include e(add) {
+  @include edeep(add) {
     vertical-align: bottom;
   }
 }
