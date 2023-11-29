@@ -313,6 +313,9 @@ export default defineConfig({
           }, {
             link: "/component/count-down",
             text: "CountDown 倒计时"
+          }, {
+            link: "/component/number-keyboard",
+            text: "NumberKeyboard 数字键盘"
           }]
         }, {
     
