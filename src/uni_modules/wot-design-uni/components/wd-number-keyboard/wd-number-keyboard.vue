@@ -1,18 +1,12 @@
 <template>
   <wd-popup v-model="show" position="bottom" :safe-area-inset-bottom="safeAreaInsetBottom" :modal="false">
     <view class="wd-number-keyboard">
-      <view class="wd-number-keyboard__header" v-if="showTitle">
-        <text class="wd-number-keyboard__title">{{ title }}</text>
-        <text class="wd-number-keyboard__close" v-if="showClose">{{ closeText }}</text>
-      </view>
+      <view class="wd-number-keyboard__header"></view>
       <view class="wd-number-keyboard__body">
         <view class="wd-number-keyboard__keys">
           <key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" :color="key.color" @press="handlePress"></key>
         </view>
-        <view class="wd-number-keyboard__sidebar" v-if="mode === 'custom'">
-          <key v-if="showDeleteKey" large :text="deleteText" type="delete" @press="handlePress"></key>
-          <key large :text="closeText" type="close" :loading="closeButtonLoading" @press="handlePress"></key>
-        </view>
+        <view class="wd-number-keyboard__sidebar"></view>
       </view>
     </view>
   </wd-popup>
@@ -33,7 +27,7 @@ import { computed, ref, watch } from 'vue'
 import key from './key/index.vue'
 
 type KeyboardMode = 'default' | 'custom'
-type KeyType = '' | 'delete' | 'extra' | 'close'
+type KeyType = '' | 'delete' | 'extra' | 'confirm'
 
 interface Key {
   text?: number | string
@@ -56,17 +50,17 @@ interface Props {
   // 最大长度
   maxlength?: number
   // 关闭时是否失去焦点
-  blurOnClose?: boolean
+  blurOnConfirm?: boolean
   // 是否显示删除键
   showDeleteKey?: boolean
   // 是否随机键盘按键顺序
   randomKeyOrder?: boolean
   // 确认按钮文本
-  closeText?: string
+  confirmText?: string
   // 删除按钮文本
   deleteText?: string
   // 关闭按钮是否显示加载状态
-  closeButtonLoading?: boolean
+  confirmButtonLoading?: boolean
   // 点击外部区域是否隐藏键盘
   hideOnClickOutside?: boolean
   // 是否在底部安全区域内
@@ -86,12 +80,12 @@ const props = withDefaults(defineProps<Props>(), {
   mode: 'default',
   zIndex: 100,
   maxlength: Infinity,
-  blurOnClose: true,
+  blurOnConfirm: true,
   showDeleteKey: true,
   randomKeyOrder: false,
-  closeText: '完成',
+  confirmText: '完成',
   deleteText: '',
-  closeButtonLoading: false,
+  confirmButtonLoading: false,
   hideOnClickOutside: true,
   safeAreaInsetBottom: true,
   extraKey: '',
@@ -108,14 +102,6 @@ watch(
 )
 
 const keys = computed(() => (props.mode === 'custom' ? genCustomKeys() : genDefaultKeys()))
-
-const showClose = computed(() => {
-  return props.closeText && props.mode === 'default'
-})
-
-const showTitle = computed(() => {
-  return props.title || showClose.value
-})
 
 const emit = defineEmits(['update:visible', 'blur', 'input', 'close', 'delete', 'update:modelValue'])
 
@@ -171,24 +157,10 @@ const genCustomKeys = () => {
   return keys
 }
 
-const onBlur = () => {
-  if (props.visible) {
-    emit('blur')
-  }
-}
-
-const onClose = () => {
-  emit('close')
-
-  if (props.blurOnClose) {
-    onBlur()
-  }
-}
-
 const handlePress = (text: string, type: KeyType) => {
   if (text === '') {
     if (type === 'extra') {
-      onBlur()
+      // onBlur()
     }
     return
   }
@@ -198,8 +170,8 @@ const handlePress = (text: string, type: KeyType) => {
   if (type === 'delete') {
     emit('delete')
     emit('update:modelValue', value.slice(0, value.length - 1))
-  } else if (type === 'close') {
-    onClose()
+  } else if (type === 'confirm') {
+    // onClose()
   } else if (value.length < +props.maxlength) {
     emit('input', text)
     emit('update:modelValue', value + text)

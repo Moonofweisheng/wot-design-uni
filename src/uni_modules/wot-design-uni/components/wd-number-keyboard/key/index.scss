@@ -37,7 +37,7 @@
     height: auto;
   }
 
-  @include m(delete,close) {
+  @include m(delete,confirm) {
     font-size: $-number-keyboard-delete-font-size;
   }
 
@@ -45,7 +45,7 @@
     background-color: $-number-keyboard-key-active-color;
   }
 
-  @include m(close) {
+  @include m(confirm) {
     color: $-number-keyboard-button-text-color;
     background: $-number-keyboard-button-background;
 
