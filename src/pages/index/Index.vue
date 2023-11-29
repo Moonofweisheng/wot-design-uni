@@ -77,6 +77,10 @@ const list = ref([
       {
         id: 'fab',
         name: 'Fab 悬浮按钮'
+      },
+      {
+        id: 'gap',
+        name: 'Gap 间隔槽'
       }
     ]
   },
