@@ -19,6 +19,10 @@ $-color-yellow: var(--wot-color-yellow, #f0cd1d) !default; // 黄色
 $-color-blue: var(--wot-color-blue, #2bb3ed) !default; // 蓝色
 $-color-info: var(--wot-color-info, #909399) !default;
 
+$-color-theme: var(--wot-color-theme, $default-theme) !default; // 品牌色
+$-color-white: var(--wot-color-white, rgb(255, 255, 255)) !default; // 用于mix的白色
+$-color-black: var(--wot-color-black, rgb(0, 0, 0)) !default; // 用于mix的黑色
+
 $-color-gray-1: var(--wot-color-gray-1, #f7f8fa) !default;
 $-color-gray-2: var(--wot-color-gray-2, #f2f3f5) !default;
 $-color-gray-3: var(--wot-color-gray-3, #ebedf0) !default;
@@ -801,67 +805,48 @@ $-navbar-disabled-opacity: var(--wot-navbar-disabled-opacity, 0.6) !default; // 
 $-navbar-hover-color :var(--wot-navbar-hover-color, #eee) !default; // navbar hover样式
 
 // navbar capsule
-$-navbar-capsule-border-color: var(--wot-navbar-capsule-border-color, #e7e7e7) !default;
-$-navbar-capsule-border-radius: var(--wot-navbar-capsule-border-radius, 16px) !default;
-$-navbar-capsule-width: var(--wot-navbar-capsule-width, 88px) !default;
-$-navbar-capsule-height: var(--wot-navbar-capsule-height, 32px) !default;
+$-navbar-capsule-border-color: var(--wot-navbar-capsule-border-color, #e7e7e7);
+$-navbar-capsule-border-radius: var(--wot-navbar-capsule-border-radius, 16px);
+$-navbar-capsule-width: var(--wot-navbar-capsule-width, 88px);
+$-navbar-capsule-height: var(--wot-navbar-capsule-height, 32px);
 
 // table
-$-table-color: var(--wot-table-color, $-font-gray-1) !default; // 表格字体颜色
-$-table-bg: var(--wot-table-bg, #FFFFFF) !default; // 表格背景颜色
-$-table-stripe-bg: var(--wot-table-stripe-bg, #f3f3f3) !default; // 表格背景颜色
-$-table-border-color: var(--wot-table-border-color, #ececec) !default; // 表格边框颜色
-$-table-font-size: var(--wot-table-font-size, 13px) !default; // 表格字体大小
+$-table-color: var(--wot-table-color, $-font-gray-1); // 表格字体颜色
+$-table-bg: var(--wot-table-bg, #FFFFFF); // 表格背景颜色
+$-table-stripe-bg: var(--wot-table-stripe-bg, #f3f3f3); // 表格背景颜色
+$-table-border-color: var(--wot-table-border-color, #ececec); // 表格边框颜色
+$-table-font-size: var(--wot-table-font-size, 13px); // 表格字体大小
 
 // sidebar
-$-sidebar-bg: var(--wot-sidebar-bg, $-color-gray-1) !default; // 侧边栏背景色
-$-sidebar-width: var(--wot-sidebar-width, 104px) !default; // 侧边栏宽度
-$-sidebar-height: var(--wot-sidebar-height, 100%) !default; // 侧边栏高度
+$-sidebar-bg: var(--wot-sidebar-bg, $-color-gray-1); // 侧边栏背景色
+$-sidebar-width: var(--wot-sidebar-width, 104px); // 侧边栏宽度
+$-sidebar-height: var(--wot-sidebar-height, 100%); // 侧边栏高度
 
 // sidebar-item
-$-sidebar-color: var(--wd-sidebar-color, $-font-gray-1) !default;
-$-sidebar-item-height: var(--wd-sidebar-item-height, 56px) !default;
-$-sidebar-item-line-height: var(--wd-sidebar-item-line-height, 24px) !default;
-$-sidebar-disabled-color: var(--wd-side-bar-disabled-color, $-font-gray-4) !default;
-$-sidebar-active-color: var(--wd-sidebar-active-color, $-color-theme) !default; // 激活项字体颜色
-$-sidebar-active-bg: var(--wot-sidebar-active-bg, $-color-white) !default; // 激活项背景颜色
-$-sidebar-hover-bg: var(--wot-sidebar-hover-bg, $-color-gray-2) !default; // 激活项点击背景颜色
-$-sidebar-border-radius: var(--wd-sidebar-border-radius, 8px) !default;
-$-sidebar-font-size: var(--wd-sidebar-font-size, 16px) !default;
-$-sidebar-icon-size: var(--wd-sidebar-icon-size, 20px) !default;
-$-sidebar-active-border-width: var(--wd-sidebar-active-border-width, 4px) !default;
-$-sidebar-active-border-height: var(--wd-sidebar-active-border-height, 16px) !default;
+$-sidebar-color: var(--wd-sidebar-color, $-font-gray-1);
+$-sidebar-item-height: var(--wd-sidebar-item-height, 56px);
+$-sidebar-item-line-height: var(--wd-sidebar-item-line-height, 24px);
+$-sidebar-disabled-color: var(--wd-side-bar-disabled-color, $-font-gray-4);
+$-sidebar-active-color: var(--wd-sidebar-active-color, $-color-theme); // 激活项字体颜色
+$-sidebar-active-bg: var(--wot-sidebar-active-bg, $-color-white); // 激活项背景颜色
+$-sidebar-hover-bg: var(--wot-sidebar-hover-bg, $-color-gray-2); // 激活项点击背景颜色
+$-sidebar-border-radius: var(--wd-sidebar-border-radius, 8px);
+$-sidebar-font-size: var(--wd-sidebar-font-size, 16px);
+$-sidebar-icon-size: var(--wd-sidebar-icon-size, 20px);
+$-sidebar-active-border-width: var(--wd-sidebar-active-border-width, 4px);
+$-sidebar-active-border-height: var(--wd-sidebar-active-border-height, 16px);
 
 // fab
-$-fab-trigger-height: var(--wd-fab-trigger-height, 56px) !default;
-$-fab-trigger-width: var(--wd-fab-trigger-width, 56px) !default;
-$-fab-actions-padding: var(--wd-actions-padding, 12px) !default;
-$-fab-top: var(--wd-fab-top, 16px) !default;
-$-fab-left: var(--wd-fab-left, 16px) !default;
-$-fab-right: var(--wd-fab-right, 16px) !default;
-$-fab-bottom: var(--wd-fab-bottom, 16px) !default;
+$-fab-trigger-height: var(--wd-fab-trigger-height, 56px);
+$-fab-trigger-width: var(--wd-fab-trigger-width, 56px);
+$-fab-actions-padding: var(--wd-actions-padding, 12px);
+$-fab-top: var(--wd-fab-top, 16px);
+$-fab-left: var(--wd-fab-left, 16px);
+$-fab-right: var(--wd-fab-right, 16px);
+$-fab-bottom: var(--wd-fab-bottom, 16px);
 
 
 // count-down
-$-count-down-text-color: var(--wd-count-down-text-color, $-color-gray-8) !default;
-$-count-down-font-size: var(--wd-count-down-font-size, $-fs-content) !default;
-$-count-down-line-height: var(--wd-count-down-line-height, 20px) !default;
-
-// keyboard
-$-number-keyboard-key-height: var(--wd-number-keyboard-key-height, 48px) !default;
-$-number-keyboard-key-font-size: var(--wd-number-keyboard-key-font-size, 28px) !default;
-$-number-keyboard-key-background: var(--wd-number-keyboard-key-background, $-color-white) !default;
-$-number-keyboard-key-border-radius: var(--wot-number-keyboard-key-border-radius, 8px) !default;
-$-number-keyboard-delete-font-size: var(--wot-number-keyboard-delete-font-size, 16px) !default;
-$-number-keyboard-key-active-color: var(--wot-number-keyboard-key-active-color, $-color-gray-3) !default;
-$-number-keyboard-button-text-color: var(--wot-number-keyboard-button-text-color, $-color-white) !default;
-$-number-keyboard-button-background: var(--wot-number-keyboard--button-background, $-color-theme) !default;
-$-number-keyboard-button-active-opacity: var(--wot-number-keyboard-button-active-opacity, 0.6) !default;
-$-number-keyboard-z-index: var(--wot-number-keyboard-z-index, 100) !default;
-$-number-keyboard-background: var(--wot-number-keyboard-background, $-color-gray-2) !default;
-$-number-keyboard-title-height: var(--wot-number-keyboard-title-height, 34px) !default;
-$-number-keyboard-title-color: var(--wot-number-keyboard-title-color, $-color-gray-7) !default;
-$-number-keyboard-title-font-size: var(--wot-number-keyboard-title-font-size, 16px) !default;
-$-number-keyboard-close-padding: var(--wot-number-keyboard-title-font-size, 0 16px) !default;
-$-number-keyboard-close-color: var(--wot-number-keyboard-close-color, $-color-theme) !default;
-$-number-keyboard-close-font-size: var(--wot-number-keyboard-close-font-size, 14px) !default;
+$-count-down-text-color: var(--wd-count-down-text-color, $-color-gray-8);
+$-count-down-font-size: var(--wd-count-down-font-size, $-fs-content);
+$-count-down-line-height: var(--wd-count-down-line-height, 20px);
