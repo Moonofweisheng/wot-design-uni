@@ -857,6 +857,7 @@ $-number-keyboard-key-active-color: var(--wot-number-keyboard-key-active-color, 
 $-number-keyboard-button-text-color: var(--wot-number-keyboard-button-text-color, $-color-white) !default;
 $-number-keyboard-button-background: var(--wot-number-keyboard--button-background, $-color-theme) !default;
 $-number-keyboard-button-active-opacity: var(--wot-number-keyboard-button-active-opacity, 0.6) !default;
+$-number-keyboard-z-index: var(--wot-number-keyboard-z-index, 100) !default;
 $-number-keyboard-background: var(--wot-number-keyboard-background, $-color-gray-2) !default;
 $-number-keyboard-title-height: var(--wot-number-keyboard-title-height, 34px) !default;
 $-number-keyboard-title-color: var(--wot-number-keyboard-title-color, $-color-gray-7) !default;

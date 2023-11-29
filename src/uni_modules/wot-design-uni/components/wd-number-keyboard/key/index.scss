@@ -51,8 +51,7 @@
     color: $-number-keyboard-button-text-color;
     background: $-number-keyboard-button-background;
 
-    &:active{
-      background: $-number-keyboard-button-background;
+    &.wd-key--active {
       opacity: $-number-keyboard-button-active-opacity;
     }
   }

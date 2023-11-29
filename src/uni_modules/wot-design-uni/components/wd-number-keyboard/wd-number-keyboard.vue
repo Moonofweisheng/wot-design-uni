@@ -18,11 +18,11 @@
       </view>
       <view class="wd-number-keyboard__body">
         <view class="wd-number-keyboard__keys">
-          <wd-key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" @press="handlePress"></wd-key>
+          <key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" @press="handlePress"></key>
         </view>
         <view class="wd-number-keyboard__sidebar" v-if="mode === 'custom'">
-          <wd-key v-if="showDeleteKey" large :text="deleteText" type="delete" @press="handlePress"></wd-key>
-          <wd-key large :text="closeText" type="close" :loading="closeButtonLoading" @press="handlePress"></wd-key>
+          <key v-if="showDeleteKey" large :text="deleteText" type="delete" @press="handlePress"></key>
+          <key large :text="closeText" type="close" :loading="closeButtonLoading" @press="handlePress"></key>
         </view>
       </view>
     </view>
@@ -41,7 +41,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import WdKey from './key/index.vue'
+import key from './key/index.vue'
 
 type KeyboardMode = 'default' | 'custom'
 type KeyType = '' | 'delete' | 'extra' | 'close'
