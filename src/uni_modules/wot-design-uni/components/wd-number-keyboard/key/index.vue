@@ -55,7 +55,7 @@ const touch = useTouch()
 const active = ref<boolean>(false)
 
 const keyClass = computed(() => {
-  return `wd-key ${props.large ? 'wd-key--large' : ''} ${props.type === 'delete' ? 'wd-key--delete' : ''} ${
+  return `wd-key ${props.large ? 'wd-key--large' : ''} ${active.value ? 'wd-key--active' : ''} ${props.type === 'delete' ? 'wd-key--delete' : ''} ${
     props.type === 'close' ? 'wd-key--close' : ''
   }`
 })

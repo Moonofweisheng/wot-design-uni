@@ -26,9 +26,7 @@
   line-height: 1.5;
   background: $-number-keyboard-key-background;
   border-radius: $-number-keyboard-key-border-radius;
-  &:active{
-    background-color: $-number-keyboard-key-active-color;
-  }
+  cursor: pointer;
 
   @include m(large) {
     position: absolute;
@@ -54,6 +52,16 @@
     &.wd-key--active {
       opacity: $-number-keyboard-button-active-opacity;
     }
+  }
+
+  @include edeep(delete-icon) {
+    width: 32px;
+    height: 22px;
+  }
+
+  @include edeep(collapse-icon) {
+    width: 30px;
+    height: 24px;
   }
 
   @include edeep(loading-icon) {

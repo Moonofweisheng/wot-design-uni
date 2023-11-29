@@ -4,12 +4,11 @@
   <page-wraper>
     <demo-block title="基本用法" transparent>
       <wd-cell-group border>
-        <wd-cell title="默认键盘" is-link @click="showKeyBoard(1)" />
-        <wd-cell title="带右侧栏的键盘" is-link @click="showKeyBoard(2)" />
-        <wd-cell title="身份证键盘" is-link @click="showKeyBoard(3)" />
-        <wd-cell title="带标题的键盘" is-link @click="showKeyBoard(4)" />
-        <wd-cell title="多个额外按键" is-link @click="showKeyBoard(5)" />
-        <wd-cell title="随机数字键盘" is-link @click="showKeyBoard(6)" />
+        <wd-cell title="弹出带右侧栏的键盘" is-link @click="showKeyBoard(2)" />
+        <wd-cell title="弹出身份证键盘" is-link @click="showKeyBoard(3)" />
+        <wd-cell title="弹出带标题的键盘" is-link @click="showKeyBoard(4)" />
+        <wd-cell title="弹出配置多个按键的键盘" is-link @click="showKeyBoard(5)" />
+        <wd-cell title="弹出配置随机数字的键盘" is-link @click="showKeyBoard(6)" />
         <wd-cell title="双向绑定" clickable :value="value1" @click="showKeyBoard(7)" />
         <wd-cell title="展示蒙层" clickable @click="showKeyBoard(8)" />
       </wd-cell-group>
@@ -25,7 +24,7 @@
       @delete="onDelete"
     ></wd-number-keyboard>
     <wd-number-keyboard v-model:visible="visible3" extra-key="X" close-text="完成" @input="onInput" @delete="onDelete" />
-    <wd-number-keyboard v-model:visible="visible4" title="输入密码" extra-key="." close-text="完成" @input="onInput" @delete="onDelete" />
+    <wd-number-keyboard v-model:visible="visible4" title="键盘标题" extra-key="." close-text="完成" @input="onInput" @delete="onDelete" />
 
     <wd-number-keyboard v-model:visible="visible5" mode="custom" :extra-key="['00', '.']" close-text="完成" @input="onInput" @delete="onDelete" />
 
