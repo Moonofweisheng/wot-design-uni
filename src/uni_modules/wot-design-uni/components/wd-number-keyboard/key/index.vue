@@ -20,7 +20,7 @@
 </template>
 <script lang="ts">
 export default {
-  name: 'key',
+  name: 'wd-key',
   options: {
     virtualHost: true,
     addGlobalClass: true,
