@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.66](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.65...v0.1.66) (2023-12-01)
+
+
+### ✨ Features | 新功能
+
+* ✨ Tag 组件type增加属性值default ([#143](https://github.com/Moonofweisheng/wot-design-uni/issues/143)) ([48f0e4b](https://github.com/Moonofweisheng/wot-design-uni/commit/48f0e4b3c484755a0da4eb11fa814c6b52be74b1))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 ActionSheet 组件设置custom-class无效的问题 ([1e5bcf7](https://github.com/Moonofweisheng/wot-design-uni/commit/1e5bcf7d0a8be66b80de81a0359d3fb429fdf52d))
+
 ### [0.1.65](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.64...v0.1.65) (2023-11-29)
 
 
