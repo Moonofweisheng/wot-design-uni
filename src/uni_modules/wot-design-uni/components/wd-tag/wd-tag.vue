@@ -42,7 +42,7 @@ export default {
 import { objToStyle } from '../common/util'
 import { computed, ref, watch } from 'vue'
 
-type TagType = 'primary' | 'success' | 'warning' | 'danger'
+type TagType = 'default' | 'primary' | 'success' | 'warning' | 'danger'
 
 interface Props {
   useIconSlot?: boolean
@@ -59,6 +59,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  type: 'default',
   customClass: '',
   useIconSlot: false,
   closable: false,
