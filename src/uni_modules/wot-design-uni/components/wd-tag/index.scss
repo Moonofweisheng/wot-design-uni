@@ -40,8 +40,10 @@
   border-radius: 2px;
   transition: opacity .3s;
   vertical-align: middle;
-  @include tag-type-style($-tag-info-color, $-tag-info-bg);
 
+  @include when(default) {
+    @include tag-type-style($-tag-info-color, $-tag-info-bg);
+  }
   @include when(primary) {
     @include tag-type-style($-tag-primary-color, $-tag-primary-bg);
   }

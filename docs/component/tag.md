@@ -160,7 +160,7 @@ function handleClose(order) {
 
 | 参数          | 说明                     | 类型    | 可选值                                       | 默认值 | 最低版本 |
 | ------------- | ------------------------ | ------- | -------------------------------------------- | ------ | -------- |
-| type          | 标签类型                 | string  | `primary` / `danger` / `warning` / `success` | -      | -        |
+| type          | 标签类型                 | string  | `default` / `primary` / `danger` / `warning` / `success` | default      | -        |
 | plain         | 幽灵类型                 | boolean | -                                            | false  | -        |
 | mark          | 标记类型                 | boolean | -                                            | false  | -        |
 | round         | 圆角类型                 | boolean | -                                            | false  | -        |
