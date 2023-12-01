@@ -17,12 +17,12 @@
       :z-index="zIndex"
     >
       <view
-        class="wd-action-sheet"
+        :class="`wd-action-sheet ${customClass}`"
         :style="`${
           (actions && actions.length) || (panels && panels.length)
             ? 'margin: 0 10px calc(var(--window-bottom) + 10px) 10px; border-radius: 16px;'
-            : 'margin-bottom: var(--window-bottom)'
-        }`"
+            : 'margin-bottom: var(--window-bottom);'
+        } ${customStyle}`"
       >
         <view v-if="title" :class="`wd-action-sheet__header ${customHeaderClass}`">
           {{ title }}
@@ -96,6 +96,7 @@ interface Panel {
 interface Props {
   customClass?: string
   customHeaderClass?: string
+  customStyle?: string
   modelValue: boolean
   actions?: Array<Action>
   panels?: Array<Panel>
@@ -112,6 +113,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   customHeaderClass: '',
+  customStyle: '',
   modelValue: false,
   actions: () => [] as Array<Action>,
   panels: () => [] as Array<Panel>,
