@@ -300,6 +300,10 @@ const list = ref([
         name: 'Divider 分割线'
       },
       {
+        id: 'gap',
+        name: 'Gap 间隔槽'
+      },
+      {
         id: 'img',
         name: 'Img 图片'
       },

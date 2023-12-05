@@ -701,6 +701,16 @@
         },
         "navigationBarTitleText": "NumberKeyboard 数字键盘"
       }
+    },
+    {
+      "path": "pages/gap/Index",
+      "name": "gap",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Gap 间隔槽"
+      }
     }
   ],
   // "tabBar": {
