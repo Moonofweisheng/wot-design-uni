@@ -39,7 +39,7 @@
 
 | 参数              | 说明      | 类型      | 可选值        | 默认值         | 最低版本 |
 |-----------------|---------|---------|------------|-------------| -------- |
-| height          | 高度      | string  | -          | 30rpx       | -        |
+| height          | 高度      | `string`/`number`  | -          | 15       | -        |
 | background      | 背景颜色    | string  |            | transparent | -        |
 | safeAreaBbottom | 底部安全区  | boolean | true/false | false       | -        |
 
