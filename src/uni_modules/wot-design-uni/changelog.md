@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.1.67](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.66...v0.1.67) (2023-12-06)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Gap 间隔槽组件 ([#147](https://github.com/Moonofweisheng/wot-design-uni/issues/147)) ([fa7cd16](https://github.com/Moonofweisheng/wot-design-uni/commit/fa7cd163810cbcd63fc2a99a6a92ccd8a803b2f1))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Picker组件v-model数据不更新的问题 ([e60f475](https://github.com/Moonofweisheng/wot-design-uni/commit/e60f47538130625a8c8f93e3a6795b7e71588002)), closes [#146](https://github.com/Moonofweisheng/wot-design-uni/issues/146)
+
 ### [0.1.66](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.65...v0.1.66) (2023-12-01)
 
 
