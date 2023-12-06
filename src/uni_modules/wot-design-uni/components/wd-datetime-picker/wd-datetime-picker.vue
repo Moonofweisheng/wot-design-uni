@@ -135,7 +135,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { type DateTimeType, getPickerValue } from '../wd-datetime-picker-view/type'
@@ -296,7 +296,9 @@ watch(
       // 每次value更新时都需要刷新整个列表
       innerValue.value = deepClone(getDefaultInnerValue())
     }
-    setShowValue(false, false, true)
+    nextTick(() => {
+      setShowValue(false, false, true)
+    })
   },
   {
     deep: true,
