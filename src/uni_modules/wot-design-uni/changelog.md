@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.68](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.67...v0.1.68) (2023-12-07)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  增加 Gap 组件的文档 ([9e3a8c1](https://github.com/Moonofweisheng/wot-design-uni/commit/9e3a8c1506f9ef93f9f0155ac948c8bc4d215ea8))
+
 ### [0.1.67](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.66...v0.1.67) (2023-12-06)
 
 
