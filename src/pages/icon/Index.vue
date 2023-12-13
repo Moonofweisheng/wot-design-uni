@@ -1,6 +1,5 @@
 <template>
   <view>
-    <wd-notify />
     <page-wraper>
       <view class="icon">
         <view style="position: sticky; top: 0; z-index: 2">
@@ -20,7 +19,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useNotify } from '@/uni_modules/wot-design-uni'
-const { showNotify } = useNotify('notify')
+const { showNotify } = useNotify()
 const keyword = ref<string>('')
 
 const icons = ref<Array<string>>([

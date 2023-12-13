@@ -15,7 +15,7 @@
       </wd-cell>
       <slot />
     </view>
-    <wd-notify selector="notify" />
+    <wd-notify />
   </wd-config-provider>
 </template>
 <script lang="ts">

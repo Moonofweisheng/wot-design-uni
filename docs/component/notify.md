@@ -12,7 +12,7 @@
 ```ts
 import { useNotify } from '@/uni_modules/wot-design-uni'
 
-const { showNotify, closeNotify } = useNotify('notify')
+const { showNotify, closeNotify } = useNotify()
 
 // 3 秒后自动关闭
 showNotify('通知内容')
@@ -139,7 +139,7 @@ export default {
   <wd-config-provider>
     <slot />
     <TabBar />
-    <wd-notify selector="notify" />
+    <wd-notify />
   </wd-config-provider>
 </template>
 
@@ -177,7 +177,7 @@ export default {
 <script setup lang="ts">
   import { useNotify } from '@/uni_modules/wot-design-uni'
 
-  const { showNotify } = useNotify('notify')
+  const { showNotify } = useNotify()
 </script>
 ```
 

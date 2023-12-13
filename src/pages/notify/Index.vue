@@ -25,7 +25,7 @@
         <wd-cell title="使用 Notify 组件" is-link @click="showNotifyComponent" />
       </wd-cell-group>
     </demo-block>
-    <wd-notify type="success" v-model:visible="visible">
+    <wd-notify selector="visible" type="success" v-model:visible="visible">
       <wd-icon name="check-outline" size="inherit" color="inherit" />
       成功通知
     </wd-notify>
@@ -38,7 +38,7 @@ import { useNotify } from '@/uni_modules/wot-design-uni'
 
 let timer: ReturnType<typeof setTimeout>
 const visible = ref(false)
-const { showNotify } = useNotify('notify')
+const { showNotify } = useNotify()
 
 const showType = (type: NotifyType) => {
   showNotify({
