@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.69](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.68...v0.1.69) (2023-12-13)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Notify 使用文档错误的问题 ([3fe6423](https://github.com/Moonofweisheng/wot-design-uni/commit/3fe6423c9c6727eaa3655029bf862b9be182b70b)), closes [#148](https://github.com/Moonofweisheng/wot-design-uni/issues/148)
+
 ### [0.1.68](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.67...v0.1.68) (2023-12-07)
 
 
