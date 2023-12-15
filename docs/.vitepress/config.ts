@@ -265,6 +265,9 @@ export default defineConfig({
           }, {
             link: "/component/upload",
             text: "Upload 上传"
+          }, {
+            link: "/component/password-input",
+            text: "PasswordInput 密码输入框"
           }]
         }, {
           text: "反馈",

@@ -711,6 +711,16 @@
         },
         "navigationBarTitleText": "Gap 间隔槽"
       }
+    },
+    {
+      "path": "pages/passwordInput/Index",
+      "name": "passwordInput",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "PasswordInput 密码输入框"
+      }
     }
   ],
   // "tabBar": {

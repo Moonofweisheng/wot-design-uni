@@ -1,0 +1,72 @@
+<template>
+  <view class="wd-password-input">
+    <view @touchstart="onTouchStart" class="flex wd-password-input__security">
+      <view
+        v-for="(item, index) in length"
+        :key="index"
+        :class="`wd-password-input__item ${gutter ? '' : 'is-border'}`"
+        :style="{ marginLeft: index !== 0 && gutter ? addUnit(gutter) : '' }"
+      >
+        <view v-if="focused && index === modelValue.length" class="wd-password-input__cursor"></view>
+        <view v-else :class="`wd-password-input__value`">
+          <i :style="{ visibility: mask && modelValue[index] ? 'visible' : 'hidden' }" class="wd-password-input__mask"></i>
+          <text v-if="!mask && modelValue[index]">{{ modelValue[index] }}</text>
+        </view>
+      </view>
+    </view>
+    <view v-if="info || errorInfo" :class="`wd-password-input__info ${errorInfo ? 'is-error' : ''}`">
+      {{ errorInfo || info }}
+    </view>
+  </view>
+</template>
+
+<script lang="ts">
+export default {
+  name: 'wd-password-input',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
+<script lang="ts" setup>
+import { computed, ref, watch } from 'vue'
+import { addUnit } from '../common/util'
+
+interface Props {
+  modelValue: string
+  mask: boolean
+  info: string
+  errorInfo: string
+  gutter: number | string
+  length: number | string
+  focused: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
+  mask: true,
+  info: '',
+  errorInfo: '',
+  gutter: 0,
+  length: 6,
+  focused: true
+})
+
+const emit = defineEmits(['focus'])
+
+function onTouchStart(event: Event) {
+  event.stopPropagation()
+  emit('focus')
+}
+</script>
+
+<style lang="scss" scoped>
+@import './index.scss';
+.flex {
+  display: flex;
+  align-items: center;
+}
+</style>
