@@ -5,7 +5,7 @@
         v-for="(item, index) in length"
         :key="index"
         :class="`wd-password-input__item ${gutter ? '' : 'is-border'}`"
-        :style="{ marginLeft: index !== 0 && gutter ? addUnit(gutter) : '' }"
+        :style="{ marginLeft: index !== 0 && gutter ? addUnit(gutter) : 0 }"
       >
         <view v-if="focused && index === modelValue.length" class="wd-password-input__cursor"></view>
         <view v-else :class="`wd-password-input__value`">
@@ -32,16 +32,15 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
 import { addUnit } from '../common/util'
 
 interface Props {
   modelValue: string
-  mask: boolean
-  info: string
-  errorInfo: string
-  gutter: number | string
-  length: number | string
+  mask?: boolean
+  info?: string
+  errorInfo?: string
+  gutter?: number | string
+  length?: number | string
   focused: boolean
 }
 
