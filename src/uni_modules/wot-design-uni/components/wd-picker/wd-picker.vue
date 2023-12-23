@@ -81,7 +81,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
-import { deepClone, defaultDisplayFormat, getType } from '../common/util'
+import { deepClone, defaultDisplayFormat, getType, isDef } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { type ColumnItem, formatArray } from '../wd-picker-view/type'
 
@@ -220,7 +220,7 @@ watch(
   (newValue) => {
     pickerValue.value = newValue
     // 获取初始选中项,并展示初始选中文案
-    if (newValue) {
+    if (isDef(newValue)) {
       if (pickerViewWd.value && pickerViewWd.value.getSelects) {
         nextTick(() => {
           setShowValue(pickerViewWd.value!.getSelects())
