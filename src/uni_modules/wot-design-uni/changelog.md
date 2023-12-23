@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.1.70](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.69...v0.1.70) (2023-12-23)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 picker 的列value为0时回显异常的问题 ([2ba93c3](https://github.com/Moonofweisheng/wot-design-uni/commit/2ba93c328c54c41b6e1e9ead946e9c46e278ebb9)), closes [#155](https://github.com/Moonofweisheng/wot-design-uni/issues/155)
+
 ### [0.1.69](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.68...v0.1.69) (2023-12-13)
 
 
