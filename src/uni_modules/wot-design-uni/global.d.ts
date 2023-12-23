@@ -93,6 +93,7 @@ declare module '@vue/runtime-core' {
     WdCountDown: typeof import('./components/wd-count-down/wd-count-down.vue')['default']
     WdNumberKeyboard: typeof import('./components/wd-number-keyboard/wd-number-keyboard.vue')['default']
     WdGap: typeof import('./components/wd-gap/wd-gap.vue')['default']
+    WdPasswordInput: typeof import('./components/wd-password-input/wd-password-input.vue')['default']
   }
 }
 

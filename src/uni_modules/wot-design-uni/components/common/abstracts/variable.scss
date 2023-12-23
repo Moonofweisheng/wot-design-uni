@@ -864,3 +864,8 @@ $-number-keyboard-title-font-size: var(--wot-number-keyboard-title-font-size, 16
 $-number-keyboard-close-padding: var(--wot-number-keyboard-title-font-size, 0 16px) !default;
 $-number-keyboard-close-color: var(--wot-number-keyboard-close-color, $-color-theme) !default;
 $-number-keyboard-close-font-size: var(--wot-number-keyboard-close-font-size, 14px) !default;
+
+// passwod-input
+$-password-input-color: var(--wd-password-input-color, #323233);
+$-password-input-border-color: var(--wd-password-border-color, #ebedf0);
+$-password-input-background-color: var(--wd-password-input-background-color, #fff);

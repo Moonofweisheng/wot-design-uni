@@ -194,6 +194,10 @@ const list = ref([
       {
         id: 'upload',
         name: 'Upload 上传'
+      },
+      {
+        id: 'passwordInput',
+        name: 'PasswordInput 密码输入框'
       }
     ]
   },

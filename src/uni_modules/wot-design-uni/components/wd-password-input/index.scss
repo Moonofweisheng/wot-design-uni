@@ -1,0 +1,124 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+.wot-theme-dark {
+  @include b(password-input) {
+    @include e(item) {
+      color: $-dark-color;
+      background: $-dark-background2;
+
+      @include when(border) {
+        border-color: $-dark-border-color;
+      }
+    }
+
+    @include e(mask) {
+      background-color: $-dark-color;
+    }
+
+    @include e(cursor) {
+      background-color: $-dark-color;
+    }
+
+    @include e(info) {
+      color: $-dark-color;
+
+      @include when(border) {
+        color: $-dark-color2;
+      }
+    }
+  }
+}
+
+@include b(password-input) {
+  position: relative;
+  margin: 0 16px;
+  user-select: none;
+
+  @include e(security) {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  @include e(item) {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: $-password-input-color;
+    font-size: 20px;
+    line-height: 1.2;
+    background: $-password-input-background-color;
+
+    @include when(border) {
+      border: 1px solid $-password-input-border-color;
+
+      &:not(:last-child) {
+        border-right: none;
+      }
+
+      &:first-child {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+    }
+  }
+
+  @include e(mask) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: $-password-input-color;
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+  }
+
+  @include e(cursor) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 40%;
+    background: $-password-input-color;
+    transform: translate(-50%, -50%);
+    animation: 1s van-cursor-flicker infinite;
+  }
+
+  @include e(info) {
+    margin-top: 16px;
+    font-size: $-fs-content;
+    text-align: center;
+    color: $-color-info;
+
+    @include when(error) {
+      color: $-color-danger;
+    }
+
+  }
+}
+
+@keyframes van-cursor-flicker {
+  from {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
