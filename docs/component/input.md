@@ -2,6 +2,9 @@
 
 #  Input 输入框
 
+::: tip 提示
+`0.2.0`版本已将 `Input` 组件的 `textarea 文本域`功能迁移至 [Textarea](/component/textarea)组件，所有API保持一致。
+:::
 
 ## 基本用法
 
