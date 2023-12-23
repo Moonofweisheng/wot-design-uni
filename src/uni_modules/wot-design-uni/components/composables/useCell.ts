@@ -1,4 +1,4 @@
-import { getCurrentInstance, inject, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { getCurrentInstance, inject, onMounted, onBeforeMount, ref, watch } from 'vue'
 
 export function useCell() {
   const border = ref<boolean>(false) // 是否展示边框
