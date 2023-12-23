@@ -128,10 +128,10 @@ function showToast() {
 <style lang="scss" scoped>
 .cell-icon {
   display: block;
+  box-sizing: border-box;
   width: 16px;
   height: 16px;
-  margin-top: 2px;
-  margin-right: 15px;
+  margin: 4px 4px 4px 0;
   background: url('https://img10.360buyimg.com/jmadvertisement/jfs/t1/71075/7/3762/1820/5d1f26d1E0d600b9e/a264c901943080ac.png') no-repeat;
   background-size: cover;
 }

@@ -24,7 +24,7 @@
       }
     }
 
-    :deep(.wd-cell__arrow-right){
+    :deep(.wd-cell__arrow-right) {
       color: $-dark-color;
     }
   }
@@ -36,7 +36,7 @@
   background-color: $-color-white;
   text-decoration: none;
   color: $-cell-title-color;
-  line-height: $-cell-ling-height;
+  line-height: $-cell-line-height;
   -webkit-tap-highlight-color: transparent;
 
   @include when(border) {
@@ -62,6 +62,10 @@
       .wd-cell__value {
         text-align: left;
       }
+
+      .wd-cell__left {
+        margin-right: 0;
+      }
     }
 
     @include when(label) {
@@ -73,10 +77,9 @@
     position: relative;
     flex: 1;
     display: flex;
-    align-items: center;
-    margin-right: $-cell-padding;
     font-size: $-cell-title-fs;
     box-sizing: border-box;
+    margin-right: $-cell-padding;
 
     @include when(required) {
       padding-left: 12px;
@@ -94,7 +97,6 @@
 
   @include e(right) {
     position: relative;
-    display: flex;
     flex: 1;
   }
 
@@ -102,7 +104,6 @@
     flex: 1;
     width: 100%;
     font-size: $-cell-title-fs;
-    margin-right: $-cell-padding;
   }
 
   @include e(label) {
@@ -115,11 +116,14 @@
   @include edeep(icon) {
     display: block;
     position: relative;
-    width: $-cell-icon-size;
-    height: $-cell-icon-size;
-    line-height: 1.25;
     margin-right: $-cell-icon-right;
     font-size: $-cell-icon-size;
+    height: $-cell-line-height;
+    line-height: $-cell-line-height;
+  }
+
+  @include e(body){
+    display: flex;
   }
 
   @include e(value) {
@@ -128,18 +132,25 @@
     font-size: $-cell-value-fs;
     color: $-cell-value-color;
     text-align: right;
-    line-height: $-cell-value-line-height;
-    vertical-align: top;
+    vertical-align: middle;
   }
 
   @include edeep(arrow-right) {
-    display: inline-block;
+    display: block;
     margin-left: 8px;
     width: $-cell-arrow-size;
-    line-height: 1.22;
     font-size: $-cell-arrow-size;
     color: $-cell-arrow-color;
-    vertical-align: top;
+    height: $-cell-line-height;
+    line-height: $-cell-line-height;
+  }
+
+  @include e(error-message){
+    color: $-form-item-error-message-color;
+    font-size: $-form-item-error-message-font-size;
+    line-height: $-form-item-error-message-line-height;
+    text-align: left;
+    vertical-align: middle;
   }
 
   @include when(link) {
@@ -155,14 +166,17 @@
       font-size: $-cell-title-fs-large;
     }
 
+    .wd-cell__wrapper {
+      padding-top: $-cell-wrapper-padding-large;
+      padding-bottom: $-cell-wrapper-padding-large;
+    }
+
     .wd-cell__label {
       font-size: $-cell-label-fs-large;
     }
 
-    .wd-cell__icon {
+    :deep(.wd-cell__icon) {
       font-size: $-cell-icon-size-large;
-      width: $-cell-icon-size-large;
-      height: $-cell-icon-size-large;
     }
   }
 

@@ -1,14 +1,6 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-08-07 18:49:03
- * @LastEditTime: 2023-10-17 15:14:09
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\components\page-wraper\page-wraper.vue
- * 记得注释
--->
 <template>
   <wd-config-provider :theme="theme">
+    <wd-toast />
     <view class="page-wraper">
       <wd-cell title="切换暗黑" title-width="240px" center v-if="showDarkMode">
         <wd-switch v-model="isDark" />

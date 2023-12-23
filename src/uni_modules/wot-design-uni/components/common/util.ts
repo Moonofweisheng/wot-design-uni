@@ -537,3 +537,19 @@ export function throttle(func: Function, wait: number): Function {
 
   return throttled
 }
+
+/**
+ * 根据属性路径获取对象中的属性值
+ * @param obj 目标对象
+ * @param path 属性路径，可以是字符串或字符串数组
+ * @returns 属性值，如果属性不存在或中间的属性为 null 或 undefined，则返回 undefined
+ */
+export const getPropByPath = (obj: any, path: string): any => {
+  const keys: string[] = path.split('.')
+
+  try {
+    return keys.reduce((acc: any, key: string) => (acc !== undefined && acc !== null ? acc[key] : undefined), obj)
+  } catch (error) {
+    return undefined
+  }
+}

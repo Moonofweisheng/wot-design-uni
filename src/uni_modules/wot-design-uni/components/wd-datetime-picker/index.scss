@@ -3,7 +3,7 @@
 
 .wot-theme-dark {
   @include b(picker) {
-    @include e(field) {
+    @include e(cell) {
       background-color: $-dark-background2;
       color: $-dark-color;
     }
@@ -21,7 +21,7 @@
   
 
     @include when(border) {
-      .wd-picker__field {
+      .wd-picker__cell {
         @include halfPixelBorder('top', $-cell-padding, $-dark-border-color);
       }
     }
@@ -53,17 +53,17 @@
     border-radius: 16px 16px 0px 0px;
   }
 
-  @include e(body) {
+  @include e(wraper) {
     padding-bottom: var(--window-bottom);
   }
 
   @include when(border) {
-    .wd-picker__field {
+    .wd-picker__cell {
       @include halfPixelBorder("top", $-cell-padding);
     }
   }
   @include when(large) {
-    .wd-picker__field {
+    .wd-picker__cell {
       font-size: $-cell-title-fs-large;
     }
     :deep(.wd-picker__arrow) {
@@ -85,17 +85,17 @@
       text-align: right;
     }
   }
-  @include e(field) {
+  @include e(cell) {
     position: relative;
     display: flex;
-    padding: 0 $-cell-padding;
+    padding: $-cell-wrapper-padding $-cell-padding;
     align-items: flex-start;
     background-color: $-color-white;
     text-decoration: none;
     color: $-cell-title-color;
     font-size: $-cell-title-fs;
     overflow: hidden;
-    line-height: $-cell-ling-height;
+    line-height: $-cell-line-height;
 
     @include when(disabled) {
       .wd-picker__value {
@@ -110,10 +110,17 @@
     }
   }
 
+  @include e(error-message){
+    color: $-form-item-error-message-color;
+    font-size: $-form-item-error-message-font-size;
+    line-height: $-form-item-error-message-line-height;
+    text-align: left;
+    vertical-align: middle;
+  }
+
   @include e(label) {
     position: relative;
     width: $-input-cell-label-width;
-    padding: $-cell-wrapper-padding 0;
     margin-right: $-cell-padding;
     color: $-cell-title-color;
     box-sizing: border-box;
@@ -124,7 +131,7 @@
       &::after {
         position: absolute;
         left: 0;
-        top: calc($-cell-wrapper-padding + 2px);
+        top: 2px;
         content: "*";
         font-size: $-cell-required-size;
         line-height: 1.1;
@@ -133,10 +140,12 @@
     }
   }
 
+  @include e(value-wraper) {
+    display: flex;
+  }
+
   @include e(value) {
-    width: 0;
     flex: 1;
-    padding: $-cell-wrapper-padding 0;
     margin-right: 10px;
     color: $-cell-value-color;
     
@@ -145,16 +154,19 @@
     }
   }
 
+  @include e(body) {
+    flex: 1;
+  }
+
   @include e(placeholder) {
     color: $-input-placeholder-color;
   }
 
   @include edeep(arrow) {
     display: block;
-    margin-top: $-cell-wrapper-padding;
     font-size: $-cell-icon-size;
     color: $-cell-arrow-color;
-    line-height: 1.25;
+    line-height: $-cell-line-height;
   }
 
   @include e(toolbar) {

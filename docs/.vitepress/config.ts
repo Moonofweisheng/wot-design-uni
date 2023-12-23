@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-12-07 15:08:32
+ * @LastEditTime: 2023-12-21 22:27:02
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -231,10 +231,13 @@ export default defineConfig({
             text: "DatetimePickerView 时间选择器视图"
           }, {
             link: "/component/form",
-            text: "Form 表单组合"
+            text: "Form 表单"
           }, {
             link: "/component/input",
             text: "Input 输入框"
+          }, {
+            link: "/component/textarea",
+            text: "Textarea 文本域"
           }, {
             link: "/component/input-number",
             text: "InputNumber 计数器"

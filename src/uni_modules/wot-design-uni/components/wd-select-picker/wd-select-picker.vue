@@ -10,20 +10,26 @@
       >
         <view
           v-if="label || useLabelSlot"
-          :class="`wd-select-picker__label ${required && 'is-required'} ${customLabelClass}`"
+          :class="`wd-select-picker__label ${isRequired && 'is-required'} ${customLabelClass}`"
           :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
         >
           <block v-if="label">{{ label }}</block>
           <slot v-else name="label"></slot>
         </view>
-        <view
-          :class="`wd-select-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${
-            showValue ? '' : 'wd-select-picker__value--placeholder'
-          }`"
-        >
-          {{ showValue || placeholder || '请选择' }}
+        <view class="wd-select-picker__body">
+          <view class="wd-select-picker__value-wraper">
+            <view
+              :class="`wd-select-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${
+                showValue ? '' : 'wd-select-picker__value--placeholder'
+              }`"
+            >
+              {{ showValue || placeholder || '请选择' }}
+            </view>
+            <wd-icon v-if="!disabled && !readonly" custom-class="wd-select-picker__arrow" name="arrow-right" />
+          </view>
+
+          <view v-if="errorMessage" class="wd-select-picker__error-message">{{ errorMessage }}</view>
         </view>
-        <wd-icon v-if="!disabled && !readonly" custom-class="wd-select-picker__arrow" name="arrow-right" />
       </view>
     </view>
     <wd-action-sheet
@@ -102,9 +108,11 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, ref, watch, nextTick } from 'vue'
+import { getCurrentInstance, onBeforeMount, ref, watch, nextTick, computed } from 'vue'
 import { useCell } from '../composables/useCell'
 import { getRect, getType, isArray, isDef, requestAnimationFrame } from '../common/util'
+import { useParent } from '../composables/useParent'
+import { FORM_KEY, FormItemRule } from '../wd-form/types'
 
 type SelectPickerType = 'checkbox' | 'radio'
 
@@ -149,6 +157,8 @@ interface Props {
   filterPlaceholder?: string
   ellipsis?: boolean
   scrollIntoView?: boolean
+  prop?: string
+  rules?: FormItemRule[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -181,7 +191,8 @@ const props = withDefaults(defineProps<Props>(), {
   filterable: false,
   filterPlaceholder: '搜索',
   ellipsis: false,
-  scrollIntoView: true
+  scrollIntoView: true,
+  rules: () => []
 })
 
 const pickerShow = ref<boolean>(false)
@@ -248,6 +259,31 @@ watch(
     immediate: true
   }
 )
+
+const { parent: form } = useParent(FORM_KEY)
+
+// 表单校验错误信息
+const errorMessage = computed(() => {
+  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
+    return form.errorMessages[props.prop]
+  } else {
+    return ''
+  }
+})
+
+// 是否展示必填
+const isRequired = computed(() => {
+  let formRequired = false
+  if (form && form.rules) {
+    const rules = form.rules
+    for (const key in rules) {
+      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
+        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
+      }
+    }
+  }
+  return props.required || props.rules.some((rule) => rule.required) || formRequired
+})
 
 onBeforeMount(() => {
   selectList.value = valueFormat(props.modelValue)

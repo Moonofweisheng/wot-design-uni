@@ -35,10 +35,10 @@
 ```scss
 .cell-icon {
   display: block;
+  box-sizing: border-box;
   width: 16px;
   height: 16px;
-  margin-top: 2px;
-  margin-right: 15px;
+  margin-right: 4px;
   background: url('https://img10.360buyimg.com/jmadvertisement/jfs/t1/71075/7/3762/1820/5d1f26d1E0d600b9e/a264c901943080ac.png') no-repeat;
   background-size: cover;
 }
@@ -198,10 +198,11 @@ function handleSwitchChange({ value }) {
 ```scss
 .cell-icon {
   display: block;
+  box-sizing: border-box;
+  padding: 4px 0;
   width: 16px;
-  height: 16px;
-  margin-top: 2px;
-  margin-right: 15px;
+  height: 24px;
+  margin-right: 4px;
   background: url('https://img10.360buyimg.com/jmadvertisement/jfs/t1/71075/7/3762/1820/5d1f26d1E0d600b9e/a264c901943080ac.png') no-repeat;
   background-size: cover;
 }
@@ -251,6 +252,18 @@ function handleSwitchChange({ value }) {
 | center      | 是否垂直居中，默认顶部居中     | boolean | -      | false  | -        |
 | required    | 表单属性，必填                 | boolean | -      | false  | -        |
 | vertical    | 表单属性，上下结构             | boolean | -      | false  | -        |
+| prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
+| rules | 表单验证规则	 | `FormItemRule []`	 | - | `[]` | - |
+
+### FormItemRule 数据结构
+
+| 键名 | 说明 | 类型 |
+| --- | --- | --- |
+| required | 是否为必选字段	 | `boolean` |
+| message | 错误提示文案	 | `string` |
+| validator | 通过函数进行校验，可以返回一个 `Promise` 来进行异步校验 | `(value, rule) => boolean \| Promise` |
+| pattern | 通过正则表达式进行校验，正则无法匹配表示校验不通过 | `RegExp` |
+
 
 ## Cell Events
 

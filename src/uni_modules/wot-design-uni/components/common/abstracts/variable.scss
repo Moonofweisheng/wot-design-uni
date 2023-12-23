@@ -226,7 +226,7 @@ $-button-suck-active-color: var(--wot-button-suck-active-color, $-button-primary
 
 /* cell */
 $-cell-padding: var(--wot-cell-padding, $-size-side-padding) !default; // cell 左右padding距离
-$-cell-ling-height: var(--wot-cell-ling-height, 1.43) !default; // 行高
+$-cell-line-height: var(--wot-cell-line-height, 24px) !default; // 行高
 
 $-cell-group-title-fs: var(--wot-cell-group-title-fs, $-fs-title) !default; // 组标题字号
 $-cell-group-padding: var(--wot-cell-group-padding, 13px $-cell-padding) !default; // 组padding
@@ -234,9 +234,11 @@ $-cell-group-title-color: var(--wot-cell-group-title-color, rgba(0, 0, 0, 0.85))
 $-cell-group-value-fs: var(--wot-cell-group-value-fs, $-fs-content) !default; // 组值字号
 $-cell-group-value-color: var(--wot-cell-group-value-color, $-color-content) !default; // 组值文字颜色
 
-$-cell-wrapper-padding: var(--wot-cell-wrapper-padding, 13px) !default; // cell 容器padding
+$-cell-wrapper-padding: var(--wot-cell-wrapper-padding, 10px) !default; // cell 容器padding
+$-cell-wrapper-padding-large: var(--wot-cell-wrapper-padding-large, 12px) !default; // large类型cell容器padding
+
 $-cell-wrapper-padding-with-label: var(--wot-cell-wrapper-padding-with-label, 16px) !default; // cell 容器上下padding（有label情况下）
-$-cell-icon-right: var(--wot-cell-icon-right, $-cell-padding) !default; // 图标距离右边缘
+$-cell-icon-right: var(--wot-cell-icon-right, 4px) !default; // 图标距离右边缘
 $-cell-icon-size: var(--wot-cell-icon-size, 16px) !default; // 图标大小
 $-cell-title-fs: var(--wot-cell-title-fs, 14px) !default; // 标题字号
 $-cell-title-color: var(--wot-cell-title-color, rgba(0, 0, 0, 0.85)) !default; // 标题文字颜色
@@ -244,7 +246,6 @@ $-cell-label-fs: var(--wot-cell-label-fs, 12px) !default; // 描述信息字号
 $-cell-label-color: var(--wot-cell-label-color, rgba(0, 0, 0, 0.45)) !default; // 描述信息文字颜色
 $-cell-value-fs: var(--wot-cell-value-fs, 14px) !default; // 右侧内容字号
 $-cell-value-color: var(--wot-cell-value-color, rgba(0, 0, 0, 0.85)) !default; // 右侧内容文字颜色
-$-cell-value-line-height: var(--wot-cell-value-line-height, 1.58) !default; // 右侧内容行高
 $-cell-arrow-size: var(--wot-cell-arrow-size, 18px) !default; // 右箭头大小
 $-cell-arrow-color: var(--wot-cell-arrow-color, rgba(0, 0, 0, 0.25)) !default; // 右箭头颜色
 $-cell-tap-bg: var(--wot-cell-tap-bg, rgba(0, 0, 0, 0.06)) !default; // 点击态背景色
@@ -354,8 +355,9 @@ $-input-number-icon-size: var(--wot-input-number-icon-size, 14px) !default; // �
 $-input-number-icon-color: var(--wot-input-number-icon-color, rgba(0, 0, 0, 0.65)) !default; // icon颜色
 
 /* input */
+$-input-padding: var(--wot-input-padding, $-size-side-padding) !default; // input 左右padding距离
 $-input-border-color: var(--wot-input-border-color, #dadada) !default; // 无label边框颜色
-$-input-not-empty-border-color: var(--wot-input-not-empty-border-color, #262626) !default; // 无label边框颜色
+$-input-not-empty-border-color: var(--wot-input-not-empty-border-color, #262626) !default; // 输入框有值时 无label边框颜色
 $-input-fs: var(--wot-input-fs, $-cell-title-fs) !default; // 字号
 $-input-fs-large: var(--wot-input-fs-large, $-cell-title-fs-large) !default; // 大尺寸字号
 $-input-icon-margin: var(--wot-input-icon-margin, 8px) !default; // 图标距离
@@ -367,23 +369,43 @@ $-input-icon-color: var(--wot-input-icon-color, #bfbfbf) !default; // 图标颜�
 $-input-clear-color: var(--wot-input-clear-color, #585858) !default; // 关闭按钮颜色
 $-input-count-color: var(--wot-input-count-color, #bfbfbf) !default; // 计数文字颜色
 $-input-count-current-color: var(--wot-input-count-current-color, #262626) !default; // 当前长度颜色
-$-input-label-padding: var(--wot-input-label-padding, 11px 10px 11px 0) !default; // label padding
 $-input-bg: var(--wot-input-bg, $-color-white) !default; // 默认背景颜色
 
 $-input-cell-bg: var(--wot-input-cell-bg, $-color-white) !default; // cell 类型背景色
 $-input-cell-border-color: var(--wot-input-cell-border-color, $-color-border-light) !default; // cell 类型边框颜色
-$-input-cell-padding: var(--wot-input-cell-padding, $-size-side-padding) !default; // cell 类型左右间距
-$-input-cell-height: var(--wot-input-cell-height, 46px) !default; // cell 高度
-$-input-cell-height-large: var(--wot-input-cell-height-large, 48px) !default; // cell 大尺寸高度
+$-input-cell-padding: var(--wot-input-cell-padding, 10px) !default; // cell 容器padding
+$-input-cell-padding-large: var(--wot-input-cell-padding-large, 12px) !default; // large类型cell容器padding
+$-input-cell-height: var(--wot-input-cell-height, 24px) !default; // cell 高度
 $-input-cell-label-width: var(--wot-input-cell-label-width, 33%) !default; // cell 下 label 的宽度
 $-input-inner-height: var(--wot-input-inner-height, 34px) !default; // 非cell和textarea下的高度
-$-input-inner-height-no-border: var(--wot-input-inner-height-no-border, 20px) !default; // 无边框下的高度
-$-input-inner-padding: var(--wot-input-inner-padding, 6px 0) !default; // 非cell和textarea下的padding
+$-input-inner-height-no-border: var(--wot-input-inner-height-no-border, 24px) !default; // 无边框下的高度
 $-input-count-fs: var(--wot-input-count-fs, 14px) !default; // 计数字号
 $-input-count-fs-large: var(--wot-input-count-fs-large, 14px) !default; // 大尺寸计数字号
 $-input-icon-size: var(--wot-input-icon-size, 16px) !default; // 图标大小
 $-input-icon-size-large: var(--wot-input-icon-size-large, 18px) !default; // 大尺寸图标大小
-$-input-textarea-padding: var(--wot-input-textarea-padding, 15px) !default; // textarea下的padding
+
+/* textarea */
+$-textarea-padding: var(--wot-textarea-padding, $-size-side-padding) !default; // textarea 左右padding距离
+$-textarea-border-color: var(--wot-textarea-border-color, #dadada) !default; // 无label边框颜色
+$-textarea-not-empty-border-color: var(--wot-textarea-not-empty-border-color, #262626) !default; // 输入框有值时 无label边框颜色
+$-textarea-fs: var(--wot-textarea-fs, $-cell-title-fs) !default; // 字号
+$-textarea-fs-large: var(--wot-textarea-fs-large, $-cell-title-fs-large) !default; // 大尺寸字号
+$-textarea-icon-margin: var(--wot-textarea-icon-margin, 8px) !default; // 图标距离
+$-textarea-color: var(--wot-textarea-color, #262626) !default; // 文字颜色
+$-textarea-icon-color: var(--wot-textarea-icon-color, #bfbfbf) !default; // 图标颜色
+$-textarea-clear-color: var(--wot-textarea-clear-color, #585858) !default; // 关闭按钮颜色
+$-textarea-count-color: var(--wot-textarea-count-color, #bfbfbf) !default; // 计数文字颜色
+$-textarea-count-current-color: var(--wot-textarea-count-current-color, #262626) !default; // 当前长度颜色
+$-textarea-bg: var(--wot-textarea-bg, $-color-white) !default; // 默认背景颜色
+
+$-textarea-cell-border-color: var(--wot-textarea-cell-border-color, $-color-border-light) !default; // cell 类型边框颜色
+$-textarea-cell-padding: var(--wot-textarea-cell-padding, 10px) !default; // cell 容器padding
+$-textarea-cell-padding-large: var(--wot-textarea-cell-padding-large, 12px) !default; // large类型cell容器padding
+$-textarea-cell-height: var(--wot-textarea-cell-height, 24px) !default; // cell 高度
+$-textarea-count-fs: var(--wot-textarea-count-fs, 14px) !default; // 计数字号
+$-textarea-count-fs-large: var(--wot-textarea-count-fs-large, 14px) !default; // 大尺寸计数字号
+$-textarea-icon-size: var(--wot-textarea-icon-size, 16px) !default; // 图标大小
+$-textarea-icon-size-large: var(--wot-textarea-icon-size-large, 18px) !default; // 大尺寸图标大小
 
 /* loadmore */
 $-loadmore-height: var(--wot-loadmore-height, 48px) !default; // 高度
@@ -869,3 +891,9 @@ $-number-keyboard-close-font-size: var(--wot-number-keyboard-close-font-size, 14
 $-password-input-color: var(--wd-password-input-color, #323233);
 $-password-input-border-color: var(--wd-password-border-color, #ebedf0);
 $-password-input-background-color: var(--wd-password-input-background-color, #fff);
+// form-item
+$-form-item-error-message-color: var(--wot-form-item-error-message-color, $-color-danger) !default;
+$-form-item-error-message-font-size: var(--wot-form-item-error-message-font-size, $-fs-secondary) !default;
+$-form-item-error-message-line-height: var(--wot-form-item-error-message-line-height, 24px) !default;
+
+

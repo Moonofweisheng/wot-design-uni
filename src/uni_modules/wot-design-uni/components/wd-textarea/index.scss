@@ -1,0 +1,350 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+.wot-theme-dark {
+  @include b(textarea) {
+    background: $-dark-background2;
+
+    &::after {
+      background: $-dark-color-gray;
+    }
+
+    @include when(not-empty) {
+      &:not(.is-disabled) {
+        &::after {
+          background-color: $-dark-color;
+        }
+      }
+    }
+
+    @include e(value) {
+      background: $-dark-background2;
+    }
+
+    @include e(inner) {
+      color: $-dark-color;
+
+      &::-webkit-input-placeholder {
+        color: $-dark-color3;
+      }
+    }
+
+    @include e(placeholder) {
+      color: $-dark-color3;
+    }
+
+    @include e(count) {
+      color: $-dark-color3;
+      background: transparent;
+    }
+
+    @include e(count-current) {
+      color: $-dark-color;
+    }
+
+    :deep(.wd-textarea__icon) {
+      color: $-dark-color;
+      background: transparent;
+    }
+
+    @include when(cell) {
+      background-color: $-dark-background2;
+
+      @include when(border) {
+        @include halfPixelBorder("top", $-textarea-cell-padding, $-dark-border-color);
+      }
+    }
+
+    @include when(disabled) {
+
+      .wd-textarea__inner {
+        color: $-dark-color-gray;
+        background: transparent;
+      }
+    }
+
+
+    @include e(label) {
+      color: $-dark-color;
+    }
+  }
+}
+
+@include b(textarea) {
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+  background: $-textarea-bg;
+  padding: $-textarea-cell-padding $-textarea-padding;
+
+  &::after {
+    position: absolute;
+    display: none;
+    content: "";
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $-textarea-border-color;
+    transform: scaleY(0.5);
+    transition: background-color 0.2s ease-in-out;
+  }
+
+
+
+  @include e(label) {
+    position: relative;
+    width: $-input-cell-label-width;
+    color: $-cell-title-color;
+    margin-right: $-cell-padding;
+    box-sizing: border-box;
+    font-size: $-textarea-fs;
+    flex-shrink: 0;
+
+    @include when(required) {
+      padding-left: 12px;
+
+      &::after {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        content: "*";
+        font-size: $-cell-required-size;
+        line-height: 1.1;
+        color: $-cell-required-color;
+      }
+    }
+  }
+
+  @include e(label-inner) {
+    display: inline-block;
+    line-height: $-cell-line-height;
+    font-size: $-textarea-fs;
+  }
+
+  @include e(prefix) {
+    margin-right: $-textarea-icon-margin;
+    font-size: $-textarea-fs;
+
+    :deep(.wd-textarea__icon) {
+      margin-left: 0;
+    }
+  }
+
+  @include e(suffix) {
+    flex-shrink: 0;
+    margin-left: $-textarea-icon-margin;
+    line-height: initial;
+  }
+
+  @include e(value) {
+    position: relative;
+    padding: 0;
+    font-size: 0;
+    background: $-textarea-bg;
+
+    @include when(show-limit) {
+      padding-bottom: 36px;
+    }
+  }
+
+
+  @include e(inner) {
+    padding: 0;
+    width: 100%;
+    font-size: $-textarea-fs;
+    line-height: $-cell-line-height;
+    color: $-textarea-color;
+    outline: none;
+    box-sizing: border-box;
+    border: none;
+    word-break: break-word;
+
+    &::-webkit-input-placeholder {
+      color: $-input-placeholder-color;
+    }
+
+    @include when(suffix) {
+      padding-right: calc($-textarea-icon-size + 8px);
+    }
+  }
+
+  @include e(suffix) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  @include edeep(icon) {
+    margin-left: $-textarea-icon-margin;
+    font-size: $-textarea-icon-size;
+    color: $-textarea-icon-color;
+    background: $-textarea-bg;
+    vertical-align: middle;
+    line-height: $-cell-line-height;
+  }
+
+  @include edeep(clear) {
+    margin-left: $-textarea-icon-margin;
+    font-size: $-textarea-icon-size;
+    color: $-textarea-clear-color;
+    vertical-align: middle;
+    background: $-textarea-bg;
+    line-height: $-cell-line-height;
+  }
+
+
+  @include e(count) {
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    font-size: $-textarea-count-fs;
+    color: $-textarea-count-color;
+    background: $-textarea-bg;
+    line-height: 20px;
+    display: inline-flex;
+  }
+
+  @include e(count-current) {
+    color: $-textarea-count-current-color;
+
+    @include when(error) {
+      color: $-input-error-color;
+    }
+  }
+
+  @include e(placeholder) {
+    color: $-input-placeholder-color;
+
+    &.is-error {
+      color: $-input-error-color;
+    }
+  }
+
+
+  @include e(readonly-mask) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(error-message){
+    color: $-form-item-error-message-color;
+    font-size: $-form-item-error-message-font-size;
+    line-height: $-form-item-error-message-line-height;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  @include when(not-empty) {
+    &:not(.is-disabled) {
+      &::after {
+        background-color: $-textarea-not-empty-border-color;
+      }
+    }
+  }
+
+  @include when(disabled) {
+
+    .wd-textarea__inner {
+      color: $-input-disabled-color;
+      background: transparent;
+    }
+  }
+
+  @include when(error) {
+
+    .wd-textarea__inner {
+      color: $-input-error-color;
+      background: transparent;
+    }
+  }
+
+  @include when(no-border) {
+    &::after {
+      display: none;
+    }
+  }
+
+  @include when(auto-height) {
+    &:not(.is-cell) {
+      padding: 5px 0;
+    }
+
+    &::after {
+      display: block;
+    }
+  }
+
+  @include when(cell) {
+    display: flex;
+
+    &.is-error::after {
+      background: $-textarea-cell-border-color;
+    }
+
+    .wd-textarea__value {
+      flex: 1;
+    }
+
+    :deep(.wd-textarea__icon) {
+      height: $-textarea-cell-height;
+      line-height: $-textarea-cell-height;
+    }
+
+    .wd-textarea__prefix {
+      display: inline-block;
+      margin-right: $-cell-icon-right;
+    }
+
+    &.wd-textarea::after {
+      display: none;
+    }
+
+
+    .wd-textarea__inner {
+      padding-right: 24px;
+    }
+
+    .wd-textarea__suffix {
+      right: 0;
+    }
+
+    @include when(center) {
+      align-items: center;
+    }
+
+    @include when(border) {
+      @include halfPixelBorder("top", $-textarea-cell-padding);
+    }
+  }
+
+  @include when(large) {
+    padding: $-textarea-cell-padding-large;
+
+    .wd-textarea__prefix {
+      font-size: $-textarea-fs-large;
+    }
+
+    .wd-textarea__label-inner {
+      font-size: $-textarea-fs-large;
+    }
+
+    .wd-textarea__inner {
+      font-size: $-textarea-fs-large;
+    }
+
+    .wd-textarea__count {
+      font-size: $-textarea-count-fs-large;
+    }
+
+    :deep(.wd-textarea__icon),
+    :deep(.wd-textarea__clear) {
+      font-size: $-textarea-icon-size-large;
+    }
+  }
+}

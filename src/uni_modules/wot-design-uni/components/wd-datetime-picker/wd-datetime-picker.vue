@@ -5,28 +5,33 @@
     } ${error ? 'is-error' : ''} ${customClass}`"
   >
     <!--文案-->
-    <view @click="showPopup">
+    <view class="wd-picker__field" @click="showPopup">
       <slot v-if="useDefaultSlot"></slot>
-      <view v-else class="wd-picker__field">
+      <view v-else class="wd-picker__cell">
         <view
           v-if="label || useLabelSlot"
-          :class="`wd-picker__label ${customLabelClass} ${required ? 'is-required' : ''}`"
+          :class="`wd-picker__label ${customLabelClass} ${isRequired ? 'is-required' : ''}`"
           :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
         >
           <block v-if="label">{{ label }}</block>
           <slot v-else name="label"></slot>
         </view>
-        <view :class="`wd-picker__value ${customValueClass}`">
-          <view v-if="region">
-            <text :class="showValue[0] ? '' : 'wd-picker__placeholder'">{{ showValue[0] ? showValue[0] : placeholder }}</text>
-            至
-            <text :class="showValue[1] ? '' : 'wd-picker__placeholder'">{{ showValue[1] ? showValue[1] : placeholder }}</text>
+        <view class="wd-picker__body">
+          <view class="wd-picker__value-wraper">
+            <view :class="`wd-picker__value ${customValueClass}`">
+              <view v-if="region">
+                <text :class="showValue[0] ? '' : 'wd-picker__placeholder'">{{ showValue[0] ? showValue[0] : placeholder }}</text>
+                至
+                <text :class="showValue[1] ? '' : 'wd-picker__placeholder'">{{ showValue[1] ? showValue[1] : placeholder }}</text>
+              </view>
+              <view v-else :class="showValue ? '' : 'wd-picker__placeholder'">
+                {{ showValue ? showValue : placeholder }}
+              </view>
+            </view>
+            <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
           </view>
-          <view v-else :class="showValue ? '' : 'wd-picker__placeholder'">
-            {{ showValue ? showValue : placeholder }}
-          </view>
+          <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
         </view>
-        <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
       </view>
     </view>
     <!--弹出层，picker-view 在隐藏时修改值，会触发多次change事件，从而导致所有列选中第一项，因此picker在关闭时不隐藏 -->
@@ -40,7 +45,7 @@
       @close="onCancel"
       custom-class="wd-picker__popup"
     >
-      <view class="wd-picker__body">
+      <view class="wd-picker__wraper">
         <!--toolBar-->
         <view class="wd-picker__toolbar" @touchmove="noop">
           <!--取消按钮-->
@@ -135,10 +140,12 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { type DateTimeType, getPickerValue } from '../wd-datetime-picker-view/type'
+import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { useParent } from '../composables/useParent'
 interface Props {
   customClass?: string
   customViewClass?: string
@@ -211,6 +218,8 @@ interface Props {
   displayFormatTabLabel?: Function
   defaultValue?: string | number | Date | Array<string | number | Date>
   zIndex?: number
+  prop?: string
+  rules?: FormItemRule[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -262,7 +271,8 @@ const props = withDefaults(defineProps<Props>(), {
   minMinute: 0,
   // 最大分钟
   maxMinute: 59,
-  zIndex: 15
+  zIndex: 15,
+  rules: () => []
 })
 const datetimePickerView = ref()
 const datetimePickerView1 = ref()
@@ -382,6 +392,31 @@ watch(
     immediate: true
   }
 )
+
+const { parent: form } = useParent(FORM_KEY)
+
+// 表单校验错误信息
+const errorMessage = computed(() => {
+  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
+    return form.errorMessages[props.prop]
+  } else {
+    return ''
+  }
+})
+
+// 是否展示必填
+const isRequired = computed(() => {
+  let formRequired = false
+  if (form && form.rules) {
+    const rules = form.rules
+    for (const key in rules) {
+      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
+        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
+      }
+    }
+  }
+  return props.required || props.rules.some((rule) => rule.required) || formRequired
+})
 
 const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
 
