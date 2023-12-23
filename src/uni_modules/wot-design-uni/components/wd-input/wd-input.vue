@@ -1,74 +1,22 @@
 <template>
-  <view :class="rootClass" :style="customStyle">
+  <view :class="rootClass" :style="customStyle" @click="handleClick">
     <view v-if="label || useLabelSlot" :class="labelClass" :style="labelStyle">
       <view v-if="prefixIcon || usePrefixSlot" class="wd-input__prefix">
         <wd-icon v-if="prefixIcon && !usePrefixSlot" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
         <slot v-else name="prefix"></slot>
       </view>
-      <view style="display: inline-flex">
-        <view class="wd-input__label-inner">
-          <template v-if="label">{{ label }}</template>
-          <slot v-else name="label"></slot>
-        </view>
+      <view class="wd-input__label-inner">
+        <template v-if="label">{{ label }}</template>
+        <slot v-else name="label"></slot>
       </view>
-    </view>
-    <!-- 文本域 -->
-    <view v-if="type === 'textarea'" :class="`wd-input__textarea ${customTextareaContainerClass} ${showWordCount ? 'is-show-limit' : ''}`">
-      <!-- readonly -->
-      <view v-if="readonly" class="wd-input__textarea-inner">{{ inputValue }}</view>
-      <template v-else>
-        <textarea
-          :class="`wd-input__textarea-inner ${showClear ? 'is-suffix' : ''} ${customTextareaClass}`"
-          v-model="inputValue"
-          :show-count="false"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          :minlength="minlength"
-          :maxlength="maxlength"
-          :focus="isFocus"
-          :placeholder-style="placeholderStyle"
-          :placeholder-class="inputPlaceholderClass"
-          :auto-height="autoHeight"
-          :cursor-spacing="cursorSpacing"
-          :fixed="fixed"
-          :cursor="cursor"
-          :show-confirm-bar="showConfirmBar"
-          :selection-start="selectionStart"
-          :selection-end="selectionEnd"
-          :adjust-position="adjustPosition"
-          :hold-keyboard="holdKeyboard"
-          @input="handleInput"
-          @focus="handleFocus"
-          @blur="handleBlur"
-          @confirm="handleConfirm"
-          @linechange="handleLineChange"
-          @keyboardheightchange="handleKeyboardheightchange"
-        />
-        <view class="wd-input__textarea-suffix">
-          <wd-icon v-if="showClear" custom-class="wd-input__textarea-icon" name="error-fill" @click="clear" />
-          <view v-if="showWordCount" class="wd-input__textarea-count">
-            <text
-              :class="[
-                inputValue && String(inputValue).length > 0 ? 'wd-input__textarea-count-current' : '',
-                String(inputValue).length > parseInt(String(maxlength)) ? 'is-error' : ''
-              ]"
-            >
-              {{ String(inputValue).length }}
-            </text>
-            /{{ maxlength }}
-          </view>
-        </view>
-      </template>
     </view>
     <!-- 输入域 -->
-    <view v-else class="wd-input__block">
-      <view v-if="(prefixIcon || usePrefixSlot) && !label" class="wd-input__prefix">
-        <wd-icon v-if="prefixIcon" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
-        <slot name="prefix"></slot>
-      </view>
-      <!-- readonly -->
-      <view v-if="readonly" class="wd-input__inner wd-input__readonly">{{ inputValue }}</view>
-      <template v-else>
+    <view class="wd-input__body">
+      <view class="wd-input__value">
+        <view v-if="(prefixIcon || usePrefixSlot) && !label" class="wd-input__prefix">
+          <wd-icon v-if="prefixIcon" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
+          <slot name="prefix"></slot>
+        </view>
         <input
           :class="[
             'wd-input__inner',
@@ -81,9 +29,7 @@
           :password="showPassword && !isPwdVisible"
           v-model="inputValue"
           :placeholder="placeholder"
-          :readonly="readonly"
           :disabled="disabled"
-          :minlength="minlength"
           :maxlength="maxlength"
           :focus="isFocus"
           :confirm-type="confirmType"
@@ -103,6 +49,7 @@
           @confirm="handleConfirm"
           @keyboardheightchange="handleKeyboardheightchange"
         />
+        <view v-if="readonly" class="wd-input__readonly-mask" />
         <view v-if="showClear || showPassword || suffixIcon || showWordCount || useSuffixSlot" class="wd-input__suffix">
           <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="clear" />
           <wd-icon v-if="showPassword" custom-class="wd-input__icon" :name="isPwdVisible ? 'view' : 'eye-close'" @click="togglePwdVisible" />
@@ -120,7 +67,8 @@
           <wd-icon v-if="suffixIcon" custom-class="wd-input__icon" :name="suffixIcon" @click="onClickSuffixIcon" />
           <slot name="suffix"></slot>
         </view>
-      </template>
+      </view>
+      <view v-if="errorMessage" class="wd-input__error-message">{{ errorMessage }}</view>
     </view>
   </view>
 </template>
@@ -140,10 +88,10 @@ export default {
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { objToStyle, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'
+import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { useParent } from '../composables/useParent'
 
 interface Props {
-  customTextareaContainerClass?: string
-  customTextareaClass?: string
   customInputClass?: string
   customLabelClass?: string
   customClass?: string
@@ -152,11 +100,8 @@ interface Props {
   placeholder?: string
   placeholderStyle?: string
   placeholderClass?: string
-  autoHeight?: boolean
-  fixed?: boolean
   cursorSpacing?: number
   cursor?: number
-  showConfirmBar?: boolean
   selectionStart?: number
   selectionEnd?: number
   adjustPosition?: boolean
@@ -167,11 +112,10 @@ interface Props {
   type?: string
   maxlength?: number
   disabled?: boolean
-  alignRight?: boolean
   alwaysEmbed?: boolean
   // 原生属性结束
+  alignRight?: boolean
   modelValue: string | number
-  minlength?: number
   showPassword?: boolean
   clearable?: boolean
   readonly?: boolean
@@ -180,8 +124,6 @@ interface Props {
   prefixIcon?: string
   suffixIcon?: string
   showWordLimit?: boolean
-  suffix?: string
-  suffixCount?: number
   label?: string
   labelWidth?: string
   useLabelSlot?: boolean
@@ -190,11 +132,11 @@ interface Props {
   center?: boolean
   noBorder?: boolean
   required?: boolean
+  prop?: string
+  rules?: FormItemRule[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  customTextareaContainerClass: '',
-  customTextareaClass: '',
   customInputClass: '',
   customLabelClass: '',
   customClass: '',
@@ -203,7 +145,6 @@ const props = withDefaults(defineProps<Props>(), {
   maxlength: -1,
   modelValue: '',
   placeholder: '请输入...',
-  autoHeight: false,
   clearable: false,
   showPassword: false,
   disabled: false,
@@ -215,12 +156,10 @@ const props = withDefaults(defineProps<Props>(), {
   showWordLimit: false,
   confirmType: 'done',
   confirmHold: false,
-  placeholderClass: 'textarea-placeholder',
+  placeholderClass: '',
   focus: false,
   cursorSpacing: 0,
-  fixed: false,
   cursor: -1,
-  showConfirmBar: true,
   selectionStart: -1,
   selectionEnd: -1,
   adjustPosition: true,
@@ -230,7 +169,8 @@ const props = withDefaults(defineProps<Props>(), {
   labelWidth: '33%',
   useLabelSlot: false,
   required: false,
-  noBorder: false
+  noBorder: false,
+  rules: () => []
 })
 
 const showClear = ref<boolean>(false)
@@ -263,18 +203,40 @@ watch(
   { immediate: true, deep: true }
 )
 
+const { parent: form } = useParent(FORM_KEY)
+
+const errorMessage = computed(() => {
+  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
+    return form.errorMessages[props.prop]
+  } else {
+    return ''
+  }
+})
+
+// 是否展示必填
+const isRequired = computed(() => {
+  let formRequired = false
+  if (form && form.rules) {
+    const rules = form.rules
+    for (const key in rules) {
+      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
+        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
+      }
+    }
+  }
+  return props.required || props.rules.some((rule) => rule.required) || formRequired
+})
+
 const rootClass = computed(() => {
-  return `wd-input ${props.type === 'textarea' ? 'is-textarea' : ''} ${props.label || props.useLabelSlot ? 'is-cell' : ''} ${
-    props.center ? 'is-center' : ''
-  } ${cell.border.value ? 'is-border' : ''} ${props.size ? 'is-' + props.size : ''} ${props.error ? 'is-error' : ''} ${
-    props.disabled ? 'is-disabled' : ''
-  } ${props.autoHeight ? 'is-auto-height' : ''} ${inputValue.value && String(inputValue.value).length > 0 ? 'is-not-empty' : ''}  ${
-    props.noBorder ? 'is-no-border' : ''
-  } ${props.customClass}`
+  return `wd-input  ${props.label || props.useLabelSlot ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${
+    cell.border.value ? 'is-border' : ''
+  } ${props.size ? 'is-' + props.size : ''} ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''}  ${
+    inputValue.value && String(inputValue.value).length > 0 ? 'is-not-empty' : ''
+  }  ${props.noBorder ? 'is-no-border' : ''} ${props.customClass}`
 })
 
 const labelClass = computed(() => {
-  return `wd-input__label ${props.customLabelClass} ${props.required ? 'is-required' : ''}`
+  return `wd-input__label ${props.customLabelClass} ${isRequired.value ? 'is-required' : ''}`
 })
 
 const inputPlaceholderClass = computed(() => {
@@ -301,7 +263,8 @@ const emit = defineEmits([
   'confirm',
   'linechange',
   'clicksuffixicon',
-  'clickprefixicon'
+  'clickprefixicon',
+  'click'
 ])
 
 onBeforeMount(() => {
@@ -346,9 +309,7 @@ function handleBlur({ detail }) {
   })
   emit('update:modelValue', inputValue.value)
   emit('blur', {
-    value: inputValue.value,
-    // textarea 有 cursor
-    cursor: detail.cursor ? detail.cursor : null
+    value: inputValue.value
   })
 }
 function handleFocus({ detail }) {
@@ -370,14 +331,14 @@ function handleKeyboardheightchange(event) {
 function handleConfirm({ detail }) {
   emit('confirm', detail)
 }
-function handleLineChange(event) {
-  emit('linechange', event.detail)
-}
 function onClickSuffixIcon() {
   emit('clicksuffixicon')
 }
 function onClickPrefixIcon() {
   emit('clickprefixicon')
+}
+function handleClick(event: MouseEvent) {
+  emit('click', event)
 }
 </script>
 

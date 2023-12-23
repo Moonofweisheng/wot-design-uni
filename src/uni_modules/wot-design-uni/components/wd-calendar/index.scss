@@ -52,13 +52,14 @@
   @include e(cell) {
     position: relative;
     display: flex;
-    padding: 0 $-cell-padding;
+    padding: $-cell-wrapper-padding $-cell-padding;
+    align-items: flex-start;
     background-color: $-color-white;
     text-decoration: none;
     color: $-cell-title-color;
     font-size: $-cell-title-fs;
     overflow: hidden;
-    line-height: $-cell-ling-height;
+    line-height: $-cell-line-height;
   }
 
   @include e(cell) {
@@ -101,11 +102,19 @@
     }
   }
 
+  @include e(error-message){
+    color: $-form-item-error-message-color;
+    font-size: $-form-item-error-message-font-size;
+    line-height: $-form-item-error-message-line-height;
+    text-align: left;
+    vertical-align: middle;
+  }
+
   @include e(label) {
     position: relative;
     width: $-input-cell-label-width;
-    padding: $-cell-wrapper-padding 0;
     margin-right: $-cell-padding;
+    color: $-cell-title-color;
     box-sizing: border-box;
 
     @include when(required) {
@@ -114,7 +123,7 @@
       &::after {
         position: absolute;
         left: 0;
-        top: calc($-cell-wrapper-padding + 2px);
+        top: 2px;
         content: '*';
         font-size: $-cell-required-size;
         line-height: 1.1;
@@ -123,12 +132,14 @@
     }
   }
 
+  @include e(value-wraper) {
+    display: flex;
+  }
+
   @include e(value) {
     flex: 1;
-    padding: $-cell-wrapper-padding 0;
     margin-right: 10px;
     color: $-cell-value-color;
-    white-space: pre-wrap;
 
     @include when(ellipsis) {
       @include lineEllipsis;
@@ -139,12 +150,15 @@
     }
   }
 
+  @include e(body) {
+    flex: 1;
+  }
+
   @include edeep(arrow) {
     display: block;
-    margin-top: $-cell-wrapper-padding;
     font-size: $-cell-icon-size;
     color: $-cell-arrow-color;
-    line-height: 1.25;
+    line-height: $-cell-line-height;
   }
 
   @include e(header) {

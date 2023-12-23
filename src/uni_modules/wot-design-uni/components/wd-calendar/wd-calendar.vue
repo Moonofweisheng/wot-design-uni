@@ -10,18 +10,23 @@
       >
         <view
           v-if="label || useLabelSlot"
-          :class="`wd-calendar__label ${required ? 'is-required' : ''} ${customLabelClass}`"
+          :class="`wd-calendar__label ${isRequired ? 'is-required' : ''} ${customLabelClass}`"
           :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
         >
           <block v-if="label">{{ label }}</block>
           <slot v-else name="label"></slot>
         </view>
-        <view
-          :class="`wd-calendar__value ${ellipsis ? 'is-ellipsis' : ''} ${customValueClass} ${showValue ? '' : 'wd-calendar__value--placeholder'}`"
-        >
-          {{ showValue || placeholder || '请选择' }}
+        <view class="wd-calendar__body">
+          <view class="wd-calendar__value-wraper">
+            <view
+              :class="`wd-calendar__value ${ellipsis ? 'is-ellipsis' : ''} ${customValueClass} ${showValue ? '' : 'wd-calendar__value--placeholder'}`"
+            >
+              {{ showValue || placeholder || '请选择' }}
+            </view>
+            <wd-icon v-if="!disabled && !readonly" custom-class="wd-calendar__arrow" name="arrow-right" />
+          </view>
+          <view v-if="errorMessage" class="wd-calendar__error-message">{{ errorMessage }}</view>
         </view>
-        <wd-icon v-if="!disabled && !readonly" custom-class="wd-calendar__arrow" name="arrow-right" />
       </view>
     </view>
     <wd-action-sheet
@@ -109,9 +114,11 @@ export default {
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { dayjs } from '../common/dayjs'
-import { debounce, deepClone, isArray, isEqual, padZero } from '../common/util'
+import { deepClone, isArray, isEqual, padZero } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
 import { useCell } from '../composables/useCell'
+import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { useParent } from '../composables/useParent'
 
 const defaultDisplayFormat = (value, type) => {
   switch (type) {
@@ -229,6 +236,8 @@ interface Props {
   safeAreaInsetBottom?: boolean
   // eslint-disable-next-line @typescript-eslint/ban-types
   beforeConfirm?: Function
+  prop?: string
+  rules?: FormItemRule[]
 }
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
@@ -255,7 +264,8 @@ const props = withDefaults(defineProps<Props>(), {
   ellipsis: false,
   showTypeSwitch: false,
   shortcuts: () => [],
-  safeAreaInsetBottom: true
+  safeAreaInsetBottom: true,
+  rules: () => []
 })
 
 const pickerShow = ref<boolean>(false)
@@ -328,6 +338,31 @@ watch(
     immediate: true
   }
 )
+
+const { parent: form } = useParent(FORM_KEY)
+
+// 表单校验错误信息
+const errorMessage = computed(() => {
+  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
+    return form.errorMessages[props.prop]
+  } else {
+    return ''
+  }
+})
+
+// 是否展示必填
+const isRequired = computed(() => {
+  let formRequired = false
+  if (form && form.rules) {
+    const rules = form.rules
+    for (const key in rules) {
+      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
+        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
+      }
+    }
+  }
+  return props.required || props.rules.some((rule) => rule.required) || formRequired
+})
 
 const range = computed(() => {
   return (type) => {

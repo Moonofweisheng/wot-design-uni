@@ -69,36 +69,6 @@ function handleChange(event) {
 <wd-input v-model="value" :maxlength="20" show-word-limit @change="handleChange"/>
 ```
 
-## 文本域
-
-设置 `type` 为 'textarea`。
-
-:::warning
-当 `wd-input` 的 `type` 为 'textarea' ，并嵌入 `wd-message-box`、`wd-popup`、`wd-action-sheet` 这类弹层组件时，textarea 的 placeholder 样式会失效，需要手动给 `wd-message-box`、`wd-popup`、`wd-action-sheet` 组件设置 `:lazy-render="false"` 属性，textarea 原生组件在这块实现有些问题，对于页面非立即渲染的 textarea 无法成功设置 placeholder 样式
-:::
-
-```html
-<wd-input type="textarea" v-model="value" placeholder="请输入..." @change="handleChange"/>
-```
-
-设置清空，字数限制。
-
-```html
-<wd-input
-  type="textarea"
-  v-model="value"
-  placeholder="请输入..."
-  :maxlength="120"
-  clearable
-  show-word-limit
-  @change="handleChange"/>
-```
-也可以设置`auto-height`使高度自增加。
-
-```html
-<wd-input v-model="value" auto-height @change="handleChange" clearable/>
-```
-
 ## 设置label标题
 
 设置 `label` 标题，可以和 `cell-group` 组合使用，形成 `cell` 展示类型。可以通过 `label-width` 设置标题宽度，默认为 '33%'。
@@ -143,7 +113,7 @@ function handleChange(event) {
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
-| type | 类型 | string | text / textarea / number / digit / idcard | text | - |
+| type | 类型 | string | text / number / digit / idcard | text | - |
 | v-model |	绑定值 | string / number | - | - | - |
 | placeholder	| 占位文本 |	string | - |	请输入... | - |
 | clearable | 显示清空按钮 | boolean | - | false | - |
@@ -157,17 +127,14 @@ function handleChange(event) {
 | confirm-type | 设置键盘右下角按钮的文字，仅在type='text'时生效 | string | done / go / next / search / send | done | - |
 | confirm-hold | 点击键盘右下角按钮时是否保持键盘不收起	 | Boolean | - | false | - |
 | always-embed	 | 微信小程序原生属性，强制 input 处于同层状态，默认 focus 时 input 会切到非同层状态 (仅在 iOS 下生效)	 | Boolean | - | false | - |
-| placeholderStyle | 原生属，指定 placeholder 的样式，目前仅支持color,font-size和font-weight | string | - | - | - |
-| placeholderClass | textarea指定 placeholder 的样式类 | string | - | textarea-placeholder | - |
+| placeholderStyle | 原生属性，指定 placeholder 的样式，目前仅支持color,font-size和font-weight | string | - | - | - |
+| placeholderClass | 原生属性，指定 placeholder 的样式类 | string | - | - | - |
 | focus | 原生属性，获取焦点 | boolean | - | false | - |
-| cursorSpacing | 原生属性，指定光标与键盘的距离。取textarea距离底部的距离和cursor-spacing指定的距离的最小值作为光标与键盘的距离 | number | - | 0 | - |
-| fixed | textarea原生属性，如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true | boolean | - | false | - |
+| cursorSpacing | 原生属性，指定光标与键盘的距离。取 input 距离底部的距离和cursor-spacing指定的距离的最小值作为光标与键盘的距离 | number | - | 0 | - |
 | cursor | 原生属性，指定focus时的光标位置 | number | - | -1 | - |
-| showConfirmBar | 原生属性，是否显示键盘上方带有”完成“按钮那一栏 | boolean | - | true | - |
 | selectionStart | 原生属性，光标起始位置，自动聚集时有效，需与selection-end搭配使用 | number | - | -1 | - |
 | selectionEnd | 原生属性，光标结束位置，自动聚集时有效，需与selection-start搭配使用 | number | - | -1 | - |
 | adjustPosition | 原生属性，键盘弹起时，是否自动上推页面 | boolean | - | true | - |
-| autoHeight | textarea原生属性，textarea 行数自适应，从1行开始显示 | boolean | - | false | - |
 | label | 设置左侧标题 | string | - | - | - |
 | size | 设置输入框大小 | string | - | - | - |
 | error | 设置输入框错误状态，错误状态时为红色 | boolean | - | false | - |
@@ -177,8 +144,20 @@ function handleChange(event) {
 | use-suffix-slot | 使用 后置图标 插槽 | boolean | - | false | - |
 | use-prefix-slot | 使用 前置图标 插槽 | boolean | - | false | - |
 | required | cell 类型下必填样式 | boolean | - | false | - |
-| name | form 表单中的字段名 | string | - | - | - |
 | no-border | 非 cell 类型下是否隐藏下划线 | boolean | - | false | - | - |
+| prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
+| rules | 表单验证规则	 | `FormItemRule []`	 | - | `[]` | - |
+
+
+### FormItemRule 数据结构
+
+| 键名 | 说明 | 类型 |
+| --- | --- | --- |
+| required | 是否为必选字段	 | `boolean` |
+| message | 错误提示文案	 | `string` |
+| validator | 通过函数进行校验，可以返回一个 `Promise` 来进行异步校验 | `(value, rule) => boolean \| Promise` |
+| pattern | 通过正则表达式进行校验，正则无法匹配表示校验不通过 | `RegExp` |
+
 
 ## Events
 
@@ -186,10 +165,9 @@ function handleChange(event) {
 |---------|-----|-----|---------|
 | input | 监听输入框input事件 | ` {value, cursor, keyCode}` | - |
 | focus | 监听输入框focus事件 | ` { value, height }`, height 为键盘高度 | - |
-| blur | 监听输入框blur事件 | ` { value, cursor }`，仅在type="textarea"时存在cursor | - |
+| blur | 监听输入框blur事件 | ` { value }` | - |
 | change | 监听输入框修改事件 | ` { value }` | - |
 | clear | 监听输入框清空按钮事件 | - | - |
-| linechange | 监听输入框行数变化(仅限textarea) | ` { height: 0, heightRpx: 0, lineCount: 0 }` | - |
 | confirm | 点击完成时， 触发 confirm 事件 | ` { value }` | - |
 | keyboardheightchange | 键盘高度发生变化的时候触发此事件 | ` { height, duration }` | - |
 | clickprefixicon | 点击前置图标时触发 | - | - |
@@ -211,7 +189,5 @@ function handleChange(event) {
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
 | custom-class | 根节点样式 | - |
-| custom-textarea-container-class | textarea 容器外部自定义样式 | - |
-| custom-textarea-class | textarea 外部自定义样式 | - |
 | custom-input-class | input 外部自定义样式 | - |
 | custom-label-class | label 外部自定义样式 | - |

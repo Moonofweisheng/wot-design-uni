@@ -1,6 +1,18 @@
 <template>
   <page-wraper>
     <wd-toast />
+    <view class="main">
+      <wd-tabs v-model="tab1" @change="handleChange">
+        <block v-for="item in 4" :key="item">
+          <wd-tab :title="`标签${item}`">
+            <view class="content">
+              内容{{ tab1 + 1 }}
+              <wd-button @click="tab1 < 3 ? tab1++ : (tab1 = 0)">下一个</wd-button>
+            </view>
+          </wd-tab>
+        </block>
+      </wd-tabs>
+    </view>
     <demo-block title="基本用法" transparent>
       <wd-tabs v-model="tab1" @change="handleChange">
         <block v-for="item in 4" :key="item">
@@ -128,5 +140,9 @@ function handleChange(event) {
 .large {
   line-height: 320px;
   text-align: center;
+}
+.main {
+  :deep(.wd-tabs) {
+  }
 }
 </style>

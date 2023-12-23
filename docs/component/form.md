@@ -1,141 +1,727 @@
 <frame/>
 
-#  Form 表单组合
+# Form 表单 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.0</el-tag>
 
-本章节主要讲如何将多个 form 表单组件进行组合，形成一个完整的表单页面。
+用于数据录入、校验，支持输入框、单选框、复选框、文件上传等类型，常见的 form 表单为`单元格`形式的展示，即左侧为表单的标题描述，右侧为表单的输入。
 
-常见的 form 表单为`单元格`形式的展示，即左侧为表单的标题描述，右侧为表单的输入。
+其中，`Input 输入框`、`Textarea 输入框`、`Picker 选择器`、 `Calendar 日历选择器`、 `ColPicker 多列选择器`、`SelectPicker 单复选选择器`、`Cell 单元格` 和 `DatetimePicker 日期时间选择器`具有`单元格`的展示形式，同时也支持 `prop` 和 `rules` 属性，我们称之为`表单项组件`，而 `InputNumber 计数器` 、 `Switch 开关` 和 `Upload 上传` 等组件则需要使用 `Cell 单元格` 进行包裹使用。
 
-其中，`Input 输入框`、`Picker 选择器`、 `Calendar 日历选择器`, `ColPicker 多列选择器`、`SelectPicker 单复选选择器` 和 `DatetimePicker 日期时间选择器`具有`单元格`的展示形式，而 `InputNumber 计数器`和 `Switch 开关`需要使用 `Cell 单元格`进行包裹使用。
+结合 `wd-form` 组件，可以实现对以上组件的规则校验。
 
-所有的表单组件都支持 `name` 属性，可以结合小程序原生的 `form` 组件，监听 `submit` 事件，统一获取到所有表单组件的 `value`，也可以单独对每个表单组件监听 `change` 事件来获取单个表单组件的 `value`。
+> 对于表单组件，建议对 wd-cell-group 开启 border 属性，这样每条 cell 就会有边框线隔离开，这样表单的划分比较清晰。
 
-> 对于表单组件，建议对 wd-cell-group 开启 border 属性，这样每条cell就会有边框线隔离开，这样表单的划分比较清晰。
+## 基础用法
 
-下面是 Demo 示例：
+在表单中，使用 `model` 指定表单数据对象，每个 `表单项组件` 代表一个表单项，使用 `prop` 指定表单项字段 ，使用 `rules` 属性定义校验规则。
 
-html 文件代码：
+::: details 查看基础用法示例
+::: code-group
 
-```html
+```html [vue]
+<wd-form ref="form" :model="model">
+  <wd-cell-group border>
+    <wd-input
+      label="用户名"
+      label-width="100px"
+      prop="value1"
+      clearable
+      v-model="model.value1"
+      placeholder="请输入用户名"
+      :rules="[{ required: true, message: '请填写用户名' }]"
+    />
+    <wd-input
+      label="密码"
+      label-width="100px"
+      prop="value2"
+      show-password
+      clearable
+      v-model="model.value2"
+      placeholder="请输入密码"
+      :rules="[{ required: true, message: '请填写密码' }]"
+    />
+  </wd-cell-group>
+  <view class="footer">
+    <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
+  </view>
+</wd-form>
+```
+
+```typescript [typescript]
+<script lang="ts" setup>
+const { success: showSuccess } = useToast()
+
+const model = reactive<{
+  value1: string
+  value2: string
+}>({
+  value1: '',
+  value2: ''
+})
+
+const form = ref()
+
+function handleSubmit1() {
+  form.value
+    .validate()
+    .then(({ valid, errors }) => {
+      if (valid) {
+        showSuccess({
+          msg: '校验通过'
+        })
+      }
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+    })
+}
+</script>
+```
+
+```css [css]
+.footer {
+  padding: 12px;
+}
+```
+
+:::
+
+## 校验规则
+
+本章节演示四种自定义校验及提示规则：`正则校验`、`函数校验`、`函数返回错误提示`和`异步函数校验`。
+
+::: details 查看校验规则示例
+::: code-group
+
+```html [vue]
+<wd-form ref="form2" :model="model">
+  <wd-cell-group border>
+    <wd-input
+      label="校验"
+      label-width="100px"
+      prop="value1"
+      clearable
+      v-model="model.value1"
+      placeholder="正则校验"
+      :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+    />
+    <wd-input
+      label="校验"
+      label-width="100px"
+      prop="value2"
+      clearable
+      v-model="model.value2"
+      placeholder="函数校验"
+      :rules="[
+              {
+                required: false,
+                validator: validatorMessage,
+                message: '请输入正确的手机号'
+              }
+            ]"
+    />
+    <wd-input
+      label="校验"
+      label-width="100px"
+      prop="value3"
+      clearable
+      v-model="model.value3"
+      placeholder="校验函数返回错误提示"
+      :rules="[
+              {
+                required: false,
+                message: '请输入内容',
+                validator: validator
+              }
+            ]"
+    />
+    <wd-input
+      label="校验"
+      label-width="100px"
+      prop="value4"
+      clearable
+      v-model="model.value4"
+      placeholder="异步函数校验"
+      :rules="[{ required: false, validator: asyncValidator, message: '请输入1234' }]"
+    />
+  </wd-cell-group>
+  <view class="footer">
+    <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
+  </view>
+</wd-form>
+```
+
+```typescript [typescript]
+<script lang="ts" setup>
+const model = reactive<{
+  value1: string
+  value2: string
+  value3: string
+  value4: string
+}>({
+  value1: '',
+  value2: '',
+  value3: '',
+  value4: ''
+})
+
+const { success: showSuccess } = useToast()
+
+const form = ref()
+
+const validatorMessage = (val) => {
+  return /1\d{10}/.test(val)
+}
+
+const validator = (val) => {
+  if (String(val).length >= 4) {
+    return Promise.resolve()
+  } else {
+    return Promise.reject('长度不得小于4')
+  }
+}
+
+// 校验函数可以返回 Promise，实现异步校验
+const asyncValidator = (val) =>
+  new Promise((resolve) => {
+    showLoading('验证中...')
+
+    setTimeout(() => {
+      closeToast()
+      resolve(val === '1234')
+    }, 1000)
+  })
+
+function handleSubmit() {
+  form.value
+    .validate()
+    .then(({ valid, errors }) => {
+      if (valid) {
+        showSuccess({
+          msg: '提交成功'
+        })
+      }
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+    })
+}
+</script>
+```
+
+```css [css]
+.footer {
+  padding: 12px;
+}
+```
+
+:::
+
+## 动态表单
+
+表单项动态增减。
+
+::: details 查看动态表单示例
+::: code-group
+
+```html [vue]
+<wd-form ref="form" :model="model">
+  <wd-cell-group border>
+    <wd-input
+      label="用户名"
+      label-width="100px"
+      prop="name"
+      clearable
+      v-model="model.name"
+      placeholder="请输入用户名"
+      :rules="[{ required: true, message: '请填写用户名' }]"
+    />
+    <wd-input
+      v-for="(item, index) in model.phoneNumbers"
+      :key="item.key"
+      :label="'联系方式' + index"
+      :prop="'phoneNumbers.' + index + '.value'"
+      label-width="100px"
+      clearable
+      v-model="item.value"
+      placeholder="联系方式"
+      :rules="[{ required: true, message: '请填写联系方式' + index }]"
+    />
+
+    <wd-cell title-width="0px">
+      <view class="footer">
+        <wd-button size="small" type="info" plain @click="addPhone">添加</wd-button>
+        <wd-button size="small" type="info" plain @click="removePhone">删除</wd-button>
+        <wd-button size="small" type="info" plain @click="reset">重置</wd-button>
+        <wd-button type="primary" size="small" @click="submit">提交</wd-button>
+      </view>
+    </wd-cell>
+  </wd-cell-group>
+</wd-form>
+```
+
+```typescript [typescript]
+<script lang="ts" setup>
+import { useToast } from '@/uni_modules/wot-design-uni'
+import { reactive, ref } from 'vue'
+
+interface PhoneItem {
+  key: number
+  value: string
+}
+
+const model = reactive<{
+  name: string
+  phoneNumbers: PhoneItem[]
+}>({
+  name: '',
+  phoneNumbers: [
+    {
+      key: Date.now(),
+      value: ''
+    }
+  ]
+})
+
+const { success: showSuccess } = useToast()
+const form = ref()
+
+const removePhone = () => {
+  model.phoneNumbers.splice(model.phoneNumbers.length - 1, 1)
+}
+
+const addPhone = () => {
+  model.phoneNumbers.push({
+    key: Date.now(),
+    value: ''
+  })
+}
+
+const reset = () => {
+  form.value.reset()
+}
+
+const submit = () => {
+  form.value.validate().then(({ valid, errors }) => {
+    if (valid) {
+      showSuccess('校验通过')
+    }
+  })
+}
+</script>
+```
+
+```css [css]
+.footer {
+  text-align: left;
+  :deep(.wd-button) {
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+  }
+}
+```
+
+:::
+
+## 指定字段校验
+
+`validate` 方法可以传入一个 `prop` 参数，指定校验的字段，可以实现在表单组件的`blur`、`change`等事件触发时对该字段的校验。
+
+::: details 查看指定字段校验示例
+::: code-group
+
+```html [vue]
+<wd-form ref="form" :model="model">
+  <wd-cell-group border>
+    <wd-input
+      label="用户名"
+      label-width="100px"
+      prop="name"
+      clearable
+      v-model="model.name"
+      placeholder="请输入用户名"
+      @blur="handleBlur('name')"
+      :rules="[{ required: true, message: '请填写用户名' }]"
+    />
+    <wd-input
+      label="联系方式"
+      prop="phoneNumber"
+      label-width="100px"
+      clearable
+      @blur="handleBlur('phoneNumber')"
+      v-model="model.phoneNumber"
+      placeholder="联系方式"
+      :rules="[{ required: true, message: '请填写联系方式' }]"
+    />
+  </wd-cell-group>
+</wd-form>
+
+<view class="footer">
+  <wd-button type="primary" size="large" block @click="handleSubmit">提交</wd-button>
+</view>
+```
+
+```typescript [typescript]
+<script lang="ts" setup>
+import { useToast } from '@/uni_modules/wot-design-uni'
+import { reactive, ref } from 'vue'
+
+const model = reactive<{
+  name: string
+  phoneNumber: string
+}>({
+  name: '',
+  phoneNumber: ''
+})
+
+const { success: showSuccess } = useToast()
+const form = ref()
+
+function handleBlur(prop: string) {
+  form.value.validate(prop)
+}
+
+function handleSubmit() {
+  form.value
+    .validate()
+    .then(({ valid }) => {
+      if (valid) {
+        showSuccess('校验通过')
+      }
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+    })
+}
+</script>
+```
+
+```css [css]
+.footer {
+  padding: 12px;
+}
+```
+
+:::
+
+## 复杂表单
+
+结合`Input 输入框`、`Textarea 输入框`、`Picker 选择器`、 `Calendar 日历选择器`、 `ColPicker 多列选择器`、`SelectPicker 单复选选择器`、`Cell 单元格` 和 `DatetimePicker 日期时间选择器`实现一个复杂表单。
+
+::: details 查看复杂表单示例
+::: code-group
+
+```html [vue]
+<view>
   <wd-message-box />
   <wd-toast />
-  <form @submit="formSubmit">
+  <wd-form ref="form" :model="model" :rules="rules">
     <wd-cell-group custom-class="group" title="基础信息" border>
       <wd-input
         label="优惠券名称"
         label-width="100px"
         :maxlength="20"
         show-word-limit
-        name="couponName"
+        prop="couponName"
         required
         suffix-icon="warn-bold"
         clearable
-        v-model="couponName"
+        v-model="model.couponName"
         placeholder="请输入优惠券名称"
-        @change="handleCouponName"
         @clicksuffixicon="handleIconClick"
       />
       <wd-select-picker
         label="推广平台"
         label-width="100px"
-        name="platform"
-        v-model="platform"
+        prop="platform"
+        v-model="model.platform"
         :columns="platformList"
         placeholder="请选择推广平台"
-        @confirm="handlePlatform"
       />
-      <wd-picker label="优惠方式" label-width="100px" name="promotion" align-right v-model="promotion" :columns="promotionlist" />
-      <wd-cell title="券面额" required title-width="100px" custom-value-class="cell-left">
+      <wd-picker
+        label="优惠方式"
+        placeholder="请选择优惠方式"
+        label-width="100px"
+        prop="promotion"
+        v-model="model.promotion"
+        :columns="promotionlist"
+      />
+      <wd-cell prop="threshold" title="券面额" required title-width="100px" custom-value-class="cell-left">
         <view style="text-align: left">
           <view class="inline-txt" style="margin-left: 0">满</view>
           <wd-input
             no-border
             custom-style="display: inline-block; width: 70px; vertical-align: middle"
             placeholder="请输入金额"
-            v-model="threshold"
-            name="threshold"
-            @change="handleThreshold"
+            v-model="model.threshold"
           />
           <view class="inline-txt">减</view>
           <wd-input
             no-border
             custom-style="display: inline-block; width: 70px; vertical-align: middle"
             placeholder="请输入金额"
-            v-model="price"
-            name="price"
-            @change="handlePrice"
+            v-model="model.price"
           />
         </view>
       </wd-cell>
     </wd-cell-group>
     <wd-cell-group custom-class="group" title="时间和地址" border>
-      <wd-datetime-picker label="时间" label-width="100px" name="date" v-model="date" @confirm="handleDate" />
+      <wd-datetime-picker label="时间" label-width="100px" placeholder="请选择时间" prop="time" v-model="model.time" />
+      <wd-calendar label="日期" label-width="100px" placeholder="请选择日期" prop="date" v-model="model.date" />
+
       <wd-col-picker
         label="地址"
+        placeholder="请选择地址"
         label-width="100px"
-        name="address"
-        v-model="address"
+        prop="address"
+        v-model="model.address"
         :columns="area"
         :column-change="areaChange"
-        @confirm="handleAddress"
       />
     </wd-cell-group>
     <wd-cell-group custom-class="group" title="其他信息" border>
-      <wd-input
+      <wd-textarea
         label="活动细则"
         label-width="100px"
         type="textarea"
-        v-model="content"
+        v-model="model.content"
         :maxlength="300"
         show-word-limit
         placeholder="请输入活动细则信息"
         clearable
-        name="content"
-        @change="handleContent"
+        prop="content"
       />
-      <wd-cell title="发货数量" center>
-        <wd-input-number v-model="count" name="count" @change="handleCount" />
+      <wd-cell title="发货数量" title-width="100px" prop="count">
+        <view style="text-align: left">
+          <wd-input-number v-model="model.count" />
+        </view>
       </wd-cell>
-      <wd-cell title="这里显示的是多文字标题包含非常的文字" title-width="240px" center>
-        <wd-switch v-model="switchVal" name="switchVal" @change="handleSwitch" />
+      <wd-cell title="开启折扣" title-width="100px" prop="switchVal" center>
+        <view style="text-align: left">
+          <wd-switch v-model="model.switchVal" />
+        </view>
       </wd-cell>
-      <wd-input
-        label="卡号"
-        label-width="100px"
-        name="cardId"
-        suffix-icon="camera"
-        placeholder="请输入卡号"
-        clearable
-        v-model="cardId"
-        @change="handleCardId"
-      />
-      <wd-input label="手机号" label-width="100px" name="phone" placeholder="请输入手机号" clearable v-model="phone" @change="handlePhone" />
+      <wd-input label="卡号" label-width="100px" prop="cardId" suffix-icon="camera" placeholder="请输入卡号" clearable v-model="model.cardId" />
+      <wd-input label="手机号" label-width="100px" prop="phone" placeholder="请输入手机号" clearable v-model="model.phone" />
+      <wd-cell title="活动图片" title-width="100px" prop="fileList">
+        <wd-upload :file-list="model.fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleFileChange"></wd-upload>
+      </wd-cell>
     </wd-cell-group>
     <view class="tip">
-      <wd-checkbox v-model="read" name="read" @change="handleRead" custom-label-class="label-class">
+      <wd-checkbox v-model="model.read" prop="read" custom-label-class="label-class">
         已阅读并同意
         <text style="color: #4d80f0">《借款额度合同及相关授权》</text>
       </wd-checkbox>
     </view>
     <view class="footer">
-      <button class="wd-button is-primary is-block is-round is-large" form-type="submit">提交</button>
+      <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
     </view>
-  </form>
+  </wd-form>
+</view>
 ```
 
-> 自定义按钮组件的 form-type 无法触发小程序官方form组件的submit事件，微信要求小程序基础库 2.10.3 才支持，京东小程序的则暂时不支持，因此需要用小程序自带的官方 button 组件，样式上可以引入 wot-design 中 button 的样式文件，使用 `wd-button` , `is-primary` , `is-suck` , `is-block`, `is-plain` , `is-disabled` 等类名进行组合使用来展示 wot-design 组件库的按钮样式。
-
-index.js 文件代码：
-
-```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-box'
+```typescript [typescript]
+<script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
+import { FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import { areaData } from '@/utils/area'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
-const couponName = ref<string>('')
-const couponNameErr = ref<boolean>(false)
-const platform = ref<any>([])
+const model = reactive<{
+  couponName: string
+  platform: any[]
+  promotion: string
+  threshold: string
+  price: string
+  time: number | string
+  date: null | number
+  address: string[]
+  count: number
+  content: string
+  switchVal: boolean
+  cardId: string
+  phone: string
+  read: boolean
+  fileList: Record<string, string>[]
+}>({
+  couponName: '',
+  platform: [],
+  promotion: '',
+  threshold: '',
+  price: '',
+  date: null,
+  time: '',
+  address: [],
+  count: 1,
+  content: '',
+  switchVal: true,
+  cardId: '',
+  phone: '',
+  read: false,
+  fileList: []
+})
+
+const rules: FormRules = {
+  couponName: [
+    {
+      required: true,
+      pattern: /\d{6}/,
+      message: '优惠券名称6个字以上',
+      validator: (value) => {
+        if (value) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject('请输入优惠券名称')
+        }
+      }
+    }
+  ],
+  content: [
+    {
+      required: true,
+      message: '请输入活动细则信息',
+      validator: (value) => {
+        if (value && value.length > 2) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject('请输入活动细则信息')
+        }
+      }
+    }
+  ],
+  threshold: [
+    {
+      required: true,
+      message: '请输入满减金额',
+      validator: (value) => {
+        if (value && model.price) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject()
+        }
+      }
+    }
+  ],
+  platform: [
+    {
+      required: true,
+      message: '请选择推广平台',
+      validator: (value) => {
+        if (value && isArray(value) && value.length) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject('请选择推广平台')
+        }
+      }
+    }
+  ],
+  promotion: [
+    {
+      required: true,
+      message: '请选择推广平台',
+      validator: (value) => {
+        if (value) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject('请选择推广平台')
+        }
+      }
+    }
+  ],
+  time: [
+    {
+      required: true,
+      message: '请选择时间',
+      validator: (value) => {
+        if (value) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject('请选择时间')
+        }
+      }
+    }
+  ],
+  date: [
+    {
+      required: true,
+      message: '请选择日期',
+      validator: (value) => {
+        if (value) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject()
+        }
+      }
+    }
+  ],
+  address: [
+    {
+      required: true,
+      message: '请选择地址',
+      validator: (value) => {
+        if (isArray(value) && value.length) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject('请选择地址')
+        }
+      }
+    }
+  ],
+  count: [
+    {
+      required: true,
+      message: '发货数量需要大于1',
+      validator: (value) => {
+        if (Number(value) > 1) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject('发货数量需要大于1')
+        }
+      }
+    }
+  ],
+  cardId: [
+    {
+      required: true,
+      message: '请输入卡号',
+      validator: (value) => {
+        if (value) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject('请输入卡号')
+        }
+      }
+    }
+  ],
+  phone: [
+    {
+      required: true,
+      message: '请输入手机号',
+      validator: (value) => {
+        if (value) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject()
+        }
+      }
+    }
+  ],
+  fileList: [
+    {
+      required: true,
+      message: '请选择活动图片',
+      validator: (value) => {
+        if (isArray(value) && value.length) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject()
+        }
+      }
+    }
+  ]
+}
+
 const platformList = ref<any>([
   {
     value: '1',
@@ -166,7 +752,6 @@ const platformList = ref<any>([
     label: '京东极速版'
   }
 ])
-const promotion = ref<string>('1')
 const promotionlist = ref<any[]>([
   {
     value: '1',
@@ -177,12 +762,6 @@ const promotionlist = ref<any[]>([
     label: '无门槛'
   }
 ])
-const threshold = ref<string>('')
-const price = ref<string>('')
-const date = ref<number>(Date.now())
-const address = ref<any[]>([])
-
-const count = ref<number>(1)
 
 const area = ref<any[]>([
   Object.keys(areaData[86]).map((key) => {
@@ -206,69 +785,32 @@ const areaChange = ({ selectedItem, resolve, finish }) => {
     finish()
   }
 }
-const content = ref<string>('')
-const coun = ref<number>(1)
-const read = ref<boolean>(false)
-const switchVal = ref<boolean>(true)
-const cardId = ref<string>('')
-const phone = ref<string>('')
-
 const toast = useToast()
-const messageBox = useMessage()
+const form = ref()
 
-function handleCouponName({ value }) {
-  console.log(value)
+function handleFileChange({ fileList }) {
+  model.fileList = fileList
+}
 
-  couponNameErr.value = false
+function handleSubmit() {
+  form.value
+    .validate()
+    .then(({ valid, errors }) => {
+      console.log(valid)
+      console.log(errors)
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+    })
 }
-function handlePlatform({ value }) {
-  console.log(value)
-}
-function handleThreshold({ value }) {
-  console.log(value)
-}
-function handlePrice({ value }) {
-  console.log(value)
-}
-function handleAddress({ value }) {
-  console.log(value)
-}
-function handleContent({ value }) {
-  console.log(value)
-}
-function handleCount({ value }) {
-  console.log(value)
-}
-function handleSwitch({ value }) {
-  console.log(value)
-}
-function handleRead({ value }) {
-  read.value = value
-}
-function handleCardId({ value }) {
-  console.log(value)
-}
-function handlePhone({ value }) {
-  console.log(value)
-}
-function formSubmit() {
-  if (!couponName.value) {
-    toast.error('请填写优惠券名称')
-    return
-  }
-  messageBox.alert('提交成功')
-}
+
 function handleIconClick() {
   toast.info('优惠券提示信息')
 }
-function handleDate({ value }) {
-  console.log(value)
-}
+</script>
 ```
 
-css 文件代码：
-
-```scss
+```css [css]
 .inline-txt {
   display: inline-block;
   font-size: 14px;
@@ -292,3 +834,34 @@ css 文件代码：
   font-size: 12px !important;
 }
 ```
+
+:::
+
+## Attributes
+
+| 参数  | 说明         | 类型                  | 可选值 | 默认值 | 最低版本 |
+| ----- | ------------ | --------------------- | ------ | ------ | -------- |
+| model | 表单数据对象 | `Record<string, any>` | -      | -      | 0.2.0    |
+| rules | 表单验证规则 | `FormRules`           | -      | -      | 0.2.0    |
+
+### FormItemRule 数据结构
+
+| 键名      | 说明                                                    | 类型                                  |
+| --------- | ------------------------------------------------------- | ------------------------------------- |
+| required  | 是否为必选字段                                          | `boolean`                             |
+| message   | 错误提示文案                                            | `string`                              |
+| validator | 通过函数进行校验，可以返回一个 `Promise` 来进行异步校验 | `(value, rule) => boolean \| Promise` |
+| pattern   | 通过正则表达式进行校验，正则无法匹配表示校验不通过      | `RegExp`                              |
+
+## Events
+
+| 事件名称 | 说明                                                                           | 参数            | 最低版本 |
+| -------- | ------------------------------------------------------------------------------ | --------------- | -------- |
+| validate | 验证表单，支持传入一个 prop 来验证单个表单项，不传入 prop 时，会验证所有表单项 | `prop?: string` | 0.2.0    |
+| reset    | 重置校验结果                                                                   | -               | 0.2.0    |
+
+## 外部样式类
+
+| 类名         | 说明       | 最低版本 |
+| ------------ | ---------- | -------- |
+| custom-class | 根节点样式 | 0.2.0    |

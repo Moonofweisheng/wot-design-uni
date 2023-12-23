@@ -1,279 +1,211 @@
 <template>
-  <view>
-    <page-wraper>
-      <wd-message-box />
-      <wd-toast />
-      <form @submit="formSubmit">
-        <wd-cell-group custom-class="group" title="基础信息" border>
+  <page-wraper>
+    <demo-block title="基础表单" transparent>
+      <wd-form ref="form1" :model="model1">
+        <wd-cell-group border>
           <wd-input
-            label="优惠券名称"
+            label="用户名"
             label-width="100px"
-            :maxlength="20"
-            show-word-limit
-            name="couponName"
-            required
-            suffix-icon="warn-bold"
+            prop="value1"
             clearable
-            v-model="couponName"
-            placeholder="请输入优惠券名称"
-            @change="handleCouponName"
-            @clicksuffixicon="handleIconClick"
+            v-model="model1.value1"
+            placeholder="请输入用户名"
+            :rules="[{ required: true, message: '请填写用户名' }]"
           />
-          <wd-select-picker
-            label="推广平台"
+          <wd-input
+            label="密码"
             label-width="100px"
-            name="platform"
-            v-model="platform"
-            :columns="platformList"
-            placeholder="请选择推广平台"
-            @confirm="handlePlatform"
-          />
-          <wd-picker label="优惠方式" label-width="100px" name="promotion" align-right v-model="promotion" :columns="promotionlist" />
-          <wd-cell title="券面额" required title-width="100px" custom-value-class="cell-left">
-            <view style="text-align: left">
-              <view class="inline-txt" style="margin-left: 0">满</view>
-              <wd-input
-                no-border
-                custom-style="display: inline-block; width: 70px; vertical-align: middle"
-                placeholder="请输入金额"
-                v-model="threshold"
-                name="threshold"
-                @change="handleThreshold"
-              />
-              <view class="inline-txt">减</view>
-              <wd-input
-                no-border
-                custom-style="display: inline-block; width: 70px; vertical-align: middle"
-                placeholder="请输入金额"
-                v-model="price"
-                name="price"
-                @change="handlePrice"
-              />
-            </view>
-          </wd-cell>
-        </wd-cell-group>
-        <wd-cell-group custom-class="group" title="时间和地址" border>
-          <wd-datetime-picker label="时间" label-width="100px" name="date" v-model="date" @confirm="handleDate" />
-          <wd-col-picker
-            label="地址"
-            label-width="100px"
-            name="address"
-            v-model="address"
-            :columns="area"
-            :column-change="areaChange"
-            @confirm="handleAddress"
+            prop="value2"
+            show-password
+            clearable
+            v-model="model1.value2"
+            placeholder="请输入密码"
+            :rules="[{ required: true, message: '请填写密码' }]"
           />
         </wd-cell-group>
-        <wd-cell-group custom-class="group" title="其他信息" border>
-          <wd-input
-            label="活动细则"
-            label-width="100px"
-            type="textarea"
-            v-model="content"
-            :maxlength="300"
-            show-word-limit
-            placeholder="请输入活动细则信息"
-            clearable
-            name="content"
-            @change="handleContent"
-          />
-          <wd-cell title="发货数量" center>
-            <wd-input-number v-model="count" name="count" @change="handleCount" />
-          </wd-cell>
-          <wd-cell title="这里显示的是多文字标题包含非常的文字" title-width="240px" center>
-            <wd-switch v-model="switchVal" name="switchVal" @change="handleSwitch" />
-          </wd-cell>
-          <wd-input
-            label="卡号"
-            label-width="100px"
-            name="cardId"
-            suffix-icon="camera"
-            placeholder="请输入卡号"
-            clearable
-            v-model="cardId"
-            @change="handleCardId"
-          />
-          <wd-input label="手机号" label-width="100px" name="phone" placeholder="请输入手机号" clearable v-model="phone" @change="handlePhone" />
-        </wd-cell-group>
-        <view class="tip">
-          <wd-checkbox v-model="read" name="read" @change="handleRead" custom-label-class="label-class">
-            已阅读并同意
-            <text style="color: #4d80f0">《借款额度合同及相关授权》</text>
-          </wd-checkbox>
-        </view>
         <view class="footer">
-          <button class="wd-button is-primary is-block is-round is-large" form-type="submit">提交</button>
+          <wd-button type="primary" size="large" @click="handleSubmit1" block>提交</wd-button>
         </view>
-      </form>
-    </page-wraper>
-  </view>
+      </wd-form>
+    </demo-block>
+
+    <demo-block title="校验规则" transparent>
+      <wd-form ref="form2" :model="model2">
+        <wd-cell-group border>
+          <wd-input
+            label="校验"
+            label-width="100px"
+            prop="value1"
+            clearable
+            v-model="model2.value1"
+            placeholder="正则校验"
+            :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+          />
+          <wd-input
+            label="校验"
+            label-width="100px"
+            prop="value2"
+            clearable
+            v-model="model2.value2"
+            placeholder="函数校验"
+            :rules="[
+              {
+                required: false,
+                validator: validatorMessage,
+                message: '请输入正确的手机号'
+              }
+            ]"
+          />
+          <wd-input
+            label="校验"
+            label-width="100px"
+            prop="value3"
+            clearable
+            v-model="model2.value3"
+            placeholder="校验函数返回错误提示"
+            :rules="[
+              {
+                required: false,
+                message: '请输入内容',
+                validator: validator
+              }
+            ]"
+          />
+          <wd-input
+            label="校验"
+            label-width="100px"
+            prop="value4"
+            clearable
+            v-model="model2.value4"
+            placeholder="异步函数校验"
+            :rules="[{ required: false, validator: asyncValidator, message: '请输入1234' }]"
+          />
+        </wd-cell-group>
+        <view class="footer">
+          <wd-button type="primary" size="large" @click="handleSubmit2" block>提交</wd-button>
+        </view>
+      </wd-form>
+    </demo-block>
+
+    <demo-block title="动态表单" transparent>
+      <view class="demo-button">
+        <wd-button @click="handleClick1" :round="false" block size="large">动态表单</wd-button>
+      </view>
+    </demo-block>
+
+    <demo-block title="失焦校验" transparent>
+      <view class="demo-button">
+        <wd-button @click="handleClick2" :round="false" block size="large">失焦校验</wd-button>
+      </view>
+    </demo-block>
+
+    <demo-block title="复杂表单" transparent>
+      <view class="demo-button">
+        <wd-button @click="handleClick3" :round="false" block size="large">复杂表单</wd-button>
+      </view>
+    </demo-block>
+  </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useMessage } from '@/uni_modules/wot-design-uni/components/wd-message-box'
 import { useToast } from '@/uni_modules/wot-design-uni'
-import { areaData } from '@/utils/area'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
-const couponName = ref<string>('')
-const couponNameErr = ref<boolean>(false)
-const platform = ref<any>([])
-const platformList = ref<any>([
-  {
-    value: '1',
-    label: '京东'
-  },
-  {
-    value: '2',
-    label: '开普勒'
-  },
-  {
-    value: '3',
-    label: '手Q'
-  },
-  {
-    value: '4',
-    label: '微信'
-  },
-  {
-    value: '5',
-    label: '1号店'
-  },
-  {
-    value: '6',
-    label: '十元街'
-  },
-  {
-    value: '7',
-    label: '京东极速版'
-  }
-])
-const promotion = ref<string>('1')
-const promotionlist = ref<any[]>([
-  {
-    value: '1',
-    label: '满减'
-  },
-  {
-    value: '2',
-    label: '无门槛'
-  }
-])
-const threshold = ref<string>('')
-const price = ref<string>('')
-const date = ref<number>(Date.now())
-const address = ref<any[]>([])
+const model1 = reactive<{
+  value1: string
+  value2: string
+}>({
+  value1: '',
+  value2: ''
+})
 
-const count = ref<number>(1)
+const model2 = reactive<{
+  value1: string
+  value2: string
+  value3: string
+  value4: string
+}>({
+  value1: '',
+  value2: '',
+  value3: '',
+  value4: ''
+})
 
-const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
-    return {
-      value: key,
-      label: areaData[86][key]
-    }
-  })
-])
-const areaChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
-    resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
-        return {
-          value: key,
-          label: areaData[selectedItem.value][key]
-        }
-      })
-    )
+const { success: showSuccess, loading: showLoading, close: closeToast } = useToast()
+const form1 = ref()
+const form2 = ref()
+
+const validatorMessage = (val) => {
+  return /1\d{10}/.test(val)
+}
+
+const validator = (val) => {
+  if (String(val).length >= 4) {
+    return Promise.resolve()
   } else {
-    finish()
+    return Promise.reject('长度不得小于4')
   }
 }
-const content = ref<string>('')
-const coun = ref<number>(1)
-const read = ref<boolean>(false)
-const switchVal = ref<boolean>(true)
-const cardId = ref<string>('')
-const phone = ref<string>('')
 
-const toast = useToast()
-const messageBox = useMessage()
+// 校验函数可以返回 Promise，实现异步校验
+const asyncValidator = (val) =>
+  new Promise((resolve) => {
+    showLoading('验证中...')
 
-function handleCouponName({ value }) {
-  console.log(value)
+    setTimeout(() => {
+      closeToast()
+      resolve(val === '1234')
+    }, 1000)
+  })
 
-  couponNameErr.value = false
+function handleSubmit1() {
+  form1.value
+    .validate()
+    .then(({ valid, errors }) => {
+      if (valid) {
+        showSuccess({
+          msg: '提交成功'
+        })
+      }
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+    })
 }
-function handlePlatform({ value }) {
-  console.log(value)
-}
-function handleThreshold({ value }) {
-  console.log(value)
-}
-function handlePrice({ value }) {
-  console.log(value)
-}
-function handleAddress({ value }) {
-  console.log(value)
-}
-function handleContent({ value }) {
-  console.log(value)
-}
-function handleCount({ value }) {
-  console.log(value)
-}
-function handleSwitch({ value }) {
-  console.log(value)
-}
-function handleRead({ value }) {
-  read.value = value
-}
-function handleCardId({ value }) {
-  console.log(value)
-}
-function handlePhone({ value }) {
-  console.log(value)
-}
-function formSubmit(event) {
-  console.log(event)
 
-  if (!couponName.value) {
-    toast.error('请填写优惠券名称')
-    return
-  }
-  messageBox.alert('提交成功')
+function handleSubmit2() {
+  form2.value
+    .validate()
+    .then(({ valid, errors }) => {
+      if (valid) {
+        showSuccess({
+          msg: '提交成功'
+        })
+      }
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+    })
 }
-function handleIconClick() {
-  toast.info('优惠券提示信息')
+
+function handleClick1() {
+  uni.navigateTo({ url: '/pages/form/demo1' })
 }
-function handleDate({ value }) {
-  console.log(value)
+
+function handleClick2() {
+  uni.navigateTo({ url: '/pages/form/demo2' })
+}
+
+function handleClick3() {
+  uni.navigateTo({ url: '/pages/form/demo3' })
 }
 </script>
 <style lang="scss" scoped>
-.wot-theme-dark {
-  .inline-txt {
-    color: $-dark-color3;
-  }
-}
-.inline-txt {
-  display: inline-block;
-  font-size: 14px;
-  margin: 0 8px;
-  color: rgba(0, 0, 0, 0.45);
-  vertical-align: middle;
-}
-:deep(.group) {
-  margin-top: 12px;
-}
-.tip {
-  margin: 10px 15px 21px;
-  color: #999;
-  font-size: 12px;
+.demo-button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 24rpx;
 }
 .footer {
-  padding: 0 25px 21px;
-}
-:deep(.label-class) {
-  color: #999 !important;
-  font-size: 12px !important;
+  padding: 16px;
 }
 </style>

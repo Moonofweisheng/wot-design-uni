@@ -342,6 +342,17 @@ function handleConfirm({ value, selectedItems }) {
 | filter-placeholder     | 搜索框占位符                                                                                             | string                            | -                | 搜索     | -    |
 | ellipsis               | 是否超出隐藏                                                                                             | boolean                           | -                | false    | -    |
 | scroll-into-view       | 重新打开是否滚动到选中项                                                                                 | boolean                           | -                | true    | 0.1.34    |
+| prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
+| rules | 表单验证规则	 | `FormItemRule []`	 | - | `[]` | - |
+
+### FormItemRule 数据结构
+
+| 键名 | 说明 | 类型 |
+| --- | --- | --- |
+| required | 是否为必选字段	 | `boolean` |
+| message | 错误提示文案	 | `string` |
+| validator | 通过函数进行校验，可以返回一个 `Promise` 来进行异步校验 | `(value, rule) => boolean \| Promise` |
+| pattern | 通过正则表达式进行校验，正则无法匹配表示校验不通过 | `RegExp` |
 
 ## 选项数据结构
 

@@ -161,6 +161,16 @@
       }
     },
     {
+      "path": "pages/textarea/Index",
+      "name": "textarea",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Textarea 文本域"
+      }
+    },
+    {
       "path": "pages/messageBox/Index",
       "name": "messageBox",
       "style": {
@@ -528,7 +538,37 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Form 表单组合"
+        "navigationBarTitleText": "Form 表单"
+      }
+    },
+    {
+      "path": "pages/form/demo1",
+      "name": "formDemo1",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "复杂表单"
+      }
+    },
+    {
+      "path": "pages/form/demo2",
+      "name": "formDemo2",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "失焦校验"
+      }
+    },
+    {
+      "path": "pages/form/demo3",
+      "name": "formDemo3",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "复杂表单"
       }
     },
     {

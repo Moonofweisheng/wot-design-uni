@@ -16,7 +16,7 @@
       <wd-input type="text" v-model="value4" clearable @change="handleChange1" />
     </demo-block>
     <demo-block title="密码框">
-      <wd-input type="text" v-model="value5" clearable show-password @change="handleChange2" />
+      <wd-input type="text" v-model="value5" disabled clearable show-password @change="handleChange2" />
     </demo-block>
     <demo-block title="设置前后Icon">
       <wd-input type="text" v-model="value6" prefix-icon="dong" suffix-icon="list" clearable @change="handleChange3" />
@@ -26,16 +26,7 @@
     </demo-block>
     <demo-block title="取消底部边框，自定义使用">
       <wd-input v-model="value8" no-border placeholder="请输入价格" custom-style="display: inline-block; width: 70px; vertical-align: middle;" />
-      <text class="custom-txt" style="display: inline-block; vertical-align: middle; font-size: 14px">元</text>
-    </demo-block>
-    <demo-block title="textarea" transparent>
-      <wd-input type="textarea" v-model="value9" placeholder="请填写评价" @blur="handleBlur" />
-    </demo-block>
-    <demo-block title="textarea 清空按钮 和 字数限制" transparent>
-      <wd-input type="textarea" v-model="value10" :maxlength="120" clearable show-word-limit />
-    </demo-block>
-    <demo-block title="textarea 高度自适应">
-      <wd-input type="textarea" v-model="value11" auto-height clearable></wd-input>
+      <text class="custom-txt">元</text>
     </demo-block>
     <demo-block title="cell 类型" transparent>
       <wd-cell-group border>
@@ -45,12 +36,12 @@
         <wd-input type="text" label="错误状态" v-model="value15" placeholder="请输入用户名" error />
         <wd-input type="text" label="必填" v-model="value16" placeholder="请输入用户名" required />
         <wd-input type="text" label="图标" v-model="value17" placeholder="请输入..." prefix-icon="dong" suffix-icon="list" />
-        <wd-input type="text" label="自定义插槽" v-model="value18" placeholder="请输入..." use-suffix-slot clearable>
+        <wd-input type="text" label="自定义插槽" center v-model="value18" placeholder="请输入..." use-suffix-slot clearable>
           <template #suffix>
             <wd-button size="small" custom-class="button">获取验证码</wd-button>
           </template>
         </wd-input>
-        <wd-input type="text" label="大尺寸" size="large" v-model="value19" placeholder="请输入..." />
+        <wd-input type="text" label="大尺寸" clearable size="large" v-model="value19" placeholder="请输入..." />
       </wd-cell-group>
     </demo-block>
   </page-wraper>
@@ -100,6 +91,12 @@ function handleBlur(event) {
   .custom-txt {
     color: $-dark-color;
   }
+}
+.custom-txt {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 24px;
 }
 .flex {
   display: flex;
