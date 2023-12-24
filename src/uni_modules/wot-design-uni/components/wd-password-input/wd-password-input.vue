@@ -1,15 +1,15 @@
 <template>
   <view class="wd-password-input">
-    <view @touchstart="onTouchStart" class="flex wd-password-input__security">
+    <view @touchstart="onTouchStart" class="wd-password-input__security">
       <view
-        v-for="(item, index) in length"
+        v-for="(_, index) in length"
         :key="index"
         :class="`wd-password-input__item ${gutter ? '' : 'is-border'}`"
         :style="{ marginLeft: index !== 0 && gutter ? addUnit(gutter) : 0 }"
       >
         <view v-if="focused && index === modelValue.length" class="wd-password-input__cursor"></view>
         <view v-else :class="`wd-password-input__value`">
-          <i :style="{ visibility: mask && modelValue[index] ? 'visible' : 'hidden' }" class="wd-password-input__mask"></i>
+          <view :style="{ visibility: mask && modelValue[index] ? 'visible' : 'hidden' }" class="wd-password-input__mask"></view>
           <text v-if="!mask && modelValue[index]">{{ modelValue[index] }}</text>
         </view>
       </view>
@@ -40,7 +40,7 @@ interface Props {
   info?: string
   errorInfo?: string
   gutter?: number | string
-  length?: number | string
+  length?: number
   focused: boolean
 }
 
@@ -57,15 +57,10 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(['focus'])
 
 function onTouchStart(event: Event) {
-  event.stopPropagation()
-  emit('focus')
+  emit('focus', event)
 }
 </script>
 
 <style lang="scss" scoped>
 @import './index.scss';
-.flex {
-  display: flex;
-  align-items: center;
-}
 </style>
