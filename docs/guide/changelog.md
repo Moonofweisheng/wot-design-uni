@@ -1,6 +1,28 @@
 # 更新日志 
 
 
+## [0.2.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.70...v0.2.0) (2023-12-24)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 Form 表单组件 ([c8086d6](https://github.com/Moonofweisheng/wot-design-uni/commit/c8086d624c01bfbae3b9dfc324d33d6bfe46e041))
+* ✨ 新增 PasswordInput 密码输入框 ([b8c68f9](https://github.com/Moonofweisheng/wot-design-uni/commit/b8c68f92f7ddbf3ae2a58bf36593a0cd0340f225))
+* ✨ 新增 textarea 文本域组件 ([ed56bcd](https://github.com/Moonofweisheng/wot-design-uni/commit/ed56bcdb0337c198e8834182d47d1cd83513091d))
+* ✨ 增加父子组件 Provide/Inject 的hooks ([eb971d4](https://github.com/Moonofweisheng/wot-design-uni/commit/eb971d4e86733b0337de0c63f26b373424a842f0))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Input 组件在支付宝平台存在一个默认padding的问题 ([921c906](https://github.com/Moonofweisheng/wot-design-uni/commit/921c90606e05ea1b29cdee39cde7858907b2cd4d))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整主题定制相关文档 ([2d5b1af](https://github.com/Moonofweisheng/wot-design-uni/commit/2d5b1af2787d33ec24eb6e6ab9db6ff941d80c2b))
+* ✏️  增加 textarea 文本域组件功能的迁移说明 ([61ebc7d](https://github.com/Moonofweisheng/wot-design-uni/commit/61ebc7db1e1db3e8634a87c24fae0869f4b6f17b))
+* ✏️  PasswordInput 密码输入框文档增加版本介绍 ([56ccf60](https://github.com/Moonofweisheng/wot-design-uni/commit/56ccf6005e502237e1ff45b5b52e852b402a10c9))
+
 ### [0.1.70](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.69...v0.1.70) (2023-12-23)
 
 
