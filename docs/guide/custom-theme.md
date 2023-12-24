@@ -2,9 +2,7 @@
 
 Wot Design Uni 每1个组件基本都有自定义类名 custom-class，可以在组件根节点加入你页面上的类名，进行样式修改。
 
-## 自定义样式
-
-在 Wot Design Uni 的源码中，样式是通过 SCSS 进行编写的，主题色和各个组件的一些样式都是通过 SCSS 变量进行配置，因此，如果要更深层次地进行主题自定义，自己根据 Wot Design Uni 的样式变量定义一套变量文件即可。
+## 主题介绍
 
 ### 主要变量介绍
 
@@ -118,12 +116,6 @@ Wot Design Uni 每1个组件基本都有自定义类名 custom-class，可以在
   <li class="color-group-line" style="background: rgba(255,255,255,0.02);color: rgba(255,255,255,0.65)">2%<div>表头填充色</div></li>
 </ul>
 
-### 自定义 Sass 变量
+## 定制主题
 
-开发者自己参考 `@/uni_modules/wot-design-uni/components/common/abstracts/variable.scss` 文件中的scss变量`uni.scss`文件中重新定义一份自定义主题变量。
-例如：
-```scss
-// uni.scss
-$-color-success: red !default;
-
-```
+我们为每个组件提供了`css 变量`，可以参考[config-provider](../component/config-provider)组件的使用介绍来定制主题。

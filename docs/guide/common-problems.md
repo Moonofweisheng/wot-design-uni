@@ -118,6 +118,15 @@ export default {
 ```
 
 
+## 为何我修改了$-color-theme，有的组件颜色没有改变？
+目前 `Wot Design Uni` 部分组件使用了渐变，不会直接应用`$-color-theme`，所以目前使用`$-color-theme`修改主题色，只会改变部分组件的颜色，不会改变渐变组件的颜色。
+如果需要修改渐变组件的颜色，请将`variable.scss`中`$open-linear: true !default;`改为`$open-linear: false;`。
+
+::: tip 推荐方案
+我们为每个组件提供了`css 变量`，可以参考[config-provider](../component/config-provider)组件的使用介绍来定制主题。
+:::
+
+
 ## 关于我们
 
 **如果您的问题不在上述列表中或您有更好的建议，请联系我们 [Moonofweisheng](https://github.com/Moonofweisheng/wot-design-uni)**
