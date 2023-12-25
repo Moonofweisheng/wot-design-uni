@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.0...v0.2.1) (2023-12-25)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  PassowrdInput 密码输入框组件增加文档标题 ([cccc4cc](https://github.com/Moonofweisheng/wot-design-uni/commit/cccc4cc0d4952f594e5387bad32a7248009ebd9e))
+
 ## [0.2.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.1.70...v0.2.0) (2023-12-24)
 
 
