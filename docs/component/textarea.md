@@ -9,7 +9,7 @@
 可以通过 `v-model` 双向绑定输入框的值，通过 `placeholder` 设置占位提示文字。
 
 ```html
-<wd-input v-model="value" placeholder="请填写评价" />
+<wd-textarea v-model="value" placeholder="请填写评价" />
 ```
 
 ```typescript
