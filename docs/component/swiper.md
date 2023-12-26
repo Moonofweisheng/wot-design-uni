@@ -221,7 +221,7 @@ function onChange(e) {
 
 ### SwiperList
 
-轮播图项的列表配置，包括 `value` 和 `ariaLabel` 属性。
+轮播图项的列表配置，包括 `value` 属性，支持扩展属性。
 
 ### SwiperIndicatorProps
 

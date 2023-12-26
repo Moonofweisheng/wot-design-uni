@@ -16,8 +16,8 @@ export type EasingType = 'default' | 'linear' | 'easeInCubic' | 'easeOutCubic' |
 export type IndicatorPositionType = 'left' | 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right' | 'right'
 
 export interface SwiperList {
+  [key: string]: any
   value: string
-  ariaLabel: string
 }
 
 export interface SwiperIndicatorProps {
