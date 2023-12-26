@@ -526,7 +526,7 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                                            | boolean  | -      | true    | -        |
 | ellipsis               | 是否超出隐藏                                                                                                                   | boolean  | -      | false   | -        |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
-| rules | 表单验证规则	 | `FormItemRule []`	 | - | `[]` | - |
+| rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
 
 ### FormItemRule 数据结构
 

@@ -149,7 +149,7 @@ function handleChange(event) {
 | required | cell 类型下必填样式 | boolean | - | false | - |
 | no-border | 非 cell 类型下是否隐藏下划线 | boolean | - | false | - | - |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
-| rules | 表单验证规则	 | `FormItemRule []`	 | - | `[]` | - |
+| rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
 
 
 ### FormItemRule 数据结构
