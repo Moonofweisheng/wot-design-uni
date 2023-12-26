@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [0.2.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.1...v0.2.2) (2023-12-26)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 移除 Swiper 的list中不必填的属性 ([672f680](https://github.com/Moonofweisheng/wot-design-uni/commit/672f680051009edd23a67d4e32722839f519d9ba))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复 Textarea 文档示例错误的问题 ([7da3a4c](https://github.com/Moonofweisheng/wot-design-uni/commit/7da3a4cdfe35f87193f57139de0819130424d6ea))
+* ✏️  优化 Form 相关组件的文档介绍 ([6a0a7a7](https://github.com/Moonofweisheng/wot-design-uni/commit/6a0a7a730fcd8904609f8a48339e1079baf3e9be))
+
 ### [0.2.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.0...v0.2.1) (2023-12-25)
 
 
