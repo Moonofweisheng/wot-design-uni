@@ -548,7 +548,7 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "复杂表单"
+        "navigationBarTitleText": "动态表单"
       }
     },
     {
