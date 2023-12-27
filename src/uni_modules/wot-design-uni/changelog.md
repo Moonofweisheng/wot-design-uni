@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.2...v0.2.3) (2023-12-27)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复动态表单演示页面标题错误的问题 ([7c65359](https://github.com/Moonofweisheng/wot-design-uni/commit/7c65359c88614ae53c4800d0946d8e09ef547a26))
+
 ### [0.2.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.1...v0.2.2) (2023-12-26)
 
 
