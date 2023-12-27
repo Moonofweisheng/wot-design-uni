@@ -35,5 +35,6 @@
       "end_with_newline": true
       // #vue组件中html代码格式化样式
     }
-  }
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

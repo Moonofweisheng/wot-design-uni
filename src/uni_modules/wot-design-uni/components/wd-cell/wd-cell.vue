@@ -60,7 +60,7 @@ export default {
 import { computed } from 'vue'
 import { useCell } from '../composables/useCell'
 import { useParent } from '../composables/useParent'
-import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 
 interface Props {
   title?: string

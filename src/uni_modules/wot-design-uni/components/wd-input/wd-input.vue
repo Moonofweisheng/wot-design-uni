@@ -88,7 +88,7 @@ export default {
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { objToStyle, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'
-import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 
 interface Props {

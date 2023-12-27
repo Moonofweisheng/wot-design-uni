@@ -144,7 +144,7 @@ import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, 
 import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { type DateTimeType, getPickerValue } from '../wd-datetime-picker-view/type'
-import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 interface Props {
   customClass?: string

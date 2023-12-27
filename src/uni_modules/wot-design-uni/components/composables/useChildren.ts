@@ -1,12 +1,12 @@
 import {
-  VNode,
   provide,
   reactive,
-  InjectionKey,
   getCurrentInstance,
-  VNodeNormalizedChildren,
-  ComponentPublicInstance,
-  ComponentInternalInstance
+  type VNode,
+  type InjectionKey,
+  type VNodeNormalizedChildren,
+  type ComponentPublicInstance,
+  type ComponentInternalInstance
 } from 'vue'
 
 // 小程序端不支持从vue导出的isVNode方法，参考uni-mp-vue的实现

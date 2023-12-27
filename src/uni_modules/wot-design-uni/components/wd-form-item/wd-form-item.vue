@@ -36,7 +36,7 @@ export default {
 import { computed, ref } from 'vue'
 import { useParent } from '../composables/useParent'
 import WdCell from '../wd-cell/wd-cell.vue'
-import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 
 interface Props {
   prop: string

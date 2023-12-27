@@ -117,7 +117,7 @@ import { dayjs } from '../common/dayjs'
 import { deepClone, isArray, isEqual, padZero } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
 import { useCell } from '../composables/useCell'
-import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 
 const defaultDisplayFormat = (value, type) => {

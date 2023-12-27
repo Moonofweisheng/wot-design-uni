@@ -97,7 +97,7 @@ export default {
 import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import { debounce, getRect, getType } from '../common/util'
 import { useCell } from '../composables/useCell'
-import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 
 const $container = '.wd-col-picker__selected-container'

@@ -112,7 +112,7 @@ import { getCurrentInstance, onBeforeMount, ref, watch, nextTick, computed } fro
 import { useCell } from '../composables/useCell'
 import { getRect, getType, isArray, isDef, requestAnimationFrame } from '../common/util'
 import { useParent } from '../composables/useParent'
-import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 
 type SelectPickerType = 'checkbox' | 'radio'
 

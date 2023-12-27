@@ -89,7 +89,7 @@ import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nex
 import { deepClone, defaultDisplayFormat, getType, isDef } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { type ColumnItem, formatArray } from '../wd-picker-view/type'
-import { FORM_KEY, FormItemRule } from '../wd-form/types'
+import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 
 interface Props {

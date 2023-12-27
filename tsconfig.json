@@ -13,6 +13,7 @@
     "experimentalDecorators":true,
     "sourceMap": false,
     "skipLibCheck": true,
+    "verbatimModuleSyntax":true,
     "baseUrl": ".",
     "types": [
       "@dcloudio/types",
