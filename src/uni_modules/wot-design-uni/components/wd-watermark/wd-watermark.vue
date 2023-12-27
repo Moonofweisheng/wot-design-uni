@@ -491,7 +491,6 @@ async function drawImageOffScreen(
   img.crossOrigin = 'anonymous'
   img.referrerPolicy = 'no-referrer'
 
-  img.referrerPolicy = 'no-referrer'
   if (isBase64Image(image)) {
     img.src = image
   } else {
