@@ -3,9 +3,8 @@
   <view
     :class="`wd-swipe-action ${customClass}`"
     @click.stop="onClick()"
-    @touchmove="stopPropagation ? nothing : ''"
     @touchstart="startDrag"
-    @touchmove.prevent="onDrag"
+    @touchmove="onDrag"
     @touchend="endDrag"
     @touchcancel="endDrag"
   >
@@ -58,7 +57,6 @@ const props = withDefaults(defineProps<Props>(), {
 const queue = inject<Queue | null>(queueKey, null)
 
 const wrapperStyle = ref<string>('')
-const stopPropagation = ref<boolean>(false)
 
 // 滑动开始时，wrapper的偏移量
 const originOffset = ref<number>(0)
@@ -131,8 +129,7 @@ function changeState(value: string, old?: string) {
     }
   })
 }
-/** 防穿透函数的占位符 **/
-function nothing() {}
+
 /**
  * @description 获取左/右操作按钮的宽度
  * @return {Promise<[Number, Number]>} 左宽度、右宽度
@@ -202,12 +199,11 @@ function onDrag(event) {
   if (props.disabled) return
 
   touch.touchMove(event)
-
   if (touch.direction.value === 'vertical') {
-    stopPropagation.value = false
     return
   } else {
-    stopPropagation.value = true
+    event.preventDefault()
+    event.stopPropagation()
   }
 
   touching.value = true
@@ -238,7 +234,6 @@ function endDrag() {
   if (props.disabled) return
   // 滑出"操作按钮"的阈值
   const THRESHOLD = 0.3
-  stopPropagation.value = false
   touching.value = false
 
   getWidths().then(([leftWidth, rightWidth]) => {
