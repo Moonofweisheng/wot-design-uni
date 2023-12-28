@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.2.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.4...v0.2.5) (2023-12-28)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Form 导入FormRules、ErrorMessage时未指定为type的问题 ([c88c84e](https://github.com/Moonofweisheng/wot-design-uni/commit/c88c84e8b71fc2404643a623c28f4953ffe36e71))
+* 🐛 修复 SwipeAction 组件在H5端导致页面无法上下滚动的问题 ([1f68ce1](https://github.com/Moonofweisheng/wot-design-uni/commit/1f68ce13c8109dd92ca4bf055f66aa8dff24c83d)), closes [#149](https://github.com/Moonofweisheng/wot-design-uni/issues/149)
+
 ### [0.2.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.3...v0.2.4) (2023-12-27)
 
 ### [0.2.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.2...v0.2.3) (2023-12-27)
