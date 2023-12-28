@@ -19,7 +19,7 @@ export default {
 import { reactive, watch } from 'vue'
 import { deepClone, getPropByPath, isDef, isPromise } from '../common/util'
 import { useChildren } from '../composables/useChildren'
-import { FormRules, FORM_KEY, ErrorMessage, FormItemRule } from './types'
+import { type FormRules, FORM_KEY, type ErrorMessage } from './types'
 
 interface Props {
   // 表单数据对象
