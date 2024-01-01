@@ -18,10 +18,10 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install Dependencies
-        run: yarn
+        run: pnpm
 
       - name: Run Compiler
-        run: yarn compiler
+        run: pnpm compiler
 
       - name: Publish Package
         run: |

@@ -53,6 +53,9 @@ npm run commit
 # 或者
 yarn commit
 
+# 或者
+pnpm commit
+
 ## 执行命令后根据修改类型选择
 ```
 

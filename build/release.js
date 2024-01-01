@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2022-11-01 17:12:57
- * @LastEditTime: 2023-10-31 21:36:16
+ * @LastEditTime: 2024-01-01 22:23:31
  * @LastEditors: weisheng
  * @Description: 组件发版问答
- * @FilePath: \wot-design-uni\build\release.js
+ * @FilePath: /wot-design-uni/build/release.js
  * 记得注释
  */
 const inquirer = require('inquirer')
@@ -39,16 +39,16 @@ inquirer
     // 项目版本更新
     switch (answers['version']) {
       case '🐛 patch 小版本':
-        execSync('yarn release-patch')
+        execSync('pnpm release-patch')
         break
       case '✨ minor 中版本':
-        execSync('yarn release-minor')
+        execSync('pnpm release-minor')
         break
       case '🚀 major 大版本':
-        execSync('yarn release-major')
+        execSync('pnpm release-major')
         break
       default:
-        execSync('yarn release-minor')
+        execSync('pnpm release-minor')
         break
     }
     // 生成日志
@@ -62,7 +62,7 @@ inquirer
     package.version = version
     writeFileSync(path.resolve(src, 'package.json'), JSON.stringify(package))
     // 生成制品
-    execSync('yarn lint')
+    execSync('pnpm lint')
     execSync('git add -A ')
     execSync(`git commit -am "build: compile ${version}"`)
     execSync(`git tag -a v${version} -am "chore(release): ${version}"`)

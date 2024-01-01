@@ -20,8 +20,8 @@ jobs:
 
       - name: Install Dependencies and Build Docs
         run: |
-          yarn install
-          yarn build:docs
+          pnpm install
+          pnpm build:docs
 
       - name: Setup Aliyun OSS
         uses: manyuanrong/setup-ossutil@master
