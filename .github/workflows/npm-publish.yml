@@ -18,7 +18,9 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install Dependencies
-        run: pnpm
+        run: |
+          npm install pnpm -g
+          pnpm install
 
       - name: Run Compiler
         run: pnpm compiler

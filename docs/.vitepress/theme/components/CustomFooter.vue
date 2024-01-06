@@ -4,11 +4,11 @@ import { useSidebar } from 'vitepress/dist/client/theme-default/composables/side
 import { computed } from 'vue';
 
 
-const { theme, frontmatter } = useData()
+const { theme } = useData()
 const { hasSidebar } = useSidebar()
 
 const copyright = computed(()=>{
-  const isNetlify = location.href.includes('netlify')
+  const isNetlify = typeof window !== 'undefined' ? window.location.href.includes('netlify') : false
   if (!isNetlify) {
     return `${theme.value.footer.copyright} | <a style="text-decoration: none;" href="https://www.netlify.com">This site is powered by Netlify</a>`
   }else{

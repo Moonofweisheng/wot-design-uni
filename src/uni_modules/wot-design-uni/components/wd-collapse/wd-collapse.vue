@@ -44,7 +44,7 @@ export default {
 import { onBeforeMount, ref, watch } from 'vue'
 import { COLLAPSE_KEY, type CollapseToggleAllOptions } from './types'
 import { useChildren } from '../composables/useChildren'
-import { isArray } from '../common/util'
+import { isArray, isDef } from '../common/util'
 
 interface Props {
   customClass?: string
@@ -137,7 +137,7 @@ const toggleAll = (options: boolean | CollapseToggleAllOptions = {}) => {
         names.push(item.name || index)
       }
     } else {
-      if (expanded ?? !item.$.exposed.expanded.value) {
+      if (isDef(expanded) ? expanded : !item.$.exposed.expanded.value) {
         names.push(item.name || index)
       }
     }

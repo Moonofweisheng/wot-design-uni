@@ -12,11 +12,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      
+      - name: Install pnpm
+        run: corepack enable       
 
-      - name: 设置 Node.js 18.x 环境
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '18'
+          cache: 'pnpm'
 
       - name: Install Dependencies and Build Docs
         run: |
