@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.2.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.5...v0.2.6) (2024-01-06)
+
+
+### ✨ Features | 新功能
+
+* ✨ 优化provide/inject的使用方式 ([892f467](https://github.com/Moonofweisheng/wot-design-uni/commit/892f4675a848ee3d4c965c36d5c4034aa5806b6d))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档网站增加自定义footer ([dd8bc00](https://github.com/Moonofweisheng/wot-design-uni/commit/dd8bc003eedcdc43cdd60bb896c897d108dd4a51))
+
 ### [0.2.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.4...v0.2.5) (2023-12-28)
 
 
