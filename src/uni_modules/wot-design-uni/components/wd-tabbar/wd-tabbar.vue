@@ -24,6 +24,8 @@ export default {
 import { getCurrentInstance, onMounted, provide, reactive, ref, watch, nextTick, computed, type CSSProperties } from 'vue'
 import type { TabbarItem } from '../wd-tabbar-item/types'
 import { addUnit, getRect, isDef, objToStyle } from '../common/util'
+import { useChildren } from '../composables/useChildren'
+import { TABBAR_KEY } from './types'
 
 type TabbarShape = 'default' | 'round'
 
@@ -66,12 +68,12 @@ const props = withDefaults(defineProps<Props>(), {
   zIndex: 99
 })
 const height = ref<number | ''>('') // 占位高度
-const parentData = reactive({
-  activeColor: props.activeColor,
-  inactiveColor: props.inactiveColor,
-  modelValue: props.modelValue,
-  children: [] as any[],
-  setChild,
+const { proxy } = getCurrentInstance() as any
+
+const { linkChildren } = useChildren(TABBAR_KEY)
+
+linkChildren({
+  props,
   setChange
 })
 
@@ -82,17 +84,6 @@ const rootStyle = computed(() => {
   }
   return `${objToStyle(style)};${props.customStyle}`
 })
-
-const { proxy } = getCurrentInstance() as any
-
-provide('wdtabbar', parentData)
-
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    parentData.modelValue = newValue
-  }
-)
 
 watch(
   [() => props.fixed, () => props.placeholder],
@@ -113,30 +104,12 @@ onMounted(() => {
 const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
- * 设置子项
- * @param child
- */
-function setChild(child: any) {
-  const hasChild = parentData.children.indexOf(child)
-  if (hasChild === -1) {
-    parentData.children.push(child)
-  } else {
-    parentData.children[hasChild] = child
-  }
-  if (!isDef(props.modelValue) && parentData.children.length === 1) {
-    const name = isDef(parentData.children[0].name) ? parentData.children[0].name : 0
-    setChange({ name })
-  }
-}
-
-/**
  * 子项状态变更
  * @param child 子项
  */
 function setChange(child: TabbarItem) {
   let active = child.name
   emit('update:modelValue', active)
-  parentData.modelValue = active
   emit('change', {
     value: active
   })

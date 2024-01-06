@@ -17,7 +17,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { type ComponentPublicInstance, reactive, provide, watch } from 'vue'
+import { useChildren } from '../composables/useChildren'
+import { SIDEBAR_KEY } from './types'
 
 interface Props {
   modelValue?: number | string
@@ -32,46 +33,10 @@ const props = withDefaults(defineProps<Props>(), {
   customClass: ''
 })
 
-const parentData = reactive({
-  value: props.modelValue,
-  children: [] as ComponentPublicInstance[],
-  setChild,
-  removeChild,
-  setChange
-})
+const { linkChildren } = useChildren(SIDEBAR_KEY)
+linkChildren({ props, setChange })
 
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    parentData.value = newValue
-  }
-)
-
-provide('wdSidebar', parentData)
 const emit = defineEmits(['change', 'update:modelValue'])
-
-/**
- * 设置子项
- * @param child
- */
-function setChild(child: ComponentPublicInstance) {
-  const hasChild = parentData.children.indexOf(child)
-  if (hasChild === -1) {
-    parentData.children.push(child)
-  } else {
-    parentData.children[hasChild] = child
-  }
-}
-
-/**
- * 移除子项
- * @param child
- */
-function removeChild(child: ComponentPublicInstance) {
-  parentData.children = parentData.children.filter((c) => {
-    return c !== child
-  })
-}
 
 /**
  * 子项状态变更
@@ -79,7 +44,6 @@ function removeChild(child: ComponentPublicInstance) {
  */
 function setChange(value: number | string, label: string) {
   emit('update:modelValue', value)
-  parentData.value = value
   emit('change', { value, label })
 }
 </script>

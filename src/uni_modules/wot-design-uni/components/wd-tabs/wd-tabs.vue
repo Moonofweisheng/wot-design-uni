@@ -15,8 +15,8 @@
                     @click="handleSelect(index)"
                     v-for="(item, index) in items"
                     :key="index"
-                    :class="`wd-tabs__nav-item  ${activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
-                    :style="activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
+                    :class="`wd-tabs__nav-item  ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
+                    :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
                   >
                     {{ item.title }}
                   </view>
@@ -36,9 +36,9 @@
               <view :class="`wd-tabs__map-body  ${animating ? 'is-open' : ''}`" :style="mapShow ? '' : 'display:none'">
                 <view class="wd-tabs__map-nav-item" v-for="(item, index) in items" :key="index" @click="handleSelect(index)">
                   <view
-                    :class="`wd-tabs__map-nav-btn ${activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`"
+                    :class="`wd-tabs__map-nav-btn ${state.activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`"
                     :style="
-                      activeIndex === index
+                      state.activeIndex === index
                         ? color
                           ? 'color:' + color + ';border-color:' + color
                           : ''
@@ -80,8 +80,8 @@
                 v-for="(item, index) in items"
                 @click="handleSelect(index)"
                 :key="index"
-                :class="`wd-tabs__nav-item ${activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
-                :style="activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
+                :class="`wd-tabs__nav-item ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
+                :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
               >
                 {{ item.title }}
               </view>
@@ -100,7 +100,7 @@
           <view class="wd-tabs__map-header" :style="`${mapShow ? '' : 'display:none;'}  ${animating ? 'opacity:1;' : ''}`">全部</view>
           <view :class="`wd-tabs__map-body ${animating ? 'is-open' : ''}`" :style="mapShow ? '' : 'display:none'">
             <view class="wd-tabs__map-nav-item" v-for="(item, index) in items" :key="index" @click="handleSelect(index)">
-              <view :class="`wd-tabs__map-nav-btn ${activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`">
+              <view :class="`wd-tabs__map-nav-btn ${state.activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`">
                 {{ item.title }}
               </view>
             </view>
@@ -131,9 +131,11 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, provide, ref, watch, nextTick } from 'vue'
+import { computed, getCurrentInstance, onMounted, ref, watch, nextTick, reactive } from 'vue'
 import { checkNumRange, debounce, getRect, getType, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
+import { TABS_KEY } from './types'
+import { useChildren } from '../composables/useChildren'
 
 const $item = '.wd-tabs__nav-item'
 const $container = '.wd-tabs__nav-container'
@@ -179,11 +181,10 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 // 选中值的索引，默认第一个
-const activeIndex = ref<number>(0)
+const state = reactive({ activeIndex: 0 })
 // navBar的下划线样式
 const lineStyle = ref<string>('')
-// tabs数据
-const items = ref<Record<string, any>[]>([])
+
 // map的开关
 const mapShow = ref<boolean>(false)
 // scroll-view偏移量
@@ -192,13 +193,21 @@ const scrollLeft = ref<number>(0)
 // 是否动画中
 const animating = ref<boolean>(false)
 
-const children: any[] = []
-
 const inited = ref<boolean>(false)
+
+const { children, linkChildren } = useChildren(TABS_KEY)
+linkChildren({ state })
 
 const { proxy } = getCurrentInstance() as any
 
 const touch = useTouch()
+
+// tabs数据
+const items = computed(() => {
+  return children.map((child, index) => {
+    return { disabled: child.disabled, title: child.title, name: isDef(child.name) ? child.name : index }
+  })
+})
 
 const bodyStyle = computed(() => {
   if (!props.animated) {
@@ -206,7 +215,7 @@ const bodyStyle = computed(() => {
   }
 
   return objToStyle({
-    left: -100 * activeIndex.value + '%',
+    left: -100 * state.activeIndex + '%',
     'transition-duration': props.duration + 'ms',
     '-webkit-transition-duration': props.duration + 'ms'
   })
@@ -225,7 +234,7 @@ const setActive = debounce(
     value = getActiveIndex(value)
     // 被禁用，不执行任何操作
     if (items.value[value].disabled) return
-    activeIndex.value = value
+    state.activeIndex = value
     if (setScroll) {
       updateLineStyle(init === false)
       scrollIntoView()
@@ -262,11 +271,22 @@ watch(
   () => props.modelValue,
   (newValue) => {
     const index = getActiveIndex(newValue)
-    setActive(newValue, false, index !== activeIndex.value)
+    setActive(newValue, false, index !== state.activeIndex)
   },
   {
     immediate: false,
     deep: true
+  }
+)
+
+watch(
+  () => children.length,
+  () => {
+    if (inited.value) {
+      nextTick(() => {
+        setActive(props.modelValue)
+      })
+    }
   }
 )
 
@@ -293,43 +313,6 @@ onMounted(() => {
 
 const emit = defineEmits(['change', 'disabled', 'click', 'update:modelValue'])
 
-provide('tabs', {
-  setActive,
-  setChild,
-  updateItems,
-  children
-})
-
-/**
- * 设置子项
- * @param child
- */
-function setChild(child) {
-  const hasChild = children.findIndex((tab) => {
-    return tab.$.uid === child.$.uid
-  })
-  if (hasChild <= -1) {
-    children.push(child)
-  } else {
-    children[hasChild] = child
-  }
-  updateItems()
-
-  // 提前设置好高亮的 tab，避免等到 mounted 时出现闪烁延迟问题
-  if (isNumber(props.modelValue) && props.modelValue >= items.value.length) {
-    return
-  }
-  let active: number = isNumber(props.modelValue) ? props.modelValue : 0
-
-  // 如果是字符串直接匹配，匹配不到用0兜底
-  if (getType(props.modelValue) === 'string') {
-    const index = items.value.findIndex((item) => item.name === props.modelValue)
-    if (index === -1) return
-    active = index
-  }
-  children[active].$.exposed.setShow(true, true)
-}
-
 /**
  * @description nav map list 开关
  */
@@ -347,27 +330,18 @@ function toggleMap() {
     }, 100)
   }
 }
-/**
- * @description 更新tab items
- */
-function updateItems() {
-  items.value = children.map((child, index) => {
-    return { disabled: child.disabled, title: child.title, name: isDef(child.name) ? child.name : index }
-  })
-}
+
 /**
  * @description 更新navBar underline的偏移量
  * @param {Boolean} animation 是否伴随动画
  */
 function updateLineStyle(animation = true) {
   if (!inited.value) return
-  // const { activeIndex, lineWidth, lineHeight, slidableNum, items } = this.data
   const { lineWidth, lineHeight } = props
   getRect($item, true, proxy).then((rects: any) => {
-    const rect = rects[activeIndex.value]
-    // const width = lineWidth || (slidableNum < items.length ? rect.width : (rect.width - 14))
+    const rect = rects[state.activeIndex]
     const width = lineWidth
-    let left = rects.slice(0, activeIndex.value).reduce((prev, curr) => prev + curr.width, 0)
+    let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + curr.width, 0)
     left += (rect.width - width) / 2
     const transition = animation ? 'transition: width 300ms ease, transform 300ms ease;' : ''
 
@@ -388,15 +362,12 @@ function updateLineStyle(animation = true) {
  */
 function setActiveTab() {
   if (!inited.value) return
-  children.forEach((child, index) => {
-    child.$.exposed.setShow(child.$.exposed.painted.value || index === activeIndex.value, index === activeIndex.value)
-  })
-  if (items.value[activeIndex.value].name !== props.modelValue) {
+  if (items.value[state.activeIndex].name !== props.modelValue) {
     emit('change', {
-      index: activeIndex.value,
-      name: items.value[activeIndex.value].name
+      index: state.activeIndex,
+      name: items.value[state.activeIndex].name
     })
-    emit('update:modelValue', items.value[activeIndex.value].name)
+    emit('update:modelValue', items.value[state.activeIndex].name)
   }
 }
 /**
@@ -406,9 +377,9 @@ function scrollIntoView() {
   if (!inited.value) return
   Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)]).then(([navItemsRects, navRect]) => {
     // 选中元素
-    const selectItem = navItemsRects[activeIndex.value]
+    const selectItem = navItemsRects[state.activeIndex]
     // 选中元素之前的节点的宽度总和
-    const offsetLeft = (navItemsRects as any).slice(0, activeIndex.value).reduce((prev, curr) => prev + curr.width, 0)
+    const offsetLeft = (navItemsRects as any).slice(0, state.activeIndex).reduce((prev, curr) => prev + curr.width, 0)
     // scroll-view滑动到selectItem的偏移量
     const left = offsetLeft - ((navRect as any).width - selectItem.width) / 2
     if (left === scrollLeft.value) {
@@ -456,11 +427,11 @@ function onTouchEnd() {
   const { direction, deltaX, offsetX } = touch
   const minSwipeDistance = 50
   if (direction.value === 'horizontal' && offsetX.value >= minSwipeDistance) {
-    if (deltaX.value > 0 && activeIndex.value !== 0) {
-      setActive(activeIndex.value - 1)
-    } else if (deltaX.value < 0 && activeIndex.value !== items.value.length - 1) {
-      setActive(activeIndex.value + 1)
-      setActive(activeIndex.value + 1)
+    if (deltaX.value > 0 && state.activeIndex !== 0) {
+      setActive(state.activeIndex - 1)
+    } else if (deltaX.value < 0 && state.activeIndex !== items.value.length - 1) {
+      setActive(state.activeIndex + 1)
+      setActive(state.activeIndex + 1)
     }
   }
 }
@@ -482,7 +453,6 @@ function getActiveIndex(value: number | string) {
 
 defineExpose({
   setActive,
-  updateItems,
   scrollIntoView,
   updateLineStyle,
   children

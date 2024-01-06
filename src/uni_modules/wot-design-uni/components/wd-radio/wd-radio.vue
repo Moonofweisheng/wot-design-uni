@@ -31,7 +31,9 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { computed, getCurrentInstance, inject, onBeforeMount, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
+import { useParent } from '../composables/useParent'
+import { RADIO_GROUP_KEY } from '../wd-radio-group/types'
 
 type RadioShape = 'dot' | 'button' | 'check'
 interface Props {
@@ -53,111 +55,81 @@ const props = withDefaults(defineProps<Props>(), {
   inline: null
 })
 
-const isChecked = ref<boolean>(false) // 是否被选中
-const parent = inject<any>('radioGroup')
-const { proxy } = getCurrentInstance() as any
+const { parent: radioGroup } = useParent(RADIO_GROUP_KEY)
+
+const isChecked = computed(() => {
+  if (radioGroup) {
+    return props.value === radioGroup.props.modelValue
+  } else {
+    return false
+  }
+})
 
 const innerShape = computed(() => {
-  if (!props.shape && parent && parent.shape) {
-    return parent.shape
+  if (!props.shape && radioGroup && radioGroup.props.shape) {
+    return radioGroup.props.shape
   } else {
     return props.shape
   }
 })
 
 const innerCheckedColor = computed(() => {
-  if (!props.checkedColor && parent && parent.checkedColor) {
-    return parent.checkedColor
+  if (!props.checkedColor && radioGroup && radioGroup.props.checkedColor) {
+    return radioGroup.props.checkedColor
   } else {
     return props.checkedColor
   }
 })
 
 const innerDisabled = computed(() => {
-  if ((props.disabled === null || props.disabled === undefined) && parent && parent.disabled) {
-    return parent.disabled
+  if ((props.disabled === null || props.disabled === undefined) && radioGroup && radioGroup.props.disabled) {
+    return radioGroup.props.disabled
   } else {
     return props.disabled
   }
 })
 
 const innerInline = computed(() => {
-  if ((props.inline === null || props.inline === undefined) && parent && parent.inline) {
-    return parent.inline
+  if ((props.inline === null || props.inline === undefined) && radioGroup && radioGroup.props.inline) {
+    return radioGroup.props.inline
   } else {
     return props.inline
   }
 })
 
 const innerSize = computed(() => {
-  if (!props.size && parent && parent.size) {
-    return parent.size
+  if (!props.size && radioGroup && radioGroup.props.size) {
+    return radioGroup.props.size
   } else {
     return props.size
   }
 })
 
 const innerCell = computed(() => {
-  if ((props.cell === null || props.cell === undefined) && parent && parent.cell) {
-    return parent.cell
+  if ((props.cell === null || props.cell === undefined) && radioGroup && radioGroup.props.cell) {
+    return radioGroup.props.cell
   } else {
     return props.cell
   }
 })
 
 watch(
-  () => props.value,
-  (newValue) => {
-    // 当建立relations关系之后，radio的value改变,以下内容才能执行
-    if (!parent || newValue === null) return
-    // 会判断新value是否和radioGroup的value一致，一致就会调用radio的方法选中此节点。
-    // 如果之前本节点被选中，匹配不上还要主动关闭自己
-    if (newValue === parent.modelValue) {
-      parent.$.exposed.changeSelect(newValue)
-    } else {
-      isChecked.value = false
-    }
-  }
-)
-
-watch(
   () => props.shape,
   (newValue) => {
-    // type: 'dot', 'button', 'check'
     const type = ['check', 'dot', 'button']
     if (!newValue || type.indexOf(newValue) === -1) console.error(`shape must be one of ${type.toString()}`)
   }
 )
-
-onBeforeMount(() => {
-  if (parent) {
-    parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
-    isChecked.value = props.value === parent.modelValue
-  }
-})
 
 /**
  * 点击子元素，通知父元素触发change事件
  */
 function handleClick() {
   const { value } = props
-  if (!innerDisabled.value && parent && value !== null && value !== undefined) {
-    parent.$.exposed.handleClick(value)
-    // this.parent.setData({ value })
+  if (!innerDisabled.value && radioGroup && value !== null && value !== undefined) {
+    radioGroup.updateValue(value)
   }
 }
-
-/**
- * 设置选中状态
- * @param checked 选中状态
- */
-function setChecked(checked: boolean) {
-  isChecked.value = checked
-}
-
-defineExpose({
-  setChecked
-})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

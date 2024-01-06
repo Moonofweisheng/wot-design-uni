@@ -28,8 +28,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance } from 'vue'
-import { inject, onBeforeUnmount, onMounted } from 'vue'
+import { computed } from 'vue'
+import { useParent } from '../composables/useParent'
+import { SIDEBAR_KEY } from '../wd-sidebar/types'
 
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 interface BadgeProps {
@@ -68,20 +69,17 @@ interface Props {
   customClass?: string
 }
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: 0,
   disabled: false,
   max: 99,
   customStyle: '',
   customClass: ''
 })
 
-const parent = inject<any>('wdSidebar', null) // 父组件
-
-const { proxy } = getCurrentInstance() as any
+const { parent: sidebar } = useParent(SIDEBAR_KEY)
 
 const active = computed(() => {
   let active: boolean = false
-  if (parent && parent.value === props.value) {
+  if (sidebar && sidebar.props.modelValue === props.value) {
     active = true
   }
   return active
@@ -89,12 +87,12 @@ const active = computed(() => {
 
 const prefix = computed(() => {
   let prefix: boolean = false
-  if (parent) {
-    let activeIndex: number = parent.children.findIndex((c) => {
-      return c.value === parent.value
+  if (sidebar) {
+    let activeIndex: number = sidebar.children.findIndex((c: any) => {
+      return c.value === sidebar.props.modelValue
     })
 
-    let currentIndex: number = parent.children.findIndex((c) => {
+    let currentIndex: number = sidebar.children.findIndex((c: any) => {
       return c.value === props.value
     })
 
@@ -107,12 +105,12 @@ const prefix = computed(() => {
 
 const suffix = computed(() => {
   let suffix: boolean = false
-  if (parent) {
-    let activeIndex: number = parent.children.findIndex((c) => {
-      return c.value === parent.value
+  if (sidebar) {
+    let activeIndex: number = sidebar.children.findIndex((c: any) => {
+      return c.value === sidebar.props.modelValue
     })
 
-    let currentIndex: number = parent.children.findIndex((c) => {
+    let currentIndex: number = sidebar.children.findIndex((c: any) => {
       return c.value === props.value
     })
 
@@ -123,19 +121,11 @@ const suffix = computed(() => {
   return suffix
 })
 
-onMounted(() => {
-  parent && parent.setChild && parent.setChild(proxy)
-})
-
-onBeforeUnmount(() => {
-  parent && parent.removeChild && parent.removeChild(proxy)
-})
-
 function handleClick() {
   if (props.disabled) {
     return
   }
-  parent && parent.setChange && parent.setChange(props.value, props.label)
+  sidebar && sidebar.setChange(props.value, props.label)
 }
 </script>
 

@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2023-07-14 11:36:50
+ * @LastEditTime: 2024-01-03 21:31:31
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-steps\wd-steps.vue
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-steps/wd-steps.vue
  * 记得注释
 -->
 <template>
@@ -23,7 +23,8 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, provide, watch } from 'vue'
+import { useChildren } from '../composables/useChildren'
+import { STEPS_KEY } from './types'
 
 interface Props {
   customClass?: string
@@ -42,50 +43,9 @@ const props = withDefaults(defineProps<Props>(), {
   alignCenter: false
 })
 
-const children: any[] = [] // 子组件
-const { proxy } = getCurrentInstance() as any
+const { linkChildren } = useChildren(STEPS_KEY)
 
-watch(
-  () => props.active,
-  () => {
-    if (children && children.length) {
-      children.forEach((child) => child.$.exposed.setIndexAndStatus())
-    }
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-provide('wdsteps', proxy)
-
-/**
- * 设置子项
- * @param child
- */
-function setChild(child) {
-  const hasChild = children.findIndex((drop) => {
-    return drop.$.uid === child.$.uid
-  })
-  if (hasChild <= -1) {
-    children.push(child)
-  } else {
-    children[hasChild] = child
-  }
-  let timer = setTimeout(() => {
-    clearTimeout(timer)
-    const { vertical, dot, alignCenter } = props
-    const canAlignCenter = !vertical && alignCenter
-    child.$.exposed.setStyleFromParent(vertical, dot, canAlignCenter)
-    children.forEach((child) => child.$.exposed.setIndexAndStatus())
-  }, 30)
-}
-
-defineExpose({
-  setChild,
-  children
-})
+linkChildren({ props })
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

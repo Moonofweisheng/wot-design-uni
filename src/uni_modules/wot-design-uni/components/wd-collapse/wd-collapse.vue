@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-11-20 13:33:11
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse\wd-collapse.vue
- * 记得注释
--->
 <template>
   <view :class="`wd-collapse ${viewmore ? 'is-viewmore' : ''} ${customClass}`">
     <!-- 普通或手风琴 -->
@@ -50,9 +41,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, provide, ref, watch } from 'vue'
-import type { CollapseItem } from './types'
-import { deepClone, isBoolean } from '../common/util'
+import { onBeforeMount, ref, watch } from 'vue'
+import { COLLAPSE_KEY, type CollapseToggleAllOptions } from './types'
+import { useChildren } from '../composables/useChildren'
+import { isArray } from '../common/util'
 
 interface Props {
   customClass?: string
@@ -74,9 +66,10 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const contentLineNum = ref<number>(0) // 查看更多的折叠面板，收起时的显示行数
-const children: CollapseItem[] = [] // 子组件
-const firstItem = ref<string>('') // 第一项
-const { proxy } = getCurrentInstance() as any
+
+const { linkChildren, children } = useChildren(COLLAPSE_KEY)
+
+linkChildren({ props, toggle })
 
 const emit = defineEmits(['change', 'update:modelValue'])
 
@@ -87,7 +80,7 @@ watch(
     // 手风琴状态下 value 类型只能为 string
     if (accordion && typeof newVal !== 'string') {
       console.error('accordion value must be string')
-    } else if (!accordion && !viewmore && checkType(newVal) !== 'Array') {
+    } else if (!accordion && !viewmore && !isArray(newVal)) {
       console.error('value must be Array')
     }
   },
@@ -109,61 +102,47 @@ onBeforeMount(() => {
   contentLineNum.value = viewmore && !modelValue ? lineNum : 0
 })
 
-/**
- * 设置子项
- * @param child
- */
-function setChild(child: CollapseItem) {
-  const hasChild = children.findIndex((item) => {
-    return item.name === child.name
-  })
-  if (hasChild === -1) {
-    const repeat = checkRepeat(children, child.name, 'name')
-    if (repeat > -1) {
-      console.error('Name attribute cannot be defined repeatedly')
-    }
-    children.push(child)
-  } else {
-    children[hasChild] = child
-  }
-  if (children.length) {
-    firstItem.value = children[0].name
-  }
-}
-
-function checkType(value) {
-  return Object.prototype.toString.call(value).slice(8, -1)
-}
-/**
- * 检查是否存在重复属性
- * @param {Array} currentList
- * @param {String} checkValue 比较的重复值
- * @param {String} key 键名
- */
-function checkRepeat(currentList: CollapseItem[], checkValue: string, key: string): number {
-  return currentList.findIndex((item) => item[key] === checkValue)
-}
-
-/**
- * 子项状态变更
- * @param child 子项
- */
-function setChange(child: CollapseItem) {
-  let activeNames: string | string[] | boolean = deepClone(props.modelValue || '')
-  if (!isBoolean(activeNames)) {
-    if (props.accordion) {
-      activeNames = child.expanded ? child.name : ''
-    } else {
-      activeNames = child.expanded
-        ? Array.from(new Set((activeNames || []).concat(child.name)))
-        : ((activeNames as string[]) || []).filter((activeName: string | number) => activeName !== child.name)
-    }
-  }
-
+function updateChange(activeNames: string | string[] | boolean) {
   emit('update:modelValue', activeNames)
   emit('change', {
     value: activeNames
   })
+}
+
+function toggle(name: string, expanded: boolean) {
+  const { accordion, modelValue } = props
+  if (accordion) {
+    updateChange(name === modelValue ? '' : name)
+  } else if (expanded) {
+    updateChange((modelValue as string[]).concat(name))
+  } else {
+    updateChange((modelValue as string[]).filter((activeName) => activeName !== name))
+  }
+}
+
+const toggleAll = (options: boolean | CollapseToggleAllOptions = {}) => {
+  if (props.accordion) {
+    return
+  }
+  if (typeof options === 'boolean') {
+    options = { expanded: options }
+  }
+
+  const { expanded, skipDisabled } = options
+  const names: string[] = []
+
+  children.forEach((item: any, index: number) => {
+    if (item.disabled && skipDisabled) {
+      if (item.$.exposed.expanded.value) {
+        names.push(item.name || index)
+      }
+    } else {
+      if (expanded ?? !item.$.exposed.expanded.value) {
+        names.push(item.name || index)
+      }
+    }
+  })
+  updateChange(names)
 }
 
 /**
@@ -176,16 +155,8 @@ function handleMore() {
   })
 }
 
-provide('wdcollapse', proxy)
-provide('firstItem', firstItem)
-provide('set-child', setChild) // 将设置子项方法导出
-provide('set-change', setChange) // 将子项状态变更方法导出
-
 defineExpose({
-  children,
-  setChild,
-  checkRepeat
-  // switchValue
+  toggleAll
 })
 </script>
 

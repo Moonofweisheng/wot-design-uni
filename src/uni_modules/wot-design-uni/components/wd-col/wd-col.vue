@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2023-11-20 13:32:00
+ * @LastEditTime: 2024-01-03 21:59:39
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-col\wd-col.vue
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-col/wd-col.vue
  * 记得注释
 -->
 <template>
@@ -25,8 +25,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { inject, provide, watch } from 'vue'
+import { computed, inject, provide, watch } from 'vue'
 import { ref } from 'vue'
+import { useParent } from '../composables/useParent'
+import { ROW_KEY } from '../wd-row/types'
 interface Props {
   span?: number
   offset?: number
@@ -40,14 +42,23 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const style = ref<string>('')
-const row: any = inject('$row')
+
+const { parent: row } = useParent(ROW_KEY)
+
+const gutter = computed(() => {
+  if (row) {
+    return row.props.gutter || 0
+  } else {
+    return 0
+  }
+})
 
 watch([() => props.span, () => props.offset], () => {
   check()
 })
 
 watch(
-  () => row.gutter,
+  () => gutter.value,
   (newVal) => {
     setGutter(newVal || 0)
   },
@@ -69,8 +80,6 @@ function setGutter(gutter: number) {
     style.value = customStyle
   }
 }
-
-provide('setGutter', setGutter) // 将设置子项方法导出
 </script>
 
 <style lang="scss" scoped>

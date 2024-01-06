@@ -15,8 +15,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, provide, watch } from 'vue'
-import { checkNumRange, debounce, deepClone } from '../common/util'
+import { watch } from 'vue'
+import { checkNumRange, deepClone } from '../common/util'
+import { useChildren } from '../composables/useChildren'
+import { CHECKBOX_GROUP_KEY } from './types'
 
 type checkShape = 'circle' | 'square' | 'button'
 interface Props {
@@ -45,22 +47,9 @@ const props = withDefaults(defineProps<Props>(), {
   inline: false
 })
 
-const children: any[] = [] // 子组件
-const { proxy } = getCurrentInstance() as any
+const { linkChildren } = useChildren(CHECKBOX_GROUP_KEY)
 
-/**
- * @description 修正子组件的 isChecked 和 finalDisabled
- * @param {array} values
- */
-const resetChildren = debounce(function (values) {
-  values = values || props.modelValue
-  children &&
-    children.forEach((child) => {
-      // value 对应的节点直接选中
-      const isChecked = values.indexOf(child.modelValue) > -1
-      child.$.exposed.setChecked(isChecked)
-    })
-}, 50)
+linkChildren({ props, changeSelectState })
 
 watch(
   () => props.modelValue,
@@ -79,7 +68,6 @@ watch(
       console.error("checkboxGroup's bound value's length can't be large than max")
     }
     // 每次value变化都会触发重新匹配选中项
-    children && children.length > 0 && resetChildren()
   },
   { deep: true, immediate: true }
 )
@@ -94,18 +82,9 @@ watch(
 )
 
 watch(
-  [() => props.disabled, () => props.inline, () => props.size],
-  () => {
-    resetChildren()
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
   () => props.min,
   (newValue) => {
     checkNumRange(newValue, 'min')
-    resetChildren()
   },
   { deep: true, immediate: true }
 )
@@ -114,7 +93,6 @@ watch(
   () => props.max,
   (newValue) => {
     checkNumRange(newValue, 'max')
-    resetChildren()
   },
   { deep: true, immediate: true }
 )
@@ -122,40 +100,10 @@ watch(
 const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
- * 设置子项
- * @param child
- */
-function setChild(child) {
-  const hasChild = children.findIndex((check) => {
-    return check.$.uid === child.$.uid
-  })
-  if (hasChild <= -1) {
-    children.push(child)
-  } else {
-    children[hasChild] = child
-  }
-
-  const index = children.findIndex((check) => {
-    return check.$.uid === child.$.uid
-  })
-  // 如果当前子节点为第一个组件，将其isFirst设置为true
-  if (index === 0) {
-    child.$.exposed.setFirst(true)
-  }
-  // 如果当前子节点为最后一个组件，将其isLast设置为true，删掉倒数第二个子节点的isLast
-  if (index === children.length - 1) {
-    child.$.exposed.setLast(true)
-    const [prevChild] = children.slice(-2, -1)
-    prevChild && prevChild.$.exposed.setLast(false)
-  }
-  resetChildren()
-}
-
-/**
  * @description 子节点通知父节点修改子节点选中状态
  * @param {any} value 子组件的标识符
  */
-function changeSelectState(value) {
+function changeSelectState(value: string | number | boolean) {
   const temp: (string | number | boolean)[] = deepClone(props.modelValue)
   const index = temp.indexOf(value)
   if (index > -1) {
@@ -166,20 +114,11 @@ function changeSelectState(value) {
     temp.push(value)
   }
   emit('update:modelValue', temp)
-  // 操作完之后更新一下 所有节点的 disabled 状态
-  resetChildren(temp)
+
   emit('change', {
     value: temp
   })
 }
-
-provide('checkGroup', proxy)
-
-defineExpose({
-  setChild,
-  changeSelectState,
-  children
-})
 </script>
 
 <style lang="scss" scoped>

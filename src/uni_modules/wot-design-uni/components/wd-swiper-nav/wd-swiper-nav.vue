@@ -63,7 +63,7 @@ interface Props {
   customStyle?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   customClass: '',
   customStyle: '',
   current: 0,
