@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.7...v0.2.8) (2024-01-06)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  展示netlify支持 ([410b180](https://github.com/Moonofweisheng/wot-design-uni/commit/410b180ec9c660ab9c49d6eb203d53c35919c512))
+
 ### [0.2.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.5...v0.2.7) (2024-01-06)
 
 
