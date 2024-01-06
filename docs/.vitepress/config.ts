@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2023-12-21 22:27:02
+ * @LastEditTime: 2024-01-06 22:20:13
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
+ * @FilePath: /wot-design-uni/docs/.vitepress/config.ts
  * 记得注释
  */
 import { defineConfig } from 'vitepress';
