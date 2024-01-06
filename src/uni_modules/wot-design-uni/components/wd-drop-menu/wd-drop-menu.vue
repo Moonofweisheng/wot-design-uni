@@ -2,13 +2,13 @@
   <view :style="customStyle" :class="`wd-drop-menu ${customClass}`" @click.stop="noop">
     <view class="wd-drop-menu__list">
       <view
-        v-for="(item, index) in titleList"
+        v-for="(child, index) in children"
         :key="index"
-        @click="toggle(item.uid)"
-        :class="`wd-drop-menu__item ${item.disabled ? 'is-disabled' : ''} ${currentUid === item.uid ? 'is-active' : ''}`"
+        @click="toggle(child)"
+        :class="`wd-drop-menu__item ${child.disabled ? 'is-disabled' : ''} ${currentUid === child.$.uid ? 'is-active' : ''}`"
       >
         <view class="wd-drop-menu__item-title">
-          <view class="wd-drop-menu__item-title-text">{{ item.title }}</view>
+          <view class="wd-drop-menu__item-title-text">{{ getDisplayTitle(child) }}</view>
           <wd-icon name="arrow-down" size="14px" custom-class="wd-drop-menu__arrow" />
         </view>
       </view>
@@ -28,10 +28,12 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, inject, onBeforeMount, onMounted, provide, ref, watch } from 'vue'
+import { getCurrentInstance, inject, onBeforeMount, ref, watch } from 'vue'
 import { closeOther } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { getRect } from '../common/util'
+import { useChildren } from '../composables/useChildren'
+import { DROP_MENU_KEY } from './types'
 
 type DropDirction = 'up' | 'down'
 interface Props {
@@ -55,15 +57,16 @@ const props = withDefaults(defineProps<Props>(), {
 })
 const queue = inject<Queue | null>(queueKey, null)
 
-// 保存的永远是当前选中的值
-const titleList = ref<Record<string, any>[]>([])
 // -1表示折叠
-const currentUid = ref<string | null>(null)
+const currentUid = ref<number | null>(null)
 const offset = ref<number>(0)
 const windowHeight = ref<number>(0)
 
-const children: any[] = []
 const { proxy } = getCurrentInstance() as any
+
+const { linkChildren, children } = useChildren(DROP_MENU_KEY)
+
+linkChildren({ props, fold, offset })
 
 watch(
   () => props.direction,
@@ -80,32 +83,26 @@ onBeforeMount(() => {
   windowHeight.value = uni.getSystemInfoSync().windowHeight
 })
 
-onMounted(() => {
-  updateTitle()
-})
-
-/**
- * 设置子项
- * @param child
- */
-function setChild(child) {
-  const hasChild = children.findIndex((drop) => {
-    return drop.$.uid === child.$.uid
-  })
-  if (hasChild <= -1) {
-    children.push(child)
-  } else {
-    children[hasChild] = child
-  }
+function noop(event: Event) {
+  event.preventDefault()
+  event.stopPropagation()
 }
 
-function noop() {}
+function getDisplayTitle(child: any) {
+  const { title, modelValue, options, valueKey, labelKey } = child
 
-function toggle(uid: string) {
-  // 如果重复展开相同的选项，则折叠选项卡
-  const child = children.find((child) => {
-    return child.$.uid === uid
-  })
+  if (title) {
+    return title
+  }
+  for (let i = 0, len = options.length; i < len; i++) {
+    if (modelValue === options[i][valueKey]) {
+      return options[i][labelKey]
+    }
+  }
+  console.error('[wot-design] warning(wd-drop-menu-item): no value is matched in the options option.')
+}
+
+function toggle(child: any) {
   // 点击当前 menu, 关闭其他 menu
   if (child && !child.disabled) {
     if (queue && queue.closeOther) {
@@ -118,17 +115,15 @@ function toggle(uid: string) {
 }
 /**
  * 控制菜单内容是否展开
- * @param {Number} currentIndex 当前选的索引
  */
 function fold(child?: any) {
   currentUid.value = child ? child.$.uid : null
   if (!child) {
-    children.forEach((item, index) => {
-      item.$.exposed.setShowPop(false)
+    children.forEach((item) => {
+      item.$.exposed!.setShowPop(false)
     })
     return
   }
-
   getRect('.wd-drop-menu', false, proxy).then((rect: any) => {
     if (!rect) return
     const { top, bottom } = rect
@@ -139,36 +134,15 @@ function fold(child?: any) {
       offset.value = windowHeight.value - top
     }
     // 选中当前关掉其他的
-    children.forEach((item, index) => {
+    children.forEach((item) => {
       if (child.$.uid === item.$.uid) {
-        item.$.exposed.open()
+        item.$.exposed!.open()
       } else {
-        item.$.exposed.setShowPop(false)
+        item.$.exposed!.setShowPop(false)
       }
     })
   })
 }
-// 重设选中的 value 菜单列表
-function updateTitle() {
-  const titleListTemp: Record<string, any>[] = []
-  children.forEach((item, index) => {
-    titleListTemp.push({
-      uid: item.$.uid,
-      title: item.$.exposed.displayTitle.value,
-      disabled: item.disabled
-    })
-  })
-  titleList.value = titleListTemp
-}
-
-defineExpose({
-  setChild,
-  offset,
-  fold,
-  updateTitle
-})
-
-provide('dropMenu', proxy)
 </script>
 
 <style lang="scss" scoped>

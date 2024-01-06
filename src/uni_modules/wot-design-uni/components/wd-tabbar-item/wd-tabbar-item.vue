@@ -24,8 +24,10 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { type CSSProperties, computed, inject, onMounted, ref, watch, getCurrentInstance } from 'vue'
+import { type CSSProperties, computed, onMounted } from 'vue'
 import { isDef, objToStyle } from '../common/util'
+import { useParent } from '../composables/useParent'
+import { TABBAR_KEY } from '../wd-tabbar/types'
 
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 interface BadgeProps {
@@ -67,39 +69,35 @@ const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   customStyle: ''
 })
-const { proxy } = getCurrentInstance() as any
 
-const parent = inject<any>('wdtabbar', { value: '' }) // 父组件
-const active = ref<boolean>(false) // 是否激活
-const index = ref<number>(0) // 当前tabbar 下标
+const { parent: tabbar, index } = useParent(TABBAR_KEY)
 
 const textStyle = computed(() => {
   const style: CSSProperties = {}
-  if (active.value && parent.activeColor) {
-    style['color'] = parent.activeColor
+  if (tabbar) {
+    if (active.value && tabbar.props.activeColor) {
+      style['color'] = tabbar.props.activeColor
+    }
+    if (!active.value && tabbar.props.inactiveColor) {
+      style['color'] = tabbar.props.inactiveColor
+    }
   }
-  if (!active.value && parent.inactiveColor) {
-    style['color'] = parent.inactiveColor
-  }
+
   return `${objToStyle(style)}`
 })
 
-watch(
-  () => parent.modelValue,
-  (newVal: string | number) => {
-    const name = isDef(props.name) ? props.name : index.value
-    if (isDef(newVal)) {
-      if (newVal === name) {
-        active.value = true
-      } else {
-        active.value = false
-      }
+const active = computed(() => {
+  const name = isDef(props.name) ? props.name : index.value
+  if (tabbar) {
+    if (tabbar.props.modelValue === name) {
+      return true
     } else {
-      active.value = false
+      return false
     }
-  },
-  { deep: true }
-)
+  } else {
+    return false
+  }
+})
 
 onMounted(() => {
   init()
@@ -109,27 +107,10 @@ onMounted(() => {
  * 初始化将组件信息注入父组件
  */
 function init() {
-  if (parent.children && isDef(props.name)) {
-    const repeat = checkRepeat(parent.children, props.name, 'name')
+  if (tabbar && tabbar.children && isDef(props.name)) {
+    const repeat = checkRepeat(tabbar.children, props.name, 'name')
     if (repeat > -1) {
       console.error('[wot-design] warning(wd-tabbar-item): name attribute cannot be defined repeatedly')
-    }
-  }
-  parent.setChild && parent.setChild(proxy)
-  index.value = parent.children.indexOf(proxy)
-  updateActive()
-}
-
-/**
- * 更新展开状态
- */
-function updateActive() {
-  if (parent && isDef(parent.modelValue)) {
-    const name = isDef(props.name) ? props.name : index.value
-    if (parent.modelValue === name) {
-      active.value = true
-    } else {
-      active.value = false
     }
   }
 }
@@ -148,9 +129,8 @@ function checkRepeat(currentList: any[], checkValue: string | number, key: strin
  * 点击tabbar选项
  */
 function handleClick() {
-  active.value = true
-  const name = isDef(props.name) ? props.name : index.value
-  parent.setChange && parent.setChange({ name })
+  const name: string | number = isDef(props.name) ? props.name : index.value
+  tabbar && tabbar.setChange({ name })
 }
 </script>
 <style lang="scss" scoped>

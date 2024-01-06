@@ -53,8 +53,10 @@ export default {
 import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
-import { debounce } from '../common/util'
 import type { PopupType } from '../wd-popup/type'
+import { useParent } from '../composables/useParent'
+import { DROP_MENU_KEY } from '../wd-drop-menu/types'
+import { isDef } from '../common/util'
 
 interface Props {
   customClass?: string
@@ -90,40 +92,21 @@ const queue = inject<Queue | null>(queueKey, null)
 const showWrapper = ref<boolean>(false)
 const showPop = ref<boolean>(false)
 const position = ref<PopupType>()
-const transName = ref<string>('')
 const zIndex = ref<number>(12)
-const displayTitle = ref<string>('')
 const modal = ref<boolean>(true)
 const closeOnClickModal = ref<boolean>(true)
 const duration = ref<number>(0)
 
-const parent = inject<any>('dropMenu')
-const { proxy } = getCurrentInstance() as any
+const { parent: dropMenu } = useParent(DROP_MENU_KEY)
 
-const updateTitle = debounce(function () {
-  setDisplayTitle()
-  parent && parent.$.exposed.updateTitle && parent.$.exposed.updateTitle()
-}, 50)
+const { proxy } = getCurrentInstance() as any
 
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (typeof newValue !== 'number' && typeof newValue !== 'string') {
+    if (isDef(newValue) && typeof newValue !== 'number' && typeof newValue !== 'string') {
       console.error('[wot-design] warning(wd-drop-menu-item): the type of value should be a number or a string.')
-      return
     }
-    updateTitle()
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-watch(
-  [() => props.options, () => props.title],
-  () => {
-    updateTitle()
   },
   {
     deep: true,
@@ -137,10 +120,6 @@ onBeforeMount(() => {
   } else {
     pushToQueue(proxy)
   }
-  if (parent) {
-    parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
-    updateTitle()
-  }
 })
 
 onBeforeUnmount(() => {
@@ -151,27 +130,7 @@ onBeforeUnmount(() => {
   }
 })
 
-onMounted(() => {
-  setDisplayTitle()
-})
-
 const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
-
-function setDisplayTitle() {
-  const { title, modelValue, options, valueKey, labelKey } = props
-
-  if (title) {
-    displayTitle.value = title
-    return
-  }
-  for (let i = 0, len = options.length; i < len; i++) {
-    if (modelValue === options[i][valueKey]) {
-      displayTitle.value = options[i][labelKey]
-      return
-    }
-  }
-  console.error('[wot-design] warning(wd-drop-menu-item): no value is matched in the options option.')
-}
 
 /**
  * 父组件更改子组件内部
@@ -192,21 +151,20 @@ function choose(index: number) {
     value: item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item,
     selectedItem: item
   })
-  parent.$.exposed.updateTitle()
 }
 // 外部关闭弹出框
 function close() {
   showPop.value = false
-  parent.$.exposed.fold()
+  dropMenu && dropMenu.fold()
 }
 
 const positionStyle = computed(() => {
   let style: string = ''
-  if (showPop.value) {
+  if (showPop.value && dropMenu) {
     style =
-      parent.direction === 'down'
-        ? `top: calc(var(--window-top) + ${parent.$.exposed.offset.value}px); bottom: 0;`
-        : `top: 0; bottom: calc(var(--window-bottom) + ${parent.$.exposed.offset.value}px)`
+      dropMenu.props.direction === 'down'
+        ? `top: calc(var(--window-top) + ${dropMenu.offset.value}px); bottom: 0;`
+        : `top: 0; bottom: calc(var(--window-bottom) + ${dropMenu.offset.value}px)`
   } else {
     style = ''
   }
@@ -216,10 +174,13 @@ const positionStyle = computed(() => {
 function open() {
   showWrapper.value = true
   showPop.value = true
-  modal.value = parent.modal
-  duration.value = parent.duration
-  closeOnClickModal.value = parent.closeOnClickModal
-  position.value = parent.direction === 'down' ? 'top' : 'bottom'
+  if (dropMenu) {
+    modal.value = Boolean(dropMenu.props.modal)
+    duration.value = Number(dropMenu.props.duration)
+    closeOnClickModal.value = Boolean(dropMenu.props.closeOnClickModal)
+    position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
+  }
+
   emit('open')
 }
 function onPopupClose() {
@@ -236,7 +197,7 @@ function handleClose() {
   emit('close')
 }
 
-defineExpose({ setShowPop, open, close, displayTitle })
+defineExpose({ setShowPop, open, close })
 </script>
 
 <style lang="scss" scoped>

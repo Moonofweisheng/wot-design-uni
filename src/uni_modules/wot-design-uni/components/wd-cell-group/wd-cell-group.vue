@@ -30,7 +30,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, provide, ref } from 'vue'
+import { useChildren } from '../composables/useChildren'
+import { CELL_GROUP_KEY } from './types'
 
 interface Props {
   customClass?: string
@@ -45,10 +46,9 @@ const props = withDefaults(defineProps<Props>(), {
   customClass: ''
 })
 
-const cellList = ref<any>([]) // cell列表
-provide('cell-list', cellList)
-const { proxy } = getCurrentInstance() as any
-provide('cell-group', proxy)
+const { linkChildren } = useChildren(CELL_GROUP_KEY)
+
+linkChildren({ props })
 </script>
 
 <style lang="scss" scoped>

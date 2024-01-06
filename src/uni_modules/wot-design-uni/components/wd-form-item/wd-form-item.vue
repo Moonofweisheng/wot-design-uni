@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2023-12-17 15:16:03
+ * @LastEditTime: 2024-01-03 21:50:52
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-form-item\wd-form-item.vue
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-form-item/wd-form-item.vue
  * 记得注释
 -->
 <template>
@@ -69,7 +69,7 @@ const errorMessage = computed(() => {
 })
 
 const border = computed(() => {
-  if (index.value > 0 && form && form.border) {
+  if (index.value > 0 && form && form.props.border) {
     return true
   } else {
     return false

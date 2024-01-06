@@ -120,8 +120,8 @@ const errorMessage = computed(() => {
 // 是否展示必填
 const isRequired = computed(() => {
   let formRequired = false
-  if (form && form.rules) {
-    const rules = form.rules
+  if (form && form.props.rules) {
+    const rules = form.props.rules
     for (const key in rules) {
       if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
         formRequired = rules[key].some((rule: FormItemRule) => rule.required)

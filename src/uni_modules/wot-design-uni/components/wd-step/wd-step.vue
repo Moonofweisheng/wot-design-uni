@@ -42,7 +42,10 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, inject, onBeforeMount, ref } from 'vue'
+import { computed } from 'vue'
+import { useParent } from '../composables/useParent'
+import { STEPS_KEY } from '../wd-steps/types'
+import { isDef } from '../common/util'
 
 type StepStatus = 'finished' | 'process' | 'error'
 
@@ -66,49 +69,61 @@ const props = withDefaults(defineProps<Props>(), {
   descriptionSlot: false
 })
 
-const index = ref<number>(-1)
-const styles = ref<string>('')
-const currentStatus = ref<string>('')
-const currentTitle = ref<string>('')
-const canAlignCenter = ref<boolean>(false)
-const vertical = ref<boolean>(false)
-const dot = ref<boolean>(false)
-const childrenLength = ref<number>(0)
+const { parent: steps, index } = useParent(STEPS_KEY)
 
-const parent = inject<any>('wdsteps')
-const { proxy } = getCurrentInstance() as any
+const currentStatus = computed(() => {
+  return getCurrentStatus(index.value)
+})
 
-onBeforeMount(() => {
-  if (parent) {
-    parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
+const currentTitle = computed(() => {
+  return getCurrentTitle(currentStatus.value)
+})
+const styles = computed(() => {
+  return getStyles()
+})
+
+const canAlignCenter = computed(() => {
+  if (isDef(steps)) {
+    const { vertical, alignCenter } = steps.props
+    return Boolean(!vertical && alignCenter)
+  } else {
+    return false
   }
 })
 
-/**
- * 父组件设置子组件样式
- * @param v vertical
- * @param d dot
- * @param c canAlignCenter
- */
-function setStyleFromParent(v: boolean, d: boolean, c: boolean) {
-  vertical.value = v
-  dot.value = d
-  canAlignCenter.value = c
-}
+const vertical = computed(() => {
+  if (isDef(steps)) {
+    return Boolean(steps.props.vertical)
+  } else {
+    return false
+  }
+})
+const dot = computed(() => {
+  if (isDef(steps)) {
+    return Boolean(steps.props.dot)
+  } else {
+    return false
+  }
+})
 
-function getIndex() {
-  const index = parent.$.exposed.children.findIndex((child: { $: { uid: any } }) => {
-    return child.$.uid === proxy.$.uid
-  })
-  return index
-}
+const childrenLength = computed(() => {
+  if (isDef(steps)) {
+    return Number(steps.children.length)
+  } else {
+    return 0
+  }
+})
 
 function getStyles() {
-  const { vertical, space } = parent
-  if (vertical) {
-    return space ? `height: ${space}` : ''
+  if (steps) {
+    const { vertical, space } = steps.props
+    if (vertical) {
+      return space ? `height: ${space}` : ''
+    } else {
+      return `width: ${space || 100 / steps.children.length + '%'}`
+    }
   } else {
-    return `width: ${space || 100 / parent.$.exposed.children.length + '%'}`
+    return ''
   }
 }
 function getCurrentStatus(index: number) {
@@ -116,12 +131,15 @@ function getCurrentStatus(index: number) {
     return props.status
   }
 
-  const { active } = parent
-
-  if (active > index) {
-    return 'finished'
-  } else if (active === index) {
-    return 'process'
+  if (steps) {
+    const { active } = steps.props
+    if (Number(active) > index) {
+      return 'finished'
+    } else if (Number(active) === index) {
+      return 'process'
+    } else {
+      return 'wait'
+    }
   } else {
     return 'wait'
   }
@@ -141,15 +159,6 @@ function getCurrentTitle(currentStatus: string) {
       return '未开始'
   }
 }
-function setIndexAndStatus() {
-  index.value = getIndex()
-  currentStatus.value = getCurrentStatus(index.value)
-  currentTitle.value = getCurrentTitle(currentStatus.value)
-  styles.value = getStyles()
-  childrenLength.value = parent.$.exposed.children.length
-}
-
-defineExpose({ setIndexAndStatus, setStyleFromParent })
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

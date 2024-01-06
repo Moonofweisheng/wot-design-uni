@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-10-29 17:42:06
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-collapse-item\wd-collapse-item.vue
- * 记得注释
--->
 <template>
   <view :class="`wd-collapse-item ${disabled ? 'is-disabled' : ''} is-border ${customClass}`">
     <view :class="`wd-collapse-item__header  ${isFirst ? 'wd-collapse-item__header-first' : ''}`" @click="handleClick">
@@ -32,8 +23,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { type Ref, computed, getCurrentInstance, inject, onMounted, ref, watch } from 'vue'
+import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import { getRect, isArray, isDef, isPromise, objToStyle } from '../common/util'
+import { useParent } from '../composables/useParent'
+import { COLLAPSE_KEY } from '../wd-collapse/types'
 
 const $body = '.wd-collapse-item__body'
 
@@ -52,15 +45,10 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false
 })
 
-const parent = inject<any>('wdcollapse')
-// eslint-disable-next-line @typescript-eslint/ban-types
-const setChange: Function | undefined = inject('set-change') // 设置子组件是否显示
-// eslint-disable-next-line @typescript-eslint/ban-types
-const setChild: Function | undefined = inject('set-child') // 将子组件上下文放到父组件children中
+const { parent: collapse, index } = useParent(COLLAPSE_KEY)
 
 const height = ref<string | number>('')
 const show = ref<boolean>(true)
-const firstItem = inject<Ref<string>>('firstItem')
 
 const expanded = ref<boolean>(false)
 
@@ -71,7 +59,7 @@ const { proxy } = getCurrentInstance() as any
  * 容器样式，(动画)
  */
 const isFirst = computed(() => {
-  return firstItem && firstItem.value === props.name
+  return index.value === 0
 })
 
 /**
@@ -85,9 +73,17 @@ const contentStyle = computed(() => {
   return objToStyle(style)
 })
 
+const selected = computed(() => {
+  if (collapse) {
+    return collapse.props.modelValue
+  } else {
+    return []
+  }
+})
+
 watch(
-  () => parent.modelValue,
-  (newVal: string | string[]) => {
+  () => selected.value,
+  (newVal) => {
     const name = props.name
     if (isDef(newVal)) {
       if (typeof newVal === 'string' && newVal === name) {
@@ -102,6 +98,10 @@ watch(
     } else {
       expanded.value = false
     }
+  },
+  {
+    deep: true,
+    immediate: true
   }
 )
 
@@ -114,26 +114,6 @@ onMounted(() => {
  */
 function init() {
   doResetHeight($body)
-  updateExpended()
-  let name = props.name
-  setChild && setChild({ name: name, expanded: expanded.value })
-}
-
-/**
- * 更新展开状态
- */
-function updateExpended() {
-  if (parent) {
-    let { modelValue } = parent
-    let name = props.name
-    if (modelValue) {
-      if (typeof modelValue === 'string' && modelValue === name) {
-        expanded.value = true
-      } else if (isArray(modelValue) && modelValue.indexOf(name) >= 0) {
-        expanded.value = true
-      }
-    }
-  }
 }
 
 /**
@@ -141,7 +121,7 @@ function updateExpended() {
  * @param {String} select 选择器名称
  * @param {Boolean} firstRender 是否首次渲染
  */
-function doResetHeight(select) {
+function doResetHeight(select: string) {
   getRect(select, false, proxy).then((rect: any) => {
     if (!rect) return
     const { height: rectHeight } = rect
@@ -162,26 +142,20 @@ function handleClick() {
       }
       if (isPromise(response)) {
         response.then(() => {
-          setChange && setChange({ name: name, expanded: !expanded.value })
+          collapse && collapse.toggle(name, !expanded.value)
         })
       } else {
-        setChange && setChange({ name: name, expanded: !expanded.value })
+        collapse && collapse.toggle(name, !expanded.value)
       }
     } else {
-      setChange && setChange({ name: name, expanded: !expanded.value })
+      collapse && collapse.toggle(name, !expanded.value)
     }
   } else {
-    setChange && setChange({ name: name, expanded: !expanded.value })
+    collapse && collapse.toggle(name, !expanded.value)
   }
 }
-// 动画结束时触发
-function onTransitionend() {
-  if (!expanded.value) {
-    show.value = false
-  } else {
-    height.value = ''
-  }
-}
+
+defineExpose({ expanded })
 </script>
 
 <style lang="scss" scoped>

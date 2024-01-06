@@ -17,7 +17,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, provide, ref, watch } from 'vue'
+import { watch } from 'vue'
+import { useChildren } from '../composables/useChildren'
+import { GRID_KEY } from './types'
+import { debounce } from '../common/util'
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 20))
 
 interface Props {
@@ -38,10 +41,9 @@ const props = withDefaults(defineProps<Props>(), {
   bgColor: ''
 })
 
-const children: any[] = [] // 子组件
 // 子元素个数
-const childCount = ref<number>(0)
-const { proxy } = getCurrentInstance() as any
+const { linkChildren, children } = useChildren(GRID_KEY)
+linkChildren({ props })
 
 watch(
   () => props.column,
@@ -76,22 +78,19 @@ watch(
   }
 )
 
-/**
- * 设置子项
- * @param child
- */
-function setChild(child) {
-  const hasChild = children.findIndex((grid) => {
-    return grid.$.uid === child.$.uid
-  })
-  if (hasChild <= -1) {
-    children.push(child)
-    childCount.value = childCount.value + 1
-  } else {
-    children[hasChild] = child
+watch(
+  () => children,
+  () => {
+    handleChildrenChange()
+  },
+  {
+    deep: true
   }
+)
+
+const handleChildrenChange = debounce(() => {
   init()
-}
+}, 50)
 
 function init() {
   if (!children) return
@@ -101,26 +100,17 @@ function init() {
       if (column) {
         const isRightItem = children.length - 1 === index || (index + 1) % column === 0
         const isFirstLine = index + 1 <= column
-
-        isFirstLine && item.$.exposed.setiIemClass('is-first')
-        isRightItem && item.$.exposed.setiIemClass('is-right')
-        !isFirstLine && item.$.exposed.setiIemClass('is-border')
+        isFirstLine && item.$.exposed!.setiIemClass('is-first')
+        isRightItem && item.$.exposed!.setiIemClass('is-right')
+        !isFirstLine && item.$.exposed!.setiIemClass('is-border')
       } else {
-        item.$.exposed.setiIemClass('is-first')
+        item.$.exposed!.setiIemClass('is-first')
       }
-      children.length - 1 === index && item.$.exposed.setiIemClass(item.$.exposed.itemClass.value + ' is-last')
+      children.length - 1 === index && item.$.exposed!.setiIemClass(item.$.exposed!.itemClass.value + ' is-last')
     }
-    item.$.exposed.init()
+    item.$.exposed!.init()
   })
 }
-
-defineExpose({
-  children,
-  setChild
-})
-
-provide('wdgrid', proxy)
-provide('childCount', childCount)
 </script>
 
 <style lang="scss" scoped>

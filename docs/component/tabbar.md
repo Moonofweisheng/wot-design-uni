@@ -9,7 +9,7 @@
 `v-model` 为绑定值，表示选中标签的索引值或者名称。
 
 ```html
-<wd-tabbar v-model="tabbar1">
+<wd-tabbar v-model="tabbar">
   <wd-tabbar-item title="首页" icon="home"></wd-tabbar-item>
   <wd-tabbar-item title="分类" icon="cart"></wd-tabbar-item>
   <wd-tabbar-item title="我的" icon="user"></wd-tabbar-item>
@@ -19,7 +19,7 @@
 ```typescript
 import { ref } from 'vue'
 
-const tabbar1 = ref('home')
+const tabbar = ref(1)
 ```
 
 ## 通过名称匹配
@@ -27,25 +27,36 @@ const tabbar1 = ref('home')
 通过设置 `name` 属性，可以通过名称匹配选中标签。
 
 ```html
-<wd-tabbar v-model="tabbar1">
+<wd-tabbar v-model="tabbar">
   <wd-tabbar-item name="home" title="首页" icon="home"></wd-tabbar-item>
   <wd-tabbar-item name="cart" title="分类" icon="cart"></wd-tabbar-item>
   <wd-tabbar-item name="setting" title="设置" icon="setting"></wd-tabbar-item>
   <wd-tabbar-item name="user" title="我的" icon="user"></wd-tabbar-item>
 </wd-tabbar>
 ```
+```typescript
+import { ref } from 'vue'
+
+const tabbar = ref('home')
+```
+
 
 ## 徽标提示
 
 通过设置 `value` 属性，可以显示徽标提示，而设置 is-dot 属性后，会在图标右上角展示一个小红点。
 
 ```html
-<wd-tabbar v-model="tabbar5">
-  <wd-tabbar-item name="1" is-dot :value="2" title="点状" icon="home"></wd-tabbar-item>
-  <wd-tabbar-item name="2" :value="2" icon="cart" title="分类"></wd-tabbar-item>
-  <wd-tabbar-item name="3" :value="30" title="我的" icon="user"></wd-tabbar-item>
-  <wd-tabbar-item name="4" :value="200" title="最大值" icon="user"></wd-tabbar-item>
+<wd-tabbar v-model="tabbar">
+  <wd-tabbar-item is-dot :value="2" title="点状" icon="home"></wd-tabbar-item>
+  <wd-tabbar-item :value="2" icon="cart" title="分类"></wd-tabbar-item>
+  <wd-tabbar-item :value="30" title="我的" icon="user"></wd-tabbar-item>
+  <wd-tabbar-item :value="200" title="最大值" icon="user"></wd-tabbar-item>
 </wd-tabbar>
+```
+```typescript
+import { ref } from 'vue'
+
+const tabbar = ref(1)
 ```
 
 ## 悬浮标签栏
@@ -53,12 +64,17 @@ const tabbar1 = ref('home')
 通过设置 `shape` 属性为 `round`，可以将标签栏设置为悬浮样式。
 
 ```html
-<wd-tabbar shape="round" v-model="tabbar2">
-  <wd-tabbar-item name="1" title="首页" is-dot :value="2" icon="home"></wd-tabbar-item>
-  <wd-tabbar-item name="2" title="分类" :value="2" icon="cart"></wd-tabbar-item>
-  <wd-tabbar-item name="3" title="相册" :value="30" icon="photo"></wd-tabbar-item>
-  <wd-tabbar-item name="4" title="我的" :value="200" icon="user"></wd-tabbar-item>
+<wd-tabbar shape="round" v-model="tabbar">
+  <wd-tabbar-item title="首页" is-dot :value="2" icon="home"></wd-tabbar-item>
+  <wd-tabbar-item title="分类" :value="2" icon="cart"></wd-tabbar-item>
+  <wd-tabbar-item title="相册" :value="30" icon="photo"></wd-tabbar-item>
+  <wd-tabbar-item title="我的" :value="200" icon="user"></wd-tabbar-item>
 </wd-tabbar>
+```
+```typescript
+import { ref } from 'vue'
+
+const tabbar = ref(1)
 ```
 
 ## 自定义图标
@@ -66,15 +82,20 @@ const tabbar1 = ref('home')
 通过使用 `<template #icon>` 可以自定义标签页的图标。
 
 ```html
-<wd-tabbar v-model="tabbar4">
-  <wd-tabbar-item name="1" :value="2" title="首页" icon="home"></wd-tabbar-item>
-  <wd-tabbar-item name="2" :value="2" icon="cart" title="分类">
+<wd-tabbar v-model="tabbar">
+  <wd-tabbar-item :value="2" title="首页" icon="home"></wd-tabbar-item>
+  <wd-tabbar-item :value="2" icon="cart" title="分类">
     <template #icon>
       <wd-img round height="40rpx" width="40rpx" src="https://unpkg.com/wot-design-uni-assets/panda.jpg"></wd-img>
     </template>
   </wd-tabbar-item>
-  <wd-tabbar-item name="3" :value="3" title="我的" icon="user"></wd-tabbar-item>
+  <wd-tabbar-item :value="3" title="我的" icon="user"></wd-tabbar-item>
 </wd-tabbar>
+```
+```typescript
+import { ref } from 'vue'
+
+const tabbar = ref(1)
 ```
 
 ## 自定义颜色
@@ -82,13 +103,18 @@ const tabbar1 = ref('home')
 通过设置 `active-color` 和 `inactive-color` 属性，可以自定义激活和未激活标签的颜色。
 
 ```html
-<wd-tabbar v-model="tabbar5" active-color="#ee0a24" inactive-color="#7d7e80">
-  <wd-tabbar-item name="1" is-dot :value="2" title="点状" icon="home"></wd-tabbar-item>
-  <wd-tabbar-item name="2" :value="2" icon="cart" title="分类"></wd-tabbar-item>
-  <wd-tabbar-item name="3" :value="30" title="我的" icon="user"></wd-tabbar-item>
-  <wd-tabbar-item name="4" :value="200" title="最大值" icon="photo"></wd-tabbar-item>
-  <wd-tabbar-item name="5" :value="10" title="客服" icon="chat"></wd-tabbar-item>
+<wd-tabbar v-model="tabbar" active-color="#ee0a24" inactive-color="#7d7e80">
+  <wd-tabbar-item is-dot :value="2" title="点状" icon="home"></wd-tabbar-item>
+  <wd-tabbar-item :value="2" icon="cart" title="分类"></wd-tabbar-item>
+  <wd-tabbar-item :value="30" title="我的" icon="user"></wd-tabbar-item>
+  <wd-tabbar-item :value="200" title="最大值" icon="photo"></wd-tabbar-item>
+  <wd-tabbar-item :value="10" title="客服" icon="chat"></wd-tabbar-item>
 </wd-tabbar>
+```
+```typescript
+import { ref } from 'vue'
+
+const tabbar = ref(1)
 ```
 
 ## 监听切换事件
@@ -96,16 +122,20 @@ const tabbar1 = ref('home')
 通过监听 `change` 事件，可以获取选中标签的值。
 
 ```html
-<wd-tabbar v-model="tabbar6" @change="handleChange1" active-color="#ee0a24" inactive-color="#7d7e80">
-  <wd-tabbar-item name="1" title="首页" icon="home"></wd-tabbar-item>
-  <wd-tabbar-item name="2" title="分类" icon="cart"></wd-tabbar-item>
-  <wd-tabbar-item name="3" title="我的" icon="user"></wd-tabbar-item>
-  <wd-tabbar-item name="4" title="相册" icon="photo"></wd-tabbar-item>
-  <wd-tabbar-item name="5" title="客服" icon="chat"></wd-tabbar-item>
+<wd-tabbar v-model="tabbar" @change="handleChange1" active-color="#ee0a24" inactive-color="#7d7e80">
+  <wd-tabbar-item title="首页" icon="home"></wd-tabbar-item>
+  <wd-tabbar-item title="分类" icon="cart"></wd-tabbar-item>
+  <wd-tabbar-item title="我的" icon="user"></wd-tabbar-item>
+  <wd-tabbar-item title="相册" icon="photo"></wd-tabbar-item>
+  <wd-tabbar-item title="客服" icon="chat"></wd-tabbar-item>
 </wd-tabbar>
 ```
 
 ```typescript
+import { ref } from 'vue'
+
+const tabbar = ref(1)
+
 function handleChange1({ value }: { value: string }) {
   show(`选中标签:${value}`)
 }
@@ -116,13 +146,18 @@ function handleChange1({ value }: { value: string }) {
 通过设置 `fixed` 属性，可以将标签栏固定在底部；通过设置 `placeholder` 属性，可以在固定在底部时在标签位置生成一个等高的占位元素。
 
 ```html
-<wd-tabbar fixed v-model="tabbar3" bordered safeAreaInsetBottom placeholder>
-  <wd-tabbar-item name="1" :value="2" is-dot title="首页" icon="home"></wd-tabbar-item>
-  <wd-tabbar-item name="2" title="分类" icon="cart"></wd-tabbar-item>
-  <wd-tabbar-item name="3" title="我的" icon="user"></wd-tabbar-item>
-  <wd-tabbar-item name="4" :value="200" title="相册" icon="photo"></wd-tabbar-item>
-  <wd-tabbar-item name="5" :value="10" title="客服" icon="chat"></wd-tabbar-item>
+<wd-tabbar fixed v-model="tabbar" bordered safeAreaInsetBottom placeholder>
+  <wd-tabbar-item :value="2" is-dot title="首页" icon="home"></wd-tabbar-item>
+  <wd-tabbar-item title="分类" icon="cart"></wd-tabbar-item>
+  <wd-tabbar-item title="我的" icon="user"></wd-tabbar-item>
+  <wd-tabbar-item :value="200" title="相册" icon="photo"></wd-tabbar-item>
+  <wd-tabbar-item :value="10" title="客服" icon="chat"></wd-tabbar-item>
 </wd-tabbar>
+```
+```typescript
+import { ref } from 'vue'
+
+const tabbar = ref(1)
 ```
 
 

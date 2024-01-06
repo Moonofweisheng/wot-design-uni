@@ -42,7 +42,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, inject, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { computed, getCurrentInstance, onBeforeMount, watch } from 'vue'
+import { useParent } from '../composables/useParent'
+import { CHECKBOX_GROUP_KEY } from '../wd-checkbox-group/types'
+import { isDef } from '../common/util'
 
 type checkShape = 'circle' | 'square' | 'button'
 interface Props {
@@ -69,25 +72,33 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: null
 })
 
-const isChecked = ref<boolean>(false) // 是否被选中
+const { parent: checkboxGroup, index } = useParent(CHECKBOX_GROUP_KEY)
 
-const inited = ref<boolean>(false)
-// 相同组件的伪类选择器无效，这里配合类名手动模拟 last-child、first-child
-const isFirst = ref<boolean>(false)
-const isLast = ref<boolean>(false)
-const parent = inject<any>('checkGroup', null)
+const isChecked = computed(() => {
+  if (checkboxGroup) {
+    return checkboxGroup.props.modelValue.indexOf(props.modelValue) > -1
+  } else {
+    return props.modelValue === props.trueValue
+  }
+}) // 是否被选中
+
+const isFirst = computed(() => {
+  return index.value === 0
+})
+
+const isLast = computed(() => {
+  const children = isDef(checkboxGroup) ? checkboxGroup.children : []
+  return index.value === children.length - 1
+})
 const { proxy } = getCurrentInstance() as any
 
 watch(
   () => props.modelValue,
-  (newValue) => {
-    if (!inited.value) return
+  () => {
     // 组合使用走这个逻辑
-    if (parent && parent.$.exposed.resetChildren) {
+    if (checkboxGroup) {
       checkName()
-      return parent.$.exposed.resetChildren()
     }
-    isChecked.value = newValue === props.trueValue
   }
 )
 
@@ -100,16 +111,16 @@ watch(
 )
 
 const innerShape = computed(() => {
-  if (!props.shape && parent && parent.shape) {
-    return parent.shape
+  if (!props.shape && checkboxGroup && checkboxGroup.props.shape) {
+    return checkboxGroup.props.shape
   } else {
     return props.shape
   }
 })
 
 const innerCheckedColor = computed(() => {
-  if (!props.checkedColor && parent && parent.checkedColor) {
-    return parent.checkedColor
+  if (!props.checkedColor && checkboxGroup && checkboxGroup.props.checkedColor) {
+    return checkboxGroup.props.checkedColor
   } else {
     return props.checkedColor
   }
@@ -117,16 +128,16 @@ const innerCheckedColor = computed(() => {
 
 const innerDisabled = computed(() => {
   let innerDisabled = props.disabled
-  if (parent) {
+  if (checkboxGroup) {
     if (
       // max 生效时，group 已经选满，禁止其它节点再选中。
-      (parent.max && parent.modelValue.length >= parent.max && !isChecked.value) ||
+      (checkboxGroup.props.max && checkboxGroup.props.modelValue.length >= checkboxGroup.props.max && !isChecked.value) ||
       // min 生效时，group 选中的节点数量仅满足最小值，禁止取消已选中的节点。
-      (parent.min && parent.modelValue.length <= parent.min && isChecked.value) ||
+      (checkboxGroup.props.min && checkboxGroup.props.modelValue.length <= checkboxGroup.props.min && isChecked.value) ||
       // 只要子节点自己要求 disabled，那就 disabled。
       props.disabled === true ||
       // 父节点要求全局 disabled，子节点没吱声，那就 disabled。
-      (parent.disabled && props.disabled === null)
+      (checkboxGroup.props.disabled && props.disabled === null)
     ) {
       innerDisabled = true
     }
@@ -135,24 +146,24 @@ const innerDisabled = computed(() => {
 })
 
 const innerInline = computed(() => {
-  if (parent && parent.inline) {
-    return parent.inline
+  if (checkboxGroup && checkboxGroup.props.inline) {
+    return checkboxGroup.props.inline
   } else {
     return false
   }
 })
 
 const innerCell = computed(() => {
-  if (parent && parent.cell) {
-    return parent.cell
+  if (checkboxGroup && checkboxGroup.props.cell) {
+    return checkboxGroup.props.cell
   } else {
     return false
   }
 })
 
 const innerSize = computed(() => {
-  if (!props.size && parent && parent.size) {
-    return parent.size
+  if (!props.size && checkboxGroup && checkboxGroup.props.size) {
+    return checkboxGroup.props.size
   } else {
     return props.size
   }
@@ -161,20 +172,6 @@ const innerSize = computed(() => {
 onBeforeMount(() => {
   // eslint-disable-next-line quotes
   if (props.modelValue === null) console.error("checkbox's value must be set")
-  inited.value = true
-})
-
-onMounted(() => {
-  // 如果没有父组件，设置 isChecked
-  if (!parent) {
-    isChecked.value = props.modelValue === props.trueValue
-    isFirst.value = true
-    isLast.value = true
-  }
-  if (parent) {
-    parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
-    isChecked.value = props.modelValue === parent.modelValue
-  }
 })
 
 const emit = defineEmits(['change', 'update:modelValue'])
@@ -185,10 +182,10 @@ const emit = defineEmits(['change', 'update:modelValue'])
  * @param  myName 自己的标识符
  */
 function checkName() {
-  parent &&
-    parent.$.exposed.children &&
-    parent.$.exposed.children.forEach((child) => {
-      if (child.$.uid !== proxy.$.uid && child.value === props.modelValue) {
+  checkboxGroup &&
+    checkboxGroup.children &&
+    checkboxGroup.children.forEach((child: any) => {
+      if (child.$.uid !== proxy.$.uid && child.modelValue === props.modelValue) {
         console.error(`The checkbox's bound value: ${props.modelValue} has been used`)
       }
     })
@@ -199,11 +196,11 @@ function checkName() {
 function toggle() {
   if (innerDisabled.value) return
   // 复选框单独使用时点击反选，并且在checkbox上触发change事件
-  if (parent) {
+  if (checkboxGroup) {
     emit('change', {
       value: !isChecked.value
     })
-    parent.$.exposed.changeSelectState(props.modelValue)
+    checkboxGroup.changeSelectState(props.modelValue)
   } else {
     const newVal = props.modelValue === props.trueValue ? props.falseValue : props.trueValue
     emit('update:modelValue', newVal)
@@ -212,36 +209,6 @@ function toggle() {
     })
   }
 }
-
-/**
- * 设置是否为第一个
- * @param first
- */
-function setFirst(first: boolean) {
-  isFirst.value = first
-}
-
-/**
- * 设置是否为最后一个
- * @param first
- */
-function setLast(last: boolean) {
-  isLast.value = last
-}
-
-/**
- * 设置是否选中
- * @param checked 是否选中
- */
-function setChecked(checked: boolean) {
-  isChecked.value = checked
-}
-
-defineExpose({
-  setFirst,
-  setLast,
-  setChecked
-})
 </script>
 
 <style lang="scss" scoped>

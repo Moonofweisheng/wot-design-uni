@@ -39,7 +39,7 @@ const props = withDefaults(defineProps<Props>(), {
 const { children, linkChildren } = useChildren(FORM_KEY)
 let errorMessages = reactive<Record<string, string>>({})
 
-linkChildren({ ...props, errorMessages: errorMessages })
+linkChildren({ props, errorMessages: errorMessages })
 
 watch(
   () => props.model,

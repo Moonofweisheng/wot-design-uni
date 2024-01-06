@@ -17,8 +17,10 @@ export default {
 </script>
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
-import { getType } from '../common/util'
-import { inject } from 'vue'
+import { getType, isDef } from '../common/util'
+import { useParent } from '../composables/useParent'
+import { TABS_KEY } from '../wd-tabs/types'
+import { computed } from 'vue'
 
 interface Props {
   customClass?: string
@@ -38,7 +40,12 @@ const props = withDefaults(defineProps<Props>(), {
 const painted = ref<boolean>(false) // 初始状态tab不会渲染，必须通过tabs来设置painted使tab渲染
 const isShow = ref<boolean>(false)
 const { proxy } = getCurrentInstance() as any
-const parent = inject<any>('tabs')
+const { parent: tabs, index } = useParent(TABS_KEY)
+
+// 激活项下标
+const activeIndex = computed(() => {
+  return isDef(tabs) ? tabs.state.activeIndex : 0
+})
 
 watch(
   () => props.name,
@@ -47,10 +54,8 @@ watch(
       console.error('[wot design] error(wd-tab): the type of name should be number or string')
       return
     }
-    // 当tab与tabs建立relations关系之后，tab的name改变,需要检测一下与其他tab的name是否冲突
-    if (parent) {
+    if (tabs) {
       checkName(proxy)
-      parent.updateItems()
     }
   },
   {
@@ -60,36 +65,16 @@ watch(
 )
 
 watch(
-  () => props.title,
-  () => {
-    if (parent) {
-      parent.updateItems()
+  () => activeIndex.value,
+  (newValue) => {
+    if (newValue === index.value) {
+      setShow(true, true)
+    } else {
+      setShow(painted.value, false)
     }
   },
-  {
-    deep: true,
-    immediate: true
-  }
+  { deep: true, immediate: true }
 )
-
-watch(
-  () => props.disabled,
-  () => {
-    if (parent) {
-      parent.updateItems()
-    }
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-onBeforeMount(() => {
-  if (parent && parent.setChild) {
-    parent.setChild(proxy)
-  }
-})
 
 /**
  * @description 检测tab绑定的name是否和其它tab的name冲突
@@ -100,8 +85,8 @@ function checkName(self) {
   if (myName === undefined || myName === null || myName === '') {
     return
   }
-  parent &&
-    parent.children.forEach((child) => {
+  tabs &&
+    tabs.children.forEach((child: any) => {
       if (child.$.uid !== self.$.uid && child.name === myName) {
         console.error(`The tab's bound value: ${myName} has been used`)
       }

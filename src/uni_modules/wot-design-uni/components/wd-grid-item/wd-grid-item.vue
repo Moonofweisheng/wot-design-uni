@@ -29,7 +29,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, inject, onBeforeMount, onMounted, ref, type Ref, watch } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
+import { useParent } from '../composables/useParent'
+import { GRID_KEY } from '../wd-grid/types'
+import { isDef } from '../common/util'
 
 type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 interface BadgeProps {
@@ -84,22 +87,27 @@ const itemClass = ref<string>('')
 const gutter = ref<number>(0)
 const square = ref<boolean>(false)
 const border = ref<boolean>(true)
+const { parent: grid } = useParent(GRID_KEY)
 
-const parent = inject<any>('wdgrid')
-const childCount = inject<Ref<null | number>>('childCount') || ref(0)
-const { proxy } = getCurrentInstance() as any
+const childCount = computed(() => {
+  if (isDef(grid) && isDef(grid.children)) {
+    return grid.children.length
+  } else {
+    return 0
+  }
+})
 
 const emit = defineEmits(['itemclick'])
 
 watch(
   () => childCount.value,
   () => {
-    if (!parent) return
-    const width = parent.column ? 100 / parent.column + '%' : 100 / (childCount.value || 1) + '%'
+    if (!grid) return
+    const width = grid.props.column ? 100 / grid.props.column + '%' : 100 / (childCount.value || 1) + '%'
     // 单独定义间隔
-    const gutterStyle = parent.gutter ? `padding:${parent.gutter}px ${parent.gutter}px 0 0; background-color: transparent;` : ''
+    const gutterStyle = grid.props.gutter ? `padding:${grid.props.gutter}px ${grid.props.gutter}px 0 0; background-color: transparent;` : ''
     // 单独定义正方形
-    const squareStyle = parent.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
+    const squareStyle = grid.props.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
     style.value = `width: ${width}; ${squareStyle || gutterStyle}`
   },
   {
@@ -108,38 +116,32 @@ watch(
   }
 )
 
-onBeforeMount(() => {
-  if (parent) {
-    parent.$.exposed.setChild && parent.$.exposed.setChild(proxy)
-  }
-})
-
 onMounted(() => {
   init()
 })
 
 function init() {
-  if (!parent) return
-  const children = parent.$.exposed.children
-  const width = parent.column ? 100 / parent.column + '%' : 100 / children.length + '%'
+  if (!grid) return
+  const children = grid.children
+  const width = grid.props.column ? 100 / grid.props.column + '%' : 100 / children.length + '%'
   // 单独定义间隔
-  const gutterStyle = parent.gutter ? `padding:${parent.gutter}px ${parent.gutter}px 0 0; background-color: transparent;` : ''
+  const gutterStyle = grid.props.gutter ? `padding:${grid.props.gutter}px ${grid.props.gutter}px 0 0; background-color: transparent;` : ''
   // 单独定义正方形
-  const squareStyle = parent.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
+  const squareStyle = grid.props.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
   // 间隔+正方形
   gutterContentStyle.value =
-    parent.gutter && parent.square
-      ? `right: ${parent.gutter}px; bottom:${parent.gutter}px;height: auto; background-color: ${parent.bgColor}`
-      : `background-color: ${parent.bgColor}`
+    grid.props.gutter && grid.props.square
+      ? `right: ${grid.props.gutter}px; bottom:${grid.props.gutter}px;height: auto; background-color: ${grid.props.bgColor}`
+      : `background-color: ${grid.props.bgColor}`
 
-  border.value = parent.border
-  square.value = parent.square
-  gutter.value = parent.gutter
+  border.value = Boolean(grid.props.border)
+  square.value = Boolean(grid.props.square)
+  gutter.value = Number(grid.props.gutter)
   style.value = `width: ${width}; ${squareStyle || gutterStyle}`
 }
 
 function click() {
-  if (!parent.clickable) return
+  if (grid && !grid.props.clickable) return
   const { url, linkType } = props
   emit('itemclick')
   if (url) {

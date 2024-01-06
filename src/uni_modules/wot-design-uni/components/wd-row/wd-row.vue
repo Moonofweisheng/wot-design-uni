@@ -15,7 +15,9 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, provide, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
+import { useChildren } from '../composables/useChildren'
+import { ROW_KEY } from './types'
 
 interface Props {
   customClass?: string
@@ -26,6 +28,9 @@ const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   gutter: 0
 })
+const { linkChildren } = useChildren(ROW_KEY)
+
+linkChildren({ props })
 
 const style = ref<string>('')
 
@@ -39,9 +44,6 @@ watch(
     immediate: true
   }
 )
-
-const { proxy } = getCurrentInstance() as any
-provide('$row', proxy)
 
 function setGutter() {
   const { gutter } = props
