@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2024-01-07 00:46:50
+ * @LastEditTime: 2024-01-07 01:47:28
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/CustomFooter.vue
+ * 记得注释
+-->
 <script setup lang="ts">
 import { useData } from 'vitepress/dist/client/theme-default/composables/data';
 import { useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar';
@@ -9,7 +18,7 @@ const { hasSidebar } = useSidebar()
 
 const copyright = computed(()=>{
   const isNetlify = typeof window !== 'undefined' ? window.location.href.includes('netlify') : false
-  if (!isNetlify) {
+  if (isNetlify) {
     return `${theme.value.footer.copyright} | <a style="text-decoration: none;" href="https://www.netlify.com">This site is powered by Netlify</a>`
   }else{
     return theme.value.footer.copyright
