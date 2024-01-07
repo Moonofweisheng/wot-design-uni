@@ -103,7 +103,7 @@
         </wd-checkbox>
       </view>
       <view class="footer">
-        <button class="wd-button is-primary is-block is-round is-large" form-type="submit">提交</button>
+        <wd-button block round size="large">提交</wd-button>
       </view>
     </form>
   </page-wraper>
@@ -111,7 +111,7 @@
 <script setup lang="ts">
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
 import { areaData } from '@/utils/area'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 const showAction = ref<boolean>(false)
 const actions = ref<any[]>([])
 
