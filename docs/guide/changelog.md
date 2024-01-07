@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.8...v0.2.9) (2024-01-07)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 col-picker 组件首次打开指示线位置异常的问题 ([323fb00](https://github.com/Moonofweisheng/wot-design-uni/commit/323fb00942b7032b678d92ab03360dc7bb8faae8))
+
 ### [0.2.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.7...v0.2.8) (2024-01-06)
 
 
