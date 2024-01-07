@@ -156,8 +156,9 @@
     line-height: $-cell-line-height;
     color: $-textarea-color;
     outline: none;
-    box-sizing: border-box;
+    background: none;
     border: none;
+    box-sizing: border-box;
     word-break: break-word;
 
     &::-webkit-input-placeholder {
