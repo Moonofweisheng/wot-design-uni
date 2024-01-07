@@ -36,6 +36,7 @@
       :close-on-click-modal="closeOnClickModal"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
+      @open="handlePickerOpend"
       @close="handlePickerClose"
     >
       <view class="wd-col-picker__selected">
@@ -217,12 +218,12 @@ watch(
       console.error('[wot design] error(wd-col-picker): the columns props of wd-col-picker should be a two-dimensional array')
       return
     }
-
     if (newValue.length === 0 && !oldValue) return
 
     const newSelectedList = newValue.slice(0)
 
     selectList.value = newSelectedList
+
     selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
       return getSelectedItem(item, colIndex, newSelectedList)[props.labelKey]
     })
@@ -317,6 +318,10 @@ function open() {
 function close() {
   handlePickerClose()
 }
+function handlePickerOpend() {
+  updateLineAndScroll(false)
+}
+
 function handlePickerClose() {
   pickerShow.value = false
   // 如果目前用户正在选择，需要在popup关闭时将数据重置回上次数据，popup 关闭时间 250
@@ -340,9 +345,6 @@ function showPicker() {
   pickerShow.value = true
   lastPickerColSelected.value = pickerColSelected.value.slice(0)
   lastSelectList.value = selectList.value.slice(0)
-  setTimeout(() => {
-    updateLineAndScroll()
-  }, 30)
 }
 
 function getSelectedItem(value, colIndex, selectList) {

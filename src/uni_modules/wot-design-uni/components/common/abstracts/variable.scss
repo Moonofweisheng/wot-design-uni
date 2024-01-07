@@ -83,8 +83,8 @@ $-color-icon: var(--wot-color-icon, #d9d9d9) !default; // icon颜色
 $-color-icon-active: var(--wot-color-icon-active, #eee) !default; // icon颜色hover
 $-color-icon-disabled: var(--wot-color-icon-disabled, #a7a7a7) !default; // icon颜色disabled
 /* overlay */
-$-overlay-bg: rgba(0, 0, 0, 0.65) !default;
-$-overlay-bg-dark: rgba(0, 0, 0, 0.75) !default;
+$-overlay-bg: var(--wot-overlay-bg, rgba(0, 0, 0, 0.65)) !default;
+$-overlay-bg-dark: var(--wot-overlay-bg-dark, rgba(0, 0, 0, 0.75)) !default;
 
 
 /*----------------------------------------- Theme color. end -------------------------------------------*/
