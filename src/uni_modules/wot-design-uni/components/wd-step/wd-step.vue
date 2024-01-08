@@ -10,7 +10,7 @@
       <view :class="`wd-step__icon  ${dot ? 'is-dot' : !!icon || iconSlot ? 'is-icon' : 'is-text'}`">
         <view v-if="dot" class="wd-step__dot"></view>
         <slot v-else-if="iconSlot" name="icon" />
-        <wd-icon v-else-if="icon" class="wd-step__icon-inner" :name="icon" />
+        <wd-icon v-else-if="icon" custom-class="wd-step__icon-inner" :name="icon" />
         <view v-else class="wd-step__icon-outer">
           <wd-icon v-if="currentStatus === 'finished'" name="check-bold" />
           <wd-icon v-else-if="currentStatus === 'error'" name="close-bold" />
