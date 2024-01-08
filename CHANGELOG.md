@@ -1,6 +1,15 @@
 # 更新日志 
 
 
+### [0.2.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.9...v0.2.10) (2024-01-08)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 col-picker 暗黑模式下标题文字颜色不清楚的问题 ([217ffb7](https://github.com/Moonofweisheng/wot-design-uni/commit/217ffb7dacb66b2017145c6e43fc8c873a6e9dd2))
+* 🐛 修复 steps 组件自定义图标显示异常的问题 ([0300f63](https://github.com/Moonofweisheng/wot-design-uni/commit/0300f63f35a5afcd278aba3b4ab721f498716d94))
+* 🐛 修复支付宝小程序暗黑模式下 Input、Textarea 组件显示异常的问题 ([8a9c344](https://github.com/Moonofweisheng/wot-design-uni/commit/8a9c344872bfcd81a73f71520f51b6b849f516d5))
+
 ### [0.2.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.8...v0.2.9) (2024-01-07)
 
 
