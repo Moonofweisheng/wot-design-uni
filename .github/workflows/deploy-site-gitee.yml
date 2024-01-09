@@ -2,10 +2,8 @@ name: Deploy VitePress site to Gitee Pages
 
 on:
   push:
-    tags:
-      - '*'
-
-  workflow_dispatch:
+    branches:
+      - release
 
 jobs:
   deploy-and-sync:
@@ -13,8 +11,6 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
-        with:
-          ref: 'master'
 
       - name: Install pnpm
         run: corepack enable
