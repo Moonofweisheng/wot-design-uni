@@ -1,13 +1,12 @@
 /*
  * @Author: weisheng
  * @Date: 2023-09-25 17:28:12
- * @LastEditTime: 2023-12-23 22:42:18
+ * @LastEditTime: 2024-01-09 12:48:02
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\global.d.ts
  * 记得注释
  */
-// For this project development
 import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
@@ -44,7 +43,7 @@ declare module '@vue/runtime-core' {
     WdLoading: typeof import('./components/wd-loading/wd-loading.vue')['default']
     WdLoadmore: typeof import('./components/wd-loadmore/wd-loadmore.vue')['default']
     WdMessageBox: typeof import('./components/wd-message-box/wd-message-box.vue')['default']
-    WdModal: typeof import('./components/wd-overlay/wd-overlay.vue')['default']
+    WdOverlay: typeof import('./components/wd-overlay/wd-overlay.vue')['default']
     WdNoticeBar: typeof import('./components/wd-notice-bar/wd-notice-bar.vue')['default']
     WdPagination: typeof import('./components/wd-pagination/wd-pagination.vue')['default']
     WdPicker: typeof import('./components/wd-picker/wd-picker.vue')['default']
