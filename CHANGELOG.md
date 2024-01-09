@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.2.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.10...v0.2.11) (2024-01-09)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Overlay 类型声明错误的问题 ([930e59a](https://github.com/Moonofweisheng/wot-design-uni/commit/930e59a9b09aee535ec4c316e44ed3c0e31be628))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  提供托管在Giteee上的文档网站 ([6d62e9e](https://github.com/Moonofweisheng/wot-design-uni/commit/6d62e9e7ddda0bd9f51f2ad9e2893f1ed3709c63))
+
 ### [0.2.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.9...v0.2.10) (2024-01-08)
 
 
