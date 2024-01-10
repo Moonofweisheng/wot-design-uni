@@ -3,13 +3,18 @@
 </p>
 <h1 align="center">Wot Design Uni</h1>
 
-<p align="center">📱 一个参照<a href="https://ftf.jd.com/wot-design/">Wot-design</a>，基于 Vue3 打造的uni-app组件库</p>
+<p align="center">📱 一个参照<a href="https://ftf.jd.com/wot-design/">wot-design</a>，基于 Vue3 打造的uni-app组件库</p>
 
 <p align="center">
 
 <a href="https://github.com/Moonofweisheng/wot-design-uni">
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Moonofweisheng/wot-design-uni?logo=github&color=%234d80f0&link=https%3A%2F%2Fgithub.com%2FMoonofweisheng%2Fwot-design-uni">
  </a>
+
+<a href='https://gitee.com/wot-design-uni/wot-design-uni/stargazers'>
+<img src='https://gitee.com/wot-design-uni/wot-design-uni/badge/star.svg?theme=gray' alt='star'>
+</a>
+
 
 <a href="https://www.npmjs.com/package/wot-design-uni">
   <img alt="npm" src="https://img.shields.io/npm/v/wot-design-uni?logo=npm&color=%234d80f0&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-design-uni">
