@@ -24,7 +24,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { type CSSProperties, computed, onMounted } from 'vue'
+import { type CSSProperties, computed } from 'vue'
 import { isDef, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { TABBAR_KEY } from '../wd-tabbar/types'
@@ -98,32 +98,6 @@ const active = computed(() => {
     return false
   }
 })
-
-onMounted(() => {
-  init()
-})
-
-/**
- * 初始化将组件信息注入父组件
- */
-function init() {
-  if (tabbar && tabbar.children && isDef(props.name)) {
-    const repeat = checkRepeat(tabbar.children, props.name, 'name')
-    if (repeat > -1) {
-      console.error('[wot-design] warning(wd-tabbar-item): name attribute cannot be defined repeatedly')
-    }
-  }
-}
-
-/**
- * 检查是否存在重复name属性
- * @param {Array} currentList
- * @param {String} checkValue 比较的重复值
- * @param {String} key 键名
- */
-function checkRepeat(currentList: any[], checkValue: string | number, key: string): number {
-  return currentList.findIndex((item) => item[key] === checkValue)
-}
 
 /**
  * 点击tabbar选项
