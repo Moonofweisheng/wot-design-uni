@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [0.2.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.11...v0.2.12) (2024-01-11)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tabbar 错误地抛出提示信息的问题 ([1c89ed0](https://github.com/Moonofweisheng/wot-design-uni/commit/1c89ed0a7158e79556e83c6aeb89bd1e93e4ea0d))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  增加 Circle 组件使用插槽的示例 ([6341594](https://github.com/Moonofweisheng/wot-design-uni/commit/6341594295732dac951c465d95537f36addbbf9c))
+* ✏️  增加展示gitee的star徽标 ([1abf962](https://github.com/Moonofweisheng/wot-design-uni/commit/1abf962e37e27c1c1688bed2026c66022e63ce9b))
+
 ### [0.2.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.10...v0.2.11) (2024-01-09)
 
 
