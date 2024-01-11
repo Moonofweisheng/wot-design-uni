@@ -72,7 +72,6 @@ const gradientColor = {
 | `v-model` \|`modelValue`     | 当前进度                     | number                      | -                                          | `0`             | 0.1.19   |
 | `customClass`     | 自定义class                  | string                      | -                                          | -            | 0.1.19   |
 | `customStyle`     | 自定义style                  | string                      | -                                          | -            | 0.1.19   |
-| `rate`            | 目标进度                     | number \| string            | -                                          | `100`           | 0.1.19   |
 | `size`            | 圆环直径，默认单位为 px     | number                      | -                                          | `100`           | 0.1.19   |
 | `color`           | 进度条颜色                   | string \| Record<string, string> | -                                      | `#4d80f0`     | 0.1.19   |
 | `layerColor`      | 轨道颜色                     | string                      | -                                          | `#EBEEF5`     | 0.1.19   |

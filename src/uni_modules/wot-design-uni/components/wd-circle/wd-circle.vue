@@ -51,8 +51,6 @@ interface Props {
   customClass?: string
   // 自定义style
   customStyle?: string
-  // 目标进度
-  rate?: number | string
   // 圆环直径，默认单位为 px
   size?: number
   // 进度条颜色，传入对象格式可以定义渐变色
@@ -80,16 +78,12 @@ const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   // 自定义style
   customStyle: '',
-  // 目标进度
-  rate: 100,
   // 圆环直径，默认单位为 px
   size: 100,
   // 进度条颜色，传入对象格式可以定义渐变色
   color: '#4d80f0',
   // 轨道颜色
   layerColor: '#EBEEF5',
-  // 填充颜色
-  fill: '#ffffff',
   // 动画速度（单位为 rate/s）
   speed: 50,
   // 进度条宽度 默认单位px

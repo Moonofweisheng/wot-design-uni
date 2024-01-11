@@ -12,6 +12,12 @@
         <wd-circle custom-class="custom-circle" v-model="current" :size="120" text="大小定制" />
       </demo-block>
 
+      <demo-block title="使用slot">
+        <wd-circle custom-class="custom-circle" v-model="current" :stroke-width="6">
+          <view style="color: red">{{ current }}%</view>
+        </wd-circle>
+      </demo-block>
+
       <demo-block>
         <wd-button custom-style="margin-right:24rpx" type="primary" size="small" @click="doAdd">增加</wd-button>
         <wd-button type="error" size="small" @click="doDecre">减少</wd-button>
