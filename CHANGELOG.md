@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.12...v0.2.13) (2024-01-12)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复演示文档刷新后指向localhost的问题 ([4cd8b16](https://github.com/Moonofweisheng/wot-design-uni/commit/4cd8b16bdf5ea8e93cff85396025844e9ebd031c))
+
 ### [0.2.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.11...v0.2.12) (2024-01-11)
 
 
