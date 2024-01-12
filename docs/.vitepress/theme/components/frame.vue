@@ -5,7 +5,8 @@
 <script setup lang="ts">
 import { useRoute, useData } from 'vitepress';
 import { computed, watch } from 'vue'
-const baseUrl = process.env.NODE_ENV === 'production' && typeof window !== 'undefined'  ? `${window.location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
+const baseUrl = process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
+
 const route = useRoute()
 const href = computed(() => {
   const path = route.path
