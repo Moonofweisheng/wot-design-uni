@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.13...v0.2.14) (2024-01-14)
+
+
+### ✨ Features | 新功能
+
+* ✨ InputNumber步进器支持禁用输入框 ([933bce3](https://github.com/Moonofweisheng/wot-design-uni/commit/933bce314618956ff922daacef5b3594f36baf9b))
+
 ### [0.2.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.12...v0.2.13) (2024-01-12)
 
 
