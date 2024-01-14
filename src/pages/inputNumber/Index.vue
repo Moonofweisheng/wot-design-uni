@@ -12,6 +12,9 @@
     <demo-block title="禁用">
       <wd-input-number v-model="value4" @change="handleChange4" disabled />
     </demo-block>
+    <demo-block title="禁用输入框">
+      <wd-input-number v-model="value10" @change="handleChange4" disable-input />
+    </demo-block>
     <demo-block title="无输入框">
       <view class="flex">
         <view>数量：{{ value5 }}</view>
@@ -44,6 +47,7 @@ const value6 = ref<string>('1.205')
 const value7 = ref<number>(1)
 const value8 = ref<number>(2)
 const value9 = ref<string>('')
+const value10 = ref<number>(1)
 
 function handleChange1({ value }) {
   console.log(value)

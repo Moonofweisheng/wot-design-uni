@@ -42,6 +42,15 @@ function handleChange1({ value }) {
 <wd-input-number v-model="value" @change="handleChange" disabled />
 ```
 
+## 禁用输入框
+
+设置 `disable-input` 属性。
+
+```html
+<wd-input-number v-model="value" @change="handleChange" disable-input />
+```
+
+
 ## 无输入框
 
 设置 `without-input` ，不展示输入框。
@@ -105,6 +114,10 @@ function handleChange1({ value }) {
 | name | form 表单中的字段名 | string | - | - | - |
 | allow-null | 允许空值 | boolean | - | false | - |
 | placeholder | 占位文本 | string | - | - | - |
+| disable-input | 禁用输入框 | boolean | - | false | 0.2.14 |
+| disable-plus | 禁用增加按钮 | boolean | - | false | 0.2.14 |
+| disable-minus | 禁用减少按钮 | boolean | - | false | 0.2.14 |
+
 
 ## Events
 

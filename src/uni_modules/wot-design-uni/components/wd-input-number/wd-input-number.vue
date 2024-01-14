@@ -1,14 +1,14 @@
 <template>
   <view :class="`wd-input-number ${customClass} ${disabled ? 'is-disabled' : ''} ${withoutInput ? 'is-without-input' : ''}`">
-    <view :class="`wd-input-number__action ${minDisabled ? 'is-disabled' : ''}`" @click="sub">
+    <view :class="`wd-input-number__action ${minDisabled || disableMinus ? 'is-disabled' : ''}`" @click="sub">
       <wd-icon name="decrease" custom-class="wd-input-number__action-icon"></wd-icon>
     </view>
-    <view v-if="!withoutInput" class="wd-input-number__inner">
+    <view v-if="!withoutInput" class="wd-input-number__inner" @click.stop="">
       <input
         class="wd-input-number__input"
         :style="`${inputWidth ? 'width: ' + inputWidth : ''}`"
         type="digit"
-        :disabled="disabled"
+        :disabled="disabled || disableInput"
         v-model="inputValue"
         :placeholder="placeholder"
         @input="handleInput"
@@ -17,7 +17,7 @@
       />
       <view class="wd-input-number__input-border"></view>
     </view>
-    <view :class="`wd-input-number__action ${maxDisabled ? 'is-disabled' : ''}`" @click="add">
+    <view :class="`wd-input-number__action ${maxDisabled || disablePlus ? 'is-disabled' : ''}`" @click="add">
       <wd-icon name="add" custom-class="wd-input-number__action-icon"></wd-icon>
     </view>
   </view>
@@ -47,11 +47,13 @@ interface Props {
   stepStrictly?: boolean
   precision?: number
   disabled?: boolean
+  disableInput?: boolean
+  disableMinus?: boolean
+  disablePlus?: boolean
   withoutInput?: boolean
   inputWidth?: string | number
   allowNull?: boolean
   placeholder?: string
-  name?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -62,11 +64,13 @@ const props = withDefaults(defineProps<Props>(), {
   stepStrictly: false,
   precision: 0,
   disabled: false,
+  disableInput: false,
+  disableMinus: false,
+  disablePlus: false,
   withoutInput: false,
   inputWidth: 36,
   allowNull: false,
-  placeholder: '',
-  name: ''
+  placeholder: ''
 })
 
 const minDisabled = ref<boolean>(false)
@@ -168,14 +172,14 @@ function changeStep(val: string | number, step: number) {
 }
 
 function sub() {
-  if (minDisabled.value) return
+  if (minDisabled.value || props.disableMinus) return
 
   const newValue = changeStep(inputValue.value, -props.step)
   dispatchChangeEvent(newValue)
 }
 
 function add() {
-  if (maxDisabled.value) return
+  if (maxDisabled.value || props.disablePlus) return
 
   const newValue = changeStep(inputValue.value, props.step)
   dispatchChangeEvent(newValue)
