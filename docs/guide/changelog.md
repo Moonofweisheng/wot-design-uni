@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.2.15](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.14...v0.2.15) (2024-01-15)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Tab class类名属性错误的问题 ([dc87df7](https://github.com/Moonofweisheng/wot-design-uni/commit/dc87df70c7920d7cfabc571ace8beb2ce0dc2a7c))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复 Upload 文档中before-upload钩子参数描述错误的问题 ([3ec7299](https://github.com/Moonofweisheng/wot-design-uni/commit/3ec7299ce724fce771b782f6110ba6ec29376291))
+
 ### [0.2.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.13...v0.2.14) (2024-01-14)
 
 
