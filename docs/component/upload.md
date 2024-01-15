@@ -111,7 +111,7 @@ const fileList = ref<any[]>([
   }
 ])
 
-const beforeUpload = ({ file, resolve }) => {
+const beforeUpload = ({ files, resolve }) => {
   messageBox
     .confirm({
       msg: '是否上传',
@@ -385,7 +385,7 @@ const fileList = ref<any[]>([
 | formData         | HTTP 请求中其他额外的 form data，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                                     | object                                | -      | -                          | -        |
 | header           | HTTP 请求 Header，Header 中不能设置 Referer，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                         | object                                | -      | -                          | -        |
 | on-preview-fail  | 预览失败执行操作                                                                                                                                                               | function({ index, imgList })          | -      | -                          | -        |
-| before-upload    | 上传文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                        | function({ file, fileList, resolve }) | -      | -                          | -        |
+| before-upload    | 上传文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                        | function({ files, fileList, resolve })	 | -      | -                          | -        |
 | before-choose    | 选择图片之前的钩子，参数为文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                                    | function({ fileList, resolve })       | -      | -                          | -        |
 | before-remove    | 删除文件之前的钩子，参数为要删除的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ file, fileList, resolve }) | -      | -                          | -        |
 | before-preview   | 图片预览前的钩子，参数为预览的图片下标和图片列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ index, imgList, resolve }) | -      | -                          | -        |

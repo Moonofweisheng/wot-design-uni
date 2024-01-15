@@ -105,13 +105,14 @@ const beforePreview = ({ file, resolve }) => {
       toast.show('取消预览操作')
     })
 }
-const beforeUpload = ({ file, resolve }) => {
+const beforeUpload = ({ files, resolve }) => {
   messageBox
     .confirm({
       msg: '是否上传',
       title: '提示'
     })
     .then(() => {
+      console.log(files, 'files')
       resolve(true)
     })
     .catch(() => {
