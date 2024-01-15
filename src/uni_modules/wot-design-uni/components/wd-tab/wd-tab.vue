@@ -1,6 +1,6 @@
 <template>
   <view :class="`wd-tab ${customClass}`">
-    <view v-if="painted" cclass="wd-tab__body" :style="isShow ? '' : 'display: none;'">
+    <view v-if="painted" class="wd-tab__body" :style="isShow ? '' : 'display: none;'">
       <slot />
     </view>
   </view>
@@ -16,7 +16,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
+import { getCurrentInstance, ref, watch } from 'vue'
 import { getType, isDef } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { TABS_KEY } from '../wd-tabs/types'
