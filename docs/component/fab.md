@@ -32,7 +32,7 @@
 </wd-fab>
 ```
 ```ts
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { useToast } from 'wot-design-uni/components/wd-toast'
 const { show: showToast } = useToast()
 const type = ref<'primary' | 'success' | 'info' | 'warning' | 'error' | 'default'>('primary')
 const position = ref<'left-top' | 'right-top' | 'left-bottom' | 'right-bottom'>('left-bottom')
