@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.16](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.15...v0.2.16) (2024-01-21)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复文档中关于日期选择器最大日期描述错误的问题 ([bb76ce3](https://github.com/Moonofweisheng/wot-design-uni/commit/bb76ce332c6977cbae981790aa356bc27c0d9efa))
+
 ### [0.2.15](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.14...v0.2.15) (2024-01-15)
 
 
