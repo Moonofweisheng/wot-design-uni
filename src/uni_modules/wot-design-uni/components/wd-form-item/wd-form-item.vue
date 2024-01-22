@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-01-03 21:50:52
+ * @LastEditTime: 2024-01-21 20:59:59
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-form-item/wd-form-item.vue
@@ -61,15 +61,15 @@ const props = withDefaults(defineProps<Props>(), {
 const { parent: form, index } = useParent(FORM_KEY)
 
 const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
+  if (form.value && props.prop && form.value.errorMessages && form.value.errorMessages[props.prop]) {
+    return form.value.errorMessages[props.prop]
   } else {
     return ''
   }
 })
 
 const border = computed(() => {
-  if (index.value > 0 && form && form.props.border) {
+  if (index.value > 0 && form.value && form.value.props.border) {
     return true
   } else {
     return false

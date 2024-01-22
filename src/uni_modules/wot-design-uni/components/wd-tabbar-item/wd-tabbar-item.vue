@@ -74,12 +74,12 @@ const { parent: tabbar, index } = useParent(TABBAR_KEY)
 
 const textStyle = computed(() => {
   const style: CSSProperties = {}
-  if (tabbar) {
-    if (active.value && tabbar.props.activeColor) {
-      style['color'] = tabbar.props.activeColor
+  if (tabbar.value) {
+    if (active.value && tabbar.value.props.activeColor) {
+      style['color'] = tabbar.value.props.activeColor
     }
-    if (!active.value && tabbar.props.inactiveColor) {
-      style['color'] = tabbar.props.inactiveColor
+    if (!active.value && tabbar.value.props.inactiveColor) {
+      style['color'] = tabbar.value.props.inactiveColor
     }
   }
 
@@ -88,8 +88,9 @@ const textStyle = computed(() => {
 
 const active = computed(() => {
   const name = isDef(props.name) ? props.name : index.value
-  if (tabbar) {
-    if (tabbar.props.modelValue === name) {
+
+  if (tabbar.value) {
+    if (tabbar.value.props.modelValue === name) {
       return true
     } else {
       return false
@@ -104,7 +105,7 @@ const active = computed(() => {
  */
 function handleClick() {
   const name: string | number = isDef(props.name) ? props.name : index.value
-  tabbar && tabbar.setChange({ name })
+  tabbar.value && tabbar.value.setChange({ name })
 }
 </script>
 <style lang="scss" scoped>

@@ -44,7 +44,7 @@ const { parent: tabs, index } = useParent(TABS_KEY)
 
 // 激活项下标
 const activeIndex = computed(() => {
-  return isDef(tabs) ? tabs.state.activeIndex : 0
+  return isDef(tabs.value) ? tabs.value.state.activeIndex : 0
 })
 
 watch(
@@ -85,8 +85,8 @@ function checkName(self) {
   if (myName === undefined || myName === null || myName === '') {
     return
   }
-  tabs &&
-    tabs.children.forEach((child: any) => {
+  tabs.value &&
+    tabs.value.children.forEach((child: any) => {
       if (child.$.uid !== self.$.uid && child.name === myName) {
         console.error(`The tab's bound value: ${myName} has been used`)
       }

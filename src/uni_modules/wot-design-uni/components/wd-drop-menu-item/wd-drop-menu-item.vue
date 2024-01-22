@@ -155,16 +155,16 @@ function choose(index: number) {
 // 外部关闭弹出框
 function close() {
   showPop.value = false
-  dropMenu && dropMenu.fold()
+  dropMenu.value && dropMenu.value.fold()
 }
 
 const positionStyle = computed(() => {
   let style: string = ''
-  if (showPop.value && dropMenu) {
+  if (showPop.value && dropMenu.value) {
     style =
-      dropMenu.props.direction === 'down'
-        ? `top: calc(var(--window-top) + ${dropMenu.offset.value}px); bottom: 0;`
-        : `top: 0; bottom: calc(var(--window-bottom) + ${dropMenu.offset.value}px)`
+      dropMenu.value.props.direction === 'down'
+        ? `top: calc(var(--window-top) + ${dropMenu.value.offset.value}px); bottom: 0;`
+        : `top: 0; bottom: calc(var(--window-bottom) + ${dropMenu.value.offset.value}px)`
   } else {
     style = ''
   }
@@ -174,11 +174,11 @@ const positionStyle = computed(() => {
 function open() {
   showWrapper.value = true
   showPop.value = true
-  if (dropMenu) {
-    modal.value = Boolean(dropMenu.props.modal)
-    duration.value = Number(dropMenu.props.duration)
-    closeOnClickModal.value = Boolean(dropMenu.props.closeOnClickModal)
-    position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
+  if (dropMenu.value) {
+    modal.value = Boolean(dropMenu.value.props.modal)
+    duration.value = Number(dropMenu.value.props.duration)
+    closeOnClickModal.value = Boolean(dropMenu.value.props.closeOnClickModal)
+    position.value = dropMenu.value.props.direction === 'down' ? 'top' : 'bottom'
   }
 
   emit('open')

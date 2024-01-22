@@ -264,8 +264,8 @@ const { parent: form } = useParent(FORM_KEY)
 
 // 表单校验错误信息
 const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
+  if (form.value && props.prop && form.value.errorMessages && form.value.errorMessages[props.prop]) {
+    return form.value.errorMessages[props.prop]
   } else {
     return ''
   }
@@ -274,8 +274,8 @@ const errorMessage = computed(() => {
 // 是否展示必填
 const isRequired = computed(() => {
   let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
+  if (form.value && form.value.props.rules) {
+    const rules = form.value.props.rules
     for (const key in rules) {
       if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
         formRequired = rules[key].some((rule: FormItemRule) => rule.required)

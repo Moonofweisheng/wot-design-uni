@@ -90,8 +90,8 @@ const border = ref<boolean>(true)
 const { parent: grid } = useParent(GRID_KEY)
 
 const childCount = computed(() => {
-  if (isDef(grid) && isDef(grid.children)) {
-    return grid.children.length
+  if (isDef(grid.value) && isDef(grid.value.children)) {
+    return grid.value.children.length
   } else {
     return 0
   }
@@ -102,12 +102,14 @@ const emit = defineEmits(['itemclick'])
 watch(
   () => childCount.value,
   () => {
-    if (!grid) return
-    const width = grid.props.column ? 100 / grid.props.column + '%' : 100 / (childCount.value || 1) + '%'
+    if (!grid.value) return
+    const width = grid.value.props.column ? 100 / grid.value.props.column + '%' : 100 / (childCount.value || 1) + '%'
     // 单独定义间隔
-    const gutterStyle = grid.props.gutter ? `padding:${grid.props.gutter}px ${grid.props.gutter}px 0 0; background-color: transparent;` : ''
+    const gutterStyle = grid.value.props.gutter
+      ? `padding:${grid.value.props.gutter}px ${grid.value.props.gutter}px 0 0; background-color: transparent;`
+      : ''
     // 单独定义正方形
-    const squareStyle = grid.props.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
+    const squareStyle = grid.value.props.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
     style.value = `width: ${width}; ${squareStyle || gutterStyle}`
   },
   {
@@ -121,27 +123,29 @@ onMounted(() => {
 })
 
 function init() {
-  if (!grid) return
-  const children = grid.children
-  const width = grid.props.column ? 100 / grid.props.column + '%' : 100 / children.length + '%'
+  if (!grid.value) return
+  const children = grid.value.children
+  const width = grid.value.props.column ? 100 / grid.value.props.column + '%' : 100 / children.length + '%'
   // 单独定义间隔
-  const gutterStyle = grid.props.gutter ? `padding:${grid.props.gutter}px ${grid.props.gutter}px 0 0; background-color: transparent;` : ''
+  const gutterStyle = grid.value.props.gutter
+    ? `padding:${grid.value.props.gutter}px ${grid.value.props.gutter}px 0 0; background-color: transparent;`
+    : ''
   // 单独定义正方形
-  const squareStyle = grid.props.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
+  const squareStyle = grid.value.props.square ? `background-color:transparent; padding-bottom: 0; padding-top:${width}` : ''
   // 间隔+正方形
   gutterContentStyle.value =
-    grid.props.gutter && grid.props.square
-      ? `right: ${grid.props.gutter}px; bottom:${grid.props.gutter}px;height: auto; background-color: ${grid.props.bgColor}`
-      : `background-color: ${grid.props.bgColor}`
+    grid.value.props.gutter && grid.value.props.square
+      ? `right: ${grid.value.props.gutter}px; bottom:${grid.value.props.gutter}px;height: auto; background-color: ${grid.value.props.bgColor}`
+      : `background-color: ${grid.value.props.bgColor}`
 
-  border.value = Boolean(grid.props.border)
-  square.value = Boolean(grid.props.square)
-  gutter.value = Number(grid.props.gutter)
+  border.value = Boolean(grid.value.props.border)
+  square.value = Boolean(grid.value.props.square)
+  gutter.value = Number(grid.value.props.gutter)
   style.value = `width: ${width}; ${squareStyle || gutterStyle}`
 }
 
 function click() {
-  if (grid && !grid.props.clickable) return
+  if (grid.value && !grid.value.props.clickable) return
   const { url, linkType } = props
   emit('itemclick')
   if (url) {

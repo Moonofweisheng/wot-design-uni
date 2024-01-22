@@ -74,8 +74,8 @@ const contentStyle = computed(() => {
 })
 
 const selected = computed(() => {
-  if (collapse) {
-    return collapse.props.modelValue
+  if (collapse.value) {
+    return collapse.value.props.modelValue
   } else {
     return []
   }
@@ -142,16 +142,16 @@ function handleClick() {
       }
       if (isPromise(response)) {
         response.then(() => {
-          collapse && collapse.toggle(name, !expanded.value)
+          collapse.value && collapse.value.toggle(name, !expanded.value)
         })
       } else {
-        collapse && collapse.toggle(name, !expanded.value)
+        collapse.value && collapse.value.toggle(name, !expanded.value)
       }
     } else {
-      collapse && collapse.toggle(name, !expanded.value)
+      collapse.value && collapse.value.toggle(name, !expanded.value)
     }
   } else {
-    collapse && collapse.toggle(name, !expanded.value)
+    collapse.value && collapse.value.toggle(name, !expanded.value)
   }
 }
 

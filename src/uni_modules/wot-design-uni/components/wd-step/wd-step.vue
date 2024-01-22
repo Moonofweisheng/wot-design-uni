@@ -83,8 +83,8 @@ const styles = computed(() => {
 })
 
 const canAlignCenter = computed(() => {
-  if (isDef(steps)) {
-    const { vertical, alignCenter } = steps.props
+  if (isDef(steps.value)) {
+    const { vertical, alignCenter } = steps.value.props
     return Boolean(!vertical && alignCenter)
   } else {
     return false
@@ -92,35 +92,35 @@ const canAlignCenter = computed(() => {
 })
 
 const vertical = computed(() => {
-  if (isDef(steps)) {
-    return Boolean(steps.props.vertical)
+  if (isDef(steps.value)) {
+    return Boolean(steps.value.props.vertical)
   } else {
     return false
   }
 })
 const dot = computed(() => {
-  if (isDef(steps)) {
-    return Boolean(steps.props.dot)
+  if (isDef(steps.value)) {
+    return Boolean(steps.value.props.dot)
   } else {
     return false
   }
 })
 
 const childrenLength = computed(() => {
-  if (isDef(steps)) {
-    return Number(steps.children.length)
+  if (isDef(steps.value)) {
+    return Number(steps.value.children.length)
   } else {
     return 0
   }
 })
 
 function getStyles() {
-  if (steps) {
-    const { vertical, space } = steps.props
+  if (steps.value) {
+    const { vertical, space } = steps.value.props
     if (vertical) {
       return space ? `height: ${space}` : ''
     } else {
-      return `width: ${space || 100 / steps.children.length + '%'}`
+      return `width: ${space || 100 / steps.value.children.length + '%'}`
     }
   } else {
     return ''
@@ -131,8 +131,8 @@ function getCurrentStatus(index: number) {
     return props.status
   }
 
-  if (steps) {
-    const { active } = steps.props
+  if (steps.value) {
+    const { active } = steps.value.props
     if (Number(active) > index) {
       return 'finished'
     } else if (Number(active) === index) {

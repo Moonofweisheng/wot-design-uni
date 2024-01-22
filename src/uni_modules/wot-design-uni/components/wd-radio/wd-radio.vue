@@ -58,56 +58,56 @@ const props = withDefaults(defineProps<Props>(), {
 const { parent: radioGroup } = useParent(RADIO_GROUP_KEY)
 
 const isChecked = computed(() => {
-  if (radioGroup) {
-    return props.value === radioGroup.props.modelValue
+  if (radioGroup.value) {
+    return props.value === radioGroup.value.props.modelValue
   } else {
     return false
   }
 })
 
 const innerShape = computed(() => {
-  if (!props.shape && radioGroup && radioGroup.props.shape) {
-    return radioGroup.props.shape
+  if (!props.shape && radioGroup.value && radioGroup.value.props.shape) {
+    return radioGroup.value.props.shape
   } else {
     return props.shape
   }
 })
 
 const innerCheckedColor = computed(() => {
-  if (!props.checkedColor && radioGroup && radioGroup.props.checkedColor) {
-    return radioGroup.props.checkedColor
+  if (!props.checkedColor && radioGroup.value && radioGroup.value.props.checkedColor) {
+    return radioGroup.value.props.checkedColor
   } else {
     return props.checkedColor
   }
 })
 
 const innerDisabled = computed(() => {
-  if ((props.disabled === null || props.disabled === undefined) && radioGroup && radioGroup.props.disabled) {
-    return radioGroup.props.disabled
+  if ((props.disabled === null || props.disabled === undefined) && radioGroup.value && radioGroup.value.props.disabled) {
+    return radioGroup.value.props.disabled
   } else {
     return props.disabled
   }
 })
 
 const innerInline = computed(() => {
-  if ((props.inline === null || props.inline === undefined) && radioGroup && radioGroup.props.inline) {
-    return radioGroup.props.inline
+  if ((props.inline === null || props.inline === undefined) && radioGroup.value && radioGroup.value.props.inline) {
+    return radioGroup.value.props.inline
   } else {
     return props.inline
   }
 })
 
 const innerSize = computed(() => {
-  if (!props.size && radioGroup && radioGroup.props.size) {
-    return radioGroup.props.size
+  if (!props.size && radioGroup.value && radioGroup.value.props.size) {
+    return radioGroup.value.props.size
   } else {
     return props.size
   }
 })
 
 const innerCell = computed(() => {
-  if ((props.cell === null || props.cell === undefined) && radioGroup && radioGroup.props.cell) {
-    return radioGroup.props.cell
+  if ((props.cell === null || props.cell === undefined) && radioGroup.value && radioGroup.value.props.cell) {
+    return radioGroup.value.props.cell
   } else {
     return props.cell
   }
@@ -126,8 +126,8 @@ watch(
  */
 function handleClick() {
   const { value } = props
-  if (!innerDisabled.value && radioGroup && value !== null && value !== undefined) {
-    radioGroup.updateValue(value)
+  if (!innerDisabled.value && radioGroup.value && value !== null && value !== undefined) {
+    radioGroup.value.updateValue(value)
   }
 }
 </script>

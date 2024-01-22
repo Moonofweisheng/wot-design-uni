@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2024-01-03 21:59:39
+ * @LastEditTime: 2024-01-21 20:56:59
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-col/wd-col.vue
@@ -46,8 +46,8 @@ const style = ref<string>('')
 const { parent: row } = useParent(ROW_KEY)
 
 const gutter = computed(() => {
-  if (row) {
-    return row.props.gutter || 0
+  if (row.value) {
+    return row.value.props.gutter || 0
   } else {
     return 0
   }

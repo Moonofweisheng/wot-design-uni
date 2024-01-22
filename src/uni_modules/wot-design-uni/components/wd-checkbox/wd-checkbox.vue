@@ -75,8 +75,8 @@ const props = withDefaults(defineProps<Props>(), {
 const { parent: checkboxGroup, index } = useParent(CHECKBOX_GROUP_KEY)
 
 const isChecked = computed(() => {
-  if (checkboxGroup) {
-    return checkboxGroup.props.modelValue.indexOf(props.modelValue) > -1
+  if (checkboxGroup.value) {
+    return checkboxGroup.value.props.modelValue.indexOf(props.modelValue) > -1
   } else {
     return props.modelValue === props.trueValue
   }
@@ -87,7 +87,7 @@ const isFirst = computed(() => {
 })
 
 const isLast = computed(() => {
-  const children = isDef(checkboxGroup) ? checkboxGroup.children : []
+  const children = isDef(checkboxGroup.value) ? checkboxGroup.value.children : []
   return index.value === children.length - 1
 })
 const { proxy } = getCurrentInstance() as any
@@ -96,7 +96,7 @@ watch(
   () => props.modelValue,
   () => {
     // 组合使用走这个逻辑
-    if (checkboxGroup) {
+    if (checkboxGroup.value) {
       checkName()
     }
   }
@@ -111,16 +111,16 @@ watch(
 )
 
 const innerShape = computed(() => {
-  if (!props.shape && checkboxGroup && checkboxGroup.props.shape) {
-    return checkboxGroup.props.shape
+  if (!props.shape && checkboxGroup.value && checkboxGroup.value.props.shape) {
+    return checkboxGroup.value.props.shape
   } else {
     return props.shape
   }
 })
 
 const innerCheckedColor = computed(() => {
-  if (!props.checkedColor && checkboxGroup && checkboxGroup.props.checkedColor) {
-    return checkboxGroup.props.checkedColor
+  if (!props.checkedColor && checkboxGroup.value && checkboxGroup.value.props.checkedColor) {
+    return checkboxGroup.value.props.checkedColor
   } else {
     return props.checkedColor
   }
@@ -128,16 +128,16 @@ const innerCheckedColor = computed(() => {
 
 const innerDisabled = computed(() => {
   let innerDisabled = props.disabled
-  if (checkboxGroup) {
+  if (checkboxGroup.value) {
     if (
       // max 生效时，group 已经选满，禁止其它节点再选中。
-      (checkboxGroup.props.max && checkboxGroup.props.modelValue.length >= checkboxGroup.props.max && !isChecked.value) ||
+      (checkboxGroup.value.props.max && checkboxGroup.value.props.modelValue.length >= checkboxGroup.value.props.max && !isChecked.value) ||
       // min 生效时，group 选中的节点数量仅满足最小值，禁止取消已选中的节点。
-      (checkboxGroup.props.min && checkboxGroup.props.modelValue.length <= checkboxGroup.props.min && isChecked.value) ||
+      (checkboxGroup.value.props.min && checkboxGroup.value.props.modelValue.length <= checkboxGroup.value.props.min && isChecked.value) ||
       // 只要子节点自己要求 disabled，那就 disabled。
       props.disabled === true ||
       // 父节点要求全局 disabled，子节点没吱声，那就 disabled。
-      (checkboxGroup.props.disabled && props.disabled === null)
+      (checkboxGroup.value.props.disabled && props.disabled === null)
     ) {
       innerDisabled = true
     }
@@ -146,24 +146,24 @@ const innerDisabled = computed(() => {
 })
 
 const innerInline = computed(() => {
-  if (checkboxGroup && checkboxGroup.props.inline) {
-    return checkboxGroup.props.inline
+  if (checkboxGroup.value && checkboxGroup.value.props.inline) {
+    return checkboxGroup.value.props.inline
   } else {
     return false
   }
 })
 
 const innerCell = computed(() => {
-  if (checkboxGroup && checkboxGroup.props.cell) {
-    return checkboxGroup.props.cell
+  if (checkboxGroup.value && checkboxGroup.value.props.cell) {
+    return checkboxGroup.value.props.cell
   } else {
     return false
   }
 })
 
 const innerSize = computed(() => {
-  if (!props.size && checkboxGroup && checkboxGroup.props.size) {
-    return checkboxGroup.props.size
+  if (!props.size && checkboxGroup.value && checkboxGroup.value.props.size) {
+    return checkboxGroup.value.props.size
   } else {
     return props.size
   }
@@ -182,9 +182,9 @@ const emit = defineEmits(['change', 'update:modelValue'])
  * @param  myName 自己的标识符
  */
 function checkName() {
-  checkboxGroup &&
-    checkboxGroup.children &&
-    checkboxGroup.children.forEach((child: any) => {
+  checkboxGroup.value &&
+    checkboxGroup.value.children &&
+    checkboxGroup.value.children.forEach((child: any) => {
       if (child.$.uid !== proxy.$.uid && child.modelValue === props.modelValue) {
         console.error(`The checkbox's bound value: ${props.modelValue} has been used`)
       }
@@ -196,11 +196,11 @@ function checkName() {
 function toggle() {
   if (innerDisabled.value) return
   // 复选框单独使用时点击反选，并且在checkbox上触发change事件
-  if (checkboxGroup) {
+  if (checkboxGroup.value) {
     emit('change', {
       value: !isChecked.value
     })
-    checkboxGroup.changeSelectState(props.modelValue)
+    checkboxGroup.value.changeSelectState(props.modelValue)
   } else {
     const newVal = props.modelValue === props.trueValue ? props.falseValue : props.trueValue
     emit('update:modelValue', newVal)
