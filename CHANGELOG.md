@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.17](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.16...v0.2.17) (2024-01-23)
+
+
+### ✨ Features | 新功能
+
+* ✨ Form 表单组件提供开关控制是否model变化时重置提示信息 ([b9f46ba](https://github.com/Moonofweisheng/wot-design-uni/commit/b9f46ba0da85acd7312753a34dd0ad3f2f7379a2)), closes [#166](https://github.com/Moonofweisheng/wot-design-uni/issues/166)
+
 ### [0.2.16](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.15...v0.2.16) (2024-01-21)
 
 
