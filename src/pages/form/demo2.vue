@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <wd-form ref="form" :model="model">
+    <wd-form ref="form" :model="model" :reset-on-change="false">
       <wd-cell-group border>
         <wd-input
           label="用户名"

@@ -111,7 +111,7 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
-import { FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
+import { type FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import { areaData } from '@/utils/area'
 import { reactive, ref } from 'vue'
 

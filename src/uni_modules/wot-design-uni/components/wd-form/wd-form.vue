@@ -26,12 +26,15 @@ interface Props {
   model: Record<string, any>
   // 表单验证规则
   rules?: FormRules
+  // 是否在输入时重置表单校验信息
+  resetOnChange?: boolean
   customClass?: string
   customStyle?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   rules: () => ({}),
+  resetOnChange: true,
   customClass: '',
   customStyle: ''
 })
@@ -44,7 +47,9 @@ linkChildren({ props, errorMessages: errorMessages })
 watch(
   () => props.model,
   () => {
-    clearMessage()
+    if (props.resetOnChange) {
+      clearMessage()
+    }
   },
   { immediate: true, deep: true }
 )
@@ -129,6 +134,14 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
     showMessage(error)
   })
 
+  if (valid) {
+    if (prop) {
+      clearMessage(prop)
+    } else {
+      clearMessage()
+    }
+  }
+
   return {
     valid,
     errors
@@ -156,10 +169,14 @@ function showMessage(errorMsg: ErrorMessage) {
   }
 }
 
-function clearMessage() {
-  Object.keys(errorMessages).forEach((key) => {
-    errorMessages[key] = ''
-  })
+function clearMessage(prop?: string) {
+  if (prop) {
+    errorMessages[prop] = ''
+  } else {
+    Object.keys(errorMessages).forEach((key) => {
+      errorMessages[key] = ''
+    })
+  }
 }
 
 function reset() {
