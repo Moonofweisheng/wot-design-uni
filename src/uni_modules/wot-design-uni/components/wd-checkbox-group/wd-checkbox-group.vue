@@ -40,7 +40,6 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: () => [],
   cell: false,
   shape: 'circle',
-  checkedColor: '#4D80F0',
   disabled: false,
   min: 0,
   max: 0,
