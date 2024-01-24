@@ -182,7 +182,6 @@ const props = withDefaults(defineProps<Props>(), {
   alignRight: false,
   min: 0,
   max: 0,
-  checkedColor: '#4D80F0',
   useDefaultSlot: false,
   useLabelSlot: false,
   closeOnClickModal: true,

@@ -15,8 +15,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, provide, watch } from 'vue'
-import { isDef } from '../common/util'
+import { watch } from 'vue'
 import { useChildren } from '../composables/useChildren'
 import { RADIO_GROUP_KEY } from './types'
 
@@ -36,7 +35,6 @@ const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   shape: 'check',
   size: '',
-  checkedColor: '#4D80F0',
   disabled: false,
   inline: false,
   cell: false
