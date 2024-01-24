@@ -135,8 +135,8 @@
         position: absolute;
         width: $-radio-dot-size;
         height: $-radio-dot-size;
-        left: 2px;
-        top: 2px;
+        left: calc(50% - #{$-radio-dot-size / 2});
+        top: calc(50% - #{$-radio-dot-size / 2});
         border-radius: 50%;
         background-color: #fff;
         transform: scale(0);
@@ -291,6 +291,8 @@
         &::before {
           width: $-radio-dot-large-size;
           height: $-radio-dot-large-size;
+          left: calc(50% - #{$-radio-dot-large-size / 2});
+          top: calc(50% - #{$-radio-dot-large-size / 2});
         }
       }
     }
