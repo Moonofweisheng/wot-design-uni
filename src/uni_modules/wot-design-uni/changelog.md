@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.2.18](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.17...v0.2.18) (2024-01-24)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 CheckBox 组件的选中色无法应用到css变量的问题 ([febfb61](https://github.com/Moonofweisheng/wot-design-uni/commit/febfb61cab3b55a9f78920ed4715f05a232fb9f6))
+* 🐛 修复 Radio 组件的选中色无法应用到css变量的问题 ([b7e8631](https://github.com/Moonofweisheng/wot-design-uni/commit/b7e86314139cc6291e851c350219fce837f0f26e))
+
 ### [0.2.17](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.16...v0.2.17) (2024-01-23)
 
 
