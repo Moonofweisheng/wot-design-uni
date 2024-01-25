@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [0.2.19](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.18...v0.2.19) (2024-01-25)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Input 绑定值无法为null的问题 ([f745e14](https://github.com/Moonofweisheng/wot-design-uni/commit/f745e14d10d64b643aa2f9c0170f72db3a99bb3e))
+* 🐛 修复多列、单复选选择器列更新时显示值未更新的问题 ([5ba45b9](https://github.com/Moonofweisheng/wot-design-uni/commit/5ba45b94b711e1129873fa29b243a616087ddc2a)), closes [#167](https://github.com/Moonofweisheng/wot-design-uni/issues/167)
+
 ### [0.2.18](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.17...v0.2.18) (2024-01-24)
 
 
