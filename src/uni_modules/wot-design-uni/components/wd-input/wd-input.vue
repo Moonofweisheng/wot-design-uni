@@ -193,9 +193,9 @@ watch(
   () => props.modelValue,
   (newValue) => {
     const { disabled, readonly, clearable } = props
-    if (newValue === null || newValue === undefined) {
+    if (newValue === undefined) {
       newValue = ''
-      console.warn('[wot-design] warning(wd-input): value can not be null or undefined.')
+      console.warn('[wot-design] warning(wd-input): value can not be undefined.')
     }
     inputValue.value = newValue
     showClear.value = Boolean(clearable && !disabled && !readonly && newValue)
