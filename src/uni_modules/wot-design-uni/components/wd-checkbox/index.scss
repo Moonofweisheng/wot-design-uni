@@ -149,9 +149,9 @@
     :deep(.wd-checkbox__check) {
       opacity: 1;
       position: absolute;
-      left: 0;
-      top: -1px;
-      transform: translateX(-4.5%);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
