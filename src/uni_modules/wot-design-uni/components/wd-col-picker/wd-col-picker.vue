@@ -177,7 +177,6 @@ const selectList = ref<Record<string, any>[]>([])
 const pickerColSelected = ref<(string | number)[]>([])
 const selectShowList = ref<Record<string, any>[]>([])
 const loading = ref<boolean>(false)
-const showValue = ref<string>('')
 const isChange = ref<boolean>(false)
 const lastSelectList = ref<Record<string, any>[]>([])
 const lastPickerColSelected = ref<(string | number)[]>([])
@@ -194,6 +193,22 @@ const updateLineAndScroll = debounce(function (animation = true) {
   lineScrollIntoView()
 }, 50)
 
+const showValue = computed(() => {
+  const selectedItems = (props.modelValue || []).map((item, colIndex) => {
+    return getSelectedItem(item, colIndex, selectList.value)
+  })
+
+  if (props.displayFormat) {
+    return props.displayFormat(selectedItems)
+  } else {
+    return selectedItems
+      .map((item) => {
+        return item[props.labelKey]
+      })
+      .join('')
+  }
+})
+
 watch(
   () => props.modelValue,
   (newValue) => {
@@ -202,7 +217,6 @@ watch(
     newValue.map((item, colIndex) => {
       return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
     })
-    setShowValue(newValue)
     handleAutoComplete()
   },
   {
@@ -231,7 +245,6 @@ watch(
 
     if (newSelectedList.length > 0) {
       currentCol.value = newSelectedList.length - 1
-      setShowValue(props.modelValue)
     }
   },
   {
@@ -447,7 +460,6 @@ function onConfirm() {
   pickerShow.value = false
 
   emit('update:modelValue', pickerColSelected.value)
-  setShowValue(pickerColSelected.value)
   emit('confirm', {
     value: pickerColSelected.value,
     selectedItems: pickerColSelected.value.map((item, colIndex) => {
@@ -499,21 +511,7 @@ function lineScrollIntoView() {
     scrollLeft.value = offsetLeft - ((navRect as any).width - selectItem.width) / 2
   })
 }
-function setShowValue(value) {
-  const selectedItems = value.map((item, colIndex) => {
-    return getSelectedItem(item, colIndex, selectList.value)
-  })
 
-  if (props.displayFormat) {
-    showValue.value = props.displayFormat(selectedItems)
-  } else {
-    showValue.value = selectedItems
-      .map((item) => {
-        return item[props.labelKey]
-      })
-      .join('')
-  }
-}
 // 递归列数据补齐
 function diffColumns(colIndex) {
   // colIndex 为 -1 时，item 为空对象，>=0 时则具有 value 属性
@@ -522,8 +520,6 @@ function diffColumns(colIndex) {
     // 如果 columns 长度还小于 value 长度，colIndex + 1，继续递归补齐
     if (selectList.value.length < props.modelValue.length) {
       diffColumns(colIndex + 1)
-    } else {
-      setShowValue(pickerColSelected.value)
     }
   })
 }

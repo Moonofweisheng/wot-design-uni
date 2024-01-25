@@ -196,7 +196,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
-const showValue = ref<string>('')
 const isConfirm = ref<boolean>(false)
 const lastSelectList = ref<Array<number | boolean | string>>([])
 const filterVal = ref<string>('')
@@ -204,13 +203,39 @@ const filterColumns = ref<Array<Record<string, any>>>([])
 const scrollTop = ref<number | null>(0) // 滚动位置
 const cell = useCell()
 
+const showValue = computed(() => {
+  const value = valueFormat(props.modelValue)
+  let showValueTemp: string = ''
+
+  if (props.displayFormat) {
+    showValueTemp = props.displayFormat(value, props.columns)
+  } else {
+    const { type, labelKey } = props
+    if (type === 'checkbox') {
+      const selectedItems = value.map((item) => {
+        return getSelectedItem(item)
+      })
+      showValueTemp = selectedItems
+        .map((item) => {
+          return item[labelKey]
+        })
+        .join(', ')
+    } else if (type === 'radio') {
+      const selectedItem = getSelectedItem(value)
+      showValueTemp = selectedItem[labelKey]
+    } else {
+      showValueTemp = value
+    }
+  }
+  return showValueTemp
+})
+
 watch(
   () => props.modelValue,
   (newValue) => {
     if (newValue === selectList.value) return
     selectList.value = valueFormat(newValue)
     lastSelectList.value = valueFormat(newValue)
-    setShowValue(valueFormat(newValue))
   },
   {
     deep: true,
@@ -411,33 +436,6 @@ function handleConfirm() {
     value: lastSelectList.value,
     selectedItems
   })
-  setShowValue(lastSelectList.value)
-}
-
-function setShowValue(value) {
-  let showValueTemp: string = ''
-
-  if (props.displayFormat) {
-    showValueTemp = props.displayFormat(value, props.columns)
-  } else {
-    const { type, labelKey } = props
-    if (type === 'checkbox') {
-      const selectedItems = value.map((item) => {
-        return getSelectedItem(item)
-      })
-      showValueTemp = selectedItems
-        .map((item) => {
-          return item[labelKey]
-        })
-        .join(', ')
-    } else if (type === 'radio') {
-      const selectedItem = getSelectedItem(value)
-      showValueTemp = selectedItem[labelKey]
-    } else {
-      showValueTemp = value
-    }
-  }
-  showValue.value = showValueTemp
 }
 
 function getFilterText(label, filterVal) {
