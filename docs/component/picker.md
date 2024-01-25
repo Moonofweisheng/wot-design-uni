@@ -87,7 +87,7 @@ const columns = ref([
 
 传入 `column-change` 属性，其类型为 `function`，接收 pickerView 实例、选中项、当前修改列的下标、resolve 作为入参，根据选中项和列下标进行判断，通过 pickerView 实例暴露出来的 `setColumnData` 方法修改其他列的数据源，当修改完成后需要执行 `resolve()` 告知组件修改完成以继续执行，如果 `column-change` 包含异步操作，也可以使组件按照异步顺序进行执行。
 
-> resolve 参数为 1.4.0 添加，每次修改完后都需要调用 resolve() 通知组件。
+> 每次修改完后都需要调用 resolve() 通知组件。
 
 ```html
 <wd-picker

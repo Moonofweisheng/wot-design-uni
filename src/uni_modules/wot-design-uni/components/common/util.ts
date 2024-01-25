@@ -276,6 +276,15 @@ export function kebabCase(word: string): string {
 }
 
 /**
+ * 将短横线链接转换为驼峰命名
+ * @param word 需要转换的短横线链接
+ * @returns 转换后的驼峰命名字符串
+ */
+export function camelCase(word: string): string {
+  return word.replace(/-(\w)/g, (_, c) => c.toUpperCase())
+}
+
+/**
  * 检查给定值是否为数组。
  * @param {any} value 要检查的值
  * @returns {boolean} 如果是数组则返回 true，否则返回 false

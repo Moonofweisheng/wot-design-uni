@@ -119,6 +119,8 @@ import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
+import { useTranslate } from '../composables/useTranslate'
+const { translate } = useTranslate('calendar')
 
 const defaultDisplayFormat = (value, type) => {
   switch (type) {
@@ -131,12 +133,14 @@ const defaultDisplayFormat = (value, type) => {
         })
         .join(', ')
     case 'daterange':
-      return `${value[0] ? dayjs(value[0]).format('YYYY-MM-DD') : '开始时间'} 至 ${value[1] ? dayjs(value[1]).format('YYYY-MM-DD') : '结束时间'}`
+      return `${value[0] ? dayjs(value[0]).format('YYYY-MM-DD') : translate('startTime')} ${translate('to')} ${
+        value[1] ? dayjs(value[1]).format('YYYY-MM-DD') : translate('endTime')
+      }`
     case 'datetime':
       return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
     case 'datetimerange':
-      return `${value[0] ? dayjs(value[0]).format('YY年MM月DD日 HH:mm:ss') : '开始时间'} 至\n${
-        value[1] ? dayjs(value[1]).format('YY年MM月DD日 HH:mm:ss') : '结束时间'
+      return `${value[0] ? dayjs(value[0]).format('YY年MM月DD日 HH:mm:ss') : translate('startTime')} ${translate('to')}\n${
+        value[1] ? dayjs(value[1]).format('YY年MM月DD日 HH:mm:ss') : translate('endTime')
       }`
     case 'week': {
       const year = new Date(value).getFullYear()
@@ -153,7 +157,9 @@ const defaultDisplayFormat = (value, type) => {
     case 'month':
       return dayjs(value).format('YYYY / MM')
     case 'monthrange':
-      return `${value[0] ? dayjs(value[0]).format('YYYY / MM') : '开始月'} 至 ${value[1] ? dayjs(value[1]).format('YYYY / MM') : '结束月'}`
+      return `${value[0] ? dayjs(value[0]).format('YYYY / MM') : '开始月'} ${translate('to')} ${
+        value[1] ? dayjs(value[1]).format('YYYY / MM') : '结束月'
+      }`
   }
 }
 
@@ -161,12 +167,12 @@ const formatRange = (value, rangeType, type) => {
   switch (type) {
     case 'daterange':
       if (!value) {
-        return rangeType === 'end' ? '结束时间' : '开始时间'
+        return rangeType === 'end' ? translate('endTime') : translate('startTime')
       }
       return dayjs(value).format('YYYY年MM月DD日')
     case 'datetimerange':
       if (!value) {
-        return rangeType === 'end' ? '结束时间' : '开始时间'
+        return rangeType === 'end' ? translate('endTime') : translate('startTime')
       }
       return dayjs(value).format('YY年MM月DD日 HH:mm:ss')
     case 'weekrange': {
