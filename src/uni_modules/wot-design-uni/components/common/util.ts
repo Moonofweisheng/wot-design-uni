@@ -501,6 +501,25 @@ export function deepMerge<T extends Record<string, any>>(target: T, source: Reco
 }
 
 /**
+ * 深度合并两个对象。
+ * @param target
+ * @param source
+ * @returns
+ */
+export function deepAssign(target: Record<string, any>, source: Record<string, any>): Record<string, any> {
+  Object.keys(source).forEach((key) => {
+    const targetValue = target[key]
+    const newObjValue = source[key]
+    if (isObj(targetValue) && isObj(newObjValue)) {
+      deepMerge(targetValue, newObjValue)
+    } else {
+      target[key] = newObjValue
+    }
+  })
+  return target
+}
+
+/**
  * 构建带参数的URL
  * @param baseUrl 基础URL
  * @param params 参数对象，键值对表示要添加到URL的参数

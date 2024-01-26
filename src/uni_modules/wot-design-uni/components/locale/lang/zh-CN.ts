@@ -11,7 +11,7 @@ export default {
     to: '至',
     timeFormat: 'YY年MM月DD日 HH:mm:ss',
     dateFormat: 'YYYY年MM月DD日',
-    weekFormat: '{year} 第 {week} 周',
+    weekFormat: (year: number, week: number) => `${year} 第 ${week} 周`,
     startWeek: '开始周',
     endWeek: '结束周',
     startMonth: '开始月',
@@ -30,15 +30,15 @@ export default {
       fri: '五',
       sat: '六'
     },
-    rangePrompt: '选择天数不能超过{maxRange}天',
-    rangePromptWeek: '选择周数不能超过{maxRange}周',
-    rangePromptMonth: '选择月份不能超过{maxRange}个月',
+    rangePrompt: (maxRange: number) => `选择天数不能超过${maxRange}天`,
+    rangePromptWeek: (maxRange: number) => `选择周数不能超过${maxRange}周`,
+    rangePromptMonth: (maxRange: number) => `选择月份不能超过${maxRange}个月`,
     monthTitle: 'YYYY年M月',
     yearTitle: 'YYYY年',
     month: 'M月',
-    hour: '{value}时',
-    minute: '{value}分',
-    second: '{value}秒'
+    hour: (value: number) => `${value}时`,
+    minute: (value: number) => `${value}分`,
+    second: (value: number) => `${value}秒`
   },
   collapse: {
     expand: '展开',

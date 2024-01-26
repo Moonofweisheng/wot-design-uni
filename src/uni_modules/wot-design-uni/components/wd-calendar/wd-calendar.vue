@@ -21,7 +21,7 @@
             <view
               :class="`wd-calendar__value ${ellipsis ? 'is-ellipsis' : ''} ${customValueClass} ${showValue ? '' : 'wd-calendar__value--placeholder'}`"
             >
-              {{ showValue || placeholder || '请选择' }}
+              {{ showValue || placeholder || translate('placeholder') }}
             </view>
             <wd-icon v-if="!disabled && !readonly" custom-class="wd-calendar__arrow" name="arrow-right" />
           </view>
@@ -38,12 +38,12 @@
       @close="close"
     >
       <view class="wd-calendar__header">
-        <view v-if="!showTypeSwitch && shortcuts.length === 0" class="wd-calendar__title">{{ title || '选择日期' }}</view>
+        <view v-if="!showTypeSwitch && shortcuts.length === 0" class="wd-calendar__title">{{ title || translate('title') }}</view>
         <view v-if="showTypeSwitch" class="wd-calendar__tabs">
           <wd-tabs ref="calendarTabs" v-model="currentTab" @change="handleTypeChange">
-            <wd-tab title="日" name="日" />
-            <wd-tab title="周" name="周" />
-            <wd-tab title="月" name="月" />
+            <wd-tab :title="translate('day')" :name="translate('day')" />
+            <wd-tab :title="translate('week')" :name="translate('week')" />
+            <wd-tab :title="translate('month')" :name="translate('month')" />
           </wd-tabs>
         </view>
         <view v-if="shortcuts.length > 0" class="wd-calendar__shortcuts">
@@ -94,7 +94,7 @@
         />
       </view>
       <view v-if="showConfirm" class="wd-calendar__confirm">
-        <wd-button block :disabled="confirmBtnDisabled" @click="handleConfirm">{{ confirmText || '确定' }}</wd-button>
+        <wd-button block :disabled="confirmBtnDisabled" @click="handleConfirm">{{ confirmText || translate('confirm') }}</wd-button>
       </view>
     </wd-action-sheet>
   </view>
@@ -139,26 +139,28 @@ const defaultDisplayFormat = (value, type) => {
     case 'datetime':
       return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
     case 'datetimerange':
-      return `${value[0] ? dayjs(value[0]).format('YY年MM月DD日 HH:mm:ss') : translate('startTime')} ${translate('to')}\n${
-        value[1] ? dayjs(value[1]).format('YY年MM月DD日 HH:mm:ss') : translate('endTime')
+      return `${value[0] ? dayjs(value[0]).format(translate('timeFormat')) : translate('startTime')} ${translate('to')}\n${
+        value[1] ? dayjs(value[1]).format(translate('timeFormat')) : translate('endTime')
       }`
     case 'week': {
       const year = new Date(value).getFullYear()
       const week = getWeekNumber(value)
-      return `${year} 第 ${padZero(week)} 周`
+      return translate('weekFormat', year, padZero(week))
     }
     case 'weekrange': {
       const year1 = new Date(value[0]).getFullYear()
       const week1 = getWeekNumber(value[0])
       const year2 = new Date(value[1]).getFullYear()
       const week2 = getWeekNumber(value[1])
-      return `${value[0] ? `${year1} 第 ${padZero(week1)} 周` : '开始周'} - ${value[1] ? `${year2} 第 ${padZero(week2)} 周` : '结束周'}`
+      return `${value[0] ? translate('weekFormat', year1, padZero(week1)) : translate('startWeek')} - ${
+        value[1] ? translate('weekFormat', year2, padZero(week2)) : translate('endWeek')
+      }`
     }
     case 'month':
       return dayjs(value).format('YYYY / MM')
     case 'monthrange':
-      return `${value[0] ? dayjs(value[0]).format('YYYY / MM') : '开始月'} ${translate('to')} ${
-        value[1] ? dayjs(value[1]).format('YYYY / MM') : '结束月'
+      return `${value[0] ? dayjs(value[0]).format('YYYY / MM') : translate('startMonth')} ${translate('to')} ${
+        value[1] ? dayjs(value[1]).format('YYYY / MM') : translate('endMonth')
       }`
   }
 }
@@ -169,26 +171,26 @@ const formatRange = (value, rangeType, type) => {
       if (!value) {
         return rangeType === 'end' ? translate('endTime') : translate('startTime')
       }
-      return dayjs(value).format('YYYY年MM月DD日')
+      return dayjs(value).format(translate('dateFormat'))
     case 'datetimerange':
       if (!value) {
         return rangeType === 'end' ? translate('endTime') : translate('startTime')
       }
-      return dayjs(value).format('YY年MM月DD日 HH:mm:ss')
+      return dayjs(value).format(translate('timeFormat'))
     case 'weekrange': {
       if (!value) {
-        return rangeType === 'end' ? '结束周' : '开始周'
+        return rangeType === 'end' ? translate('endWeek') : translate('startWeek')
       }
       const date = new Date(value)
       const year = date.getFullYear()
       const week = getWeekNumber(value)
-      return year + '年第' + week + '周'
+      return translate('weekFormat', year, padZero(week))
     }
     case 'monthrange':
       if (!value) {
-        return rangeType === 'end' ? '结束月' : '开始月'
+        return rangeType === 'end' ? translate('endMonth') : translate('startMonth')
       }
-      return dayjs(value).format('YYYY年MM月')
+      return dayjs(value).format(translate('monthFormat'))
   }
 }
 
