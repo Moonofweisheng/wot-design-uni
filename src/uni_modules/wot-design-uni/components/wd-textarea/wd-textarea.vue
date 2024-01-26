@@ -16,7 +16,7 @@
         :class="`wd-textarea__inner ${showClear ? 'is-suffix' : ''} ${customTextareaClass}`"
         v-model="inputValue"
         :show-count="false"
-        :placeholder="placeholder"
+        :placeholder="placeholder || translate('placeholder')"
         :disabled="disabled"
         :maxlength="maxlength"
         :focus="isFocus"
@@ -80,7 +80,10 @@ import { objToStyle, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
+import { useTranslate } from '../composables/useTranslate'
 type ConfirmType = 'send' | 'search' | 'next' | 'go' | 'done'
+
+const { translate } = useTranslate('textarea')
 
 interface Props {
   // 原生属性
@@ -136,7 +139,6 @@ const props = withDefaults(defineProps<Props>(), {
   customStyle: '',
   maxlength: -1,
   modelValue: '',
-  placeholder: '请输入...',
   autoHeight: false,
   clearable: false,
   showPassword: false,

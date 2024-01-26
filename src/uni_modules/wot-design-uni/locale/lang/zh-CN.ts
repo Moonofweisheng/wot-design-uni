@@ -51,9 +51,13 @@ export default {
   },
   datetimePicker: {
     start: '开始时间',
-    end: '结束时间'
+    end: '结束时间',
+    to: '至',
+    placeholder: '请选择',
+    confirm: '完成',
+    cancel: '取消'
   },
-  infiniteLoad: {
+  loadmore: {
     loading: '正在努力加载中...',
     finished: '已加载完毕',
     error: '加载失败',
@@ -71,9 +75,9 @@ export default {
   pagination: {
     prev: '上一页',
     next: '下一页',
-    page: '当前页：{value}',
-    total: '当前数据：{total}条',
-    size: '分页大小：{size}'
+    page: (value: number) => `当前页：${value}`,
+    total: (total: number) => `当前数据：${total}条`,
+    size: (size: number) => `分页大小：${size}`
   },
   picker: {
     cancel: '取消',
@@ -83,11 +87,6 @@ export default {
   imgCropper: {
     confirm: '完成',
     cancel: '取消'
-  },
-  pullRefresh: {
-    topPull: '下拉刷新',
-    topDrop: '释放刷新',
-    topLoading: '正在刷新'
   },
   search: {
     search: '搜索',
@@ -103,7 +102,23 @@ export default {
     all: '全部'
   },
   upload: {
-    fileName: '文件名',
     error: '上传失败'
+  },
+  input: {
+    placeholder: '请输入...'
+  },
+  selectPicker: {
+    title: '请选择',
+    placeholder: '请选择',
+    select: '请选择',
+    confirm: '确认',
+    filterPlaceholder: '搜索'
+  },
+  tag: {
+    placeholder: '请输入',
+    add: '新增标签'
+  },
+  textarea: {
+    placeholder: '请输入...'
   }
 }

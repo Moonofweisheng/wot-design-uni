@@ -21,7 +21,7 @@
             <view
               :class="`wd-col-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${showValue ? '' : 'wd-col-picker__value--placeholder'}`"
             >
-              {{ showValue || placeholder || '请选择' }}
+              {{ showValue || placeholder || translate('placeholder') }}
             </view>
             <wd-icon v-if="!disabled && !readonly" custom-class="wd-col-picker__arrow" name="arrow-right" />
           </view>
@@ -32,7 +32,7 @@
     <wd-action-sheet
       v-model="pickerShow"
       :duration="250"
-      :title="title || '请选择'"
+      :title="title || translate('title')"
       :close-on-click-modal="closeOnClickModal"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
@@ -48,7 +48,7 @@
               :class="`wd-col-picker__selected-item  ${colIndex === currentCol && 'is-selected'}`"
               @click="handleColClick(colIndex)"
             >
-              {{ selectShowList[colIndex] || '请选择' }}
+              {{ selectShowList[colIndex] || translate('select') }}
             </view>
             <view class="wd-col-picker__selected-line" :style="lineStyle"></view>
           </view>
@@ -100,6 +100,9 @@ import { debounce, getRect, getType } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
+import { useTranslate } from '../composables/useTranslate'
+
+const { translate } = useTranslate('col-picker')
 
 const $container = '.wd-col-picker__selected-container'
 const $item = '.wd-col-picker__selected-item'
@@ -154,7 +157,6 @@ const props = withDefaults(defineProps<Props>(), {
   useDefaultSlot: false,
   disabled: false,
   readonly: false,
-  placeholder: '请选择',
   alignRight: false,
   error: false,
   required: false,

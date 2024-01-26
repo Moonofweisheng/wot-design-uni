@@ -11,7 +11,7 @@
         @click="handleDateClick(index)"
       >
         <view class="wd-year__month-top">{{ item.topInfo }}</view>
-        <view class="wd-year__month-text">{{ item.text }}月</view>
+        <view class="wd-year__month-text">{{ getMonthLabel(item.text) }}</view>
         <view class="wd-year__month-bottom">{{ item.bottomInfo }}</view>
       </view>
     </view>
@@ -32,6 +32,8 @@ import { computed, ref, watch } from 'vue'
 import { deepClone, getType } from '../../common/util'
 import { compareMonth, formatYearTitle, getDateByDefaultTime, getItemClass, getMonthByOffset, getMonthOffset } from '../utils'
 import { useToast } from '../../wd-toast'
+import { useTranslate } from '../../composables/useTranslate'
+import { dayjs } from '../../common/dayjs'
 
 interface Props {
   type: string
@@ -50,6 +52,7 @@ const props = withDefaults(defineProps<Props>(), {
   allowSameDay: false
 })
 const toast = useToast('wd-year')
+const { translate } = useTranslate('calendar-view')
 
 const months = ref<Record<string, any>[]>([])
 
@@ -77,6 +80,10 @@ watch(
     immediate: true
   }
 )
+
+function getMonthLabel(date) {
+  return dayjs(date).format(translate('month'))
+}
 
 function setMonths() {
   const monthList: Record<string, any>[] = []
@@ -166,7 +173,7 @@ function handleMonthRangeChange(date) {
       const maxEndDate = getMonthByOffset(startDate, props.maxRange - 1)
       value = [startDate, getDate(maxEndDate)]
       toast.show({
-        msg: props.rangePrompt || `选择月份不能超过${props.maxRange}个月`
+        msg: props.rangePrompt || translate('rangePromptMonth', props.maxRange)
       })
     } else {
       value = [startDate, getDate(date.date)]

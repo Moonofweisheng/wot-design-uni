@@ -16,7 +16,7 @@
         <!-- 失败时展示失败图标以及失败信息 -->
         <view v-if="file.status === 'fail'" class="wd-upload__status-content">
           <wd-icon name="close-outline" custom-class="wd-upload__icon"></wd-icon>
-          <text class="wd-upload__progress-txt">{{ file.error || '上传失败' }}</text>
+          <text class="wd-upload__progress-txt">{{ file.error || translate('error') }}</text>
         </view>
       </view>
       <!-- 上传状态为上传中时不展示移除按钮 -->
@@ -54,6 +54,7 @@ export default {
 import { ref, watch } from 'vue'
 import { context, getType, isDef, isEqual } from '../common/util'
 import { chooseFile } from './utils'
+import { useTranslate } from '../composables/useTranslate'
 
 interface Props {
   customClass?: string
@@ -121,6 +122,8 @@ const props = withDefaults(defineProps<Props>(), {
   statusKey: 'status',
   maxSize: Number.MAX_VALUE
 })
+
+const { translate } = useTranslate('upload')
 
 const uploadFiles = ref<Record<string, any>[]>([])
 

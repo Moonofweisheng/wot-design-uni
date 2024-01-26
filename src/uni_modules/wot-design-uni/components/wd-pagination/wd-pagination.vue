@@ -2,7 +2,7 @@
   <view :class="`wd-pager ${customClass}`" v-if="!(hideIfOnePage && totalPageNum === 1)">
     <view class="wd-pager__content">
       <wd-button :plain="modelValue > 1" type="info" size="small" :disabled="modelValue <= 1" custom-class="wd-pager__nav" @click="sub">
-        <text v-if="!showIcon">{{ prevText }}</text>
+        <text v-if="!showIcon">{{ prevText || translate('prev') }}</text>
         <wd-icon
           v-else
           size="14px"
@@ -23,7 +23,7 @@
         custom-class="wd-pager__nav"
         @click="add"
       >
-        <text v-if="!showIcon">{{ nextText }}</text>
+        <text v-if="!showIcon">{{ nextText || translate('next') }}</text>
         <wd-icon
           v-else
           size="14px"
@@ -33,9 +33,9 @@
       </wd-button>
     </view>
     <view class="wd-pager__message" v-if="showMessage">
-      <text>当前页：{{ modelValue }}，</text>
-      <text v-if="total">当前数据：{{ total }}，</text>
-      <text>分页大小：{{ pageSize }}</text>
+      <text>{{ translate('page', modelValue) }}，</text>
+      <text v-if="total">{{ translate('total', total) }}，</text>
+      <text>{{ translate('size', pageSize) }}</text>
     </view>
   </view>
 </template>
@@ -53,6 +53,9 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
+import { useTranslate } from '../composables/useTranslate'
+
+const { translate } = useTranslate('pagination')
 
 interface Props {
   customClass?: string
@@ -74,8 +77,6 @@ const props = withDefaults(defineProps<Props>(), {
   showMessage: false,
   total: 0,
   pageSize: 10, // 分页大小
-  prevText: '上一页',
-  nextText: '下一页',
   hideIfOnePage: true
 })
 

@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2024-01-03 21:59:39
+ * @LastEditTime: 2024-01-26 11:53:06
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-col/wd-col.vue
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-col\wd-col.vue
  * 记得注释
 -->
 <template>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, inject, provide, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { ref } from 'vue'
 import { useParent } from '../composables/useParent'
 import { ROW_KEY } from '../wd-row/types'

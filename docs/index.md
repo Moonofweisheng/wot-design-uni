@@ -2,12 +2,12 @@
 layout: home
 
 title: Wot Design Uni
-titleTemplate: 一个参照Wot-design打造的uni-app组件库
+titleTemplate: 基于Vue3+TS开发的uni-app组件库
 
 hero:
   name: Wot Design Uni
   text:
-  tagline: 一个参照Wot-design打造的uni-app组件库
+  tagline: 基于Vue3+TS开发的uni-app组件库
   image:
     src: /wot-design.png
     alt: Wot Design

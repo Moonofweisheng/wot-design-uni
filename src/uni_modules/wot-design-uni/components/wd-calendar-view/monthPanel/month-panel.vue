@@ -32,7 +32,7 @@
     </scroll-view>
     <view v-if="timeType" class="wd-month-panel__time">
       <view v-if="type === 'datetimerange'" class="wd-month-panel__time-label">
-        <view class="wd-month-panel__time-text">{{ timeType === 'start' ? '开始' : '结束' }}</view>
+        <view class="wd-month-panel__time-text">{{ timeType === 'start' ? translate('startTime') : translate('endTime') }}</view>
       </view>
       <view class="wd-month-panel__time-picker">
         <wd-picker-view
@@ -65,6 +65,7 @@ import { debounce, getType, isEqual } from '../../common/util'
 import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'
 import Month from '../month/month.vue'
 import type { MonthInfo } from './type'
+import { useTranslate } from '../../composables/useTranslate'
 
 interface Props {
   type: string
@@ -89,6 +90,7 @@ const props = withDefaults(defineProps<Props>(), {
   showPanelTitle: false,
   hideSecond: false
 })
+const { translate } = useTranslate('calendar-view')
 
 const title = ref<string>('')
 const scrollTop = ref<number>(0) // 滚动位置

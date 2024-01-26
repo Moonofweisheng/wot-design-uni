@@ -46,6 +46,7 @@ import { computed } from 'vue'
 import { useParent } from '../composables/useParent'
 import { STEPS_KEY } from '../wd-steps/types'
 import { isDef } from '../common/util'
+import { useTranslate } from '../composables/useTranslate'
 
 type StepStatus = 'finished' | 'process' | 'error'
 
@@ -70,6 +71,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const { parent: steps, index } = useParent(STEPS_KEY)
+
+const { translate } = useTranslate('steps')
 
 const currentStatus = computed(() => {
   return getCurrentStatus(index.value)
@@ -149,14 +152,14 @@ function getCurrentTitle(currentStatus: string) {
 
   switch (currentStatus) {
     case 'finished':
-      return '已完成'
+      return translate('finished')
     case 'error':
-      return '失败'
+      return translate('failed')
     case 'process':
-      return '进行中'
+      return translate('process')
     case 'wait':
     default:
-      return '未开始'
+      return translate('wait')
   }
 }
 </script>

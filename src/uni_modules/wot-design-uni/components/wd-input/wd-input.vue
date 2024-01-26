@@ -28,7 +28,7 @@
           :type="type"
           :password="showPassword && !isPwdVisible"
           v-model="inputValue"
-          :placeholder="placeholder"
+          :placeholder="placeholder || translate('placeholder')"
           :disabled="disabled"
           :maxlength="maxlength"
           :focus="isFocus"
@@ -90,6 +90,7 @@ import { objToStyle, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
+import { useTranslate } from '../composables/useTranslate'
 
 interface Props {
   customInputClass?: string
@@ -136,6 +137,8 @@ interface Props {
   rules?: FormItemRule[]
 }
 
+const { translate } = useTranslate('input')
+
 const props = withDefaults(defineProps<Props>(), {
   customInputClass: '',
   customLabelClass: '',
@@ -144,7 +147,6 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   maxlength: -1,
   modelValue: '',
-  placeholder: '请输入...',
   clearable: false,
   showPassword: false,
   disabled: false,

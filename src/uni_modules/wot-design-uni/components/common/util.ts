@@ -511,7 +511,7 @@ export function deepAssign(target: Record<string, any>, source: Record<string, a
     const targetValue = target[key]
     const newObjValue = source[key]
     if (isObj(targetValue) && isObj(newObjValue)) {
-      deepMerge(targetValue, newObjValue)
+      deepAssign(targetValue, newObjValue)
     } else {
       target[key] = newObjValue
     }

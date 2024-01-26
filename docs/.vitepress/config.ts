@@ -1,17 +1,17 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-01-06 22:20:13
+ * @LastEditTime: 2024-01-26 13:32:22
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/config.ts
+ * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
  * 记得注释
  */
 import { defineConfig } from 'vitepress';
 
 export default defineConfig({
   title: `Wot Design Uni`,
-  description: '一个参照Wot-design打造的uni-app组件库',
+  description: '一个参照wot-design打造的uni-app组件库',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['script', {}, `
@@ -69,15 +69,17 @@ export default defineConfig({
           {
             text: '字体',
             link: '/guide/typography',
+          }, {
+            text: '常见问题',
+            link: '/guide/common-problems',
           },
           {
+            text: '国际化',
+            link: '/guide/locale',
+          }, {
             text: '更新日志',
             link: '/guide/changelog',
           },
-          {
-            text: '常见问题',
-            link: '/guide/common-problems',
-          }
         ]
       },
       {
@@ -133,13 +135,17 @@ export default defineConfig({
           link: '/guide/typography',
         },
         {
-          text: '更新日志',
-          link: '/guide/changelog',
+          text: '国际化',
+          link: '/guide/locale',
         },
         {
           text: '常见问题',
           link: '/guide/common-problems',
-        }
+        },
+        {
+          text: '更新日志',
+          link: '/guide/changelog',
+        },
       ],
       '/reward/': [
         {
@@ -151,7 +157,7 @@ export default defineConfig({
           link: '/reward/donor',
         },
       ],
-    
+
       '/component/': [
         {
           text: '基础',
@@ -184,7 +190,7 @@ export default defineConfig({
           ]
         },
         {
-    
+
           text: "导航",
           items: [{
             link: "/component/pagination",
@@ -209,7 +215,7 @@ export default defineConfig({
             text: "Sidebar 侧边栏"
           }]
         }, {
-    
+
           text: "数据输入",
           items: [{
             link: "/component/calendar",
@@ -324,7 +330,7 @@ export default defineConfig({
             text: "NumberKeyboard 数字键盘"
           }]
         }, {
-    
+
           text: "数据展示",
           items: [{
             link: "/component/badge",
@@ -384,7 +390,7 @@ export default defineConfig({
         }
       ]
     }
-    
+
   },
 
 })
