@@ -1,4 +1,4 @@
-# 国际化
+# 国际化<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.20</el-tag>
 
 Wot Design Uni 默认使用中文语言，同时支持多语言切换，如果你希望使用其他语言，你可以参考下面的方案。
 
