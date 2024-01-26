@@ -135,7 +135,7 @@ export function getFirstDayStyle(index: number, date: number, firstDayOfWeek: nu
  * @param {timestamp} date
  */
 export function formatYearTitle(date: number) {
-  return dayjs(date).format(translate(' yearTitle'))
+  return dayjs(date).format(translate('yearTitle'))
 }
 
 /**

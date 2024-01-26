@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-01-25 23:06:48
- * @LastEditTime: 2024-01-26 14:01:21
+ * @LastEditTime: 2024-01-26 17:30:21
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\locale\index.ts
@@ -14,7 +14,7 @@ import { deepAssign } from '../components/common/util'
 type Message = Record<string, any>
 type Messages = Record<string, Message>
 
-const lang = ref('zh-CN')
+const lang = ref<string>('zh-CN')
 const messages = reactive<Messages>({
   'zh-CN': zhCN
 })

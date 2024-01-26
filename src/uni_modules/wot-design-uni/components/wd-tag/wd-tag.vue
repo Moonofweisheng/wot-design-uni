@@ -89,7 +89,7 @@ watch(
   (newValue) => {
     if (!newValue) return
     // type: 'primary', 'danger', 'warning', 'success'
-    const type = ['primary', 'danger', 'warning', 'success']
+    const type = ['primary', 'danger', 'warning', 'success', 'default']
     if (type.indexOf(newValue) === -1) console.error(`type must be one of ${type.toString()}`)
     computeTagClass()
   },

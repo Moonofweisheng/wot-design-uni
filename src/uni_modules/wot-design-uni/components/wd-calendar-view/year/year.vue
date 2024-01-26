@@ -11,7 +11,7 @@
         @click="handleDateClick(index)"
       >
         <view class="wd-year__month-top">{{ item.topInfo }}</view>
-        <view class="wd-year__month-text">{{ getMonthLabel(item.text) }}</view>
+        <view class="wd-year__month-text">{{ getMonthLabel(item.date) }}</view>
         <view class="wd-year__month-bottom">{{ item.bottomInfo }}</view>
       </view>
     </view>
@@ -29,7 +29,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { deepClone, getType } from '../../common/util'
+import { deepClone, getType, padZero } from '../../common/util'
 import { compareMonth, formatYearTitle, getDateByDefaultTime, getItemClass, getMonthByOffset, getMonthOffset } from '../utils'
 import { useToast } from '../../wd-toast'
 import { useTranslate } from '../../composables/useTranslate'
@@ -82,7 +82,7 @@ watch(
 )
 
 function getMonthLabel(date) {
-  return dayjs(date).format(translate('month'))
+  return dayjs(date).format(translate('month', date))
 }
 
 function setMonths() {
