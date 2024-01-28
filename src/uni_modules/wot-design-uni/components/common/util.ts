@@ -544,8 +544,8 @@ export function debounce<T extends (...args: any[]) => any>(func: T, wait: numbe
   let lastArgs: any[] | undefined
   let lastThis: any
   let result: ReturnType<T> | undefined
-  const leading = options.leading ?? false
-  const trailing = options.trailing ?? true
+  const leading = isDef(options.leading) ? options.leading : false
+  const trailing = isDef(options.trailing) ? options.trailing : true
 
   function invokeFunc() {
     if (lastArgs !== undefined) {
