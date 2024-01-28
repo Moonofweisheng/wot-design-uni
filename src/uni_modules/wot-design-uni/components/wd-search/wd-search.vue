@@ -7,14 +7,14 @@
       <view class="wd-search__field">
         <view v-if="!placeholderLeft" :style="coverStyle" class="wd-search__cover" @click="closeCover">
           <wd-icon name="search" size="18px" custom-class="wd-search__search-icon"></wd-icon>
-          <text class="wd-search__placeholder-txt">{{ placeholder || '搜索' }}</text>
+          <text class="wd-search__placeholder-txt">{{ placeholder || translate('search') }}</text>
         </view>
         <!--icon:search-->
         <wd-icon v-if="showInput || str || placeholderLeft" name="search" size="18px" custom-class="wd-search__search-left-icon"></wd-icon>
         <!--搜索框-->
         <input
           v-if="showInput || str || placeholderLeft"
-          :placeholder="placeholder || '搜索'"
+          :placeholder="placeholder || translate('search')"
           placeholder-class="wd-search__placeholder-txt"
           confirm-type="search"
           v-model="str"
@@ -37,7 +37,7 @@
       <slot v-if="userSuffixSlot" name="suffix"></slot>
       <!--默认button-->
       <view v-else class="wd-search__cancel" @click="handleCancel">
-        {{ cancelTxt || '取消' }}
+        {{ cancelTxt || translate('cancel') }}
       </view>
     </block>
   </view>
@@ -57,6 +57,7 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, onMounted, ref, watch } from 'vue'
 import { objToStyle, requestAnimationFrame } from '../common/util'
+import { useTranslate } from '../composables/useTranslate'
 
 interface Props {
   userSuffixSlot?: boolean
@@ -74,13 +75,13 @@ interface Props {
   customStyle?: string
 }
 
+const { translate } = useTranslate('search')
+
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   customClass: '',
   customStyle: '',
   userSuffixSlot: false,
-  placeholder: '搜索',
-  cancelTxt: '取消',
   light: false,
   focus: false,
   focusWhenClear: false,

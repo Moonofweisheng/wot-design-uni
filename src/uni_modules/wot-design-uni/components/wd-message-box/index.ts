@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2022-12-14 17:33:21
- * @LastEditTime: 2023-09-07 00:29:51
+ * @LastEditTime: 2024-01-26 11:19:42
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\index.ts
@@ -10,6 +10,9 @@
 import { provide, ref } from 'vue'
 import type { Message, MessageOptions, MessageResult, MessageType } from './types'
 import { deepMerge } from '../common/util'
+import { useTranslate } from '../composables/useTranslate'
+
+const { translate } = useTranslate('message-box')
 
 /**
  * useMessage 用到的key
@@ -24,13 +27,13 @@ export const defaultOptions: MessageOptions = {
   showCancelButton: false,
   show: false,
   closeOnClickModal: true,
-  confirmButtonText: '确定',
-  cancelButtonText: '取消',
+  confirmButtonText: translate('confirm'),
+  cancelButtonText: translate('cancel'),
   msg: '',
   type: 'alert',
   inputType: 'text',
   inputValue: '',
-  inputPlaceholder: '请输入',
+  inputPlaceholder: translate('inputPlaceholder'),
   inputValidate: null,
   showErr: false,
   zIndex: 99,

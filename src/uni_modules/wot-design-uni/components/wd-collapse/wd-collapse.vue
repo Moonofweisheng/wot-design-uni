@@ -19,7 +19,7 @@
         </view>
         <!-- 显示展开或折叠按钮 -->
         <block v-else>
-          <span class="wd-collapse__more-txt">{{ !modelValue ? '展开' : '折叠' }}</span>
+          <span class="wd-collapse__more-txt">{{ !modelValue ? translate('expand') : translate('retract') }}</span>
           <view :class="`wd-collapse__arrow ${modelValue ? 'is-retract' : ''}`">
             <wd-icon name="arrow-down"></wd-icon>
           </view>
@@ -45,6 +45,7 @@ import { onBeforeMount, ref, watch } from 'vue'
 import { COLLAPSE_KEY, type CollapseToggleAllOptions } from './types'
 import { useChildren } from '../composables/useChildren'
 import { isArray, isDef } from '../common/util'
+import { useTranslate } from '../composables/useTranslate'
 
 interface Props {
   customClass?: string
@@ -65,6 +66,7 @@ const props = withDefaults(defineProps<Props>(), {
   lineNum: 2
 })
 
+const { translate } = useTranslate('collapse')
 const contentLineNum = ref<number>(0) // 查看更多的折叠面板，收起时的显示行数
 
 const { linkChildren, children } = useChildren(COLLAPSE_KEY)

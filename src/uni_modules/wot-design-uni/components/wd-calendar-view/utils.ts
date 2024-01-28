@@ -1,6 +1,17 @@
+import { dayjs } from '../common/dayjs'
 import { getType, padZero } from '../common/util'
+import { useTranslate } from '../composables/useTranslate'
+const { translate } = useTranslate('calendar-view')
 
-const weeks: string[] = ['日', '一', '二', '三', '四', '五', '六']
+const weeks: string[] = [
+  translate('weeks.sun'),
+  translate('weeks.mon'),
+  translate('weeks.tue'),
+  translate('weeks.wed'),
+  translate('weeks.thu'),
+  translate('weeks.fri'),
+  translate('weeks.sat')
+]
 
 /**
  * 比较两个时间的日期是否相等
@@ -86,12 +97,7 @@ export function getMonthEndDay(year, month) {
  * @param {timestamp} date
  */
 export function formatMonthTitle(date) {
-  date = new Date(date)
-
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-
-  return year + '年' + month + '月'
+  return dayjs(date).format(translate('monthTitle'))
 }
 
 /**
@@ -129,9 +135,7 @@ export function getFirstDayStyle(index: number, date: number, firstDayOfWeek: nu
  * @param {timestamp} date
  */
 export function formatYearTitle(date: number) {
-  const year = new Date(date).getFullYear()
-
-  return year + '年'
+  return dayjs(date).format(translate('yearTitle'))
 }
 
 /**
@@ -350,14 +354,14 @@ export function getTimeData({ date, minDate, maxDate, isHideSecond, filter } = {
   let columns: any[] = []
   let hours = times(24, (index) => {
     return {
-      label: `${padZero(index)}时`,
+      label: translate('hour', padZero(index)),
       value: index,
       disabled: index < minHour || index > maxHour
     }
   })
   let minutes = times(60, (index) => {
     return {
-      label: `${padZero(index)}分`,
+      label: translate('minute', padZero(index)),
       value: index,
       disabled: index < minMinute || index > maxMinute
     }
@@ -377,7 +381,7 @@ export function getTimeData({ date, minDate, maxDate, isHideSecond, filter } = {
   if (!isHideSecond) {
     seconds = times(60, (index) => {
       return {
-        label: `${padZero(index)}秒`,
+        label: translate('second', padZero(index)),
         value: index,
         disabled: index < minSecond || index > maxSecond
       }

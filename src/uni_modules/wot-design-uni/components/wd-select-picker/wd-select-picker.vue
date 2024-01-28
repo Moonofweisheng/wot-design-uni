@@ -23,7 +23,7 @@
                 showValue ? '' : 'wd-select-picker__value--placeholder'
               }`"
             >
-              {{ showValue || placeholder || '请选择' }}
+              {{ showValue || placeholder || translate('placeholder') }}
             </view>
             <wd-icon v-if="!disabled && !readonly" custom-class="wd-select-picker__arrow" name="arrow-right" />
           </view>
@@ -35,7 +35,7 @@
     <wd-action-sheet
       v-model="pickerShow"
       :duration="250"
-      :title="title || '请选择'"
+      :title="title || translate('title')"
       :close-on-click-modal="closeOnClickModal"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
@@ -43,7 +43,14 @@
       @opened="scrollIntoView ? setScrollIntoView() : ''"
       custom-header-class="wd-select-picker__header"
     >
-      <wd-search v-if="filterable" v-model="filterVal" :placeholder="filterPlaceholder" hide-cancel placeholder-left @change="handleFilterChange" />
+      <wd-search
+        v-if="filterable"
+        v-model="filterVal"
+        :placeholder="filterPlaceholder || translate('filterPlaceholder')"
+        hide-cancel
+        placeholder-left
+        @change="handleFilterChange"
+      />
       <scroll-view
         :class="`wd-select-picker__wrapper ${filterable ? 'is-filterable' : ''} ${loading ? 'is-loading' : ''} ${customContentClass}`"
         :scroll-y="!loading"
@@ -91,7 +98,7 @@
       </scroll-view>
       <!-- 确认按钮 -->
       <view class="wd-select-picker__footer">
-        <wd-button block size="large" @click="onConfirm" :disabled="loading">{{ confirmButtonText }}</wd-button>
+        <wd-button block size="large" @click="onConfirm" :disabled="loading">{{ confirmButtonText || translate('confirm') }}</wd-button>
       </view>
     </wd-action-sheet>
   </view>
@@ -113,8 +120,11 @@ import { useCell } from '../composables/useCell'
 import { getRect, getType, isArray, isDef, requestAnimationFrame } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
+import { useTranslate } from '../composables/useTranslate'
 
 type SelectPickerType = 'checkbox' | 'radio'
+
+const { translate } = useTranslate('select-picker')
 
 interface Props {
   customClass?: string
@@ -170,12 +180,10 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'checkbox',
   valueKey: 'value',
   labelKey: 'label',
-  placeholder: '请选择',
   disabled: false,
   loading: false,
   loadingColor: '#4D80F0',
   readonly: false,
-  confirmButtonText: '确认',
   labelWidth: '33%',
   error: false,
   required: false,
@@ -188,7 +196,6 @@ const props = withDefaults(defineProps<Props>(), {
   zIndex: 15,
   safeAreaInsetBottom: true,
   filterable: false,
-  filterPlaceholder: '搜索',
   ellipsis: false,
   scrollIntoView: true,
   rules: () => []

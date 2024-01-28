@@ -51,6 +51,7 @@ import {
 } from '../utils'
 import { useToast } from '../../wd-toast'
 import { deepClone, getType, isArray } from '../../common/util'
+import { useTranslate } from '../../composables/useTranslate'
 
 interface Props {
   type: string
@@ -69,6 +70,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   allowSameDay: false
 })
+
+const { translate } = useTranslate('calendar-view')
 
 const days = ref<Array<Record<string, any>>>([])
 
@@ -295,7 +298,7 @@ function handleDateRangeChange(date) {
       const maxEndDate = getDayByOffset(startDate, props.maxRange - 1)
       value = [startDate, getDate(maxEndDate, true)]
       toast.show({
-        msg: props.rangePrompt || `选择天数不能超过${props.maxRange}天`
+        msg: props.rangePrompt || translate('rangePrompt', props.maxRange)
       })
     } else {
       value = [startDate, getDate(date.date, true)]

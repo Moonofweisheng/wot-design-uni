@@ -19,7 +19,7 @@
         <view class="wd-picker__body">
           <view class="wd-picker__value-wraper">
             <view :class="`wd-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${showValue ? '' : 'wd-picker__placeholder'}`">
-              {{ showValue ? showValue : placeholder }}
+              {{ showValue ? showValue : placeholder || translate('placeholder') }}
             </view>
             <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
           </view>
@@ -43,13 +43,13 @@
         <view class="wd-picker__toolbar" @touchmove="noop">
           <!--取消按钮-->
           <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
-            {{ cancelButtonText }}
+            {{ cancelButtonText || translate('cancel') }}
           </view>
           <!--标题-->
           <view v-if="title" class="wd-picker__title">{{ title }}</view>
           <!--确定按钮-->
           <view :class="`wd-picker__action ${isLoading ? 'is-loading' : ''}`" @click="onConfirm">
-            {{ confirmButtonText }}
+            {{ confirmButtonText || translate('done') }}
           </view>
         </view>
         <!--pickerView-->
@@ -91,6 +91,8 @@ import { useCell } from '../composables/useCell'
 import { type ColumnItem, formatArray } from '../wd-picker-view/type'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
+import { useTranslate } from '../composables/useTranslate'
+const { translate } = useTranslate('picker')
 
 interface Props {
   customClass?: string
@@ -157,17 +159,12 @@ const props = withDefaults(defineProps<Props>(), {
   customLabelClass: '',
   customValueClass: '',
   // 选择器占位符
-  placeholder: '请选择',
   // 禁用
   disabled: false,
   // 只读
   readonly: false,
   loading: false,
   loadingColor: '#4D80F0',
-  // 取消按钮文案
-  cancelButtonText: '取消',
-  // 确认按钮文案
-  confirmButtonText: '完成',
   // 是否必填
   required: false,
   useDefaultSlot: false,

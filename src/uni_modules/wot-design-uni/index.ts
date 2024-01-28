@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2021-12-21 14:22:03
- * @LastEditTime: 2023-10-31 22:20:14
+ * @LastEditTime: 2024-01-26 13:46:52
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\index.ts
@@ -24,3 +24,5 @@ export { dayjs } from './components/common/dayjs'
 export * as CommonUtil from './components/common/util'
 
 export * as clickOut from './components/common/clickoutside'
+
+export * from './locale'

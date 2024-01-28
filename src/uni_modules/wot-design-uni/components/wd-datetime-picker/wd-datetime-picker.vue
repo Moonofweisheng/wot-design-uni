@@ -21,11 +21,11 @@
             <view :class="`wd-picker__value ${customValueClass}`">
               <view v-if="region">
                 <text :class="showValue[0] ? '' : 'wd-picker__placeholder'">{{ showValue[0] ? showValue[0] : placeholder }}</text>
-                至
+                {{ translate('to') }}
                 <text :class="showValue[1] ? '' : 'wd-picker__placeholder'">{{ showValue[1] ? showValue[1] : placeholder }}</text>
               </view>
               <view v-else :class="showValue ? '' : 'wd-picker__placeholder'">
-                {{ showValue ? showValue : placeholder }}
+                {{ showValue ? showValue : placeholder || translate('placeholder') }}
               </view>
             </view>
             <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
@@ -50,23 +50,23 @@
         <view class="wd-picker__toolbar" @touchmove="noop">
           <!--取消按钮-->
           <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
-            {{ cancelButtonText }}
+            {{ cancelButtonText || translate('cancel') }}
           </view>
           <!--标题-->
           <view v-if="title" class="wd-picker__title">{{ title }}</view>
           <!--确定按钮-->
           <view :class="`wd-picker__action ${loading || isLoading ? 'is-loading' : ''}`" @click="onConfirm">
-            {{ confirmButtonText }}
+            {{ confirmButtonText || translate('confirm') }}
           </view>
         </view>
         <!-- 区域选择tab展示 -->
         <view v-if="region" class="wd-picker__region-tabs">
           <view :class="`wd-picker__region ${showStart ? 'is-active' : ''} `" @click="tabChange">
-            <view>开始时间</view>
+            <view>{{ translate('start') }}</view>
             <view class="wd-picker__region-time">{{ showTabLabel[0] }}</view>
           </view>
           <view :class="`wd-picker__region ${showStart ? '' : 'is-active'}`" @click="tabChange">
-            <view>结束时间</view>
+            <view>{{ translate('end') }}</view>
             <view class="wd-picker__region-time">{{ showTabLabel[1] }}</view>
           </view>
         </view>
@@ -146,6 +146,7 @@ import { useCell } from '../composables/useCell'
 import { type DateTimeType, getPickerValue } from '../wd-datetime-picker-view/type'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
+import { useTranslate } from '../composables/useTranslate'
 interface Props {
   customClass?: string
   customViewClass?: string
@@ -227,19 +228,13 @@ const props = withDefaults(defineProps<Props>(), {
   customViewClass: '',
   customLabelClass: '',
   customValueClass: '',
-  // 选择器占位符
-  placeholder: '请选择',
   // 禁用
   disabled: false,
   // 只读
   readonly: false,
   loading: false,
   loadingColor: '#4D80F0',
-  /* popup */
-  // 取消按钮文案
-  cancelButtonText: '取消',
-  // 确认按钮文案
-  confirmButtonText: '完成',
+
   // 是否必填
   required: false,
   labelWidth: '33%',
@@ -274,6 +269,9 @@ const props = withDefaults(defineProps<Props>(), {
   zIndex: 15,
   rules: () => []
 })
+
+const { translate } = useTranslate('datetime-picker')
+
 const datetimePickerView = ref()
 const datetimePickerView1 = ref()
 

@@ -11,7 +11,7 @@
     <input
       v-if="dynamicInput && dynamic"
       class="wd-tag__add-text"
-      placeholder="请输入"
+      :placeholder="translate('placeholder')"
       type="text"
       focus="true"
       v-model="dynamicValue"
@@ -22,7 +22,7 @@
       <slot name="add" v-if="$slots.add"></slot>
       <template v-else>
         <wd-icon name="add" custom-class="wd-tag__add wd-tag__icon" />
-        <text>新增标签</text>
+        <text>{{ translate('add') }}</text>
       </template>
     </view>
   </view>
@@ -41,6 +41,7 @@ export default {
 <script lang="ts" setup>
 import { objToStyle } from '../common/util'
 import { computed, ref, watch } from 'vue'
+import { useTranslate } from '../composables/useTranslate'
 
 type TagType = 'default' | 'primary' | 'success' | 'warning' | 'danger'
 
@@ -69,6 +70,8 @@ const props = withDefaults(defineProps<Props>(), {
   mark: false
 })
 
+const { translate } = useTranslate('tag')
+
 const tagClass = ref<string>('')
 const dynamicValue = ref<string>('')
 const dynamicInput = ref<boolean>(false)
@@ -86,7 +89,7 @@ watch(
   (newValue) => {
     if (!newValue) return
     // type: 'primary', 'danger', 'warning', 'success'
-    const type = ['primary', 'danger', 'warning', 'success']
+    const type = ['primary', 'danger', 'warning', 'success', 'default']
     if (type.indexOf(newValue) === -1) console.error(`type must be one of ${type.toString()}`)
     computeTagClass()
   },

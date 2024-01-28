@@ -25,7 +25,7 @@
               <wd-input v-model="inputValue" :type="inputType" size="large" :placeholder="inputPlaceholder || '请输入'" @input="inputValChange" />
               <!--错误提示-->
               <view v-if="showErr" class="wd-message-box__input-error">
-                {{ inputError || '输入的数据不合法' }}
+                {{ inputError || translate('inputNoValidate') }}
               </view>
             </block>
             <!--使用插槽-->
@@ -37,10 +37,10 @@
         <!--action按钮组合-->
         <view :class="`wd-message-box__actions ${showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`">
           <wd-button type="info" block v-if="showCancelButton" custom-style="margin-right: 16px;" @click="toggleModal('cancel')">
-            {{ cancelButtonText || '取消' }}
+            {{ cancelButtonText || translate('cancel') }}
           </wd-button>
           <wd-button block @click="toggleModal('confirm')">
-            {{ confirmButtonText || '确定' }}
+            {{ confirmButtonText || translate('confirm') }}
           </wd-button>
         </view>
       </view>
@@ -63,6 +63,7 @@ import { computed, inject, ref, watch } from 'vue'
 import type { MessageOptions, MessageType } from './types'
 import { defaultOptions, messageDefaultOptionKey } from '.'
 import { isDef } from '../common/util'
+import { useTranslate } from '../composables/useTranslate'
 
 interface Props {
   useSlot?: boolean
@@ -75,6 +76,8 @@ const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   selector: ''
 })
+
+const { translate } = useTranslate('message-box')
 
 const rootClass = computed(() => {
   return `wd-message-box__container ${props.customClass}`

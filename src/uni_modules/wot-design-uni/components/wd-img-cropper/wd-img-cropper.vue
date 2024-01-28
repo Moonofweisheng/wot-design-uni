@@ -58,8 +58,8 @@
     <view class="wd-img-cropper__footer">
       <wd-icon v-if="!disabledRotate" name="rotate" size="24px" color="#fff" data-eventsync="true" @click="handleRotate"></wd-icon>
       <view class="wd-img-cropper__footer--button">
-        <view class="is-cancel" @click="handleCancel">{{ cancelButtonText }}</view>
-        <wd-button size="small" :custom-style="buttonStyle" @click="handleConfirm">{{ confirmButtonText }}</wd-button>
+        <view class="is-cancel" @click="handleCancel">{{ cancelButtonText || translate('cancel') }}</view>
+        <wd-button size="small" :custom-style="buttonStyle" @click="handleConfirm">{{ confirmButtonText || translate('confirm') }}</wd-button>
       </view>
     </view>
   </view>
@@ -79,6 +79,7 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, ref, watch } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
+import { useTranslate } from '../composables/useTranslate'
 
 // 延时动画设置
 let CHANGE_TIME: any | null = null
@@ -118,11 +119,11 @@ interface Props {
   maxScale?: number
 }
 
+const { translate } = useTranslate('img-cropper')
+
 const props = withDefaults(defineProps<Props>(), {
   customClass: '',
   modelValue: false,
-  cancelButtonText: '取消',
-  confirmButtonText: '完成',
   // 是否禁用旋转
   disabledRotate: false,
   /** canvas绘图参数 start **/

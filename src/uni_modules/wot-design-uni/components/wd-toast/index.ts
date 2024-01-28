@@ -25,7 +25,7 @@ export const defaultOptions: ToastOptions = {
 }
 
 export function useToast(selector: string = ''): Toast {
-  let timer: NodeJS.Timeout | null = null
+  let timer: ReturnType<typeof setTimeout> | null = null
   const toastOption = ref<ToastOptions>(defaultOptions) // Toast选项
   const toastOptionKey = selector ? toastDefaultOptionKey + selector : toastDefaultOptionKey
   provide(toastOptionKey, toastOption)

@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 10:04:19
- * @LastEditTime: 2023-09-02 15:12:03
+ * @LastEditTime: 2024-01-26 12:42:13
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-status-tip\wd-status-tip.vue
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, type CSSProperties } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
 
 interface Props {
@@ -59,7 +59,7 @@ watch(
 )
 
 const imgStyle = computed(() => {
-  let style: Record<string, string> = {}
+  let style: CSSProperties = {}
   if (props.imageSize) {
     style = {
       height: addUnit(props.imageSize),
