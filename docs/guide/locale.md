@@ -3,7 +3,8 @@
 Wot Design Uni 默认使用中文语言，同时支持多语言切换，如果你希望使用其他语言，你可以参考下面的方案。
 
 :::warning 注意点
-目前组件库发布到 npm 上的包是未经编译的`vue`与`ts`，而Vite 会将[预构建](https://cn.vitejs.dev/guide/dep-pre-bundling.html)的依赖项缓存到 `node_modules/.vite`，组件库的国际化的实现是基于`reactive`实现的数据共享，在`dev`阶段就会出现页面使用预构建产物中的国际化数据，而组件库使用组件库内部的国际化数据，所以在非`uni_modules`模式引入时，需要在`vite.config.ts`中增加以下配置:
+目前组件库发布到 npm 上的包是未经编译的`vue`与`ts`，而 Vite 会将[预构建](https://cn.vitejs.dev/guide/dep-pre-bundling.html)的依赖项缓存到 `node_modules/.vite`，组件库的国际化的实现是基于`reactive`实现的数据共享，在`dev`阶段就会出现页面使用预构建产物中的国际化数据，而组件库使用组件库内部的国际化数据，所以在非`uni_modules`模式引入时，需要在`vite.config.ts`中增加以下配置:
+
 ```ts
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
@@ -17,10 +18,10 @@ export default defineConfig({
 })
 
 ```
+
 使用[optimizeDeps.exclude](https://cn.vitejs.dev/config/dep-optimization-options.html#optimizedeps-exclude)在预构建中强制排除`wot-design-uni`模块，在`uni_modules`模式下，不需要做任何处理。
 
 :::
-
 
 ## 使用其他语言
 
@@ -54,12 +55,13 @@ Locale.add(messages)
 
 ## 支持的语言
 
-| 语言             | 文件名 | 版本      |
-| ---------------- | ------ | --------- |
-| 简体中文         | zh-CN  | `v0.2.20` |
-| 繁体中文（台湾） | zh-TW  | `v0.2.20` |
-| 繁体中文（香港） | zh-HK  | `v0.2.20` |
-| 英文             | en-US  | `v0.2.20` |
-| 泰文             | th-TH  | `v0.2.20` |
+| 语言             | 文件名    | 版本      |
+| ---------------- | --------- | --------- |
+| 简体中文         | zh-CN     | `v0.2.20` |
+| 繁体中文（台湾） | zh-TW     | `v0.2.20` |
+| 繁体中文（香港） | zh-HK     | `v0.2.20` |
+| 英文             | en-US     | `v0.2.20` |
+| 泰文             | th-TH     | `v0.2.20` |
+| 越南文             | vi-VN    | `v0.2.20` |
 
 如果你需要使用其他的语言，欢迎贡献 [PR](https://github.com/Moonofweisheng/wot-design-uni/pulls)，只需在[这里](https://github.com/Moonofweisheng/wot-design-uni/tree/master/src/uni_modules/wot-design-uni/locale/lang)添加一个语言配置文件即可。
