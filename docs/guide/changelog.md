@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [0.2.21](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.19...v0.2.21) (2024-01-28)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Dropdown 组件点击已展开项时无法关闭的问题 ([3846590](https://github.com/Moonofweisheng/wot-design-uni/commit/38465905e76b929a4d4af93dfe4ad9f31503b2ad))
+
+
+### ✨ Features | 新功能
+
+* ✨ 支持国际化 ([#168](https://github.com/Moonofweisheng/wot-design-uni/issues/168)) ([ce9f192](https://github.com/Moonofweisheng/wot-design-uni/commit/ce9f19244e4d376c5104be2b89d57426bf722aee))
+
 ### [0.2.19](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.18...v0.2.19) (2024-01-25)
 
 
