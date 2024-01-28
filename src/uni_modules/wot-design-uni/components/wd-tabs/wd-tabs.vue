@@ -234,7 +234,7 @@ const bodyStyle = computed(() => {
  * @param {Boolean } init - 是否伴随初始化操作
  */
 const setActive = debounce(
-  function (value: number = 0, init: boolean = false, setScroll: boolean = true) {
+  function (value: number | string = 0, init: boolean = false, setScroll: boolean = true) {
     // 没有tab子元素，不执行任何操作
     if (items.value.length === 0) return
 

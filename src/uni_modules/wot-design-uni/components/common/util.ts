@@ -1,6 +1,3 @@
-/* eslint-disable no-prototype-builtins */
-import debounce from './lodash/debounce'
-
 /**
  * 生成uuid
  * @returns string
@@ -77,8 +74,6 @@ export const defaultFunction = <T>(value: T): T => value
  * @return {Boolean} 是否不为空
  */
 export const isDef = <T>(value: T): value is NonNullable<T> => value !== undefined && value !== null
-
-export { debounce }
 
 /**
  * @description 防止数字小于零
@@ -491,6 +486,7 @@ export function deepMerge<T extends Record<string, any>>(target: T, source: Reco
 
   // 遍历源对象的属性
   for (const prop in source) {
+    // eslint-disable-next-line no-prototype-builtins
     if (!source.hasOwnProperty(prop))
       continue
       // 使用类型断言，告诉 TypeScript 这是有效的属性
@@ -538,10 +534,66 @@ export function buildUrlWithParams(baseUrl: string, params: Record<string, strin
   return `${baseUrl}${separator}${queryString}`
 }
 
+type DebounceOptions = {
+  leading?: boolean // 是否在延迟时间开始时调用函数
+  trailing?: boolean // 是否在延迟时间结束时调用函数
+}
+
+export function debounce<T extends (...args: any[]) => any>(func: T, wait: number, options: DebounceOptions = {}): T {
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
+  let lastArgs: any[] | undefined
+  let lastThis: any
+  let result: ReturnType<T> | undefined
+  const leading = options.leading ?? false
+  const trailing = options.trailing ?? true
+
+  function invokeFunc() {
+    if (lastArgs !== undefined) {
+      result = func.apply(lastThis, lastArgs)
+      lastArgs = undefined
+    }
+  }
+
+  function startTimer() {
+    timeoutId = setTimeout(() => {
+      timeoutId = null
+      if (trailing) {
+        invokeFunc()
+      }
+    }, wait)
+  }
+
+  function cancelTimer() {
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId)
+      timeoutId = null
+    }
+  }
+
+  function debounced(this: any, ...args: Parameters<T>): ReturnType<T> | undefined {
+    lastArgs = args
+    lastThis = this
+
+    if (timeoutId === null) {
+      if (leading) {
+        invokeFunc()
+      }
+      startTimer()
+    } else if (trailing) {
+      cancelTimer()
+      startTimer()
+    }
+
+    return result
+  }
+
+  return debounced as T
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function throttle(func: Function, wait: number): Function {
-  let timeout: NodeJS.Timeout | null
-  let previous = 0
+  let timeout: ReturnType<typeof setTimeout> | null = null
+  let previous: number = 0
 
   const throttled = function (this: any, ...args: any[]) {
     const now = Date.now()
