@@ -50,7 +50,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import type { PopupType } from '../wd-popup/type'
@@ -140,6 +140,9 @@ function setShowPop(show: boolean) {
   showPop.value = show
 }
 
+function getShowPop() {
+  return showPop.value
+}
 // 模拟单选操作 默认根据 value 选中操作
 function choose(index: number) {
   if (props.disabled) return
@@ -154,13 +157,15 @@ function choose(index: number) {
 }
 // 外部关闭弹出框
 function close() {
-  showPop.value = false
-  dropMenu && dropMenu.fold()
+  if (showPop.value) {
+    showPop.value = false
+    dropMenu && dropMenu.fold()
+  }
 }
 
 const positionStyle = computed(() => {
   let style: string = ''
-  if (showPop.value && dropMenu) {
+  if (showWrapper.value && dropMenu) {
     style =
       dropMenu.props.direction === 'down'
         ? `top: calc(var(--window-top) + ${dropMenu.offset.value}px); bottom: 0;`
@@ -197,7 +202,7 @@ function handleClose() {
   emit('close')
 }
 
-defineExpose({ setShowPop, open, close })
+defineExpose({ setShowPop, getShowPop, open, close })
 </script>
 
 <style lang="scss" scoped>

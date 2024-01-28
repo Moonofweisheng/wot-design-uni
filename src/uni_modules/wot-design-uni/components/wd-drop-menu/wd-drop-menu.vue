@@ -104,6 +104,7 @@ function getDisplayTitle(child: any) {
 
 function toggle(child: any) {
   // 点击当前 menu, 关闭其他 menu
+
   if (child && !child.disabled) {
     if (queue && queue.closeOther) {
       queue.closeOther(child)
@@ -133,14 +134,20 @@ function fold(child?: any) {
     } else {
       offset.value = windowHeight.value - top
     }
-    // 选中当前关掉其他的
-    children.forEach((item) => {
-      if (child.$.uid === item.$.uid) {
-        item.$.exposed!.open()
-      } else {
-        item.$.exposed!.setShowPop(false)
-      }
-    })
+    const showPop = child.$.exposed!.getShowPop()
+    if (showPop) {
+      child.$.exposed!.setShowPop(false)
+      currentUid.value = null
+    } else {
+      // 选中当前关掉其他的
+      children.forEach((item) => {
+        if (child.$.uid === item.$.uid) {
+          item.$.exposed!.open()
+        } else {
+          item.$.exposed!.setShowPop(false)
+        }
+      })
+    }
   })
 }
 </script>
