@@ -42,7 +42,7 @@ function handleChange1({ show }) {
 
 - **menu**（列表模式）:
   - 文字提示框会展示成列表形式，此时 `content` 属性传入 `Array` 类型，数组内对象数据结构如下方列表所示。
-  - 绑定事件 `menu-click`，在选择结束后，执行操作，列表关闭。
+  - 绑定事件 `menuclick`，在选择结束后，执行操作，列表关闭。
 
 列表模式下 `content` 数组内对象的数据结构：
 
@@ -54,7 +54,7 @@ function handleChange1({ show }) {
 **注意：iconClass 属性值为组件库内部的 icon 图标名。**
 
 ```html
-<wd-popover v-model="show" mode="menu" :content="menu" @menu-click="link" @change="handleChange">
+<wd-popover v-model="show" mode="menu" :content="menu" @menuclick="link" @change="handleChange">
   <wd-button>列表</wd-button>
 </wd-popover>
 ```

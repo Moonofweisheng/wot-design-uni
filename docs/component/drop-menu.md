@@ -159,7 +159,7 @@ function confirm() {
 
 ## DropdownItem Methods
 
-通过 `this.selectComponent('#selector')` 可以获取到 DropdownItem 实例并调用实例方法
+通过设置 `ref` 可以获取到 DropdownItem 实例并调用实例方法
 
 | 方法名 | 说明     | 参数 | 返回值 | 最低版本 |
 | ------ | -------- | ---- | ------ | -------- |
