@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.2.22](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.21...v0.2.22) (2024-01-30)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修正 Popover 组件文档中menuclick示例错误的问题 ([9df96e7](https://github.com/Moonofweisheng/wot-design-uni/commit/9df96e7629296bfba2b7f951b83508cc9e4a3935))
+
 ### [0.2.21](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.19...v0.2.21) (2024-01-28)
 
 
