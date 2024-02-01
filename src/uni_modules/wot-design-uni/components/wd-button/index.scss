@@ -170,6 +170,16 @@
       border-color: $-button-normal-border-active-color;
     }
   }
+
+  .wd-button__loading {
+    border: 2px solid transparent;
+    border-left-color: $-color-gray-1;
+    border-radius: 100%;
+    margin-right: 10px;
+
+    animation: wd-rotate infinite 1s linear;
+  }
+
   @include when(disabled) {
     color: $-button-normal-disabled-color;
     background: $-button-normal-disabled-bg;
@@ -229,6 +239,9 @@
       $-button-info-disabled-bg-color,
       $-button-info-disabled-color
     );
+    .wd-button__loading {
+      border-left-color: $-color-gray-7;
+    }
   }
   @include when(warning) {
     @include button-type-style($-color-white, $-button-warning-color, $-button-warning-active-color, $-button-warning-disabled-color, $-color-white);
@@ -480,7 +493,7 @@
     &.wd-button--active {
       background: $-button-icon-active-color;
     }
-    :deep(.wd-button__icon){
+    :deep(.wd-button__icon) {
       margin-right: 0;
     }
     @include when(disabled) {

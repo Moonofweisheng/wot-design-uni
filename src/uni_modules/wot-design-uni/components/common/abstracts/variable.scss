@@ -152,20 +152,20 @@ $-button-small-height: var(--wot-button-small-height, 28px) !default; // 小型�
 $-button-small-padding: var(--wot-button-small-padding, 0 11px) !default; // 小型按钮padding
 $-button-small-fs: var(--wot-button-small-fs, $-fs-secondary) !default; // 小型按钮字号
 $-button-small-radius: var(--wot-button-small-radius, 2px) !default; // 小型按钮圆角大小
-$-button-small-loading: var(--wot-button-small-loading, 14px) !default; // 小型按钮loading图标大小
+$-button-small-loading: var(--wot-button-small-loading, 10px) !default; // 小型按钮loading图标大小
 
 $-button-medium-height: var(--wot-button-medium-height, 36px) !default; // 中型按钮高度
 $-button-medium-padding: var(--wot-button-medium-padding, 0 15px) !default; // 中型按钮padding
 $-button-medium-fs: var(--wot-button-medium-fs, $-fs-content) !default; // 中型按钮字号
 $-button-medium-radius: var(--wot-button-medium-radius, 4px) !default; // 中型按钮圆角大小
-$-button-medium-loading: var(--wot-button-medium-loading, 18px) !default; // 中型按钮loading图标大小
+$-button-medium-loading: var(--wot-button-medium-loading, 14px) !default; // 中型按钮loading图标大小
 $-button-medium-box-shadow-size: var(--wot-button-medium-box-shadow-size, 0px 2px 4px 0px) !default; // 中尺寸阴影尺寸
 
 $-button-large-height: var(--wot-button-large-height, 44px) !default; // 大型按钮高度
 $-button-large-padding: var(--wot-button-large-padding, 0 36px) !default; // 大型按钮padding
 $-button-large-fs: var(--wot-button-large-fs, $-fs-title) !default; // 大型按钮字号
 $-button-large-radius: var(--wot-button-large-radius, 8px) !default; // 大型按钮圆角大小
-$-button-large-loading: var(--wot-button-large-loading, 24px) !default; // 大小按钮loading图标大小
+$-button-large-loading: var(--wot-button-large-loading, 20px) !default; // 大小按钮loading图标大小
 $-button-large-box-shadow-size: var(--wot-button-large-box-shadow-size, 0px 4px 8px 0px) !default; // 大尺寸阴影尺寸
 
 $-button-icon-fs: var(--wot-button-icon-fs, 18px) !default; // 带图标的按钮的图标大小

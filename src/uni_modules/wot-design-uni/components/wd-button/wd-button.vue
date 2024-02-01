@@ -34,9 +34,7 @@
     @launchapp="handleLaunchapp"
     @opensetting="handleOpensetting"
   >
-    <view v-if="loading" class="wd-button__loading">
-      <view class="wd-button__loading-svg" :style="loadingStyle"></view>
-    </view>
+    <view v-if="loading" class="wd-button__loading"/>
     <wd-icon v-if="icon" custom-class="wd-button__icon" :name="icon"></wd-icon>
     <view class="wd-button__text"><slot /></view>
   </button>
@@ -54,19 +52,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, watch } from 'vue'
+import { watch } from 'vue'
 import { ref } from 'vue'
-import base64 from '../common/base64'
 
-const loadingIcon = (color = '#4D80F0', reverse = true) => {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42"><defs><linearGradient x1="100%" y1="0%" x2="0%" y2="0%" id="a"><stop stop-color="${
-    reverse ? color : '#fff'
-  }" offset="0%" stop-opacity="0"/><stop stop-color="${
-    reverse ? color : '#fff'
-  }" offset="100%"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><path d="M21 1c11.046 0 20 8.954 20 20s-8.954 20-20 20S1 32.046 1 21 9.954 1 21 1zm0 7C13.82 8 8 13.82 8 21s5.82 13 13 13 13-5.82 13-13S28.18 8 21 8z" fill="${
-    reverse ? '#fff' : color
-  }"/><path d="M4.599 21c0 9.044 7.332 16.376 16.376 16.376 9.045 0 16.376-7.332 16.376-16.376" stroke="url(#a)" stroke-width="3.5" stroke-linecap="round"/></g></svg>`
-}
 type ButtonType = 'primary' | 'success' | 'info' | 'warning' | 'error' | 'default' | 'text' | 'icon'
 type ButtonSize = 'small' | 'medium' | 'large'
 
@@ -109,7 +97,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const hoverStartTime = ref<number>(20)
 const hoverStayTime = ref<number>(70)
-const loadingIconSvg = ref<string>('')
 
 watch(
   () => props.loading,
@@ -118,10 +105,6 @@ watch(
   },
   { deep: true, immediate: true }
 )
-
-const loadingStyle = computed(() => {
-  return `background-image: url(${loadingIconSvg.value});`
-})
 
 const emit = defineEmits(['click', 'getuserinfo', 'contact', 'getphonenumber', 'error', 'launchapp', 'opensetting'])
 
@@ -179,9 +162,6 @@ function buildLoadingSvg() {
         break
     }
   }
-
-  const svg = loadingIcon(color, !plain)
-  loadingIconSvg.value = `"data:image/svg+xml;base64,${base64(svg)}"`
 }
 </script>
 
