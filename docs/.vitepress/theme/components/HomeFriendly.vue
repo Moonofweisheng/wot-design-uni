@@ -1,14 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-02-02 15:40:08
- * @LastEditTime: 2024-02-03 23:56:17
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\docs\.vitepress\theme\components\HomeFriendly.vue
- * 记得注释
--->
-<style scoped></style>
-
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useFriendly } from '../composables/friendly'
@@ -17,8 +6,8 @@ import VPFeature from 'vitepress/dist/client/theme-default/components/VPFeature.
 const { data } = useFriendly()
 
 
-const features = computed(() => {
-  return data && data.value ? data.value : [{
+const links = computed(() => {
+  return data.value.length ? data.value : [{
     icon: "https://www.flowerui.com/logo.png",
     title: 'Flower Library',
     details: 'uni-app 多平台多版本兼容的轻量、简洁、高效、全面的移动端组件库',
@@ -32,7 +21,7 @@ const features = computed(() => {
 })
 
 const grid = computed(() => {
-  const length = features.value.length || 0
+  const length = links.value.length || 0
   if (!length) {
     return
   } else {
@@ -42,12 +31,12 @@ const grid = computed(() => {
 </script>
 
 <template>
-  <div v-if="features && features.length" class="VPFeatures">
+  <div v-if="links && links.length" class="VPFeatures">
     <div class="container">
       <h1 class="friendly-title">友情链接</h1>
 
       <div class="items">
-        <div v-for="feature in features" :key="feature.title" class="item" :class="[grid]">
+        <div v-for="feature in links" :key="feature.title" class="item" :class="[grid]">
           <VPFeature :icon="{ src: feature.icon, height: '48px', width: 'auto' }" :title="feature.title"
             :details="feature.details" :link="feature.link" />
         </div>
