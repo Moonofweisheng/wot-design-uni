@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2024-02-04 09:57:32
+ * @LastEditTime: 2024-02-04 10:21:21
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\theme\composables\friendly.ts
@@ -20,7 +20,7 @@ const data = ref<FriendlyLink[]>([])
 
 export function useFriendly() {
   onMounted(async () => {
-    if (data.value) {
+    if (data.value && data.value.length) {
       return
     }
     const result = await fetch('https://historysoa.oss-cn-hongkong.aliyuncs.com/sponsors/friendly.json')

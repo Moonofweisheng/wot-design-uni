@@ -7,17 +7,7 @@ const { data } = useFriendly()
 
 
 const links = computed(() => {
-  return data.value.length ? data.value : [{
-    icon: "https://www.flowerui.com/logo.png",
-    title: 'Flower Library',
-    details: 'uni-app 多平台多版本兼容的轻量、简洁、高效、全面的移动端组件库',
-    link: 'https://www.flowerui.com/',
-  }, {
-    icon: 'https://www.uxframe.cn/logo/hero.svg',
-    title: 'UxFrame',
-    details: '是一款基于 uni-app-x 跨平台应用开发引擎的低代码高性能原生UI框架，简单高效、丰富便捷、炫酷giao炸、无与伦比。',
-    link: 'https://www.uxframe.cn/',
-  }]
+  return data.value.length ? data.value : []
 })
 
 const grid = computed(() => {
