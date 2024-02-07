@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [0.2.23](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.22...v0.2.23) (2024-02-07)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档支持显示友情链接 ([adac43f](https://github.com/Moonofweisheng/wot-design-uni/commit/adac43f2a1b300d4169249e108389b3a24ac9ffa))
+* ✏️  友情链接支持来自线上配置 ([50896bb](https://github.com/Moonofweisheng/wot-design-uni/commit/50896bb475c5e1c5be42bdc22a56a47db9a51481))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 MessageBox 国际化不生效的问题 ([48404a1](https://github.com/Moonofweisheng/wot-design-uni/commit/48404a1ccccf9081cf3e9f9918e20cb58a6bb12f)), closes [#177](https://github.com/Moonofweisheng/wot-design-uni/issues/177)
+
 ### [0.2.22](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.21...v0.2.22) (2024-01-30)
 
 
