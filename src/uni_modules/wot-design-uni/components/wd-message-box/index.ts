@@ -10,9 +10,6 @@
 import { provide, ref } from 'vue'
 import type { Message, MessageOptions, MessageResult, MessageType } from './types'
 import { deepMerge } from '../common/util'
-import { useTranslate } from '../composables/useTranslate'
-
-const { translate } = useTranslate('message-box')
 
 /**
  * useMessage 用到的key
@@ -27,13 +24,10 @@ export const defaultOptions: MessageOptions = {
   showCancelButton: false,
   show: false,
   closeOnClickModal: true,
-  confirmButtonText: translate('confirm'),
-  cancelButtonText: translate('cancel'),
   msg: '',
   type: 'alert',
   inputType: 'text',
   inputValue: '',
-  inputPlaceholder: translate('inputPlaceholder'),
   inputValidate: null,
   showErr: false,
   zIndex: 99,
