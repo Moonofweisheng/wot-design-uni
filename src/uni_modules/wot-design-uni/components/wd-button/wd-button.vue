@@ -1,6 +1,6 @@
 <template>
   <button
-    hover-class="wd-button--active"
+    :hover-class="`${disabled || loading ? '' : 'wd-button--active'}`"
     :style="customStyle"
     :class="[
       'wd-button',
@@ -9,7 +9,7 @@
       plain ? 'is-plain' : '',
       disabled ? 'is-disabled' : '',
       round ? 'is-round' : '',
-      suck ? 'is-suck' : '',
+      hairline ? 'is-hairline' : '',
       block ? 'is-block' : '',
       loading ? 'is-loading' : '',
       customClass
@@ -74,7 +74,7 @@ interface Props {
   plain?: boolean
   disabled?: boolean
   round?: boolean
-  suck?: boolean
+  hairline?: boolean
   block?: boolean
   type?: ButtonType
   size?: ButtonSize
@@ -100,7 +100,7 @@ const props = withDefaults(defineProps<Props>(), {
   round: true,
   plain: false,
   loading: false,
-  suck: false,
+  hairline: false,
   block: false,
   disabled: false,
   customClass: '',

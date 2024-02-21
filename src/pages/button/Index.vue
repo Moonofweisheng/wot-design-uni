@@ -22,6 +22,13 @@
         <wd-button type="warning" plain>警告按钮</wd-button>
         <wd-button type="error" plain>危险按钮</wd-button>
       </demo-block>
+      <demo-block title="细边框幽灵按钮">
+        <wd-button plain hairline>主要按钮</wd-button>
+        <wd-button type="success" plain hairline>成功按钮</wd-button>
+        <wd-button type="info" plain hairline>信息按钮</wd-button>
+        <wd-button type="warning" plain hairline>警告按钮</wd-button>
+        <wd-button type="error" plain hairline>危险按钮</wd-button>
+      </demo-block>
       <demo-block title="幽灵按钮禁用状态">
         <wd-button plain disabled>主要按钮</wd-button>
         <wd-button type="success" plain disabled>成功按钮</wd-button>

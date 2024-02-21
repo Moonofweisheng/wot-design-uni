@@ -169,8 +169,9 @@
   }
 }
 
-/* 0.5px 边框 */
+/* 0.5px 边框 指定方向*/
 @mixin halfPixelBorder($direction: "bottom", $left: 0, $color: $-color-border-light) {
+  position: relative;
   &::after {
     position: absolute;
     display: block;
@@ -189,6 +190,26 @@
     }
     transform: scaleY(0.5);
     background: $color;
+  }
+}
+
+
+/* 0.5px 边框 环绕 */
+@mixin halfPixelBorderSurround($color: $-color-border-light) {
+  position: relative;
+  &::after {
+    position: absolute;
+    display: block;
+    content: ' ';
+    pointer-events: none;
+    width: 200%;
+    height: 200%;
+    left: 0;
+    top: 0;
+    border: 1px solid $color;
+    transform: scale(0.5);
+    box-sizing: border-box;
+    transform-origin: left top;
   }
 }
 @mixin buttonClear {
