@@ -182,7 +182,7 @@ $-button-normal-disabled-color: var(--wot-button-normal-disabled-color, rgba(0, 
 $-button-plain-bg-color: var(--wot-button-plain-bg-color, $-color-white) !default; // 幽灵按钮背景色
 
 $-button-primary-color: var(--wot-button-primary-color, $-color-white) !default; // 主要按钮颜色
-$-button-primary-bg-color: var(--wot-button-primary-bg-color,$-color-theme) !default; // 主要按钮背景颜色
+$-button-primary-bg-color: var(--wot-button-primary-bg-color, $-color-theme) !default; // 主要按钮背景颜色
 $-button-primary-box-shadow-color: var(--wot-button-primary-box-shadow-color, rgba($-color-theme, 0.25)) !default; // 主要按钮阴影颜色
 
 $-button-success-color: var(--wot-button-success-color, $-color-white) !default; // 成功按钮文字颜色
@@ -321,7 +321,7 @@ $-drop-menu-item-color-active: var(--wot-drop-menu-item-color-active, $-color-th
 $-drop-menu-item-color-tip: var(--wot-drop-menu-item-color-tip, rgba(0, 0, 0, 0.45)) !default; // 提示文字颜色
 $-drop-menu-item-fs-tip: var(--wot-drop-menu-item-fs-tip, $-fs-secondary) !default; // 提示文字字号
 $-drop-menu-option-check-size: var(--wot-drop-menu-option-check-size, 20px) !default; // check 图标大小
-$-drop-menu-line-color: var(--wot-drop-menu-line-color, resultColor($open-linear, 315deg, $-color-theme, "dark""light", rgba(81, 124, 240, 1) rgba(118, 158, 245, 1), 0% 100%)) !default; // 下划线颜色
+$-drop-menu-line-color: var(--wot-drop-menu-line-color, $-color-theme) !default; // 下划线颜色
 $-drop-menu-line-height: var(--wot-drop-menu-line-height, 3px) !default; // 下划线高度
 
 /* input-number */
@@ -465,7 +465,7 @@ $-picker-region-separator-color: var(--wot-picker-region-separator-color, rgba(0
 $-picker-cell-arrow-size-large: var(--wot-picker-cell-arrow-size-large, $-cell-icon-size) !default; // cell 类型的大尺寸 右侧icon尺寸
 
 $-picker-region-color: var(--wot-picker-region-color, rgba(0, 0, 0, 0.45)) !default; // 区域选择文字颜色
-$-picker-region-bg-active-color: var(--wot-picker-region-bg-active-color, resultColor($open-linear, 315deg, $-color-theme, "dark""light""light", rgba(79, 124, 248, 1) rgba(102, 141, 248, 1) rgba(102, 141, 248, 1), 0% 100% 100%)) !default; // 区域选择激活选中背景颜色
+$-picker-region-bg-active-color: var(--wot-picker-region-bg-active-color, $-color-theme) !default; // 区域选择激活选中背景颜色
 
 $-picker-region-fs: var(--wot-picker-region-fs, 14px) !default; // 区域选择文字字号
 
@@ -569,7 +569,7 @@ $-sort-button-fs: var(--wot-sort-button-fs, $-fs-content) !default; // 字号
 $-sort-button-color: var(--wot-sort-button-color, $-color-content) !default; // 颜色
 $-sort-button-height: var(--wot-sort-button-height, 48px) !default; // 高度
 $-sort-button-line-height: var(--wot-sort-button-line-height, 3px) !default; // 下划线高度
-$-sort-button-line-color: var(--wot-sort-button-line-color, resultColor($open-linear, 315deg, $-color-theme, "dark""light", rgba(81, 124, 240, 1) rgba(118, 158, 245, 1), 0% 100%)) !default; // 下划线颜色
+$-sort-button-line-color: var(--wot-sort-button-line-color, $-color-theme) !default; // 下划线颜色
 
 /* steps */
 $-steps-icon-size: var(--wot-steps-icon-size, 22px) !default; // 图标尺寸
@@ -592,7 +592,7 @@ $-switch-width: var(--wot-switch-width, calc(1.8em + 4px)) !default; // 宽度
 $-switch-height: var(--wot-switch-height, calc(1em + 4px)) !default; // 高度
 $-switch-circle-size: var(--wot-switch-circle-size, 1em) !default; // 圆点大小
 $-switch-border-color: var(--wot-switch-border-color, #e5e5e5) !default; // 边框颜色选中状态背景颜色
-$-switch-active-color: var(--wot-switch-active-color, resultColor($open-linear, 315deg, $-color-theme, "light""dark", #4f7cf8 #668df8, 0% 100%)) !default; // 选中状态背景
+$-switch-active-color: var(--wot-switch-active-color, $-color-theme) !default; // 选中状态背景
 $-switch-active-shadow-color: var(--wot-switch-active-shadow-color, rgba(0, 83, 162, 0.5)) !default; // 选中状态shadow颜色
 $-switch-inactive-color: var(--wot-switch-inactive-color, resultColor($open-linear, 315deg, #dadada, "light""dark""dark", #f2f2f2 #dadada #668df8, 0% 100% 100%)) !default; // 非选中背景颜色
 $-switch-inactive-shadow-color: var(--wot-switch-inactive-shadow-color, rgba(155, 155, 155, 0.5)) !default; // 非选中状态shadow颜色
@@ -609,7 +609,7 @@ $-tabs-nav-bg: var(--wot-tabs-nav-bg, $-color-white) !default; // 背景颜色
 $-tabs-nav-active-color: var(--wot-tabs-nav-active-color, $-color-theme) !default; // 头部高亮颜色
 $-tabs-nav-disabled-color: var(--wot-tabs-nav-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 头部禁用颜色
 $-tabs-nav-line-height: var(--wot-tabs-nav-line-height, 3px) !default; // 高亮边框高度
-$-tabs-nav-line-bg-color: var(--wot-tabs-nav-line-bg-color, resultColor($open-linear, 315deg, $-color-theme, "dark""light", rgba(81, 124, 240, 1) rgba(118, 158, 245, 1), 0% 100%)) !default; // 底部条颜色
+$-tabs-nav-line-bg-color: var(--wot-tabs-nav-line-bg-color, $-color-theme) !default; // 底部条颜色
 $-tabs-nav-map-fs: var(--wot-tabs-nav-map-fs, $-fs-content) !default; // map 类型按钮字号
 $-tabs-nav-map-color: var(--wot-tabs-nav-map-color, rgba(0, 0, 0, 0.85)) !default; // map 类型按钮文字颜色
 $-tabs-nav-map-arrow-color: var(--wot-tabs-nav-map-arrow-color, rgba(0, 0, 0, 0.65)) !default; // map 类型箭头颜色
@@ -624,14 +624,14 @@ $-tag-color: var(--wot-tag-color, $-color-white) !default; // 字体颜色
 $-tag-small-fs: var(--wot-tag-small-fs, $-fs-aid) !default; // 小尺寸字号
 $-tag-info-color: var(--wot-tag-info-color, #585858) !default; // info 颜色
 $-tag-primary-color: var(--wot-tag-primary-color, $-color-theme) !default; // 主颜色
-$-tag-danger-color: var(--wot-tag-danger-color, rgba(250, 67, 80, 1)) !default; // danger 颜色
-$-tag-warning-color: var(--wot-tag-warning-color, rgba(255, 144, 0, 1)) !default; // warning 颜色
-$-tag-success-color: var(--wot-tag-success-color, rgba(51, 187, 68, 1)) !default; // success 颜色
+$-tag-danger-color: var(--wot-tag-danger-color, $-color-danger) !default; // danger 颜色
+$-tag-warning-color: var(--wot-tag-warning-color, $-color-warning) !default; // warning 颜色
+$-tag-success-color: var(--wot-tag-success-color, $-color-success) !default; // success 颜色
 $-tag-info-bg: var(--wot-tag-info-bg, resultColor($open-linear, 49deg, $-color-black, "dark""light", #808080 #999999, 0% 100%)) !default; // info 背景颜色
-$-tag-primary-bg: var(--wot-tag-primary-bg, resultColor($open-linear, 49deg, $-color-theme, "dark""light", rgba(81, 124, 240, 1) rgba(118, 158, 245, 1), 0% 100%)) !default; // 主背景颜色
-$-tag-danger-bg: var(--wot-tag-danger-bg, resultColor($open-linear, 44deg, $-color-danger, "dark""light", rgba(230, 62, 70, 1) rgba(255, 64, 73, 1), 0% 100%)) !default; // danger 背景颜色
-$-tag-warning-bg: var(--wot-tag-warning-bg, resultColor($open-linear, 45deg, $-color-warning, "dark""light", rgba(230, 113, 55, 1) rgba(255, 151, 76, 1), 0% 100%)) !default; // warning 背景颜色
-$-tag-success-bg: var(--wot-tag-success-bg, resultColor($open-linear, 45deg, $-color-success, "dark""light", rgba(32, 176, 128, 1) rgba(43, 214, 157, 1), 0% 100%)) !default; // success 背景颜色
+$-tag-primary-bg: var(--wot-tag-primary-bg, $-color-theme) !default; // 主背景颜色
+$-tag-danger-bg: var(--wot-tag-danger-bg, $-color-danger) !default; // danger 背景颜色
+$-tag-warning-bg: var(--wot-tag-warning-bg, $-color-warning) !default; // warning 背景颜色
+$-tag-success-bg: var(--wot-tag-success-bg, $-color-success) !default; // success 背景颜色
 $-tag-round-color: var(--wot-tag-round-color, rgba(102, 102, 102, 1)) !default; // round 字体颜色
 $-tag-round-border-color: var(--wot-tag-round-border-color, rgba(225, 225, 225, 1)) !default; // round 边框颜色
 $-tag-round-radius: var(--wot-tag-round-radius, 12px) !default; // round 圆角大小
