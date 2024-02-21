@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+## [0.3.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.23...v0.3.0) (2024-02-21)
+
+
+### ✨ Features | 新功能
+
+* ✨ 调整Button 按钮样式受主色控制并优化幽灵按钮显示效果 ([5f0d1f5](https://github.com/Moonofweisheng/wot-design-uni/commit/5f0d1f5f8bac81435d248348ec5823e82d35f7a4))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复select-picker组件绑定值描述错误的问题 ([b287111](https://github.com/Moonofweisheng/wot-design-uni/commit/b2871114311656580ade25c25f0775d9246f32b7)), closes [#178](https://github.com/Moonofweisheng/wot-design-uni/issues/178)
+* ✏️  增加Button细边框幽灵按钮的使用说明 ([366c34b](https://github.com/Moonofweisheng/wot-design-uni/commit/366c34b69faedee4874221c604d1a6d5c8c1a8e0))
+
 ### [0.2.23](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.22...v0.2.23) (2024-02-07)
 
 
