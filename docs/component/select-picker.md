@@ -308,7 +308,7 @@ function handleConfirm({ value, selectedItems }) {
 
 | 参数                   | 说明                                                                                                     | 类型                              | 可选值           | 默认值   | 最低版本 |
 | ---------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------- | ---------------- | -------- | -------- |
-| value                  | 选中项，`type`类型为`checkbox`时，类型为 array；`type`为`radio` 时 ，类型为 number / boolean / string    | array / number / boolean / string | -                | -        | -        |
+| v-model             | 选中项，`type`类型为`checkbox`时，类型为 array；`type`为`radio` 时 ，类型为 number / boolean / string    | array / number / boolean / string | -                | -        | -        |
 | columns                | 选择器数据，一维数组                                                                                     | array                             | -                | -        | -        |
 | type                   | 单复选选择器类型                                                                                         | string                            | checkbox / radio | checkbox | -        |
 | value-key              | 选项对象中，value 对应的 key                                                                             | string                            | -                | value    | -        |
