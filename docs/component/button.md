@@ -31,6 +31,15 @@
 <wd-button plain>主要按钮</wd-button>
 ```
 
+## 细边框幽灵按钮
+
+设置 `hairline` 属性。
+
+```html
+<wd-button plain hairline>主要按钮</wd-button>
+```
+
+
 ## 按钮大小
 
 设置 `size` ，支持 'small'、'medium'、'large'，默认为 'medium'。
@@ -88,8 +97,8 @@
 | type | 按钮类型 |	string | primary / success / info / warning / error / text / icon |	primary | - |
 | round	| 圆角按钮 | boolean | - |	true | - |
 | plain | 幽灵按钮 | boolean | - | false | - |
+| hairline| 是否细边框 | boolean | - | false | - |
 | loading | 加载中按钮 | boolean | - | false | - |
-| suck | 吸顶按钮 | boolean | - | false | - |
 | block | 块状按钮 | boolean | - | false | - |
 | size | 按钮尺寸 | string | small / medium / large | medium | - |
 | disabled | 禁用按钮 | boolean | - | false | - |
