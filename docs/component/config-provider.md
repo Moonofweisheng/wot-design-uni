@@ -107,6 +107,17 @@ export default {
 }
 ```
 
+### 在 TypeScript 中使用
+在 TypeScript 中定义 `themeVars` 时，建议使用 __wot-design-uni__ 提供的 __ConfigProviderThemeVars__ 类型，可以提供完善的类型提示：
+
+```ts
+import type { ConfigProviderThemeVars } from 'wot-design-uni';
+
+const themeVars: ConfigProviderThemeVars = {
+  colorTheme: 'red'
+}
+```
+
 :::tip
 注意：ConfigProvider 仅影响它的子组件的样式，不影响全局 root 节点。
 :::

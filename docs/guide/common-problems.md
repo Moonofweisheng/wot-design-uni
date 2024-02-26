@@ -4,7 +4,7 @@
 
 ## 目前支持哪些平台？
 
-目前支持`APP-vue`、`微信小程序`和`h5`，在`1.0.0`版本之前都是支持这三个平台。当我们升级到`1.0.0`版本时会新增支持`支付宝小程序`和`钉钉小程序`，虽然当前目前基本也是支持这两个平台的，但是有部分组件存在样式差异，这一点因为时间问题还没有修复，所以这里也是不推荐在`支付宝小程序`和`钉钉小程序`中使用`Wot Design Uni`组件库。
+目前支持`APP-vue`、`微信小程序`、`支付宝小程序`和`h5`，计划支持的平台：钉钉小程序。
 
 
 ## 如何开启暗黑模式？
@@ -26,7 +26,9 @@
 }
 ```
 
-### 在自定义组件中使用 Wot Design Uni 组件时，需开启`styleIsolation: 'shared'`选项
+### 为什么在组件中无法覆盖组件库样式？
+
+在自定义组件中使用 Wot Design Uni 组件时，需开启`styleIsolation: 'shared'`选项
 
 ```vue
 <wd-button type="primary">主要按钮</wd-button>
@@ -118,13 +120,9 @@ export default {
 ```
 
 
-## 为何我修改了$-color-theme，有的组件颜色没有改变？
-目前 `Wot Design Uni` 部分组件使用了渐变，不会直接应用`$-color-theme`，所以目前使用`$-color-theme`修改主题色，只会改变部分组件的颜色，不会改变渐变组件的颜色。
-如果需要修改渐变组件的颜色，请将`variable.scss`中`$open-linear: true !default;`改为`$open-linear: false;`。
-
-::: tip 推荐方案
+## 如何定制主题？
 我们为每个组件提供了`css 变量`，可以参考[config-provider](../component/config-provider)组件的使用介绍来定制主题。
-:::
+
 
 
 ## 关于我们

@@ -1,9 +1,12 @@
 <template>
-  <wd-config-provider :theme="theme">
+  <wd-config-provider :theme="theme" :theme-vars="isRed ? themeVars : {}">
     <wd-toast />
     <view class="page-wraper">
       <wd-cell title="切换暗黑" title-width="240px" center v-if="showDarkMode">
         <wd-switch v-model="isDark" />
+      </wd-cell>
+      <wd-cell title="切换主题色" title-width="240px" center v-if="showDarkMode">
+        <wd-switch v-model="isRed" />
       </wd-cell>
       <slot />
     </view>
@@ -21,7 +24,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, ref, onMounted } from 'vue'
-import { setNotifyDefaultOptions } from '@/uni_modules/wot-design-uni'
+import { setNotifyDefaultOptions, type ConfigProviderThemeVars } from '@/uni_modules/wot-design-uni'
 import { useDark } from '../../store'
 
 interface Props {
@@ -34,6 +37,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 const darkMode = useDark()
 const isDark = ref<boolean>(false)
+const isRed = ref<boolean>(false)
+
+const themeVars: ConfigProviderThemeVars = {
+  colorTheme: 'red'
+}
 
 const theme = computed(() => {
   return darkMode.isDark.value || isDark.value ? 'dark' : 'light'

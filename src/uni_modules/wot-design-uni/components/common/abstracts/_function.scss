@@ -18,7 +18,9 @@ $default-theme: #4d80f0 !default; // 正常色
 
   @if str-index($selector, $modifierSeparator) {
     @return true;
-  } @else {
+  }
+
+  @else {
     @return false;
   }
 }
@@ -29,7 +31,9 @@ $default-theme: #4d80f0 !default; // 正常色
 
   @if str-index($selector, ':') {
     @return true;
-  } @else {
+  }
+
+  @else {
     @return false;
   }
 }
@@ -41,16 +45,22 @@ $default-theme: #4d80f0 !default; // 正常色
  * @params $type 变暗’dark‘ 变亮 'light'
  * @params $mix-color 自己设置的混色
  */
- @function themeColor($theme-color, $type: "", $mix-color: "") {
-  @if $default-theme != #4d80f0 {
-    @if $type == "dark" {
+@function themeColor($theme-color, $type: "", $mix-color: "") {
+  @if $default-theme !=#4d80f0 {
+    @if $type=="dark" {
       @return darken($theme-color, 10%);
-    } @else if $type == "light" {
+    }
+
+    @else if $type=="light" {
       @return lighten($theme-color, 10%);
-    } @else {
+    }
+
+    @else {
       @return $theme-color;
     }
-  } @else {
+  }
+
+  @else {
     @return $mix-color;
   }
 }
@@ -64,17 +74,16 @@ $default-theme: #4d80f0 !default; // 正常色
  * @params [Array] $color-list 渐变色顺序， $color-list 和 $per-list 数量相同
  * @params [Array] $per-list 渐变色比例
  */
-@function resultColor($open-linear, $deg, $theme-color, $set, $color-list, $per-list) {
+@function resultColor($deg, $theme-color, $set, $color-list, $per-list) {
   // 开启渐变
-  @if $open-linear {
-    $len: length($color-list);
-    $arg: $deg;
-    @for $i from 1 through $len {
-      $arg: $arg + "," + themeColor($theme-color, nth($set, $i), nth($color-list, $i)) + " " + nth($per-list, $i);
-    }
-    @return linear-gradient(unquote($arg));
-  } @else {
-    // 不开启渐变 直接使用色值
-    @return $theme-color;
+
+  $len: length($color-list);
+  $arg: $deg;
+
+  @for $i from 1 through $len {
+    $arg: $arg + ","+ themeColor($theme-color, nth($set, $i), nth($color-list, $i)) + " "+ nth($per-list, $i);
   }
+
+  @return linear-gradient(unquote($arg));
+
 }
