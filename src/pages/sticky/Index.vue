@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-08-14 21:51:11
+ * @LastEditTime: 2024-02-26 14:42:16
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\pages\sticky\Index.vue
@@ -22,7 +22,7 @@
       <view class="demo-block">
         <view class="demo-title">吸顶距离</view>
         <view class="demo-container">
-          <wd-sticky :offset-top="50" style="margin-left: 120px">
+          <wd-sticky :offset-top="50" custom-style="margin-left: 120px">
             <wd-button>吸顶距离</wd-button>
           </wd-sticky>
         </view>

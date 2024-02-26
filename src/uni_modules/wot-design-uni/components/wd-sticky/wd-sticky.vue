@@ -2,7 +2,7 @@
   <view :style="`${rootStyle};display: inline-block;`">
     <!--强制设置高宽，防止元素坍塌-->
     <!--在使用 wd-sticky-box 时，某些情况下 wd-sticky__container 的 'position：absolute' 需要相对于 wd-sticky-box-->
-    <view :class="`wd-sticky ${props.customClass}`" :style="stickyStyle">
+    <view :class="`wd-sticky ${props.customClass}`" :style="stickyStyle" :id="styckyId">
       <!--吸顶容器-->
       <view class="wd-sticky__container" :style="containerStyle">
         <!--监听元素尺寸变化-->
@@ -28,7 +28,7 @@ export default {
 
 <script lang="ts" setup>
 import { type Ref, computed, getCurrentInstance, inject, ref } from 'vue'
-import { addUnit, getRect, objToStyle } from '../common/util'
+import { addUnit, getRect, objToStyle, uuid } from '../common/util'
 
 interface Props {
   customStyle?: string
@@ -43,6 +43,8 @@ const props = withDefaults(defineProps<Props>(), {
   zIndex: 1,
   offsetTop: 0
 })
+
+const styckyId = ref<string>(`wd-sticky${uuid()}`)
 
 const openBox = ref<boolean>(false)
 const position = ref<string>('absolute')
@@ -142,8 +144,8 @@ function observerContentScroll() {
     .relativeToViewport({
       top: -offset // viewport上边界往下拉
     })
-    .observe('.wd-sticky', scrollHandler)
-  getRect('.wd-sticky', false, proxy).then((res: any) => {
+    .observe(`#${styckyId.value}`, scrollHandler)
+  getRect(`#${styckyId.value}`, false, proxy).then((res: any) => {
     // 当 wd-sticky 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
     if (res.bottom <= offset) scrollHandler({ boundingClientRect: res })
   })

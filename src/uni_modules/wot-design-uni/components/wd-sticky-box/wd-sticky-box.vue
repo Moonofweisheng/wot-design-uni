@@ -1,6 +1,6 @@
 <template>
   <view style="position: relative">
-    <view :class="`wd-sticky-box ${props.customClass}`">
+    <view :class="`wd-sticky-box ${props.customClass}`" :id="styckyBoxId">
       <wd-resize @resize="resizeHandler">
         <slot />
       </wd-resize>
@@ -21,7 +21,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, provide, ref } from 'vue'
-import { getRect } from '../common/util'
+import { getRect, uuid } from '../common/util'
 
 interface Props {
   customClass?: string
@@ -30,6 +30,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   customClass: ''
 })
+
+const styckyBoxId = ref<string>(`wd-sticky-box${uuid()}`)
 
 const observerMap = ref<Map<any, any>>(new Map())
 const height = ref<number>(0)
@@ -109,10 +111,10 @@ function observerForChild(child) {
   if (height.value <= exposed.height.value) {
     exposed.setPosition(false, 'absolute', 0)
   }
-  observer.relativeToViewport({ top: -offset }).observe('.wd-sticky-box', (result) => {
+  observer.relativeToViewport({ top: -offset }).observe(`#${styckyBoxId.value}`, (result) => {
     scrollHandler(exposed, result)
   })
-  getRect('.wd-sticky-box', false, proxy).then((res: any) => {
+  getRect(`#${styckyBoxId.value}`, false, proxy).then((res: any) => {
     // 当 wd-sticky-box 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
     if (res.bottom <= offset) scrollHandler(exposed, { boundingClientRect: res })
   })
