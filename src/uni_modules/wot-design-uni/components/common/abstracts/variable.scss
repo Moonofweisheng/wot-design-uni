@@ -173,7 +173,6 @@ $-button-large-box-shadow-size: var(--wot-button-large-box-shadow-size, 0px 4px 
 $-button-icon-fs: var(--wot-button-icon-fs, 18px) !default; // 带图标的按钮的图标大小
 $-button-icon-size: var(--wot-button-icon-size, 40px) !default; // icon 类型按钮尺寸
 $-button-icon-color: var(--wot-button-icon-color, rgba(0, 0, 0, 0.65)) !default; // icon 类型按钮颜色
-$-button-icon-active-color: var(--wot-button-icon-active-color, $-color-icon-active) !default; // icon 类型按钮点击态颜色
 $-button-icon-disabled-color: var(--wot-button-icon-disabled-color, $-color-icon-disabled) !default; // icon 类型按钮禁用颜色
 
 $-button-normal-color: var(--wot-button-normal-color, $-color-title) !default; // 文字颜色
@@ -191,7 +190,6 @@ $-button-success-box-shadow-color: var(--wot-button-success-box-shadow-color, rg
 
 $-button-info-color: var(--wot-button-info-color, $-color-title) !default; // 信息按钮颜色
 $-button-info-bg-color: var(--wot-button-info-bg-color, #F0F0F0) !default; // 信息按钮背景颜色
-
 $-button-info-plain-border-color: var(--wot-button-info-plain-border-color, rgba(0, 0, 0, 0.45)) !default; // 信息按钮禁用颜色
 $-button-info-plain-normal-color: var(--wot-button-info-plain-normal-color, rgba(0, 0, 0, 0.85)) !default; // 信息幽灵按钮默认颜色
 
