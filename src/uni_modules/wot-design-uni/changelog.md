@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [0.3.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.3.0...v0.3.1) (2024-02-26)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复大尺寸checkbox选中样式异常的问题 ([413cf3b](https://github.com/Moonofweisheng/wot-design-uni/commit/413cf3b6a04358bca5284704d750cfd224c1d277))
+
 ## [0.3.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.2.23...v0.3.0) (2024-02-21)
 
 
