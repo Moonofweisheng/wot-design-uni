@@ -4,7 +4,10 @@
       <view class="page__hd">
         <view class="page__title">
           <view class="logo"></view>
-          <view class="inline">Wot Design Uni</view>
+          <view class="inline">
+            Wot Design Uni
+            <text class="version">@{{ packageConfig.version }}</text>
+          </view>
         </view>
         <view class="page__desc">
           Wot Design Uni 是移动端 Vue 组件库 Wot Design 的 uni-app 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建 uni-app
@@ -37,6 +40,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import packageConfig from '../../../package.json'
+
 const imgModules: any = import.meta.glob('../images/*.png', { eager: true })
 
 const list = ref([
@@ -421,6 +426,9 @@ function kindToggle(id: string) {
 .inline {
   display: inline-block;
   vertical-align: middle;
+}
+.version {
+  font-size: 14px;
 }
 .wd-flex {
   align-items: center;
