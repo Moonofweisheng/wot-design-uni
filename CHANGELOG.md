@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+## [1.0.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.3.1...v1.0.0) (2024-02-26)
+
+
+### ✨ Features | 新功能
+
+* ✨ 支持支付宝小程序并提供ConfigProvider的便利性优化 ([e1baca3](https://github.com/Moonofweisheng/wot-design-uni/commit/e1baca3ce5201c38e6b0aee5e6cb7099ecba9772))
+* ✨ sticky组件支持支付宝平台 ([3805882](https://github.com/Moonofweisheng/wot-design-uni/commit/3805882b8b1f8ad165d8cda528fa0b5cf3f96c27))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  演示demo增加组件库版本号的显示 ([19a00e3](https://github.com/Moonofweisheng/wot-design-uni/commit/19a00e34652bf672f7fdfd28899625dac977a1b6))
+
 ### [0.3.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.3.0...v0.3.1) (2024-02-26)
 
 
