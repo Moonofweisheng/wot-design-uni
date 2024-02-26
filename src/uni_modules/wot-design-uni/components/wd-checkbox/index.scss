@@ -283,10 +283,5 @@
     .wd-checkbox__label {
       font-size: $-checkbox-large-label-fs;
     }
-
-    :deep(.wd-checkbox__check) {
-      top: 0;
-      left: 1px;
-    }
   }
 }
