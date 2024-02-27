@@ -1,19 +1,25 @@
 <template>
-  <view :style="customStyle" :class="`wd-drop-menu ${customClass}`" @click.stop="noop">
-    <view class="wd-drop-menu__list">
-      <view
-        v-for="(child, index) in children"
-        :key="index"
-        @click="toggle(child)"
-        :class="`wd-drop-menu__item ${child.disabled ? 'is-disabled' : ''} ${currentUid === child.$.uid ? 'is-active' : ''}`"
-      >
-        <view class="wd-drop-menu__item-title">
-          <view class="wd-drop-menu__item-title-text">{{ getDisplayTitle(child) }}</view>
-          <wd-icon name="arrow-down" size="14px" custom-class="wd-drop-menu__arrow" />
+  <view :style="customStyle" :class="`wd-drop-menu ${customClass}`" @click.stop="noop" :id="dropMenuId">
+    <!-- #ifdef MP-DINGTALK -->
+    <view :id="dropMenuId">
+      <!-- #endif -->
+      <view class="wd-drop-menu__list">
+        <view
+          v-for="(child, index) in children"
+          :key="index"
+          @click="toggle(child)"
+          :class="`wd-drop-menu__item ${child.disabled ? 'is-disabled' : ''} ${currentUid === child.$.uid ? 'is-active' : ''}`"
+        >
+          <view class="wd-drop-menu__item-title">
+            <view class="wd-drop-menu__item-title-text">{{ getDisplayTitle(child) }}</view>
+            <wd-icon name="arrow-down" size="14px" custom-class="wd-drop-menu__arrow" />
+          </view>
         </view>
       </view>
+      <slot />
+      <!-- #ifdef MP-DINGTALK -->
     </view>
-    <slot />
+    <!-- #endif -->
   </view>
 </template>
 <script lang="ts">
@@ -31,7 +37,7 @@ export default {
 import { getCurrentInstance, inject, onBeforeMount, ref, watch } from 'vue'
 import { closeOther } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
-import { getRect } from '../common/util'
+import { getRect, uuid } from '../common/util'
 import { useChildren } from '../composables/useChildren'
 import { DROP_MENU_KEY } from './types'
 
@@ -57,6 +63,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 const queue = inject<Queue | null>(queueKey, null)
 
+const dropMenuId = ref<string>(`dropMenuId${uuid()}`)
 // -1表示折叠
 const currentUid = ref<number | null>(null)
 const offset = ref<number>(0)
@@ -125,7 +132,7 @@ function fold(child?: any) {
     })
     return
   }
-  getRect('.wd-drop-menu', false, proxy).then((rect: any) => {
+  getRect(`#${dropMenuId.value}`, false, proxy).then((rect: any) => {
     if (!rect) return
     const { top, bottom } = rect
 
