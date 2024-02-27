@@ -9,8 +9,8 @@
       :key="index"
     >
       <view class="wd-segmented__item-label">
-        <slot name="label" :option="isObj(option) ? option : { value: option }"></slot>
-        <template v-if="!$slots.label">
+        <slot name="label" v-if="$slots.label" :option="isObj(option) ? option : { value: option }"></slot>
+        <template v-else>
           {{ isObj(option) ? option.value : option }}
         </template>
       </view>

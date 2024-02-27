@@ -36,7 +36,8 @@
           <wd-segmented :options="list1" v-model:value="current4" :vibrate-short="true">
             <template #label="{ option }">
               <view class="section-slot">
-                <wd-img round width="32px" height="32px" :src="option.payload.avatar" />
+                <image style="border-radius: 50%; width: 32px; height: 32px" :src="option.payload.avatar" />
+
                 <view class="name">
                   {{ option.value }}
                 </view>
