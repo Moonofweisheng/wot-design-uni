@@ -1,6 +1,22 @@
 # 更新日志 
 
 
+## [1.1.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.0.0...v1.1.0) (2024-02-27)
+
+
+### ✨ Features | 新功能
+
+* ✨ Button 支持微信小程序chooseavatar和agreeprivacyauthorization事件 ([177c726](https://github.com/Moonofweisheng/wot-design-uni/commit/177c726e0d0f9bc435f815af2e4fc8e917ef144d))
+* ✨ DropDown组件支持钉钉小程序 ([924c65b](https://github.com/Moonofweisheng/wot-design-uni/commit/924c65b4f66e7d1ff75aa2bcb5c6cbe4e045fb92))
+* ✨ Slider 支持钉钉小程序 ([bea7a49](https://github.com/Moonofweisheng/wot-design-uni/commit/bea7a499edc3e0681ec11dd26333d8a969dd9b0e))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  新增支持钉钉小程序平台 ([9525f23](https://github.com/Moonofweisheng/wot-design-uni/commit/9525f23f207af47c10c37614279b8318500e3ede))
+* ✏️  修复Segment演示demo在钉钉小程序平台展示异常的问题 ([4fbe556](https://github.com/Moonofweisheng/wot-design-uni/commit/4fbe5569b3cb1761c2ef7847a4abc1721d3ed220))
+* ✏️  支持平台的介绍中新增支付宝小程序 ([320e4dd](https://github.com/Moonofweisheng/wot-design-uni/commit/320e4dd2e102146b8a466d378c8356286faeb28c))
+
 ## [1.0.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v0.3.1...v1.0.0) (2024-02-26)
 
 
