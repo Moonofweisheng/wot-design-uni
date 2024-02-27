@@ -25,7 +25,7 @@ hero:
 features:
   - icon: 🚀
     title: 多平台覆盖
-    details: 支持 微信小程序、支付宝小程序、H5、APP 等平台。
+    details: 支持 微信小程序、支付宝小程序、钉钉小程序、H5、APP 等平台。
   - icon: 🚀
     title: 60+ 组件
     details: 超过 60 个高质量组件，覆盖移动端主流场景。
