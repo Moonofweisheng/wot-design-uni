@@ -1,43 +1,49 @@
 <template>
-  <view :class="rootClass">
-    <view :class="`wd-slider__label-min ${customMinClass}`" v-if="!hideMinMax">
-      {{ minValue }}
-    </view>
-    <view class="wd-slider__bar-wrapper" :style="barWrapperStyle">
-      <view class="wd-slider__bar" :style="barCustomStyle"></view>
-      <!-- 左边 -->
-      <view
-        class="wd-slider__button-wrapper"
-        :style="buttonLeftStyle"
-        @touchstart="onTouchStart"
-        @touchmove="onTouchMove"
-        @touchend="onTouchEnd"
-        @touchcancel="onTouchEnd"
-      >
-        <view class="wd-slider__label" v-if="!hideLabel">
-          {{ leftNewValue }}
-        </view>
-        <view class="wd-slider__button" />
+  <view :class="rootClass" :id="sliderId">
+    <!-- #ifdef MP-DINGTALK -->
+    <view :id="sliderId" style="flex: 1" :class="rootClass">
+      <!-- #endif -->
+      <view :class="`wd-slider__label-min ${customMinClass}`" v-if="!hideMinMax">
+        {{ minValue }}
       </view>
-      <!-- 右边 -->
-      <view
-        v-if="showRight"
-        class="wd-slider__button-wrapper"
-        :style="buttonRightStyle"
-        @touchstart="onTouchStartRight"
-        @touchmove="onTouchMoveRight"
-        @touchend="onTouchEndRight"
-        @touchcancel="onTouchEndRight"
-      >
-        <view class="wd-slider__label" v-if="!hideLabel">
-          {{ rightNewValue }}
+      <view class="wd-slider__bar-wrapper" :style="barWrapperStyle">
+        <view class="wd-slider__bar" :style="barCustomStyle"></view>
+        <!-- 左边 -->
+        <view
+          class="wd-slider__button-wrapper"
+          :style="buttonLeftStyle"
+          @touchstart="onTouchStart"
+          @touchmove="onTouchMove"
+          @touchend="onTouchEnd"
+          @touchcancel="onTouchEnd"
+        >
+          <view class="wd-slider__label" v-if="!hideLabel">
+            {{ leftNewValue }}
+          </view>
+          <view class="wd-slider__button" />
         </view>
-        <view class="wd-slider__button" />
+        <!-- 右边 -->
+        <view
+          v-if="showRight"
+          class="wd-slider__button-wrapper"
+          :style="buttonRightStyle"
+          @touchstart="onTouchStartRight"
+          @touchmove="onTouchMoveRight"
+          @touchend="onTouchEndRight"
+          @touchcancel="onTouchEndRight"
+        >
+          <view class="wd-slider__label" v-if="!hideLabel">
+            {{ rightNewValue }}
+          </view>
+          <view class="wd-slider__button" />
+        </view>
       </view>
+      <view :class="`wd-slider__label-max ${customMaxClass}`" v-if="!hideMinMax">
+        {{ maxValue }}
+      </view>
+      <!-- #ifdef MP-DINGTALK -->
     </view>
-    <view :class="`wd-slider__label-max ${customMaxClass}`" v-if="!hideMinMax">
-      {{ maxValue }}
-    </view>
+    <!-- #endif -->
   </view>
 </template>
 
@@ -54,7 +60,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
-import { getRect, isArray, isDef } from '../common/util'
+import { getRect, isArray, isDef, uuid } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 import { watch } from 'vue'
 
@@ -94,11 +100,11 @@ const rightSlider = {
   deltaX: 0,
   newValue: 0
 }
+const sliderId = ref<string>(`sliderId${uuid()}`)
 
 const touchLeft = useTouch()
 const touchRight = useTouch()
 
-const $slider = '.wd-slider'
 const showRight = ref<boolean>(false)
 const barStyle = ref<string>('width: 0; height: 3px')
 const barHeight = ref<string>('3px')
@@ -222,7 +228,7 @@ const buttonRightStyle = computed(() => {
 })
 
 onMounted(() => {
-  getRect($slider, false, proxy).then((data: any) => {
+  getRect(`#${sliderId.value}`, false, proxy).then((data: any) => {
     // trackWidth: 轨道全长
     trackWidth.value = data.width
     // trackLeft: 轨道距离左侧的距离
