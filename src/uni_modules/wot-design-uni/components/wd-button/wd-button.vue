@@ -33,6 +33,8 @@
     @error="handleError"
     @launchapp="handleLaunchapp"
     @opensetting="handleOpensetting"
+    @chooseavatar="handleChooseavatar"
+    @agreeprivacyauthorization="handleAgreePrivacyAuthorization"
   >
     <view v-if="loading" class="wd-button__loading">
       <view class="wd-button__loading-svg" :style="loadingStyle"></view>
@@ -123,7 +125,17 @@ const loadingStyle = computed(() => {
   return `background-image: url(${loadingIconSvg.value});`
 })
 
-const emit = defineEmits(['click', 'getuserinfo', 'contact', 'getphonenumber', 'error', 'launchapp', 'opensetting'])
+const emit = defineEmits([
+  'click',
+  'getuserinfo',
+  'contact',
+  'getphonenumber',
+  'error',
+  'launchapp',
+  'opensetting',
+  'chooseavatar',
+  'agreeprivacyauthorization'
+])
 
 function handleClick(event) {
   if (!props.disabled && !props.loading) {
@@ -153,6 +165,14 @@ function handleLaunchapp(event) {
 
 function handleOpensetting(event) {
   emit('opensetting', event.detail)
+}
+
+function handleChooseavatar(event) {
+  emit('chooseavatar', event.detail)
+}
+
+function handleAgreePrivacyAuthorization(event) {
+  emit('agreeprivacyauthorization', event.detail)
 }
 function buildLoadingSvg() {
   const { loadingColor, type, plain } = props
