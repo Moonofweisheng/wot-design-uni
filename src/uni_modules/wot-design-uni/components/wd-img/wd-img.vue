@@ -9,7 +9,7 @@
 -->
 <template>
   <view :class="rootClass" @click="handleClick" :style="rootStyle">
-    <image :class="customImage" class="image" :src="src" :mode="mode" :lazy-load="lazyLoad" @load="handleLoad" @error="handleError" />
+    <image :class="`wd-img__image ${customImage}`" :src="src" :mode="mode" :lazy-load="lazyLoad" @load="handleLoad" @error="handleError" />
   </view>
 </template>
 <script lang="ts">
