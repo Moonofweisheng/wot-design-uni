@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-09-20 11:10:41
- * @LastEditTime: 2023-11-20 18:35:28
+ * @LastEditTime: 2024-02-29 13:17:27
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\pages\imgCropper\Index.vue
@@ -14,7 +14,6 @@
     <!-- #endif -->
     <demo-block title="基本用法" style="text-align: center">
       <wd-img-cropper
-        id="wd-img-cropper"
         v-model="show"
         :img-src="src"
         @confirm="handleConfirm"

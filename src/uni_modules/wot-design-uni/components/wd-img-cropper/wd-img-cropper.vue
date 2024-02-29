@@ -1,6 +1,6 @@
 <template>
   <!-- 绘制的图片canvas -->
-  <view id="wd-img-cropper" v-if="modelValue" :class="`wd-img-cropper ${customClass}`" @touchmove="preventTouchMove">
+  <view v-if="modelValue" :class="`wd-img-cropper ${customClass}`" @touchmove="preventTouchMove">
     <!-- 展示在用户面前的裁剪框 -->
     <view class="wd-img-cropper__wrapper">
       <!-- 画出裁剪框 -->
@@ -146,6 +146,10 @@ const props = withDefaults(defineProps<Props>(), {
 const imgAngle = ref<number>(0)
 // 是否开启动画
 const isAnimation = ref<boolean>(false)
+// #ifdef MP-ALIPAY || APP-PLUS
+// hack 避免钉钉小程序、支付宝小程序、app抛出相关异常
+const animation: any = null
+// #endif
 
 // 裁剪框的宽高
 const picWidth = ref<number>(0)
@@ -588,12 +592,12 @@ function canvasToImage() {
         fileType,
         quality,
         canvasId: 'wd-img-cropper-canvas',
-        success: (res) => {
-          emit('confirm', {
-            tempFilePath: res.tempFilePath,
-            width: cutWidth.value * exportScale,
-            height: cutHeight.value * exportScale
-          })
+        success: (res: any) => {
+          const result = { tempFilePath: res.tempFilePath, width: cutWidth.value * exportScale, height: cutHeight.value * exportScale }
+          // #ifdef MP-DINGTALK
+          result.tempFilePath = res.filePath
+          // #endif
+          emit('confirm', result)
         },
         complete: () => {
           emit('update:modelValue', false)
