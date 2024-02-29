@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [1.1.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.0...v1.1.1) (2024-02-29)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 ImgCropper 在钉钉小程序平台无法展示所选图片的问题 ([db8d029](https://github.com/Moonofweisheng/wot-design-uni/commit/db8d029db3a227cd062c6e9d7c14eb9d0f3dae87))
+* 🐛 修复微信小程序css使用标签选择器抛出警告的问题（wd-img） ([#181](https://github.com/Moonofweisheng/wot-design-uni/issues/181)) ([ee3da01](https://github.com/Moonofweisheng/wot-design-uni/commit/ee3da016439d68f1d9d061bb1b1cbd10f2863aa4))
+
 ## [1.1.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.0.0...v1.1.0) (2024-02-27)
 
 
