@@ -5,12 +5,13 @@
   position: relative;
   display: inline-block;
 
-  .wd-img__image {
+  @include e(image) {
     display: block;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
   }
+
   @include when(round) {
     overflow: hidden;
     border-radius: 50%;
