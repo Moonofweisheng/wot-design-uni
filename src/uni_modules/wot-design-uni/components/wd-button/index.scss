@@ -71,6 +71,11 @@
     content: ' ';
   }
 
+
+  &::after {
+    border: none;
+  }
+
   @include m(active) {
     &:active::before {
       opacity: 0.15;
