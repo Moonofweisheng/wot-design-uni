@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.1.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.1...v1.1.2) (2024-03-01)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Button会存在一个默认border的问题 ([#182](https://github.com/Moonofweisheng/wot-design-uni/issues/182)) ([3714ffb](https://github.com/Moonofweisheng/wot-design-uni/commit/3714ffb0f1de55f3eae5a36b9235bdbc518b0738))
+
 ### [1.1.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.0...v1.1.1) (2024-02-29)
 
 
