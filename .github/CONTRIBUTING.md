@@ -10,6 +10,7 @@
 
 - 遇到问题时，请先确认这个问题是否已经在 issue 中有记录或者已被修复。
 - 提 issue 时，请用简短的语言描述遇到的问题，并添加出现问题时的环境和复现步骤。
+- 如果在提问前，无法确认怎样的一个问题是好的、更容易被回复的问题，可以读一读[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)。
 
 ## 参与开发
 

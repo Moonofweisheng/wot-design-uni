@@ -6,6 +6,9 @@
 
 目前支持 微信小程序、支付宝小程序、钉钉小程序、H5、APP 等平台。
 
+## 组件库有没有提供可以单独引入的组件？
+目前是没有的，首先在插件市场缺少`CI/CD`工具，无法实现自动化发布，维护一套单独引入的组件费时费力，其次组件库提供的安装方式均可以实现按需引入，所以是无需提供单独引入的组件的。
+
 
 ## 如何开启暗黑模式？
 
@@ -49,6 +52,23 @@ export default {
 :deep(.wd-button) {
   color: red !important;
 }
+```
+
+什么？还有人想问：这样写还我怎么使用`script setup`啊！
+
+***简单，这样写两个就行了***
+
+```ts
+<script lang="ts">
+export default {
+  options: {
+    styleIsolation: 'shared'
+  }
+}
+</script>
+
+<script lang="ts" setup>
+</script>
 ```
 
 ## 小程序使用外部样式类
@@ -123,7 +143,17 @@ export default {
 ## 如何定制主题？
 我们为每个组件提供了`css 变量`，可以参考[config-provider](../component/config-provider)组件的使用介绍来定制主题。
 
+## Toast和MessageBox组件调用无效果？
 
+首先要检查一下用法是否正确，`uni-app`平台不支持全局挂载组件，所以```Message```、```Toast```等组件仍需在SFC中显式使用，例如:
+``` html
+<wd-toast></wd-toast>
+```
+
+```Message```、```Toast```的函数式调用是基于`provide/inject`实现的，所以你的调用要确保在`setup`中。
+
+## 如何快速解决你的问题？
+[提问的智慧](https://lug.ustc.edu.cn/wiki/doc/smart-questions/)，可以帮助你快速提出正确的问题，获得更快的解答。
 
 ## 关于我们
 
