@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.1.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.2...v1.1.3) (2024-03-03)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档中增加提问的智慧和toast、message组件的常见问题 ([2fdd4b1](https://github.com/Moonofweisheng/wot-design-uni/commit/2fdd4b1c050ed8805637ec0b082ca4d20c3c17b6))
+
 ### [1.1.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.1...v1.1.2) (2024-03-01)
 
 
