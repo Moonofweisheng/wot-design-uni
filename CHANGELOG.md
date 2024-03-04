@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [1.1.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.3...v1.1.4) (2024-03-04)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Navbar显示下边框时fixed不生效的问题 ([18c09d8](https://github.com/Moonofweisheng/wot-design-uni/commit/18c09d87384699c044a9f84838b17f74eaff77b3))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  增加支付宝小程序styleIsolation配置的文档 ([68d1262](https://github.com/Moonofweisheng/wot-design-uni/commit/68d1262ed5ac6ccf8c078ba089e045739c2275e8))
+
 ### [1.1.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.2...v1.1.3) (2024-03-03)
 
 
