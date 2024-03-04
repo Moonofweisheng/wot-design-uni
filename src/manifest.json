@@ -62,7 +62,8 @@
   "mp-alipay": {
     "darkmode": true,
     "themeLocation": "theme.json",
-    "usingComponents": true
+    "usingComponents": true,
+    "styleIsolation": "shared"
   },
   "h5": {
     "darkmode": true,
