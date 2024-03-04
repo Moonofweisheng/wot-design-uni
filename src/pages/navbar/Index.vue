@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-10-17 17:20:31
+ * @LastEditTime: 2024-03-04 12:48:00
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\navbar\Index.vue
+ * 记得注释
+-->
 <template>
   <wd-toast></wd-toast>
   <page-wraper>
@@ -44,6 +53,7 @@
         </template>
       </wd-navbar>
     </demo-block>
+    <view style="height: 500rpx"></view>
   </page-wraper>
 </template>
 <script lang="ts" setup>
