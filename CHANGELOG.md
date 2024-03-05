@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [1.1.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.4...v1.1.5) (2024-03-05)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Search、Input等组件clear事件在value变更前触发的问题 ([8d113a2](https://github.com/Moonofweisheng/wot-design-uni/commit/8d113a285dbffa705e44a31ad05e48f36978c46c)), closes [#185](https://github.com/Moonofweisheng/wot-design-uni/issues/185)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  首页增加常见问题的入口 ([fd7a7dd](https://github.com/Moonofweisheng/wot-design-uni/commit/fd7a7dd287226f670cf02db9cf2856c9ebe52498))
+
 ### [1.1.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.3...v1.1.4) (2024-03-04)
 
 
