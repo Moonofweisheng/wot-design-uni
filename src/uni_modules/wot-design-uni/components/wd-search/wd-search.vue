@@ -186,11 +186,11 @@ function clearSearch() {
         showPlaceHolder.value = true
         hackFocus(false)
       }
-      emit('clear')
       emit('change', {
         value: ''
       })
       emit('update:modelValue', '')
+      emit('clear')
     })
 }
 /**

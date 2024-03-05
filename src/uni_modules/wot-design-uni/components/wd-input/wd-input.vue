@@ -296,11 +296,11 @@ function clear() {
     .then(() => requestAnimationFrame())
     .then(() => {
       isFocus.value = true
-      emit('clear')
       emit('change', {
         value: ''
       })
       emit('update:modelValue', inputValue.value)
+      emit('clear')
     })
 }
 // 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur
