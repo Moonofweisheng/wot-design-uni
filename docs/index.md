@@ -16,14 +16,17 @@ hero:
       text: 快速上手
       link: /guide/quick-use
     - theme: alt
+      text: 常见问题
+      link: /guide/common-problems
+    - theme: alt
       text: 组件列表
       link: /component/button
-    - theme: alt
-      text: 捐赠作者
+    - theme: brand
+      text: 🥤一杯咖啡
       link: /reward/reward
 
 features:
-  - icon: 🚀
+  - icon: 🎯
     title: 多平台覆盖
     details: 支持 微信小程序、支付宝小程序、钉钉小程序、H5、APP 等平台。
   - icon: 🚀

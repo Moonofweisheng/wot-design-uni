@@ -104,7 +104,7 @@ export default defineConfig({
 
         ]
       },
-      { text: '捐赠作者', link: '/reward/reward', activeMatch: '/reward/' },
+      { text: '🥤一杯咖啡', link: '/reward/reward', activeMatch: '/reward/' },
       {
         text: '相关链接',
         items: [
@@ -149,7 +149,7 @@ export default defineConfig({
       ],
       '/reward/': [
         {
-          text: '捐赠作者',
+          text: '🥤一杯咖啡',
           link: '/reward/reward',
         },
         {
