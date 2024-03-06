@@ -1,5 +1,5 @@
 <template>
-  <page-wraper>
+  <page-wraper :safeAreaInsetBottom="false">
     <wd-toast></wd-toast>
     <demo-block hor="0" title="基础用法" transparent>
       <wd-tabbar bordered @change="handleChange" v-model="tabbar0">

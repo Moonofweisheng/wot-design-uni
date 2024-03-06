@@ -1,5 +1,5 @@
 <template>
-  <view :style="{ height: addUnit(height) }">
+  <view :class="{ 'wd-tabbar__placeholder': fixed && placeholder && safeAreaInsetBottom }" :style="{ height: addUnit(height) }">
     <view
       :class="`wd-tabbar wd-tabbar--${shape} ${customClass} ${fixed ? 'is-fixed' : ''} ${safeAreaInsetBottom ? 'is-safe' : ''} ${
         bordered ? 'is-border' : ''
@@ -67,7 +67,7 @@ const props = withDefaults(defineProps<Props>(), {
   placeholder: false,
   zIndex: 99
 })
-const height = ref<number | ''>('') // 占位高度
+const height = ref<number | string>('') // 占位高度
 const { proxy } = getCurrentInstance() as any
 
 const { linkChildren } = useChildren(TABBAR_KEY)

@@ -7,7 +7,6 @@
   }
 }
 
-
 @include b(tabbar) {
   display: flex;
   align-items: center;
@@ -16,29 +15,19 @@
   background: $-color-white;
   height: $-tabbar-height;
 
+  @include e(placeholder) {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
   @include m(round) {
     margin-left: 32rpx;
     margin-right: 32rpx;
     border-radius: 999px;
     box-shadow: $-tabbar-box-shadow;
-
-    @include when(fixed) {
-      @include when(safe) {
-        bottom: constant(safe-area-inset-bottom);
-        bottom: env(safe-area-inset-bottom);
-      }
-    }
   }
 
   @include m(default) {
-
-    @include when(fixed) {
-      @include when(safe) {
-        padding-bottom: constant(safe-area-inset-bottom);
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-    }
-
     @include when(border) {
       @include halfPixelBorder('top');
     }
@@ -50,5 +39,10 @@
     bottom: 0;
     right: 0;
     z-index: 500;
+
+    @include when(safe) {
+      bottom: constant(safe-area-inset-bottom);
+      bottom: env(safe-area-inset-bottom);
+    }
   }
 }
