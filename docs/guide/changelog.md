@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.1.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.5...v1.1.6) (2024-03-06)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Tabar为round类型时开启safeAreaInsetBottom是样式异常的问题 ([aa9ae88](https://github.com/Moonofweisheng/wot-design-uni/commit/aa9ae88f35236dec15635bd8e4fd0c7023e5fb70))
+
 ### [1.1.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.4...v1.1.5) (2024-03-05)
 
 
