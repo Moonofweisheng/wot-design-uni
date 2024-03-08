@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:59
- * @LastEditTime: 2023-11-22 13:11:29
+ * @LastEditTime: 2024-03-08 23:55:25
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-badge\wd-badge.vue
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-badge/wd-badge.vue
  * 记得注释
 -->
 <template>
@@ -85,8 +85,6 @@ function notice() {
   content.value = value
 }
 </script>
-
-<script></script>
 
 <style lang="scss" scoped>
 @import './index.scss';
