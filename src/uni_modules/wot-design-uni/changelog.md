@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.1.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.6...v1.1.7) (2024-03-09)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复badge组件多出一个script标签的问题 ([e1819b4](https://github.com/Moonofweisheng/wot-design-uni/commit/e1819b4dbcb3dc1244bbe5641cdb538d0ad9c5e7)), closes [#188](https://github.com/Moonofweisheng/wot-design-uni/issues/188)
+
 ### [1.1.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.5...v1.1.6) (2024-03-06)
 
 
