@@ -92,6 +92,8 @@ const transitionEnded = ref<boolean>(false)
 const currentDuration = ref<number>(300)
 // 类名
 const classes = ref<string>('')
+// 用于控制enter和leave的顺序执行
+const enterPromise = ref<Promise<void> | null>(null)
 
 const emit = defineEmits(['click', 'before-enter', 'enter', 'before-leave', 'leave', 'after-leave', 'after-enter'])
 
@@ -128,41 +130,51 @@ function observerShow(value: boolean) {
 }
 
 function enter() {
-  const classNames = getClassNames(props.name)
-  const duration = isObj(props.duration) ? (props.duration as any).enter : props.duration
-  status.value = 'enter'
-  emit('before-enter')
+  if (enterPromise.value) return
+  enterPromise.value = new Promise((resolve) => {
+    const classNames = getClassNames(props.name)
+    const duration = isObj(props.duration) ? (props.duration as any).enter : props.duration
+    status.value = 'enter'
+    emit('before-enter')
 
-  requestAnimationFrame(() => {
-    emit('enter')
-    classes.value = classNames.enter
-    currentDuration.value = duration
     requestAnimationFrame(() => {
-      inited.value = true
-      display.value = true
+      emit('enter')
+      classes.value = classNames.enter
+      currentDuration.value = duration
       requestAnimationFrame(() => {
-        transitionEnded.value = false
-        classes.value = classNames['enter-to']
+        inited.value = true
+        display.value = true
+        requestAnimationFrame(() => {
+          transitionEnded.value = false
+          classes.value = classNames['enter-to']
+          resolve()
+        })
       })
     })
   })
 }
 function leave() {
-  if (!display.value) return
-  const classNames = getClassNames(props.name)
-  const duration = isObj(props.duration) ? (props.duration as any).leave : props.duration
-  status.value = 'leave'
-  emit('before-leave')
-
-  requestAnimationFrame(() => {
-    emit('leave')
-    classes.value = classNames.leave
-    currentDuration.value = duration
+  if (!enterPromise.value) return
+  enterPromise.value.then(() => {
+    if (!display.value) return
+    const classNames = getClassNames(props.name)
+    const duration = isObj(props.duration) ? (props.duration as any).leave : props.duration
+    status.value = 'leave'
+    emit('before-leave')
 
     requestAnimationFrame(() => {
-      transitionEnded.value = false
-      setTimeout(() => onTransitionEnd(), currentDuration.value)
-      classes.value = classNames['leave-to']
+      emit('leave')
+      classes.value = classNames.leave
+      currentDuration.value = duration
+
+      requestAnimationFrame(() => {
+        transitionEnded.value = false
+        setTimeout(() => {
+          onTransitionEnd()
+          enterPromise.value = null
+        }, currentDuration.value)
+        classes.value = classNames['leave-to']
+      })
     })
   })
 }
