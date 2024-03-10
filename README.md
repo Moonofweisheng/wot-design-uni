@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="logo" src="https://wot-design-uni.cn/wot-design.png" width="200">
+    <img alt="logo" src="https://wot-design-uni.gitee.io/wot-design.png" width="200">
 </p>
 <h1 align="center">Wot Design Uni</h1>
 
@@ -38,9 +38,9 @@
 </p>
 
 <p align="center">
-  ✈️ <a href="https://wot-design-uni.gitee.io/">文档网站 (国内)</a>&nbsp;
-  🚀 <a href="https://wot-design-uni.cn/">文档网站 (官网)</a>&nbsp;
-  🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (Netlify)</a>
+  ✈️ <a href="https://wot-design-uni.gitee.io/">文档网站 (国内推荐)</a>&nbsp;
+  🚀 <a href="https://wot-design-uni.cn">文档网站 (备用)</a>&nbsp;
+  🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (备用)</a>
 </p>
 
 ## ✨ 特性
@@ -58,19 +58,19 @@
 扫描二维码访问演示，注意：因微信审核机制限制，当前的微信小程序示例可能不是最新版本，可以clone代码到本地预览。
 
 <p>
-<img src="https://wot-design-uni.cn/wx.jpg" width="200" height="200" style="margin-right:30px"/>
-<img src="https://wot-design-uni.cn/alipay.png" width="200" height="200" />
+<img src="https://wot-design-uni.gitee.io/wx.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-design-uni.gitee.io/alipay.png" width="200" height="200" />
 </p>
 
 ## 快速上手
 
-详细说明见 [快速上手](https://wot-design-uni.cn/guide/quick-use.html)。
+详细说明见 [快速上手](https://wot-design-uni.gitee.io/guide/quick-use.html)。
 
 ## 链接
 
 * [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
-* [更新日志](https://wot-design-uni.cn/guide/changelog.html)
-* [常见问题](https://wot-design-uni.cn/guide/common-problems.html)
+* [更新日志](https://wot-design-uni.gitee.io/guide/changelog.html)
+* [常见问题](https://wot-design-uni.gitee.io/guide/common-problems.html)
 * [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
 * [QQ 群](https://qm.qq.com/cgi-bin/qm/qr?k=O1Z3pal6StL39qHtABqR54Tb56igr90O&jump_from=webapi&authKey=MtVWfi/EQbT03wW7tKXv4bmyKYHBHtzI8VewlzSsOdxFjN0wbgNy17np9Z9yC4Z8)
 * [快速上手项目](https://github.com/Moonofweisheng/wot-starter)
@@ -106,8 +106,8 @@
 ### 扫码捐赠
 
 <p>
-<img src="https://wot-design-uni.cn/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
-<img src="https://wot-design-uni.cn/alipayQrcode.jpg" width="200" height="200" />
+<img src="https://wot-design-uni.gitee.io/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-design-uni.gitee.io/alipayQrcode.jpg" width="200" height="200" />
 </p>
 
 ## LICENSE
