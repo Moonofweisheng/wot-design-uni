@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.1.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.7...v1.1.8) (2024-03-10)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复transitiont打开后立即关闭时无法关闭的问题 ([c1cebf6](https://github.com/Moonofweisheng/wot-design-uni/commit/c1cebf6de0b1c6a2f8a32aa4815adc8c0466eeca))
+
 ### [1.1.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.6...v1.1.7) (2024-03-09)
 
 
