@@ -10,6 +10,7 @@
         <slot v-else name="label"></slot>
       </view>
     </view>
+
     <!-- 文本域 -->
     <view :class="`wd-textarea__value ${customTextareaContainerClass} ${showWordCount ? 'is-show-limit' : ''}`">
       <textarea
@@ -48,13 +49,8 @@
       <view class="wd-textarea__suffix">
         <wd-icon v-if="showClear" custom-class="wd-textarea__clear" name="error-fill" @click="clear" />
         <view v-if="showWordCount" class="wd-textarea__count">
-          <text
-            :class="[
-              inputValue && String(inputValue).length > 0 ? 'wd-textarea__count-current' : '',
-              String(inputValue).length > parseInt(String(maxlength)) ? 'is-error' : ''
-            ]"
-          >
-            {{ String(inputValue).length }}
+          <text :class="countClass">
+            {{ currentLength }}
           </text>
           /{{ maxlength }}
         </view>
@@ -223,12 +219,17 @@ const isRequired = computed(() => {
   return props.required || props.rules.some((rule) => rule.required) || formRequired
 })
 
+// 当前文本域文字长度
+const currentLength = computed(() => {
+  return String(props.modelValue || '').length
+})
+
 const rootClass = computed(() => {
   return `wd-textarea   ${props.label || props.useLabelSlot ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${
     cell.border.value ? 'is-border' : ''
   } ${props.size ? 'is-' + props.size : ''} ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''} ${
     props.autoHeight ? 'is-auto-height' : ''
-  } ${inputValue.value && String(inputValue.value).length > 0 ? 'is-not-empty' : ''}  ${props.noBorder ? 'is-no-border' : ''} ${props.customClass}`
+  } ${currentLength.value > 0 ? 'is-not-empty' : ''}  ${props.noBorder ? 'is-no-border' : ''} ${props.customClass}`
 })
 
 const labelClass = computed(() => {
@@ -237,6 +238,10 @@ const labelClass = computed(() => {
 
 const inputPlaceholderClass = computed(() => {
   return `wd-textarea__placeholder  ${props.placeholderClass}`
+})
+
+const countClass = computed(() => {
+  return `${currentLength.value > 0 ? 'wd-textarea__count-current' : ''} ${currentLength.value > props.maxlength ? 'is-error' : ''}`
 })
 
 const labelStyle = computed(() => {
@@ -269,14 +274,18 @@ onBeforeMount(() => {
 // 状态初始化
 function initState() {
   const { disabled, readonly, clearable, maxlength, showWordLimit } = props
-  let newVal = ''
-  if (showWordLimit && maxlength && inputValue.value.toString().length > maxlength) {
-    newVal = inputValue.value.toString().substring(0, maxlength)
-  }
   showClear.value = Boolean(!disabled && !readonly && clearable && inputValue.value)
   showWordCount.value = Boolean(!disabled && !readonly && maxlength && showWordLimit)
-  inputValue.value = newVal || inputValue.value
+  inputValue.value = formatValue(inputValue.value as string)
   emit('update:modelValue', inputValue.value)
+}
+
+function formatValue(value: string) {
+  const { maxlength, showWordLimit } = props
+  if (showWordLimit && maxlength !== -1 && value.length > maxlength) {
+    return value.toString().substring(0, maxlength)
+  }
+  return value
 }
 
 function clear() {
@@ -316,6 +325,7 @@ function handleFocus({ detail }) {
 }
 // input事件需要传入
 function handleInput() {
+  inputValue.value = formatValue(inputValue.value as string)
   emit('update:modelValue', inputValue.value)
   emit('input', inputValue.value)
 }
