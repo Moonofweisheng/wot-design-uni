@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [1.1.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.8...v1.1.9) (2024-03-11)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  推荐使用托管在gitee上的文档地址 ([24ae6ca](https://github.com/Moonofweisheng/wot-design-uni/commit/24ae6cac05b150ff8da3ab47cc4bb3eeac48a369))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复textarea在微信小程序平台下部分安卓手机maxlength不生效的问题 ([512e63b](https://github.com/Moonofweisheng/wot-design-uni/commit/512e63b0ad30ff7acb14fffbb124dba59e34d450))
+
 ### [1.1.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.7...v1.1.8) (2024-03-10)
 
 
