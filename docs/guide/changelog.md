@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.1.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.9...v1.1.10) (2024-03-15)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复tabbar默认shape固定底部安全区无遮挡的问题 ([03048bb](https://github.com/Moonofweisheng/wot-design-uni/commit/03048bba17966e13e864c4a3d29047986778d586))
+
 ### [1.1.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.8...v1.1.9) (2024-03-11)
 
 
