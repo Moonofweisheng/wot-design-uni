@@ -37,7 +37,7 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { curtainProps } from './type'
+import { curtainProps } from './types'
 
 const props = defineProps(curtainProps)
 

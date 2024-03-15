@@ -48,8 +48,8 @@
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref } from 'vue'
 import { addUnit, isObj } from '../common/util'
-import { swiperProps, type SwiperList } from './type'
-import type { SwiperNavProps } from '../wd-swiper-nav/type'
+import { swiperProps, type SwiperList } from './types'
+import type { SwiperNavProps } from '../wd-swiper-nav/types'
 
 const props = defineProps(swiperProps)
 const navCurrent = ref<number>(0) // 当前滑块

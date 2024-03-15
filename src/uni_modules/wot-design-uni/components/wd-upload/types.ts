@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
-import type { LoadingType } from '../wd-loading/type'
+import type { LoadingType } from '../wd-loading/types'
 
 export interface ChooseFileOption {
   multiple: boolean

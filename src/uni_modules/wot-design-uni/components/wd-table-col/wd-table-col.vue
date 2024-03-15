@@ -29,7 +29,7 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, inject, onMounted } from 'vue'
 import { addUnit, isDef, objToStyle, isOdd } from '../common/util'
-import { tableColumnProps, type TableColumn } from './type'
+import { tableColumnProps, type TableColumn } from './types'
 
 const props = defineProps(tableColumnProps)
 

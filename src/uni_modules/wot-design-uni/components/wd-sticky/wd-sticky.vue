@@ -29,7 +29,7 @@ export default {
 <script lang="ts" setup>
 import { type Ref, computed, getCurrentInstance, inject, ref } from 'vue'
 import { addUnit, getRect, objToStyle, uuid } from '../common/util'
-import { stickyProps } from './type'
+import { stickyProps } from './types'
 
 const props = defineProps(stickyProps)
 const styckyId = ref<string>(`wd-sticky${uuid()}`)

@@ -18,7 +18,7 @@ export default {
 
 <script lang="ts" setup>
 import { useChildren } from '../composables/useChildren'
-import { SIDEBAR_KEY, sidebarProps } from './type'
+import { SIDEBAR_KEY, sidebarProps } from './types'
 
 const props = defineProps(sidebarProps)
 const { linkChildren } = useChildren(SIDEBAR_KEY)

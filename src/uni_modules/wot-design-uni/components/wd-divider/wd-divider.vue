@@ -19,7 +19,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { dividerProps } from './type'
+import { dividerProps } from './types'
 
 defineProps(dividerProps)
 </script>

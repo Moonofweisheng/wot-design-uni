@@ -53,11 +53,11 @@ export default {
 import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
-import type { PopupType } from '../wd-popup/type'
+import type { PopupType } from '../wd-popup/types'
 import { useParent } from '../composables/useParent'
-import { DROP_MENU_KEY } from '../wd-drop-menu/type'
+import { DROP_MENU_KEY } from '../wd-drop-menu/types'
 import { isDef } from '../common/util'
-import { dorpMenuItemProps } from './type'
+import { dorpMenuItemProps } from './types'
 
 const props = defineProps(dorpMenuItemProps)
 

@@ -28,8 +28,8 @@ export default {
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 import { ref, computed, watch } from 'vue'
-import type { SkeletonRowCol, SkeletonRowColObj } from './type'
-import { skeletonProps } from './type'
+import type { SkeletonRowCol, SkeletonRowColObj } from './types'
+import { skeletonProps } from './types'
 import { isNumber, addUnit } from '../common/util'
 
 const themeMap = {

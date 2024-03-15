@@ -33,7 +33,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch, nextTick } from 'vue'
 import { addUnit, buildUrlWithParams, isBase64Image, objToStyle, uuid } from '../common/util'
-import { watermarkProps } from './type'
+import { watermarkProps } from './types'
 
 const props = defineProps(watermarkProps)
 

@@ -77,7 +77,7 @@ import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
-import { textareaProps } from './type'
+import { textareaProps } from './types'
 
 const { translate } = useTranslate('textarea')
 

@@ -1,7 +1,6 @@
 import type { ExtractPropTypes, Prop, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeNumberProp, makeStringProp } from '../common/props'
-import { extend, getType } from '../common/util'
-import wdPickerView from './wd-picker-view.vue'
+import { getType } from '../common/util'
 
 export type ColumnItem = {
   [key: string]: any

@@ -28,7 +28,7 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, watch, type CSSProperties } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
-import { statusTipProps } from './type'
+import { statusTipProps } from './types'
 
 const props = defineProps(statusTipProps)
 

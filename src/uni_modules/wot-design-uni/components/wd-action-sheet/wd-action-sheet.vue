@@ -72,7 +72,7 @@ export default {
 
 <script lang="ts" setup>
 import { watch, ref } from 'vue'
-import { actionSheetProps, type Panel } from './type'
+import { actionSheetProps, type Panel } from './types'
 
 const props = defineProps(actionSheetProps)
 const formatPanels = ref<Array<Panel> | Array<Panel[]>>([])

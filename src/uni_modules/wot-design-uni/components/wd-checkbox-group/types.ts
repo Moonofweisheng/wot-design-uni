@@ -1,5 +1,5 @@
 import { type ExtractPropTypes, type InjectionKey, type PropType } from 'vue'
-import type { CheckShape } from '../wd-checkbox/type'
+import type { CheckShape } from '../wd-checkbox/types'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type RequiredModelValue = {

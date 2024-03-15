@@ -63,7 +63,7 @@ import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 import { getRect, isArray, isDef, uuid } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 import { watch } from 'vue'
-import { sliderProps } from './type'
+import { sliderProps } from './types'
 
 const props = defineProps(sliderProps)
 

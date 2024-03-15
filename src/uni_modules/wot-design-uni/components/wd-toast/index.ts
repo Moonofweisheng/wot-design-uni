@@ -1,5 +1,5 @@
 import { provide, ref } from 'vue'
-import type { Toast, ToastOptions } from './type'
+import type { Toast, ToastOptions } from './types'
 import { deepMerge } from '../common/util'
 
 /**

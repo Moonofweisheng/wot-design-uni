@@ -60,8 +60,8 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, provide, watch, reactive } from 'vue'
 import { addUnit, debounce, deepClone, isDef, objToStyle } from '../common/util'
-import type { SortDirection, TableColumn } from '../wd-table-col/type'
-import { tableProps } from './type'
+import type { SortDirection, TableColumn } from '../wd-table-col/types'
+import { tableProps } from './types'
 
 const props = defineProps(tableProps)
 

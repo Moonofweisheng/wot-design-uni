@@ -38,7 +38,7 @@ import { getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, 
 import { usePopover } from '../composables/usePopover'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
-import { tooltipProps } from './type'
+import { tooltipProps } from './types'
 
 const props = defineProps(tooltipProps)
 

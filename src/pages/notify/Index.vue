@@ -33,7 +33,7 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { NotifyType } from '@/uni_modules/wot-design-uni/components/wd-notify/type'
+import type { NotifyType } from '@/uni_modules/wot-design-uni/components/wd-notify/types'
 import { useNotify } from '@/uni_modules/wot-design-uni'
 
 let timer: ReturnType<typeof setTimeout>

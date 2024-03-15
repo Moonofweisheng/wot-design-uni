@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import { swiperNavprops } from './type'
+import { swiperNavprops } from './types'
 
 defineProps(swiperNavprops)
 

@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
-import type { SwiperNavProps } from '../wd-swiper-nav/type'
+import type { SwiperNavProps } from '../wd-swiper-nav/types'
 
 /**
  * 轮播滑动方向

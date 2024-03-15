@@ -18,7 +18,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj, requestAnimationFrame } from '../common/util'
-import { transitionProps } from './type'
+import { transitionProps } from './types'
 
 const getClassNames = (name?: string) => {
   if (!name) {

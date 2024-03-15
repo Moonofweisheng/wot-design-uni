@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeNumberProp, makeNumericProp, numericProp } from '../common/props'
-import type { BadgeProps } from '../wd-badge/type'
+import type { BadgeProps } from '../wd-badge/types'
 
 /**
  * 折叠面板子项

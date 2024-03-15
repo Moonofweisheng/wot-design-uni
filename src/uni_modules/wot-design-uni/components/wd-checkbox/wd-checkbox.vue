@@ -44,9 +44,9 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onBeforeMount, watch } from 'vue'
 import { useParent } from '../composables/useParent'
-import { CHECKBOX_GROUP_KEY } from '../wd-checkbox-group/type'
+import { CHECKBOX_GROUP_KEY } from '../wd-checkbox-group/types'
 import { isDef } from '../common/util'
-import { checkboxProps } from './type'
+import { checkboxProps } from './types'
 
 const props = defineProps(checkboxProps)
 const { parent: checkboxGroup, index } = useParent(CHECKBOX_GROUP_KEY)

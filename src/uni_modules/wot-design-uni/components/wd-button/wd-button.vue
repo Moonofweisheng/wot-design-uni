@@ -59,7 +59,7 @@ export default {
 import { computed, watch } from 'vue'
 import { ref } from 'vue'
 import base64 from '../common/base64'
-import { buttonProps } from './type'
+import { buttonProps } from './types'
 
 const loadingIcon = (color = '#4D80F0', reverse = true) => {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42"><defs><linearGradient x1="100%" y1="0%" x2="0%" y2="0%" id="a"><stop stop-color="${

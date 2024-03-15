@@ -42,7 +42,7 @@ export default {
 import { objToStyle } from '../common/util'
 import { computed, ref, watch } from 'vue'
 import { useTranslate } from '../composables/useTranslate'
-import { tagProps } from './type'
+import { tagProps } from './types'
 
 const props = defineProps(tagProps)
 

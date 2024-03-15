@@ -18,7 +18,7 @@ export default {
 import { watch } from 'vue'
 import { checkNumRange, deepClone } from '../common/util'
 import { useChildren } from '../composables/useChildren'
-import { CHECKBOX_GROUP_KEY, checkboxGroupProps } from './type'
+import { CHECKBOX_GROUP_KEY, checkboxGroupProps } from './types'
 
 const props = defineProps(checkboxGroupProps)
 

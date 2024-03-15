@@ -1,6 +1,6 @@
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
-import type { DirectionType, IndicatorPositionType } from '../wd-swiper/type'
+import type { DirectionType, IndicatorPositionType } from '../wd-swiper/types'
 
 /**
  * 指示器类型，点状(dots)、点条状(dots-bar)、分式(fraction)等

@@ -30,8 +30,8 @@ export default {
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useParent } from '../composables/useParent'
-import { SIDEBAR_KEY } from '../wd-sidebar/type'
-import { sidebarItemProps } from './type'
+import { SIDEBAR_KEY } from '../wd-sidebar/types'
+import { sidebarItemProps } from './types'
 
 const props = defineProps(sidebarItemProps)
 

@@ -22,10 +22,10 @@ export default {
 </script>
 <script lang="ts" setup>
 import { getCurrentInstance, onMounted, ref, watch, nextTick, computed, type CSSProperties } from 'vue'
-import type { TabbarItem } from '../wd-tabbar-item/type'
+import type { TabbarItem } from '../wd-tabbar-item/types'
 import { addUnit, getRect, isDef, objToStyle } from '../common/util'
 import { useChildren } from '../composables/useChildren'
-import { TABBAR_KEY, tabbarProps } from './type'
+import { TABBAR_KEY, tabbarProps } from './types'
 
 const props = defineProps(tabbarProps)
 const height = ref<number | string>('') // 占位高度

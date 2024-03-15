@@ -39,7 +39,7 @@ import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside
 import { type Queue, queueKey } from '../composables/useQueue'
 import { useTouch } from '../composables/useTouch'
 import { getRect } from '../common/util'
-import { swipeActionProps, type SwipeActionPosition, type SwipeActionReason, type SwipeActionStatus } from './type'
+import { swipeActionProps, type SwipeActionPosition, type SwipeActionReason, type SwipeActionStatus } from './types'
 
 const props = defineProps(swipeActionProps)
 

@@ -44,10 +44,10 @@ export default {
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useParent } from '../composables/useParent'
-import { STEPS_KEY } from '../wd-steps/type'
+import { STEPS_KEY } from '../wd-steps/types'
 import { isDef } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
-import { stepProps } from './type'
+import { stepProps } from './types'
 
 const props = defineProps(stepProps)
 

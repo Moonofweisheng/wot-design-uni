@@ -32,7 +32,7 @@ export default {
 // Circle 环形进度条
 import { computed, getCurrentInstance, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue'
 import { addUnit, isObj, objToStyle, uuid } from '../common/util'
-import { circleProps } from './type'
+import { circleProps } from './types'
 
 // 大于等于0且小于等于100
 function format(rate: number) {

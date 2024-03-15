@@ -26,8 +26,8 @@ export default {
 import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import { getRect, isArray, isDef, isPromise, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
-import { COLLAPSE_KEY } from '../wd-collapse/type'
-import { collpaseItemProps } from './type'
+import { COLLAPSE_KEY } from '../wd-collapse/types'
+import { collpaseItemProps } from './types'
 
 const $body = '.wd-collapse-item__body'
 

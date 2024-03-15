@@ -34,7 +34,7 @@ export default {
 import { computed, inject, onBeforeMount, ref, watch } from 'vue'
 import base64 from '../common/base64'
 import { defaultOptions, toastDefaultOptionKey, toastIcon } from '.'
-import { toastProps, type ToastLoadingType, type ToastOptions } from './type'
+import { toastProps, type ToastLoadingType, type ToastOptions } from './types'
 import { isDef, objToStyle } from '../common/util'
 
 const props = defineProps(toastProps)

@@ -22,7 +22,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { badgeProps } from './type'
+import { badgeProps } from './types'
 
 const props = defineProps(badgeProps)
 const content = ref<number | string | null>(null)

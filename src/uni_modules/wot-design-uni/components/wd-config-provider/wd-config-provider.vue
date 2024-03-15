@@ -26,7 +26,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { configProviderProps } from './type'
+import { configProviderProps } from './types'
 
 const props = defineProps(configProviderProps)
 

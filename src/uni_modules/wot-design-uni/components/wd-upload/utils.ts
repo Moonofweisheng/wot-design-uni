@@ -1,4 +1,4 @@
-import type { ChooseFileOption } from './type'
+import type { ChooseFileOption } from './types'
 
 // 后续会对外暴露选中视频文件
 export function chooseFile({ multiple, sizeType, sourceType, maxCount }: ChooseFileOption) {

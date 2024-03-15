@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeRequiredProp } from '../common/props'
-import type { BadgeProps } from '../wd-badge/type'
+import type { BadgeProps } from '../wd-badge/types'
 
 export const sidebarItemProps = {
   ...baseProps,

@@ -17,7 +17,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount } from 'vue'
 import { addUnit, getType, objToStyle } from '../common/util'
-import { switchProps } from './type'
+import { switchProps } from './types'
 
 const props = defineProps(switchProps)
 

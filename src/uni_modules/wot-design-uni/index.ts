@@ -27,4 +27,4 @@ export * as clickOut from './components/common/clickoutside'
 
 export * from './locale'
 
-export type { ConfigProviderThemeVars } from './components/wd-config-provider/type'
+export type { ConfigProviderThemeVars } from './components/wd-config-provider/types'

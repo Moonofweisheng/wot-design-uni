@@ -55,7 +55,7 @@ import { ref, watch } from 'vue'
 import { context, getType, isDef, isEqual } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
-import { uploadProps, type UploadFileItem } from './type'
+import { uploadProps, type UploadFileItem } from './types'
 
 const props = defineProps(uploadProps)
 

@@ -19,9 +19,9 @@ export default {
 import { getCurrentInstance, ref, watch } from 'vue'
 import { getType, isDef } from '../common/util'
 import { useParent } from '../composables/useParent'
-import { TABS_KEY } from '../wd-tabs/type'
+import { TABS_KEY } from '../wd-tabs/types'
 import { computed } from 'vue'
-import { tabProps } from './type'
+import { tabProps } from './types'
 
 const props = defineProps(tabProps)
 

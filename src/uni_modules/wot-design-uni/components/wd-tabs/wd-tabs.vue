@@ -138,7 +138,7 @@ export default {
 import { computed, getCurrentInstance, onMounted, ref, watch, nextTick, reactive } from 'vue'
 import { checkNumRange, debounce, getRect, getType, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
-import { TABS_KEY, tabsProps } from './type'
+import { TABS_KEY, tabsProps } from './types'
 import { useChildren } from '../composables/useChildren'
 import { useTranslate } from '../composables/useTranslate'
 

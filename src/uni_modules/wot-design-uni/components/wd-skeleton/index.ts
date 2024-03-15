@@ -1,1 +1,1 @@
-export type { SkeletonThemeVars } from './type'
+export type { SkeletonThemeVars } from './types'

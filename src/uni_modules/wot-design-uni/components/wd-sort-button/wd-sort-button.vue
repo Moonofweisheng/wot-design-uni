@@ -24,7 +24,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { sortButtonProps } from './type'
+import { sortButtonProps } from './types'
 
 const props = defineProps(sortButtonProps)
 

@@ -44,7 +44,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isArray, isEqual, range } from '../common/util'
-import { type ColumnItem, formatArray, pickerViewProps } from './type'
+import { type ColumnItem, formatArray, pickerViewProps } from './types'
 
 // interface Props {
 //   customClass?: string

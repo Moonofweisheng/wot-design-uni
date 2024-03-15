@@ -29,7 +29,7 @@ import { computed, watch } from 'vue'
 import { ref } from 'vue'
 import { useParent } from '../composables/useParent'
 import { ROW_KEY } from '../wd-row/types'
-import { colProps } from './type'
+import { colProps } from './types'
 
 const props = defineProps(colProps)
 

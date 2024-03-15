@@ -27,8 +27,8 @@ export default {
 import { type CSSProperties, computed } from 'vue'
 import { isDef, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
-import { TABBAR_KEY } from '../wd-tabbar/type'
-import { tabbarItemProps } from './type'
+import { TABBAR_KEY } from '../wd-tabbar/types'
+import { tabbarItemProps } from './types'
 
 const props = defineProps(tabbarItemProps)
 

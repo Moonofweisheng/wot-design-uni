@@ -20,7 +20,7 @@ export default {
 import { watch, computed } from 'vue'
 import { parseFormat } from './utils'
 import { useCountDown } from '../composables/useCountDown'
-import { countDownProps } from './type'
+import { countDownProps } from './types'
 
 const props = defineProps(countDownProps)
 

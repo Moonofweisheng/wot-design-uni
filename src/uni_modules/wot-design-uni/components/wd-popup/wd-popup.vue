@@ -29,7 +29,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj, requestAnimationFrame } from '../common/util'
-import type { PopupType } from './type'
+import type { PopupType } from './types'
 
 interface Props {
   transition?: string

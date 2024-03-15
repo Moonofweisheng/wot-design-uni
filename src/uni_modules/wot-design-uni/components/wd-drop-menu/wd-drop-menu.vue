@@ -39,7 +39,7 @@ import { closeOther } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { getRect, uuid } from '../common/util'
 import { useChildren } from '../composables/useChildren'
-import { DROP_MENU_KEY, dropMenuProps } from './type'
+import { DROP_MENU_KEY, dropMenuProps } from './types'
 
 const props = defineProps(dropMenuProps)
 const queue = inject<Queue | null>(queueKey, null)
