@@ -65,20 +65,20 @@ const fileList2 = ref<any[]>([
     url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
   }
 ])
-const fileList3 = ref<Record<string, any>[]>([])
-const fileList4 = ref<Record<string, any>[]>([])
-const fileList5 = ref<Record<string, any>[]>([])
-const fileList6 = ref<Record<string, any>[]>([])
-const fileList7 = ref<Record<string, any>[]>([])
-const fileList8 = ref<Record<string, any>[]>([])
-const fileList9 = ref<Record<string, any>[]>([])
-const fileList10 = ref<Record<string, any>[]>([])
-const fileList11 = ref<Record<string, any>[]>([])
+const fileList3 = ref([])
+const fileList4 = ref([])
+const fileList5 = ref([])
+const fileList6 = ref([])
+const fileList7 = ref([])
+const fileList8 = ref([])
+const fileList9 = ref([])
+const fileList10 = ref([])
+const fileList11 = ref([])
 
 const messageBox = useMessage()
 const toast = useToast()
 
-const beforeChoose = (file, resolve) => {
+const beforeChoose = ({ file, resolve }: any) => {
   messageBox
     .confirm({
       msg: '是否选择',
@@ -92,7 +92,7 @@ const beforeChoose = (file, resolve) => {
     })
 }
 
-const beforePreview = ({ file, resolve }) => {
+const beforePreview = ({ resolve }: any) => {
   messageBox
     .confirm({
       msg: '是否预览图片',
@@ -105,7 +105,7 @@ const beforePreview = ({ file, resolve }) => {
       toast.show('取消预览操作')
     })
 }
-const beforeUpload = ({ files, resolve }) => {
+const beforeUpload = ({ files, resolve }: any) => {
   messageBox
     .confirm({
       msg: '是否上传',
@@ -119,7 +119,7 @@ const beforeUpload = ({ files, resolve }) => {
       toast.show('取消上传操作')
     })
 }
-const beforeRemove = ({ file, fileList, resolve }) => {
+const beforeRemove = ({ file, fileList, resolve }: any) => {
   messageBox
     .confirm({
       msg: '是否删除',
@@ -134,7 +134,7 @@ const beforeRemove = ({ file, fileList, resolve }) => {
     })
 }
 
-const buildFormData = ({ file, formData, resolve }) => {
+const buildFormData = ({ file, formData, resolve }: any) => {
   let imageName = file.url.substring(file.url.lastIndexOf('/') + 1)
   // #ifdef H5
   // h5端url中不包含扩展名，可以拼接一下name
@@ -157,56 +157,56 @@ const buildFormData = ({ file, formData, resolve }) => {
   resolve(formData)
 }
 
-const handleSuccess1 = (res) => {
+const handleSuccess1 = (res: any) => {
   console.log('成功', res)
 }
-const handleFail1 = (res) => {
+const handleFail1 = (res: any) => {
   console.log('失败', res)
 }
-const handleProgess1 = (res) => {
+const handleProgess1 = (res: any) => {
   console.log('加载中', res)
 }
 
-function handleSuccess(event) {
+function handleSuccess(event: any) {
   console.log('成功', event)
 }
-function handleFail(event) {
+function handleFail(event: any) {
   console.log('失败', event)
 }
-function handleProgess(event) {
+function handleProgess(event: any) {
   console.log('加载中', event)
 }
-function handleChange1({ fileList }) {
+function handleChange1({ fileList }: any) {
   fileList1.value = fileList
 }
-function handleChange2({ fileList }) {
+function handleChange2({ fileList }: any) {
   fileList2.value = fileList
 }
-function handleChange3({ fileList }) {
+function handleChange3({ fileList }: any) {
   fileList3.value = fileList
 }
-function handleChange4({ fileList }) {
+function handleChange4({ fileList }: any) {
   fileList4.value = fileList
 }
-function handleChange5({ fileList }) {
+function handleChange5({ fileList }: any) {
   fileList5.value = fileList
 }
-function handleChange6({ fileList }) {
+function handleChange6({ fileList }: any) {
   fileList6.value = fileList
 }
-function handleChange7({ fileList }) {
+function handleChange7({ fileList }: any) {
   fileList7.value = fileList
 }
-function handleChange8({ fileList }) {
+function handleChange8({ fileList }: any) {
   fileList8.value = fileList
 }
-function handleChange9({ fileList }) {
+function handleChange9({ fileList }: any) {
   fileList9.value = fileList
 }
-function handleChange10({ fileList }) {
+function handleChange10({ fileList }: any) {
   fileList10.value = fileList
 }
-function handleChange11({ fileList }) {
+function handleChange11({ fileList }: any) {
   fileList11.value = fileList
 }
 </script>

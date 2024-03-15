@@ -38,50 +38,9 @@ import { getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, 
 import { usePopover } from '../composables/usePopover'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
+import { tooltipProps } from './type'
 
-type PlacementType =
-  | 'top'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left'
-  | 'left-start'
-  | 'left-end'
-  | 'right'
-  | 'right-start'
-  | 'right-end'
-
-interface Props {
-  customStyle?: string
-  customArrow?: string
-  customPop?: string
-  customClass?: string
-  // 是否显示 popover 箭头
-  visibleArrow?: boolean
-  // 显示内容
-  content?: Record<string, any>[] | string
-  placement?: PlacementType
-  offset?: number
-  useContentSlot?: boolean
-  disabled?: boolean
-  showClose?: boolean
-  modelValue: boolean
-}
-const props = withDefaults(defineProps<Props>(), {
-  customStyle: '',
-  customClass: '',
-  customPop: '',
-  customArrow: '',
-  visibleArrow: true,
-  placement: 'bottom',
-  offset: 0,
-  useContentSlot: false,
-  disabled: false,
-  showClose: false,
-  modelValue: false
-})
+const props = defineProps(tooltipProps)
 
 const popover = usePopover()
 const queue = inject<Queue | null>(queueKey, null)
@@ -138,7 +97,7 @@ onBeforeUnmount(() => {
   }
 })
 
-function toggle(event) {
+function toggle() {
   if (props.disabled) return
   emit('update:modelValue', !props.modelValue)
 }

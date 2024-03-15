@@ -104,7 +104,7 @@ function handleClose() {
   emit('close')
 }
 
-function initAnimation(duration, delay, translate) {
+function initAnimation(duration: number, delay: number, translate: number) {
   const ani = uni
     .createAnimation({
       duration,

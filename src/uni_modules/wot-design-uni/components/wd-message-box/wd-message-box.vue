@@ -247,7 +247,7 @@ function validate() {
  * @description show关闭时，销毁错误提示
  * @param val
  */
-function resetErr(val) {
+function resetErr(val: boolean) {
   if (val === false) {
     showErr.value = false
   }

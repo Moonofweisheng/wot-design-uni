@@ -423,7 +423,7 @@ const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'upda
  * @param {Component} picker datetimePickerView对象
  * @return {Array} columns
  */
-const customColumnFormatter = (picker) => {
+const customColumnFormatter = (picker: any) => {
   if (!picker) {
     return
   }
@@ -755,7 +755,7 @@ function defaultDisplayFormat(items, tabLabel = false) {
 
 /**
  * @description 区域选择time禁用规则，根据传入的位置标志以及日期类型 返回该节点是否禁用
- * @param {String} isStart 时间段类型 true：start | false：end
+ * @param {Boolean} isStart 时间段类型 true：start | false：end
  * @param {Array} column 当前遍历到的列数组
  * @param {Number} cindex 外层column的索引（对应每一个类型）
  * @param {Number / String} value 遍历到的当前值
@@ -763,7 +763,7 @@ function defaultDisplayFormat(items, tabLabel = false) {
  * @param {Array} boundary 当前变量的限制值，决定禁用的边界值
  * @return {Boolean} disabled
  */
-function columnDisabledRules(isStart, columns, cIndex, value, currentValue, boundary) {
+function columnDisabledRules(isStart: boolean, columns, cIndex, value, currentValue, boundary) {
   const { type } = props
   // 0年 1月 2日 3時 4分
   // startPicker 除最小值外 还需要有一个时间限制, endPicker 时间选择后, startPicker 的 添加一个时间限制boundary min->boundary
@@ -831,7 +831,7 @@ function columnDisabledRules(isStart, columns, cIndex, value, currentValue, boun
   return false
 }
 
-function setLoading(loading) {
+function setLoading(loading: boolean) {
   isLoading.value = loading
 }
 

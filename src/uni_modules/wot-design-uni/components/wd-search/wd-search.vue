@@ -197,7 +197,7 @@ function clearSearch() {
  * @description 点击搜索按钮时的handle
  * @param value
  */
-function search({ detail: { value } }) {
+function search({ detail: { value } }: any) {
   // 组件触发search事件
   emit('search', {
     value

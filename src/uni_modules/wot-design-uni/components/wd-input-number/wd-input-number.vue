@@ -113,17 +113,17 @@ function updateBoundary() {
   }, 30)()
 }
 
-function splitDisabled(value) {
+function splitDisabled(value: number | string) {
   const { disabled, min, max, step } = props
-  minDisabled.value = disabled || value <= min || changeStep(value, -step) < min
-  maxDisabled.value = disabled || value >= max || changeStep(value, step) > max
+  minDisabled.value = disabled || Number(value) <= min || changeStep(value, -step) < min
+  maxDisabled.value = disabled || Number(value) >= max || changeStep(value, step) > max
 }
 
 function toPrecision(value: number) {
   return Number(parseFloat(`${Math.round(value * Math.pow(10, props.precision)) / Math.pow(10, props.precision)}`).toFixed(props.precision))
 }
 
-function getPrecision(value) {
+function getPrecision(value?: number) {
   if (value === undefined) return 0
   const valueString = value.toString()
   const dotPosition = valueString.indexOf('.')
@@ -134,10 +134,10 @@ function getPrecision(value) {
   return precision
 }
 
-function toStrictlyStep(value) {
+function toStrictlyStep(value: number | string) {
   const stepPrecision = getPrecision(props.step)
   const precisionFactory = Math.pow(10, stepPrecision)
-  return (Math.round(value / props.step) * precisionFactory * props.step) / precisionFactory
+  return (Math.round(Number(value) / props.step) * precisionFactory * props.step) / precisionFactory
 }
 
 function setValue(value: string | number, change: boolean = true) {
@@ -185,12 +185,12 @@ function add() {
   dispatchChangeEvent(newValue)
 }
 
-function handleInput(event) {
+function handleInput(event: any) {
   const value = event.detail.value || ''
   dispatchChangeEvent(value)
 }
 
-function handleFocus(event) {
+function handleFocus(event: any) {
   emit('focus', event.detail)
 }
 
@@ -229,7 +229,7 @@ function formatValue(value: string | number) {
     value = value.toFixed(props.precision)
   }
 
-  return value
+  return Number(value)
 }
 </script>
 

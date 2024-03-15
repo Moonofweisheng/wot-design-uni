@@ -158,13 +158,13 @@ function controlProgress() {
    */
   let colorArray: string[] | Record<string, any>[] = (isArray(color) ? color : [color]) as string[] | Record<string, any>[]
   if (colorArray.length === 0) throw Error('The colorArray is empty')
-  const isStrArray = (colorArray as any).every((item) => typeof item === 'string')
+  const isStrArray = (colorArray as any).every((item: any) => typeof item === 'string')
   // eslint-disable-next-line no-prototype-builtins
-  const isObjArray = (colorArray as any).every((color) => color.hasOwnProperty('color') && color.hasOwnProperty('percentage'))
+  const isObjArray = (colorArray as any).every((color: any) => color.hasOwnProperty('color') && color.hasOwnProperty('percentage'))
   if (!isStrArray && !isObjArray) {
     throw Error('Color must be String or Object with color and percentage')
   }
-  if (isObjArray && (colorArray as any).some(({ percentage }) => Number.isNaN(parseInt(percentage)))) {
+  if (isObjArray && (colorArray as any).some(({ percentage }: any) => Number.isNaN(parseInt(percentage)))) {
     throw Error('All the percentage must can be formatted to Number')
   }
   /**
@@ -172,7 +172,7 @@ function controlProgress() {
    */
   const partNum = parseInt(`${100 / colorArray.length}`)
   const partList = isObjArray
-    ? colorArray.sort((a, b) => a.percentage - b.percentage)
+    ? colorArray.sort((a: any, b: any) => a.percentage - b.percentage)
     : colorArray.map((item, index) => {
         return {
           color: item,
@@ -184,14 +184,14 @@ function controlProgress() {
    */
   showPercent.value > percentage
     ? // 减小不加动画，找到第一个比target大的锚点，取锚点颜色并设置target值
-      partList.some((part) => {
+      partList.some((part: any) => {
         if (percentage <= part.percentage) {
           update(percentage, part.color)
           return true
         }
       })
     : // 增加使用分段动画
-      partList.some((part, index) => {
+      partList.some((part: any, index: number) => {
         if (showPercent.value < part.percentage && part.percentage <= percentage) {
           // 找到第一个比now大的点，如果这个点比target小或等，就把这个点设置为下一个即将展示的点
           update(part.percentage, part.color)

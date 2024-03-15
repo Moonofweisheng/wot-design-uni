@@ -39,20 +39,9 @@ import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside
 import { type Queue, queueKey } from '../composables/useQueue'
 import { useTouch } from '../composables/useTouch'
 import { getRect } from '../common/util'
+import { swipeActionProps, type SwipeActionPosition, type SwipeActionReason, type SwipeActionStatus } from './type'
 
-interface Props {
-  customClass?: string
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeClose?: Function
-  disabled?: boolean
-  modelValue?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customStyle: '',
-  modelValue: 'close',
-  disabled: false
-})
+const props = defineProps(swipeActionProps)
 
 const queue = inject<Queue | null>(queueKey, null)
 
@@ -109,7 +98,7 @@ onBeforeUnmount(() => {
 
 const emit = defineEmits(['click', 'update:modelValue'])
 
-function changeState(value: string, old?: string) {
+function changeState(value: SwipeActionStatus, old?: SwipeActionStatus) {
   if (props.disabled) {
     return
   }
@@ -166,7 +155,7 @@ function swipeMove(offset = 0) {
  * @description click的handler
  * @param event
  */
-function onClick(position?: string) {
+function onClick(position?: SwipeActionPosition) {
   if (props.disabled || wrapperOffset.value === 0) {
     return
   }
@@ -180,7 +169,7 @@ function onClick(position?: string) {
 /**
  * @description 开始滑动
  */
-function startDrag(event) {
+function startDrag(event: TouchEvent) {
   if (props.disabled) return
 
   originOffset.value = wrapperOffset.value
@@ -195,7 +184,7 @@ function startDrag(event) {
  * @description 滑动时，逐渐展示按钮
  * @param event
  */
-function onDrag(event) {
+function onDrag(event: TouchEvent) {
   if (props.disabled) return
 
   touch.touchMove(event)
@@ -276,7 +265,7 @@ function endDrag() {
 /**
  * @description 关闭操过按钮，并在合适的时候调用 beforeClose
  */
-function close(reason, position?: string) {
+function close(reason: SwipeActionReason, position?: SwipeActionPosition) {
   if (reason === 'swipe' && originOffset.value === 0) {
     // offset：0 ——> offset：0
     return swipeMove(0)

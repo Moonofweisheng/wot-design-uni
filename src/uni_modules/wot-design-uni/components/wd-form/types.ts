@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-01-03 21:46:58
+ * @LastEditTime: 2024-03-15 17:39:58
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-form/types.ts
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-form\type.ts
  * 记得注释
  */
 import { type InjectionKey } from 'vue'

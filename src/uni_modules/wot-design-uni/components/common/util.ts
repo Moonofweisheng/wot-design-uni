@@ -374,7 +374,7 @@ export function isBase64Image(url: string) {
  * @param {object | object[]} styles 外部传入的样式对象或数组
  * @returns {string} 格式化后的 CSS 样式字符串
  */
-export function objToStyle(styles: object | object[]): string {
+export function objToStyle(styles: Record<string, any> | Record<string, any>[]): string {
   // 如果 styles 是数组类型
   if (isArray(styles)) {
     // 使用过滤函数去除空值和 null 值的元素
@@ -633,3 +633,5 @@ export const getPropByPath = (obj: any, path: string): any => {
     return undefined
   }
 }
+
+export const extend = Object.assign

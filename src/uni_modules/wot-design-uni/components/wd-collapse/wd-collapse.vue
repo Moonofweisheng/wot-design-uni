@@ -42,7 +42,7 @@ export default {
 
 <script lang="ts" setup>
 import { onBeforeMount, ref, watch } from 'vue'
-import { COLLAPSE_KEY, type CollapseToggleAllOptions } from './types'
+import { COLLAPSE_KEY, type CollapseToggleAllOptions } from './type'
 import { useChildren } from '../composables/useChildren'
 import { isArray, isDef } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
@@ -165,3 +165,4 @@ defineExpose({
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+./type

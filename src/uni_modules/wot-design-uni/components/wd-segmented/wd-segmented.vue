@@ -125,7 +125,7 @@ const emit = defineEmits(['update:value', 'change'])
 function updateActiveStyle() {
   getRect($item, true, proxy).then((rects: any) => {
     const rect = rects[activeIndex.value]
-    let left = rects.slice(0, activeIndex.value).reduce((prev, curr) => prev + curr.width, 0)
+    let left = rects.slice(0, activeIndex.value).reduce((prev: any, curr: any) => prev + curr.width, 0)
     left += (rect.width - sectionItemInfo.width) / 2
     const transition = 'all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)'
     const style: CSSProperties = {

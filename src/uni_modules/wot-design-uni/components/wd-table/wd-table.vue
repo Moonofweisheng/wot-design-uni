@@ -60,41 +60,10 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, provide, watch, reactive } from 'vue'
 import { addUnit, debounce, deepClone, isDef, objToStyle } from '../common/util'
-import type { SortDirection, TableColumn } from '../wd-table-col/types'
+import type { SortDirection, TableColumn } from '../wd-table-col/type'
+import { tableProps } from './type'
 
-interface Props {
-  // 显示的数据
-  data: Array<any>
-  // 是否带有边框
-  border?: boolean
-  // 是否为斑马纹 table
-  stripe?: boolean
-  // Table 的高度
-  height?: string
-  // 行高
-  rowHeight?: number | string
-  // 是否显示表头
-  showHeader?: boolean
-  // 是否超出2行隐藏
-  ellipsis?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  // 显示的数据
-  data: () => [],
-  // table行是否为斑马纹
-  stripe: true,
-  // 是否显示边框
-  border: true,
-  // table高度
-  height: '80vh',
-  // 行高
-  rowHeight: 50,
-  // 是否显示表头
-  showHeader: true,
-  // 是否超出2行隐藏
-  ellipsis: true
-})
+const props = defineProps(tableProps)
 
 watch(
   () => props.data,
@@ -165,7 +134,7 @@ const reactiveState = reactive({
   setColumns
 })
 
-const scroll = debounce(handleScroll, 100, false) // 滚动事件
+const scroll = debounce(handleScroll, 100, { leading: false }) // 滚动事件
 
 provide('wdTable', reactiveState)
 
@@ -269,7 +238,7 @@ function handleSortChange(value: SortDirection, index: number) {
 /**
  * 滚动事件
  */
-function handleScroll(event) {
+function handleScroll(event: any) {
   if (!props.showHeader) {
     return
   }
@@ -284,3 +253,4 @@ function setRowClick(index: number) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+../wd-table-col/type

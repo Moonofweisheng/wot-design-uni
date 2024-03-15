@@ -424,3 +424,4 @@ function handleIconClick() {
   font-size: 12px !important;
 }
 </style>
+@/uni_modules/wot-design-uni/components/wd-form/type

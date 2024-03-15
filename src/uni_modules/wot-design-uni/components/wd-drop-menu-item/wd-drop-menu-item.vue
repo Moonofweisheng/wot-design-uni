@@ -55,38 +55,11 @@ import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import type { PopupType } from '../wd-popup/type'
 import { useParent } from '../composables/useParent'
-import { DROP_MENU_KEY } from '../wd-drop-menu/types'
+import { DROP_MENU_KEY } from '../wd-drop-menu/type'
 import { isDef } from '../common/util'
+import { dorpMenuItemProps } from './type'
 
-interface Props {
-  customClass?: string
-  customTitle?: string
-  customIcon?: string
-  // 当前选中的value
-  modelValue?: string | number
-  // 可能是 array || String
-  options?: Array<Record<string, any>>
-  useDropItemSlot?: boolean
-  disabled?: boolean
-  iconName?: string
-  title?: string
-  valueKey?: string
-  labelKey?: string
-  tipKey?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customTitle: '',
-  customIcon: '',
-  options: () => [],
-  useDropItemSlot: false,
-  disabled: false,
-  iconName: 'check',
-  valueKey: 'value',
-  labelKey: 'label',
-  tipKey: 'tip'
-})
+const props = defineProps(dorpMenuItemProps)
 
 const queue = inject<Queue | null>(queueKey, null)
 const showWrapper = ref<boolean>(false)

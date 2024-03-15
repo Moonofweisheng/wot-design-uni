@@ -1,20 +1,41 @@
-/*
- * @Author: weisheng
- * @Date: 2023-08-21 13:03:42
- * @LastEditTime: 2023-08-21 17:24:57
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-picker-view\type.ts
- * 记得注释
- */
-
-import { getType } from '../common/util'
+import type { ExtractPropTypes, Prop, PropType } from 'vue'
+import { baseProps, makeArrayProp, makeNumberProp, makeStringProp } from '../common/props'
+import { extend, getType } from '../common/util'
+import wdPickerView from './wd-picker-view.vue'
 
 export type ColumnItem = {
+  [key: string]: any
   value?: string | number | boolean
   label?: string
   disabled?: boolean
 }
+
+export type PickerViewColumnChange = (
+  pickerView: any,
+  selects: Record<string, any> | Record<string, any>[],
+  index: number,
+  reslove?: () => void
+) => void
+
+export const pickerViewProps = {
+  ...baseProps,
+  loading: { type: Boolean, default: false },
+  loadingColor: makeStringProp('#4D80F0'),
+  columnsHeight: makeNumberProp(217),
+  valueKey: makeStringProp('value'),
+  labelKey: makeStringProp('label'),
+  modelValue: {
+    type: [String, Number, Boolean, Array<number>, Array<string>, Array<boolean>] as PropType<
+      string | number | boolean | Array<number> | Array<string> | Array<boolean>
+    >,
+    default: '',
+    required: true
+  },
+  columns: makeArrayProp<string | number | ColumnItem | Array<number> | Array<string> | Array<ColumnItem>>(),
+  columnChange: Function as PropType<PickerViewColumnChange>
+}
+
+export type PickerViewProps = ExtractPropTypes<typeof pickerViewProps>
 
 /**
  * @description 为props的value为array类型时提供format
@@ -67,11 +88,11 @@ export function formatArray(array: Array<string | number | ColumnItem | Array<st
       }
       // eslint-disable-next-line no-prototype-builtins
       if (!row.hasOwnProperty(labelKey)) {
-        row[labelKey] = row[valueKey]
+        ;(row as ColumnItem)[labelKey] = (row as ColumnItem)[valueKey]
       }
       // eslint-disable-next-line no-prototype-builtins
       if (!row.hasOwnProperty(valueKey)) {
-        row[valueKey] = row[labelKey]
+        ;(row as ColumnItem)[valueKey] = (row as ColumnItem)[labelKey]
       }
       return row as ColumnItem
     })

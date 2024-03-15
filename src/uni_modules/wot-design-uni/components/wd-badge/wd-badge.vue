@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-12 18:40:59
- * @LastEditTime: 2024-03-08 23:55:25
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-badge/wd-badge.vue
- * 记得注释
--->
 <template>
   <view :class="['wd-badge', customClass]" :style="customStyle">
     <slot></slot>
@@ -31,27 +22,9 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
-interface Props {
-  modelValue?: number | string | null
-  /** 当数值为 0 时，是否展示徽标 */
-  showZero?: boolean
-  bgColor?: string
-  max?: number
-  isDot?: boolean
-  hidden?: boolean
-  type?: BadgeType
-  top?: number
-  right?: number
-  customClass?: string
-  customStyle?: string
-}
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customStyle: '',
-  modelValue: null,
-  showZero: false
-})
+import { badgeProps } from './type'
+
+const props = defineProps(badgeProps)
 const content = ref<number | string | null>(null)
 
 watch(

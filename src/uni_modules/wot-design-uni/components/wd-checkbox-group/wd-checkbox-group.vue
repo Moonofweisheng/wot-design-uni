@@ -18,33 +18,9 @@ export default {
 import { watch } from 'vue'
 import { checkNumRange, deepClone } from '../common/util'
 import { useChildren } from '../composables/useChildren'
-import { CHECKBOX_GROUP_KEY } from './types'
+import { CHECKBOX_GROUP_KEY, checkboxGroupProps } from './type'
 
-type checkShape = 'circle' | 'square' | 'button'
-interface Props {
-  customClass?: string
-  modelValue: Array<string | number | boolean>
-  cell?: boolean
-  shape?: checkShape
-  checkedColor?: string
-  disabled?: boolean
-  min?: number
-  max?: number
-  inline?: boolean
-  size?: string
-  name?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  modelValue: () => [],
-  cell: false,
-  shape: 'circle',
-  disabled: false,
-  min: 0,
-  max: 0,
-  inline: false
-})
+const props = defineProps(checkboxGroupProps)
 
 const { linkChildren } = useChildren(CHECKBOX_GROUP_KEY)
 

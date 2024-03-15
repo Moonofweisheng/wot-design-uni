@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-10-12 12:41:02
+ * @LastEditTime: 2024-03-13 16:26:08
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-icon\wd-icon.vue
+ * 记得注释
+-->
 <template>
   <view @click="handleClick" :class="rootClass" :style="rootStyle">
     <image v-if="isImageUrl" class="wd-icon__image" :src="name"></image>
@@ -61,8 +70,8 @@ const rootStyle = computed(() => {
 
 const emit = defineEmits(['click'])
 
-function handleClick(e) {
-  emit('click', e)
+function handleClick(event: any) {
+  emit('click', event)
 }
 </script>
 

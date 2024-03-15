@@ -27,48 +27,10 @@ export default {
 import { type CSSProperties, computed } from 'vue'
 import { isDef, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
-import { TABBAR_KEY } from '../wd-tabbar/types'
+import { TABBAR_KEY } from '../wd-tabbar/type'
+import { tabbarItemProps } from './type'
 
-type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
-interface BadgeProps {
-  modelValue?: number | string | null
-  bgColor?: string
-  max?: number
-  isDot?: boolean
-  hidden?: boolean
-  type?: BadgeType
-  top?: number
-  right?: number
-  customClass?: string
-  customStyle?: string
-}
-
-interface Props {
-  // 自定义样式类
-  customClass?: string
-  // 自定义样式
-  customStyle?: string
-  // 标签页的标题
-  title?: string
-  // 唯一标识符
-  name?: string | number
-  // 图标
-  icon?: string
-  // 徽标显示值
-  value?: number | string | null
-  // 是否点状徽标
-  isDot?: boolean
-  // 徽标最大值
-  max?: number
-  // 徽标属性，透传给 Badge 组件
-  badgeProps?: BadgeProps
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  max: 99,
-  customClass: '',
-  customStyle: ''
-})
+const props = defineProps(tabbarItemProps)
 
 const { parent: tabbar, index } = useParent(TABBAR_KEY)
 
@@ -110,3 +72,4 @@ function handleClick() {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+../wd-tabbar/type

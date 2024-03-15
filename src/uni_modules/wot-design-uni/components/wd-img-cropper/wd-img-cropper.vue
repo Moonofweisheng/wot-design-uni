@@ -490,7 +490,7 @@ function throttle() {
 /**
  * @description {图片区} 开始拖动
  */
-function handleImgTouchStart(event) {
+function handleImgTouchStart(event: any) {
   // 如果处于在拖动中，背景为淡色展示全部，拖动结束则为 0.85 透明度
   IS_TOUCH_END.value = false
   if (event.touches.length === 1) {
@@ -510,7 +510,7 @@ function handleImgTouchStart(event) {
 /**
  * @description {图片区} 拖动中
  */
-function handleImgTouchMove(event) {
+function handleImgTouchMove(event: any) {
   if (IS_TOUCH_END.value || !MOVE_THROTTLE_FLAG) return
   // 节流
   throttle()
@@ -544,14 +544,14 @@ function handleImgTouchEnd() {
 /**
  * @description 图片已加载完成
  */
-function handleImgLoaded(res) {
+function handleImgLoaded(res: any) {
   emit('imgloaded', res)
 }
 
 /**
  * @description 图片加载失败
  */
-function handleImgLoadError(err) {
+function handleImgLoadError(err: any) {
   emit('imgloaderror', err)
 }
 
@@ -573,7 +573,7 @@ function handleCancel() {
 /**
  * @description 完成裁剪
  */
-function handleConfirm(event) {
+function handleConfirm() {
   draw()
 }
 

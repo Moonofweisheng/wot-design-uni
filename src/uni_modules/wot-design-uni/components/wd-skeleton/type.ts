@@ -1,8 +1,9 @@
-import type { PropType, CSSProperties } from 'vue'
+import type { PropType, CSSProperties, ExtractPropTypes } from 'vue'
 
 type SkeletonTheme = 'text' | 'avatar' | 'paragraph' | 'image'
 type SkeletonAnimation = 'gradient' | 'flashed'
 export type SkeletonRowColObj = {
+  [key: string]: any
   type?: 'rect' | 'circle' | 'text'
   size?: string | number
   width?: string | number
@@ -74,3 +75,5 @@ export const skeletonProps = {
     }
   }
 }
+
+export type SkeletonProps = ExtractPropTypes<typeof skeletonProps>

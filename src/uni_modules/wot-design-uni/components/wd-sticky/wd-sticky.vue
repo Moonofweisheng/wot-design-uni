@@ -29,21 +29,9 @@ export default {
 <script lang="ts" setup>
 import { type Ref, computed, getCurrentInstance, inject, ref } from 'vue'
 import { addUnit, getRect, objToStyle, uuid } from '../common/util'
+import { stickyProps } from './type'
 
-interface Props {
-  customStyle?: string
-  customClass?: string
-  zIndex?: number
-  offsetTop?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customStyle: '',
-  customClass: '',
-  zIndex: 1,
-  offsetTop: 0
-})
-
+const props = defineProps(stickyProps)
 const styckyId = ref<string>(`wd-sticky${uuid()}`)
 
 const openBox = ref<boolean>(false)
@@ -123,7 +111,7 @@ function createObserver() {
 /**
  * @description 监听到吸顶元素尺寸大小变化时，立即重新模拟吸顶
  */
-function resizeHandler(detail) {
+function resizeHandler(detail: any) {
   // 当吸顶内容处于absolute、fixed时，为了防止父容器坍塌，需要手动设置父容器高宽。
   width.value = detail.width
   height.value = detail.height
@@ -153,7 +141,7 @@ function observerContentScroll() {
 /**
  * @description 根据位置进行吸顶
  */
-function scrollHandler({ boundingClientRect }) {
+function scrollHandler({ boundingClientRect }: any) {
   // sticky 高度大于或等于 wd-sticky-box，使用 wd-sticky-box 无任何意义
   if (observerForChild && height.value >= boxHeight.value) {
     position.value = 'absolute'

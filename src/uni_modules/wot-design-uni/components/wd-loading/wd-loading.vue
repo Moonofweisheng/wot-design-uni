@@ -100,7 +100,7 @@ onBeforeMount(() => {
 
 function buildSvg() {
   const { type, color } = props
-  let adaptType = 'ring'
+  let adaptType: 'outline' | 'ring' = 'ring'
   //  2.2.0 版本向下兼容 circle-outline 和 circle-ring;
   if (type === 'circle-outline') {
     adaptType = 'outline'

@@ -22,14 +22,9 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, provide, ref } from 'vue'
 import { getRect, uuid } from '../common/util'
+import { baseProps } from '../common/props'
 
-interface Props {
-  customClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: ''
-})
+const props = defineProps(baseProps)
 
 const styckyBoxId = ref<string>(`wd-sticky-box${uuid()}`)
 
@@ -53,7 +48,7 @@ onBeforeMount(() => {
 /**
  * @description wd-sticky-box 尺寸发生变化时，重新监听所有的viewport
  */
-function resizeHandler(detail) {
+function resizeHandler(detail: any) {
   // 相对的容器大小改变后，同步设置 wd-sticky-box 的大小
   width.value = detail.width
   height.value = detail.height
@@ -75,7 +70,7 @@ function resizeHandler(detail) {
  * @description 删除 wd-sticky 废弃的监听器
  * @param child
  */
-function deleteObserver(child) {
+function deleteObserver(child: any) {
   const observer = observerMap.value.get(child.$.uid)
   if (!observer) return
   observer.disconnect()
@@ -85,7 +80,7 @@ function deleteObserver(child) {
  * @description 为 wd-sticky 创建监听器
  * @param child
  */
-function createObserver(child) {
+function createObserver(child: any) {
   const observer = uni.createIntersectionObserver(instance)
   observerMap.value.set(child.$.uid, observer)
   return observer
@@ -94,7 +89,7 @@ function createObserver(child) {
  * @description 为单个 wd-sticky 监听 viewport
  * @param child sticky
  */
-function observerForChild(child) {
+function observerForChild(child: any) {
   const hasChild = stickyList.find((sticky) => {
     return sticky.$.uid === child.$.uid
   })
@@ -124,7 +119,7 @@ function observerForChild(child) {
  * @param {Object} exposed wd-sticky实例暴露出的事件
  * @param {Object} boundingClientRect 目标节点各个边在viewport中的坐标
  */
-function scrollHandler(exposed, { boundingClientRect }) {
+function scrollHandler(exposed: any, { boundingClientRect }: any) {
   const offset = exposed.height.value + exposed.offsetTop
   if (boundingClientRect.bottom <= offset) {
     // 父元素即将被吸顶元素遮盖，将吸顶元素固定到父元素底部

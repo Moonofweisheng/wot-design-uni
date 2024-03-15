@@ -138,52 +138,14 @@ export default {
 import { computed, getCurrentInstance, onMounted, ref, watch, nextTick, reactive } from 'vue'
 import { checkNumRange, debounce, getRect, getType, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
-import { TABS_KEY } from './types'
+import { TABS_KEY, tabsProps } from './type'
 import { useChildren } from '../composables/useChildren'
 import { useTranslate } from '../composables/useTranslate'
 
 const $item = '.wd-tabs__nav-item'
 const $container = '.wd-tabs__nav-container'
 
-interface Props {
-  customClass?: string
-  // 绑定值
-  modelValue: number | string
-  // 标签数超过阈值可滑动
-  slidableNum?: number
-  // 标签数超过阈值显示导航地图
-  mapNum?: number
-  // 粘性布局
-  sticky?: boolean
-  // 粘性布局吸顶位置
-  offsetTop?: number
-  // 开启手势滑动
-  swipeable?: boolean
-  // 底部条宽度，单位像素
-  lineWidth?: number
-  // 底部条高度，单位像素
-  lineHeight?: number
-  color?: string
-  inactiveColor?: string
-  // 是否开启切换标签内容时的过渡动画
-  animated?: boolean
-  // 切换动画过渡时间，单位毫秒
-  duration?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  modelValue: 0,
-  slidableNum: 6,
-  mapNum: 10,
-  sticky: false,
-  offsetTop: 0,
-  swipeable: false,
-  lineWidth: 19,
-  lineHeight: 3,
-  animated: false,
-  duration: 300
-})
+const props = defineProps(tabsProps)
 
 const { translate } = useTranslate('tabs')
 
@@ -342,13 +304,13 @@ function toggleMap() {
  * @description 更新navBar underline的偏移量
  * @param {Boolean} animation 是否伴随动画
  */
-function updateLineStyle(animation = true) {
+function updateLineStyle(animation: boolean = true) {
   if (!inited.value) return
   const { lineWidth, lineHeight } = props
   getRect($item, true, proxy).then((rects: any) => {
     const rect = rects[state.activeIndex]
     const width = lineWidth
-    let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + curr.width, 0)
+    let left = rects.slice(0, state.activeIndex).reduce((prev: any, curr: any) => prev + curr.width, 0)
     left += (rect.width - width) / 2
     const transition = animation ? 'transition: width 300ms ease, transform 300ms ease;' : ''
 
@@ -384,9 +346,9 @@ function scrollIntoView() {
   if (!inited.value) return
   Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)]).then(([navItemsRects, navRect]) => {
     // 选中元素
-    const selectItem = navItemsRects[state.activeIndex]
+    const selectItem: any = (navItemsRects as any[])[state.activeIndex]
     // 选中元素之前的节点的宽度总和
-    const offsetLeft = (navItemsRects as any).slice(0, state.activeIndex).reduce((prev, curr) => prev + curr.width, 0)
+    const offsetLeft = (navItemsRects as any).slice(0, state.activeIndex).reduce((prev: any, curr: any) => prev + curr.width, 0)
     // scroll-view滑动到selectItem的偏移量
     const left = offsetLeft - ((navRect as any).width - selectItem.width) / 2
     if (left === scrollLeft.value) {
@@ -421,11 +383,11 @@ function handleSelect(index: number) {
  * @description touch handle
  * @param event
  */
-function onTouchStart(event) {
+function onTouchStart(event: any) {
   if (!props.swipeable) return
   touch.touchStart(event)
 }
-function onTouchMove(event) {
+function onTouchMove(event: any) {
   if (!props.swipeable) return
   touch.touchMove(event)
 }
@@ -468,3 +430,4 @@ defineExpose({
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+./type

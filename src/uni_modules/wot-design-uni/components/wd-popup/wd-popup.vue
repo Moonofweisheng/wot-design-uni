@@ -66,7 +66,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: false
 })
 
-const getClassNames = (name) => {
+const getClassNames = (name?: string) => {
   if (!name) {
     return {
       enter: 'enter-class enter-active-class',

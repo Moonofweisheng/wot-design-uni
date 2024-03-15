@@ -120,7 +120,7 @@ onMounted(() => {
           emitStack.push(1)
         }
         if (emitStack.length !== 0) {
-          const result = {}
+          const result: Record<string, any> = {}
           ;['bottom', 'top', 'left', 'right', 'height', 'width'].forEach((propName) => {
             result[propName] = res[propName]
           })
@@ -141,7 +141,7 @@ onMounted(() => {
   })
 })
 
-function scrollToBottom({ lastWidth, lastHeight }) {
+function scrollToBottom({ lastWidth, lastHeight }: { lastWidth: number; lastHeight: number }) {
   expandScrollTop.value = 100000 + lastHeight
   shrinkScrollTop.value = 3 * height.value + lastHeight
   expandScrollLeft.value = 100000 + lastWidth

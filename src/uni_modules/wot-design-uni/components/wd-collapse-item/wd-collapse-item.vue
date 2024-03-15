@@ -26,29 +26,16 @@ export default {
 import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import { getRect, isArray, isDef, isPromise, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
-import { COLLAPSE_KEY } from '../wd-collapse/types'
+import { COLLAPSE_KEY } from '../wd-collapse/type'
+import { collpaseItemProps } from './type'
 
 const $body = '.wd-collapse-item__body'
 
-interface Props {
-  customClass?: string
-  title?: string
-  disabled?: boolean
-  name: string
-  // 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeExpend?: Function
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  disabled: false
-})
+const props = defineProps(collpaseItemProps)
 
 const { parent: collapse, index } = useParent(COLLAPSE_KEY)
 
 const height = ref<string | number>('')
-const show = ref<boolean>(true)
 
 const expanded = ref<boolean>(false)
 
@@ -161,3 +148,4 @@ defineExpose({ expanded })
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+../wd-collapse/type

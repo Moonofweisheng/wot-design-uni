@@ -304,7 +304,7 @@ function clear() {
     })
 }
 // 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur
-function handleBlur({ detail }) {
+function handleBlur() {
   isFocus.value = false
   emit('change', {
     value: inputValue.value
@@ -314,7 +314,7 @@ function handleBlur({ detail }) {
     value: inputValue.value
   })
 }
-function handleFocus({ detail }) {
+function handleFocus({ detail }: any) {
   if (clearing.value) {
     clearing.value = false
     return
@@ -327,10 +327,10 @@ function handleInput() {
   emit('update:modelValue', inputValue.value)
   emit('input', inputValue.value)
 }
-function handleKeyboardheightchange(event) {
+function handleKeyboardheightchange(event: any) {
   emit('keyboardheightchange', event.detail)
 }
-function handleConfirm({ detail }) {
+function handleConfirm({ detail }: any) {
   emit('confirm', detail)
 }
 function onClickSuffixIcon() {

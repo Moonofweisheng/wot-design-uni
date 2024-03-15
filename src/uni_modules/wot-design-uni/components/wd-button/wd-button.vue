@@ -59,6 +59,7 @@ export default {
 import { computed, watch } from 'vue'
 import { ref } from 'vue'
 import base64 from '../common/base64'
+import { buttonProps } from './type'
 
 const loadingIcon = (color = '#4D80F0', reverse = true) => {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42"><defs><linearGradient x1="100%" y1="0%" x2="0%" y2="0%" id="a"><stop stop-color="${
@@ -69,45 +70,7 @@ const loadingIcon = (color = '#4D80F0', reverse = true) => {
     reverse ? '#fff' : color
   }"/><path d="M4.599 21c0 9.044 7.332 16.376 16.376 16.376 9.045 0 16.376-7.332 16.376-16.376" stroke="url(#a)" stroke-width="3.5" stroke-linecap="round"/></g></svg>`
 }
-type ButtonType = 'primary' | 'success' | 'info' | 'warning' | 'error' | 'default' | 'text' | 'icon'
-type ButtonSize = 'small' | 'medium' | 'large'
-
-interface Props {
-  plain?: boolean
-  disabled?: boolean
-  round?: boolean
-  hairline?: boolean
-  block?: boolean
-  type?: ButtonType
-  size?: ButtonSize
-  icon?: string
-  loading?: boolean
-  loadingColor?: string
-  openType?: string
-  formType?: string
-  hoverStopPropagation?: boolean
-  lang?: string
-  sessionFrom?: string
-  sendMessageTitle?: string
-  sendMessagePath?: string
-  sendMessageImg?: string
-  appParameter?: string
-  showMessageCard?: boolean
-  customClass?: string
-  customStyle?: string
-}
-const props = withDefaults(defineProps<Props>(), {
-  type: 'primary',
-  size: 'medium',
-  round: true,
-  plain: false,
-  loading: false,
-  hairline: false,
-  block: false,
-  disabled: false,
-  customClass: '',
-  customStyle: ''
-})
+const props = defineProps(buttonProps)
 
 const hoverStartTime = ref<number>(20)
 const hoverStayTime = ref<number>(70)
@@ -137,41 +100,41 @@ const emit = defineEmits([
   'agreeprivacyauthorization'
 ])
 
-function handleClick(event) {
+function handleClick(event: any) {
   if (!props.disabled && !props.loading) {
     emit('click', event.detail)
   }
 }
 
-function handleGetuserinfo(event) {
+function handleGetuserinfo(event: any) {
   emit('getuserinfo', event.detail)
 }
 
-function handleConcat(event) {
+function handleConcat(event: any) {
   emit('contact', event.detail)
 }
 
-function handleGetphonenumber(event) {
+function handleGetphonenumber(event: any) {
   emit('getphonenumber', event.detail)
 }
 
-function handleError(event) {
+function handleError(event: any) {
   emit('error', event.detail)
 }
 
-function handleLaunchapp(event) {
+function handleLaunchapp(event: any) {
   emit('launchapp', event.detail)
 }
 
-function handleOpensetting(event) {
+function handleOpensetting(event: any) {
   emit('opensetting', event.detail)
 }
 
-function handleChooseavatar(event) {
+function handleChooseavatar(event: any) {
   emit('chooseavatar', event.detail)
 }
 
-function handleAgreePrivacyAuthorization(event) {
+function handleAgreePrivacyAuthorization(event: any) {
   emit('agreeprivacyauthorization', event.detail)
 }
 function buildLoadingSvg() {

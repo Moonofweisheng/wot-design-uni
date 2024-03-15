@@ -278,7 +278,7 @@ function updateColumns() {
  * 设置数据列
  * @param columnList 数据列
  */
-function setColumns(columnList) {
+function setColumns(columnList: Array<string | number>) {
   columns.value = columnList
 }
 
@@ -289,7 +289,7 @@ function setColumns(columnList) {
 function getOriginColumns() {
   const { filter } = props
   return getRanges().map(({ type, range }) => {
-    let values = times(range[1] - range[0] + 1, (index) => {
+    let values = times(range[1] - range[0] + 1, (index: number) => {
       return range[0] + index
     })
 

@@ -86,7 +86,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
-import { deepClone, defaultDisplayFormat, getType, isDef } from '../common/util'
+import { deepClone, defaultDisplayFormat, getType, isArray, isDef } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { type ColumnItem, formatArray } from '../wd-picker-view/type'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
@@ -232,7 +232,7 @@ watch(
           setShowValue(pickerViewWd.value!.getSelects())
         })
       } else {
-        setShowValue(getSelects(props.modelValue))
+        setShowValue(getSelects(props.modelValue)!)
       }
     } else {
       showValue.value = ''
@@ -256,7 +256,7 @@ watch(
           setShowValue(pickerViewWd.value!.getSelects())
         })
       } else {
-        setShowValue(getSelects(props.modelValue))
+        setShowValue(getSelects(props.modelValue)!)
       }
     } else {
       showValue.value = ''
@@ -311,7 +311,7 @@ const { proxy } = getCurrentInstance() as any
 const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
 
 onMounted(() => {
-  props.modelValue && setShowValue(getSelects(props.modelValue))
+  props.modelValue && setShowValue(getSelects(props.modelValue)!)
   if (props.modelValue && pickerViewWd.value && pickerViewWd.value.getSelects) {
     setShowValue(pickerViewWd.value!.getSelects())
   }
@@ -326,12 +326,12 @@ onBeforeMount(() => {
  * @description 根据传入的value，picker组件获取当前cell展示值。
  * @param {String|Number|Array<String|Number|Array<any>>}value
  */
-function getSelects(value) {
+function getSelects(value: string | number | Array<string | number | Array<any>>) {
   const formatColumns = formatArray(props.columns, props.valueKey, props.labelKey)
   if (props.columns.length === 0) return
 
   // 使其默认选中首项
-  if (value === '' || value === null || value === undefined || (getType(value) === 'array' && value.length === 0)) {
+  if (value === '' || value === null || value === undefined || (isArray(value) && value.length === 0)) {
     value = formatColumns.map((col) => {
       return col[0][props.valueKey]
     })
@@ -409,7 +409,7 @@ function onConfirm() {
   if (beforeConfirm && getType(beforeConfirm) === 'function') {
     beforeConfirm(
       pickerValue.value,
-      (isPass) => {
+      (isPass: boolean) => {
         isPass && handleConfirm()
       },
       proxy.$.exposed
@@ -441,14 +441,14 @@ function handleConfirm() {
  * @description 初始change事件
  * @param event
  */
-function pickerViewChange({ value }) {
+function pickerViewChange({ value }: any) {
   pickerValue.value = value
 }
 /**
  * @description 设置展示值
- * @param {Array<String>} items
+ * @param  items
  */
-function setShowValue(items) {
+function setShowValue(items: ColumnItem | ColumnItem[]) {
   // 避免值为空时调用自定义展示函数
   if ((items instanceof Array && !items.length) || !items) return
 

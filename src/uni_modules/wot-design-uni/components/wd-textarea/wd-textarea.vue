@@ -77,93 +77,11 @@ import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
-type ConfirmType = 'send' | 'search' | 'next' | 'go' | 'done'
+import { textareaProps } from './type'
 
 const { translate } = useTranslate('textarea')
 
-interface Props {
-  // 原生属性
-  placeholder?: string
-  placeholderStyle?: string
-  placeholderClass?: string
-  disabled?: boolean
-  maxlength?: number
-  focus?: boolean
-  autoFocus?: boolean
-  autoHeight?: boolean
-  fixed?: boolean
-  cursorSpacing?: number
-  cursor?: number
-  confirmType?: ConfirmType
-  confirmHold?: boolean
-  showConfirmBar?: boolean
-  selectionStart?: number
-  selectionEnd?: number
-  adjustPosition?: boolean
-  disableDefaultPadding?: boolean
-  holdKeyboard?: boolean
-  // 原生属性结束
-  modelValue: string | number
-  showPassword?: boolean
-  clearable?: boolean
-  readonly?: boolean
-  prefixIcon?: string
-  usePrefixSlot?: boolean
-  showWordLimit?: boolean
-  label?: string
-  labelWidth?: string
-  useLabelSlot?: boolean
-  size?: string
-  error?: boolean
-  center?: boolean
-  noBorder?: boolean
-  required?: boolean
-  prop?: string
-  rules?: FormItemRule[]
-  customTextareaContainerClass?: string
-  customTextareaClass?: string
-  customLabelClass?: string
-  customClass?: string
-  customStyle?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customTextareaContainerClass: '',
-  customTextareaClass: '',
-  customLabelClass: '',
-  customClass: '',
-  customStyle: '',
-  maxlength: -1,
-  modelValue: '',
-  autoHeight: false,
-  clearable: false,
-  showPassword: false,
-  disabled: false,
-  readonly: false,
-  usePrefixSlot: false,
-  showWordLimit: false,
-  placeholderClass: '',
-  focus: false,
-  autoFocus: false,
-  cursorSpacing: 0,
-  fixed: false,
-  cursor: -1,
-  showConfirmBar: true,
-  selectionStart: -1,
-  selectionEnd: -1,
-  adjustPosition: true,
-  holdKeyboard: false,
-  confirmType: 'done',
-  confirmHold: false,
-  disableDefaultPadding: false,
-  error: false,
-  center: false,
-  labelWidth: '33%',
-  useLabelSlot: false,
-  required: false,
-  noBorder: false,
-  rules: () => []
-})
+const props = defineProps(textareaProps)
 
 const showClear = ref<boolean>(false)
 const showWordCount = ref<boolean>(false)
@@ -303,7 +221,7 @@ function clear() {
     })
 }
 // 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur
-function handleBlur({ detail }) {
+function handleBlur({ detail }: any) {
   isFocus.value = false
   emit('change', {
     value: inputValue.value
@@ -315,7 +233,7 @@ function handleBlur({ detail }) {
     cursor: detail.cursor ? detail.cursor : null
   })
 }
-function handleFocus({ detail }) {
+function handleFocus({ detail }: any) {
   if (clearing.value) {
     clearing.value = false
     return
@@ -329,13 +247,13 @@ function handleInput() {
   emit('update:modelValue', inputValue.value)
   emit('input', inputValue.value)
 }
-function handleKeyboardheightchange({ detail }) {
+function handleKeyboardheightchange({ detail }: any) {
   emit('keyboardheightchange', detail)
 }
-function handleConfirm({ detail }) {
+function handleConfirm({ detail }: any) {
   emit('confirm', detail)
 }
-function handleLineChange({ detail }) {
+function handleLineChange({ detail }: any) {
   emit('linechange', detail)
 }
 function onClickPrefixIcon() {

@@ -189,3 +189,4 @@ defineExpose({ validate, reset })
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+./type

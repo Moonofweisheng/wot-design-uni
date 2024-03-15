@@ -1,3 +1,18 @@
+import type { ExtractPropTypes, PropType } from 'vue'
+import { makeStringProp } from '../common/props'
+
+export type ConfigProviderTheme = 'light' | 'dark'
+
+export const configProviderProps = {
+  theme: makeStringProp<ConfigProviderTheme>('light'),
+  themeVars: {
+    type: Object as PropType<ConfigProviderThemeVars>,
+    default: () => ({})
+  }
+}
+
+export type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>
+
 export type baseThemeVars = {
   colorTheme?: string // 主题色
   colorWhite?: string // 用于mix的白色
