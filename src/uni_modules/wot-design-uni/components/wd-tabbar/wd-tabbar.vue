@@ -1,5 +1,5 @@
 <template>
-  <view :class="{ 'wd-tabbar__placeholder': fixed && placeholder && safeAreaInsetBottom }" :style="{ height: addUnit(height) }">
+  <view :class="{ 'wd-tabbar__placeholder': fixed && placeholder && safeAreaInsetBottom && shape === 'round' }" :style="{ height: addUnit(height) }">
     <view
       :class="`wd-tabbar wd-tabbar--${shape} ${customClass} ${fixed ? 'is-fixed' : ''} ${safeAreaInsetBottom ? 'is-safe' : ''} ${
         bordered ? 'is-border' : ''
