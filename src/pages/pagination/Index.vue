@@ -21,13 +21,13 @@ const page3 = ref<number>(1)
 const total3 = ref<number>(160)
 const pageSize3 = ref<number>(20)
 
-function handleChange1({ value }) {
+function handleChange1({ value }: any) {
   console.log(value)
 }
-function handleChange2({ value }) {
+function handleChange2({ value }: any) {
   console.log(value)
 }
-function handleChange3({ value }) {
+function handleChange3({ value }: any) {
   console.log(value)
 }
 </script>

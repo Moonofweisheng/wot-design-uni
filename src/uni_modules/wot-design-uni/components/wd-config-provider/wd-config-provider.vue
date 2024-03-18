@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2023-08-16 10:51:08
+ * @LastEditTime: 2024-03-15 17:00:16
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-config-provider\wd-config-provider.vue
@@ -26,18 +26,9 @@ export default {
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-type ConfigProviderTheme = 'light' | 'dark'
-interface Props {
-  theme?: ConfigProviderTheme
-  themeVars?: Record<string, any>
-}
+import { configProviderProps } from './types'
 
-const props = withDefaults(defineProps<Props>(), {
-  theme: 'light',
-  themeVars: () => {
-    return {}
-  }
-})
+const props = defineProps(configProviderProps)
 
 const themeClass = computed(() => {
   return `wot-theme-${props.theme}`

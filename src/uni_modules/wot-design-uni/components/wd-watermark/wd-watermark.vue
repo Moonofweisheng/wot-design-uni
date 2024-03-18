@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-04-05 21:32:56
- * @LastEditTime: 2023-09-18 22:17:45
+ * @LastEditTime: 2024-03-14 18:06:38
  * @LastEditors: weisheng
  * @Description: 水印组件
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-watermark\wd-watermark.vue
@@ -33,83 +33,9 @@ export default {
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch, nextTick } from 'vue'
 import { addUnit, buildUrlWithParams, isBase64Image, objToStyle, uuid } from '../common/util'
+import { watermarkProps } from './types'
 
-/**
- * WaterMark 水印
- */
-interface Props {
-  // 显示内容
-  content?: string
-  // 显示图片的地址，支持网络图片和base64（钉钉小程序仅支持网络图片）
-  image?: string
-  // 图片高度
-  imageHeight?: number
-  // 图片高度
-  imageWidth?: number
-  // X轴间距，单位px
-  gutterX?: number
-  // Y轴间距，单位px
-  gutterY?: number
-  // canvas画布宽度，单位px
-  width?: number
-  // canvas画布高度，单位px
-  height?: number
-  // 是否为全屏水印
-  fullScreen?: boolean
-  // 水印字体颜色
-  color?: string
-  // 水印字体大小，单位px
-  size?: number
-  // 水印字体样式（仅微信和h5支持），可能的值：normal、italic、oblique
-  fontStyle?: string
-  // 水印字体的粗细（仅微信和h5支持）
-  fontWeight?: number | string
-  // 水印字体系列（仅微信和h5支持）
-  fontFamily?: string
-  // 水印旋转角度
-  rotate?: number
-  // 自定义层级
-  zIndex?: number
-  // 自定义透明度，取值 0~1
-  opacity?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  // 显示内容
-  content: '',
-  // 显示图片
-  image: '',
-  // 图片高度
-  imageHeight: 100,
-  // 图片高度
-  imageWidth: 100,
-  // X轴间距
-  gutterX: 0,
-  // Y轴间距
-  gutterY: 0,
-  // canvas画布宽度，单位px
-  width: 100,
-  // canvas画布高度，单位px
-  height: 100,
-  // 是否为全屏水印
-  fullScreen: true,
-  // 水印字体颜色
-  color: '#8c8c8c',
-  // 水印字体大小
-  size: 14,
-  // 水印字体样式，可能的值：normal、italic、oblique
-  fontStyle: 'normal',
-  // 水印字体的粗细
-  fontWeight: 'normal',
-  // 水印字体系列
-  fontFamily: 'PingFang SC',
-  // 水印旋转角度
-  rotate: -25,
-  // 自定义层级
-  zIndex: 1100,
-  // 自定义透明度，取值 0~1
-  opacity: 0.5
-})
+const props = defineProps(watermarkProps)
 
 watch(
   () => props,
@@ -446,7 +372,7 @@ function drawTextOnScreen(ctx: UniApp.CanvasContext, content: string, contentWid
   // #ifdef MP-DINGTALK
   // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
   ;(ctx as any).toTempFilePath({
-    success(res) {
+    success(res: any) {
       showCanvas.value = false
       waterMarkUrl.value = res.filePath
     }
@@ -545,7 +471,7 @@ function drawImageOnScreen(
     // #ifdef MP-DINGTALK
     // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
     ;(ctx as any).toTempFilePath({
-      success(res) {
+      success(res: any) {
         showCanvas.value = false
         waterMarkUrl.value = res.filePath
       }

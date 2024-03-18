@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-10-13 18:45:34
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\pages\popup\Index.vue
- * 记得注释
--->
 <template>
   <page-meta :page-style="`overflow:${show10 ? 'hidden' : 'visible'};`"></page-meta>
   <view>

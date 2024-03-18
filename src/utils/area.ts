@@ -1,4 +1,4 @@
-export const areaData = {
+export const areaData: Record<string, any> = {
   86: {
     110000: '北京市',
     120000: '天津市',

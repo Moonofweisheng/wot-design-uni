@@ -519,7 +519,6 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | loading-color          | loading 图标的颜色                                                                                                             | string   | -      | #4D80F0 | -        |
 | use-default-slot       | 使用默认插槽时设置该选项                                                                                                       | boolean  | -      | false   | -        |
 | use-label-slot         | 使用 label 插槽时设置该选项                                                                                                    | boolean  | -      | false   | -        |
-| name                   | form 表单中的字段名                                                                                                            | string   | -      | -       | -        |
 | close-on-click-modal   | 点击遮罩是否关闭                                                                                                               | boolean  | -      | true    | -        |
 | auto-complete          | 自动触发 column-change 事件来补全数据，当 columns 为空数组或者 columns 数组长度小于 value 数组长度时，会自动触发 column-change | -        | false  | -       |
 | z-index                | 弹窗层级                                                                                                                       | number   | -      | 15      | -        |

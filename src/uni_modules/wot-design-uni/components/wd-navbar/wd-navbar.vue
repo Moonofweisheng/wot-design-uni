@@ -53,49 +53,9 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
 import { getRect, addUnit, isDef, objToStyle } from '../common/util'
+import { navbarProps } from './types'
 
-interface Props {
-  customClass?: string
-  customStyle?: string
-  // 标题文字
-  title?: string
-  // 左侧文案
-  leftText?: string
-  // 右侧文案
-  rightText?: string
-  // 是否显示左侧箭头
-  leftArrow?: boolean
-  // 是否显示下边框
-  bordered?: boolean
-  // 是否固定到顶部
-  fixed?: boolean
-  // 固定在顶部时，是否在标签位置生成一个等高的占位元素
-  placeholder?: boolean
-  // 导航栏 z-index
-  zIndex?: number
-  // 是否开启顶部安全区适配
-  safeAreaInsetTop?: boolean
-  // 是否禁用左侧按钮，禁用时透明度降低，且无法点击
-  leftDisabled?: boolean
-  // 是否禁用右侧按钮，禁用时透明度降低，且无法点击
-  rightDisabled?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customStyle: '',
-  customClass: '',
-  title: '',
-  leftText: '',
-  rightText: '',
-  leftArrow: false,
-  bordered: true,
-  fixed: false,
-  placeholder: false,
-  zIndex: 500,
-  safeAreaInsetTop: false,
-  leftDisabled: false,
-  rightDisabled: false
-})
+const props = defineProps(navbarProps)
 
 const height = ref<number | ''>('') // 占位高度
 
@@ -149,8 +109,8 @@ function setPlaceholderHeight() {
     return
   }
 
-  getRect('.wd-navbar', false, proxy).then((res: any) => {
-    height.value = res.height
+  getRect('.wd-navbar', false, proxy).then((res) => {
+    height.value = res.height as number
   })
 }
 </script>

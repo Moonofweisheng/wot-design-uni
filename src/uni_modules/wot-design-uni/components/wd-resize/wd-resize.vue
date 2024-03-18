@@ -44,18 +44,9 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 import { addUnit, objToStyle, uuid } from '../common/util'
+import { resizeProps } from './types'
 
-interface Props {
-  customClass?: string
-  customContainerClass?: string
-  customStyle?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customStyle: '',
-  customClass: '',
-  customContainerClass: ''
-})
+const props = defineProps(resizeProps)
 
 const expandScrollTop = ref<number>(0)
 const shrinkScrollTop = ref<number>(0)
@@ -120,7 +111,7 @@ onMounted(() => {
           emitStack.push(1)
         }
         if (emitStack.length !== 0) {
-          const result = {}
+          const result: Record<string, any> = {}
           ;['bottom', 'top', 'left', 'right', 'height', 'width'].forEach((propName) => {
             result[propName] = res[propName]
           })
@@ -141,7 +132,7 @@ onMounted(() => {
   })
 })
 
-function scrollToBottom({ lastWidth, lastHeight }) {
+function scrollToBottom({ lastWidth, lastHeight }: { lastWidth: number; lastHeight: number }) {
   expandScrollTop.value = 100000 + lastHeight
   shrinkScrollTop.value = 3 * height.value + lastHeight
   expandScrollLeft.value = 100000 + lastWidth

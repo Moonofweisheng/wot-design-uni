@@ -110,6 +110,7 @@
 </template>
 <script setup lang="ts">
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+import type { ColPickerColumnChangeOption } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
 import { areaData } from '@/utils/area'
 import { ref } from 'vue'
 const showAction = ref<boolean>(false)
@@ -174,7 +175,7 @@ const area = ref<any[]>([
     }
   })
 ])
-const areaChange = ({ selectedItem, resolve, finish }) => {
+const areaChange = ({ selectedItem, resolve, finish }: ColPickerColumnChangeOption) => {
   if (areaData[selectedItem.value]) {
     resolve(
       Object.keys(areaData[selectedItem.value]).map((key) => {
@@ -214,42 +215,42 @@ function showActions() {
   ]
 }
 
-function handleCouponName({ value }) {
+function handleCouponName({ value }: any) {
   console.log(value)
 
   couponNameErr.value = false
 }
-function handlePlatform({ value }) {
+function handlePlatform({ value }: any) {
   console.log(value)
 }
-function handleThreshold({ value }) {
+function handleThreshold({ value }: any) {
   console.log(value)
 }
-function handlePrice({ value }) {
+function handlePrice({ value }: any) {
   console.log(value)
 }
-function handleAddress({ value }) {
+function handleAddress({ value }: any) {
   console.log(value)
 }
-function handleContent({ value }) {
+function handleContent({ value }: any) {
   console.log(value)
 }
-function handleCount({ value }) {
+function handleCount({ value }: any) {
   console.log(value)
 }
-function handleSwitch({ value }) {
+function handleSwitch({ value }: any) {
   console.log(value)
 }
-function handleRead({ value }) {
+function handleRead({ value }: any) {
   read.value = value
 }
-function handleCardId({ value }) {
+function handleCardId({ value }: any) {
   console.log(value)
 }
-function handlePhone({ value }) {
+function handlePhone({ value }: any) {
   console.log(value)
 }
-function formSubmit(event) {
+function formSubmit(event: any) {
   console.log(event)
 
   if (!couponName.value) {
@@ -261,7 +262,7 @@ function formSubmit(event) {
 function handleIconClick() {
   toast.info('优惠券提示信息')
 }
-function handleDate({ value }) {
+function handleDate({ value }: any) {
   console.log(value)
 }
 </script>

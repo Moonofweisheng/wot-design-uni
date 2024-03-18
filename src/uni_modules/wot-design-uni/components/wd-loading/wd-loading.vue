@@ -24,7 +24,7 @@ export default {
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import base64 from '../common/base64'
 import { gradient, context, objToStyle, addUnit } from '../common/util'
-import type { LoadingType } from './type'
+import { loadingProps } from './types'
 
 const svgDefineId = context.id++
 const svgDefineId1 = context.id++
@@ -39,21 +39,7 @@ const icon = {
   }
 }
 
-interface Props {
-  customStyle?: string
-  customClass?: string
-  type?: LoadingType
-  color?: string
-  size?: string | number
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customStyle: '',
-  customClass: '',
-  type: 'ring',
-  color: '#4D80F0',
-  size: '32px'
-})
+const props = defineProps(loadingProps)
 
 const svg = ref<string>('')
 const intermediateColor = ref<string>('')
@@ -100,7 +86,7 @@ onBeforeMount(() => {
 
 function buildSvg() {
   const { type, color } = props
-  let adaptType = 'ring'
+  let adaptType: 'outline' | 'ring' = 'ring'
   //  2.2.0 版本向下兼容 circle-outline 和 circle-ring;
   if (type === 'circle-outline') {
     adaptType = 'outline'

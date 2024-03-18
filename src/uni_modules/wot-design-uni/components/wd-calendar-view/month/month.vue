@@ -8,7 +8,7 @@
           <view
             v-for="(item, index) in days"
             :key="index"
-            :class="`wd-month__day ${item.disabled ? 'is-disabled' : ''} ${item.type ? itemClass(item.type, value, type) : ''}`"
+            :class="`wd-month__day ${item.disabled ? 'is-disabled' : ''} ${item.type ? itemClass(item.type, value!, type) : ''}`"
             :style="firstDayStyle(index, item.date, firstDayOfWeek)"
             @click="handleDateClick(index)"
           >
@@ -52,37 +52,23 @@ import {
 import { useToast } from '../../wd-toast'
 import { deepClone, getType, isArray } from '../../common/util'
 import { useTranslate } from '../../composables/useTranslate'
+import type { CalendarDayItem, CalendarDayType, CalendarType } from '../types'
+import { monthProps } from './types'
 
-interface Props {
-  type: string
-  date: number
-  value: null | number | Array<number>
-  minDate: number
-  maxDate: number
-  firstDayOfWeek: number
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter?: Function
-  maxRange?: number
-  rangePrompt?: string
-  allowSameDay?: boolean
-  defaultTime: Array<number>
-}
-const props = withDefaults(defineProps<Props>(), {
-  allowSameDay: false
-})
+const props = defineProps(monthProps)
 
 const { translate } = useTranslate('calendar-view')
 
-const days = ref<Array<Record<string, any>>>([])
+const days = ref<Array<CalendarDayItem>>([])
 
 const itemClass = computed(() => {
-  return (monthType, value, type) => {
+  return (monthType: CalendarDayType, value: number | (number | null)[], type: CalendarType) => {
     return getItemClass(monthType, value, type)
   }
 })
 
 const monthTitle = computed(() => {
-  return (date) => {
+  return (date: number) => {
     return formatMonthTitle(date)
   }
 })
@@ -108,7 +94,7 @@ const toast = useToast('wd-month')
 const emit = defineEmits(['change'])
 
 function setDays() {
-  const dayList: Array<Record<string, any>> = []
+  const dayList: Array<CalendarDayItem> = []
   const date = new Date(props.date)
   const year = date.getFullYear()
   const month = date.getMonth()
@@ -120,7 +106,7 @@ function setDays() {
 
   for (let day = 1; day <= totalDay; day++) {
     const date = new Date(year, month, day).getTime()
-    let type = getDayType(date, value)
+    let type: CalendarDayType = getDayType(date, value as number | number[] | null)
     if (!type && compareDate(date, Date.now()) === 0) {
       type = 'current'
     }
@@ -129,7 +115,7 @@ function setDays() {
   }
   days.value = dayList
 }
-function getDayType(date, value) {
+function getDayType(date: number, value: number | number[] | null): CalendarDayType {
   switch (props.type) {
     case 'date':
     case 'datetime':
@@ -147,23 +133,20 @@ function getDayType(date, value) {
       return getDateType(date)
   }
 }
-function getDateType(date) {
-  if (props.value && compareDate(date, props.value) === 0) {
+function getDateType(date: number): CalendarDayType {
+  if (props.value && compareDate(date, props.value as number) === 0) {
     return 'selected'
   }
-
   return ''
 }
 
-function getDatesType(date) {
-  if (!props.value) return ''
+function getDatesType(date: number): CalendarDayType {
+  if (!isArray(props.value)) return ''
 
-  let type = ''
-
-  ;(props.value as any).some((item) => {
+  let type: CalendarDayType = ''
+  props.value.some((item) => {
     if (compareDate(date, item) === 0) {
       type = 'selected'
-
       return true
     }
 
@@ -172,8 +155,8 @@ function getDatesType(date) {
 
   return type
 }
-function getDatetimeType(date, value) {
-  const [startDate, endDate] = value || []
+function getDatetimeType(date: number, value: number | number[] | null) {
+  const [startDate, endDate] = isArray(value) ? value : []
 
   if (startDate && compareDate(date, startDate) === 0) {
     if (props.allowSameDay && endDate && compareDate(startDate, endDate) === 0) {
@@ -188,8 +171,8 @@ function getDatetimeType(date, value) {
     return ''
   }
 }
-function getWeektimeType(date, value) {
-  const [startDate, endDate] = value || []
+function getWeektimeType(date: number, value: number | number[] | null) {
+  const [startDate, endDate] = isArray(value) ? value : []
 
   if (startDate && compareDate(date, startDate) === 0) {
     return 'start'
@@ -203,7 +186,7 @@ function getWeektimeType(date, value) {
 }
 function getWeekValue() {
   if (props.type === 'week') {
-    return getWeekRange(props.value, props.firstDayOfWeek)
+    return getWeekRange(props.value as number, props.firstDayOfWeek)
   } else {
     const [startDate, endDate] = (props.value as any) || []
 
@@ -224,7 +207,6 @@ function getWeekValue() {
 }
 function handleDateClick(index: number) {
   const date = days.value[index]
-
   switch (props.type) {
     case 'date':
     case 'datetime':
@@ -247,7 +229,7 @@ function handleDateClick(index: number) {
       handleDateChange(date)
   }
 }
-function getDate(date, isEnd: boolean = false) {
+function getDate(date: number, isEnd: boolean = false) {
   date = props.defaultTime && props.defaultTime.length > 0 ? getDateByDefaultTime(date, isEnd ? props.defaultTime[1] : props.defaultTime[0]) : date
 
   if (date < props.minDate) return props.minDate
@@ -257,7 +239,7 @@ function getDate(date, isEnd: boolean = false) {
   return date
 }
 
-function handleDateChange(date) {
+function handleDateChange(date: CalendarDayItem) {
   if (date.disabled) return
 
   if (date.type !== 'selected') {
@@ -267,7 +249,7 @@ function handleDateChange(date) {
     })
   }
 }
-function handleDatesChange(date) {
+function handleDatesChange(date: CalendarDayItem) {
   if (date.disabled) return
   const value = deepClone(isArray(props.value) ? props.value : [])
   if (date.type !== 'selected') {
@@ -279,11 +261,11 @@ function handleDatesChange(date) {
     value
   })
 }
-function handleDateRangeChange(date) {
+function handleDateRangeChange(date: CalendarDayItem) {
   if (date.disabled) return
 
-  let value
-  let type
+  let value: (number | null)[] = []
+  let type: CalendarDayType = ''
   const [startDate, endDate] = deepClone(isArray(props.value) ? props.value : [])
   const compare = compareDate(date.date, startDate)
 
@@ -307,10 +289,10 @@ function handleDateRangeChange(date) {
     // 时间范围类型，且有开始时间和结束时间，需要支持重新点击开始日期和结束日期可以重新修改时间
     if (compare === 0) {
       type = 'start'
-      value = props.value
+      value = props.value as number[]
     } else if (compareDate(date.date, endDate) === 0) {
       type = 'end'
-      value = props.value
+      value = props.value as number[]
     } else {
       value = [getDate(date.date), null]
     }
@@ -323,7 +305,7 @@ function handleDateRangeChange(date) {
     type: type || (value[1] ? 'end' : 'start')
   })
 }
-function handleWeekChange(date) {
+function handleWeekChange(date: CalendarDayItem) {
   const [weekStart] = getWeekRange(date.date, props.firstDayOfWeek)
 
   // 周的第一天如果是禁用状态，则不可选中
@@ -333,13 +315,13 @@ function handleWeekChange(date) {
     value: getDate(weekStart) + 24 * 60 * 60 * 1000
   })
 }
-function handleWeekRangeChange(date) {
+function handleWeekRangeChange(date: CalendarDayItem) {
   const [weekStartDate] = getWeekRange(date.date, props.firstDayOfWeek)
 
   // 周的第一天如果是禁用状态，则不可选中
   if (getFormatterDate(weekStartDate, new Date(weekStartDate).getDate()).disabled) return
 
-  let value
+  let value: (number | null)[] = []
   const [startDate, endDate] = deepClone(isArray(props.value) ? props.value : [])
   const [startWeekStartDate] = startDate ? getWeekRange(startDate, props.firstDayOfWeek) : []
   const compare = compareDate(weekStartDate, startWeekStartDate)
@@ -356,8 +338,8 @@ function handleWeekRangeChange(date) {
     value
   })
 }
-function getFormatterDate(date, day, type?: string) {
-  let dayObj = {
+function getFormatterDate(date: number, day: string | number, type?: CalendarDayType) {
+  let dayObj: CalendarDayItem = {
     date: date,
     text: day,
     topInfo: '',
@@ -372,7 +354,6 @@ function getFormatterDate(date, day, type?: string) {
       console.error('[wot-design] error(wd-calendar-view): the formatter prop of wd-calendar-view should be a function')
     }
   }
-
   return dayObj
 }
 </script>

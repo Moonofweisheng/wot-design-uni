@@ -47,28 +47,9 @@ import { useParent } from '../composables/useParent'
 import { STEPS_KEY } from '../wd-steps/types'
 import { isDef } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
+import { stepProps } from './types'
 
-type StepStatus = 'finished' | 'process' | 'error'
-
-interface Props {
-  customClass?: string
-  customStyle?: string
-  title?: string
-  description?: string
-  icon?: string
-  status?: StepStatus
-  iconSlot?: boolean
-  titleSlot?: boolean
-  descriptionSlot?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customStyle: '',
-  iconSlot: false,
-  titleSlot: false,
-  descriptionSlot: false
-})
+const props = defineProps(stepProps)
 
 const { parent: steps, index } = useParent(STEPS_KEY)
 
@@ -166,3 +147,4 @@ function getCurrentTitle(currentStatus: string) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+../wd-steps/type

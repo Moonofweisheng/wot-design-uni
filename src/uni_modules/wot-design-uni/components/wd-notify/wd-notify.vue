@@ -25,9 +25,9 @@ export default {
 
 <script lang="ts" setup>
 import { inject, computed, watch } from 'vue'
-import { notifyProps, type NotifyProps } from './type'
+import { notifyProps, type NotifyProps } from './types'
 import { getNotifyOptionKey } from '.'
-import { isDef, addUnit, isFunction } from '../common/util'
+import { addUnit, isFunction } from '../common/util'
 
 const props = defineProps(notifyProps)
 const emits = defineEmits<{

@@ -2,7 +2,9 @@
   <page-wraper>
     <wd-toast></wd-toast>
     <demo-block title="基础用法" transparent>
-      <wd-collapse v-model="value1" @change="handleChange1">
+      <wd-button @click="collapse?.toggleAll()">toggleAll</wd-button>
+
+      <wd-collapse ref="collapse" v-model="value1" @change="handleChange1">
         <wd-collapse-item
           v-for="(item, index) in itemList"
           :before-expend="index === 2 ? beforeExpend : undefined"
@@ -54,6 +56,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { CollapseInstance } from '@/uni_modules/wot-design-uni/components/wd-collapse/types'
 import { ref } from 'vue'
 
 const toast = useToast()
@@ -85,6 +88,8 @@ const itemList = ref<Record<string, any>[]>([
   }
 ])
 
+const collapse = ref<CollapseInstance>()
+
 const value1 = ref<string[]>(['item1'])
 const value2 = ref<string>('item1')
 const value3 = ref<string[]>(['item1'])
@@ -94,31 +99,31 @@ const value6 = ref<boolean>(false)
 const accordion = ref<boolean>(true)
 const name = ref<string>('item1')
 
-function handleChange1({ value }) {
-  // console.log(value)
+function handleChange1({ value }: any) {
+  console.log(value)
 }
-function handleChange2({ value }) {
-  // console.log(value)
+function handleChange2({ value }: any) {
+  console.log(value)
 }
-function handleChange3({ value }) {
-  // console.log(value)
+function handleChange3({ value }: any) {
+  console.log(value)
 }
-function handleChange4({ value }) {
-  // console.log(value)
+function handleChange4({ value }: any) {
+  console.log(value)
 }
-function handleChange5({ value }) {
-  // console.log(value)
+function handleChange5({ value }: any) {
+  console.log(value)
 }
 
-function handleChange6({ value }) {
-  // console.log(value)
+function handleChange6({ value }: any) {
+  console.log(value)
 }
 
 /**
  * 折叠面板展开前回调方法
  * @param e
  */
-function beforeExpend(name) {
+function beforeExpend(name: string) {
   const index = itemList.value.findIndex((item) => {
     return item.name === name
   })

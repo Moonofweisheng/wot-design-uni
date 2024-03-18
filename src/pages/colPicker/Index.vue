@@ -49,6 +49,7 @@
 import { ref } from 'vue'
 import { areaData } from '../../utils/area'
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { ColPickerColumnChangeOption } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
 
 const value1 = ref<any[]>([])
 const value2 = ref<any[]>(['150000', '150100', '150121'])
@@ -67,7 +68,7 @@ const value14 = ref<any[]>([])
 const value15 = ref<any[]>([])
 const displayValue = ref<string>('')
 const areaData1 = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  Object.keys(areaData[86]).map((key: string) => {
     return {
       value: key,
       label: areaData[86][key]
@@ -117,7 +118,7 @@ const areaData5 = ref<any[]>([
 
 const toast = useToast()
 
-const columnChange1 = ({ selectedItem, resolve, finish, index, rowIndex }) => {
+const columnChange1 = ({ selectedItem, resolve, finish, index }: ColPickerColumnChangeOption) => {
   const value = index === -1 ? 86 : selectedItem.value
   if (areaData[value]) {
     resolve(
@@ -132,7 +133,7 @@ const columnChange1 = ({ selectedItem, resolve, finish, index, rowIndex }) => {
     finish()
   }
 }
-const columnChange2 = ({ selectedItem, resolve, finish }) => {
+const columnChange2 = ({ selectedItem, resolve, finish }: ColPickerColumnChangeOption) => {
   setTimeout(() => {
     if (Math.random() > 0.7) {
       finish(false)
@@ -153,11 +154,11 @@ const columnChange2 = ({ selectedItem, resolve, finish }) => {
     }
   }, 300)
 }
-const displayFormat = (selectedItems) => {
+const displayFormat = (selectedItems: Record<string, any>[]) => {
   return selectedItems[selectedItems.length - 2].label + '-' + selectedItems[selectedItems.length - 1].label
 }
-const beforeConfirm = (value, selectedItems, resolve) => {
-  if (parseInt(value[2]) > 120000) {
+const beforeConfirm = (value: (string | number)[], selectedItems: Record<string, any>[], resolve: (isPass: boolean) => void) => {
+  if (parseInt(String(value[2])) > 120000) {
     toast.error('该地区库存不足')
     resolve(false)
   } else {
@@ -165,14 +166,14 @@ const beforeConfirm = (value, selectedItems, resolve) => {
   }
 }
 
-function handleConfirm({ selectedItems }) {
+function handleConfirm({ selectedItems }: any) {
   displayValue.value = selectedItems
-    .map((item) => {
+    .map((item: any) => {
       return item.label
     })
     .join('')
 }
-function handleValue({ value }) {
+function handleValue({ value }: any) {
   console.log(value)
 }
 </script>

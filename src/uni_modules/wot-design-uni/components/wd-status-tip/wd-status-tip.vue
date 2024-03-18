@@ -28,22 +28,9 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, watch, type CSSProperties } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
+import { statusTipProps } from './types'
 
-interface Props {
-  customClass?: string
-  customStyle?: string
-  image?: string
-  imageSize?: string
-  tip?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customStyle: '',
-  image: 'network',
-  imageSize: '',
-  tip: ''
-})
+const props = defineProps(statusTipProps)
 
 const imgUrl = ref<string>('') // 图片地址
 

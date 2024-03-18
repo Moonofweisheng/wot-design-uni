@@ -86,101 +86,16 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
-import { deepClone, defaultDisplayFormat, getType, isDef } from '../common/util'
+import { deepClone, defaultDisplayFormat, getType, isArray, isDef } from '../common/util'
 import { useCell } from '../composables/useCell'
-import { type ColumnItem, formatArray } from '../wd-picker-view/type'
+import { type ColumnItem, formatArray } from '../wd-picker-view/types'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
+import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
 
-interface Props {
-  customClass?: string
-  customLabelClass?: string
-  customValueClass?: string
-  customViewClass?: string
-  // 选择器左侧文案
-  label?: string
-  // 选择器占位符
-  placeholder?: string
-  // 禁用
-  disabled?: boolean
-  // 只读
-  readonly?: boolean
-  loading?: boolean
-  loadingColor?: string
-  /* popup */
-  // 弹出层标题
-  title?: string
-  // 取消按钮文案
-  cancelButtonText?: string
-  // 确认按钮文案
-  confirmButtonText?: string
-  // 是否必填
-  required?: boolean
-  size?: string
-  labelWidth?: string
-  useDefaultSlot?: boolean
-  useLabelSlot?: boolean
-  error?: boolean
-  alignRight?: boolean
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm?: Function
-  closeOnClickModal?: boolean
-  safeAreaInsetBottom?: boolean
-  ellipsis?: boolean
-
-  // 选项总高度
-  columnsHeight?: number
-  // 选项对象中，value对应的 key
-  valueKey?: string
-  // 选项对象中，展示的文本对应的 key
-  labelKey?: string
-  // 初始值
-  modelValue?: string | number | Array<string | number>
-  // 选择器数据
-  columns?: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>
-  // 多级联动
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  columnChange?: Function
-  // 外部展示格式化函数
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat?: Function
-  // 自定义层级
-  zIndex?: number
-  prop?: string
-  rules?: FormItemRule[]
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  modelValue: '',
-  customClass: '',
-  customViewClass: '',
-  customLabelClass: '',
-  customValueClass: '',
-  // 选择器占位符
-  // 禁用
-  disabled: false,
-  // 只读
-  readonly: false,
-  loading: false,
-  loadingColor: '#4D80F0',
-  // 是否必填
-  required: false,
-  useDefaultSlot: false,
-  useLabelSlot: false,
-  error: false,
-  alignRight: false,
-  closeOnClickModal: true,
-  safeAreaInsetBottom: true,
-  ellipsis: false,
-  columnsHeight: 217,
-  valueKey: 'value',
-  labelKey: 'label',
-  columns: () => [],
-  zIndex: 15,
-  rules: () => []
-})
+const props = defineProps(pickerProps)
 
 const pickerViewWd = ref<any>(null)
 const cell = useCell()
@@ -191,7 +106,7 @@ const innerLoading = ref<boolean>(false) // 内部控制是否loading
 const popupShow = ref<boolean>(false)
 // 选定后展示的选中项
 const showValue = ref<string>('')
-const pickerValue = ref<string | number | boolean | (string | number | boolean)[]>('')
+const pickerValue = ref<string | number | boolean | string[] | number[] | boolean[]>('')
 const displayColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 传入 pickerView 的columns
 const resetColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 保存之前的 columns，当取消时，将数据源回滚，避免多级联动数据源不正确的情况
 const isPicking = ref<boolean>(false) // 判断pickview是否还在滑动中
@@ -232,7 +147,7 @@ watch(
           setShowValue(pickerViewWd.value!.getSelects())
         })
       } else {
-        setShowValue(getSelects(props.modelValue))
+        setShowValue(getSelects(props.modelValue)!)
       }
     } else {
       showValue.value = ''
@@ -256,7 +171,7 @@ watch(
           setShowValue(pickerViewWd.value!.getSelects())
         })
       } else {
-        setShowValue(getSelects(props.modelValue))
+        setShowValue(getSelects(props.modelValue)!)
       }
     } else {
       showValue.value = ''
@@ -311,7 +226,7 @@ const { proxy } = getCurrentInstance() as any
 const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
 
 onMounted(() => {
-  props.modelValue && setShowValue(getSelects(props.modelValue))
+  props.modelValue && setShowValue(getSelects(props.modelValue)!)
   if (props.modelValue && pickerViewWd.value && pickerViewWd.value.getSelects) {
     setShowValue(pickerViewWd.value!.getSelects())
   }
@@ -326,12 +241,12 @@ onBeforeMount(() => {
  * @description 根据传入的value，picker组件获取当前cell展示值。
  * @param {String|Number|Array<String|Number|Array<any>>}value
  */
-function getSelects(value) {
+function getSelects(value: string | number | Array<string | number | Array<any>>) {
   const formatColumns = formatArray(props.columns, props.valueKey, props.labelKey)
   if (props.columns.length === 0) return
 
   // 使其默认选中首项
-  if (value === '' || value === null || value === undefined || (getType(value) === 'array' && value.length === 0)) {
+  if (value === '' || value === null || value === undefined || (isArray(value) && value.length === 0)) {
     value = formatColumns.map((col) => {
       return col[0][props.valueKey]
     })
@@ -409,7 +324,7 @@ function onConfirm() {
   if (beforeConfirm && getType(beforeConfirm) === 'function') {
     beforeConfirm(
       pickerValue.value,
-      (isPass) => {
+      (isPass: boolean) => {
         isPass && handleConfirm()
       },
       proxy.$.exposed
@@ -441,14 +356,14 @@ function handleConfirm() {
  * @description 初始change事件
  * @param event
  */
-function pickerViewChange({ value }) {
+function pickerViewChange({ value }: any) {
   pickerValue.value = value
 }
 /**
  * @description 设置展示值
- * @param {Array<String>} items
+ * @param  items
  */
-function setShowValue(items) {
+function setShowValue(items: ColumnItem | ColumnItem[]) {
   // 避免值为空时调用自定义展示函数
   if ((items instanceof Array && !items.length) || !items) return
 
@@ -476,7 +391,7 @@ function setLoading(loading: boolean) {
   innerLoading.value = loading
 }
 
-defineExpose({
+defineExpose<PickerExpose>({
   close,
   open,
   setLoading

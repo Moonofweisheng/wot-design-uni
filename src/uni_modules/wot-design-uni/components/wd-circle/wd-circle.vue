@@ -32,6 +32,7 @@ export default {
 // Circle 环形进度条
 import { computed, getCurrentInstance, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue'
 import { addUnit, isObj, objToStyle, uuid } from '../common/util'
+import { circleProps } from './types'
 
 // 大于等于0且小于等于100
 function format(rate: number) {
@@ -42,57 +43,8 @@ const PERIMETER = 2 * Math.PI
 // 开始角度
 const BEGIN_ANGLE = -Math.PI / 2
 const STEP = 1
-// 进度条端点的形状，可选值为 "butt" | "round" | "square"
-type StrokeLinecapType = 'butt' | 'round' | 'square'
-interface Props {
-  // 当前进度
-  modelValue: number
-  // 自定义class
-  customClass?: string
-  // 自定义style
-  customStyle?: string
-  // 圆环直径，默认单位为 px
-  size?: number
-  // 进度条颜色，传入对象格式可以定义渐变色
-  color?: string | Record<string, string>
-  // 轨道颜色
-  layerColor?: string
-  // 填充颜色
-  fill?: string
-  // 动画速度（单位为 rate/s）
-  speed?: number
-  // 文字
-  text?: string
-  // 进度条宽度 单位px
-  strokeWidth?: number
-  // 进度条端点的形状，可选值为 "butt" | "round" | "square"
-  strokeLinecap?: StrokeLinecapType
-  // 是否顺时针增加
-  clockwise?: boolean
-}
 
-const props = withDefaults(defineProps<Props>(), {
-  // 当前进度
-  modelValue: 0,
-  // 自定义class
-  customClass: '',
-  // 自定义style
-  customStyle: '',
-  // 圆环直径，默认单位为 px
-  size: 100,
-  // 进度条颜色，传入对象格式可以定义渐变色
-  color: '#4d80f0',
-  // 轨道颜色
-  layerColor: '#EBEEF5',
-  // 动画速度（单位为 rate/s）
-  speed: 50,
-  // 进度条宽度 默认单位px
-  strokeWidth: 10,
-  // 进度条端点的形状
-  strokeLinecap: 'round',
-  // 是否顺时针增加
-  clockwise: true
-})
+const props = defineProps(circleProps)
 
 const progressColor = ref<string | CanvasGradient>('') // 进度条颜色
 const pixel = ref<number>(1) // 设备像素比
@@ -242,7 +194,7 @@ function renderHoverCircle(context: UniApp.CanvasContext, formatValue: number) {
     const LinearColor = context.createLinearGradient(canvasSize, 0, 0, 0)
     Object.keys(props.color)
       .sort((a, b) => parseFloat(a) - parseFloat(b))
-      .map((key) => LinearColor.addColorStop(parseFloat(key) / 100, props.color[key]))
+      .map((key) => LinearColor.addColorStop(parseFloat(key) / 100, (props.color as Record<string, any>)[key]))
     progressColor.value = LinearColor
   } else {
     progressColor.value = props.color
@@ -263,7 +215,7 @@ function renderDot(context: UniApp.CanvasContext) {
     const LinearColor = context.createLinearGradient(canvasSize, 0, 0, 0)
     Object.keys(props.color)
       .sort((a, b) => parseFloat(a) - parseFloat(b))
-      .map((key) => LinearColor.addColorStop(parseFloat(key) / 100, props.color[key]))
+      .map((key) => LinearColor.addColorStop(parseFloat(key) / 100, (props.color as Record<string, any>)[key]))
     progressColor.value = LinearColor
   } else {
     progressColor.value = props.color

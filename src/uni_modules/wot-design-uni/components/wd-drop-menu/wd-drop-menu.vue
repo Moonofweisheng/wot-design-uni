@@ -39,28 +39,9 @@ import { closeOther } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { getRect, uuid } from '../common/util'
 import { useChildren } from '../composables/useChildren'
-import { DROP_MENU_KEY } from './types'
+import { DROP_MENU_KEY, dropMenuProps } from './types'
 
-type DropDirction = 'up' | 'down'
-interface Props {
-  customClass?: string
-  customStyle?: string
-  zIndex?: number
-  direction?: DropDirction
-  modal?: boolean
-  closeOnClickModal?: boolean
-  duration?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customStyle: '',
-  zIndex: 12,
-  direction: 'down',
-  modal: true,
-  closeOnClickModal: true,
-  duration: 200
-})
+const props = defineProps(dropMenuProps)
 const queue = inject<Queue | null>(queueKey, null)
 
 const dropMenuId = ref<string>(`dropMenuId${uuid()}`)
@@ -132,14 +113,14 @@ function fold(child?: any) {
     })
     return
   }
-  getRect(`#${dropMenuId.value}`, false, proxy).then((rect: any) => {
+  getRect(`#${dropMenuId.value}`, false, proxy).then((rect) => {
     if (!rect) return
     const { top, bottom } = rect
 
     if (props.direction === 'down') {
-      offset.value = bottom
+      offset.value = Number(bottom)
     } else {
-      offset.value = windowHeight.value - top
+      offset.value = windowHeight.value - Number(top)
     }
     const showPop = child.$.exposed!.getShowPop()
     if (showPop) {

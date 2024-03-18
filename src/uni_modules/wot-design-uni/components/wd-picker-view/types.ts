@@ -1,20 +1,77 @@
-/*
- * @Author: weisheng
- * @Date: 2023-08-21 13:03:42
- * @LastEditTime: 2023-08-21 17:24:57
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-picker-view\type.ts
- * 记得注释
- */
-
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
+import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import { getType } from '../common/util'
 
 export type ColumnItem = {
+  [key: string]: any
   value?: string | number | boolean
   label?: string
   disabled?: boolean
 }
+
+export type PickerViewColumnChange = (
+  pickerView: PickerViewInstance,
+  selects: Record<string, any> | Record<string, any>[],
+  index: number,
+  reslove: () => void
+) => void
+
+export const pickerViewProps = {
+  ...baseProps,
+  /**
+   * 加载状态
+   */
+  loading: makeBooleanProp(false),
+  /**
+   * 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写
+   */
+  loadingColor: makeStringProp('#4D80F0'),
+  /**
+   * picker内部滚筒高
+   */
+  columnsHeight: makeNumberProp(217),
+  /**
+   * 选项对象中，value对应的 key
+   */
+  valueKey: makeStringProp('value'),
+  /**
+   * 选项对象中，展示的文本对应的 key
+   */
+  labelKey: makeStringProp('label'),
+  /**
+   * 选中项，如果为多列选择器，则其类型应为数组
+   */
+  modelValue: {
+    type: [String, Number, Boolean, Array<number>, Array<string>, Array<boolean>] as PropType<
+      string | number | boolean | Array<number> | Array<string> | Array<boolean>
+    >,
+    default: '',
+    required: true
+  },
+  /**
+   * 选择器数据，可以为字符串数组，也可以为对象数组，如果为二维数组，则为多列选择器
+   */
+  columns: makeArrayProp<string | number | ColumnItem | Array<number> | Array<string> | Array<ColumnItem>>(),
+  /**
+   * 接收 pickerView 实例、选中项、当前修改列的下标、resolve 作为入参，根据选中项和列下标进行判断，通过 pickerView 实例暴露出来的 setColumnData 方法修改其他列的数据源。
+   */
+  columnChange: Function as PropType<PickerViewColumnChange>
+}
+
+export type PickerViewExpose = {
+  getSelects: () => Record<string, any> | Record<string, any>[]
+  getValues: () => string | string[]
+  setColumnData: (columnIndex: any, data: Array<any>, jumpTo?: number) => void
+  getColumnsData: () => Record<string, string>[][]
+  getColumnData: (columnIndex: number) => Record<string, string>[]
+  getColumnIndex: (columnIndex: number) => number
+  getLabels: () => string[]
+  getSelectedIndex: () => number[]
+}
+
+export type PickerViewProps = ExtractPropTypes<typeof pickerViewProps>
+
+export type PickerViewInstance = ComponentPublicInstance<PickerViewProps, PickerViewExpose>
 
 /**
  * @description 为props的value为array类型时提供format
@@ -67,11 +124,11 @@ export function formatArray(array: Array<string | number | ColumnItem | Array<st
       }
       // eslint-disable-next-line no-prototype-builtins
       if (!row.hasOwnProperty(labelKey)) {
-        row[labelKey] = row[valueKey]
+        ;(row as ColumnItem)[labelKey] = (row as ColumnItem)[valueKey]
       }
       // eslint-disable-next-line no-prototype-builtins
       if (!row.hasOwnProperty(valueKey)) {
-        row[valueKey] = row[labelKey]
+        ;(row as ColumnItem)[valueKey] = (row as ColumnItem)[labelKey]
       }
       return row as ColumnItem
     })

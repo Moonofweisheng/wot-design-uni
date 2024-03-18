@@ -99,10 +99,10 @@ const swiperList = ref([
   'https://img.yzcdn.cn/vant/cat.jpeg',
   'https://unpkg.com/wot-design-uni-assets/meng.jpg'
 ])
-function handleClick(e) {
+function handleClick(e: any) {
   console.log(e)
 }
-function onChange(e) {
+function onChange(e: any) {
   console.log(e)
 }
 </script>

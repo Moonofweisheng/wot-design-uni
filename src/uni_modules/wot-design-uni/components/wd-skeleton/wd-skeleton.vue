@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2024-03-15 11:36:12
+ * @LastEditTime: 2024-03-15 14:26:00
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-skeleton\wd-skeleton.vue
+ * 记得注释
+-->
 <template>
   <view class="wd-skeleton" :class="[props.customClass]" :style="props.customStyle">
     <view class="wd-skeleton__content" v-if="parsedRowCols.length">
@@ -84,7 +93,7 @@ function getColItemStyle(rowCol: SkeletonRowColObj) {
         style.width = px
         style.height = px
       } else {
-        style[name] = px
+        ;(style as any)[name] = px
       }
     }
   }
@@ -103,3 +112,4 @@ watch(
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+./type./type

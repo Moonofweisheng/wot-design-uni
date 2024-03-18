@@ -17,28 +17,9 @@ export default {
 <script lang="ts" setup>
 import { watch } from 'vue'
 import { useChildren } from '../composables/useChildren'
-import { RADIO_GROUP_KEY } from './types'
+import { RADIO_GROUP_KEY, radioGroupProps } from './types'
 
-type RadioShape = 'dot' | 'button' | 'check'
-interface Props {
-  customClass?: string
-  modelValue?: string | number | boolean
-  shape?: RadioShape
-  checkedColor?: string
-  disabled?: boolean
-  cell?: boolean
-  size?: string
-  inline?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  shape: 'check',
-  size: '',
-  disabled: false,
-  inline: false,
-  cell: false
-})
+const props = defineProps(radioGroupProps)
 
 const { linkChildren, children } = useChildren(RADIO_GROUP_KEY)
 

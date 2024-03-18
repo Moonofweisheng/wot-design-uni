@@ -27,28 +27,15 @@ import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import { getRect, isArray, isDef, isPromise, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { COLLAPSE_KEY } from '../wd-collapse/types'
+import { collapseItemProps, type CollapseItemExpose } from './types'
 
 const $body = '.wd-collapse-item__body'
 
-interface Props {
-  customClass?: string
-  title?: string
-  disabled?: boolean
-  name: string
-  // 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeExpend?: Function
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  disabled: false
-})
+const props = defineProps(collapseItemProps)
 
 const { parent: collapse, index } = useParent(COLLAPSE_KEY)
 
 const height = ref<string | number>('')
-const show = ref<boolean>(true)
 
 const expanded = ref<boolean>(false)
 
@@ -122,10 +109,10 @@ function init() {
  * @param {Boolean} firstRender 是否首次渲染
  */
 function doResetHeight(select: string) {
-  getRect(select, false, proxy).then((rect: any) => {
+  getRect(select, false, proxy).then((rect) => {
     if (!rect) return
     const { height: rectHeight } = rect
-    height.value = rectHeight
+    height.value = Number(rectHeight)
   })
 }
 
@@ -155,7 +142,11 @@ function handleClick() {
   }
 }
 
-defineExpose({ expanded })
+function getExpanded() {
+  return expanded.value
+}
+
+defineExpose<CollapseItemExpose>({ getExpanded })
 </script>
 
 <style lang="scss" scoped>

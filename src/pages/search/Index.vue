@@ -78,7 +78,7 @@ const menu = ref([
   }
 ])
 
-function search(e) {
+function search(e: any) {
   uni.showToast({ title: '搜索' + e.value })
 }
 function clear() {
@@ -87,10 +87,10 @@ function clear() {
 function cancel() {
   uni.showToast({ title: '取消' })
 }
-function change(e) {
+function change(e: any) {
   console.log(e.value)
 }
-function changeSearchType({ item, index }) {
+function changeSearchType({ item, index }: any) {
   // this.setData({
   //   searchType: e.detail.item.content
   // })

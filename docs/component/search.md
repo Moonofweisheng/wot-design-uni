@@ -169,7 +169,6 @@ function changeSearchType({ item, index }) {
 | use-suffix-slot  | 是否使用输入框右侧插槽                | boolean         | -      | false  | -        |
 | focus            | 是否自动聚焦                      | boolean         | -      | false  | 0.1.63        |
 | focusWhenClear   | 是否在点击清除按钮时聚焦输入框       | boolean         | -      | false  | 0.1.63        |
-| name             | form 表单中的字段名                   | string          | -      | -      | -        |
 
 ## Events
 

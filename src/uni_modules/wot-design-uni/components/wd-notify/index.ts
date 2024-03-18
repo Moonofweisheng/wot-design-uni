@@ -1,5 +1,5 @@
 import { provide, reactive } from 'vue'
-import type { NotifyProps } from './type'
+import type { NotifyProps } from './types'
 import { deepMerge, isString } from '../common/util'
 
 let timer: ReturnType<typeof setTimeout>

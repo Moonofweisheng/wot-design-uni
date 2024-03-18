@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2024-01-26 11:53:06
+ * @LastEditTime: 2024-03-15 16:49:17
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-col\wd-col.vue
@@ -29,17 +29,9 @@ import { computed, watch } from 'vue'
 import { ref } from 'vue'
 import { useParent } from '../composables/useParent'
 import { ROW_KEY } from '../wd-row/types'
-interface Props {
-  span?: number
-  offset?: number
-  customClass?: string
-}
+import { colProps } from './types'
 
-const props = withDefaults(defineProps<Props>(), {
-  span: 24,
-  offset: 0,
-  customClass: ''
-})
+const props = defineProps(colProps)
 
 const style = ref<string>('')
 

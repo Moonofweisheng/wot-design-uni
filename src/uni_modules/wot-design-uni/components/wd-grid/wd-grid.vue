@@ -19,27 +19,11 @@ export default {
 <script lang="ts" setup>
 import { watch } from 'vue'
 import { useChildren } from '../composables/useChildren'
-import { GRID_KEY } from './types'
+import { GRID_KEY, gridProps } from './types'
 import { debounce } from '../common/util'
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 20))
 
-interface Props {
-  customClass?: string
-  clickable?: boolean
-  square?: boolean
-  column?: number
-  border?: boolean
-  bgColor?: string
-  gutter?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  clickable: false,
-  square: false,
-  border: false,
-  bgColor: ''
-})
+const props = defineProps(gridProps)
 
 // 子元素个数
 const { linkChildren, children } = useChildren(GRID_KEY)

@@ -80,7 +80,7 @@ function custom() {
     customShow.value = false
   }, 1200)
 }
-function transition(transition) {
+function transition(transition: string) {
   name.value = transition
   show.value = true
   setTimeout(() => {

@@ -1,6 +1,5 @@
 <template>
   <page-wraper>
-    <wd-toast />
     <demo-block :title="`基本用法，数值: ${value1}`">
       <wd-picker-view v-model="value1" :columns="columns1" @change="(e) => onChange(1, e)" />
     </demo-block>
@@ -23,11 +22,10 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
+import type { PickerViewColumnChange } from '@/uni_modules/wot-design-uni/components/wd-picker-view/types'
 import { ref } from 'vue'
 
-const toast = useToast()
-const district = {
+const district: Record<string, Array<{ label: string; value: string }>> = {
   0: [
     { label: '北京', value: '110000' },
     { label: '广东省', value: '440000' }
@@ -97,8 +95,8 @@ const columns4 = ref([
 const value5 = ref(['110000', '110100', '110102'])
 const columns5 = ref([district[0], district[district[0][0].value], district[district[district[0][0].value][0].value]])
 
-const onChangeDistrict = (picker, value, columnIndex, resolve) => {
-  const item = value[columnIndex]
+const onChangeDistrict: PickerViewColumnChange = (picker, value, columnIndex, resolve) => {
+  const item = (value as Record<string, any>[])[columnIndex]
   if (columnIndex === 0) {
     picker.setColumnData(1, district[item.value])
     picker.setColumnData(2, district[district[item.value][0].value])
@@ -108,7 +106,7 @@ const onChangeDistrict = (picker, value, columnIndex, resolve) => {
   resolve()
 }
 
-function onChange(index: number, e) {
+function onChange(index: number, e: any) {
   console.log(e)
   if (index === 1) {
     // toast.show(`当前选中项: ${value}, 下标: ${index}`)

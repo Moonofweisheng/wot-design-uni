@@ -146,7 +146,6 @@ radio设置的props优先级比radioGroup上设置的props优先级更高
 | max-width | 文字位置最大宽度 | string | - | - | - |
 | inline | 同行展示 | boolean | - | false | - |
 | cell | 表单模式 | boolean | - | false | - |
-| name | form 表单中的字段名 | string | - | - | - |
 
 ## RadioGroup Events
 

@@ -226,15 +226,17 @@ export const context = {
   id: 1000
 }
 
+export type RectResultType<T extends boolean> = T extends true ? UniApp.NodeInfo[] : UniApp.NodeInfo
+
 /**
  * 获取节点信息
- * @param selector 节点 #id,.class
+ * @param selector 节点选择器 #id,.class
  * @param all 是否返回所有 selector 对应的节点
  * @param scope 作用域（支付宝小程序无效）
- * @returns
+ * @returns 节点信息或节点信息数组
  */
-export function getRect(selector: string, all: boolean = false, scope?: any) {
-  return new Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>((resolve) => {
+export function getRect<T extends boolean>(selector: string, all: T, scope?: any): Promise<RectResultType<T>> {
+  return new Promise<RectResultType<T>>((resolve, reject) => {
     let query: UniNamespace.SelectorQuery | null = null
     if (scope) {
       query = uni.createSelectorQuery().in(scope)
@@ -243,11 +245,12 @@ export function getRect(selector: string, all: boolean = false, scope?: any) {
     }
     query[all ? 'selectAll' : 'select'](selector)
       .boundingClientRect((rect) => {
-        if (all && Array.isArray(rect) && rect.length) {
-          resolve(rect)
-        }
-        if (!all && rect) {
-          resolve(rect)
+        if (all && isArray(rect) && rect.length > 0) {
+          resolve(rect as RectResultType<T>)
+        } else if (!all && rect) {
+          resolve(rect as RectResultType<T>)
+        } else {
+          reject(new Error('No nodes found'))
         }
       })
       .exec()
@@ -374,7 +377,7 @@ export function isBase64Image(url: string) {
  * @param {object | object[]} styles 外部传入的样式对象或数组
  * @returns {string} 格式化后的 CSS 样式字符串
  */
-export function objToStyle(styles: object | object[]): string {
+export function objToStyle(styles: Record<string, any> | Record<string, any>[]): string {
   // 如果 styles 是数组类型
   if (isArray(styles)) {
     // 使用过滤函数去除空值和 null 值的元素
@@ -633,3 +636,10 @@ export const getPropByPath = (obj: any, path: string): any => {
     return undefined
   }
 }
+
+/**
+ * 检查一个值是否为Date类型
+ * @param val 要检查的值
+ * @returns 如果值是Date类型，则返回true，否则返回false
+ */
+export const isDate = (val: unknown): val is Date => Object.prototype.toString.call(val) === '[object Date]' && !Number.isNaN((val as Date).getTime())

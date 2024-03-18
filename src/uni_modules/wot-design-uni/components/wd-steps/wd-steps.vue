@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 18:40:58
- * @LastEditTime: 2024-01-03 21:31:31
+ * @LastEditTime: 2024-03-15 13:42:55
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-steps/wd-steps.vue
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-steps\wd-steps.vue
  * 记得注释
 -->
 <template>
@@ -24,24 +24,9 @@ export default {
 </script>
 <script lang="ts" setup>
 import { useChildren } from '../composables/useChildren'
-import { STEPS_KEY } from './types'
+import { STEPS_KEY, stepsProps } from './types'
 
-interface Props {
-  customClass?: string
-  active?: number
-  vertical?: boolean
-  dot?: boolean
-  space?: string
-  alignCenter?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  active: 0,
-  vertical: false,
-  dot: false,
-  alignCenter: false
-})
+const props = defineProps(stepsProps)
 
 const { linkChildren } = useChildren(STEPS_KEY)
 
@@ -50,3 +35,4 @@ linkChildren({ props })
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+./type

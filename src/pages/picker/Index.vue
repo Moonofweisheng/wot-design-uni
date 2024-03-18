@@ -40,11 +40,13 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { ColumnItem, PickerViewColumnChange } from '@/uni_modules/wot-design-uni/components/wd-picker-view/types'
+import type { PickerBeforeConfirm, PickerDisplayFormat } from '@/uni_modules/wot-design-uni/components/wd-picker/types'
 import { ref } from 'vue'
 
 const toast = useToast()
 
-const district = {
+const district: Record<string, Array<{ label: string; value: string }>> = {
   0: [
     { label: '北京', value: '110000' },
     { label: '广东省', value: '440000' }
@@ -111,8 +113,8 @@ const columns6 = ref([
 const columns7 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
 const value7 = ref('')
 
-const onChangeDistrict = (pickerView, value, columnIndex, resolve) => {
-  const item = value[columnIndex]
+const onChangeDistrict: PickerViewColumnChange = (pickerView, value, columnIndex, resolve) => {
+  const item = (value as Record<string, any>[])[columnIndex]
   if (columnIndex === 0) {
     pickerView.setColumnData(1, district[item.value])
     pickerView.setColumnData(2, district[district[item.value][0].value])
@@ -122,19 +124,19 @@ const onChangeDistrict = (pickerView, value, columnIndex, resolve) => {
   resolve()
 }
 
-const displayFormat = (items) => {
-  return items
+const displayFormat: PickerDisplayFormat = (items) => {
+  return (items as ColumnItem[])
     .map((item) => {
       return item.label
     })
     .join('-')
 }
 
-const beforeConfirm = (value, resolve, picker) => {
+const beforeConfirm: PickerBeforeConfirm = (value, resolve, picker) => {
   picker.setLoading(true)
   setTimeout(() => {
     picker.setLoading(false)
-    if (['选项2', '选项3'].indexOf(value) > -1) {
+    if (['选项2', '选项3'].indexOf(value as string) > -1) {
       resolve(false)
       toast.error('选项校验不通过，请重新选择')
     } else {
@@ -143,7 +145,7 @@ const beforeConfirm = (value, resolve, picker) => {
   }, 2000)
 }
 
-function handleConfirm({ value }) {
+function handleConfirm({ value }: any) {
   value8.value = value
 }
 </script>

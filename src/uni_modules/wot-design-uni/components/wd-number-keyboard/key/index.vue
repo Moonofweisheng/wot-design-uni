@@ -32,24 +32,9 @@ export default {
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { useTouch } from '../../composables/useTouch'
+import { keyProps } from './types'
 
-type KeyType = '' | 'delete' | 'extra' | 'close'
-
-interface Props {
-  type?: KeyType
-  text?: number | string
-  wider?: boolean
-  large?: boolean
-  loading?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  type: '',
-  text: '',
-  wider: false,
-  large: false,
-  loading: false
-})
+const props = defineProps(keyProps)
 
 const touch = useTouch()
 const active = ref<boolean>(false)

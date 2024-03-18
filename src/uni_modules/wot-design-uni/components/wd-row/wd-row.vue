@@ -17,17 +17,9 @@ export default {
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useChildren } from '../composables/useChildren'
-import { ROW_KEY } from './types'
+import { ROW_KEY, rowProps } from './types'
 
-interface Props {
-  customClass?: string
-  gutter?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  gutter: 0
-})
+const props = defineProps(rowProps)
 const { linkChildren } = useChildren(ROW_KEY)
 
 linkChildren({ props })

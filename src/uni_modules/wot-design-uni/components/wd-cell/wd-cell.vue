@@ -60,46 +60,10 @@ export default {
 import { computed } from 'vue'
 import { useCell } from '../composables/useCell'
 import { useParent } from '../composables/useParent'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
+import { FORM_KEY } from '../wd-form/types'
+import { cellProps } from './types'
 
-interface Props {
-  title?: string
-  value?: string
-  icon?: string
-  label?: string
-  isLink?: boolean
-  to?: string
-  replace?: boolean
-  clickable?: boolean
-  size?: string
-  border?: boolean
-  titleWidth?: string
-  center?: boolean
-  required?: boolean
-  vertical?: boolean
-  prop?: string
-  rules?: FormItemRule[]
-  customClass?: string
-  customIconClass?: string
-  customLabelClass?: string
-  customValueClass?: string
-  customTitleClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customIconClass: '',
-  customLabelClass: '',
-  customValueClass: '',
-  customTitleClass: '',
-  isLink: false,
-  clickable: false,
-  replace: false,
-  center: false,
-  required: false,
-  vertical: false,
-  rules: () => []
-})
+const props = defineProps(cellProps)
 
 const cell = useCell()
 
@@ -124,7 +88,7 @@ const isRequired = computed(() => {
     const rules = form.props.rules
     for (const key in rules) {
       if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
+        formRequired = rules[key].some((rule) => rule.required)
       }
     }
   }

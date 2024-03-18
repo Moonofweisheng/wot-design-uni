@@ -29,30 +29,9 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, inject, onMounted } from 'vue'
 import { addUnit, isDef, objToStyle, isOdd } from '../common/util'
+import { tableColumnProps, type TableColumn } from './types'
 
-type AlignType = 'left' | 'center' | 'right'
-
-interface Props {
-  // 列对应字段
-  prop: string
-  // 列对应字段标题
-  label: string
-  // 列宽度
-  width?: number | string
-  // 是否开启列排序
-  sortable?: boolean
-  // 是否固定本列
-  fixed?: boolean
-  // 列的对齐方式，可选值left,center,right
-  align?: AlignType
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  sortable: false, // 是否开启列排序
-  fixed: false, // 是否固定本列
-  width: 100, // 列宽度，单位px
-  align: 'left' // 列对齐方式
-})
+const props = defineProps(tableColumnProps)
 
 const parent = inject<any>('wdTable', { data: [] }) // table数据
 
@@ -81,7 +60,7 @@ const ellipsis = computed(() => {
 const isLastFixed = computed(() => {
   let isLastFixed: boolean = false
   if (props.fixed && isDef(parent.columns)) {
-    const columns = parent.columns.filter((column) => {
+    const columns = parent.columns.filter((column: TableColumn) => {
       return column.fixed
     })
     if (columns.length && columns[columns.length - 1].prop === props.prop) {
@@ -98,12 +77,12 @@ const columnStyle = computed(() => {
     style['width'] = addUnit(props.width)
   }
   if (props.fixed) {
-    const columnIndex: number = parent.columns.findIndex((column) => {
+    const columnIndex: number = parent.columns.findIndex((column: TableColumn) => {
       return column.prop === props.prop
     })
     if (columnIndex > 0) {
       let left: string | number = ''
-      parent.columns.forEach((column, index) => {
+      parent.columns.forEach((column: TableColumn, index: number) => {
         if (index < columnIndex) {
           left = left ? `${left} + ${addUnit(column.width)}` : addUnit(column.width)
         }
@@ -125,12 +104,12 @@ const cellStyle = computed(() => {
     style['height'] = addUnit(rowHeight)
   }
   if (props.fixed) {
-    const columnIndex: number = parent.columns.findIndex((column) => {
+    const columnIndex: number = parent.columns.findIndex((column: TableColumn) => {
       return column.prop === props.prop
     })
     if (columnIndex > 0) {
       let left: string | number = ''
-      parent.columns.forEach((column, index) => {
+      parent.columns.forEach((column: TableColumn, index: number) => {
         if (index < columnIndex) {
           left = left ? `${left} + ${addUnit(column.width)}` : addUnit(column.width)
         }
@@ -152,7 +131,7 @@ const scope = computed(() => {
 
 // 列数据
 const column = computed(() => {
-  let column: any[] = parent.data.map((item) => {
+  let column: any[] = parent.data.map((item: any) => {
     return item[props.prop]
   })
   return column
@@ -183,3 +162,4 @@ function handleRowClick(index: number) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+./type

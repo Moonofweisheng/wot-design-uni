@@ -46,32 +46,9 @@ import { computed, getCurrentInstance, onBeforeMount, watch } from 'vue'
 import { useParent } from '../composables/useParent'
 import { CHECKBOX_GROUP_KEY } from '../wd-checkbox-group/types'
 import { isDef } from '../common/util'
+import { checkboxProps } from './types'
 
-type checkShape = 'circle' | 'square' | 'button'
-interface Props {
-  customLabelClass?: string
-  customShapeClass?: string
-  customClass?: string
-  modelValue: string | number | boolean
-  shape?: checkShape
-  checkedColor?: string
-  disabled?: boolean | null
-  trueValue?: string | number | boolean
-  falseValue?: string | number | boolean
-  size?: string
-  maxWidth?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customLabelClass: '',
-  customShapeClass: '',
-  customClass: '',
-  shape: 'circle',
-  trueValue: true,
-  falseValue: false,
-  disabled: null
-})
-
+const props = defineProps(checkboxProps)
 const { parent: checkboxGroup, index } = useParent(CHECKBOX_GROUP_KEY)
 
 const isChecked = computed(() => {

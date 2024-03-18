@@ -19,15 +19,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-interface Props {
-  customClass?: string
-  color?: string
-}
+import { dividerProps } from './types'
 
-const props = withDefaults(defineProps<Props>(), {
-  color: '',
-  customClass: ''
-})
+defineProps(dividerProps)
 </script>
 
 <style lang="scss" scoped>

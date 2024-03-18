@@ -60,22 +60,12 @@ export default {
 
 <script lang="ts" setup>
 import { computed, inject, ref, watch } from 'vue'
-import type { MessageOptions, MessageType } from './types'
+import { messageBoxProps, type InputValidate, type MessageOptions, type MessageType } from './types'
 import { defaultOptions, messageDefaultOptionKey } from '.'
 import { isDef } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 
-interface Props {
-  useSlot?: boolean
-  selector?: string
-  customClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  useSlot: false,
-  customClass: '',
-  selector: ''
-})
+const props = defineProps(messageBoxProps)
 
 const { translate } = useTranslate('message-box')
 
@@ -148,8 +138,7 @@ const inputPattern = ref<RegExp>()
 /**
  * 当type为prompt时，输入框校验函数，点击确定按钮时进行校验
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-let inputValidate: Function | null = null
+let inputValidate: InputValidate | null = null
 
 /**
  * 当type为prompt时，输入框检验不通过时的错误提示文案
@@ -234,7 +223,7 @@ function validate() {
     return false
   }
   if (typeof inputValidate === 'function') {
-    const validateResult = inputValidate(inputValue)
+    const validateResult = inputValidate(inputValue.value)
     if (!validateResult) {
       showErr.value = true
       return false
@@ -247,7 +236,7 @@ function validate() {
  * @description show关闭时，销毁错误提示
  * @param val
  */
-function resetErr(val) {
+function resetErr(val: boolean) {
   if (val === false) {
     showErr.value = false
   }

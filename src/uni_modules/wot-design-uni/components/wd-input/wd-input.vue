@@ -91,89 +91,11 @@ import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
+import { inputProps } from './types'
 
-interface Props {
-  customInputClass?: string
-  customLabelClass?: string
-  customClass?: string
-  customStyle?: string
-  // 原生属性
-  placeholder?: string
-  placeholderStyle?: string
-  placeholderClass?: string
-  cursorSpacing?: number
-  cursor?: number
-  selectionStart?: number
-  selectionEnd?: number
-  adjustPosition?: boolean
-  holdKeyboard?: boolean
-  confirmType?: string
-  confirmHold?: boolean
-  focus?: boolean
-  type?: string
-  maxlength?: number
-  disabled?: boolean
-  alwaysEmbed?: boolean
-  // 原生属性结束
-  alignRight?: boolean
-  modelValue: string | number
-  showPassword?: boolean
-  clearable?: boolean
-  readonly?: boolean
-  useSuffixSlot?: boolean
-  usePrefixSlot?: boolean
-  prefixIcon?: string
-  suffixIcon?: string
-  showWordLimit?: boolean
-  label?: string
-  labelWidth?: string
-  useLabelSlot?: boolean
-  size?: string
-  error?: boolean
-  center?: boolean
-  noBorder?: boolean
-  required?: boolean
-  prop?: string
-  rules?: FormItemRule[]
-}
+const props = defineProps(inputProps)
 
 const { translate } = useTranslate('input')
-
-const props = withDefaults(defineProps<Props>(), {
-  customInputClass: '',
-  customLabelClass: '',
-  customClass: '',
-  customStyle: '',
-  type: 'text',
-  maxlength: -1,
-  modelValue: '',
-  clearable: false,
-  showPassword: false,
-  disabled: false,
-  alignRight: false,
-  alwaysEmbed: false,
-  readonly: false,
-  useSuffixSlot: false,
-  usePrefixSlot: false,
-  showWordLimit: false,
-  confirmType: 'done',
-  confirmHold: false,
-  placeholderClass: '',
-  focus: false,
-  cursorSpacing: 0,
-  cursor: -1,
-  selectionStart: -1,
-  selectionEnd: -1,
-  adjustPosition: true,
-  holdKeyboard: false,
-  error: false,
-  center: false,
-  labelWidth: '33%',
-  useLabelSlot: false,
-  required: false,
-  noBorder: false,
-  rules: () => []
-})
 
 const showClear = ref<boolean>(false)
 const showWordCount = ref<boolean>(false)
@@ -304,7 +226,7 @@ function clear() {
     })
 }
 // 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur
-function handleBlur({ detail }) {
+function handleBlur() {
   isFocus.value = false
   emit('change', {
     value: inputValue.value
@@ -314,7 +236,7 @@ function handleBlur({ detail }) {
     value: inputValue.value
   })
 }
-function handleFocus({ detail }) {
+function handleFocus({ detail }: any) {
   if (clearing.value) {
     clearing.value = false
     return
@@ -327,10 +249,10 @@ function handleInput() {
   emit('update:modelValue', inputValue.value)
   emit('input', inputValue.value)
 }
-function handleKeyboardheightchange(event) {
+function handleKeyboardheightchange(event: any) {
   emit('keyboardheightchange', event.detail)
 }
-function handleConfirm({ detail }) {
+function handleConfirm({ detail }: any) {
   emit('confirm', detail)
 }
 function onClickSuffixIcon() {

@@ -1,13 +1,15 @@
 /*
  * @Author: weisheng
  * @Date: 2023-06-19 12:47:57
- * @LastEditTime: 2023-09-07 00:34:18
+ * @LastEditTime: 2024-03-14 21:18:15
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-toast\type.ts
  * 记得注释
  */
-import type { LoadingType } from '../wd-loading/type'
+import type { ExtractPropTypes } from 'vue'
+import { baseProps, makeStringProp } from '../common/props'
+import type { LoadingType } from '../wd-loading/types'
 
 export type ToastIconType = 'success' | 'error' | 'warning' | 'loading' | 'info' // 图标类型
 
@@ -46,3 +48,11 @@ export interface Toast {
   // 关闭Toast
   close(): void
 }
+
+export const toastProps = {
+  ...baseProps,
+  customIconClass: makeStringProp(''),
+  selector: makeStringProp('')
+}
+
+export type ToastProps = ExtractPropTypes<typeof toastProps>

@@ -108,6 +108,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { FormInstance } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import { reactive, ref } from 'vue'
 
 const model1 = reactive<{
@@ -131,14 +132,14 @@ const model2 = reactive<{
 })
 
 const { success: showSuccess, loading: showLoading, close: closeToast } = useToast()
-const form1 = ref()
-const form2 = ref()
+const form1 = ref<FormInstance>()
+const form2 = ref<FormInstance>()
 
-const validatorMessage = (val) => {
+const validatorMessage = (val: string) => {
   return /1\d{10}/.test(val)
 }
 
-const validator = (val) => {
+const validator = (val: any) => {
   if (String(val).length >= 4) {
     return Promise.resolve()
   } else {
@@ -147,7 +148,7 @@ const validator = (val) => {
 }
 
 // 校验函数可以返回 Promise，实现异步校验
-const asyncValidator = (val) =>
+const asyncValidator = (val: string) =>
   new Promise((resolve) => {
     showLoading('验证中...')
 
@@ -158,8 +159,8 @@ const asyncValidator = (val) =>
   })
 
 function handleSubmit1() {
-  form1.value
-    .validate()
+  form1
+    .value!.validate()
     .then(({ valid, errors }) => {
       if (valid) {
         showSuccess({
@@ -173,8 +174,8 @@ function handleSubmit1() {
 }
 
 function handleSubmit2() {
-  form2.value
-    .validate()
+  form2
+    .value!.validate()
     .then(({ valid, errors }) => {
       if (valid) {
         showSuccess({

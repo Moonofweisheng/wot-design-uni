@@ -28,34 +28,12 @@ import { onBeforeMount, ref, watch } from 'vue'
 import { getRect } from '../common/util'
 import { getCurrentInstance } from 'vue'
 import { nextTick } from 'vue'
+import { noticeBarProps } from './types'
 
 const $wrap = '.wd-notice-bar__wrap'
 const $content = '.wd-notice-bar__content'
 
-type NoticeBarType = 'warning' | 'info' | 'danger' | ''
-interface Props {
-  customClass?: string
-  text?: string
-  type?: NoticeBarType
-  scrollable?: boolean
-  delay?: number
-  speed?: number
-  closable?: boolean
-  wrapable?: boolean
-  prefix?: string
-  color?: string
-  backgroundColor?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  type: 'warning',
-  scrollable: true,
-  delay: 1,
-  speed: 50,
-  closable: false,
-  wrapable: false
-})
+const props = defineProps(noticeBarProps)
 
 const firstPlay = ref<boolean>(true)
 const wrapWidth = ref<number>(0)
@@ -104,7 +82,7 @@ function handleClose() {
   emit('close')
 }
 
-function initAnimation(duration, delay, translate) {
+function initAnimation(duration: number, delay: number, translate: number) {
   const ani = uni
     .createAnimation({
       duration,
@@ -117,7 +95,7 @@ function initAnimation(duration, delay, translate) {
 
 function scroll() {
   Promise.all([getRect($wrap, false, proxy), getRect($content, false, proxy)]).then((rects) => {
-    const [wrapRect, contentRect] = rects as UniApp.NodeInfo[]
+    const [wrapRect, contentRect] = rects
     if (!wrapRect || !contentRect || !wrapRect.width || !contentRect.width) return
 
     const wrapWidthTemp = wrapRect.width

@@ -96,91 +96,28 @@ export default {
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
-import { debounce, getRect, getType } from '../common/util'
+import { debounce, getRect, getType, isArray, isBoolean } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
+import { colPickerProps, type ColPickerExpose } from './types'
 
 const { translate } = useTranslate('col-picker')
 
 const $container = '.wd-col-picker__selected-container'
 const $item = '.wd-col-picker__selected-item'
 
-interface Props {
-  customClass?: string
-  customViewClass?: string
-  customLabelClass?: string
-  customValueClass?: string
-  modelValue: Array<string | number>
-  columns: Array<Array<Record<string, any>>>
-  label?: string
-  labelWidth?: string
-  useLabelSlot?: boolean
-  useDefaultSlot?: boolean
-  disabled?: boolean
-  readonly?: boolean
-  placeholder?: string
-  title?: string
-  // 接收当前列的选中项 item、当前列下标、当前列选中项下标下一列数据处理函数 resolve、结束选择 finish
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  columnChange?: Function
-  // 外部展示格式化函数
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat?: Function
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm?: Function
-  alignRight?: boolean
-  error?: boolean
-  required?: boolean
-  size?: string
-  valueKey?: string
-  labelKey?: string
-  tipKey?: string
-  loadingColor?: string
-  closeOnClickModal?: boolean
-  autoComplete?: boolean
-  zIndex?: number
-  safeAreaInsetBottom?: boolean
-  ellipsis?: boolean
-  prop?: string
-  rules?: FormItemRule[]
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customViewClass: '',
-  customLabelClass: '',
-  customValueClass: '',
-  columns: () => [],
-  useLabelSlot: false,
-  useDefaultSlot: false,
-  disabled: false,
-  readonly: false,
-  alignRight: false,
-  error: false,
-  required: false,
-  valueKey: 'value',
-  labelKey: 'label',
-  tipKey: 'tip',
-  loadingColor: '#4D80F0',
-  closeOnClickModal: true,
-  autoComplete: false,
-  zIndex: 15,
-  safeAreaInsetBottom: true,
-  ellipsis: false,
-  labelWidth: '33%',
-  rules: () => []
-})
+const props = defineProps(colPickerProps)
 
 const pickerShow = ref<boolean>(false)
 const currentCol = ref<number>(0)
-const selectList = ref<Record<string, any>[]>([])
+const selectList = ref<Record<string, any>[][]>([])
 const pickerColSelected = ref<(string | number)[]>([])
 const selectShowList = ref<Record<string, any>[]>([])
 const loading = ref<boolean>(false)
 const isChange = ref<boolean>(false)
-const lastSelectList = ref<Record<string, any>[]>([])
+const lastSelectList = ref<Record<string, any>[][]>([])
 const lastPickerColSelected = ref<(string | number)[]>([])
 const lineStyle = ref<string>('')
 const scrollLeft = ref<number>(0)
@@ -325,11 +262,11 @@ onMounted(() => {
   inited.value = true
 })
 
-// 对外暴露方法，打开弹框
+// 打开弹框
 function open() {
   showPicker()
 }
-// 对外暴露方法，关闭弹框
+// 关闭弹框
 function close() {
   handlePickerClose()
 }
@@ -345,7 +282,7 @@ function handlePickerClose() {
       selectList.value = lastSelectList.value.slice(0)
       pickerColSelected.value = lastPickerColSelected.value.slice(0)
       selectShowList.value = lastPickerColSelected.value.map((item, colIndex) => {
-        return getSelectedItem(item, colIndex, lastSelectList)[props.labelKey]
+        return getSelectedItem(item, colIndex, lastSelectList.value)[props.labelKey]
       })
       currentCol.value = lastSelectList.value.length - 1
       isChange.value = false
@@ -362,7 +299,7 @@ function showPicker() {
   lastSelectList.value = selectList.value.slice(0)
 }
 
-function getSelectedItem(value, colIndex, selectList) {
+function getSelectedItem(value: string | number, colIndex: number, selectList: Record<string, any>[][]) {
   const { valueKey, labelKey } = props
   if (selectList[colIndex]) {
     const selecteds = selectList[colIndex].filter((item) => {
@@ -380,7 +317,7 @@ function getSelectedItem(value, colIndex, selectList) {
   }
 }
 
-function chooseItem(colIndex, index) {
+function chooseItem(colIndex: number, index: number) {
   const item = selectList.value[colIndex][index]
   if (item.disabled) return
 
@@ -394,7 +331,7 @@ function chooseItem(colIndex, index) {
   })
   handleColChange(colIndex, item, index)
 }
-function handleColChange(colIndex, item, index, callback?) {
+function handleColChange(colIndex: number, item: Record<string, any>, index: number, callback?: () => void) {
   loading.value = true
   const { columnChange, beforeConfirm } = props
   columnChange &&
@@ -402,7 +339,7 @@ function handleColChange(colIndex, item, index, callback?) {
       selectedItem: item,
       index: colIndex,
       rowIndex: index,
-      resolve: (nextColumn) => {
+      resolve: (nextColumn: Record<string, any>[]) => {
         if (!(nextColumn instanceof Array)) {
           console.error('[wot design] error(wd-col-picker): the data of each column of wd-col-picker should be an array')
           return
@@ -424,14 +361,14 @@ function handleColChange(colIndex, item, index, callback?) {
           callback()
         }
       },
-      finish: (isOk) => {
+      finish: (isOk?: boolean) => {
         // 每设置展示数据回显
         if (typeof callback === 'function') {
           loading.value = false
           isCompleting.value = false
           return
         }
-        if (getType(isOk) === 'boolean' && !isOk) {
+        if (isBoolean(isOk) && !isOk) {
           loading.value = false
           return
         }
@@ -442,7 +379,7 @@ function handleColChange(colIndex, item, index, callback?) {
             pickerColSelected.value.map((item, colIndex) => {
               return getSelectedItem(item, colIndex, selectList.value)
             }),
-            (isPass) => {
+            (isPass: boolean) => {
               if (isPass) {
                 onConfirm()
               } else {
@@ -480,12 +417,12 @@ function handleColClick(index: number) {
  */
 function setLineStyle(animation = true) {
   if (!inited.value) return
-  getRect($item, true, proxy).then((rects: any) => {
+  getRect($item, true, proxy).then((rects) => {
     const rect = rects[currentCol.value]
     // const width = lineWidth || (slidableNum < items.length ? rect.width : (rect.width - 14))
     const width = 16
-    let left = rects.slice(0, currentCol.value).reduce((prev, curr) => prev + curr.width, 0)
-    left += (rect.width - width) / 2
+    let left = rects.slice(0, currentCol.value).reduce((prev: any, curr: any) => prev + curr.width, 0)
+    left += (Number(rect.width) - width) / 2
     const transition = animation ? 'transition: width 300ms ease, transform 300ms ease;' : ''
 
     const lineStyleTemp = `
@@ -504,18 +441,18 @@ function setLineStyle(animation = true) {
 function lineScrollIntoView() {
   if (!inited.value) return
   Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)]).then(([navItemsRects, navRect]) => {
-    if ((navItemsRects as any).length === 0) return
+    if (!isArray(navItemsRects) || navItemsRects.length === 0) return
     // 选中元素
     const selectItem = navItemsRects[currentCol.value]
     // 选中元素之前的节点的宽度总和
-    const offsetLeft = (navItemsRects as any).slice(0, currentCol).reduce((prev, curr) => prev + curr.width, 0)
+    const offsetLeft = navItemsRects.slice(0, currentCol.value).reduce((prev, curr) => prev + Number(curr.width), 0)
     // scroll-view滑动到selectItem的偏移量
-    scrollLeft.value = offsetLeft - ((navRect as any).width - selectItem.width) / 2
+    scrollLeft.value = offsetLeft - ((navRect as any).width - Number(selectItem.width)) / 2
   })
 }
 
 // 递归列数据补齐
-function diffColumns(colIndex) {
+function diffColumns(colIndex: number) {
   // colIndex 为 -1 时，item 为空对象，>=0 时则具有 value 属性
   const item = colIndex === -1 ? {} : { [props.valueKey]: props.modelValue[colIndex] }
   handleColChange(colIndex, item, -1, () => {
@@ -540,7 +477,7 @@ function handleAutoComplete() {
   }
 }
 
-defineExpose({
+defineExpose<ColPickerExpose>({
   close,
   open
 })

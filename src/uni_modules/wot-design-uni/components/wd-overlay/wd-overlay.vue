@@ -24,22 +24,9 @@ export default {
 
 <script lang="ts" setup>
 import useLockScroll from '../composables/useLockScroll'
+import { overlayProps } from './types'
 
-interface Props {
-  show: boolean
-  duration?: Record<string, number> | number | boolean
-  lockScroll?: boolean
-  zIndex?: number
-  customStyle?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  show: false,
-  lockScroll: true,
-  duration: 300,
-  zIndex: 10,
-  customStyle: ''
-})
+const props = defineProps(overlayProps)
 
 const emit = defineEmits(['click'])
 

@@ -29,6 +29,7 @@
 </template>
 <script lang="ts" setup>
 import { useMessage } from '@/uni_modules/wot-design-uni'
+import type { SwitchBeforeChange } from '@/uni_modules/wot-design-uni/components/wd-switch/types'
 import { ref } from 'vue'
 
 const checked1 = ref<boolean>(true)
@@ -41,7 +42,7 @@ const checked7 = ref<boolean>(false)
 
 const message = useMessage()
 
-const beforeChange = ({ value, resolve }) => {
+const beforeChange: SwitchBeforeChange = ({ value, resolve }) => {
   message
     .confirm('是否切换开关')
     .then(() => {
@@ -51,19 +52,19 @@ const beforeChange = ({ value, resolve }) => {
       resolve(false)
     })
 }
-function handleChange1({ value }) {
+function handleChange1({ value }: any) {
   console.log(value)
 }
-function handleChange2({ value }) {
+function handleChange2({ value }: any) {
   console.log(value)
 }
-function handleChange3({ value }) {
+function handleChange3({ value }: any) {
   console.log(value)
 }
-function handleChange4({ value }) {
+function handleChange4({ value }: any) {
   console.log(value)
 }
-function handleChange5({ value }) {
+function handleChange5({ value }: any) {
   console.log(value)
 }
 </script>

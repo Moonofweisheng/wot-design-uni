@@ -24,23 +24,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-interface Props {
-  customClass?: string
-  title?: string
-  modelValue: number
-  allowReset?: boolean
-  descFirst?: boolean
-  line?: boolean
-}
+import { sortButtonProps } from './types'
 
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  title: '',
-  modelValue: 0,
-  allowReset: false,
-  descFirst: false,
-  line: true
-})
+const props = defineProps(sortButtonProps)
 
 const emit = defineEmits(['change', 'update:modelValue'])
 

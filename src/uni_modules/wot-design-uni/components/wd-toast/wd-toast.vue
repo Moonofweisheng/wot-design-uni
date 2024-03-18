@@ -34,20 +34,10 @@ export default {
 import { computed, inject, onBeforeMount, ref, watch } from 'vue'
 import base64 from '../common/base64'
 import { defaultOptions, toastDefaultOptionKey, toastIcon } from '.'
-import type { ToastLoadingType, ToastOptions } from './type'
+import { toastProps, type ToastLoadingType, type ToastOptions } from './types'
 import { isDef, objToStyle } from '../common/util'
 
-interface Props {
-  customIconClass?: string
-  customClass?: string
-  selector?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customIconClass: '',
-  customClass: '',
-  selector: ''
-})
+const props = defineProps(toastProps)
 
 const iconName = ref<string>('') // 图标类型
 const customIcon = ref<boolean>(false)

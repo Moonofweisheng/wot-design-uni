@@ -219,11 +219,11 @@ const dataList = ref<Record<string, any>[]>([
  * 排序
  * @param e
  */
-function doSort(e) {
+function doSort() {
   dataList.value = dataList.value.reverse()
 }
 
-function handleRowClick({ rowIndex }) {
+function handleRowClick({ rowIndex }: any) {
   console.log(rowIndex)
 }
 </script>

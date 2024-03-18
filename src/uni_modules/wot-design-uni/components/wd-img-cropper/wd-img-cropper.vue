@@ -80,6 +80,7 @@ export default {
 import { computed, getCurrentInstance, ref, watch } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
+import { imgCropperProps, type ImgCropperExpose } from './types'
 
 // 延时动画设置
 let CHANGE_TIME: any | null = null
@@ -94,53 +95,9 @@ let INIT_IMGHEIGHT: null | number | string = null
 // 顶部裁剪框占比
 const TOP_PERCENT = 0.85
 
-interface Props {
-  customClass?: string
-  modelValue: boolean
-  cancelButtonText?: string
-  confirmButtonText?: string
-  // 是否禁用旋转
-  disabledRotate?: boolean
-  /** canvas绘图参数 start **/
-  // canvasToTempFilePath —— fileType
-  fileType?: string
-  // canvasToTempFilePath —— quality
-  quality?: number
-  // 设置导出图片尺寸
-  exportScale?: number
-  /** canvas绘图参数 end **/
-  // 图片源路径
-  imgSrc?: string
-  // 图片宽
-  imgWidth?: string | number
-  // 图片高
-  imgHeight?: string | number
-  // 最大缩放
-  maxScale?: number
-}
+const props = defineProps(imgCropperProps)
 
 const { translate } = useTranslate('img-cropper')
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  modelValue: false,
-  // 是否禁用旋转
-  disabledRotate: false,
-  /** canvas绘图参数 start **/
-  // canvasToTempFilePath —— fileType
-  fileType: 'png',
-  // canvasToTempFilePath —— quality
-  quality: 1,
-  // 设置导出图片尺寸
-  exportScale: 2,
-  /** canvas绘图参数 end **/
-  // 图片源路径
-  imgSrc: '',
-  // 最大缩放
-  maxScale: 3,
-  imgWidth: '',
-  imgHeight: ''
-})
 
 // 旋转角度
 const imgAngle = ref<number>(0)
@@ -490,7 +447,7 @@ function throttle() {
 /**
  * @description {图片区} 开始拖动
  */
-function handleImgTouchStart(event) {
+function handleImgTouchStart(event: any) {
   // 如果处于在拖动中，背景为淡色展示全部，拖动结束则为 0.85 透明度
   IS_TOUCH_END.value = false
   if (event.touches.length === 1) {
@@ -510,7 +467,7 @@ function handleImgTouchStart(event) {
 /**
  * @description {图片区} 拖动中
  */
-function handleImgTouchMove(event) {
+function handleImgTouchMove(event: any) {
   if (IS_TOUCH_END.value || !MOVE_THROTTLE_FLAG) return
   // 节流
   throttle()
@@ -544,14 +501,14 @@ function handleImgTouchEnd() {
 /**
  * @description 图片已加载完成
  */
-function handleImgLoaded(res) {
+function handleImgLoaded(res: any) {
   emit('imgloaded', res)
 }
 
 /**
  * @description 图片加载失败
  */
-function handleImgLoadError(err) {
+function handleImgLoadError(err: any) {
   emit('imgloaderror', err)
 }
 
@@ -573,7 +530,7 @@ function handleCancel() {
 /**
  * @description 完成裁剪
  */
-function handleConfirm(event) {
+function handleConfirm() {
   draw()
 }
 
@@ -646,7 +603,7 @@ function draw() {
 }
 function preventTouchMove() {}
 
-defineExpose({
+defineExpose<ImgCropperExpose>({
   revertIsAnimation
 })
 </script>

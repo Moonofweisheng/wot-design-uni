@@ -43,41 +43,13 @@ export default {
 </script>
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
-import { deepClone, getType, isEqual, range } from '../common/util'
-import { type ColumnItem, formatArray } from './type'
+import { deepClone, getType, isArray, isEqual, range } from '../common/util'
+import { formatArray, pickerViewProps, type PickerViewExpose } from './types'
 
-interface Props {
-  customClass?: string
-  // 加载中
-  loading?: boolean
-  loadingColor?: string
-  // 选项总高度
-  columnsHeight?: number
-  // 选项对象中，value对应的 key
-  valueKey?: string
-  // 选项对象中，展示的文本对应的 key
-  labelKey?: string
-  // 初始值
-  modelValue: string | number | boolean | Array<string | number | boolean>
-  // 选择器数据
-  columns: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>
-  // 多级联动
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  columnChange?: Function
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  loading: false,
-  loadingColor: '#4D80F0',
-  columnsHeight: 217,
-  valueKey: 'value',
-  labelKey: 'label',
-  columns: () => []
-})
+const props = defineProps(pickerViewProps)
 
 // 格式化之后，用于render 列表的数据
-const formatColumns = ref<Array<Array<Record<string, any>>>>([])
+const formatColumns = ref<Record<string, string>[][]>([])
 const itemHeight = ref<number>(35)
 const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中的下标集合
 const preSelectedIndex = ref<Array<number>>([])
@@ -85,7 +57,7 @@ const preSelectedIndex = ref<Array<number>>([])
 watch(
   () => props.modelValue,
   (newValue, oldValue) => {
-    if (!isEqual(oldValue, newValue)) {
+    if (!isEqual(oldValue, newValue) && newValue) {
       selectWithValue(newValue)
     }
   },
@@ -149,11 +121,11 @@ const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue']
  * 会保证formatColumns先设置，之后会修改selectedIndex。
  * @param {String|Number|Boolean|Array<String|Number|Boolean|Array<any>>}value
  */
-function selectWithValue(value) {
+function selectWithValue(value: string | number | boolean | number[] | string[] | boolean[]) {
   if (props.columns.length === 0) return
 
   // 使其默认选中首项
-  if (value === '' || value === null || value === undefined || (getType(value) === 'array' && value.length === 0)) {
+  if (value === '' || value === null || value === undefined || (isArray(value) && value.length === 0)) {
     value = formatColumns.value.map((col) => {
       return col[0][props.valueKey]
     })
@@ -170,7 +142,7 @@ function selectWithValue(value) {
    * 2.根据formatColumns的长度截取Array<String>，保证下面的遍历不溢出
    * 3.根据每列的key值找到选项中value为此key的下标并记录
    */
-  value = value instanceof Array ? value : [value]
+  value = isArray(value) ? value : [value as string]
   value = value.slice(0, formatColumns.value.length)
 
   if (value.length === 0) {
@@ -197,7 +169,7 @@ function selectWithValue(value) {
  * @param {Number} rowIndex 要选中的行索引
  * @return {Boolean} 是否设置成功
  */
-function selectWithIndex(columnIndex, rowIndex) {
+function selectWithIndex(columnIndex: number, rowIndex: number) {
   const col = formatColumns.value[columnIndex]
   if (!col || !col[rowIndex]) {
     throw Error(`The value to select with Col:${columnIndex} Row:${rowIndex} is correct`)
@@ -230,8 +202,8 @@ function selectWithIndex(columnIndex, rowIndex) {
  * @return {Number|Array<Number>}选中项的下标或者集合
  * @return {Object}实例本身
  */
-function onChange({ detail: { value } }) {
-  value = value.map((v) => {
+function onChange({ detail: { value } }: any) {
+  value = value.map((v: any) => {
     return Number(v || 0)
   })
   const index = getChangeDiff(value)
@@ -242,23 +214,23 @@ function onChange({ detail: { value } }) {
     if (props.columnChange) {
       // columnsChange 可能有异步操作，需要添加 resolve 进行回调通知，形参小于4个则为同步
       if (props.columnChange.length < 4) {
-        props.columnChange(proxy.$.exposed, getSelects(), index)
-        handleChange(index)
+        props.columnChange(proxy.$.exposed, getSelects(), index || 0, () => {})
+        handleChange(index || 0)
       } else {
-        props.columnChange(proxy.$.exposed, getSelects(), index, () => {
+        props.columnChange(proxy.$.exposed, getSelects(), index || 0, () => {
           // 如果selectedIndex只有一列，返回此项；如果是多项，返回所有选中项。
-          handleChange(index)
+          handleChange(index || 0)
         })
       }
     } else {
       // 如果selectedIndex只有一列，返回此项；如果是多项，返回所有选中项。
-      handleChange(index)
+      handleChange(index || 0)
     }
   })
 }
 
-function getChangeIndex(now, origin) {
-  if (!now || !origin) return
+function getChangeIndex(now: number[], origin: number[]) {
+  if (!now || !origin) return -1
   const index = now.findIndex((row, index) => row !== origin[index])
   return index
 }
@@ -349,7 +321,7 @@ function getLabels() {
  * @param {Number} columnIndex 列的下标
  * @returns {Number} 下标
  */
-function getColumnIndex(columnIndex) {
+function getColumnIndex(columnIndex: number) {
   return selectedIndex.value[columnIndex]
 }
 
@@ -358,7 +330,7 @@ function getColumnIndex(columnIndex) {
  * @param {Number} columnIndex 列的下标
  * @returns {Array<{valueKey,labelKey}>} 当前列的集合
  */
-function getColumnData(columnIndex) {
+function getColumnData(columnIndex: number) {
   return formatColumns.value[columnIndex]
 }
 
@@ -368,7 +340,7 @@ function getColumnData(columnIndex) {
  * @param {Array<原始值|Object>} 一维数组，元素仅限对象和原始值
  * @param {Number} jumpTo 更换列数据后停留的地点
  */
-function setColumnData(columnIndex, data, jumpTo = 0) {
+function setColumnData(columnIndex: any, data: Array<any>, jumpTo = 0) {
   /**
    * @注意 以下为pickerView的坑
    * 如果某一列(以下简称列)中有10个选项，而且当前选中第10项。
@@ -385,6 +357,10 @@ function getColumnsData() {
   return formatColumns.value.slice(0)
 }
 
+function getSelectedIndex() {
+  return selectedIndex.value
+}
+
 function onPickStart() {
   emit('pickstart')
 }
@@ -393,7 +369,7 @@ function onPickEnd() {
   emit('pickend')
 }
 
-defineExpose({
+defineExpose<PickerViewExpose>({
   getSelects,
   getValues,
   setColumnData,
@@ -401,7 +377,7 @@ defineExpose({
   getColumnData,
   getColumnIndex,
   getLabels,
-  selectedIndex
+  getSelectedIndex
 })
 </script>
 <style lang="scss" scoped>

@@ -34,48 +34,10 @@ export default {
 import { computed, getCurrentInstance, onMounted, reactive, ref, watch } from 'vue'
 import { addUnit, getRect, isObj, objToStyle } from '../common/util'
 import type { CSSProperties } from 'vue'
+import { segmentedProps, type SegmentedInfo, type SegmentedOption } from './types'
 const $item = '.wd-segmented__item'
 
-type SegmentedType = 'large' | 'middle' | 'small'
-
-interface SegmentedOption {
-  value: string | number // 选中值
-  disabled?: boolean // 是否禁用
-  payload?: any // 更多数据
-}
-
-/**
- * 分段器信息
- */
-interface SegmentedInfo {
-  height: number
-  width: number
-}
-
-interface Props {
-  // 当前选中的值
-  value: string | number
-  // 是否禁用
-  disabled?: boolean
-  // 控件尺寸
-  size?: SegmentedType
-  // 数据集合
-  options: string[] | number[] | SegmentedOption[]
-  // 切换选项时是否振动
-  vibrateShort?: boolean
-  // 自定义样式
-  customStyle?: string
-  // 自定义样式类
-  customClass?: string
-}
-const props = withDefaults(defineProps<Props>(), {
-  size: 'middle',
-  options: () => [],
-  vibrateShort: false,
-  disabled: false,
-  customStyle: '',
-  customClass: ''
-})
+const props = defineProps(segmentedProps)
 
 const sectionItemInfo = reactive<SegmentedInfo>({
   width: 0,
@@ -106,10 +68,10 @@ watch(
 const { proxy } = getCurrentInstance() as any
 
 onMounted(() => {
-  getRect('.wd-segmented__item', false, proxy).then((rect: any) => {
+  getRect('.wd-segmented__item', false, proxy).then((rect) => {
     if (rect) {
-      sectionItemInfo.height = rect.height
-      sectionItemInfo.width = rect.width
+      sectionItemInfo.height = Number(rect.height)
+      sectionItemInfo.width = Number(rect.width)
       updateCurrentIndex()
       updateActiveStyle()
     }
@@ -123,10 +85,10 @@ const emit = defineEmits(['update:value', 'change'])
  *
  */
 function updateActiveStyle() {
-  getRect($item, true, proxy).then((rects: any) => {
+  getRect($item, true, proxy).then((rects) => {
     const rect = rects[activeIndex.value]
-    let left = rects.slice(0, activeIndex.value).reduce((prev, curr) => prev + curr.width, 0)
-    left += (rect.width - sectionItemInfo.width) / 2
+    let left = rects.slice(0, activeIndex.value).reduce((prev, curr) => prev + Number(curr.width), 0)
+    left += (Number(rect.width) - sectionItemInfo.width) / 2
     const transition = 'all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)'
     const style: CSSProperties = {
       position: 'absolute',

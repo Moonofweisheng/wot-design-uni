@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-11-05 12:09:52
- * @LastEditTime: 2023-11-05 22:22:15
+ * @LastEditTime: 2024-03-17 20:15:39
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\pages\sidebar\demo2.vue
+ * @FilePath: /wot-design-uni/src/pages/sidebar/demo2.vue
  * 记得注释
 -->
 <template>
@@ -99,7 +99,7 @@ const categories = ref([
   }
 ])
 
-function handleChange({ value }) {
+function handleChange({ value }: any) {
   active.value = value
   scrollTop.value = -1
   nextTick(() => {

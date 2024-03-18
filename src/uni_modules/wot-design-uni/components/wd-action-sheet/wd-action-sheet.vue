@@ -72,59 +72,10 @@ export default {
 
 <script lang="ts" setup>
 import { watch, ref } from 'vue'
+import { actionSheetProps, type Panel } from './types'
 
-interface Action {
-  // 选项名称
-  name: string
-  // 描述信息
-  subname: string
-  // 颜色
-  color: string
-  // 禁用
-  disabled: boolean
-  // 加载中状态
-  loading: boolean
-}
-
-interface Panel {
-  // 图片地址
-  iconUrl: string
-  // 标题内容
-  title: string
-}
-
-interface Props {
-  customClass?: string
-  customHeaderClass?: string
-  customStyle?: string
-  modelValue: boolean
-  actions?: Array<Action>
-  panels?: Array<Panel>
-  title?: string
-  cancelText?: string
-  closeOnClickAction?: boolean
-  closeOnClickModal?: boolean
-  duration?: number
-  zIndex?: number
-  lazyRender?: boolean
-  safeAreaInsetBottom?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customHeaderClass: '',
-  customStyle: '',
-  modelValue: false,
-  actions: () => [] as Array<Action>,
-  panels: () => [] as Array<Panel>,
-  closeOnClickAction: true,
-  closeOnClickModal: true,
-  duration: 200,
-  zIndex: 10,
-  lazyRender: true,
-  safeAreaInsetBottom: true
-})
-const formatPanels = ref<Array<Panel> | Array<Array<Panel>>>([])
+const props = defineProps(actionSheetProps)
+const formatPanels = ref<Array<Panel> | Array<Panel[]>>([])
 
 const showPopup = ref<boolean>(false)
 
@@ -144,7 +95,7 @@ function isArray() {
   return props.panels.length && !(props.panels[0] instanceof Array)
 }
 function computedValue() {
-  formatPanels.value = isArray() ? [props.panels] : props.panels
+  formatPanels.value = isArray() ? [props.panels as Panel[]] : (props.panels as Panel[][])
 }
 
 function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) {
@@ -160,7 +111,7 @@ function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) 
     })
   } else {
     emit('select', {
-      item: props.panels[rowIndex][Number(colIndex)],
+      item: (props.panels as Panel[][])[rowIndex][Number(colIndex)],
       rowIndex,
       colIndex
     })

@@ -37,25 +37,9 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-type ClosePosition = 'inset' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
-interface Props {
-  customClass?: string
-  value: boolean
-  closePosition?: ClosePosition
-  src?: string
-  to?: string
-  width?: number
-  closeOnClickModal?: boolean
-  hideWhenClose?: boolean
-}
+import { curtainProps } from './types'
 
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  value: false,
-  closePosition: 'inset',
-  closeOnClickModal: false,
-  hideWhenClose: true
-})
+const props = defineProps(curtainProps)
 
 const show = ref<boolean>(false)
 const imgSucc = ref<boolean>(true)
@@ -150,7 +134,7 @@ function clickModal() {
   emit('click-modal')
 }
 
-function imgLoad(event) {
+function imgLoad(event: any) {
   const { height, width } = event.detail
   imgScale.value = width / height
   imgSucc.value = true

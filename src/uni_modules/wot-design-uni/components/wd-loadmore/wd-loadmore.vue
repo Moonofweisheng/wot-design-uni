@@ -32,22 +32,9 @@ export default {
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useTranslate } from '../composables/useTranslate'
+import { loadmoreProps, type LoadMoreState } from './types'
 
-type LoadMoreState = 'loading' | 'error' | 'finished'
-
-interface Props {
-  customClass?: string
-  state?: LoadMoreState
-  loadingText?: string
-  finishedText?: string
-  errorText?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  errorText: ''
-})
-
+const props = defineProps(loadmoreProps)
 const { translate } = useTranslate('loadmore')
 
 const currentState = ref<LoadMoreState | null>(null)

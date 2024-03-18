@@ -58,7 +58,7 @@
         :scroll-with-animation="true"
       >
         <!-- 多选 -->
-        <view v-if="type === 'checkbox'" id="wd-checkbox-group">
+        <view v-if="type === 'checkbox' && isArray(selectList)" id="wd-checkbox-group">
           <wd-checkbox-group v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" :min="min" :max="max" @change="handleChange">
             <view v-for="item in filterColumns" :key="item[valueKey]" :id="'check' + item[valueKey]">
               <wd-checkbox :modelValue="item[valueKey]" :disabled="item.disabled">
@@ -76,7 +76,7 @@
           </wd-checkbox-group>
         </view>
         <!-- 单选 -->
-        <view v-if="type === 'radio'" id="wd-radio-group">
+        <view v-if="type === 'radio' && !isArray(selectList)" id="wd-radio-group">
           <wd-radio-group v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" @change="handleChange">
             <view v-for="(item, index) in filterColumns" :key="index" :id="'radio' + item[valueKey]">
               <wd-radio :value="item[valueKey]" :disabled="item.disabled">
@@ -121,90 +121,16 @@ import { getRect, getType, isArray, isDef, requestAnimationFrame } from '../comm
 import { useParent } from '../composables/useParent'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useTranslate } from '../composables/useTranslate'
-
-type SelectPickerType = 'checkbox' | 'radio'
+import { selectPickerProps, type SelectPickerExpose } from './types'
 
 const { translate } = useTranslate('select-picker')
 
-interface Props {
-  customClass?: string
-  customContentClass?: string
-  customLabelClass?: string
-  customValueClass?: string
-  label?: string
-  labelWidth?: string
-  disabled?: boolean
-  readonly?: boolean
-  placeholder?: string
-  title?: string
-  alignRight?: boolean
-  error?: boolean
-  required?: boolean
-  useLabelSlot?: boolean
-  useDefaultSlot?: boolean
-  size?: string
-  checkedColor?: string
-  min?: number
-  max?: number
-  selectSize?: string
-  loading?: boolean
-  loadingColor?: string
-  closeOnClickModal?: boolean
-  modelValue: Array<number | boolean | string> | number | boolean | string
-  columns: Array<Record<string, any>>
-  type?: SelectPickerType
-  valueKey?: string
-  labelKey?: string
-  confirmButtonText?: string
-  // 外部展示格式化函数
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat?: Function
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm?: Function
-  zIndex?: number
-  safeAreaInsetBottom?: boolean
-  filterable?: boolean
-  filterPlaceholder?: string
-  ellipsis?: boolean
-  scrollIntoView?: boolean
-  prop?: string
-  rules?: FormItemRule[]
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customContentClass: '',
-  customLabelClass: '',
-  customValueClass: '',
-  columns: () => [],
-  type: 'checkbox',
-  valueKey: 'value',
-  labelKey: 'label',
-  disabled: false,
-  loading: false,
-  loadingColor: '#4D80F0',
-  readonly: false,
-  labelWidth: '33%',
-  error: false,
-  required: false,
-  alignRight: false,
-  min: 0,
-  max: 0,
-  useDefaultSlot: false,
-  useLabelSlot: false,
-  closeOnClickModal: true,
-  zIndex: 15,
-  safeAreaInsetBottom: true,
-  filterable: false,
-  ellipsis: false,
-  scrollIntoView: true,
-  rules: () => []
-})
+const props = defineProps(selectPickerProps)
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
 const isConfirm = ref<boolean>(false)
-const lastSelectList = ref<Array<number | boolean | string>>([])
+const lastSelectList = ref<Array<number | boolean | string> | number | boolean | string>([])
 const filterVal = ref<string>('')
 const filterColumns = ref<Array<Record<string, any>>>([])
 const scrollTop = ref<number | null>(0) // 滚动位置
@@ -219,7 +145,7 @@ const showValue = computed(() => {
   } else {
     const { type, labelKey } = props
     if (type === 'checkbox') {
-      const selectedItems = value.map((item) => {
+      const selectedItems = (isArray(value) ? value : []).map((item) => {
         return getSelectedItem(item)
       })
       showValueTemp = selectedItems
@@ -228,10 +154,10 @@ const showValue = computed(() => {
         })
         .join(', ')
     } else if (type === 'radio') {
-      const selectedItem = getSelectedItem(value)
+      const selectedItem = getSelectedItem(value as string | number | boolean)
       showValueTemp = selectedItem[labelKey]
     } else {
-      showValueTemp = value
+      showValueTemp = value as string
     }
   }
   return showValueTemp
@@ -369,7 +295,7 @@ function setScrollIntoView() {
 
 function noop() {}
 
-function getSelectedItem(value) {
+function getSelectedItem(value: string | number | boolean) {
   const { valueKey, labelKey, columns } = props
 
   const selecteds = columns.filter((item) => {
@@ -386,11 +312,11 @@ function getSelectedItem(value) {
   }
 }
 
-function valueFormat(value) {
-  return props.type === 'checkbox' ? Array.prototype.slice.call(value) : value
+function valueFormat(value: string | number | boolean | (string | number | boolean)[]) {
+  return props.type === 'checkbox' ? (isArray(value) ? value : []) : value
 }
 
-function handleChange({ value }) {
+function handleChange({ value }: { value: string | number | boolean | (string | number | boolean)[] }) {
   selectList.value = value
   emit('change', { value })
 }
@@ -418,7 +344,7 @@ function onConfirm() {
     return
   }
   if (props.beforeConfirm) {
-    props.beforeConfirm(selectList.value, (isPass) => {
+    props.beforeConfirm(selectList.value, (isPass: boolean) => {
       isPass && handleConfirm()
     })
   } else {
@@ -432,11 +358,11 @@ function handleConfirm() {
   lastSelectList.value = valueFormat(selectList.value)
   let selectedItems: Record<string, any> = {}
   if (props.type === 'checkbox') {
-    selectedItems = lastSelectList.value.map((item) => {
+    selectedItems = (isArray(lastSelectList.value) ? lastSelectList.value : []).map((item) => {
       return getSelectedItem(item)
     })
   } else {
-    selectedItems = getSelectedItem(lastSelectList.value)
+    selectedItems = getSelectedItem(lastSelectList.value as string | number | boolean)
   }
   emit('update:modelValue', lastSelectList.value)
   emit('confirm', {
@@ -445,7 +371,7 @@ function handleConfirm() {
   })
 }
 
-function getFilterText(label, filterVal) {
+function getFilterText(label: string, filterVal: string) {
   const reg = new RegExp(`(${filterVal})`, 'g')
 
   return label.split(reg).map((text) => {
@@ -456,7 +382,7 @@ function getFilterText(label, filterVal) {
   })
 }
 
-function handleFilterChange({ value }) {
+function handleFilterChange({ value }: { value: string }) {
   if (value === '') {
     filterColumns.value = []
     filterVal.value = value
@@ -469,7 +395,7 @@ function handleFilterChange({ value }) {
   }
 }
 
-function formatFilterColumns(columns, filterVal) {
+function formatFilterColumns(columns: Record<string, any>[], filterVal: string) {
   const filterColumnsTemp = columns.filter((item) => {
     return item[props.labelKey].indexOf(filterVal) > -1
   })
@@ -486,7 +412,7 @@ function formatFilterColumns(columns, filterVal) {
   })
 }
 
-defineExpose({
+defineExpose<SelectPickerExpose>({
   close,
   open
 })

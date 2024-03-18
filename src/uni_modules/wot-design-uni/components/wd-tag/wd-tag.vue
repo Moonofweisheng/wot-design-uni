@@ -42,33 +42,9 @@ export default {
 import { objToStyle } from '../common/util'
 import { computed, ref, watch } from 'vue'
 import { useTranslate } from '../composables/useTranslate'
+import { tagProps } from './types'
 
-type TagType = 'default' | 'primary' | 'success' | 'warning' | 'danger'
-
-interface Props {
-  useIconSlot?: boolean
-  type?: TagType
-  icon?: string
-  closable?: boolean
-  plain?: boolean
-  dynamic?: boolean
-  color?: string
-  bgColor?: string
-  round?: boolean
-  mark?: boolean
-  customClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  type: 'default',
-  customClass: '',
-  useIconSlot: false,
-  closable: false,
-  plain: false,
-  dynamic: false,
-  round: false,
-  mark: false
-})
+const props = defineProps(tagProps)
 
 const { translate } = useTranslate('tag')
 
@@ -155,7 +131,7 @@ function handleAdd() {
 function handleBlur() {
   setDynamicInput()
 }
-function handleConfirm(event) {
+function handleConfirm(event: any) {
   setDynamicInput()
   emit('confirm', {
     value: event.detail.value

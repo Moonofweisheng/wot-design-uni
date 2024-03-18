@@ -37,6 +37,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { FormInstance } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import { reactive, ref } from 'vue'
 
 interface PhoneItem {
@@ -58,7 +59,7 @@ const model = reactive<{
 })
 
 const { success: showSuccess } = useToast()
-const form = ref()
+const form = ref<FormInstance>()
 
 const removePhone = () => {
   model.phoneNumbers.splice(model.phoneNumbers.length - 1, 1)
@@ -72,11 +73,11 @@ const addPhone = () => {
 }
 
 const reset = () => {
-  form.value.reset()
+  form.value!.reset()
 }
 
 const submit = () => {
-  form.value.validate().then(({ valid, errors }) => {
+  form.value!.validate().then(({ valid, errors }) => {
     if (valid) {
       showSuccess('校验通过')
     }

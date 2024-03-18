@@ -40,6 +40,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { SelectPickerBeforeConfirm, SelectPickerDisplayFormat } from '@/uni_modules/wot-design-uni/components/wd-select-picker/types'
 import { ref } from 'vue'
 
 const columns1 = ref<Record<string, any>[]>([
@@ -130,20 +131,20 @@ const customShow = ref<string>('奢侈品')
 
 const toast = useToast()
 
-const displayFormat = (items, columns) => {
+const displayFormat: SelectPickerDisplayFormat = (items, columns) => {
   let showValue = ''
   columns.forEach((column) => {
-    items.forEach((item, index) => {
+    ;(items as (string | number | boolean)[]).forEach((item, index) => {
       if (column.value === item) {
-        showValue += `${item}: ${column.label} ${index + 1 < items.length ? '--' : ''} `
+        showValue += `${item}: ${column.label} ${index + 1 < (items as (string | number | boolean)[]).length ? '--' : ''} `
       }
     })
   })
   return showValue
 }
 
-const beforeConfirm = (value, resolve) => {
-  if (value.length > 0) {
+const beforeConfirm: SelectPickerBeforeConfirm = (value, resolve) => {
+  if ((value as string[]).length > 0) {
     toast.error('暂时无法选择商品')
     resolve(false)
   } else {
@@ -151,61 +152,61 @@ const beforeConfirm = (value, resolve) => {
   }
 }
 
-function handleChange({ value }) {
+function handleChange({ value }: any) {
   toast.show('选择了' + value)
 }
-function handleConfirm1({ value }) {
+function handleConfirm1({ value }: any) {
   console.log(value)
 }
-function handleConfirm2({ value }) {
+function handleConfirm2({ value }: any) {
   console.log(value)
 }
-function handleConfirm3({ value }) {
+function handleConfirm3({ value }: any) {
   console.log(value)
 }
-function handleConfirm4({ value }) {
+function handleConfirm4({ value }: any) {
   console.log(value)
 }
-function handleConfirm5({ value }) {
+function handleConfirm5({ value }: any) {
   console.log(value)
 }
-function handleConfirm6({ value }) {
+function handleConfirm6({ value }: any) {
   console.log(value)
 }
-function handleConfirm7({ value }) {
+function handleConfirm7({ value }: any) {
   console.log(value)
 }
-function handleConfirm8({ value }) {
+function handleConfirm8({ value }: any) {
   console.log(value)
 }
-function handleConfirm9({ value }) {
+function handleConfirm9({ value }: any) {
   console.log(value)
 }
-function handleConfirm10({ value }) {
+function handleConfirm10({ value }: any) {
   console.log(value)
 }
-function handleConfirm11({ value }) {
+function handleConfirm11({ value }: any) {
   console.log(value)
 }
-function handleConfirm12({ value }) {
+function handleConfirm12({ value }: any) {
   console.log(value)
 }
-function handleConfirm13({ value }) {
+function handleConfirm13({ value }: any) {
   console.log(value)
 }
-function handleConfirm14({ value }) {
+function handleConfirm14({ value }: any) {
   console.log(value)
 }
-function handleConfirm15({ value }) {
+function handleConfirm15({ value }: any) {
   console.log(value)
 }
-function handleConfirm16({ value }) {
+function handleConfirm16({ value }: any) {
   console.log(value)
 }
-function handleConfirm17({ value, selectedItems }) {
+function handleConfirm17({ value, selectedItems }: any) {
   console.log(value)
   customShow.value = selectedItems
-    .map((item) => {
+    .map((item: any) => {
       return item.label
     })
     .join(', ')

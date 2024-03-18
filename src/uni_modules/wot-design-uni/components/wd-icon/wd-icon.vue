@@ -18,20 +18,9 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import { objToStyle } from '../common/util'
+import { iconProps } from './types'
 
-interface Props {
-  name: string
-  color?: string
-  size?: string
-  classPrefix?: string
-  customStyle?: string
-  customClass?: string
-}
-const props = withDefaults(defineProps<Props>(), {
-  customStyle: '',
-  customClass: '',
-  classPrefix: 'wd-icon'
-})
+const props = defineProps(iconProps)
 
 const isImageUrl = ref<boolean>(false)
 
@@ -61,8 +50,8 @@ const rootStyle = computed(() => {
 
 const emit = defineEmits(['click'])
 
-function handleClick(e) {
-  emit('click', e)
+function handleClick(event: any) {
+  emit('click', event)
 }
 </script>
 

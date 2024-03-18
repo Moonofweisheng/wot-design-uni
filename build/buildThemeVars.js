@@ -69,7 +69,7 @@ const generateTSFileContent = (variables) => {
   return tsContent
 }
 
-const tsFilePath = path.resolve(__dirname, '../src/uni_modules/wot-design-uni/components/wd-config-provider/types.ts')
+const tsFilePath = path.resolve(__dirname, '../src/uni_modules/wot-design-uni/components/wd-config-provider/type.ts')
 const scssFilePath = path.resolve(__dirname, '../src/uni_modules/wot-design-uni/components/common/abstracts/test.scss')
 
 const variables = extractSCSSVariables(scssFilePath)

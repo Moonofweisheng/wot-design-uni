@@ -113,7 +113,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-function handleGetuserinfo(event) {
+function handleGetuserinfo(event: any) {
   // TODO
   console.log(event)
 }

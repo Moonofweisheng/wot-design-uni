@@ -103,14 +103,15 @@
 </template>
 <script lang="ts" setup>
 import { useToast, useQueue } from '@/uni_modules/wot-design-uni'
+import type { SwipeActionBeforeClose, SwipeActionStatus } from '@/uni_modules/wot-design-uni/components/wd-swipe-action/types'
 
 const { closeOutside } = useQueue()
 
 import { ref } from 'vue'
 const toast = useToast()
-const value = ref<string>('close')
+const value = ref<SwipeActionStatus>('close')
 
-const beforeClose = (reason, position) => {
+const beforeClose: SwipeActionBeforeClose = (reason, position) => {
   if (reason === 'click') {
     toast.show(`${reason} ${position}导致滑动按钮关闭`)
   } else {
@@ -118,10 +119,10 @@ const beforeClose = (reason, position) => {
   }
 }
 
-function changeState(position: string) {
+function changeState(position: SwipeActionStatus) {
   value.value = position
 }
-function handleClick({ value }) {
+function handleClick({ value }: any) {
   toast.show(`点击${value}关闭操作按钮`)
 }
 function handleAction(action: string) {

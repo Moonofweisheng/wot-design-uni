@@ -136,56 +136,56 @@ function onShow() {
 function onHide() {
   toast.show('文字提示关闭')
 }
-function handleChange1(event) {
-  //   this.setData({ show1: event.detail.show })
+function handleChange1(event: any) {
+  console.log(event)
 }
-function handleChange2(event) {
-  //   this.setData({ show2: event.detail.show })
+function handleChange2(event: any) {
+  console.log(event)
 }
-function handleChange3(event) {
-  //   this.setData({ show3: event.detail.show })
+function handleChange3(event: any) {
+  console.log(event)
 }
-function handleChange4(event) {
-  //   this.setData({ show4: event.detail.show })
+function handleChange4(event: any) {
+  console.log(event)
 }
-function handleChange5(event) {
-  //   this.setData({ show5: event.detail.show })
+function handleChange5(event: any) {
+  console.log(event)
 }
-function handleChange6(event) {
-  //   this.setData({ show6: event.detail.show })
+function handleChange6(event: any) {
+  console.log(event)
 }
-function handleChange7(event) {
-  //   this.setData({ show7: event.detail.show })
+function handleChange7(event: any) {
+  console.log(event)
 }
-function handleChange8(event) {
-  //   this.setData({ show8: event.detail.show })
+function handleChange8(event: any) {
+  console.log(event)
 }
-function handleChange9(event) {
-  //   this.setData({ show9: event.detail.show })
+function handleChange9(event: any) {
+  console.log(event)
 }
-function handleChange10(event) {
-  //   this.setData({ show10: event.detail.show })
+function handleChange10(event: any) {
+  console.log(event)
 }
-function handleChange11(event) {
-  //   this.setData({ show11: event.detail.show })
+function handleChange11(event: any) {
+  console.log(event)
 }
-function handleChange12(event) {
-  //   this.setData({ show12: event.detail.show })
+function handleChange12(event: any) {
+  console.log(event)
 }
-function handleChange13(event) {
-  // this.setData({ show13: event.detail.show })
+function handleChange13(event: any) {
+  console.log(event)
 }
-function handleChange14(event) {
-  // this.setData({ show14: event.detail.show })
+function handleChange14(event: any) {
+  console.log(event)
 }
-function handleChange15(event) {
-  // this.setData({ show15: event.detail.show })
+function handleChange15(event: any) {
+  console.log(event)
 }
-function handleChange16(event) {
-  // this.setData({ show16: event.detail.show })
+function handleChange16(event: any) {
+  console.log(event)
 }
-function handleChange17(event) {
-  // this.setData({ show17: event.detail.show })
+function handleChange17(event: any) {
+  console.log(event)
 }
 </script>
 <style lang="scss" scoped>

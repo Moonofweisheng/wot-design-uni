@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-11-05 12:09:52
- * @LastEditTime: 2023-11-05 22:23:03
+ * @LastEditTime: 2024-03-18 21:33:29
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\pages\sidebar\demo1.vue
+ * @FilePath: /wot-design-uni/src/pages/sidebar/demo1.vue
  * 记得注释
 -->
 <template>
@@ -74,18 +74,16 @@ const categories = ref([
 
 onMounted(() => {
   getRect('.category', true).then((rects) => {
-    if (isArray(rects)) {
-      itemScrollTop.value = rects.map((item) => item.top || 0)
-      scrollTop.value = rects[active.value].top || 0
-    }
+    itemScrollTop.value = rects.map((item) => item.top || 0)
+    scrollTop.value = rects[active.value].top || 0
   })
 })
 
-function handleChange({ value }) {
+function handleChange({ value }: any) {
   active.value = value
   scrollTop.value = itemScrollTop.value[value]
 }
-function onScroll(e) {
+function onScroll(e: any) {
   const { scrollTop } = e.detail
   const threshold = 50 // 下一个标题与顶部的距离
   if (scrollTop < threshold) {

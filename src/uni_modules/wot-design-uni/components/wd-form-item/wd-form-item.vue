@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-01-03 21:50:52
+ * @LastEditTime: 2024-03-15 21:29:33
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-form-item/wd-form-item.vue
@@ -33,30 +33,13 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useParent } from '../composables/useParent'
 import WdCell from '../wd-cell/wd-cell.vue'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
+import { FORM_KEY } from '../wd-form/types'
+import { formItemProps } from './types'
 
-interface Props {
-  prop: string
-  rules?: FormItemRule[]
-  required?: boolean
-  center?: boolean
-  label?: string
-  labelWidth?: string
-  isLink?: boolean
-  customClass?: string
-  customStyle?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  rules: () => [],
-  center: false,
-  labelWidth: '100px',
-  customClass: '',
-  customStyle: ''
-})
+const props = defineProps(formItemProps)
 
 const { parent: form, index } = useParent(FORM_KEY)
 

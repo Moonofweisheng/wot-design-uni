@@ -17,28 +17,9 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount } from 'vue'
 import { addUnit, getType, objToStyle } from '../common/util'
+import { switchProps } from './types'
 
-interface Props {
-  modelValue: boolean | string | number
-  disabled?: boolean
-  activeValue?: boolean | string | number
-  inactiveValue?: boolean | string | number
-  activeColor?: string
-  inactiveColor?: string
-  size?: string | number
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeChange?: Function
-  customClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  disabled: false,
-  modelValue: false,
-  activeValue: true,
-  inactiveValue: false,
-  size: 28
-})
+const props = defineProps(switchProps)
 
 const rootClass = computed(() => {
   return `wd-switch ${props.customClass} ${props.disabled ? 'is-disabled' : ''} ${props.modelValue === props.activeValue ? 'is-checked' : ''}`
@@ -70,7 +51,7 @@ function switchValue() {
   if (props.beforeChange && getType(props.beforeChange) === 'function') {
     props.beforeChange({
       value: newVal,
-      resolve: (pass) => {
+      resolve: (pass: boolean) => {
         if (pass) {
           emit('update:modelValue', newVal)
           emit('change', {

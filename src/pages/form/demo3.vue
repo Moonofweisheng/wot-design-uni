@@ -111,7 +111,9 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
-import { type FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
+import type { ColPickerColumnChange } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
+import { type FormInstance, type FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
+import type { UploadFileItem } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
 import { areaData } from '@/utils/area'
 import { reactive, ref } from 'vue'
 
@@ -130,7 +132,7 @@ const model = reactive<{
   cardId: string
   phone: string
   read: boolean
-  fileList: Record<string, string>[]
+  fileList: UploadFileItem[]
 }>({
   couponName: '',
   platform: [],
@@ -358,7 +360,7 @@ const area = ref<any[]>([
     }
   })
 ])
-const areaChange = ({ selectedItem, resolve, finish }) => {
+const areaChange: ColPickerColumnChange = ({ selectedItem, resolve, finish }) => {
   if (areaData[selectedItem.value]) {
     resolve(
       Object.keys(areaData[selectedItem.value]).map((key) => {
@@ -373,15 +375,15 @@ const areaChange = ({ selectedItem, resolve, finish }) => {
   }
 }
 const toast = useToast()
-const form = ref()
+const form = ref<FormInstance>()
 
-function handleFileChange({ fileList }) {
+function handleFileChange({ fileList }: any) {
   model.fileList = fileList
 }
 
 function handleSubmit() {
-  form.value
-    .validate()
+  form
+    .value!.validate()
     .then(({ valid, errors }) => {
       console.log(valid)
       console.log(errors)
@@ -424,3 +426,4 @@ function handleIconClick() {
   font-size: 12px !important;
 }
 </style>
+@/uni_modules/wot-design-uni/components/wd-form/type

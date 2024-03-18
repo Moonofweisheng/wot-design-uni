@@ -10,7 +10,7 @@
       <view v-if="file.status !== 'success'" class="wd-upload__mask wd-upload__status-content">
         <!-- loading时展示loading图标和进度 -->
         <view v-if="file.status === 'loading'" class="wd-upload__status-content">
-          <wd-loading :size="24" :color="loadingColor" />
+          <wd-loading :type="loadingType" :size="loadingSize" :color="loadingColor" />
           <text class="wd-upload__progress-txt">{{ file.percent }}%</text>
         </view>
         <!-- 失败时展示失败图标以及失败信息 -->
@@ -55,77 +55,13 @@ import { ref, watch } from 'vue'
 import { context, getType, isDef, isEqual } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
+import { uploadProps, type UploadFileItem } from './types'
 
-interface Props {
-  customClass?: string
-  customEvokeClass?: string
-  customPreviewClass?: string
-  // 多选
-  multiple?: boolean
-  // 接受类型 暂定接受类型为图片，视频后续添加
-  accept?: string
-  sizeType?: Array<string>
-  sourceType?: Array<string>
-  header?: Record<string, any>
-  name?: string
-  formData?: Record<string, any>
-  // 上传相关
-  action: string
-  fileList?: Record<string, any>[]
-  statusKey?: string
-  maxSize?: number
-  limit?: number
-  showLimitNum?: boolean
-  disabled?: boolean
-  useDefaultSlot?: boolean
-  // loading 相关
-  loadingType?: string
-  loadingColor?: string
-  loadingSize?: string
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforePreview?: Function
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onPreviewFail?: Function
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeRemove?: Function
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeUpload?: Function
-  // 图片预览相关
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeChoose?: Function
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  buildFormData?: Function
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customEvokeClass: '',
-  customPreviewClass: '',
-  multiple: false,
-  fileList: () => [] as Record<string, any>[],
-  accept: 'image',
-  showLimitNum: true,
-  disabled: false,
-  sourceType: () => ['album', 'camera'],
-  sizeType: () => ['original', 'compressed'],
-  header: () => {
-    return {}
-  },
-  formData: () => {
-    return {}
-  },
-  name: 'file',
-  loadingType: 'ring',
-  loadingColor: '#ffffff',
-  loadingSize: '24px',
-  useDefaultSlot: false,
-  statusKey: 'status',
-  maxSize: Number.MAX_VALUE
-})
+const props = defineProps(uploadProps)
 
 const { translate } = useTranslate('upload')
 
-const uploadFiles = ref<Record<string, any>[]>([])
+const uploadFiles = ref<UploadFileItem[]>([])
 
 watch(
   () => props.fileList,
@@ -135,7 +71,6 @@ watch(
     const uploadFileList = val.map((item) => {
       item.uid = context.id++
       item[statusKey] = item[statusKey] || 'success'
-      item.size = item.size || ''
       item.action = props.action || ''
       item.response = item.response || ''
       return item
@@ -245,9 +180,9 @@ const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', '
  * @description 初始化文件数据
  * @param {Object} file 上传的文件
  */
-function initFile(file) {
+function initFile(file: UploadFileItem) {
   // 状态初始化
-  const initState = {
+  const initState: UploadFileItem = {
     uid: context.id++,
     // 仅h5支持 name
     name: file.name || '',
@@ -280,7 +215,7 @@ function initFile(file) {
  * @param {Object} err 错误返回信息
  * @param {Object} file 上传的文件
  */
-function handleError(err, file, formData: Record<string, any>) {
+function handleError(err: Record<string, any>, file: UploadFileItem, formData: Record<string, any>) {
   const { statusKey } = props
   const index = uploadFiles.value.findIndex((item) => item.uid === file.uid)
   if (index > -1) {
@@ -296,7 +231,7 @@ function handleError(err, file, formData: Record<string, any>) {
  * @param {Object} res 接口返回信息
  * @param {Object} file 上传的文件
  */
-function handleSuccess(res, file, formData: Record<string, any>) {
+function handleSuccess(res: Record<string, any>, file: UploadFileItem, formData: Record<string, any>) {
   const { statusKey } = props
   const index = uploadFiles.value.findIndex((item) => item.uid === file.uid)
   if (index > -1) {
@@ -312,7 +247,7 @@ function handleSuccess(res, file, formData: Record<string, any>) {
  * @param {Object} res 接口返回信息
  * @param {Object} file 上传的文件
  */
-function handleProgress(res, file) {
+function handleProgress(res: Record<string, any>, file: UploadFileItem) {
   const index = uploadFiles.value.findIndex((item) => item.uid === file.uid)
   if (index > -1) {
     uploadFiles.value[index].percent = res.progress
@@ -324,7 +259,7 @@ function handleProgress(res, file) {
  * @description 上传操作
  * @param {Object} file 上传的文件
  */
-function handleUpload(file, formData: Record<string, any>) {
+function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
   const { action, name, header = {}, accept } = props
 
   const uploadTask = uni.uploadFile({
@@ -377,16 +312,15 @@ function onChooseFile() {
     })
       .then((res: any) => {
         // 成功选择初始化file
-        let files: null | Array<any> = null
-        files = Array.prototype.slice.call(res.tempFiles)
+        let files: Array<any> = Array.prototype.slice.call(res.tempFiles)
         // 单选只有一个
         if (!multiple) {
           files = files.slice(0, 1)
         }
 
         // 遍历列表逐个初始化上传参数
-        const mapFiles = (files) => {
-          files.forEach(async (file) => {
+        const mapFiles = (files: Array<any>) => {
+          files.forEach(async (file: any) => {
             if (!isDef(file.size)) {
               file.size = await getImageInfo(file.path)
             }
@@ -396,20 +330,13 @@ function onChooseFile() {
 
         // 上传前的钩子
         if (beforeUpload) {
-          // 向下兼容原来的参数写法，2.2.0 向下兼容 2.1.0
-          if (beforeUpload.length === 2) {
-            beforeUpload(files, (isPass) => {
+          beforeUpload({
+            files,
+            fileList: uploadFiles.value,
+            resolve: (isPass: boolean) => {
               isPass && mapFiles(files)
-            })
-          } else {
-            beforeUpload({
-              files,
-              fileList: uploadFiles.value,
-              resolve: (isPass) => {
-                isPass && mapFiles(files)
-              }
-            })
-          }
+            }
+          })
         } else {
           mapFiles(files)
         }
@@ -447,19 +374,12 @@ function handleChoose() {
 
   // 选择图片前的钩子
   if (beforeChoose) {
-    // 向下兼容原来的参数写法，2.2.0 向下兼容 2.1.0
-    if (beforeChoose.length === 2) {
-      beforeChoose(uploadFiles.value, (isPass) => {
+    beforeChoose({
+      fileList: uploadFiles.value,
+      resolve: (isPass: boolean) => {
         isPass && onChooseFile()
-      })
-    } else {
-      beforeChoose({
-        fileList: uploadFiles.value,
-        resolve: (isPass) => {
-          isPass && onChooseFile()
-        }
-      })
-    }
+      }
+    })
   } else {
     onChooseFile()
   }
@@ -470,7 +390,7 @@ function handleChoose() {
  * @param {Object} file 上传的文件
  * @param {Number} index 删除
  */
-function handleRemove(file, index?: number) {
+function handleRemove(file: Record<any, any>, index?: number) {
   uploadFiles.value.splice(
     uploadFiles.value.findIndex((item) => item.uid === file.uid),
     1
@@ -481,46 +401,35 @@ function handleRemove(file, index?: number) {
   emit('remove', { file })
 }
 
-function removeFile(index) {
+function removeFile(index: number) {
   const { beforeRemove } = props
-  const intIndex = parseInt(index)
+  const intIndex: number = index
   const file = uploadFiles.value[intIndex]
   if (beforeRemove) {
-    // 向下兼容原来的参数写法，2.2.0 向下兼容 2.1.0
-    if (beforeRemove.length === 3) {
-      beforeRemove(file, uploadFiles.value, (isPass) => {
+    beforeRemove({
+      file,
+      index: intIndex,
+      fileList: uploadFiles.value,
+      resolve: (isPass: boolean) => {
         isPass && handleRemove(file)
-      })
-    } else {
-      beforeRemove({
-        file,
-        index: intIndex,
-        fileList: uploadFiles.value,
-        resolve: (isPass) => {
-          isPass && handleRemove(file)
-        }
-      })
-    }
+      }
+    })
   } else {
     handleRemove(file)
   }
 }
 
-function onPreview(index, lists) {
+function onPreview(index: number, lists: string[]) {
   const { onPreviewFail } = props
   uni.previewImage({
     urls: lists,
     current: lists[index],
     fail() {
       if (onPreviewFail) {
-        if (onPreviewFail.length === 2) {
-          onPreviewFail(index, lists)
-        } else {
-          onPreviewFail({
-            index,
-            imgList: lists
-          })
-        }
+        onPreviewFail({
+          index,
+          imgList: lists
+        })
       } else {
         uni.showToast({ title: '预览图片失败', icon: 'none' })
       }
@@ -528,24 +437,17 @@ function onPreview(index, lists) {
   })
 }
 
-function onPreviewImage(index) {
+function onPreviewImage(index: number) {
   const { beforePreview } = props
   const lists = uploadFiles.value.map((file) => file.url)
   if (beforePreview) {
-    // 向下兼容原来的参数写法，2.2.0 向下兼容 2.1.0
-    if (beforePreview.length === 2) {
-      beforePreview({ index, lists }, (isPass) => {
+    beforePreview({
+      index,
+      imgList: lists,
+      resolve: (isPass: boolean) => {
         isPass && onPreview(index, lists)
-      })
-    } else {
-      beforePreview({
-        index,
-        imgList: lists,
-        resolve: (isPass) => {
-          isPass && onPreview(index, lists)
-        }
-      })
-    }
+      }
+    })
   } else {
     onPreview(index, lists)
   }

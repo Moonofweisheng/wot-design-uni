@@ -11,7 +11,7 @@ class Dayjs {
   mHour: any
   mMinute: any
   mSecond: any
-  constructor(dateStr) {
+  constructor(dateStr?: string | number | Date) {
     this.utc = false
     const parsedDate = this.parseConfig(dateStr)
     this.date = new Date(parsedDate)
@@ -26,17 +26,17 @@ class Dayjs {
     this.mSecond = this.date.getSeconds()
   }
 
-  parseConfig(dateStr) {
+  parseConfig(dateStr?:string | number | Date) {
     if (!dateStr) return new Date()
     if (dateStr instanceof Date) return dateStr
-    if (/^(\d){8}$/.test(dateStr)) {
+    if (/^(\d){8}$/.test(dateStr as string)) {
       this.utc = true
-      return `${dateStr.substr(0, 4)}-${dateStr.substr(4, 2)}-${dateStr.substr(6, 2)}`
+      return `${(dateStr as string).substr(0, 4)}-${(dateStr as string).substr(4, 2)}-${(dateStr as string).substr(6, 2)}`
     }
     return dateStr
   }
 
-  padNumber(num, length, padChar) {
+  padNumber(num:string, length:number, padChar:string) {
     return !num || num.length >= length ? num : `${Array(length + 1 - num.length).join(padChar)}${num}`
   }
 
@@ -57,7 +57,7 @@ class Dayjs {
     return this.date.toUTCString()
   }
 
-  startOf(unit) {
+  startOf(unit:string) {
     switch (unit) {
       case 'year':
         return new Dayjs(new Date(this.year(), 0, 1))
@@ -68,7 +68,7 @@ class Dayjs {
     }
   }
 
-  add(amount, unit) {
+  add(amount:number, unit:string) {
     let interval
     switch (unit) {
       case 'm':
@@ -94,7 +94,7 @@ class Dayjs {
     return new Dayjs(1000 * newUnixTime)
   }
 
-  subtract(amount, unit) {
+  subtract(amount:number, unit:string) {
     return this.add(-1 * amount, unit)
   }
 

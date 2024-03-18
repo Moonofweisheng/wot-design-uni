@@ -18,8 +18,9 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj, requestAnimationFrame } from '../common/util'
+import { transitionProps } from './types'
 
-const getClassNames = (name) => {
+const getClassNames = (name?: string) => {
   if (!name) {
     return {
       enter: `${props.enterClass} ${props.enterActiveClass}`,
@@ -37,48 +38,7 @@ const getClassNames = (name) => {
   }
 }
 
-type TransitionName =
-  | 'fade'
-  | 'fade-down'
-  | 'fade-left'
-  | 'fade-right'
-  | 'fade-up'
-  | 'slide-down'
-  | 'slide-left'
-  | 'slide-right'
-  | 'slide-up'
-  | 'zoom-in'
-  | 'zoom-out'
-
-interface Props {
-  show?: boolean
-  duration?: Record<string, number> | number | boolean
-  name?: TransitionName | ''
-  customStyle?: string
-  lazyRender?: boolean
-  customClass?: string
-  // 定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。
-  enterClass?: string
-  // 定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡/动画完成之后移除。这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。
-  enterActiveClass?: string
-  // 定义进入过渡的结束状态。在元素被插入之后下一帧生效 (与此同时 enter-class 被移除)，在过渡/动画完成之后移除。
-  enterToClass?: string
-  // 定义离开过渡的开始状态。在离开过渡被触发时立刻生效，下一帧被移除。
-  leaveClass?: string
-  // 定义离开过渡生效时的状态。在整个离开过渡的阶段中应用，在离开过渡被触发时立刻生效，在过渡/动画完成之后移除。这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数。
-  leaveActiveClass?: string
-  // 定义离开过渡的结束状态。在离开过渡被触发之后下一帧生效 (与此同时 leave-class 被删除)，在过渡/动画完成之后移除。
-  leaveToClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customStyle: '',
-  show: false,
-  name: 'fade',
-  duration: 300,
-  lazyRender: true
-})
+const props = defineProps(transitionProps)
 
 // 初始化是否完成
 const inited = ref<boolean>(false)
