@@ -1,5 +1,5 @@
 import { type ExtractPropTypes, type InjectionKey } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 
 export type TabsProvide = {
   state: {
@@ -11,7 +11,7 @@ export const TABS_KEY: InjectionKey<TabsProvide> = Symbol('wd-tabs')
 
 export const tabsProps = {
   ...baseProps,
-  modelValue: makeNumberProp(0), // 绑定值
+  modelValue: makeNumericProp(0), // 绑定值
   slidableNum: makeNumberProp(6), // 标签数超过阈值可滑动
   mapNum: makeNumberProp(10), // 标签数超过阈值显示导航地图
   sticky: makeBooleanProp(false), // 粘性布局

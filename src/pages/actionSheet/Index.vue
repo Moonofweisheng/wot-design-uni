@@ -191,10 +191,10 @@ function close4() {
 }
 
 const toast = useToast()
-function select({ item, index }) {
+function select({ item, index }: { item: any; index: number }) {
   toast.show(`当前选中项: ${item.title}, 下标: ${index}`)
 }
-function select1({ item, rowIndex, colIndex }) {
+function select1({ item, rowIndex, colIndex }: { item: any; rowIndex: number; colIndex: number }) {
   toast.show(`当前选中项: ${item.title}, 行下标: ${rowIndex}, 列下标: ${colIndex}`)
 }
 </script>

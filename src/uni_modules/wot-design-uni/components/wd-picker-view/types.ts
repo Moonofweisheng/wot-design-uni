@@ -1,5 +1,5 @@
-import type { ExtractPropTypes, Prop, PropType } from 'vue'
-import { baseProps, makeArrayProp, makeNumberProp, makeStringProp } from '../common/props'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
+import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import { getType } from '../common/util'
 
 export type ColumnItem = {
@@ -10,15 +10,15 @@ export type ColumnItem = {
 }
 
 export type PickerViewColumnChange = (
-  pickerView: any,
+  pickerView: PickerViewInstance,
   selects: Record<string, any> | Record<string, any>[],
   index: number,
-  reslove?: () => void
+  reslove: () => void
 ) => void
 
 export const pickerViewProps = {
   ...baseProps,
-  loading: { type: Boolean, default: false },
+  loading: makeBooleanProp(false),
   loadingColor: makeStringProp('#4D80F0'),
   columnsHeight: makeNumberProp(217),
   valueKey: makeStringProp('value'),
@@ -34,7 +34,20 @@ export const pickerViewProps = {
   columnChange: Function as PropType<PickerViewColumnChange>
 }
 
+export type PickerViewExpose = {
+  getSelects: () => Record<string, any> | Record<string, any>[]
+  getValues: () => string | string[]
+  setColumnData: (columnIndex: any, data: Array<any>, jumpTo?: number) => void
+  getColumnsData: () => Record<string, string>[][]
+  getColumnData: (columnIndex: number) => Record<string, string>[]
+  getColumnIndex: (columnIndex: number) => number
+  getLabels: () => string[]
+  getSelectedIndex: () => number[]
+}
+
 export type PickerViewProps = ExtractPropTypes<typeof pickerViewProps>
+
+export type PickerViewInstance = ComponentPublicInstance<PickerViewProps, PickerViewExpose>
 
 /**
  * @description 为props的value为array类型时提供format

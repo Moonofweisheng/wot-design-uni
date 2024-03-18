@@ -58,38 +58,11 @@ export default {
 import { type CSSProperties, computed, onMounted, ref, watch } from 'vue'
 import { objToStyle, requestAnimationFrame } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
+import { searchProps } from './types'
 
-interface Props {
-  userSuffixSlot?: boolean
-  placeholder?: string
-  cancelTxt?: string
-  light?: boolean
-  hideCancel?: boolean
-  disabled?: boolean
-  maxlength?: number | string
-  modelValue?: string
-  placeholderLeft?: boolean
-  focus?: boolean
-  focusWhenClear?: boolean
-  customClass?: string
-  customStyle?: string
-}
+const props = defineProps(searchProps)
 
 const { translate } = useTranslate('search')
-
-const props = withDefaults(defineProps<Props>(), {
-  modelValue: '',
-  customClass: '',
-  customStyle: '',
-  userSuffixSlot: false,
-  light: false,
-  focus: false,
-  focusWhenClear: false,
-  hideCancel: false,
-  disabled: false,
-  maxlength: -1,
-  placeholderLeft: false
-})
 
 const isFocused = ref<boolean>(false) // 是否聚焦中
 const showInput = ref<boolean>(false) // 是否显示输入框 用于实现聚焦的hack

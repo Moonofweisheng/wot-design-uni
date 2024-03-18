@@ -25,16 +25,16 @@ const value2 = ref<number>(0)
 const value3 = ref<number>(0)
 const value4 = ref<number>(0)
 
-function handleChange1({ value }) {
+function handleChange1({ value }: any) {
   console.log(value)
 }
-function handleChange2({ value }) {
+function handleChange2({ value }: any) {
   console.log(value)
 }
-function handleChange3({ value }) {
+function handleChange3({ value }: any) {
   console.log(value)
 }
-function handleChange4({ value }) {
+function handleChange4({ value }: any) {
   console.log(value)
 }
 </script>

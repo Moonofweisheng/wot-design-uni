@@ -80,6 +80,7 @@ export default {
 import { computed, getCurrentInstance, ref, watch } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
+import { imgCropperProps } from './types'
 
 // 延时动画设置
 let CHANGE_TIME: any | null = null
@@ -94,53 +95,9 @@ let INIT_IMGHEIGHT: null | number | string = null
 // 顶部裁剪框占比
 const TOP_PERCENT = 0.85
 
-interface Props {
-  customClass?: string
-  modelValue: boolean
-  cancelButtonText?: string
-  confirmButtonText?: string
-  // 是否禁用旋转
-  disabledRotate?: boolean
-  /** canvas绘图参数 start **/
-  // canvasToTempFilePath —— fileType
-  fileType?: string
-  // canvasToTempFilePath —— quality
-  quality?: number
-  // 设置导出图片尺寸
-  exportScale?: number
-  /** canvas绘图参数 end **/
-  // 图片源路径
-  imgSrc?: string
-  // 图片宽
-  imgWidth?: string | number
-  // 图片高
-  imgHeight?: string | number
-  // 最大缩放
-  maxScale?: number
-}
+const props = defineProps(imgCropperProps)
 
 const { translate } = useTranslate('img-cropper')
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  modelValue: false,
-  // 是否禁用旋转
-  disabledRotate: false,
-  /** canvas绘图参数 start **/
-  // canvasToTempFilePath —— fileType
-  fileType: 'png',
-  // canvasToTempFilePath —— quality
-  quality: 1,
-  // 设置导出图片尺寸
-  exportScale: 2,
-  /** canvas绘图参数 end **/
-  // 图片源路径
-  imgSrc: '',
-  // 最大缩放
-  maxScale: 3,
-  imgWidth: '',
-  imgHeight: ''
-})
 
 // 旋转角度
 const imgAngle = ref<number>(0)

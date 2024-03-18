@@ -31,20 +31,9 @@ export default {
 
 <script lang="ts" setup>
 import { useChildren } from '../composables/useChildren'
-import { CELL_GROUP_KEY } from './types'
+import { CELL_GROUP_KEY, cellGroupProps } from './types'
 
-interface Props {
-  customClass?: string
-  title?: string
-  value?: string
-  useSlot?: boolean
-  border?: boolean
-}
-const props = withDefaults(defineProps<Props>(), {
-  useSlot: false,
-  border: false,
-  customClass: ''
-})
+const props = defineProps(cellGroupProps)
 
 const { linkChildren } = useChildren(CELL_GROUP_KEY)
 

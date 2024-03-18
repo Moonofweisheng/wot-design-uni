@@ -60,22 +60,12 @@ export default {
 
 <script lang="ts" setup>
 import { computed, inject, ref, watch } from 'vue'
-import type { MessageOptions, MessageType } from './types'
+import { messageBoxProps, type MessageOptions, type MessageType } from './types'
 import { defaultOptions, messageDefaultOptionKey } from '.'
 import { isDef } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 
-interface Props {
-  useSlot?: boolean
-  selector?: string
-  customClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  useSlot: false,
-  customClass: '',
-  selector: ''
-})
+const props = defineProps(messageBoxProps)
 
 const { translate } = useTranslate('message-box')
 

@@ -112,7 +112,7 @@ const value8 = ref<number[]>([1])
 const value9 = ref<string[]>([])
 const value10 = ref<string[]>([])
 
-function handleChange1(e) {
+function handleChange1(e: any) {
   console.log(e)
 }
 </script>

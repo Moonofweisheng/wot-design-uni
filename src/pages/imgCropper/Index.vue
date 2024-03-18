@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-09-20 11:10:41
- * @LastEditTime: 2024-02-29 13:17:27
+ * @LastEditTime: 2024-03-17 19:53:11
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\pages\imgCropper\Index.vue
+ * @FilePath: /wot-design-uni/src/pages/imgCropper/Index.vue
  * 记得注释
 -->
 <template>
@@ -48,17 +48,17 @@ function upload() {
     }
   })
 }
-function handleConfirm(event) {
+function handleConfirm(event: any) {
   const { tempFilePath } = event
   imgSrc.value = tempFilePath
 }
-function imgLoaderror(res) {
+function imgLoaderror(res: any) {
   console.log('加载失败', res)
 }
-function imgLoaded(res) {
+function imgLoaded(res: any) {
   console.log('加载成功', res)
 }
-function handleCancel(event) {
+function handleCancel(event: any) {
   console.log('取消', event)
 }
 </script>

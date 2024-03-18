@@ -1,6 +1,6 @@
 import { type InjectionKey } from 'vue'
-
-type RadioShape = 'dot' | 'button' | 'check'
+import type { RadioShape } from '../wd-radio/types'
+import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 
 export type RadioGroupProvide = {
   props: {
@@ -16,3 +16,14 @@ export type RadioGroupProvide = {
 }
 
 export const RADIO_GROUP_KEY: InjectionKey<RadioGroupProvide> = Symbol('wd-radio-group')
+
+export const radioGroupProps = {
+  ...baseProps,
+  modelValue: [String, Number, Boolean],
+  shape: makeStringProp<RadioShape>('check'),
+  checkedColor: String,
+  disabled: makeBooleanProp(false),
+  cell: makeBooleanProp(false),
+  size: makeStringProp(''),
+  inline: makeBooleanProp(false)
+}

@@ -33,28 +33,11 @@ export default {
 <script lang="ts" setup>
 import { computed, onMounted, ref, nextTick } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
-import { getType } from '../../common/util'
+import { getType, isArray, isNumber } from '../../common/util'
 import Year from '../year/year.vue'
-import type { YearInfo } from './types'
+import { yearPanelProps, type YearInfo } from './types'
 
-interface Props {
-  type: string
-  value: Array<number> | number | null
-  minDate: number
-  maxDate: number
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter?: Function
-  maxRange?: number
-  rangePrompt?: string
-  allowSameDay?: boolean
-  showPanelTitle?: boolean
-  defaultTime: Array<number>
-  panelHeight: number
-}
-const props = withDefaults(defineProps<Props>(), {
-  allowSameDay: false,
-  showPanelTitle: false
-})
+const props = defineProps(yearPanelProps)
 
 const title = ref<string>('')
 const scrollTop = ref<number>(0) // 滚动位置
@@ -100,9 +83,9 @@ function scrollIntoView() {
   requestAnimationFrame().then(() => {
     let activeDate
     const type = getType(props.value)
-    if (type === 'array') {
+    if (isArray(props.value)) {
       activeDate = props.value![0]
-    } else if (type === 'number') {
+    } else if (isNumber(props.value)) {
       activeDate = props.value
     }
 
@@ -150,7 +133,7 @@ function doSetSubtitle(scrollTop: number, yearsInfo: YearInfo[]) {
   }
 }
 
-function handleDateChange({ value }) {
+function handleDateChange({ value }: { value: number[] }) {
   emit('change', {
     value
   })

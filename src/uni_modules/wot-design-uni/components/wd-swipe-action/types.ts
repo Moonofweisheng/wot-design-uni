@@ -8,7 +8,7 @@ export type SwipeActionReason = 'click' | 'swipe' | 'value'
 
 export type SwipeActionPosition = SwipeActionStatus | 'inside'
 
-export type SwipeActionBeforeClose = (reason: SwipeActionReason, position: SwipeActionPosition) => boolean | Promise<boolean>
+export type SwipeActionBeforeClose = (reason: SwipeActionReason, position: SwipeActionPosition) => void
 
 export const swipeActionProps = {
   ...baseProps,

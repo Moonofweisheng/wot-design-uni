@@ -1,6 +1,7 @@
 import { dayjs } from '../common/dayjs'
-import { getType, padZero } from '../common/util'
+import { getType, isArray, padZero } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
+import type { CalendarDayType, CalendarItem, CalendarTimeFilter, CalendarType } from './types'
 const { translate } = useTranslate('calendar-view')
 
 const weeks: string[] = [
@@ -18,16 +19,16 @@ const weeks: string[] = [
  * @param {timestamp} date1
  * @param {timestamp} date2
  */
-export function compareDate(date1, date2) {
-  date1 = new Date(date1)
-  date2 = new Date(date2)
+export function compareDate(date1: number, date2: number | null) {
+  const dateValue1 = new Date(date1)
+  const dateValue2 = new Date(date2 || '')
 
-  const year1 = date1.getFullYear()
-  const year2 = date2.getFullYear()
-  const month1 = date1.getMonth()
-  const month2 = date2.getMonth()
-  const day1 = date1.getDate()
-  const day2 = date2.getDate()
+  const year1 = dateValue1.getFullYear()
+  const year2 = dateValue2.getFullYear()
+  const month1 = dateValue1.getMonth()
+  const month2 = dateValue2.getMonth()
+  const day1 = dateValue1.getDate()
+  const day2 = dateValue2.getDate()
 
   if (year1 === year2) {
     if (month1 === month2) {
@@ -43,7 +44,7 @@ export function compareDate(date1, date2) {
  * 判断是否是范围选择
  * @param {string} type
  */
-export function isRange(type) {
+export function isRange(type: CalendarType) {
   return type.indexOf('range') > -1
 }
 
@@ -52,14 +53,14 @@ export function isRange(type) {
  * @param {timestamp} date1
  * @param {timestamp} date2
  */
-export function compareMonth(date1, date2) {
-  date1 = new Date(date1)
-  date2 = new Date(date2)
+export function compareMonth(date1: number, date2: number) {
+  const dateValue1 = new Date(date1)
+  const dateValue2 = new Date(date2)
 
-  const year1 = date1.getFullYear()
-  const year2 = date2.getFullYear()
-  const month1 = date1.getMonth()
-  const month2 = date2.getMonth()
+  const year1 = dateValue1.getFullYear()
+  const year2 = dateValue2.getFullYear()
+  const month1 = dateValue1.getMonth()
+  const month2 = dateValue2.getMonth()
 
   if (year1 === year2) {
     return month1 === month2 ? 0 : month1 > month2 ? 1 : -1
@@ -73,12 +74,12 @@ export function compareMonth(date1, date2) {
  * @param {timestamp} date1
  * @param {timestamp} date2
  */
-export function compareYear(date1, date2) {
-  date1 = new Date(date1)
-  date2 = new Date(date2)
+export function compareYear(date1: number, date2: number) {
+  const dateValue1 = new Date(date1)
+  const dateValue2 = new Date(date2)
 
-  const year1 = date1.getFullYear()
-  const year2 = date2.getFullYear()
+  const year1 = dateValue1.getFullYear()
+  const year2 = dateValue2.getFullYear()
 
   return year1 === year2 ? 0 : year1 > year2 ? 1 : -1
 }
@@ -88,7 +89,7 @@ export function compareYear(date1, date2) {
  * @param {number} year
  * @param {number} month
  */
-export function getMonthEndDay(year, month) {
+export function getMonthEndDay(year: number, month: number) {
   return 32 - new Date(year, month - 1, 32).getDate()
 }
 
@@ -96,7 +97,7 @@ export function getMonthEndDay(year, month) {
  * 格式化年月
  * @param {timestamp} date
  */
-export function formatMonthTitle(date) {
+export function formatMonthTitle(date: number) {
   return dayjs(date).format(translate('monthTitle'))
 }
 
@@ -104,7 +105,7 @@ export function formatMonthTitle(date) {
  * 根据下标获取星期
  * @param {number} index
  */
-export function getWeekLabel(index) {
+export function getWeekLabel(index: number) {
   if (index >= 7) {
     index = index % 7
   }
@@ -143,12 +144,12 @@ export function formatYearTitle(date: number) {
  * @param {timestamp} minDate
  * @param {timestamp} maxDate
  */
-export function getMonths(minDate, maxDate) {
+export function getMonths(minDate: number, maxDate: number) {
   const months: number[] = []
   const month = new Date(minDate)
   month.setDate(1)
 
-  while (compareMonth(month, maxDate) < 1) {
+  while (compareMonth(month.getTime(), maxDate) < 1) {
     months.push(month.getTime())
     month.setMonth(month.getMonth() + 1)
   }
@@ -167,7 +168,7 @@ export function getYears(minDate: number, maxDate: number) {
   year.setMonth(0)
   year.setDate(1)
 
-  while (compareYear(year, maxDate) < 1) {
+  while (compareYear(year.getTime(), maxDate) < 1) {
     years.push(year.getTime())
     year.setFullYear(year.getFullYear() + 1)
   }
@@ -179,17 +180,17 @@ export function getYears(minDate: number, maxDate: number) {
  * 获取一个日期所在周的第一天和最后一天
  * @param {timestamp} date
  */
-export function getWeekRange(date, firstDayOfWeek) {
+export function getWeekRange(date: number, firstDayOfWeek: number) {
   if (firstDayOfWeek >= 7) {
     firstDayOfWeek = firstDayOfWeek % 7
   }
 
-  date = new Date(date)
-  date.setHours(0, 0, 0, 0)
-  const year = date.getFullYear()
-  const month = date.getMonth()
-  const day = date.getDate()
-  const week = date.getDay()
+  const dateValue = new Date(date)
+  dateValue.setHours(0, 0, 0, 0)
+  const year = dateValue.getFullYear()
+  const month = dateValue.getMonth()
+  const day = dateValue.getDate()
+  const week = dateValue.getDay()
 
   const weekStart = new Date(year, month, day - ((7 + week - firstDayOfWeek) % 7))
   const weekEnd = new Date(year, month, day + 6 - ((7 + week - firstDayOfWeek) % 7))
@@ -202,7 +203,7 @@ export function getWeekRange(date, firstDayOfWeek) {
  * @param {timestamp} date1
  * @param {timestamp} date2
  */
-export function getDayOffset(date1, date2) {
+export function getDayOffset(date1: number, date2: number) {
   return (date1 - date2) / (24 * 60 * 60 * 1000) + 1
 }
 
@@ -211,11 +212,11 @@ export function getDayOffset(date1, date2) {
  * @param {timestamp} date
  * @param {number} offset
  */
-export function getDayByOffset(date, offset) {
-  date = new Date(date)
-  date.setDate(date.getDate() + offset)
+export function getDayByOffset(date: number, offset: number) {
+  const dateValue = new Date(date)
+  dateValue.setDate(dateValue.getDate() + offset)
 
-  return date.getTime()
+  return dateValue.getTime()
 }
 
 /**
@@ -223,14 +224,14 @@ export function getDayByOffset(date, offset) {
  * @param {timestamp} date1
  * @param {timestamp} date2
  */
-export function getMonthOffset(date1, date2) {
-  date1 = new Date(date1)
-  date2 = new Date(date2)
+export function getMonthOffset(date1: number, date2: number) {
+  const dateValue1 = new Date(date1)
+  const dateValue2 = new Date(date2)
 
-  const year1 = date1.getFullYear()
-  const year2 = date2.getFullYear()
-  let month1 = date1.getMonth()
-  const month2 = date2.getMonth()
+  const year1 = dateValue1.getFullYear()
+  const year2 = dateValue2.getFullYear()
+  let month1 = dateValue1.getMonth()
+  const month2 = dateValue2.getMonth()
 
   month1 = (year1 - year2) * 12 + month1
 
@@ -242,20 +243,20 @@ export function getMonthOffset(date1, date2) {
  * @param {timestamp} date
  * @param {number} offset
  */
-export function getMonthByOffset(date, offset) {
-  date = new Date(date)
-  date.setMonth(date.getMonth() + offset)
+export function getMonthByOffset(date: number, offset: number) {
+  const dateValue = new Date(date)
+  dateValue.setMonth(dateValue.getMonth() + offset)
 
-  return date.getTime()
+  return dateValue.getTime()
 }
 
 /**
  * 获取默认时间，格式化为数组
  * @param {array|string|null} defaultTime
  */
-export function getDefaultTime(defaultTime) {
-  if (getType(defaultTime) === 'array') {
-    const startTime = (defaultTime[0] || '00:00:00').split(':').map((item) => {
+export function getDefaultTime(defaultTime: string[] | string | null) {
+  if (isArray(defaultTime)) {
+    const startTime = (defaultTime[0] || '00:00:00').split(':').map((item: string) => {
       return parseInt(item)
     })
     const endTime = (defaultTime[1] || '00:00:00').split(':').map((item) => {
@@ -276,13 +277,13 @@ export function getDefaultTime(defaultTime) {
  * @param {timestamp} date
  * @param {array} defaultTime
  */
-export function getDateByDefaultTime(date, defaultTime) {
-  date = new Date(date)
-  date.setHours(defaultTime[0])
-  date.setMinutes(defaultTime[1])
-  date.setSeconds(defaultTime[2])
+export function getDateByDefaultTime(date: number, defaultTime: number[]) {
+  const dateValue = new Date(date)
+  dateValue.setHours(defaultTime[0])
+  dateValue.setMinutes(defaultTime[1])
+  dateValue.setSeconds(defaultTime[2])
 
-  return date.getTime()
+  return dateValue.getTime()
 }
 
 /**
@@ -290,9 +291,9 @@ export function getDateByDefaultTime(date, defaultTime) {
  * @param {number} n
  * @param {function} iteratee
  */
-const times = (n, iteratee) => {
-  let index = -1
-  const result = Array(n < 0 ? 0 : n)
+const times = (n: number, iteratee: (index: number) => CalendarItem) => {
+  let index: number = -1
+  const result: CalendarItem[] = Array(n < 0 ? 0 : n)
   while (++index < n) {
     result[index] = iteratee(index)
   }
@@ -303,16 +304,28 @@ const times = (n, iteratee) => {
  * 获取时分秒
  * @param {timestamp}} date
  */
-const getTime = (date) => {
-  date = new Date(date)
-  return [date.getHours(), date.getMinutes(), date.getSeconds()]
+const getTime = (date: number) => {
+  const dateValue = new Date(date)
+  return [dateValue.getHours(), dateValue.getMinutes(), dateValue.getSeconds()]
 }
 
 /**
  * 根据最小最大日期获取时间数据，用于填入picker
  * @param {*} param0
  */
-export function getTimeData({ date, minDate, maxDate, isHideSecond, filter } = {} as any) {
+export function getTimeData({
+  date,
+  minDate,
+  maxDate,
+  isHideSecond,
+  filter
+}: {
+  date: number
+  minDate: number
+  maxDate: number
+  isHideSecond: boolean
+  filter?: CalendarTimeFilter
+}) {
   const compareMin = compareDate(date, minDate)
   const compareMax = compareDate(date, maxDate)
 
@@ -351,7 +364,7 @@ export function getTimeData({ date, minDate, maxDate, isHideSecond, filter } = {
     }
   }
 
-  let columns: any[] = []
+  let columns: CalendarItem[][] = []
   let hours = times(24, (index) => {
     return {
       label: translate('hour', padZero(index)),
@@ -366,7 +379,7 @@ export function getTimeData({ date, minDate, maxDate, isHideSecond, filter } = {
       disabled: index < minMinute || index > maxMinute
     }
   })
-  let seconds
+  let seconds: CalendarItem[] = []
   if (filter && getType(filter) === 'function') {
     hours = filter({
       type: 'hour',
@@ -403,7 +416,7 @@ export function getTimeData({ date, minDate, maxDate, isHideSecond, filter } = {
  * 获取当前是第几周
  * @param {timestamp} date
  */
-export function getWeekNumber(date) {
+export function getWeekNumber(date: number | Date) {
   date = new Date(date)
   date.setHours(0, 0, 0, 0)
   // Thursday in current week decides the year.
@@ -415,10 +428,10 @@ export function getWeekNumber(date) {
   return 1 + Math.round(((date.getTime() - week.getTime()) / 86400000 - 3 + ((week.getDay() + 6) % 7)) / 7)
 }
 
-export function getItemClass(monthType, value, type) {
+export function getItemClass(monthType: CalendarDayType, value: number | (number | null)[], type: CalendarType) {
   const classList = ['is-' + monthType]
 
-  if (type.indexOf('range') > -1) {
+  if (type.indexOf('range') > -1 && isArray(value)) {
     if (!value || !value[1]) {
       classList.push('is-without-end')
     }

@@ -34,26 +34,9 @@ export default {
 import { computed, watch } from 'vue'
 import { useParent } from '../composables/useParent'
 import { RADIO_GROUP_KEY } from '../wd-radio-group/types'
+import { radioProps } from './types'
 
-type RadioShape = 'dot' | 'button' | 'check'
-interface Props {
-  customClass?: string
-  value: string | number | boolean
-  shape?: RadioShape
-  checkedColor?: string
-  disabled?: boolean | null
-  cell?: boolean | null
-  size?: string
-  inline?: boolean | null
-  maxWidth?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  disabled: null,
-  cell: null,
-  inline: null
-})
+const props = defineProps(radioProps)
 
 const { parent: radioGroup } = useParent(RADIO_GROUP_KEY)
 

@@ -16,24 +16,9 @@ export default {
 <script setup lang="ts">
 import { type CSSProperties, computed } from 'vue'
 import { addUnit, isDef, objToStyle } from '../common/util'
+import { gapProps } from './types'
 
-interface Props {
-  bgColor?: string
-  safeAreaBottom?: boolean
-  customClass?: string
-  customStyle?: string
-  height?: string | number
-}
-const props = withDefaults(defineProps<Props>(), {
-  // 背景颜色（默认transparent）
-  bgColor: 'transparent',
-  //额外添加底部安全区高度
-  safeAreaBottom: false,
-  //分割槽高度，单位px
-  height: 15,
-  customClass: '',
-  customStyle: ''
-})
+const props = defineProps(gapProps)
 
 const rootStyle = computed(() => {
   const rootStyle: CSSProperties = {}

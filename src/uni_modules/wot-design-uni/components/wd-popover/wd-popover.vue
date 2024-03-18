@@ -65,53 +65,10 @@ import { getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, 
 import { usePopover } from '../composables/usePopover'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
+import { popoverProps } from './types'
+import { isArray } from '../common/util'
 
-type PlacementType =
-  | 'top'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left'
-  | 'left-start'
-  | 'left-end'
-  | 'right'
-  | 'right-start'
-  | 'right-end'
-
-type PopoverMode = 'menu' | 'normal'
-
-interface Props {
-  customArrow?: string
-  customPop?: string
-  customClass?: string
-  // 是否显示 popover 箭头
-  visibleArrow?: boolean
-  // 显示内容
-  content?: string | Record<string, any>[]
-  placement?: PlacementType
-  offset?: number
-  useContentSlot?: boolean
-  disabled?: boolean
-  showClose?: boolean
-  modelValue: boolean
-  mode?: PopoverMode
-}
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customPop: '',
-  customArrow: '',
-  visibleArrow: true,
-  placement: 'bottom',
-  content: '',
-  offset: 0,
-  useContentSlot: false,
-  disabled: false,
-  showClose: false,
-  modelValue: false,
-  mode: 'normal'
-})
+const props = defineProps(popoverProps)
 
 const queue = inject<Queue | null>(queueKey, null)
 
@@ -125,7 +82,7 @@ watch(
     const { mode } = props
     if (selector === 'popover' && mode === 'normal' && typeof newVal !== 'string') {
       console.error('The value type must be a string type in normal mode')
-    } else if (selector === 'popover' && mode === 'menu' && popover.checkType(newVal) !== 'Array') {
+    } else if (selector === 'popover' && mode === 'menu' && !isArray(newVal)) {
       console.error('The value type must be a Array type in menu mode')
     }
   }
@@ -174,7 +131,7 @@ const popover = usePopover()
 function menuClick(index: number) {
   emit('update:modelValue', false)
   emit('menuclick', {
-    item: props.content[index],
+    item: (props.content as Array<Record<string, any>>)[index],
     index
   })
 }

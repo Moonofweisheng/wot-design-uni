@@ -29,26 +29,9 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import { checkNumRange, isArray, objToStyle } from '../common/util'
+import { progressProps } from './types'
 
-type ProgressStatus = 'success' | 'danger' // 状态类型
-
-interface Props {
-  customClass?: string
-  percentage?: number
-  hideText?: boolean
-  color?: string | string[] | Record<string, any>[]
-  duration?: number
-  status?: ProgressStatus
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  percentage: 0,
-  hideText: false,
-  color: 'linear-gradient(315deg, rgba(81,124,240,1) 0%,rgba(118,158,245,1) 100%)',
-  duration: 30
-})
-
+const props = defineProps(progressProps)
 // 进度条展示的颜色
 const showColor = ref<string>('')
 // 进度条展示的进度

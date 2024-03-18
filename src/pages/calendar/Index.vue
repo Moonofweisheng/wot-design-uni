@@ -49,6 +49,8 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { dayjs } from '@/uni_modules/wot-design-uni'
+import type { CalendarDayItem } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
+import type { CalendarOnShortcutsClickOption } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
 import { ref } from 'vue'
 
 const minDate = ref<number>(new Date(new Date().getFullYear() - 20, new Date().getMonth() - 6, new Date().getDate()).getTime())
@@ -70,7 +72,7 @@ const value14 = ref<number | null>(null)
 const value15 = ref<number | null>(null)
 
 const formatValue = ref<string>('')
-const formatter = (day) => {
+const formatter = (day: CalendarDayItem) => {
   const date = new Date(day.date)
   const now = new Date()
 
@@ -123,24 +125,24 @@ const shortcuts = ref<Record<string, any>[]>([
 ])
 
 const toast = useToast()
-const onShortcutsClick = ({ item }) => {
+const onShortcutsClick = ({ item }: CalendarOnShortcutsClickOption) => {
   const dayDiff = item.id
   const endDate = Date.now() - 24 * 60 * 60 * 1000
   const startDate = endDate - dayDiff * 24 * 60 * 60 * 1000
 
   return [startDate, endDate]
 }
-const displayFormat = (value) => {
+const displayFormat = (value: any) => {
   return dayjs(value[0]).format('YY年MM月DD日') + ' - ' + dayjs(value[1]).format('YY年MM月DD日')
 }
-const innerDisplayFormat = (value, rangeType) => {
+const innerDisplayFormat = (value: string | number | Date | undefined, rangeType: string) => {
   if (!value) {
     return rangeType === 'start' ? '活动开始时间' : '活动结束时间'
   }
 
   return dayjs(value).format('YY年MM月DD日')
 }
-const beforeConfirm = ({ value, resolve }) => {
+const beforeConfirm = ({ value, resolve }: any) => {
   if (value > Date.now()) {
     toast.error('该日期暂无数据')
     resolve(false)
@@ -149,26 +151,18 @@ const beforeConfirm = ({ value, resolve }) => {
   }
 }
 
-function handleConfirm1({ value }) {
+function handleConfirm1({ value }: any) {
   console.log(value)
 }
-function handleConfirm2({ value }) {
-  // this.setData({
-  //   value2: event.detail.value
-  // })
-}
-function handleConfirm3({ value }) {
+function handleConfirm2({ value }: any) {
   console.log(value)
-  // this.setData({
-  //   value12: event.detail.value
-  // })
 }
-function handleConfirm4({ value }) {
+function handleConfirm3({ value }: any) {
+  console.log(value)
+}
+function handleConfirm4({ value }: any) {
   console.log(new Date(value).toString())
   formatValue.value = new Date(value).toString()
-  // this.setData({
-  //   formatValue: new Date(event.detail.value).toString()
-  // })
 }
 </script>
 <style lang="scss" scoped></style>

@@ -29,42 +29,9 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj, requestAnimationFrame } from '../common/util'
-import type { PopupType } from './types'
+import { popupProps } from './types'
 
-interface Props {
-  transition?: string
-  closable?: boolean
-  position?: PopupType
-  closeOnClickModal?: boolean
-  duration?: number | boolean
-  modal?: boolean
-  zIndex?: number
-  hideWhenClose?: boolean
-  modalStyle?: string
-  safeAreaInsetBottom?: boolean
-  modelValue: boolean
-  customStyle?: string
-  lazyRender?: boolean
-  lockScroll?: boolean
-  customClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customStyle: '',
-  modalStyle: '',
-  position: 'center',
-  closeOnClickModal: true,
-  modal: true,
-  closable: false,
-  duration: 300,
-  zIndex: 10,
-  hideWhenClose: true,
-  lazyRender: true,
-  lockScroll: true,
-  safeAreaInsetBottom: false,
-  modelValue: false
-})
+const props = defineProps(popupProps)
 
 const getClassNames = (name?: string) => {
   if (!name) {

@@ -1,5 +1,7 @@
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeRequiredProp, makeStringProp } from '../common/props'
+import { UPDATE_MODEL_EVENT } from '../common/event'
+import { isBoolean } from '../common/util'
 
 export type Action = {
   // 选项名称
@@ -38,3 +40,16 @@ export const actionSheetProps = {
 }
 
 export type ActionSheetProps = ExtractPropTypes<typeof actionSheetProps>
+
+// export type SelectPanelOption = {
+//   item: Panel | Action
+//   index?: number
+//   rowIndex?: number
+//   colIndex?: number
+// }
+
+// export const actionSheetEmits = {
+//   [UPDATE_MODEL_EVENT]: (newValue: boolean) => isBoolean(newValue),
+//   select: (option: SelectPanelOption) => option !== undefined
+// }
+// export type ActionSheetEmits = typeof actionSheetEmits

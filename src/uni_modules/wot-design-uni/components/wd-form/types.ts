@@ -1,13 +1,14 @@
 /*
  * @Author: weisheng
  * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-03-15 17:39:58
+ * @LastEditTime: 2024-03-17 19:47:59
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-form\type.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-form/types.ts
  * 记得注释
  */
-import { type InjectionKey } from 'vue'
+import { type ComponentPublicInstance, type ExtractPropTypes, type InjectionKey, type PropType } from 'vue'
+import { baseProps, makeBooleanProp, makeRequiredProp } from '../common/props'
 
 export type FormProvide = {
   props: {
@@ -38,3 +39,27 @@ export interface FormItemRule {
 }
 
 export type FormItemRuleWithoutValidator = Omit<FormItemRule, 'validator'>
+
+export const formProps = {
+  ...baseProps,
+  // 表单数据对象
+  model: makeRequiredProp(Object as PropType<Record<string, any>>),
+  // 表单验证规则
+  rules: {
+    type: Object as PropType<FormRules>,
+    default: () => ({})
+  },
+  // 是否在输入时重置表单校验信息
+  resetOnChange: makeBooleanProp(true)
+}
+export type FormProps = ExtractPropTypes<typeof formProps>
+
+export type FormExpose = {
+  validate: (prop?: string) => Promise<{
+    valid: boolean
+    errors: ErrorMessage[]
+  }>
+  reset: () => void
+}
+
+export type FormInstance = ComponentPublicInstance<FormProps, FormExpose>

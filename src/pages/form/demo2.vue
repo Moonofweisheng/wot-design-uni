@@ -32,6 +32,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { FormInstance } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import { reactive, ref } from 'vue'
 
 const model = reactive<{
@@ -43,15 +44,15 @@ const model = reactive<{
 })
 
 const { success: showSuccess } = useToast()
-const form = ref()
+const form = ref<FormInstance>()
 
 function handleBlur(prop: string) {
-  form.value.validate(prop)
+  form.value!.validate(prop)
 }
 
 function handleSubmit() {
-  form.value
-    .validate()
+  form
+    .value!.validate()
     .then(({ valid }) => {
       if (valid) {
         showSuccess('校验通过')

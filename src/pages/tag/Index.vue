@@ -127,19 +127,19 @@ const tags = ref([
 ])
 const dynamicTags = ref(['标签一', '标签二'])
 
-function handleClick(index) {
+function handleClick(index: number) {
   console.log('click:index' + index)
 }
-function handleClose(order) {
+function handleClose(order: number) {
   tags.value = tags.value.filter((value, index) => index !== order)
   console.log('close:index' + order)
 }
-function handleClose1(order) {
+function handleClose1(order: number) {
   dynamicTags.value = dynamicTags.value.filter((item, index) => {
     return index !== order
   })
 }
-function handleConfirm({ value }) {
+function handleConfirm({ value }: any) {
   if (!value) return
   dynamicTags.value = [...dynamicTags.value, value]
 }

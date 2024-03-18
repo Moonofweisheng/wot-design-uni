@@ -70,19 +70,19 @@ const value17 = ref<string>('')
 const value18 = ref<string>('')
 const value19 = ref<string>('')
 
-function handleChange(event) {
+function handleChange(event: any) {
   console.log(event)
 }
-function handleChange1(event) {
+function handleChange1(event: any) {
   console.log(event)
 }
-function handleChange2(event) {
+function handleChange2(event: any) {
   console.log(event)
 }
-function handleChange3(event) {
+function handleChange3(event: any) {
   console.log(event)
 }
-function handleBlur(event) {
+function handleBlur(event: any) {
   console.log('失焦', event)
 }
 </script>

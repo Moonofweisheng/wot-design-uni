@@ -110,10 +110,10 @@ function handleDisagree() {
  */
 function openPrivacyContract() {
   ;(wx as any).openPrivacyContract({
-    success: (res) => {
+    success: (res: any) => {
       console.log('openPrivacyContract success')
     },
-    fail: (res) => {
+    fail: (res: any) => {
       console.error('openPrivacyContract fail', res)
     }
   })

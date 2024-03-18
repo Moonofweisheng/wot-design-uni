@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-07-29 17:03:39
- * @LastEditTime: 2023-08-07 20:28:16
+ * @LastEditTime: 2024-03-17 20:19:52
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\pages\rate\Index.vue
+ * @FilePath: /wot-design-uni/src/pages/rate/Index.vue
  * 记得注释
 -->
 <template>
@@ -54,10 +54,10 @@ const value5 = ref<number>(4)
 const value6 = ref<number>(3)
 const value7 = ref<number>(5)
 
-function changeValue1({ value }) {
+function changeValue1({ value }: any) {
   console.log(value)
 }
-function changeValue2({ value }) {
+function changeValue2({ value }: any) {
   console.log(value)
 }
 </script>

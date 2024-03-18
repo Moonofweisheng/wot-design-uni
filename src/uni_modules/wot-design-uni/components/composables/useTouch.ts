@@ -9,7 +9,7 @@ export function useTouch() {
   const startX = ref<number>(0)
   const startY = ref<number>(0)
 
-  function touchStart(event) {
+  function touchStart(event: any) {
     const touch = event.touches[0]
     direction.value = ''
     deltaX.value = 0
@@ -20,7 +20,7 @@ export function useTouch() {
     startY.value = touch.clientY
   }
 
-  function touchMove(event) {
+  function touchMove(event: any) {
     const touch = event.touches[0]
     deltaX.value = touch.clientX - startX.value
     deltaY.value = touch.clientY - startY.value

@@ -44,32 +44,12 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isArray, isEqual, range } from '../common/util'
-import { type ColumnItem, formatArray, pickerViewProps } from './types'
-
-// interface Props {
-//   customClass?: string
-//   // 加载中
-//   loading?: boolean
-//   loadingColor?: string
-//   // 选项总高度
-//   columnsHeight?: number
-//   // 选项对象中，value对应的 key
-//   valueKey?: string
-//   // 选项对象中，展示的文本对应的 key
-//   labelKey?: string
-//   // 初始值
-//   modelValue: string | number | boolean | Array<string | number | boolean>
-//   // 选择器数据
-//   columns: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>
-//   // 多级联动
-//   // eslint-disable-next-line @typescript-eslint/ban-types
-//   columnChange?: Function
-// }
+import { formatArray, pickerViewProps } from './types'
 
 const props = defineProps(pickerViewProps)
 
 // 格式化之后，用于render 列表的数据
-const formatColumns = ref<Array<Array<Record<string, any>>>>([])
+const formatColumns = ref<Record<string, string>[][]>([])
 const itemHeight = ref<number>(35)
 const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中的下标集合
 const preSelectedIndex = ref<Array<number>>([])
@@ -234,7 +214,7 @@ function onChange({ detail: { value } }: any) {
     if (props.columnChange) {
       // columnsChange 可能有异步操作，需要添加 resolve 进行回调通知，形参小于4个则为同步
       if (props.columnChange.length < 4) {
-        props.columnChange(proxy.$.exposed, getSelects(), index || 0)
+        props.columnChange(proxy.$.exposed, getSelects(), index || 0, () => {})
         handleChange(index || 0)
       } else {
         props.columnChange(proxy.$.exposed, getSelects(), index || 0, () => {
@@ -377,6 +357,10 @@ function getColumnsData() {
   return formatColumns.value.slice(0)
 }
 
+function getSelectedIndex() {
+  return selectedIndex.value
+}
+
 function onPickStart() {
   emit('pickstart')
 }
@@ -393,7 +377,7 @@ defineExpose({
   getColumnData,
   getColumnIndex,
   getLabels,
-  selectedIndex
+  getSelectedIndex
 })
 </script>
 <style lang="scss" scoped>

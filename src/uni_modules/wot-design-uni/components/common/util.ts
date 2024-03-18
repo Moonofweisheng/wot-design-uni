@@ -634,4 +634,9 @@ export const getPropByPath = (obj: any, path: string): any => {
   }
 }
 
-export const extend = Object.assign
+/**
+ * 检查一个值是否为Date类型
+ * @param val 要检查的值
+ * @returns 如果值是Date类型，则返回true，否则返回false
+ */
+export const isDate = (val: unknown): val is Date => Object.prototype.toString.call(val) === '[object Date]' && !Number.isNaN((val as Date).getTime())

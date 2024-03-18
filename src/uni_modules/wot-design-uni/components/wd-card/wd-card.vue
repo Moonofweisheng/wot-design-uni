@@ -27,22 +27,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-interface Props {
-  title?: string
-  type?: string
-  customClass?: string
-  customTitleClass?: string
-  customContentClass?: string
-  customFooterClass?: string
-}
+import { cardProps } from './types'
 
-const props = withDefaults(defineProps<Props>(), {
-  type: '',
-  customClass: '',
-  customTitleClass: '',
-  customContentClass: '',
-  customFooterClass: ''
-})
+defineProps(cardProps)
 </script>
 
 <style lang="scss" scoped>

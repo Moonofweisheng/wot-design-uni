@@ -127,7 +127,7 @@ const value9 = ref<number>(1)
 const value10 = ref<number>(1)
 const value11 = ref<number>(1)
 
-function change(e) {
+function change(e: any) {
   console.log(e)
 }
 </script>

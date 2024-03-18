@@ -1,3 +1,5 @@
+import { baseProps, makeBooleanProp } from '../common/props'
+
 export type MessageType = 'alert' | 'confirm' | 'prompt'
 
 export type MessageOptions = {
@@ -85,4 +87,10 @@ export interface Message {
   prompt(toastOptions: MessageOptions | string): Promise<MessageResult>
   // 关闭Message
   close(): void
+}
+
+export const messageBoxProps = {
+  ...baseProps,
+  useSlot: makeBooleanProp(false),
+  selector: String
 }

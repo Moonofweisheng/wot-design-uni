@@ -42,29 +42,12 @@ export default {
 
 <script lang="ts" setup>
 import { onBeforeMount, ref, watch } from 'vue'
-import { COLLAPSE_KEY, type CollapseToggleAllOptions } from './types'
+import { COLLAPSE_KEY, collapseProps, type CollapseToggleAllOptions } from './types'
 import { useChildren } from '../composables/useChildren'
 import { isArray, isDef } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 
-interface Props {
-  customClass?: string
-  customMoreSlotClass?: string
-  modelValue: string | Array<string> | boolean
-  accordion?: boolean
-  viewmore?: boolean
-  useMoreSlot?: boolean
-  lineNum?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customMoreSlotClass: '',
-  accordion: false,
-  viewmore: false,
-  useMoreSlot: false,
-  lineNum: 2
-})
+const props = defineProps(collapseProps)
 
 const { translate } = useTranslate('collapse')
 const contentLineNum = ref<number>(0) // 查看更多的折叠面板，收起时的显示行数

@@ -19,25 +19,9 @@ export default {
 import { reactive, watch } from 'vue'
 import { deepClone, getPropByPath, isDef, isPromise } from '../common/util'
 import { useChildren } from '../composables/useChildren'
-import { type FormRules, FORM_KEY, type ErrorMessage } from './types'
+import { type FormRules, FORM_KEY, type ErrorMessage, formProps } from './types'
 
-interface Props {
-  // 表单数据对象
-  model: Record<string, any>
-  // 表单验证规则
-  rules?: FormRules
-  // 是否在输入时重置表单校验信息
-  resetOnChange?: boolean
-  customClass?: string
-  customStyle?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  rules: () => ({}),
-  resetOnChange: true,
-  customClass: '',
-  customStyle: ''
-})
+const props = defineProps(formProps)
 
 const { children, linkChildren } = useChildren(FORM_KEY)
 let errorMessages = reactive<Record<string, string>>({})

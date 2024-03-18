@@ -44,18 +44,9 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 import { addUnit, objToStyle, uuid } from '../common/util'
+import { resizeProps } from './types'
 
-interface Props {
-  customClass?: string
-  customContainerClass?: string
-  customStyle?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customStyle: '',
-  customClass: '',
-  customContainerClass: ''
-})
+const props = defineProps(resizeProps)
 
 const expandScrollTop = ref<number>(0)
 const shrinkScrollTop = ref<number>(0)

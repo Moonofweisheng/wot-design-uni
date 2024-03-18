@@ -66,11 +66,14 @@
         :class="`wd-calendar__view  ${currentType.indexOf('range') > -1 ? 'is-range' : ''} ${showConfirm ? 'is-show-confirm' : ''}`"
       >
         <view v-if="range(type)" :class="`wd-calendar__range-label ${type === 'monthrange' ? 'is-monthrange' : ''}`">
-          <view :class="`wd-calendar__range-label-item ${!calendarValue || !calendarValue[0] ? 'is-placeholder' : ''}`" style="text-align: right">
+          <view
+            :class="`wd-calendar__range-label-item ${!calendarValue || !isArray(calendarValue) || !calendarValue[0] ? 'is-placeholder' : ''}`"
+            style="text-align: right"
+          >
             {{ rangeLabel[0] }}
           </view>
           <view class="wd-calendar__range-sperator">/</view>
-          <view :class="`wd-calendar__range-label-item ${!calendarValue || !calendarValue[1] ? 'is-placeholder' : ''}`">
+          <view :class="`wd-calendar__range-label-item ${!calendarValue || !isArray(calendarValue) || !calendarValue[1] ? 'is-placeholder' : ''}`">
             {{ rangeLabel[1] }}
           </view>
         </view>
@@ -120,52 +123,54 @@ import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
+import { calendarProps } from './types'
+import type { CalendarType } from '../wd-calendar-view/types'
 const { translate } = useTranslate('calendar')
 
-const defaultDisplayFormat = (value, type) => {
+const defaultDisplayFormat = (value: number | number[], type: CalendarType): string => {
   switch (type) {
     case 'date':
-      return dayjs(value).format('YYYY-MM-DD')
+      return dayjs(value as number).format('YYYY-MM-DD')
     case 'dates':
-      return value
+      return (value as number[])
         .map((item) => {
           return dayjs(item).format('YYYY-MM-DD')
         })
         .join(', ')
     case 'daterange':
-      return `${value[0] ? dayjs(value[0]).format('YYYY-MM-DD') : translate('startTime')} ${translate('to')} ${
-        value[1] ? dayjs(value[1]).format('YYYY-MM-DD') : translate('endTime')
+      return `${(value as number[])[0] ? dayjs((value as number[])[0]).format('YYYY-MM-DD') : translate('startTime')} ${translate('to')} ${
+        (value as number[])[1] ? dayjs((value as number[])[1]).format('YYYY-MM-DD') : translate('endTime')
       }`
     case 'datetime':
-      return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+      return dayjs(value as number).format('YYYY-MM-DD HH:mm:ss')
     case 'datetimerange':
-      return `${value[0] ? dayjs(value[0]).format(translate('timeFormat')) : translate('startTime')} ${translate('to')}\n${
-        value[1] ? dayjs(value[1]).format(translate('timeFormat')) : translate('endTime')
-      }`
+      return `${(value as number[])[0] ? dayjs((value as number[])[0]).format(translate('timeFormat')) : translate('startTime')} ${translate(
+        'to'
+      )}\n${(value as number[])[1] ? dayjs((value as number[])[1]).format(translate('timeFormat')) : translate('endTime')}`
     case 'week': {
-      const year = new Date(value).getFullYear()
-      const week = getWeekNumber(value)
+      const year = new Date(value as number).getFullYear()
+      const week = getWeekNumber(value as number)
       return translate('weekFormat', year, padZero(week))
     }
     case 'weekrange': {
-      const year1 = new Date(value[0]).getFullYear()
-      const week1 = getWeekNumber(value[0])
-      const year2 = new Date(value[1]).getFullYear()
-      const week2 = getWeekNumber(value[1])
-      return `${value[0] ? translate('weekFormat', year1, padZero(week1)) : translate('startWeek')} - ${
-        value[1] ? translate('weekFormat', year2, padZero(week2)) : translate('endWeek')
+      const year1 = new Date((value as number[])[0]).getFullYear()
+      const week1 = getWeekNumber((value as number[])[0])
+      const year2 = new Date((value as number[])[1]).getFullYear()
+      const week2 = getWeekNumber((value as number[])[1])
+      return `${(value as number[])[0] ? translate('weekFormat', year1, padZero(week1)) : translate('startWeek')} - ${
+        (value as number[])[1] ? translate('weekFormat', year2, padZero(week2)) : translate('endWeek')
       }`
     }
     case 'month':
-      return dayjs(value).format('YYYY / MM')
+      return dayjs(value as number).format('YYYY / MM')
     case 'monthrange':
-      return `${value[0] ? dayjs(value[0]).format('YYYY / MM') : translate('startMonth')} ${translate('to')} ${
-        value[1] ? dayjs(value[1]).format('YYYY / MM') : translate('endMonth')
+      return `${(value as number[])[0] ? dayjs((value as number[])[0]).format('YYYY / MM') : translate('startMonth')} ${translate('to')} ${
+        (value as number[])[1] ? dayjs((value as number[])[1]).format('YYYY / MM') : translate('endMonth')
       }`
   }
 }
 
-const formatRange = (value, rangeType, type) => {
+const formatRange = (value: number, rangeType: 'start' | 'end', type: CalendarType) => {
   switch (type) {
     case 'daterange':
       if (!value) {
@@ -194,87 +199,7 @@ const formatRange = (value, rangeType, type) => {
   }
 }
 
-type CalendarType = 'date' | 'dates' | 'datetime' | 'week' | 'month' | 'daterange' | 'datetimerange' | 'weekrange' | 'monthrange'
-
-interface Props {
-  customClass?: string
-  customViewClass?: string
-  customLabelClass?: string
-  customValueClass?: string
-  modelValue: null | number | Array<number>
-  type?: CalendarType
-  minDate?: number
-  maxDate?: number
-  firstDayOfWeek?: number
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  formatter?: Function
-  maxRange?: number
-  rangePrompt?: string
-  allowSameDay?: boolean
-  defaultTime?: string | Array<string>
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  timeFilter?: Function
-  hideSecond?: boolean
-  label?: string
-  labelWidth?: string
-  useLabelSlot?: boolean
-  useDefaultSlot?: boolean
-  disabled?: boolean
-  readonly?: boolean
-  placeholder?: string
-  title?: string
-  alignRight?: boolean
-  error?: boolean
-  required?: boolean
-  size?: string
-  center?: boolean
-  closeOnClickModal?: boolean
-  zIndex?: number
-  showConfirm?: boolean
-  confirmText?: string
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat?: Function
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  innerDisplayFormat?: Function
-  ellipsis?: boolean
-  showTypeSwitch?: boolean
-  shortcuts?: Array<Record<string, any>>
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onShortcutsClick?: Function
-  safeAreaInsetBottom?: boolean
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm?: Function
-  prop?: string
-  rules?: FormItemRule[]
-}
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customViewClass: '',
-  customLabelClass: '',
-  customValueClass: '',
-  type: 'date',
-  minDate: new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()).getTime(),
-  maxDate: new Date(new Date().getFullYear(), new Date().getMonth() + 6, new Date().getDate(), 23, 59, 59).getTime(),
-  firstDayOfWeek: 0,
-  allowSameDay: false,
-  hideSecond: false,
-  useLabelSlot: false,
-  useDefaultSlot: false,
-  disabled: false,
-  readonly: false,
-  alignRight: false,
-  error: false,
-  required: false,
-  center: false,
-  closeOnClickModal: true,
-  zIndex: 15,
-  showConfirm: true,
-  ellipsis: false,
-  showTypeSwitch: false,
-  shortcuts: () => [],
-  safeAreaInsetBottom: true,
-  rules: () => []
-})
+const props = defineProps(calendarProps)
 
 const pickerShow = ref<boolean>(false)
 const calendarValue = ref<null | number | number[]>(null)
@@ -373,7 +298,7 @@ const isRequired = computed(() => {
 })
 
 const range = computed(() => {
-  return (type) => {
+  return (type: CalendarType) => {
     return isRange(type)
   }
 })
@@ -415,7 +340,7 @@ function close() {
   }, 250)
   emit('cancel')
 }
-function handleTypeChange({ index }) {
+function handleTypeChange({ index }: { index: number }) {
   const tabs = ['date', 'week', 'month']
   const rangeTabs = ['daterange', 'weekrange', 'monthrange']
   const type = props.type.indexOf('range') > -1 ? rangeTabs[index] : tabs[index]
@@ -423,12 +348,12 @@ function handleTypeChange({ index }) {
   currentTab.value = index
   currentType.value = type as CalendarType
 }
-function getConfirmBtnStatus(value) {
+function getConfirmBtnStatus(value: number | number[] | null) {
   let confirmBtnDisabled = false
   // 范围选择未选择满，或者多日期选择未选择日期，按钮置灰不可点击
   if (
-    (props.type.indexOf('range') > -1 && (!value[0] || !value[1] || !value)) ||
-    (props.type === 'dates' && (value.length === 0 || !value)) ||
+    (props.type.indexOf('range') > -1 && (!isArray(value) || !value[0] || !value[1] || !value)) ||
+    (props.type === 'dates' && (!isArray(value) || value.length === 0 || !value)) ||
     !value
   ) {
     confirmBtnDisabled = true
@@ -436,7 +361,7 @@ function getConfirmBtnStatus(value) {
 
   return confirmBtnDisabled
 }
-function handleChange({ value }) {
+function handleChange({ value }: { value: number | number[] | null }) {
   calendarValue.value = deepClone(value)
   confirmBtnDisabled.value = getConfirmBtnStatus(value)
 
@@ -456,7 +381,7 @@ function handleConfirm() {
   if (props.beforeConfirm) {
     props.beforeConfirm({
       value: calendarValue.value,
-      resolve: (isPass) => {
+      resolve: (isPass: boolean) => {
         isPass && onConfirm()
       }
     })
@@ -485,7 +410,7 @@ function setShowValue() {
     showValue.value = ''
   }
 }
-function handleShortcutClick(index) {
+function handleShortcutClick(index: number) {
   if (props.onShortcutsClick && typeof props.onShortcutsClick === 'function') {
     calendarValue.value = deepClone(
       props.onShortcutsClick({

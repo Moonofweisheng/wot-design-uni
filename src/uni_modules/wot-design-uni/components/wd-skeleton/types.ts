@@ -1,4 +1,5 @@
 import type { PropType, CSSProperties, ExtractPropTypes } from 'vue'
+import { makeArrayProp, makeBooleanProp, makeStringProp } from '../common/props'
 
 type SkeletonTheme = 'text' | 'avatar' | 'paragraph' | 'image'
 type SkeletonAnimation = 'gradient' | 'flashed'
@@ -30,10 +31,7 @@ export const skeletonProps = {
   /**
    * 骨架图风格，有基础、头像组合等两大类
    */
-  theme: {
-    type: String as PropType<SkeletonTheme>,
-    default: 'text'
-  },
+  theme: makeStringProp<SkeletonTheme>('text'),
   /**
    * 用于设置行列数量、宽度高度、间距等。
    * @example
@@ -41,20 +39,12 @@ export const skeletonProps = {
    * 【示例二】，`[1, 1, { width: '100px' }]` 表示自定义第三行的宽度为 `100px`。
    * 【示例三】，`[1, 2, [{ width, height }, { width, height, marginLeft }]]` 表示第三行有两列，且自定义宽度、高度和间距
    */
-  rowCol: {
-    type: Array as PropType<SkeletonRowCol>,
-    default() {
-      return []
-    }
-  },
+  rowCol: makeArrayProp<SkeletonRowCol>(),
   /**
    * 是否为加载状态，如果是则显示骨架图，如果不是则显示加载完成的内容
    * @default true
    */
-  loading: {
-    type: Boolean,
-    default: true
-  },
+  loading: makeBooleanProp(true),
   /**
    * 动画效果，有「渐变加载动画」和「闪烁加载动画」两种。值为空则表示没有动画
    */

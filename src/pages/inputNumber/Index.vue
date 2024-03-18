@@ -49,31 +49,31 @@ const value8 = ref<number>(2)
 const value9 = ref<string>('')
 const value10 = ref<number>(1)
 
-function handleChange1({ value }) {
+function handleChange1({ value }: any) {
   console.log(value)
 }
-function handleChange2({ value }) {
+function handleChange2({ value }: any) {
   console.log(value)
 }
-function handleChange3({ value }) {
+function handleChange3({ value }: any) {
   console.log(value)
 }
-function handleChange4({ value }) {
+function handleChange4({ value }: any) {
   console.log(value)
 }
-function handleChange5({ value }) {
+function handleChange5({ value }: any) {
   console.log(value)
 }
-function handleChange6({ value }) {
+function handleChange6({ value }: any) {
   console.log(value)
 }
-function handleChange7({ value }) {
+function handleChange7({ value }: any) {
   console.log(value)
 }
-function handleChange8({ value }) {
+function handleChange8({ value }: any) {
   console.log(value)
 }
-function handleChange9({ value }) {
+function handleChange9({ value }: any) {
   console.log(value)
 }
 </script>

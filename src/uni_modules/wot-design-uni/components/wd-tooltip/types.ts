@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type PlacementType =
@@ -32,3 +32,10 @@ export const tooltipProps = {
 }
 
 export type TooltipProps = ExtractPropTypes<typeof tooltipProps>
+
+export type TooltipExpose = {
+  open: () => void
+  close: () => void
+}
+
+export type TooltipInstance = ComponentPublicInstance<TooltipProps, TooltipExpose>

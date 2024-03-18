@@ -33,53 +33,9 @@ import { onMounted, ref, watch, computed } from 'vue'
 import { useParent } from '../composables/useParent'
 import { GRID_KEY } from '../wd-grid/types'
 import { isDef } from '../common/util'
+import { gridItemProps } from './types'
 
-type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
-interface BadgeProps {
-  modelValue?: number | string | null
-  bgColor?: string
-  max?: number
-  isDot?: boolean
-  hidden?: boolean
-  type?: BadgeType
-  top?: number
-  right?: number
-  customClass?: string
-  customStyle?: string
-}
-type LinkType = 'navigateTo' | 'switchTab' | 'reLaunch' | 'redirectTo'
-interface Props {
-  customText?: string
-  customIcon?: string
-  customClass?: string
-  icon?: string
-  iconSize?: string
-  text?: string
-  url?: string
-  linkType?: LinkType
-  useSlot?: boolean
-  useIconSlot?: boolean
-  useTextSlot?: boolean
-  // badge属性
-  isDot?: boolean
-  type?: BadgeType
-  value?: number
-  max?: number
-  // 徽标属性，透传给 Badge 组件
-  badgeProps?: BadgeProps
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customText: '',
-  customIcon: '',
-  icon: '',
-  iconSize: '26px',
-  linkType: 'navigateTo',
-  useSlot: false,
-  useIconSlot: false,
-  useTextSlot: false
-})
+const props = defineProps(gridItemProps)
 
 const style = ref<string>('')
 const gutterContentStyle = ref<string>('')

@@ -92,95 +92,10 @@ import { type ColumnItem, formatArray } from '../wd-picker-view/types'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
+import { pickerProps } from './types'
 const { translate } = useTranslate('picker')
 
-interface Props {
-  customClass?: string
-  customLabelClass?: string
-  customValueClass?: string
-  customViewClass?: string
-  // 选择器左侧文案
-  label?: string
-  // 选择器占位符
-  placeholder?: string
-  // 禁用
-  disabled?: boolean
-  // 只读
-  readonly?: boolean
-  loading?: boolean
-  loadingColor?: string
-  /* popup */
-  // 弹出层标题
-  title?: string
-  // 取消按钮文案
-  cancelButtonText?: string
-  // 确认按钮文案
-  confirmButtonText?: string
-  // 是否必填
-  required?: boolean
-  size?: string
-  labelWidth?: string
-  useDefaultSlot?: boolean
-  useLabelSlot?: boolean
-  error?: boolean
-  alignRight?: boolean
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  beforeConfirm?: Function
-  closeOnClickModal?: boolean
-  safeAreaInsetBottom?: boolean
-  ellipsis?: boolean
-
-  // 选项总高度
-  columnsHeight?: number
-  // 选项对象中，value对应的 key
-  valueKey?: string
-  // 选项对象中，展示的文本对应的 key
-  labelKey?: string
-  // 初始值
-  modelValue?: string | number | Array<string | number>
-  // 选择器数据
-  columns?: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>
-  // 多级联动
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  columnChange?: Function
-  // 外部展示格式化函数
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  displayFormat?: Function
-  // 自定义层级
-  zIndex?: number
-  prop?: string
-  rules?: FormItemRule[]
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  modelValue: '',
-  customClass: '',
-  customViewClass: '',
-  customLabelClass: '',
-  customValueClass: '',
-  // 选择器占位符
-  // 禁用
-  disabled: false,
-  // 只读
-  readonly: false,
-  loading: false,
-  loadingColor: '#4D80F0',
-  // 是否必填
-  required: false,
-  useDefaultSlot: false,
-  useLabelSlot: false,
-  error: false,
-  alignRight: false,
-  closeOnClickModal: true,
-  safeAreaInsetBottom: true,
-  ellipsis: false,
-  columnsHeight: 217,
-  valueKey: 'value',
-  labelKey: 'label',
-  columns: () => [],
-  zIndex: 15,
-  rules: () => []
-})
+const props = defineProps(pickerProps)
 
 const pickerViewWd = ref<any>(null)
 const cell = useCell()
@@ -191,7 +106,7 @@ const innerLoading = ref<boolean>(false) // 内部控制是否loading
 const popupShow = ref<boolean>(false)
 // 选定后展示的选中项
 const showValue = ref<string>('')
-const pickerValue = ref<string | number | boolean | (string | number | boolean)[]>('')
+const pickerValue = ref<string | number | boolean | string[] | number[] | boolean[]>('')
 const displayColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 传入 pickerView 的columns
 const resetColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 保存之前的 columns，当取消时，将数据源回滚，避免多级联动数据源不正确的情况
 const isPicking = ref<boolean>(false) // 判断pickview是否还在滑动中

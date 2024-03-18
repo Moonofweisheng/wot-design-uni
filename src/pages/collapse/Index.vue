@@ -94,31 +94,31 @@ const value6 = ref<boolean>(false)
 const accordion = ref<boolean>(true)
 const name = ref<string>('item1')
 
-function handleChange1({ value }) {
-  // console.log(value)
+function handleChange1({ value }: any) {
+  console.log(value)
 }
-function handleChange2({ value }) {
-  // console.log(value)
+function handleChange2({ value }: any) {
+  console.log(value)
 }
-function handleChange3({ value }) {
-  // console.log(value)
+function handleChange3({ value }: any) {
+  console.log(value)
 }
-function handleChange4({ value }) {
-  // console.log(value)
+function handleChange4({ value }: any) {
+  console.log(value)
 }
-function handleChange5({ value }) {
-  // console.log(value)
+function handleChange5({ value }: any) {
+  console.log(value)
 }
 
-function handleChange6({ value }) {
-  // console.log(value)
+function handleChange6({ value }: any) {
+  console.log(value)
 }
 
 /**
  * 折叠面板展开前回调方法
  * @param e
  */
-function beforeExpend(name) {
+function beforeExpend(name: string) {
   const index = itemList.value.findIndex((item) => {
     return item.name === name
   })

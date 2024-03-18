@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type TransitionName =
@@ -17,7 +17,10 @@ export type TransitionName =
 export const transitionProps = {
   ...baseProps,
   show: makeBooleanProp(false),
-  duration: makeNumberProp(300),
+  duration: {
+    type: [Object, Number, Boolean] as PropType<Record<string, number> | number | boolean>,
+    default: 300
+  },
   name: makeStringProp<TransitionName | ''>('fade'),
   lazyRender: makeBooleanProp(true),
   enterClass: makeStringProp(''),

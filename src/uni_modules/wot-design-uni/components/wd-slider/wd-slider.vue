@@ -60,7 +60,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
-import { getRect, isArray, isDef, uuid } from '../common/util'
+import { getRect, isArray, isDef, isNumber, uuid } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 import { watch } from 'vue'
 import { sliderProps } from './types'
@@ -147,9 +147,9 @@ watch(
     if (newValue === null || newValue === undefined) {
       emit('update:modelValue', oldValue)
       console.warn('[wot design] warning(wd-slider): value can nott be null or undefined')
-    } else if (checkType(newValue) === 'Array' && (newValue as any).length !== 2) {
+    } else if (isArray(newValue) && newValue.length !== 2) {
       console.warn('[wot design] warning(wd-slider): value must be dyadic array')
-    } else if (checkType(newValue) !== 'Number' && checkType(newValue) !== 'Array') {
+    } else if (!isNumber(newValue) && !isArray(newValue)) {
       emit('update:modelValue', oldValue)
       console.warn('[wot design] warning(wd-slider): value must be dyadic array Or Number')
     }
@@ -317,9 +317,6 @@ function styleControl() {
   barStyle.value = barStyleTemp
 }
 
-function checkType(value: number | number[]) {
-  return Object.prototype.toString.call(value).slice(8, -1)
-}
 function equal(arr1: number[], arr2: number[]) {
   if (!isDef(arr1) || !isDef(arr2)) {
     return false

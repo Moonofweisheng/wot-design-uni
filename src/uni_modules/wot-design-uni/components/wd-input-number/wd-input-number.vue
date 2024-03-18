@@ -37,41 +37,9 @@ export default {
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { debounce, getType } from '../common/util'
+import { inputNumberProps } from './types'
 
-interface Props {
-  customClass?: string
-  modelValue: number | string
-  min?: number
-  max?: number
-  step?: number
-  stepStrictly?: boolean
-  precision?: number
-  disabled?: boolean
-  disableInput?: boolean
-  disableMinus?: boolean
-  disablePlus?: boolean
-  withoutInput?: boolean
-  inputWidth?: string | number
-  allowNull?: boolean
-  placeholder?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  min: 1,
-  max: Number.MAX_SAFE_INTEGER,
-  step: 1,
-  stepStrictly: false,
-  precision: 0,
-  disabled: false,
-  disableInput: false,
-  disableMinus: false,
-  disablePlus: false,
-  withoutInput: false,
-  inputWidth: 36,
-  allowNull: false,
-  placeholder: ''
-})
+const props = defineProps(inputNumberProps)
 
 const minDisabled = ref<boolean>(false)
 const maxDisabled = ref<boolean>(false)

@@ -109,11 +109,11 @@ const tab6 = ref<number>(0)
 const tab7 = ref<number>(0)
 const tab8 = ref<number>(0)
 const toast = useToast()
-function handleClick({ index, name }) {
+function handleClick({ index, name }: any) {
   console.log('event', { index, name })
   toast.show(`点击了标签${name}`)
 }
-function handleChange(event) {
+function handleChange(event: any) {
   console.log('change', event)
 }
 </script>

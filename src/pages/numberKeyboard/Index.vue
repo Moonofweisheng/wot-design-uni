@@ -66,7 +66,7 @@ function showKeyBoard(index: number) {
   visibleArr.forEach((item, i) => (i === index - 1 ? (item.value = true) : (item.value = false)))
 }
 
-const onInput = (value) => showToast(`${value}`)
+const onInput = (value: string) => showToast(`${value}`)
 const onDelete = () => showToast('删除')
 </script>
 <style lang="scss" scoped></style>

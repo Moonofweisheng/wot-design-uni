@@ -64,7 +64,7 @@ const menu = ref<Array<Record<string, any>>>([
   }
 ])
 
-function link(e) {
+function link(e: any) {
   toast.show('选择了' + e.item.content)
 }
 
@@ -75,14 +75,14 @@ function showPop(index: number) {
   // pop = selectComponent('#' + id)
 }
 
-function handleChange1(event) {
+function handleChange1() {
   // show1.value = event.detail.show
 }
 
-function handleChange2(event) {
+function handleChange2() {
   // show2.value = event.detail.show
 }
-function handleChange3(event) {
+function handleChange3() {
   // show3.value = event.detail.show
 }
 </script>

@@ -26,7 +26,7 @@
       <wd-calendar-view :type="type2" allow-same-day v-model="value3" @change="handleChange3"></wd-calendar-view>
     </demo-block>
     <demo-block title="时间类型" :hor="0">
-      <wd-calendar-view type="datetime" v-model="value4"></wd-calendar-view>
+      <wd-calendar-view type="datetime" v-model="value4" :time-filter="timeFilter"></wd-calendar-view>
     </demo-block>
     <demo-block title="时间范围类型" :hor="0">
       <wd-calendar-view type="datetimerange" v-model="value5"></wd-calendar-view>
@@ -57,7 +57,18 @@ const value6 = ref([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() - 24 * 60 *
 const value7 = ref([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() - 24 * 60 * 60 * 1000])
 const value8 = ref([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() - 24 * 60 * 60 * 1000])
 
-const formatter = (day) => {
+const timeFilter = ({ type, values }: any) => {
+  if (type === 'minute') {
+    // 只展示 0,10,20,30,40,50 分钟选项
+    return values.filter((item: any) => {
+      return item.value % 10 === 0
+    })
+  }
+
+  return values
+}
+
+const formatter = (day: any) => {
   const date = new Date(day.date)
   const now = new Date()
 
@@ -95,16 +106,17 @@ const formatter = (day) => {
   return day
 }
 
-function handleTypeChange2({ value }) {
+function handleTypeChange2({ value }: any) {
   type2.value = value
 }
-function handleChange1({ value }) {
+function handleChange1({ value }: any) {
+  console.log(value)
   // value1.value = value
 }
-function handleChange2({ value }) {
+function handleChange2({ value }: any) {
   value2.value = value
 }
-function handleChange3({ value }) {
+function handleChange3({ value }: any) {
   value3.value = value
 }
 </script>

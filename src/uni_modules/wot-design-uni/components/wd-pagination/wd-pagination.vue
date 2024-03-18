@@ -54,32 +54,11 @@ export default {
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useTranslate } from '../composables/useTranslate'
+import { paginationProps } from './types'
 
 const { translate } = useTranslate('pagination')
 
-interface Props {
-  customClass?: string
-  modelValue: number // 当前页
-  totalPage?: number
-  showIcon?: boolean // 是否展示分页为Icon图标
-  showMessage?: boolean
-  total?: number
-  pageSize?: number
-  prevText?: string
-  nextText?: string
-  hideIfOnePage?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  totalPage: 1,
-  showIcon: false, // 是否展示分页为Icon图标
-  showMessage: false,
-  total: 0,
-  pageSize: 10, // 分页大小
-  hideIfOnePage: true
-})
-
+const props = defineProps(paginationProps)
 const totalPageNum = ref<number>(0) // 总页数
 
 const emit = defineEmits(['change', 'update:modelValue'])

@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp } from '../common/props'
 
 export type SwitchBeforeChangeOption = {
   value: number | string | boolean
@@ -26,7 +26,7 @@ export const switchProps = {
   }, // 非激活值
   activeColor: String, // 激活颜色
   inactiveColor: String, // 非激活颜色
-  size: makeNumberProp(28), // 大小
+  size: makeNumericProp(28), // 大小
   beforeChange: Function as PropType<SwitchBeforeChange> // 在改变前执行的函数
 }
 

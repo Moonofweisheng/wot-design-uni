@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-12 10:04:19
- * @LastEditTime: 2023-08-22 22:37:02
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-img\wd-img.vue
- * 记得注释
--->
 <template>
   <view :class="rootClass" @click="handleClick" :style="rootStyle">
     <image :class="`wd-img__image ${customImage}`" :src="src" :mode="mode" :lazy-load="lazyLoad" @load="handleLoad" @error="handleError" />
@@ -26,27 +17,9 @@ export default {
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { addUnit, isDef, objToStyle } from '../common/util'
+import { imgProps } from './types'
 
-interface Props {
-  customClass?: string
-  customStyle?: string
-  customImage?: string
-  src: string
-  round?: boolean
-  mode?: string
-  lazyLoad?: boolean
-  width?: string | number
-  height?: string | number
-  radius?: string | number
-}
-const props = withDefaults(defineProps<Props>(), {
-  customClass: '',
-  customStyle: '',
-  customImage: '',
-  round: false,
-  mode: 'scaleToFill',
-  lazyLoad: false
-})
+const props = defineProps(imgProps)
 
 const rootStyle = computed(() => {
   const style: Record<string, string | number> = {}

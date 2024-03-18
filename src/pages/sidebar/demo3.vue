@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-11-05 12:09:52
- * @LastEditTime: 2023-11-05 22:21:45
+ * @LastEditTime: 2024-03-17 20:15:27
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\pages\sidebar\demo3.vue
+ * @FilePath: /wot-design-uni/src/pages/sidebar/demo3.vue
  * 记得注释
 -->
 <template>
@@ -88,11 +88,11 @@ onMounted(() => {
   })
 })
 
-function handleChange({ value }) {
+function handleChange({ value }: any) {
   active.value = value
   scrollTop.value = itemScrollTop.value[value]
 }
-function onScroll(e) {
+function onScroll(e: any) {
   const { scrollTop } = e.detail
   const threshold = 50 // 下一个标题与顶部的距离
   if (scrollTop < threshold) {

@@ -42,72 +42,10 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import WdKey from './key/index.vue'
+import { numberKeyboardProps, type Key } from './types'
+import type { NumberKeyType } from './key/types'
 
-type KeyboardMode = 'default' | 'custom'
-type KeyType = '' | 'delete' | 'extra' | 'close'
-
-interface Key {
-  text?: number | string // key文本
-  type?: KeyType // key的类型
-  wider?: boolean // 是否占2个key的宽度
-}
-
-interface Props {
-  // 是否可见
-  visible?: boolean
-  // 绑定的值
-  modelValue?: string
-  // 标题
-  title?: string
-  // 键盘模式
-  mode?: KeyboardMode
-  // 层级
-  zIndex?: number
-  // 最大长度
-  maxlength?: number
-  // 是否显示删除键
-  showDeleteKey?: boolean
-  // 是否随机键盘按键顺序
-  randomKeyOrder?: boolean
-  // 确认按钮文本
-  closeText?: string
-  // 删除按钮文本
-  deleteText?: string
-  // 关闭按钮是否显示加载状态
-  closeButtonLoading?: boolean
-  // 是否显示蒙层
-  modal?: boolean
-  // 是否在点击外部时收起键盘
-  hideOnClickOutside?: boolean
-  // 是否锁定滚动
-  lockScroll?: boolean
-  // 是否在底部安全区域内
-  safeAreaInsetBottom?: boolean
-  // 额外按键
-  extraKey?: string | string[]
-  // 自定义样式
-  customStyle?: string
-  // 自定义类名
-  customClass?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  visible: false,
-  modelValue: '',
-  mode: 'default',
-  zIndex: 100,
-  maxlength: Infinity,
-  showDeleteKey: true,
-  randomKeyOrder: false,
-  closeButtonLoading: false,
-  modal: false,
-  hideOnClickOutside: true,
-  lockScroll: true,
-  safeAreaInsetBottom: true,
-  extraKey: '',
-  customClass: '',
-  customStyle: ''
-})
+const props = defineProps(numberKeyboardProps)
 
 const show = ref(props.visible)
 watch(
@@ -184,7 +122,7 @@ const handleClose = () => {
   emit('update:visible', false)
 }
 
-const handlePress = (text: string, type: KeyType) => {
+const handlePress = (text: string, type: NumberKeyType) => {
   if (text === '' && type === 'extra') {
     return handleClose()
   }

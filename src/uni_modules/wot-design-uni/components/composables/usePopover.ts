@@ -63,10 +63,6 @@ export function usePopover() {
     })
   }
 
-  function checkType(value) {
-    return Object.prototype.toString.call(value).slice(8, -1)
-  }
-
   function control(
     placement:
       | 'top'
@@ -164,5 +160,5 @@ export function usePopover() {
     arrowStyle.value = placements.get(placement)![1]
   }
 
-  return { popStyle, arrowStyle, showStyle, arrowClass, init, control, noop, checkType }
+  return { popStyle, arrowStyle, showStyle, arrowClass, init, control, noop }
 }
