@@ -130,7 +130,8 @@
     "ios >= 9"
   ],
   "lint-staged": {
-    "*.{js,ts,vue}": "eslint --fix --ext .js,.vue,.ts src"
+    "*.{js,ts,vue}": "eslint --fix --ext .js,.vue,.ts src",
+    "*.{ts,vue}": "vue-tsc --noEmit"
   },
   "uni-app": {
     "scripts": {
