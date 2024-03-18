@@ -44,7 +44,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isArray, isEqual, range } from '../common/util'
-import { formatArray, pickerViewProps } from './types'
+import { formatArray, pickerViewProps, type PickerViewExpose } from './types'
 
 const props = defineProps(pickerViewProps)
 
@@ -369,7 +369,7 @@ function onPickEnd() {
   emit('pickend')
 }
 
-defineExpose({
+defineExpose<PickerViewExpose>({
   getSelects,
   getValues,
   setColumnData,

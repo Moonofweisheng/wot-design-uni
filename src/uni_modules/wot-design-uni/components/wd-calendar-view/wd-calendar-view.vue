@@ -55,7 +55,7 @@ import { ref, watch } from 'vue'
 import { getDefaultTime } from './utils'
 import yearPanel from './yearPanel/year-panel.vue'
 import MonthPanel from './monthPanel/month-panel.vue'
-import { calendarViewProps } from './types'
+import { calendarViewProps, type CalendarViewExpose } from './types'
 
 const props = defineProps(calendarViewProps)
 
@@ -77,7 +77,9 @@ watch(
 
 const emit = defineEmits(['change', 'update:modelValue', 'pickstart', 'pickend'])
 
-// 对外暴露方法
+/**
+ * 使当前日期或者选中日期滚动到可视区域
+ */
 function scrollIntoView() {
   const panel = getPanel()
   panel.scrollIntoView && panel.scrollIntoView()
@@ -100,7 +102,7 @@ function handlePickEnd() {
   emit('pickend')
 }
 
-defineExpose({
+defineExpose<CalendarViewExpose>({
   scrollIntoView
 })
 </script>

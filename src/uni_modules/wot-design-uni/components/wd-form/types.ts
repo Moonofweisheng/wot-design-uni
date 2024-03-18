@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-03-17 19:47:59
+ * @LastEditTime: 2024-03-18 12:50:41
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-form/types.ts
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-form\types.ts
  * 记得注释
  */
 import { type ComponentPublicInstance, type ExtractPropTypes, type InjectionKey, type PropType } from 'vue'
@@ -42,23 +42,36 @@ export type FormItemRuleWithoutValidator = Omit<FormItemRule, 'validator'>
 
 export const formProps = {
   ...baseProps,
-  // 表单数据对象
+  /**
+   * 表单数据对象
+   */
   model: makeRequiredProp(Object as PropType<Record<string, any>>),
-  // 表单验证规则
+  /**
+   * 表单验证规则
+   */
   rules: {
     type: Object as PropType<FormRules>,
     default: () => ({})
   },
-  // 是否在输入时重置表单校验信息
+  /**
+   * 是否在输入时重置表单校验信息
+   */
   resetOnChange: makeBooleanProp(true)
 }
 export type FormProps = ExtractPropTypes<typeof formProps>
 
 export type FormExpose = {
+  /**
+   * 表单校验
+   * @param prop 指定校验字段
+   */
   validate: (prop?: string) => Promise<{
     valid: boolean
     errors: ErrorMessage[]
   }>
+  /**
+   * 重置表单项的验证提示
+   */
   reset: () => void
 }
 

@@ -114,7 +114,6 @@ const onChangeDistrict = (pickerView, value, columnIndex, resolve) => {
 | value-key | 选项对象中，value对应的 key | string | - | value | - |
 | label-key | 选项对象中，展示的文本对应的 key | string | - | label | - |
 | column-change | 接收 pickerView 实例、选中项、当前修改列的下标、resolve 作为入参，根据选中项和列下标进行判断，通过 pickerView 实例暴露出来的 `setColumnData` 方法修改其他列的数据源。 | function | - | - | - |
-| name | form 表单中的字段名 | string | - | - | - |
 
 ## Methods
 

@@ -29,6 +29,9 @@ export const yearPanelProps = {
 export type YearPanelProps = ExtractPropTypes<typeof yearPanelProps>
 
 export type YearPanelExpose = {
+  /**
+   * 使当前日期或者选中日期滚动到可视区域
+   */
   scrollIntoView: () => void
 }
 

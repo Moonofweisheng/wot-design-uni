@@ -35,6 +35,9 @@ export type MonthPanelProps = ExtractPropTypes<typeof monthPanelProps>
 export type MonthPanelTimeType = 'start' | 'end' | ''
 
 export type MonthPanelExpose = {
+  /**
+   * 使当前日期或者选中日期滚动到可视区域
+   */
   scrollIntoView: () => void
 }
 

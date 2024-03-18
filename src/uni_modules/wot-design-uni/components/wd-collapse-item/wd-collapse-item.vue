@@ -27,11 +27,11 @@ import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import { getRect, isArray, isDef, isPromise, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { COLLAPSE_KEY } from '../wd-collapse/types'
-import { collpaseItemProps } from './types'
+import { collapseItemProps, type CollapseItemExpose } from './types'
 
 const $body = '.wd-collapse-item__body'
 
-const props = defineProps(collpaseItemProps)
+const props = defineProps(collapseItemProps)
 
 const { parent: collapse, index } = useParent(COLLAPSE_KEY)
 
@@ -142,10 +142,13 @@ function handleClick() {
   }
 }
 
-defineExpose({ expanded })
+function getExpanded() {
+  return expanded.value
+}
+
+defineExpose<CollapseItemExpose>({ getExpanded })
 </script>
 
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-collapse/type

@@ -10,24 +10,47 @@ export type SwitchBeforeChange = (option: SwitchBeforeChangeOption) => void
 
 export const switchProps = {
   ...baseProps,
+  /**
+   * 绑定值
+   */
   modelValue: {
     type: [Boolean, String, Number],
     required: true,
     default: false
-  }, // 模型值
-  disabled: makeBooleanProp(false), // 是否禁用
+  },
+  /**
+   * 是否禁用
+   */
+  disabled: makeBooleanProp(false),
+  /**
+   * 激活值
+   */
   activeValue: {
     type: [Boolean, String, Number],
     default: true
-  }, // 激活值
+  },
+  /**
+   * 非激活值
+   */
   inactiveValue: {
     type: [Boolean, String, Number],
     default: false
-  }, // 非激活值
-  activeColor: String, // 激活颜色
-  inactiveColor: String, // 非激活颜色
-  size: makeNumericProp(28), // 大小
-  beforeChange: Function as PropType<SwitchBeforeChange> // 在改变前执行的函数
+  },
+  /**
+   * 激活颜色
+   */
+  activeColor: String,
+  /**
+   * 非激活颜色
+   */
+  inactiveColor: String,
+  /**
+   * 大小
+   */
+  size: makeNumericProp(28),
+  /**
+   * 在改变前执行的函数
+   */
+  beforeChange: Function as PropType<SwitchBeforeChange>
 }
-
 export type SwitchProps = ExtractPropTypes<typeof switchProps>

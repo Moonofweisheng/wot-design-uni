@@ -12,13 +12,34 @@ export interface TabbarItem {
 
 export const tabbarItemProps = {
   ...baseProps,
-  title: String, // 标签页的标题
-  name: numericProp, // 唯一标识符
-  icon: String, // 图标
-  value: makeNumericProp(null), // 徽标显示值
-  isDot: Boolean, // 是否点状徽标
-  max: makeNumberProp(99), // 徽标最大值
-  badgeProps: Object as PropType<BadgeProps> // 徽标属性，透传给 Badge 组件
+  /**
+   * 标签页的标题
+   */
+  title: String,
+  /**
+   * 唯一标识符
+   */
+  name: numericProp,
+  /**
+   * 图标
+   */
+  icon: String,
+  /**
+   * 徽标显示值
+   */
+  value: makeNumericProp(null),
+  /**
+   * 是否点状徽标
+   */
+  isDot: Boolean,
+  /**
+   * 徽标最大值
+   */
+  max: makeNumberProp(99),
+  /**
+   * 徽标属性，透传给 Badge 组件
+   */
+  badgeProps: Object as PropType<BadgeProps>
 }
 
 export type TabbarItemProps = ExtractPropTypes<typeof tabbarItemProps>

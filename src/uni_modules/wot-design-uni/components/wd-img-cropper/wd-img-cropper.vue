@@ -80,7 +80,7 @@ export default {
 import { computed, getCurrentInstance, ref, watch } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
-import { imgCropperProps } from './types'
+import { imgCropperProps, type ImgCropperExpose } from './types'
 
 // 延时动画设置
 let CHANGE_TIME: any | null = null
@@ -603,7 +603,7 @@ function draw() {
 }
 function preventTouchMove() {}
 
-defineExpose({
+defineExpose<ImgCropperExpose>({
   revertIsAnimation
 })
 </script>

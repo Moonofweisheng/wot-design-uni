@@ -19,7 +19,7 @@ export default {
 import { reactive, watch } from 'vue'
 import { deepClone, getPropByPath, isDef, isPromise } from '../common/util'
 import { useChildren } from '../composables/useChildren'
-import { type FormRules, FORM_KEY, type ErrorMessage, formProps } from './types'
+import { type FormRules, FORM_KEY, type ErrorMessage, formProps, type FormExpose } from './types'
 
 const props = defineProps(formProps)
 
@@ -163,11 +163,14 @@ function clearMessage(prop?: string) {
   }
 }
 
+/**
+ * 重置表单项的验证提示
+ */
 function reset() {
   clearMessage()
 }
 
-defineExpose({ validate, reset })
+defineExpose<FormExpose>({ validate, reset })
 </script>
 
 <style lang="scss" scoped>

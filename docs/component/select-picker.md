@@ -334,7 +334,6 @@ function handleConfirm({ value, selectedItems }) {
 | checked-color          | 选中的颜色（单/复选框）                                                                                  | string                            | -                | #4D80F0  | -        |
 | use-default-slot       | 使用默认插槽时设置该选项                                                                                 | boolean                           | -                | false    | -        |
 | use-label-slot         | 使用 label 插槽时设置该选项                                                                              | boolean                           | -                | false    | -        |
-| name                   | form 表单中的字段名                                                                                      | string                            | -                | -        | -        |
 | close-on-click-modal   | 点击遮罩是否关闭                                                                                         | boolean                           | -                | true     | -        |
 | z-index                | 弹窗层级                                                                                                 | number                            | -                | 15       | -    |
 | safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                      | boolean                           | -                | true     | -    |

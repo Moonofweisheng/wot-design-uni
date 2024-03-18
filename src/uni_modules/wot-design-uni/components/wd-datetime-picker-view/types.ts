@@ -28,21 +28,63 @@ export function getPickerValue(value: string | number, type: DateTimeType) {
 
 export const datetimePickerViewProps = {
   ...baseProps,
+  /**
+   * 选中项，当 type 为 time 时，类型为字符串，否则为 时间戳
+   */
   modelValue: makeRequiredProp([String, Number, Date]),
+  /**
+   * 加载中
+   */
   loading: makeBooleanProp(false),
+  /**
+   * 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写
+   */
   loadingColor: makeStringProp('#4D80F0'),
+  /**
+   * picker内部滚筒高
+   */
   columnsHeight: makeNumberProp(217),
   valueKey: makeStringProp('value'),
   labelKey: makeStringProp('label'),
+  /**
+   * 选择器类型，可选值：date / year-month / time
+   */
   type: makeStringProp<DateTimeType>('datetime'),
+  /**
+   * 自定义过滤选项的函数，返回列的选项数组
+   */
   filter: Function as PropType<DatetimePickerViewFilter>,
+  /**
+   * 自定义弹出层选项文案的格式化函数，返回一个字符串
+   */
   formatter: Function as PropType<DatetimePickerViewFormatter>,
+  /**
+   * 自定义列的格式化函数
+   */
   columnFormatter: Function as PropType<DatetimePickerViewColumnFormatter>,
+  /**
+   * 最小日期
+   */
   minDate: makeNumberProp(new Date(new Date().getFullYear() - 10, 0, 1).getTime()),
+  /**
+   * 最大日期
+   */
   maxDate: makeNumberProp(new Date(new Date().getFullYear() + 10, 11, 31).getTime()),
+  /**
+   * 最小小时，time类型时生效
+   */
   minHour: makeNumberProp(0),
+  /**
+   * 最大小时，time类型时生效
+   */
   maxHour: makeNumberProp(23),
+  /**
+   * 最小分钟，time类型时生效
+   */
   minMinute: makeNumberProp(0),
+  /**
+   * 最大分钟，time类型时生效
+   */
   maxMinute: makeNumberProp(59),
   startSymbol: makeBooleanProp(false)
 }

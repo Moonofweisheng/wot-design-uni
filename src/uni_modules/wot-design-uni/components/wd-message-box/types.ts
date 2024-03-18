@@ -52,12 +52,14 @@ export type MessageOptions = {
   /**
    * 当type为prompt时，输入框校验函数，点击确定按钮时进行校验
    */
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  inputValidate?: Function | null
+  inputValidate?: InputValidate | null
   /**
    * 当type为prompt时，输入框检验不通过时的错误提示文案
    */
   inputError?: string
+  /**
+   * 是否展示错误信息
+   */
   showErr?: boolean
   /**
    * 弹窗层级
@@ -70,6 +72,8 @@ export type MessageOptions = {
 }
 
 export type ActionType = 'confirm' | 'cancel' | 'modal'
+
+export type InputValidate = (inputValue: string | number) => boolean
 
 export interface MessageResult {
   action: ActionType

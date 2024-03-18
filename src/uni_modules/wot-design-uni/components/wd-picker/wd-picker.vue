@@ -92,7 +92,7 @@ import { type ColumnItem, formatArray } from '../wd-picker-view/types'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
-import { pickerProps } from './types'
+import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
 
 const props = defineProps(pickerProps)
@@ -391,7 +391,7 @@ function setLoading(loading: boolean) {
   innerLoading.value = loading
 }
 
-defineExpose({
+defineExpose<PickerExpose>({
   close,
   open,
   setLoading

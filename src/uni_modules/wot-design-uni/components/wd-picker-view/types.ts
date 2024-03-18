@@ -18,11 +18,29 @@ export type PickerViewColumnChange = (
 
 export const pickerViewProps = {
   ...baseProps,
+  /**
+   * 加载状态
+   */
   loading: makeBooleanProp(false),
+  /**
+   * 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写
+   */
   loadingColor: makeStringProp('#4D80F0'),
+  /**
+   * picker内部滚筒高
+   */
   columnsHeight: makeNumberProp(217),
+  /**
+   * 选项对象中，value对应的 key
+   */
   valueKey: makeStringProp('value'),
+  /**
+   * 选项对象中，展示的文本对应的 key
+   */
   labelKey: makeStringProp('label'),
+  /**
+   * 选中项，如果为多列选择器，则其类型应为数组
+   */
   modelValue: {
     type: [String, Number, Boolean, Array<number>, Array<string>, Array<boolean>] as PropType<
       string | number | boolean | Array<number> | Array<string> | Array<boolean>
@@ -30,7 +48,13 @@ export const pickerViewProps = {
     default: '',
     required: true
   },
+  /**
+   * 选择器数据，可以为字符串数组，也可以为对象数组，如果为二维数组，则为多列选择器
+   */
   columns: makeArrayProp<string | number | ColumnItem | Array<number> | Array<string> | Array<ColumnItem>>(),
+  /**
+   * 接收 pickerView 实例、选中项、当前修改列的下标、resolve 作为入参，根据选中项和列下标进行判断，通过 pickerView 实例暴露出来的 setColumnData 方法修改其他列的数据源。
+   */
   columnChange: Function as PropType<PickerViewColumnChange>
 }
 

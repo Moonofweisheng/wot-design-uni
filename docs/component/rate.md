@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-08-27 18:05:52
- * @LastEditTime: 2023-09-02 16:12:14
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\docs\component\rate.md
- * 记得注释
--->
 <frame/>
 
 #  Rate 评分
@@ -85,7 +76,6 @@ function changeValue({ value }) {
 | active-icon | 选中的图标类名 | string | - | wd-icon-star-on | - |
 | disabled | 是否禁用 | boolean | - | false | - |
 | disabled-color | 禁用的图标颜色 | string | - | linear-gradient(315deg, rgba(177,177,177,1) 0%,rgba(199,199,199,1) 100%) | - |
-| name | form 表单中的字段名 | string | - | - | - |
 
 ## Events
 

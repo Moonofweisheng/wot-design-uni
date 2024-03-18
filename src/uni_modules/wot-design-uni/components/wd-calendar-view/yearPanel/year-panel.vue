@@ -35,7 +35,7 @@ import { computed, onMounted, ref, nextTick } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
 import { getType, isArray, isNumber } from '../../common/util'
 import Year from '../year/year.vue'
-import { yearPanelProps, type YearInfo } from './types'
+import { yearPanelProps, type YearInfo, type YearPanelExpose } from './types'
 
 const props = defineProps(yearPanelProps)
 
@@ -139,7 +139,7 @@ function handleDateChange({ value }: { value: number[] }) {
   })
 }
 
-defineExpose({
+defineExpose<YearPanelExpose>({
   scrollIntoView
 })
 </script>

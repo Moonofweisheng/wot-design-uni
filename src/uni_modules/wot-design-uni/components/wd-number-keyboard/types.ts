@@ -12,36 +12,68 @@ export interface Key {
 
 export const numberKeyboardProps = {
   ...baseProps,
-  // 是否可见
+  /**
+   * 是否可见
+   */
   visible: makeBooleanProp(false),
-  // 绑定的值
+  /**
+   * 绑定的值
+   */
   modelValue: makeStringProp(''),
-  // 标题
+  /**
+   * 标题
+   */
   title: String,
-  // 键盘模式
+  /**
+   * 键盘模式
+   */
   mode: makeStringProp<KeyboardMode>('default'),
-  // 层级
+  /**
+   * 层级
+   */
   zIndex: makeNumberProp(100),
-  // 最大长度
+  /**
+   * 最大长度
+   */
   maxlength: makeNumberProp(Infinity),
-  // 是否显示删除键
+  /**
+   * 是否显示删除键
+   */
   showDeleteKey: makeBooleanProp(true),
-  // 是否随机键盘按键顺序
+  /**
+   * 是否随机键盘按键顺序
+   */
   randomKeyOrder: makeBooleanProp(false),
-  // 确认按钮文本
+  /**
+   * 确认按钮文本
+   */
   closeText: String,
-  // 删除按钮文本
+  /**
+   * 删除按钮文本
+   */
   deleteText: String,
-  // 关闭按钮是否显示加载状态
+  /**
+   * 关闭按钮是否显示加载状态
+   */
   closeButtonLoading: makeBooleanProp(false),
-  // 是否显示蒙层
+  /**
+   * 是否显示蒙层
+   */
   modal: makeBooleanProp(false),
-  // 是否在点击外部时收起键盘
+  /**
+   * 是否在点击外部时收起键盘
+   */
   hideOnClickOutside: makeBooleanProp(true),
-  // 是否锁定滚动
+  /**
+   * 是否锁定滚动
+   */
   lockScroll: makeBooleanProp(true),
-  // 是否在底部安全区域内
+  /**
+   * 是否在底部安全区域内
+   */
   safeAreaInsetBottom: makeBooleanProp(true),
-  // 额外按键
+  /**
+   * 额外按键
+   */
   extraKey: [String, Array] as PropType<string | Array<string>>
 }

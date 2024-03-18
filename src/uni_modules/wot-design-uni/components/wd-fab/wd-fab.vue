@@ -36,7 +36,7 @@ import { type CSSProperties, computed, onBeforeMount, ref, watch, inject, getCur
 import { isDef, objToStyle } from '../common/util'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
-import { fabProps } from './types'
+import { fabProps, type FabExpose } from './types'
 
 const props = defineProps(fabProps)
 const isActive = ref<boolean>(false) // 是否激活状态
@@ -108,7 +108,7 @@ function close() {
   emit('update:active', false)
 }
 
-defineExpose({
+defineExpose<FabExpose>({
   open,
   close
 })

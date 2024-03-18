@@ -101,7 +101,7 @@ import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
-import { colPickerProps } from './types'
+import { colPickerProps, type ColPickerExpose } from './types'
 
 const { translate } = useTranslate('col-picker')
 
@@ -262,11 +262,11 @@ onMounted(() => {
   inited.value = true
 })
 
-// 对外暴露方法，打开弹框
+// 打开弹框
 function open() {
   showPicker()
 }
-// 对外暴露方法，关闭弹框
+// 关闭弹框
 function close() {
   handlePickerClose()
 }
@@ -477,7 +477,7 @@ function handleAutoComplete() {
   }
 }
 
-defineExpose({
+defineExpose<ColPickerExpose>({
   close,
   open
 })

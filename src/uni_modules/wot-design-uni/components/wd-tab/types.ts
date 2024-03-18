@@ -3,9 +3,18 @@ import { baseProps, makeBooleanProp } from '../common/props'
 
 export const tabProps = {
   ...baseProps,
-  name: String, // 唯一标识符
-  title: String, // tab的label
-  disabled: makeBooleanProp(false) // tab禁用，无法点击
+  /**
+   * 唯一标识符
+   */
+  name: String,
+  /**
+   * tab的标题
+   */
+  title: String,
+  /**
+   *  是否禁用，无法点击
+   */
+  disabled: makeBooleanProp(false)
 }
 
 export type TabProps = ExtractPropTypes<typeof tabProps>

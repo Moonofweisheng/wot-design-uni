@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { makeBooleanProp, makeNumberProp, makeNumericProp, makeRequiredProp, makeStringProp } from '../common/props'
+import { makeBooleanProp, makeNumericProp, makeRequiredProp, makeStringProp } from '../common/props'
 
 type AlignType = 'left' | 'center' | 'right' // 列的对齐方式
 
@@ -23,12 +23,30 @@ export interface TableColumn {
 }
 
 export const tableColumnProps = {
-  prop: makeRequiredProp(String), // 列对应字段
-  label: makeRequiredProp(String), // 列对应字段标题
-  width: makeNumericProp(100), // 列宽度，单位px
-  sortable: makeBooleanProp(false), // 是否开启列排序
-  fixed: makeBooleanProp(false), // 是否固定本列
-  align: makeStringProp<AlignType>('left') // 列的对齐方式，可选值left,center,right
+  /**
+   * 列对应字段
+   */
+  prop: makeRequiredProp(String),
+  /**
+   * 列对应字段标题
+   */
+  label: makeRequiredProp(String),
+  /**
+   * 列宽度，单位px
+   */
+  width: makeNumericProp(100),
+  /**
+   * 是否开启列排序
+   */
+  sortable: makeBooleanProp(false),
+  /**
+   * 是否固定本列
+   */
+  fixed: makeBooleanProp(false),
+  /**
+   * 列的对齐方式，可选值left,center,right
+   */
+  align: makeStringProp<AlignType>('left')
 }
 
 export type TableColumnProps = ExtractPropTypes<typeof tableColumnProps>

@@ -7,21 +7,45 @@ export const checkboxProps = {
   ...baseProps,
   customLabelClass: makeStringProp(''),
   customShapeClass: makeStringProp(''),
+  /**
+   * 单选框选中时的值
+   */
   modelValue: {
     type: [String, Number, Boolean],
     required: true,
     default: false
   },
+  /**
+   * 单选框形状，可选值：circle / square / button
+   */
   shape: makeStringProp<CheckShape>('circle'),
+  /**
+   * 选中的颜色
+   */
   checkedColor: String,
+  /**
+   * 禁用
+   */
   disabled: makeBooleanProp(null),
+  /**
+   * 选中值，在 checkbox-group 中使用无效，需同 false-value 一块使用
+   */
   trueValue: {
     type: [String, Number, Boolean]
   },
+  /**
+   * 非选中时的值，在 checkbox-group 中使用无效，需同 true-value 一块使用
+   */
   falseValue: {
     type: [String, Number, Boolean]
   },
+  /**
+   * 设置大小，可选值：large
+   */
   size: String,
+  /**
+   * 文字位置最大宽度
+   */
   maxWidth: String
 }
 

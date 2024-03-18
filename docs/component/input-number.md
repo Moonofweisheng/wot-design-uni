@@ -111,7 +111,6 @@ function handleChange1({ value }) {
 | disabled | 禁用 | boolean | - | false | - |
 | without-input | 不显示输入框 | boolean | - | false | - |
 | input-width | 输入框宽度 | string | - | 36px | - |
-| name | form 表单中的字段名 | string | - | - | - |
 | allow-null | 允许空值 | boolean | - | false | - |
 | placeholder | 占位文本 | string | - | - | - |
 | disable-input | 禁用输入框 | boolean | - | false | 0.2.14 |

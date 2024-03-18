@@ -57,7 +57,7 @@ import type { PopupType } from '../wd-popup/types'
 import { useParent } from '../composables/useParent'
 import { DROP_MENU_KEY } from '../wd-drop-menu/types'
 import { isDef } from '../common/util'
-import { dorpMenuItemProps } from './types'
+import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
 
 const props = defineProps(dorpMenuItemProps)
 
@@ -175,7 +175,7 @@ function handleClose() {
   emit('close')
 }
 
-defineExpose({ setShowPop, getShowPop, open, close })
+defineExpose<DropMenuItemExpose>({ setShowPop, getShowPop, open, close })
 </script>
 
 <style lang="scss" scoped>

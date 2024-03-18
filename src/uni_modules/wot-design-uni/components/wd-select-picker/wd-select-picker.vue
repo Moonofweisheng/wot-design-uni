@@ -121,7 +121,7 @@ import { getRect, getType, isArray, isDef, requestAnimationFrame } from '../comm
 import { useParent } from '../composables/useParent'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useTranslate } from '../composables/useTranslate'
-import { selectPickerProps } from './types'
+import { selectPickerProps, type SelectPickerExpose } from './types'
 
 const { translate } = useTranslate('select-picker')
 
@@ -412,7 +412,7 @@ function formatFilterColumns(columns: Record<string, any>[], filterVal: string) 
   })
 }
 
-defineExpose({
+defineExpose<SelectPickerExpose>({
   close,
   open
 })

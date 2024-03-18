@@ -156,7 +156,7 @@ import {
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
-import { datetimePickerProps } from './types'
+import { datetimePickerProps, type DatetimePickerExpose } from './types'
 
 const props = defineProps(datetimePickerProps)
 
@@ -734,7 +734,7 @@ function setLoading(loading: boolean) {
   isLoading.value = loading
 }
 
-defineExpose({
+defineExpose<DatetimePickerExpose>({
   open,
   close,
   setLoading

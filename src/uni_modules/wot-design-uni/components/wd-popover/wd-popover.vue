@@ -65,7 +65,7 @@ import { getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, 
 import { usePopover } from '../composables/usePopover'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
-import { popoverProps } from './types'
+import { popoverProps, type PopoverExpose } from './types'
 import { isArray } from '../common/util'
 
 const props = defineProps(popoverProps)
@@ -149,7 +149,7 @@ function close() {
   emit('update:modelValue', false)
 }
 
-defineExpose({
+defineExpose<PopoverExpose>({
   open,
   close
 })

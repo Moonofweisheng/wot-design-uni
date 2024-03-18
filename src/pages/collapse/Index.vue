@@ -2,7 +2,9 @@
   <page-wraper>
     <wd-toast></wd-toast>
     <demo-block title="基础用法" transparent>
-      <wd-collapse v-model="value1" @change="handleChange1">
+      <wd-button @click="collapse?.toggleAll()">toggleAll</wd-button>
+
+      <wd-collapse ref="collapse" v-model="value1" @change="handleChange1">
         <wd-collapse-item
           v-for="(item, index) in itemList"
           :before-expend="index === 2 ? beforeExpend : undefined"
@@ -54,6 +56,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { CollapseInstance } from '@/uni_modules/wot-design-uni/components/wd-collapse/types'
 import { ref } from 'vue'
 
 const toast = useToast()
@@ -84,6 +87,8 @@ const itemList = ref<Record<string, any>[]>([
     body: 'Q1:优惠券使用详情？详情页面【我的】-【我的优惠】-【优惠券规则说明】。'
   }
 ])
+
+const collapse = ref<CollapseInstance>()
 
 const value1 = ref<string[]>(['item1'])
 const value2 = ref<string>('item1')

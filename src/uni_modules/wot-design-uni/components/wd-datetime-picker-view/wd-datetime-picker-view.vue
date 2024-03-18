@@ -27,7 +27,13 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
 import { debounce, getType, isDef, padZero, range } from '../common/util'
-import { getPickerValue, datetimePickerViewProps, type DatetimePickerViewColumnType, type DatetimePickerViewOption } from './types'
+import {
+  getPickerValue,
+  datetimePickerViewProps,
+  type DatetimePickerViewColumnType,
+  type DatetimePickerViewOption,
+  type DatetimePickerViewExpose
+} from './types'
 import type { PickerViewInstance } from '../wd-picker-view/types'
 
 // 本地时间戳
@@ -483,7 +489,7 @@ function getSelects() {
   return datePickerview.value && datePickerview.value.getSelects ? datePickerview.value.getSelects() : undefined
 }
 
-defineExpose({
+defineExpose<DatetimePickerViewExpose>({
   updateColumns,
   setColumns,
   getSelects,

@@ -64,7 +64,7 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { debounce, isArray, isEqual, isNumber } from '../../common/util'
 import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'
 import Month from '../month/month.vue'
-import { monthPanelProps, type MonthInfo, type MonthPanelTimeType } from './types'
+import { monthPanelProps, type MonthInfo, type MonthPanelTimeType, type MonthPanelExpose } from './types'
 import { useTranslate } from '../../composables/useTranslate'
 import type { CalendarItem } from '../types'
 
@@ -148,6 +148,9 @@ const handleChange = debounce((value) => {
   })
 }, 50)
 
+/**
+ * 使当前日期或者选中日期滚动到可视区域
+ */
 function scrollIntoView() {
   setTimeout(() => {
     let activeDate: number | null = 0
@@ -324,7 +327,7 @@ function doSetSubtitle(scrollTop: number, monthsInfo: MonthInfo[]) {
   }
 }
 
-defineExpose({
+defineExpose<MonthPanelExpose>({
   scrollIntoView
 })
 </script>
