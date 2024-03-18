@@ -133,9 +133,9 @@ function observerContentScroll() {
       top: -offset // viewport上边界往下拉
     })
     .observe(`#${styckyId.value}`, scrollHandler)
-  getRect(`#${styckyId.value}`, false, proxy).then((res: any) => {
+  getRect(`#${styckyId.value}`, false, proxy).then((res) => {
     // 当 wd-sticky 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
-    if (res.bottom <= offset) scrollHandler({ boundingClientRect: res })
+    if (Number(res.bottom) <= offset) scrollHandler({ boundingClientRect: res })
   })
 }
 /**

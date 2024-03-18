@@ -307,11 +307,11 @@ function toggleMap() {
 function updateLineStyle(animation: boolean = true) {
   if (!inited.value) return
   const { lineWidth, lineHeight } = props
-  getRect($item, true, proxy).then((rects: any) => {
+  getRect($item, true, proxy).then((rects) => {
     const rect = rects[state.activeIndex]
     const width = lineWidth
-    let left = rects.slice(0, state.activeIndex).reduce((prev: any, curr: any) => prev + curr.width, 0)
-    left += (rect.width - width) / 2
+    let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + Number(curr.width), 0)
+    left += (Number(rect.width) - width) / 2
     const transition = animation ? 'transition: width 300ms ease, transform 300ms ease;' : ''
 
     const lineStyleTemp = `
@@ -346,11 +346,11 @@ function scrollIntoView() {
   if (!inited.value) return
   Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)]).then(([navItemsRects, navRect]) => {
     // 选中元素
-    const selectItem: any = (navItemsRects as any[])[state.activeIndex]
+    const selectItem = navItemsRects[state.activeIndex]
     // 选中元素之前的节点的宽度总和
     const offsetLeft = (navItemsRects as any).slice(0, state.activeIndex).reduce((prev: any, curr: any) => prev + curr.width, 0)
     // scroll-view滑动到selectItem的偏移量
-    const left = offsetLeft - ((navRect as any).width - selectItem.width) / 2
+    const left = offsetLeft - ((navRect as any).width - Number(selectItem.width)) / 2
     if (left === scrollLeft.value) {
       scrollLeft.value = left + Math.random() / 10000
     } else {

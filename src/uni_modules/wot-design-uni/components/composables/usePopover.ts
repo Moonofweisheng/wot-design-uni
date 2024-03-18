@@ -47,19 +47,19 @@ export function usePopover() {
     }
 
     // 初始化数据获取
-    getRect('#target', false, proxy).then((rect: any) => {
+    getRect('#target', false, proxy).then((rect) => {
       if (!rect) return
-      left.value = rect.left
-      bottom.value = rect.bottom
-      width.value = rect.width
-      height.value = rect.height
-      top.value = rect.top
+      left.value = rect.left as number
+      bottom.value = rect.bottom as number
+      width.value = rect.width as number
+      height.value = rect.height as number
+      top.value = rect.top as number
     })
     // 用透明度可在初始化时获取到pop尺寸
-    getRect('#pos', false, proxy).then((rect: any) => {
+    getRect('#pos', false, proxy).then((rect) => {
       if (!rect) return
-      popWidth.value = rect.width
-      popHeight.value = rect.height
+      popWidth.value = rect.width as number
+      popHeight.value = rect.height as number
     })
   }
 

@@ -17,9 +17,7 @@
           @touchend="onTouchEnd"
           @touchcancel="onTouchEnd"
         >
-          <view class="wd-slider__label" v-if="!hideLabel">
-            {{ leftNewValue }}
-          </view>
+          <view class="wd-slider__label" v-if="!hideLabel">{{ leftNewValue }}</view>
           <view class="wd-slider__button" />
         </view>
         <!-- 右边 -->
@@ -32,9 +30,7 @@
           @touchend="onTouchEndRight"
           @touchcancel="onTouchEndRight"
         >
-          <view class="wd-slider__label" v-if="!hideLabel">
-            {{ rightNewValue }}
-          </view>
+          <view class="wd-slider__label" v-if="!hideLabel">{{ rightNewValue }}</view>
           <view class="wd-slider__button" />
         </view>
       </view>
@@ -155,8 +151,8 @@ watch(
     }
     currentValue.value = newValue
     // 动态传值后修改
-    if (isArray(newValue) && isArray(oldValue)) {
-      if (equal(newValue, oldValue)) return
+    if (isArray(newValue)) {
+      if (oldValue && isArray(oldValue) && equal(newValue, oldValue)) return
       showRight.value = true
       if (leftBarPercent.value <= rightBarPercent.value) {
         leftBarSlider(newValue[0])
@@ -167,7 +163,7 @@ watch(
       }
     } else {
       if (newValue === oldValue) return
-      leftBarSlider(newValue as number)
+      leftBarSlider(newValue)
     }
   },
   { deep: true, immediate: true }
@@ -201,11 +197,11 @@ const buttonRightStyle = computed(() => {
 })
 
 onMounted(() => {
-  getRect(`#${sliderId.value}`, false, proxy).then((data: any) => {
+  getRect(`#${sliderId.value}`, false, proxy).then((data) => {
     // trackWidth: 轨道全长
-    trackWidth.value = data.width
+    trackWidth.value = Number(data.width)
     // trackLeft: 轨道距离左侧的距离
-    trackLeft.value = data.left
+    trackLeft.value = Number(data.left)
   })
 })
 

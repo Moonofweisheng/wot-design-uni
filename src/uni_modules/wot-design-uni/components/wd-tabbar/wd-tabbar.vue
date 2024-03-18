@@ -81,8 +81,8 @@ function setPlaceholderHeight() {
     return
   }
 
-  getRect('.wd-tabbar', false, proxy).then((res: any) => {
-    height.value = res.height
+  getRect('.wd-tabbar', false, proxy).then((res) => {
+    height.value = Number(res.height)
   })
 }
 </script>

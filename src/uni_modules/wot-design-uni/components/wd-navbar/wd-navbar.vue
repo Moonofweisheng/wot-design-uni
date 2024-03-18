@@ -109,8 +109,8 @@ function setPlaceholderHeight() {
     return
   }
 
-  getRect('.wd-navbar', false, proxy).then((res: any) => {
-    height.value = res.height
+  getRect('.wd-navbar', false, proxy).then((res) => {
+    height.value = res.height as number
   })
 }
 </script>

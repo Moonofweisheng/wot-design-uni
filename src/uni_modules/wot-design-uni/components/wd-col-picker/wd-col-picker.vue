@@ -417,12 +417,12 @@ function handleColClick(index: number) {
  */
 function setLineStyle(animation = true) {
   if (!inited.value) return
-  getRect($item, true, proxy).then((rects: any) => {
+  getRect($item, true, proxy).then((rects) => {
     const rect = rects[currentCol.value]
     // const width = lineWidth || (slidableNum < items.length ? rect.width : (rect.width - 14))
     const width = 16
     let left = rects.slice(0, currentCol.value).reduce((prev: any, curr: any) => prev + curr.width, 0)
-    left += (rect.width - width) / 2
+    left += (Number(rect.width) - width) / 2
     const transition = animation ? 'transition: width 300ms ease, transform 300ms ease;' : ''
 
     const lineStyleTemp = `

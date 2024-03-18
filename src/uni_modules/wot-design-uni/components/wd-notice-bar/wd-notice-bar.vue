@@ -95,7 +95,7 @@ function initAnimation(duration: number, delay: number, translate: number) {
 
 function scroll() {
   Promise.all([getRect($wrap, false, proxy), getRect($content, false, proxy)]).then((rects) => {
-    const [wrapRect, contentRect] = rects as UniApp.NodeInfo[]
+    const [wrapRect, contentRect] = rects
     if (!wrapRect || !contentRect || !wrapRect.width || !contentRect.width) return
 
     const wrapWidthTemp = wrapRect.width

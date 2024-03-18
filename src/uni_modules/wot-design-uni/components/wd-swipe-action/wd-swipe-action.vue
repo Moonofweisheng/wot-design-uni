@@ -125,11 +125,11 @@ function changeState(value: SwipeActionStatus, old?: SwipeActionStatus) {
  */
 function getWidths() {
   return Promise.all([
-    getRect('.wd-swipe-action__left', false, proxy).then((rects: any) => {
-      return rects.width ? rects.width : 0
+    getRect('.wd-swipe-action__left', false, proxy).then((rect) => {
+      return rect.width ? rect.width : 0
     }),
-    getRect('.wd-swipe-action__right', false, proxy).then((rects: any) => {
-      return rects.width ? rects.width : 0
+    getRect('.wd-swipe-action__right', false, proxy).then((rect) => {
+      return rect.width ? rect.width : 0
     })
   ])
 }

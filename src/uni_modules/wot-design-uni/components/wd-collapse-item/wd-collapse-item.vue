@@ -109,10 +109,10 @@ function init() {
  * @param {Boolean} firstRender 是否首次渲染
  */
 function doResetHeight(select: string) {
-  getRect(select, false, proxy).then((rect: any) => {
+  getRect(select, false, proxy).then((rect) => {
     if (!rect) return
     const { height: rectHeight } = rect
-    height.value = rectHeight
+    height.value = Number(rectHeight)
   })
 }
 

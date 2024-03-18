@@ -109,9 +109,9 @@ function observerForChild(child: any) {
   observer.relativeToViewport({ top: -offset }).observe(`#${styckyBoxId.value}`, (result) => {
     scrollHandler(exposed, result)
   })
-  getRect(`#${styckyBoxId.value}`, false, proxy).then((res: any) => {
+  getRect(`#${styckyBoxId.value}`, false, proxy).then((res) => {
     // 当 wd-sticky-box 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
-    if (res.bottom <= offset) scrollHandler(exposed, { boundingClientRect: res })
+    if (Number(res.bottom) <= offset) scrollHandler(exposed, { boundingClientRect: res })
   })
 }
 /**

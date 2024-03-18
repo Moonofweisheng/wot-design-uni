@@ -113,14 +113,14 @@ function fold(child?: any) {
     })
     return
   }
-  getRect(`#${dropMenuId.value}`, false, proxy).then((rect: any) => {
+  getRect(`#${dropMenuId.value}`, false, proxy).then((rect) => {
     if (!rect) return
     const { top, bottom } = rect
 
     if (props.direction === 'down') {
-      offset.value = bottom
+      offset.value = Number(bottom)
     } else {
-      offset.value = windowHeight.value - top
+      offset.value = windowHeight.value - Number(top)
     }
     const showPop = child.$.exposed!.getShowPop()
     if (showPop) {

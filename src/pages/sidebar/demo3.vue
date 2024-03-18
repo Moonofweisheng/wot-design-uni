@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-11-05 12:09:52
- * @LastEditTime: 2024-03-17 20:15:27
+ * @LastEditTime: 2024-03-18 21:33:59
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/src/pages/sidebar/demo3.vue
@@ -81,10 +81,8 @@ const categories = ref([
 
 onMounted(() => {
   getRect('.category', true).then((rects) => {
-    if (isArray(rects)) {
-      itemScrollTop.value = rects.map((item) => item.top || 0)
-      scrollTop.value = rects[active.value].top || 0
-    }
+    itemScrollTop.value = rects.map((item) => item.top || 0)
+    scrollTop.value = rects[active.value].top || 0
   })
 })
 

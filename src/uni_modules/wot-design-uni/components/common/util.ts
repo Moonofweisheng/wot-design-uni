@@ -226,15 +226,17 @@ export const context = {
   id: 1000
 }
 
+export type RectResultType<T extends boolean> = T extends true ? UniApp.NodeInfo[] : UniApp.NodeInfo
+
 /**
  * 获取节点信息
- * @param selector 节点 #id,.class
+ * @param selector 节点选择器 #id,.class
  * @param all 是否返回所有 selector 对应的节点
  * @param scope 作用域（支付宝小程序无效）
- * @returns
+ * @returns 节点信息或节点信息数组
  */
-export function getRect(selector: string, all: boolean = false, scope?: any) {
-  return new Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>((resolve) => {
+export function getRect<T extends boolean>(selector: string, all: T, scope?: any): Promise<RectResultType<T>> {
+  return new Promise<RectResultType<T>>((resolve, reject) => {
     let query: UniNamespace.SelectorQuery | null = null
     if (scope) {
       query = uni.createSelectorQuery().in(scope)
@@ -243,11 +245,12 @@ export function getRect(selector: string, all: boolean = false, scope?: any) {
     }
     query[all ? 'selectAll' : 'select'](selector)
       .boundingClientRect((rect) => {
-        if (all && Array.isArray(rect) && rect.length) {
-          resolve(rect)
-        }
-        if (!all && rect) {
-          resolve(rect)
+        if (all && isArray(rect) && rect.length > 0) {
+          resolve(rect as RectResultType<T>)
+        } else if (!all && rect) {
+          resolve(rect as RectResultType<T>)
+        } else {
+          reject(new Error('No nodes found'))
         }
       })
       .exec()
