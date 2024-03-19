@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+## [1.2.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.10...v1.2.0) (2024-03-19)
+
+
+### ✨ Features | 新功能
+
+* ✨ typescript类型支持增强 ([#192](https://github.com/Moonofweisheng/wot-design-uni/issues/192)) ([201e7a1](https://github.com/Moonofweisheng/wot-design-uni/commit/201e7a12b9c4023e35ff9540f5da09794ea3c6f7))
+
 ### [1.1.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.9...v1.1.10) (2024-03-15)
 
 
