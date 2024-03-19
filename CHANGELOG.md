@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.2.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.0...v1.2.1) (2024-03-19)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复部分可为null的props丢失null类型的问题 ([604e9f3](https://github.com/Moonofweisheng/wot-design-uni/commit/604e9f3810f38637ee1a7640e642790719cd9d3f))
+
 ## [1.2.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.1.10...v1.2.0) (2024-03-19)
 
 
