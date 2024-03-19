@@ -1,14 +1,14 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-03-18 13:19:32
+ * @LastEditTime: 2024-03-19 16:33:12
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-badge\types.ts
  * 记得注释
  */
-import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
+import type { ExtractPropTypes, PropType } from 'vue'
+import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 
 export type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 
@@ -17,7 +17,10 @@ export const badgeProps = {
   /**
    * 显示值
    */
-  modelValue: makeNumericProp(null),
+  modelValue: {
+    type: [Number, String, null] as PropType<number | string | null>,
+    default: null
+  },
   /** 当数值为 0 时，是否展示徽标 */
   showZero: makeBooleanProp(false),
   bgColor: String,

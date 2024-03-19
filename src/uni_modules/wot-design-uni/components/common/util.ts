@@ -416,8 +416,8 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
   return ''
 }
 
-export const requestAnimationFrame = (cb = () => void 0) => {
-  return new Promise((resolve, reject) => {
+export const requestAnimationFrame = (cb = () => {}) => {
+  return new Promise((resolve) => {
     const timer = setInterval(() => {
       clearInterval(timer)
       resolve(true)

@@ -1,5 +1,5 @@
-import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
+import type { ExtractPropTypes, PropType } from 'vue'
+import { baseProps, makeStringProp } from '../common/props'
 
 export type CheckShape = 'circle' | 'square' | 'button'
 
@@ -26,7 +26,10 @@ export const checkboxProps = {
   /**
    * 禁用
    */
-  disabled: makeBooleanProp(null),
+  disabled: {
+    type: [Boolean, null] as PropType<boolean | null>,
+    default: null
+  },
   /**
    * 选中值，在 checkbox-group 中使用无效，需同 false-value 一块使用
    */

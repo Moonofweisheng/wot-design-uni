@@ -66,7 +66,7 @@ onMounted(() => {
   scrollIntoView()
 })
 
-const requestAnimationFrame = (cb = () => void 0) => {
+const requestAnimationFrame = (cb = () => {}) => {
   return new Promise((resolve, reject) => {
     uni
       .createSelectorQuery()

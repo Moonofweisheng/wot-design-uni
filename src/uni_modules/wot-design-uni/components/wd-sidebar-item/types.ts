@@ -1,5 +1,5 @@
-import type { ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeRequiredProp } from '../common/props'
+import type { ExtractPropTypes, Prop, PropType } from 'vue'
+import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp } from '../common/props'
 import type { BadgeProps } from '../wd-badge/types'
 
 export const sidebarItemProps = {
@@ -9,7 +9,10 @@ export const sidebarItemProps = {
   /** 当前选项的值，唯一标识 */
   value: makeRequiredProp([Number, String]),
   /** 徽标显示值 */
-  badge: makeNumericProp(null),
+  badge: {
+    type: [String, Number, null] as PropType<string | number | null>,
+    default: null
+  },
   /** 徽标属性，透传给 Badge 组件 */
   badgeProps: Object as PropType<Partial<BadgeProps>>,
   /** 图标 */
