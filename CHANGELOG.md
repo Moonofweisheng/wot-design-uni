@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.2.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.1...v1.2.2) (2024-03-19)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复picker选择器绑定值value值为0时无法生效的问题 ([d4de4ba](https://github.com/Moonofweisheng/wot-design-uni/commit/d4de4ba93824905840adc49e2d85d7168c9fd48e)), closes [#195](https://github.com/Moonofweisheng/wot-design-uni/issues/195)
+
 ### [1.2.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.0...v1.2.1) (2024-03-19)
 
 
