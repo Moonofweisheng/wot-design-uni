@@ -3,27 +3,27 @@
     <wd-toast />
     <demo-block transparent>
       <wd-cell-group border>
-        <wd-picker label="单列选项" :columns="columns0" />
+        <wd-picker label="单列选项" v-model="value0" :columns="columns0" />
         <wd-picker label="禁用" disabled v-model="value1" :columns="columns1" />
         <wd-picker label="只读" readonly v-model="value2" :columns="columns2" />
-        <wd-picker label="loading" loading :columns="columns3" />
+        <wd-picker label="loading" v-model="value3" loading :columns="columns3" />
         <wd-picker label="多列" v-model="value4" :columns="columns4" />
         <wd-picker label="多级联动" v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
         <wd-picker label="分隔符" v-model="value6" :columns="columns6" :display-format="displayFormat" />
-        <wd-picker label="标题" :columns="columns7" title="文案标题" />
+        <wd-picker label="标题" v-model="value9" :columns="columns7" title="文案标题" />
         <wd-picker label="before-confirm" :columns="columns0" v-model="value7" :before-confirm="beforeConfirm" />
-        <wd-picker label="错误" error :columns="columns0" />
-        <wd-picker label="必填" :columns="columns0" required />
+        <wd-picker label="错误" v-model="value10" error :columns="columns0" />
+        <wd-picker label="必填" v-model="value11" :columns="columns0" required />
       </wd-cell-group>
     </demo-block>
     <demo-block title="label 不传" transparent>
-      <wd-picker :columns="columns0" />
+      <wd-picker :columns="columns0" v-model="value12" />
     </demo-block>
     <demo-block title="大小" transparent>
-      <wd-picker label="单列选项" size="large" :columns="columns0" />
+      <wd-picker label="单列选项" v-model="value13" size="large" :columns="columns0" />
     </demo-block>
     <demo-block title="值靠右显示" transparent>
-      <wd-picker label="单列选项" align-right :columns="columns0" />
+      <wd-picker label="单列选项" v-model="value14" align-right :columns="columns0" />
     </demo-block>
     <demo-block title="默认插槽" transparent>
       <view class="default-slot">
@@ -88,12 +88,16 @@ const district: Record<string, Array<{ label: string; value: string }>> = {
 }
 
 const columns0 = ref(['选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const value0 = ref('选项3')
+
 const value1 = ref('选项3')
 const columns1 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
 const value2 = ref('选项4')
 const columns2 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
 
 const columns3 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const value3 = ref('选项4')
+
 const value4 = ref(['中南大学', '软件工程'])
 const columns4 = ref([
   ['中山大学', '中南大学', '华南理工大学'],
@@ -104,13 +108,22 @@ const value5 = ref(['110000', '110100', '110102'])
 const columns5 = ref([district[0], district[district[0][0].value], district[district[district[0][0].value][0].value]])
 
 const value6 = ref(['中南大学', '软件工程'])
-const value8 = ref('选项1')
+const value8 = ref('选项2')
+const value9 = ref('选项1')
+const value10 = ref('选项2')
+
+const value11 = ref('选项3')
+const value12 = ref('选项3')
+const value13 = ref('选项3')
+const value14 = ref('选项3')
+
 const columns6 = ref([
   ['中山大学', '中南大学', '华南理工大学'],
   ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
 ])
 
 const columns7 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+
 const value7 = ref('')
 
 const onChangeDistrict: PickerViewColumnChange = (pickerView, value, columnIndex, resolve) => {

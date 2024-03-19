@@ -123,7 +123,7 @@ watch(
       console.error('The type of displayFormat must be Function')
     }
     if (pickerViewWd.value && pickerViewWd.value.selectedIndex && pickerViewWd.value.selectedIndex.length !== 0) {
-      if (props.modelValue) {
+      if (isDef(props.modelValue)) {
         setShowValue(pickerViewWd.value.getSelects())
       } else {
         showValue.value = ''
@@ -165,7 +165,7 @@ watch(
     displayColumns.value = newValue
     resetColumns.value = newValue
     // 获取初始选中项,并展示初始选中文案
-    if (props.modelValue) {
+    if (isDef(props.modelValue)) {
       if (pickerViewWd.value && pickerViewWd.value.getSelects) {
         nextTick(() => {
           setShowValue(pickerViewWd.value!.getSelects())
@@ -226,8 +226,8 @@ const { proxy } = getCurrentInstance() as any
 const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
 
 onMounted(() => {
-  props.modelValue && setShowValue(getSelects(props.modelValue)!)
-  if (props.modelValue && pickerViewWd.value && pickerViewWd.value.getSelects) {
+  isDef(props.modelValue) && setShowValue(getSelects(props.modelValue)!)
+  if (isDef(props.modelValue) && pickerViewWd.value && pickerViewWd.value.getSelects) {
     setShowValue(pickerViewWd.value!.getSelects())
   }
 })
