@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [1.2.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.2...v1.2.3) (2024-03-20)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复部分外部链接不可用的问题 ([e2fb515](https://github.com/Moonofweisheng/wot-design-uni/commit/e2fb5155c40e58e44920329cdfb4f2391bb81970))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修复 checkbox 单独使用时无法切换选中状态的问题 ([#198](https://github.com/Moonofweisheng/wot-design-uni/issues/198)) ([4a20219](https://github.com/Moonofweisheng/wot-design-uni/commit/4a2021908f0d63ca398660950609bd5f4a7ca9b9))
+
 ### [1.2.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.1...v1.2.2) (2024-03-19)
 
 
