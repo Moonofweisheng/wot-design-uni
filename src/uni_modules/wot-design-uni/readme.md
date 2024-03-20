@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">Wot Design Uni</h1>
 
-<p align="center">📱 一个参照<a href="https://ftf.jd.com/wot-design/">wot-design</a>，基于 Vue3 打造的uni-app组件库</p>
+<p align="center">📱 一个基于vue3+Typescript构建，参照<a href="https://ftf.jd.com/wot-design/">wot-design</a>打造的uni-app组件库</p>
 
 <p align="center">
 
@@ -75,7 +75,7 @@
 * [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
 * [QQ 群](https://qm.qq.com/cgi-bin/qm/qr?k=O1Z3pal6StL39qHtABqR54Tb56igr90O&jump_from=webapi&authKey=MtVWfi/EQbT03wW7tKXv4bmyKYHBHtzI8VewlzSsOdxFjN0wbgNy17np9Z9yC4Z8)
 * [快速上手项目](https://github.com/Moonofweisheng/wot-starter)
-* [Vue3路由库](https://moonofweisheng.gitee.io/uni-mini-router/)
+* [Vue3路由库](https://wot-design-uni.gitee.io/uni-mini-router/)
 
 ## 开发计划
 

@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-01-26 13:32:22
+ * @LastEditTime: 2024-03-20 13:15:11
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
@@ -108,11 +108,9 @@ export default defineConfig({
       {
         text: '相关链接',
         items: [
-          { text: 'Vue3路由库', link: 'https://moonofweisheng.gitee.io/uni-mini-router/' },
+          { text: 'Vue3 uni-app路由库', link: 'https://wot-design-uni.gitee.io/uni-mini-router/' },
+          { text: '多平台小程序CI工具', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: '快速上手项目', link: 'https://github.com/Moonofweisheng/wot-starter' },
-          { text: 'uni-mini-ci', link: 'https://gitee.com/fant-mini/uni-mini-ci' },
-          { text: 'wot-design', link: 'https://ftf.jd.com/wot-design/' },
-          { text: 'wot-design-mini', link: 'https://ftf.jd.com/wot-design-mini/' }
         ],
       },
     ],
