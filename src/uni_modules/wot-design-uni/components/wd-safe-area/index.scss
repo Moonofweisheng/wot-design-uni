@@ -1,0 +1,14 @@
+.wd-safe-area {
+  display: block;
+  width: 100%;
+
+  &-position-top {
+    padding-bottom: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+  }
+
+  &-position-bottom {
+    padding-top: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

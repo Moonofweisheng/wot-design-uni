@@ -81,6 +81,16 @@
       }
     },
     {
+      "path": "pages/safeArea/Index",
+      "name": "safeArea",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "SafeArea 安全区域"
+      }
+    },
+    {
       "path": "pages/card/Index",
       "name": "card",
       "style": {
@@ -778,7 +788,6 @@
     "backgroundColorTop": "@bgColorTop",
     "backgroundColorBottom": "@bgColorBottom",
     "navigationStyle": "default"
-
     // "navigationBarTextStyle": "black",
     // "navigationBarBackgroundColor": "#FFF",
     // "backgroundColor": "#F8F8F8"
