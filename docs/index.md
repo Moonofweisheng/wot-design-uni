@@ -52,7 +52,7 @@ footer: false
 import { onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 onMounted(()=>{
-  if (window.location.hostname === 'localhost') {
+  if (window.location.hostname === 'wot-design-uni.cn') {
     ElMessageBox.confirm('您正在访问的站点速度较慢，是否跳转至更快的 wot-design-uni.gitee.io ？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
