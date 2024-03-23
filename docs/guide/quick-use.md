@@ -5,12 +5,12 @@
 :::warning 关于安装
 `Wot Design Uni`提供了`uni_modules`和`npm`两种安装方式，按需选择。
 - 使用`uni_modules`安装无需额外配置，即插即用，但是每次更新组件库需要处理代码差异（一般直接覆盖就可以）。
-- 使用`npm`安装需要配置`easycom`，更新组件库时无需处理代码差异。
+- 使用`npm`安装需要额外配置，更新组件库时无需处理代码差异。
 :::
 
 ## uni_modules 安装
 
-`Wot Design Uni` 支持 [uni_modules](https://uniapp.dcloud.net.cn/plugin/uni_modules.html#uni-modules) 规范，已经上架到 uni-app 的插件市场，故我们推荐使用 uni_modules 的方式引入，方便更新。
+`Wot Design Uni` 支持 [uni_modules](https://uniapp.dcloud.net.cn/plugin/uni_modules.html#uni-modules) 规范，已经上架到 uni-app 的插件市场。
 
 在`uni-app插件市场`选择使用`HBuildX`导入，或者选择手动在src目录下创建uni_modules文件夹并将`Wot Design Uni`解压到uni_modules中，结构如下:
 ``` 
@@ -66,6 +66,11 @@ pnpm add wot-design-uni
 ### 基于vite配置自动引入组件<el-tag type="primary" style="vertical-align: middle;margin-left:8px;" effect="dark" >自动引入方案2</el-tag>
 如果不熟悉`easycom`，也可以通过[@uni-helper/vite-plugin-uni-components](https://github.com/uni-helper/vite-plugin-uni-components)实现组件的自动引入。
 
+:::tip 提醒
+- 推荐使用@uni-helper/vite-plugin-uni-components@0.0.9及以上版本，因为在0.0.9版本开始其内置了`wot-design-uni`的`resolver`。
+- 如果使用此方案时控制台打印很多`Sourcemap for  points to missing source files​`，可以尝试将vite版本升级至4.5.x。
+:::
+
 ::: code-group
 ```bash [npm]
 npm i @uni-helper/vite-plugin-uni-components -D
@@ -79,6 +84,8 @@ yarn add @uni-helper/vite-plugin-uni-components -D
 pnpm add @uni-helper/vite-plugin-uni-components -D
 ```
 :::
+
+***@uni-helper/vite-plugin-uni-components 0.0.8及之前版本***
 ```ts
 // vite.config.ts
 import { defineConfig } from "vite";
@@ -87,7 +94,8 @@ import uni from "@dcloudio/vite-plugin-uni";
 import Components, { kebabCase } from '@uni-helper/vite-plugin-uni-components'
 
 export default defineConfig({
-  plugins: [Components({
+  plugins: [
+    Components({
     resolvers: [
       {
         type: 'component',
@@ -102,6 +110,24 @@ export default defineConfig({
         },
       }
     ]
+  }), uni()],
+});
+```
+
+***@uni-helper/vite-plugin-uni-components 0.0.9及以后版本***
+```ts
+// vite.config.ts
+import { defineConfig } from "vite";
+import uni from "@dcloudio/vite-plugin-uni";
+
+import Components from '@uni-helper/vite-plugin-uni-components'
+import { WotResolver } from '@uni-helper/vite-plugin-uni-components/resolvers'
+
+
+export default defineConfig({
+  plugins: [
+    Components({
+    resolvers: [WotResolver()]
   }), uni()],
 });
 ```
