@@ -21,7 +21,7 @@
 
     <demo-block title="cell 类型" transparent>
       <wd-cell-group border>
-        <wd-textarea label="高度自适应" auto-height clearable v-model="value5" placeholder="请输入..." prefix-icon="dong" />
+        <wd-textarea label="高度自适应" auto-height clearable v-model="value5" placeholder="请输入..." prefix-icon="location" />
         <wd-textarea label="清空按钮" clearable v-model="value4" placeholder="请输入..." required />
         <wd-textarea label="字数限制" :maxlength="240" clearable show-word-limit v-model="value6" placeholder="请输入..." required />
         <wd-textarea label="只读" readonly clearable :maxlength="240" show-word-limit v-model="value12" placeholder="请输入..." required />

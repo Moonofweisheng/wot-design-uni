@@ -47,6 +47,7 @@
 
     @include when(cell) {
       background-color: $-dark-background2;
+      line-height: $-cell-line-height;
 
       @include when(border) {
         @include halfPixelBorder("top", $-input-cell-padding, $-dark-border-color);
@@ -96,6 +97,7 @@
 
   @include e(label) {
     position: relative;
+    display: flex;
     width: $-input-cell-label-width;
     color: $-cell-title-color;
     margin-right: $-cell-padding;
@@ -139,6 +141,7 @@
   @include e(prefix) {
     margin-right: $-input-icon-margin;
     font-size: $-input-fs;
+    line-height: initial;
 
     :deep(.wd-input__icon),
     :deep(.wd-input__clear) {
@@ -200,6 +203,8 @@
 
     :deep(.wd-input__icon),
     :deep(.wd-input__clear) {
+      display: inline-flex;
+      align-items: center;
       height: $-input-cell-height;
       line-height: $-input-cell-height;
     }
