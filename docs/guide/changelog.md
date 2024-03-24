@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.2.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.4...v1.2.5) (2024-03-24)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复textarea在支付宝小程序上清除按钮点击热区失效的问题 ([84662f2](https://github.com/Moonofweisheng/wot-design-uni/commit/84662f254b85d3b554113c9ba4f73ca695596fe9))
+
 ### [1.2.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.3...v1.2.4) (2024-03-23)
 
 
