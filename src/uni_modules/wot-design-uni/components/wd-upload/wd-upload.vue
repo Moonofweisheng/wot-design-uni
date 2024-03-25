@@ -4,7 +4,7 @@
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
-        <image :src="file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <image :src="file.thumb || file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
       </view>
 
       <view v-if="file.status !== 'success'" class="wd-upload__mask wd-upload__status-content">
@@ -55,7 +55,7 @@ import { ref, watch } from 'vue'
 import { context, getType, isDef, isEqual } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
-import { uploadProps, type UploadFileItem } from './types'
+import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
 
 const props = defineProps(uploadProps)
 
@@ -71,7 +71,6 @@ watch(
     const uploadFileList = val.map((item) => {
       item.uid = context.id++
       item[statusKey] = item[statusKey] || 'success'
-      item.action = props.action || ''
       item.response = item.response || ''
       return item
     })
@@ -180,16 +179,16 @@ const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', '
  * @description 初始化文件数据
  * @param {Object} file 上传的文件
  */
-function initFile(file: UploadFileItem) {
+function initFile(file: ChooseFile) {
   // 状态初始化
   const initState: UploadFileItem = {
     uid: context.id++,
     // 仅h5支持 name
     name: file.name || '',
+    thumb: file.thumb || '',
     status: 'loading',
-    size: file.size,
+    size: file.size || 0,
     url: file.path,
-    action: props.action,
     percent: 0
   }
 
@@ -300,51 +299,52 @@ function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
  * @description 选择文件的实际操作，将chooseFile自己用promise包了一层
  */
 function onChooseFile() {
-  const { multiple, maxSize, accept, sizeType, limit, sourceType, beforeUpload } = props
-  // 设置为只选择图片的时候使用 chooseImage 来实现
-  if (accept === 'image') {
-    // 文件选择
-    chooseFile({
-      multiple,
-      sizeType,
-      sourceType,
-      maxCount: limit ? limit - uploadFiles.value.length : 9
+  const { multiple, maxSize, accept, sizeType, limit, sourceType, compressed, maxDuration, camera, beforeUpload } = props
+  // 文件选择
+  chooseFile({
+    multiple,
+    sizeType,
+    sourceType,
+    maxCount: limit ? limit - uploadFiles.value.length : 9,
+    accept,
+    compressed,
+    maxDuration,
+    camera
+  })
+    .then((res) => {
+      // 成功选择初始化file
+      let files = res
+      // 单选只有一个
+      if (!multiple) {
+        files = files.slice(0, 1)
+      }
+
+      // 遍历列表逐个初始化上传参数
+      const mapFiles = (files: ChooseFile[]) => {
+        files.forEach(async (file) => {
+          if (!isDef(file.size)) {
+            file.size = await getImageInfo(file.path)
+          }
+          file.size <= maxSize ? initFile(file) : emit('oversize', { file })
+        })
+      }
+
+      // 上传前的钩子
+      if (beforeUpload) {
+        beforeUpload({
+          files,
+          fileList: uploadFiles.value,
+          resolve: (isPass: boolean) => {
+            isPass && mapFiles(files)
+          }
+        })
+      } else {
+        mapFiles(files)
+      }
     })
-      .then((res: any) => {
-        // 成功选择初始化file
-        let files: Array<any> = Array.prototype.slice.call(res.tempFiles)
-        // 单选只有一个
-        if (!multiple) {
-          files = files.slice(0, 1)
-        }
-
-        // 遍历列表逐个初始化上传参数
-        const mapFiles = (files: Array<any>) => {
-          files.forEach(async (file: any) => {
-            if (!isDef(file.size)) {
-              file.size = await getImageInfo(file.path)
-            }
-            file.size <= maxSize ? initFile(file) : emit('oversize', { file })
-          })
-        }
-
-        // 上传前的钩子
-        if (beforeUpload) {
-          beforeUpload({
-            files,
-            fileList: uploadFiles.value,
-            resolve: (isPass: boolean) => {
-              isPass && mapFiles(files)
-            }
-          })
-        } else {
-          mapFiles(files)
-        }
-      })
-      .catch((error) => {
-        emit('chooseerror', { error })
-      })
-  }
+    .catch((error) => {
+      emit('chooseerror', { error })
+    })
 }
 
 /**

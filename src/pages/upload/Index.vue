@@ -6,7 +6,7 @@
     <wd-message-box></wd-message-box>
     <wd-toast id="wd-toast"></wd-toast>
     <demo-block title="基本用法">
-      <wd-upload :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
+      <wd-upload accept="video" :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
     </demo-block>
     <demo-block title="多选上传">
       <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
