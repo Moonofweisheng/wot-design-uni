@@ -4,7 +4,15 @@
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
-        <image :src="file.thumb || file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <image v-if="isImageUrl(file.url)" :src="file.thumb || file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <video
+          @click="onPreviewVideo(index)"
+          v-else-if="isVideoUrl(file.url)"
+          :src="file.url"
+          :title="file.name || '视频' + index"
+          :poster="file.thumb"
+          class="wd-upload__picture"
+        />
       </view>
 
       <view v-if="file.status !== 'success'" class="wd-upload__mask wd-upload__status-content">
@@ -52,7 +60,7 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { context, getType, isDef, isEqual } from '../common/util'
+import { context, getType, isDef, isEqual, isImageUrl, isVideoUrl } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
@@ -419,7 +427,7 @@ function removeFile(index: number) {
   }
 }
 
-function onPreview(index: number, lists: string[]) {
+function handlePreviewImage(index: number, lists: string[]) {
   const { onPreviewFail } = props
   uni.previewImage({
     urls: lists,
@@ -437,19 +445,59 @@ function onPreview(index: number, lists: string[]) {
   })
 }
 
+function handlePreviewVieo(index: number, lists: UploadFileItem[]) {
+  const { onPreviewFail } = props
+  uni.previewMedia({
+    current: index,
+    sources: lists.map((file) => {
+      return {
+        url: file.url,
+        type: 'video',
+        poster: file.thumb
+      }
+    }),
+    fail() {
+      if (onPreviewFail) {
+        onPreviewFail({
+          index,
+          imgList: []
+        })
+      } else {
+        uni.showToast({ title: '预览视频失败', icon: 'none' })
+      }
+    }
+  })
+}
+
 function onPreviewImage(index: number) {
   const { beforePreview } = props
-  const lists = uploadFiles.value.map((file) => file.url)
+  const lists = uploadFiles.value.filter((file) => isImageUrl(file.url)).map((file) => file.url)
   if (beforePreview) {
     beforePreview({
       index,
       imgList: lists,
       resolve: (isPass: boolean) => {
-        isPass && onPreview(index, lists)
+        isPass && handlePreviewImage(index, lists)
       }
     })
   } else {
-    onPreview(index, lists)
+    handlePreviewImage(index, lists)
+  }
+}
+
+function onPreviewVideo(index: number) {
+  const { beforePreview } = props
+  const lists = uploadFiles.value.filter((file) => isVideoUrl(file.url))
+  if (beforePreview) {
+    beforePreview({
+      index,
+      imgList: [],
+      resolve: (isPass: boolean) => {
+        isPass && handlePreviewVieo(index, lists)
+      }
+    })
+  } else {
+    handlePreviewVieo(index, lists)
   }
 }
 </script>
