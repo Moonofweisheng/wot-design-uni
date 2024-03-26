@@ -54,7 +54,7 @@
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
-const action: string = 'https://ftf.jd.com/api/uploadImg'
+const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
 const fileList1 = ref<any[]>([
   {
     url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'

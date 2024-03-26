@@ -158,7 +158,10 @@ export const uploadProps = {
    * 类型：array
    * 默认值：['album','camera']
    */
-  sourceType: makeArrayProp<UploadSourceType>(),
+  sourceType: {
+    type: Array as PropType<UploadSourceType[]>,
+    default: () => ['album', 'camera']
+  },
   /**
    * 所选的图片的尺寸，chooseImage接口详细参数，查看官方手册
    * 类型：array
