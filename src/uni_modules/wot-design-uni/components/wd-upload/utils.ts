@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 22:36:44
- * @LastEditTime: 2024-03-24 18:17:28
+ * @LastEditTime: 2024-03-26 12:49:46
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-upload/utils.ts
@@ -51,7 +51,9 @@ function formatMedia(res: UniApp.ChooseMediaSuccessCallbackResult): ChooseFile[]
   return res.tempFiles.map((item) => ({
     type: item.fileType,
     path: item.tempFilePath,
-    thumb: item.fileType === 'video' ? item.thumbTempFilePath : item.tempFilePath
+    thumb: item.fileType === 'video' ? item.thumbTempFilePath : item.tempFilePath,
+    size: item.size,
+    duration: item.duration
   }))
 }
 
@@ -77,6 +79,7 @@ export function chooseFile({
         })
         break
       case 'video':
+        debugger
         uni.chooseVideo({
           sourceType,
           compressed,

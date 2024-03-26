@@ -4,12 +4,14 @@
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
-        <image v-if="isImageUrl(file.url)" :src="file.thumb || file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <image v-if="isImageUrl(file.url)" :src="file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <!-- <image v-else-if="isVideoUrl(file.url)" :src="file.thumb" mode="aspectFit" class="wd-upload__picture" @click="onPreviewVideo(file)" /> -->
         <video
-          @click="onPreviewVideo(index)"
           v-else-if="isVideoUrl(file.url)"
+          @click="onPreviewVideo(file)"
           :src="file.url"
           :title="file.name || '视频' + index"
+          object-fit="contain"
           :poster="file.thumb"
           class="wd-upload__picture"
         />
@@ -268,7 +270,7 @@ function handleProgress(res: Record<string, any>, file: UploadFileItem) {
  */
 function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
   const { action, name, header = {}, accept } = props
-
+  debugger
   const uploadTask = uni.uploadFile({
     url: action,
     header,
@@ -320,6 +322,7 @@ function onChooseFile() {
     camera
   })
     .then((res) => {
+      debugger
       // 成功选择初始化file
       let files = res
       // 单选只有一个
@@ -330,10 +333,7 @@ function onChooseFile() {
       // 遍历列表逐个初始化上传参数
       const mapFiles = (files: ChooseFile[]) => {
         files.forEach(async (file) => {
-          if (!isDef(file.size)) {
-            file.size = await getImageInfo(file.path)
-          }
-          file.size <= maxSize ? initFile(file) : emit('oversize', { file })
+          Number(file.size) <= maxSize ? initFile(file) : emit('oversize', { file })
         })
       }
 
@@ -353,24 +353,6 @@ function onChooseFile() {
     .catch((error) => {
       emit('chooseerror', { error })
     })
-}
-
-/**
- * 获取图片信息
- * @param src 图片地址
- */
-function getImageInfo(src: string) {
-  return new Promise<number>((resolve, reject) => {
-    uni.getImageInfo({
-      src: src,
-      success: (res) => {
-        resolve(res.height * res.width)
-      },
-      fail: () => {
-        reject(0)
-      }
-    })
-  })
 }
 
 /**
@@ -485,9 +467,10 @@ function onPreviewImage(index: number) {
   }
 }
 
-function onPreviewVideo(index: number) {
+function onPreviewVideo(file: UploadFileItem) {
   const { beforePreview } = props
   const lists = uploadFiles.value.filter((file) => isVideoUrl(file.url))
+  const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
       index,
