@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [1.2.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.5...v1.2.6) (2024-03-27)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Picker 未选择时显示第一列值的问题 ([21839e0](https://github.com/Moonofweisheng/wot-design-uni/commit/21839e0caf170248f454d80645bc3aa2f3ae2cdb))
+* 🐛 修复DatetimePicker区间模式未选值时显示占位符错误的问题 ([37350ee](https://github.com/Moonofweisheng/wot-design-uni/commit/37350ee5234a0f30debd22d33fb168415ec4e72d))
+
 ### [1.2.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.4...v1.2.5) (2024-03-24)
 
 
