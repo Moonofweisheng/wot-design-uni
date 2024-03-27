@@ -152,4 +152,3 @@ defineExpose<CollapseExpose>({
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-./type

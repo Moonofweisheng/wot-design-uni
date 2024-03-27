@@ -162,4 +162,3 @@ function handleRowClick(index: number) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-./type
