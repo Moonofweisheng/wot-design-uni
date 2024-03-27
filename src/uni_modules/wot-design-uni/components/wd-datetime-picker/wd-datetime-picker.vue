@@ -19,15 +19,20 @@
         <view class="wd-picker__body">
           <view class="wd-picker__value-wraper">
             <view :class="`wd-picker__value ${customValueClass}`">
-              <view v-if="region">
-                <text :class="(showValue as string[])[0] ? '' : 'wd-picker__placeholder'">
-                  {{ (showValue as string[])[0] ? (showValue as string[])[0] : placeholder }}
-                </text>
-                {{ translate('to') }}
-                <text :class="(showValue as string[])[1] ? '' : 'wd-picker__placeholder'">
-                  {{ (showValue as string[])[1] ? (showValue as string[])[1] : placeholder }}
-                </text>
-              </view>
+              <template v-if="region">
+                <view v-if="isArray(showValue) && showValue.length === 2 && showValue[0] !== '' && showValue[1] !== ''">
+                  <text :class="showValue[0] ? '' : 'wd-picker__placeholder'">
+                    {{ showValue[0] ? showValue[0] : placeholder }}
+                  </text>
+                  {{ translate('to') }}
+                  <text :class="showValue[1] ? '' : 'wd-picker__placeholder'">
+                    {{ showValue[1] ? showValue[1] : placeholder }}
+                  </text>
+                </view>
+                <view v-else class="wd-picker__placeholder">
+                  {{ placeholder || translate('placeholder') }}
+                </view>
+              </template>
               <view v-else :class="showValue ? '' : 'wd-picker__placeholder'">
                 {{ showValue ? showValue : placeholder || translate('placeholder') }}
               </view>
