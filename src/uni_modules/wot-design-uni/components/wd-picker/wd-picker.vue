@@ -123,7 +123,7 @@ watch(
       console.error('The type of displayFormat must be Function')
     }
     if (pickerViewWd.value && pickerViewWd.value.selectedIndex && pickerViewWd.value.selectedIndex.length !== 0) {
-      if (isDef(props.modelValue)) {
+      if (isDef(props.modelValue) && props.modelValue !== '') {
         setShowValue(pickerViewWd.value.getSelects())
       } else {
         showValue.value = ''
@@ -141,13 +141,13 @@ watch(
   (newValue) => {
     pickerValue.value = newValue
     // 获取初始选中项,并展示初始选中文案
-    if (isDef(newValue)) {
+    if (isDef(newValue) && newValue !== '') {
       if (pickerViewWd.value && pickerViewWd.value.getSelects) {
         nextTick(() => {
           setShowValue(pickerViewWd.value!.getSelects())
         })
       } else {
-        setShowValue(getSelects(props.modelValue)!)
+        setShowValue(getSelects(newValue)!)
       }
     } else {
       showValue.value = ''
@@ -165,7 +165,7 @@ watch(
     displayColumns.value = newValue
     resetColumns.value = newValue
     // 获取初始选中项,并展示初始选中文案
-    if (isDef(props.modelValue)) {
+    if (isDef(props.modelValue) && props.modelValue !== '') {
       if (pickerViewWd.value && pickerViewWd.value.getSelects) {
         nextTick(() => {
           setShowValue(pickerViewWd.value!.getSelects())
@@ -226,8 +226,8 @@ const { proxy } = getCurrentInstance() as any
 const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
 
 onMounted(() => {
-  isDef(props.modelValue) && setShowValue(getSelects(props.modelValue)!)
-  if (isDef(props.modelValue) && pickerViewWd.value && pickerViewWd.value.getSelects) {
+  isDef(props.modelValue) && props.modelValue !== '' && setShowValue(getSelects(props.modelValue)!)
+  if (isDef(props.modelValue) && props.modelValue !== '' && pickerViewWd.value && pickerViewWd.value.getSelects) {
     setShowValue(pickerViewWd.value!.getSelects())
   }
 })
@@ -246,10 +246,8 @@ function getSelects(value: string | number | Array<string | number | Array<any>>
   if (props.columns.length === 0) return
 
   // 使其默认选中首项
-  if (value === '' || value === null || value === undefined || (isArray(value) && value.length === 0)) {
-    value = formatColumns.map((col) => {
-      return col[0][props.valueKey]
-    })
+  if (value === '' || !isDef(value) || (isArray(value) && value.length === 0)) {
+    return
   }
   const valueType = getType(value)
   const type = ['string', 'number', 'boolean', 'array']
