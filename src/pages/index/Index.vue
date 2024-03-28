@@ -64,6 +64,10 @@ const list = ref([
         name: 'Layout 布局'
       },
       {
+        id: 'safeArea',
+        name: 'SafeArea 安全区域'
+      },
+      {
         id: 'configProvider',
         name: 'ConfigProvider 全局配置'
       },

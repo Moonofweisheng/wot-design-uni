@@ -1,8 +1,8 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-03-20 13:15:11
- * @LastEditors: weisheng
+ * @LastEditTime: 2024-03-21 13:57:58
+ * @LastEditors: xkfe zkai98516@gmail.com
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
  * 记得注释
@@ -169,6 +169,9 @@ export default defineConfig({
             }, {
               link: "/component/layout",
               text: "Layout 布局"
+            },{
+              link: "/component/safe-area",
+              text: "SafeArea 安全区域"
             }, {
               link: "/component/config-provider",
               text: "ConfigProvider 全局配置"
