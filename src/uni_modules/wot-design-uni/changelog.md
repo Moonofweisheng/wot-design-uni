@@ -1,6 +1,17 @@
 # 更新日志 
 
 
+### [1.2.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.6...v1.2.7) (2024-03-29)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复DatePicker占位符展示缺失的问题 ([8fbca94](https://github.com/Moonofweisheng/wot-design-uni/commit/8fbca94e3690e8b86ce59fbe668805839c50192b))
+* 🐛 修复DateTimePicker区域选择极值计算错误的问题 ([a1e9530](https://github.com/Moonofweisheng/wot-design-uni/commit/a1e9530a917981ca4cf96dde1aa268eaf3da059f))
+* 🐛 修复picker-view初始化报错的问题 ([2102f38](https://github.com/Moonofweisheng/wot-design-uni/commit/2102f38a107a7cc8a316cb7fdc5a9738a5bb7499)), closes [#205](https://github.com/Moonofweisheng/wot-design-uni/issues/205)
+* 🐛 修复picker选择器在APP端包装二维数组逻辑错误导致无法实现多列选择器的问题 ([ed5d7ac](https://github.com/Moonofweisheng/wot-design-uni/commit/ed5d7ace2050f5ae7541c8fd2ec395de56fa73cc))
+* 🐛 移除文件移动时volar变更文件路径错误导致.vue文件中多出的无用路径字符串 ([1f8f8ae](https://github.com/Moonofweisheng/wot-design-uni/commit/1f8f8ae2bfb2b13a6b6fcd6435a2d75f47d0e775))
+
 ### [1.2.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.5...v1.2.6) (2024-03-27)
 
 
