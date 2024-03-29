@@ -43,7 +43,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
-import { deepClone, getType, isArray, isEqual, range } from '../common/util'
+import { deepClone, getType, isArray, isEqual, isFunction, range } from '../common/util'
 import { formatArray, pickerViewProps, type PickerViewExpose } from './types'
 
 const props = defineProps(pickerViewProps)
@@ -53,6 +53,7 @@ const formatColumns = ref<Record<string, string>[][]>([])
 const itemHeight = ref<number>(35)
 const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中的下标集合
 const preSelectedIndex = ref<Array<number>>([])
+const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
 
 watch(
   () => props.modelValue,
@@ -103,7 +104,7 @@ watch(
 watch(
   () => props.columnChange,
   (newValue) => {
-    if (newValue && getType(newValue) !== 'function') {
+    if (newValue && !isFunction(newValue)) {
       console.error('The type of columnChange must be Function')
     }
   },
@@ -113,8 +114,6 @@ watch(
   }
 )
 const { proxy } = getCurrentInstance() as any
-
-const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
 
 /**
  * @description 根据传入的value，寻找对应的索引，并传递给原生选择器。
