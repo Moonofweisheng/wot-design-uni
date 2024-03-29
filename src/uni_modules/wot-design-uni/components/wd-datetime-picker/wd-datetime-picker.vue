@@ -93,7 +93,7 @@
             :label-key="labelKey"
             :formatter="formatter"
             :filter="filter"
-            :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
+            :column-formatter="isArray(modelValue) ? customColumnFormatter : undefined"
             :max-hour="maxHour"
             :min-hour="minHour"
             :max-date="maxDate"
@@ -119,7 +119,7 @@
             :label-key="labelKey"
             :formatter="formatter"
             :filter="filter"
-            :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
+            :column-formatter="isArray(modelValue) ? customColumnFormatter : undefined"
             :max-hour="maxHour"
             :min-hour="minHour"
             :max-date="maxDate"
@@ -150,7 +150,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
-import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
+import { deepClone, isArray, isDef, isEqual, isFunction, padZero } from '../common/util'
 import { useCell } from '../composables/useCell'
 import {
   getPickerValue,
@@ -191,7 +191,7 @@ watch(
   (val, oldVal) => {
     if (isEqual(val, oldVal)) return
 
-    if (getType(val) === 'array') {
+    if (isArray(val)) {
       region.value = true
       innerValue.value = deepClone(getDefaultInnerValue(true))
       endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
@@ -212,7 +212,7 @@ watch(
 watch(
   () => props.displayFormat,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of displayFormat must be Function')
     }
   },
@@ -224,7 +224,7 @@ watch(
 watch(
   () => props.filter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of filter must be Function')
     }
   },
@@ -236,7 +236,7 @@ watch(
 watch(
   () => props.formatter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of formatter must be Function')
     }
   },
@@ -248,7 +248,7 @@ watch(
 watch(
   () => props.beforeConfirm,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforeConfirm must be Function')
     }
   },
@@ -260,7 +260,7 @@ watch(
 watch(
   () => props.displayFormatTabLabel,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of displayFormatTabLabel must be Function')
     }
   },
@@ -273,7 +273,7 @@ watch(
 watch(
   () => props.defaultValue,
   (val) => {
-    if (getType(val) === 'array' || region.value) {
+    if (isArray(val) || region.value) {
       innerValue.value = deepClone(getDefaultInnerValue(true))
       endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
     } else {
@@ -327,6 +327,7 @@ const customColumnFormatter: DatetimePickerViewColumnFormatter = (picker) => {
   // 校准上下方picker的value值，与内部innerValue对应
   const start = picker.correctValue(innerValue.value)
   const end = picker.correctValue(endInnerValue.value)
+
   /**
    * 如果是上方picekr 那么将下方picker的值作为下边界
    * 如果是下方picekr 那么将上方picker的值作为上边界
@@ -351,7 +352,7 @@ const customColumnFormatter: DatetimePickerViewColumnFormatter = (picker) => {
 
 onBeforeMount(() => {
   const { modelValue: value } = props
-  if (getType(value) === 'array') {
+  if (isArray(value)) {
     region.value = true
     innerValue.value = deepClone(getDefaultInnerValue(true))
     endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
@@ -453,7 +454,6 @@ function onChangeStart({ value }: { value: number | string }) {
     datetimePickerView.value && datetimePickerView.value.setColumns(datetimePickerView.value.updateColumns())
     datetimePickerView1.value && datetimePickerView1.value.setColumns(datetimePickerView1.value.updateColumns())
   } else {
-    // emit('update:modelValue', innerValue.value)
     emit('change', {
       value: innerValue.value
     })
@@ -465,9 +465,7 @@ function onChangeStart({ value }: { value: number | string }) {
  */
 function onChangeEnd({ value }: { value: number | string }) {
   endInnerValue.value = deepClone(value)
-
   showTabLabel.value = [deepClone(showTabLabel.value[0]), setTabLabel(1)]
-  // emit('update:modelValue', [innerValue.value, value])
   emit('change', {
     value: [innerValue.value, value]
   })
