@@ -52,7 +52,7 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { context, getType, isDef, isEqual } from '../common/util'
+import { context, getType, isDef, isEqual, isFunction } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import { uploadProps, type UploadFileItem } from './types'
@@ -99,7 +99,7 @@ watch(
 watch(
   () => props.beforePreview,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforePreview must be Function')
     }
   },
@@ -112,7 +112,7 @@ watch(
 watch(
   () => props.onPreviewFail,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of onPreviewFail must be Function')
     }
   },
@@ -125,7 +125,7 @@ watch(
 watch(
   () => props.beforeRemove,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeRemove must be Function')
     }
   },
@@ -138,7 +138,7 @@ watch(
 watch(
   () => props.beforeUpload,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeUpload must be Function')
     }
   },
@@ -151,7 +151,7 @@ watch(
 watch(
   () => props.beforeChoose,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeChoose must be Function')
     }
   },
@@ -164,7 +164,7 @@ watch(
 watch(
   () => props.buildFormData,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of buildFormData must be Function')
     }
   },

@@ -1,5 +1,5 @@
 import { dayjs } from '../common/dayjs'
-import { getType, isArray, padZero } from '../common/util'
+import { isArray, isFunction, padZero } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import type { CalendarDayType, CalendarItem, CalendarTimeFilter, CalendarType } from './types'
 const { translate } = useTranslate('calendar-view')
@@ -380,7 +380,7 @@ export function getTimeData({
     }
   })
   let seconds: CalendarItem[] = []
-  if (filter && getType(filter) === 'function') {
+  if (filter && isFunction(filter)) {
     hours = filter({
       type: 'hour',
       values: hours
@@ -399,7 +399,7 @@ export function getTimeData({
         disabled: index < minSecond || index > maxSecond
       }
     })
-    if (filter && getType(filter) === 'function') {
+    if (filter && isFunction(filter)) {
       seconds = filter({
         type: 'second',
         values: seconds

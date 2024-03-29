@@ -1,12 +1,12 @@
 import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeBooleanProp } from '../common/props'
+import { baseProps, makeBooleanProp, numericProp } from '../common/props'
 
 export const tabProps = {
   ...baseProps,
   /**
    * 唯一标识符
    */
-  name: String,
+  name: numericProp,
   /**
    * tab的标题
    */

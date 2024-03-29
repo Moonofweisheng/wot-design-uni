@@ -16,7 +16,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount } from 'vue'
-import { addUnit, getType, objToStyle } from '../common/util'
+import { addUnit, isFunction, objToStyle } from '../common/util'
 import { switchProps } from './types'
 
 const props = defineProps(switchProps)
@@ -48,7 +48,7 @@ function switchValue() {
   if (props.disabled) return
   const newVal = props.modelValue === props.activeValue ? props.inactiveValue : props.activeValue
 
-  if (props.beforeChange && getType(props.beforeChange) === 'function') {
+  if (props.beforeChange && isFunction(props.beforeChange)) {
     props.beforeChange({
       value: newVal,
       resolve: (pass: boolean) => {

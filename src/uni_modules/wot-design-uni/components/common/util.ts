@@ -439,7 +439,7 @@ export function deepClone<T>(obj: T, cache: Map<any, any> = new Map()): T {
   }
 
   // 处理特殊对象类型：日期、正则表达式、错误对象
-  if (obj instanceof Date) {
+  if (isDate(obj)) {
     return new Date(obj.getTime()) as any
   }
   if (obj instanceof RegExp) {

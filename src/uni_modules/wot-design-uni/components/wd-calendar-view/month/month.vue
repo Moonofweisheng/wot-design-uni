@@ -50,7 +50,7 @@ import {
   getWeekRange
 } from '../utils'
 import { useToast } from '../../wd-toast'
-import { deepClone, getType, isArray } from '../../common/util'
+import { deepClone, isArray, isFunction } from '../../common/util'
 import { useTranslate } from '../../composables/useTranslate'
 import type { CalendarDayItem, CalendarDayType, CalendarType } from '../types'
 import { monthProps } from './types'
@@ -348,7 +348,7 @@ function getFormatterDate(date: number, day: string | number, type?: CalendarDay
     disabled: compareDate(date, props.minDate) === -1 || compareDate(date, props.maxDate) === 1
   }
   if (props.formatter) {
-    if (getType(props.formatter) === 'function') {
+    if (isFunction(props.formatter)) {
       dayObj = props.formatter(dayObj)
     } else {
       console.error('[wot-design] error(wd-calendar-view): the formatter prop of wd-calendar-view should be a function')
