@@ -95,6 +95,7 @@ import Components, { kebabCase } from '@uni-helper/vite-plugin-uni-components'
 
 export default defineConfig({
   plugins: [
+    // make sure put it before `Uni()`
     Components({
     resolvers: [
       {
@@ -126,6 +127,7 @@ import { WotResolver } from '@uni-helper/vite-plugin-uni-components/resolvers'
 
 export default defineConfig({
   plugins: [
+    // make sure put it before `Uni()`
     Components({
     resolvers: [WotResolver()]
   }), uni()],
@@ -141,8 +143,6 @@ public-hoist-pattern[]=@vue*
 // or
 // shamefully-hoist = true
 ```
-
-see more in [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components#installation)
 
 
 ## Volar 支持<el-tag type="primary" style="vertical-align: middle;margin-left:8px;" effect="dark" >推荐</el-tag>
