@@ -39,4 +39,3 @@ function setChange(value: number | string, label: string) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-./type

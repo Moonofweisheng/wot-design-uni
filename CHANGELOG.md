@@ -1,6 +1,59 @@
 # 更新日志 
 
 
+### [1.2.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.6...v1.2.7) (2024-03-29)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复DatePicker占位符展示缺失的问题 ([8fbca94](https://github.com/Moonofweisheng/wot-design-uni/commit/8fbca94e3690e8b86ce59fbe668805839c50192b))
+* 🐛 修复DateTimePicker区域选择极值计算错误的问题 ([a1e9530](https://github.com/Moonofweisheng/wot-design-uni/commit/a1e9530a917981ca4cf96dde1aa268eaf3da059f))
+* 🐛 修复picker-view初始化报错的问题 ([2102f38](https://github.com/Moonofweisheng/wot-design-uni/commit/2102f38a107a7cc8a316cb7fdc5a9738a5bb7499)), closes [#205](https://github.com/Moonofweisheng/wot-design-uni/issues/205)
+* 🐛 修复picker选择器在APP端包装二维数组逻辑错误导致无法实现多列选择器的问题 ([ed5d7ac](https://github.com/Moonofweisheng/wot-design-uni/commit/ed5d7ace2050f5ae7541c8fd2ec395de56fa73cc))
+* 🐛 移除文件移动时volar变更文件路径错误导致.vue文件中多出的无用路径字符串 ([1f8f8ae](https://github.com/Moonofweisheng/wot-design-uni/commit/1f8f8ae2bfb2b13a6b6fcd6435a2d75f47d0e775))
+
+### [1.2.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.5...v1.2.6) (2024-03-27)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Picker 未选择时显示第一列值的问题 ([21839e0](https://github.com/Moonofweisheng/wot-design-uni/commit/21839e0caf170248f454d80645bc3aa2f3ae2cdb))
+* 🐛 修复DatetimePicker区间模式未选值时显示占位符错误的问题 ([37350ee](https://github.com/Moonofweisheng/wot-design-uni/commit/37350ee5234a0f30debd22d33fb168415ec4e72d))
+
+### [1.2.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.4...v1.2.5) (2024-03-24)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复textarea在支付宝小程序上清除按钮点击热区失效的问题 ([84662f2](https://github.com/Moonofweisheng/wot-design-uni/commit/84662f254b85d3b554113c9ba4f73ca695596fe9))
+
+### [1.2.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.3...v1.2.4) (2024-03-23)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复textarea、input的label存在icon时高度异常的问题 ([e487ced](https://github.com/Moonofweisheng/wot-design-uni/commit/e487ced1624ce9ba35b29537481302e07050612c))
+* 🐛 修复textarea无法换行的问题 ([25bd564](https://github.com/Moonofweisheng/wot-design-uni/commit/25bd56485508ae8b3dfffd13d47c306fbf42d65e))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整组件库基于vite配置自动引入组件的介绍 ([2d23607](https://github.com/Moonofweisheng/wot-design-uni/commit/2d2360706fbe2a5d4024ceebd82720014c6b1ea2))
+* ✏️  文档推荐用户从wot-design-uni.cn迁移至wot-design-uni.gitee.io ([72a567c](https://github.com/Moonofweisheng/wot-design-uni/commit/72a567c44867f049c1526f5d682e46155047516a))
+* ✏️  增加steps设置激活项的介绍 ([7c0d36c](https://github.com/Moonofweisheng/wot-design-uni/commit/7c0d36c36214517d959aa27e284aacf59d2b074b))
+
+### [1.2.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.2...v1.2.3) (2024-03-20)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  修复部分外部链接不可用的问题 ([e2fb515](https://github.com/Moonofweisheng/wot-design-uni/commit/e2fb5155c40e58e44920329cdfb4f2391bb81970))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修复 checkbox 单独使用时无法切换选中状态的问题 ([#198](https://github.com/Moonofweisheng/wot-design-uni/issues/198)) ([4a20219](https://github.com/Moonofweisheng/wot-design-uni/commit/4a2021908f0d63ca398660950609bd5f4a7ca9b9))
+
 ### [1.2.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.1...v1.2.2) (2024-03-19)
 
 

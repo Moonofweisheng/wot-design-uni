@@ -94,6 +94,7 @@
 
   @include e(label) {
     position: relative;
+    display: flex;
     width: $-input-cell-label-width;
     color: $-cell-title-color;
     margin-right: $-cell-padding;
@@ -125,6 +126,7 @@
   @include e(prefix) {
     margin-right: $-textarea-icon-margin;
     font-size: $-textarea-fs;
+    line-height: initial;
 
     :deep(.wd-textarea__icon) {
       margin-left: 0;
@@ -133,7 +135,6 @@
 
   @include e(suffix) {
     flex-shrink: 0;
-    margin-left: $-textarea-icon-margin;
     line-height: initial;
   }
 
@@ -142,9 +143,15 @@
     padding: 0;
     font-size: 0;
     background: $-textarea-bg;
+    padding-right: 24px;
+    box-sizing: border-box;
 
     @include when(show-limit) {
       padding-bottom: 36px;
+    }
+
+    @include when(suffix) {
+      padding-right: calc($-textarea-icon-size + 8px);
     }
   }
 
@@ -160,18 +167,16 @@
     border: none;
     box-sizing: border-box;
     word-break: break-word;
+    min-height: 24px;
 
     &::-webkit-input-placeholder {
       color: $-input-placeholder-color;
-    }
-
-    @include when(suffix) {
-      padding-right: calc($-textarea-icon-size + 8px);
     }
   }
 
   @include e(suffix) {
     position: absolute;
+    z-index: 1;
     right: 0;
     top: 0;
     bottom: 0;
@@ -182,8 +187,6 @@
     font-size: $-textarea-icon-size;
     color: $-textarea-icon-color;
     background: $-textarea-bg;
-    vertical-align: middle;
-    line-height: $-cell-line-height;
   }
 
   @include edeep(clear) {
@@ -217,7 +220,7 @@
 
   @include e(placeholder) {
     color: $-input-placeholder-color;
-
+    
     &.is-error {
       color: $-input-error-color;
     }
@@ -233,7 +236,7 @@
     height: 100%;
   }
 
-  @include e(error-message){
+  @include e(error-message) {
     color: $-form-item-error-message-color;
     font-size: $-form-item-error-message-font-size;
     line-height: $-form-item-error-message-line-height;
@@ -283,6 +286,7 @@
 
   @include when(cell) {
     display: flex;
+    line-height: $-cell-line-height;
 
     &.is-error::after {
       background: $-textarea-cell-border-color;
@@ -293,6 +297,8 @@
     }
 
     :deep(.wd-textarea__icon) {
+      display: inline-flex;
+      align-items: center;
       height: $-textarea-cell-height;
       line-height: $-textarea-cell-height;
     }
@@ -304,11 +310,6 @@
 
     &.wd-textarea::after {
       display: none;
-    }
-
-
-    .wd-textarea__inner {
-      padding-right: 24px;
     }
 
     .wd-textarea__suffix {

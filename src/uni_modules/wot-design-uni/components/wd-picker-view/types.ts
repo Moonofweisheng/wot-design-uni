@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
-import { getType } from '../common/util'
+import { getType, isArray, isObj } from '../common/util'
 
 export type ColumnItem = {
   [key: string]: any
@@ -80,7 +80,7 @@ export type PickerViewInstance = ComponentPublicInstance<PickerViewProps, Picker
  * @param {string} labelKey labelKey
  */
 export function formatArray(array: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>, valueKey: string, labelKey: string) {
-  let tempArray: Array<string | number | ColumnItem | Array<string | number | ColumnItem>> = array instanceof Array ? array : [array]
+  let tempArray: Array<string | number | ColumnItem | Array<string | number | ColumnItem>> = isArray(array) ? array : [array]
   // 检测第一层的type
   const firstLevelTypeList = new Set(array.map(getType))
   /**
@@ -97,15 +97,14 @@ export function formatArray(array: Array<string | number | ColumnItem | Array<st
    * 数组的所有一维子元素都不是array，说明是它是一个一维数组
    * 所以需要把一维的转成二维，这样方便统一处理
    */
-  if (!(array[0] instanceof Array)) {
+  if (!isArray(array[0])) {
     tempArray = [tempArray as Array<string | number | ColumnItem>]
   }
   // 经过上述处理，都已经变成了二维数组，再把每一项二维元素包装成object
   const result: Array<Array<ColumnItem>> = (tempArray as Array<Array<string | number | ColumnItem>>).map((col) => {
     return col.map((row) => {
-      const isObj = getType(row)
       /* 针对原始值，包装成{valueKey,labelKey} */
-      if (isObj !== 'object') {
+      if (!isObj(row)) {
         return {
           [valueKey]: row,
           [labelKey]: row

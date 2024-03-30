@@ -117,7 +117,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch, nextTick, computed } from 'vue'
 import { useCell } from '../composables/useCell'
-import { getRect, getType, isArray, isDef, requestAnimationFrame } from '../common/util'
+import { getRect, isArray, isDef, isFunction, requestAnimationFrame } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useTranslate } from '../composables/useTranslate'
@@ -194,7 +194,7 @@ watch(
 watch(
   () => props.displayFormat,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of displayFormat must be Function')
     }
   },
@@ -207,7 +207,7 @@ watch(
 watch(
   () => props.beforeConfirm,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforeConfirm must be Function')
     }
   },

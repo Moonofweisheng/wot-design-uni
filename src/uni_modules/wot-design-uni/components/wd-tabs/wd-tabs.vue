@@ -136,7 +136,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref, watch, nextTick, reactive } from 'vue'
-import { checkNumRange, debounce, getRect, getType, isDef, isNumber, isString, objToStyle } from '../common/util'
+import { checkNumRange, debounce, getRect, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 import { TABS_KEY, tabsProps } from './types'
 import { useChildren } from '../composables/useChildren'
@@ -217,13 +217,13 @@ const setActive = debounce(
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (getType(newValue) !== 'number' && getType(newValue) !== 'string') {
+    if (!isNumber(newValue) && !isString(newValue)) {
       console.error('[wot design] error(wd-tabs): the type of value should be number or string')
     }
     // 保证不为非空字符串，小于0的数字
-    if ((newValue as any) === '' || newValue === undefined) {
+    if (newValue === '' || !isDef(newValue)) {
       // eslint-disable-next-line quotes
-      console.error("[wot design] error(wd-tabs): tabs's value cannot be null or undefined")
+      console.error("[wot design] error(wd-tabs): tabs's value cannot be '' null or undefined")
     }
     if (typeof newValue === 'number' && newValue < 0) {
       // eslint-disable-next-line quotes
@@ -430,4 +430,3 @@ defineExpose({
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-./type

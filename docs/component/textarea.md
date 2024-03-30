@@ -114,7 +114,7 @@ const value = ref<string>('')
 | fixed                   | 如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true                                       | -                 | false                            | -         |
 | cursorSpacing           | 原生属性，指定光标与键盘的距离。取 textarea 距离底部的距离和 cursor-spacing 指定的距离的最小值作为光标与键盘的距离 | number            | -                                | 0         | -        |
 | cursor                  | 原生属性，指定 focus 时的光标位置                                                                                  | number            | -                                | -1        | -        |
-| confirm-type            | 设置键盘右下角按钮的文字                                                                                           | string            | `done / go / next / search / send` | done      | -        |
+| confirm-type            | 设置键盘右下角按钮的文字                                                                                           | string            | `done / go / next / search / send` | -      | -        |
 | confirm-hold            | 点击键盘右下角按钮时是否保持键盘不收起                                                                             | Boolean           | -                                | false     | -        |
 | show-confirm-bar        | 是否显示键盘上方带有”完成“按钮那一栏                                                                               | Boolean           | -                                | true      | -        |
 | selection-start         | 原生属性，光标起始位置，自动聚集时有效，需与 selection-end 搭配使用                                                | number            | -                                | -1        | -        |

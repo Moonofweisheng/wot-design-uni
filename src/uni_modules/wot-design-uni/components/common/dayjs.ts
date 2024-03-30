@@ -1,3 +1,5 @@
+import { isDate } from './util'
+
 /* eslint-disable */
 class Dayjs {
   utc: boolean
@@ -28,7 +30,7 @@ class Dayjs {
 
   parseConfig(dateStr?:string | number | Date) {
     if (!dateStr) return new Date()
-    if (dateStr instanceof Date) return dateStr
+    if (isDate(dateStr)) return dateStr
     if (/^(\d){8}$/.test(dateStr as string)) {
       this.utc = true
       return `${(dateStr as string).substr(0, 4)}-${(dateStr as string).substr(4, 2)}-${(dateStr as string).substr(6, 2)}`

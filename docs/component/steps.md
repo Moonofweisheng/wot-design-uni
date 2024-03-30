@@ -37,6 +37,15 @@
   <wd-step title="步骤2" description="登录账号并绑定手机" />
   <wd-step title="步骤3" description="完善个人信息" />
 </wd-steps>
+<wd-button size="small" @click="nextStep">下一步</wd-button>
+```
+```ts
+const active = ref<number>(0)
+
+function nextStep() {
+  active.value = active.value + 1
+}
+
 ```
 
 ## 修改图标

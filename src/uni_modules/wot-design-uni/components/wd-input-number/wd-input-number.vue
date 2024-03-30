@@ -36,7 +36,7 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { debounce, getType } from '../common/util'
+import { debounce, isDef } from '../common/util'
 import { inputNumberProps } from './types'
 
 const props = defineProps(inputNumberProps)
@@ -109,9 +109,7 @@ function toStrictlyStep(value: number | string) {
 }
 
 function setValue(value: string | number, change: boolean = true) {
-  const type = getType(value)
-
-  if (props.allowNull && (type === 'null' || type === 'undefined' || value === '')) {
+  if (props.allowNull && (!isDef(value) || value === '')) {
     dispatchChangeEvent(value, change)
     return
   }
@@ -177,9 +175,7 @@ function dispatchChangeEvent(value: string | number, change: boolean = true) {
 }
 
 function formatValue(value: string | number) {
-  const type = getType(value)
-
-  if (props.allowNull && (type === 'null' || type === 'undefined' || value === '')) {
+  if (props.allowNull && (!isDef(value) || value === '')) {
     return ''
   }
 

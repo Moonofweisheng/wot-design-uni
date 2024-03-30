@@ -35,4 +35,3 @@ linkChildren({ props })
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-./type

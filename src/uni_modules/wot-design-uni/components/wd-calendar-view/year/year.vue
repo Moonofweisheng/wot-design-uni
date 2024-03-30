@@ -29,7 +29,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { deepClone, getType, isArray } from '../../common/util'
+import { deepClone, isArray, isFunction } from '../../common/util'
 import { compareMonth, formatYearTitle, getDateByDefaultTime, getItemClass, getMonthByOffset, getMonthOffset } from '../utils'
 import { useToast } from '../../wd-toast'
 import { useTranslate } from '../../composables/useTranslate'
@@ -181,7 +181,7 @@ function getFormatterDate(date: number, month: number, type?: CalendarDayType) {
     disabled: compareMonth(date, props.minDate) === -1 || compareMonth(date, props.maxDate) === 1
   }
   if (props.formatter) {
-    if (getType(props.formatter) === 'function') {
+    if (isFunction(props.formatter)) {
       monthObj = props.formatter(monthObj)
     } else {
       console.error('[wot-design] error(wd-calendar-view): the formatter prop of wd-calendar-view should be a function')

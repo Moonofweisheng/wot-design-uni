@@ -88,7 +88,7 @@ const district: Record<string, Array<{ label: string; value: string }>> = {
 }
 
 const columns0 = ref(['选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
-const value0 = ref('选项3')
+const value0 = ref('')
 
 const value1 = ref('选项3')
 const columns1 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])

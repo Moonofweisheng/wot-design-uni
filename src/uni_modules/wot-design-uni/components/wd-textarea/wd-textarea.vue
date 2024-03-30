@@ -1,5 +1,5 @@
 <template>
-  <view :class="rootClass" :style="customStyle" @click="handleClick">
+  <view :class="rootClass" :style="customStyle">
     <view v-if="label || useLabelSlot" :class="labelClass" :style="labelStyle">
       <view v-if="prefixIcon || usePrefixSlot" class="wd-textarea__prefix">
         <wd-icon v-if="prefixIcon && !usePrefixSlot" custom-class="wd-textarea__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
@@ -12,9 +12,9 @@
     </view>
 
     <!-- 文本域 -->
-    <view :class="`wd-textarea__value ${customTextareaContainerClass} ${showWordCount ? 'is-show-limit' : ''}`">
+    <view :class="`wd-textarea__value ${showClear ? 'is-suffix' : ''} ${customTextareaContainerClass} ${showWordCount ? 'is-show-limit' : ''}`">
       <textarea
-        :class="`wd-textarea__inner ${showClear ? 'is-suffix' : ''} ${customTextareaClass}`"
+        :class="`wd-textarea__inner ${customTextareaClass}`"
         v-model="inputValue"
         :show-count="false"
         :placeholder="placeholder || translate('placeholder')"
@@ -212,12 +212,15 @@ function clear() {
     .then(() => requestAnimationFrame())
     .then(() => requestAnimationFrame())
     .then(() => {
-      isFocus.value = true
       emit('change', {
         value: ''
       })
       emit('update:modelValue', inputValue.value)
       emit('clear')
+
+      requestAnimationFrame().then(() => {
+        isFocus.value = true
+      })
     })
 }
 // 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur

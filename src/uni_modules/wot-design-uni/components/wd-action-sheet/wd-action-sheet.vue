@@ -73,6 +73,7 @@ export default {
 <script lang="ts" setup>
 import { watch, ref } from 'vue'
 import { actionSheetProps, type Panel } from './types'
+import { isArray } from '../common/util'
 
 const props = defineProps(actionSheetProps)
 const formatPanels = ref<Array<Panel> | Array<Panel[]>>([])
@@ -91,11 +92,11 @@ watch(
 
 const emit = defineEmits(['select', 'click-modal', 'cancel', 'closed', 'close', 'open', 'opened', 'update:modelValue'])
 
-function isArray() {
-  return props.panels.length && !(props.panels[0] instanceof Array)
+function isPanelArray() {
+  return props.panels.length && !isArray(props.panels[0])
 }
 function computedValue() {
-  formatPanels.value = isArray() ? [props.panels as Panel[]] : (props.panels as Panel[][])
+  formatPanels.value = isPanelArray() ? [props.panels as Panel[]] : (props.panels as Panel[][])
 }
 
 function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) {
@@ -104,7 +105,7 @@ function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) 
       item: props.actions[rowIndex],
       index: rowIndex
     })
-  } else if (isArray()) {
+  } else if (isPanelArray()) {
     emit('select', {
       item: props.panels[Number(colIndex)],
       index: colIndex

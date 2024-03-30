@@ -86,7 +86,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
-import { deepClone, defaultDisplayFormat, getType, isArray, isDef } from '../common/util'
+import { deepClone, defaultDisplayFormat, getType, isArray, isDef, isFunction } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { type ColumnItem, formatArray } from '../wd-picker-view/types'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
@@ -112,6 +112,8 @@ const resetColumns = ref<Array<string | number | ColumnItem | Array<string | num
 const isPicking = ref<boolean>(false) // 判断pickview是否还在滑动中
 const hasConfirmed = ref<boolean>(false) // 判断用户是否点击了确认按钮
 
+const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
+
 const isLoading = computed(() => {
   return props.loading || innerLoading.value
 })
@@ -119,11 +121,11 @@ const isLoading = computed(() => {
 watch(
   () => props.displayFormat,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of displayFormat must be Function')
     }
     if (pickerViewWd.value && pickerViewWd.value.selectedIndex && pickerViewWd.value.selectedIndex.length !== 0) {
-      if (isDef(props.modelValue)) {
+      if (isDef(props.modelValue) && props.modelValue !== '') {
         setShowValue(pickerViewWd.value.getSelects())
       } else {
         showValue.value = ''
@@ -141,13 +143,13 @@ watch(
   (newValue) => {
     pickerValue.value = newValue
     // 获取初始选中项,并展示初始选中文案
-    if (isDef(newValue)) {
+    if (isDef(newValue) && newValue !== '') {
       if (pickerViewWd.value && pickerViewWd.value.getSelects) {
         nextTick(() => {
           setShowValue(pickerViewWd.value!.getSelects())
         })
       } else {
-        setShowValue(getSelects(props.modelValue)!)
+        setShowValue(getSelects(newValue)!)
       }
     } else {
       showValue.value = ''
@@ -165,7 +167,7 @@ watch(
     displayColumns.value = newValue
     resetColumns.value = newValue
     // 获取初始选中项,并展示初始选中文案
-    if (isDef(props.modelValue)) {
+    if (isDef(props.modelValue) && props.modelValue !== '') {
       if (pickerViewWd.value && pickerViewWd.value.getSelects) {
         nextTick(() => {
           setShowValue(pickerViewWd.value!.getSelects())
@@ -186,7 +188,7 @@ watch(
 watch(
   () => props.columnChange,
   (newValue) => {
-    if (newValue && getType(newValue) !== 'function') {
+    if (newValue && !isFunction(newValue)) {
       console.error('The type of columnChange must be Function')
     }
   },
@@ -223,11 +225,9 @@ const isRequired = computed(() => {
 
 const { proxy } = getCurrentInstance() as any
 
-const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
-
 onMounted(() => {
-  isDef(props.modelValue) && setShowValue(getSelects(props.modelValue)!)
-  if (isDef(props.modelValue) && pickerViewWd.value && pickerViewWd.value.getSelects) {
+  isDef(props.modelValue) && props.modelValue !== '' && setShowValue(getSelects(props.modelValue)!)
+  if (isDef(props.modelValue) && props.modelValue !== '' && pickerViewWd.value && pickerViewWd.value.getSelects) {
     setShowValue(pickerViewWd.value!.getSelects())
   }
 })
@@ -246,10 +246,8 @@ function getSelects(value: string | number | Array<string | number | Array<any>>
   if (props.columns.length === 0) return
 
   // 使其默认选中首项
-  if (value === '' || value === null || value === undefined || (isArray(value) && value.length === 0)) {
-    value = formatColumns.map((col) => {
-      return col[0][props.valueKey]
-    })
+  if (value === '' || !isDef(value) || (isArray(value) && value.length === 0)) {
+    return
   }
   const valueType = getType(value)
   const type = ['string', 'number', 'boolean', 'array']
@@ -259,7 +257,7 @@ function getSelects(value: string | number | Array<string | number | Array<any>>
    * 2.根据formatColumns的长度截取Array<String>，保证下面的遍历不溢出
    * 3.根据每列的key值找到选项中value为此key的下标并记录
    */
-  value = value instanceof Array ? value : [value]
+  value = isArray(value) ? value : [value]
   value = value.slice(0, formatColumns.length)
 
   if (value.length === 0) {
@@ -321,7 +319,7 @@ function onConfirm() {
   }
 
   const { beforeConfirm } = props
-  if (beforeConfirm && getType(beforeConfirm) === 'function') {
+  if (beforeConfirm && isFunction(beforeConfirm)) {
     beforeConfirm(
       pickerValue.value,
       (isPass: boolean) => {
@@ -365,7 +363,7 @@ function pickerViewChange({ value }: any) {
  */
 function setShowValue(items: ColumnItem | ColumnItem[]) {
   // 避免值为空时调用自定义展示函数
-  if ((items instanceof Array && !items.length) || !items) return
+  if ((isArray(items) && !items.length) || !items) return
 
   const { valueKey, labelKey } = props
   showValue.value = (props.displayFormat || defaultDisplayFormat)(items, { valueKey, labelKey })

@@ -96,7 +96,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
-import { debounce, getRect, getType, isArray, isBoolean } from '../common/util'
+import { debounce, getRect, isArray, isBoolean, isFunction } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -167,7 +167,7 @@ watch(
 watch(
   () => props.columns,
   (newValue, oldValue) => {
-    if (newValue.length && !(newValue[0] instanceof Array)) {
+    if (newValue.length && !isArray(newValue[0])) {
       console.error('[wot design] error(wd-col-picker): the columns props of wd-col-picker should be a two-dimensional array')
       return
     }
@@ -195,7 +195,7 @@ watch(
 watch(
   () => props.columnChange,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of columnChange must be Function')
     }
   },
@@ -208,7 +208,7 @@ watch(
 watch(
   () => props.displayFormat,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of displayFormat must be Function')
     }
   },
@@ -221,7 +221,7 @@ watch(
 watch(
   () => props.beforeConfirm,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforeConfirm must be Function')
     }
   },
@@ -340,7 +340,7 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
       index: colIndex,
       rowIndex: index,
       resolve: (nextColumn: Record<string, any>[]) => {
-        if (!(nextColumn instanceof Array)) {
+        if (!isArray(nextColumn)) {
           console.error('[wot design] error(wd-col-picker): the data of each column of wd-col-picker should be an array')
           return
         }

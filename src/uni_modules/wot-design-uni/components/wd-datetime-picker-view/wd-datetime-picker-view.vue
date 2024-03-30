@@ -26,7 +26,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
-import { debounce, getType, isDef, padZero, range } from '../common/util'
+import { debounce, isFunction, isDef, padZero, range } from '../common/util'
 import {
   getPickerValue,
   datetimePickerViewProps,
@@ -78,6 +78,15 @@ const created = ref<boolean>(false)
 
 const { proxy } = getCurrentInstance() as any
 
+defineExpose<DatetimePickerViewExpose>({
+  updateColumns,
+  setColumns,
+  getSelects,
+  correctValue,
+  getPickerValue,
+  getOriginColumns,
+  ...props
+})
 /**
  * @description updateValue 防抖函数的占位符
  */
@@ -120,7 +129,7 @@ watch(
 watch(
   () => props.filter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of filter must be Function')
     }
     updateValue()
@@ -131,7 +140,7 @@ watch(
 watch(
   () => props.formatter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of formatter must be Function')
     }
     updateValue()
@@ -142,7 +151,7 @@ watch(
 watch(
   () => props.columnFormatter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of columnFormatter must be Function')
     }
     updateValue()
@@ -488,15 +497,6 @@ function onPickEnd() {
 function getSelects() {
   return datePickerview.value && datePickerview.value.getSelects ? datePickerview.value.getSelects() : undefined
 }
-
-defineExpose<DatetimePickerViewExpose>({
-  updateColumns,
-  setColumns,
-  getSelects,
-  correctValue,
-  getPickerValue,
-  getOriginColumns
-})
 </script>
 
 <style lang="scss" scoped>

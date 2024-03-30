@@ -33,7 +33,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onMounted, ref, nextTick } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
-import { getType, isArray, isNumber } from '../../common/util'
+import { isArray, isNumber } from '../../common/util'
 import Year from '../year/year.vue'
 import { yearPanelProps, type YearInfo, type YearPanelExpose } from './types'
 
@@ -81,8 +81,7 @@ const requestAnimationFrame = (cb = () => {}) => {
 
 function scrollIntoView() {
   requestAnimationFrame().then(() => {
-    let activeDate
-    const type = getType(props.value)
+    let activeDate: number | null = null
     if (isArray(props.value)) {
       activeDate = props.value![0]
     } else if (isNumber(props.value)) {

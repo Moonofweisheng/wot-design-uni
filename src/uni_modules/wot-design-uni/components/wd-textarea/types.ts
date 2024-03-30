@@ -95,7 +95,7 @@ export const textareaProps = {
    * 默认值：'done'
    * 可选值有'done', 'go', 'next', 'search', 'send'
    */
-  confirmType: makeStringProp<ConfirmType>('done'),
+  confirmType: makeStringProp<ConfirmType | null>(null),
 
   /**
    * * 点击键盘右下角按钮时是否保持键盘不收起。

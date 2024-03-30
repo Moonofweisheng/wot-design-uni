@@ -404,7 +404,7 @@ function setInnerLabel() {
   })
 }
 function setShowValue() {
-  if ((!(calendarValue.value instanceof Array) && calendarValue.value) || (calendarValue.value instanceof Array && calendarValue.value.length)) {
+  if ((!isArray(calendarValue.value) && calendarValue.value) || (isArray(calendarValue.value) && calendarValue.value.length)) {
     showValue.value = (props.displayFormat || defaultDisplayFormat)(calendarValue.value, currentType.value)
   } else {
     showValue.value = ''
