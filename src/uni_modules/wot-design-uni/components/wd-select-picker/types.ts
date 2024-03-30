@@ -81,7 +81,9 @@ export const selectPickerProps = {
   /** 自定义标签样式类 */
   customLabelClass: makeStringProp(''),
   /** 自定义值样式类 */
-  customValueClass: makeStringProp('')
+  customValueClass: makeStringProp(''),
+  /** 确认按钮是否显示（单选才生效） */
+  showConfirmBtn: makeBooleanProp(true)
 }
 export type SelectPickerProps = ExtractPropTypes<typeof selectPickerProps>
 
