@@ -10,7 +10,6 @@
 import { reactive, ref } from 'vue'
 import zhCN from './lang/zh-CN'
 import { deepAssign } from '../components/common/util'
-import { log } from 'console'
 
 type Message = Record<string, any>
 type Messages = Record<string, Message>
