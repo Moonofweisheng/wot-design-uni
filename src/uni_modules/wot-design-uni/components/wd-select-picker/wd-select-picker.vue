@@ -97,7 +97,7 @@
         </view>
       </scroll-view>
       <!-- 确认按钮 -->
-      <view v-if="showConfirmBtn" class="wd-select-picker__footer">
+      <view v-if="showConfirm" class="wd-select-picker__footer">
         <wd-button block size="large" @click="onConfirm" :disabled="loading">{{ confirmButtonText || translate('confirm') }}</wd-button>
       </view>
     </wd-action-sheet>
@@ -319,7 +319,7 @@ function valueFormat(value: string | number | boolean | (string | number | boole
 function handleChange({ value }: { value: string | number | boolean | (string | number | boolean)[] }) {
   selectList.value = value
   emit('change', { value })
-  if (props.type === 'radio' && !props.showConfirmBtn) {
+  if (props.type === 'radio' && !props.showConfirm) {
     onConfirm()
   }
 }
@@ -415,8 +415,8 @@ function formatFilterColumns(columns: Record<string, any>[], filterVal: string) 
   })
 }
 
-const showConfirmBtn = computed(() => {
-  return (props.type === 'radio' && props.showConfirmBtn) || props.type === 'checkbox'
+const showConfirm = computed(() => {
+  return (props.type === 'radio' && props.showConfirm) || props.type === 'checkbox'
 })
 
 defineExpose<SelectPickerExpose>({

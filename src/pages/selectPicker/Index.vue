@@ -17,14 +17,7 @@
         <wd-select-picker label="必填" required v-model="value12" :columns="columns1" @confirm="handleConfirm12" />
         <wd-select-picker label="可搜索" filterable v-model="value13" :columns="columns1" @confirm="handleConfirm13" />
         <wd-select-picker label="单选可搜索" filterable v-model="value18" type="radio" :columns="columns1" @confirm="handleConfirm13" />
-        <wd-select-picker
-          label="单选取消确认按钮"
-          type="radio"
-          :show-confirm-btn="false"
-          v-model="value19"
-          :columns="columns1"
-          @confirm="handleConfirm2"
-        />
+        <wd-select-picker label="自动完成" type="radio" :show-confirm="false" v-model="value19" :columns="columns1" @confirm="handleConfirm2" />
       </wd-cell-group>
     </view>
     <demo-block title="label不传" transparent>
