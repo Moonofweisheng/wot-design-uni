@@ -26,7 +26,9 @@ export const Locale = {
 
   use(newLang: string, newMessages?: Message) {
     lang.value = newLang
-    this.add({ [newLang]: newMessages })
+    if (newMessages) {
+      this.add({ [newLang]: newMessages })
+    }
   },
 
   add(newMessages: Message = {}) {
