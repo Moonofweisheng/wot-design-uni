@@ -1,6 +1,23 @@
 # 更新日志 
 
 
+### [1.2.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.7...v1.2.8) (2024-03-30)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修复useLocale 不传 message 会丢失原有语言配置的问题 ([#209](https://github.com/Moonofweisheng/wot-design-uni/issues/209)) ([e854d0e](https://github.com/Moonofweisheng/wot-design-uni/commit/e854d0e758e44cba9213992794974b7ae5985abf))
+
+
+### ✨ Features | 新功能
+
+* ✨ SelectPicker单选模式支持自动完成 ([#207](https://github.com/Moonofweisheng/wot-design-uni/issues/207)) ([11aa887](https://github.com/Moonofweisheng/wot-design-uni/commit/11aa887ae36153c0a6a0cd9053fc94c70acbcb0d)), closes [#206](https://github.com/Moonofweisheng/wot-design-uni/issues/206)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档中增加@uni-helper/vite-plugin-uni-components的使用提示 ([37d9d46](https://github.com/Moonofweisheng/wot-design-uni/commit/37d9d4631e434792b1e97dccac8a52a6d253d616))
+
 ### [1.2.7](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.6...v1.2.7) (2024-03-29)
 
 
