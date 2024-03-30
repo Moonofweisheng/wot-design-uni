@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-01-25 23:06:48
- * @LastEditTime: 2024-01-26 17:30:21
+ * @LastEditTime: 2024-03-30 11:30:55
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\locale\index.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/locale/index.ts
  * 记得注释
  */
 import { reactive, ref } from 'vue'
@@ -24,14 +24,14 @@ export const Locale = {
     return messages[lang.value]
   },
 
-  use(newLang: string, newMessages?: Message) {
+  use(newLang: string, newMessage?: Message) {
     lang.value = newLang
-    if (newMessages) {
-      this.add({ [newLang]: newMessages })
+    if (newMessage) {
+      this.add({ [newLang]: newMessage })
     }
   },
 
-  add(newMessages: Message = {}) {
+  add(newMessages: Messages = {}) {
     deepAssign(messages, newMessages)
   }
 }
