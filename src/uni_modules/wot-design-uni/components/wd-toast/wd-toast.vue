@@ -127,15 +127,17 @@ function buildSvg() {
  */
 function reset(option: ToastOptions) {
   if (option) {
-    iconName.value = isDef(option.iconName!) ? option.iconName! : iconName.value
-    customIcon.value = isDef(option.customIcon!) ? option.customIcon! : customIcon.value
-    msg.value = isDef(option.msg!) ? option.msg! : msg.value
-    position.value = isDef(option.position!) ? option.position! : position.value
-    show.value = isDef(option.show!) ? option.show! : show.value
-    zIndex.value = isDef(option.zIndex!) ? option.zIndex! : zIndex.value
-    loadingType.value = isDef(option.loadingType!) ? option.loadingType! : loadingType.value
-    loadingColor.value = isDef(option.loadingColor!) ? option.loadingColor! : loadingColor.value
-    iconSize.value = isDef(option.iconSize!) ? option.iconSize! : iconSize.value
+    show.value = isDef(option.show!) ? option.show! : false
+    if (show.value) {
+      iconName.value = isDef(option.iconName!) ? option.iconName! : ''
+      customIcon.value = isDef(option.customIcon!) ? option.customIcon! : false
+      msg.value = isDef(option.msg!) ? option.msg! : ''
+      position.value = isDef(option.position!) ? option.position! : 'middle'
+      zIndex.value = isDef(option.zIndex!) ? option.zIndex! : 100
+      loadingType.value = isDef(option.loadingType!) ? option.loadingType! : 'outline'
+      loadingColor.value = isDef(option.loadingColor!) ? option.loadingColor! : '#4D80F0'
+      iconSize.value = isDef(option.iconSize!) ? option.iconSize! : 42
+    }
   }
 }
 </script>

@@ -255,8 +255,8 @@ function inputValChange(value: string | number) {
  */
 function reset(option: MessageOptions) {
   if (option) {
-    title.value = isDef(option.title) ? option.title : title.value
-    showCancelButton.value = isDef(option.showCancelButton) ? option.showCancelButton : showCancelButton.value
+    title.value = isDef(option.title) ? option.title : ''
+    showCancelButton.value = isDef(option.showCancelButton) ? option.showCancelButton : false
     show.value = option.show!
     closeOnClickModal.value = option.closeOnClickModal!
     confirmButtonText.value = option.confirmButtonText!

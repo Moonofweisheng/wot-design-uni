@@ -1,7 +1,6 @@
 <template>
   <view>
     <page-wraper>
-      <wd-toast />
       <demo-block title="基本用法">
         <wd-button @click="showToast">toast</wd-button>
         <wd-button @click="showLongToast">长文案</wd-button>

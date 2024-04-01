@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2024-03-29 13:29:57
+ * @LastEditTime: 2024-04-01 19:13:51
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-toast\index.ts
+ * 记得注释
+ */
 import { provide, ref } from 'vue'
 import type { Toast, ToastOptions } from './types'
 import { deepMerge } from '../common/util'
