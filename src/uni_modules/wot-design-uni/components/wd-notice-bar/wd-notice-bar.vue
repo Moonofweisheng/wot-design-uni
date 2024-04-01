@@ -1,5 +1,9 @@
 <template>
-  <view v-if="show" :class="`wd-notice-bar ${customClass} ${noticeBarClass}`" :style="`color: ${color}; background: ${backgroundColor};`">
+  <view
+    v-if="show"
+    :class="`wd-notice-bar ${customClass} ${noticeBarClass}`"
+    :style="`color: ${color}; background: ${backgroundColor};${customStyle}`"
+  >
     <wd-icon v-if="prefix" custom-class="wd-notice-bar__prefix" size="18px" :name="prefix"></wd-icon>
     <slot v-else name="prefix"></slot>
     <view class="wd-notice-bar__wrap">

@@ -1,5 +1,5 @@
 <template>
-  <view v-if="showWrapper" :class="`wd-drop-item  ${customClass}`" :style="`z-index: ${zIndex}; ${positionStyle}`">
+  <view v-if="showWrapper" :class="`wd-drop-item  ${customClass}`" :style="`z-index: ${zIndex}; ${positionStyle};${customStyle}`">
     <wd-popup
       v-model="showPop"
       :z-index="zIndex"

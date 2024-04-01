@@ -1,6 +1,6 @@
 <template>
   <!-- 绘制的图片canvas -->
-  <view v-if="modelValue" :class="`wd-img-cropper ${customClass}`" @touchmove="preventTouchMove">
+  <view v-if="modelValue" :class="`wd-img-cropper ${customClass}`" :style="customStyle" @touchmove="preventTouchMove">
     <!-- 展示在用户面前的裁剪框 -->
     <view class="wd-img-cropper__wrapper">
       <!-- 画出裁剪框 -->

@@ -1,14 +1,14 @@
 <!--
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-03-15 14:26:00
+ * @LastEditTime: 2024-04-01 20:24:22
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-skeleton\wd-skeleton.vue
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-skeleton/wd-skeleton.vue
  * 记得注释
 -->
 <template>
-  <view class="wd-skeleton" :class="[props.customClass]" :style="props.customStyle">
+  <view :class="`wd-skeleton ${customClass}`" :style="customStyle">
     <view class="wd-skeleton__content" v-if="parsedRowCols.length">
       <view class="wd-skeleton__row" v-for="(row, index) of parsedRowCols" :key="`row-${index}`">
         <view v-for="(col, idx) of row" :key="`col-${idx}`" :class="col.class" :style="col.style" />

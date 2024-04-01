@@ -1,5 +1,5 @@
 <template>
-  <view :class="rootClass" :id="sliderId">
+  <view :class="rootClass" :style="customStyle" :id="sliderId">
     <!-- #ifdef MP-DINGTALK -->
     <view :id="sliderId" style="flex: 1" :class="rootClass">
       <!-- #endif -->

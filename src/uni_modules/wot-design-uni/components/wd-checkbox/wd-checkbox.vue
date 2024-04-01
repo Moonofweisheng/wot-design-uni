@@ -5,6 +5,7 @@
     } ${isLast ? 'is-last-child' : ''} ${innerInline ? 'is-inline' : ''} ${innerShape === 'button' ? 'is-button' : ''} ${
       innerDisabled ? 'is-disabled' : ''
     } ${innerSize ? 'is-' + innerSize : ''} ${customClass}`"
+    :style="customStyle"
     @click="toggle"
   >
     <!--shape为button时，移除wd-checkbox__shape，只保留wd-checkbox__label-->

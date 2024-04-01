@@ -1,5 +1,5 @@
 <template>
-  <view :class="['wd-upload', customClass]">
+  <view :class="['wd-upload', customClass]" :style="customStyle">
     <!-- 预览列表 -->
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->

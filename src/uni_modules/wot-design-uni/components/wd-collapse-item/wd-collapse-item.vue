@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-collapse-item ${disabled ? 'is-disabled' : ''} is-border ${customClass}`">
+  <view :class="`wd-collapse-item ${disabled ? 'is-disabled' : ''} is-border ${customClass}`" :style="customStyle">
     <view :class="`wd-collapse-item__header  ${isFirst ? 'wd-collapse-item__header-first' : ''}`" @click="handleClick">
       <text class="wd-collapse-item__title">{{ title }}</text>
       <wd-icon name="arrow-down" :custom-class="`wd-collapse-item__arrow ${expanded ? 'is-retract' : ''}`" />

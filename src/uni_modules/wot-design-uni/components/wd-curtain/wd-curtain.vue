@@ -15,6 +15,7 @@
       @close="close"
       @click-modal="clickModal"
       :custom-class="`wd-curtain ${customClass}`"
+      :custom-style="customStyle"
     >
       <view class="wd-curtain__content">
         <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>

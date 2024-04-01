@@ -1,5 +1,5 @@
 <template>
-  <view class="wd-tabbar-item" :style="customStyle" @click="handleClick">
+  <view :class="`wd-tabbar-item ${customClass}`" :style="customStyle" @click="handleClick">
     <wd-badge :modelValue="value" v-bind="badgeProps" :is-dot="isDot" :max="max">
       <view class="wd-tabbar-item__body">
         <slot name="icon" :active="active"></slot>

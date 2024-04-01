@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-rate ${customClass}`">
+  <view :class="`wd-rate ${customClass}`" :style="customStyle">
     <view
       v-for="(rate, index) in rateList"
       :key="index"

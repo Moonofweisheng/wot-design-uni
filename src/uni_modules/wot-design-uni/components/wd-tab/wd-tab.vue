@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-tab ${customClass}`">
+  <view :class="`wd-tab ${customClass}`" :style="customStyle">
     <view v-if="painted" class="wd-tab__body" :style="isShow ? '' : 'display: none;'">
       <slot />
     </view>

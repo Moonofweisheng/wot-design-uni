@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-popover ${customClass}`" id="popover" @click.stop="popover.noop">
+  <view :class="`wd-popover ${customClass}`" :style="customStyle" id="popover" @click.stop="popover.noop">
     <!-- TODO 插槽情况监听会有问题 待调整， 用于为渲染获取宽高的元素 -->
     <view class="wd-popover__pos wd-popover__hidden" id="pos">
       <view :class="`wd-popover__container ${customPop}`">

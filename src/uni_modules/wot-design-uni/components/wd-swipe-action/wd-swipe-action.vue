@@ -2,6 +2,7 @@
   <!--注意阻止横向滑动的穿透：横向移动时阻止冒泡-->
   <view
     :class="`wd-swipe-action ${customClass}`"
+    :style="customStyle"
     @click.stop="onClick()"
     @touchstart="startDrag"
     @touchmove="onDrag"

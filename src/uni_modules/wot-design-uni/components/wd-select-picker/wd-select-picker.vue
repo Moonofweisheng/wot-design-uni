@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-select-picker ${cell.border.value ? 'is-border' : ''} ${customClass}`">
+  <view :class="`wd-select-picker ${cell.border.value ? 'is-border' : ''} ${customClass}`" :style="customStyle">
     <view class="wd-select-picker__field" @click="open">
       <slot v-if="useDefaultSlot"></slot>
       <view

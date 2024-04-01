@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-circle ${customClass}`">
+  <view :class="`wd-circle ${customClass}`" :style="customStyle">
     <canvas :width="canvasSize" :height="canvasSize" :style="style" :id="canvasId" :canvas-id="canvasId"></canvas>
     <view v-if="!text" class="wd-circle__text">
       <!-- 自定义提示内容 -->

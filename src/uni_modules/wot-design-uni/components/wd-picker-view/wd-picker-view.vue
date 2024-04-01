@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-picker-view ${customClass}`">
+  <view :class="`wd-picker-view ${customClass}`" :style="customStyle">
     <view class="wd-picker-view__loading" v-if="loading">
       <wd-loading :color="loadingColor" />
     </view>

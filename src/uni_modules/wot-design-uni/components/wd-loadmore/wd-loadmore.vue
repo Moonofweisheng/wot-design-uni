@@ -1,5 +1,5 @@
 <template>
-  <view :class="['wd-loadmore', customClass]" @click="reload">
+  <view :class="['wd-loadmore', customClass]" :style="customStyle" @click="reload">
     <wd-divider v-if="state === 'finished'">{{ finishedText || translate('finished') }}</wd-divider>
     <block v-if="state === 'error'">
       <block v-if="errorText">

@@ -3,6 +3,7 @@
     <wd-sticky-box>
       <view
         :class="`wd-tabs ${customClass} ${slidableNum < items.length ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`"
+        :style="customStyle"
       >
         <wd-sticky :offset-top="offsetTop">
           <!--头部导航容器-->

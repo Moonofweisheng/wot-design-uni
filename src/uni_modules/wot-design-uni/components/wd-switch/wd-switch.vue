@@ -31,7 +31,7 @@ const rootStyle = computed(() => {
     background: props.modelValue === props.activeValue ? props.activeColor : props.inactiveColor,
     'border-color': props.modelValue === props.activeValue ? props.activeColor : props.inactiveColor
   }
-  return objToStyle(rootStyle)
+  return `${objToStyle(rootStyle)};${props.customStyle}`
 })
 
 const circleStyle = computed(() => {

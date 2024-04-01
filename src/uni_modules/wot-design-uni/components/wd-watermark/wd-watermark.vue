@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-04-05 21:32:56
- * @LastEditTime: 2024-03-14 18:06:38
+ * @LastEditTime: 2024-04-01 20:40:34
  * @LastEditors: weisheng
  * @Description: 水印组件
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-watermark\wd-watermark.vue
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-watermark/wd-watermark.vue
  * 记得注释
 -->
 <template>
@@ -61,7 +61,7 @@ const rootClass = computed(() => {
   if (props.fullScreen) {
     classess = `${classess} is-fullscreen`
   }
-  return classess
+  return `${classess} ${props.customClass}`
 })
 
 /**
@@ -75,7 +75,7 @@ const rootStyle = computed(() => {
   if (waterMarkUrl.value) {
     style['backgroundImage'] = `url('${waterMarkUrl.value}')`
   }
-  return objToStyle(style)
+  return `${objToStyle(style)};${props.customStyle}`
 })
 
 onMounted(() => {

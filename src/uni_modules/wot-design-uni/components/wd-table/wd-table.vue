@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-table ${border ? 'is-border' : ''}`" :style="tableStyle">
+  <view :class="`wd-table ${border ? 'is-border' : ''} ${customClass}`" :style="tableStyle">
     <scroll-view
       :enable-flex="true"
       :throttle="false"
@@ -148,7 +148,7 @@ const tableStyle = computed(() => {
   if (isDef(props.height)) {
     style['max-height'] = addUnit(props.height)
   }
-  return objToStyle(style)
+  return `${objToStyle(style)};${props.customStyle}`
 })
 
 const realWidthStyle = computed(() => {

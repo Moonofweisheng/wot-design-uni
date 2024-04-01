@@ -2,6 +2,7 @@
   <view>
     <wd-picker-view
       :custom-class="customClass"
+      :custom-style="customStyle"
       ref="datePickerview"
       v-model="pickerValue"
       :columns="columns"

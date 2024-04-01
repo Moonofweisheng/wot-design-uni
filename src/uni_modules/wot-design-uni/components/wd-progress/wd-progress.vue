@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-progress ${customClass}`">
+  <view :class="`wd-progress ${customClass}`" :style="customStyle">
     <!--进度条-->
     <view class="wd-progress__outer">
       <view :class="`wd-progress__inner ${progressClass}`" :style="rootStyle"></view>

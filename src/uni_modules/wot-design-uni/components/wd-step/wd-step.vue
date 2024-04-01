@@ -4,7 +4,7 @@
     :class="`wd-step ${customClass} ${currentStatus ? 'is-' + currentStatus : ''} ${canAlignCenter ? 'is-center' : ''}  ${
       vertical ? 'is-vertical' : ''
     }`"
-    :style="styles"
+    :style="rootStyle"
   >
     <view :class="`wd-step__header  ${dot ? 'is-dot' : ''}`">
       <view :class="`wd-step__icon  ${dot ? 'is-dot' : !!icon || $slots.icon ? 'is-icon' : 'is-text'}`">
@@ -45,9 +45,10 @@ export default {
 import { computed } from 'vue'
 import { useParent } from '../composables/useParent'
 import { STEPS_KEY } from '../wd-steps/types'
-import { isDef } from '../common/util'
+import { isDef, objToStyle } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import { stepProps } from './types'
+import type { CSSProperties } from 'vue'
 
 const props = defineProps(stepProps)
 
@@ -62,8 +63,19 @@ const currentStatus = computed(() => {
 const currentTitle = computed(() => {
   return getCurrentTitle(currentStatus.value)
 })
-const styles = computed(() => {
-  return getStyles()
+const rootStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (steps) {
+    const { vertical, space } = steps.props
+    if (vertical) {
+      if (isDef(space)) {
+        style['height'] = space
+      }
+    } else {
+      style['width'] = space || 100 / steps.children.length + '%'
+    }
+  }
+  return `${objToStyle(style)};${props.customStyle}`
 })
 
 const canAlignCenter = computed(() => {
@@ -98,18 +110,6 @@ const childrenLength = computed(() => {
   }
 })
 
-function getStyles() {
-  if (steps) {
-    const { vertical, space } = steps.props
-    if (vertical) {
-      return space ? `height: ${space}` : ''
-    } else {
-      return `width: ${space || 100 / steps.children.length + '%'}`
-    }
-  } else {
-    return ''
-  }
-}
 function getCurrentStatus(index: number) {
   if (props.status) {
     return props.status
