@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.2.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.8...v1.2.9) (2024-04-01)
+
+
+### ✨ Features | 新功能
+
+* ✨ Segmented分段器change事件参数类型扩充为SegmentedOption ([5592bc4](https://github.com/Moonofweisheng/wot-design-uni/commit/5592bc49b9439ef34306741f16c4b5c702d562b2)), closes [#204](https://github.com/Moonofweisheng/wot-design-uni/issues/204)
+
 ### [1.2.8](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.7...v1.2.8) (2024-03-30)
 
 
