@@ -117,7 +117,7 @@ function updateCurrentIndex() {
   } else {
     const value = isObj(props.options[0]) ? props.options[0].value : props.options[0]
     emit('update:value', value)
-    emit('change', { value })
+    emit('change', isObj(props.options[0]) ? props.options[0] : { value })
   }
 }
 
@@ -130,7 +130,7 @@ function handleClick(option: string | number | SegmentedOption, index: number) {
   activeIndex.value = index
   updateActiveStyle()
   emit('update:value', value)
-  emit('change', { value })
+  emit('change', isObj(option) ? option : { value })
 }
 </script>
 

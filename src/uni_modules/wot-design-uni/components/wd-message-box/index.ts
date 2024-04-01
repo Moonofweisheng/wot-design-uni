@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2022-12-14 17:33:21
- * @LastEditTime: 2024-01-26 11:19:42
+ * @LastEditTime: 2024-04-01 12:30:51
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\index.ts
@@ -41,7 +41,7 @@ export function useMessage(selector: string = ''): Message {
   provide(messageOptionKey, messageOption)
 
   const createMethod = (type: MessageType) => {
-    // 优先级：options->toastOptions->defaultOptions
+    // 优先级：options->MessageOptions->defaultOptions
     return (options: MessageOptions | string) => {
       const messageOptions = deepMerge({ type: type }, typeof options === 'string' ? { title: options } : options) as MessageOptions
       if (messageOptions.type === 'confirm' || messageOptions.type === 'prompt') {
