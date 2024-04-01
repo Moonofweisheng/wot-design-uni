@@ -29,26 +29,5 @@ export const stepProps = {
    * 步骤状态，可选值为 'finished'（已完成）、'process'（进行中）、'error'（出错）。
    * 类型: string
    */
-  status: String as PropType<StepStatus>,
-
-  /**
-   * 当使用icon插槽时，需要设置该属性为true。
-   * 类型: boolean
-   * 默认值: false
-   */
-  iconSlot: makeBooleanProp(false),
-
-  /**
-   * 当使用title插槽时，需要设置该属性为true。
-   * 类型: boolean
-   * 默认值: false
-   */
-  titleSlot: makeBooleanProp(false),
-
-  /**
-   * 当使用description插槽时，需要设置该属性为true。
-   * 类型: boolean
-   * 默认值: false
-   */
-  descriptionSlot: makeBooleanProp(false)
+  status: String as PropType<StepStatus>
 }

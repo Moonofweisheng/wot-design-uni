@@ -7,9 +7,9 @@
     :style="styles"
   >
     <view :class="`wd-step__header  ${dot ? 'is-dot' : ''}`">
-      <view :class="`wd-step__icon  ${dot ? 'is-dot' : !!icon || iconSlot ? 'is-icon' : 'is-text'}`">
+      <view :class="`wd-step__icon  ${dot ? 'is-dot' : !!icon || $slots.icon ? 'is-icon' : 'is-text'}`">
         <view v-if="dot" class="wd-step__dot"></view>
-        <slot v-else-if="iconSlot" name="icon" />
+        <slot v-else-if="$slots.icon" name="icon" />
         <wd-icon v-else-if="icon" custom-class="wd-step__icon-inner" :name="icon" />
         <view v-else class="wd-step__icon-outer">
           <wd-icon v-if="currentStatus === 'finished'" name="check-bold" />
@@ -20,12 +20,12 @@
       <view v-if="index < childrenLength - 1" class="wd-step__line"></view>
     </view>
     <view class="wd-step__content">
-      <view :class="`wd-step__title ${descriptionSlot || description ? 'is-description' : ''}`">
-        <slot v-if="titleSlot" name="title" />
+      <view :class="`wd-step__title ${$slots.description || description ? 'is-description' : ''}`">
+        <slot v-if="$slots.title" name="title" />
         <text v-else>{{ currentTitle }}</text>
       </view>
-      <view v-if="descriptionSlot || description" class="wd-step__description">
-        <slot v-if="descriptionSlot" />
+      <view v-if="$slots.description || description" class="wd-step__description">
+        <slot v-if="$slots.description" />
         <text v-else>{{ description }}</text>
       </view>
     </view>

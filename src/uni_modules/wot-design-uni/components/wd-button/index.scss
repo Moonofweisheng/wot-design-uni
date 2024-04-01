@@ -40,13 +40,6 @@
   }
 }
 
-/* #ifdef MP-WEIXIN */
-button {
-  margin: 0;
-}
-/* #endif */
-
-
 @include b(button) {
   position: relative;
   display: inline-flex;

@@ -2,6 +2,10 @@
 
 #  Steps 标签页
 
+:::tip 破坏性更新提醒
+`1.2.10`版本`step`组件废弃了`title-slot`、`icon-slot`和`description-slot`等三个控制插槽使用的字段，新增支持直接使用`title`、`icon`和`description`插槽，同时废弃了`default`插槽。
+:::
+
 
 ## 基本用法
 
@@ -111,20 +115,20 @@ function nextStep() {
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|--------|
 | title | 标题，如果没有则为默认文案。当只有标题而没有描述时，标题的字号会小2号 | string | - | - | - |
-| title-slot | 使用 title 插槽时需要设置该属性 | boolean | - | false | - |
+| <s>title-slot</s> |<s> 使用 title 插槽时需要设置该属性</s>，已废弃，直接使用title插槽即可 | boolean | - | false | - |
 | description | 描述 | string | - | - | - |
-| description-slot | 使用 description 插槽时需要设置该属性 | boolean | - | false | - |
+| <s>description-slot</s> | <s>使用 description 插槽时需要设置该属性</s>，已废弃，直接使用description插槽即可 | boolean | - | false | - |
 | icon | 图标 | string | - | - | - |
-| icon-slot | 使用 icon 插槽时需要设置该属性 | boolean | - | false | - |
+| <s>icon-slot</s> | <s>使用 icon 插槽时需要设置该属性</s>，已废弃，直接使用icon插槽即可 | boolean | - | false | - |
 | status | 步骤状态 | string | finished / process / error | - | - |
 
 ## Step Slot
 
 | name | 说明 | 最低版本 |
 |------|-----|---------|
-| icon | 图标 | - |
-| title | 标题 | - |
-| description | 描述 | - |
+| icon | 图标 | 1.2.10 |
+| title | 标题 | 1.2.10 |
+| description | 描述 | 1.2.10 |
 
 ## Steps 外部样式类
 
