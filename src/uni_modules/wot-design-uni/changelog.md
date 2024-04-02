@@ -1,6 +1,26 @@
 # 更新日志 
 
 
+### [1.2.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.9...v1.2.10) (2024-04-02)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Step组件description插槽无法使用的问题 ([e431294](https://github.com/Moonofweisheng/wot-design-uni/commit/e431294ea2b97858f93513c112f1a7574654a87d))
+* 🐛 修复Toast、MessageBox二次打开时部分参数未重置的问题 ([e2e7d37](https://github.com/Moonofweisheng/wot-design-uni/commit/e2e7d378e577d3d1f5582464bdd9e6c4e6d82e3d))
+
+
+### ✨ Features | 新功能
+
+* ✨ 为所有组件补充customStyle属性 ([964240e](https://github.com/Moonofweisheng/wot-design-uni/commit/964240e2e7f640586a18bec1c11b0359afcf99e2)), closes [#212](https://github.com/Moonofweisheng/wot-design-uni/issues/212)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  更新vitepress至1.0.1 ([da7684f](https://github.com/Moonofweisheng/wot-design-uni/commit/da7684f33ada867a9ba2f22bb1489c804a7d840e))
+* ✏️  修复更新vitepress至1.0.1后友情链接丢失logo的问题 ([1e36c39](https://github.com/Moonofweisheng/wot-design-uni/commit/1e36c39ff7ab814741792ee91a2ee7d9085862f9))
+* ✏️  Steps文档标题调整为步骤条 ([1ea7996](https://github.com/Moonofweisheng/wot-design-uni/commit/1ea79960fd9facef7aa5ef17f0f9bde03daa0d7c))
+
 ### [1.2.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.8...v1.2.9) (2024-04-01)
 
 
