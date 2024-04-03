@@ -60,8 +60,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { debounce, isArray, isEqual, isNumber } from '../../common/util'
+import { computed, onMounted, ref, watch } from 'vue'
+import { debounce, isArray, isEqual, isNumber, requestAnimationFrame } from '../../common/util'
 import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'
 import Month from '../month/month.vue'
 import { monthPanelProps, type MonthInfo, type MonthPanelTimeType, type MonthPanelExpose } from './types'
@@ -152,7 +152,7 @@ const handleChange = debounce((value) => {
  * 使当前日期或者选中日期滚动到可视区域
  */
 function scrollIntoView() {
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     let activeDate: number | null = 0
     if (isArray(props.value)) {
       activeDate = props.value![0]
@@ -174,10 +174,10 @@ function scrollIntoView() {
       top += monthsInfo[index] ? Number(monthsInfo[index].height) : 0
     }
     scrollTop.value = 0
-    nextTick(() => {
+    requestAnimationFrame(() => {
       scrollTop.value = top
     })
-  }, 50)
+  })
 }
 /**
  * 获取时间 picker 的数据
@@ -185,9 +185,6 @@ function scrollIntoView() {
  * @param {string} type 类型，是开始还是结束
  */
 function getTime(value: number | (number | null)[], type?: string) {
-  if (!props.value) {
-    return []
-  }
   if (props.type === 'datetime') {
     return getTimeData({
       date: value as number,
@@ -243,7 +240,6 @@ function setTime(value: number | (number | null)[], type?: MonthPanelTimeType) {
   if (isArray(value) && value[0] && value[1] && type === 'start' && timeType.value === 'start') {
     type = 'end'
   }
-
   timeData.value = getTime(value, type) || []
   timeValue.value = getTimeValue(value, type || '')
   timeType.value = type || ''
