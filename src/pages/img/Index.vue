@@ -41,7 +41,9 @@
 <script lang="ts" setup>
 import { joy } from '../images/joy'
 import img from '../images/jd.png'
-const modes = [
+import type { ImageMode } from '@/uni_modules/wot-design-uni/components/wd-img/types'
+
+const modes: ImageMode[] = [
   'top left',
   'top right',
   'bottom left',
