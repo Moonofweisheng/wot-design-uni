@@ -14,8 +14,9 @@ export const searchProps = {
    * 是否使用输入框右侧插槽
    * 类型: boolean
    * 默认值: false
+   * @deprecated 该属性已废弃，将在下一个minor版本被移除，直接使用插槽即可
    */
-  userSuffixSlot: makeBooleanProp(false),
+  useSuffixSlot: makeBooleanProp(false),
 
   /**
    * 搜索框占位文本
