@@ -60,7 +60,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, watch } from 'vue'
 import { debounce, isArray, isEqual, isNumber, requestAnimationFrame } from '../../common/util'
 import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'
 import Month from '../month/month.vue'
@@ -136,7 +136,7 @@ watch(
   }
 )
 
-onMounted(() => {
+onBeforeMount(() => {
   scrollIntoView()
 })
 

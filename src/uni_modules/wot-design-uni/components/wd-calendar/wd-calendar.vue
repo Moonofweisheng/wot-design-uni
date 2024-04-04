@@ -117,7 +117,7 @@ export default {
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { dayjs } from '../common/dayjs'
-import { deepClone, isArray, isEqual, padZero } from '../common/util'
+import { deepClone, isArray, isEqual, padZero, requestAnimationFrame } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
@@ -319,7 +319,9 @@ function open() {
   lastCalendarValue.value = deepClone(calendarValue.value)
   lastTab.value = currentTab.value
   lastCurrentType.value = currentType.value
-  scrollIntoView()
+  requestAnimationFrame(() => {
+    scrollIntoView()
+  })
 
   setTimeout(() => {
     if (props.showTypeSwitch) {
@@ -331,7 +333,6 @@ function open() {
 // 对外暴露方法
 function close() {
   pickerShow.value = false
-  scrollIntoView()
   setTimeout(() => {
     calendarValue.value = deepClone(lastCalendarValue.value)
     currentTab.value = lastTab.value

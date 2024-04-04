@@ -31,9 +31,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, nextTick } from 'vue'
+import { computed, ref, onBeforeMount } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
-import { isArray, isNumber } from '../../common/util'
+import { isArray, isNumber, requestAnimationFrame } from '../../common/util'
 import Year from '../year/year.vue'
 import { yearPanelProps, type YearInfo, type YearPanelExpose } from './types'
 
@@ -62,25 +62,12 @@ const years = computed(() => {
 
 const emit = defineEmits(['change'])
 
-onMounted(() => {
+onBeforeMount(() => {
   scrollIntoView()
 })
 
-const requestAnimationFrame = (cb = () => {}) => {
-  return new Promise((resolve, reject) => {
-    uni
-      .createSelectorQuery()
-      .selectViewport()
-      .boundingClientRect()
-      .exec(() => {
-        resolve(true)
-        cb()
-      })
-  })
-}
-
 function scrollIntoView() {
-  requestAnimationFrame().then(() => {
+  requestAnimationFrame(() => {
     let activeDate: number | null = null
     if (isArray(props.value)) {
       activeDate = props.value![0]
@@ -102,7 +89,7 @@ function scrollIntoView() {
       top += yearsInfo[index] ? Number(yearsInfo[index].height) : 0
     }
     scrollTop.value = 0
-    nextTick(() => {
+    requestAnimationFrame(() => {
       scrollTop.value = top
     })
   })
