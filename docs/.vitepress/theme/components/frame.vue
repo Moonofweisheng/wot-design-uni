@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { useRoute, useData } from 'vitepress';
-import { computed, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 const baseUrl = process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
 
 const route = useRoute()
@@ -22,11 +22,22 @@ const href = computed(() => {
 
 const vitepressData = useData()
 
+onMounted(() => {
+  setTimeout(() => {
+    ssendMessage()
+  }, 500);
+})
+
 
 watch(() => vitepressData.isDark.value, () => {
+  ssendMessage()
+})
+
+function ssendMessage(){
   const iFrame: any = document.getElementById('demo')
   iFrame && iFrame.contentWindow.postMessage(vitepressData.isDark.value, href.value)
-})
+
+}
 
 function kebabToCamel(input: string): string {
   return input.replace(/-([a-z])/g, (match, group) => group.toUpperCase());
