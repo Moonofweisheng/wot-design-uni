@@ -3,7 +3,7 @@
  * @Date: 2023-11-02 18:57:41
  * @LastEditTime: 2023-11-02 19:02:24
  * @LastEditors: weisheng
- * @Description: 
+ * @Description:
  * @FilePath: \wot-design-uni\src\pages\img\Index.vue
  * 记得注释
 -->
@@ -31,6 +31,10 @@
         <wd-img width="100%" height="27vw" :radius="5" :src="joy" :mode="mode" />
         <view class="center">{{ mode }}</view>
       </view>
+    </demo-block>
+
+    <demo-block title="可预览">
+      <wd-img :width="100" :height="100" :src="joy" :enable-preview="true" />
     </demo-block>
   </page-wraper>
 </template>

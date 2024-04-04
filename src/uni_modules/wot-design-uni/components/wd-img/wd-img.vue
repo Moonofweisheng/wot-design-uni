@@ -46,6 +46,11 @@ function handleError(event: Event) {
   emit('error', event)
 }
 function handleClick() {
+  if (props.enablePreview && props.src) {
+    uni.previewImage({
+      urls: [props.src]
+    })
+  }
   emit('click')
 }
 function handleLoad(event: Event) {
