@@ -184,12 +184,33 @@ function onChange(e) {
 }
 ```
 
+## 属性控制切换
+```html
+<wd-swiper :loop="isLoop" :autoplay="false" :list="swiperList" v-model:current="current" />
+<wd-gap />
+<wd-cell-group>
+  <wd-cell title="loop">
+    <wd-switch v-model="isLoop" size="24px" />
+  </wd-cell>
+  <wd-cell title="current" :value="current.toString()" />
+</wd-cell-group>
+<view style="display: flex; justify-content: space-between">
+  <wd-button @click="current--">prev</wd-button>
+  <wd-button type="success" @click="current++">next</wd-button>
+</view>
+```
+
+```javascript
+const current = ref<number>(0)
+const isLoop = ref(false)
+```
+
 ## Attributes
 
 | 参数                 | 说明                                                   | 类型                      | 可选值      | 默认值     | 最低版本 |
 | -------------------- | ------------------------------------------------------ | ------------------------- | ---------- | ---------- | -------- |
 | autoplay             | 是否自动播放                                           | `boolean`                   | -          | true       | 0.1.22   |
-| current              | 当前轮播在哪一项（下标）                               | `number`                    | -          | 0          | 0.1.22   |
+| v-model:current      | 控制当前轮播在哪一项（下标）                               | `number`                    | -          | 0          | 0.1.22   |
 | direction            | 轮播滑动方向                                           | `DirectionType`             | `horizontal, vertical`     | horizontal | 0.1.22   |
 | displayMultipleItems | 同时显示的滑块数量                                     | `number`                    | -          | 1          | 0.1.22   |
 | duration             | 滑动动画时长                                           | `number`                    | -          | 300        | 0.1.22   |
@@ -226,7 +247,7 @@ function onChange(e) {
 ### SwiperIndicatorProps
 
 | 参数                | 说明                       | 类型                   | 可选值                                                                   | 默认值     | 最低版本 |
-| ------------------- | -------------------------- | ---------------------- | ------------------------------------------------------------------------ | ---------- | -------- | 
+| ------------------- | -------------------------- | ---------------------- | ------------------------------------------------------------------------ | ---------- | -------- |
 | current             | 当前轮播在哪一项（下标）   | Number                 | -                                                                        | 0          | 0.1.22   |
 | direction           | 轮播滑动方向               | DirectionType          | `horizontal, vertical`                                                   | horizontal | 0.1.22   |
 | min-show-num        | 小于这个数字不会显示导航器 | Number                 | -                                                                        | 2          | 0.1.22   |
@@ -234,7 +255,7 @@ function onChange(e) {
 | show-controls       | 是否显示控制按钮           | Boolean                | -                                                                        | false      | 0.1.22   |
 | total               | 总共的项数                 | Number                 | -                                                                        | 0          | 0.1.22   |
 | type                | 导航器类型                 | SwiperIndicatorType   | `dots, dots-bar, fraction `                                        | dots       | 0.1.22   |
-| autoplay            | 是否自动播放               | boolean                | -                                                                        | true       | 0.1.22   | 
+| autoplay            | 是否自动播放               | boolean                | -                                                                        | true       | 0.1.22   |
 
 ## Events
 
