@@ -87,6 +87,22 @@
         </template>
       </wd-swiper>
     </demo-block>
+
+    <demo-block title="属性控制切换">
+      <wd-swiper :loop="isLoop" :autoplay="false" :list="swiperList" v-model:current="current" />
+      <wd-gap />
+      <wd-cell-group>
+        <wd-cell title="loop">
+          <wd-switch v-model="isLoop" size="24px" />
+        </wd-cell>
+        <wd-cell title="current" :value="current.toString()" />
+      </wd-cell-group>
+      <view style="display: flex; justify-content: space-between">
+        <wd-button @click="current--">prev</wd-button>
+
+        <wd-button type="success" @click="current++">next</wd-button>
+      </view>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -99,6 +115,10 @@ const swiperList = ref([
   'https://img.yzcdn.cn/vant/cat.jpeg',
   'https://unpkg.com/wot-design-uni-assets/meng.jpg'
 ])
+
+const current = ref<number>(0)
+const isLoop = ref(false)
+
 function handleClick(e: any) {
   console.log(e)
 }

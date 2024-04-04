@@ -46,17 +46,29 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { addUnit, isObj } from '../common/util'
 import { swiperProps, type SwiperList } from './types'
 import type { SwiperNavProps } from '../wd-swiper-nav/types'
 
+const emit = defineEmits(['click', 'change', 'animationfinish', 'update:current'])
 const props = defineProps(swiperProps)
 const navCurrent = ref<number>(0) // 当前滑块
 
-onBeforeMount(() => {
-  navCurrent.value = props.current
-})
+watch(
+  () => props.current,
+  (val) => {
+    if (val < 0) {
+      props.loop ? goToEnd() : goToStart()
+    } else if (val >= props.list.length) {
+      props.loop ? goToStart() : goToEnd()
+    } else {
+      go(val)
+    }
+    emit('update:current', navCurrent.value)
+  },
+  { immediate: true }
+)
 
 const swiperIndicator = computed(() => {
   const { list, direction, indicatorPosition, indicator } = props
@@ -74,7 +86,17 @@ const swiperIndicator = computed(() => {
   return swiperIndicator
 })
 
-const emit = defineEmits(['click', 'change', 'animationfinish'])
+function go(index: number) {
+  navCurrent.value = index
+}
+
+function goToStart() {
+  navCurrent.value = 0
+}
+
+function goToEnd() {
+  navCurrent.value = props.list.length - 1
+}
 
 /**
  * 是否为当前滑块的前一个滑块
