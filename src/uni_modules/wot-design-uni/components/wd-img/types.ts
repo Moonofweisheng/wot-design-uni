@@ -30,5 +30,9 @@ export const imgProps = {
   /**
    * 圆角大小，默认单位为px
    */
-  radius: numericProp
+  radius: numericProp,
+  /**
+   * 是否允许预览
+   */
+  enablePreview: makeBooleanProp(false)
 }

@@ -58,6 +58,19 @@ mode为小程序原生属性，参考[微信小程序image官方文档](https://
 />
 ```
 
+## 可预览
+
+通过设置`enable-preview`属性可以支持点击预览，底层调用uni.previewImage来实现预览效果
+
+```html
+<wd-img
+  :width="100"
+  :height="100"
+  :src="joy"
+  :enable-preview="true"
+/>
+```
+
 ## Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
@@ -68,6 +81,7 @@ mode为小程序原生属性，参考[微信小程序image官方文档](https://
 | mode | 填充模式 | string | 'top left' / 'top right' / 'bottom left' / 'bottom right' / 'right' / 'left' / 'center' / 'bottom' / 'top' / 'heightFix' / 'widthFix' / 'aspectFill' / 'aspectFit' / 'scaleToFill' | 'scaleToFill' | - |
 | round | 是否显示为圆形 | boolean | - | false | - |
 | radius | 圆角大小，默认单位为px | number / string | - | - | - |
+| enable-preview | 是否支持点击预览 | boolean | - | false | - |
 
 ## Events
 
