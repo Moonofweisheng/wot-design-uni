@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type NoticeBarType = 'warning' | 'info' | 'danger' | ''
@@ -7,7 +8,10 @@ export const noticeBarProps = {
   /**
    * 设置通知栏文案
    */
-  text: String,
+  text: {
+    type: [String, Array] as PropType<string | string[]>,
+    default: ''
+  },
   /**
    * 设置通知栏类型，可选值为：'warning' | 'info' | 'danger'
    */

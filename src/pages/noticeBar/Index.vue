@@ -3,7 +3,7 @@
  * @Date: 2023-06-13 11:47:12
  * @LastEditTime: 2023-08-07 20:24:04
  * @LastEditors: weisheng
- * @Description: 
+ * @Description:
  * @FilePath: \wot-design-uni\src\pages\noticeBar\Index.vue
  * 记得注释
 -->
@@ -57,9 +57,28 @@
         background-color="#f0f9eb"
       ></wd-notice-bar>
     </demo-block>
+
+    <demo-block title="多文本轮播">
+      <wd-notice-bar :text="textArray" prefix="check-outline" @next="onNext" />
+    </demo-block>
   </page-wraper>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const textArray = ref([
+  '欢迎使用wot design uni',
+  '该组件库基于uniapp ->Vue3, ts构建',
+  '项目地址：https://github.com/Moonofweisheng/wot-design-uni',
+  '我们的目标是打造最强uniapp组件库',
+  '诚挚邀请大家共同建设'
+])
+
+const onNext = (index: number) => {
+  console.log('展示下一条，index: ', index)
+  console.log('文本是：' + textArray.value[index])
+}
+</script>
 <style lang="scss" scoped>
 :deep(.prefix) {
   font-size: 18px;

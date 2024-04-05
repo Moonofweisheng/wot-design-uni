@@ -79,20 +79,45 @@
 />
 ```
 
+## 多文本轮播
+将一个`string[]`传递给`text`属性，即可开启多文本轮播，并且会在展示下一条文本时触发`next`事件，该事件接收一个`number`参数，代表的是当前展示的文本数组索引
+
+```html
+<wd-notice-bar :text="textArray" prefix="check-outline" @next="onNext" />
+```
+
+```javascript
+import { ref } from 'vue'
+
+const textArray = ref([
+  '欢迎使用wot design uni',
+  '该组件库基于uniapp ->Vue3, ts构建',
+  '项目地址：https://github.com/Moonofweisheng/wot-design-uni',
+  '我们的目标是打造最强uniapp组件库',
+  '诚挚邀请大家共同建设'
+])
+
+const onNext = (index: number) => {
+  console.log('展示下一条，index: ', index)
+  console.log('文本是：' + textArray.value[index])
+}
+```
+
+
 ## Attributes
 
 | 参数             | 说明                                   | 类型    | 可选值                  | 默认值  | 最低版本 |
 | ---------------- | -------------------------------------- | ------- | ----------------------- | ------- | -------- |
-| text             | 设置通知栏文案                         | string  | -                       | -       | -        |
-| type             | 设置通知栏类型                         | string  | info / warning / danger | warning | -        |
-| prefix           | 设置左侧图标，使用 icon 章节中的图标名 | string  | -                       | -       | -        |
-| scrollable       | 是否可以滚动                           | boolean | -                       | true    | -        |
-| delay            | 滚动动画初始延时，单位 秒(s)           | number  | -                       | 1       | -        |
-| speed            | 滚动速度，单位 px/s                    | number  | -                       | 50      | -        |
-| closable         | 是否可以关闭                           | boolean | -                       | false   | -        |
-| wrapable         | 是否换行展示                           | boolean | -                       | false   | -        |
-| color            | 文字、图标颜色                         | string  | -                       | -       | -        |
-| background-color | 背景颜色                               | string  | -                       | -       | -        |
+| text             | 设置通知栏文案                         | `string` `string[]`  | -                       | -       | -        |
+| type             | 设置通知栏类型                         | `string`  | info / warning / danger | warning | -        |
+| prefix           | 设置左侧图标，使用 icon 章节中的图标名 | `string`  | -                       | -       | -        |
+| scrollable       | 是否可以滚动                           | `boolean` | -                       | true    | -        |
+| delay            | 滚动动画初始延时，单位 秒(s)           | `number`  | -                       | 1       | -        |
+| speed            | 滚动速度，单位 px/s                    | `number`  | -                       | 50      | -        |
+| closable         | 是否可以关闭                           | `boolean` | -                       | false   | -        |
+| wrapable         | 是否换行展示                           | `boolean` | -                       | false   | -        |
+| color            | 文字、图标颜色                         | `string`  | -                       | -       | -        |
+| background-color | 背景颜色                               | `string`  | -                       | -       | -        |
 
 ## Events
 
