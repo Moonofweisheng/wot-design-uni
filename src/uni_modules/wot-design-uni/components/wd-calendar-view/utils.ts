@@ -1,18 +1,21 @@
+import { computed } from 'vue'
 import { dayjs } from '../common/dayjs'
 import { isArray, isFunction, padZero } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import type { CalendarDayType, CalendarItem, CalendarTimeFilter, CalendarType } from './types'
 const { translate } = useTranslate('calendar-view')
 
-const weeks: string[] = [
-  translate('weeks.sun'),
-  translate('weeks.mon'),
-  translate('weeks.tue'),
-  translate('weeks.wed'),
-  translate('weeks.thu'),
-  translate('weeks.fri'),
-  translate('weeks.sat')
-]
+const weeks = computed(() => {
+  return [
+    translate('weeks.sun'),
+    translate('weeks.mon'),
+    translate('weeks.tue'),
+    translate('weeks.wed'),
+    translate('weeks.thu'),
+    translate('weeks.fri'),
+    translate('weeks.sat')
+  ]
+})
 
 /**
  * 比较两个时间的日期是否相等
@@ -110,7 +113,7 @@ export function getWeekLabel(index: number) {
     index = index % 7
   }
 
-  return weeks[index]
+  return weeks.value[index]
 }
 
 /**

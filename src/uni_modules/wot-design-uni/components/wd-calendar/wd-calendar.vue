@@ -206,13 +206,26 @@ const calendarValue = ref<null | number | number[]>(null)
 const lastCalendarValue = ref<null | number | number[]>(null)
 const panelHeight = ref<number>(338)
 const confirmBtnDisabled = ref<boolean>(true)
-const showValue = ref<string>('')
 const currentTab = ref<number>(0)
 const lastTab = ref<number>(0)
 const currentType = ref<CalendarType>('date')
-const lastCurrentType = ref<CalendarType>('date')
+const lastCurrentType = ref<CalendarType>()
 const inited = ref<boolean>(false)
-const rangeLabel = ref<Array<string>>([])
+
+const rangeLabel = computed(() => {
+  const [start, end] = deepClone(isArray(calendarValue.value) ? calendarValue.value : [])
+  return [start, end].map((item, index) => {
+    return (props.innerDisplayFormat || formatRange)(item, index === 0 ? 'start' : 'end', currentType.value)
+  })
+})
+
+const showValue = computed(() => {
+  if ((!isArray(props.modelValue) && props.modelValue) || (isArray(props.modelValue) && props.modelValue.length)) {
+    return (props.displayFormat || defaultDisplayFormat)(props.modelValue, lastCurrentType.value || currentType.value)
+  } else {
+    return ''
+  }
+})
 
 const cell = useCell()
 
@@ -225,11 +238,6 @@ watch(
     if (isEqual(val, oldVal)) return
     calendarValue.value = deepClone(val)
     confirmBtnDisabled.value = getConfirmBtnStatus(val)
-    setShowValue()
-
-    if (props.type.indexOf('range') > -1) {
-      setInnerLabel()
-    }
   },
   {
     immediate: true
@@ -248,12 +256,6 @@ watch(
     }
     panelHeight.value = props.showConfirm ? 338 : 400
     currentType.value = deepClone(newValue)
-
-    setShowValue()
-
-    if (props.type.indexOf('range') > -1) {
-      setInnerLabel()
-    }
   },
   {
     deep: true,
@@ -336,7 +338,7 @@ function close() {
   setTimeout(() => {
     calendarValue.value = deepClone(lastCalendarValue.value)
     currentTab.value = lastTab.value
-    currentType.value = lastCurrentType.value
+    currentType.value = lastCurrentType.value || 'date'
     confirmBtnDisabled.value = getConfirmBtnStatus(lastCalendarValue.value)
   }, 250)
   emit('cancel')
@@ -370,10 +372,6 @@ function handleChange({ value }: { value: number | number[] | null }) {
     value
   })
 
-  if (props.type.indexOf('range') > -1) {
-    setInnerLabel()
-  }
-
   if (!props.showConfirm && !confirmBtnDisabled.value) {
     handleConfirm()
   }
@@ -392,25 +390,13 @@ function handleConfirm() {
 }
 function onConfirm() {
   pickerShow.value = false
+  lastCurrentType.value = currentType.value
   emit('update:modelValue', calendarValue.value)
   emit('confirm', {
     value: calendarValue.value
   })
-  setShowValue()
 }
-function setInnerLabel() {
-  const [start, end] = deepClone(isArray(calendarValue.value) ? calendarValue.value : [])
-  rangeLabel.value = [start, end].map((item, index) => {
-    return (props.innerDisplayFormat || formatRange)(item, index === 0 ? 'start' : 'end', currentType.value)
-  })
-}
-function setShowValue() {
-  if ((!isArray(calendarValue.value) && calendarValue.value) || (isArray(calendarValue.value) && calendarValue.value.length)) {
-    showValue.value = (props.displayFormat || defaultDisplayFormat)(calendarValue.value, currentType.value)
-  } else {
-    showValue.value = ''
-  }
-}
+
 function handleShortcutClick(index: number) {
   if (props.onShortcutsClick && typeof props.onShortcutsClick === 'function') {
     calendarValue.value = deepClone(
@@ -420,10 +406,6 @@ function handleShortcutClick(index: number) {
       })
     )
     confirmBtnDisabled.value = getConfirmBtnStatus(calendarValue.value)
-
-    if (props.type.indexOf('range') > -1) {
-      setInnerLabel()
-    }
   }
 
   if (!props.showConfirm) {
