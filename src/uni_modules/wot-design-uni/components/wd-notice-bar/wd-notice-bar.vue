@@ -8,8 +8,7 @@
     <slot v-else name="prefix"></slot>
     <view class="wd-notice-bar__wrap">
       <view class="wd-notice-bar__content" :animation="animation" @transitionend="animationEnd">
-        {{ text }}
-        <slot></slot>
+        <slot>{{ currentText }}</slot>
       </view>
     </view>
     <wd-icon v-if="closable" custom-class="wd-notice-bar__suffix" size="18px" name="close-bold" @click="handleClose"></wd-icon>
@@ -33,22 +32,22 @@ import { getRect } from '../common/util'
 import { getCurrentInstance } from 'vue'
 import { nextTick } from 'vue'
 import { noticeBarProps } from './types'
+import { computed } from 'vue'
 
 const $wrap = '.wd-notice-bar__wrap'
 const $content = '.wd-notice-bar__content'
 
 const props = defineProps(noticeBarProps)
 
-const firstPlay = ref<boolean>(true)
 const wrapWidth = ref<number>(0)
-const contentWidth = ref<number>(0)
 const show = ref<boolean>(true)
-const duration = ref<number>(0)
 const animation = ref<string>('')
 const noticeBarClass = ref<string>('')
+const currentIndex = ref(0)
+const textArray = computed(() => (Array.isArray(props.text) ? props.text : [props.text]))
+const currentText = computed(() => textArray.value[currentIndex.value])
 
 const { proxy } = getCurrentInstance() as any
-
 watch(
   [() => props.type, () => props.scrollable, () => props.wrapable],
   () => {
@@ -60,9 +59,7 @@ watch(
 watch(
   [() => props.text],
   () => {
-    nextTick(() => {
-      scroll()
-    })
+    nextTick(() => scroll())
   },
   { deep: true, immediate: true }
 )
@@ -71,7 +68,7 @@ onBeforeMount(() => {
   computedClass()
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'next'])
 
 function computedClass() {
   const { type, wrapable, scrollable } = props
@@ -104,18 +101,36 @@ function scroll() {
 
     const wrapWidthTemp = wrapRect.width
     const contentWidthTemp = contentRect.width
-    if (props.scrollable && contentWidthTemp > wrapWidthTemp) {
+    if (props.scrollable) {
       animation.value = initAnimation((contentWidthTemp / props.speed) * 1000, props.delay * 1000, -contentWidthTemp)
       wrapWidth.value = wrapWidthTemp
-      contentWidth.value = contentWidthTemp
     }
   })
 }
 
+function next() {
+  if (currentIndex.value >= textArray.value.length - 1) {
+    currentIndex.value = 0
+  } else {
+    currentIndex.value++
+  }
+  emit('next', currentIndex.value)
+}
+
 function animationEnd() {
   animation.value = initAnimation(0, 0, wrapWidth.value)
+
   const timer = setTimeout(() => {
-    animation.value = initAnimation(((wrapWidth.value + contentWidth.value) / props.speed) * 1000, 0, -contentWidth.value)
+    next() // 更换下一条文本
+
+    nextTick(() => {
+      // 因为文本会发生变化，所以contentWidth每一次都需要查询
+      getRect($content, false, proxy).then((rect) => {
+        if (!rect) return
+        animation.value = initAnimation(((wrapWidth.value + rect.width!) / props.speed) * 1000, props.delay * 1000, -rect.width!)
+      })
+    })
+
     clearTimeout(timer)
   }, 20)
 }
