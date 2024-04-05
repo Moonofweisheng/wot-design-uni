@@ -13,7 +13,7 @@
 `action` 设置图片上传的地址；
 
 ```html
-<wd-upload :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
+<wd-upload :file-list="fileList1" image-mode="aspectFill" :action="action" @change="handleChange1"></wd-upload>
 ```
 
 ```typescript
@@ -214,7 +214,7 @@ function handleChange({ files }) {
 - `formData` 待处理的`formData`
 - `resolve` 函数，用于告知组件是否组装`formData`成功，`resolve(formData)` 表示组装成功。
 
- 
+
 
 ```html
 <wd-upload :file-list="files" :action="host" :build-form-data="buildFormData" @change="handleChange"></wd-upload>
@@ -290,8 +290,8 @@ const buildFormData = ({ file, formData, resolve }) => {
   const key = `20231120/${imageName}` // 图片上传到oss的路径(拼接你的文件夹和文件名)
   const qAk = 'your qAk'
   const qSignAlgorithm = 'your qSignAlgorithm'
-  const qKeyTime = 'your qKeyTime'  
-  const qSignature = 'your qSignature'  
+  const qKeyTime = 'your qKeyTime'
+  const qSignature = 'your qSignature'
   const success_action_status = '200' // 将上传成功状态码设置为200
   formData = {
     ...formData,
@@ -395,6 +395,7 @@ const fileList = ref<any[]>([
 | loading-size     | [加载中图标尺寸](/component/loading)                                                                                                                                           | string                                | -      | 24px                       | -        |
 | use-default-slot | 开启默认唤起项插槽                                                                                                                                                             | boolean                               | -      | false                      | -        |
 | status-key       | file 数据结构中，status 对应的 key                                                                                                                                             | string                                | -      | status                     | -        |
+| image-mode       | 预览图片的mode属性                                                                                                                                             | ImageMode                                | -      | aspectFit                     | -        |
 
 ## file 数据结构
 

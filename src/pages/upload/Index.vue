@@ -6,7 +6,7 @@
     <wd-message-box></wd-message-box>
     <wd-toast id="wd-toast"></wd-toast>
     <demo-block title="基本用法">
-      <wd-upload :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
+      <wd-upload :file-list="fileList1" image-mode="aspectFill" :action="action" @change="handleChange1"></wd-upload>
     </demo-block>
     <demo-block title="多选上传">
       <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
@@ -57,7 +57,7 @@ import { ref } from 'vue'
 const action: string = 'https://ftf.jd.com/api/uploadImg'
 const fileList1 = ref<any[]>([
   {
-    url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
+    url: 'https://img.yzcdn.cn/vant/cat.jpeg'
   }
 ])
 const fileList2 = ref<any[]>([

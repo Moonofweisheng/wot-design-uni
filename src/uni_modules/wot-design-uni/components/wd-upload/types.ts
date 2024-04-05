@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import type { LoadingType } from '../wd-loading/types'
+import type { ImageMode } from '../wd-img/types'
 
 export interface ChooseFileOption {
   multiple: boolean
@@ -217,7 +218,11 @@ export const uploadProps = {
    */
   loadingSize: makeStringProp('24px'),
   customEvokeClass: makeStringProp(''),
-  customPreviewClass: makeStringProp('')
+  customPreviewClass: makeStringProp(''),
+  /**
+   * 预览图片的mode属性
+   */
+  imageMode: makeStringProp<ImageMode>('aspectFit')
 }
 
 export type UploadProps = ExtractPropTypes<typeof uploadProps>

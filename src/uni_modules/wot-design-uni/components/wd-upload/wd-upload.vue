@@ -4,7 +4,7 @@
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
-        <image :src="file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <image :src="file.url" :mode="imageMode" class="wd-upload__picture" @click="onPreviewImage(index)" />
       </view>
 
       <view v-if="file.status !== 'success'" class="wd-upload__mask wd-upload__status-content">
