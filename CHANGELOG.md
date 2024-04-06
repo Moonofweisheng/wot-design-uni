@@ -1,6 +1,37 @@
 # 更新日志 
 
 
+### [1.2.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.10...v1.2.11) (2024-04-06)
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* ⚡ 优化Calendar日历选择器打开关闭时的动画效果 ([5fb9542](https://github.com/Moonofweisheng/wot-design-uni/commit/5fb9542087c62b8cf6974d2e5f4b5f455b456495))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  `notice-bar`组件补充`event`事件 ([8f11c8a](https://github.com/Moonofweisheng/wot-design-uni/commit/8f11c8a0fe02f3bb0a2e7a67e105f2e33d658477))
+* ✏️  优化文档与演示demo同步暗黑模式的逻辑 ([d057607](https://github.com/Moonofweisheng/wot-design-uni/commit/d0576071ebaeb69828b8c5e789471c3324dabb1f)), closes [#210](https://github.com/Moonofweisheng/wot-design-uni/issues/210)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复ActionSheet丢失props默认值的问题 ([e50cccc](https://github.com/Moonofweisheng/wot-design-uni/commit/e50cccceeccebeb99ca69712b9f64e8a9e5fd23f))
+* 🐛 修复Calendar部分文字运行时切换国际化未应用国际化文字的问题 ([857c922](https://github.com/Moonofweisheng/wot-design-uni/commit/857c922d4f3542cb543b8b99600bf9c48ffa24b9))
+* 🐛 修复Calendar的type为datetime且无默认值时无法在首次选择日期后选择时间的问题 ([3746ba3](https://github.com/Moonofweisheng/wot-design-uni/commit/3746ba304021c56e14414dfaed225c465869a473)), closes [#214](https://github.com/Moonofweisheng/wot-design-uni/issues/214)
+* 🐛 修复search组件suffix插槽无法使用的问题 ([6a4af41](https://github.com/Moonofweisheng/wot-design-uni/commit/6a4af41b93e8edd92e297eaea7c1bc566bfb4d6d))
+
+
+### ✨ Features | 新功能
+
+* ✨ `notice-bar`增加垂直滚动功能 ([93d048b](https://github.com/Moonofweisheng/wot-design-uni/commit/93d048b219d66718880609d6ec9086ce058121fa)), closes [#122](https://github.com/Moonofweisheng/wot-design-uni/issues/122)
+* ✨ `notice-bar`增加多文本轮播功能 ([c2e5e9b](https://github.com/Moonofweisheng/wot-design-uni/commit/c2e5e9bbd86093a5795d93aa23c2bd03d8416767))
+* ✨ `upload`组件增加`mode`属性传递给预览`image` ([acf3f99](https://github.com/Moonofweisheng/wot-design-uni/commit/acf3f999033df7b2925040ff83ad1088d0e59a44)), closes [#203](https://github.com/Moonofweisheng/wot-design-uni/issues/203)
+* ✨ img组件的mode属性增加类型`ImageMode` ([1398982](https://github.com/Moonofweisheng/wot-design-uni/commit/139898209fea4559a69cbaffed2e7b45b91aa107))
+* ✨ img组件增加enable-preview属性来支持点击预览功能 ([e6a3b73](https://github.com/Moonofweisheng/wot-design-uni/commit/e6a3b73142e37547e60b8f1dd1845fc3e9d5d17e)), closes [#193](https://github.com/Moonofweisheng/wot-design-uni/issues/193)
+* ✨ swiper组件增加current属性控制轮播项功能 ([443fd8a](https://github.com/Moonofweisheng/wot-design-uni/commit/443fd8a19e3b73ee61ae6a1692c5409e3d0c0b84)), closes [#211](https://github.com/Moonofweisheng/wot-design-uni/issues/211)
+
 ### [1.2.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.9...v1.2.10) (2024-04-02)
 
 
