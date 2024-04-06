@@ -8,7 +8,15 @@
     <slot v-else name="prefix"></slot>
     <view class="wd-notice-bar__wrap">
       <view class="wd-notice-bar__content" :animation="animation" @transitionend="animationEnd">
-        <slot>{{ currentText }}</slot>
+        <template v-if="direction === 'vertical'">
+          <slot v-for="(item, i) in textArray" :key="item" :name="`vertical-${i}`">
+            <view>{{ item }}</view>
+          </slot>
+          <slot v-if="textArray.length > 1" name="vertical-0">
+            <view>{{ textArray[0] }}</view>
+          </slot>
+        </template>
+        <slot v-else>{{ currentText }}</slot>
       </view>
     </view>
     <wd-icon v-if="closable" custom-class="wd-notice-bar__suffix" size="18px" name="close-bold" @click="handleClose"></wd-icon>
@@ -46,6 +54,9 @@ const noticeBarClass = ref<string>('')
 const currentIndex = ref(0)
 const textArray = computed(() => (Array.isArray(props.text) ? props.text : [props.text]))
 const currentText = computed(() => textArray.value[currentIndex.value])
+const verticalIndex = ref(0)
+const isHorizontal = computed(() => props.direction === 'horizontal')
+const isVertical = computed(() => props.direction === 'vertical')
 
 const { proxy } = getCurrentInstance() as any
 watch(
@@ -71,10 +82,17 @@ onBeforeMount(() => {
 const emit = defineEmits(['close', 'next'])
 
 function computedClass() {
-  const { type, wrapable, scrollable } = props
+  const { type, wrapable, scrollable, direction } = props
+
   let noticeBarClasses: string[] = []
   type && noticeBarClasses.push(`is-${type}`)
-  !wrapable && !scrollable && noticeBarClasses.push('wd-notice-bar--ellipse')
+
+  if (isHorizontal.value) {
+    !wrapable && !scrollable && noticeBarClasses.push('wd-notice-bar--ellipse')
+  } else {
+    noticeBarClasses.push('wd-notice-bar--ellipse')
+  }
+
   wrapable && !scrollable && noticeBarClasses.push('wd-notice-bar--wrap')
   noticeBarClass.value = noticeBarClasses.join(' ')
 }
@@ -83,29 +101,50 @@ function handleClose() {
   emit('close')
 }
 
-function initAnimation(duration: number, delay: number, translate: number) {
+function initAnimation({ duration, delay, translate }: { duration: number; delay: number; translate: number }) {
   const ani = uni
     .createAnimation({
       duration,
       delay
     })
-    .translateX(translate)
+    [isHorizontal.value ? 'translateX' : 'translateY'](translate)
   ani.step()
   return ani.export()
 }
 
-function scroll() {
-  Promise.all([getRect($wrap, false, proxy), getRect($content, false, proxy)]).then((rects) => {
-    const [wrapRect, contentRect] = rects
-    if (!wrapRect || !contentRect || !wrapRect.width || !contentRect.width) return
+function queryRect() {
+  return Promise.all([getRect($wrap, false, proxy), getRect($content, false, proxy)])
+}
 
-    const wrapWidthTemp = wrapRect.width
-    const contentWidthTemp = contentRect.width
-    if (props.scrollable) {
-      animation.value = initAnimation((contentWidthTemp / props.speed) * 1000, props.delay * 1000, -contentWidthTemp)
-      wrapWidth.value = wrapWidthTemp
-    }
+async function verticalAnimate(height: number) {
+  const translate = -(height / (textArray.value.length + 1)) * (currentIndex.value + 1)
+
+  animation.value = initAnimation({
+    duration: props.speed * 1000,
+    delay: props.delay * 1000,
+    translate
   })
+}
+
+async function scroll() {
+  const [wrapRect, contentRect] = await queryRect()
+  if (!wrapRect.width || !contentRect.width || !contentRect.height) return
+
+  wrapWidth.value = wrapRect.width
+
+  if (isHorizontal.value) {
+    if (props.scrollable) {
+      animation.value = initAnimation({
+        duration: (contentRect.width / props.speed) * 1000,
+        delay: props.delay * 1000,
+        translate: -contentRect.width
+      })
+    }
+  } else {
+    if (textArray.value.length > 1) {
+      verticalAnimate(contentRect.height)
+    }
+  }
 }
 
 function next() {
@@ -118,17 +157,40 @@ function next() {
 }
 
 function animationEnd() {
-  animation.value = initAnimation(0, 0, wrapWidth.value)
+  if (isHorizontal.value) {
+    animation.value = initAnimation({
+      duration: 0,
+      delay: 0,
+      translate: wrapWidth.value + 1 // +1容错空间，防止露出来一丢丢
+    })
+  } else {
+    if (++verticalIndex.value >= textArray.value.length) {
+      verticalIndex.value = 0
+      animation.value = initAnimation({
+        duration: 0,
+        delay: 0,
+        translate: 0
+      })
+    }
+  }
 
   const timer = setTimeout(() => {
     next() // 更换下一条文本
 
-    nextTick(() => {
-      // 因为文本会发生变化，所以contentWidth每一次都需要查询
-      getRect($content, false, proxy).then((rect) => {
-        if (!rect) return
-        animation.value = initAnimation(((wrapWidth.value + rect.width!) / props.speed) * 1000, props.delay * 1000, -rect.width!)
-      })
+    nextTick(async () => {
+      // 因为文本会发生变化，所以每一次都需要查询
+      const [_, contentRect] = await queryRect()
+      if (!contentRect.width || !contentRect.height) return
+
+      if (isHorizontal.value) {
+        animation.value = initAnimation({
+          duration: ((wrapWidth.value + contentRect.width) / props.speed) * 1000,
+          delay: props.delay * 1000,
+          translate: -contentRect.width
+        })
+      } else {
+        verticalAnimate(contentRect.height)
+      }
     })
 
     clearTimeout(timer)
