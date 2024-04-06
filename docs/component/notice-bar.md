@@ -80,6 +80,7 @@
 ```
 
 ## 多文本轮播
+
 将一个`string[]`传递给`text`属性，即可开启多文本轮播，并且会在展示下一条文本时触发`next`事件，该事件接收一个`number`参数，代表的是当前展示的文本数组索引
 
 ```html
@@ -94,7 +95,8 @@ const textArray = ref([
   '该组件库基于uniapp ->Vue3, ts构建',
   '项目地址：https://github.com/Moonofweisheng/wot-design-uni',
   '我们的目标是打造最强uniapp组件库',
-  '诚挚邀请大家共同建设'
+  '诚挚邀请大家共同建设',
+  '这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息'
 ])
 
 const onNext = (index: number) => {
@@ -103,35 +105,56 @@ const onNext = (index: number) => {
 }
 ```
 
+## 垂直滚动
+
+1. `direction`传递`vertical`即可开启垂直滚动，目前仅支持一个方向的垂直滚动
+2. `text`为数组时才会进行滚动
+3. 垂直滚动时会提供`vertical-{index}`的插槽，`text`有几个成员就有几个这样的插槽，索引从 0 开始
+4. **插槽内容不应该改变高度，例如设置 height、padding 等可能改变高度的样式，否则会导致滚动不准确**
+
+```html
+<demo-block title="垂直滚动">
+  <wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :speed="0.5" :delay="3" custom-class="space" />
+  <wd-notice-bar prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :speed="0.5" :delay="3" custom-class="space" />
+  <wd-notice-bar prefix="warn-bold" direction="vertical" :text="['', '这是文本内容，index:1', '这是文本内容，index:2']" :speed="0.5" :delay="3">
+    <template #vertical-0>
+      <!-- 插槽内容不应该改变高度，例如设置height、padding等可能改变高度的样式，否则会导致滚动不准确 -->
+      <view style="font-weight: 700">索引为0的插槽</view>
+    </template>
+  </wd-notice-bar>
+</demo-block>
+```
 
 ## Attributes
 
-| 参数             | 说明                                   | 类型    | 可选值                  | 默认值  | 最低版本 |
-| ---------------- | -------------------------------------- | ------- | ----------------------- | ------- | -------- |
-| text             | 设置通知栏文案                         | `string` `string[]`  | -                       | -       | -        |
-| type             | 设置通知栏类型                         | `string`  | info / warning / danger | warning | -        |
-| prefix           | 设置左侧图标，使用 icon 章节中的图标名 | `string`  | -                       | -       | -        |
-| scrollable       | 是否可以滚动                           | `boolean` | -                       | true    | -        |
-| delay            | 滚动动画初始延时，单位 秒(s)           | `number`  | -                       | 1       | -        |
-| speed            | 滚动速度，单位 px/s                    | `number`  | -                       | 50      | -        |
-| closable         | 是否可以关闭                           | `boolean` | -                       | false   | -        |
-| wrapable         | 是否换行展示                           | `boolean` | -                       | false   | -        |
-| color            | 文字、图标颜色                         | `string`  | -                       | -       | -        |
-| background-color | 背景颜色                               | `string`  | -                       | -       | -        |
+| 参数             | 说明                                   | 类型                       | 可选值                  | 默认值       | 最低版本 |
+| ---------------- | -------------------------------------- | -------------------------- | ----------------------- | ------------ | -------- |
+| text             | 设置通知栏文案                         | `string` `string[]`        | -                       | -            | -        |
+| type             | 设置通知栏类型                         | `string`                   | info / warning / danger | warning      | -        |
+| prefix           | 设置左侧图标，使用 icon 章节中的图标名 | `string`                   | -                       | -            | -        |
+| scrollable       | 是否可以滚动                           | `boolean`                  | -                       | true         | -        |
+| delay            | 滚动动画初始延时，单位 秒(s)           | `number`                   | -                       | 1            | -        |
+| speed            | 滚动速度，单位 px/s                    | `number`                   | -                       | 50           | -        |
+| closable         | 是否可以关闭                           | `boolean`                  | -                       | false        | -        |
+| wrapable         | 是否换行展示                           | `boolean`                  | -                       | false        | -        |
+| color            | 文字、图标颜色                         | `string`                   | -                       | -            | -        |
+| background-color | 背景颜色                               | `string`                   | -                       | -            | -        |
+| direction        | 滚动方向                               | `NoticeBarScrollDirection` | `horizontal` `vertical` | `horizontal` | -        |
 
 ## Events
 
-| 事件名称   | 说明           | 参数 | 最低版本 |
-| ---------- | -------------- | ---- | -------- |
-| close | 关闭按钮点击时 | -    | -        |
-| next | 下一次滚动前触发 | index: `number`    | -        |
+| 事件名称 | 说明             | 参数            | 最低版本 |
+| -------- | ---------------- | --------------- | -------- |
+| close    | 关闭按钮点击时   | -               | -        |
+| next     | 下一次滚动前触发 | index: `number` | -        |
 
 ## Slot
 
-| name   | 说明     | 最低版本 |
-| ------ | -------- | -------- |
-| prefix | 前置图标 | -        |
-| suffix | 后置插槽 | -        |
+| name             | 说明                 | 最低版本 |
+| ---------------- | -------------------- | -------- |
+| prefix           | 前置图标             | -        |
+| suffix           | 后置插槽             | -        |
+| vertical-\{index\} | 垂直滚动时提供的插槽 | -        |
 
 ## 外部样式类
 

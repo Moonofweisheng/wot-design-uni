@@ -2,6 +2,7 @@ import type { PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type NoticeBarType = 'warning' | 'info' | 'danger' | ''
+export type NoticeBarScrollDirection = 'horizontal' | 'vertical'
 
 export const noticeBarProps = {
   ...baseProps,
@@ -47,5 +48,9 @@ export const noticeBarProps = {
   /**
    * 背景颜色
    */
-  backgroundColor: String
+  backgroundColor: String,
+  /**
+   * 滚动方向
+   */
+  direction: makeStringProp<NoticeBarScrollDirection>('horizontal')
 }

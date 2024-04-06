@@ -12,6 +12,7 @@
     <demo-block title="基本用法">
       <wd-notice-bar text="这是一条消息提示信息这是一条消息提示信息这是一条消息提示信息" prefix="warn-bold" />
     </demo-block>
+
     <demo-block title="类型修改">
       <wd-notice-bar
         type="danger"
@@ -25,9 +26,11 @@
         prefix="check-outline"
       />
     </demo-block>
+
     <demo-block title="禁止滚动">
       <wd-notice-bar :scrollable="false" text="通知被禁或时段内消息屏蔽可能造成消…" prefix="warn-bold"></wd-notice-bar>
     </demo-block>
+
     <demo-block title="插槽">
       <wd-notice-bar :scrollable="false">
         <template #prefix>
@@ -39,9 +42,11 @@
         </template>
       </wd-notice-bar>
     </demo-block>
+
     <demo-block title="可关闭的">
       <wd-notice-bar text="挂起后，电脑与手机均不会有新客户接入。挂起后，电脑与手机均不会有新客户接入。" closable prefix="warn-bold" />
     </demo-block>
+
     <demo-block title="多行展示">
       <wd-notice-bar
         text="这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息"
@@ -49,6 +54,7 @@
         :scrollable="false"
       />
     </demo-block>
+
     <demo-block title="自定义颜色">
       <wd-notice-bar
         text="这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息"
@@ -61,6 +67,17 @@
     <demo-block title="多文本轮播">
       <wd-notice-bar :text="textArray" prefix="check-outline" @next="onNext" />
     </demo-block>
+
+    <demo-block title="垂直滚动">
+      <wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :speed="0.5" :delay="3" custom-class="space" />
+      <wd-notice-bar prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :speed="0.5" :delay="3" custom-class="space" />
+      <wd-notice-bar prefix="warn-bold" direction="vertical" :text="['', '这是文本内容，index:1', '这是文本内容，index:2']" :speed="0.5" :delay="3">
+        <template #vertical-0>
+          <!-- 插槽内容不应该改变高度，例如设置height、padding等可能改变高度的样式，否则会导致滚动不准确 -->
+          <view style="font-weight: 700">索引为0的插槽</view>
+        </template>
+      </wd-notice-bar>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -71,7 +88,8 @@ const textArray = ref([
   '该组件库基于uniapp ->Vue3, ts构建',
   '项目地址：https://github.com/Moonofweisheng/wot-design-uni',
   '我们的目标是打造最强uniapp组件库',
-  '诚挚邀请大家共同建设'
+  '诚挚邀请大家共同建设',
+  '这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息'
 ])
 
 const onNext = (index: number) => {
