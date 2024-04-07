@@ -25,7 +25,7 @@
         <text v-else>{{ currentTitle }}</text>
       </view>
       <view v-if="$slots.description || description" class="wd-step__description">
-        <slot v-if="$slots.description" name="description"/>
+        <slot v-if="$slots.description" name="description" />
         <text v-else>{{ description }}</text>
       </view>
     </view>

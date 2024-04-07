@@ -12,11 +12,20 @@
 `active` 为步骤进度，为 number 类型，步骤的下标。
 
 ```html
-<wd-steps :active="0">
+<wd-steps :active="active">
   <wd-step />
   <wd-step />
   <wd-step />
 </wd-steps>
+```
+
+```ts
+const active = ref<number>(0)
+
+function nextStep() {
+  active.value = active.value + 1
+}
+
 ```
 
 ## 水平居中
@@ -36,7 +45,7 @@
 可以通过 `title` 和 `description` 设置步骤的标题和描述信息。如果不设置标题，则会使用默认的文案。
 
 ```html
-<wd-steps :active="0" align-center>
+<wd-steps :active="active" align-center>
   <wd-step title="步骤1" description="注册1个账号" />
   <wd-step title="步骤2" description="登录账号并绑定手机" />
   <wd-step title="步骤3" description="完善个人信息" />
