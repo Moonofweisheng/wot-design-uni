@@ -353,6 +353,8 @@ function handleClick(icon: string) {
 }
 </script>
 <style lang="scss" scoped>
+$-light-color: #999;
+
 .wot-theme-dark {
   .icon-list {
     background: $-dark-background2;
@@ -386,8 +388,13 @@ function handleClick(icon: string) {
   padding: 15px 0;
   text-align: center;
 }
+
+:deep(.icon-item-class) {
+  color: $-light-color;
+}
+
 .icon-item-name {
   margin: 10px 0;
-  color: #999;
+  color: $-light-color;
 }
 </style>
