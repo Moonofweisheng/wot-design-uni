@@ -92,6 +92,30 @@ const onInput = (value) => showToast(`${value}`)
 const onDelete = () => showToast('删除')
 ```
 
+## 使用 slot 自定义标题
+
+```html
+<wd-cell title="使用 slot 自定义标题" is-link @click="showKeyBoard" />
+
+<wd-number-keyboard v-model:visible="visible" extra-key="." close-text="完成" @input="onInput" @delete="onDelete">
+  <template #title>
+    <text style="color: red">自定义标题</text>
+  </template>
+</wd-number-keyboard>
+```
+
+```ts
+const { show: showToast } = useToast()
+const visible = ref<boolean>(false)
+
+function showKeyBoard() {
+  visible.value = true
+}
+
+const onInput = (value) => showToast(`${value}`)
+const onDelete = () => showToast('删除')
+```
+
 ## 多个额外按键
 
 当 `mode` 为 `custom` 时，支持以数组的形式配置两个 `extra-key`。
@@ -175,7 +199,6 @@ const onDelete = () => showToast('删除')
 当前`modal`仅控制遮罩是否为透明，`hideOnClickOutside`控制弹窗是否有遮罩，当存在遮罩时，点击遮罩就可以关闭键盘，但是键盘展开时必须点击遮罩关闭当前键盘后才可以再点击别的按钮。也可以关闭`hideOnClickOutside`，手动控制键盘是否展示来实现点击外部时收起键盘，这样更灵活。
 :::
 
-
 ```html
 <wd-cell title="双向绑定" :value="value1" is-link @click="showKeyBoard" />
 <wd-number-keyboard :modal="true" :hide-on-click-outside="true" v-model:visible="visible" @input="onInput" @delete="onDelete" />
@@ -215,6 +238,12 @@ const onDelete = () => showToast('删除')
 | safeAreaInsetBottom | 是否在底部安全区域内     | `boolean`             | -                   | `true`     | 0.1.65   |
 | extraKey            | 额外按键                 | `string` / `string[]` | -                   | -          | 0.1.65   |
 
+## Slot
+
+| name  | 说明 | 类型 | 最低版本 |
+| ----- | ---- | ---- | -------- |
+| title | 标题 | -    | 1.2.12   |
+
 ## Events
 
 | 事件名称 | 说明                           | 参数        | 最低版本 |
@@ -225,8 +254,7 @@ const onDelete = () => showToast('删除')
 
 ## 外部样式类
 
-| 类名         | 说明       | 最低版本 |
-| ------------ | ---------- | -------- |
+| 类名         | 说明         | 最低版本 |
+| ------------ | ------------ | -------- |
 | custom-class | 根节点样式类 | 0.1.65   |
-| custom-style | 根节点样式 | 0.1.65   |
-
+| custom-style | 根节点样式   | 0.1.65   |
