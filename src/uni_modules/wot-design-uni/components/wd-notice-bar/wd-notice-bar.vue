@@ -8,11 +8,11 @@
     <slot v-else name="prefix"></slot>
     <view class="wd-notice-bar__wrap">
       <view class="wd-notice-bar__content" :animation="animation" @transitionend="animationEnd">
-        <template v-if="direction === 'vertical'">
-          <slot v-for="(item, i) in textArray" :key="item" :name="`vertical-${i}`">
+        <template v-if="isVertical">
+          <slot v-for="(item, i) in textArray" :key="item" name="vertical" :item="item" :index="i">
             <view>{{ item }}</view>
           </slot>
-          <slot v-if="textArray.length > 1" name="vertical-0">
+          <slot v-if="textArray.length > 1" name="vertical" :item="textArray[0]" :index="0">
             <view>{{ textArray[0] }}</view>
           </slot>
         </template>

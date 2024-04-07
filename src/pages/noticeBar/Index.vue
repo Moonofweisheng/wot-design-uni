@@ -71,10 +71,10 @@
     <demo-block title="垂直滚动">
       <wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :speed="0.5" :delay="3" custom-class="space" />
       <wd-notice-bar prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :speed="0.5" :delay="3" custom-class="space" />
-      <wd-notice-bar prefix="warn-bold" direction="vertical" :text="['', '这是文本内容，index:1', '这是文本内容，index:2']" :speed="0.5" :delay="3">
-        <template #vertical-0>
+      <wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :speed="0.5" :delay="3">
+        <template #vertical="{ item, index }">
           <!-- 插槽内容不应该改变高度，例如设置height、padding等可能改变高度的样式，否则会导致滚动不准确 -->
-          <view style="font-weight: 700">索引为0的插槽</view>
+          <view style="font-weight: 700; text-decoration: underline">{{ index }}: {{ item }}</view>
         </template>
       </wd-notice-bar>
     </demo-block>
