@@ -21,9 +21,8 @@
   flex-direction: column;
   align-items: center;
 
-  @include e(image) {
+  @include edeep(image) {
     margin: 0 auto;
-    display: block;
     width: 160px;
     height: 160px;
   }

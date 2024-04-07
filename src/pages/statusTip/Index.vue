@@ -29,7 +29,14 @@
     </demo-block>
 
     <demo-block title="自定义大小">
-      <wd-status-tip image-size="100" image="search" tip="当前搜索无结果" />
+      <wd-status-tip
+        :image-size="{
+          height: 200,
+          width: 300
+        }"
+        image="search"
+        tip="当前搜索无结果"
+      />
     </demo-block>
 
     <demo-block title="自定义图片">
