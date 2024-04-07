@@ -1,6 +1,27 @@
 # 更新日志 
 
 
+### [1.2.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.11...v1.2.12) (2024-04-07)
+
+
+### ✨ Features | 新功能
+
+* ✨ 增强`notice-bar`组件`vertical`模式下插槽的功能 ([e3daed5](https://github.com/Moonofweisheng/wot-design-uni/commit/e3daed516c958dbb5bff0d4a51d7d16cf9971da1))
+* ✨ NumberKeyboard数字键盘增加名为title的插槽 ([7edc746](https://github.com/Moonofweisheng/wot-design-uni/commit/7edc7462aa43ea800536ac0a464bb6e6c131a20c)), closes [#213](https://github.com/Moonofweisheng/wot-design-uni/issues/213)
+* ✨ StatusTip缺省提示组件新增支持图片mode和自定义图片宽高 ([171c2bb](https://github.com/Moonofweisheng/wot-design-uni/commit/171c2bbdaf9e5ec62fa13fad1079b86daca85d54))
+* ✨ Swiper轮播为image-mode增加ts类型标注 ([9a4ceb2](https://github.com/Moonofweisheng/wot-design-uni/commit/9a4ceb21160dab06a08b39c35e50f69c7c49d023))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修复 step 的 description 插槽不显示的bug ([f979ccc](https://github.com/Moonofweisheng/wot-design-uni/commit/f979cccc05b9956fe0df121fc2e8cbbb24544766))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整演示demo iframe加载完成后再同步当前是否暗黑模式 ([9ab370e](https://github.com/Moonofweisheng/wot-design-uni/commit/9ab370e19395aaef013da8a386dd310c7deec59e)), closes [#210](https://github.com/Moonofweisheng/wot-design-uni/issues/210)
+* ✏️  Steps步骤条增加控制进度的示例 ([8025174](https://github.com/Moonofweisheng/wot-design-uni/commit/80251742f6f5d560d546bd7cd812c35433158a91))
+
 ### [1.2.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.10...v1.2.11) (2024-04-06)
 
 
