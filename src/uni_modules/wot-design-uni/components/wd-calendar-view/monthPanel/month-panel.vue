@@ -69,6 +69,8 @@ import { useTranslate } from '../../composables/useTranslate'
 import type { CalendarItem } from '../types'
 
 const props = defineProps(monthPanelProps)
+const emit = defineEmits(['change', 'pickstart', 'pickend'])
+
 const { translate } = useTranslate('calendar-view')
 
 const scrollTop = ref<number>(0) // 滚动位置
@@ -77,6 +79,12 @@ const timeValue = ref<number[]>([]) // 当前选中的时分秒
 
 const timeType = ref<MonthPanelTimeType>('') // 当前时间类型，是开始还是结束
 const innerValue = ref<string | number | (number | null)[]>('') // 内部保存一个值，用于判断新老值，避免监听器触发
+
+const handleChange = debounce((value) => {
+  emit('change', {
+    value
+  })
+}, 50)
 
 // 时间picker的列数据
 const timeData = computed<Array<CalendarItem[]>>(() => {
@@ -171,14 +179,6 @@ watch(
 onMounted(() => {
   scrollIntoView()
 })
-
-const emit = defineEmits(['change', 'pickstart', 'pickend'])
-
-const handleChange = debounce((value) => {
-  emit('change', {
-    value
-  })
-}, 50)
 
 /**
  * 使当前日期或者选中日期滚动到可视区域

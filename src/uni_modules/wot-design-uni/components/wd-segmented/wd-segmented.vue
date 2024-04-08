@@ -38,6 +38,7 @@ import { segmentedProps, type SegmentedInfo, type SegmentedOption } from './type
 const $item = '.wd-segmented__item'
 
 const props = defineProps(segmentedProps)
+const emit = defineEmits(['update:value', 'change'])
 
 const sectionItemInfo = reactive<SegmentedInfo>({
   width: 0,
@@ -77,8 +78,6 @@ onMounted(() => {
     }
   })
 })
-
-const emit = defineEmits(['update:value', 'change'])
 
 /**
  * @description 更新滑块偏移量

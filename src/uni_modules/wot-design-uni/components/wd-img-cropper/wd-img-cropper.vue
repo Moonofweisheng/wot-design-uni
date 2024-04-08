@@ -96,6 +96,7 @@ let INIT_IMGHEIGHT: null | number | string = null
 const TOP_PERCENT = 0.85
 
 const props = defineProps(imgCropperProps)
+const emit = defineEmits(['imgloaded', 'imgloaderror', 'cancel', 'confirm', 'update:modelValue'])
 
 const { translate } = useTranslate('img-cropper')
 
@@ -249,8 +250,6 @@ const imageStyle = computed(() => {
   }
   return objToStyle(style)
 })
-
-const emit = defineEmits(['imgloaded', 'imgloaderror', 'cancel', 'confirm', 'update:modelValue'])
 
 /**
  * 逆转是否使用动画

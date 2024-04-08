@@ -109,10 +109,14 @@ function observerForChild(child: any) {
   observer.relativeToViewport({ top: -offset }).observe(`#${styckyBoxId.value}`, (result) => {
     scrollHandler(exposed, result)
   })
-  getRect(`#${styckyBoxId.value}`, false, proxy).then((res) => {
-    // 当 wd-sticky-box 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
-    if (Number(res.bottom) <= offset) scrollHandler(exposed, { boundingClientRect: res })
-  })
+  getRect(`#${styckyBoxId.value}`, false, proxy)
+    .then((res) => {
+      // 当 wd-sticky-box 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
+      if (Number(res.bottom) <= offset) scrollHandler(exposed, { boundingClientRect: res })
+    })
+    .catch((res) => {
+      console.log(res)
+    })
 }
 /**
  * @description 为子节点监听 viewport，处理子节点的相对吸顶逻辑

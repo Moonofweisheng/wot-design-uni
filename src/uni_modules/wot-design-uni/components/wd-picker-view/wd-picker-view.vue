@@ -47,13 +47,13 @@ import { deepClone, getType, isArray, isEqual, isFunction, range } from '../comm
 import { formatArray, pickerViewProps, type PickerViewExpose } from './types'
 
 const props = defineProps(pickerViewProps)
+const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
 
 // 格式化之后，用于render 列表的数据
 const formatColumns = ref<Record<string, string>[][]>([])
 const itemHeight = ref<number>(35)
 const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中的下标集合
 const preSelectedIndex = ref<Array<number>>([])
-const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
 
 watch(
   () => props.modelValue,

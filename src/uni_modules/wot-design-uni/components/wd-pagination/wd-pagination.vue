@@ -59,9 +59,9 @@ import { paginationProps } from './types'
 const { translate } = useTranslate('pagination')
 
 const props = defineProps(paginationProps)
-const totalPageNum = ref<number>(0) // 总页数
-
 const emit = defineEmits(['change', 'update:modelValue'])
+
+const totalPageNum = ref<number>(0) // 总页数
 
 watch(
   () => props.totalPage,

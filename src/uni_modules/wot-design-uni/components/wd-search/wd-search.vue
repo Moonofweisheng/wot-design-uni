@@ -60,6 +60,7 @@ import { useTranslate } from '../composables/useTranslate'
 import { searchProps } from './types'
 
 const props = defineProps(searchProps)
+const emit = defineEmits(['update:modelValue', 'change', 'clear', 'search', 'focus', 'blur', 'cancel'])
 
 const { translate } = useTranslate('search')
 
@@ -107,8 +108,6 @@ const coverStyle = computed(() => {
 
   return objToStyle(coverStyle)
 })
-
-const emit = defineEmits(['update:modelValue', 'change', 'clear', 'search', 'focus', 'blur', 'cancel'])
 
 function hackFocus(focus: boolean) {
   showInput.value = focus

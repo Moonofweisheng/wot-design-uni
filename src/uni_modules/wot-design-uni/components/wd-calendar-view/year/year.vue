@@ -38,6 +38,8 @@ import { yearProps } from './types'
 import type { CalendarDayItem, CalendarDayType, CalendarType } from '../types'
 
 const props = defineProps(yearProps)
+const emit = defineEmits(['change'])
+
 const toast = useToast('wd-year')
 const { translate } = useTranslate('calendar-view')
 
@@ -54,8 +56,6 @@ const yearTitle = computed(() => {
     return formatYearTitle(date)
   }
 })
-
-const emit = defineEmits(['change'])
 
 watch(
   [() => props.type, () => props.date, () => props.value, () => props.minDate, () => props.maxDate, () => props.formatter],

@@ -165,6 +165,7 @@ import { useTranslate } from '../composables/useTranslate'
 import { datetimePickerProps, type DatetimePickerExpose } from './types'
 
 const props = defineProps(datetimePickerProps)
+const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
 
 const { translate } = useTranslate('datetime-picker')
 
@@ -311,8 +312,6 @@ const isRequired = computed(() => {
   }
   return props.required || props.rules.some((rule) => rule.required) || formRequired
 })
-
-const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
 
 /**
  * @description 自定义列项筛选规则，对每列单项进行禁用校验，最终返回传入PickerView的columns数组

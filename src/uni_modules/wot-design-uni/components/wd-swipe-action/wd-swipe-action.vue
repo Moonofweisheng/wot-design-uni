@@ -43,6 +43,7 @@ import { getRect } from '../common/util'
 import { swipeActionProps, type SwipeActionPosition, type SwipeActionReason, type SwipeActionStatus } from './types'
 
 const props = defineProps(swipeActionProps)
+const emit = defineEmits(['click', 'update:modelValue'])
 
 const queue = inject<Queue | null>(queueKey, null)
 
@@ -96,8 +97,6 @@ onBeforeUnmount(() => {
     removeFromQueue(proxy)
   }
 })
-
-const emit = defineEmits(['click', 'update:modelValue'])
 
 function changeState(value: SwipeActionStatus, old?: SwipeActionStatus) {
   if (props.disabled) {

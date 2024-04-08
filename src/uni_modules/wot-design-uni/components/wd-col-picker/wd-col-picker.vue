@@ -109,6 +109,7 @@ const $container = '.wd-col-picker__selected-container'
 const $item = '.wd-col-picker__selected-item'
 
 const props = defineProps(colPickerProps)
+const emit = defineEmits(['close', 'update:modelValue', 'confirm'])
 
 const pickerShow = ref<boolean>(false)
 const currentCol = ref<number>(0)
@@ -255,8 +256,6 @@ const isRequired = computed(() => {
   }
   return props.required || props.rules.some((rule) => rule.required) || formRequired
 })
-
-const emit = defineEmits(['close', 'update:modelValue', 'confirm'])
 
 onMounted(() => {
   inited.value = true

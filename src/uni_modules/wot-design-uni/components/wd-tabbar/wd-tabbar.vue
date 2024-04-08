@@ -28,6 +28,8 @@ import { useChildren } from '../composables/useChildren'
 import { TABBAR_KEY, tabbarProps } from './types'
 
 const props = defineProps(tabbarProps)
+const emit = defineEmits(['change', 'update:modelValue'])
+
 const height = ref<number | string>('') // 占位高度
 const { proxy } = getCurrentInstance() as any
 
@@ -61,8 +63,6 @@ onMounted(() => {
     })
   }
 })
-
-const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
  * 子项状态变更

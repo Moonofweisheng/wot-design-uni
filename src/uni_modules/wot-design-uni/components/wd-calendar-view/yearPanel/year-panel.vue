@@ -38,6 +38,7 @@ import Year from '../year/year.vue'
 import { yearPanelProps, type YearInfo, type YearPanelExpose } from './types'
 
 const props = defineProps(yearPanelProps)
+const emit = defineEmits(['change'])
 
 const scrollTop = ref<number>(0) // 滚动位置
 const scrollIndex = ref<number>(0) // 当前显示的年份索引
@@ -62,8 +63,6 @@ const years = computed<YearInfo[]>(() => {
 const title = computed(() => {
   return formatYearTitle(years.value[scrollIndex.value].date)
 })
-
-const emit = defineEmits(['change'])
 
 onMounted(() => {
   scrollIntoView()

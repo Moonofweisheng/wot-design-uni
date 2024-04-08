@@ -94,7 +94,20 @@ import { useTranslate } from '../composables/useTranslate'
 import { inputProps } from './types'
 
 const props = defineProps(inputProps)
-
+const emit = defineEmits([
+  'update:modelValue',
+  'clear',
+  'change',
+  'blur',
+  'focus',
+  'input',
+  'keyboardheightchange',
+  'confirm',
+  'linechange',
+  'clicksuffixicon',
+  'clickprefixicon',
+  'click'
+])
 const { translate } = useTranslate('input')
 
 const showClear = ref<boolean>(false)
@@ -175,21 +188,6 @@ const labelStyle = computed(() => {
       })
     : ''
 })
-
-const emit = defineEmits([
-  'update:modelValue',
-  'clear',
-  'change',
-  'blur',
-  'focus',
-  'input',
-  'keyboardheightchange',
-  'confirm',
-  'linechange',
-  'clicksuffixicon',
-  'clickprefixicon',
-  'click'
-])
 
 onBeforeMount(() => {
   initState()

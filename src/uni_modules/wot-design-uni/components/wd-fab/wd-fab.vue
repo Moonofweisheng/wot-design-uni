@@ -39,6 +39,8 @@ import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside
 import { fabProps, type FabExpose } from './types'
 
 const props = defineProps(fabProps)
+const emit = defineEmits(['update:active'])
+
 const isActive = ref<boolean>(false) // 是否激活状态
 const queue = inject<Queue | null>(queueKey, null)
 const { proxy } = getCurrentInstance() as any
@@ -87,8 +89,6 @@ onBeforeUnmount(() => {
     removeFromQueue(proxy)
   }
 })
-
-const emit = defineEmits(['update:active'])
 
 function handleClick() {
   if (props.disabled) {

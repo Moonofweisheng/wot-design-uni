@@ -20,6 +20,7 @@ import { addUnit, isFunction, objToStyle } from '../common/util'
 import { switchProps } from './types'
 
 const props = defineProps(switchProps)
+const emit = defineEmits(['change', 'update:modelValue'])
 
 const rootClass = computed(() => {
   return `wd-switch ${props.customClass} ${props.disabled ? 'is-disabled' : ''} ${props.modelValue === props.activeValue ? 'is-checked' : ''}`
@@ -41,8 +42,6 @@ const circleStyle = computed(() => {
       : ''
   return circleStyle
 })
-
-const emit = defineEmits(['change', 'update:modelValue'])
 
 function switchValue() {
   if (props.disabled) return

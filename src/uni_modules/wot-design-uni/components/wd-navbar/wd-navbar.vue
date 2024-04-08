@@ -56,6 +56,7 @@ import { getRect, addUnit, isDef, objToStyle } from '../common/util'
 import { navbarProps } from './types'
 
 const props = defineProps(navbarProps)
+const emit = defineEmits(['click-left', 'click-right'])
 
 const height = ref<number | ''>('') // 占位高度
 
@@ -87,8 +88,6 @@ onMounted(() => {
     })
   }
 })
-
-const emit = defineEmits(['click-left', 'click-right'])
 
 function handleClickLeft() {
   if (!props.leftDisabled) {

@@ -20,6 +20,7 @@ import { addUnit, isDef, objToStyle } from '../common/util'
 import { imgProps } from './types'
 
 const props = defineProps(imgProps)
+const emit = defineEmits(['error', 'click', 'load'])
 
 const rootStyle = computed(() => {
   const style: Record<string, string | number> = {}
@@ -39,8 +40,6 @@ const rootStyle = computed(() => {
 const rootClass = computed(() => {
   return `wd-img  ${props.round ? 'is-round' : ''} ${props.customClass}`
 })
-
-const emit = defineEmits(['error', 'click', 'load'])
 
 function handleError(event: Event) {
   emit('error', event)

@@ -21,6 +21,7 @@ import { objToStyle } from '../common/util'
 import { iconProps } from './types'
 
 const props = defineProps(iconProps)
+const emit = defineEmits(['click'])
 
 const isImageUrl = ref<boolean>(false)
 
@@ -47,8 +48,6 @@ const rootStyle = computed(() => {
   }
   return `${objToStyle(style)}; ${props.customStyle}`
 })
-
-const emit = defineEmits(['click'])
 
 function handleClick(event: any) {
   emit('click', event)

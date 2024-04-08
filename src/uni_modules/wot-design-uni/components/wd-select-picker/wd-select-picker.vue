@@ -126,6 +126,7 @@ import { selectPickerProps, type SelectPickerExpose } from './types'
 const { translate } = useTranslate('select-picker')
 
 const props = defineProps(selectPickerProps)
+const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue'])
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
@@ -246,8 +247,6 @@ onBeforeMount(() => {
   selectList.value = valueFormat(props.modelValue)
   filterColumns.value = props.columns
 })
-
-const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue'])
 
 const { proxy } = getCurrentInstance() as any
 

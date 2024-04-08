@@ -51,8 +51,8 @@ import { addUnit, isObj } from '../common/util'
 import { swiperProps, type SwiperList } from './types'
 import type { SwiperNavProps } from '../wd-swiper-nav/types'
 
-const emit = defineEmits(['click', 'change', 'animationfinish', 'update:current'])
 const props = defineProps(swiperProps)
+const emit = defineEmits(['click', 'change', 'animationfinish', 'update:current'])
 const navCurrent = ref<number>(0) // 当前滑块
 
 watch(

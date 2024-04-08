@@ -41,12 +41,12 @@ import { type Queue, queueKey } from '../composables/useQueue'
 import { tooltipProps, type TooltipExpose } from './types'
 
 const props = defineProps(tooltipProps)
+const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
 
 const popover = usePopover()
 const queue = inject<Queue | null>(queueKey, null)
 
 const selector: string = 'tooltip'
-const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
 const { proxy } = getCurrentInstance() as any
 
 watch(

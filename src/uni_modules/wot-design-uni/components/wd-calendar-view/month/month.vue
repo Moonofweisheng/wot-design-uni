@@ -56,10 +56,13 @@ import type { CalendarDayItem, CalendarDayType, CalendarType } from '../types'
 import { monthProps } from './types'
 
 const props = defineProps(monthProps)
+const emit = defineEmits(['change'])
 
 const { translate } = useTranslate('calendar-view')
 
 const days = ref<Array<CalendarDayItem>>([])
+
+const toast = useToast('wd-month')
 
 const itemClass = computed(() => {
   return (monthType: CalendarDayType, value: number | (number | null)[], type: CalendarType) => {
@@ -88,10 +91,6 @@ watch(
     immediate: true
   }
 )
-
-const toast = useToast('wd-month')
-
-const emit = defineEmits(['change'])
 
 function setDays() {
   const dayList: Array<CalendarDayItem> = []

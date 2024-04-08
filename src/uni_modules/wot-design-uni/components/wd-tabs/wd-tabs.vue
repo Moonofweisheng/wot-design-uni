@@ -147,6 +147,7 @@ const $item = '.wd-tabs__nav-item'
 const $container = '.wd-tabs__nav-container'
 
 const props = defineProps(tabsProps)
+const emit = defineEmits(['change', 'disabled', 'click', 'update:modelValue'])
 
 const { translate } = useTranslate('tabs')
 
@@ -280,8 +281,6 @@ onMounted(() => {
     setActive(props.modelValue, true)
   })
 })
-
-const emit = defineEmits(['change', 'disabled', 'click', 'update:modelValue'])
 
 /**
  * @description nav map list 开关

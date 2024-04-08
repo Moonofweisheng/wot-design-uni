@@ -200,6 +200,7 @@ const formatRange = (value: number, rangeType: 'start' | 'end', type: CalendarTy
 }
 
 const props = defineProps(calendarProps)
+const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm'])
 
 const pickerShow = ref<boolean>(false)
 const calendarValue = ref<null | number | number[]>(null)
@@ -211,6 +212,9 @@ const lastTab = ref<number>(0)
 const currentType = ref<CalendarType>('date')
 const lastCurrentType = ref<CalendarType>()
 const inited = ref<boolean>(false)
+const cell = useCell()
+const calendarView = ref()
+const calendarTabs = ref()
 
 const rangeLabel = computed(() => {
   const [start, end] = deepClone(isArray(calendarValue.value) ? calendarValue.value : [])
@@ -226,11 +230,6 @@ const showValue = computed(() => {
     return ''
   }
 })
-
-const cell = useCell()
-
-const calendarView = ref()
-const calendarTabs = ref()
 
 watch(
   () => props.modelValue,
@@ -304,8 +303,6 @@ const range = computed(() => {
     return isRange(type)
   }
 })
-
-const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm'])
 
 function scrollIntoView() {
   calendarView.value && calendarView.value && calendarView.value.$.exposed.scrollIntoView()

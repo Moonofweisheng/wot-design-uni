@@ -35,6 +35,7 @@ import { useTouch } from '../../composables/useTouch'
 import { keyProps } from './types'
 
 const props = defineProps(keyProps)
+const emit = defineEmits(['press'])
 
 const touch = useTouch()
 const active = ref<boolean>(false)
@@ -44,8 +45,6 @@ const keyClass = computed(() => {
     props.type === 'close' ? 'wd-key--close' : ''
   }`
 })
-
-const emit = defineEmits(['press'])
 
 function onTouchStart(event: TouchEvent) {
   touch.touchStart(event)

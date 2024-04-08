@@ -46,6 +46,7 @@ const $wrap = '.wd-notice-bar__wrap'
 const $content = '.wd-notice-bar__content'
 
 const props = defineProps(noticeBarProps)
+const emit = defineEmits(['close', 'next'])
 
 const wrapWidth = ref<number>(0)
 const show = ref<boolean>(true)
@@ -78,8 +79,6 @@ watch(
 onBeforeMount(() => {
   computedClass()
 })
-
-const emit = defineEmits(['close', 'next'])
 
 function computedClass() {
   const { type, wrapable, scrollable, direction } = props

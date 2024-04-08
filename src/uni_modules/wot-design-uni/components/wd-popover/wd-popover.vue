@@ -69,11 +69,11 @@ import { popoverProps, type PopoverExpose } from './types'
 import { isArray } from '../common/util'
 
 const props = defineProps(popoverProps)
+const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
 
 const queue = inject<Queue | null>(queueKey, null)
 
 const selector: string = 'popover'
-const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
 const { proxy } = getCurrentInstance() as any
 
 watch(

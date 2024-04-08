@@ -48,6 +48,7 @@ import { isArray, isDef } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 
 const props = defineProps(collapseProps)
+const emit = defineEmits(['change', 'update:modelValue'])
 
 const { translate } = useTranslate('collapse')
 const contentLineNum = ref<number>(0) // 查看更多的折叠面板，收起时的显示行数
@@ -55,8 +56,6 @@ const contentLineNum = ref<number>(0) // 查看更多的折叠面板，收起时
 const { linkChildren, children } = useChildren(COLLAPSE_KEY)
 
 linkChildren({ props, toggle })
-
-const emit = defineEmits(['change', 'update:modelValue'])
 
 watch(
   () => props.modelValue,

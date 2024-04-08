@@ -66,6 +66,8 @@ const getMonthEndDay = (year: number, month: number) => {
 }
 
 const props = defineProps(datetimePickerViewProps)
+const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
+
 // pickerview
 const datePickerview = ref<PickerViewInstance>()
 // 内部保持时间戳的
@@ -185,14 +187,6 @@ onBeforeMount(() => {
   const innerValue = correctValue(props.modelValue)
   updateColumnValue(innerValue)
 })
-
-// onMounted(() => {
-//   // 手动进行一次render
-//   const innerValue = correctValue(props.modelValue)
-//   updateColumnValue(innerValue)
-// })
-
-const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
 
 /** pickerView触发change事件，同步修改pickerValue */
 function onChange({ value }: { value: string | string[] }) {

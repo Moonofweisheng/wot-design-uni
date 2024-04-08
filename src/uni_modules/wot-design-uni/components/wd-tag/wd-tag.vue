@@ -45,6 +45,7 @@ import { useTranslate } from '../composables/useTranslate'
 import { tagProps } from './types'
 
 const props = defineProps(tagProps)
+const emit = defineEmits(['click', 'close', 'confirm'])
 
 const { translate } = useTranslate('tag')
 
@@ -102,8 +103,6 @@ const textStyle = computed(() => {
   }
   return objToStyle(textStyle)
 })
-
-const emit = defineEmits(['click', 'close', 'confirm'])
 
 function computeTagClass() {
   const { type, plain, round, mark, dynamic, icon, useIconSlot } = props

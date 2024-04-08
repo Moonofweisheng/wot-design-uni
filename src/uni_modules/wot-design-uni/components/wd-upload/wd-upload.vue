@@ -58,6 +58,7 @@ import { useTranslate } from '../composables/useTranslate'
 import { uploadProps, type UploadFileItem } from './types'
 
 const props = defineProps(uploadProps)
+const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
 
 const { translate } = useTranslate('upload')
 
@@ -173,8 +174,6 @@ watch(
     immediate: true
   }
 )
-
-const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
 
 /**
  * @description 初始化文件数据

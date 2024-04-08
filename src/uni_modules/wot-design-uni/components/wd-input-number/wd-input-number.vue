@@ -40,6 +40,7 @@ import { debounce, isDef } from '../common/util'
 import { inputNumberProps } from './types'
 
 const props = defineProps(inputNumberProps)
+const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue'])
 
 const minDisabled = ref<boolean>(false)
 const maxDisabled = ref<boolean>(false)
@@ -70,8 +71,6 @@ watch(
   },
   { immediate: true, deep: true }
 )
-
-const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue'])
 
 function updateBoundary() {
   debounce(() => {

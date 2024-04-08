@@ -76,6 +76,8 @@ import { actionSheetProps, type Panel } from './types'
 import { isArray } from '../common/util'
 
 const props = defineProps(actionSheetProps)
+const emit = defineEmits(['select', 'click-modal', 'cancel', 'closed', 'close', 'open', 'opened', 'update:modelValue'])
+
 const formatPanels = ref<Array<Panel> | Array<Panel[]>>([])
 
 const showPopup = ref<boolean>(false)
@@ -89,8 +91,6 @@ watch(
   },
   { deep: true, immediate: true }
 )
-
-const emit = defineEmits(['select', 'click-modal', 'cancel', 'closed', 'close', 'open', 'opened', 'update:modelValue'])
 
 function isPanelArray() {
   return props.panels.length && !isArray(props.panels[0])

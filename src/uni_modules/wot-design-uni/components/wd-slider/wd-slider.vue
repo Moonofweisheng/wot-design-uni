@@ -62,6 +62,7 @@ import { watch } from 'vue'
 import { sliderProps } from './types'
 
 const props = defineProps(sliderProps)
+const emit = defineEmits(['dragstart', 'dragmove', 'dragend', 'update:modelValue'])
 
 // 存放右滑轮中的所有属性
 const rightSlider = {
@@ -204,8 +205,6 @@ onMounted(() => {
     trackLeft.value = Number(data.left)
   })
 })
-
-const emit = defineEmits(['dragstart', 'dragmove', 'dragend', 'update:modelValue'])
 
 function onTouchStart(event: any) {
   const { disabled, modelValue } = props

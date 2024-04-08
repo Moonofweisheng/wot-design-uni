@@ -65,6 +65,7 @@ import { FORM_KEY } from '../wd-form/types'
 import { cellProps } from './types'
 
 const props = defineProps(cellProps)
+const emit = defineEmits(['click'])
 
 const cell = useCell()
 
@@ -95,8 +96,6 @@ const isRequired = computed(() => {
   }
   return props.required || props.rules.some((rule) => rule.required) || formRequired
 })
-
-const emit = defineEmits(['click'])
 
 /**
  * @description 点击cell的handle

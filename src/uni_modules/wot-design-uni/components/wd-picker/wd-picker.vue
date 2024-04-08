@@ -97,6 +97,7 @@ import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
 
 const props = defineProps(pickerProps)
+const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
 
 const pickerViewWd = ref<any>(null)
 const cell = useCell()
@@ -112,8 +113,6 @@ const displayColumns = ref<Array<string | number | ColumnItem | Array<string | n
 const resetColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 保存之前的 columns，当取消时，将数据源回滚，避免多级联动数据源不正确的情况
 const isPicking = ref<boolean>(false) // 判断pickview是否还在滑动中
 const hasConfirmed = ref<boolean>(false) // 判断用户是否点击了确认按钮
-
-const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
 
 const isLoading = computed(() => {
   return props.loading || innerLoading.value

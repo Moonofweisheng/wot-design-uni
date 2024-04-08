@@ -33,10 +33,10 @@ import { computed, ref, watch } from 'vue'
 import { rateProps } from './types'
 
 const props = defineProps(rateProps)
+const emit = defineEmits(['update:modelValue', 'change'])
 
 const rateList = ref<Array<string>>([])
 const activeValue = ref<string>('')
-const emit = defineEmits(['update:modelValue', 'change'])
 
 const iconStyle = computed(() => {
   return `background:${props.color}; -webkit-background-clip: text; color: transparent`

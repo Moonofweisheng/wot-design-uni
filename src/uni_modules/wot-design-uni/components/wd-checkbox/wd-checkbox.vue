@@ -50,6 +50,8 @@ import { isDef } from '../common/util'
 import { checkboxProps } from './types'
 
 const props = defineProps(checkboxProps)
+const emit = defineEmits(['change', 'update:modelValue'])
+
 const { parent: checkboxGroup, index } = useParent(CHECKBOX_GROUP_KEY)
 
 const isChecked = computed(() => {
@@ -151,8 +153,6 @@ onBeforeMount(() => {
   // eslint-disable-next-line quotes
   if (props.modelValue === null) console.error("checkbox's value must be set")
 })
-
-const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
  * @description 检测checkbox绑定的value是否和其它checkbox的value冲突

@@ -42,6 +42,21 @@ import { curtainProps } from './types'
 
 const props = defineProps(curtainProps)
 
+const emit = defineEmits([
+  'beforeenter',
+  'enter',
+  'afterenter',
+  'beforeleave',
+  'leave',
+  'afterleave',
+  'close',
+  'closed',
+  'click-modal',
+  'load',
+  'error',
+  'click'
+])
+
 const show = ref<boolean>(false)
 const imgSucc = ref<boolean>(true)
 const imgStyle = ref<string>('')
@@ -68,21 +83,6 @@ watch(
     immediate: true
   }
 )
-
-const emit = defineEmits([
-  'beforeenter',
-  'enter',
-  'afterenter',
-  'beforeleave',
-  'leave',
-  'afterleave',
-  'close',
-  'closed',
-  'click-modal',
-  'load',
-  'error',
-  'click'
-])
 
 function computedShowImg() {
   if (props.value && imgSucc.value) {

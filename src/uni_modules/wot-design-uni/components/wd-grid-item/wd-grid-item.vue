@@ -36,6 +36,7 @@ import { isDef } from '../common/util'
 import { gridItemProps } from './types'
 
 const props = defineProps(gridItemProps)
+const emit = defineEmits(['itemclick'])
 
 const style = ref<string>('')
 const gutterContentStyle = ref<string>('')
@@ -52,8 +53,6 @@ const childCount = computed(() => {
     return 0
   }
 })
-
-const emit = defineEmits(['itemclick'])
 
 watch(
   () => childCount.value,

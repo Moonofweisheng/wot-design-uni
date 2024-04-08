@@ -60,6 +60,7 @@ import { isDef } from '../common/util'
 import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
 
 const props = defineProps(dorpMenuItemProps)
+const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
 
 const queue = inject<Queue | null>(queueKey, null)
 const showWrapper = ref<boolean>(false)
@@ -102,8 +103,6 @@ onBeforeUnmount(() => {
     removeFromQueue(proxy)
   }
 })
-
-const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
 
 /**
  * 父组件更改子组件内部

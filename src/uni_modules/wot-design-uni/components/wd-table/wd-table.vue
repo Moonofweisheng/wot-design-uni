@@ -64,6 +64,24 @@ import type { SortDirection, TableColumn } from '../wd-table-col/types'
 import { tableProps } from './types'
 
 const props = defineProps(tableProps)
+const emit = defineEmits(['click', 'sort-method', 'row-click'])
+const reactiveState = reactive({
+  data: props.data,
+  stripe: props.stripe,
+  border: props.border,
+  height: props.height,
+  rowHeight: props.rowHeight,
+  showHeader: props.showHeader,
+  ellipsis: props.ellipsis,
+  scrollLeft: 0,
+  columns: [] as TableColumn[],
+  setRowClick,
+  setColumns
+})
+
+const scroll = debounce(handleScroll, 100, { leading: false }) // 滚动事件
+
+provide('wdTable', reactiveState)
 
 watch(
   () => props.data,
@@ -119,26 +137,6 @@ watch(
   },
   { deep: true }
 )
-
-const reactiveState = reactive({
-  data: props.data,
-  stripe: props.stripe,
-  border: props.border,
-  height: props.height,
-  rowHeight: props.rowHeight,
-  showHeader: props.showHeader,
-  ellipsis: props.ellipsis,
-  scrollLeft: 0,
-  columns: [] as TableColumn[],
-  setRowClick,
-  setColumns
-})
-
-const scroll = debounce(handleScroll, 100, { leading: false }) // 滚动事件
-
-provide('wdTable', reactiveState)
-
-const emit = defineEmits(['click', 'sort-method', 'row-click'])
 
 /**
  * 容器样式

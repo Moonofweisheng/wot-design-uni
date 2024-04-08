@@ -39,6 +39,7 @@ const getClassNames = (name?: string) => {
 }
 
 const props = defineProps(transitionProps)
+const emit = defineEmits(['click', 'before-enter', 'enter', 'before-leave', 'leave', 'after-leave', 'after-enter'])
 
 // 初始化是否完成
 const inited = ref<boolean>(false)
@@ -54,8 +55,6 @@ const currentDuration = ref<number>(300)
 const classes = ref<string>('')
 // 用于控制enter和leave的顺序执行
 const enterPromise = ref<Promise<void> | null>(null)
-
-const emit = defineEmits(['click', 'before-enter', 'enter', 'before-leave', 'leave', 'after-leave', 'after-enter'])
 
 const style = computed(() => {
   return `-webkit-transition-duration:${currentDuration.value}ms;transition-duration:${currentDuration.value}ms;${
