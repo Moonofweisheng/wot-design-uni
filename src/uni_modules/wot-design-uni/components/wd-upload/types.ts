@@ -130,13 +130,19 @@ export const uploadProps = {
    * 类型：array
    * 默认值：['album','camera']
    */
-  sourceType: makeArrayProp<UploadSourceType>(),
+  sourceType: {
+    type: Array as PropType<UploadSourceType[]>,
+    default: () => ['album', 'camera']
+  },
   /**
    * 所选的图片的尺寸，chooseImage接口详细参数，查看官方手册
    * 类型：array
    * 默认值：['original','compressed']
    */
-  sizeType: makeArrayProp<UploadSizeType>(),
+  sizeType: {
+    type: Array as PropType<UploadSizeType[]>,
+    default: () => ['original', 'compressed']
+  },
   /**
    * 文件对应的key，开发者在服务端可以通过这个key获取文件的二进制内容，uploadFile接口详细参数，查看官方手册
    * 类型：string
