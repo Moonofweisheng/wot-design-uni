@@ -3,6 +3,11 @@
 
 .wot-theme-dark {
   @include b(number-keyboard) {
+    background: $-dark-background5;
+
+    @include e(header){
+      color: $-dark-color;
+    }
   }
 }
 
