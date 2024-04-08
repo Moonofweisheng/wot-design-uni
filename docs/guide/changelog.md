@@ -1,6 +1,20 @@
 # 更新日志 
 
 
+### [1.2.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.12...v1.2.13) (2024-04-08)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  demo首页使用Cell组件重构显示样式 ([9ae8a20](https://github.com/Moonofweisheng/wot-design-uni/commit/9ae8a207f3ee8c765e6269b7ef5cb42ff1cd10fd))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复升级vue到3.4.2.之后defineEmits位置不规范导致访问'emit'报错的问题 ([ef574cf](https://github.com/Moonofweisheng/wot-design-uni/commit/ef574cfcb8f805ec308d8364cb887b65394e6108)), closes [#226](https://github.com/Moonofweisheng/wot-design-uni/issues/226)
+* 🐛 修复NumberKeyboard暗黑模式无效的问题 ([b0cc958](https://github.com/Moonofweisheng/wot-design-uni/commit/b0cc958e0fd762915fe427275288a87d0c58ed38))
+* 🐛 修复Upload组件sourceType属性丢失默认值导致在iOS系统微信小程序报错的问题 ([b70991a](https://github.com/Moonofweisheng/wot-design-uni/commit/b70991a1133be77439fc139df9019527ded9b71d)), closes [#227](https://github.com/Moonofweisheng/wot-design-uni/issues/227)
+
 ### [1.2.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.11...v1.2.12) (2024-04-07)
 
 
