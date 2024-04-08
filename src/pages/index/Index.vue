@@ -9,10 +9,7 @@
             <text class="version">@{{ packageConfig.version }}</text>
           </view>
         </view>
-        <view class="page__desc">
-          Wot Design Uni 是移动端 Vue 组件库 Wot Design 的 uni-app 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建 uni-app
-          应用。
-        </view>
+        <view class="page__desc">Wot Design Uni 是一个基于Vue3+TS开发的uni-app组件库，提供60+高质量组件，支持暗黑模式、国际化和自定义主题。</view>
       </view>
       <view class="page__bd">
         <block v-for="(item, index) in list" :key="index">
@@ -23,12 +20,13 @@
             </view>
             <view :class="['kind-list__item-bd', item.open ? 'kind-list__item-bd_show' : '']">
               <view :class="['wd-cells', item.open ? 'wd-cells_show' : '']">
-                <block v-for="(page, j) in item.pages" :key="j">
-                  <navigator :url="`/pages/${page.id}/Index`" class="wd-cell wd-flex wd-cell_access">
-                    <view class="wd-flex__item page-name">{{ page.name }}</view>
-                    <view class="wd-cell__ft wd-tool-right-line-angle"></view>
-                  </navigator>
-                </block>
+                <wd-cell
+                  v-for="(page, j) in item.pages"
+                  :key="j"
+                  is-link
+                  :label="page.name"
+                  @click="handleClick(`/pages/${page.id}/Index`)"
+                ></wd-cell>
               </view>
             </view>
           </view>
@@ -364,6 +362,12 @@ const list = ref([
   }
 ])
 
+function handleClick(url: string) {
+  uni.navigateTo({
+    url
+  })
+}
+
 function kindToggle(id: string) {
   const listValue = list.value
   for (let i = 0, len = listValue.length; i < len; ++i) {
@@ -385,8 +389,8 @@ function kindToggle(id: string) {
   .title {
     color: $-dark-color;
   }
-  .page-name {
-    color: $-dark-color3;
+  :deep(.wd-cell__label) {
+    color: $-dark-color3 !important;
   }
   .kind-list__img {
     filter: invert(100%);
@@ -430,9 +434,7 @@ function kindToggle(id: string) {
 .version {
   font-size: 14px;
 }
-.wd-flex {
-  align-items: center;
-}
+
 .wd-cell_access {
   padding: 15px 20px;
 }
@@ -446,6 +448,9 @@ function kindToggle(id: string) {
   opacity: 0;
   transform: translateY(-50%);
   transition: 0.3s;
+  :deep(.wd-cell__label) {
+    color: rgba(0, 0, 0, 0.65);
+  }
 }
 .wd-cells_show {
   opacity: 1;
