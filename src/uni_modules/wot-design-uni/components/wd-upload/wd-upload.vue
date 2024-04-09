@@ -23,7 +23,7 @@
       <wd-icon v-if="file.status !== 'loading' && !disabled" name="error-fill" custom-class="wd-upload__close" @click="removeFile(index)"></wd-icon>
     </view>
 
-    <view v-if="canUploadMoreFiles" @click="handleChoose">
+    <view v-if="canUploadMoreFiles" :class="['wd-upload__evoke-wrapper', customEvokeWrapperClass]" @click="handleChoose">
       <slot v-if="useDefaultSlot"></slot>
       <!-- 唤起项 -->
       <view v-if="!useDefaultSlot" :class="['wd-upload__evoke', disabled ? 'is-disabled' : '', customEvokeClass]">

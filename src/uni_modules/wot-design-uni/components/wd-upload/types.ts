@@ -224,6 +224,7 @@ export const uploadProps = {
    */
   loadingSize: makeStringProp('24px'),
   customEvokeClass: makeStringProp(''),
+  customEvokeWrapperClass: makeStringProp(''),
   customPreviewClass: makeStringProp(''),
   /**
    * 预览图片的mode属性
