@@ -29,9 +29,8 @@
               </view>
             </block>
             <!--使用插槽-->
-            <slot v-if="useSlot"></slot>
+            <slot>{{ msg }}</slot>
             <!--使用文本-->
-            <block v-else>{{ msg }}</block>
           </view>
         </view>
         <!--action按钮组合-->

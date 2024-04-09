@@ -1,4 +1,13 @@
-import { baseProps, makeBooleanProp } from '../common/props'
+/*
+ * @Author: weisheng
+ * @Date: 2024-04-08 22:34:01
+ * @LastEditTime: 2024-04-09 22:07:26
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-message-box/types.ts
+ * 记得注释
+ */
+import { baseProps } from '../common/props'
 
 export type MessageType = 'alert' | 'confirm' | 'prompt'
 
@@ -95,6 +104,5 @@ export interface Message {
 
 export const messageBoxProps = {
   ...baseProps,
-  useSlot: makeBooleanProp(false),
   selector: String
 }

@@ -124,7 +124,7 @@ function prompt() {
 如果提供的弹框内容不满足需求，可以使用插槽自定义弹框内容。可以通过指定唯一标识`selector`的方式，在一个页面中使用多个`MessageBox`,`useMessage(selector)`会返回一个指定了`selector`的组件实例。
 
 ```html
-<wd-message-box selector="wd-message-box-slot" use-slot>
+<wd-message-box selector="wd-message-box-slot">
   <wd-rate custom-class="custom-rate-class" v-model="rate"/>
 </wd-message-box>
 

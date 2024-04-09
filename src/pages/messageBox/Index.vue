@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <wd-message-box></wd-message-box>
-    <wd-message-box selector="wd-message-box-slot" use-slot>
+    <wd-message-box selector="wd-message-box-slot">
       <wd-rate custom-class="custom-rate-class" v-model="rate" />
     </wd-message-box>
     <demo-block title="alert">
