@@ -23,13 +23,10 @@
       <wd-icon v-if="file.status !== 'loading' && !disabled" name="error-fill" custom-class="wd-upload__close" @click="removeFile(index)"></wd-icon>
     </view>
 
-    <view @click="handleChoose">
+    <view v-if="canUploadMoreFiles" @click="handleChoose">
       <slot v-if="useDefaultSlot"></slot>
       <!-- 唤起项 -->
-      <view
-        v-if="!useDefaultSlot && (!limit || uploadFiles.length < limit)"
-        :class="['wd-upload__evoke', disabled ? 'is-disabled' : '', customEvokeClass]"
-      >
+      <view v-if="!useDefaultSlot" :class="['wd-upload__evoke', disabled ? 'is-disabled' : '', customEvokeClass]">
         <!-- 唤起项图标 -->
         <wd-icon class="wd-upload__evoke-icon" name="fill-camera"></wd-icon>
         <!-- 有限制个数时确认是否展示限制个数 -->
@@ -51,7 +48,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { context, getType, isDef, isEqual, isFunction } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
@@ -63,6 +60,8 @@ const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', '
 const { translate } = useTranslate('upload')
 
 const uploadFiles = ref<UploadFileItem[]>([])
+
+const canUploadMoreFiles = computed(() => !props.limit || uploadFiles.value.length < props.limit)
 
 watch(
   () => props.fileList,
