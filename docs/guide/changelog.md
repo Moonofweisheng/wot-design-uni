@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.2.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.13...v1.2.14) (2024-04-09)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复NoticeBar通知栏在小程序端垂直滚动无效的问题 ([eaeb935](https://github.com/Moonofweisheng/wot-design-uni/commit/eaeb935a299dee3c5e54dee6b926d625a7ef66a8))
+
 ### [1.2.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.12...v1.2.13) (2024-04-08)
 
 
