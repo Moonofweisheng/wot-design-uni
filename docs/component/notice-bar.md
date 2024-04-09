@@ -109,18 +109,10 @@ const onNext = (index: number) => {
 
 1. `direction`传递`vertical`即可开启垂直滚动，目前仅支持一个方向的垂直滚动
 2. `text`为数组时才会进行滚动
-3. 垂直滚动时会提供`vertical`的插槽，该插槽传递`{item: any, index: number}`
-4. <u>**插槽内容不应该改变高度，例如设置 height、padding 等可能改变高度的样式，否则会导致滚动不准确**</u>
 
 ```html
 <wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :speed="0.5" :delay="3" custom-class="space" />
 <wd-notice-bar prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :speed="0.5" :delay="3" custom-class="space" />
-<wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :speed="0.5" :delay="3">
-  <template #vertical="{ item, index }">
-    <!-- 插槽内容不应该改变高度，例如设置height、padding等可能改变高度的样式，否则会导致滚动不准确 -->
-    <view style="font-weight: 700; text-decoration: underline">{{ index }}: {{ item }}</view>
-  </template>
-</wd-notice-bar>
 ```
 
 ## Attributes
@@ -148,11 +140,11 @@ const onNext = (index: number) => {
 
 ## Slot
 
-| name     | 说明                 | 类型                         | 最低版本 |
-| -------- | -------------------- | ---------------------------- | -------- |
-| prefix   | 前置图标             | -                            | -        |
-| suffix   | 后置插槽             | -                            | -        |
-| vertical | 垂直滚动时提供的插槽 | `{item: any, index: number}` | -        |
+| name    | 说明         | 类型 | 最低版本 |
+| ------- | ------------ | ---- | -------- |
+| prefix  | 前置图标     | -    | -        |
+| suffix  | 后置插槽     | -    | -        |
+| default | 通知文本内容 | -    | -        |
 
 ## 外部样式类
 

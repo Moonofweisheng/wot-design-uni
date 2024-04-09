@@ -1,20 +1,12 @@
 <template>
-  <view
-    v-if="show"
-    :class="`wd-notice-bar ${customClass} ${noticeBarClass}`"
-    :style="`color: ${color}; background: ${backgroundColor};${customStyle}`"
-  >
+  <view v-if="show" :class="`wd-notice-bar ${customClass} ${noticeBarClass}`" :style="rootStyle">
     <wd-icon v-if="prefix" custom-class="wd-notice-bar__prefix" size="18px" :name="prefix"></wd-icon>
     <slot v-else name="prefix"></slot>
     <view class="wd-notice-bar__wrap">
-      <view class="wd-notice-bar__content" :animation="animation" @transitionend="animationEnd">
+      <view class="wd-notice-bar__content" :style="animation" @transitionend="animationEnd">
         <template v-if="isVertical">
-          <slot v-for="(item, i) in textArray" :key="item" name="vertical" :item="item" :index="i">
-            <view>{{ item }}</view>
-          </slot>
-          <slot v-if="textArray.length > 1" name="vertical" :item="textArray[0]" :index="0">
-            <view>{{ textArray[0] }}</view>
-          </slot>
+          <view v-for="item in textArray" :key="item">{{ item }}</view>
+          <view v-if="textArray.length > 1">{{ textArray[0] }}</view>
         </template>
         <slot v-else>{{ currentText }}</slot>
       </view>
@@ -35,12 +27,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onBeforeMount, ref, watch } from 'vue'
-import { getRect } from '../common/util'
-import { getCurrentInstance } from 'vue'
-import { nextTick } from 'vue'
+import { ref, watch, nextTick, computed, getCurrentInstance, type CSSProperties } from 'vue'
+import { getRect, isDef, objToStyle } from '../common/util'
 import { noticeBarProps } from './types'
-import { computed } from 'vue'
 
 const $wrap = '.wd-notice-bar__wrap'
 const $content = '.wd-notice-bar__content'
@@ -51,7 +40,6 @@ const emit = defineEmits(['close', 'next'])
 const wrapWidth = ref<number>(0)
 const show = ref<boolean>(true)
 const animation = ref<string>('')
-const noticeBarClass = ref<string>('')
 const currentIndex = ref(0)
 const textArray = computed(() => (Array.isArray(props.text) ? props.text : [props.text]))
 const currentText = computed(() => textArray.value[currentIndex.value])
@@ -59,29 +47,20 @@ const verticalIndex = ref(0)
 const isHorizontal = computed(() => props.direction === 'horizontal')
 const isVertical = computed(() => props.direction === 'vertical')
 
-const { proxy } = getCurrentInstance() as any
-watch(
-  [() => props.type, () => props.scrollable, () => props.wrapable],
-  () => {
-    computedClass()
-  },
-  { deep: true, immediate: true }
-)
+const rootStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (isDef(props.color)) {
+    style.color = props.color
+  }
 
-watch(
-  [() => props.text],
-  () => {
-    nextTick(() => scroll())
-  },
-  { deep: true, immediate: true }
-)
+  if (isDef(props.backgroundColor)) {
+    style.background = props.backgroundColor
+  }
 
-onBeforeMount(() => {
-  computedClass()
+  return `${objToStyle(style)};${props.customStyle}`
 })
-
-function computedClass() {
-  const { type, wrapable, scrollable, direction } = props
+const noticeBarClass = computed(() => {
+  const { type, wrapable, scrollable } = props
 
   let noticeBarClasses: string[] = []
   type && noticeBarClasses.push(`is-${type}`)
@@ -93,22 +72,34 @@ function computedClass() {
   }
 
   wrapable && !scrollable && noticeBarClasses.push('wd-notice-bar--wrap')
-  noticeBarClass.value = noticeBarClasses.join(' ')
-}
+  return noticeBarClasses.join(' ')
+})
+
+const { proxy } = getCurrentInstance() as any
+
+watch(
+  [() => props.text],
+  () => {
+    nextTick(() => scroll())
+  },
+  { deep: true, immediate: true }
+)
+
 function handleClose() {
   show.value = false
   emit('close')
 }
 
 function initAnimation({ duration, delay, translate }: { duration: number; delay: number; translate: number }) {
-  const ani = uni
-    .createAnimation({
-      duration,
-      delay
-    })
-    [isHorizontal.value ? 'translateX' : 'translateY'](translate)
-  ani.step()
-  return ani.export()
+  const style: CSSProperties = {
+    transitionProperty: 'all',
+    transitionDelay: `${delay}s`,
+    transitionDuration: `${duration}s`,
+    transform: `${props.direction === 'vertical' ? 'translateY' : 'translateX'}(${translate}px)`,
+    transitionTimingFunction: 'linear'
+  }
+
+  return objToStyle(style)
 }
 
 function queryRect() {
@@ -117,10 +108,9 @@ function queryRect() {
 
 async function verticalAnimate(height: number) {
   const translate = -(height / (textArray.value.length + 1)) * (currentIndex.value + 1)
-
   animation.value = initAnimation({
-    duration: props.speed * 1000,
-    delay: props.delay * 1000,
+    duration: height / (textArray.value.length + 1) / props.speed,
+    delay: props.delay,
     translate
   })
 }
@@ -134,8 +124,8 @@ async function scroll() {
   if (isHorizontal.value) {
     if (props.scrollable) {
       animation.value = initAnimation({
-        duration: (contentRect.width / props.speed) * 1000,
-        delay: props.delay * 1000,
+        duration: contentRect.width / props.speed,
+        delay: props.delay,
         translate: -contentRect.width
       })
     }
@@ -183,8 +173,8 @@ function animationEnd() {
 
       if (isHorizontal.value) {
         animation.value = initAnimation({
-          duration: ((wrapWidth.value + contentRect.width) / props.speed) * 1000,
-          delay: props.delay * 1000,
+          duration: (wrapWidth.value + contentRect.width) / props.speed,
+          delay: props.delay,
           translate: -contentRect.width
         })
       } else {

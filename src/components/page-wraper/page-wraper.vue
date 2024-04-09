@@ -11,6 +11,7 @@
       <slot />
     </view>
     <wd-notify />
+    <wd-gap height="0" safe-area-bottom></wd-gap>
   </wd-config-provider>
 </template>
 <script lang="ts">
