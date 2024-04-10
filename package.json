@@ -72,6 +72,7 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-3090920231225001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-3090920231225001",
     "element-plus": "^2.3.9",
+    "vite-plugin-compression": "^0.5.1",
     "vitepress": "^1.0.1",
     "vue": "^3.3.4",
     "vue-i18n": "^9.2.2"
@@ -110,6 +111,8 @@
     "standard-version": "^9.5.0",
     "typescript": "^5.3.3",
     "uni-read-pages-vite": "^0.0.6",
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.26.0",
     "vite": "4.0.3",
     "vitest": "^0.30.1",
     "vue-eslint-parser": "^9.1.0",

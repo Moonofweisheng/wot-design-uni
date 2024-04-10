@@ -1,15 +1,51 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-03-20 13:15:11
+ * @LastEditTime: 2024-04-10 11:31:29
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\docs\.vitepress\config.ts
+ * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
  * 记得注释
  */
 import { defineConfig } from 'vitepress';
+import viteCompression from 'vite-plugin-compression'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 
 export default defineConfig({
+  vite: {
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+      viteCompression({
+        verbose: true,
+        disable: false,
+        threshold: 10240,
+        algorithm: 'gzip',
+        ext: '.gz',
+      })
+    ],
+    ssr: { noExternal: ['element-plus'] }
+    // build: {
+    //   terserOptions: {
+    //     compress: {
+    //       //生产环境时移除console
+    //       drop_console: true,
+    //       drop_debugger: true
+    //     }
+    //   },
+    //   //   关闭文件计算
+    //   reportCompressedSize: false,
+    //   //   关闭生成map文件 可以达到缩小打包体积
+    //   sourcemap: false // 这个生产环境一定要关闭，不然打包的产物会很大
+    // }
+  },
   title: `Wot Design Uni`,
   description: '一个参照wot-design打造的uni-app组件库',
   head: [
