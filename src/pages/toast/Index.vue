@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2023-09-20 11:10:44
+ * @LastEditTime: 2024-04-10 21:14:50
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/src/pages/toast/Index.vue
+ * 记得注释
+-->
 <template>
   <view>
     <page-wraper>

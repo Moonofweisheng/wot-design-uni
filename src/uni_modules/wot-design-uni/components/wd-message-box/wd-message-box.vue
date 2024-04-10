@@ -59,9 +59,16 @@ export default {
 
 <script lang="ts" setup>
 import { computed, inject, ref, watch } from 'vue'
-import { messageBoxProps, type InputValidate, type MessageOptions, type MessageType } from './types'
+import {
+  messageBoxProps,
+  type InputValidate,
+  type MessageBeforeConfirmOption,
+  type MessageOptions,
+  type MessageResult,
+  type MessageType
+} from './types'
 import { defaultOptions, messageDefaultOptionKey } from '.'
-import { isDef } from '../common/util'
+import { isDef, isFunction } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 
 const props = defineProps(messageBoxProps)
@@ -83,10 +90,9 @@ const messageOption = inject(messageOptionKey, ref<MessageOptions>(defaultOption
  * 消息文案
  */
 const msg = ref<string>('')
-// eslint-disable-next-line @typescript-eslint/ban-types
-let onConfirm: Function | null = null
-// eslint-disable-next-line @typescript-eslint/ban-types
-let onCancel: Function | null = null
+let onConfirm: ((res: MessageResult) => void) | null = null
+let onCancel: ((res: MessageResult) => void) | null = null
+let beforeConfirm: ((options: MessageBeforeConfirmOption) => void) | null = null
 const show = ref<boolean>(false)
 /**
  * 标题
@@ -189,29 +195,53 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
   if (type.value === 'prompt' && action === 'confirm' && !validate()) {
     return
   }
-  show.value = false
   switch (action) {
     case 'confirm':
-      onConfirm &&
-        onConfirm({
+      if (beforeConfirm) {
+        beforeConfirm({
+          resolve: (isPass) => {
+            if (isPass) {
+              handleConfirm({
+                action: action,
+                value: inputValue.value
+              })
+            }
+          }
+        })
+      } else {
+        handleConfirm({
           action: action,
           value: inputValue.value
         })
+      }
       break
     case 'cancel':
-      onCancel &&
-        onCancel({
-          action: action
-        })
+      handleCancel({
+        action: action
+      })
       break
     default:
-      onCancel &&
-        onCancel({
-          action: 'modal'
-        })
+      handleCancel({
+        action: 'modal'
+      })
       break
   }
 }
+
+function handleConfirm(result: MessageResult) {
+  show.value = false
+  if (isFunction(onConfirm)) {
+    onConfirm(result)
+  }
+}
+
+function handleCancel(result: MessageResult) {
+  show.value = false
+  if (isFunction(onCancel)) {
+    onCancel(result)
+  }
+}
+
 /**
  * @description 如果存在校验规则行为，则进行判断校验是否通过规则。默认不存在校验直接铜鼓。
  * @return {Boolean} 是否通过校验
@@ -269,6 +299,7 @@ function reset(option: MessageOptions) {
     inputValidate = option.inputValidate!
     onConfirm = (option as any).onConfirm
     onCancel = (option as any).onCancel
+    beforeConfirm = option.beforeConfirm!
     inputError.value = option.inputError!
     showErr.value = option.showErr!
     zIndex.value = option.zIndex!

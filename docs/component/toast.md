@@ -84,18 +84,19 @@ toast.close()
 
 ## options
 
-| 参数         | 说明                                                                        | 类型    | 可选值                    | 默认值       | 最低版本 |
-| ------------ | --------------------------------------------------------------------------- | ------- | ------------------------- | ------------ | -------- |
-| msg          | 消息内容                                                                    | string  | -                         | -            | -        |
-| duration     | 持续时间，单位 ms，为 0 时表示不自动关闭                                    | number  | -                         | 2000         | -        |
-| iconName     | 图标类型                                                                    | string  | success / error / warning | -            | -        |
-| iconSize     | 左侧图标尺寸                                                                | string  | -                         | 42px         | -        |
-| iconClass    | 图标类目，自定义图标，可以使用 Icon 章节的那些图标类名，iconName 优先级更高 | string  | -                         | -            | -        |
-| customIcon   | 自定义图标，开启后可以通过 custom-icon-class 类名自定义图标                 | Boolean | -                         | false        | -        |
-| position     | 提示信息框的位置                                                            | string  | top / middle / bottom     | middle       | -        |
-| zIndex       | toast 层级                                                                  | number  | -                         | 100          | -        |
-| loadingType  | [加载中图标类型](/component/loading)                                        | string  | ring                      | outline      | -        |
-| loadingColor | [加载中图标颜色](/component/loading)                                        | string  | -                         | #4D80F0      | -        |
+| 参数         | 说明                                                                        | 类型    | 可选值                    | 默认值                 | 最低版本 |
+| ------------ | --------------------------------------------------------------------------- | ------- | ------------------------- | ---------------------- | -------- |
+| msg          | 消息内容                                                                    | string  | -                         | -                      | -        |
+| duration     | 持续时间，单位 ms，为 0 时表示不自动关闭                                    | number  | -                         | 2000                   | -        |
+| iconName     | 图标类型                                                                    | string  | success / error / warning | -                      | -        |
+| iconSize     | 左侧图标尺寸                                                                | string  | -                         | 42px                   | -        |
+| iconClass    | 图标类目，自定义图标，可以使用 Icon 章节的那些图标类名，iconName 优先级更高 | string  | -                         | -                      | -        |
+| customIcon   | 自定义图标，开启后可以通过 custom-icon-class 类名自定义图标                 | Boolean | -                         | false                  | -        |
+| position     | 提示信息框的位置                                                            | string  | top / middle / bottom     | middle                 | -        |
+| zIndex       | toast 层级                                                                  | number  | -                         | 100                    | -        |
+| loadingType  | [加载中图标类型](/component/loading)                                        | string  | ring                      | outline                | -        |
+| loadingColor | [加载中图标颜色](/component/loading)                                        | string  | -                         | #4D80F0                | -        |
+| cover        | 是否存在一个透明遮罩                                                        | boolean | -                         | `loading`时默认为 true | 1.2.15   |
 
 ## Methods
 

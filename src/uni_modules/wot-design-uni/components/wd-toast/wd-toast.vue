@@ -1,4 +1,5 @@
 <template>
+  <wd-overlay v-if="cover" :z-index="zIndex" lock-scroll :show="show" custom-style="background-color: transparent;pointer-events: auto;"></wd-overlay>
   <wd-transition name="fade" :show="show" :custom-style="transitionStyle">
     <view :class="rootClass">
       <!--iconName优先级更高-->
@@ -31,7 +32,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, inject, onBeforeMount, ref, watch } from 'vue'
+import { computed, inject, onBeforeMount, ref, watch, type CSSProperties } from 'vue'
 import base64 from '../common/base64'
 import { defaultOptions, toastDefaultOptionKey, toastIcon } from '.'
 import { toastProps, type ToastLoadingType, type ToastOptions } from './types'
@@ -49,6 +50,7 @@ const loadingType = ref<ToastLoadingType>('outline')
 const loadingColor = ref<string>('#4D80F0')
 const iconSize = ref<number>(42)
 const svgStr = ref<string>('') // 图标
+const cover = ref<boolean>(false) // 是否存在遮罩层
 
 const toastOptionKey = props.selector ? toastDefaultOptionKey + props.selector : toastDefaultOptionKey
 const toastOption = inject(toastOptionKey, ref<ToastOptions>(defaultOptions)) // toast选项
@@ -80,8 +82,15 @@ watch(
 /**
  * 动画自定义样式
  */
+const isLoading = computed(() => {
+  return iconName.value === 'loading'
+})
+
+/**
+ * 动画自定义样式
+ */
 const transitionStyle = computed(() => {
-  const style: Record<string, string | number> = {
+  const style: CSSProperties = {
     'z-index': zIndex.value,
     position: 'fixed',
     top: '50%',
@@ -97,7 +106,7 @@ const transitionStyle = computed(() => {
  * 加载自定义样式
  */
 const loadingStyle = computed(() => {
-  const style: Record<string, string | number> = {
+  const style: CSSProperties = {
     display: 'inline-block',
     'margin-right': '16px'
   }
@@ -137,6 +146,7 @@ function reset(option: ToastOptions) {
       loadingType.value = isDef(option.loadingType!) ? option.loadingType! : 'outline'
       loadingColor.value = isDef(option.loadingColor!) ? option.loadingColor! : '#4D80F0'
       iconSize.value = isDef(option.iconSize!) ? option.iconSize! : 42
+      cover.value = isDef(option.cover!) ? option.cover! : false
     }
   }
 }
