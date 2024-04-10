@@ -158,6 +158,42 @@ function withSlot() {
 }
 ```
 
+## 确认前置处理
+
+设置 `beforeConfirm` 函数，在用户选择图片点击确认后，会执行 `beforeConfirm` 函数，接收 { resolve }，开发者可以在确认前进行处理，并通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 `boolean` 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会完成确认操作。
+
+```html
+<wd-toast />
+<wd-message-box />
+<wd-button @click="beforeConfirm">beforeConfirm</wd-button>
+```
+```typescript
+import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
+const message = useMessage()
+const toast = useToast()
+
+function beforeConfirm() {
+  message
+    .confirm({
+      msg: '是否删除',
+      title: '提示',
+      beforeConfirm: ({ resolve }) => {
+        toast.loading('删除中...')
+        setTimeout(() => {
+          toast.close()
+          resolve(true)
+          toast.success('删除成功')
+        }, 2000)
+      }
+    })
+    .then(() => {})
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
+```
+
 ---
 
 弹框在点击确定和取消按钮时，会返回一个 promise 对象，用 then 接收“确定”按钮事件，用 catch 接收“取消”按钮事件。传入的 action 值为:'confirm'、'cancel'、'modal'。

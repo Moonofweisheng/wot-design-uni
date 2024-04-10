@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-06-19 12:47:57
- * @LastEditTime: 2024-03-14 21:18:15
+ * @LastEditTime: 2024-04-10 20:18:34
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-toast\type.ts
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-toast\types.ts
  * 记得注释
  */
 import type { ExtractPropTypes } from 'vue'
@@ -30,6 +30,10 @@ export type ToastOptions = {
   position?: ToastPositionType
   show?: boolean
   zIndex?: number
+  /**
+   * 是否存在遮罩层
+   */
+  cover?: boolean
 }
 
 export interface Toast {
