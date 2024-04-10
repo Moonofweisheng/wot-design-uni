@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 12:36:30
- * @LastEditTime: 2024-04-01 17:11:39
+ * @LastEditTime: 2024-04-10 10:58:31
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\theme\index.ts
@@ -12,8 +12,6 @@ import Theme from 'vitepress/theme'
 import './styles/vars.css'
 import './styles/custom.css'
 import './styles/scrollbar.scss'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
 
 import HomeFriendly from './components/HomeFriendly.vue'
 import NavBarTitleAfter from './components/NavBarTitleAfter.vue'
@@ -34,7 +32,6 @@ export default {
     })
   },
   enhanceApp({ app }) {
-    app.use(ElementPlus)
     app.component('SvgImage', SvgImage)
     app.component('frame', frame)
   },

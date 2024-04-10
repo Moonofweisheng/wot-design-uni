@@ -111,6 +111,8 @@
     "standard-version": "^9.5.0",
     "typescript": "^5.3.3",
     "uni-read-pages-vite": "^0.0.6",
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.26.0",
     "vite": "4.0.3",
     "vitest": "^0.30.1",
     "vue-eslint-parser": "^9.1.0",
