@@ -1,6 +1,6 @@
 <template>
   <wd-overlay v-if="cover" :z-index="zIndex" lock-scroll :show="show" custom-style="background-color: transparent;pointer-events: auto;"></wd-overlay>
-  <wd-transition name="fade" :show="show" :custom-style="transitionStyle">
+  <wd-transition name="fade" :show="show" :custom-style="transitionStyle" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave">
     <view :class="rootClass">
       <!--iconName优先级更高-->
       <wd-loading v-if="iconName === 'loading'" :type="loadingType" :color="loadingColor" custom-class="wd-toast__icon" :customStyle="loadingStyle" />
@@ -36,7 +36,7 @@ import { computed, inject, onBeforeMount, ref, watch, type CSSProperties } from 
 import base64 from '../common/base64'
 import { defaultOptions, toastDefaultOptionKey, toastIcon } from '.'
 import { toastProps, type ToastLoadingType, type ToastOptions } from './types'
-import { isDef, objToStyle } from '../common/util'
+import { isDef, isFunction, objToStyle } from '../common/util'
 
 const props = defineProps(toastProps)
 
@@ -51,6 +51,10 @@ const loadingColor = ref<string>('#4D80F0')
 const iconSize = ref<number>(42)
 const svgStr = ref<string>('') // 图标
 const cover = ref<boolean>(false) // 是否存在遮罩层
+
+let opened: (() => void) | null = null
+
+let closed: (() => void) | null = null
 
 const toastOptionKey = props.selector ? toastDefaultOptionKey + props.selector : toastDefaultOptionKey
 const toastOption = inject(toastOptionKey, ref<ToastOptions>(defaultOptions)) // toast选项
@@ -78,13 +82,6 @@ watch(
     immediate: true
   }
 )
-
-/**
- * 动画自定义样式
- */
-const isLoading = computed(() => {
-  return iconName.value === 'loading'
-})
 
 /**
  * 动画自定义样式
@@ -123,6 +120,18 @@ onBeforeMount(() => {
   buildSvg()
 })
 
+function handleAfterEnter() {
+  if (isFunction(opened)) {
+    opened()
+  }
+}
+
+function handleAfterLeave() {
+  if (isFunction(closed)) {
+    closed()
+  }
+}
+
 function buildSvg() {
   if (iconName.value !== 'success' && iconName.value !== 'warning' && iconName.value !== 'info' && iconName.value !== 'error') return
   const iconSvg = toastIcon[iconName.value]()
@@ -147,6 +156,8 @@ function reset(option: ToastOptions) {
       loadingColor.value = isDef(option.loadingColor!) ? option.loadingColor! : '#4D80F0'
       iconSize.value = isDef(option.iconSize!) ? option.iconSize! : 42
       cover.value = isDef(option.cover!) ? option.cover! : false
+      closed = isFunction(option.closed) ? option.closed : null
+      opened = isFunction(option.opened) ? option.opened : null
     }
   }
 }

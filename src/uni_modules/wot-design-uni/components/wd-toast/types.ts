@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-06-19 12:47:57
- * @LastEditTime: 2024-04-10 20:18:34
+ * @LastEditTime: 2024-04-11 13:03:38
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-toast\types.ts
@@ -34,6 +34,14 @@ export type ToastOptions = {
    * 是否存在遮罩层
    */
   cover?: boolean
+  /**
+   * 完全展示后的回调函数
+   */
+  opened?: () => void
+  /**
+   * 完全关闭时的回调函数
+   */
+  closed?: () => void
 }
 
 export interface Toast {

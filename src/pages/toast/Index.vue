@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-09-20 11:10:44
- * @LastEditTime: 2024-04-10 21:14:50
+ * @LastEditTime: 2024-04-11 13:13:28
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/pages/toast/Index.vue
+ * @FilePath: \wot-design-uni\src\pages\toast\Index.vue
  * 记得注释
 -->
 <template>
@@ -54,7 +54,13 @@ function showNormalToast() {
 function showTopToast() {
   toast.show({
     position: 'top',
-    msg: '提示信息'
+    msg: '提示信息',
+    closed() {
+      console.log(232)
+    },
+    opened() {
+      console.log(2323232)
+    }
   })
 }
 function showBottomToast() {
