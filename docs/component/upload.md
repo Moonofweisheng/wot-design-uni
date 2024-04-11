@@ -210,21 +210,21 @@ function handleChange({ files }) {
 ## 上传至云存储
 
 设置 `buildFormData` 函数，在用户点击上传时，会执行 `buildFormData` 函数，接收 `{ file, formData, resolve }`
+
 - `file` 当前上传的文件
 - `formData` 待处理的`formData`
 - `resolve` 函数，用于告知组件是否组装`formData`成功，`resolve(formData)` 表示组装成功。
-
-
 
 ```html
 <wd-upload :file-list="files" :action="host" :build-form-data="buildFormData" @change="handleChange"></wd-upload>
 ```
 
 :::tip 参考
+
 - 上传至阿里云 OSS 的示例，参考[地址](https://help.aliyun.com/zh/oss/use-cases/use-wechat-mini-programs-to-upload-objects)
 - 上传至腾讯云 COS 的示例，参考[地址](https://cloud.tencent.com/document/product/436/34929)
 - 上传至华为云 OBS 的示例，参考[地址](https://support.huaweicloud.com/bestpractice-obs/obs_05_2000.html)
-:::
+  :::
 
 ::: code-group
 
@@ -351,10 +351,8 @@ const buildFormData = ({ file, formData, resolve }) => {
 
 使用默认插槽可以修改唤起上传的样式。
 
-开启`use-default-slot`属性。
-
 ```html
-<wd-upload :file-list="fileList" use-default-slot action="https://ftf.jd.com/api/uploadImg" @change="handleChange">
+<wd-upload :file-list="fileList" :limit="5" action="https://ftf.jd.com/api/uploadImg" @change="handleChange">
   <wd-button>上传</wd-button>
 </wd-upload>
 ```
@@ -369,33 +367,33 @@ const fileList = ref<any[]>([
 
 ## Attributes
 
-| 参数             | 说明                                                                                                                                                                           | 类型                                  | 可选值 | 默认值                     | 最低版本 |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- | ------ | -------------------------- | -------- |
-| file-list        | 上传的文件列表, 例如: [{ name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg' }]                                                                                               | array                                 | -      | []                         | -        |
-| action           | 必选参数，上传的地址                                                                                                                                                           | string                                | -      | -                          | -        |
-| header           | 设置上传的请求头部                                                                                                                                                             | object                                | -      | -                          | -        |
-| multiple         | 是否支持多选文件                                                                                                                                                               | boolean                               | -      | -                          | -        |
-| disabled         | 是否禁用                                                                                                                                                                       | boolean                               | -      | false                      | -        |
-| limit            | 最大允许上传个数                                                                                                                                                               | number                                | -      | -                          | -        |
-| show-limit-num   | 限制上传个数的情况下，是否展示当前上传的个数                                                                                                                                   | boolean                               | -      | false                      | -        |
-| max-size         | 文件大小限制，单位为`byte`                                                                                                                                                     | number                                | -      | -                          | -        |
-| source-type      | 选择图片的来源，chooseImage 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage)                                                        | array / string                        | -      | ['album', 'camera']        | -        |
-| size-type        | 所选的图片的尺寸，chooseImage 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage)                                                      | array / string                        | -      | ['original', 'compressed'] | -        |
-| name             | 文件对应的 key，开发者在服务端可以通过这个 key 获取文件的二进制内容，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile) | string                                | -      | file                       | -        |
-| formData         | HTTP 请求中其他额外的 form data，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                                     | object                                | -      | -                          | -        |
-| header           | HTTP 请求 Header，Header 中不能设置 Referer，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                         | object                                | -      | -                          | -        |
-| on-preview-fail  | 预览失败执行操作                                                                                                                                                               | function({ index, imgList })          | -      | -                          | -        |
-| before-upload    | 上传文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                        | function({ files, fileList, resolve })	 | -      | -                          | -        |
-| before-choose    | 选择图片之前的钩子，参数为文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                                    | function({ fileList, resolve })       | -      | -                          | -        |
-| before-remove    | 删除文件之前的钩子，参数为要删除的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ file, fileList, resolve }) | -      | -                          | -        |
-| before-preview   | 图片预览前的钩子，参数为预览的图片下标和图片列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ index, imgList, resolve }) | -      | -                          | -        |
-| build-form-data   | 构建上传`formData`的钩子，参数为上传的文件、待处理的`formData`，返回值为处理后的`formData`，若返回 false 或者返回 Promise 且被 reject，则停止上传。  | function({ file, formData, resolve }) | -      | -                          | 0.1.61        |
-| loading-type     | [加载中图标类型](/component/loading)                                                                                                                                           | string                                | -      | circular-ring              | -        |
-| loading-color    | [加载中图标颜色](/component/loading)                                                                                                                                           | string                                | -      | #ffffff                    | -        |
-| loading-size     | [加载中图标尺寸](/component/loading)                                                                                                                                           | string                                | -      | 24px                       | -        |
-| use-default-slot | 开启默认唤起项插槽                                                                                                                                                             | boolean                               | -      | false                      | -        |
-| status-key       | file 数据结构中，status 对应的 key                                                                                                                                             | string                                | -      | status                     | -        |
-| image-mode       | 预览图片的mode属性                                                                                                                                             | ImageMode                                | -      | aspectFit                     | -        |
+| 参数                    | 说明                                                                                                                                                                           | 类型                                   | 可选值 | 默认值                     | 最低版本 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- | ------ | -------------------------- | -------- |
+| file-list               | 上传的文件列表, 例如: [{ name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg' }]                                                                                               | array                                  | -      | []                         | -        |
+| action                  | 必选参数，上传的地址                                                                                                                                                           | string                                 | -      | -                          | -        |
+| header                  | 设置上传的请求头部                                                                                                                                                             | object                                 | -      | -                          | -        |
+| multiple                | 是否支持多选文件                                                                                                                                                               | boolean                                | -      | -                          | -        |
+| disabled                | 是否禁用                                                                                                                                                                       | boolean                                | -      | false                      | -        |
+| limit                   | 最大允许上传个数                                                                                                                                                               | number                                 | -      | -                          | -        |
+| show-limit-num          | 限制上传个数的情况下，是否展示当前上传的个数                                                                                                                                   | boolean                                | -      | false                      | -        |
+| max-size                | 文件大小限制，单位为`byte`                                                                                                                                                     | number                                 | -      | -                          | -        |
+| source-type             | 选择图片的来源，chooseImage 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage)                                                        | array / string                         | -      | ['album', 'camera']        | -        |
+| size-type               | 所选的图片的尺寸，chooseImage 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage)                                                      | array / string                         | -      | ['original', 'compressed'] | -        |
+| name                    | 文件对应的 key，开发者在服务端可以通过这个 key 获取文件的二进制内容，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile) | string                                 | -      | file                       | -        |
+| formData                | HTTP 请求中其他额外的 form data，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                                     | object                                 | -      | -                          | -        |
+| header                  | HTTP 请求 Header，Header 中不能设置 Referer，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                         | object                                 | -      | -                          | -        |
+| on-preview-fail         | 预览失败执行操作                                                                                                                                                               | function({ index, imgList })           | -      | -                          | -        |
+| before-upload           | 上传文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                        | function({ files, fileList, resolve }) | -      | -                          | -        |
+| before-choose           | 选择图片之前的钩子，参数为文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                                    | function({ fileList, resolve })        | -      | -                          | -        |
+| before-remove           | 删除文件之前的钩子，参数为要删除的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ file, fileList, resolve })  | -      | -                          | -        |
+| before-preview          | 图片预览前的钩子，参数为预览的图片下标和图片列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ index, imgList, resolve })  | -      | -                          | -        |
+| build-form-data         | 构建上传`formData`的钩子，参数为上传的文件、待处理的`formData`，返回值为处理后的`formData`，若返回 false 或者返回 Promise 且被 reject，则停止上传。                            | function({ file, formData, resolve })  | -      | -                          | 0.1.61   |
+| loading-type            | [加载中图标类型](/component/loading)                                                                                                                                           | string                                 | -      | circular-ring              | -        |
+| loading-color           | [加载中图标颜色](/component/loading)                                                                                                                                           | string                                 | -      | #ffffff                    | -        |
+| loading-size            | [加载中图标尺寸](/component/loading)                                                                                                                                           | string                                 | -      | 24px                       | -        |
+| <s>use-default-slot</s> | <s>开启默认唤起项插槽</s>移除该属性，直接使用`默认插槽`即可                                                                                                                    | boolean                                | -      | false                      | -        |
+| status-key              | file 数据结构中，status 对应的 key                                                                                                                                             | string                                 | -      | status                     | -        |
+| image-mode              | 预览图片的 mode 属性                                                                                                                                                           | ImageMode                              | -      | aspectFit                  | -        |
 
 ## file 数据结构
 
@@ -417,12 +415,20 @@ const fileList = ref<any[]>([
 
 ## Events
 
-| 事件名称    | 说明                   | 参数                                                                        | 最低版本 |
-| ----------- | ---------------------- | --------------------------------------------------------------------------- | -------- |
+| 事件名称    | 说明                   | 参数                                                                                 | 最低版本 |
+| ----------- | ---------------------- | ------------------------------------------------------------------------------------ | -------- |
 | success     | 上传成功时触发         | event = { file, fileList,formData } file 为当前选上传的文件，'fileList' 上传图片列表 | -        |
 | fail        | 上传失败时触发         | event = { error, file,formData } error 错误信息，file 上传失败的文件                 | -        |
-| progress    | 上传中时触发           | event = { response, file } response 上传中响应信息，file 为当前选上传的文件 | -        |
-| chooseerror | 选择图片失败时触发     | event = { error } error 选择图片失败的错误信息                              | -        |
-| change      | 上传列表修改时触发     | 选中的值 event = { fileList } 'fileList' 上传图片列表                       | -        |
-| remove      | 移除图片时触发         | event = { file } file: 移除的文件信息                                       | -        |
-| oversize    | 文件大小超过限制时触发 | event = { file } file: 尺寸超出的文件信息                                   | -        |
+| progress    | 上传中时触发           | event = { response, file } response 上传中响应信息，file 为当前选上传的文件          | -        |
+| chooseerror | 选择图片失败时触发     | event = { error } error 选择图片失败的错误信息                                       | -        |
+| change      | 上传列表修改时触发     | 选中的值 event = { fileList } 'fileList' 上传图片列表                                | -        |
+| remove      | 移除图片时触发         | event = { file } file: 移除的文件信息                                                | -        |
+| oversize    | 文件大小超过限制时触发 | event = { file } file: 尺寸超出的文件信息                                            | -        |
+
+## Upload 外部样式类
+
+| 类名                 | 说明                     | 最低版本 |
+| -------------------- | ------------------------ | -------- |
+| custom-class         | 根节点样式类             | -        |
+| custom-evoke-class   | 自定义上传按钮样式类     | -        |
+| custom-preview-class | 自定义预览图片列表样式类 | -        |

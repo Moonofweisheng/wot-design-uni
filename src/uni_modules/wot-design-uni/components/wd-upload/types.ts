@@ -223,7 +223,15 @@ export const uploadProps = {
    * 默认值：'24px'
    */
   loadingSize: makeStringProp('24px'),
+  /**
+   * 自定义上传按钮样式
+   * 类型：string
+   */
   customEvokeClass: makeStringProp(''),
+  /**
+   * 自定义预览图片列表样式
+   * 类型：string
+   */
   customPreviewClass: makeStringProp(''),
   /**
    * 预览图片的mode属性

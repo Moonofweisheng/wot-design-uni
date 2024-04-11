@@ -36,8 +36,8 @@
     <demo-block title="禁用">
       <wd-upload :file-list="fileList8" disabled :action="action" @change="handleChange8"></wd-upload>
     </demo-block>
-    <demo-block title="自定义唤起上传样式">
-      <wd-upload :file-list="fileList9" :action="action" @change="handleChange9" use-default-slot>
+    <demo-block title="自定义唤起上传样式并限制上传5张">
+      <wd-upload :file-list="fileList9" :action="action" @change="handleChange9" :limit="5">
         <wd-button>自定义唤起样式</wd-button>
       </wd-upload>
     </demo-block>
