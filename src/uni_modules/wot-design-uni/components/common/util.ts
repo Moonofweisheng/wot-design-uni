@@ -542,13 +542,12 @@ type DebounceOptions = {
   trailing?: boolean // 是否在延迟时间结束时调用函数
 }
 
-export function debounce<T extends (...args: any[]) => any>(func: T, wait: number, options: DebounceOptions = {}): T {
+export function debounce<T extends (...args: any[]) => any>(func: T, wait: number, options: DebounceOptions = { leading: false, trailing: true }): T {
   let timeoutId: ReturnType<typeof setTimeout> | null = null
   let lastArgs: any[] | undefined
   let lastThis: any
   let result: ReturnType<T> | undefined
-  const leading = isDef(options.leading) ? options.leading : false
-  const trailing = isDef(options.trailing) ? options.trailing : true
+  const { leading, trailing } = options
 
   function invokeFunc() {
     if (lastArgs !== undefined) {
