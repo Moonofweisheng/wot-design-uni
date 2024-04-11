@@ -1,6 +1,25 @@
 # 更新日志 
 
 
+### [1.2.15](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.14...v1.2.15) (2024-04-11)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️ 优化文档及演示demo访问速度 ([#232](https://github.com/Moonofweisheng/wot-design-uni/issues/232)) ([8d3f617](https://github.com/Moonofweisheng/wot-design-uni/commit/8d3f617e403fdbf53a29ca0d48624dc5da74fc94))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Button不同尺寸显示固定尺寸icon样式不协调的问题 ([2a73992](https://github.com/Moonofweisheng/wot-design-uni/commit/2a73992d9c551c51f4f3672167b972d0d0cca881)), closes [#235](https://github.com/Moonofweisheng/wot-design-uni/issues/235)
+* 🐛 修复Upload自定义上传样式时未应用limit数量限制和customEvokeClass的问题 ([50baac8](https://github.com/Moonofweisheng/wot-design-uni/commit/50baac876279029214062a23072bb7c309110c0c))
+
+
+### ✨ Features | 新功能
+
+* ✨ MessageBox支持确认前置处理钩子beforeConfirm ([78bed6a](https://github.com/Moonofweisheng/wot-design-uni/commit/78bed6a212a12639cd8831e3a1ad4542d6fbf518)), closes [#229](https://github.com/Moonofweisheng/wot-design-uni/issues/229)
+* ✨ Toast轻提示增加opened、closed两个钩子 ([ead218b](https://github.com/Moonofweisheng/wot-design-uni/commit/ead218b87b6b0bd53c8c541c38561fdb45396c72))
+
 ### [1.2.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.13...v1.2.14) (2024-04-09)
 
 
