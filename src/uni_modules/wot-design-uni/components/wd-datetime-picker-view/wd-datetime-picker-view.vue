@@ -119,7 +119,7 @@ watch(
 watch(
   () => props.type,
   (target) => {
-    const type = ['date', 'year-month', 'time', 'datetime']
+    const type = ['date', 'year-month', 'time', 'datetime', 'year']
     if (type.indexOf(target) === -1) {
       console.error(`type must be one of ${type}`)
     }
@@ -299,6 +299,7 @@ function getRanges(): Array<{ type: DatetimePickerViewColumnType; range: number[
 
   if (props.type === 'date') result.splice(3, 2)
   if (props.type === 'year-month') result.splice(2, 3)
+  if (props.type === 'year') result.splice(1, 4)
   return result
 }
 
@@ -409,16 +410,16 @@ function updateInnerValue() {
   }
 
   // 处理年份 索引位0
-  const year = values[0] && parseInt(values[0])
+  const year = type === 'year' ? values : values[0] && parseInt(values[0])
 
   // 处理月 索引位1
-  const month = values[1] && parseInt(values[1])
+  const month = type === 'year' ? 1 : values[1] && parseInt(values[1])
 
   const maxDate = getMonthEndDay(Number(year), Number(month))
 
   // 处理 date 日期 索引位2
   let date: string | number = 1
-  if (type !== 'year-month') {
+  if (type !== 'year-month' && type !== 'year') {
     date = (Number(values[2]) && parseInt(String(values[2]))) > maxDate ? maxDate : values[2] && parseInt(String(values[2]))
   }
 
@@ -440,8 +441,8 @@ function updateInnerValue() {
  * @description 选中项改变，多级联动
  */
 function columnChange(picker: PickerViewInstance) {
-  // time 和 year-mouth 无需联动
-  if (props.type === 'time' || props.type === 'year-month') {
+  // time year-mouth year 无需联动
+  if (props.type === 'time' || props.type === 'year-month' || props.type === 'year') {
     return
   }
   /** 重新计算年月日时分秒，修正时间。 */
@@ -470,7 +471,7 @@ function columnChange(picker: PickerViewInstance) {
    * 选中月，会修改月份对应的日数
    */
 
-  newColumns.forEach((columns, index) => {
+  newColumns.forEach((_columns, index) => {
     const nextColumnIndex = index + 1
     const nextColumnData = newColumns[nextColumnIndex]
     // `日`不控制任何其它列
