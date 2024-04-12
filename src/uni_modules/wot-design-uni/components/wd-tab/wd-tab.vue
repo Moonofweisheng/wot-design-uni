@@ -99,4 +99,3 @@ defineExpose({
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-tabs/type

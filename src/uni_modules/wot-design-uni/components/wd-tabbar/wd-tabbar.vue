@@ -89,4 +89,3 @@ function setPlaceholderHeight() {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-tabbar-item/type./type

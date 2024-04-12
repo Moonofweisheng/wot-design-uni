@@ -92,4 +92,3 @@ function handleClick() {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-sidebar/type
