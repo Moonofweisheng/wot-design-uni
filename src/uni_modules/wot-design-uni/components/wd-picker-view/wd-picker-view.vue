@@ -43,7 +43,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
-import { deepClone, getType, isArray, isEqual, isFunction, range } from '../common/util'
+import { deepClone, getType, isArray, isDef, isEqual, isFunction, range } from '../common/util'
 import { formatArray, pickerViewProps, type PickerViewExpose } from './types'
 
 const props = defineProps(pickerViewProps)
@@ -58,7 +58,7 @@ const preSelectedIndex = ref<Array<number>>([])
 watch(
   () => props.modelValue,
   (newValue, oldValue) => {
-    if (!isEqual(oldValue, newValue) && newValue) {
+    if (!isEqual(oldValue, newValue) && isDef(newValue)) {
       selectWithValue(newValue)
     }
   },
