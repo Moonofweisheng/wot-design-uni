@@ -87,10 +87,50 @@
         <wd-checkbox modelValue="shop">商家后台</wd-checkbox>
       </wd-checkbox-group>
     </demo-block>
+
+    <demo-block title="结合Cell使用" transparent>
+      <wd-cell-group border>
+        <wd-checkbox-group v-model="value10" size="large">
+          <wd-cell title="点赞" center clickable @click="handleCheck1">
+            <view @click.stop="noop">
+              <wd-checkbox model-value="1" ref="checkBox1" custom-style="margin:0;"></wd-checkbox>
+            </view>
+          </wd-cell>
+          <wd-cell title="投币" center clickable @click="handleCheck2">
+            <view @click.stop="noop">
+              <wd-checkbox model-value="2" ref="checkBox2" custom-style="margin:0;"></wd-checkbox>
+            </view>
+          </wd-cell>
+          <wd-cell title="一键三连" center clickable @click="handleCheck3">
+            <view @click.stop="noop">
+              <wd-checkbox model-value="3" ref="checkBox3" custom-style="margin:0;"></wd-checkbox>
+            </view>
+          </wd-cell>
+        </wd-checkbox-group>
+      </wd-cell-group>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
+import type { CheckboxInstance } from '@/uni_modules/wot-design-uni/components/wd-checkbox/types'
 import { ref } from 'vue'
+
+const checkBox1 = ref<CheckboxInstance>()
+const checkBox2 = ref<CheckboxInstance>()
+const checkBox3 = ref<CheckboxInstance>()
+
+function handleCheck1() {
+  checkBox1.value && checkBox1.value.toggle()
+}
+
+function handleCheck2() {
+  checkBox2.value && checkBox2.value.toggle()
+}
+function handleCheck3() {
+  checkBox3.value && checkBox3.value.toggle()
+}
+
+function noop() {}
 
 const check1 = ref<boolean>(true)
 const check2 = ref<boolean>(true)
@@ -98,6 +138,8 @@ const check3 = ref<boolean>(true)
 const check4 = ref<boolean>(true)
 const check5 = ref<boolean>(true)
 const check6 = ref<boolean>(true)
+
+const value0 = ref<number[]>([1, 2, 3])
 
 const value1 = ref<number[]>([1, 3])
 const value2 = ref<number[]>([1])
