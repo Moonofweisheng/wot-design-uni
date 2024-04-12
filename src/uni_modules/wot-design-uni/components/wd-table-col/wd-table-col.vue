@@ -10,7 +10,7 @@
       :style="cellStyle"
       @click="handleRowClick(index)"
     >
-      <slot name="value" v-if="$slots.value" :row="scope(index)"></slot>
+      <slot name="value" v-if="$slots.value" :row="scope(index)" :index="index"></slot>
       <text :class="`wd-table__value ${ellipsis ? 'is-ellipsis' : ''}`" v-else>{{ row }}</text>
     </view>
   </view>

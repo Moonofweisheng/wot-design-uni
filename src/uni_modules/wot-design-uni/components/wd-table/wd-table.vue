@@ -251,4 +251,3 @@ function setRowClick(index: number) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-table-col/type

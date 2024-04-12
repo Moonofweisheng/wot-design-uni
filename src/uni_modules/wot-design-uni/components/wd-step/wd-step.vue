@@ -147,4 +147,3 @@ function getCurrentTitle(currentStatus: string) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-steps/type
