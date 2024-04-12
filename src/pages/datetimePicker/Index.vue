@@ -6,6 +6,7 @@
         <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />
         <wd-datetime-picker label="年月日" v-model="value2" type="date" @confirm="handleConfirm2" />
         <wd-datetime-picker label="年月" v-model="value3" type="year-month" @confirm="handleConfirm3" />
+        <wd-datetime-picker label="年" v-model="value16" type="year" @confirm="handleConfirm16" />
         <wd-datetime-picker label="时分" v-model="value4" type="time" @confirm="handleConfirm4" />
         <wd-datetime-picker label="展示格式" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
         <wd-datetime-picker label="内部格式" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
@@ -63,6 +64,7 @@ const value12 = ref<string>('')
 const value13 = ref<number>(Date.now())
 const value14 = ref<any[]>(['', ''])
 const value15 = ref<any[]>(['', Date.now()])
+const value16 = ref(Date.now())
 const defaultValue = ref<any[]>([Date.now() - 24 * 60 * 60 * 1000, Date.now()])
 const showstart = ref<boolean>(false)
 const formatter: DatetimePickerViewFormatter = (type, value) => {
@@ -152,6 +154,9 @@ function handleConfirm14({ value }: any) {
   console.log(value)
 }
 function handleConfirm15({ value }: any) {
+  console.log(value)
+}
+function handleConfirm16({ value }: any) {
   console.log(value)
 }
 /** picker触发cancel事件，同步触发cancel事件 */
