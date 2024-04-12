@@ -58,6 +58,17 @@ const value = ref<number>(Date.now())
 const value = ref<number>(Date.now())
 ```
 
+## year 类型
+
+`year` 类型只展示年。
+
+```html
+<wd-datetime-picker type="year" v-model="value" label="年" />
+```
+```typescript
+const value = ref<number>(Date.now())
+```
+
 ## time 类型
 
 `time` 类型只展示时分，绑定值为 `HH:mm` 格式。
