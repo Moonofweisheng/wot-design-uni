@@ -47,10 +47,14 @@ import { computed, getCurrentInstance, onBeforeMount, watch } from 'vue'
 import { useParent } from '../composables/useParent'
 import { CHECKBOX_GROUP_KEY } from '../wd-checkbox-group/types'
 import { isDef } from '../common/util'
-import { checkboxProps } from './types'
+import { checkboxProps, type CheckboxExpose } from './types'
 
 const props = defineProps(checkboxProps)
 const emit = defineEmits(['change', 'update:modelValue'])
+
+defineExpose<CheckboxExpose>({
+  toggle
+})
 
 const { parent: checkboxGroup, index } = useParent(CHECKBOX_GROUP_KEY)
 
