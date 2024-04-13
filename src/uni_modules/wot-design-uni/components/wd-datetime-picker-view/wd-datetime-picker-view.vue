@@ -27,7 +27,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
-import { debounce, isFunction, isDef, padZero, range } from '../common/util'
+import { debounce, isFunction, isDef, padZero, range, isArray } from '../common/util'
 import {
   getPickerValue,
   datetimePickerViewProps,
@@ -403,7 +403,7 @@ function updateInnerValue() {
   const { type } = props
   let innerValue: string | number = ''
   const pickerVal = datePickerview.value?.getValues() || []
-  const values = Array.isArray(pickerVal) ? pickerVal : [pickerVal]
+  const values = isArray(pickerVal) ? pickerVal : [pickerVal]
 
   if (type === 'time') {
     innerValue = `${padZero(values[0])}:${padZero(values[1])}`
@@ -411,7 +411,7 @@ function updateInnerValue() {
   }
 
   // 处理年份 索引位0
-  const year = type === 'year' ? values : values[0] && parseInt(values[0])
+  const year = values[0] && parseInt(values[0])
 
   // 处理月 索引位1
   const month = type === 'year' ? 1 : values[1] && parseInt(values[1])
@@ -494,7 +494,7 @@ function onPickEnd() {
 function getSelects() {
   const pickerVal = datePickerview.value?.getSelects()
   if (pickerVal == null) return undefined
-  if (Array.isArray(pickerVal)) return pickerVal
+  if (isArray(pickerVal)) return pickerVal
   return [pickerVal]
 }
 </script>
