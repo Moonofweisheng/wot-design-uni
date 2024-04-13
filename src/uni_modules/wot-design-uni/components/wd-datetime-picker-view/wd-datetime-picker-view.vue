@@ -398,12 +398,12 @@ function updateColumnValue(value: string | number) {
 /**
  * @description 根据当前的选中项 处理innerValue
  * @return {date} innerValue
- */
-function updateInnerValue() {
+ */ function updateInnerValue() {
   const { type } = props
-  let values: Array<string> = []
   let innerValue: string | number = ''
-  values = datePickerview.value!.getValues() as string[]
+  const pickerVal = datePickerview.value?.getValues() || []
+  const values = Array.isArray(pickerVal) ? pickerVal : [pickerVal]
+
   if (type === 'time') {
     innerValue = `${padZero(values[0])}:${padZero(values[1])}`
     return innerValue
@@ -491,7 +491,10 @@ function onPickEnd() {
 }
 
 function getSelects() {
-  return datePickerview.value && datePickerview.value.getSelects ? datePickerview.value.getSelects() : undefined
+  const pickerVal = datePickerview.value?.getSelects()
+  if (pickerVal == null) return undefined
+  if (Array.isArray(pickerVal)) return pickerVal
+  return [pickerVal]
 }
 </script>
 

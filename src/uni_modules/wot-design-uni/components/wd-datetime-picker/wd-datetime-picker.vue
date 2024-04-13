@@ -603,13 +603,7 @@ function setShowValue(tab: boolean = false, isConfirm: boolean = false, beforeMo
  * @return {String} showValue / showTabLabel
  */
 function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = false) {
-  // type=year时 items为对象，不是数组
-  if (!Array.isArray(items)) {
-    items = items ? [items] : []
-  }
-
   if (items.length === 0) return ''
-  console.log('items.length', items.length)
 
   if (tabLabel && props.displayFormatTabLabel) {
     return props.displayFormatTabLabel(items)
