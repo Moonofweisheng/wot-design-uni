@@ -398,7 +398,8 @@ function updateColumnValue(value: string | number) {
 /**
  * @description 根据当前的选中项 处理innerValue
  * @return {date} innerValue
- */ function updateInnerValue() {
+ */
+function updateInnerValue() {
   const { type } = props
   let innerValue: string | number = ''
   const pickerVal = datePickerview.value?.getValues() || []
