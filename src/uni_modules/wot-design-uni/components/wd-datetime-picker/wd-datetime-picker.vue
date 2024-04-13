@@ -621,6 +621,7 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
      * 但使用模拟nextTick会造成页面延迟展示问题，对用户感知来讲不友好，因此不适用该方法
      */
     const typeMaps = {
+      year: ['year'],
       datetime: ['year', 'month', 'date', 'hour', 'minute'],
       date: ['year', 'month', 'date'],
       time: ['hour', 'minute'],
@@ -634,6 +635,8 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
   }
 
   switch (props.type) {
+    case 'year':
+      return items[0].label
     case 'date':
       return `${items[0].label}-${items[1].label}-${items[2].label}`
     case 'year-month':

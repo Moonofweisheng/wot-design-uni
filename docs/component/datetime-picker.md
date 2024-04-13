@@ -58,6 +58,17 @@ const value = ref<number>(Date.now())
 const value = ref<number>(Date.now())
 ```
 
+## year 类型
+
+`year` 类型只展示年。
+
+```html
+<wd-datetime-picker type="year" v-model="value" label="年" />
+```
+```typescript
+const value = ref<number>(Date.now())
+```
+
 ## time 类型
 
 `time` 类型只展示时分，绑定值为 `HH:mm` 格式。
@@ -250,7 +261,7 @@ const displayFormatTabLabel = (items) => {
 |-----|------|-----|-------|-------|---------|
 | v-model | 选中项，当 type 为 time 时，类型为字符串；当 type 为 Array 时，类型为范围选择；否则为 Date | string / date / array | - | - | - |
 | default-value | 默认日期，类型保持与 value 一致，打开面板时面板自动选到默认日期 | string / date / array | - | - | - |
-| type | 选择器类型 | string | date / year-month / time | datetime | - |
+| type | 选择器类型 | string | date / year-month / time / year | datetime | - |
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |
 | columns-height | picker内部滚筒高 | number | - | 231 | - |
