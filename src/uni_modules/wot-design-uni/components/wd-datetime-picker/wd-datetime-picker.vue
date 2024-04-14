@@ -386,14 +386,18 @@ function getSelects(picker: 'before' | 'after') {
 
 function noop() {}
 
-function getDefaultInnerValue(isRegion?: boolean, isEnd?: boolean): string {
+function getDefaultInnerValue(isRegion?: boolean, isEnd?: boolean): string | number {
   const { modelValue: value, defaultValue } = props
 
   if (isRegion) {
     if (isEnd) {
-      return (isArray(value) ? (value[1] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[1] as string) : '')
+      return (
+        (isArray(value) ? (value[1] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[1] as string) : '') || props.maxDate
+      )
     } else {
-      return (isArray(value) ? (value[0] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[0] as string) : '')
+      return (
+        (isArray(value) ? (value[0] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[0] as string) : '') || props.minDate
+      )
     }
   } else {
     return isDef(value || defaultValue) ? (value as string) || (defaultValue as string) : ''
@@ -706,6 +710,12 @@ function columnDisabledRules(
     }
     if (column.type === 'month' && currentValue[0] === year) {
       return isStart ? value > month : value < month
+    }
+  } else if (type === 'year') {
+    const year = boundary[0]
+
+    if (column.type === 'year') {
+      return isStart ? value > year : value < year
     }
   } else if (type === 'date') {
     const year = boundary[0]
