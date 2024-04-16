@@ -81,7 +81,7 @@ mode为小程序原生属性，参考[微信小程序image官方文档](https://
 | mode | 填充模式 | ImageMode | 'top left' / 'top right' / 'bottom left' / 'bottom right' / 'right' / 'left' / 'center' / 'bottom' / 'top' / 'heightFix' / 'widthFix' / 'aspectFill' / 'aspectFit' / 'scaleToFill' | 'scaleToFill' | - |
 | round | 是否显示为圆形 | boolean | - | false | - |
 | radius | 圆角大小，默认单位为px | number / string | - | - | - |
-| enable-preview | 是否支持点击预览 | boolean | - | false | - |
+| enable-preview | 是否支持点击预览 | boolean | - | false | 1.2.11 |
 
 ## Events
 
