@@ -7,7 +7,7 @@
     <view class="wd-tag__text" :style="textStyle">
       <slot />
     </view>
-    <wd-icon v-if="closable && round" custom-class="wd-tag__close" name="error-fill" @click="handleClose" />
+    <wd-icon v-if="closable && round" custom-class="wd-tag__close" name="error-fill" @click.stop="handleClose" />
     <input
       v-if="dynamicInput && dynamic"
       class="wd-tag__add-text"
@@ -18,7 +18,7 @@
       @blur="handleBlur"
       @confirm="handleConfirm"
     />
-    <view v-else-if="dynamic" class="wd-tag__text" :style="textStyle" @click="handleAdd">
+    <view v-else-if="dynamic" class="wd-tag__text" :style="textStyle" @click.stop="handleAdd">
       <slot name="add" v-if="$slots.add"></slot>
       <template v-else>
         <wd-icon name="add" custom-class="wd-tag__add wd-tag__icon" />
@@ -117,11 +117,11 @@ function computeTagClass() {
   tagClass.value = tagClassList.join(' ')
 }
 
-function handleClick() {
-  emit('click')
+function handleClick(event: any) {
+  emit('click', event)
 }
-function handleClose() {
-  emit('close')
+function handleClose(event: any) {
+  emit('close', event)
 }
 function handleAdd() {
   dynamicInput.value = true
