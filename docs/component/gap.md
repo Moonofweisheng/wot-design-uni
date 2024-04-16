@@ -32,7 +32,7 @@
 
 
 ```html
-<wd-gap bg-color="#FFFFFF"></wd-gap>
+<wd-gap safe-area-bottom height="0"></wd-gap>
 ```
 
 ## Attributes
@@ -41,7 +41,7 @@
 |-----------------|---------|---------|------------|-------------| -------- |
 | height          | 高度      | `string`/`number`  | -          | 15       | -        |
 | bgColor      | 背景颜色    | string  |            | transparent | -        |
-| safeAreaBbottom | 底部安全区  | boolean | true/false | false       | -        |
+| safeAreaBottom | 开启底部安全区  | boolean | true/false | false       | -        |
 
 ## 外部样式类
 
