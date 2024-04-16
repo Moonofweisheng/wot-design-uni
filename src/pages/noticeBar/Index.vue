@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2024-04-09 21:48:26
+ * @LastEditTime: 2024-04-16 13:13:31
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/pages/noticeBar/Index.vue
+ * @FilePath: \wot-design-uni\src\pages\noticeBar\Index.vue
  * 记得注释
 -->
 <template>
@@ -66,12 +66,12 @@
       </demo-block>
 
       <demo-block title="多文本轮播">
-        <wd-notice-bar :text="textArray" prefix="check-outline" @next="onNext" />
+        <wd-notice-bar @click="handleClick" :text="textArray" prefix="check-outline" @next="onNext" />
       </demo-block>
 
       <demo-block title="垂直滚动">
-        <wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" custom-class="space" />
-        <wd-notice-bar prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :delay="3" custom-class="space" />
+        <wd-notice-bar @click="handleClick" prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" custom-class="space" />
+        <wd-notice-bar @click="handleClick" prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :delay="3" custom-class="space" />
       </demo-block>
     </view>
   </page-wraper>
@@ -91,6 +91,10 @@ const textArray = ref([
 const onNext = (index: number) => {
   console.log('展示下一条，index: ', index)
   console.log('文本是：' + textArray.value[index])
+}
+
+function handleClick(result: { text: string; index: number }) {
+  console.log(result)
 }
 </script>
 <style lang="scss" scoped>

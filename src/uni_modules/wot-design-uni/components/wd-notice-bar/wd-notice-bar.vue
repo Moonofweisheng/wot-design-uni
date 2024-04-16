@@ -3,7 +3,7 @@
     <wd-icon v-if="prefix" custom-class="wd-notice-bar__prefix" size="18px" :name="prefix"></wd-icon>
     <slot v-else name="prefix"></slot>
     <view class="wd-notice-bar__wrap">
-      <view class="wd-notice-bar__content" :style="animation" @transitionend="animationEnd">
+      <view class="wd-notice-bar__content" :style="animation" @transitionend="animationEnd" @click="handleClick">
         <template v-if="isVertical">
           <view v-for="item in textArray" :key="item">{{ item }}</view>
           <view v-if="textArray.length > 1">{{ textArray[0] }}</view>
@@ -28,14 +28,14 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch, nextTick, computed, getCurrentInstance, type CSSProperties } from 'vue'
-import { getRect, isDef, objToStyle } from '../common/util'
+import { getRect, isArray, isDef, objToStyle } from '../common/util'
 import { noticeBarProps } from './types'
 
 const $wrap = '.wd-notice-bar__wrap'
 const $content = '.wd-notice-bar__content'
 
 const props = defineProps(noticeBarProps)
-const emit = defineEmits(['close', 'next'])
+const emit = defineEmits(['close', 'next', 'click'])
 
 const wrapWidth = ref<number>(0)
 const show = ref<boolean>(true)
@@ -184,6 +184,19 @@ function animationEnd() {
 
     clearTimeout(timer)
   }, 20)
+}
+
+function handleClick() {
+  const result = isArray(props.text)
+    ? {
+        index: currentIndex.value,
+        text: props.text[currentIndex.value]
+      }
+    : {
+        index: 0,
+        text: props.text
+      }
+  emit('click', result)
 }
 </script>
 
