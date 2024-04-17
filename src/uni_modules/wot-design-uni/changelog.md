@@ -1,6 +1,28 @@
 # 更新日志 
 
 
+### [1.2.16](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.15...v1.2.16) (2024-04-17)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Gap组件文档中safeAreaBottom属性名错误的问题 ([b03e39f](https://github.com/Moonofweisheng/wot-design-uni/commit/b03e39f601a68ff5f7e72aa3605279683e5e5b74))
+* 🐛 修复PickerView在绑定值为0时无法生效的问题 ([742b4d6](https://github.com/Moonofweisheng/wot-design-uni/commit/742b4d65255926a0e8c3899ae3ee2eb9d7b7e5e5))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  补充Img图片支持图片预览的最低支持版本 ([82d8e49](https://github.com/Moonofweisheng/wot-design-uni/commit/82d8e493c0723da9e3ba88981a45ea31ae8ef9d5)), closes [#244](https://github.com/Moonofweisheng/wot-design-uni/issues/244)
+
+
+### ✨ Features | 新功能
+
+* ✨ 阻止tag的关闭和新增事件冒泡 ([4c22cf5](https://github.com/Moonofweisheng/wot-design-uni/commit/4c22cf515e2e121b3bbe7d9fd64c5777ce72df32))
+* ✨ Checkbox 新增toggle方法 ([6ec0397](https://github.com/Moonofweisheng/wot-design-uni/commit/6ec0397bc9a5e80780b22245c29c6f05f1b25313)), closes [#239](https://github.com/Moonofweisheng/wot-design-uni/issues/239)
+* ✨ date-time-picker-view 添加年选择 ([#241](https://github.com/Moonofweisheng/wot-design-uni/issues/241)) ([0073b32](https://github.com/Moonofweisheng/wot-design-uni/commit/0073b323967fe859ed15284607f4117243614d5e))
+* ✨ Noticebar 通知栏新增支持click点击事件 ([6fc786d](https://github.com/Moonofweisheng/wot-design-uni/commit/6fc786d9be63c2f021c10e0c48c466e0114f5c24))
+* ✨ TableColumn组件value插槽新增index参数 ([b8b03c3](https://github.com/Moonofweisheng/wot-design-uni/commit/b8b03c352b62e31a584faa41ced65d72bc427d89))
+
 ### [1.2.15](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.14...v1.2.15) (2024-04-11)
 
 
