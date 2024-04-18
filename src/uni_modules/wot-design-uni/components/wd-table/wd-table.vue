@@ -79,7 +79,7 @@ const reactiveState = reactive({
   setColumns
 })
 
-const scroll = debounce(handleScroll, 100) // 滚动事件
+const scroll = debounce(handleScroll, 100, { leading: false }) // 滚动事件
 
 provide('wdTable', reactiveState)
 
