@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.2.17](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.16...v1.2.17) (2024-04-18)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复debounce调整后导致tabs无法切换的问题 ([bd594a7](https://github.com/Moonofweisheng/wot-design-uni/commit/bd594a7202d3cd4e641f23a0b98d468227370d6f))
+
 ### [1.2.16](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.15...v1.2.16) (2024-04-17)
 
 
