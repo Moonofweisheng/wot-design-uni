@@ -63,6 +63,11 @@ const gradientColor = {
 <wd-circle v-model="current" :size="300"></wd-circle>
 ```
 
+## Slots
+
+| 插槽名称 | 说明       | 最低版本 |
+| -------- | ---------- | -------- |
+| default  | 自定义中间文字内容，组件不传入text值时生效 | -        |
 
 
 ## Attributes
