@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [1.2.18](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.17...v1.2.18) (2024-04-23)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复InputNumber步进器组件在初始化时未发生变化仍触发change的问题 ([6ac20fd](https://github.com/Moonofweisheng/wot-design-uni/commit/6ac20fd60728e9056282466571c64ff747af4c9f))
+* 🐛 修复InputNumber的change事件无法取到当前绑定值的更新的问题 ([45980c5](https://github.com/Moonofweisheng/wot-design-uni/commit/45980c526a0b47fb1cb2c95ad50ab9f226464d7c))
+
 ### [1.2.17](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.16...v1.2.17) (2024-04-18)
 
 
