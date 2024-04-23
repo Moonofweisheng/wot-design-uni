@@ -36,7 +36,7 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { debounce, isDef } from '../common/util'
+import { debounce, isDef, isEqual } from '../common/util'
 import { inputNumberProps } from './types'
 
 const props = defineProps(inputNumberProps)
@@ -75,7 +75,9 @@ watch(
 function updateBoundary() {
   debounce(() => {
     const value = formatValue(inputValue.value)
-    setValue(value)
+    if (!isEqual(inputValue.value, value)) {
+      setValue(value)
+    }
     splitDisabled(value)
   }, 30)()
 }
@@ -161,13 +163,18 @@ function handleFocus(event: any) {
 
 function handleBlur() {
   const value = formatValue(inputValue.value)
-  setValue(value)
+  if (!isEqual(inputValue.value, value)) {
+    setValue(value)
+  }
   emit('blur', {
     value
   })
 }
 
 function dispatchChangeEvent(value: string | number, change: boolean = true) {
+  if (isEqual(inputValue.value, value)) {
+    return
+  }
   inputValue.value = value
   change && emit('update:modelValue', inputValue.value)
   change && emit('change', { value })
