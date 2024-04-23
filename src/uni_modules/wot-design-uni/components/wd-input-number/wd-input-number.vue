@@ -169,8 +169,8 @@ function handleBlur() {
 
 function dispatchChangeEvent(value: string | number, change: boolean = true) {
   inputValue.value = value
-  change && emit('change', { value })
   change && emit('update:modelValue', inputValue.value)
+  change && emit('change', { value })
 }
 
 function formatValue(value: string | number) {
