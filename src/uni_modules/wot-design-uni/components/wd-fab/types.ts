@@ -38,7 +38,11 @@ export const fabProps = {
   /**
    * 自定义悬浮按钮层级
    */
-  zIndex: makeNumberProp(99)
+  zIndex: makeNumberProp(99),
+  /**
+   * 是否可拖动,以及上下安全区高度配置
+   */
+  draggable: makeBooleanProp(false)
 }
 
 export type FabProps = ExtractPropTypes<typeof fabProps>

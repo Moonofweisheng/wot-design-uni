@@ -9,7 +9,6 @@
   position: fixed;
   z-index: 99;
 
-
   @include edeep(trigger) {
     min-width: auto !important;
     box-sizing: border-box;
@@ -109,46 +108,9 @@
       }
     }
 
-
   }
 
   @include edeep(icon) {
     font-size: 20px;
-  }
-
-  @include m(left-top) {
-    top: $-fab-top;
-    left: $-fab-left;
-    /* #ifdef H5 */
-    top: calc($-fab-top + var(--window-top));
-    left: calc($-fab-left + var(--window-left));
-    /* #endif */
-  }
-
-  @include m(right-top) {
-    top: $-fab-top;
-    right: $-fab-right;
-    /* #ifdef H5 */
-    top: calc($-fab-top + var(--window-top));
-    right: calc($-fab-right + var(--window-right));
-    /* #endif */
-  }
-
-  @include m(left-bottom) {
-    bottom: $-fab-bottom;
-    left: $-fab-left;
-    /* #ifdef H5 */
-    bottom: calc($-fab-bottom + var(--window-bottom));
-    left: calc($-fab-left + var(--window-left));
-    /* #endif */
-  }
-
-  @include m(right-bottom) {
-    bottom: $-fab-bottom;
-    right: $-fab-right;
-    /* #ifdef H5 */
-    bottom: calc($-fab-bottom + var(--window-bottom));
-    right: calc($-fab-right + var(--window-right));
-    /* #endif */
   }
 }

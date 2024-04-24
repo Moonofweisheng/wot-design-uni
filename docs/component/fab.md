@@ -65,6 +65,16 @@ const disabled = ref<boolean>(false)
 const active = ref<boolean>(false)
 
 ```
+
+## 可拖动按钮
+```html
+<wd-fab :draggable="true">
+```
+
+:::warning
+开启拖动后`direction`属性将失效，会根据拖动后的位置自动计算弹出方向。拖动完成后按钮将会自动吸边。
+:::
+
 ## Attributes
 
 | 参数           | 说明                   | 类型         | 可选值                                                                                    | 默认值         | 最低版本 |
@@ -72,6 +82,7 @@ const active = ref<boolean>(false)
 | v-model:active | 是否激活               | boolean      | -                                                                                         | false          | 0.1.57   |
 | type           | 类型                   | FabType      | 'primary' &#124; 'success' &#124; 'info' &#124; 'warning' &#124; 'error' &#124; 'default' | 'primary'      | 0.1.57   |
 | position       | 悬浮按钮位置           | FabPosition  | 'left-top' &#124; 'right-top' &#124; 'left-bottom' &#124; 'right-bottom'                  | 'right-bottom' | 0.1.57   |
+| draggable      | 按钮能否拖动           | boolean      |                                                                                           | false          |          |
 | direction      | 悬浮按钮菜单弹出方向   | FabDirection | 'top' &#124; 'right' &#124; 'bottom' &#124; 'left'                                        | 'top'          | 0.1.57   |
 | disabled       | 是否禁用               | boolean      | -                                                                                         | false          | 0.1.57   |
 | inactiveIcon   | 悬浮按钮未展开时的图标 | string       | -                                                                                         | 'add'          | 0.1.57   |

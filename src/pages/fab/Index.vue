@@ -32,13 +32,18 @@
           <wd-switch v-model="disabled" size="22px" />
         </view>
       </demo-block>
+      <demo-block title="可拖动">
+        <view @click.stop="">
+          <wd-switch v-model="draggable" size="22px" />
+        </view>
+      </demo-block>
 
       <demo-block title="切换展示">
         <view @click.stop="">
           <wd-button type="primary" @click="active = !active" round>切换</wd-button>
         </view>
       </demo-block>
-      <wd-fab v-model:active="active" :disabled="disabled" :type="type" :position="position" :direction="direction">
+      <wd-fab v-model:active="active" :disabled="disabled" :type="type" :position="position" :direction="direction" :draggable="draggable">
         <wd-button @click="showToast('一键三连')" :disabled="disabled" custom-class="custom-button" type="primary" round>
           <wd-icon name="github-filled" size="22px"></wd-icon>
         </wd-button>
@@ -65,6 +70,7 @@ const type = ref<'primary' | 'success' | 'info' | 'warning' | 'error' | 'default
 const position = ref<'left-top' | 'right-top' | 'left-bottom' | 'right-bottom'>('left-bottom')
 const direction = ref<'top' | 'right' | 'bottom' | 'left'>('top')
 const disabled = ref<boolean>(false)
+const draggable = ref(false)
 const { closeOutside } = useQueue()
 </script>
 <style lang="scss" scoped>
