@@ -40,7 +40,7 @@ export const fabProps = {
    */
   zIndex: makeNumberProp(99),
   /**
-   * 是否可拖动,以及上下安全区高度配置
+   * 是否可拖动
    */
   draggable: makeBooleanProp(false)
 }
