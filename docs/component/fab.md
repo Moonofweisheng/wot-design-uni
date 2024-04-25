@@ -77,18 +77,18 @@ const active = ref<boolean>(false)
 
 ## Attributes
 
-| 参数           | 说明                   | 类型         | 可选值                                                                                    | 默认值         | 最低版本 |
-| -------------- | ---------------------- | ------------ | ----------------------------------------------------------------------------------------- | -------------- | -------- |
-| v-model:active | 是否激活               | boolean      | -                                                                                         | false          | 0.1.57   |
-| type           | 类型                   | FabType      | 'primary' &#124; 'success' &#124; 'info' &#124; 'warning' &#124; 'error' &#124; 'default' | 'primary'      | 0.1.57   |
-| position       | 悬浮按钮位置           | FabPosition  | 'left-top' &#124; 'right-top' &#124; 'left-bottom' &#124; 'right-bottom'                  | 'right-bottom' | 0.1.57   |
-| draggable      | 按钮能否拖动           | boolean      |                                                                                           | false          |          |
-| direction      | 悬浮按钮菜单弹出方向   | FabDirection | 'top' &#124; 'right' &#124; 'bottom' &#124; 'left'                                        | 'top'          | 0.1.57   |
-| disabled       | 是否禁用               | boolean      | -                                                                                         | false          | 0.1.57   |
-| inactiveIcon   | 悬浮按钮未展开时的图标 | string       | -                                                                                         | 'add'          | 0.1.57   |
-| activeIcon     | 悬浮按钮展开时的图标   | string       | -                                                                                         | 'close'        | 0.1.57   |
-| zIndex         | 自定义悬浮按钮层级     | number       | -                                                                                         | 99             | 0.1.57   |
-| customStyle    | 自定义样式             | string       | -                                                                                         | ''             | 0.1.57   |
+| 参数           | 说明                   | 类型         | 可选值                                                                                    | 默认值         | 最低版本         |
+| -------------- | ---------------------- | ------------ | ----------------------------------------------------------------------------------------- | -------------- | ---------------- |
+| v-model:active | 是否激活               | boolean      | -                                                                                         | false          | 0.1.57           |
+| type           | 类型                   | FabType      | 'primary' &#124; 'success' &#124; 'info' &#124; 'warning' &#124; 'error' &#124; 'default' | 'primary'      | 0.1.57           |
+| position       | 悬浮按钮位置           | FabPosition  | 'left-top' &#124; 'right-top' &#124; 'left-bottom' &#124; 'right-bottom'                  | 'right-bottom' | 0.1.57           |
+| draggable      | 按钮能否拖动           | boolean      |                                                                                           | false          | $LOWEST_VERSION$ |
+| direction      | 悬浮按钮菜单弹出方向   | FabDirection | 'top' &#124; 'right' &#124; 'bottom' &#124; 'left'                                        | 'top'          | 0.1.57           |
+| disabled       | 是否禁用               | boolean      | -                                                                                         | false          | 0.1.57           |
+| inactiveIcon   | 悬浮按钮未展开时的图标 | string       | -                                                                                         | 'add'          | 0.1.57           |
+| activeIcon     | 悬浮按钮展开时的图标   | string       | -                                                                                         | 'close'        | 0.1.57           |
+| zIndex         | 自定义悬浮按钮层级     | number       | -                                                                                         | 99             | 0.1.57           |
+| customStyle    | 自定义样式             | string       | -                                                                                         | ''             | 0.1.57           |
 
 ## 外部样式类
 
