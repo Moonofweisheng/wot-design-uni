@@ -51,6 +51,24 @@ const dataList = reactive([
 </wd-table>
 ```
 
+## 显示索引
+
+通过`index`设置表格是否显示序号列，默认为`false`。同时也可以传入对象对序号列进行配置，参数同`TableColumnProps`
+
+```html
+<wd-table :data="dataList" height="328px" :index="true">
+  <wd-table-col prop="name" label="姓名" :sortable="true"></wd-table-col>
+  <wd-table-col prop="grade" label="分数" :sortable="true"></wd-table-col>
+  <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true" :width="160"></wd-table-col>
+</wd-table>
+
+<wd-table :data="dataList" height="328px" :index="{ align: 'center', width: 200 }">
+  <wd-table-col prop="name" label="姓名" :sortable="true" align="center"></wd-table-col>
+  <wd-table-col prop="grade" label="分数" :sortable="true" align="center"></wd-table-col>
+  <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true" :width="160"></wd-table-col>
+</wd-table>
+```
+
 ## 斑马纹
 
 通过`stripe`设置表格是否展示斑马纹，默认`true`。
@@ -216,15 +234,16 @@ function handleSort(e) {
 
 ## Attributes
 
-| 参数       | 说明                       | 类型              | 可选值 | 默认值 | 最低版本 |
-| ---------- | -------------------------- | ----------------- | ------ | ------ | -------- |
-| data       | 显示的数据                 | Array             | -      | -      | 0.0.39   |
-| border     | 是否带有边框               | boolean           | -      | true   | 0.0.39   |
-| stripe     | 是否为斑马纹表             | boolean           | -      | true   | 0.0.39   |
-| height     | Table 的高度，默认为`80vh` | string            | -      | `80vh` | 0.0.39   |
-| rowHeight  | 行高                       | `number / string` | -      | 50     | 0.0.39   |
-| showHeader | 是否显示表头               | boolean           | -      | true   | 0.0.39   |
-| ellipsis   | 是否超出 2 行隐藏          | boolean           | -      | true   | 0.0.39   |
+| 参数       | 说明                                              | 类型                         | 可选值 | 默认值 | 最低版本         |
+| ---------- | ------------------------------------------------- | ---------------------------- | ------ | ------ | ---------------- |
+| data       | 显示的数据                                        | Array                        | -      | -      | 0.0.39           |
+| border     | 是否带有边框                                      | boolean                      | -      | true   | 0.0.39           |
+| stripe     | 是否为斑马纹表                                    | boolean                      | -      | true   | 0.0.39           |
+| height     | Table 的高度，默认为`80vh`                        | string                       | -      | `80vh` | 0.0.39           |
+| rowHeight  | 行高                                              | `number / string`            | -      | 50     | 0.0.39           |
+| showHeader | 是否显示表头                                      | boolean                      | -      | true   | 0.0.39           |
+| ellipsis   | 是否超出 2 行隐藏                                 | boolean                      | -      | true   | 0.0.39           |
+| index      | 是否显示索引列，可传入`boolean`也可传入column配置 | `boolean / TableColumnProps` |        | false  | $LOWEST_VERSION$ |
 
 ## TableColumn Attributes
 

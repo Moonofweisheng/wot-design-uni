@@ -54,5 +54,8 @@ export default {
   input: { placeholder: '請輸入...' },
   selectPicker: { title: '請選擇', placeholder: '請選擇', select: '確認', confirm: '確認', filterPlaceholder: '搜索' },
   tag: { placeholder: '請輸入', add: '新增標籤' },
-  textarea: { placeholder: '請輸入...' }
+  textarea: { placeholder: '請輸入...' },
+  tableCol: {
+    indexLabel: '序號'
+  }
 }

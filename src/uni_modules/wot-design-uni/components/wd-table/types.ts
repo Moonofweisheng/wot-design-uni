@@ -9,6 +9,8 @@
  */
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
+import type { TableColumnProps } from '../wd-table-col/types'
+import type { PropType } from 'vue'
 
 export const tableProps = {
   ...baseProps,
@@ -39,7 +41,14 @@ export const tableProps = {
   /**
    * 是否超出2行隐藏
    */
-  ellipsis: makeBooleanProp(true)
+  ellipsis: makeBooleanProp(true),
+  /**
+   * 是否显示索引列
+   */
+  index: {
+    type: [Object, Boolean] as PropType<boolean | Omit<Partial<TableColumnProps>, 'prop'>>,
+    default: false
+  }
 }
 
 export type TableProps = ExtractPropTypes<typeof tableProps>
