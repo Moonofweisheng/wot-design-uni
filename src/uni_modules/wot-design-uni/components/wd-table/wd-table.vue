@@ -40,6 +40,19 @@
       :scrollLeft="reactiveState.scrollLeft"
     >
       <view id="table-body" class="wd-table__content" :style="realWidthStyle">
+        <wd-table-col
+          v-if="index !== false"
+          :prop="indexColumn.prop"
+          :label="indexColumn.label"
+          :width="indexColumn.width"
+          :sortable="indexColumn.sortable"
+          :fixed="indexColumn.fixed"
+          :align="indexColumn.align"
+        >
+          <template #value="{ index }">
+            <text>{{ index + 1 }}</text>
+          </template>
+        </wd-table-col>
         <slot></slot>
       </view>
     </scroll-view>
@@ -58,10 +71,14 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { type CSSProperties, computed, provide, watch, reactive } from 'vue'
-import { addUnit, debounce, deepClone, isDef, objToStyle } from '../common/util'
-import type { SortDirection, TableColumn } from '../wd-table-col/types'
+import { type CSSProperties, computed, provide, watch, reactive, ref } from 'vue'
+import { addUnit, debounce, deepClone, isDef, isObj, objToStyle, uuid } from '../common/util'
+import type { SortDirection, TableColumn, TableColumnProps } from '../wd-table-col/types'
 import { tableProps } from './types'
+import WdTableCol from '../wd-table-col/wd-table-col.vue'
+import { useTranslate } from '../composables/useTranslate'
+
+const { translate } = useTranslate('tableCol')
 
 const props = defineProps(tableProps)
 const emit = defineEmits(['click', 'sort-method', 'row-click'])
@@ -77,6 +94,17 @@ const reactiveState = reactive({
   columns: [] as TableColumn[],
   setRowClick,
   setColumns
+})
+
+const indexUUID = uuid()
+const indexColumn = ref<TableColumnProps>({
+  prop: indexUUID,
+  label: translate('indexLabel'),
+  width: '100rpx',
+  sortable: false,
+  fixed: false,
+  align: 'left',
+  ...(isObj(props.index) ? props.index : {})
 })
 
 const scroll = debounce(handleScroll, 100, { leading: false }) // 滚动事件
@@ -191,7 +219,11 @@ function isLastFixed(column: TableColumn) {
  * @param column 列
  */
 function setColumns(column: TableColumn) {
-  reactiveState.columns = deepClone([...reactiveState.columns, column])
+  if (column.prop === indexUUID) {
+    reactiveState.columns = deepClone([column, ...reactiveState.columns])
+  } else {
+    reactiveState.columns = deepClone([...reactiveState.columns, column])
+  }
 }
 
 /**

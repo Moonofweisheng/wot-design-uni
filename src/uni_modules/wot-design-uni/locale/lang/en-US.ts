@@ -120,5 +120,8 @@ export default {
   },
   textarea: {
     placeholder: 'Please input information...'
+  },
+  tableCol: {
+    indexLabel: 'index'
   }
 }

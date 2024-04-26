@@ -39,6 +39,17 @@
       </wd-table>
     </demo-block>
 
+    <demo-block title="显示索引">
+      <wd-table :data="dataList" height="328px" :index="{ align: 'center' }">
+        <wd-table-col prop="name" label="姓名" :sortable="true" align="center"></wd-table-col>
+        <wd-table-col prop="grade" label="分数" :sortable="true" align="center"></wd-table-col>
+        <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true" :width="160"></wd-table-col>
+        <wd-table-col prop="school" label="求学之所" :width="180"></wd-table-col>
+        <wd-table-col prop="major" label="专业"></wd-table-col>
+        <wd-table-col prop="gender" label="性别"></wd-table-col>
+      </wd-table>
+    </demo-block>
+
     <demo-block title="自定义列模板">
       <wd-table :data="dataList" @sort-method="doSort" @row-click="handleRowClick" height="328px">
         <wd-table-col prop="name" label="姓名" fixed :sortable="true" align="center"></wd-table-col>

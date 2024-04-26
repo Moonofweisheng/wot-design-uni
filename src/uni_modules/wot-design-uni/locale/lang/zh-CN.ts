@@ -120,5 +120,8 @@ export default {
   },
   textarea: {
     placeholder: '请输入...'
+  },
+  tableCol: {
+    indexLabel: '序号'
   }
 }

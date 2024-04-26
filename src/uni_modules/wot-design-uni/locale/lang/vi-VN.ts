@@ -61,5 +61,8 @@ export default {
   input: { placeholder: 'Vui lòng nhập...' },
   selectPicker: { title: 'Vui lòng chọn', placeholder: 'Vui lòng chọn', select: 'Xác nhận', confirm: 'Xác nhận', filterPlaceholder: 'Tìm kiếm' },
   tag: { placeholder: 'Vui lòng nhập', add: 'thêm' },
-  textarea: { placeholder: 'Vui lòng nhập...' }
+  textarea: { placeholder: 'Vui lòng nhập...' },
+  tableCol: {
+    indexLabel: 'Số sê-ri'
+  }
 }
