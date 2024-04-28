@@ -123,9 +123,11 @@ watch(
 watch(
   () => props.step,
   (newValue) => {
-    if (newValue <= 0) {
+    if (newValue < 1) {
       stepValue.value = 1
       console.warn('[wot design] warning(wd-slider): step must be greater than 0')
+    } else {
+      stepValue.value = Math.floor(newValue)
     }
   },
   { immediate: true }
