@@ -95,10 +95,7 @@ const stepValue = ref<number>(1) // 步长
 watch(
   () => props.max,
   (newValue) => {
-    if (newValue < 0) {
-      maxValue.value = 100
-      console.warn('[wot design] warning(wd-slider): max value must be greater than 0')
-    } else if (newValue <= props.min) {
+    if (newValue <= props.min) {
       maxValue.value = props.min // 交换最大值和最小值
       minValue.value = newValue
       console.warn('[wot design] warning(wd-slider): max value must be greater than min value')
@@ -106,16 +103,13 @@ watch(
       maxValue.value = newValue // 更新最大值
     }
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 )
 
 watch(
   () => props.min,
   (newValue) => {
-    if (newValue < 0) {
-      minValue.value = 0
-      console.warn('[wot design] warning(wd-slider): min value must be greater than 0')
-    } else if (newValue >= props.max) {
+    if (newValue >= props.max) {
       minValue.value = props.max // 交换最小值和最大值
       maxValue.value = newValue
       console.warn('[wot design] warning(wd-slider): min value must be less than max value')
@@ -123,7 +117,7 @@ watch(
       minValue.value = newValue // 更新最小值
     }
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 )
 
 watch(
@@ -134,7 +128,7 @@ watch(
       console.warn('[wot design] warning(wd-slider): step must be greater than 0')
     }
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 )
 
 watch(
