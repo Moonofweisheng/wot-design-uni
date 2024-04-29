@@ -3,7 +3,7 @@
  * @Date: 2023-10-10 17:02:32
  * @LastEditTime: 2023-10-10 18:08:19
  * @LastEditors: weisheng
- * @Description: 
+ * @Description:
  * @FilePath: \wot-design-uni\src\pages\slider\Index.vue
  * 记得注释
 -->
@@ -13,7 +13,7 @@
       <wd-slider v-model="value1" />
     </demo-block>
     <demo-block title="指定选择范围">
-      <wd-slider v-model="value2" :min="4" :max="1000" />
+      <wd-slider v-model="value2" :min="-10" :max="10" />
     </demo-block>
     <demo-block title="指定步长">
       <wd-slider v-model="value4" hide-min-max :step="10" />
