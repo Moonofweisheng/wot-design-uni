@@ -102,6 +102,7 @@ watch(
     } else {
       maxValue.value = newValue // 更新最大值
     }
+    calcBarPercent()
   },
   { immediate: true }
 )
@@ -116,6 +117,7 @@ watch(
     } else {
       minValue.value = newValue // 更新最小值
     }
+    calcBarPercent()
   },
   { immediate: true }
 )
@@ -327,6 +329,16 @@ function format(value: number) {
 function formatPercent(value: number) {
   const percentage = ((value - minValue.value) / (maxValue.value - minValue.value)) * 100
   return percentage
+}
+// 计算滑块位置和进度长度
+function calcBarPercent() {
+  const { modelValue } = props
+  let value = !isArray(modelValue) ? format(modelValue) : leftBarPercent.value < rightBarPercent.value ? format(modelValue[0]) : format(modelValue[1])
+  value = format(value)
+  // 把 value 转换成百分比
+  const percent = formatPercent(value)
+  leftBarPercent.value = percent
+  barStyle.value = `width: ${percent}%; height: ${barHeight.value};`
 }
 </script>
 <style lang="scss" scoped>
