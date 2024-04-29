@@ -102,6 +102,12 @@ watch(
     } else {
       maxValue.value = newValue // 更新最大值
     }
+    const { modelValue } = props
+		let value = !isArray(modelValue) ? format(modelValue) : leftBarPercent.value < rightBarPercent.value ? format(modelValue[0]) : format(modelValue[1])
+		value = format(value)
+		// 把 value 转换成百分比
+		const percent = formatPercent(value)
+		leftBarPercent.value = percent
   },
   { immediate: true }
 )
@@ -116,6 +122,12 @@ watch(
     } else {
       minValue.value = newValue // 更新最小值
     }
+    const { modelValue } = props
+		let value = !isArray(modelValue) ? format(modelValue) : leftBarPercent.value < rightBarPercent.value ? format(modelValue[0]) : format(modelValue[1])
+		value = format(value)
+		// 把 value 转换成百分比
+		const percent = formatPercent(value)
+		leftBarPercent.value = percent
   },
   { immediate: true }
 )
