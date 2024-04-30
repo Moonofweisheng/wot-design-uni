@@ -643,3 +643,8 @@ export const getPropByPath = (obj: any, path: string): any => {
  * @returns 如果值是Date类型，则返回true，否则返回false
  */
 export const isDate = (val: unknown): val is Date => Object.prototype.toString.call(val) === '[object Date]' && !Number.isNaN((val as Date).getTime())
+
+/**
+ * 判断环境是否是H5
+ */
+export const isH5 = process.env.UNI_PLATFORM === 'h5'
