@@ -45,7 +45,7 @@
   }
 
   @include m(active) {
-    font-weight: 600;
+    font-weight: bold;
     background: $-sidebar-active-bg;
     color: $-sidebar-active-color;
 
