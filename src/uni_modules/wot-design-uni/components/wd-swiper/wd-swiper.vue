@@ -18,12 +18,16 @@
       @animationfinish="handleAnimationfinish"
     >
       <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item" @click="handleClick(index)">
-        <image
-          :src="isObj(item) ? item.value : item"
-          :class="`wd-swiper__image ${customImageClass} ${getCustomImageClass(navCurrent, index, list)}`"
-          :style="{ height: addUnit(height) }"
-          :mode="imageMode"
-        />
+        <view class="wd-swiper__item__content">
+          <slot v-if="$slots.default" :index="index" :data="item"></slot>
+          <image
+            v-else
+            :src="isObj(item) ? item.value : item"
+            :class="`wd-swiper__image ${customImageClass} ${getCustomImageClass(navCurrent, index, list)}`"
+            :style="{ height: addUnit(height) }"
+            :mode="imageMode"
+          />
+        </view>
       </swiper-item>
     </swiper>
 

@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <demo-block title="点状指示器">
-      <wd-swiper :list="swiperList" autoplay :current="0" :indicator="{ type: 'dots' }" @click="handleClick" @change="onChange"></wd-swiper>
+      <wd-swiper :list="swiperList" :autoplay="false" :current="0" :indicator="{ type: 'dots' }" @click="handleClick" @change="onChange"></wd-swiper>
     </demo-block>
 
     <demo-block title="点条状指示器">
@@ -80,6 +80,17 @@
       ></wd-swiper>
     </demo-block>
 
+    <demo-block title="自定义内容">
+      <wd-swiper :list="swiperList" autoplay :current="0" :indicator="{ type: 'dots' }" @click="handleClick" @change="onChange">
+        <template #default="{ index, data }">
+          <view class="custom-item">
+            <view class="custom-item-title">custom-item-{{ index }}</view>
+            <image class="custom-item-img" :src="data" />
+          </view>
+        </template>
+      </wd-swiper>
+    </demo-block>
+
     <demo-block title="自定义指示器">
       <wd-swiper :list="swiperList" direction="vertical" indicator-position="right" autoplay :current="1" @click="handleClick" @change="onChange">
         <template #indicator="{ current, total }">
@@ -152,5 +163,28 @@ function onChange(e: any) {
   background: rgba(0, 0, 0, 0.6);
   color: #ffffff;
   font-size: 24rpx;
+}
+
+.custom-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &-title {
+    font-size: 40rpx;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10rpx;
+  }
+
+  &-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
 }
 </style>
