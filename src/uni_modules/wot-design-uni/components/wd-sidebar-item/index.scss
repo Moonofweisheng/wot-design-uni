@@ -28,6 +28,7 @@
 
 @include b(sidebar-item) {
   display: flex;
+  gap:8rpx;
   align-items: center;
   justify-content: center;
   position: relative;
