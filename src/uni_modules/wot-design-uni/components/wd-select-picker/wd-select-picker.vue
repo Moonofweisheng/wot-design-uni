@@ -253,7 +253,7 @@ const { proxy } = getCurrentInstance() as any
 function setScrollIntoView() {
   let wraperSelector: string = ''
   let selectorPromise: Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>[] = []
-  if (isDef(selectList.value) && !isArray(selectList.value)) {
+  if (isDef(selectList.value) && selectList.value !== '' && !isArray(selectList.value)) {
     wraperSelector = '#wd-radio-group'
     selectorPromise = [getRect(`#radio${selectList.value}`, false, proxy)]
   } else if (isArray(selectList.value) && selectList.value.length > 0) {
