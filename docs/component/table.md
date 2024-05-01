@@ -234,16 +234,23 @@ function handleSort(e) {
 
 ## Attributes
 
-| 参数       | 说明                                              | 类型                         | 可选值 | 默认值 | 最低版本         |
-| ---------- | ------------------------------------------------- | ---------------------------- | ------ | ------ | ---------------- |
-| data       | 显示的数据                                        | Array                        | -      | -      | 0.0.39           |
-| border     | 是否带有边框                                      | boolean                      | -      | true   | 0.0.39           |
-| stripe     | 是否为斑马纹表                                    | boolean                      | -      | true   | 0.0.39           |
-| height     | Table 的高度，默认为`80vh`                        | string                       | -      | `80vh` | 0.0.39           |
-| rowHeight  | 行高                                              | `number / string`            | -      | 50     | 0.0.39           |
-| showHeader | 是否显示表头                                      | boolean                      | -      | true   | 0.0.39           |
-| ellipsis   | 是否超出 2 行隐藏                                 | boolean                      | -      | true   | 0.0.39           |
-| index      | 是否显示索引列，可传入`boolean`也可传入column配置 | `boolean / TableColumnProps` |        | false  | $LOWEST_VERSION$ |
+| 参数       | 说明                                                | 类型                         | 可选值 | 默认值 | 最低版本         |
+| ---------- | --------------------------------------------------- | ---------------------------- | ------ | ------ | ---------------- |
+| data       | 显示的数据                                          | Array                        | -      | -      | 0.0.39           |
+| border     | 是否带有边框                                        | boolean                      | -      | true   | 0.0.39           |
+| stripe     | 是否为斑马纹表                                      | boolean                      | -      | true   | 0.0.39           |
+| height     | Table 的高度，默认为`80vh`                          | string                       | -      | `80vh` | 0.0.39           |
+| rowHeight  | 行高                                                | `number / string`            | -      | 50     | 0.0.39           |
+| showHeader | 是否显示表头                                        | boolean                      | -      | true   | 0.0.39           |
+| ellipsis   | 是否超出 2 行隐藏                                   | boolean                      | -      | true   | 0.0.39           |
+| index      | 是否显示索引列，可传入`boolean`也可传入 column 配置 | `boolean / TableColumnProps` |        | false  | $LOWEST_VERSION$ |
+
+## Events
+
+| 事件名称    | 说明                                                               | 参数                             | 最低版本 |
+| ----------- | ------------------------------------------------------------------ | -------------------------------- | -------- |
+| sort-method | 指定数据按照哪个属性进行排序，仅当 sortable 设置为 true 的时候有效 | `TableColumn：当前点击列数据`    | 0.0.39   |
+| row-click   | 当某一行被点击时会触发该事件                                       | `{rowIndex:number} 点击行的下标` | 0.0.39   |
 
 ## TableColumn Attributes
 

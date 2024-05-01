@@ -81,7 +81,7 @@ import { useTranslate } from '../composables/useTranslate'
 const { translate } = useTranslate('tableCol')
 
 const props = defineProps(tableProps)
-const emit = defineEmits(['click', 'sort-method', 'row-click'])
+const emit = defineEmits(['sort-method', 'row-click'])
 const reactiveState = reactive({
   data: props.data,
   stripe: props.stripe,
