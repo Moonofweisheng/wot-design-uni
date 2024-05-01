@@ -31,11 +31,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 32rpx;
+  padding: 32rpx 24rpx;
   font-size: $-sidebar-font-size;
   color: $-sidebar-color;
   background: $-sidebar-bg;
-  min-height: $-sidebar-item-height;
   box-sizing: border-box;
   white-space: wrap;
   line-height: $-sidebar-item-line-height;
@@ -85,7 +84,18 @@
   }
 
   @include edeep(badge) {
+	flex: 1;
+	text-align: center;
     z-index: 2;
+  }
+  
+  @include edeep(badge-with-icon) {
+	flex: 1;
+	text-align: center;
+    z-index: 2;
+	overflow-wrap: break-word;
+	word-break: break-all;
+	max-width: 4ch;
   }
 
   @include edeep(icon) {
