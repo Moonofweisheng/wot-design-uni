@@ -243,7 +243,7 @@ function handleSort(e) {
 | rowHeight  | 行高                                                | `number / string`            | -      | 50     | 0.0.39           |
 | showHeader | 是否显示表头                                        | boolean                      | -      | true   | 0.0.39           |
 | ellipsis   | 是否超出 2 行隐藏                                   | boolean                      | -      | true   | 0.0.39           |
-| index      | 是否显示索引列，可传入`boolean`也可传入 column 配置 | `boolean / TableColumnProps` |        | false  | $LOWEST_VERSION$ |
+| index      | 是否显示索引列，可传入`boolean`也可传入 column 配置 | `boolean / TableColumnProps` |        | false  | 1.2.19 |
 
 ## Events
 
