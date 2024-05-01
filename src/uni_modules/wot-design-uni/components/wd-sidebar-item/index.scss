@@ -85,18 +85,18 @@
   }
 
   @include edeep(badge) {
-	flex: 1;
-	text-align: center;
+    flex: 1;
+    text-align: center;
     z-index: 2;
   }
   
   @include edeep(badge-with-icon) {
-	flex: 1;
-	text-align: center;
+    flex: 1;
+    text-align: center;
     z-index: 2;
-	overflow-wrap: break-word;
-	word-break: break-all;
-	max-width: 4ch;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    max-width: 4ch;
   }
 
   @include edeep(icon) {
