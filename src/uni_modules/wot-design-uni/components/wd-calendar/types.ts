@@ -203,7 +203,7 @@ export type CalendarOnShortcutsClick = (option: CalendarOnShortcutsClickOption) 
 
 export type CalendarExpose = {
   /** 关闭时间选择器弹窗 */
-  close: () => void,
+  close: () => void
   /** 打开时间选择器弹窗 */
   open: () => void
 }
