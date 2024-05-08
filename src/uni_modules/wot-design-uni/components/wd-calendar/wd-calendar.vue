@@ -123,7 +123,7 @@ import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
-import { calendarProps } from './types'
+import { calendarProps, CalendarExpose } from './types'
 import type { CalendarType } from '../wd-calendar-view/types'
 const { translate } = useTranslate('calendar')
 
@@ -409,6 +409,11 @@ function handleShortcutClick(index: number) {
     handleConfirm()
   }
 }
+
+defineExpose<CalendarExpose>({
+  close,
+  open
+})
 </script>
 
 <style lang="scss" scoped>
