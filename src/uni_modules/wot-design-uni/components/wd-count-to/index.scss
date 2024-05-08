@@ -1,0 +1,19 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(count-to) {
+    color: $-dark-color;
+  }
+}
+
+
+@include b(count-to) {
+  /* #ifndef APP-NVUE */
+	display: inline-flex;
+	/* #endif */
+	text-align: center;
+  color: $-count-down-text-color;
+  font-size: $-count-down-font-size;
+  line-height: $-count-down-line-height;
+}

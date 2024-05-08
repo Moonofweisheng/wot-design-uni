@@ -761,6 +761,16 @@
         },
         "navigationBarTitleText": "PasswordInput 密码输入框"
       }
+    },
+    {
+      "path": "pages/countTo/Index",
+      "name": "countTo",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "countTo 数字滚动"
+      }
     }
   ],
   // "tabBar": {
