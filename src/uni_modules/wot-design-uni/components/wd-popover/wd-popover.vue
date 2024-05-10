@@ -89,6 +89,13 @@ watch(
 )
 
 watch(
+  () => props.placement,
+  () => {
+    popover.init(props.placement, props.visibleArrow, selector)
+  }
+)
+
+watch(
   () => props.modelValue,
   (newValue) => {
     if (newValue) {

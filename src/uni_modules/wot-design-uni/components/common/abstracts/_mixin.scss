@@ -286,6 +286,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
+      left: 0;
       bottom: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
@@ -299,6 +300,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
+      left: 0;
       top: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
@@ -313,6 +315,7 @@
       background-color: $bg;
       position: absolute;
       left: calc(-1 * $size / 2);
+      top: 0;
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
@@ -326,6 +329,7 @@
       background-color: $bg;
       position: absolute;
       right: calc(-1 * $size / 2);
+      top: 0;
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
