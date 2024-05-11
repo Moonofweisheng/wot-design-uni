@@ -27,17 +27,18 @@ export default {
 import { ref, unref, onMounted, watch, computed } from 'vue'
 import { countToProps } from './types'
 import { onBeforeUnmount } from 'vue'
+import { useRequestAnimationFrame, formatNumber } from './utils'
 
 const props = defineProps(countToProps)
+const { requestAnimationFrame } = useRequestAnimationFrame()
 
-const result = ref(0)
-let printVal = null
-let localStartVal: number | null = null
-let localDuration: number | null = null
-let timestamp: number | null = null // 时间戳
-let startTime: number | null = null // 开始的时间
-let remaining: number | null = null //  停留的时间
-let lastTime = 0 // 上一次的时间
+const result = ref<string | number>(0)
+let printVal: string | number | null = null
+let localStartVal: number = 0
+let localDuration: number = 0
+let timestamp: number = 0 // 时间戳
+let startTime: number = 0 // 开始的时间
+let remaining: number = 0 //  停留的时间
 let rafId: number | null = null
 const countDown = computed(() => props.startVal > props.endVal)
 
@@ -62,14 +63,13 @@ const handleCountTo = (_timestamp) => {
     rafId = requestAnimationFrame(handleCountTo)
   } else {
     localStartVal = props.endVal //  让结束时间等于开始时间，下次更新时开始时间不从0开始
-    console.log('结束')
   }
 }
 
 const handleStart = () => {
   !localStartVal && (localStartVal = props.startVal)
   localDuration = props.duration
-  startTime = null
+  startTime = 0
   rafId = requestAnimationFrame(handleCountTo)
 }
 
@@ -90,30 +90,8 @@ watch(
   }
 )
 
-function requestAnimationFrame(callback) {
-  const currTime = new Date().getTime()
-  // 为了使setTimteout的尽可能的接近每秒60帧的效果
-  const timeToCall = Math.max(0, 16 - (currTime - lastTime))
-  const id = setTimeout(() => {
-    callback(currTime + timeToCall)
-  }, timeToCall) as unknown as number
-  lastTime = currTime + timeToCall
-  return id
-}
 function cancelAnimationFrame(id) {
   clearTimeout(id)
-}
-
-// 判断是否数字
-function isNumber(val): boolean {
-  return !isNaN(parseFloat(val))
-}
-
-// 格式化结果
-function formatNumber(num) {
-  num = Number(num)
-  num = num.toFixed(props.decimals)
-  return num
 }
 </script>
 
