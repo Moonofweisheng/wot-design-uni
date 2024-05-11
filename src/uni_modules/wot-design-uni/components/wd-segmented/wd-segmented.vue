@@ -38,7 +38,7 @@ import { segmentedProps, type SegmentedInfo, type SegmentedOption } from './type
 const $item = '.wd-segmented__item'
 
 const props = defineProps(segmentedProps)
-const emit = defineEmits(['update:value', 'change'])
+const emit = defineEmits(['update:value', 'change', 'click'])
 
 const sectionItemInfo = reactive<SegmentedInfo>({
   width: 0,
@@ -130,6 +130,7 @@ function handleClick(option: string | number | SegmentedOption, index: number) {
   updateActiveStyle()
   emit('update:value', value)
   emit('change', isObj(option) ? option : { value })
+  emit('click', isObj(option) ? option : { value })
 }
 </script>
 

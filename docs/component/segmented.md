@@ -120,6 +120,7 @@ const list1 = ref([
 | 事件名称 | 说明                       | 参数        | 最低版本 |
 | -------- | -------------------------- | ----------- | -------- |
 | change   | 选项切换时触发             | `SegmentedOption` | 0.1.23   |
+| click   | 选项点击时触发             | `SegmentedOption` | $LOWEST_VERSION$   |
 
 ## Slots
 
