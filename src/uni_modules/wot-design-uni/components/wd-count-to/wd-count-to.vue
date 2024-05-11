@@ -32,8 +32,9 @@ import { useRequestAnimationFrame, formatNumber } from './utils'
 const props = defineProps(countToProps)
 const { requestAnimationFrame } = useRequestAnimationFrame()
 
+console.log(props)
 const result = ref<string | number>(0)
-let printVal: string | number | null = null
+let printVal: string | number = ''
 let localStartVal: number = 0
 let localDuration: number = 0
 let timestamp: number = 0 // 时间戳
@@ -58,7 +59,7 @@ const handleCountTo = (_timestamp) => {
     printVal = printVal > _endVal ? _endVal : printVal
   }
 
-  result.value = formatNumber(printVal) || 0
+  result.value = formatNumber({ num: printVal, separator: props.separator }) || 0
   if (progress < localDuration) {
     rafId = requestAnimationFrame(handleCountTo)
   } else {

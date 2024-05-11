@@ -34,7 +34,11 @@ export const countToProps = {
   /**
    * 是否加粗
    */
-  isBold: makeBooleanProp(false)
+  isBold: makeBooleanProp(false),
+  /**
+   * 分隔符
+   */
+  separator: makeStringProp('')
 }
 
 export type CountToProps = ExtractPropTypes<typeof countToProps>

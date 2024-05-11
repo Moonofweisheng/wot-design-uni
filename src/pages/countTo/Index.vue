@@ -13,6 +13,10 @@
       </view>
     </demo-block>
 
+    <demo-block title="分隔符">
+      <wd-count-to :startVal="1000" :endVal="20000000" fontSize="48rpx" fontColor="#f34250" isBold separator="." />
+    </demo-block>
+
     <demo-block title="样式">
       <wd-count-to :startVal="1000" :endVal="2000" fontSize="48rpx" fontColor="#f34250" isBold />
     </demo-block>
