@@ -25,7 +25,10 @@
     </demo-block>
 
     <demo-block title="使用插槽" transparent>
-      <wd-navbar title="标题" left-text="返回" left-arrow>
+      <wd-navbar title="标题" @click-left="handleClickLeft">
+        <template #left>
+          <wd-icon name="arrow-left" size="24px" class="wd-navbar__arrow" />
+        </template>
         <template #right>
           <wd-icon name="search" size="18" />
         </template>
