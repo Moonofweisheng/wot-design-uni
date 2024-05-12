@@ -1,6 +1,28 @@
 # 更新日志 
 
 
+### [1.2.19](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.18...v1.2.19) (2024-05-01)
+
+
+### ✨ Features | 新功能
+
+* ✨ `Slider`组件`min`值允许负数 ([9e7c8d3](https://github.com/Moonofweisheng/wot-design-uni/commit/9e7c8d33eb2c0fccc44f465ed3b28d2cd81efa2d)), closes [#266](https://github.com/Moonofweisheng/wot-design-uni/issues/266)
+* ✨ fab添加draggable属性 ([#259](https://github.com/Moonofweisheng/wot-design-uni/issues/259)) ([5e0cd6c](https://github.com/Moonofweisheng/wot-design-uni/commit/5e0cd6caa2296a44a3dc1b3d33033d4cc91d01b9))
+* ✨ table组件添加index参数 ([2161705](https://github.com/Moonofweisheng/wot-design-uni/commit/2161705a2f868f874b89ee28b6029677854a7741))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复`slider`组件`step`属性无效问题 ([50133b9](https://github.com/Moonofweisheng/wot-design-uni/commit/50133b9e5e2a18aace8cbf9eb7570579cc563f1d)), closes [#269](https://github.com/Moonofweisheng/wot-design-uni/issues/269)
+* 🐛 修复Cell组件title文字对齐方式受外部影响的问题 ([caf66b6](https://github.com/Moonofweisheng/wot-design-uni/commit/caf66b6beeb236a9295cf0d8ec250557dc19e54e)), closes [#282](https://github.com/Moonofweisheng/wot-design-uni/issues/282)
+* 🐛 修复SelectPicker无默认值时仍会查找选择项节点的问题 ([130c438](https://github.com/Moonofweisheng/wot-design-uni/commit/130c4383dc862e190b96bc3670a852a4cce3e629)), closes [#281](https://github.com/Moonofweisheng/wot-design-uni/issues/281)
+* 🐛 修复Slider组件max和min变化时滑块和进度条未更新的问题 ([#276](https://github.com/Moonofweisheng/wot-design-uni/issues/276)) ([69303b5](https://github.com/Moonofweisheng/wot-design-uni/commit/69303b52077bd268e3563fa9096e91530bb978c5))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  补充Table组件关于Events的介绍 ([6760317](https://github.com/Moonofweisheng/wot-design-uni/commit/676031781b189a3a89dba9e57cb989c06999091a)), closes [#260](https://github.com/Moonofweisheng/wot-design-uni/issues/260)
+
 ### [1.2.18](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.17...v1.2.18) (2024-04-23)
 
 

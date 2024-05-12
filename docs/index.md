@@ -52,12 +52,12 @@ footer: false
 import { onMounted } from 'vue'
 onMounted(()=>{
   if (window.location.hostname === 'wot-design-uni.cn') {
-    ElMessageBox.confirm('您正在访问的站点速度较慢，是否跳转至更快的 wot-design-uni.gitee.io ？', '提示', {
+    ElMessageBox.confirm('您正在访问的站点不稳定，是否跳转至更稳定的 wot-design-uni.pages.dev ？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
     }).then(() => {
-        window.location.href = 'https://wot-design-uni.gitee.io/';
+        window.location.href = 'https://wot-design-uni.pages.dev/';
     }).catch(() => {
         // 用户点击取消按钮时的操作
     });

@@ -33,7 +33,7 @@ const handleLowestVersion = (dir, version) => {
         })
 
         if (content.includes(LOWEST_VERSION)) {
-          content = content.replace(LOWEST_VERSION, version)
+          content = content.replace(/\$LOWEST_VERSION\$/g, version)
           writeFileSync(itemPath, content)
         }
       }

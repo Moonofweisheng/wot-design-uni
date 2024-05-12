@@ -200,3 +200,10 @@ export type CalendarOnShortcutsClickOption = {
 }
 
 export type CalendarOnShortcutsClick = (option: CalendarOnShortcutsClickOption) => number | number[]
+
+export type CalendarExpose = {
+  /** 关闭时间选择器弹窗 */
+  close: () => void
+  /** 打开时间选择器弹窗 */
+  open: () => void
+}

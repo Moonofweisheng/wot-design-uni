@@ -82,7 +82,7 @@ const active = ref<boolean>(false)
 | v-model:active | 是否激活               | boolean      | -                                                                                         | false          | 0.1.57           |
 | type           | 类型                   | FabType      | 'primary' &#124; 'success' &#124; 'info' &#124; 'warning' &#124; 'error' &#124; 'default' | 'primary'      | 0.1.57           |
 | position       | 悬浮按钮位置           | FabPosition  | 'left-top' &#124; 'right-top' &#124; 'left-bottom' &#124; 'right-bottom'                  | 'right-bottom' | 0.1.57           |
-| draggable      | 按钮能否拖动           | boolean      |                                                                                           | false          | $LOWEST_VERSION$ |
+| draggable      | 按钮能否拖动           | boolean      |                                                                                           | false          | 1.2.19 |
 | direction      | 悬浮按钮菜单弹出方向   | FabDirection | 'top' &#124; 'right' &#124; 'bottom' &#124; 'left'                                        | 'top'          | 0.1.57           |
 | disabled       | 是否禁用               | boolean      | -                                                                                         | false          | 0.1.57           |
 | inactiveIcon   | 悬浮按钮未展开时的图标 | string       | -                                                                                         | 'add'          | 0.1.57           |

@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2024-02-04 10:21:21
+ * @LastEditTime: 2024-05-08 13:29:27
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\theme\composables\friendly.ts
@@ -23,7 +23,7 @@ export function useFriendly() {
     if (data.value && data.value.length) {
       return
     }
-    const result = await fetch('https://historysoa.oss-cn-hongkong.aliyuncs.com/sponsors/friendly.json')
+    const result = await fetch('https://wot-sponsors.pages.dev/friendly.json')
     const json = await result.json()
     data.value = json && json.links ? json.links : []
   })

@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2024-02-02 15:30:41
+ * @LastEditTime: 2024-05-08 13:23:59
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\theme\composables\sponsor.ts
@@ -17,7 +17,7 @@ export function useSponsor() {
     if (data.value) {
       return
     }
-    const result = await fetch('https://historysoa.oss-cn-hongkong.aliyuncs.com/sponsors/wot-design-uni.json')
+    const result = await fetch('https://wot-sponsors.pages.dev/wot-design-uni.json')
     const json = await result.json()
     data.value = json
   })

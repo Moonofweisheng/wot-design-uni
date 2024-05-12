@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-04-10 11:31:29
+ * @LastEditTime: 2024-05-07 17:05:08
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
@@ -144,7 +144,7 @@ export default defineConfig({
       {
         text: '相关链接',
         items: [
-          { text: 'Vue3 uni-app路由库', link: 'https://wot-design-uni.gitee.io/uni-mini-router/' },
+          { text: 'Vue3 uni-app路由库', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: '多平台小程序CI工具', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: '快速上手项目', link: 'https://github.com/Moonofweisheng/wot-starter' },
         ],
