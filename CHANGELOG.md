@@ -1,6 +1,30 @@
 # 更新日志 
 
 
+### [1.2.20](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.19...v1.2.20) (2024-05-12)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整捐赠榜单和友情链接的数据到cloudflare上 ([1314373](https://github.com/Moonofweisheng/wot-design-uni/commit/1314373af1dff95aee4cd3cddefebcb3a6a5c5d2))
+* ✏️  推荐文档地址调整至cloudflare ([9119f30](https://github.com/Moonofweisheng/wot-design-uni/commit/9119f30b23676ad1b9a3869e362a3840ba288dc3))
+* ✏️  Curtain组件width属性标记为number类型 ([d172ce7](https://github.com/Moonofweisheng/wot-design-uni/commit/d172ce7ffcfebf29b184b57a7f74a25acad1f967)), closes [#303](https://github.com/Moonofweisheng/wot-design-uni/issues/303)
+
+
+### ✨ Features | 新功能
+
+* Segmented组件添加click事件 ([#301](https://github.com/Moonofweisheng/wot-design-uni/issues/301)) ([225ce22](https://github.com/Moonofweisheng/wot-design-uni/commit/225ce225ac7faedffd4686b908076c47ba111695))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复MessageBox中使用TextArea字数统计样式错误的问题 ([b186ac0](https://github.com/Moonofweisheng/wot-design-uni/commit/b186ac09294a4fede16c514cd96ff94f661fcbc9)), closes [#290](https://github.com/Moonofweisheng/wot-design-uni/issues/290)
+* 🐛 修复PickerView可以滚动到禁用选项的问题 ([edd44ed](https://github.com/Moonofweisheng/wot-design-uni/commit/edd44eda3fc9879dc980b02d1885d77530a3d2e8)), closes [#302](https://github.com/Moonofweisheng/wot-design-uni/issues/302)
+* 🐛 修复Popover指定placement后箭头显示异常的问题([#306](https://github.com/Moonofweisheng/wot-design-uni/issues/306)) ([a9b108d](https://github.com/Moonofweisheng/wot-design-uni/commit/a9b108d231a8e537aab4ba49781590bcafb9354d))
+* 🐛 修复release脚本处理最低版本号问题 ([c8077c9](https://github.com/Moonofweisheng/wot-design-uni/commit/c8077c9f3790e7844c902528d43596c4bc4025af))
+* 🐛 修复Sticky组件获取节点错误的问题 ([5483ea6](https://github.com/Moonofweisheng/wot-design-uni/commit/5483ea6c447f85229af66b950e34c1dc690fadb1))
+* 修复wd-calendar未抛出事件 ([c1203c9](https://github.com/Moonofweisheng/wot-design-uni/commit/c1203c91841c3d5bcd407923a577711e462207a3))
+
 ### [1.2.19](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.18...v1.2.19) (2024-05-01)
 
 
