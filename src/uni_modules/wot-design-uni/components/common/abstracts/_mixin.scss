@@ -286,6 +286,7 @@
       height: $size;
       background-color: $bg;
       position: absolute;
+      left: 0;
       bottom: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
@@ -293,12 +294,14 @@
   }
   @include e(arrow-up) {
     transform: translateX(-50%);
+    top: 0;
     &:after {
       content: "";
       width: $size;
       height: $size;
       background-color: $bg;
       position: absolute;
+      left: 0;
       top: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
@@ -306,6 +309,7 @@
   }
   @include e(arrow-left) {
     transform: translateY(-50%);
+    left: 0;
     &:after {
       content: "";
       width: $size;
@@ -313,12 +317,15 @@
       background-color: $bg;
       position: absolute;
       left: calc(-1 * $size / 2);
+      top: 0;
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
   }
   @include e(arrow-right) {
     transform: translateY(-50%);
+    right: 0;
+
     &:after {
       content: "";
       width: $size;
@@ -326,6 +333,7 @@
       background-color: $bg;
       position: absolute;
       right: calc(-1 * $size / 2);
+      top: 0;
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
