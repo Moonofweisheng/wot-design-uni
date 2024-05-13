@@ -10,7 +10,7 @@
     <template v-if="!$slots.icon && icon">
       <wd-icon custom-class="wd-sidebar-item__icon" :name="icon" size="20px"></wd-icon>
     </template>
-    <wd-badge :model-value="badge" :is-dot="isDot" :max="max" v-bind="badgeProps" custom-class="wd-sidebar-item__badge">
+    <wd-badge :model-value="badge" :is-dot="isDot" :max="max" v-bind="badgeProps" :custom-class="($slots.icon || icon)?'wd-sidebar-item__badge-with-icon':'wd-sidebar-item__badge'">
       {{ label }}
     </wd-badge>
   </view>
