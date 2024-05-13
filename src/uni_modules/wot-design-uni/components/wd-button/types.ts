@@ -48,6 +48,10 @@ export const buttonProps = {
    */
   icon: String,
   /**
+  * 自定义图标前缀
+  */
+  iconClassPrefix: String,
+  /**
    * 加载中按钮
    */
   loading: makeBooleanProp(false),
