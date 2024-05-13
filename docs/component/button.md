@@ -82,6 +82,14 @@
 <wd-button icon="edit-outline"></wd-button>
 ```
 
+## 在按钮中使用自定义图标
+
+设置 `icon-class-prefix` 属性，使用方法参考wd-icon中的`class-prefix`属性
+
+```html
+<wd-button type="icon" icon-class-prefix="my-icon" icon="extra"></wd-button>
+```
+
 ## 块状按钮
 
 设置 `block` 属性。
@@ -103,6 +111,7 @@
 | size | 按钮尺寸 | string | small / medium / large | medium | - |
 | disabled | 禁用按钮 | boolean | - | false | - |
 | icon | 图标类名 | string | - | - | - |
+| icon-class-prefix | 类名前缀，用于使用自定义图标 | string | - | - | - |
 | loading-color | 加载图标颜色 | string | - | - | - |
 | open-type | 微信开放能力 | string | - | - | - |
 | <s>form-type</s> | <s>用于 form 组件，点击分别会触发 form 组件的 submit/reset 事件</s>，该属性暂时不可用 | string | submit / reset | - | - |
