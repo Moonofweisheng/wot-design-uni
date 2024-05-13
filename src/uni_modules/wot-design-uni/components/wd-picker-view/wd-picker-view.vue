@@ -174,6 +174,9 @@ function selectWithIndex(columnIndex: number, rowIndex: number) {
     throw Error(`The value to select with Col:${columnIndex} Row:${rowIndex} is correct`)
   }
   const select: number[] = deepClone(selectedIndex.value)
+  select[columnIndex] = rowIndex
+  selectedIndex.value = deepClone(select)
+
   // 被禁用的无法选中，选中距离它最近的未被禁用的
   if (col[rowIndex].disabled) {
     // 寻找值为0或最最近的未被禁用的节点的索引
@@ -189,10 +192,10 @@ function selectWithIndex(columnIndex: number, rowIndex: number) {
     } else if (select[columnIndex] === undefined) {
       select[columnIndex] = 0
     }
-  } else {
-    select[columnIndex] = rowIndex
+    nextTick(() => {
+      selectedIndex.value = deepClone(select)
+    })
   }
-  selectedIndex.value = deepClone(select)
   return selectedIndex.value
 }
 

@@ -103,7 +103,7 @@ function handleClose() {
 |-----|-----|------|-------|-------|--------|
 | value | 绑定值，展示/关闭幕帘 | boolean | - | - | - |
 | src | 幕帘图片地址，必须使用网络地址 | string | - | - | - |
-| width | 幕帘图片宽度 | string | - | - | - |
+| width | 幕帘图片宽度，默认单位px | number | - | - | - |
 | to | 幕帘图片点击链接 | string | - | - | - |
 | close-position | 关闭按钮位置 | string | inset / top / bottom / top-left / top-right / bottom-left / bottom-right | inset | - |
 | close-on-click-modal | 点击遮罩是否关闭 | boolean | - | false | - |

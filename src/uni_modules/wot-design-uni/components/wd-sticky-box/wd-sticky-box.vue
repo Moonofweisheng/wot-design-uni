@@ -1,6 +1,6 @@
 <template>
   <view style="position: relative">
-    <view :class="`wd-sticky-box ${props.customClass}`" :style="customStyle" id="styckyBoxId">
+    <view :class="`wd-sticky-box ${props.customClass}`" :style="customStyle" :id="styckyBoxId">
       <wd-resize @resize="resizeHandler">
         <slot />
       </wd-resize>
