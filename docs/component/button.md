@@ -71,7 +71,7 @@
 将 `type` 设置为 `icon`，同时设置 `icon` 属性，icon为图标的类名，可以直接使用 `Icon 图标` 章节中的图标类名。
 
 ```html
-<wd-button type="icon" icon="menu"></wd-button>
+<wd-button type="icon" icon="picture"></wd-button>
 ```
 
 ## 带图标的按钮
