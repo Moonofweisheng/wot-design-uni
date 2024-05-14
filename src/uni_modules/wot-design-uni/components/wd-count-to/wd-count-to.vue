@@ -43,7 +43,7 @@ let remaining: number = 0 //  停留的时间
 let rafId: number | null = null
 const countDown = computed(() => props.startVal > props.endVal)
 
-const handleCountTo = (_timestamp) => {
+const handleCountTo = (_timestamp: number) => {
   if (!startTime) startTime = _timestamp
   const _countDown = unref(countDown)
   const _endVal = props.endVal
@@ -91,7 +91,7 @@ watch(
   }
 )
 
-function cancelAnimationFrame(id) {
+function cancelAnimationFrame(id: number) {
   clearTimeout(id)
 }
 </script>
