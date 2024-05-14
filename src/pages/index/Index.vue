@@ -117,6 +117,10 @@ const list = ref([
       {
         id: 'sidebar',
         name: 'Sidebar 侧边栏'
+      },
+      {
+        id: 'backtop',
+        name: 'Backtop 回到顶部'
       }
     ]
   },

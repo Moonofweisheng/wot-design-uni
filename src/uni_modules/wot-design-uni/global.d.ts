@@ -95,6 +95,7 @@ declare module '@vue/runtime-core' {
     WdPasswordInput: typeof import('./components/wd-password-input/wd-password-input.vue')['default']
     WdForm: typeof import('./components/wd-form/wd-form.vue')['default']
     WdTextarea: typeof import('./components/wd-textarea/wd-textarea.vue')['default']
+    WdBacktop: typeof import('./components/wd-backtop/wd-backtop.vue')['default']
   }
 }
 
