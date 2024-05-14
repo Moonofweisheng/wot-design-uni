@@ -247,6 +247,9 @@ export default defineConfig({
           }, {
             link: "/component/sidebar",
             text: "Sidebar 侧边栏"
+          }, {
+            link: "/component/backtop",
+            text: "Backtop 回到顶部"
           }]
         }, {
 

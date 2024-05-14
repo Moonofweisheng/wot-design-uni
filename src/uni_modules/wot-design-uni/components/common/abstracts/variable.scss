@@ -869,3 +869,6 @@ $-password-input-cursor-duration: var(--wd-password-input-cursor-duration, 1s);
 $-form-item-error-message-color: var(--wot-form-item-error-message-color, $-color-danger) !default;
 $-form-item-error-message-font-size: var(--wot-form-item-error-message-font-size, $-fs-secondary) !default;
 $-form-item-error-message-line-height: var(--wot-form-item-error-message-line-height, 24px) !default;
+
+/* backtop */
+$-backtop-bg: var(--wot-backtop-bg, #e1e1e1) !default;

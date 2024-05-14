@@ -761,6 +761,16 @@
         },
         "navigationBarTitleText": "PasswordInput 密码输入框"
       }
+    },
+    {
+      "path": "pages/backtop/Index",
+      "name": "backtop",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Backtop 回到顶部"
+      }
     }
   ],
   // "tabBar": {
