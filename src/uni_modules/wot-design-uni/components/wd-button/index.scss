@@ -224,14 +224,7 @@
 
   @include when(round) {
     border-radius: 999px;
-
-    &::after {
-      border-radius: 999px;
-    }
-
-    &::before {
-      border-radius: 999px;
-    }
+    overflow: hidden;
   }
 
   @include when(text) {
