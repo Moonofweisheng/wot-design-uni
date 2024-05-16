@@ -1,6 +1,6 @@
 <frame/>
 
-#  Picker 选择器视图
+#  Picker 选择器
 
 Picker 组件为 popup 和 pickerView 的组合。
 

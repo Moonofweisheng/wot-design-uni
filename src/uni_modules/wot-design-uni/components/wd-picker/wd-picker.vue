@@ -89,7 +89,7 @@ export default {
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
 import { deepClone, defaultDisplayFormat, getType, isArray, isDef, isFunction } from '../common/util'
 import { useCell } from '../composables/useCell'
-import { type ColumnItem, formatArray } from '../wd-picker-view/types'
+import { type ColumnItem, formatArray, type PickerViewInstance } from '../wd-picker-view/types'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
@@ -99,7 +99,7 @@ const { translate } = useTranslate('picker')
 const props = defineProps(pickerProps)
 const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
 
-const pickerViewWd = ref<any>(null)
+const pickerViewWd = ref<PickerViewInstance | null>(null)
 const cell = useCell()
 
 const innerLoading = ref<boolean>(false) // 内部控制是否loading
@@ -124,12 +124,8 @@ watch(
     if (fn && !isFunction(fn)) {
       console.error('The type of displayFormat must be Function')
     }
-    if (pickerViewWd.value && pickerViewWd.value.selectedIndex && pickerViewWd.value.selectedIndex.length !== 0) {
-      if (isDef(props.modelValue) && props.modelValue !== '') {
-        setShowValue(pickerViewWd.value.getSelects())
-      } else {
-        showValue.value = ''
-      }
+    if (pickerViewWd.value && pickerViewWd.value.getSelectedIndex().length !== 0) {
+      handleShowValueUpdate(props.modelValue)
     }
   },
   {
@@ -143,17 +139,7 @@ watch(
   (newValue) => {
     pickerValue.value = newValue
     // 获取初始选中项,并展示初始选中文案
-    if (isDef(newValue) && newValue !== '') {
-      if (pickerViewWd.value && pickerViewWd.value.getSelects) {
-        nextTick(() => {
-          setShowValue(pickerViewWd.value!.getSelects())
-        })
-      } else {
-        setShowValue(getSelects(newValue)!)
-      }
-    } else {
-      showValue.value = ''
-    }
+    handleShowValueUpdate(newValue)
   },
   {
     deep: true,
@@ -167,17 +153,7 @@ watch(
     displayColumns.value = newValue
     resetColumns.value = newValue
     // 获取初始选中项,并展示初始选中文案
-    if (isDef(props.modelValue) && props.modelValue !== '') {
-      if (pickerViewWd.value && pickerViewWd.value.getSelects) {
-        nextTick(() => {
-          setShowValue(pickerViewWd.value!.getSelects())
-        })
-      } else {
-        setShowValue(getSelects(props.modelValue)!)
-      }
-    } else {
-      showValue.value = ''
-    }
+    handleShowValueUpdate(props.modelValue)
   },
   {
     deep: true,
@@ -226,16 +202,32 @@ const isRequired = computed(() => {
 const { proxy } = getCurrentInstance() as any
 
 onMounted(() => {
-  isDef(props.modelValue) && props.modelValue !== '' && setShowValue(getSelects(props.modelValue)!)
-  if (isDef(props.modelValue) && props.modelValue !== '' && pickerViewWd.value && pickerViewWd.value.getSelects) {
-    setShowValue(pickerViewWd.value!.getSelects())
-  }
+  handleShowValueUpdate(props.modelValue)
 })
 
 onBeforeMount(() => {
   displayColumns.value = deepClone(props.columns)
   resetColumns.value = deepClone(props.columns)
 })
+
+/**
+ * 值变更时更新显示内容
+ * @param value
+ */
+function handleShowValueUpdate(value: string | number | Array<string | number>) {
+  // 获取初始选中项,并展示初始选中文案
+  if ((isArray(value) && value.length > 0) || (isDef(value) && !isArray(value) && value !== '')) {
+    if (pickerViewWd.value) {
+      nextTick(() => {
+        setShowValue(pickerViewWd.value!.getSelects())
+      })
+    } else {
+      setShowValue(getSelects(value)!)
+    }
+  } else {
+    showValue.value = ''
+  }
+}
 
 /**
  * @description 根据传入的value，picker组件获取当前cell展示值。
@@ -344,6 +336,7 @@ function handleConfirm() {
   popupShow.value = false
   resetColumns.value = deepClone(columns)
   emit('update:modelValue', values)
+
   setShowValue(selects)
   emit('confirm', {
     value: values,
