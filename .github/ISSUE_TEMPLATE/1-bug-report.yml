@@ -39,7 +39,7 @@ body:
   - type: input
     id: reproduce
     attributes:
-      label: 重现链接
+      label: 复现Demo地址
       description: |
         请提供一个尽可能简单的 GitHub 仓库链接。不要随便填写一个链接，这会导致你的 issue 被直接关闭。
     validations:
