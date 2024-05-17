@@ -20,6 +20,7 @@
 import type { AnchorItem, AnchorIndex } from './type'
 import { indexBarInjectionKey } from './type'
 import { provide, ref, getCurrentInstance, onMounted } from 'vue'
+import { getRect } from '../common/util'
 
 const { proxy } = getCurrentInstance()!
 
@@ -39,33 +40,18 @@ let sidebarInfo = {
 }
 
 function init() {
-  uni
-    .createSelectorQuery()
-    .in(proxy)
-    .select('.wd-index-bar')
-    .boundingClientRect()
-    .exec(([res]) => (offsetTop = res.top))
-
   setTimeout(() => {
     currentAnchorIndex.value = anchorList.value[0]?.index
 
-    uni
-      .createSelectorQuery()
-      .in(proxy)
-      .select('.wd-index-bar__sidebar')
-      .boundingClientRect()
-      .exec(([res]) => {
-        sidebarInfo.offsetTop = res.top
-      })
-
-    uni
-      .createSelectorQuery()
-      .in(proxy)
-      .select('.wd-index-bar__index')
-      .boundingClientRect()
-      .exec(([res]) => {
-        sidebarInfo.indexHeight = res.height
-      })
+    Promise.all([
+      getRect('.wd-index-bar', false, proxy),
+      getRect('.wd-index-bar__sidebar', false, proxy),
+      getRect('.wd-index-bar__index', false, proxy)
+    ]).then(([bar, sidebar, index]) => {
+      offsetTop = bar.top!
+      sidebarInfo.offsetTop = sidebar.top!
+      sidebarInfo.indexHeight = index.height!
+    })
   }, 100)
 }
 
