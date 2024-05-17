@@ -250,6 +250,9 @@ export default defineConfig({
           }, {
             link: "/component/backtop",
             text: "Backtop 回到顶部"
+          }, {
+            link: "/component/indexBar",
+            text: "IndexBar 索引栏"
           }]
         }, {
 

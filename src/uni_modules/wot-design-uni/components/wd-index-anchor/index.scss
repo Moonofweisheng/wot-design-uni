@@ -1,0 +1,16 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+.wot-theme-dark {
+  @include b(index-anchor) {
+    background-color: $-color-gray-8;
+    color: $-color-white;
+  }
+}
+
+@include b(index-anchor) {
+  background-color: $-color-gray-3;
+  padding: 10px;
+  font-size: 14px;
+  color: $-color-title;
+}

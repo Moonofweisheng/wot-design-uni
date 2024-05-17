@@ -872,3 +872,6 @@ $-form-item-error-message-line-height: var(--wot-form-item-error-message-line-he
 
 /* backtop */
 $-backtop-bg: var(--wot-backtop-bg, #e1e1e1) !default;
+
+/* index-bar */
+$-index-bar-index-font-size: var(--wot-index-bar-index-font-size, $-fs-aid) !default;
