@@ -771,6 +771,16 @@
         },
         "navigationBarTitleText": "Backtop 回到顶部"
       }
+    },
+    {
+      "path": "pages/indexBar/Index",
+      "name": "indexBar",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "IndexBar 索引栏"
+      }
     }
   ],
   // "tabBar": {

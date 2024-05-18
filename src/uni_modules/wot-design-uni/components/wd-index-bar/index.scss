@@ -1,0 +1,39 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+.wot-theme-dark {
+  @include b(index-bar) {
+    @include e(index) {
+      color: $-color-white;
+    }
+  }
+}
+
+@include b(index-bar) {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  @include e(content) {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(sidebar) {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    transform: translateY(-50%);
+  }
+
+  @include e(index) {
+    font-size: 12px;
+    font-weight: $-fw-medium;
+    color: $-color-title;
+    padding: 4px 6px;
+
+    @include when(active) {
+      color: $-color-theme;
+    }
+  }
+}
