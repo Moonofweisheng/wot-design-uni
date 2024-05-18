@@ -1,34 +1,55 @@
 <template>
-  <view class="wd-index-bar">
-    <scroll-view :scrollTop="scrollTop" :scroll-y="true" class="wd-index-bar__content" @scroll="hanleScroll">
-      <slot></slot>
-    </scroll-view>
-    <view
-      class="wd-index-bar__sidebar"
-      @touchmove.stop.prevent="handleTouchMove"
-      @touchend.stop.prevent="handleTouchEnd"
-      @touchcancel.stop.prevent="handleTouchEnd"
-    >
-      <view class="wd-index-bar__index" :class="{ 'is-active': item.index === currentAnchorIndex }" v-for="item in anchorList" :key="item.index">
-        {{ item.index }}
+  <view class="wd-index-bar" :id="indexBarId">
+    <!-- #ifdef MP-DINGTALK -->
+    <view class="wd-index-bar" :id="indexBarId">
+      <!-- #endif -->
+      <scroll-view :scrollTop="scrollTop" :scroll-y="true" class="wd-index-bar__content" @scroll="hanleScroll">
+        <slot></slot>
+      </scroll-view>
+      <view
+        class="wd-index-bar__sidebar"
+        @touchmove.stop.prevent="handleTouchMove"
+        @touchend.stop.prevent="handleTouchEnd"
+        @touchcancel.stop.prevent="handleTouchEnd"
+      >
+        <view
+          class="wd-index-bar__index"
+          :class="{ 'is-active': item.index === state.activeIndex }"
+          v-for="item in state.anchorList"
+          :key="item.index"
+        >
+          {{ item.index }}
+        </view>
       </view>
+      <!-- #ifdef MP-DINGTALK -->
     </view>
+    <!-- #endif -->
   </view>
 </template>
 
 <script setup lang="ts">
 import type { AnchorItem, AnchorIndex } from './type'
-import { indexBarInjectionKey } from './type'
-import { provide, ref, getCurrentInstance, onMounted } from 'vue'
-import { getRect } from '../common/util'
+import { indexBarInjectionKey, indexBarProps } from './type'
+import { ref, getCurrentInstance, onMounted, reactive } from 'vue'
+import { getRect, isDef, uuid } from '../common/util'
+import { useChildren } from '../composables/useChildren'
+
+const props = defineProps(indexBarProps)
+
+const indexBarId = ref<string>(`indexBar${uuid()}`)
 
 const { proxy } = getCurrentInstance()!
 
-const anchorList = ref<AnchorItem[]>([])
-provide(indexBarInjectionKey, { anchorList })
+const state = reactive({
+  activeIndex: null as AnchorIndex | null,
+  anchorList: [] as AnchorItem[]
+})
+
+const { linkChildren } = useChildren(indexBarInjectionKey)
+
+linkChildren({ props, anchorState: state })
 
 const scrollTop = ref(0)
-const currentAnchorIndex = ref<AnchorIndex | null>()
 
 // 组件距离页面顶部的高度
 let offsetTop = 0
@@ -41,10 +62,10 @@ let sidebarInfo = {
 
 function init() {
   setTimeout(() => {
-    currentAnchorIndex.value = anchorList.value[0]?.index
+    state.activeIndex = state.anchorList[0]?.index
 
     Promise.all([
-      getRect('.wd-index-bar', false, proxy),
+      getRect(`#${indexBarId.value}`, false, proxy),
       getRect('.wd-index-bar__sidebar', false, proxy),
       getRect('.wd-index-bar__index', false, proxy)
     ]).then(([bar, sidebar, index]) => {
@@ -61,26 +82,25 @@ onMounted(() => {
 
 function hanleScroll(scrollEvent: any) {
   const { detail } = scrollEvent
-  scrollTop.value = detail.scrollTop
-  const anchor = anchorList.value.find((item, index) => {
-    if (anchorList.value[index + 1] == null) return true
-    if (item.top - offsetTop <= scrollTop.value && anchorList.value[index + 1].top - offsetTop > scrollTop.value) return true
+  const anchor = state.anchorList.find((item, index) => {
+    if (!isDef(state.anchorList[index + 1])) return true
+    if (item.top - offsetTop <= detail.scrollTop && state.anchorList[index + 1].top - offsetTop > detail.scrollTop) return true
     return false
   })!
-  currentAnchorIndex.value = anchor.index
+  state.activeIndex = anchor.index
 }
 
 function getAnchorByPageY(pageY: number) {
   const y = pageY - sidebarInfo.offsetTop
   let idx = Math.floor(y / sidebarInfo.indexHeight)
   if (idx < 0) idx = 0
-  else if (idx > anchorList.value.length - 1) idx = anchorList.value.length - 1
-  return anchorList.value[idx]
+  else if (idx > state.anchorList.length - 1) idx = state.anchorList.length - 1
+  return state.anchorList[idx]
 }
 
 function handleTouchMove(e: TouchEvent) {
   const clientY = e.touches[0].pageY
-  currentAnchorIndex.value = getAnchorByPageY(clientY).index
+  state.activeIndex = getAnchorByPageY(clientY).index
 }
 
 function handleTouchEnd(e: TouchEvent) {

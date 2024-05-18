@@ -1,10 +1,10 @@
 <template>
   <page-wraper>
-    <view class="wrap" :style="{ height: wrapHeight + 'px' }">
-      <wd-index-bar>
+    <view class="wraper">
+      <wd-index-bar sticky>
         <view v-for="item in data" :key="item.index" class="city-wrap">
           <wd-index-anchor :index="item.index" />
-          <view v-for="city in item.data" class="city" :key="city">{{ city }}</view>
+          <view v-for="city in item.data" class="city" :key="city" @click="handleClick(item.index, city)">{{ city }}</view>
         </view>
       </wd-index-bar>
     </view>
@@ -12,15 +12,9 @@
 </template>
 
 <script lang="ts" setup>
+import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
-import { onMounted } from 'vue'
-
-const wrapHeight = ref(400)
-
-onMounted(() => {
-  const info = uni.getWindowInfo()
-  wrapHeight.value = info.windowHeight
-})
+const { show: showToast } = useToast()
 
 const data = ref([
   {
@@ -110,6 +104,10 @@ const data = ref([
     ]
   }
 ])
+
+function handleClick(index: string, city: string) {
+  showToast(`当前点击项：${index}，城市：${city}`)
+}
 </script>
 
 <style lang="scss">
@@ -120,8 +118,10 @@ const data = ref([
   border-bottom: 1px solid #ddd;
 }
 
-.city-wrap .city:last-child {
-  margin-bottom: 10px;
+.wraper {
+  height: calc(100vh - var(--window-top));
+  height: calc(100vh - var(--window-top) - constant(safe-area-inset-bottom));
+  height: calc(100vh - var(--window-top) - env(safe-area-inset-bottom));
 }
 
 .wot-theme-dark {
