@@ -1,4 +1,4 @@
-import type { PropType, CSSProperties, ExtractPropTypes } from 'vue'
+import type { PropType, ExtractPropTypes, CSSProperties } from 'vue'
 import { makeArrayProp, makeBooleanProp, makeStringProp } from '../common/props'
 
 type SkeletonTheme = 'text' | 'avatar' | 'paragraph' | 'image'
@@ -16,7 +16,7 @@ export type SkeletonRowColObj = {
   borderRadius?: string | number
   backgroundColor?: string
 }
-export type SkeletonRowCol = Array<number | SkeletonRowColObj | Array<SkeletonRowColObj>>
+export type SkeletonRowCol = number | SkeletonRowColObj | Array<SkeletonRowColObj>
 export type SkeletonThemeVars = {
   notifyPadding?: string
   notifyFontSize?: string

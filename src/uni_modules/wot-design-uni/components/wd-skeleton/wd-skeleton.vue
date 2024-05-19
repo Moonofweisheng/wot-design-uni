@@ -9,10 +9,13 @@
 -->
 <template>
   <view :class="`wd-skeleton ${customClass}`" :style="customStyle">
-    <view class="wd-skeleton__content" v-if="parsedRowCols.length">
+    <view class="wd-skeleton__content" v-if="show">
       <view class="wd-skeleton__row" v-for="(row, index) of parsedRowCols" :key="`row-${index}`">
         <view v-for="(col, idx) of row" :key="`col-${idx}`" :class="col.class" :style="col.style" />
       </view>
+    </view>
+    <view v-else>
+      <slot />
     </view>
   </view>
 </template>
@@ -45,7 +48,7 @@ const themeMap = {
   paragraph: [1, 1, 1, { width: '55%' }]
 }
 const props = defineProps(skeletonProps)
-const rowCols = ref<SkeletonRowCol>([])
+const rowCols = ref<SkeletonRowCol[]>([])
 
 const parsedRowCols = computed(() => {
   return rowCols.value.map((item) => {
@@ -107,6 +110,8 @@ watch(
   },
   { immediate: true }
 )
+
+const show = computed(() => props.loading == undefined || props.loading === true)
 </script>
 
 <style lang="scss" scoped>
