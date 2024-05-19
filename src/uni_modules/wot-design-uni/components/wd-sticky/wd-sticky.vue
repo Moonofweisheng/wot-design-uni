@@ -2,7 +2,7 @@
   <view :style="`${rootStyle};display: inline-block;`">
     <!--强制设置高宽，防止元素坍塌-->
     <!--在使用 wd-sticky-box 时，某些情况下 wd-sticky__container 的 'position：absolute' 需要相对于 wd-sticky-box-->
-    <view :class="`wd-sticky ${props.customClass}`" :style="stickyStyle" :id="styckyId">
+    <view :class="`wd-sticky ${customClass}`" :style="stickyStyle" :id="styckyId">
       <!--吸顶容器-->
       <view class="wd-sticky__container" :style="containerStyle">
         <!--监听元素尺寸变化-->
@@ -20,7 +20,7 @@ export default {
   name: 'wd-sticky',
   options: {
     addGlobalClass: true,
-    // virtualHost: true,
+    virtualHost: true,
     styleIsolation: 'shared'
   }
 }
@@ -28,7 +28,7 @@ export default {
 
 <script lang="ts" setup>
 import { type Ref, computed, getCurrentInstance, inject, ref } from 'vue'
-import { addUnit, getRect, objToStyle, uuid } from '../common/util'
+import { addUnit, getRect, objToStyle, requestAnimationFrame, uuid } from '../common/util'
 import { stickyProps } from './types'
 
 const props = defineProps(stickyProps)
@@ -116,9 +116,11 @@ function resizeHandler(detail: any) {
   width.value = detail.width
   height.value = detail.height
   // // 如果和 wd-sticky-box 配套使用，吸顶逻辑交由 wd-sticky-box 进行处理
-  observerContentScroll()
-  if (!observerForChild) return
-  observerForChild(proxy)
+  requestAnimationFrame(() => {
+    observerContentScroll()
+    if (!observerForChild) return
+    observerForChild(proxy)
+  })
 }
 /**
  * @description 模拟吸顶逻辑
@@ -132,7 +134,9 @@ function observerContentScroll() {
     .relativeToViewport({
       top: -offset // viewport上边界往下拉
     })
-    .observe(`#${styckyId.value}`, scrollHandler)
+    .observe(`#${styckyId.value}`, (result) => {
+      scrollHandler(result)
+    })
   getRect(`#${styckyId.value}`, false, proxy).then((res) => {
     // 当 wd-sticky 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
     if (Number(res.bottom) <= offset) scrollHandler({ boundingClientRect: res })

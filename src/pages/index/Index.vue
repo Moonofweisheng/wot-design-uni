@@ -121,6 +121,10 @@ const list = ref([
       {
         id: 'backtop',
         name: 'Backtop 回到顶部'
+      },
+      {
+        id: 'indexBar',
+        name: 'IndexBar 索引栏'
       }
     ]
   },

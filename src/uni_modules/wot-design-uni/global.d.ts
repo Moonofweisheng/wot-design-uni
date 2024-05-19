@@ -97,6 +97,8 @@ declare module '@vue/runtime-core' {
     WdTextarea: typeof import('./components/wd-textarea/wd-textarea.vue')['default']
     WdBacktop: typeof import('./components/wd-backtop/wd-backtop.vue')['default']
     WdSkeleton: typeof import('./components/wd-skeleton/wd-skeleton.vue')['default']
+    WdIndexBar: typeof import('./components/wd-index-bar/wd-index-bar.vue')['default']
+    WdIndexAnchor: typeof import('./components/wd-index-anchor/wd-index-anchor.vue')['default']
   }
 }
 

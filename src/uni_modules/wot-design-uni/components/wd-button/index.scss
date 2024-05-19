@@ -52,7 +52,7 @@
   box-sizing: border-box;
   border: none;
   color: $-button-normal-color;
-  transition: all 0.2s;
+  transition: opacity 0.2s;
   user-select: none;
   font-weight: normal;
 
@@ -224,14 +224,7 @@
 
   @include when(round) {
     border-radius: 999px;
-
-    &::after {
-      border-radius: 999px;
-    }
-
-    &::before {
-      border-radius: 999px;
-    }
+    overflow: hidden;
   }
 
   @include when(text) {
