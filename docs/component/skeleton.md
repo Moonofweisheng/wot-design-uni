@@ -137,4 +137,4 @@ const showContent = ref(true)
 
 | name    | 说明                  | 最低版本         |
 | ------- | --------------------- | ---------------- |
-| default | loading结束后展示内容 | $LOWEST_VERSION$ |
+| default | loading结束后展示内容 | 1.2.21 |

@@ -1,6 +1,6 @@
 <frame/>
 
-# Backtop 回到顶部 `$LOWEST_VERSION$`
+# Backtop 回到顶部 `1.2.21`
 
 ## 基本用法
 

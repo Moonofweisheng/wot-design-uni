@@ -1,6 +1,6 @@
 <frame/>
 
-# IndexBar 索引栏 `$LOWEST_VERSION$`
+# IndexBar 索引栏 `1.2.21`
 
 用于列表的索引分类显示和快速定位。
 

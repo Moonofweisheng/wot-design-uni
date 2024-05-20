@@ -1,6 +1,30 @@
 # 更新日志 
 
 
+### [1.2.21](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.20...v1.2.21) (2024-05-20)
+
+
+### ✨ Features | 新功能
+
+* ✨ 添加索引栏组件 ([#321](https://github.com/Moonofweisheng/wot-design-uni/issues/321)) ([f84e9af](https://github.com/Moonofweisheng/wot-design-uni/commit/f84e9affb1a044a37661c5d1dc118d834b49239c))
+* ✨ img组件添加loading、error插槽 ([#323](https://github.com/Moonofweisheng/wot-design-uni/issues/323)) ([00ffa9f](https://github.com/Moonofweisheng/wot-design-uni/commit/00ffa9f3e54f3ba9eec967887e195c0266ef0a41))
+* ✨ skeleton添加默认内容插槽 ([#322](https://github.com/Moonofweisheng/wot-design-uni/issues/322)) ([9a68c47](https://github.com/Moonofweisheng/wot-design-uni/commit/9a68c477dbf5e0f30f74882df92251eac707fdde))
+* add backtop ([#314](https://github.com/Moonofweisheng/wot-design-uni/issues/314)) ([bf9e55a](https://github.com/Moonofweisheng/wot-design-uni/commit/bf9e55a24e676a764b1e035ca86bd6fe26b87420))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Cell组件单独使用时设置border无效的问题 ([19b9f19](https://github.com/Moonofweisheng/wot-design-uni/commit/19b9f196466b88456e8b3e7221afd710da3df99b))
+* 🐛 修复Picker选择器多列选择模式绑定值为空数组时将列第一项作为显示值的问题 ([c3b96ce](https://github.com/Moonofweisheng/wot-design-uni/commit/c3b96ce912bfc13d30c09393dd57cbcbf2d0b80a))
+* 🐛 修复Sticky吸顶组件在微信小程序中放置在页面顶部时吸顶失效的问题 ([4ca3ebe](https://github.com/Moonofweisheng/wot-design-uni/commit/4ca3ebe7202f118a1bf6a462b27dc76ab6c720f9)), closes [#325](https://github.com/Moonofweisheng/wot-design-uni/issues/325)
+* 修复wd-button在自定义样式时激活态样式问题 ([#312](https://github.com/Moonofweisheng/wot-design-uni/issues/312)) ([7544d69](https://github.com/Moonofweisheng/wot-design-uni/commit/7544d690f176b44a8e016688723af70d2a77388a))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  常见问题增加关于useToast等hooks的答疑以及自定义编译平台的内容 ([65597c7](https://github.com/Moonofweisheng/wot-design-uni/commit/65597c76b812e5e61be17879de320989d0873df4))
+* ✏️  文档中增加解释导入方式的faq ([83fa0b0](https://github.com/Moonofweisheng/wot-design-uni/commit/83fa0b06927fddabd1021ee02c3c7f8377704786))
+
 ### [1.2.20](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.19...v1.2.20) (2024-05-12)
 
 
