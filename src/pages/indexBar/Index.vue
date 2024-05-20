@@ -2,9 +2,9 @@
   <page-wraper>
     <view class="wraper">
       <wd-index-bar sticky>
-        <view v-for="item in data" :key="item.index" class="city-wrap">
+        <view v-for="item in data" :key="item.index">
           <wd-index-anchor :index="item.index" />
-          <view v-for="city in item.data" class="city" :key="city" @click="handleClick(item.index, city)">{{ city }}</view>
+          <wd-cell border clickable v-for="city in item.data" :key="city" :title="city" @click="handleClick(item.index, city)"></wd-cell>
         </view>
       </wd-index-bar>
     </view>
@@ -111,23 +111,9 @@ function handleClick(index: string, city: string) {
 </script>
 
 <style lang="scss">
-.city {
-  padding: 20px;
-  font-size: 14px;
-  color: black;
-  border-bottom: 1px solid #ddd;
-}
-
 .wraper {
   height: calc(100vh - var(--window-top));
   height: calc(100vh - var(--window-top) - constant(safe-area-inset-bottom));
   height: calc(100vh - var(--window-top) - env(safe-area-inset-bottom));
-}
-
-.wot-theme-dark {
-  .city {
-    color: white;
-    border-bottom-color: #666;
-  }
 }
 </style>

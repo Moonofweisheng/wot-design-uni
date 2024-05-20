@@ -1,12 +1,8 @@
 <template>
   <!-- #ifdef MP-DINGTALK -->
-  <view :class="`wd-index-anchor-ding ${indexBar && indexBar.props.sticky && indexBar.anchorState.activeIndex === index ? 'is-sticky' : ''}`">
+  <view :class="`wd-index-anchor-ding ${isSticky ? 'is-sticky' : ''}`">
     <!-- #endif -->
-    <view
-      :class="`wd-index-anchor ${indexBar && indexBar.props.sticky && indexBar.anchorState.activeIndex === index ? 'is-sticky' : ''} ${customClass}`"
-      :style="customStyle"
-      :id="indexAnchorId"
-    >
+    <view :class="`wd-index-anchor ${isSticky ? 'is-sticky' : ''} ${customClass}`" :style="customStyle" :id="indexAnchorId">
       <slot>
         {{ index }}
       </slot>
@@ -18,7 +14,7 @@
 
 <script setup lang="ts">
 import { indexAnchorProps } from './type'
-import { onMounted, getCurrentInstance, ref } from 'vue'
+import { onMounted, getCurrentInstance, ref, computed } from 'vue'
 import { indexBarInjectionKey } from '../wd-index-bar/type'
 import { getRect, isDef, uuid } from '../common/util'
 import { useParent } from '../composables/useParent'
@@ -30,6 +26,10 @@ const { parent: indexBar } = useParent(indexBarInjectionKey)
 const indexAnchorId = ref<string>(`indexBar${uuid()}`)
 
 const { proxy } = getCurrentInstance()!
+
+const isSticky = computed(() => {
+  return indexBar && indexBar.props.sticky && indexBar.anchorState.activeIndex === props.index
+})
 
 function getInfo() {
   getRect(`#${indexAnchorId.value}`, false, proxy).then((res) => {

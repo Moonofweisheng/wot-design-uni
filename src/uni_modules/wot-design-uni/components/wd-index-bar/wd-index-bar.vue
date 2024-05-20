@@ -100,7 +100,11 @@ function getAnchorByPageY(pageY: number) {
 
 function handleTouchMove(e: TouchEvent) {
   const clientY = e.touches[0].pageY
+  if (state.activeIndex === getAnchorByPageY(clientY).index) {
+    return
+  }
   state.activeIndex = getAnchorByPageY(clientY).index
+  scrollTop.value = getAnchorByPageY(clientY).top - offsetTop
 }
 
 function handleTouchEnd(e: TouchEvent) {

@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-05-07 17:05:08
+ * @LastEditTime: 2024-05-20 13:18:53
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
@@ -251,7 +251,7 @@ export default defineConfig({
             link: "/component/backtop",
             text: "Backtop 回到顶部"
           }, {
-            link: "/component/indexBar",
+            link: "/component/index-bar",
             text: "IndexBar 索引栏"
           }]
         }, {
