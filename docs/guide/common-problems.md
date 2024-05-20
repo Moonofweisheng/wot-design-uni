@@ -180,19 +180,64 @@ uni-app 3.99.2023122704 将支付宝小程序的`styleIsolation`默认值设置�
 ```
 
 ## 为什么组件库文档中都是从`@/uni_modules/wot-design-uni`导入方法和工具类？
+
 当前组件库本身的开发方式是将组件库代码放到`@/uni_modules/wot-design-uni`这个目录的，所以文档中都是从`@/uni_modules/wot-design-uni`导入方法和工具类，使用`npm`方式安装组件库的时候可以这样调整：
+
 ```ts
 // useToast、useNotify等同理
 import { useMessage } from '@/uni_modules/wot-design-uni'
-
 ```
+
 替换为
 
 ```ts
 import { useMessage } from 'wot-design-uni'
-
 ```
 
+## uni-app 如何自定义编译平台，例如钉钉小程序？
+
+可以参考`uni-app`文档中[package.json](https://uniapp.dcloud.net.cn/collocation/package.html#%E7%A4%BA%E4%BE%8B-%E9%92%89%E9%92%89%E5%B0%8F%E7%A8%8B%E5%BA%8F)章节。
+
+钉钉小程序示例：
+```JSON
+{
+    "uni-app": {
+    "scripts": {
+      "mp-dingtalk": {
+        "title": "钉钉小程序",
+        "env": {
+          "UNI_PLATFORM": "mp-alipay"
+        },
+        "define": {
+          "MP-DINGTALK": true
+        }
+      }
+    }
+  },
+}
+```
+
+## 当前组件库提供的用于控制组件显示隐藏 hooks 不生效怎么办？
+
+**_可以按照以下步骤进行排查_**
+
+1. `uni-app`平台不支持全局挂载组件，所以`Message`、`Toast`、`Notify`等组件需在 SFC 中显式使用，例如：
+
+```html
+<wd-toast></wd-toast>
+```
+
+2. `useToast`、`useMessage`、`useNotify`、`useQueue`等 hooks 不生效，请检查是否在`setup`中调用，如果`setup`中调用，请检查当前页面是否存在多次执行`use`的场景，例如在多个组件中执行，这样会导致上一次`use`的失效。针对此场景，组件的函数式调用都支持传入`selector`参数，可以通过`selector`参数来指定组件，例如：
+
+```html
+<wd-toast></wd-toast>
+<wd-toast selector="my-toast"></wd-toast>
+```
+
+```ts
+const toast = useToast()
+const myToast = useToast({ selector: 'my-toast' })
+```
 
 ## 如何快速解决你的问题？
 
