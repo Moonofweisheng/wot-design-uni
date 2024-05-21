@@ -61,7 +61,7 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
           valid = false
           break
         }
-        if (rule.pattern && !rule.pattern.test(props.model[prop])) {
+        if (rule.pattern && !rule.pattern.test(value)) {
           errors.push({
             prop,
             message: rule.message
@@ -71,7 +71,7 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
         }
         const { validator, ...ruleWithoutValidator } = rule
         if (validator) {
-          const result = validator(props.model[prop], ruleWithoutValidator)
+          const result = validator(value, ruleWithoutValidator)
           if (isPromise(result)) {
             promises.push(
               result
