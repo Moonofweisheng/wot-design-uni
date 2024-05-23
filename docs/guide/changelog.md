@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [1.2.22](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.21...v1.2.22) (2024-05-23)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  组件库介绍组件数量调整至70+ ([efd55ca](https://github.com/Moonofweisheng/wot-design-uni/commit/efd55ca8afc07368b8d9f348d73c9a25cf186c47))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Form指定prop为`a.b`时校验失败的问题 ([#329](https://github.com/Moonofweisheng/wot-design-uni/issues/329)) ([ab600b9](https://github.com/Moonofweisheng/wot-design-uni/commit/ab600b915a647ff089d5cfbb0ac955e3baa581c3))
+
 ### [1.2.21](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.20...v1.2.21) (2024-05-20)
 
 
