@@ -32,8 +32,7 @@
         <view class="wd-cell__body">
           <!--文案内容-->
           <view :class="`wd-cell__value ${customValueClass}`">
-            <template v-if="value">{{ value }}</template>
-            <slot v-else></slot>
+            <slot>{{ value }}</slot>
           </view>
           <!--箭头-->
           <wd-icon v-if="isLink" custom-class="wd-cell__arrow-right" name="arrow-right" />
