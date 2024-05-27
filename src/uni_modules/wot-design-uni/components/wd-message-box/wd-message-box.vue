@@ -11,29 +11,20 @@
       :duration="200"
     >
       <view :class="rootClass">
-        <!--内容部分-->
         <view :class="bodyClass">
-          <!--公共title-->
           <view v-if="title" class="wd-message-box__title">
             {{ title }}
           </view>
-          <!--其它类型-->
           <view class="wd-message-box__content">
-            <!--prompt类型-->
             <block v-if="type === 'prompt'">
-              <!--输入框-->
               <wd-input v-model="inputValue" :type="inputType" size="large" :placeholder="inputPlaceholder || '请输入'" @input="inputValChange" />
-              <!--错误提示-->
               <view v-if="showErr" class="wd-message-box__input-error">
                 {{ inputError || translate('inputNoValidate') }}
               </view>
             </block>
-            <!--使用插槽-->
             <slot>{{ msg }}</slot>
-            <!--使用文本-->
           </view>
         </view>
-        <!--action按钮组合-->
         <view :class="`wd-message-box__actions ${showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`">
           <wd-button type="info" block v-if="showCancelButton" custom-style="margin-right: 16px;" @click="toggleModal('cancel')">
             {{ cancelButtonText || translate('cancel') }}
@@ -183,15 +174,13 @@ watch(
 )
 
 /**
- * @description 关闭消息框的统一主调 handle
- * @param {'cancel' | 'confirm'} action
+ * 点击操作
+ * @param action
  */
 function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
-  // closeOnClickModal为false，此时点击蒙层没任何效果
   if (action === 'modal' && !closeOnClickModal.value) {
     return
   }
-  // prompt类型的弹窗 文案没有通过校验，点击了确定按钮没有任何效果
   if (type.value === 'prompt' && action === 'confirm' && !validate()) {
     return
   }
@@ -228,6 +217,10 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
   }
 }
 
+/**
+ * 确认回调
+ * @param result
+ */
 function handleConfirm(result: MessageResult) {
   show.value = false
   if (isFunction(onConfirm)) {
@@ -235,6 +228,10 @@ function handleConfirm(result: MessageResult) {
   }
 }
 
+/**
+ * 取消回调
+ * @param result
+ */
 function handleCancel(result: MessageResult) {
   show.value = false
   if (isFunction(onCancel)) {

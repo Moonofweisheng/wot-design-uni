@@ -1,10 +1,10 @@
 <template>
   <view :class="rootClass" :style="rootStyle">
-    <view v-if="!type || type === 'ring' || type === 'circle-ring'" class="wd-loading__body">
+    <view v-if="!type || type === 'ring'" class="wd-loading__body">
       <view class="wd-loading__svg" :style="`background-image: url(${svg});`"></view>
     </view>
 
-    <view v-if="type === 'circle-outline' || type === 'outline'" class="wd-loading__body">
+    <view v-if="type === 'outline'" class="wd-loading__body">
       <view class="wd-loading__svg" :style="`background-image: url(${svg});`"></view>
     </view>
   </view>
@@ -23,7 +23,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import base64 from '../common/base64'
-import { gradient, context, objToStyle, addUnit } from '../common/util'
+import { gradient, context, objToStyle, addUnit, isDef } from '../common/util'
 import { loadingProps } from './types'
 
 const svgDefineId = context.id++
@@ -86,19 +86,8 @@ onBeforeMount(() => {
 
 function buildSvg() {
   const { type, color } = props
-  let adaptType: 'outline' | 'ring' = 'ring'
-  //  2.2.0 版本向下兼容 circle-outline 和 circle-ring;
-  if (type === 'circle-outline') {
-    adaptType = 'outline'
-  } else if (type === 'outline') {
-    adaptType = 'outline'
-  } else if (type === 'circle-ring') {
-    adaptType = 'ring'
-  }
-  const svgStr = `"data:image/svg+xml;base64,${base64(
-    adaptType === 'ring' ? icon[adaptType](color, intermediateColor.value) : icon[adaptType](color)
-  )}"`
-
+  let ringType: 'outline' | 'ring' = isDef(type) ? type : 'ring'
+  const svgStr = `"data:image/svg+xml;base64,${base64(ringType === 'ring' ? icon[ringType](color, intermediateColor.value) : icon[ringType](color))}"`
   svg.value = svgStr
 }
 </script>

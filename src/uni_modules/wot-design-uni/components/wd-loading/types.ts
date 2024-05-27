@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-03-18 14:59:32
+ * @LastEditTime: 2024-05-27 18:49:28
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-loading\types.ts
@@ -10,13 +10,12 @@
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeNumericProp, makeStringProp } from '../common/props'
 
-// 'circle-outline' | 'circle-ring' 废弃
-export type LoadingType = 'outline' | 'ring' | 'circle-outline' | 'circle-ring' // 提示信息加载状态类型
+export type LoadingType = 'outline' | 'ring' // 提示信息加载状态类型
 
 export const loadingProps = {
   ...baseProps,
   /**
-   * 加载指示器类型，可选值：'outline' | 'ring' | 'circle-outline' | 'circle-ring'
+   * 加载指示器类型，可选值：'outline' | 'ring'
    */
   type: makeStringProp<LoadingType>('ring'),
   /**
