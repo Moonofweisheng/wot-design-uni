@@ -4,7 +4,7 @@ import type { ChooseFileOption } from './types'
 export function chooseFile({ multiple, sizeType, sourceType, maxCount }: ChooseFileOption) {
   return new Promise((resolve, reject) => {
     uni.chooseImage({
-      count: multiple ? Math.min(maxCount, 9) : 1, // 最多可以选择的数量，如果不支持多选则数量为1
+      count: multiple ? maxCount : 1, // 最多可以选择的数量，如果不支持多选则数量为1,移除9张上限限制
       sizeType,
       sourceType,
       success: resolve,
