@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">Wot Design Uni</h1>
 
-<p align="center">📱 一个基于vue3+Typescript构建，参照<a href="https://ftf.jd.com/wot-design/">wot-design</a>打造的uni-app组件库</p>
+<p align="center">📱 一个基于vue3+Typescript构建，参照<a href="https://github.com/jd-ftf/wot-design-mini?tab=readme-ov-file">wot-design</a>打造的uni-app组件库</p>
 
 <p align="center">
 
@@ -39,7 +39,7 @@
 
 <p align="center">
   ✈️ <a href="https://wot-design-uni.pages.dev/">文档网站 (推荐)</a>&nbsp;
-  🚀 <a href="https://wot-design-uni.cn">文档网站 (备用)</a>&nbsp;
+  <!-- 🚀 <a href="https://wot-design-uni.cn">文档网站 (备用)</a>&nbsp; -->
   🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (备用)</a>&nbsp;
   🚫 <a href="https://wot-design-uni.gitee.io/">文档网站 (Gitee暂时下线)</a>
 </p>
@@ -112,7 +112,7 @@
 
 ## LICENSE
 
-[MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/develop/LICENSE)
+[MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/master/LICENSE)
 
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Moonofweisheng/wot-design-uni&type=Date)](https://star-history.com/#Moonofweisheng/wot-design-uni&Date)

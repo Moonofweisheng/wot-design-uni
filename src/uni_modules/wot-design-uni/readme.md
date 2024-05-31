@@ -114,4 +114,4 @@
 
 ## LICENSE
 
-[MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/develop/LICENSE)
+[MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/master/LICENSE)
