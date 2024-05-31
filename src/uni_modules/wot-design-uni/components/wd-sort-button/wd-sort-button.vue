@@ -57,10 +57,10 @@ function handleClick() {
       }
     }
   }
+  emit('update:modelValue', value)
   emit('change', {
     value
   })
-  emit('update:modelValue', value)
 }
 </script>
 <style lang="scss" scoped>
