@@ -6,7 +6,7 @@
 
 `label` 设置左侧文本内容；
 
-`columns` 设置数据源，为二维数组，每一列为一个一维数组，每个选项包含 `value`(选项值) 和 `label`(选项名称)；
+`columns` 设置数据源，一维数组，每个选项包含 `value`(选项值) 和 `label`(选项名称)；
 
 `v-model` 设置选中项的值，数据类型为 `Array` | `String` `Number` 或 `Boolean`；
 
