@@ -7,7 +7,7 @@
           <wd-tab :title="`标签${item}`">
             <view class="content">
               内容{{ tab1 + 1 }}
-              <wd-button @click="tab1 < 3 ? tab1++ : (tab1 = 0)">下一个</wd-button>
+              <view><wd-button @click="tab1 < 3 ? tab1++ : (tab1 = 0)">下一个</wd-button></view>
             </view>
           </wd-tab>
         </block>
@@ -53,21 +53,21 @@
       </wd-tabs>
     </demo-block>
 
-    <demo-block title="手势滑动" transparent>
-      <wd-tabs v-model="tab5" swipeable @change="handleChange">
-        <block v-for="item in 4" :key="item">
-          <wd-tab :title="`标签${item}`">
-            <view class="content">内容{{ tab5 + 1 }}</view>
-          </wd-tab>
-        </block>
-      </wd-tabs>
-    </demo-block>
-
     <demo-block title="切换动画" transparent>
       <wd-tabs v-model="tab8" animated @change="handleChange">
         <block v-for="item in 4" :key="item">
           <wd-tab :title="`标签${item}`">
             <view class="content">内容{{ tab8 + 1 }}</view>
+          </wd-tab>
+        </block>
+      </wd-tabs>
+    </demo-block>
+
+    <demo-block title="手势滑动" transparent>
+      <wd-tabs v-model="tab5" swipeable animated @change="handleChange">
+        <block v-for="item in 4" :key="item">
+          <wd-tab :title="`标签${item}`">
+            <view class="content">内容{{ tab5 + 1 }}</view>
           </wd-tab>
         </block>
       </wd-tabs>
