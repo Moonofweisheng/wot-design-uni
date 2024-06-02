@@ -1,6 +1,26 @@
 # 更新日志 
 
 
+### [1.2.23](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.22...v1.2.23) (2024-06-02)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  更新LICENSE文件地址 ([dae3ffc](https://github.com/Moonofweisheng/wot-design-uni/commit/dae3ffcc7b488dd6d87bc1c5e8ae16a78b794f85))
+* ✏️  修复loading组件示例代码中文标点符号、img-cropper组件示例代码标签缺失的问题 ([#347](https://github.com/Moonofweisheng/wot-design-uni/issues/347)) ([d171255](https://github.com/Moonofweisheng/wot-design-uni/commit/d171255899d232f141c84aa1251c03cc1d0a0b75))
+* update select-picker doc ([#346](https://github.com/Moonofweisheng/wot-design-uni/issues/346)) ([7454452](https://github.com/Moonofweisheng/wot-design-uni/commit/7454452ad44331f329408cead9b483cf774cce5f))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Cell的value为0时无法渲染的问题 ([dc64c09](https://github.com/Moonofweisheng/wot-design-uni/commit/dc64c09e6c6f991fe6f8f9fcfa309392e233ce21))
+* 🐛 修复Sticky在h5和App端缓慢拖动时存在几率始终固定在顶部的问题 ([#350](https://github.com/Moonofweisheng/wot-design-uni/issues/350)) ([c5b3c5f](https://github.com/Moonofweisheng/wot-design-uni/commit/c5b3c5f68e1bb376249ed5f2c30b1898cc375abe))
+
+
+### ✨ Features | 新功能
+
+* ✨ 调整Circle环形进度条在微信小程序端使用canvas2d支持同层渲染 ([#351](https://github.com/Moonofweisheng/wot-design-uni/issues/351)) ([4489517](https://github.com/Moonofweisheng/wot-design-uni/commit/44895179e4688ceb995ea1968d23df4f0bf9cdc2))
+
 ### [1.2.22](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.21...v1.2.22) (2024-05-23)
 
 
