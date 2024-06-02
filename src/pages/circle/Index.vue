@@ -1,6 +1,8 @@
 <template>
   <view class="circle">
     <page-wraper>
+      <wd-message-box></wd-message-box>
+
       <demo-block title="基础用法">
         <wd-circle custom-class="custom-circle" v-model="current" :text="current + '%'" />
       </demo-block>
@@ -22,10 +24,14 @@
         <wd-button custom-style="margin-right:24rpx" type="primary" size="small" @click="doAdd">增加</wd-button>
         <wd-button type="error" size="small" @click="doDecre">减少</wd-button>
       </demo-block>
+      <demo-block title="alert">
+        <wd-button @click="alert">alert</wd-button>
+      </demo-block>
     </page-wraper>
   </view>
 </template>
 <script lang="ts" setup>
+import { useMessage } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const current = ref<number>(20)
@@ -44,6 +50,12 @@ function doDecre() {
   if (current.value > 0) {
     current.value -= 10
   }
+}
+
+const message = useMessage()
+
+function alert() {
+  message.alert('操作成功')
 }
 </script>
 <style lang="scss" scoped>
