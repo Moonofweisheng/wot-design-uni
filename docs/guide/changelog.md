@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.2.24](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.23...v1.2.24) (2024-06-03)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Input支付宝小程序number/digit类型使用maxlength=-1时v-model失效的问题 ([7aa21b0](https://github.com/Moonofweisheng/wot-design-uni/commit/7aa21b0baadeccf4f0eb179f74332013acec6a10))
+
 ### [1.2.23](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.22...v1.2.23) (2024-06-02)
 
 
