@@ -57,7 +57,7 @@
             <text
               :class="[
                 inputValue && String(inputValue).length > 0 ? 'wd-input__count-current' : '',
-                String(inputValue).length > maxlength ? 'is-error' : ''
+                String(inputValue).length > maxlength! ? 'is-error' : ''
               ]"
             >
               {{ String(inputValue).length }}

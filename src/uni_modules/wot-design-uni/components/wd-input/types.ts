@@ -61,7 +61,12 @@ export const inputProps = {
   /**
    * 原生属性，最大长度
    */
-  maxlength: makeNumberProp(-1),
+  maxlength: {
+    type: Number,
+    // #ifndef MP-ALIPAY
+    default: -1
+    // #endif
+  },
   /**
    * 原生属性，禁用
    */
