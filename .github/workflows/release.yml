@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: 检出代码
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: 获取当前和上一个标签
         id: get_tags
