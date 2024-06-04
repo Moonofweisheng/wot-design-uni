@@ -8,7 +8,7 @@
   background: transparent;
   font-size: 0;
 }
-@include bdeep(curtain) {
+@include b(curtain) {
 
   @include e(content) {
     position: relative;
