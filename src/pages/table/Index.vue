@@ -1,35 +1,35 @@
 <template>
   <page-wraper>
     <demo-block title="基本用法">
-      <wd-table :data="dataList" @sort-method="doSort" height="328px" @row-click="handleRowClick">
+      <wd-table :data="dataList" @sort-method="handleSort" height="328px" @row-click="handleRowClick">
         <wd-table-col prop="name" label="姓名" align="center" width="50%"></wd-table-col>
         <wd-table-col prop="grade" label="分数" align="center" width="50%"></wd-table-col>
       </wd-table>
     </demo-block>
 
     <demo-block title="无边框">
-      <wd-table :data="dataList" @sort-method="doSort" height="328px" :border="false" @row-click="handleRowClick">
+      <wd-table :data="dataList" @sort-method="handleSort" height="328px" :border="false" @row-click="handleRowClick">
         <wd-table-col prop="name" label="姓名" align="center" width="50%"></wd-table-col>
         <wd-table-col prop="grade" label="分数" align="center" width="50%"></wd-table-col>
       </wd-table>
     </demo-block>
 
     <demo-block title="无斑马纹">
-      <wd-table :data="dataList" @sort-method="doSort" height="328px" :stripe="false" @row-click="handleRowClick">
+      <wd-table :data="dataList" @sort-method="handleSort" height="328px" :stripe="false" @row-click="handleRowClick">
         <wd-table-col prop="name" label="姓名" align="center" width="50%"></wd-table-col>
         <wd-table-col prop="grade" label="分数" align="center" width="50%"></wd-table-col>
       </wd-table>
     </demo-block>
 
     <demo-block title="不展示表头">
-      <wd-table :data="dataList" @sort-method="doSort" height="328px" :show-header="false" @row-click="handleRowClick">
+      <wd-table :data="dataList" @sort-method="handleSort" height="328px" :show-header="false" @row-click="handleRowClick">
         <wd-table-col prop="name" label="姓名" align="center" width="50%"></wd-table-col>
         <wd-table-col prop="grade" label="分数" align="center" width="50%"></wd-table-col>
       </wd-table>
     </demo-block>
 
     <demo-block title="固定列">
-      <wd-table :data="dataList" @sort-method="doSort" @row-click="handleRowClick" height="328px">
+      <wd-table :data="dataList" @sort-method="handleSort" @row-click="handleRowClick" height="328px">
         <wd-table-col prop="name" label="姓名" fixed :sortable="true" align="center"></wd-table-col>
         <wd-table-col prop="grade" label="分数" fixed :sortable="true" align="center"></wd-table-col>
         <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true" :width="160"></wd-table-col>
@@ -40,7 +40,7 @@
     </demo-block>
 
     <demo-block title="显示索引">
-      <wd-table :data="dataList" height="328px" :index="{ align: 'center' }">
+      <wd-table :data="dataList" height="328px" @sort-method="handleSort" :index="{ align: 'center' }">
         <wd-table-col prop="name" label="姓名" :sortable="true" align="center"></wd-table-col>
         <wd-table-col prop="grade" label="分数" :sortable="true" align="center"></wd-table-col>
         <wd-table-col prop="hobby" label="一言以蔽之" :sortable="true" :width="160"></wd-table-col>
@@ -51,7 +51,7 @@
     </demo-block>
 
     <demo-block title="自定义列模板">
-      <wd-table :data="dataList" @sort-method="doSort" @row-click="handleRowClick" height="328px">
+      <wd-table :data="dataList" @sort-method="handleSort" @row-click="handleRowClick" height="328px">
         <wd-table-col prop="name" label="姓名" fixed :sortable="true" align="center"></wd-table-col>
         <wd-table-col prop="grade" label="分数" fixed :sortable="true" align="center">
           <template #value="{ row }">
@@ -71,6 +71,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
+import type { TableColumn } from '@/uni_modules/wot-design-uni/components/wd-table-col/types'
 import { ref } from 'vue'
 
 const dataList = ref<Record<string, any>[]>([
@@ -230,7 +231,7 @@ const dataList = ref<Record<string, any>[]>([
  * 排序
  * @param e
  */
-function doSort() {
+function handleSort(column: TableColumn) {
   dataList.value = dataList.value.reverse()
 }
 

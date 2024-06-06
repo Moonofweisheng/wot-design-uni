@@ -73,7 +73,7 @@ export default {
 <script lang="ts" setup>
 import { type CSSProperties, computed, watch, reactive, ref } from 'vue'
 import { addUnit, debounce, isDef, isObj, objToStyle, uuid } from '../common/util'
-import type { SortDirection, TableColumnInstance, TableColumnProps } from '../wd-table-col/types'
+import type { SortDirection, TableColumn, TableColumnInstance, TableColumnProps } from '../wd-table-col/types'
 import { TABLE_KEY, tableProps, type TableProvide } from './types'
 import WdTableCol from '../wd-table-col/wd-table-col.vue'
 import { useTranslate } from '../composables/useTranslate'
@@ -263,7 +263,23 @@ function handleSortChange(value: SortDirection, index: number) {
       col.$.exposed!.sortDirection.value = 0
     }
   })
-  emit('sort-method', children[index])
+  const column: TableColumn = {
+    // 列对应字段
+    prop: children[index].prop,
+    // 列对应字段标题
+    label: children[index].label,
+    // 列宽度
+    width: children[index].width,
+    // 是否开启列排序
+    sortable: children[index].sortable,
+    // 列的对齐方式，可选值left,center,right
+    align: children[index].align,
+    // 列的排序方向
+    sortDirection: value,
+    // 是否i固定列
+    fixed: children[index].fixed
+  }
+  emit('sort-method', column)
 }
 
 /**

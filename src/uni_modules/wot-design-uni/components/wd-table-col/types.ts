@@ -11,7 +11,7 @@ export interface TableColumn {
   // 列对应字段标题
   label: string
   // 列宽度
-  width: string
+  width: string | number
   // 是否开启列排序
   sortable?: boolean
   // 列的对齐方式，可选值left,center,right
