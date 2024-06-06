@@ -239,6 +239,34 @@ const toast = useToast()
 const myToast = useToast({ selector: 'my-toast' })
 ```
 
+## 为什么在微信小程序上使用`Popup`、`ActionSheet`、`DropDownItem`等弹出框组件包裹`Slider`、`Tabs`等组件时，`Slider`、`Tabs`表现异常？
+
+目前uni-app使用`v-if`控制插槽是否显示编译到微信小程序端存在问题，具体可以参考issue:[4755](https://github.com/dcloudio/uni-app/issues/4755)、[4847](https://github.com/dcloudio/uni-app/issues/4847)。而`Popup`、`ActionSheet`、`DropDownItem`恰好正是使用`v-if`控制插槽是否显示，所以会导致`Slider`、`Tabs`在未渲染时执行了相关生命周期。`Slider`、`Tabs`等组件的一些数据如`Slider`的宽度，`Tabs`的滑块位置等会在onMounted等生命周期进行获取，此时这些数据将会存在异常。
+
+解决办法：
+
+1. 在`Slider`、`Tabs`等组件外部使用`v-if`控制弹框打开前不展示，例如：
+
+```html
+<wd-slider v-if="showSlider"></wd-slider>
+```
+
+1. 在`Popup`、`ActionSheet`、`DropDownItem`等组件完全打开时的钩子中重新初始化`Slider`、`Tabs`组件，例如：
+   
+```html
+<wd-popup v-model="show" position="bottom" closable custom-style="height: 200px;" @after-enter="handleOpened">
+<wd-slider v-model="value" ref="slider"></wd-slider>
+</wd-popup>
+```
+```ts
+const slider = ref()
+
+function handleOpened() {
+  slider.value!.initSlider()
+}
+
+```
+
 ## 如何快速解决你的问题？
 
 [提问的智慧](https://lug.ustc.edu.cn/wiki/doc/smart-questions/)，可以帮助你快速提出正确的问题，获得更快的解答。
