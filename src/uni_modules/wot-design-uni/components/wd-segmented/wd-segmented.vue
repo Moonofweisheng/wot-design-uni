@@ -80,7 +80,7 @@ onMounted(() => {
 })
 
 /**
- * @description 更新滑块偏移量
+ * 更新滑块偏移量
  *
  */
 function updateActiveStyle() {

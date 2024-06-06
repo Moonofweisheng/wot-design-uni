@@ -1,13 +1,13 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-03-18 15:36:59
+ * @LastEditTime: 2024-06-06 19:11:32
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-table\types.ts
  * 记得注释
  */
-import type { ExtractPropTypes } from 'vue'
+import type { CSSProperties, ExtractPropTypes, InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 import type { TableColumnProps } from '../wd-table-col/types'
 import type { PropType } from 'vue'
@@ -52,3 +52,12 @@ export const tableProps = {
 }
 
 export type TableProps = ExtractPropTypes<typeof tableProps>
+
+export type TableProvide = Omit<TableProps, 'index' | 'customStyle' | 'customClass'> & {
+  scrollLeft: number
+  rowClick: (index: number) => void
+  getIsLastFixed: (column: { fixed: boolean; prop: string }) => boolean
+  getFixedStyle: (index: number, style: CSSProperties) => CSSProperties
+}
+
+export const TABLE_KEY: InjectionKey<TableProvide> = Symbol('wd-table')
