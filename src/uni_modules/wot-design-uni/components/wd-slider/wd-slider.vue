@@ -59,7 +59,7 @@ import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 import { getRect, isArray, isDef, isNumber, uuid } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 import { watch } from 'vue'
-import { sliderProps } from './types'
+import { sliderProps, type SliderExpose } from './types'
 
 const props = defineProps(sliderProps)
 const emit = defineEmits(['dragstart', 'dragmove', 'dragend', 'update:modelValue'])
@@ -196,13 +196,20 @@ const buttonRightStyle = computed(() => {
 })
 
 onMounted(() => {
+  initSlider()
+})
+
+/**
+ * 初始化slider宽度
+ */
+function initSlider() {
   getRect(`#${sliderId.value}`, false, proxy).then((data) => {
     // trackWidth: 轨道全长
     trackWidth.value = Number(data.width)
     // trackLeft: 轨道距离左侧的距离
     trackLeft.value = Number(data.left)
   })
-})
+}
 
 function onTouchStart(event: any) {
   const { disabled, modelValue } = props
@@ -224,6 +231,7 @@ function onTouchMove(event: any) {
   // 移动间距 deltaX 就是向左(-)向右(+)
   const diff = (touchLeft.deltaX.value / trackWidth.value) * (maxValue.value - minValue.value)
   newValue.value = startValue.value + diff
+
   // 左滑轮滑动控制
   leftBarSlider(newValue.value)
   emit('dragmove', {
@@ -340,6 +348,10 @@ function calcBarPercent() {
   leftBarPercent.value = percent
   barStyle.value = `width: ${percent}%; height: ${barHeight.value};`
 }
+
+defineExpose<SliderExpose>({
+  initSlider
+})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

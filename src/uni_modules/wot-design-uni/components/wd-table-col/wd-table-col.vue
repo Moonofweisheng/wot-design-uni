@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { type CSSProperties, computed, ref, reactive } from 'vue'
+import { type CSSProperties, computed, ref } from 'vue'
 import { addUnit, isDef, objToStyle, isOdd, isFunction } from '../common/util'
 import { tableColumnProps, type SortDirection } from './types'
 import { useParent } from '../composables/useParent'

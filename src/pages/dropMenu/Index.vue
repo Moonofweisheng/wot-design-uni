@@ -10,8 +10,9 @@
       <demo-block title="自定义菜单内容" transparent>
         <wd-drop-menu>
           <wd-drop-menu-item v-model="value3" :options="option1" @change="handleChange3" />
-          <wd-drop-menu-item ref="dropMenu" title="筛选">
+          <wd-drop-menu-item ref="dropMenu" title="筛选" @opened="handleOpened">
             <view>
+              <wd-slider v-model="valuetest" ref="slider" />
               <wd-cell title="标题文字" value="内容" />
               <wd-cell title="标题文字" label="描述信息" value="内容" />
               <view style="padding: 0 10px 20px; box-sizing: border-box">
@@ -50,10 +51,14 @@
 import { ref } from 'vue'
 
 import { useQueue } from '@/uni_modules/wot-design-uni'
+import type { SliderInstance } from '@/uni_modules/wot-design-uni/components/wd-slider/types'
 
 const { closeOutside } = useQueue()
 
 const dropMenu = ref()
+const slider = ref<SliderInstance>()
+
+const valuetest = ref<number>(30)
 
 const show = ref<boolean>(false)
 const value1 = ref<number>(1)
@@ -75,6 +80,10 @@ const option2 = ref<Record<string, any>[]>([
   { label: '销量', value: 1 },
   { label: '上架时间', value: 2 }
 ])
+
+function handleOpened() {
+  slider.value?.initSlider()
+}
 
 function handleChange1({ value }: any) {
   console.log(value)
