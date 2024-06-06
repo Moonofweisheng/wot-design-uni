@@ -1,7 +1,7 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
 import { makeBooleanProp, makeNumericProp, makeRequiredProp, makeStringProp } from '../common/props'
 
-type AlignType = 'left' | 'center' | 'right' // 列的对齐方式
+export type AlignType = 'left' | 'center' | 'right' // 列的对齐方式
 
 export type SortDirection = 0 | 1 | -1 // 列的排序方向
 
@@ -50,3 +50,5 @@ export const tableColumnProps = {
 }
 
 export type TableColumnProps = ExtractPropTypes<typeof tableColumnProps>
+
+export type TableColumnInstance = ComponentPublicInstance<TableColumnProps>

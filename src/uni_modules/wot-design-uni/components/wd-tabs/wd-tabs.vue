@@ -423,8 +423,7 @@ function getActiveIndex(value: number | string) {
 defineExpose({
   setActive,
   scrollIntoView,
-  updateLineStyle,
-  children
+  updateLineStyle
 })
 </script>
 <style lang="scss" scoped>
