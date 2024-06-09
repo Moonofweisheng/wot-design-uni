@@ -1,6 +1,29 @@
 # 更新日志 
 
 
+### [1.2.25](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.24...v1.2.25) (2024-06-09)
+
+
+### ✨ Features | 新功能
+
+* ✨ Pickerview选择器新增immediate-change属性，目前微信和支付宝小程序支持。 ([3428ae1](https://github.com/Moonofweisheng/wot-design-uni/commit/3428ae17889a36552010e3f7cc4a9bebb7a94461))
+* ✨ Slider暴露initSlider方法用于外部初始化slider宽度信息 ([fc3e4ef](https://github.com/Moonofweisheng/wot-design-uni/commit/fc3e4ef3bb108e6bb6a660ffead40f4658c119e7)), closes [#344](https://github.com/Moonofweisheng/wot-design-uni/issues/344)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  常见问题中增加关于交流群的内容 ([9ddaeec](https://github.com/Moonofweisheng/wot-design-uni/commit/9ddaeec32299463406ae2f60406cf39daff575cf))
+* ✏️  更新文档中组件数量 ([10d2ba9](https://github.com/Moonofweisheng/wot-design-uni/commit/10d2ba9035970c5627fc731219ec529e634d2578))
+* ✏️  增加关于微信小程序v-if和slot执行顺序异常问题的介绍 ([6a14879](https://github.com/Moonofweisheng/wot-design-uni/commit/6a1487900b214d071fdbda52034f220b8b046eec))
+* ✏️ 修正upload组件文档中change事件的dmeo错误 ([#360](https://github.com/Moonofweisheng/wot-design-uni/issues/360)) ([61004d3](https://github.com/Moonofweisheng/wot-design-uni/commit/61004d30ed3e79b439ef8a3c5d2e78723d7fa017))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复时间选择器设置minDate之后选择器显示值和实际选择值不一致的问题 ([3c0284f](https://github.com/Moonofweisheng/wot-design-uni/commit/3c0284f1f27b743ea3bdb7eeac5c489939057e13)), closes [#339](https://github.com/Moonofweisheng/wot-design-uni/issues/339)
+* 🐛 修复ImgCropper未暴露resetImg和setRoate方法的问题 ([e58f111](https://github.com/Moonofweisheng/wot-design-uni/commit/e58f1111f2ae8e2da23e60c0ed60130373117970)), closes [#354](https://github.com/Moonofweisheng/wot-design-uni/issues/354)
+* 🐛 修复Tag在钉钉小程序平台close方法不执行的问题 ([242d2f2](https://github.com/Moonofweisheng/wot-design-uni/commit/242d2f25c6ac829b5d20d63d520b1f8c8ae921a8)), closes [#359](https://github.com/Moonofweisheng/wot-design-uni/issues/359)
+
 ### [1.2.24](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.23...v1.2.24) (2024-06-03)
 
 
