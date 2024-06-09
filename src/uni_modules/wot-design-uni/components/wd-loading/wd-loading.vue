@@ -1,10 +1,6 @@
 <template>
   <view :class="rootClass" :style="rootStyle">
-    <view v-if="!type || type === 'ring'" class="wd-loading__body">
-      <view class="wd-loading__svg" :style="`background-image: url(${svg});`"></view>
-    </view>
-
-    <view v-if="type === 'outline'" class="wd-loading__body">
+    <view class="wd-loading__body">
       <view class="wd-loading__svg" :style="`background-image: url(${svg});`"></view>
     </view>
   </view>

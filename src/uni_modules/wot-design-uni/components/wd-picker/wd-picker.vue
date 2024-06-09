@@ -5,7 +5,6 @@
     } ${error ? 'is-error' : ''} ${customClass}`"
     :style="customStyle"
   >
-    <!--文案-->
     <view class="wd-picker__field" @click="showPopup">
       <slot v-if="useDefaultSlot"></slot>
       <view v-else class="wd-picker__cell">
@@ -28,7 +27,6 @@
         </view>
       </view>
     </view>
-    <!--弹出层，picker-view 在隐藏时修改值，会触发多次change事件，从而导致所有列选中第一项，因此picker在关闭时不隐藏 -->
     <wd-popup
       v-model="popupShow"
       position="bottom"
@@ -40,20 +38,15 @@
       custom-class="wd-picker__popup"
     >
       <view class="wd-picker__wraper">
-        <!--toolBar-->
         <view class="wd-picker__toolbar" @touchmove="noop">
-          <!--取消按钮-->
           <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
             {{ cancelButtonText || translate('cancel') }}
           </view>
-          <!--标题-->
           <view v-if="title" class="wd-picker__title">{{ title }}</view>
-          <!--确定按钮-->
           <view :class="`wd-picker__action ${isLoading ? 'is-loading' : ''}`" @click="onConfirm">
             {{ confirmButtonText || translate('done') }}
           </view>
         </view>
-        <!--pickerView-->
         <wd-picker-view
           ref="pickerViewWd"
           :custom-class="customViewClass"
@@ -150,8 +143,8 @@ watch(
 watch(
   () => props.columns,
   (newValue) => {
-    displayColumns.value = newValue
-    resetColumns.value = newValue
+    displayColumns.value = deepClone(newValue)
+    resetColumns.value = deepClone(newValue)
     // 获取初始选中项,并展示初始选中文案
     handleShowValueUpdate(props.modelValue)
   },
@@ -281,7 +274,7 @@ function close() {
   onCancel()
 }
 /**
- * @description 展示popup，小程序有个bug，在picker-view弹出时设置value，会触发change事件，而且会将picker-view的value多次触发change重置为第一项
+ * 展示popup
  */
 function showPopup() {
   if (props.disabled || props.readonly) return
@@ -291,15 +284,16 @@ function showPopup() {
   pickerValue.value = props.modelValue
   displayColumns.value = resetColumns.value
 }
+
 /**
- * @description 点击取消按钮触发。关闭popup，触发cancel事件。
+ * 点击取消按钮触发。关闭popup，触发cancel事件。
  */
 function onCancel() {
   popupShow.value = false
   emit('cancel')
 }
 /**
- * @description 点击确定按钮触发。展示选中值，触发cancel事件。
+ * 点击确定按钮触发。展示选中值，触发cancel事件。
  */
 function onConfirm() {
   if (isLoading.value) return
@@ -344,14 +338,14 @@ function handleConfirm() {
   })
 }
 /**
- * @description 初始change事件
+ * 初始change事件
  * @param event
  */
 function pickerViewChange({ value }: any) {
   pickerValue.value = value
 }
 /**
- * @description 设置展示值
+ * 设置展示值
  * @param  items
  */
 function setShowValue(items: ColumnItem | ColumnItem[]) {

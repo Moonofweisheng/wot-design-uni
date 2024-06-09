@@ -1,4 +1,3 @@
-
 <frame/>
 
 #  Slider 滑块
@@ -83,7 +82,7 @@ const value = ref<number[]>([10, 30])
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |--------|------|-----|---------|
-| initSlider | 初始化slider宽度数据 | - | 1.2.25 |
+| initSlider | 初始化slider宽度数据 | - | $LOWEST_VERSION$ |
 
 ## 外部样式类
 | 类名 | 说明 | 最低版本 |

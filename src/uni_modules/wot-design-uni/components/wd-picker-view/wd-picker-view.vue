@@ -10,6 +10,7 @@
         :indicator-style="`height: ${itemHeight}px;`"
         :style="`height: ${columnsHeight - 20}px;`"
         :value="selectedIndex"
+        :immediate-change="immediateChange"
         @change="onChange"
         @pickstart="onPickStart"
         @pickend="onPickEnd"
@@ -43,23 +44,24 @@ export default {
 </script>
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
-import { deepClone, getType, isArray, isDef, isEqual, isFunction, range } from '../common/util'
-import { formatArray, pickerViewProps, type PickerViewExpose } from './types'
+import { deepClone, getType, isArray, isDef, isEqual, range } from '../common/util'
+import { formatArray, pickerViewProps, type ColumnItem, type PickerViewExpose } from './types'
 
 const props = defineProps(pickerViewProps)
 const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
 
-// 格式化之后，用于render 列表的数据
-const formatColumns = ref<Record<string, string>[][]>([])
+const formatColumns = ref<ColumnItem[][]>([]) // 格式化后的列数据
 const itemHeight = ref<number>(35)
 const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中的下标集合
-const preSelectedIndex = ref<Array<number>>([])
 
 watch(
-  () => props.modelValue,
+  [() => props.modelValue, () => props.columns],
   (newValue, oldValue) => {
-    if (!isEqual(oldValue, newValue) && isDef(newValue)) {
-      selectWithValue(newValue)
+    if (!isEqual(oldValue[1], newValue[1])) {
+      formatColumns.value = formatArray(newValue[1], props.valueKey, props.labelKey)
+    }
+    if (!isEqual(oldValue[0], newValue[0]) && isDef(newValue[0])) {
+      selectWithValue(newValue[0])
     }
   },
   {
@@ -68,63 +70,18 @@ watch(
   }
 )
 
-watch(
-  () => props.columns,
-  (newValue) => {
-    // props初始化的时候格式化formatColumns交给value的observer来做
-    formatColumns.value = formatArray(newValue, props.valueKey, props.labelKey)
-    /**
-     * 每次改变都要重置选中项
-     * 1.选中每列的第一个
-     * 2.原来的value再选一次
-     */
-    // this.data.formatColumns.forEach((no, col) => this.selectWithIndex(col, 0))
-    selectWithValue(props.modelValue)
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-watch(
-  () => selectedIndex.value,
-  (newValue) => {
-    if (isEqual(newValue, preSelectedIndex.value)) return
-    if (!isEqual(getValues(), props.modelValue)) {
-      handleChange(0)
-    }
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-watch(
-  () => props.columnChange,
-  (newValue) => {
-    if (newValue && !isFunction(newValue)) {
-      console.error('The type of columnChange must be Function')
-    }
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
 const { proxy } = getCurrentInstance() as any
 
 /**
- * @description 根据传入的value，寻找对应的索引，并传递给原生选择器。
- * 会保证formatColumns先设置，之后会修改selectedIndex。
+ * 根据传入的value，寻找对应的索引，并传递给原生选择器。
+ * 需要保证formatColumns先设置，之后会修改selectedIndex。
  * @param {String|Number|Boolean|Array<String|Number|Boolean|Array<any>>}value
  */
 function selectWithValue(value: string | number | boolean | number[] | string[] | boolean[]) {
-  if (props.columns.length === 0) return
+  if (formatColumns.value.length === 0) return
 
   // 使其默认选中首项
-  if (value === '' || value === null || value === undefined || (isArray(value) && value.length === 0)) {
+  if (value === '' || !isDef(value) || (isArray(value) && value.length === 0)) {
     value = formatColumns.value.map((col) => {
       return col[0][props.valueKey]
     })
@@ -132,10 +89,7 @@ function selectWithValue(value: string | number | boolean | number[] | string[] 
   const valueType = getType(value)
   const type = ['string', 'number', 'boolean', 'array']
   if (type.indexOf(valueType) === -1) console.error(`value must be one of ${type.toString()}`)
-  // 在props初始化的时候有可能会调用此函数，此时需要保证formatColumns已经被设置，关于此问题更多详情参考/ISSUE.md。
-  if (formatColumns.value.length === 0) {
-    formatColumns.value = formatArray(props.columns, props.valueKey, props.labelKey)
-  }
+
   /**
    * 1.单key转为Array<key>
    * 2.根据formatColumns的长度截取Array<String>，保证下面的遍历不溢出
@@ -144,17 +98,13 @@ function selectWithValue(value: string | number | boolean | number[] | string[] 
   value = isArray(value) ? value : [value as string]
   value = value.slice(0, formatColumns.value.length)
 
-  if (value.length === 0) {
-    value = formatColumns.value.map(() => 0)
-  }
-
   let selected: number[] = deepClone(selectedIndex.value)
   value.forEach((target, col) => {
     let row = formatColumns.value[col].findIndex((row) => {
       return row[props.valueKey].toString() === target.toString()
     })
     row = row === -1 ? 0 : row
-    selected = selectWithIndex(col, row)
+    selected = correctSelectedIndex(col, row, selected)
   })
   /** 根据formatColumns的长度去除selectWithIndex无用的部分。
    * 始终保持value、selectWithIndex、formatColumns长度一致
@@ -163,19 +113,32 @@ function selectWithValue(value: string | number | boolean | number[] | string[] 
 }
 
 /**
- * @description 根据传入的col,row，传递给原生选择器
- * @param {Number} columnIndex 要操作的列索引
- * @param {Number} rowIndex 要选中的行索引
- * @return {Boolean} 是否设置成功
+ * 修正选中项的值
+ * @param value 当前picker选择器选中的值
+ * @param origin 原始选中的值
  */
-function selectWithIndex(columnIndex: number, rowIndex: number) {
+function correctSelected(value: number[]) {
+  let selected = deepClone(value)
+  value.forEach((row, col) => {
+    row = range(row, 0, formatColumns.value[col].length - 1)
+    selected = correctSelectedIndex(col, row, selected)
+  })
+  return selected
+}
+
+/**
+ * 修正选中项指定列行的值
+ * @param columnIndex 列下标
+ * @param rowIndex 行下标
+ * @param selected 选中值列表
+ */
+function correctSelectedIndex(columnIndex: number, rowIndex: number, selected: number[]) {
   const col = formatColumns.value[columnIndex]
   if (!col || !col[rowIndex]) {
-    throw Error(`The value to select with Col:${columnIndex} Row:${rowIndex} is correct`)
+    throw Error(`The value to select with Col:${columnIndex} Row:${rowIndex} is incorrect`)
   }
-  const select: number[] = deepClone(selectedIndex.value)
+  const select: number[] = deepClone(selected)
   select[columnIndex] = rowIndex
-  selectedIndex.value = deepClone(select)
 
   // 被禁用的无法选中，选中距离它最近的未被禁用的
   if (col[rowIndex].disabled) {
@@ -192,27 +155,24 @@ function selectWithIndex(columnIndex: number, rowIndex: number) {
     } else if (select[columnIndex] === undefined) {
       select[columnIndex] = 0
     }
-    nextTick(() => {
-      selectedIndex.value = deepClone(select)
-    })
   }
-  return selectedIndex.value
+  return select
 }
 
 /**
- * @description 滚动选中时更新选中的索引、触发change事件
- * @return {Number|Array<Number>}选中项的下标或者集合
- * @return {Object}实例本身
+ * 选择器选中项变化时触发
+ * @param param0
  */
-function onChange({ detail: { value } }: any) {
+function onChange({ detail: { value } }: { detail: { value: number[] } }) {
   value = value.map((v: any) => {
     return Number(v || 0)
   })
   const index = getChangeDiff(value)
+  // 先将picker选择器的值赋给selectedIndex，然后重新赋予修正后的值，防止两次操作修正结果一致时pikcer视图不刷新
   selectedIndex.value = deepClone(value)
-
   nextTick(() => {
-    // 执行多级联动
+    // 重新赋予修正后的值
+    selectedIndex.value = correctSelected(value)
     if (props.columnChange) {
       // columnsChange 可能有异步操作，需要添加 resolve 进行回调通知，形参小于4个则为同步
       if (props.columnChange.length < 4) {
@@ -231,33 +191,33 @@ function onChange({ detail: { value } }: any) {
   })
 }
 
-function getChangeIndex(now: number[], origin: number[]) {
+/**
+ * 获取选中项变化的列的下标
+ * @param now 当前选中项值
+ * @param origin 旧选中项值
+ */
+function getChangeColumn(now: number[], origin: number[]) {
   if (!now || !origin) return -1
   const index = now.findIndex((row, index) => row !== origin[index])
   return index
 }
 
 function getChangeDiff(value: number[]) {
-  // 小程序bug 1. 修改原生pickerView的columns，滑动触发change事件回传的数组长度为未改变columns之前的,并不会缩减
-  // 小程序bug 2. 当点击速度过快时，会出现负数列项的操作，需要将value进行限制
   value = value.slice(0, formatColumns.value.length)
 
   // 保留选中前的
   const origin: number[] = deepClone(selectedIndex.value)
   // 存储赋值旧值，便于外部比较
   let selected: number[] = deepClone(selectedIndex.value)
-  // 开始应用最新的值
+
   value.forEach((row, col) => {
     row = range(row, 0, formatColumns.value[col].length - 1)
     if (row === origin[col]) return
-    selected = selectWithIndex(col, row)
+    selected = correctSelectedIndex(col, row, selected)
   })
-  selectedIndex.value = selected
-  preSelectedIndex.value = origin
 
-  // diff出变化的列
-  // const diffCol = selectedIndex.findIndex((row, index) => row !== origin[index])
-  const diffCol = getChangeIndex(selected, origin)
+  // 值变化的列
+  const diffCol = getChangeColumn(selected, origin)
   if (diffCol === -1) return
 
   // 获取变化的的行
@@ -267,6 +227,10 @@ function getChangeDiff(value: number[]) {
   return selected.length === 1 ? diffRow : diffCol
 }
 
+/**
+ * 列更新
+ * @param index 列下标
+ */
 function handleChange(index: number) {
   const value = getValues()
 
@@ -297,11 +261,14 @@ function getSelects() {
 }
 
 /**
- * @description 获取所有列选中项的value，返回值为一个数组
+ * 获取所有列的选中值
+ * 如果values只有一项则将第一项返回
  */
 function getValues() {
   const { valueKey } = props
-  const values = selectedIndex.value.map((row, col) => formatColumns.value[col][row][valueKey])
+  const values = selectedIndex.value.map((row, col) => {
+    return formatColumns.value[col][row][valueKey]
+  })
 
   if (values.length === 1) {
     return values[0]
@@ -310,8 +277,7 @@ function getValues() {
 }
 
 /**
- * @description 获取所有列选中项的label，返回值为一个数组
- * @return {Array} 每列选中的label
+ * 获取所有列选中项的label，返回值为一个数组
  */
 function getLabels() {
   const { labelKey } = props
@@ -319,7 +285,7 @@ function getLabels() {
 }
 
 /**
- * @description 获取某一列的选中项下标
+ * 获取某一列的选中项下标
  * @param {Number} columnIndex 列的下标
  * @returns {Number} 下标
  */
@@ -328,7 +294,7 @@ function getColumnIndex(columnIndex: number) {
 }
 
 /**
- * @description 获取某一列的选项
+ *  获取某一列的选项
  * @param {Number} columnIndex 列的下标
  * @returns {Array<{valueKey,labelKey}>} 当前列的集合
  */
@@ -337,28 +303,26 @@ function getColumnData(columnIndex: number) {
 }
 
 /**
- * @description 获取某一列的选项
- * @param {Number} columnIndex 列的下标
- * @param {Array<原始值|Object>} 一维数组，元素仅限对象和原始值
- * @param {Number} jumpTo 更换列数据后停留的地点
+ * 设置列数据
+ * @param columnIndex 列下标
+ * @param data // 列数据
+ * @param rowIndex // 行下标
  */
-function setColumnData(columnIndex: any, data: Array<any>, jumpTo = 0) {
-  /**
-   * @注意 以下为pickerView的坑
-   * 如果某一列(以下简称列)中有10个选项，而且当前选中第10项。
-   * 如果此时把此列的选项修改后还剩下3个，那么选中项会由第10项滑落到第3项，同时出发change事件
-   */
-  // 为了防止上述情况发生，修改数据前先将当前列选中0
-  selectedIndex.value = selectWithIndex(columnIndex, jumpTo)
-  // 经过formatArray处理的数据会变成二维数组，一定要拍成一维的。
-  // ps 小程序基础库v2.9.3才可以用flat
+function setColumnData(columnIndex: number, data: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>, rowIndex: number = 0) {
   formatColumns.value[columnIndex] = formatArray(data, props.valueKey, props.labelKey).reduce((acc, val) => acc.concat(val), [])
+  selectedIndex.value = correctSelectedIndex(columnIndex, rowIndex, selectedIndex.value)
 }
 
+/**
+ * 获取列数据
+ */
 function getColumnsData() {
-  return formatColumns.value.slice(0)
+  return deepClone(formatColumns.value)
 }
 
+/**
+ * 获取选中数据
+ */
 function getSelectedIndex() {
   return selectedIndex.value
 }

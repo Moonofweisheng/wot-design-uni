@@ -208,7 +208,6 @@ function onChange({ value }: { value: string | string[] }) {
  */
 function updateColumns(): DatetimePickerViewOption[][] {
   const { formatter, columnFormatter } = props
-
   if (columnFormatter) {
     return columnFormatter(proxy.$.exposed)
   } else {
@@ -464,19 +463,18 @@ function columnChange(picker: PickerViewInstance) {
   // 更新选中时间戳
   innerValue.value = correctValue(value)
   // 根据innerValue获取最新的时间表，重新生成对应的数据源
-  const newColumns = updateColumns().slice(0, 3)
+
+  const newColumns = updateColumns()
   // 深拷贝联动之前的选中项
   const selectedIndex = picker.getSelectedIndex().slice(0)
   /**
    * 选中年会修改对应的年份的月数，和月份对应的日期。
    * 选中月，会修改月份对应的日数
    */
-
   newColumns.forEach((_columns, index) => {
     const nextColumnIndex = index + 1
     const nextColumnData = newColumns[nextColumnIndex]
-    // `日`不控制任何其它列
-    if (index === 2) return
+    if (nextColumnIndex > newColumns.length - 1) return
     picker.setColumnData(
       nextColumnIndex,
       nextColumnData,

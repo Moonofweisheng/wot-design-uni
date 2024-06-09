@@ -172,7 +172,7 @@ const { translate } = useTranslate('datetime-picker')
 const datetimePickerView = ref<DatetimePickerViewInstance>()
 const datetimePickerView1 = ref<DatetimePickerViewInstance>()
 
-const showValue = ref<string | Date | Array<string | Date>>([])
+const showValue = ref<string | Date | Array<string | Date>>('')
 const popupShow = ref<boolean>(false)
 const showStart = ref<boolean>(true)
 const region = ref<boolean>(false)

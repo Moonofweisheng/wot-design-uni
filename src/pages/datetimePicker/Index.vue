@@ -15,6 +15,7 @@
         <wd-datetime-picker label="错误" v-model="value9" error @confirm="handleConfirm9" />
         <wd-datetime-picker label="必填" v-model="value10" required @confirm="handleConfirm10" />
         <wd-datetime-picker label="默认日期" v-model="value2" :default-value="value2" />
+        <wd-datetime-picker label="时间范围一年" :minDate="minDate" :maxDate="maxDate" v-model="value17" @confirm="handleConfirm1" />
       </wd-cell-group>
     </demo-block>
     <demo-block title="label 不传" transparent>
@@ -36,11 +37,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
-import type {
-  DatetimePickerViewColumnType,
-  DatetimePickerViewFilter,
-  DatetimePickerViewFormatter
-} from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/types'
+import type { DatetimePickerViewFilter, DatetimePickerViewFormatter } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/types'
 import type {
   DatetimePickerDisplayFormat,
   DatetimePickerDisplayFormatTabLabel,
@@ -48,7 +45,6 @@ import type {
 } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker/types'
 import { ref } from 'vue'
 
-const type = ref<string>('date')
 const value1 = ref<string>('')
 const value2 = ref<number>(Date.now())
 const value3 = ref<number>(Date.now())
@@ -65,8 +61,11 @@ const value13 = ref<number>(Date.now())
 const value14 = ref<any[]>(['', ''])
 const value15 = ref<any[]>(['', Date.now()])
 const value16 = ref(Date.now())
-const defaultValue = ref<any[]>([Date.now() - 24 * 60 * 60 * 1000, Date.now()])
-const showstart = ref<boolean>(false)
+const value17 = ref(Date.now())
+
+const minDate = ref<number>(Date.now())
+const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
+
 const formatter: DatetimePickerViewFormatter = (type, value) => {
   switch (type) {
     case 'year':

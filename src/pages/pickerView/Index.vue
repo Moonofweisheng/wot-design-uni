@@ -5,7 +5,7 @@
     </demo-block>
 
     <demo-block :title="`禁用选项，数值: ${value2}`">
-      <wd-picker-view v-model="value2" :columns="columns2" @change="(e) => onChange(2, e)" />
+      <wd-picker-view v-model="value2" :immediate-change="true" :columns="columns2" @change="(e) => onChange(2, e)" />
     </demo-block>
 
     <demo-block :title="`加载中，数值: ${value3}`">
