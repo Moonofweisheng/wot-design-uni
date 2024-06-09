@@ -31,6 +31,7 @@
       :show-panel-title="showPanelTitle"
       :default-time="formatDefauleTime"
       :panel-height="panelHeight"
+      :immediate-change="immediateChange"
       :time-filter="timeFilter"
       :hide-second="hideSecond"
       @change="handleChange"

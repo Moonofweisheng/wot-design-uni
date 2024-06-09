@@ -1,9 +1,10 @@
 <template>
   <view>
     <wd-picker-view
+      ref="datePickerview"
       :custom-class="customClass"
       :custom-style="customStyle"
-      ref="datePickerview"
+      :immediate-change="immediateChange"
       v-model="pickerValue"
       :columns="columns"
       :columns-height="columnsHeight"

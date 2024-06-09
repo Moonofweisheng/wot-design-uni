@@ -61,7 +61,11 @@ export const calendarViewProps = {
   /**
    * type 为 'datetime' 或 'datetimerange' 时有效，是否不展示秒修改
    */
-  hideSecond: makeBooleanProp(false)
+  hideSecond: makeBooleanProp(false),
+  /**
+   * 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
+   */
+  immediateChange: makeBooleanProp(false)
 }
 
 export type CalendarViewProps = ExtractPropTypes<typeof calendarViewProps>

@@ -93,6 +93,7 @@
           :time-filter="timeFilter"
           :hide-second="hideSecond"
           :show-panel-title="!range(type)"
+          :immediate-change="immediateChange"
           @change="handleChange"
         />
       </view>

@@ -133,6 +133,7 @@ const filter = (type, values) => {
 | maxHour | 最大小时，time类型时生效 | number | - | 23 | - |
 | minMinute | 最小分钟，time类型时生效 | number | - | 0 | - |
 | maxMinute | 最大分钟，time类型时生效 | number | - | 59 | - |
+| immediate-change | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。 | boolean | - | false | $LOWEST_VERSION$ |
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |

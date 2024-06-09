@@ -57,6 +57,7 @@
           :columns-height="columnsHeight"
           :value-key="valueKey"
           :label-key="labelKey"
+          :immediate-change="immediateChange"
           @change="pickerViewChange"
           @pickstart="onPickStart"
           @pickend="onPickEnd"

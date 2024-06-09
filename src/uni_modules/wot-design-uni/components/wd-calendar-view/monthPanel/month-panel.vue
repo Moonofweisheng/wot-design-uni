@@ -40,6 +40,7 @@
           v-model="timeValue"
           :columns="timeData"
           :columns-height="125"
+          :immediate-change="immediateChange"
           @change="handleTimeChange"
           @pickstart="handlePickStart"
           @pickend="handlePickEnd"
