@@ -25,7 +25,7 @@ const fileList = ref<any[]>([
 
 const action: string = 'https://ftf.jd.com/api/uploadImg'
 
-function handleChange({ files }) {
+function handleChange({ fileList: files }) {
   fileList.value = files
 }
 ```
