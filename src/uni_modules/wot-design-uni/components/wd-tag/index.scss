@@ -95,7 +95,7 @@
     vertical-align: middle;
     padding: 0;
   }
-  @include edeep(close) {
+  @include e(close) {
     display: inline-block;
     margin-left: 24px;
     margin-right: -4px;
