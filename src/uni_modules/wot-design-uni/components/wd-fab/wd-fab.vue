@@ -7,7 +7,7 @@
     :style="rootStyle"
     @click.stop=""
   >
-    <view @click.stop="">
+    <view @click.stop="" v-if="inited">
       <wd-button @click="handleClick" custom-class="wd-fab__trigger" round :type="type" :disabled="disabled">
         <wd-icon custom-class="wd-fab__icon" :name="isActive ? activeIcon : inactiveIcon"></wd-icon>
       </wd-button>
@@ -44,11 +44,11 @@ import { isDef, isH5, objToStyle } from '../common/util'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { fabProps, type FabExpose } from './types'
-import { onMounted, reactive } from 'vue'
+import { reactive } from 'vue'
 
 const props = defineProps(fabProps)
 const emit = defineEmits(['update:active'])
-
+const inited = ref<boolean>(false) // 是否初始化完成
 const isActive = ref<boolean>(false) // 是否激活状态
 const queue = inject<Queue | null>(queueKey, null)
 const { proxy } = getCurrentInstance() as any
@@ -86,28 +86,26 @@ watch(
   () => initPosition()
 )
 
-const top = ref(0)
-const left = ref(0)
+const top = ref<number>(0)
+const left = ref<number>(0)
 const screen = reactive({ width: 0, height: 0 })
-const fabSize = ref(56)
+const fabSize = ref<number>(56)
 const bounding = reactive({
   minTop: 0,
   minLeft: 0,
   maxTop: 0,
   maxLeft: 0
 })
+const fabGap: number = 16 // fab默认与边缘的间距
 
 function getBounding() {
   const sysInfo = uni.getSystemInfoSync()
-  const gap = 16
-
   screen.width = sysInfo.windowWidth
   screen.height = isH5 ? sysInfo.windowTop + sysInfo.windowHeight : sysInfo.windowHeight
-
-  bounding.minTop = isH5 ? sysInfo.windowTop + gap : gap
-  bounding.minLeft = gap
-  bounding.maxLeft = screen.width - fabSize.value - gap
-  bounding.maxTop = screen.height - fabSize.value - gap
+  bounding.minTop = isH5 ? sysInfo.windowTop + fabGap : fabGap
+  bounding.minLeft = fabGap
+  bounding.maxLeft = screen.width - fabSize.value - fabGap
+  bounding.maxTop = screen.height - fabSize.value - fabGap
 }
 
 function initPosition() {
@@ -128,13 +126,9 @@ function initPosition() {
   }
 }
 
-onMounted(() => {
-  initPosition()
-})
-
 // 按下时坐标相对于元素的偏移量
 const touchOffset = reactive({ x: 0, y: 0 })
-const attractTransition = ref(false)
+const attractTransition = ref<boolean>(false)
 function handleTouchStart(e: TouchEvent) {
   if (props.draggable === false) return
 
@@ -191,6 +185,8 @@ const rootStyle = computed(() => {
 
 onBeforeMount(() => {
   getBounding()
+  initPosition()
+  inited.value = true
   if (queue && queue.pushToQueue) {
     queue.pushToQueue(proxy)
   } else {
