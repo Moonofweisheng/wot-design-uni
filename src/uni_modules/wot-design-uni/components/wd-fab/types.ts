@@ -46,7 +46,7 @@ export const fabProps = {
   draggable: makeBooleanProp(false),
   gap: {
     type: Object as PropType<FabGap>,
-    default: () => {}
+    default: () => ({})
   }
 }
 
