@@ -1,10 +1,11 @@
 import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
+import type { PropType } from 'vue'
 
 export type FabType = 'primary' | 'success' | 'info' | 'warning' | 'error' | 'default'
 export type FabPosition = 'left-top' | 'right-top' | 'left-bottom' | 'right-bottom'
 export type FabDirection = 'top' | 'right' | 'bottom' | 'left'
-
+export type FabGap = Partial<Record<FabDirection, number>>
 export const fabProps = {
   ...baseProps,
   /**
@@ -42,7 +43,11 @@ export const fabProps = {
   /**
    * 是否可拖动
    */
-  draggable: makeBooleanProp(false)
+  draggable: makeBooleanProp(false),
+  gap: {
+    type: Object as PropType<FabGap>,
+    default: () => ({})
+  }
 }
 
 export type FabProps = ExtractPropTypes<typeof fabProps>
