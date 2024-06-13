@@ -96,16 +96,16 @@ const bounding = reactive({
   maxTop: 0,
   maxLeft: 0
 })
-const fabGap: number = 16 // fab默认与边缘的间距
 
 function getBounding() {
   const sysInfo = uni.getSystemInfoSync()
+  const { top = 16, left = 16, right = 16, bottom = 16 } = props.gap
   screen.width = sysInfo.windowWidth
   screen.height = isH5 ? sysInfo.windowTop + sysInfo.windowHeight : sysInfo.windowHeight
-  bounding.minTop = isH5 ? sysInfo.windowTop + fabGap : fabGap
-  bounding.minLeft = fabGap
-  bounding.maxLeft = screen.width - fabSize.value - fabGap
-  bounding.maxTop = screen.height - fabSize.value - fabGap
+  bounding.minTop = isH5 ? sysInfo.windowTop + top : top
+  bounding.minLeft = left
+  bounding.maxLeft = screen.width - fabSize.value - right
+  bounding.maxTop = screen.height - fabSize.value - bottom
 }
 
 function initPosition() {
