@@ -145,7 +145,8 @@ function buildSvg() {
  */
 function reset(option: ToastOptions) {
   if (option) {
-    show.value = isDef(option.show!) ? option.show! : false
+    show.value = isDef(option.show) ? option.show : false
+
     if (show.value) {
       iconName.value = isDef(option.iconName!) ? option.iconName! : ''
       customIcon.value = isDef(option.customIcon!) ? option.customIcon! : false

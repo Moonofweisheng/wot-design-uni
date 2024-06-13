@@ -1,3 +1,5 @@
+import { AbortablePromise } from './AbortablePromise'
+
 /**
  * 生成uuid
  * @returns string
@@ -330,7 +332,7 @@ export function isNumber(value: any): value is number {
  */
 export function isPromise(value: unknown): value is Promise<any> {
   // 先将 value 断言为 object 类型
-  if (isObj(value)) {
+  if (isObj(value) && isDef(value)) {
     // 然后进一步检查 value 是否具有 then 和 catch 方法，并且它们是函数类型
     return isFunction((value as Promise<any>).then) && isFunction((value as Promise<any>).catch)
   }
@@ -417,7 +419,7 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
 }
 
 export const requestAnimationFrame = (cb = () => {}) => {
-  return new Promise((resolve) => {
+  return new AbortablePromise((resolve) => {
     const timer = setInterval(() => {
       clearInterval(timer)
       resolve(true)
