@@ -93,7 +93,7 @@ const active = ref<boolean>(false)
 | inactiveIcon   | 悬浮按钮未展开时的图标             | string       | -                                                                                         | 'add'                                          | 0.1.57           |
 | activeIcon     | 悬浮按钮展开时的图标               | string       | -                                                                                         | 'close'                                        | 0.1.57           |
 | zIndex         | 自定义悬浮按钮层级                 | number       | -                                                                                         | 99                                             | 0.1.57           |
-| gap            | 自定义悬浮按钮与可视区域边缘的间距 | FabGap       | -                                                                                         | \{ top: 16, left: 16, right: 16, bottom: 16 \} | $LOWEST_VERSION$ |
+| gap            | 自定义悬浮按钮与可视区域边缘的间距 | FabGap       | -                                                                                         | \{ top: 16, left: 16, right: 16, bottom: 16 \} | 1.2.26 |
 | customStyle    | 自定义样式                         | string       | -                                                                                         | ''                                             | 0.1.57           |
 
 ## 外部样式类
