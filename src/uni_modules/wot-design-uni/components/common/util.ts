@@ -650,3 +650,14 @@ export const isDate = (val: unknown): val is Date => Object.prototype.toString.c
  * 判断环境是否是H5
  */
 export const isH5 = process.env.UNI_PLATFORM === 'h5'
+
+/**
+ * 从对象中移除值为undefined的字段
+ * @param obj - 输入的对象
+ * @returns 处理后的新对象
+ */
+export function removeUndefinedFields(obj: Record<string, any>): Record<string, any> {
+  const newObj: Record<string, any> = { ...obj } // 创建输入对象的副本
+  Object.keys(newObj).forEach((key) => newObj[key] === undefined && delete newObj[key]) // 遍历对象的键，删除值为undefined的字段
+  return newObj // 返回处理后的新对象
+}

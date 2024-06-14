@@ -18,9 +18,12 @@ export const sidebarItemProps = {
   /** 图标 */
   icon: String,
   /** 是否点状徽标 */
-  isDot: Boolean,
+  isDot: {
+    type: Boolean,
+    default: undefined
+  },
   /** 徽标最大值 */
-  max: makeNumberProp(99),
+  max: Number,
   /** 是否禁用 */
   disabled: makeBooleanProp(false)
 }
