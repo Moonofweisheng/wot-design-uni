@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [1.2.26](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.25...v1.2.26) (2024-06-14)
+
+
+### ✨ Features | 新功能
+
+* ✨ fab组件添加gap属性 ([#366](https://github.com/Moonofweisheng/wot-design-uni/issues/366)) ([7b44765](https://github.com/Moonofweisheng/wot-design-uni/commit/7b44765adc08fd16e055fbd326698a8f6b708426))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Fab初始化时存在初始位置闪现的问题 ([74c90be](https://github.com/Moonofweisheng/wot-design-uni/commit/74c90beb402e519fee1057870b0631673945cb73))
+* 🐛 修复Transition被打断时出现显示异常的问题 ([#368](https://github.com/Moonofweisheng/wot-design-uni/issues/368)) ([9c21b95](https://github.com/Moonofweisheng/wot-design-uni/commit/9c21b9512076cc95098a36ee7a7283f70386c94b))
+
 ### [1.2.25](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.24...v1.2.25) (2024-06-09)
 
 
