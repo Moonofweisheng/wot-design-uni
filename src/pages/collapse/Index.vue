@@ -16,6 +16,27 @@
         </wd-collapse-item>
       </wd-collapse>
     </demo-block>
+
+    <demo-block title="自定义title" transparent>
+      <wd-collapse v-model="value7">
+        <wd-collapse-item name="item1">
+          <template #title="{ expanded }">
+            <span style="color: red">通过 slot 自定义标题</span>
+            <span>{{ expanded ? '我展开了' : '我已收起' }}</span>
+          </template>
+          {{ desc7 }}
+        </wd-collapse-item>
+        <wd-collapse-item name="item2" disabled>
+          <template #title="{ expanded, disabled }">
+            <span v-if="disabled">被禁用</span>
+            <span style="color: red" v-else>通过 slot 自定义 title</span>
+            <span>{{ expanded ? '我展开了' : '我已收起' }}</span>
+          </template>
+          {{ desc7 }}
+        </wd-collapse-item>
+      </wd-collapse>
+    </demo-block>
+
     <demo-block title="手风琴" transparent>
       <wd-collapse v-model="value2" :accordion="accordion" @change="handleChange2">
         <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
@@ -50,26 +71,6 @@
         <template #more>
           <view>显示全部</view>
         </template>
-      </wd-collapse>
-    </demo-block>
-
-    <demo-block title="自定义title" transparent>
-      <wd-collapse v-model="value7">
-        <wd-collapse-item name="item1">
-          <template #title="{ expanded }">
-            <span style="color: red">通过 slot 自定义标题</span>
-            <span>{{ expanded ? '我展开了' : '我已收起' }}</span>
-          </template>
-          {{ desc7 }}
-        </wd-collapse-item>
-        <wd-collapse-item name="item2" disabled>
-          <template #title="{ expanded, disabled }">
-            <span v-if="disabled">被禁用</span>
-            <span style="color: red" v-else>通过 slot 自定义 title</span>
-            <span>{{ expanded ? '我展开了' : '我已收起' }}</span>
-          </template>
-          {{ desc7 }}
-        </wd-collapse-item>
       </wd-collapse>
     </demo-block>
   </page-wraper>
