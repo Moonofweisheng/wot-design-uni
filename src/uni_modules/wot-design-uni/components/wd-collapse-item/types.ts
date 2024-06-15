@@ -6,7 +6,7 @@ export type CollapseItemBeforeExpand = (name: string) => void
 export const collapseItemProps = {
   ...baseProps,
   /**
-   * 折叠栏的标题
+   * 折叠栏的标题, 可通过 slot 传递自定义内容
    */
   title: String,
   /**
