@@ -16,8 +16,8 @@ const value = ref<string[]>(['item1'])
   <wd-collapse-item title="标签2" name="item2">这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item name="item3">
     <template #title="{ expanded, disabled, isFirst }">
-      <span style="color: red">通过 slot 自定义标题</span>
-      <span>{{ expanded ? '我展开了' : '我已收起' }}</span>
+      <text style="color: red">通过 slot 自定义标题</text>
+      <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
     </template>
     这是一条简单的示例文字。
   </wd-collapse-item>
