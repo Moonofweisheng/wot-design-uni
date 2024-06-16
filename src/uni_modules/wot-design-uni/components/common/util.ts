@@ -1,5 +1,7 @@
 import { AbortablePromise } from './AbortablePromise'
 
+type NotUndefined<T> = T extends undefined ? never : T
+
 /**
  * 生成uuid
  * @returns string
@@ -348,6 +350,14 @@ export function isBoolean(value: any): value is boolean {
   return typeof value === 'boolean'
 }
 
+export function isUndefined(value): value is undefined {
+  return typeof value === 'undefined'
+}
+
+export function isNotUndefined<T>(value: T): value is NotUndefined<T> {
+  return !isUndefined(value)
+}
+
 /**
  * 检查给定的值是否为奇数
  * @param value 要检查的值
@@ -652,12 +662,21 @@ export const isDate = (val: unknown): val is Date => Object.prototype.toString.c
 export const isH5 = process.env.UNI_PLATFORM === 'h5'
 
 /**
- * 从对象中移除值为undefined的字段
- * @param obj - 输入的对象
- * @returns 处理后的新对象
+ * 剔除对象中的某些属性
+ * @param obj
+ * @param predicate
+ * @returns
  */
-export function removeUndefinedFields(obj: Record<string, any>): Record<string, any> {
-  const newObj: Record<string, any> = { ...obj } // 创建输入对象的副本
-  Object.keys(newObj).forEach((key) => newObj[key] === undefined && delete newObj[key]) // 遍历对象的键，删除值为undefined的字段
-  return newObj // 返回处理后的新对象
+export function omitBy<O extends Record<string, any>>(obj: O, predicate: (value: any, key: keyof O) => boolean): Partial<O> {
+  const newObj = {}
+
+  const keys = Object.keys(obj)
+
+  for (const item in keys) {
+    if (!predicate(obj[item], item)) {
+      newObj[item] = obj[item]
+    }
+  }
+
+  return newObj
 }

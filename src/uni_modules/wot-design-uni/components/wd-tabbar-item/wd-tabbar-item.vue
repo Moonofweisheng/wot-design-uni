@@ -25,7 +25,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { type CSSProperties, computed } from 'vue'
-import { deepAssign, isDef, objToStyle, removeUndefinedFields } from '../common/util'
+import { deepAssign, isDef, isUndefined, objToStyle, omitBy } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { TABBAR_KEY } from '../wd-tabbar/types'
 import { tabbarItemProps } from './types'
@@ -37,12 +37,15 @@ const { parent: tabbar, index } = useParent(TABBAR_KEY)
 
 const customBadgeProps = computed(() => {
   const badgeProps: Partial<BadgeProps> = deepAssign(
-    isDef(props.badgeProps) ? removeUndefinedFields(props.badgeProps) : {},
-    removeUndefinedFields({
-      max: props.max,
-      isDot: props.isDot,
-      modelValue: props.value
-    })
+    isDef(props.badgeProps) ? omitBy(props.badgeProps, isUndefined) : {},
+    omitBy(
+      {
+        max: props.max,
+        isDot: props.isDot,
+        modelValue: props.value
+      },
+      isUndefined
+    )
   )
   if (!isDef(badgeProps.max)) {
     badgeProps.max = 99

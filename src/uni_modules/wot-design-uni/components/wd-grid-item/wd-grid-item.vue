@@ -32,7 +32,7 @@ export default {
 import { onMounted, ref, watch, computed } from 'vue'
 import { useParent } from '../composables/useParent'
 import { GRID_KEY } from '../wd-grid/types'
-import { deepAssign, isDef, removeUndefinedFields } from '../common/util'
+import { deepAssign, isDef, isUndefined, omitBy } from '../common/util'
 import { gridItemProps } from './types'
 import type { BadgeProps } from '../wd-badge/types'
 
@@ -57,13 +57,16 @@ const childCount = computed(() => {
 
 const customBadgeProps = computed(() => {
   const badgeProps: Partial<BadgeProps> = deepAssign(
-    isDef(props.badgeProps) ? removeUndefinedFields(props.badgeProps) : {},
-    removeUndefinedFields({
-      max: props.max,
-      isDot: props.isDot,
-      modelValue: props.value,
-      type: props.type
-    })
+    isDef(props.badgeProps) ? omitBy(props.badgeProps, isUndefined) : {},
+    omitBy(
+      {
+        max: props.max,
+        isDot: props.isDot,
+        modelValue: props.value,
+        type: props.type
+      },
+      isUndefined
+    )
   )
   return badgeProps
 })
