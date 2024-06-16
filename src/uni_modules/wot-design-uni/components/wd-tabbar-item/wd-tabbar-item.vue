@@ -1,6 +1,6 @@
 <template>
   <view :class="`wd-tabbar-item ${customClass}`" :style="customStyle" @click="handleClick">
-    <wd-badge :modelValue="value" v-bind="badgeProps" :is-dot="isDot" :max="max">
+    <wd-badge v-bind="customBadgeProps">
       <view class="wd-tabbar-item__body">
         <slot name="icon" :active="active"></slot>
         <template v-if="!$slots.icon && icon">
@@ -25,14 +25,33 @@ export default {
 </script>
 <script lang="ts" setup>
 import { type CSSProperties, computed } from 'vue'
-import { isDef, objToStyle } from '../common/util'
+import { deepAssign, isDef, isUndefined, objToStyle, omitBy } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { TABBAR_KEY } from '../wd-tabbar/types'
 import { tabbarItemProps } from './types'
+import type { BadgeProps } from '../wd-badge/types'
 
 const props = defineProps(tabbarItemProps)
 
 const { parent: tabbar, index } = useParent(TABBAR_KEY)
+
+const customBadgeProps = computed(() => {
+  const badgeProps: Partial<BadgeProps> = deepAssign(
+    isDef(props.badgeProps) ? omitBy(props.badgeProps, isUndefined) : {},
+    omitBy(
+      {
+        max: props.max,
+        isDot: props.isDot,
+        modelValue: props.value
+      },
+      isUndefined
+    )
+  )
+  if (!isDef(badgeProps.max)) {
+    badgeProps.max = 99
+  }
+  return badgeProps
+})
 
 const textStyle = computed(() => {
   const style: CSSProperties = {}

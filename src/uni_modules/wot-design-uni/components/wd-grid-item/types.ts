@@ -49,7 +49,10 @@ export const gridItemProps = {
   /**
    * 是否显示图标右上角小红点
    */
-  isDot: Boolean,
+  isDot: {
+    type: Boolean,
+    default: undefined
+  },
   /**
    * 图标右上角显示的 badge 类型，可选值：primary / success / warning / danger / info
    */
