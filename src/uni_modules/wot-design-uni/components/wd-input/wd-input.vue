@@ -10,7 +10,6 @@
         <slot v-else name="label"></slot>
       </view>
     </view>
-    <!-- 输入域 -->
     <view class="wd-input__body">
       <view class="wd-input__value">
         <view v-if="(prefixIcon || usePrefixSlot) && !label" class="wd-input__prefix">
@@ -206,7 +205,6 @@ function initState() {
   emit('update:modelValue', inputValue.value)
 }
 function togglePwdVisible() {
-  // password属性设置false不生效，置空生效
   isPwdVisible.value = !isPwdVisible.value
 }
 function clear() {
@@ -223,7 +221,6 @@ function clear() {
       emit('clear')
     })
 }
-// 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur
 function handleBlur() {
   isFocus.value = false
   emit('change', {
@@ -242,7 +239,6 @@ function handleFocus({ detail }: any) {
   isFocus.value = true
   emit('focus', detail)
 }
-// input事件需要传入
 function handleInput() {
   emit('update:modelValue', inputValue.value)
   emit('input', inputValue.value)

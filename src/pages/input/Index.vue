@@ -16,7 +16,7 @@
       <wd-input type="text" v-model="value4" clearable @change="handleChange1" />
     </demo-block>
     <demo-block title="密码框">
-      <wd-input type="text" v-model="value5" disabled clearable show-password @change="handleChange2" />
+      <wd-input type="text" v-model="value5" clearable show-password @change="handleChange2" />
     </demo-block>
     <demo-block title="数字类型">
       <wd-input type="number" v-model="value9" />
