@@ -76,8 +76,7 @@ const touchLeft = useTouch()
 const touchRight = useTouch()
 
 const showRight = ref<boolean>(false)
-const barStyle = ref<string>('width: 0; height: 3px')
-const barHeight = ref<string>('3px')
+const barStyle = ref<string>('')
 const leftNewValue = ref<number>(0)
 const rightNewValue = ref<number>(0)
 const rightBarPercent = ref<number>(0)
@@ -298,7 +297,7 @@ function leftBarSlider(value: number) {
     emit('update:modelValue', value)
     leftNewValue.value = value
     leftBarPercent.value = percent
-    barStyle.value = `width: ${percent}%; height: ${barHeight.value};`
+    barStyle.value = `width: ${percent}%; `
   } else {
     leftNewValue.value = value
     leftBarPercent.value = percent
@@ -312,7 +311,7 @@ function styleControl() {
   const barLeft =
     leftBarPercent.value < rightBarPercent.value ? [leftBarPercent.value, rightBarPercent.value] : [rightBarPercent.value, leftBarPercent.value]
   // 通过左右滑轮的间距控制 激活条宽度 barLeft[1] - barLeft[0]
-  const barStyleTemp = `width: ${barLeft[1] - barLeft[0]}%; height: ${barHeight.value}; left: ${barLeft[0]}%`
+  const barStyleTemp = `width: ${barLeft[1] - barLeft[0]}%;  left: ${barLeft[0]}%`
   currentValue.value =
     leftNewValue.value < rightNewValue.value ? [leftNewValue.value, rightNewValue.value] : [rightNewValue.value, leftNewValue.value]
   barStyle.value = barStyleTemp
@@ -346,7 +345,7 @@ function calcBarPercent() {
   // 把 value 转换成百分比
   const percent = formatPercent(value)
   leftBarPercent.value = percent
-  barStyle.value = `width: ${percent}%; height: ${barHeight.value};`
+  barStyle.value = `width: ${percent}%; `
 }
 
 defineExpose<SliderExpose>({
