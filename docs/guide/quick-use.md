@@ -154,7 +154,7 @@ cli项目使用`uni_modules`安装无需配置，对`Volar`的支持自动生效
 // tsconfig.json
 {
   "compilerOptions": {
-    "types": ["wot-design-uni/global.d.ts"]
+    "types": ["wot-design-uni/global"]
   }
 }
 ```
