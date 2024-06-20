@@ -101,6 +101,9 @@ function computedValue() {
 
 function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) {
   if (type === 'action') {
+    if (props.actions[rowIndex].disabled || props.actions[rowIndex].loading) {
+      return
+    }
     emit('select', {
       item: props.actions[rowIndex],
       index: rowIndex
