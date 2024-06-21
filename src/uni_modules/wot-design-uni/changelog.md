@@ -1,6 +1,25 @@
 # 更新日志 
 
 
+### [1.2.27](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.26...v1.2.27) (2024-06-21)
+
+
+### ✨ Features | 新功能
+
+* ✨ add title slot for wd-collapse-item ([#372](https://github.com/Moonofweisheng/wot-design-uni/issues/372)) ([0252bd9](https://github.com/Moonofweisheng/wot-design-uni/commit/0252bd98254f8e108e545651127a744640b39692)), closes [#356](https://github.com/Moonofweisheng/wot-design-uni/issues/356)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整文档中关于类型声明文件的配置 ([0c38e98](https://github.com/Moonofweisheng/wot-design-uni/commit/0c38e986f0151b8aa2e17ab1770d1f39b178d354))
+* ✏️  Input 密码输入框示例移除disabled属性 ([3026c78](https://github.com/Moonofweisheng/wot-design-uni/commit/3026c78d237217b08e2fa3cdf64260c294a61b2b))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复ActionSheet禁用和加载状态时仍有点击效果的问题 ([c6baf45](https://github.com/Moonofweisheng/wot-design-uni/commit/c6baf452f0b626dea378148131d624589bb0c47e)), closes [#379](https://github.com/Moonofweisheng/wot-design-uni/issues/379)
+* 🐛 修复Sidebar等组件css变量前缀错误的问题 ([0c31e16](https://github.com/Moonofweisheng/wot-design-uni/commit/0c31e16699e0b70b91384da0a5c0537b791e6bcf))
+
 ### [1.2.26](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.25...v1.2.26) (2024-06-14)
 
 
