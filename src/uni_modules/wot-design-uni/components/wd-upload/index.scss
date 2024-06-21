@@ -11,6 +11,13 @@
         color: $-dark-color-gray;
       }
     }
+    @include e(file) {
+      background-color: $-dark-background4;
+    }
+
+    @include e(file-name){
+      color: $-dark-color3;
+    }
   }
 
 }
@@ -76,10 +83,28 @@
     display: flex;
   }
 
-  @include e(picture) {
+  @include e(picture, file) {
     display: block;
     width: 100%;
     height: 100%;
+  }
+
+  @include e(file) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $-upload-evoke-bg;
+  }
+  @include e(file-name){
+    width: 100%;
+    font-size: $-upload-file-fs;
+    color: $-upload-file-color;
+    box-sizing: border-box;
+    padding: 0 4px;
+    text-align: center;
+    margin-top: 8px;
+    @include lineEllipsis()
   }
 
   @include edeep(close) {

@@ -5,7 +5,6 @@
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
         <image v-if="isImageUrl(file.url)" :src="file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
-        <!-- <image v-else-if="isVideoUrl(file.url)" :src="file.thumb" mode="aspectFit" class="wd-upload__picture" @click="onPreviewVideo(file)" /> -->
         <video
           v-else-if="isVideoUrl(file.url)"
           @click="onPreviewVideo(file)"
@@ -15,6 +14,10 @@
           :poster="file.thumb"
           class="wd-upload__picture"
         />
+        <view v-else class="wd-upload__file" @click="onPreviewFile(file)">
+          <wd-icon name="file" size="22px"></wd-icon>
+          <view class="wd-upload__file-name">{{ file.name || file.url }}</view>
+        </view>
       </view>
 
       <view v-if="file.status !== 'success'" class="wd-upload__mask wd-upload__status-content">
@@ -409,6 +412,22 @@ function removeFile(index: number) {
   }
 }
 
+/**
+ * 预览文件
+ * @param file
+ */
+function handlePreviewFile(file: UploadFileItem) {
+  uni.openDocument({
+    filePath: file.url,
+    showMenu: true
+  })
+}
+
+/**
+ * 预览图片
+ * @param index
+ * @param lists
+ */
 function handlePreviewImage(index: number, lists: string[]) {
   const { onPreviewFail } = props
   uni.previewImage({
@@ -427,6 +446,11 @@ function handlePreviewImage(index: number, lists: string[]) {
   })
 }
 
+/**
+ * 预览视频
+ * @param index
+ * @param lists
+ */
 function handlePreviewVieo(index: number, lists: UploadFileItem[]) {
   const { onPreviewFail } = props
   uni.previewMedia({
@@ -481,6 +505,23 @@ function onPreviewVideo(file: UploadFileItem) {
     })
   } else {
     handlePreviewVieo(index, lists)
+  }
+}
+
+function onPreviewFile(file: UploadFileItem) {
+  const { beforePreview } = props
+  const lists = uploadFiles.value.filter((file) => isVideoUrl(file.url))
+  const index: number = lists.findIndex((item) => item.url === file.url)
+  if (beforePreview) {
+    beforePreview({
+      index,
+      imgList: [],
+      resolve: (isPass: boolean) => {
+        isPass && handlePreviewFile(file)
+      }
+    })
+  } else {
+    handlePreviewFile(file)
   }
 }
 </script>

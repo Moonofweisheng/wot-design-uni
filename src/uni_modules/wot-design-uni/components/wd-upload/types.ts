@@ -51,14 +51,14 @@ export interface ChooseFile {
   path: string // 上传临时地址
   size?: number // 上传大小
   name?: string // 当前文件名称，仅h5支持
-  type: 'image' | 'video' // 上传类型
+  type: 'image' | 'video' | 'file' // 上传类型
   duration?: number // 上传时间
   thumb?: string // 缩略图地址
 }
 
 export type UploadSourceType = 'album' | 'camera'
 export type UploadSizeType = 'original' | 'compressed'
-export type UploadFileType = 'image' | 'video' | 'media'
+export type UploadFileType = 'image' | 'video' | 'media' | 'all' | 'file'
 export type UploadCameraType = 'front' | 'back'
 
 export type UploadBeforePreviewOption = {
@@ -230,7 +230,7 @@ export const uploadProps = {
    */
   loadingColor: makeStringProp('#ffffff'),
   /**
-   * 文件类型
+   * 文件类型，可选值：'image' | 'video' | 'media' | 'all' | 'file'
    */
   accept: makeStringProp<UploadFileType>('image'),
   /**

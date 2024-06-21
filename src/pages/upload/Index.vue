@@ -6,7 +6,16 @@
     <wd-message-box></wd-message-box>
     <wd-toast id="wd-toast"></wd-toast>
     <demo-block title="基本用法">
+      <wd-upload accept="image" :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
+    </demo-block>
+    <demo-block title="上传视频">
       <wd-upload accept="video" :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
+    </demo-block>
+    <demo-block title="Media">
+      <wd-upload accept="media" :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
+    </demo-block>
+    <demo-block title="File">
+      <wd-upload accept="all" :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
     </demo-block>
     <demo-block title="多选上传">
       <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
@@ -55,11 +64,13 @@ import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
-const fileList1 = ref<any[]>([
+const fileList = ref<any[]>([
   {
     url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
   }
 ])
+
+const fileList1 = ref<any[]>([])
 const fileList2 = ref<any[]>([
   {
     url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
@@ -176,6 +187,11 @@ function handleFail(event: any) {
 function handleProgess(event: any) {
   console.log('加载中', event)
 }
+
+function handleChange({ fileList }: any) {
+  fileList.value = fileList
+}
+
 function handleChange1({ fileList }: any) {
   fileList1.value = fileList
 }

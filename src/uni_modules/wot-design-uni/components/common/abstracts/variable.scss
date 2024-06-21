@@ -700,6 +700,10 @@ $-upload-evoke-disabled-color: var(--wot-upload-evoke-disabled-color, rgba(0, 0,
 $-upload-close-icon-size: var(--wot-upload-close-icon-size, 16px) !default; // 移除按钮尺寸
 $-upload-close-icon-color: var(--wot-upload-close-icon-color, rgba(0, 0, 0, 0.65)) !default; // 移除按钮颜色
 $-upload-progress-fs: var(--wot-upload-progress-fs, 14px) !default; // 进度文字字号
+$-upload-file-fs: var(--wot-upload-file-fs, 12px) !default; // 文件名字号
+$-upload-file-color: var(--wot-upload-file-color, $-color-secondary) !default; // 文件名字颜色
+
+
 $-upload-preview-name-fs: var(--wot-upload-preview-name-fs, 12px) !default; // 预览图片名字号
 $-upload-preview-icon-size: var(--wot-upload-preview-icon-size, 24px) !default; // 预览内部图标尺寸
 $-upload-preview-name-bg: var(--wot-upload-preview-name-bg, rgba(0, 0, 0, 0.6)) !default; // 预览文件名背景色
