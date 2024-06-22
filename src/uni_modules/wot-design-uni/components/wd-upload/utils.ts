@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 22:36:44
- * @LastEditTime: 2024-06-20 21:33:52
+ * @LastEditTime: 2024-06-21 13:21:01
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-upload/utils.ts
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-upload\utils.ts
  * 记得注释
  */
 import { isArray } from '../common/util'
@@ -56,10 +56,6 @@ function formatMedia(res: UniApp.ChooseMediaSuccessCallbackResult): ChooseFile[]
     duration: item.duration
   }))
 }
-function formatFile(res: UniApp.ChooseMessageFileSuccessCallbackResult): ChooseFile[] {
-  return res.tempFiles
-}
-
 export function chooseFile({
   multiple,
   sizeType,
@@ -93,7 +89,6 @@ export function chooseFile({
           fail: reject
         })
         break
-      // #ifdef MP-WEIXIN
       case 'media':
         uni.chooseMedia({
           count: multiple ? Math.min(maxCount, 9) : 1,
@@ -106,15 +101,31 @@ export function chooseFile({
         })
         break
       case 'file':
-      case 'all':
         uni.chooseMessageFile({
           count: multiple ? Math.min(maxCount, 100) : 1,
           type: accept,
-          success: (res) => resolve(formatFile(res)),
+          success: (res) => resolve(res.tempFiles),
           fail: reject
         })
         break
-      // #endif
+      case 'all':
+        // #ifdef MP-WEIXIN
+        uni.chooseMessageFile({
+          count: multiple ? Math.min(maxCount, 100) : 1,
+          type: accept,
+          success: (res) => resolve(res.tempFiles),
+          fail: reject
+        })
+        // #endif
+        // #ifdef H5
+        uni.chooseFile({
+          count: multiple ? Math.min(maxCount, 100) : 1,
+          type: accept,
+          success: (res) => resolve(res.tempFiles as ChooseFile[]),
+          fail: reject
+        })
+        // #endif
+        break
       default:
         break
     }

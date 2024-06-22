@@ -4,14 +4,16 @@
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
-        <image v-if="isImageUrl(file.url)" :src="file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <image v-if="isImage(file)" :src="file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
         <video
-          v-else-if="isVideoUrl(file.url)"
+          v-else-if="isVideo(file)"
           @click="onPreviewVideo(file)"
           :src="file.url"
           :title="file.name || '视频' + index"
           object-fit="contain"
           :poster="file.thumb"
+          controls
+          objectFit="contain"
           class="wd-upload__picture"
         />
         <view v-else class="wd-upload__file" @click="onPreviewFile(file)">
@@ -65,7 +67,7 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { context, getType, isDef, isEqual, isImageUrl, isVideoUrl } from '../common/util'
+import { context, getType, isEqual, isImageUrl, isVideoUrl } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
@@ -523,6 +525,14 @@ function onPreviewFile(file: UploadFileItem) {
   } else {
     handlePreviewFile(file)
   }
+}
+
+function isVideo(file: UploadFileItem) {
+  return (file.name && isVideoUrl(file.name)) || isVideoUrl(file.url)
+}
+
+function isImage(file: UploadFileItem) {
+  return (file.name && isImageUrl(file.name)) || isImageUrl(file.url)
 }
 </script>
 <style lang="scss" scoped>
