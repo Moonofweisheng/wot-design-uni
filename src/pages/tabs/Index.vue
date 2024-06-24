@@ -15,8 +15,8 @@
     </demo-block>
     <demo-block title="name匹配" transparent>
       <wd-tabs v-model="tab" @change="handleChange">
-        <block v-for="item in tabs" :key="item">
-          <wd-tab :title="`${item}`" :name="item">
+        <block v-for="item in tabs" :key="item.value">
+          <wd-tab :title="`${item.title}`" :name="item.value">
             <view class="content">内容{{ tab }}</view>
           </wd-tab>
         </block>
@@ -46,7 +46,7 @@
     <demo-block title="点击事件" transparent>
       <wd-tabs v-model="tab4" @click="handleClick" @change="handleChange">
         <block v-for="item in 4" :key="item">
-          <wd-tab :title="`标签${item}`">
+          <wd-tab :title="`标签${item}`" :name="item">
             <view class="content">内容{{ tab4 + 1 }}</view>
           </wd-tab>
         </block>
@@ -97,8 +97,29 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
-const tabs = ref(['这', '是', '一', '个', '例子'])
-const tab = ref('一')
+const tabs = ref([
+  {
+    title: '这',
+    value: 9
+  },
+  {
+    title: '是',
+    value: 10
+  },
+  {
+    title: '一',
+    value: 11
+  },
+  {
+    title: '个',
+    value: '11'
+  },
+  {
+    title: '例子',
+    value: 12
+  }
+])
+const tab = ref(11)
 
 const tab1 = ref<number>(0)
 const tab2 = ref<number>(0)
@@ -125,6 +146,7 @@ function handleChange(event: any) {
   flex-direction: column;
   justify-content: space-around;
 }
+
 .large {
   line-height: 320px;
   text-align: center;

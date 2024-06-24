@@ -16,8 +16,8 @@
                     @click="handleSelect(index)"
                     v-for="(item, index) in items"
                     :key="index"
-                    :class="`wd-tabs__nav-item  ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
-                    :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
+                    :class="`wd-tabs__nav-item  ${activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
+                    :style="activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
                   >
                     {{ item.title }}
                   </view>
@@ -39,9 +39,9 @@
               <view :class="`wd-tabs__map-body  ${animating ? 'is-open' : ''}`" :style="mapShow ? '' : 'display:none'">
                 <view class="wd-tabs__map-nav-item" v-for="(item, index) in items" :key="index" @click="handleSelect(index)">
                   <view
-                    :class="`wd-tabs__map-nav-btn ${state.activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`"
+                    :class="`wd-tabs__map-nav-btn ${activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`"
                     :style="
-                      state.activeIndex === index
+                      activeIndex === index
                         ? color
                           ? 'color:' + color + ';border-color:' + color
                           : ''
@@ -83,8 +83,8 @@
                 v-for="(item, index) in items"
                 @click="handleSelect(index)"
                 :key="index"
-                :class="`wd-tabs__nav-item ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
-                :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
+                :class="`wd-tabs__nav-item ${activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
+                :style="activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
               >
                 {{ item.title }}
               </view>
@@ -105,7 +105,7 @@
           </view>
           <view :class="`wd-tabs__map-body ${animating ? 'is-open' : ''}`" :style="mapShow ? '' : 'display:none'">
             <view class="wd-tabs__map-nav-item" v-for="(item, index) in items" :key="index" @click="handleSelect(index)">
-              <view :class="`wd-tabs__map-nav-btn ${state.activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`">
+              <view :class="`wd-tabs__map-nav-btn ${activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`">
                 {{ item.title }}
               </view>
             </view>
@@ -137,7 +137,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, ref, watch, nextTick, reactive } from 'vue'
-import { checkNumRange, debounce, getRect, isDef, isNumber, isString, objToStyle } from '../common/util'
+import { debounce, getRect, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 import { TABS_KEY, tabsProps } from './types'
 import { useChildren } from '../composables/useChildren'
@@ -152,7 +152,7 @@ const emit = defineEmits(['change', 'disabled', 'click', 'update:modelValue'])
 const { translate } = useTranslate('tabs')
 
 // 选中值的索引，默认第一个
-const state = reactive({ activeIndex: 0 })
+// const state = reactive({ activeIndex: 0 })
 // navBar的下划线样式
 const lineStyle = ref<string>('')
 
@@ -166,18 +166,53 @@ const animating = ref<boolean>(false)
 
 const inited = ref<boolean>(false)
 
-const { children, linkChildren } = useChildren(TABS_KEY)
-linkChildren({ state })
-
 const { proxy } = getCurrentInstance() as any
 
 const touch = useTouch()
 
+// 数据双向绑定 后续可优化为 defineModel 方式
+const currentValue = ref()
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (!isNumber(newValue) && !isString(newValue)) {
+      console.error('[wot design] error(wd-tabs): the type of value should be number or string')
+    }
+    currentValue.value = newValue
+  },
+  {
+    immediate: true
+  }
+)
+watch(currentValue, (val) => {
+  updateLineStyle()
+  scrollIntoView()
+  emit('change', {
+    index: activeIndex.value,
+    name: val
+  })
+  emit('update:modelValue', val)
+})
+const { children, linkChildren } = useChildren(TABS_KEY)
 // tabs数据
 const items = computed(() => {
   return children.map((child, index) => {
     return { disabled: child.disabled, title: child.title, name: isDef(child.name) ? child.name : index }
   })
+})
+const activeIndex = computed(() => {
+  // 提前校验减少后续运算
+  if (currentValue.value === undefined || items.value.length <= 0) {
+    return 0
+  }
+  const index = items.value.findIndex((item) => item.name === currentValue.value)
+  // name代表的索引超过了items的边界，自动用0兜底
+  return Math.max(0, index)
+})
+linkChildren({
+  state: {
+    activeIndex
+  }
 })
 
 const bodyStyle = computed(() => {
@@ -186,7 +221,7 @@ const bodyStyle = computed(() => {
   }
 
   return objToStyle({
-    left: -100 * state.activeIndex + '%',
+    left: -100 * activeIndex.value + '%',
     'transition-duration': props.duration + 'ms',
     '-webkit-transition-duration': props.duration + 'ms'
   })
@@ -194,91 +229,24 @@ const bodyStyle = computed(() => {
 
 /**
  * @description 修改选中的tab Index
- * @param {String |Number } value - radio绑定的value或者tab索引，默认值0
- * @param {Boolean } init - 是否伴随初始化操作
  */
 const setActive = debounce(
-  function (value: number | string = 0, init: boolean = false, setScroll: boolean = true) {
+  function (value: number) {
     // 没有tab子元素，不执行任何操作
     if (items.value.length === 0) return
-
-    value = getActiveIndex(value)
     // 被禁用，不执行任何操作
     if (items.value[value].disabled) return
-    state.activeIndex = value
-    if (setScroll) {
-      updateLineStyle(init === false)
-      scrollIntoView()
-    }
-    setActiveTab()
+    currentValue.value = items.value[value].name
   },
   100,
   { leading: false }
 )
 
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    if (!isNumber(newValue) && !isString(newValue)) {
-      console.error('[wot design] error(wd-tabs): the type of value should be number or string')
-    }
-    // 保证不为非空字符串，小于0的数字
-    if (newValue === '' || !isDef(newValue)) {
-      // eslint-disable-next-line quotes
-      console.error("[wot design] error(wd-tabs): tabs's value cannot be '' null or undefined")
-    }
-    if (typeof newValue === 'number' && newValue < 0) {
-      // eslint-disable-next-line quotes
-      console.error("[wot design] error(wd-tabs): tabs's value cannot be less than zero")
-    }
-  },
-  {
-    immediate: true,
-    deep: true
-  }
-)
-
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    const index = getActiveIndex(newValue)
-    setActive(newValue, false, index !== state.activeIndex)
-  },
-  {
-    immediate: false,
-    deep: true
-  }
-)
-
-watch(
-  () => children.length,
-  () => {
-    if (inited.value) {
-      nextTick(() => {
-        setActive(props.modelValue)
-      })
-    }
-  }
-)
-
-watch(
-  () => props.slidableNum,
-  (newValue) => {
-    checkNumRange(newValue, 'slidableNum')
-  }
-)
-
-watch(
-  () => props.mapNum,
-  (newValue) => {
-    checkNumRange(newValue, 'mapNum')
-  }
-)
-
 onMounted(() => {
   inited.value = true
   nextTick(() => {
-    setActive(props.modelValue, true)
+    updateLineStyle(false)
+    scrollIntoView()
   })
 })
 
@@ -308,9 +276,9 @@ function updateLineStyle(animation: boolean = true) {
   if (!inited.value) return
   const { lineWidth, lineHeight } = props
   getRect($item, true, proxy).then((rects) => {
-    const rect = rects[state.activeIndex]
+    const rect = rects[activeIndex.value]
     const width = lineWidth
-    let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + Number(curr.width), 0)
+    let left = rects.slice(0, activeIndex.value).reduce((prev, curr) => prev + Number(curr.width), 0)
     left += (Number(rect.width) - width) / 2
     const transition = animation ? 'transition: width 300ms ease, transform 300ms ease;' : ''
 
@@ -326,19 +294,7 @@ function updateLineStyle(animation: boolean = true) {
     }
   })
 }
-/**
- * @description 通过控制tab的active来展示选定的tab
- */
-function setActiveTab() {
-  if (!inited.value) return
-  if (items.value[state.activeIndex].name !== props.modelValue) {
-    emit('change', {
-      index: state.activeIndex,
-      name: items.value[state.activeIndex].name
-    })
-    emit('update:modelValue', items.value[state.activeIndex].name)
-  }
-}
+
 /**
  * @description scroll-view滑动到active的tab_nav
  */
@@ -346,9 +302,9 @@ function scrollIntoView() {
   if (!inited.value) return
   Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)]).then(([navItemsRects, navRect]) => {
     // 选中元素
-    const selectItem = navItemsRects[state.activeIndex]
+    const selectItem = navItemsRects[activeIndex.value]
     // 选中元素之前的节点的宽度总和
-    const offsetLeft = (navItemsRects as any).slice(0, state.activeIndex).reduce((prev: any, curr: any) => prev + curr.width, 0)
+    const offsetLeft = (navItemsRects as any).slice(0, activeIndex.value).reduce((prev: any, curr: any) => prev + curr.width, 0)
     // scroll-view滑动到selectItem的偏移量
     const left = offsetLeft - ((navRect as any).width - Number(selectItem.width)) / 2
     if (left === scrollLeft.value) {
@@ -373,7 +329,7 @@ function handleSelect(index: number) {
     return
   }
   mapShow.value && toggleMap()
-  setActive(index)
+  currentValue.value = name
   emit('click', {
     index,
     name
@@ -396,28 +352,12 @@ function onTouchEnd() {
   const { direction, deltaX, offsetX } = touch
   const minSwipeDistance = 50
   if (direction.value === 'horizontal' && offsetX.value >= minSwipeDistance) {
-    if (deltaX.value > 0 && state.activeIndex !== 0) {
-      setActive(state.activeIndex - 1)
-    } else if (deltaX.value < 0 && state.activeIndex !== items.value.length - 1) {
-      setActive(state.activeIndex + 1)
-      setActive(state.activeIndex + 1)
+    if (deltaX.value > 0 && activeIndex.value !== 0) {
+      setActive(activeIndex.value - 1)
+    } else if (deltaX.value < 0 && activeIndex.value !== items.value.length - 1) {
+      setActive(activeIndex.value + 1)
     }
   }
-}
-function getActiveIndex(value: number | string) {
-  // name代表的索引超过了items的边界，自动用0兜底
-  if (isNumber(value) && value >= items.value.length) {
-    // eslint-disable-next-line prettier/prettier
-    console.error('[wot design] warning(wd-tabs): the type of tabs\' value is Number shouldn\'t be less than its children')
-    value = 0
-  }
-  // 如果是字符串直接匹配，匹配不到用0兜底
-  if (isString(value)) {
-    const index = items.value.findIndex((item) => item.name === value)
-    value = index === -1 ? 0 : index
-  }
-
-  return value
 }
 
 defineExpose({

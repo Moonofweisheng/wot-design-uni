@@ -1,9 +1,9 @@
-import { type ExtractPropTypes, type InjectionKey } from 'vue'
+import { type ExtractPropTypes, type InjectionKey, type ComputedRef } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 
 export type TabsProvide = {
   state: {
-    activeIndex: number
+    activeIndex: ComputedRef<number>
   }
 }
 
@@ -22,7 +22,12 @@ export const tabsProps = {
   /**
    * 标签数超过阈值显示导航地图
    */
-  mapNum: makeNumberProp(10),
+  mapNum: {
+    ...makeNumberProp(10),
+    validate(val: number) {
+      return val > 0
+    }
+  },
   /**
    * 粘性布局
    */
