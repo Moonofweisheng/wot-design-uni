@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.2.28](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.27...v1.2.28) (2024-06-24)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复omitBy工具方法实现错误导致Tabbar等组件徽标显示异常的问题 ([1491fe4](https://github.com/Moonofweisheng/wot-design-uni/commit/1491fe44616a0db1c165e2bed29637f8c46fbc7e))
+
 ### [1.2.27](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.26...v1.2.27) (2024-06-21)
 
 
