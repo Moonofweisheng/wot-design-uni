@@ -350,7 +350,7 @@ export function isBoolean(value: any): value is boolean {
   return typeof value === 'boolean'
 }
 
-export function isUndefined(value): value is undefined {
+export function isUndefined(value: any): value is undefined {
   return typeof value === 'undefined'
 }
 
@@ -668,15 +668,7 @@ export const isH5 = process.env.UNI_PLATFORM === 'h5'
  * @returns
  */
 export function omitBy<O extends Record<string, any>>(obj: O, predicate: (value: any, key: keyof O) => boolean): Partial<O> {
-  const newObj = {}
-
-  const keys = Object.keys(obj)
-
-  for (const item in keys) {
-    if (!predicate(obj[item], item)) {
-      newObj[item] = obj[item]
-    }
-  }
-
+  const newObj = deepClone(obj)
+  Object.keys(newObj).forEach((key) => predicate(newObj[key], key) && delete newObj[key]) // 遍历对象的键，删除值为不满足predicate的字段
   return newObj
 }
