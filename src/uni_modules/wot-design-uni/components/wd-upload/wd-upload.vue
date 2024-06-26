@@ -12,10 +12,26 @@
           :title="file.name || '视频' + index"
           object-fit="contain"
           :poster="file.thumb"
-          controls
-          objectFit="contain"
-          class="wd-upload__picture"
-        />
+          :controls="false"
+          :show-center-play-btn="false"
+          :show-fullscreen-btn="false"
+          :show-play-btn="false"
+          :show-loading="false"
+          :enable-progress-gesture="false"
+          class="wd-upload__video"
+        >
+          <wd-icon name="play-circle-filled" custom-class="wd-upload__video-paly"></wd-icon>
+        </video>
+        <!-- <template v-else-if="isVideo(file)">
+          <view v-if="file.thumb" class="wd-upload__video" @click="onPreviewVideo(file)">
+            <image :src="file.thumb" mode="aspectFit" class="wd-upload__picture" />
+          </view>
+          <view v-else class="wd-upload__video" @click="onPreviewVideo(file)">
+            <wd-icon name="video" size="22px"></wd-icon>
+            <view class="wd-upload__video-name">{{ file.name || file.url }}</view>
+          </view>
+        </template> -->
+
         <view v-else class="wd-upload__file" @click="onPreviewFile(file)">
           <wd-icon name="file" size="22px"></wd-icon>
           <view class="wd-upload__file-name">{{ file.name || file.url }}</view>
@@ -275,7 +291,6 @@ function handleProgress(res: Record<string, any>, file: UploadFileItem) {
  */
 function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
   const { action, name, header = {}, accept } = props
-  debugger
   const uploadTask = uni.uploadFile({
     url: action,
     header,
@@ -327,7 +342,6 @@ function onChooseFile() {
     camera
   })
     .then((res) => {
-      debugger
       // 成功选择初始化file
       let files = res
       // 单选只有一个
