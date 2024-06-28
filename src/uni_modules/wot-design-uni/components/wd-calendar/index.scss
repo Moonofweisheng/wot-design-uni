@@ -7,6 +7,10 @@
       background-color: $-dark-background2;
       color: $-dark-color;
     }
+    
+    @include e(label) {
+      color: $-dark-color;
+    }
 
     @include e(value) {
       color: $-dark-color;
