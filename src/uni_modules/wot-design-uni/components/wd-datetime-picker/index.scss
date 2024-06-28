@@ -8,6 +8,10 @@
       color: $-dark-color;
     }
 
+    @include e(title) {
+      color: $-dark-color;
+    }
+
     @include e(label) {
       color: $-dark-color;
     }

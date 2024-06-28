@@ -25,6 +25,17 @@
       }
     }
 
+    @include e(list-item) {
+  
+      @include when(disabled) {
+        color: $-dark-color3;
+      }
+    }
+
+    @include e(list-item-tip) {
+      color: $-dark-color-gray;
+    }
+
     @include e(value) {
       color: $-dark-color;
   
