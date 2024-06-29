@@ -1,8 +1,8 @@
 <frame/>
 
-# Swiper 轮播图 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.22</el-tag>
+# Swiper 轮播
 
-用于创建轮播图，它支持水平和垂直方向的滑动，可以自定义样式和指示器位置。
+用于创建轮播，它支持水平和垂直方向的滑动，可以自定义样式和指示器位置，支持视频和图片资源的轮播，支持设置轮播标题和自定义标题样式。
 
 ## 基础用法
 
@@ -48,6 +48,25 @@ function onChange(e) {
   @click="handleClick"
   @change="onChange"
 ></wd-swiper>
+```
+
+## 播放视频<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.13</el-tag>
+
+:::danger 请注意
+嵌入视频仅在`h5`和`微信小程序`端支持，其余端不支持，请了解后使用。
+:::
+
+```html
+<wd-swiper :list="videoList" autoplay :indicator="false" indicator-position="bottom-right"></wd-swiper>
+```
+
+```ts
+const videoList = ref([
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_115503.mp4',
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_150752.mp4',
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_155516.mp4',
+  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg'
+])
 ```
 
 ## 手动切换
@@ -186,25 +205,39 @@ function onChange(e) {
 }
 ```
 
-## 指定valueKey <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.7</el-tag>
+## 指定valueKey和textKey
 
 通过`value-key` 属性指定 `list` 中每个对象图片地址字段，默认为 `value`。
 
+通过`text-key` 属性指定 `list` 中每个对象标题字段，默认为 `text`。
+:::tip 提示
+当前`swiper`提供的标题样式为顶部靠右，如需自定义样式，请使用外部样式类`customTextClass`或者自定义样式`customTextStyle`，使用`text-key`时请确认你的组件库版本是否包含此功能。
+:::
+
 
 ```html
-<wd-swiper value-key="url" :list="customSwiperList" autoplay v-model:current="current" @click="handleClick" @change="onChange"></wd-swiper>
+<wd-swiper value-key="url" text-key="title" :custom-text-style="color:#fff" :list="customSwiperList" autoplay v-model:current="current" @click="handleClick" @change="onChange"></wd-swiper>
 ```
 ```ts
 const current = ref<number>(0)
 
 const customSwiperList = ref([
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg' }
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg', title: '小熊猫！' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg', title: '卡！皮！巴！拉！' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg', title: '大熊猫！' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg', title: '诗画中国！' }
 ])
 ```
-
+```scss
+:deep(.customTextClass) {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  color: #ffffff;
+  font-size: 24rpx;
+  text-shadow: 0 0 8rpx #000000;
+}
+```
 
 
 ## 属性控制切换
@@ -238,7 +271,7 @@ const isLoop = ref(false)
 | direction            | 轮播滑动方向                                           | `DirectionType`                   | `horizontal, vertical`                                                                                 | horizontal   | 0.1.22   |
 | displayMultipleItems | 同时显示的滑块数量                                     | `number`                          | -                                                                                                      | 1            | 0.1.22   |
 | duration             | 滑动动画时长                                           | `number`                          | -                                                                                                      | 300          | 0.1.22   |
-| easingFunction       | 切换缓动动画类型（微信小程序、快手小程序、京东小程序） | `EasingType`                      | -                                                                                                      | default      | 0.1.22   |
+| easingFunction       | 切换缓动动画类型 | `EasingType`                      | -                                                                                                      | default      | 0.1.22   |
 | height               | 轮播的高度                                             | `string \| number`                | -                                                                                                      | 192          | 0.1.22   |
 | interval             | 轮播间隔时间                                           | `number`                          | -                                                                                                      | 5000         | 0.1.22   |
 | list                 | 图片列表                                               | `string[] \| SwiperList[]`        | -                                                                                                      | -            | 0.1.22   |
@@ -251,6 +284,8 @@ const isLoop = ref(false)
 | imageMode            | 图片裁剪、缩放的模式                                   | `string`                          | 参考官方文档[mode](https://uniapp.dcloud.net.cn/component/image.html#mode-%E6%9C%89%E6%95%88%E5%80%BC) | `aspectFill` | 0.1.55   |
 | customStyle          | 外部自定义样式        | `string`       | -       | ''           | 0.1.22   |
 | value-key          | 选项对象中，value 对应的 key        | `string`       | -       | `value`           | 1.3.7   |
+| text-key          | 选项对象中，标题 text 对应的 key        | `string`       | -       | `text`           | $LOWEST_VERSION$   |
+
 
 
 ### DirectionType
@@ -267,7 +302,7 @@ const isLoop = ref(false)
 
 ### SwiperList
 
-轮播图项的列表配置，包括 `value` 属性，支持扩展属性。
+轮播图项的列表配置，包括 图片或视频地址`value`、视频封面`poster` 等属性，支持扩展属性。
 
 ### SwiperIndicatorProps
 
@@ -295,12 +330,18 @@ const isLoop = ref(false)
 | --------- | ------------ | ------------------------------------ | -------- |
 | indicator | 自定义指示器 | `{ current: number, total: number }` | 0.1.22   |
 
+
 ## 外部样式类
 
 | 类名                 | 说明                 | 最低版本 |
 | -------------------- | -------------------- | -------- |
 | customClass          | 外部自定义类名       | 0.1.22   |
-| customIndicatorClass | 自定义指示器类名     | 0.1.22   |
-| customImageClass     | 自定义图片类名       | 0.1.22   |
-| customPrevImageClass | 自定义上一个图片类名 | 0.1.22   |
-| customNextImageClass | 自定义下一个图片类名 | 0.1.22   |
+| customIndicatorClass       | 自定义指示器类名     | 0.1.22   |
+| customImageClass     | 自定义图片类名，1.3版本将废弃，请使用`customItemClass`代替 | 0.1.22   |
+| customPrevImageClass | 自定义上一个图片类名，1.3版本将废弃，请使用`customPrevClass`代替 | 0.1.22   |
+| customNextImageClass | 自定义下一个图片类名，1.3版本将废弃，请使用`customNextClass`代替 | 0.1.22   |
+| customItemClass     | 自定义子项类名       | $LOWEST_VERSION$   |
+| customPrevClass | 自定义上一个子项类名 | $LOWEST_VERSION$   |
+| customNextClass | 自定义下一个子项类名 | $LOWEST_VERSION$   |
+| customTextClass | 自定义文字标题类名 | $LOWEST_VERSION$   |
+| customTextStyle | 自定义文字标题样式 | $LOWEST_VERSION$   |

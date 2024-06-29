@@ -34,6 +34,12 @@
       ></wd-swiper>
     </demo-block>
 
+    <!-- #ifdef MP-WEIXIN || H5 -->
+    <demo-block title="播放视频">
+      <wd-swiper :list="videoList" autoplay :indicator="false" indicator-position="bottom-right" @click="handleClick" @change="onChange"></wd-swiper>
+    </demo-block>
+    <!-- #endif -->
+
     <demo-block title="手动切换">
       <wd-swiper
         :list="swiperList"
@@ -110,8 +116,16 @@
       </wd-swiper>
     </demo-block>
 
-    <demo-block title="指定valueKey">
-      <wd-swiper value-key="url" :list="customSwiperList" autoplay v-model:current="current9" @click="handleClick" @change="onChange"></wd-swiper>
+    <demo-block title="指定valueKey和textKey">
+      <wd-swiper
+        value-key="url"
+        text-key="title"
+        :list="customSwiperList"
+        autoplay
+        v-model:current="current9"
+        @click="handleClick"
+        @change="onChange"
+      ></wd-swiper>
     </demo-block>
 
     <demo-block title="属性控制切换">
@@ -143,10 +157,17 @@ const swiperList = ref([
 ])
 
 const customSwiperList = ref([
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg' }
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg', title: '小熊猫！' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg', title: '卡！皮！巴！拉！' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg', title: '大熊猫！' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg', title: '诗画中国！' }
+])
+
+const videoList = ref([
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_115503.mp4',
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_150752.mp4',
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_155516.mp4',
+  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg'
 ])
 
 const current = ref<number>(0)
@@ -159,6 +180,7 @@ const current6 = ref<number>(0)
 const current7 = ref<number>(0)
 const current8 = ref<number>(0)
 const current9 = ref<number>(0)
+const current10 = ref<number>(0)
 
 const isLoop = ref(false)
 
@@ -185,6 +207,11 @@ function onChange(e: any) {
   :deep(.custom-image-prev) {
     height: 168px !important;
   }
+}
+
+.custom-slot-image {
+  width: 100%;
+  height: 100%;
 }
 
 .custom-indicator {

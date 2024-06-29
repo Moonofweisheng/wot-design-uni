@@ -20,7 +20,10 @@ export type IndicatorPositionType = 'left' | 'top-left' | 'top' | 'top-right' | 
 
 export interface SwiperList {
   [key: string]: any
+  // 图片、视频等资源地址
   value?: string
+  // 视频资源的封面
+  poster?: string
 }
 
 export const swiperProps = {
@@ -119,14 +122,12 @@ export const swiperProps = {
    * 默认值：'0'
    */
   previousMargin: makeNumericProp('0'),
-
   /**
    * 是否应用边距到第一个、最后一个元素
    * 类型：boolean
    * 默认值：false
    */
   snapToEdge: makeBooleanProp(false),
-
   /**
    * 指示器全部配置，可以是布尔值或指示器配置对象
    * 类型：boolean 或 object
@@ -147,6 +148,22 @@ export const swiperProps = {
    * 选项对象中，value 对应的 key
    */
   valueKey: makeStringProp('value'),
+  /**
+   * 选项对象中，标题 text 对应的 key
+   */
+  textKey: makeStringProp('text'),
+  /**
+   * 视频是否自动播放
+   */
+  autoplayVideo: makeBooleanProp(true),
+  /**
+   * 切换轮播项时是否停止上一个视频的播放
+   */
+  stopPreviousVideo: makeBooleanProp(true),
+  /**
+   * 视频播放时是否停止自动轮播
+   */
+  stopAutoplayWhenVideoPlay: makeBooleanProp(false),
   /**
    * 自定义指示器类名
    * 类型：string
@@ -169,7 +186,33 @@ export const swiperProps = {
    * 自定义下一个图片类名
    * 类型：string
    */
-  customNextImageClass: makeStringProp('')
+  customNextImageClass: makeStringProp(''),
+
+  /**
+   * 自定义swiper子项类名
+   * 类型：string
+   */
+  customItemClass: makeStringProp(''),
+  /**
+   * 自定义上一个子项类名
+   * 类型：string
+   */
+  customPrevClass: makeStringProp(''),
+  /**
+   * 自定义下一个子项类名
+   * 类型：string
+   */
+  customNextClass: makeStringProp(''),
+  /**
+   * 自定义文字标题类名
+   * 类型：string
+   */
+  customTextClass: makeStringProp(''),
+  /**
+   * 自定义文字标题样式
+   * 类型：string
+   */
+  customTextStyle: makeStringProp('')
 }
 
 export type SwiperProps = ExtractPropTypes<typeof swiperProps>
