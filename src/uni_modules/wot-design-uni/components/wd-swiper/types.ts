@@ -110,12 +110,11 @@ export const swiperProps = {
   nextMargin: makeNumericProp('0'),
 
   /**
-   * 页码信息展示位置，可选值：'bottom'（底部）等
+   * 页码信息展示位置，可选值：'left' | 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right' | 'right'
    * 类型：string
    * 默认值：'bottom'
    */
   indicatorPosition: makeStringProp<IndicatorPositionType>('bottom'),
-
   /**
    * 前边距
    * 类型：number 或 string（数字或可转换为数字的字符串）
@@ -154,14 +153,20 @@ export const swiperProps = {
   textKey: makeStringProp('text'),
   /**
    * 视频是否自动播放
+   * 类型：boolean
+   * 默认值：true
    */
   autoplayVideo: makeBooleanProp(true),
   /**
    * 切换轮播项时是否停止上一个视频的播放
+   * 类型：boolean
+   * 默认值：true
    */
   stopPreviousVideo: makeBooleanProp(true),
   /**
    * 视频播放时是否停止自动轮播
+   * 类型：boolean
+   * 默认值：false
    */
   stopAutoplayWhenVideoPlay: makeBooleanProp(false),
   /**
