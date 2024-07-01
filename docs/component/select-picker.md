@@ -377,6 +377,8 @@ function handleConfirm({ value, selectedItems }) {
 | confirm  | 点击确认时触发             | event.detail = { value, selectedItems }, checkbox 类型时 value 和 selectedItems 为数组，radio 类型为非数组 | -        |
 | change   | picker 内选项更改时触发    | `{ value }`, checkbox 类型时 value 为数组，radio 类型为非数组                                              | -        |
 | cancel   | 点击关闭按钮或者蒙层时触发 | -                                                                                                          | -        |
+| close   | 弹窗关闭时触发 | -                                                                                                          | 1.2.29        |
+| open   | 弹窗打开时触发 | -                                                                                                          | 1.2.29        |
 
 ## Methods
 
