@@ -1,15 +1,15 @@
 <!--
  * @Author: weisheng
  * @Date: 2024-06-30 23:09:04
- * @LastEditTime: 2024-07-01 13:04:16
+ * @LastEditTime: 2024-07-01 14:16:56
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-video-preview/wd-video-preview.vue
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-video-preview\wd-video-preview.vue
  * 记得注释
 -->
 <template>
-  <wd-popup v-model="showPopup">
-    <video v-if="videoUrl" :src="videoUrl"></video>
+  <wd-popup modalStyle="background: #000;" v-model="showPopup">
+    <video v-if="videoUrl" objectFit="cover" style="width: 100vw" :controls="true" :enableNative="true" autoplay :src="videoUrl"></video>
   </wd-popup>
 </template>
 

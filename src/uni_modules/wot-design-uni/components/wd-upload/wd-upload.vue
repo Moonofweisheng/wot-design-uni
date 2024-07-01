@@ -68,6 +68,7 @@
       </view>
     </view>
   </view>
+  <wd-video-preview ref="videoPreview"></wd-video-preview>
 </template>
 
 <script lang="ts">
@@ -87,12 +88,15 @@ import { context, getType, isEqual, isImageUrl, isVideoUrl } from '../common/uti
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
+import type { VideoPreviewInstance } from '../wd-video-preview/types'
 
 const props = defineProps(uploadProps)
 
 const { translate } = useTranslate('upload')
 
 const uploadFiles = ref<UploadFileItem[]>([])
+
+const videoPreview = ref<VideoPreviewInstance>()
 
 watch(
   () => props.fileList,
@@ -469,26 +473,27 @@ function handlePreviewImage(index: number, lists: string[]) {
  */
 function handlePreviewVieo(index: number, lists: UploadFileItem[]) {
   const { onPreviewFail } = props
-  uni.previewMedia({
-    current: index,
-    sources: lists.map((file) => {
-      return {
-        url: file.url,
-        type: 'video',
-        poster: file.thumb
-      }
-    }),
-    fail() {
-      if (onPreviewFail) {
-        onPreviewFail({
-          index,
-          imgList: []
-        })
-      } else {
-        uni.showToast({ title: '预览视频失败', icon: 'none' })
-      }
-    }
-  })
+  videoPreview.value?.open(lists[index].url)
+  // uni.previewMedia({
+  //   current: index,
+  //   sources: lists.map((file) => {
+  //     return {
+  //       url: file.url,
+  //       type: 'video',
+  //       poster: file.thumb
+  //     }
+  //   }),
+  //   fail() {
+  //     if (onPreviewFail) {
+  //       onPreviewFail({
+  //         index,
+  //         imgList: []
+  //       })
+  //     } else {
+  //       uni.showToast({ title: '预览视频失败', icon: 'none' })
+  //     }
+  //   }
+  // })
 }
 
 function onPreviewImage(index: number) {

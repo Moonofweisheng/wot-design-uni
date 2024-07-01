@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-09-25 17:28:12
- * @LastEditTime: 2024-01-09 12:48:02
+ * @LastEditTime: 2024-07-01 13:10:35
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\global.d.ts
@@ -95,6 +95,7 @@ declare module '@vue/runtime-core' {
     WdPasswordInput: typeof import('./components/wd-password-input/wd-password-input.vue')['default']
     WdForm: typeof import('./components/wd-form/wd-form.vue')['default']
     WdTextarea: typeof import('./components/wd-textarea/wd-textarea.vue')['default']
+    WdVideoPreview: typeof import('./components/wd-video-preview/wd-video-preview.vue')['default']
   }
 }
 
