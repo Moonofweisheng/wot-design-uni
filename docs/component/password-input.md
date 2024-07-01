@@ -10,7 +10,7 @@
 
 ```html
 <!-- 密码输入框 -->
-<wd-password-input :value="value" :focused="showKeyboard" @focus="showKeyboard = true" />
+<wd-password-input v-model="value" :focused="showKeyboard" @focus="showKeyboard = true" />
 <!-- 数字键盘 -->
 <wd-number-keyboard v-model="value" v-model:visible="showKeyboard" :maxlength="4" @blur="showKeyboard = false" />
 ```
@@ -28,7 +28,7 @@ const showKeyboard = ref<boolean>(true)
 
 ```html
 <!-- 密码输入框 -->
-<wd-password-input :value="value" :length="4" :focused="showKeyboard" @focus="showKeyboard = true" />
+<wd-password-input v-model="value" :length="4" :focused="showKeyboard" @focus="showKeyboard = true" />
 <wd-number-keyboard v-model="value" v-model:visible="showKeyboard" :maxlength="4" @blur="showKeyboard = false"></wd-number-keyboard>
 ```
 
@@ -38,7 +38,7 @@ const showKeyboard = ref<boolean>(true)
 
 ```html
 <!-- 密码输入框 -->
-<wd-password-input :value="value" :gutter="10" :focused="showKeyboard" @focus="showKeyboard = true" />
+<wd-password-input v-model="value" :gutter="10" :focused="showKeyboard" @focus="showKeyboard = true" />
 ```
 
 ### 明文展示
@@ -47,7 +47,7 @@ const showKeyboard = ref<boolean>(true)
 
 ```html
 <!-- 密码输入框 -->
-<wd-password-input :value="value" :mask="false" :focused="showKeyboard" @focus="showKeyboard = true" />
+<wd-password-input v-model="value" :mask="false" :focused="showKeyboard" @focus="showKeyboard = true" />
 ```
 
 ### 提示信息
@@ -56,7 +56,7 @@ const showKeyboard = ref<boolean>(true)
 
 ```html
 <!-- 密码输入框 -->
-<wd-password-input :value="value" info="密码为 6 位数字" :error-info="errorInfo" :focused="showKeyboard" @focus="showKeyboard = true" />
+<wd-password-input v-model="value" info="密码为 6 位数字" :error-info="errorInfo" :focused="showKeyboard" @focus="showKeyboard = true" />
 <!-- 数字键盘 -->
 <wd-number-keyboard v-model="value" :show="showKeyboard" :maxlength="6" @blur="showKeyboard = false" />
 ```
