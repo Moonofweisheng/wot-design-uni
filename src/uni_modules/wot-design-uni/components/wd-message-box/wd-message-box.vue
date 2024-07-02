@@ -35,7 +35,7 @@
             </wd-button>
           </template>
           <template v-else>
-            <slot name="confirmButton" @click="toggleModal('confirm')"></slot>
+            <slot name="confirmButton"></slot>
           </template>
         </view>
       </view>
