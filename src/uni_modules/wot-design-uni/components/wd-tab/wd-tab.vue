@@ -32,7 +32,7 @@ const { parent: tabs, index } = useParent(TABS_KEY)
 
 // 激活项下标
 const activeIndex = computed(() => {
-  return isDef(tabs) ? tabs.state.activeIndex : 0
+  return isDef(tabs) ? tabs.state.activeIndex.value : 0
 })
 
 watch(
