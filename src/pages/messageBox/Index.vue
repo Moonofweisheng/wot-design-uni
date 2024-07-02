@@ -16,6 +16,18 @@
       <wd-button @click="confirm">confirm</wd-button>
     </demo-block>
 
+    <demo-block title="自定义确定按钮:一般用于在微信小程序弹窗通过按钮授权等场景,调用close方法手动关闭弹窗。">
+      <wd-message-box selector="wd-message-close">
+        <view>
+          <view>自定义按钮</view>
+        </view>
+        <template #confirmButton>
+          <wd-button block @click="close()">自定义确定按钮</wd-button>
+        </template>
+      </wd-message-box>
+      <wd-button @click="show">alert-自定义确定按钮</wd-button>
+    </demo-block>
+
     <demo-block title="prompt">
       <wd-button @click="prompt">prompt</wd-button>
     </demo-block>
@@ -42,6 +54,7 @@ const value1 = ref<string>('')
 const toast = useToast()
 const message = useMessage()
 const message1 = useMessage('wd-message-box-slot')
+const message2 = useMessage('wd-message-close')
 
 function alert() {
   message.alert('操作成功')
@@ -114,6 +127,18 @@ function withSlot() {
     .catch((error) => {
       console.log(error)
     })
+}
+
+function show() {
+  message2.alert({
+    title: '提示',
+    showConfirmButton: false,
+    showCancelButton: false
+  })
+}
+
+function close() {
+  message2.close()
 }
 </script>
 <style lang="scss" scoped>
