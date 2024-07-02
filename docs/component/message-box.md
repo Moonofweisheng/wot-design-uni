@@ -89,6 +89,40 @@ function confirm() {
 
 ```
 
+## Alert 弹框
+
+一般用于在微信小程序弹窗通过按钮授权等场景,调用close方法手动关闭弹窗。
+
+```html
+<wd-message-box selector="wd-message-close">
+<view>
+  <view>自定义按钮</view>
+</view>
+<template #confirmButton>
+  <wd-button block @click="close()">自定义确定按钮</wd-button>
+</template>
+</wd-message-box>
+<wd-button @click="show">alert-自定义确定按钮</wd-button>
+```
+
+```typescript
+import { useMessage } from '@/uni_modules/wot-design-uni'
+const message2 = useMessage('wd-message-close')
+
+function show() {
+  message2.alert({
+    title: '提示',
+    showConfirmButton: false,
+    showCancelButton: false
+  })
+}
+
+function close() {
+  message2.close()
+}
+
+```
+
 ## Prompt 弹框
 
 prompt 会展示一个输入框，并可以进行输入校验。
