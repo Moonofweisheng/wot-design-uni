@@ -289,7 +289,6 @@ function inputValChange(value: string | number) {
  * @param option message选项值
  */
 function reset(option: MessageOptions) {
-  console.log(isDef(option.showConfirmButton))
   if (option) {
     title.value = isDef(option.title) ? option.title : ''
     showCancelButton.value = isDef(option.showCancelButton) ? option.showCancelButton : false
