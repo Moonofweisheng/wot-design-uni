@@ -875,3 +875,11 @@ $-backtop-bg: var(--wot-backtop-bg, #e1e1e1) !default;
 
 /* index-bar */
 $-index-bar-index-font-size: var(--wot-index-bar-index-font-size, $-fs-aid) !default;
+
+
+/* text */
+$-text-primary-color: var(--wot-text-primary-color,$-color-theme) !default; // 主要按钮颜色
+$-text-success-color: var(--wot-text-success-color,$-color-success) !default; // 成功按钮文字颜色
+$-text-info-color: var(--wot-text-info-color, $-color-info) !default; // 信息按钮颜色
+$-text-warning-color: var(--wot-text-warning-color,$-color-warning) !default; // 警告按钮字体颜色
+$-text-error-color: var(--wot-text-error-color,$-color-danger) !default; // 错误按钮颜色

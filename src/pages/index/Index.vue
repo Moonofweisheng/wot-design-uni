@@ -80,6 +80,10 @@ const list = ref([
       {
         id: 'fab',
         name: 'Fab 悬浮按钮'
+      },
+      {
+        id: 'text',
+        name: 'Text 文本'
       }
     ]
   },
