@@ -60,6 +60,39 @@ function alert() {
 }
 ```
 
+## alert 弹框 自定义确认按钮
+
+需要配合showConfirmButton 属性使用，
+一般用于在微信小程序弹窗通过按钮授权等场景，调用close方法手动关闭弹窗。
+
+```html
+<wd-message-box selector="wd-message-box-confirm">
+  <view>这里是内容内容</view>
+  <template #confirmButton>
+    <wd-button block open-type="contact" @click="confirmClose">前往微信客服</wd-button>
+  </template>
+</wd-message-box>
+
+<wd-button @click="alertConfirm">alert</wd-button>
+```
+
+```typescript
+import { useMessage } from '@/uni_modules/wot-design-uni'
+const confirmMessage = useMessage('wd-message-box-confirm')
+
+function alertConfirm() {
+  confirmMessage.alert({
+    title: '标题',
+    showConfirmButton: false
+  })
+}
+
+function confirmClose() {
+  confirmMessage.close()
+}
+
+```
+
 ## Confirm 弹框
 
 用于提示用户操作。
@@ -232,6 +265,7 @@ MessageBox.prompt(options)
 | selector          | 组件的 id                                                     | string          | -                        | #wd-message-box  | -        |
 | zIndex            | 弹窗层级                                                      | number          | -                        | 99               | -    |
 | lazyRender        | 弹层内容懒渲染，触发展示时才渲染内容                          | boolean         | -                        | true             | -    |
+| showConfirmButton        | 是否显示确认按钮                          | boolean         | -                        | true             | -    |
 
 ## 外部样式类
 

@@ -8,6 +8,17 @@
       <wd-button @click="alert">alert</wd-button>
     </demo-block>
 
+    <demo-block title="alert-自定义确认按钮">
+      <wd-message-box selector="wd-message-box-confirm">
+        <view>这里是内容内容</view>
+        <template #confirmButton>
+          <wd-button block open-type="contact" @click="confirmClose">前往微信客服</wd-button>
+        </template>
+      </wd-message-box>
+
+      <wd-button @click="alertConfirm">alert</wd-button>
+    </demo-block>
+
     <demo-block title="显示标题">
       <wd-button @click="alertWithTitle">alert</wd-button>
     </demo-block>
@@ -42,9 +53,19 @@ const value1 = ref<string>('')
 const toast = useToast()
 const message = useMessage()
 const message1 = useMessage('wd-message-box-slot')
+const confirmMessage = useMessage('wd-message-box-confirm')
 
 function alert() {
   message.alert('操作成功')
+}
+function alertConfirm() {
+  confirmMessage.alert({
+    title: '标题',
+    showConfirmButton: false
+  })
+}
+function confirmClose() {
+  confirmMessage.close()
 }
 function alertWithTitle() {
   message.alert({

@@ -21,6 +21,7 @@ export const messageDefaultOptionKey = '__MESSAGE_OPTION__'
 // 默认模板
 export const defaultOptions: MessageOptions = {
   title: '',
+  showConfirmButton: true,
   showCancelButton: false,
   show: false,
   closeOnClickModal: true,
@@ -75,9 +76,9 @@ export function useMessage(selector: string = ''): Message {
   const confirm = createMethod('confirm')
   // 打开Prompt 弹框
   const prompt = createMethod('prompt')
-
+  // 关闭弹窗
   const close = () => {
-    messageOption.value = { ...defaultOptions }
+    messageOption.value.show = false
   }
   return {
     show,
