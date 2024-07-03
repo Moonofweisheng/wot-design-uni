@@ -1,5 +1,9 @@
 <template>
-  <text @click="handleClick" :class="rootClass" :style="rootStyle">{{ mode === 'date' ? dayjs(Number(text)).format('YYYY-MM-DD') : text }}</text>
+  <view>
+    <text @click="handleClick" :class="rootClass" :style="rootStyle">
+      {{ formattedText }}
+    </text>
+  </view>
 </template>
 
 <script lang="ts">
@@ -19,26 +23,30 @@ import { objToStyle } from '../common/util'
 import { dayjs } from '@/uni_modules/wot-design-uni'
 import { textProps } from './types'
 
-const props = defineProps(textProps)
+const props = defineProps({
+  ...textProps
+})
 const emit = defineEmits(['click'])
 
 const textClass = ref<string>('')
 
+// 合并 watch 逻辑
 watch(
-  [() => props.type, () => props.text, () => props.mode, () => props.call, () => props.color, () => props.bold, () => props.lines],
-  () => {
-    computeTextClass()
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  () => props.type,
-  (newValue) => {
-    if (!newValue) return
-    // type: 'primary', 'error', 'warning', 'success', 'default'
-    const type = ['primary', 'error', 'warning', 'success', 'default']
-    if (type.indexOf(newValue) === -1) console.error(`type must be one of ${type.toString()}`)
+  () => ({
+    type: props.type,
+    text: props.text,
+    mode: props.mode,
+    call: props.call,
+    color: props.color,
+    bold: props.bold,
+    lines: props.lines,
+    format: props.format
+  }),
+  ({ type }) => {
+    // type 验证
+    if (type && !['primary', 'error', 'warning', 'success', 'default'].includes(type)) {
+      console.error(`type must be one of ${type.toString()}`)
+    }
     computeTextClass()
   },
   { deep: true, immediate: true }
@@ -63,7 +71,7 @@ const rootStyle = computed(() => {
 })
 
 function computeTextClass() {
-  const { type, text, mode, call, color, bold, lines } = props
+  const { type, color, bold, lines } = props
   let textClassList: string[] = []
   if (!color) {
     textClassList.push(`is-${type}`)
@@ -74,6 +82,27 @@ function computeTextClass() {
   bold && textClassList.push('is-bold')
   textClass.value = textClassList.join(' ')
 }
+
+// 格式化文本函数
+function formatText(text: string, format: boolean, mode: string): string {
+  if (format) {
+    if (mode === 'phone') {
+      return text.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
+    } else if (mode === 'name') {
+      return text.replace(/^(.).*(.)$/, '$1**$2')
+    } else {
+      throw new Error('mode must be one of phone or name for encryption')
+    }
+  }
+  return text
+}
+
+const formattedText = computed(() => {
+  if (props.mode === 'date') {
+    return dayjs(Number(props.text)).format('YYYY-MM-DD')
+  }
+  return formatText(props.text, props.format, props.mode)
+})
 
 function handleClick(event: any) {
   emit('click', event)

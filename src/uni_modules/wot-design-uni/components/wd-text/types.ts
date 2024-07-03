@@ -26,7 +26,7 @@ export const textProps = {
   size: makeStringProp(''),
   /**
    * 文本处理的匹配模式
-   * 可选值：'text-普通文本' / 'date - 日期'
+   * 可选值：'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名'
    * 类型：string
    * 默认值：'text'
    */
@@ -43,6 +43,12 @@ export const textProps = {
    * 默认值：false
    */
   bold: makeBooleanProp(false),
+  /**
+   * 是否脱敏,当mode为phone和name时生效
+   * 类型：boolean
+   * 默认值：false
+   */
+  format: makeBooleanProp(false),
   /**
    * 文本颜色
    * 类型：string

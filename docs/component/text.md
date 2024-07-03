@@ -47,6 +47,15 @@
 <wd-text text="只有拼尽全力，才能不留遗憾。只有奋斗不止，才能拥有更好的未来。" size="16px"></wd-text>
 ```
 
+## 脱敏
+
+设置 `format` 属性,当 `mode` 为 `phone``name`时生效。
+
+```html
+<wd-text text="李四" mode="name" :format="true"></wd-text>
+<wd-text text="张长三" mode="name" :format="true"></wd-text>
+<wd-text text="18888888888" mode="phone" :format="true"></wd-text>
+```
 
 ## 事件
 
@@ -66,9 +75,10 @@ function clickTest(){
 | ------------- | ------------------------ | ------- | -------------------------------------------- | ------ | -------- |
 | type          | 主题类型                 | string  | 'primary' / 'error' / 'warning' / 'success' | default      | -        |
 | text         | 文字                 | string | -                                            |   | -        |
-| size          | 字体大小                 | string | -                                            | false  | -        |
-| mode         | 文本处理的匹配模式                 | string | 'text-普通文本' / 'date - 日期'                                            | text  | -        |
-| bold          | 是否粗体，默认normal                 | boolean  | -                                            | -      | -        |
+| size          | 字体大小                 | string | -                                            | -  | -        |
+| mode         | 文本处理的匹配模式                 | string | 'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名'                                            | text  | -        |
+| bold          | 是否粗体，默认normal                 | boolean  | -                                            | false      | -        |
+| format          | 是否脱敏                 | boolean  | 当mode为phone和name时生效                                            | false      | -        |
 | color         | 文字颜色                 | string  | -                                            | -      | -        |
 | lines      | 文本显示的行数，如果设置，超出此行数，将会显示省略号。最大值为5。           | Number  | -                                            | -      | -        |
 | lineHeight      | 文本行高 | string | -                                            |   | -        |

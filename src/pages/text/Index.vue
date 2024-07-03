@@ -29,7 +29,7 @@
             <code>info-默认</code>
             。
           </view>
-          <view style="margin-top: 15px">
+          <view style="margin-top: 15px; display: flex" class="space-x-3">
             <wd-text type="primary" text="主色"></wd-text>
             <wd-text type="error" text="错误"></wd-text>
             <wd-text type="success" text="成功"></wd-text>
@@ -117,10 +117,20 @@
           <view>
             通过
             <code>mode</code>
-            文本处理的匹配模式可选值：'text-普通文本' / 'date - 日期'
+            文本处理的匹配模式可选值：'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名'
           </view>
           <view style="margin-top: 15px">
             <view><wd-text text="1719976636911" mode="date" @click="clickTest"></wd-text></view>
+          </view>
+        </view>
+      </demo-block>
+
+      <demo-block title="format">
+        <view>
+          <view style="display: flex" class="space-x-3">
+            <view><wd-text text="李四" mode="name" :format="true"></wd-text></view>
+            <view><wd-text text="张长三" mode="name" :format="true"></wd-text></view>
+            <view><wd-text text="18888888888" mode="phone" :format="true"></wd-text></view>
           </view>
         </view>
       </demo-block>
@@ -139,9 +149,11 @@ function clickTest() {
   margin: 0 10px 10px;
 }
 
-:deep(.wd-text) {
-  & + .wd-text {
-    margin-left: 12px;
+.space-x-3 {
+  & > * {
+    + * {
+      margin-left: 12px;
+    }
   }
 }
 </style>
