@@ -1,15 +1,20 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-06-30 23:09:04
- * @LastEditTime: 2024-07-01 14:16:56
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-video-preview\wd-video-preview.vue
- * 记得注释
--->
 <template>
-  <wd-popup modalStyle="background: #000;" v-model="showPopup">
-    <video v-if="videoUrl" objectFit="cover" style="width: 100vw" :controls="true" :enableNative="true" autoplay :src="videoUrl"></video>
+  <wd-popup modalStyle="background: #000;" custom-style="width:100%;height:100%;background:none;" v-model="showPopup" @after-leave="handleClosed">
+    <view :class="`wd-video-preview ${customClass}`" :style="customStyle">
+      <video
+        class="wd-video-preview__video"
+        v-if="previdewVideo.url"
+        :controls="true"
+        :poster="previdewVideo.poster"
+        :title="previdewVideo.title"
+        play-btn-position="center"
+        :enableNative="true"
+        :src="previdewVideo.url"
+        :enable-progress-gesture="false"
+      ></video>
+
+      <wd-icon name="close-circle" size="48px" :custom-class="`wd-video-preview__close`" @click="close" />
+    </view>
   </wd-popup>
 </template>
 
@@ -25,20 +30,28 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { videoPreviewProps, type VideoPreviewExpose } from './types'
-const props = defineProps(videoPreviewProps)
+import { reactive, ref } from 'vue'
+import { videoPreviewProps, type PreviewVideo, type VideoPreviewExpose } from './types'
+defineProps(videoPreviewProps)
 
 const showPopup = ref<boolean>(false)
-const videoUrl = ref<string>('')
+const previdewVideo = reactive<PreviewVideo>({ url: '', poster: '', title: '' })
 
-function open(url: string) {
-  videoUrl.value = url
+function open(video: PreviewVideo) {
+  previdewVideo.url = video.url
+  previdewVideo.poster = video.poster
+  previdewVideo.title = video.title
   showPopup.value = true
 }
 
 function close() {
   showPopup.value = false
+}
+
+function handleClosed() {
+  previdewVideo.url = ''
+  previdewVideo.poster = ''
+  previdewVideo.title = ''
 }
 
 defineExpose<VideoPreviewExpose>({
@@ -47,5 +60,5 @@ defineExpose<VideoPreviewExpose>({
 })
 </script>
 <style lang="scss" scoped>
-// @import './index.scss';
+@import './index.scss';
 </style>

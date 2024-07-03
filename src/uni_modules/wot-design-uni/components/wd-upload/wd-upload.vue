@@ -473,32 +473,37 @@ function handlePreviewImage(index: number, lists: string[]) {
  */
 function handlePreviewVieo(index: number, lists: UploadFileItem[]) {
   const { onPreviewFail } = props
-  videoPreview.value?.open(lists[index].url)
-  // uni.previewMedia({
-  //   current: index,
-  //   sources: lists.map((file) => {
-  //     return {
-  //       url: file.url,
-  //       type: 'video',
-  //       poster: file.thumb
-  //     }
-  //   }),
-  //   fail() {
-  //     if (onPreviewFail) {
-  //       onPreviewFail({
-  //         index,
-  //         imgList: []
-  //       })
-  //     } else {
-  //       uni.showToast({ title: '预览视频失败', icon: 'none' })
-  //     }
-  //   }
-  // })
+  // #ifdef MP-WEIXIN
+  uni.previewMedia({
+    current: index,
+    sources: lists.map((file) => {
+      return {
+        url: file.url,
+        type: 'video',
+        poster: file.thumb
+      }
+    }),
+    fail() {
+      if (onPreviewFail) {
+        onPreviewFail({
+          index,
+          imgList: []
+        })
+      } else {
+        uni.showToast({ title: '预览视频失败', icon: 'none' })
+      }
+    }
+  })
+  // #endif
+
+  // #ifndef MP-WEIXIN
+  videoPreview.value?.open({ url: lists[index].url, poster: lists[index].thumb, title: lists[index].name })
+  // #endif
 }
 
 function onPreviewImage(index: number) {
   const { beforePreview } = props
-  const lists = uploadFiles.value.filter((file) => isImageUrl(file.url)).map((file) => file.url)
+  const lists = uploadFiles.value.filter((file) => isImage(file)).map((file) => file.url)
   if (beforePreview) {
     beforePreview({
       index,
@@ -514,7 +519,7 @@ function onPreviewImage(index: number) {
 
 function onPreviewVideo(file: UploadFileItem) {
   const { beforePreview } = props
-  const lists = uploadFiles.value.filter((file) => isVideoUrl(file.url))
+  const lists = uploadFiles.value.filter((file) => isVideo(file))
   const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
@@ -531,7 +536,9 @@ function onPreviewVideo(file: UploadFileItem) {
 
 function onPreviewFile(file: UploadFileItem) {
   const { beforePreview } = props
-  const lists = uploadFiles.value.filter((file) => isVideoUrl(file.url))
+  const lists = uploadFiles.value.filter((file) => {
+    return !isVideo(file) && !isImage(file)
+  })
   const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({

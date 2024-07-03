@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 22:36:44
- * @LastEditTime: 2024-06-21 13:21:01
+ * @LastEditTime: 2024-07-02 22:19:38
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-upload\utils.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-upload/utils.ts
  * 记得注释
  */
 import { isArray } from '../common/util'
@@ -69,6 +69,19 @@ export function chooseFile({
   return new Promise((resolve, reject) => {
     switch (accept) {
       case 'image':
+        // #ifdef MP-WEIXIN
+        uni.chooseMedia({
+          count: multiple ? Math.min(maxCount, 9) : 1,
+          mediaType: ['image'],
+          sourceType,
+          sizeType,
+          camera,
+          success: (res) => resolve(formatMedia(res)),
+          fail: reject
+        })
+        // #endif
+
+        // #ifndef MP-WEIXIN
         uni.chooseImage({
           count: multiple ? Math.min(maxCount, 9) : 1, // 最多可以选择的数量，如果不支持多选则数量为1
           sizeType,
@@ -76,8 +89,23 @@ export function chooseFile({
           success: (res) => resolve(formatImage(res)),
           fail: reject
         })
+        // #endif
+
         break
       case 'video':
+        // #ifdef MP-WEIXIN
+        uni.chooseMedia({
+          count: multiple ? Math.min(maxCount, 9) : 1,
+          mediaType: ['video'],
+          sourceType,
+          sizeType,
+          camera,
+          success: (res) => resolve(formatMedia(res)),
+          fail: reject
+        })
+        // #endif
+
+        // #ifndef MP-WEIXIN
         uni.chooseVideo({
           sourceType,
           compressed,
@@ -88,7 +116,10 @@ export function chooseFile({
           },
           fail: reject
         })
+        // #endif
+
         break
+      // #ifdef MP-WEIXIN
       case 'media':
         uni.chooseMedia({
           count: multiple ? Math.min(maxCount, 9) : 1,
@@ -108,6 +139,7 @@ export function chooseFile({
           fail: reject
         })
         break
+      // #endif
       case 'all':
         // #ifdef MP-WEIXIN
         uni.chooseMessageFile({
