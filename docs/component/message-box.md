@@ -60,6 +60,42 @@ function alert() {
 }
 ```
 
+
+## Alert 自定义确认按钮
+
+一般用于在微信小程序弹窗通过按钮授权等场景open-type,调用close方法手动关闭弹窗。
+
+```html
+<wd-message-box selector="wd-message-close">
+<view>
+  <view>自定义按钮</view>
+</view>
+<template #confirmButton>
+  <wd-button block @click="close()">自定义确定按钮</wd-button>
+</template>
+</wd-message-box>
+
+<wd-button @click="show">alert-自定义确定按钮</wd-button>
+```
+
+```typescript
+import { useMessage } from '@/uni_modules/wot-design-uni'
+const message2 = useMessage('wd-message-close')
+
+function show() {
+  message2.alert({
+    title: '提示',
+    showConfirmButton: false
+  })
+}
+
+function close() {
+  message2.close()
+}
+
+```
+
+
 ## Confirm 弹框
 
 用于提示用户操作。
@@ -85,40 +121,6 @@ function confirm() {
     .catch(() => {
       console.log('点击了取消按钮')
     })
-}
-
-```
-
-## Alert 弹框
-
-一般用于在微信小程序弹窗通过按钮授权等场景,调用close方法手动关闭弹窗。
-
-```html
-<wd-message-box selector="wd-message-close">
-<view>
-  <view>自定义按钮</view>
-</view>
-<template #confirmButton>
-  <wd-button block @click="close()">自定义确定按钮</wd-button>
-</template>
-</wd-message-box>
-<wd-button @click="show">alert-自定义确定按钮</wd-button>
-```
-
-```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
-const message2 = useMessage('wd-message-close')
-
-function show() {
-  message2.alert({
-    title: '提示',
-    showConfirmButton: false,
-    showCancelButton: false
-  })
-}
-
-function close() {
-  message2.close()
 }
 
 ```
@@ -254,6 +256,7 @@ MessageBox.prompt(options)
 | title             | 标题                                                          | string          | -                        | -                | -        |
 | msg               | 消息文案                                                      | string          | -                        | -                | -        |
 | type              | 弹框类型                                                      | string          | alert / confirm / prompt | alert            | -        |
+| type              | 弹框类型                                                      | string          | alert / confirm / prompt | alert            | -        |
 | closeOnClickModal | 是否支持点击蒙层进行关闭，点击蒙层回调传入的 action 为'modal' | boolean         | -                        | true             | -        |
 | inputType         | 当 type 为 prompt 时，输入框类型                              | string          | -                        | text             | -        |
 | inputValue        | 当 type 为 prompt 时，输入框初始值                            | string / number | -                        | -                | -        |
@@ -261,6 +264,7 @@ MessageBox.prompt(options)
 | inputPattern      | 当 type 为 prompt 时，输入框正则校验，点击确定按钮时进行校验  | regex           | -                        | -                | -        |
 | inputValidate     | 当 type 为 prompt 时，输入框校验函数，点击确定按钮时进行校验  | function        | -                        | -                | -        |
 | inputError        | 当 type 为 prompt 时，输入框检验不通过时的错误提示文案        | string          | -                        | 输入的数据不合法 | -        |
+| showConfirmButton | type为alert时是否显示确认按钮                                                  | boolean          | -                        | true             | -        |
 | confirmButtonText | 确定按钮文案                                                  | string          | -                        | 确定             | -        |
 | cancelButtonText  | 取消按钮文案                                                  | string          | -                        | 取消             | -        |
 | selector          | 组件的 id                                                     | string          | -                        | #wd-message-box  | -        |

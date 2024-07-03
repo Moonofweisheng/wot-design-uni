@@ -132,8 +132,7 @@ function withSlot() {
 function show() {
   message2.alert({
     title: '提示',
-    showConfirmButton: false,
-    showCancelButton: false
+    showConfirmButton: false
   })
 }
 
