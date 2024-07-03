@@ -875,3 +875,25 @@ $-backtop-bg: var(--wot-backtop-bg, #e1e1e1) !default;
 
 /* index-bar */
 $-index-bar-index-font-size: var(--wot-index-bar-index-font-size, $-fs-aid) !default;
+
+
+/* 主题颜色 */
+$-color-theme: var(--wot-color-theme, $default-theme) !default; // 主题色
+$-color-white: var(--wot-color-white, rgb(255, 255, 255)) !default; // 用于mix的白色
+$-color-black: var(--wot-color-black, rgb(0, 0, 0)) !default; // 用于mix的黑色
+
+/* 辅助色 */
+$-color-success: var(--wot-color-success, #34d19d) !default; // 成功色
+$-color-warning: var(--wot-color-warning, #f0883a) !default; // 警告色
+$-color-danger: var(--wot-color-danger, #fa4350) !default; // 危险出错色
+$-color-purple: var(--wot-color-purple, #8268de) !default; // 紫色
+$-color-yellow: var(--wot-color-yellow, #f0cd1d) !default; // 黄色
+$-color-blue: var(--wot-color-blue, #2bb3ed) !default; // 蓝色
+$-color-info: var(--wot-color-info, #909399) !default;
+
+
+$-text-info-color: $-color-info !default;
+$-text-primary-color: $-color-theme !default;
+$-text-error-color: $-color-danger !default;
+$-text-warning-color: $-color-warning !default;
+$-text-success-color: $-color-success !default;
