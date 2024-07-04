@@ -11,11 +11,14 @@
     <demo-block title="上传视频">
       <wd-upload accept="video" :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
     </demo-block>
-    <demo-block title="Media">
-      <wd-upload accept="media" :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
+    <demo-block title="上传视频和图片">
+      <wd-upload accept="media" :file-list="fileList11" :action="action" @change="handleChange11"></wd-upload>
     </demo-block>
-    <demo-block title="File">
-      <wd-upload accept="all" :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
+    <demo-block title="仅上传文件">
+      <wd-upload accept="file" :file-list="fileList12" :action="action" @change="handleChange12"></wd-upload>
+    </demo-block>
+    <demo-block title="上传视频图片和文件">
+      <wd-upload accept="all" :file-list="fileList13" :action="action" @change="handleChange13"></wd-upload>
     </demo-block>
     <demo-block title="多选上传">
       <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
@@ -61,7 +64,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
 const fileList = ref<any[]>([
@@ -85,6 +88,10 @@ const fileList8 = ref([])
 const fileList9 = ref([])
 const fileList10 = ref([])
 const fileList11 = ref([])
+const fileList12 = ref([])
+const fileList13 = ref([])
+const fileList14 = ref([])
+const fileList15 = ref([])
 
 const messageBox = useMessage()
 const toast = useToast()
@@ -224,6 +231,17 @@ function handleChange10({ fileList }: any) {
 }
 function handleChange11({ fileList }: any) {
   fileList11.value = fileList
+}
+function handleChange12({ fileList }: any) {
+  debugger
+  fileList12.value = fileList
+}
+function handleChange13({ fileList }: any) {
+  debugger
+  fileList13.value = fileList
+}
+function handleChange14({ fileList }: any) {
+  fileList14.value = fileList
 }
 </script>
 <style lang="scss" scoped></style>

@@ -159,6 +159,14 @@ export function chooseFile({
         // #endif
         break
       default:
+        // 默认选择图片
+        uni.chooseImage({
+          count: multiple ? Math.min(maxCount, 9) : 1, // 最多可以选择的数量，如果不支持多选则数量为1
+          sizeType,
+          sourceType,
+          success: (res) => resolve(formatImage(res)),
+          fail: reject
+        })
         break
     }
   })
