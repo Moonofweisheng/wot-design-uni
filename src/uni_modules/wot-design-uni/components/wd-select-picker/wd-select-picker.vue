@@ -126,7 +126,7 @@ import { selectPickerProps, type SelectPickerExpose } from './types'
 const { translate } = useTranslate('select-picker')
 
 const props = defineProps(selectPickerProps)
-const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue'])
+const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue','open','close'])
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
@@ -330,6 +330,7 @@ function close() {
     selectList.value = valueFormat(lastSelectList.value)
   }
   emit('cancel')
+  emit('close')
 }
 
 function open() {
@@ -337,12 +338,14 @@ function open() {
   selectList.value = valueFormat(props.modelValue)
   pickerShow.value = true
   isConfirm.value = false
+  emit('open')
 }
 
 function onConfirm() {
   if (props.loading) {
     pickerShow.value = false
     emit('confirm')
+    emit('close')
     return
   }
   if (props.beforeConfirm) {
@@ -371,6 +374,7 @@ function handleConfirm() {
     value: lastSelectList.value,
     selectedItems
   })
+  emit('close')
 }
 
 function getFilterText(label: string, filterVal: string) {
