@@ -162,7 +162,7 @@ function handleOpened() {
 | ----------- | ---------------- | ----------------------------------------------------------------------------- | -------- |
 | change | 绑定值变化时触发 | event.detail = { value, selectedItem }, value 为选中值，selectedItem 为选中项 | -        |
 | close  | 关闭菜单         | -                                                                             | -        |
-| open   | 展开菜单         | -                                                                             | -        |
+| opened   | 展开菜单         | -                                                                             | -        |
 
 ## DropdownItem Methods
 
