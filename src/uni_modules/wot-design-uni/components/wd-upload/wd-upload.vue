@@ -103,11 +103,10 @@ watch(
   (val) => {
     const { statusKey } = props
     if (isEqual(val, uploadFiles.value)) return
-    const uploadFileList = val.map((item) => {
-      item.uid = context.id++
+    const uploadFileList: UploadFileItem[] = val.map((item) => {
       item[statusKey] = item[statusKey] || 'success'
       item.response = item.response || ''
-      return item
+      return { ...item, uid: context.id++ }
     })
     uploadFiles.value = uploadFileList
   },

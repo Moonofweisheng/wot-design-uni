@@ -27,7 +27,7 @@ export interface ChooseFileOption {
   camera: UploadCameraType
 }
 
-export interface UploadFileItem {
+export type UploadFileItem = {
   [key: string]: any
   // 	当前上传文件在列表中的唯一标识
   uid: number
@@ -102,15 +102,16 @@ export type UploadBuildFormDataOption = {
 }
 export type UploadBuildFormData = (options: UploadBuildFormDataOption) => void
 
+export type UploadFile = Partial<UploadFileItem> & { url: string }
+
 export const uploadProps = {
   ...baseProps,
-
   /**
    * 上传的文件列表,例如:[{name:'food.jpg',url:'https://xxx.cdn.com/xxx.jpg'}]
    * 类型：array
    * 默认值：[]
    */
-  fileList: makeArrayProp<UploadFileItem>(),
+  fileList: makeArrayProp<UploadFile>(),
   /**
    * 必选参数，上传的地址
    * 类型：string

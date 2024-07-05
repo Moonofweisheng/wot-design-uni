@@ -8,21 +8,6 @@
     <demo-block title="基本用法">
       <wd-upload accept="image" :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
     </demo-block>
-    <demo-block title="上传视频">
-      <wd-upload accept="video" :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
-    </demo-block>
-    <demo-block title="上传视频和图片">
-      <wd-upload accept="media" :file-list="fileList11" :action="action" @change="handleChange11"></wd-upload>
-    </demo-block>
-    <demo-block title="仅上传文件">
-      <wd-upload accept="file" :file-list="fileList12" :action="action" @change="handleChange12"></wd-upload>
-    </demo-block>
-    <demo-block title="上传视频图片和文件">
-      <wd-upload accept="all" :file-list="fileList13" :action="action" @change="handleChange13"></wd-upload>
-    </demo-block>
-    <demo-block title="多选上传">
-      <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
-    </demo-block>
     <demo-block title="最大上传数限制">
       <wd-upload :file-list="fileList3" :limit="3" :action="action" @change="handleChange3"></wd-upload>
     </demo-block>
@@ -48,6 +33,9 @@
     <demo-block title="禁用">
       <wd-upload :file-list="fileList8" disabled :action="action" @change="handleChange8"></wd-upload>
     </demo-block>
+    <demo-block title="多选上传">
+      <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
+    </demo-block>
     <demo-block title="自定义唤起上传样式">
       <wd-upload :file-list="fileList9" :action="action" @change="handleChange9" use-default-slot>
         <wd-button>自定义唤起样式</wd-button>
@@ -60,38 +48,58 @@
     <!-- <demo-block title="上传至oss">
       <wd-upload :file-list="fileList11" action="https://xxx.aliyuncs.com" :build-form-data="buildFormData" @change="handleChange11"></wd-upload>
     </demo-block> -->
+
+    <demo-block title="上传视频">
+      <wd-upload accept="video" multiple :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
+    </demo-block>
+
+    <!-- #ifdef MP-WEIXIN -->
+    <demo-block title="上传视频和图片">
+      <wd-upload accept="media" multiple :file-list="fileList11" :action="action" @change="handleChange11"></wd-upload>
+    </demo-block>
+    <demo-block title="仅上传文件">
+      <wd-upload accept="file" multiple :file-list="fileList12" :action="action" @change="handleChange12"></wd-upload>
+    </demo-block>
+    <!-- #endif -->
+
+    <!-- #ifdef MP-WEIXIN || H5  -->
+    <demo-block title="上传视频图片和文件">
+      <wd-upload accept="all" multiple :file-list="fileList13" :action="action" @change="handleChange13"></wd-upload>
+    </demo-block>
+    <!-- #endif -->
   </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-import { onMounted, ref } from 'vue'
+import type { UploadFile } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import { ref } from 'vue'
 
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
-const fileList = ref<any[]>([
+const fileList = ref<UploadFile[]>([
   {
     url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
   }
 ])
 
-const fileList1 = ref<any[]>([])
-const fileList2 = ref<any[]>([
+const fileList1 = ref<UploadFile[]>([])
+const fileList2 = ref<UploadFile[]>([
   {
     url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
   }
 ])
-const fileList3 = ref([])
-const fileList4 = ref([])
-const fileList5 = ref([])
-const fileList6 = ref([])
-const fileList7 = ref([])
-const fileList8 = ref([])
-const fileList9 = ref([])
-const fileList10 = ref([])
-const fileList11 = ref([])
-const fileList12 = ref([])
-const fileList13 = ref([])
-const fileList14 = ref([])
-const fileList15 = ref([])
+const fileList3 = ref<UploadFile[]>([])
+const fileList4 = ref<UploadFile[]>([])
+const fileList5 = ref<UploadFile[]>([])
+const fileList6 = ref<UploadFile[]>([])
+const fileList7 = ref<UploadFile[]>([])
+const fileList8 = ref<UploadFile[]>([])
+const fileList9 = ref<UploadFile[]>([])
+const fileList10 = ref<UploadFile[]>([])
+const fileList11 = ref<UploadFile[]>([])
+const fileList12 = ref<UploadFile[]>([])
+const fileList13 = ref<UploadFile[]>([])
+const fileList14 = ref<UploadFile[]>([])
+const fileList15 = ref<UploadFile[]>([])
 
 const messageBox = useMessage()
 const toast = useToast()
@@ -233,11 +241,9 @@ function handleChange11({ fileList }: any) {
   fileList11.value = fileList
 }
 function handleChange12({ fileList }: any) {
-  debugger
   fileList12.value = fileList
 }
 function handleChange13({ fileList }: any) {
-  debugger
   fileList13.value = fileList
 }
 function handleChange14({ fileList }: any) {
