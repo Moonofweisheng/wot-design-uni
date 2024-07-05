@@ -38,6 +38,7 @@ import { segmentedProps, type SegmentedInfo, type SegmentedOption } from './type
 const $item = '.wd-segmented__item'
 
 const props = defineProps(segmentedProps)
+const emit = defineEmits(['update:value', 'change', 'click'])
 
 const sectionItemInfo = reactive<SegmentedInfo>({
   width: 0,
@@ -78,10 +79,8 @@ onMounted(() => {
   })
 })
 
-const emit = defineEmits(['update:value', 'change'])
-
 /**
- * @description 更新滑块偏移量
+ * 更新滑块偏移量
  *
  */
 function updateActiveStyle() {
@@ -117,7 +116,7 @@ function updateCurrentIndex() {
   } else {
     const value = isObj(props.options[0]) ? props.options[0].value : props.options[0]
     emit('update:value', value)
-    emit('change', { value })
+    emit('change', isObj(props.options[0]) ? props.options[0] : { value })
   }
 }
 
@@ -130,7 +129,8 @@ function handleClick(option: string | number | SegmentedOption, index: number) {
   activeIndex.value = index
   updateActiveStyle()
   emit('update:value', value)
-  emit('change', { value })
+  emit('change', isObj(option) ? option : { value })
+  emit('click', isObj(option) ? option : { value })
 }
 </script>
 

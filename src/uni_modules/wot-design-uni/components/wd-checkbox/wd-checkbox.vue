@@ -5,6 +5,7 @@
     } ${isLast ? 'is-last-child' : ''} ${innerInline ? 'is-inline' : ''} ${innerShape === 'button' ? 'is-button' : ''} ${
       innerDisabled ? 'is-disabled' : ''
     } ${innerSize ? 'is-' + innerSize : ''} ${customClass}`"
+    :style="customStyle"
     @click="toggle"
   >
     <!--shape为button时，移除wd-checkbox__shape，只保留wd-checkbox__label-->
@@ -46,9 +47,15 @@ import { computed, getCurrentInstance, onBeforeMount, watch } from 'vue'
 import { useParent } from '../composables/useParent'
 import { CHECKBOX_GROUP_KEY } from '../wd-checkbox-group/types'
 import { isDef } from '../common/util'
-import { checkboxProps } from './types'
+import { checkboxProps, type CheckboxExpose } from './types'
 
 const props = defineProps(checkboxProps)
+const emit = defineEmits(['change', 'update:modelValue'])
+
+defineExpose<CheckboxExpose>({
+  toggle
+})
+
 const { parent: checkboxGroup, index } = useParent(CHECKBOX_GROUP_KEY)
 
 const isChecked = computed(() => {
@@ -150,8 +157,6 @@ onBeforeMount(() => {
   // eslint-disable-next-line quotes
   if (props.modelValue === null) console.error("checkbox's value must be set")
 })
-
-const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
  * @description 检测checkbox绑定的value是否和其它checkbox的value冲突

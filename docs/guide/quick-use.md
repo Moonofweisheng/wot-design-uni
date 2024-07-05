@@ -95,6 +95,7 @@ import Components, { kebabCase } from '@uni-helper/vite-plugin-uni-components'
 
 export default defineConfig({
   plugins: [
+    // make sure put it before `Uni()`
     Components({
     resolvers: [
       {
@@ -126,6 +127,7 @@ import { WotResolver } from '@uni-helper/vite-plugin-uni-components/resolvers'
 
 export default defineConfig({
   plugins: [
+    // make sure put it before `Uni()`
     Components({
     resolvers: [WotResolver()]
   }), uni()],
@@ -142,8 +144,6 @@ public-hoist-pattern[]=@vue*
 // shamefully-hoist = true
 ```
 
-see more in [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components#installation)
-
 
 ## Volar 支持<el-tag type="primary" style="vertical-align: middle;margin-left:8px;" effect="dark" >推荐</el-tag>
 如果您使用 `Volar`，请在 `tsconfig.json` 中通过 `compilerOptions.type` 指定全局组件类型。
@@ -154,7 +154,7 @@ cli项目使用`uni_modules`安装无需配置，对`Volar`的支持自动生效
 // tsconfig.json
 {
   "compilerOptions": {
-    "types": ["wot-design-uni/global.d.ts"]
+    "types": ["wot-design-uni/global"]
   }
 }
 ```

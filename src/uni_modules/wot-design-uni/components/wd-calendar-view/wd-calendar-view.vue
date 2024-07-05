@@ -31,6 +31,7 @@
       :show-panel-title="showPanelTitle"
       :default-time="formatDefauleTime"
       :panel-height="panelHeight"
+      :immediate-change="immediateChange"
       :time-filter="timeFilter"
       :hide-second="hideSecond"
       @change="handleChange"
@@ -58,7 +59,7 @@ import MonthPanel from './monthPanel/month-panel.vue'
 import { calendarViewProps, type CalendarViewExpose } from './types'
 
 const props = defineProps(calendarViewProps)
-
+const emit = defineEmits(['change', 'update:modelValue', 'pickstart', 'pickend'])
 const formatDefauleTime = ref<number[][]>([])
 
 const yearPanelRef = ref()
@@ -74,8 +75,6 @@ watch(
     immediate: true
   }
 )
-
-const emit = defineEmits(['change', 'update:modelValue', 'pickstart', 'pickend'])
 
 /**
  * 使当前日期或者选中日期滚动到可视区域

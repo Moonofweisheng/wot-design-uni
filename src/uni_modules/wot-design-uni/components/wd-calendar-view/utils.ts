@@ -1,18 +1,21 @@
+import { computed } from 'vue'
 import { dayjs } from '../common/dayjs'
-import { getType, isArray, padZero } from '../common/util'
+import { isArray, isFunction, padZero } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import type { CalendarDayType, CalendarItem, CalendarTimeFilter, CalendarType } from './types'
 const { translate } = useTranslate('calendar-view')
 
-const weeks: string[] = [
-  translate('weeks.sun'),
-  translate('weeks.mon'),
-  translate('weeks.tue'),
-  translate('weeks.wed'),
-  translate('weeks.thu'),
-  translate('weeks.fri'),
-  translate('weeks.sat')
-]
+const weeks = computed(() => {
+  return [
+    translate('weeks.sun'),
+    translate('weeks.mon'),
+    translate('weeks.tue'),
+    translate('weeks.wed'),
+    translate('weeks.thu'),
+    translate('weeks.fri'),
+    translate('weeks.sat')
+  ]
+})
 
 /**
  * 比较两个时间的日期是否相等
@@ -110,7 +113,7 @@ export function getWeekLabel(index: number) {
     index = index % 7
   }
 
-  return weeks[index]
+  return weeks.value[index]
 }
 
 /**
@@ -380,7 +383,7 @@ export function getTimeData({
     }
   })
   let seconds: CalendarItem[] = []
-  if (filter && getType(filter) === 'function') {
+  if (filter && isFunction(filter)) {
     hours = filter({
       type: 'hour',
       values: hours
@@ -399,7 +402,7 @@ export function getTimeData({
         disabled: index < minSecond || index > maxSecond
       }
     })
-    if (filter && getType(filter) === 'function') {
+    if (filter && isFunction(filter)) {
       seconds = filter({
         type: 'second',
         values: seconds

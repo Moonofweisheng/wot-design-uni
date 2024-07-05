@@ -6,7 +6,7 @@
 
 `label` 设置左侧文本内容；
 
-`columns` 设置数据源，为二维数组，每一列为一个一维数组，每个选项包含 `value`(选项值) 和 `label`(选项名称)；
+`columns` 设置数据源，一维数组，每个选项包含 `value`(选项值) 和 `label`(选项名称)；
 
 `v-model` 设置选中项的值，数据类型为 `Array` | `String` `Number` 或 `Boolean`；
 
@@ -229,6 +229,14 @@ const beforeConfirm = (value, resolve) => {
 <wd-select-picker label="可搜索" v-model="value" :columns="columns" filterable></wd-select-picker>
 ```
 
+## 自动完成
+
+`radio`类型，设置 `show-confirm` 属性支持控制确认按钮的显示，设置为`false`可自动完成。
+
+```html
+<wd-select-picker label="自动完成" type="radio" :show-confirm="false" v-model="value19" :columns="columns" />
+```
+
 ## 自定义选择器
 
 如果默认的 cell 类型的展示格式不满足需求，可以通过默认插槽进行自定义选择器样式。
@@ -308,7 +316,7 @@ function handleConfirm({ value, selectedItems }) {
 
 | 参数                   | 说明                                                                                                     | 类型                              | 可选值           | 默认值   | 最低版本 |
 | ---------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------- | ---------------- | -------- | -------- |
-| v-model             | 选中项，`type`类型为`checkbox`时，类型为 array；`type`为`radio` 时 ，类型为 number / boolean / string    | array / number / boolean / string | -                | -        | -        |
+| v-model                | 选中项，`type`类型为`checkbox`时，类型为 array；`type`为`radio` 时 ，类型为 number / boolean / string    | array / number / boolean / string | -                | -        | -        |
 | columns                | 选择器数据，一维数组                                                                                     | array                             | -                | -        | -        |
 | type                   | 单复选选择器类型                                                                                         | string                            | checkbox / radio | checkbox | -        |
 | value-key              | 选项对象中，value 对应的 key                                                                             | string                            | -                | value    | -        |
@@ -335,23 +343,24 @@ function handleConfirm({ value, selectedItems }) {
 | use-default-slot       | 使用默认插槽时设置该选项                                                                                 | boolean                           | -                | false    | -        |
 | use-label-slot         | 使用 label 插槽时设置该选项                                                                              | boolean                           | -                | false    | -        |
 | close-on-click-modal   | 点击遮罩是否关闭                                                                                         | boolean                           | -                | true     | -        |
-| z-index                | 弹窗层级                                                                                                 | number                            | -                | 15       | -    |
-| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                      | boolean                           | -                | true     | -    |
-| filterable             | 可搜索（目前只支持本地搜索）                                                                             | boolean                           | -                | false    | -    |
-| filter-placeholder     | 搜索框占位符                                                                                             | string                            | -                | 搜索     | -    |
-| ellipsis               | 是否超出隐藏                                                                                             | boolean                           | -                | false    | -    |
-| scroll-into-view       | 重新打开是否滚动到选中项                                                                                 | boolean                           | -                | true    | 0.1.34    |
-| prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
-| rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
+| z-index                | 弹窗层级                                                                                                 | number                            | -                | 15       | -        |
+| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                      | boolean                           | -                | true     | -        |
+| filterable             | 可搜索（目前只支持本地搜索）                                                                             | boolean                           | -                | false    | -        |
+| filter-placeholder     | 搜索框占位符                                                                                             | string                            | -                | 搜索     | -        |
+| ellipsis               | 是否超出隐藏                                                                                             | boolean                           | -                | false    | -        |
+| scroll-into-view       | 重新打开是否滚动到选中项                                                                                 | boolean                           | -                | true     | 0.1.34   |
+| show-confirm           | 是否显示确认按钮（仅`radio`类型生效）                                                                             | boolean                           |                  | true     | 1.2.8    |
+| prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                        | string                            | -                | -        | -        |
+| rules                  | 表单验证规则，结合`wd-form`组件使用                                                                      | `FormItemRule []`                 | -                | `[]`     | -        |
 
 ### FormItemRule 数据结构
 
-| 键名 | 说明 | 类型 |
-| --- | --- | --- |
-| required | 是否为必选字段	 | `boolean` |
-| message | 错误提示文案	 | `string` |
+| 键名      | 说明                                                    | 类型                                  |
+| --------- | ------------------------------------------------------- | ------------------------------------- |
+| required  | 是否为必选字段                                          | `boolean`                             |
+| message   | 错误提示文案                                            | `string`                              |
 | validator | 通过函数进行校验，可以返回一个 `Promise` 来进行异步校验 | `(value, rule) => boolean \| Promise` |
-| pattern | 通过正则表达式进行校验，正则无法匹配表示校验不通过 | `RegExp` |
+| pattern   | 通过正则表达式进行校验，正则无法匹配表示校验不通过      | `RegExp`                              |
 
 ## 选项数据结构
 
@@ -363,11 +372,13 @@ function handleConfirm({ value, selectedItems }) {
 
 ## Events
 
-| 事件名称     | 说明                       | 参数                                                                                                       | 最低版本 |
-| ------------ | -------------------------- | ---------------------------------------------------------------------------------------------------------- | -------- |
-| confirm | 点击确认时触发             | event.detail = { value, selectedItems }, checkbox 类型时 value 和 selectedItems 为数组，radio 类型为非数组 | -        |
-| change  | picker 内选项更改时触发    | `{ value }`, checkbox 类型时 value 为数组，radio 类型为非数组                                              | -        |
-| cancel  | 点击关闭按钮或者蒙层时触发 | -                                                                                                          | -        |
+| 事件名称 | 说明                       | 参数                                                                                                       | 最低版本 |
+| -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------- | -------- |
+| confirm  | 点击确认时触发             | event.detail = { value, selectedItems }, checkbox 类型时 value 和 selectedItems 为数组，radio 类型为非数组 | -        |
+| change   | picker 内选项更改时触发    | `{ value }`, checkbox 类型时 value 为数组，radio 类型为非数组                                              | -        |
+| cancel   | 点击关闭按钮或者蒙层时触发 | -                                                                                                          | -        |
+| close   | 弹窗关闭时触发 | -                                                                                                          | 1.2.29        |
+| open   | 弹窗打开时触发 | -                                                                                                          | 1.2.29        |
 
 ## Methods
 

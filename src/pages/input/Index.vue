@@ -16,7 +16,10 @@
       <wd-input type="text" v-model="value4" clearable @change="handleChange1" />
     </demo-block>
     <demo-block title="密码框">
-      <wd-input type="text" v-model="value5" disabled clearable show-password @change="handleChange2" />
+      <wd-input type="text" v-model="value5" clearable show-password @change="handleChange2" />
+    </demo-block>
+    <demo-block title="数字类型">
+      <wd-input type="number" v-model="value9" />
     </demo-block>
     <demo-block title="设置前后Icon">
       <wd-input type="text" v-model="value6" prefix-icon="dong" suffix-icon="list" clearable @change="handleChange3" />
@@ -58,9 +61,7 @@ const value5 = ref<string>('password')
 const value6 = ref<string>('')
 const value7 = ref<string>('1234')
 const value8 = ref<string>('')
-const value9 = ref<string>('')
-const value10 = ref<string>('支持清空和字数限制的文本域')
-const value11 = ref<string>('输入文字后，输入框高度跟随字数多少变化')
+const value9 = ref<number | null>(null)
 const value12 = ref<string>('')
 const value13 = ref<string>('该输入框禁用')
 const value14 = ref<string>('12345678')

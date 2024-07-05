@@ -1,0 +1,21 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(backtop) {
+  position: fixed;
+  background-color: $-backtop-bg;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $-color-gray-8;
+
+  @include when(circle) {
+    border-radius: 50%;
+  }
+
+  @include when(square) {
+    border-radius: 4px;
+  }
+}

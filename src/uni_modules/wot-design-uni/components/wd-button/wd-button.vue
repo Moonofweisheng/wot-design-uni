@@ -39,7 +39,7 @@
     <view v-if="loading" class="wd-button__loading">
       <view class="wd-button__loading-svg" :style="loadingStyle"></view>
     </view>
-    <wd-icon v-if="icon" custom-class="wd-button__icon" :name="icon"></wd-icon>
+    <wd-icon v-else-if="icon" custom-class="wd-button__icon" :name="icon"></wd-icon>
     <view class="wd-button__text"><slot /></view>
   </button>
 </template>
@@ -71,23 +71,6 @@ const loadingIcon = (color = '#4D80F0', reverse = true) => {
   }"/><path d="M4.599 21c0 9.044 7.332 16.376 16.376 16.376 9.045 0 16.376-7.332 16.376-16.376" stroke="url(#a)" stroke-width="3.5" stroke-linecap="round"/></g></svg>`
 }
 const props = defineProps(buttonProps)
-
-const hoverStartTime = ref<number>(20)
-const hoverStayTime = ref<number>(70)
-const loadingIconSvg = ref<string>('')
-
-watch(
-  () => props.loading,
-  () => {
-    buildLoadingSvg()
-  },
-  { deep: true, immediate: true }
-)
-
-const loadingStyle = computed(() => {
-  return `background-image: url(${loadingIconSvg.value});`
-})
-
 const emit = defineEmits([
   'click',
   'getuserinfo',
@@ -99,6 +82,22 @@ const emit = defineEmits([
   'chooseavatar',
   'agreeprivacyauthorization'
 ])
+
+const hoverStartTime = ref<number>(20)
+const hoverStayTime = ref<number>(70)
+const loadingIconSvg = ref<string>('')
+
+const loadingStyle = computed(() => {
+  return `background-image: url(${loadingIconSvg.value});`
+})
+
+watch(
+  () => props.loading,
+  () => {
+    buildLoadingSvg()
+  },
+  { deep: true, immediate: true }
+)
 
 function handleClick(event: any) {
   if (!props.disabled && !props.loading) {

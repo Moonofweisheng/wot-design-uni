@@ -4,7 +4,7 @@
 
 ## 基本使用
 
-`v-model` 为绑定值，可以为 array 类型（普通折叠）、 string 类型（手风琴）和 boolean 类型（收起展开查看更多）。CollapseItem 的 `title` 和 `name` 为必填。`name` 用于标识该折叠栏。
+`v-model` 为绑定值，可以为 array 类型（普通折叠）、 string 类型（手风琴）和 boolean 类型（收起展开查看更多）。CollapseItem 的 `name` 为必填, `title` 选填且可通过 `slot` 自定义。`name` 用于标识该折叠栏。
 
 ```typescript
 const value = ref<string[]>(['item1'])
@@ -14,7 +14,13 @@ const value = ref<string[]>(['item1'])
 <wd-collapse v-model="value">
   <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item title="标签2" name="item2">这是一条简单的示例文字。</wd-collapse-item>
-  <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
+  <wd-collapse-item name="item3">
+    <template #title="{ expanded, disabled, isFirst }">
+      <text style="color: red">通过 slot 自定义标题</text>
+      <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
+    </template>
+    这是一条简单的示例文字。
+  </wd-collapse-item>
 </wd-collapse>
 ```
 
@@ -151,7 +157,7 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 | 参数          | 说明                                                        | 类型     | 可选值 | 默认值 | 最低版本 |
 | ------------- | ----------------------------------------------------------- | -------- | ------ | ------ | -------- |
 | name          | 折叠栏的标识符                                              | string   | -      | -      | -        |
-| title         | 折叠栏的标题                                                | string   | -      | -      | -        |
+| title         | 折叠栏的标题, 支持同名 slot 自定义内容                          | string   | -      | ''      | -        |
 | disabled      | 禁用折叠栏                                                  | boolean  | -      | false  | -        |
 | before-expend | 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise | Function | -      | false  | -        |
 
@@ -187,6 +193,7 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 
 | name | 说明                                                 | 最低版本 |
 | ---- | ---------------------------------------------------- | -------- |
+| title |标题，便于开发者自定义标题（非 viewmore 使用）  | 1.2.27      |
 | more | 查看更多，便于开发者自定义查看更多类型的展开收起样式 | -        |
 
 ## CollapseItem 外部样式类

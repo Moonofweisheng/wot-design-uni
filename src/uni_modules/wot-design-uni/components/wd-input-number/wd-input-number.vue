@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-input-number ${customClass} ${disabled ? 'is-disabled' : ''} ${withoutInput ? 'is-without-input' : ''}`">
+  <view :class="`wd-input-number ${customClass} ${disabled ? 'is-disabled' : ''} ${withoutInput ? 'is-without-input' : ''}`" :style="customStyle">
     <view :class="`wd-input-number__action ${minDisabled || disableMinus ? 'is-disabled' : ''}`" @click="sub">
       <wd-icon name="decrease" custom-class="wd-input-number__action-icon"></wd-icon>
     </view>
@@ -36,10 +36,11 @@ export default {
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { debounce, getType } from '../common/util'
+import { debounce, isDef, isEqual } from '../common/util'
 import { inputNumberProps } from './types'
 
 const props = defineProps(inputNumberProps)
+const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue'])
 
 const minDisabled = ref<boolean>(false)
 const maxDisabled = ref<boolean>(false)
@@ -71,12 +72,12 @@ watch(
   { immediate: true, deep: true }
 )
 
-const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue'])
-
 function updateBoundary() {
   debounce(() => {
     const value = formatValue(inputValue.value)
-    setValue(value)
+    if (!isEqual(inputValue.value, value)) {
+      setValue(value)
+    }
     splitDisabled(value)
   }, 30)()
 }
@@ -109,9 +110,7 @@ function toStrictlyStep(value: number | string) {
 }
 
 function setValue(value: string | number, change: boolean = true) {
-  const type = getType(value)
-
-  if (props.allowNull && (type === 'null' || type === 'undefined' || value === '')) {
+  if (props.allowNull && (!isDef(value) || value === '')) {
     dispatchChangeEvent(value, change)
     return
   }
@@ -164,22 +163,25 @@ function handleFocus(event: any) {
 
 function handleBlur() {
   const value = formatValue(inputValue.value)
-  setValue(value)
+  if (!isEqual(inputValue.value, value)) {
+    setValue(value)
+  }
   emit('blur', {
     value
   })
 }
 
 function dispatchChangeEvent(value: string | number, change: boolean = true) {
+  if (isEqual(inputValue.value, value)) {
+    return
+  }
   inputValue.value = value
-  change && emit('change', { value })
   change && emit('update:modelValue', inputValue.value)
+  change && emit('change', { value })
 }
 
 function formatValue(value: string | number) {
-  const type = getType(value)
-
-  if (props.allowNull && (type === 'null' || type === 'undefined' || value === '')) {
+  if (props.allowNull && (!isDef(value) || value === '')) {
     return ''
   }
 

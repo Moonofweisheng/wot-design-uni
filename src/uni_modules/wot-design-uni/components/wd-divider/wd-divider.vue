@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-divider ${customClass}`">
+  <view :class="`wd-divider ${customClass}`" :style="customStyle">
     <view class="wd-divider__line" :style="color ? 'background: ' + color : ''"></view>
     <view class="wd-divider__content" :style="color ? 'color: ' + color : ''">
       <slot></slot>

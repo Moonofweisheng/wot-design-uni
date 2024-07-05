@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="logo" src="https://wot-design-uni.gitee.io/wot-design.png" width="200">
+    <img alt="logo" src="https://wot-design-uni.pages.dev/wot-design.png" width="200">
 </p>
 <h1 align="center">Wot Design Uni</h1>
 
@@ -39,15 +39,16 @@
 </p>
 
 <p align="center">
-  ✈️ <a href="https://wot-design-uni.gitee.io">文档网站 (国内推荐)</a>&nbsp;
+  ✈️ <a href="https://wot-design-uni.pages.dev/">文档网站 (推荐)</a>&nbsp;
   🚀 <a href="https://wot-design-uni.cn">文档网站 (备用)</a>&nbsp;
-  🔥 <a href="https://wot-design-uni.netlify.app">文档网站 (备用)</a>
+  🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (备用)</a>&nbsp;
+  🚫 <a href="https://wot-design-uni.gitee.io/">文档网站 (Gitee暂时下线)</a>
 </p>
 
 ## ✨ 特性
 
 - 🎯 多平台覆盖，支持 微信小程序、支付宝小程序、钉钉小程序、H5、APP 等.
-- 🚀 60+ 个高质量组件，覆盖移动端主流场景.
+- 🚀 70+ 个高质量组件，覆盖移动端主流场景.
 - 💪 使用 Typescript 构建，提供良好的组件类型系统.
 - 🌍 支持国际化，内置 6 种语言包.
 - 📖 提供丰富的文档和组件示例.
@@ -59,23 +60,23 @@
 扫描二维码访问演示，注意：因微信审核机制限制，当前的微信小程序示例可能不是最新版本，可以clone代码到本地预览。
 
 <p>
-<img src="https://wot-design-uni.gitee.io/wx.jpg" width="200" height="200" style="margin-right:30px"/>
-<img src="https://wot-design-uni.gitee.io/alipay.png" width="200" height="200" />
+<img src="https://wot-design-uni.pages.dev/wx.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-design-uni.pages.dev/alipay.png" width="200" height="200" />
 </p>
 
 ## 快速上手
 
-详细说明见 [快速上手](https://wot-design-uni.gitee.io/guide/quick-use.html)。
+详细说明见 [快速上手](https://wot-design-uni.pages.dev/guide/quick-use.html)。
 
 ## 链接
 
 * [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
-* [更新日志](https://wot-design-uni.gitee.io/guide/changelog.html)
-* [常见问题](https://wot-design-uni.gitee.io/guide/common-problems.html)
+* [更新日志](https://wot-design-uni.pages.dev/guide/changelog.html)
+* [常见问题](https://wot-design-uni.pages.dev/guide/common-problems.html)
 * [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
 * [QQ 群](https://qm.qq.com/cgi-bin/qm/qr?k=O1Z3pal6StL39qHtABqR54Tb56igr90O&jump_from=webapi&authKey=MtVWfi/EQbT03wW7tKXv4bmyKYHBHtzI8VewlzSsOdxFjN0wbgNy17np9Z9yC4Z8)
 * [快速上手项目](https://github.com/Moonofweisheng/wot-starter)
-* [Vue3路由库](https://wot-design-uni.gitee.io/uni-mini-router/)
+* [Vue3路由库](https://wot-design-uni.pages.dev/uni-mini-router/)
 
 ## 开发计划
 
@@ -107,10 +108,10 @@
 ### 扫码捐赠
 
 <p>
-<img src="https://wot-design-uni.gitee.io/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
-<img src="https://wot-design-uni.gitee.io/alipayQrcode.jpg" width="200" height="200" />
+<img src="https://wot-design-uni.pages.dev/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-design-uni.pages.dev/alipayQrcode.jpg" width="200" height="200" />
 </p>
 
 ## LICENSE
 
-[MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/develop/LICENSE)
+[MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/master/LICENSE)

@@ -152,7 +152,7 @@ $-button-large-radius: var(--wot-button-large-radius, 8px) !default; // 大型�
 $-button-large-loading: var(--wot-button-large-loading, 24px) !default; // 大小按钮loading图标大小
 $-button-large-box-shadow-size: var(--wot-button-large-box-shadow-size, 0px 4px 8px 0px) !default; // 大尺寸阴影尺寸
 
-$-button-icon-fs: var(--wot-button-icon-fs, 18px) !default; // 带图标的按钮的图标大小
+$-button-icon-fs: var(--wot-button-icon-fs, 1.18em) !default; // 带图标的按钮的图标大小
 $-button-icon-size: var(--wot-button-icon-size, 40px) !default; // icon 类型按钮尺寸
 $-button-icon-color: var(--wot-button-icon-color, rgba(0, 0, 0, 0.65)) !default; // icon 类型按钮颜色
 $-button-icon-disabled-color: var(--wot-button-icon-disabled-color, $-color-icon-disabled) !default; // icon 类型按钮禁用颜色
@@ -809,38 +809,34 @@ $-sidebar-width: var(--wot-sidebar-width, 104px) !default; // 侧边栏宽度
 $-sidebar-height: var(--wot-sidebar-height, 100%) !default; // 侧边栏高度
 
 /* sidebar-item */
-$-sidebar-color: var(--wd-sidebar-color, $-font-gray-1) !default;
-$-sidebar-item-height: var(--wd-sidebar-item-height, 56px) !default;
-$-sidebar-item-line-height: var(--wd-sidebar-item-line-height, 24px) !default;
-$-sidebar-disabled-color: var(--wd-side-bar-disabled-color, $-font-gray-4) !default;
-$-sidebar-active-color: var(--wd-sidebar-active-color, $-color-theme) !default; // 激活项字体颜色
+$-sidebar-color: var(--wot-sidebar-color, $-font-gray-1) !default;
+$-sidebar-item-height: var(--wot-sidebar-item-height, 56px) !default;
+$-sidebar-item-line-height: var(--wot-sidebar-item-line-height, 24px) !default;
+$-sidebar-disabled-color: var(--wot-side-bar-disabled-color, $-font-gray-4) !default;
+$-sidebar-active-color: var(--wot-sidebar-active-color, $-color-theme) !default; // 激活项字体颜色
 $-sidebar-active-bg: var(--wot-sidebar-active-bg, $-color-white) !default; // 激活项背景颜色
 $-sidebar-hover-bg: var(--wot-sidebar-hover-bg, $-color-gray-2) !default; // 激活项点击背景颜色
-$-sidebar-border-radius: var(--wd-sidebar-border-radius, 8px) !default;
-$-sidebar-font-size: var(--wd-sidebar-font-size, 16px) !default;
-$-sidebar-icon-size: var(--wd-sidebar-icon-size, 20px) !default;
-$-sidebar-active-border-width: var(--wd-sidebar-active-border-width, 4px) !default;
-$-sidebar-active-border-height: var(--wd-sidebar-active-border-height, 16px) !default;
+$-sidebar-border-radius: var(--wot-sidebar-border-radius, 8px) !default;
+$-sidebar-font-size: var(--wot-sidebar-font-size, 16px) !default;
+$-sidebar-icon-size: var(--wot-sidebar-icon-size, 20px) !default;
+$-sidebar-active-border-width: var(--wot-sidebar-active-border-width, 4px) !default;
+$-sidebar-active-border-height: var(--wot-sidebar-active-border-height, 16px) !default;
 
 /* fab */
-$-fab-trigger-height: var(--wd-fab-trigger-height, 56px) !default;
-$-fab-trigger-width: var(--wd-fab-trigger-width, 56px) !default;
-$-fab-actions-padding: var(--wd-actions-padding, 12px) !default;
-$-fab-top: var(--wd-fab-top, 16px) !default;
-$-fab-left: var(--wd-fab-left, 16px) !default;
-$-fab-right: var(--wd-fab-right, 16px) !default;
-$-fab-bottom: var(--wd-fab-bottom, 16px) !default;
+$-fab-trigger-height: var(--wot-fab-trigger-height, 56px) !default;
+$-fab-trigger-width: var(--wot-fab-trigger-width, 56px) !default;
+$-fab-actions-padding: var(--wot-actions-padding, 12px) !default;
 
 
 /* count-down */
-$-count-down-text-color: var(--wd-count-down-text-color, $-color-gray-8) !default;
-$-count-down-font-size: var(--wd-count-down-font-size, $-fs-content) !default;
-$-count-down-line-height: var(--wd-count-down-line-height, 20px) !default;
+$-count-down-text-color: var(--wot-count-down-text-color, $-color-gray-8) !default;
+$-count-down-font-size: var(--wot-count-down-font-size, $-fs-content) !default;
+$-count-down-line-height: var(--wot-count-down-line-height, 20px) !default;
 
 /* number-keyboard */
-$-number-keyboard-key-height: var(--wd-number-keyboard-key-height, 48px) !default;
-$-number-keyboard-key-font-size: var(--wd-number-keyboard-key-font-size, 28px) !default;
-$-number-keyboard-key-background: var(--wd-number-keyboard-key-background, $-color-white) !default;
+$-number-keyboard-key-height: var(--wot-number-keyboard-key-height, 48px) !default;
+$-number-keyboard-key-font-size: var(--wot-number-keyboard-key-font-size, 28px) !default;
+$-number-keyboard-key-background: var(--wot-number-keyboard-key-background, $-color-white) !default;
 $-number-keyboard-key-border-radius: var(--wot-number-keyboard-key-border-radius, 8px) !default;
 $-number-keyboard-delete-font-size: var(--wot-number-keyboard-delete-font-size, 16px) !default;
 $-number-keyboard-key-active-color: var(--wot-number-keyboard-key-active-color, $-color-gray-3) !default;
@@ -856,24 +852,30 @@ $-number-keyboard-close-color: var(--wot-number-keyboard-close-color, $-color-th
 $-number-keyboard-close-font-size: var(--wot-number-keyboard-close-font-size, 14px) !default;
 
 /* passwod-input */
-$-password-input-height: var(--wd-password-input-height, 50px);
-$-password-input-margin: var(--wd-password-input-margin, 16px);
-$-password-input-font-size: var(--wd-password-input-margin, 20px);
-$-password-input-radius: var(--wd-password-input-radius, 6px);
-$-password-input-background: var(--wd-password-input-background, #fff);
-$-password-input-info-color: var(--wd-password-input-info-color, $-color-info);
-$-password-input-info-font-size: var(--wd-password-input-info-font-size, $-fs-content);
-$-password-input-border-color: var(--wd-password-border-color, #ebedf0);
-$-password-input-error-info-color: var(--wd-password-input-error-info-color, $-color-danger);
-$-password-input-dot-size: var(--wd-password-input-dot-size, 10px);
-$-password-input-dot-color: var(--wd-password-input-dot-color, $-color-gray-8);
-$-password-input-text-color: var(--wd-password-input-text-color, $-color-gray-8);
-$-password-input-cursor-color: var(--wd-password-input-cursor-color, $-color-gray-8);
-$-password-input-cursor-width: var(--wd-password-input-cursor-width, 1px);
-$-password-input-cursor-height: var(--wd-password-input-cursor-height, 40%);
-$-password-input-cursor-duration: var(--wd-password-input-cursor-duration, 1s);
+$-password-input-height: var(--wot-password-input-height, 50px);
+$-password-input-margin: var(--wot-password-input-margin, 16px);
+$-password-input-font-size: var(--wot-password-input-margin, 20px);
+$-password-input-radius: var(--wot-password-input-radius, 6px);
+$-password-input-background: var(--wot-password-input-background, #fff);
+$-password-input-info-color: var(--wot-password-input-info-color, $-color-info);
+$-password-input-info-font-size: var(--wot-password-input-info-font-size, $-fs-content);
+$-password-input-border-color: var(--wot-password-border-color, #ebedf0);
+$-password-input-error-info-color: var(--wot-password-input-error-info-color, $-color-danger);
+$-password-input-dot-size: var(--wot-password-input-dot-size, 10px);
+$-password-input-dot-color: var(--wot-password-input-dot-color, $-color-gray-8);
+$-password-input-text-color: var(--wot-password-input-text-color, $-color-gray-8);
+$-password-input-cursor-color: var(--wot-password-input-cursor-color, $-color-gray-8);
+$-password-input-cursor-width: var(--wot-password-input-cursor-width, 1px);
+$-password-input-cursor-height: var(--wot-password-input-cursor-height, 40%);
+$-password-input-cursor-duration: var(--wot-password-input-cursor-duration, 1s);
 
 /* form-item */
 $-form-item-error-message-color: var(--wot-form-item-error-message-color, $-color-danger) !default;
 $-form-item-error-message-font-size: var(--wot-form-item-error-message-font-size, $-fs-secondary) !default;
 $-form-item-error-message-line-height: var(--wot-form-item-error-message-line-height, 24px) !default;
+
+/* backtop */
+$-backtop-bg: var(--wot-backtop-bg, #e1e1e1) !default;
+
+/* index-bar */
+$-index-bar-index-font-size: var(--wot-index-bar-index-font-size, $-fs-aid) !default;

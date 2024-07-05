@@ -1,14 +1,14 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 11:22:03
- * @LastEditTime: 2024-03-18 13:17:22
+ * @LastEditTime: 2024-04-04 22:35:25
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-action-sheet\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-action-sheet/types.ts
  * 记得注释
  */
 import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeArrayProp, makeBooleanProp, makeRequiredProp, makeStringProp } from '../common/props'
+import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 
 export type Action = {
   /**
@@ -48,65 +48,74 @@ export const actionSheetProps = {
   ...baseProps,
   /**
    * header 头部样式
+   * @default ''
+   * @type {string}
    */
   customHeaderClass: makeStringProp(''),
   /**
    * 设置菜单显示隐藏
+   * @default false
+   * @type {boolean}
    */
   modelValue: { ...makeBooleanProp(false), ...makeRequiredProp(Boolean) },
   /**
    * 菜单选项
+   * @default []
+   * @type {Action[]}
    */
   actions: makeArrayProp<Action>(),
   /**
    * 自定义面板项,可以为字符串数组，也可以为对象数组，如果为二维数组，则为多行展示
+   * @default []
+   * @type {Array<Panel | Panel[]>}
    */
   panels: makeArrayProp<Panel | Panel[]>(),
   /**
    * 标题
+   * @type {string}
    */
   title: String,
   /**
    * 取消按钮文案
+   * @type {string}
    */
   cancelText: String,
   /**
    * 点击选项后是否关闭菜单
+   * @default true
+   * @type {boolean}
    */
-  closeOnClickAction: Boolean,
+  closeOnClickAction: makeBooleanProp(true),
   /**
    * 点击遮罩是否关闭
+   * @default true
+   * @type {boolean}
    */
-  closeOnClickModal: Boolean,
+  closeOnClickModal: makeBooleanProp(true),
   /**
    * 弹框动画持续时间
+   * @default 200
+   * @type {number}
    */
-  duration: Number,
+  duration: makeNumberProp(200),
   /**
    * 菜单层级
+   * @default 10
+   * @type {number}
    */
-  zIndex: Number,
+  zIndex: makeNumberProp(10),
   /**
    * 弹层内容懒渲染，触发展示时才渲染内容
+   * @default true
+   * @type {boolean}
    */
-  lazyRender: Boolean,
+  lazyRender: makeBooleanProp(true),
   /**
    * 弹出面板是否设置底部安全距离（iphone X 类型的机型）
+   * @default true
+   * @type {boolean}
    */
-  safeAreaInsetBottom: Boolean
+  safeAreaInsetBottom: makeBooleanProp(true)
 }
 
 export type ActionSheetProps = ExtractPropTypes<typeof actionSheetProps>
-
-// export type SelectPanelOption = {
-//   item: Panel | Action
-//   index?: number
-//   rowIndex?: number
-//   colIndex?: number
-// }
-
-// export const actionSheetEmits = {
-//   [UPDATE_MODEL_EVENT]: (newValue: boolean) => isBoolean(newValue),
-//   select: (option: SelectPanelOption) => option !== undefined
-// }
-// export type ActionSheetEmits = typeof actionSheetEmits

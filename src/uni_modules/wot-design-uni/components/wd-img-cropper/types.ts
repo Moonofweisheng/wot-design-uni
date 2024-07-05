@@ -1,4 +1,13 @@
-import type { ExtractPropTypes } from 'vue'
+/*
+ * @Author: weisheng
+ * @Date: 2024-06-03 23:43:43
+ * @LastEditTime: 2024-06-06 21:40:53
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-img-cropper/types.ts
+ * 记得注释
+ */
+import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 
 export const imgCropperProps = {
@@ -58,4 +67,15 @@ export type ImgCropperExpose = {
    * 逆转是否使用动画
    */
   revertIsAnimation: (animation: boolean) => void
+  /**
+   * 初始化图片的大小和角度以及距离
+   */
+  resetImg: () => void
+  /**
+   * 控制旋转角度
+   * @param angle 角度
+   */
+  setRoate: (angle: number) => void
 }
+
+export type ImgCropperInstance = ComponentPublicInstance<ImgCropperProps, ImgCropperExpose>

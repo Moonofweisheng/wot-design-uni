@@ -398,6 +398,8 @@ function handleConfirm4({ value }) {
 | safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                 | boolean               | -                                                                                           | true                  | -        |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
+| immediate-change | type 为 'datetime' 或 'datetimerange' 时有，是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。 | boolean | - | false | 1.2.25 |
+
 
 ### FormItemRule 数据结构
 

@@ -13,7 +13,7 @@
         <wd-calendar label="周范围选择" :first-day-of-week="1" type="weekrange" v-model="value8" />
         <wd-calendar label="月范围选择" type="monthrange" v-model="value9" />
         <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value10" />
-        <wd-calendar label="快捷操作" v-model="value10" :show-confirm="false" />
+        <wd-calendar label="快捷操作" v-model="value16" :show-confirm="false" />
         <wd-calendar label="日期格式化" type="daterange" v-model="value11" :formatter="formatter" />
         <wd-calendar
           label="快捷选项"
@@ -49,7 +49,7 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { dayjs } from '@/uni_modules/wot-design-uni'
-import type { CalendarDayItem } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
+import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
 import type { CalendarOnShortcutsClickOption } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
 import { ref } from 'vue'
 
@@ -70,9 +70,10 @@ const value12 = ref<number[]>([])
 const value13 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])
 const value14 = ref<number | null>(null)
 const value15 = ref<number | null>(null)
+const value16 = ref<number>(Date.now())
 
 const formatValue = ref<string>('')
-const formatter = (day: CalendarDayItem) => {
+const formatter: CalendarFormatter = (day: CalendarDayItem) => {
   const date = new Date(day.date)
   const now = new Date()
 

@@ -1,10 +1,10 @@
 <template>
-  <view :class="`wd-grid-item ${border && !gutter ? itemClass : ''} ${customClass}`" @click="click" :style="style">
+  <view :class="`wd-grid-item ${border && !gutter ? itemClass : ''} ${customClass}`" @click="click" :style="`${style};${customStyle}`">
     <view :class="`wd-grid-item__content ${square ? 'is-square' : ''} ${border && gutter > 0 ? 'is-round' : ''}`" :style="gutterContentStyle">
       <slot v-if="useSlot" />
       <block v-else>
         <view :style="'width:' + iconSize + '; height: ' + iconSize" class="wd-grid-item__wrapper">
-          <wd-badge custom-class="badge" :is-dot="isDot" :modelValue="value" :max="max" :type="type" v-bind="badgeProps">
+          <wd-badge custom-class="badge" v-bind="customBadgeProps">
             <template v-if="useIconSlot">
               <slot name="icon" />
             </template>
@@ -32,10 +32,12 @@ export default {
 import { onMounted, ref, watch, computed } from 'vue'
 import { useParent } from '../composables/useParent'
 import { GRID_KEY } from '../wd-grid/types'
-import { isDef } from '../common/util'
+import { deepAssign, isDef, isUndefined, omitBy } from '../common/util'
 import { gridItemProps } from './types'
+import type { BadgeProps } from '../wd-badge/types'
 
 const props = defineProps(gridItemProps)
+const emit = defineEmits(['itemclick'])
 
 const style = ref<string>('')
 const gutterContentStyle = ref<string>('')
@@ -53,7 +55,21 @@ const childCount = computed(() => {
   }
 })
 
-const emit = defineEmits(['itemclick'])
+const customBadgeProps = computed(() => {
+  const badgeProps: Partial<BadgeProps> = deepAssign(
+    isDef(props.badgeProps) ? omitBy(props.badgeProps, isUndefined) : {},
+    omitBy(
+      {
+        max: props.max,
+        isDot: props.isDot,
+        modelValue: props.value,
+        type: props.type
+      },
+      isUndefined
+    )
+  )
+  return badgeProps
+})
 
 watch(
   () => childCount.value,

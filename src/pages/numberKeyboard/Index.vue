@@ -8,6 +8,7 @@
         <wd-cell title="带右侧栏的键盘" is-link @click="showKeyBoard(2)" />
         <wd-cell title="身份证键盘" is-link @click="showKeyBoard(3)" />
         <wd-cell title="带标题的键盘" is-link @click="showKeyBoard(4)" />
+        <wd-cell title="slot自定义标题" is-link @click="showKeyBoard(9)" />
         <wd-cell title="多个额外按键" is-link @click="showKeyBoard(5)" />
         <wd-cell title="随机数字键盘" is-link @click="showKeyBoard(6)" />
         <wd-cell title="双向绑定" clickable :value="value1" @click="showKeyBoard(7)" />
@@ -25,7 +26,19 @@
       @delete="onDelete"
     ></wd-number-keyboard>
     <wd-number-keyboard v-model:visible="visible3" extra-key="X" close-text="完成" @input="onInput" @delete="onDelete" />
-    <wd-number-keyboard v-model:visible="visible4" title="输入密码" extra-key="." close-text="完成" @input="onInput" @delete="onDelete" />
+    <wd-number-keyboard
+      v-model:visible="visible4"
+      title="输入密码"
+      extra-key="."
+      close-text="完成"
+      @input="onInput"
+      @delete="onDelete"
+    ></wd-number-keyboard>
+    <wd-number-keyboard v-model:visible="visible9" extra-key="." close-text="完成" @input="onInput" @delete="onDelete">
+      <template #title>
+        <text style="color: red">自定义标题</text>
+      </template>
+    </wd-number-keyboard>
 
     <wd-number-keyboard v-model:visible="visible5" mode="custom" :extra-key="['00', '.']" close-text="完成" @input="onInput" @delete="onDelete" />
 
@@ -40,7 +53,7 @@
       close-text="完成"
       @input="onInput"
       @delete="onDelete"
-    />
+    ></wd-number-keyboard>
 
     <wd-number-keyboard :modal="true" v-model:visible="visible8" @input="onInput" @delete="onDelete" />
   </page-wraper>
@@ -57,8 +70,9 @@ const visible5 = ref<boolean>(false)
 const visible6 = ref<boolean>(false)
 const visible7 = ref<boolean>(false)
 const visible8 = ref<boolean>(false)
+const visible9 = ref<boolean>(false)
 
-const visibleArr = [visible1, visible2, visible3, visible4, visible5, visible6, visible7, visible8]
+const visibleArr = [visible1, visible2, visible3, visible4, visible5, visible6, visible7, visible8, visible9]
 
 const value1 = ref<string>('')
 

@@ -1,0 +1,35 @@
+@import "./../common/abstracts/_mixin.scss";
+@import "./../common/abstracts/variable.scss";
+
+.wot-theme-dark {
+  @include b(index-anchor) {
+    background-color: $-color-gray-8;
+    color: $-color-white;
+  }
+}
+
+// #ifdef MP-DINGTALK
+@include b(index-anchor-ding) {
+  
+  @include when(sticky){
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+}
+// #endif
+
+@include b(index-anchor) {
+  background-color: $-color-gray-2;
+  padding: 10px;
+  font-size: 14px;
+  color: $-color-title;
+
+  @include when(sticky){
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+}

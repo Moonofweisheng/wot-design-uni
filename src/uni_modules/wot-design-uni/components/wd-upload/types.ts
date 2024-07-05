@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import type { LoadingType } from '../wd-loading/types'
+import type { ImageMode } from '../wd-img/types'
 
 export interface ChooseFileOption {
   // 是否支持多选文件
@@ -168,7 +169,10 @@ export const uploadProps = {
    * 类型：array
    * 默认值：['original','compressed']
    */
-  sizeType: makeArrayProp<UploadSizeType>(),
+  sizeType: {
+    type: Array as PropType<UploadSizeType[]>,
+    default: () => ['original', 'compressed']
+  },
   /**
    * 文件对应的key，开发者在服务端可以通过这个key获取文件的二进制内容，uploadFile接口详细参数，查看官方手册
    * 类型：string
@@ -273,8 +277,20 @@ export const uploadProps = {
    * 默认值：'back'
    */
   camera: makeStringProp<UploadCameraType>('back'),
+  /**
+   * 自定义上传按钮样式
+   * 类型：string
+   */
   customEvokeClass: makeStringProp(''),
-  customPreviewClass: makeStringProp('')
+  /**
+   * 自定义预览图片列表样式
+   * 类型：string
+   */
+  customPreviewClass: makeStringProp(''),
+  /**
+   * 预览图片的mode属性
+   */
+  imageMode: makeStringProp<ImageMode>('aspectFit')
 }
 
 export type UploadProps = ExtractPropTypes<typeof uploadProps>

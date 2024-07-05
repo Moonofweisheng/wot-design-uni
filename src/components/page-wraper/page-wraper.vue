@@ -1,7 +1,7 @@
 <template>
   <wd-config-provider :theme="theme" :theme-vars="isRed ? themeVars : {}">
     <wd-toast />
-    <view :class="['page-wraper', safeAreaInsetBottom ? 'is-safe' : '']">
+    <view class="page-wraper">
       <wd-cell title="切换暗黑" title-width="240px" center v-if="showDarkMode">
         <wd-switch v-model="isDark" />
       </wd-cell>
@@ -9,6 +9,7 @@
         <wd-switch v-model="isRed" />
       </wd-cell>
       <slot />
+      <wd-gap height="0" v-if="safeAreaInsetBottom" safe-area-bottom></wd-gap>
     </view>
     <wd-notify />
   </wd-config-provider>
@@ -66,10 +67,5 @@ onMounted(() => {
 .page-wraper {
   min-height: calc(100vh - var(--window-top));
   box-sizing: border-box;
-  .is-safe {
-    padding-bottom: 0;
-    padding-bottom: constant(safe-area-inset-bottom);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
 }
 </style>

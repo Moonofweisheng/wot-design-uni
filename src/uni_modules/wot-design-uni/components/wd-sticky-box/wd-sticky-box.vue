@@ -1,7 +1,7 @@
 <template>
   <view style="position: relative">
-    <view :class="`wd-sticky-box ${props.customClass}`" :id="styckyBoxId">
-      <wd-resize @resize="resizeHandler">
+    <view :class="`wd-sticky-box ${props.customClass}`" :style="customStyle" :id="styckyBoxId">
+      <wd-resize @resize="handleResize">
         <slot />
       </wd-resize>
     </view>
@@ -20,38 +20,43 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onBeforeMount, provide, ref } from 'vue'
+import { getCurrentInstance, onBeforeMount, reactive, ref } from 'vue'
 import { getRect, uuid } from '../common/util'
 import { baseProps } from '../common/props'
+import { STICKY_BOX_KEY } from './types'
+import { useChildren } from '../composables/useChildren'
 
 const props = defineProps(baseProps)
 
 const styckyBoxId = ref<string>(`wd-sticky-box${uuid()}`)
 
 const observerMap = ref<Map<any, any>>(new Map())
-const height = ref<number>(0)
-const width = ref<number>(0)
 
-const stickyList: any[] = [] // 子元素sticky列表
+const boxStyle = reactive({
+  height: 0,
+  width: 0
+})
 
 const { proxy } = getCurrentInstance() as any
-const instance = getCurrentInstance() as any
 
-provide('box-height', height)
-provide('box-width', width)
-provide('observerForChild', observerForChild)
+const { children: stickyList, linkChildren } = useChildren(STICKY_BOX_KEY)
+linkChildren({
+  boxStyle: boxStyle,
+  observerForChild
+})
 
 onBeforeMount(() => {
   observerMap.value = new Map()
 })
 
 /**
- * @description wd-sticky-box 尺寸发生变化时，重新监听所有的viewport
+ * 容器大小变化后重新监听sticky组件与box组件的交叉状态
+ * @param detail
  */
-function resizeHandler(detail: any) {
+function handleResize(detail: any) {
   // 相对的容器大小改变后，同步设置 wd-sticky-box 的大小
-  width.value = detail.width
-  height.value = detail.height
+  boxStyle.width = detail.width
+  boxStyle.height = detail.height
   // wd-sticky-box 大小变化时，重新监听所有吸顶元素
   const temp = observerMap.value
   observerMap.value = new Map()
@@ -67,8 +72,8 @@ function resizeHandler(detail: any) {
   temp.clear()
 }
 /**
- * @description 删除 wd-sticky 废弃的监听器
- * @param child
+ * 删除对指定sticky的监听
+ * @param child 指定的子组件
  */
 function deleteObserver(child: any) {
   const observer = observerMap.value.get(child.$.uid)
@@ -77,59 +82,70 @@ function deleteObserver(child: any) {
   observerMap.value.delete(child.$.uid)
 }
 /**
- * @description 为 wd-sticky 创建监听器
- * @param child
+ * 针对指定sticky添加监听
+ * @param child 指定的子组件
  */
 function createObserver(child: any) {
-  const observer = uni.createIntersectionObserver(instance)
+  const observer = uni.createIntersectionObserver(proxy, { thresholds: [0, 0.5] })
   observerMap.value.set(child.$.uid, observer)
   return observer
 }
 /**
- * @description 为单个 wd-sticky 监听 viewport
- * @param child sticky
+ * 监听子组件
+ * @param child 子组件
  */
 function observerForChild(child: any) {
-  const hasChild = stickyList.find((sticky) => {
-    return sticky.$.uid === child.$.uid
-  })
-  if (!hasChild) {
-    stickyList.push(child)
-  }
   deleteObserver(child)
   const observer = createObserver(child)
-
   const exposed = child.$.exposed
-  const offset = exposed.height.value + exposed.offsetTop
+  let offset = exposed.stickyState.height + exposed.offsetTop
+  // #ifdef H5
+  // H5端，导航栏为普通元素，需要将组件移动到导航栏的下边沿
+  // H5的导航栏高度为44px
+  offset = offset + 44
+  // #endif
 
-  // 如果 wd-sticky 比 wd-sticky-box还大，"相对吸顶"无任何意义,此时强制吸顶元素回归其占位符
-  if (height.value <= exposed.height.value) {
+  if (boxStyle.height <= exposed.stickyState.height) {
     exposed.setPosition(false, 'absolute', 0)
   }
   observer.relativeToViewport({ top: -offset }).observe(`#${styckyBoxId.value}`, (result) => {
-    scrollHandler(exposed, result)
+    handleRelativeTo(exposed, result)
   })
-  getRect(`#${styckyBoxId.value}`, false, proxy).then((res) => {
-    // 当 wd-sticky-box 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
-    if (Number(res.bottom) <= offset) scrollHandler(exposed, { boundingClientRect: res })
-  })
+  // 当子组件默认处于边界外且永远不会进入边界内时，需要手动调用一次
+  getRect(`#${styckyBoxId.value}`, false, proxy)
+    .then((res) => {
+      // #ifdef H5
+      // H5端，查询节点信息未计算导航栏高度
+      res.bottom = Number(res.bottom) + 44
+      // #endif
+      if (Number(res.bottom) <= offset) handleRelativeTo(exposed, { boundingClientRect: res })
+    })
+    .catch((res) => {
+      console.log(res)
+    })
 }
 /**
- * @description 为子节点监听 viewport，处理子节点的相对吸顶逻辑
+ *  监听容器组件
  * @param {Object} exposed wd-sticky实例暴露出的事件
- * @param {Object} boundingClientRect 目标节点各个边在viewport中的坐标
+ * @param {Object} boundingClientRect 边界信息
  */
-function scrollHandler(exposed: any, { boundingClientRect }: any) {
-  const offset = exposed.height.value + exposed.offsetTop
-  if (boundingClientRect.bottom <= offset) {
-    // 父元素即将被吸顶元素遮盖，将吸顶元素固定到父元素底部
-    exposed.setPosition(true, 'absolute', boundingClientRect.height - exposed.height.value)
-  } else if (boundingClientRect.top <= offset && boundingClientRect.bottom > offset) {
-    // wd-sticky 已经完全呈现了 viewport 中了，
-    // 此时没有必要再相对 wd-sticky-box 吸顶了
-    if (exposed.state.value === 'normal') return
-    // 顶元素开始遮盖不住父元素了，将吸顶元素恢复到吸顶模式
-    exposed.setPosition(false, 'fixed', exposed.offsetTop)
+function handleRelativeTo(exposed: any, { boundingClientRect }: any) {
+  let childOffsetTop = exposed.offsetTop
+  // #ifdef H5
+  // H5端，导航栏为普通元素，需要将组件移动到导航栏的下边沿
+  // H5的导航栏高度为44px
+  childOffsetTop = childOffsetTop + 44
+  // #endif
+  const offset = exposed.stickyState.height + childOffsetTop
+  let isAbsolute = boundingClientRect.bottom <= offset
+  // #ifdef H5 || APP-PLUS
+  isAbsolute = boundingClientRect.bottom < offset
+  // #endif
+  if (isAbsolute) {
+    exposed.setPosition(true, 'absolute', boundingClientRect.height - exposed.stickyState.height)
+  } else if (boundingClientRect.top <= offset && !isAbsolute) {
+    if (exposed.stickyState.state === 'normal') return
+    exposed.setPosition(false, 'fixed', childOffsetTop)
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-popover ${customClass}`" id="popover" @click.stop="popover.noop">
+  <view :class="`wd-popover ${customClass}`" :style="customStyle" id="popover" @click.stop="popover.noop">
     <!-- TODO 插槽情况监听会有问题 待调整， 用于为渲染获取宽高的元素 -->
     <view class="wd-popover__pos wd-popover__hidden" id="pos">
       <view :class="`wd-popover__container ${customPop}`">
@@ -69,11 +69,11 @@ import { popoverProps, type PopoverExpose } from './types'
 import { isArray } from '../common/util'
 
 const props = defineProps(popoverProps)
+const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
 
 const queue = inject<Queue | null>(queueKey, null)
 
 const selector: string = 'popover'
-const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'close'])
 const { proxy } = getCurrentInstance() as any
 
 watch(
@@ -85,6 +85,13 @@ watch(
     } else if (selector === 'popover' && mode === 'menu' && !isArray(newVal)) {
       console.error('The value type must be a Array type in menu mode')
     }
+  }
+)
+
+watch(
+  () => props.placement,
+  () => {
+    popover.init(props.placement, props.visibleArrow, selector)
   }
 )
 

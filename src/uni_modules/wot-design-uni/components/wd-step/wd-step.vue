@@ -4,12 +4,12 @@
     :class="`wd-step ${customClass} ${currentStatus ? 'is-' + currentStatus : ''} ${canAlignCenter ? 'is-center' : ''}  ${
       vertical ? 'is-vertical' : ''
     }`"
-    :style="styles"
+    :style="rootStyle"
   >
     <view :class="`wd-step__header  ${dot ? 'is-dot' : ''}`">
-      <view :class="`wd-step__icon  ${dot ? 'is-dot' : !!icon || iconSlot ? 'is-icon' : 'is-text'}`">
+      <view :class="`wd-step__icon  ${dot ? 'is-dot' : !!icon || $slots.icon ? 'is-icon' : 'is-text'}`">
         <view v-if="dot" class="wd-step__dot"></view>
-        <slot v-else-if="iconSlot" name="icon" />
+        <slot v-else-if="$slots.icon" name="icon" />
         <wd-icon v-else-if="icon" custom-class="wd-step__icon-inner" :name="icon" />
         <view v-else class="wd-step__icon-outer">
           <wd-icon v-if="currentStatus === 'finished'" name="check-bold" />
@@ -20,12 +20,12 @@
       <view v-if="index < childrenLength - 1" class="wd-step__line"></view>
     </view>
     <view class="wd-step__content">
-      <view :class="`wd-step__title ${descriptionSlot || description ? 'is-description' : ''}`">
-        <slot v-if="titleSlot" name="title" />
+      <view :class="`wd-step__title ${$slots.description || description ? 'is-description' : ''}`">
+        <slot v-if="$slots.title" name="title" />
         <text v-else>{{ currentTitle }}</text>
       </view>
-      <view v-if="descriptionSlot || description" class="wd-step__description">
-        <slot v-if="descriptionSlot" />
+      <view v-if="$slots.description || description" class="wd-step__description">
+        <slot v-if="$slots.description" name="description" />
         <text v-else>{{ description }}</text>
       </view>
     </view>
@@ -45,9 +45,10 @@ export default {
 import { computed } from 'vue'
 import { useParent } from '../composables/useParent'
 import { STEPS_KEY } from '../wd-steps/types'
-import { isDef } from '../common/util'
+import { isDef, objToStyle } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import { stepProps } from './types'
+import type { CSSProperties } from 'vue'
 
 const props = defineProps(stepProps)
 
@@ -62,8 +63,19 @@ const currentStatus = computed(() => {
 const currentTitle = computed(() => {
   return getCurrentTitle(currentStatus.value)
 })
-const styles = computed(() => {
-  return getStyles()
+const rootStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (steps) {
+    const { vertical, space } = steps.props
+    if (vertical) {
+      if (isDef(space)) {
+        style['height'] = space
+      }
+    } else {
+      style['width'] = space || 100 / steps.children.length + '%'
+    }
+  }
+  return `${objToStyle(style)};${props.customStyle}`
 })
 
 const canAlignCenter = computed(() => {
@@ -98,18 +110,6 @@ const childrenLength = computed(() => {
   }
 })
 
-function getStyles() {
-  if (steps) {
-    const { vertical, space } = steps.props
-    if (vertical) {
-      return space ? `height: ${space}` : ''
-    } else {
-      return `width: ${space || 100 / steps.children.length + '%'}`
-    }
-  } else {
-    return ''
-  }
-}
 function getCurrentStatus(index: number) {
   if (props.status) {
     return props.status
@@ -147,4 +147,3 @@ function getCurrentTitle(currentStatus: string) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-steps/type

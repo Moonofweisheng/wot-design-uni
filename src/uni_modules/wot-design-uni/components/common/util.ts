@@ -1,3 +1,7 @@
+import { AbortablePromise } from './AbortablePromise'
+
+type NotUndefined<T> = T extends undefined ? never : T
+
 /**
  * 生成uuid
  * @returns string
@@ -330,7 +334,7 @@ export function isNumber(value: any): value is number {
  */
 export function isPromise(value: unknown): value is Promise<any> {
   // 先将 value 断言为 object 类型
-  if (isObj(value)) {
+  if (isObj(value) && isDef(value)) {
     // 然后进一步检查 value 是否具有 then 和 catch 方法，并且它们是函数类型
     return isFunction((value as Promise<any>).then) && isFunction((value as Promise<any>).catch)
   }
@@ -344,6 +348,14 @@ export function isPromise(value: unknown): value is Promise<any> {
  */
 export function isBoolean(value: any): value is boolean {
   return typeof value === 'boolean'
+}
+
+export function isUndefined(value: any): value is undefined {
+  return typeof value === 'undefined'
+}
+
+export function isNotUndefined<T>(value: T): value is NotUndefined<T> {
+  return !isUndefined(value)
 }
 
 /**
@@ -417,7 +429,7 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
 }
 
 export const requestAnimationFrame = (cb = () => {}) => {
-  return new Promise((resolve) => {
+  return new AbortablePromise((resolve) => {
     const timer = setInterval(() => {
       clearInterval(timer)
       resolve(true)
@@ -439,7 +451,7 @@ export function deepClone<T>(obj: T, cache: Map<any, any> = new Map()): T {
   }
 
   // 处理特殊对象类型：日期、正则表达式、错误对象
-  if (obj instanceof Date) {
+  if (isDate(obj)) {
     return new Date(obj.getTime()) as any
   }
   if (obj instanceof RegExp) {
@@ -664,4 +676,21 @@ export function isImageUrl(url: string): boolean {
   // 使用正则表达式匹配图片URL
   const imageRegex = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg|image)/i
   return imageRegex.test(url)
+}
+
+/**
+ * 判断环境是否是H5
+ */
+export const isH5 = process.env.UNI_PLATFORM === 'h5'
+
+/**
+ * 剔除对象中的某些属性
+ * @param obj
+ * @param predicate
+ * @returns
+ */
+export function omitBy<O extends Record<string, any>>(obj: O, predicate: (value: any, key: keyof O) => boolean): Partial<O> {
+  const newObj = deepClone(obj)
+  Object.keys(newObj).forEach((key) => predicate(newObj[key], key) && delete newObj[key]) // 遍历对象的键，删除值为不满足predicate的字段
+  return newObj
 }

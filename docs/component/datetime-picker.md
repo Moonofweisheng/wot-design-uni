@@ -58,6 +58,17 @@ const value = ref<number>(Date.now())
 const value = ref<number>(Date.now())
 ```
 
+## year 类型
+
+`year` 类型只展示年。
+
+```html
+<wd-datetime-picker type="year" v-model="value" label="年" />
+```
+```typescript
+const value = ref<number>(Date.now())
+```
+
 ## time 类型
 
 `time` 类型只展示时分，绑定值为 `HH:mm` 格式。
@@ -250,7 +261,7 @@ const displayFormatTabLabel = (items) => {
 |-----|------|-----|-------|-------|---------|
 | v-model | 选中项，当 type 为 time 时，类型为字符串；当 type 为 Array 时，类型为范围选择；否则为 Date | string / date / array | - | - | - |
 | default-value | 默认日期，类型保持与 value 一致，打开面板时面板自动选到默认日期 | string / date / array | - | - | - |
-| type | 选择器类型 | string | date / year-month / time | datetime | - |
+| type | 选择器类型 | string | date / year-month / time / year | datetime | - |
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |
 | columns-height | picker内部滚筒高 | number | - | 231 | - |
@@ -285,6 +296,7 @@ const displayFormatTabLabel = (items) => {
 | ellipsis | 是否超出隐藏 | boolean | - | false | - |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
+| immediate-change | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。 | boolean | - | false | 1.2.25 |
 
 ### FormItemRule 数据结构
 

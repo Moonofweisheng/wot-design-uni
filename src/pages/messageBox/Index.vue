@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <wd-message-box></wd-message-box>
-    <wd-message-box selector="wd-message-box-slot" use-slot>
+    <wd-message-box selector="wd-message-box-slot">
       <wd-rate custom-class="custom-rate-class" v-model="rate" />
     </wd-message-box>
     <demo-block title="alert">
@@ -27,14 +27,19 @@
     <demo-block title="使用wd-message-box组件，通过slot插入其他组件内容">
       <wd-button @click="withSlot">custom</wd-button>
     </demo-block>
+
+    <demo-block title="使用beforeConfirm钩子，在弹框确认前，可以进行一些操作">
+      <wd-button @click="beforeConfirm">beforeConfirm</wd-button>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useMessage } from '@/uni_modules/wot-design-uni'
+import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 const rate = ref<number>(1)
 const value1 = ref<string>('')
 
+const toast = useToast()
 const message = useMessage()
 const message1 = useMessage('wd-message-box-slot')
 
@@ -77,6 +82,27 @@ function alertWithLongChar() {
     title: '标题'
   })
 }
+
+function beforeConfirm() {
+  message
+    .confirm({
+      msg: '是否删除',
+      title: '提示',
+      beforeConfirm: ({ resolve }) => {
+        toast.loading('删除中...')
+        setTimeout(() => {
+          toast.close()
+          resolve(true)
+          toast.success('删除成功')
+        }, 3000)
+      }
+    })
+    .then(() => {})
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
 function withSlot() {
   message1
     .confirm({

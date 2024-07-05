@@ -11,30 +11,20 @@
       :duration="200"
     >
       <view :class="rootClass">
-        <!--内容部分-->
         <view :class="bodyClass">
-          <!--公共title-->
           <view v-if="title" class="wd-message-box__title">
             {{ title }}
           </view>
-          <!--其它类型-->
           <view class="wd-message-box__content">
-            <!--prompt类型-->
             <block v-if="type === 'prompt'">
-              <!--输入框-->
               <wd-input v-model="inputValue" :type="inputType" size="large" :placeholder="inputPlaceholder || '请输入'" @input="inputValChange" />
-              <!--错误提示-->
               <view v-if="showErr" class="wd-message-box__input-error">
                 {{ inputError || translate('inputNoValidate') }}
               </view>
             </block>
-            <!--使用插槽-->
-            <slot v-if="useSlot"></slot>
-            <!--使用文本-->
-            <block v-else>{{ msg }}</block>
+            <slot>{{ msg }}</slot>
           </view>
         </view>
-        <!--action按钮组合-->
         <view :class="`wd-message-box__actions ${showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`">
           <wd-button type="info" block v-if="showCancelButton" custom-style="margin-right: 16px;" @click="toggleModal('cancel')">
             {{ cancelButtonText || translate('cancel') }}
@@ -60,9 +50,16 @@ export default {
 
 <script lang="ts" setup>
 import { computed, inject, ref, watch } from 'vue'
-import { messageBoxProps, type InputValidate, type MessageOptions, type MessageType } from './types'
+import {
+  messageBoxProps,
+  type InputValidate,
+  type MessageBeforeConfirmOption,
+  type MessageOptions,
+  type MessageResult,
+  type MessageType
+} from './types'
 import { defaultOptions, messageDefaultOptionKey } from '.'
-import { isDef } from '../common/util'
+import { isDef, isFunction } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 
 const props = defineProps(messageBoxProps)
@@ -84,10 +81,9 @@ const messageOption = inject(messageOptionKey, ref<MessageOptions>(defaultOption
  * 消息文案
  */
 const msg = ref<string>('')
-// eslint-disable-next-line @typescript-eslint/ban-types
-let onConfirm: Function | null = null
-// eslint-disable-next-line @typescript-eslint/ban-types
-let onCancel: Function | null = null
+let onConfirm: ((res: MessageResult) => void) | null = null
+let onCancel: ((res: MessageResult) => void) | null = null
+let beforeConfirm: ((options: MessageBeforeConfirmOption) => void) | null = null
 const show = ref<boolean>(false)
 /**
  * 标题
@@ -178,41 +174,71 @@ watch(
 )
 
 /**
- * @description 关闭消息框的统一主调 handle
- * @param {'cancel' | 'confirm'} action
+ * 点击操作
+ * @param action
  */
 function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
-  // closeOnClickModal为false，此时点击蒙层没任何效果
   if (action === 'modal' && !closeOnClickModal.value) {
     return
   }
-  // prompt类型的弹窗 文案没有通过校验，点击了确定按钮没有任何效果
   if (type.value === 'prompt' && action === 'confirm' && !validate()) {
     return
   }
-  show.value = false
   switch (action) {
     case 'confirm':
-      onConfirm &&
-        onConfirm({
+      if (beforeConfirm) {
+        beforeConfirm({
+          resolve: (isPass) => {
+            if (isPass) {
+              handleConfirm({
+                action: action,
+                value: inputValue.value
+              })
+            }
+          }
+        })
+      } else {
+        handleConfirm({
           action: action,
           value: inputValue.value
         })
+      }
       break
     case 'cancel':
-      onCancel &&
-        onCancel({
-          action: action
-        })
+      handleCancel({
+        action: action
+      })
       break
     default:
-      onCancel &&
-        onCancel({
-          action: 'modal'
-        })
+      handleCancel({
+        action: 'modal'
+      })
       break
   }
 }
+
+/**
+ * 确认回调
+ * @param result
+ */
+function handleConfirm(result: MessageResult) {
+  show.value = false
+  if (isFunction(onConfirm)) {
+    onConfirm(result)
+  }
+}
+
+/**
+ * 取消回调
+ * @param result
+ */
+function handleCancel(result: MessageResult) {
+  show.value = false
+  if (isFunction(onCancel)) {
+    onCancel(result)
+  }
+}
+
 /**
  * @description 如果存在校验规则行为，则进行判断校验是否通过规则。默认不存在校验直接铜鼓。
  * @return {Boolean} 是否通过校验
@@ -255,8 +281,8 @@ function inputValChange(value: string | number) {
  */
 function reset(option: MessageOptions) {
   if (option) {
-    title.value = isDef(option.title) ? option.title : title.value
-    showCancelButton.value = isDef(option.showCancelButton) ? option.showCancelButton : showCancelButton.value
+    title.value = isDef(option.title) ? option.title : ''
+    showCancelButton.value = isDef(option.showCancelButton) ? option.showCancelButton : false
     show.value = option.show!
     closeOnClickModal.value = option.closeOnClickModal!
     confirmButtonText.value = option.confirmButtonText!
@@ -270,6 +296,7 @@ function reset(option: MessageOptions) {
     inputValidate = option.inputValidate!
     onConfirm = (option as any).onConfirm
     onCancel = (option as any).onCancel
+    beforeConfirm = option.beforeConfirm!
     inputError.value = option.inputError!
     showErr.value = option.showErr!
     zIndex.value = option.zIndex!

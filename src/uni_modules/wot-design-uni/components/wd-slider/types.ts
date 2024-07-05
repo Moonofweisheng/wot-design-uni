@@ -1,5 +1,14 @@
-import type { PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
+/*
+ * @Author: weisheng
+ * @Date: 2024-06-03 23:43:43
+ * @LastEditTime: 2024-06-06 22:03:57
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-slider/types.ts
+ * 记得注释
+ */
+import type { ComponentPublicInstance, PropType } from 'vue'
+import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export const sliderProps = {
   ...baseProps,
@@ -84,3 +93,12 @@ export const sliderProps = {
     default: 0
   }
 }
+
+export type SliderExpose = {
+  /**
+   * 初始化slider宽度
+   */
+  initSlider: () => void
+}
+
+export type SliderInstance = ComponentPublicInstance<SliderExpose>

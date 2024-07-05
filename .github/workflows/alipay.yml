@@ -9,7 +9,7 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - shell: bash
       env:
         TOOLID: ${{ secrets.ALI_TOOL_ID }}
@@ -37,14 +37,13 @@ jobs:
           }' > .minicirc
         fi
 
-    - name: Install pnpm
-      run: corepack enable
-
-    - uses: actions/setup-node@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version: '18'
-        cache: 'pnpm'
-        
+        node-version: 18
+
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
 
     - name: upload
       run: |

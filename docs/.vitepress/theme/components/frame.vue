@@ -1,11 +1,12 @@
 <template>
-  <iframe v-if="href" id="demo" class="iframe demo-model" scrolling="auto" frameborder="0" :src="href"></iframe>
+  <iframe v-if="href" ref="iframe" id="demo" class="iframe demo-model" scrolling="auto" frameborder="0" :src="href"></iframe>
 </template>
 
 <script setup lang="ts">
-import { useRoute, useData } from 'vitepress';
-import { computed, watch } from 'vue'
-const baseUrl = process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
+import { useRoute, useData } from 'vitepress'
+import { computed, onMounted, ref, watch } from 'vue'
+const baseUrl =
+  process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
 
 const route = useRoute()
 const href = computed(() => {
@@ -20,19 +21,34 @@ const href = computed(() => {
   return href
 })
 
+const iframe = ref<HTMLIFrameElement | null>(null)
+
 const vitepressData = useData()
 
-
-watch(() => vitepressData.isDark.value, () => {
-  const iFrame: any = document.getElementById('demo')
-  iFrame && iFrame.contentWindow.postMessage(vitepressData.isDark.value, href.value)
+onMounted(() => {
+  iframe.value &&
+    iframe.value.addEventListener('load', () => {
+      // 在iframe加载完成后执行发送消息的操作
+      ssendMessage()
+    })
 })
 
-function kebabToCamel(input: string): string {
-  return input.replace(/-([a-z])/g, (match, group) => group.toUpperCase());
+watch(
+  () => vitepressData.isDark.value,
+  () => {
+    ssendMessage()
+  }
+)
+
+function ssendMessage() {
+  if (iframe.value && iframe.value.contentWindow) {
+    iframe.value.contentWindow.postMessage(vitepressData.isDark.value, href.value)
+  }
 }
 
-
+function kebabToCamel(input: string): string {
+  return input.replace(/-([a-z])/g, (match, group) => group.toUpperCase())
+}
 </script>
 <style scoped>
 ::-webkit-scrollbar {

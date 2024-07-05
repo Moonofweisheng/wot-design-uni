@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-radio-group  ${customClass} ${cell && shape === 'button' ? 'is-button' : ''}`">
+  <view :class="`wd-radio-group  ${customClass} ${cell && shape === 'button' ? 'is-button' : ''}`" :style="customStyle">
     <slot />
   </view>
 </template>
@@ -20,6 +20,7 @@ import { useChildren } from '../composables/useChildren'
 import { RADIO_GROUP_KEY, radioGroupProps } from './types'
 
 const props = defineProps(radioGroupProps)
+const emit = defineEmits(['change', 'update:modelValue'])
 
 const { linkChildren, children } = useChildren(RADIO_GROUP_KEY)
 
@@ -34,8 +35,6 @@ watch(
   },
   { deep: true, immediate: true }
 )
-
-const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
  * @description 处理radio子节点通知

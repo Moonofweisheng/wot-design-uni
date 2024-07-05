@@ -1,5 +1,5 @@
 <template>
-  <view :class="rootClass" :id="sliderId">
+  <view :class="rootClass" :style="customStyle" :id="sliderId">
     <!-- #ifdef MP-DINGTALK -->
     <view :id="sliderId" style="flex: 1" :class="rootClass">
       <!-- #endif -->
@@ -59,9 +59,10 @@ import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 import { getRect, isArray, isDef, isNumber, uuid } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 import { watch } from 'vue'
-import { sliderProps } from './types'
+import { sliderProps, type SliderExpose } from './types'
 
 const props = defineProps(sliderProps)
+const emit = defineEmits(['dragstart', 'dragmove', 'dragend', 'update:modelValue'])
 
 // 存放右滑轮中的所有属性
 const rightSlider = {
@@ -75,8 +76,7 @@ const touchLeft = useTouch()
 const touchRight = useTouch()
 
 const showRight = ref<boolean>(false)
-const barStyle = ref<string>('width: 0; height: 3px')
-const barHeight = ref<string>('3px')
+const barStyle = ref<string>('')
 const leftNewValue = ref<number>(0)
 const rightNewValue = ref<number>(0)
 const rightBarPercent = ref<number>(0)
@@ -94,46 +94,44 @@ const stepValue = ref<number>(1) // 步长
 watch(
   () => props.max,
   (newValue) => {
-    if (newValue < 0) {
-      maxValue.value = 100
-      console.warn('[wot design] warning(wd-slider): max value must be greater than 0')
-    } else if (newValue <= props.min) {
+    if (newValue <= props.min) {
       maxValue.value = props.min // 交换最大值和最小值
       minValue.value = newValue
       console.warn('[wot design] warning(wd-slider): max value must be greater than min value')
     } else {
       maxValue.value = newValue // 更新最大值
     }
+    calcBarPercent()
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 )
 
 watch(
   () => props.min,
   (newValue) => {
-    if (newValue < 0) {
-      minValue.value = 0
-      console.warn('[wot design] warning(wd-slider): min value must be greater than 0')
-    } else if (newValue >= props.max) {
+    if (newValue >= props.max) {
       minValue.value = props.max // 交换最小值和最大值
       maxValue.value = newValue
       console.warn('[wot design] warning(wd-slider): min value must be less than max value')
     } else {
       minValue.value = newValue // 更新最小值
     }
+    calcBarPercent()
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 )
 
 watch(
   () => props.step,
   (newValue) => {
-    if (newValue <= 0) {
+    if (newValue < 1) {
       stepValue.value = 1
       console.warn('[wot design] warning(wd-slider): step must be greater than 0')
+    } else {
+      stepValue.value = Math.floor(newValue)
     }
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 )
 
 watch(
@@ -197,15 +195,20 @@ const buttonRightStyle = computed(() => {
 })
 
 onMounted(() => {
+  initSlider()
+})
+
+/**
+ * 初始化slider宽度
+ */
+function initSlider() {
   getRect(`#${sliderId.value}`, false, proxy).then((data) => {
     // trackWidth: 轨道全长
     trackWidth.value = Number(data.width)
     // trackLeft: 轨道距离左侧的距离
     trackLeft.value = Number(data.left)
   })
-})
-
-const emit = defineEmits(['dragstart', 'dragmove', 'dragend', 'update:modelValue'])
+}
 
 function onTouchStart(event: any) {
   const { disabled, modelValue } = props
@@ -227,6 +230,7 @@ function onTouchMove(event: any) {
   // 移动间距 deltaX 就是向左(-)向右(+)
   const diff = (touchLeft.deltaX.value / trackWidth.value) * (maxValue.value - minValue.value)
   newValue.value = startValue.value + diff
+
   // 左滑轮滑动控制
   leftBarSlider(newValue.value)
   emit('dragmove', {
@@ -293,7 +297,7 @@ function leftBarSlider(value: number) {
     emit('update:modelValue', value)
     leftNewValue.value = value
     leftBarPercent.value = percent
-    barStyle.value = `width: ${percent}%; height: ${barHeight.value};`
+    barStyle.value = `width: ${percent}%; `
   } else {
     leftNewValue.value = value
     leftBarPercent.value = percent
@@ -307,7 +311,7 @@ function styleControl() {
   const barLeft =
     leftBarPercent.value < rightBarPercent.value ? [leftBarPercent.value, rightBarPercent.value] : [rightBarPercent.value, leftBarPercent.value]
   // 通过左右滑轮的间距控制 激活条宽度 barLeft[1] - barLeft[0]
-  const barStyleTemp = `width: ${barLeft[1] - barLeft[0]}%; height: ${barHeight.value}; left: ${barLeft[0]}%`
+  const barStyleTemp = `width: ${barLeft[1] - barLeft[0]}%;  left: ${barLeft[0]}%`
   currentValue.value =
     leftNewValue.value < rightNewValue.value ? [leftNewValue.value, rightNewValue.value] : [rightNewValue.value, leftNewValue.value]
   barStyle.value = barStyleTemp
@@ -333,6 +337,20 @@ function formatPercent(value: number) {
   const percentage = ((value - minValue.value) / (maxValue.value - minValue.value)) * 100
   return percentage
 }
+// 计算滑块位置和进度长度
+function calcBarPercent() {
+  const { modelValue } = props
+  let value = !isArray(modelValue) ? format(modelValue) : leftBarPercent.value < rightBarPercent.value ? format(modelValue[0]) : format(modelValue[1])
+  value = format(value)
+  // 把 value 转换成百分比
+  const percent = formatPercent(value)
+  leftBarPercent.value = percent
+  barStyle.value = `width: ${percent}%; `
+}
+
+defineExpose<SliderExpose>({
+  initSlider
+})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

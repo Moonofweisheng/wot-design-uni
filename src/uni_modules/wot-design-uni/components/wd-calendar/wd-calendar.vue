@@ -93,6 +93,7 @@
           :time-filter="timeFilter"
           :hide-second="hideSecond"
           :show-panel-title="!range(type)"
+          :immediate-change="immediateChange"
           @change="handleChange"
         />
       </view>
@@ -117,13 +118,13 @@ export default {
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { dayjs } from '../common/dayjs'
-import { deepClone, isArray, isEqual, padZero } from '../common/util'
+import { deepClone, isArray, isEqual, padZero, requestAnimationFrame } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
-import { calendarProps } from './types'
+import { calendarProps, type CalendarExpose } from './types'
 import type { CalendarType } from '../wd-calendar-view/types'
 const { translate } = useTranslate('calendar')
 
@@ -200,24 +201,36 @@ const formatRange = (value: number, rangeType: 'start' | 'end', type: CalendarTy
 }
 
 const props = defineProps(calendarProps)
+const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm'])
 
 const pickerShow = ref<boolean>(false)
 const calendarValue = ref<null | number | number[]>(null)
 const lastCalendarValue = ref<null | number | number[]>(null)
 const panelHeight = ref<number>(338)
 const confirmBtnDisabled = ref<boolean>(true)
-const showValue = ref<string>('')
 const currentTab = ref<number>(0)
 const lastTab = ref<number>(0)
 const currentType = ref<CalendarType>('date')
-const lastCurrentType = ref<CalendarType>('date')
+const lastCurrentType = ref<CalendarType>()
 const inited = ref<boolean>(false)
-const rangeLabel = ref<Array<string>>([])
-
 const cell = useCell()
-
 const calendarView = ref()
 const calendarTabs = ref()
+
+const rangeLabel = computed(() => {
+  const [start, end] = deepClone(isArray(calendarValue.value) ? calendarValue.value : [])
+  return [start, end].map((item, index) => {
+    return (props.innerDisplayFormat || formatRange)(item, index === 0 ? 'start' : 'end', currentType.value)
+  })
+})
+
+const showValue = computed(() => {
+  if ((!isArray(props.modelValue) && props.modelValue) || (isArray(props.modelValue) && props.modelValue.length)) {
+    return (props.displayFormat || defaultDisplayFormat)(props.modelValue, lastCurrentType.value || currentType.value)
+  } else {
+    return ''
+  }
+})
 
 watch(
   () => props.modelValue,
@@ -225,11 +238,6 @@ watch(
     if (isEqual(val, oldVal)) return
     calendarValue.value = deepClone(val)
     confirmBtnDisabled.value = getConfirmBtnStatus(val)
-    setShowValue()
-
-    if (props.type.indexOf('range') > -1) {
-      setInnerLabel()
-    }
   },
   {
     immediate: true
@@ -248,12 +256,6 @@ watch(
     }
     panelHeight.value = props.showConfirm ? 338 : 400
     currentType.value = deepClone(newValue)
-
-    setShowValue()
-
-    if (props.type.indexOf('range') > -1) {
-      setInnerLabel()
-    }
   },
   {
     deep: true,
@@ -303,8 +305,6 @@ const range = computed(() => {
   }
 })
 
-const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm'])
-
 function scrollIntoView() {
   calendarView.value && calendarView.value && calendarView.value.$.exposed.scrollIntoView()
 }
@@ -319,7 +319,9 @@ function open() {
   lastCalendarValue.value = deepClone(calendarValue.value)
   lastTab.value = currentTab.value
   lastCurrentType.value = currentType.value
-  scrollIntoView()
+  requestAnimationFrame(() => {
+    scrollIntoView()
+  })
 
   setTimeout(() => {
     if (props.showTypeSwitch) {
@@ -331,11 +333,10 @@ function open() {
 // 对外暴露方法
 function close() {
   pickerShow.value = false
-  scrollIntoView()
   setTimeout(() => {
     calendarValue.value = deepClone(lastCalendarValue.value)
     currentTab.value = lastTab.value
-    currentType.value = lastCurrentType.value
+    currentType.value = lastCurrentType.value || 'date'
     confirmBtnDisabled.value = getConfirmBtnStatus(lastCalendarValue.value)
   }, 250)
   emit('cancel')
@@ -369,10 +370,6 @@ function handleChange({ value }: { value: number | number[] | null }) {
     value
   })
 
-  if (props.type.indexOf('range') > -1) {
-    setInnerLabel()
-  }
-
   if (!props.showConfirm && !confirmBtnDisabled.value) {
     handleConfirm()
   }
@@ -391,25 +388,13 @@ function handleConfirm() {
 }
 function onConfirm() {
   pickerShow.value = false
+  lastCurrentType.value = currentType.value
   emit('update:modelValue', calendarValue.value)
   emit('confirm', {
     value: calendarValue.value
   })
-  setShowValue()
 }
-function setInnerLabel() {
-  const [start, end] = deepClone(isArray(calendarValue.value) ? calendarValue.value : [])
-  rangeLabel.value = [start, end].map((item, index) => {
-    return (props.innerDisplayFormat || formatRange)(item, index === 0 ? 'start' : 'end', currentType.value)
-  })
-}
-function setShowValue() {
-  if ((!(calendarValue.value instanceof Array) && calendarValue.value) || (calendarValue.value instanceof Array && calendarValue.value.length)) {
-    showValue.value = (props.displayFormat || defaultDisplayFormat)(calendarValue.value, currentType.value)
-  } else {
-    showValue.value = ''
-  }
-}
+
 function handleShortcutClick(index: number) {
   if (props.onShortcutsClick && typeof props.onShortcutsClick === 'function') {
     calendarValue.value = deepClone(
@@ -419,16 +404,17 @@ function handleShortcutClick(index: number) {
       })
     )
     confirmBtnDisabled.value = getConfirmBtnStatus(calendarValue.value)
-
-    if (props.type.indexOf('range') > -1) {
-      setInnerLabel()
-    }
   }
 
   if (!props.showConfirm) {
     handleConfirm()
   }
 }
+
+defineExpose<CalendarExpose>({
+  close,
+  open
+})
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 #  介绍
 
-`wot-design-uni`组件库基于`vue3`+`Typescript`构建，参照`wot design`的设计规范进行开发，提供60+高质量组件，支持暗黑模式、国际化和自定义主题，旨在给开发者提供统一的UI交互，同时提高研发的开发效率。
+`wot-design-uni`组件库基于`vue3`+`Typescript`构建，参照`wot design`的设计规范进行开发，提供70+高质量组件，支持暗黑模式、国际化和自定义主题，旨在给开发者提供统一的UI交互，同时提高研发的开发效率。
 
 ## 快速上手
 
@@ -21,7 +21,7 @@
 ## ✨ 特性
 
 - 🎯 多平台覆盖，支持 微信小程序、支付宝小程序、钉钉小程序、H5、APP 等.
-- 🚀 60+ 个高质量组件，覆盖移动端主流场景.
+- 🚀 70+ 个高质量组件，覆盖移动端主流场景.
 - 💪 使用 Typescript 构建，提供良好的组件类型系统.
 - 🌍 支持国际化，内置 6 种语言包.
 - 📖 提供丰富的文档和组件示例.
@@ -38,7 +38,7 @@
 * [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
 * [QQ 群](https://qm.qq.com/cgi-bin/qm/qr?k=O1Z3pal6StL39qHtABqR54Tb56igr90O&jump_from=webapi&authKey=MtVWfi/EQbT03wW7tKXv4bmyKYHBHtzI8VewlzSsOdxFjN0wbgNy17np9Z9yC4Z8)
 * [快速上手项目](https://github.com/Moonofweisheng/wot-starter)
-* [Vue3路由库](https://wot-design-uni.gitee.io/uni-mini-router/)
+* [Vue3路由库](https://moonofweisheng.github.io/uni-mini-router/)
 
 ## 开发计划
 

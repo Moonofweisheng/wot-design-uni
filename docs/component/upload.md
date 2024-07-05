@@ -13,7 +13,7 @@
 `action` 设置上传的地址；
 
 ```html
-<wd-upload :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
+<wd-upload :file-list="fileList1" image-mode="aspectFill" :action="action" @change="handleChange1"></wd-upload>
 ```
 
 ```typescript
@@ -25,7 +25,7 @@ const fileList = ref<any[]>([
 
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
 
-function handleChange({ files }) {
+function handleChange({ fileList: files }) {
   fileList.value = files
 }
 ```
@@ -386,15 +386,13 @@ const buildFormData = ({ file, formData, resolve }) => {
 
 使用默认插槽可以修改唤起上传的样式。
 
-开启`use-default-slot`属性。
-
 ```html
 <wd-upload
   :file-list="fileList"
-  use-default-slot
   action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
   @change="handleChange"
 >
+<wd-upload :file-list="fileList" :limit="5" action="https://ftf.jd.com/api/uploadImg" @change="handleChange">
   <wd-button>上传</wd-button>
 </wd-upload>
 ```
@@ -504,6 +502,7 @@ function handleChange({ files }) {
 | loading-size     | [加载中图标尺寸](/component/loading)                                                                                                                                           | string                                 | -                                              | 24px                       | -        |
 | use-default-slot | 开启默认唤起项插槽                                                                                                                                                             | boolean                                | -                                              | false                      | -        |
 | status-key       | file 数据结构中，status 对应的 key                                                                                                                                             | string                                 | -                                              | status                     | -        |
+| image-mode              | 预览图片的 mode 属性                                                                                                                                                           | ImageMode                              | -      | aspectFit                  | -        |
 | accept           | 接受的文件类型                                                                                                                                                                 | UploadFileType                         | **image** **video** **media** **file** **all** | **image**                  | 1.3.0    |
 
 ## accept 的合法值
@@ -545,3 +544,11 @@ function handleChange({ files }) {
 | change      | 上传列表修改时触发     | 选中的值 event = { fileList } 'fileList' 上传图片列表                                | -        |
 | remove      | 移除图片时触发         | event = { file } file: 移除的文件信息                                                | -        |
 | oversize    | 文件大小超过限制时触发 | event = { file } file: 尺寸超出的文件信息                                            | -        |
+
+## Upload 外部样式类
+
+| 类名                 | 说明                     | 最低版本 |
+| -------------------- | ------------------------ | -------- |
+| custom-class         | 根节点样式类             | -        |
+| custom-evoke-class   | 自定义上传按钮样式类     | -        |
+| custom-preview-class | 自定义预览图片列表样式类 | -        |

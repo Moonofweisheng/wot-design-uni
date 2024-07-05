@@ -16,10 +16,11 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount } from 'vue'
-import { addUnit, getType, objToStyle } from '../common/util'
+import { addUnit, isFunction, objToStyle } from '../common/util'
 import { switchProps } from './types'
 
 const props = defineProps(switchProps)
+const emit = defineEmits(['change', 'update:modelValue'])
 
 const rootClass = computed(() => {
   return `wd-switch ${props.customClass} ${props.disabled ? 'is-disabled' : ''} ${props.modelValue === props.activeValue ? 'is-checked' : ''}`
@@ -31,7 +32,7 @@ const rootStyle = computed(() => {
     background: props.modelValue === props.activeValue ? props.activeColor : props.inactiveColor,
     'border-color': props.modelValue === props.activeValue ? props.activeColor : props.inactiveColor
   }
-  return objToStyle(rootStyle)
+  return `${objToStyle(rootStyle)};${props.customStyle}`
 })
 
 const circleStyle = computed(() => {
@@ -42,13 +43,11 @@ const circleStyle = computed(() => {
   return circleStyle
 })
 
-const emit = defineEmits(['change', 'update:modelValue'])
-
 function switchValue() {
   if (props.disabled) return
   const newVal = props.modelValue === props.activeValue ? props.inactiveValue : props.activeValue
 
-  if (props.beforeChange && getType(props.beforeChange) === 'function') {
+  if (props.beforeChange && isFunction(props.beforeChange)) {
     props.beforeChange({
       value: newVal,
       resolve: (pass: boolean) => {

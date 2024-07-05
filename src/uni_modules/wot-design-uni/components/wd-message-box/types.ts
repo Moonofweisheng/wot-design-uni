@@ -1,6 +1,19 @@
-import { baseProps, makeBooleanProp } from '../common/props'
+/*
+ * @Author: weisheng
+ * @Date: 2024-04-08 22:34:01
+ * @LastEditTime: 2024-04-10 12:58:10
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\types.ts
+ * 记得注释
+ */
+import { baseProps } from '../common/props'
 
 export type MessageType = 'alert' | 'confirm' | 'prompt'
+
+export type MessageBeforeConfirmOption = {
+  resolve: (isPass: boolean) => void
+}
 
 export type MessageOptions = {
   /**
@@ -69,6 +82,10 @@ export type MessageOptions = {
    * 弹层内容懒渲染，触发展示时才渲染内容
    */
   lazyRender?: boolean
+  /**
+   * 确认前钩子
+   */
+  beforeConfirm?: (options: MessageBeforeConfirmOption) => void
 }
 
 export type ActionType = 'confirm' | 'cancel' | 'modal'
@@ -95,6 +112,5 @@ export interface Message {
 
 export const messageBoxProps = {
   ...baseProps,
-  useSlot: makeBooleanProp(false),
   selector: String
 }

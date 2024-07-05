@@ -120,7 +120,7 @@ function handleChange(event) {
 | v-model |	绑定值 | string / number | - | - | - |
 | placeholder	| 占位文本 |	string | - |	请输入... | - |
 | clearable | 显示清空按钮 | boolean | - | false | - |
-| maxlength | 原生属性，最大长度 | string | - | - | - |
+| maxlength | 原生属性，最大长度 | number | - | 支付宝小程序无默认值，其余平台默认为-1 | - |
 | showPassword | 显示为密码框 | boolean | - | false | - |
 | disabled | 原生属性，禁用 | boolean | - | false | - |
 | readonly | 只读 | boolean | - | false | - |

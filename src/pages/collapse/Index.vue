@@ -16,6 +16,27 @@
         </wd-collapse-item>
       </wd-collapse>
     </demo-block>
+
+    <demo-block title="自定义title" transparent>
+      <wd-collapse v-model="value7">
+        <wd-collapse-item name="item1">
+          <template #title="{ expanded }">
+            <text style="color: red">通过 slot 自定义标题</text>
+            <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
+          </template>
+          {{ desc7 }}
+        </wd-collapse-item>
+        <wd-collapse-item name="item2" disabled>
+          <template #title="{ expanded, disabled }">
+            <text v-if="disabled">被禁用</text>
+            <text style="color: red" v-else>通过 slot 自定义 title</text>
+            <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
+          </template>
+          {{ desc7 }}
+        </wd-collapse-item>
+      </wd-collapse>
+    </demo-block>
+
     <demo-block title="手风琴" transparent>
       <wd-collapse v-model="value2" :accordion="accordion" @change="handleChange2">
         <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
@@ -96,6 +117,8 @@ const value3 = ref<string[]>(['item1'])
 const value4 = ref<boolean>(false)
 const value5 = ref<boolean>(false)
 const value6 = ref<boolean>(false)
+const value7 = ref<string[]>(['item1'])
+const desc7 = '如订单处于暂停状态，进入“我的订单”页面，找到要取消的订单，点击“取消订单”按钮；选择订单取消原因后，点击“下一步”提交申请即可。'
 const accordion = ref<boolean>(true)
 const name = ref<string>('item1')
 
@@ -114,7 +137,6 @@ function handleChange4({ value }: any) {
 function handleChange5({ value }: any) {
   console.log(value)
 }
-
 function handleChange6({ value }: any) {
   console.log(value)
 }

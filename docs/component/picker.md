@@ -1,6 +1,6 @@
 <frame/>
 
-#  Picker 选择器视图
+#  Picker 选择器
 
 Picker 组件为 popup 和 pickerView 的组合。
 
@@ -262,6 +262,7 @@ function handleConfirm({ value }) {
 | ellipsis | 是否超出隐藏 | boolean | - | false | - |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
+| immediate-change | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。 | boolean | - | false | 1.2.25 |
 
 ### FormItemRule 数据结构
 

@@ -15,6 +15,7 @@
       @close="close"
       @click-modal="clickModal"
       :custom-class="`wd-curtain ${customClass}`"
+      :custom-style="customStyle"
     >
       <view class="wd-curtain__content">
         <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
@@ -40,6 +41,21 @@ import { ref, watch } from 'vue'
 import { curtainProps } from './types'
 
 const props = defineProps(curtainProps)
+
+const emit = defineEmits([
+  'beforeenter',
+  'enter',
+  'afterenter',
+  'beforeleave',
+  'leave',
+  'afterleave',
+  'close',
+  'closed',
+  'click-modal',
+  'load',
+  'error',
+  'click'
+])
 
 const show = ref<boolean>(false)
 const imgSucc = ref<boolean>(true)
@@ -67,21 +83,6 @@ watch(
     immediate: true
   }
 )
-
-const emit = defineEmits([
-  'beforeenter',
-  'enter',
-  'afterenter',
-  'beforeleave',
-  'leave',
-  'afterleave',
-  'close',
-  'closed',
-  'click-modal',
-  'load',
-  'error',
-  'click'
-])
 
 function computedShowImg() {
   if (props.value && imgSucc.value) {

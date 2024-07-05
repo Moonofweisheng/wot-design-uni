@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 import type { SwiperNavProps } from '../wd-swiper-nav/types'
+import type { ImageMode } from '../wd-img/types'
 
 /**
  * 轮播滑动方向
@@ -141,7 +142,7 @@ export const swiperProps = {
    * 类型：string
    * 默认值：'aspectFill'
    */
-  imageMode: makeStringProp('aspectFill'),
+  imageMode: makeStringProp<ImageMode>('aspectFill'),
 
   /**
    * 自定义指示器类名

@@ -236,6 +236,7 @@ function handleChange({ value }) {
 | panel-height      | 可滚动面板的高度                                                       | number                | -                                                                                           | 378                   | -        |
 | time-filter       | type 为 'datetime' 或 'datetimerange' 时有效，用于过滤时间选择器的数据 | function              | -                                                                                           | -                     | -        |
 | hide-second       | type 为 'datetime' 或 'datetimerange' 时有效，是否不展示秒修改         | boolean               | -                                                                                           | false                 | -        |
+| immediate-change | type 为 'datetime' 或 'datetimerange' 时有，是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。 | boolean | - | false | 1.2.25 |
 
 ## Events
 

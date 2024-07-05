@@ -3,6 +3,7 @@
     :class="`wd-picker ${disabled ? 'is-disabled' : ''} ${size ? 'is-' + size : ''}  ${cell.border.value ? 'is-border' : ''} ${
       alignRight ? 'is-align-right' : ''
     } ${error ? 'is-error' : ''} ${customClass}`"
+    :style="customStyle"
   >
     <!--文案-->
     <view class="wd-picker__field" @click="showPopup">
@@ -19,15 +20,20 @@
         <view class="wd-picker__body">
           <view class="wd-picker__value-wraper">
             <view :class="`wd-picker__value ${customValueClass}`">
-              <view v-if="region">
-                <text :class="(showValue as string[])[0] ? '' : 'wd-picker__placeholder'">
-                  {{ (showValue as string[])[0] ? (showValue as string[])[0] : placeholder }}
-                </text>
-                {{ translate('to') }}
-                <text :class="(showValue as string[])[1] ? '' : 'wd-picker__placeholder'">
-                  {{ (showValue as string[])[1] ? (showValue as string[])[1] : placeholder }}
-                </text>
-              </view>
+              <template v-if="region">
+                <view v-if="isArray(showValue)">
+                  <text :class="showValue[0] ? '' : 'wd-picker__placeholder'">
+                    {{ showValue[0] ? showValue[0] : placeholder || translate('placeholder') }}
+                  </text>
+                  {{ translate('to') }}
+                  <text :class="showValue[1] ? '' : 'wd-picker__placeholder'">
+                    {{ showValue[1] ? showValue[1] : placeholder || translate('placeholder') }}
+                  </text>
+                </view>
+                <view v-else class="wd-picker__placeholder">
+                  {{ placeholder || translate('placeholder') }}
+                </view>
+              </template>
               <view v-else :class="showValue ? '' : 'wd-picker__placeholder'">
                 {{ showValue ? showValue : placeholder || translate('placeholder') }}
               </view>
@@ -88,7 +94,7 @@
             :label-key="labelKey"
             :formatter="formatter"
             :filter="filter"
-            :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
+            :column-formatter="isArray(modelValue) ? customColumnFormatter : undefined"
             :max-hour="maxHour"
             :min-hour="minHour"
             :max-date="maxDate"
@@ -96,6 +102,7 @@
             :max-minute="maxMinute"
             :min-minute="minMinute"
             :start-symbol="true"
+            :immediate-change="immediateChange"
             @change="onChangeStart"
             @pickstart="onPickStart"
             @pickend="onPickEnd"
@@ -114,7 +121,7 @@
             :label-key="labelKey"
             :formatter="formatter"
             :filter="filter"
-            :column-formatter="getType(modelValue) === 'array' ? customColumnFormatter : undefined"
+            :column-formatter="isArray(modelValue) ? customColumnFormatter : undefined"
             :max-hour="maxHour"
             :min-hour="minHour"
             :max-date="maxDate"
@@ -122,6 +129,7 @@
             :max-minute="maxMinute"
             :min-minute="minMinute"
             :start-symbol="false"
+            :immediate-change="immediateChange"
             @change="onChangeEnd"
             @pickstart="onPickStart"
             @pickend="onPickEnd"
@@ -145,7 +153,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
-import { deepClone, getType, isArray, isDef, isEqual, padZero } from '../common/util'
+import { deepClone, isArray, isDef, isEqual, isFunction, padZero } from '../common/util'
 import { useCell } from '../composables/useCell'
 import {
   getPickerValue,
@@ -159,13 +167,14 @@ import { useTranslate } from '../composables/useTranslate'
 import { datetimePickerProps, type DatetimePickerExpose } from './types'
 
 const props = defineProps(datetimePickerProps)
+const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
 
 const { translate } = useTranslate('datetime-picker')
 
 const datetimePickerView = ref<DatetimePickerViewInstance>()
 const datetimePickerView1 = ref<DatetimePickerViewInstance>()
 
-const showValue = ref<string | Date | Array<string | Date>>([])
+const showValue = ref<string | Date | Array<string | Date>>('')
 const popupShow = ref<boolean>(false)
 const showStart = ref<boolean>(true)
 const region = ref<boolean>(false)
@@ -186,7 +195,7 @@ watch(
   (val, oldVal) => {
     if (isEqual(val, oldVal)) return
 
-    if (getType(val) === 'array') {
+    if (isArray(val)) {
       region.value = true
       innerValue.value = deepClone(getDefaultInnerValue(true))
       endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
@@ -207,7 +216,7 @@ watch(
 watch(
   () => props.displayFormat,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of displayFormat must be Function')
     }
   },
@@ -219,7 +228,7 @@ watch(
 watch(
   () => props.filter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of filter must be Function')
     }
   },
@@ -231,7 +240,7 @@ watch(
 watch(
   () => props.formatter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of formatter must be Function')
     }
   },
@@ -243,7 +252,7 @@ watch(
 watch(
   () => props.beforeConfirm,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforeConfirm must be Function')
     }
   },
@@ -255,7 +264,7 @@ watch(
 watch(
   () => props.displayFormatTabLabel,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of displayFormatTabLabel must be Function')
     }
   },
@@ -268,7 +277,7 @@ watch(
 watch(
   () => props.defaultValue,
   (val) => {
-    if (getType(val) === 'array' || region.value) {
+    if (isArray(val) || region.value) {
       innerValue.value = deepClone(getDefaultInnerValue(true))
       endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
     } else {
@@ -306,8 +315,6 @@ const isRequired = computed(() => {
   return props.required || props.rules.some((rule) => rule.required) || formRequired
 })
 
-const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
-
 /**
  * @description 自定义列项筛选规则，对每列单项进行禁用校验，最终返回传入PickerView的columns数组
  * @param {Component} picker datetimePickerView对象
@@ -322,6 +329,7 @@ const customColumnFormatter: DatetimePickerViewColumnFormatter = (picker) => {
   // 校准上下方picker的value值，与内部innerValue对应
   const start = picker.correctValue(innerValue.value)
   const end = picker.correctValue(endInnerValue.value)
+
   /**
    * 如果是上方picekr 那么将下方picker的值作为下边界
    * 如果是下方picekr 那么将上方picker的值作为上边界
@@ -346,7 +354,7 @@ const customColumnFormatter: DatetimePickerViewColumnFormatter = (picker) => {
 
 onBeforeMount(() => {
   const { modelValue: value } = props
-  if (getType(value) === 'array') {
+  if (isArray(value)) {
     region.value = true
     innerValue.value = deepClone(getDefaultInnerValue(true))
     endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
@@ -380,14 +388,18 @@ function getSelects(picker: 'before' | 'after') {
 
 function noop() {}
 
-function getDefaultInnerValue(isRegion?: boolean, isEnd?: boolean): string {
+function getDefaultInnerValue(isRegion?: boolean, isEnd?: boolean): string | number {
   const { modelValue: value, defaultValue } = props
 
   if (isRegion) {
     if (isEnd) {
-      return (isArray(value) ? (value[1] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[1] as string) : '')
+      return (
+        (isArray(value) ? (value[1] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[1] as string) : '') || props.maxDate
+      )
     } else {
-      return (isArray(value) ? (value[0] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[0] as string) : '')
+      return (
+        (isArray(value) ? (value[0] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[0] as string) : '') || props.minDate
+      )
     }
   } else {
     return isDef(value || defaultValue) ? (value as string) || (defaultValue as string) : ''
@@ -448,7 +460,6 @@ function onChangeStart({ value }: { value: number | string }) {
     datetimePickerView.value && datetimePickerView.value.setColumns(datetimePickerView.value.updateColumns())
     datetimePickerView1.value && datetimePickerView1.value.setColumns(datetimePickerView1.value.updateColumns())
   } else {
-    // emit('update:modelValue', innerValue.value)
     emit('change', {
       value: innerValue.value
     })
@@ -460,9 +471,7 @@ function onChangeStart({ value }: { value: number | string }) {
  */
 function onChangeEnd({ value }: { value: number | string }) {
   endInnerValue.value = deepClone(value)
-
   showTabLabel.value = [deepClone(showTabLabel.value[0]), setTabLabel(1)]
-  // emit('update:modelValue', [innerValue.value, value])
   emit('change', {
     value: [innerValue.value, value]
   })
@@ -618,6 +627,7 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
      * 但使用模拟nextTick会造成页面延迟展示问题，对用户感知来讲不友好，因此不适用该方法
      */
     const typeMaps = {
+      year: ['year'],
       datetime: ['year', 'month', 'date', 'hour', 'minute'],
       date: ['year', 'month', 'date'],
       time: ['hour', 'minute'],
@@ -631,6 +641,8 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
   }
 
   switch (props.type) {
+    case 'year':
+      return items[0].label
     case 'date':
       return `${items[0].label}-${items[1].label}-${items[2].label}`
     case 'year-month':
@@ -700,6 +712,12 @@ function columnDisabledRules(
     }
     if (column.type === 'month' && currentValue[0] === year) {
       return isStart ? value > month : value < month
+    }
+  } else if (type === 'year') {
+    const year = boundary[0]
+
+    if (column.type === 'year') {
+      return isStart ? value > year : value < year
     }
   } else if (type === 'date') {
     const year = boundary[0]

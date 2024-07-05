@@ -50,16 +50,19 @@ import {
   getWeekRange
 } from '../utils'
 import { useToast } from '../../wd-toast'
-import { deepClone, getType, isArray } from '../../common/util'
+import { deepClone, isArray, isFunction } from '../../common/util'
 import { useTranslate } from '../../composables/useTranslate'
 import type { CalendarDayItem, CalendarDayType, CalendarType } from '../types'
 import { monthProps } from './types'
 
 const props = defineProps(monthProps)
+const emit = defineEmits(['change'])
 
 const { translate } = useTranslate('calendar-view')
 
 const days = ref<Array<CalendarDayItem>>([])
+
+const toast = useToast('wd-month')
 
 const itemClass = computed(() => {
   return (monthType: CalendarDayType, value: number | (number | null)[], type: CalendarType) => {
@@ -88,10 +91,6 @@ watch(
     immediate: true
   }
 )
-
-const toast = useToast('wd-month')
-
-const emit = defineEmits(['change'])
 
 function setDays() {
   const dayList: Array<CalendarDayItem> = []
@@ -348,7 +347,7 @@ function getFormatterDate(date: number, day: string | number, type?: CalendarDay
     disabled: compareDate(date, props.minDate) === -1 || compareDate(date, props.maxDate) === 1
   }
   if (props.formatter) {
-    if (getType(props.formatter) === 'function') {
+    if (isFunction(props.formatter)) {
       dayObj = props.formatter(dayObj)
     } else {
       console.error('[wot-design] error(wd-calendar-view): the formatter prop of wd-calendar-view should be a function')

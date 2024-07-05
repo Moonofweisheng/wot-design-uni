@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-tab ${customClass}`">
+  <view :class="`wd-tab ${customClass}`" :style="customStyle">
     <view v-if="painted" class="wd-tab__body" :style="isShow ? '' : 'display: none;'">
       <slot />
     </view>
@@ -17,7 +17,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { getCurrentInstance, ref, watch } from 'vue'
-import { getType, isDef } from '../common/util'
+import { isDef, isNumber, isString } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { TABS_KEY } from '../wd-tabs/types'
 import { computed } from 'vue'
@@ -38,7 +38,7 @@ const activeIndex = computed(() => {
 watch(
   () => props.name,
   (newValue) => {
-    if (newValue && getType(newValue) !== 'number' && getType(newValue) !== 'string') {
+    if (isDef(newValue) && !isNumber(newValue) && !isString(newValue)) {
       console.error('[wot design] error(wd-tab): the type of name should be number or string')
       return
     }
@@ -99,4 +99,3 @@ defineExpose({
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-tabs/type

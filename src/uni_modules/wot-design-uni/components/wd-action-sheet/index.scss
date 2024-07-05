@@ -42,7 +42,7 @@
   }
 }
 
-:deep(.wd-action-sheet__popup){
+:deep(.wd-action-sheet__popup) {
   border-radius: $-action-sheet-radius $-action-sheet-radius 0 0;
 }
 
@@ -78,12 +78,13 @@
       display: none;
     }
 
-    &:active {
+    &:not(&--disabled):not(&--loading):active {
       background: $-action-sheet-active-color;
     }
 
     @include m(disabled) {
       color: $-action-sheet-disabled-color;
+      cursor: not-allowed;
     }
 
     @include m(loading) {

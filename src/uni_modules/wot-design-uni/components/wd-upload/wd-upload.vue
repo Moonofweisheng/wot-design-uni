@@ -1,10 +1,10 @@
 <template>
-  <view :class="['wd-upload', customClass]">
+  <view :class="['wd-upload', customClass]" :style="customStyle">
     <!-- 预览列表 -->
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
-        <image v-if="isImage(file)" :src="file.url" mode="aspectFit" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <image v-if="isImage(file)" :src="file.url" :mode="imageMode" class="wd-upload__picture" @click="onPreviewImage(index)" />
         <video
           v-else-if="isVideo(file)"
           @click="onPreviewVideo(file)"
@@ -54,19 +54,18 @@
       <wd-icon v-if="file.status !== 'loading' && !disabled" name="error-fill" custom-class="wd-upload__close" @click="removeFile(index)"></wd-icon>
     </view>
 
-    <view @click="handleChoose">
-      <slot v-if="useDefaultSlot"></slot>
+    <block v-if="showUpload">
+      <view :class="['wd-upload__evoke-slot', customEvokeClass]" v-if="$slots.default" @click="handleChoose">
+        <slot></slot>
+      </view>
       <!-- 唤起项 -->
-      <view
-        v-if="!useDefaultSlot && (!limit || uploadFiles.length < limit)"
-        :class="['wd-upload__evoke', disabled ? 'is-disabled' : '', customEvokeClass]"
-      >
+      <view v-else @click="handleChoose" :class="['wd-upload__evoke', disabled ? 'is-disabled' : '', customEvokeClass]">
         <!-- 唤起项图标 -->
         <wd-icon class="wd-upload__evoke-icon" name="fill-camera"></wd-icon>
         <!-- 有限制个数时确认是否展示限制个数 -->
         <view v-if="limit && showLimitNum" class="wd-upload__evoke-num">（{{ uploadFiles.length }}/{{ limit }}）</view>
       </view>
-    </view>
+    </block>
   </view>
   <wd-video-preview ref="videoPreview"></wd-video-preview>
 </template>
@@ -83,18 +82,21 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
-import { context, getType, isEqual, isImageUrl, isVideoUrl } from '../common/util'
+import { computed, ref, watch } from 'vue'
+import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
 import type { VideoPreviewInstance } from '../wd-video-preview/types'
 
 const props = defineProps(uploadProps)
+const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
 
 const { translate } = useTranslate('upload')
 
 const uploadFiles = ref<UploadFileItem[]>([])
+
+const showUpload = computed(() => !props.limit || uploadFiles.value.length < props.limit)
 
 const videoPreview = ref<VideoPreviewInstance>()
 
@@ -132,7 +134,7 @@ watch(
 watch(
   () => props.beforePreview,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforePreview must be Function')
     }
   },
@@ -145,7 +147,7 @@ watch(
 watch(
   () => props.onPreviewFail,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of onPreviewFail must be Function')
     }
   },
@@ -158,7 +160,7 @@ watch(
 watch(
   () => props.beforeRemove,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeRemove must be Function')
     }
   },
@@ -171,7 +173,7 @@ watch(
 watch(
   () => props.beforeUpload,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeUpload must be Function')
     }
   },
@@ -184,7 +186,7 @@ watch(
 watch(
   () => props.beforeChoose,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of beforeChoose must be Function')
     }
   },
@@ -197,7 +199,7 @@ watch(
 watch(
   () => props.buildFormData,
   (fn) => {
-    if (fn && getType(fn) !== 'function' && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
       console.error('The type of buildFormData must be Function')
     }
   },
@@ -206,8 +208,6 @@ watch(
     immediate: true
   }
 )
-
-const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
 
 /**
  * @description 初始化文件数据

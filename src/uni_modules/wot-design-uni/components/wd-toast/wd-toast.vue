@@ -1,5 +1,6 @@
 <template>
-  <wd-transition name="fade" :show="show" :custom-style="transitionStyle">
+  <wd-overlay v-if="cover" :z-index="zIndex" lock-scroll :show="show" custom-style="background-color: transparent;pointer-events: auto;"></wd-overlay>
+  <wd-transition name="fade" :show="show" :custom-style="transitionStyle" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave">
     <view :class="rootClass">
       <!--iconName优先级更高-->
       <wd-loading v-if="iconName === 'loading'" :type="loadingType" :color="loadingColor" custom-class="wd-toast__icon" :customStyle="loadingStyle" />
@@ -31,11 +32,11 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, inject, onBeforeMount, ref, watch } from 'vue'
+import { computed, inject, onBeforeMount, ref, watch, type CSSProperties } from 'vue'
 import base64 from '../common/base64'
 import { defaultOptions, toastDefaultOptionKey, toastIcon } from '.'
 import { toastProps, type ToastLoadingType, type ToastOptions } from './types'
-import { isDef, objToStyle } from '../common/util'
+import { isDef, isFunction, objToStyle } from '../common/util'
 
 const props = defineProps(toastProps)
 
@@ -49,6 +50,11 @@ const loadingType = ref<ToastLoadingType>('outline')
 const loadingColor = ref<string>('#4D80F0')
 const iconSize = ref<number>(42)
 const svgStr = ref<string>('') // 图标
+const cover = ref<boolean>(false) // 是否存在遮罩层
+
+let opened: (() => void) | null = null
+
+let closed: (() => void) | null = null
 
 const toastOptionKey = props.selector ? toastDefaultOptionKey + props.selector : toastDefaultOptionKey
 const toastOption = inject(toastOptionKey, ref<ToastOptions>(defaultOptions)) // toast选项
@@ -81,7 +87,7 @@ watch(
  * 动画自定义样式
  */
 const transitionStyle = computed(() => {
-  const style: Record<string, string | number> = {
+  const style: CSSProperties = {
     'z-index': zIndex.value,
     position: 'fixed',
     top: '50%',
@@ -97,7 +103,7 @@ const transitionStyle = computed(() => {
  * 加载自定义样式
  */
 const loadingStyle = computed(() => {
-  const style: Record<string, string | number> = {
+  const style: CSSProperties = {
     display: 'inline-block',
     'margin-right': '16px'
   }
@@ -114,6 +120,18 @@ onBeforeMount(() => {
   buildSvg()
 })
 
+function handleAfterEnter() {
+  if (isFunction(opened)) {
+    opened()
+  }
+}
+
+function handleAfterLeave() {
+  if (isFunction(closed)) {
+    closed()
+  }
+}
+
 function buildSvg() {
   if (iconName.value !== 'success' && iconName.value !== 'warning' && iconName.value !== 'info' && iconName.value !== 'error') return
   const iconSvg = toastIcon[iconName.value]()
@@ -127,15 +145,21 @@ function buildSvg() {
  */
 function reset(option: ToastOptions) {
   if (option) {
-    iconName.value = isDef(option.iconName!) ? option.iconName! : iconName.value
-    customIcon.value = isDef(option.customIcon!) ? option.customIcon! : customIcon.value
-    msg.value = isDef(option.msg!) ? option.msg! : msg.value
-    position.value = isDef(option.position!) ? option.position! : position.value
-    show.value = isDef(option.show!) ? option.show! : show.value
-    zIndex.value = isDef(option.zIndex!) ? option.zIndex! : zIndex.value
-    loadingType.value = isDef(option.loadingType!) ? option.loadingType! : loadingType.value
-    loadingColor.value = isDef(option.loadingColor!) ? option.loadingColor! : loadingColor.value
-    iconSize.value = isDef(option.iconSize!) ? option.iconSize! : iconSize.value
+    show.value = isDef(option.show) ? option.show : false
+
+    if (show.value) {
+      iconName.value = isDef(option.iconName!) ? option.iconName! : ''
+      customIcon.value = isDef(option.customIcon!) ? option.customIcon! : false
+      msg.value = isDef(option.msg!) ? option.msg! : ''
+      position.value = isDef(option.position!) ? option.position! : 'middle'
+      zIndex.value = isDef(option.zIndex!) ? option.zIndex! : 100
+      loadingType.value = isDef(option.loadingType!) ? option.loadingType! : 'outline'
+      loadingColor.value = isDef(option.loadingColor!) ? option.loadingColor! : '#4D80F0'
+      iconSize.value = isDef(option.iconSize!) ? option.iconSize! : 42
+      cover.value = isDef(option.cover!) ? option.cover! : false
+      closed = isFunction(option.closed) ? option.closed : null
+      opened = isFunction(option.opened) ? option.opened : null
+    }
   }
 }
 </script>

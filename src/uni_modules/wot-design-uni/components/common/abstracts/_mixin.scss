@@ -8,7 +8,7 @@
   * BEM，定义块（b)
   */
 @mixin b($block) {
-  $B: $namespace + "-" + $block !global;
+  $B: $namespace + "-"+ $block !global;
 
   .#{$B} {
     @content;
@@ -24,6 +24,7 @@
     @each $item in $element {
       $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
     }
+
     @at-root {
       #{$selector} {
         #{$selectors} {
@@ -31,10 +32,13 @@
         }
       }
     }
-  } @else {
+  }
+
+  @else {
     @each $item in $element {
       $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
     }
+
     @at-root {
       #{$selectors} {
         @content;
@@ -44,17 +48,7 @@
 }
 
 
-/* 此方法用于生成穿透样式 */
-/**
-  * BEM，定义块（b)
-  */
-  @mixin bdeep($block) {
-    $B: $namespace + "-" + $block !global;
-  
-    .#{$B}{
-      @content;
-    }
-  }
+
 /* 此方法用于生成穿透样式 */
 
 /* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
@@ -66,20 +60,28 @@
     @each $item in $element {
       $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
     }
+
     @at-root {
       #{$selector} {
-        :deep(#{$selectors}) {
-          @content;
+        :deep() {
+          #{$selectors} {
+            @content;
+          }
         }
       }
     }
-  } @else {
+  }
+
+  @else {
     @each $item in $element {
       $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
     }
+
     @at-root {
-      :deep(#{$selectors}) {
-        @content;
+      :deep() {
+        #{$selectors} {
+          @content;
+        }
       }
     }
   }
@@ -89,6 +91,7 @@
 /* 定义状态（m） */
 @mixin m($modifier...) {
   $selectors: "";
+
   @each $item in $modifier {
     $selectors: #{$selectors + & + $modifierSeparator + $item + ","};
   }
@@ -99,6 +102,7 @@
     }
   }
 }
+
 /* 对于需要需要嵌套在 m 底下的 e，调用这个混合宏，一般在切换整个组件的状态，如切换颜色的时候 */
 @mixin me($element...) {
   $selector: &;
@@ -108,6 +112,7 @@
     @each $item in $element {
       $selectors: #{$selectors + "." + $B + $elementSeparator + $item + ","};
     }
+
     @at-root {
       #{$selector} {
         #{$selectors} {
@@ -115,10 +120,13 @@
         }
       }
     }
-  } @else {
+  }
+
+  @else {
     @each $item in $element {
       $selectors: #{$selectors + $selector + $elementSeparator + $item + ","};
     }
+
     @at-root {
       #{$selectors} {
         @content;
@@ -172,22 +180,31 @@
 /* 0.5px 边框 指定方向*/
 @mixin halfPixelBorder($direction: "bottom", $left: 0, $color: $-color-border-light) {
   position: relative;
+
   &::after {
     position: absolute;
     display: block;
     content: "";
-    @if ($left == 0) {
+
+    @if ($left==0) {
       width: 100%;
-    } @else {
+    }
+
+    @else {
       width: calc(100% - #{$left});
     }
+
     height: 1px;
     left: $left;
-    @if ($direction == "bottom") {
+
+    @if ($direction=="bottom") {
       bottom: 0;
-    } @else {
+    }
+
+    @else {
       top: 0;
     }
+
     transform: scaleY(0.5);
     background: $color;
   }
@@ -197,6 +214,7 @@
 /* 0.5px 边框 环绕 */
 @mixin halfPixelBorderSurround($color: $-color-border-light) {
   position: relative;
+
   &::after {
     position: absolute;
     display: block;
@@ -212,6 +230,7 @@
     transform-origin: left top;
   }
 }
+
 @mixin buttonClear {
   outline: none;
   -webkit-appearance: none;
@@ -238,6 +257,7 @@
     transform: translateX(-50%);
     bottom: calc(-1 * $size)
   }
+
   @include e(arrow-up) {
     border-left: $size solid transparent;
     border-right: $size solid transparent;
@@ -245,6 +265,7 @@
     transform: translateX(-50%);
     top: calc(-1 * $size)
   }
+
   @include e(arrow-left) {
     border-top: $size solid transparent;
     border-bottom: $size solid transparent;
@@ -252,6 +273,7 @@
     transform: translateY(-50%);
     left: calc(-1 * $size)
   }
+
   @include e(arrow-right) {
     border-top: $size solid transparent;
     border-bottom: $size solid transparent;
@@ -286,26 +308,34 @@
       height: $size;
       background-color: $bg;
       position: absolute;
+      left: 0;
       bottom: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
   }
+
   @include e(arrow-up) {
     transform: translateX(-50%);
+    top: 0;
+
     &:after {
       content: "";
       width: $size;
       height: $size;
       background-color: $bg;
       position: absolute;
+      left: 0;
       top: calc(-1 * $size / 2);
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
   }
+
   @include e(arrow-left) {
     transform: translateY(-50%);
+    left: 0;
+
     &:after {
       content: "";
       width: $size;
@@ -313,12 +343,16 @@
       background-color: $bg;
       position: absolute;
       left: calc(-1 * $size / 2);
+      top: 0;
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }
   }
+
   @include e(arrow-right) {
     transform: translateY(-50%);
+    right: 0;
+
     &:after {
       content: "";
       width: $size;
@@ -326,6 +360,7 @@
       background-color: $bg;
       position: absolute;
       right: calc(-1 * $size / 2);
+      top: 0;
       transform: rotateZ(45deg);
       box-shadow: $box-shadow;
     }

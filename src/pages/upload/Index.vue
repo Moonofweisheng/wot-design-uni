@@ -6,7 +6,7 @@
     <wd-message-box></wd-message-box>
     <wd-toast id="wd-toast"></wd-toast>
     <demo-block title="基本用法">
-      <wd-upload accept="image" :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
+      <wd-upload accept="image" :file-list="fileList" image-mode="aspectFill" :action="action" @change="handleChange"></wd-upload>
     </demo-block>
     <demo-block title="最大上传数限制">
       <wd-upload :file-list="fileList3" :limit="3" :action="action" @change="handleChange3"></wd-upload>
@@ -33,11 +33,8 @@
     <demo-block title="禁用">
       <wd-upload :file-list="fileList8" disabled :action="action" @change="handleChange8"></wd-upload>
     </demo-block>
-    <demo-block title="多选上传">
-      <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
-    </demo-block>
-    <demo-block title="自定义唤起上传样式">
-      <wd-upload :file-list="fileList9" :action="action" @change="handleChange9" use-default-slot>
+    <demo-block title="自定义唤起上传样式并限制上传5张">
+      <wd-upload :file-list="fileList9" :action="action" @change="handleChange9" :limit="5">
         <wd-button>自定义唤起样式</wd-button>
       </wd-upload>
     </demo-block>
@@ -77,7 +74,7 @@ import { ref } from 'vue'
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
 const fileList = ref<UploadFile[]>([
   {
-    url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
+    url: 'https://img.yzcdn.cn/vant/cat.jpeg'
   }
 ])
 

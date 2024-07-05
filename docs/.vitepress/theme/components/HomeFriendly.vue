@@ -5,7 +5,6 @@ import VPFeature from 'vitepress/dist/client/theme-default/components/VPFeature.
 
 const { data } = useFriendly()
 
-
 const links = computed(() => {
   return data.value.length ? data.value : []
 })
@@ -27,8 +26,12 @@ const grid = computed(() => {
 
       <div class="items">
         <div v-for="feature in links" :key="feature.title" class="item" :class="[grid]">
-          <VPFeature :icon="{ src: feature.icon, height: '48px', width: 'auto' }" :title="feature.title"
-            :details="feature.details" :link="feature.link" />
+          <VPFeature
+            :icon="{ src: feature.icon, height: '48px', width: 'auto' }"
+            :title="feature.title"
+            :details="feature.details"
+            :link="feature.link"
+          />
         </div>
       </div>
     </div>
@@ -40,6 +43,21 @@ const grid = computed(() => {
   position: relative;
   padding: 0 24px;
 }
+
+:deep(.VPImage) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  /* background-color: var(--vp-c-default-soft); */
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  transition: background-color 0.25s;
+}
+
+ 
 
 @media (min-width: 640px) {
   .VPFeatures {
@@ -77,7 +95,6 @@ const grid = computed(() => {
 }
 
 @media (min-width: 640px) {
-
   .item.grid-2,
   .item.grid-4,
   .item.grid-6 {
@@ -86,7 +103,6 @@ const grid = computed(() => {
 }
 
 @media (min-width: 768px) {
-
   .item.grid-2,
   .item.grid-4 {
     width: calc(100% / 2);
@@ -104,4 +120,3 @@ const grid = computed(() => {
   }
 }
 </style>
-

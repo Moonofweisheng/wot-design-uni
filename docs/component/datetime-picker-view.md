@@ -43,6 +43,17 @@ const value = ref<number>(Date.now())
 const value = ref<number>(Date.now())
 ```
 
+## year 类型
+
+`year` 类型只展示年月。
+
+```html
+<wd-datetime-picker-view type="year" v-model="value" label="年" />
+```
+```typescript
+const value = ref<number>(Date.now())
+```
+
 ## time 类型
 
 `time` 类型只展示时分，绑定值为 `HH:mm` 格式。
@@ -110,7 +121,7 @@ const filter = (type, values) => {
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
 | v-model | 选中项，当 type 为 time 时，类型为字符串，否则为 Date | string / date | - | - |
-| type | 选择器类型 | string | date / year-month / time | datetime | - |
+| type | 选择器类型 | string | date / year-month / time / year | datetime | - |
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |
 | columns-height | picker内部滚筒高 | number | - | 231 | - |
@@ -122,6 +133,7 @@ const filter = (type, values) => {
 | maxHour | 最大小时，time类型时生效 | number | - | 23 | - |
 | minMinute | 最小分钟，time类型时生效 | number | - | 0 | - |
 | maxMinute | 最大分钟，time类型时生效 | number | - | 59 | - |
+| immediate-change | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。 | boolean | - | false | 1.2.25 |
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |

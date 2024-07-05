@@ -28,6 +28,8 @@ import { useChildren } from '../composables/useChildren'
 import { TABBAR_KEY, tabbarProps } from './types'
 
 const props = defineProps(tabbarProps)
+const emit = defineEmits(['change', 'update:modelValue'])
+
 const height = ref<number | string>('') // 占位高度
 const { proxy } = getCurrentInstance() as any
 
@@ -62,8 +64,6 @@ onMounted(() => {
   }
 })
 
-const emit = defineEmits(['change', 'update:modelValue'])
-
 /**
  * 子项状态变更
  * @param child 子项
@@ -89,4 +89,3 @@ function setPlaceholderHeight() {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-../wd-tabbar-item/type./type

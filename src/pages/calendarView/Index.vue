@@ -43,6 +43,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
+import type { CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
 import { ref } from 'vue'
 
 const type1 = ref<any>('date')
@@ -68,7 +69,7 @@ const timeFilter = ({ type, values }: any) => {
   return values
 }
 
-const formatter = (day: any) => {
+const formatter: CalendarFormatter = (day) => {
   const date = new Date(day.date)
   const now = new Date()
 

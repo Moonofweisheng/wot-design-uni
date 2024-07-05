@@ -21,6 +21,7 @@
   :img-src="src"
   @confirm="handleConfirm"
   @cancel="handleCancel"
+>
 </wd-img-cropper>
 <view class="profile">
   <view v-if="!imgSrc" class="img" @click="upload">

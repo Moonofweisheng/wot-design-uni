@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-select-picker ${cell.border.value ? 'is-border' : ''} ${customClass}`">
+  <view :class="`wd-select-picker ${cell.border.value ? 'is-border' : ''} ${customClass}`" :style="customStyle">
     <view class="wd-select-picker__field" @click="open">
       <slot v-if="useDefaultSlot"></slot>
       <view
@@ -97,7 +97,7 @@
         </view>
       </scroll-view>
       <!-- 确认按钮 -->
-      <view class="wd-select-picker__footer">
+      <view v-if="showConfirm" class="wd-select-picker__footer">
         <wd-button block size="large" @click="onConfirm" :disabled="loading">{{ confirmButtonText || translate('confirm') }}</wd-button>
       </view>
     </wd-action-sheet>
@@ -117,7 +117,7 @@ export default {
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch, nextTick, computed } from 'vue'
 import { useCell } from '../composables/useCell'
-import { getRect, getType, isArray, isDef, requestAnimationFrame } from '../common/util'
+import { getRect, isArray, isDef, isFunction, requestAnimationFrame } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useTranslate } from '../composables/useTranslate'
@@ -126,6 +126,7 @@ import { selectPickerProps, type SelectPickerExpose } from './types'
 const { translate } = useTranslate('select-picker')
 
 const props = defineProps(selectPickerProps)
+const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue', 'open', 'close'])
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
@@ -194,7 +195,7 @@ watch(
 watch(
   () => props.displayFormat,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of displayFormat must be Function')
     }
   },
@@ -207,7 +208,7 @@ watch(
 watch(
   () => props.beforeConfirm,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforeConfirm must be Function')
     }
   },
@@ -247,14 +248,12 @@ onBeforeMount(() => {
   filterColumns.value = props.columns
 })
 
-const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue'])
-
 const { proxy } = getCurrentInstance() as any
 
 function setScrollIntoView() {
   let wraperSelector: string = ''
   let selectorPromise: Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>[] = []
-  if (isDef(selectList.value) && !isArray(selectList.value)) {
+  if (isDef(selectList.value) && selectList.value !== '' && !isArray(selectList.value)) {
     wraperSelector = '#wd-radio-group'
     selectorPromise = [getRect(`#radio${selectList.value}`, false, proxy)]
   } else if (isArray(selectList.value) && selectList.value.length > 0) {
@@ -319,6 +318,9 @@ function valueFormat(value: string | number | boolean | (string | number | boole
 function handleChange({ value }: { value: string | number | boolean | (string | number | boolean)[] }) {
   selectList.value = value
   emit('change', { value })
+  if (props.type === 'radio' && !props.showConfirm) {
+    onConfirm()
+  }
 }
 
 function close() {
@@ -328,6 +330,7 @@ function close() {
     selectList.value = valueFormat(lastSelectList.value)
   }
   emit('cancel')
+  emit('close')
 }
 
 function open() {
@@ -335,12 +338,14 @@ function open() {
   selectList.value = valueFormat(props.modelValue)
   pickerShow.value = true
   isConfirm.value = false
+  emit('open')
 }
 
 function onConfirm() {
   if (props.loading) {
     pickerShow.value = false
     emit('confirm')
+    emit('close')
     return
   }
   if (props.beforeConfirm) {
@@ -369,6 +374,7 @@ function handleConfirm() {
     value: lastSelectList.value,
     selectedItems
   })
+  emit('close')
 }
 
 function getFilterText(label: string, filterVal: string) {
@@ -411,6 +417,10 @@ function formatFilterColumns(columns: Record<string, any>[], filterVal: string) 
     filterColumns.value = formatFilterColumns
   })
 }
+
+const showConfirm = computed(() => {
+  return (props.type === 'radio' && props.showConfirm) || props.type === 'checkbox'
+})
 
 defineExpose<SelectPickerExpose>({
   close,

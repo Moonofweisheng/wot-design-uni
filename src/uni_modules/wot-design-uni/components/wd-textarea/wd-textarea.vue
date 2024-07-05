@@ -82,6 +82,19 @@ import { textareaProps } from './types'
 const { translate } = useTranslate('textarea')
 
 const props = defineProps(textareaProps)
+const emit = defineEmits([
+  'update:modelValue',
+  'clear',
+  'change',
+  'blur',
+  'focus',
+  'input',
+  'keyboardheightchange',
+  'confirm',
+  'linechange',
+  'clickprefixicon',
+  'click'
+])
 
 const showClear = ref<boolean>(false)
 const showWordCount = ref<boolean>(false)
@@ -170,20 +183,6 @@ const labelStyle = computed(() => {
       })
     : ''
 })
-
-const emit = defineEmits([
-  'update:modelValue',
-  'clear',
-  'change',
-  'blur',
-  'focus',
-  'input',
-  'keyboardheightchange',
-  'confirm',
-  'linechange',
-  'clickprefixicon',
-  'click'
-])
 
 onBeforeMount(() => {
   initState()

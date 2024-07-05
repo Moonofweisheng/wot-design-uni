@@ -60,6 +60,10 @@
       <demo-block title="带图标的基本按钮">
         <wd-button icon="download">下载</wd-button>
         <wd-button icon="setting">设置</wd-button>
+        <wd-button icon="download" size="small">下载</wd-button>
+        <wd-button icon="setting" size="small">设置</wd-button>
+        <wd-button icon="download" size="large">下载</wd-button>
+        <wd-button icon="setting" size="large">设置</wd-button>
       </demo-block>
       <demo-block title="块状按钮，宽度100%">
         <wd-button block size="large">主要按钮</wd-button>

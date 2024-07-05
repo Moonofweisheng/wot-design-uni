@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-grid ${customClass}`" :style="gutter ? 'padding-left:' + gutter + 'px;' + 'padding-bottom:' + gutter + 'px;' : ''">
+  <view :class="`wd-grid ${customClass}`" :style="rootStyle">
     <!-- 默认插入的 item -->
     <slot />
   </view>
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useChildren } from '../composables/useChildren'
 import { GRID_KEY, gridProps } from './types'
 import { debounce } from '../common/util'
@@ -71,6 +71,10 @@ watch(
     deep: true
   }
 )
+
+const rootStyle = computed(() => {
+  return `${props.gutter ? 'padding-left:' + props.gutter + 'px;' + 'padding-bottom:' + props.gutter + 'px;' : ''}${props.customStyle}`
+})
 
 const handleChildrenChange = debounce(() => {
   init()

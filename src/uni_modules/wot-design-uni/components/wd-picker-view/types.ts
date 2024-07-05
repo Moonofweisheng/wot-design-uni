@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
-import { getType } from '../common/util'
+import { getType, isArray, isObj } from '../common/util'
 
 export type ColumnItem = {
   [key: string]: any
@@ -39,6 +39,10 @@ export const pickerViewProps = {
    */
   labelKey: makeStringProp('label'),
   /**
+   * 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
+   */
+  immediateChange: makeBooleanProp(false),
+  /**
    * 选中项，如果为多列选择器，则其类型应为数组
    */
   modelValue: {
@@ -61,7 +65,7 @@ export const pickerViewProps = {
 export type PickerViewExpose = {
   getSelects: () => Record<string, any> | Record<string, any>[]
   getValues: () => string | string[]
-  setColumnData: (columnIndex: any, data: Array<any>, jumpTo?: number) => void
+  setColumnData: (columnIndex: number, data: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>, rowIndex?: number) => void
   getColumnsData: () => Record<string, string>[][]
   getColumnData: (columnIndex: number) => Record<string, string>[]
   getColumnIndex: (columnIndex: number) => number
@@ -74,14 +78,20 @@ export type PickerViewProps = ExtractPropTypes<typeof pickerViewProps>
 export type PickerViewInstance = ComponentPublicInstance<PickerViewProps, PickerViewExpose>
 
 /**
- * @description 为props的value为array类型时提供format
- * @param {Array<String|Number|Object>} array 列数组
- * @param {string} valueKey valueKey
- * @param {string} labelKey labelKey
+ * 格式化传入的列数据
+ * 列数据统一格式化为二维数组
+ * @param array 列数据
+ * @param valueKey
+ * @param labelKey
+ * @returns
  */
-export function formatArray(array: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>, valueKey: string, labelKey: string) {
-  let tempArray: Array<string | number | ColumnItem | Array<string | number | ColumnItem>> = array instanceof Array ? array : [array]
-  // 检测第一层的type
+export function formatArray(
+  array: Array<string | number | ColumnItem | Array<string | number | ColumnItem>>,
+  valueKey: string,
+  labelKey: string
+): ColumnItem[][] {
+  let tempArray: Array<string | number | ColumnItem | Array<string | number | ColumnItem>> = isArray(array) ? array : [array]
+  // 判断数组第一层的数据类型，如果存在多种类型，则抛错
   const firstLevelTypeList = new Set(array.map(getType))
   /**
    * 存在三种类型的合法数据
@@ -94,18 +104,17 @@ export function formatArray(array: Array<string | number | ColumnItem | Array<st
     throw Error('The columns are correct')
   }
   /**
-   * 数组的所有一维子元素都不是array，说明是它是一个一维数组
+   * 简单处理，如果数组第一项不是数组则认为它是一个一维数组
    * 所以需要把一维的转成二维，这样方便统一处理
    */
-  if (!(array[0] instanceof Array)) {
+  if (!isArray(array[0])) {
     tempArray = [tempArray as Array<string | number | ColumnItem>]
   }
-  // 经过上述处理，都已经变成了二维数组，再把每一项二维元素包装成object
+  // 转化为二维数组后需要将每一项包装成ColumnItem
   const result: Array<Array<ColumnItem>> = (tempArray as Array<Array<string | number | ColumnItem>>).map((col) => {
     return col.map((row) => {
-      const isObj = getType(row)
-      /* 针对原始值，包装成{valueKey,labelKey} */
-      if (isObj !== 'object') {
+      // 非对象类型直接将值作为label和value
+      if (!isObj(row)) {
         return {
           [valueKey]: row,
           [labelKey]: row
@@ -124,13 +133,13 @@ export function formatArray(array: Array<string | number | ColumnItem | Array<st
       }
       // eslint-disable-next-line no-prototype-builtins
       if (!row.hasOwnProperty(labelKey)) {
-        ;(row as ColumnItem)[labelKey] = (row as ColumnItem)[valueKey]
+        row[labelKey] = row[valueKey]
       }
       // eslint-disable-next-line no-prototype-builtins
       if (!row.hasOwnProperty(valueKey)) {
-        ;(row as ColumnItem)[valueKey] = (row as ColumnItem)[labelKey]
+        row[valueKey] = row[labelKey]
       }
-      return row as ColumnItem
+      return row
     })
   })
 

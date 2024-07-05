@@ -44,12 +44,6 @@
     @include when(disabled) {
       color: $-upload-evoke-disabled-color;
     }
-
-    @include when(slot-default) {
-      width: auto;
-      height: auto;
-      background-color: transparent;
-    }
   }
 
   @include e(evoke-num) {

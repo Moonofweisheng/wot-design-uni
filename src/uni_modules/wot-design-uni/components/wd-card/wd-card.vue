@@ -1,5 +1,5 @@
 <template>
-  <view :class="['wd-card', type == 'rectangle' ? 'is-rectangle' : '', customClass]">
+  <view :class="['wd-card', type == 'rectangle' ? 'is-rectangle' : '', customClass]" :style="customStyle">
     <view :class="['wd-card__title-content', customTitleClass]">
       <view class="wd-card__title">
         <text v-if="title">{{ title }}</text>

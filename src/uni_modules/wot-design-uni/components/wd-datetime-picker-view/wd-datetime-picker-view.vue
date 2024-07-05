@@ -1,8 +1,10 @@
 <template>
   <view>
     <wd-picker-view
-      :custom-class="customClass"
       ref="datePickerview"
+      :custom-class="customClass"
+      :custom-style="customStyle"
+      :immediate-change="immediateChange"
       v-model="pickerValue"
       :columns="columns"
       :columns-height="columnsHeight"
@@ -26,7 +28,7 @@ export default {
 
 <script lang="ts" setup>
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
-import { debounce, getType, isDef, padZero, range } from '../common/util'
+import { debounce, isFunction, isDef, padZero, range, isArray } from '../common/util'
 import {
   getPickerValue,
   datetimePickerViewProps,
@@ -65,6 +67,8 @@ const getMonthEndDay = (year: number, month: number) => {
 }
 
 const props = defineProps(datetimePickerViewProps)
+const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
+
 // pickerview
 const datePickerview = ref<PickerViewInstance>()
 // 内部保持时间戳的
@@ -78,6 +82,15 @@ const created = ref<boolean>(false)
 
 const { proxy } = getCurrentInstance() as any
 
+defineExpose<DatetimePickerViewExpose>({
+  updateColumns,
+  setColumns,
+  getSelects,
+  correctValue,
+  getPickerValue,
+  getOriginColumns,
+  ...props
+})
 /**
  * @description updateValue 防抖函数的占位符
  */
@@ -107,7 +120,7 @@ watch(
 watch(
   () => props.type,
   (target) => {
-    const type = ['date', 'year-month', 'time', 'datetime']
+    const type = ['date', 'year-month', 'time', 'datetime', 'year']
     if (type.indexOf(target) === -1) {
       console.error(`type must be one of ${type}`)
     }
@@ -120,7 +133,7 @@ watch(
 watch(
   () => props.filter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of filter must be Function')
     }
     updateValue()
@@ -131,7 +144,7 @@ watch(
 watch(
   () => props.formatter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of formatter must be Function')
     }
     updateValue()
@@ -142,7 +155,7 @@ watch(
 watch(
   () => props.columnFormatter,
   (fn) => {
-    if (fn && getType(fn) !== 'function') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of columnFormatter must be Function')
     }
     updateValue()
@@ -176,14 +189,6 @@ onBeforeMount(() => {
   updateColumnValue(innerValue)
 })
 
-// onMounted(() => {
-//   // 手动进行一次render
-//   const innerValue = correctValue(props.modelValue)
-//   updateColumnValue(innerValue)
-// })
-
-const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
-
 /** pickerView触发change事件，同步修改pickerValue */
 function onChange({ value }: { value: string | string[] }) {
   // 更新pickerView的value
@@ -204,7 +209,6 @@ function onChange({ value }: { value: string | string[] }) {
  */
 function updateColumns(): DatetimePickerViewOption[][] {
   const { formatter, columnFormatter } = props
-
   if (columnFormatter) {
     return columnFormatter(proxy.$.exposed)
   } else {
@@ -295,6 +299,7 @@ function getRanges(): Array<{ type: DatetimePickerViewColumnType; range: number[
 
   if (props.type === 'date') result.splice(3, 2)
   if (props.type === 'year-month') result.splice(2, 3)
+  if (props.type === 'year') result.splice(1, 4)
   return result
 }
 
@@ -396,9 +401,10 @@ function updateColumnValue(value: string | number) {
  */
 function updateInnerValue() {
   const { type } = props
-  let values: Array<string> = []
   let innerValue: string | number = ''
-  values = datePickerview.value!.getValues() as string[]
+  const pickerVal = datePickerview.value?.getValues() || []
+  const values = isArray(pickerVal) ? pickerVal : [pickerVal]
+
   if (type === 'time') {
     innerValue = `${padZero(values[0])}:${padZero(values[1])}`
     return innerValue
@@ -408,13 +414,13 @@ function updateInnerValue() {
   const year = values[0] && parseInt(values[0])
 
   // 处理月 索引位1
-  const month = values[1] && parseInt(values[1])
+  const month = type === 'year' ? 1 : values[1] && parseInt(values[1])
 
   const maxDate = getMonthEndDay(Number(year), Number(month))
 
   // 处理 date 日期 索引位2
   let date: string | number = 1
-  if (type !== 'year-month') {
+  if (type !== 'year-month' && type !== 'year') {
     date = (Number(values[2]) && parseInt(String(values[2]))) > maxDate ? maxDate : values[2] && parseInt(String(values[2]))
   }
 
@@ -436,8 +442,8 @@ function updateInnerValue() {
  * @description 选中项改变，多级联动
  */
 function columnChange(picker: PickerViewInstance) {
-  // time 和 year-mouth 无需联动
-  if (props.type === 'time' || props.type === 'year-month') {
+  // time year-mouth year 无需联动
+  if (props.type === 'time' || props.type === 'year-month' || props.type === 'year') {
     return
   }
   /** 重新计算年月日时分秒，修正时间。 */
@@ -458,19 +464,18 @@ function columnChange(picker: PickerViewInstance) {
   // 更新选中时间戳
   innerValue.value = correctValue(value)
   // 根据innerValue获取最新的时间表，重新生成对应的数据源
-  const newColumns = updateColumns().slice(0, 3)
+
+  const newColumns = updateColumns()
   // 深拷贝联动之前的选中项
   const selectedIndex = picker.getSelectedIndex().slice(0)
   /**
    * 选中年会修改对应的年份的月数，和月份对应的日期。
    * 选中月，会修改月份对应的日数
    */
-
-  newColumns.forEach((columns, index) => {
+  newColumns.forEach((_columns, index) => {
     const nextColumnIndex = index + 1
     const nextColumnData = newColumns[nextColumnIndex]
-    // `日`不控制任何其它列
-    if (index === 2) return
+    if (nextColumnIndex > newColumns.length - 1) return
     picker.setColumnData(
       nextColumnIndex,
       nextColumnData,
@@ -486,17 +491,11 @@ function onPickEnd() {
 }
 
 function getSelects() {
-  return datePickerview.value && datePickerview.value.getSelects ? datePickerview.value.getSelects() : undefined
+  const pickerVal = datePickerview.value?.getSelects()
+  if (pickerVal == null) return undefined
+  if (isArray(pickerVal)) return pickerVal
+  return [pickerVal]
 }
-
-defineExpose<DatetimePickerViewExpose>({
-  updateColumns,
-  setColumns,
-  getSelects,
-  correctValue,
-  getPickerValue,
-  getOriginColumns
-})
 </script>
 
 <style lang="scss" scoped>

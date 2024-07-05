@@ -1,14 +1,14 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeRequiredProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeRequiredProp, makeStringProp } from '../common/props'
 
 export type CollapseItemBeforeExpand = (name: string) => void
 
 export const collapseItemProps = {
   ...baseProps,
   /**
-   * 折叠栏的标题
+   * 折叠栏的标题, 可通过 slot 传递自定义内容
    */
-  title: String,
+  title: makeStringProp(''),
   /**
    * 禁用折叠栏
    */

@@ -4,7 +4,7 @@
     <page-wraper>
       <demo-block title="大型分段器" transparent>
         <view class="section">
-          <wd-segmented :options="list" v-model:value="current" size="large"></wd-segmented>
+          <wd-segmented :options="list" v-model:value="current" size="large" @change="handleChange"></wd-segmented>
         </view>
       </demo-block>
       <demo-block title="默认分段器" transparent>
@@ -33,7 +33,7 @@
 
       <demo-block title="自定义渲染分段器标签" transparent>
         <view class="section">
-          <wd-segmented :options="list1" v-model:value="current4" :vibrate-short="true">
+          <wd-segmented :options="list1" v-model:value="current4" :vibrate-short="true" @change="handleChange">
             <template #label="{ option }">
               <view class="section-slot">
                 <image style="border-radius: 50%; width: 32px; height: 32px" :src="option.payload.avatar" />
@@ -50,6 +50,7 @@
   </view>
 </template>
 <script lang="ts" setup>
+import type { SegmentedOption } from '@/uni_modules/wot-design-uni/components/wd-segmented/types'
 import { ref } from 'vue'
 
 const list = ref<string[]>(['评论', '点赞', '贡献', '打赏'])
@@ -96,6 +97,10 @@ const current3 = ref('打赏')
 const current4 = ref('韩梅梅')
 
 const current5 = ref('评论')
+
+function handleChange(option: SegmentedOption) {
+  console.log(option)
+}
 </script>
 <style lang="scss" scoped>
 .section {

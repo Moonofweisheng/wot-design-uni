@@ -5,19 +5,22 @@
         <view class="wd-navbar__capsule" v-if="$slots.capsule">
           <slot name="capsule" />
         </view>
+
         <view
           :class="`wd-navbar__left ${leftDisabled ? 'is-disabled' : ''}`"
-          :hover-class="leftDisabled ? '' : 'wd-navbar__left--hover'"
+          :hover-class="leftDisabled || $slots.left ? '' : 'wd-navbar__left--hover'"
           hover-stay-time="70"
           @click="handleClickLeft"
-          v-if="!$slots.capsule && ($slots.left || leftArrow || leftText)"
+          v-else-if="!$slots.left"
         >
-          <slot name="left" />
-          <block v-if="!$slots.left && (leftArrow || leftText)">
-            <wd-icon v-if="leftArrow" size="24px" name="arrow-left" custom-class="wd-navbar__arrow" />
-            <view v-if="leftText" class="wd-navbar__text">{{ leftText }}</view>
-          </block>
+          <wd-icon v-if="leftArrow" size="24px" name="arrow-left" custom-class="wd-navbar__arrow" />
+          <view v-if="leftText" class="wd-navbar__text">{{ leftText }}</view>
         </view>
+
+        <view v-else :class="`wd-navbar__left ${leftDisabled ? 'is-disabled' : ''}`" @click="handleClickLeft">
+          <slot name="left" />
+        </view>
+
         <view class="wd-navbar__title">
           <slot name="title" />
           <block v-if="!$slots.title && title">{{ title }}</block>
@@ -56,6 +59,7 @@ import { getRect, addUnit, isDef, objToStyle } from '../common/util'
 import { navbarProps } from './types'
 
 const props = defineProps(navbarProps)
+const emit = defineEmits(['click-left', 'click-right'])
 
 const height = ref<number | ''>('') // 占位高度
 
@@ -87,8 +91,6 @@ onMounted(() => {
     })
   }
 })
-
-const emit = defineEmits(['click-left', 'click-right'])
 
 function handleClickLeft() {
   if (!props.leftDisabled) {

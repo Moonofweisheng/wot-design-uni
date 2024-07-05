@@ -5,6 +5,7 @@
     } ${innerInline ? 'is-inline' : ''} ${isChecked ? 'is-checked' : ''} ${innerShape !== 'check' ? 'is-' + innerShape : ''} ${
       innerDisabled ? 'is-disabled' : ''
     } ${customClass}`"
+    :style="customStyle"
     @click="handleClick"
   >
     <view

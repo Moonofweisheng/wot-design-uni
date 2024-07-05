@@ -1,13 +1,8 @@
 <template>
   <view :style="`${rootStyle};display: inline-block;`">
-    <!--强制设置高宽，防止元素坍塌-->
-    <!--在使用 wd-sticky-box 时，某些情况下 wd-sticky__container 的 'position：absolute' 需要相对于 wd-sticky-box-->
-    <view :class="`wd-sticky ${props.customClass}`" :style="stickyStyle" :id="styckyId">
-      <!--吸顶容器-->
+    <view :class="`wd-sticky ${customClass}`" :style="stickyStyle" :id="styckyId">
       <view class="wd-sticky__container" :style="containerStyle">
-        <!--监听元素尺寸变化-->
-        <wd-resize @resize="resizeHandler" custom-style="display: inline-block;">
-          <!--需要吸顶的内容-->
+        <wd-resize @resize="handleResize" custom-style="display: inline-block;">
           <slot />
         </wd-resize>
       </view>
@@ -20,63 +15,64 @@ export default {
   name: 'wd-sticky',
   options: {
     addGlobalClass: true,
-    // virtualHost: true,
+    virtualHost: true,
     styleIsolation: 'shared'
   }
 }
 </script>
 
 <script lang="ts" setup>
-import { type Ref, computed, getCurrentInstance, inject, ref } from 'vue'
-import { addUnit, getRect, objToStyle, uuid } from '../common/util'
+import { computed, getCurrentInstance, reactive, ref, type CSSProperties } from 'vue'
+import { addUnit, getRect, objToStyle, requestAnimationFrame, uuid } from '../common/util'
 import { stickyProps } from './types'
+import { useParent } from '../composables/useParent'
+import { STICKY_BOX_KEY } from '../wd-sticky-box/types'
 
 const props = defineProps(stickyProps)
 const styckyId = ref<string>(`wd-sticky${uuid()}`)
-
-const openBox = ref<boolean>(false)
-const position = ref<string>('absolute')
-const top = ref<number>(0)
-const height = ref<number>(0)
-const width = ref<number>(0)
 const observerList = ref<UniApp.IntersectionObserver[]>([])
-const state = ref<string>('')
 
-const boxHeight: Ref<number> = inject('box-height', null) || ref(0)
-// eslint-disable-next-line @typescript-eslint/ban-types
-const observerForChild: Function | null = inject('observerForChild', null)
+const stickyState = reactive({
+  position: 'absolute',
+  boxLeaved: false,
+  top: 0,
+  height: 0,
+  width: 0,
+  state: ''
+})
+
+const { parent: stickyBox } = useParent(STICKY_BOX_KEY)
 
 const { proxy } = getCurrentInstance() as any
-const instance = getCurrentInstance() as any
 
 const rootStyle = computed(() => {
-  const style: Record<string, string | number> = {
+  const style: CSSProperties = {
     'z-index': props.zIndex,
-    height: addUnit(height.value),
-    width: addUnit(width.value)
+    height: addUnit(stickyState.height),
+    width: addUnit(stickyState.width)
   }
-  if (!openBox.value) {
+  if (!stickyState.boxLeaved) {
     style['position'] = 'relative'
   }
   return `${objToStyle(style)};${props.customStyle}`
 })
 
 const stickyStyle = computed(() => {
-  const style: Record<string, string | number> = {
+  const style: CSSProperties = {
     'z-index': props.zIndex,
-    height: addUnit(height.value),
-    width: addUnit(width.value)
+    height: addUnit(stickyState.height),
+    width: addUnit(stickyState.width)
   }
-  if (!openBox.value) {
+  if (!stickyState.boxLeaved) {
     style['position'] = 'relative'
   }
   return `${objToStyle(style)};`
 })
 
 const containerStyle = computed(() => {
-  const style: Record<string, string | number> = {
-    position: position.value,
-    top: addUnit(top.value)
+  const style: CSSProperties = {
+    position: stickyState.position as 'static' | 'relative' | 'absolute' | 'sticky' | 'fixed',
+    top: addUnit(stickyState.top)
   }
   return objToStyle(style)
 })
@@ -93,7 +89,7 @@ const innerOffsetTop = computed(() => {
 })
 
 /**
- * @description 清除无用的 viewport 观察者
+ * 清除对当前组件的监听
  */
 function clearObserver() {
   while (observerList.value.length !== 0) {
@@ -101,90 +97,92 @@ function clearObserver() {
   }
 }
 /**
- * @description 创建新的 viewport 观察者
+ * 添加对当前组件的监听
  */
 function createObserver() {
-  const observer = uni.createIntersectionObserver(instance)
+  const observer = uni.createIntersectionObserver(proxy, { thresholds: [0, 0.5] })
   observerList.value.push(observer)
   return observer
 }
 /**
- * @description 监听到吸顶元素尺寸大小变化时，立即重新模拟吸顶
+ *  当前内容高度发生变化时重置监听
  */
-function resizeHandler(detail: any) {
-  // 当吸顶内容处于absolute、fixed时，为了防止父容器坍塌，需要手动设置父容器高宽。
-  width.value = detail.width
-  height.value = detail.height
-  // // 如果和 wd-sticky-box 配套使用，吸顶逻辑交由 wd-sticky-box 进行处理
-  observerContentScroll()
-  if (!observerForChild) return
-  observerForChild(proxy)
+function handleResize(detail: any) {
+  stickyState.width = detail.width
+  stickyState.height = detail.height
+  requestAnimationFrame(() => {
+    observerContentScroll()
+    if (!stickyBox || !stickyBox.observerForChild) return
+    stickyBox.observerForChild(proxy)
+  })
 }
 /**
- * @description 模拟吸顶逻辑
+ *  监听吸顶元素滚动事件
  */
 function observerContentScroll() {
-  // 视图在 render tree 中未呈现，吸顶无任何意义。
-  if (height.value === 0 && width.value === 0) return
-  const offset = innerOffsetTop.value + height.value
+  if (stickyState.height === 0 && stickyState.width === 0) return
+  const offset = innerOffsetTop.value + stickyState.height
   clearObserver()
   createObserver()
     .relativeToViewport({
-      top: -offset // viewport上边界往下拉
+      top: -offset
     })
-    .observe(`#${styckyId.value}`, scrollHandler)
+    .observe(`#${styckyId.value}`, (result) => {
+      handleRelativeTo(result)
+    })
   getRect(`#${styckyId.value}`, false, proxy).then((res) => {
-    // 当 wd-sticky 位于 viewport 外部时不会触发 observe，此时根据位置手动修复位置。
-    if (Number(res.bottom) <= offset) scrollHandler({ boundingClientRect: res })
+    // #ifdef H5
+    // H5端，查询节点信息未计算导航栏高度
+    res.bottom = Number(res.bottom) + 44
+    // #endif
+    if (Number(res.bottom) <= offset) handleRelativeTo({ boundingClientRect: res })
   })
 }
 /**
  * @description 根据位置进行吸顶
  */
-function scrollHandler({ boundingClientRect }: any) {
+function handleRelativeTo({ boundingClientRect }: any) {
   // sticky 高度大于或等于 wd-sticky-box，使用 wd-sticky-box 无任何意义
-  if (observerForChild && height.value >= boxHeight.value) {
-    position.value = 'absolute'
-    top.value = 0
+  if (stickyBox && stickyState.height >= stickyBox.boxStyle.height) {
+    stickyState.position = 'absolute'
+    stickyState.top = 0
     return
   }
-  // boundingClientRect : 目标节点各个边在 viewport 中的坐标
-  if (boundingClientRect.top <= innerOffsetTop.value) {
-    state.value = 'sticky'
-    // 开始吸顶，固定到顶部
-    openBox.value = false
-    position.value = 'fixed'
-    top.value = innerOffsetTop.value
-  } else if (boundingClientRect.top > innerOffsetTop.value) {
-    state.value = 'normal'
-    // 完全展示，结束吸顶
-    openBox.value = false
-    position.value = 'absolute'
-    top.value = 0
+
+  let isStycky = boundingClientRect.top <= innerOffsetTop.value
+  // #ifdef H5 || APP-PLUS
+  isStycky = boundingClientRect.top < innerOffsetTop.value
+  // #endif
+
+  if (isStycky) {
+    stickyState.state = 'sticky'
+    stickyState.boxLeaved = false
+    stickyState.position = 'fixed'
+    stickyState.top = innerOffsetTop.value
+  } else {
+    stickyState.state = 'normal'
+    stickyState.boxLeaved = false
+    stickyState.position = 'absolute'
+    stickyState.top = 0
   }
 }
 
 /**
  * 设置位置
- * @param setOpenBox
+ * @param setboxLeaved
  * @param setPosition
  * @param setTop
  */
-function setPosition(setOpenBox: boolean, setPosition: string, setTop: number) {
-  openBox.value = setOpenBox
-  position.value = setPosition
-  top.value = setTop
+function setPosition(boxLeaved: boolean, position: string, top: number) {
+  stickyState.boxLeaved = boxLeaved
+  stickyState.position = position
+  stickyState.top = top
 }
 
 defineExpose({
   setPosition,
-  openBox: openBox,
-  position: position,
-  top: top,
-  height: height,
-  width: width,
-  state: state,
-  offsetTop: innerOffsetTop.value
+  stickyState,
+  offsetTop: props.offsetTop
 })
 </script>
 <style lang="scss" scoped>

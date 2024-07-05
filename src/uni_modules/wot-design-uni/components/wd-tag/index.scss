@@ -40,6 +40,7 @@
   border-radius: 2px;
   transition: opacity .3s;
   vertical-align: middle;
+  line-height: initial;
 
   @include when(default) {
     @include tag-type-style($-tag-info-color, $-tag-info-bg);
@@ -94,7 +95,7 @@
     vertical-align: middle;
     padding: 0;
   }
-  @include edeep(close) {
+  @include e(close) {
     display: inline-block;
     margin-left: 24px;
     margin-right: -4px;

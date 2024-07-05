@@ -47,6 +47,7 @@ import { addUnit, objToStyle, uuid } from '../common/util'
 import { resizeProps } from './types'
 
 const props = defineProps(resizeProps)
+const emit = defineEmits(['resize'])
 
 const expandScrollTop = ref<number>(0)
 const shrinkScrollTop = ref<number>(0)
@@ -67,7 +68,6 @@ let onScrollHandler = () => {}
 const { proxy } = getCurrentInstance() as any
 
 const resizeId = ref<string>(`resize${uuid()}`)
-const emit = defineEmits(['resize'])
 
 onMounted(() => {
   // 初始化数据获取

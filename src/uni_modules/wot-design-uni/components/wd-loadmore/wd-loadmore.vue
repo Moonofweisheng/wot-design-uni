@@ -1,5 +1,5 @@
 <template>
-  <view :class="['wd-loadmore', customClass]" @click="reload">
+  <view :class="['wd-loadmore', customClass]" :style="customStyle" @click="reload">
     <wd-divider v-if="state === 'finished'">{{ finishedText || translate('finished') }}</wd-divider>
     <block v-if="state === 'error'">
       <block v-if="errorText">
@@ -35,11 +35,11 @@ import { useTranslate } from '../composables/useTranslate'
 import { loadmoreProps, type LoadMoreState } from './types'
 
 const props = defineProps(loadmoreProps)
+const emit = defineEmits(['reload'])
+
 const { translate } = useTranslate('loadmore')
 
 const currentState = ref<LoadMoreState | null>(null)
-
-const emit = defineEmits(['reload'])
 
 function reload() {
   if (props.state !== 'error') return

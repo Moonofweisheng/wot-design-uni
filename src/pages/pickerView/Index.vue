@@ -8,6 +8,10 @@
       <wd-picker-view v-model="value2" :columns="columns2" @change="(e) => onChange(2, e)" />
     </demo-block>
 
+    <demo-block :title="`立即触发 change，数值: ${value6}`">
+      <wd-picker-view v-model="value6" :immediate-change="true" :columns="columns2" @change="(e) => onChange(2, e)" />
+    </demo-block>
+
     <demo-block :title="`加载中，数值: ${value3}`">
       <wd-picker-view v-model="value3" :columns="columns3" loading @change="(e) => onChange(3, e)" />
     </demo-block>
@@ -70,6 +74,8 @@ const value1 = ref<string>('选项1')
 const columns1 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
 
 const value2 = ref<string>('选项1')
+const value6 = ref<string>('选项1')
+
 const columns2 = ref([
   { label: '选项1' },
   { label: '选项2' },

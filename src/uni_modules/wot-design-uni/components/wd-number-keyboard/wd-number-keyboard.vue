@@ -11,7 +11,9 @@
   >
     <view :class="`wd-number-keyboard ${customClass}`" :style="customStyle">
       <view class="wd-number-keyboard__header" v-if="showTitle">
-        <text class="wd-number-keyboard__title">{{ title }}</text>
+        <slot name="title">
+          <text class="wd-number-keyboard__title">{{ title }}</text>
+        </slot>
         <view class="wd-number-keyboard__close" hover-class="wd-number-keyboard__close--hover" v-if="showClose" @click="handleClose">
           <text>{{ closeText }}</text>
         </view>
@@ -46,6 +48,7 @@ import { numberKeyboardProps, type Key } from './types'
 import type { NumberKeyType } from './key/types'
 
 const props = defineProps(numberKeyboardProps)
+const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue'])
 
 const show = ref(props.visible)
 watch(
@@ -64,8 +67,6 @@ const showClose = computed(() => {
 const showTitle = computed(() => {
   return props.title || showClose.value
 })
-
-const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue'])
 
 /**
  * 随机打乱数组的顺序

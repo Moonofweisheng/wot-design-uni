@@ -12,14 +12,43 @@ const inquirer = require('inquirer')
 const { execSync } = require('child_process')
 const { writeFileSync, readFileSync } = require('fs')
 const path = require('path')
+const fs = require('fs')
+
 const src = path.resolve(__dirname, '../src/uni_modules/wot-design-uni')
+
 const oldVersion = require('../package.json').version
+const LOWEST_VERSION = '$LOWEST_VERSION$'
+
+const handleLowestVersion = (dir, version) => {
+  const files = fs.readdirSync(dir)
+
+  for (const item of files) {
+    const itemPath = path.resolve(dir, item)
+    const stat = fs.statSync(itemPath)
+
+    if (stat.isFile()) {
+      if (item.endsWith('.md')) {
+        let content = fs.readFileSync(itemPath, {
+          encoding: 'utf-8'
+        })
+
+        if (content.includes(LOWEST_VERSION)) {
+          content = content.replace(/\$LOWEST_VERSION\$/g, version)
+          writeFileSync(itemPath, content)
+        }
+      }
+    } else {
+      handleLowestVersion(itemPath, version)
+    }
+  }
+}
+
 inquirer
   .prompt([
     {
       type: 'list',
       name: 'version',
-      message: '请选择发版类型（默认值：✨ minor）',
+      message: '请选择发版类型（默认值：✨ minor)',
       choices: ['🐛 patch 小版本', '✨ minor 中版本', '🚀 major 大版本'],
       default: '✨ minor 中版本'
     },
@@ -56,16 +85,20 @@ inquirer
     // 更新版本
     const file = readFileSync(path.resolve(__dirname, '../package.json'))
     const packageJson = JSON.parse(file.toString())
-    const version = packageJson.version
-    console.log(`√ bumping version in package.json from ${oldVersion} to ${version}`)
+    const newVersion = packageJson.version
+
+    // 处理文档中的最低版本标识
+    handleLowestVersion(path.resolve(__dirname, '../docs'), newVersion)
+
+    console.log(`√ bumping version in package.json from ${oldVersion} to ${newVersion}`)
     const package = require('../src/uni_modules/wot-design-uni/package.json')
-    package.version = version
+    package.version = newVersion
     writeFileSync(path.resolve(src, 'package.json'), JSON.stringify(package))
     // 生成制品
     execSync('pnpm lint')
     execSync('git add -A ')
-    execSync(`git commit -am "build: compile ${version}"`)
-    execSync(`git tag -a v${version} -am "chore(release): ${version}"`)
+    execSync(`git commit -am "build: compile ${newVersion}"`)
+    execSync(`git tag -a v${newVersion} -am "chore(release): ${newVersion}"`)
     console.log('√ committing changes')
     const branch = execSync('git branch --show-current').toString().replace(/\*/g, '').replace(/ /g, '')
     console.log('🎉 版本发布成功')

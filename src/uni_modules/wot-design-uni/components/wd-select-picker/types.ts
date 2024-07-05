@@ -81,7 +81,9 @@ export const selectPickerProps = {
   /** 自定义标签样式类 */
   customLabelClass: makeStringProp(''),
   /** 自定义值样式类 */
-  customValueClass: makeStringProp('')
+  customValueClass: makeStringProp(''),
+  /** 是否显示确认按钮（radio类型生效），默认值为：true */
+  showConfirm: makeBooleanProp(true)
 }
 export type SelectPickerProps = ExtractPropTypes<typeof selectPickerProps>
 

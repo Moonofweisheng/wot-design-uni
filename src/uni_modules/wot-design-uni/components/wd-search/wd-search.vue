@@ -32,14 +32,13 @@
       </view>
     </view>
     <!--the button behind input,care for hideCancel without displaying-->
-    <block v-if="!hideCancel">
-      <!--有插槽就不用默认的按钮了-->
-      <slot v-if="userSuffixSlot" name="suffix"></slot>
+
+    <slot v-if="!hideCancel" name="suffix">
       <!--默认button-->
-      <view v-else class="wd-search__cancel" @click="handleCancel">
+      <view class="wd-search__cancel" @click="handleCancel">
         {{ cancelTxt || translate('cancel') }}
       </view>
-    </block>
+    </slot>
   </view>
 </template>
 
@@ -61,6 +60,7 @@ import { useTranslate } from '../composables/useTranslate'
 import { searchProps } from './types'
 
 const props = defineProps(searchProps)
+const emit = defineEmits(['update:modelValue', 'change', 'clear', 'search', 'focus', 'blur', 'cancel'])
 
 const { translate } = useTranslate('search')
 
@@ -108,8 +108,6 @@ const coverStyle = computed(() => {
 
   return objToStyle(coverStyle)
 })
-
-const emit = defineEmits(['update:modelValue', 'change', 'clear', 'search', 'focus', 'blur', 'cancel'])
 
 function hackFocus(focus: boolean) {
   showInput.value = focus

@@ -31,15 +31,32 @@
         <wd-skeleton :custom-style="{ width: '100%', marginLeft: '12px' }" animation="flashed" theme="paragraph" />
       </view>
     </demo-block>
+    <demo-block title="插槽内容">
+      <view style="margin-bottom: 10px">切换显示</view>
+      <wd-switch v-model="showContent" />
+      <view style="height: 20px"></view>
+      <wd-skeleton :row-col="grid" :loading="showContent">
+        <wd-grid>
+          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
+          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
+          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
+          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
+          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
+        </wd-grid>
+      </wd-skeleton>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
+import { ref } from 'vue'
+import type { SkeletonRowCol, SkeletonProps } from '../../uni_modules/wot-design-uni/components/wd-skeleton/types'
+
 const themeList = [
   { title: '头像骨架屏', value: 'avatar' },
   { title: '图片骨架屏', value: 'image' },
   { title: '文本骨架屏', value: 'text' },
   { title: '段落骨架屏', value: 'paragraph' }
-]
+] as Array<{ title: string; value: SkeletonProps['theme'] }>
 const grid = [
   [
     { width: '48px', height: '48px' },
@@ -55,6 +72,8 @@ const grid = [
     { width: '48px', height: '16px' },
     { width: '48px', height: '16px' }
   ]
-]
-const imageGroup = [{ height: '171px' }, 1, { width: '107px' }, [{ width: '93px' }, { width: '32px', marginLeft: '41px' }]]
+] as SkeletonRowCol[]
+const imageGroup = [{ height: '171px' }, 1, { width: '107px' }, [{ width: '93px' }, { width: '32px', marginLeft: '41px' }]] as SkeletonRowCol[]
+
+const showContent = ref(true)
 </script>

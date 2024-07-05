@@ -2,7 +2,19 @@
 @import "./../../common/abstracts/variable.scss";
 
 .wot-theme-dark {
-  @include b(key) {}
+  @include b(key) {
+    background: $-dark-background2;
+    color: $-dark-color;
+
+    &:active {
+      background-color: $-dark-background4;
+    }
+
+    @include m(active) {
+      background-color: $-dark-background4;
+    }
+ 
+  }
 }
 
 .wd-key-wrapper {
@@ -12,7 +24,7 @@
   box-sizing: border-box;
   padding: 0 6px 6px 0;
 
-  @include m(wider){
+  @include m(wider) {
     flex-basis: 66%;
   }
 }
@@ -26,7 +38,8 @@
   line-height: 1.5;
   background: $-number-keyboard-key-background;
   border-radius: $-number-keyboard-key-border-radius;
-  &:active{
+
+  &:active {
     background-color: $-number-keyboard-key-active-color;
   }
 
@@ -39,7 +52,7 @@
     height: auto;
   }
 
-  @include m(delete,close) {
+  @include m(delete, close) {
     font-size: $-number-keyboard-delete-font-size;
   }
 
@@ -51,7 +64,7 @@
     color: $-number-keyboard-button-text-color;
     background: $-number-keyboard-button-background;
 
-    &:active{
+    &:active {
       background: $-number-keyboard-button-background;
       opacity: $-number-keyboard-button-active-opacity;
     }

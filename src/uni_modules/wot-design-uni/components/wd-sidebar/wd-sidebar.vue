@@ -21,10 +21,10 @@ import { useChildren } from '../composables/useChildren'
 import { SIDEBAR_KEY, sidebarProps } from './types'
 
 const props = defineProps(sidebarProps)
+const emit = defineEmits(['change', 'update:modelValue'])
+
 const { linkChildren } = useChildren(SIDEBAR_KEY)
 linkChildren({ props, setChange })
-
-const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
  * 子项状态变更
@@ -39,4 +39,3 @@ function setChange(value: number | string, label: string) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-./type

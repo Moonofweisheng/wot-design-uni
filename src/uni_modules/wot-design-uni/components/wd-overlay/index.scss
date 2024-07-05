@@ -7,7 +7,7 @@
   }
 }
 
-@include bdeep(overlay) {
+@include b(overlay) {
   position: fixed;
   left: 0;
   top: 0;

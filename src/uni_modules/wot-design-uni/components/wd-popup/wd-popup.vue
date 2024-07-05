@@ -32,6 +32,17 @@ import { isObj, requestAnimationFrame } from '../common/util'
 import { popupProps } from './types'
 
 const props = defineProps(popupProps)
+const emit = defineEmits([
+  'update:modelValue',
+  'before-enter',
+  'enter',
+  'before-leave',
+  'leave',
+  'after-leave',
+  'after-enter',
+  'click-modal',
+  'close'
+])
 
 const getClassNames = (name?: string) => {
   if (!name) {
@@ -67,18 +78,6 @@ const classes = ref<string>('')
 const safeBottom = ref<number>(0)
 
 const name = ref<string>('') // 动画名
-
-const emit = defineEmits([
-  'update:modelValue',
-  'before-enter',
-  'enter',
-  'before-leave',
-  'leave',
-  'after-leave',
-  'after-enter',
-  'click-modal',
-  'close'
-])
 
 const style = computed(() => {
   return `z-index: ${props.zIndex}; padding-bottom: ${safeBottom.value}px; -webkit-transition-duration: ${

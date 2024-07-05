@@ -62,8 +62,9 @@ function handleChange2({ value }) {
 ```html
 <wd-drop-menu>
   <wd-drop-menu-item v-model="value" :options="option" @change="handleChange" />
-  <wd-drop-menu-item title="筛选" ref="dropMenu">
+  <wd-drop-menu-item title="筛选" ref="dropMenu" @opened="handleOpened">
     <view>
+      <wd-slider v-model="sliderValue" ref="slider" />
       <wd-cell title="标题文字" value="内容" />
       <wd-cell title="标题文字" label="描述信息" value="内容" />
       <wd-button block size="large" suck @click="confirm">主要按钮</wd-button>
@@ -74,9 +75,11 @@ function handleChange2({ value }) {
 
 ```typescript
 const dropMenu = ref()
+const slider = ref<SliderInstance>() // slider 1.2.25支持
 
 
 const value = ref<number>(0)
+const sliderValue = ref<number>(30)
 const option = ref<Record<string, any>>([
   { label: '全部商品', value: 0 },
   { label: '新款商品', value: 1 },
@@ -88,6 +91,10 @@ function handleChange({ value }) {
 
 function confirm() {
   dropMenu.value.close()
+}
+
+function handleOpened() {
+  slider.value?.initSlider()
 }
 
 ```

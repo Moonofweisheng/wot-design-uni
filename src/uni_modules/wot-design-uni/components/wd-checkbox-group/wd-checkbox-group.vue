@@ -1,5 +1,5 @@
 <template>
-  <view :class="`wd-checkbox-group ${shape === 'button' && cell ? 'is-button' : ''} ${customClass}`">
+  <view :class="`wd-checkbox-group ${shape === 'button' && cell ? 'is-button' : ''} ${customClass}`" :style="customStyle">
     <slot />
   </view>
 </template>
@@ -21,6 +21,7 @@ import { useChildren } from '../composables/useChildren'
 import { CHECKBOX_GROUP_KEY, checkboxGroupProps } from './types'
 
 const props = defineProps(checkboxGroupProps)
+const emit = defineEmits(['change', 'update:modelValue'])
 
 const { linkChildren } = useChildren(CHECKBOX_GROUP_KEY)
 
@@ -71,8 +72,6 @@ watch(
   },
   { deep: true, immediate: true }
 )
-
-const emit = defineEmits(['change', 'update:modelValue'])
 
 /**
  * @description 子节点通知父节点修改子节点选中状态

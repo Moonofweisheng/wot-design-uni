@@ -55,17 +55,17 @@ const value = ref<number[]>([10, 30])
 ```
 
 ## Attributes
-| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-|-----|------|-----|-------|-------|--------|
-| v-model |	滑块值，如果为array，则为双向滑块 |	number / array | - | - | - |
-| hide-min-max | 是否显示左右的最大最小值 |	boolean |	- |	false | - |
-| hide-label | 是否显示当前滑块值 | boolean | - | false | - |
-| disabled | 是否禁用 | boolean | - | false | - |
-| max | 最大值 | number | - | 100 | - |
-| min | 最小值 | number | - | 0 | - |
-| step | 步进值 | number | - | 1 | - |
-| active-color | 进度条激活背景颜色 | string | - | linear-gradient(315deg, rgba(81,124,240,1) 0%,rgba(118,158,245,1) 100%) | - |
-| inactive-color | 进度条未激活背景颜色 | string | - | #e5e5e5 | - |
+| 参数 | 说明                        | 类型 | 可选值 | 默认值 | 最低版本 |
+|-----|---------------------------|-----|-------|-------|-------|
+| v-model | 	滑块值，如果为array，则为双向滑块      |	number / array | - | - | - |
+| hide-min-max | 是否显示左右的最大最小值              |	boolean |	- |	false | - |
+| hide-label | 是否显示当前滑块值                 | boolean | - | false | - |
+| disabled | 是否禁用                      | boolean | - | false | - |
+| max | 最大值                       | number | - | 100 | - |
+| min | 最小值，允许负数`(1.2.19)` | number | - | 0 | - |
+| step | 步进值                       | number | - | 1 | `1.2.19` |
+| active-color | 进度条激活背景颜色                 | string | - | linear-gradient(315deg, rgba(81,124,240,1) 0%,rgba(118,158,245,1) 100%) | - |
+| inactive-color | 进度条未激活背景颜色                | string | - | #e5e5e5 | - |
 
 ## Events
 
@@ -74,6 +74,15 @@ const value = ref<number[]>([10, 30])
 | dragstart | 开始移动时触发 | `{ value }` | - |
 | dragmove | 移动滑块时触发 | `{ value }` | - |
 | dragend | 移动结束时触发 | `{ value }` | - |
+
+
+## Methods
+
+对外暴露函数
+
+| 事件名称 | 说明 | 参数 | 最低版本 |
+|--------|------|-----|---------|
+| initSlider | 初始化slider宽度数据 | - | 1.2.25 |
 
 ## 外部样式类
 | 类名 | 说明 | 最低版本 |
