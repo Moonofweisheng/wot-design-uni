@@ -4,6 +4,71 @@
 
 使用多列选择器来做级联，交互效果较好，多列选择器支持无限级选择。
 
+::: tip 提示
+多列选择器常用于选择省市区，我们使用 Vant 提供的中国省市区数据作为数据源，你可以安装 [@vant/area-data](https://github.com/youzan/vant/tree/main/packages/vant-area-data) npm 包来引入：
+
+```bash
+# 通过 npm
+npm i @vant/area-data
+
+# 通过 yarn
+yarn add @vant/area-data
+
+# 通过 pnpm
+pnpm add @vant/area-data
+
+# 通过 Bun
+bun add @vant/area-data
+```
+
+:::
+
+**_为了方便开发者使用`@vant/area-data`进行开发调试，我们封装了`useColPickerData`，你可以直接使用`useColPickerData`来获取数据源。_**
+::: details 基于@vant/area-data 包装的`useColPickerData`
+
+```typescript
+// 可以将此代码放置于项目src/hooks/useColPickerData.ts中
+import { useCascaderAreaData } from '@vant/area-data'
+
+export type CascaderOption = {
+  text: string
+  value: string
+  children?: CascaderOption[]
+}
+
+/**
+ * 使用'@vant/area-data'作为数据源，构造ColPicker组件的数据
+ * @returns
+ */
+export function useColPickerData() {
+  // '@vant/area-data' 数据源
+  const colPickerData: CascaderOption[] = useCascaderAreaData()
+
+  // 根据code查找子节点，不传code则返回所有节点
+  function findChildrenByCode(data: CascaderOption[], code?: string): CascaderOption[] | null {
+    if (!code) {
+      return data
+    }
+    for (const item of data) {
+      if (item.value === code) {
+        return item.children || null
+      }
+      if (item.children) {
+        const childrenResult = findChildrenByCode(item.children, code)
+        if (childrenResult) {
+          return childrenResult
+        }
+      }
+    }
+    return null
+  }
+
+  return { colPickerData, findChildrenByCode }
+}
+```
+
+:::
+
 ## 基本用法
 
 `label` 设置左侧文本内容；
@@ -29,27 +94,30 @@
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
 
-const value = ref<any[]>([])
+const value = ref<string[]>([])
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
 
 const columnChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -74,15 +142,17 @@ function handleConfirm({ value }) {
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
 
-const value = ref<any[]>([])
+const value = ref<string[]>([])
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
@@ -96,12 +166,14 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
       toast.error.error('数据请求失败，请重试')
       return
     }
-    if (areaData[selectedItem.value]) {
+    // 这里为什么用selectedItem.value作为code呢？是因为area构造的时候就是将标识放到了value字段上，同理你也可以改为其他字段，只要和area的字段对应即可
+    const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+    if (areaData && areaData.length) {
       resolve(
-        Object.keys(areaData[selectedItem.value]).map((key) => {
+        areaData.map((item) => {
           return {
-            value: key,
-            label: areaData[selectedItem.value][key]
+            value: item.value,
+            label: item.text
           }
         })
       )
@@ -128,38 +200,42 @@ function handleConfirm({ value }) {
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
-const value = ref<any[]>(['150000', '150100', '150121'])
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
+
+const value = ref<string[]>(['150000', '150100', '150121'])
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   }),
-  Object.keys(areaData[130000]).map((key) => {
+  findChildrenByCode(colPickerData, '130000')!.map((item) => {
     return {
-      value: key,
-      label: areaData[130000][key]
+      value: item.value,
+      label: item.text
     }
   }),
-  Object.keys(areaData[130200]).map((key) => {
+  findChildrenByCode(colPickerData, '130200')!.map((item) => {
     return {
-      value: key,
-      label: areaData[130200][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
 
 const columnChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -171,7 +247,6 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 function handleConfirm({ value }) {
   console.log(value)
 }
-
 ```
 
 2）设置 `auto-complete` 属性，当 `columns` 数组长度小于 `value` 或长度为 0 时，会自动触发 `columnChange` 函数来补齐数据。设置了该属性后，因为数据需要动态补全，因此 传递出来的参数 selectedItem 只有 value 字段，没有 label 字段。
@@ -181,23 +256,26 @@ function handleConfirm({ value }) {
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
 import { useToast } from '@/uni_modules/wot-design-uni'
 
 const toast = useToast()
 
-const value = ref<any[]>(['150000', '150100', '150121'])
+const value = ref<string[]>(['150000', '150100', '150121'])
 
-const area = ref<any[]>(areaData)
-const columnChange1 = ({ selectedItem, resolve, finish, index, rowIndex }) => {
-  const value = index === -1 ? 86 : selectedItem.value
-  if (areaData[value]) {
+const area = ref<any[]>([])
+
+const columnChange = ({ selectedItem, resolve, finish }) => {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -232,26 +310,30 @@ const columnChange1 = ({ selectedItem, resolve, finish, index, rowIndex }) => {
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
 
-const value = ref<any[]>([])
+const value = ref<string[]>([])
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text,
+      disabled: item.value === '140000'
     }
   })
 ])
 const columnChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -270,26 +352,31 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
-const value = ref<any[]>([])
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
+
+const value = ref<string[]>([])
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key],
-      tip: key === '150000' ? '该地区配送时间可能较长' : ''
+      value: item.value,
+      label: item.text,
+      disabled: item.value === '140000',
+      tip: item.value === '140000' ? '该地区无货，暂时无法选择' : item.value === '150000' ? '该地区配送时间可能较长' : ''
     }
   })
 ])
 const columnChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -315,38 +402,42 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
+
 const value = ref<string[]>(['130000', '130200', '130204'])
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   }),
-  Object.keys(areaData[130000]).map((key) => {
+  findChildrenByCode(colPickerData, '130000')!.map((item) => {
     return {
-      value: key,
-      label: areaData[130000][key]
+      value: item.value,
+      label: item.text
     }
   }),
-  Object.keys(areaData[130200]).map((key) => {
+  findChildrenByCode(colPickerData, '130200')!.map((item) => {
     return {
-      value: key,
-      label: areaData[130200][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
 
 const columnChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -354,7 +445,8 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
     finish()
   }
 }
-const displayFormat = (selectedItems) => {
+// 格式化方法
+const displayFormat = (selectedItems: Record<string, any>[]) => {
   return selectedItems[selectedItems.length - 2].label + '-' + selectedItems[selectedItems.length - 1].label
 }
 ```
@@ -383,25 +475,29 @@ const displayFormat = (selectedItems) => {
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
-const value = ref<any[]>([])
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
+
+const value = ref<string[]>([])
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
 
 const columnChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -409,13 +505,21 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
     finish()
   }
 }
-const beforeConfirm = (value, selectedItems, resolve) => {
-  if (parseInt(value[2]) > 120000) {
+const beforeConfirm = (value: (string | number)[], selectedItems: Record<string, any>[], resolve: (isPass: boolean) => void) => {
+  if (parseInt(String(value[2])) > 120000) {
     toast.error('该地区库存不足')
     resolve(false)
   } else {
     resolve(true)
   }
+}
+
+function handleConfirm({ selectedItems }: any) {
+  displayValue.value = selectedItems
+    .map((item: any) => {
+      return item.label
+    })
+    .join('')
 }
 ```
 
@@ -463,28 +567,31 @@ const beforeConfirm = (value, selectedItems, resolve) => {
 ```
 
 ```typescript
-// 使用的是 `china-area-data` 库，包含国内最新的地区编码，手动将代码搬一下
-import areaData from '../utils/area.json'
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
 
-const value = ref<any[]>([])
+const value = ref<string[]>([])
 const displayValue = ref('')
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
 
 const columnChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -496,45 +603,45 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 
 ## Attributes
 
-| 参数                   | 说明                                                                                                                           | 类型     | 可选值 | 默认值  | 最低版本 |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------ | ------- | -------- |
-| v-model                | 选中项                                                                                                                         | array    | -      | -       | -        |
-| columns                | 选择器数据，二维数组                                                                                                           | array    | -      | -       | -        |
-| value-key              | 选项对象中，value 对应的 key                                                                                                   | string   | -      | value   | -        |
-| label-key              | 选项对象中，展示的文本对应的 key                                                                                               | string   | -      | label   | -        |
-| tip-key                | 选项对象中，提示文案对应的 key                                                                                                 | string   | -      | tip     | -        |
-| title                  | 弹出层标题                                                                                                                     | string   | -      | -       | -        |
-| label                  | 选择器左侧文案                                                                                                                 | string   | -      | -       | -        |
-| placeholder            | 选择器占位符                                                                                                                   | string   | -      | 请选择  | -        |
-| disabled               | 禁用                                                                                                                           | boolean  | -      | fasle   | -        |
-| readonly               | 只读                                                                                                                           | boolean  | -      | false   | -        |
-| display-format         | 自定义展示文案的格式化函数，返回一个字符串                                                                                     | function | -      | -       | -        |
-| column-change          | 接收当前列的选中项 item、当前列下标、当前列选中项下标下一列数据处理函数 resolve、结束选择 finish                               | function | -      | -       | -        |
-| size                   | 设置选择器大小                                                                                                                 | string   | large  | -       | -        |
-| label-width            | 设置左侧标题宽度                                                                                                               | string   | -      | 33%     | -        |
-| error                  | 是否为错误状态，错误状态时右侧内容为红色                                                                                       | boolean  | -      | false   | -        |
-| required               | 必填样式                                                                                                                       | boolean  | -      | false   | -        |
-| align-right            | 选择器的值靠右展示                                                                                                             | boolean  | -      | false   | -        |
-| before-confirm         | 确定前校验函数，接收 (value, resolve) 参数，通过 resolve 继续执行 picker，resolve 接收 1 个 boolean 参数                       | function | -      | -       | -        |
-| loading-color          | loading 图标的颜色                                                                                                             | string   | -      | #4D80F0 | -        |
-| use-default-slot       | 使用默认插槽时设置该选项                                                                                                       | boolean  | -      | false   | -        |
-| use-label-slot         | 使用 label 插槽时设置该选项                                                                                                    | boolean  | -      | false   | -        |
-| close-on-click-modal   | 点击遮罩是否关闭                                                                                                               | boolean  | -      | true    | -        |
-| auto-complete          | 自动触发 column-change 事件来补全数据，当 columns 为空数组或者 columns 数组长度小于 value 数组长度时，会自动触发 column-change | -        | false  | -       |
-| z-index                | 弹窗层级                                                                                                                       | number   | -      | 15      | -        |
-| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                                            | boolean  | -      | true    | -        |
-| ellipsis               | 是否超出隐藏                                                                                                                   | boolean  | -      | false   | -        |
-| prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
-| rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
+| 参数                   | 说明                                                                                                                           | 类型              | 可选值 | 默认值  | 最低版本 |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------- | ------ | ------- | -------- |
+| v-model                | 选中项                                                                                                                         | array             | -      | -       | -        |
+| columns                | 选择器数据，二维数组                                                                                                           | array             | -      | -       | -        |
+| value-key              | 选项对象中，value 对应的 key                                                                                                   | string            | -      | value   | -        |
+| label-key              | 选项对象中，展示的文本对应的 key                                                                                               | string            | -      | label   | -        |
+| tip-key                | 选项对象中，提示文案对应的 key                                                                                                 | string            | -      | tip     | -        |
+| title                  | 弹出层标题                                                                                                                     | string            | -      | -       | -        |
+| label                  | 选择器左侧文案                                                                                                                 | string            | -      | -       | -        |
+| placeholder            | 选择器占位符                                                                                                                   | string            | -      | 请选择  | -        |
+| disabled               | 禁用                                                                                                                           | boolean           | -      | fasle   | -        |
+| readonly               | 只读                                                                                                                           | boolean           | -      | false   | -        |
+| display-format         | 自定义展示文案的格式化函数，返回一个字符串                                                                                     | function          | -      | -       | -        |
+| column-change          | 接收当前列的选中项 item、当前列下标、当前列选中项下标下一列数据处理函数 resolve、结束选择 finish                               | function          | -      | -       | -        |
+| size                   | 设置选择器大小                                                                                                                 | string            | large  | -       | -        |
+| label-width            | 设置左侧标题宽度                                                                                                               | string            | -      | 33%     | -        |
+| error                  | 是否为错误状态，错误状态时右侧内容为红色                                                                                       | boolean           | -      | false   | -        |
+| required               | 必填样式                                                                                                                       | boolean           | -      | false   | -        |
+| align-right            | 选择器的值靠右展示                                                                                                             | boolean           | -      | false   | -        |
+| before-confirm         | 确定前校验函数，接收 (value, resolve) 参数，通过 resolve 继续执行 picker，resolve 接收 1 个 boolean 参数                       | function          | -      | -       | -        |
+| loading-color          | loading 图标的颜色                                                                                                             | string            | -      | #4D80F0 | -        |
+| use-default-slot       | 使用默认插槽时设置该选项                                                                                                       | boolean           | -      | false   | -        |
+| use-label-slot         | 使用 label 插槽时设置该选项                                                                                                    | boolean           | -      | false   | -        |
+| close-on-click-modal   | 点击遮罩是否关闭                                                                                                               | boolean           | -      | true    | -        |
+| auto-complete          | 自动触发 column-change 事件来补全数据，当 columns 为空数组或者 columns 数组长度小于 value 数组长度时，会自动触发 column-change | -                 | false  | -       |
+| z-index                | 弹窗层级                                                                                                                       | number            | -      | 15      | -        |
+| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                                            | boolean           | -      | true    | -        |
+| ellipsis               | 是否超出隐藏                                                                                                                   | boolean           | -      | false   | -        |
+| prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                              | string            | -      | -       | -        |
+| rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                            | `FormItemRule []` | -      | `[]`    | -        |
 
 ### FormItemRule 数据结构
 
-| 键名 | 说明 | 类型 |
-| --- | --- | --- |
-| required | 是否为必选字段	 | `boolean` |
-| message | 错误提示文案	 | `string` |
+| 键名      | 说明                                                    | 类型                                  |
+| --------- | ------------------------------------------------------- | ------------------------------------- |
+| required  | 是否为必选字段                                          | `boolean`                             |
+| message   | 错误提示文案                                            | `string`                              |
 | validator | 通过函数进行校验，可以返回一个 `Promise` 来进行异步校验 | `(value, rule) => boolean \| Promise` |
-| pattern | 通过正则表达式进行校验，正则无法匹配表示校验不通过 | `RegExp` |
+| pattern   | 通过正则表达式进行校验，正则无法匹配表示校验不通过      | `RegExp`                              |
 
 ## 选项数据结构
 
@@ -547,10 +654,10 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 
 ## Events
 
-| 事件名称 | 说明                       | 参数                                            | 最低版本 |
-| -------- | -------------------------- | ----------------------------------------------- | -------- |
-| confirm  | 最后一列选项选中时触发     | `{ value(选项值数组), selectedItem(选项数组) }` | -        |
-| cancel   | 点击关闭按钮或者蒙层时触发 | -                                               | -        |
+| 事件名称 | 说明                       | 参数                                             | 最低版本 |
+| -------- | -------------------------- | ------------------------------------------------ | -------- |
+| confirm  | 最后一列选项选中时触发     | `{ value(选项值数组), selectedItems(选项数组) }` | -        |
+| cancel   | 点击关闭按钮或者蒙层时触发 | -                                                | -        |
 
 ## Methods
 
