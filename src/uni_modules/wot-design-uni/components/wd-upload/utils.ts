@@ -1,16 +1,20 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 22:36:44
- * @LastEditTime: 2024-07-05 13:04:16
+ * @LastEditTime: 2024-07-05 23:59:32
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-upload\utils.ts
  * 记得注释
  */
-import { isArray } from '../common/util'
+import { isArray, isDef } from '../common/util'
 import type { ChooseFile, ChooseFileOption } from './types'
 
 function formatImage(res: UniApp.ChooseImageSuccessCallbackResult): ChooseFile[] {
+  // #ifdef MP-DINGTALK
+  // 钉钉文件在files中
+  res.tempFiles = isDef((res as any).files) ? (res as any).files : res.tempFiles
+  // #endif
   if (isArray(res.tempFiles)) {
     return res.tempFiles.map((item: any) => {
       return {
@@ -37,7 +41,7 @@ function formatImage(res: UniApp.ChooseImageSuccessCallbackResult): ChooseFile[]
 function formatVideo(res: UniApp.ChooseVideoSuccess): ChooseFile[] {
   return [
     {
-      path: res.tempFilePath || '',
+      path: res.tempFilePath || (res as any).filePath || '',
       name: res.name || '',
       size: res.size,
       type: 'video',
@@ -74,7 +78,9 @@ export function chooseFile({
           sizeType,
           sourceType,
           success: (res) => resolve(formatImage(res)),
-          fail: reject
+          fail: (error) => {
+            reject(error)
+          }
         })
         break
       case 'video':

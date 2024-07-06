@@ -204,7 +204,12 @@ function handleChange({ fileList }: any) {
   fileList.value = fileList
 }
 
-function handleChange1({ fileList }: any) {
+function handleChange1({ fileList }: { fileList: UploadFile[] }) {
+  fileList.forEach((item) => {
+    if (!item.thumb) {
+      item.thumb = 'https://unpkg.com/wot-design-uni-assets/redpanda.jpg'
+    }
+  })
   fileList1.value = fileList
 }
 function handleChange2({ fileList }: any) {

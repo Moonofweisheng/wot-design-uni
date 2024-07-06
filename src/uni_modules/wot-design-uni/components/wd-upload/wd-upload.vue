@@ -5,32 +5,33 @@
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
         <image v-if="isImage(file)" :src="file.url" :mode="imageMode" class="wd-upload__picture" @click="onPreviewImage(index)" />
-        <video
-          v-else-if="isVideo(file)"
-          @click="onPreviewVideo(file)"
-          :src="file.url"
-          :title="file.name || '视频' + index"
-          object-fit="contain"
-          :poster="file.thumb"
-          :controls="false"
-          :show-center-play-btn="false"
-          :show-fullscreen-btn="false"
-          :show-play-btn="false"
-          :show-loading="false"
-          :enable-progress-gesture="false"
-          class="wd-upload__video"
-        >
-          <wd-icon name="play-circle-filled" custom-class="wd-upload__video-paly"></wd-icon>
-        </video>
-        <!-- <template v-else-if="isVideo(file)">
-          <view v-if="file.thumb" class="wd-upload__video" @click="onPreviewVideo(file)">
-            <image :src="file.thumb" mode="aspectFit" class="wd-upload__picture" />
-          </view>
+        <template v-else-if="isVideo(file)">
+          <image v-if="file.thumb" :src="file.thumb" :mode="imageMode" class="wd-upload__picture" @click="onPreviewVideo(file)" />
           <view v-else class="wd-upload__video" @click="onPreviewVideo(file)">
+            <!-- #ifdef MP-DINGTALK -->
             <wd-icon name="video" size="22px"></wd-icon>
-            <view class="wd-upload__video-name">{{ file.name || file.url }}</view>
+            <!-- #endif -->
+
+            <!-- #ifndef MP-DINGTALK -->
+            <video
+              :src="file.url"
+              :title="file.name || '视频' + index"
+              object-fit="contain"
+              :controls="false"
+              :show-center-play-btn="false"
+              :show-fullscreen-btn="false"
+              :show-play-btn="false"
+              :show-loading="false"
+              :show-progress="false"
+              :show-mute-btn="false"
+              :enable-progress-gesture="false"
+              :enableNative="true"
+              class="wd-upload__video"
+            ></video>
+            <wd-icon name="play-circle-filled" custom-class="wd-upload__video-paly"></wd-icon>
+            <!-- #endif -->
           </view>
-        </template> -->
+        </template>
 
         <view v-else class="wd-upload__file" @click="onPreviewFile(file)">
           <wd-icon name="file" size="22px"></wd-icon>
@@ -351,6 +352,7 @@ function onChooseFile() {
       if (!multiple) {
         files = files.slice(0, 1)
       }
+      console.log(res)
 
       // 遍历列表逐个初始化上传参数
       const mapFiles = (files: ChooseFile[]) => {

@@ -7,7 +7,7 @@ export interface ChooseFileOption {
   // 是否支持多选文件
   multiple: boolean
   // 所选的图片的尺寸
-  sizeType: UploadSizeType[]
+  sizeType?: UploadSizeType[]
   // 选择文件的来源
   sourceType: UploadSourceType[]
   // 最大允许上传个数
@@ -171,7 +171,9 @@ export const uploadProps = {
    */
   sizeType: {
     type: Array as PropType<UploadSizeType[]>,
+    // #ifndef MP-DINGTALK
     default: () => ['original', 'compressed']
+    // #endif
   },
   /**
    * 文件对应的key，开发者在服务端可以通过这个key获取文件的二进制内容，uploadFile接口详细参数，查看官方手册
