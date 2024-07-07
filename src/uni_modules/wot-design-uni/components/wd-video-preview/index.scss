@@ -1,0 +1,28 @@
+@import "../common/abstracts/variable.scss";
+@import "../common/abstracts/_mixin.scss";
+
+@include b(video-preview) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 101;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+
+  @include e(video) {
+    width: 100%;
+    height: 242px;
+    transition: all 0.3s ease;
+  }
+
+  @include edeep(close){
+    margin-top: 64px;
+    padding: 6px;
+    color: $-curtain-content-close-color;
+  }
+}

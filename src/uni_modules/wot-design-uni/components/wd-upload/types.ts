@@ -4,34 +4,63 @@ import type { LoadingType } from '../wd-loading/types'
 import type { ImageMode } from '../wd-img/types'
 
 export interface ChooseFileOption {
+  // 是否支持多选文件
   multiple: boolean
-  sizeType: string | string[]
-  sourceType: string[]
+  // 所选的图片的尺寸
+  sizeType?: UploadSizeType[]
+  // 选择文件的来源
+  sourceType: UploadSourceType[]
+  // 最大允许上传个数
   maxCount: number
+  // 接受文件类型
+  accept: UploadFileType
+  /**
+   * 是否压缩视频，当 accept 为 video 时生效。
+   */
+  compressed: boolean
+  /**
+   * 拍摄视频最长拍摄时间，当 accept 为 video | media 时生效，单位秒。
+   */
+  maxDuration: number
+  /**
+   * 使用前置或者后置相机，当 accept 为 video | media 时生效，可选值为：back｜front。
+   */
+  camera: UploadCameraType
 }
 
-export interface UploadFileItem {
+export type UploadFileItem = {
   [key: string]: any
   // 	当前上传文件在列表中的唯一标识
   uid: number
+  // 缩略图地址
+  thumb?: string
   // 当前文件名称，仅h5支持
   name?: string
   // 上传状态
-  status: string
+  status?: string
   // 文件大小
-  size: number
-  // 上传图片的本地地址
+  size?: number
+  // 上传图片/视频的本地地址
   url: string
-  // 上传的地址
-  action: string
   // 上传进度
-  percent: number
+  percent?: number
   // 后端返回的内容，可能是对象，也可能是字符串
   response?: string | Record<string, any>
 }
 
+export interface ChooseFile {
+  path: string // 上传临时地址
+  size?: number // 上传大小
+  name?: string // 当前文件名称，仅h5支持
+  type: 'image' | 'video' | 'file' // 上传类型
+  duration?: number // 上传时间
+  thumb?: string // 缩略图地址
+}
+
 export type UploadSourceType = 'album' | 'camera'
 export type UploadSizeType = 'original' | 'compressed'
+export type UploadFileType = 'image' | 'video' | 'media' | 'all' | 'file'
+export type UploadCameraType = 'front' | 'back'
 
 export type UploadBeforePreviewOption = {
   index: number
@@ -74,15 +103,16 @@ export type UploadBuildFormDataOption = {
 }
 export type UploadBuildFormData = (options: UploadBuildFormDataOption) => void
 
+export type UploadFile = Partial<UploadFileItem> & { url: string }
+
 export const uploadProps = {
   ...baseProps,
-
   /**
    * 上传的文件列表,例如:[{name:'food.jpg',url:'https://xxx.cdn.com/xxx.jpg'}]
    * 类型：array
    * 默认值：[]
    */
-  fileList: makeArrayProp<UploadFileItem>(),
+  fileList: makeArrayProp<UploadFile>(),
   /**
    * 必选参数，上传的地址
    * 类型：string
@@ -110,9 +140,9 @@ export const uploadProps = {
   /**
    * 最大允许上传个数
    * 类型：number
-   * 默认值：0
+   * 默认值：无
    */
-  limit: makeNumberProp(0),
+  limit: Number,
   /**
    * 限制上传个数的情况下，是否展示当前上传的个数
    * 类型：boolean
@@ -141,7 +171,9 @@ export const uploadProps = {
    */
   sizeType: {
     type: Array as PropType<UploadSizeType[]>,
+    // #ifndef MP-DINGTALK
     default: () => ['original', 'compressed']
+    // #endif
   },
   /**
    * 文件对应的key，开发者在服务端可以通过这个key获取文件的二进制内容，uploadFile接口详细参数，查看官方手册
@@ -204,7 +236,13 @@ export const uploadProps = {
    * 默认值：'#ffffff'
    */
   loadingColor: makeStringProp('#ffffff'),
-  accept: makeStringProp('image'),
+  /**
+   * 文件类型，可选值：'image' | 'video' | 'media' | 'all' | 'file'
+   * 默认值：image
+   * 描述：'media'表示同时支持'image'和'video'，'file'表示支持除'image'和'video'外的所有文件类型，'all'标识支持全部类型文件
+   * 'media'和'file'仅微信支持，'all'仅微信和H5支持
+   */
+  accept: makeStringProp<UploadFileType>('image'),
   /**
    * file 数据结构中，status 对应的 key
    * 类型：string
@@ -212,17 +250,29 @@ export const uploadProps = {
    */
   statusKey: makeStringProp('status'),
   /**
-   * 开启默认唤起项插槽
-   * 类型：boolean
-   * 默认值：false
-   */
-  useDefaultSlot: makeBooleanProp(false),
-  /**
    * 加载中图标尺寸
    * 类型：string
    * 默认值：'24px'
    */
   loadingSize: makeStringProp('24px'),
+  /**
+   * 是否压缩视频，当 accept 为 video 时生效。
+   * 类型：boolean
+   * 默认值：true
+   */
+  compressed: makeBooleanProp(true),
+  /**
+   * 拍摄视频最长拍摄时间，当 accept 为 video | media 时生效，单位秒。
+   * 类型：number
+   * 默认值：60
+   */
+  maxDuration: makeNumberProp(60),
+  /**
+   * 使用前置或者后置相机，当 accept 为 video | media 时生效，可选值为：back｜front。
+   * 类型：UploadCameraType
+   * 默认值：'back'
+   */
+  camera: makeStringProp<UploadCameraType>('back'),
   /**
    * 自定义上传按钮样式
    * 类型：string
