@@ -1,18 +1,32 @@
 <template>
   <page-wraper>
     <demo-block title="点状指示器">
-      <wd-swiper :list="swiperList" autoplay :current="0" :indicator="{ type: 'dots' }" @click="handleClick" @change="onChange"></wd-swiper>
+      <wd-swiper
+        :list="swiperList"
+        autoplay
+        v-model:current="current"
+        :indicator="{ type: 'dots' }"
+        @click="handleClick"
+        @change="onChange"
+      ></wd-swiper>
     </demo-block>
 
     <demo-block title="点条状指示器">
-      <wd-swiper :list="swiperList" autoplay :current="1" :indicator="{ type: 'dots-bar' }" @click="handleClick" @change="onChange"></wd-swiper>
+      <wd-swiper
+        :list="swiperList"
+        autoplay
+        v-model:current="current1"
+        :indicator="{ type: 'dots-bar' }"
+        @click="handleClick"
+        @change="onChange"
+      ></wd-swiper>
     </demo-block>
 
     <demo-block title="数字指示器">
       <wd-swiper
         :list="swiperList"
         autoplay
-        :current="2"
+        v-model:current="current2"
         :indicator="{ type: 'fraction' }"
         indicator-position="bottom-right"
         @click="handleClick"
@@ -24,7 +38,7 @@
       <wd-swiper
         :list="swiperList"
         :autoplay="false"
-        :current="3"
+        v-model:current="current3"
         :indicator="{ showControls: true }"
         :loop="false"
         @click="handleClick"
@@ -36,7 +50,7 @@
       <view class="card-swiper">
         <wd-swiper
           autoplay
-          :current="4"
+          v-model:current="current4"
           custom-indicator-class="custom-indicator-class"
           custom-image-class="custom-image"
           custom-next-image-class="custom-image-prev"
@@ -53,7 +67,7 @@
       <view class="card-swiper">
         <wd-swiper
           autoplay
-          :current="4"
+          v-model:current="current5"
           :display-multiple-items="2"
           custom-indicator-class="custom-indicator-class"
           custom-image-class="custom-image"
@@ -73,7 +87,7 @@
         direction="vertical"
         indicator-position="right"
         autoplay
-        :current="1"
+        v-model:current="current6"
         :indicator="{ type: 'dots-bar' }"
         @click="handleClick"
         @change="onChange"
@@ -81,7 +95,15 @@
     </demo-block>
 
     <demo-block title="自定义指示器">
-      <wd-swiper :list="swiperList" direction="vertical" indicator-position="right" autoplay :current="1" @click="handleClick" @change="onChange">
+      <wd-swiper
+        :list="swiperList"
+        direction="vertical"
+        indicator-position="right"
+        autoplay
+        v-model:current="current7"
+        @click="handleClick"
+        @change="onChange"
+      >
         <template #indicator="{ current, total }">
           <view class="custom-indicator" style="position: absolute; bottom: 24rpx; right: 24rpx">{{ current + 1 }}/{{ total }}</view>
         </template>
@@ -89,18 +111,18 @@
     </demo-block>
 
     <demo-block title="属性控制切换">
-      <wd-swiper :loop="isLoop" :autoplay="false" :list="swiperList" v-model:current="current" />
+      <wd-swiper :loop="isLoop" :autoplay="false" :list="swiperList" v-model:current="current8" />
       <wd-gap />
       <wd-cell-group>
         <wd-cell title="loop">
           <wd-switch v-model="isLoop" size="24px" />
         </wd-cell>
-        <wd-cell title="current" :value="current.toString()" />
+        <wd-cell title="current" :value="current8.toString()" />
       </wd-cell-group>
       <view style="display: flex; justify-content: space-between">
-        <wd-button @click="current--">prev</wd-button>
+        <wd-button @click="current8--">prev</wd-button>
 
-        <wd-button type="success" @click="current++">next</wd-button>
+        <wd-button type="success" @click="current8++">next</wd-button>
       </view>
     </demo-block>
   </page-wraper>
@@ -112,11 +134,20 @@ const swiperList = ref([
   'https://unpkg.com/wot-design-uni-assets/redpanda.jpg',
   'https://unpkg.com/wot-design-uni-assets/capybara.jpg',
   'https://unpkg.com/wot-design-uni-assets/panda.jpg',
-  'https://img.yzcdn.cn/vant/cat.jpeg',
+  'https://unpkg.com/wot-design-uni-assets/moon.jpg',
   'https://unpkg.com/wot-design-uni-assets/meng.jpg'
 ])
 
 const current = ref<number>(0)
+const current1 = ref<number>(1)
+const current2 = ref<number>(2)
+const current3 = ref<number>(3)
+const current4 = ref<number>(4)
+const current5 = ref<number>(0)
+const current6 = ref<number>(0)
+const current7 = ref<number>(0)
+const current8 = ref<number>(0)
+
 const isLoop = ref(false)
 
 function handleClick(e: any) {
