@@ -82,12 +82,15 @@ onMounted(() => {
 
 function hanleScroll(scrollEvent: any) {
   const { detail } = scrollEvent
+  const scrolltop = Math.floor(detail.scrollTop)
   const anchor = state.anchorList.find((item, index) => {
     if (!isDef(state.anchorList[index + 1])) return true
-    if (item.top - offsetTop <= detail.scrollTop && state.anchorList[index + 1].top - offsetTop > detail.scrollTop) return true
+    if (item.top - offsetTop <= scrolltop && state.anchorList[index + 1].top - offsetTop > scrolltop) return true
     return false
   })!
-  state.activeIndex = anchor.index
+  if (state.activeIndex !== anchor.index) {
+    state.activeIndex = anchor.index
+  }
 }
 
 function getAnchorByPageY(pageY: number) {
