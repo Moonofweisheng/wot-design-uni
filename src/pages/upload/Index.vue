@@ -4,7 +4,7 @@
     <wd-privacy-popup></wd-privacy-popup>
     <!-- #endif -->
     <wd-message-box></wd-message-box>
-    <wd-toast id="wd-toast"></wd-toast>
+    <wd-toast></wd-toast>
     <demo-block title="基本用法">
       <wd-upload accept="image" :file-list="fileList" image-mode="aspectFill" :action="action" @change="handleChange"></wd-upload>
     </demo-block>
@@ -205,11 +205,11 @@ function handleChange({ fileList }: any) {
 }
 
 function handleChange1({ fileList }: { fileList: UploadFile[] }) {
-  fileList.forEach((item) => {
-    if (!item.thumb) {
-      item.thumb = 'https://unpkg.com/wot-design-uni-assets/redpanda.jpg'
-    }
-  })
+  // fileList.forEach((item) => {
+  //   if (!item.thumb) {
+  //     item.thumb = 'https://unpkg.com/wot-design-uni-assets/redpanda.jpg'
+  //   }
+  // })
   fileList1.value = fileList
 }
 function handleChange2({ fileList }: any) {

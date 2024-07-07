@@ -250,12 +250,6 @@ export const uploadProps = {
    */
   statusKey: makeStringProp('status'),
   /**
-   * 开启默认唤起项插槽
-   * 类型：boolean
-   * 默认值：false
-   */
-  useDefaultSlot: makeBooleanProp(false),
-  /**
    * 加载中图标尺寸
    * 类型：string
    * 默认值：'24px'

@@ -6,18 +6,23 @@
       <view class="wd-upload__status-content">
         <image v-if="isImage(file)" :src="file.url" :mode="imageMode" class="wd-upload__picture" @click="onPreviewImage(index)" />
         <template v-else-if="isVideo(file)">
-          <image v-if="file.thumb" :src="file.thumb" :mode="imageMode" class="wd-upload__picture" @click="onPreviewVideo(file)" />
+          <view class="wd-upload__video" v-if="file.thumb" @click="onPreviewVideo(file)">
+            <image :src="file.thumb" :mode="imageMode" class="wd-upload__picture" />
+            <wd-icon name="play-circle-filled" custom-class="wd-upload__video-paly"></wd-icon>
+          </view>
           <view v-else class="wd-upload__video" @click="onPreviewVideo(file)">
-            <!-- #ifdef MP-DINGTALK -->
+            <!-- #ifdef APP-PLUS || MP-DINGTALK -->
             <wd-icon name="video" size="22px"></wd-icon>
             <!-- #endif -->
-
+            <!-- #ifndef APP-PLUS -->
             <!-- #ifndef MP-DINGTALK -->
             <video
               :src="file.url"
               :title="file.name || '视频' + index"
               object-fit="contain"
               :controls="false"
+              :poster="file.thumb"
+              :autoplay="false"
               :show-center-play-btn="false"
               :show-fullscreen-btn="false"
               :show-play-btn="false"
@@ -29,6 +34,7 @@
               class="wd-upload__video"
             ></video>
             <wd-icon name="play-circle-filled" custom-class="wd-upload__video-paly"></wd-icon>
+            <!-- #endif -->
             <!-- #endif -->
           </view>
         </template>
@@ -211,6 +217,24 @@ watch(
 )
 
 /**
+ * 获取图片信息
+ * @param img
+ */
+function getImageInfo(img: string) {
+  return new Promise<UniApp.GetImageInfoSuccessData>((resolve, reject) => {
+    uni.getImageInfo({
+      src: img,
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (error) => {
+        reject(error)
+      }
+    })
+  })
+}
+
+/**
  * @description 初始化文件数据
  * @param {Object} file 上传的文件
  */
@@ -352,13 +376,16 @@ function onChooseFile() {
       if (!multiple) {
         files = files.slice(0, 1)
       }
-      console.log(res)
-
       // 遍历列表逐个初始化上传参数
-      const mapFiles = (files: ChooseFile[]) => {
-        files.forEach(async (file) => {
+      const mapFiles = async (files: ChooseFile[]) => {
+        for (let index = 0; index < files.length; index++) {
+          const file = files[index]
+          if (file.type === 'image' && !file.size) {
+            const imageInfo = await getImageInfo(file.path)
+            file.size = imageInfo.width * imageInfo.height
+          }
           Number(file.size) <= maxSize ? initFile(file) : emit('oversize', { file })
-        })
+        }
       }
 
       // 上传前的钩子

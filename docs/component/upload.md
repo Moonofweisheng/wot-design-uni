@@ -4,6 +4,10 @@
 
 图片、视频和文件上传组件
 
+::: tip 提示
+目前组件库已兼容的平台，都支持上传视频，使用`video`组件实现的视频封面在`H5`、`微信小程序`和`支付宝小程序`平台得到支持，而在`钉钉小程序`和`App`平台则受限于`video`标签在这两个平台的能力无法用做视频封面。故推荐在`change`事件中获取视频封面并给`fileList`对应视频添加封面：`thumb`（上传至各种云服务器时，各厂商应该都提供了视频封面的功能）。
+:::
+
 ## 基本用法
 
 `file-list` 设置上传列表，数据类型为数组；
@@ -500,10 +504,12 @@ function handleChange({ files }) {
 | loading-type     | [加载中图标类型](/component/loading)                                                                                                                                           | string                                 | -                                              | circular-ring              | -        |
 | loading-color    | [加载中图标颜色](/component/loading)                                                                                                                                           | string                                 | -                                              | #ffffff                    | -        |
 | loading-size     | [加载中图标尺寸](/component/loading)                                                                                                                                           | string                                 | -                                              | 24px                       | -        |
-| use-default-slot | 开启默认唤起项插槽                                                                                                                                                             | boolean                                | -                                              | false                      | -        |
 | status-key       | file 数据结构中，status 对应的 key                                                                                                                                             | string                                 | -                                              | status                     | -        |
 | image-mode              | 预览图片的 mode 属性                                                                                                                                                           | ImageMode                              | -      | aspectFit                  | -        |
 | accept           | 接受的文件类型                                                                                                                                                                 | UploadFileType                         | **image** **video** **media** **file** **all** | **image**                  | 1.3.0    |
+| compressed       | 是否压缩视频，当 accept 为 video \| media 时生效                                                                                                                                                                 | boolean                         | - | true                  | 1.3.0    |
+| maxDuration           | 拍摄视频最长拍摄时间，当 accept 为 video \| media 时生效，单位秒                                                                                                                                                               | Number                         | - | 60                 | 1.3.0    |
+| camera           | 使用前置或者后置相机，当 accept 为 video \| media 时生效                                                                                                                                                                 | UploadCameraType       | **front**  | **back**                  | 1.3.0    |
 
 ## accept 的合法值
 

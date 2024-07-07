@@ -79,7 +79,7 @@
 通过设置 `clickable` 开启点击反馈，之后可以监听`click`事件。
 
 ```html
-<wd-toast id="wd-toast" />
+<wd-toast />
 <wd-cell title="标题文字" value="内容" clickable @click="toast" />
 ```
 

@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 22:36:44
- * @LastEditTime: 2024-07-05 23:59:32
+ * @LastEditTime: 2024-07-07 18:59:40
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-upload\utils.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-upload/utils.ts
  * 记得注释
  */
 import { isArray, isDef } from '../common/util'
@@ -16,15 +16,17 @@ function formatImage(res: UniApp.ChooseImageSuccessCallbackResult): ChooseFile[]
   res.tempFiles = isDef((res as any).files) ? (res as any).files : res.tempFiles
   // #endif
   if (isArray(res.tempFiles)) {
-    return res.tempFiles.map((item: any) => {
-      return {
+    const result: ChooseFile[] = []
+    res.tempFiles.forEach(async (item: any) => {
+      result.push({
         path: item.path || '',
         name: item.name || '',
         size: item.size,
         type: 'image',
         thumb: item.path || ''
-      }
+      })
     })
+    return result
   } else {
     return [
       {

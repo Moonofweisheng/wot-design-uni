@@ -2,13 +2,17 @@
 @import "../common/abstracts/_mixin.scss";
 
 @include b(video-preview) {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 101;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: #000;
 
   @include e(video) {
     width: 100%;
