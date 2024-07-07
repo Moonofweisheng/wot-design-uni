@@ -77,7 +77,6 @@ function handleChange2({ value }) {
 const dropMenu = ref()
 const slider = ref<SliderInstance>() // slider 1.2.25支持
 
-
 const value = ref<number>(0)
 const sliderValue = ref<number>(30)
 const option = ref<Record<string, any>>([
@@ -96,7 +95,6 @@ function confirm() {
 function handleOpened() {
   slider.value?.initSlider()
 }
-
 ```
 
 ## 自定义菜单选项
@@ -106,7 +104,7 @@ function handleOpened() {
 ```html
 <view style="display: flex; background: #fff; text-align: center;">
   <wd-drop-menu style="flex: 1; min-width: 0;">
-    <wd-drop-menu-item  v-model="value1" :options="option" @change="handleChange1" />
+    <wd-drop-menu-item v-model="value1" :options="option" @change="handleChange1" />
   </wd-drop-menu>
   <view style="flex: 1;">
     <wd-sort-button v-model="value2" title="上架时间" @change="handleChange2" />
@@ -147,7 +145,7 @@ function handleOpened() {
 
 | 参数      | 说明                                                                   | 类型            | 可选值 | 默认值 | 最低版本 |
 | --------- | ---------------------------------------------------------------------- | --------------- | ------ | ------ | -------- |
-| v-model     | 当前选中项对应选中的 value                                             | string / number | -      | -      | -        |
+| v-model   | 当前选中项对应选中的 value                                             | string / number | -      | -      | -        |
 | disabled  | 禁用菜单                                                               | boolean         | -      | false  | -        |
 | options   | 列表数据，对应数据结构 `[{text: '标题', value: '0', tip: '提示文字'}]` | array           | -      | -      | -        |
 | icon-name | 选中的图标名称(可选名称在 wd-icon 组件中)                              | string          | -      | check  | -        |
@@ -158,11 +156,13 @@ function handleOpened() {
 
 ## DropdownItem Events
 
-| 方法名      | 说明             | 参数                                                                          | 最低版本 |
-| ----------- | ---------------- | ----------------------------------------------------------------------------- | -------- |
+| 方法名 | 说明             | 参数                                                                          | 最低版本 |
+| ------ | ---------------- | ----------------------------------------------------------------------------- | -------- |
 | change | 绑定值变化时触发 | event.detail = { value, selectedItem }, value 为选中值，selectedItem 为选中项 | -        |
 | close  | 关闭菜单         | -                                                                             | -        |
 | open   | 展开菜单         | -                                                                             | -        |
+| closed | 菜单完全关闭     | -                                                                             | -        |
+| opened | 菜单展开完成     | -                                                                             | -        |
 
 ## DropdownItem Methods
 
