@@ -10,8 +10,12 @@
       color: $-dark-color;
       background: $-dark-background2;
 
-      &:active {
+      &:not(&--disabled):not(&--loading):active {
         background: $-dark-background4;
+      }
+
+      @include m(disabled) {
+        color: $-dark-color-gray;
       }
     }
 
