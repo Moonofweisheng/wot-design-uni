@@ -111,8 +111,10 @@
 <script setup lang="ts">
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
 import type { ColPickerColumnChangeOption } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
-import { areaData } from '@/utils/area'
 import { ref } from 'vue'
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
+
 const showAction = ref<boolean>(false)
 const actions = ref<any[]>([])
 
@@ -168,20 +170,21 @@ const address = ref<any[]>([])
 const count = ref<number>(1)
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
 const areaChange = ({ selectedItem, resolve, finish }: ColPickerColumnChangeOption) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )

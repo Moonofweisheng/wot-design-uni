@@ -1,6 +1,28 @@
 # 更新日志 
 
 
+## [1.3.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.28...v1.3.0) (2024-07-07)
+
+
+### ✨ Features | 新功能
+
+* ✨ Upload上传组件新增支持上传视频和文件 ([#412](https://github.com/Moonofweisheng/wot-design-uni/issues/412)) ([e07dbdd](https://github.com/Moonofweisheng/wot-design-uni/commit/e07dbdd5305c112fe3648ce988a45b2cc36ae143)), closes [#186](https://github.com/Moonofweisheng/wot-design-uni/issues/186) [#336](https://github.com/Moonofweisheng/wot-design-uni/issues/336)
+* ✨select-picker组件增加open、close事件 ([#395](https://github.com/Moonofweisheng/wot-design-uni/issues/395)) ([9237a04](https://github.com/Moonofweisheng/wot-design-uni/commit/9237a04bcbde9960864b9a7b09a64fc2b6c27595))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整ColPicker多列选择器文档中省市区数据源及演示demo ([d09bd03](https://github.com/Moonofweisheng/wot-design-uni/commit/d09bd037e735b02264074c2a251c59c01b8ff571))
+* ✏️  DropDownItem文档增加closed和opened介绍 ([401bd28](https://github.com/Moonofweisheng/wot-design-uni/commit/401bd284ceaafe957a0f4184d0a009bed70e9377))
+* ✏️ PasswordInput 修复示例代码错误的问题 ([#391](https://github.com/Moonofweisheng/wot-design-uni/issues/391)) ([519d172](https://github.com/Moonofweisheng/wot-design-uni/commit/519d17235b7c61acf2048104a495690bff0b9804))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Calendar等组件暗黑模式部分样式异常的问题 ([281e20f](https://github.com/Moonofweisheng/wot-design-uni/commit/281e20f2a922d98c00321d1316efc96b985c620d)), closes [#388](https://github.com/Moonofweisheng/wot-design-uni/issues/388)
+* 🐛 修复IndexBar点击索引序号时未显示预期索引值的问题 ([c33991e](https://github.com/Moonofweisheng/wot-design-uni/commit/c33991ee14b8108bcd084b5d7b59f35cb79b2b35)), closes [#408](https://github.com/Moonofweisheng/wot-design-uni/issues/408)
+* 🐛 修复Swiper在微信端长时间处于后台出现抖动的问题 ([#413](https://github.com/Moonofweisheng/wot-design-uni/issues/413)) ([4741439](https://github.com/Moonofweisheng/wot-design-uni/commit/4741439277f1a2668634a4e5e3649236ed95a627)), closes [#411](https://github.com/Moonofweisheng/wot-design-uni/issues/411)
+
 ### [1.2.28](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.27...v1.2.28) (2024-06-24)
 
 

@@ -13,7 +13,7 @@
       @before-enter="handleOpen"
       @after-enter="handleOpened"
       @before-leave="handleClose"
-      @after-leave="onPopupClose"
+      @after-leave="handleClosed"
     >
       <view v-if="options.length">
         <view
@@ -160,7 +160,7 @@ function open() {
 
   emit('open')
 }
-function onPopupClose() {
+function handleClosed() {
   showWrapper.value = false
   emit('closed')
 }

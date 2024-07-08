@@ -4,12 +4,9 @@
     <wd-privacy-popup></wd-privacy-popup>
     <!-- #endif -->
     <wd-message-box></wd-message-box>
-    <wd-toast id="wd-toast"></wd-toast>
+    <wd-toast></wd-toast>
     <demo-block title="基本用法">
-      <wd-upload :file-list="fileList1" image-mode="aspectFill" :action="action" @change="handleChange1"></wd-upload>
-    </demo-block>
-    <demo-block title="多选上传">
-      <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
+      <wd-upload accept="image" :file-list="fileList" image-mode="aspectFill" :action="action" @change="handleChange"></wd-upload>
     </demo-block>
     <demo-block title="最大上传数限制">
       <wd-upload :file-list="fileList3" :limit="3" :action="action" @change="handleChange3"></wd-upload>
@@ -48,32 +45,58 @@
     <!-- <demo-block title="上传至oss">
       <wd-upload :file-list="fileList11" action="https://xxx.aliyuncs.com" :build-form-data="buildFormData" @change="handleChange11"></wd-upload>
     </demo-block> -->
+
+    <demo-block title="上传视频">
+      <wd-upload accept="video" multiple :file-list="fileList1" :action="action" @change="handleChange1"></wd-upload>
+    </demo-block>
+
+    <!-- #ifdef MP-WEIXIN -->
+    <demo-block title="上传视频和图片">
+      <wd-upload accept="media" multiple :file-list="fileList11" :action="action" @change="handleChange11"></wd-upload>
+    </demo-block>
+    <demo-block title="仅上传文件">
+      <wd-upload accept="file" multiple :file-list="fileList12" :action="action" @change="handleChange12"></wd-upload>
+    </demo-block>
+    <!-- #endif -->
+
+    <!-- #ifdef MP-WEIXIN || H5  -->
+    <demo-block title="上传视频图片和文件">
+      <wd-upload accept="all" multiple :file-list="fileList13" :action="action" @change="handleChange13"></wd-upload>
+    </demo-block>
+    <!-- #endif -->
   </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+import type { UploadFile } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
 import { ref } from 'vue'
 
-const action: string = 'https://ftf.jd.com/api/uploadImg'
-const fileList1 = ref<any[]>([
+const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
+const fileList = ref<UploadFile[]>([
   {
     url: 'https://img.yzcdn.cn/vant/cat.jpeg'
   }
 ])
-const fileList2 = ref<any[]>([
+
+const fileList1 = ref<UploadFile[]>([])
+const fileList2 = ref<UploadFile[]>([
   {
     url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
   }
 ])
-const fileList3 = ref([])
-const fileList4 = ref([])
-const fileList5 = ref([])
-const fileList6 = ref([])
-const fileList7 = ref([])
-const fileList8 = ref([])
-const fileList9 = ref([])
-const fileList10 = ref([])
-const fileList11 = ref([])
+const fileList3 = ref<UploadFile[]>([])
+const fileList4 = ref<UploadFile[]>([])
+const fileList5 = ref<UploadFile[]>([])
+const fileList6 = ref<UploadFile[]>([])
+const fileList7 = ref<UploadFile[]>([])
+const fileList8 = ref<UploadFile[]>([])
+const fileList9 = ref<UploadFile[]>([])
+const fileList10 = ref<UploadFile[]>([])
+const fileList11 = ref<UploadFile[]>([])
+const fileList12 = ref<UploadFile[]>([])
+const fileList13 = ref<UploadFile[]>([])
+const fileList14 = ref<UploadFile[]>([])
+const fileList15 = ref<UploadFile[]>([])
 
 const messageBox = useMessage()
 const toast = useToast()
@@ -176,7 +199,17 @@ function handleFail(event: any) {
 function handleProgess(event: any) {
   console.log('加载中', event)
 }
-function handleChange1({ fileList }: any) {
+
+function handleChange({ fileList }: any) {
+  fileList.value = fileList
+}
+
+function handleChange1({ fileList }: { fileList: UploadFile[] }) {
+  // fileList.forEach((item) => {
+  //   if (!item.thumb) {
+  //     item.thumb = 'https://unpkg.com/wot-design-uni-assets/redpanda.jpg'
+  //   }
+  // })
   fileList1.value = fileList
 }
 function handleChange2({ fileList }: any) {
@@ -208,6 +241,15 @@ function handleChange10({ fileList }: any) {
 }
 function handleChange11({ fileList }: any) {
   fileList11.value = fileList
+}
+function handleChange12({ fileList }: any) {
+  fileList12.value = fileList
+}
+function handleChange13({ fileList }: any) {
+  fileList13.value = fileList
+}
+function handleChange14({ fileList }: any) {
+  fileList14.value = fileList
 }
 </script>
 <style lang="scss" scoped></style>

@@ -35,7 +35,7 @@ function getInfo() {
   getRect(`#${indexAnchorId.value}`, false, proxy).then((res) => {
     if (isDef(indexBar)) {
       const anchor = indexBar.anchorState.anchorList.find((v) => v.index === props.index)!
-      anchor.top = res.top!
+      anchor.top = Math.floor(res.top!)
     }
   })
 }

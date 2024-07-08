@@ -114,7 +114,10 @@ import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
 import type { ColPickerColumnChange } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
 import { type FormInstance, type FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import type { UploadFileItem } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
-import { areaData } from '@/utils/area'
+import { useColPickerData } from '@/hooks/useColPickerData'
+
+const { colPickerData, findChildrenByCode } = useColPickerData()
+
 import { reactive, ref } from 'vue'
 
 const model = reactive<{
@@ -353,20 +356,21 @@ const promotionlist = ref<any[]>([
 ])
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
 const areaChange: ColPickerColumnChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )

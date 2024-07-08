@@ -2,7 +2,11 @@
 
 # Upload 上传
 
-图片上传组件
+图片、视频和文件上传组件
+
+::: tip 提示
+目前组件库已兼容的平台，都支持上传视频，使用`video`组件实现的视频封面在`H5`、`微信小程序`和`支付宝小程序`平台得到支持，而在`钉钉小程序`和`App`平台则受限于`video`标签在这两个平台的能力无法用做视频封面。故推荐在`change`事件中获取视频封面并给`fileList`对应视频添加封面：`thumb`（上传至各种云服务器时，各厂商应该都提供了视频封面的功能）。
+:::
 
 ## 基本用法
 
@@ -10,7 +14,7 @@
 
 数据更改后通过绑定 `change` 事件给 fileList 赋值。
 
-`action` 设置图片上传的地址；
+`action` 设置上传的地址；
 
 ```html
 <wd-upload :file-list="fileList1" image-mode="aspectFill" :action="action" @change="handleChange1"></wd-upload>
@@ -23,7 +27,7 @@ const fileList = ref<any[]>([
   }
 ])
 
-const action: string = 'https://ftf.jd.com/api/uploadImg'
+const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
 
 function handleChange({ fileList: files }) {
   fileList.value = files
@@ -35,7 +39,12 @@ function handleChange({ fileList: files }) {
 设置 `disabled` 开启禁用上传
 
 ```html
-<wd-upload :file-list="fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleChange" disabled></wd-upload>
+<wd-upload
+  :file-list="fileList"
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+  disabled
+></wd-upload>
 ```
 
 ## 多选上传
@@ -43,7 +52,12 @@ function handleChange({ fileList: files }) {
 通过设置 `multiple` 开启文件多选上传。
 
 ```html
-<wd-upload :file-list="fileList" multiple action="https://ftf.jd.com/api/uploadImg" @change="handleChange"></wd-upload>
+<wd-upload
+  :file-list="fileList"
+  multiple
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+></wd-upload>
 ```
 
 ## 最大上传数限制
@@ -51,7 +65,12 @@ function handleChange({ fileList: files }) {
 上传组件可通过设置 `limit` 来限制上传文件的个数。
 
 ```html
-<wd-upload :file-list="fileList" :limit="3" action="https://ftf.jd.com/api/uploadImg" @change="handleChange"></wd-upload>
+<wd-upload
+  :file-list="fileList"
+  :limit="3"
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+></wd-upload>
 ```
 
 ## 拦截预览图片操作
@@ -59,7 +78,12 @@ function handleChange({ fileList: files }) {
 设置 `before-preview` 函数，在用户点击图片进行预览时，会执行 `before-preview` 函数，接收 { index: 当前预览的下标, imgList: 所有图片地址列表, resolve }，通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会执行预览图片操作。
 
 ```html
-<wd-upload :file-list="fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleChange" :before-preview="beforePreview"></wd-upload>
+<wd-upload
+  :file-list="fileList"
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+  :before-preview="beforePreview"
+></wd-upload>
 ```
 
 ```typescript
@@ -97,7 +121,12 @@ function handleChange({ files }) {
 设置 `before-upload` 函数，弹出图片选择界面，在用户选择图片点击确认后，会执行 `before-upload` 函数，接收 { files: 当前上传的文件, fileList: 文件列表, resolve }，可以对 `file` 进行处理，并通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会执行上传操作。
 
 ```html
-<wd-upload :file-list="fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleChange" :before-upload="beforeUpload"></wd-upload>
+<wd-upload
+  :file-list="fileList"
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+  :before-upload="beforeUpload"
+></wd-upload>
 ```
 
 ```typescript
@@ -135,7 +164,12 @@ function handleChange({ files }) {
 设置 `before-remove` 函数，在用户点击关闭按钮时，会执行 `before-remove` 函数，接收 { file: 移除的文件, index: 移除文件的下标, fileList: 文件列表, resolve }，可以对 `file` 进行处理，并通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会执行移除图片操作。
 
 ```html
-<wd-upload :file-list="fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleChange" :before-remove="beforeRemove"></wd-upload>
+<wd-upload
+  :file-list="fileList"
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+  :before-remove="beforeRemove"
+></wd-upload>
 ```
 
 ```typescript
@@ -174,7 +208,12 @@ function handleChange({ files }) {
 设置 `before-choose` 函数，在用户点击唤起项时，会执行 `before-choose` 函数，接收 { fileList: 文件列表, resolve }，通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会执行选择文件操作。
 
 ```html
-<wd-upload :file-list="fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleChange" :before-choose="beforeChoose"></wd-upload>
+<wd-upload
+  :file-list="fileList"
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+  :before-choose="beforeChoose"
+></wd-upload>
 ```
 
 ```typescript
@@ -352,6 +391,11 @@ const buildFormData = ({ file, formData, resolve }) => {
 使用默认插槽可以修改唤起上传的样式。
 
 ```html
+<wd-upload
+  :file-list="fileList"
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+>
 <wd-upload :file-list="fileList" :limit="5" action="https://ftf.jd.com/api/uploadImg" @change="handleChange">
   <wd-button>上传</wd-button>
 </wd-upload>
@@ -365,35 +409,117 @@ const fileList = ref<any[]>([
 ])
 ```
 
+## 上传视频
+
+将`accept`设置为`video`可以用于上传视频类型的文件。
+
+```html
+<wd-upload accept="video" multiple :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
+```
+
+```typescript
+const action = ref<string>('https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload')
+
+const fileList = ref([])
+
+function handleChange({ files }) {
+  fileList.value = files
+}
+```
+
+## 同时上传视频和图片
+
+将`accept`设置为`media`可以用于同时上传视频和图片。仅微信小程序支持。
+
+```html
+<wd-upload accept="media" multiple :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
+```
+```typescript
+const action = ref<string>('https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload')
+
+const fileList = ref([])
+
+function handleChange({ files }) {
+  fileList.value = files
+}
+```
+
+## 仅上传文件
+将`accept`设置为`file`可以用于上传除图片和视频以外类型的文件。仅微信小程序支持。
+
+```html
+<wd-upload accept="file" multiple :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
+```
+```typescript
+const action = ref<string>('https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload')
+
+const fileList = ref([])
+
+function handleChange({ files }) {
+  fileList.value = files
+}
+```
+
+
+## 上传视频图片和文件
+将`accept`设置为`all`可以用于上传视频图片和文件。仅微信小程序和H5支持。微信小程序使用`chooseMessageFile`实现，H5使用`chooseFile`实现。
+
+```html
+<wd-upload accept="all" multiple :file-list="fileList" :action="action" @change="handleChange"></wd-upload>
+```
+```typescript
+const action = ref<string>('https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload')
+
+const fileList = ref([])
+
+function handleChange({ files }) {
+  fileList.value = files
+}
+```
+
+
 ## Attributes
 
-| 参数                    | 说明                                                                                                                                                                           | 类型                                   | 可选值 | 默认值                     | 最低版本 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- | ------ | -------------------------- | -------- |
-| file-list               | 上传的文件列表, 例如: [{ name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg' }]                                                                                               | array                                  | -      | []                         | -        |
-| action                  | 必选参数，上传的地址                                                                                                                                                           | string                                 | -      | -                          | -        |
-| header                  | 设置上传的请求头部                                                                                                                                                             | object                                 | -      | -                          | -        |
-| multiple                | 是否支持多选文件                                                                                                                                                               | boolean                                | -      | -                          | -        |
-| disabled                | 是否禁用                                                                                                                                                                       | boolean                                | -      | false                      | -        |
-| limit                   | 最大允许上传个数                                                                                                                                                               | number                                 | -      | -                          | -        |
-| show-limit-num          | 限制上传个数的情况下，是否展示当前上传的个数                                                                                                                                   | boolean                                | -      | false                      | -        |
-| max-size                | 文件大小限制，单位为`byte`                                                                                                                                                     | number                                 | -      | -                          | -        |
-| source-type             | 选择图片的来源，chooseImage 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage)                                                        | array / string                         | -      | ['album', 'camera']        | -        |
-| size-type               | 所选的图片的尺寸，chooseImage 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage)                                                      | array / string                         | -      | ['original', 'compressed'] | -        |
-| name                    | 文件对应的 key，开发者在服务端可以通过这个 key 获取文件的二进制内容，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile) | string                                 | -      | file                       | -        |
-| formData                | HTTP 请求中其他额外的 form data，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                                     | object                                 | -      | -                          | -        |
-| header                  | HTTP 请求 Header，Header 中不能设置 Referer，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                         | object                                 | -      | -                          | -        |
-| on-preview-fail         | 预览失败执行操作                                                                                                                                                               | function({ index, imgList })           | -      | -                          | -        |
-| before-upload           | 上传文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                        | function({ files, fileList, resolve }) | -      | -                          | -        |
-| before-choose           | 选择图片之前的钩子，参数为文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                                    | function({ fileList, resolve })        | -      | -                          | -        |
-| before-remove           | 删除文件之前的钩子，参数为要删除的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ file, fileList, resolve })  | -      | -                          | -        |
-| before-preview          | 图片预览前的钩子，参数为预览的图片下标和图片列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ index, imgList, resolve })  | -      | -                          | -        |
-| build-form-data         | 构建上传`formData`的钩子，参数为上传的文件、待处理的`formData`，返回值为处理后的`formData`，若返回 false 或者返回 Promise 且被 reject，则停止上传。                            | function({ file, formData, resolve })  | -      | -                          | 0.1.61   |
-| loading-type            | [加载中图标类型](/component/loading)                                                                                                                                           | string                                 | -      | circular-ring              | -        |
-| loading-color           | [加载中图标颜色](/component/loading)                                                                                                                                           | string                                 | -      | #ffffff                    | -        |
-| loading-size            | [加载中图标尺寸](/component/loading)                                                                                                                                           | string                                 | -      | 24px                       | -        |
-| <s>use-default-slot</s> | <s>开启默认唤起项插槽</s>移除该属性，直接使用`默认插槽`即可                                                                                                                    | boolean                                | -      | false                      | -        |
-| status-key              | file 数据结构中，status 对应的 key                                                                                                                                             | string                                 | -      | status                     | -        |
+| 参数             | 说明                                                                                                                                                                           | 类型                                   | 可选值                                         | 默认值                     | 最低版本 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- | ---------------------------------------------- | -------------------------- | -------- |
+| file-list        | 上传的文件列表, 例如: [{ name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg' }]                                                                                               | array                                  | -                                              | []                         | -        |
+| action           | 必选参数，上传的地址                                                                                                                                                           | string                                 | -                                              | -                          | -        |
+| header           | 设置上传的请求头部                                                                                                                                                             | object                                 | -                                              | -                          | -        |
+| multiple         | 是否支持多选文件                                                                                                                                                               | boolean                                | -                                              | -                          | -        |
+| disabled         | 是否禁用                                                                                                                                                                       | boolean                                | -                                              | false                      | -        |
+| limit            | 最大允许上传个数                                                                                                                                                               | number                                 | -                                              | -                          | -        |
+| show-limit-num   | 限制上传个数的情况下，是否展示当前上传的个数                                                                                                                                   | boolean                                | -                                              | false                      | -        |
+| max-size         | 文件大小限制，单位为`byte`                                                                                                                                                     | number                                 | -                                              | -                          | -        |
+| source-type      | 选择图片的来源，chooseImage 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage)                                                        | array / string                         | -                                              | ['album', 'camera']        | -        |
+| size-type        | 所选的图片的尺寸，chooseImage 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage)                                                      | array / string                         | -                                              | ['original', 'compressed'] | -        |
+| name             | 文件对应的 key，开发者在服务端可以通过这个 key 获取文件的二进制内容，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile) | string                                 | -                                              | file                       | -        |
+| formData         | HTTP 请求中其他额外的 form data，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                                     | object                                 | -                                              | -                          | -        |
+| header           | HTTP 请求 Header，Header 中不能设置 Referer，uploadFile 接口详细参数，查看[官方手册](https://uniapp.dcloud.net.cn/api/request/network-file#uploadfile)                         | object                                 | -                                              | -                          | -        |
+| on-preview-fail  | 预览失败执行操作                                                                                                                                                               | function({ index, imgList })           | -                                              | -                          | -        |
+| before-upload    | 上传文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                        | function({ files, fileList, resolve }) | -                                              | -                          | -        |
+| before-choose    | 选择图片之前的钩子，参数为文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                                    | function({ fileList, resolve })        | -                                              | -                          | -        |
+| before-remove    | 删除文件之前的钩子，参数为要删除的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ file, fileList, resolve })  | -                                              | -                          | -        |
+| before-preview   | 图片预览前的钩子，参数为预览的图片下标和图片列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ index, imgList, resolve })  | -                                              | -                          | -        |
+| build-form-data  | 构建上传`formData`的钩子，参数为上传的文件、待处理的`formData`，返回值为处理后的`formData`，若返回 false 或者返回 Promise 且被 reject，则停止上传。                            | function({ file, formData, resolve })  | -                                              | -                          | 0.1.61   |
+| loading-type     | [加载中图标类型](/component/loading)                                                                                                                                           | string                                 | -                                              | circular-ring              | -        |
+| loading-color    | [加载中图标颜色](/component/loading)                                                                                                                                           | string                                 | -                                              | #ffffff                    | -        |
+| loading-size     | [加载中图标尺寸](/component/loading)                                                                                                                                           | string                                 | -                                              | 24px                       | -        |
+| status-key       | file 数据结构中，status 对应的 key                                                                                                                                             | string                                 | -                                              | status                     | -        |
 | image-mode              | 预览图片的 mode 属性                                                                                                                                                           | ImageMode                              | -      | aspectFit                  | -        |
+| accept           | 接受的文件类型                                                                                                                                                                 | UploadFileType                         | **image** **video** **media** **file** **all** | **image**                  | 1.3.0    |
+| compressed       | 是否压缩视频，当 accept 为 video \| media 时生效                                                                                                                                                                 | boolean                         | - | true                  | 1.3.0    |
+| maxDuration           | 拍摄视频最长拍摄时间，当 accept 为 video \| media 时生效，单位秒                                                                                                                                                               | Number                         | - | 60                 | 1.3.0    |
+| camera           | 使用前置或者后置相机，当 accept 为 video \| media 时生效                                                                                                                                                                 | UploadCameraType       | **front**  | **back**                  | 1.3.0    |
+
+## accept 的合法值
+
+| name  | 说明                                                                                   | 最低版本 |
+| ----- | -------------------------------------------------------------------------------------- | -------- |
+| image | 图片，全平台支持                                                                       | -        |
+| video | 视频，全平台支持                                                                       | 1.3.0    |
+| media | 图片和视频，仅微信支持，使用`chooseMedia`实现                                          | 1.3.0    |
+| file  | 从客户端会话选择图片和视频以外的文件，仅微信支持，使用`chooseMessageFile`实现          | 1.3.0    |
+| all   | 全部类型的文件，仅微信和 H5 支持，微信使用`chooseMessageFile`，H5 使用`chooseFile`实现 | 1.3.0    |
 
 ## file 数据结构
 

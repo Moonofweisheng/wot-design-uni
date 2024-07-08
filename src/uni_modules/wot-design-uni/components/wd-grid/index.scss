@@ -1,10 +1,5 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
-.wot-theme-dark {
-  @include b(grid) {
-    background-color: $-dark-background2;
-  }
-}
 
 @include b(grid) {
   position: relative;

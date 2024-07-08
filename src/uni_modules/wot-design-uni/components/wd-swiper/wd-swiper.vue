@@ -3,7 +3,7 @@
     <swiper
       class="wd-swiper__track"
       :autoplay="autoplay"
-      :current="navCurrent"
+      :current="current"
       :interval="interval"
       :duration="duration"
       :circular="loop"
@@ -136,6 +136,9 @@ function getCustomImageClass(current: number, index: number, list: string[] | Sw
 function handleChange(e: { detail: { current: any; source: string } }) {
   const { current, source } = e.detail
   navCurrent.value = current
+  // #ifndef MP-WEIXIN
+  emit('update:current', navCurrent.value)
+  // #endif
   emit('change', { current, source })
 }
 
@@ -144,10 +147,13 @@ function handleChange(e: { detail: { current: any; source: string } }) {
  */
 function handleAnimationfinish(e: { detail: { current: any; source: string } }) {
   const { current, source } = e.detail
-  // navCurrent.value = current
+  // #ifdef MP-WEIXIN
+  // 兼容微信swiper抖动的问题
+  emit('update:current', navCurrent.value)
+  // #endif
+
   /**
    * 滑块动画结束时触发
-   * @arg value:Object 滑块值
    */
   emit('animationfinish', { current, source })
 }
@@ -180,6 +186,7 @@ function doIndicatorBtnChange(dir: string, source: string) {
 
   navCurrent.value = nextPos
   emit('change', { current: nextPos, source })
+  emit('update:current', navCurrent.value)
 }
 </script>
 

@@ -525,8 +525,11 @@ function handleSubmit() {
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
 import { FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
-import { areaData } from '@/utils/area'
 import { reactive, ref } from 'vue'
+// useColPickerData可以参考本章节顶部的介绍
+// 导入路径根据自己实际情况调整，万不可一贴了之
+import { useColPickerData } from '@/hooks/useColPickerData'
+const { colPickerData, findChildrenByCode } = useColPickerData()
 
 const model = reactive<{
   couponName: string
@@ -764,20 +767,21 @@ const promotionlist = ref<any[]>([
 ])
 
 const area = ref<any[]>([
-  Object.keys(areaData[86]).map((key) => {
+  colPickerData.map((item) => {
     return {
-      value: key,
-      label: areaData[86][key]
+      value: item.value,
+      label: item.text
     }
   })
 ])
-const areaChange = ({ selectedItem, resolve, finish }) => {
-  if (areaData[selectedItem.value]) {
+const areaChange: ColPickerColumnChange = ({ selectedItem, resolve, finish }) => {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
     resolve(
-      Object.keys(areaData[selectedItem.value]).map((key) => {
+      areaData.map((item) => {
         return {
-          value: key,
-          label: areaData[selectedItem.value][key]
+          value: item.value,
+          label: item.text
         }
       })
     )
@@ -785,6 +789,7 @@ const areaChange = ({ selectedItem, resolve, finish }) => {
     finish()
   }
 }
+
 const toast = useToast()
 const form = ref()
 
