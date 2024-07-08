@@ -10,7 +10,7 @@
       color: $-dark-color;
       background: $-dark-background2;
 
-      &:not(&--disabled):not(&--loading):active {
+      &:not(.wd-action-sheet__action--disabled):not(.wd-action-sheet__action--loading):active {
         background: $-dark-background4;
       }
 
