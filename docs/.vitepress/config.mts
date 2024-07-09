@@ -140,6 +140,7 @@ export default defineConfig({
 
         ]
       },
+      {text: 'JS工具库', link: '/js/tool', activeMatch: '/tool/'},
       { text: '🥤一杯咖啡', link: '/reward/reward', activeMatch: '/reward/' },
       {
         text: '相关链接',
@@ -190,6 +191,15 @@ export default defineConfig({
           text: '榜上有名',
           link: '/reward/donor',
         },
+      ],
+      '/js/': [
+        {
+          text: 'JS工具库',
+          link: '/js/tool',
+        },{
+          text: 'Test 规则校验',
+          link: '/js/test',
+        }
       ],
 
       '/component/': [

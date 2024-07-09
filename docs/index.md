@@ -21,6 +21,9 @@ hero:
     - theme: alt
       text: 组件列表
       link: /component/button
+    - theme: alt
+      text: JS工具库
+      link: /js/tool
     - theme: brand
       text: 🥤一杯咖啡
       link: /reward/reward
