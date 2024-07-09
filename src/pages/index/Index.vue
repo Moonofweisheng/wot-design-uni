@@ -365,6 +365,10 @@ const list = ref([
       {
         id: 'table',
         name: 'Table 表格'
+      },
+      {
+        id: 'statistic',
+        name: 'Statistic 数值显示'
       }
     ]
   }
