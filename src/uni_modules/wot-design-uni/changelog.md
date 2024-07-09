@@ -1,6 +1,20 @@
 # 更新日志 
 
 
+### [1.3.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.1...v1.3.2) (2024-07-08)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复ActionSheet样式调整导致微信编译错误的问题 ([a9189d2](https://github.com/Moonofweisheng/wot-design-uni/commit/a9189d2c263459a33cdbb68bec3dd0dd0213b5c0))
+
+### [1.3.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.0...v1.3.1) (2024-07-08)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复暗黑模式下Grid和ActionSheet组件部分样式异常的问题 ([a28938c](https://github.com/Moonofweisheng/wot-design-uni/commit/a28938c91d4b437e6b583793e32f8373cec102ae)), closes [#409](https://github.com/Moonofweisheng/wot-design-uni/issues/409)
+
 ## [1.3.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.28...v1.3.0) (2024-07-07)
 
 
