@@ -27,6 +27,7 @@ export default {
 import { objToStyle, addUnit, isDef } from '../common/util'
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import { statisticProps } from './types'
+import { requestAnimationFrame, cancelAnimationFrame } from './requestAnimationFrame'
 
 // 获取并定义传入的属性
 const props = defineProps(statisticProps)
