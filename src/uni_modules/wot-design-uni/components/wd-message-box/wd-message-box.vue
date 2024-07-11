@@ -25,7 +25,10 @@
             <slot>{{ msg }}</slot>
           </view>
         </view>
-        <view :class="`wd-message-box__actions ${showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`">
+        <view
+          :class="`wd-message-box__actions ${showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`"
+          v-if="!(type === 'alert' && showConfirmButton === false)"
+        >
           <wd-button type="info" block v-if="showCancelButton" custom-style="margin-right: 16px;" @click="toggleModal('cancel')">
             {{ cancelButtonText || translate('cancel') }}
           </wd-button>
@@ -93,6 +96,12 @@ const title = ref<string>('')
  * 是否展示取消按钮
  */
 const showCancelButton = ref<boolean>(false)
+
+/**
+ * 是否显示确认按钮
+ */
+const showConfirmButton = ref<boolean>(true)
+
 /**
  * 是否支持点击蒙层进行关闭，点击蒙层回调传入的action为'modal'
  */
@@ -283,6 +292,7 @@ function reset(option: MessageOptions) {
   if (option) {
     title.value = isDef(option.title) ? option.title : ''
     showCancelButton.value = isDef(option.showCancelButton) ? option.showCancelButton : false
+    showConfirmButton.value = isDef(option.showConfirmButton) ? option.showConfirmButton : true
     show.value = option.show!
     closeOnClickModal.value = option.closeOnClickModal!
     confirmButtonText.value = option.confirmButtonText!
@@ -306,5 +316,5 @@ function reset(option: MessageOptions) {
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import './index';
 </style>

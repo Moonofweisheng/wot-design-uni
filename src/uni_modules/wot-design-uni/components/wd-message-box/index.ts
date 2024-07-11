@@ -22,6 +22,7 @@ export const messageDefaultOptionKey = '__MESSAGE_OPTION__'
 export const defaultOptions: MessageOptions = {
   title: '',
   showCancelButton: false,
+  showConfirmButton: true,
   show: false,
   closeOnClickModal: true,
   msg: '',

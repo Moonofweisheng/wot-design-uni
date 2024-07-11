@@ -41,6 +41,26 @@ function alert() {
 }
 ```
 
+不显示确认按钮的 alert 弹框。
+
+```html
+<wd-message-box />
+<wd-button @click="alertOnCancel">alert</wd-button>
+```
+
+```typescript
+import { useMessage } from '@/uni_modules/wot-design-uni'
+const message = useMessage()
+
+function alertOnCancel() {
+  message.alert({
+    msg: '不显示确认按钮',
+    title: '标题',
+    showConfirmButton: false,
+  })
+}
+```
+
 如果内容文案过长，弹框高度不再增加，而是展示滚动条。
 
 ```html

@@ -25,6 +25,11 @@ export type MessageOptions = {
    */
   showCancelButton?: boolean
 
+  /**
+   * 是否显示确认按钮
+   */
+  showConfirmButton?: boolean
+
   show?: boolean
   /**
    * 是否支持点击蒙层进行关闭，点击蒙层回调传入的action为'modal'
