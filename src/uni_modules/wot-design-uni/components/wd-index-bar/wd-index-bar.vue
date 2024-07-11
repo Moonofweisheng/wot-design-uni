@@ -3,11 +3,12 @@
     <!-- #ifdef MP-DINGTALK -->
     <view class="wd-index-bar" :id="indexBarId">
       <!-- #endif -->
-      <scroll-view :scrollTop="scrollTop" :scroll-y="true" class="wd-index-bar__content" @scroll="hanleScroll">
+      <scroll-view :scrollTop="scrollState.scrollTop" :scroll-y="true" class="wd-index-bar__content" @scroll="hanleScroll">
         <slot></slot>
       </scroll-view>
       <view
         class="wd-index-bar__sidebar"
+        @touchstart.stop.prevent="handleTouchStart"
         @touchmove.stop.prevent="handleTouchMove"
         @touchend.stop.prevent="handleTouchEnd"
         @touchcancel.stop.prevent="handleTouchEnd"
@@ -30,8 +31,8 @@
 <script setup lang="ts">
 import type { AnchorItem, AnchorIndex } from './type'
 import { indexBarInjectionKey, indexBarProps } from './type'
-import { ref, getCurrentInstance, onMounted, reactive } from 'vue'
-import { getRect, isDef, uuid } from '../common/util'
+import { ref, getCurrentInstance, onMounted, reactive, nextTick } from 'vue'
+import { getRect, isDef, uuid, requestAnimationFrame } from '../common/util'
 import { useChildren } from '../composables/useChildren'
 
 const props = defineProps(indexBarProps)
@@ -49,7 +50,12 @@ const { linkChildren } = useChildren(indexBarInjectionKey)
 
 linkChildren({ props, anchorState: state })
 
-const scrollTop = ref(0)
+const scrollState = reactive({
+  scrollTop: 0, // 即将滚动到的位置
+  prevScrollTop: 0, // 上次记录的位置
+  // 滚动距离
+  touching: false
+})
 
 // 组件距离页面顶部的高度
 let offsetTop = 0
@@ -63,7 +69,6 @@ let sidebarInfo = {
 function init() {
   setTimeout(() => {
     state.activeIndex = state.anchorList[0]?.index
-
     Promise.all([
       getRect(`#${indexBarId.value}`, false, proxy),
       getRect('.wd-index-bar__sidebar', false, proxy),
@@ -81,6 +86,9 @@ onMounted(() => {
 })
 
 function hanleScroll(scrollEvent: any) {
+  if (scrollState.touching) {
+    return
+  }
   const { detail } = scrollEvent
   const scrolltop = Math.floor(detail.scrollTop)
   const anchor = state.anchorList.find((item, index) => {
@@ -91,6 +99,7 @@ function hanleScroll(scrollEvent: any) {
   if (state.activeIndex !== anchor.index) {
     state.activeIndex = anchor.index
   }
+  scrollState.prevScrollTop = scrolltop
 }
 
 function getAnchorByPageY(pageY: number) {
@@ -101,18 +110,37 @@ function getAnchorByPageY(pageY: number) {
   return state.anchorList[idx]
 }
 
+function handleTouchStart() {
+  scrollState.touching = true
+}
+
 function handleTouchMove(e: TouchEvent) {
   const clientY = e.touches[0].pageY
   if (state.activeIndex === getAnchorByPageY(clientY).index) {
     return
   }
   state.activeIndex = getAnchorByPageY(clientY).index
-  scrollTop.value = getAnchorByPageY(clientY).top - offsetTop
+  setScrollTop(getAnchorByPageY(clientY).top - offsetTop)
 }
 
 function handleTouchEnd(e: TouchEvent) {
   const clientY = e.changedTouches[0].pageY
-  scrollTop.value = getAnchorByPageY(clientY).top - offsetTop
+  state.activeIndex = getAnchorByPageY(clientY).index
+  setScrollTop(getAnchorByPageY(clientY).top - offsetTop)
+  requestAnimationFrame(() => {
+    scrollState.touching = false
+  })
+}
+
+function setScrollTop(top: number) {
+  if (scrollState.scrollTop === top) {
+    scrollState.scrollTop = scrollState.prevScrollTop
+    nextTick(() => {
+      scrollState.scrollTop = top
+    })
+  } else {
+    scrollState.scrollTop = top
+  }
 }
 </script>
 
