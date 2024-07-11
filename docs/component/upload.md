@@ -8,6 +8,10 @@
 目前组件库已兼容的平台，都支持上传视频，使用`video`组件实现的视频封面在`H5`、`微信小程序`和`支付宝小程序`平台得到支持，而在`钉钉小程序`和`App`平台则受限于`video`标签在这两个平台的能力无法用做视频封面。故推荐在`change`事件中获取视频封面并给`fileList`对应视频添加封面：`thumb`（上传至各种云服务器时，各厂商应该都提供了视频封面的功能）。
 :::
 
+::: warning 关于微信小程序隐私协议
+`upload`在微信小程序平台使用了`wx.chooseImage`、`wx.chooseMedia`、`wx.chooseVideo`三个隐私接口需要配置微信隐私协议，可以参考[小程序隐私协议开发指南](https://developers.weixin.qq.com/miniprogram/dev/framework/user-privacy/PrivacyAuthorize.html)进行相关配置和开发，否则会导致上传功能无法使用。推荐使用[微信小程序隐私保护弹出框](https://ext.dcloud.net.cn/plugin?id=14346)或者组件库演示用的[微信隐私协议弹框](https://github.com/Moonofweisheng/wot-design-uni/tree/master/src/components/wd-privacy-popup)。
+:::
+
 ## 基本用法
 
 `file-list` 设置上传列表，数据类型为数组；
