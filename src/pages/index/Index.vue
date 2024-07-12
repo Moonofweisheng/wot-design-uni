@@ -223,6 +223,10 @@ const list = ref([
     icon: imgModules['../images/icon_nav_feedback.png'].default,
     pages: [
       {
+        id: 'cubicBezier',
+        name: 'AubicBezier 贝塞尔曲线'
+      },
+      {
         id: 'actionSheet',
         name: 'ActionSheet 上拉菜单'
       },

@@ -311,6 +311,16 @@
         "navigationBarTitleText": "SortButton 排序按钮"
       }
     },
+	{
+	  "path": "pages/cubicBezier/Index",
+	  "name": "cubicBezier",
+	  "style": {
+	    "mp-alipay": {
+	      "allowsBounceVertical": "NO"
+	    },
+	    "navigationBarTitleText": "cubicBezier 贝塞尔曲线"
+	  }
+	},
     {
       "path": "pages/actionSheet/Index",
       "name": "actionSheet",
