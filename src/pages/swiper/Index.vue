@@ -131,11 +131,11 @@
 import { ref } from 'vue'
 
 const swiperList = ref([
-  'https://unpkg.com/wot-design-uni-assets/redpanda.jpg',
-  'https://unpkg.com/wot-design-uni-assets/capybara.jpg',
-  'https://unpkg.com/wot-design-uni-assets/panda.jpg',
-  'https://unpkg.com/wot-design-uni-assets/moon.jpg',
-  'https://unpkg.com/wot-design-uni-assets/meng.jpg'
+  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg',
+  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg',
+  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg',
+  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg',
+  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/meng.jpg'
 ])
 
 const current = ref<number>(0)

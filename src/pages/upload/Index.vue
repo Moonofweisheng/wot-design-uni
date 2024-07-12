@@ -74,7 +74,7 @@ import { ref } from 'vue'
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
 const fileList = ref<UploadFile[]>([
   {
-    url: 'https://img.yzcdn.cn/vant/cat.jpeg'
+    url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg'
   }
 ])
 
@@ -207,7 +207,7 @@ function handleChange({ fileList }: any) {
 function handleChange1({ fileList }: { fileList: UploadFile[] }) {
   // fileList.forEach((item) => {
   //   if (!item.thumb) {
-  //     item.thumb = 'https://unpkg.com/wot-design-uni-assets/redpanda.jpg'
+  //     item.thumb = 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg'
   //   }
   // })
   fileList1.value = fileList
