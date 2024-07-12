@@ -242,7 +242,7 @@ const beforeConfirm = (value, resolve) => {
 如果默认的 cell 类型的展示格式不满足需求，可以通过默认插槽进行自定义选择器样式。
 
 ```html
-<veiw>当前选中项：{{customShow}}</view>
+<view>当前选中项：{{customShow}}</view>
 <wd-select-picker v-model="value" use-default-slot :columns="columns" @confirm="handleConfirm">
   <wd-button>默认唤起项</wd-button>
 </wd-select-picker>
