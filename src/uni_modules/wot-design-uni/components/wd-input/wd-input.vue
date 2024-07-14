@@ -84,7 +84,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, watch,nextTick } from 'vue'
 import { objToStyle, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
@@ -239,8 +239,9 @@ function handleFocus({ detail }: any) {
   isFocus.value = true
   emit('focus', detail)
 }
-function handleInput() {
+async function handleInput() {
   emit('update:modelValue', inputValue.value)
+  await nextTick()
   emit('input', inputValue.value)
 }
 function handleKeyboardheightchange(event: any) {
