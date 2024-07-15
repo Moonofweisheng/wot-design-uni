@@ -239,12 +239,12 @@ function handleFocus({ detail }: any) {
   isFocus.value = true
   emit('focus', detail)
 }
-function handleInput() {
+function handleInput({ detail }: any) {
   emit('update:modelValue', inputValue.value)
-  emit('input', inputValue.value)
+  emit('input', detail)
 }
-function handleKeyboardheightchange(event: any) {
-  emit('keyboardheightchange', event.detail)
+function handleKeyboardheightchange({ detail }: any) {
+  emit('keyboardheightchange', detail)
 }
 function handleConfirm({ detail }: any) {
   emit('confirm', detail)
