@@ -723,6 +723,9 @@ export type uploadThemeVars = {
   uploadCloseIconSize?: string
   uploadCloseIconColor?: string
   uploadProgressFs?: string
+  uploadFileFs?: string
+  uploadFileColor?: string
+
   uploadPreviewNameFs?: string
   uploadPreviewIconSize?: string
   uploadPreviewNameBg?: string
@@ -858,10 +861,6 @@ export type fabThemeVars = {
   fabTriggerHeight?: string
   fabTriggerWidth?: string
   fabActionsPadding?: string
-  fabTop?: string
-  fabLeft?: string
-  fabRight?: string
-  fabBottom?: string
 }
 
 export type countDownThemeVars = {
@@ -912,6 +911,22 @@ export type formItemThemeVars = {
   formItemErrorMessageColor?: string
   formItemErrorMessageFontSize?: string
   formItemErrorMessageLineHeight?: string
+}
+
+export type backtopThemeVars = {
+  backtopBg?: string
+}
+
+export type indexBarThemeVars = {
+  indexBarIndexFontSize?: string
+}
+
+export type textThemeVars = {
+  textInfoColor?: string
+  textPrimaryColor?: string
+  textErrorColor?: string
+  textWarningColor?: string
+  textSuccessColor?: string
 }
 
 export type ConfigProviderThemeVars = baseThemeVars &
@@ -969,4 +984,7 @@ export type ConfigProviderThemeVars = baseThemeVars &
   countDownThemeVars &
   numberKeyboardThemeVars &
   passwodInputThemeVars &
-  formItemThemeVars
+  formItemThemeVars &
+  backtopThemeVars &
+  indexBarThemeVars &
+  textThemeVars

@@ -19,13 +19,11 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { objToStyle } from '../common/util'
+import { isDef, objToStyle } from '../common/util'
 import { dayjs } from '@/uni_modules/wot-design-uni'
 import { textProps } from './types'
 
-const props = defineProps({
-  ...textProps
-})
+const props = defineProps(textProps)
 const emit = defineEmits(['click'])
 
 const textClass = ref<string>('')
@@ -76,7 +74,7 @@ function computeTextClass() {
   if (!color) {
     textClassList.push(`is-${type}`)
   }
-  if (lines != null) {
+  if (isDef(lines)) {
     textClassList.push(`is-lines-${lines}`)
   }
   bold && textClassList.push('is-bold')
