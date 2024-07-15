@@ -220,6 +220,9 @@ export default defineConfig({
             }, {
               link: "/component/fab",
               text: "Fab 悬浮按钮"
+            }, {
+              link: "/component/text",
+              text: "Text 文本"
             }
           ]
         },
