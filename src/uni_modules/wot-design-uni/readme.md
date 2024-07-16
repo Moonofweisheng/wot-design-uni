@@ -31,6 +31,11 @@
 <a href="https://github.com/Moonofweisheng/wot-design-uni">
   <img alt="GitHub" src="https://img.shields.io/github/license/Moonofweisheng/wot-design-uni?logo=github">
  </a>
+ 
+ <a href="https://github.com/actions-cool/" target="_blank" referrerpolicy="no-referrer">
+  <img src="https://img.shields.io/badge/using-actions--cool-red?style=flat-square" alt="actions-cool" />
+</a>
+
 
 <a href="https://app.netlify.com/sites/wot-design-uni/deploys" target="_blank" referrerpolicy="no-referrer">
   <img src="https://api.netlify.com/api/v1/badges/0991d8a9-0fb0-483b-8961-5bde066bbd50/deploy-status" alt="deploy-status" />
