@@ -4,7 +4,7 @@
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
-        <image v-if="isImage(file)" :src="file.url" :mode="imageMode" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <image v-if="isImage(file)" :src="file.url" :mode="imageMode" class="wd-upload__picture" @click="onPreviewImage(file)" />
         <template v-else-if="isVideo(file)">
           <view class="wd-upload__video" v-if="file.thumb" @click="onPreviewVideo(file)">
             <image :src="file.thumb" :mode="imageMode" class="wd-upload__picture" />
@@ -529,19 +529,27 @@ function handlePreviewVieo(index: number, lists: UploadFileItem[]) {
   // #endif
 }
 
-function onPreviewImage(index: number) {
+function onPreviewImage(file: UploadFileItem) {
   const { beforePreview } = props
-  const lists = uploadFiles.value.filter((file) => isImage(file)).map((file) => file.url)
+  const lists = uploadFiles.value.filter((file) => isImage(file))
+  const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
       index,
-      imgList: lists,
+      imgList: lists.map((file) => file.url),
       resolve: (isPass: boolean) => {
-        isPass && handlePreviewImage(index, lists)
+        isPass &&
+          handlePreviewImage(
+            index,
+            lists.map((file) => file.url)
+          )
       }
     })
   } else {
-    handlePreviewImage(index, lists)
+    handlePreviewImage(
+      index,
+      lists.map((file) => file.url)
+    )
   }
 }
 
