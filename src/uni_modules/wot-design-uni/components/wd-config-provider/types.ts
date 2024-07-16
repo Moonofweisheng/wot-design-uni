@@ -929,6 +929,12 @@ export type textThemeVars = {
   textSuccessColor?: string
 }
 
+export type videoPreviewThemeVars = {
+  videoPreviewBg?: string
+  videoPreviewCloseColor?: string
+  videoPreviewCloseFontSize?: string
+}
+
 export type ConfigProviderThemeVars = baseThemeVars &
   actionSheetThemeVars &
   badgeThemeVars &
@@ -987,4 +993,5 @@ export type ConfigProviderThemeVars = baseThemeVars &
   formItemThemeVars &
   backtopThemeVars &
   indexBarThemeVars &
-  textThemeVars
+  textThemeVars &
+  videoPreviewThemeVars
