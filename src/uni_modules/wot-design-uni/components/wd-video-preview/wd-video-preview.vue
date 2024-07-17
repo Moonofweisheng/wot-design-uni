@@ -31,6 +31,7 @@ export default {
 <script lang="ts" setup>
 import { nextTick, reactive, ref } from 'vue'
 import { videoPreviewProps, type PreviewVideo, type VideoPreviewExpose } from './types'
+import useLockScroll from '../composables/useLockScroll'
 defineProps(videoPreviewProps)
 
 const showPopup = ref<boolean>(false)
@@ -55,6 +56,10 @@ function handleClosed() {
   previdewVideo.poster = ''
   previdewVideo.title = ''
 }
+
+// #ifdef H5
+useLockScroll(() => showPopup.value)
+// #endif
 
 defineExpose<VideoPreviewExpose>({
   open,
