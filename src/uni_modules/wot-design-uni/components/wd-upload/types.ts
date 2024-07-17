@@ -274,6 +274,14 @@ export const uploadProps = {
    */
   camera: makeStringProp<UploadCameraType>('back'),
   /**
+   * 预览图片的mode属性
+   */
+  imageMode: makeStringProp<ImageMode>('aspectFit'),
+  /**
+   * 接口响应的成功状态（statusCode）值
+   */
+  successStatus: makeNumberProp(200),
+  /**
    * 自定义上传按钮样式
    * 类型：string
    */
@@ -282,11 +290,7 @@ export const uploadProps = {
    * 自定义预览图片列表样式
    * 类型：string
    */
-  customPreviewClass: makeStringProp(''),
-  /**
-   * 预览图片的mode属性
-   */
-  imageMode: makeStringProp<ImageMode>('aspectFit')
+  customPreviewClass: makeStringProp('')
 }
 
 export type UploadProps = ExtractPropTypes<typeof uploadProps>

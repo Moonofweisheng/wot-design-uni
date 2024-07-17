@@ -90,7 +90,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction } from '../common/util'
+import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
@@ -319,6 +319,7 @@ function handleProgress(res: Record<string, any>, file: UploadFileItem) {
  */
 function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
   const { action, name, header = {}, accept } = props
+  const statusCode = isDef(props.successStatus) ? props.successStatus : 200
   const uploadTask = uni.uploadFile({
     url: action,
     header,
@@ -328,7 +329,7 @@ function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
     formData,
     filePath: file.url,
     success(res) {
-      if (res.statusCode === 200) {
+      if (res.statusCode === statusCode) {
         // 上传成功进行文件列表拼接
         handleSuccess(res, file, formData)
       } else {

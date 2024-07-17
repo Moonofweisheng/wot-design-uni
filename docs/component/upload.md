@@ -514,6 +514,8 @@ function handleChange({ files }) {
 | compressed       | 是否压缩视频，当 accept 为 video \| media 时生效                                                                                                                                                                 | boolean                         | - | true                  | 1.3.0    |
 | maxDuration           | 拍摄视频最长拍摄时间，当 accept 为 video \| media 时生效，单位秒                                                                                                                                                               | Number                         | - | 60                 | 1.3.0    |
 | camera           | 使用前置或者后置相机，当 accept 为 video \| media 时生效                                                                                                                                                                 | UploadCameraType       | **front**  | **back**                  | 1.3.0    |
+| successStatus           | 接口响应的成功状态（statusCode）值            | number       | -  | 200                  | $LOWEST_VERSION$    |
+
 
 ## accept 的合法值
 
