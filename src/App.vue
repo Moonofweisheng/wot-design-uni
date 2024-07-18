@@ -33,6 +33,8 @@ onHide(() => {
 })
 </script>
 <style lang="scss">
+@import '@/iconfont/index.css';
+
 ::-webkit-scrollbar {
   width: 0;
   height: 0;

@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-06-19 12:47:57
- * @LastEditTime: 2024-04-11 13:03:38
+ * @LastEditTime: 2024-07-18 22:18:07
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-toast\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-toast/types.ts
  * 记得注释
  */
 import type { ExtractPropTypes } from 'vue'
@@ -24,9 +24,8 @@ export type ToastOptions = {
   iconSize?: number
   loadingType?: ToastLoadingType
   loadingColor?: string
-  iconColor?: string
   loadingSize?: number
-  customIcon?: boolean
+  iconColor?: string
   position?: ToastPositionType
   show?: boolean
   zIndex?: number
@@ -34,6 +33,14 @@ export type ToastOptions = {
    * 是否存在遮罩层
    */
   cover?: boolean
+  /**
+   * 图标类名
+   */
+  iconClass?: string
+  /**
+   * 类名前缀，用于使用自定义图标
+   */
+  classPrefix?: string
   /**
    * 完全展示后的回调函数
    */
@@ -63,7 +70,6 @@ export interface Toast {
 
 export const toastProps = {
   ...baseProps,
-  customIconClass: makeStringProp(''),
   selector: makeStringProp('')
 }
 

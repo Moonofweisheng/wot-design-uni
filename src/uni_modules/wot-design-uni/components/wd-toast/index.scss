@@ -19,9 +19,10 @@
     text-align: left;
     font-family: "San Francisco", Rotobo, arial, "PingFang SC", "Noto SansCJK", "Microsoft Yahei", sans-serif;
   }
-  @include e(icon) {
+  @include edeep(icon) {
     display: inline-block;
-    margin-right: 16px;
+    margin-right: $-toast-icon-margin-right;
+    font-size: $-toast-icon-size;
   }
   @include e(iconWrap){
     font-size: 0;
@@ -34,6 +35,8 @@
     height: 100%;
   }
   @include e(iconSvg){
+    width: $-toast-icon-size;
+    height: $-toast-icon-size;
     background-size: cover;
     background-repeat: no-repeat;
   }

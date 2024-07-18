@@ -31,6 +31,25 @@ toast.warning('提示信息')
 toast.info('常规提示信息')
 ```
 
+## 使用图标
+可以使用`iconClass`指定图标，结合`classPrefix`可以使用自定义图标，参见[icon](/component/icon#自定义图标)。
+```ts
+// 使用组件库内部图标
+toast.show({
+  iconClass: 'star',
+  msg: '使用组件库内部图标'
+})
+```
+
+```ts
+// 使用自定义图标
+toast.show({
+  iconClass: 'kehuishouwu',
+  classPrefix: 'fish',
+  msg: '使用自定义图标'
+})
+```
+
 ## 提示位置
 
 ```typescript
@@ -89,9 +108,9 @@ toast.close()
 | msg          | 消息内容                                                                    | string     | -                         | -                      | -        |
 | duration     | 持续时间，单位 ms，为 0 时表示不自动关闭                                    | number     | -                         | 2000                   | -        |
 | iconName     | 图标类型                                                                    | string     | success / error / warning | -                      | -        |
-| iconSize     | 左侧图标尺寸                                                                | string     | -                         | 42px                   | -        |
+| iconSize     | 左侧图标尺寸                                                                | string     | -                         | -                   | -        |
 | iconClass    | 图标类目，自定义图标，可以使用 Icon 章节的那些图标类名，iconName 优先级更高 | string     | -                         | -                      | -        |
-| customIcon   | 自定义图标，开启后可以通过 custom-icon-class 类名自定义图标                 | Boolean    | -                         | false                  | -        |
+| classPrefix   | 类名前缀，用于使用自定义图标                 | string    | -                         | -                  | -        |
 | position     | 提示信息框的位置                                                            | string     | top / middle / bottom     | middle                 | -        |
 | zIndex       | toast 层级                                                                  | number     | -                         | 100                    | -        |
 | loadingType  | [加载中图标类型](/component/loading)                                        | string     | ring                      | outline                | -        |
@@ -116,4 +135,3 @@ toast.close()
 | 类名              | 说明           | 最低版本 |
 | ----------------- | -------------- | -------- |
 | custom-class      | 根节点样式     | -        |
-| custom-icon-class | 自定义图标类名 | -        |
