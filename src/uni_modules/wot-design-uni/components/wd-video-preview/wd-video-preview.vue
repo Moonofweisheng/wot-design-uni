@@ -1,18 +1,19 @@
 <template>
-  <view :class="`wd-video-preview ${customClass}`" :style="customStyle" v-if="showPopup">
-    <video
-      class="wd-video-preview__video"
-      v-if="previdewVideo.url"
-      :controls="true"
-      :poster="previdewVideo.poster"
-      :title="previdewVideo.title"
-      play-btn-position="center"
-      :enableNative="true"
-      :src="previdewVideo.url"
-      :enable-progress-gesture="false"
-    ></video>
-
-    <wd-icon name="close-circle" size="48px" :custom-class="`wd-video-preview__close`" @click="close" />
+  <view :class="`wd-video-preview ${customClass}`" :style="customStyle" v-if="showPopup" @click="close">
+    <view class="wd-video-preview__video" @click.stop="">
+      <video
+        class="wd-video-preview__video"
+        v-if="previdewVideo.url"
+        :controls="true"
+        :poster="previdewVideo.poster"
+        :title="previdewVideo.title"
+        play-btn-position="center"
+        :enableNative="true"
+        :src="previdewVideo.url"
+        :enable-progress-gesture="false"
+      ></video>
+    </view>
+    <wd-icon name="close" :custom-class="`wd-video-preview__close`" @click="close" />
   </view>
 </template>
 
@@ -28,8 +29,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { nextTick, reactive, ref } from 'vue'
 import { videoPreviewProps, type PreviewVideo, type VideoPreviewExpose } from './types'
+import useLockScroll from '../composables/useLockScroll'
 defineProps(videoPreviewProps)
 
 const showPopup = ref<boolean>(false)
@@ -44,6 +46,9 @@ function open(video: PreviewVideo) {
 
 function close() {
   showPopup.value = false
+  nextTick(() => {
+    handleClosed()
+  })
 }
 
 function handleClosed() {
@@ -51,6 +56,10 @@ function handleClosed() {
   previdewVideo.poster = ''
   previdewVideo.title = ''
 }
+
+// #ifdef H5
+useLockScroll(() => showPopup.value)
+// #endif
 
 defineExpose<VideoPreviewExpose>({
   open,

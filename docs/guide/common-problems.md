@@ -273,6 +273,11 @@ function handleOpened() {
 
 ```
 
+## 为何messageBox弹出了多个？
+检查一下弹出多个`messageBox`的页面是否存在多个相同`selector`或无`selector`的`<wd-message-box></wd-message-box>`标签(当前页面包括页面中使用的组件)。`toast`亦是同理，在子组件中使用`messageBox`等组件需要指定`selector`并确保`selector`唯一。
+
+
+
 ## 如何快速解决你的问题？
 
 [提问的智慧](https://lug.ustc.edu.cn/wiki/doc/smart-questions/)，可以帮助你快速提出正确的问题，获得更快的解答。

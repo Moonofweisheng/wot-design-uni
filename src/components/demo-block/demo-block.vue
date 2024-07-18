@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2023-11-02 19:01:52
+ * @LastEditTime: 2024-07-11 19:13:17
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\components\demo-block\demo-block.vue
@@ -70,6 +70,7 @@ function setStyle() {
 
 .demo-block {
   position: relative;
+  color: #666;
 
   &:not(:first-child) {
     margin-top: 15px;
@@ -78,8 +79,6 @@ function setStyle() {
   &:not(:last-child) {
     margin-bottom: 15px;
   }
-
-  color: #666;
 }
 
 .is-white {

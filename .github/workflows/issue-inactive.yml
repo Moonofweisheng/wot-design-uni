@@ -1,0 +1,38 @@
+name: Issue Inactive
+
+on:
+  schedule:
+    - cron: '0 16 * * *'
+
+jobs:
+  close-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: need reproduction
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'close-issues'
+          labels: 'need reproduction'
+          inactive-day: 7
+
+      - name: pending
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'close-issues'
+          labels: 'pending'
+          inactive-day: 7
+          body: |
+            由于该 issue 被标记为需要更多信息，却 7 天未收到回应。现关闭 issue，若有任何问题，可评论回复。
+
+  lock-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: lock-issues
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'lock-issues'
+          issue-state: closed
+          inactive-day: 30
+          body: |
+            此 issue 已被自动锁定，因为关闭后没有任何近期活动。如果有相关 bug，请重新创建一个新 issue。
+

@@ -4,7 +4,7 @@
     <view :class="['wd-upload__preview', customPreviewClass]" v-for="(file, index) in uploadFiles" :key="index">
       <!-- 成功时展示图片 -->
       <view class="wd-upload__status-content">
-        <image v-if="isImage(file)" :src="file.url" :mode="imageMode" class="wd-upload__picture" @click="onPreviewImage(index)" />
+        <image v-if="isImage(file)" :src="file.url" :mode="imageMode" class="wd-upload__picture" @click="onPreviewImage(file)" />
         <template v-else-if="isVideo(file)">
           <view class="wd-upload__video" v-if="file.thumb" @click="onPreviewVideo(file)">
             <image :src="file.thumb" :mode="imageMode" class="wd-upload__picture" />
@@ -90,7 +90,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction } from '../common/util'
+import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
@@ -319,6 +319,7 @@ function handleProgress(res: Record<string, any>, file: UploadFileItem) {
  */
 function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
   const { action, name, header = {}, accept } = props
+  const statusCode = isDef(props.successStatus) ? props.successStatus : 200
   const uploadTask = uni.uploadFile({
     url: action,
     header,
@@ -328,7 +329,7 @@ function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
     formData,
     filePath: file.url,
     success(res) {
-      if (res.statusCode === 200) {
+      if (res.statusCode === statusCode) {
         // 上传成功进行文件列表拼接
         handleSuccess(res, file, formData)
       } else {
@@ -529,19 +530,27 @@ function handlePreviewVieo(index: number, lists: UploadFileItem[]) {
   // #endif
 }
 
-function onPreviewImage(index: number) {
+function onPreviewImage(file: UploadFileItem) {
   const { beforePreview } = props
-  const lists = uploadFiles.value.filter((file) => isImage(file)).map((file) => file.url)
+  const lists = uploadFiles.value.filter((file) => isImage(file))
+  const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
       index,
-      imgList: lists,
+      imgList: lists.map((file) => file.url),
       resolve: (isPass: boolean) => {
-        isPass && handlePreviewImage(index, lists)
+        isPass &&
+          handlePreviewImage(
+            index,
+            lists.map((file) => file.url)
+          )
       }
     })
   } else {
-    handlePreviewImage(index, lists)
+    handlePreviewImage(
+      index,
+      lists.map((file) => file.url)
+    )
   }
 }
 

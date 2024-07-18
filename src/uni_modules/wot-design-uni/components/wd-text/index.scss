@@ -1,0 +1,69 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@mixin text-type-style($normalColor) {
+  color: $normalColor;
+
+  &.is-bold {
+    font-weight: bold;
+  }
+
+  &.is-lines-1,
+  &.is-lines-2,
+  &.is-lines-3,
+  &.is-lines-4,
+  &.is-lines-5 {
+    display: -webkit-box !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical !important;
+  }
+
+  &.is-lines-1 {
+    @include multiEllipsis(1);
+  }
+
+  &.is-lines-2 {
+    line-clamp: 2;
+    @include multiEllipsis(2);
+
+  }
+
+  &.is-lines-3 {
+    @include multiEllipsis(3);
+
+  }
+
+  &.is-lines-4 {
+    @include multiEllipsis(4);
+
+  }
+
+  &.is-lines-5 {
+    @include multiEllipsis(5);
+
+  }
+}
+
+@include b(text) {
+  @include when(default) {
+    @include text-type-style($-text-info-color);
+  }
+
+  @include when(primary) {
+    @include text-type-style($-text-primary-color);
+  }
+
+  @include when(error) {
+    @include text-type-style($-text-error-color);
+  }
+
+  @include when(warning) {
+    @include text-type-style($-text-warning-color);
+  }
+
+  @include when(success) {
+    @include text-type-style($-text-success-color);
+  }
+}

@@ -244,10 +244,10 @@ function handleFocus({ detail }: any) {
   emit('focus', detail)
 }
 // input事件需要传入
-function handleInput() {
+function handleInput({ detail }: any) {
   inputValue.value = formatValue(inputValue.value as string)
   emit('update:modelValue', inputValue.value)
-  emit('input', inputValue.value)
+  emit('input', detail)
 }
 function handleKeyboardheightchange({ detail }: any) {
   emit('keyboardheightchange', detail)
@@ -260,9 +260,6 @@ function handleLineChange({ detail }: any) {
 }
 function onClickPrefixIcon() {
   emit('clickprefixicon')
-}
-function handleClick(event: MouseEvent) {
-  emit('click', event)
 }
 </script>
 

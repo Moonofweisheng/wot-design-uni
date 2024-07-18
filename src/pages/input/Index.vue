@@ -1,50 +1,56 @@
 <template>
   <page-wraper>
     <demo-block title="基本用法">
-      <wd-input type="text" v-model="value" placeholder="请输入用户名" @change="handleChange" @blur="handleBlur" />
+      <wd-input type="text" @input="handleInput" v-model="value" placeholder="请输入用户名" @change="handleChange" @blur="handleBlur" />
     </demo-block>
     <demo-block title="禁用状态">
-      <wd-input type="text" v-model="value1" disabled />
+      <wd-input type="text" @input="handleInput" v-model="value1" disabled />
     </demo-block>
     <demo-block title="只读状态">
-      <wd-input type="text" v-model="value2" readonly />
+      <wd-input type="text" @input="handleInput" v-model="value2" readonly />
     </demo-block>
     <demo-block title="错误状态">
-      <wd-input type="text" v-model="value3" placeholder="请输入用户名" error />
+      <wd-input type="text" @input="handleInput" v-model="value3" placeholder="请输入用户名" error />
     </demo-block>
     <demo-block title="清空按钮">
-      <wd-input type="text" v-model="value4" clearable @change="handleChange1" />
+      <wd-input type="text" @input="handleInput" v-model="value4" clearable @change="handleChange1" />
     </demo-block>
     <demo-block title="密码框">
-      <wd-input type="text" v-model="value5" clearable show-password @change="handleChange2" />
+      <wd-input type="text" @input="handleInput" v-model="value5" clearable show-password @change="handleChange2" />
     </demo-block>
     <demo-block title="数字类型">
-      <wd-input type="number" v-model="value9" />
+      <wd-input type="number" @input="handleInput" v-model="value9" />
     </demo-block>
     <demo-block title="设置前后Icon">
-      <wd-input type="text" v-model="value6" prefix-icon="dong" suffix-icon="list" clearable @change="handleChange3" />
+      <wd-input type="text" v-model="value6" @input="handleInput" prefix-icon="dong" suffix-icon="list" clearable @change="handleChange3" />
     </demo-block>
     <demo-block title="字数限制">
-      <wd-input type="text" v-model="value7" :maxlength="20" show-word-limit />
+      <wd-input type="text" v-model="value7" @input="handleInput" :maxlength="20" show-word-limit />
     </demo-block>
     <demo-block title="取消底部边框，自定义使用">
-      <wd-input v-model="value8" no-border placeholder="请输入价格" custom-style="display: inline-block; width: 70px; vertical-align: middle;" />
+      <wd-input
+        v-model="value8"
+        @input="handleInput"
+        no-border
+        placeholder="请输入价格"
+        custom-style="display: inline-block; width: 70px; vertical-align: middle;"
+      />
       <text class="custom-txt">元</text>
     </demo-block>
     <demo-block title="cell 类型" transparent>
       <wd-cell-group border>
-        <wd-input type="text" label="基本用法" v-model="value12" placeholder="请输入..." />
-        <wd-input type="text" label="禁用" v-model="value13" disabled placeholder="用户名" />
-        <wd-input type="text" label="清除、密码" v-model="value14" placeholder="密码" clearable show-password />
-        <wd-input type="text" label="错误状态" v-model="value15" placeholder="请输入用户名" error />
-        <wd-input type="text" label="必填" v-model="value16" placeholder="请输入用户名" required />
-        <wd-input type="text" label="图标" v-model="value17" placeholder="请输入..." prefix-icon="dong" suffix-icon="list" />
-        <wd-input type="text" label="自定义插槽" center v-model="value18" placeholder="请输入..." use-suffix-slot clearable>
+        <wd-input type="text" label="基本用法" v-model="value12" @input="handleInput" placeholder="请输入..." />
+        <wd-input type="text" label="禁用" v-model="value13" @input="handleInput" disabled placeholder="用户名" />
+        <wd-input type="text" label="清除、密码" v-model="value14" @input="handleInput" placeholder="密码" clearable show-password />
+        <wd-input type="text" label="错误状态" v-model="value15" @input="handleInput" placeholder="请输入用户名" error />
+        <wd-input type="text" label="必填" v-model="value16" @input="handleInput" placeholder="请输入用户名" required />
+        <wd-input type="text" label="图标" v-model="value17" @input="handleInput" placeholder="请输入..." prefix-icon="dong" suffix-icon="list" />
+        <wd-input type="text" label="自定义插槽" center v-model="value18" @input="handleInput" placeholder="请输入..." use-suffix-slot clearable>
           <template #suffix>
             <wd-button size="small" custom-class="button">获取验证码</wd-button>
           </template>
         </wd-input>
-        <wd-input type="text" label="大尺寸" clearable size="large" v-model="value19" placeholder="请输入..." />
+        <wd-input type="text" label="大尺寸" clearable size="large" v-model="value19" @input="handleInput" placeholder="请输入..." />
       </wd-cell-group>
     </demo-block>
   </page-wraper>
@@ -85,6 +91,10 @@ function handleChange3(event: any) {
 }
 function handleBlur(event: any) {
   console.log('失焦', event)
+}
+
+function handleInput(event: any) {
+  console.log(event)
 }
 </script>
 <style lang="scss" scoped>

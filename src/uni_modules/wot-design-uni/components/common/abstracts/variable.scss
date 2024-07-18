@@ -879,3 +879,15 @@ $-backtop-bg: var(--wot-backtop-bg, #e1e1e1) !default;
 
 /* index-bar */
 $-index-bar-index-font-size: var(--wot-index-bar-index-font-size, $-fs-aid) !default;
+
+/* text */
+$-text-info-color: var(--wot-text-info-color, $-color-info) !default;
+$-text-primary-color: var(--wot-text-primary-color, $-color-theme) !default;
+$-text-error-color: var(--wot-text-error-color, $-color-danger) !default;
+$-text-warning-color: var(--wot-text-warning-color, $-color-warning) !default;
+$-text-success-color: var(--wot-text-success-color, $-color-success) !default;
+
+/* video-preview */
+$-video-preview-bg: var(--wot-video-preview-bg, rgba(0, 0, 0, 0.8)) !default; // 背景色
+$-video-preview-close-color: var(--wot-video-preview-close-color, #fff) !default; // 图标颜色
+$-video-preview-close-font-size: var(--wot-video-preview-close-font-size, 20px) !default; // 图标大小

@@ -136,21 +136,21 @@ watch(
 
 watch(
   () => props.modelValue,
-  (newValue, oldValue) => {
+  (newValue) => {
     // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
     if (newValue === null || newValue === undefined) {
-      emit('update:modelValue', oldValue)
+      emit('update:modelValue', currentValue.value)
       console.warn('[wot design] warning(wd-slider): value can nott be null or undefined')
     } else if (isArray(newValue) && newValue.length !== 2) {
       console.warn('[wot design] warning(wd-slider): value must be dyadic array')
     } else if (!isNumber(newValue) && !isArray(newValue)) {
-      emit('update:modelValue', oldValue)
+      emit('update:modelValue', currentValue.value)
       console.warn('[wot design] warning(wd-slider): value must be dyadic array Or Number')
     }
-    currentValue.value = newValue
     // 动态传值后修改
     if (isArray(newValue)) {
-      if (oldValue && isArray(oldValue) && equal(newValue, oldValue)) return
+      if (currentValue.value && isArray(currentValue.value) && equal(newValue, currentValue.value)) return
+      currentValue.value = newValue
       showRight.value = true
       if (leftBarPercent.value <= rightBarPercent.value) {
         leftBarSlider(newValue[0])
@@ -160,7 +160,8 @@ watch(
         rightBarSlider(newValue[0])
       }
     } else {
-      if (newValue === oldValue) return
+      if (newValue === currentValue.value) return
+      currentValue.value = newValue
       leftBarSlider(newValue)
     }
   },

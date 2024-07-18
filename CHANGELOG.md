@@ -1,6 +1,21 @@
 # 更新日志 
 
 
+### [1.3.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.2...v1.3.3) (2024-07-14)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复IndexBar索引值显示错误的问题 ([#433](https://github.com/Moonofweisheng/wot-design-uni/issues/433)) ([19dc35b](https://github.com/Moonofweisheng/wot-design-uni/commit/19dc35bf40eecc263ed19e9f54d05c004b1d3425)), closes [#408](https://github.com/Moonofweisheng/wot-design-uni/issues/408)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整演示demo中图片到npmmirror上 ([93ff5f9](https://github.com/Moonofweisheng/wot-design-uni/commit/93ff5f938fdb1ced622080bce9168bfe0e7ed771))
+* ✏️  新增关于messageBox弹出多个的常见问题解答 ([a362928](https://github.com/Moonofweisheng/wot-design-uni/commit/a3629283aa3838803df900512afc990f920b3e0b))
+* ✏️  修复SelectPicker文档中存在的拼写错误 ([9e28b57](https://github.com/Moonofweisheng/wot-design-uni/commit/9e28b5771a30fa0bf8aad60e8e494e0bc976d9a1)), closes [#426](https://github.com/Moonofweisheng/wot-design-uni/issues/426)
+* ✏️  Upload文档增加微信隐私协议的介绍 ([c7f3a4a](https://github.com/Moonofweisheng/wot-design-uni/commit/c7f3a4adc2907bab30f5e075417f34541cba7a5e))
+
 ### [1.3.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.1...v1.3.2) (2024-07-08)
 
 
