@@ -8,7 +8,7 @@
 
 在这里我们提供 12 种不同方向的展示方式，可以通过以下完整示例来理解。
 
-`v-model` 控制是否展示文字提示。
+可以通过`v-model` 控制手动是否展示文字提示。
 
 使用`content`属性来决定显示时的提示信息。
 
@@ -28,7 +28,7 @@
 
 ```html
 <view @click="closeOutside">
-  <wd-tooltip v-model="show" @change="handleChange" placement="top" content="top 提示文字">
+  <wd-tooltip @change="handleChange" placement="top" content="top 提示文字">
     <wd-button>top</wd-button>
   </wd-tooltip>
 </view>
@@ -51,8 +51,12 @@ const show = ref<boolean>(false)
 
 使用插槽时，请使用 `useContentSlot` 属性，确定 `content` 插槽开启。
 
+:::warning 注意
+目前使用`content`插槽时，组件内部无法正确获取气泡的宽高，此时设置偏移的`placement`无法生效，例如`bottom-end`。
+:::
+
 ```html
-<wd-tooltip v-model="show" placement="right" useContentSlot>
+<wd-tooltip placement="right" useContentSlot>
   <wd-button>多行文本</wd-button>
   <template #content>
     <view style="color: red; padding: 5px; width: 90px">
@@ -76,10 +80,36 @@ const show = ref<boolean>(false)
 Tooltip 组件通过属性`show-close` 控制是否显示关闭按钮。
 
 ```html
-<wd-tooltip v-model="show" content="显示关闭按钮" show-close>
+<wd-tooltip content="显示关闭按钮" show-close>
   <wd-button>显示关闭按钮</wd-button>
 </wd-tooltip>
 ```
+
+## 控制显隐
+通过绑定`v-model`控制 `tooltip` 的显隐。
+
+```html
+<wd-button plain @click="control" size="small" class="button-control">
+  {{ show ? '关闭' : '打开' }}
+</wd-button>
+
+<wd-tooltip placement="top" content="控制显隐" v-model="show">
+  <wd-button :round="false">top</wd-button>
+</wd-tooltip>
+
+```
+
+```ts
+import { ref } from 'vue'
+
+const show = ref<boolean>(false)
+
+const control = () => {
+  show.value = !show.value
+}
+```
+
+
 
 ## 高级扩展
 
@@ -88,7 +118,7 @@ Tooltip 组件通过属性`show-close` 控制是否显示关闭按钮。
 如果需要关闭 `tooltip` 功能，`disabled` 属性可以满足这个需求，它接受一个`Boolean`，设置为`true`即可。
 
 ```html
-<wd-tooltip v-model="show" placement="right-end" content="禁用" disabled>
+<wd-tooltip placement="right-end" content="禁用" disabled>
   <wd-button>禁用</wd-button>
 </wd-tooltip>
 ```

@@ -638,7 +638,7 @@ $-toast-box-shadow: var(--wot-toast-box-shadow, 0px 6px 16px 0px rgba(0, 0, 0, 0
 $-tooltip-bg: var(--wot-tooltip-bg, rgba(38, 39, 40, 0.8)) !default; // 背景色
 $-tooltip-color: var(--wot-tooltip-color, $-color-white) !default; // 文字颜色
 $-tooltip-radius: var(--wot-tooltip-radius, 8px) !default; // 圆角大小
-$-tooltip-arrow-size: var(--wot-tooltip-arrow-size, 9px) !default; // 箭头大小
+$-tooltip-arrow-size: var(--wot-tooltip-arrow-size, 5px) !default; // 箭头大小
 $-tooltip-fs: var(--wot-tooltip-fs, $-fs-content) !default; // 字号
 $-tooltip-blur: var(--wot-tooltip-blur, 10px) !default; // 背景高斯模糊效果
 $-tooltip-padding: var(--wot-tooltip-padding, 9px 20px) !default; // 间距

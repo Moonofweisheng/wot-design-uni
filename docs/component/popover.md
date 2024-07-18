@@ -16,7 +16,7 @@ Popover 的属性与 [Tooltip](/component/tooltip.html) 很类似，因此对于
 
 ```html
 <view @click="closeOutside">
-  <wd-popover v-model="show" content="这是一段信息。" @change="handleChange">
+  <wd-popover content="这是一段信息。" @change="handleChange">
     <wd-button>点击展示</wd-button>
   </wd-popover>
 </view>
@@ -26,7 +26,6 @@ Popover 的属性与 [Tooltip](/component/tooltip.html) 很类似，因此对于
 import { useQueue } from '@/uni_modules/wot-design-uni'
 
 const { closeOutside } = useQueue()
-const show = ref<boolean>(false)
 function handleChange1({ show }) {
   console.log(show)
 }
@@ -54,7 +53,7 @@ function handleChange1({ show }) {
 **注意：iconClass 属性值为组件库内部的 icon 图标名。**
 
 ```html
-<wd-popover v-model="show" mode="menu" :content="menu" @menuclick="link" @change="handleChange">
+<wd-popover mode="menu" :content="menu" @menuclick="link" @change="handleChange">
   <wd-button>列表</wd-button>
 </wd-popover>
 ```
@@ -63,8 +62,6 @@ function handleChange1({ show }) {
 import { useToast } from '@/uni_modules/wot-design-uni'
 
 const toast = useToast()
-
-const show = ref<boolean>(false)
 
 const menu = ref<Array<Record<string, any>>>([
   {
@@ -93,13 +90,16 @@ function link(e) {
 ## 嵌套信息
 
 开启属性 `use-content-slot`，使用插槽 `content`， 可以在 Popover 中嵌套多种类型信息。
+:::warning 注意
+目前使用`content`插槽时，组件内部无法正确获取气泡的宽高，此时设置偏移的`placement`无法生效，例如`bottom-end`。
+:::
 
 ```html
 <wd-popover use-content-slot>
   <template #content>
     <view class="pop-content">这是一段自定义样式的内容。</view>
   </template>
-  <wd-button data-id="pop2">点击展示</wd-button>
+  <wd-button>点击展示</wd-button>
 </wd-popover>
 ```
 
