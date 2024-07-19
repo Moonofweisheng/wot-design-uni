@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-06-06 19:11:32
+ * @LastEditTime: 2024-07-18 19:02:32
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-table\types.ts
@@ -53,7 +53,8 @@ export const tableProps = {
 
 export type TableProps = ExtractPropTypes<typeof tableProps>
 
-export type TableProvide = Omit<TableProps, 'index' | 'customStyle' | 'customClass'> & {
+export type TableProvide = {
+  props: Omit<TableProps, 'index' | 'customStyle' | 'customClass'>
   scrollLeft: number
   rowClick: (index: number) => void
   getIsLastFixed: (column: { fixed: boolean; prop: string }) => boolean
