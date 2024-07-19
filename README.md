@@ -81,7 +81,7 @@
 * [更新日志](https://wot-design-uni.pages.dev/guide/changelog.html)
 * [常见问题](https://wot-design-uni.pages.dev/guide/common-problems.html)
 * [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
-* [QQ 群](https://qm.qq.com/cgi-bin/qm/qr?k=O1Z3pal6StL39qHtABqR54Tb56igr90O&jump_from=webapi&authKey=MtVWfi/EQbT03wW7tKXv4bmyKYHBHtzI8VewlzSsOdxFjN0wbgNy17np9Z9yC4Z8)
+* [QQ 群](https://wot-design-uni.pages.dev/guide/join-group.html)
 * [快速上手项目](https://github.com/Moonofweisheng/wot-starter)
 
 ## 开发计划
