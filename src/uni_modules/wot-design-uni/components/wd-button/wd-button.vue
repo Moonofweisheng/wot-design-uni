@@ -101,7 +101,7 @@ watch(
 
 function handleClick(event: any) {
   if (!props.disabled && !props.loading) {
-    emit('click', event.detail)
+    emit('click', event)
   }
 }
 
