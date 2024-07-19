@@ -1,6 +1,32 @@
 # 更新日志 
 
 
+### [1.3.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.3...v1.3.4) (2024-07-19)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复双向滑块响应式丢失 ([#436](https://github.com/Moonofweisheng/wot-design-uni/issues/436)) ([825ea9b](https://github.com/Moonofweisheng/wot-design-uni/commit/825ea9b5b81981ae2a8cb497b412bf950caf6aaf))
+* 🐛 修复Input组件[@input](https://github.com/input)事件参数错误的问题 ([82357f9](https://github.com/Moonofweisheng/wot-design-uni/commit/82357f916def6283003aef64ef522a5bb155c307))
+* 🐛 修复Table组件异步填充数据源无效的问题 ([c795c00](https://github.com/Moonofweisheng/wot-design-uni/commit/c795c00560a267de41d8ef3f976fe16c6ad8ba00)), closes [#445](https://github.com/Moonofweisheng/wot-design-uni/issues/445)
+* 🐛 修复Upload组件accept为media时图片预览顺序混乱的问题 ([f8c1053](https://github.com/Moonofweisheng/wot-design-uni/commit/f8c1053abd2b0ce3f3bee89fbd0e9adcdf1961d2)), closes [#442](https://github.com/Moonofweisheng/wot-design-uni/issues/442)
+* 🐛 Button按钮click事件直接透传event ([017aeda](https://github.com/Moonofweisheng/wot-design-uni/commit/017aeda89d7950024baddc40a4a1e83a36010be3)), closes [#443](https://github.com/Moonofweisheng/wot-design-uni/issues/443)
+* 修复 textarea 组件同时使用 auto-height 和 no-border 属性时，no-border 属性不生效 ([#448](https://github.com/Moonofweisheng/wot-design-uni/issues/448)) ([a2f4b32](https://github.com/Moonofweisheng/wot-design-uni/commit/a2f4b322f5b9bd01a36a46b904684d531d5e6730))
+
+
+### ✨ Features | 新功能
+
+* ✨ Button按钮组件支持使用自定义组件 ([517b583](https://github.com/Moonofweisheng/wot-design-uni/commit/517b583f262e374154111d635644dfb225a473c9)), closes [#310](https://github.com/Moonofweisheng/wot-design-uni/issues/310)
+* ✨ Toast 轻提示组件支持使用组件库内置和自定义图标 ([723c51b](https://github.com/Moonofweisheng/wot-design-uni/commit/723c51bac98bb751af44f13737fba12deb298dd4)), closes [#444](https://github.com/Moonofweisheng/wot-design-uni/issues/444)
+* ✨ Upload上传组件新增支持successStatus属性 ([99eab74](https://github.com/Moonofweisheng/wot-design-uni/commit/99eab74260e1e3c43f9f4b147edb4a5a3147d086))
+* 新增Text 文本组件 ([#403](https://github.com/Moonofweisheng/wot-design-uni/issues/403)) ([14f5f44](https://github.com/Moonofweisheng/wot-design-uni/commit/14f5f4430a7cd599149adf16f7bc704dc42f4d90))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整QQ群与提问相关文档 ([cb11e98](https://github.com/Moonofweisheng/wot-design-uni/commit/cb11e9822ff714d3c1e03ad5f2b01b0a07e8fcec))
+* ✏️  移除示例demo中手机号等字样方便过审 ([7488a7f](https://github.com/Moonofweisheng/wot-design-uni/commit/7488a7f708035b5f59c60078190c880cc8d11800))
+
 ### [1.3.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.2...v1.3.3) (2024-07-14)
 
 
