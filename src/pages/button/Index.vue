@@ -60,6 +60,7 @@
       <demo-block title="带图标的基本按钮">
         <wd-button icon="download">下载</wd-button>
         <wd-button icon="setting">设置</wd-button>
+        <wd-button classPrefix="fish" icon="kehuishouwu">可回收</wd-button>
         <wd-button icon="download" size="small">下载</wd-button>
         <wd-button icon="setting" size="small">设置</wd-button>
         <wd-button icon="download" size="large">下载</wd-button>

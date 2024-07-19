@@ -32,7 +32,7 @@ toast.info('常规提示信息')
 ```
 
 ## 使用图标
-可以使用`iconClass`指定图标，结合`classPrefix`可以使用自定义图标，参见[icon](/component/icon#自定义图标)。
+可以使用`iconClass`指定图标，结合`classPrefix`可以使用自定义图标，参见 [Icon 自定义图标](/component/icon#自定义图标)。
 ```ts
 // 使用组件库内部图标
 toast.show({

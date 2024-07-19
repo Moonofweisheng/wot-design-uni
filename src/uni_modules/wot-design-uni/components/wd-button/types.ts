@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-03-18 13:24:34
+ * @LastEditTime: 2024-07-19 21:31:44
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-button\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-button/types.ts
  * 记得注释
  */
 import type { ExtractPropTypes } from 'vue'
@@ -47,6 +47,10 @@ export const buttonProps = {
    * 图标类名
    */
   icon: String,
+  /**
+   * 类名前缀，用于使用自定义图标，用法参考Icon组件
+   */
+  classPrefix: makeStringProp('wd-icon'),
   /**
    * 加载中按钮
    */
