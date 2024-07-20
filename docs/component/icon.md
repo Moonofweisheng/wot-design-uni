@@ -30,25 +30,40 @@
 ## 自定义图标
 如果需要在现有 Icon 的基础上使用更多图标，可以引入第三方 iconfont 对应的字体文件和 CSS 文件，之后就可以在 Icon 组件中直接使用。
 
-``` scss
-/* 引入第三方或自定义的字体图标样式 */
+
+``` css
+/* 路径 src/iconfont/index.css */
+
 @font-face {
-  font-family: 'my-icon';
-  src: url('./my-icon.ttf') format('truetype');
+  font-family: "fish";
+  src: url('//at.alicdn.com/t/c/font_4626013_vwpx4thmin.woff2?t=1721314121733') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4626013_vwpx4thmin.woff?t=1721314121733') format('woff'),
+       url('//at.alicdn.com/t/c/font_4626013_vwpx4thmin.ttf?t=1721314121733') format('truetype');
 }
 
-.my-icon {
-  font-family: 'my-icon';
+.fish {
+  font-family: "fish" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.my-icon-extra::before {
-  content: '\e626';
+.fish-kehuishouwu:before {
+  content: "\e627";
 }
+
+```
+```html
+<!-- app.vue -->
+ <style>
+@import '@/iconfont/index.css';
+</style>
 ```
 
 ```html
-<!-- 通过 class-prefix 指定类名为 my-icon -->
-<wd-icon class-prefix="my-icon" name="extra" />
+<!-- 通过 class-prefix 指定类名为 fish -->
+<wd-icon class-prefix="fish" name="kehuishouwu" />
 ```
 
 ## Attributes

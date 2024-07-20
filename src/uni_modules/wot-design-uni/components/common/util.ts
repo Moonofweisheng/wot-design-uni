@@ -22,7 +22,7 @@ function s4() {
  * @return {string} num+px
  */
 export function addUnit(num: number | string) {
-  return Number.isNaN(Number(num)) ? num : `${num}px`
+  return !isNumber(num) ? num : `${num}px`
 }
 
 /**

@@ -648,8 +648,13 @@ export type toastThemeVars = {
   toastFs?: string
   toastWithIconMinWidth?: string
   toastIconSize?: string
+  toastIconMarginRight?: string
   toastLoadingPadding?: string
   toastBoxShadow?: string
+}
+
+export type loadingThemeVars = {
+  loadingSize?: string
 }
 
 export type tooltipThemeVars = {
@@ -966,6 +971,7 @@ export type ConfigProviderThemeVars = baseThemeVars &
   tabsThemeVars &
   tagThemeVars &
   toastThemeVars &
+  loadingThemeVars &
   tooltipThemeVars &
   popoverThemeVars &
   gridItemThemeVars &

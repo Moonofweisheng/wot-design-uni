@@ -220,7 +220,7 @@
 
   @include e(placeholder) {
     color: $-input-placeholder-color;
-    
+
     &.is-error {
       color: $-input-error-color;
     }
@@ -268,12 +268,6 @@
     }
   }
 
-  @include when(no-border) {
-    &::after {
-      display: none;
-    }
-  }
-
   @include when(auto-height) {
     &:not(.is-cell) {
       padding: 5px 0;
@@ -281,6 +275,12 @@
 
     &::after {
       display: block;
+    }
+  }
+
+  @include when(no-border) {
+    &::after {
+      display: none;
     }
   }
 

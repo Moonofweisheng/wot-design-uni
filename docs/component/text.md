@@ -2,7 +2,7 @@
 
 # Text 文本
 
-> $LOWEST_VERSION$ 版本提供
+> 1.3.4 版本提供
 
 ## 基本用法
 
@@ -88,21 +88,21 @@ function clickTest() {
 
 | 参数       | 说明                                                               | 类型    | 可选值                                                             | 默认值  | 最低版本         |
 | ---------- | ------------------------------------------------------------------ | ------- | ------------------------------------------------------------------ | ------- | ---------------- |
-| type       | 主题类型                                                           | string  | 'primary' / 'error' / 'warning' / 'success'                        | default | $LOWEST_VERSION$ |
-| text       | 文字                                                               | string  | -                                                                  |         | $LOWEST_VERSION$ |
-| size       | 字体大小                                                           | string  | -                                                                  | -       | $LOWEST_VERSION$ |
-| mode       | 文本处理的匹配模式                                                 | string  | 'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名' | text    | $LOWEST_VERSION$ |
-| bold       | 是否粗体，默认 normal                                              | boolean | -                                                                  | false   | $LOWEST_VERSION$ |
-| format     | 是否脱敏                                                           | boolean | 当 mode 为 phone 和 name 时生效                                    | false   | $LOWEST_VERSION$ |
-| color      | 文字颜色                                                           | string  | -                                                                  | -       | $LOWEST_VERSION$ |
-| lines      | 文本显示的行数，如果设置，超出此行数，将会显示省略号。最大值为 5。 | Number  | -                                                                  | -       | $LOWEST_VERSION$ |
-| lineHeight | 文本行高                                                           | string  | -                                                                  |         | $LOWEST_VERSION$ |
+| type       | 主题类型                                                           | string  | 'primary' / 'error' / 'warning' / 'success'                        | default | 1.3.4 |
+| text       | 文字                                                               | string  | -                                                                  |         | 1.3.4 |
+| size       | 字体大小                                                           | string  | -                                                                  | -       | 1.3.4 |
+| mode       | 文本处理的匹配模式                                                 | string  | 'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名' | text    | 1.3.4 |
+| bold       | 是否粗体，默认 normal                                              | boolean | -                                                                  | false   | 1.3.4 |
+| format     | 是否脱敏                                                           | boolean | 当 mode 为 phone 和 name 时生效                                    | false   | 1.3.4 |
+| color      | 文字颜色                                                           | string  | -                                                                  | -       | 1.3.4 |
+| lines      | 文本显示的行数，如果设置，超出此行数，将会显示省略号。最大值为 5。 | Number  | -                                                                  | -       | 1.3.4 |
+| lineHeight | 文本行高                                                           | string  | -                                                                  |         | 1.3.4 |
 
 ## Events
 
 | 事件名称 | 说明           | 参数  | 最低版本         |
 | -------- | -------------- | ----- | ---------------- |
-| click    | 标签点击时触发 | event | $LOWEST_VERSION$ |
+| click    | 标签点击时触发 | event | 1.3.4 |
 
 ## Slots
 
@@ -110,5 +110,5 @@ function clickTest() {
 
 | 类名         | 说明       | 最低版本         |
 | ------------ | ---------- | ---------------- |
-| custom-class | 根节点样式 | $LOWEST_VERSION$ |
-| custom-style | 根节点样式 | $LOWEST_VERSION$ |
+| custom-class | 根节点样式 | 1.3.4 |
+| custom-style | 根节点样式 | 1.3.4 |

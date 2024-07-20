@@ -6,7 +6,7 @@
         <view v-if="!useContentSlot" class="wd-tooltip__inner">{{ content }}</view>
       </view>
     </view>
-    <wd-transition custom-class="wd-tooltip__pos" :custom-style="popover.popStyle.value" :show="modelValue" name="fade" :duration="200">
+    <wd-transition custom-class="wd-tooltip__pos" :custom-style="popover.popStyle.value" :show="showTooltip" name="fade" :duration="200">
       <view class="wd-tooltip__container custom-pop">
         <view v-if="visibleArrow" :class="`wd-tooltip__arrow ${popover.arrowClass.value} ${customArrow}`" :style="popover.arrowStyle.value"></view>
         <!-- 普通模式 -->
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue'
+import { getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { usePopover } from '../composables/usePopover'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
@@ -45,9 +45,9 @@ const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'c
 
 const popover = usePopover()
 const queue = inject<Queue | null>(queueKey, null)
-
 const selector: string = 'tooltip'
 const { proxy } = getCurrentInstance() as any
+const showTooltip = ref<boolean>(false) // 控制tooltip显隐
 
 watch(
   () => props.content,
@@ -60,7 +60,21 @@ watch(
 )
 
 watch(
+  () => props.placement,
+  () => {
+    popover.init(props.placement, props.visibleArrow, selector)
+  }
+)
+
+watch(
   () => props.modelValue,
+  (newValue) => {
+    showTooltip.value = newValue
+  }
+)
+
+watch(
+  () => showTooltip.value,
   (newValue) => {
     if (newValue) {
       popover.control(props.placement, props.offset)
@@ -99,15 +113,20 @@ onBeforeUnmount(() => {
 
 function toggle() {
   if (props.disabled) return
-  emit('update:modelValue', !props.modelValue)
+  updateModelValue(!showTooltip.value)
 }
 
 function open() {
-  emit('update:modelValue', true)
+  updateModelValue(true)
 }
 
 function close() {
-  emit('update:modelValue', false)
+  updateModelValue(false)
+}
+
+function updateModelValue(value: boolean) {
+  showTooltip.value = value
+  emit('update:modelValue', value)
 }
 
 defineExpose<TooltipExpose>({

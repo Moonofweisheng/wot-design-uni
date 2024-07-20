@@ -39,7 +39,7 @@
     <view v-if="loading" class="wd-button__loading">
       <view class="wd-button__loading-svg" :style="loadingStyle"></view>
     </view>
-    <wd-icon v-else-if="icon" custom-class="wd-button__icon" :name="icon"></wd-icon>
+    <wd-icon v-else-if="icon" custom-class="wd-button__icon" :name="icon" :classPrefix="classPrefix"></wd-icon>
     <view class="wd-button__text"><slot /></view>
   </button>
 </template>
@@ -101,7 +101,7 @@ watch(
 
 function handleClick(event: any) {
   if (!props.disabled && !props.loading) {
-    emit('click', event.detail)
+    emit('click', event)
   }
 }
 

@@ -115,7 +115,7 @@ function handleSubmit1() {
               {
                 required: false,
                 validator: validatorMessage,
-                message: '请输入正确的手机号'
+                message: '请输入正确的玛卡巴卡'
               }
             ]"
     />
@@ -501,8 +501,8 @@ function handleSubmit() {
           <wd-switch v-model="model.switchVal" />
         </view>
       </wd-cell>
-      <wd-input label="卡号" label-width="100px" prop="cardId" suffix-icon="camera" placeholder="请输入卡号" clearable v-model="model.cardId" />
-      <wd-input label="手机号" label-width="100px" prop="phone" placeholder="请输入手机号" clearable v-model="model.phone" />
+      <wd-input label="歪比巴卜" label-width="100px" prop="cardId" suffix-icon="camera" placeholder="请输入歪比巴卜" clearable v-model="model.cardId" />
+      <wd-input label="玛卡巴卡" label-width="100px" prop="phone" placeholder="请输入玛卡巴卡" clearable v-model="model.phone" />
       <wd-cell title="活动图片" title-width="100px" prop="fileList">
         <wd-upload :file-list="model.fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleFileChange"></wd-upload>
       </wd-cell>
@@ -510,7 +510,7 @@ function handleSubmit() {
     <view class="tip">
       <wd-checkbox v-model="model.read" prop="read" custom-label-class="label-class">
         已阅读并同意
-        <text style="color: #4d80f0">《借款额度合同及相关授权》</text>
+        <text style="color: #4d80f0">《巴拉巴拉吧啦协议》</text>
       </wd-checkbox>
     </view>
     <view class="footer">
@@ -687,12 +687,12 @@ const rules: FormRules = {
   cardId: [
     {
       required: true,
-      message: '请输入卡号',
+      message: '请输入歪比巴卜',
       validator: (value) => {
         if (value) {
           return Promise.resolve()
         } else {
-          return Promise.reject('请输入卡号')
+          return Promise.reject('请输入歪比巴卜')
         }
       }
     }
@@ -700,7 +700,7 @@ const rules: FormRules = {
   phone: [
     {
       required: true,
-      message: '请输入手机号',
+      message: '请输入玛卡巴卡',
       validator: (value) => {
         if (value) {
           return Promise.resolve()

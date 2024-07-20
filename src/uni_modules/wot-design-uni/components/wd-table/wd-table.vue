@@ -71,7 +71,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { type CSSProperties, computed, watch, reactive, ref } from 'vue'
+import { type CSSProperties, computed, reactive, ref } from 'vue'
 import { addUnit, debounce, isDef, isObj, objToStyle, uuid } from '../common/util'
 import type { SortDirection, TableColumn, TableColumnInstance, TableColumnProps } from '../wd-table-col/types'
 import { TABLE_KEY, tableProps, type TableProvide } from './types'
@@ -85,13 +85,7 @@ const props = defineProps(tableProps)
 const emit = defineEmits(['sort-method', 'row-click'])
 
 const reactiveState = reactive<TableProvide>({
-  data: props.data,
-  stripe: props.stripe,
-  border: props.border,
-  height: props.height,
-  rowHeight: props.rowHeight,
-  showHeader: props.showHeader,
-  ellipsis: props.ellipsis,
+  props,
   scrollLeft: 0,
   rowClick,
   getIsLastFixed,
@@ -114,61 +108,6 @@ const indexColumn = ref<TableColumnProps>({
 })
 
 const scroll = debounce(handleScroll, 100, { leading: false }) // 滚动事件
-
-watch(
-  () => props.data,
-  (newValue) => {
-    reactiveState.data = newValue
-  },
-  { deep: true }
-)
-
-watch(
-  () => props.stripe,
-  (newValue) => {
-    reactiveState.stripe = newValue
-  },
-  { deep: true }
-)
-
-watch(
-  () => props.border,
-  (newValue) => {
-    reactiveState.border = newValue
-  },
-  { deep: true }
-)
-
-watch(
-  () => props.height,
-  (newValue) => {
-    reactiveState.height = newValue
-  },
-  { deep: true }
-)
-
-watch(
-  () => props.rowHeight,
-  (newValue) => {
-    reactiveState.rowHeight = newValue
-  },
-  { deep: true }
-)
-watch(
-  () => props.showHeader,
-  (newValue) => {
-    reactiveState.showHeader = newValue
-  },
-  { deep: true }
-)
-
-watch(
-  () => props.ellipsis,
-  (newValue) => {
-    reactiveState.ellipsis = newValue
-  },
-  { deep: true }
-)
 
 /**
  * 容器样式

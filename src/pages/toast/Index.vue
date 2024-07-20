@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-09-20 11:10:44
- * @LastEditTime: 2024-04-11 13:13:28
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\pages\toast\Index.vue
- * 记得注释
--->
 <template>
   <view>
     <page-wraper>
@@ -19,6 +10,10 @@
         <wd-button @click="showErrorToast">错误toast</wd-button>
         <wd-button @click="showWarnToast">警告toast</wd-button>
         <wd-button @click="showNormalToast">常规toast</wd-button>
+      </demo-block>
+      <demo-block title="使用图标">
+        <wd-button @click="showInnerIconToast">内部图标</wd-button>
+        <wd-button @click="showCustomIconToast">自定义图标</wd-button>
       </demo-block>
       <demo-block title="提示位置">
         <wd-button @click="showTopToast">顶部toast</wd-button>
@@ -54,6 +49,7 @@ function showNormalToast() {
 function showTopToast() {
   toast.show({
     position: 'top',
+    iconClass: 'star',
     msg: '提示信息',
     closed() {
       console.log(232)
@@ -87,6 +83,21 @@ function showLoadingToast2() {
 }
 function showLongToast() {
   toast.show('这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文案')
+}
+
+function showInnerIconToast() {
+  toast.show({
+    iconClass: 'star',
+    msg: '使用组件库内部图标'
+  })
+}
+
+function showCustomIconToast() {
+  toast.show({
+    iconClass: 'kehuishouwu',
+    classPrefix: 'fish',
+    msg: '使用自定义图标'
+  })
 }
 </script>
 <style lang="scss" scoped>

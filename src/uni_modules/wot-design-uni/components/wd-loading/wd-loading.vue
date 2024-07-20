@@ -1,5 +1,5 @@
 <template>
-  <view :class="rootClass" :style="rootStyle">
+  <view :class="`wd-loading ${props.customClass}`" :style="rootStyle">
     <view class="wd-loading__body">
       <view class="wd-loading__svg" :style="`background-image: url(${svg});`"></view>
     </view>
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, watch, type CSSProperties } from 'vue'
 import base64 from '../common/base64'
 import { gradient, context, objToStyle, addUnit, isDef } from '../common/util'
 import { loadingProps } from './types'
@@ -39,7 +39,7 @@ const props = defineProps(loadingProps)
 
 const svg = ref<string>('')
 const intermediateColor = ref<string>('')
-const iconSize = ref<string | number>('32px')
+const iconSize = ref<string | number | null>(null)
 
 watch(
   () => props.size,
@@ -64,15 +64,12 @@ watch(
 )
 
 const rootStyle = computed(() => {
-  const style: Record<string, string | number> = {
-    width: iconSize.value,
-    height: iconSize.value
+  const style: CSSProperties = {}
+  if (isDef(iconSize.value)) {
+    style.height = addUnit(iconSize.value)
+    style.width = addUnit(iconSize.value)
   }
   return `${objToStyle(style)}; ${props.customStyle}`
-})
-
-const rootClass = computed(() => {
-  return `wd-loading  ${props.customClass}`
 })
 
 onBeforeMount(() => {

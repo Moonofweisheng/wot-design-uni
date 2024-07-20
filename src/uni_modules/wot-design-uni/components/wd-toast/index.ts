@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-29 13:29:57
- * @LastEditTime: 2024-04-10 20:18:47
+ * @LastEditTime: 2024-07-18 23:16:16
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-toast\index.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-toast/index.ts
  * 记得注释
  */
 import { provide, ref } from 'vue'
@@ -25,9 +25,6 @@ export const defaultOptions: ToastOptions = {
   loadingType: 'outline',
   loadingColor: '#4D80F0',
   iconColor: '#4D80F0',
-  iconSize: 42,
-  loadingSize: 42,
-  customIcon: false,
   position: 'middle',
   show: false,
   zIndex: 100

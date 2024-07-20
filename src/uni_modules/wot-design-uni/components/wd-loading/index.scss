@@ -6,6 +6,8 @@
   line-height: 0;
   vertical-align: middle;
   display: inline-block;
+  width: $-loading-size;
+  height: $-loading-size;
 
   @include e(body) {
     width: 100%;

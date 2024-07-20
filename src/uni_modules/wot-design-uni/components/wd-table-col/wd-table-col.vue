@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { type CSSProperties, computed, ref } from 'vue'
+import { type CSSProperties, computed, ref, watch } from 'vue'
 import { addUnit, isDef, objToStyle, isOdd, isFunction } from '../common/util'
 import { tableColumnProps, type SortDirection } from './types'
 import { useParent } from '../composables/useParent'
@@ -42,7 +42,7 @@ const sortDirection = ref<SortDirection>(0) // 排序方向
 // 是否开启斑马纹
 const stripe = computed(() => {
   if (isDef(table)) {
-    return table.stripe
+    return table.props.stripe
   } else {
     return false
   }
@@ -53,7 +53,7 @@ const stripe = computed(() => {
  */
 const border = computed(() => {
   if (isDef(table)) {
-    return table.border
+    return table.props.border
   } else {
     return false
   }
@@ -64,7 +64,7 @@ const border = computed(() => {
  */
 const ellipsis = computed(() => {
   if (isDef(table)) {
-    return table.ellipsis
+    return table.props.ellipsis
   } else {
     return false
   }
@@ -100,7 +100,7 @@ const columnStyle = computed(() => {
  */
 const cellStyle = computed(() => {
   let style: CSSProperties = {}
-  const rowHeight: string | number = isDef(table) ? table.rowHeight : '80rpx' // 自定义行高
+  const rowHeight: string | number = isDef(table) ? table.props.rowHeight : '80rpx' // 自定义行高
   if (isDef(rowHeight)) {
     style['height'] = addUnit(rowHeight)
   }
@@ -115,7 +115,8 @@ const column = computed(() => {
   if (!isDef(table)) {
     return []
   }
-  const column: any[] = table.data.map((item) => {
+
+  const column: any[] = table.props.data.map((item) => {
     return item[props.prop]
   })
   return column
@@ -137,7 +138,7 @@ function getScope(index: number) {
   if (!isDef(table)) {
     return {}
   }
-  return table.data[index] || {}
+  return table.props.data[index] || {}
 }
 
 defineExpose({ sortDirection: sortDirection })
