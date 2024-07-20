@@ -7,6 +7,19 @@
 * 当切换选中选项时，关联区域的内容会发生变化。
 
 
+## 基本用法
+
+通过 `options` 属性设置选项列表，通过 `v-model:value` 绑定当前选中项。
+
+```vue
+<wd-segmented :options="list" v-model:value="current"></wd-segmented>
+```
+```ts
+const list = ref<string[]>(['评论', '点赞', '贡献', '打赏'])
+
+const current = ref('点赞')
+```
+
 ## 大型分段器
 
 通过设置 `size` 属性为 `"large"`，创建一个大型分段器。
@@ -15,20 +28,13 @@
 <wd-segmented :options="list" v-model:value="current" size="large"></wd-segmented>
 ```
 
-## 默认分段器
-
-这是默认尺寸的分段器。
-
-```vue
-<wd-segmented :options="list" v-model:value="current1"></wd-segmented>
-```
 
 ## 小型分段器
 
 通过设置 `size` 属性为 `"small"`，创建一个小型分段器。
 
 ```html
-<wd-segmented :options="list" v-model:value="current2" size="small"></wd-segmented>
+<wd-segmented :options="list" v-model:value="current" size="small"></wd-segmented>
 ```
 
 ## 带振动效果的分段器
@@ -36,7 +42,7 @@
 通过设置 `vibrate-short` 属性为 `true`，使手机在切换选项时产生短暂振动。
 
 ```html
-<wd-segmented :options="list" v-model:value="current3" :vibrate-short="true"></wd-segmented>
+<wd-segmented :options="list" v-model:value="current" :vibrate-short="true"></wd-segmented>
 ```
 
 ## 禁用分段器
@@ -44,7 +50,7 @@
 通过设置 `disabled` 属性为 `true`，禁用分段器。
 
 ```html
-<wd-segmented :options="list" v-model:value="current5" disabled></wd-segmented>
+<wd-segmented :options="list" v-model:value="current" disabled></wd-segmented>
 ```
 
 ## 自定义渲染分段器标签
@@ -52,7 +58,7 @@
 使用插槽 `label` 可以自定义渲染分段器的标签内容。
 
 ```html
-<wd-segmented :options="list1" v-model:value="current4" :vibrate-short="true">
+<wd-segmented :options="list" v-model:value="current" :vibrate-short="true">
   <template #label="{ option }">
     <view class="section-slot">
       <image style="border-radius: 50%; width: 32px; height: 32px" :src="option.payload.avatar" />
@@ -64,7 +70,7 @@
 </wd-segmented>
 ```
 ```ts
-const list1 = ref([
+const list = ref([
   {
     value: '李雷',
     disabled: false,
@@ -93,7 +99,6 @@ const list1 = ref([
 
 ```
 
-请注意，上述示例代码中的 `list` 和 `list1` 变量是您在 `<script>` 部分设置的示例数据。您可以根据您的实际需求自定义这些数据。
 
 
 ## Attributes
