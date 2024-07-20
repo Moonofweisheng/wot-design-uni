@@ -62,12 +62,12 @@ function change(e) {
 
 ## 表单模式
 
-设置 `cell` 属性，开启表单模式复选框组。
+设置 `cell` 属性，开启表单模式单选框组。
 
-开启表单模式时，如果同时设置 `shape` 为 `button` 开启表单复选按钮组模式。
+开启表单模式时，如果同时设置 `shape` 为 `button` 开启表单模式单选按钮组模式。
 
 ```html
-<wd-radio-group modelValue="1" cell>
+<wd-radio-group v-model="value" cell>
   <wd-radio value="1">选项一</wd-radio>
   <wd-radio value="2">选项二</wd-radio>
   <wd-radio value="3">选项三</wd-radio>
@@ -78,15 +78,22 @@ function change(e) {
 </wd-radio-group>
 ```
 
+``` ts
+const value = ref<number>(1)
+```
+
 ## 同行展示
 
 设置 `inline` 属性，使单选框在同一行展示。
 
 ```html
-<wd-radio-group modelValue="1" inline>
+<wd-radio-group v-model="value" inline>
   <wd-radio value="1">单选框1</wd-radio>
   <wd-radio value="2">单选框2</wd-radio>
 </wd-radio-group>
+```
+``` ts
+const value = ref<number>(1)
 ```
 
 ## 修改选中的颜色
@@ -94,10 +101,13 @@ function change(e) {
 设置 `checked-color` 属性。
 
 ```html
-<wd-radio-group modelValue="1" checked-color="#fa4350">
+<wd-radio-group v-model="value" checked-color="#fa4350">
   <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
+```
+``` ts
+const value = ref<number>(1)
 ```
 
 ## 禁用
@@ -105,10 +115,13 @@ function change(e) {
 可以在 `radio-group` 上面设置 `disabled`，禁用所有单选框，也可以在单个单选框上面设置 `disabled` 属性，禁用某个单选框。
 
 ```html
-<wd-radio-group modelValue="1" disabled>
+<wd-radio-group v-model="value" disabled>
   <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
+```
+``` ts
+const value = ref<number>(1)
 ```
 
 ## 尺寸
@@ -116,7 +129,7 @@ function change(e) {
 设置 `size` 属性，可选 `large`。
 
 ```html
-<wd-radio-group modelValue="1" size="large">
+<wd-radio-group v-model="value" size="large">
   <wd-radio value="1">沃特</wd-radio>
   <wd-radio value="2">商家后台</wd-radio>
 </wd-radio-group>
@@ -127,7 +140,7 @@ function change(e) {
 radio设置的props优先级比radioGroup上设置的props优先级更高
 
 ```html
-  <wd-radio-group modelValue="1" shape="button" disabled checked-color="#f00">
+  <wd-radio-group v-model="value" shape="button" disabled checked-color="#f00">
     <wd-radio value="1" :disabled="false" checked-color="#000">商家后台</wd-radio>
     <wd-radio value="2" :disabled="false">沃特</wd-radio>
     <wd-radio value="3">商家智能</wd-radio>
