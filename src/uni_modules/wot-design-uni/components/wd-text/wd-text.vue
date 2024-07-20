@@ -20,7 +20,7 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import { isDef, objToStyle } from '../common/util'
-import { dayjs } from '@/uni_modules/wot-design-uni'
+import { dayjs } from '../common/dayjs'
 import { textProps } from './types'
 
 const props = defineProps(textProps)
