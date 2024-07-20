@@ -1,6 +1,20 @@
 # 更新日志 
 
 
+### [1.3.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.4...v1.3.5) (2024-07-20)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Text组件使用日期工具方法路径错误的问题 ([c4071c3](https://github.com/Moonofweisheng/wot-design-uni/commit/c4071c3759d8328f5dd6a6a374bb91dda5af1029)), closes [#453](https://github.com/Moonofweisheng/wot-design-uni/issues/453)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档中全局引入ElTag用于显示组件上线版本 ([1d05654](https://github.com/Moonofweisheng/wot-design-uni/commit/1d056547c89f4b6f39e9f2b503d55790abc02b52))
+* ✏️  修复RadioBox文档中关于表单模式表述错误的问题 ([1da6c34](https://github.com/Moonofweisheng/wot-design-uni/commit/1da6c34565d20c7fdb0970cfc93dada208b1f82e))
+* ✏️  优化Segmented分段器关于绑定激活项的文档 ([5caf3b9](https://github.com/Moonofweisheng/wot-design-uni/commit/5caf3b95073c9bf28f280cbe88431a40f937e994))
+
 ### [1.3.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.3...v1.3.4) (2024-07-19)
 
 
