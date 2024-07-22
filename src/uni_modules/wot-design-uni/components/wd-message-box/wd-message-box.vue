@@ -267,7 +267,7 @@ function resetErr(val: boolean) {
     showErr.value = false
   }
 }
-function inputValChange(value: string | number) {
+function inputValChange({ value }: { value: string | number }) {
   if (value === '') {
     showErr.value = false
     return
