@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-07-19 21:31:44
+ * @LastEditTime: 2024-07-23 11:38:09
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-button/types.ts
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-button\types.ts
  * 记得注释
  */
 import type { ExtractPropTypes } from 'vue'
@@ -63,7 +63,6 @@ export const buttonProps = {
    * 开放能力
    */
   openType: String,
-  formType: String,
   /**
    * 指定是否阻止本节点的祖先节点出现点击态
    */
@@ -95,7 +94,11 @@ export const buttonProps = {
   /**
    * 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效
    */
-  showMessageCard: Boolean
+  showMessageCard: Boolean,
+  /**
+   * 按钮的唯一标识，可用于设置隐私同意授权按钮的id
+   */
+  buttonId: String
 }
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>

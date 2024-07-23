@@ -1,5 +1,6 @@
 <template>
   <button
+    :id="buttonId"
     :hover-class="`${disabled || loading ? '' : 'wd-button--active'}`"
     :style="customStyle"
     :class="[
@@ -16,7 +17,7 @@
     ]"
     :hover-start-time="hoverStartTime"
     :hover-stay-time="hoverStayTime"
-    :open-type="openType"
+    :open-type="disabled || loading ? '' : openType"
     :send-message-title="sendMessageTitle"
     :send-message-path="sendMessagePath"
     :send-message-img="sendMessageImg"
@@ -25,7 +26,6 @@
     :session-from="sessionFrom"
     :lang="lang"
     :hover-stop-propagation="hoverStopPropagation"
-    :form-type="formType"
     @click="handleClick"
     @getuserinfo="handleGetuserinfo"
     @contact="handleConcat"

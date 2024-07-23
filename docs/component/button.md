@@ -119,6 +119,8 @@
 | app-parameter | 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 | string | - | - | - |
 | show-message-card	| 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 | boolean | - | false | - |
 | classPrefix | 类名前缀，用于使用自定义图标，参见[icon](/component/icon#自定义图标) | string | - | 'wd-icon' | 0.1.27 |
+| button-id | 按钮的唯一标识，可用于设置隐私同意授权按钮的id | string | - | - | $LOWEST_VERSION$ |
+
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
