@@ -83,6 +83,7 @@ export type baseThemeVars = {
 export type actionSheetThemeVars = {
   actionSheetWeight?: string
   actionSheetRadius?: string
+  actionSheetLoadingSize?: string
   actionSheetActionHeight?: string
   actionSheetColor?: string
   actionSheetFs?: string
@@ -289,6 +290,8 @@ export type dropMenuThemeVars = {
   dropMenuHeight?: string
   dropMenuColor?: string
   dropMenuFs?: string
+  dropMenuArrowFs?: string
+
   dropMenuSidePadding?: string
   dropMenuDisabledColor?: string
   dropMenuItemHeight?: string
@@ -359,7 +362,6 @@ export type textareaThemeVars = {
   textareaCountColor?: string
   textareaCountCurrentColor?: string
   textareaBg?: string
-
   textareaCellBorderColor?: string
   textareaCellPadding?: string
   textareaCellPaddingLarge?: string
@@ -375,6 +377,8 @@ export type loadmoreThemeVars = {
   loadmoreColor?: string
   loadmoreFs?: string
   loadmoreErrorColor?: string
+  loadmoreRefreshFs?: string
+  loadmoreLoadingSize?: string
 }
 
 export type messageBoxThemeVars = {
@@ -423,6 +427,7 @@ export type paginationThemeVars = {
   paginationNavContentFs?: string
   paginationNavSepatatorPadding?: string
   paginationNavCurrentColor?: string
+  paginationIconSize?: string
 }
 
 export type pickerThemeVars = {
@@ -542,6 +547,8 @@ export type searchThemeVars = {
   searchInputFs?: string
   searchInputColor?: string
   searchIconColor?: string
+  searchIconSize?: string
+  searchClearIconSize?: string
   searchPlaceholderColor?: string
   searchCancelPadding?: string
   searchCancelFs?: string
@@ -607,6 +614,7 @@ export type tabsThemeVars = {
   tabsNavActiveColor?: string
   tabsNavDisabledColor?: string
   tabsNavLineHeight?: string
+  tabsNavLineWidth?: string
   tabsNavLineBgColor?: string
   tabsNavMapFs?: string
   tabsNavMapColor?: string
@@ -730,11 +738,11 @@ export type uploadThemeVars = {
   uploadProgressFs?: string
   uploadFileFs?: string
   uploadFileColor?: string
-
   uploadPreviewNameFs?: string
   uploadPreviewIconSize?: string
   uploadPreviewNameBg?: string
   uploadPreviewNameHeight?: string
+  uploadCoverIconSize?: string
 }
 
 export type curtainThemeVars = {
@@ -811,6 +819,7 @@ export type tabbarItemThemeVars = {
   tabbarItemTitleLineHeight?: string
   tabbarInactiveColor?: string
   tabbarActiveColor?: string
+  tabbarItemIconSize?: string
 }
 
 export type navbarThemeVars = {
@@ -831,6 +840,7 @@ export type navbarCapsuleThemeVars = {
   navbarCapsuleBorderRadius?: string
   navbarCapsuleWidth?: string
   navbarCapsuleHeight?: string
+  navbarCapsuleIconSize?: string
 }
 
 export type tableThemeVars = {
@@ -866,6 +876,7 @@ export type fabThemeVars = {
   fabTriggerHeight?: string
   fabTriggerWidth?: string
   fabActionsPadding?: string
+  fabIconFs?: string
 }
 
 export type countDownThemeVars = {
@@ -891,6 +902,7 @@ export type numberKeyboardThemeVars = {
   numberKeyboardClosePadding?: string
   numberKeyboardCloseColor?: string
   numberKeyboardCloseFontSize?: string
+  numberKeyboardIconSize?: string
 }
 
 export type passwodInputThemeVars = {
@@ -920,6 +932,7 @@ export type formItemThemeVars = {
 
 export type backtopThemeVars = {
   backtopBg?: string
+  backtopIconSize?: string
 }
 
 export type indexBarThemeVars = {
@@ -938,6 +951,11 @@ export type videoPreviewThemeVars = {
   videoPreviewBg?: string
   videoPreviewCloseColor?: string
   videoPreviewCloseFontSize?: string
+}
+
+export type imgCropperThemeVars = {
+  imgCropperIconSize?: string
+  imgCropperIconColor?: string
 }
 
 export type ConfigProviderThemeVars = baseThemeVars &
@@ -1000,4 +1018,5 @@ export type ConfigProviderThemeVars = baseThemeVars &
   backtopThemeVars &
   indexBarThemeVars &
   textThemeVars &
-  videoPreviewThemeVars
+  videoPreviewThemeVars &
+  imgCropperThemeVars

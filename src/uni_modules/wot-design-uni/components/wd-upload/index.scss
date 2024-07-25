@@ -93,6 +93,10 @@
     background-color: $-upload-evoke-bg;
   }
 
+  @include e(video-icon, file-icon) {
+    font-size: $-upload-cover-icon-size;
+  }
+
   @include e(file-name, video-name) {
     width: 100%;
     font-size: $-upload-file-fs;

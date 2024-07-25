@@ -38,7 +38,7 @@
             :style="`color: ${action.color}`"
             @click="select(rowIndex, 'action')"
           >
-            <wd-loading v-if="action.loading" size="20px" />
+            <wd-loading custom-class="`wd-action-sheet__action-loading" v-if="action.loading" />
             <view v-else class="wd-action-sheet__name">{{ action.name }}</view>
             <view v-if="!action.loading && action.subname" class="wd-action-sheet__subname">{{ action.subname }}</view>
           </button>

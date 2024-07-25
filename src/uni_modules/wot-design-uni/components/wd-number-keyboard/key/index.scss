@@ -13,7 +13,7 @@
     @include m(active) {
       background-color: $-dark-background4;
     }
- 
+
   }
 }
 
@@ -73,4 +73,9 @@
   @include edeep(loading-icon) {
     color: $-number-keyboard-button-text-color;
   }
+
+  @include edeep(icon) {
+    font-size: $-number-keyboard-icon-size;
+  }
+
 }

@@ -113,10 +113,11 @@
     position: absolute;
     bottom: 4px;
     left: 0;
-    height: $-tabs-nav-line-height;
-    background: $-tabs-nav-line-bg-color;
     z-index: 1;
-    border-radius: 1.5px;
+    height: $-tabs-nav-line-height;
+    width: $-tabs-nav-line-width;
+    background: $-tabs-nav-line-bg-color;
+    border-radius: calc($-tabs-nav-line-height / 2);
   }
 
   @include e(container) {

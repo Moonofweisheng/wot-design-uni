@@ -56,7 +56,7 @@
     />
     <!-- 下方按钮 -->
     <view class="wd-img-cropper__footer">
-      <wd-icon v-if="!disabledRotate" name="rotate" size="24px" color="#fff" data-eventsync="true" @click="handleRotate"></wd-icon>
+      <wd-icon custom-class="wd-img-cropper__rotate" v-if="!disabledRotate" name="rotate" @click="handleRotate"></wd-icon>
       <view class="wd-img-cropper__footer--button">
         <view class="is-cancel" @click="handleCancel">{{ cancelButtonText || translate('cancel') }}</view>
         <wd-button size="small" :custom-style="buttonStyle" @click="handleConfirm">{{ confirmButtonText || translate('confirm') }}</wd-button>

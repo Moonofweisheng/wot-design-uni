@@ -43,7 +43,7 @@
         <scroll-view :scroll-x="true" scroll-with-animation :scroll-left="scrollLeft">
           <view class="wd-col-picker__selected-container">
             <view
-              v-for="(select, colIndex) in selectList"
+              v-for="(_, colIndex) in selectList"
               :key="colIndex"
               :class="`wd-col-picker__selected-item  ${colIndex === currentCol && 'is-selected'}`"
               @click="handleColClick(colIndex)"

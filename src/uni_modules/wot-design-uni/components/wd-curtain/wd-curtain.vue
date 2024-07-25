@@ -19,7 +19,7 @@
     >
       <view class="wd-curtain__content">
         <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
-        <wd-icon name="close-outline" size="24px" :custom-class="`wd-curtain__content-close ${closePosition}`" @click="close" />
+        <wd-icon name="close-outline" :custom-class="`wd-curtain__content-close ${closePosition}`" @click="close" />
       </view>
     </wd-popup>
   </view>

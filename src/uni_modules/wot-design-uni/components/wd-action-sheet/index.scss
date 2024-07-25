@@ -98,6 +98,11 @@
       line-height: initial;
     }
   }
+  
+  @include edeep(action-loading){
+    width: $-action-sheet-loading-size;
+    height: $-action-sheet-loading-size;
+  }
 
   @include e(name) {
     display: inline-block;

@@ -23,18 +23,12 @@
   }
   @include edeep(prefix) {
     padding-right: 4px;
-    width: $-notice-bar-prefix-size;
-    height: $-notice-bar-prefix-size;
-    line-height: $-notice-bar-prefix-size;
+    font-size: $-notice-bar-prefix-size;
   }
-
-
 
   @include edeep(suffix) {
     text-align: center;
-    width: $-notice-bar-close-size;
-    height: $-notice-bar-close-size;
-    line-height: $-notice-bar-close-size;
+    font-size: $-notice-bar-close-size;
     display: inline-block;
     background-color: $-notice-bar-close-bg;
     color: $-notice-bar-close-color;

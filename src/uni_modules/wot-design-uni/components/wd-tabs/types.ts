@@ -1,5 +1,5 @@
 import { type ExtractPropTypes, type InjectionKey } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp, numericProp } from '../common/props'
 
 export type TabsProvide = {
   state: {
@@ -38,11 +38,11 @@ export const tabsProps = {
   /**
    * 底部条宽度，单位像素
    */
-  lineWidth: makeNumberProp(19),
+  lineWidth: numericProp,
   /**
    * 底部条高度，单位像素
    */
-  lineHeight: makeNumberProp(3),
+  lineHeight: numericProp,
   /**
    * 颜色
    */

@@ -7,7 +7,7 @@
     :style="rootStyle"
     @click.stop=""
   >
-    <view @click.stop="" v-if="inited">
+    <view @click.stop="" :style="{ visibility: inited ? 'visible' : 'hidden' }" id="trigger">
       <wd-button @click="handleClick" custom-class="wd-fab__trigger" round :type="type" :disabled="disabled">
         <wd-icon custom-class="wd-fab__icon" :name="isActive ? activeIcon : inactiveIcon"></wd-icon>
       </wd-button>
@@ -39,8 +39,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { type CSSProperties, computed, onBeforeMount, ref, watch, inject, getCurrentInstance, onBeforeUnmount } from 'vue'
-import { isDef, isH5, objToStyle } from '../common/util'
+import { type CSSProperties, computed, ref, watch, inject, getCurrentInstance, onBeforeUnmount, onMounted, nextTick } from 'vue'
+import { getRect, isDef, isH5, objToStyle } from '../common/util'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { fabProps, type FabExpose } from './types'
@@ -97,8 +97,15 @@ const bounding = reactive({
   maxLeft: 0
 })
 
-function getBounding() {
+async function getBounding() {
   const sysInfo = uni.getSystemInfoSync()
+  try {
+    const trigerInfo = await getRect('#trigger', false, proxy)
+    fabSize.value = trigerInfo.width || 56
+  } catch (error) {
+    console.log(error)
+  }
+
   const { top = 16, left = 16, right = 16, bottom = 16 } = props.gap
   screen.width = sysInfo.windowWidth
   screen.height = isH5 ? sysInfo.windowTop + sysInfo.windowHeight : sysInfo.windowHeight
@@ -183,15 +190,18 @@ const rootStyle = computed(() => {
   return `${objToStyle(style)};${props.customStyle}`
 })
 
-onBeforeMount(() => {
-  getBounding()
-  initPosition()
-  inited.value = true
+onMounted(() => {
   if (queue && queue.pushToQueue) {
     queue.pushToQueue(proxy)
   } else {
     pushToQueue(proxy)
   }
+
+  nextTick(async () => {
+    await getBounding()
+    initPosition()
+    inited.value = true
+  })
 })
 
 onBeforeUnmount(() => {
