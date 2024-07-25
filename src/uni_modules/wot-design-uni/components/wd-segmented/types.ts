@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 11:22:03
- * @LastEditTime: 2024-03-18 16:27:35
+ * @LastEditTime: 2024-07-25 22:17:56
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-segmented\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-segmented/types.ts
  * 记得注释
  */
 import type { PropType } from 'vue'
@@ -16,14 +16,6 @@ export interface SegmentedOption {
   value: string | number // 选中值
   disabled?: boolean // 是否禁用
   payload?: any // 更多数据
-}
-
-/**
- * 分段器信息
- */
-export interface SegmentedInfo {
-  height: number
-  width: number
 }
 
 export const segmentedProps = {
