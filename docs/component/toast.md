@@ -124,7 +124,7 @@ toast.close()
 | 方法名称 | 说明                                      | 参数    | 最低版本 |
 | -------- | ----------------------------------------- | ------- | -------- |
 | success  | 成功提示                                  | options | -        |
-| error    | 关闭提示                                  | options | -        |
+| error    | 错误提示                                  | options | -        |
 | info     | 常规提示                                  | options | -        |
 | warning  | 警告提示                                  | options | -        |
 | loading  | 加载提示                                  | options | -        |
