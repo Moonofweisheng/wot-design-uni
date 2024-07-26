@@ -1,6 +1,21 @@
 # 更新日志 
 
 
+### [1.3.6](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.5...v1.3.6) (2024-07-26)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Button为disabled状态时仍能触发open-type指定事件的问题 ([a64a570](https://github.com/Moonofweisheng/wot-design-uni/commit/a64a5707d2573c042cd9bb16d6f7fecba9a38291)), closes [#458](https://github.com/Moonofweisheng/wot-design-uni/issues/458)
+* 🐛 修复MessageBox设置为prompt时输入框绑定值异常的问题 ([140d960](https://github.com/Moonofweisheng/wot-design-uni/commit/140d96019d91a51f2af2efbd91a279d203a8408b))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档地址更新并增加QQ2群二维码 ([ef1ad01](https://github.com/Moonofweisheng/wot-design-uni/commit/ef1ad011f205612d6d2a8f5fc8cbf7d05dfffc7d))
+* ✏️  修复Toast组件文档中关于提示方法描述的错误 ([8ed19a2](https://github.com/Moonofweisheng/wot-design-uni/commit/8ed19a2949064ec93cc281aadae4710d4d24a25f))
+* ✏️  修正DateTimePicker文档中关于minDate和maxDate类型标注错误的问题 ([b322264](https://github.com/Moonofweisheng/wot-design-uni/commit/b322264c9a84d9acb82276ecacf5f12f1fd25f6e))
+
 ### [1.3.5](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.4...v1.3.5) (2024-07-20)
 
 
