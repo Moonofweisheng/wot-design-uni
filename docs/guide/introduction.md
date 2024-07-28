@@ -8,7 +8,8 @@
 
 ## 扫码体验
 
-<div style="display: inline-block; margin-right: 60px;">
+<div style="display:flex;gap:24px">
+<div style="display: inline-block;">
   <img style="width: 150px; height: 150px;" :src="WxQrcode" />
   <div style="text-align: center;">微信扫码</div>
 </div>
@@ -16,6 +17,12 @@
 <div style="display: inline-block;">
   <img style="width: 150px; height: 150px;" :src="AlipayQrcode" />
   <div style="text-align: center;">支付宝扫码</div>
+</div>
+
+<div style="display: inline-block;">
+  <img style="width: 150px; height: 150px;" :src="H5Qrcode" />
+  <div style="text-align: center;">浏览器扫码</div>
+</div>
 </div>
 
 ## ✨ 特性
@@ -66,12 +73,15 @@
 <script>
 import WxQrcode from '/wx.jpg'
 import AlipayQrcode from '/alipay.png'
+import H5Qrcode from '/h5.png'
+
 
 export default {
   data () {
     return {
       WxQrcode,
-      AlipayQrcode
+      AlipayQrcode,
+      H5Qrcode
     }
   }
 }

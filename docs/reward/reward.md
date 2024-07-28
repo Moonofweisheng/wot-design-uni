@@ -10,7 +10,7 @@
 
 ### 爱发电捐赠
 
-<a href="https://afdian.net/a/weisheng233">https://afdian.net/a/weisheng233</a>
+<a href="https://afdian.com/a/weisheng233">https://afdian.com/a/weisheng233</a>
 
 
 ### 扫码捐赠

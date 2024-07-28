@@ -64,9 +64,10 @@
 
 扫描二维码访问演示，注意：因微信审核机制限制，当前的微信小程序示例可能不是最新版本，可以clone代码到本地预览。
 
-<p>
-<img src="https://wot-design-uni.pages.dev/wx.jpg" width="200" height="200" style="margin-right:30px"/>
+<p style="display:flex;gap:24px">
+<img src="https://wot-design-uni.pages.dev/wx.jpg" width="200" height="200"/>
 <img src="https://wot-design-uni.pages.dev/alipay.png" width="200" height="200" />
+<img src="https://wot-design-uni.pages.dev/h5.png" width="200" height="200" />
 </p>
 
 ## 快速上手
@@ -122,7 +123,7 @@
 
 ### 爱发电捐赠
 
-<a href="https://afdian.net/a/weisheng233">https://afdian.net/a/weisheng233</a>
+<a href="https://afdian.com/a/weisheng233">https://afdian.com/a/weisheng233</a>
 
 ### 扫码捐赠
 
