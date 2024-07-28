@@ -75,17 +75,26 @@
 
 ## 链接
 
-* [意见反馈](https://github.com/Moonofweisheng/wot-design-uni/issues)
-* [更新日志](https://wot-design-uni.pages.dev/guide/changelog.html)
-* [常见问题](https://wot-design-uni.pages.dev/guide/common-problems.html)
-* [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
-* [QQ 群](https://wot-design-uni.pages.dev/guide/join-group.html)
-* [快速上手项目](https://github.com/Moonofweisheng/wot-starter)
-* [Vue3路由库](https://wot-design-uni.pages.dev/uni-mini-router/)
+- [常见问题](https://wot-design-uni.pages.dev/guide/common-problems.html)
+- [更新日志](https://wot-design-uni.pages.dev/guide/changelog.html)
+- [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
+- [QQ 群](https://wot-design-uni.pages.dev/guide/join-group.html)
 
-## 开发计划
 
-开发计划已公布在[Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions/45)中，欢迎参与讨论，提出意见和建议。
+## 周边生态
+
+| 项目                                                                                                        | 描述                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app)                                            | 多端统一开发框架 uni-app 优秀开发资源汇总            |
+| [create-uni](https://github.com/uni-helper/create-uni)                                                      | 快速创建 uni-app 项目                                |
+| [wot-starter](https://github.com/Moonofweisheng/wot-starter)                                                | 基于 wot-design-uni 的快速上手项目                   |
+| [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | 基于 wot-design-uni 的 uni-app 零售行业模板          |
+| [Wot Design Uni Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot Design Uni 代码块提示                            |
+| [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci)                                                | 一个 uni-app 小程序端构建后支持 CI（持续集成）的插件 |
+| [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router)                                        | 一个基于 vue3 和 Typescript 的轻量级 uni-app 路由库  |
+| [unibest](https://github.com/codercup/unibest)                                                              | 基于 wot-design-uni 的 uni-app 模板                  |
+| [wot-design-uni AI 助手](https://www.coze.cn/store/bot/7347916532258701363)                                 | 一个能回答你关于 wot-design-uni 组件库问题的智能助手 |
+
 
 ## 贡献指南
 
@@ -104,7 +113,12 @@
 
 ## 捐赠本项目
 
-捐赠本项目，支持组件库的更好的发展，捐赠后你的昵称和主页将会被展示在 `wot design uni` 文档的捐赠榜单上。
+开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。为此 Wot Design Uni 经常肝到深夜 ……  
+
+如果您认为 Wot Design Uni 帮助到了您的开发工作，您可以捐赠 Wot Design Uni 的研发工作，捐赠无门槛，哪怕是一杯可乐也好。
+
+捐赠后您的昵称、留言等将会展示在[捐赠榜单](https://wot-design-uni.cn/reward/donor.html)中。
+
 
 ### 爱发电捐赠
 
@@ -117,6 +131,14 @@
 <img src="https://wot-design-uni.pages.dev/alipayQrcode.jpg" width="200" height="200" />
 </p>
 
-## LICENSE
 
-[MIT](https://github.com/Moonofweisheng/wot-design-uni/blob/master/LICENSE)
+## 鸣谢
+
+- [wot-design](https://github.com/jd-ftf/wot-design-mini) - 感谢 wot-design 团队多年来的不断维护，让 wot-design-uni 能够站在巨人的肩膀上。
+- [uni-helper](https://github.com/uni-helper) - 感谢 uni-helper 团队提供的 uni-app 工具库，让 wot-design-uni 能够更方便地使用。
+- [捐赠者](https://wot-design-uni.cn/reward/donor.html) - 感谢所有捐赠者，是你们的捐赠让 wot-design-uni 能够更好地发展。
+
+
+## 开源协议
+
+本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源。
