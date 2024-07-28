@@ -6,11 +6,11 @@
       <slot name="prefix"></slot>
       <view class="wd-search__field">
         <view v-if="!placeholderLeft" :style="coverStyle" class="wd-search__cover" @click="closeCover">
-          <wd-icon name="search" size="18px" custom-class="wd-search__search-icon"></wd-icon>
+          <wd-icon name="search" custom-class="wd-search__search-icon"></wd-icon>
           <text class="wd-search__placeholder-txt">{{ placeholder || translate('search') }}</text>
         </view>
         <!--icon:search-->
-        <wd-icon v-if="showInput || str || placeholderLeft" name="search" size="18px" custom-class="wd-search__search-left-icon"></wd-icon>
+        <wd-icon v-if="showInput || str || placeholderLeft" name="search" custom-class="wd-search__search-left-icon"></wd-icon>
         <!--搜索框-->
         <input
           v-if="showInput || str || placeholderLeft"
@@ -28,7 +28,7 @@
           :focus="isFocused"
         />
         <!--icon:clear-->
-        <wd-icon v-if="str" custom-class="wd-search__clear wd-search__clear-icon" name="error-fill" size="16px" @click="clearSearch" />
+        <wd-icon v-if="str" custom-class="wd-search__clear wd-search__clear-icon" name="error-fill" @click="clearSearch" />
       </view>
     </view>
     <!--the button behind input,care for hideCancel without displaying-->

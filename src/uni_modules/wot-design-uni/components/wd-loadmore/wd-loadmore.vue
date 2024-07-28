@@ -8,11 +8,11 @@
       <block v-else>
         <text class="wd-loadmore__text">{{ translate('error') }}</text>
         <text class="wd-loadmore__text is-light">{{ translate('retry') }}</text>
-        <wd-icon name="refresh" size="16px" custom-class="wd-loadmore__refresh" />
+        <wd-icon name="refresh" custom-class="wd-loadmore__refresh" />
       </block>
     </block>
     <block v-if="state === 'loading'">
-      <wd-loading size="16px" custom-class="wd-loadmore__loading" />
+      <wd-loading custom-class="wd-loadmore__loading" />
       <text class="wd-loadmore__text">{{ loadingText || translate('loading') }}</text>
     </block>
   </view>

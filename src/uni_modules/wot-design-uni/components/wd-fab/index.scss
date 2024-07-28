@@ -111,6 +111,6 @@
   }
 
   @include edeep(icon) {
-    font-size: 20px;
+    font-size: $-fab-icon-fs;
   }
 }

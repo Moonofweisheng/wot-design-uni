@@ -12,7 +12,7 @@
           </view>
           <view v-else class="wd-upload__video" @click="onPreviewVideo(file)">
             <!-- #ifdef APP-PLUS || MP-DINGTALK -->
-            <wd-icon name="video" size="22px"></wd-icon>
+            <wd-icon custom-class="wd-upload__video-icon" name="video"></wd-icon>
             <!-- #endif -->
             <!-- #ifndef APP-PLUS -->
             <!-- #ifndef MP-DINGTALK -->
@@ -40,7 +40,7 @@
         </template>
 
         <view v-else class="wd-upload__file" @click="onPreviewFile(file)">
-          <wd-icon name="file" size="22px"></wd-icon>
+          <wd-icon name="file" custom-class="wd-upload__file-icon"></wd-icon>
           <view class="wd-upload__file-name">{{ file.name || file.url }}</view>
         </view>
       </view>

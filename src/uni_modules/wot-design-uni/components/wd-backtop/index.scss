@@ -11,6 +11,10 @@
   align-items: center;
   color: $-color-gray-8;
 
+  @include edeep(backicon) {
+    font-size: $-backtop-icon-size;
+  }
+
   @include when(circle) {
     border-radius: 50%;
   }

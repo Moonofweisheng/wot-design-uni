@@ -99,19 +99,15 @@
   @include edeep(search-icon) {
     margin-right: 8px;
     color: $-search-icon-color;
-    font-size: $-search-input-fs;
-    height: $-search-input-height;
+    font-size: $-search-icon-size;
   }
   @include edeep(search-left-icon) {
     position: absolute;
-    display: inline-block;
-    height: $-search-input-height;
-    line-height: $-search-input-height;
+    font-size: $-search-icon-size;
     top: 50%;
     left: 16px;
     transform: translateY(-50%);
     color: $-search-icon-color;
-    font-size: $-search-input-fs;
   }
   @include e(placeholder-txt) {
     color: $-search-placeholder-color;
@@ -125,6 +121,7 @@
   }
   @include edeep(clear-icon) {
     vertical-align: middle;
+    font-size: $-search-clear-icon-size;
   }
   @include e(cancel) {
     padding: $-search-cancel-padding;

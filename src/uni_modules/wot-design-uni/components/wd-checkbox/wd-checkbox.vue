@@ -14,7 +14,7 @@
       :class="`wd-checkbox__shape ${innerShape === 'square' ? 'is-square' : ''} ${customShapeClass}`"
       :style="isChecked && !innerDisabled && innerCheckedColor ? 'color :' + innerCheckedColor : ''"
     >
-      <wd-icon custom-class="wd-checkbox__check" name="check-bold" size="14px" />
+      <wd-icon custom-class="wd-checkbox__check" name="check-bold" />
     </view>
     <!--shape为button时只保留wd-checkbox__label-->
     <view
@@ -22,7 +22,7 @@
       :style="isChecked && innerShape === 'button' && !innerDisabled && innerCheckedColor ? 'color:' + innerCheckedColor : ''"
     >
       <!--button选中时展示的icon-->
-      <wd-icon v-if="innerShape === 'button' && isChecked" custom-class="wd-checkbox__btn-check" name="check-bold" size="14px" />
+      <wd-icon v-if="innerShape === 'button' && isChecked" custom-class="wd-checkbox__btn-check" name="check-bold" />
       <!--文案-->
       <view class="wd-checkbox__txt" :style="maxWidth ? 'max-width:' + maxWidth : ''">
         <slot></slot>

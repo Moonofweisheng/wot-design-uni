@@ -13,7 +13,7 @@
           @click="handleClickLeft"
           v-else-if="!$slots.left"
         >
-          <wd-icon v-if="leftArrow" size="24px" name="arrow-left" custom-class="wd-navbar__arrow" />
+          <wd-icon v-if="leftArrow" name="arrow-left" custom-class="wd-navbar__arrow" />
           <view v-if="leftText" class="wd-navbar__text">{{ leftText }}</view>
         </view>
 

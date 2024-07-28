@@ -13,6 +13,11 @@
 @include b(pager) {
   user-select: none;
   background-color: #fff;
+
+  @include edeep(icon) {
+    font-size: $-pagination-icon-size;
+  }
+
   @include e(content) {
     display: flex;
     justify-content: flex-start;

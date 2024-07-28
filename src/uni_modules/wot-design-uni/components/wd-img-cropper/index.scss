@@ -9,11 +9,13 @@
   width: 100vw;
   height: 100vh;
   z-index: 1;
+
   // 裁剪框包裹器
   @include e(wrapper) {
     position: relative;
     background: rgba(0, 0, 0, 0.45);
   }
+
   @include e(cut) {
     z-index: 9;
     position: absolute;
@@ -30,21 +32,26 @@
       // 拖动中背景蒙层为0 拖动结束为0.85
       background-color: rgba(0, 0, 0, 0.85);
       transition: background 0.2s;
+
       @include when(hightlight) {
         background-color: rgba(0, 0, 0, 0);
       }
     }
+
     .wd-img-cropper__cut--bottom,
     .wd-img-cropper__cut--right {
       flex: auto;
     }
+
     @include m(middle) {
       display: flex;
     }
+
     @include m(body) {
       // 若需要变化窗体大小，支持控制窗体的大小来控制下方所有对应的展示
       background-color: transparent;
       position: relative;
+
       // 节选框的窗体最外部边缘线
       &::before {
         content: "";
@@ -59,6 +66,7 @@
 
       // 结算框对角尺寸
       $border-size: 2px;
+
       // 节选框的四个角
       .is-left-top,
       .is-left-bottom,
@@ -71,6 +79,7 @@
           height: 20px;
           background-color: #fff;
         }
+
         &::after {
           content: "";
           position: absolute;
@@ -79,28 +88,36 @@
           background-color: #fff;
         }
       }
+
       .is-left-top {
+
         &::before,
         &::after {
           left: -$border-size;
           top: -$border-size;
         }
       }
+
       .is-left-bottom {
+
         &::before,
         &::after {
           left: -$border-size;
           bottom: -$border-size;
         }
       }
+
       .is-right-top {
+
         &::before,
         &::after {
           right: -$border-size;
           top: -$border-size;
         }
       }
+
       .is-right-bottom {
+
         &::before,
         &::after {
           right: -$border-size;
@@ -118,8 +135,10 @@
         top: 0;
         display: flex;
       }
+
       .is-gridlines-x {
         justify-content: center;
+
         &::before {
           content: "";
           display: inline-block;
@@ -131,9 +150,11 @@
           transform: scale(0.5) translate(0, -50%);
         }
       }
+
       // 内部网格线 - y轴
       .is-gridlines-y {
         align-items: center;
+
         &::after {
           content: "";
           flex-shrink: 0;
@@ -148,6 +169,7 @@
       }
     }
   }
+
   @include e(img) {
     z-index: 2;
     top: 0;
@@ -158,6 +180,7 @@
     backface-visibility: hidden;
     transform-origin: center;
   }
+
   @include e(canvas) {
     position: fixed;
     background: white;
@@ -167,6 +190,7 @@
     top: -200%;
     pointer-events: none;
   }
+
   @include e(footer) {
     position: fixed;
     z-index: 10;
@@ -174,6 +198,7 @@
     width: 100%;
     height: 15vh;
     text-align: center;
+
     @include m(button) {
       position: relative;
       text-align: left;
@@ -181,11 +206,13 @@
       padding-top: 4vh;
       // line-height: 32px;
       box-sizing: border-box;
+
       .is-cancel {
         display: inline-block;
         color: #fff;
         font-size: 16px;
       }
+
       .is-confirm {
         position: absolute;
         right: 0;
@@ -195,5 +222,10 @@
         font-size: 16px;
       }
     }
+  }
+
+  @include edeep(rotate) {
+    font-size: $-img-cropper-icon-size;
+    color: $-img-cropper-icon-color;
   }
 }

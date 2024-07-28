@@ -12,7 +12,7 @@
         >
           <view class="wd-drop-menu__item-title">
             <view class="wd-drop-menu__item-title-text">{{ getDisplayTitle(child) }}</view>
-            <wd-icon name="arrow-down" size="14px" custom-class="wd-drop-menu__arrow" />
+            <wd-icon name="arrow-down" custom-class="wd-drop-menu__arrow" />
           </view>
         </view>
       </view>

@@ -1,18 +1,18 @@
 <template>
   <view :class="`wd-key-wrapper ${wider ? 'wd-key-wrapper--wider' : ''}`" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
     <view :class="keyClass">
-      <wd-loading custom-class="wd-key--loading-icon" v-if="props.loading" />
+      <wd-loading custom-class="wd-key__loading-icon" v-if="props.loading" />
       <template v-if="type === 'delete'">
         <template v-if="text">
           {{ text }}
         </template>
-        <wd-icon v-else name="keyboard-delete" size="22px"></wd-icon>
+        <wd-icon v-else custom-class="wd-key__icon" name="keyboard-delete" size="22px"></wd-icon>
       </template>
       <template v-else-if="type === 'extra'">
         <template v-if="text">
           {{ text }}
         </template>
-        <wd-icon v-else name="keyboard-collapse" size="22px"></wd-icon>
+        <wd-icon v-else custom-class="wd-key__icon" name="keyboard-collapse" size="22px"></wd-icon>
       </template>
       <template v-else>{{ text }}</template>
     </view>

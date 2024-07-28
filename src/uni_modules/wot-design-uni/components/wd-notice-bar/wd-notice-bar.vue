@@ -1,6 +1,6 @@
 <template>
   <view v-if="show" :class="`wd-notice-bar ${customClass} ${noticeBarClass}`" :style="rootStyle">
-    <wd-icon v-if="prefix" custom-class="wd-notice-bar__prefix" size="18px" :name="prefix"></wd-icon>
+    <wd-icon v-if="prefix" custom-class="wd-notice-bar__prefix" :name="prefix"></wd-icon>
     <slot v-else name="prefix"></slot>
     <view class="wd-notice-bar__wrap">
       <view class="wd-notice-bar__content" :style="animation" @transitionend="animationEnd" @click="handleClick">
@@ -11,7 +11,7 @@
         <slot v-else>{{ currentText }}</slot>
       </view>
     </view>
-    <wd-icon v-if="closable" custom-class="wd-notice-bar__suffix" size="18px" name="close-bold" @click="handleClose"></wd-icon>
+    <wd-icon v-if="closable" custom-class="wd-notice-bar__suffix" name="close-bold" @click="handleClose"></wd-icon>
     <slot v-else name="suffix"></slot>
   </view>
 </template>

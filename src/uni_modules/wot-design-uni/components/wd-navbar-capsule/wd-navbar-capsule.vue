@@ -1,7 +1,7 @@
 <template>
   <view class="wd-navbar-capsule">
-    <wd-icon @click="handleBack" size="20px" name="chevron-left" custom-class="wd-navbar-capsule__icon" />
-    <wd-icon @click="handleBackHome" size="20px" name="home" custom-class="wd-navbar-capsule__icon" />
+    <wd-icon @click="handleBack" name="chevron-left" custom-class="wd-navbar-capsule__icon" />
+    <wd-icon @click="handleBackHome" name="home" custom-class="wd-navbar-capsule__icon" />
   </view>
 </template>
 <script lang="ts">

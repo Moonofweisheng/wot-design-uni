@@ -8,7 +8,7 @@
   >
     <slot name="icon"></slot>
     <template v-if="!$slots.icon && icon">
-      <wd-icon custom-class="wd-sidebar-item__icon" :name="icon" size="20px"></wd-icon>
+      <wd-icon custom-class="wd-sidebar-item__icon" :name="icon"></wd-icon>
     </template>
     <wd-badge v-bind="customBadgeProps" custom-class="wd-sidebar-item__badge">
       {{ label }}

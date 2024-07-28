@@ -47,5 +47,9 @@
     font-size: $-tabbar-item-title-font-size;
     line-height: $-tabbar-item-title-line-height;
   }
+
+  @include edeep(body-icon) {
+    font-size: $-tabbar-item-icon-size;
+  }
   
 }
