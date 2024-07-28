@@ -50,7 +50,7 @@
             >
               {{ selectShowList[colIndex] || translate('select') }}
             </view>
-            <view class="wd-col-picker__selected-line" :style="lineStyle"></view>
+            <view class="wd-col-picker__selected-line" :style="state.lineStyle"></view>
           </view>
         </scroll-view>
       </view>
@@ -95,8 +95,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
-import { debounce, getRect, isArray, isBoolean, isFunction } from '../common/util'
+import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties, reactive, nextTick } from 'vue'
+import { addUnit, debounce, getRect, isArray, isBoolean, isDef, isFunction, objToStyle } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -120,10 +120,14 @@ const loading = ref<boolean>(false)
 const isChange = ref<boolean>(false)
 const lastSelectList = ref<Record<string, any>[][]>([])
 const lastPickerColSelected = ref<(string | number)[]>([])
-const lineStyle = ref<string>('')
 const scrollLeft = ref<number>(0)
 const inited = ref<boolean>(false)
 const isCompleting = ref<boolean>(false)
+
+const state = reactive({
+  lineStyle: 'display:none;' // 激活项边框线样式
+})
+
 const { proxy } = getCurrentInstance() as any
 
 const cell = useCell()
@@ -328,8 +332,14 @@ function chooseItem(colIndex: number, index: number) {
   selectShowList.value = newPickerColSelected.map((item, colIndex) => {
     return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
   })
+
+  if (selectShowList.value[colIndex] && colIndex === currentCol.value) {
+    updateLineAndScroll(true)
+  }
+
   handleColChange(colIndex, item, index)
 }
+
 function handleColChange(colIndex: number, item: Record<string, any>, index: number, callback?: () => void) {
   loading.value = true
   const { columnChange, beforeConfirm } = props
@@ -414,24 +424,27 @@ function handleColClick(index: number) {
  * @description 更新navBar underline的偏移量
  * @param {Boolean} animation 是否伴随动画
  */
-function setLineStyle(animation = true) {
+function setLineStyle(animation: boolean = true) {
   if (!inited.value) return
+  const { lineWidth, lineHeight } = props
   getRect($item, true, proxy).then((rects) => {
-    const rect = rects[currentCol.value]
-    // const width = lineWidth || (slidableNum < items.length ? rect.width : (rect.width - 14))
-    const width = 16
-    let left = rects.slice(0, currentCol.value).reduce((prev: any, curr: any) => prev + curr.width, 0)
-    left += (Number(rect.width) - width) / 2
-    const transition = animation ? 'transition: width 300ms ease, transform 300ms ease;' : ''
-
-    const lineStyleTemp = `
-          transform: translateX(${left}px);
-          ${transition}
-        `
-    // 防止重复绘制
-    if (lineStyle.value !== lineStyleTemp) {
-      lineStyle.value = lineStyleTemp
+    const lineStyle: CSSProperties = {}
+    if (isDef(lineWidth)) {
+      lineStyle.width = addUnit(lineWidth)
     }
+    if (isDef(lineHeight)) {
+      lineStyle.height = addUnit(lineHeight)
+      lineStyle.borderRadius = `calc(${addUnit(lineHeight)} / 2)`
+    }
+    const rect = rects[currentCol.value]
+    let left = rects.slice(0, currentCol.value).reduce((prev, curr) => prev + Number(curr.width), 0) + Number(rect.width) / 2
+    lineStyle.transform = `translateX(${left}px) translateX(-50%)`
+
+    if (animation) {
+      lineStyle.transition = 'width 300ms ease, transform 300ms ease'
+    }
+
+    state.lineStyle = objToStyle(lineStyle)
   })
 }
 /**

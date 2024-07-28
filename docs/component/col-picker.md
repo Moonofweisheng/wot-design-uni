@@ -249,7 +249,7 @@ function handleConfirm({ value }) {
 }
 ```
 
-2）设置 `auto-complete` 属性，当 `columns` 数组长度小于 `value` 或长度为 0 时，会自动触发 `columnChange` 函数来补齐数据。设置了该属性后，因为数据需要动态补全，因此 传递出来的参数 selectedItem 只有 value 字段，没有 label 字段。
+2）设置 `auto-complete` 属性，当 `columns` 数组长度为 0 时，会自动触发 `columnChange` 函数来补齐数据。设置了该属性后，因为数据需要动态补全，因此 传递出来的参数 selectedItem 只有 value 字段，没有 label 字段。
 
 ```html
 <wd-col-picker label="选择地址" v-model="value" :columns="area" :column-change="columnChange" auto-complete></wd-col-picker>
@@ -264,11 +264,22 @@ import { useToast } from '@/uni_modules/wot-design-uni'
 
 const toast = useToast()
 
-const value = ref<string[]>(['150000', '150100', '150121'])
+const value = ref<string[]>([])
 
 const area = ref<any[]>([])
 
-const columnChange = ({ selectedItem, resolve, finish }) => {
+onMounted(async () => {
+  toast.loading('数据加载中')
+  // 模拟异步请求
+  await sleep()
+  toast.close()
+  value.value = ['150000', '150100', '150121']
+})
+
+const columnChange: ColPickerColumnChange = async ({ selectedItem, resolve, finish }) => {
+  // 模拟异步请求
+  
+  await sleep(0.3)
   const areaData = findChildrenByCode(colPickerData, selectedItem.value)
   if (areaData && areaData.length) {
     resolve(
@@ -283,6 +294,15 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
     finish()
   }
 }
+
+function sleep(second: number = 1) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true)
+    }, 1000 * second)
+  })
+}
+
 ```
 
 ## 禁用
@@ -633,6 +653,8 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | ellipsis               | 是否超出隐藏                                                                                                                   | boolean           | -      | false   | -        |
 | prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                              | string            | -      | -       | -        |
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                            | `FormItemRule []` | -      | `[]`    | -        |
+| lineWidth     | 底部条宽度，单位像素             | number          | -      | -     | $LOWEST_VERSION$        |
+| lineHeight    | 底部条高度，单位像素             | number          | -      | -      | $LOWEST_VERSION$        |
 
 ### FormItemRule 数据结构
 

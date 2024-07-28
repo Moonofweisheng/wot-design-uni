@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
+import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp, numericProp } from '../common/props'
 import type { FormItemRule } from '../wd-form/types'
 
 export const colPickerProps = {
@@ -116,6 +116,14 @@ export const colPickerProps = {
    * 表单验证规则，结合wd-form组件使用
    */
   rules: makeArrayProp<FormItemRule>(),
+  /**
+   * 底部条宽度，单位像素
+   */
+  lineWidth: numericProp,
+  /**
+   * 底部条高度，单位像素
+   */
+  lineHeight: numericProp,
   /**
    * label 外部自定义样式
    */
