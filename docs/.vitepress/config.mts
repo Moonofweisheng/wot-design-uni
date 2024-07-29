@@ -188,6 +188,7 @@ export default defineConfig({
       '/component/': [
         {
           text: '基础',
+          collapsed: false,
           items: [
             {
               link: "/component/button",
@@ -222,6 +223,7 @@ export default defineConfig({
         {
 
           text: "导航",
+          collapsed: false,
           items: [{
             link: "/component/pagination",
             text: "Pagination 分页"
@@ -253,6 +255,7 @@ export default defineConfig({
         }, {
 
           text: "数据输入",
+          collapsed: false,
           items: [{
             link: "/component/calendar",
             text: "Calendar 日历选择器"
@@ -316,6 +319,7 @@ export default defineConfig({
           }]
         }, {
           text: "反馈",
+          collapsed: false,
           items: [{
             link: "/component/action-sheet",
             text: "ActionSheet 动作面板"
@@ -368,6 +372,7 @@ export default defineConfig({
         }, {
 
           text: "数据展示",
+          collapsed: false,
           items: [{
             link: "/component/badge",
             text: "Badge 徽标"
