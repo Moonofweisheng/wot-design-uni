@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue'
+import { onBeforeUnmount, onDeactivated, ref, watch } from 'vue'
 
 function useLockScroll(shouldLock: () => boolean) {
   const scrollLockCount = ref(0)
@@ -19,9 +19,16 @@ function useLockScroll(shouldLock: () => boolean) {
     }
   }
 
+  const destroy = () => {
+    shouldLock() && unlock()
+  }
+
   watch(shouldLock, (value) => {
     value ? lock() : unlock()
   })
+
+  onDeactivated(destroy)
+  onBeforeUnmount(destroy)
 
   return {
     lock,
