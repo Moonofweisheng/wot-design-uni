@@ -1,9 +1,9 @@
 <template>
-  <view>
-    <text @click="handleClick" :class="rootClass" :style="rootStyle">
-      {{ formattedText }}
-    </text>
-  </view>
+  <text @click="handleClick" :class="rootClass" :style="rootStyle">
+    <slot name="prefix">{{ props.prefix }}</slot>
+    <text>{{ formattedText }}</text>
+    <slot name="suffix">{{ props.suffix }}</slot>
+  </text>
 </template>
 
 <script lang="ts">
@@ -23,25 +23,26 @@ import { isDef, objToStyle } from '../common/util'
 import { textProps } from './types'
 import { dayjs } from '../common/dayjs'
 
+// 获取组件的 props 和 emit 函数
 const props = defineProps(textProps)
 const emit = defineEmits(['click'])
 
+// 存储文本类名的响应式变量
 const textClass = ref<string>('')
 
-// 合并 watch 逻辑
+// 监听 props 变化，合并 watch 逻辑
 watch(
   () => ({
     type: props.type,
     text: props.text,
     mode: props.mode,
-    call: props.call,
     color: props.color,
     bold: props.bold,
     lines: props.lines,
     format: props.format
   }),
   ({ type }) => {
-    // type 验证
+    // 验证 type 属性
     if (type && !['primary', 'error', 'warning', 'success', 'default'].includes(type)) {
       console.error(`type must be one of ${type.toString()}`)
     }
@@ -50,10 +51,12 @@ watch(
   { deep: true, immediate: true }
 )
 
+// 计算根元素的类名
 const rootClass = computed(() => {
   return `wd-text ${props.customClass} ${textClass.value}`
 })
 
+// 计算根元素的样式
 const rootStyle = computed(() => {
   const rootStyle: Record<string, any> = {}
   if (props.color) {
@@ -65,12 +68,16 @@ const rootStyle = computed(() => {
   if (props.lineHeight) {
     rootStyle['line-height'] = `${props.lineHeight}`
   }
+  if (props.decoration) {
+    rootStyle['text-decoration'] = `${props.decoration}`
+  }
   return `${objToStyle(rootStyle)};${props.customStyle}`
 })
 
+// 计算文本类名的函数
 function computeTextClass() {
   const { type, color, bold, lines } = props
-  let textClassList: string[] = []
+  const textClassList: string[] = []
   if (!color) {
     textClassList.push(`is-${type}`)
   }
@@ -81,7 +88,7 @@ function computeTextClass() {
   textClass.value = textClassList.join(' ')
 }
 
-// 格式化文本函数
+// 格式化文本的函数
 function formatText(text: string, format: boolean, mode: string): string {
   if (format) {
     if (mode === 'phone') {
@@ -95,14 +102,33 @@ function formatText(text: string, format: boolean, mode: string): string {
   return text
 }
 
-const formattedText = computed(() => {
-  if (props.mode === 'date') {
-    return dayjs(Number(props.text)).format('YYYY-MM-DD')
+// 格式化数字的函数
+function formatNumber(num: number | string): string {
+  num = Number(num).toFixed(2)
+  const x = num.split('.')
+  let x1 = x[0]
+  const x2 = x.length > 1 ? '.' + x[1] : ''
+  const rgx = /(\d+)(\d{3})/
+  while (rgx.test(x1)) {
+    x1 = x1.replace(rgx, '$1,$2')
   }
-  return formatText(props.text, props.format, props.mode)
+  return x1 + x2
+}
+
+// 计算格式化后的文本
+const formattedText = computed(() => {
+  const { text, mode, format } = props
+  if (mode === 'date') {
+    return dayjs(Number(text)).format('YYYY-MM-DD')
+  }
+  if (mode === 'price') {
+    return formatNumber(text)
+  }
+  return formatText(text, format, mode)
 })
 
-function handleClick(event: any) {
+// 处理点击事件
+function handleClick(event: Event) {
   emit('click', event)
 }
 </script>

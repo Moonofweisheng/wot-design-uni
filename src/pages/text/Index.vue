@@ -28,7 +28,6 @@
 
     <demo-block title="脱敏">
       <view style="display: flex; align-items: center">
-        <wd-text text="李四" mode="name" :format="true"></wd-text>
         <wd-text text="张长三" mode="name" :format="true"></wd-text>
         <wd-text text="18888888888" mode="phone" :format="true"></wd-text>
       </view>
@@ -49,6 +48,31 @@
         <view><wd-text text="18888888888" mode="phone"></wd-text></view>
         <view><wd-text text="王三" mode="name"></wd-text></view>
         <view><wd-text text="1719976636911" mode="date"></wd-text></view>
+      </view>
+    </demo-block>
+
+    <demo-block title="前后插槽">
+      <view>
+        <wd-text text="12345678901" mode="phone" format type="primary" prefix="Prefix" suffix="Suffix" />
+        <br />
+        <wd-text text="12345678901" mode="phone" format type="primary">
+          <template #prefix>
+            <text>Prefix</text>
+          </template>
+          <template #suffix>Suffix</template>
+        </wd-text>
+      </view>
+    </demo-block>
+
+    <demo-block title="金额">
+      <view>
+        <wd-text text="16354.156" mode="price" type="success" decoration="line-through" prefix="￥" />
+      </view>
+    </demo-block>
+
+    <demo-block title="文字装饰">
+      <view>
+        <wd-text :text="text" type="warning" decoration="underline" />
       </view>
     </demo-block>
   </page-wraper>

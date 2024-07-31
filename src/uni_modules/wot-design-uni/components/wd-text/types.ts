@@ -26,11 +26,19 @@ export const textProps = {
   size: makeStringProp(''),
   /**
    * 文本处理的匹配模式
-   * 可选值：'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名'
+   * 可选值：'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名' / 'price - 金额'
    * 类型：string
    * 默认值：'text'
    */
   mode: makeStringProp('text'),
+  /**
+   * 文字装饰，下划线，中划线等
+   * 可选值：'underline/line-through/overline'
+   * 类型：string
+   * 默认值：'none'
+   */
+  decoration: makeStringProp('none'),
+
   /**
    * mode=phone时，点击文本是否拨打电话
    * 类型：boolean
@@ -55,6 +63,18 @@ export const textProps = {
    * 默认值：''
    */
   color: makeStringProp(''),
+  /**
+   * 前置插槽
+   * 类型：string
+   * 默认值：''
+   */
+  prefix: makeStringProp(''),
+  /**
+   * 后置插槽
+   * 类型：string
+   * 默认值：''
+   */
+  suffix: makeStringProp(''),
   /**
    * 文本显示的行数，如果设置，超出此行数，将会显示省略号。最大值为5。
    */
