@@ -44,6 +44,21 @@ function handleChange(event) {
 <wd-input v-model="value" clearable @change="handleChange"/>
 ```
 
+## 有值且聚焦时展示清空按钮
+设置 `clear-trigger` 属性，可以控制是否聚焦时才展示清空按钮。
+
+```html
+<wd-input v-model="value" clear-trigger="focus" clearable @change="handleChange"/>
+```
+
+## 点击清除按钮时不自动聚焦
+
+设置`focus-when-clear` 属性，可以控制点击清除按钮时是否自动聚焦。
+
+```html
+<wd-input type="text" :focus-when-clear="false" v-model="value" clearable />
+```
+
 ## 密码输入框
 
 设置 `show-password` 属性。
@@ -150,6 +165,9 @@ function handleChange(event) {
 | no-border | 非 cell 类型下是否隐藏下划线 | boolean | - | false | - | - |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
+| clearTrigger | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示	 | `InputClearTrigger`	 | `focus` / `always` | `always` | $LOWEST_VERSION$ |
+| focusWhenClear | 是否在点击清除按钮时聚焦输入框 | boolean | -      | true  | $LOWEST_VERSION$   |
+
 
 
 ### FormItemRule 数据结构

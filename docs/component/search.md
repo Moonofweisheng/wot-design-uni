@@ -141,18 +141,6 @@ function changeSearchType({ item, index }) {
 <wd-search placeholder="请输入订单号/订单名称" cancel-txt="搜索" />
 ```
 
-<!-- 通过设置 `use-action-slot` 来自定义输入框左边内容，设置`use-action-slot` 使用自定义内容替换取消按钮。
-
-```html
-<wd-search use-label-slot use-action-slot>
-  <template #label>
-    <view style="line-height: 14px;margin-right: 10px;">左侧</view>
-  </template>
-  <template #action>
-    <view style="padding: 5px 10px;color: #ff0000;">右侧</view>
-  </template>
-</wd-search>
-``` -->
 
 ## Attributes
 
