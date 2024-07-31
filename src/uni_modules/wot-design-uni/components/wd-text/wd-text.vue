@@ -1,8 +1,8 @@
 <template>
   <text @click="handleClick" :class="rootClass" :style="rootStyle">
-    <slot name="prefix">{{ props.prefix }}</slot>
+    <slot v-if="$slots.prefix || prefix" name="prefix">{{ prefix }}</slot>
     <text>{{ formattedText }}</text>
-    <slot name="suffix">{{ props.suffix }}</slot>
+    <slot v-if="$slots.suffix || suffix" name="suffix">{{ suffix }}</slot>
   </text>
 </template>
 

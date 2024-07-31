@@ -1,7 +1,7 @@
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 
-export type TextType = 'default' | 'primary' | 'success' | 'warning' | 'danger'
+export type TextType = 'default' | 'primary' | 'success' | 'warning' | 'error'
 
 export const textProps = {
   ...baseProps,
@@ -68,13 +68,13 @@ export const textProps = {
    * 类型：string
    * 默认值：''
    */
-  prefix: makeStringProp(''),
+  prefix: String,
   /**
    * 后置插槽
    * 类型：string
    * 默认值：''
    */
-  suffix: makeStringProp(''),
+  suffix: String,
   /**
    * 文本显示的行数，如果设置，超出此行数，将会显示省略号。最大值为5。
    */
