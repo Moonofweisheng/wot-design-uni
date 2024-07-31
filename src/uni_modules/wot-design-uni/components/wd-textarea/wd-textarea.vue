@@ -17,7 +17,7 @@
         :class="`wd-textarea__inner ${customTextareaClass}`"
         v-model="inputValue"
         :show-count="false"
-        :placeholder="placeholder ?? translate('placeholder')"
+        :placeholder="placeholderValue"
         :disabled="disabled"
         :maxlength="maxlength"
         :focus="isFocus"
@@ -72,7 +72,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { objToStyle, requestAnimationFrame } from '../common/util'
+import { objToStyle, requestAnimationFrame, isDef } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -95,6 +95,10 @@ const emit = defineEmits([
   'clickprefixicon',
   'click'
 ])
+
+const placeholderValue = computed(() => {
+  return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
+})
 
 const showClear = ref<boolean>(false)
 const showWordCount = ref<boolean>(false)
