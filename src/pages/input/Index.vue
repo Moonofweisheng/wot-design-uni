@@ -15,6 +15,12 @@
     <demo-block title="清空按钮">
       <wd-input type="text" @input="handleInput" v-model="value4" clearable @change="handleChange1" />
     </demo-block>
+    <demo-block title="有值且聚焦时展示清空按钮">
+      <wd-input type="text" clear-trigger="focus" @input="handleInput" v-model="value20" clearable @change="handleChange1" />
+    </demo-block>
+    <demo-block title="点击清除按钮时不自动聚焦">
+      <wd-input type="text" :focus-when-clear="false" @input="handleInput" v-model="value21" clearable @change="handleChange1" />
+    </demo-block>
     <demo-block title="密码框">
       <wd-input type="text" @input="handleInput" v-model="value5" clearable show-password @change="handleChange2" />
     </demo-block>
@@ -45,7 +51,7 @@
         <wd-input type="text" label="错误状态" v-model="value15" @input="handleInput" placeholder="请输入用户名" error />
         <wd-input type="text" label="必填" v-model="value16" @input="handleInput" placeholder="请输入用户名" required />
         <wd-input type="text" label="图标" v-model="value17" @input="handleInput" placeholder="请输入..." prefix-icon="dong" suffix-icon="list" />
-        <wd-input type="text" label="自定义插槽" center v-model="value18" @input="handleInput" placeholder="请输入..." use-suffix-slot clearable>
+        <wd-input type="text" label="自定义插槽" center v-model="value18" @input="handleInput" placeholder="请输入..." clearable>
           <template #suffix>
             <wd-button size="small" custom-class="button">获取验证码</wd-button>
           </template>
@@ -76,6 +82,8 @@ const value16 = ref<string>('')
 const value17 = ref<string>('')
 const value18 = ref<string>('')
 const value19 = ref<string>('')
+const value20 = ref<string>('')
+const value21 = ref<string>('')
 
 function handleChange(event: any) {
   console.log(event)

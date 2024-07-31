@@ -30,7 +30,7 @@
           :placeholder="placeholder || translate('placeholder')"
           :disabled="disabled"
           :maxlength="maxlength"
-          :focus="isFocus"
+          :focus="focused"
           :confirm-type="confirmType"
           :confirm-hold="confirmHold"
           :cursor="cursor"
@@ -49,7 +49,7 @@
           @keyboardheightchange="handleKeyboardheightchange"
         />
         <view v-if="readonly" class="wd-input__readonly-mask" />
-        <view v-if="showClear || showPassword || suffixIcon || showWordCount || useSuffixSlot" class="wd-input__suffix">
+        <view v-if="showClear || showPassword || suffixIcon || showWordCount || $slots.suffix" class="wd-input__suffix">
           <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="clear" />
           <wd-icon v-if="showPassword" custom-class="wd-input__icon" :name="isPwdVisible ? 'view' : 'eye-close'" @click="togglePwdVisible" />
           <view v-if="showWordCount" class="wd-input__count">
@@ -85,7 +85,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { objToStyle, requestAnimationFrame } from '../common/util'
+import { isDef, objToStyle, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -102,25 +102,23 @@ const emit = defineEmits([
   'input',
   'keyboardheightchange',
   'confirm',
-  'linechange',
   'clicksuffixicon',
   'clickprefixicon',
   'click'
 ])
 const { translate } = useTranslate('input')
 
-const showClear = ref<boolean>(false)
-const showWordCount = ref<boolean>(false)
 const isPwdVisible = ref<boolean>(false)
-const clearing = ref<boolean>(false)
-const isFocus = ref<boolean>(false) // 是否聚焦
+const clearing = ref<boolean>(false) // 是否正在清空操作，避免重复触发失焦
+const focused = ref<boolean>(false) // 控制聚焦
+const focusing = ref<boolean>(false) // 当前是否激活状态
 const inputValue = ref<string | number>('') // 输入框的值
 const cell = useCell()
 
 watch(
   () => props.focus,
   (newValue) => {
-    isFocus.value = newValue
+    focused.value = newValue
   },
   { immediate: true, deep: true }
 )
@@ -128,19 +126,40 @@ watch(
 watch(
   () => props.modelValue,
   (newValue) => {
-    const { disabled, readonly, clearable } = props
     if (newValue === undefined) {
       newValue = ''
       console.warn('[wot-design] warning(wd-input): value can not be undefined.')
     }
     inputValue.value = newValue
-    showClear.value = Boolean(clearable && !disabled && !readonly && newValue)
   },
   { immediate: true, deep: true }
 )
 
 const { parent: form } = useParent(FORM_KEY)
 
+/**
+ * 展示清空按钮
+ */
+const showClear = computed(() => {
+  const { disabled, readonly, clearable, clearTrigger } = props
+  if (clearable && !readonly && !disabled && inputValue.value && (clearTrigger === 'always' || (props.clearTrigger === 'focus' && focusing.value))) {
+    return true
+  } else {
+    return false
+  }
+})
+
+/**
+ * 展示字数统计
+ */
+const showWordCount = computed(() => {
+  const { disabled, readonly, maxlength, showWordLimit } = props
+  return Boolean(!disabled && !readonly && isDef(maxlength) && maxlength > -1 && showWordLimit)
+})
+
+/**
+ * 表单错误提示信息
+ */
 const errorMessage = computed(() => {
   if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
     return form.errorMessages[props.prop]
@@ -194,41 +213,50 @@ onBeforeMount(() => {
 
 // 状态初始化
 function initState() {
-  const { disabled, readonly, clearable, maxlength, showWordLimit } = props
-  let newVal = ''
-  if (showWordLimit && maxlength && inputValue.value.toString().length > maxlength) {
-    newVal = inputValue.value.toString().substring(0, maxlength)
-  }
-  showClear.value = Boolean(!disabled && !readonly && clearable && inputValue.value)
-  showWordCount.value = Boolean(!disabled && !readonly && maxlength && showWordLimit)
-  inputValue.value = newVal || inputValue.value
+  inputValue.value = formatValue(inputValue.value)
   emit('update:modelValue', inputValue.value)
 }
+
+function formatValue(value: string | number) {
+  const { maxlength } = props
+  if (isDef(maxlength) && maxlength !== -1 && String(value).length > maxlength) {
+    return value.toString().slice(0, maxlength)
+  }
+  return value
+}
+
 function togglePwdVisible() {
   isPwdVisible.value = !isPwdVisible.value
 }
 function clear() {
+  clearing.value = true
+  focusing.value = false
   inputValue.value = ''
-  requestAnimationFrame()
-    .then(() => requestAnimationFrame())
-    .then(() => requestAnimationFrame())
-    .then(() => {
-      isFocus.value = true
-      emit('change', {
-        value: ''
-      })
-      emit('update:modelValue', inputValue.value)
-      emit('clear')
+  if (props.focusWhenClear) {
+    focused.value = false
+  }
+  requestAnimationFrame(() => {
+    if (props.focusWhenClear) {
+      focused.value = true
+      focusing.value = true
+    }
+    emit('change', {
+      value: ''
     })
+    emit('update:modelValue', inputValue.value)
+    emit('clear')
+  })
 }
 function handleBlur() {
-  isFocus.value = false
-  emit('change', {
-    value: inputValue.value
-  })
-  emit('update:modelValue', inputValue.value)
-  emit('blur', {
-    value: inputValue.value
+  if (clearing.value) {
+    clearing.value = false
+    return
+  }
+  requestAnimationFrame(() => {
+    focusing.value = false
+    emit('blur', {
+      value: inputValue.value
+    })
   })
 }
 function handleFocus({ detail }: any) {
@@ -236,7 +264,7 @@ function handleFocus({ detail }: any) {
     clearing.value = false
     return
   }
-  isFocus.value = true
+  focusing.value = true
   emit('focus', detail)
 }
 function handleInput({ detail }: any) {
