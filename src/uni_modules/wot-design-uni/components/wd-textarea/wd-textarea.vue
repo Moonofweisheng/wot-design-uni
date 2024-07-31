@@ -17,7 +17,7 @@
         :class="`wd-textarea__inner ${customTextareaClass}`"
         v-model="inputValue"
         :show-count="false"
-        :placeholder="placeholder || translate('placeholder')"
+        :placeholder="placeholder ?? translate('placeholder')"
         :disabled="disabled"
         :maxlength="maxlength"
         :focus="isFocus"
