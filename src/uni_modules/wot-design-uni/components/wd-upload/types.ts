@@ -108,6 +108,8 @@ export type UploadBuildFormData = (options: UploadBuildFormDataOption) => void
 
 export type UploadFile = Partial<UploadFileItem> & { url: string }
 
+export type UploadMethod = (uploadFile: UploadFileItem, formData?: UploadFormData) => Promise<void>
+
 export const uploadProps = {
   ...baseProps,
   /**
@@ -298,7 +300,13 @@ export const uploadProps = {
    * 是否选择文件后自动上传
    * 类型：boolean
    */
-  autoUpload: makeBooleanProp(true)
+  autoUpload: makeBooleanProp(true),
+  /**
+   * 自定义上传文件的请求方法
+   * 类型：UploadMethod
+   * 默认值：-
+   */
+  uploadMethod: Function as PropType<UploadMethod>
 }
 
 export type UploadProps = ExtractPropTypes<typeof uploadProps>

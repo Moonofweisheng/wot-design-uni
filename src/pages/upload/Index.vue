@@ -69,11 +69,15 @@
       <wd-upload ref="upload14" :auto-upload="false" :file-list="fileList14" :action="action" @change="handleChange14"></wd-upload>
       <wd-button @click="upload14?.submit()">开始上传</wd-button>
     </demo-block>
+
+    <demo-block title="自定义上传方法">
+      <wd-upload v-model:file-list="fileList15" :upload-method="customUpload"></wd-upload>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-import type { UploadFile } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import type { UploadFile, UploadFileItem, UploadFormData, UploadMethod } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
 import { ref } from 'vue'
 
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
@@ -257,6 +261,22 @@ function handleChange13({ fileList }: any) {
 }
 function handleChange14({ fileList }: any) {
   fileList14.value = fileList
+}
+
+const customUpload: UploadMethod = (uploadFile: UploadFileItem, formData?: UploadFormData) => {
+  return new Promise<void>((resolve, reject) => {
+    messageBox
+      .confirm({
+        title: '调用自定义上传',
+        msg: `上传文件URL：${uploadFile.url}；点击确定完成上传，点击取消将会上传失败。`
+      })
+      .then(() => {
+        resolve()
+      })
+      .catch(() => {
+        reject()
+      })
+  })
 }
 </script>
 <style lang="scss" scoped></style>

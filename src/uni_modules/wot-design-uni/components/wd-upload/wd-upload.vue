@@ -296,7 +296,7 @@ function initFile(file: ChooseFile) {
  * @description 开始上传文件
  */
 async function startUploadFiles() {
-  const { buildFormData, formData = {}, statusKey } = props
+  const { buildFormData, formData = {}, statusKey, uploadMethod } = props
 
   for (const uploadFile of uploadFiles.value) {
     // 仅开始未上传的文件
@@ -314,8 +314,18 @@ async function startUploadFiles() {
           })
         })
       }
-
-      await handleUpload(uploadFile, data)
+      if (uploadMethod) {
+        try {
+          uploadFile[statusKey] = 'loading'
+          await uploadMethod(uploadFile, data)
+          uploadFile[statusKey] = 'success'
+        } catch (e) {
+          console.error('[wot-design]Error: error when invoking custom upload method', e)
+          uploadFile[statusKey] = 'fail'
+        }
+      } else {
+        await handleUpload(uploadFile, data)
+      }
     }
   }
 }
