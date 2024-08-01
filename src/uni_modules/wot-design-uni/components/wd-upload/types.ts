@@ -97,9 +97,11 @@ export type UploadBeforeUploadOption = {
 }
 export type UploadBeforeUpload = (options: UploadBeforeUploadOption) => void
 
+export type UploadFormData = Record<string, any>
+
 export type UploadBuildFormDataOption = {
   file: UploadFileItem
-  formData: Record<string, any>
+  formData: UploadFormData
   resolve: (formData: Record<string, any>) => void
 }
 export type UploadBuildFormData = (options: UploadBuildFormDataOption) => void
@@ -306,4 +308,33 @@ export type UploadExpose = {
    * 手动触发上传
    */
   submit: () => void
+}
+
+export type UploadErrorEvent = {
+  error: any
+  file: UploadFileItem
+  formData: UploadFormData
+}
+
+export type UploadChangeEvent = {
+  fileList: UploadFileItem[]
+}
+
+export type UploadSuccessEvent = {
+  file: UploadFileItem
+  fileList: UploadFileItem[]
+  formData: UploadFormData
+}
+
+export type UploadProgressEvent = {
+  response: UniApp.OnProgressUpdateResult
+  file: UploadFileItem
+}
+
+export type UploadOversizeEvent = {
+  file: ChooseFile
+}
+
+export type UploadRemoveEvent = {
+  file: UploadFileItem
 }

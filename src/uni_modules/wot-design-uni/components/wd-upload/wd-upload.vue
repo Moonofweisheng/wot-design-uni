@@ -98,11 +98,32 @@ import { computed, ref, watch } from 'vue'
 import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
-import { uploadProps, type UploadFileItem, type ChooseFile, type UploadExpose } from './types'
+import {
+  uploadProps,
+  type UploadFileItem,
+  type ChooseFile,
+  type UploadExpose,
+  type UploadErrorEvent,
+  type UploadChangeEvent,
+  type UploadSuccessEvent,
+  type UploadProgressEvent,
+  type UploadOversizeEvent,
+  type UploadRemoveEvent
+} from './types'
 import type { VideoPreviewInstance } from '../wd-video-preview/types'
 
 const props = defineProps(uploadProps)
-const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove', 'update:fileList'])
+
+const emit = defineEmits<{
+  (e: 'fail', value: UploadErrorEvent): void
+  (e: 'change', value: UploadChangeEvent): void
+  (e: 'success', value: UploadSuccessEvent): void
+  (e: 'progress', value: UploadProgressEvent): void
+  (e: 'oversize', value: UploadOversizeEvent): void
+  (e: 'chooseerror', value: any): void
+  (e: 'remove', value: UploadRemoveEvent): void
+  (e: 'update:fileList', value: UploadFileItem[]): void
+}>()
 
 defineExpose<UploadExpose>({
   submit: () => startUploadFiles().then()
@@ -338,7 +359,7 @@ function handleSuccess(res: Record<string, any>, file: UploadFileItem, formData:
  * @param {Object} res 接口返回信息
  * @param {Object} file 上传的文件
  */
-function handleProgress(res: Record<string, any>, file: UploadFileItem) {
+function handleProgress(res: UniApp.OnProgressUpdateResult, file: UploadFileItem) {
   const index = uploadFiles.value.findIndex((item) => item.uid === file.uid)
   if (index > -1) {
     uploadFiles.value[index].percent = res.progress
@@ -472,7 +493,7 @@ function handleChoose() {
  * @param {Object} file 上传的文件
  * @param {Number} index 删除
  */
-function handleRemove(file: Record<any, any>, index?: number) {
+function handleRemove(file: UploadFileItem, index?: number) {
   uploadFiles.value.splice(
     uploadFiles.value.findIndex((item) => item.uid === file.uid),
     1
