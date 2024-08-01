@@ -37,7 +37,7 @@ export type UploadFileItem = {
   // 当前文件名称，仅h5支持
   name?: string
   // 上传状态。若自定义了status-key，应取对应字段
-  status?: string
+  status?: UploadStatusType
   // 文件大小
   size?: number
   // 上传图片/视频的本地地址
@@ -61,6 +61,7 @@ export type UploadSourceType = 'album' | 'camera'
 export type UploadSizeType = 'original' | 'compressed'
 export type UploadFileType = 'image' | 'video' | 'media' | 'all' | 'file'
 export type UploadCameraType = 'front' | 'back'
+export type UploadStatusType = 'pending' | 'loading' | 'success' | 'fail'
 
 export type UploadBeforePreviewOption = {
   index: number
@@ -290,7 +291,19 @@ export const uploadProps = {
    * 自定义预览图片列表样式
    * 类型：string
    */
-  customPreviewClass: makeStringProp('')
+  customPreviewClass: makeStringProp(''),
+  /**
+   * 是否选择文件后自动上传
+   * 类型：boolean
+   */
+  autoUpload: makeBooleanProp(true)
 }
 
 export type UploadProps = ExtractPropTypes<typeof uploadProps>
+
+export type UploadExpose = {
+  /**
+   * 手动触发上传
+   */
+  submit: () => void
+}

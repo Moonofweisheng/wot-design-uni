@@ -64,6 +64,11 @@
       <wd-upload accept="all" multiple :file-list="fileList13" :action="action" @change="handleChange13"></wd-upload>
     </demo-block>
     <!-- #endif -->
+
+    <demo-block title="手动触发上传">
+      <wd-upload ref="upload14" :auto-upload="false" :file-list="fileList14" :action="action" @change="handleChange14"></wd-upload>
+      <wd-button @click="upload14?.submit()">开始上传</wd-button>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -97,6 +102,8 @@ const fileList12 = ref<UploadFile[]>([])
 const fileList13 = ref<UploadFile[]>([])
 const fileList14 = ref<UploadFile[]>([])
 const fileList15 = ref<UploadFile[]>([])
+
+const upload14 = ref()
 
 const messageBox = useMessage()
 const toast = useToast()

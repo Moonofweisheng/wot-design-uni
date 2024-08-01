@@ -98,11 +98,15 @@ import { computed, ref, watch } from 'vue'
 import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
-import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
+import { uploadProps, type UploadFileItem, type ChooseFile, type UploadExpose } from './types'
 import type { VideoPreviewInstance } from '../wd-video-preview/types'
 
 const props = defineProps(uploadProps)
 const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
+
+defineExpose<UploadExpose>({
+  submit: () => startUploadFiles().then()
+})
 
 const { translate } = useTranslate('upload')
 
@@ -251,26 +255,43 @@ function initFile(file: ChooseFile) {
     // 仅h5支持 name
     name: file.name || '',
     thumb: file.thumb || '',
-    [statusKey]: 'loading',
+    [statusKey]: 'pending',
     size: file.size || 0,
     url: file.path,
     percent: 0
   }
 
   uploadFiles.value.push(initState)
+  if (props.autoUpload) {
+    startUploadFiles().then()
+  }
+}
 
-  const { buildFormData, formData = {} } = props
+/**
+ * @description 开始上传文件
+ */
+async function startUploadFiles() {
+  const { buildFormData, formData = {}, statusKey } = props
 
-  if (buildFormData) {
-    buildFormData({
-      file: initState,
-      formData,
-      resolve: (formData: Record<string, any>) => {
-        formData && handleUpload(initState, formData)
+  for (const uploadFile of uploadFiles.value) {
+    // 仅开始未上传的文件
+    if (uploadFile[statusKey] == 'pending') {
+      let data = formData
+
+      if (buildFormData) {
+        data = await new Promise((resolve, reject) => {
+          buildFormData({
+            file: uploadFile,
+            formData,
+            resolve: (formData: Record<string, any>) => {
+              resolve(formData)
+            }
+          })
+        })
       }
-    })
-  } else {
-    handleUpload(initState, formData)
+
+      await handleUpload(uploadFile, data)
+    }
   }
 }
 
@@ -324,39 +345,46 @@ function handleProgress(res: Record<string, any>, file: UploadFileItem) {
  * @param {Object} file 上传的文件
  */
 function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
-  const { action, name, header = {}, accept } = props
+  const { action, name, header = {}, accept, statusKey } = props
   const statusCode = isDef(props.successStatus) ? props.successStatus : 200
-  const uploadTask = uni.uploadFile({
-    url: action,
-    header,
-    name,
-    fileName: name,
-    fileType: accept as 'image' | 'video' | 'audio',
-    formData,
-    filePath: file.url,
-    success(res) {
-      if (res.statusCode === statusCode) {
-        // 上传成功进行文件列表拼接
-        handleSuccess(res, file, formData)
-      } else {
+  // 设置上传中，防止重复发起上传
+  file[statusKey] = 'loading'
+  return new Promise<void>((resolve, reject) => {
+    const uploadTask = uni.uploadFile({
+      url: action,
+      header,
+      name,
+      fileName: name,
+      fileType: accept as 'image' | 'video' | 'audio',
+      formData,
+      filePath: file.url,
+      success(res) {
+        if (res.statusCode === statusCode) {
+          // 上传成功进行文件列表拼接
+          handleSuccess(res, file, formData)
+          resolve()
+        } else {
+          // 上传失败处理
+          handleError(res, file, formData)
+          reject()
+        }
+      },
+      fail(err) {
         // 上传失败处理
-        handleError(res, file, formData)
+        handleError(err, file, formData)
+        reject()
       }
-    },
-    fail(err) {
-      // 上传失败处理
-      handleError(err, file, formData)
-    }
-  })
+    })
 
-  // 获取当前文件加载的百分比
-  uploadTask.onProgressUpdate((res) => {
-    /**
-     * res.progress: 上传进度
-     * res.totalBytesSent: 已经上传的数据长度
-     * res.totalBytesExpectedToSend: 预期需要上传的数据总长度
-     */
-    handleProgress(res, file)
+    // 获取当前文件加载的百分比
+    uploadTask.onProgressUpdate((res) => {
+      /**
+       * res.progress: 上传进度
+       * res.totalBytesSent: 已经上传的数据长度
+       * res.totalBytesExpectedToSend: 预期需要上传的数据总长度
+       */
+      handleProgress(res, file)
+    })
   })
 }
 
