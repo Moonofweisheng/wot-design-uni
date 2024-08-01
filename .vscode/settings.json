@@ -36,7 +36,7 @@
       // #vue组件中html代码格式化样式
     }
   },
-  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "i18n-ally.localesPaths": [
     "src/uni_modules/wot-design-uni/locale",
     "src/uni_modules/wot-design-uni/locale/lang"
