@@ -6,7 +6,7 @@
     <wd-message-box></wd-message-box>
     <wd-toast></wd-toast>
     <demo-block title="基本用法">
-      <wd-upload accept="image" :file-list="fileList" image-mode="aspectFill" :action="action" @change="handleChange"></wd-upload>
+      <wd-upload accept="image" v-model:file-list="fileList" image-mode="aspectFill" :action="action"></wd-upload>
     </demo-block>
     <demo-block title="最大上传数限制">
       <wd-upload :file-list="fileList3" :limit="3" :action="action" @change="handleChange3"></wd-upload>
@@ -207,8 +207,8 @@ function handleProgess(event: any) {
   console.log('加载中', event)
 }
 
-function handleChange({ fileList }: any) {
-  fileList.value = fileList
+function handleChange({ fileList: list }: any) {
+  fileList.value = list
 }
 
 function handleChange1({ fileList }: { fileList: UploadFile[] }) {

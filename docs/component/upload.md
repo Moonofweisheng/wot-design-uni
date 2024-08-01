@@ -38,6 +38,26 @@ function handleChange({ fileList: files }) {
 }
 ```
 
+## 双向绑定 `$LOWEST_VERSION$`
+
+`file-list` 支持用 `v-model` 进行双向绑定。
+
+上传、删除等操作会都会同步数据，不需要通过 `change` 事件进行绑定
+
+```html
+<wd-upload v-model:file-list="fileList1" image-mode="aspectFill" :action="action"></wd-upload>
+```
+
+```typescript
+const fileList = ref<any[]>([
+  {
+    url: 'https://img12.360buyimg.com//n0/jfs/t1/29118/6/4823/55969/5c35c16bE7c262192/c9fdecec4b419355.jpg'
+  }
+])
+
+const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
+```
+
 ## 禁用
 
 设置 `disabled` 开启禁用上传

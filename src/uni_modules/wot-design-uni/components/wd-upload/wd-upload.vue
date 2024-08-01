@@ -102,7 +102,7 @@ import { uploadProps, type UploadFileItem, type ChooseFile, type UploadExpose } 
 import type { VideoPreviewInstance } from '../wd-video-preview/types'
 
 const props = defineProps(uploadProps)
-const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
+const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove', 'update:fileList'])
 
 defineExpose<UploadExpose>({
   submit: () => startUploadFiles().then()
@@ -225,6 +225,10 @@ watch(
   }
 )
 
+function emitFileList() {
+  emit('update:fileList', uploadFiles.value)
+}
+
 /**
  * 获取图片信息
  * @param img
@@ -308,6 +312,7 @@ function handleError(err: Record<string, any>, file: UploadFileItem, formData: R
     uploadFiles.value[index].error = err.message
     uploadFiles.value[index].response = err
     emit('fail', { error: err, file, formData })
+    emitFileList()
   }
 }
 
@@ -324,6 +329,7 @@ function handleSuccess(res: Record<string, any>, file: UploadFileItem, formData:
     uploadFiles.value[index].response = res.data
     emit('change', { fileList: uploadFiles.value })
     emit('success', { file, fileList: uploadFiles.value, formData })
+    emitFileList()
   }
 }
 
@@ -475,6 +481,7 @@ function handleRemove(file: Record<any, any>, index?: number) {
     fileList: uploadFiles.value
   })
   emit('remove', { file })
+  emitFileList()
 }
 
 function removeFile(index: number) {
