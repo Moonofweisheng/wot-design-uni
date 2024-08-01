@@ -20,7 +20,7 @@ export type IndicatorPositionType = 'left' | 'top-left' | 'top' | 'top-right' | 
 
 export interface SwiperList {
   [key: string]: any
-  value: string
+  value?: string
 }
 
 export const swiperProps = {
@@ -143,7 +143,10 @@ export const swiperProps = {
    * 默认值：'aspectFill'
    */
   imageMode: makeStringProp<ImageMode>('aspectFill'),
-
+  /**
+   * 选项对象中，value 对应的 key
+   */
+  valueKey: makeStringProp('value'),
   /**
    * 自定义指示器类名
    * 类型：string
