@@ -32,6 +32,18 @@ export const dorpMenuItemProps = {
    */
   title: String,
   /**
+   * 菜单图标
+   */
+  icon: makeStringProp('arrow-down'),
+  /**
+   * 菜单图标大小
+   */
+  iconSize: makeStringProp('14px'),
+  /**
+   * 自定义点击事件
+   */
+  customClick: Function,
+  /**
    * 选项对象中，value 对应的 key
    */
   valueKey: makeStringProp('value'),

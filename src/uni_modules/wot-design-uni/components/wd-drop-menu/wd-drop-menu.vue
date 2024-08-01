@@ -7,12 +7,12 @@
         <view
           v-for="(child, index) in children"
           :key="index"
-          @click="toggle(child)"
+          @click="handleItemClick(child)"
           :class="`wd-drop-menu__item ${child.disabled ? 'is-disabled' : ''} ${currentUid === child.$.uid ? 'is-active' : ''}`"
         >
           <view class="wd-drop-menu__item-title">
             <view class="wd-drop-menu__item-title-text">{{ getDisplayTitle(child) }}</view>
-            <wd-icon name="arrow-down" custom-class="wd-drop-menu__arrow" />
+            <wd-icon :name="child.icon" :size="child.iconSize" custom-class="wd-drop-menu__arrow" />
           </view>
         </view>
       </view>
@@ -88,6 +88,14 @@ function getDisplayTitle(child: any) {
     }
   }
   console.error('[wot-design] warning(wd-drop-menu-item): no value is matched in the options option.')
+}
+
+function handleItemClick(child: any) {
+  if (child.customClick) {
+    child.customClick()
+  } else {
+    toggle(child)
+  }
 }
 
 function toggle(child: any) {

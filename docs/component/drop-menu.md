@@ -112,6 +112,24 @@ function handleOpened() {
 </view>
 ```
 
+## 自定义菜单图标
+
+可以通过 icon 设置菜单右侧图标，等同于 `<wd-icon />` 的 name 属性。通过 icon-size 设置图标尺寸，等同于 `<wd-icon />` 的 size 属性。
+
+可以通过 custom-click 来自定义菜单点击事件，不传则默认展开菜单。
+
+```html
+<wd-drop-menu>
+  <wd-drop-menu-item title="地图" icon="location" icon-size="24px" :custom-click="handleClick" />
+</wd-drop-menu>
+```
+
+```typescript
+function handleClick() {
+  console.log('点击了地图')
+}
+```
+
 ## 向上展开
 
 将 `direction` 属性值设置为 `up`，菜单即可向上展开
@@ -150,6 +168,9 @@ function handleOpened() {
 | options   | 列表数据，对应数据结构 `[{text: '标题', value: '0', tip: '提示文字'}]` | array           | -      | -      | -        |
 | icon-name | 选中的图标名称(可选名称在 wd-icon 组件中)                              | string          | -      | check  | -        |
 | title     | 菜单标题                                                               | string          | -      | -      | -        |
+| icon      | 菜单图标                                                           | string            | -       | arrow-down | -     |
+| icon-size | 菜单图标尺寸                                                        | string            | -       | 14px | _       |
+| custom-click | 菜单点击事件                                                     | function          | -       | -      | -      |
 | value-key | 选项对象中，value 对应的 key                                           | string          | -      | value  | -        |
 | label-key | 选项对象中，展示的文本对应的 key                                       | string          | -      | label  | -        |
 | tip-key   | 选项对象中，选项说明对应的 key                                         | string          | -      | tip    | -        |

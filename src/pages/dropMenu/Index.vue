@@ -32,6 +32,11 @@
           </view>
         </view>
       </demo-block>
+      <demo-block title="自定义菜单图标" transparent>
+        <wd-drop-menu>
+          <wd-drop-menu-item title="地图" icon="location" icon-size="24px" :custom-click="handleMapClick" />
+        </wd-drop-menu>
+      </demo-block>
       <demo-block title="向上弹出" transparent>
         <wd-drop-menu direction="up">
           <wd-drop-menu-item v-model="value6" :options="option1" @change="handleChange6" />
@@ -115,6 +120,10 @@ function handleChange9({ value }: any) {
 
 function confirm() {
   dropMenu.value.close()
+}
+
+function handleMapClick() {
+  console.log('点击了地图')
 }
 </script>
 <style lang="scss" scoped>
