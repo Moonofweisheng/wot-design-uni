@@ -126,11 +126,7 @@ watch(
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (newValue === undefined) {
-      newValue = ''
-      console.warn('[wot-design] warning(wd-input): value can not be undefined.')
-    }
-    inputValue.value = newValue
+    inputValue.value = isDef(newValue) ? String(newValue) : ''
   },
   { immediate: true, deep: true }
 )
