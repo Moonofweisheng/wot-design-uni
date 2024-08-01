@@ -382,10 +382,11 @@ $-loadmore-loading-size: var(--wot-loadmore-loading-size, $-fs-title) !default; 
 
 
 /* message-box */
+$-message-padding: var(--wot-message-padding, 24px) !default; // 主体padding
 $-message-box-width: var(--wot-message-box-width, 300px) !default; // 宽度
 $-message-box-bg: var(--wot-message-box-bg, $-color-white) !default; // 默认背景颜色
 $-message-box-radius: var(--wot-message-box-radius, 16px) !default; // 圆角大小
-$-message-box-padding: var(--wot-message-box-padding, 25px 24px 0) !default; // 主体内容padding
+$-message-box-padding: var(--wot-message-box-padding, 0 0 24px 0) !default; // 主体padding
 $-message-box-title-fs: var(--wot-message-box-title-fs, 16px) !default; // 标题字号
 $-message-box-title-color: var(--wot-message-box-title-color, rgba(0, 0, 0, 0.85)) !default; // 标题颜色
 $-message-box-content-fs: var(--wot-message-box-content-fs, 14px) !default; // 内容字号

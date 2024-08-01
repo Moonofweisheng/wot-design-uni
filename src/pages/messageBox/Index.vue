@@ -12,6 +12,10 @@
       <wd-button @click="alertWithTitle">alert</wd-button>
     </demo-block>
 
+    <demo-block title="不显示确认按钮">
+      <wd-button @click="alertOnCancel">alert</wd-button>
+    </demo-block>
+
     <demo-block title="confirm">
       <wd-button @click="confirm">confirm</wd-button>
     </demo-block>
@@ -50,6 +54,14 @@ function alertWithTitle() {
   message.alert({
     msg: '提示文案',
     title: '标题'
+  })
+}
+
+function alertOnCancel() {
+  message.alert({
+    msg: '不显示确认按钮',
+    title: '标题',
+    showConfirmButton: false
   })
 }
 function confirm() {

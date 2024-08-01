@@ -13,7 +13,6 @@
 
     @include e(content) {
       color: $-dark-color3;
-
       &::-webkit-scrollbar-thumb {
         background: $-dark-border-color;
       }
@@ -31,16 +30,17 @@
   overflow: hidden;
 
   @include e(container) {
+    padding: $-message-padding;
     width: $-message-box-width;
     box-sizing: border-box;
   }
 
   @include e(body) {
     background-color: $-message-box-bg;
-    padding: $-message-box-padding;
+    
 
     @include when(no-title) {
-      padding: 25px 24px 0px;
+      padding: 24px 24px 0px;
     }
   }
 
@@ -50,8 +50,7 @@
     color: $-message-box-title-color;
     line-height: 20px;
     font-weight: 500;
-    padding-top: 5px;
-    padding-bottom: 10px;
+    padding: $-message-box-padding;
   }
 
   @include e(content) {
@@ -61,7 +60,6 @@
     text-align: center;
     overflow: auto;
     line-height: 20px;
-
     &::-webkit-scrollbar {
       width: $-message-box-content-scrollbar-width;
     }
@@ -85,7 +83,7 @@
   }
 
   @include e(actions) {
-    padding: 24px;
+    padding: 24px 0 0 0;
   }
 
   @include e(flex) {
