@@ -376,12 +376,12 @@ const buildFormData = ({ file, formData, resolve }) => {
   const key = `20231120/${imageName}` // 图片上传到oss的路径(拼接你的文件夹和文件名)
   const success_action_status = '200' // 将上传成功状态码设置为200，默认状态码为204
 
-  formData = {accessKeyId
+  formData = {
     ...formData,
     key: key,
     policy: policy,
     AccessKeyId: accessKeyId,
-    signature: signature
+    signature: signature,
     success_action_status: success_action_status
   }
   resolve(formData) // 组装成功后返回 formData，必须返回
@@ -529,14 +529,14 @@ function handleChange({ files }) {
 
 ## file 数据结构
 
-| 键名     | 类型            | 说明                                       | 最低版本 |
-| -------- | --------------- | ------------------------------------------ | -------- |
-| uid      | number          | 当前上传文件在列表中的唯一标识             | -        |
-| url      | string          | 上传图片地址                               | -        |
-| action   | string          | 上传的地址                                 | -        |
-| percent  | number          | 上传进度                                   | -        |
-| size     | number          | 响文件尺寸应码                             | -        |
-| status   | string          | 当前图片上传状态                           | -        |
+| 键名     | 类型            | 说明                    | 最低版本 |
+| -------- | --------------- |-----------------------| -------- |
+| uid      | number          | 当前上传文件在列表中的唯一标识       | -        |
+| url      | string          | 上传图片地址                | -        |
+| action   | string          | 上传的地址                 | -        |
+| percent  | number          | 上传进度                  | -        |
+| size     | number          | 响文件尺寸应码               | -        |
+| status   | string          | 当前图片上传状态。若自定义了status-key，应取对应字段 | -        |
 | response | string / object | 后端返回的内容，可能是对象，也可能是字符串 | -        |
 
 ## Slot

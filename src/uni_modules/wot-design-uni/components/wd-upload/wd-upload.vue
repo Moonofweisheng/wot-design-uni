@@ -45,20 +45,25 @@
         </view>
       </view>
 
-      <view v-if="file.status !== 'success'" class="wd-upload__mask wd-upload__status-content">
+      <view v-if="file[props.statusKey] !== 'success'" class="wd-upload__mask wd-upload__status-content">
         <!-- loading时展示loading图标和进度 -->
-        <view v-if="file.status === 'loading'" class="wd-upload__status-content">
+        <view v-if="file[props.statusKey] === 'loading'" class="wd-upload__status-content">
           <wd-loading :type="loadingType" :size="loadingSize" :color="loadingColor" />
           <text class="wd-upload__progress-txt">{{ file.percent }}%</text>
         </view>
         <!-- 失败时展示失败图标以及失败信息 -->
-        <view v-if="file.status === 'fail'" class="wd-upload__status-content">
+        <view v-if="file[props.statusKey] === 'fail'" class="wd-upload__status-content">
           <wd-icon name="close-outline" custom-class="wd-upload__icon"></wd-icon>
           <text class="wd-upload__progress-txt">{{ file.error || translate('error') }}</text>
         </view>
       </view>
       <!-- 上传状态为上传中时不展示移除按钮 -->
-      <wd-icon v-if="file.status !== 'loading' && !disabled" name="error-fill" custom-class="wd-upload__close" @click="removeFile(index)"></wd-icon>
+      <wd-icon
+        v-if="file[props.statusKey] !== 'loading' && !disabled"
+        name="error-fill"
+        custom-class="wd-upload__close"
+        @click="removeFile(index)"
+      ></wd-icon>
     </view>
 
     <block v-if="showUpload">
@@ -239,13 +244,14 @@ function getImageInfo(img: string) {
  * @param {Object} file 上传的文件
  */
 function initFile(file: ChooseFile) {
+  const { statusKey } = props
   // 状态初始化
   const initState: UploadFileItem = {
     uid: context.id++,
     // 仅h5支持 name
     name: file.name || '',
     thumb: file.thumb || '',
-    status: 'loading',
+    [statusKey]: 'loading',
     size: file.size || 0,
     url: file.path,
     percent: 0

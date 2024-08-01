@@ -36,7 +36,7 @@ export type UploadFileItem = {
   thumb?: string
   // 当前文件名称，仅h5支持
   name?: string
-  // 上传状态
+  // 上传状态。若自定义了status-key，应取对应字段
   status?: string
   // 文件大小
   size?: number
