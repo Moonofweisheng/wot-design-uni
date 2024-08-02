@@ -34,7 +34,12 @@
       </demo-block>
       <demo-block title="自定义菜单图标" transparent>
         <wd-drop-menu>
-          <wd-drop-menu-item title="地图" icon="location" icon-size="24px" :custom-click="handleMapClick" />
+          <wd-drop-menu-item title="地图" icon="location" icon-size="24px" />
+        </wd-drop-menu>
+      </demo-block>
+      <demo-block title="自定义点击事件" transparent>
+        <wd-drop-menu>
+          <wd-drop-menu-item title="延迟 0.5s 展开" :before-toggle="handleBeforeToggle" />
         </wd-drop-menu>
       </demo-block>
       <demo-block title="向上弹出" transparent>
@@ -122,8 +127,11 @@ function confirm() {
   dropMenu.value.close()
 }
 
-function handleMapClick() {
-  console.log('点击了地图')
+function handleBeforeToggle(showPop: boolean, toggle: () => void) {
+  console.log('当前菜单展开状态:', showPop)
+
+  // 异步展开（如果不需要展开则不调用 toggle 函数即可）
+  setTimeout(toggle, 500)
 }
 </script>
 <style lang="scss" scoped>

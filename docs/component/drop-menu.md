@@ -114,19 +114,30 @@ function handleOpened() {
 
 ## 自定义菜单图标
 
-可以通过 icon 设置菜单右侧图标，等同于 `<wd-icon />` 的 name 属性。通过 icon-size 设置图标尺寸，等同于 `<wd-icon />` 的 size 属性。
-
-可以通过 custom-click 来自定义菜单点击事件，不传则默认展开菜单。
+可以通过 `icon` 设置菜单右侧图标，等同于 `<wd-icon />` 的 `name` 属性。通过 `icon-size` 设置图标尺寸，等同于 `<wd-icon />` 的 `size` 属性。
 
 ```html
 <wd-drop-menu>
-  <wd-drop-menu-item title="地图" icon="location" icon-size="24px" :custom-click="handleClick" />
+  <wd-drop-menu-item title="地图" icon="location" icon-size="24px" />
+</wd-drop-menu>
+```
+
+## 自定义菜单点击事件
+
+可以通过 `before-toggle` 来自定义菜单点击事件，不传则默认展开菜单。
+
+```html
+<wd-drop-menu>
+  <wd-drop-menu-item title="延迟 0.5s 展开" :before-toggle="handleBeforeToggle" />
 </wd-drop-menu>
 ```
 
 ```typescript
-function handleClick() {
-  console.log('点击了地图')
+function handleBeforeToggle(showPop: boolean, toggle: () => void) {
+  console.log('当前菜单展开状态:', showPop)
+
+  // 异步展开（如果不需要展开则不调用 toggle 函数即可）
+  setTimeout(toggle, 500)
 }
 ```
 
@@ -170,7 +181,7 @@ function handleClick() {
 | title     | 菜单标题                                                               | string          | -      | -      | -        |
 | icon      | 菜单图标                                                           | string            | -       | arrow-down | -     |
 | icon-size | 菜单图标尺寸                                                        | string            | -       | 14px | _       |
-| custom-click | 菜单点击事件                                                     | function          | -       | -      | -      |
+| before-toggle | 在切换操作之前调用的函数，类型：`(showPop: boolean, toggle: () => void) => void`，其中 `showPop` 为当前菜单展开状态 | function          | -       | -      | -      |
 | value-key | 选项对象中，value 对应的 key                                           | string          | -      | value  | -        |
 | label-key | 选项对象中，展示的文本对应的 key                                       | string          | -      | label  | -        |
 | tip-key   | 选项对象中，选项说明对应的 key                                         | string          | -      | tip    | -        |

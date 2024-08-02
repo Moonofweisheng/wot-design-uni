@@ -40,9 +40,9 @@ export const dorpMenuItemProps = {
    */
   iconSize: makeStringProp('14px'),
   /**
-   * 自定义点击事件
+   * 自定义点击事件: (showPop: boolean, toggle: ()=>void)=>void
    */
-  customClick: Function,
+  beforeToggle: Function,
   /**
    * 选项对象中，value 对应的 key
    */

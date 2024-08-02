@@ -91,8 +91,9 @@ function getDisplayTitle(child: any) {
 }
 
 function handleItemClick(child: any) {
-  if (child.customClick) {
-    child.customClick()
+  if (child.beforeToggle) {
+    const showPop = child.$.exposed!.getShowPop()
+    child.beforeToggle(showPop, () => toggle(child))
   } else {
     toggle(child)
   }
