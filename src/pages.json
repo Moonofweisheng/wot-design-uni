@@ -673,6 +673,16 @@
       }
     },
     {
+      "path": "pages/statistic/Index",
+      "name": "statistic",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Statistic 数值显示"
+      }
+    },
+    {
       "path": "pages/sidebar/Index",
       "name": "sidebar",
       "style": {

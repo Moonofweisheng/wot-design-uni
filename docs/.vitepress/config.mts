@@ -427,6 +427,9 @@ export default defineConfig({
           }, {
             link: "/component/table",
             text: "Table 表格"
+          }, {
+            link: "/component/statistic",
+            text: "Statistic 数值显示"
           }]
         }
       ]

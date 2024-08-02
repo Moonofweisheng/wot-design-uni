@@ -1,0 +1,12 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+
+.wd-statistic{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: center;
+}
+
