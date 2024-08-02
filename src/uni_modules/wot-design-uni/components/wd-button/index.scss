@@ -80,6 +80,7 @@
   @include m(active) {
     &:active::before {
       opacity: 0.15;
+      border-radius: 6px;
     }
   }
 
