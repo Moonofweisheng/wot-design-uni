@@ -186,6 +186,27 @@ function onChange(e) {
 }
 ```
 
+## 指定valueKey <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+
+通过`value-key` 属性指定 `list` 中每个对象图片地址字段，默认为 `value`。
+
+
+```html
+<wd-swiper value-key="url" :list="customSwiperList" autoplay v-model:current="current" @click="handleClick" @change="onChange"></wd-swiper>
+```
+```ts
+const current = ref<number>(0)
+
+const customSwiperList = ref([
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg' }
+])
+```
+
+
+
 ## 属性控制切换
 
 ```html
@@ -228,7 +249,9 @@ const isLoop = ref(false)
 | snapToEdge           | 边距是否应用到第一个、最后一个元素                     | `boolean`                         | -                                                                                                      | false        | 0.1.22   |
 | indicator            | 指示器全部配置                                         | `SwiperIndicatorProps \| boolean` | -                                                                                                      | true         | 0.1.22   |
 | imageMode            | 图片裁剪、缩放的模式                                   | `string`                          | 参考官方文档[mode](https://uniapp.dcloud.net.cn/component/image.html#mode-%E6%9C%89%E6%95%88%E5%80%BC) | `aspectFill` | 0.1.55   |
-| customStyle          | 外部自定义样式                                         | `string`                          | -                                                                                                      | ''           | 0.1.22   |
+| customStyle          | 外部自定义样式        | `string`       | -       | ''           | 0.1.22   |
+| value-key          | 选项对象中，value 对应的 key        | `string`       | -       | `value`           | $LOWEST_VERSION$   |
+
 
 ### DirectionType
 
@@ -263,7 +286,7 @@ const isLoop = ref(false)
 
 | 事件名称 | 说明             | 参数                                                        | 最低版本 |
 | -------- | ---------------- | ----------------------------------------------------------- | -------- |
-| click    | 点击轮播项时触发 | `(index: number)`                                           | 0.1.22   |
+| click    | 点击轮播项时触发 | `(index: number, item: SwiperList \| string)`                                           | 0.1.22   |
 | change   | 轮播切换时触发   | `(current: number, source: 'autoplay' \| 'touch' \| 'nav')	` | 0.1.22   |
 
 ## Slot

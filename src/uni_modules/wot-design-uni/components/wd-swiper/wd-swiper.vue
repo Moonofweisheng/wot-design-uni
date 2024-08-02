@@ -17,9 +17,9 @@
       @change="handleChange"
       @animationfinish="handleAnimationfinish"
     >
-      <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item" @click="handleClick(index)">
+      <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item" @click="handleClick(index, item)">
         <image
-          :src="isObj(item) ? item.value : item"
+          :src="isObj(item) ? item[valueKey] : item"
           :class="`wd-swiper__image ${customImageClass} ${getCustomImageClass(navCurrent, index, list)}`"
           :style="{ height: addUnit(height) }"
           :mode="imageMode"
@@ -161,9 +161,10 @@ function handleAnimationfinish(e: { detail: { current: any; source: string } }) 
 /**
  * 点击滑块事件
  * @param index 点击的滑块下标
+ * @param item 点击的滑块内容
  */
-function handleClick(index: number) {
-  emit('click', { index })
+function handleClick(index: number, item: string | SwiperList) {
+  emit('click', { index, item })
 }
 
 function handleIndicatorChange(e: { dir: any; source: string }) {

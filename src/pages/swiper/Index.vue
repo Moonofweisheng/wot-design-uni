@@ -110,6 +110,10 @@
       </wd-swiper>
     </demo-block>
 
+    <demo-block title="指定valueKey">
+      <wd-swiper value-key="url" :list="customSwiperList" autoplay v-model:current="current9" @click="handleClick" @change="onChange"></wd-swiper>
+    </demo-block>
+
     <demo-block title="属性控制切换">
       <wd-swiper :loop="isLoop" :autoplay="false" :list="swiperList" v-model:current="current8" />
       <wd-gap />
@@ -138,6 +142,13 @@ const swiperList = ref([
   'https://registry.npmmirror.com/wot-design-uni-assets/*/files/meng.jpg'
 ])
 
+const customSwiperList = ref([
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg' },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg' }
+])
+
 const current = ref<number>(0)
 const current1 = ref<number>(1)
 const current2 = ref<number>(2)
@@ -147,6 +158,7 @@ const current5 = ref<number>(0)
 const current6 = ref<number>(0)
 const current7 = ref<number>(0)
 const current8 = ref<number>(0)
+const current9 = ref<number>(0)
 
 const isLoop = ref(false)
 
