@@ -1,5 +1,7 @@
-import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeStringProp } from '../common/props'
+
+export type DropMenuItemBeforeToggle = (showPop: boolean, toggle: () => void) => void
 
 export const dorpMenuItemProps = {
   ...baseProps,
@@ -31,6 +33,18 @@ export const dorpMenuItemProps = {
    * 菜单标题
    */
   title: String,
+  /**
+   * 菜单图标
+   */
+  icon: makeStringProp('arrow-down'),
+  /**
+   * 菜单图标大小
+   */
+  iconSize: makeStringProp('14px'),
+  /**
+   * 自定义点击事件
+   */
+  beforeToggle: Function as PropType<DropMenuItemBeforeToggle>,
   /**
    * 选项对象中，value 对应的 key
    */

@@ -32,6 +32,16 @@
           </view>
         </view>
       </demo-block>
+      <demo-block title="自定义菜单图标" transparent>
+        <wd-drop-menu>
+          <wd-drop-menu-item title="地图" icon="location" icon-size="24px" />
+        </wd-drop-menu>
+      </demo-block>
+      <demo-block title="自定义点击事件" transparent>
+        <wd-drop-menu>
+          <wd-drop-menu-item title="延迟 0.5s 展开" :before-toggle="handleBeforeToggle" />
+        </wd-drop-menu>
+      </demo-block>
       <demo-block title="向上弹出" transparent>
         <wd-drop-menu direction="up">
           <wd-drop-menu-item v-model="value6" :options="option1" @change="handleChange6" />
@@ -115,6 +125,13 @@ function handleChange9({ value }: any) {
 
 function confirm() {
   dropMenu.value.close()
+}
+
+function handleBeforeToggle(showPop: boolean, toggle: () => void) {
+  console.log('当前菜单展开状态:', showPop)
+
+  // 异步展开（如果不需要展开则不调用 toggle 函数即可）
+  setTimeout(toggle, 500)
 }
 </script>
 <style lang="scss" scoped>
