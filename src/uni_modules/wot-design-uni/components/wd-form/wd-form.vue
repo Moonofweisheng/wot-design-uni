@@ -1,6 +1,7 @@
 <template>
   <view :class="`wd-form ${customClass}`" :style="customStyle">
     <slot></slot>
+    <wd-toast v-if="props.errorType === 'toast'" />
   </view>
 </template>
 
@@ -19,8 +20,10 @@ export default {
 import { reactive, watch } from 'vue'
 import { deepClone, getPropByPath, isDef, isPromise } from '../common/util'
 import { useChildren } from '../composables/useChildren'
+import { useToast } from '../wd-toast'
 import { type FormRules, FORM_KEY, type ErrorMessage, formProps, type FormExpose } from './types'
 
+const toast = useToast()
 const props = defineProps(formProps)
 
 const { children, linkChildren } = useChildren(FORM_KEY)
@@ -148,7 +151,11 @@ function getMergeRules() {
 }
 
 function showMessage(errorMsg: ErrorMessage) {
-  if (errorMsg.message) {
+  if (!errorMsg.message) return
+
+  if (props.errorType === 'toast') {
+    toast.show(errorMsg.message)
+  } else if (props.errorType === 'message') {
     errorMessages[errorMsg.prop] = errorMsg.message
   }
 }

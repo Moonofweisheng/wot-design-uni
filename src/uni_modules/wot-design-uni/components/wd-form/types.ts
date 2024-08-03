@@ -56,7 +56,14 @@ export const formProps = {
   /**
    * 是否在输入时重置表单校验信息
    */
-  resetOnChange: makeBooleanProp(true)
+  resetOnChange: makeBooleanProp(true),
+  /**
+   * 错误提示类型
+   */
+  errorType: {
+    type: String as PropType<'toast' | 'message' | 'none'>,
+    default: 'message'
+  }
 }
 export type FormProps = ExtractPropTypes<typeof formProps>
 
