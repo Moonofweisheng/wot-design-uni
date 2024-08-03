@@ -20,7 +20,7 @@
         :placeholder="placeholderValue"
         :disabled="disabled"
         :maxlength="maxlength"
-        :focus="isFocus"
+        :focus="focused"
         :auto-focus="autoFocus"
         :placeholder-style="placeholderStyle"
         :placeholder-class="inputPlaceholderClass"
@@ -72,7 +72,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { objToStyle, requestAnimationFrame, isDef } from '../common/util'
+import { objToStyle, requestAnimationFrameTimer, isDef } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -100,17 +100,16 @@ const placeholderValue = computed(() => {
   return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
 })
 
-const showClear = ref<boolean>(false)
-const showWordCount = ref<boolean>(false)
 const clearing = ref<boolean>(false)
-const isFocus = ref<boolean>(false) // 是否聚焦
+const focused = ref<boolean>(false) // 控制聚焦
+const focusing = ref<boolean>(false) // 当前是否激活状态
 const inputValue = ref<string | number>('') // 输入框的值
 const cell = useCell()
 
 watch(
   () => props.focus,
   (newValue) => {
-    isFocus.value = newValue
+    focused.value = newValue
   },
   { immediate: true, deep: true }
 )
@@ -118,18 +117,32 @@ watch(
 watch(
   () => props.modelValue,
   (newValue) => {
-    const { disabled, readonly, clearable } = props
-    if (newValue === null || newValue === undefined) {
-      newValue = ''
-      console.warn('[wot-design] warning(wd-textarea): value can not be null or undefined.')
-    }
-    inputValue.value = newValue
-    showClear.value = Boolean(clearable && !disabled && !readonly && newValue)
+    inputValue.value = isDef(newValue) ? String(newValue) : ''
   },
   { immediate: true, deep: true }
 )
 
 const { parent: form } = useParent(FORM_KEY)
+
+/**
+ * 展示清空按钮
+ */
+const showClear = computed(() => {
+  const { disabled, readonly, clearable, clearTrigger } = props
+  if (clearable && !readonly && !disabled && inputValue.value && (clearTrigger === 'always' || (props.clearTrigger === 'focus' && focusing.value))) {
+    return true
+  } else {
+    return false
+  }
+})
+
+/**
+ * 展示字数统计
+ */
+const showWordCount = computed(() => {
+  const { disabled, readonly, maxlength, showWordLimit } = props
+  return Boolean(!disabled && !readonly && isDef(maxlength) && maxlength > -1 && showWordLimit)
+})
 
 // 表单校验错误信息
 const errorMessage = computed(() => {
@@ -194,49 +207,50 @@ onBeforeMount(() => {
 
 // 状态初始化
 function initState() {
-  const { disabled, readonly, clearable, maxlength, showWordLimit } = props
-  showClear.value = Boolean(!disabled && !readonly && clearable && inputValue.value)
-  showWordCount.value = Boolean(!disabled && !readonly && maxlength && showWordLimit)
-  inputValue.value = formatValue(inputValue.value as string)
+  inputValue.value = formatValue(inputValue.value)
   emit('update:modelValue', inputValue.value)
 }
 
-function formatValue(value: string) {
+function formatValue(value: string | number) {
   const { maxlength, showWordLimit } = props
-  if (showWordLimit && maxlength !== -1 && value.length > maxlength) {
+  if (showWordLimit && maxlength !== -1 && String(value).length > maxlength) {
     return value.toString().substring(0, maxlength)
   }
   return value
 }
 
 function clear() {
+  clearing.value = true
+  focusing.value = false
   inputValue.value = ''
-  requestAnimationFrame()
-    .then(() => requestAnimationFrame())
-    .then(() => requestAnimationFrame())
-    .then(() => {
-      emit('change', {
-        value: ''
-      })
-      emit('update:modelValue', inputValue.value)
-      emit('clear')
-
-      requestAnimationFrame().then(() => {
-        isFocus.value = true
-      })
+  if (props.focusWhenClear) {
+    focused.value = false
+  }
+  requestAnimationFrameTimer(1, () => {
+    if (props.focusWhenClear) {
+      focused.value = true
+      focusing.value = true
+    }
+    emit('change', {
+      value: ''
     })
+    emit('update:modelValue', inputValue.value)
+    emit('clear')
+  })
 }
 // 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur
 function handleBlur({ detail }: any) {
-  isFocus.value = false
-  emit('change', {
-    value: inputValue.value
-  })
-  emit('update:modelValue', inputValue.value)
-  emit('blur', {
-    value: inputValue.value,
-    // textarea 有 cursor
-    cursor: detail.cursor ? detail.cursor : null
+  if (clearing.value) {
+    clearing.value = false
+    return
+  }
+  requestAnimationFrameTimer(3, () => {
+    focusing.value = false
+    emit('blur', {
+      value: inputValue.value,
+      // textarea 有 cursor
+      cursor: detail.cursor ? detail.cursor : null
+    })
   })
 }
 function handleFocus({ detail }: any) {
@@ -244,7 +258,7 @@ function handleFocus({ detail }: any) {
     clearing.value = false
     return
   }
-  isFocus.value = true
+  focusing.value = true
   emit('focus', detail)
 }
 // input事件需要传入

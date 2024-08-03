@@ -1,11 +1,29 @@
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 import type { FormItemRule } from '../wd-form/types'
+import type { InputClearTrigger } from '../wd-input/types'
 
 export type ConfirmType = 'send' | 'search' | 'next' | 'go' | 'done'
 
 export const textareaProps = {
   ...baseProps,
+  /**
+   * * 自定义文本域容器class名称。
+   * 类型：string
+   */
+  customTextareaContainerClass: makeStringProp(''),
+
+  /**
+   * * 自定义文本域class名称。
+   * 类型：string
+   */
+  customTextareaClass: makeStringProp(''),
+
+  /**
+   * * 自定义标签class名称。
+   * 类型：string
+   */
+  customLabelClass: makeStringProp(''),
   // 原生属性
   /**
    * * 绑定值。
@@ -254,24 +272,20 @@ export const textareaProps = {
    * 默认值：[]
    */
   rules: makeArrayProp<FormItemRule>(),
-
   /**
-   * * 自定义文本域容器class名称。
-   * 类型：string
+   * 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示
+   * 类型: "focus" | "always"
+   * 默认值: "always"
+   * 最低版本: $LOWEST_VERSION$
    */
-  customTextareaContainerClass: makeStringProp(''),
-
+  clearTrigger: makeStringProp<InputClearTrigger>('always'),
   /**
-   * * 自定义文本域class名称。
-   * 类型：string
+   * 是否在点击清除按钮时聚焦输入框
+   * 类型: boolean
+   * 默认值: true
+   * 最低版本: $LOWEST_VERSION$
    */
-  customTextareaClass: makeStringProp(''),
-
-  /**
-   * * 自定义标签class名称。
-   * 类型：string
-   */
-  customLabelClass: makeStringProp('')
+  focusWhenClear: makeBooleanProp(true)
 }
 
 export type TextareaProps = ExtractPropTypes<typeof textareaProps>

@@ -27,7 +27,7 @@
           :type="type"
           :password="showPassword && !isPwdVisible"
           v-model="inputValue"
-          :placeholder="placeholder || translate('placeholder')"
+          :placeholder="placeholderValue"
           :disabled="disabled"
           :maxlength="maxlength"
           :focus="focused"
@@ -85,7 +85,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { isDef, objToStyle, requestAnimationFrame } from '../common/util'
+import { isDef, objToStyle, requestAnimationFrameTimer } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -132,6 +132,10 @@ watch(
 )
 
 const { parent: form } = useParent(FORM_KEY)
+
+const placeholderValue = computed(() => {
+  return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
+})
 
 /**
  * 展示清空按钮
@@ -226,12 +230,12 @@ function togglePwdVisible() {
 }
 function clear() {
   clearing.value = true
-  focusing.value = false
   inputValue.value = ''
   if (props.focusWhenClear) {
     focused.value = false
   }
-  requestAnimationFrame(() => {
+  focusing.value = false
+  requestAnimationFrameTimer(1, () => {
     if (props.focusWhenClear) {
       focused.value = true
       focusing.value = true
@@ -248,7 +252,7 @@ function handleBlur() {
     clearing.value = false
     return
   }
-  requestAnimationFrame(() => {
+  requestAnimationFrameTimer(3, () => {
     focusing.value = false
     emit('blur', {
       value: inputValue.value

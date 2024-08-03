@@ -160,6 +160,9 @@ export const inputProps = {
   rules: makeArrayProp<FormItemRule>(),
   /**
    * 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示
+   * 类型: "focus" | "always"
+   * 默认值: "always"
+   * 最低版本: $LOWEST_VERSION$
    */
   clearTrigger: makeStringProp<InputClearTrigger>('always'),
   /**

@@ -40,6 +40,23 @@ const value = ref<string>('')
 <wd-textarea v-model="value" :maxlength="120" clearable show-word-limit />
 ```
 
+
+## 有值且聚焦时展示清空按钮
+设置 `clear-trigger` 属性，可以控制是否聚焦时才展示清空按钮。
+
+```html
+<wd-textarea clear-trigger="focus" v-model="value14" :maxlength="120" clearable show-word-limit />
+```
+
+## 点击清除按钮时不自动聚焦
+
+设置`focus-when-clear` 属性，可以控制点击清除按钮时是否自动聚焦。
+
+```html
+ <wd-textarea v-model="value" :focus-when-clear="false" :maxlength="120" clearable show-word-limit />
+```
+
+
 ## 高度自适应
 
 通过设置 `auto-height` 属性，实现高度自适应。
@@ -137,7 +154,9 @@ const value = ref<string>('')
 | no-border               | 非 cell 类型下是否隐藏下划线                                                                                       | boolean           | -                                | false     | -        | -   |
 | required                | cell 类型下必填样式                                                                                                | boolean           | -                                | false     | -        |
 | prop                    | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                  | string            | -                                | -         | -        |
-| rules                   | 表单验证规则                                                                                                       | `FormItemRule []` | -                                | `[]`      | -        |
+| rules                   | 表单验证规则        | `FormItemRule []` | -                                | `[]`      | -        |
+| clearTrigger | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示	 | `InputClearTrigger`	 | `focus` / `always` | `always` | $LOWEST_VERSION$ |
+| focusWhenClear | 是否在点击清除按钮时聚焦输入框 | boolean | -      | true  | $LOWEST_VERSION$   |
 
 ### FormItemRule 数据结构
 

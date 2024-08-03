@@ -439,6 +439,26 @@ export const requestAnimationFrame = (cb = () => {}) => {
 }
 
 /**
+ * 设置多少个requestAnimationFrame 之后执行回调函数
+ * @param {number} n - 执行次数
+ * @param {function} cb - 回调函数
+ */
+export const requestAnimationFrameTimer = (n: number, cb = () => {}) => {
+  let count = 0
+  const recursiveFunc = () => {
+    requestAnimationFrame(() => {
+      count++
+      if (count === n) {
+        cb()
+      } else {
+        recursiveFunc()
+      }
+    })
+  }
+  recursiveFunc()
+}
+
+/**
  * 深拷贝函数，用于将对象进行完整复制。
  * @param obj 要深拷贝的对象
  * @param cache 用于缓存已复制的对象，防止循环引用

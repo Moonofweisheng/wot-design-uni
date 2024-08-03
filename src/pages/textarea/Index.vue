@@ -12,6 +12,12 @@
     <demo-block title="清空按钮 和 字数限制" transparent>
       <wd-textarea v-model="value2" :maxlength="120" clearable show-word-limit />
     </demo-block>
+    <demo-block title="有值且聚焦时展示清空按钮" transparent>
+      <wd-textarea clear-trigger="focus" v-model="value14" :maxlength="120" clearable show-word-limit />
+    </demo-block>
+    <demo-block title="点击清除按钮时不自动聚焦" transparent>
+      <wd-textarea v-model="value15" :focus-when-clear="false" :maxlength="120" clearable show-word-limit />
+    </demo-block>
     <demo-block title="大尺寸" transparent>
       <wd-textarea v-model="value7" size="large" :maxlength="120" clearable show-word-limit></wd-textarea>
     </demo-block>
@@ -51,9 +57,10 @@ const value8 = ref<string>('只读只读只度')
 const value9 = ref<string>('')
 const value10 = ref<string>('')
 const value11 = ref<string>('禁用禁用禁用')
-
 const value12 = ref<string>('只读只读只度')
 const value13 = ref<string>('禁用禁用禁用')
+const value14 = ref<string>('')
+const value15 = ref<string>('')
 </script>
 <style lang="scss" scoped>
 .wot-theme-dark {
