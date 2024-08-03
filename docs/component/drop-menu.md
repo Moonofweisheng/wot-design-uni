@@ -112,7 +112,7 @@ function handleOpened() {
 </view>
 ```
 
-## 自定义菜单图标
+## 自定义菜单图标<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
 
 可以通过 `icon` 设置菜单右侧图标，等同于 `<wd-icon />` 的 `name` 属性。通过 `icon-size` 设置图标尺寸，等同于 `<wd-icon />` 的 `size` 属性。
 
@@ -122,22 +122,47 @@ function handleOpened() {
 </wd-drop-menu>
 ```
 
-## 自定义菜单点击事件
+## 异步打开/关闭<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
 
-可以通过 `before-toggle` 来自定义菜单点击事件，不传则默认展开菜单。
+设置 `before-toggle` 函数，在下拉菜单打开或者关闭前执行特定的逻辑，实现状态变更前校验、异步打开/关闭的目的，`before-toggle`接收 { status: 当前操作类型：true 打开下拉菜单，false 关闭下拉菜单, resolve }，可以对操作进行校验，并通过 resolve 函数告知组件是否确定通过，resolve 接受 1 个 boolean 值，resolve(true) 表示选项通过，resolve(false) 表示选项不通过，不通过时不会执行关闭或展开操作。
+
+:::warning 提示
+`before-toggle` 函数无法阻止其他`drop-menu`或其他`drop-menu-item`的展开/关闭操作，仅限当前`drop-menu-item`的展开/关闭操作。
+:::
 
 ```html
+<wd-message-box></wd-message-box>
 <wd-drop-menu>
-  <wd-drop-menu-item title="延迟 0.5s 展开" :before-toggle="handleBeforeToggle" />
+  <wd-drop-menu-item v-model="value" :options="option" :before-toggle="handleBeforeToggle" />
 </wd-drop-menu>
 ```
 
 ```typescript
-function handleBeforeToggle(showPop: boolean, toggle: () => void) {
-  console.log('当前菜单展开状态:', showPop)
 
-  // 异步展开（如果不需要展开则不调用 toggle 函数即可）
-  setTimeout(toggle, 500)
+import { useMessage } from '@/uni_modules/wot-design-uni'
+const messageBox = useMessage()
+
+const value = ref<number>(0)
+
+const option = ref<Record<string, any>>([
+  { label: '全部商品', value: 0 },
+  { label: '新款商品', value: 1 },
+  { label: '活动商品', value: 2 }
+])
+ 
+// 通过对话框确认是否打开/关闭下拉菜单
+const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
+  messageBox
+    .confirm({
+      title: `异步${status ? '打开' : '关闭'}`,
+      msg: `确定要${status ? '打开' : '关闭'}下拉菜单吗？`
+    })
+    .then(() => {
+      resolve(true)
+    })
+    .catch(() => {
+      resolve(false)
+    })
 }
 ```
 
@@ -181,7 +206,7 @@ function handleBeforeToggle(showPop: boolean, toggle: () => void) {
 | title     | 菜单标题                                                               | string          | -      | -      | -        |
 | icon      | 菜单图标                                                           | string            | -       | arrow-down | -     |
 | icon-size | 菜单图标尺寸                                                        | string            | -       | 14px | _       |
-| before-toggle | 在切换操作之前调用的函数，类型：`(showPop: boolean, toggle: () => void) => void`，其中 `showPop` 为当前菜单展开状态 | function          | -       | -      | -      |
+| before-toggle | 下拉菜单打开或者关闭前触发，`reslove(true)`时继续执行打开或关闭操作 | function({ status, resolve })          | -       | -      | $LOWEST_VERSION$      |
 | value-key | 选项对象中，value 对应的 key                                           | string          | -      | value  | -        |
 | label-key | 选项对象中，展示的文本对应的 key                                       | string          | -      | label  | -        |
 | tip-key   | 选项对象中，选项说明对应的 key                                         | string          | -      | tip    | -        |
