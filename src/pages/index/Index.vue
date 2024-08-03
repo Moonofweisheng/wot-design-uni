@@ -287,6 +287,10 @@ const list = ref([
         name: 'CountDown 倒计时'
       },
       {
+        id: 'statistic',
+        name: 'Statistic 数值显示'
+      },
+      {
         id: 'numberKeyboard',
         name: 'NumberKeyboard 数字键盘'
       }
