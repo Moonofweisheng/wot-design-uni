@@ -29,6 +29,7 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { textProps } from './types'
+import { isNumber } from '../common/util'
 import { requestAnimationFrame, cancelAnimationFrame } from './requestAnimationFrame'
 
 // 获取组件的 props 和 emit 函数
@@ -129,7 +130,7 @@ function pause() {
 function resume() {
   if (isAnimationEnded) {
     // 如果动画已经结束，重置并重新开始动画
-    start(localStartVal)
+    start(localStartVal.value)
     return
   }
   startTime = null
@@ -156,9 +157,9 @@ function count(timestamp_e: number) {
 
   if (props.useEasing) {
     if (countDown) {
-      printVal = localStartVal.value - easingFn(progress, 0, localStartVal.value - props.endVal, localDuration) || 0
+      printVal = localStartVal.value - easingFn(progress, 0, localStartVal.value - props.endVal, localDuration.value) || 0
     } else {
-      printVal = easingFn(progress, localStartVal, props.endVal - localStartVal.value, localDuration)
+      printVal = easingFn(progress, localStartVal.value, props.endVal - localStartVal.value, localDuration.value)
     }
   } else {
     if (countDown) {
@@ -185,26 +186,26 @@ function count(timestamp_e: number) {
   }
 }
 
-// 判断是否为数字
-function isNumber(val: any): boolean {
-  return !isNaN(parseFloat(val))
-}
-
 // 格式化数字
-function formatNumber(num: number): string {
+function formatNumber(num: any): string {
+  if (typeof num !== 'number') {
+    num = parseFloat(num)
+    if (isNaN(num)) {
+      return '0'
+    }
+  }
   num = num.toFixed(props.decimals)
-  num += ''
-  const x = num.split('.')
-  let x1 = x[0]
-  const x2 = x.length > 1 ? props.decimal + x[1] : ''
+  const parts = num.split('.')
+  let integerPart = parts[0]
+  const decimalPart = parts.length > 1 ? props.decimal + parts[1] : ''
   const rgx = /(\d+)(\d{3})/
 
   if (props.separator && !isNumber(props.separator)) {
-    while (rgx.test(x1)) {
-      x1 = x1.replace(rgx, '$1' + props.separator + '$2')
+    while (rgx.test(integerPart)) {
+      integerPart = integerPart.replace(rgx, '$1' + props.separator + '$2')
     }
   }
-  return x1 + x2
+  return integerPart + decimalPart
 }
 
 // 对外暴露的方法

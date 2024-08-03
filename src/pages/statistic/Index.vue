@@ -5,18 +5,9 @@
     </demo-block>
 
     <demo-block title="插槽">
-      <wd-statistic prefix="￥" :startVal="0" :decimals="2" :endVal="186.321" :fontSize="32" suffix="%" color="#1e9fff"></wd-statistic>
-      <wd-statistic prefix="￥" :startVal="0" :decimals="2" :endVal="21286.321" :fontSize="32" suffix="%" color="#ff5722"></wd-statistic>
-      <wd-statistic
-        prefix="￥"
-        :startVal="0"
-        :decimals="2"
-        :endVal="21286.321"
-        :fontSize="32"
-        suffix="%"
-        color="#ffb800"
-        :duration="2000"
-      ></wd-statistic>
+      <wd-statistic prefix="￥" :decimals="2" :endVal="186.321" :fontSize="32" suffix="%" color="#1e9fff"></wd-statistic>
+      <wd-statistic prefix="￥" :decimals="2" :endVal="21286.321" :fontSize="32" suffix="%" color="#ff5722"></wd-statistic>
+      <wd-statistic prefix="￥" :decimals="2" :endVal="21286.321" :fontSize="32" suffix="%" color="#ffb800" :duration="2000"></wd-statistic>
     </demo-block>
 
     <demo-block title="ref方法">
