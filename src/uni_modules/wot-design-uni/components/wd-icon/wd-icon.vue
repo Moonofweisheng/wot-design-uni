@@ -1,6 +1,6 @@
 <template>
   <view @click="handleClick" :class="rootClass" :style="rootStyle">
-    <image v-if="isImageUrl" class="wd-icon__image" :src="name"></image>
+    <image v-if="isImage" class="wd-icon__image" :src="name"></image>
   </view>
 </template>
 
@@ -16,35 +16,29 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
-import { objToStyle } from '../common/util'
+import { computed, type CSSProperties } from 'vue'
+import { addUnit, isDef, objToStyle, isImageUrl } from '../common/util'
 import { iconProps } from './types'
 
 const props = defineProps(iconProps)
-const emit = defineEmits(['click'])
+const emit = defineEmits(['click', 'touch'])
 
-const isImageUrl = ref<boolean>(false)
-
-watch(
-  () => props.name,
-  (val) => {
-    isImageUrl.value = val.indexOf('/') > -1
-  },
-  { deep: true, immediate: true }
-)
+const isImage = computed(() => {
+  return isDef(props.name) && isImageUrl(props.name)
+})
 
 const rootClass = computed(() => {
   const prefix = props.classPrefix
-  return `${prefix} ${props.customClass} ${isImageUrl.value ? 'wd-icon--image' : prefix + '-' + props.name}`
+  return `${prefix} ${props.customClass} ${isImage.value ? 'wd-icon--image' : prefix + '-' + props.name}`
 })
 
 const rootStyle = computed(() => {
-  const style: Record<string, any> = {}
+  const style: CSSProperties = {}
   if (props.color) {
     style['color'] = props.color
   }
   if (props.size) {
-    style['font-size'] = props.size
+    style['font-size'] = addUnit(props.size)
   }
   return `${objToStyle(style)}; ${props.customStyle}`
 })
