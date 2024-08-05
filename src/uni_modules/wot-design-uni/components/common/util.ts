@@ -439,23 +439,17 @@ export const requestAnimationFrame = (cb = () => {}) => {
 }
 
 /**
- * 设置多少个requestAnimationFrame 之后执行回调函数
- * @param {number} n - 执行次数
- * @param {function} cb - 回调函数
+ * 暂停指定时间函数
+ * @param ms 延迟时间
+ * @returns
  */
-export const requestAnimationFrameTimer = (n: number, cb = () => {}) => {
-  let count = 0
-  const recursiveFunc = () => {
-    requestAnimationFrame(() => {
-      count++
-      if (count === n) {
-        cb()
-      } else {
-        recursiveFunc()
-      }
-    })
-  }
-  recursiveFunc()
+export const pause = (ms: number) => {
+  return new AbortablePromise((resolve) => {
+    const timer = setTimeout(() => {
+      clearTimeout(timer)
+      resolve(true)
+    }, ms)
+  })
 }
 
 /**

@@ -47,7 +47,7 @@
 
       <view v-if="readonly" class="wd-textarea__readonly-mask" />
       <view class="wd-textarea__suffix">
-        <wd-icon v-if="showClear" custom-class="wd-textarea__clear" name="error-fill" @click="clear" />
+        <wd-icon v-if="showClear" custom-class="wd-textarea__clear" name="error-fill" @click="handleClear" />
         <view v-if="showWordCount" class="wd-textarea__count">
           <text :class="countClass">
             {{ currentLength }}
@@ -72,7 +72,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { objToStyle, requestAnimationFrameTimer, isDef } from '../common/util'
+import { objToStyle, requestAnimationFrame, isDef, pause } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -219,14 +219,14 @@ function formatValue(value: string | number) {
   return value
 }
 
-function clear() {
+function handleClear() {
   clearing.value = true
   focusing.value = false
   inputValue.value = ''
   if (props.focusWhenClear) {
     focused.value = false
   }
-  requestAnimationFrameTimer(1, () => {
+  requestAnimationFrame(() => {
     if (props.focusWhenClear) {
       focused.value = true
       focusing.value = true
@@ -238,19 +238,19 @@ function clear() {
     emit('clear')
   })
 }
-// 失去焦点时会先后触发change、blur，未输入内容但失焦不触发 change 只触发 blur
-function handleBlur({ detail }: any) {
+async function handleBlur({ detail }: any) {
+  // 等待100毫秒，clear执行完毕
+  await pause(100)
+
   if (clearing.value) {
     clearing.value = false
     return
   }
-  requestAnimationFrameTimer(3, () => {
-    focusing.value = false
-    emit('blur', {
-      value: inputValue.value,
-      // textarea 有 cursor
-      cursor: detail.cursor ? detail.cursor : null
-    })
+
+  focusing.value = false
+  emit('blur', {
+    value: inputValue.value,
+    cursor: detail.cursor ? detail.cursor : null
   })
 }
 function handleFocus({ detail }: any) {
@@ -261,7 +261,6 @@ function handleFocus({ detail }: any) {
   focusing.value = true
   emit('focus', detail)
 }
-// input事件需要传入
 function handleInput({ detail }: any) {
   inputValue.value = formatValue(inputValue.value as string)
   emit('update:modelValue', inputValue.value)
