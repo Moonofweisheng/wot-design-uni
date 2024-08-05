@@ -248,8 +248,8 @@ function handleClear() {
   })
 }
 async function handleBlur() {
-  // 等待100毫秒，clear执行完毕
-  await pause(100)
+  // 等待150毫秒，clear执行完毕
+  await pause(150)
   if (clearing.value) {
     clearing.value = false
     return
@@ -260,10 +260,6 @@ async function handleBlur() {
   })
 }
 function handleFocus({ detail }: any) {
-  if (clearing.value) {
-    clearing.value = false
-    return
-  }
   focusing.value = true
   emit('focus', detail)
 }
