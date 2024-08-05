@@ -44,6 +44,11 @@ const value = ref<string>('')
 ## 有值且聚焦时展示清空按钮
 设置 `clear-trigger` 属性，可以控制是否聚焦时才展示清空按钮。
 
+:::warning 注意
+支付宝小程序暂不支持 `clear-trigger` 属性，且某种情况下清空按钮无法点击，原因参考此[issue](https://github.com/ant-design/ant-design-mini/issues/1255)（希望可以早点解决，所以直接给蚂蚁的组件库提了个issue）。
+:::
+
+
 ```html
 <wd-textarea clear-trigger="focus" v-model="value14" :maxlength="120" clearable show-word-limit />
 ```
