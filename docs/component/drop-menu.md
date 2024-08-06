@@ -112,7 +112,7 @@ function handleOpened() {
 </view>
 ```
 
-## 自定义菜单图标<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+## 自定义菜单图标<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.7</el-tag>
 
 可以通过 `icon` 设置菜单右侧图标，等同于 `<wd-icon />` 的 `name` 属性。通过 `icon-size` 设置图标尺寸，等同于 `<wd-icon />` 的 `size` 属性。
 
@@ -122,7 +122,7 @@ function handleOpened() {
 </wd-drop-menu>
 ```
 
-## 异步打开/关闭<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+## 异步打开/关闭<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.7</el-tag>
 
 设置 `before-toggle` 函数，在下拉菜单打开或者关闭前执行特定的逻辑，实现状态变更前校验、异步打开/关闭的目的，`before-toggle`接收 { status: 当前操作类型：true 打开下拉菜单，false 关闭下拉菜单, resolve }，可以对操作进行校验，并通过 resolve 函数告知组件是否确定通过，resolve 接受 1 个 boolean 值，resolve(true) 表示选项通过，resolve(false) 表示选项不通过，不通过时不会执行关闭或展开操作。
 
@@ -206,7 +206,7 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 | title     | 菜单标题                                                               | string          | -      | -      | -        |
 | icon      | 菜单图标                                                           | string            | -       | arrow-down | -     |
 | icon-size | 菜单图标尺寸                                                        | string            | -       | 14px | _       |
-| before-toggle | 下拉菜单打开或者关闭前触发，`reslove(true)`时继续执行打开或关闭操作 | function({ status, resolve })          | -       | -      | $LOWEST_VERSION$      |
+| before-toggle | 下拉菜单打开或者关闭前触发，`reslove(true)`时继续执行打开或关闭操作 | function({ status, resolve })          | -       | -      | 1.3.7      |
 | value-key | 选项对象中，value 对应的 key                                           | string          | -      | value  | -        |
 | label-key | 选项对象中，展示的文本对应的 key                                       | string          | -      | label  | -        |
 | tip-key   | 选项对象中，选项说明对应的 key                                         | string          | -      | tip    | -        |

@@ -160,8 +160,8 @@ const value = ref<string>('')
 | required                | cell 类型下必填样式                                                                                                | boolean           | -                                | false     | -        |
 | prop                    | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                  | string            | -                                | -         | -        |
 | rules                   | 表单验证规则        | `FormItemRule []` | -                                | `[]`      | -        |
-| clearTrigger | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示	 | `InputClearTrigger`	 | `focus` / `always` | `always` | $LOWEST_VERSION$ |
-| focusWhenClear | 是否在点击清除按钮时聚焦输入框 | boolean | -      | true  | $LOWEST_VERSION$   |
+| clearTrigger | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示	 | `InputClearTrigger`	 | `focus` / `always` | `always` | 1.3.7 |
+| focusWhenClear | 是否在点击清除按钮时聚焦输入框 | boolean | -      | true  | 1.3.7   |
 
 ### FormItemRule 数据结构
 

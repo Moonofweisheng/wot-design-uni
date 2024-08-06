@@ -653,8 +653,8 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | ellipsis               | 是否超出隐藏                                                                                                                   | boolean           | -      | false   | -        |
 | prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                              | string            | -      | -       | -        |
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                            | `FormItemRule []` | -      | `[]`    | -        |
-| lineWidth     | 底部条宽度，单位像素             | number          | -      | -     | $LOWEST_VERSION$        |
-| lineHeight    | 底部条高度，单位像素             | number          | -      | -      | $LOWEST_VERSION$        |
+| lineWidth     | 底部条宽度，单位像素             | number          | -      | -     | 1.3.7        |
+| lineHeight    | 底部条高度，单位像素             | number          | -      | -      | 1.3.7        |
 
 ### FormItemRule 数据结构
 
