@@ -1,7 +1,7 @@
 <template>
   <view :class="`wd-form ${customClass}`" :style="customStyle">
     <slot></slot>
-    <wd-toast v-if="props.errorType === 'toast'" />
+    <wd-toast v-if="props.errorType === 'toast'" selector="wd-form-toast" />
   </view>
 </template>
 
@@ -23,7 +23,7 @@ import { useChildren } from '../composables/useChildren'
 import { useToast } from '../wd-toast'
 import { type FormRules, FORM_KEY, type ErrorMessage, formProps, type FormExpose } from './types'
 
-const toast = useToast()
+const toast = useToast('wd-form-toast')
 const props = defineProps(formProps)
 
 const { children, linkChildren } = useChildren(FORM_KEY)
