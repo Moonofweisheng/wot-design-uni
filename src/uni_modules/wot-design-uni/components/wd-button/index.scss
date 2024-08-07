@@ -180,6 +180,10 @@
       }
     }
 
+    @include when(block) {
+      border-radius: $-button-medium-radius;
+    }
+    
     .wd-button__loading {
       width: $-button-medium-loading;
       height: $-button-medium-loading;
