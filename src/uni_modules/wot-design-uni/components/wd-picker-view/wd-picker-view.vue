@@ -78,8 +78,9 @@ const { proxy } = getCurrentInstance() as any
  * @param {String|Number|Boolean|Array<String|Number|Boolean|Array<any>>}value
  */
 function selectWithValue(value: string | number | boolean | number[] | string[] | boolean[]) {
-  if (formatColumns.value.length === 0) return
-
+  if (formatColumns.value.length === 0 || (formatColumns.value.length === 1 && formatColumns.value[0].length === 0)) {
+    return
+  }
   // 使其默认选中首项
   if (value === '' || !isDef(value) || (isArray(value) && value.length === 0)) {
     value = formatColumns.value.map((col) => {
@@ -120,6 +121,7 @@ function selectWithValue(value: string | number | boolean | number[] | string[] 
 function correctSelected(value: number[]) {
   let selected = deepClone(value)
   value.forEach((row, col) => {
+    if (formatColumns.value[col].length === 0) return
     row = range(row, 0, formatColumns.value[col].length - 1)
     selected = correctSelectedIndex(col, row, selected)
   })
@@ -211,6 +213,7 @@ function getChangeDiff(value: number[]) {
   let selected: number[] = deepClone(selectedIndex.value)
 
   value.forEach((row, col) => {
+    if (formatColumns.value[0].length === 0) return
     row = range(row, 0, formatColumns.value[col].length - 1)
     if (row === origin[col]) return
     selected = correctSelectedIndex(col, row, selected)
@@ -266,6 +269,11 @@ function getSelects() {
  */
 function getValues() {
   const { valueKey } = props
+  // columns 为空时，直接抛出 undefined
+  if (formatColumns.value[0].length === 0) {
+    return undefined
+  }
+
   const values = selectedIndex.value.map((row, col) => {
     return formatColumns.value[col][row][valueKey]
   })
