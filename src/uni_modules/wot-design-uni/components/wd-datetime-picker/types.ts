@@ -156,6 +156,10 @@ export const datetimePickerProps = {
    */
   rules: makeArrayProp<FormItemRule>(),
   /**
+   * picker cell 外部自定义样式
+   */
+  customCellClass: makeStringProp(''),
+  /**
    * pickerView 外部自定义样式
    */
   customViewClass: makeStringProp(''),
