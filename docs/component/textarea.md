@@ -129,7 +129,7 @@ const value = ref<string>('')
 | placeholderStyle        | 原生属性，指定 placeholder 的样式                                                                                  | string            | -                                | -         | -        |
 | placeholderClass        | 原生属性，指定 placeholder 的样式类                                                                                | string            | -                                | -         | -        |
 | disabled                | 原生属性，禁用                                                                                                     | boolean           | -                                | false     | -        |
-| maxlength               | 原生属性，最大输入长度，设置为 -1 的时候不限制最大长度                                                             | string            | -                                | -         | -        |
+| maxlength               | 原生属性，最大输入长度，设置为 -1 的时候不限制最大长度                                                             | number            | -                                | -         | -        |
 | auto-focus              | 原生属性，自动聚焦，拉起键盘。                                                                                     | boolean           | -                                | false     | -        |
 | focus                   | 原生属性，获取焦点                                                                                                 | boolean           | -                                | false     | -        |
 | auto-height             | 原生属性，是否自动增高，设置 auto-height 时，style.height 不生效                                                   | boolean           | -                                | false     | -        |
