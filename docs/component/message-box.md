@@ -229,7 +229,7 @@ MessageBox.prompt(options)
 | inputError        | 当 type 为 prompt 时，输入框检验不通过时的错误提示文案        | string          | -                        | 输入的数据不合法 | -        |
 | confirmButtonText | 确定按钮文案                                                  | string          | -                        | 确定             | -        |
 | cancelButtonText  | 取消按钮文案                                                  | string          | -                        | 取消             | -        |
-| selector          | 组件的 id                                                     | string          | -                        | #wd-message-box  | -        |
+| selector          | 指定唯一标识                                                 | string          | -                        | #wd-message-box  | -        |
 | zIndex            | 弹窗层级                                                      | number          | -                        | 99               | -    |
 | lazyRender        | 弹层内容懒渲染，触发展示时才渲染内容                          | boolean         | -                        | true             | -    |
 
