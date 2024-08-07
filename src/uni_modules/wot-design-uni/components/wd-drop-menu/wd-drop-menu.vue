@@ -56,7 +56,7 @@ linkChildren({ props, fold, offset })
 watch(
   () => props.direction,
   (newValue) => {
-    if (['up', 'down'].includes(newValue)) {
+    if (!['up', 'down'].includes(newValue)) {
       // eslint-disable-next-line quotes
       console.error("[wot design] warning(wd-drop-menu): direction must be 'up' or 'down'")
     }
