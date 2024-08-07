@@ -115,6 +115,7 @@ toast.close()
 | zIndex       | toast 层级                                                                  | number     | -                         | 100                    | -        |
 | loadingType  | [加载中图标类型](/component/loading)                                        | string     | ring                      | outline                | -        |
 | loadingColor | [加载中图标颜色](/component/loading)                                        | string     | -                         | #4D80F0                | -        |
+| selector     | 组件的 id                                                     | string          | -                        | -  | -        |
 | cover        | 是否存在一个透明遮罩                                                        | boolean    | -                         | `loading`时默认为 true | 1.2.15   |
 | opened       | 完全展示后的回调函数                                                        | `Function` | -                         | -                      | 1.2.15   |
 | closed       | 完全关闭后的回调函数                                                        | `Function` | -                         | -                      | 1.2.15   |
