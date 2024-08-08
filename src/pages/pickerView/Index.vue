@@ -23,6 +23,12 @@
     <demo-block :title="`多级联动，数值: [${value5}]`">
       <wd-picker-view v-model="value5" :columns="columns5" :column-change="onChangeDistrict" @change="(e) => onChange(5, e)" />
     </demo-block>
+
+    <demo-block :title="`只有一项数据,数值: [${value7}]`">
+      <wd-picker-view ref="picker7" v-model="value7" :columns="storeList" label-key="storeName" value-key="storeId" />
+      <button @click="getList">getList</button>
+      <button @click="getSelects">getSelects</button>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -118,6 +124,27 @@ function onChange(index: number, e: any) {
     // toast.show(`当前选中项: ${value}, 下标: ${index}`)
   }
   // this.setData({ [`value${dataset.index}`]: value })
+}
+
+const value7 = ref<string>('')
+const storeList = ref<
+  {
+    storeId: number
+    storeName: string
+  }[]
+>([])
+const getList = () => {
+  storeList.value = [
+    {
+      storeId: 21,
+      storeName: 'aaa'
+    }
+  ]
+}
+const picker7 = ref()
+const getSelects = () => {
+  console.log(picker7.value.getValues())
+  console.log(picker7.value.getSelects())
 }
 </script>
 <style lang="scss" scoped></style>
