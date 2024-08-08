@@ -6,8 +6,8 @@
         <wd-icon name="arrow-down" :custom-class="`wd-collapse-item__arrow ${expanded ? 'is-retract' : ''}`" />
       </slot>
     </view>
-    <view class="wd-collapse-item__wrapper" :style="contentStyle">
-      <view class="wd-collapse-item__body">
+    <view class="wd-collapse-item__wrapper" :style="contentStyle" @transitionend="handleTransitionEnd">
+      <view class="wd-collapse-item__body" :id="collapseId">
         <slot />
       </view>
     </view>
@@ -25,23 +25,21 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
-import { getRect, isArray, isDef, isPromise, objToStyle } from '../common/util'
+import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties } from 'vue'
+import { addUnit, getRect, isArray, isDef, isPromise, objToStyle, requestAnimationFrame, uuid } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { COLLAPSE_KEY } from '../wd-collapse/types'
 import { collapseItemProps, type CollapseItemExpose } from './types'
 
-const $body = '.wd-collapse-item__body'
+const collapseId = ref<string>(`collapseId${uuid()}`)
 
 const props = defineProps(collapseItemProps)
 
 const { parent: collapse, index } = useParent(COLLAPSE_KEY)
 
 const height = ref<string | number>('')
-
+const inited = ref<boolean>(false)
 const expanded = ref<boolean>(false)
-
-const transD = ref<string>('0.3s')
 const { proxy } = getCurrentInstance() as any
 
 /**
@@ -55,9 +53,14 @@ const isFirst = computed(() => {
  * 容器样式，(动画)
  */
 const contentStyle = computed(() => {
-  let style: Record<string, string> = {
-    height: expanded.value ? height.value + 'px' : '0px',
-    'transition-duration': transD.value
+  const style: CSSProperties = {}
+  if (inited.value) {
+    style.transition = 'height 0.3s ease-in-out'
+  }
+  if (!expanded.value) {
+    style.height = '0px'
+  } else if (height.value) {
+    style.height = addUnit(height.value)
   }
   return objToStyle(style)
 })
@@ -72,21 +75,11 @@ const selected = computed(() => {
 
 watch(
   () => selected.value,
-  (newVal) => {
-    const name = props.name
-    if (isDef(newVal)) {
-      if (typeof newVal === 'string' && newVal === name) {
-        doResetHeight($body)
-        expanded.value = true
-      } else if (isArray(newVal) && newVal.indexOf(name as string) >= 0) {
-        doResetHeight($body)
-        expanded.value = true
-      } else {
-        expanded.value = false
-      }
-    } else {
-      expanded.value = false
+  () => {
+    if (!inited.value) {
+      return
     }
+    updateExpend()
   },
   {
     deep: true,
@@ -95,27 +88,38 @@ watch(
 )
 
 onMounted(() => {
-  init()
+  updateExpend()
 })
 
-/**
- * 初始化将组件信息注入父组件
- */
-function init() {
-  doResetHeight($body)
+function updateExpend() {
+  return getRect(`#${collapseId.value}`, false, proxy).then((rect) => {
+    const { height: rectHeight } = rect
+    height.value = isDef(rectHeight) ? Number(rectHeight) : ''
+    const name = props.name
+    requestAnimationFrame(() => {
+      if (isDef(selected.value)) {
+        if (
+          (typeof selected.value === 'string' && selected.value === name) ||
+          (isArray(selected.value) && selected.value.indexOf(name as string) >= 0)
+        ) {
+          expanded.value = true
+        } else {
+          expanded.value = false
+        }
+      } else {
+        expanded.value = false
+      }
+      if (!inited.value) {
+        inited.value = true
+      }
+    })
+  })
 }
 
-/**
- * 控制折叠面板滚动
- * @param {String} select 选择器名称
- * @param {Boolean} firstRender 是否首次渲染
- */
-function doResetHeight(select: string) {
-  getRect(select, false, proxy).then((rect) => {
-    if (!rect) return
-    const { height: rectHeight } = rect
-    height.value = Number(rectHeight)
-  })
+function handleTransitionEnd() {
+  if (expanded.value) {
+    height.value = ''
+  }
 }
 
 // 点击子项
