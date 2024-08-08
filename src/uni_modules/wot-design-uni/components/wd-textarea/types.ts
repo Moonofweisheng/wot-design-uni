@@ -60,7 +60,7 @@ export const textareaProps = {
 
   /**
    * * 最大输入长度，设置为-1表示不限制最大长度。
-   * 类型：string
+   * 类型：number
    * 默认值：-1
    */
   maxlength: makeNumberProp(-1),
