@@ -1,7 +1,6 @@
 <frame/>
 
-#  InputNumber 计数器
-
+# InputNumber 计数器
 
 ## 基本用法
 
@@ -49,7 +48,6 @@ function handleChange1({ value }) {
 ```html
 <wd-input-number v-model="value" @change="handleChange" disable-input />
 ```
-
 
 ## 无输入框
 
@@ -117,18 +115,23 @@ function handleChange1({ value }) {
 | disable-plus | 禁用增加按钮 | boolean | - | false | 0.2.14 |
 | disable-minus | 禁用减少按钮 | boolean | - | false | 0.2.14 |
 
-
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 |---------|-----|-----|---------|
-| change | 值修改事件 | ` { value }` | - |
-| focus | 输入框获取焦点事件 | ` { value, height }` | - |
-| blur | 输入框失去焦点事件 | ` { value }` | - |
+| change | 值修改事件 | `{ value }` | - |
+| focus | 输入框获取焦点事件 | `{ value, height }` | - |
+| blur | 输入框失去焦点事件 | `{ value }` | - |
+
+## Slots
+
+| name   | 说明                 | 参数                    | 最低版本 |
+| ------ | -------------------- | ----------------------- | -------- |
+| left-icon  | 左侧图标         | `{ value }` | $LOWEST_VERSION$   |
+| right-icon  | 右侧图标         | `{ value }` | $LOWEST_VERSION$   |
 
 ## 外部样式类
 
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
 | custom-class | 根节点样式 | - |
-
