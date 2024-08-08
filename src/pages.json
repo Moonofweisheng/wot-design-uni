@@ -713,6 +713,16 @@
       }
     },
     {
+      "path": "pages/form/demo4",
+      "name": "formDemo4",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "校验提示方式"
+      }
+    },
+    {
       "path": "pages/fab/Index",
       "name": "fab",
       "style": {
