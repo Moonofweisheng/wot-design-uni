@@ -85,6 +85,78 @@ function handleSubmit1() {
 
 :::
 
+## 校验错误提示方式
+
+1. `message`：默认为输入框下方用文字进行提示
+2. `toast`：以"toast"提示的方式弹出错误信息，每次只弹出最前面的那个表单域的错误信息
+3. `none`：不会进行任何提示
+
+::: details 错误提示方式
+::: code-group
+
+```html [vue]
+<wd-form ref="form" :model="model" :errorType="errorType">
+  <wd-cell-group border>
+    <wd-input
+      label="用户名"
+      label-width="100px"
+      prop="value1"
+      clearable
+      v-model="model.value1"
+      placeholder="请输入用户名"
+      :rules="[{ required: true, message: '请填写用户名' }]"
+    />
+    <wd-input
+      label="密码"
+      label-width="100px"
+      prop="value2"
+      show-password
+      clearable
+      v-model="model.value2"
+      placeholder="请输入密码"
+      :rules="[{ required: true, message: '请填写密码' }]"
+    />
+  </wd-cell-group>
+  <view class="footer">
+    <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
+  </view>
+</wd-form>
+```
+
+```typescript [typescript]
+<script lang="ts" setup>
+const { success: showSuccess } = useToast()
+const errorType = ref<string>('message')
+const model = reactive<{
+  value1: string
+  value2: string
+}>({
+  value1: '',
+  value2: ''
+})
+
+const form = ref()
+
+function handleSubmit1() {
+  form.value
+    .validate()
+    .then(({ valid, errors }) => {
+      if (valid) {
+        showSuccess({
+          msg: '校验通过'
+        })
+      }
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+    })
+}
+</script>
+```
+
+
+:::
+
 ## 校验规则
 
 本章节演示四种自定义校验及提示规则：`正则校验`、`函数校验`、`函数返回错误提示`和`异步函数校验`。
@@ -849,6 +921,7 @@ function handleIconClick() {
 | model | 表单数据对象 | `Record<string, any>` | -      | -      | 0.2.0    |
 | rules | 表单验证规则 | `FormRules`           | -      | -      | 0.2.0    |
 | resetOnChange | 表单数据变化时是否重置表单提示信息（设置为false时需要开发者单独对变更项进行校验） | `boolean` | -      | `true`   | 0.2.16 |
+| errorType | 校验错误提示方式 | `toast/message/none` | -      | `message`   | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 
