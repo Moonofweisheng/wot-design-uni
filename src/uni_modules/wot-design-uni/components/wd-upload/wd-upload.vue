@@ -45,20 +45,25 @@
         </view>
       </view>
 
-      <view v-if="file.status !== 'success'" class="wd-upload__mask wd-upload__status-content">
+      <view v-if="file[props.statusKey] !== 'success'" class="wd-upload__mask wd-upload__status-content">
         <!-- loading时展示loading图标和进度 -->
-        <view v-if="file.status === 'loading'" class="wd-upload__status-content">
+        <view v-if="file[props.statusKey] === 'loading'" class="wd-upload__status-content">
           <wd-loading :type="loadingType" :size="loadingSize" :color="loadingColor" />
           <text class="wd-upload__progress-txt">{{ file.percent }}%</text>
         </view>
         <!-- 失败时展示失败图标以及失败信息 -->
-        <view v-if="file.status === 'fail'" class="wd-upload__status-content">
+        <view v-if="file[props.statusKey] === 'fail'" class="wd-upload__status-content">
           <wd-icon name="close-outline" custom-class="wd-upload__icon"></wd-icon>
           <text class="wd-upload__progress-txt">{{ file.error || translate('error') }}</text>
         </view>
       </view>
       <!-- 上传状态为上传中时不展示移除按钮 -->
-      <wd-icon v-if="file.status !== 'loading' && !disabled" name="error-fill" custom-class="wd-upload__close" @click="removeFile(index)"></wd-icon>
+      <wd-icon
+        v-if="file[props.statusKey] !== 'loading' && !disabled"
+        name="error-fill"
+        custom-class="wd-upload__close"
+        @click="removeFile(index)"
+      ></wd-icon>
     </view>
 
     <block v-if="showUpload">
@@ -93,11 +98,36 @@ import { computed, ref, watch } from 'vue'
 import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
-import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
+import {
+  uploadProps,
+  type UploadFileItem,
+  type ChooseFile,
+  type UploadExpose,
+  type UploadErrorEvent,
+  type UploadChangeEvent,
+  type UploadSuccessEvent,
+  type UploadProgressEvent,
+  type UploadOversizeEvent,
+  type UploadRemoveEvent
+} from './types'
 import type { VideoPreviewInstance } from '../wd-video-preview/types'
 
 const props = defineProps(uploadProps)
-const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
+
+const emit = defineEmits<{
+  (e: 'fail', value: UploadErrorEvent): void
+  (e: 'change', value: UploadChangeEvent): void
+  (e: 'success', value: UploadSuccessEvent): void
+  (e: 'progress', value: UploadProgressEvent): void
+  (e: 'oversize', value: UploadOversizeEvent): void
+  (e: 'chooseerror', value: any): void
+  (e: 'remove', value: UploadRemoveEvent): void
+  (e: 'update:fileList', value: UploadFileItem[]): void
+}>()
+
+defineExpose<UploadExpose>({
+  submit: () => startUploadFiles().then()
+})
 
 const { translate } = useTranslate('upload')
 
@@ -216,6 +246,10 @@ watch(
   }
 )
 
+function emitFileList() {
+  emit('update:fileList', uploadFiles.value)
+}
+
 /**
  * 获取图片信息
  * @param img
@@ -239,32 +273,60 @@ function getImageInfo(img: string) {
  * @param {Object} file 上传的文件
  */
 function initFile(file: ChooseFile) {
+  const { statusKey } = props
   // 状态初始化
   const initState: UploadFileItem = {
     uid: context.id++,
     // 仅h5支持 name
     name: file.name || '',
     thumb: file.thumb || '',
-    status: 'loading',
+    [statusKey]: 'pending',
     size: file.size || 0,
     url: file.path,
     percent: 0
   }
 
   uploadFiles.value.push(initState)
+  if (props.autoUpload) {
+    startUploadFiles().then()
+  }
+}
 
-  const { buildFormData, formData = {} } = props
+/**
+ * @description 开始上传文件
+ */
+async function startUploadFiles() {
+  const { buildFormData, formData = {}, statusKey, uploadMethod } = props
 
-  if (buildFormData) {
-    buildFormData({
-      file: initState,
-      formData,
-      resolve: (formData: Record<string, any>) => {
-        formData && handleUpload(initState, formData)
+  for (const uploadFile of uploadFiles.value) {
+    // 仅开始未上传的文件
+    if (uploadFile[statusKey] == 'pending') {
+      let data = formData
+
+      if (buildFormData) {
+        data = await new Promise((resolve, reject) => {
+          buildFormData({
+            file: uploadFile,
+            formData,
+            resolve: (formData: Record<string, any>) => {
+              resolve(formData)
+            }
+          })
+        })
       }
-    })
-  } else {
-    handleUpload(initState, formData)
+      if (uploadMethod) {
+        try {
+          uploadFile[statusKey] = 'loading'
+          await uploadMethod(uploadFile, data)
+          uploadFile[statusKey] = 'success'
+        } catch (e) {
+          console.error('[wot-design]Error: error when invoking custom upload method', e)
+          uploadFile[statusKey] = 'fail'
+        }
+      } else {
+        await handleUpload(uploadFile, data)
+      }
+    }
   }
 }
 
@@ -281,6 +343,7 @@ function handleError(err: Record<string, any>, file: UploadFileItem, formData: R
     uploadFiles.value[index].error = err.message
     uploadFiles.value[index].response = err
     emit('fail', { error: err, file, formData })
+    emitFileList()
   }
 }
 
@@ -297,6 +360,7 @@ function handleSuccess(res: Record<string, any>, file: UploadFileItem, formData:
     uploadFiles.value[index].response = res.data
     emit('change', { fileList: uploadFiles.value })
     emit('success', { file, fileList: uploadFiles.value, formData })
+    emitFileList()
   }
 }
 
@@ -305,7 +369,7 @@ function handleSuccess(res: Record<string, any>, file: UploadFileItem, formData:
  * @param {Object} res 接口返回信息
  * @param {Object} file 上传的文件
  */
-function handleProgress(res: Record<string, any>, file: UploadFileItem) {
+function handleProgress(res: UniApp.OnProgressUpdateResult, file: UploadFileItem) {
   const index = uploadFiles.value.findIndex((item) => item.uid === file.uid)
   if (index > -1) {
     uploadFiles.value[index].percent = res.progress
@@ -318,39 +382,46 @@ function handleProgress(res: Record<string, any>, file: UploadFileItem) {
  * @param {Object} file 上传的文件
  */
 function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
-  const { action, name, header = {}, accept } = props
+  const { action, name, header = {}, accept, statusKey } = props
   const statusCode = isDef(props.successStatus) ? props.successStatus : 200
-  const uploadTask = uni.uploadFile({
-    url: action,
-    header,
-    name,
-    fileName: name,
-    fileType: accept as 'image' | 'video' | 'audio',
-    formData,
-    filePath: file.url,
-    success(res) {
-      if (res.statusCode === statusCode) {
-        // 上传成功进行文件列表拼接
-        handleSuccess(res, file, formData)
-      } else {
+  // 设置上传中，防止重复发起上传
+  file[statusKey] = 'loading'
+  return new Promise<void>((resolve, reject) => {
+    const uploadTask = uni.uploadFile({
+      url: action,
+      header,
+      name,
+      fileName: name,
+      fileType: accept as 'image' | 'video' | 'audio',
+      formData,
+      filePath: file.url,
+      success(res) {
+        if (res.statusCode === statusCode) {
+          // 上传成功进行文件列表拼接
+          handleSuccess(res, file, formData)
+          resolve()
+        } else {
+          // 上传失败处理
+          handleError(res, file, formData)
+          reject()
+        }
+      },
+      fail(err) {
         // 上传失败处理
-        handleError(res, file, formData)
+        handleError(err, file, formData)
+        reject()
       }
-    },
-    fail(err) {
-      // 上传失败处理
-      handleError(err, file, formData)
-    }
-  })
+    })
 
-  // 获取当前文件加载的百分比
-  uploadTask.onProgressUpdate((res) => {
-    /**
-     * res.progress: 上传进度
-     * res.totalBytesSent: 已经上传的数据长度
-     * res.totalBytesExpectedToSend: 预期需要上传的数据总长度
-     */
-    handleProgress(res, file)
+    // 获取当前文件加载的百分比
+    uploadTask.onProgressUpdate((res) => {
+      /**
+       * res.progress: 上传进度
+       * res.totalBytesSent: 已经上传的数据长度
+       * res.totalBytesExpectedToSend: 预期需要上传的数据总长度
+       */
+      handleProgress(res, file)
+    })
   })
 }
 
@@ -432,7 +503,7 @@ function handleChoose() {
  * @param {Object} file 上传的文件
  * @param {Number} index 删除
  */
-function handleRemove(file: Record<any, any>, index?: number) {
+function handleRemove(file: UploadFileItem, index?: number) {
   uploadFiles.value.splice(
     uploadFiles.value.findIndex((item) => item.uid === file.uid),
     1
@@ -441,6 +512,7 @@ function handleRemove(file: Record<any, any>, index?: number) {
     fileList: uploadFiles.value
   })
   emit('remove', { file })
+  emitFileList()
 }
 
 function removeFile(index: number) {
