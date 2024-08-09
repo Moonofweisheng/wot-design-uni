@@ -17,7 +17,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { watch, computed } from 'vue'
+import { watch, computed, onMounted } from 'vue'
 import { parseFormat } from './utils'
 import { useCountDown } from '../composables/useCountDown'
 import { countDownProps, type CountDownExpose } from './types'
@@ -37,13 +37,16 @@ const timeText = computed(() => parseFormat(props.format, current.value))
 
 const resetTime = () => {
   reset(props.time)
-
   if (props.autoStart) {
     start()
   }
 }
 
-watch(() => props.time, resetTime, { immediate: true })
+watch(() => props.time, resetTime, { immediate: false })
+
+onMounted(() => {
+  resetTime()
+})
 
 defineExpose<CountDownExpose>({
   start,
