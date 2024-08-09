@@ -1,5 +1,6 @@
 import { ref, computed, onBeforeUnmount } from 'vue'
 import { isDef } from '../common/util'
+import { useRaf } from './useRaf'
 
 // 定义倒计时时间的数据结构
 export type CurrentTime = {
@@ -48,27 +49,12 @@ function isSameSecond(time1: number, time2: number): boolean {
   return Math.floor(time1 / 1000) === Math.floor(time2 / 1000)
 }
 
-// 判断当前环境是否为 H5
-const isH5 = process.env.UNI_PLATFORM === 'h5'
-
-// 封装 requestAnimationFrame 和 setTimeout
-function raf(fn: FrameRequestCallback): number {
-  return isH5 ? requestAnimationFrame(fn) : setTimeout(fn, 33)
-}
-
-function cancelRaf(id: number) {
-  if (isH5) {
-    cancelAnimationFrame(id)
-  } else {
-    clearTimeout(id)
-  }
-}
-
 // 定义 useCountDown 函数
 export function useCountDown(options: UseCountDownOptions) {
-  let timer: number | null = null // 定时器
   let endTime: number // 结束时间
   let counting: boolean // 是否计时中
+
+  const { start: startRaf, cancel: cancelRaf } = useRaf(tick)
 
   const remain = ref(options.time) // 剩余时间
   const current = computed(() => parseTime(remain.value)) // 当前倒计时数据
@@ -76,7 +62,7 @@ export function useCountDown(options: UseCountDownOptions) {
   // 暂停倒计时
   const pause = () => {
     counting = false
-    cancelRaf(timer!)
+    cancelRaf()
   }
 
   // 获取当前剩余时间
@@ -86,7 +72,6 @@ export function useCountDown(options: UseCountDownOptions) {
   const setRemain = (value: number) => {
     remain.value = value
     isDef(options.onChange) && options.onChange(current.value)
-
     if (value === 0) {
       pause()
       isDef(options.onFinish) && options.onFinish()
@@ -95,36 +80,30 @@ export function useCountDown(options: UseCountDownOptions) {
 
   // 每毫秒更新一次倒计时
   const microTick = () => {
-    timer = raf(() => {
-      if (counting) {
-        setRemain(getCurrentRemain())
-
-        if (remain.value > 0) {
-          microTick()
-        }
+    if (counting) {
+      setRemain(getCurrentRemain())
+      if (remain.value > 0) {
+        startRaf()
       }
-    })
+    }
   }
 
   // 每秒更新一次倒计时
   const macroTick = () => {
-    timer = raf(() => {
-      if (counting) {
-        const remainRemain = getCurrentRemain()
-
-        if (!isSameSecond(remainRemain, remain.value) || remainRemain === 0) {
-          setRemain(remainRemain)
-        }
-
-        if (remain.value > 0) {
-          macroTick()
-        }
+    if (counting) {
+      const remainRemain = getCurrentRemain()
+      if (!isSameSecond(remainRemain, remain.value) || remainRemain === 0) {
+        setRemain(remainRemain)
       }
-    })
+
+      if (remain.value > 0) {
+        startRaf()
+      }
+    }
   }
 
   // 根据配置项选择更新方式
-  const tick = () => {
+  function tick() {
     if (options.millisecond) {
       microTick()
     } else {
@@ -137,7 +116,7 @@ export function useCountDown(options: UseCountDownOptions) {
     if (!counting) {
       endTime = Date.now() + remain.value
       counting = true
-      tick()
+      startRaf()
     }
   }
 

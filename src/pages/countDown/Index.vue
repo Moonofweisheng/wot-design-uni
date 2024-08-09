@@ -1,6 +1,14 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2024-08-09 10:12:54
+ * @LastEditTime: 2024-08-09 13:10:34
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\pages\countDown\Index.vue
+ * 记得注释
+-->
 <template>
   <page-wraper>
-    <wd-toast></wd-toast>
     <demo-block title="基本用法">
       <wd-count-down :time="time" />
     </demo-block>
@@ -33,25 +41,27 @@
         <wd-grid-item text="重置" icon="refresh" @itemclick="reset" />
       </wd-grid>
     </demo-block>
+    <wd-toast></wd-toast>
   </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { CountDownInstance } from '@/uni_modules/wot-design-uni/components/wd-count-down/types'
 import { ref } from 'vue'
 const { show: showToast } = useToast()
 
 const time = ref(30 * 60 * 60 * 1000)
 
-const countDown = ref<any>(null)
+const countDown = ref<CountDownInstance>()
 
 const start = () => {
-  countDown.value.start()
+  countDown.value!.start()
 }
 const pause = () => {
-  countDown.value.pause()
+  countDown.value!.pause()
 }
 const reset = () => {
-  countDown.value.reset()
+  countDown.value!.reset()
 }
 const onFinish = () => showToast('倒计时结束')
 </script>
