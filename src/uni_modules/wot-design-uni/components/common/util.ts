@@ -708,3 +708,15 @@ export function omitBy<O extends Record<string, any>>(obj: O, predicate: (value:
   Object.keys(newObj).forEach((key) => predicate(newObj[key], key) && delete newObj[key]) // 遍历对象的键，删除值为不满足predicate的字段
   return newObj
 }
+
+/**
+ * 缓动函数，用于在动画或过渡效果中根据时间参数计算当前值
+ * @param t 当前时间，通常是从动画开始经过的时间
+ * @param b 初始值，动画属性的初始值
+ * @param c 变化量，动画属性的目标值与初始值的差值
+ * @param d 持续时间，动画持续的总时间长度
+ * @returns 计算出的当前值
+ */
+export function easingFn(t: number = 0, b: number = 0, c: number = 0, d: number = 0): number {
+  return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b
+}

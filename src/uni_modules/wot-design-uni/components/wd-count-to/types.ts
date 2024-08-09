@@ -1,7 +1,7 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
-export const textProps = {
+export const countToProps = {
   ...baseProps,
 
   // 字体大小
@@ -25,19 +25,17 @@ export const textProps = {
   endVal: makeNumberProp(2024),
 
   /**
-   * 从起始值到结束值数字变动的时间
+   * 从起始值到结束值数字变动的时间，单位毫秒
    * 类型：number
    * 默认值：3000
    */
   duration: makeNumberProp(3000),
-
   /**
-   * 是否自动播放
+   * 是否自动开始
    * 类型：boolean
    * 默认值：true
    */
-  autoplay: makeBooleanProp(true),
-
+  autoStart: makeBooleanProp(true),
   /**
    * 保留的小数位数
    * 类型：number
@@ -82,20 +80,6 @@ export const textProps = {
   useEasing: makeBooleanProp(true),
 
   /**
-   * 是否隔一段时间数字跳动，这里的跳动是隔一段时间设置初始值
-   * 类型：boolean
-   * 默认值：false
-   */
-  isFrequent: makeBooleanProp(false),
-
-  /**
-   * 跳动间隔时间
-   * 类型：number
-   * 默认值：5000
-   */
-  frequentTime: makeNumberProp(5000),
-
-  /**
    * 自定义根节点样式
    */
   customStyle: makeStringProp(''),
@@ -106,4 +90,21 @@ export const textProps = {
   customClass: makeStringProp('')
 }
 
-export type TextProps = ExtractPropTypes<typeof textProps>
+export type CountDownProps = ExtractPropTypes<typeof countToProps>
+
+export type CountUpExpose = {
+  /**
+   * 开始倒计时
+   */
+  start: () => void
+  /**
+   * 暂停倒计时
+   */
+  pause: () => void
+  /**
+   * 重设倒计时，若 auto-start 为 true，重设后会自动开始倒计时
+   */
+  reset: () => void
+}
+
+export type CountToInstance = ComponentPublicInstance<CountDownProps, CountUpExpose>
