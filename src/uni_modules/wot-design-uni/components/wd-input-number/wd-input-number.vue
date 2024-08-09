@@ -1,7 +1,9 @@
 <template>
   <view :class="`wd-input-number ${customClass} ${disabled ? 'is-disabled' : ''} ${withoutInput ? 'is-without-input' : ''}`" :style="customStyle">
     <view :class="`wd-input-number__action ${minDisabled || disableMinus ? 'is-disabled' : ''}`" @click="sub">
-      <wd-icon name="decrease" custom-class="wd-input-number__action-icon"></wd-icon>
+      <slot name="left-icon" :value="inputValue">
+        <wd-icon name="decrease" custom-class="wd-input-number__action-icon"></wd-icon>
+      </slot>
     </view>
     <view v-if="!withoutInput" class="wd-input-number__inner" @click.stop="">
       <input
@@ -18,7 +20,9 @@
       <view class="wd-input-number__input-border"></view>
     </view>
     <view :class="`wd-input-number__action ${maxDisabled || disablePlus ? 'is-disabled' : ''}`" @click="add">
-      <wd-icon name="add" custom-class="wd-input-number__action-icon"></wd-icon>
+      <slot name="right-icon" :value="inputValue">
+        <wd-icon name="add" custom-class="wd-input-number__action-icon"></wd-icon>
+      </slot>
     </view>
   </view>
 </template>
