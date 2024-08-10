@@ -242,7 +242,7 @@ import { useMessage } from 'wot-design-uni'
 
 ```ts
 const toast = useToast()
-const myToast = useToast({ selector: 'my-toast' })
+const myToast = useToast('my-toast')
 ```
 
 ## 为什么在微信小程序上使用`Popup`、`ActionSheet`、`DropDownItem`等弹出框组件包裹`Slider`、`Tabs`等组件时，`Slider`、`Tabs`表现异常？
