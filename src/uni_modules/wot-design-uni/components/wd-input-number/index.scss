@@ -3,7 +3,6 @@
 
 .wot-theme-dark {
   @include b(input-number) {
-    display: inline-block;
     @include e(action) {
       color: $-dark-color;
       @include when(disabled) {
