@@ -1,5 +1,6 @@
 import { type ExtractPropTypes, type InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp, numericProp } from '../common/props'
+import type { TabProps } from '../wd-tab/types' 
 
 export type TabsProvide = {
   state: {
@@ -62,3 +63,5 @@ export const tabsProps = {
 }
 
 export type TabsProps = ExtractPropTypes<typeof tabsProps>
+
+export type TTabProps = Pick<TabProps, 'name' | 'title' | 'disabled'>
