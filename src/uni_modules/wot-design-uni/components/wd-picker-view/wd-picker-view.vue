@@ -57,10 +57,10 @@ const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中�
 watch(
   [() => props.modelValue, () => props.columns],
   (newValue, oldValue) => {
-    if (!isEqual(oldValue[1], newValue[1])) {
+    if (!isEqual(oldValue[1], newValue[1]) && isArray(newValue[1]) && newValue[1].length > 0) {
       formatColumns.value = formatArray(newValue[1], props.valueKey, props.labelKey)
     }
-    if (!isEqual(oldValue[0], newValue[0]) && isDef(newValue[0])) {
+    if (isDef(newValue[0])) {
       selectWithValue(newValue[0])
     }
   },
@@ -79,7 +79,6 @@ const { proxy } = getCurrentInstance() as any
  */
 function selectWithValue(value: string | number | boolean | number[] | string[] | boolean[]) {
   if (formatColumns.value.length === 0) return
-
   // 使其默认选中首项
   if (value === '' || !isDef(value) || (isArray(value) && value.length === 0)) {
     value = formatColumns.value.map((col) => {
