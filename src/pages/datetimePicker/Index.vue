@@ -4,6 +4,7 @@
     <demo-block transparent>
       <wd-cell-group border>
         <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />
+
         <wd-datetime-picker label="年月日" v-model="value2" type="date" @confirm="handleConfirm2" />
         <wd-datetime-picker label="年月" v-model="value3" type="year-month" @confirm="handleConfirm3" />
         <wd-datetime-picker label="年" v-model="value16" type="year" @confirm="handleConfirm16" />
@@ -16,6 +17,11 @@
         <wd-datetime-picker label="必填" v-model="value10" required @confirm="handleConfirm10" />
         <wd-datetime-picker label="默认日期" v-model="value2" :default-value="value2" />
         <wd-datetime-picker label="时间范围一年" :minDate="minDate" :maxDate="maxDate" v-model="value17" @confirm="handleConfirm1" />
+        <wd-datetime-picker label="清空日期" v-model="value18" @confirm="handleConfirm1" :use-icon-slot="Boolean(value18)">
+          <template #icon>
+            <wd-icon name="close" @click.stop="clear" v-if="value18"></wd-icon>
+          </template>
+        </wd-datetime-picker>
       </wd-cell-group>
     </demo-block>
     <demo-block title="label 不传" transparent>
@@ -62,6 +68,7 @@ const value14 = ref<any[]>(['', ''])
 const value15 = ref<any[]>(['', Date.now()])
 const value16 = ref(Date.now())
 const value17 = ref(Date.now())
+const value18 = ref(Date.now())
 
 const minDate = ref<number>(Date.now())
 const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
@@ -160,5 +167,10 @@ function handleConfirm16({ value }: any) {
 }
 /** picker触发cancel事件，同步触发cancel事件 */
 function onCancel() {}
+
+/*  */
+function clear() {
+  value18.value = ''
+}
 </script>
 <style lang="scss" scoped></style>

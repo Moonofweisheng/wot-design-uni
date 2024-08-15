@@ -38,7 +38,8 @@
                 {{ showValue ? showValue : placeholder || translate('placeholder') }}
               </view>
             </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
+            <slot v-if="useIconSlot" name="icon" custom-class="wd-picker__arrow"></slot>
+            <wd-icon v-if="!disabled && !readonly && !useIconSlot" custom-class="wd-picker__arrow" name="arrow-right" />
           </view>
           <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
         </view>

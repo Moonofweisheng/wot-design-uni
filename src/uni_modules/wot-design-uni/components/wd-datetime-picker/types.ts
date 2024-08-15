@@ -174,7 +174,11 @@ export const datetimePickerProps = {
   /**
    * 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
    */
-  immediateChange: makeBooleanProp(false)
+  immediateChange: makeBooleanProp(false),
+  /**
+   * 是否开启清空功能
+   */
+  useIconSlot: makeBooleanProp(false)
 }
 
 export type DatetimePickerDisplayFormat = (items: Record<string, any>[]) => string
