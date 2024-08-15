@@ -60,7 +60,6 @@
 
   @include e(wrapper) {
     position: relative;
-    transition: height 0.3s ease-in-out;
     overflow: hidden;
     will-change: height;
   }
