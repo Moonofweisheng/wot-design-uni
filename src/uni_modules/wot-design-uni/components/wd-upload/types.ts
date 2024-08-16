@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import type { LoadingType } from '../wd-loading/types'
 import type { ImageMode } from '../wd-img/types'
@@ -108,7 +108,21 @@ export type UploadBuildFormData = (options: UploadBuildFormDataOption) => void
 
 export type UploadFile = Partial<UploadFileItem> & { url: string }
 
-export type UploadMethod = (uploadFile: UploadFileItem, formData?: UploadFormData) => Promise<void>
+export type UploadMethod = (
+  uploadFile: UploadFileItem,
+  formData: UploadFormData,
+  options: {
+    action: string
+    header: Record<string, any>
+    name: string
+    fileName: string
+    fileType: 'image' | 'video' | 'audio'
+    statusCode: number
+    onSuccess: (res: UniApp.UploadFileSuccessCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
+    onError: (res: UniApp.GeneralCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
+    onProgress: (res: UniApp.OnProgressUpdateResult, file: UploadFileItem) => void
+  }
+) => void
 
 export const uploadProps = {
   ...baseProps,
@@ -191,7 +205,7 @@ export const uploadProps = {
    * 类型：object
    * 默认值：{}
    */
-  formData: { type: Object as PropType<Record<string, any>>, default: () => {} },
+  formData: { type: Object as PropType<UploadFormData>, default: () => {} },
   /**
    * 预览失败执行操作
    * 类型：function({index,imgList})
@@ -346,3 +360,5 @@ export type UploadOversizeEvent = {
 export type UploadRemoveEvent = {
   file: UploadFileItem
 }
+
+export type UploadInstance = ComponentPublicInstance<UploadProps, UploadExpose>

@@ -77,7 +77,7 @@
 </template>
 <script lang="ts" setup>
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-import type { UploadFile, UploadFileItem, UploadFormData, UploadMethod } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import type { UploadFile, UploadInstance, UploadMethod } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
 import { ref } from 'vue'
 
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
@@ -107,7 +107,7 @@ const fileList13 = ref<UploadFile[]>([])
 const fileList14 = ref<UploadFile[]>([])
 const fileList15 = ref<UploadFile[]>([])
 
-const upload14 = ref()
+const upload14 = ref<UploadInstance>()
 
 const messageBox = useMessage()
 const toast = useToast()
@@ -263,19 +263,32 @@ function handleChange14({ fileList }: any) {
   fileList14.value = fileList
 }
 
-const customUpload: UploadMethod = (uploadFile: UploadFileItem, formData?: UploadFormData) => {
-  return new Promise<void>((resolve, reject) => {
-    messageBox
-      .confirm({
-        title: '调用自定义上传',
-        msg: `上传文件URL：${uploadFile.url}；点击确定完成上传，点击取消将会上传失败。`
-      })
-      .then(() => {
-        resolve()
-      })
-      .catch(() => {
-        reject()
-      })
+const customUpload: UploadMethod = (file, formData, options) => {
+  const uploadTask = uni.uploadFile({
+    url: action,
+    header: options.header,
+    name: options.name,
+    fileName: options.name,
+    fileType: options.fileType,
+    formData,
+    filePath: file.url,
+    success(res) {
+      if (res.statusCode === options.statusCode) {
+        // 上传成功
+        options.onSuccess(res, file, formData)
+      } else {
+        // 上传失败
+        options.onError({ ...res, errMsg: res.errMsg || '' }, file, formData)
+      }
+    },
+    fail(err) {
+      // 上传失败
+      options.onError(err, file, formData)
+    }
+  })
+  // 获取当前文件加载的百分比
+  uploadTask.onProgressUpdate((res) => {
+    options.onProgress(res, file)
   })
 }
 </script>
