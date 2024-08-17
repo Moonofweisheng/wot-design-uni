@@ -9,24 +9,34 @@
     :lockScroll="lockScroll"
     @click-modal="handleClose"
   >
-    <view :class="`wd-number-keyboard ${customClass}`" :style="customStyle">
-      <view class="wd-number-keyboard__header" v-if="showTitle">
+    <view :class="`wd-keyboard ${customClass}`" :style="customStyle">
+      <view class="wd-keyboard__header" v-if="showTitle">
         <slot name="title">
-          <text class="wd-number-keyboard__title">{{ title }}</text>
+          <text class="wd-keyboard__title">{{ title }}</text>
         </slot>
-        <view class="wd-number-keyboard__close" hover-class="wd-number-keyboard__close--hover" v-if="showClose" @click="handleClose">
+        <view class="wd-keyboard__close" hover-class="wd-keyboard__close--hover" v-if="showClose" @click="handleClose">
           <text>{{ closeText }}</text>
         </view>
       </view>
-      <view class="wd-number-keyboard__body">
-        <view class="wd-number-keyboard__keys">
-          <wd-key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" @press="handlePress"></wd-key>
+      <template v-if="mode !== 'car'">
+        <view class="wd-keyboard-number__body">
+          <view class="wd-keyboard-number__keys">
+            <wd-key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" @press="handlePress"></wd-key>
+          </view>
+          <view class="wd-keyboard-number__sidebar" v-if="mode === 'custom'">
+            <wd-key v-if="showDeleteKey" large :text="deleteText" type="delete" @press="handlePress"></wd-key>
+            <wd-key large :text="closeText" type="close" :loading="closeButtonLoading" @press="handlePress"></wd-key>
+          </view>
         </view>
-        <view class="wd-number-keyboard__sidebar" v-if="mode === 'custom'">
-          <wd-key v-if="showDeleteKey" large :text="deleteText" type="delete" @press="handlePress"></wd-key>
-          <wd-key large :text="closeText" type="close" :loading="closeButtonLoading" @press="handlePress"></wd-key>
+      </template>
+
+      <template v-if="mode === 'car'">
+        <view class="wd-keyboard-car__body">
+          <view class="wd-keyboard-car__keys">
+            <wd-key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" @press="handlePress"></wd-key>
+          </view>
         </view>
-      </view>
+      </template>
     </view>
   </wd-popup>
 </template>
@@ -46,6 +56,7 @@ import { computed, ref, watch } from 'vue'
 import WdKey from './key/index.vue'
 import { numberKeyboardProps, type Key } from './types'
 import type { NumberKeyType } from './key/types'
+import { CAR_KEYBOARD_AREAS, CAR_KEYBOARD_KEYS } from './constants'
 
 const props = defineProps(numberKeyboardProps)
 const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue'])
@@ -58,10 +69,12 @@ watch(
   }
 )
 
-const keys = computed(() => (props.mode === 'custom' ? genCustomKeys() : genDefaultKeys()))
+const carKeyboardLang = ref('zh')
+
+const keys = computed(() => (props.mode !== 'car' ? (props.mode === 'custom' ? genCustomKeys() : genDefaultKeys()) : genCarKeys()))
 
 const showClose = computed(() => {
-  return props.closeText && props.mode === 'default'
+  return props.closeText && (props.mode === 'default' || props.mode === 'car')
 })
 
 const showTitle = computed(() => {
@@ -118,15 +131,35 @@ function genCustomKeys(): Key[] {
   return keys
 }
 
+function genCarKeys(): Key[] {
+  return [
+    ...splitCarKeys()[0],
+    { text: carKeyboardLang.value === 'zh' ? 'ABC' : '返回', type: 'extra', wider: true },
+    ...splitCarKeys()[1],
+    { text: props.deleteText, type: 'delete', wider: true }
+  ]
+}
+
+function splitCarKeys(): [Key[], Key[]] {
+  const keys = carKeyboardLang.value === 'zh' ? CAR_KEYBOARD_AREAS.map((key) => ({ text: key })) : CAR_KEYBOARD_KEYS.map((key) => ({ text: key }))
+  return [keys.slice(0, 30), keys.slice(30)]
+}
+
 const handleClose = () => {
   emit('close')
   emit('update:visible', false)
 }
 
 const handlePress = (text: string, type: NumberKeyType) => {
-  if (text === '' && type === 'extra') {
-    return handleClose()
+  if (type === 'extra') {
+    if (text === '') {
+      return handleClose()
+    } else if (text === 'ABC' || text === '返回') {
+      carKeyboardLang.value = carKeyboardLang.value === 'zh' ? 'en' : 'zh'
+      return
+    }
   }
+
   const value = props.modelValue
   if (type === 'delete') {
     emit('delete')

@@ -7,6 +7,8 @@
         <wd-cell title="默认键盘" is-link @click="showKeyBoard(1)" />
         <wd-cell title="带右侧栏的键盘" is-link @click="showKeyBoard(2)" />
         <wd-cell title="身份证键盘" is-link @click="showKeyBoard(3)" />
+        <wd-cell title="车牌号键盘" is-link @click="showKeyBoard(10)" />
+        <wd-cell title="带标题的车牌号键盘" is-link @click="showKeyBoard(11)" />
         <wd-cell title="带标题的键盘" is-link @click="showKeyBoard(4)" />
         <wd-cell title="slot自定义标题" is-link @click="showKeyBoard(9)" />
         <wd-cell title="多个额外按键" is-link @click="showKeyBoard(5)" />
@@ -16,35 +18,21 @@
       </wd-cell-group>
     </demo-block>
 
-    <wd-number-keyboard v-model:visible="visible1" @input="onInput" @delete="onDelete"></wd-number-keyboard>
-    <wd-number-keyboard
-      v-model:visible="visible2"
-      mode="custom"
-      extra-key="."
-      close-text="完成"
-      @input="onInput"
-      @delete="onDelete"
-    ></wd-number-keyboard>
-    <wd-number-keyboard v-model:visible="visible3" extra-key="X" close-text="完成" @input="onInput" @delete="onDelete" />
-    <wd-number-keyboard
-      v-model:visible="visible4"
-      title="输入密码"
-      extra-key="."
-      close-text="完成"
-      @input="onInput"
-      @delete="onDelete"
-    ></wd-number-keyboard>
-    <wd-number-keyboard v-model:visible="visible9" extra-key="." close-text="完成" @input="onInput" @delete="onDelete">
+    <wd-keyboard v-model:visible="visible1" @input="onInput" @delete="onDelete"></wd-keyboard>
+    <wd-keyboard v-model:visible="visible2" mode="custom" extra-key="." close-text="完成" @input="onInput" @delete="onDelete"></wd-keyboard>
+    <wd-keyboard v-model:visible="visible3" extra-key="X" close-text="完成" @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model:visible="visible4" title="输入密码" extra-key="." close-text="完成" @input="onInput" @delete="onDelete"></wd-keyboard>
+    <wd-keyboard v-model:visible="visible9" extra-key="." close-text="完成" @input="onInput" @delete="onDelete">
       <template #title>
         <text style="color: red">自定义标题</text>
       </template>
-    </wd-number-keyboard>
+    </wd-keyboard>
 
-    <wd-number-keyboard v-model:visible="visible5" mode="custom" :extra-key="['00', '.']" close-text="完成" @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model:visible="visible5" mode="custom" :extra-key="['00', '.']" close-text="完成" @input="onInput" @delete="onDelete" />
 
-    <wd-number-keyboard v-model:visible="visible6" random-key-order @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model:visible="visible6" random-key-order @input="onInput" @delete="onDelete" />
 
-    <wd-number-keyboard
+    <wd-keyboard
       v-model="value1"
       :maxlength="6"
       v-model:visible="visible7"
@@ -53,9 +41,12 @@
       close-text="完成"
       @input="onInput"
       @delete="onDelete"
-    ></wd-number-keyboard>
+    ></wd-keyboard>
 
-    <wd-number-keyboard :modal="true" v-model:visible="visible8" @input="onInput" @delete="onDelete" />
+    <wd-keyboard :modal="true" v-model:visible="visible8" @input="onInput" @delete="onDelete" />
+
+    <wd-keyboard mode="car" v-model:visible="visible10" @input="onInput" @delete="onDelete" />
+    <wd-keyboard mode="car" title="输入车牌号" close-text="完成" v-model:visible="visible11" @input="onInput" @delete="onDelete" />
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -71,8 +62,10 @@ const visible6 = ref<boolean>(false)
 const visible7 = ref<boolean>(false)
 const visible8 = ref<boolean>(false)
 const visible9 = ref<boolean>(false)
+const visible10 = ref<boolean>(false)
+const visible11 = ref<boolean>(false)
 
-const visibleArr = [visible1, visible2, visible3, visible4, visible5, visible6, visible7, visible8, visible9]
+const visibleArr = [visible1, visible2, visible3, visible4, visible5, visible6, visible7, visible8, visible9, visible10, visible11]
 
 const value1 = ref<string>('')
 

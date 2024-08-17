@@ -291,8 +291,8 @@ const list = ref([
         name: 'CountTo 数字滚动'
       },
       {
-        id: 'numberKeyboard',
-        name: 'NumberKeyboard 数字键盘'
+        id: 'keyboard',
+        name: 'keyboard 虚拟键盘'
       }
     ]
   },

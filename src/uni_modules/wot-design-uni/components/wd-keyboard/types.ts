@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
-export type KeyboardMode = 'default' | 'custom'
+export type KeyboardMode = 'default' | 'custom' | 'car'
 export type KeyType = '' | 'delete' | 'extra' | 'close'
 
 export interface Key {

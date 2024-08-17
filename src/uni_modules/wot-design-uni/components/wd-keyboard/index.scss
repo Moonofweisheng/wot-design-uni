@@ -1,17 +1,17 @@
-@import "./../common/abstracts/_mixin.scss";
-@import "./../common/abstracts/variable.scss";
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
 
 .wot-theme-dark {
-  @include b(number-keyboard) {
+  @include b(keyboard) {
     background: $-dark-background5;
 
-    @include e(header){
+    @include e(header) {
       color: $-dark-color;
     }
   }
 }
 
-@include b(number-keyboard) {
+@include b(keyboard) {
   width: 100%;
   background: $-number-keyboard-background;
   color: $-color-black;
@@ -43,15 +43,43 @@
     }
   }
 
-  @include e(body) {
-    display: flex;
-    padding: 6px 0 0 6px;
+  &-number {
+    @include e(body) {
+      display: flex;
+      padding: 6px 0 0 6px;
+    }
   }
 
-  @include e(keys) {
-    display: flex;
-    flex: 3;
-    flex-wrap: wrap;
+  &-number {
+    @include e(keys) {
+      display: flex;
+      flex: 3;
+      flex-wrap: wrap;
+    }
+  }
+
+  &-car {
+    @include e(body) {
+      display: flex;
+      padding: 6px 0 0 6px;
+    }
+  }
+
+  &-car {
+    @include e(keys) {
+      display: flex;
+      flex: 10;
+      flex-wrap: wrap;
+
+      .wd-key-wrapper {
+        --wot-number-keyboard-key-font-size: 18px;
+        flex-basis: 10%;
+
+        @include m(wider) {
+          flex-basis: 20%;
+        }
+      }
+    }
   }
 
   @include e(close) {
@@ -65,14 +93,16 @@
     font-size: $-number-keyboard-close-font-size;
     background-color: transparent;
     border: none;
-    @include m(hover){
-      opacity: 0.6; 
+    @include m(hover) {
+      opacity: 0.6;
     }
   }
 
-  @include e(sidebar) {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+  &-number {
+    @include e(sidebar) {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
   }
 }
