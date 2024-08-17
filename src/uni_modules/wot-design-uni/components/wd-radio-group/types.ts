@@ -11,6 +11,7 @@ export type RadioGroupProvide = {
     cell?: boolean
     size?: string
     inline?: boolean
+    cancelable?: boolean
   }
   updateValue: (value: string | number | boolean) => void
 }
