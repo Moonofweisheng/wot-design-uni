@@ -42,7 +42,8 @@
       color: $-dark-color;
     }
 
-    :deep(.wd-textarea__icon) {
+    :deep(.wd-textarea__icon),
+    :deep(.wd-textarea__clear) {
       color: $-dark-color;
       background: transparent;
     }
