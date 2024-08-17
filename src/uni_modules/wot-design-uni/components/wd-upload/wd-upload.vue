@@ -291,7 +291,6 @@ const startUpload: UploadMethod = (file, formData, options) => {
   // 设置上传中，防止重复发起上传
   file[statusKey] = 'loading'
   if (isFunction(uploadMethod)) {
-    debugger
     uploadMethod(file, formData, options)
   } else {
     upload(file, formData, options)
