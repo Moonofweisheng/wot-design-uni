@@ -38,7 +38,7 @@ function handleChange({ fileList: files }) {
 }
 ```
 
-## 双向绑定 `$LOWEST_VERSION$`
+## 双向绑定 `1.3.8`
 
 `file-list` 支持用 `v-model` 进行双向绑定。
 
@@ -600,8 +600,8 @@ const customUpload: UploadMethod = (file, formData, options) => {
 | maxDuration                   | 拍摄视频最长拍摄时间，当 accept 为 video \| media 时生效，单位秒                                                                                                               | Number                                 | -                                              | 60                         | 1.3.0            |
 | camera                        | 使用前置或者后置相机，当 accept 为 video \| media 时生效                                                                                                                       | UploadCameraType                       | **front**                                      | **back**                   | 1.3.0            |
 | successStatus                 | 接口响应的成功状态（statusCode）值                                                                                                                                             | number                                 | -                                              | 200                        | 1.3.4            |
-| auto-upload                   | 是否选择文件后自动上传。为 false 时应手动调用 submit() 方法开始上传                                                                                                            | boolean                                | -                                              | true                       | $LOWEST_VERSION$ |
-| upload-method                 | 自定义上传方法                                                                                                                                                     | UploadMethod                                | -                                              | -                       | $LOWEST_VERSION$ |
+| auto-upload                   | 是否选择文件后自动上传。为 false 时应手动调用 submit() 方法开始上传                                                                                                            | boolean                                | -                                              | true                       | 1.3.8 |
+| upload-method                 | 自定义上传方法                                                                                                                                                     | UploadMethod                                | -                                              | -                       | 1.3.8 |
 
 ## accept 的合法值
 
@@ -647,7 +647,7 @@ const customUpload: UploadMethod = (file, formData, options) => {
 
 | 方法名称 | 说明         | 参数 | 最低版本         |
 | -------- | ------------ | ---- | ---------------- |
-| submit   | 手动开始上传 | -    | $LOWEST_VERSION$ |
+| submit   | 手动开始上传 | -    | 1.3.8 |
 
 ## Upload 外部样式类
 
