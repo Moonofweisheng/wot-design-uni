@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-08-08 17:38:21
+ * @LastEditTime: 2024-08-19 10:01:59
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
@@ -366,7 +366,7 @@ export default defineConfig({
             link: "/component/count-down",
             text: "CountDown 倒计时"
           }, {
-            link: "/component/count-up",
+            link: "/component/count-to",
             text: "CountTo 数字滚动"
           }, {
             link: "/component/number-keyboard",
