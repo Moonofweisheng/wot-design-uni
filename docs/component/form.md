@@ -41,7 +41,7 @@
     />
   </wd-cell-group>
   <view class="footer">
-    <wd-button type="primary" size="large" @click="handleSubmit block>提交</wd-button>
+    <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
   </view>
 </wd-form>
 ```
