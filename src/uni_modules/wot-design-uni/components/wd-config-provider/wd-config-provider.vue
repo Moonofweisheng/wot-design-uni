@@ -27,15 +27,17 @@ export default {
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { configProviderProps } from './types'
+import { objToStyle } from '../common/util'
 
 const props = defineProps(configProviderProps)
 
 const themeClass = computed(() => {
-  return `wot-theme-${props.theme}`
+  return `wot-theme-${props.theme} ${props.customClass}`
 })
 
 const themeStyle = computed(() => {
-  return mapThemeVarsToCSSVars(props.themeVars)
+  const styleObj = mapThemeVarsToCSSVars(props.themeVars)
+  return styleObj ? `${objToStyle(styleObj)};${props.customStyle}` : props.customStyle
 })
 
 const kebabCase = (str: string): string => {
