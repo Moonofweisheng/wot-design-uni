@@ -41,7 +41,7 @@
     />
   </wd-cell-group>
   <view class="footer">
-    <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
+    <wd-button type="primary" size="large" @click="handleSubmit block>提交</wd-button>
   </view>
 </wd-form>
 ```
@@ -60,7 +60,7 @@ const model = reactive<{
 
 const form = ref()
 
-function handleSubmit1() {
+function handleSubmit() {
   form.value
     .validate()
     .then(({ valid, errors }) => {
