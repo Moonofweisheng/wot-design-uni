@@ -11,6 +11,7 @@ export type RadioGroupProvide = {
     cell?: boolean
     size?: string
     inline?: boolean
+    cancelable?: boolean
   }
   updateValue: (value: string | number | boolean) => void
 }
@@ -32,5 +33,7 @@ export const radioGroupProps = {
   /** 设置大小，默认为空 */
   size: makeStringProp(''),
   /** 同行展示，默认为 false */
-  inline: makeBooleanProp(false)
+  inline: makeBooleanProp(false),
+  /** 是否可取消选中，默认为 false */
+  cancelable: makeBooleanProp(false)
 }
