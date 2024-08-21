@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { indexAnchorProps } from './type'
-import { onMounted, getCurrentInstance, ref, computed } from 'vue'
+import { onMounted, getCurrentInstance, ref, computed, onUnmounted } from 'vue'
 import { indexBarInjectionKey } from '../wd-index-bar/type'
 import { getRect, isDef, uuid } from '../common/util'
 import { useParent } from '../composables/useParent'
@@ -45,6 +45,15 @@ onMounted(() => {
     indexBar.anchorState.anchorList.push({ top: 0, index: props.index })
   }
   getInfo()
+})
+
+onUnmounted(() => {
+  if (isDef(indexBar)) {
+    const index = indexBar.anchorState.anchorList.findIndex(v => v.index === props.index)
+    if (index !== -1) {
+      indexBar.anchorState.anchorList.splice(index, 1)
+    }
+  }
 })
 </script>
 
