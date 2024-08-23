@@ -27,6 +27,10 @@ export const dorpMenuItemProps = {
   /**
    * 列表数据，对应数据结构 [{text: '标题', value: '0', tip: '提示文字'}]
    */
+  /** 可搜索（目前只支持本地搜索） */
+  filterable: makeBooleanProp(false),
+  /** 搜索框占位符 */
+  filterPlaceholder: String,
   options: makeArrayProp<Record<string, any>>(),
   /**
    * 禁用菜单
