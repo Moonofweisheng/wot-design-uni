@@ -16,8 +16,16 @@
       @after-leave="afterLeave"
     >
       <view v-if="options.length">
+        <wd-search
+          v-if="filterable"
+          v-model="filterVal"
+          :placeholder="filterPlaceholder || translate('filterPlaceholder')"
+          hide-cancel
+          placeholder-left
+          @change="handleFilterChange"
+        />
         <view
-          v-for="(item, index) in options"
+          v-for="(item, index) in filterOptions"
           :key="index"
           @click="choose(index)"
           :class="`wd-drop-item__option ${(item[valueKey] !== '' ? item[valueKey] : item) === modelValue ? 'is-active' : ''}`"
@@ -50,7 +58,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, ref, watch, nextTick } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import type { PopupType } from '../wd-popup/types'
@@ -58,6 +66,9 @@ import { useParent } from '../composables/useParent'
 import { DROP_MENU_KEY } from '../wd-drop-menu/types'
 import { isDef, isFunction } from '../common/util'
 import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
+import { useTranslate } from '../composables/useTranslate'
+
+const { translate } = useTranslate('drop-menu')
 
 const props = defineProps(dorpMenuItemProps)
 const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
@@ -70,6 +81,8 @@ const zIndex = ref<number>(12)
 const modal = ref<boolean>(true)
 const closeOnClickModal = ref<boolean>(true)
 const duration = ref<number>(0)
+const filterVal = ref<string>('')
+const filterOptions = ref<Array<Record<string, any>>>([])
 
 const { parent: dropMenu } = useParent(DROP_MENU_KEY)
 
@@ -101,6 +114,22 @@ watch(
   }
 )
 
+watch(
+  () => props.options,
+  (newValue) => {
+    console.log("🚀 ~ newValue:", newValue)
+    if (props.filterable && filterVal.value) {
+      formatFilterOptions(newValue, filterVal.value)
+    } else {
+      filterOptions.value = newValue
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
 onBeforeMount(() => {
   if (queue && queue.pushToQueue) {
     queue.pushToQueue(proxy)
@@ -117,6 +146,30 @@ onBeforeUnmount(() => {
   }
 })
 
+function handleFilterChange({ value }: { value: string }) {
+  if (value === '') {
+    filterOptions.value = []
+    filterVal.value = value
+    nextTick(() => {
+      filterOptions.value = props.options
+    })
+  } else {
+    filterVal.value = value
+    formatFilterOptions(props.options, value)
+  }
+}
+
+function formatFilterOptions(options: Record<string, any>[], filterVal: string) {
+  const filterOptionsTemp = options.filter((item) => {
+    return item[props.labelKey].indexOf(filterVal) > -1
+  })
+  filterOptions.value = []
+  nextTick(() => {
+    filterOptions.value = filterOptionsTemp
+  })
+}
+
+
 function getShowPop() {
   return showPop.value
 }
@@ -124,13 +177,20 @@ function getShowPop() {
 function choose(index: number) {
   if (props.disabled) return
   const { valueKey } = props
-  const item = props.options[index]
+  const item = filterOptions.value[index]
   emit('update:modelValue', item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item)
   emit('change', {
     value: item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item,
     selectedItem: item
   })
   close()
+  
+  //关闭清空搜索 避免清空画面闪过
+  if(filterVal.value !== '') {
+    setTimeout(() => {
+      handleFilterChange({ value: ''})
+    }, 300);
+  }
 }
 // 外部关闭弹出框
 function close() {
