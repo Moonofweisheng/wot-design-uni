@@ -16,7 +16,7 @@
 
 ## 设置主题
 
-通过<code>type</code>参数设置文本主题，我们提供了五类属性：<code>primary</code> <code>error</code> <code>success</code> <code>warning</code> <code>info-默认</code>。
+通过<code>type</code>参数设置文本主题，我们提供了五类属性：<code>primary</code> <code>error</code> <code>success</code> <code>warning</code> <code>default-默认</code>。
 
 ```html
 <wd-text type="primary" text="主色"></wd-text>
