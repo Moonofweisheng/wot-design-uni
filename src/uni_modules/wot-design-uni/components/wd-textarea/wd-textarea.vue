@@ -169,7 +169,7 @@ const isRequired = computed(() => {
 
 // 当前文本域文字长度
 const currentLength = computed(() => {
-  return String(props.modelValue || '').length
+  return String(formatValue(props.modelValue) || '').length
 })
 
 const rootClass = computed(() => {
