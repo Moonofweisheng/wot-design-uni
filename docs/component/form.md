@@ -60,7 +60,7 @@ const model = reactive<{
 
 const form = ref()
 
-function handleSubmit1() {
+function handleSubmit() {
   form.value
     .validate()
     .then(({ valid, errors }) => {
