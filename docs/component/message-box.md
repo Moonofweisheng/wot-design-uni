@@ -137,7 +137,7 @@ const rate = ref<number>(1)
 const message = useMessage('wd-message-box-slot')
 
 function withSlot() {
-  message1
+  message
     .confirm({
       title: '评分'
     })
