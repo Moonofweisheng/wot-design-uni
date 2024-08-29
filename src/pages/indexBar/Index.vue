@@ -1,8 +1,9 @@
 <template>
   <page-wraper>
+    <wd-search hide-cancel placeholder="我要去哪里？" v-model="keyword" @search="handleSearch" @clear="handleClear" />
     <view class="wraper">
-      <wd-index-bar sticky>
-        <view v-for="item in data" :key="item.index">
+      <wd-index-bar sticky v-if="showList.length">
+        <view v-for="item in showList" :key="item.index">
           <wd-index-anchor :index="item.index" />
           <wd-cell border clickable v-for="city in item.data" :key="city" :title="city" @click="handleClick(item.index, city)"></wd-cell>
         </view>
@@ -13,10 +14,18 @@
 
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
-import { ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 const { show: showToast } = useToast()
 
-const data = ref([
+onMounted(() => {
+  handleSearch()
+})
+
+const keyword = ref('')
+
+const showList = ref<any>([])
+
+const indexList = [
   {
     index: 'A',
     data: ['阿坝', '阿拉善', '阿里', '安康', '安庆', '鞍山', '安顺', '安阳', '澳门']
@@ -103,10 +112,32 @@ const data = ref([
       '菏泽'
     ]
   }
-])
+]
 
 function handleClick(index: string, city: string) {
   showToast(`当前点击项：${index}，城市：${city}`)
+}
+
+function handleSearch() {
+  showList.value = []
+  nextTick(() => {
+    if (keyword.value) {
+      showList.value = indexList.filter((item) => {
+        return item.data.some((city) => {
+          return city.includes(keyword.value)
+        })
+      })
+    } else {
+      showList.value = indexList
+    }
+  })
+
+  // 筛选indexList项中data包含keyword的项
+}
+
+function handleClear() {
+  keyword.value = ''
+  handleSearch()
 }
 </script>
 
