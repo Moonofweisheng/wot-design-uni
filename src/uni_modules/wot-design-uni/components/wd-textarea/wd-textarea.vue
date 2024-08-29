@@ -18,7 +18,7 @@
         v-model="inputValue"
         :show-count="false"
         :placeholder="placeholderValue"
-        :disabled="disabled"
+        :disabled="disabled || readonly"
         :maxlength="maxlength"
         :focus="focused"
         :auto-focus="autoFocus"

@@ -28,7 +28,7 @@
           :password="showPassword && !isPwdVisible"
           v-model="inputValue"
           :placeholder="placeholderValue"
-          :disabled="disabled"
+          :disabled="disabled || readonly"
           :maxlength="maxlength"
           :focus="focused"
           :confirm-type="confirmType"
