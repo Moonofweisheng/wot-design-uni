@@ -326,6 +326,15 @@ function getSelectedIndex() {
   return selectedIndex.value
 }
 
+/**
+ * 用于重置列数据为指定列数据
+ */
+function resetColumns(columns: (string | number | string[] | number[] | ColumnItem | ColumnItem[])[]) {
+  if (isArray(columns) && columns.length) {
+    formatColumns.value = formatArray(columns, props.valueKey, props.labelKey)
+  }
+}
+
 function onPickStart() {
   emit('pickstart')
 }
@@ -342,7 +351,8 @@ defineExpose<PickerViewExpose>({
   getColumnData,
   getColumnIndex,
   getLabels,
-  getSelectedIndex
+  getSelectedIndex,
+  resetColumns
 })
 </script>
 <style lang="scss" scoped>

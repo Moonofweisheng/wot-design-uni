@@ -292,6 +292,10 @@ function showPopup() {
 function onCancel() {
   popupShow.value = false
   emit('cancel')
+  let timmer = setTimeout(() => {
+    clearTimeout(timmer)
+    isDef(pickerViewWd.value) && pickerViewWd.value.resetColumns(resetColumns.value)
+  }, 300)
 }
 /**
  * 点击确定按钮触发。展示选中值，触发cancel事件。
