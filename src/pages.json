@@ -1,5 +1,6 @@
 {
-  "pages": [{
+  "pages": [
+    {
       "path": "pages/index/Index",
       "name": "index",
       "style": {
@@ -194,7 +195,6 @@
       "path": "pages/notify/Index",
       "name": "toast",
       "style": {
-
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
@@ -760,6 +760,16 @@
           "allowsBounceVertical": "NO"
         },
         "navigationBarTitleText": "CountTo 数字滚动"
+      }
+    },
+    {
+      "path": "pages/keyboard/Index",
+      "name": "keyboard",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Keyboard 虚拟键盘"
       }
     },
     {
