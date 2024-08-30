@@ -124,7 +124,7 @@ const formattedText = computed(() => {
   if (mode === 'price') {
     return formatNumber(text)
   }
-  return formatText(text, format, mode)
+  return formatText(`${text}`, format, mode)
 })
 
 // 处理点击事件
