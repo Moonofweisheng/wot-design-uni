@@ -309,13 +309,13 @@ function handleSubmit() {
     <wd-input
       v-for="(item, index) in model.phoneNumbers"
       :key="item.key"
-      :label="'联系方式' + index"
+      :label="'玛卡巴卡单号' + index"
       :prop="'phoneNumbers.' + index + '.value'"
       label-width="100px"
       clearable
       v-model="item.value"
-      placeholder="联系方式"
-      :rules="[{ required: true, message: '请填写联系方式' + index }]"
+      placeholder="玛卡巴卡单号"
+      :rules="[{ required: true, message: '请填写玛卡巴卡单号' + index }]"
     />
 
     <wd-cell title-width="0px">
