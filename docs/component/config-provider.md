@@ -134,5 +134,5 @@ const themeVars: ConfigProviderThemeVars = {
 
 | 类名         | 说明       | 最低版本         |
 | ------------ | ---------- | ---------------- |
-| custom-class | 根节点样式 | $LOWEST_VERSION$ |
-| custom-style | 根节点样式 | $LOWEST_VERSION$ |
+| custom-class | 根节点样式 | 1.3.9 |
+| custom-style | 根节点样式 | 1.3.9 |

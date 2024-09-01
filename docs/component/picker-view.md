@@ -127,7 +127,7 @@ const onChangeDistrict = (pickerView, value, columnIndex, resolve) => {
 | getColumnIndex | 获取某一列的选中项下标 | columnIndex | - |
 | getColumnData | 获取某一列的选项 | columnIndex | - |
 | setColumnData | 设置某一列的选项 | columnIndex, values | - |
-| resetColumns | 重置列数据为指定列数据 | columns（类型与props中columns相同） | $LOWEST_VERSION$ |
+| resetColumns | 重置列数据为指定列数据 | columns（类型与props中columns相同） | 1.3.9 |
 
 ## Events
 
