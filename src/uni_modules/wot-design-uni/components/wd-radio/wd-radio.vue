@@ -32,6 +32,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, watch } from 'vue'
 import { useParent } from '../composables/useParent'
 import { RADIO_GROUP_KEY } from '../wd-radio-group/types'

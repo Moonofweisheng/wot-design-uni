@@ -54,6 +54,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { type CSSProperties, computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
 import { getRect, addUnit, isDef, objToStyle } from '../common/util'
 import { navbarProps } from './types'

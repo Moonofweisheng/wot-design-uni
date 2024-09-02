@@ -25,6 +25,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties } from 'vue'
 import { addUnit, getRect, isArray, isDef, isPromise, objToStyle, requestAnimationFrame, uuid } from '../common/util'
 import { useParent } from '../composables/useParent'

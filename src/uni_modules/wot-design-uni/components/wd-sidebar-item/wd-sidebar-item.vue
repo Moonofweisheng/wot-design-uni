@@ -28,6 +28,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdBadge from '../wd-badge/wd-badge.vue'
 import { computed } from 'vue'
 import { useParent } from '../composables/useParent'
 import { SIDEBAR_KEY } from '../wd-sidebar/types'

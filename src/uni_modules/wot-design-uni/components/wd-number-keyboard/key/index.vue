@@ -30,6 +30,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdLoading from '../../wd-loading/wd-loading.vue'
+import wdIcon from '../../wd-icon/wd-icon.vue'
 import { computed, ref } from 'vue'
 import { useTouch } from '../../composables/useTouch'
 import { keyProps } from './types'

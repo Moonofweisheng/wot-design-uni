@@ -84,6 +84,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isDef, objToStyle, pause, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'

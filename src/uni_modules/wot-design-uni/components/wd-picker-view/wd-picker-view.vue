@@ -43,6 +43,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
+import wdLoading from '../wd-loading/wd-loading.vue'
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isArray, isDef, isEqual, range } from '../common/util'
 import { formatArray, pickerViewProps, type ColumnItem, type PickerViewExpose } from './types'

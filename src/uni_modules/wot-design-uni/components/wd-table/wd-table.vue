@@ -71,6 +71,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdTableCol from '../wd-table-col/wd-table-col.vue'
+import wdSortButton from '../wd-sort-button/wd-sort-button.vue'
 import { type CSSProperties, computed, reactive, ref } from 'vue'
 import { addUnit, debounce, isDef, isObj, objToStyle, uuid } from '../common/util'
 import type { SortDirection, TableColumn, TableColumnInstance, TableColumnProps } from '../wd-table-col/types'

@@ -140,7 +140,11 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, ref, watch, nextTick, reactive, type CSSProperties } from 'vue'
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdSticky from '../wd-sticky/wd-sticky.vue'
+import wdStickyBox from '../wd-sticky-box/wd-sticky-box.vue'
+
+import { computed, getCurrentInstance, onMounted, watch, nextTick, reactive, type CSSProperties } from 'vue'
 import { addUnit, checkNumRange, debounce, getRect, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 import { TABS_KEY, tabsProps } from './types'

@@ -41,6 +41,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { onBeforeMount, ref, watch } from 'vue'
 import { COLLAPSE_KEY, collapseProps, type CollapseExpose, type CollapseToggleAllOptions } from './types'
 import { useChildren } from '../composables/useChildren'

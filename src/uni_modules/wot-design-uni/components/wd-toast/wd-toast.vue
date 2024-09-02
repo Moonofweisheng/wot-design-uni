@@ -31,6 +31,11 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdLoading from '../wd-loading/wd-loading.vue'
+import wdOverlay from '../wd-overlay/wd-overlay.vue'
+import wdTransition from '../wd-transition/wd-transition.vue'
+
 import { computed, inject, onBeforeMount, ref, watch, type CSSProperties } from 'vue'
 import base64 from '../common/base64'
 import { defaultOptions, toastDefaultOptionKey, toastIcon } from '.'

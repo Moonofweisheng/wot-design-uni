@@ -35,6 +35,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { ref, watch } from 'vue'
 import { debounce, isDef, isEqual } from '../common/util'
 import { inputNumberProps } from './types'

@@ -1,15 +1,4 @@
-/*
- * @Author: weisheng
- * @Date: 2023-09-25 17:28:12
- * @LastEditTime: 2024-08-09 13:39:14
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\global.d.ts
- * 记得注释
- */
-import '@vue/runtime-core'
-
-declare module '@vue/runtime-core' {
+declare module 'vue' {
   // Helper for Volar
   export interface GlobalComponents {
     WdActionSheet: typeof import('./components/wd-action-sheet/wd-action-sheet.vue')['default']

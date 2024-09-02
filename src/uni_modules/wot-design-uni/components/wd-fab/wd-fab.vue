@@ -39,6 +39,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdButton from '../wd-button/wd-button.vue'
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdTransition from '../wd-transition/wd-transition.vue'
 import { type CSSProperties, computed, ref, watch, inject, getCurrentInstance, onBeforeUnmount, onMounted, nextTick } from 'vue'
 import { getRect, isDef, isH5, objToStyle } from '../common/util'
 import { type Queue, queueKey } from '../composables/useQueue'

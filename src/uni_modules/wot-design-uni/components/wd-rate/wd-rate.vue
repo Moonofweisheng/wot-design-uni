@@ -29,6 +29,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, ref, watch } from 'vue'
 import { rateProps } from './types'
 

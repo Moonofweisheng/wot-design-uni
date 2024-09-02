@@ -109,7 +109,7 @@
     "rollup-plugin-visualizer": "^5.9.0",
     "sass": "^1.59.3",
     "standard-version": "^9.5.0",
-    "typescript": "^5.3.3",
+    "typescript": "^5.5.4",
     "uni-read-pages-vite": "^0.0.6",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
