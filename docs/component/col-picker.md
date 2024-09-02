@@ -577,11 +577,11 @@ function handleConfirm({ selectedItems }: any) {
 
 ## 自定义选择器
 
-如果默认的 cell 类型的展示格式不满足需求，可以通过默认插槽进行自定义选择器样式。
+如果默认的 cell 类型的展示格式不满足需求，可以通过默认插槽进行自定义选择器样式。在标签上添加 use-default-slot 属性并设置为 true。 
 
 ```html
 <view style="margin-bottom: 10px;">当前选中项: {{ displayValue }}</view>
-<wd-col-picker v-model="value" :columns="area" :column-change="columnChange" @confirm="handleConfirm">
+<wd-col-picker :use-default-slot="true" v-model="value" :columns="area" :column-change="columnChange" @confirm="handleConfirm">
   <wd-button>选择地址</wd-button>
 </wd-col-picker>
 ```
