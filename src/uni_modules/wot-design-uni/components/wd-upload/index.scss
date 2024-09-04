@@ -131,6 +131,7 @@
     color: $-upload-close-icon-color;
     width: $-upload-close-icon-size;
     height: $-upload-close-icon-size;
+    line-height: $-upload-close-icon-size;
 
     &::after {
       position: absolute;
