@@ -25,7 +25,8 @@
             >
               {{ showValue || placeholder || translate('placeholder') }}
             </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-select-picker__arrow" name="arrow-right" />
+            <wd-icon v-if="showArrow" custom-class="wd-select-picker__arrow" name="arrow-right" />
+            <wd-icon v-else-if="showClear" custom-class="wd-select-picker__clear" name="error-fill" @click.stop="handleClear" />
           </view>
 
           <view v-if="errorMessage" class="wd-select-picker__error-message">{{ errorMessage }}</view>
@@ -420,6 +421,20 @@ function formatFilterColumns(columns: Record<string, any>[], filterVal: string) 
 
 const showConfirm = computed(() => {
   return (props.type === 'radio' && props.showConfirm) || props.type === 'checkbox'
+})
+
+// 是否展示清除按钮
+const showClear = computed(() => {
+  return props.clearable && !props.disabled && !props.readonly && showValue.value.length
+})
+
+function handleClear() {
+  emit('update:modelValue', props.type === 'checkbox' ? [] : '')
+}
+
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly && !showClear.value
 })
 
 defineExpose<SelectPickerExpose>({
