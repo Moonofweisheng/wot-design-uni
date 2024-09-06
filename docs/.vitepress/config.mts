@@ -369,6 +369,9 @@ export default defineConfig({
             link: "/component/count-to",
             text: "CountTo 数字滚动"
           }, {
+            link: "/component/keyboard",
+            text: "Keyboard 虚拟键盘"
+          }, {
             link: "/component/number-keyboard",
             text: "NumberKeyboard 数字键盘"
           }]
