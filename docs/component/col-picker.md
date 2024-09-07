@@ -278,7 +278,7 @@ onMounted(async () => {
 
 const columnChange: ColPickerColumnChange = async ({ selectedItem, resolve, finish }) => {
   // 模拟异步请求
-  
+
   await sleep(0.3)
   const areaData = findChildrenByCode(colPickerData, selectedItem.value)
   if (areaData && areaData.length) {
@@ -302,7 +302,6 @@ function sleep(second: number = 1) {
     }, 1000 * second)
   })
 }
-
 ```
 
 ## 禁用
@@ -577,7 +576,7 @@ function handleConfirm({ selectedItems }: any) {
 
 ## 自定义选择器
 
-如果默认的 cell 类型的展示格式不满足需求，可以通过默认插槽进行自定义选择器样式。在标签上添加 use-default-slot 属性并设置为 true。 
+如果默认的 cell 类型的展示格式不满足需求，可以通过默认插槽进行自定义选择器样式。在标签上添加 use-default-slot 属性并设置为 true。
 
 ```html
 <view style="margin-bottom: 10px;">当前选中项: {{ displayValue }}</view>
@@ -653,8 +652,8 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | ellipsis               | 是否超出隐藏                                                                                                                   | boolean           | -      | false   | -        |
 | prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                              | string            | -      | -       | -        |
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                            | `FormItemRule []` | -      | `[]`    | -        |
-| lineWidth     | 底部条宽度，单位像素             | number          | -      | -     | 1.3.7        |
-| lineHeight    | 底部条高度，单位像素             | number          | -      | -      | 1.3.7        |
+| lineWidth              | 底部条宽度，单位像素                                                                                                           | number            | -      | -       | 1.3.7    |
+| lineHeight             | 底部条高度，单位像素                                                                                                           | number            | -      | -       | 1.3.7    |
 
 ### FormItemRule 数据结构
 
@@ -679,7 +678,7 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | 事件名称 | 说明                       | 参数                                             | 最低版本 |
 | -------- | -------------------------- | ------------------------------------------------ | -------- |
 | confirm  | 最后一列选项选中时触发     | `{ value(选项值数组), selectedItems(选项数组) }` | -        |
-| cancel   | 点击关闭按钮或者蒙层时触发 | -                                                | -        |
+| close    | 点击关闭按钮或者蒙层时触发 | -                                                | -        |
 
 ## Methods
 
