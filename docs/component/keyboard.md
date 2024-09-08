@@ -1,6 +1,6 @@
 <frame/>
 
-# Keyboard 虚拟键盘 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+# Keyboard 虚拟键盘 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.10</el-tag>
 
 虚拟数字键盘，用于输入数字、密码、身份证或车牌号等场景。
 
@@ -243,22 +243,22 @@ const onDelete = () => showToast('删除')
 
 | 参数                | 说明                     | 类型                  | 可选值                     | 默认值     | 最低版本         |
 | ------------------- | ------------------------ | --------------------- | -------------------------- | ---------- | ---------------- |
-| v-model:visible     | 是否展开                 | `boolean`             | -                          | `false`    | $LOWEST_VERSION$           |
-| v-model             | 绑定的值                 | `string`              | -                          | -          | $LOWEST_VERSION$           |
-| title               | 标题                     | `string`              | -                          | -          | $LOWEST_VERSION$           |
-| mode                | 键盘模式                 | `string`              | `default`, `car`, `custom` | `default`  | $LOWEST_VERSION$ |
-| zIndex              | 层级                     | `number`              | -                          | `100`      | $LOWEST_VERSION$           |
-| maxlength           | 最大长度                 | `number`              | -                          | `Infinity` | $LOWEST_VERSION$           |
-| showDeleteKey       | 是否显示删除键           | `boolean`             | -                          | `true`     | $LOWEST_VERSION$           |
-| randomKeyOrder      | 是否随机键盘按键顺序     | `boolean`             | -                          | `false`    | $LOWEST_VERSION$           |
-| closeText           | 确认按钮文本             | `string`              | -                          | -          | $LOWEST_VERSION$           |
-| deleteText          | 删除按钮文本             | `string`              | -                          | -          | $LOWEST_VERSION$           |
-| closeButtonLoading  | 关闭按钮是否显示加载状态 | `boolean`             | -                          | `false`    | $LOWEST_VERSION$           |
-| modal               | 是否显示蒙层遮罩         | `boolean`             | -                          | `false`    | $LOWEST_VERSION$           |
-| hideOnClickOutside  | 是否在点击外部时收起键盘 | `boolean`             | -                          | `true`     | $LOWEST_VERSION$           |
-| lockScroll          | 是否锁定滚动             | `boolean`             | -                          | `true`     | $LOWEST_VERSION$           |
-| safeAreaInsetBottom | 是否在底部安全区域内     | `boolean`             | -                          | `true`     | $LOWEST_VERSION$           |
-| extraKey            | 额外按键                 | `string` / `string[]` | -                          | -          | $LOWEST_VERSION$           |
+| v-model:visible     | 是否展开                 | `boolean`             | -                          | `false`    | 1.3.10           |
+| v-model             | 绑定的值                 | `string`              | -                          | -          | 1.3.10           |
+| title               | 标题                     | `string`              | -                          | -          | 1.3.10           |
+| mode                | 键盘模式                 | `string`              | `default`, `car`, `custom` | `default`  | 1.3.10 |
+| zIndex              | 层级                     | `number`              | -                          | `100`      | 1.3.10           |
+| maxlength           | 最大长度                 | `number`              | -                          | `Infinity` | 1.3.10           |
+| showDeleteKey       | 是否显示删除键           | `boolean`             | -                          | `true`     | 1.3.10           |
+| randomKeyOrder      | 是否随机键盘按键顺序     | `boolean`             | -                          | `false`    | 1.3.10           |
+| closeText           | 确认按钮文本             | `string`              | -                          | -          | 1.3.10           |
+| deleteText          | 删除按钮文本             | `string`              | -                          | -          | 1.3.10           |
+| closeButtonLoading  | 关闭按钮是否显示加载状态 | `boolean`             | -                          | `false`    | 1.3.10           |
+| modal               | 是否显示蒙层遮罩         | `boolean`             | -                          | `false`    | 1.3.10           |
+| hideOnClickOutside  | 是否在点击外部时收起键盘 | `boolean`             | -                          | `true`     | 1.3.10           |
+| lockScroll          | 是否锁定滚动             | `boolean`             | -                          | `true`     | 1.3.10           |
+| safeAreaInsetBottom | 是否在底部安全区域内     | `boolean`             | -                          | `true`     | 1.3.10           |
+| extraKey            | 额外按键                 | `string` / `string[]` | -                          | -          | 1.3.10           |
 
 ## Slot
 
@@ -278,5 +278,5 @@ const onDelete = () => showToast('删除')
 
 | 类名         | 说明         | 最低版本 |
 | ------------ | ------------ | -------- |
-| custom-class | 根节点样式类 | $LOWEST_VERSION$   |
-| custom-style | 根节点样式   | $LOWEST_VERSION$   |
+| custom-class | 根节点样式类 | 1.3.10   |
+| custom-style | 根节点样式   | 1.3.10   |

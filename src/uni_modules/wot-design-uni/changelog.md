@@ -1,6 +1,25 @@
 # 更新日志 
 
 
+### [1.3.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.9...v1.3.10) (2024-09-08)
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增Keyboard虚拟键盘支持车牌号输入 ([#567](https://github.com/Moonofweisheng/wot-design-uni/issues/567)) ([59df1b7](https://github.com/Moonofweisheng/wot-design-uni/commit/59df1b7ce56e9253ad046a7898651a866b8c99d7)), closes [#351](https://github.com/Moonofweisheng/wot-design-uni/issues/351)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 col-picker 点击遮罩关闭执行两次问题 ([#584](https://github.com/Moonofweisheng/wot-design-uni/issues/584)) ([8fc5380](https://github.com/Moonofweisheng/wot-design-uni/commit/8fc5380ad1f9a34998aedf1de2a9b05011bd8267))
+* 🐛 修复wd-upload 关闭按钮受项目行高影响的问题 ([#576](https://github.com/Moonofweisheng/wot-design-uni/issues/576)) ([feb64ea](https://github.com/Moonofweisheng/wot-design-uni/commit/feb64ea7be1eada01782bb1fa0d5b848acb4fa64))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档中添加KeyBoard的版本要求 ([715c054](https://github.com/Moonofweisheng/wot-design-uni/commit/715c054f4c723de73e2d57b940390cc7bcc89273))
+* ✏️  优化多列选择器组件文档 ([#572](https://github.com/Moonofweisheng/wot-design-uni/issues/572)) ([93e0736](https://github.com/Moonofweisheng/wot-design-uni/commit/93e0736a24aa77d60376b5dd4d073180b88a6411))
+
 ### [1.3.9](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.8...v1.3.9) (2024-09-01)
 
 
