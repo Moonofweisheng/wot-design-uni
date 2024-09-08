@@ -127,9 +127,9 @@ function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) 
 }
 function handleClickModal() {
   emit('click-modal')
-  if (props.closeOnClickModal) {
-    close()
-  }
+  // if (props.closeOnClickModal) {
+  //   close()
+  // }
 }
 function handleCancel() {
   emit('cancel')
