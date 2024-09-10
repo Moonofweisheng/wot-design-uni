@@ -42,6 +42,7 @@
           :hold-keyboard="holdKeyboard"
           :always-embed="alwaysEmbed"
           :placeholder-class="inputPlaceholderClass"
+          :ignoreCompositionEvent="ignoreCompositionEvent"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
