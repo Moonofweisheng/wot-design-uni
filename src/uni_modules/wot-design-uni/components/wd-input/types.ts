@@ -125,7 +125,7 @@ export const inputProps = {
   /**
    * 设置左侧标题宽度
    */
-  labelWidth: makeStringProp('33%'),
+  labelWidth: makeStringProp(''),
   /**
    * 使用 label 插槽
    */

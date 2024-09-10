@@ -207,17 +207,16 @@ export const textareaProps = {
   showWordLimit: makeBooleanProp(false),
 
   /**
-   * * 设置左侧标题。
+   * 设置左侧标题。
    * 类型：string
    */
   label: String,
 
   /**
-   * * 设置左侧标题宽度。
+   * 设置左侧标题宽度。
    * 类型：string
-   * 默认值：'33%'
    */
-  labelWidth: makeStringProp('33%'),
+  labelWidth: makeStringProp(''),
 
   /**
    * * 是否使用label插槽。
