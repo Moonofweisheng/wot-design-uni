@@ -505,7 +505,7 @@ $-progress-icon-fs: var(--wot-progress-icon-fs, 18px) !default; // 图标字号
 $-radio-margin: var(--wot-radio-margin, $-checkbox-margin) !default; // 多个单选框距离
 $-radio-label-margin: var(--wot-radio-label-margin, $-checkbox-label-margin) !default; // 右侧文字与左侧图标距离
 $-radio-size: var(--wot-radio-size, 16px) !default; // 左侧图标尺寸
-$-radio-bg: var(--wot-radio-bg, $-checkbox-bg) !default; // 左侧图标尺寸
+$-radio-bg: var(--wot-radio-bg, $-color-white) !default; // 左侧图标尺寸
 $-radio-label-fs: var(--wot-radio-label-fs, $-checkbox-label-fs) !default; // 右侧文字字号
 $-radio-label-color: var(--wot-radio-label-color, $-checkbox-label-color) !default; // 右侧文字颜色
 $-radio-checked-color: var(--wot-radio-checked-color, $-checkbox-checked-color) !default; // 选中颜色
