@@ -99,7 +99,7 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 
 ## 拦截预览图片操作
 
-设置 `before-preview` 函数，在用户点击图片进行预览时，会执行 `before-preview` 函数，接收 { index: 当前预览的下标, imgList: 所有图片地址列表, resolve }，通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会执行预览图片操作。
+设置 `before-preview` 函数，在用户点击图片进行预览时，会执行 `before-preview` 函数，接收 { file: 预览文件, index: 当前预览的下标, imgList: 所有图片地址列表, resolve }，通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会执行预览图片操作。
 
 ```html
 <wd-upload
@@ -588,7 +588,7 @@ const customUpload: UploadMethod = (file, formData, options) => {
 | before-upload                 | 上传文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                        | function({ files, fileList, resolve }) | -                                              | -                          | -                |
 | before-choose                 | 选择图片之前的钩子，参数为文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                                    | function({ fileList, resolve })        | -                                              | -                          | -                |
 | before-remove                 | 删除文件之前的钩子，参数为要删除的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ file, fileList, resolve })  | -                                              | -                          | -                |
-| before-preview                | 图片预览前的钩子，参数为预览的图片下标和图片列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({ index, imgList, resolve })  | -                                              | -                          | -                |
+| before-preview                | 图片预览前的钩子，参数为预览的图片下标和图片列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。                                                                      | function({file, index, imgList, resolve })  | -                                              | -                          | -                |
 | build-form-data               | 构建上传`formData`的钩子，参数为上传的文件、待处理的`formData`，返回值为处理后的`formData`，若返回 false 或者返回 Promise 且被 reject，则停止上传。                            | function({ file, formData, resolve })  | -                                              | -                          | 0.1.61           |
 | loading-type                  | [加载中图标类型](/component/loading)                                                                                                                                           | string                                 | -                                              | circular-ring              | -                |
 | loading-color                 | [加载中图标颜色](/component/loading)                                                                                                                                           | string                                 | -                                              | #ffffff                    | -                |
