@@ -135,8 +135,8 @@ const beforePreview = ({ file, resolve }) => {
     })
 }
 
-function handleChange({ files }) {
-  fileList.value = files
+function handleChange({ fileList }) {
+  fileList.value = fileList
 }
 ```
 
@@ -178,8 +178,8 @@ const beforeUpload = ({ files, resolve }) => {
     })
 }
 
-function handleChange({ files }) {
-  fileList.value = files
+function handleChange({ fileList }) {
+  fileList.value = fileList
 }
 ```
 
@@ -222,8 +222,8 @@ const beforeRemove = ({ file, fileList, resolve }) => {
     })
 }
 
-function handleChange({ files }) {
-  fileList.value = files
+function handleChange({ fileList }) {
+  fileList.value = fileList
 }
 ```
 
@@ -251,7 +251,7 @@ const fileList = ref<any[]>([
   }
 ])
 
-const beforeChoose = (file, resolve) => {
+const beforeChoose = ({fileList, resolve}) => {
   messageBox
     .confirm({
       msg: '是否选择',
@@ -265,8 +265,8 @@ const beforeChoose = (file, resolve) => {
     })
 }
 
-function handleChange({ files }) {
-  fileList.value = files
+function handleChange({ fileList }) {
+  fileList.value = fileList
 }
 ```
 
@@ -443,8 +443,8 @@ const action = ref<string>('https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bd
 
 const fileList = ref([])
 
-function handleChange({ files }) {
-  fileList.value = files
+function handleChange({ fileList }) {
+  fileList.value = fileList
 }
 ```
 
@@ -461,8 +461,8 @@ const action = ref<string>('https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bd
 
 const fileList = ref([])
 
-function handleChange({ files }) {
-  fileList.value = files
+function handleChange({ fileList }) {
+  fileList.value = fileList
 }
 ```
 
@@ -479,8 +479,8 @@ const action = ref<string>('https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bd
 
 const fileList = ref([])
 
-function handleChange({ files }) {
-  fileList.value = files
+function handleChange({ fileList }) {
+  fileList.value = fileList
 }
 ```
 
@@ -497,8 +497,8 @@ const action = ref<string>('https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bd
 
 const fileList = ref([])
 
-function handleChange({ files }) {
-  fileList.value = files
+function handleChange({ fileList }) {
+  fileList.value = fileList
 }
 ```
 

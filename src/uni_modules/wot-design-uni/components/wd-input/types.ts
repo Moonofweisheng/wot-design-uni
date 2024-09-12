@@ -125,7 +125,7 @@ export const inputProps = {
   /**
    * 设置左侧标题宽度
    */
-  labelWidth: makeStringProp('33%'),
+  labelWidth: makeStringProp(''),
   /**
    * 使用 label 插槽
    */
@@ -162,14 +162,18 @@ export const inputProps = {
    * 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示
    * 类型: "focus" | "always"
    * 默认值: "always"
-   * 最低版本: $LOWEST_VERSION$
    */
   clearTrigger: makeStringProp<InputClearTrigger>('always'),
   /**
    * 是否在点击清除按钮时聚焦输入框
    * 类型: boolean
    * 默认值: true
-   * 最低版本: $LOWEST_VERSION$
    */
-  focusWhenClear: makeBooleanProp(true)
+  focusWhenClear: makeBooleanProp(true),
+  /**
+   * 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件
+   * 类型: boolean
+   * 默认值: true
+   */
+  ignoreCompositionEvent: makeBooleanProp(true)
 }

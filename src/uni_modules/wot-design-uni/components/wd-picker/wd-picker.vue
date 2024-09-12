@@ -80,6 +80,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdPopup from '../wd-popup/wd-popup.vue'
+import wdPickerView from '../wd-picker-view/wd-picker-view.vue'
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
 import { deepClone, defaultDisplayFormat, getType, isArray, isDef, isFunction } from '../common/util'
 import { useCell } from '../composables/useCell'
@@ -292,6 +295,10 @@ function showPopup() {
 function onCancel() {
   popupShow.value = false
   emit('cancel')
+  let timmer = setTimeout(() => {
+    clearTimeout(timmer)
+    isDef(pickerViewWd.value) && pickerViewWd.value.resetColumns(resetColumns.value)
+  }, 300)
 }
 /**
  * 点击确定按钮触发。展示选中值，触发cancel事件。

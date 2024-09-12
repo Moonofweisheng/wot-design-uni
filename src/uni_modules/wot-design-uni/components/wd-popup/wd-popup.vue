@@ -27,6 +27,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdOverlay from '../wd-overlay/wd-overlay.vue'
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj, requestAnimationFrame } from '../common/util'
 import { popupProps } from './types'

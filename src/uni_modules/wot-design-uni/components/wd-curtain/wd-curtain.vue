@@ -37,6 +37,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdPopup from '../wd-popup/wd-popup.vue'
 import { ref, watch } from 'vue'
 import { curtainProps } from './types'
 

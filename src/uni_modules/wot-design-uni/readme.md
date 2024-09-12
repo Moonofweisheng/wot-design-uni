@@ -68,6 +68,8 @@
 <img src="https://wot-design-uni.pages.dev/wx.jpg" width="200" height="200"/>
 <img src="https://wot-design-uni.pages.dev/alipay.png" width="200" height="200" />
 <img src="https://wot-design-uni.pages.dev/h5.png" width="200" height="200" />
+<img src="https://wot-design-uni.pages.dev/android.png" width="200" height="200" />
+
 </p>
 
 ## 快速上手

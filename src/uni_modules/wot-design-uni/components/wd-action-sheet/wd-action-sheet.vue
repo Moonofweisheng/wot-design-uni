@@ -71,6 +71,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdPopup from '../wd-popup/wd-popup.vue'
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdLoading from '../wd-loading/wd-loading.vue'
 import { watch, ref } from 'vue'
 import { actionSheetProps, type Panel } from './types'
 import { isArray } from '../common/util'
@@ -124,9 +127,9 @@ function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) 
 }
 function handleClickModal() {
   emit('click-modal')
-  if (props.closeOnClickModal) {
-    close()
-  }
+  // if (props.closeOnClickModal) {
+  //   close()
+  // }
 }
 function handleCancel() {
   emit('cancel')

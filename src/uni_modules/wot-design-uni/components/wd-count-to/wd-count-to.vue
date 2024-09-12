@@ -27,6 +27,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdText from '../wd-text/wd-text.vue'
 import { computed, watch, onMounted } from 'vue'
 import { countToProps } from './types'
 import { easingFn, isNumber } from '../common/util'

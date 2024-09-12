@@ -23,6 +23,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdTransition from '../wd-transition/wd-transition.vue'
 import useLockScroll from '../composables/useLockScroll'
 import { overlayProps } from './types'
 

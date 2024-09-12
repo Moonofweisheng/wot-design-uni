@@ -20,20 +20,6 @@
       }
     }
 
-    @include when(dot) {
-      .wd-radio__shape {
-  
-        &::before {
-          background-color: $-radio-dot-checked-bg;
-        }
-      }
-      @include when(checked) {
-        .wd-radio__shape {
-          background-color: transparent;
-        }
-      }
-    }
-
     @include when(disabled) {
       .wd-radio__label {
         color: $-dark-color-gray;
@@ -91,7 +77,6 @@
     font-size: $-radio-size;
     color: transparent;
     display: none;
-    background: $-radio-bg;
     vertical-align: middle;
     transition: background 0.2s;
   }
@@ -145,8 +130,10 @@
     }
     @include when(checked) {
       .wd-radio__shape {
-        background-color: $-radio-dot-checked-bg;
-        border-color: $-radio-dot-checked-border-color;
+        background-color: currentColor;
+        border-color: currentColor;
+        // background-color: $-radio-dot-checked-bg;
+        // border-color: $-radio-dot-checked-border-color;
         &::before {
           transform: scale(1);
         }

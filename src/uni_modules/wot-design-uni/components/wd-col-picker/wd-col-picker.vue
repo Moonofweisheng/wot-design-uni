@@ -38,6 +38,7 @@
       :safe-area-inset-bottom="safeAreaInsetBottom"
       @open="handlePickerOpend"
       @close="handlePickerClose"
+      @closed="handlePickerClosed"
     >
       <view class="wd-col-picker__selected">
         <scroll-view :scroll-x="true" scroll-with-animation :scroll-left="scrollLeft">
@@ -95,6 +96,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdLoading from '../wd-loading/wd-loading.vue'
+import wdActionSheet from '../wd-action-sheet/wd-action-sheet.vue'
 import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties, reactive, nextTick } from 'vue'
 import { addUnit, debounce, getRect, isArray, isBoolean, isDef, isFunction, objToStyle } from '../common/util'
 import { useCell } from '../composables/useCell'
@@ -279,7 +283,10 @@ function handlePickerOpend() {
 
 function handlePickerClose() {
   pickerShow.value = false
-  // 如果目前用户正在选择，需要在popup关闭时将数据重置回上次数据，popup 关闭时间 250
+  emit('close')
+}
+
+function handlePickerClosed() {
   if (isChange.value) {
     setTimeout(() => {
       selectList.value = lastSelectList.value.slice(0)
@@ -291,8 +298,8 @@ function handlePickerClose() {
       isChange.value = false
     }, 250)
   }
-  emit('close')
 }
+
 function showPicker() {
   const { disabled, readonly } = props
 
@@ -427,40 +434,44 @@ function handleColClick(index: number) {
 function setLineStyle(animation: boolean = true) {
   if (!inited.value) return
   const { lineWidth, lineHeight } = props
-  getRect($item, true, proxy).then((rects) => {
-    const lineStyle: CSSProperties = {}
-    if (isDef(lineWidth)) {
-      lineStyle.width = addUnit(lineWidth)
-    }
-    if (isDef(lineHeight)) {
-      lineStyle.height = addUnit(lineHeight)
-      lineStyle.borderRadius = `calc(${addUnit(lineHeight)} / 2)`
-    }
-    const rect = rects[currentCol.value]
-    let left = rects.slice(0, currentCol.value).reduce((prev, curr) => prev + Number(curr.width), 0) + Number(rect.width) / 2
-    lineStyle.transform = `translateX(${left}px) translateX(-50%)`
+  getRect($item, true, proxy)
+    .then((rects) => {
+      const lineStyle: CSSProperties = {}
+      if (isDef(lineWidth)) {
+        lineStyle.width = addUnit(lineWidth)
+      }
+      if (isDef(lineHeight)) {
+        lineStyle.height = addUnit(lineHeight)
+        lineStyle.borderRadius = `calc(${addUnit(lineHeight)} / 2)`
+      }
+      const rect = rects[currentCol.value]
+      let left = rects.slice(0, currentCol.value).reduce((prev, curr) => prev + Number(curr.width), 0) + Number(rect.width) / 2
+      lineStyle.transform = `translateX(${left}px) translateX(-50%)`
 
-    if (animation) {
-      lineStyle.transition = 'width 300ms ease, transform 300ms ease'
-    }
+      if (animation) {
+        lineStyle.transition = 'width 300ms ease, transform 300ms ease'
+      }
 
-    state.lineStyle = objToStyle(lineStyle)
-  })
+      state.lineStyle = objToStyle(lineStyle)
+    })
+    .catch(() => {})
 }
 /**
  * @description scroll-view滑动到active的tab_nav
  */
 function lineScrollIntoView() {
   if (!inited.value) return
-  Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)]).then(([navItemsRects, navRect]) => {
-    if (!isArray(navItemsRects) || navItemsRects.length === 0) return
-    // 选中元素
-    const selectItem = navItemsRects[currentCol.value]
-    // 选中元素之前的节点的宽度总和
-    const offsetLeft = navItemsRects.slice(0, currentCol.value).reduce((prev, curr) => prev + Number(curr.width), 0)
-    // scroll-view滑动到selectItem的偏移量
-    scrollLeft.value = offsetLeft - ((navRect as any).width - Number(selectItem.width)) / 2
-  })
+  Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)])
+    .then(([navItemsRects, navRect]) => {
+      if (!isArray(navItemsRects) || navItemsRects.length === 0) return
+      // 选中元素
+      const selectItem = navItemsRects[currentCol.value]
+      // 选中元素之前的节点的宽度总和
+      const offsetLeft = navItemsRects.slice(0, currentCol.value).reduce((prev, curr) => prev + Number(curr.width), 0)
+      // scroll-view滑动到selectItem的偏移量
+      scrollLeft.value = offsetLeft - ((navRect as any).width - Number(selectItem.width)) / 2
+    })
+    .catch(() => {})
 }
 
 // 递归列数据补齐

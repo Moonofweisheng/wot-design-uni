@@ -18,7 +18,7 @@
         v-model="inputValue"
         :show-count="false"
         :placeholder="placeholderValue"
-        :disabled="disabled"
+        :disabled="disabled || readonly"
         :maxlength="maxlength"
         :focus="focused"
         :auto-focus="autoFocus"
@@ -36,6 +36,7 @@
         :confirm-type="confirmType"
         :confirm-hold="confirmHold"
         :disable-default-padding="disableDefaultPadding"
+        :ignoreCompositionEvent="ignoreCompositionEvent"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -71,6 +72,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { objToStyle, requestAnimationFrame, isDef, pause } from '../common/util'
 import { useCell } from '../composables/useCell'
@@ -169,7 +171,7 @@ const isRequired = computed(() => {
 
 // 当前文本域文字长度
 const currentLength = computed(() => {
-  return String(props.modelValue || '').length
+  return String(formatValue(props.modelValue) || '').length
 })
 
 const rootClass = computed(() => {
