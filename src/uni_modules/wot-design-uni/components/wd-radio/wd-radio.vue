@@ -100,7 +100,7 @@ watch(
  */
 function handleClick() {
   const { value } = props
-  if (!disabledValue.value && radioGroup && !isDef(value)) {
+  if (!disabledValue.value && radioGroup && isDef(value)) {
     radioGroup.updateValue(value)
   }
 }
