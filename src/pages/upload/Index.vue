@@ -126,7 +126,7 @@ const beforeChoose = ({ file, resolve }: any) => {
     })
 }
 
-const beforePreview = ({ resolve }: any) => {
+const beforePreview = ({ resolve, file }: any) => {
   messageBox
     .confirm({
       msg: '是否预览图片',
