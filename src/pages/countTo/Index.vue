@@ -12,7 +12,7 @@
       <wd-count-to type="error" prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
       <wd-count-to type="success" prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
       <wd-count-to type="warning" prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
-      <wd-count-to type="info" prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
+      <wd-count-to prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
     </demo-block>
 
     <demo-block title="手动控制">
