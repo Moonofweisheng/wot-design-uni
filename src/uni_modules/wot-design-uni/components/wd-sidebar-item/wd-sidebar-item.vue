@@ -39,7 +39,7 @@ import { deepAssign, isDef, isUndefined, omitBy } from '../common/util'
 
 const props = defineProps(sidebarItemProps)
 
-const { parent: sidebar } = useParent(SIDEBAR_KEY)
+const { parent } = useParent(SIDEBAR_KEY)
 
 const customBadgeProps = computed(() => {
   const badgeProps: Partial<BadgeProps> = deepAssign(
@@ -61,7 +61,7 @@ const customBadgeProps = computed(() => {
 
 const active = computed(() => {
   let active: boolean = false
-  if (sidebar && sidebar.props.modelValue === props.value) {
+  if (parent.value && parent.value.props.modelValue === props.value) {
     active = true
   }
   return active
@@ -69,12 +69,12 @@ const active = computed(() => {
 
 const prefix = computed(() => {
   let prefix: boolean = false
-  if (sidebar) {
-    let activeIndex: number = sidebar.children.findIndex((c: any) => {
-      return c.value === sidebar.props.modelValue
+  if (parent.value) {
+    let activeIndex: number = parent.value.children.findIndex((c: any) => {
+      return c.value === parent.value!.props.modelValue
     })
 
-    let currentIndex: number = sidebar.children.findIndex((c: any) => {
+    let currentIndex: number = parent.value.children.findIndex((c: any) => {
       return c.value === props.value
     })
 
@@ -87,12 +87,12 @@ const prefix = computed(() => {
 
 const suffix = computed(() => {
   let suffix: boolean = false
-  if (sidebar) {
-    let activeIndex: number = sidebar.children.findIndex((c: any) => {
-      return c.value === sidebar.props.modelValue
+  if (parent.value) {
+    let activeIndex: number = parent.value.children.findIndex((c: any) => {
+      return c.value === parent.value!.props.modelValue
     })
 
-    let currentIndex: number = sidebar.children.findIndex((c: any) => {
+    let currentIndex: number = parent.value.children.findIndex((c: any) => {
       return c.value === props.value
     })
 
@@ -107,7 +107,7 @@ function handleClick() {
   if (props.disabled) {
     return
   }
-  sidebar && sidebar.setChange(props.value, props.label)
+  parent.value && parent.value.setChange(props.value, props.label)
 }
 </script>
 

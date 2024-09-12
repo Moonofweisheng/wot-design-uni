@@ -28,11 +28,11 @@ const props = defineProps(tabProps)
 const painted = ref<boolean>(false) // 初始状态tab不会渲染，必须通过tabs来设置painted使tab渲染
 const isShow = ref<boolean>(false)
 const { proxy } = getCurrentInstance() as any
-const { parent: tabs, index } = useParent(TABS_KEY)
+const { parent, index } = useParent(TABS_KEY)
 
 // 激活项下标
 const activeIndex = computed(() => {
-  return isDef(tabs) ? tabs.state.activeIndex : 0
+  return isDef(parent.value) ? parent.value.state.activeIndex : 0
 })
 
 watch(
@@ -42,7 +42,7 @@ watch(
       console.error('[wot design] error(wd-tab): the type of name should be number or string')
       return
     }
-    if (tabs) {
+    if (parent.value) {
       checkName(proxy)
     }
   },
@@ -73,8 +73,8 @@ function checkName(self: any) {
   if (myName === undefined || myName === null || myName === '') {
     return
   }
-  tabs &&
-    tabs.children.forEach((child: any) => {
+  parent.value &&
+    parent.value.children.forEach((child: any) => {
       if (child.$.uid !== self.$.uid && child.name === myName) {
         console.error(`The tab's bound value: ${myName} has been used`)
       }

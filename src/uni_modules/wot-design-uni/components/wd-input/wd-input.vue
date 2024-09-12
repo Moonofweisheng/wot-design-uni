@@ -133,7 +133,7 @@ watch(
   { immediate: true, deep: true }
 )
 
-const { parent: form } = useParent(FORM_KEY)
+const { parent } = useParent(FORM_KEY)
 
 const placeholderValue = computed(() => {
   return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
@@ -163,8 +163,8 @@ const showWordCount = computed(() => {
  * 表单错误提示信息
  */
 const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
+  if (parent.value && props.prop && parent.value.errorMessages && parent.value.errorMessages[props.prop]) {
+    return parent.value.errorMessages[props.prop]
   } else {
     return ''
   }
@@ -173,8 +173,8 @@ const errorMessage = computed(() => {
 // 是否展示必填
 const isRequired = computed(() => {
   let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
+  if (parent.value && parent.value.props.rules) {
+    const rules = parent.value.props.rules
     for (const key in rules) {
       if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
         formRequired = rules[key].some((rule: FormItemRule) => rule.required)

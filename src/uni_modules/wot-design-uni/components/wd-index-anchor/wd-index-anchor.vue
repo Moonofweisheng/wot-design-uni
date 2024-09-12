@@ -21,7 +21,7 @@ import { useParent } from '../composables/useParent'
 
 const props = defineProps(indexAnchorProps)
 
-const { parent: indexBar } = useParent(indexBarInjectionKey)
+const { parent } = useParent(indexBarInjectionKey)
 
 const indexAnchorId = ref<string>(`indexBar${uuid()}`)
 
@@ -30,12 +30,12 @@ const { proxy } = getCurrentInstance()!
 const top = ref<number>(0)
 
 const isSticky = computed(() => {
-  return indexBar && indexBar.props.sticky && indexBar.anchorState.activeIndex === props.index
+  return parent.value && parent.value.props.sticky && parent.value.anchorState.activeIndex === props.index
 })
 
 function getInfo() {
   getRect(`#${indexAnchorId.value}`, false, proxy).then((res) => {
-    if (isDef(indexBar)) {
+    if (isDef(parent.value)) {
       top.value = Math.floor(res.top!)
     }
   })

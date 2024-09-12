@@ -6,7 +6,9 @@ import {
   type InjectionKey,
   getCurrentInstance,
   type ComponentPublicInstance,
-  type ComponentInternalInstance
+  type ComponentInternalInstance,
+  onMounted,
+  type Ref
 } from 'vue'
 
 type ParentProvide<T> = T & {
@@ -16,26 +18,32 @@ type ParentProvide<T> = T & {
   internalChildren: ComponentInternalInstance[]
 }
 
+type UseParentResult<T> = {
+  parent: Ref<ParentProvide<T> | null>
+  index: Ref<number>
+}
+
 export function useParent<T>(key: InjectionKey<ParentProvide<T>>) {
-  const parent = inject(key, null)
+  const result: UseParentResult<T> = {
+    parent: ref(null),
+    index: ref<number>(-1)
+  }
+  // #ifdef MP-TOUTIAO
+  onMounted(() => {
+    // #endif
+    result.parent.value = inject(key, null)
+    if (result.parent.value) {
+      const instance = getCurrentInstance()!
+      const { link, unlink, internalChildren } = result.parent.value
 
-  if (parent) {
-    const instance = getCurrentInstance()!
-    const { link, unlink, internalChildren } = parent
+      link(instance)
+      onUnmounted(() => unlink(instance))
 
-    link(instance)
-    onUnmounted(() => unlink(instance))
-
-    const index = computed(() => internalChildren.indexOf(instance))
-
-    return {
-      parent,
-      index
+      result.index.value = computed(() => internalChildren.indexOf(instance)).value
     }
-  }
+    // #ifdef MP-TOUTIAO
+  })
+  // #endif
 
-  return {
-    parent: null,
-    index: ref(-1)
-  }
+  return result
 }

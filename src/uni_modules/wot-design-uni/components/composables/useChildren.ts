@@ -6,7 +6,8 @@ import {
   type InjectionKey,
   type VNodeNormalizedChildren,
   type ComponentPublicInstance,
-  type ComponentInternalInstance
+  type ComponentInternalInstance,
+  onMounted
 } from 'vue'
 
 // 小程序端不支持从vue导出的isVNode方法，参考uni-mp-vue的实现
@@ -49,7 +50,6 @@ const findVNodeIndex = (vnodes: VNode[], vnode: VNode) => {
   return index
 }
 
-// sort children instances by vnodes order
 export function sortChildren(
   parent: ComponentInternalInstance,
   publicChildren: ComponentPublicInstance[],
@@ -92,18 +92,24 @@ export function useChildren<
       internalChildren.splice(index, 1)
     }
 
-    provide(
-      key,
-      Object.assign(
-        {
-          link,
-          unlink,
-          children: publicChildren,
-          internalChildren
-        },
-        value
+    // #ifdef MP-TOUTIAO
+    onMounted(() => {
+      // #endif
+      provide(
+        key,
+        Object.assign(
+          {
+            link,
+            unlink,
+            children: publicChildren,
+            internalChildren
+          },
+          value
+        )
       )
-    )
+      // #ifdef MP-TOUTIAO
+    })
+    // #endif
   }
 
   return {

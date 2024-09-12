@@ -41,18 +41,18 @@ import { formItemProps } from './types'
 
 const props = defineProps(formItemProps)
 
-const { parent: form, index } = useParent(FORM_KEY)
+const { parent, index } = useParent(FORM_KEY)
 
 const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
+  if (parent.value && props.prop && parent.value.errorMessages && parent.value.errorMessages[props.prop]) {
+    return parent.value.errorMessages[props.prop]
   } else {
     return ''
   }
 })
 
 const border = computed(() => {
-  if (index.value > 0 && form && form.props.border) {
+  if (index.value > 0 && parent.value && parent.value.props.border) {
     return true
   } else {
     return false

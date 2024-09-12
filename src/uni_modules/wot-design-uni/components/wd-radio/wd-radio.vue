@@ -41,29 +41,29 @@ import { getPropByPath, isDef } from '../common/util'
 
 const props = defineProps(radioProps)
 
-const { parent: radioGroup } = useParent(RADIO_GROUP_KEY)
+const { parent } = useParent(RADIO_GROUP_KEY)
 
 const isChecked = computed(() => {
-  if (radioGroup) {
-    return props.value === radioGroup.props.modelValue
+  if (parent.value) {
+    return props.value === parent.value.props.modelValue
   } else {
     return false
   }
 })
 
 const shapeValue = computed(() => {
-  return props.shape || getPropByPath(radioGroup, 'props.shape')
+  return props.shape || getPropByPath(parent.value, 'props.shape')
 })
 
 const checkedColorValue = computed(() => {
-  return props.checkedColor || getPropByPath(radioGroup, 'props.checkedColor')
+  return props.checkedColor || getPropByPath(parent.value, 'props.checkedColor')
 })
 
 const disabledValue = computed(() => {
   if (isDef(props.disabled)) {
     return props.disabled
   } else {
-    return getPropByPath(radioGroup, 'props.disabled')
+    return getPropByPath(parent.value, 'props.disabled')
   }
 })
 
@@ -71,19 +71,19 @@ const inlineValue = computed(() => {
   if (isDef(props.inline)) {
     return props.inline
   } else {
-    return getPropByPath(radioGroup, 'props.inline')
+    return getPropByPath(parent.value, 'props.inline')
   }
 })
 
 const sizeValue = computed(() => {
-  return props.size || getPropByPath(radioGroup, 'props.size')
+  return props.size || getPropByPath(parent.value, 'props.size')
 })
 
 const cellValue = computed(() => {
   if (isDef(props.cell)) {
     return props.cell
   } else {
-    return getPropByPath(radioGroup, 'props.cell')
+    return getPropByPath(parent.value, 'props.cell')
   }
 })
 
@@ -100,8 +100,8 @@ watch(
  */
 function handleClick() {
   const { value } = props
-  if (!disabledValue.value && radioGroup && !isDef(value)) {
-    radioGroup.updateValue(value)
+  if (!disabledValue.value && parent.value && !isDef(value)) {
+    parent.value.updateValue(value)
   }
 }
 </script>

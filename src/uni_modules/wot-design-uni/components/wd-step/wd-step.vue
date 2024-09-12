@@ -53,7 +53,7 @@ import type { CSSProperties } from 'vue'
 
 const props = defineProps(stepProps)
 
-const { parent: steps, index } = useParent(STEPS_KEY)
+const { parent, index } = useParent(STEPS_KEY)
 
 const { translate } = useTranslate('steps')
 
@@ -66,22 +66,22 @@ const currentTitle = computed(() => {
 })
 const rootStyle = computed(() => {
   const style: CSSProperties = {}
-  if (steps) {
-    const { vertical, space } = steps.props
+  if (parent.value) {
+    const { vertical, space } = parent.value.props
     if (vertical) {
       if (isDef(space)) {
         style['height'] = space
       }
     } else {
-      style['width'] = space || 100 / steps.children.length + '%'
+      style['width'] = space || 100 / parent.value.children.length + '%'
     }
   }
   return `${objToStyle(style)};${props.customStyle}`
 })
 
 const canAlignCenter = computed(() => {
-  if (isDef(steps)) {
-    const { vertical, alignCenter } = steps.props
+  if (isDef(parent.value)) {
+    const { vertical, alignCenter } = parent.value.props
     return Boolean(!vertical && alignCenter)
   } else {
     return false
@@ -89,23 +89,23 @@ const canAlignCenter = computed(() => {
 })
 
 const vertical = computed(() => {
-  if (isDef(steps)) {
-    return Boolean(steps.props.vertical)
+  if (isDef(parent.value)) {
+    return Boolean(parent.value.props.vertical)
   } else {
     return false
   }
 })
 const dot = computed(() => {
-  if (isDef(steps)) {
-    return Boolean(steps.props.dot)
+  if (isDef(parent.value)) {
+    return Boolean(parent.value.props.dot)
   } else {
     return false
   }
 })
 
 const childrenLength = computed(() => {
-  if (isDef(steps)) {
-    return Number(steps.children.length)
+  if (isDef(parent.value)) {
+    return Number(parent.value.children.length)
   } else {
     return 0
   }
@@ -116,8 +116,8 @@ function getCurrentStatus(index: number) {
     return props.status
   }
 
-  if (steps) {
-    const { active } = steps.props
+  if (parent.value) {
+    const { active } = parent.value.props
     if (Number(active) > index) {
       return 'finished'
     } else if (Number(active) === index) {

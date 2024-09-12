@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="`wd-table-col ${fixed ? 'wd-table-col--fixed' : ''} ${isLastFixed && isDef(table) && table.scrollLeft ? 'is-shadow' : ''}`"
+    :class="`wd-table-col ${fixed ? 'wd-table-col--fixed' : ''} ${isLastFixed && isDef(parent) && parent.scrollLeft ? 'is-shadow' : ''}`"
     :style="columnStyle"
   >
     <view
@@ -35,14 +35,14 @@ import { TABLE_KEY } from '../wd-table/types'
 
 const props = defineProps(tableColumnProps)
 
-const { parent: table, index: columnIndex } = useParent(TABLE_KEY)
+const { parent, index: columnIndex } = useParent(TABLE_KEY)
 
 const sortDirection = ref<SortDirection>(0) // 排序方向
 
 // 是否开启斑马纹
 const stripe = computed(() => {
-  if (isDef(table)) {
-    return table.props.stripe
+  if (isDef(parent.value)) {
+    return parent.value.props.stripe
   } else {
     return false
   }
@@ -52,8 +52,8 @@ const stripe = computed(() => {
  * 是否有边框
  */
 const border = computed(() => {
-  if (isDef(table)) {
-    return table.props.border
+  if (isDef(parent.value)) {
+    return parent.value.props.border
   } else {
     return false
   }
@@ -63,8 +63,8 @@ const border = computed(() => {
  * 是否超出省略
  */
 const ellipsis = computed(() => {
-  if (isDef(table)) {
-    return table.props.ellipsis
+  if (isDef(parent.value)) {
+    return parent.value.props.ellipsis
   } else {
     return false
   }
@@ -75,8 +75,8 @@ const ellipsis = computed(() => {
  */
 const isLastFixed = computed(() => {
   let isLastFixed: boolean = false
-  if (props.fixed && isDef(table)) {
-    isLastFixed = table.getIsLastFixed(props)
+  if (props.fixed && isDef(parent.value)) {
+    isLastFixed = parent.value.getIsLastFixed(props)
   }
   return isLastFixed
 })
@@ -89,8 +89,8 @@ const columnStyle = computed(() => {
   if (isDef(props.width)) {
     style['width'] = addUnit(props.width)
   }
-  if (props.fixed && isDef(table) && isFunction(table.getFixedStyle)) {
-    style = table.getFixedStyle(columnIndex.value, style)
+  if (props.fixed && isDef(parent.value) && isFunction(parent.value.getFixedStyle)) {
+    style = parent.value.getFixedStyle(columnIndex.value, style)
   }
   return style
 })
@@ -100,23 +100,23 @@ const columnStyle = computed(() => {
  */
 const cellStyle = computed(() => {
   let style: CSSProperties = {}
-  const rowHeight: string | number = isDef(table) ? table.props.rowHeight : '80rpx' // 自定义行高
+  const rowHeight: string | number = isDef(parent.value) ? parent.value.props.rowHeight : '80rpx' // 自定义行高
   if (isDef(rowHeight)) {
     style['height'] = addUnit(rowHeight)
   }
-  if (props.fixed && isDef(table) && isFunction(table.getFixedStyle)) {
-    style = table.getFixedStyle(columnIndex.value, style)
+  if (props.fixed && isDef(parent.value) && isFunction(parent.value.getFixedStyle)) {
+    style = parent.value.getFixedStyle(columnIndex.value, style)
   }
   return objToStyle(style)
 })
 
 // 列数据
 const column = computed(() => {
-  if (!isDef(table)) {
+  if (!isDef(parent.value)) {
     return []
   }
 
-  const column: any[] = table.props.data.map((item) => {
+  const column: any[] = parent.value.props.data.map((item) => {
     return item[props.prop]
   })
   return column
@@ -127,18 +127,18 @@ const column = computed(() => {
  * @param index 行下标
  */
 function handleRowClick(index: number) {
-  if (!isDef(table)) {
+  if (!isDef(parent.value)) {
     return
   }
-  isFunction(table.rowClick) && table.rowClick(index)
+  isFunction(parent.value.rowClick) && parent.value.rowClick(index)
 }
 
 // 行数据
 function getScope(index: number) {
-  if (!isDef(table)) {
+  if (!isDef(parent.value)) {
     return {}
   }
-  return table.props.data[index] || {}
+  return parent.value.props.data[index] || {}
 }
 
 defineExpose({ sortDirection: sortDirection })

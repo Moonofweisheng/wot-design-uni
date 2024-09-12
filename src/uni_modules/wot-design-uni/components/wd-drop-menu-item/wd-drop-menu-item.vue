@@ -73,17 +73,17 @@ const modal = ref<boolean>(true)
 const closeOnClickModal = ref<boolean>(true)
 const duration = ref<number>(0)
 
-const { parent: dropMenu } = useParent(DROP_MENU_KEY)
+const { parent } = useParent(DROP_MENU_KEY)
 
 const { proxy } = getCurrentInstance() as any
 
 const positionStyle = computed(() => {
   let style: string = ''
-  if (showWrapper.value && dropMenu) {
+  if (showWrapper.value && parent.value) {
     style =
-      dropMenu.props.direction === 'down'
-        ? `top: calc(var(--window-top) + ${dropMenu.offset.value}px); bottom: 0;`
-        : `top: 0; bottom: calc(var(--window-bottom) + ${dropMenu.offset.value}px)`
+      parent.value.props.direction === 'down'
+        ? `top: calc(var(--window-top) + ${parent.value.offset.value}px); bottom: 0;`
+        : `top: 0; bottom: calc(var(--window-bottom) + ${parent.value.offset.value}px)`
   } else {
     style = ''
   }
@@ -176,11 +176,11 @@ function open() {
 function handleOpen() {
   showWrapper.value = true
   showPop.value = true
-  if (dropMenu) {
-    modal.value = Boolean(dropMenu.props.modal)
-    duration.value = Number(dropMenu.props.duration)
-    closeOnClickModal.value = Boolean(dropMenu.props.closeOnClickModal)
-    position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
+  if (parent.value) {
+    modal.value = Boolean(parent.value.props.modal)
+    duration.value = Number(parent.value.props.duration)
+    closeOnClickModal.value = Boolean(parent.value.props.closeOnClickModal)
+    position.value = parent.value.props.direction === 'down' ? 'top' : 'bottom'
   }
   emit('open')
 }

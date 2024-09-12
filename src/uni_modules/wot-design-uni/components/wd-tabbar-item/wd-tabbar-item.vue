@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2024-09-11 18:38:42
+ * @LastEditTime: 2024-09-12 12:55:54
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-tabbar-item\wd-tabbar-item.vue
+ * 记得注释
+-->
 <template>
   <view :class="`wd-tabbar-item ${customClass}`" :style="customStyle" @click="handleClick">
     <wd-badge v-bind="customBadgeProps">
@@ -39,7 +48,7 @@ import type { BadgeProps } from '../wd-badge/types'
 
 const props = defineProps(tabbarItemProps)
 
-const { parent: tabbar, index } = useParent(TABBAR_KEY)
+const { parent, index } = useParent(TABBAR_KEY)
 
 const customBadgeProps = computed(() => {
   const badgeProps: Partial<BadgeProps> = deepAssign(
@@ -61,12 +70,12 @@ const customBadgeProps = computed(() => {
 
 const textStyle = computed(() => {
   const style: CSSProperties = {}
-  if (tabbar) {
-    if (active.value && tabbar.props.activeColor) {
-      style['color'] = tabbar.props.activeColor
+  if (parent.value) {
+    if (active.value && parent.value.props.activeColor) {
+      style['color'] = parent.value.props.activeColor
     }
-    if (!active.value && tabbar.props.inactiveColor) {
-      style['color'] = tabbar.props.inactiveColor
+    if (!active.value && parent.value.props.inactiveColor) {
+      style['color'] = parent.value.props.inactiveColor
     }
   }
 
@@ -75,8 +84,8 @@ const textStyle = computed(() => {
 
 const active = computed(() => {
   const name = isDef(props.name) ? props.name : index.value
-  if (tabbar) {
-    if (tabbar.props.modelValue === name) {
+  if (parent.value) {
+    if (parent.value.props.modelValue === name) {
       return true
     } else {
       return false
@@ -91,7 +100,7 @@ const active = computed(() => {
  */
 function handleClick() {
   const name: string | number = isDef(props.name) ? props.name : index.value
-  tabbar && tabbar.setChange({ name })
+  parent.value && parent.value.setChange({ name })
 }
 </script>
 <style lang="scss" scoped>

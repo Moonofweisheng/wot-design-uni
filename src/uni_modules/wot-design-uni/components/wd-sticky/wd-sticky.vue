@@ -42,7 +42,7 @@ const stickyState = reactive({
   state: ''
 })
 
-const { parent: stickyBox } = useParent(STICKY_BOX_KEY)
+const { parent } = useParent(STICKY_BOX_KEY)
 
 const { proxy } = getCurrentInstance() as any
 
@@ -113,8 +113,8 @@ function handleResize(detail: any) {
   stickyState.height = detail.height
   requestAnimationFrame(() => {
     observerContentScroll()
-    if (!stickyBox || !stickyBox.observerForChild) return
-    stickyBox.observerForChild(proxy)
+    if (!parent.value || !parent.value.observerForChild) return
+    parent.value.observerForChild(proxy)
   })
 }
 /**
@@ -144,7 +144,7 @@ function observerContentScroll() {
  */
 function handleRelativeTo({ boundingClientRect }: any) {
   // sticky 高度大于或等于 wd-sticky-box，使用 wd-sticky-box 无任何意义
-  if (stickyBox && stickyState.height >= stickyBox.boxStyle.height) {
+  if (parent.value && stickyState.height >= parent.value.boxStyle.height) {
     stickyState.position = 'absolute'
     stickyState.top = 0
     return

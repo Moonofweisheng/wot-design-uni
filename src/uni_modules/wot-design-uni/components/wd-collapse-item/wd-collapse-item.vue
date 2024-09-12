@@ -36,7 +36,7 @@ const collapseId = ref<string>(`collapseId${uuid()}`)
 
 const props = defineProps(collapseItemProps)
 
-const { parent: collapse, index } = useParent(COLLAPSE_KEY)
+const { parent, index } = useParent(COLLAPSE_KEY)
 
 const height = ref<string | number>('')
 const inited = ref<boolean>(false)
@@ -67,8 +67,8 @@ const contentStyle = computed(() => {
 })
 
 const selected = computed(() => {
-  if (collapse) {
-    return collapse.props.modelValue
+  if (parent.value) {
+    return parent.value.props.modelValue
   } else {
     return []
   }
@@ -136,16 +136,16 @@ function handleClick() {
       }
       if (isPromise(response)) {
         response.then(() => {
-          collapse && collapse.toggle(name, !expanded.value)
+          parent.value && parent.value.toggle(name, !expanded.value)
         })
       } else {
-        collapse && collapse.toggle(name, !expanded.value)
+        parent.value && parent.value.toggle(name, !expanded.value)
       }
     } else {
-      collapse && collapse.toggle(name, !expanded.value)
+      parent.value && parent.value.toggle(name, !expanded.value)
     }
   } else {
-    collapse && collapse.toggle(name, !expanded.value)
+    parent.value && parent.value.toggle(name, !expanded.value)
   }
 }
 
