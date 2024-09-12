@@ -64,6 +64,7 @@ export type UploadCameraType = 'front' | 'back'
 export type UploadStatusType = 'pending' | 'loading' | 'success' | 'fail'
 
 export type UploadBeforePreviewOption = {
+  file: UploadFileItem
   index: number
   imgList: string[]
   resolve: (isPass: boolean) => void
