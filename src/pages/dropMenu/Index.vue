@@ -57,17 +57,9 @@
       </demo-block>
       <demo-block title="可搜索" transparent>
         <wd-drop-menu>
-          <wd-drop-menu-item
-            v-model="value11"
-            :options="option1"
-            @change="handleChange1"
-          />
-          <wd-drop-menu-item
-            v-model="value12"
-            :options="option2"
-            @change="handleChange2"
-            filterable
-          />
+          <wd-drop-menu-item v-model="value11" :options="option1" @change="handleChange11" />
+          <wd-drop-menu-item v-model="value12" :options="option2" @change="handleChange12" filterable />
+          <wd-drop-menu-item v-model="value13" :options="option2" @change="handleChange13" filterable filter-placeholder=“检索” />
         </wd-drop-menu>
       </demo-block>
     </view>
@@ -98,8 +90,10 @@ const value7 = ref<number>(0)
 const value8 = ref<number>(0)
 const value9 = ref<number>(0)
 const value10 = ref<number>(0)
+  
 const value11 = ref<number>(0)
 const value12 = ref<number>(0)
+const value13 = ref<number>(0)
 
 const option1 = ref<Record<string, any>[]>([
   { label: '全部商品', value: 0 },
@@ -141,6 +135,16 @@ function handleChange8({ value }: any) {
   console.log(value)
 }
 function handleChange9({ value }: any) {
+  console.log(value)
+}
+
+function handleChange11({ value }: any) {
+  console.log(value)
+}
+function handleChange12({ value }: any) {
+  console.log(value)
+}
+function handleChange13({ value }: any) {
   console.log(value)
 }
 
