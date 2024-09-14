@@ -55,6 +55,21 @@
           <wd-drop-menu-item v-model="value9" :options="option2" @change="handleChange9" />
         </wd-drop-menu>
       </demo-block>
+      <demo-block title="可搜索" transparent>
+        <wd-drop-menu>
+          <wd-drop-menu-item
+            v-model="value11"
+            :options="option1"
+            @change="handleChange1"
+          />
+          <wd-drop-menu-item
+            v-model="value12"
+            :options="option2"
+            @change="handleChange2"
+            filterable
+          />
+        </wd-drop-menu>
+      </demo-block>
     </view>
   </page-wraper>
 </template>
@@ -83,6 +98,8 @@ const value7 = ref<number>(0)
 const value8 = ref<number>(0)
 const value9 = ref<number>(0)
 const value10 = ref<number>(0)
+const value11 = ref<number>(0)
+const value12 = ref<number>(0)
 
 const option1 = ref<Record<string, any>[]>([
   { label: '全部商品', value: 0 },

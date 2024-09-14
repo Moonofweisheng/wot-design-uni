@@ -186,6 +186,28 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 </wd-drop-menu>
 ```
 
+
+## 可搜索
+
+设置 `filterable` 属性支持本地搜索，设置 `filter-placeholder` 属性设置搜索框的占位符。
+
+```html
+<wd-drop-menu>
+  <wd-drop-menu-item
+    v-model="value1"
+    :options="option1"
+    @change="handleChange1"
+  />
+  <wd-drop-menu-item
+    v-model="value2"
+    :options="option2"
+    @change="handleChange2"
+    filterable
+  />
+</wd-drop-menu>
+```
+
+
 ## DropMenu Attributes
 
 | 参数                 | 说明                                 | 类型    | 可选值    | 默认值 | 最低版本 |
