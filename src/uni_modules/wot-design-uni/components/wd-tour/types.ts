@@ -39,7 +39,6 @@ export interface IRect<T extends number | string> {
   right?: T
   bottom?: T
   left?: T
-  maxWidth?: any
 }
 
 export const tourOptions = {
