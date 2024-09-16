@@ -1,5 +1,6 @@
 {
-  "pages": [{
+  "pages": [
+    {
       "path": "pages/index/Index",
       "name": "index",
       "style": {
@@ -194,7 +195,6 @@
       "path": "pages/notify/Index",
       "name": "toast",
       "style": {
-
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
@@ -750,6 +750,16 @@
           "allowsBounceVertical": "NO"
         },
         "navigationBarTitleText": "NumberKeyboard 数字键盘"
+      }
+    },
+    {
+      "path": "pages/tour/Index",
+      "name": "tour",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Tour 引导"
       }
     },
     {
