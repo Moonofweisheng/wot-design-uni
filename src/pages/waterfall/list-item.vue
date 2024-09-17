@@ -1,6 +1,6 @@
 <template>
   <view class="list-item">
-    <image :src="item.image" mode="aspectFill" style="width: 100%; height: 100px" />
+    <image :src="item.image" mode="widthFix" style="width: 100%" />
     <view>{{ item.title }}</view>
     <view>
       <wd-row>

@@ -24,6 +24,7 @@
 import { onReachBottom } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 import ListItem from './list-item.vue'
+import { uuid } from '@/uni_modules/wot-design-uni/components/common/util'
 const flowList = ref([
   {
     id: 1,
@@ -86,11 +87,19 @@ function handleClearChange() {
     flowList.value = copyFlowList
   }
 }
+async function fetchMoreData() {
+  return copyFlowList
+}
 onReachBottom(() => {
   if (flowList.value.length < 50) {
-    flowList.value = [...flowList.value, ...flowList.value]
+    fetchMoreData().then((newData) => {
+      flowList.value = [...flowList.value, ...newData].map((item) => {
+        return {
+          ...item,
+          id: uuid()
+        }
+      })
+    })
   }
 })
 </script>
-
-<style scope lang="scss"></style>

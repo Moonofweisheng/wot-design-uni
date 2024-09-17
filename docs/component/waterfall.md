@@ -118,7 +118,7 @@ function handleUpdate(id, key, value) {
 | add-time / addTime     | 单条数据添加到队列的时间间隔，单位 ms，详情见上方注意事项说明                                                                  | number  | -            | 50     | -        |
 | id-key / idKey         | 数据的唯一值的键名, 后续删除、修改的主键 id 都是基于此值进行查找。                                                             | string  | -            | id     | -        |
 | is-reorder / isReorder | 数据操作完成后，是否重新排序（目前主要是删除操作的时候）。                                                                     | boolean | true / false | false  | -        |
-| options                | （可选）全局配置参数，使用方式同 v-slot='{ options }', 传递什么就返回什么，通过 options 接收，主要用于解决低版本作用域数据问题 | -       | -            |
+| options                | （可选）全局配置参数，使用方式同 v-slot='{ options }', 传递什么就返回什么，通过 options 接收，主要用于解决低版本作用域数据问题 | -       | -            | -      | -        |
 
 ## Methods
 
