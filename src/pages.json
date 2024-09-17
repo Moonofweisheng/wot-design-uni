@@ -1,5 +1,6 @@
 {
-  "pages": [{
+  "pages": [
+    {
       "path": "pages/index/Index",
       "name": "index",
       "style": {
@@ -194,7 +195,6 @@
       "path": "pages/notify/Index",
       "name": "toast",
       "style": {
-
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
@@ -670,6 +670,16 @@
           "allowsBounceVertical": "NO"
         },
         "navigationBarTitleText": "Table 表格"
+      }
+    },
+    {
+      "path": "pages/waterfall/Index",
+      "name": "waterfall",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "waterfall瀑布流"
       }
     },
     {
