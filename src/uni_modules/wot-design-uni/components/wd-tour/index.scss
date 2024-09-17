@@ -1,0 +1,125 @@
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
+
+@mixin position-bottom($horizontal-position: left, $offset: 20px) {
+  &::before {
+    top: auto;
+    bottom: -20px;
+    border-bottom-color: transparent;
+    border-top-color: var(--wd-bg-color);
+    @if ($horizontal-position== 'left') {
+      left: $offset;
+    } @else {
+      left: auto;
+      right: $offset;
+    }
+  }
+}
+
+.wot-theme-dark {
+  @include b(tour) {
+    color: $-dark-color3;
+    @include e(mask) {
+      box-shadow: 0px 0px 0px 150vh rgb(0, 0, 0, 0.85);
+    }
+    @include e(popup) {
+      background-color: $-dark-background7;
+      @include when(arrow) {
+        &::before {
+          border-bottom-color: $-dark-background7;
+        }
+      }
+    }
+  }
+}
+
+@include b(tour) {
+  @include e(masked) {
+    position: fixed;
+    width: 100vh;
+    height: 100vh;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    background: transparent;
+  }
+  @include e(popup) {
+    --wd-bg-color: $-color-white;
+    position: fixed;
+    z-index: 2001;
+    border-radius: 10rpx;
+    background-color: var(--wd-bg-color);
+    @include when(arrow) {
+      &::before {
+        content: '';
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-bottom-color: var(--wd-bg-color);
+        position: absolute;
+        top: -20px;
+        left: 20px;
+      }
+      @include m(left-top) {
+        &::before {
+          left: 20px;
+        }
+      }
+      @include m(right-top) {
+        &::before {
+          left: auto;
+          right: 20px;
+        }
+      }
+      @include m(left-bottom) {
+        @include position-bottom('left');
+      }
+      @include m(right-bottom) {
+        @include position-bottom('right');
+      }
+    }
+  }
+  @include e(mask) {
+    position: fixed;
+    width: 100px;
+    height: 50px;
+    box-shadow: 0px 0px 0px 150vh $-font-gray-2;
+    border-radius: 10px;
+    z-index: 1002;
+    @include when(none) {
+      box-shadow: none;
+    }
+  }
+  @include e(content) {
+    display: block;
+    padding: 10px 12px;
+    @include m(top) {
+      display: block;
+      text-align: right;
+      @include when(title) {
+        margin-bottom: 5px;
+      }
+    }
+    @include m(inner) {
+      margin: 5px 0 10px;
+      font-size: 14px;
+      @include when(title) {
+        margin: 0;
+      }
+    }
+    @include m(bottom) {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    @include m(bottom-init) {
+      margin: 0 10px;
+    }
+    @include m(bottom-operate) {
+      display: flex;
+      justify-content: flex-end;
+      gap: 5px;
+    }
+  }
+}

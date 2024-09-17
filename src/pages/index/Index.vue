@@ -289,6 +289,10 @@ const list = ref([
       {
         id: 'numberKeyboard',
         name: 'NumberKeyboard 数字键盘'
+      },
+      {
+        id: 'tour',
+        name: 'tour 引导'
       }
     ]
   },
