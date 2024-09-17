@@ -373,6 +373,10 @@ const list = ref([
       {
         id: 'table',
         name: 'Table 表格'
+      },
+      {
+        id: 'waterfall',
+        name: 'Waterfall 瀑布流'
       }
     ]
   }

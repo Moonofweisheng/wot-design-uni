@@ -1,0 +1,14 @@
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
+
+@include b(waterfall) {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  @include e(item) {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: calc(50% - 6px);
+    height: auto;
+  }
+}

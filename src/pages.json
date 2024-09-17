@@ -673,6 +673,16 @@
       }
     },
     {
+      "path": "pages/waterfall/Index",
+      "name": "waterfall",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "waterfall瀑布流"
+      }
+    },
+    {
       "path": "pages/sidebar/Index",
       "name": "sidebar",
       "style": {
