@@ -783,6 +783,16 @@
       }
     },
     {
+      "path": "pages/tour/Index",
+      "name": "tour",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Tour 引导"
+      }
+    },
+    {
       "path": "pages/gap/Index",
       "name": "gap",
       "style": {
