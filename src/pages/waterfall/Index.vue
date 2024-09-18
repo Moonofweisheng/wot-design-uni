@@ -77,7 +77,11 @@ function handleDel(item: any) {
   waterfallRef.value.remove(item.id)
 }
 function handleUpdate(item: any) {
-  waterfallRef.value.update(item.id, 'title', '这是修改后的内容！！！')
+  const str = 'this is new title'
+  if (item.title.includes(str)) {
+    return waterfallRef.value.update(item.id, 'title', item.title.slice(str.length + 1))
+  }
+  waterfallRef.value.update(item.id, 'title', `this is new title-${item.title}`)
 }
 
 function handleClearChange() {
@@ -87,8 +91,8 @@ function handleClearChange() {
     flowList.value = copyFlowList
   }
 }
-async function fetchMoreData() {
-  return copyFlowList
+function fetchMoreData() {
+  return Promise.resolve(copyFlowList)
 }
 onReachBottom(() => {
   if (flowList.value.length < 50) {
