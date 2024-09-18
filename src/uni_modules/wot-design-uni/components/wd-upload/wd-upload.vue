@@ -564,6 +564,7 @@ function handlePreviewFile(file: UploadFileItem) {
 function handlePreviewImage(index: number, lists: string[]) {
   const { onPreviewFail } = props
   uni.previewImage({
+    file,
     urls: lists,
     current: lists[index],
     fail() {
@@ -620,6 +621,7 @@ function onPreviewImage(file: UploadFileItem) {
   const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
+      file,
       index,
       imgList: lists.map((file) => file.url),
       resolve: (isPass: boolean) => {
@@ -644,6 +646,7 @@ function onPreviewVideo(file: UploadFileItem) {
   const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
+      file,
       index,
       imgList: [],
       resolve: (isPass: boolean) => {
@@ -663,6 +666,7 @@ function onPreviewFile(file: UploadFileItem) {
   const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
+      file,
       index,
       imgList: [],
       resolve: (isPass: boolean) => {

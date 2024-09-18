@@ -2,7 +2,7 @@
   <view :class="['wd-loadmore', customClass]" :style="customStyle" @click="reload">
     <wd-divider v-if="state === 'finished'">{{ finishedText || translate('finished') }}</wd-divider>
     <block v-if="state === 'error'">
-      <text class="wd-loadmore__text">{{ errorText || translate('error') }} </text>
+      <text class="wd-loadmore__text">{{ errorText || translate('error') }}</text>
       <text class="wd-loadmore__text is-light">{{ translate('retry') }}</text>
       <wd-icon name="refresh" custom-class="wd-loadmore__refresh" />
     </block>
