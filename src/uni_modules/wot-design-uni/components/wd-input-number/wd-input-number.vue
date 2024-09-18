@@ -11,6 +11,7 @@
         :disabled="disabled || disableInput"
         v-model="inputValue"
         :placeholder="placeholder"
+        :adjust-position="adjustPosition"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
