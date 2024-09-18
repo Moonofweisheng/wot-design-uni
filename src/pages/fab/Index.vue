@@ -43,7 +43,23 @@
           <wd-button type="primary" @click="active = !active" round>切换</wd-button>
         </view>
       </demo-block>
-      <wd-fab v-model:active="active" :disabled="disabled" :type="type" :position="position" :direction="direction" :draggable="draggable">
+
+      <demo-block title="自定义触发器">
+        <view @click.stop="">
+          <wd-switch v-model="useTriggerSlot" size="22px" />
+        </view>
+      </demo-block>
+      <wd-fab
+        v-if="!useTriggerSlot"
+        v-model:active="active"
+        :disabled="disabled"
+        :type="type"
+        :position="position"
+        :direction="direction"
+        :draggable="draggable"
+        :trigger-expend="triggerExpend"
+        @click="showToast('我被点了')"
+      >
         <wd-button @click="showToast('一键三连')" :disabled="disabled" custom-class="custom-button" type="primary" round>
           <wd-icon name="github-filled" size="22px"></wd-icon>
         </wd-button>
@@ -58,6 +74,12 @@
           <wd-icon name="thumb-up" size="22px"></wd-icon>
         </wd-button>
       </wd-fab>
+
+      <wd-fab v-else position="left-bottom" :draggable="draggable" :trigger-expend="false" @click="showToast('自定义trigger插槽')">
+        <template #trigger>
+          <wd-button icon="share" type="error">分享给朋友</wd-button>
+        </template>
+      </wd-fab>
     </page-wraper>
   </view>
 </template>
@@ -70,7 +92,11 @@ const type = ref<'primary' | 'success' | 'info' | 'warning' | 'error' | 'default
 const position = ref<'left-top' | 'right-top' | 'left-bottom' | 'right-bottom'>('left-bottom')
 const direction = ref<'top' | 'right' | 'bottom' | 'left'>('top')
 const disabled = ref<boolean>(false)
-const draggable = ref(false)
+const draggable = ref<boolean>(false)
+const triggerExpend = ref<boolean>(true)
+
+const useTriggerSlot = ref<boolean>(false)
+
 const { closeOutside } = useQueue()
 </script>
 <style lang="scss" scoped>
@@ -78,6 +104,7 @@ const { closeOutside } = useQueue()
   position: relative;
   height: 100%;
   width: 100%;
+  padding-bottom: 88rpx;
   :deep(.custom-button) {
     min-width: auto !important;
     box-sizing: border-box;

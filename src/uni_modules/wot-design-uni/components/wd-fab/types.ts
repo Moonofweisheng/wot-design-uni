@@ -47,7 +47,11 @@ export const fabProps = {
   gap: {
     type: Object as PropType<FabGap>,
     default: () => ({})
-  }
+  },
+  /**
+   * 用于控制点击时是否展开菜单
+   */
+  triggerExpend: makeBooleanProp(true)
 }
 
 export type FabProps = ExtractPropTypes<typeof fabProps>
