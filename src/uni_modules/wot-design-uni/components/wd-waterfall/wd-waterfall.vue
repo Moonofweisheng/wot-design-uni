@@ -190,7 +190,7 @@ function update(id: TId, key: string, value: any) {
   }
 }
 
-defineExpose<IMethods>({
+defineExpose({
   reorder,
   clear,
   remove,
