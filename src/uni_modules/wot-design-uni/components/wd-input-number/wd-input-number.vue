@@ -75,6 +75,7 @@ watch(
 function updateBoundary() {
   debounce(() => {
     const value = formatValue(inputValue.value)
+    console.log(value, 'value')
     if (!isEqual(inputValue.value, value)) {
       setValue(value)
     }
@@ -197,6 +198,12 @@ function formatValue(value: string | number) {
 
   if (props.precision !== undefined) {
     value = value.toFixed(props.precision)
+  }
+  if (value > props.max) {
+    value = props.max
+  }
+  if (value < props.min) {
+    value = props.min
   }
 
   return Number(value)
