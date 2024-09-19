@@ -1,27 +1,27 @@
 <template>
   <page-wraper>
     <demo-block :title="`基本用法，数值: ${value1}`">
-      <wd-picker-view v-model="value1" :columns="columns1" @change="(e) => onChange(1, e)" />
+      <wd-picker-view v-model="value1" :columns="columns1" />
     </demo-block>
 
     <demo-block :title="`禁用选项，数值: ${value2}`">
-      <wd-picker-view v-model="value2" :columns="columns2" @change="(e) => onChange(2, e)" />
+      <wd-picker-view v-model="value2" :columns="columns2" />
     </demo-block>
 
     <demo-block :title="`立即触发 change，数值: ${value6}`">
-      <wd-picker-view v-model="value6" :immediate-change="true" :columns="columns2" @change="(e) => onChange(2, e)" />
+      <wd-picker-view v-model="value6" :immediate-change="true" :columns="columns2" />
     </demo-block>
 
     <demo-block :title="`加载中，数值: ${value3}`">
-      <wd-picker-view v-model="value3" :columns="columns3" loading @change="(e) => onChange(3, e)" />
+      <wd-picker-view v-model="value3" :columns="columns3" loading />
     </demo-block>
 
     <demo-block :title="`多列，数值: [${value4}]`">
-      <wd-picker-view v-model="value4" :columns="columns4" @change="(e) => onChange(4, e)" />
+      <wd-picker-view v-model="value4" :columns="columns4" />
     </demo-block>
 
     <demo-block :title="`多级联动，数值: [${value5}]`">
-      <wd-picker-view v-model="value5" :columns="columns5" :column-change="onChangeDistrict" @change="(e) => onChange(5, e)" />
+      <wd-picker-view v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
     </demo-block>
   </page-wraper>
 </template>
@@ -110,14 +110,6 @@ const onChangeDistrict: PickerViewColumnChange = (picker, value, columnIndex, re
     picker.setColumnData(2, district[item.value])
   }
   resolve()
-}
-
-function onChange(index: number, e: any) {
-  console.log(e)
-  if (index === 1) {
-    // toast.show(`当前选中项: ${value}, 下标: ${index}`)
-  }
-  // this.setData({ [`value${dataset.index}`]: value })
 }
 </script>
 <style lang="scss" scoped></style>

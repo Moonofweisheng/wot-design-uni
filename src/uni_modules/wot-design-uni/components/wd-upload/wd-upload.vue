@@ -564,7 +564,6 @@ function handlePreviewFile(file: UploadFileItem) {
 function handlePreviewImage(index: number, lists: string[]) {
   const { onPreviewFail } = props
   uni.previewImage({
-    file,
     urls: lists,
     current: lists[index],
     fail() {
