@@ -57,7 +57,6 @@
         :position="position"
         :direction="direction"
         :draggable="draggable"
-        :trigger-expend="triggerExpend"
         @click="showToast('我被点了')"
       >
         <wd-button @click="showToast('一键三连')" :disabled="disabled" custom-class="custom-button" type="primary" round>
@@ -75,9 +74,9 @@
         </wd-button>
       </wd-fab>
 
-      <wd-fab v-else position="left-bottom" :draggable="draggable" :trigger-expend="false" @click="showToast('自定义trigger插槽')">
+      <wd-fab v-else position="left-bottom" :draggable="draggable" :expandable="false">
         <template #trigger>
-          <wd-button icon="share" type="error">分享给朋友</wd-button>
+          <wd-button @click="handleCustomClick" icon="share" type="error">分享给朋友</wd-button>
         </template>
       </wd-fab>
     </page-wraper>
@@ -93,17 +92,21 @@ const position = ref<'left-top' | 'right-top' | 'left-bottom' | 'right-bottom'>(
 const direction = ref<'top' | 'right' | 'bottom' | 'left'>('top')
 const disabled = ref<boolean>(false)
 const draggable = ref<boolean>(false)
-const triggerExpend = ref<boolean>(true)
-
 const useTriggerSlot = ref<boolean>(false)
 
 const { closeOutside } = useQueue()
+
+function handleCustomClick() {
+  showToast('分享给朋友')
+}
 </script>
 <style lang="scss" scoped>
 .fab {
   position: relative;
   height: 100%;
   width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
   padding-bottom: 88rpx;
   :deep(.custom-button) {
     min-width: auto !important;

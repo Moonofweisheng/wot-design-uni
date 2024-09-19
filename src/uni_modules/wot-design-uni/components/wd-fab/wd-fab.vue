@@ -14,7 +14,7 @@
       </wd-button>
     </view>
     <wd-transition
-      v-if="triggerExpend"
+      v-if="expandable"
       :enter-class="`wd-fab__transition-enter--${fabDirection}`"
       enter-active-class="wd-fab__transition-enter-active"
       :leave-to-class="`wd-fab__transition-leave-to--${fabDirection}`"
@@ -205,8 +205,6 @@ onMounted(() => {
   }
 
   const { start } = useRaf(async () => {
-    console.log(2323)
-
     await getBounding()
     initPosition()
     inited.value = true
@@ -226,7 +224,7 @@ function handleClick() {
   if (props.disabled) {
     return
   }
-  if (!props.triggerExpend) {
+  if (!props.expandable) {
     emit('click')
     return
   }

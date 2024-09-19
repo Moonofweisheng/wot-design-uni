@@ -79,6 +79,25 @@ const active = ref<boolean>(false)
 开启拖动后`direction`属性将失效，会根据拖动后的位置自动计算弹出方向。拖动完成后按钮将会自动吸边。
 :::
 
+## 自定义触发器
+
+通过`trigger`插槽自定义触发器，`expandable`控制点击触发器是否展开/收起动作按钮菜单。
+
+
+```html
+<wd-fab position="left-bottom" :expandable="false">
+  <template #trigger>
+    <wd-button @click="handleClick" icon="share" type="error">分享给朋友</wd-button>
+  </template>
+</wd-fab>
+```
+```ts
+const handleClick = () => {
+  console.log('点击了')
+}
+
+```
+
 ## Attributes
 
 | 参数           | 说明                                                  | 类型         | 可选值                                                                                    | 默认值                                         | 最低版本         |
@@ -94,13 +113,19 @@ const active = ref<boolean>(false)
 | zIndex         | 自定义悬浮按钮层级                                    | number       | -                                                                                         | 99                                             | 0.1.57           |
 | gap            | 自定义悬浮按钮与可视区域边缘的间距                    | FabGap       | -                                                                                         | \{ top: 16, left: 16, right: 16, bottom: 16 \} | 1.2.26           |
 | customStyle    | 自定义样式                                            | string       | -                                                                                         | ''                                             | 0.1.57           |
-| trigger-expand | 用于控制点击时是否展开菜单，设置为 false 时触发 click | boolean      | -                                                                                         | true                                           | $LOWEST_VERSION$ |
+| expandable     | 用于控制点击时是否展开菜单，设置为 false 时触发 click | boolean      | -                                                                                         | true                                           | $LOWEST_VERSION$ |
 
 ## Events
 
-| 事件名称 | 说明                                             | 参数 | 最低版本         |
-| -------- | ------------------------------------------------ | ---- | ---------------- |
-| click    | trigger-expand 设置为 false 时，点击悬浮按钮触发 | —    | $LOWEST_VERSION$ |
+| 事件名称 | 说明                                         | 参数 | 最低版本         |
+| -------- | -------------------------------------------- | ---- | ---------------- |
+| click    | expandable 设置为 false 时，点击悬浮按钮触发 | —    | $LOWEST_VERSION$ |
+
+## Slot
+
+| name    | 说明                                                           | 最低版本         |
+| ------- | -------------------------------------------------------------- | ---------------- |
+| trigger | 触发器插槽，用于自定义点击按钮，使用此插槽时组件不会抛出 click | $LOWEST_VERSION$ |
 
 ## 外部样式类
 

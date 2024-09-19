@@ -51,7 +51,7 @@ export const fabProps = {
   /**
    * 用于控制点击时是否展开菜单
    */
-  triggerExpend: makeBooleanProp(true)
+  expandable: makeBooleanProp(true)
 }
 
 export type FabProps = ExtractPropTypes<typeof fabProps>
