@@ -235,6 +235,10 @@ const list = ref([
         name: 'DropMenu 下拉菜单'
       },
       {
+        id: 'floatingPanel',
+        name: 'FloatingPanel 浮动面板'
+      },
+      {
         id: 'loading',
         name: 'Loading 加载指示器'
       },

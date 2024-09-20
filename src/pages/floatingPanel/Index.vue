@@ -1,4 +1,5 @@
 <template>
+  <wd-toast></wd-toast>
   <view class="floating-panel">
     <page-wraper>
       <wd-tabs v-model="tab">
@@ -10,7 +11,7 @@
           </wd-floating-panel>
         </wd-tab>
         <wd-tab :title="`自定义锚点`">
-          <wd-floating-panel v-model:height="height" :anchors="anchors" safeAreaInsetBottom>
+          <wd-floating-panel v-model:height="height" :anchors="anchors" safeAreaInsetBottom @heightChange="handleHeightChange">
             <view class="inner-content">自定义锚点 {{ anchors.map(addUnit) }} - {{ addUnit(height.toFixed(0)) }}</view>
           </wd-floating-panel>
         </wd-tab>
@@ -27,7 +28,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import { useToast } from '@/uni_modules/wot-design-uni'
 import { addUnit } from '@/uni_modules/wot-design-uni/components/common/util'
+
+const { show } = useToast()
 
 const data = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
@@ -36,9 +40,13 @@ const height = ref<number>(0)
 const windowHeight = ref<number>(0)
 const anchors = ref<number[]>([])
 
+const handleHeightChange = ({ height }: { height: number }) => {
+  show(addUnit(height))
+}
+
 onLoad(() => {
   windowHeight.value = uni.getSystemInfoSync().windowHeight
-  anchors.value = [100, 300, Math.round(0.7 * windowHeight.value)]
+  anchors.value = [100, Math.round(0.4 * windowHeight.value), Math.round(0.7 * windowHeight.value)]
   height.value = anchors.value[1]
 })
 </script>
