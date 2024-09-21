@@ -7,10 +7,10 @@
       'wd-button',
       'is-' + type,
       'is-' + size,
-      plain ? 'is-plain' : '',
-      disabled ? 'is-disabled' : '',
       round ? 'is-round' : '',
       hairline ? 'is-hairline' : '',
+      plain ? 'is-plain' : '',
+      disabled ? 'is-disabled' : '',
       block ? 'is-block' : '',
       loading ? 'is-loading' : '',
       customClass

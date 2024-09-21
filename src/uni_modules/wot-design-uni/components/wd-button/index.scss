@@ -51,6 +51,7 @@
   background: transparent;
   box-sizing: border-box;
   border: none;
+  border-radius: 0;
   color: $-button-normal-color;
   transition: opacity 0.2s;
   user-select: none;
@@ -75,6 +76,7 @@
 
   &::after {
     border: none;
+    border-radius: 0;
   }
 
   @include m(active) {
@@ -224,7 +226,6 @@
 
   @include when(round) {
     border-radius: 999px;
-    overflow: hidden;
   }
 
   @include when(text) {
@@ -253,46 +254,69 @@
 
   @include when(plain) {
     background: $-button-plain-bg-color;
+    border: 1px solid currentColor;
 
     @include when(primary) {
       color: $-button-primary-bg-color;
-      border: 1px solid $-button-primary-bg-color;
     }
 
     @include when(success) {
       color: $-button-success-bg-color;
-      border: 1px solid $-button-success-bg-color;
     }
 
     @include when(info) {
       color: $-button-info-plain-normal-color;
-      border: 1px solid $-button-info-plain-border-color;
+      border-color: $-button-info-plain-border-color;
     }
 
     @include when(warning) {
       color: $-button-warning-bg-color;
-      border: 1px solid $-button-warning-bg-color;
     }
 
     @include when(error) {
       color: $-button-error-bg-color;
-      border: 1px solid $-button-error-bg-color;
     }
   }
 
   @include when(hairline) {
+    border-width: 0;
+
     &.is-plain {
-      border-width: 0;
-      border-radius: 0;
       @include halfPixelBorderSurround();
+
+      &::before {
+        border-radius: inherit;
+      }
 
       &::after {
         border-color: inherit;
       }
+
+      &.is-round {
+        &::after {
+          border-radius: inherit !important;
+        }
+      }
+
+      &.is-large {
+        &::after {
+          border-radius: calc(2 * $-button-large-radius);
+        }
+      }
+
+      &.is-medium {
+        &::after {
+          border-radius: calc(2 * $-button-medium-radius);
+        }
+      }
+
+      &.is-small {
+        &::after {
+          border-radius: calc(2 * $-button-small-radius);
+        }
+      }
     }
-
   }
-
 
   @include when(block) {
     display: flex;
@@ -330,12 +354,6 @@
     user-select: none;
     white-space: nowrap;
   }
-}
-
-// 微信2.8.0以上版本加了较高层级的默认样式，需要重置掉
-.wd-button {
-  min-height: auto;
-  width: auto;
 }
 
 @keyframes wd-rotate {
