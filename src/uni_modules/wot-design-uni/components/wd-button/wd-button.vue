@@ -17,7 +17,7 @@
     ]"
     :hover-start-time="hoverStartTime"
     :hover-stay-time="hoverStayTime"
-    :open-type="disabled || loading ? '' : openType"
+    :open-type="disabled || loading ? undefined : openType"
     :send-message-title="sendMessageTitle"
     :send-message-path="sendMessagePath"
     :send-message-img="sendMessageImg"

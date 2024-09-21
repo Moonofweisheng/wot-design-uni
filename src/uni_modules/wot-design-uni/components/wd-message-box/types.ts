@@ -1,13 +1,14 @@
 /*
  * @Author: weisheng
  * @Date: 2024-04-08 22:34:01
- * @LastEditTime: 2024-04-10 12:58:10
+ * @LastEditTime: 2024-09-21 15:51:27
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\types.ts
  * 记得注释
  */
 import { baseProps } from '../common/props'
+import { InputType } from '../wd-input/types'
 
 export type MessageType = 'alert' | 'confirm' | 'prompt'
 
@@ -49,7 +50,7 @@ export type MessageOptions = {
   /**
    * 当type为prompt时，输入框类型
    */
-  inputType?: string
+  inputType?: InputType
   /**
    * 当type为prompt时，输入框初始值
    */

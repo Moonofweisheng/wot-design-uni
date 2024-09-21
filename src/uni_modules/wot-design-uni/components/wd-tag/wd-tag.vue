@@ -15,7 +15,7 @@
       class="wd-tag__add-text"
       :placeholder="translate('placeholder')"
       type="text"
-      focus="true"
+      :focus="true"
       v-model="dynamicValue"
       @blur="handleBlur"
       @confirm="handleConfirm"
