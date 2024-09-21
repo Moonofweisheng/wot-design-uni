@@ -186,7 +186,7 @@ function onChange(e) {
 }
 ```
 
-## 指定valueKey <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+## 指定valueKey <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.7</el-tag>
 
 通过`value-key` 属性指定 `list` 中每个对象图片地址字段，默认为 `value`。
 
@@ -250,7 +250,7 @@ const isLoop = ref(false)
 | indicator            | 指示器全部配置                                         | `SwiperIndicatorProps \| boolean` | -                                                                                                      | true         | 0.1.22   |
 | imageMode            | 图片裁剪、缩放的模式                                   | `string`                          | 参考官方文档[mode](https://uniapp.dcloud.net.cn/component/image.html#mode-%E6%9C%89%E6%95%88%E5%80%BC) | `aspectFill` | 0.1.55   |
 | customStyle          | 外部自定义样式        | `string`       | -       | ''           | 0.1.22   |
-| value-key          | 选项对象中，value 对应的 key        | `string`       | -       | `value`           | $LOWEST_VERSION$   |
+| value-key          | 选项对象中，value 对应的 key        | `string`       | -       | `value`           | 1.3.7   |
 
 
 ### DirectionType

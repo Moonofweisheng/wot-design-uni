@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 10:04:19
- * @LastEditTime: 2024-04-07 14:01:12
+ * @LastEditTime: 2024-09-19 14:44:17
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-status-tip\wd-status-tip.vue
@@ -26,6 +26,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdImg from '../wd-img/wd-img.vue'
 import { computed, type CSSProperties } from 'vue'
 import { addUnit, isDef, isObj, objToStyle } from '../common/util'
 import { statusTipProps } from './types'
@@ -36,30 +37,10 @@ const props = defineProps(statusTipProps)
 const imgUrl = computed(() => {
   // 改用网络地址，避免小程序打包的时候统一打包进去导致包过大问题
   let img: string = ''
-  switch (props.image) {
-    case 'collect':
-      img = 'https://img.wot-design-uni.cn/wdu/collect.png'
-      break
-    case 'comment':
-      img = 'https://img.wot-design-uni.cn/wdu/comment.png'
-      break
-    case 'content':
-      img = 'https://img.wot-design-uni.cn/wdu/content.png'
-      break
-    case 'halo':
-      img = 'https://img.wot-design-uni.cn/wdu/halo.png'
-      break
-    case 'message':
-      img = 'https://img.wot-design-uni.cn/wdu/message.png'
-      break
-    case 'network':
-      img = 'https://img.wot-design-uni.cn/wdu/network.png'
-      break
-    case 'search':
-      img = 'https://img.wot-design-uni.cn/wdu/search.png'
-      break
-    default:
-      img = props.image
+  if (['search', 'network', 'content', 'collect', 'comment', 'halo', 'message'].includes(props.image)) {
+    img = `${props.urlPrefix}${props.image}.png`
+  } else {
+    img = props.image
   }
   return img
 })

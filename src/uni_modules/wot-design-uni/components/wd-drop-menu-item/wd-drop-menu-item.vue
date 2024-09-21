@@ -8,12 +8,12 @@
       custom-style="position: absolute; max-height: 80%;"
       modal-style="position: absolute;"
       :modal="modal"
-      :close-on-click-modal="closeOnClickModal"
-      @click-modal="close"
-      @before-enter="handleOpen"
-      @after-enter="handleOpened"
-      @before-leave="handleClose"
-      @after-leave="handleClosed"
+      :close-on-click-modal="false"
+      @click-modal="closeOnClickModal && close()"
+      @before-enter="beforeEnter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @after-leave="afterLeave"
     >
       <view v-if="options.length">
         <view
@@ -50,13 +50,15 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdPopup from '../wd-popup/wd-popup.vue'
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import type { PopupType } from '../wd-popup/types'
 import { useParent } from '../composables/useParent'
 import { DROP_MENU_KEY } from '../wd-drop-menu/types'
-import { isDef } from '../common/util'
+import { isDef, isFunction } from '../common/util'
 import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
 
 const props = defineProps(dorpMenuItemProps)
@@ -74,6 +76,19 @@ const duration = ref<number>(0)
 const { parent: dropMenu } = useParent(DROP_MENU_KEY)
 
 const { proxy } = getCurrentInstance() as any
+
+const positionStyle = computed(() => {
+  let style: string = ''
+  if (showWrapper.value && dropMenu) {
+    style =
+      dropMenu.props.direction === 'down'
+        ? `top: calc(var(--window-top) + ${dropMenu.offset.value}px); bottom: 0;`
+        : `top: 0; bottom: calc(var(--window-bottom) + ${dropMenu.offset.value}px)`
+  } else {
+    style = ''
+  }
+  return style
+})
 
 watch(
   () => props.modelValue,
@@ -104,14 +119,6 @@ onBeforeUnmount(() => {
   }
 })
 
-/**
- * 父组件更改子组件内部
- * @param show
- */
-function setShowPop(show: boolean) {
-  showPop.value = show
-}
-
 function getShowPop() {
   return showPop.value
 }
@@ -121,34 +128,52 @@ function choose(index: number) {
   const { valueKey } = props
   const item = props.options[index]
   emit('update:modelValue', item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item)
-  close()
   emit('change', {
     value: item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item,
     selectedItem: item
   })
+  close()
 }
 // 外部关闭弹出框
 function close() {
-  if (showPop.value) {
-    showPop.value = false
-    dropMenu && dropMenu.fold()
+  if (!showPop.value) {
+    return
+  }
+  if (isFunction(props.beforeToggle)) {
+    props.beforeToggle({
+      status: false,
+      resolve: (isPass: boolean) => {
+        isPass && handleClose()
+      }
+    })
+  } else {
+    handleClose()
   }
 }
 
-const positionStyle = computed(() => {
-  let style: string = ''
-  if (showWrapper.value && dropMenu) {
-    style =
-      dropMenu.props.direction === 'down'
-        ? `top: calc(var(--window-top) + ${dropMenu.offset.value}px); bottom: 0;`
-        : `top: 0; bottom: calc(var(--window-bottom) + ${dropMenu.offset.value}px)`
-  } else {
-    style = ''
+function handleClose() {
+  if (showPop.value) {
+    showPop.value = false
   }
-  return style
-})
+}
 
 function open() {
+  if (showPop.value) {
+    return
+  }
+  if (isFunction(props.beforeToggle)) {
+    props.beforeToggle({
+      status: true,
+      resolve: (isPass) => {
+        isPass && handleOpen()
+      }
+    })
+  } else {
+    handleOpen()
+  }
+}
+
+function handleOpen() {
   showWrapper.value = true
   showPop.value = true
   if (dropMenu) {
@@ -157,24 +182,32 @@ function open() {
     closeOnClickModal.value = Boolean(dropMenu.props.closeOnClickModal)
     position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
   }
-
   emit('open')
 }
-function handleClosed() {
+
+function toggle() {
+  if (showPop.value) {
+    close()
+  } else {
+    open()
+  }
+}
+
+function afterLeave() {
   showWrapper.value = false
   emit('closed')
 }
-function handleOpen() {
+function beforeEnter() {
   emit('open')
 }
-function handleOpened() {
+function afterEnter() {
   emit('opened')
 }
-function handleClose() {
+function beforeLeave() {
   emit('close')
 }
 
-defineExpose<DropMenuItemExpose>({ setShowPop, getShowPop, open, close })
+defineExpose<DropMenuItemExpose>({ getShowPop, open, close, toggle })
 </script>
 
 <style lang="scss" scoped>

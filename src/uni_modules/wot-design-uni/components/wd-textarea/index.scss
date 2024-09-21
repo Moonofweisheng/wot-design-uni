@@ -42,7 +42,8 @@
       color: $-dark-color;
     }
 
-    :deep(.wd-textarea__icon) {
+    :deep(.wd-textarea__icon),
+    :deep(.wd-textarea__clear) {
       color: $-dark-color;
       background: transparent;
     }
@@ -143,7 +144,6 @@
     padding: 0;
     font-size: 0;
     background: $-textarea-bg;
-    padding-right: 24px;
     box-sizing: border-box;
 
     @include when(show-limit) {

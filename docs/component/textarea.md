@@ -40,6 +40,28 @@ const value = ref<string>('')
 <wd-textarea v-model="value" :maxlength="120" clearable show-word-limit />
 ```
 
+
+## 有值且聚焦时展示清空按钮
+设置 `clear-trigger` 属性，可以控制是否聚焦时才展示清空按钮。
+
+:::warning 注意
+支付宝小程序暂不支持 `clear-trigger` 属性，且某种情况下清空按钮无法点击，原因参考此[issue](https://github.com/ant-design/ant-design-mini/issues/1255)（希望可以早点解决，所以直接给蚂蚁的组件库提了个issue）。
+:::
+
+
+```html
+<wd-textarea clear-trigger="focus" v-model="value14" :maxlength="120" clearable show-word-limit />
+```
+
+## 点击清除按钮时不自动聚焦
+
+设置`focus-when-clear` 属性，可以控制点击清除按钮时是否自动聚焦。
+
+```html
+ <wd-textarea v-model="value" :focus-when-clear="false" :maxlength="120" clearable show-word-limit />
+```
+
+
 ## 高度自适应
 
 通过设置 `auto-height` 属性，实现高度自适应。
@@ -107,7 +129,7 @@ const value = ref<string>('')
 | placeholderStyle        | 原生属性，指定 placeholder 的样式                                                                                  | string            | -                                | -         | -        |
 | placeholderClass        | 原生属性，指定 placeholder 的样式类                                                                                | string            | -                                | -         | -        |
 | disabled                | 原生属性，禁用                                                                                                     | boolean           | -                                | false     | -        |
-| maxlength               | 原生属性，最大输入长度，设置为 -1 的时候不限制最大长度                                                             | string            | -                                | -         | -        |
+| maxlength               | 原生属性，最大输入长度，设置为 -1 的时候不限制最大长度                                                             | number            | -                                | -         | -        |
 | auto-focus              | 原生属性，自动聚焦，拉起键盘。                                                                                     | boolean           | -                                | false     | -        |
 | focus                   | 原生属性，获取焦点                                                                                                 | boolean           | -                                | false     | -        |
 | auto-height             | 原生属性，是否自动增高，设置 auto-height 时，style.height 不生效                                                   | boolean           | -                                | false     | -        |
@@ -137,7 +159,10 @@ const value = ref<string>('')
 | no-border               | 非 cell 类型下是否隐藏下划线                                                                                       | boolean           | -                                | false     | -        | -   |
 | required                | cell 类型下必填样式                                                                                                | boolean           | -                                | false     | -        |
 | prop                    | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                  | string            | -                                | -         | -        |
-| rules                   | 表单验证规则                                                                                                       | `FormItemRule []` | -                                | `[]`      | -        |
+| rules                   | 表单验证规则        | `FormItemRule []` | -                                | `[]`      | -        |
+| clearTrigger | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示	 | `InputClearTrigger`	 | `focus` / `always` | `always` | 1.3.7 |
+| focusWhenClear | 是否在点击清除按钮时聚焦输入框 | boolean | -      | true  | 1.3.7   |
+| ignoreCompositionEvent | 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件。 | boolean | -      | true  | $LOWEST_VERSION$|
 
 ### FormItemRule 数据结构
 

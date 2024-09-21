@@ -66,6 +66,8 @@
 <img src="https://wot-design-uni.pages.dev/wx.jpg" width="200" height="200"/>
 <img src="https://wot-design-uni.pages.dev/alipay.png" width="200" height="200" />
 <img src="https://wot-design-uni.pages.dev/h5.png" width="200" height="200" />
+<img src="https://wot-design-uni.pages.dev/android.png" width="200" height="200" />
+
 </p>
 
 ## 快速上手
@@ -92,6 +94,7 @@
 | [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router)                                        | 一个基于 vue3 和 Typescript 的轻量级 uni-app 路由库  |
 | [unibest](https://github.com/codercup/unibest)                                                              | 基于 wot-design-uni 的 uni-app 模板                  |
 | [wot-design-uni AI 助手](https://www.coze.cn/store/bot/7347916532258701363)                                 | 一个能回答你关于 wot-design-uni 组件库问题的智能助手 |
+| [uni-ku-root](https://github.com/uni-ku/root)                                                               | 一个模拟 App.vue 原有能力的根组件插件                  |
 
 ## 贡献指南
 

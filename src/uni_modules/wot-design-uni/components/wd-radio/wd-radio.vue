@@ -1,9 +1,9 @@
 <template>
   <view
-    :class="`wd-radio ${innerCell ? 'is-cell-radio' : ''} ${innerCell && innerShape == 'button' ? 'is-button-radio' : ''} ${
-      innerSize ? 'is-' + innerSize : ''
-    } ${innerInline ? 'is-inline' : ''} ${isChecked ? 'is-checked' : ''} ${innerShape !== 'check' ? 'is-' + innerShape : ''} ${
-      innerDisabled ? 'is-disabled' : ''
+    :class="`wd-radio ${cellValue ? 'is-cell-radio' : ''} ${cellValue && shapeValue == 'button' ? 'is-button-radio' : ''} ${
+      sizeValue ? 'is-' + sizeValue : ''
+    } ${inlineValue ? 'is-inline' : ''} ${isChecked ? 'is-checked' : ''} ${shapeValue !== 'check' ? 'is-' + shapeValue : ''} ${
+      disabledValue ? 'is-disabled' : ''
     } ${customClass}`"
     :style="customStyle"
     @click="handleClick"
@@ -11,13 +11,13 @@
     <view
       class="wd-radio__label"
       :style="`${maxWidth ? 'max-width:' + maxWidth : ''};  ${
-        isChecked && innerShape === 'button' && !innerDisabled ? 'color :' + innerCheckedColor : ''
+        isChecked && shapeValue === 'button' && !disabledValue ? 'color :' + checkedColorValue : ''
       }`"
     >
       <slot></slot>
     </view>
-    <view class="wd-radio__shape" :style="isChecked && !disabled ? 'color: ' + innerCheckedColor : ''">
-      <wd-icon v-if="innerShape === 'check'" :style="isChecked && !disabled ? 'color: ' + innerCheckedColor : ''" name="check"></wd-icon>
+    <view class="wd-radio__shape" :style="isChecked && !disabledValue ? 'color: ' + checkedColorValue : ''">
+      <wd-icon v-if="shapeValue === 'check'" :style="isChecked && !disabledValue ? 'color: ' + checkedColorValue : ''" name="check"></wd-icon>
     </view>
   </view>
 </template>
@@ -32,10 +32,12 @@ export default {
 }
 </script>
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, watch } from 'vue'
 import { useParent } from '../composables/useParent'
 import { RADIO_GROUP_KEY } from '../wd-radio-group/types'
 import { radioProps } from './types'
+import { getPropByPath, isDef } from '../common/util'
 
 const props = defineProps(radioProps)
 
@@ -49,51 +51,39 @@ const isChecked = computed(() => {
   }
 })
 
-const innerShape = computed(() => {
-  if (!props.shape && radioGroup && radioGroup.props.shape) {
-    return radioGroup.props.shape
-  } else {
-    return props.shape
-  }
+const shapeValue = computed(() => {
+  return props.shape || getPropByPath(radioGroup, 'props.shape')
 })
 
-const innerCheckedColor = computed(() => {
-  if (!props.checkedColor && radioGroup && radioGroup.props.checkedColor) {
-    return radioGroup.props.checkedColor
-  } else {
-    return props.checkedColor
-  }
+const checkedColorValue = computed(() => {
+  return props.checkedColor || getPropByPath(radioGroup, 'props.checkedColor')
 })
 
-const innerDisabled = computed(() => {
-  if ((props.disabled === null || props.disabled === undefined) && radioGroup && radioGroup.props.disabled) {
-    return radioGroup.props.disabled
-  } else {
+const disabledValue = computed(() => {
+  if (isDef(props.disabled)) {
     return props.disabled
+  } else {
+    return getPropByPath(radioGroup, 'props.disabled')
   }
 })
 
-const innerInline = computed(() => {
-  if ((props.inline === null || props.inline === undefined) && radioGroup && radioGroup.props.inline) {
-    return radioGroup.props.inline
-  } else {
+const inlineValue = computed(() => {
+  if (isDef(props.inline)) {
     return props.inline
+  } else {
+    return getPropByPath(radioGroup, 'props.inline')
   }
 })
 
-const innerSize = computed(() => {
-  if (!props.size && radioGroup && radioGroup.props.size) {
-    return radioGroup.props.size
-  } else {
-    return props.size
-  }
+const sizeValue = computed(() => {
+  return props.size || getPropByPath(radioGroup, 'props.size')
 })
 
-const innerCell = computed(() => {
-  if ((props.cell === null || props.cell === undefined) && radioGroup && radioGroup.props.cell) {
-    return radioGroup.props.cell
-  } else {
+const cellValue = computed(() => {
+  if (isDef(props.cell)) {
     return props.cell
+  } else {
+    return getPropByPath(radioGroup, 'props.cell')
   }
 })
 
@@ -110,7 +100,7 @@ watch(
  */
 function handleClick() {
   const { value } = props
-  if (!innerDisabled.value && radioGroup && value !== null && value !== undefined) {
+  if (!disabledValue.value && radioGroup && isDef(value)) {
     radioGroup.updateValue(value)
   }
 }

@@ -1,7 +1,14 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeStringProp } from '../common/props'
 
-export type DropMenuItemBeforeToggle = (showPop: boolean, toggle: () => void) => void
+export type DropMenuItemBeforeToggleOption = {
+  // 操作状态：true 打开下拉菜单，false 关闭下拉菜单
+  status: boolean
+  // 回调函数，用于控制是否允许打开或关闭下拉菜单，true 允许打开或关闭，false 不允许打开或关闭
+  resolve: (isPass: boolean) => void
+}
+
+export type DropMenuItemBeforeToggle = (option: DropMenuItemBeforeToggleOption) => void
 
 export const dorpMenuItemProps = {
   ...baseProps,
@@ -62,10 +69,10 @@ export const dorpMenuItemProps = {
 export type DropMenuItemProps = ExtractPropTypes<typeof dorpMenuItemProps>
 
 export type DropMenuItemExpose = {
-  setShowPop: (show: boolean) => void
   getShowPop: () => boolean
   open: () => void
   close: () => void
+  toggle: () => void
 }
 
 export type DropMenuItemInstance = ComponentPublicInstance<DropMenuItemProps>

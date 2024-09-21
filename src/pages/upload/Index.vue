@@ -6,7 +6,7 @@
     <wd-message-box></wd-message-box>
     <wd-toast></wd-toast>
     <demo-block title="基本用法">
-      <wd-upload accept="image" :file-list="fileList" image-mode="aspectFill" :action="action" @change="handleChange"></wd-upload>
+      <wd-upload accept="image" v-model:file-list="fileList" image-mode="aspectFill" :action="action"></wd-upload>
     </demo-block>
     <demo-block title="最大上传数限制">
       <wd-upload :file-list="fileList3" :limit="3" :action="action" @change="handleChange3"></wd-upload>
@@ -64,11 +64,20 @@
       <wd-upload accept="all" multiple :file-list="fileList13" :action="action" @change="handleChange13"></wd-upload>
     </demo-block>
     <!-- #endif -->
+
+    <demo-block title="手动触发上传">
+      <wd-upload ref="upload14" :auto-upload="false" :file-list="fileList14" :action="action" @change="handleChange14"></wd-upload>
+      <wd-button @click="upload14?.submit()">开始上传</wd-button>
+    </demo-block>
+
+    <demo-block title="自定义上传方法">
+      <wd-upload v-model:file-list="fileList15" :upload-method="customUpload"></wd-upload>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-import type { UploadFile } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import type { UploadFile, UploadInstance, UploadMethod } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
 import { ref } from 'vue'
 
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
@@ -98,6 +107,8 @@ const fileList13 = ref<UploadFile[]>([])
 const fileList14 = ref<UploadFile[]>([])
 const fileList15 = ref<UploadFile[]>([])
 
+const upload14 = ref<UploadInstance>()
+
 const messageBox = useMessage()
 const toast = useToast()
 
@@ -115,7 +126,7 @@ const beforeChoose = ({ file, resolve }: any) => {
     })
 }
 
-const beforePreview = ({ resolve }: any) => {
+const beforePreview = ({ resolve, file }: any) => {
   messageBox
     .confirm({
       msg: '是否预览图片',
@@ -200,8 +211,8 @@ function handleProgess(event: any) {
   console.log('加载中', event)
 }
 
-function handleChange({ fileList }: any) {
-  fileList.value = fileList
+function handleChange({ fileList: list }: any) {
+  fileList.value = list
 }
 
 function handleChange1({ fileList }: { fileList: UploadFile[] }) {
@@ -250,6 +261,35 @@ function handleChange13({ fileList }: any) {
 }
 function handleChange14({ fileList }: any) {
   fileList14.value = fileList
+}
+
+const customUpload: UploadMethod = (file, formData, options) => {
+  const uploadTask = uni.uploadFile({
+    url: action,
+    header: options.header,
+    name: options.name,
+    fileName: options.name,
+    fileType: options.fileType,
+    formData,
+    filePath: file.url,
+    success(res) {
+      if (res.statusCode === options.statusCode) {
+        // 上传成功
+        options.onSuccess(res, file, formData)
+      } else {
+        // 上传失败
+        options.onError({ ...res, errMsg: res.errMsg || '' }, file, formData)
+      }
+    },
+    fail(err) {
+      // 上传失败
+      options.onError(err, file, formData)
+    }
+  })
+  // 获取当前文件加载的百分比
+  uploadTask.onProgressUpdate((res) => {
+    options.onProgress(res, file)
+  })
 }
 </script>
 <style lang="scss" scoped></style>

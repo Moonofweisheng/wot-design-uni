@@ -11,6 +11,7 @@
         :disabled="disabled || disableInput"
         v-model="inputValue"
         :placeholder="placeholder"
+        :adjust-position="adjustPosition"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -35,6 +36,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { ref, watch } from 'vue'
 import { debounce, isDef, isEqual } from '../common/util'
 import { inputNumberProps } from './types'
@@ -185,21 +187,27 @@ function formatValue(value: string | number) {
     return ''
   }
 
-  value = Number(value)
+  let formatValue = Number(value)
 
-  if (isNaN(value)) {
+  if (isNaN(formatValue)) {
     value = props.min
   }
 
   if (props.stepStrictly) {
-    value = toStrictlyStep(value)
+    formatValue = toStrictlyStep(value)
   }
 
   if (props.precision !== undefined) {
-    value = value.toFixed(props.precision)
+    formatValue = Number(formatValue.toFixed(props.precision))
+  }
+  if (formatValue > props.max) {
+    formatValue = props.max
+  }
+  if (formatValue < props.min) {
+    formatValue = props.min
   }
 
-  return Number(value)
+  return formatValue
 }
 </script>
 

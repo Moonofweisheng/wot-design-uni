@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2022-12-14 17:33:21
- * @LastEditTime: 2024-04-01 12:30:51
+ * @LastEditTime: 2024-08-17 18:18:16
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\index.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-message-box/index.ts
  * 记得注释
  */
 import { provide, ref } from 'vue'
@@ -77,7 +77,7 @@ export function useMessage(selector: string = ''): Message {
   const prompt = createMethod('prompt')
 
   const close = () => {
-    messageOption.value = { ...defaultOptions }
+    messageOption.value.show = false
   }
   return {
     show,

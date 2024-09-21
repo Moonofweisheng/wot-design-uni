@@ -46,6 +46,7 @@
 </template>
 
 <script lang="ts" setup>
+import wdSwiperNav from '../wd-swiper-nav/wd-swiper-nav.vue'
 import { computed, watch, ref } from 'vue'
 import { addUnit, isObj } from '../common/util'
 import { swiperProps, type SwiperList } from './types'

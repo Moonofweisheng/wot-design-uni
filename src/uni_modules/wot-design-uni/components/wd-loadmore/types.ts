@@ -20,5 +20,5 @@ export const loadmoreProps = {
   /**
    * 加载失败的提示文案
    */
-  errorText: makeStringProp('加载失败，点击重试')
+  errorText: String
 }

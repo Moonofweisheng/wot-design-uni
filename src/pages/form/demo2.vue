@@ -13,14 +13,14 @@
           :rules="[{ required: true, message: '请填写用户名' }]"
         />
         <wd-input
-          label="联系方式"
+          label="玛卡巴卡单号"
           prop="phoneNumber"
           label-width="100px"
           clearable
           @blur="handleBlur('phoneNumber')"
           v-model="model.phoneNumber"
-          placeholder="联系方式"
-          :rules="[{ required: true, message: '请填写联系方式' }]"
+          placeholder="玛卡巴卡单号"
+          :rules="[{ required: true, message: '请填写玛卡巴卡单号' }]"
         />
       </wd-cell-group>
     </wd-form>

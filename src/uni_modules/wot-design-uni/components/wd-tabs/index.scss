@@ -99,6 +99,7 @@
     font-size: $-tabs-nav-fs;
     color: $-tabs-nav-color;
     transition: color .3s;
+    @include lineEllipsis();
 
     @include when(active) {
       font-weight: 600;

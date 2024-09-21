@@ -18,7 +18,9 @@ export const checkboxProps = {
   /**
    * 单选框形状，可选值：circle / square / button
    */
-  shape: makeStringProp<CheckShape>('circle'),
+  shape: {
+    type: String as PropType<CheckShape>
+  },
   /**
    * 选中的颜色
    */

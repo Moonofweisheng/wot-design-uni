@@ -334,5 +334,6 @@ const displayFormatTabLabel = (items) => {
 | 类名 | 说明 | 最低版本 |
 |-----|------|--------|
 | custom-view-class | pickerView 外部自定义样式 | - |
+| custom-cell-class | pickerView cell 外部自定义样式 | 1.3.8 |
 | custom-label-class | label 外部自定义样式 | - |
 | custom-value-class | value 外部自定义样式 | - |

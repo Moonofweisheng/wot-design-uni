@@ -29,6 +29,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { nextTick, reactive, ref } from 'vue'
 import { videoPreviewProps, type PreviewVideo, type VideoPreviewExpose } from './types'
 import useLockScroll from '../composables/useLockScroll'

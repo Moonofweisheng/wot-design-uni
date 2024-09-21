@@ -16,6 +16,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 const emit = defineEmits(['back', 'back-home'])
 
 function handleBack() {

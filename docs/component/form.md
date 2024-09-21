@@ -60,7 +60,7 @@ const model = reactive<{
 
 const form = ref()
 
-function handleSubmit1() {
+function handleSubmit() {
   form.value
     .validate()
     .then(({ valid, errors }) => {
@@ -81,6 +81,77 @@ function handleSubmit1() {
 .footer {
   padding: 12px;
 }
+```
+
+:::
+
+## 校验错误提示方式
+
+1. `message`：默认为输入框下方用文字进行提示
+2. `toast`：以"toast"提示的方式弹出错误信息，每次只弹出最前面的那个表单域的错误信息
+3. `none`：不会进行任何提示
+
+::: details 错误提示方式
+::: code-group
+
+```html [vue]
+<wd-form ref="form" :model="model" :errorType="errorType">
+  <wd-cell-group border>
+    <wd-input
+      label="用户名"
+      label-width="100px"
+      prop="value1"
+      clearable
+      v-model="model.value1"
+      placeholder="请输入用户名"
+      :rules="[{ required: true, message: '请填写用户名' }]"
+    />
+    <wd-input
+      label="密码"
+      label-width="100px"
+      prop="value2"
+      show-password
+      clearable
+      v-model="model.value2"
+      placeholder="请输入密码"
+      :rules="[{ required: true, message: '请填写密码' }]"
+    />
+  </wd-cell-group>
+  <view class="footer">
+    <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
+  </view>
+</wd-form>
+```
+
+```typescript [typescript]
+<script lang="ts" setup>
+const { success: showSuccess } = useToast()
+const errorType = ref<string>('message')
+const model = reactive<{
+  value1: string
+  value2: string
+}>({
+  value1: '',
+  value2: ''
+})
+
+const form = ref()
+
+function handleSubmit() {
+  form.value
+    .validate()
+    .then(({ valid, errors }) => {
+      if (valid) {
+        showSuccess({
+          msg: '校验通过'
+        })
+      }
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+    })
+}
+</script>
 ```
 
 :::
@@ -238,13 +309,13 @@ function handleSubmit() {
     <wd-input
       v-for="(item, index) in model.phoneNumbers"
       :key="item.key"
-      :label="'联系方式' + index"
+      :label="'玛卡巴卡单号' + index"
       :prop="'phoneNumbers.' + index + '.value'"
       label-width="100px"
       clearable
       v-model="item.value"
-      placeholder="联系方式"
-      :rules="[{ required: true, message: '请填写联系方式' + index }]"
+      placeholder="玛卡巴卡单号"
+      :rules="[{ required: true, message: '请填写玛卡巴卡单号' + index }]"
     />
 
     <wd-cell title-width="0px">
@@ -331,62 +402,59 @@ const submit = () => {
 ::: code-group
 
 ```html [vue]
-<wd-form ref="form" :model="model">
+<wd-form ref="form" :model="model" errorType="toast">
   <wd-cell-group border>
     <wd-input
       label="用户名"
       label-width="100px"
-      prop="name"
+      prop="value1"
       clearable
-      v-model="model.name"
+      v-model="model.value1"
       placeholder="请输入用户名"
-      @blur="handleBlur('name')"
       :rules="[{ required: true, message: '请填写用户名' }]"
     />
     <wd-input
-      label="联系方式"
-      prop="phoneNumber"
+      label="密码"
       label-width="100px"
+      prop="value2"
+      show-password
       clearable
-      @blur="handleBlur('phoneNumber')"
-      v-model="model.phoneNumber"
-      placeholder="联系方式"
-      :rules="[{ required: true, message: '请填写联系方式' }]"
+      v-model="model.value2"
+      placeholder="请输入密码"
+      :rules="[{ required: true, message: '请填写密码' }]"
     />
   </wd-cell-group>
+  <view class="footer">
+    <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
+  </view>
 </wd-form>
-
-<view class="footer">
-  <wd-button type="primary" size="large" block @click="handleSubmit">提交</wd-button>
-</view>
 ```
 
 ```typescript [typescript]
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { FormInstance } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import { reactive, ref } from 'vue'
 
+const { success: showSuccess } = useToast()
 const model = reactive<{
-  name: string
-  phoneNumber: string
+  value1: string
+  value2: string
 }>({
-  name: '',
-  phoneNumber: ''
+  value1: '',
+  value2: ''
 })
 
-const { success: showSuccess } = useToast()
-const form = ref()
-
-function handleBlur(prop: string) {
-  form.value.validate(prop)
-}
+const form = ref<FormInstance>()
 
 function handleSubmit() {
-  form.value
-    .validate()
-    .then(({ valid }) => {
+  form
+    .value!.validate()
+    .then(({ valid, errors }) => {
       if (valid) {
-        showSuccess('校验通过')
+        showSuccess({
+          msg: '校验通过'
+        })
       }
     })
     .catch((error) => {
@@ -501,7 +569,15 @@ function handleSubmit() {
           <wd-switch v-model="model.switchVal" />
         </view>
       </wd-cell>
-      <wd-input label="歪比巴卜" label-width="100px" prop="cardId" suffix-icon="camera" placeholder="请输入歪比巴卜" clearable v-model="model.cardId" />
+      <wd-input
+        label="歪比巴卜"
+        label-width="100px"
+        prop="cardId"
+        suffix-icon="camera"
+        placeholder="请输入歪比巴卜"
+        clearable
+        v-model="model.cardId"
+      />
       <wd-input label="玛卡巴卡" label-width="100px" prop="phone" placeholder="请输入玛卡巴卡" clearable v-model="model.phone" />
       <wd-cell title="活动图片" title-width="100px" prop="fileList">
         <wd-upload :file-list="model.fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleFileChange"></wd-upload>
@@ -844,11 +920,12 @@ function handleIconClick() {
 
 ## Attributes
 
-| 参数  | 说明         | 类型                  | 可选值 | 默认值 | 最低版本 |
-| ----- | ------------ | --------------------- | ------ | ------ | -------- |
-| model | 表单数据对象 | `Record<string, any>` | -      | -      | 0.2.0    |
-| rules | 表单验证规则 | `FormRules`           | -      | -      | 0.2.0    |
-| resetOnChange | 表单数据变化时是否重置表单提示信息（设置为false时需要开发者单独对变更项进行校验） | `boolean` | -      | `true`   | 0.2.16 |
+| 参数          | 说明                                                                                | 类型                  | 可选值 | 默认值    | 最低版本         |
+| ------------- | ----------------------------------------------------------------------------------- | --------------------- | ------ | --------- | ---------------- |
+| model         | 表单数据对象                                                                        | `Record<string, any>` | -      | -         | 0.2.0            |
+| rules         | 表单验证规则                                                                        | `FormRules`           | -      | -         | 0.2.0            |
+| resetOnChange | 表单数据变化时是否重置表单提示信息（设置为 false 时需要开发者单独对变更项进行校验） | `boolean`             | -      | `true`    | 0.2.16           |
+| errorType     | 校验错误提示方式                                                                    | `toast/message/none`  | -      | `message` | 1.3.8 |
 
 ### FormItemRule 数据结构
 

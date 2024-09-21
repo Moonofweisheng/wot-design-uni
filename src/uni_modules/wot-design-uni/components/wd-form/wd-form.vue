@@ -1,6 +1,7 @@
 <template>
   <view :class="`wd-form ${customClass}`" :style="customStyle">
     <slot></slot>
+    <wd-toast v-if="props.errorType === 'toast'" selector="wd-form-toast" />
   </view>
 </template>
 
@@ -16,11 +17,14 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdToast from '../wd-toast/wd-toast.vue'
 import { reactive, watch } from 'vue'
 import { deepClone, getPropByPath, isDef, isPromise } from '../common/util'
 import { useChildren } from '../composables/useChildren'
+import { useToast } from '../wd-toast'
 import { type FormRules, FORM_KEY, type ErrorMessage, formProps, type FormExpose } from './types'
 
+const { show: showToast } = useToast('wd-form-toast')
 const props = defineProps(formProps)
 
 const { children, linkChildren } = useChildren(FORM_KEY)
@@ -114,9 +118,7 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
 
   await Promise.all(promises)
 
-  errors.forEach((error) => {
-    showMessage(error)
-  })
+  showMessage(errors)
 
   if (valid) {
     if (prop) {
@@ -147,9 +149,16 @@ function getMergeRules() {
   return mergedRules
 }
 
-function showMessage(errorMsg: ErrorMessage) {
-  if (errorMsg.message) {
-    errorMessages[errorMsg.prop] = errorMsg.message
+function showMessage(errors: ErrorMessage[]) {
+  const messages = errors.filter((error) => error.message)
+  if (messages.length) {
+    if (props.errorType === 'toast') {
+      showToast(messages[0].message)
+    } else if (props.errorType === 'message') {
+      messages.forEach((error) => {
+        errorMessages[error.prop] = error.message
+      })
+    }
   }
 }
 

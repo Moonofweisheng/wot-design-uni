@@ -45,20 +45,25 @@
         </view>
       </view>
 
-      <view v-if="file.status !== 'success'" class="wd-upload__mask wd-upload__status-content">
+      <view v-if="file[props.statusKey] !== 'success'" class="wd-upload__mask wd-upload__status-content">
         <!-- loading时展示loading图标和进度 -->
-        <view v-if="file.status === 'loading'" class="wd-upload__status-content">
+        <view v-if="file[props.statusKey] === 'loading'" class="wd-upload__status-content">
           <wd-loading :type="loadingType" :size="loadingSize" :color="loadingColor" />
           <text class="wd-upload__progress-txt">{{ file.percent }}%</text>
         </view>
         <!-- 失败时展示失败图标以及失败信息 -->
-        <view v-if="file.status === 'fail'" class="wd-upload__status-content">
+        <view v-if="file[props.statusKey] === 'fail'" class="wd-upload__status-content">
           <wd-icon name="close-outline" custom-class="wd-upload__icon"></wd-icon>
           <text class="wd-upload__progress-txt">{{ file.error || translate('error') }}</text>
         </view>
       </view>
       <!-- 上传状态为上传中时不展示移除按钮 -->
-      <wd-icon v-if="file.status !== 'loading' && !disabled" name="error-fill" custom-class="wd-upload__close" @click="removeFile(index)"></wd-icon>
+      <wd-icon
+        v-if="file[props.statusKey] !== 'loading' && !disabled"
+        name="error-fill"
+        custom-class="wd-upload__close"
+        @click="removeFile(index)"
+      ></wd-icon>
     </view>
 
     <block v-if="showUpload">
@@ -89,15 +94,45 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdVideoPreview from '../wd-video-preview/wd-video-preview.vue'
+import wdLoading from '../wd-loading/wd-loading.vue'
+
 import { computed, ref, watch } from 'vue'
 import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
-import { uploadProps, type UploadFileItem, type ChooseFile } from './types'
+import {
+  uploadProps,
+  type UploadFileItem,
+  type ChooseFile,
+  type UploadExpose,
+  type UploadErrorEvent,
+  type UploadChangeEvent,
+  type UploadSuccessEvent,
+  type UploadProgressEvent,
+  type UploadOversizeEvent,
+  type UploadRemoveEvent,
+  type UploadMethod
+} from './types'
 import type { VideoPreviewInstance } from '../wd-video-preview/types'
 
 const props = defineProps(uploadProps)
-const emit = defineEmits(['fail', 'change', 'success', 'progress', 'oversize', 'chooseerror', 'remove'])
+
+const emit = defineEmits<{
+  (e: 'fail', value: UploadErrorEvent): void
+  (e: 'change', value: UploadChangeEvent): void
+  (e: 'success', value: UploadSuccessEvent): void
+  (e: 'progress', value: UploadProgressEvent): void
+  (e: 'oversize', value: UploadOversizeEvent): void
+  (e: 'chooseerror', value: any): void
+  (e: 'remove', value: UploadRemoveEvent): void
+  (e: 'update:fileList', value: UploadFileItem[]): void
+}>()
+
+defineExpose<UploadExpose>({
+  submit: () => startUploadFiles()
+})
 
 const { translate } = useTranslate('upload')
 
@@ -216,6 +251,56 @@ watch(
   }
 )
 
+function emitFileList() {
+  emit('update:fileList', uploadFiles.value)
+}
+
+/**
+ * 组件内部上传方法
+ * @param file 文件
+ * @param formData
+ * @param options
+ */
+const upload: UploadMethod = (file, formData, options) => {
+  const uploadTask = uni.uploadFile({
+    url: options.action,
+    header: options.header,
+    name: options.name,
+    fileName: options.name,
+    fileType: options.fileType as 'image' | 'video' | 'audio',
+    formData,
+    filePath: file.url,
+    success(res) {
+      if (res.statusCode === options.statusCode) {
+        // 上传成功进行文件列表拼接
+        options.onSuccess(res, file, formData)
+      } else {
+        // 上传失败处理
+        options.onError({ ...res, errMsg: res.errMsg || '' }, file, formData)
+      }
+    },
+    fail(err) {
+      // 上传失败处理
+      options.onError(err, file, formData)
+    }
+  })
+  // 获取当前文件加载的百分比
+  uploadTask.onProgressUpdate((res) => {
+    options.onProgress(res, file)
+  })
+}
+
+const startUpload: UploadMethod = (file, formData, options) => {
+  const { statusKey, uploadMethod } = props
+  // 设置上传中，防止重复发起上传
+  file[statusKey] = 'loading'
+  if (isFunction(uploadMethod)) {
+    uploadMethod(file, formData, options)
+  } else {
+    upload(file, formData, options)
+  }
+}
+
 /**
  * 获取图片信息
  * @param img
@@ -239,32 +324,69 @@ function getImageInfo(img: string) {
  * @param {Object} file 上传的文件
  */
 function initFile(file: ChooseFile) {
+  const { statusKey } = props
   // 状态初始化
   const initState: UploadFileItem = {
     uid: context.id++,
     // 仅h5支持 name
     name: file.name || '',
     thumb: file.thumb || '',
-    status: 'loading',
+    [statusKey]: 'pending',
     size: file.size || 0,
     url: file.path,
     percent: 0
   }
 
   uploadFiles.value.push(initState)
+  if (props.autoUpload) {
+    startUploadFiles()
+  }
+}
 
-  const { buildFormData, formData = {} } = props
+/**
+ *  开始上传文件
+ */
+function startUploadFiles() {
+  const { buildFormData, formData = {}, statusKey } = props
+  const { action, name, header = {}, accept, successStatus } = props
+  const statusCode = isDef(successStatus) ? successStatus : 200
 
-  if (buildFormData) {
-    buildFormData({
-      file: initState,
-      formData,
-      resolve: (formData: Record<string, any>) => {
-        formData && handleUpload(initState, formData)
+  for (const uploadFile of uploadFiles.value) {
+    // 仅开始未上传的文件
+    if (uploadFile[statusKey] == 'pending') {
+      if (buildFormData) {
+        buildFormData({
+          file: uploadFile,
+          formData,
+          resolve: (formData: Record<string, any>) => {
+            formData &&
+              startUpload(uploadFile, formData, {
+                onSuccess: handleSuccess,
+                onError: handleError,
+                onProgress: handleProgress,
+                action,
+                header,
+                name,
+                fileName: name,
+                fileType: accept as 'image' | 'video' | 'audio',
+                statusCode
+              })
+          }
+        })
+      } else {
+        startUpload(uploadFile, formData, {
+          onSuccess: handleSuccess,
+          onError: handleError,
+          onProgress: handleProgress,
+          action,
+          header,
+          name,
+          fileName: name,
+          fileType: accept as 'image' | 'video' | 'audio',
+          statusCode
+        })
       }
-    })
-  } else {
-    handleUpload(initState, formData)
+    }
   }
 }
 
@@ -281,6 +403,7 @@ function handleError(err: Record<string, any>, file: UploadFileItem, formData: R
     uploadFiles.value[index].error = err.message
     uploadFiles.value[index].response = err
     emit('fail', { error: err, file, formData })
+    emitFileList()
   }
 }
 
@@ -297,6 +420,7 @@ function handleSuccess(res: Record<string, any>, file: UploadFileItem, formData:
     uploadFiles.value[index].response = res.data
     emit('change', { fileList: uploadFiles.value })
     emit('success', { file, fileList: uploadFiles.value, formData })
+    emitFileList()
   }
 }
 
@@ -305,53 +429,12 @@ function handleSuccess(res: Record<string, any>, file: UploadFileItem, formData:
  * @param {Object} res 接口返回信息
  * @param {Object} file 上传的文件
  */
-function handleProgress(res: Record<string, any>, file: UploadFileItem) {
+function handleProgress(res: UniApp.OnProgressUpdateResult, file: UploadFileItem) {
   const index = uploadFiles.value.findIndex((item) => item.uid === file.uid)
   if (index > -1) {
     uploadFiles.value[index].percent = res.progress
     emit('progress', { response: res, file })
   }
-}
-
-/**
- * @description 上传操作
- * @param {Object} file 上传的文件
- */
-function handleUpload(file: UploadFileItem, formData: Record<string, any>) {
-  const { action, name, header = {}, accept } = props
-  const statusCode = isDef(props.successStatus) ? props.successStatus : 200
-  const uploadTask = uni.uploadFile({
-    url: action,
-    header,
-    name,
-    fileName: name,
-    fileType: accept as 'image' | 'video' | 'audio',
-    formData,
-    filePath: file.url,
-    success(res) {
-      if (res.statusCode === statusCode) {
-        // 上传成功进行文件列表拼接
-        handleSuccess(res, file, formData)
-      } else {
-        // 上传失败处理
-        handleError(res, file, formData)
-      }
-    },
-    fail(err) {
-      // 上传失败处理
-      handleError(err, file, formData)
-    }
-  })
-
-  // 获取当前文件加载的百分比
-  uploadTask.onProgressUpdate((res) => {
-    /**
-     * res.progress: 上传进度
-     * res.totalBytesSent: 已经上传的数据长度
-     * res.totalBytesExpectedToSend: 预期需要上传的数据总长度
-     */
-    handleProgress(res, file)
-  })
 }
 
 /**
@@ -432,7 +515,7 @@ function handleChoose() {
  * @param {Object} file 上传的文件
  * @param {Number} index 删除
  */
-function handleRemove(file: Record<any, any>, index?: number) {
+function handleRemove(file: UploadFileItem) {
   uploadFiles.value.splice(
     uploadFiles.value.findIndex((item) => item.uid === file.uid),
     1
@@ -441,6 +524,7 @@ function handleRemove(file: Record<any, any>, index?: number) {
     fileList: uploadFiles.value
   })
   emit('remove', { file })
+  emitFileList()
 }
 
 function removeFile(index: number) {
@@ -536,6 +620,7 @@ function onPreviewImage(file: UploadFileItem) {
   const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
+      file,
       index,
       imgList: lists.map((file) => file.url),
       resolve: (isPass: boolean) => {
@@ -560,6 +645,7 @@ function onPreviewVideo(file: UploadFileItem) {
   const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
+      file,
       index,
       imgList: [],
       resolve: (isPass: boolean) => {
@@ -579,6 +665,7 @@ function onPreviewFile(file: UploadFileItem) {
   const index: number = lists.findIndex((item) => item.url === file.url)
   if (beforePreview) {
     beforePreview({
+      file,
       index,
       imgList: [],
       resolve: (isPass: boolean) => {

@@ -49,6 +49,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdPopup from '../wd-popup/wd-popup.vue'
+import wdButton from '../wd-button/wd-button.vue'
+import wdInput from '../wd-input/wd-input.vue'
 import { computed, inject, ref, watch } from 'vue'
 import {
   messageBoxProps,

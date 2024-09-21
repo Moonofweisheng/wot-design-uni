@@ -61,6 +61,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdPickerView from '../../wd-picker-view/wd-picker-view.vue'
 import { computed, ref, watch, onMounted } from 'vue'
 import { debounce, isArray, isEqual, isNumber, requestAnimationFrame } from '../../common/util'
 import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'

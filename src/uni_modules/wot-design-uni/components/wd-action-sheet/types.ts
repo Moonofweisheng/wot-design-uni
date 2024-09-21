@@ -18,19 +18,19 @@ export type Action = {
   /**
    * 描述信息
    */
-  subname: string
+  subname?: string
   /**
    * 颜色
    */
-  color: string
+  color?: string
   /**
    * 禁用
    */
-  disabled: boolean
+  disabled?: boolean
   /**
    * 加载中状态
    */
-  loading: boolean
+  loading?: boolean
 }
 
 export type Panel = {

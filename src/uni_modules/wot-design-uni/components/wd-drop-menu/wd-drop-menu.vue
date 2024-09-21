@@ -7,8 +7,8 @@
         <view
           v-for="(child, index) in children"
           :key="index"
-          @click="handleItemClick(child)"
-          :class="`wd-drop-menu__item ${child.disabled ? 'is-disabled' : ''} ${currentUid === child.$.uid ? 'is-active' : ''}`"
+          @click="toggle(child)"
+          :class="`wd-drop-menu__item ${child.disabled ? 'is-disabled' : ''} ${child.$.exposed!.getShowPop() ? 'is-active' : ''}`"
         >
           <view class="wd-drop-menu__item-title">
             <view class="wd-drop-menu__item-title-text">{{ getDisplayTitle(child) }}</view>
@@ -43,10 +43,7 @@ import { DROP_MENU_KEY, dropMenuProps } from './types'
 
 const props = defineProps(dropMenuProps)
 const queue = inject<Queue | null>(queueKey, null)
-
 const dropMenuId = ref<string>(`dropMenuId${uuid()}`)
-// -1表示折叠
-const currentUid = ref<number | null>(null)
 const offset = ref<number>(0)
 const windowHeight = ref<number>(0)
 
@@ -59,7 +56,7 @@ linkChildren({ props, fold, offset })
 watch(
   () => props.direction,
   (newValue) => {
-    if (newValue !== 'up' && newValue !== 'down') {
+    if (!['up', 'down'].includes(newValue)) {
       // eslint-disable-next-line quotes
       console.error("[wot design] warning(wd-drop-menu): direction must be 'up' or 'down'")
     }
@@ -90,18 +87,8 @@ function getDisplayTitle(child: any) {
   console.error('[wot-design] warning(wd-drop-menu-item): no value is matched in the options option.')
 }
 
-function handleItemClick(child: any) {
-  if (child.beforeToggle) {
-    const showPop = child.$.exposed!.getShowPop()
-    child.beforeToggle(showPop, () => toggle(child))
-  } else {
-    toggle(child)
-  }
-}
-
 function toggle(child: any) {
   // 点击当前 menu, 关闭其他 menu
-
   if (child && !child.disabled) {
     if (queue && queue.closeOther) {
       queue.closeOther(child)
@@ -111,40 +98,20 @@ function toggle(child: any) {
     fold(child)
   }
 }
+
 /**
  * 控制菜单内容是否展开
  */
-function fold(child?: any) {
-  currentUid.value = child ? child.$.uid : null
-  if (!child) {
-    children.forEach((item) => {
-      item.$.exposed!.setShowPop(false)
-    })
-    return
-  }
+function fold(child: any) {
   getRect(`#${dropMenuId.value}`, false, proxy).then((rect) => {
     if (!rect) return
     const { top, bottom } = rect
-
     if (props.direction === 'down') {
       offset.value = Number(bottom)
     } else {
       offset.value = windowHeight.value - Number(top)
     }
-    const showPop = child.$.exposed!.getShowPop()
-    if (showPop) {
-      child.$.exposed!.setShowPop(false)
-      currentUid.value = null
-    } else {
-      // 选中当前关掉其他的
-      children.forEach((item) => {
-        if (child.$.uid === item.$.uid) {
-          item.$.exposed!.open()
-        } else {
-          item.$.exposed!.setShowPop(false)
-        }
-      })
-    }
+    child.$.exposed!.toggle()
   })
 }
 </script>

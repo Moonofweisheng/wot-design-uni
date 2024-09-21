@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import type { LoadingType } from '../wd-loading/types'
 import type { ImageMode } from '../wd-img/types'
@@ -36,8 +36,8 @@ export type UploadFileItem = {
   thumb?: string
   // 当前文件名称，仅h5支持
   name?: string
-  // 上传状态
-  status?: string
+  // 上传状态。若自定义了status-key，应取对应字段
+  status?: UploadStatusType
   // 文件大小
   size?: number
   // 上传图片/视频的本地地址
@@ -61,8 +61,10 @@ export type UploadSourceType = 'album' | 'camera'
 export type UploadSizeType = 'original' | 'compressed'
 export type UploadFileType = 'image' | 'video' | 'media' | 'all' | 'file'
 export type UploadCameraType = 'front' | 'back'
+export type UploadStatusType = 'pending' | 'loading' | 'success' | 'fail'
 
 export type UploadBeforePreviewOption = {
+  file: UploadFileItem
   index: number
   imgList: string[]
   resolve: (isPass: boolean) => void
@@ -96,14 +98,32 @@ export type UploadBeforeUploadOption = {
 }
 export type UploadBeforeUpload = (options: UploadBeforeUploadOption) => void
 
+export type UploadFormData = Record<string, any>
+
 export type UploadBuildFormDataOption = {
   file: UploadFileItem
-  formData: Record<string, any>
+  formData: UploadFormData
   resolve: (formData: Record<string, any>) => void
 }
 export type UploadBuildFormData = (options: UploadBuildFormDataOption) => void
 
 export type UploadFile = Partial<UploadFileItem> & { url: string }
+
+export type UploadMethod = (
+  uploadFile: UploadFileItem,
+  formData: UploadFormData,
+  options: {
+    action: string
+    header: Record<string, any>
+    name: string
+    fileName: string
+    fileType: 'image' | 'video' | 'audio'
+    statusCode: number
+    onSuccess: (res: UniApp.UploadFileSuccessCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
+    onError: (res: UniApp.GeneralCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
+    onProgress: (res: UniApp.OnProgressUpdateResult, file: UploadFileItem) => void
+  }
+) => void
 
 export const uploadProps = {
   ...baseProps,
@@ -186,7 +206,7 @@ export const uploadProps = {
    * 类型：object
    * 默认值：{}
    */
-  formData: { type: Object as PropType<Record<string, any>>, default: () => {} },
+  formData: { type: Object as PropType<UploadFormData>, default: () => {} },
   /**
    * 预览失败执行操作
    * 类型：function({index,imgList})
@@ -290,7 +310,56 @@ export const uploadProps = {
    * 自定义预览图片列表样式
    * 类型：string
    */
-  customPreviewClass: makeStringProp('')
+  customPreviewClass: makeStringProp(''),
+  /**
+   * 是否选择文件后自动上传
+   * 类型：boolean
+   */
+  autoUpload: makeBooleanProp(true),
+  /**
+   * 自定义上传文件的请求方法
+   * 类型：UploadMethod
+   * 默认值：-
+   */
+  uploadMethod: Function as PropType<UploadMethod>
 }
 
 export type UploadProps = ExtractPropTypes<typeof uploadProps>
+
+export type UploadExpose = {
+  /**
+   * 手动触发上传
+   */
+  submit: () => void
+}
+
+export type UploadErrorEvent = {
+  error: any
+  file: UploadFileItem
+  formData: UploadFormData
+}
+
+export type UploadChangeEvent = {
+  fileList: UploadFileItem[]
+}
+
+export type UploadSuccessEvent = {
+  file: UploadFileItem
+  fileList: UploadFileItem[]
+  formData: UploadFormData
+}
+
+export type UploadProgressEvent = {
+  response: UniApp.OnProgressUpdateResult
+  file: UploadFileItem
+}
+
+export type UploadOversizeEvent = {
+  file: ChooseFile
+}
+
+export type UploadRemoveEvent = {
+  file: UploadFileItem
+}
+
+export type UploadInstance = ComponentPublicInstance<UploadProps, UploadExpose>

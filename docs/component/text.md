@@ -16,7 +16,7 @@
 
 ## 设置主题
 
-通过<code>type</code>参数设置文本主题，我们提供了五类属性：<code>primary</code> <code>error</code> <code>success</code> <code>warning</code> <code>info-默认</code>。
+通过<code>type</code>参数设置文本主题，我们提供了五类属性：<code>primary</code> <code>error</code> <code>success</code> <code>warning</code> <code>default-默认</code>。
 
 ```html
 <wd-text type="primary" text="主色"></wd-text>
@@ -149,7 +149,7 @@ function clickTest() {
 | 参数       | 说明                                                               | 类型    | 可选值                                                             | 默认值  | 最低版本         |
 | ---------- | ------------------------------------------------------------------ | ------- | ------------------------------------------------------------------ | ------- | ---------------- |
 | type       | 主题类型                                                           | string  | 'primary' / 'error' / 'warning' / 'success'                        | default | 1.3.4 |
-| text       | 文字                                                               | string  | -                                                                  |         | 1.3.4 |
+| text       | 文字                                                               | string / number  | -                                                                  |         | 1.3.4 |
 | size       | 字体大小                                                           | string  | -                                                                  | -       | 1.3.4 |
 | mode       | 文本处理的匹配模式                                                 | string  | 'text-普通文本' / 'date - 日期' / 'phone - 手机号' / 'name - 姓名' / 'price - 金额' | text    | 1.3.4+ |
 | bold       | 是否粗体，默认 normal                                              | boolean | -                                                                  | false   | 1.3.4 |

@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
 
 export type TextType = 'default' | 'primary' | 'success' | 'warning' | 'error'
 
@@ -14,10 +14,10 @@ export const textProps = {
   type: makeStringProp<TextType>('default'),
   /**
    * 文字
-   * 类型：string
+   * 类型：string | number
    * 默认值：'空字符串'
    */
-  text: makeStringProp(''),
+  text: makeNumericProp(''),
   /**
    * 字体大小
    * 类型：string

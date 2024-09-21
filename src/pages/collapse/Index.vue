@@ -1,9 +1,11 @@
 <template>
   <page-wraper>
     <wd-toast></wd-toast>
-    <demo-block title="基础用法" transparent>
-      <wd-button @click="collapse?.toggleAll()">toggleAll</wd-button>
 
+    <demo-block title="toggleAll" transparent>
+      <wd-button @click="collapse?.toggleAll()">toggleAll</wd-button>
+    </demo-block>
+    <demo-block title="基础用法" transparent>
       <wd-collapse ref="collapse" v-model="value1" @change="handleChange1">
         <wd-collapse-item
           v-for="(item, index) in itemList"
@@ -55,6 +57,19 @@
         <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
       </wd-collapse>
     </demo-block>
+
+    <demo-block title="嵌套" transparent>
+      <wd-collapse v-model="collapseRoot" @change="handleChange1">
+        <wd-collapse-item v-for="item in 5" :key="item" :title="`标签${item}`" :name="`${item}`">
+          <wd-collapse v-model="collapseList[item - 1]">
+            <wd-collapse-item v-for="(item, index) in itemList" :key="index" :title="item.title" :name="item.name">
+              {{ item.body }}
+            </wd-collapse-item>
+          </wd-collapse>
+        </wd-collapse-item>
+      </wd-collapse>
+    </demo-block>
+
     <demo-block title="查看更多" transparent>
       <wd-collapse viewmore v-model="value4" @change="handleChange4">
         这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
@@ -120,7 +135,33 @@ const value6 = ref<boolean>(false)
 const value7 = ref<string[]>(['item1'])
 const desc7 = '如订单处于暂停状态，进入“我的订单”页面，找到要取消的订单，点击“取消订单”按钮；选择订单取消原因后，点击“下一步”提交申请即可。'
 const accordion = ref<boolean>(true)
-const name = ref<string>('item1')
+
+const collapseRoot = ref<string[]>(['0'])
+const collapseList = ref<Array<string[]>>([['item1'], ['item2'], ['item3'], ['item4'], ['item5']])
+
+function handleChange1({ value }: any) {
+  console.log(value)
+}
+function handleChange2({ value }: any) {
+  console.log(value)
+}
+function handleChange3({ value }: any) {
+  console.log(value)
+}
+function handleChange4({ value }: any) {
+  console.log(value)
+}
+function handleChange5({ value }: any) {
+  console.log(value)
+}
+function handleChange6({ value }: any) {
+  console.log(value)
+}
+function handleChange7({ value }: any) {
+  console.log(value)
+}
+
+/**
 
 function handleChange1({ value }: any) {
   console.log(value)

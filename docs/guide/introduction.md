@@ -23,6 +23,11 @@
   <img style="width: 150px; height: 150px;" :src="H5Qrcode" />
   <div style="text-align: center;">浏览器扫码</div>
 </div>
+
+<div style="display: inline-block;">
+  <img style="width: 150px; height: 150px;" :src="AndroidQrcode" />
+  <div style="text-align: center;">浏览器扫码</div>
+</div>
 </div>
 
 ## ✨ 特性
@@ -74,6 +79,7 @@
 import WxQrcode from '/wx.jpg'
 import AlipayQrcode from '/alipay.png'
 import H5Qrcode from '/h5.png'
+import AndroidQrcode from '/android.png'
 
 
 export default {
@@ -81,7 +87,8 @@ export default {
     return {
       WxQrcode,
       AlipayQrcode,
-      H5Qrcode
+      H5Qrcode,
+      AndroidQrcode
     }
   }
 }

@@ -1,15 +1,4 @@
-/*
- * @Author: weisheng
- * @Date: 2023-09-25 17:28:12
- * @LastEditTime: 2024-07-31 23:10:28
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/global.d.ts
- * 记得注释
- */
-import '@vue/runtime-core'
-
-declare module '@vue/runtime-core' {
+declare module 'vue' {
   // Helper for Volar
   export interface GlobalComponents {
     WdActionSheet: typeof import('./components/wd-action-sheet/wd-action-sheet.vue')['default']
@@ -101,6 +90,7 @@ declare module '@vue/runtime-core' {
     WdIndexBar: typeof import('./components/wd-index-bar/wd-index-bar.vue')['default']
     WdIndexAnchor: typeof import('./components/wd-index-anchor/wd-index-anchor.vue')['default']
     WdText: typeof import('./components/wd-text/wd-text.vue')['default']
+    WdCountTo: typeof import('./components/wd-count-to/wd-count-to.vue')['default']
   }
 }
 

@@ -43,6 +43,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
+import wdLoading from '../wd-loading/wd-loading.vue'
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import { deepClone, getType, isArray, isDef, isEqual, range } from '../common/util'
 import { formatArray, pickerViewProps, type ColumnItem, type PickerViewExpose } from './types'
@@ -57,10 +58,10 @@ const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中�
 watch(
   [() => props.modelValue, () => props.columns],
   (newValue, oldValue) => {
-    if (!isEqual(oldValue[1], newValue[1])) {
+    if (!isEqual(oldValue[1], newValue[1]) && isArray(newValue[1]) && newValue[1].length > 0) {
       formatColumns.value = formatArray(newValue[1], props.valueKey, props.labelKey)
     }
-    if (!isEqual(oldValue[0], newValue[0]) && isDef(newValue[0])) {
+    if (isDef(newValue[0])) {
       selectWithValue(newValue[0])
     }
   },
@@ -79,7 +80,6 @@ const { proxy } = getCurrentInstance() as any
  */
 function selectWithValue(value: string | number | boolean | number[] | string[] | boolean[]) {
   if (formatColumns.value.length === 0) return
-
   // 使其默认选中首项
   if (value === '' || !isDef(value) || (isArray(value) && value.length === 0)) {
     value = formatColumns.value.map((col) => {
@@ -327,6 +327,15 @@ function getSelectedIndex() {
   return selectedIndex.value
 }
 
+/**
+ * 用于重置列数据为指定列数据
+ */
+function resetColumns(columns: (string | number | string[] | number[] | ColumnItem | ColumnItem[])[]) {
+  if (isArray(columns) && columns.length) {
+    formatColumns.value = formatArray(columns, props.valueKey, props.labelKey)
+  }
+}
+
 function onPickStart() {
   emit('pickstart')
 }
@@ -343,7 +352,8 @@ defineExpose<PickerViewExpose>({
   getColumnData,
   getColumnIndex,
   getLabels,
-  getSelectedIndex
+  getSelectedIndex,
+  resetColumns
 })
 </script>
 <style lang="scss" scoped>

@@ -439,6 +439,20 @@ export const requestAnimationFrame = (cb = () => {}) => {
 }
 
 /**
+ * 暂停指定时间函数
+ * @param ms 延迟时间
+ * @returns
+ */
+export const pause = (ms: number) => {
+  return new AbortablePromise((resolve) => {
+    const timer = setTimeout(() => {
+      clearTimeout(timer)
+      resolve(true)
+    }, ms)
+  })
+}
+
+/**
  * 深拷贝函数，用于将对象进行完整复制。
  * @param obj 要深拷贝的对象
  * @param cache 用于缓存已复制的对象，防止循环引用
@@ -693,4 +707,16 @@ export function omitBy<O extends Record<string, any>>(obj: O, predicate: (value:
   const newObj = deepClone(obj)
   Object.keys(newObj).forEach((key) => predicate(newObj[key], key) && delete newObj[key]) // 遍历对象的键，删除值为不满足predicate的字段
   return newObj
+}
+
+/**
+ * 缓动函数，用于在动画或过渡效果中根据时间参数计算当前值
+ * @param t 当前时间，通常是从动画开始经过的时间
+ * @param b 初始值，动画属性的初始值
+ * @param c 变化量，动画属性的目标值与初始值的差值
+ * @param d 持续时间，动画持续的总时间长度
+ * @returns 计算出的当前值
+ */
+export function easingFn(t: number = 0, b: number = 0, c: number = 0, d: number = 0): number {
+  return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b
 }

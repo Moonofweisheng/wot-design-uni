@@ -22,6 +22,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdResize from '../wd-resize/wd-resize.vue'
 import { computed, getCurrentInstance, reactive, ref, type CSSProperties } from 'vue'
 import { addUnit, getRect, objToStyle, requestAnimationFrame, uuid } from '../common/util'
 import { stickyProps } from './types'

@@ -27,8 +27,8 @@
           :type="type"
           :password="showPassword && !isPwdVisible"
           v-model="inputValue"
-          :placeholder="placeholder || translate('placeholder')"
-          :disabled="disabled"
+          :placeholder="placeholderValue"
+          :disabled="disabled || readonly"
           :maxlength="maxlength"
           :focus="focused"
           :confirm-type="confirmType"
@@ -42,6 +42,7 @@
           :hold-keyboard="holdKeyboard"
           :always-embed="alwaysEmbed"
           :placeholder-class="inputPlaceholderClass"
+          :ignoreCompositionEvent="ignoreCompositionEvent"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
@@ -50,7 +51,7 @@
         />
         <view v-if="readonly" class="wd-input__readonly-mask" />
         <view v-if="showClear || showPassword || suffixIcon || showWordCount || $slots.suffix" class="wd-input__suffix">
-          <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="clear" />
+          <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="handleClear" />
           <wd-icon v-if="showPassword" custom-class="wd-input__icon" :name="isPwdVisible ? 'view' : 'eye-close'" @click="togglePwdVisible" />
           <view v-if="showWordCount" class="wd-input__count">
             <text
@@ -84,8 +85,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { isDef, objToStyle, requestAnimationFrame } from '../common/util'
+import { isDef, objToStyle, pause, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -132,6 +134,10 @@ watch(
 )
 
 const { parent: form } = useParent(FORM_KEY)
+
+const placeholderValue = computed(() => {
+  return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
+})
 
 /**
  * 展示清空按钮
@@ -224,7 +230,7 @@ function formatValue(value: string | number) {
 function togglePwdVisible() {
   isPwdVisible.value = !isPwdVisible.value
 }
-function clear() {
+function handleClear() {
   clearing.value = true
   focusing.value = false
   inputValue.value = ''
@@ -243,23 +249,19 @@ function clear() {
     emit('clear')
   })
 }
-function handleBlur() {
+async function handleBlur() {
+  // 等待150毫秒，clear执行完毕
+  await pause(150)
   if (clearing.value) {
     clearing.value = false
     return
   }
-  requestAnimationFrame(() => {
-    focusing.value = false
-    emit('blur', {
-      value: inputValue.value
-    })
+  focusing.value = false
+  emit('blur', {
+    value: inputValue.value
   })
 }
 function handleFocus({ detail }: any) {
-  if (clearing.value) {
-    clearing.value = false
-    return
-  }
   focusing.value = true
   emit('focus', detail)
 }

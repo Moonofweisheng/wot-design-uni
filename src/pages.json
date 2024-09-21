@@ -1,5 +1,6 @@
 {
-  "pages": [{
+  "pages": [
+    {
       "path": "pages/index/Index",
       "name": "index",
       "style": {
@@ -194,7 +195,6 @@
       "path": "pages/notify/Index",
       "name": "toast",
       "style": {
-
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
@@ -713,6 +713,16 @@
       }
     },
     {
+      "path": "pages/form/demo4",
+      "name": "formDemo4",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "校验提示方式"
+      }
+    },
+    {
       "path": "pages/fab/Index",
       "name": "fab",
       "style": {
@@ -740,6 +750,26 @@
           "allowsBounceVertical": "NO"
         },
         "navigationBarTitleText": "CountDown 倒计时"
+      }
+    },
+    {
+      "path": "pages/countTo/Index",
+      "name": "countTo",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "CountTo 数字滚动"
+      }
+    },
+    {
+      "path": "pages/keyboard/Index",
+      "name": "keyboard",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Keyboard 虚拟键盘"
       }
     },
     {
