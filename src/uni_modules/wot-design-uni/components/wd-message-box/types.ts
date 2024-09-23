@@ -1,14 +1,14 @@
 /*
  * @Author: weisheng
  * @Date: 2024-04-08 22:34:01
- * @LastEditTime: 2024-09-21 15:51:27
+ * @LastEditTime: 2024-09-23 15:59:04
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\types.ts
  * 记得注释
  */
 import { baseProps } from '../common/props'
-import { InputType } from '../wd-input/types'
+import { type InputType } from '../wd-input/types'
 
 export type MessageType = 'alert' | 'confirm' | 'prompt'
 

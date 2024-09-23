@@ -64,7 +64,7 @@ import {
 import { defaultOptions, messageDefaultOptionKey } from '.'
 import { isDef, isFunction } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
-import { InputType } from '../wd-input/types'
+import { type InputType } from '../wd-input/types'
 
 const props = defineProps(messageBoxProps)
 
