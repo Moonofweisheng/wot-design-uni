@@ -40,7 +40,7 @@
     </demo-block>
 
     <demo-block title="自定义图片">
-      <wd-status-tip image="https://img.wot-design-uni.cn/static/1.jpg" tip="查看我的头像" />
+      <wd-status-tip image="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg" tip="查看我的头像" />
     </demo-block>
   </page-wraper>
 </template>

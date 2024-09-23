@@ -9,7 +9,7 @@
         <view
           :class="`wd-navbar__left ${leftDisabled ? 'is-disabled' : ''}`"
           :hover-class="leftDisabled || $slots.left ? '' : 'wd-navbar__left--hover'"
-          hover-stay-time="70"
+          :hover-stay-time="70"
           @click="handleClickLeft"
           v-else-if="!$slots.left"
         >
@@ -30,11 +30,11 @@
           @click="handleClickRight"
           v-if="$slots.right || rightText"
           :hover-class="rightDisabled ? '' : 'wd-navbar__right--hover'"
-          hover-stay-time="70"
+          :hover-stay-time="70"
         >
           <slot name="right" />
 
-          <view v-if="!$slots.right && rightText" class="wd-navbar__text" hover-class="wd-navbar__text--hover" hover-stay-time="70">
+          <view v-if="!$slots.right && rightText" class="wd-navbar__text" hover-class="wd-navbar__text--hover" :hover-stay-time="70">
             {{ rightText }}
           </view>
         </view>

@@ -187,21 +187,27 @@ function formatValue(value: string | number) {
     return ''
   }
 
-  value = Number(value)
+  let formatValue = Number(value)
 
-  if (isNaN(value)) {
+  if (isNaN(formatValue)) {
     value = props.min
   }
 
   if (props.stepStrictly) {
-    value = toStrictlyStep(value)
+    formatValue = toStrictlyStep(value)
   }
 
   if (props.precision !== undefined) {
-    value = value.toFixed(props.precision)
+    formatValue = Number(formatValue.toFixed(props.precision))
+  }
+  if (formatValue > props.max) {
+    formatValue = props.max
+  }
+  if (formatValue < props.min) {
+    formatValue = props.min
   }
 
-  return Number(value)
+  return formatValue
 }
 </script>
 

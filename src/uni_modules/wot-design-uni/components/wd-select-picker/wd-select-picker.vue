@@ -142,7 +142,7 @@ const isConfirm = ref<boolean>(false)
 const lastSelectList = ref<Array<number | boolean | string> | number | boolean | string>([])
 const filterVal = ref<string>('')
 const filterColumns = ref<Array<Record<string, any>>>([])
-const scrollTop = ref<number | null>(0) // 滚动位置
+const scrollTop = ref<number>(0) // 滚动位置
 const cell = useCell()
 
 const showValue = computed(() => {

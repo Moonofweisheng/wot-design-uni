@@ -64,6 +64,7 @@ import {
 import { defaultOptions, messageDefaultOptionKey } from '.'
 import { isDef, isFunction } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
+import { type InputType } from '../wd-input/types'
 
 const props = defineProps(messageBoxProps)
 
@@ -117,7 +118,7 @@ const type = ref<MessageType>('alert')
 /**
  * 当type为prompt时，输入框类型
  */
-const inputType = ref<string>('text')
+const inputType = ref<InputType>('text')
 
 /**
  * 当type为prompt时，输入框初始值
