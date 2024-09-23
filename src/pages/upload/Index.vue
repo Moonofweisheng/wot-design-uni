@@ -75,9 +75,10 @@
     </demo-block>
 
     <demo-block title="自定义预览样式">
-      <wd-upload v-model:file-list="fileList16" accept="image" image-mode="aspectFill">
-        <template #preview-cover="{ file }">
-          <view class="preview-cover">{{ file.name }}</view>
+      <wd-upload v-model:file-list="fileList16" accept="image" image-mode="aspectFill" :action="action">
+        <template #preview-cover="{ file, index }">
+          <!-- 小程序拿不到文件 -->
+          <view class="preview-cover">{{ file.name || `文件${index}` }}</view>
         </template>
       </wd-upload>
     </demo-block>

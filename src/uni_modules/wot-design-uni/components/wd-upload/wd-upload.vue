@@ -65,7 +65,7 @@
         @click="removeFile(index)"
       ></wd-icon>
       <!-- 自定义预览样式 -->
-      <slot name="preview-cover" v-if="$slots['preview-cover']" :file="file"></slot>
+      <slot name="preview-cover" v-if="$slots['preview-cover']" :file="file" :index="index"></slot>
     </view>
 
     <block v-if="showUpload">
@@ -566,7 +566,6 @@ function handlePreviewFile(file: UploadFileItem) {
 function handlePreviewImage(index: number, lists: string[]) {
   const { onPreviewFail } = props
   uni.previewImage({
-    file,
     urls: lists,
     current: lists[index],
     fail() {
