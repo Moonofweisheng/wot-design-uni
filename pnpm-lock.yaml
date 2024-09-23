@@ -102,6 +102,9 @@ importers:
       '@uni-helper/uni-types':
         specifier: 1.0.0-alpha.4
         version: 1.0.0-alpha.4(@uni-helper/uni-app-types@1.0.0-alpha.4(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))(@uni-helper/uni-cloud-types@1.0.0-alpha.4(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))(@uni-helper/uni-ui-types@1.0.0-alpha.4(@uni-helper/uni-app-types@1.0.0-alpha.4(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4)))(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))
+      '@uni-helper/vite-plugin-uni-components':
+        specifier: ^0.1.0
+        version: 0.1.0(rollup@3.26.3)
       '@vant/area-data':
         specifier: ^1.4.1
         version: 1.4.1
@@ -2021,6 +2024,9 @@ packages:
       '@uni-helper/uni-app-types': 1.0.0-alpha.4
       typescript: ^5.0.0
       vue: ^3.0.0
+
+  '@uni-helper/vite-plugin-uni-components@0.1.0':
+    resolution: {integrity: sha512-rqHswBjVf0sMssGQ8G2xc3BrEvW07niRBHR2YyUyoD9MCEPN3T6NIpMOXh2QHujJIIm4XwKF8GQV3RaljWRupQ==}
 
   '@vant/area-data@1.4.1':
     resolution: {integrity: sha512-D8zI/rfxREhnIKGoYzsEJZ73fte4JARhFeFftLIH7ynu1sPrCBEgPkLEbwPyvw3VC4JdSIuzaK5uOhu+BcoPXw==}
@@ -4291,6 +4297,10 @@ packages:
     resolution: {integrity: sha512-xy4q7wou3vUoC9k1xGTXc+awNdGaGVHtFUaey8tiX4H1QRc04DZ/rmDFwNm2EBsuYEhAZ6SgMmYf3InGY6OauA==}
     engines: {node: '>=10'}
 
+  minimatch@8.0.4:
+    resolution: {integrity: sha512-W0Wvr9HyFXZRGIDgCicunpQ299OKXs9RgZfaukz4qAW/pJhcpUfupc9c+OObPOFueNy8VSrZgEmDtk6Kh4WzDA==}
+    engines: {node: '>=16 || 14 >=14.17'}
+
   minimatch@9.0.3:
     resolution: {integrity: sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -6055,7 +6065,7 @@ snapshots:
       '@babel/traverse': 7.25.6
       '@babel/types': 7.25.6
       convert-source-map: 2.0.0
-      debug: 4.3.6
+      debug: 4.3.7
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -6075,7 +6085,7 @@ snapshots:
       '@babel/traverse': 7.25.6
       '@babel/types': 7.25.6
       convert-source-map: 2.0.0
-      debug: 4.3.6
+      debug: 4.3.7
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -6157,7 +6167,7 @@ snapshots:
       '@babel/core': 7.25.2
       '@babel/helper-compilation-targets': 7.25.2
       '@babel/helper-plugin-utils': 7.24.8
-      debug: 4.3.6
+      debug: 4.3.7
       lodash.debounce: 4.0.8
       resolve: 1.22.8
     transitivePeerDependencies:
@@ -6884,7 +6894,7 @@ snapshots:
       '@babel/parser': 7.25.6
       '@babel/template': 7.25.0
       '@babel/types': 7.25.6
-      debug: 4.3.6
+      debug: 4.3.7
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -7068,11 +7078,11 @@ snapshots:
       '@vue/compiler-sfc': 3.4.21
       '@vue/consolidate': 1.0.0
       '@vue/shared': 3.4.21
-      debug: 4.3.6
+      debug: 4.3.7
       es-module-lexer: 1.3.0
       estree-walker: 2.0.2
       fs-extra: 10.1.0
-      magic-string: 0.30.8
+      magic-string: 0.30.11
       picocolors: 1.0.1
       source-map-js: 1.2.0
       unplugin-auto-import: 0.16.7(@vueuse/core@10.9.0(vue@3.4.38(typescript@5.5.4)))(rollup@3.26.3)
@@ -7095,7 +7105,7 @@ snapshots:
       '@vitejs/plugin-vue': 5.0.4(vite@5.2.8(@types/node@18.15.3)(sass@1.59.3)(terser@5.16.6))(vue@3.4.38(typescript@5.5.4))
       '@vue/compiler-dom': 3.4.21
       '@vue/compiler-sfc': 3.4.21
-      debug: 4.3.6
+      debug: 4.3.7
       fs-extra: 10.1.0
       picocolors: 1.0.1
     transitivePeerDependencies:
@@ -7253,7 +7263,7 @@ snapshots:
       '@vue/compiler-sfc': 3.4.21
       '@vue/server-renderer': 3.4.21(vue@3.4.38(typescript@5.5.4))
       '@vue/shared': 3.4.21
-      debug: 4.3.6
+      debug: 4.3.7
       fs-extra: 10.1.0
       mime: 3.0.0
       module-alias: 2.2.2
@@ -7462,7 +7472,7 @@ snapshots:
       '@dcloudio/uni-shared': 3.0.0-4020420240722002
       '@vue/compiler-sfc': 3.4.21
       '@vue/shared': 3.4.21
-      debug: 4.3.6
+      debug: 4.3.7
     transitivePeerDependencies:
       - '@nuxt/kit'
       - '@vueuse/core'
@@ -7560,7 +7570,7 @@ snapshots:
     dependencies:
       '@dcloudio/uni-cli-shared': 3.0.0-4020420240722002(@vueuse/core@10.9.0(vue@3.4.38(typescript@5.5.4)))(postcss@8.4.47)(rollup@3.26.3)(ts-node@10.9.2(@types/node@18.15.3)(typescript@5.5.4))(vue@3.4.38(typescript@5.5.4))
       '@dcloudio/uni-shared': 3.0.0-4020420240722002
-      debug: 4.3.6
+      debug: 4.3.7
     transitivePeerDependencies:
       - '@nuxt/kit'
       - '@vueuse/core'
@@ -8563,7 +8573,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 5.55.0(typescript@5.5.4)
       '@typescript-eslint/utils': 5.55.0(eslint@8.36.0)(typescript@5.5.4)
-      debug: 4.3.4
+      debug: 4.3.7
       eslint: 8.36.0
       tsutils: 3.21.0(typescript@5.5.4)
     optionalDependencies:
@@ -8577,7 +8587,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 5.55.0
       '@typescript-eslint/visitor-keys': 5.55.0
-      debug: 4.3.4
+      debug: 4.3.7
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.4.0
@@ -8630,6 +8640,21 @@ snapshots:
       '@uni-helper/uni-app-types': 1.0.0-alpha.4(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))
       typescript: 5.5.4
       vue: 3.4.38(typescript@5.5.4)
+
+  '@uni-helper/vite-plugin-uni-components@0.1.0(rollup@3.26.3)':
+    dependencies:
+      '@antfu/utils': 0.7.7
+      '@rollup/pluginutils': 5.1.0(rollup@3.26.3)
+      chokidar: 3.5.3
+      debug: 4.3.7
+      fast-glob: 3.3.2
+      local-pkg: 0.4.3
+      magic-string: 0.30.11
+      minimatch: 8.0.4
+      resolve: 1.22.8
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
 
   '@vant/area-data@1.4.1': {}
 
@@ -8783,7 +8808,7 @@ snapshots:
       '@vue/compiler-ssr': 3.4.21
       '@vue/shared': 3.4.21
       estree-walker: 2.0.2
-      magic-string: 0.30.8
+      magic-string: 0.30.11
       postcss: 8.4.38
       source-map-js: 1.2.0
 
@@ -11376,6 +11401,10 @@ snapshots:
     dependencies:
       brace-expansion: 2.0.1
 
+  minimatch@8.0.4:
+    dependencies:
+      brace-expansion: 2.0.1
+
   minimatch@9.0.3:
     dependencies:
       brace-expansion: 2.0.1
@@ -12531,8 +12560,8 @@ snapshots:
       '@rollup/pluginutils': 5.1.0(rollup@3.26.3)
       fast-glob: 3.3.2
       local-pkg: 0.5.0
-      magic-string: 0.30.8
-      minimatch: 9.0.3
+      magic-string: 0.30.11
+      minimatch: 9.0.5
       unimport: 3.7.1(rollup@3.26.3)
       unplugin: 1.7.1
     optionalDependencies:

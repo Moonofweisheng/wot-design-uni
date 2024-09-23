@@ -33,7 +33,7 @@ interface Props {
   safeAreaInsetBottom?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   showDarkMode: false,
   safeAreaInsetBottom: true
 })
