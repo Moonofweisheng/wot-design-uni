@@ -62,7 +62,7 @@
 | image-size | 图片大小，默认单位为 `px`                          | `string`/`number`/`ImageSize` | -                                                               | -                                                             | -                |
 | tip        | 提示文案                                           | string                        | -                                                               | -                                                             | -                |
 | image-mode | 预览图片的 mode 属性                               | `ImageMode`                   | -                                                               | aspectFit                                                     | 1.2.12           |
-| url-prefix | 图片路径前缀，指向图片所在目录，用于拼接图片 URL。 | string                        | -                                                               | https://registry.npmmirror.com/wot-design-uni-assets/*/files/ | $LOWEST_VERSION$ |
+| url-prefix | 图片路径前缀，指向图片所在目录，用于拼接图片 URL。 | string                        | -                                                               | https://registry.npmmirror.com/wot-design-uni-assets/*/files/ | 1.3.11 |
 
 ### ImageSize
 

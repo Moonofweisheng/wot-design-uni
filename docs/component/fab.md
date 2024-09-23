@@ -113,19 +113,19 @@ const handleClick = () => {
 | zIndex         | 自定义悬浮按钮层级                                    | number       | -                                                                                         | 99                                             | 0.1.57           |
 | gap            | 自定义悬浮按钮与可视区域边缘的间距                    | FabGap       | -                                                                                         | \{ top: 16, left: 16, right: 16, bottom: 16 \} | 1.2.26           |
 | customStyle    | 自定义样式                                            | string       | -                                                                                         | ''                                             | 0.1.57           |
-| expandable     | 用于控制点击时是否展开菜单，设置为 false 时触发 click | boolean      | -                                                                                         | true                                           | $LOWEST_VERSION$ |
+| expandable     | 用于控制点击时是否展开菜单，设置为 false 时触发 click | boolean      | -                                                                                         | true                                           | 1.3.11 |
 
 ## Events
 
 | 事件名称 | 说明                                         | 参数 | 最低版本         |
 | -------- | -------------------------------------------- | ---- | ---------------- |
-| click    | expandable 设置为 false 时，点击悬浮按钮触发 | —    | $LOWEST_VERSION$ |
+| click    | expandable 设置为 false 时，点击悬浮按钮触发 | —    | 1.3.11 |
 
 ## Slot
 
 | name    | 说明                                                           | 最低版本         |
 | ------- | -------------------------------------------------------------- | ---------------- |
-| trigger | 触发器插槽，用于自定义点击按钮，使用此插槽时组件不会抛出 click | $LOWEST_VERSION$ |
+| trigger | 触发器插槽，用于自定义点击按钮，使用此插槽时组件不会抛出 click | 1.3.11 |
 
 ## 外部样式类
 
