@@ -567,6 +567,25 @@ const customUpload: UploadMethod = (file, formData, options) => {
 }
 ```
 
+
+## 自定义预览样式
+
+使用 `preview-cover` 插槽可以自定义覆盖在预览区域上方的内容
+
+```html
+<wd-upload v-model:file-list="fileList" accept="image" image-mode="aspectFill">
+  <template #preview-cover="{ file }">
+    <view class="preview-cover">{{ file.name }}</view>
+  </template>
+</wd-upload>
+<style>
+  .preview-cover {
+  margin-top: 10rpx;
+  text-align: center;
+}
+</style>
+```
+
 ## Attributes
 
 | 参数                          | 说明                                                                                                                                                                           | 类型                                   | 可选值                                         | 默认值                     | 最低版本         |
@@ -630,6 +649,7 @@ const customUpload: UploadMethod = (file, formData, options) => {
 | name    | 说明             | 最低版本 |
 | ------- | ---------------- | -------- |
 | default | 上传唤起插槽样式 | -        |
+| preview-cover | 自定义覆盖在预览区域上方的内容 | -        |
 
 ## Events
 
