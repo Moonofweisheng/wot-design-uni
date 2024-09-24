@@ -327,6 +327,9 @@ export default defineConfig({
             link: "/component/drop-menu",
             text: "DropMenu 下拉菜单"
           }, {
+            link: "/component/floating-panel",
+            text: "FloatingPanel 浮动面板"
+          }, {
             link: "/component/loading",
             text: "Loading 加载"
           }, {

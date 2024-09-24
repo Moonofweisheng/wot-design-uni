@@ -720,3 +720,14 @@ export function omitBy<O extends Record<string, any>>(obj: O, predicate: (value:
 export function easingFn(t: number = 0, b: number = 0, c: number = 0, d: number = 0): number {
   return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b
 }
+
+/**
+ * 从数组中寻找最接近目标值的元素
+ *
+ * @param arr 数组
+ * @param target 目标值
+ * @returns 最接近目标值的元素
+ */
+export function closest(arr: number[], target: number) {
+  return arr.reduce((prev, curr) => (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev))
+}

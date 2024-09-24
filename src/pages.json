@@ -821,6 +821,16 @@
         },
         "navigationBarTitleText": "IndexBar 索引栏"
       }
+    },
+    {
+      "path": "pages/floatingPanel/Index",
+      "name": "floatingPanel",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "floatingPanel 浮动面板"
+      }
     }
   ],
   // "tabBar": {
