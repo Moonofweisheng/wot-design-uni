@@ -42,6 +42,14 @@
     <demo-block title="自定义图片">
       <wd-status-tip image="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg" tip="查看我的头像" />
     </demo-block>
+
+    <demo-block title="插槽自定义图片内容">
+      <wd-status-tip tip="插槽自定义图片内容">
+        <template #image>
+          <wd-icon name="ie-filled" size="100px"></wd-icon>
+        </template>
+      </wd-status-tip>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup></script>

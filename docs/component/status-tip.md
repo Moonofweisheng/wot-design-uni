@@ -54,6 +54,18 @@
 <wd-status-tip image="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg" tip="查看我的头像" />
 ```
 
+## 自定义图片内容
+
+使用插槽 `image` 可以自定义图片内容。
+
+```html
+<wd-status-tip tip="自定义图片内容">
+  <template #image>
+    <wd-icon name="ie-filled" size="100px"></wd-icon>
+  </template>
+</wd-status-tip>
+```
+
 ## Attributes
 
 | 参数       | 说明                                               | 类型                          | 可选值                                                          | 默认值                                                        | 最低版本         |
@@ -70,3 +82,9 @@
 | ------ | ------------------------- | ---------------- | ------ | ------ | -------- |
 | height | 图片高度，默认单位为 `px` | string \| number | -      | -      | 1.2.12   |
 | width  | 图片宽度，默认单位为 `px` | string \| number | -      | -      | 1.2.12   |
+
+## Slot
+
+| name    | 说明                     | 最低版本 |
+| ------- | ------------------------ | -------- |
+| image   | 图片内容                  | $LOWEST_VERSION$ |
