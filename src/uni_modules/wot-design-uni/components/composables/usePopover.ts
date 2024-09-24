@@ -94,7 +94,7 @@ export function usePopover() {
     let offsetY = 0
     if (Array.isArray(offset)) {
       offsetX = (verticalX - 17 > 0 ? 0 : verticalX - 25) + offset[0]
-      offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + offset[1]
+      offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + (offset[1] ? offset[1] : offset[0])
     } else if (isObj(offset)) {
       offsetX = (verticalX - 17 > 0 ? 0 : verticalX - 25) + offset.x
       offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + offset.y
