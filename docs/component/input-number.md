@@ -116,7 +116,7 @@ function handleChange1({ value }) {
 | disable-input | 禁用输入框 | boolean | - | false | 0.2.14 |
 | disable-plus | 禁用增加按钮 | boolean | - | false | 0.2.14 |
 | disable-minus | 禁用减少按钮 | boolean | - | false | 0.2.14 |
-| adjustPosition | 原生属性，键盘弹起时，是否自动上推页面 | boolean | - | true | $LOWEST_VERSION$ |
+| adjustPosition | 原生属性，键盘弹起时，是否自动上推页面 | boolean | - | true | 1.3.11 |
 
 
 ## Events

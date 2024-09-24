@@ -172,7 +172,7 @@ function handleChange(event) {
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
 | clearTrigger | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示	 | `InputClearTrigger`	 | `focus` / `always` | `always` | 1.3.7 |
 | focusWhenClear | 是否在点击清除按钮时聚焦输入框 | boolean | -      | true  | 1.3.7   |
-| ignoreCompositionEvent | 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件。 | boolean | -      | true  | $LOWEST_VERSION$|
+| ignoreCompositionEvent | 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件。 | boolean | -      | true  | 1.3.11|
 
 
 ### FormItemRule 数据结构
