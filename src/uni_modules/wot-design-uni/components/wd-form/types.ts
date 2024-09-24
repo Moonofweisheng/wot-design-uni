@@ -63,7 +63,11 @@ export const formProps = {
   errorType: {
     type: String as PropType<'toast' | 'message' | 'none'>,
     default: 'message'
-  }
+  },
+  /**
+   * 表单整体禁用，开启之后，里面的表单项都会被禁用
+   */
+  disabled: makeBooleanProp(false)
 }
 export type FormProps = ExtractPropTypes<typeof formProps>
 

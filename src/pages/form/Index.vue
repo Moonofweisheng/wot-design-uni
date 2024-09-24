@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <demo-block title="基础表单" transparent>
-      <wd-form ref="form1" :model="model1">
+      <wd-form ref="form1" :model="model1" disabled>
         <wd-cell-group border>
           <wd-input
             label="用户名"
