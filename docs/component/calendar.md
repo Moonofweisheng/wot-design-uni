@@ -417,6 +417,7 @@ function handleConfirm4({ value }) {
 | confirm  | 绑定值变化时触发                     | `{ value }`               | -        |
 | change   | 点击面板日期时触发                   | `{ value }`               | -        |
 | cancel   | 点击关闭按钮或者蒙层时触发           | -|-|
+| open     | 日历打开时触发          | -|-|
 
 ## Methods
 

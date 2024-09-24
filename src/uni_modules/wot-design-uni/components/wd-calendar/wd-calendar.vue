@@ -205,7 +205,7 @@ const formatRange = (value: number, rangeType: 'start' | 'end', type: CalendarTy
 }
 
 const props = defineProps(calendarProps)
-const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm'])
+const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm', 'open'])
 
 const pickerShow = ref<boolean>(false)
 const calendarValue = ref<null | number | number[]>(null)
@@ -333,6 +333,7 @@ function open() {
       calendarTabs.value.updateLineStyle(false)
     }
   }, 250)
+  emit('open')
 }
 // 对外暴露方法
 function close() {
@@ -349,7 +350,6 @@ function handleTypeChange({ index }: { index: number }) {
   const tabs = ['date', 'week', 'month']
   const rangeTabs = ['daterange', 'weekrange', 'monthrange']
   const type = props.type.indexOf('range') > -1 ? rangeTabs[index] : tabs[index]
-
   currentTab.value = index
   currentType.value = type as CalendarType
 }
