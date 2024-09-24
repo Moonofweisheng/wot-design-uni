@@ -44,7 +44,11 @@
         </wd-calendar>
       </view>
     </demo-block>
+    <demo-block transparent title="open事件">
+      <wd-calendar v-model="value17" @open="handleOpen" />
+    </demo-block>
   </page-wraper>
+  <wd-message-box />
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
@@ -52,6 +56,8 @@ import { dayjs } from '@/uni_modules/wot-design-uni'
 import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
 import type { CalendarOnShortcutsClickOption } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
 import { ref } from 'vue'
+import { useMessage } from '@/uni_modules/wot-design-uni'
+const message = useMessage()
 
 const minDate = ref<number>(new Date(new Date().getFullYear() - 20, new Date().getMonth() - 6, new Date().getDate()).getTime())
 
@@ -71,7 +77,7 @@ const value13 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()]
 const value14 = ref<number | null>(null)
 const value15 = ref<number | null>(null)
 const value16 = ref<number>(Date.now())
-
+const value17 = ref<number>(Date.now())
 const formatValue = ref<string>('')
 const formatter: CalendarFormatter = (day: CalendarDayItem) => {
   const date = new Date(day.date)
@@ -164,6 +170,9 @@ function handleConfirm3({ value }: any) {
 function handleConfirm4({ value }: any) {
   console.log(new Date(value).toString())
   formatValue.value = new Date(value).toString()
+}
+function handleOpen() {
+  message.alert('打开日历')
 }
 </script>
 <style lang="scss" scoped></style>
