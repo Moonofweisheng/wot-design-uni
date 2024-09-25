@@ -103,12 +103,6 @@
             <wd-upload :file-list="model.fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleFileChange"></wd-upload>
           </wd-cell>
         </wd-cell-group>
-        <wd-cell title="性别" required prop="sex" center>
-          <wd-radio-group shape="dot" cell inline v-model="model.sex">
-            <wd-radio :value="1">男</wd-radio>
-            <wd-radio :value="2">女</wd-radio>
-          </wd-radio-group>
-        </wd-cell>
         <view class="tip">
           <wd-checkbox v-model="model.read" prop="read" custom-label-class="label-class">
             已阅读并同意
@@ -150,7 +144,6 @@ const model = reactive<{
   phone: string
   read: boolean
   fileList: UploadFileItem[]
-  sex: number
 }>({
   couponName: '',
   platform: [],
@@ -166,8 +159,7 @@ const model = reactive<{
   cardId: '',
   phone: '',
   read: false,
-  fileList: [],
-  sex: 1
+  fileList: []
 })
 
 const rules: FormRules = {
@@ -423,7 +415,6 @@ function handleIconClick() {
     color: $-dark-color3;
   }
 }
-
 .inline-txt {
   display: inline-block;
   font-size: 14px;
@@ -431,21 +422,17 @@ function handleIconClick() {
   color: rgba(0, 0, 0, 0.45);
   vertical-align: middle;
 }
-
 :deep(.group) {
   margin-top: 12px;
 }
-
 .tip {
   margin: 10px 15px 21px;
   color: #999;
   font-size: 12px;
 }
-
 .footer {
   padding: 0 25px 21px;
 }
-
 :deep(.label-class) {
   color: #999 !important;
   font-size: 12px !important;
