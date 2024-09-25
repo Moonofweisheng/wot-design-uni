@@ -567,6 +567,31 @@ const customUpload: UploadMethod = (file, formData, options) => {
 }
 ```
 
+
+## 自定义预览样式
+
+使用 `preview-cover` 插槽可以自定义覆盖在预览区域上方的内容
+
+```html
+<wd-upload v-model:file-list="fileList" accept="image" image-mode="aspectFill" :action="action">
+  <template #preview-cover="{ file,index }">
+            <!-- 小程序拿不到文件 -->
+    <view class="preview-cover">{{ file?.name||`文件${index+1}` }}</view>
+  </template>
+</wd-upload>
+<style>
+  .preview-cover {
+  margin-top: 10rpx;
+  text-align: center;
+}
+</style>
+```
+
+```typescript
+const fileList = ref<UploadFile[]>([])
+const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
+```
+
 ## Attributes
 
 | 参数                          | 说明                                                                                                                                                                           | 类型                                   | 可选值                                         | 默认值                     | 最低版本         |
@@ -630,6 +655,7 @@ const customUpload: UploadMethod = (file, formData, options) => {
 | name    | 说明             | 最低版本 |
 | ------- | ---------------- | -------- |
 | default | 上传唤起插槽样式 | -        |
+| preview-cover | 自定义覆盖在预览区域上方的内容 |   $LOWEST_VERSION$   |
 
 ## Events
 

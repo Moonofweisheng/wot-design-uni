@@ -73,6 +73,15 @@
     <demo-block title="自定义上传方法">
       <wd-upload v-model:file-list="fileList15" :upload-method="customUpload"></wd-upload>
     </demo-block>
+
+    <demo-block title="自定义预览样式">
+      <wd-upload v-model:file-list="fileList16" accept="image" image-mode="aspectFill" :action="action">
+        <template #preview-cover="{ file, index }">
+          <!-- 小程序拿不到文件 -->
+          <view class="preview-cover">{{ file.name || `文件${index}` }}</view>
+        </template>
+      </wd-upload>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -106,6 +115,12 @@ const fileList12 = ref<UploadFile[]>([])
 const fileList13 = ref<UploadFile[]>([])
 const fileList14 = ref<UploadFile[]>([])
 const fileList15 = ref<UploadFile[]>([])
+const fileList16 = ref<UploadFile[]>([
+  {
+    url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg',
+    name: 'panda'
+  }
+])
 
 const upload14 = ref<UploadInstance>()
 
@@ -292,4 +307,9 @@ const customUpload: UploadMethod = (file, formData, options) => {
   })
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.preview-cover {
+  margin-top: 10rpx;
+  text-align: center;
+}
+</style>

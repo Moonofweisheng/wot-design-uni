@@ -64,6 +64,8 @@
         custom-class="wd-upload__close"
         @click="removeFile(index)"
       ></wd-icon>
+      <!-- 自定义预览样式 -->
+      <slot name="preview-cover" v-if="$slots['preview-cover']" :file="file" :index="index"></slot>
     </view>
 
     <block v-if="showUpload">
