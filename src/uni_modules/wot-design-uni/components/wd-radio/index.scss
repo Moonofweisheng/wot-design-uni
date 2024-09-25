@@ -244,8 +244,9 @@
 
   // 以下内容用于解决父子组件样式隔离的问题 —— START
   @include when(cell-radio) {
-    padding: 13px 15px;
+    padding:0px 15px;
     margin: 0;
+    line-height:inherit;
 
     @include when(large) {
       padding: 14px 15px;
