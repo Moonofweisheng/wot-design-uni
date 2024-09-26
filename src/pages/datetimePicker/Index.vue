@@ -33,6 +33,15 @@
     <demo-block title="范围tab展示格式" transparent>
       <wd-datetime-picker label="日期选择" v-model="value15" @confirm="handleConfirm15" :display-format-tab-label="displayFormatTabLabel" />
     </demo-block>
+    <demo-block title="自定义icon" transparent>
+      <wd-datetime-picker label="自定义icon" v-model="value18" ref="dateTimePickerRef">
+        <template #right-icon="{ disabled, readonly }">
+          <view @click.stop="rightIconClick" v-if="!disabled && !readonly">
+            <wd-icon custom-class="wd-picker__arrow" :name="isEmpty ? 'arrow-right' : 'close'" />
+          </view>
+        </template>
+      </wd-datetime-picker>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -41,9 +50,10 @@ import type { DatetimePickerViewFilter, DatetimePickerViewFormatter } from '@/un
 import type {
   DatetimePickerDisplayFormat,
   DatetimePickerDisplayFormatTabLabel,
-  DatetimePickerInstance
+  DatetimePickerInstance,
+  DatetimePickerExpose
 } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker/types'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const value1 = ref<string>('')
 const value2 = ref<number>(Date.now())
@@ -62,9 +72,12 @@ const value14 = ref<any[]>(['', ''])
 const value15 = ref<any[]>(['', Date.now()])
 const value16 = ref(Date.now())
 const value17 = ref(Date.now())
+const value18 = ref<any[]>(['', Date.now()])
 
 const minDate = ref<number>(Date.now())
 const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
+
+const dateTimePickerRef = ref<DatetimePickerExpose>()
 
 const formatter: DatetimePickerViewFormatter = (type, value) => {
   switch (type) {
@@ -160,5 +173,18 @@ function handleConfirm16({ value }: any) {
 }
 /** picker触发cancel事件，同步触发cancel事件 */
 function onCancel() {}
+/* 自定义icon */
+const isEmpty = computed(() => {
+  return value18.value.every((item) => item == '')
+})
+/* right-icon点击事件 */
+function rightIconClick() {
+  if (isEmpty.value) {
+    dateTimePickerRef.value!.open()
+    return
+  }
+  value18.value = []
+  toast.success('清空成功')
+}
 </script>
 <style lang="scss" scoped></style>
