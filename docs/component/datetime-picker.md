@@ -362,7 +362,7 @@ function rightIconClick() {
 |------|-----|---------|
 | default | 使用默认插槽 | - |
 | label | 左侧标题插槽 | - |
-| right-icon | 右侧图标插槽 | $LOWEST_VERSION$ |
+| right-icon | 右侧图标插槽,作用域参数：{ disabled, readonly } | $LOWEST_VERSION$ |
 
 ## 外部样式类
 
