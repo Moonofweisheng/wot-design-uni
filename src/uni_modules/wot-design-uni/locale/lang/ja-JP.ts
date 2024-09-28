@@ -1,0 +1,128 @@
+export default {
+  calendar: {
+    placeholder: '選択',
+    title: '日付を選択してください',
+    day: '日付',
+    week: '週',
+    month: '月',
+    confirm: 'わかりました',
+    startTime: '開始日',
+    endTime: '終了日',
+    to: 'に',
+    timeFormat: 'YY-MM-DD HH:mm:ss',
+    dateFormat: 'YYYY-MM-DD',
+    weekFormat: (year: number, week: number) => `${year}年第${week}週`,
+    startWeek: '週の開始',
+    endWeek: '週末の終わり',
+    startMonth: '開始月',
+    endMonth: '終了月',
+    monthFormat: 'YYYY-MM',
+  },
+  calendarView: {
+    startTime: '開始時間',
+    endTime: '終了時間',
+    weeks: {
+      sun: '太陽',
+      mon: '月',
+      tue: '火',
+      wed: '水',
+      thu: '木',
+      fri: '金',
+      sat: '土',
+    },
+    rangePrompt: (maxRange: number) => `選択した日数は ${maxRange} 日を超えることはできません`,
+    rangePromptWeek: (maxRange: number) =>
+      `選択した週数は ${maxRange} 週間を超えることはできません`,
+    rangePromptMonth: (maxRange: number) => `選択した月は ${maxRange} か月を超えることはできません`,
+    monthTitle: 'YYYY-MM',
+    yearTitle: 'YYYY',
+    month: 'MM',
+    hour: (value: number) => `${value}`,
+    minute: (value: number) => `${value}`,
+    second: (value: number) => `${value}`,
+  },
+  datetimePicker: {
+    start: 'から',
+    end: 'に',
+    to: 'に',
+    placeholder: '選択',
+    confirm: 'わかりました',
+    cancel: 'キャンセル',
+  },
+  collapse: {
+    expand: '拡大する',
+    retract: '折り畳み',
+  },
+  colPicker: {
+    title: '選択',
+    placeholder: '選択',
+    select: '選択',
+  },
+  loadmore: {
+    loading: '読み込み中...',
+    finished: '読み込みが完了しました',
+    error: 'ロードに失敗しました...',
+    retry: 'リフレッシュ',
+  },
+  imgCropper: {
+    confirm: 'わかりました',
+    cancel: 'キャンセル',
+  },
+  messageBox: {
+    inputPlaceholder: '情報を入力してください',
+    confirm: 'わかりました',
+    cancel: 'キャンセル',
+    inputNoValidate: '正しい情報を入力してください',
+  },
+  numberKeyboard: {
+    confirm: '終わり',
+  },
+  pagination: {
+    prev: '前の',
+    next: '次',
+    page: (value: number) => `ページ：${value}`,
+    total: (total: number) => `合計：${total}`,
+    size: (size: number) => `${size}/ページ`,
+  },
+  picker: {
+    cancel: 'キャンセル',
+    done: '終わり',
+    placeholder: '選択',
+  },
+  search: {
+    search: '検索',
+    cancel: 'キャンセル',
+  },
+  steps: {
+    wait: '未開始',
+    finished: '期限切れ',
+    process: '進行中',
+    failed: '失敗した',
+  },
+  tabs: {
+    all: '全て',
+  },
+  upload: {
+    error: 'アップロードに失敗しました',
+  },
+  input: {
+    placeholder: '情報を入力してください...',
+  },
+  selectPicker: {
+    title: '選択',
+    placeholder: '選択',
+    select: '選択',
+    confirm: 'わかりました',
+    filterPlaceholder: '検索',
+  },
+  tag: {
+    placeholder: '入力',
+    add: 'タグの追加',
+  },
+  textarea: {
+    placeholder: '情報を入力してください...',
+  },
+  tableCol: {
+    indexLabel: '索引',
+  },
+}

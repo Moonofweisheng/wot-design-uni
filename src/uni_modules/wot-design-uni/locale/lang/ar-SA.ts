@@ -1,0 +1,128 @@
+export default {
+  calendar: {
+    placeholder: 'يختار',
+    title: 'حدد التاريخ',
+    day: 'تاريخ',
+    week: 'أسبوع',
+    month: 'شهر',
+    confirm: 'نعم',
+    startTime: 'تاريخ البدء',
+    endTime: 'تاريخ الانتهاء',
+    to: 'ل',
+    timeFormat: 'YY-MM-DD HH:mm:ss',
+    dateFormat: 'YYYY-MM-DD',
+    weekFormat: (year: number, week: number) => `${year},${week}الأسبوع`,
+    startWeek: 'بداية الأسبوع',
+    endWeek: 'نهاية الأسبوع',
+    startMonth: 'شهر البدء',
+    endMonth: 'نهاية الشهر',
+    monthFormat: 'YYYY-MM',
+  },
+  calendarView: {
+    startTime: 'وقت البدء',
+    endTime: 'وقت النهاية',
+    weeks: {
+      sun: 'شمس',
+      mon: 'الاثنين',
+      tue: 'الثلاثاء',
+      wed: 'تزوج',
+      thu: 'الخميس',
+      fri: 'الجمعة',
+      sat: 'قعد',
+    },
+    rangePrompt: (maxRange: number) => `لا يمكن أن يتجاوز عدد الأيام المحددة ${maxRange} أيام `,
+    rangePromptWeek: (maxRange: number) =>
+      `لا يمكن أن يتجاوز عدد الأسابيع المحددة ${maxRange} أسابيع`,
+    rangePromptMonth: (maxRange: number) => `لا يمكن أن يتجاوز الشهر المحدد ${maxRange} أشهر`,
+    monthTitle: 'YYYY-MM',
+    yearTitle: 'YYYY',
+    month: 'MM',
+    hour: (value: number) => `${value}`,
+    minute: (value: number) => `${value}`,
+    second: (value: number) => `${value}`,
+  },
+  datetimePicker: {
+    start: 'من',
+    end: 'ل',
+    to: 'ل',
+    placeholder: 'يختار',
+    confirm: 'نعم',
+    cancel: 'يلغي',
+  },
+  collapse: {
+    expand: 'يوسع',
+    retract: 'طية',
+  },
+  colPicker: {
+    title: 'يختار',
+    placeholder: 'يختار',
+    select: 'يختار',
+  },
+  loadmore: {
+    loading: 'تحميل...',
+    finished: 'تم الانتهاء من التحميل',
+    error: 'فشل التحميل...',
+    retry: 'ينعش',
+  },
+  imgCropper: {
+    confirm: 'نعم',
+    cancel: 'يلغي',
+  },
+  messageBox: {
+    inputPlaceholder: 'الرجاء إدخال المعلومات',
+    confirm: 'نعم',
+    cancel: 'يلغي',
+    inputNoValidate: 'يرجى التأكد من إدخال المعلومات الصحيحة',
+  },
+  numberKeyboard: {
+    confirm: 'منتهي',
+  },
+  pagination: {
+    prev: 'سابق',
+    next: 'التالي',
+    page: (value: number) => `الصفحة: ${value}`,
+    total: (total: number) => `المجموع: ${total}`,
+    size: (size: number) => `${size}/الصفحة`,
+  },
+  picker: {
+    cancel: 'يلغي',
+    done: 'منتهي',
+    placeholder: 'يختار',
+  },
+  search: {
+    search: 'يبحث',
+    cancel: 'يلغي',
+  },
+  steps: {
+    wait: 'لم يبدأ',
+    finished: 'منتهي الصلاحية',
+    process: 'في تَقَدم',
+    failed: 'فشل',
+  },
+  tabs: {
+    all: 'الجميع',
+  },
+  upload: {
+    error: 'فشل التحميل',
+  },
+  input: {
+    placeholder: 'الرجاء إدخال المعلومات...',
+  },
+  selectPicker: {
+    title: 'يختار',
+    placeholder: 'يختار',
+    select: 'يختار',
+    confirm: 'نعم',
+    filterPlaceholder: 'يبحث',
+  },
+  tag: {
+    placeholder: 'يدخل',
+    add: 'إضافة علامة',
+  },
+  textarea: {
+    placeholder: 'الرجاء إدخال المعلومات...',
+  },
+  tableCol: {
+    indexLabel: 'فِهرِس',
+  },
+}
