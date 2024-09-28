@@ -5,7 +5,7 @@ export default {
     day: 'Date',
     week: 'Semaine',
     month: 'Mois',
-    confirm: "D'ACCORD",
+    confirm: "Confirmer",
     startTime: 'Date de début',
     endTime: 'Date de fin',
     to: 'À',
@@ -22,13 +22,13 @@ export default {
     startTime: 'Heure de début',
     endTime: 'Heure de fin',
     weeks: {
-      sun: 'Soleil',
+      sun: 'Dim',
       mon: 'Lun',
       tue: 'Mar',
-      wed: 'Épouser',
+      wed: 'Mer',
       thu: 'Jeu',
       fri: 'Ven',
-      sat: 'Assis',
+      sat: 'Sam',
     },
     rangePrompt: (maxRange: number) =>
       `Le nombre de jours sélectionnés ne peut pas dépasser ${maxRange} jours`,
@@ -48,7 +48,7 @@ export default {
     end: 'À',
     to: 'À',
     placeholder: 'Sélectionner',
-    confirm: "D'ACCORD",
+    confirm: "Confirmer",
     cancel: 'Annuler',
   },
   collapse: {
@@ -67,17 +67,17 @@ export default {
     retry: 'Rafraîchir',
   },
   imgCropper: {
-    confirm: "D'ACCORD",
+    confirm: "Confirmer",
     cancel: 'Annuler',
   },
   messageBox: {
     inputPlaceholder: 'Veuillez saisir des informations',
-    confirm: "D'ACCORD",
+    confirm: "Confirmer",
     cancel: 'Annuler',
     inputNoValidate: 'Veuillez vous assurer de saisir des informations correctes',
   },
   numberKeyboard: {
-    confirm: 'fait',
+    confirm: 'Confirmer',
   },
   pagination: {
     prev: 'Précédent',
@@ -114,7 +114,7 @@ export default {
     title: 'Sélectionner',
     placeholder: 'Sélectionner',
     select: 'Sélectionner',
-    confirm: "D'accord",
+    confirm: "Confirmer",
     filterPlaceholder: 'Recherche',
   },
   tag: {

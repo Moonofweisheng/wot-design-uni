@@ -22,7 +22,7 @@ export default {
     startTime: 'وقت البدء',
     endTime: 'وقت النهاية',
     weeks: {
-      sun: 'شمس',
+      sun: 'الأحد',
       mon: 'الاثنين',
       tue: 'الثلاثاء',
       wed: 'تزوج',

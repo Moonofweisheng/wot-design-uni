@@ -22,7 +22,7 @@ export default {
     startTime: '開始時間',
     endTime: '終了時間',
     weeks: {
-      sun: '太陽',
+      sun: '日',
       mon: '月',
       tue: '火',
       wed: '水',

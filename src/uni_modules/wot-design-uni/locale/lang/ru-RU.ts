@@ -25,7 +25,7 @@ export default {
       sun: 'Солнце',
       mon: 'Пн.',
       tue: 'Вт',
-      wed: 'Обвенчались',
+      wed: 'Ср',
       thu: 'Чт',
       fri: 'Пт',
       sat: 'Суббота',

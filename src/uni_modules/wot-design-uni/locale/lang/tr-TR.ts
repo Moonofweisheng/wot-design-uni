@@ -28,7 +28,7 @@ export default {
       wed: 'Çar',
       thu: 'Per',
       fri: 'Cuma',
-      sat: 'Doygunluk',
+      sat: 'Cumartesi',
     },
     rangePrompt: (maxRange: number) => `Seçilen günlerin sayısı aşamaz ${maxRange} günler`,
     rangePromptWeek: (maxRange: number) => `Seçilen hafta sayısı aşamaz ${maxRange} haftalar`,

@@ -25,7 +25,7 @@ export default {
       sun: 'Sol',
       mon: 'Lun',
       tue: 'Mar',
-      wed: 'Casarse',
+      wed: 'Mié',
       thu: 'Jue',
       fri: 'Vie',
       sat: 'Se sentó',

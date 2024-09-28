@@ -70,7 +70,7 @@ Locale.add(messages)
 | 法语             | fr-FR    | `v0.2.20` |
 | 日语             | ja-JP    | `v0.2.20` |
 | 韩语             | ko-KR    | `v0.2.20` |
-| 德语             | de-DE    | `v0.2.20` |
 | 土耳其语             | tr-TR    | `v0.2.20` |
+| 俄语             | ru-RU    | `v0.2.20` |
 
 如果你需要使用其他的语言，欢迎贡献 [PR](https://github.com/Moonofweisheng/wot-design-uni/pulls)，只需在[这里](https://github.com/Moonofweisheng/wot-design-uni/tree/master/src/uni_modules/wot-design-uni/locale/lang)添加一个语言配置文件即可。

@@ -22,13 +22,13 @@ export default {
     startTime: 'Hora de início',
     endTime: 'Hora de término',
     weeks: {
-      sun: 'Sol',
+      sun: 'dom',
       mon: 'seg',
       tue: 'ter',
       wed: 'qua',
       thu: 'qui',
       fri: 'sex',
-      sat: 'Sentado',
+      sat: 'sáb',
     },
     rangePrompt: (maxRange: number) =>
       `O número de dias selecionados não pode exceder ${maxRange} dias`,
