@@ -81,8 +81,8 @@ export default {
   pagination: {
     prev: 'Anterior',
     next: 'Próximo',
-    page: (value: number) => `Página${value}`,
-    total: (total: number) => `Total:${total}`,
+    page: (value: number) => `Página: ${value}`,
+    total: (total: number) => `Total: ${total}`,
     size: (size: number) => `${size}/Página`,
   },
   picker: {

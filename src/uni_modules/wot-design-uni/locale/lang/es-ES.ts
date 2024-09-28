@@ -5,7 +5,7 @@ export default {
     day: 'Fecha',
     week: 'Semana',
     month: 'Mes',
-    confirm: 'DE ACUERDO',
+    confirm: 'De Acuerdo',
     startTime: 'Fecha de inicio',
     endTime: 'Fecha de finalización',
     to: 'A',
@@ -47,7 +47,7 @@ export default {
     end: 'A',
     to: 'A',
     placeholder: 'Seleccionar',
-    confirm: 'DE ACUERDO',
+    confirm: 'De Acuerdo',
     cancel: 'Cancelar',
   },
   collapse: {
@@ -66,12 +66,12 @@ export default {
     retry: 'Refrescar',
   },
   imgCropper: {
-    confirm: 'DE ACUERDO',
+    confirm: 'De Acuerdo',
     cancel: 'Cancelar',
   },
   messageBox: {
     inputPlaceholder: 'Por favor ingrese información',
-    confirm: 'DE ACUERDO',
+    confirm: 'De Acuerdo',
     cancel: 'Cancelar',
     inputNoValidate: 'Por favor asegúrese de ingresar la información correcta',
   },
@@ -113,7 +113,7 @@ export default {
     title: 'Seleccionar',
     placeholder: 'Seleccionar',
     select: 'Seleccionar',
-    confirm: 'De acuerdo',
+    confirm: 'De Acuerdo',
     filterPlaceholder: 'Buscar',
   },
   tag: {

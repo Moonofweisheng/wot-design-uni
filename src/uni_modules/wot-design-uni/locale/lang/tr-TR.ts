@@ -74,13 +74,13 @@ export default {
     inputNoValidate: 'Lütfen doğru bilgileri girdiğinizden emin olun',
   },
   numberKeyboard: {
-    confirm: 'Tamamlandı',
+    confirm: 'TAMAM',
   },
   pagination: {
     prev: 'Öncesi',
     next: 'Sonraki',
-    page: (value: number) => `Sayfa:${value}`,
-    total: (total: number) => `Toplam:${total}`,
+    page: (value: number) => `Sayfa: ${value}`,
+    total: (total: number) => `Toplam: ${total}`,
     size: (size: number) => `${size}/Sayfa`,
   },
   picker: {
@@ -111,7 +111,7 @@ export default {
     title: 'Seçme',
     placeholder: 'Seçme',
     select: 'Seçme',
-    confirm: 'Tamam',
+    confirm: 'TAMAM',
     filterPlaceholder: 'Aramak',
   },
   tag: {

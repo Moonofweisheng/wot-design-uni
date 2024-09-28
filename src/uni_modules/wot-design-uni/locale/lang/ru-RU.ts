@@ -76,13 +76,13 @@ export default {
     inputNoValidate: 'Пожалуйста, убедитесь, что вы вводите правильную информацию',
   },
   numberKeyboard: {
-    confirm: 'сделанный',
+    confirm: 'ХОРОШО',
   },
   pagination: {
     prev: 'Предыдущий',
     next: 'Следующий',
-    page: (value: number) => `Страница:${value}`,
-    total: (total: number) => `Общий:${total}`,
+    page: (value: number) => `Страница: ${value}`,
+    total: (total: number) => `Общий: ${total}`,
     size: (size: number) => `${size}/Cтраница`,
   },
   picker: {
@@ -113,7 +113,7 @@ export default {
     title: 'Выбирать',
     placeholder: 'Выбирать',
     select: 'Выбирать',
-    confirm: 'Хорошо',
+    confirm: 'ХОРОШО',
     filterPlaceholder: 'Поиск',
   },
   tag: {

@@ -79,8 +79,8 @@ export default {
   pagination: {
     prev: '이전의',
     next: '다음',
-    page: (value: number) => `페이지:${value}`,
-    total: (total: number) => `총:${total}`,
+    page: (value: number) => `페이지: ${value}`,
+    total: (total: number) => `총: ${total}`,
     size: (size: number) => `${size}/페이지`,
   },
   picker: {

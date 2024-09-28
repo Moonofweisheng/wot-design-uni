@@ -74,21 +74,21 @@ export default {
     inputPlaceholder: 'Bitte geben Sie Informationen ein',
     confirm: 'OK',
     cancel: 'Stornieren',
-    inputNoValidate: 'Bitte stellen Sie sicher, dass Sie die richtigen Informationen eingeben',
+    inputNoValidate: 'Bitte geben Sie gültige Informationen ein',
   },
   numberKeyboard: {
-    confirm: 'Erledigt',
+    confirm: 'OK',
   },
   pagination: {
     prev: 'Vorherige',
     next: 'Nächste',
-    page: (value: number) => `Seite:${value}`,
-    total: (total: number) => `Gesamt:${total}`,
+    page: (value: number) => `Seite: ${value}`,
+    total: (total: number) => `Gesamt: ${total}`,
     size: (size: number) => `${size}/Seite`,
   },
   picker: {
     cancel: 'Stornieren',
-    done: 'Erledigt',
+    done: 'OK',
     placeholder: 'Wählen',
   },
   search: {

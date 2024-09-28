@@ -80,7 +80,7 @@ export default {
   pagination: {
     prev: 'سابق',
     next: 'التالي',
-    page: (value: number) => `الصفحة: ${value}`,
+    page: (value: number) => `صفحة: ${value}`,
     total: (total: number) => `المجموع: ${total}`,
     size: (size: number) => `${size}/الصفحة`,
   },
@@ -117,10 +117,10 @@ export default {
   },
   tag: {
     placeholder: 'يدخل',
-    add: 'إضافة علامة',
+    add: 'إضافة وسم',
   },
   textarea: {
-    placeholder: 'الرجاء إدخال المعلومات...',
+    placeholder: 'الرجاء إدخال نص متعدد الأسطر هنا...',
   },
   tableCol: {
     indexLabel: 'فِهرِس',
