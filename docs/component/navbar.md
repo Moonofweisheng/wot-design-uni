@@ -113,7 +113,7 @@ function handleBack() {
 }
 
 function handleBackHome() {
-  uni.reLaunch({ url: '/pages/index/Index' })
+  uni.reLaunch({ url: '/pages/index/index' })
 }
 ```
 
