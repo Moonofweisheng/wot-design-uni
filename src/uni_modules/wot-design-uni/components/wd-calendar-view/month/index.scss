@@ -123,7 +123,11 @@
   @include e(day-container) {
     position: relative;
     z-index: 2;
+   .wd-badge{
+      display: block;
+    }
   }
+ 
 
   @include e(day-text) {
     font-weight: $-calendar-day-fw;

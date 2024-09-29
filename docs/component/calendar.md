@@ -156,6 +156,8 @@ function handleConfirm({ value }) {
 | bottomInfo | string    | 下方提示信息                                                                                                                                            | -        |
 | disabled   | boolean   | 是否禁用                                                                                                                                                | -        |
 
+| isDot   | boolean   | 是否开启红点                                                                                                                                                | `($LOWEST_VERSION$)`       |
+
 ```html
 <wd-calendar type="daterange" v-model="value" allow-same-day :formatter="formatter" @confirm="handleConfirm" />
 ```
