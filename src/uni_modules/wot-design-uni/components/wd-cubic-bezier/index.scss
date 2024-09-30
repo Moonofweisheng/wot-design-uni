@@ -1,0 +1,25 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+.wd-bezier {
+	position: absolute;
+	opacity: 0;
+	z-index: 887;
+}
+
+.wd-animate__bezier {
+	opacity: 1;
+	z-index: 990;
+	transition: opacity 0.1s, transform cubic-bezier(0, 0, 0, 0) 0.3s;
+}
+
+.wd-animate__bezier_y {
+	opacity: 1;
+	z-index: 990;
+	transition: opacity 0.1s, transform cubic-bezier(0.3, -0.2, 1, 0) 0.3s;
+}
+
+.wd-badge__bezier {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
