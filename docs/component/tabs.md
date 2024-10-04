@@ -147,6 +147,7 @@ const tab = ref('例子')
 | inactiveColor | 非活动标签文字颜色               | string          | -      | -      | -        |
 | animated      | 是否开启切换标签内容时的转场动画 | boolean         | -      | false  | -        |
 | duration      | 切换动画过渡时间，单位毫秒       | number          | -      | 300    | -        |
+| showScrollbar | 当标签可以滑动时是否显示滚动条    | boolean          | -      | false   | -        |
 
 ## Tab Attributes
 
