@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2023-07-27 12:36:30
- * @LastEditTime: 2024-07-20 16:52:08
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/theme/index.ts
- * 记得注释
- */
 import { h } from 'vue'
 import Theme from 'vitepress/theme'
 import './styles/vars.css'
@@ -19,7 +10,7 @@ import CustomFooter from './components/CustomFooter.vue'
 import SvgImage from './components/SvgImage.vue'
 import HomeStar from './components/HomeStar.vue'
 import frame from './components/frame.vue'
-import { ElTag } from 'element-plus'
+import { ElTag, ElLink } from 'element-plus'
 
 export default {
   ...Theme,
@@ -35,6 +26,6 @@ export default {
     app.component('SvgImage', SvgImage)
     app.component('frame', frame)
     app.component('ElTag', ElTag)
-
+    app.component('ElLink', ElLink)
   },
 }

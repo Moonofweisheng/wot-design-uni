@@ -3,6 +3,10 @@ import type { FormItemRule } from '../wd-form/types'
 
 export type InputClearTrigger = 'focus' | 'always'
 
+export type InputType = 'text' | 'number' | 'digit' | 'idcard'
+
+export type InputConfirmType = 'send' | 'search' | 'next' | 'go' | 'done'
+
 export const inputProps = {
   ...baseProps,
   customInputClass: makeStringProp(''),
@@ -47,7 +51,7 @@ export const inputProps = {
   /**
    * 设置键盘右下角按钮的文字，仅在type='text'时生效，可选值：done / go / next / search / send
    */
-  confirmType: makeStringProp('done'),
+  confirmType: makeStringProp<InputConfirmType>('done'),
   /**
    * 点击键盘右下角按钮时是否保持键盘不收起
    */
@@ -59,7 +63,7 @@ export const inputProps = {
   /**
    * 类型，可选值：text / number / digit / idcard
    */
-  type: makeStringProp('text'),
+  type: makeStringProp<InputType>('text'),
   /**
    * 原生属性，最大长度
    */

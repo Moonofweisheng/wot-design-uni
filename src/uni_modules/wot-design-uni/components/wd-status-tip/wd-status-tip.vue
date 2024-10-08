@@ -1,15 +1,16 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 10:04:19
- * @LastEditTime: 2024-09-19 14:44:17
- * @LastEditors: weisheng
+ * @LastEditTime: 2024-09-20 10:23:38
+ * @LastEditors: jiaoxueyan
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-status-tip\wd-status-tip.vue
  * 记得注释
 -->
 <template>
   <view :class="`wd-status-tip  ${customClass}`" :style="customStyle">
-    <wd-img v-if="imgUrl" :mode="imageMode" :src="imgUrl" custom-class="wd-status-tip__image" :custom-style="imgStyle"></wd-img>
+    <slot name="image" v-if="$slots.image"></slot>
+    <wd-img v-else-if="imgUrl" :mode="imageMode" :src="imgUrl" custom-class="wd-status-tip__image" :custom-style="imgStyle"></wd-img>
     <view v-if="tip" class="wd-status-tip__text">{{ tip }}</view>
   </view>
 </template>

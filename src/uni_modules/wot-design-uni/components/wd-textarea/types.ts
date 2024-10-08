@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 import type { FormItemRule } from '../wd-form/types'
 import type { InputClearTrigger } from '../wd-input/types'
@@ -113,7 +113,7 @@ export const textareaProps = {
    * 默认值：'done'
    * 可选值有'done', 'go', 'next', 'search', 'send'
    */
-  confirmType: makeStringProp<ConfirmType | null>(null),
+  confirmType: String as PropType<ConfirmType>,
 
   /**
    * * 点击键盘右下角按钮时是否保持键盘不收起。

@@ -100,7 +100,7 @@ mode 为小程序原生属性，参考[微信小程序 image 官方文档](https
 | round                  | 是否显示为圆形                                     | boolean         | -                                                                                                                                                                                  | false         | -                |
 | radius                 | 圆角大小，默认单位为 px                            | number / string | -                                                                                                                                                                                  | -             | -                |
 | enable-preview         | 是否支持点击预览                                   | boolean         | -                                                                                                                                                                                  | false         | 1.2.11           |
-| show-menu-by-longpress | 开启长按图片显示识别小程序码菜单，仅微信小程序支持 | boolean         | -                                                                                                                                                                                  | false         | $LOWEST_VERSION$ |
+| show-menu-by-longpress | 开启长按图片显示识别小程序码菜单，仅微信小程序支持 | boolean         | -                                                                                                                                                                                  | false         | 1.3.11 |
 
 ## Events
 

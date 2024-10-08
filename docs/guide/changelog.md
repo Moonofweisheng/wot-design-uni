@@ -1,6 +1,34 @@
 # 更新日志 
 
 
+### [1.3.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.10...v1.3.11) (2024-09-23)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  移除文档中CountTo不支持的type ([cae2e56](https://github.com/Moonofweisheng/wot-design-uni/commit/cae2e56aba98427b1b6c7a2c3f6a2f9ed8acf96f))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复[#598](https://github.com/Moonofweisheng/wot-design-uni/issues/598)产生的使用未定义变量的问题 ([ce64daf](https://github.com/Moonofweisheng/wot-design-uni/commit/ce64daf77d119df509873226c9209cae406e0330))
+* 🐛 修复与@uni-helper/uni-typed搭配使用时tsc报类型错误的问题并更新依赖 ([f9ca2e4](https://github.com/Moonofweisheng/wot-design-uni/commit/f9ca2e4d4ed2ef88a073f7f80ce64df811144b3a)), closes [#586](https://github.com/Moonofweisheng/wot-design-uni/issues/586)
+* 🐛 修复Button设置为hairline时圆角显示异常的问题 ([10ebf5c](https://github.com/Moonofweisheng/wot-design-uni/commit/10ebf5c3959099389f1f1349e32ad755740ce0d5)), closes [#486](https://github.com/Moonofweisheng/wot-design-uni/issues/486)
+* 🐛 修复Input、Textarea未设置labelWidth时通过CSS变量设置label宽度无效的问题 ([#591](https://github.com/Moonofweisheng/wot-design-uni/issues/591)) ([2f12ac6](https://github.com/Moonofweisheng/wot-design-uni/commit/2f12ac6d2b598c7fa545009a82acd1c07bf21779)), closes [#573](https://github.com/Moonofweisheng/wot-design-uni/issues/573)
+* 🐛 修复loadmore组件属性errorText存在默认值导致国际化失效的问题 ([#594](https://github.com/Moonofweisheng/wot-design-uni/issues/594)) ([0bcc3c4](https://github.com/Moonofweisheng/wot-design-uni/commit/0bcc3c498ed9206bea45522f58889ec3f3a5f673))
+* 🐛 修复Radio点击失效的问题 ([5cce125](https://github.com/Moonofweisheng/wot-design-uni/commit/5cce125c737989e1e447394223129e2e585b91f4)), closes [#596](https://github.com/Moonofweisheng/wot-design-uni/issues/596)
+* 🐛确保inputNumber输入值在设定的最小值和最大值之间 ([#610](https://github.com/Moonofweisheng/wot-design-uni/issues/610)) ([344b1ac](https://github.com/Moonofweisheng/wot-design-uni/commit/344b1ac9168701bc408f82268f68ef8453527ef9)), closes [#602](https://github.com/Moonofweisheng/wot-design-uni/issues/602)
+
+
+### ✨ Features | 新功能
+
+* ✨ 迁移StatusTip组件的图片资源 ([f54ff30](https://github.com/Moonofweisheng/wot-design-uni/commit/f54ff306e7dafcfaead671120d100c4d9482daf9))
+* ✨ count-to组件添加type属性 ([#556](https://github.com/Moonofweisheng/wot-design-uni/issues/556)) ([60c92f2](https://github.com/Moonofweisheng/wot-design-uni/commit/60c92f2f38b563968f88f94267b8d805c28109d1))
+* ✨ Fab 悬浮按钮组件支持自定义触发器和控制能否展开 ([#612](https://github.com/Moonofweisheng/wot-design-uni/issues/612)) ([8e68ef3](https://github.com/Moonofweisheng/wot-design-uni/commit/8e68ef3bf807b5ec3c935daa6ce68f58962a188d)), closes [#512](https://github.com/Moonofweisheng/wot-design-uni/issues/512)
+* ✨ Img组件新增属性 show-menu-by-longpress 支持微信小程序长按弹出菜单栏 ([#613](https://github.com/Moonofweisheng/wot-design-uni/issues/613)) ([a7fc229](https://github.com/Moonofweisheng/wot-design-uni/commit/a7fc22964823af1ee1e513a268fb783bbea77ee4)), closes [#611](https://github.com/Moonofweisheng/wot-design-uni/issues/611)
+* ✨ Input、Textarea增加ignoreCompositionEvent属性 ([#592](https://github.com/Moonofweisheng/wot-design-uni/issues/592)) ([efcd4bb](https://github.com/Moonofweisheng/wot-design-uni/commit/efcd4bbb38b5bf53a26f0a8834f0cbd9fa26f5e5)), closes [#574](https://github.com/Moonofweisheng/wot-design-uni/issues/574)
+* ✨ InputNumber 步进器新增支持adjustPosition属性 ([f8a5240](https://github.com/Moonofweisheng/wot-design-uni/commit/f8a524010a2945941fbefa745756f2e6efbeb88b)), closes [#599](https://github.com/Moonofweisheng/wot-design-uni/issues/599)
+
 ### [1.3.10](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.9...v1.3.10) (2024-09-08)
 
 

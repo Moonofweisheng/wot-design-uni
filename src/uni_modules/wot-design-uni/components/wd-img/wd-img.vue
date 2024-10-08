@@ -58,7 +58,7 @@ const rootClass = computed(() => {
 
 const status = ref<'loading' | 'error' | 'success'>('loading')
 
-function handleError(event: Event) {
+function handleError(event: any) {
   status.value = 'error'
   emit('error', event)
 }
@@ -70,7 +70,7 @@ function handleClick(event: MouseEvent) {
   }
   emit('click', event)
 }
-function handleLoad(event: Event) {
+function handleLoad(event: any) {
   status.value = 'success'
   emit('load', event)
 }

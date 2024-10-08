@@ -54,6 +54,18 @@
 <wd-status-tip image="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg" tip="查看我的头像" />
 ```
 
+## 自定义图片内容
+
+使用插槽 `image` 可以自定义图片内容。
+
+```html
+<wd-status-tip tip="自定义图片内容">
+  <template #image>
+    <wd-icon name="ie-filled" size="100px"></wd-icon>
+  </template>
+</wd-status-tip>
+```
+
 ## Attributes
 
 | 参数       | 说明                                               | 类型                          | 可选值                                                          | 默认值                                                        | 最低版本         |
@@ -62,7 +74,7 @@
 | image-size | 图片大小，默认单位为 `px`                          | `string`/`number`/`ImageSize` | -                                                               | -                                                             | -                |
 | tip        | 提示文案                                           | string                        | -                                                               | -                                                             | -                |
 | image-mode | 预览图片的 mode 属性                               | `ImageMode`                   | -                                                               | aspectFit                                                     | 1.2.12           |
-| url-prefix | 图片路径前缀，指向图片所在目录，用于拼接图片 URL。 | string                        | -                                                               | https://registry.npmmirror.com/wot-design-uni-assets/*/files/ | $LOWEST_VERSION$ |
+| url-prefix | 图片路径前缀，指向图片所在目录，用于拼接图片 URL。 | string                        | -                                                               | https://registry.npmmirror.com/wot-design-uni-assets/*/files/ | 1.3.11 |
 
 ### ImageSize
 
@@ -70,3 +82,9 @@
 | ------ | ------------------------- | ---------------- | ------ | ------ | -------- |
 | height | 图片高度，默认单位为 `px` | string \| number | -      | -      | 1.2.12   |
 | width  | 图片宽度，默认单位为 `px` | string \| number | -      | -      | 1.2.12   |
+
+## Slot
+
+| name    | 说明                     | 最低版本 |
+| ------- | ------------------------ | -------- |
+| image   | 图片内容                  | $LOWEST_VERSION$ |

@@ -95,11 +95,11 @@ function scrollIntoView() {
   })
 }
 
-const yearScroll = (e: Event) => {
+const yearScroll = (event: { detail: { scrollTop: number } }) => {
   if (years.value.length <= 1) {
     return
   }
-  const scrollTop = Math.max(0, (e.target as Element).scrollTop)
+  const scrollTop = Math.max(0, event.detail.scrollTop)
   doSetSubtitle(scrollTop)
 }
 
