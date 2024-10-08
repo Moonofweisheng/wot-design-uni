@@ -1,26 +1,26 @@
 export default {
   calendar: {
-    placeholder: '選択',
-    title: '日付を選択してください',
-    day: '日付',
+    placeholder: '選択してください',
+    title: '日付を選択',
+    day: '日',
     week: '週',
     month: '月',
-    confirm: 'わかりました',
-    startTime: '開始日',
-    endTime: '終了日',
-    to: 'に',
-    timeFormat: 'YY-MM-DD HH:mm:ss',
-    dateFormat: 'YYYY-MM-DD',
-    weekFormat: (year: number, week: number) => `${year}年第${week}週`,
-    startWeek: '週の開始',
-    endWeek: '週末の終わり',
-    startMonth: '開始月',
-    endMonth: '終了月',
-    monthFormat: 'YYYY-MM',
-  },
-  calendarView: {
+    confirm: '確認',
     startTime: '開始時間',
     endTime: '終了時間',
+    to: '〜',
+    timeFormat: 'YY年MM月DD日 HH:mm:ss',
+    dateFormat: 'YYYY年MM月DD日',
+    weekFormat: (year: number, week: number) => `${year}年 第${week}週`,
+    startWeek: '開始週',
+    endWeek: '終了週',
+    startMonth: '開始月',
+    endMonth: '終了月',
+    monthFormat: 'YYYY年MM月'
+  },
+  calendarView: {
+    startTime: '開始',
+    endTime: '終了',
     weeks: {
       sun: '日',
       mon: '月',
@@ -28,101 +28,100 @@ export default {
       wed: '水',
       thu: '木',
       fri: '金',
-      sat: '土',
+      sat: '土'
     },
-    rangePrompt: (maxRange: number) => `選択した日数は ${maxRange} 日を超えることはできません`,
-    rangePromptWeek: (maxRange: number) =>
-      `選択した週数は ${maxRange} 週間を超えることはできません`,
-    rangePromptMonth: (maxRange: number) => `選択した月は ${maxRange} か月を超えることはできません`,
-    monthTitle: 'YYYY-MM',
-    yearTitle: 'YYYY',
-    month: 'MM',
-    hour: (value: number) => `${value}`,
-    minute: (value: number) => `${value}`,
-    second: (value: number) => `${value}`,
-  },
-  datetimePicker: {
-    start: 'から',
-    end: 'に',
-    to: 'に',
-    placeholder: '選択',
-    confirm: 'わかりました',
-    cancel: 'キャンセル',
+    rangePrompt: (maxRange: number) => `選択できる日数は最大${maxRange}日です`,
+    rangePromptWeek: (maxRange: number) => `選択できる週数は最大${maxRange}週です`,
+    rangePromptMonth: (maxRange: number) => `選択できる月数は最大${maxRange}ヶ月です`,
+    monthTitle: 'YYYY年MM月',
+    yearTitle: 'YYYY年',
+    month: 'MM月',
+    hour: (value: number) => `${value}時`,
+    minute: (value: number) => `${value}分`,
+    second: (value: number) => `${value}秒`
   },
   collapse: {
-    expand: '拡大する',
-    retract: '折り畳み',
+    expand: '展開',
+    retract: '折りたたむ'
   },
   colPicker: {
-    title: '選択',
-    placeholder: '選択',
-    select: '選択',
+    title: '選択してください',
+    placeholder: '選択してください',
+    select: '選択'
+  },
+  datetimePicker: {
+    start: '開始時間',
+    end: '終了時間',
+    to: '〜',
+    placeholder: '選択してください',
+    confirm: '完了',
+    cancel: 'キャンセル'
   },
   loadmore: {
     loading: '読み込み中...',
-    finished: '読み込みが完了しました',
-    error: 'ロードに失敗しました...',
-    retry: 'リフレッシュ',
-  },
-  imgCropper: {
-    confirm: 'わかりました',
-    cancel: 'キャンセル',
+    finished: '読み込み完了',
+    error: '読み込みエラー',
+    retry: '再試行'
   },
   messageBox: {
-    inputPlaceholder: '情報を入力してください',
-    confirm: 'わかりました',
+    inputPlaceholder: '入力してください',
+    confirm: '確認',
     cancel: 'キャンセル',
-    inputNoValidate: '正しい情報を入力してください',
+    inputNoValidate: '無効なデータが入力されました'
   },
   numberKeyboard: {
-    confirm: '終わり',
+    confirm: '完了'
   },
   pagination: {
-    prev: '前の',
-    next: '次',
-    page: (value: number) => `ページ：${value}`,
-    total: (total: number) => `合計：${total}`,
-    size: (size: number) => `${size}/ページ`,
+    prev: '前へ',
+    next: '次へ',
+    page: (value: number) => `ページ: ${value}`,
+    total: (total: number) => `合計: ${total}`,
+    size: (size: number) => `ページサイズ: ${size}`
   },
   picker: {
     cancel: 'キャンセル',
-    done: '終わり',
-    placeholder: '選択',
+    done: '完了',
+    placeholder: '選択してください'
+  },
+  imgCropper: {
+    confirm: '完了',
+    cancel: 'キャンセル'
   },
   search: {
     search: '検索',
-    cancel: 'キャンセル',
+    cancel: 'キャンセル'
   },
   steps: {
     wait: '未開始',
-    finished: '期限切れ',
+    finished: '完了',
     process: '進行中',
-    failed: '失敗した',
+    failed: '失敗'
   },
   tabs: {
-    all: '全て',
+    all: 'すべて'
   },
   upload: {
-    error: 'アップロードに失敗しました',
+    error: 'アップロードエラー'
   },
   input: {
-    placeholder: '情報を入力してください...',
+    placeholder: '入力してください...'
   },
   selectPicker: {
-    title: '選択',
-    placeholder: '選択',
+    title: '選択してください',
+    placeholder: '選択してください',
     select: '選択',
-    confirm: 'わかりました',
-    filterPlaceholder: '検索',
+    confirm: '確認',
+    filterPlaceholder: '検索'
   },
   tag: {
-    placeholder: '入力',
-    add: 'タグの追加',
+    placeholder: '入力してください',
+    add: 'タグを追加'
   },
   textarea: {
-    placeholder: '情報を入力してください...',
+    placeholder: '入力してください...'
   },
   tableCol: {
-    indexLabel: '索引',
-  },
+    indexLabel: '索引'
+  }
 }

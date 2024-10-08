@@ -1,127 +1,127 @@
 export default {
   calendar: {
-    placeholder: 'Seçme',
-    title: 'Tarih Seçin',
-    day: 'Tarih',
+    placeholder: 'Lütfen seçin',
+    title: 'Tarih seç',
+    day: 'Gün',
     week: 'Hafta',
     month: 'Ay',
-    confirm: 'TAMAM',
-    startTime: 'Başlangıç ​​Tarihi',
-    endTime: 'Bitiş Tarihi',
-    to: 'İle',
+    confirm: 'Tamam',
+    startTime: 'Başlangıç zamanı',
+    endTime: 'Bitiş zamanı',
+    to: 'ile',
     timeFormat: 'YY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
-    weekFormat: (year: number, week: number) => `${year}'ün${week}haftası`,
-    startWeek: 'Haftaya Başla',
-    endWeek: 'Hafta Sonu',
-    startMonth: 'Ayı Başlat',
-    endMonth: 'Ay Sonu',
-    monthFormat: 'YYYY-MM',
+    weekFormat: (year: number, week: number) => `${year} ${week}. Hafta`,
+    startWeek: 'Başlangıç hafta',
+    endWeek: 'Bitiş hafta',
+    startMonth: 'Başlangıç ay',
+    endMonth: 'Bitiş ay',
+    monthFormat: 'YYYY-MM'
   },
   calendarView: {
-    startTime: 'Başlangıç ​​Zamanı',
-    endTime: 'Bitiş Zamanı',
+    startTime: 'Başlangıç',
+    endTime: 'Bitiş',
     weeks: {
-      sun: 'Güneş',
-      mon: 'Pazartesi',
-      tue: 'Salı',
+      sun: 'Paz',
+      mon: 'Pzt',
+      tue: 'Sal',
       wed: 'Çar',
       thu: 'Per',
-      fri: 'Cuma',
-      sat: 'Cumartesi',
+      fri: 'Cum',
+      sat: 'Cts'
     },
-    rangePrompt: (maxRange: number) => `Seçilen günlerin sayısı aşamaz ${maxRange} günler`,
-    rangePromptWeek: (maxRange: number) => `Seçilen hafta sayısı aşamaz ${maxRange} haftalar`,
-    rangePromptMonth: (maxRange: number) => `Seçilen ay aşamaz ${maxRange} aylar`,
+    rangePrompt: (maxRange: number) => `Seçilen gün sayısı ${maxRange} günü geçemez`,
+    rangePromptWeek: (maxRange: number) => `Seçilen hafta sayısı ${maxRange} haftayı geçemez`,
+    rangePromptMonth: (maxRange: number) => `Seçilen ay sayısı ${maxRange} ayı geçemez`,
     monthTitle: 'YYYY-MM',
-    yearTitle: 'YYYY',
-    month: 'MM',
-    hour: (value: number) => `${value}`,
-    minute: (value: number) => `${value}`,
-    second: (value: number) => `${value}`,
-  },
-  datetimePicker: {
-    start: 'İtibaren',
-    end: 'İle',
-    to: 'İle',
-    placeholder: 'Seçme',
-    confirm: 'TAMAM',
-    cancel: 'İptal etmek',
+    yearTitle: 'YYYY Yılı',
+    month: 'MM Ay',
+    hour: (value: number) => `${value} Saat`,
+    minute: (value: number) => `${value} Dakika`,
+    second: (value: number) => `${value} Saniye`
   },
   collapse: {
-    expand: 'Genişletmek',
-    retract: 'Katlamak',
+    expand: 'Genişlet',
+    retract: 'Daralt'
   },
   colPicker: {
-    title: 'Seçme',
-    placeholder: 'Seçme',
-    select: 'Seçme',
+    title: 'Lütfen seçin',
+    placeholder: 'Lütfen seçin',
+    select: 'Seç'
+  },
+  datetimePicker: {
+    start: 'Başlangıç zamanı',
+    end: 'Bitiş zamanı',
+    to: 'ile',
+    placeholder: 'Lütfen seçin',
+    confirm: 'Tamam',
+    cancel: 'İptal'
   },
   loadmore: {
     loading: 'Yükleniyor...',
-    finished: 'Yükleme tamamlandı',
-    error: 'Yüklenemedi...',
-    retry: 'Yenile',
-  },
-  imgCropper: {
-    confirm: 'TAMAM',
-    cancel: 'İptal etmek',
+    finished: 'Yüklenme tamamlandı',
+    error: 'Yükleme başarısız',
+    retry: 'Tekrar deneyin'
   },
   messageBox: {
-    inputPlaceholder: 'Lütfen bilgileri girin',
-    confirm: 'TAMAM',
-    cancel: 'İptal etmek',
-    inputNoValidate: 'Lütfen doğru bilgileri girdiğinizden emin olun',
+    inputPlaceholder: 'Lütfen girin',
+    confirm: 'Tamam',
+    cancel: 'İptal',
+    inputNoValidate: 'Girilen veriler geçerli değil'
   },
   numberKeyboard: {
-    confirm: 'TAMAM',
+    confirm: 'Tamam'
   },
   pagination: {
-    prev: 'Öncesi',
-    next: 'Sonraki',
-    page: (value: number) => `Sayfa: ${value}`,
-    total: (total: number) => `Toplam: ${total}`,
-    size: (size: number) => `${size}/Sayfa`,
+    prev: 'Önceki Sayfa',
+    next: 'Sonraki Sayfa',
+    page: (value: number) => `Şu anki Sayfa: ${value}`,
+    total: (total: number) => `Toplam Veri: ${total} adet`,
+    size: (size: number) => `Sayfa Boyutu: ${size}`
   },
   picker: {
-    cancel: 'İptal etmek',
-    done: 'Tamamlamak',
-    placeholder: 'Seçme',
+    cancel: 'İptal',
+    done: 'Tamam',
+    placeholder: 'Lütfen seçin'
+  },
+  imgCropper: {
+    confirm: 'Tamam',
+    cancel: 'İptal'
   },
   search: {
-    search: 'Aramak',
-    cancel: 'İptal etmek',
+    search: 'Ara',
+    cancel: 'İptal'
   },
   steps: {
-    wait: 'Başlatılmadı',
-    finished: 'Günü geçmiş',
-    process: 'Devam etmekte',
-    failed: 'Arızalı',
+    wait: 'Başlamadı',
+    finished: 'Tamamlandı',
+    process: 'Süreçte',
+    failed: 'Başarısız'
   },
   tabs: {
-    all: 'Tüm',
+    all: 'Hepsi'
   },
   upload: {
-    error: 'Yükleme başarısız oldu',
+    error: 'Yükleme başarısız'
   },
   input: {
-    placeholder: 'Lütfen bilgilerinizi giriniz...',
+    placeholder: 'Lütfen girin...'
   },
   selectPicker: {
-    title: 'Seçme',
-    placeholder: 'Seçme',
-    select: 'Seçme',
-    confirm: 'TAMAM',
-    filterPlaceholder: 'Aramak',
+    title: 'Lütfen seçin',
+    placeholder: 'Lütfen seçin',
+    select: 'Seç',
+    confirm: 'Onayla',
+    filterPlaceholder: 'Ara'
   },
   tag: {
-    placeholder: 'Girmek',
-    add: 'Etiket Ekle',
+    placeholder: 'Lütfen girin',
+    add: 'Yeni Etiket Ekle'
   },
   textarea: {
-    placeholder: 'Lütfen bilgilerinizi giriniz...',
+    placeholder: 'Lütfen girin...'
   },
   tableCol: {
-    indexLabel: 'dizin',
-  },
+    indexLabel: 'Sıra No'
+  }
 }

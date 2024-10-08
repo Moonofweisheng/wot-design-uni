@@ -1,129 +1,127 @@
 export default {
   calendar: {
-    placeholder: 'Выбирать',
-    title: 'Выберите дату',
-    day: 'Дата',
+    placeholder: 'Выберите, пожалуйста',
+    title: 'Выбор даты',
+    day: 'День',
     week: 'Неделя',
     month: 'Месяц',
-    confirm: 'ХОРОШО',
-    startTime: 'Дата начала',
-    endTime: 'Дата окончания',
-    to: 'К',
-    timeFormat: 'YY-MM-DD HH:mm:ss',
-    dateFormat: 'YYYY-MM-DD',
-    weekFormat: (year: number, week: number) => `Неделя${week}, ${year} г.`,
+    confirm: 'Ок',
+    startTime: 'Начало',
+    endTime: 'Конец',
+    to: 'до',
+    timeFormat: 'DD.MM.YY HH:mm:ss',
+    dateFormat: 'DD.MM.YYYY',
+    weekFormat: (year: number, week: number) => `${year} Неделя ${week}`,
     startWeek: 'Начало недели',
     endWeek: 'Конец недели',
-    startMonth: 'Начальный месяц',
+    startMonth: 'Начало месяца',
     endMonth: 'Конец месяца',
-    monthFormat: 'YYYY-ММ',
+    monthFormat: 'MM.YYYY'
   },
   calendarView: {
-    startTime: 'Время начала',
-    endTime: 'Конец Времени',
+    startTime: 'Начало',
+    endTime: 'Конец',
     weeks: {
-      sun: 'Солнце',
-      mon: 'Пн.',
+      sun: 'Вс',
+      mon: 'Пн',
       tue: 'Вт',
       wed: 'Ср',
       thu: 'Чт',
       fri: 'Пт',
-      sat: 'Суббота',
+      sat: 'Сб'
     },
-    rangePrompt: (maxRange: number) =>
-      `Количество выбранных дней не может превышать ${maxRange} дни`,
-    rangePromptWeek: (maxRange: number) =>
-      `Количество выбранных недель не может превышать ${maxRange} недели`,
-    rangePromptMonth: (maxRange: number) => `Выбранный месяц не может превышать ${maxRange} месяцы`,
-    monthTitle: 'YYYY-MM',
-    yearTitle: 'YYYY',
-    month: 'MM',
-    hour: (value: number) => `${value}`,
-    minute: (value: number) => `${value}`,
-    second: (value: number) => `${value}`,
-  },
-  datetimePicker: {
-    start: 'От',
-    end: 'К',
-    to: 'К',
-    placeholder: 'Выбирать',
-    confirm: 'ХОРОШО',
-    cancel: 'Отмена',
+    rangePrompt: (maxRange: number) => `Выбор не должен превышать ${maxRange} дня`,
+    rangePromptWeek: (maxRange: number) => `Выбор не должен превышать ${maxRange} недели`,
+    rangePromptMonth: (maxRange: number) => `Выбор не должен превышать ${maxRange} месяца`,
+    monthTitle: 'Месяц YYYY-MM',
+    yearTitle: 'Год YYYY',
+    month: 'Месяц MM',
+    hour: (value: number) => `${value} час`,
+    minute: (value: number) => `${value} минут`,
+    second: (value: number) => `${value} секунд`
   },
   collapse: {
-    expand: 'Расширять',
-    retract: 'Складывать',
+    expand: 'Развернуть',
+    retract: 'Свернуть'
   },
   colPicker: {
-    title: 'Выбирать',
-    placeholder: 'Выбирать',
-    select: 'Выбирать',
+    title: 'Выберите, пожалуйста',
+    placeholder: 'Выберите, пожалуйста',
+    select: 'Выберите'
+  },
+  datetimePicker: {
+    start: 'Начало',
+    end: 'Конец',
+    to: 'до',
+    placeholder: 'Выберите, пожалуйста',
+    confirm: 'Готово',
+    cancel: 'Отмена'
   },
   loadmore: {
     loading: 'Загрузка...',
     finished: 'Загрузка завершена',
-    error: 'Не удалось загрузить...',
-    retry: 'Обновить',
-  },
-  imgCropper: {
-    confirm: 'ХОРОШО',
-    cancel: 'Отмена',
+    error: 'Ошибка загрузки',
+    retry: 'Повторить'
   },
   messageBox: {
-    inputPlaceholder: 'Пожалуйста, введите информацию',
-    confirm: 'ХОРОШО',
+    inputPlaceholder: 'Введите, пожалуйста',
+    confirm: 'Ок',
     cancel: 'Отмена',
-    inputNoValidate: 'Пожалуйста, убедитесь, что вы вводите правильную информацию',
+    inputNoValidate: 'Неверные данные'
   },
   numberKeyboard: {
-    confirm: 'ХОРОШО',
+    confirm: 'Готово'
   },
   pagination: {
-    prev: 'Предыдущий',
-    next: 'Следующий',
+    prev: 'Предыдущая',
+    next: 'Следующая',
     page: (value: number) => `Страница: ${value}`,
-    total: (total: number) => `Общий: ${total}`,
-    size: (size: number) => `${size}/Cтраница`,
+    total: (total: number) => `Всего: ${total} записи`,
+    size: (size: number) => `Размер страницы: ${size}`
   },
   picker: {
     cancel: 'Отмена',
-    done: 'Сделанный',
-    placeholder: 'Выбирать',
+    done: 'Готово',
+    placeholder: 'Выберите, пожалуйста'
+  },
+  imgCropper: {
+    confirm: 'Готово',
+    cancel: 'Отмена'
   },
   search: {
     search: 'Поиск',
-    cancel: 'Отмена',
+    cancel: 'Отмена'
   },
   steps: {
-    wait: 'Не запущено',
-    finished: 'Истекший',
-    process: 'В ходе выполнения',
-    failed: 'Неуспешный',
+    wait: 'Не началось',
+    finished: 'Завершено',
+    process: 'В процессе',
+    failed: 'Неудачно'
   },
   tabs: {
-    all: 'Все',
+    all: 'Все'
   },
   upload: {
-    error: 'Не удалось загрузить',
+    error: 'Ошибка загрузки'
   },
   input: {
-    placeholder: 'Пожалуйста, введите информацию...',
+    placeholder: 'Введите...'
   },
   selectPicker: {
-    title: 'Выбирать',
-    placeholder: 'Выбирать',
-    select: 'Выбирать',
-    confirm: 'ХОРОШО',
-    filterPlaceholder: 'Поиск',
+    title: 'Выберите, пожалуйста',
+    placeholder: 'Выберите, пожалуйста',
+    select: 'Выберите',
+    confirm: 'Подтвердить',
+    filterPlaceholder: 'Поиск'
   },
   tag: {
-    placeholder: 'Входить',
-    add: 'Добавить тег',
+    placeholder: 'Введите',
+    add: 'Добавить тег'
   },
   textarea: {
-    placeholder: 'Пожалуйста, введите информацию...',
+    placeholder: 'Введите...'
   },
   tableCol: {
-    indexLabel: 'индекс',
-  },
+    indexLabel: '№'
+  }
 }
