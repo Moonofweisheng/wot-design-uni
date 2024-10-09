@@ -18,6 +18,9 @@
     <demo-block title="点击遮罩关闭">
       <wd-button @click="handleClick8">点击遮罩关闭</wd-button>
     </demo-block>
+    <demo-block title="自定义图标">
+      <wd-button @click="handleClick9">关闭图标自定义</wd-button>
+    </demo-block>
 
     <wd-curtain :value="value1" :src="img" :to="link" @close="handleClose1" :width="280"></wd-curtain>
     <wd-curtain :value="value2" :src="img" :to="link" close-position="top-left" :width="200" @close="handleClose2"></wd-curtain>
@@ -35,6 +38,16 @@
       @close="handleClose8"
       :close-on-click-modal="true"
     ></wd-curtain>
+    <wd-curtain
+      :value="value9"
+      :src="img"
+      :to="link"
+      closeIconName="close"
+      closeIconSize="20"
+      closeIconColor="red"
+      @close="handleClose9"
+      :width="280"
+    ></wd-curtain>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -48,6 +61,7 @@ const value5 = ref<boolean>(false)
 const value6 = ref<boolean>(false)
 const value7 = ref<boolean>(false)
 const value8 = ref<boolean>(false)
+const value9 = ref<boolean>(false)
 const img = ref<string>('https://img20.360buyimg.com/da/jfs/t1/141592/25/8861/261559/5f68d8c1E33ed78ab/698ad655bfcfbaed.png')
 const link = ref<string>('/pages/index/index')
 
@@ -98,6 +112,12 @@ function handleClick8() {
 }
 function handleClose8() {
   value8.value = false
+}
+function handleClick9() {
+  value9.value = true
+}
+function handleClose9() {
+  value9.value = false
 }
 function clickImg() {
   uni.navigateTo({

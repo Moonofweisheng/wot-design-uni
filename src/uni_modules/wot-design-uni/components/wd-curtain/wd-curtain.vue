@@ -19,7 +19,13 @@
     >
       <view class="wd-curtain__content">
         <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
-        <wd-icon name="close-outline" :custom-class="`wd-curtain__content-close ${closePosition}`" @click="close" />
+        <wd-icon
+          :name="closeIconName"
+          :size="closeIconSize"
+          :color="closeIconColor"
+          :custom-class="`wd-curtain__content-close ${closePosition}`"
+          @click="close"
+        />
       </view>
     </wd-popup>
   </view>
@@ -39,7 +45,8 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
-import { ref, watch } from 'vue'
+import { addUnit, objToStyle } from '../common/util'
+import { computed, ref, watch, type CSSProperties } from 'vue'
 import { curtainProps } from './types'
 
 const props = defineProps(curtainProps)

@@ -108,6 +108,9 @@ function handleClose() {
 | close-position | 关闭按钮位置 | string | inset / top / bottom / top-left / top-right / bottom-left / bottom-right | inset | - |
 | close-on-click-modal | 点击遮罩是否关闭 | boolean | - | false | - |
 | hide-when-close | 是否当关闭时将弹出层隐藏（display: none) | boolean | - | true | - |
+| close-icon-name | 关闭按钮图标 | string | close-outline / close | close-outline | $LOWEST_VERSION$ |
+| close-icon-size | 图标的字体大小 | string |	- |	inherit | - |
+| close-icon-color | 图标的字体颜色 | string |	- |	inherit | - |
 
 ## Events
 

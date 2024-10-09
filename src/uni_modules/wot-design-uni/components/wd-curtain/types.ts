@@ -2,6 +2,7 @@ import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 
 export type ClosePosition = 'inset' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+export type CloseIconName = 'close-outline' | 'close'
 
 export const curtainProps = {
   ...baseProps,
@@ -32,7 +33,19 @@ export const curtainProps = {
   /**
    * 是否当关闭时将弹出层隐藏（display: none)
    */
-  hideWhenClose: makeBooleanProp(true)
+  hideWhenClose: makeBooleanProp(true),
+  /**
+   * 关闭按钮图标，可选值：close-outline / close
+   */
+  closeIconName: makeStringProp<CloseIconName>('close-outline'),
+  /**
+   * 图标的字体大小
+   */
+  closeIconSize: String,
+  /**
+   * 图标的字体颜色
+   */
+  closeIconColor: String
 }
 
 export type CurtainProps = ExtractPropTypes<typeof curtainProps>
