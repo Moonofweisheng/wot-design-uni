@@ -45,8 +45,7 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
-import { addUnit, objToStyle } from '../common/util'
-import { computed, ref, watch, type CSSProperties } from 'vue'
+import { ref, watch } from 'vue'
 import { curtainProps } from './types'
 
 const props = defineProps(curtainProps)
