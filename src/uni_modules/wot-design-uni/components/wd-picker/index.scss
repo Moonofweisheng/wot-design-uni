@@ -25,7 +25,8 @@
       color: $-dark-color-gray;
     }
 
-    :deep(.wd-picker__arrow){
+    :deep(.wd-picker__arrow),
+    :deep(.wd-picker__clear) {
       color: $-dark-color;
     }
 
@@ -78,13 +79,15 @@
     .wd-picker__cell {
       font-size: $-cell-title-fs-large;
     }
-    :deep(.wd-picker__arrow) {
+    :deep(.wd-picker__arrow),
+    :deep(.wd-picker__clear) {
       font-size: $-cell-icon-size-large;
     }
   }
   @include when(error) {
     .wd-picker__value,
-    :deep(.wd-picker__arrow) {
+    :deep(.wd-picker__arrow),
+    :deep(.wd-picker__clear) {
       color: $-input-error-color;
     }
   }
@@ -170,7 +173,7 @@
     color: $-input-placeholder-color;
   }
 
-  @include edeep(arrow) {
+  @include edeep(arrow,clear) {
     display: block;
     font-size: $-cell-icon-size;
     color: $-cell-arrow-color;

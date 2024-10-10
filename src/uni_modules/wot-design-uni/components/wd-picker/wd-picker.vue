@@ -21,7 +21,8 @@
             <view :class="`wd-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${showValue ? '' : 'wd-picker__placeholder'}`">
               {{ showValue ? showValue : placeholder || translate('placeholder') }}
             </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
+            <wd-icon v-if="showArrow" custom-class="wd-picker__arrow" name="arrow-right" />
+            <wd-icon v-else-if="showClear" custom-class="wd-picker__clear" name="error-fill" @click.stop="handleClear" />
           </view>
           <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
         </view>
@@ -383,6 +384,21 @@ function onPickEnd() {
 function setLoading(loading: boolean) {
   innerLoading.value = loading
 }
+
+// 是否展示清除按钮
+const showClear = computed(() => {
+  return props.clearable && !props.disabled && !props.readonly && showValue.value.length
+})
+
+function handleClear() {
+  const clearValue = isArray(pickerValue.value) ? [] : ''
+  emit('update:modelValue', clearValue)
+}
+
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly && !showClear.value
+})
 
 defineExpose<PickerExpose>({
   close,
