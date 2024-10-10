@@ -58,7 +58,13 @@ export const tabsProps = {
   /**
    * 切换动画过渡时间，单位毫秒
    */
-  duration: makeNumberProp(300)
+  duration: makeNumberProp(300),
+  /**
+   * 控制是否出现滚动条
+   *
+   * 默认为 false
+   */
+  showScrollbar: makeBooleanProp(false)
 }
 
 export type TabsProps = ExtractPropTypes<typeof tabsProps>

@@ -80,7 +80,7 @@
       <!--头部导航容器-->
       <view class="wd-tabs__nav">
         <view class="wd-tabs__nav--wrap">
-          <scroll-view :scroll-x="slidableNum < items.length" scroll-with-animation :scroll-left="state.scrollLeft">
+          <scroll-view :showScrollbar="showScrollbar" :scroll-x="slidableNum < items.length" scroll-with-animation :scroll-left="state.scrollLeft">
             <view class="wd-tabs__nav-container">
               <!--nav列表-->
               <view
