@@ -48,6 +48,18 @@
       </wd-radio-group>
     </demo-block>
 
+    <demo-block title="可取消选中" transparent>
+      <wd-radio-group v-model="value4" cell shape="button" cancelable>
+        <wd-radio :value="1">选项一</wd-radio>
+        <wd-radio :value="2">选项二</wd-radio>
+        <wd-radio :value="3">选项三</wd-radio>
+        <wd-radio :value="4">选项四</wd-radio>
+        <wd-radio :value="5">选项五</wd-radio>
+        <wd-radio :value="6">选项六</wd-radio>
+        <wd-radio :value="7">选项七</wd-radio>
+      </wd-radio-group>
+    </demo-block>
+
     <demo-block title="同行展示">
       <wd-radio-group v-model="value5" inline>
         <wd-radio :value="1">单选框1</wd-radio>

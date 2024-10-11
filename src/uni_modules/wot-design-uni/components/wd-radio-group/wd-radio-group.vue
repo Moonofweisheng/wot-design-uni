@@ -40,7 +40,11 @@ watch(
  * @description 处理radio子节点通知
  */
 function updateValue(value: string | number | boolean) {
-  emit('update:modelValue', value)
+  if (props.cancelable && props.modelValue === value) {
+    emit('update:modelValue', '')
+  } else {
+    emit('update:modelValue', value)
+  }
   emit('change', {
     value
   })
