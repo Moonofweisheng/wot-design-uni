@@ -563,6 +563,8 @@ $-sort-button-color: var(--wot-sort-button-color, $-color-content) !default; // 
 $-sort-button-height: var(--wot-sort-button-height, 48px) !default; // 高度
 $-sort-button-line-height: var(--wot-sort-button-line-height, 3px) !default; // 下划线高度
 $-sort-button-line-color: var(--wot-sort-button-line-color, $-color-theme) !default; // 下划线颜色
+$-sort-button-icon-color: var(--wot-sort-button-icon-color, rgba(0, 0, 0, 0.45)) !default; // 排序图标颜色
+$-sort-button-icon-active-color: var(--wot-sort-button-icon-active-color, $-color-theme) !default; // 排序图标激活颜色
 
 /* steps */
 $-steps-icon-size: var(--wot-steps-icon-size, 22px) !default; // 图标尺寸
