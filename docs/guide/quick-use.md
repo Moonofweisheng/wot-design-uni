@@ -2,7 +2,8 @@
 
 本节介绍如何在`uni-app`项目中安装、配置并使用 `Wot Design Uni`。
 
-
+## 使用之前
+使用前，请确保你已经学习过Vue官方的 [快速上手](https://cn.vuejs.org/guide/quick-start.html) 和 uni-app提供的 [学习路线](https://uniapp.dcloud.net.cn/resource.html)。
 
 ## 安装
 :::warning 关于安装
