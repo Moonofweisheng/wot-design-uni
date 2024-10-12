@@ -11,9 +11,6 @@
 
     @include e(text) {
       color: $-dark-color;
-      @include m(hover){
-        background-color: $-dark-background3;
-      }
     }
 
     :deep(.wd-navbar__arrow) {
@@ -72,17 +69,8 @@
     left: 0;
   }
 
-  @include e(left) {
-    @include m(hover){
-      background-color: $-navbar-hover-color;
-    }
-  }
-
   @include e(right) {
     right: 0;
-    @include m(hover){
-      background-color: $-navbar-hover-color;
-    }
   }
 
   @include edeep(arrow) {
