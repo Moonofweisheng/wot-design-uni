@@ -1,0 +1,1 @@
+import{r as a,O as e}from"./index-B7o-V5at.js";import{I as r,t}from"./page-wraper.CdpHa-_z.js";function n(n){const o=a(null),s=()=>{r(o.value)?cancelAnimationFrame(o.value):t(o.value)&&clearTimeout(o.value)};return e((()=>{s()})),{start:()=>{const a=a=>{n(a)};o.value=requestAnimationFrame(a)},cancel:s}}export{n as u};
