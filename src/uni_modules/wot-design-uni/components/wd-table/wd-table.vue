@@ -77,7 +77,6 @@ import { type CSSProperties, computed, reactive, ref } from 'vue'
 import { addUnit, debounce, isDef, isObj, objToStyle, uuid } from '../common/util'
 import type { SortDirection, TableColumn, TableColumnInstance, TableColumnProps } from '../wd-table-col/types'
 import { TABLE_KEY, tableProps, type TableProvide } from './types'
-import WdTableCol from '../wd-table-col/wd-table-col.vue'
 import { useTranslate } from '../composables/useTranslate'
 import { useChildren } from '../composables/useChildren'
 
