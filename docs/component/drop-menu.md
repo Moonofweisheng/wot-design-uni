@@ -166,6 +166,29 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 }
 ```
 
+## 外部控制打开/关闭状态<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.13</el-tag>
+
+通过绑定 `v-model:open` 值，可以实现外部控制 `drop-menu-item` 的打开和关闭。
+
+```html
+<wd-switch v-model="open" />
+<wd-drop-menu>
+  <wd-drop-menu-item v-model="value" v-model:open="open" :options="option" />
+</wd-drop-menu>
+```
+
+```typescript
+
+const open = ref<boolean>(false)
+const value = ref<number>(0)
+
+const option = ref<Record<string, any>>([
+  { label: '全部商品', value: 0 },
+  { label: '新款商品', value: 1 },
+  { label: '活动商品', value: 2 }
+])
+```
+
 ## 向上展开
 
 将 `direction` 属性值设置为 `up`，菜单即可向上展开
@@ -200,6 +223,7 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 | 参数      | 说明                                                                   | 类型            | 可选值 | 默认值 | 最低版本 |
 | --------- | ---------------------------------------------------------------------- | --------------- | ------ | ------ | -------- |
 | v-model   | 当前选中项对应选中的 value                                             | string / number | -      | -      | -        |
+| v-model:open   | 菜单是否打开，通过 v-model:open 可以实现外部控制菜单的打开和关闭 | boolean         | -      | -  | -        |
 | disabled  | 禁用菜单                                                               | boolean         | -      | false  | -        |
 | options   | 列表数据，对应数据结构 `[{text: '标题', value: '0', tip: '提示文字'}]` | array           | -      | -      | -        |
 | icon-name | 选中的图标名称(可选名称在 wd-icon 组件中)                              | string          | -      | check  | -        |

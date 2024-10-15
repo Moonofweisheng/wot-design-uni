@@ -62,11 +62,11 @@ import { isDef, isFunction } from '../common/util'
 import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
 
 const props = defineProps(dorpMenuItemProps)
-const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
+const emit = defineEmits(['change', 'update:modelValue', 'update:open', 'open', 'opened', 'closed', 'close'])
 
 const queue = inject<Queue | null>(queueKey, null)
 const showWrapper = ref<boolean>(false)
-const showPop = ref<boolean>(false)
+const showPop = ref<boolean>(props.open)
 const position = ref<PopupType>()
 const zIndex = ref<number>(12)
 const modal = ref<boolean>(true)
@@ -100,6 +100,27 @@ watch(
   {
     deep: true,
     immediate: true
+  }
+)
+
+watch(
+  () => props.open,
+  (newValue) => {
+    if (isDef(newValue) && typeof newValue !== 'boolean') {
+      console.error('[wot-design] warning(wd-drop-menu-item): the type of open should be a boolean.')
+    }
+    if (newValue !== showPop.value) {
+      dropMenu?.fold(proxy)
+    }
+  }
+)
+
+watch(
+  () => showPop.value,
+  (newValue) => {
+    if (newValue !== props.open) {
+      emit('update:open', newValue)
+    }
   }
 )
 
