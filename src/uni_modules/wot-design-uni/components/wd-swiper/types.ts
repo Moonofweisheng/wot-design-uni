@@ -18,6 +18,14 @@ export type EasingType = 'default' | 'linear' | 'easeInCubic' | 'easeOutCubic' |
  */
 export type IndicatorPositionType = 'left' | 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right' | 'right'
 
+/**
+ * first：第一个滑块。
+ * current：实时的当前滑块。
+ * highest：高度最大的滑块。
+ * none：不根据滑块调整高度，容器高度取决于自身样式。
+ */
+export type AdjustHeightType = 'first' | 'current' | 'highest' | 'none'
+
 export interface SwiperList {
   [key: string]: any
   // 图片、视频等资源地址
@@ -169,6 +177,20 @@ export const swiperProps = {
    * 默认值：false
    */
   stopAutoplayWhenVideoPlay: makeBooleanProp(false),
+  /**
+   * 自动以指定滑块的高度为整个容器的高度。当 vertical 为 true 时，默认不调整
+   * 仅支付宝小程序支持
+   * 类型：'first' | 'current' | 'highest' | 'none'
+   * 默认值：false
+   */
+  adjustHeight: makeStringProp<AdjustHeightType>('highest'),
+  /**
+   * vertical 为 true 时强制使 adjust-height 生效。
+   * 仅支付宝小程序支持
+   * 类型：boolean
+   * 默认值：false
+   */
+  adjustVerticalHeight: makeBooleanProp(false),
   /**
    * 自定义指示器类名
    * 类型：string

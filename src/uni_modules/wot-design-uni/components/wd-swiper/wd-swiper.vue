@@ -1,6 +1,8 @@
 <template>
   <view :class="`wd-swiper ${customClass}`" :style="customStyle">
     <swiper
+      :adjust-height="adjustHeight"
+      :adjust-vertical-height="adjustVerticalHeight"
       class="wd-swiper__track"
       :autoplay="autoplay && !videoPlaying"
       :current="navCurrent"

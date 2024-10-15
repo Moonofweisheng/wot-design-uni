@@ -34,6 +34,7 @@
       ></wd-swiper>
     </demo-block>
 
+    <!-- #ifdef MP-WEIXIN || H5 || MP-DINGTALK -->
     <demo-block title="视频轮播">
       <wd-swiper
         :list="videoList"
@@ -69,6 +70,7 @@
         @change="onChange"
       ></wd-swiper>
     </demo-block>
+    <!-- #endif -->
 
     <demo-block title="手动切换">
       <wd-swiper

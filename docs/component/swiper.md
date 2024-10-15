@@ -5,7 +5,7 @@
 用于创建轮播，它支持水平和垂直方向的滑动，可以自定义样式和指示器位置，支持视频和图片资源的轮播，支持设置轮播标题和自定义标题样式。
 
 :::danger 请注意
-嵌入视频仅在`h5`和`微信小程序`端支持，其余端不支持，请了解后使用。
+嵌入视频仅在`h5`、`微信小程序`和`钉钉小程序`支持，其余端不支持，请了解后使用。
 :::
 
 ## 基础用法
@@ -57,7 +57,7 @@ function onChange(e) {
 ## 视频轮播<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.13</el-tag>
 
 :::danger 请注意
-嵌入视频仅在`h5`和`微信小程序`端支持，其余端不支持，请了解后使用。
+嵌入视频仅在`h5`、`微信小程序`和`钉钉小程序`支持，其余端不支持，请了解后使用。
 :::
 
 ```html
@@ -327,6 +327,10 @@ const isLoop = ref(false)
 | customStyle               | 外部自定义样式                                                     | `string`                          | -                                                                                                      | ''           | 0.1.22           |
 | value-key          | 选项对象中，value 对应的 key        | `string`       | -       | `value`           | 1.3.7   |
 | text-key          | 选项对象中，标题 text 对应的 key        | `string`       | -       | `text`           | $LOWEST_VERSION$   |
+| adjust-height      | 自动以指定滑块的高度为整个容器的高度。当 vertical 为 true 时，默认不调整，仅支付宝小程序支持。| `string`       | `'first' \| 'current' \| 'highest' \| 'none'`       |   `highest`  | $LOWEST_VERSION$   |
+| adjust-vertical-height | vertical 为 true 时强制使 adjust-height 生效。仅支付宝小程序支持。 | `boolean`       | -       | `false`           | $LOWEST_VERSION$   |
+
+
 
 ### DirectionType
 
