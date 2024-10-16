@@ -38,7 +38,7 @@
           <wd-icon v-if="isLink" custom-class="wd-cell__arrow-right" name="arrow-right" />
           <slot v-else name="right-icon" />
         </view>
-        <view v-if="errorMessage" class="wd-cell__error-message">{{ errorMessage }}</view>
+        <view class="wd-cell__error-message">{{ errorMessage }}</view>
       </view>
       <!--right content END-->
     </view>
