@@ -1,128 +1,127 @@
 export default {
   calendar: {
-    placeholder: 'يختار',
+    placeholder: 'حدد التاريخ',
     title: 'حدد التاريخ',
-    day: 'تاريخ',
+    day: 'يوم',
     week: 'أسبوع',
     month: 'شهر',
-    confirm: 'نعم',
-    startTime: 'تاريخ البدء',
-    endTime: 'تاريخ الانتهاء',
-    to: 'ل',
+    confirm: 'تأكيد',
+    startTime: 'وقت البداية',
+    endTime: 'وقت النهاية',
+    to: 'إلى',
     timeFormat: 'YY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
-    weekFormat: (year: number, week: number) => `${year},${week}الأسبوع`,
+    weekFormat: (year: number, week: number) => `${year} الأسبوع ${week}`,
     startWeek: 'بداية الأسبوع',
     endWeek: 'نهاية الأسبوع',
-    startMonth: 'شهر البدء',
+    startMonth: 'بداية الشهر',
     endMonth: 'نهاية الشهر',
-    monthFormat: 'YYYY-MM',
+    monthFormat: 'YYYY-MM'
   },
   calendarView: {
-    startTime: 'وقت البدء',
+    startTime: 'وقت البداية',
     endTime: 'وقت النهاية',
     weeks: {
       sun: 'الأحد',
       mon: 'الاثنين',
       tue: 'الثلاثاء',
-      wed: 'تزوج',
+      wed: 'الأربعاء',
       thu: 'الخميس',
       fri: 'الجمعة',
-      sat: 'قعد',
+      sat: 'السبت'
     },
-    rangePrompt: (maxRange: number) => `لا يمكن أن يتجاوز عدد الأيام المحددة ${maxRange} أيام `,
-    rangePromptWeek: (maxRange: number) =>
-      `لا يمكن أن يتجاوز عدد الأسابيع المحددة ${maxRange} أسابيع`,
-    rangePromptMonth: (maxRange: number) => `لا يمكن أن يتجاوز الشهر المحدد ${maxRange} أشهر`,
+    rangePrompt: (maxRange: number) => `لا يمكن أن تزيد الأيام المحددة عن ${maxRange} يوم`,
+    rangePromptWeek: (maxRange: number) => `لا يمكن أن تزيد الأسابيع المحددة عن ${maxRange} أسبوع`,
+    rangePromptMonth: (maxRange: number) => `لا يمكن أن تزيد الشهور المحددة عن ${maxRange} شهر`,
     monthTitle: 'YYYY-MM',
     yearTitle: 'YYYY',
     month: 'MM',
-    hour: (value: number) => `${value}`,
-    minute: (value: number) => `${value}`,
-    second: (value: number) => `${value}`,
+    hour: (value: number) => `${value} ساعة`,
+    minute: (value: number) => `${value} دقيقة`,
+    second: (value: number) => `${value} ثانية`
   },
   datetimePicker: {
     start: 'من',
-    end: 'ل',
-    to: 'ل',
-    placeholder: 'يختار',
-    confirm: 'نعم',
-    cancel: 'يلغي',
+    end: 'إلى',
+    to: 'إلى',
+    placeholder: 'حدد التاريخ والوقت',
+    confirm: 'تأكيد',
+    cancel: 'إلغاء'
   },
   collapse: {
-    expand: 'يوسع',
-    retract: 'طية',
+    expand: 'توسيع',
+    retract: 'طي'
   },
   colPicker: {
-    title: 'يختار',
-    placeholder: 'يختار',
-    select: 'يختار',
+    title: 'حدد لون',
+    placeholder: 'حدد لون',
+    select: 'حدد'
   },
   loadmore: {
-    loading: 'تحميل...',
-    finished: 'تم الانتهاء من التحميل',
+    loading: 'جارٍ التحميل...',
+    finished: 'التحميل قد انتهى',
     error: 'فشل التحميل...',
-    retry: 'ينعش',
+    retry: 'إعادة المحاولة'
   },
   imgCropper: {
-    confirm: 'نعم',
-    cancel: 'يلغي',
+    confirm: 'تأكيد',
+    cancel: 'إلغاء'
   },
   messageBox: {
     inputPlaceholder: 'الرجاء إدخال المعلومات',
-    confirm: 'نعم',
-    cancel: 'يلغي',
-    inputNoValidate: 'يرجى التأكد من إدخال المعلومات الصحيحة',
+    confirm: 'تأكيد',
+    cancel: 'إلغاء',
+    inputNoValidate: 'الرجاء التأكد من إدخال المعلومات الصحيحة'
   },
   numberKeyboard: {
-    confirm: 'منتهي',
+    confirm: 'إنهاء'
   },
   pagination: {
-    prev: 'سابق',
+    prev: 'السابق',
     next: 'التالي',
     page: (value: number) => `صفحة: ${value}`,
     total: (total: number) => `المجموع: ${total}`,
-    size: (size: number) => `${size}/الصفحة`,
+    size: (size: number) => `${size} / صفحة`
   },
   picker: {
-    cancel: 'يلغي',
-    done: 'منتهي',
-    placeholder: 'يختار',
+    cancel: 'إلغاء',
+    done: 'إنهاء',
+    placeholder: 'حدد'
   },
   search: {
-    search: 'يبحث',
-    cancel: 'يلغي',
+    search: 'بحث',
+    cancel: 'إلغاء'
   },
   steps: {
     wait: 'لم يبدأ',
-    finished: 'منتهي الصلاحية',
-    process: 'في تَقَدم',
-    failed: 'فشل',
+    finished: 'تم',
+    process: 'جاري',
+    failed: 'فشل'
   },
   tabs: {
-    all: 'الجميع',
+    all: 'الجميع'
   },
   upload: {
-    error: 'فشل التحميل',
+    error: 'فشل التحميل'
   },
   input: {
-    placeholder: 'الرجاء إدخال المعلومات...',
+    placeholder: 'الرجاء إدخال المعلومات...'
   },
   selectPicker: {
-    title: 'يختار',
-    placeholder: 'يختار',
-    select: 'يختار',
-    confirm: 'نعم',
-    filterPlaceholder: 'يبحث',
+    title: 'حدد',
+    placeholder: 'حدد',
+    select: 'حدد',
+    confirm: 'تأكيد',
+    filterPlaceholder: 'بحث'
   },
   tag: {
-    placeholder: 'يدخل',
-    add: 'إضافة وسم',
+    placeholder: 'إدخال',
+    add: 'إضافة وسم'
   },
   textarea: {
-    placeholder: 'الرجاء إدخال نص متعدد الأسطر هنا...',
+    placeholder: 'الرجاء إدخال نص متعدد الأسطر هنا...'
   },
   tableCol: {
-    indexLabel: 'فِهرِس',
-  },
+    indexLabel: 'فهرس'
+  }
 }

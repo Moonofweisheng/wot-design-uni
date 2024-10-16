@@ -1,127 +1,127 @@
 export default {
   calendar: {
-    placeholder: '선택하다',
+    placeholder: '선택',
     title: '날짜 선택',
-    day: '날짜',
+    day: '일',
     week: '주',
     month: '월',
-    confirm: '좋아요',
-    startTime: '시작일',
-    endTime: '종료일',
-    to: '에게',
-    timeFormat: 'YY-MM-DD HH:mm:ss',
-    dateFormat: 'YYYY-MM-DD',
-    weekFormat: (year: number, week: number) => `${year}년${week}주차`,
-    startWeek: '주 시작',
-    endWeek: '마지막 주',
-    startMonth: '시작월',
-    endMonth: '종료 월',
-    monthFormat: 'YYYY-MM',
-  },
-  calendarView: {
+    confirm: '확인',
     startTime: '시작 시간',
     endTime: '종료 시간',
+    to: '~',
+    timeFormat: 'YY년 MM월 DD일 HH:mm:ss',
+    dateFormat: 'YYYY년 MM월 DD일',
+    weekFormat: (year: number, week: number) => `${year}년 ${week}주`,
+    startWeek: '주 시작',
+    endWeek: '주 종료',
+    startMonth: '월 시작',
+    endMonth: '월 종료',
+    monthFormat: 'YYYY년 MM월'
+  },
+  calendarView: {
+    startTime: '시작',
+    endTime: '종료',
     weeks: {
-      sun: '해',
+      sun: '일',
       mon: '월',
-      tue: '화요일',
-      wed: '수요일',
+      tue: '화',
+      wed: '수',
       thu: '목',
       fri: '금',
-      sat: '앉았다',
+      sat: '토'
     },
-    rangePrompt: (maxRange: number) => `선택한 일수는 ${maxRange} 일을 초과할 수 없습니다.`,
-    rangePromptWeek: (maxRange: number) => `선택한 주 수는 ${maxRange} 주를 초과할 수 없습니다.`,
-    rangePromptMonth: (maxRange: number) => `선택한 달은 ${maxRange} 개월을 초과할 수 없습니다.`,
-    monthTitle: 'YYYY-MM',
-    yearTitle: 'YYYY',
-    month: 'MM',
-    hour: (value: number) => `${value}`,
-    minute: (value: number) => `${value}`,
-    second: (value: number) => `${value}`,
-  },
-  datetimePicker: {
-    start: '에서',
-    end: '에게',
-    to: '에게',
-    placeholder: '선택하다',
-    confirm: '좋아요',
-    cancel: '취소',
+    rangePrompt: (maxRange: number) => `최대 ${maxRange}일까지 선택할 수 있습니다`,
+    rangePromptWeek: (maxRange: number) => `최대 ${maxRange}주까지 선택할 수 있습니다`,
+    rangePromptMonth: (maxRange: number) => `최대 ${maxRange}개월까지 선택할 수 있습니다`,
+    monthTitle: 'YYYY년 MM월',
+    yearTitle: 'YYYY년',
+    month: 'MM월',
+    hour: (value: number) => `${value}시`,
+    minute: (value: number) => `${value}분`,
+    second: (value: number) => `${value}초`
   },
   collapse: {
-    expand: '확장하다',
-    retract: '겹',
+    expand: '확장',
+    retract: '축소'
   },
   colPicker: {
-    title: '선택하다',
-    placeholder: '선택하다',
-    select: '선택하다',
+    title: '선택',
+    placeholder: '선택',
+    select: '선택'
+  },
+  datetimePicker: {
+    start: '시작',
+    end: '종료',
+    to: '~',
+    placeholder: '선택',
+    confirm: '확인',
+    cancel: '취소'
   },
   loadmore: {
-    loading: '로드 중...',
+    loading: '로딩 중...',
     finished: '로딩 완료',
-    error: '로드하지 못했습니다...',
-    retry: '새로 고치다',
-  },
-  imgCropper: {
-    confirm: '좋아요',
-    cancel: '취소',
+    error: '로딩 오류',
+    retry: '재시도'
   },
   messageBox: {
     inputPlaceholder: '정보를 입력해주세요',
-    confirm: '좋아요',
+    confirm: '확인',
     cancel: '취소',
-    inputNoValidate: '올바른 정보를 입력했는지 확인하세요.',
+    inputNoValidate: '유효한 정보를 입력해주세요'
   },
   numberKeyboard: {
-    confirm: '완료',
+    confirm: '확인'
   },
   pagination: {
-    prev: '이전의',
+    prev: '이전',
     next: '다음',
     page: (value: number) => `페이지: ${value}`,
     total: (total: number) => `총: ${total}`,
-    size: (size: number) => `${size}/페이지`,
+    size: (size: number) => `${size}/페이지`
   },
   picker: {
     cancel: '취소',
     done: '완료',
-    placeholder: '선택하다',
+    placeholder: '선택'
+  },
+  imgCropper: {
+    confirm: '확인',
+    cancel: '취소'
   },
   search: {
-    search: '찾다',
-    cancel: '취소',
+    search: '검색',
+    cancel: '취소'
   },
   steps: {
-    wait: '시작되지 않음',
-    finished: '만료됨',
+    wait: '대기 중',
+    finished: '완료',
     process: '진행 중',
-    failed: '실패한',
+    failed: '실패'
   },
   tabs: {
-    all: '모두',
+    all: '모두'
   },
   upload: {
-    error: '업로드하지 못했습니다.',
+    error: '업로드 오류'
   },
   input: {
-    placeholder: '정보를 입력해주세요...',
+    placeholder: '정보를 입력해주세요...'
   },
   selectPicker: {
-    title: '선택하다',
-    placeholder: '선택하다',
-    select: '선택하다',
-    confirm: '좋아요',
-    filterPlaceholder: '찾다',
+    title: '선택',
+    placeholder: '선택',
+    select: '선택',
+    confirm: '확인',
+    filterPlaceholder: '검색'
   },
   tag: {
-    placeholder: '입력하다',
-    add: '태그 추가',
+    placeholder: '입력',
+    add: '태그 추가'
   },
   textarea: {
-    placeholder: '정보를 입력해주세요...',
+    placeholder: '정보를 입력해주세요...'
   },
   tableCol: {
-    indexLabel: '색인',
-  },
+    indexLabel: '인덱스'
+  }
 }

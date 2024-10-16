@@ -6,13 +6,7 @@
           <slot name="capsule" />
         </view>
 
-        <view
-          :class="`wd-navbar__left ${leftDisabled ? 'is-disabled' : ''}`"
-          :hover-class="leftDisabled || $slots.left ? '' : 'wd-navbar__left--hover'"
-          :hover-stay-time="70"
-          @click="handleClickLeft"
-          v-else-if="!$slots.left"
-        >
+        <view :class="`wd-navbar__left ${leftDisabled ? 'is-disabled' : ''}`" @click="handleClickLeft" v-else-if="!$slots.left">
           <wd-icon v-if="leftArrow" name="arrow-left" custom-class="wd-navbar__arrow" />
           <view v-if="leftText" class="wd-navbar__text">{{ leftText }}</view>
         </view>
@@ -25,13 +19,7 @@
           <slot name="title" />
           <block v-if="!$slots.title && title">{{ title }}</block>
         </view>
-        <view
-          :class="`wd-navbar__right ${rightDisabled ? 'is-disabled' : ''}`"
-          @click="handleClickRight"
-          v-if="$slots.right || rightText"
-          :hover-class="rightDisabled ? '' : 'wd-navbar__right--hover'"
-          :hover-stay-time="70"
-        >
+        <view :class="`wd-navbar__right ${rightDisabled ? 'is-disabled' : ''}`" @click="handleClickRight" v-if="$slots.right || rightText">
           <slot name="right" />
 
           <view v-if="!$slots.right && rightText" class="wd-navbar__text" hover-class="wd-navbar__text--hover" :hover-stay-time="70">

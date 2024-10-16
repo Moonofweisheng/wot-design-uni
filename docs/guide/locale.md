@@ -63,14 +63,14 @@ Locale.add(messages)
 | 英语             | en-US     | `v0.2.20` |
 | 泰语             | th-TH     | `v0.2.20` |
 | 越南语             | vi-VN    | `v0.2.20` |
-| 阿拉伯语             | ar-SA    | `v0.2.20` |
-| 德语             | de-DE    | `v0.2.20` |
-| 西班牙语             | es-ES    | `v0.2.20` |
-| 葡萄牙语             | pt-PT    | `v0.2.20` |
-| 法语             | fr-FR    | `v0.2.20` |
-| 日语             | ja-JP    | `v0.2.20` |
-| 韩语             | ko-KR    | `v0.2.20` |
-| 土耳其语             | tr-TR    | `v0.2.20` |
-| 俄语             | ru-RU    | `v0.2.20` |
+| 阿拉伯语             | ar-SA    | `v1.3.12` |
+| 德语             | de-DE    | `v1.3.12` |
+| 西班牙语             | es-ES    | `v1.3.12` |
+| 葡萄牙语             | pt-PT    | `v1.3.12` |
+| 法语             | fr-FR    | `v1.3.12` |
+| 日语             | ja-JP    | `v1.3.12` |
+| 韩语             | ko-KR    | `v1.3.12` |
+| 土耳其语             | tr-TR    | `v1.3.12` |
+| 俄语             | ru-RU    | `v1.3.12` |
 
 如果你需要使用其他的语言，欢迎贡献 [PR](https://github.com/Moonofweisheng/wot-design-uni/pulls)，只需在[这里](https://github.com/Moonofweisheng/wot-design-uni/tree/master/src/uni_modules/wot-design-uni/locale/lang)添加一个语言配置文件即可。

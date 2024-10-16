@@ -136,6 +136,11 @@ function handleBackHome() {
   align-items: center;
   --wot-search-padding: 0;
   --wot-search-side-padding: 0;
+  :deep() {
+    .wd-search {
+      background: transparent;
+    }
+  }
 }
 ```
 

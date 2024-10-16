@@ -1,129 +1,127 @@
 export default {
   calendar: {
-    placeholder: 'Selecione',
+    placeholder: 'Por favor selecione',
     title: 'Selecione a data',
-    day: 'Data',
+    day: 'Dia',
     week: 'Semana',
     month: 'Mês',
-    confirm: 'OK',
-    startTime: 'Data de início',
-    endTime: 'Data de término',
-    to: 'Para',
-    timeFormat: 'YY-MM-DD HH:mm:ss',
-    dateFormat: 'YYYY-MM-DD',
-    weekFormat: (year: number, week: number) => `Semana ${year}, ${week}`,
-    startWeek: 'Semana de início',
-    endWeek: 'Fim da semana',
-    startMonth: 'Mês de início',
-    endMonth: 'Fim do mês',
-    monthFormat: 'YYYY-MM',
-  },
-  calendarView: {
+    confirm: 'Confirmar',
     startTime: 'Hora de início',
     endTime: 'Hora de término',
-    weeks: {
-      sun: 'dom',
-      mon: 'seg',
-      tue: 'ter',
-      wed: 'qua',
-      thu: 'qui',
-      fri: 'sex',
-      sat: 'sáb',
-    },
-    rangePrompt: (maxRange: number) =>
-      `O número de dias selecionados não pode exceder ${maxRange} dias`,
-    rangePromptWeek: (maxRange: number) =>
-      `O número de semanas selecionado não pode exceder ${maxRange} semanas`,
-    rangePromptMonth: (maxRange: number) => `O mês selecionado não pode exceder ${maxRange} meses`,
-    monthTitle: 'YYYY-MM',
-    yearTitle: 'YYYY',
-    month: 'MM',
-    hour: (value: number) => `${value}`,
-    minute: (value: number) => `${value}`,
-    second: (value: number) => `${value}`,
+    to: 'até',
+    timeFormat: 'DD/MM/YYYY HH:mm:ss',
+    dateFormat: 'DD/MM/YYYY',
+    weekFormat: (year: number, week: number) => `${year} Semana ${week}`,
+    startWeek: 'Semana de início',
+    endWeek: 'Semana de término',
+    startMonth: 'Mês de início',
+    endMonth: 'Mês de término',
+    monthFormat: 'MM/YYYY'
   },
-  datetimePicker: {
-    start: 'De',
-    end: 'Para',
-    to: 'Para',
-    placeholder: 'Selecione',
-    confirm: 'OK',
-    cancel: 'Cancelar',
+  calendarView: {
+    startTime: 'Início',
+    endTime: 'Término',
+    weeks: {
+      sun: 'Dom',
+      mon: 'Seg',
+      tue: 'Ter',
+      wed: 'Qua',
+      thu: 'Qui',
+      fri: 'Sex',
+      sat: 'Sáb'
+    },
+    rangePrompt: (maxRange: number) => `Não pode selecionar mais que ${maxRange} dias`,
+    rangePromptWeek: (maxRange: number) => `Não pode selecionar mais que ${maxRange} semanas`,
+    rangePromptMonth: (maxRange: number) => `Não pode selecionar mais que ${maxRange} meses`,
+    monthTitle: 'MM/YYYY',
+    yearTitle: 'YYYY',
+    month: 'Mês',
+    hour: (value: number) => `${value} horas`,
+    minute: (value: number) => `${value} minutos`,
+    second: (value: number) => `${value} segundos`
   },
   collapse: {
     expand: 'Expandir',
-    retract: 'Dobrar',
+    retract: 'Retrair'
   },
   colPicker: {
-    title: 'Selecione',
-    placeholder: 'Selecione',
-    select: 'Selecione',
+    title: 'Por favor selecione',
+    placeholder: 'Por favor selecione',
+    select: 'Por favor selecione'
+  },
+  datetimePicker: {
+    start: 'Hora de início',
+    end: 'Hora de término',
+    to: 'até',
+    placeholder: 'Por favor selecione',
+    confirm: 'Concluir',
+    cancel: 'Cancelar'
   },
   loadmore: {
     loading: 'Carregando...',
     finished: 'Carregamento concluído',
-    error: 'Falha ao carregar...',
-    retry: 'Atualizar',
-  },
-  imgCropper: {
-    confirm: 'OK',
-    cancel: 'Cancelar',
+    error: 'Falha ao carregar',
+    retry: 'Clique para tentar novamente'
   },
   messageBox: {
-    inputPlaceholder: 'Por favor insira informações',
-    confirm: 'OK',
+    inputPlaceholder: 'Por favor insira',
+    confirm: 'Confirmar',
     cancel: 'Cancelar',
-    inputNoValidate: 'Certifique-se de inserir informações corretas',
+    inputNoValidate: 'Dados inseridos inválidos'
   },
   numberKeyboard: {
-    confirm: 'feito',
+    confirm: 'Concluir'
   },
   pagination: {
-    prev: 'Anterior',
-    next: 'Próximo',
-    page: (value: number) => `Página: ${value}`,
-    total: (total: number) => `Total: ${total}`,
-    size: (size: number) => `${size}/Página`,
+    prev: 'Página anterior',
+    next: 'Próxima página',
+    page: (value: number) => `Página atual: ${value}`,
+    total: (total: number) => `Total de dados: ${total}`,
+    size: (size: number) => `Tamanho da página: ${size}`
   },
   picker: {
     cancel: 'Cancelar',
-    done: 'Feito',
-    placeholder: 'Selecione',
+    done: 'Concluir',
+    placeholder: 'Por favor selecione'
+  },
+  imgCropper: {
+    confirm: 'Concluir',
+    cancel: 'Cancelar'
   },
   search: {
-    search: 'Procurar',
-    cancel: 'Cancelar',
+    search: 'Buscar',
+    cancel: 'Cancelar'
   },
   steps: {
     wait: 'Não iniciado',
-    finished: 'Expirado',
-    process: 'Em andamento',
-    failed: 'Fracassado',
+    finished: 'Concluído',
+    process: 'Em progresso',
+    failed: 'Falhou'
   },
   tabs: {
-    all: 'Todos',
+    all: 'Todos'
   },
   upload: {
-    error: 'Falha ao carregar',
+    error: 'Falha ao carregar'
   },
   input: {
-    placeholder: 'Por favor insira informações...',
+    placeholder: 'Por favor insira...'
   },
   selectPicker: {
-    title: 'Selecione',
-    placeholder: 'Selecione',
-    select: 'Selecione',
-    confirm: 'OK',
-    filterPlaceholder: 'Procurar',
+    title: 'Por favor selecione',
+    placeholder: 'Por favor selecione',
+    select: 'Por favor selecione',
+    confirm: 'Confirmar',
+    filterPlaceholder: 'Buscar'
   },
   tag: {
-    placeholder: 'Digitar',
-    add: 'Adicionar etiqueta',
+    placeholder: 'Por favor insira',
+    add: 'Adicionar etiqueta'
   },
   textarea: {
-    placeholder: 'Por favor insira informações...',
+    placeholder: 'Por favor insira...'
   },
   tableCol: {
-    indexLabel: 'índice',
-  },
+    indexLabel: 'Número'
+  }
 }

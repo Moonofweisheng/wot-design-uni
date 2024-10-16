@@ -17,7 +17,7 @@
 ## 有没有技术交流群？
 
 有！
-可以加入[组件库QQ 群](/guide/join-group.html)，分享心得、交流体会。
+可以加入[组件库互助 QQ 群](/guide/join-group.html)，分享心得、交流体会。
 
 
 ## 小程序样式隔离
@@ -80,6 +80,25 @@ export default {
 ## 小程序使用外部样式类
 
 Wot Design Uni 开放了大量的自定义样式类供开发者使用，具体的样式类名称可查阅对应组件的“外部样式类”部分。需要注意的是普通样式类和自定义样式类的优先级是未定义的，因此使用时请添加`!important`以保证外部样式类的优先级。
+
+::: tip 请注意
+`Wot Design Uni` 的组件均设置了`scoped`，所以它的 CSS 只会影响当前组件的元素，和 Shadow DOM 中的样式封装类似，处于 `scoped` 样式中的选择器如果想要做更“深度”的选择，也即：影响到子组件，可以使用 `:deep()` 这个伪类：
+```css
+<style scoped>
+.a :deep(.b) {
+  /* ... */
+}
+</style>
+```
+上面的代码会被编译成：
+```css
+.a[data-v-f3f3eg9] .b {
+  /* ... */
+}
+```
+
+详细可见[单文件组件 CSS 功能](https://cn.vuejs.org/api/sfc-css-features.html#sfc-css-features)。
+:::
 
 ```vue
 <wd-button custom-class="custom-button" type="primary">主要按钮</wd-button>
