@@ -2,7 +2,11 @@
   <template v-if="sticky">
     <wd-sticky-box>
       <view
-        :class="`wd-tabs ${customClass} ${slidableNum < items.length ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`"
+        :class="`wd-tabs ${customClass}
+         ${slidableNum < items.length ? 'is-slide' : ''} 
+         ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}
+         ${showScrollbar ? '' : 'hide-scrollbar'}
+         `"
         :style="customStyle"
       >
         <wd-sticky :offset-top="offsetTop">
@@ -76,11 +80,16 @@
   </template>
 
   <template v-else>
-    <view :class="`wd-tabs  ${customClass} ${slidableNum < items.length ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`">
+    <view
+      :class="`wd-tabs ${customClass} 
+      ${slidableNum < items.length ? 'is-slide' : ''}
+      ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}
+      ${showScrollbar ? '' : 'hide-scrollbar'}`"
+    >
       <!--头部导航容器-->
       <view class="wd-tabs__nav">
         <view class="wd-tabs__nav--wrap">
-          <scroll-view :showScrollbar="showScrollbar" :scroll-x="slidableNum < items.length" scroll-with-animation :scroll-left="state.scrollLeft">
+          <scroll-view :scroll-x="slidableNum < items.length" scroll-with-animation :scroll-left="state.scrollLeft">
             <view class="wd-tabs__nav-container">
               <!--nav列表-->
               <view

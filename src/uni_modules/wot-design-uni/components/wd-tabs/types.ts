@@ -64,7 +64,7 @@ export const tabsProps = {
    *
    * 默认为 false
    */
-  showScrollbar: makeBooleanProp(false)
+  showScrollbar: makeBooleanProp(true)
 }
 
 export type TabsProps = ExtractPropTypes<typeof tabsProps>
