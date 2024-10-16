@@ -14,9 +14,11 @@
           >
             <view class="wd-month__day-container">
               <view class="wd-month__day-top">{{ item.topInfo }}</view>
-              <view class="wd-month__day-text">
-                {{ item.text }}
-              </view>
+              <wd-badge :is-dot="item.isDot" :top="6" :right="6">
+                <view class="wd-month__day-text">
+                  {{ item.text }}
+                </view>
+              </wd-badge>
               <view class="wd-month__day-bottom">{{ item.bottomInfo }}</view>
             </view>
           </view>
@@ -345,7 +347,8 @@ function getFormatterDate(date: number, day: string | number, type?: CalendarDay
     topInfo: '',
     bottomInfo: '',
     type,
-    disabled: compareDate(date, props.minDate) === -1 || compareDate(date, props.maxDate) === 1
+    disabled: compareDate(date, props.minDate) === -1 || compareDate(date, props.maxDate) === 1,
+    isDot: false
   }
   if (props.formatter) {
     if (isFunction(props.formatter)) {

@@ -255,6 +255,40 @@ const displayFormatTabLabel = (items) => {
 
 ```
 
+## 自定义icon
+
+添加 `right-icon` 插槽来自定义右侧图标。
+
+
+```html
+ <wd-datetime-picker label="自定义icon" v-model="value" ref="dateTimePickerRef">
+        <template #right-icon="{ disabled, readonly }">
+          <view @click.stop="rightIconClick" v-if="!disabled && !readonly">
+            <wd-icon custom-class="wd-picker__arrow" :name="isEmpty ? 'arrow-right' : 'close'" />
+          </view>
+        </template>
+</wd-datetime-picker>
+```
+
+```typescript
+import type {,
+  DatetimePickerExpose
+} from '@/uni_modules/wot-design-uni/components/wd-datetime-picker/types'
+
+const value = ref<any[]>(['', Date.now()])
+const dateTimePickerRef=ref<DatetimePickerExpose>(null)
+
+/* right-icon点击事件 */
+function rightIconClick() {
+  if (isEmpty.value) {
+    dateTimePickerRef.value!.open()
+    return
+  }
+  value.value = []
+}
+```
+
+
 ## Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
@@ -328,6 +362,7 @@ const displayFormatTabLabel = (items) => {
 |------|-----|---------|
 | default | 使用默认插槽 | - |
 | label | 左侧标题插槽 | - |
+| right-icon | 右侧图标插槽,作用域参数：{ disabled, readonly } | $LOWEST_VERSION$ |
 
 ## 外部样式类
 
