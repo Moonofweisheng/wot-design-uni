@@ -63,6 +63,7 @@ import { useCell } from '../composables/useCell'
 import { useParent } from '../composables/useParent'
 import { FORM_KEY } from '../wd-form/types'
 import { cellProps } from './types'
+import { isNone } from '../common/util'
 
 const props = defineProps(cellProps)
 const emit = defineEmits(['click'])
@@ -70,7 +71,7 @@ const emit = defineEmits(['click'])
 const cell = useCell()
 
 const isBorder = computed(() => {
-  return Boolean(props.border ?? cell.border.value)
+  return Boolean(!isNone(props.border) ? props.border : cell.border.value)
 })
 
 const { parent: form } = useParent(FORM_KEY)
