@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2022-11-01 17:12:57
- * @LastEditTime: 2024-01-01 22:23:31
+ * @LastEditTime: 2024-10-10 13:41:19
  * @LastEditors: weisheng
  * @Description: 组件发版问答
- * @FilePath: /wot-design-uni/build/release.js
+ * @FilePath: \wot-design-uni\build\release.js
  * 记得注释
  */
 const inquirer = require('inquirer')
@@ -95,6 +95,7 @@ inquirer
     package.version = newVersion
     writeFileSync(path.resolve(src, 'package.json'), JSON.stringify(package))
     // 生成制品
+    execSync('node build/buildThemeVars.js')
     execSync('pnpm lint')
     execSync('git add -A ')
     execSync(`git commit -am "build: compile ${newVersion}"`)

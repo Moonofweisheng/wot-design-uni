@@ -655,7 +655,7 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 | name    | 说明             | 最低版本 |
 | ------- | ---------------- | -------- |
 | default | 上传唤起插槽样式 | -        |
-| preview-cover | 自定义覆盖在预览区域上方的内容 |   $LOWEST_VERSION$   |
+| preview-cover | 自定义覆盖在预览区域上方的内容 |   1.3.12   |
 
 ## Events
 

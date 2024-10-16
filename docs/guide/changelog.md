@@ -1,6 +1,30 @@
 # 更新日志 
 
 
+### [1.3.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.11...v1.3.12) (2024-10-08)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Upload文件小程序找不到文件,显示的问题 ([c13e605](https://github.com/Moonofweisheng/wot-design-uni/commit/c13e6058a2c665c174806aebd353294113c4007e))
+* 🐛 Radio修复在cell里面高度的问题 ([f9deacf](https://github.com/Moonofweisheng/wot-design-uni/commit/f9deacf40eed17a37558ca96319880822ca897d5))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  优化捐赠榜单中捐赠人链接的展示效果 ([898f079](https://github.com/Moonofweisheng/wot-design-uni/commit/898f07985e602ad18a84c06b5bd6183dd61142cd))
+* ✏️  Upload添加preview-cover最低版本 ([52f9bf6](https://github.com/Moonofweisheng/wot-design-uni/commit/52f9bf654b26a09c20b7118efb331f7e6228ea79))
+
+
+### ✨ Features | 新功能
+
+* ✨ 新增 FloatingPanel 浮动面板组件 ([#616](https://github.com/Moonofweisheng/wot-design-uni/issues/616)) ([e2966fd](https://github.com/Moonofweisheng/wot-design-uni/commit/e2966fdd01d6c91ab9499fbc95e4f7160a83deb5)), closes [#509](https://github.com/Moonofweisheng/wot-design-uni/issues/509)
+* ✨ 新增支持法语、日语等9 种语言 ([#637](https://github.com/Moonofweisheng/wot-design-uni/issues/637)) ([691a7b5](https://github.com/Moonofweisheng/wot-design-uni/commit/691a7b57727af45f3c2f99437740be72e8be0f86))
+* ✨ StatusTip缺省提示组件提供图片内容插槽([#538](https://github.com/Moonofweisheng/wot-design-uni/issues/538)) ([#615](https://github.com/Moonofweisheng/wot-design-uni/issues/615)) ([c6b2cf8](https://github.com/Moonofweisheng/wot-design-uni/commit/c6b2cf84db1cb5536516606999c1fa3d6bd1dbe3))
+* ✨ ToolTip 组件 offset 属性支持数组和对象写法 ([#625](https://github.com/Moonofweisheng/wot-design-uni/issues/625)) ([5092c5a](https://github.com/Moonofweisheng/wot-design-uni/commit/5092c5a6548fe7222e0d6e2614020f15ce95c5df)), closes [#560](https://github.com/Moonofweisheng/wot-design-uni/issues/560)
+* ✨ Upload新增preview-cover插槽 ([ef6433d](https://github.com/Moonofweisheng/wot-design-uni/commit/ef6433d81c576db8b55715a14a574a6d392478df))
+* ✨Calendar日历添加open事件 ([#627](https://github.com/Moonofweisheng/wot-design-uni/issues/627)) ([43a5da6](https://github.com/Moonofweisheng/wot-design-uni/commit/43a5da631d4402319d4e3f0739f2ab7e960e497f)), closes [#624](https://github.com/Moonofweisheng/wot-design-uni/issues/624)
+
 ### [1.3.11](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.10...v1.3.11) (2024-09-23)
 
 

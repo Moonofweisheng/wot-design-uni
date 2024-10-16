@@ -87,6 +87,8 @@ $-size-side-padding: var(--wot-size-side-padding, 15px) !default; // 屏幕两�
 
 /*-------------------------------- Theme color application size.  end --------------------------------*/
 
+/* component var */
+
 /* action-sheet */
 $-action-sheet-weight: var(--wot-action-sheet-weight, 500) !default; // 面板字重
 $-action-sheet-radius: var(--wot-action-sheet-radius, 16px) !default; // 面板圆角大小
@@ -764,6 +766,9 @@ $-circle-text-color: var(--wot-circle-text-color, $-color-content) !default; // 
 /* swiper */
 $-swiper-radius: var(--wot-swiper-radius, 8px);
 $-swiper-item-padding: var(--wot-swiper-item-padding, 0);
+$-swiper-item-text-color: var(--wot-swiper-item-text-color, #ffffff);
+$-swiper-item-text-fs: var(--wot-swiper-item-text-fs, $-fs-title);
+
 
 /* swiper-nav */
 // dot & dots-bar
@@ -954,4 +959,3 @@ $-floating-panel-bar-height: var(--wot-floating-panel-bar-height, 3px) !default;
 $-floating-panel-bar-bg: var(--wot-floating-panel-bar-bg, $-color-gray-5) !default; // bar 背景色
 $-floating-panel-bar-radius: var(--wot-floating-panel-bar-radius, 4px) !default; // bar 圆角
 $-floating-panel-content-bg: var(--wot-floating-panel-content-bg, $-color-white) !default; // 内容背景色
-// $-floating-panel-content-font-color: var(--wot-floating-panel-content-font-color, $-font-gray-1) !default; // 内容字体颜色

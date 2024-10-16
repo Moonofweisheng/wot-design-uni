@@ -157,7 +157,7 @@ const control = () => {
 | placement     | Tooltip 的出现位置                         | string         | top / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end | bottom | -        |
 | disabled      | Tooltip 是否可用                           | boolean        | -                                                                                                                               | false  | -        |
 | visible-arrow | 是否显示 Tooltip 箭头                      | boolean        | -                                                                                                                               | true   | -        |
-| offset        | 出现位置的偏移量                           | number | number[] | {x:0, y:0}         | -                                                                                                                               | 0      | $LOWEST_VERSION$        |
+| offset        | 出现位置的偏移量                           | number | number[] | {x:0, y:0}         | -                                                                                                                               | 0      | 1.3.12        |
 | show-close    | 是否显示 Tooltip 内部的关闭按钮            | boolean        | -                                                                                                                               | false  | -        |
 
 ## Events
