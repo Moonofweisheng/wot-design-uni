@@ -358,6 +358,10 @@ export function isNotUndefined<T>(value: T): value is NotUndefined<T> {
   return !isUndefined(value)
 }
 
+export function isNone(value: any): value is null | undefined {
+  return value === null || value === void 0
+}
+
 /**
  * 检查给定的值是否为奇数
  * @param value 要检查的值
