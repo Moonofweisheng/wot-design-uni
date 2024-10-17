@@ -13,6 +13,10 @@ export type DropMenuItemBeforeToggle = (option: DropMenuItemBeforeToggleOption) 
 export const dorpMenuItemProps = {
   ...baseProps,
   /**
+   * 菜单是否打开
+   */
+  open: Boolean,
+  /**
    * DropMenuItem 左侧文字样式
    */
   customTitle: makeStringProp(''),

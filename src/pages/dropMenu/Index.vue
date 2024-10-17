@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <wd-message-box></wd-message-box>
-    <view class="demo-body" @click="closeOutside">
+    <view class="demo-body">
       <demo-block title="基本用法" transparent>
         <wd-drop-menu>
           <wd-drop-menu-item v-model="value1" :options="option1" @change="handleChange1" />
@@ -36,6 +36,12 @@
       <demo-block title="自定义菜单图标" transparent>
         <wd-drop-menu>
           <wd-drop-menu-item title="地图" icon="location" icon-size="24px" />
+        </wd-drop-menu>
+      </demo-block>
+      <demo-block title="外部控制打开关闭" transparent>
+        <wd-switch v-model="open" />
+        <wd-drop-menu>
+          <wd-drop-menu-item v-model="value11" v-model:open="open" :options="option1" @change="handleChange1" />
         </wd-drop-menu>
       </demo-block>
       <demo-block title="异步打开/关闭" transparent>
@@ -83,6 +89,9 @@ const value7 = ref<number>(0)
 const value8 = ref<number>(0)
 const value9 = ref<number>(0)
 const value10 = ref<number>(0)
+const value11 = ref<number>(0)
+
+const open = ref<boolean>(false)
 
 const option1 = ref<Record<string, any>[]>([
   { label: '全部商品', value: 0 },
