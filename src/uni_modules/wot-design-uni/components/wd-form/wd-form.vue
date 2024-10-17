@@ -97,7 +97,7 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
                 .catch((error) => {
                   errors.push({
                     prop,
-                    message: error || rule.message
+                    message: error.message || error || rule.message
                   })
                   valid = false
                 })
