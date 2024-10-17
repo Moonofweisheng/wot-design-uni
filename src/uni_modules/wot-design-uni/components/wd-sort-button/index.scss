@@ -68,9 +68,9 @@
 
     @include when(active) {
 
-      :deep(.wd-sort-button__icon-up),
-      :deep(.wd-sort-button__icon-down) {
-        transform: scale(calc((10 / 14)));
+      &.ascending :deep(.wd-sort-button__icon.ascending),
+      &.descending :deep(.wd-sort-button__icon.descending) {
+        color: $-sort-button-icon-active-color;
       }
     }
   }
@@ -79,11 +79,13 @@
     display: block !important;
     line-height: 1.1;
     transform: scale(calc((10 / 14))) translate(0, 7px);
+    color: $-sort-button-icon-color;
   }
 
   @include edeep(icon-down) {
     display: block !important;
     line-height: 1.1;
     transform: scale(calc((10 / 14))) translate(0, -7px);
+    color: $-sort-button-icon-color;
   }
 }

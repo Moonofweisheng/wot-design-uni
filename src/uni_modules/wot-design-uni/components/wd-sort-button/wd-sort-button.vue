@@ -4,9 +4,18 @@
       <view :class="`wd-sort-button__left ${modelValue !== 0 ? 'is-active' : ''}`">
         {{ title }}
       </view>
-      <view :class="`wd-sort-button__right ${modelValue !== 0 ? 'is-active' : ''}`">
-        <wd-icon v-if="modelValue !== 1" name="arrow-up" custom-class="wd-sort-button__icon-up" />
-        <wd-icon v-if="modelValue !== -1" name="arrow-down" custom-class="wd-sort-button__icon-down" />
+      <view
+        class="wd-sort-button__right"
+        :class="{
+          'is-active': modelValue !== 0,
+          ascending: modelValue === 1,
+          descending: modelValue === -1
+        }"
+      >
+        <slot name="sort-icon" :sort="modelValue">
+          <wd-icon name="arrow-up" custom-class="wd-sort-button__icon ascending wd-sort-button__icon-up" />
+          <wd-icon name="arrow-down" custom-class="wd-sort-button__icon descending wd-sort-button__icon-down" />
+        </slot>
       </view>
     </view>
   </view>
