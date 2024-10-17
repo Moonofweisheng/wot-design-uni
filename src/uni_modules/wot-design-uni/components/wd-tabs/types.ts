@@ -24,6 +24,10 @@ export const tabsProps = {
    */
   mapNum: makeNumberProp(10),
   /**
+   * 显示导航地图时的标题
+   */
+  mapTitle: makeStringProp(''),
+  /**
    * 粘性布局
    */
   sticky: makeBooleanProp(false),
