@@ -94,11 +94,23 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
                     valid = false
                   }
                 })
-                .catch((error) => {
-                  errors.push({
-                    prop,
-                    message: error.message || error || rule.message
-                  })
+                .catch((error: any) => {
+                  if (error instanceof Error) {
+                    errors.push({
+                      prop,
+                      message: error.message || rule.message
+                    })
+                  } else if (typeof error === 'string') {
+                    errors.push({
+                      prop,
+                      message: error
+                    })
+                  } else {
+                    errors.push({
+                      prop,
+                      message: rule.message
+                    })
+                  }
                   valid = false
                 })
             )
