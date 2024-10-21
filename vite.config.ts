@@ -24,6 +24,13 @@ export default defineConfig({
     viteCompression()
     // #endif
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler'
+      }
+    }
+  },
   build: {
     //   关闭生成map文件 可以达到缩小打包体积
     sourcemap: false // 这个生产环境一定要关闭，不然打包的产物会很大
