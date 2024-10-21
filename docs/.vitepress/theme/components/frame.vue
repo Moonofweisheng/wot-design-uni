@@ -5,8 +5,7 @@
 <script setup lang="ts">
 import { useRoute, useData } from 'vitepress'
 import { computed, onMounted, ref, watch } from 'vue'
-const baseUrl =
-  process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
+const baseUrl = ref('http://localhost:5173/demo/#/')
 
 const route = useRoute()
 const href = computed(() => {
@@ -14,9 +13,9 @@ const href = computed(() => {
   const paths = path ? path.split('.')[0].split('/') : []
   let href = ''
   if (paths.length) {
-    href = baseUrl + `pages/${kebabToCamel(paths[paths.length - 1])}/Index`
+    href = baseUrl.value + `pages/${kebabToCamel(paths[paths.length - 1])}/Index`
   } else {
-    href = baseUrl
+    href = baseUrl.value
   }
   return href
 })
@@ -26,6 +25,8 @@ const iframe = ref<HTMLIFrameElement | null>(null)
 const vitepressData = useData()
 
 onMounted(() => {
+  baseUrl.value =
+    process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
   iframe.value &&
     iframe.value.addEventListener('load', () => {
       // 在iframe加载完成后执行发送消息的操作
