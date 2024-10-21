@@ -84,6 +84,6 @@ $default-theme: #4d80f0 !default; // 正常色
     $arg: $arg + ","+ themeColor($theme-color, nth($set, $i), nth($color-list, $i)) + " "+ nth($per-list, $i);
   }
 
-  @return linear-gradient(unquote($arg));
+  @return linear-gradient(string.unquote($arg));
 
 }
