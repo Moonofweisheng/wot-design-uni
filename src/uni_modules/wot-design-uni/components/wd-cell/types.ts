@@ -44,7 +44,7 @@ export const cellProps = {
   /**
    * 是否展示边框线
    */
-  border: Boolean,
+  border: makeBooleanProp(void 0),
   /**
    * 设置左侧标题宽度
    */

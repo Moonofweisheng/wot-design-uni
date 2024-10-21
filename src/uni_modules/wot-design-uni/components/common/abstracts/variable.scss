@@ -766,6 +766,9 @@ $-circle-text-color: var(--wot-circle-text-color, $-color-content) !default; // 
 /* swiper */
 $-swiper-radius: var(--wot-swiper-radius, 8px);
 $-swiper-item-padding: var(--wot-swiper-item-padding, 0);
+$-swiper-item-text-color: var(--wot-swiper-item-text-color, #ffffff);
+$-swiper-item-text-fs: var(--wot-swiper-item-text-fs, $-fs-title);
+
 
 /* swiper-nav */
 // dot & dots-bar
