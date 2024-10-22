@@ -35,7 +35,8 @@
       <wd-calendar-view type="daterange" :max-range="3" v-model="value7"></wd-calendar-view>
     </demo-block>
     <demo-block title="自定义日期" :hor="0">
-      <wd-calendar-view type="daterange" allow-same-day v-model="value6" :formatter="formatter"></wd-calendar-view>
+      <wd-calendar-view type="weekrange" allow-same-day v-model="value6" :formatter="formatter"></wd-calendar-view>
+      <wd-calendar-view type="monthrange" allow-same-day v-model="value6" :formatter="formatter"></wd-calendar-view>
     </demo-block>
     <demo-block title="设置周起始日" :hor="0">
       <wd-calendar-view :first-day-of-week="1" v-model="value8"></wd-calendar-view>
@@ -79,13 +80,15 @@ const formatter: CalendarFormatter = (day) => {
   const nowYear = now.getFullYear()
   const nowMonth = now.getMonth()
   const nowDa = now.getDate()
-
+  console.log(month)
   if (year === nowYear && month === nowMonth && da === nowDa) {
     day.topInfo = '今天'
+    day.isDot = true
   }
 
   if (month === 5 && da === 18) {
     day.topInfo = '618大促'
+    day.isDot = true
   }
 
   if (month === 10 && da === 11) {
@@ -94,10 +97,12 @@ const formatter: CalendarFormatter = (day) => {
 
   if (day.type === 'start') {
     day.bottomInfo = '开始'
+    day.isDot = true
   }
 
   if (day.type === 'end') {
     day.bottomInfo = '结束'
+    day.isDot = true
   }
 
   if (day.type === 'same') {

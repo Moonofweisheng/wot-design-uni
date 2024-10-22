@@ -147,6 +147,7 @@ function handleChange({ value }) {
 | topInfo    | string    | 上方提示信息                                                                                                                                            | -        |
 | bottomInfo | string    | 下方提示信息                                                                                                                                            | -        |
 | disabled   | boolean   | 是否禁用                                                                                                                                                | -        |
+| isDot   | boolean   | 是否开启红点                                                                                                                                                | `($LOWEST_VERSION$)`       |
 
 ```html
 <wd-calendar-view type="daterange" v-model="value" allow-same-day :formatter="formatter" @change="handleChange"></wd-calendar-view>
