@@ -19,7 +19,7 @@
                     :class="`wd-tabs__nav-item  ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
                     :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
                   >
-                    {{ item.title }}
+                    <text class="wd-tabs__nav-item-text">{{ item.title }}</text>
                   </view>
                   <!--下划线-->
                   <view class="wd-tabs__line" :style="state.lineStyle"></view>
@@ -90,7 +90,7 @@
                 :class="`wd-tabs__nav-item ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
                 :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
               >
-                {{ item.title }}
+                <text class="wd-tabs__nav-item-text">{{ item.title }}</text>
               </view>
               <!--下划线-->
               <view class="wd-tabs__line" :style="state.lineStyle"></view>
@@ -152,6 +152,7 @@ import { useChildren } from '../composables/useChildren'
 import { useTranslate } from '../composables/useTranslate'
 
 const $item = '.wd-tabs__nav-item'
+const $itemText = '.wd-tabs__nav-item-text'
 const $container = '.wd-tabs__nav-container'
 
 const props = defineProps(tabsProps)
@@ -308,14 +309,21 @@ function toggleMap() {
  * @description 更新navBar underline的偏移量
  * @param {Boolean} animation 是否伴随动画
  */
-function updateLineStyle(animation: boolean = true) {
+async function updateLineStyle(animation: boolean = true) {
   if (!state.inited) return
-  const { lineWidth, lineHeight } = props
-  getRect($item, true, proxy).then((rects) => {
+  const { autoLineWidth, lineWidth, lineHeight } = props
+  try {
+    const rects = await getRect($item, true, proxy)
     const lineStyle: CSSProperties = {}
 
     if (isDef(lineWidth)) {
       lineStyle.width = addUnit(lineWidth)
+    } else {
+      if (autoLineWidth) {
+        const textRects = await getRect($itemText, true, proxy)
+        const textWidth = Number(textRects[state.activeIndex].width)
+        lineStyle.width = addUnit(textWidth)
+      }
     }
     if (isDef(lineHeight)) {
       lineStyle.height = addUnit(lineHeight)
@@ -328,7 +336,9 @@ function updateLineStyle(animation: boolean = true) {
       lineStyle.transition = 'width 300ms ease, transform 300ms ease'
     }
     state.lineStyle = objToStyle(lineStyle)
-  })
+  } catch (error) {
+    console.error('[wot design] error(wd-tabs): update line style failed', error)
+  }
 }
 /**
  * @description 通过控制tab的active来展示选定的tab
