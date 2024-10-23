@@ -57,6 +57,25 @@ const tab = ref('例子')
 }
 ```
 
+## 自动调整底部条宽度
+
+设置 `auto-line-width` 属性，自动调整底部条宽度为文本内容宽度。
+
+```html
+<wd-tabs v-model="tab" @change="handleChange" auto-line-width>
+  <block v-for="item in tabs" :key="item">
+    <wd-tab :title="`${item}`" :name="item">
+      <view class="content">内容{{ tab }}</view>
+    </wd-tab>
+  </block>
+</wd-tabs>
+```
+
+```typescript
+const tabs = ref(['Wot', 'Design', 'Uni'])
+const tab = ref('Design')
+```
+
 ## 粘性布局
 
 设置 `sticky` 属性，使用粘性布局。可以设置 `offset-top` 属性，当距离窗口顶部多少像素时，固定标签头。在`H5`端使用自定义导航栏时需要参考[sticky 的吸顶距离](/component/sticky.html#吸顶距离)进行配置。
@@ -141,6 +160,7 @@ const tab = ref('例子')
 | sticky        | 粘性布局                         | boolean         | -      | false  | -        |
 | offset-top    | 粘性布局时距离窗口顶部距离       | number          | -      | 0      | -        |
 | swipeable     | 开启手势滑动                     | boolean         | -      | false  | -        |
+| autoLineWidth | 自动调整底部条宽度               | boolean         | -      | false  | -        |
 | lineWidth     | 底部条宽度，单位像素             | number          | -      | 19     | -        |
 | lineHeight    | 底部条高度，单位像素             | number          | -      | 3      | -        |
 | color         | 文字颜色                         | string          | -      | -      | -        |
