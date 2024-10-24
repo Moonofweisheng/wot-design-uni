@@ -28,10 +28,9 @@ export default {
 
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { ref, watch, nextTick, computed, getCurrentInstance, type CSSProperties } from 'vue'
+import { ref, watch, nextTick, computed, getCurrentInstance, type CSSProperties, onMounted, onActivated, onDeactivated, reactive } from 'vue'
 import { getRect, isArray, isDef, objToStyle } from '../common/util'
-import { noticeBarProps } from './types'
-
+import { type NoticeBarExpose, noticeBarProps } from './types'
 const $wrap = '.wd-notice-bar__wrap'
 const $content = '.wd-notice-bar__content'
 
@@ -40,13 +39,26 @@ const emit = defineEmits(['close', 'next', 'click'])
 
 const wrapWidth = ref<number>(0)
 const show = ref<boolean>(true)
-const animation = ref<string>('')
-const currentIndex = ref(0)
+const currentIndex = ref<number>(0)
 const textArray = computed(() => (Array.isArray(props.text) ? props.text : [props.text]))
 const currentText = computed(() => textArray.value[currentIndex.value])
-const verticalIndex = ref(0)
+const verticalIndex = ref<number>(0)
+const wrapRect = ref<UniApp.NodeInfo | null>(null) // 外层容器节点信息
+const contentRect = ref<UniApp.NodeInfo | null>(null) // 内容节点信息
 const isHorizontal = computed(() => props.direction === 'horizontal')
 const isVertical = computed(() => props.direction === 'vertical')
+
+const transitionState = reactive<CSSProperties>({
+  transitionProperty: 'unset',
+  transitionDelay: 'unset',
+  transitionDuration: 'unset',
+  transform: 'none',
+  transitionTimingFunction: 'linear'
+})
+
+const animation = computed(() => {
+  return objToStyle(transitionState)
+})
 
 const rootStyle = computed(() => {
   const style: CSSProperties = {}
@@ -79,28 +91,66 @@ const noticeBarClass = computed(() => {
 const { proxy } = getCurrentInstance() as any
 
 watch(
-  [() => props.text],
+  () => props.text,
   () => {
-    nextTick(() => scroll())
+    reset()
   },
-  { deep: true, immediate: true }
+  { deep: true }
 )
+
+onMounted(() => {
+  startTransition()
+  // #ifdef APP-PLUS
+  const pages = getCurrentPages()
+  const currentPage = pages[pages.length - 1]
+  const currentWebview = currentPage.$getAppWebview!()
+  currentWebview.addEventListener('hide', () => {
+    stopTransition()
+  })
+  currentWebview.addEventListener('show', () => {
+    startTransition()
+  })
+  // #endif
+})
+
+onActivated(() => {
+  startTransition()
+})
+
+onDeactivated(() => {
+  stopTransition()
+})
+
+function reset() {
+  stopTransition()
+  startTransition()
+}
+
+function startTransition() {
+  nextTick(() => scroll())
+}
+
+function stopTransition() {
+  transitionState.transitionProperty = 'unset'
+  transitionState.transitionDelay = 'unset'
+  transitionState.transitionDuration = 'unset'
+  transitionState.transform = 'none'
+  transitionState.transitionTimingFunction = 'linear'
+  currentIndex.value = 0
+  verticalIndex.value = 0
+}
 
 function handleClose() {
   show.value = false
   emit('close')
 }
 
-function initAnimation({ duration, delay, translate }: { duration: number; delay: number; translate: number }) {
-  const style: CSSProperties = {
-    transitionProperty: 'all',
-    transitionDelay: `${delay}s`,
-    transitionDuration: `${duration}s`,
-    transform: `${props.direction === 'vertical' ? 'translateY' : 'translateX'}(${translate}px)`,
-    transitionTimingFunction: 'linear'
-  }
-
-  return objToStyle(style)
+function setTransition({ duration, delay, translate }: { duration: number; delay: number; translate: number }) {
+  transitionState.transitionProperty = 'all'
+  transitionState.transitionDelay = `${delay}s`
+  transitionState.transitionDuration = `${duration}s`
+  transitionState.transform = `${props.direction === 'vertical' ? 'translateY' : 'translateX'}(${translate}px)`
+  transitionState.transitionTimingFunction = 'linear'
 }
 
 function queryRect() {
@@ -109,7 +159,7 @@ function queryRect() {
 
 async function verticalAnimate(height: number) {
   const translate = -(height / (textArray.value.length + 1)) * (currentIndex.value + 1)
-  animation.value = initAnimation({
+  setTransition({
     duration: height / (textArray.value.length + 1) / props.speed,
     delay: props.delay,
     translate
@@ -117,22 +167,23 @@ async function verticalAnimate(height: number) {
 }
 
 async function scroll() {
-  const [wrapRect, contentRect] = await queryRect()
-  if (!wrapRect.width || !contentRect.width || !contentRect.height) return
-
-  wrapWidth.value = wrapRect.width
+  const [wRect, cRect] = await queryRect()
+  if (!wRect.width || !cRect.width || !cRect.height) return
+  wrapRect.value = wRect
+  contentRect.value = cRect
+  wrapWidth.value = wRect.width
 
   if (isHorizontal.value) {
     if (props.scrollable) {
-      animation.value = initAnimation({
-        duration: contentRect.width / props.speed,
+      setTransition({
+        duration: cRect.width / props.speed,
         delay: props.delay,
-        translate: -contentRect.width
+        translate: -cRect.width
       })
     }
   } else {
     if (textArray.value.length > 1) {
-      verticalAnimate(contentRect.height)
+      verticalAnimate(cRect.height)
     }
   }
 }
@@ -148,15 +199,15 @@ function next() {
 
 function animationEnd() {
   if (isHorizontal.value) {
-    animation.value = initAnimation({
+    setTransition({
       duration: 0,
       delay: 0,
-      translate: wrapWidth.value + 1 // +1容错空间，防止露出来一丢丢
+      translate: wrapWidth.value + 1
     })
   } else {
     if (++verticalIndex.value >= textArray.value.length) {
       verticalIndex.value = 0
-      animation.value = initAnimation({
+      setTransition({
         duration: 0,
         delay: 0,
         translate: 0
@@ -168,18 +219,25 @@ function animationEnd() {
     next() // 更换下一条文本
 
     nextTick(async () => {
-      // 因为文本会发生变化，所以每一次都需要查询
-      const [_, contentRect] = await queryRect()
-      if (!contentRect.width || !contentRect.height) return
+      try {
+        const [wRect, cRect] = await queryRect()
+        wrapRect.value = wRect
+        contentRect.value = cRect
+        wrapWidth.value = wRect.width || 0
+      } catch (error) {
+        // console.error(error)
+      }
+
+      if (!contentRect.value || !contentRect.value.width || !contentRect.value.height) return
 
       if (isHorizontal.value) {
-        animation.value = initAnimation({
-          duration: (wrapWidth.value + contentRect.width) / props.speed,
+        setTransition({
+          duration: (wrapWidth.value + contentRect.value.width) / props.speed,
           delay: props.delay,
-          translate: -contentRect.width
+          translate: -contentRect.value.width
         })
       } else {
-        verticalAnimate(contentRect.height)
+        verticalAnimate(contentRect.value.height)
       }
     })
 
@@ -199,6 +257,8 @@ function handleClick() {
       }
   emit('click', result)
 }
+
+defineExpose<NoticeBarExpose>({ reset })
 </script>
 
 <style lang="scss" scoped>

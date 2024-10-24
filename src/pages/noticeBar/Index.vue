@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2024-04-16 13:13:31
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-design-uni\src\pages\noticeBar\Index.vue
- * 记得注释
--->
 <template>
   <page-wraper>
     <view>
@@ -73,11 +64,24 @@
         <wd-notice-bar @click="handleClick" prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" custom-class="space" />
         <wd-notice-bar @click="handleClick" prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :delay="3" custom-class="space" />
       </demo-block>
+
+      <demo-block title="重置播放动画">
+        <wd-notice-bar ref="notice" prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" custom-class="space" />
+
+        <wd-button @click="handleReset">重置播放动画</wd-button>
+      </demo-block>
     </view>
   </page-wraper>
 </template>
 <script lang="ts" setup>
+import { type NoticeBarInstance } from '@/uni_modules/wot-design-uni/components/wd-notice-bar/types'
 import { ref } from 'vue'
+
+const notice = ref<NoticeBarInstance>()
+
+function handleReset() {
+  notice.value?.reset()
+}
 
 const textArray = ref([
   '欢迎使用wot design uni',
