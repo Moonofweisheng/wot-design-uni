@@ -95,7 +95,7 @@ import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
 
 const props = defineProps(pickerProps)
-const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
+const emit = defineEmits(['confirm', 'open', 'cancel', 'clear', 'update:modelValue'])
 
 const pickerViewWd = ref<PickerViewInstance | null>(null)
 const cell = useCell()
@@ -393,6 +393,7 @@ const showClear = computed(() => {
 function handleClear() {
   const clearValue = isArray(pickerValue.value) ? [] : ''
   emit('update:modelValue', clearValue)
+  emit('clear')
 }
 
 // 是否展示箭头

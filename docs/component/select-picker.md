@@ -388,6 +388,7 @@ function handleConfirm({ value, selectedItems }) {
 | cancel   | 点击关闭按钮或者蒙层时触发 | -                                                                                                          | -        |
 | close    | 弹窗关闭时触发             | -                                                                                                          | 1.2.29   |
 | open     | 弹窗打开时触发             | -                                                                                                          | 1.2.29   |
+| clear    | 点击清空按钮时触发     | -                                                                                                    | $LOWEST_VERSION$    |
 
 ## Methods
 

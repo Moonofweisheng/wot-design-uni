@@ -135,7 +135,7 @@ import { selectPickerProps, type SelectPickerExpose } from './types'
 const { translate } = useTranslate('select-picker')
 
 const props = defineProps(selectPickerProps)
-const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue', 'open', 'close'])
+const emit = defineEmits(['change', 'cancel', 'confirm', 'clear', 'update:modelValue', 'open', 'close'])
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
@@ -438,6 +438,7 @@ const showClear = computed(() => {
 
 function handleClear() {
   emit('update:modelValue', props.type === 'checkbox' ? [] : '')
+  emit('clear')
 }
 
 // 是否展示箭头

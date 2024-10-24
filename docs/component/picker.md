@@ -288,9 +288,10 @@ function handleConfirm({ value }) {
 
 | 事件名称 | 说明                   | 参数                                                                                                        | 最低版本 |
 | -------- | ---------------------- | ----------------------------------------------------------------------------------------------------------- | -------- |
-| confirm  | 点击右侧按钮触发       | event.detail = { value, selectedItems }， value 为选中值(多列则为数组)，selectedItems为选中项(多列则为数组) | -        |
+| confirm  | 点击右侧按钮触发       |  { value, selectedItems }， value 为选中值(多列则为数组)，selectedItems为选中项(多列则为数组) | -        |
 | cancel   | 点击左侧按钮触发       | -                                                                                                           | -        |
 | open     | 打开选择器弹出层时触发 | -                                                                                                           | -        |
+| clear    | 点击清空按钮时触发     | -                                                                                                    | $LOWEST_VERSION$    |
 
 ## Methods
 
