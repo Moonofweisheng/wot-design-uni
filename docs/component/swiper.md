@@ -321,14 +321,14 @@ const isLoop = ref(false)
 | snapToEdge                | 边距是否应用到第一个、最后一个元素                                 | `boolean`                         | -                                                                                                      | false        | 0.1.22           |
 | indicator                 | 指示器全部配置                                                     | `SwiperIndicatorProps \| boolean` | -                                                                                                      | true         | 0.1.22           |
 | imageMode                 | 图片裁剪、缩放的模式                                               | `string`                          | 参考官方文档[mode](https://uniapp.dcloud.net.cn/component/image.html#mode-%E6%9C%89%E6%95%88%E5%80%BC) | `aspectFill` | 0.1.55           |
-| autoplayVideo             | 视频是否自动播放，默认自动播放                                     | `boolean`                         | -                                                                                                      | true         | $LOWEST_VERSION$ |
-| stopPreviousVideo         | 切换轮播项时是否停止上一个视频的播放，默认切换时停止播放上一个视频 | `boolean`                         | -                                                                                                      | true         | $LOWEST_VERSION$ |
-| stopAutoplayWhenVideoPlay | 视频播放时是否停止自动轮播                                         | `boolean`                         | -                                                                                                      | false        | $LOWEST_VERSION$ |
+| autoplayVideo             | 视频是否自动播放，默认自动播放                                     | `boolean`                         | -                                                                                                      | true         | 1.3.13 |
+| stopPreviousVideo         | 切换轮播项时是否停止上一个视频的播放，默认切换时停止播放上一个视频 | `boolean`                         | -                                                                                                      | true         | 1.3.13 |
+| stopAutoplayWhenVideoPlay | 视频播放时是否停止自动轮播                                         | `boolean`                         | -                                                                                                      | false        | 1.3.13 |
 | customStyle               | 外部自定义样式                                                     | `string`                          | -                                                                                                      | ''           | 0.1.22           |
 | value-key          | 选项对象中，value 对应的 key        | `string`       | -       | `value`           | 1.3.7   |
-| text-key          | 选项对象中，标题 text 对应的 key        | `string`       | -       | `text`           | $LOWEST_VERSION$   |
-| adjust-height      | 自动以指定滑块的高度为整个容器的高度。当 vertical 为 true 时，默认不调整，仅支付宝小程序支持。| `string`       | `'first' \| 'current' \| 'highest' \| 'none'`       |   `highest`  | $LOWEST_VERSION$   |
-| adjust-vertical-height | vertical 为 true 时强制使 adjust-height 生效。仅支付宝小程序支持。 | `boolean`       | -       | `false`           | $LOWEST_VERSION$   |
+| text-key          | 选项对象中，标题 text 对应的 key        | `string`       | -       | `text`           | 1.3.13   |
+| adjust-height      | 自动以指定滑块的高度为整个容器的高度。当 vertical 为 true 时，默认不调整，仅支付宝小程序支持。| `string`       | `'first' \| 'current' \| 'highest' \| 'none'`       |   `highest`  | 1.3.13   |
+| adjust-vertical-height | vertical 为 true 时强制使 adjust-height 生效。仅支付宝小程序支持。 | `boolean`       | -       | `false`           | 1.3.13   |
 
 
 
@@ -389,8 +389,8 @@ const isLoop = ref(false)
 | customImageClass     | 自定义图片类名，1.3版本将废弃，请使用`customItemClass`代替 | 0.1.22   |
 | customPrevImageClass | 自定义上一个图片类名，1.3版本将废弃，请使用`customPrevClass`代替 | 0.1.22   |
 | customNextImageClass | 自定义下一个图片类名，1.3版本将废弃，请使用`customNextClass`代替 | 0.1.22   |
-| customItemClass     | 自定义子项类名       | $LOWEST_VERSION$   |
-| customPrevClass | 自定义上一个子项类名 | $LOWEST_VERSION$   |
-| customNextClass | 自定义下一个子项类名 | $LOWEST_VERSION$   |
-| customTextClass | 自定义文字标题类名 | $LOWEST_VERSION$   |
-| customTextStyle | 自定义文字标题样式 | $LOWEST_VERSION$   |
+| customItemClass     | 自定义子项类名       | 1.3.13   |
+| customPrevClass | 自定义上一个子项类名 | 1.3.13   |
+| customNextClass | 自定义下一个子项类名 | 1.3.13   |
+| customTextClass | 自定义文字标题类名 | 1.3.13   |
+| customTextStyle | 自定义文字标题样式 | 1.3.13   |

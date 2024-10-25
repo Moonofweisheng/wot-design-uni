@@ -1,6 +1,30 @@
 # 更新日志 
 
 
+### [1.3.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.12...v1.3.13) (2024-10-25)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  快速上手增加vue和uni-app的快速上手链接 ([20148a7](https://github.com/Moonofweisheng/wot-design-uni/commit/20148a7800d12376adedadb32bf29239f02baef3))
+* ✏️  添加关于深度选择的介绍 ([63428f2](https://github.com/Moonofweisheng/wot-design-uni/commit/63428f244ae84574027ea89e19598c3600716f7b))
+* ✏️  文档新增展示优秀案例 ([47c1764](https://github.com/Moonofweisheng/wot-design-uni/commit/47c176490dabda1937abea8342d02cc6cbbcfc02))
+* ✏️  优化文档快速上手章节 ([4e9a9da](https://github.com/Moonofweisheng/wot-design-uni/commit/4e9a9da914a372f1b0f31cfcc7fbc2f96650ef58))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复Notice在Tabbar页面时跳转至其他页面导致播放异常的问题并提供reset方法 ([#680](https://github.com/Moonofweisheng/wot-design-uni/issues/680)) ([7584ac2](https://github.com/Moonofweisheng/wot-design-uni/commit/7584ac2a1249b6bee79669ae57c80da08a17d912)), closes [#358](https://github.com/Moonofweisheng/wot-design-uni/issues/358) [#650](https://github.com/Moonofweisheng/wot-design-uni/issues/650)
+
+
+### ✨ Features | 新功能
+
+* ✨ 为Picker和SelectPicker补充clear事件 ([8fffaa6](https://github.com/Moonofweisheng/wot-design-uni/commit/8fffaa646aad195b33c56719ffb28b2529f3f627))
+* ✨ 移除 Navbar 点击热区的激活态样式 ([60b07e5](https://github.com/Moonofweisheng/wot-design-uni/commit/60b07e514b836c55305536e2ba29ec5239b62de3)), closes [#511](https://github.com/Moonofweisheng/wot-design-uni/issues/511)
+* ✨ cell组件border属性以props为最高优先级 ([#656](https://github.com/Moonofweisheng/wot-design-uni/issues/656)) ([31353ce](https://github.com/Moonofweisheng/wot-design-uni/commit/31353ceafa3bcae01202c40918e579d141957c0a))
+* ✨ picker和selectPicker添加clearable属性 ([b0d60a0](https://github.com/Moonofweisheng/wot-design-uni/commit/b0d60a0b750e8ed2cbae0b55309145c6963e498a))
+* ✨ Swiper 轮播组件支持展示视频和设置轮播项标题 ([#663](https://github.com/Moonofweisheng/wot-design-uni/issues/663)) ([a50c0be](https://github.com/Moonofweisheng/wot-design-uni/commit/a50c0be38465342e5b688b8e10b377d69ba998a6))
+
 ### [1.3.12](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.11...v1.3.12) (2024-10-08)
 
 
