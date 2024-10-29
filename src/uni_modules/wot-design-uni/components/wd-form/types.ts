@@ -35,7 +35,10 @@ export interface FormItemRule {
   required: boolean
   message: string
   pattern?: RegExp
-  validator?: (value: any, rule: FormItemRuleWithoutValidator) => boolean | Promise<string> | Promise<boolean> | Promise<void> | Promise<unknown>
+  validator?: (
+    value: any,
+    rule: FormItemRuleWithoutValidator
+  ) => boolean | Promise<string> | Promise<Error> | Promise<boolean> | Promise<void> | Promise<unknown>
 }
 
 export type FormItemRuleWithoutValidator = Omit<FormItemRule, 'validator'>
