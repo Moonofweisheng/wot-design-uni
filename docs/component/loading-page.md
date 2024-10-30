@@ -77,15 +77,15 @@ const show = ref(false)
 
 ## Attributes
 
-| 参数         | 说明                                | 类型    | 可选值 | 默认值   | 最低版本 |
-| ------------ | ----------------------------------- | ------- | ------ | -------- | -------- |
-| fontSize     | 字体大小                            | string  | -      | 16px     | -        |
-| color        | 字体颜色                            | string  | -      | 18px     | -        |
-| loadingText  | 加载时显示的文字                    | string  | -      | 正在加载 | -        |
-| loading      | 是否加载中                          | boolean | -      | false    | -        |
-| bgColor      | 背景颜色                            | string  | -      | #ffffff  | -        |
-| loadingColor | 加载图标颜色                        | string  | -      | #C8C8C8  | -        |
-| loadingImage | 文字上方用于替换 loading 动画的图片 | string  | -      | 空字符串 | -        |
+| 参数         | 说明                                | 类型    | 可选值 | 默认值   | 最低版本         |
+| ------------ | ----------------------------------- | ------- | ------ | -------- | ---------------- |
+| fontSize     | 字体大小                            | string  | -      | 16px     | $LOWEST_VERSION$ |
+| color        | 字体颜色                            | string  | -      | 18px     | $LOWEST_VERSION$ |
+| loadingText  | 加载时显示的文字                    | string  | -      | 正在加载 | $LOWEST_VERSION$ |
+| loading      | 是否加载中                          | boolean | -      | false    | $LOWEST_VERSION$ |
+| bgColor      | 背景颜色                            | string  | -      | #ffffff  | $LOWEST_VERSION$ |
+| loadingColor | 加载图标颜色                        | string  | -      | #C8C8C8  | $LOWEST_VERSION$ |
+| loadingImage | 文字上方用于替换 loading 动画的图片 | string  | -      | 空字符串 | $LOWEST_VERSION$ |
 
 ## 外部样式类
 
