@@ -212,6 +212,16 @@
       }
     },
     {
+      "path": "pages/loadingPage/Index",
+      "name": "loadingPage",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "LoadingPage 加载页"
+      }
+    },
+    {
       "path": "pages/progress/Index",
       "name": "progress",
       "style": {

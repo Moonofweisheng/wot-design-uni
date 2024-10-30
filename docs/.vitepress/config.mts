@@ -334,6 +334,9 @@ export default defineConfig({
             link: "/component/loading",
             text: "Loading 加载"
           }, {
+            link: "/component/loading-page",
+            text: "LoadingPage 加载页"
+          }, {
             link: "/component/message-box",
             text: "MessageBox 弹框"
           }, {
