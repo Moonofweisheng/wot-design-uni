@@ -8,8 +8,8 @@
       </scroll-view>
       <view
         class="wd-index-bar__sidebar"
-        @touchstart.stop.prevent="handleTouchStart"
-        @touchmove.stop.prevent="handleTouchMove"
+        @touchstart.stop.passive.prevent="handleTouchStart"
+        @touchmove.stop.passive.prevent="handleTouchMove"
         @touchend.stop.prevent="handleTouchEnd"
         @touchcancel.stop.prevent="handleTouchEnd"
       >
