@@ -44,8 +44,8 @@
 </p>
 
 <p align="center">
-  ✈️ <a href="https://wot-design-uni.pages.dev/">文档网站 (推荐)</a>&nbsp;
-  🚀 <a href="https://wot-design-uni.cn">文档网站 (Vercel)</a>&nbsp;
+  🚀 <a href="https://wot-design-uni.cn">文档网站 (推荐)</a>&nbsp;
+  ✈️ <a href="https://wot-design-uni.pages.dev/">文档网站 (cloudflare)</a>&nbsp;
   🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (Netlify)</a>&nbsp;
   🚫 <a href="https://wot-design-uni.gitee.io/">文档网站 (Gitee暂时下线)</a>
 </p>

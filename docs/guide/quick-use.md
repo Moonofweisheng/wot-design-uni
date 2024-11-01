@@ -146,3 +146,13 @@ cli项目使用`uni_modules`安装无需配置，对`Volar`的支持自动生效
 ``` html
 <wd-toast></wd-toast>
 ```
+
+
+## 脚手架
+我们提供了快速上手项目[wot-demo](https://github.com/Moonofweisheng/wot-demo)，它集成了`Wot Design Uni`和众多优秀插件，你可以直接克隆该项目。
+
+你也可以使用[create-uni](https://github.com/uni-helper/create-uni)，通过以下命令快速创建一个起手项目：  
+```bash
+pnpm create uni@latest <你的项目名称> -t wot
+```
+
