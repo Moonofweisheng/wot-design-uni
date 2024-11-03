@@ -22,11 +22,12 @@ hero:
       text: 组件列表
       link: /component/button
     - theme: brand
-      text: 🤖 生活小工具
-      link: /reward/living
-    - theme: brand
       text: 🥤一杯咖啡
       link: /reward/reward
+    - theme: brand
+      text: 🤖 生活小工具
+      link: /reward/living
+
 
 features:
   - icon: 🎯
