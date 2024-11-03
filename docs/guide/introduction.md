@@ -53,6 +53,12 @@
 我们非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16) 提交案例。
 
 
+## 赞助我们
+
+如果您认为 Wot Design Uni 帮助到了您的开发工作，您可以选择[赞助](/reward/reward.html)我们，赞助无门槛，哪怕是一杯柠檬水也好。
+
+捐赠后您的昵称、留言等将会展示在[捐赠榜单](/reward/donor.html)中。
+
 ## 周边生态
 
 | 项目                                                                                                        | 描述                                                 |
@@ -66,7 +72,6 @@
 | [unibest](https://github.com/codercup/unibest)                                                              | 基于 wot-design-uni 的 uni-app 模板                  |
 | [wot-design-uni AI 助手](https://www.coze.cn/store/bot/7347916532258701363)                                 | 一个能回答你关于 wot-design-uni 组件库问题的智能助手 |
 | [uni-ku-root](https://github.com/uni-ku/root)                                                               | 一个模拟 App.vue 原有能力的根组件插件                  |
-
 
 ## 鸣谢
 

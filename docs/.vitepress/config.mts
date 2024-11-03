@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-10-10 14:08:16
+ * @LastEditTime: 2024-11-03 13:30:06
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
@@ -9,20 +9,10 @@
  */
 import { defineConfig } from 'vitepress';
 import viteCompression from 'vite-plugin-compression'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
 
 export default defineConfig({
   vite: {
     plugins: [
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-      }),
-      Components({
-        resolvers: [ElementPlusResolver()],
-      }),
       viteCompression({
         verbose: true,
         disable: false,
@@ -32,19 +22,6 @@ export default defineConfig({
       })
     ],
     ssr: { noExternal: ['element-plus'] }
-    // build: {
-    //   terserOptions: {
-    //     compress: {
-    //       //生产环境时移除console
-    //       drop_console: true,
-    //       drop_debugger: true
-    //     }
-    //   },
-    //   //   关闭文件计算
-    //   reportCompressedSize: false,
-    //   //   关闭生成map文件 可以达到缩小打包体积
-    //   sourcemap: false // 这个生产环境一定要关闭，不然打包的产物会很大
-    // }
   },
   title: `Wot Design Uni`,
   description: '一个参照wot-design打造的uni-app组件库',
@@ -138,9 +115,9 @@ export default defineConfig({
       {
         text: '周边生态',
         items: [
+          { text: '快速上手项目', link: 'https://github.com/Moonofweisheng/wot-demo' },
           { text: 'Vue3 uni-app路由库', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: '多平台小程序CI工具', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
-          { text: '快速上手项目', link: 'https://github.com/Moonofweisheng/wot-starter-retail' },
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
         ],
       },
@@ -183,6 +160,10 @@ export default defineConfig({
         {
           text: '榜上有名',
           link: '/reward/donor',
+        },
+        {
+          text: '🤖 生活小工具',
+          link: '/reward/living',
         },
       ],
 

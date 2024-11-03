@@ -13,14 +13,17 @@ hero:
     alt: Wot Design
   actions:
     - theme: brand
-      text: 快速上手
-      link: /guide/quick-use
+      text: 起步
+      link: /guide/introduction
     - theme: alt
       text: 常见问题
       link: /guide/common-problems
     - theme: alt
       text: 组件列表
       link: /component/button
+    - theme: brand
+      text: 🤖 生活小工具
+      link: /reward/living
     - theme: brand
       text: 🥤一杯咖啡
       link: /reward/reward
