@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="wd-curtain-wrapper">
     <wd-popup
       v-model="show"
       transition="zoom-in"
