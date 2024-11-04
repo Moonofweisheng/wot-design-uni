@@ -120,6 +120,24 @@
 | show-message-card	| 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 | boolean | - | false | - |
 | classPrefix | 类名前缀，用于使用自定义图标，参见[icon](/component/icon#自定义图标) | string | - | 'wd-icon' | 0.1.27 |
 | button-id | 按钮的唯一标识，可用于设置隐私同意授权按钮的id | string | - | - | 1.3.6 |
+| scope | 支付宝小程序使用，当 open-type 为 getAuthorize 时有效。   | ButtonScope    | `phoneNumber` / `userInfo`  | -            | $LOWEST_VERSION$ |
+
+### ButtonOpenType 开放能力
+
+| 属性                      | 说明                                                                                       |
+| ------------------------- | ------------------------------------------------------------------------------------------ |
+| feedback                  | 打开“意见反馈”页面，用户可提交反馈内容并上传日志。                                         |
+| share                     | 触发用户转发                                                                               |
+| getUserInfo               | 获取用户信息，可以从@getuserinfo 回调中获取到用户信息                                      |
+| contact                   | 打开客服会话，如果用户在会话中点击消息卡片后返回应用，可以从 @contact 回调中获得具体信息   |
+| getPhoneNumber            | 获取用户手机号，可以从@getphonenumber 回调中获取到用户信息                                 |
+| launchApp                 | 小程序中打开 APP，可以通过 app-parameter 属性设定向 APP 传的参数                           |
+| openSetting               | 打开授权设置页                                                                             |
+| chooseAvatar              | 获取用户头像，可以从@chooseavatar 回调中获取到头像信息                                     |
+| getAuthorize              | 支持小程序授权，支付宝小程序配合`scope`使用，可以实现`getPhoneNumber`和`getUserInfo`功能。 |
+| lifestyle                 | 关注生活号，支付宝小程序                                                                   |
+| contactShare              | 分享到通讯录好友，支付宝小程序                                                             |
+| agreePrivacyAuthorization | 用户同意隐私协议按钮。可通过 @agreeprivacyauthorization 监听用户同意隐私协议事件。         |
 
 ## Events
 

@@ -26,7 +26,9 @@
     :session-from="sessionFrom"
     :lang="lang"
     :hover-stop-propagation="hoverStopPropagation"
+    :scope="scope"
     @click="handleClick"
+    @getAuthorize="handleGetAuthorize"
     @getuserinfo="handleGetuserinfo"
     @contact="handleConcat"
     @getphonenumber="handleGetphonenumber"
@@ -103,6 +105,18 @@ watch(
 function handleClick(event: any) {
   if (!props.disabled && !props.loading) {
     emit('click', event)
+  }
+}
+
+/**
+ * 支付宝小程序授权
+ * @param event
+ */
+function handleGetAuthorize(event: any) {
+  if (props.scope === 'phoneNumber') {
+    handleGetphonenumber(event)
+  } else if (props.scope === 'userInfo') {
+    handleGetuserinfo(event)
   }
 }
 

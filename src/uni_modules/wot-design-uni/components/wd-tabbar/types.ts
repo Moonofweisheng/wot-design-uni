@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-03-18 15:38:37
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-tabbar\types.ts
- * 记得注释
- */
 import { type ExtractPropTypes, type InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 import type { TabbarItem } from '../wd-tabbar-item/types'
@@ -54,7 +45,7 @@ export const tabbarProps = {
    */
   bordered: makeBooleanProp(true),
   /**
-   * 是否设置底部安全距禿（iPhone X 类型的机型）
+   * 是否设置底部安全距离（iPhone X 类型的机型）
    */
   safeAreaInsetBottom: makeBooleanProp(false),
   /**
