@@ -79,7 +79,7 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
           if (isPromise(result)) {
             promises.push(
               result
-                .then((res: any) => {
+                .then((res) => {
                   if (typeof res === 'string') {
                     errors.push({
                       prop,
@@ -94,10 +94,11 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
                     valid = false
                   }
                 })
-                .catch((error) => {
+                .catch((error: string | Error) => {
+                  const message = typeof error === 'string' ? error : error.message
                   errors.push({
                     prop,
-                    message: error || rule.message
+                    message: message || rule.message
                   })
                   valid = false
                 })

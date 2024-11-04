@@ -149,7 +149,7 @@ const validator = (val: any) => {
   if (String(val).length >= 4) {
     return Promise.resolve()
   } else {
-    return Promise.reject('长度不得小于4')
+    return Promise.reject(new Error('长度不得小于4'))
   }
 }
 
