@@ -61,7 +61,7 @@ import {
   type MessageResult,
   type MessageType
 } from './types'
-import { defaultOptions, messageDefaultOptionKey } from '.'
+import { defaultOptions, getMessageDefaultOptionKey } from '.'
 import { isDef, isFunction } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import { type InputType } from '../wd-input/types'
@@ -78,7 +78,7 @@ const bodyClass = computed(() => {
   return `wd-message-box__body ${!title.value ? 'is-no-title' : ''} ${type.value === 'prompt' ? 'is-prompt' : ''}`
 })
 
-const messageOptionKey = props.selector ? messageDefaultOptionKey + props.selector : messageDefaultOptionKey
+const messageOptionKey = getMessageDefaultOptionKey(props.selector)
 const messageOption = inject(messageOptionKey, ref<MessageOptions>(defaultOptions)) // message选项
 
 /**
