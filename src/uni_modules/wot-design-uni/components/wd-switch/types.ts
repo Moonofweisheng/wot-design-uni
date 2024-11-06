@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, numericProp } from '../common/props'
 
 export type SwitchBeforeChangeOption = {
   value: number | string | boolean
@@ -47,7 +47,9 @@ export const switchProps = {
   /**
    * 大小
    */
-  size: makeNumericProp(28),
+  size: {
+    type: numericProp
+  },
   /**
    * 在改变前执行的函数
    */
