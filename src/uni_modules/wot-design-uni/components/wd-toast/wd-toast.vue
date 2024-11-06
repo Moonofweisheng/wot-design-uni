@@ -38,12 +38,11 @@ import wdTransition from '../wd-transition/wd-transition.vue'
 
 import { computed, inject, onBeforeMount, ref, watch, type CSSProperties } from 'vue'
 import base64 from '../common/base64'
-import { defaultOptions, toastDefaultOptionKey, toastIcon } from '.'
+import { defaultOptions, getToastOptionKey, toastIcon } from '.'
 import { toastProps, type ToastLoadingType, type ToastOptions } from './types'
 import { addUnit, isDef, isFunction, objToStyle } from '../common/util'
 
 const props = defineProps(toastProps)
-
 const iconName = ref<string>('') // 图标类型
 const msg = ref<string>('') // 消息内容
 const position = ref<string>('middle')
@@ -62,7 +61,7 @@ let opened: (() => void) | null = null
 
 let closed: (() => void) | null = null
 
-const toastOptionKey = props.selector ? toastDefaultOptionKey + props.selector : toastDefaultOptionKey
+const toastOptionKey = getToastOptionKey(props.selector)
 const toastOption = inject(toastOptionKey, ref<ToastOptions>(defaultOptions)) // toast选项
 
 // 监听options变化展示

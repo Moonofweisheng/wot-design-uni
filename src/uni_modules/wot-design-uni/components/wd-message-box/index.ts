@@ -1,22 +1,19 @@
 /*
  * @Author: weisheng
  * @Date: 2022-12-14 17:33:21
- * @LastEditTime: 2024-08-17 18:18:16
+ * @LastEditTime: 2024-11-05 23:15:31
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-message-box/index.ts
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\index.ts
  * 记得注释
  */
-import { provide, ref } from 'vue'
+import { inject, provide, ref } from 'vue'
 import type { Message, MessageOptions, MessageResult, MessageType } from './types'
 import { deepMerge } from '../common/util'
 
-/**
- * useMessage 用到的key
- *
- * @internal
- */
-export const messageDefaultOptionKey = '__MESSAGE_OPTION__'
+const messageDefaultOptionKey = '__MESSAGE_OPTION__'
+
+const None = Symbol('None')
 
 // 默认模板
 export const defaultOptions: MessageOptions = {
@@ -36,9 +33,12 @@ export const defaultOptions: MessageOptions = {
 }
 
 export function useMessage(selector: string = ''): Message {
-  const messageOption = ref<MessageOptions>(defaultOptions) // Message选项
   const messageOptionKey = selector ? messageDefaultOptionKey + selector : messageDefaultOptionKey
-  provide(messageOptionKey, messageOption)
+  const messageOption = inject(messageOptionKey, ref<MessageOptions | typeof None>(None)) // Message选项
+  if (messageOption.value === None) {
+    messageOption.value = defaultOptions
+    provide(messageOptionKey, messageOption)
+  }
 
   const createMethod = (type: MessageType) => {
     // 优先级：options->MessageOptions->defaultOptions
@@ -77,7 +77,9 @@ export function useMessage(selector: string = ''): Message {
   const prompt = createMethod('prompt')
 
   const close = () => {
-    messageOption.value.show = false
+    if (messageOption.value !== None) {
+      messageOption.value.show = false
+    }
   }
   return {
     show,
@@ -86,4 +88,8 @@ export function useMessage(selector: string = ''): Message {
     prompt,
     close
   }
+}
+
+export const getMessageDefaultOptionKey = (selector: string) => {
+  return selector ? `${messageDefaultOptionKey}${selector}` : messageDefaultOptionKey
 }
