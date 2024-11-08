@@ -209,6 +209,7 @@ $-cell-value-fs: var(--wot-cell-value-fs, 14px) !default; // 右侧内容字号
 $-cell-value-color: var(--wot-cell-value-color, rgba(0, 0, 0, 0.85)) !default; // 右侧内容文字颜色
 $-cell-arrow-size: var(--wot-cell-arrow-size, 18px) !default; // 右箭头大小
 $-cell-arrow-color: var(--wot-cell-arrow-color, rgba(0, 0, 0, 0.25)) !default; // 右箭头颜色
+$-cell-clear-color: var(--wot-cell-clear-color, #585858) !default; // 清空按钮颜色
 $-cell-tap-bg: var(--wot-cell-tap-bg, rgba(0, 0, 0, 0.06)) !default; // 点击态背景色
 
 $-cell-title-fs-large: var(--wot-cell-title-fs-large, 16px) !default; // 大尺寸标题字号

@@ -86,8 +86,7 @@
   }
   @include when(error) {
     .wd-picker__value,
-    :deep(.wd-picker__arrow),
-    :deep(.wd-picker__clear) {
+    :deep(.wd-picker__arrow) {
       color: $-input-error-color;
     }
   }
@@ -178,6 +177,10 @@
     font-size: $-cell-icon-size;
     color: $-cell-arrow-color;
     line-height: $-cell-line-height;
+  }
+
+  @include edeep(clear){
+    color: $-cell-clear-color;
   }
 
   @include e(wraper) {
