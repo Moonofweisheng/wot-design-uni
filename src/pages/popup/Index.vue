@@ -45,7 +45,9 @@
         </wd-cell-group>
       </demo-block>
 
-      <wd-popup v-model="show1" custom-style="padding: 30px 40px;" @close="handleClose1"><text class="custom-txt">内容</text></wd-popup>
+      <wd-popup v-model="show1" @close="handleClose1" custom-style="border-radius:32rpx;">
+        <text class="custom-txt">弹弹弹</text>
+      </wd-popup>
       <wd-popup v-model="show2" position="top" custom-style="height: 200px;" @close="handleClose2"></wd-popup>
       <wd-popup v-model="show3" position="right" custom-style="width: 200px;" @close="handleClose3"></wd-popup>
       <wd-popup v-model="show4" position="bottom" custom-style="height: 200px;" @close="handleClose4"></wd-popup>
@@ -168,5 +170,12 @@ function handleClose10() {
 
 .custom-txt {
   color: black;
+  width: 400rpx;
+  height: 400rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40rpx;
+  border-radius: 32rpx;
 }
 </style>
