@@ -79,7 +79,7 @@
 .wd-fade-left-enter-active,
 .wd-fade-left-leave-active,
 .wd-fade-right-enter-active,
-.wd-fade-right-enter-active {
+.wd-fade-right-leave-active {
   transition-property: opacity, transform;
 }
 
@@ -90,6 +90,6 @@
 .wd-slide-left-enter-active,
 .wd-slide-left-leave-active,
 .wd-slide-right-enter-active,
-.wd-slide-right-enter-active {
+.wd-slide-right-leave-active {
   transition-property: transform;
 }

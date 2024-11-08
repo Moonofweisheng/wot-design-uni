@@ -16,9 +16,8 @@ onThemeChange((option) => {
   darkMode.setDark(option.theme === 'dark')
 })
 
-onLaunch((ctx) => {
+onLaunch(() => {
   const systemInfo = uni.getSystemInfoSync()
-  debugger
   darkMode.setDark(systemInfo.theme === 'dark')
 
   // #ifdef H5
