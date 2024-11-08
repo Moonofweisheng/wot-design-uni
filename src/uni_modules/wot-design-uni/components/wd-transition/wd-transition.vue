@@ -1,5 +1,5 @@
 <template>
-  <view v-if="inited" :class="rootClass" :style="style" @transitionend="onTransitionEnd" @click="handleClick">
+  <view v-if="!lazyRender || inited" :class="rootClass" :style="style" @transitionend="onTransitionEnd" @click="handleClick">
     <slot />
   </view>
 </template>
@@ -18,24 +18,33 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isObj, isPromise, requestAnimationFrame } from '../common/util'
-import { transitionProps } from './types'
+import { transitionProps, type TransitionName } from './types'
 import { AbortablePromise } from '../common/AbortablePromise'
 
-const getClassNames = (name?: string) => {
-  if (!name) {
-    return {
-      enter: `${props.enterClass} ${props.enterActiveClass}`,
-      'enter-to': `${props.enterToClass} ${props.enterActiveClass}`,
-      leave: `${props.leaveClass} ${props.leaveActiveClass}`,
-      'leave-to': `${props.leaveToClass} ${props.leaveActiveClass}`
-    }
-  }
+const getClassNames = (name?: TransitionName | TransitionName[]) => {
+  let enter: string = `${props.enterClass} ${props.enterActiveClass}`
+  let enterTo: string = `${props.enterToClass} ${props.enterActiveClass}`
+  let leave: string = `${props.leaveClass} ${props.leaveActiveClass}`
+  let leaveTo: string = `${props.leaveToClass} ${props.leaveActiveClass}`
 
+  if (Array.isArray(name)) {
+    for (let index = 0; index < name.length; index++) {
+      enter = `wd-${name[index]}-enter wd-${name[index]}-enter-active ${enter}`
+      enterTo = `wd-${name[index]}-enter-to wd-${name[index]}-enter-active ${enterTo}`
+      leave = `wd-${name[index]}-leave wd-${name[index]}-leave-active ${leave}`
+      leaveTo = `wd-${name[index]}-leave-to wd-${name[index]}-leave-active ${leaveTo}`
+    }
+  } else if (name) {
+    enter = `wd-${name}-enter wd-${name}-enter-active ${enter}`
+    enterTo = `wd-${name}-enter-to wd-${name}-enter-active ${enterTo}`
+    leave = `wd-${name}-leave wd-${name}-leave-active ${leave}`
+    leaveTo = `wd-${name}-leave-to wd-${name}-leave-active ${leaveTo}`
+  }
   return {
-    enter: `wd-${name}-enter wd-${name}-enter-active`,
-    'enter-to': `wd-${name}-enter-to wd-${name}-enter-active`,
-    leave: `wd-${name}-leave wd-${name}-leave-active`,
-    'leave-to': `wd-${name}-leave-to wd-${name}-leave-active`
+    enter: enter,
+    'enter-to': enterTo,
+    leave: leave,
+    'leave-to': leaveTo
   }
 }
 
@@ -65,7 +74,7 @@ const leaveLifeCyclePromises = ref<AbortablePromise<unknown> | null>(null)
 
 const style = computed(() => {
   return `-webkit-transition-duration:${currentDuration.value}ms;transition-duration:${currentDuration.value}ms;${
-    display.value ? '' : 'display: none;'
+    display.value || !props.destroy ? '' : 'display: none;'
   }${props.customStyle}`
 })
 

@@ -16,6 +16,7 @@
       </demo-block>
       <demo-block title="Zoom 动画">
         <wd-button @click="zoomIn">zoom-in</wd-button>
+        <wd-button @click="zoomOut">zoom-out</wd-button>
       </demo-block>
       <demo-block title="自定义动画">
         <wd-button @click="custom">custom</wd-button>
@@ -25,7 +26,6 @@
 
       <wd-transition
         :show="customShow"
-        name=""
         :duration="{ enter: 700, leave: 1000 }"
         enter-class="custom-enter"
         enter-active-class="custom-enter-active"
@@ -39,10 +39,11 @@
   </view>
 </template>
 <script lang="ts" setup>
+import type { TransitionName } from '@/uni_modules/wot-design-uni/components/wd-transition/types'
 import { ref } from 'vue'
 
 const show = ref<boolean>(false)
-const name = ref<any>('')
+const name = ref<TransitionName>()
 const customShow = ref<boolean>(false)
 function fade() {
   transition('fade')
@@ -74,13 +75,16 @@ function slideRight() {
 function zoomIn() {
   transition('zoom-in')
 }
+function zoomOut() {
+  transition('zoom-out')
+}
 function custom() {
   customShow.value = true
   setTimeout(() => {
     customShow.value = false
   }, 1200)
 }
-function transition(transition: string) {
+function transition(transition: TransitionName) {
   name.value = transition
   show.value = true
   setTimeout(() => {

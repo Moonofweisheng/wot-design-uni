@@ -8,7 +8,21 @@
 `v-model` 为绑定值，表示是否展示弹出层。
 
 ```html
-<wd-popup v-model="show" custom-style="padding: 30px 40px;" @close="handleClose">内容</wd-popup>
+<wd-popup v-model="show" custom-style="border-radius:32rpx;" @close="handleClose">
+  <text class="custom-txt">弹弹弹</text>
+</wd-popup>
+```
+```css
+.custom-txt {
+  color: black;
+  width: 400rpx;
+  height: 400rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40rpx;
+  border-radius: 32rpx;
+}
 ```
 
 ## 弹出位置
@@ -89,6 +103,7 @@ h5 滚动穿透不需要处理，组件已默认开启 `lock-scroll`。
 | hide-when-close | 是否当关闭时将弹出层隐藏（display: none) | boolean | - | true | - |
 | lazy-render | 弹层内容懒渲染，触发展示时才渲染内容 | boolean | - | true | - |
 | safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型） | boolean | - | false | - |
+| transition | 动画类型，参见 wd-transition 组件的name | string | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | - | - |
 | lockScroll | 是否锁定背景滚动 | boolean | - | true | 0.1.30 |
 
 ## Events
