@@ -1,8 +1,7 @@
 # 加群沟通
 
-如果使用 `Github` 等平台无法解决你的问题，可以加群，请确保你的提问清晰明了，用词礼貌文明，非常感谢你的支持！
+如果有问题推荐使用 `Github` 反馈，如果使用 `Github` 等平台无法解决你的问题，可以加群，请确保你的提问清晰明了，用词礼貌文明，非常感谢你的支持！
 
-**_[提问的智慧](https://lug.ustc.edu.cn/wiki/doc/smart-questions/)，可以帮助你快速提出正确的问题，获得更快的解答。_**
 
 ## 沟通案例
 
@@ -26,22 +25,19 @@
 
 1 群已满，可以加 2 群。
 
-<div style="display: flex;gap:24px">
-  <img style="width: 250px; height: 250px;" :src="QQ1" />
-  <img style="width: 250px; height: 250px;" :src="QQ2" />
+**_[提问的智慧](https://lug.ustc.edu.cn/wiki/doc/smart-questions/)，可以帮助你快速提出正确的问题，获得更快的解答。_**
+
+<div style="display: flex;gap:24px;">
+  <img style="width: 250px; height: 250px;" :src="QQ1" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
+  <img style="width: 250px; height: 250px;" :src="QQ2" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
 </div>
 
-<script>
+<el-checkbox style="margin-top: 16px;" v-model="checked" label="我已阅读以上沟通案例，并同意按照正确案例提问" />
+
+
+<script setup>
+import { ref } from 'vue'
 import QQ1 from '/QQ1.png'
 import QQ2 from '/QQ2.png'
-
-
-export default {
-  data () {
-    return {
-      QQ1,
-      QQ2
-    }
-  }
-}
+const checked = ref(false)
 </script>
