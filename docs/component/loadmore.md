@@ -126,6 +126,10 @@ image {
 | loading-text  | 加载提示文案         | string | -                      | 加载中...          | -        |
 | finished-text | 全部加载完的提示文案 | string | -                      | 没有更多了         | -        |
 | error-text    | 加载失败的提示文案   | string | -                      | 加载失败，点击重试 | -        |
+| loading-props  | loading加载组件属性| `Partial<LoadingProps>` | -         | -       | $LOWEST_VERSION$        |
+
+#### LoadingProps
+参见[LoadingProps](/component/loading.html#attributes)
 
 ## Events
 
