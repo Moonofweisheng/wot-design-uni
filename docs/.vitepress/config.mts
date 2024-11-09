@@ -1,18 +1,22 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-11-03 13:30:06
+ * @LastEditTime: 2024-11-09 21:52:24
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
+ * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
  * 记得注释
  */
 import { defineConfig } from 'vitepress';
 import viteCompression from 'vite-plugin-compression'
 
+import { MarkdownTransform } from './plugins/markdown-transform'
+
+
 export default defineConfig({
   vite: {
     plugins: [
+      MarkdownTransform(),
       viteCompression({
         verbose: true,
         disable: false,
