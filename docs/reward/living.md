@@ -8,7 +8,7 @@
 
   <el-card style="max-width: 250px" shadow="hover">
     <template #header>
-    <span style=" font-size:18px;font-wight:500">🪙 薪资速算器</span>
+    <span style=" font-size:18px;font-wight:500">薪资速算器</span>
     </template>
     <el-image
       :src="salaryCalculator"

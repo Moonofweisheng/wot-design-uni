@@ -244,6 +244,10 @@ import { useMessage } from 'wot-design-uni'
 
 ## 当前组件库提供的用于控制组件显示隐藏 hooks 不生效怎么办？
 
+:::tip 注意
+多次执行`use`后，`useToast`、`useMessage`、`useNotify`、`useQueue`等 hooks 不生效的问题已在1.3.14版本修复，请升级到最新版本。
+:::
+
 **_可以按照以下步骤进行排查_**
 
 1. `uni-app`平台不支持全局挂载组件，所以`Message`、`Toast`、`Notify`等组件需在 SFC 中显式使用，例如：
@@ -263,6 +267,8 @@ import { useMessage } from 'wot-design-uni'
 const toast = useToast()
 const myToast = useToast('my-toast')
 ```
+
+
 
 ## 为什么在微信小程序上使用`Popup`、`ActionSheet`、`DropDownItem`等弹出框组件包裹`Slider`、`Tabs`等组件时，`Slider`、`Tabs`表现异常？
 

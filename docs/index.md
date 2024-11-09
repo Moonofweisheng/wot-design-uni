@@ -13,7 +13,7 @@ hero:
     alt: Wot Design
   actions:
     - theme: brand
-      text: 起步
+      text: 起步 🚀
       link: /guide/introduction
     - theme: alt
       text: 常见问题
