@@ -189,6 +189,7 @@ export type cellThemeVars = {
   cellValueColor?: string
   cellArrowSize?: string
   cellArrowColor?: string
+  cellClearColor?: string
   cellTapBg?: string
   cellTitleFsLarge?: string
   cellLabelFsLarge?: string

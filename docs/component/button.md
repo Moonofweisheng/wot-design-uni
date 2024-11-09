@@ -120,7 +120,7 @@
 | show-message-card	| 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 | boolean | - | false | - |
 | classPrefix | 类名前缀，用于使用自定义图标，参见[icon](/component/icon#自定义图标) | string | - | 'wd-icon' | 0.1.27 |
 | button-id | 按钮的唯一标识，可用于设置隐私同意授权按钮的id | string | - | - | 1.3.6 |
-| scope | 支付宝小程序使用，当 open-type 为 getAuthorize 时有效。   | ButtonScope    | `phoneNumber` / `userInfo`  | -            | $LOWEST_VERSION$ |
+| scope | 支付宝小程序使用，当 open-type 为 getAuthorize 时有效。   | ButtonScope    | `phoneNumber` / `userInfo`  | -            | 1.3.14 |
 
 ### ButtonOpenType 开放能力
 

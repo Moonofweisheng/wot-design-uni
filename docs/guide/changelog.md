@@ -1,6 +1,33 @@
 # 更新日志 
 
 
+### [1.3.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.13...v1.3.14) (2024-11-09)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Curtain 幕帘组件在某些情况下关闭按钮不显示的问题 ([8c0e978](https://github.com/Moonofweisheng/wot-design-uni/commit/8c0e97831445183662ce0af79210117eb77e63e9)), closes [#690](https://github.com/Moonofweisheng/wot-design-uni/issues/690)
+* 🐛 修复Picker和SelectPicker清空按钮颜色与Input不统一的问题 ([#700](https://github.com/Moonofweisheng/wot-design-uni/issues/700)) ([8fdbfa3](https://github.com/Moonofweisheng/wot-design-uni/commit/8fdbfa319a5c0c5895a3162b56cd3225c54a24d2))
+* 🐛 修复upload组件header默认值错误的问题 ([4cfd1e5](https://github.com/Moonofweisheng/wot-design-uni/commit/4cfd1e568d55eed9efe9cc1dadcc30dd571d3b36)), closes [#691](https://github.com/Moonofweisheng/wot-design-uni/issues/691)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  文档添加生活小工具 ([6f44a63](https://github.com/Moonofweisheng/wot-design-uni/commit/6f44a631ac067a7321ff0cb6ea8ebaabbc64bd9b))
+* ✏️  文档中添加wot-demo的介绍 ([66fff60](https://github.com/Moonofweisheng/wot-design-uni/commit/66fff6009b261a62be96d4c279d83833c70a8a0f))
+* ✏️  增加create-uni创建快速上手项目的介绍 ([92aa1ef](https://github.com/Moonofweisheng/wot-design-uni/commit/92aa1efe68f4a9bd52942122b2f063384eb885fc))
+
+
+### ✨ Features | 新功能
+
+* ✨ 使用Transition重构Popup为center类型的Popup添加zoom-in动画 ([#699](https://github.com/Moonofweisheng/wot-design-uni/issues/699)) ([0dd34d0](https://github.com/Moonofweisheng/wot-design-uni/commit/0dd34d06492f9d071ce6c11aa82789fbcc5cd442)), closes [#687](https://github.com/Moonofweisheng/wot-design-uni/issues/687)
+* ✨ 移除Switch默认的size支持在不指定size的情况下使用css变量设置组件尺寸 ([5e55da4](https://github.com/Moonofweisheng/wot-design-uni/commit/5e55da4839677c63534148d4664dbde1c9f950b2)), closes [#516](https://github.com/Moonofweisheng/wot-design-uni/issues/516)
+* ✨ 优化Toast、Message和Notify组件的函数式调用方案 ([#696](https://github.com/Moonofweisheng/wot-design-uni/issues/696)) ([9f318bd](https://github.com/Moonofweisheng/wot-design-uni/commit/9f318bdeb37bea643276d3e7f8be51bfc1b19d27))
+* ✨ 支持Button在支付宝小程序平台opentype设为getAuthorize用于获取手机号和用户信息 ([deeb45d](https://github.com/Moonofweisheng/wot-design-uni/commit/deeb45d8cb47284c1a557b50c3fcd95f80f93c22))
+* ✨ Form 校验规则validator支持传入Error作为校验提示 ([db32ef9](https://github.com/Moonofweisheng/wot-design-uni/commit/db32ef962140333a13e2a04ba4642e7423bc4bef)), closes [#667](https://github.com/Moonofweisheng/wot-design-uni/issues/667)
+* ✨ Loadmore提供loadingProps属性用于自定义loading样式 ([178e056](https://github.com/Moonofweisheng/wot-design-uni/commit/178e056035511de4123d2bd9ce575948154874b4))
+* ✨ Table 行高支持Number和String类型 ([#682](https://github.com/Moonofweisheng/wot-design-uni/issues/682)) ([21f0b17](https://github.com/Moonofweisheng/wot-design-uni/commit/21f0b178b6e3221a69609dd1603960fc866cb534))
+
 ### [1.3.13](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.12...v1.3.13) (2024-10-25)
 
 
