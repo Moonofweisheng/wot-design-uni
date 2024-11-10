@@ -29,7 +29,7 @@ const ExternalLinkIconComponent = defineComponent({
 </script>
 
 <template>
-  <el-link :href="href" style="text-decoration: none;font-size: 1.2em;" :underline="false">
+  <el-link :href="href" target="_blank" style="text-decoration: none;font-size: 1.2em;" :underline="false">
     <slot />
     <ExternalLinkIconComponent style="margin-left: 0.25em;"> </ExternalLinkIconComponent>
   </el-link>

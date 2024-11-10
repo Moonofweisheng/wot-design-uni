@@ -111,8 +111,8 @@ const onNext = (index: number) => {
 2. `text`为数组时才会进行滚动
 
 ```html
-<wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :speed="0.5" :delay="3" custom-class="space" />
-<wd-notice-bar prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :speed="0.5" :delay="3" custom-class="space" />
+<wd-notice-bar prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" custom-class="space" />
+<wd-notice-bar prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :delay="3" custom-class="space" />
 ```
 
 ## 重置播放动画 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.13</el-tag>
