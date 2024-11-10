@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type ClosePosition = 'inset' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 
@@ -32,7 +32,13 @@ export const curtainProps = {
   /**
    * 是否当关闭时将弹出层隐藏（display: none)
    */
-  hideWhenClose: makeBooleanProp(true)
+  hideWhenClose: makeBooleanProp(true),
+  /**
+   * 设置层级
+   * 类型：number
+   * 默认值：10
+   */
+  zIndex: makeNumberProp(10)
 }
 
 export type CurtainProps = ExtractPropTypes<typeof curtainProps>
