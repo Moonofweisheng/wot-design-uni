@@ -74,20 +74,6 @@ const selected = computed(() => {
   }
 })
 
-watch(
-  () => selected.value,
-  () => {
-    if (!inited.value) {
-      return
-    }
-    updateExpend()
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
 onMounted(() => {
   updateExpend()
 })
@@ -126,6 +112,7 @@ function handleTransitionEnd() {
 // 点击子项
 function handleClick() {
   if (props.disabled) return
+  updateExpend()
   let name = props.name
   const nexexpanded = !expanded.value // 执行后展开状态
   if (nexexpanded) {
