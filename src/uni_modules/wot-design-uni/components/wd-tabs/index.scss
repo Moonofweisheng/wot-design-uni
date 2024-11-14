@@ -279,3 +279,9 @@
     width: 90px;
   }
 }
+
+.hide-scrollbar::-webkit-scrollbar, .hide-scrollbar ::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  -webkit-appearance: none;
+}
