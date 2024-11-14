@@ -147,7 +147,7 @@ import wdStickyBox from '../wd-sticky-box/wd-sticky-box.vue'
 import { computed, getCurrentInstance, onMounted, watch, nextTick, reactive, type CSSProperties } from 'vue'
 import { addUnit, checkNumRange, debounce, getRect, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
-import { TABS_KEY, tabsProps } from './types'
+import { TABS_KEY, tabsProps, TTabProps } from './types'
 import { useChildren } from '../composables/useChildren'
 import { useTranslate } from '../composables/useTranslate'
 
@@ -178,10 +178,15 @@ const { proxy } = getCurrentInstance() as any
 const touch = useTouch()
 
 // tabs数据
-const items = computed(() => {
-  return children.map((child, index) => {
-    return { disabled: child.disabled, title: child.title, name: isDef(child.name) ? child.name : index }
+const items = ref<TTabProps[]>([])
+// 解决ios低版本tabs不渲染
+watch(children, newChildren => {
+  items.value = newChildren.map((child, index) => {
+    return { disabled: child.disabled, title: child.title, name: isDef(child.name)? child.name : index }
   })
+}, {
+  deep: true,
+  flush: 'post'
 })
 
 const bodyStyle = computed(() => {
