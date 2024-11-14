@@ -85,7 +85,7 @@
               <wd-radio :value="item[valueKey]" :disabled="item.disabled">
                 <block v-if="filterable && filterVal">
                   <block v-for="text in item[labelKey]" :key="text.label">
-                    <text :clsss="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
+                    <text :class="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
                   </block>
                 </block>
                 <block v-else>
