@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <demo-block title="基本用法">
-      <wd-input type="text" @input="handleInput" v-model="value" placeholder="请输入用户名" @change="handleChange" @blur="handleBlur" />
+      <wd-input type="text" @input="handleInput" v-model="value" placeholder="请输入歪比巴卜" @change="handleChange" @blur="handleBlur" />
     </demo-block>
     <demo-block title="禁用状态">
       <wd-input type="text" @input="handleInput" v-model="value1" disabled />
@@ -10,7 +10,7 @@
       <wd-input type="text" @input="handleInput" v-model="value2" readonly />
     </demo-block>
     <demo-block title="错误状态">
-      <wd-input type="text" @input="handleInput" v-model="value3" placeholder="请输入用户名" error />
+      <wd-input type="text" @input="handleInput" v-model="value3" placeholder="请输入歪比巴卜" error />
     </demo-block>
     <demo-block title="清空按钮">
       <wd-input type="text" @input="handleInput" v-model="value4" clearable @change="handleChange1" />
@@ -46,10 +46,10 @@
     <demo-block title="cell 类型" transparent>
       <wd-cell-group border>
         <wd-input type="text" label="基本用法" v-model="value12" @input="handleInput" placeholder="请输入..." />
-        <wd-input type="text" label="禁用" v-model="value13" @input="handleInput" disabled placeholder="用户名" />
-        <wd-input type="text" label="清除、密码" v-model="value14" @input="handleInput" placeholder="密码" clearable show-password />
-        <wd-input type="text" label="错误状态" v-model="value15" @input="handleInput" placeholder="请输入用户名" error />
-        <wd-input type="text" label="必填" v-model="value16" @input="handleInput" placeholder="请输入用户名" required />
+        <wd-input type="text" label="禁用" v-model="value13" @input="handleInput" disabled placeholder="歪比巴卜" />
+        <wd-input type="text" label="清除、密码" v-model="value14" @input="handleInput" placeholder="请输入..." clearable show-password />
+        <wd-input type="text" label="错误状态" v-model="value15" @input="handleInput" placeholder="请输入歪比巴卜" error />
+        <wd-input type="text" label="必填" v-model="value16" @input="handleInput" placeholder="请输入歪比巴卜" required />
         <wd-input type="text" label="图标" v-model="value17" @input="handleInput" placeholder="请输入..." prefix-icon="dong" suffix-icon="list" />
         <wd-input type="text" label="自定义插槽" center v-model="value18" @input="handleInput" placeholder="请输入..." clearable>
           <template #suffix>
@@ -73,7 +73,7 @@ const value5 = ref<string>('password')
 const value6 = ref<string>('')
 const value7 = ref<string>('1234')
 const value8 = ref<string>('')
-const value9 = ref<number | null>(null)
+const value9 = ref<number | ''>('')
 const value12 = ref<string>('')
 const value13 = ref<string>('该输入框禁用')
 const value14 = ref<string>('12345678')

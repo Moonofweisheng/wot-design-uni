@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type NoticeBarType = 'warning' | 'info' | 'danger' | ''
@@ -54,3 +54,14 @@ export const noticeBarProps = {
    */
   direction: makeStringProp<NoticeBarScrollDirection>('horizontal')
 }
+
+export type NoticeBarProps = ExtractPropTypes<typeof noticeBarProps>
+
+export type NoticeBarExpose = {
+  /**
+   * 重置NoticeBar动画
+   */
+  reset: () => void
+}
+
+export type NoticeBarInstance = ComponentPublicInstance<NoticeBarProps, NoticeBarExpose>

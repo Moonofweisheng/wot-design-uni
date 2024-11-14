@@ -21,7 +21,10 @@
             <view :class="`wd-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${showValue ? '' : 'wd-picker__placeholder'}`">
               {{ showValue ? showValue : placeholder || translate('placeholder') }}
             </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
+            <wd-icon v-if="showArrow" custom-class="wd-picker__arrow" name="arrow-right" />
+            <view v-else-if="showClear" @click.stop="handleClear">
+              <wd-icon custom-class="wd-picker__clear" name="error-fill" />
+            </view>
           </view>
           <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
         </view>
@@ -80,6 +83,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdPopup from '../wd-popup/wd-popup.vue'
+import wdPickerView from '../wd-picker-view/wd-picker-view.vue'
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
 import { deepClone, defaultDisplayFormat, getType, isArray, isDef, isFunction } from '../common/util'
 import { useCell } from '../composables/useCell'
@@ -91,7 +97,7 @@ import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
 
 const props = defineProps(pickerProps)
-const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
+const emit = defineEmits(['confirm', 'open', 'cancel', 'clear', 'update:modelValue'])
 
 const pickerViewWd = ref<PickerViewInstance | null>(null)
 const cell = useCell()
@@ -292,6 +298,10 @@ function showPopup() {
 function onCancel() {
   popupShow.value = false
   emit('cancel')
+  let timmer = setTimeout(() => {
+    clearTimeout(timmer)
+    isDef(pickerViewWd.value) && pickerViewWd.value.resetColumns(resetColumns.value)
+  }, 300)
 }
 /**
  * 点击确定按钮触发。展示选中值，触发cancel事件。
@@ -376,6 +386,22 @@ function onPickEnd() {
 function setLoading(loading: boolean) {
   innerLoading.value = loading
 }
+
+// 是否展示清除按钮
+const showClear = computed(() => {
+  return props.clearable && !props.disabled && !props.readonly && showValue.value.length
+})
+
+function handleClear() {
+  const clearValue = isArray(pickerValue.value) ? [] : ''
+  emit('update:modelValue', clearValue)
+  emit('clear')
+}
+
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly && !showClear.value
+})
 
 defineExpose<PickerExpose>({
   close,

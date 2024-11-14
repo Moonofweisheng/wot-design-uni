@@ -49,5 +49,9 @@ export const imgProps = {
   /**
    * 是否允许预览
    */
-  enablePreview: makeBooleanProp(false)
+  enablePreview: makeBooleanProp(false),
+  /**
+   * 开启长按图片显示识别小程序码菜单，仅在微信小程序平台有效
+   */
+  showMenuByLongpress: makeBooleanProp(false)
 }

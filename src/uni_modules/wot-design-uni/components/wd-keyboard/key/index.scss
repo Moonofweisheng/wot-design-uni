@@ -1,0 +1,79 @@
+@import './../../common/abstracts/_mixin.scss';
+@import './../../common/abstracts/variable.scss';
+
+.wot-theme-dark {
+  @include b(key) {
+    background: $-dark-background2;
+    color: $-dark-color;
+
+    &:active {
+      background-color: $-dark-background4;
+    }
+
+    @include m(active) {
+      background-color: $-dark-background4;
+    }
+  }
+}
+
+.wd-key-wrapper {
+  position: relative;
+  flex: 1;
+  flex-basis: 33%;
+  box-sizing: border-box;
+  padding: 0 6px 6px 0;
+
+  @include m(wider) {
+    flex-basis: 66%;
+  }
+}
+
+@include b(key) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $-keyboard-key-height;
+  font-size: $-keyboard-key-font-size;
+  line-height: 1.5;
+  background: $-keyboard-key-background;
+  border-radius: $-keyboard-key-border-radius;
+
+  &:active {
+    background-color: $-keyboard-key-active-color;
+  }
+
+  @include m(large) {
+    position: absolute;
+    top: 0;
+    right: 6px;
+    bottom: 6px;
+    left: 0;
+    height: auto;
+  }
+
+  @include m(delete, close) {
+    font-size: $-keyboard-delete-font-size;
+  }
+
+  @include m(active) {
+    background-color: $-keyboard-key-active-color;
+  }
+
+  @include m(close) {
+    color: $-keyboard-button-text-color;
+    background: $-keyboard-button-background;
+
+    &:active {
+      background: $-keyboard-button-background;
+      opacity: $-keyboard-button-active-opacity;
+    }
+  }
+
+  @include edeep(loading-icon) {
+    color: $-keyboard-button-text-color;
+  }
+
+  @include edeep(icon) {
+    font-size: $-keyboard-icon-size;
+  }
+}

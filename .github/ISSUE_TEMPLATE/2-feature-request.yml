@@ -11,6 +11,7 @@ body:
         - 确认这是一个通用功能，并且无法通过现有的 API 或 Slot 实现。
         - 尝试在 [Issue](https://github.com/Moonofweisheng/wot-design-uni/issues)列表中搜索，并且没有发现同样的需求。
         - 可以先到 [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions) 发帖，讨论一下需求是否合理。
+        - 请确保描述清楚你的需求，以便其他开发者更好地理解你的需求。
 
   - type: textarea
     id: description

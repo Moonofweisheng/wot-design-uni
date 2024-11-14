@@ -103,6 +103,23 @@
   }
 }
 
+/* 定义状态（m） */
+@mixin mdeep($modifier...) {
+  $selectors: "";
+
+  @each $item in $modifier {
+    $selectors: #{$selectors + & + $modifierSeparator + $item + ","};
+  }
+
+  @at-root {
+    :deep() {
+      #{$selectors} {
+        @content;
+      }
+    }
+  }
+}
+
 /* 对于需要需要嵌套在 m 底下的 e，调用这个混合宏，一般在切换整个组件的状态，如切换颜色的时候 */
 @mixin me($element...) {
   $selector: &;

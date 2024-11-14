@@ -28,7 +28,7 @@
           :password="showPassword && !isPwdVisible"
           v-model="inputValue"
           :placeholder="placeholderValue"
-          :disabled="disabled"
+          :disabled="disabled || readonly"
           :maxlength="maxlength"
           :focus="focused"
           :confirm-type="confirmType"
@@ -42,6 +42,7 @@
           :hold-keyboard="holdKeyboard"
           :always-embed="alwaysEmbed"
           :placeholder-class="inputPlaceholderClass"
+          :ignoreCompositionEvent="ignoreCompositionEvent"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
@@ -84,6 +85,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isDef, objToStyle, pause, requestAnimationFrame } from '../common/util'
 import { useCell } from '../composables/useCell'

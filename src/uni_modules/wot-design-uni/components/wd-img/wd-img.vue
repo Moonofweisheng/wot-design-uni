@@ -5,6 +5,7 @@
       :style="status !== 'success' ? 'width: 0;height: 0;' : ''"
       :src="src"
       :mode="mode"
+      :show-menu-by-longpress="showMenuByLongpress"
       :lazy-load="lazyLoad"
       @load="handleLoad"
       @error="handleError"
@@ -30,7 +31,11 @@ import { addUnit, isDef, objToStyle } from '../common/util'
 import { imgProps } from './types'
 
 const props = defineProps(imgProps)
-const emit = defineEmits(['error', 'click', 'load'])
+const emit = defineEmits<{
+  (e: 'error', event: Event): void
+  (e: 'click', event: MouseEvent): void
+  (e: 'load', event: Event): void
+}>()
 
 const rootStyle = computed(() => {
   const style: Record<string, string | number> = {}
@@ -53,19 +58,19 @@ const rootClass = computed(() => {
 
 const status = ref<'loading' | 'error' | 'success'>('loading')
 
-function handleError(event: Event) {
+function handleError(event: any) {
   status.value = 'error'
   emit('error', event)
 }
-function handleClick() {
+function handleClick(event: MouseEvent) {
   if (props.enablePreview && props.src) {
     uni.previewImage({
       urls: [props.src]
     })
   }
-  emit('click')
+  emit('click', event)
 }
-function handleLoad(event: Event) {
+function handleLoad(event: any) {
   status.value = 'success'
   emit('load', event)
 }

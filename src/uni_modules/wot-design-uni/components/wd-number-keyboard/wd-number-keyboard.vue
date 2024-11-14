@@ -42,6 +42,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdPopup from '../wd-popup/wd-popup.vue'
 import { computed, ref, watch } from 'vue'
 import WdKey from './key/index.vue'
 import { numberKeyboardProps, type Key } from './types'

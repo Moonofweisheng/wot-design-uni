@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2024-10-12 13:07:08
+ * @LastEditTime: 2024-11-08 13:14:48
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: \wot-design-uni\src\App.vue
+ * 记得注释
+-->
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onThemeChange } from '@dcloudio/uni-app'
 import { useDark } from './store'
@@ -7,7 +16,7 @@ onThemeChange((option) => {
   darkMode.setDark(option.theme === 'dark')
 })
 
-onLaunch((ctx) => {
+onLaunch(() => {
   const systemInfo = uni.getSystemInfoSync()
   darkMode.setDark(systemInfo.theme === 'dark')
 
@@ -18,8 +27,6 @@ onLaunch((ctx) => {
     // 处理收到的消息
     if (typeof event.data === 'boolean') {
       darkMode.setDark(event.data)
-    } else {
-      darkMode.setDark(false)
     }
   })
   // #endif

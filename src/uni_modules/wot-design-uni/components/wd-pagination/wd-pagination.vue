@@ -50,6 +50,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdButton from '../wd-button/wd-button.vue'
 import { ref, watch } from 'vue'
 import { useTranslate } from '../composables/useTranslate'
 import { paginationProps } from './types'

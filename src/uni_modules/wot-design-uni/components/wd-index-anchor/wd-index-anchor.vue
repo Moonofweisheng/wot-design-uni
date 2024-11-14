@@ -27,6 +27,8 @@ const indexAnchorId = ref<string>(`indexBar${uuid()}`)
 
 const { proxy } = getCurrentInstance()!
 
+const top = ref<number>(0)
+
 const isSticky = computed(() => {
   return indexBar && indexBar.props.sticky && indexBar.anchorState.activeIndex === props.index
 })
@@ -34,17 +36,17 @@ const isSticky = computed(() => {
 function getInfo() {
   getRect(`#${indexAnchorId.value}`, false, proxy).then((res) => {
     if (isDef(indexBar)) {
-      const anchor = indexBar.anchorState.anchorList.find((v) => v.index === props.index)!
-      anchor.top = Math.floor(res.top!)
+      top.value = Math.floor(res.top!)
     }
   })
 }
 
 onMounted(() => {
-  if (isDef(indexBar)) {
-    indexBar.anchorState.anchorList.push({ top: 0, index: props.index })
-  }
   getInfo()
+})
+
+defineExpose({
+  top
 })
 </script>
 

@@ -43,8 +43,9 @@ watch(
   }),
   ({ type }) => {
     // 验证 type 属性
-    if (type && !['primary', 'error', 'warning', 'success', 'default'].includes(type)) {
-      console.error(`type must be one of ${type.toString()}`)
+    const types = ['primary', 'error', 'warning', 'success', 'default']
+    if (type && !types.includes(type)) {
+      console.error(`type must be one of ${types.toString()}`)
     }
     computeTextClass()
   },
@@ -124,7 +125,7 @@ const formattedText = computed(() => {
   if (mode === 'price') {
     return formatNumber(text)
   }
-  return formatText(text, format, mode)
+  return formatText(`${text}`, format, mode)
 })
 
 // 处理点击事件

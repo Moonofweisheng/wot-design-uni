@@ -129,3 +129,10 @@ const themeVars: ConfigProviderThemeVars = {
 | theme      | 主题风格，设置为 `dark` 来开启深色模式，全局生效 | string | `dark`/`light` | -      | -        |
 | theme-vars | 自定义主题变量                                   | `ConfigProviderThemeVars` | -              | -      | -        |
 
+
+## 外部样式类
+
+| 类名         | 说明       | 最低版本         |
+| ------------ | ---------- | ---------------- |
+| custom-class | 根节点样式 | 1.3.9 |
+| custom-style | 根节点样式 | 1.3.9 |

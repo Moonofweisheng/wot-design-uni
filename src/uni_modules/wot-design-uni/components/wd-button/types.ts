@@ -1,17 +1,49 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-07-23 11:38:09
+ * @LastEditTime: 2024-11-04 21:33:52
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-button\types.ts
  * 记得注释
  */
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 
 export type ButtonType = 'primary' | 'success' | 'info' | 'warning' | 'error' | 'default' | 'text' | 'icon'
 export type ButtonSize = 'small' | 'medium' | 'large'
+export type ButtonLang = 'zh_CN' | 'zh_TW' | 'en'
+
+export type ButtonOpenType =
+  | 'feedback'
+  | 'share'
+  | 'getUserInfo'
+  | 'contact'
+  | 'getPhoneNumber'
+  | 'launchApp'
+  | 'openSetting'
+  | 'chooseAvatar'
+  | 'getAuthorize'
+  | 'lifestyle'
+  | 'contactShare'
+  | 'openGroupProfile'
+  | 'openGuildProfile'
+  | 'openPublicProfile'
+  | 'shareMessageToFriend'
+  | 'addFriend'
+  | 'addColorSign'
+  | 'addGroupApp'
+  | 'addToFavorites'
+  | 'chooseAddress'
+  | 'chooseInvoiceTitle'
+  | 'login'
+  | 'subscribe'
+  | 'favorite'
+  | 'watchLater'
+  | 'openProfile'
+  | 'agreePrivacyAuthorization'
+
+export type ButtonScope = 'phoneNumber' | 'userInfo'
 
 export const buttonProps = {
   ...baseProps,
@@ -62,7 +94,7 @@ export const buttonProps = {
   /**
    * 开放能力
    */
-  openType: String,
+  openType: String as PropType<ButtonOpenType>,
   /**
    * 指定是否阻止本节点的祖先节点出现点击态
    */
@@ -70,7 +102,7 @@ export const buttonProps = {
   /**
    * 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文
    */
-  lang: String,
+  lang: String as PropType<ButtonLang>,
   /**
    * 会话来源，open-type="contact"时有效
    */
@@ -98,7 +130,12 @@ export const buttonProps = {
   /**
    * 按钮的唯一标识，可用于设置隐私同意授权按钮的id
    */
-  buttonId: String
+  buttonId: String,
+  /**
+   * 支付宝小程序，当 open-type 为 getAuthorize 时有效。
+   * 可选值：'phoneNumber' | 'userInfo'
+   */
+  scope: String as PropType<ButtonScope>
 }
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>

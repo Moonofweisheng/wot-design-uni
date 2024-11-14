@@ -49,6 +49,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdPopup from '../wd-popup/wd-popup.vue'
+import wdButton from '../wd-button/wd-button.vue'
+import wdInput from '../wd-input/wd-input.vue'
 import { computed, inject, ref, watch } from 'vue'
 import {
   messageBoxProps,
@@ -58,9 +61,10 @@ import {
   type MessageResult,
   type MessageType
 } from './types'
-import { defaultOptions, messageDefaultOptionKey } from '.'
+import { defaultOptions, getMessageDefaultOptionKey } from '.'
 import { isDef, isFunction } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
+import { type InputType } from '../wd-input/types'
 
 const props = defineProps(messageBoxProps)
 
@@ -74,7 +78,7 @@ const bodyClass = computed(() => {
   return `wd-message-box__body ${!title.value ? 'is-no-title' : ''} ${type.value === 'prompt' ? 'is-prompt' : ''}`
 })
 
-const messageOptionKey = props.selector ? messageDefaultOptionKey + props.selector : messageDefaultOptionKey
+const messageOptionKey = getMessageDefaultOptionKey(props.selector)
 const messageOption = inject(messageOptionKey, ref<MessageOptions>(defaultOptions)) // message选项
 
 /**
@@ -114,7 +118,7 @@ const type = ref<MessageType>('alert')
 /**
  * 当type为prompt时，输入框类型
  */
-const inputType = ref<string>('text')
+const inputType = ref<InputType>('text')
 
 /**
  * 当type为prompt时，输入框初始值

@@ -83,7 +83,11 @@ export const selectPickerProps = {
   /** 自定义值样式类 */
   customValueClass: makeStringProp(''),
   /** 是否显示确认按钮（radio类型生效），默认值为：true */
-  showConfirm: makeBooleanProp(true)
+  showConfirm: makeBooleanProp(true),
+  /**
+   * 显示清空按钮
+   */
+  clearable: makeBooleanProp(false)
 }
 export type SelectPickerProps = ExtractPropTypes<typeof selectPickerProps>
 

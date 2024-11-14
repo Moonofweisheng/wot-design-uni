@@ -37,6 +37,7 @@
     <demo-block title="展示边框线" transparent>
       <wd-cell-group title="交易管理" border>
         <wd-cell title="标题文字" value="内容" />
+        <wd-cell :border="false" title="标题文字" label="这一个cell不想要边框" value="内容" />
         <wd-cell title="标题文字" label="描述信息" value="内容"></wd-cell>
       </wd-cell-group>
     </demo-block>

@@ -8,7 +8,7 @@
  * 记得注释
  */
 import type { CSSProperties, ExtractPropTypes, InjectionKey } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumericProp, makeRequiredProp, makeStringProp } from '../common/props'
 import type { TableColumnProps } from '../wd-table-col/types'
 import type { PropType } from 'vue'
 
@@ -33,7 +33,7 @@ export const tableProps = {
   /**
    * 行高
    */
-  rowHeight: makeNumberProp(50),
+  rowHeight: makeNumericProp(50),
   /**
    * 是否显示表头
    */

@@ -16,15 +16,18 @@
 </template>
 <script lang="ts">
 export default {
-  // #ifdef H5
   name: 'wd-notify',
-  // #endif
-  options: { virtualHost: true, addGlobalClass: true, styleIsolation: 'shared' }
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
+  }
 }
 </script>
 
 <script lang="ts" setup>
-import { inject, computed, watch } from 'vue'
+import wdPopup from '../wd-popup/wd-popup.vue'
+import { inject, computed, watch, ref } from 'vue'
 import { notifyProps, type NotifyProps } from './types'
 import { getNotifyOptionKey } from '.'
 import { addUnit, isFunction } from '../common/util'
@@ -36,10 +39,10 @@ const emits = defineEmits<{
   (e: 'closed'): void
   (e: 'opened'): void
 }>()
-const state = inject<NotifyProps>(getNotifyOptionKey(props.selector), props)
+const state = inject(getNotifyOptionKey(props.selector), ref<NotifyProps>(props))
 
 const customStyle = computed(() => {
-  const { safeHeight, position } = state
+  const { safeHeight, position } = state.value
   let customStyle: string = ''
   switch (position) {
     case 'top':
@@ -55,21 +58,24 @@ const customStyle = computed(() => {
 })
 
 const onClick = (event: MouseEvent) => {
-  if (isFunction(state.onClick)) return state.onClick(event)
+  if (isFunction(state.value.onClick)) return state.value.onClick(event)
   emits('click', event)
 }
 const onClosed = () => {
-  if (isFunction(state.onClosed)) return state.onClosed()
+  if (isFunction(state.value.onClosed)) return state.value.onClosed()
   emits('closed')
 }
 const onOpened = () => {
-  if (isFunction(state.onOpened)) return state.onOpened()
+  if (isFunction(state.value.onOpened)) return state.value.onOpened()
   emits('opened')
 }
 
 watch(
-  () => state.visible,
-  (visible) => emits('update:visible', visible as boolean)
+  () => state.value.visible,
+  (visible) => {
+    emits('update:visible', visible as boolean)
+  },
+  { deep: true }
 )
 </script>
 

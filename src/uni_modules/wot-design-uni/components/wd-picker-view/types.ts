@@ -71,6 +71,7 @@ export type PickerViewExpose = {
   getColumnIndex: (columnIndex: number) => number
   getLabels: () => string[]
   getSelectedIndex: () => number[]
+  resetColumns: (columns: (string | number | string[] | number[] | ColumnItem | ColumnItem[])[]) => void
 }
 
 export type PickerViewProps = ExtractPropTypes<typeof pickerViewProps>

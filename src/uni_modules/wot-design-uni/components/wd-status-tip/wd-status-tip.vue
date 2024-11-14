@@ -1,15 +1,16 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-12 10:04:19
- * @LastEditTime: 2024-04-07 14:01:12
- * @LastEditors: weisheng
+ * @LastEditTime: 2024-09-20 10:23:38
+ * @LastEditors: jiaoxueyan
  * @Description: 
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-status-tip\wd-status-tip.vue
  * 记得注释
 -->
 <template>
   <view :class="`wd-status-tip  ${customClass}`" :style="customStyle">
-    <wd-img v-if="imgUrl" :mode="imageMode" :src="imgUrl" custom-class="wd-status-tip__image" :custom-style="imgStyle"></wd-img>
+    <slot name="image" v-if="$slots.image"></slot>
+    <wd-img v-else-if="imgUrl" :mode="imageMode" :src="imgUrl" custom-class="wd-status-tip__image" :custom-style="imgStyle"></wd-img>
     <view v-if="tip" class="wd-status-tip__text">{{ tip }}</view>
   </view>
 </template>
@@ -26,6 +27,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdImg from '../wd-img/wd-img.vue'
 import { computed, type CSSProperties } from 'vue'
 import { addUnit, isDef, isObj, objToStyle } from '../common/util'
 import { statusTipProps } from './types'
@@ -36,30 +38,10 @@ const props = defineProps(statusTipProps)
 const imgUrl = computed(() => {
   // 改用网络地址，避免小程序打包的时候统一打包进去导致包过大问题
   let img: string = ''
-  switch (props.image) {
-    case 'collect':
-      img = 'https://img.wot-design-uni.cn/wdu/collect.png'
-      break
-    case 'comment':
-      img = 'https://img.wot-design-uni.cn/wdu/comment.png'
-      break
-    case 'content':
-      img = 'https://img.wot-design-uni.cn/wdu/content.png'
-      break
-    case 'halo':
-      img = 'https://img.wot-design-uni.cn/wdu/halo.png'
-      break
-    case 'message':
-      img = 'https://img.wot-design-uni.cn/wdu/message.png'
-      break
-    case 'network':
-      img = 'https://img.wot-design-uni.cn/wdu/network.png'
-      break
-    case 'search':
-      img = 'https://img.wot-design-uni.cn/wdu/search.png'
-      break
-    default:
-      img = props.image
+  if (['search', 'network', 'content', 'collect', 'comment', 'halo', 'message'].includes(props.image)) {
+    img = `${props.urlPrefix}${props.image}.png`
+  } else {
+    img = props.image
   }
   return img
 })

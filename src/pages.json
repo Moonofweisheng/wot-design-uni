@@ -1,5 +1,6 @@
 {
-  "pages": [{
+  "pages": [
+    {
       "path": "pages/index/Index",
       "name": "index",
       "style": {
@@ -194,7 +195,6 @@
       "path": "pages/notify/Index",
       "name": "toast",
       "style": {
-
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
@@ -763,6 +763,16 @@
       }
     },
     {
+      "path": "pages/keyboard/Index",
+      "name": "keyboard",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Keyboard 虚拟键盘"
+      }
+    },
+    {
       "path": "pages/numberKeyboard/Index",
       "name": "numberKeyboard",
       "style": {
@@ -810,6 +820,16 @@
           "allowsBounceVertical": "NO"
         },
         "navigationBarTitleText": "IndexBar 索引栏"
+      }
+    },
+    {
+      "path": "pages/floatingPanel/Index",
+      "name": "floatingPanel",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "floatingPanel 浮动面板"
       }
     }
   ],

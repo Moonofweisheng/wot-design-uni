@@ -30,7 +30,8 @@
     }
 
     :deep(.wd-select-picker__arrow),
-    :deep(.wd-select-picker__close) {
+    :deep(.wd-select-picker__close),
+    :deep(.wd-select-picker__clear) {
       color: $-dark-color;
     }
 
@@ -78,7 +79,8 @@
     @include when(large) {
       font-size: $-cell-title-fs-large;
 
-      :deep(.wd-select-picker__arrow ){
+      :deep(.wd-select-picker__arrow),
+      :deep(.wd-select-picker__clear) {
         font-size: $-cell-icon-size-large;
       }
     }
@@ -129,11 +131,15 @@
   @include e(body) {
     flex: 1;
   }
-  @include edeep(arrow) {
+  @include edeep(arrow, clear) {
     display: block;
     font-size: $-cell-icon-size;
     color: $-cell-arrow-color;
     line-height: $-cell-line-height;
+  }
+
+  @include edeep(clear) {
+    color: $-cell-clear-color;
   }
  
   @include e(loading) {

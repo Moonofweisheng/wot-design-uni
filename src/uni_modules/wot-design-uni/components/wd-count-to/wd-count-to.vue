@@ -2,15 +2,15 @@
   <view :class="rootClass">
     <!-- 前缀插槽 -->
     <slot name="prefix">
-      <wd-text :color="props.color" :size="`${props.fontSize * 0.7}px`" :text="props.prefix"></wd-text>
+      <wd-text :type="props.type" :color="props.color" :size="`${props.fontSize * 0.7}px`" :text="props.prefix"></wd-text>
     </slot>
     <!-- 默认文本插槽 -->
     <slot>
-      <wd-text :color="props.color" :size="`${props.fontSize}px`" :text="timeText"></wd-text>
+      <wd-text :type="props.type" :color="props.color" :size="`${props.fontSize}px`" :text="timeText"></wd-text>
     </slot>
     <!-- 后缀插槽 -->
     <slot name="suffix">
-      <wd-text :color="props.color" :size="`${props.fontSize * 0.7}px`" :text="props.suffix"></wd-text>
+      <wd-text :type="props.type" :color="props.color" :size="`${props.fontSize * 0.7}px`" :text="props.suffix"></wd-text>
     </slot>
   </view>
 </template>
@@ -27,6 +27,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdText from '../wd-text/wd-text.vue'
 import { computed, watch, onMounted } from 'vue'
 import { countToProps } from './types'
 import { easingFn, isNumber } from '../common/util'

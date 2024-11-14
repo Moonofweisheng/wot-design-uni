@@ -1,11 +1,12 @@
 <template>
-  <view>
+  <view class="wd-curtain-wrapper">
     <wd-popup
       v-model="show"
       transition="zoom-in"
       position="center"
       :close-on-click-modal="closeOnClickModal"
       :hide-when-close="hideWhenClose"
+      :z-index="zIndex"
       @before-enter="beforeenter"
       @enter="enter"
       @after-enter="afterenter"
@@ -37,6 +38,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdPopup from '../wd-popup/wd-popup.vue'
 import { ref, watch } from 'vue'
 import { curtainProps } from './types'
 

@@ -77,6 +77,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdButton from '../wd-button/wd-button.vue'
 import { computed, getCurrentInstance, ref, watch } from 'vue'
 import { addUnit, objToStyle } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'

@@ -1,13 +1,17 @@
 @import "./../common/abstracts/_mixin.scss";
 @import "./../common/abstracts/variable.scss";
 
-:deep(.wd-curtain){
-  display: inline-block;
-  border-radius: $-curtain-content-radius;
-  overflow-y: visible;
-  background: transparent;
-  font-size: 0;
+@include b(curtain-wrapper){
+  :deep(.wd-curtain){
+    display: inline-block;
+    border-radius: $-curtain-content-radius;
+    overflow-y: visible !important;
+    background: transparent;
+    font-size: 0;
+  }
 }
+
+
 @include b(curtain) {
 
   @include e(content) {

@@ -13,12 +13,7 @@
         @touchend.stop.prevent="handleTouchEnd"
         @touchcancel.stop.prevent="handleTouchEnd"
       >
-        <view
-          class="wd-index-bar__index"
-          :class="{ 'is-active': item.index === state.activeIndex }"
-          v-for="item in state.anchorList"
-          :key="item.index"
-        >
+        <view class="wd-index-bar__index" :class="{ 'is-active': item.index === state.activeIndex }" v-for="item in children" :key="item.index">
           {{ item.index }}
         </view>
       </view>
@@ -29,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import type { AnchorItem, AnchorIndex } from './type'
+import type { AnchorIndex } from './type'
 import { indexBarInjectionKey, indexBarProps } from './type'
-import { ref, getCurrentInstance, onMounted, reactive, nextTick } from 'vue'
+import { ref, getCurrentInstance, onMounted, reactive, nextTick, watch } from 'vue'
 import { getRect, isDef, uuid, requestAnimationFrame } from '../common/util'
 import { useChildren } from '../composables/useChildren'
 
@@ -42,13 +37,27 @@ const indexBarId = ref<string>(`indexBar${uuid()}`)
 const { proxy } = getCurrentInstance()!
 
 const state = reactive({
-  activeIndex: null as AnchorIndex | null,
-  anchorList: [] as AnchorItem[]
+  activeIndex: null as AnchorIndex | null
 })
 
-const { linkChildren } = useChildren(indexBarInjectionKey)
+const { linkChildren, children } = useChildren(indexBarInjectionKey)
 
 linkChildren({ props, anchorState: state })
+
+watch(
+  () => children,
+  (newValue) => {
+    if (!newValue.length) {
+      state.activeIndex = null // 或者设置为一个默认值，如第一个子项的索引
+      return
+    }
+
+    if (!isDef(state.activeIndex) || !newValue.find((item) => item.index === state.activeIndex)) {
+      state.activeIndex = newValue[0].index
+    }
+  },
+  { deep: true, immediate: true }
+)
 
 const scrollState = reactive({
   scrollTop: 0, // 即将滚动到的位置
@@ -68,7 +77,6 @@ let sidebarInfo = {
 
 function init() {
   setTimeout(() => {
-    state.activeIndex = state.anchorList[0]?.index
     Promise.all([
       getRect(`#${indexBarId.value}`, false, proxy),
       getRect('.wd-index-bar__sidebar', false, proxy),
@@ -91,12 +99,12 @@ function hanleScroll(scrollEvent: any) {
   }
   const { detail } = scrollEvent
   const scrolltop = Math.floor(detail.scrollTop)
-  const anchor = state.anchorList.find((item, index) => {
-    if (!isDef(state.anchorList[index + 1])) return true
-    if (item.top - offsetTop <= scrolltop && state.anchorList[index + 1].top - offsetTop > scrolltop) return true
+  const anchor = children.find((item, index) => {
+    if (!isDef(children[index + 1])) return true
+    if (item.$.exposed!.top.value - offsetTop <= scrolltop && children[index + 1].$.exposed!.top.value - offsetTop > scrolltop) return true
     return false
-  })!
-  if (state.activeIndex !== anchor.index) {
+  })
+  if (isDef(anchor) && state.activeIndex !== anchor.index) {
     state.activeIndex = anchor.index
   }
   scrollState.prevScrollTop = scrolltop
@@ -106,8 +114,8 @@ function getAnchorByPageY(pageY: number) {
   const y = pageY - sidebarInfo.offsetTop
   let idx = Math.floor(y / sidebarInfo.indexHeight)
   if (idx < 0) idx = 0
-  else if (idx > state.anchorList.length - 1) idx = state.anchorList.length - 1
-  return state.anchorList[idx]
+  else if (idx > children.length - 1) idx = children.length - 1
+  return children[idx]
 }
 
 function handleTouchStart() {
@@ -120,13 +128,13 @@ function handleTouchMove(e: TouchEvent) {
     return
   }
   state.activeIndex = getAnchorByPageY(clientY).index
-  setScrollTop(getAnchorByPageY(clientY).top - offsetTop)
+  setScrollTop(getAnchorByPageY(clientY).$.exposed!.top.value - offsetTop)
 }
 
 function handleTouchEnd(e: TouchEvent) {
   const clientY = e.changedTouches[0].pageY
   state.activeIndex = getAnchorByPageY(clientY).index
-  setScrollTop(getAnchorByPageY(clientY).top - offsetTop)
+  setScrollTop(getAnchorByPageY(clientY).$.exposed!.top.value - offsetTop)
   requestAnimationFrame(() => {
     scrollState.touching = false
   })

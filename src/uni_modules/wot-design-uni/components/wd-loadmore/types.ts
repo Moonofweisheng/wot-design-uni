@@ -1,5 +1,6 @@
 import type { PropType } from 'vue'
-import { baseProps, makeStringProp } from '../common/props'
+import { baseProps } from '../common/props'
+import type { LoadingProps } from '../wd-loading/types'
 
 export type LoadMoreState = 'loading' | 'error' | 'finished'
 
@@ -20,5 +21,10 @@ export const loadmoreProps = {
   /**
    * 加载失败的提示文案
    */
-  errorText: makeStringProp('加载失败，点击重试')
+  errorText: String,
+  /**
+   * 加载中loading组件的属性
+   * 参考loading组件
+   */
+  loadingProps: Object as PropType<Partial<LoadingProps>>
 }

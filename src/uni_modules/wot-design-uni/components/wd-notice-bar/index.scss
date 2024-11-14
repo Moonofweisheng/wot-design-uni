@@ -48,13 +48,6 @@
   @include e(content) {
     position: absolute;
     white-space: nowrap;
-
-    @include m(play) {
-      animation: notice-bar-play linear both;
-    }
-    @include m(play-infinite) {
-      animation: notice-bar-play-infinite linear infinite both;
-    }
   }
   @include m(ellipse) {
     .wd-notice-bar__content {
@@ -71,17 +64,5 @@
       position: static;
       white-space: normal;
     }
-  }
-}
-
-@keyframes notice-bar-play {
-  100% {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-@keyframes notice-bar-play-infinite {
-  100% {
-    transform: translate3d(-100%, 0, 0);
   }
 }

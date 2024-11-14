@@ -1,10 +1,11 @@
-import { provide, reactive } from 'vue'
+import { inject, provide, reactive, ref } from 'vue'
 import type { NotifyProps } from './types'
 import { deepMerge, isString } from '../common/util'
 
 let timer: ReturnType<typeof setTimeout>
 let currentOptions = getDefaultOptions()
 const notifyDefaultOptionKey = '__NOTIFY_OPTION__'
+const None = Symbol('None')
 export const setNotifyDefaultOptions = (options: NotifyProps) => {
   currentOptions = deepMerge(currentOptions, options) as NotifyProps
 }
@@ -12,23 +13,27 @@ export const resetNotifyDefaultOptions = () => {
   currentOptions = getDefaultOptions()
 }
 export const useNotify = (selector: string = '') => {
-  const notifyOption = reactive<NotifyProps>(currentOptions)
+  const notifyOptionKey = getNotifyOptionKey(selector)
+
+  const notifyOption = inject(notifyOptionKey, ref<NotifyProps | typeof None>(None))
+  if (notifyOption.value === None) {
+    notifyOption.value = currentOptions
+    provide(notifyOptionKey, notifyOption)
+  }
   const showNotify = (option: NotifyProps | string) => {
     const options = deepMerge(currentOptions, isString(option) ? { message: option } : option) as NotifyProps
-
-    Object.assign(notifyOption, options, { visible: true })
-    if (notifyOption.duration && notifyOption.duration > 0) {
+    notifyOption.value = deepMerge(options, { visible: true })
+    if (notifyOption.value.duration && notifyOption.value.duration > 0) {
       timer && clearTimeout(timer)
       timer = setTimeout(() => closeNotify(), options.duration)
     }
   }
   const closeNotify = () => {
     timer && clearTimeout(timer)
-    notifyOption.visible = false
+    if (notifyOption.value !== None) {
+      notifyOption.value.visible = false
+    }
   }
-
-  // provide
-  provide(getNotifyOptionKey(selector), notifyOption)
 
   return {
     showNotify,

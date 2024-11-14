@@ -7,6 +7,14 @@
       <wd-count-to prefix="￥" :decimals="2" :endVal="21286.321" :fontSize="32" suffix="%" color="#ffb800" :duration="2000"></wd-count-to>
     </demo-block>
 
+    <demo-block title="设置主题">
+      <wd-count-to type="primary" prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
+      <wd-count-to type="error" prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
+      <wd-count-to type="success" prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
+      <wd-count-to type="warning" prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
+      <wd-count-to prefix="￥" :startVal="0" :endVal="888888" suffix="%"></wd-count-to>
+    </demo-block>
+
     <demo-block title="手动控制">
       <wd-count-to
         ref="countTo"

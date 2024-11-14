@@ -1,0 +1,64 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(floating-panel) {
+    background: $-dark-background2;
+
+    @include e(content) {
+      background: $-dark-background2;
+    }
+  }
+}
+
+@include b(floating-panel) {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: $-floating-panel-z-index;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100vw;
+  border-top-left-radius: $-floating-panel-radius;
+  border-top-right-radius: $-floating-panel-radius;
+  background-color: $-floating-panel-bg;
+  touch-action: none;
+  will-change: transform;
+  @include when(safe) {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  &::after {
+    position: absolute;
+    bottom: -100vh;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    content: '';
+    background-color: inherit;
+  }
+
+  @include e(header) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $-floating-panel-header-height;
+    cursor: grab;
+    user-select: none;
+    &-bar {
+      width: $-floating-panel-bar-width;
+      height: $-floating-panel-bar-height;
+      background-color: $-floating-panel-bar-bg;
+      border-radius: $-floating-panel-bar-radius;
+    }
+  }
+
+  @include e(content) {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    background-color: $-floating-panel-content-bg;
+  }
+}

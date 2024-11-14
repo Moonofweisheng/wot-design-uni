@@ -33,6 +33,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { sortButtonProps } from './types'
 
 const props = defineProps(sortButtonProps)

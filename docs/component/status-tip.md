@@ -4,7 +4,18 @@
 
 一般用于兜底占位展示。
 
-> 本组件使用图片均为外链，推荐将图片下载到开发者的服务器后通过自定义图片`URL`使用。
+::: warning 注意
+本组件使用图片均为外链，**_不保证稳定性_**，推荐将图片下载到开发者的服务器后通过自定义图片`URL`或者自定义`url-prefix`使用。1.3.11版本开始支持自定义图片地址前缀`url-prefix`。
+
+下载地址：
+
+1. Github 仓库：[https://github.com/Moonofweisheng/wot-design-uni-assets](https://github.com/Moonofweisheng/wot-design-uni-assets)
+2. npm 地址：
+
+- npm：[https://www.npmjs.com/package/wot-design-uni-assets](https://www.npmjs.com/package/wot-design-uni-assets)
+- 淘宝镜像：[https://npmmirror.com/package/wot-design-uni-assets](https://npmmirror.com/package/wot-design-uni-assets)
+
+:::
 
 ## 基本用法
 
@@ -40,17 +51,30 @@
 需要自定义图片时，可以在 `image` 属性中传入任意图片 URL。
 
 ```html
-<wd-status-tip image="https://img.wot-design-uni.cn/static/1.jpg" tip="查看我的头像" />
+<wd-status-tip image="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg" tip="查看我的头像" />
+```
+
+## 自定义图片内容
+
+使用插槽 `image` 可以自定义图片内容。
+
+```html
+<wd-status-tip tip="自定义图片内容">
+  <template #image>
+    <wd-icon name="ie-filled" size="100px"></wd-icon>
+  </template>
+</wd-status-tip>
 ```
 
 ## Attributes
 
-| 参数       | 说明                           | 类型                          | 可选值                                                          | 默认值    | 最低版本 |
-| ---------- | ------------------------------ | ----------------------------- | --------------------------------------------------------------- | --------- | -------- |
-| image      | 缺省图片类型，支持传入图片 URL | string                        | search / network / content / collect / comment / halo / message | network   | -        |
-| image-size | 图片大小，默认单位为 `px`      | `string`/`number`/`ImageSize` | -                                                               | -         | -        |
-| tip        | 提示文案                       | string                        | -                                                               | -         | -        |
-| image-mode | 预览图片的 mode 属性           | `ImageMode`                   | -                                                               | aspectFit | 1.2.12   |
+| 参数       | 说明                                               | 类型                          | 可选值                                                          | 默认值                                                        | 最低版本         |
+| ---------- | -------------------------------------------------- | ----------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------- | ---------------- |
+| image      | 缺省图片类型，支持传入图片 URL                     | string                        | search / network / content / collect / comment / halo / message | network                                                       | -                |
+| image-size | 图片大小，默认单位为 `px`                          | `string`/`number`/`ImageSize` | -                                                               | -                                                             | -                |
+| tip        | 提示文案                                           | string                        | -                                                               | -                                                             | -                |
+| image-mode | 预览图片的 mode 属性                               | `ImageMode`                   | -                                                               | aspectFit                                                     | 1.2.12           |
+| url-prefix | 图片路径前缀，指向图片所在目录，用于拼接图片 URL。 | string                        | -                                                               | https://registry.npmmirror.com/wot-design-uni-assets/*/files/ | 1.3.11 |
 
 ### ImageSize
 
@@ -58,3 +82,9 @@
 | ------ | ------------------------- | ---------------- | ------ | ------ | -------- |
 | height | 图片高度，默认单位为 `px` | string \| number | -      | -      | 1.2.12   |
 | width  | 图片宽度，默认单位为 `px` | string \| number | -      | -      | 1.2.12   |
+
+## Slot
+
+| name    | 说明                     | 最低版本 |
+| ------- | ------------------------ | -------- |
+| image   | 图片内容                  | 1.3.12 |

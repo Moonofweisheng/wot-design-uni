@@ -69,8 +69,8 @@ const privacyHandler = (resolve: any) => {
 
 onBeforeMount(() => {
   // 注册监听
-  if ((wx as any).onNeedPrivacyAuthorization) {
-    ;(wx as any).onNeedPrivacyAuthorization((resolve: any) => {
+  if (wx.onNeedPrivacyAuthorization) {
+    wx.onNeedPrivacyAuthorization((resolve: any) => {
       if (typeof privacyHandler === 'function') {
         privacyHandler(resolve)
       }

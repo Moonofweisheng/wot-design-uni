@@ -7,17 +7,17 @@
       'wd-button',
       'is-' + type,
       'is-' + size,
-      plain ? 'is-plain' : '',
-      disabled ? 'is-disabled' : '',
       round ? 'is-round' : '',
       hairline ? 'is-hairline' : '',
+      plain ? 'is-plain' : '',
+      disabled ? 'is-disabled' : '',
       block ? 'is-block' : '',
       loading ? 'is-loading' : '',
       customClass
     ]"
     :hover-start-time="hoverStartTime"
     :hover-stay-time="hoverStayTime"
-    :open-type="disabled || loading ? '' : openType"
+    :open-type="disabled || loading ? undefined : openType"
     :send-message-title="sendMessageTitle"
     :send-message-path="sendMessagePath"
     :send-message-img="sendMessageImg"
@@ -26,7 +26,9 @@
     :session-from="sessionFrom"
     :lang="lang"
     :hover-stop-propagation="hoverStopPropagation"
+    :scope="scope"
     @click="handleClick"
+    @getAuthorize="handleGetAuthorize"
     @getuserinfo="handleGetuserinfo"
     @contact="handleConcat"
     @getphonenumber="handleGetphonenumber"
@@ -56,6 +58,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, watch } from 'vue'
 import { ref } from 'vue'
 import base64 from '../common/base64'
@@ -102,6 +105,18 @@ watch(
 function handleClick(event: any) {
   if (!props.disabled && !props.loading) {
     emit('click', event)
+  }
+}
+
+/**
+ * 支付宝小程序授权
+ * @param event
+ */
+function handleGetAuthorize(event: any) {
+  if (props.scope === 'phoneNumber') {
+    handleGetphonenumber(event)
+  } else if (props.scope === 'userInfo') {
+    handleGetuserinfo(event)
   }
 }
 

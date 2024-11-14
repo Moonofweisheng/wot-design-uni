@@ -1,40 +1,36 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "resolveJsonModule":true,
-    "noImplicitAny": true,
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators":true,
-    "sourceMap": false,
-    "skipLibCheck": true,
     "verbatimModuleSyntax":true,
-    "baseUrl": ".",
-    "types": [
-      "@dcloudio/types",
-      "miniprogram-api-typings",
-      "mini-types"
+    "ignoreDeprecations": "5.0",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
     ],
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+    "types": [
+      "node",
+      "@dcloudio/types",
+      "mini-types",
+      "@uni-helper/uni-types",
+      "miniprogram-api-typings"
+    ],
+    "sourceMap": true
+  },
+  "vueCompilerOptions": {
+    "plugins": [
+      "@uni-helper/uni-types/volar-plugin"
     ]
   },
   "exclude": [
     "node_modules",
     "unpackage",
     "src/**/*.nvue"
-  ],
+  ]
 }

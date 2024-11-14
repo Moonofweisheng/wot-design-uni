@@ -23,8 +23,11 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import useLockScroll from '../composables/useLockScroll'
+import wdTransition from '../wd-transition/wd-transition.vue'
 import { overlayProps } from './types'
+// #ifdef H5
+import useLockScroll from '../composables/useLockScroll'
+// #endif
 
 const props = defineProps(overlayProps)
 

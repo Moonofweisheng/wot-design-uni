@@ -13,8 +13,8 @@ hero:
     alt: Wot Design
   actions:
     - theme: brand
-      text: 快速上手
-      link: /guide/quick-use
+      text: 起步 🚀
+      link: /guide/introduction
     - theme: alt
       text: 常见问题
       link: /guide/common-problems
@@ -24,6 +24,10 @@ hero:
     - theme: brand
       text: 🥤一杯咖啡
       link: /reward/reward
+    - theme: brand
+      text: 🤖 生活小工具
+      link: /reward/living
+
 
 features:
   - icon: 🎯
@@ -37,7 +41,7 @@ features:
     details: 使用 Typescript 构建，提供良好的组件类型系统。
   - icon: 🌍
     title: 支持国际化
-    details: 支持国际化，内置 6 种语言包。
+    details: 支持国际化，内置 15 种语言包。
   - icon: 📖
     title: 提供丰富的文档和组件示例
     details: 文档和组件示例为开发者提供稳定的后勤保障。

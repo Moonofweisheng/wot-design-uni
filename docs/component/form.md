@@ -60,7 +60,7 @@ const model = reactive<{
 
 const form = ref()
 
-function handleSubmit1() {
+function handleSubmit() {
   form.value
     .validate()
     .then(({ valid, errors }) => {
@@ -309,13 +309,13 @@ function handleSubmit() {
     <wd-input
       v-for="(item, index) in model.phoneNumbers"
       :key="item.key"
-      :label="'联系方式' + index"
+      :label="'玛卡巴卡单号' + index"
       :prop="'phoneNumbers.' + index + '.value'"
       label-width="100px"
       clearable
       v-model="item.value"
-      placeholder="联系方式"
-      :rules="[{ required: true, message: '请填写联系方式' + index }]"
+      placeholder="玛卡巴卡单号"
+      :rules="[{ required: true, message: '请填写玛卡巴卡单号' + index }]"
     />
 
     <wd-cell title-width="0px">
@@ -925,7 +925,7 @@ function handleIconClick() {
 | model         | 表单数据对象                                                                        | `Record<string, any>` | -      | -         | 0.2.0            |
 | rules         | 表单验证规则                                                                        | `FormRules`           | -      | -         | 0.2.0            |
 | resetOnChange | 表单数据变化时是否重置表单提示信息（设置为 false 时需要开发者单独对变更项进行校验） | `boolean`             | -      | `true`    | 0.2.16           |
-| errorType     | 校验错误提示方式                                                                    | `toast/message/none`  | -      | `message` | $LOWEST_VERSION$ |
+| errorType     | 校验错误提示方式                                                                    | `toast/message/none`  | -      | `message` | 1.3.8 |
 
 ### FormItemRule 数据结构
 

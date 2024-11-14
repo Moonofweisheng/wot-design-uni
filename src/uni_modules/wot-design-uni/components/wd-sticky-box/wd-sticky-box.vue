@@ -20,6 +20,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import wdResize from '../wd-resize/wd-resize.vue'
 import { getCurrentInstance, onBeforeMount, reactive, ref } from 'vue'
 import { getRect, uuid } from '../common/util'
 import { baseProps } from '../common/props'

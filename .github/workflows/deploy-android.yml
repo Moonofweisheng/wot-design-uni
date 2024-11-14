@@ -1,0 +1,84 @@
+name: Sync to APP BASE
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  deploy-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 确保获取完整的提交历史  
+        
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Site
+        run: pnpm build:app-android
+      
+      - name: Extract version from package.json  
+        run: |
+          echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV  
+          echo "CODE=$(git rev-list --count HEAD)" >> $GITHUB_ENV  
+          echo "APPID=${{ secrets.UNI_APPID }}" >> $GITHUB_ENV
+
+      - name: Update manifest.json with id, version, and commit count  
+        run: |  
+          id=${{ secrets.UNI_APPID }}  
+          version=$(jq -r '.version' package.json)  
+          commit_count=$(git rev-list --count HEAD)  
+          jq --arg id "$id" --arg version "$version" --arg commit_count "$commit_count" '.id = $id | .appid = $id | .version.name = $version | .version.code = $commit_count' dist/build/app/manifest.json > tmp_manifest.json && mv tmp_manifest.json dist/build/app/manifest.json
+         
+          cat dist/build/app/manifest.json
+      - name: Print manifest.json
+        run: cat dist/build/app/manifest.json
+      - name: Package artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-artifact
+          path: dist/build/app
+
+      - name: Checkout app-base
+        uses: actions/checkout@v4
+        with:
+          repository: Moonofweisheng/uniapp-android-base 
+          token: ${{ secrets.PAT }}  
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: app-artifact
+          path: dist/build/app
+
+      - name: Clear and prepare app directory  
+        run: |  
+          cd app/src/main/assets/apps  
+          rm -rf *  
+          mkdir -p "${{ secrets.UNI_APPID }}/www"  
+          
+      - name: Copy build artifacts to app-base  
+        run: |  
+          cp -r dist/build/app/* "app/src/main/assets/apps/${{ secrets.UNI_APPID }}/www"  
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "Moonofweisheng"
+          git config --global user.name "1780903673@qq.com"
+          version=$(echo "$VERSION") # 从环境变量中获取version
+          git add .
+          git commit -m "sync appid$APPID v$version code$CODE"
+          git push

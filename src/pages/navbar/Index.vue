@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-10-17 17:20:31
- * @LastEditTime: 2024-03-04 12:48:00
+ * @LastEditTime: 2024-10-12 12:47:30
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: \wot-design-uni\src\pages\navbar\Index.vue
@@ -89,5 +89,10 @@ function handleBackHome() {
   align-items: center;
   --wot-search-padding: 0;
   --wot-search-side-padding: 0;
+  :deep() {
+    .wd-search {
+      background: transparent;
+    }
+  }
 }
 </style>
