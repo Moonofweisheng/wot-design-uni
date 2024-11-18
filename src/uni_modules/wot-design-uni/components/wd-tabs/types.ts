@@ -44,6 +44,10 @@ export const tabsProps = {
    */
   swipeable: makeBooleanProp(false),
   /**
+   * 自动调整底部条宽度，设置了 lineWidth 后无效
+   */
+  autoLineWidth: makeBooleanProp(false),
+  /**
    * 底部条宽度，单位像素
    */
   lineWidth: numericProp,

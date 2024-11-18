@@ -23,6 +23,16 @@
       </wd-tabs>
     </demo-block>
 
+    <demo-block title="自动调整底部条宽度" transparent>
+      <wd-tabs v-model="autoLineWidthTab" @change="handleChange" auto-line-width>
+        <block v-for="item in autoLineWidthTabs" :key="item">
+          <wd-tab :title="`${item}`" :name="item">
+            <view class="content">内容{{ autoLineWidthTab }}</view>
+          </wd-tab>
+        </block>
+      </wd-tabs>
+    </demo-block>
+
     <demo-block title="粘性布局" transparent>
       <wd-tabs v-model="tab2" sticky @change="handleChange">
         <block v-for="item in 4" :key="item">
@@ -109,6 +119,9 @@ import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 const tabs = ref(['这', '是', '一', '个', '例子'])
 const tab = ref('一')
+
+const autoLineWidthTabs = ref(['Wot', 'Design', 'Uni'])
+const autoLineWidthTab = ref('Design')
 
 const tab1 = ref<number>(0)
 const tab2 = ref<number>(0)
