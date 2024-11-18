@@ -1,49 +1,5 @@
 <template>
-  <view
-    :class="`wd-picker ${disabled ? 'is-disabled' : ''} ${size ? 'is-' + size : ''}  ${cell.border.value ? 'is-border' : ''} ${
-      alignRight ? 'is-align-right' : ''
-    } ${error ? 'is-error' : ''} ${customClass}`"
-    :style="customStyle"
-  >
-    <!--文案-->
-    <view class="wd-picker__field" @click="showPopup">
-      <slot v-if="useDefaultSlot"></slot>
-      <view v-else :class="['wd-picker__cell', customCellClass]">
-        <view
-          v-if="label || useLabelSlot"
-          :class="`wd-picker__label ${customLabelClass} ${isRequired ? 'is-required' : ''}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <block v-if="label">{{ label }}</block>
-          <slot v-else name="label"></slot>
-        </view>
-        <view class="wd-picker__body">
-          <view class="wd-picker__value-wraper">
-            <view :class="`wd-picker__value ${customValueClass}`">
-              <template v-if="region">
-                <view v-if="isArray(showValue)">
-                  <text :class="showValue[0] ? '' : 'wd-picker__placeholder'">
-                    {{ showValue[0] ? showValue[0] : placeholder || translate('placeholder') }}
-                  </text>
-                  {{ translate('to') }}
-                  <text :class="showValue[1] ? '' : 'wd-picker__placeholder'">
-                    {{ showValue[1] ? showValue[1] : placeholder || translate('placeholder') }}
-                  </text>
-                </view>
-                <view v-else class="wd-picker__placeholder">
-                  {{ placeholder || translate('placeholder') }}
-                </view>
-              </template>
-              <view v-else :class="showValue ? '' : 'wd-picker__placeholder'">
-                {{ showValue ? showValue : placeholder || translate('placeholder') }}
-              </view>
-            </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
-          </view>
-          <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
-        </view>
-      </view>
-    </view>
+  <view :class="`wd-picker  ${customClass}`" :style="customStyle">
     <!--弹出层，picker-view 在隐藏时修改值，会触发多次change事件，从而导致所有列选中第一项，因此picker在关闭时不隐藏 -->
     <wd-popup
       v-model="popupShow"
@@ -154,17 +110,14 @@ export default {
 <script lang="ts" setup>
 import wdPopup from '../wd-popup/wd-popup.vue'
 import wdDatetimePickerView from '../wd-datetime-picker-view/wd-datetime-picker-view.vue'
-import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { deepClone, isArray, isDef, isEqual, isFunction, padZero } from '../common/util'
-import { useCell } from '../composables/useCell'
 import {
   getPickerValue,
   type DatetimePickerViewInstance,
   type DatetimePickerViewColumnFormatter,
   type DatetimePickerViewColumnType
 } from '../wd-datetime-picker-view/types'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
-import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { datetimePickerProps, type DatetimePickerExpose } from './types'
 import { dayjs } from '../common/dayjs'
@@ -177,7 +130,6 @@ const { translate } = useTranslate('datetime-picker')
 const datetimePickerView = ref<DatetimePickerViewInstance>()
 const datetimePickerView1 = ref<DatetimePickerViewInstance>()
 
-const showValue = ref<string | Date | Array<string | Date>>('')
 const popupShow = ref<boolean>(false)
 const showStart = ref<boolean>(true)
 const region = ref<boolean>(false)
@@ -190,8 +142,6 @@ const hasConfirmed = ref<boolean>(false) // 判断用户是否点击了确认按
 
 const isLoading = ref<boolean>(false) // 加载
 const { proxy } = getCurrentInstance() as any
-
-const cell = useCell()
 
 watch(
   () => props.modelValue,
@@ -292,31 +242,6 @@ watch(
     immediate: true
   }
 )
-
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
-})
-
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
-})
 
 /**
  * @description 自定义列项筛选规则，对每列单项进行禁用校验，最终返回传入PickerView的columns数组
@@ -419,8 +344,6 @@ function close() {
  * @description 展示popup，小程序有个bug，在picker-view弹出时设置value，会触发change事件，而且会将picker-view的value多次触发change重置为第一项
  */
 function showPopup() {
-  if (props.disabled || props.readonly) return
-
   emit('open')
   if (region.value) {
     popupShow.value = true
@@ -536,7 +459,7 @@ function onPickEnd() {
 }
 
 function handleConfirm() {
-  if (props.loading || isLoading.value || props.disabled) {
+  if (props.loading || isLoading.value) {
     popupShow.value = false
     return
   }
@@ -585,19 +508,7 @@ function setShowValue(tab: boolean = false, isConfirm: boolean = false, beforeMo
       ? (endInnerValue.value && getSelects('after')) || []
       : (datetimePickerView1.value && datetimePickerView1.value.getSelects && datetimePickerView1.value.getSelects()) || []
 
-    showValue.value = tab
-      ? showValue.value
-      : [
-          (props.modelValue as (string | number)[])[0] || isConfirm ? defaultDisplayFormat(items as Record<string, any>[]) : '',
-          (props.modelValue as (string | number)[])[1] || isConfirm ? defaultDisplayFormat(endItems as Record<string, any>[]) : ''
-        ]
     showTabLabel.value = [defaultDisplayFormat(items as Record<string, any>[], true), defaultDisplayFormat(endItems as Record<string, any>[], true)]
-  } else {
-    const items = beforeMount
-      ? (innerValue.value && getSelects('before')) || []
-      : (datetimePickerView.value && datetimePickerView.value.getSelects && datetimePickerView.value.getSelects()) || []
-
-    showValue.value = deepClone(props.modelValue || isConfirm ? defaultDisplayFormat(items as Record<string, any>[]) : '')
   }
 }
 

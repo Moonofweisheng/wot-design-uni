@@ -1,35 +1,5 @@
 <template>
-  <view
-    :class="`wd-picker ${disabled ? 'is-disabled' : ''} ${size ? 'is-' + size : ''}  ${cell.border.value ? 'is-border' : ''} ${
-      alignRight ? 'is-align-right' : ''
-    } ${error ? 'is-error' : ''} ${customClass}`"
-    :style="customStyle"
-  >
-    <view class="wd-picker__field" @click="showPopup">
-      <slot v-if="useDefaultSlot"></slot>
-      <view v-else class="wd-picker__cell">
-        <view
-          v-if="label || useLabelSlot"
-          :class="`wd-picker__label ${customLabelClass}  ${isRequired ? 'is-required' : ''}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <template v-if="label">{{ label }}</template>
-          <slot v-else name="label"></slot>
-        </view>
-        <view class="wd-picker__body">
-          <view class="wd-picker__value-wraper">
-            <view :class="`wd-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${showValue ? '' : 'wd-picker__placeholder'}`">
-              {{ showValue ? showValue : placeholder || translate('placeholder') }}
-            </view>
-            <wd-icon v-if="showArrow" custom-class="wd-picker__arrow" name="arrow-right" />
-            <view v-else-if="showClear" @click.stop="handleClear">
-              <wd-icon custom-class="wd-picker__clear" name="error-fill" />
-            </view>
-          </view>
-          <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
-        </view>
-      </view>
-    </view>
+  <view :class="`wd-picker ${customClass}`" :style="customStyle">
     <wd-popup
       v-model="popupShow"
       position="bottom"
@@ -83,15 +53,11 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import wdIcon from '../wd-icon/wd-icon.vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
 import wdPickerView from '../wd-picker-view/wd-picker-view.vue'
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
-import { deepClone, defaultDisplayFormat, getType, isArray, isDef, isFunction } from '../common/util'
-import { useCell } from '../composables/useCell'
+import { deepClone, getType, isArray, isDef, isFunction } from '../common/util'
 import { type ColumnItem, formatArray, type PickerViewInstance } from '../wd-picker-view/types'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
-import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
@@ -100,14 +66,12 @@ const props = defineProps(pickerProps)
 const emit = defineEmits(['confirm', 'open', 'cancel', 'clear', 'update:modelValue'])
 
 const pickerViewWd = ref<PickerViewInstance | null>(null)
-const cell = useCell()
 
 const innerLoading = ref<boolean>(false) // 内部控制是否loading
 
 // 弹出层是否显示
 const popupShow = ref<boolean>(false)
 // 选定后展示的选中项
-const showValue = ref<string>('')
 const pickerValue = ref<string | number | boolean | string[] | number[] | boolean[]>('')
 const displayColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 传入 pickerView 的columns
 const resetColumns = ref<Array<string | number | ColumnItem | Array<string | number | ColumnItem>>>([]) // 保存之前的 columns，当取消时，将数据源回滚，避免多级联动数据源不正确的情况
@@ -174,31 +138,6 @@ watch(
   }
 )
 
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
-})
-
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
-})
-
 const { proxy } = getCurrentInstance() as any
 
 onMounted(() => {
@@ -219,13 +158,13 @@ function handleShowValueUpdate(value: string | number | Array<string | number>) 
   if ((isArray(value) && value.length > 0) || (isDef(value) && !isArray(value) && value !== '')) {
     if (pickerViewWd.value) {
       nextTick(() => {
-        setShowValue(pickerViewWd.value!.getSelects())
+        // setShowValue(pickerViewWd.value!.getSelects())
       })
     } else {
-      setShowValue(getSelects(value)!)
+      // setShowValue(getSelects(value)!)
     }
   } else {
-    showValue.value = ''
+    // showValue.value = ''
   }
 }
 
@@ -284,8 +223,6 @@ function close() {
  * 展示popup
  */
 function showPopup() {
-  if (props.disabled || props.readonly) return
-
   emit('open')
   popupShow.value = true
   pickerValue.value = props.modelValue
@@ -329,7 +266,7 @@ function onConfirm() {
   }
 }
 function handleConfirm() {
-  if (isLoading.value || props.disabled) {
+  if (isLoading.value) {
     popupShow.value = false
     return
   }
@@ -342,7 +279,7 @@ function handleConfirm() {
   resetColumns.value = deepClone(columns)
   emit('update:modelValue', values)
 
-  setShowValue(selects)
+  // setShowValue(selects)
   emit('confirm', {
     value: values,
     selectedItems: selects
@@ -355,18 +292,9 @@ function handleConfirm() {
 function pickerViewChange({ value }: any) {
   pickerValue.value = value
 }
-/**
- * 设置展示值
- * @param  items
- */
-function setShowValue(items: ColumnItem | ColumnItem[]) {
-  // 避免值为空时调用自定义展示函数
-  if ((isArray(items) && !items.length) || !items) return
 
-  const { valueKey, labelKey } = props
-  showValue.value = (props.displayFormat || defaultDisplayFormat)(items, { valueKey, labelKey })
-}
 function noop() {}
+
 function onPickStart() {
   isPicking.value = true
 }
@@ -386,22 +314,6 @@ function onPickEnd() {
 function setLoading(loading: boolean) {
   innerLoading.value = loading
 }
-
-// 是否展示清除按钮
-const showClear = computed(() => {
-  return props.clearable && !props.disabled && !props.readonly && showValue.value.length
-})
-
-function handleClear() {
-  const clearValue = isArray(pickerValue.value) ? [] : ''
-  emit('update:modelValue', clearValue)
-  emit('clear')
-}
-
-// 是否展示箭头
-const showArrow = computed(() => {
-  return !props.disabled && !props.readonly && !showClear.value
-})
 
 defineExpose<PickerExpose>({
   close,

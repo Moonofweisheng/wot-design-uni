@@ -1,16 +1,15 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-06-09 14:38:57
+ * @LastEditTime: 2024-11-13 13:18:15
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-calendar/types.ts
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-calendar\types.ts
  * 记得注释
  */
 import type { PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 import type { CalendarFormatter, CalendarTimeFilter, CalendarType } from '../wd-calendar-view/types'
-import type { FormItemRule } from '../wd-form/types'
 
 export const calendarProps = {
   ...baseProps,
@@ -65,57 +64,9 @@ export const calendarProps = {
    */
   hideSecond: makeBooleanProp(false),
   /**
-   * 选择器左侧文案
-   */
-  label: String,
-  /**
-   * 设置左侧标题宽度
-   */
-  labelWidth: String,
-  /**
-   * 使用 label 插槽时设置该选项
-   */
-  useLabelSlot: makeBooleanProp(false),
-  /**
-   * 使用默认插槽时设置该选项
-   */
-  useDefaultSlot: makeBooleanProp(false),
-  /**
-   * 禁用
-   */
-  disabled: makeBooleanProp(false),
-  /**
-   * 只读
-   */
-  readonly: makeBooleanProp(false),
-  /**
-   * 选择器占位符
-   */
-  placeholder: String,
-  /**
    * 弹出层标题
    */
   title: String,
-  /**
-   * 选择器的值靠右展示
-   */
-  alignRight: makeBooleanProp(false),
-  /**
-   * 是否为错误状态，错误状态时右侧内容为红色
-   */
-  error: makeBooleanProp(false),
-  /**
-   * 是否必填
-   */
-  required: makeBooleanProp(false),
-  /**
-   * 设置选择器大小，可选值：large
-   */
-  size: String,
-  /**
-   * 是否垂直居中
-   */
-  center: makeBooleanProp(false),
   /**
    * 点击遮罩是否关闭
    */
@@ -133,17 +84,9 @@ export const calendarProps = {
    */
   confirmText: String,
   /**
-   * 自定义展示文案的格式化函数，返回一个字符串
-   */
-  displayFormat: Function as PropType<CalendarDisplayFormat>,
-  /**
    * 自定义范围选择类型的面板内部回显，返回一个字符串
    */
   innerDisplayFormat: Function as PropType<CalendarInnerDisplayFormat>,
-  /**
-   * 是否超出隐藏
-   */
-  ellipsis: makeBooleanProp(false),
   /**
    * 是否显示类型切换功能
    */
@@ -164,23 +107,6 @@ export const calendarProps = {
    * 确定前校验函数，接收 { value, resolve } 参数，通过 resolve 继续执行，resolve 接收 1 个 boolean 参数
    */
   beforeConfirm: Function as PropType<CalendarBeforeConfirm>,
-  /**
-   * 表单域 model 字段名，在使用表单校验功能的情况下，该属性是必填的
-   */
-  prop: String,
-  /**
-   * 表单验证规则，结合wd-form组件使用
-   */
-  rules: makeArrayProp<FormItemRule>(),
-  customViewClass: makeStringProp(''),
-  /**
-   * label 外部自定义样式
-   */
-  customLabelClass: makeStringProp(''),
-  /**
-   * value 外部自定义样式
-   */
-  customValueClass: makeStringProp(''),
   /**
    * 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
    */

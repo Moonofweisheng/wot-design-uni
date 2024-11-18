@@ -1,40 +1,5 @@
 <template>
-  <view :class="`wd-select-picker ${cell.border.value ? 'is-border' : ''} ${customClass}`" :style="customStyle">
-    <view class="wd-select-picker__field" @click="open">
-      <slot v-if="useDefaultSlot"></slot>
-      <view
-        v-else
-        :class="`wd-select-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${alignRight && 'is-align-right'} ${
-          error && 'is-error'
-        } ${size && 'is-' + size}`"
-      >
-        <view
-          v-if="label || useLabelSlot"
-          :class="`wd-select-picker__label ${isRequired && 'is-required'} ${customLabelClass}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <block v-if="label">{{ label }}</block>
-          <slot v-else name="label"></slot>
-        </view>
-        <view class="wd-select-picker__body">
-          <view class="wd-select-picker__value-wraper">
-            <view
-              :class="`wd-select-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${
-                showValue ? '' : 'wd-select-picker__value--placeholder'
-              }`"
-            >
-              {{ showValue || placeholder || translate('placeholder') }}
-            </view>
-            <wd-icon v-if="showArrow" custom-class="wd-select-picker__arrow" name="arrow-right" />
-            <view v-else-if="showClear" @click.stop="handleClear">
-              <wd-icon custom-class="wd-select-picker__clear" name="error-fill" />
-            </view>
-          </view>
-
-          <view v-if="errorMessage" class="wd-select-picker__error-message">{{ errorMessage }}</view>
-        </view>
-      </view>
-    </view>
+  <view :class="`wd-select-picker  ${customClass}`" :style="customStyle">
     <wd-action-sheet
       v-model="pickerShow"
       :duration="250"
@@ -127,10 +92,7 @@ import wdButton from '../wd-button/wd-button.vue'
 import wdLoading from '../wd-loading/wd-loading.vue'
 
 import { getCurrentInstance, onBeforeMount, ref, watch, nextTick, computed } from 'vue'
-import { useCell } from '../composables/useCell'
 import { getRect, isArray, isDef, isFunction, requestAnimationFrame } from '../common/util'
-import { useParent } from '../composables/useParent'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useTranslate } from '../composables/useTranslate'
 import { selectPickerProps, type SelectPickerExpose } from './types'
 
@@ -146,34 +108,6 @@ const lastSelectList = ref<Array<number | boolean | string> | number | boolean |
 const filterVal = ref<string>('')
 const filterColumns = ref<Array<Record<string, any>>>([])
 const scrollTop = ref<number>(0) // 滚动位置
-const cell = useCell()
-
-const showValue = computed(() => {
-  const value = valueFormat(props.modelValue)
-  let showValueTemp: string = ''
-
-  if (props.displayFormat) {
-    showValueTemp = props.displayFormat(value, props.columns)
-  } else {
-    const { type, labelKey } = props
-    if (type === 'checkbox') {
-      const selectedItems = (isArray(value) ? value : []).map((item) => {
-        return getSelectedItem(item)
-      })
-      showValueTemp = selectedItems
-        .map((item) => {
-          return item[labelKey]
-        })
-        .join(', ')
-    } else if (type === 'radio') {
-      const selectedItem = getSelectedItem(value as string | number | boolean)
-      showValueTemp = selectedItem[labelKey]
-    } else {
-      showValueTemp = value as string
-    }
-  }
-  return showValueTemp
-})
 
 watch(
   () => props.modelValue,
@@ -228,31 +162,6 @@ watch(
     immediate: true
   }
 )
-
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
-})
-
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
-})
 
 onBeforeMount(() => {
   selectList.value = valueFormat(props.modelValue)
@@ -427,21 +336,6 @@ function formatFilterColumns(columns: Record<string, any>[], filterVal: string) 
 
 const showConfirm = computed(() => {
   return (props.type === 'radio' && props.showConfirm) || props.type === 'checkbox'
-})
-
-// 是否展示清除按钮
-const showClear = computed(() => {
-  return props.clearable && !props.disabled && !props.readonly && showValue.value.length
-})
-
-function handleClear() {
-  emit('update:modelValue', props.type === 'checkbox' ? [] : '')
-  emit('clear')
-}
-
-// 是否展示箭头
-const showArrow = computed(() => {
-  return !props.disabled && !props.readonly && !showClear.value
 })
 
 defineExpose<SelectPickerExpose>({

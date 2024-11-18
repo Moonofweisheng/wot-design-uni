@@ -11,6 +11,7 @@
     <demo-block title="进度条状态">
       <wd-progress :percentage="100" hide-text status="success" />
       <wd-progress :percentage="80" hide-text status="danger" />
+      <wd-progress :percentage="90" hide-text status="warning" />
     </demo-block>
 
     <demo-block title="修改颜色">
@@ -24,9 +25,10 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
+import type { ProgressColor } from '@/uni_modules/wot-design-uni/components/wd-progress/types'
 import { ref } from 'vue'
 
-const colorObject = ref<any>([
+const colorObject = ref<ProgressColor[]>([
   {
     color: 'yellow',
     percentage: 30

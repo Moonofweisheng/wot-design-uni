@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
- * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-03-15 21:29:33
+ * @Date: 2024-10-25 10:34:37
+ * @LastEditTime: 2024-11-13 18:33:38
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-form-item/wd-form-item.vue
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-form-item\wd-form-item.vue
  * 记得注释
 -->
 <template>

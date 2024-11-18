@@ -115,7 +115,13 @@ export const actionSheetProps = {
    * @default true
    * @type {boolean}
    */
-  safeAreaInsetBottom: makeBooleanProp(true)
+  safeAreaInsetBottom: makeBooleanProp(true),
+  /**
+   * 是否当关闭时将弹出层隐藏（display: none)
+   * 类型：boolean
+   * 默认值：true
+   */
+  hideWhenClose: makeBooleanProp(true)
 }
 
 export type ActionSheetProps = ExtractPropTypes<typeof actionSheetProps>

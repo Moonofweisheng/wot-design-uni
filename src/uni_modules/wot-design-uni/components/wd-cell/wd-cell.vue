@@ -1,47 +1,45 @@
 <template>
   <view
-    :class="['wd-cell', isBorder ? 'is-border' : '', size ? 'is-' + size : '', center ? 'is-center' : '', customClass]"
+    :class="['wd-cell', isBorder ? 'is-border' : '', size ? 'is-' + size : '', center ? 'is-center' : '', vertical ? 'is-vertical' : '', customClass]"
     :style="customStyle"
     :hover-class="isLink || clickable ? 'is-hover' : 'none'"
     :hover-stay-time="70"
-    @click="onClick"
+    @click="handleClick"
   >
-    <view :class="['wd-cell__wrapper', vertical ? 'is-vertical' : '']">
-      <view
-        :class="['wd-cell__left', isRequired ? 'is-required' : '']"
-        :style="titleWidth ? 'min-width:' + titleWidth + ';max-width:' + titleWidth + ';' : ''"
-      >
-        <!--左侧icon部位-->
-        <wd-icon v-if="icon" :name="icon" :custom-class="`wd-cell__icon  ${customIconClass}`"></wd-icon>
-        <slot v-else name="icon" />
+    <view
+      :class="['wd-cell__left', isRequired ? 'is-required' : '']"
+      :style="titleWidth ? 'min-width:' + titleWidth + ';max-width:' + titleWidth + ';' : ''"
+    >
+      <!--左侧icon部位-->
+      <wd-icon v-if="icon" :name="icon" :custom-class="`wd-cell__icon  ${customIconClass}`"></wd-icon>
+      <slot v-else name="icon" />
 
-        <view class="wd-cell__title">
-          <!--title BEGIN-->
-          <view v-if="title" :class="customTitleClass">{{ title }}</view>
-          <slot v-else name="title"></slot>
-          <!--title END-->
+      <view class="wd-cell__title">
+        <!--title BEGIN-->
+        <view v-if="title" :class="customTitleClass">{{ title }}</view>
+        <slot v-else name="title"></slot>
+        <!--title END-->
 
-          <!--label BEGIN-->
-          <view v-if="label" :class="`wd-cell__label ${customLabelClass}`">{{ label }}</view>
-          <slot v-else name="label" />
-          <!--label END-->
-        </view>
+        <!--label BEGIN-->
+        <view v-if="label" :class="`wd-cell__label ${customLabelClass}`">{{ label }}</view>
+        <slot v-else name="label" />
+        <!--label END-->
       </view>
-      <!--right content BEGIN-->
-      <view class="wd-cell__right">
-        <view class="wd-cell__body">
-          <!--文案内容-->
-          <view :class="`wd-cell__value ${customValueClass}`">
-            <slot>{{ value }}</slot>
-          </view>
-          <!--箭头-->
-          <wd-icon v-if="isLink" custom-class="wd-cell__arrow-right" name="arrow-right" />
-          <slot v-else name="right-icon" />
-        </view>
-        <view v-if="errorMessage" class="wd-cell__error-message">{{ errorMessage }}</view>
-      </view>
-      <!--right content END-->
     </view>
+    <!--right content BEGIN-->
+    <view class="wd-cell__right">
+      <view class="wd-cell__body">
+        <!--文案内容-->
+        <view :class="`wd-cell__value ${customValueClass}`">
+          <slot>{{ value }}</slot>
+        </view>
+        <!--箭头-->
+        <wd-icon v-if="isLink" custom-class="wd-cell__arrow-right" name="arrow-right" />
+        <slot v-else name="right-icon" />
+      </view>
+      <view v-if="errorMessage" class="wd-cell__error-message">{{ errorMessage }}</view>
+    </view>
+    <!--right content END-->
   </view>
 </template>
 
@@ -98,10 +96,7 @@ const isRequired = computed(() => {
   return props.required || props.rules.some((rule) => rule.required) || formRequired
 })
 
-/**
- * @description 点击cell的handle
- */
-function onClick() {
+function handleClick() {
   const url = props.to
 
   if (props.clickable || props.isLink) {
