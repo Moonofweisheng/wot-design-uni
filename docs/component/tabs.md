@@ -175,7 +175,7 @@ const tab = ref('Design')
 | sticky        | 粘性布局                         | boolean         | -      | false  | -        |
 | offset-top    | 粘性布局时距离窗口顶部距离       | number          | -      | 0      | -        |
 | swipeable     | 开启手势滑动                     | boolean         | -      | false  | -        |
-| autoLineWidth | 自动调整底部条宽度               | boolean         | -      | false  | -        |
+| autoLineWidth | 底部条宽度跟随文字，指定`lineWidth`时此选项不生效  | boolean         | -      | false  | $LOWEST_VERSION$   |
 | lineWidth     | 底部条宽度，单位像素             | number          | -      | 19     | -        |
 | lineHeight    | 底部条高度，单位像素             | number          | -      | 3      | -        |
 | color         | 文字颜色                         | string          | -      | -      | -        |
