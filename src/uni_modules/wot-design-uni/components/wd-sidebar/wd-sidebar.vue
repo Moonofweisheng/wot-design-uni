@@ -17,6 +17,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import { isFunction } from '../common/util'
 import { useChildren } from '../composables/useChildren'
 import { SIDEBAR_KEY, sidebarProps } from './types'
 
@@ -28,9 +29,30 @@ linkChildren({ props, setChange })
 
 /**
  * 子项状态变更
- * @param child 子项
+ * @param value 目标值
+ * @param label 目标值标题
  */
 function setChange(value: number | string, label: string) {
+  if (isFunction(props.beforeChange)) {
+    props.beforeChange({
+      value: value,
+      resolve: (pass: boolean) => {
+        if (pass) {
+          updateValue(value, label)
+        }
+      }
+    })
+  } else {
+    updateValue(value, label)
+  }
+}
+
+/**
+ * 更新选中状态
+ * @param value 目标值
+ * @param label 目标值标题
+ */
+function updateValue(value: number | string, label: string) {
   emit('update:modelValue', value)
   emit('change', { value, label })
 }
