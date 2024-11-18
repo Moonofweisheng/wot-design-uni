@@ -9,6 +9,7 @@
       :close-on-click-modal="closeOnClickModal"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :lazy-render="lazyRender"
+      :hideWhenClose="hideWhenClose"
       @enter="handleOpen"
       @close="close"
       @after-enter="handleOpened"
@@ -127,9 +128,6 @@ function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) 
 }
 function handleClickModal() {
   emit('click-modal')
-  // if (props.closeOnClickModal) {
-  //   close()
-  // }
 }
 function handleCancel() {
   emit('cancel')

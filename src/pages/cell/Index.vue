@@ -2,14 +2,14 @@
   <page-wraper>
     <wd-toast />
     <demo-block title="基本用法" transparent>
-      <wd-cell-group>
+      <wd-cell-group border>
         <wd-cell title="标题文字" value="内容" />
         <wd-cell title="标题文字" label="描述信息" value="内容" />
       </wd-cell-group>
     </demo-block>
 
     <demo-block title="图标" transparent>
-      <wd-cell-group>
+      <wd-cell-group border>
         <wd-cell title="标题文字" value="内容" icon="setting" />
         <wd-cell title="标题文字" value="内容">
           <template #icon>
@@ -20,14 +20,14 @@
     </demo-block>
 
     <demo-block title="分组标题" transparent>
-      <wd-cell-group title="交易管理" value="内容">
+      <wd-cell-group border title="交易管理" value="内容">
         <wd-cell title="标题文字" value="内容" />
         <wd-cell title="标题文字" label="描述信息" value="内容"></wd-cell>
       </wd-cell-group>
     </demo-block>
 
     <demo-block title="大尺寸" transparent>
-      <wd-cell-group>
+      <wd-cell-group border>
         <wd-cell size="large" title="标题文字" value="内容" />
         <wd-cell title="标题文字" value="内容" size="large" icon="setting" is-link />
         <wd-cell size="large" title="标题文字" label="描述信息" value="内容" />
@@ -43,20 +43,20 @@
     </demo-block>
 
     <demo-block title="点击事件" transparent>
-      <wd-cell-group>
+      <wd-cell-group border>
         <wd-cell title="标题文字" value="内容" clickable @click="showToast" />
       </wd-cell-group>
     </demo-block>
 
     <demo-block title="页面跳转" transparent>
-      <wd-cell-group>
+      <wd-cell-group border>
         <wd-cell title="帮助与反馈" is-link to="/pages/index/Index" />
         <wd-cell title="设置" value="内容" is-link to="/pages/button/Index" replace></wd-cell>
       </wd-cell-group>
     </demo-block>
 
     <demo-block title="垂直居中" transparent>
-      <wd-cell-group>
+      <wd-cell-group border>
         <wd-cell title="标题文字" value="内容" center />
         <wd-cell title="标题文字" label="描述信息" value="内容" center />
       </wd-cell-group>
@@ -74,13 +74,13 @@
     </demo-block>
 
     <demo-block title="设置宽度" transparent>
-      <wd-cell-group>
+      <wd-cell-group border>
         <wd-cell title="标题文字" label="这里是文字描述这里是文字描述这里是文字描述" title-width="200px" value="内容" />
       </wd-cell-group>
     </demo-block>
 
     <demo-block title="自定义slot" transparent>
-      <wd-cell-group>
+      <wd-cell-group border>
         <wd-cell title="标题文字" center>
           <wd-button custom-class="custom-value" size="small" plain>按钮</wd-button>
         </wd-cell>

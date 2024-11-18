@@ -1,6 +1,13 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp, numericProp } from '../common/props'
-import type { FormItemRule } from '../wd-form/types'
+
+export type ColPickerOption = {
+  label?: string
+  value?: string | number
+  tip?: string
+  disabled?: boolean
+  [key: PropertyKey]: any
+}
 
 export const colPickerProps = {
   ...baseProps,
@@ -9,37 +16,13 @@ export const colPickerProps = {
    */
   modelValue: makeRequiredProp(Array as PropType<Array<string | number>>),
   /**
+   * 是否显示
+   */
+  visible: makeBooleanProp(false),
+  /**
    * 选择器数据，二维数组
    */
-  columns: makeArrayProp<Record<string, any>[]>(),
-  /**
-   * 选择器左侧文案
-   */
-  label: String,
-  /**
-   * 设置左侧标题宽度
-   */
-  labelWidth: makeStringProp('33%'),
-  /**
-   * 使用 label 插槽时设置该选项
-   */
-  useLabelSlot: makeBooleanProp(false),
-  /**
-   * 使用默认插槽时设置该选项
-   */
-  useDefaultSlot: makeBooleanProp(false),
-  /**
-   * 禁用
-   */
-  disabled: makeBooleanProp(false),
-  /**
-   * 只读
-   */
-  readonly: makeBooleanProp(false),
-  /**
-   * 选择器占位符
-   */
-  placeholder: String,
+  columns: makeArrayProp<ColPickerOption[]>(),
   /**
    * 弹出层标题
    */
@@ -49,29 +32,9 @@ export const colPickerProps = {
    */
   columnChange: Function as PropType<ColPickerColumnChange>,
   /**
-   * 自定义展示文案的格式化函数，返回一个字符串
-   */
-  displayFormat: Function as PropType<ColPickerDisplayFormat>,
-  /**
    * 确定前校验函数，接收 (value, resolve) 参数，通过 resolve 继续执行 picker，resolve 接收 1 个 boolean 参数
    */
   beforeConfirm: Function as PropType<ColPickerBeforeConfirm>,
-  /**
-   * 选择器的值靠右展示
-   */
-  alignRight: makeBooleanProp(false),
-  /**
-   * 是否为错误状态，错误状态时右侧内容为红色
-   */
-  error: makeBooleanProp(false),
-  /**
-   * 是否必填
-   */
-  required: makeBooleanProp(false),
-  /**
-   * 设置选择器大小，可选值：large
-   */
-  size: String,
   /**
    * 选项对象中，value 对应的 key
    */
@@ -105,48 +68,27 @@ export const colPickerProps = {
    */
   safeAreaInsetBottom: makeBooleanProp(true),
   /**
-   * 是否超出隐藏
-   */
-  ellipsis: makeBooleanProp(false),
-  /**
-   * 表单域 model 字段名，在使用表单校验功能的情况下，该属性是必填的
-   */
-  prop: String,
-  /**
-   * 表单验证规则，结合wd-form组件使用
-   */
-  rules: makeArrayProp<FormItemRule>(),
-  /**
    * 底部条宽度，单位像素
    */
   lineWidth: numericProp,
   /**
    * 底部条高度，单位像素
    */
-  lineHeight: numericProp,
-  /**
-   * label 外部自定义样式
-   */
-  customViewClass: makeStringProp(''),
-  /**
-   * value 外部自定义样式
-   */
-  customLabelClass: makeStringProp(''),
-  customValueClass: makeStringProp('')
+  lineHeight: numericProp
 }
 
 export type ColPickerProps = ExtractPropTypes<typeof colPickerProps>
 
 export type ColPickerColumnChangeOption = {
-  selectedItem: Record<string, any>
+  selectedItem: ColPickerOption
   index: number
   rowIndex: number
-  resolve: (nextColumn: Record<string, any>[]) => void
+  resolve: (nextColumn: ColPickerOption[]) => void
   finish: (isOk?: boolean) => void
 }
 export type ColPickerColumnChange = (option: ColPickerColumnChangeOption) => void
-export type ColPickerDisplayFormat = (selectedItems: Record<string, any>[]) => string
-export type ColPickerBeforeConfirm = (value: (string | number)[], selectedItems: Record<string, any>[], resolve: (isPass: boolean) => void) => void
+export type ColPickerDisplayFormat = (selectedItems: ColPickerOption[]) => string
+export type ColPickerBeforeConfirm = (value: (string | number)[], selectedItems: ColPickerOption[], resolve: (isPass: boolean) => void) => void
 
 export type ColPickerExpose = {
   // 关闭picker弹框

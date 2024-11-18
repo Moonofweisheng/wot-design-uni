@@ -1,34 +1,5 @@
 <template>
-  <view :class="`wd-calendar ${cell.border.value ? 'is-border' : ''} ${customClass}`">
-    <view class="wd-calendar__field" @click="open">
-      <slot v-if="useDefaultSlot"></slot>
-      <view
-        v-else
-        :class="`wd-calendar__cell ${disabled ? 'is-disabled' : ''} ${readonly ? 'is-readonly' : ''} ${alignRight ? 'is-align-right' : ''} ${
-          error ? 'is-error' : ''
-        } ${size ? 'is-' + size : ''} ${center ? 'is-center' : ''}`"
-      >
-        <view
-          v-if="label || useLabelSlot"
-          :class="`wd-calendar__label ${isRequired ? 'is-required' : ''} ${customLabelClass}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <block v-if="label">{{ label }}</block>
-          <slot v-else name="label"></slot>
-        </view>
-        <view class="wd-calendar__body">
-          <view class="wd-calendar__value-wraper">
-            <view
-              :class="`wd-calendar__value ${ellipsis ? 'is-ellipsis' : ''} ${customValueClass} ${showValue ? '' : 'wd-calendar__value--placeholder'}`"
-            >
-              {{ showValue || placeholder || translate('placeholder') }}
-            </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-calendar__arrow" name="arrow-right" />
-          </view>
-          <view v-if="errorMessage" class="wd-calendar__error-message">{{ errorMessage }}</view>
-        </view>
-      </view>
-    </view>
+  <view :class="`wd-calendar ${customClass}`">
     <wd-action-sheet
       v-model="pickerShow"
       :duration="250"
@@ -124,56 +95,10 @@ import { ref, computed, watch } from 'vue'
 import { dayjs } from '../common/dayjs'
 import { deepClone, isArray, isEqual, padZero, requestAnimationFrame } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
-import { useCell } from '../composables/useCell'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
-import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { calendarProps, type CalendarExpose } from './types'
 import type { CalendarType } from '../wd-calendar-view/types'
 const { translate } = useTranslate('calendar')
-
-const defaultDisplayFormat = (value: number | number[], type: CalendarType): string => {
-  switch (type) {
-    case 'date':
-      return dayjs(value as number).format('YYYY-MM-DD')
-    case 'dates':
-      return (value as number[])
-        .map((item) => {
-          return dayjs(item).format('YYYY-MM-DD')
-        })
-        .join(', ')
-    case 'daterange':
-      return `${(value as number[])[0] ? dayjs((value as number[])[0]).format('YYYY-MM-DD') : translate('startTime')} ${translate('to')} ${
-        (value as number[])[1] ? dayjs((value as number[])[1]).format('YYYY-MM-DD') : translate('endTime')
-      }`
-    case 'datetime':
-      return dayjs(value as number).format('YYYY-MM-DD HH:mm:ss')
-    case 'datetimerange':
-      return `${(value as number[])[0] ? dayjs((value as number[])[0]).format(translate('timeFormat')) : translate('startTime')} ${translate(
-        'to'
-      )}\n${(value as number[])[1] ? dayjs((value as number[])[1]).format(translate('timeFormat')) : translate('endTime')}`
-    case 'week': {
-      const year = new Date(value as number).getFullYear()
-      const week = getWeekNumber(value as number)
-      return translate('weekFormat', year, padZero(week))
-    }
-    case 'weekrange': {
-      const year1 = new Date((value as number[])[0]).getFullYear()
-      const week1 = getWeekNumber((value as number[])[0])
-      const year2 = new Date((value as number[])[1]).getFullYear()
-      const week2 = getWeekNumber((value as number[])[1])
-      return `${(value as number[])[0] ? translate('weekFormat', year1, padZero(week1)) : translate('startWeek')} - ${
-        (value as number[])[1] ? translate('weekFormat', year2, padZero(week2)) : translate('endWeek')
-      }`
-    }
-    case 'month':
-      return dayjs(value as number).format('YYYY / MM')
-    case 'monthrange':
-      return `${(value as number[])[0] ? dayjs((value as number[])[0]).format('YYYY / MM') : translate('startMonth')} ${translate('to')} ${
-        (value as number[])[1] ? dayjs((value as number[])[1]).format('YYYY / MM') : translate('endMonth')
-      }`
-  }
-}
 
 const formatRange = (value: number, rangeType: 'start' | 'end', type: CalendarType) => {
   switch (type) {
@@ -217,7 +142,6 @@ const lastTab = ref<number>(0)
 const currentType = ref<CalendarType>('date')
 const lastCurrentType = ref<CalendarType>()
 const inited = ref<boolean>(false)
-const cell = useCell()
 const calendarView = ref()
 const calendarTabs = ref()
 
@@ -226,14 +150,6 @@ const rangeLabel = computed(() => {
   return [start, end].map((item, index) => {
     return (props.innerDisplayFormat || formatRange)(item, index === 0 ? 'start' : 'end', currentType.value)
   })
-})
-
-const showValue = computed(() => {
-  if ((!isArray(props.modelValue) && props.modelValue) || (isArray(props.modelValue) && props.modelValue.length)) {
-    return (props.displayFormat || defaultDisplayFormat)(props.modelValue, lastCurrentType.value || currentType.value)
-  } else {
-    return ''
-  }
 })
 
 watch(
@@ -250,7 +166,7 @@ watch(
 
 watch(
   () => props.type,
-  (newValue, oldValue) => {
+  (newValue) => {
     if (props.showTypeSwitch) {
       const tabs = ['date', 'week', 'month']
       const rangeTabs = ['daterange', 'weekrange', 'monthrange']
@@ -278,31 +194,6 @@ watch(
   }
 )
 
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
-})
-
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
-})
-
 const range = computed(() => {
   return (type: CalendarType) => {
     return isRange(type)
@@ -314,10 +205,6 @@ function scrollIntoView() {
 }
 // 对外暴露方法
 function open() {
-  const { disabled, readonly } = props
-
-  if (disabled || readonly) return
-
   inited.value = true
   pickerShow.value = true
   lastCalendarValue.value = deepClone(calendarValue.value)

@@ -9,7 +9,7 @@
     <wd-icon
       v-else-if="status"
       :custom-class="`wd-progress__label wd-progress__icon ${progressClass}`"
-      :name="status == 'danger' ? 'close-outline' : 'check-outline'"
+      :name="statusIcon"
       :color="typeof color === 'string' ? color : ''"
     ></wd-icon>
   </view>
@@ -28,9 +28,9 @@ export default {
 
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { computed, ref, watch } from 'vue'
-import { checkNumRange, isArray, objToStyle } from '../common/util'
-import { progressProps } from './types'
+import { computed, ref, watch, type CSSProperties } from 'vue'
+import { checkNumRange, isArray, isObj, objToStyle } from '../common/util'
+import { progressProps, type ProgressColor } from './types'
 
 const props = defineProps(progressProps)
 // 进度条展示的颜色
@@ -44,12 +44,32 @@ const progressClass = ref<string>('')
 let timer: NodeJS.Timeout | null = null // 定时器
 
 const rootStyle = computed(() => {
-  const style: Record<string, string | number> = {
-    background: showColor.value,
+  const style: CSSProperties = {
     width: showPercent.value + '%',
     'transition-duration': changeCount.value * props.duration * 0.001 + 's'
   }
+  if (showColor.value) {
+    style.background = showColor.value
+  }
   return objToStyle(style)
+})
+
+const statusIcon = computed(() => {
+  let icon: string = ''
+  switch (props.status) {
+    case 'danger':
+      icon = 'close-outline'
+      break
+    case 'success':
+      icon = 'check-outline'
+      break
+    case 'warning':
+      icon = 'warn-bold'
+      break
+    default:
+      break
+  }
+  return icon
 })
 
 watch(
@@ -129,22 +149,15 @@ function update(targetPercent: number, color: string) {
  * @description 控制进度条的进度和每段的颜色
  */
 function controlProgress() {
-  const {
-    // 目标百分比
-    percentage,
-    // 传入的color数组
-    color
-  } = props
-  // 锁
+  const { percentage, color } = props
   if (showPercent.value === percentage || !percentage) return
   /**
    * 数组边界安全判断
    */
-  let colorArray: string[] | Record<string, any>[] = (isArray(color) ? color : [color]) as string[] | Record<string, any>[]
+  let colorArray: string[] | ProgressColor[] = (isArray(color) ? color : [color]) as string[] | ProgressColor[]
   if (colorArray.length === 0) throw Error('The colorArray is empty')
-  const isStrArray = (colorArray as any).every((item: any) => typeof item === 'string')
-  // eslint-disable-next-line no-prototype-builtins
-  const isObjArray = (colorArray as any).every((color: any) => color.hasOwnProperty('color') && color.hasOwnProperty('percentage'))
+  const isStrArray = colorArray.every((item) => typeof item === 'string')
+  const isObjArray = colorArray.every((color) => isObj(color))
   if (!isStrArray && !isObjArray) {
     throw Error('Color must be String or Object with color and percentage')
   }

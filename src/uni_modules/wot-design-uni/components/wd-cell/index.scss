@@ -19,9 +19,7 @@
     }
 
     @include when(border) {
-      .wd-cell__wrapper {
-        @include halfPixelBorder('top', 0, $-dark-border-color);
-      }
+      @include halfPixelBorder('top', 0, $-dark-border-color);
     }
 
     :deep(.wd-cell__arrow-right) {
@@ -32,45 +30,37 @@
 
 @include b(cell) {
   position: relative;
-  padding-left: $-cell-padding;
   background-color: $-color-white;
+  padding: $-cell-horizontal-padding $-cell-vertical-padding;
   text-decoration: none;
   color: $-cell-title-color;
   line-height: $-cell-line-height;
   -webkit-tap-highlight-color: transparent;
+  display: flex;
+
 
   @include when(border) {
-    .wd-cell__wrapper {
-      @include halfPixelBorder('top');
+    @include halfPixelBorder('top');
+  }
+
+  @include when(vertical) {
+    display: block;
+
+    .wd-cell__right {
+      margin-top: $-cell-vertical-top;
+    }
+
+    .wd-cell__value {
+      text-align: left;
+    }
+
+    .wd-cell__left {
+      margin-right: 0;
     }
   }
 
-  @include e(wrapper) {
-    position: relative;
-    display: flex;
-    padding: $-cell-wrapper-padding $-cell-padding $-cell-wrapper-padding 0;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    @include when(vertical) {
-      display: block;
-
-      .wd-cell__right {
-        margin-top: $-cell-vertical-top;
-      }
-
-      .wd-cell__value {
-        text-align: left;
-      }
-
-      .wd-cell__left {
-        margin-right: 0;
-      }
-    }
-
-    @include when(label) {
-      padding: $-cell-wrapper-padding-with-label $-cell-padding $-cell-wrapper-padding-with-label 0;
-    }
+  @include when(label) {
+    padding: $-cell-horizontal-padding-with-label $-cell-vertical-padding;
   }
 
   @include e(left) {
@@ -80,7 +70,6 @@
     text-align: left;
     font-size: $-cell-title-fs;
     box-sizing: border-box;
-    margin-right: $-cell-padding;
 
     @include when(required) {
       padding-left: 12px;
@@ -123,7 +112,7 @@
     line-height: $-cell-line-height;
   }
 
-  @include e(body){
+  @include e(body) {
     display: flex;
   }
 
@@ -146,7 +135,7 @@
     line-height: $-cell-line-height;
   }
 
-  @include e(error-message){
+  @include e(error-message) {
     color: $-form-item-error-message-color;
     font-size: $-form-item-error-message-font-size;
     line-height: $-form-item-error-message-line-height;
@@ -163,14 +152,13 @@
   }
 
   @include when(large) {
+    padding-top: $-cell-horizontal-padding-large;
+    padding-bottom: $-cell-horizontal-padding-large;
+
     .wd-cell__title {
       font-size: $-cell-title-fs-large;
     }
 
-    .wd-cell__wrapper {
-      padding-top: $-cell-wrapper-padding-large;
-      padding-bottom: $-cell-wrapper-padding-large;
-    }
 
     .wd-cell__label {
       font-size: $-cell-label-fs-large;
@@ -182,8 +170,6 @@
   }
 
   @include when(center) {
-    .wd-cell__wrapper {
-      align-items: center;
-    }
+    align-items: center;
   }
 }

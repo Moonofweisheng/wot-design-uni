@@ -1,83 +1,143 @@
 <template>
   <page-wraper>
-    <wd-toast />
+    <wd-col-picker
+      v-model:visible="visible.visible1"
+      v-model="value1"
+      :columns="areaData1"
+      :column-change="columnChange1"
+      @confirm="(result) => handleConfirm({ ...result, index: 1 })"
+    />
+
+    <wd-col-picker
+      v-model:visible="visible.visible2"
+      v-model="value2"
+      :columns="areaData2"
+      :column-change="columnChange"
+      @confirm="(result) => handleConfirm({ ...result, index: 2 })"
+      auto-complete
+    />
+    <wd-col-picker
+      v-model:visible="visible.visible3"
+      v-model="value4"
+      :columns="areaData4"
+      :column-change="columnChange1"
+      @confirm="(result) => handleConfirm({ ...result, index: 3 })"
+    />
+
+    <wd-col-picker
+      v-model:visible="visible.visible4"
+      v-model="value4"
+      :columns="areaData5"
+      :column-change="columnChange1"
+      @confirm="(result) => handleConfirm({ ...result, index: 4 })"
+    />
+
+    <wd-col-picker
+      v-model="value7"
+      v-model:visible="visible.visible5"
+      title="选择地址"
+      :columns="areaData1"
+      :column-change="columnChange1"
+      @confirm="(result) => handleConfirm({ ...result, index: 5 })"
+    />
+
+    <wd-col-picker
+      v-model:visible="visible.visible6"
+      v-model="value8"
+      :columns="areaData1"
+      :column-change="columnChange1"
+      :before-confirm="beforeConfirm"
+      @confirm="(result) => handleConfirm({ ...result, index: 6 })"
+    />
+
+    <wd-col-picker
+      label="选择地址"
+      v-model="value11"
+      v-model:visible="visible.visible7"
+      :columns="areaData1"
+      @confirm="(result) => handleConfirm({ ...result, index: 7 })"
+      :column-change="columnChange2"
+    />
+
     <view style="margin: 20px 0">
       <wd-cell-group border>
-        <wd-col-picker label="选择地址" v-model="value1" :columns="areaData1" :column-change="columnChange1" @confirm="handleValue" />
-        <wd-col-picker label="初始选项" v-model="value2" :columns="areaData2" :column-change="columnChange" auto-complete />
-        <wd-col-picker label="禁用" disabled v-model="value3" :columns="areaData3" :column-change="columnChange1" />
-        <wd-col-picker label="只读" readonly v-model="value3" :columns="areaData3" :column-change="columnChange1" />
-        <wd-col-picker label="禁用选项" v-model="value4" :columns="areaData4" :column-change="columnChange1" />
-        <wd-col-picker label="选项提示信息" v-model="value5" :columns="areaData5" :column-change="columnChange1" />
-        <wd-col-picker label="展示格式化" v-model="value6" :columns="areaData3" :column-change="columnChange1" :display-format="displayFormat" />
-        <wd-col-picker label="标题" v-model="value7" title="选择地址" :columns="areaData1" :column-change="columnChange1" />
-        <wd-col-picker label="before-confirm" v-model="value8" :columns="areaData1" :column-change="columnChange1" :before-confirm="beforeConfirm" />
-        <wd-col-picker label="错误" error v-model="value9" :columns="areaData1" :column-change="columnChange1" />
-        <wd-col-picker label="必填" required v-model="value10" :columns="areaData1" :column-change="columnChange1" />
+        <wd-cell title="选择地址" :value="cellValue.value1" is-link @click="visible.visible1 = true"></wd-cell>
+        <wd-cell title="初始选项" :value="cellValue.value2" is-link @click="visible.visible2 = true"></wd-cell>
+        <wd-cell title="禁用选项" :value="cellValue.value3" is-link @click="visible.visible3 = true"></wd-cell>
+        <wd-cell title="选项提示信息" :value="cellValue.value4" is-link @click="visible.visible4 = true"></wd-cell>
+        <wd-cell title="自定义标题" :value="cellValue.value5" is-link @click="visible.visible5 = true"></wd-cell>
+        <wd-cell title="before-confirm" :value="cellValue.value6" is-link @click="visible.visible6 = true"></wd-cell>
+        <wd-cell title="加载动画" :value="cellValue.value7" is-link @click="visible.visible7 = true"></wd-cell>
       </wd-cell-group>
     </view>
-    <demo-block title="一般column-change是个异步获取数据的操作，触发column-change组件会有默认loading，数据响应后关闭loading" transparent>
-      <wd-col-picker label="选择地址" v-model="value11" :columns="areaData1" :column-change="columnChange2" />
-    </demo-block>
-    <demo-block title="label不传" transparent>
-      <wd-col-picker v-model="value12" :columns="areaData1" :column-change="columnChange1" />
-    </demo-block>
-    <demo-block title="大小" transparent>
-      <wd-col-picker label="选择地址" v-model="value13" size="large" :columns="areaData1" :column-change="columnChange1" />
-    </demo-block>
-    <demo-block title="值靠右展示" transparent>
-      <wd-col-picker label="选择地址" align-right v-model="value14" :columns="areaData1" :column-change="columnChange1" />
-    </demo-block>
-    <demo-block title="自定义选择器" transparent>
-      <view style="margin-left: 15px">
-        <view style="margin-bottom: 10px">当前选中项: {{ displayValue }}</view>
-        <wd-col-picker
-          v-model="value15"
-          use-default-slot
-          :columns="areaData1"
-          :column-change="columnChange1"
-          style="display: inline-block"
-          @confirm="handleConfirm"
-        >
-          <wd-button>选择地址</wd-button>
-        </wd-col-picker>
-      </view>
-    </demo-block>
+    <wd-toast />
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useToast } from '@/uni_modules/wot-design-uni'
-import type { ColPickerColumnChange } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
+import type { ColPickerColumnChange, ColPickerOption } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
 import { useColPickerData } from '@/hooks/useColPickerData'
 
-const { colPickerData, findChildrenByCode } = useColPickerData()
+const { colPickerData, findChildrenByCode, findNodeByCodeList } = useColPickerData()
 const toast = useToast()
 
 onMounted(async () => {
-  toast.loading('数据加载中')
   await sleep()
-  toast.close()
   value2.value = ['150000', '150100', '150121']
+  const result = findNodeByCodeList(value2.value)
+  cellValue.value2 = result.map((item) => item.text).join('/')
 })
 
-const value1 = ref<any[]>([])
+const visible = reactive({
+  visible1: false,
+  visible2: false,
+  visible3: false,
+  visible4: false,
+  visible5: false,
+  visible6: false,
+  visible7: false,
+  visible8: false,
+  visible9: false,
+  visible10: false,
+  visible11: false,
+  visible12: false,
+  visible13: false,
+  visible14: false,
+  visible15: false
+})
+
+const cellValue = reactive<{ [key: PropertyKey]: any }>({
+  value1: '',
+  value2: '',
+  value3: '',
+  value4: '',
+  value5: '',
+  value6: '',
+  value7: '',
+  value8: '',
+  value9: '',
+  value10: '',
+  value11: ''
+})
+
+const value1 = ref<string[]>([])
 const value2 = ref<string[]>([])
-const value3 = ref<any[]>(['130000', '130200', '130204'])
-const value4 = ref<any[]>([])
-const value5 = ref<any[]>([])
-const value6 = ref<any[]>(['130000', '130200', '130204'])
-const value7 = ref<any[]>([])
-const value8 = ref<any[]>([])
-const value9 = ref<any[]>([])
-const value10 = ref<any[]>([])
-const value11 = ref<any[]>([])
-const value12 = ref<any[]>([])
-const value13 = ref<any[]>([])
-const value14 = ref<any[]>([])
-const value15 = ref<any[]>([])
+const value3 = ref<string[]>(['130000', '130200', '130204'])
+const value4 = ref<string[]>([])
+const value5 = ref<string[]>([])
+const value6 = ref<string[]>(['130000', '130200', '130204'])
+const value7 = ref<string[]>([])
+const value8 = ref<string[]>([])
+const value9 = ref<string[]>([])
+const value10 = ref<string[]>([])
+const value11 = ref<string[]>([])
+const value12 = ref<string[]>([])
+const value13 = ref<string[]>([])
+const value14 = ref<string[]>([])
+const value15 = ref<string[]>([])
 const displayValue = ref<string>('')
-const areaData1 = ref<any[]>([
+const areaData1 = ref<ColPickerOption[][]>([
   colPickerData.map((item) => {
     return {
       value: item.value,
@@ -86,8 +146,8 @@ const areaData1 = ref<any[]>([
   })
 ])
 
-const areaData2 = ref<any[]>([])
-const areaData3 = ref<any[]>([
+const areaData2 = ref<ColPickerOption[][]>([])
+const areaData3 = ref<ColPickerOption[][]>([
   colPickerData.map((item) => {
     return {
       value: item.value,
@@ -107,7 +167,7 @@ const areaData3 = ref<any[]>([
     }
   })
 ])
-const areaData4 = ref<any[]>([
+const areaData4 = ref<ColPickerOption[][]>([
   colPickerData.map((item) => {
     return {
       value: item.value,
@@ -143,7 +203,7 @@ const columnChange1: ColPickerColumnChange = ({ selectedItem, resolve, finish })
   }
 }
 
-const columnChange: ColPickerColumnChange = async ({ selectedItem, resolve, finish }) => {
+const columnChange: ColPickerColumnChange = async ({ selectedItem, index, resolve, finish }) => {
   await sleep(0.3)
   const areaData = findChildrenByCode(colPickerData, selectedItem.value)
   if (areaData && areaData.length) {
@@ -182,10 +242,10 @@ const columnChange2: ColPickerColumnChange = ({ selectedItem, resolve, finish })
     }
   }, 300)
 }
-const displayFormat = (selectedItems: Record<string, any>[]) => {
+const displayFormat = (selectedItems: ColPickerOption[]) => {
   return selectedItems[selectedItems.length - 2].label + '-' + selectedItems[selectedItems.length - 1].label
 }
-const beforeConfirm = (value: (string | number)[], selectedItems: Record<string, any>[], resolve: (isPass: boolean) => void) => {
+const beforeConfirm = (value: (string | number)[], selectedItems: ColPickerOption[], resolve: (isPass: boolean) => void) => {
   if (parseInt(String(value[2])) > 120000) {
     toast.error('该地区库存不足')
     resolve(false)
@@ -202,15 +262,12 @@ function sleep(second: number = 1) {
   })
 }
 
-function handleConfirm({ selectedItems }: any) {
-  displayValue.value = selectedItems
-    .map((item: any) => {
+function handleConfirm({ selectedItems, index }: { selectedItems: ColPickerOption[]; index: number }) {
+  cellValue[`value${index}`] = selectedItems
+    .map((item) => {
       return item.label
     })
-    .join('')
-}
-function handleValue({ value }: any) {
-  console.log(value)
+    .join('/')
 }
 </script>
 <style lang="scss" scoped></style>
