@@ -1,11 +1,19 @@
-import { type ExtractPropTypes, type InjectionKey } from 'vue'
+import { type ComponentPublicInstance, type ExtractPropTypes, type InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp, numericProp } from '../common/props'
 
 export type TabsProvide = {
   state: {
     activeIndex: number
+    lineStyle: string // 激活项边框线样式
+    inited: boolean // 是否初始化
+    animating: boolean // 是否动画中
+    mapShow: boolean // map的开关
+    scrollLeft: number // scroll-view偏移量
   }
+  props: Partial<TabsProps>
 }
+
+export type TabsSlidable = 'auto' | 'always'
 
 export const TABS_KEY: InjectionKey<TabsProvide> = Symbol('wd-tabs')
 
@@ -58,7 +66,24 @@ export const tabsProps = {
   /**
    * 切换动画过渡时间，单位毫秒
    */
-  duration: makeNumberProp(300)
+  duration: makeNumberProp(300),
+  /**
+   * 是否开启滚动导航
+   * 可选值：'auto' | 'always'
+   * @default auto
+   */
+  slidable: makeStringProp<TabsSlidable>('auto')
+}
+
+export type TabsExpose = {
+  // 修改选中的tab Index
+  setActive: (value: number | string, init: boolean, setScroll: boolean) => void
+  // scroll-view滑动到active的tab_nav
+  scrollIntoView: () => void
+  // 更新底部条样式
+  updateLineStyle: (animation: boolean) => void
 }
 
 export type TabsProps = ExtractPropTypes<typeof tabsProps>
+
+export type TabsInstance = ComponentPublicInstance<TabsProps, TabsExpose>

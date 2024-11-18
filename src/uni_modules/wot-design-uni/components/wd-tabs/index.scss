@@ -91,6 +91,7 @@
   }
 
   @include e(nav-item) {
+    position: relative;
     flex: 1;
     min-width: 0;
     text-align: center;
@@ -119,6 +120,11 @@
     width: $-tabs-nav-line-width;
     background: $-tabs-nav-line-bg-color;
     border-radius: calc($-tabs-nav-line-height / 2);
+
+    @include m(inner){
+      left: 50%; 
+      transform: translateX(-50%)
+    }
   }
 
   @include e(container) {
