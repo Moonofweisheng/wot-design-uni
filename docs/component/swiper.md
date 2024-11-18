@@ -346,7 +346,13 @@ const isLoop = ref(false)
 
 ### SwiperList
 
-轮播图项的列表配置，包括 图片或视频地址`value`、视频封面`poster` 等属性，支持扩展属性。
+轮播图项的列表配置，包括 图片或视频地址`value`、视频封面`poster` 、文件资源的类型`type`等属性，支持扩展属性。指定`type`后组件将不在内部判断文件类型，以`type`为准。
+| name      | 说明          | 最低版本 |
+| --------- | ------------ | -------- |
+| value | 图片或视频地址 |-   |
+| poster | 视频封面 |-   |
+| type | 用于指定文件资源的类型，可选值`image`、`video` | $LOWEST_VERSION$ |
+
 
 ### SwiperIndicatorProps
 
