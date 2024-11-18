@@ -15,7 +15,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onBeforeMount } from 'vue'
+import { computed, type CSSProperties, onBeforeMount } from 'vue'
 import { addUnit, isFunction, objToStyle } from '../common/util'
 import { switchProps } from './types'
 
@@ -27,10 +27,12 @@ const rootClass = computed(() => {
 })
 
 const rootStyle = computed(() => {
-  const rootStyle: Record<string, any> = {
-    'font-size': addUnit(props.size),
+  const rootStyle: CSSProperties = {
     background: props.modelValue === props.activeValue ? props.activeColor : props.inactiveColor,
     'border-color': props.modelValue === props.activeValue ? props.activeColor : props.inactiveColor
+  }
+  if (props.size) {
+    rootStyle['font-size'] = addUnit(props.size)
   }
   return `${objToStyle(rootStyle)};${props.customStyle}`
 })

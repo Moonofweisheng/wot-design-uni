@@ -26,7 +26,9 @@
               {{ showValue || placeholder || translate('placeholder') }}
             </view>
             <wd-icon v-if="showArrow" custom-class="wd-select-picker__arrow" name="arrow-right" />
-            <wd-icon v-else-if="showClear" custom-class="wd-select-picker__clear" name="error-fill" @click.stop="handleClear" />
+            <view v-else-if="showClear" @click.stop="handleClear">
+              <wd-icon custom-class="wd-select-picker__clear" name="error-fill" />
+            </view>
           </view>
 
           <view v-if="errorMessage" class="wd-select-picker__error-message">{{ errorMessage }}</view>
@@ -83,7 +85,7 @@
               <wd-radio :value="item[valueKey]" :disabled="item.disabled">
                 <block v-if="filterable && filterVal">
                   <block v-for="text in item[labelKey]" :key="text.label">
-                    <text :clsss="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
+                    <text :class="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
                   </block>
                 </block>
                 <block v-else>
@@ -135,7 +137,7 @@ import { selectPickerProps, type SelectPickerExpose } from './types'
 const { translate } = useTranslate('select-picker')
 
 const props = defineProps(selectPickerProps)
-const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue', 'open', 'close'])
+const emit = defineEmits(['change', 'cancel', 'confirm', 'clear', 'update:modelValue', 'open', 'close'])
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
@@ -261,7 +263,7 @@ const { proxy } = getCurrentInstance() as any
 
 function setScrollIntoView() {
   let wraperSelector: string = ''
-  let selectorPromise: Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>[] = []
+  let selectorPromise: Promise<UniApp.NodeInfo>[] = []
   if (isDef(selectList.value) && selectList.value !== '' && !isArray(selectList.value)) {
     wraperSelector = '#wd-radio-group'
     selectorPromise = [getRect(`#radio${selectList.value}`, false, proxy)]
@@ -274,28 +276,24 @@ function setScrollIntoView() {
   if (wraperSelector) {
     requestAnimationFrame().then(() => {
       requestAnimationFrame().then(() => {
-        Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise])
-          .then((res: any[]) => {
-            if (isDef(res) && isArray(res)) {
-              const scrollView = res[0]
-              const wraper = res[1]
-              const target = res.slice(2) || []
-              if (isDef(wraper) && isDef(scrollView)) {
-                const index = target.findIndex((item) => {
-                  return item.top >= scrollView.top && item.bottom <= scrollView.bottom
+        Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise]).then((res) => {
+          if (isDef(res) && isArray(res)) {
+            const scrollView = res[0]
+            const wraper = res[1]
+            const target = res.slice(2) || []
+            if (isDef(wraper) && isDef(scrollView)) {
+              const index = target.findIndex((item) => {
+                return item.bottom! > scrollView.top! && item.top! < scrollView.bottom!
+              })
+              if (index < 0) {
+                scrollTop.value = -1
+                nextTick(() => {
+                  scrollTop.value = Math.max(0, target[0].top! - wraper.top! - scrollView.height! / 2)
                 })
-                if (index < 0) {
-                  scrollTop.value = -1
-                  nextTick(() => {
-                    scrollTop.value = Math.max(0, target[0].top - wraper.top - scrollView.height / 2)
-                  })
-                }
               }
             }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+          }
+        })
       })
     })
   }
@@ -438,6 +436,7 @@ const showClear = computed(() => {
 
 function handleClear() {
   emit('update:modelValue', props.type === 'checkbox' ? [] : '')
+  emit('clear')
 }
 
 // 是否展示箭头

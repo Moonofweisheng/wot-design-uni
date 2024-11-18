@@ -146,16 +146,31 @@ const tab = ref('Design')
 </wd-tabs>
 ```
 
+## 左对齐超出即可滚动 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.15</el-tag>
+
+`slidable`设置为`always`时，所有的标签会向左侧收缩对齐，超出即可滑动。
+
+```html
+<wd-tabs v-model="tab" slidable="always">
+  <block v-for="item in 5" :key="item">
+    <wd-tab :title="`超大标签${item}`">
+      <view class="content">内容{{ item }}</view>
+    </wd-tab>
+  </block>
+</wd-tabs>
+```
+
+
 ---
 
-标签页在标签数大于等于 6 个时，可以滑动；当标签数大于等于 10 个时，将会显示导航地图，便于快速定位到某个标签。可以通过设置 `slidable-num` 修改可滑动的数量阈值；设置 `map-num` 修改显示导航地图的阈值。
+标签页在标签数大于等于 6 个时，可以滑动；当标签数大于等于 10 个时，将会显示导航地图，便于快速定位到某个标签。可以通过设置 `slidable-num` 修改可滑动的数量阈值；设置 `map-num` 修改显示导航地图的阈值。`slidable`设置为`always`时，所有的标签会向左侧收缩对齐，超出即可滑动。
 
 ## Tabs Attributes
 
 | 参数          | 说明                             | 类型            | 可选值 | 默认值 | 最低版本 |
 | ------------- | -------------------------------- | --------------- | ------ | ------ | -------- |
 | v-model       | 绑定值                           | string / number | -      | -      | -        |
-| slidable-num  | 可滑动的标签数阈值               | number          | -      | 6      | -        |
+| slidable-num  | 可滑动的标签数阈值，`slidable`设置为`auto`时生效 | number          | -      | 6      | -        |
 | map-num       | 显示导航地图的标签数阈值         | number          | -      | 10     | -        |
 | sticky        | 粘性布局                         | boolean         | -      | false  | -        |
 | offset-top    | 粘性布局时距离窗口顶部距离       | number          | -      | 0      | -        |
@@ -167,6 +182,7 @@ const tab = ref('Design')
 | inactiveColor | 非活动标签文字颜色               | string          | -      | -      | -        |
 | animated      | 是否开启切换标签内容时的转场动画 | boolean         | -      | false  | -        |
 | duration      | 切换动画过渡时间，单位毫秒       | number          | -      | 300    | -        |
+| slidable      | 是否开启滚动导航     | TabsSlidable   | `always`  | `auto`   | $LOWEST_VERSION$   |
 
 ## Tab Attributes
 

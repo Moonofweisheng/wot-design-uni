@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-07-23 11:38:09
+ * @LastEditTime: 2024-11-04 21:33:52
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-button\types.ts
@@ -42,6 +42,8 @@ export type ButtonOpenType =
   | 'watchLater'
   | 'openProfile'
   | 'agreePrivacyAuthorization'
+
+export type ButtonScope = 'phoneNumber' | 'userInfo'
 
 export const buttonProps = {
   ...baseProps,
@@ -128,7 +130,12 @@ export const buttonProps = {
   /**
    * 按钮的唯一标识，可用于设置隐私同意授权按钮的id
    */
-  buttonId: String
+  buttonId: String,
+  /**
+   * 支付宝小程序，当 open-type 为 getAuthorize 时有效。
+   * 可选值：'phoneNumber' | 'userInfo'
+   */
+  scope: String as PropType<ButtonScope>
 }
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>

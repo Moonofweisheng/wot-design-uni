@@ -360,7 +360,7 @@ function handleConfirm({ value, selectedItems }) {
 | show-confirm           | 是否显示确认按钮（仅`radio`类型生效）                                                                    | boolean                           |                  | true     | 1.2.8            |
 | prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                        | string                            | -                | -        | -                |
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                      | `FormItemRule []`                 | -                | `[]`     | -                |
-| clearable              | 显示清空按钮                                                                                             | boolean                           | -                | false    | $LOWEST_VERSION$ |
+| clearable              | 显示清空按钮                                                                                             | boolean                           | -                | false    | 1.3.13 |
 
 ### FormItemRule 数据结构
 
@@ -388,6 +388,7 @@ function handleConfirm({ value, selectedItems }) {
 | cancel   | 点击关闭按钮或者蒙层时触发 | -                                                                                                          | -        |
 | close    | 弹窗关闭时触发             | -                                                                                                          | 1.2.29   |
 | open     | 弹窗打开时触发             | -                                                                                                          | 1.2.29   |
+| clear    | 点击清空按钮时触发     | -                                                                                                    | 1.3.13    |
 
 ## Methods
 

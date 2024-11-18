@@ -1,17 +1,33 @@
 <template>
-  <wd-overlay
-    v-if="modal"
-    :show="modelValue"
-    :z-index="zIndex"
-    :lock-scroll="lockScroll"
-    :duration="duration"
-    :custom-style="modalStyle"
-    @click="handleClickModal"
-    @touchmove="noop"
-  />
-  <view v-if="!lazyRender || inited" :class="rootClass" :style="style" @transitionend="onTransitionEnd">
-    <slot />
-    <wd-icon v-if="closable" custom-class="wd-popup__close" name="add" @click="close" />
+  <view class="wd-popup-wrapper">
+    <wd-overlay
+      v-if="modal"
+      :show="modelValue"
+      :z-index="zIndex"
+      :lock-scroll="lockScroll"
+      :duration="duration"
+      :custom-style="modalStyle"
+      @click="handleClickModal"
+      @touchmove="noop"
+    />
+    <wd-transition
+      :lazy-render="lazyRender"
+      :custom-class="rootClass"
+      :custom-style="style"
+      :duration="duration"
+      :show="modelValue"
+      :name="transitionName"
+      :destroy="hideWhenClose"
+      @before-enter="emit('before-enter')"
+      @enter="emit('enter')"
+      @after-enter="emit('after-enter')"
+      @before-leave="emit('before-leave')"
+      @leave="emit('leave')"
+      @after-leave="emit('after-leave')"
+    >
+      <slot />
+      <wd-icon v-if="closable" custom-class="wd-popup__close" name="add" @click="close" />
+    </wd-transition>
   </view>
 </template>
 
@@ -29,9 +45,10 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdOverlay from '../wd-overlay/wd-overlay.vue'
-import { computed, onBeforeMount, ref, watch } from 'vue'
-import { isObj, requestAnimationFrame } from '../common/util'
+import wdTransition from '../wd-transition/wd-transition.vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import { popupProps } from './types'
+import type { TransitionName } from '../wd-transition/types'
 
 const props = defineProps(popupProps)
 const emit = defineEmits([
@@ -46,53 +63,42 @@ const emit = defineEmits([
   'close'
 ])
 
-const getClassNames = (name?: string) => {
-  if (!name) {
-    return {
-      enter: 'enter-class enter-active-class',
-      'enter-to': 'enter-to-class enter-active-class',
-      leave: 'leave-class leave-active-class',
-      'leave-to': 'leave-to-class leave-active-class'
-    }
+/**
+ * 弹出位置
+ */
+const transitionName = computed<TransitionName | TransitionName[]>(() => {
+  if (props.transition) {
+    return props.transition
   }
-
-  return {
-    enter: `wd-${name}-enter wd-${name}-enter-active`,
-    'enter-to': `wd-${name}-enter-to wd-${name}-enter-active`,
-    leave: `wd-${name}-leave wd-${name}-leave-active`,
-    'leave-to': `wd-${name}-leave-to wd-${name}-leave-active`
+  if (props.position === 'center') {
+    return ['zoom-in', 'fade']
   }
-}
-
-// 初始化是否完成
-const inited = ref<boolean>(false)
-// 是否显示
-const display = ref<boolean>(false)
-// 当前动画状态
-const status = ref<string>('')
-// 动画是否结束
-const transitionEnded = ref<boolean>(false)
-// 动画持续时间
-const currentDuration = ref<number>(300)
-// 类名
-const classes = ref<string>('')
+  if (props.position === 'left') {
+    return 'slide-left'
+  }
+  if (props.position === 'right') {
+    return 'slide-right'
+  }
+  if (props.position === 'bottom') {
+    return 'slide-up'
+  }
+  if (props.position === 'top') {
+    return 'slide-down'
+  }
+  return 'slide-up'
+})
 
 const safeBottom = ref<number>(0)
 
-const name = ref<string>('') // 动画名
-
 const style = computed(() => {
-  return `z-index: ${props.zIndex}; padding-bottom: ${safeBottom.value}px; -webkit-transition-duration: ${
-    currentDuration.value
-  }ms; transition-duration: ${currentDuration.value}ms; ${display.value || !props.hideWhenClose ? '' : 'display: none;'} ${props.customStyle}`
+  return `z-index:${props.zIndex}; padding-bottom: ${safeBottom.value}px;${props.customStyle}`
 })
 
 const rootClass = computed(() => {
-  return `wd-popup wd-popup--${props.position} ${props.customClass || ''} ${classes.value || ''}`
+  return `wd-popup wd-popup--${props.position} ${!props.transition && props.position === 'center' ? 'is-deep' : ''} ${props.customClass || ''}`
 })
 
 onBeforeMount(() => {
-  observerTransition()
   if (props.safeAreaInsetBottom) {
     const { safeArea, screenHeight, safeAreaInsets } = uni.getSystemInfoSync()
 
@@ -107,94 +113,7 @@ onBeforeMount(() => {
       safeBottom.value = 0
     }
   }
-  if (props.modelValue) {
-    enter()
-  }
 })
-
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    observermodelValue(newVal)
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  [() => props.position, () => props.transition],
-  () => {
-    observerTransition()
-  },
-  { deep: true, immediate: true }
-)
-
-function observermodelValue(value: boolean) {
-  value ? enter() : leave()
-}
-
-function enter() {
-  const classNames = getClassNames(props.transition || props.position)
-  const duration = props.transition === 'none' ? 0 : isObj(props.duration) ? (props.duration as any).enter : props.duration
-  status.value = 'enter'
-  emit('before-enter')
-
-  requestAnimationFrame(() => {
-    emit('enter')
-    classes.value = classNames.enter
-    currentDuration.value = duration
-    requestAnimationFrame(() => {
-      inited.value = true
-      display.value = true
-      requestAnimationFrame(() => {
-        transitionEnded.value = false
-        classes.value = classNames['enter-to']
-      })
-    })
-  })
-}
-function leave() {
-  if (!display.value) return
-  const classNames = getClassNames(props.transition || props.position)
-  const duration = props.transition === 'none' ? 0 : isObj(props.duration) ? (props.duration as any).leave : props.duration
-  status.value = 'leave'
-  emit('before-leave')
-
-  requestAnimationFrame(() => {
-    emit('leave')
-    classes.value = classNames.leave
-    currentDuration.value = duration
-
-    requestAnimationFrame(() => {
-      transitionEnded.value = false
-      const timer = setTimeout(() => {
-        onTransitionEnd()
-        clearTimeout(timer)
-      }, currentDuration.value)
-      classes.value = classNames['leave-to']
-    })
-  })
-}
-
-function onTransitionEnd() {
-  if (transitionEnded.value) return
-
-  transitionEnded.value = true
-  if (status.value === 'leave') {
-    // 离开后触发
-    emit('after-leave')
-  } else if (status.value === 'enter') {
-    // 进入后触发
-    emit('after-enter')
-  }
-  if (!props.modelValue && display.value) {
-    display.value = false
-  }
-}
-
-function observerTransition() {
-  const { transition, position } = props
-  name.value = transition || position
-}
 
 function handleClickModal() {
   emit('click-modal')

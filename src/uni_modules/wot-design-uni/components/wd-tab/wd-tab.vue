@@ -1,6 +1,6 @@
 <template>
   <view :class="`wd-tab ${customClass}`" :style="customStyle">
-    <view v-if="painted" class="wd-tab__body" :style="isShow ? '' : 'display: none;'">
+    <view v-if="painted" class="wd-tab__body" :style="tabBodyStyle">
       <slot />
     </view>
   </view>
@@ -16,8 +16,8 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, ref, watch } from 'vue'
-import { isDef, isNumber, isString } from '../common/util'
+import { getCurrentInstance, ref, watch, type CSSProperties } from 'vue'
+import { isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { TABS_KEY } from '../wd-tabs/types'
 import { computed } from 'vue'
@@ -33,6 +33,14 @@ const { parent: tabs, index } = useParent(TABS_KEY)
 // 激活项下标
 const activeIndex = computed(() => {
   return isDef(tabs) ? tabs.state.activeIndex : 0
+})
+
+const tabBodyStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (!isShow.value && (!isDef(tabs) || !tabs.props.animated)) {
+    style.display = 'none'
+  }
+  return objToStyle(style)
 })
 
 watch(

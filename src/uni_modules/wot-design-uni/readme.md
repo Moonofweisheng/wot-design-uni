@@ -44,8 +44,8 @@
 </p>
 
 <p align="center">
-  ✈️ <a href="https://wot-design-uni.pages.dev/">文档网站 (推荐)</a>&nbsp;
-  🚀 <a href="https://wot-design-uni.cn">文档网站 (Vercel)</a>&nbsp;
+  🚀 <a href="https://wot-design-uni.cn">文档网站 (推荐)</a>&nbsp;
+  ✈️ <a href="https://wot-design-uni.pages.dev/">文档网站 (cloudflare)</a>&nbsp;
   🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (Netlify)</a>&nbsp;
   🚫 <a href="https://wot-design-uni.gitee.io/">文档网站 (Gitee暂时下线)</a>
 </p>
@@ -94,6 +94,7 @@
 | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app)                                            | 多端统一开发框架 uni-app 优秀开发资源汇总            |
 | [create-uni](https://github.com/uni-helper/create-uni)                                                      | 快速创建 uni-app 项目                                |
+| [wot-demo](https://github.com/Moonofweisheng/wot-demo)                  | 基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 的wot-design-uni快速起手demo     |
 | [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | 基于 wot-design-uni 的 uni-app 零售行业模板          |
 | [Wot Design Uni Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot Design Uni 代码块提示                            |
 | [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci)                                                | 一个 uni-app 小程序端构建后支持 CI（持续集成）的插件 |

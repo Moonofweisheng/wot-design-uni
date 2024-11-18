@@ -1,13 +1,13 @@
 /*
  * @Author: weisheng
  * @Date: 2024-04-08 22:34:01
- * @LastEditTime: 2024-09-23 15:59:04
+ * @LastEditTime: 2024-11-05 23:17:06
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\types.ts
  * 记得注释
  */
-import { baseProps } from '../common/props'
+import { baseProps, makeStringProp } from '../common/props'
 import { type InputType } from '../wd-input/types'
 
 export type MessageType = 'alert' | 'confirm' | 'prompt'
@@ -113,5 +113,8 @@ export interface Message {
 
 export const messageBoxProps = {
   ...baseProps,
-  selector: String
+  /**
+   * 指定唯一标识
+   */
+  selector: makeStringProp('')
 }

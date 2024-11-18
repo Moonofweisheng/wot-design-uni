@@ -1,5 +1,14 @@
+/*
+ * @Author: weisheng
+ * @Date: 2024-09-01 15:42:04
+ * @LastEditTime: 2024-11-06 23:50:08
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-transition\types.ts
+ * 记得注释
+ */
 import type { ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 
 export type TransitionName =
   | 'fade'
@@ -33,22 +42,25 @@ export const transitionProps = {
     type: [Object, Number, Boolean] as PropType<Record<string, number> | number | boolean>,
     default: 300
   },
-
+  /**
+   * 弹层内容懒渲染，触发展示时才渲染内容
+   * 类型：boolean
+   * 默认值：false
+   */
+  lazyRender: makeBooleanProp(false),
   /**
    * 动画类型
    * 类型：string
    * 可选值：fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in
    * 默认值：'fade'
    */
-  name: makeStringProp<TransitionName | ''>('fade'),
-
+  name: [String, Array] as PropType<TransitionName | TransitionName[]>,
   /**
-   * 是否延迟渲染子组件
+   * 是否在动画结束时销毁子节点（display: none)
    * 类型：boolean
-   * 默认值：true
+   * 默认值：false
    */
-  lazyRender: makeBooleanProp(true),
-
+  destroy: makeBooleanProp(true),
   /**
    * 进入过渡的开始状态
    * 类型：string

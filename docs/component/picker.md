@@ -273,7 +273,7 @@ function handleConfirm({ value }) {
 | prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                                                                     | string                            | -      | -       | -                |
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                                                                   | `FormItemRule []`                 | -      | `[]`    | -                |
 | immediate-change       | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。                   | boolean                           | -      | false   | 1.2.25           |
-| clearable              | 显示清空按钮                                                                                                                                                          | boolean                           | -      | false   | $LOWEST_VERSION$ |
+| clearable              | 显示清空按钮                                                                                                                                                          | boolean                           | -      | false   | 1.3.13 |
 
 ### FormItemRule 数据结构
 
@@ -288,9 +288,10 @@ function handleConfirm({ value }) {
 
 | 事件名称 | 说明                   | 参数                                                                                                        | 最低版本 |
 | -------- | ---------------------- | ----------------------------------------------------------------------------------------------------------- | -------- |
-| confirm  | 点击右侧按钮触发       | event.detail = { value, selectedItems }， value 为选中值(多列则为数组)，selectedItems为选中项(多列则为数组) | -        |
+| confirm  | 点击右侧按钮触发       |  { value, selectedItems }， value 为选中值(多列则为数组)，selectedItems为选中项(多列则为数组) | -        |
 | cancel   | 点击左侧按钮触发       | -                                                                                                           | -        |
 | open     | 打开选择器弹出层时触发 | -                                                                                                           | -        |
+| clear    | 点击清空按钮时触发     | -                                                                                                    | 1.3.13    |
 
 ## Methods
 

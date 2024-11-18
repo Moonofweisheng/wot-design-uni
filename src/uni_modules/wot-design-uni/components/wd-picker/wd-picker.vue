@@ -22,7 +22,9 @@
               {{ showValue ? showValue : placeholder || translate('placeholder') }}
             </view>
             <wd-icon v-if="showArrow" custom-class="wd-picker__arrow" name="arrow-right" />
-            <wd-icon v-else-if="showClear" custom-class="wd-picker__clear" name="error-fill" @click.stop="handleClear" />
+            <view v-else-if="showClear" @click.stop="handleClear">
+              <wd-icon custom-class="wd-picker__clear" name="error-fill" />
+            </view>
           </view>
           <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
         </view>
@@ -95,7 +97,7 @@ import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
 
 const props = defineProps(pickerProps)
-const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
+const emit = defineEmits(['confirm', 'open', 'cancel', 'clear', 'update:modelValue'])
 
 const pickerViewWd = ref<PickerViewInstance | null>(null)
 const cell = useCell()
@@ -393,6 +395,7 @@ const showClear = computed(() => {
 function handleClear() {
   const clearValue = isArray(pickerValue.value) ? [] : ''
   emit('update:modelValue', clearValue)
+  emit('clear')
 }
 
 // 是否展示箭头

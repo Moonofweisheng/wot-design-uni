@@ -3,13 +3,13 @@
     <wd-form ref="form" :model="model">
       <wd-cell-group border>
         <wd-input
-          label="用户名"
+          label="歪比巴卜名"
           label-width="100px"
           prop="name"
           clearable
           v-model="model.name"
-          placeholder="请输入用户名"
-          :rules="[{ required: true, message: '请填写用户名' }]"
+          placeholder="请输入歪比巴卜"
+          :rules="[{ required: true, message: '请填写歪比巴卜' }]"
         />
         <wd-input
           v-for="(item, index) in model.phoneNumbers"

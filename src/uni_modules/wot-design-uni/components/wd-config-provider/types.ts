@@ -189,6 +189,7 @@ export type cellThemeVars = {
   cellValueColor?: string
   cellArrowSize?: string
   cellArrowColor?: string
+  cellClearColor?: string
   cellTapBg?: string
   cellTitleFsLarge?: string
   cellLabelFsLarge?: string
@@ -755,6 +756,8 @@ export type circleThemeVars = {
 export type swiperThemeVars = {
   swiperRadius?: string
   swiperItemPadding?: string
+  swiperItemTextColor?: string
+  swiperItemTextFs?: string
 }
 
 export type swiperNavThemeVars = {

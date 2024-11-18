@@ -1,22 +1,11 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-29 13:29:57
- * @LastEditTime: 2024-07-18 23:16:16
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-toast/index.ts
- * 记得注释
- */
-import { provide, ref } from 'vue'
+import { inject, provide, ref } from 'vue'
 import type { Toast, ToastOptions } from './types'
 import { deepMerge } from '../common/util'
 
 /**
  * useToast 用到的key
- *
- * @internal
  */
-export const toastDefaultOptionKey = '__TOAST_OPTION__'
+const toastDefaultOptionKey = '__TOAST_OPTION__'
 
 // 默认模板
 export const defaultOptions: ToastOptions = {
@@ -30,11 +19,16 @@ export const defaultOptions: ToastOptions = {
   zIndex: 100
 }
 
+const None = Symbol('None')
+
 export function useToast(selector: string = ''): Toast {
+  const toastOptionKey = getToastOptionKey(selector)
+  const toastOption = inject(toastOptionKey, ref<ToastOptions | typeof None>(None)) // toast选项
+  if (toastOption.value === None) {
+    toastOption.value = defaultOptions
+    provide(toastOptionKey, toastOption)
+  }
   let timer: ReturnType<typeof setTimeout> | null = null
-  const toastOption = ref<ToastOptions>(defaultOptions) // Toast选项
-  const toastOptionKey = selector ? toastDefaultOptionKey + selector : toastDefaultOptionKey
-  provide(toastOptionKey, toastOption)
 
   const createMethod = (toastOptions: ToastOptions) => {
     // 优先级：options->toastOptions->defaultOptions
@@ -83,6 +77,10 @@ export function useToast(selector: string = ''): Toast {
     info,
     close
   }
+}
+
+export const getToastOptionKey = (selector: string) => {
+  return selector ? `${toastDefaultOptionKey}${selector}` : toastDefaultOptionKey
 }
 
 export const toastIcon = {

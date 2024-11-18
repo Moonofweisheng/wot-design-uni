@@ -20,10 +20,10 @@
 
 ### 镜像仓库
 
-如果 GitHub 克隆速度较慢，你也可以直接克隆 Wot Design Uni 在 gitee 上的[镜像仓库](https://gitee.com/fant-mini/wot-design-uni)：
+如果 GitHub 克隆速度较慢，你也可以直接克隆 Wot Design Uni 在 gitee 上的[镜像仓库](https://gitee.com/wot-design-uni/wot-design-uni)：
 
 ```bash
-git clone https://gitee.com/fant-mini/wot-design-uni.git
+git clone https://gitee.com/wot-design-uni/wot-design-uni.git
 ```
 
 镜像仓库仅用于加快国内的访问速度，请勿在镜像仓库中提 issue 和 Pull Request。

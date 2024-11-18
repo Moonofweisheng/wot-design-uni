@@ -2,14 +2,14 @@
   <template v-if="sticky">
     <wd-sticky-box>
       <view
-        :class="`wd-tabs ${customClass} ${slidableNum < items.length ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`"
+        :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`"
         :style="customStyle"
       >
         <wd-sticky :offset-top="offsetTop">
           <!--头部导航容器-->
           <view class="wd-tabs__nav wd-tabs__nav--sticky">
             <view class="wd-tabs__nav--wrap">
-              <scroll-view :scroll-x="slidableNum < items.length" scroll-with-animation :scroll-left="state.scrollLeft">
+              <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">
                 <view class="wd-tabs__nav-container">
                   <!--nav列表-->
                   <view
@@ -20,6 +20,7 @@
                     :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
                   >
                     <text class="wd-tabs__nav-item-text">{{ item.title }}</text>
+                    <view class="wd-tabs__line wd-tabs__line--inner" v-if="state.activeIndex === index && state.useInnerLine"></view>
                   </view>
                   <!--下划线-->
                   <view class="wd-tabs__line" :style="state.lineStyle"></view>
@@ -76,11 +77,11 @@
   </template>
 
   <template v-else>
-    <view :class="`wd-tabs  ${customClass} ${slidableNum < items.length ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`">
+    <view :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`">
       <!--头部导航容器-->
       <view class="wd-tabs__nav">
         <view class="wd-tabs__nav--wrap">
-          <scroll-view :scroll-x="slidableNum < items.length" scroll-with-animation :scroll-left="state.scrollLeft">
+          <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">
             <view class="wd-tabs__nav-container">
               <!--nav列表-->
               <view
@@ -91,6 +92,7 @@
                 :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
               >
                 <text class="wd-tabs__nav-item-text">{{ item.title }}</text>
+                <view class="wd-tabs__line wd-tabs__line--inner" v-if="state.activeIndex === index && state.useInnerLine"></view>
               </view>
               <!--下划线-->
               <view class="wd-tabs__line" :style="state.lineStyle"></view>
@@ -143,7 +145,6 @@ export default {
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdSticky from '../wd-sticky/wd-sticky.vue'
 import wdStickyBox from '../wd-sticky-box/wd-sticky-box.vue'
-
 import { computed, getCurrentInstance, onMounted, watch, nextTick, reactive, type CSSProperties } from 'vue'
 import { addUnit, checkNumRange, debounce, getRect, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
@@ -163,6 +164,7 @@ const { translate } = useTranslate('tabs')
 const state = reactive({
   activeIndex: 0, // 选中值的索引，默认第一个
   lineStyle: 'display:none;', // 激活项边框线样式
+  useInnerLine: false, // 是否使用内部激活项边框线，当外部激活下划线未成功渲染时显示内部定位的
   inited: false, // 是否初始化
   animating: false, // 是否动画中
   mapShow: false, // map的开关
@@ -172,11 +174,15 @@ const state = reactive({
 // map的开关
 
 const { children, linkChildren } = useChildren(TABS_KEY)
-linkChildren({ state })
+linkChildren({ state, props })
 
 const { proxy } = getCurrentInstance() as any
 
 const touch = useTouch()
+
+const innerSlidable = computed(() => {
+  return props.slidable === 'always' || items.value.length > props.slidableNum
+})
 
 // tabs数据
 const items = computed(() => {
@@ -198,28 +204,32 @@ const bodyStyle = computed(() => {
 })
 
 /**
+ * 更新激活项
+ * @param value 激活值
+ * @param init 是否已初始化
+ * @param setScroll // 是否设置scroll-view滚动
+ */
+const updateActive = (value: number | string = 0, init: boolean = false, setScroll: boolean = true) => {
+  // 没有tab子元素，不执行任何操作
+  if (items.value.length === 0) return
+
+  value = getActiveIndex(value)
+  // 被禁用，不执行任何操作
+  if (items.value[value].disabled) return
+  state.activeIndex = value
+  if (setScroll) {
+    updateLineStyle(init === false)
+    scrollIntoView()
+  }
+  setActiveTab()
+}
+
+/**
  * @description 修改选中的tab Index
  * @param {String |Number } value - radio绑定的value或者tab索引，默认值0
  * @param {Boolean } init - 是否伴随初始化操作
  */
-const setActive = debounce(
-  function (value: number | string = 0, init: boolean = false, setScroll: boolean = true) {
-    // 没有tab子元素，不执行任何操作
-    if (items.value.length === 0) return
-
-    value = getActiveIndex(value)
-    // 被禁用，不执行任何操作
-    if (items.value[value].disabled) return
-    state.activeIndex = value
-    if (setScroll) {
-      updateLineStyle(init === false)
-      scrollIntoView()
-    }
-    setActiveTab()
-  },
-  100,
-  { leading: false }
-)
+const setActive = debounce(updateActive, 100, { leading: false })
 
 watch(
   () => props.modelValue,
@@ -283,7 +293,8 @@ watch(
 onMounted(() => {
   state.inited = true
   nextTick(() => {
-    setActive(props.modelValue, true)
+    updateActive(props.modelValue, true)
+    state.useInnerLine = true
   })
 })
 
@@ -306,8 +317,8 @@ function toggleMap() {
 }
 
 /**
- * @description 更新navBar underline的偏移量
- * @param {Boolean} animation 是否伴随动画
+ * 更新 underline的偏移量
+ * @param animation 是否开启动画
  */
 async function updateLineStyle(animation: boolean = true) {
   if (!state.inited) return
@@ -315,7 +326,6 @@ async function updateLineStyle(animation: boolean = true) {
   try {
     const rects = await getRect($item, true, proxy)
     const lineStyle: CSSProperties = {}
-
     if (isDef(lineWidth)) {
       lineStyle.width = addUnit(lineWidth)
     } else {
@@ -331,11 +341,14 @@ async function updateLineStyle(animation: boolean = true) {
     }
     const rect = rects[state.activeIndex]
     let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + Number(curr.width), 0) + Number(rect.width) / 2
-    lineStyle.transform = `translateX(${left}px) translateX(-50%)`
-    if (animation) {
-      lineStyle.transition = 'width 300ms ease, transform 300ms ease'
+    if (left) {
+      lineStyle.transform = `translateX(${left}px) translateX(-50%)`
+      if (animation) {
+        lineStyle.transition = 'width 300ms ease, transform 300ms ease'
+      }
+      state.useInnerLine = false
+      state.lineStyle = objToStyle(lineStyle)
     }
-    state.lineStyle = objToStyle(lineStyle)
   } catch (error) {
     console.error('[wot design] error(wd-tabs): update line style failed', error)
   }

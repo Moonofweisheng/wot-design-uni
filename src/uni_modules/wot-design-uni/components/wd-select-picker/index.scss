@@ -72,8 +72,7 @@
       .wd-select-picker__value {
         color: $-input-error-color;
       }
-      :deep(.wd-select-picker__arrow),
-      :deep(.wd-select-picker__clear) {
+      :deep(.wd-select-picker__arrow) {
         color: $-input-error-color;
       }
     }
@@ -137,6 +136,10 @@
     font-size: $-cell-icon-size;
     color: $-cell-arrow-color;
     line-height: $-cell-line-height;
+  }
+
+  @include edeep(clear) {
+    color: $-cell-clear-color;
   }
  
   @include e(loading) {

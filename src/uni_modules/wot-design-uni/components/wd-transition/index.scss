@@ -2,25 +2,14 @@
   transition-timing-function: ease;
 }
 
-.wd-fade-enter-active,
-.wd-fade-leave-active {
-  transition-property: opacity;
-}
-
 .wd-fade-enter,
 .wd-fade-leave-to {
   opacity: 0;
 }
 
-.wd-fade-up-enter-active,
-.wd-fade-up-leave-active,
-.wd-fade-down-enter-active,
-.wd-fade-down-leave-active,
-.wd-fade-left-enter-active,
-.wd-fade-left-leave-active,
-.wd-fade-right-enter-active,
-.wd-fade-right-enter-active {
-  transition-property: opacity, transform;
+.wd-fade-enter-active,
+.wd-fade-leave-active {
+  transition-property: opacity;
 }
 
 .wd-fade-up-enter,
@@ -47,17 +36,6 @@
   opacity: 0;
 }
 
-.wd-slide-up-enter-active,
-.wd-slide-up-leave-active,
-.wd-slide-down-enter-active,
-.wd-slide-down-leave-active,
-.wd-slide-left-enter-active,
-.wd-slide-left-leave-active,
-.wd-slide-right-enter-active,
-.wd-slide-right-enter-active {
-  transition-property: transform;
-}
-
 .wd-slide-up-enter,
 .wd-slide-up-leave-to {
   transform: translate3d(0, 100%, 0);
@@ -78,14 +56,40 @@
   transform: translate3d(100%, 0, 0);
 }
 
-.wd-zoom-in-enter-active,
-.wd-zoom-in-leave-active {
-  transition-property: opacity, transform;
-  transform-origin: center center;
-}
-
 .wd-zoom-in-enter,
 .wd-zoom-in-leave-to {
   opacity: 0;
-  transform: scale(0.7);
+  transform: scale(0.8);
+}
+
+.wd-zoom-out-enter,
+.wd-zoom-out-leave-to {
+  transform: scale(1.2);
+  opacity: 0;
+}
+
+.wd-zoom-in-enter-active,
+.wd-zoom-in-leave-active,
+.wd-zoom-out-enter-active,
+.wd-zoom-out-leave-active,
+.wd-fade-up-enter-active,
+.wd-fade-up-leave-active,
+.wd-fade-down-enter-active,
+.wd-fade-down-leave-active,
+.wd-fade-left-enter-active,
+.wd-fade-left-leave-active,
+.wd-fade-right-enter-active,
+.wd-fade-right-leave-active {
+  transition-property: opacity, transform;
+}
+
+.wd-slide-up-enter-active,
+.wd-slide-up-leave-active,
+.wd-slide-down-enter-active,
+.wd-slide-down-leave-active,
+.wd-slide-left-enter-active,
+.wd-slide-left-leave-active,
+.wd-slide-right-enter-active,
+.wd-slide-right-leave-active {
+  transition-property: transform;
 }

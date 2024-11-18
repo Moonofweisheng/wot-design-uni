@@ -1,11 +1,12 @@
 <template>
-  <view>
+  <view class="wd-curtain-wrapper">
     <wd-popup
       v-model="show"
       transition="zoom-in"
       position="center"
       :close-on-click-modal="closeOnClickModal"
       :hide-when-close="hideWhenClose"
+      :z-index="zIndex"
       @before-enter="beforeenter"
       @enter="enter"
       @after-enter="afterenter"

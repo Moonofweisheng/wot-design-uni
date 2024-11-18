@@ -144,7 +144,7 @@ export const uploadProps = {
    * 类型：object
    * 默认值：{}
    */
-  header: { type: Object as PropType<Record<string, any>>, default: () => {} },
+  header: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
   /**
    * 是否支持多选文件
    * 类型：boolean
