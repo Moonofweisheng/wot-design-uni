@@ -76,10 +76,10 @@
     box-shadow: 0 2px 4px 0 rgba($color: #9b9b9b, $alpha: 0.5);
   }
   @include e(label-min) {
-    margin-right: $-slider-handle-radius + 11px;
+    margin-right: calc($-slider-handle-radius * 2);
   }
   @include e(label-max) {
-    margin-left: $-slider-handle-radius + 11px;
+    margin-left: calc($-slider-handle-radius * 2);
   }
   @include m(disabled) {
     @include me(bar) {
