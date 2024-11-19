@@ -32,6 +32,10 @@ export const tabsProps = {
    */
   mapNum: makeNumberProp(10),
   /**
+   * 导航地图的标题
+   */
+  mapTitle: String,
+  /**
    * 粘性布局
    */
   sticky: makeBooleanProp(false),

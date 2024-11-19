@@ -172,6 +172,7 @@ const tab = ref('Design')
 | v-model       | 绑定值                           | string / number | -      | -      | -        |
 | slidable-num  | 可滑动的标签数阈值，`slidable`设置为`auto`时生效 | number          | -      | 6      | -        |
 | map-num       | 显示导航地图的标签数阈值         | number          | -      | 10     | -        |
+| map-title     | 导航地图标题                     | string          | -      | -      | $LOWEST_VERSION$ |
 | sticky        | 粘性布局                         | boolean         | -      | false  | -        |
 | offset-top    | 粘性布局时距离窗口顶部距离       | number          | -      | 0      | -        |
 | swipeable     | 开启手势滑动                     | boolean         | -      | false  | -        |
