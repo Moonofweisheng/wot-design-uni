@@ -190,8 +190,9 @@ const tab = ref('Design')
 | 参数     | 说明       | 类型    | 可选值 | 默认值 | 最低版本 |
 | -------- | ---------- | ------- | ------ | ------ | -------- |
 | name     | 标签页名称 | string  | -      | -      | -        |
-| title    | 标题       | string  | -      | -      | -        |
-| disabled | 禁用       | boolean | -      | false  | -        |
+| title    | 标题       | string  | -     | -      | -        |
+| disabled | 禁用       | boolean | -     | false  | -        |
+| lazy     | 延迟渲染，默认开启，开启`animated`后此选项始终为`false`    | boolean | -     | true   | $LOWEST_VERSION$ |
 
 ## Tabs Events
 

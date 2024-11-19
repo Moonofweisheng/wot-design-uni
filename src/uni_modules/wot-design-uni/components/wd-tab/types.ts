@@ -14,7 +14,12 @@ export const tabProps = {
   /**
    *  是否禁用，无法点击
    */
-  disabled: makeBooleanProp(false)
+  disabled: makeBooleanProp(false),
+  /**
+   * 是否懒加载，切换到该tab时才加载内容
+   * @default true
+   */
+  lazy: makeBooleanProp(true)
 }
 
 export type TabProps = ExtractPropTypes<typeof tabProps>
