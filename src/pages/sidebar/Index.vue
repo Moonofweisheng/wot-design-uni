@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-11-06 20:08:34
- * @LastEditTime: 2023-11-06 20:32:06
+ * @LastEditTime: 2024-11-18 23:27:20
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\pages\sidebar\Index.vue
+ * @FilePath: /wot-design-uni/src/pages/sidebar/Index.vue
  * 记得注释
 -->
 <template>
@@ -21,7 +21,7 @@
           <wd-sidebar-item :value="1" label="标签名称" badge="5" />
           <wd-sidebar-item :value="2" label="标签名称" badge="2" :badge-props="{ type: 'warning', modelValue: 55, max: 99 }" />
         </wd-sidebar>
-        <wd-sidebar v-model="active3">
+        <wd-sidebar v-model="active3" :before-change="beforeChange">
           <wd-sidebar-item :value="0" label="标签名称" />
           <wd-sidebar-item :value="1" label="标签名称" disabled />
           <wd-sidebar-item :value="2" label="标签名称" />
@@ -49,11 +49,22 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
+import { useToast } from '@/uni_modules/wot-design-uni'
+import type { SidebarBeforeChange } from '@/uni_modules/wot-design-uni/components/wd-sidebar/types'
 import { ref } from 'vue'
+const { loading: showLoading, close: closeLoading } = useToast()
 
 const active1 = ref(0)
 const active2 = ref(0)
 const active3 = ref(0)
+
+const beforeChange: SidebarBeforeChange = ({ value, resolve }) => {
+  showLoading('切换中')
+  setTimeout(() => {
+    closeLoading()
+    resolve(true)
+  }, 2000)
+}
 
 function handleClick1() {
   uni.navigateTo({ url: '/pages/sidebar/demo1' })

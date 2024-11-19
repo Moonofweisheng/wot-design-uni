@@ -26,12 +26,17 @@ export type IndicatorPositionType = 'left' | 'top-left' | 'top' | 'top-right' | 
  */
 export type AdjustHeightType = 'first' | 'current' | 'highest' | 'none'
 
+// 资源类型
+export type SwiperItemType = 'image' | 'video'
+
 export interface SwiperList {
   [key: string]: any
   // 图片、视频等资源地址
   value?: string
   // 视频资源的封面
   poster?: string
+  // 资源文件类型，可选值：'image' | 'video'
+  type?: SwiperItemType
 }
 
 export const swiperProps = {
