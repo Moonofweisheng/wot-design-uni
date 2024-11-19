@@ -32,6 +32,6 @@
     line-height: $-statustip-line-height;
     color: $-statustip-color;
     text-align: center;
-    word-break: break-all;
+    overflow-wrap: break-word;
   }
 }
