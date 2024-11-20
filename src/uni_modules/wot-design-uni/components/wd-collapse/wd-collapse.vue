@@ -126,6 +126,7 @@ const toggleAll = (options: boolean | CollapseToggleAllOptions = {}) => {
         names.push(item.name || index)
       }
     } else {
+      item.$.exposed!.updateExpand()
       if (isDef(expanded) ? expanded : !item.$.exposed!.getExpanded()) {
         names.push(item.name || index)
       }

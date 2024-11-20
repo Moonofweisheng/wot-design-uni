@@ -75,10 +75,10 @@ const selected = computed(() => {
 })
 
 onMounted(() => {
-  updateExpend()
+  updateExpand()
 })
 
-function updateExpend() {
+function updateExpand() {
   return getRect(`#${collapseId.value}`, false, proxy).then((rect) => {
     const { height: rectHeight } = rect
     height.value = isDef(rectHeight) ? Number(rectHeight) : ''
@@ -112,7 +112,6 @@ function handleTransitionEnd() {
 // 点击子项
 function handleClick() {
   if (props.disabled) return
-  updateExpend()
   let name = props.name
   const nexexpanded = !expanded.value // 执行后展开状态
   if (nexexpanded) {
@@ -123,16 +122,16 @@ function handleClick() {
       }
       if (isPromise(response)) {
         response.then(() => {
-          collapse && collapse.toggle(name, !expanded.value)
+          handleChangeExpand(name)
         })
       } else {
-        collapse && collapse.toggle(name, !expanded.value)
+        handleChangeExpand(name)
       }
     } else {
-      collapse && collapse.toggle(name, !expanded.value)
+      handleChangeExpand(name)
     }
   } else {
-    collapse && collapse.toggle(name, !expanded.value)
+    handleChangeExpand(name)
   }
 }
 
@@ -140,7 +139,12 @@ function getExpanded() {
   return expanded.value
 }
 
-defineExpose<CollapseItemExpose>({ getExpanded })
+function handleChangeExpand(name: string) {
+  updateExpand()
+  collapse && collapse.toggle(name, !expanded.value)
+}
+
+defineExpose<CollapseItemExpose>({ getExpanded, updateExpand })
 </script>
 
 <style lang="scss" scoped>
