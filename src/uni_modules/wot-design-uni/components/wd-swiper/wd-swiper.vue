@@ -21,14 +21,14 @@
     >
       <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item" @click="handleClick(index, item)">
         <image
-          v-if="isImageUrl(isObj(item) ? item[valueKey] : item)"
+          v-if="isImage(item)"
           :src="isObj(item) ? item[valueKey] : item"
           :class="`wd-swiper__image ${customImageClass} ${customItemClass} ${getCustomItemClass(navCurrent, index, list)}`"
           :style="{ height: addUnit(height) }"
           :mode="imageMode"
         />
         <video
-          v-else
+          v-else-if="isVideo(item)"
           :id="`video-${index}-${uid}`"
           :style="{ height: addUnit(height) }"
           :src="isObj(item) ? item[valueKey] : item"
@@ -77,7 +77,7 @@ export default {
 <script lang="ts" setup>
 import wdSwiperNav from '../wd-swiper-nav/wd-swiper-nav.vue'
 import { computed, watch, ref, getCurrentInstance } from 'vue'
-import { addUnit, isObj, isImageUrl, isVideoUrl, uuid } from '../common/util'
+import { addUnit, isObj, isImageUrl, isVideoUrl, uuid, isDef } from '../common/util'
 import { swiperProps, type SwiperList } from './types'
 import type { SwiperNavProps } from '../wd-swiper-nav/types'
 
@@ -121,6 +121,22 @@ const swiperIndicator = computed(() => {
   }
   return swiperIndicator
 })
+
+const getMediaType = (item: string | SwiperList, type: 'video' | 'image') => {
+  if (isObj(item)) {
+    return item.type ? item.type === type : type === 'video' ? isVideoUrl(item[props.valueKey]) : isImageUrl(item[props.valueKey])
+  } else {
+    return type === 'video' ? isVideoUrl(item) : isImageUrl(item)
+  }
+}
+
+const isVideo = (item: string | SwiperList) => {
+  return getMediaType(item, 'video')
+}
+
+const isImage = (item: string | SwiperList) => {
+  return getMediaType(item, 'image')
+}
 
 function go(index: number) {
   navCurrent.value = index
@@ -205,12 +221,9 @@ function handleVideoChange(previous: number, current: number) {
 function handleStartVideoPaly(index: number) {
   if (props.autoplayVideo) {
     const currentItem = props.list[index]
-    if (currentItem) {
-      const url = isObj(currentItem) ? currentItem.url : currentItem
-      if (isVideoUrl(url)) {
-        const video = uni.createVideoContext(`video-${index}-${uid.value}`, proxy)
-        video.play()
-      }
+    if (isDef(currentItem) && isVideo(currentItem)) {
+      const video = uni.createVideoContext(`video-${index}-${uid.value}`, proxy)
+      video.play()
     }
   }
 }
@@ -222,12 +235,9 @@ function handleStartVideoPaly(index: number) {
 function handleStopVideoPaly(index: number) {
   if (props.stopPreviousVideo) {
     const previousItem = props.list[index]
-    if (previousItem) {
-      const url = isObj(previousItem) ? previousItem.url : previousItem
-      if (isVideoUrl(url)) {
-        const video = uni.createVideoContext(`video-${index}-${uid.value}`, proxy)
-        video.pause()
-      }
+    if (isDef(previousItem) && isVideo(previousItem)) {
+      const video = uni.createVideoContext(`video-${index}-${uid.value}`, proxy)
+      video.pause()
     }
   } else if (props.stopAutoplayWhenVideoPlay) {
     handleVideoPause()

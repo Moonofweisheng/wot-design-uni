@@ -23,6 +23,16 @@
       </wd-tabs>
     </demo-block>
 
+    <demo-block title="自动调整底部条宽度" transparent>
+      <wd-tabs v-model="autoLineWidthTab" @change="handleChange" auto-line-width>
+        <block v-for="item in autoLineWidthTabs" :key="item">
+          <wd-tab :title="`${item}`" :name="item">
+            <view class="content">内容{{ autoLineWidthTab }}</view>
+          </wd-tab>
+        </block>
+      </wd-tabs>
+    </demo-block>
+
     <demo-block title="粘性布局" transparent>
       <wd-tabs v-model="tab2" sticky @change="handleChange">
         <block v-for="item in 4" :key="item">
@@ -74,10 +84,20 @@
     </demo-block>
 
     <demo-block title="数量大于6时可滚动" transparent>
-      <wd-tabs v-model="tab6" lazy-render @change="handleChange">
+      <wd-tabs v-model="tab6" @change="handleChange">
         <block v-for="item in 7" :key="item">
           <wd-tab :title="`标签${item}`">
             <view class="content">内容{{ tab6 + 1 }}</view>
+          </wd-tab>
+        </block>
+      </wd-tabs>
+    </demo-block>
+
+    <demo-block title="左对齐超出即可滚动" transparent>
+      <wd-tabs v-model="tab9" slidable="always" @change="handleChange">
+        <block v-for="item in 5" :key="item">
+          <wd-tab :title="`超大标签${item}`">
+            <view class="content">内容{{ tab9 + 1 }}</view>
           </wd-tab>
         </block>
       </wd-tabs>
@@ -100,6 +120,9 @@ import { ref } from 'vue'
 const tabs = ref(['这', '是', '一', '个', '例子'])
 const tab = ref('一')
 
+const autoLineWidthTabs = ref(['Wot', 'Design', 'Uni'])
+const autoLineWidthTab = ref('Design')
+
 const tab1 = ref<number>(0)
 const tab2 = ref<number>(0)
 const tab3 = ref<number>(1)
@@ -108,6 +131,8 @@ const tab5 = ref<number>(0)
 const tab6 = ref<number>(0)
 const tab7 = ref<number>(0)
 const tab8 = ref<number>(0)
+const tab9 = ref<number>(0)
+
 const toast = useToast()
 function handleClick({ index, name }: any) {
   console.log('event', { index, name })
