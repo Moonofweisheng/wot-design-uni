@@ -31,6 +31,11 @@ export type CollapseItemExpose = {
    * @returns boolean
    */
   getExpanded: () => boolean
+  /**
+   * 更新展开状态
+   * @returns Promise<void>
+   */
+  updateExpand: () => Promise<void>
 }
 
 export type CollapseItemInstance = ComponentPublicInstance<CollapseItemProps, CollapseItemExpose>
