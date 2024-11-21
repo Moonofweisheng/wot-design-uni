@@ -45,9 +45,10 @@ const touch = useTouch()
 const props = defineProps(floatingPanelProps)
 const emit = defineEmits(['update:height', 'height-change'])
 
+const heightValue = ref<number>(props.height)
+
 const DAMP = 0.2 // 阻尼系数
 let startY: number // 起始位置
-const height = ref<number>(props.height) // 当前高度
 const windowHeight = ref<number>(0)
 const dragging = ref<boolean>(false) // 是否正在拖拽
 
@@ -61,17 +62,22 @@ const anchors = computed(() => (props.anchors.length >= 2 ? props.anchors : [bou
 const rootStyle = computed(() => {
   const style: CSSProperties = {
     height: addUnit(boundary.value.max),
-    transform: `translateY(calc(100% + ${addUnit(-height.value)}))`,
+    transform: `translateY(calc(100% + ${addUnit(-heightValue.value)}))`,
     transition: !dragging.value ? `transform ${props.duration}ms cubic-bezier(0.18, 0.89, 0.32, 1.28)` : 'none'
   }
 
   return `${objToStyle(style)};${props.customStyle}`
 })
 
+const updateHeight = (value: number) => {
+  heightValue.value = value
+  emit('update:height', value)
+}
+
 const handleTouchStart = (event: TouchEvent) => {
   touch.touchStart(event)
   dragging.value = true
-  startY = -height.value
+  startY = -heightValue.value
 }
 
 const handleTouchMove = (event: TouchEvent) => {
@@ -81,15 +87,15 @@ const handleTouchMove = (event: TouchEvent) => {
   }
   touch.touchMove(event)
   const moveY = touch.deltaY.value + startY
-  height.value = -ease(moveY)
+  updateHeight(-ease(moveY))
 }
 
 const handleTouchEnd = () => {
   dragging.value = false
-  height.value = closest(anchors.value, height.value)
+  updateHeight(closest(anchors.value, heightValue.value))
 
-  if (height.value !== -startY) {
-    emit('height-change', { height: height.value })
+  if (heightValue.value !== -startY) {
+    emit('height-change', { height: heightValue.value })
   }
 }
 
@@ -109,16 +115,16 @@ const ease = (y: number) => {
 }
 
 watch(
-  () => height.value,
+  () => props.height,
   (value) => {
-    emit('update:height', value)
+    heightValue.value = value
   }
 )
 
 watch(
   boundary,
   () => {
-    height.value = closest(anchors.value, height.value)
+    updateHeight(closest(anchors.value, heightValue.value))
   },
   { immediate: true }
 )
