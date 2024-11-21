@@ -2,7 +2,7 @@
   <view :class="['wd-badge', customClass]" :style="customStyle">
     <slot></slot>
     <view
-      v-if="isBadgeShow"
+      v-if="shouldShowBadge"
       :class="['wd-badge__content', 'is-fixed', type ? 'wd-badge__content--' + type : '', isDot ? 'is-dot' : '']"
       :style="contentStyle"
     >
@@ -21,42 +21,39 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { computed, type CSSProperties } from 'vue'
 import { badgeProps } from './types'
+import { addUnit, isDef, isNumber, objToStyle } from '../common/util'
 
 const props = defineProps(badgeProps)
-const content = ref<number | string | null>(null)
-
-watch(
-  [() => props.modelValue, () => props.max, () => props.isDot],
-  () => {
-    notice()
-  },
-  { immediate: true, deep: true }
-)
+const content = computed(() => {
+  const { modelValue, max, isDot } = props
+  if (isDot) return ''
+  let value = modelValue
+  if (value && max && isNumber(value) && !Number.isNaN(value) && !Number.isNaN(max)) {
+    value = max < value ? `${max}+` : value
+  }
+  return value
+})
 
 const contentStyle = computed(() => {
-  return `background-color: ${props.bgColor};top:${props.top || 0}px;right:${props.right || 0}px`
+  const style: CSSProperties = {}
+  if (isDef(props.bgColor)) {
+    style.backgroundColor = props.bgColor
+  }
+
+  if (isDef(props.top)) {
+    style.top = addUnit(props.top)
+  }
+
+  if (isDef(props.right)) {
+    style.right = addUnit(props.right)
+  }
+  return objToStyle(style)
 })
 
 // 是否展示徽标数字
-const isBadgeShow = computed(() => {
-  let isBadgeShow: boolean = false
-  if (!props.hidden && (content.value || (content.value === 0 && props.showZero) || props.isDot)) {
-    isBadgeShow = true
-  }
-  return isBadgeShow
-})
-
-function notice() {
-  if (props.isDot) return
-  let value = props.modelValue
-  const max = props.max
-  if (value && max && typeof value === 'number' && !Number.isNaN(value) && !Number.isNaN(max)) {
-    value = max < value ? `${max}+` : value
-  }
-  content.value = value
-}
+const shouldShowBadge = computed(() => !props.hidden && (content.value || (content.value === 0 && props.showZero) || props.isDot))
 </script>
 
 <style lang="scss" scoped>

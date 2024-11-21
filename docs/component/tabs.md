@@ -57,6 +57,47 @@ const tab = ref('例子')
 }
 ```
 
+## 使用徽标<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.15</el-tag>
+
+使用`bage-props`设置徽标属性，可以参考[Badge 组件的 props](/component/badge#attributes)。
+
+```html
+<wd-tabs v-model="tabWithBadge" @change="handleChange">
+  <wd-tab v-for="(item, index) in tabsWithBadge" :key="index" :title="`${item.title}`" :badge-props="item.badgeProps">
+    <view class="content">{{ item.title }}徽标</view>
+  </wd-tab>
+</wd-tabs>
+```
+
+```typescript
+const tabWithBadge = ref(0)
+const tabsWithBadge = ref([
+  {
+    title: '普通数值',
+    badgeProps: {
+      modelValue: 10,
+      right: '-8px'
+    }
+  },
+  {
+    title: '最大值',
+    badgeProps: {
+      modelValue: 100,
+      max: 99,
+      right: '-8px'
+    }
+  },
+  {
+    title: '点状',
+    badgeProps: {
+      isDot: true,
+      right: '-8px',
+      showZero: true
+    }
+  }
+])
+```
+
 ## 自动调整底部条宽度
 
 设置 `auto-line-width` 属性，自动调整底部条宽度为文本内容宽度。
@@ -160,39 +201,39 @@ const tab = ref('Design')
 </wd-tabs>
 ```
 
-
 ---
 
 标签页在标签数大于等于 6 个时，可以滑动；当标签数大于等于 10 个时，将会显示导航地图，便于快速定位到某个标签。可以通过设置 `slidable-num` 修改可滑动的数量阈值；设置 `map-num` 修改显示导航地图的阈值。`slidable`设置为`always`时，所有的标签会向左侧收缩对齐，超出即可滑动。
 
 ## Tabs Attributes
 
-| 参数          | 说明                             | 类型            | 可选值 | 默认值 | 最低版本 |
-| ------------- | -------------------------------- | --------------- | ------ | ------ | -------- |
-| v-model       | 绑定值                           | string / number | -      | -      | -        |
-| slidable-num  | 可滑动的标签数阈值，`slidable`设置为`auto`时生效 | number          | -      | 6      | -        |
-| map-num       | 显示导航地图的标签数阈值         | number          | -      | 10     | -        |
-| map-title     | 导航地图标题                     | string          | -      | -      | $LOWEST_VERSION$ |
-| sticky        | 粘性布局                         | boolean         | -      | false  | -        |
-| offset-top    | 粘性布局时距离窗口顶部距离       | number          | -      | 0      | -        |
-| swipeable     | 开启手势滑动                     | boolean         | -      | false  | -        |
-| autoLineWidth | 底部条宽度跟随文字，指定`lineWidth`时此选项不生效  | boolean         | -      | false  | $LOWEST_VERSION$   |
-| lineWidth     | 底部条宽度，单位像素             | number          | -      | 19     | -        |
-| lineHeight    | 底部条高度，单位像素             | number          | -      | 3      | -        |
-| color         | 文字颜色                         | string          | -      | -      | -        |
-| inactiveColor | 非活动标签文字颜色               | string          | -      | -      | -        |
-| animated      | 是否开启切换标签内容时的转场动画 | boolean         | -      | false  | -        |
-| duration      | 切换动画过渡时间，单位毫秒       | number          | -      | 300    | -        |
-| slidable      | 是否开启滚动导航     | TabsSlidable   | `always`  | `auto`   | $LOWEST_VERSION$   |
+| 参数          | 说明                                              | 类型            | 可选值   | 默认值 | 最低版本         |
+| ------------- | ------------------------------------------------- | --------------- | -------- | ------ | ---------------- |
+| v-model       | 绑定值                                            | string / number | -        | -      | -                |
+| slidable-num  | 可滑动的标签数阈值，`slidable`设置为`auto`时生效  | number          | -        | 6      | -                |
+| map-num       | 显示导航地图的标签数阈值                          | number          | -        | 10     | -                |
+| map-title     | 导航地图标题                                      | string          | -        | -      | $LOWEST_VERSION$ |
+| sticky        | 粘性布局                                          | boolean         | -        | false  | -                |
+| offset-top    | 粘性布局时距离窗口顶部距离                        | number          | -        | 0      | -                |
+| swipeable     | 开启手势滑动                                      | boolean         | -        | false  | -                |
+| autoLineWidth | 底部条宽度跟随文字，指定`lineWidth`时此选项不生效 | boolean         | -        | false  | $LOWEST_VERSION$ |
+| lineWidth     | 底部条宽度，单位像素                              | number          | -        | 19     | -                |
+| lineHeight    | 底部条高度，单位像素                              | number          | -        | 3      | -                |
+| color         | 文字颜色                                          | string          | -        | -      | -                |
+| inactiveColor | 非活动标签文字颜色                                | string          | -        | -      | -                |
+| animated      | 是否开启切换标签内容时的转场动画                  | boolean         | -        | false  | -                |
+| duration      | 切换动画过渡时间，单位毫秒                        | number          | -        | 300    | -                |
+| slidable      | 是否开启滚动导航                                  | TabsSlidable    | `always` | `auto` | $LOWEST_VERSION$ |
+| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes) | BadgeProps   | -  | -  | $LOWEST_VERSION$   |
 
 ## Tab Attributes
 
-| 参数     | 说明       | 类型    | 可选值 | 默认值 | 最低版本 |
-| -------- | ---------- | ------- | ------ | ------ | -------- |
-| name     | 标签页名称 | string  | -      | -      | -        |
-| title    | 标题       | string  | -     | -      | -        |
-| disabled | 禁用       | boolean | -     | false  | -        |
-| lazy     | 延迟渲染，默认开启，开启`animated`后此选项始终为`false`    | boolean | -     | true   | $LOWEST_VERSION$ |
+| 参数     | 说明                                                    | 类型    | 可选值 | 默认值 | 最低版本         |
+| -------- | ------------------------------------------------------- | ------- | ------ | ------ | ---------------- |
+| name     | 标签页名称                                              | string  | -      | -      | -                |
+| title    | 标题                                                    | string  | -      | -      | -                |
+| disabled | 禁用                                                    | boolean | -      | false  | -                |
+| lazy     | 延迟渲染，默认开启，开启`animated`后此选项始终为`false` | boolean | -      | true   | $LOWEST_VERSION$ |
 
 ## Tabs Events
 
