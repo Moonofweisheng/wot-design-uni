@@ -45,7 +45,7 @@ import wdIcon from '../wd-icon/wd-icon.vue'
 import { onBeforeMount, ref, watch } from 'vue'
 import { COLLAPSE_KEY, collapseProps, type CollapseExpose, type CollapseToggleAllOptions } from './types'
 import { useChildren } from '../composables/useChildren'
-import { isArray, isDef } from '../common/util'
+import { isArray, isBoolean, isDef } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 
 const props = defineProps(collapseProps)
@@ -94,10 +94,22 @@ function updateChange(activeNames: string | string[] | boolean) {
   })
 }
 
-function toggle(name: string, expanded: boolean) {
+// 更新全部自组件展开状态
+const updateChildren = async () => {
+  for (const item of children) {
+    try {
+      await item.$.exposed!.updateExpand()
+    } catch (error) {
+      console.warn(`更新折叠面板状态失败: ${error}`)
+    }
+  }
+}
+
+async function toggle(name: string, expanded: boolean) {
   const { accordion, modelValue } = props
   if (accordion) {
     updateChange(name === modelValue ? '' : name)
+    await updateChildren()
   } else if (expanded) {
     updateChange((modelValue as string[]).concat(name))
   } else {
@@ -109,30 +121,27 @@ function toggle(name: string, expanded: boolean) {
  * 切换所有面板展开状态，传 true 为全部展开，false 为全部收起，不传参为全部切换
  * @param options 面板状态
  */
-const toggleAll = (options: boolean | CollapseToggleAllOptions = {}) => {
+const toggleAll = async (options: CollapseToggleAllOptions = {}) => {
   if (props.accordion) {
     return
   }
-  if (typeof options === 'boolean') {
+  if (isBoolean(options)) {
     options = { expanded: options }
   }
 
   const { expanded, skipDisabled } = options
   const names: string[] = []
-
-  children.forEach((item, index: number) => {
+  children.forEach((item, index) => {
     if (item.disabled && skipDisabled) {
       if (item.$.exposed!.getExpanded()) {
         names.push(item.name || index)
       }
-    } else {
-      item.$.exposed!.updateExpand()
-      if (isDef(expanded) ? expanded : !item.$.exposed!.getExpanded()) {
-        names.push(item.name || index)
-      }
+    } else if (isDef(expanded) ? expanded : !item.$.exposed!.getExpanded()) {
+      names.push(item.name || index)
     }
   })
   updateChange(names)
+  await updateChildren()
 }
 
 /**
