@@ -97,6 +97,19 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 ></wd-upload>
 ```
 
+## 关闭预览点击文件替换
+
+上传组件可通过设置 `use-preview` 来关闭文件预览并启用点击文件替换。
+
+```html
+<wd-upload
+  :file-list="fileList"
+  :use-preview="false"
+  action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+  @change="handleChange"
+></wd-upload>
+```
+
 ## 拦截预览图片操作
 
 设置 `before-preview` 函数，在用户点击图片进行预览时，会执行 `before-preview` 函数，接收 { file: 预览文件, index: 当前预览的下标, imgList: 所有图片地址列表, resolve }，通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会执行预览图片操作。
@@ -601,6 +614,7 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 | header                        | 设置上传的请求头部                                                                                                                                                             | object                                 | -                                              | -                          | -                |
 | multiple                      | 是否支持多选文件                                                                                                                                                               | boolean                                | -                                              | -                          | -                |
 | disabled                      | 是否禁用                                                                                                                                                                       | boolean                                | -                                              | false                      | -                |
+| use-preview                 | 是否点击已上传的图片或视频可预览，值为false的情况下再次弹出上传                                                                                                                                                     | boolean                                | -                                              | true                       | 1.3.15 |
 | limit                         | 最大允许上传个数                                                                                                                                                               | number                                 | -                                              | -                          | -                |
 | show-limit-num                | 限制上传个数的情况下，是否展示当前上传的个数                                                                                                                                   | boolean                                | -                                              | false                      | -                |
 | max-size                      | 文件大小限制，单位为`byte`                                                                                                                                                     | number                                 | -                                              | -                          | -                |
