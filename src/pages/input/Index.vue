@@ -50,6 +50,7 @@
         <wd-input type="text" label="清除、密码" v-model="value14" @input="handleInput" placeholder="请输入..." clearable show-password />
         <wd-input type="text" label="错误状态" v-model="value15" @input="handleInput" placeholder="请输入歪比巴卜" error />
         <wd-input type="text" label="必填" v-model="value16" @input="handleInput" placeholder="请输入歪比巴卜" required />
+        <wd-input type="text" label="字数限制" v-model="value22" placeholder="请输入..." :maxlength="20" show-word-limit clearable />
         <wd-input type="text" label="图标" v-model="value17" @input="handleInput" placeholder="请输入..." prefix-icon="dong" suffix-icon="list" />
         <wd-input type="text" label="自定义插槽" center v-model="value18" @input="handleInput" placeholder="请输入..." clearable>
           <template #suffix>
@@ -84,6 +85,7 @@ const value18 = ref<string>('')
 const value19 = ref<string>('')
 const value20 = ref<string>('')
 const value21 = ref<string>('')
+const value22 = ref<string>('')
 
 function handleChange(event: any) {
   console.log(event)
