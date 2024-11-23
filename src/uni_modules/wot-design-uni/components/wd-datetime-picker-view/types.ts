@@ -31,7 +31,7 @@ export const datetimePickerViewProps = {
   /**
    * 选中项，当 type 为 time 时，类型为字符串，否则为 时间戳
    */
-  modelValue: makeRequiredProp([String, Number, Date]),
+  modelValue: makeRequiredProp([String, Number]),
   /**
    * 加载中
    */

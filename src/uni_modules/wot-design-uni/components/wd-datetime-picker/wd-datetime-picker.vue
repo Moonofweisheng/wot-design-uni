@@ -167,6 +167,7 @@ import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { datetimePickerProps, type DatetimePickerExpose } from './types'
+import { dayjs } from '../common/dayjs'
 
 const props = defineProps(datetimePickerProps)
 const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
@@ -391,18 +392,14 @@ function getSelects(picker: 'before' | 'after') {
 function noop() {}
 
 function getDefaultInnerValue(isRegion?: boolean, isEnd?: boolean): string | number {
-  const { modelValue: value, defaultValue } = props
-
+  const { modelValue: value, defaultValue, maxDate, minDate, type } = props
   if (isRegion) {
-    if (isEnd) {
-      return (
-        (isArray(value) ? (value[1] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[1] as string) : '') || props.maxDate
-      )
-    } else {
-      return (
-        (isArray(value) ? (value[0] as string) : '') || (defaultValue && isArray(defaultValue) ? (defaultValue[0] as string) : '') || props.minDate
-      )
-    }
+    const index = isEnd ? 1 : 0
+    const targetValue = isArray(value) ? (value[index] as string) : ''
+    const targetDefault = isArray(defaultValue) ? (defaultValue[index] as string) : ''
+    const maxValue = type === 'time' ? dayjs(maxDate).format('HH:mm') : maxDate
+    const minValue = type === 'time' ? dayjs(minDate).format('HH:mm') : minDate
+    return targetValue || targetDefault || (isEnd ? maxValue : minValue)
   } else {
     return isDef(value || defaultValue) ? (value as string) || (defaultValue as string) : ''
   }

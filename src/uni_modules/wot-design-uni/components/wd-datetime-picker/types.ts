@@ -90,7 +90,7 @@ export const datetimePickerProps = {
   /**
    * 选中项，当 type 为 time 时，类型为字符串；当 type 为 Array 时，类型为范围选择；否则为 时间戳
    */
-  modelValue: makeRequiredProp([String, Number, Date, Array] as PropType<string | number | Date | Array<string | number | Date>>),
+  modelValue: makeRequiredProp([String, Number, Array] as PropType<string | number | Array<string | number>>),
   /**
    * 选择器类型，可选值为：date / year-month / time
    */
@@ -102,7 +102,7 @@ export const datetimePickerProps = {
   /**
    * 最大日期
    */
-  maxDate: makeNumberProp(new Date(new Date().getFullYear() + 10, 11, 31).getTime()),
+  maxDate: makeNumberProp(new Date(new Date().getFullYear() + 10, 11, 31, 23, 59, 59).getTime()),
   /**
    * 最小小时，time类型时生效
    */
