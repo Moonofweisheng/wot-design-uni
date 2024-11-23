@@ -131,58 +131,42 @@ $-badge-border: var(--wot-badge-border, 2px solid $-badge-color) !default; // �
 
 /* button */
 $-button-disabled-opacity: var(--wot-button-disabled-opacity, 0.6) !default; // button禁用透明度
-
 $-button-small-height: var(--wot-button-small-height, 28px) !default; // 小型按钮高度
 $-button-small-padding: var(--wot-button-small-padding, 0 12px) !default; // 小型按钮padding
 $-button-small-fs: var(--wot-button-small-fs, $-fs-secondary) !default; // 小型按钮字号
 $-button-small-radius: var(--wot-button-small-radius, 2px) !default; // 小型按钮圆角大小
 $-button-small-loading: var(--wot-button-small-loading, 14px) !default; // 小型按钮loading图标大小
-
 $-button-medium-height: var(--wot-button-medium-height, 36px) !default; // 中型按钮高度
 $-button-medium-padding: var(--wot-button-medium-padding, 0 16px) !default; // 中型按钮padding
 $-button-medium-fs: var(--wot-button-medium-fs, $-fs-content) !default; // 中型按钮字号
 $-button-medium-radius: var(--wot-button-medium-radius, 4px) !default; // 中型按钮圆角大小
 $-button-medium-loading: var(--wot-button-medium-loading, 18px) !default; // 中型按钮loading图标大小
 $-button-medium-box-shadow-size: var(--wot-button-medium-box-shadow-size, 0px 2px 4px 0px) !default; // 中尺寸阴影尺寸
-
 $-button-large-height: var(--wot-button-large-height, 44px) !default; // 大型按钮高度
 $-button-large-padding: var(--wot-button-large-padding, 0 36px) !default; // 大型按钮padding
 $-button-large-fs: var(--wot-button-large-fs, $-fs-title) !default; // 大型按钮字号
 $-button-large-radius: var(--wot-button-large-radius, 8px) !default; // 大型按钮圆角大小
 $-button-large-loading: var(--wot-button-large-loading, 24px) !default; // 大小按钮loading图标大小
 $-button-large-box-shadow-size: var(--wot-button-large-box-shadow-size, 0px 4px 8px 0px) !default; // 大尺寸阴影尺寸
-
 $-button-icon-fs: var(--wot-button-icon-fs, 1.18em) !default; // 带图标的按钮的图标大小
 $-button-icon-size: var(--wot-button-icon-size, 40px) !default; // icon 类型按钮尺寸
 $-button-icon-color: var(--wot-button-icon-color, rgba(0, 0, 0, 0.65)) !default; // icon 类型按钮颜色
 $-button-icon-disabled-color: var(--wot-button-icon-disabled-color, $-color-icon-disabled) !default; // icon 类型按钮禁用颜色
-
 $-button-normal-color: var(--wot-button-normal-color, $-color-title) !default; // 文字颜色
 $-button-normal-disabled-color: var(--wot-button-normal-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 默认按钮禁用文字色
-
 $-button-plain-bg-color: var(--wot-button-plain-bg-color, $-color-white) !default; // 幽灵按钮背景色
-
 $-button-primary-color: var(--wot-button-primary-color, $-color-white) !default; // 主要按钮颜色
 $-button-primary-bg-color: var(--wot-button-primary-bg-color, $-color-theme) !default; // 主要按钮背景颜色
-$-button-primary-box-shadow-color: var(--wot-button-primary-box-shadow-color, rgba($-color-theme, 0.25)) !default; // 主要按钮阴影颜色
-
 $-button-success-color: var(--wot-button-success-color, $-color-white) !default; // 成功按钮文字颜色
 $-button-success-bg-color: var(--wot-button-success-bg-color, $-color-success) !default; // 成功按钮颜色
-$-button-success-box-shadow-color: var(--wot-button-success-box-shadow-color, rgba($-color-success, 0.25)) !default; // 主要按钮阴影颜色
-
 $-button-info-color: var(--wot-button-info-color, $-color-title) !default; // 信息按钮颜色
 $-button-info-bg-color: var(--wot-button-info-bg-color, #f0f0f0) !default; // 信息按钮背景颜色
 $-button-info-plain-border-color: var(--wot-button-info-plain-border-color, rgba(0, 0, 0, 0.45)) !default; // 信息按钮禁用颜色
 $-button-info-plain-normal-color: var(--wot-button-info-plain-normal-color, rgba(0, 0, 0, 0.85)) !default; // 信息幽灵按钮默认颜色
-
 $-button-warning-color: var(--wot-button-warning-color, $-color-white) !default; // 警告按钮字体颜色
 $-button-warning-bg-color: var(--wot-button-warning-bg-color, $-color-warning) !default; // 警告按钮背景颜色
-$-button-warning-box-shadow-color: var(--wot-button-warning-box-shadow-color, rgba($-color-warning, 0.25)) !default; // 主要按钮阴影颜色
-
 $-button-error-color: var(--wot-button-error-color, $-color-white) !default; // 错误按钮颜色
 $-button-error-bg-color: var(--wot-button-error-bg-color, $-color-danger) !default; // 错误按钮背景颜色
-$-button-error-box-shadow-color: var(--wot-button-error-box-shadow-color, rgba($-color-danger, 0.25)) !default; // 主要按钮阴影颜色
-
 $-button-text-hover-opacity: var(--wot-button-text-hover-opacity, 0.7) !default; // 文字button激活时透明度
 
 /* cell */

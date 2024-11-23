@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <view>
+    <view class="page-button">
       <demo-block title="基本用法">
         <wd-button>主要按钮</wd-button>
         <wd-button type="success">成功按钮</wd-button>
@@ -114,6 +114,14 @@
           <wd-button type="info" size="small" plain>次操作</wd-button>
         </view>
       </demo-block>
+
+      <demo-block title="自定义样式-Material Design 3 风格 box-shadow">
+        <wd-button custom-class="custom-shadow">主要按钮</wd-button>
+        <wd-button type="success" custom-class="custom-shadow">成功按钮</wd-button>
+        <wd-button type="info" custom-class="custom-shadow">信息按钮</wd-button>
+        <wd-button type="warning" custom-class="custom-shadow">警告按钮</wd-button>
+        <wd-button type="error" custom-class="custom-shadow">危险按钮</wd-button>
+      </demo-block>
     </view>
   </page-wraper>
 </template>
@@ -124,10 +132,18 @@ function handleGetuserinfo(event: any) {
 }
 </script>
 <style lang="scss" scoped>
-:deep(button) {
-  margin: 0 10px 10px 0;
-}
-.button-block {
-  margin-right: 0;
+.page-button {
+  :deep(button) {
+    margin: 0 10px 10px 0;
+  }
+
+  :deep() {
+    .custom-shadow {
+      box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    }
+  }
+  .button-block {
+    margin-right: 0;
+  }
 }
 </style>

@@ -148,26 +148,6 @@
     border-radius: $-button-medium-radius;
     font-size: $-button-medium-fs;
 
-    @include when(primary) {
-      box-shadow: $-button-medium-box-shadow-size $-button-primary-box-shadow-color;
-    }
-
-    @include when(success) {
-      box-shadow: $-button-medium-box-shadow-size $-button-success-box-shadow-color;
-    }
-
-    @include when(warning) {
-      box-shadow: $-button-medium-box-shadow-size $-button-warning-box-shadow-color;
-    }
-
-    @include when(error) {
-      box-shadow: $-button-medium-box-shadow-size $-button-error-box-shadow-color;
-    }
-
-    @include when(plain) {
-      box-shadow: none;
-    }
-
     @include when(round) {
       min-width: 120px;
 
@@ -197,25 +177,6 @@
     &::after {
       border-radius: $-button-large-radius;
     }
-
-    &:not(.is-plain) {
-      @include when(primary) {
-        box-shadow: $-button-large-box-shadow-size $-button-primary-box-shadow-color;
-      }
-
-      @include when(success) {
-        box-shadow: $-button-large-box-shadow-size $-button-success-box-shadow-color;
-      }
-
-      @include when(warning) {
-        box-shadow: $-button-large-box-shadow-size $-button-warning-box-shadow-color;
-      }
-
-      @include when(error) {
-        box-shadow: $-button-large-box-shadow-size $-button-error-box-shadow-color;
-      }
-    }
-
 
     .wd-button__loading {
       width: $-button-large-loading;
