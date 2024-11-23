@@ -270,7 +270,7 @@ $-checkbox-button-disabled-border: var(--wot-checkbox-button-disabled-border, rg
 
 /* collapse */
 $-collapse-side-padding: var(--wot-collapse-side-padding, $-size-side-padding) !default; // 左右间距
-$-collapse-body-padding: var(--wot-collapse-body-padding, 14px 25px) !default; // body padding
+$-collapse-body-padding: var(--wot-collapse-body-padding, 14px $-size-side-padding) !default; // body padding
 $-collapse-header-padding: var(--wot-collapse-header-padding, 13px $-size-side-padding) !default; // 头部padding
 $-collapse-title-color: var(--wot-collapse-title-color, rgba(0, 0, 0, 0.85)) !default; // 标题颜色
 $-collapse-title-fs: var(--wot-collapse-title-fs, 16px) !default; // 标题字号

@@ -54,20 +54,13 @@ const value = ref<string[]>(['item1'])
 
 ```html
 <wd-collapse v-model="value">
-  <wd-collapse-item
-    v-for="(item, index) in itemList"
-    :before-expend="beforeExpend"
-    :key="index"
-    :title="item.title"
-    :name="item.name"
-  >
+  <wd-collapse-item v-for="(item, index) in itemList" :before-expend="beforeExpend" :key="index" :title="item.title" :name="item.name">
     {{ item.body }}
   </wd-collapse-item>
 </wd-collapse>
 ```
 
 ```ts
-
 import { useToast } from '@/uni_modules/wot-design-uni'
 const toast = useToast()
 const value = ref<string[]>(['item1'])
@@ -152,14 +145,60 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 </wd-collapse>
 ```
 
+## 嵌套使用
+
+`collapse`可以嵌套使用，同时由于`collapse-item`的内容容器存在默认的`padding`，所以嵌套的`collapse`需要设置`custom-body-style`或者`custom-body-class`来覆盖默认样式。
+
+***以下为示例，也可以自行调整样式。***
+
+:::tip 注意
+`custom-body-style`和`custom-body-class`在`$LOWEST_VERSION$`及以上版本支持。
+:::
+
+```html
+<view class="collapse">
+  <wd-collapse v-model="collapseRoot">
+    <wd-collapse-item custom-body-style="padding:0 0 0 14px" v-for="item in 5" :key="item" :title="`标签${item}`" :name="`${item}`">
+      <wd-collapse v-model="collapseList[item - 1]">
+        <wd-collapse-item
+          v-for="(item, index) in itemList"
+          :custom-class="index === 0 ? 'no-border' : ''"
+          :key="index"
+          :title="item.title"
+          :name="item.name"
+        >
+          {{ item.body }}
+        </wd-collapse-item>
+      </wd-collapse>
+    </wd-collapse-item>
+  </wd-collapse>
+</view>
+```
+```css
+.collapse {
+  :deep() {
+    .no-border {
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+```
+
+```ts
+const collapseRoot = ref<string[]>(['0'])
+const collapseList = ref<Array<string[]>>([['item1'], ['item2'], ['item3'], ['item4'], ['item5']])
+```
+
 ## CollapseItem Attributes
 
 | 参数          | 说明                                                        | 类型     | 可选值 | 默认值 | 最低版本 |
 | ------------- | ----------------------------------------------------------- | -------- | ------ | ------ | -------- |
 | name          | 折叠栏的标识符                                              | string   | -      | -      | -        |
-| title         | 折叠栏的标题, 支持同名 slot 自定义内容                          | string   | -      | ''      | -        |
+| title         | 折叠栏的标题, 支持同名 slot 自定义内容                      | string   | -      | ''     | -        |
 | disabled      | 禁用折叠栏                                                  | boolean  | -      | false  | -        |
-| before-expend | 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise | Function | -      | false  | -        |
+| before-expend | 打开前的回调函数，返回 false 可以阻止打开，支持返回 Promise | Function | -      | -      | -        |
 
 ### `before-expend` 执行时会传递以下回调参数：
 
@@ -185,24 +224,62 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 
 ## Methods
 
-| 方法名 | 说明 | 参数 | 最低版本 |
-| --- | --- | --- | --- |
-| toggleAll | 切换所有面板展开状态，传 `true` 为全部展开，`false` 为全部收起，不传参为全部切换 | _options?: boolean \| object_ | 0.2.6 |
+| 方法名    | 说明                                                                             | 参数                                 | 最低版本 |
+| --------- | -------------------------------------------------------------------------------- | ------------------------------------ | -------- |
+| toggleAll | 切换所有面板展开状态，传 `true` 为全部展开，`false` 为全部收起，不传参为全部切换 | `options?: CollapseToggleAllOptions` | 0.2.6    |
+
+### CollapseToggleAllOptions 参数说明
+
+| 参数名       | 说明                                | 类型    | 默认值 |
+| ------------ | ----------------------------------- | ------- | ------ |
+| expanded     | 是否展开，true 为展开，false 为收起 | boolean | -      |
+| skipDisabled | 是否跳过禁用项                      | boolean | false  |
+
+### toggleAll 方法示例
+
+```html
+<wd-collapse ref="collapse">...</wd-collapse>
+```
+
+```ts
+import { ref } from 'vue'
+import type { CollapseInstance } from '@/uni_modules/wot-design-uni/components/wd-collapse/types'
+
+const collapseRef = ref<CollapseInstance>()
+
+// 全部切换
+collapseRef.value?.toggleAll()
+// 全部展开
+collapseRef.value?.toggleAll(true)
+// 全部收起
+collapseRef.value?.toggleAll(false)
+
+// 全部全部切换，并跳过禁用项
+collapseRef.value?.toggleAll({
+  skipDisabled: true
+})
+// 全部选中，并跳过禁用项
+collapseRef.value?.toggleAll({
+  expanded: true,
+  skipDisabled: true
+})
+```
 
 ## Collapse Slot
 
-| name | 说明                                                 | 最低版本 |
-| ---- | ---------------------------------------------------- | -------- |
-| title |标题，便于开发者自定义标题（非 viewmore 使用）  | 1.2.27      |
-| more | 查看更多，便于开发者自定义查看更多类型的展开收起样式 | -        |
+| name  | 说明                                                 | 最低版本 |
+| ----- | ---------------------------------------------------- | -------- |
+| title | 标题，便于开发者自定义标题（非 viewmore 使用）       | 1.2.27   |
+| more  | 查看更多，便于开发者自定义查看更多类型的展开收起样式 | -        |
 
 ## CollapseItem 外部样式类
 
-| 类名         | 说明                    | 最低版本 |
-| ------------ | ----------------------- | -------- |
-| custom-class | collapseItem 根节点样式 | -        |
+| 类名              | 说明                           | 最低版本         |
+| ----------------- | ------------------------------ | ---------------- |
+| custom-class      | collapseItem 根节点样式        | -                |
+| custom-body-style | 自定义折叠面板内容容器的样式   | $LOWEST_VERSION$ |
+| custom-body-class | 自定义折叠面板内容容器的样式类 | $LOWEST_VERSION$ |
 
-**注意：组件内插槽样式不生效，因此使用插槽时需注意添加外部样式类**
 
 ## Collapse 外部样式类
 

@@ -1,13 +1,16 @@
 <template>
   <view :class="`wd-collapse-item ${disabled ? 'is-disabled' : ''} is-border ${customClass}`" :style="customStyle">
-    <view :class="`wd-collapse-item__header  ${isFirst ? 'wd-collapse-item__header-first' : ''}`" @click="handleClick">
+    <view
+      :class="`wd-collapse-item__header ${expanded ? 'is-expanded' : ''} ${isFirst ? 'wd-collapse-item__header-first' : ''}`"
+      @click="handleClick"
+    >
       <slot name="title" :expanded="expanded" :disabled="disabled" :isFirst="isFirst">
         <text class="wd-collapse-item__title">{{ title }}</text>
         <wd-icon name="arrow-down" :custom-class="`wd-collapse-item__arrow ${expanded ? 'is-retract' : ''}`" />
       </slot>
     </view>
     <view class="wd-collapse-item__wrapper" :style="contentStyle" @transitionend="handleTransitionEnd">
-      <view class="wd-collapse-item__body" :id="collapseId">
+      <view class="wd-collapse-item__body" :class="customBodyClass" :style="customBodyStyle" :id="collapseId">
         <slot />
       </view>
     </view>
@@ -26,8 +29,8 @@ export default {
 
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties } from 'vue'
-import { addUnit, getRect, isArray, isDef, isPromise, objToStyle, requestAnimationFrame, uuid } from '../common/util'
+import { computed, getCurrentInstance, onMounted, ref, type CSSProperties } from 'vue'
+import { addUnit, getRect, isArray, isDef, isPromise, isString, objToStyle, requestAnimationFrame, uuid } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { COLLAPSE_KEY } from '../wd-collapse/types'
 import { collapseItemProps, type CollapseItemExpose } from './types'
@@ -66,33 +69,37 @@ const contentStyle = computed(() => {
   return objToStyle(style)
 })
 
-const selected = computed(() => {
-  if (collapse) {
-    return collapse.props.modelValue
-  } else {
-    return []
-  }
+/**
+ * 是否选中
+ */
+const isSelected = computed(() => {
+  const modelValue = collapse ? collapse?.props.modelValue || [] : []
+  const { name } = props
+  return (isString(modelValue) && modelValue === name) || (isArray(modelValue) && modelValue.indexOf(name as string) >= 0)
 })
 
 onMounted(() => {
-  updateExpand()
+  updateExpand(isSelected.value)
 })
 
-function updateExpand() {
-  return getRect(`#${collapseId.value}`, false, proxy).then((rect) => {
+async function updateExpand(useBeforeExpand: boolean = true) {
+  try {
+    if (useBeforeExpand) {
+      await handleBeforeExpand()
+    }
+    initRect()
+  } catch (error) {
+    /* empty */
+  }
+}
+
+function initRect() {
+  getRect(`#${collapseId.value}`, false, proxy).then((rect) => {
     const { height: rectHeight } = rect
     height.value = isDef(rectHeight) ? Number(rectHeight) : ''
-    const name = props.name
     requestAnimationFrame(() => {
-      if (isDef(selected.value)) {
-        if (
-          (typeof selected.value === 'string' && selected.value === name) ||
-          (isArray(selected.value) && selected.value.indexOf(name as string) >= 0)
-        ) {
-          expanded.value = true
-        } else {
-          expanded.value = false
-        }
+      if (isSelected.value) {
+        expanded.value = true
       } else {
         expanded.value = false
       }
@@ -110,38 +117,42 @@ function handleTransitionEnd() {
 }
 
 // 点击子项
-function handleClick() {
+async function handleClick() {
   if (props.disabled) return
-  let name = props.name
-  const nexexpanded = !expanded.value // 执行后展开状态
-  if (nexexpanded) {
-    if (props.beforeExpend) {
-      const response: any = props.beforeExpend(name)
+  try {
+    await updateExpand()
+    const { name } = props
+    collapse && collapse.toggle(name, !expanded.value)
+  } catch (error) {
+    /* empty */
+  }
+}
+
+/**
+ * 展开前钩子
+ */
+function handleBeforeExpand() {
+  return new Promise<void>((resolve, reject) => {
+    const { name } = props
+    const nextexpanded = !expanded.value
+    if (nextexpanded && props.beforeExpend) {
+      const response = props.beforeExpend(name)
       if (!response) {
-        return
+        reject()
       }
       if (isPromise(response)) {
-        response.then(() => {
-          handleChangeExpand(name)
-        })
+        response.then(() => resolve()).catch(reject)
       } else {
-        handleChangeExpand(name)
+        resolve()
       }
     } else {
-      handleChangeExpand(name)
+      resolve()
     }
-  } else {
-    handleChangeExpand(name)
-  }
+  })
 }
 
 function getExpanded() {
   return expanded.value
-}
-
-function handleChangeExpand(name: string) {
-  updateExpand()
-  collapse && collapse.toggle(name, !expanded.value)
 }
 
 defineExpose<CollapseItemExpose>({ getExpanded, updateExpand })
