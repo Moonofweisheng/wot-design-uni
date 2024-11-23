@@ -16,12 +16,22 @@ const value = ref<string[]>(['item1'])
   <wd-collapse-item title="标签2" name="item2">这是一条简单的示例文字。</wd-collapse-item>
   <wd-collapse-item name="item3">
     <template #title="{ expanded, disabled, isFirst }">
-      <text style="color: red">通过 slot 自定义标题</text>
-      <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
+      <view class="header">
+        <text style="color: red">通过 slot 自定义标题</text>
+        <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
+      </view>
     </template>
     这是一条简单的示例文字。
   </wd-collapse-item>
 </wd-collapse>
+```
+
+```css
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 ```
 
 ## 手风琴
@@ -149,7 +159,7 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 
 `collapse`可以嵌套使用，同时由于`collapse-item`的内容容器存在默认的`padding`，所以嵌套的`collapse`需要设置`custom-body-style`或者`custom-body-class`来覆盖默认样式。
 
-***以下为示例，也可以自行调整样式。***
+**_以下为示例，也可以自行调整样式。_**
 
 :::tip 注意
 `custom-body-style`和`custom-body-class`在`$LOWEST_VERSION$`及以上版本支持。
@@ -174,6 +184,7 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
   </wd-collapse>
 </view>
 ```
+
 ```css
 .collapse {
   :deep() {
@@ -279,7 +290,6 @@ collapseRef.value?.toggleAll({
 | custom-class      | collapseItem 根节点样式        | -                |
 | custom-body-style | 自定义折叠面板内容容器的样式   | $LOWEST_VERSION$ |
 | custom-body-class | 自定义折叠面板内容容器的样式类 | $LOWEST_VERSION$ |
-
 
 ## Collapse 外部样式类
 

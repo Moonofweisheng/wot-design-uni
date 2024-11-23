@@ -57,7 +57,7 @@ const tab = ref('例子')
 }
 ```
 
-## 使用徽标<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.15</el-tag>
+## 使用徽标<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
 
 使用`bage-props`设置徽标属性，可以参考[Badge 组件的 props](/component/badge#attributes)。
 
@@ -187,7 +187,7 @@ const tab = ref('Design')
 </wd-tabs>
 ```
 
-## 左对齐超出即可滚动 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.15</el-tag>
+## 左对齐超出即可滚动 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
 
 `slidable`设置为`always`时，所有的标签会向左侧收缩对齐，超出即可滑动。
 

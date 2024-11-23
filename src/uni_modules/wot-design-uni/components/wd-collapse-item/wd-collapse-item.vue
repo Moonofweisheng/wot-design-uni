@@ -1,7 +1,9 @@
 <template>
   <view :class="`wd-collapse-item ${disabled ? 'is-disabled' : ''} is-border ${customClass}`" :style="customStyle">
     <view
-      :class="`wd-collapse-item__header ${expanded ? 'is-expanded' : ''} ${isFirst ? 'wd-collapse-item__header-first' : ''}`"
+      :class="`wd-collapse-item__header ${expanded ? 'is-expanded' : ''} ${isFirst ? 'wd-collapse-item__header-first' : ''} ${
+        $slots.title ? 'is-custom' : ''
+      }`"
       @click="handleClick"
     >
       <slot name="title" :expanded="expanded" :disabled="disabled" :isFirst="isFirst">
