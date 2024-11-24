@@ -351,7 +351,7 @@ const isLoop = ref(false)
 | --------- | ------------ | -------- |
 | value | 图片或视频地址 |-   |
 | poster | 视频封面 |-   |
-| type | 用于指定文件资源的类型，可选值`image`、`video` | $LOWEST_VERSION$ |
+| type | 用于指定文件资源的类型，可选值`image`、`video` | 1.4.0 |
 
 
 ### SwiperIndicatorProps

@@ -108,7 +108,7 @@ function handleClose() {
 | close-position | 关闭按钮位置 | string | inset / top / bottom / top-left / top-right / bottom-left / bottom-right | inset | - |
 | close-on-click-modal | 点击遮罩是否关闭 | boolean | - | false | - |
 | hide-when-close | 是否当关闭时将弹出层隐藏（display: none） | boolean | - | true | - |
-| z-index | 设置层级 | number | - | 10 | $LOWEST_VERSION$ |
+| z-index | 设置层级 | number | - | 10 | 1.4.0 |
 
 ## Events
 

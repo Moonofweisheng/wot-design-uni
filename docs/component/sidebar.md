@@ -470,7 +470,7 @@ function onScroll(e) {
 | 参数               | 说明                                                                                                                                  | 类型             | 可选值 | 默认值 | 最低版本         |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------ | ------ | ---------------- |
 | modelValue/v-model | 当前导航项的索引                                                                                                                      | string \| number | -      | 0      | 0.1.49           |
-| before-change      | 切换导航项前钩子，可以在切换标签前执行特定的逻辑，接收 { value, resolve } 参数，通过 resolve 继续执行，resolve 接收 1 个 boolean 参数 | function         | -      | -      | $LOWEST_VERSION$ |
+| before-change      | 切换导航项前钩子，可以在切换标签前执行特定的逻辑，接收 { value, resolve } 参数，通过 resolve 继续执行，resolve 接收 1 个 boolean 参数 | function         | -      | -      | 1.4.0 |
 
 ## Events
 

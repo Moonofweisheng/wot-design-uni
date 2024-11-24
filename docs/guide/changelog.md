@@ -1,6 +1,43 @@
 # 更新日志 
 
 
+## [1.4.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.14...v1.4.0) (2024-11-24)
+
+
+### ✨ Features | 新功能
+
+* ✨ Curtain 幕帘组件支持设置 z-index ([a1e20af](https://github.com/Moonofweisheng/wot-design-uni/commit/a1e20afef34704e518a96d4b4cb248cab3b7a8b6))
+* ✨ Siderbar 侧边栏添加before-change属性支持异步更新 ([#721](https://github.com/Moonofweisheng/wot-design-uni/issues/721)) ([1f5801d](https://github.com/Moonofweisheng/wot-design-uni/commit/1f5801d3f4c2cfc1b3990d74077e18ea88e8d7f8)), closes [#711](https://github.com/Moonofweisheng/wot-design-uni/issues/711)
+* ✨ Swiper 支持指定轮播项的文件类型 ([#720](https://github.com/Moonofweisheng/wot-design-uni/issues/720)) ([1e039cb](https://github.com/Moonofweisheng/wot-design-uni/commit/1e039cb7073d57bd19f59d4ffbb95c74b5cdc42f)), closes [#712](https://github.com/Moonofweisheng/wot-design-uni/issues/712)
+* ✨ Tab 添加 lazy 属性支持配置是否开启懒加载 ([bb5b193](https://github.com/Moonofweisheng/wot-design-uni/commit/bb5b19325fc2a0f4d13d353ee9bc8cfbf8605daa)), closes [#641](https://github.com/Moonofweisheng/wot-design-uni/issues/641)
+* ✨ Tabs 新增 `autoLineWidth` 设置底部条宽度自动同步文本内容' ([#679](https://github.com/Moonofweisheng/wot-design-uni/issues/679)) ([cb7cbf3](https://github.com/Moonofweisheng/wot-design-uni/commit/cb7cbf33250e3711d631271b1bbcb5f6829e75fa))
+* ✨ Tabs 新增map-title属性支持修改导航地图标题 ([0b7605f](https://github.com/Moonofweisheng/wot-design-uni/commit/0b7605f3ef2ca11cedc2cc61a3eb93e0757e6b86)), closes [#670](https://github.com/Moonofweisheng/wot-design-uni/issues/670)
+* ✨ Tabs 支持设置徽标 ([#724](https://github.com/Moonofweisheng/wot-design-uni/issues/724)) ([cd20581](https://github.com/Moonofweisheng/wot-design-uni/commit/cd20581ca6f75a67995a0cf562f524d82e357bbc)), closes [#689](https://github.com/Moonofweisheng/wot-design-uni/issues/689) [#672](https://github.com/Moonofweisheng/wot-design-uni/issues/672)
+* ✨ tabs支持左对齐 ([#718](https://github.com/Moonofweisheng/wot-design-uni/issues/718)) ([314c2e8](https://github.com/Moonofweisheng/wot-design-uni/commit/314c2e8c9d08e806dd0ec78fd4b2aa5e536af8f8)), closes [#380](https://github.com/Moonofweisheng/wot-design-uni/issues/380)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Collapse 使用 toggleAall 方法时不会触发 before-expand 钩子的问题 ([#727](https://github.com/Moonofweisheng/wot-design-uni/issues/727)) ([02aa5ce](https://github.com/Moonofweisheng/wot-design-uni/commit/02aa5ceb78713f210d97ecc29f18618084b93096))
+* 🐛 修复 CollapseItem 在微信小程序平台使用 title 插槽时宽度无法撑满的问题 ([4f1d945](https://github.com/Moonofweisheng/wot-design-uni/commit/4f1d9452ecd5054a636fb51871369ee1f183e1f1))
+* 🐛 修复 DateTimePicker 设置为 time 类型时绑定值无法设置为空数组的问题 ([443ac92](https://github.com/Moonofweisheng/wot-design-uni/commit/443ac929820327339062a608ef94db43bdaafb27)), closes [#706](https://github.com/Moonofweisheng/wot-design-uni/issues/706)
+* 🐛 修复 FloadingPanel 设置 height 不生效的问题 ([#725](https://github.com/Moonofweisheng/wot-design-uni/issues/725)) ([3cc1805](https://github.com/Moonofweisheng/wot-design-uni/commit/3cc18058aee83ed0abbf804595e38d7934490f4a)), closes [#703](https://github.com/Moonofweisheng/wot-design-uni/issues/703)
+* 🐛 修复 Slider 滑块处于极值时会遮挡max和min的问题 ([aa8834d](https://github.com/Moonofweisheng/wot-design-uni/commit/aa8834df630286882425778263ea9ff68811c928)), closes [#714](https://github.com/Moonofweisheng/wot-design-uni/issues/714)
+* 🐛 修复 wd-select-picker 组件单选搜索高亮 class 错误 ([7d461a5](https://github.com/Moonofweisheng/wot-design-uni/commit/7d461a54d09b14273fd18ff37310ecf754cf5138))
+* 🐛 修复Collapse折叠面板组件内容溢出问题 ([#710](https://github.com/Moonofweisheng/wot-design-uni/issues/710)) ([4bf8d1e](https://github.com/Moonofweisheng/wot-design-uni/commit/4bf8d1e300c28f405402582dd32fde4245d9ed47))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整文档中gitee镜像仓库的地址 ([a40dd9f](https://github.com/Moonofweisheng/wot-design-uni/commit/a40dd9f63e52cf178be2fd9a93904cdf26e23f14))
+* ✏️  调整join-group页面加群的问题 ([9a70d89](https://github.com/Moonofweisheng/wot-design-uni/commit/9a70d89be1e369dc2ea2a4babd3b3fdb326fcecc))
+* ✏️  添加 Cell 单元格 border 属性的文档 ([fad777d](https://github.com/Moonofweisheng/wot-design-uni/commit/fad777dfa8cf8dcf26288a9f975927dc3de2e80d)), closes [#653](https://github.com/Moonofweisheng/wot-design-uni/issues/653)
+* ✏️  添加关于 Button 自定义样式设置阴影的文档 ([c38321f](https://github.com/Moonofweisheng/wot-design-uni/commit/c38321f69c8f4fcb572cb40c8eef38cf4fa20eae)), closes [#731](https://github.com/Moonofweisheng/wot-design-uni/issues/731)
+* ✏️  文档新增演示页面源码和组件源码链接 ([330e8c7](https://github.com/Moonofweisheng/wot-design-uni/commit/330e8c7bbfc792f4a29cdaa08dec8b35c75b2a30))
+* ✏️  优化 NoticeBar 垂直滚动示例 ([ff1d377](https://github.com/Moonofweisheng/wot-design-uni/commit/ff1d37723b38169fc1a1f75676a8464343b42bec))
+* ✏️  增加 Input 字数限制的示例 ([5aa1c00](https://github.com/Moonofweisheng/wot-design-uni/commit/5aa1c00acd72f17cea108ffccecc427711e2cbdb))
+* ✏️  增加关于Tabs属性autoLineWidth的介绍和最低版本要求 ([08e7d77](https://github.com/Moonofweisheng/wot-design-uni/commit/08e7d774c6b6886fe3f79431b4728176e267144f))
+
 ### [1.3.14](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.3.13...v1.3.14) (2024-11-09)
 
 

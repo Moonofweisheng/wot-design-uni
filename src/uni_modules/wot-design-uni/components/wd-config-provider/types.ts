@@ -151,20 +151,16 @@ export type buttonThemeVars = {
   buttonPlainBgColor?: string
   buttonPrimaryColor?: string
   buttonPrimaryBgColor?: string
-  buttonPrimaryBoxShadowColor?: string
   buttonSuccessColor?: string
   buttonSuccessBgColor?: string
-  buttonSuccessBoxShadowColor?: string
   buttonInfoColor?: string
   buttonInfoBgColor?: string
   buttonInfoPlainBorderColor?: string
   buttonInfoPlainNormalColor?: string
   buttonWarningColor?: string
   buttonWarningBgColor?: string
-  buttonWarningBoxShadowColor?: string
   buttonErrorColor?: string
   buttonErrorBgColor?: string
-  buttonErrorBoxShadowColor?: string
   buttonTextHoverOpacity?: string
 }
 

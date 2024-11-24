@@ -57,7 +57,7 @@ const tab = ref('例子')
 }
 ```
 
-## 使用徽标<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+## 使用徽标<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.4.0</el-tag>
 
 使用`bage-props`设置徽标属性，可以参考[Badge 组件的 props](/component/badge#attributes)。
 
@@ -187,7 +187,7 @@ const tab = ref('Design')
 </wd-tabs>
 ```
 
-## 左对齐超出即可滚动 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+## 左对齐超出即可滚动 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.4.0</el-tag>
 
 `slidable`设置为`always`时，所有的标签会向左侧收缩对齐，超出即可滑动。
 
@@ -212,19 +212,19 @@ const tab = ref('Design')
 | v-model       | 绑定值                                            | string / number | -        | -      | -                |
 | slidable-num  | 可滑动的标签数阈值，`slidable`设置为`auto`时生效  | number          | -        | 6      | -                |
 | map-num       | 显示导航地图的标签数阈值                          | number          | -        | 10     | -                |
-| map-title     | 导航地图标题                                      | string          | -        | -      | $LOWEST_VERSION$ |
+| map-title     | 导航地图标题                                      | string          | -        | -      | 1.4.0 |
 | sticky        | 粘性布局                                          | boolean         | -        | false  | -                |
 | offset-top    | 粘性布局时距离窗口顶部距离                        | number          | -        | 0      | -                |
 | swipeable     | 开启手势滑动                                      | boolean         | -        | false  | -                |
-| autoLineWidth | 底部条宽度跟随文字，指定`lineWidth`时此选项不生效 | boolean         | -        | false  | $LOWEST_VERSION$ |
+| autoLineWidth | 底部条宽度跟随文字，指定`lineWidth`时此选项不生效 | boolean         | -        | false  | 1.4.0 |
 | lineWidth     | 底部条宽度，单位像素                              | number          | -        | 19     | -                |
 | lineHeight    | 底部条高度，单位像素                              | number          | -        | 3      | -                |
 | color         | 文字颜色                                          | string          | -        | -      | -                |
 | inactiveColor | 非活动标签文字颜色                                | string          | -        | -      | -                |
 | animated      | 是否开启切换标签内容时的转场动画                  | boolean         | -        | false  | -                |
 | duration      | 切换动画过渡时间，单位毫秒                        | number          | -        | 300    | -                |
-| slidable      | 是否开启滚动导航                                  | TabsSlidable    | `always` | `auto` | $LOWEST_VERSION$ |
-| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes) | BadgeProps   | -  | -  | $LOWEST_VERSION$   |
+| slidable      | 是否开启滚动导航                                  | TabsSlidable    | `always` | `auto` | 1.4.0 |
+| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes) | BadgeProps   | -  | -  | 1.4.0   |
 
 ## Tab Attributes
 
@@ -233,7 +233,7 @@ const tab = ref('Design')
 | name     | 标签页名称                                              | string  | -      | -      | -                |
 | title    | 标题                                                    | string  | -      | -      | -                |
 | disabled | 禁用                                                    | boolean | -      | false  | -                |
-| lazy     | 延迟渲染，默认开启，开启`animated`后此选项始终为`false` | boolean | -      | true   | $LOWEST_VERSION$ |
+| lazy     | 延迟渲染，默认开启，开启`animated`后此选项始终为`false` | boolean | -      | true   | 1.4.0 |
 
 ## Tabs Events
 
