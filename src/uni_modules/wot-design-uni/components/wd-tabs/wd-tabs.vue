@@ -219,7 +219,7 @@ const updateActive = (value: number | string = 0, init: boolean = false, setScro
  * @param {String |Number } value - radio绑定的value或者tab索引，默认值0
  * @param {Boolean } init - 是否伴随初始化操作
  */
-const setActive = debounce(updateActive, 100, { leading: false })
+const setActive = debounce(updateActive, 100, { leading: true })
 
 watch(
   () => props.modelValue,
@@ -310,7 +310,6 @@ async function updateLineStyle(animation: boolean = true) {
   if (!state.inited) return
   const { autoLineWidth, lineWidth, lineHeight } = props
   try {
-    const rects = await getRect($item, true, proxy)
     const lineStyle: CSSProperties = {}
     if (isDef(lineWidth)) {
       lineStyle.width = addUnit(lineWidth)
@@ -325,12 +324,13 @@ async function updateLineStyle(animation: boolean = true) {
       lineStyle.height = addUnit(lineHeight)
       lineStyle.borderRadius = `calc(${addUnit(lineHeight)} / 2)`
     }
+    const rects = await getRect($item, true, proxy)
     const rect = rects[state.activeIndex]
     let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + Number(curr.width), 0) + Number(rect.width) / 2
     if (left) {
       lineStyle.transform = `translateX(${left}px) translateX(-50%)`
       if (animation) {
-        lineStyle.transition = 'width 300ms ease, transform 300ms ease'
+        lineStyle.transition = 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);'
       }
       state.useInnerLine = false
       state.lineStyle = objToStyle(lineStyle)
