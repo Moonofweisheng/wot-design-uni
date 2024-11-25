@@ -138,7 +138,6 @@ function handleOpened() {
 ```
 
 ```typescript
-
 import { useMessage } from '@/uni_modules/wot-design-uni'
 const messageBox = useMessage()
 
@@ -149,7 +148,7 @@ const option = ref<Record<string, any>>([
   { label: '新款商品', value: 1 },
   { label: '活动商品', value: 2 }
 ])
- 
+
 // 通过对话框确认是否打开/关闭下拉菜单
 const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
   messageBox
@@ -197,19 +196,19 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 
 ## DropMenuItem Attributes
 
-| 参数      | 说明                                                                   | 类型            | 可选值 | 默认值 | 最低版本 |
-| --------- | ---------------------------------------------------------------------- | --------------- | ------ | ------ | -------- |
-| v-model   | 当前选中项对应选中的 value                                             | string / number | -      | -      | -        |
-| disabled  | 禁用菜单                                                               | boolean         | -      | false  | -        |
-| options   | 列表数据，对应数据结构 `[{text: '标题', value: '0', tip: '提示文字'}]` | array           | -      | -      | -        |
-| icon-name | 选中的图标名称(可选名称在 wd-icon 组件中)                              | string          | -      | check  | -        |
-| title     | 菜单标题                                                               | string          | -      | -      | -        |
-| icon      | 菜单图标                                                           | string            | -       | arrow-down | -     |
-| icon-size | 菜单图标尺寸                                                        | string            | -       | 14px | _       |
-| before-toggle | 下拉菜单打开或者关闭前触发，`reslove(true)`时继续执行打开或关闭操作 | function({ status, resolve })          | -       | -      | 1.3.7      |
-| value-key | 选项对象中，value 对应的 key                                           | string          | -      | value  | -        |
-| label-key | 选项对象中，展示的文本对应的 key                                       | string          | -      | label  | -        |
-| tip-key   | 选项对象中，选项说明对应的 key                                         | string          | -      | tip    | -        |
+| 参数          | 说明                                                                   | 类型                          | 可选值 | 默认值     | 最低版本 |
+| ------------- | ---------------------------------------------------------------------- | ----------------------------- | ------ | ---------- | -------- |
+| v-model       | 当前选中项对应选中的 value                                             | string / number               | -      | -          | -        |
+| disabled      | 禁用菜单                                                               | boolean                       | -      | false      | -        |
+| options       | 列表数据，对应数据结构 `[{text: '标题', value: '0', tip: '提示文字'}]` | array                         | -      | -          | -        |
+| icon-name     | 选中的图标名称(可选名称在 wd-icon 组件中)                              | string                        | -      | check      | -        |
+| title         | 菜单标题                                                               | string                        | -      | -          | -        |
+| icon          | 菜单图标                                                               | string                        | -      | arrow-down | -        |
+| icon-size     | 菜单图标尺寸                                                           | string                        | -      | 14px       | \_       |
+| before-toggle | 下拉菜单打开或者关闭前触发，`reslove(true)`时继续执行打开或关闭操作    | function({ status, resolve }) | -      | -          | 1.3.7    |
+| value-key     | 选项对象中，value 对应的 key                                           | string                        | -      | value      | -        |
+| label-key     | 选项对象中，展示的文本对应的 key                                       | string                        | -      | label      | -        |
+| tip-key       | 选项对象中，选项说明对应的 key                                         | string                        | -      | tip        | -        |
 
 ## DropdownItem Events
 
@@ -250,8 +249,10 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 
 ## DropMenuItem 外部样式类
 
-| 类名         | 说明                        | 最低版本 |
-| ------------ | --------------------------- | -------- |
-| custom-class | DropMenuItem 根节点样式     | -        |
-| custom-title | DropMenuItem 左侧文字样式   | -        |
-| custom-icon  | DropMenuItem 右侧 icon 样式 | -        |
+| 类名               | 说明                        | 最低版本         |
+| ------------------ | --------------------------- | ---------------- |
+| custom-class       | DropMenuItem 根节点样式     | -                |
+| custom-title       | DropMenuItem 左侧文字样式   | -                |
+| custom-icon        | DropMenuItem 右侧 icon 样式 | -                |
+| custom-popup-class | 自定义下拉菜单 popup 样式类 | $LOWEST_VERSION$ |
+| custom-popup-style | 自定义下拉菜单 popup 样式   | $LOWEST_VERSION$ |
