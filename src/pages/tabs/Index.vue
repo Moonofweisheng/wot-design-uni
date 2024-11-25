@@ -120,10 +120,26 @@
         </block>
       </wd-tabs>
     </demo-block>
+
+    <demo-block title="在弹出框中使用" transparent>
+      <view class="section">
+        <wd-button @click="handleOpenClick">打开弹窗</wd-button>
+      </view>
+    </demo-block>
+
+    <wd-popup v-model="showPopup" position="bottom" @after-enter="handlePopupShow" closable custom-style="height: 200px;padding: 0 24rpx;">
+      <view class="title">在弹出框中使用</view>
+      <wd-tabs v-model="tab10" ref="tabsRef">
+        <wd-tab v-for="item in tabs" :key="item" :title="`${item}`" :name="item">
+          <view class="content">内容{{ tab10 }}</view>
+        </wd-tab>
+      </wd-tabs>
+    </wd-popup>
   </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { TabsInstance } from '@/uni_modules/wot-design-uni/components/wd-tabs/types'
 import { ref } from 'vue'
 const tabs = ref(['这', '是', '一', '个', '例子'])
 const tab = ref('一')
@@ -168,6 +184,7 @@ const tab6 = ref<number>(0)
 const tab7 = ref<number>(0)
 const tab8 = ref<number>(0)
 const tab9 = ref<number>(0)
+const tab10 = ref<number>(3)
 
 const toast = useToast()
 function handleClick({ index, name }: any) {
@@ -176,6 +193,22 @@ function handleClick({ index, name }: any) {
 }
 function handleChange(event: any) {
   console.log('change', event)
+}
+
+const showPopup = ref(false) // 控制popup显示
+const tabsRef = ref<TabsInstance>() // 获取分段器实例
+
+/**
+ * 点击按钮打开popup
+ */
+function handleOpenClick() {
+  showPopup.value = true
+}
+/**
+ * popup打开后更新分段器样式
+ */
+function handlePopupShow() {
+  tabsRef.value?.updateLineStyle(false)
 }
 </script>
 <style lang="scss" scoped>
@@ -189,5 +222,12 @@ function handleChange(event: any) {
 .large {
   line-height: 320px;
   text-align: center;
+}
+.title {
+  display: flex;
+  font-size: 32rpx;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0;
 }
 </style>

@@ -84,12 +84,22 @@ export const tabsProps = {
 }
 
 export type TabsExpose = {
-  // 修改选中的tab Index
+  /**
+   * 设置激活项
+   * @param value 激活值
+   * @param init 是否已初始化
+   * @param setScroll 是否设置scroll-view滚动
+   */
   setActive: (value: number | string, init: boolean, setScroll: boolean) => void
-  // scroll-view滑动到active的tab_nav
+  /**
+   * 使选中项滚动到可视区域
+   */
   scrollIntoView: () => void
-  // 更新底部条样式
-  updateLineStyle: (animation: boolean) => void
+  /**
+   * 更新激活项边框线样式
+   * @param animation 是否开启动画，默认开启
+   */
+  updateLineStyle: (animation?: boolean) => void
 }
 
 export type TabsProps = ExtractPropTypes<typeof tabsProps>

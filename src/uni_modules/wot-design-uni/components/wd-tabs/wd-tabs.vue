@@ -143,7 +143,7 @@ import wdStickyBox from '../wd-sticky-box/wd-sticky-box.vue'
 import { computed, getCurrentInstance, onMounted, watch, nextTick, reactive, type CSSProperties, type ComponentInstance } from 'vue'
 import { addUnit, checkNumRange, debounce, getRect, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
-import { TABS_KEY, tabsProps } from './types'
+import { TABS_KEY, tabsProps, type TabsExpose } from './types'
 import { useChildren } from '../composables/useChildren'
 import { useTranslate } from '../composables/useTranslate'
 
@@ -428,7 +428,7 @@ function getActiveIndex(value: number | string) {
   return value
 }
 
-defineExpose({
+defineExpose<TabsExpose>({
   setActive,
   scrollIntoView,
   updateLineStyle
