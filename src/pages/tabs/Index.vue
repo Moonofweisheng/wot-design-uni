@@ -127,7 +127,7 @@
       </view>
     </demo-block>
 
-    <wd-popup v-model="showPopup" position="bottom" @after-enter="handlePopupShow" closable custom-style="height: 200px;padding: 0 24rpx;">
+    <wd-popup v-model="showPopup" position="bottom" safe-area-inset-bottom @after-enter="handlePopupShow" closable custom-style="padding: 0 24rpx;">
       <view class="title">在弹出框中使用</view>
       <wd-tabs v-model="tab10" ref="tabsRef">
         <wd-tab v-for="item in tabs" :key="item" :title="`${item}`" :name="item">
