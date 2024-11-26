@@ -268,9 +268,21 @@ $-collapse-more-color: var(--wot-collapse-more-color, $-color-theme) !default; /
 
 /* divider */
 $-divider-padding: var(--wot-divider-padding, 0 $-size-side-padding) !default; // 两边间距
+$-divider-margin: var(--wot-divider-margin, 16px 0) !default; // 上下间距
 $-divider-color: var(--wot-divider-color, rgba(0, 0, 0, 0.45)) !default; // 字体颜色
-$-divider-line-color: var(--wot-divider-line-color, rgba(0, 0, 0, 0.15)) !default; // 线条颜色
+$-divider-line-color: var(--wot-divider-line-color, currentColor) !default; // 线条颜色
+$-divider-line-height: var(--wot-divider-line-height, 1px) !default; // 线条高度
 $-divider-fs: var(--wot-divider-fs, 14px) !default; // 字体大小
+$-divider-content-left-width: var(--wot-divider-content-left-width, 10%) !default; // 左侧内容宽度
+$-divider-content-left-margin: var(--wot-divider-content-left-margin, 12px) !default; // 左侧内容距离线距离
+$-divider-content-right-margin: var(--wot-divider-content-right-margin, 12px) !default; // 右侧内容距离线距离
+$-divider-content-right-width: var(--wot-divider-content-right-width, 10%) !default; // 右侧内容宽度
+$-divider-vertical-height: var(--wot-divider-vertical-height, 16px) !default; // 垂直分割线高度
+$-divider-vertical-content-margin: var(--wot-divider-vertical-content-margin, 0 8px) !default; // 垂直分割线内容间距
+$-divider-vertical-line-width: var(--wot-divider-vertical-line-width, 1px) !default; // 线条高度
+
+
+
 
 /* drop-menu */
 $-drop-menu-height: var(--wot-drop-menu-height, 48px) !default; // 展示选中项的高度
