@@ -70,6 +70,7 @@
     position: relative;
     display: inline-block;
     vertical-align: middle;
+    line-height: 2;
   }
 
   @include e(input) {

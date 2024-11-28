@@ -13,7 +13,7 @@
       <wd-input-number v-model="value4" @change="handleChange4" disabled />
     </demo-block>
     <demo-block title="禁用输入框">
-      <wd-input-number v-model="value10" @change="handleChange4" disable-input />
+      <wd-input-number v-model="value10" @change="handleChange4" disable-input @clickInput="handleClickInput" />
     </demo-block>
     <demo-block title="无输入框">
       <view class="flex">
@@ -75,6 +75,10 @@ function handleChange8({ value }: any) {
 }
 function handleChange9({ value }: any) {
   console.log(value)
+}
+
+function handleClickInput() {
+  console.log('点击了输入框')
 }
 </script>
 <style lang="scss" scoped>
