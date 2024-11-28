@@ -31,7 +31,7 @@ export default {
 
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { computed, getCurrentInstance, onMounted, ref, type CSSProperties } from 'vue'
+import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties } from 'vue'
 import { addUnit, getRect, isArray, isDef, isPromise, isString, objToStyle, requestAnimationFrame, uuid } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { COLLAPSE_KEY } from '../wd-collapse/types'
@@ -79,6 +79,13 @@ const isSelected = computed(() => {
   const { name } = props
   return (isString(modelValue) && modelValue === name) || (isArray(modelValue) && modelValue.indexOf(name as string) >= 0)
 })
+
+watch(
+  () => isSelected.value,
+  (newVal) => {
+    updateExpand(newVal)
+  }
+)
 
 onMounted(() => {
   updateExpand(isSelected.value)
