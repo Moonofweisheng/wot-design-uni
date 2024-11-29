@@ -20,7 +20,14 @@
     >
       <view class="wd-curtain__content">
         <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
-        <wd-icon name="close-outline" :custom-class="`wd-curtain__content-close ${closePosition}`" @click="close" />
+        <slot name="close">
+          <wd-icon
+            name="close-outline"
+            :custom-class="`wd-curtain__content-close ${closePosition} ${customCloseClass}`"
+            :custom-style="customCloseStyle"
+            @click="close"
+          />
+        </slot>
       </view>
     </wd-popup>
   </view>
@@ -40,7 +47,7 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { curtainProps } from './types'
 
 const props = defineProps(curtainProps)
@@ -62,13 +69,16 @@ const emit = defineEmits([
 
 const show = ref<boolean>(false)
 const imgSucc = ref<boolean>(true)
-const imgStyle = ref<string>('')
 const imgScale = ref<number>(1)
 
 watch(
   () => props.value,
-  () => {
-    computedShowImg()
+  (newVal) => {
+    if (newVal && imgSucc.value) {
+      show.value = true
+    } else {
+      show.value = false
+    }
   },
   {
     deep: true,
@@ -76,34 +86,14 @@ watch(
   }
 )
 
-watch(
-  () => props.width,
-  () => {
-    computeImgStyle()
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-function computedShowImg() {
-  if (props.value && imgSucc.value) {
-    show.value = true
-  } else {
-    show.value = false
-    close()
-  }
-}
-
-function computeImgStyle() {
+const imgStyle = computed(() => {
   let style = ''
   if (props.width) {
     style += `width: ${props.width}px ;`
     style += `height: ${props.width / imgScale.value}px`
   }
-  imgStyle.value = style
-}
+  return style
+})
 
 function beforeenter() {
   emit('beforeenter')
@@ -142,7 +132,6 @@ function imgLoad(event: any) {
   const { height, width } = event.detail
   imgScale.value = width / height
   imgSucc.value = true
-  computeImgStyle()
   emit('load')
 }
 function imgErr() {

@@ -38,7 +38,19 @@ export const curtainProps = {
    * 类型：number
    * 默认值：10
    */
-  zIndex: makeNumberProp(10)
+  zIndex: makeNumberProp(10),
+  /**
+   * 自定义关闭按钮的类名
+   * 类型：string
+   * 默认值：''
+   */
+  customCloseClass: makeStringProp(''),
+  /**
+   * 自定义关闭按钮的样式
+   * 类型：string
+   * 默认值：''
+   */
+  customCloseStyle: makeStringProp('')
 }
 
 export type CurtainProps = ExtractPropTypes<typeof curtainProps>
