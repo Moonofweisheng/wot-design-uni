@@ -32,7 +32,7 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties } from 'vue'
-import { addUnit, getRect, isArray, isDef, isPromise, isString, objToStyle, requestAnimationFrame, uuid } from '../common/util'
+import { addUnit, getRect, isArray, isDef, isPromise, isString, objToStyle, pause, uuid } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { COLLAPSE_KEY } from '../wd-collapse/types'
 import { collapseItemProps, type CollapseItemExpose } from './types'
@@ -103,19 +103,18 @@ async function updateExpand(useBeforeExpand: boolean = true) {
 }
 
 function initRect() {
-  getRect(`#${collapseId.value}`, false, proxy).then((rect) => {
+  getRect(`#${collapseId.value}`, false, proxy).then(async (rect) => {
     const { height: rectHeight } = rect
     height.value = isDef(rectHeight) ? Number(rectHeight) : ''
-    requestAnimationFrame(() => {
-      if (isSelected.value) {
-        expanded.value = true
-      } else {
-        expanded.value = false
-      }
-      if (!inited.value) {
-        inited.value = true
-      }
-    })
+    await pause()
+    if (isSelected.value) {
+      expanded.value = true
+    } else {
+      expanded.value = false
+    }
+    if (!inited.value) {
+      inited.value = true
+    }
   })
 }
 

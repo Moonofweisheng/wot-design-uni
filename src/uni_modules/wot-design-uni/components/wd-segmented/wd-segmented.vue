@@ -32,7 +32,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, reactive, watch } from 'vue'
-import { requestAnimationFrame, getRect, isObj, objToStyle, addUnit } from '../common/util'
+import { getRect, isObj, objToStyle, addUnit, pause } from '../common/util'
 import type { CSSProperties } from 'vue'
 import { segmentedProps, type SegmentedExpose, type SegmentedOption } from './types'
 const $item = '.wd-segmented__item'
@@ -65,11 +65,10 @@ watch(
 
 const { proxy } = getCurrentInstance() as any
 
-onMounted(() => {
+onMounted(async () => {
   updateCurrentIndex()
-  requestAnimationFrame(() => {
-    updateActiveStyle(false)
-  })
+  await pause()
+  updateActiveStyle(false)
 })
 
 /**

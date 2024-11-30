@@ -122,7 +122,7 @@ import wdActionSheet from '../wd-action-sheet/wd-action-sheet.vue'
 import wdButton from '../wd-button/wd-button.vue'
 import { ref, computed, watch } from 'vue'
 import { dayjs } from '../common/dayjs'
-import { deepClone, isArray, isEqual, padZero, requestAnimationFrame } from '../common/util'
+import { deepClone, isArray, isEqual, padZero, pause } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
@@ -313,7 +313,7 @@ function scrollIntoView() {
   calendarView.value && calendarView.value && calendarView.value.$.exposed.scrollIntoView()
 }
 // 对外暴露方法
-function open() {
+async function open() {
   const { disabled, readonly } = props
 
   if (disabled || readonly) return
@@ -323,10 +323,9 @@ function open() {
   lastCalendarValue.value = deepClone(calendarValue.value)
   lastTab.value = currentTab.value
   lastCurrentType.value = currentType.value
-  requestAnimationFrame(() => {
-    scrollIntoView()
-  })
-
+  // 等待渲染完毕
+  await pause()
+  scrollIntoView()
   setTimeout(() => {
     if (props.showTypeSwitch) {
       calendarTabs.value.scrollIntoView()

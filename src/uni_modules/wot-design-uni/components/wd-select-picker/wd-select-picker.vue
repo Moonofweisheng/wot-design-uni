@@ -128,7 +128,7 @@ import wdLoading from '../wd-loading/wd-loading.vue'
 
 import { getCurrentInstance, onBeforeMount, ref, watch, nextTick, computed } from 'vue'
 import { useCell } from '../composables/useCell'
-import { getRect, isArray, isDef, isFunction, requestAnimationFrame } from '../common/util'
+import { getRect, isArray, isDef, isFunction, pause } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useTranslate } from '../composables/useTranslate'
@@ -261,7 +261,7 @@ onBeforeMount(() => {
 
 const { proxy } = getCurrentInstance() as any
 
-function setScrollIntoView() {
+async function setScrollIntoView() {
   let wraperSelector: string = ''
   let selectorPromise: Promise<UniApp.NodeInfo>[] = []
   if (isDef(selectList.value) && selectList.value !== '' && !isArray(selectList.value)) {
@@ -274,27 +274,24 @@ function setScrollIntoView() {
     wraperSelector = '#wd-checkbox-group'
   }
   if (wraperSelector) {
-    requestAnimationFrame().then(() => {
-      requestAnimationFrame().then(() => {
-        Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise]).then((res) => {
-          if (isDef(res) && isArray(res)) {
-            const scrollView = res[0]
-            const wraper = res[1]
-            const target = res.slice(2) || []
-            if (isDef(wraper) && isDef(scrollView)) {
-              const index = target.findIndex((item) => {
-                return item.bottom! > scrollView.top! && item.top! < scrollView.bottom!
-              })
-              if (index < 0) {
-                scrollTop.value = -1
-                nextTick(() => {
-                  scrollTop.value = Math.max(0, target[0].top! - wraper.top! - scrollView.height! / 2)
-                })
-              }
-            }
+    await pause(2000 / 30)
+    Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise]).then((res) => {
+      if (isDef(res) && isArray(res)) {
+        const scrollView = res[0]
+        const wraper = res[1]
+        const target = res.slice(2) || []
+        if (isDef(wraper) && isDef(scrollView)) {
+          const index = target.findIndex((item) => {
+            return item.bottom! > scrollView.top! && item.top! < scrollView.bottom!
+          })
+          if (index < 0) {
+            scrollTop.value = -1
+            nextTick(() => {
+              scrollTop.value = Math.max(0, target[0].top! - wraper.top! - scrollView.height! / 2)
+            })
           }
-        })
-      })
+        }
+      }
     })
   }
 }

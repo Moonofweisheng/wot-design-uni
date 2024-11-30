@@ -1,7 +1,5 @@
 <template>
   <view :class="rootClass" :style="customStyle">
-    <!--自定义label插槽-->
-    <!--搜索框主体-->
     <view class="wd-search__block">
       <slot name="prefix"></slot>
       <view class="wd-search__field">
@@ -9,9 +7,7 @@
           <wd-icon name="search" custom-class="wd-search__search-icon"></wd-icon>
           <text class="wd-search__placeholder-txt">{{ placeholder || translate('search') }}</text>
         </view>
-        <!--icon:search-->
         <wd-icon v-if="showInput || str || placeholderLeft" name="search" custom-class="wd-search__search-left-icon"></wd-icon>
-        <!--搜索框-->
         <input
           v-if="showInput || str || placeholderLeft"
           :placeholder="placeholder || translate('search')"
@@ -27,14 +23,11 @@
           :maxlength="maxlength"
           :focus="isFocused"
         />
-        <!--icon:clear-->
         <wd-icon v-if="str" custom-class="wd-search__clear wd-search__clear-icon" name="error-fill" @click="clearSearch" />
       </view>
     </view>
-    <!--the button behind input,care for hideCancel without displaying-->
 
     <slot v-if="!hideCancel" name="suffix">
-      <!--默认button-->
       <view class="wd-search__cancel" @click="handleCancel">
         {{ cancelTxt || translate('cancel') }}
       </view>
@@ -56,7 +49,7 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { type CSSProperties, computed, onMounted, ref, watch } from 'vue'
-import { objToStyle, requestAnimationFrame } from '../common/util'
+import { objToStyle, pause } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import { searchProps } from './types'
 
@@ -110,22 +103,17 @@ const coverStyle = computed(() => {
   return objToStyle(coverStyle)
 })
 
-function hackFocus(focus: boolean) {
+async function hackFocus(focus: boolean) {
   showInput.value = focus
-  requestAnimationFrame(() => {
-    isFocused.value = focus
-  })
+  await pause()
+  isFocused.value = focus
 }
 
-function closeCover() {
+async function closeCover() {
   if (props.disabled) return
-  requestAnimationFrame()
-    .then(() => requestAnimationFrame())
-    .then(() => requestAnimationFrame())
-    .then(() => {
-      showPlaceHolder.value = false
-      hackFocus(true)
-    })
+  await pause(100)
+  showPlaceHolder.value = false
+  hackFocus(true)
 }
 /**
  * @description input的input事件handle
@@ -141,29 +129,25 @@ function inputValue(event: any) {
 /**
  * @description 点击清空icon的handle
  */
-function clearSearch() {
+async function clearSearch() {
   str.value = ''
   clearing.value = true
   if (props.focusWhenClear) {
     isFocused.value = false
   }
-  requestAnimationFrame()
-    .then(() => requestAnimationFrame())
-    .then(() => requestAnimationFrame())
-    .then(() => {
-      if (props.focusWhenClear) {
-        showPlaceHolder.value = false
-        hackFocus(true)
-      } else {
-        showPlaceHolder.value = true
-        hackFocus(false)
-      }
-      emit('change', {
-        value: ''
-      })
-      emit('update:modelValue', '')
-      emit('clear')
-    })
+  await pause(100)
+  if (props.focusWhenClear) {
+    showPlaceHolder.value = false
+    hackFocus(true)
+  } else {
+    showPlaceHolder.value = true
+    hackFocus(false)
+  }
+  emit('change', {
+    value: ''
+  })
+  emit('update:modelValue', '')
+  emit('clear')
 }
 /**
  * @description 点击搜索按钮时的handle

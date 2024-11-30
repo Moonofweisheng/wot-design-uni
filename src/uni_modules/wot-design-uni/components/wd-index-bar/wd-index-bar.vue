@@ -27,7 +27,7 @@
 import type { AnchorIndex } from './type'
 import { indexBarInjectionKey, indexBarProps } from './type'
 import { ref, getCurrentInstance, onMounted, reactive, nextTick, watch } from 'vue'
-import { getRect, isDef, uuid, requestAnimationFrame } from '../common/util'
+import { getRect, isDef, uuid, pause } from '../common/util'
 import { useChildren } from '../composables/useChildren'
 
 const props = defineProps(indexBarProps)
@@ -131,13 +131,12 @@ function handleTouchMove(e: TouchEvent) {
   setScrollTop(getAnchorByPageY(clientY).$.exposed!.top.value - offsetTop)
 }
 
-function handleTouchEnd(e: TouchEvent) {
+async function handleTouchEnd(e: TouchEvent) {
   const clientY = e.changedTouches[0].pageY
   state.activeIndex = getAnchorByPageY(clientY).index
   setScrollTop(getAnchorByPageY(clientY).$.exposed!.top.value - offsetTop)
-  requestAnimationFrame(() => {
-    scrollState.touching = false
-  })
+  await pause()
+  scrollState.touching = false
 }
 
 function setScrollTop(top: number) {
