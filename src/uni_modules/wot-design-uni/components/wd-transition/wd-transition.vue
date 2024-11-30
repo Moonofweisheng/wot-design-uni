@@ -17,7 +17,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { isObj, isPromise, requestAnimationFrame } from '../common/util'
+import { isObj, isPromise, pause } from '../common/util'
 import { transitionProps, type TransitionName } from './types'
 import { AbortablePromise } from '../common/AbortablePromise'
 
@@ -127,16 +127,16 @@ function enter() {
       const duration = isObj(props.duration) ? (props.duration as any).enter : props.duration
       status.value = 'enter'
       emit('before-enter')
-      enterLifeCyclePromises.value = requestAnimationFrame()
+      enterLifeCyclePromises.value = pause()
       await enterLifeCyclePromises.value
       emit('enter')
       classes.value = classNames.enter
       currentDuration.value = duration
-      enterLifeCyclePromises.value = requestAnimationFrame()
+      enterLifeCyclePromises.value = pause()
       await enterLifeCyclePromises.value
       inited.value = true
       display.value = true
-      enterLifeCyclePromises.value = requestAnimationFrame()
+      enterLifeCyclePromises.value = pause()
       await enterLifeCyclePromises.value
       enterLifeCyclePromises.value = null
       transitionEnded.value = false
@@ -162,11 +162,11 @@ async function leave() {
     status.value = 'leave'
     emit('before-leave')
     currentDuration.value = duration
-    leaveLifeCyclePromises.value = requestAnimationFrame()
+    leaveLifeCyclePromises.value = pause()
     await leaveLifeCyclePromises.value
     emit('leave')
     classes.value = classNames.leave
-    leaveLifeCyclePromises.value = requestAnimationFrame()
+    leaveLifeCyclePromises.value = pause()
     await leaveLifeCyclePromises.value
     transitionEnded.value = false
     classes.value = classNames['leave-to']

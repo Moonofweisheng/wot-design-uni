@@ -443,7 +443,7 @@ export const requestAnimationFrame = (cb = () => {}) => {
  * @param ms 延迟时间
  * @returns
  */
-export const pause = (ms: number) => {
+export const pause = (ms: number = 1000 / 30) => {
   return new AbortablePromise((resolve) => {
     const timer = setTimeout(() => {
       clearTimeout(timer)

@@ -33,7 +33,7 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, onMounted } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
-import { isArray, isNumber, requestAnimationFrame } from '../../common/util'
+import { isArray, isNumber, pause } from '../../common/util'
 import Year from '../year/year.vue'
 import { yearPanelProps, type YearInfo, type YearPanelExpose } from './types'
 
@@ -68,31 +68,29 @@ onMounted(() => {
   scrollIntoView()
 })
 
-function scrollIntoView() {
-  requestAnimationFrame(() => {
-    let activeDate: number | null = null
-    if (isArray(props.value)) {
-      activeDate = props.value![0]
-    } else if (isNumber(props.value)) {
-      activeDate = props.value
-    }
+async function scrollIntoView() {
+  await pause()
+  let activeDate: number | null = null
+  if (isArray(props.value)) {
+    activeDate = props.value![0]
+  } else if (isNumber(props.value)) {
+    activeDate = props.value
+  }
 
-    if (!activeDate) {
-      activeDate = Date.now()
-    }
+  if (!activeDate) {
+    activeDate = Date.now()
+  }
 
-    let top: number = 0
-    for (let index = 0; index < years.value.length; index++) {
-      if (compareYear(years.value[index].date, activeDate) === 0) {
-        break
-      }
-      top += years.value[index] ? Number(years.value[index].height) : 0
+  let top: number = 0
+  for (let index = 0; index < years.value.length; index++) {
+    if (compareYear(years.value[index].date, activeDate) === 0) {
+      break
     }
-    scrollTop.value = 0
-    requestAnimationFrame(() => {
-      scrollTop.value = top
-    })
-  })
+    top += years.value[index] ? Number(years.value[index].height) : 0
+  }
+  scrollTop.value = 0
+  await pause()
+  scrollTop.value = top
 }
 
 const yearScroll = (event: { detail: { scrollTop: number } }) => {

@@ -74,7 +74,7 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { objToStyle, requestAnimationFrame, isDef, pause } from '../common/util'
+import { objToStyle, isDef, pause } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -221,24 +221,23 @@ function formatValue(value: string | number) {
   return `${value}`
 }
 
-function handleClear() {
+async function handleClear() {
   clearing.value = true
   focusing.value = false
   inputValue.value = ''
   if (props.focusWhenClear) {
     focused.value = false
   }
-  requestAnimationFrame(() => {
-    if (props.focusWhenClear) {
-      focused.value = true
-      focusing.value = true
-    }
-    emit('change', {
-      value: ''
-    })
-    emit('update:modelValue', inputValue.value)
-    emit('clear')
+  await pause()
+  if (props.focusWhenClear) {
+    focused.value = true
+    focusing.value = true
+  }
+  emit('change', {
+    value: ''
   })
+  emit('update:modelValue', inputValue.value)
+  emit('clear')
 }
 async function handleBlur({ detail }: any) {
   // 等待150毫秒，clear执行完毕

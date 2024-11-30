@@ -63,7 +63,7 @@ export default {
 <script lang="ts" setup>
 import wdPickerView from '../../wd-picker-view/wd-picker-view.vue'
 import { computed, ref, watch, onMounted } from 'vue'
-import { debounce, isArray, isEqual, isNumber, requestAnimationFrame } from '../../common/util'
+import { debounce, isArray, isEqual, isNumber, pause } from '../../common/util'
 import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'
 import Month from '../month/month.vue'
 import { monthPanelProps, type MonthInfo, type MonthPanelTimeType, type MonthPanelExpose } from './types'
@@ -185,31 +185,31 @@ onMounted(() => {
 /**
  * 使当前日期或者选中日期滚动到可视区域
  */
-function scrollIntoView() {
-  requestAnimationFrame(() => {
-    let activeDate: number | null = 0
-    if (isArray(props.value)) {
-      activeDate = props.value![0]
-    } else if (isNumber(props.value)) {
-      activeDate = props.value
-    }
+async function scrollIntoView() {
+  // 等待渲染完毕
+  await pause()
+  let activeDate: number | null = 0
+  if (isArray(props.value)) {
+    activeDate = props.value![0]
+  } else if (isNumber(props.value)) {
+    activeDate = props.value
+  }
 
-    if (!activeDate) {
-      activeDate = Date.now()
-    }
+  if (!activeDate) {
+    activeDate = Date.now()
+  }
 
-    let top: number = 0
-    for (let index = 0; index < months.value.length; index++) {
-      if (compareMonth(months.value[index].date, activeDate) === 0) {
-        break
-      }
-      top += months.value[index] ? Number(months.value[index].height) : 0
+  let top: number = 0
+  for (let index = 0; index < months.value.length; index++) {
+    if (compareMonth(months.value[index].date, activeDate) === 0) {
+      break
     }
-    scrollTop.value = 0
-    requestAnimationFrame(() => {
-      scrollTop.value = top
-    })
-  })
+    top += months.value[index] ? Number(months.value[index].height) : 0
+  }
+  scrollTop.value = 0
+  // 等待渲染完毕
+  await pause()
+  scrollTop.value = top
 }
 /**
  * 获取时间 picker 的数据
