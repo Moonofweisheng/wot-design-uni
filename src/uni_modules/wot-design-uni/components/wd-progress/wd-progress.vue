@@ -34,7 +34,7 @@ const props = defineProps(progressProps)
 const showColor = ref<string>('')
 const showPercent = ref<number>(0)
 const changeCount = ref<number>(0)
-let timer: NodeJS.Timeout | null = null
+let timer: ReturnType<typeof setTimeout> | null = null
 
 const rootStyle = computed(() => {
   return objToStyle({
