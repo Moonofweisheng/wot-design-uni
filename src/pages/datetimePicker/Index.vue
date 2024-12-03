@@ -1,67 +1,130 @@
 <template>
   <page-wraper>
-    <wd-toast />
-    <demo-block transparent>
-      <wd-cell-group border>
-        <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />
-        <wd-datetime-picker label="年月日" v-model="value2" type="date" @confirm="handleConfirm2" />
-        <wd-datetime-picker label="年月" v-model="value3" type="year-month" @confirm="handleConfirm3" />
-        <wd-datetime-picker label="年" v-model="value16" type="year" @confirm="handleConfirm16" />
-        <wd-datetime-picker label="时分" v-model="value4" type="time" @confirm="handleConfirm4" />
-        <wd-datetime-picker label="展示格式" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
-        <wd-datetime-picker label="内部格式" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
-        <wd-datetime-picker label="过滤选项" v-model="value7" :filter="filter" @confirm="handleConfirm7" />
-        <wd-datetime-picker label="before-confirm" v-model="value8" :before-confirm="beforeConfirm" @confirm="handleConfirm8" />
-        <wd-datetime-picker label="错误" v-model="value9" error @confirm="handleConfirm9" />
-        <wd-datetime-picker label="必填" v-model="value10" required @confirm="handleConfirm10" />
-        <wd-datetime-picker label="默认日期" v-model="value2" :default-value="value2" />
-        <wd-datetime-picker label="时间范围一年" :minDate="minDate" :maxDate="maxDate" v-model="value17" @confirm="handleConfirm1" />
-      </wd-cell-group>
-    </demo-block>
-    <demo-block title="label 不传" transparent>
-      <wd-datetime-picker v-model="value11" @confirm="handleConfirm11" />
-    </demo-block>
-    <demo-block title="大小" transparent>
-      <wd-datetime-picker label="日期选择" size="large" v-model="value12" @confirm="handleConfirm12" />
-    </demo-block>
-    <demo-block title="值靠右展示" transparent>
-      <wd-datetime-picker label="日期选择" align-right v-model="value13" @confirm="handleConfirm13" />
-    </demo-block>
-    <demo-block title="区域选择" transparent>
-      <wd-datetime-picker label="日期选择" title="请选择区间" v-model="value14" @confirm="handleConfirm14" />
-    </demo-block>
-    <demo-block title="范围tab展示格式" transparent>
-      <wd-datetime-picker label="日期选择" v-model="value15" @confirm="handleConfirm15" :display-format-tab-label="displayFormatTabLabel" />
-    </demo-block>
+    <wd-cell-group border>
+      <wd-cell title="日期选择" :value="cellValue.value1" is-link @click="visible.visible1 = true"></wd-cell>
+      <wd-cell title="年月日" :value="cellValue.value2" is-link @click="visible.visible2 = true"></wd-cell>
+      <wd-cell title="年月" :value="cellValue.value3" is-link @click="visible.visible3 = true"></wd-cell>
+      <wd-cell title="年" :value="cellValue.value4" is-link @click="visible.visible4 = true"></wd-cell>
+      <wd-cell title="时分" :value="cellValue.value5" is-link @click="visible.visible5 = true"></wd-cell>
+      <wd-cell title="过滤选项" :value="cellValue.value6" is-link @click="visible.visible6 = true"></wd-cell>
+      <wd-cell title="before-confirm" :value="cellValue.value7" is-link @click="visible.visible7 = true"></wd-cell>
+      <wd-cell title="时间范围一年" :value="cellValue.value8" is-link @click="visible.visible8 = true"></wd-cell>
+      <wd-cell title="区间选择" :value="cellValue.value9" is-link @click="visible.visible9 = true"></wd-cell>
+      <wd-cell title="范围tab展示格式" :value="cellValue.value10" is-link @click="visible.visible10 = true"></wd-cell>
+    </wd-cell-group>
+    <wd-datetime-picker v-model="value1" v-model:visible="visible.visible1" @confirm="(result) => handleConfirm({ ...result, index: 1 })" />
+    <wd-datetime-picker
+      v-model="value2"
+      v-model:visible="visible.visible2"
+      type="date"
+      @confirm="(result) => handleConfirm({ ...result, index: 2, type: 'date' })"
+    />
+
+    <wd-datetime-picker
+      v-model="value3"
+      v-model:visible="visible.visible3"
+      type="year-month"
+      @confirm="(result) => handleConfirm({ ...result, index: 3, type: 'year-month' })"
+    />
+
+    <wd-datetime-picker
+      v-model="value4"
+      v-model:visible="visible.visible4"
+      type="year"
+      @confirm="(result) => handleConfirm({ ...result, index: 4, type: 'year' })"
+    />
+
+    <wd-datetime-picker
+      v-model="value5"
+      v-model:visible="visible.visible5"
+      type="time"
+      @confirm="(result) => handleConfirm({ ...result, index: 5, type: 'time' })"
+    />
+
+    <wd-datetime-picker
+      v-model="value6"
+      v-model:visible="visible.visible6"
+      :filter="filter"
+      @confirm="(result) => handleConfirm({ ...result, index: 6 })"
+    />
+
+    <wd-datetime-picker
+      v-model="value7"
+      v-model:visible="visible.visible7"
+      :before-confirm="beforeConfirm"
+      @confirm="(result) => handleConfirm({ ...result, index: 7 })"
+    />
+
+    <wd-datetime-picker
+      v-model="value8"
+      v-model:visible="visible.visible8"
+      :minDate="minDate"
+      :maxDate="maxDate"
+      @confirm="(result) => handleConfirm({ ...result, index: 8 })"
+    />
+
+    <wd-datetime-picker
+      v-model:visible="visible.visible9"
+      title="请选择区间"
+      v-model="value9"
+      @confirm="(result) => handleConfirm({ ...result, index: 9 })"
+    />
+
+    <wd-datetime-picker
+      v-model:visible="visible.visible10"
+      v-model="value10"
+      @confirm="(result) => handleConfirm({ ...result, index: 10 })"
+      :display-format-tab-label="displayFormatTabLabel"
+    />
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import type { DatetimePickerViewFilter, DatetimePickerViewFormatter } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/types'
+import { useToast, dayjs } from '@/uni_modules/wot-design-uni'
+import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
 import type {
-  DatetimePickerDisplayFormat,
-  DatetimePickerDisplayFormatTabLabel,
-  DatetimePickerInstance
-} from '@/uni_modules/wot-design-uni/components/wd-datetime-picker/types'
-import { ref } from 'vue'
+  DatetimePickerViewFilter,
+  DatetimePickerViewFormatter,
+  DateTimeType
+} from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/types'
+import type { DatetimePickerDisplayFormatTabLabel, DatetimePickerInstance } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker/types'
+import { reactive, ref } from 'vue'
+
+const visible = reactive({
+  visible1: false,
+  visible2: false,
+  visible3: false,
+  visible4: false,
+  visible5: false,
+  visible6: false,
+  visible7: false,
+  visible8: false,
+  visible9: false,
+  visible10: false
+})
 
 const value1 = ref<string>('')
 const value2 = ref<number>(Date.now())
 const value3 = ref<number>(Date.now())
-const value4 = ref<string>('09:20')
-const value5 = ref<number>(Date.now())
+const value4 = ref<number>(Date.now())
+const value5 = ref<string>('09:20')
 const value6 = ref<number>(Date.now())
 const value7 = ref<number>(Date.now())
 const value8 = ref<number>(Date.now())
-const value9 = ref<number>(Date.now())
-const value10 = ref<number>(Date.now())
-const value11 = ref<string>('')
-const value12 = ref<string>('')
-const value13 = ref<number>(Date.now())
-const value14 = ref<any[]>(['', ''])
-const value15 = ref<any[]>(['', Date.now()])
-const value16 = ref(Date.now())
-const value17 = ref(Date.now())
+const value9 = ref<any[]>(['', ''])
+const value10 = ref<any[]>(['', ''])
+
+const cellValue = reactive<{ [key: PropertyKey]: any }>({
+  value1: '',
+  value2: formatDate(value2.value, 'date'),
+  value3: formatDate(value3.value, 'year-month'),
+  value4: formatDate(value4.value, 'year'),
+  value5: '09:20',
+  value6: formatDate(value6.value),
+  value7: formatDate(value7.value),
+  value8: formatDate(value8.value),
+  value9: '',
+  value10: ''
+})
 
 const minDate = ref<number>(Date.now())
 const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
@@ -88,9 +151,7 @@ const filter: DatetimePickerViewFilter = (type, values) => {
   }
   return values
 }
-const displayFormat: DatetimePickerDisplayFormat = (items) => {
-  return `${items[0].label}年${items[1].label}月${items[2].label}日 ${items[3].label}:${items[4].label}`
-}
+
 const toast = useToast()
 const beforeConfirm = (value: number | string | (number | string)[], resolve: (isPass: boolean) => void, picker: DatetimePickerInstance) => {
   picker.setLoading(true)
@@ -108,57 +169,25 @@ const displayFormatTabLabel: DatetimePickerDisplayFormatTabLabel = (items) => {
   return `${items[0].label}年${items[1].label}月${items[2].label}日 ${items[3].label}:${items[4].label}`
 }
 
-/** picker触发confirm事件，同步触发confirm事件 */
-function handleConfirm1({ value }: any) {
-  console.log(new Date(value))
-}
-function handleConfirm2({ value }: any) {
-  console.log(value)
-}
-function handleConfirm3({ value }: any) {
-  console.log(value)
-}
-function handleConfirm4({ value }: any) {
-  console.log(value)
-}
-function handleConfirm5({ value }: any) {
-  console.log(value)
-}
-function handleConfirm6({ value }: any) {
-  console.log(value)
-}
-function handleConfirm7({ value }: any) {
-  console.log(value)
+function handleConfirm({ value, index, type }: { value: string | number | (string | number)[]; index: number; type?: DateTimeType }) {
+  cellValue[`value${index}`] = (isArray(value) ? value : [value]).map((item) => formatDate(item, type)).join('至')
 }
 
-function handleConfirm8({ value }: any) {
-  console.log(value)
+function formatDate(date: number | string, type?: DateTimeType) {
+  switch (type) {
+    case 'date':
+      return dayjs(date).format('YYYY-MM-DD')
+    case 'year-month':
+      return dayjs(date).format('YYYY-MM')
+    case 'time':
+      return date
+    case 'datetime':
+      return dayjs(date).format('YYYY-MM-DD HH:mm')
+    case 'year':
+      return dayjs(date).format('YYYY')
+    default:
+      return dayjs(date).format('YYYY-MM-DD HH:mm')
+  }
 }
-function handleConfirm9({ value }: any) {
-  console.log(value)
-}
-function handleConfirm10({ value }: any) {
-  console.log(value)
-}
-function handleConfirm11({ value }: any) {
-  console.log(value)
-}
-function handleConfirm12({ value }: any) {
-  console.log(value)
-}
-function handleConfirm13({ value }: any) {
-  console.log(value)
-}
-function handleConfirm14({ value }: any) {
-  console.log(value)
-}
-function handleConfirm15({ value }: any) {
-  console.log(value)
-}
-function handleConfirm16({ value }: any) {
-  console.log(value)
-}
-/** picker触发cancel事件，同步触发cancel事件 */
-function onCancel() {}
 </script>
 <style lang="scss" scoped></style>

@@ -1,49 +1,65 @@
 <template>
   <page-wraper>
-    <wd-toast />
     <demo-block transparent>
       <wd-cell-group border>
-        <wd-picker label="单列选项" v-model="value0" :columns="columns0" />
-        <wd-picker label="禁用" disabled v-model="value1" :columns="columns1" />
-        <wd-picker label="只读" readonly v-model="value2" :columns="columns2" />
-        <wd-picker label="loading" v-model="value3" loading :columns="columns3" />
-        <wd-picker label="多列" v-model="value4" :columns="columns4" />
-        <wd-picker label="多级联动" v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
-        <wd-picker label="分隔符" v-model="value6" :columns="columns6" :display-format="displayFormat" />
-        <wd-picker label="标题" v-model="value9" :columns="columns7" title="文案标题" />
-        <wd-picker label="before-confirm" :columns="columns0" v-model="value7" :before-confirm="beforeConfirm" />
-        <wd-picker label="错误" v-model="value10" error :columns="columns0" />
-        <wd-picker label="必填" v-model="value11" :columns="columns0" required />
-        <wd-picker label="可清空" :clearable="true" v-model="value15" :columns="columns5" :column-change="onChangeDistrict" />
+        <wd-cell title="单列选项" :value="cellValue.value1" is-link @click="visible.visible1 = true"></wd-cell>
+        <wd-cell title="loading" :value="cellValue.value2" is-link @click="visible.visible2 = true"></wd-cell>
+        <wd-cell title="多列" :value="cellValue.value3" is-link @click="visible.visible3 = true"></wd-cell>
+        <wd-cell title="多级联动" :value="cellValue.value4" is-link @click="visible.visible4 = true"></wd-cell>
+        <wd-cell title="自定义标题" :value="cellValue.value5" is-link @click="visible.visible5 = true" />
+        <wd-cell title="before-confirm" :value="cellValue.value6" is-link @click="visible.visible6 = true" />
       </wd-cell-group>
     </demo-block>
-    <demo-block title="label 不传" transparent>
-      <wd-picker :columns="columns0" v-model="value12" />
-    </demo-block>
-    <demo-block title="大小" transparent>
-      <wd-picker label="单列选项" v-model="value13" size="large" :columns="columns0" />
-    </demo-block>
-    <demo-block title="值靠右显示" transparent>
-      <wd-picker label="单列选项" v-model="value14" align-right :columns="columns0" />
-    </demo-block>
-    <demo-block title="默认插槽" transparent>
-      <view class="default-slot">
-        <view class="default-slot-txt">
-          选中值：
-          <text style="color: #34d19d">{{ value8 }}</text>
-        </view>
-        <wd-picker :columns="columns0" v-model="value8" use-default-slot @confirm="handleConfirm">
-          <wd-button>插槽唤起</wd-button>
-        </wd-picker>
-      </view>
-    </demo-block>
+    <wd-picker
+      v-model:visible="visible.visible1"
+      v-model="value1"
+      :columns="columns0"
+      @confirm="(result) => handleConfirm({ ...result, index: 1 })"
+    />
+    <wd-picker
+      v-model:visible="visible.visible2"
+      v-model="value2"
+      loading
+      :columns="columns1"
+      @confirm="(result) => handleConfirm({ ...result, index: 2 })"
+    />
+    <wd-picker
+      v-model="value3"
+      v-model:visible="visible.visible3"
+      :columns="columns2"
+      @confirm="(result) => handleConfirm({ ...result, index: 3 })"
+    />
+    <wd-picker
+      v-model="value4"
+      v-model:visible="visible.visible4"
+      :columns="columns3"
+      :column-change="onChangeDistrict"
+      @confirm="(result) => handleConfirm({ ...result, index: 4 })"
+    />
+
+    <wd-picker
+      v-model="value5"
+      v-model:visible="visible.visible5"
+      :columns="columns4"
+      title="文案标题"
+      @confirm="(result) => handleConfirm({ ...result, index: 5 })"
+    />
+
+    <wd-picker
+      v-model="value6"
+      v-model:visible="visible.visible6"
+      :columns="columns0"
+      :before-confirm="beforeConfirm"
+      @confirm="(result) => handleConfirm({ ...result, index: 6 })"
+    />
   </page-wraper>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
-import type { ColumnItem, PickerViewColumnChange } from '@/uni_modules/wot-design-uni/components/wd-picker-view/types'
-import type { PickerBeforeConfirm, PickerDisplayFormat } from '@/uni_modules/wot-design-uni/components/wd-picker/types'
-import { ref } from 'vue'
+import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
+import type { PickerViewColumnChange } from '@/uni_modules/wot-design-uni/components/wd-picker-view/types'
+import type { PickerBeforeConfirm } from '@/uni_modules/wot-design-uni/components/wd-picker/types'
+import { reactive, ref } from 'vue'
 
 const toast = useToast()
 
@@ -89,44 +105,20 @@ const district: Record<string, Array<{ label: string; value: string }>> = {
 }
 
 const columns0 = ref(['选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
-const value0 = ref('')
-
-const value1 = ref('选项3')
 const columns1 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const columns2 = ref([
+  ['中山大学', '中南大学', '华南理工大学'],
+  ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
+])
+const columns3 = ref([district[0], district[district[0][0].value], district[district[district[0][0].value][0].value]])
+const columns4 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+
+const value1 = ref('')
 const value2 = ref('选项4')
-const columns2 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
-
-const columns3 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
-const value3 = ref('选项4')
-
+const value3 = ref([])
 const value4 = ref([])
-const columns4 = ref([
-  ['中山大学', '中南大学', '华南理工大学'],
-  ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
-])
-
-const value5 = ref(['110000', '110100', '110102'])
-const value15 = ref(['110000', '110100', '110102'])
-const columns5 = ref([district[0], district[district[0][0].value], district[district[district[0][0].value][0].value]])
-
-const value6 = ref(['中南大学', '软件工程'])
-const value8 = ref('选项2')
-const value9 = ref('选项1')
-const value10 = ref('选项2')
-
-const value11 = ref('选项3')
-const value12 = ref('选项3')
-const value13 = ref('选项3')
-const value14 = ref('选项3')
-
-const columns6 = ref([
-  ['中山大学', '中南大学', '华南理工大学'],
-  ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
-])
-
-const columns7 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
-
-const value7 = ref('')
+const value5 = ref('选项1')
+const value6 = ref('')
 
 const onChangeDistrict: PickerViewColumnChange = (pickerView, value, columnIndex, resolve) => {
   const item = (value as Record<string, any>[])[columnIndex]
@@ -137,14 +129,6 @@ const onChangeDistrict: PickerViewColumnChange = (pickerView, value, columnIndex
     pickerView.setColumnData(2, district[item.value])
   }
   resolve()
-}
-
-const displayFormat: PickerDisplayFormat = (items) => {
-  return (items as ColumnItem[])
-    .map((item) => {
-      return item.label
-    })
-    .join('-')
 }
 
 const beforeConfirm: PickerBeforeConfirm = (value, resolve, picker) => {
@@ -160,26 +144,30 @@ const beforeConfirm: PickerBeforeConfirm = (value, resolve, picker) => {
   }, 2000)
 }
 
-function handleConfirm({ value }: any) {
-  value8.value = value
-}
-</script>
-<style lang="scss" scoped>
-.wot-theme-dark {
-  .default-slot {
-    background: $-dark-background2;
-  }
-  .default-slot-txt {
-    color: $-dark-color3;
-  }
-}
-.default-slot {
-  background: #fff;
-  padding: 15px;
+function handleConfirm({ selectedItems, index }: { selectedItems: Record<string, any> | Record<string, any>[]; index: number }) {
+  cellValue[`value${index}`] = (isArray(selectedItems) ? selectedItems : [selectedItems])
+    .map((item) => {
+      return item.label
+    })
+    .join('/')
 }
 
-.default-slot-txt {
-  margin-bottom: 10px;
-  color: rgba(0, 0, 0, 0.45);
-}
-</style>
+const visible = reactive({
+  visible1: false,
+  visible2: false,
+  visible3: false,
+  visible4: false,
+  visible5: false,
+  visible6: false
+})
+
+const cellValue = reactive<{ [key: PropertyKey]: any }>({
+  value1: '',
+  value2: '选项4',
+  value3: '',
+  value4: '',
+  value5: '选项1',
+  value6: ''
+})
+</script>
+<style lang="scss" scoped></style>

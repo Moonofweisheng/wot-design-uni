@@ -123,20 +123,10 @@ const cellValue = reactive<{ [key: PropertyKey]: any }>({
 
 const value1 = ref<string[]>([])
 const value2 = ref<string[]>([])
-const value3 = ref<string[]>(['130000', '130200', '130204'])
 const value4 = ref<string[]>([])
-const value5 = ref<string[]>([])
-const value6 = ref<string[]>(['130000', '130200', '130204'])
 const value7 = ref<string[]>([])
 const value8 = ref<string[]>([])
-const value9 = ref<string[]>([])
-const value10 = ref<string[]>([])
 const value11 = ref<string[]>([])
-const value12 = ref<string[]>([])
-const value13 = ref<string[]>([])
-const value14 = ref<string[]>([])
-const value15 = ref<string[]>([])
-const displayValue = ref<string>('')
 const areaData1 = ref<ColPickerOption[][]>([
   colPickerData.map((item) => {
     return {

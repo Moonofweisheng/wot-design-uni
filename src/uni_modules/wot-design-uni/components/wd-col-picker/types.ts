@@ -66,15 +66,7 @@ export const colPickerProps = {
   /**
    * 弹出面板是否设置底部安全距离（iphone X 类型的机型）
    */
-  safeAreaInsetBottom: makeBooleanProp(true),
-  /**
-   * 底部条宽度，单位像素
-   */
-  lineWidth: numericProp,
-  /**
-   * 底部条高度，单位像素
-   */
-  lineHeight: numericProp
+  safeAreaInsetBottom: makeBooleanProp(true)
 }
 
 export type ColPickerProps = ExtractPropTypes<typeof colPickerProps>
@@ -87,7 +79,6 @@ export type ColPickerColumnChangeOption = {
   finish: (isOk?: boolean) => void
 }
 export type ColPickerColumnChange = (option: ColPickerColumnChangeOption) => void
-export type ColPickerDisplayFormat = (selectedItems: ColPickerOption[]) => string
 export type ColPickerBeforeConfirm = (value: (string | number)[], selectedItems: ColPickerOption[], resolve: (isPass: boolean) => void) => void
 
 export type ColPickerExpose = {

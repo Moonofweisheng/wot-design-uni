@@ -1,6 +1,5 @@
 <template>
   <view :class="`wd-picker  ${customClass}`" :style="customStyle">
-    <!--弹出层，picker-view 在隐藏时修改值，会触发多次change事件，从而导致所有列选中第一项，因此picker在关闭时不隐藏 -->
     <wd-popup
       v-model="popupShow"
       position="bottom"
@@ -8,24 +7,20 @@
       :close-on-click-modal="closeOnClickModal"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :z-index="zIndex"
-      @close="onCancel"
+      @leave="handlePickerClose"
+      @after-leave="handlePickerClosed"
       custom-class="wd-picker__popup"
     >
       <view class="wd-picker__wraper">
-        <!--toolBar-->
         <view class="wd-picker__toolbar" @touchmove="noop">
-          <!--取消按钮-->
-          <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
+          <view class="wd-picker__action wd-picker__action--cancel" @click="close">
             {{ cancelButtonText || translate('cancel') }}
           </view>
-          <!--标题-->
           <view v-if="title" class="wd-picker__title">{{ title }}</view>
-          <!--确定按钮-->
           <view :class="`wd-picker__action ${loading || isLoading ? 'is-loading' : ''}`" @click="onConfirm">
             {{ confirmButtonText || translate('confirm') }}
           </view>
         </view>
-        <!-- 区域选择tab展示 -->
         <view v-if="region" class="wd-picker__region-tabs">
           <view :class="`wd-picker__region ${showStart ? 'is-active' : ''} `" @click="tabChange">
             <view>{{ translate('start') }}</view>
@@ -36,7 +31,6 @@
             <view class="wd-picker__region-time">{{ showTabLabel[1] }}</view>
           </view>
         </view>
-        <!--datetimePickerView-->
         <view :class="showStart ? 'wd-picker__show' : 'wd-picker__hidden'">
           <wd-datetime-picker-view
             :custom-class="customViewClass"
@@ -123,7 +117,7 @@ import { datetimePickerProps, type DatetimePickerExpose } from './types'
 import { dayjs } from '../common/dayjs'
 
 const props = defineProps(datetimePickerProps)
-const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
+const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue', 'update:visible', 'close'])
 
 const { translate } = useTranslate('datetime-picker')
 
@@ -164,6 +158,18 @@ watch(
     deep: true,
     immediate: true
   }
+)
+
+watch(
+  () => props.visible,
+  (newValue) => {
+    if (newValue) {
+      open()
+    } else {
+      close()
+    }
+  },
+  { deep: true, immediate: true }
 )
 
 watch(
@@ -219,22 +225,6 @@ watch(
   (fn) => {
     if (fn && !isFunction(fn)) {
       console.error('The type of displayFormatTabLabel must be Function')
-    }
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-watch(
-  () => props.defaultValue,
-  (val) => {
-    if (isArray(val) || region.value) {
-      innerValue.value = deepClone(getDefaultInnerValue(true))
-      endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
-    } else {
-      innerValue.value = deepClone(getDefaultInnerValue())
     }
   },
   {
@@ -317,34 +307,20 @@ function getSelects(picker: 'before' | 'after') {
 function noop() {}
 
 function getDefaultInnerValue(isRegion?: boolean, isEnd?: boolean): string | number {
-  const { modelValue: value, defaultValue, maxDate, minDate, type } = props
+  const { modelValue: value, maxDate, minDate, type } = props
   if (isRegion) {
     const index = isEnd ? 1 : 0
     const targetValue = isArray(value) ? (value[index] as string) : ''
-    const targetDefault = isArray(defaultValue) ? (defaultValue[index] as string) : ''
     const maxValue = type === 'time' ? dayjs(maxDate).format('HH:mm') : maxDate
     const minValue = type === 'time' ? dayjs(minDate).format('HH:mm') : minDate
-    return targetValue || targetDefault || (isEnd ? maxValue : minValue)
+    return targetValue || (isEnd ? maxValue : minValue)
   } else {
-    return isDef(value || defaultValue) ? (value as string) || (defaultValue as string) : ''
+    return isDef(value) ? (value as string) : ''
   }
 }
 
-// 对外暴露接口，打开弹框
+// 打开弹框
 function open() {
-  showPopup()
-}
-
-// 对外暴露接口，关闭弹框
-function close() {
-  onCancel()
-}
-
-/**
- * @description 展示popup，小程序有个bug，在picker-view弹出时设置value，会触发change事件，而且会将picker-view的value多次触发change重置为第一项
- */
-function showPopup() {
-  emit('open')
   if (region.value) {
     popupShow.value = true
     showStart.value = true
@@ -355,6 +331,34 @@ function showPopup() {
     innerValue.value = deepClone(getDefaultInnerValue())
   }
   setShowValue(true, false, true)
+}
+
+// 关闭弹框
+function close() {
+  popupShow.value = false
+}
+
+/**
+ * 弹出框关闭后
+ */
+function handlePickerClosed() {
+  let timer = setTimeout(() => {
+    clearTimeout(timer)
+    if (region.value) {
+      innerValue.value = deepClone(getDefaultInnerValue(true))
+      endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
+    } else {
+      innerValue.value = deepClone(getDefaultInnerValue())
+    }
+  }, 300)
+}
+
+/**
+ * 弹出框关闭时
+ */
+function handlePickerClose() {
+  emit('update:visible', false)
+  emit('close')
 }
 
 /**
@@ -399,23 +403,6 @@ function onChangeEnd({ value }: { value: number | string }) {
   })
   datetimePickerView.value && datetimePickerView.value.setColumns(datetimePickerView.value.updateColumns())
   datetimePickerView1.value && datetimePickerView1.value.setColumns(datetimePickerView1.value.updateColumns())
-}
-
-/**
- * @description 点击取消按钮触发。关闭popup，触发cancel事件。
- */
-function onCancel() {
-  popupShow.value = false
-  setTimeout(() => {
-    if (region.value) {
-      innerValue.value = deepClone(getDefaultInnerValue(true))
-      endInnerValue.value = deepClone(getDefaultInnerValue(true, true))
-    } else {
-      innerValue.value = deepClone(getDefaultInnerValue())
-    }
-  }, 200)
-
-  emit('cancel')
 }
 
 /** picker触发confirm事件，同步触发confirm事件 */

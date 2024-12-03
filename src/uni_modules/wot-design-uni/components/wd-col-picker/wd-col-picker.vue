@@ -5,14 +5,14 @@
       :duration="250"
       :title="title || translate('title')"
       :close-on-click-modal="closeOnClickModal"
-      :hideWhenClose="false"
+      :hide-when-close="false"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       @opened="handlePickerOpened"
       @close="handlePickerClose"
       @closed="handlePickerClosed"
     >
-      <wd-tabs ref="tabs" v-model="currentCol" :animated="animated" slidable="always">
+      <wd-tabs ref="tabsRef" v-model="currentCol" :animated="animated" slidable="always">
         <wd-tab v-for="(col, colIndex) in innerColumns" :key="colIndex" :title="`${currentColumn[colIndex] || translate('select')}`" :name="colIndex">
           <view class="wd-col-picker__list-container">
             <view class="wd-col-picker__list">
@@ -62,7 +62,7 @@ import { colPickerProps, type ColPickerExpose, type ColPickerOption } from './ty
 import type { TabsInstance } from '../wd-tabs/types'
 
 const { translate } = useTranslate('col-picker')
-const tabs = ref<TabsInstance>()
+const tabsRef = ref<TabsInstance>()
 
 const props = defineProps(colPickerProps)
 const emit = defineEmits(['close', 'update:modelValue', 'update:visible', 'confirm'])
@@ -70,7 +70,6 @@ const innerValue = ref(props.modelValue) // 当前选择值
 const innerColumns = ref<ColPickerOption[][]>(props.columns) // 全部列数据
 const currentColumn = ref<ColPickerOption[]>([]) // 当前展示列数据
 const animated = ref<boolean>(false) // 是否开启切换动画 弹窗打开后开启
-
 const pickerShow = ref<boolean>(false)
 const currentCol = ref<number>(0)
 const loading = ref<boolean>(false)
@@ -134,8 +133,8 @@ function updateInnerValue() {
  * 弹出框打开后
  */
 function handlePickerOpened() {
-  if (isDef(tabs.value)) {
-    tabs.value?.updateLineStyle(false)
+  if (isDef(tabsRef.value)) {
+    tabsRef.value?.updateLineStyle(false)
     animated.value = true
   }
 }
@@ -153,17 +152,15 @@ function handlePickerClose() {
  */
 function handlePickerClosed() {
   animated.value = false
-  setTimeout(() => {
-    innerColumns.value = lastSelectList.value.slice(0)
-    innerValue.value = lastPickerColSelected.value.slice(0)
-    currentColumn.value = lastPickerColSelected.value.map((item, colIndex) => {
-      return getSelectedItem(item, colIndex, lastSelectList.value)[props.labelKey]
-    })
-    currentCol.value = lastSelectList.value.length - 1
-    if (isDef(tabs.value)) {
-      tabs.value.updateLineStyle(false)
-    }
-  }, 250)
+  innerColumns.value = lastSelectList.value.slice(0)
+  innerValue.value = lastPickerColSelected.value.slice(0)
+  currentColumn.value = lastPickerColSelected.value.map((item, colIndex) => {
+    return getSelectedItem(item, colIndex, lastSelectList.value)[props.labelKey]
+  })
+  currentCol.value = lastSelectList.value.length - 1
+  if (isDef(tabsRef.value)) {
+    tabsRef.value.updateLineStyle(false)
+  }
 }
 
 function getSelectedItem(value: string | number, colIndex: number, innerColumns: ColPickerOption[][]) {

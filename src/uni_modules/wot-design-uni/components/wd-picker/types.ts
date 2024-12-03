@@ -1,7 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import type { ColumnItem, PickerViewColumnChange } from '../wd-picker-view/types'
-import type { FormItemRule } from '../wd-form/types'
 
 export const pickerProps = {
   ...baseProps,
@@ -73,22 +72,20 @@ export const pickerProps = {
    */
   columnChange: Function as PropType<PickerViewColumnChange>,
   /**
-   * 自定义展示文案的格式化函数，返回一个字符串
-   */
-  displayFormat: Function as PropType<PickerDisplayFormat>,
-  /**
    * 自定义层级
    */
   zIndex: makeNumberProp(15),
   /**
    * 是否在手指松开时立即触发 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
    */
-  immediateChange: makeBooleanProp(false)
+  immediateChange: makeBooleanProp(false),
+  /**
+   * 是否显示
+   */
+  visible: makeBooleanProp(false)
 }
 
 export type PickerProps = ExtractPropTypes<typeof pickerProps>
-
-export type PickerDisplayFormat = (item: ColumnItem | ColumnItem[], vl: { valueKey: string; labelKey: string }) => string
 
 export type PickerBeforeConfirm = (
   value: string | number | boolean | string[] | number[] | boolean[],

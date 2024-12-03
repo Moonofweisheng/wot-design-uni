@@ -1,65 +1,82 @@
 <template>
   <page-wraper>
-    <wd-toast />
-    <view style="margin: 20px 0">
-      <wd-cell-group border>
-        <wd-calendar label="单个日期选择" v-model="value1" @confirm="handleConfirm1" />
-        <wd-calendar label="多个日期选择" type="dates" v-model="value2" @confirm="handleConfirm2" />
-        <wd-calendar label="日期范围选择" type="daterange" v-model="value3" />
-        <wd-calendar label="日期时间选择" type="datetime" v-model="value4" />
-        <wd-calendar label="日期时间范围选择" type="datetimerange" v-model="value5" />
-        <wd-calendar label="周选择" type="week" v-model="value6" />
-        <wd-calendar label="月选择" type="month" :min-date="minDate" v-model="value7" />
-        <wd-calendar label="周范围选择" :first-day-of-week="1" type="weekrange" v-model="value8" />
-        <wd-calendar label="月范围选择" type="monthrange" v-model="value9" />
-        <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value10" />
-        <wd-calendar label="快捷操作" v-model="value16" :show-confirm="false" />
-        <wd-calendar label="日期格式化" type="daterange" v-model="value11" :formatter="formatter" />
-        <wd-calendar
-          label="快捷选项"
-          :shortcuts="shortcuts"
-          :on-shortcuts-click="onShortcutsClick"
-          type="daterange"
-          const
-          v-model="value12"
-          @confirm="handleConfirm3"
-        />
-        <wd-calendar
-          label="自定义展示"
-          type="daterange"
-          const
-          v-model="value13"
-          :display-format="displayFormat"
-          :inner-display-format="innerDisplayFormat"
-        />
-        <wd-calendar label="before-confirm" v-model="value14" :before-confirm="beforeConfirm" />
-      </wd-cell-group>
-    </view>
+    <wd-cell-group border>
+      <wd-cell title="单个日期选择" :value="cellValue.value1" is-link @click="visible.visible1 = true" />
+      <wd-cell title="多个日期选择" :value="cellValue.value2" is-link @click="visible.visible2 = true" />
+      <wd-cell title="日期范围选择" :value="cellValue.value3" is-link @click="visible.visible3 = true" />
+      <wd-cell title="日期时间选择" :value="cellValue.value4" is-link @click="visible.visible4 = true" />
+      <wd-cell title="日期时间范围选择" :value="cellValue.value5" is-link @click="visible.visible5 = true" />
+      <wd-cell title="周选择" :value="cellValue.value6" is-link @click="visible.visible6 = true" />
 
-    <demo-block transparent title="自定义选择器">
-      <view style="margin: 0 15px">
-        <view style="margin-bottom: 10px">当前选中日期：{{ formatValue }}</view>
-        <wd-calendar v-model="value15" use-default-slot @confirm="handleConfirm4">
-          <wd-button>选择日期</wd-button>
-        </wd-calendar>
-      </view>
-    </demo-block>
-    <demo-block transparent title="open事件">
-      <wd-calendar v-model="value17" @open="handleOpen" />
-    </demo-block>
+      <wd-calendar label="周选择" type="week" v-model="value6" />
+      <wd-calendar label="月选择" type="month" :min-date="minDate" v-model="value7" />
+      <wd-calendar label="周范围选择" :first-day-of-week="1" type="weekrange" v-model="value8" />
+      <wd-calendar label="月范围选择" type="monthrange" v-model="value9" />
+      <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value10" />
+      <wd-calendar label="快捷操作" v-model="value16" :show-confirm="false" />
+      <wd-calendar label="日期格式化" type="daterange" v-model="value11" :formatter="formatter" />
+      <wd-calendar
+        label="快捷选项"
+        :shortcuts="shortcuts"
+        :on-shortcuts-click="onShortcutsClick"
+        type="daterange"
+        const
+        v-model="value12"
+        @confirm="handleConfirm3"
+      />
+      <wd-calendar
+        label="自定义展示"
+        type="daterange"
+        const
+        v-model="value13"
+        :display-format="displayFormat"
+        :inner-display-format="innerDisplayFormat"
+      />
+      <wd-calendar label="before-confirm" v-model="value14" :before-confirm="beforeConfirm" />
+    </wd-cell-group>
+    <wd-calendar v-model:visible="visible.visible1" v-model="value1" @confirm="(result) => handleConfirm({ ...result, index: 1 })" />
+    <wd-calendar v-model:visible="visible.visible2" v-model="value2" type="dates" @confirm="(result) => handleConfirm({ ...result, index: 2 })" />
+    <wd-calendar
+      v-model:visible="visible.visible3"
+      v-model="value3"
+      type="daterange"
+      @confirm="(result) => handleConfirm({ ...result, index: 3, connectors: ' 至 ' })"
+    />
+    <wd-calendar
+      v-model:visible="visible.visible4"
+      v-model="value4"
+      type="datetime"
+      @confirm="(result) => handleConfirm({ ...result, index: 4, type: 'datetime' })"
+    />
+    <wd-calendar
+      v-model:visible="visible.visible5"
+      v-model="value5"
+      type="datetimerange"
+      @confirm="(result) => handleConfirm({ ...result, type: 'datetime', index: 5, connectors: ' 至 ' })"
+    />
+    <wd-calendar v-model:visible="visible.visible6" v-model="value6" type="week" @confirm="(result) => handleConfirm({ ...result, index: 6 })" />
   </page-wraper>
-  <wd-message-box />
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { dayjs } from '@/uni_modules/wot-design-uni'
+import { isArray } from '@/uni_modules/wot-design-uni/components/common/util'
 import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
 import type { CalendarOnShortcutsClickOption } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
-import { ref } from 'vue'
-import { useMessage } from '@/uni_modules/wot-design-uni'
-const message = useMessage()
+import { reactive, ref } from 'vue'
 
-const minDate = ref<number>(new Date(new Date().getFullYear() - 20, new Date().getMonth() - 6, new Date().getDate()).getTime())
+const visible = reactive({
+  visible1: false,
+  visible2: false,
+  visible3: false,
+  visible4: false,
+  visible5: false,
+  visible6: false,
+  visible7: false,
+  visible8: false,
+  visible9: false,
+  visible10: false
+})
 
 const value1 = ref<number>(Date.now())
 const value2 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])
@@ -78,7 +95,22 @@ const value14 = ref<number | null>(null)
 const value15 = ref<number | null>(null)
 const value16 = ref<number>(Date.now())
 const value17 = ref<number>(Date.now())
-const formatValue = ref<string>('')
+
+const cellValue = reactive<{ [key: PropertyKey]: string }>({
+  value1: formatDate(value1.value),
+  value2: value2.value.map((item) => formatDate(item)).join(','),
+  value3: '',
+  value4: formatDate(value4.value, 'datetime'),
+  value5: value5.value.map((item) => formatDate(item, 'datetime')).join(' 至 '),
+  value6: '',
+  value7: '',
+  value8: '',
+  value9: '',
+  value10: ''
+})
+
+const minDate = ref<number>(new Date(new Date().getFullYear() - 20, new Date().getMonth() - 6, new Date().getDate()).getTime())
+
 const formatter: CalendarFormatter = (day: CalendarDayItem) => {
   const date = new Date(day.date)
   const now = new Date()
@@ -158,21 +190,33 @@ const beforeConfirm = ({ value, resolve }: any) => {
   }
 }
 
-function handleConfirm1({ value }: any) {
-  console.log(value)
+function handleConfirm({
+  value,
+  type,
+  index,
+  connectors
+}: {
+  value: string | number | (string | number)[]
+  type?: 'date' | 'datetime'
+  index: number
+  connectors?: string
+}) {
+  cellValue[`value${index}`] = (isArray(value) ? value : [value]).map((item) => formatDate(item, type)).join(connectors || ',')
 }
-function handleConfirm2({ value }: any) {
-  console.log(value)
-}
+
 function handleConfirm3({ value }: any) {
   console.log(value)
 }
-function handleConfirm4({ value }: any) {
-  console.log(new Date(value).toString())
-  formatValue.value = new Date(value).toString()
-}
-function handleOpen() {
-  message.alert('打开日历')
+
+function formatDate(date: number | string, type?: 'date' | 'datetime') {
+  switch (type) {
+    case 'date':
+      return dayjs(date).format('YYYY-MM-DD')
+    case 'datetime':
+      return dayjs(date).format('YYYY-MM-DD HH:mm:ss')
+    default:
+      return dayjs(date).format('YYYY-MM-DD')
+  }
 }
 </script>
 <style lang="scss" scoped></style>
