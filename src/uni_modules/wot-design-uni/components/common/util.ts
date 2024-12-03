@@ -695,7 +695,13 @@ export function isImageUrl(url: string): boolean {
 /**
  * 判断环境是否是H5
  */
-export const isH5 = process.env.UNI_PLATFORM === 'h5'
+export const isH5 = (() => {
+  let isH5 = false
+  // #ifdef H5
+  isH5 = true
+  // #endif
+  return isH5
+})()
 
 /**
  * 剔除对象中的某些属性

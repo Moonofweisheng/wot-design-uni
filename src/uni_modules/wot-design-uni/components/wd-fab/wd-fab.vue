@@ -22,7 +22,6 @@
       :custom-class="`wd-fab__actions wd-fab__actions--${fabDirection}`"
       :show="isActive"
       :duration="300"
-      name=""
     >
       <slot></slot>
     </wd-transition>
