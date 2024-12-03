@@ -11,7 +11,11 @@
         @click="handleDateClick(index)"
       >
         <view class="wd-year__month-top">{{ item.topInfo }}</view>
-        <view class="wd-year__month-text">{{ getMonthLabel(item.date) }}</view>
+        <view class="wd-year__month-text">
+          <wd-badge :is-dot="item.isDot" :top="6" :right="6">
+            {{ getMonthLabel(item.date) }}
+          </wd-badge>
+        </view>
         <view class="wd-year__month-bottom">{{ item.bottomInfo }}</view>
       </view>
     </view>

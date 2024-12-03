@@ -79,6 +79,7 @@ export type CalendarDayItem = {
   bottomInfo?: string
   type?: CalendarDayType
   disabled?: boolean
+  isDot?: boolean
 }
 
 export type CalendarFormatter = (day: CalendarDayItem) => CalendarDayItem
