@@ -65,7 +65,7 @@ const showClose = computed(() => {
 })
 
 const showTitle = computed(() => {
-  return props.title || showClose.value
+  return !!props.title
 })
 
 /**
