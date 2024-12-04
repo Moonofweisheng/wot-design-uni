@@ -10,10 +10,9 @@
     @click-modal="handleClose"
   >
     <view :class="`wd-number-keyboard ${customClass}`" :style="customStyle">
-      <view class="wd-number-keyboard__header" v-if="showTitle">
-        <slot name="title">
-          <text class="wd-number-keyboard__title">{{ title }}</text>
-        </slot>
+      <view class="wd-number-keyboard__header">
+        <text class="wd-number-keyboard__title" v-if="showTitle">{{ title }}</text>
+        <slot name="title" v-else></slot>
         <view class="wd-number-keyboard__close" hover-class="wd-number-keyboard__close--hover" v-if="showClose" @click="handleClose">
           <text>{{ closeText }}</text>
         </view>
