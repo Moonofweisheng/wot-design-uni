@@ -19,13 +19,14 @@
       @change="handleChange"
       @animationfinish="handleAnimationfinish"
     >
-      <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item" @click="handleClick(index, item)">
+      <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item">
         <image
           v-if="isImage(item)"
           :src="isObj(item) ? item[valueKey] : item"
           :class="`wd-swiper__image ${customImageClass} ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
           :style="{ height: addUnit(height) }"
           :mode="imageMode"
+          @click="handleClick(index, item)"
         />
         <video
           v-else-if="isVideo(item)"
@@ -41,6 +42,7 @@
           muted
           :autoplay="autoplayVideo"
           objectFit="cover"
+          @click="handleClick(index, item)"
         />
         <text v-if="isObj(item) && item[textKey]" :class="`wd-swiper__text ${customTextClass}`" :style="customTextStyle">{{ item[textKey] }}</text>
       </swiper-item>
