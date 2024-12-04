@@ -19,13 +19,14 @@
       @change="handleChange"
       @animationfinish="handleAnimationfinish"
     >
-      <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item" @click="handleClick(index, item)">
+      <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item">
         <image
           v-if="isImage(item)"
           :src="isObj(item) ? item[valueKey] : item"
-          :class="`wd-swiper__image ${customImageClass} ${customItemClass} ${getCustomItemClass(navCurrent, index, list)}`"
+          :class="`wd-swiper__image ${customImageClass} ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
           :style="{ height: addUnit(height) }"
           :mode="imageMode"
+          @click="handleClick(index, item)"
         />
         <video
           v-else-if="isVideo(item)"
@@ -33,7 +34,7 @@
           :style="{ height: addUnit(height) }"
           :src="isObj(item) ? item[valueKey] : item"
           :poster="isObj(item) ? item.poster : ''"
-          :class="`wd-swiper__video ${customItemClass} ${getCustomItemClass(navCurrent, index, list)}`"
+          :class="`wd-swiper__video ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
           @play="handleVideoPaly"
           @pause="handleVideoPause"
           :enable-progress-gesture="false"
@@ -41,13 +42,14 @@
           muted
           :autoplay="autoplayVideo"
           objectFit="cover"
+          @click="handleClick(index, item)"
         />
         <text v-if="isObj(item) && item[textKey]" :class="`wd-swiper__text ${customTextClass}`" :style="customTextStyle">{{ item[textKey] }}</text>
       </swiper-item>
     </swiper>
 
     <template v-if="indicator">
-      <slot name="indicator" :current="navCurrent" :total="list.length"></slot>
+      <slot name="indicator" :current="currentValue" :total="list.length"></slot>
       <wd-swiper-nav
         v-if="!$slots.indicator"
         :custom-class="customIndicatorClass"
@@ -83,7 +85,21 @@ import type { SwiperNavProps } from '../wd-swiper-nav/types'
 
 const props = defineProps(swiperProps)
 const emit = defineEmits(['click', 'change', 'animationfinish', 'update:current'])
-const navCurrent = ref<number>(0) // 当前滑块
+const navCurrent = ref<number>(props.current) // 当前滑块 swiper使用
+const currentValue = ref<number>(props.current) // 当前滑块
+
+/**
+ * 更新当前滑块
+ * @param current 当前滑块索引
+ * @param force 是否强制更新swiper绑定的的current
+ */
+const updateCurrent = (current: number, force: boolean = false) => {
+  currentValue.value = current
+  if (force) {
+    navCurrent.value = current
+  }
+  emit('update:current', current)
+}
 
 const videoPlaying = ref<boolean>(false) // 当前是否在播放视频
 
@@ -99,17 +115,15 @@ watch(
     } else if (val >= props.list.length) {
       props.loop ? goToStart() : goToEnd()
     } else {
-      go(val)
+      navTo(val)
     }
-    emit('update:current', navCurrent.value)
-  },
-  { immediate: true }
+  }
 )
 
 const swiperIndicator = computed(() => {
   const { list, direction, indicatorPosition, indicator } = props
   const swiperIndicator: Partial<SwiperNavProps> = {
-    current: navCurrent.value || 0,
+    current: currentValue.value || 0,
     total: list.length || 0,
     direction: direction || 'horizontal',
     indicatorPosition: indicatorPosition || 'bottom'
@@ -138,16 +152,17 @@ const isImage = (item: string | SwiperList) => {
   return getMediaType(item, 'image')
 }
 
-function go(index: number) {
-  navCurrent.value = index
+function navTo(index: number) {
+  if (index === currentValue.value) return
+  updateCurrent(index, true)
 }
 
 function goToStart() {
-  navCurrent.value = 0
+  navTo(0)
 }
 
 function goToEnd() {
-  navCurrent.value = props.list.length - 1
+  navTo(props.list.length - 1)
 }
 
 // 视频播放
@@ -193,16 +208,15 @@ function getCustomItemClass(current: number, index: number, list: string[] | Swi
 
 /**
  * 轮播滑块切换时触发
- * @param e
  */
 function handleChange(e: { detail: { current: number; source: string } }) {
   const { current, source } = e.detail
-  const previous = navCurrent.value
-  navCurrent.value = current
-  // #ifndef MP-WEIXIN
-  emit('update:current', navCurrent.value)
-  // #endif
+  const previous = currentValue.value
   emit('change', { current, source })
+  if (current !== currentValue.value) {
+    const forceUpdate = source === 'autoplay' || source === 'touch'
+    updateCurrent(current, forceUpdate)
+  }
   handleVideoChange(previous, current)
 }
 
@@ -249,11 +263,10 @@ function handleStopVideoPaly(index: number) {
  */
 function handleAnimationfinish(e: { detail: { current: any; source: string } }) {
   const { current, source } = e.detail
-  // #ifdef MP-WEIXIN
-  // 兼容微信swiper抖动的问题
-  emit('update:current', navCurrent.value)
-  // #endif
-
+  if (current !== currentValue.value) {
+    const forceUpdate = source === 'autoplay' || source === 'touch'
+    updateCurrent(current, forceUpdate)
+  }
   /**
    * 滑块动画结束时触发
    */
@@ -269,27 +282,17 @@ function handleClick(index: number, item: string | SwiperList) {
   emit('click', { index, item })
 }
 
-function handleIndicatorChange(e: { dir: any; source: string }) {
-  const { dir, source } = e
-  doIndicatorBtnChange(dir, source)
-}
-
-function doIndicatorBtnChange(dir: string, source: string) {
+function handleIndicatorChange({ dir }: { dir: 'prev' | 'next' }) {
   const { list, loop } = props
   const total = list.length
-  let nextPos = dir === 'next' ? navCurrent.value + 1 : navCurrent.value - 1
-
+  let nextPos = dir === 'next' ? currentValue.value + 1 : currentValue.value - 1
   if (loop) {
-    nextPos = dir === 'next' ? (navCurrent.value + 1) % total : (navCurrent.value - 1 + total) % total
+    nextPos = dir === 'next' ? (currentValue.value + 1) % total : (currentValue.value - 1 + total) % total
   } else {
-    nextPos = nextPos < 0 || nextPos >= total ? navCurrent.value : nextPos
+    nextPos = nextPos < 0 || nextPos >= total ? currentValue.value : nextPos
   }
-
-  if (nextPos === navCurrent.value) return
-
-  navCurrent.value = nextPos
-  emit('change', { current: nextPos, source })
-  emit('update:current', navCurrent.value)
+  if (nextPos === currentValue.value) return
+  navTo(nextPos)
 }
 </script>
 

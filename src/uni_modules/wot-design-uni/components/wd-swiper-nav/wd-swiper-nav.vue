@@ -10,7 +10,7 @@
   >
     <block v-if="type === 'dots' || type === 'dots-bar'">
       <view
-        v-for="(item, index) in total"
+        v-for="(_, index) in total"
         :key="index"
         :class="`wd-swiper-nav__item--${type} ${current === index ? 'is-active' : ''} is-${direction}`"
       ></view>
