@@ -246,7 +246,7 @@ function handleSwitchChange({ value }) {
 | label       | 描述信息                       | string  | -      | -      | -        |
 | is-link     | 是否为跳转链接                 | boolean | -      | false  | -        |
 | to          | 跳转地址                       | string  | -      | -      | -        |
-| clickable   | 开启点击反馈，is-link 默认开启 | boolean | -      | false  | -        |
+| clickable   | 点击反馈，开启 is-link 时，默认开启此选项 | boolean | -      | false  | -        |
 | replace     | 跳转时是否替换栈顶页面         | boolean | -      | false  | -        |
 | size        | 设置单元格大小                 | string  | large  | -      | -        |
 | title-width | 设置左侧标题宽度               | string  | -      | -      | -        |
