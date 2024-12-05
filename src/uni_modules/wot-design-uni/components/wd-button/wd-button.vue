@@ -38,11 +38,13 @@
     @chooseavatar="handleChooseavatar"
     @agreeprivacyauthorization="handleAgreePrivacyAuthorization"
   >
-    <view v-if="loading" class="wd-button__loading">
-      <view class="wd-button__loading-svg" :style="loadingStyle"></view>
+    <view class="wd-button__content">
+      <view v-if="loading" class="wd-button__loading">
+        <view class="wd-button__loading-svg" :style="loadingStyle"></view>
+      </view>
+      <wd-icon v-else-if="icon" custom-class="wd-button__icon" :name="icon" :classPrefix="classPrefix"></wd-icon>
+      <view class="wd-button__text"><slot /></view>
     </view>
-    <wd-icon v-else-if="icon" custom-class="wd-button__icon" :name="icon" :classPrefix="classPrefix"></wd-icon>
-    <view class="wd-button__text"><slot /></view>
   </button>
 </template>
 
