@@ -5,14 +5,17 @@
     :z-index="zIndex"
     :safe-area-inset-bottom="safeAreaInsetBottom"
     :modal-style="modal ? '' : 'opacity: 0;'"
+    :custom-style="rootStyle"
     :modal="hideOnClickOutside"
     :lockScroll="lockScroll"
     @click-modal="handleClose"
   >
     <view :class="`wd-number-keyboard ${customClass}`" :style="customStyle">
-      <view class="wd-number-keyboard__header">
-        <text class="wd-number-keyboard__title" v-if="showTitle">{{ title }}</text>
-        <slot name="title" v-else></slot>
+      <slot name="header"></slot>
+      <view class="wd-number-keyboard__header" v-if="showTitle">
+        <slot name="title">
+          <text class="wd-number-keyboard__title">{{ title }}</text>
+        </slot>
         <view class="wd-number-keyboard__close" hover-class="wd-number-keyboard__close--hover" v-if="showClose" @click="handleClose">
           <text>{{ closeText }}</text>
         </view>
@@ -42,10 +45,11 @@ export default {
 
 <script lang="ts" setup>
 import wdPopup from '../wd-popup/wd-popup.vue'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, useSlots } from 'vue'
 import WdKey from './key/index.vue'
 import { numberKeyboardProps, type Key } from './types'
 import type { NumberKeyType } from './key/types'
+import { objToStyle, isDef, addUnit } from '../common/util'
 
 const props = defineProps(numberKeyboardProps)
 const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue'])
@@ -64,8 +68,18 @@ const showClose = computed(() => {
   return props.closeText && props.mode === 'default'
 })
 
+const slots = useSlots()
 const showTitle = computed(() => {
-  return !!props.title
+  return !!props.title || showClose.value || slots.title
+})
+
+const rootStyle = computed(() => {
+  const style: Record<string, string | number> = {}
+  if (isDef(props.radius)) {
+    style['border-radius'] = `${addUnit(props.radius)} ${addUnit(props.radius)} 0 0`
+    style['overflow'] = 'hidden'
+  }
+  return `${objToStyle(style)};`
 })
 
 /**

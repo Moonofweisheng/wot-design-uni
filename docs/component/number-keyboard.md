@@ -243,6 +243,7 @@ const onDelete = () => showToast('删除')
 | name  | 说明 | 类型 | 最低版本 |
 | ----- | ---- | ---- | -------- |
 | title | 标题 | -    | 1.2.12   |
+| header | 顶部 | -    |         |
 
 ## Events
 
