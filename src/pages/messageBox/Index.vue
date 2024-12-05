@@ -31,6 +31,10 @@
     <demo-block title="使用beforeConfirm钩子，在弹框确认前，可以进行一些操作">
       <wd-button @click="beforeConfirm">beforeConfirm</wd-button>
     </demo-block>
+
+    <demo-block title="通过button-props自定义按钮">
+      <wd-button @click="withButtonProps">withButtonProps</wd-button>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -103,6 +107,26 @@ function beforeConfirm() {
     })
 }
 
+function withButtonProps() {
+  message
+    .confirm({
+      msg: '自定义按钮样式',
+      title: '提示',
+      cancelButtonProps: {
+        type: 'error',
+        customClass: 'custom-shadow'
+      },
+      confirmButtonProps: {
+        type: 'success',
+        customClass: 'custom-shadow'
+      }
+    })
+    .then(() => {})
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
 function withSlot() {
   message1
     .confirm({
@@ -120,5 +144,10 @@ function withSlot() {
 :deep(.custom-rate-class) {
   display: block;
   height: 22px;
+}
+:deep() {
+  .custom-shadow {
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+  }
 }
 </style>
