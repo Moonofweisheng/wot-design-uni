@@ -1,41 +1,43 @@
 <template>
-  <page-wraper>
-    <wd-message-box></wd-message-box>
-    <wd-message-box selector="wd-message-box-slot">
-      <wd-rate custom-class="custom-rate-class" v-model="rate" />
-    </wd-message-box>
-    <demo-block title="alert">
-      <wd-button @click="alert">alert</wd-button>
-    </demo-block>
+  <view class="page-message-box">
+    <page-wraper>
+      <wd-message-box></wd-message-box>
+      <wd-message-box selector="wd-message-box-slot">
+        <wd-rate v-model="rate" />
+      </wd-message-box>
+      <demo-block title="alert">
+        <wd-button @click="alert">alert</wd-button>
+      </demo-block>
 
-    <demo-block title="显示标题">
-      <wd-button @click="alertWithTitle">alert</wd-button>
-    </demo-block>
+      <demo-block title="显示标题">
+        <wd-button @click="alertWithTitle">alert</wd-button>
+      </demo-block>
 
-    <demo-block title="confirm">
-      <wd-button @click="confirm">confirm</wd-button>
-    </demo-block>
+      <demo-block title="confirm">
+        <wd-button @click="confirm">confirm</wd-button>
+      </demo-block>
 
-    <demo-block title="prompt">
-      <wd-button @click="prompt">prompt</wd-button>
-    </demo-block>
+      <demo-block title="prompt">
+        <wd-button @click="prompt">prompt</wd-button>
+      </demo-block>
 
-    <demo-block title="当文案过长时，弹框的高度不再增加，而是将文案内容设置成滚动">
-      <wd-button @click="alertWithLongChar">alert</wd-button>
-    </demo-block>
+      <demo-block title="当文案过长时，弹框的高度不再增加，而是将文案内容设置成滚动">
+        <wd-button @click="alertWithLongChar">alert</wd-button>
+      </demo-block>
 
-    <demo-block title="使用wd-message-box组件，通过slot插入其他组件内容">
-      <wd-button @click="withSlot">custom</wd-button>
-    </demo-block>
+      <demo-block title="使用wd-message-box组件，通过slot插入其他组件内容">
+        <wd-button @click="withSlot">custom</wd-button>
+      </demo-block>
 
-    <demo-block title="使用beforeConfirm钩子，在弹框确认前，可以进行一些操作">
-      <wd-button @click="beforeConfirm">beforeConfirm</wd-button>
-    </demo-block>
+      <demo-block title="使用beforeConfirm钩子，在弹框确认前，可以进行一些操作">
+        <wd-button @click="beforeConfirm">beforeConfirm</wd-button>
+      </demo-block>
 
-    <demo-block title="通过button-props自定义按钮">
-      <wd-button @click="withButtonProps">withButtonProps</wd-button>
-    </demo-block>
-  </page-wraper>
+      <demo-block title="通过button-props自定义按钮">
+        <wd-button @click="withButtonProps">withButtonProps</wd-button>
+      </demo-block>
+    </page-wraper>
+  </view>
 </template>
 <script lang="ts" setup>
 import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
@@ -113,10 +115,12 @@ function withButtonProps() {
       msg: '自定义按钮样式',
       title: '提示',
       cancelButtonProps: {
+        round: false,
         type: 'error',
         customClass: 'custom-shadow'
       },
       confirmButtonProps: {
+        round: false,
         type: 'success',
         customClass: 'custom-shadow'
       }
@@ -141,13 +145,11 @@ function withSlot() {
 }
 </script>
 <style lang="scss" scoped>
-:deep(.custom-rate-class) {
-  display: block;
-  height: 22px;
-}
-:deep() {
-  .custom-shadow {
-    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+.page-message-box {
+  :deep() {
+    .custom-shadow {
+      box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    }
   }
 }
 </style>
