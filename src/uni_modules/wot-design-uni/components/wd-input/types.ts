@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 import type { FormItemRule } from '../wd-form/types'
 
@@ -6,6 +7,8 @@ export type InputClearTrigger = 'focus' | 'always'
 export type InputType = 'text' | 'number' | 'digit' | 'idcard'
 
 export type InputConfirmType = 'send' | 'search' | 'next' | 'go' | 'done'
+
+export type InputSize = 'large'
 
 export const inputProps = {
   ...baseProps,
@@ -137,7 +140,7 @@ export const inputProps = {
   /**
    * 设置输入框大小，可选值：large
    */
-  size: String,
+  size: String as PropType<InputSize>,
   /**
    * 设置输入框错误状态，错误状态时为红色
    */
