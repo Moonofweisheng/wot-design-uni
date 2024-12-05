@@ -22,7 +22,7 @@
     <demo-block title="分组标题" transparent>
       <wd-cell-group title="交易管理" value="内容">
         <wd-cell title="标题文字" value="内容" />
-        <wd-cell title="标题文字" label="描述信息" value="内容"></wd-cell>
+        <wd-cell title="标题文字" label="黄鹤断矶头，故人今在否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。" value="内容"></wd-cell>
       </wd-cell-group>
     </demo-block>
 
