@@ -11,6 +11,9 @@
     <demo-block title="最大上传数限制">
       <wd-upload :file-list="fileList3" :limit="3" :action="action" @change="handleChange3"></wd-upload>
     </demo-block>
+    <demo-block title="关闭预览点击文件替换">
+      <wd-upload accept="image" :use-preview="false" v-model:file-list="fileList17" image-mode="aspectFill" :action="action"></wd-upload>
+    </demo-block>
     <demo-block title="拦截预览图片操作">
       <wd-upload :file-list="fileList4" :action="action" @change="handleChange4" :before-preview="beforePreview"></wd-upload>
     </demo-block>
@@ -119,6 +122,11 @@ const fileList16 = ref<UploadFile[]>([
   {
     url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg',
     name: 'panda'
+  }
+])
+const fileList17 = ref<UploadFile[]>([
+  {
+    url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg'
   }
 ])
 

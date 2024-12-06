@@ -325,7 +325,7 @@ function getImageInfo(img: string) {
  * @description 初始化文件数据
  * @param {Object} file 上传的文件
  */
-function initFile(file: ChooseFile) {
+function initFile(file: ChooseFile, currentIndex?: number) {
   const { statusKey } = props
   // 状态初始化
   const initState: UploadFileItem = {
@@ -338,8 +338,11 @@ function initFile(file: ChooseFile) {
     url: file.path,
     percent: 0
   }
-
-  uploadFiles.value.push(initState)
+  if (typeof currentIndex === 'number') {
+    uploadFiles.value.splice(currentIndex, 1, initState)
+  } else {
+    uploadFiles.value.push(initState)
+  }
   if (props.autoUpload) {
     startUploadFiles()
   }
@@ -442,7 +445,7 @@ function handleProgress(res: UniApp.OnProgressUpdateResult, file: UploadFileItem
 /**
  * @description 选择文件的实际操作，将chooseFile自己用promise包了一层
  */
-function onChooseFile() {
+function onChooseFile(currentIndex?: number) {
   const { multiple, maxSize, accept, sizeType, limit, sourceType, compressed, maxDuration, camera, beforeUpload } = props
   // 文件选择
   chooseFile({
@@ -470,7 +473,7 @@ function onChooseFile() {
             const imageInfo = await getImageInfo(file.path)
             file.size = imageInfo.width * imageInfo.height
           }
-          Number(file.size) <= maxSize ? initFile(file) : emit('oversize', { file })
+          Number(file.size) <= maxSize ? initFile(file, currentIndex) : emit('oversize', { file })
         }
       }
 
@@ -495,7 +498,7 @@ function onChooseFile() {
 /**
  * @description 选择文件，内置拦截选择操作
  */
-function handleChoose() {
+function handleChoose(index?: number) {
   if (props.disabled) return
   const { beforeChoose } = props
 
@@ -504,11 +507,11 @@ function handleChoose() {
     beforeChoose({
       fileList: uploadFiles.value,
       resolve: (isPass: boolean) => {
-        isPass && onChooseFile()
+        isPass && onChooseFile(index)
       }
     })
   } else {
-    onChooseFile()
+    onChooseFile(index)
   }
 }
 
@@ -617,65 +620,77 @@ function handlePreviewVieo(index: number, lists: UploadFileItem[]) {
 }
 
 function onPreviewImage(file: UploadFileItem) {
-  const { beforePreview } = props
+  const { beforePreview, usePreview } = props
   const lists = uploadFiles.value.filter((file) => isImage(file))
   const index: number = lists.findIndex((item) => item.url === file.url)
-  if (beforePreview) {
-    beforePreview({
-      file,
-      index,
-      imgList: lists.map((file) => file.url),
-      resolve: (isPass: boolean) => {
-        isPass &&
-          handlePreviewImage(
-            index,
-            lists.map((file) => file.url)
-          )
-      }
-    })
+  if (usePreview) {
+    if (beforePreview) {
+      beforePreview({
+        file,
+        index,
+        imgList: lists.map((file) => file.url),
+        resolve: (isPass: boolean) => {
+          isPass &&
+            handlePreviewImage(
+              index,
+              lists.map((file) => file.url)
+            )
+        }
+      })
+    } else {
+      handlePreviewImage(
+        index,
+        lists.map((file) => file.url)
+      )
+    }
   } else {
-    handlePreviewImage(
-      index,
-      lists.map((file) => file.url)
-    )
+    handleChoose(index)
   }
 }
 
 function onPreviewVideo(file: UploadFileItem) {
-  const { beforePreview } = props
+  const { beforePreview, usePreview } = props
   const lists = uploadFiles.value.filter((file) => isVideo(file))
   const index: number = lists.findIndex((item) => item.url === file.url)
-  if (beforePreview) {
-    beforePreview({
-      file,
-      index,
-      imgList: [],
-      resolve: (isPass: boolean) => {
-        isPass && handlePreviewVieo(index, lists)
-      }
-    })
+  if (usePreview) {
+    if (beforePreview) {
+      beforePreview({
+        file,
+        index,
+        imgList: [],
+        resolve: (isPass: boolean) => {
+          isPass && handlePreviewVieo(index, lists)
+        }
+      })
+    } else {
+      handlePreviewVieo(index, lists)
+    }
   } else {
-    handlePreviewVieo(index, lists)
+    handleChoose(index)
   }
 }
 
 function onPreviewFile(file: UploadFileItem) {
-  const { beforePreview } = props
+  const { beforePreview, usePreview } = props
   const lists = uploadFiles.value.filter((file) => {
     return !isVideo(file) && !isImage(file)
   })
   const index: number = lists.findIndex((item) => item.url === file.url)
-  if (beforePreview) {
-    beforePreview({
-      file,
-      index,
-      imgList: [],
-      resolve: (isPass: boolean) => {
-        isPass && handlePreviewFile(file)
-      }
-    })
+  if (usePreview) {
+    if (beforePreview) {
+      beforePreview({
+        file,
+        index,
+        imgList: [],
+        resolve: (isPass: boolean) => {
+          isPass && handlePreviewFile(file)
+        }
+      })
+    } else {
+      handlePreviewFile(file)
+    }
   } else {
-    handlePreviewFile(file)
+    handleChoose(index)
   }
 }
 
