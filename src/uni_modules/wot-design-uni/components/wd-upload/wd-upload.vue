@@ -101,7 +101,7 @@ import wdVideoPreview from '../wd-video-preview/wd-video-preview.vue'
 import wdLoading from '../wd-loading/wd-loading.vue'
 
 import { computed, ref, watch } from 'vue'
-import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef } from '../common/util'
+import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef, deepClone } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import {
@@ -620,68 +620,68 @@ function handlePreviewVieo(index: number, lists: UploadFileItem[]) {
 }
 
 function onPreviewImage(file: UploadFileItem) {
-  const { beforePreview, usePreview } = props
-  const lists = uploadFiles.value.filter((file) => isImage(file))
-  const index: number = lists.findIndex((item) => item.url === file.url)
-  if (usePreview) {
+  const { beforePreview, reupload } = props
+  const fileList = deepClone(uploadFiles.value)
+  const index: number = fileList.findIndex((item) => item.url === file.url)
+  const imgList = fileList.filter((file) => isImage(file)).map((file) => file.url)
+  const imgIndex: number = imgList.findIndex((item) => item === file.url)
+  if (reupload) {
+    handleChoose(index)
+  } else {
     if (beforePreview) {
       beforePreview({
         file,
         index,
-        imgList: lists.map((file) => file.url),
+        fileList: fileList,
+        imgList: imgList,
         resolve: (isPass: boolean) => {
-          isPass &&
-            handlePreviewImage(
-              index,
-              lists.map((file) => file.url)
-            )
+          isPass && handlePreviewImage(imgIndex, imgList)
         }
       })
     } else {
-      handlePreviewImage(
-        index,
-        lists.map((file) => file.url)
-      )
+      handlePreviewImage(imgIndex, imgList)
     }
-  } else {
-    handleChoose(index)
   }
 }
 
 function onPreviewVideo(file: UploadFileItem) {
-  const { beforePreview, usePreview } = props
-  const lists = uploadFiles.value.filter((file) => isVideo(file))
-  const index: number = lists.findIndex((item) => item.url === file.url)
-  if (usePreview) {
+  const { beforePreview, reupload } = props
+  const fileList = deepClone(uploadFiles.value)
+  const index: number = fileList.findIndex((item) => item.url === file.url)
+  const videoList = fileList.filter((file) => isVideo(file))
+  const videoIndex: number = videoList.findIndex((item) => item.url === file.url)
+  if (reupload) {
+    handleChoose(index)
+  } else {
     if (beforePreview) {
       beforePreview({
         file,
         index,
         imgList: [],
+        fileList,
         resolve: (isPass: boolean) => {
-          isPass && handlePreviewVieo(index, lists)
+          isPass && handlePreviewVieo(videoIndex, videoList)
         }
       })
     } else {
-      handlePreviewVieo(index, lists)
+      handlePreviewVieo(videoIndex, videoList)
     }
-  } else {
-    handleChoose(index)
   }
 }
 
 function onPreviewFile(file: UploadFileItem) {
-  const { beforePreview, usePreview } = props
-  const lists = uploadFiles.value.filter((file) => {
-    return !isVideo(file) && !isImage(file)
-  })
-  const index: number = lists.findIndex((item) => item.url === file.url)
-  if (usePreview) {
+  const { beforePreview, reupload } = props
+  const fileList = deepClone(uploadFiles.value)
+  const index: number = fileList.findIndex((item) => item.url === file.url)
+  if (reupload) {
+    handleChoose(index)
+  } else {
     if (beforePreview) {
       beforePreview({
         file,
         index,
         imgList: [],
+        fileList,
         resolve: (isPass: boolean) => {
           isPass && handlePreviewFile(file)
         }
@@ -689,8 +689,6 @@ function onPreviewFile(file: UploadFileItem) {
     } else {
       handlePreviewFile(file)
     }
-  } else {
-    handleChoose(index)
   }
 }
 

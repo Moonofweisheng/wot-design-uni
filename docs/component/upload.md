@@ -97,14 +97,14 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 ></wd-upload>
 ```
 
-## 关闭预览点击文件替换
+## 覆盖上传
 
-上传组件可通过设置 `use-preview` 来关闭文件预览并启用点击文件替换。
+上传组件可通过设置 `reupload` 来实现在选中时自动替换上一个文件。
 
 ```html
 <wd-upload
   :file-list="fileList"
-  :use-preview="false"
+  reupload
   action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
   @change="handleChange"
 ></wd-upload>
@@ -614,7 +614,7 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 | header                        | 设置上传的请求头部                                                                                                                                                             | object                                 | -                                              | -                          | -                |
 | multiple                      | 是否支持多选文件                                                                                                                                                               | boolean                                | -                                              | -                          | -                |
 | disabled                      | 是否禁用                                                                                                                                                                       | boolean                                | -                                              | false                      | -                |
-| use-preview                 | 是否点击已上传的图片或视频可预览，值为false的情况下再次弹出上传                                                                                                                                                     | boolean                                | -                                              | true                       | 1.3.15 |
+| reupload    | 是否开启覆盖上传，开启后会关闭图片预览   | boolean          | -                                              | false                       | $LOWEST_VERSION$ |
 | limit                         | 最大允许上传个数                                                                                                                                                               | number                                 | -                                              | -                          | -                |
 | show-limit-num                | 限制上传个数的情况下，是否展示当前上传的个数                                                                                                                                   | boolean                                | -                                              | false                      | -                |
 | max-size                      | 文件大小限制，单位为`byte`                                                                                                                                                     | number                                 | -                                              | -                          | -                |

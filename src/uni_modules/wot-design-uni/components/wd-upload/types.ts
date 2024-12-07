@@ -67,6 +67,7 @@ export type UploadBeforePreviewOption = {
   file: UploadFileItem
   index: number
   imgList: string[]
+  fileList: UploadFileItem[]
   resolve: (isPass: boolean) => void
 }
 export type UploadBeforePreview = (option: UploadBeforePreviewOption) => void
@@ -317,10 +318,10 @@ export const uploadProps = {
    */
   autoUpload: makeBooleanProp(true),
   /**
-   * 是否点击已上传的图片或视频可预览，值为false的情况下再次弹出上传
+   * 点击已上传时是否可以重新上传
    * 类型：boolean
    */
-  usePreview: makeBooleanProp(true),
+  reupload: makeBooleanProp(true),
   /**
    * 自定义上传文件的请求方法
    * 类型：UploadMethod

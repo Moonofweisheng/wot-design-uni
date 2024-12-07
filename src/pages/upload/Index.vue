@@ -11,8 +11,15 @@
     <demo-block title="最大上传数限制">
       <wd-upload :file-list="fileList3" :limit="3" :action="action" @change="handleChange3"></wd-upload>
     </demo-block>
-    <demo-block title="关闭预览点击文件替换">
-      <wd-upload accept="image" :use-preview="false" v-model:file-list="fileList17" image-mode="aspectFill" :action="action"></wd-upload>
+    <demo-block title="覆盖上传">
+      <!-- #ifdef MP-WEIXIN || H5  -->
+      <wd-upload accept="all" reupload v-model:file-list="fileList17" image-mode="aspectFill" :action="action"></wd-upload>
+      <!-- #endif -->
+      <!-- #ifndef MP-WEIXIN -->
+      <!-- #ifndef H5 -->
+      <wd-upload accept="image" reupload v-model:file-list="fileList17" image-mode="aspectFill" :action="action"></wd-upload>
+      <!-- #endif -->
+      <!-- #endif -->
     </demo-block>
     <demo-block title="拦截预览图片操作">
       <wd-upload :file-list="fileList4" :action="action" @change="handleChange4" :before-preview="beforePreview"></wd-upload>
