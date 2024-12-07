@@ -80,6 +80,10 @@ export type FormExpose = {
    * 重置表单项的验证提示
    */
   reset: () => void
+  /**
+   * 重置表单项为初始值，并清空验证提示
+   */
+  resetFields: () => void
 }
 
 export type FormInstance = ComponentPublicInstance<FormProps, FormExpose>
