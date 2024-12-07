@@ -1,5 +1,3 @@
-<frame/>
-
 # ActionSheet 动作面板
 
 ## 基本用法

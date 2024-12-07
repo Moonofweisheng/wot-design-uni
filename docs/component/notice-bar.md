@@ -1,5 +1,3 @@
-<frame/>
-
 # NoticeBar 通知栏
 
 ## 基本用法

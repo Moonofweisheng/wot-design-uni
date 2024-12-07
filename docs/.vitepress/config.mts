@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2024-11-09 21:52:24
+ * @LastEditTime: 2024-12-07 15:20:53
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
@@ -9,6 +9,7 @@
  */
 import { defineConfig } from 'vitepress';
 import viteCompression from 'vite-plugin-compression'
+import { fileURLToPath, URL } from 'node:url'
 
 import { MarkdownTransform } from './plugins/markdown-transform'
 
@@ -25,7 +26,41 @@ export default defineConfig({
         ext: '.gz',
       })
     ],
-    ssr: { noExternal: ['element-plus'] }
+    ssr: { noExternal: ['element-plus'] },
+    resolve: {
+      alias: [
+        {
+          find: /^.*\/VPSidebar\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/VPSidebar.vue', import.meta.url)
+          )
+        },
+        {
+          find: /^.*\/VPContent\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/VPContent.vue', import.meta.url)
+          )
+        },
+        {
+          find: /^.*\/VPDoc\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/VPDoc.vue', import.meta.url)
+          )
+        },
+        {
+          find: /^.*\/VPLocalNav\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/VPLocalNav.vue', import.meta.url)
+          )
+        },
+        {
+          find: /^.*\/VPNavBar\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/VPNavBar.vue', import.meta.url)
+          )
+        }
+      ]
+    }
   },
   title: `Wot Design Uni`,
   description: '一个参照wot-design打造的uni-app组件库',

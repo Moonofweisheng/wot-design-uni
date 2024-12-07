@@ -1,5 +1,3 @@
-<frame/>
-
 # Layout 布局
 
 `Layout` 组件由 `wd-col` 组件和 `wd-row` 组成。

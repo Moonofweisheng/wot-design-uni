@@ -1,5 +1,3 @@
-<frame/>
-
 # ConfigProvider 全局配置
 
 ## 介绍

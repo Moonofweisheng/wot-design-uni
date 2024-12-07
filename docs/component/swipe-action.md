@@ -1,5 +1,3 @@
-<frame/>
-
 # SwipeAction 滑动操作
 
 :::warning

@@ -1,5 +1,3 @@
-<frame/>
-
 # Transition 动画
 
 ## 基本用法

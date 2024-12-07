@@ -1,5 +1,3 @@
-<frame/>
-
 # Divider 分割线
 
 :::danger 请注意

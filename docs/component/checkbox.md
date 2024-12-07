@@ -1,5 +1,3 @@
-<frame/>
-
 # Checkbox 复选框
 
 ## 基本用法

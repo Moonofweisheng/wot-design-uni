@@ -1,5 +1,3 @@
-<frame/>
-
 # Collapse 折叠面板
 
 ## 基本使用

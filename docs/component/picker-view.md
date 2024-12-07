@@ -1,5 +1,3 @@
-<frame/>
-
 #  PickerView 选择器视图
 
 ## 基本用法

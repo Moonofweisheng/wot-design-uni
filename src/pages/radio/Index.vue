@@ -53,8 +53,13 @@
         <wd-radio :value="1">单选框1</wd-radio>
         <wd-radio :value="2">单选框2</wd-radio>
       </wd-radio-group>
-      <view class="divider"></view>
+      <wd-divider dashed></wd-divider>
       <wd-radio-group v-model="value6" inline shape="dot">
+        <wd-radio :value="1">单选框1</wd-radio>
+        <wd-radio :value="2">单选框2</wd-radio>
+      </wd-radio-group>
+      <wd-divider dashed></wd-divider>
+      <wd-radio-group v-model="value13" inline shape="dot" icon-placement="right">
         <wd-radio :value="1">单选框1</wd-radio>
         <wd-radio :value="2">单选框2</wd-radio>
       </wd-radio-group>
@@ -132,6 +137,7 @@ const value9 = ref<number>(1)
 const value10 = ref<number>(1)
 const value11 = ref<number>(1)
 const value12 = ref<number>(1)
+const value13 = ref<number>(1)
 
 function change(e: any) {
   console.log(e)
