@@ -42,6 +42,26 @@ pnpm add wot-design-uni
 下载地址：<a href="https://ext.dcloud.net.cn/plugin?id=13889"><span >wot-design-uni</span></a>
 
 
+## Sass
+`Wot Design Uni` 依赖 `sass` ，因此在使用之前需要确认项目中是否已经安装了 `sass`，如果没有安装，可以通过以下命令进行安装：
+::: code-group
+```bash [npm]
+npm i sass -D
+```
+
+```bash [yarn]
+yarn add sass -D
+```
+
+```bash [pnpm]
+pnpm add sass -D
+```
+:::
+
+::: warning 提醒
+`Dart Sass 3.0.0` 废弃了一批API，而组件库目前还未兼容，因此请确保你的`sass`版本为`1.78.0`及之前的版本。参见参见[常见问题](/guide/common-problems.html#sass抛出大量错误和警告)。
+:::
+
 ## 配置
 
 ### 导入组件

@@ -19,6 +19,21 @@
 有！
 可以加入[组件库互助 QQ 群](/guide/join-group.html)，分享心得、交流体会。
 
+## Sass抛出大量错误和警告？
+`Dart Sass 3.0.0` 废弃了一批API，而组件库目前还未兼容，因此请确保你的`sass`版本为`1.78.0`及之前的版本。可以通过以下命令安装指定版本：
+::: code-group
+```bash [npm]
+npm i sass@1.78.0 -D
+```
+
+```bash [yarn]
+yarn add sass@1.78.0 -D
+```
+
+```bash [pnpm]
+pnpm add sass@1.78.0 -D
+```
+:::
 
 ## 小程序样式隔离
 
