@@ -1,5 +1,3 @@
-<frame/>
-
 # CountDown 倒计时<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.58</el-tag>
 
 用于实时展示倒计时数值，支持毫秒精度。

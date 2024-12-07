@@ -1,5 +1,3 @@
-<frame/>
-
 #  Loading 加载指示器
 
 

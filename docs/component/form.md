@@ -1,5 +1,3 @@
-<frame/>
-
 # Form 表单 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.0</el-tag>
 
 用于数据录入、校验，支持输入框、单选框、复选框、文件上传等类型，常见的 form 表单为`单元格`形式的展示，即左侧为表单的标题描述，右侧为表单的输入。

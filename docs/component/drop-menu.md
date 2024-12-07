@@ -1,5 +1,3 @@
-<frame/>
-
 # DropMenu 下拉菜单
 
 ## 代码演示

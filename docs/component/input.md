@@ -1,5 +1,3 @@
-<frame/>
-
 #  Input 输入框
 
 ::: tip 提示

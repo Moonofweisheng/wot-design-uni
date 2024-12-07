@@ -1,5 +1,3 @@
-<frame/>
-
 # loadmore 加载更多
 
 ## 基本用法

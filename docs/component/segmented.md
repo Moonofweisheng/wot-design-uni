@@ -1,5 +1,3 @@
-<frame/>
-
 # Segmented 分段器 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.23</el-tag>
 
 ## 何时使用

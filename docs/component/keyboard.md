@@ -1,5 +1,3 @@
-<frame/>
-
 # Keyboard 虚拟键盘 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.10</el-tag>
 
 虚拟数字键盘，用于输入数字、密码、身份证或车牌号等场景。

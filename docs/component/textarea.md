@@ -1,5 +1,3 @@
-<frame/>
-
 # Textarea 文本域 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.0</el-tag>
 
 用于输入多行文本信息。

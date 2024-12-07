@@ -1,5 +1,3 @@
-<frame/>
-
 #  ImgCropper 图片裁剪
 
 

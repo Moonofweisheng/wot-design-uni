@@ -1,5 +1,3 @@
-<frame/>
-
 # MessageBox 弹框
 
 弹框有三种：alert、confirm 和 prompt。
