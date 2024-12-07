@@ -8,9 +8,11 @@
  * 记得注释
  */
 import type { PropType } from 'vue'
-import { baseProps, makeRequiredProp } from '../common/props'
+import { baseProps, makeRequiredProp, makeStringProp } from '../common/props'
 
 export type RadioShape = 'dot' | 'button' | 'check'
+
+export type RadioIconPlacement = 'left' | 'right' | 'auto'
 
 export const radioProps = {
   ...baseProps,
@@ -38,5 +40,10 @@ export const radioProps = {
     default: null
   },
   /** 最大宽度 */
-  maxWidth: String
+  maxWidth: String,
+  /** 图标位置，默认为 left */
+  iconPlacement: {
+    type: [String, null] as PropType<RadioIconPlacement>,
+    default: null
+  }
 }

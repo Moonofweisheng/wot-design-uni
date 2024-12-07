@@ -172,6 +172,10 @@
     }
   }
 
+  &.icon-placement-left {
+    flex-direction: row-reverse;
+  }
+
   @include when(inline) {
     display: inline-block;
     margin-top: 0;
@@ -199,6 +203,14 @@
         .wd-radio__shape {
           margin-top: 0;
         }
+      }
+    }
+
+    &.icon-placement-right {
+      .wd-radio__shape {
+        margin-right: 0;
+        margin-left: 4px;
+        float: right;
       }
     }
   }

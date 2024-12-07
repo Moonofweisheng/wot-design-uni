@@ -4,7 +4,7 @@
       sizeValue ? 'is-' + sizeValue : ''
     } ${inlineValue ? 'is-inline' : ''} ${isChecked ? 'is-checked' : ''} ${shapeValue !== 'check' ? 'is-' + shapeValue : ''} ${
       disabledValue ? 'is-disabled' : ''
-    } ${customClass}`"
+    } icon-placement-${iconPlacement} ${customClass}`"
     :style="customStyle"
     @click="handleClick"
   >
@@ -36,7 +36,7 @@ import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, watch } from 'vue'
 import { useParent } from '../composables/useParent'
 import { RADIO_GROUP_KEY } from '../wd-radio-group/types'
-import { radioProps } from './types'
+import { radioProps, type RadioIconPlacement } from './types'
 import { getPropByPath, isDef } from '../common/util'
 
 const props = defineProps(radioProps)
@@ -84,6 +84,14 @@ const cellValue = computed(() => {
     return props.cell
   } else {
     return getPropByPath(radioGroup, 'props.cell')
+  }
+})
+
+const iconPlacement = computed<RadioIconPlacement>(() => {
+  if (isDef(props.iconPlacement)) {
+    return props.iconPlacement
+  } else {
+    return getPropByPath(radioGroup, 'props.iconPlacement')
   }
 })
 

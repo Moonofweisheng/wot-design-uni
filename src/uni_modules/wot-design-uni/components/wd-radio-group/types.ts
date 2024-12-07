@@ -1,5 +1,5 @@
 import { type InjectionKey } from 'vue'
-import type { RadioShape } from '../wd-radio/types'
+import type { RadioShape, RadioIconPlacement } from '../wd-radio/types'
 import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 
 export type RadioGroupProvide = {
@@ -11,6 +11,7 @@ export type RadioGroupProvide = {
     cell?: boolean
     size?: string
     inline?: boolean
+    iconPlacement?: RadioIconPlacement
   }
   updateValue: (value: string | number | boolean) => void
 }
@@ -32,5 +33,7 @@ export const radioGroupProps = {
   /** 设置大小，默认为空 */
   size: makeStringProp(''),
   /** 同行展示，默认为 false */
-  inline: makeBooleanProp(false)
+  inline: makeBooleanProp(false),
+  /** 图标位置，默认为 left */
+  iconPlacement: makeStringProp<RadioIconPlacement>('auto')
 }
