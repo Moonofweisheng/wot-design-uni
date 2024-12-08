@@ -394,7 +394,8 @@ function onConfirm() {
   lastCurrentType.value = currentType.value
   emit('update:modelValue', calendarValue.value)
   emit('confirm', {
-    value: calendarValue.value
+    value: calendarValue.value,
+    type: currentType.value
   })
 }
 
