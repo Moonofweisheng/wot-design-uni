@@ -1,13 +1,13 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-06-09 14:38:57
+ * @LastEditTime: 2024-12-08 19:13:33
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-calendar/types.ts
  * 记得注释
  */
-import type { PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 import type { CalendarFormatter, CalendarTimeFilter, CalendarType } from '../wd-calendar-view/types'
 import type { FormItemRule } from '../wd-form/types'
@@ -72,14 +72,6 @@ export const calendarProps = {
    * 设置左侧标题宽度
    */
   labelWidth: String,
-  /**
-   * 使用 label 插槽时设置该选项
-   */
-  useLabelSlot: makeBooleanProp(false),
-  /**
-   * 使用默认插槽时设置该选项
-   */
-  useDefaultSlot: makeBooleanProp(false),
   /**
    * 禁用
    */
@@ -184,7 +176,12 @@ export const calendarProps = {
   /**
    * 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
    */
-  immediateChange: makeBooleanProp(false)
+  immediateChange: makeBooleanProp(false),
+  /**
+   * 是否使用内置单元格
+   * 默认为 true，使用内置单元格
+   */
+  withCell: makeBooleanProp(true)
 }
 
 export type CalendarDisplayFormat = (value: number | number[], type: CalendarType) => string
@@ -211,3 +208,7 @@ export type CalendarExpose = {
   /** 打开时间选择器弹窗 */
   open: () => void
 }
+
+export type CalendarProps = ExtractPropTypes<typeof calendarProps>
+
+export type CalendarInstance = ComponentPublicInstance<CalendarExpose, CalendarProps>

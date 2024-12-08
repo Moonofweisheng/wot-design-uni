@@ -70,7 +70,7 @@ export const calendarViewProps = {
 
 export type CalendarViewProps = ExtractPropTypes<typeof calendarViewProps>
 
-export type CalendarDayType = '' | 'start' | 'middle' | 'end' | 'selected' | 'same' | 'current'
+export type CalendarDayType = '' | 'start' | 'middle' | 'end' | 'selected' | 'same' | 'current' | 'multiple-middle' | 'multiple-selected'
 
 export type CalendarDayItem = {
   date: number
@@ -79,6 +79,7 @@ export type CalendarDayItem = {
   bottomInfo?: string
   type?: CalendarDayType
   disabled?: boolean
+  isLastRow?: boolean
 }
 
 export type CalendarFormatter = (day: CalendarDayItem) => CalendarDayItem
