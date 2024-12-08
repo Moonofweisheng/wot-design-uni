@@ -330,7 +330,7 @@ function handleConfirm({ value, selectedItems }) {
 | title                  | 弹出层标题                                                                                               | string                            | -                | -        | -                |
 | label                  | 选择器左侧文案                                                                                           | string                            | -                | -        | -                |
 | placeholder            | 选择器占位符                                                                                             | string                            | -                | 请选择   | -                |
-| disabled               | 禁用                                                                                                     | boolean                           | -                | fasle    | -                |
+| disabled               | 禁用                                                                                                     | boolean                           | -                | false    | -                |
 | loading                | 加载中                                                                                                   | boolean                           | -                | false    | -                |
 | loading-color          | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写                                                   | String                            | -                | #4D80F0  | -                |
 | readonly               | 只读                                                                                                     | boolean                           | -                | false    | -                |
