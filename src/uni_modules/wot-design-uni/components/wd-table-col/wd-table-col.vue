@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="`wd-table-col ${fixed ? 'wd-table-col--fixed' : ''} ${isLastFixed && isDef(table) && table.scrollLeft ? 'is-shadow' : ''}`"
+    :class="`wd-table-col ${fixed ? 'wd-table-col--fixed' : ''} ${isLastFixed && isDef(table) && table.state.scrollLeft ? 'is-shadow' : ''}`"
     :style="columnStyle"
   >
     <view
@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { type CSSProperties, computed, ref, watch } from 'vue'
+import { type CSSProperties, computed, ref } from 'vue'
 import { addUnit, isDef, objToStyle, isOdd, isFunction } from '../common/util'
 import { tableColumnProps, type SortDirection } from './types'
 import { useParent } from '../composables/useParent'
@@ -100,7 +100,7 @@ const columnStyle = computed(() => {
  */
 const cellStyle = computed(() => {
   let style: CSSProperties = {}
-  const rowHeight: string | number = isDef(table) ? table.props.rowHeight : '80rpx' // 自定义行高
+  const rowHeight: string | number = isDef(table) ? table.props.rowHeight : 50 // 自定义行高
   if (isDef(rowHeight)) {
     style['height'] = addUnit(rowHeight)
   }

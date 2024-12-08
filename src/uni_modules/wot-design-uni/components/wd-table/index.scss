@@ -43,7 +43,6 @@
     border: 1px solid $-table-border-color;
   }
 
-
   :deep() {
     .wd-table-col:last-child {
       .wd-table__cell {
@@ -72,6 +71,12 @@
 
   @include e(content) {
     display: flex;
+
+    @include m(header) {
+      position: sticky;
+      top: 0;
+      z-index: 2
+    }
   }
 
   @include e(cell) {
@@ -127,6 +132,26 @@
     }
   }
 
+  @include e(wrapper) {
+    width: 100%;
+    overflow: auto;
+  }
+
+  @include e(inner) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include e(header-row) {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  @include e(body) {
+    display: flex;
+    width: 100%;
+  }
 
   @include e(value) {
     @include when(ellipsis) {
