@@ -161,6 +161,25 @@ const value = ref<string>('')
 | clearTrigger | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示	 | `InputClearTrigger`	 | `focus` / `always` | `always` | 1.3.7 |
 | focusWhenClear | 是否在点击清除按钮时聚焦输入框 | boolean | -      | true  | 1.3.7   |
 | ignoreCompositionEvent | 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件。 | boolean | -      | true  | 1.3.11|
+| inputmode | 提供用户在编辑元素或其内容时可能输入的数据类型的提示。 | InputMode | -      | text  | $LOWEST_VERSION$ |
+
+### InputMode 可选值
+
+>新增于 uni-app 3.6.16+ inputmode是html规范后期更新的内容。各家小程序还未支持此属性。
+
+在符合条件的高版本webview里，uni-app的web和app-vue平台中可使用本属性，参见[inputmode](https://uniapp.dcloud.net.cn/component/input.html#inputmode)。
+
+| 值      | 说明                                                                                                                 |
+|---------|----------------------------------------------------------------------------------------------------------------------|
+| none    | 无虚拟键盘。在应用程序或者站点需要实现自己的键盘输入控件时很有用。                                                   |
+| text    | 使用用户本地区域设置的标准文本输入键盘。                                                                             |
+| decimal | 小数输入键盘，包含数字和分隔符（通常是“ . ”或者“ , ”），设备可能也可能不显示减号键。                                 |
+| numeric | 数字输入键盘，所需要的就是 0 到 9 的数字，设备可能也可能不显示减号键。                                               |
+| tel     | 电话输入键盘，包含 0 到 9 的数字、星号（*）和井号（#）键。表单输入里面的电话输入通常应该使用 <input type="tel"> 。   |
+| search  | 为搜索输入优化的虚拟键盘，比如，返回键可能被重新标记为“搜索”，也可能还有其他的优化。                                 |
+| email   | 为邮件地址输入优化的虚拟键盘，通常包含"@"符号和其他优化。表单里面的邮件地址输入应该使用 <input type="email">。       |
+| url     | 为网址输入优化的虚拟键盘，比如，“/”键会更加明显、历史记录访问等。表单里面的网址输入通常应该使用 <input type="url">。 |
+
 
 ### FormItemRule 数据结构
 

@@ -37,6 +37,7 @@
         :confirm-hold="confirmHold"
         :disable-default-padding="disableDefaultPadding"
         :ignoreCompositionEvent="ignoreCompositionEvent"
+        :inputmode="inputmode"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"

@@ -43,6 +43,7 @@
           :always-embed="alwaysEmbed"
           :placeholder-class="inputPlaceholderClass"
           :ignoreCompositionEvent="ignoreCompositionEvent"
+          :inputmode="inputmode"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
