@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 import type { FormItemRule } from '../wd-form/types'
-import type { InputClearTrigger } from '../wd-input/types'
+import type { InputClearTrigger, InputMode } from '../wd-input/types'
 
 export type ConfirmType = 'send' | 'search' | 'next' | 'go' | 'done'
 
@@ -288,7 +288,14 @@ export const textareaProps = {
    * 类型: boolean
    * 默认值: true
    */
-  ignoreCompositionEvent: makeBooleanProp(true)
+  ignoreCompositionEvent: makeBooleanProp(true),
+  /**
+   * 它提供了用户在编辑元素或其内容时可能输入的数据类型的提示。在符合条件的高版本webview里，uni-app的web和app-vue平台中可使用本属性。
+   * 类型: InputMode
+   * 可选值: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search" | "password"
+   * 默认值: "text"
+   */
+  inputmode: makeStringProp<InputMode>('text')
 }
 
 export type TextareaProps = ExtractPropTypes<typeof textareaProps>
