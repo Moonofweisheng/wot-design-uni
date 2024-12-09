@@ -131,12 +131,12 @@ function handleClose() {
 
 | name  | 说明         | 最低版本         |
 | ----- | ------------ | ---------------- |
-| close | 关闭按钮插槽 | $LOWEST_VERSION$ |
+| close | 关闭按钮插槽 | 1.5.0 |
 
 ## 外部样式类
 
 | 类名               | 说明           | 最低版本         |
 | ------------------ | -------------- | ---------------- |
 | custom-class       | 根节点样式     | -                |
-| custom-close-class | 关闭按钮样式类 | $LOWEST_VERSION$ |
-| custom-close-style | 关闭按钮样式   | $LOWEST_VERSION$ |
+| custom-close-class | 关闭按钮样式类 | 1.5.0 |
+| custom-close-style | 关闭按钮样式   | 1.5.0 |

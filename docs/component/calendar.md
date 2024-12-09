@@ -164,8 +164,8 @@ function handleConfirm({ value }) {
 | middle            | 范围开始与结束之间的日期             | -                |
 | same              | 范围开始与结束日期同一天             | -                |
 | current           | 当前日期                             | -                |
-| multiple-middle   | 多日期范围选择，开始与结束之间的日期 | $LOWEST_VERSION$ |
-| multiple-selected | 多日期范围选择，选中的日期           | $LOWEST_VERSION$ |
+| multiple-middle   | 多日期范围选择，开始与结束之间的日期 | 1.5.0 |
+| multiple-selected | 多日期范围选择，选中的日期           | 1.5.0 |
 
 ```html
 <wd-calendar type="daterange" v-model="value" allow-same-day :formatter="formatter" @confirm="handleConfirm" />
@@ -437,7 +437,7 @@ function handleConfirm({ value }) {
 | prop                    | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                                                                                                  | string                | -                                                                                           | -                     | -                |
 | rules                   | 表单验证规则，结合`wd-form`组件使用                                                                                                                                                                | `FormItemRule []`     | -                                                                                           | `[]`                  | -                |
 | immediate-change        | type 为 'datetime' 或 'datetimerange' 时有，是否在手指松开时立即触发 picker-view 的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25 版本起提供，仅微信小程序和支付宝小程序支持。 | boolean               | -                                                                                           | false                 | 1.2.25           |
-| with-cell               | 是否使用内置 cell 选择器                                                                                                                                                                           | boolean               | -                                                                                           | true                  | $LOWEST_VERSION$ |
+| with-cell               | 是否使用内置 cell 选择器                                                                                                                                                                           | boolean               | -                                                                                           | true                  | 1.5.0 |
 
 ### FormItemRule 数据结构
 

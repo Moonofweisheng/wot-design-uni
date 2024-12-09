@@ -3,7 +3,7 @@
 用于展示多条结构类似的数据， 可对数据进行排序等操作。
 
 ::: warning 提示
-`$LOWEST_VERSION$`后取消了`height`的默认值，需要自行设置，最好设置为`number`类型，方便未来适配虚拟列表。
+`1.5.0`后取消了`height`的默认值，需要自行设置，最好设置为`number`类型，方便未来适配虚拟列表。
 :::
 
 ## 基础用法
@@ -461,7 +461,7 @@ const paginationData = computed(() => {
 | showHeader      | 是否显示表头                                        | boolean                      | -      | true   | 0.0.39           |
 | ellipsis        | 是否超出 2 行隐藏                                   | boolean                      | -      | true   | 0.0.39           |
 | index           | 是否显示索引列，可传入`boolean`也可传入 column 配置 | `boolean / TableColumnProps` |        | false  | 1.2.19           |
-| fixed-header    | 是否固定表头，需要结合`height`才可以实现固定表头的效果。      | boolean                      | -      | true   | $LOWEST_VERSION$ |
+| fixed-header    | 是否固定表头，需要结合`height`才可以实现固定表头的效果。      | boolean                      | -      | true   | 1.5.0 |
 
 ## Events
 
