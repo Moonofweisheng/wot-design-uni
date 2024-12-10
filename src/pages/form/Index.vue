@@ -25,6 +25,7 @@
         </wd-cell-group>
         <view class="footer">
           <wd-button type="primary" size="large" @click="handleSubmit1" block>提交</wd-button>
+          <wd-button type="primary" size="large" @click="resetFields1" block class="reset">重置</wd-button>
         </view>
       </wd-form>
     </demo-block>
@@ -194,6 +195,10 @@ function handleSubmit2() {
     })
 }
 
+function resetFields1() {
+  form1.value!.resetFields()
+}
+
 function handleClick1() {
   uni.navigateTo({ url: '/pages/form/demo1' })
 }
@@ -218,5 +223,8 @@ function handleClick4() {
 }
 .footer {
   padding: 16px;
+  .reset {
+    margin-top: 10px;
+  }
 }
 </style>
