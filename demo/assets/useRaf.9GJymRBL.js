@@ -1,0 +1,1 @@
+import{r as a,Q as e}from"./index-Bn4U3GXe.js";import{ab as t,E as r,q as n}from"./page-wraper.kNu70N2E.js";function o(o){const s=a(null),u=()=>{t&&r(s.value)?cancelAnimationFrame(s.value):n(s.value)&&clearTimeout(s.value)};return e((()=>{u()})),{start:()=>{const a=a=>{o(a)};s.value=t?requestAnimationFrame(a):setTimeout((()=>a(Date.now())),1e3/30)},cancel:u}}export{o as u};
