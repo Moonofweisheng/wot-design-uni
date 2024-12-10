@@ -300,7 +300,7 @@ function handleSwitchChange({ value }) {
 | 类名               | 说明                           | 最低版本 |
 | ------------------ | ------------------------------ | -------- |
 | custom-class       | 根节点样式                     | -        |
-| custom-icon-class  | icon 使用 slot 时的自定义样式  | -        |
-| custom-label-class | label 使用 slot 时的自定义样式 | -        |
-| custom-value-class | value 使用 slot 时的自定义样式 | -        |
-| custom-title-class | title 使用 slot 时的自定义样式 | -        |
+| custom-icon-class  | icon 外部自定义样式  | -        |
+| custom-label-class | label 外部自定义样式 | -        |
+| custom-value-class | value 外部自定义样式 | -        |
+| custom-title-class | title 外部自定义样式 | -        |
