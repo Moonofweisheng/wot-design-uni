@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.5.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.5.0...v1.5.1) (2024-12-10)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 调整 Upload 的覆盖上传参数 reupload 默认值为 false ([d9ce000](https://github.com/Moonofweisheng/wot-design-uni/commit/d9ce00010a15ae8e168e082a2c4f3a50cf61fa13))
+
 ## [1.5.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.4.0...v1.5.0) (2024-12-09)
 
 
