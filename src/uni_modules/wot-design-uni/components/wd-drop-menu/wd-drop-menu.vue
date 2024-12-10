@@ -34,7 +34,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, inject, onBeforeMount, ref, watch } from 'vue'
+import { getCurrentInstance, inject, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { closeOther } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { getRect, uuid } from '../common/util'
@@ -66,6 +66,10 @@ watch(
 
 onBeforeMount(() => {
   windowHeight.value = uni.getSystemInfoSync().windowHeight
+})
+
+onMounted(() => {
+  updateOffset()
 })
 
 function noop(event: Event) {
@@ -100,19 +104,25 @@ function toggle(child: any) {
 }
 
 /**
+ * 更新 offset
+ */
+async function updateOffset() {
+  const rect = await getRect(`#${dropMenuId.value}`, false, proxy)
+  if (!rect) return
+  const { top, bottom } = rect
+  if (props.direction === 'down') {
+    offset.value = Number(bottom)
+  } else {
+    offset.value = windowHeight.value - Number(top)
+  }
+}
+
+/**
  * 控制菜单内容是否展开
  */
-function fold(child: any) {
-  getRect(`#${dropMenuId.value}`, false, proxy).then((rect) => {
-    if (!rect) return
-    const { top, bottom } = rect
-    if (props.direction === 'down') {
-      offset.value = Number(bottom)
-    } else {
-      offset.value = windowHeight.value - Number(top)
-    }
-    child.$.exposed!.toggle()
-  })
+async function fold(child: any) {
+  await updateOffset()
+  child.$.exposed!.toggle()
 }
 </script>
 
