@@ -62,7 +62,7 @@ export const tabsProps = {
   /**
    * 底部条颜色
    */
-  lineBgGolor: makeStringProp(''),
+  lineBgColor: makeStringProp(''),
   /**
    * 颜色
    */

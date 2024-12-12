@@ -308,7 +308,7 @@ function toggleMap() {
  */
 async function updateLineStyle(animation: boolean = true) {
   if (!state.inited) return
-  const { autoLineWidth, lineWidth, lineHeight, lineBgGolor } = props
+  const { autoLineWidth, lineWidth, lineHeight, lineBgColor } = props
   try {
     const lineStyle: CSSProperties = {}
     if (isDef(lineWidth)) {
@@ -320,8 +320,8 @@ async function updateLineStyle(animation: boolean = true) {
         lineStyle.width = addUnit(textWidth)
       }
     }
-    if (isDef(lineBgGolor)) {
-      lineStyle.background = addUnit(lineBgGolor)
+    if (isDef(lineBgColor)) {
+      lineStyle.background = addUnit(lineBgColor)
     }
     if (isDef(lineHeight)) {
       lineStyle.height = addUnit(lineHeight)
