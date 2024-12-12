@@ -263,6 +263,7 @@ function handlePopupShow() {
 | autoLineWidth | 底部条宽度跟随文字，指定`lineWidth`时此选项不生效                                        | boolean         | -        | false  | 1.4.0    |
 | lineWidth     | 底部条宽度，单位像素                                                                     | number          | -        | 19     | -        |
 | lineHeight    | 底部条高度，单位像素                                                                     | number          | -        | 3      | -        |
+| lineBgGolor   | 底部条颜色                                                                               | string          | -        | #4d80f0 | $LOWEST_VERSION$  |
 | color         | 文字颜色                                                                                 | string          | -        | -      | -        |
 | inactiveColor | 非活动标签文字颜色                                                                       | string          | -        | -      | -        |
 | animated      | 是否开启切换标签内容时的转场动画                                                         | boolean         | -        | false  | -        |
