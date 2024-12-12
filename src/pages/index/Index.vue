@@ -1,5 +1,5 @@
 <template>
-  <page-wraper :use-wx-ad="false">
+  <page-wraper :use-wx-ad="false" :use-reward-fab="true">
     <view class="page">
       <view class="page__hd">
         <view class="page__title">

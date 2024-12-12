@@ -831,6 +831,16 @@
         },
         "navigationBarTitleText": "floatingPanel 浮动面板"
       }
+    },
+    {
+      "path": "pages/wxRewardAd/Index",
+      "name": "wxRewardAd",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "感谢激励"
+      }
     }
   ],
   // "tabBar": {
