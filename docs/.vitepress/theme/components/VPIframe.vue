@@ -8,13 +8,14 @@
     <div class="demo-header">
       <ExternalLink :href="href" class="demo-link" :style="`${expanded ? '' : 'height:0;width:0;opacity:0'}`">
       </ExternalLink>
+      <QrCode class="demo-qrcode" :src="qrcode" v-if="expanded&&qrcode"></QrCode>
       <el-icon class="expand-icon" style="cursor: pointer;" @click="toggleExpand">
         <component :is="expanded ? Fold : Expand" />
       </el-icon>
     </div>
     <!-- iframe 容器 -->
     <div class="iframe-container">
-      <iframe v-if="expanded" ref="iframe" id="demo" class="iframe" scrolling="auto" frameborder="0" :src="href" />
+      <iframe v-if="expanded&&transitionEnd" ref="iframe" id="demo" class="iframe" scrolling="auto" frameborder="0" :src="href" />
     </div>
   </div>
 </template>
@@ -23,6 +24,8 @@
 import { Expand, Fold } from '@element-plus/icons-vue'
 import { useRoute, useData } from 'vitepress'
 import { computed, onMounted, ref, watch } from 'vue'
+import QrCode from './QrCode.vue'
+
 interface Props {
   /** 是否展开状态 */
   expanded?: boolean
@@ -35,7 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
 // 状态管理
 const baseUrl = ref('')
 const iframe = ref<HTMLIFrameElement | null>(null)
-const transitionEnd = ref(false)
+const transitionEnd = ref(true)
 
 const emit = defineEmits<{
   'update:expanded': [boolean]  // 更新展开状态
@@ -52,6 +55,13 @@ const href = computed(() => {
   if (!paths.length) return baseUrl.value
 
   return baseUrl.value + `pages/${kebabToCamel(paths[paths.length - 1])}/Index`
+})
+
+const qrcode = computed(() => {
+  const path = route.path
+  const paths = path ? path.split('.')[0].split('/') : []
+  if (!paths.length) return ''
+  return `/wxqrcode/${kebabToCamel(paths[paths.length - 1])}.png`
 })
 
 // 工具函数：转换 kebab-case 为 camelCase
@@ -74,17 +84,13 @@ function toggleExpand() {
   // 触发事件通知父组件
   emit('update:expanded', !props.expanded)
   emit('state-change', !props.expanded)
-
-  if (props.expanded) {
-    transitionEnd.value = false
-  }
+  transitionEnd.value = false
 }
 
 // 过渡结束处理
 function onTransitionEnd() {
-  if (!props.expanded) {
-    transitionEnd.value = true
-  }
+  transitionEnd.value = true
+
 }
 
 // iframe 消息通信
@@ -175,6 +181,16 @@ watch(
   transition: all 0.3s ease-in-out;
   position: absolute;
   left: 0;
+  --color: inherit;
+  fill: currentColor;
+  color: var(--color);
+}
+
+.demo-qrcode{
+  font-size: 28px !important;
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  left: calc(50% - 14px);
   --color: inherit;
   fill: currentColor;
   color: var(--color);

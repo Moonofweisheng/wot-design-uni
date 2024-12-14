@@ -25,7 +25,7 @@
     <wd-notify />
     <wd-toast />
     <!-- #ifdef MP-WEIXIN -->
-    <wd-fab v-model:active="fabActive" draggable type="error" :gap="{ bottom: 58 }" v-if="enableRewardFab">
+    <wd-fab v-model:active="fabActive" draggable type="error" :gap="{ bottom: 58 }" direction="left" v-if="enableRewardFab">
       <wd-button type="error" round @click="goToReward">
         <view style="display: flex; align-items: center">
           <wd-icon name="thumb-up" size="22px"></wd-icon>
@@ -72,8 +72,8 @@ const darkMode = useDark()
 const { closeOutside } = useQueue()
 const isDark = ref<boolean>(false)
 const isRed = ref<boolean>(false)
-const fabActive = ref<boolean>(false)
 // #ifdef MP-WEIXIN
+const fabActive = ref<boolean>(false)
 // 横幅广告和格子广告可以共存，但插屏广告展示时，不显示横幅广告和格子广告
 const showWxAd = ref<boolean>(Math.random() > 0.5) // 横幅广告
 const showWxAd2 = ref<boolean>(Math.random() > 0.33) // 格子广告
@@ -109,6 +109,13 @@ onMounted(() => {
     nextTick(() => {
       interstitialAd && interstitialAd.show()
     })
+  }
+
+  if (enableRewardFab.value) {
+    const timer = setTimeout(() => {
+      clearTimeout(timer)
+      fabActive.value = true
+    }, 500)
   }
 
   // #endif
