@@ -58,13 +58,17 @@ pnpm add sass@1.78.0 -D
 <wd-button type="primary">主要按钮</wd-button>
 ```
 
+`Vue 3.2` 及以下版本可以使用如下配置开启`styleIsolation: 'shared'`选项：
 ```ts
+// vue
 <script lang="ts">
 export default {
   options: {
     styleIsolation: 'shared'
   }
 }
+</script>
+<script lang="ts" setup>
 </script>
 ```
 
@@ -74,21 +78,14 @@ export default {
   color: red !important;
 }
 ```
-
-什么？还有人想问：这样写还我怎么使用`script setup`啊！
-
-**_简单，这样写两个就行了_**
-
+`Vue 3.3+` 可以通过`defineOptions`开启`styleIsolation: 'shared'`选项：
 ```ts
-<script lang="ts">
-export default {
+<script lang="ts" setup>
+defineOptions({
   options: {
     styleIsolation: 'shared'
   }
-}
-</script>
-
-<script lang="ts" setup>
+})
 </script>
 ```
 
