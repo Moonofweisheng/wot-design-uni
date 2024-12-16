@@ -243,6 +243,10 @@ const list = ref([
         name: 'Loading 加载指示器'
       },
       {
+        id: 'loadingPage',
+        name: 'LoadingPage 加载页'
+      },
+      {
         id: 'messageBox',
         name: 'MessageBox 弹框'
       },
