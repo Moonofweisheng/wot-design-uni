@@ -19,7 +19,7 @@ export default {
 <script lang="ts" setup>
 import wdToast from '../wd-toast/wd-toast.vue'
 import { reactive, watch } from 'vue'
-import { deepClone, getPropByPath, isDef, isPromise } from '../common/util'
+import { deepClone, getPropByPath, isDef, isPromise, isString } from '../common/util'
 import { useChildren } from '../composables/useChildren'
 import { useToast } from '../wd-toast'
 import { type FormRules, FORM_KEY, type ErrorMessage, formProps, type FormExpose } from './types'
@@ -94,12 +94,9 @@ async function validate(prop?: string): Promise<{ valid: boolean; errors: ErrorM
                     valid = false
                   }
                 })
-                .catch((error: string | Error) => {
-                  const message = typeof error === 'string' ? error : error.message
-                  errors.push({
-                    prop,
-                    message: message || rule.message
-                  })
+                .catch((error?: string | Error) => {
+                  const message = isDef(error) ? (isString(error) ? error : error.message || rule.message) : rule.message
+                  errors.push({ prop, message })
                   valid = false
                 })
             )
