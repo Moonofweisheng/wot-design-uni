@@ -76,7 +76,7 @@ const emit = defineEmits(['update:modelValue', 'menuclick', 'change', 'open', 'c
 const queue = inject<Queue | null>(queueKey, null)
 const selector: string = 'popover'
 const { proxy } = getCurrentInstance() as any
-const popover = usePopover()
+const popover = usePopover(props.visibleArrow)
 
 const showPopover = ref<boolean>(false) // 控制popover显隐
 

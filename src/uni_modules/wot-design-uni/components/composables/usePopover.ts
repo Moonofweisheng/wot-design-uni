@@ -1,7 +1,7 @@
 import { getCurrentInstance, ref } from 'vue'
 import { getRect, isObj } from '../common/util'
 
-export function usePopover() {
+export function usePopover(visibleArrow = true) {
   const { proxy } = getCurrentInstance() as any
   const popStyle = ref<string>('')
   const arrowStyle = ref<string>('')
@@ -80,7 +80,7 @@ export function usePopover() {
     offset: number | number[] | Record<'x' | 'y', number>
   ) {
     // arrow size
-    const arrowSize = 9
+    const arrowSize = visibleArrow ? 9 : 0
     // 上下位（纵轴）对应的距离左边的距离
     const verticalX = width.value / 2
     // 上下位（纵轴）对应的距离底部的距离
