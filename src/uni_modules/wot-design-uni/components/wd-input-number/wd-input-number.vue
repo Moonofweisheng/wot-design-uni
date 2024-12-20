@@ -5,10 +5,11 @@
     </view>
     <view v-if="!withoutInput" class="wd-input-number__inner" @click.stop="">
       <input
+        v-if="!disableInput"
         class="wd-input-number__input"
         :style="`${inputWidth ? 'width: ' + inputWidth : ''}`"
         type="digit"
-        :disabled="disabled || disableInput"
+        :disabled="disabled"
         v-model="inputValue"
         :placeholder="placeholder"
         :adjust-position="adjustPosition"
@@ -16,6 +17,9 @@
         @focus="handleFocus"
         @blur="handleBlur"
       />
+      <view @click="handleClickInput" v-else :style="`${inputWidth ? 'width: ' + inputWidth : ''}`" class="wd-input-number__input">
+        {{ inputValue }}
+      </view>
       <view class="wd-input-number__input-border"></view>
     </view>
     <view :class="`wd-input-number__action ${maxDisabled || disablePlus ? 'is-disabled' : ''}`" @click="add">
@@ -42,7 +46,7 @@ import { debounce, isDef, isEqual } from '../common/util'
 import { inputNumberProps } from './types'
 
 const props = defineProps(inputNumberProps)
-const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue'])
+const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue', 'clickInput'])
 
 const minDisabled = ref<boolean>(false)
 const maxDisabled = ref<boolean>(false)
@@ -162,7 +166,9 @@ function handleInput(event: any) {
 function handleFocus(event: any) {
   emit('focus', event.detail)
 }
-
+function handleClickInput(event: any) {
+  emit('clickInput')
+}
 function handleBlur() {
   const value = formatValue(inputValue.value)
   if (!isEqual(inputValue.value, value)) {

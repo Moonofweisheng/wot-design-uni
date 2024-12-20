@@ -124,6 +124,7 @@ function handleChange1({ value }) {
 | change | 值修改事件 | ` { value }` | - |
 | focus | 输入框获取焦点事件 | ` { value, height }` | - |
 | blur | 输入框失去焦点事件 | ` { value }` | - |
+| clickInput | 禁用input框时点击触发 | 暂无 | - |
 
 ## 外部样式类
 
