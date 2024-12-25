@@ -10,7 +10,7 @@
       <slot />
       <!-- #ifdef MP-WEIXIN -->
       <!-- 横幅广告和格子广告可以共存，但插屏广告展示时，不显示横幅广告和格子广告 -->
-      <template v-if="useWxAd && !showWxAd3">
+      <template v-if="useWxAd && !showWxAd3 && !isFree">
         <ad-custom v-if="showWxAd" unit-id="adunit-06191d6d3d1ddfc4"></ad-custom>
         <ad-custom
           v-if="showWxAd2"
@@ -29,7 +29,7 @@
       <wd-button type="error" round @click="goToReward">
         <view style="display: flex; align-items: center">
           <wd-icon name="thumb-up" size="22px"></wd-icon>
-          观看激励视频广告为我助力
+          观看视频广告24h内免除广告
         </view>
       </wd-button>
     </wd-fab>
@@ -49,6 +49,7 @@ export default {
 import { computed, ref, onMounted, nextTick } from 'vue'
 import { setNotifyDefaultOptions, useQueue, type ConfigProviderThemeVars } from '@/uni_modules/wot-design-uni'
 import { useDark } from '../../store'
+import { useRewardAd } from '@/store/useRewardAd'
 
 interface Props {
   showDarkMode?: boolean
@@ -67,7 +68,7 @@ const props = withDefaults(defineProps<Props>(), {
 const enableRewardFab = computed(() => {
   return props.useRewardFab && (process.env.NODE_ENV === 'development' ? false : true)
 })
-
+const { isFree } = useRewardAd()
 const darkMode = useDark()
 const { closeOutside } = useQueue()
 const isDark = ref<boolean>(false)

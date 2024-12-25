@@ -24,11 +24,12 @@
 
 ## QQ 群
 
-目前 1 群已满，请加 2 群。
+目前 1、2 群已满，请加 3 群。
 
 <div style="display: flex;gap:24px;">
-  <img style="width: 250px; height: 250px;" :src="QQ1" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
-  <img style="width: 250px; height: 250px;" :src="QQ2" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
+  <img style="width: 250px; height: auto;" :src="QQ1" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
+  <img style="width: 250px; height: auto;" :src="QQ2" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
+  <img style="width: 250px; height: auto;" :src="QQ3" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
 </div>
 
 ***快速定位问题小技巧***
@@ -37,6 +38,7 @@
 3. 查看[Github issues](https://github.com/Moonofweisheng/wot-design-uni/issues)，是否有类似问题。
 4. 翻看[更新日志](/guide/changelog)，查看是否有相关更新。
 5. 学习[提问的智慧](https://lug.ustc.edu.cn/wiki/doc/smart-questions/)，如何快速提出正确的问题。
+6. 交流群主要是提供一个互助交流的平台，请友好交流，不做伸手党，感谢支持。
 
 <el-checkbox  v-model="checked" label="我已阅读以上沟通案例和小技巧，并保证提问时遵守以上规范" />
 
@@ -44,8 +46,10 @@
 <script setup>
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
-import QQ1 from '/QQ1.png'
-import QQ2 from '/QQ2.png'
+import QQ1 from '/QQ1.jpg'
+import QQ2 from '/QQ2.jpg'
+import QQ3 from '/QQ3.jpg'
+
 const checked = ref(false)
 
 function handleClick() {
