@@ -148,12 +148,8 @@ function getMergeRules() {
 }
 
 function showMessage(errors: ErrorMessage[]) {
-  const childrenProps = children.map((e) => e.prop).filter(Boolean)
-  const messages = errors.filter((error) => error.message && childrenProps.includes(error.prop))
+  const messages = errors.filter((error) => error.message)
   if (messages.length) {
-    messages.sort((a, b) => {
-      return childrenProps.indexOf(a.prop) - childrenProps.indexOf(b.prop)
-    })
     if (props.errorType === 'toast') {
       showToast(messages[0].message)
     } else if (props.errorType === 'message') {
