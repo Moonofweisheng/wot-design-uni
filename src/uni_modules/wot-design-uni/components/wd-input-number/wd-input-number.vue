@@ -174,9 +174,6 @@ function handleBlur() {
 }
 
 function dispatchChangeEvent(value: string | number, change: boolean = true) {
-  if (isEqual(inputValue.value, value)) {
-    return
-  }
   inputValue.value = value
   change && emit('update:modelValue', inputValue.value)
   change && emit('change', { value })
