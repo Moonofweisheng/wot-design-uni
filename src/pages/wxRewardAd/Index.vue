@@ -15,7 +15,7 @@
 import { useRewardAd } from '@/store/useRewardAd'
 import { pause } from '@/uni_modules/wot-design-uni/components/common/util'
 import { onMounted } from 'vue'
-const { createRewardVideoAd, showRewardAd, isFree } = useRewardAd()
+const { createRewardVideoAd, showRewardAd } = useRewardAd()
 
 onMounted(async () => {
   await pause()

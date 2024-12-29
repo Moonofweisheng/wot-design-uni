@@ -105,7 +105,7 @@ onMounted(() => {
   })
   // #ifdef MP-WEIXIN
   // 微信广告
-  if (uni.createInterstitialAd && showWxAd3.value && props.useWxAd) {
+  if (uni.createInterstitialAd && showWxAd3.value && props.useWxAd && !isFree.value) {
     interstitialAd = uni.createInterstitialAd({ adUnitId: 'adunit-fc8522e2b1185c89' })
     nextTick(() => {
       interstitialAd && interstitialAd.show()

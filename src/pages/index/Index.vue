@@ -39,6 +39,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import packageConfig from '../../../package.json'
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 
 const imgModules: any = import.meta.glob('../images/*.png', { eager: true })
 
@@ -402,6 +403,22 @@ function kindToggle(id: string) {
   }
   list.value = listValue
 }
+
+onShareAppMessage(() => {
+  return {
+    title: '一个基于Vue3+TS的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。',
+    path: '/pages/index/Index',
+    imageUrl: imgModules['../images/share.png'].default
+  }
+})
+
+onShareTimeline(() => {
+  return {
+    title: '一个基于Vue3+TS的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。',
+    path: '/pages/index/Index',
+    imageUrl: imgModules['../images/share.png'].default
+  }
+})
 </script>
 
 <style lang="scss" scoped>
