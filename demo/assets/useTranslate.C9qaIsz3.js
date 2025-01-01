@@ -1,0 +1,1 @@
+import{B as s,L as a,C as r,D as t}from"./page-wraper.BdjgkBfa.js";const e=e=>{const n=e?s(e)+".":"";return{translate:(s,...e)=>{const o=a.messages(),p=r(o,n+s);return t(p)?p(...e):p}}};export{e as u};
