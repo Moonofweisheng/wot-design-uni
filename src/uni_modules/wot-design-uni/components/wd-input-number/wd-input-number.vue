@@ -9,7 +9,7 @@
         :style="`${inputWidth ? 'width: ' + inputWidth : ''}`"
         type="digit"
         :disabled="disabled || disableInput"
-        v-model="inputValue"
+        :value="String(inputValue)"
         :placeholder="placeholder"
         :adjust-position="adjustPosition"
         @input="handleInput"
@@ -37,57 +37,51 @@ export default {
 
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { ref, watch } from 'vue'
-import { debounce, isDef, isEqual } from '../common/util'
+import { computed, nextTick, ref, watch } from 'vue'
+import { isDef, isEqual } from '../common/util'
 import { inputNumberProps } from './types'
+import { callInterceptor } from '../common/interceptor'
 
 const props = defineProps(inputNumberProps)
 const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue'])
+const inputValue = ref<string | number>(getInitValue()) // 输入框的值
 
-const minDisabled = ref<boolean>(false)
-const maxDisabled = ref<boolean>(false)
-const inputValue = ref<string | number>('') // 输入框的值
+// 减号是否禁用
+const minDisabled = computed(() => {
+  const value = formatValue(inputValue.value)
+  const { disabled, min, step } = props
+  return disabled || Number(value) <= min || changeStep(value, -step) < min
+})
+
+// 加号是否禁用
+const maxDisabled = computed(() => {
+  const value = formatValue(inputValue.value)
+  const { disabled, max, step } = props
+  return disabled || Number(value) >= max || changeStep(value, step) > max
+})
 
 watch(
   () => props.modelValue,
-  (newValue) => {
-    inputValue.value = newValue
-    splitDisabled(newValue)
-  },
-  { immediate: true, deep: true }
+  (value) => {
+    updateValue(value)
+  }
 )
 
-watch(
-  [() => props.max, () => props.min],
-  () => {
-    updateBoundary()
-  },
-  { immediate: true, deep: true }
-)
+watch([() => props.max, () => props.min, () => props.precision], () => {
+  const value = formatValue(inputValue.value)
+  updateValue(value)
+})
 
-watch(
-  () => props.disabled,
-  (newValue) => {
-    minDisabled.value = newValue
-    maxDisabled.value = newValue
-  },
-  { immediate: true, deep: true }
-)
-
-function updateBoundary() {
-  debounce(() => {
-    const value = formatValue(inputValue.value)
-    if (!isEqual(inputValue.value, value)) {
-      setValue(value)
-    }
-    splitDisabled(value)
-  }, 30)()
+function isValueEqual(value1: number | string, value2: number | string) {
+  return isEqual(String(value1), String(value2))
 }
 
-function splitDisabled(value: number | string) {
-  const { disabled, min, max, step } = props
-  minDisabled.value = disabled || Number(value) <= min || changeStep(value, -step) < min
-  maxDisabled.value = disabled || Number(value) >= max || changeStep(value, step) > max
+function getInitValue() {
+  const formatted = formatValue(props.modelValue)
+  if (!isValueEqual(formatted, props.modelValue)) {
+    emit('update:modelValue', formatted)
+  }
+  return formatted
 }
 
 function toPrecision(value: number) {
@@ -95,7 +89,7 @@ function toPrecision(value: number) {
 }
 
 function getPrecision(value?: number) {
-  if (value === undefined) return 0
+  if (!isDef(value)) return 0
   const valueString = value.toString()
   const dotPosition = valueString.indexOf('.')
   let precision = 0
@@ -111,75 +105,69 @@ function toStrictlyStep(value: number | string) {
   return (Math.round(Number(value) / props.step) * precisionFactory * props.step) / precisionFactory
 }
 
-function setValue(value: string | number, change: boolean = true) {
-  if (props.allowNull && (!isDef(value) || value === '')) {
-    dispatchChangeEvent(value, change)
+function updateValue(value: string | number, fromUser: boolean = false) {
+  if (isValueEqual(value, inputValue.value)) {
     return
   }
 
-  if (props.stepStrictly) {
-    value = toStrictlyStep(value)
+  const update = () => {
+    inputValue.value = value
+    const formatted = formatValue(value)
+    nextTick(() => {
+      inputValue.value = formatted
+      emit('update:modelValue', inputValue.value)
+      emit('change', { value: inputValue.value })
+    })
   }
-  if ((value || value === 0) && props.precision !== undefined) {
-    value = toPrecision(Number(value))
-  }
-  if (Number(value) > props.max) value = toPrecision(props.max)
-  if (Number(value) < props.min) value = toPrecision(props.min)
 
-  dispatchChangeEvent(value, change)
+  if (fromUser) {
+    callInterceptor(props.beforeChange, {
+      args: [value],
+      done: update
+    })
+  } else {
+    update()
+  }
 }
 
 function changeStep(val: string | number, step: number) {
   val = Number(val)
-
   if (isNaN(val)) {
     return props.min
   }
-
   const precisionFactory = Math.pow(10, props.precision)
   return toPrecision((val * precisionFactory + step * precisionFactory) / precisionFactory)
 }
 
-function sub() {
-  if (minDisabled.value || props.disableMinus) return
+function changeValue(step: number) {
+  if ((step < 0 && (minDisabled.value || props.disableMinus)) || (step > 0 && (maxDisabled.value || props.disablePlus))) return
+  const value = changeStep(inputValue.value, step)
+  updateValue(value, true)
+}
 
-  const newValue = changeStep(inputValue.value, -props.step)
-  dispatchChangeEvent(newValue)
+function sub() {
+  changeValue(-props.step)
 }
 
 function add() {
-  if (maxDisabled.value || props.disablePlus) return
-
-  const newValue = changeStep(inputValue.value, props.step)
-  dispatchChangeEvent(newValue)
+  changeValue(props.step)
 }
 
 function handleInput(event: any) {
   const value = event.detail.value || ''
-  dispatchChangeEvent(value)
+  updateValue(value, true)
 }
 
 function handleFocus(event: any) {
   emit('focus', event.detail)
 }
 
-function handleBlur() {
-  const value = formatValue(inputValue.value)
-  if (!isEqual(inputValue.value, value)) {
-    setValue(value)
-  }
+function handleBlur(event: any) {
+  const value = event.detail.value || ''
+  updateValue(value, true)
   emit('blur', {
     value
   })
-}
-
-function dispatchChangeEvent(value: string | number, change: boolean = true) {
-  if (isEqual(inputValue.value, value)) {
-    return
-  }
-  inputValue.value = value
-  change && emit('update:modelValue', inputValue.value)
-  change && emit('change', { value })
 }
 
 function formatValue(value: string | number) {
@@ -187,27 +175,23 @@ function formatValue(value: string | number) {
     return ''
   }
 
-  let formatValue = Number(value)
+  let formatted = Number(value)
 
-  if (isNaN(formatValue)) {
-    value = props.min
+  if (isNaN(formatted)) {
+    formatted = props.min
   }
 
   if (props.stepStrictly) {
-    formatValue = toStrictlyStep(value)
+    formatted = toStrictlyStep(value)
   }
 
-  if (props.precision !== undefined) {
-    formatValue = Number(formatValue.toFixed(props.precision))
-  }
-  if (formatValue > props.max) {
-    formatValue = props.max
-  }
-  if (formatValue < props.min) {
-    formatValue = props.min
+  formatted = Math.min(Math.max(formatted, props.min), props.max)
+
+  if (isDef(props.precision)) {
+    formatted = Number(formatted.toFixed(props.precision))
   }
 
-  return formatValue
+  return formatted
 }
 </script>
 
