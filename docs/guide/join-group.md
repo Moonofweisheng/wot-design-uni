@@ -22,11 +22,25 @@
 
 我在使用`Button`组件的`custom-class`属性来自定义样式时遇到了自定义样式不生效的问题，我阅读了官方文档和常见问题，但仍然无法解决，我将我的最小复现 demo 整理到复现仓库了，请问能否帮助排查问题？
 
-## QQ 群
+## 互助社群
+
+我们提供了 微信公众号、微信群 和 QQ 群，欢迎加入，一起交流学习。
+
+## 微信公众号
+
+欢迎关注公众号【阿鱼聊前端】，我是不如摸鱼去，将会在此公众号分享前端、uni-app与wot-ui组件库相关知识与经验。
+
+微信群可以通过公众号添加【摸鱼小助手】的微信，备注【加群】即可加入。
+
+<div style="display: flex;gap:24px;">
+  <img style="min-width: 250px;max-width:400px; height: auto;" :src="wechatPublicAccount" />
+</div>
+
+### QQ 群
 
 目前 1、2 群已满，请加 3 群。
 
-<div style="display: flex;gap:24px;">
+<div style="display: flex;gap:24px;flex-wrap: wrap;">
   <img style="width: 250px; height: auto;" :src="QQ1" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
   <img style="width: 250px; height: auto;" :src="QQ2" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
   <img style="width: 250px; height: auto;" :src="QQ3" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
@@ -40,7 +54,7 @@
 5. 学习[提问的智慧](https://lug.ustc.edu.cn/wiki/doc/smart-questions/)，如何快速提出正确的问题。
 6. 交流群主要是提供一个互助交流的平台，请友好交流，不做伸手党，感谢支持。
 
-<el-checkbox  v-model="checked" label="我已阅读以上沟通案例和小技巧，并保证提问时遵守以上规范" />
+<el-checkbox  v-model="checked" label="我已阅读，并保证提问时遵守以上规范" />
 
 
 <script setup>
@@ -49,12 +63,14 @@ import { ref } from 'vue'
 import QQ1 from '/QQ1.jpg'
 import QQ2 from '/QQ2.jpg'
 import QQ3 from '/QQ3.jpg'
+import wechatPublicAccount from '/wechatPublicAccount.png'
+
 
 const checked = ref(false)
 
 function handleClick() {
   if (!checked.value) {
-  ElMessageBox.alert('阅读以上沟通案例和小技巧，并保证提问时遵守相关规范后可以加群。以任何形式加入到群聊，即表示同意遵守相关规范，请知悉', '提示', {
+  ElMessageBox.alert('请阅读以上沟通案例和小技巧并在下方勾选我已阅读，保证提问时遵守相关规范后可以加群。以任何形式加入到群聊，即表示同意遵守相关规范，请知悉', '提示', {
     confirmButtonText: '我知道了',
   })
   }

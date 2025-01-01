@@ -71,7 +71,7 @@ export default defineConfig({
    `]
   ],
   themeConfig: {
-    logo: '/wot-design.png',
+    logo: '/logo.png',
     lastUpdated: {
       text: '最后更新'
     },

@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="logo" src="https://wot-design-uni.pages.dev/wot-design.png" width="200">
+    <img alt="logo" src="https://wot-design-uni.cn/logo.png" width="200">
 </p>
 <h1 align="center">Wot Design Uni</h1>
 
