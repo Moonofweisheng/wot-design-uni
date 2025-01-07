@@ -1,3 +1,11 @@
+/*
+ * @Author: 810505339
+ * @Date: 2025-01-03 14:09:33
+ * @LastEditors: 810505339
+ * @LastEditTime: 2025-01-07 13:44:45
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-switch\types.ts
+ * 记得注释
+ */
 import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, numericProp } from '../common/props'
 
@@ -44,6 +52,14 @@ export const switchProps = {
    * 非激活颜色
    */
   inactiveColor: String,
+  /**
+   * 激活的文字
+   */
+  activeText: String,
+  /**
+   * 非激活的文字
+   */
+  inactiveText: String,
   /**
    * 大小
    */

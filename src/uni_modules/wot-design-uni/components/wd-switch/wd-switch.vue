@@ -1,5 +1,8 @@
 <template>
   <view :class="rootClass" :style="rootStyle" @click="switchValue">
+    <view class="wd-switch__inner" v-if="innerText">
+      {{ innerText }}
+    </view>
     <view class="wd-switch__circle" :style="circleStyle"></view>
   </view>
 </template>
@@ -43,6 +46,10 @@ const circleStyle = computed(() => {
       ? 'box-shadow: none;'
       : ''
   return circleStyle
+})
+
+const innerText = computed(() => {
+  return props.modelValue === props.activeValue ? props.activeText : props.inactiveText
 })
 
 function switchValue() {
