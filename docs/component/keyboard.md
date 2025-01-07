@@ -272,7 +272,7 @@ const onDelete = () => showToast('删除')
 | lockScroll          | 是否锁定滚动       | `boolean`             | -                        | `true`    | 1.3.10 |
 | safeAreaInsetBottom | 是否在底部安全区域内   | `boolean`             | -                        | `true`    | 1.3.10 |
 | extraKey            | 额外按键         | `string` / `string[]` | -                        | -         | 1.3.10 |
-| carLang             | 车牌号键盘布局，仅适用于 `mode="car"` 模式    | `string`              |     `zh`, `en`           |   `zh`       | 1.5.2  |
+| carLang             | 车牌号键盘布局，仅适用于 `mode="car"` 模式    | `string`              |     `zh`, `en`           |   `zh`       | $LOWEST_VERSION$  |
 
 ## Slot
 
