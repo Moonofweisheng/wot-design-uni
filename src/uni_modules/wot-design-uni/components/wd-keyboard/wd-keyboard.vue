@@ -70,6 +70,14 @@ watch(
 )
 
 const carKeyboardLang = ref('zh')
+
+watch(
+  () => props.carLang,
+  (newValue) => {
+    carKeyboardLang.value = newValue
+  }
+)
+
 const keys = computed(() => (props.mode !== 'car' ? (props.mode === 'custom' ? genCustomKeys() : genDefaultKeys()) : genCarKeys()))
 
 const showClose = computed(() => {
@@ -135,7 +143,7 @@ function genCarKeys(): Array<Key> {
   const [keys, remainKeys] = splitCarKeys()
   return [
     ...keys,
-    { text: carKeyboardLang.value === 'zh' ? 'ABC' : '返回', type: 'extra', wider: true },
+    { text: carKeyboardLang.value === 'zh' ? 'ABC' : '汉字', type: 'extra', wider: true },
     ...remainKeys,
     { text: props.deleteText, type: 'delete', wider: true }
   ]
@@ -155,7 +163,7 @@ const handlePress = (text: string, type: NumberKeyType) => {
   if (type === 'extra') {
     if (text === '') {
       return handleClose()
-    } else if (text === 'ABC' || text === '返回') {
+    } else if (text === 'ABC' || text === '汉字') {
       carKeyboardLang.value = carKeyboardLang.value === 'zh' ? 'en' : 'zh'
       return
     }

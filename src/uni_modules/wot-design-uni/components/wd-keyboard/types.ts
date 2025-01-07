@@ -3,6 +3,7 @@ import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../c
 
 export type KeyboardMode = 'default' | 'custom' | 'car'
 export type KeyType = '' | 'delete' | 'extra' | 'close'
+export type CarKeyboardLang = '' | 'zh' | 'en'
 
 export interface Key {
   text?: number | string // key文本
@@ -75,5 +76,9 @@ export const keyboardProps = {
   /**
    * 额外按键
    */
-  extraKey: [String, Array] as PropType<string | Array<string>>
+  extraKey: [String, Array] as PropType<string | Array<string>>,
+  /**
+   * 车牌键盘中/英文模式，在 `mode` 为 `car` 时生效
+   */
+  carLang: makeStringProp<CarKeyboardLang>('zh')
 }

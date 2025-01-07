@@ -44,7 +44,7 @@
 
     <wd-keyboard :modal="true" v-model:visible="visible8" @input="onInput" @delete="onDelete" />
 
-    <wd-keyboard v-model:visible="visible10" mode="car" @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model:visible="visible10" mode="car" @input="onInputCar" @delete="onDeleteCar" :carLang="carLang" />
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -66,11 +66,29 @@ const visibleArr = [visible1, visible2, visible3, visible4, visible5, visible6, 
 
 const value1 = ref<string>('')
 
+const carLang = ref<'zh' | 'en'>('zh')
+const carNum = ref<string>('')
+
 function showKeyBoard(index: number) {
   visibleArr.forEach((item, i) => (i === index - 1 ? (item.value = true) : (item.value = false)))
 }
 
 const onInput = (value: string) => showToast(`${value}`)
+const onInputCar = (value: string) => {
+  carNum.value = carNum.value + value
+  showToast(`${carNum.value}`)
+  carLang.value = carNum.value.length > 0 ? 'en' : 'zh'
+}
 const onDelete = () => showToast('删除')
+const onDeleteCar = () => {
+  carNum.value = carNum.value.slice(0, -1)
+  if (carNum.value.length === 0) {
+    showToast('删除')
+    carLang.value = 'zh'
+  } else {
+    showToast(`${carNum.value}`)
+    carLang.value = carNum.value.length > 0 ? 'en' : 'zh'
+  }
+}
 </script>
 <style lang="scss" scoped></style>

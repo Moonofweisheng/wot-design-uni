@@ -70,24 +70,39 @@ const onDelete = () => showToast('删除')
 
 ## 车牌号键盘
 
-将 `mode` 属性设置为 `car` 来展示车牌号键盘，常用于输入车牌号的场景。
+将 `mode` 属性设置为 `car` 来展示车牌号键盘，常用于输入车牌号的场景。 通过设置 `carLang` 属性可以控制车牌号键盘的键盘布局，默认为 `zh`，可以设置为 `en`。
 
 ```html
 <wd-cell title="车牌号键盘" is-link @click="showKeyBoard" />
 
-<wd-keyboard v-model:visible="visible" mode="car" @input="onInput" @delete="onDelete"></wd-keyboard>
+<wd-keyboard v-model:visible="visible" mode="car" @input="onInputCar" @delete="onDeleteCar" :carLang="carLang"></wd-keyboard>
 ```
 
 ```ts
 const { show: showToast } = useToast()
 const visible = ref<boolean>(false)
+const carLang = ref<'zh' | 'en'>('zh');
+const carNum = ref<string>('');
 
 function showKeyBoard() {
   visible.value = true
 }
 
-const onInput = (value) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
+const onInputCar = (value: string) => {
+  carNum.value = carNum.value + value
+  showToast(`${carNum.value}`)
+  carLang.value = carNum.value.length > 0 ? 'en' : 'zh'
+}
+const onDeleteCar = () => {
+  carNum.value = carNum.value.slice(0, -1)
+  if (carNum.value.length === 0) {
+    showToast("删除")
+    carLang.value = "zh"
+  } else {
+    showToast(`${carNum.value}`)
+    carLang.value = carNum.value.length > 0 ? 'en' : 'zh'
+  }
+}
 ```
 
 ## 带标题的键盘
@@ -239,24 +254,25 @@ const onDelete = () => showToast('删除')
 
 ## Attributes
 
-| 参数                | 说明                     | 类型                  | 可选值                     | 默认值     | 最低版本         |
-| ------------------- | ------------------------ | --------------------- | -------------------------- | ---------- | ---------------- |
-| v-model:visible     | 是否展开                 | `boolean`             | -                          | `false`    | 1.3.10           |
-| v-model             | 绑定的值                 | `string`              | -                          | -          | 1.3.10           |
-| title               | 标题                     | `string`              | -                          | -          | 1.3.10           |
-| mode                | 键盘模式                 | `string`              | `default`, `car`, `custom` | `default`  | 1.3.10 |
-| zIndex              | 层级                     | `number`              | -                          | `100`      | 1.3.10           |
-| maxlength           | 最大长度                 | `number`              | -                          | `Infinity` | 1.3.10           |
-| showDeleteKey       | 是否显示删除键           | `boolean`             | -                          | `true`     | 1.3.10           |
-| randomKeyOrder      | 是否随机键盘按键顺序     | `boolean`             | -                          | `false`    | 1.3.10           |
-| closeText           | 确认按钮文本             | `string`              | -                          | -          | 1.3.10           |
-| deleteText          | 删除按钮文本             | `string`              | -                          | -          | 1.3.10           |
-| closeButtonLoading  | 关闭按钮是否显示加载状态 | `boolean`             | -                          | `false`    | 1.3.10           |
-| modal               | 是否显示蒙层遮罩         | `boolean`             | -                          | `false`    | 1.3.10           |
-| hideOnClickOutside  | 是否在点击外部时收起键盘 | `boolean`             | -                          | `true`     | 1.3.10           |
-| lockScroll          | 是否锁定滚动             | `boolean`             | -                          | `true`     | 1.3.10           |
-| safeAreaInsetBottom | 是否在底部安全区域内     | `boolean`             | -                          | `true`     | 1.3.10           |
-| extraKey            | 额外按键                 | `string` / `string[]` | -                          | -          | 1.3.10           |
+| 参数                  | 说明           | 类型                    | 可选值                      | 默认值     | 最低版本   |
+|---------------------|--------------|-----------------------|--------------------------| --------- |--------|
+| v-model:visible     | 是否展开         | `boolean`             | -                        | `false`   | 1.3.10 |
+| v-model             | 绑定的值         | `string`              | -                        | -         | 1.3.10 |
+| title               | 标题           | `string`              | -                        | -         | 1.3.10 |
+| mode                | 键盘模式         | `string`              | `default`, `car`, `custom` | `default` | 1.3.10 |
+| zIndex              | 层级           | `number`              | -                        | `100`     | 1.3.10 |
+| maxlength           | 最大长度         | `number`              | -                        | `Infinity` | 1.3.10 |
+| showDeleteKey       | 是否显示删除键      | `boolean`             | -                        | `true`    | 1.3.10 |
+| randomKeyOrder      | 是否随机键盘按键顺序   | `boolean`             | -                        | `false`   | 1.3.10 |
+| closeText           | 确认按钮文本       | `string`              | -                        | -         | 1.3.10 |
+| deleteText          | 删除按钮文本       | `string`              | -                        | -         | 1.3.10 |
+| closeButtonLoading  | 关闭按钮是否显示加载状态 | `boolean`             | -                        | `false`   | 1.3.10 |
+| modal               | 是否显示蒙层遮罩     | `boolean`             | -                        | `false`   | 1.3.10 |
+| hideOnClickOutside  | 是否在点击外部时收起键盘 | `boolean`             | -                        | `true`    | 1.3.10 |
+| lockScroll          | 是否锁定滚动       | `boolean`             | -                        | `true`    | 1.3.10 |
+| safeAreaInsetBottom | 是否在底部安全区域内   | `boolean`             | -                        | `true`    | 1.3.10 |
+| extraKey            | 额外按键         | `string` / `string[]` | -                        | -         | 1.3.10 |
+| carLang             | 车牌号键盘布局，仅适用于 `mode="car"` 模式    | `string`              |     `zh`, `en`           |   `zh`       | 1.5.2  |
 
 ## Slot
 
