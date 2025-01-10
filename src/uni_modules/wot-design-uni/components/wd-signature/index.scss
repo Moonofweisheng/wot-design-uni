@@ -1,0 +1,27 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(signature) {
+  @include e(context){
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    background: $-signature-bg;
+    border-radius:$-signature-radius;
+    border:$-signature-border;
+    height: 200px;
+    & canvas{
+      width: 100%;
+      height: 100%;
+    }
+
+    
+  }
+  @include e(footer)
+  {
+    margin-top: 4px;
+    justify-content: flex-end;
+    display: flex;
+  }  
+}
