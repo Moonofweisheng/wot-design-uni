@@ -2,7 +2,7 @@
  * @Author: 810505339
  * @Date: 2025-01-10 20:03:57
  * @LastEditors: 810505339
- * @LastEditTime: 2025-01-11 20:01:47
+ * @LastEditTime: 2025-01-11 23:03:44
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-signature\types.ts
  * 记得注释
  */
@@ -55,7 +55,7 @@ export const signatureProps = {
 export type FileType = {
   tempFilePath: string
   width: number
-  hight: number
+  height: number
 }
 export type SignatureExpose = {
   /** 点击清除按钮清除签名 */
