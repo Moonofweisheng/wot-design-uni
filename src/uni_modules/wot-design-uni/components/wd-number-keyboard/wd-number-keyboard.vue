@@ -50,6 +50,7 @@ import type { NumberKeyType } from './key/types'
 
 const props = defineProps(numberKeyboardProps)
 const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue'])
+const slots = defineSlots()
 
 const show = ref(props.visible)
 watch(
@@ -62,11 +63,11 @@ watch(
 const keys = computed(() => (props.mode === 'custom' ? genCustomKeys() : genDefaultKeys()))
 
 const showClose = computed(() => {
-  return props.closeText && props.mode === 'default'
+  return props.closeText
 })
 
 const showTitle = computed(() => {
-  return props.title || showClose.value
+  return props.title || slots.title || showClose.value
 })
 
 /**
