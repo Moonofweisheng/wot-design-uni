@@ -35,7 +35,7 @@
           <wd-button v-bind="customCancelProps" v-if="messageState.showCancelButton" @click="toggleModal('cancel')">
             {{ messageState.cancelButtonText || translate('cancel') }}
           </wd-button>
-          <wd-button v-bind="customConfirmProps" @click="toggleModal('confirm')">
+          <wd-button v-bind="customConfirmProps" v-if="messageState.showConfirmButton" @click="toggleModal('confirm')">
             {{ messageState.confirmButtonText || translate('confirm') }}
           </wd-button>
         </view>
@@ -84,6 +84,7 @@ const messageState = reactive<MessageOptionsWithCallBack>({
   msg: '', // 消息内容
   show: false, // 是否显示弹框
   title: '', // 标题
+  showConfirmButton: true, // 是否展示确定按钮
   showCancelButton: false, // 是否展示取消按钮
   closeOnClickModal: true, // 是否支持点击蒙层关闭
   confirmButtonText: '', // 确定按钮文案
@@ -259,6 +260,7 @@ function inputValChange({ value }: { value: string | number }) {
 function reset(option: MessageOptionsWithCallBack) {
   if (option) {
     messageState.title = isDef(option.title) ? option.title : ''
+    messageState.showConfirmButton = isDef(option.showConfirmButton) ? option.showConfirmButton : true
     messageState.showCancelButton = isDef(option.showCancelButton) ? option.showCancelButton : false
     messageState.show = option.show
     messageState.closeOnClickModal = option.closeOnClickModal
