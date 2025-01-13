@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-12-14 11:21:58
- * @LastEditTime: 2024-03-18 12:50:41
+ * @LastEditTime: 2025-01-11 13:31:20
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-form\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-form/types.ts
  * 记得注释
  */
 import { type ComponentPublicInstance, type ExtractPropTypes, type InjectionKey, type PropType } from 'vue'
@@ -72,7 +72,7 @@ export type FormExpose = {
    * 表单校验
    * @param prop 指定校验字段
    */
-  validate: (prop?: string) => Promise<{
+  validate: (prop?: string | Array<string>) => Promise<{
     valid: boolean
     errors: ErrorMessage[]
   }>
