@@ -262,6 +262,8 @@ MessageBox.prompt(options)
 | inputPattern         | 当 type 为 prompt 时，输入框正则校验，点击确定按钮时进行校验                    | regex           | -                        | -                | -                |
 | inputValidate        | 当 type 为 prompt 时，输入框校验函数，点击确定按钮时进行校验                    | function        | -                        | -                | -                |
 | inputError           | 当 type 为 prompt 时，输入框检验不通过时的错误提示文案                          | string          | -                        | 输入的数据不合法 | -                |
+| showConfirmButton    | 是否展示确定按钮                                                                    | boolean          | -                        | true             |
+| showCancelButton    | 是否展示取消按钮                                                                    | boolean          | -                        | 当 type 为 confirm 或 prompt 时默认为 true，其它调用类型默认为 false             |
 | confirmButtonText    | 确定按钮文案                                                                    | string          | -                        | 确定             | -                |
 | cancelButtonText     | 取消按钮文案                                                                    | string          | -                        | 取消             | -                |
 | selector             | 指定唯一标识                                                                    | string          | -                        | #wd-message-box  | -                |
