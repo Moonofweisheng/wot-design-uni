@@ -29,7 +29,7 @@
       <wd-button type="error" round @click="goToReward">
         <view style="display: flex; align-items: center">
           <wd-icon name="thumb-up" size="22px"></wd-icon>
-          观看视频广告24h内免除广告
+          看视频免广告
         </view>
       </wd-button>
     </wd-fab>

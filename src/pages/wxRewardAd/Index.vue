@@ -3,25 +3,21 @@
     <div class="ad-completion-message">
       <div class="message-title">感谢你愿意来观看广告！</div>
       <div class="message-content">观看成功就已经成功为我助力！</div>
-      <div class="message-content">观看一次即可免除24h内的页面贴片和插屏广告！</div>
+      <div class="message-content">观看一次即可在24h内免除页面贴片和插屏广告！</div>
       <view class="button-group">
         <wd-button type="success" block @click="back">返回使用</wd-button>
-        <wd-button type="error" block @click="showAd">再次观看</wd-button>
+        <wd-button type="error" block @click="showAd">观看视频</wd-button>
       </view>
     </div>
   </page-wraper>
 </template>
 <script setup lang="ts">
 import { useRewardAd } from '@/store/useRewardAd'
-import { pause } from '@/uni_modules/wot-design-uni/components/common/util'
 import { onMounted } from 'vue'
 const { createRewardVideoAd, showRewardAd } = useRewardAd()
 
 onMounted(async () => {
-  await pause()
   createRewardVideoAd()
-  await pause()
-  showRewardAd()
 })
 
 function back() {
