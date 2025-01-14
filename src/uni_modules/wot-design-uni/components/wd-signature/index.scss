@@ -1,0 +1,23 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(signature) {
+  @include e(context){
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    background: $-signature-bg;
+    border-radius:$-signature-radius;
+    border:$-signature-border;
+  }
+  @include e(footer)
+  {
+    margin-top: 4px;
+    justify-content: flex-end;
+    display: flex;
+    & .wd-button + .wd-button{
+      margin-left: 4px;
+    }
+  }  
+}

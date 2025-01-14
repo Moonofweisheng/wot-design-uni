@@ -1,3 +1,11 @@
+/*
+ * @Author: 810505339
+ * @Date: 2025-01-11 23:03:12
+ * @LastEditors: 810505339
+ * @LastEditTime: 2025-01-11 23:03:24
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\global.d.ts
+ * 记得注释
+ */
 declare module 'vue' {
   // Helper for Volar
   export interface GlobalComponents {
@@ -92,6 +100,7 @@ declare module 'vue' {
     WdText: typeof import('./components/wd-text/wd-text.vue')['default']
     WdCountTo: typeof import('./components/wd-count-to/wd-count-to.vue')['default']
     WdFloatingPanel: typeof import('./components/wd-floating-panel/wd-floating-panel.vue')['default']
+    WdSignature: typeof import('./components/wd-signature/wd-signature.vue')['default']
   }
 }
 

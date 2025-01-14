@@ -27,7 +27,6 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-
         "navigationBarTitleText": "Icon 图标"
       }
     },
@@ -803,6 +802,16 @@
       }
     },
     {
+      "path": "pages/signature/Index",
+      "name": "signature",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Signature 签名"
+      }
+    },
+    {
       "path": "pages/backtop/Index",
       "name": "backtop",
       "style": {
@@ -858,7 +867,6 @@
     "backgroundColorTop": "@bgColorTop",
     "backgroundColorBottom": "@bgColorBottom",
     "navigationStyle": "default"
-
     // "navigationBarTextStyle": "black",
     // "navigationBarBackgroundColor": "#FFF",
     // "backgroundColor": "#F8F8F8"
