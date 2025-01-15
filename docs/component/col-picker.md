@@ -212,13 +212,13 @@ const area = ref<any[]>([
       label: item.text
     }
   }),
-  findChildrenByCode(colPickerData, '130000')!.map((item) => {
+  findChildrenByCode(colPickerData, '150000')!.map((item) => {
     return {
       value: item.value,
       label: item.text
     }
   }),
-  findChildrenByCode(colPickerData, '130200')!.map((item) => {
+  findChildrenByCode(colPickerData, '150100')!.map((item) => {
     return {
       value: item.value,
       label: item.text
