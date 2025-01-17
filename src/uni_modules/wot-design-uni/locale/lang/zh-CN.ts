@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: '序号'
+  },
+  signature: {
+    confirmText: '确认',
+    clearText: '清空'
   }
 }

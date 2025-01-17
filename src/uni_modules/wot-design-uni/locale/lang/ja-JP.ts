@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: '索引'
+  },
+  signature: {
+    confirmText: '確認',
+    clearText: 'クリア'
   }
 }

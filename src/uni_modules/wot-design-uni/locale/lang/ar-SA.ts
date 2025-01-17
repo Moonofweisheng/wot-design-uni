@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: 'فهرس'
+  },
+  signature: {
+    confirmText: 'تأكيد',
+    clearText: 'مسح'
   }
 }

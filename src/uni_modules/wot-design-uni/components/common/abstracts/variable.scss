@@ -958,3 +958,8 @@ $-floating-panel-content-bg: var(--wot-floating-panel-content-bg, $-color-white)
 $-signature-bg: var(--wot-signature-bg, $-color-white) !default; // 背景色
 $-signature-radius: var(--wot-signature-radius, 4px) !default; // 圆角
 $-signature-border: var(--wot-signature-border, 1px solid $-color-gray-5) !default; // 边框圆角
+$-signature-footer-margin-top: var(--wot-signature-footer-margin-top, 8px) !default; // 底部按钮上边距
+$-signature-button-margin-left: var(--wot-signature-button-margin-left, 8px) !default; // 底部按钮左边距
+
+
+

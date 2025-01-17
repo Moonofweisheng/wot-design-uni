@@ -64,5 +64,9 @@ export default {
   textarea: { placeholder: 'Vui lòng nhập...' },
   tableCol: {
     indexLabel: 'Số sê-ri'
+  },
+  signature: {
+    confirmText: 'Xác nhận',
+    clearText: 'Xóa'
   }
 }

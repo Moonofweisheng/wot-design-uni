@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: 'หมายเลขซีเรียล'
+  },
+  signature: {
+    confirmText: 'ยืนยัน',
+    clearText: 'ล้าง'
   }
 }

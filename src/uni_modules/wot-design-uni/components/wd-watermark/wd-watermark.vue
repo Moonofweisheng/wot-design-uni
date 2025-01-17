@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-04-05 21:32:56
- * @LastEditTime: 2024-04-01 20:40:34
+ * @LastEditTime: 2025-01-16 21:43:47
  * @LastEditors: weisheng
  * @Description: 水印组件
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-watermark/wd-watermark.vue
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch, nextTick } from 'vue'
+import { computed, onMounted, ref, watch, nextTick, type CSSProperties } from 'vue'
 import { addUnit, buildUrlWithParams, isBase64Image, objToStyle, uuid } from '../common/util'
 import { watermarkProps } from './types'
 
@@ -68,7 +68,7 @@ const rootClass = computed(() => {
  * 水印样式
  */
 const rootStyle = computed(() => {
-  const style: Record<string, string | number> = {
+  const style: CSSProperties = {
     opacity: props.opacity,
     backgroundSize: addUnit(props.width + props.gutterX)
   }
