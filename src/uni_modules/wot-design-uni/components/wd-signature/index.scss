@@ -2,22 +2,29 @@
 @import '../common/abstracts/mixin';
 
 @include b(signature) {
-  @include e(context){
+  @include e(content) {
     justify-content: center;
     align-items: center;
     display: flex;
     overflow: hidden;
     background: $-signature-bg;
-    border-radius:$-signature-radius;
-    border:$-signature-border;
+    border-radius: $-signature-radius;
+    border: $-signature-border;
   }
-  @include e(footer)
-  {
-    margin-top: 4px;
+
+  @include e(content-canvas) {
+    width: 100%;
+  }
+
+  @include e(footer) {
+    margin-top: $-signature-footer-margin-top;
     justify-content: flex-end;
     display: flex;
-    & .wd-button + .wd-button{
-      margin-left: 4px;
+
+    :deep(){
+      .wd-button{
+        margin-left: $-signature-button-margin-left;
+      }
     }
-  }  
+  }
 }

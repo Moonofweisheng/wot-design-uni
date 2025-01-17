@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: 'Número'
+  },
+  signature: {
+    confirmText: 'Concluir',
+    clearText: 'Limpar'
   }
 }
