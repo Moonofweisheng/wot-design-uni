@@ -30,8 +30,8 @@
           @play="handleVideoPaly"
           @pause="handleVideoPause"
           :enable-progress-gesture="false"
-          loop
-          muted
+          :loop="videoLoop"
+          :muted="muted"
           :autoplay="autoplayVideo"
           objectFit="cover"
           @click="handleClick(index, item)"

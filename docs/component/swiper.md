@@ -327,6 +327,8 @@ const isLoop = ref(false)
 | text-key          | 选项对象中，标题 text 对应的 key        | `string`       | -       | `text`           | 1.3.13   |
 | adjust-height      | 自动以指定滑块的高度为整个容器的高度。当 vertical 为 true 时，默认不调整，仅支付宝小程序支持。| `string`       | `'first' \| 'current' \| 'highest' \| 'none'`       |   `highest`  | 1.3.13   |
 | adjust-vertical-height | vertical 为 true 时强制使 adjust-height 生效。仅支付宝小程序支持。 | `boolean`       | -       | `false`           | 1.3.13   |
+｜ muted | 视频是否静音播放 | `boolean` | - | `true` | $LOWEST_VERSION$ |
+| videoLoop | 视频是否循环播放 | `boolean` | - | `true` | $LOWEST_VERSION$ |
 
 
 
