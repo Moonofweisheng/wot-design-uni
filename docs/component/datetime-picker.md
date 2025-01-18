@@ -268,7 +268,7 @@ const displayFormatTabLabel = (items) => {
 | confirm-button-text | 确认按钮文案 | string | - | 完成 | - |
 | label | 选择器左侧文案，label可以不传 | string | - | - | - |
 | placeholder | 选择器占位符 | string | - | 请选择 | - |
-| disabled | 禁用 | boolean | - | fasle | - |
+| disabled | 禁用 | boolean | - | false | - |
 | readonly | 只读 | boolean | - | false | - |
 | display-format | 自定义展示文案的格式化函数，返回一个字符串 | function | - | - | - |
 | formatter | 自定义弹出层选项文案的格式化函数，返回一个字符串 | function | - | - | - |

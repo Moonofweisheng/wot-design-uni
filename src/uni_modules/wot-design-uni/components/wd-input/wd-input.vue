@@ -43,6 +43,7 @@
           :always-embed="alwaysEmbed"
           :placeholder-class="inputPlaceholderClass"
           :ignoreCompositionEvent="ignoreCompositionEvent"
+          :inputmode="inputmode"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
@@ -56,9 +57,9 @@
           <view v-if="showWordCount" class="wd-input__count">
             <text
               :class="[
-                inputValue && String(inputValue).length > 0 ? 'wd-input__count-current' : '',
-                String(inputValue).length > maxlength! ? 'is-error' : ''
-              ]"
+              inputValue && String(inputValue).length > 0 ? 'wd-input__count-current' : '',
+              String(inputValue).length > maxlength! ? 'is-error' : ''
+            ]"
             >
               {{ String(inputValue).length }}
             </text>
@@ -87,7 +88,7 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import { isDef, objToStyle, pause } from '../common/util'
+import { isDef, objToStyle, pause, isEqual } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -114,7 +115,7 @@ const isPwdVisible = ref<boolean>(false)
 const clearing = ref<boolean>(false) // 是否正在清空操作，避免重复触发失焦
 const focused = ref<boolean>(false) // 控制聚焦
 const focusing = ref<boolean>(false) // 当前是否激活状态
-const inputValue = ref<string | number>('') // 输入框的值
+const inputValue = ref<string | number>(getInitValue()) // 输入框的值
 const cell = useCell()
 
 watch(
@@ -129,8 +130,7 @@ watch(
   () => props.modelValue,
   (newValue) => {
     inputValue.value = isDef(newValue) ? String(newValue) : ''
-  },
-  { immediate: true, deep: true }
+  }
 )
 
 const { parent: form } = useParent(FORM_KEY)
@@ -209,14 +209,13 @@ const labelStyle = computed(() => {
     : ''
 })
 
-onBeforeMount(() => {
-  initState()
-})
-
 // 状态初始化
-function initState() {
-  inputValue.value = formatValue(inputValue.value)
-  emit('update:modelValue', inputValue.value)
+function getInitValue() {
+  const formatted = formatValue(props.modelValue)
+  if (!isValueEqual(formatted, props.modelValue)) {
+    emit('update:modelValue', formatted)
+  }
+  return formatted
 }
 
 function formatValue(value: string | number) {
@@ -282,6 +281,9 @@ function onClickPrefixIcon() {
 }
 function handleClick(event: MouseEvent) {
   emit('click', event)
+}
+function isValueEqual(value1: number | string, value2: number | string) {
+  return isEqual(String(value1), String(value2))
 }
 </script>
 

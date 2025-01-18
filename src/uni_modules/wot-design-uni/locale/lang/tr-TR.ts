@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: 'Sıra No'
+  },
+  signature: {
+    confirmText: 'İmzala',
+    clearText: 'Temizle'
   }
 }

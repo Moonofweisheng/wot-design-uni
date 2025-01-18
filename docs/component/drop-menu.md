@@ -252,5 +252,5 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 | custom-class       | DropMenuItem 根节点样式     | -                |
 | custom-title       | DropMenuItem 左侧文字样式   | -                |
 | custom-icon        | DropMenuItem 右侧 icon 样式 | -                |
-| custom-popup-class | 自定义下拉菜单 popup 样式类 | $LOWEST_VERSION$ |
-| custom-popup-style | 自定义下拉菜单 popup 样式   | $LOWEST_VERSION$ |
+| custom-popup-class | 自定义下拉菜单 popup 样式类 | 1.5.0 |
+| custom-popup-style | 自定义下拉菜单 popup 样式   | 1.5.0 |

@@ -9,7 +9,7 @@ export const dividerProps = {
   /**
    * 自定义颜色
    */
-  color: makeStringProp(''),
+  color: String,
   /**
    * 内容位置，可选值为 `left` `right` `center`
    * 默认值：`center`

@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: '인덱스'
+  },
+  signature: {
+    confirmText: '확인',
+    clearText: '지우기'
   }
 }

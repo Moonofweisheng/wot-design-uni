@@ -189,7 +189,7 @@ function beforeConfirm() {
 }
 ```
 
-## 自定义操作按钮<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+## 自定义操作按钮<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.5.0</el-tag>
 
 可以通过按钮属性 `cancel-button-props` 和 `confirm-button-props` 自定义操作按钮的样式，具体参考 [Button Attributes](/component/button.html#attributes)。
 
@@ -267,8 +267,8 @@ MessageBox.prompt(options)
 | selector             | 指定唯一标识                                                                    | string          | -                        | #wd-message-box  | -                |
 | zIndex               | 弹窗层级                                                                        | number          | -                        | 99               | -                |
 | lazyRender           | 弹层内容懒渲染，触发展示时才渲染内容                                            | boolean         | -                        | true             | -                |
-| cancel-button-props  | 取消按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | $LOWEST_VERSION$ |
-| confirm-button-props | 确定按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | $LOWEST_VERSION$ |
+| cancel-button-props  | 取消按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | 1.5.0 |
+| confirm-button-props | 确定按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | 1.5.0 |
 
 ## 外部样式类
 

@@ -17,7 +17,7 @@
 ## 有没有技术交流群？
 
 有！
-可以加入[组件库互助 QQ 群](/guide/join-group.html)，分享心得、交流体会。
+可以加入[Wot UI 互助群](/guide/join-group.html)，分享心得、交流体会。
 
 ## Sass抛出大量错误和警告？
 `Dart Sass 3.0.0` 废弃了一批API，而组件库目前还未兼容，因此请确保你的`sass`版本为`1.78.0`及之前的版本。可以通过以下命令安装指定版本：
@@ -58,13 +58,17 @@ pnpm add sass@1.78.0 -D
 <wd-button type="primary">主要按钮</wd-button>
 ```
 
+`Vue 3.2` 及以下版本可以使用如下配置开启`styleIsolation: 'shared'`选项：
 ```ts
+// vue
 <script lang="ts">
 export default {
   options: {
     styleIsolation: 'shared'
   }
 }
+</script>
+<script lang="ts" setup>
 </script>
 ```
 
@@ -74,21 +78,14 @@ export default {
   color: red !important;
 }
 ```
-
-什么？还有人想问：这样写还我怎么使用`script setup`啊！
-
-**_简单，这样写两个就行了_**
-
+`Vue 3.3+` 可以通过`defineOptions`开启`styleIsolation: 'shared'`选项：
 ```ts
-<script lang="ts">
-export default {
+<script lang="ts" setup>
+defineOptions({
   options: {
     styleIsolation: 'shared'
   }
-}
-</script>
-
-<script lang="ts" setup>
+})
 </script>
 ```
 

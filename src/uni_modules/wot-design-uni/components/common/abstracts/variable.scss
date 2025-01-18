@@ -218,10 +218,13 @@ $-calendar-day-fw: var(--wot-calendar-day-fw, 500) !default;
 $-calendar-day-height: var(--wot-calendar-day-height, 64px) !default;
 $-calendar-month-width: var(--wot-calendar-month-width, 50px) !default;
 $-calendar-active-color: var(--wot-calendar-active-color, $-color-theme) !default;
+$-calendar-selected-color: var(--wot-calendar-selected-color, $-color-white) !default;
 $-calendar-disabled-color: var(--wot-calendar-disabled-color, rgba(0, 0, 0, 0.25)) !default;
 $-calendar-range-color: var(--wot-calendar-range-color, rgba(#4d80f0, 0.09)) !default;
 $-calendar-active-border: var(--wot-calendar-active-border, 8px) !default;
 $-calendar-info-fs: var(--wot-calendar-info-fs, 10px) !default;
+$-calendar-item-margin-bottom: var(--wot-calendar-item-margin-bottom, 4px) !default;
+ 
 
 /* checkbox */
 $-checkbox-margin: var(--wot-checkbox-margin, 10px) !default; // 多个复选框距离
@@ -950,3 +953,13 @@ $-floating-panel-bar-height: var(--wot-floating-panel-bar-height, 3px) !default;
 $-floating-panel-bar-bg: var(--wot-floating-panel-bar-bg, $-color-gray-5) !default; // bar 背景色
 $-floating-panel-bar-radius: var(--wot-floating-panel-bar-radius, 4px) !default; // bar 圆角
 $-floating-panel-content-bg: var(--wot-floating-panel-content-bg, $-color-white) !default; // 内容背景色
+
+/* signature */
+$-signature-bg: var(--wot-signature-bg, $-color-white) !default; // 背景色
+$-signature-radius: var(--wot-signature-radius, 4px) !default; // 圆角
+$-signature-border: var(--wot-signature-border, 1px solid $-color-gray-5) !default; // 边框圆角
+$-signature-footer-margin-top: var(--wot-signature-footer-margin-top, 8px) !default; // 底部按钮上边距
+$-signature-button-margin-left: var(--wot-signature-button-margin-left, 8px) !default; // 底部按钮左边距
+
+
+

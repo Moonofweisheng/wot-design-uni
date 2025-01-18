@@ -540,32 +540,28 @@ function handleConfirm() {
  */
 function canvasToImage() {
   const { fileType, quality, exportScale } = props
-  try {
-    uni.canvasToTempFilePath(
-      {
-        width: cutWidth.value * exportScale,
-        height: Math.round(cutHeight.value * exportScale),
-        destWidth: cutWidth.value * exportScale,
-        destHeight: Math.round(cutHeight.value * exportScale),
-        fileType,
-        quality,
-        canvasId: 'wd-img-cropper-canvas',
-        success: (res: any) => {
-          const result = { tempFilePath: res.tempFilePath, width: cutWidth.value * exportScale, height: cutHeight.value * exportScale }
-          // #ifdef MP-DINGTALK
-          result.tempFilePath = res.filePath
-          // #endif
-          emit('confirm', result)
-        },
-        complete: () => {
-          emit('update:modelValue', false)
-        }
+  uni.canvasToTempFilePath(
+    {
+      width: cutWidth.value * exportScale,
+      height: Math.round(cutHeight.value * exportScale),
+      destWidth: cutWidth.value * exportScale,
+      destHeight: Math.round(cutHeight.value * exportScale),
+      fileType,
+      quality,
+      canvasId: 'wd-img-cropper-canvas',
+      success: (res: any) => {
+        const result = { tempFilePath: res.tempFilePath, width: cutWidth.value * exportScale, height: cutHeight.value * exportScale }
+        // #ifdef MP-DINGTALK
+        result.tempFilePath = res.filePath
+        // #endif
+        emit('confirm', result)
       },
-      proxy
-    )
-  } catch (error) {
-    console.log(error)
-  }
+      complete: () => {
+        emit('update:modelValue', false)
+      }
+    },
+    proxy
+  )
 }
 
 /**

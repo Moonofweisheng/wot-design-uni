@@ -2,7 +2,6 @@
   <view>
     <page-wraper>
       <wd-message-box />
-      <wd-toast />
       <wd-form ref="form" :model="model" :rules="rules">
         <wd-cell-group custom-class="group" title="基础信息" border>
           <wd-input
@@ -90,6 +89,15 @@
             </view>
           </wd-cell>
           <wd-input
+            label="折扣"
+            v-if="model.switchVal"
+            label-width="100px"
+            prop="discount"
+            placeholder="请输入优惠金额"
+            clearable
+            v-model="model.discount"
+          />
+          <wd-input
             label="歪比巴卜"
             label-width="100px"
             prop="cardId"
@@ -100,7 +108,11 @@
           />
           <wd-input label="玛卡巴卡" label-width="100px" prop="phone" placeholder="请输入玛卡巴卡" clearable v-model="model.phone" />
           <wd-cell title="活动图片" title-width="100px" prop="fileList">
-            <wd-upload :file-list="model.fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleFileChange"></wd-upload>
+            <wd-upload
+              :file-list="model.fileList"
+              action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+              @change="handleFileChange"
+            ></wd-upload>
           </wd-cell>
         </wd-cell-group>
         <view class="tip">
@@ -144,6 +156,7 @@ const model = reactive<{
   phone: string
   read: boolean
   fileList: UploadFileItem[]
+  discount: number
 }>({
   couponName: '',
   platform: [],
@@ -159,7 +172,8 @@ const model = reactive<{
   cardId: '',
   phone: '',
   read: false,
-  fileList: []
+  fileList: [],
+  discount: 1
 })
 
 const rules: FormRules = {
@@ -319,6 +333,19 @@ const rules: FormRules = {
         }
       }
     }
+  ],
+  discount: [
+    {
+      required: true,
+      message: '请输入优惠金额',
+      validator: (value) => {
+        if (value) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject()
+        }
+      }
+    }
   ]
 }
 
@@ -397,6 +424,9 @@ function handleSubmit() {
   form
     .value!.validate()
     .then(({ valid, errors }) => {
+      if (valid) {
+        toast.success('提交成功')
+      }
       console.log(valid)
       console.log(errors)
     })

@@ -18,7 +18,7 @@
       <demo-block title="局部水印">
         <wd-watermark
           :opacity="0.8"
-          image="https://wot-design-uni.cn/wot-design.png"
+          image="https://wot-design-uni.cn/logo.png"
           :image-width="38"
           :image-height="38"
           :full-screen="false"
@@ -74,7 +74,7 @@ import { computed, ref } from 'vue'
 const showImage = ref(false) // 是否展示图片
 
 const image = computed(() => {
-  return showImage.value ? 'https://wot-design-uni.cn/wot-design.png' : ''
+  return showImage.value ? 'https://wot-design-uni.cn/logo.png' : ''
 })
 
 function doSetImage(show: boolean) {

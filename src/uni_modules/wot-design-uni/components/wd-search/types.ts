@@ -11,7 +11,7 @@ import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeString
 
 export const searchProps = {
   ...baseProps,
-
+  customInputClass: makeStringProp(''),
   /**
    * 输入框内容，双向绑定
    * 类型: string
@@ -88,5 +88,15 @@ export const searchProps = {
    * 默认值: false
    * 最低版本: 0.1.63
    */
-  focusWhenClear: makeBooleanProp(false)
+  focusWhenClear: makeBooleanProp(false),
+
+  /**
+   * 原生属性，指定 placeholder 的样式，目前仅支持color,font-size和font-weight
+   */
+  placeholderStyle: String,
+
+  /**
+   * 原生属性，指定 placeholder 的样式类
+   */
+  placeholderClass: makeStringProp('')
 }

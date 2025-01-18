@@ -1,5 +1,5 @@
 <template>
-  <page-wraper :use-wx-ad="false">
+  <page-wraper :use-wx-ad="false" :use-reward-fab="true">
     <view class="page">
       <view class="page__hd">
         <view class="page__title">
@@ -39,6 +39,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import packageConfig from '../../../package.json'
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 
 const imgModules: any = import.meta.glob('../images/*.png', { eager: true })
 
@@ -217,6 +218,10 @@ const list = ref([
       {
         id: 'passwordInput',
         name: 'PasswordInput 密码输入框'
+      },
+      {
+        id: 'signature',
+        name: 'Signature 签名'
       }
     ]
   },
@@ -402,6 +407,22 @@ function kindToggle(id: string) {
   }
   list.value = listValue
 }
+
+onShareAppMessage(() => {
+  return {
+    title: '一个基于Vue3+TS的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。',
+    path: '/pages/index/Index',
+    imageUrl: imgModules['../images/share.png'].default
+  }
+})
+
+onShareTimeline(() => {
+  return {
+    title: '一个基于Vue3+TS的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。',
+    path: '/pages/index/Index',
+    imageUrl: imgModules['../images/share.png'].default
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -410,37 +431,45 @@ function kindToggle(id: string) {
   .kind-list__item {
     background: $-dark-background2;
   }
+
   .title {
     color: $-dark-color;
   }
+
   :deep(.wd-cell__label) {
     color: $-dark-color3 !important;
   }
+
   .kind-list__img {
     filter: invert(100%);
   }
 }
+
 .page__hd {
   padding: 40px 40px 30px;
   margin-bottom: 30px;
   background: #fff;
 }
+
 .page__title {
   text-align: left;
   font-size: 20px;
   font-weight: 400;
   color: #0083ff;
 }
+
 .page__desc {
   margin-top: 20px;
   color: #999;
   text-align: left;
   font-size: 12px;
 }
+
 .page__bd {
   padding: 0 15px 30px 20px;
   user-select: none;
 }
+
 .logo {
   display: inline-block;
   margin-right: 14px;
@@ -451,10 +480,12 @@ function kindToggle(id: string) {
   background-size: cover;
   vertical-align: middle;
 }
+
 .inline {
   display: inline-block;
   vertical-align: middle;
 }
+
 .version {
   font-size: 14px;
 }
@@ -462,20 +493,24 @@ function kindToggle(id: string) {
 .wd-cell_access {
   padding: 15px 20px;
 }
+
 .wd-cell__ft {
   padding-right: 16px;
   position: relative;
 }
+
 .wd-cells {
   position: relative;
   margin-top: 0;
   opacity: 0;
   transform: translateY(-50%);
   transition: 0.3s;
+
   :deep(.wd-cell__label) {
     color: rgba(0, 0, 0, 0.65);
   }
 }
+
 .wd-cells_show {
   opacity: 1;
   transform: translateY(0);
@@ -485,6 +520,7 @@ function kindToggle(id: string) {
   border-radius: 30px;
   background: #fff;
   overflow: hidden;
+
   &:not(:last-child) {
     margin-bottom: 20px;
   }
@@ -504,6 +540,7 @@ function kindToggle(id: string) {
   height: 0;
   overflow: hidden;
 }
+
 .kind-list__item-bd_show {
   height: auto;
 }
@@ -511,13 +548,16 @@ function kindToggle(id: string) {
 .wd-flex {
   display: flex;
 }
+
 .wd-flex__item {
   flex: 1;
 }
+
 .title {
   font-size: 14px;
   color: rgba(0, 0, 0, 0.85);
 }
+
 .page-name {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.65);

@@ -41,6 +41,8 @@
 }
 
 @include b(button) {
+  margin-left: initial;
+  margin-right: initial;
   position: relative;
   display: inline-block;
   outline: none;

@@ -1,6 +1,6 @@
 {
   "name": "wot-design-uni",
-  "version": "1.4.0",
+  "version": "1.5.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -55,7 +55,8 @@
     "compiler": "npm run clean:lib && node build/compiler.js",
     "upload:mp-weixin": "uni build -p mp-weixin && minici --platform weixin",
     "upload:mp-alipay": "uni build -p mp-alipay && minici --platform alipay",
-    "upload:mp-dingtalk": "uni build -p mp-dingtalk && minici --platform dd"
+    "upload:mp-dingtalk": "uni build -p mp-dingtalk && minici --platform dd",
+    "qrcode": "node build/qrcode.js"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-4020420240722002",
@@ -97,6 +98,7 @@
     "@vue/runtime-core": "^3.4.38",
     "@vue/tsconfig": "^0.1.3",
     "@vueuse/core": "^12.0.0",
+    "axios": "^1.7.9",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -104,6 +106,7 @@
     "git-cz": "^4.9.0",
     "husky": "^8.0.3",
     "inquirer": "8.0.0",
+    "json5": "^2.2.3",
     "lint-staged": "^13.2.0",
     "mini-types": "^0.1.7",
     "miniprogram-api-typings": "^3.12.3",

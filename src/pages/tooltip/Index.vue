@@ -1,7 +1,6 @@
 <template>
   <page-wraper>
-    <wd-toast />
-    <view style="overflow: hidden" @click.stop="closeOutside">
+    <view style="overflow: hidden" class="page-tooltip" @click.stop="closeOutside">
       <demo-block title="基本用法">
         <view class="top">
           <wd-tooltip placement="bottom-start" content="bottom-start 提示文字" @change="handleChange1">
@@ -74,10 +73,10 @@
       </demo-block>
       <demo-block title="控制显隐">
         <view @click.stop="control">
-          <wd-button plain size="small" class="button-control">{{ show15 ? '关闭' : '打开' }}</wd-button>
+          <wd-button plain size="small" class="button-control">{{ show ? '关闭' : '打开' }}</wd-button>
         </view>
         <view class="demo-left demo-control">
-          <wd-tooltip placement="top" content="控制显隐" v-model="show15">
+          <wd-tooltip placement="top" content="控制显隐" v-model="show">
             <wd-button :round="false">top</wd-button>
           </wd-tooltip>
         </view>
@@ -103,23 +102,7 @@
 import { useToast, useQueue } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 
-const show1 = ref<boolean>(false)
-const show2 = ref<boolean>(false)
-const show3 = ref<boolean>(false)
-const show4 = ref<boolean>(false)
-const show5 = ref<boolean>(false)
-const show6 = ref<boolean>(false)
-const show7 = ref<boolean>(false)
-const show8 = ref<boolean>(false)
-const show9 = ref<boolean>(false)
-const show10 = ref<boolean>(false)
-const show11 = ref<boolean>(false)
-const show12 = ref<boolean>(false)
-const show13 = ref<boolean>(false)
-const show14 = ref<boolean>(false)
-const show15 = ref<boolean>(false)
-const show16 = ref<boolean>(false)
-const show17 = ref<boolean>(false)
+const show = ref<boolean>(false)
 const content = ref<string>('显示内容')
 
 const toast = useToast()
@@ -127,8 +110,7 @@ const toast = useToast()
 const { closeOutside } = useQueue()
 
 function control() {
-  show15.value = !show15.value
-  //   this.setData({ show15: !this.data.show15 })
+  show.value = !show.value
 }
 function onShow() {
   console.log('显示')
@@ -189,6 +171,13 @@ function handleChange17(event: any) {
 }
 </script>
 <style lang="scss" scoped>
+.page-tooltip {
+  :deep() {
+    .wd-button {
+      min-width: auto;
+    }
+  }
+}
 .position-wrap {
   position: relative;
 }

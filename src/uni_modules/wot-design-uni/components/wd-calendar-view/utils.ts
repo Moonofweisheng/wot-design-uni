@@ -117,24 +117,6 @@ export function getWeekLabel(index: number) {
 }
 
 /**
- * 获取一个月第一天的样式
- * @param {number} index
- * @param {timestamp} date
- * @param {number} firstDayOfWeek
- */
-export function getFirstDayStyle(index: number, date: number, firstDayOfWeek: number) {
-  if (firstDayOfWeek >= 7) {
-    firstDayOfWeek = firstDayOfWeek % 7
-  }
-
-  if (index !== 0) return ''
-
-  const offset = (7 + new Date(date).getDay() - firstDayOfWeek) % 7
-
-  return 'margin-left: ' + (100 / 7) * offset + '%'
-}
-
-/**
  * 格式化年份
  * @param {timestamp} date
  */
@@ -221,6 +203,9 @@ export function getDayByOffset(date: number, offset: number) {
 
   return dateValue.getTime()
 }
+
+export const getPrevDay = (date: number) => getDayByOffset(date, -1)
+export const getNextDay = (date: number) => getDayByOffset(date, 1)
 
 /**
  * 获取月份偏移量
@@ -431,7 +416,7 @@ export function getWeekNumber(date: number | Date) {
   return 1 + Math.round(((date.getTime() - week.getTime()) / 86400000 - 3 + ((week.getDay() + 6) % 7)) / 7)
 }
 
-export function getItemClass(monthType: CalendarDayType, value: number | (number | null)[], type: CalendarType) {
+export function getItemClass(monthType: CalendarDayType, value: number | null | (number | null)[], type: CalendarType) {
   const classList = ['is-' + monthType]
 
   if (type.indexOf('range') > -1 && isArray(value)) {

@@ -57,5 +57,9 @@ export default {
   textarea: { placeholder: '請輸入...' },
   tableCol: {
     indexLabel: '序號'
+  },
+  signature: {
+    confirmText: '確認',
+    clearText: '清空'
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <view :class="`wd-calendar ${cell.border.value ? 'is-border' : ''} ${customClass}`">
-    <view class="wd-calendar__field" @click="open">
-      <slot v-if="useDefaultSlot"></slot>
+    <view class="wd-calendar__field" @click="open" v-if="withCell">
+      <slot v-if="$slots.default"></slot>
       <view
         v-else
         :class="`wd-calendar__cell ${disabled ? 'is-disabled' : ''} ${readonly ? 'is-readonly' : ''} ${alignRight ? 'is-align-right' : ''} ${
@@ -9,12 +9,11 @@
         } ${size ? 'is-' + size : ''} ${center ? 'is-center' : ''}`"
       >
         <view
-          v-if="label || useLabelSlot"
+          v-if="label || $slots.label"
           :class="`wd-calendar__label ${isRequired ? 'is-required' : ''} ${customLabelClass}`"
           :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
         >
-          <block v-if="label">{{ label }}</block>
-          <slot v-else name="label"></slot>
+          <slot name="label">{{ label }}</slot>
         </view>
         <view class="wd-calendar__body">
           <view class="wd-calendar__value-wraper">
@@ -153,17 +152,35 @@ const defaultDisplayFormat = (value: number | number[], type: CalendarType): str
         'to'
       )}\n${(value as number[])[1] ? dayjs((value as number[])[1]).format(translate('timeFormat')) : translate('endTime')}`
     case 'week': {
-      const year = new Date(value as number).getFullYear()
+      const date = new Date(value as number)
+      const year = date.getFullYear()
       const week = getWeekNumber(value as number)
-      return translate('weekFormat', year, padZero(week))
+      const weekStart = new Date(date)
+      weekStart.setDate(date.getDate() - date.getDay() + 1)
+      const weekEnd = new Date(date)
+      weekEnd.setDate(date.getDate() + (7 - date.getDay()))
+      const adjustedYear = weekEnd.getFullYear() > year ? weekEnd.getFullYear() : year
+      return translate('weekFormat', adjustedYear, padZero(week))
     }
     case 'weekrange': {
-      const year1 = new Date((value as number[])[0]).getFullYear()
+      const date1 = new Date((value as number[])[0])
+      const date2 = new Date((value as number[])[1])
+      const year1 = date1.getFullYear()
+      const year2 = date2.getFullYear()
       const week1 = getWeekNumber((value as number[])[0])
-      const year2 = new Date((value as number[])[1]).getFullYear()
       const week2 = getWeekNumber((value as number[])[1])
-      return `${(value as number[])[0] ? translate('weekFormat', year1, padZero(week1)) : translate('startWeek')} - ${
-        (value as number[])[1] ? translate('weekFormat', year2, padZero(week2)) : translate('endWeek')
+      const weekStart1 = new Date(date1)
+      weekStart1.setDate(date1.getDate() - date1.getDay() + 1)
+      const weekEnd1 = new Date(date1)
+      weekEnd1.setDate(date1.getDate() + (7 - date1.getDay()))
+      const weekStart2 = new Date(date2)
+      weekStart2.setDate(date2.getDate() - date2.getDay() + 1)
+      const weekEnd2 = new Date(date2)
+      weekEnd2.setDate(date2.getDate() + (7 - date2.getDay()))
+      const adjustedYear1 = weekEnd1.getFullYear() > year1 ? weekEnd1.getFullYear() : year1
+      const adjustedYear2 = weekEnd2.getFullYear() > year2 ? weekEnd2.getFullYear() : year2
+      return `${(value as number[])[0] ? translate('weekFormat', adjustedYear1, padZero(week1)) : translate('startWeek')} - ${
+        (value as number[])[1] ? translate('weekFormat', adjustedYear2, padZero(week2)) : translate('endWeek')
       }`
     }
     case 'month':

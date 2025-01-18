@@ -9,7 +9,7 @@ hero:
   text: 高颜值、轻量化的uni-app组件库
   tagline: 基于Vue3+TS开发，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。
   image:
-    src: /wot-design.png
+    src: /logo.png
     alt: Wot Design
   actions:
     - theme: brand

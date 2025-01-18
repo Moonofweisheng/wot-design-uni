@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: 'Indice'
+  },
+  signature: {
+    confirmText: 'Signer',
+    clearText: 'Effacer'
   }
 }

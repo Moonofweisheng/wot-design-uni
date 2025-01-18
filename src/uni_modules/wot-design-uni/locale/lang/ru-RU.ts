@@ -123,5 +123,9 @@ export default {
   },
   tableCol: {
     indexLabel: '№'
+  },
+  signature: {
+    confirmText: 'Подтвердить',
+    clearText: 'Очистить'
   }
 }

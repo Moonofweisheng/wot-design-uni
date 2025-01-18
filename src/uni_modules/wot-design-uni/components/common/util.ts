@@ -237,9 +237,10 @@ export type RectResultType<T extends boolean> = T extends true ? UniApp.NodeInfo
  * @param selector 节点选择器 #id,.class
  * @param all 是否返回所有 selector 对应的节点
  * @param scope 作用域（支付宝小程序无效）
+ * @param useFields 是否使用 fields 方法获取节点信息
  * @returns 节点信息或节点信息数组
  */
-export function getRect<T extends boolean>(selector: string, all: T, scope?: any): Promise<RectResultType<T>> {
+export function getRect<T extends boolean>(selector: string, all: T, scope?: any, useFields?: boolean): Promise<RectResultType<T>> {
   return new Promise<RectResultType<T>>((resolve, reject) => {
     let query: UniNamespace.SelectorQuery | null = null
     if (scope) {
@@ -247,17 +248,24 @@ export function getRect<T extends boolean>(selector: string, all: T, scope?: any
     } else {
       query = uni.createSelectorQuery()
     }
-    query[all ? 'selectAll' : 'select'](selector)
-      .boundingClientRect((rect) => {
-        if (all && isArray(rect) && rect.length > 0) {
-          resolve(rect as RectResultType<T>)
-        } else if (!all && rect) {
-          resolve(rect as RectResultType<T>)
-        } else {
-          reject(new Error('No nodes found'))
-        }
-      })
-      .exec()
+
+    const method = all ? 'selectAll' : 'select'
+
+    const callback = (rect: UniApp.NodeInfo | UniApp.NodeInfo[]) => {
+      if (all && isArray(rect) && rect.length > 0) {
+        resolve(rect as RectResultType<T>)
+      } else if (!all && rect) {
+        resolve(rect as RectResultType<T>)
+      } else {
+        reject(new Error('No nodes found'))
+      }
+    }
+
+    if (useFields) {
+      query[method](selector).fields({ size: true, node: true }, callback).exec()
+    } else {
+      query[method](selector).boundingClientRect(callback).exec()
+    }
   })
 }
 
@@ -459,7 +467,7 @@ export const pause = (ms: number = 1000 / 30) => {
  * @returns 深拷贝后的对象副本
  */
 export function deepClone<T>(obj: T, cache: Map<any, any> = new Map()): T {
-  // 如果对象为 null 或者不是对象类型，则直接返回该对象
+  // 如果对象为 null 或或者不是对象类型，则直接返回该对象
   if (obj === null || typeof obj !== 'object') {
     return obj
   }

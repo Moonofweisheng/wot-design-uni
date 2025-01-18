@@ -14,6 +14,7 @@
           :range-prompt="rangePrompt"
           :allow-same-day="allowSameDay"
           :default-time="defaultTime"
+          :showTitle="index !== 0"
           @change="handleDateChange"
         />
       </view>
@@ -45,16 +46,16 @@ const scrollIndex = ref<number>(0) // 当前显示的年份索引
 
 // 滚动区域的高度
 const scrollHeight = computed(() => {
-  const scrollHeight: number = (props.panelHeight || 378) + (props.showPanelTitle ? 26 : 16)
+  const scrollHeight: number = props.panelHeight + (props.showPanelTitle ? 26 : 16)
   return scrollHeight
 })
 
 // 年份信息
 const years = computed<YearInfo[]>(() => {
-  return getYears(props.minDate, props.maxDate).map((year) => {
+  return getYears(props.minDate, props.maxDate).map((year, index) => {
     return {
       date: year,
-      height: 237
+      height: index === 0 ? 200 : 245
     }
   })
 })
@@ -89,8 +90,10 @@ async function scrollIntoView() {
     top += years.value[index] ? Number(years.value[index].height) : 0
   }
   scrollTop.value = 0
-  await pause()
-  scrollTop.value = top
+  if (top > 0) {
+    await pause()
+    scrollTop.value = top + 45
+  }
 }
 
 const yearScroll = (event: { detail: { scrollTop: number } }) => {
@@ -109,7 +112,7 @@ function doSetSubtitle(scrollTop: number) {
   let height: number = 0 // 月份高度和
   for (let index = 0; index < years.value.length; index++) {
     height = height + years.value[index].height
-    if (scrollTop < height + 45) {
+    if (scrollTop < height) {
       scrollIndex.value = index
       return
     }

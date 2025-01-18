@@ -71,7 +71,7 @@ export default defineConfig({
    `]
   ],
   themeConfig: {
-    logo: '/wot-design.png',
+    logo: '/logo.png',
     lastUpdated: {
       text: '最后更新'
     },
@@ -337,7 +337,12 @@ export default defineConfig({
           }, {
             link: "/component/password-input",
             text: "PasswordInput 密码输入框"
-          }]
+          },
+          , {
+            link: "/component/signature",
+            text: "Signature 签名"
+          }
+        ]
         }, {
           text: "反馈",
           collapsed: false,

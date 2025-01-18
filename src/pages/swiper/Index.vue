@@ -212,7 +212,6 @@ const current6 = ref<number>(0)
 const current7 = ref<number>(0)
 const current8 = ref<number>(0)
 const current9 = ref<number>(0)
-const current10 = ref<number>(0)
 
 const isLoop = ref(false)
 

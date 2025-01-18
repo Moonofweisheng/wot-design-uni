@@ -15,35 +15,35 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, useSlots } from 'vue'
+import { computed, useSlots, type CSSProperties } from 'vue'
 import { dividerProps } from './types'
+import { objToStyle } from '../common/util'
 
 const props = defineProps(dividerProps)
 const slots = useSlots()
 
 const rootStyle = computed(() => {
-  return `--wot-divider-color:${props.color};${props.customStyle}`
+  const { color } = props
+  const style: CSSProperties = {}
+  if (color) {
+    style.color = color
+  }
+  return `${objToStyle(style)};${props.customStyle}`
 })
 
 const rootClass = computed(() => {
   const prefixCls = 'wd-divider'
-  if (!props.vertical) {
-    return {
-      [prefixCls]: true,
-      [`${prefixCls}--center`]: slots.default,
-      [`${prefixCls}--left`]: props.contentPosition === 'left',
-      [`${prefixCls}--right`]: props.contentPosition === 'right',
-      ['is-dashed']: props.dashed,
-      ['is-hairline']: props.hairline
-    }
-  } else {
-    return {
-      [prefixCls]: true,
-      [`${prefixCls}--vertical`]: true,
-      ['is-dashed']: props.dashed,
-      ['is-hairline']: props.hairline
-    }
+  const classes: Record<string, boolean> = {
+    [prefixCls]: true,
+    ['is-dashed']: props.dashed,
+    ['is-hairline']: props.hairline,
+    [`${prefixCls}--vertical`]: props.vertical,
+    [`${prefixCls}--center`]: !props.vertical && !!slots.default,
+    [`${prefixCls}--left`]: !props.vertical && props.contentPosition === 'left',
+    [`${prefixCls}--right`]: !props.vertical && props.contentPosition === 'right',
+    [props.customClass]: !!props.customClass
   }
+  return classes
 })
 </script>
 
