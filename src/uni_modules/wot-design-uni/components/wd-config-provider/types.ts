@@ -969,6 +969,14 @@ export type floatingPanelThemeVars = {
   floatingPanelContentBg?: string
 }
 
+export type signatureThemeVars = {
+  signatureBg?: string
+  signatureRadius?: string
+  signatureBorder?: string
+  signatureFooterMarginTop?: string
+  signatureButtonMarginLeft?: string
+}
+
 export type ConfigProviderThemeVars = baseThemeVars &
   actionSheetThemeVars &
   badgeThemeVars &
@@ -1032,4 +1040,5 @@ export type ConfigProviderThemeVars = baseThemeVars &
   textThemeVars &
   videoPreviewThemeVars &
   imgCropperThemeVars &
-  floatingPanelThemeVars
+  floatingPanelThemeVars &
+  signatureThemeVars

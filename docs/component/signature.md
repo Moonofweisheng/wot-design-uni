@@ -1,4 +1,4 @@
-# Signature 签名 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+# Signature 签名 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.6.0</el-tag>
 
 用于签名场景，基于 Canvas 实现的签名组件。它提供了多种自定义选项，包括签名笔的颜色、宽度以及自定义操作按钮。
 

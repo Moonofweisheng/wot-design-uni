@@ -155,8 +155,8 @@ function changeSearchType({ item, index }) {
 | ~~use-suffix-slot~~ | ~~是否使用输入框右侧插槽~~**（已废弃，将在下一个 minor 版本被移除，直接使用插槽即可）** | boolean         | -      | false  | -        |
 | focus               | 是否自动聚焦                                                                              | boolean         | -      | false  | 0.1.63   |
 | focusWhenClear      | 是否在点击清除按钮时聚焦输入框                                                            | boolean         | -      | false  | 0.1.63   |
-| placeholderStyle    | 原生属性，指定 placeholder 的样式，目前仅支持color,font-size和font-weight | string | - | - | $LOWEST_VERSION$ |
-| placeholderClass    | 原生属性，指定 placeholder 的样式类 | string | - | - | $LOWEST_VERSION$ |
+| placeholderStyle    | 原生属性，指定 placeholder 的样式，目前仅支持color,font-size和font-weight | string | - | - | 1.6.0 |
+| placeholderClass    | 原生属性，指定 placeholder 的样式类 | string | - | - | 1.6.0 |
 
 ## Events
 
@@ -181,4 +181,4 @@ function changeSearchType({ item, index }) {
 | 类名         | 说明       | 最低版本 |
 | ------------ | ---------- | -------- |
 | custom-class | 根节点样式 | -        |
-| custom-input-class | input 外部自定义样式 | $LOWEST_VERSION$ |
+| custom-input-class | input 外部自定义样式 | 1.6.0 |
