@@ -5,13 +5,13 @@
       <view class="wd-search__field">
         <view v-if="!placeholderLeft" :style="coverStyle" class="wd-search__cover" @click="closeCover">
           <wd-icon name="search" custom-class="wd-search__search-icon"></wd-icon>
-          <text class="wd-search__placeholder-txt">{{ placeholder || translate('search') }}</text>
+          <text :class="`wd-search__placeholder-txt ${placeholderClass}`">{{ placeholder || translate('search') }}</text>
         </view>
         <wd-icon v-if="showInput || str || placeholderLeft" name="search" custom-class="wd-search__search-left-icon"></wd-icon>
         <input
           v-if="showInput || str || placeholderLeft"
           :placeholder="placeholder || translate('search')"
-          :placeholder-class="`wd-search__placeholder-txt', ${placeholderClass}`"
+          :placeholder-class="`wd-search__placeholder-txt ${placeholderClass}`"
           :placeholder-style="placeholderStyle"
           confirm-type="search"
           v-model="str"
