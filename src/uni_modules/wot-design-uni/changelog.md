@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [1.6.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.6.0...v1.6.1) (2025-01-20)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  更新文档小程序二维码 ([a5f862b](https://github.com/Moonofweisheng/wot-design-uni/commit/a5f862bdbea6a84df7ad2e3bef4456baae040ae8))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Search placeholder 样式丢失的问题 ([#857](https://github.com/Moonofweisheng/wot-design-uni/issues/857)) ([40565d1](https://github.com/Moonofweisheng/wot-design-uni/commit/40565d19688f6776cdb4ea4b9fc3f6cbaeb4dc66)), closes [#856](https://github.com/Moonofweisheng/wot-design-uni/issues/856)
+
 ## [1.6.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.5.1...v1.6.0) (2025-01-18)
 
 
