@@ -169,7 +169,7 @@ onMounted(() => {
 
 onBeforeMount(() => {
   // #ifdef MP
-  pixelRatio.value = uni.getSystemInfoSync().pixelRatio
+  pixelRatio.value = uni.getDeviceInfo().devicePixelRatio
   // #endif
 })
 

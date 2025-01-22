@@ -65,7 +65,7 @@ watch(
 )
 
 onBeforeMount(() => {
-  windowHeight.value = uni.getSystemInfoSync().windowHeight
+  windowHeight.value = uni.getWindowInfo().windowHeight
 })
 
 function noop(event: Event) {

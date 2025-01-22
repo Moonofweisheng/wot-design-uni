@@ -130,11 +130,12 @@ const imgScale = ref<number>(1)
 // imgWidth: null,
 // imgHeight: null,
 // 图片中心轴点距左的距离
-const imgLeft = ref<number>(uni.getSystemInfoSync().windowWidth / 2)
-const imgTop = ref<number>((uni.getSystemInfoSync().windowHeight / 2) * TOP_PERCENT)
+const imgLeft = ref<number>(uni.getWindowInfo().windowWidth / 2)
+const imgTop = ref<number>((uni.getWindowInfo().windowHeight / 2) * TOP_PERCENT)
 
 const imgInfo = ref<UniApp.GetImageInfoSuccessData | null>(null)
-const info = ref<UniApp.GetSystemInfoResult>(uni.getSystemInfoSync())
+const windowInfo = ref<UniApp.GetWindowInfoResult>(uni.getWindowInfo())
+const deviceInfo = ref<UniApp.GetDeviceInfoResult>(uni.getDeviceInfo())
 
 // 是否移动中设置 同时控制背景颜色是否高亮
 const IS_TOUCH_END = ref<boolean>(true)
@@ -162,11 +163,12 @@ watch(
     if (newValue) {
       INIT_IMGWIDTH = props.imgWidth
       INIT_IMGHEIGHT = props.imgHeight
-      info.value = uni.getSystemInfoSync()
-      const tempCutSize = info.value.windowWidth - offset.value * 2
+      windowInfo.value = uni.getWindowInfo()
+      deviceInfo.value = uni.getDeviceInfo()
+      const tempCutSize = windowInfo.value.windowWidth - offset.value * 2
       cutWidth.value = tempCutSize
       cutHeight.value = tempCutSize
-      cutTop.value = (info.value.windowHeight * TOP_PERCENT - tempCutSize) / 2
+      cutTop.value = (windowInfo.value.windowHeight * TOP_PERCENT - tempCutSize) / 2
       cutLeft.value = offset.value
       canvasScale.value = props.exportScale
       canvasHeight.value = tempCutSize
@@ -276,7 +278,7 @@ function setRoate(angle: number) {
  * 初始化图片的大小和角度以及距离
  */
 function resetImg() {
-  const { windowHeight, windowWidth } = uni.getSystemInfoSync()
+  const { windowHeight, windowWidth } = uni.getWindowInfo()
   imgScale.value = 1
   imgAngle.value = 0
   imgLeft.value = windowWidth / 2
@@ -357,7 +359,7 @@ function initImageSize() {
   // 处理宽高特殊单位 %>px
   if (INIT_IMGWIDTH && typeof INIT_IMGWIDTH === 'string' && INIT_IMGWIDTH.indexOf('%') !== -1) {
     const width: string = INIT_IMGWIDTH.replace('%', '')
-    INIT_IMGWIDTH = (info.value.windowWidth / 100) * Number(width)
+    INIT_IMGWIDTH = (windowInfo.value.windowWidth / 100) * Number(width)
     picWidth.value = INIT_IMGWIDTH
   } else if (INIT_IMGWIDTH && typeof INIT_IMGWIDTH === 'number') {
     picWidth.value = INIT_IMGWIDTH
@@ -365,7 +367,7 @@ function initImageSize() {
   if (INIT_IMGHEIGHT && typeof INIT_IMGHEIGHT === 'string' && INIT_IMGHEIGHT.indexOf('%') !== -1) {
     const height = (props.imgHeight as string).replace('%', '')
     // INIT_IMGHEIGHT = this.data.imgHeight = (info.value.windowHeight / 100) * Number(height)
-    INIT_IMGHEIGHT = (info.value.windowHeight / 100) * Number(height)
+    INIT_IMGHEIGHT = (windowInfo.value.windowHeight / 100) * Number(height)
     picWidth.value = INIT_IMGHEIGHT
   } else if (INIT_IMGHEIGHT && typeof INIT_IMGHEIGHT === 'number') {
     picWidth.value = Number(INIT_IMGWIDTH)
@@ -435,7 +437,7 @@ function detectImgScaleIsEdge() {
  *  节流
  */
 function throttle() {
-  if (info.value.platform === 'android') {
+  if (deviceInfo.value.platform === 'android') {
     MOVE_THROTTLE && clearTimeout(MOVE_THROTTLE)
     MOVE_THROTTLE = setTimeout(() => {
       MOVE_THROTTLE_FLAG = true

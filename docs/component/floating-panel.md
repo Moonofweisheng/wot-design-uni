@@ -42,7 +42,7 @@ const handleHeightChange = ({ height }: { height: number }) => {
 }
 
 onLoad(() => {
-  windowHeight.value = uni.getSystemInfoSync().windowHeight
+  windowHeight.value = uni.getWindowInfo().windowHeight
   anchors.value = [100, Math.round(0.4 * windowHeight.value), Math.round(0.7 * windowHeight.value)]
   height.value = anchors.value[1]
 })
@@ -78,30 +78,30 @@ onLoad(() => {
 
 ## Attributes
 
-| 参数                | 说明                                        | 类型     | 可选值 | 默认值                      | 最低版本         |
-| ------------------- | ------------------------------------------- | -------- | ------ | --------------------------- | ---------------- |
-| v-model:height      | 当前面板的显示高度                          | number   | -      | `0`                         | 1.3.12 |
-| anchors             | 设置自定义锚点, 单位 `px`                   | number[] | -      | `[100, windowHeight * 0.6]` | 1.3.12 |
-| duration            | 动画时长，单位`ms`，设置为 `0` 可以禁用动画 | number   | -      | `300`                       | 1.3.12 |
-| contentDraggable    | 允许拖拽内容容器                            | boolean  | -      | `true`                      | 1.3.12 |
-| safeAreaInsetBottom | 是否开启底部安全区适配                      | boolean  | -      | `false`                     | 1.3.12 |
-| showScrollbar       | 是否开启滚动条                              | boolean  | -      | `true`                      | 1.3.12 |
+| 参数                | 说明                                        | 类型     | 可选值 | 默认值                      | 最低版本 |
+| ------------------- | ------------------------------------------- | -------- | ------ | --------------------------- | -------- |
+| v-model:height      | 当前面板的显示高度                          | number   | -      | `0`                         | 1.3.12   |
+| anchors             | 设置自定义锚点, 单位 `px`                   | number[] | -      | `[100, windowHeight * 0.6]` | 1.3.12   |
+| duration            | 动画时长，单位`ms`，设置为 `0` 可以禁用动画 | number   | -      | `300`                       | 1.3.12   |
+| contentDraggable    | 允许拖拽内容容器                            | boolean  | -      | `true`                      | 1.3.12   |
+| safeAreaInsetBottom | 是否开启底部安全区适配                      | boolean  | -      | `false`                     | 1.3.12   |
+| showScrollbar       | 是否开启滚动条                              | boolean  | -      | `true`                      | 1.3.12   |
 
 ## Slots
 
-| 名称 | 说明     | 最低版本         |
-| ---- | -------- | ---------------- |
-| —    | 默认插槽 | 1.3.12 |
+| 名称 | 说明     | 最低版本 |
+| ---- | -------- | -------- |
+| —    | 默认插槽 | 1.3.12   |
 
 ## Events
 
-| 方法名       | 说明                             | 参数                 | 最低版本         |
-| ------------ | -------------------------------- | -------------------- | ---------------- |
-| heightChange | 面板显示高度改变且结束拖动后触发 | `{ height: number }` | 1.3.12 |
+| 方法名       | 说明                             | 参数                 | 最低版本 |
+| ------------ | -------------------------------- | -------------------- | -------- |
+| heightChange | 面板显示高度改变且结束拖动后触发 | `{ height: number }` | 1.3.12   |
 
 ## 外部样式类
 
-| 类名         | 说明         | 最低版本         |
-| ------------ | ------------ | ---------------- |
-| custom-class | 根节点样式类 | 1.3.12 |
-| custom-style | 根节点样式   | 1.3.12 |
+| 类名         | 说明         | 最低版本 |
+| ------------ | ------------ | -------- |
+| custom-class | 根节点样式类 | 1.3.12   |
+| custom-style | 根节点样式   | 1.3.12   |

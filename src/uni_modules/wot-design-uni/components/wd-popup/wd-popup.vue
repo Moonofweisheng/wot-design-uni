@@ -100,7 +100,7 @@ const rootClass = computed(() => {
 
 onBeforeMount(() => {
   if (props.safeAreaInsetBottom) {
-    const { safeArea, screenHeight, safeAreaInsets } = uni.getSystemInfoSync()
+    const { safeArea, screenHeight, safeAreaInsets } = uni.getWindowInfo()
 
     if (safeArea) {
       // #ifdef MP-WEIXIN
