@@ -33,6 +33,10 @@
         <wd-button @click="beforeConfirm">beforeConfirm</wd-button>
       </demo-block>
 
+      <demo-block title="使用confirmButtonLoading搭配beforeConfirm钩子，在弹框确认前，可以进行加载操作">
+        <wd-button @click="beforeConfirmLoading">beforeConfirm</wd-button>
+      </demo-block>
+
       <demo-block title="通过button-props自定义按钮">
         <wd-button @click="withButtonProps">withButtonProps</wd-button>
       </demo-block>
@@ -101,6 +105,31 @@ function beforeConfirm() {
           resolve(true)
           toast.success('删除成功')
         }, 3000)
+      }
+    })
+    .then(() => {})
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
+function beforeConfirmLoading() {
+  message
+    .confirm({
+      msg: '是否删除',
+      title: '提示',
+      confirmButtonLoading: true,
+      beforeConfirm: ({ resolve }) => {
+        try {
+          toast.loading('删除中...')
+          setTimeout(() => {
+            toast.close()
+            resolve(true)
+            toast.success('删除成功')
+          }, 3000)
+        } finally {
+          resolve()
+        }
       }
     })
     .then(() => {})

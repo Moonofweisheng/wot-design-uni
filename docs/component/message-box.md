@@ -189,6 +189,48 @@ function beforeConfirm() {
 }
 ```
 
+## 确认前置加载<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.6.2</el-tag>
+
+设置属性 `confirmButtonLoading` 搭配 `beforeConfirm` 函数，在用户选择图片点击确认后，会将确认按钮置为 Loading 状态，并设置禁止点击蒙层关闭，执行 `beforeConfirm` 函数后，接收 { resolve }，开发者可以在确认前进行处理，并通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 `boolean` 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会完成确认操作。
+
+```html
+<wd-toast />
+<wd-message-box />
+<wd-button @click="beforeConfirmLoading">beforeConfirmLoading</wd-button>
+```
+
+```typescript
+import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
+const message = useMessage()
+const toast = useToast()
+
+function beforeConfirmLoading() {
+  message
+    .confirm({
+      msg: '是否删除',
+      title: '提示',
+      confirmButtonLoading: true,
+      beforeConfirm: ({ resolve }) => {
+        try {
+          toast.loading('删除中...')
+          setTimeout(() => {
+            toast.close()
+            resolve(true)
+            toast.success('删除成功')
+          }, 2000)
+        } finally {
+          // 只要调用了 resolve 则会自动停止加载状态
+          resolve()
+        }
+      }
+    })
+    .then(() => {})
+    .catch((error) => {
+      console.log(error)
+    })
+}
+```
+
 ## 自定义操作按钮<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.5.0</el-tag>
 
 可以通过按钮属性 `cancel-button-props` 和 `confirm-button-props` 自定义操作按钮的样式，具体参考 [Button Attributes](/component/button.html#attributes)。
@@ -250,25 +292,26 @@ MessageBox.prompt(options)
 
 ## Options Attributes
 
-| 参数                 | 说明                                                                            | 类型            | 可选值                   | 默认值           | 最低版本         |
-| -------------------- | ------------------------------------------------------------------------------- | --------------- | ------------------------ | ---------------- | ---------------- |
-| title                | 标题                                                                            | string          | -                        | -                | -                |
-| msg                  | 消息文案                                                                        | string          | -                        | -                | -                |
-| type                 | 弹框类型                                                                        | string          | alert / confirm / prompt | alert            | -                |
-| closeOnClickModal    | 是否支持点击蒙层进行关闭，点击蒙层回调传入的 action 为'modal'                   | boolean         | -                        | true             | -                |
-| inputType            | 当 type 为 prompt 时，输入框类型                                                | string          | -                        | text             | -                |
-| inputValue           | 当 type 为 prompt 时，输入框初始值                                              | string / number | -                        | -                | -                |
-| inputPlaceholder     | 当 type 为 prompt 时，输入框 placeholder                                        | string          | -                        | 请输入内容       | -                |
-| inputPattern         | 当 type 为 prompt 时，输入框正则校验，点击确定按钮时进行校验                    | regex           | -                        | -                | -                |
-| inputValidate        | 当 type 为 prompt 时，输入框校验函数，点击确定按钮时进行校验                    | function        | -                        | -                | -                |
-| inputError           | 当 type 为 prompt 时，输入框检验不通过时的错误提示文案                          | string          | -                        | 输入的数据不合法 | -                |
-| confirmButtonText    | 确定按钮文案                                                                    | string          | -                        | 确定             | -                |
-| cancelButtonText     | 取消按钮文案                                                                    | string          | -                        | 取消             | -                |
-| selector             | 指定唯一标识                                                                    | string          | -                        | #wd-message-box  | -                |
-| zIndex               | 弹窗层级                                                                        | number          | -                        | 99               | -                |
-| lazyRender           | 弹层内容懒渲染，触发展示时才渲染内容                                            | boolean         | -                        | true             | -                |
-| cancel-button-props  | 取消按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | 1.5.0 |
-| confirm-button-props | 确定按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | 1.5.0 |
+| 参数                 | 说明                                                                            | 类型            | 可选值                   | 默认值           | 最低版本 |
+| -------------------- | ------------------------------------------------------------------------------- | --------------- | ------------------------ | ---------------- | -------- |
+| title                | 标题                                                                            | string          | -                        | -                | -        |
+| msg                  | 消息文案                                                                        | string          | -                        | -                | -        |
+| type                 | 弹框类型                                                                        | string          | alert / confirm / prompt | alert            | -        |
+| closeOnClickModal    | 是否支持点击蒙层进行关闭，点击蒙层回调传入的 action 为'modal'                   | boolean         | -                        | true             | -        |
+| inputType            | 当 type 为 prompt 时，输入框类型                                                | string          | -                        | text             | -        |
+| inputValue           | 当 type 为 prompt 时，输入框初始值                                              | string / number | -                        | -                | -        |
+| inputPlaceholder     | 当 type 为 prompt 时，输入框 placeholder                                        | string          | -                        | 请输入内容       | -        |
+| inputPattern         | 当 type 为 prompt 时，输入框正则校验，点击确定按钮时进行校验                    | regex           | -                        | -                | -        |
+| inputValidate        | 当 type 为 prompt 时，输入框校验函数，点击确定按钮时进行校验                    | function        | -                        | -                | -        |
+| inputError           | 当 type 为 prompt 时，输入框检验不通过时的错误提示文案                          | string          | -                        | 输入的数据不合法 | -        |
+| confirmButtonText    | 确定按钮文案                                                                    | string          | -                        | 确定             | -        |
+| cancelButtonText     | 取消按钮文案                                                                    | string          | -                        | 取消             | -        |
+| selector             | 指定唯一标识                                                                    | string          | -                        | #wd-message-box  | -        |
+| zIndex               | 弹窗层级                                                                        | number          | -                        | 99               | -        |
+| lazyRender           | 弹层内容懒渲染，触发展示时才渲染内容                                            | boolean         | -                        | true             | -        |
+| cancel-button-props  | 取消按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | 1.5.0    |
+| confirm-button-props | 确定按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | 1.5.0    |
+| confirmButtonLoading | 确认按钮是否加载，当设置 beforeConfirm 时才会生效                               | boolean         | -                        | false            | 1.6.2    |
 
 ## 外部样式类
 
