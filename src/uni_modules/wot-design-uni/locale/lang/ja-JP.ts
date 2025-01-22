@@ -67,7 +67,8 @@ export default {
     inputPlaceholder: '入力してください',
     confirm: '確認',
     cancel: 'キャンセル',
-    inputNoValidate: '無効なデータが入力されました'
+    inputNoValidate: '無効なデータが入力されました',
+    loading: '読み込み中...'
   },
   numberKeyboard: {
     confirm: '完了'

@@ -71,7 +71,8 @@ export default {
     inputPlaceholder: 'กรุณาใส่ข้อมูล',
     confirm: 'ยืนยัน',
     cancel: 'ยกเลิก',
-    inputNoValidate: 'กรุณาตรวจสอบว่าคุณได้ใส่ข้อมูลที่ถูกต้อง'
+    inputNoValidate: 'กรุณาตรวจสอบว่าคุณได้ใส่ข้อมูลที่ถูกต้อง',
+    loading: 'กำลังโหลด...'
   },
   numberKeyboard: {
     confir: 'ตกลง'

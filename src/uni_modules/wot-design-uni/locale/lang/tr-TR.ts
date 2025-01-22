@@ -67,7 +67,8 @@ export default {
     inputPlaceholder: 'Lütfen girin',
     confirm: 'Tamam',
     cancel: 'İptal',
-    inputNoValidate: 'Girilen veriler geçerli değil'
+    inputNoValidate: 'Girilen veriler geçerli değil',
+    loading: 'Yükleniyor...'
   },
   numberKeyboard: {
     confirm: 'Tamam'

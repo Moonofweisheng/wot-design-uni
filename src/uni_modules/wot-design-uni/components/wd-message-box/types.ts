@@ -14,7 +14,7 @@ import { type InputSize, type InputType } from '../wd-input/types'
 export type MessageType = 'alert' | 'confirm' | 'prompt'
 
 export type MessageBeforeConfirmOption = {
-  resolve: (isPass: boolean) => void
+  resolve: (isPass?: boolean) => void
 }
 
 export type MessageOptions = {
@@ -98,6 +98,10 @@ export type MessageOptions = {
    * 确认按钮Props
    */
   confirmButtonProps?: Partial<ButtonProps>
+  /**
+   * 确认按钮加载
+   */
+  confirmButtonLoading?: boolean
 }
 
 export type MessageOptionsWithCallBack = MessageOptions & {

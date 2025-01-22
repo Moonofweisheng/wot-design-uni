@@ -67,7 +67,8 @@ export default {
     inputPlaceholder: 'Por favor insira',
     confirm: 'Confirmar',
     cancel: 'Cancelar',
-    inputNoValidate: 'Dados inseridos inválidos'
+    inputNoValidate: 'Dados inseridos inválidos',
+    loading: 'Carregando...'
   },
   numberKeyboard: {
     confirm: 'Concluir'

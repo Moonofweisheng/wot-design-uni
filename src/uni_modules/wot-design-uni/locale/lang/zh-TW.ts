@@ -36,7 +36,7 @@ export default {
   colPicker: { title: '請選擇', placeholder: '請選擇', select: '請選擇' },
   datetimePicker: { start: '開始時間', end: '結束時間', to: '至', placeholder: '請選擇', confirm: '完成', cancel: '取消' },
   loadmore: { loading: '正在努力加載中...', finished: '已加載完畢', error: '加載失敗', retry: '點擊重試' },
-  messageBox: { inputPlaceholder: '請輸入', confirm: '確定', cancel: '取消', inputNoValidate: '輸入的數據不合法' },
+  messageBox: { inputPlaceholder: '請輸入', confirm: '確定', cancel: '取消', inputNoValidate: '輸入的數據不合法', loading: '加載中...' },
   numberKeyboard: { confirm: '完成' },
   pagination: {
     prev: '上一頁',

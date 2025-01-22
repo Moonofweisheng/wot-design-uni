@@ -67,7 +67,8 @@ export default {
     inputPlaceholder: '정보를 입력해주세요',
     confirm: '확인',
     cancel: '취소',
-    inputNoValidate: '유효한 정보를 입력해주세요'
+    inputNoValidate: '유효한 정보를 입력해주세요',
+    loading: '로딩 중...'
   },
   numberKeyboard: {
     confirm: '확인'

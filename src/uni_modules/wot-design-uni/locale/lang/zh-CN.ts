@@ -67,7 +67,8 @@ export default {
     inputPlaceholder: '请输入',
     confirm: '确定',
     cancel: '取消',
-    inputNoValidate: '输入的数据不合法'
+    inputNoValidate: '输入的数据不合法',
+    loading: '加载中...'
   },
   numberKeyboard: {
     confirm: '完成'

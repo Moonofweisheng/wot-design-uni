@@ -71,7 +71,8 @@ export default {
     inputPlaceholder: 'Bitte geben Sie Informationen ein',
     confirm: 'OK',
     cancel: 'Stornieren',
-    inputNoValidate: 'Bitte geben Sie gültige Informationen ein'
+    inputNoValidate: 'Bitte geben Sie gültige Informationen ein',
+    loading: 'Wird geladen...'
   },
   numberKeyboard: {
     confirm: 'OK'

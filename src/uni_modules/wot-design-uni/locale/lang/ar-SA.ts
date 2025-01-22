@@ -71,7 +71,8 @@ export default {
     inputPlaceholder: 'الرجاء إدخال المعلومات',
     confirm: 'تأكيد',
     cancel: 'إلغاء',
-    inputNoValidate: 'الرجاء التأكد من إدخال المعلومات الصحيحة'
+    inputNoValidate: 'الرجاء التأكد من إدخال المعلومات الصحيحة',
+    loading: 'جارٍ التحميل...'
   },
   numberKeyboard: {
     confirm: 'إنهاء'

@@ -35,7 +35,7 @@
           <wd-button v-bind="customCancelProps" v-if="messageState.showCancelButton" @click="toggleModal('cancel')">
             {{ messageState.cancelButtonText || translate('cancel') }}
           </wd-button>
-          <wd-button v-bind="customConfirmProps" @click="toggleModal('confirm')">
+          <wd-button v-bind="customConfirmProps" :loading="messageState.confirmButtonLoading" @click="toggleModal('confirm')">
             {{ messageState.confirmButtonText || translate('confirm') }}
           </wd-button>
         </view>
@@ -95,7 +95,8 @@ const messageState = reactive<MessageOptionsWithCallBack>({
   inputError: '', // 输入框错误提示文案
   showErr: false, // 是否显示错误提示
   zIndex: 99, // 弹窗层级
-  lazyRender: true // 弹层内容懒渲染
+  lazyRender: true, // 弹层内容懒渲染
+  confirmButtonLoading: false // 确认按钮加载
 })
 
 /**
@@ -164,9 +165,19 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
   switch (action) {
     case 'confirm':
       if (messageState.beforeConfirm) {
+        const localConfirmButtonText = messageState.confirmButtonText
+        const localShowCancelButton = messageState.showCancelButton
+        const localCloseOnClickModal = messageState.closeOnClickModal
+        messageState.confirmButtonLoading = true
+        messageState.showCancelButton = false
+        messageState.confirmButtonText = translate('loading')
         messageState.beforeConfirm({
           resolve: (isPass) => {
-            if (isPass) {
+            if (isPass === null || isPass === undefined || isPass) {
+              messageState.confirmButtonLoading = false
+              messageState.showCancelButton = localShowCancelButton
+              messageState.confirmButtonText = localConfirmButtonText
+              messageState.closeOnClickModal = localCloseOnClickModal
               handleConfirm({
                 action: action,
                 value: messageState.inputValue
@@ -281,6 +292,7 @@ function reset(option: MessageOptionsWithCallBack) {
     messageState.lazyRender = option.lazyRender
     messageState.confirmButtonProps = option.confirmButtonProps
     messageState.cancelButtonProps = option.cancelButtonProps
+    messageState.confirmButtonLoading = option.confirmButtonLoading
   }
 }
 </script>
