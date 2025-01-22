@@ -211,17 +211,12 @@ function beforeConfirmLoading() {
       title: '提示',
       confirmButtonLoading: true,
       beforeConfirm: ({ resolve }) => {
-        try {
-          toast.loading('删除中...')
-          setTimeout(() => {
-            toast.close()
-            resolve(true)
-            toast.success('删除成功')
-          }, 2000)
-        } finally {
-          // 只要调用了 resolve 则会自动停止加载状态
-          resolve()
-        }
+        toast.loading('删除中...')
+        setTimeout(() => {
+          toast.close()
+          resolve(true)
+          toast.success('删除成功')
+        }, 3000)
       }
     })
     .then(() => {})
