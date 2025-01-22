@@ -67,7 +67,8 @@ export default {
     inputPlaceholder: 'Введите, пожалуйста',
     confirm: 'Ок',
     cancel: 'Отмена',
-    inputNoValidate: 'Неверные данные'
+    inputNoValidate: 'Неверные данные',
+    loading: 'Загружается...'
   },
   numberKeyboard: {
     confirm: 'Готово'

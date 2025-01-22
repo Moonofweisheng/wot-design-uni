@@ -71,7 +71,8 @@ export default {
     inputPlaceholder: 'Please input information',
     confirm: 'OK',
     cancel: 'Cancel',
-    inputNoValidate: 'Please ensure you input correct information'
+    inputNoValidate: 'Please ensure you input correct information',
+    loading: 'Loading...'
   },
   numberKeyboard: {
     confirm: 'done'

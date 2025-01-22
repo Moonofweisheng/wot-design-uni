@@ -35,7 +35,7 @@
           <wd-button v-bind="customCancelProps" v-if="messageState.showCancelButton" @click="toggleModal('cancel')">
             {{ messageState.cancelButtonText || translate('cancel') }}
           </wd-button>
-          <wd-button v-bind="customConfirmProps" @click="toggleModal('confirm')">
+          <wd-button v-bind="customConfirmProps" :loading="state.confirmButtonLoading" @click="toggleModal('confirm')">
             {{ messageState.confirmButtonText || translate('confirm') }}
           </wd-button>
         </view>
@@ -95,7 +95,28 @@ const messageState = reactive<MessageOptionsWithCallBack>({
   inputError: '', // 输入框错误提示文案
   showErr: false, // 是否显示错误提示
   zIndex: 99, // 弹窗层级
-  lazyRender: true // 弹层内容懒渲染
+  lazyRender: true, // 弹层内容懒渲染
+  confirmButtonLoading: false // 确认按钮加载
+})
+
+const state = reactive<{
+  /** 确认按钮加载 */
+  confirmButtonLoading?: boolean
+  /** 是否展示取消按钮 */
+  showCancelButton?: boolean
+  /** 是否支持点击蒙层关闭 */
+  closeOnClickModal?: boolean
+  /** 确定按钮文案 */
+  confirmButtonText?: string
+}>({
+  /** 确认按钮加载 */
+  confirmButtonLoading: false,
+  /** 是否展示取消按钮 */
+  showCancelButton: false,
+  /** 是否支持点击蒙层关闭 */
+  closeOnClickModal: true,
+  /** 确定按钮文案 */
+  confirmButtonText: ''
 })
 
 /**
@@ -164,9 +185,23 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
   switch (action) {
     case 'confirm':
       if (messageState.beforeConfirm) {
+        if (messageState.confirmButtonLoading) {
+          state.confirmButtonText = messageState.confirmButtonText
+          state.showCancelButton = messageState.showCancelButton
+          state.closeOnClickModal = messageState.closeOnClickModal
+          messageState.showCancelButton = false
+          messageState.confirmButtonText = translate('loading')
+          state.confirmButtonLoading = true
+        }
         messageState.beforeConfirm({
           resolve: (isPass) => {
-            if (isPass) {
+            if (messageState.confirmButtonLoading) {
+              state.confirmButtonLoading = false
+              messageState.showCancelButton = state.showCancelButton
+              messageState.confirmButtonText = state.confirmButtonText
+              messageState.closeOnClickModal = state.closeOnClickModal
+            }
+            if (isPass === null || isPass === undefined || isPass) {
               handleConfirm({
                 action: action,
                 value: messageState.inputValue
