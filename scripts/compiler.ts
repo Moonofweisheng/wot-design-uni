@@ -1,19 +1,10 @@
-/*
- * @Author: weisheng
- * @Date: 2023-03-21 20:58:19
- * @LastEditTime: 2023-08-22 13:00:05
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-design-uni\build\compiler.js
- * 记得注释
- */
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
 const src = path.resolve(__dirname, '../src/uni_modules/wot-design-uni')
 const libDir = path.resolve(__dirname, '../lib')
 
-const copyComponents = function (srcPath, tarPath, filter = []) {
+const copyComponents = function (srcPath: string, tarPath: string, filter: string[] = []) {
   fs.mkdir(tarPath, (err) => {})
   fs.readdir(srcPath, function (err, files) {
     if (err === null) {
@@ -26,13 +17,11 @@ const copyComponents = function (srcPath, tarPath, filter = []) {
           fs.stat(filedir, function (errs, stats) {
             const isFile = stats.isFile()
             if (isFile) {
-              // 复制文件
               const destPath = path.join(tarPath, filename)
               fs.copyFile(filedir, destPath, (err) => {})
             } else {
-              // 创建文件夹
               const tarFiledir = path.join(tarPath, filename)
-              copyComponents(filedir, tarFiledir, filter) // 递归
+              copyComponents(filedir, tarFiledir, filter)
             }
           })
         }
@@ -45,7 +34,7 @@ const copyComponents = function (srcPath, tarPath, filter = []) {
 
 copyComponents(src, libDir, ['.md'])
 
-const copyFile = function (srcPath, tarPath) {
+const copyFile = function (srcPath: string, tarPath: string) {
   const isFile = fs.statSync(srcPath).isFile()
   if (isFile) {
     fs.copyFile(srcPath, tarPath, (err) => {})

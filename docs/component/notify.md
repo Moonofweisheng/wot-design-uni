@@ -1,5 +1,7 @@
 # Notify 消息通知
 
+通知类组件，用于在页面顶部展示通知信息。
+
 ## 基本用法
 
 需要在页面中引入该组件，作为挂载点。
@@ -208,7 +210,7 @@ export default {
 | setNotifyDefaultOptions     | 修改默认配置，影响所有的 `showNotify` 调用                                  | `NotifyOptions` | -        |
 | resetNotifyDefaultOptions  | 重置默认配置，影响所有的 `showNotify` 调用                                  | - | -        |
 
-## NotifyOptions
+## Options
 调用 `showNotify`、 `setNotifyDefaultOptions` 等方法时，支持传入以下选项：
 | 参数         | 说明                                                             | 类型    | 可选值                    | 默认值       | 最低版本 |
 | ------------ | ----------------------------------------------------------------| ------- | ------------------------- | ------------ | -------- |

@@ -1,36 +1,22 @@
-/*
- * @Author: weisheng
- * @Date: 2022-11-01 17:12:57
- * @LastEditTime: 2024-10-10 13:41:19
- * @LastEditors: weisheng
- * @Description: 组件发版问答
- * @FilePath: \wot-design-uni\build\release.js
- * 记得注释
- */
-const inquirer = require('inquirer')
-// Node 核心模块
-const { execSync } = require('child_process')
-const { writeFileSync, readFileSync } = require('fs')
-const path = require('path')
-const fs = require('fs')
+import inquirer from 'inquirer'
+import { execSync } from 'child_process'
+import { writeFileSync, readFileSync, readdirSync, statSync } from 'fs'
+import path from 'path'
 
 const src = path.resolve(__dirname, '../src/uni_modules/wot-design-uni')
-
 const oldVersion = require('../package.json').version
 const LOWEST_VERSION = '$LOWEST_VERSION$'
 
-const handleLowestVersion = (dir, version) => {
-  const files = fs.readdirSync(dir)
+const handleLowestVersion = (dir: string, version: string) => {
+  const files = readdirSync(dir)
 
   for (const item of files) {
     const itemPath = path.resolve(dir, item)
-    const stat = fs.statSync(itemPath)
+    const stat = statSync(itemPath)
 
     if (stat.isFile()) {
       if (item.endsWith('.md')) {
-        let content = fs.readFileSync(itemPath, {
-          encoding: 'utf-8'
-        })
+        let content = readFileSync(itemPath, 'utf-8')
 
         if (content.includes(LOWEST_VERSION)) {
           content = content.replace(/\$LOWEST_VERSION\$/g, version)
@@ -81,7 +67,7 @@ inquirer
         break
     }
     // 生成日志
-    execSync('node build/changelog.js')
+    execSync('pnpm build:changelog')
     // 更新版本
     const file = readFileSync(path.resolve(__dirname, '../package.json'))
     const packageJson = JSON.parse(file.toString())
@@ -91,11 +77,11 @@ inquirer
     handleLowestVersion(path.resolve(__dirname, '../docs'), newVersion)
 
     console.log(`√ bumping version in package.json from ${oldVersion} to ${newVersion}`)
-    const package = require('../src/uni_modules/wot-design-uni/package.json')
-    package.version = newVersion
-    writeFileSync(path.resolve(src, 'package.json'), JSON.stringify(package))
+    const tarfetPackageJson = require('../src/uni_modules/wot-design-uni/package.json')
+    tarfetPackageJson.version = newVersion
+    writeFileSync(path.resolve(src, 'package.json'), JSON.stringify(tarfetPackageJson))
     // 生成制品
-    execSync('node build/buildThemeVars.js')
+    execSync('pnpm build:theme-vars')
     execSync('pnpm lint')
     execSync('git add -A ')
     execSync(`git commit -am "build: compile ${newVersion}"`)

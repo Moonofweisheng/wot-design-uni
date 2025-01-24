@@ -1,12 +1,7 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
-/**
- * 从 SCSS 文件中提取变量
- * @param {string} scssFilePath - SCSS 文件路径
- * @returns {object} - 提取的变量对象
- */
-const extractSCSSVariables = (scssFilePath) => {
+const extractSCSSVariables = (scssFilePath: string): Record<string, string> => {
   const scssContent = fs.readFileSync(scssFilePath, 'utf8')
   const componentVarIndex = scssContent.indexOf('/* component var */')
 
@@ -19,7 +14,7 @@ const extractSCSSVariables = (scssFilePath) => {
 
   const variableRegex = /\/\*\s*([a-zA-Z0-9-]+)\s*\*\/([\s\S]*?)(?=\/\*\s*([a-zA-Z0-9-]+)\s*\*\/|$)/g
 
-  const variables = {}
+  const variables: Record<string, string> = {}
 
   let match
   while ((match = variableRegex.exec(scssContentToProcess)) !== null) {
@@ -36,7 +31,7 @@ const extractSCSSVariables = (scssFilePath) => {
  * @param {object} variables - 变量对象
  * @returns {string} - TypeScript 文件内容
  */
-const generateTSFileContent = (variables) => {
+const generateTSFileContent = (variables: Record<string, string>) => {
   let tsContent = `import type { ExtractPropTypes, PropType } from 'vue'
 import { makeStringProp, baseProps } from '../common/props'
 

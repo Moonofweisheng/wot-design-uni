@@ -1,5 +1,7 @@
 # Segmented 分段器 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.23</el-tag>
 
+分段器用于展示多个选项并允许用户选择其中单个选项。
+
 ## 何时使用
 
 - 用于展示多个选项并允许用户选择其中单个选项；

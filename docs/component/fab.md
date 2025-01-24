@@ -2,9 +2,11 @@
 
 悬浮动作按钮组件，按下可显示一组动作按钮。
 
-因为`uni-app`组件无法监听点击自己以外的地方，为了在点击页面其他地方时，可以自动关闭 `fab` ，建议使用组件库的 `useQueue` hook（会关闭所有 dropmenu、popover、toast、swipeAction、fab），在页面的根元素上监听点击事件的冒泡。
+
 
 :::warning
+因为`uni-app`组件无法监听点击自己以外的地方，为了在点击页面其他地方时，可以自动关闭 `fab` ，建议使用组件库的 `useQueue` hook（会关闭所有 dropmenu、popover、toast、swipeAction、fab），在页面的根元素上监听点击事件的冒泡。
+
 如果存在用户手动点击 `fab` 以外某个地方如按钮滑出 `fab` 的场景，则需要在点击的元素（在这里是按钮）加上 `click.stop=""` 阻止事件冒泡到根元素上，避免触发 `closeOutside`把要手动打开的 `fab` 关闭了。
 :::
 
