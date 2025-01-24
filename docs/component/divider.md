@@ -1,5 +1,7 @@
 # Divider 分割线
 
+用于将内容分隔为多个区域。
+
 :::danger 请注意
 `hairline`、`dashed`、`content-position`、`vertical`属性为 1.5.0 版本新增支持，在此之前仅支持默认插槽显示文本和自定义`color`。
 :::

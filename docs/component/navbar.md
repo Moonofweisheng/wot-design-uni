@@ -1,4 +1,4 @@
-# Navbar 导航栏 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.33</el-tag>
+# Navbar 导航栏
 
 为页面提供导航功能，常用于页面顶部。
 
@@ -143,7 +143,7 @@ function handleBackHome() {
 ```
 
 
-## Attributes
+## Tabbar Attributes
 
 | 参数          | 说明     | 类型    | 可选值 | 默认值 | 最低版本 |
 | ------------- | -------- | ------- | ------ | ------ | -------- |
@@ -160,21 +160,21 @@ function handleBackHome() {
 | rightDisabled | 禁用右侧按钮，禁用时透明度降低，且无法点击 | boolean | true, false | false | 0.1.33   |
 
 
-## Events
+## Tabbar Events
 
 | 事件名称     | 说明                          | 参数                                           | 最低版本 |
 | ------------ | ----------------------------- | ---------------------------------------------- | --------- |
 | click-left   | 点击左侧按钮时触发            | -                                              | 0.1.33    |
 | click-right  | 点击右侧按钮时触发            | -                                              | 0.1.33    |
 
-## Capsule Events
+## TabbarCapsule Events
 
 | 事件名称     | 说明                          | 参数                                           | 最低版本 |
 | ------------ | ----------------------------- | ---------------------------------------------- | --------- |
 | back         | 点击返回按钮时触发             | -                                              | 0.1.33    |
 | back-home    | 点击返回首页按钮时触发          | -                                              | 0.1.33    |
 
-## Slot
+## Tabbar Slot
 
 | 名称    | 说明     | 最低版本 |
 | ------- | -------- | -------- |

@@ -1,5 +1,7 @@
 # CountTo 数字滚动<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.8</el-tag>
 
+数字滚动组件。
+
 ## 基本用法
 
 设置 `endVal` 属性，表示最终值。

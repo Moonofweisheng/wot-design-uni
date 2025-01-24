@@ -1,6 +1,6 @@
 # DatetimePicker 日期时间选择器
 
-为 Picker 组件的封装，在其内部构建好日期时间选项。
+为 DatetimePickerView 组件的封装，在其内部构建好日期时间选项。
 
 ## 基本用法
 

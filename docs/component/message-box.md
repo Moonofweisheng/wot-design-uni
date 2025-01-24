@@ -1,6 +1,6 @@
-# MessageBox 弹框
+# MessageBox 弹框  
 
-弹框有三种：alert、confirm 和 prompt。
+弹出对话框，常用于消息提示、消息确认等，支持函数调用。
 
 ## Alert 弹框
 
@@ -248,7 +248,7 @@ MessageBox.confirm(options)
 MessageBox.prompt(options)
 ```
 
-## Options Attributes
+## Options
 
 | 参数                 | 说明                                                                            | 类型            | 可选值                   | 默认值           | 最低版本         |
 | -------------------- | ------------------------------------------------------------------------------- | --------------- | ------------------------ | ---------------- | ---------------- |
@@ -264,11 +264,16 @@ MessageBox.prompt(options)
 | inputError           | 当 type 为 prompt 时，输入框检验不通过时的错误提示文案                          | string          | -                        | 输入的数据不合法 | -                |
 | confirmButtonText    | 确定按钮文案                                                                    | string          | -                        | 确定             | -                |
 | cancelButtonText     | 取消按钮文案                                                                    | string          | -                        | 取消             | -                |
-| selector             | 指定唯一标识                                                                    | string          | -                        | #wd-message-box  | -                |
 | zIndex               | 弹窗层级                                                                        | number          | -                        | 99               | -                |
 | lazyRender           | 弹层内容懒渲染，触发展示时才渲染内容                                            | boolean         | -                        | true             | -                |
 | cancel-button-props  | 取消按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | 1.5.0 |
 | confirm-button-props | 确定按钮的属性，具体参考 [Button Attributes](/component/button.html#attributes) | object          | -                        | -                | 1.5.0 |
+
+## Attributes
+
+| 参数          | 说明     | 类型    | 可选值 | 默认值 | 最低版本 |
+| ------------- | -------- | ------- | ------ | ------ | -------- |
+| selector      | 指定唯一标识 | string  | -      | -     | -   |
 
 ## 外部样式类
 

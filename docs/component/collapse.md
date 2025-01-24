@@ -1,5 +1,7 @@
 # Collapse 折叠面板
 
+将一组内容放置在多个折叠面板中，点击面板的标题可以展开或收缩其内容。
+
 ## 基本使用
 
 `v-model` 为绑定值，可以为 array 类型（普通折叠）、 string 类型（手风琴）和 boolean 类型（收起展开查看更多）。CollapseItem 的 `name` 为必填, `title` 选填且可通过 `slot` 自定义。`name` 用于标识该折叠栏。

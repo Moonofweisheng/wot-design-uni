@@ -22,6 +22,9 @@ jobs:
           npm install pnpm -g
           pnpm install
 
+      - name: Run Build WEB TYPES
+        run: pnpm build:web-types
+
       - name: Run Compiler
         run: pnpm compiler
 
