@@ -252,6 +252,48 @@ const displayFormatTabLabel = (items) => {
 }
 
 ```
+## 自定义icon
+
+通过 `icon`插槽自定义icon。
+
+```html
+ <wd-datetime-picker label="可清空的" v-model="value18">
+        <template #icon="{ disabled, readonly }">
+          <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" :name="iconName" @tap.stop="clear" />
+        </template>
+      </wd-datetime-picker>
+```
+
+```typescript
+const value18 = ref<string>('')
+/* computed */
+const iconName = computed(() => {
+  return value18.value ? 'error-fill' : 'arrow-right'
+})
+const clear = () => {
+  if (iconName.value === 'arrow-right') {
+    return
+  }
+  value18.value = ''
+}
+```
+
+## 自定义展示文案
+
+给 `display-format` 属性传入一个函数，接收所有选中项数组，返回展示的文本内容。
+
+```html
+<wd-datetime-picker v-model="value" label="自定义展示文案" :display-format="displayFormat" @confirm="handleConfirm" />
+```
+
+```typescript
+const value = ref<string>('')
+
+function handleConfirm({ value }) {
+  
+}
+
+
 
 ## Attributes
 
@@ -326,6 +368,7 @@ const displayFormatTabLabel = (items) => {
 |------|-----|---------|
 | default | 使用默认插槽 | - |
 | label | 左侧标题插槽 | - |
+| icon | 图标插槽 | {disabled, readonly} ,{是否禁用，是否只读} |
 
 ## 外部样式类
 
