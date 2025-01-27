@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp, numericProp } from '../common/props'
 
 export type KeyboardMode = 'default' | 'custom'
 export type KeyType = '' | 'delete' | 'extra' | 'close'
@@ -75,5 +75,9 @@ export const numberKeyboardProps = {
   /**
    * 额外按键
    */
-  extraKey: [String, Array] as PropType<string | Array<string>>
+  extraKey: [String, Array] as PropType<string | Array<string>>,
+  /**
+   * 背景圆角大小，默认单位为px
+   */
+  radius: numericProp
 }
