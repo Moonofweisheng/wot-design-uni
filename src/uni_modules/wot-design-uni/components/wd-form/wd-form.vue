@@ -23,6 +23,7 @@ import { deepClone, getPropByPath, isArray, isDef, isPromise, isString } from '.
 import { useChildren } from '../composables/useChildren'
 import { useToast } from '../wd-toast'
 import { type FormRules, FORM_KEY, type ErrorMessage, formProps, type FormExpose } from './types'
+import { onMounted } from 'vue'
 
 const { show: showToast } = useToast('wd-form-toast')
 const props = defineProps(formProps)
@@ -201,7 +202,25 @@ function reset() {
   clearMessage()
 }
 
-defineExpose<FormExpose>({ validate, reset })
+/**
+ * 重置表单项为初始值，并清空验证提示
+ */
+let initialValue: any = undefined
+function resetFields() {
+  let model = props.model
+  children.forEach((field) => {
+    model[field.prop] = deepClone(initialValue[field.prop])
+  })
+
+  reset()
+}
+
+onMounted(() => {
+  // 保存初始值
+  initialValue = deepClone(props.model)
+})
+
+defineExpose<FormExpose>({ validate, reset, resetFields })
 </script>
 
 <style lang="scss" scoped>
