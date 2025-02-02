@@ -23,6 +23,10 @@ export type MessageOptions = {
    */
   title?: string
   /**
+   * 是否展示确定按钮
+   */
+  showConfirmButton?: boolean
+  /**
    * 是否展示取消按钮
    */
   showCancelButton?: boolean
