@@ -119,7 +119,7 @@ toast.close()
 | ------------ | --------------------------------------------------------------------------- | ---------- | ------------------------- | ---------------------- | -------- |
 | msg          | 消息内容                                                                    | string     | -                         | -                      | -        |
 | duration     | 持续时间，单位 ms，为 0 时表示不自动关闭                                    | number     | -                         | 2000                   | -        |
-| direction     | 排版方向                                                                   | string     | vertical / horizonal | horizonal              | $LOWEST_VERSION$ |
+| direction     | 排版方向                                                                   | string     | vertical / horizontal | horizontal              | $LOWEST_VERSION$ |
 | iconName     | 图标类型                                                                    | string     | success / error / warning | -                      | -        |
 | iconSize     | 左侧图标尺寸                                                                | string     | -                         | -                   | -        |
 | iconClass    | 图标类目，自定义图标，可以使用 Icon 章节的那些图标类名，iconName 优先级更高 | string     | -                         | -                      | -        |
