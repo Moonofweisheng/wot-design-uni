@@ -23,6 +23,10 @@
         <wd-button @click="showLoadingToast">Loading加载</wd-button>
         <wd-button @click="showLoadingToast2">ring类型loading</wd-button>
       </demo-block>
+      <demo-block title="排版方向">
+        <wd-button @click="showHorizonToast">横向排版</wd-button>
+        <wd-button @click="showVerticalToast">纵向排版</wd-button>
+      </demo-block>
     </page-wraper>
   </view>
 </template>
@@ -97,6 +101,17 @@ function showCustomIconToast() {
     iconClass: 'kehuishouwu',
     classPrefix: 'fish',
     msg: '使用自定义图标'
+  })
+}
+
+function showHorizonToast() {
+  toast.success('横向排版')
+}
+
+function showVerticalToast() {
+  toast.success({
+    msg: '纵向排版',
+    direction: 'vertical'
   })
 }
 </script>

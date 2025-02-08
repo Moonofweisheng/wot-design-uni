@@ -66,7 +66,7 @@ export function useToast(selector: string = ''): Toast {
   const info = createMethod({ iconName: 'info' })
 
   const close = () => {
-    toastOption.value = { show: false }
+    toastOption.value.show = false
   }
   return {
     show,
