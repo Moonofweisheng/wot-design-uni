@@ -4,7 +4,7 @@ Picker 组件为 popup 和 pickerView 的组合。
 
 ## 基本用法
 
-`columns` 设置选项数据源，选项可以为字符串，也可以为对象，如果为对象则默认取 `label` 属性为选项内容进行渲染。`label` 设置左侧文本内容，`v-model` 设置选中项的值。label 可以不传。可以通过 `label-width` 设置标题宽度，默认为 '33%'，监听 `confirm` 事件，获取选中值，传出一个 evnet 对象， `event = { value, selectedItems }`，value 为绑定值，selectedItems 为选中选项的对象。
+`columns` 设置选项数据源，选项可以为字符串，也可以为对象，如果为对象则默认取 `label` 属性为选项内容进行渲染。`label` 设置左侧文本内容，`v-model` 设置选中项的值。label 可以不传。可以通过 `label-width` 设置标题宽度，默认为 '33%'，监听 `confirm` 事件，获取选中值，传出一个 event 对象，event `event = { value, selectedItems }`，value 为绑定值，selectedItems 为选中选项的对象。
 
 ```html
 <wd-picker :columns="columns" label="单列选项" v-model="value" @confirm="handleConfirm" />
