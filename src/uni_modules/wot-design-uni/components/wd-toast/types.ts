@@ -20,6 +20,7 @@ export type ToastLoadingType = LoadingType // 提示信息加载状态类型
 export type ToastOptions = {
   msg?: string
   duration?: number
+  direction?: 'vertical' | 'horizontal'
   iconName?: ToastIconType
   iconSize?: number
   loadingType?: ToastLoadingType

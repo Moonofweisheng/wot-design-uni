@@ -3,16 +3,28 @@
   <wd-transition name="fade" :show="show" :custom-style="transitionStyle" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave">
     <view :class="rootClass">
       <!--iconName优先级更高-->
-      <wd-loading v-if="iconName === 'loading'" :type="loadingType" :color="loadingColor" :size="loadingSize" custom-class="wd-toast__icon" />
+      <wd-loading
+        v-if="iconName === 'loading'"
+        :type="loadingType"
+        :color="loadingColor"
+        :size="loadingSize"
+        :custom-class="`wd-toast__icon ${toastOption.direction === 'vertical' ? 'is-vertical' : ''}`"
+      />
       <view
-        class="wd-toast__iconWrap wd-toast__icon"
+        :class="`wd-toast__iconWrap wd-toast__icon ${toastOption.direction === 'vertical' ? 'is-vertical' : ''}`"
         v-else-if="iconName === 'success' || iconName === 'warning' || iconName === 'info' || iconName === 'error'"
       >
         <view class="wd-toast__iconBox">
           <view class="wd-toast__iconSvg" :style="svgStyle"></view>
         </view>
       </view>
-      <wd-icon v-else-if="iconClass" custom-class="wd-toast__icon" :size="iconSize" :class-prefix="classPrefix" :name="iconClass"></wd-icon>
+      <wd-icon
+        v-else-if="iconClass"
+        :custom-class="`wd-toast__icon ${toastOption.direction === 'vertical' ? 'is-vertical' : ''}`"
+        :size="iconSize"
+        :class-prefix="classPrefix"
+        :name="iconClass"
+      ></wd-icon>
       <!--文本-->
       <view v-if="msg" class="wd-toast__msg">{{ msg }}</view>
     </view>
@@ -107,7 +119,7 @@ const transitionStyle = computed(() => {
 const rootClass = computed(() => {
   return `wd-toast ${props.customClass} wd-toast--${position.value} ${
     (iconName.value !== 'loading' || msg.value) && (iconName.value || iconClass.value) ? 'wd-toast--with-icon' : ''
-  } ${iconName.value === 'loading' && !msg.value ? 'wd-toast--loading' : ''}`
+  } ${iconName.value === 'loading' && !msg.value ? 'wd-toast--loading' : ''} ${toastOption.value.direction === 'vertical' ? 'is-vertical' : ''}`
 })
 
 const svgStyle = computed(() => {
