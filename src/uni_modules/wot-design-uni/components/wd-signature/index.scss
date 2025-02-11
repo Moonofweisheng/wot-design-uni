@@ -16,6 +16,7 @@
     width: 100%;
   }
 
+
   @include e(footer) {
     margin-top: $-signature-footer-margin-top;
     justify-content: flex-end;

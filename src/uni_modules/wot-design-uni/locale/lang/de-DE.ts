@@ -126,6 +126,8 @@ export default {
   },
   signature: {
     confirmText: 'Bestätigen',
-    clearText: 'Löschen'
+    clearText: 'Löschen',
+    previousText: 'Rückgängig machen',
+    nextText: 'Wiederherstellen'
   }
 }
