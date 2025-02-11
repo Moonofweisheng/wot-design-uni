@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-12-31 00:33:21
+ * @LastEditTime: 2025-02-11 18:38:54
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-input-number/types.ts
@@ -37,7 +37,7 @@ export const inputNumberProps = {
   /**
    * 数值精度
    */
-  precision: makeNumberProp(0),
+  precision: makeNumericProp(0),
   /**
    * 是否禁用
    */
