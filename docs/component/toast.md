@@ -2,6 +2,10 @@
 
 轻提示组件，用于消息通知、加载提示、操作结果提示等场景，支持函数式调用。
 
+:::tip 提示
+`Toast` 自 $LOWEST_VERSION$ 版本起支持通过 `props` 属性控制组件样式，字段见[props](#props)，需要注意的是函数式调用api的`options`优先级高于`props`。
+:::
+
 ## 基本用法
 
 需要在页面中引入该组件，作为挂载点。
@@ -52,10 +56,18 @@ toast.show({
 
 ## 提示位置
 
+通过设置 `position` 属性，可以设置提示信息的位置，默认为 `middle-top`。
+
 ```typescript
 // 顶部提示
 toast.show({
   position: 'top',
+  msg: '提示信息'
+})
+
+// 局中提示
+toast.show({
+  position: 'middle',
   msg: '提示信息'
 })
 
@@ -109,29 +121,45 @@ toast.close()
 
 ## Attributes
 
-| 参数    | 说明                                   | 类型            | 可选值 | 默认值 | 最低版本 |
-| ------- | -------------------------------------- | --------------- | ------ | ------ | -------- |
-| options | 配置项，可以直接传入字符串作为提示信息 | string / object | -      | -      | -        |
+| 参数         | 说明                                     | 类型     | 可选值                                     | 默认值     | 最低版本         |
+|--------------|------------------------------------------|----------|--------------------------------------------|------------|------------------|
+| selector     | 选择器                                   | string   | -                                          | ''         | -                |
+| msg          | 提示信息                                 | string   | -                                          | ''         | $LOWEST_VERSION$ |
+| duration     | 持续时间，单位 ms，为 0 时表示不自动关闭 | number   | -                                          | 2000       | $LOWEST_VERSION$ |
+| direction    | 排列方向                                 | string   | vertical / horizontal                      | horizontal | $LOWEST_VERSION$ |
+| iconName     | 图标类型                                 | string   | success / error / warning / loading / info | ''         | $LOWEST_VERSION$ |
+| iconSize     | 图标大小                                 | number   | -                                          | -          | $LOWEST_VERSION$ |
+| loadingType  | 加载类型                                 | string   | outline / ring                             | outline    | $LOWEST_VERSION$ |
+| loadingColor | 加载颜色                                 | string   | -                                          | #4D80F0    | $LOWEST_VERSION$ |
+| loadingSize  | 加载大小                                 | number   | -                                          | -          | $LOWEST_VERSION$ |
+| iconColor    | 图标颜色                                 | string   | -                                          | -          | $LOWEST_VERSION$ |
+| position     | 提示信息框的位置                         | string   | top / middle-top / middle / bottom         | middle-top | $LOWEST_VERSION$ |
+| zIndex       | 层级                                     | number   | -                                          | 100        | $LOWEST_VERSION$ |
+| cover        | 是否存在遮罩层                           | boolean  | -                                          | false      | $LOWEST_VERSION$ |
+| iconClass    | 图标类名                                 | string   | -                                          | ''         | $LOWEST_VERSION$ |
+| classPrefix  | 类名前缀，用于使用自定义图标             | string   | -                                          | wd-icon    | $LOWEST_VERSION$ |
+| opened       | 完全展示后的回调函数                     | Function | -                                          | -          | $LOWEST_VERSION$ |
+| closed       | 完全关闭时的回调函数                     | Function | -                                          | -          | $LOWEST_VERSION$ |
 
-## options
+## Options
 
-| 参数         | 说明                                                                        | 类型       | 可选值                    | 默认值                 | 最低版本 |
-| ------------ | --------------------------------------------------------------------------- | ---------- | ------------------------- | ---------------------- | -------- |
-| msg          | 消息内容                                                                    | string     | -                         | -                      | -        |
-| duration     | 持续时间，单位 ms，为 0 时表示不自动关闭                                    | number     | -                         | 2000                   | -        |
-| direction     | 排版方向                                                                   | string     | vertical / horizontal | horizontal              | $LOWEST_VERSION$ |
-| iconName     | 图标类型                                                                    | string     | success / error / warning | -                      | -        |
-| iconSize     | 左侧图标尺寸                                                                | string     | -                         | -                   | -        |
-| iconClass    | 图标类目，自定义图标，可以使用 Icon 章节的那些图标类名，iconName 优先级更高 | string     | -                         | -                      | -        |
-| classPrefix   | 类名前缀，用于使用自定义图标                 | string    | -                         | -                  | -        |
-| position     | 提示信息框的位置                                                            | string     | top / middle / bottom     | middle                 | -        |
-| zIndex       | toast 层级                                                                  | number     | -                         | 100                    | -        |
-| loadingType  | [加载中图标类型](/component/loading)                                        | string     | ring                      | outline                | -        |
-| loadingColor | [加载中图标颜色](/component/loading)                                        | string     | -                         | #4D80F0                | -        |
-| selector     | 指定唯一标识                                                  | string          | -                        | -  | -        |
-| cover        | 是否存在一个透明遮罩                                                        | boolean    | -                         | `loading`时默认为 true | 1.2.15   |
-| opened       | 完全展示后的回调函数                                                        | `Function` | -                         | -                      | 1.2.15   |
-| closed       | 完全关闭后的回调函数                                                        | `Function` | -                         | -                      | 1.2.15   |
+| 参数         | 说明                                                                        | 类型     | 可选值                    | 默认值     | 最低版本 |
+|--------------|-----------------------------------------------------------------------------|----------|---------------------------|------------|----------|
+| msg          | 消息内容                                                                    | string   | -                         | ''         | -        |
+| duration     | 持续时间，单位 ms，为 0 时表示不自动关闭                                    | number   | -                         | 2000       | -        |
+| direction    | 排版方向                                                                    | string   | vertical / horizontal     | horizontal | $LOWEST_VERSION$        |
+| iconName     | 图标类型                                                                    | string   | success / error / warning | ''         | -        |
+| iconSize     | 左侧图标尺寸                                                                | number   | -                         | -          | -        |
+| iconClass    | 图标类目，自定义图标，可以使用 Icon 章节的那些图标类名，iconName 优先级更高 | string   | -                         | ''         | -        |
+| classPrefix  | 类名前缀，用于使用自定义图标                                                | string   | -                         | 'wd-icon'  | -        |
+| position     | 提示信息框的位置                                                            | string   | top / middle / bottom     | middle-top | -        |
+| zIndex       | toast 层级                                                                  | number   | -                         | 100        | -        |
+| loadingType  | [加载中图标类型](/component/loading)                                        | string   | ring                      | outline    | -        |
+| loadingColor | [加载中图标颜色](/component/loading)                                        | string   | -                         | #4D80F0    | -        |
+| selector     | 指定唯一标识                                                                | string   | -                         | ''         | -        |
+| cover        | 是否存在一个透明遮罩                                                        | boolean  | -                         | false      | -        |
+| opened       | 完全展示后的回调函数                                                        | Function | -                         | -          | -        |
+| closed       | 完全关闭后的回调函数                                                        | Function | -                         | -          | -        |
 
 ## Methods
 

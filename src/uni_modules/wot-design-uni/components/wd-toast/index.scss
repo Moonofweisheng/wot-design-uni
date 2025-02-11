@@ -16,6 +16,7 @@
   @include when(vertical) {
     flex-direction: column;
   }
+
   @include e(msg) {
     font-size: $-toast-fs;
     line-height: 20px;
@@ -55,7 +56,7 @@
   @include m(top) {
     transform: translate3d(0, -40vh, 0);
   }
-  @include m(middle){
+  @include m(middle-top){
     transform: translate3d(0%,-18.8vh,0);
   }
   @include m(bottom) {
