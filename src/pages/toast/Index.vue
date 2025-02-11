@@ -17,11 +17,13 @@
       </demo-block>
       <demo-block title="提示位置">
         <wd-button @click="showTopToast">顶部toast</wd-button>
+        <wd-button @click="showMiddletoast">局中toast</wd-button>
         <wd-button @click="showBottomToast">底部toast</wd-button>
       </demo-block>
       <demo-block title="Loading">
         <wd-button @click="showLoadingToast">Loading加载</wd-button>
         <wd-button @click="showLoadingToast2">ring类型loading</wd-button>
+        <wd-button @click="showLoadingToast3">纵向布局loading</wd-button>
       </demo-block>
       <demo-block title="排版方向">
         <wd-button @click="showHorizonToast">横向排版</wd-button>
@@ -63,6 +65,21 @@ function showTopToast() {
     }
   })
 }
+
+function showMiddletoast() {
+  toast.show({
+    position: 'middle',
+    iconClass: 'star',
+    msg: '提示信息',
+    closed() {
+      console.log(232)
+    },
+    opened() {
+      console.log(2323232)
+    }
+  })
+}
+
 function showBottomToast() {
   toast.show({
     position: 'bottom',
@@ -80,6 +97,16 @@ function showLoadingToast2() {
     msg: '3s后调用close关闭',
     loadingType: 'ring',
     loadingColor: '#fff'
+  })
+  setTimeout(() => {
+    toast.close()
+  }, 3000)
+}
+
+function showLoadingToast3() {
+  toast.loading({
+    msg: '芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。黄鹤断矶头，故人曾到否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。',
+    direction: 'vertical'
   })
   setTimeout(() => {
     toast.close()
@@ -110,7 +137,7 @@ function showHorizonToast() {
 
 function showVerticalToast() {
   toast.success({
-    msg: '纵向排版',
+    msg: '芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。黄鹤断矶头，故人曾到否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。',
     direction: 'vertical'
   })
 }

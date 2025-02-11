@@ -8,10 +8,10 @@
         :type="loadingType"
         :color="loadingColor"
         :size="loadingSize"
-        :custom-class="`wd-toast__icon ${toastOption.direction === 'vertical' ? 'is-vertical' : ''}`"
+        :custom-class="`wd-toast__icon ${direction === 'vertical' ? 'is-vertical' : ''}`"
       />
       <view
-        :class="`wd-toast__iconWrap wd-toast__icon ${toastOption.direction === 'vertical' ? 'is-vertical' : ''}`"
+        :class="`wd-toast__iconWrap wd-toast__icon ${direction === 'vertical' ? 'is-vertical' : ''}`"
         v-else-if="iconName === 'success' || iconName === 'warning' || iconName === 'info' || iconName === 'error'"
       >
         <view class="wd-toast__iconBox">
@@ -20,7 +20,7 @@
       </view>
       <wd-icon
         v-else-if="iconClass"
-        :custom-class="`wd-toast__icon ${toastOption.direction === 'vertical' ? 'is-vertical' : ''}`"
+        :custom-class="`wd-toast__icon ${direction === 'vertical' ? 'is-vertical' : ''}`"
         :size="iconSize"
         :class-prefix="classPrefix"
         :name="iconClass"
@@ -51,7 +51,7 @@ import wdTransition from '../wd-transition/wd-transition.vue'
 import { computed, inject, onBeforeMount, ref, watch, type CSSProperties } from 'vue'
 import base64 from '../common/base64'
 import { defaultOptions, getToastOptionKey, toastIcon } from '.'
-import { toastProps, type ToastLoadingType, type ToastOptions } from './types'
+import { toastProps, type ToastDirection, type ToastLoadingType, type ToastOptions, type ToastProps } from './types'
 import { addUnit, isDef, isFunction, objToStyle } from '../common/util'
 
 const props = defineProps(toastProps)
@@ -68,6 +68,7 @@ const svgStr = ref<string>('') // 图标
 const cover = ref<boolean>(false) // 是否存在遮罩层
 const classPrefix = ref<string>('wd-icon') // 图标前缀
 const iconClass = ref<string>('') // 图标类名
+const direction = ref<ToastDirection>('horizontal') // toast布局方向
 
 let opened: (() => void) | null = null
 
@@ -111,7 +112,8 @@ const transitionStyle = computed(() => {
     left: 0,
     width: '100%',
     transform: 'translate(0, -50%)',
-    'text-align': 'center'
+    'text-align': 'center',
+    'pointer-events': 'none'
   }
   return objToStyle(style)
 })
@@ -119,7 +121,7 @@ const transitionStyle = computed(() => {
 const rootClass = computed(() => {
   return `wd-toast ${props.customClass} wd-toast--${position.value} ${
     (iconName.value !== 'loading' || msg.value) && (iconName.value || iconClass.value) ? 'wd-toast--with-icon' : ''
-  } ${iconName.value === 'loading' && !msg.value ? 'wd-toast--loading' : ''} ${toastOption.value.direction === 'vertical' ? 'is-vertical' : ''}`
+  } ${iconName.value === 'loading' && !msg.value ? 'wd-toast--loading' : ''} ${direction.value === 'vertical' ? 'is-vertical' : ''}`
 })
 
 const svgStyle = computed(() => {
@@ -161,25 +163,28 @@ function buildSvg() {
  * @param option toast选项值
  */
 function reset(option: ToastOptions) {
-  if (option) {
-    show.value = isDef(option.show) ? option.show : false
+  show.value = isDef(option.show) ? option.show : false
 
-    if (show.value) {
-      iconName.value = isDef(option.iconName!) ? option.iconName! : ''
-      iconClass.value = isDef(option.iconClass!) ? option.iconClass! : ''
-      msg.value = isDef(option.msg!) ? option.msg! : ''
-      position.value = isDef(option.position!) ? option.position! : 'middle'
-      zIndex.value = isDef(option.zIndex!) ? option.zIndex! : 100
-      loadingType.value = isDef(option.loadingType!) ? option.loadingType! : 'outline'
-      loadingColor.value = isDef(option.loadingColor!) ? option.loadingColor! : '#4D80F0'
-      iconSize.value = isDef(option.iconSize) ? addUnit(option.iconSize) : option.iconSize
-      loadingSize.value = isDef(option.loadingSize) ? addUnit(option.loadingSize) : option.loadingSize
-      cover.value = isDef(option.cover!) ? option.cover! : false
-      classPrefix.value = isDef(option.classPrefix) ? option.classPrefix : 'wd-icon'
-      closed = isFunction(option.closed) ? option.closed : null
-      opened = isFunction(option.opened) ? option.opened : null
-    }
+  if (show.value) {
+    mergeOptionsWithProps(option, props)
   }
+}
+
+function mergeOptionsWithProps(option: ToastOptions, props: ToastProps) {
+  iconName.value = isDef(option.iconName!) ? option.iconName! : props.iconName
+  iconClass.value = isDef(option.iconClass!) ? option.iconClass! : props.iconClass
+  msg.value = isDef(option.msg!) ? option.msg! : props.msg
+  position.value = isDef(option.position!) ? option.position! : props.position
+  zIndex.value = isDef(option.zIndex!) ? option.zIndex! : props.zIndex
+  loadingType.value = isDef(option.loadingType!) ? option.loadingType! : props.loadingType
+  loadingColor.value = isDef(option.loadingColor!) ? option.loadingColor! : props.loadingColor
+  iconSize.value = isDef(option.iconSize) ? addUnit(option.iconSize) : isDef(props.iconSize) ? addUnit(props.iconSize) : undefined
+  loadingSize.value = isDef(option.loadingSize) ? addUnit(option.loadingSize) : isDef(props.loadingSize) ? addUnit(props.loadingSize) : undefined
+  cover.value = isDef(option.cover!) ? option.cover! : props.cover
+  classPrefix.value = isDef(option.classPrefix) ? option.classPrefix : props.classPrefix
+  direction.value = isDef(option.direction) ? option.direction : props.direction
+  closed = isFunction(option.closed) ? option.closed : isFunction(props.closed) ? props.closed : null
+  opened = isFunction(option.opened) ? option.opened : isFunction(props.opened) ? props.opened : null
 }
 </script>
 <style lang="scss" scoped>
