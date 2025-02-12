@@ -315,7 +315,7 @@ export function isArray(value: any): value is Array<any> {
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function isFunction<T extends Function>(value: any): value is T {
-  return getType(value) === 'function'
+  return getType(value) === 'function' || getType(value) === 'asyncfunction'
 }
 
 /**
