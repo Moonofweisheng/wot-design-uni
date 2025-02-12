@@ -108,14 +108,6 @@ export const inputProps = {
    */
   readonly: makeBooleanProp(false),
   /**
-   * 使用 后置图标 插槽
-   */
-  useSuffixSlot: makeBooleanProp(false),
-  /**
-   * 使用 前置图标 插槽
-   */
-  usePrefixSlot: makeBooleanProp(false),
-  /**
    * 前置图标，icon组件中的图标类名
    */
   prefixIcon: String,
@@ -135,10 +127,6 @@ export const inputProps = {
    * 设置左侧标题宽度
    */
   labelWidth: makeStringProp(''),
-  /**
-   * 使用 label 插槽
-   */
-  useLabelSlot: makeBooleanProp(false),
   /**
    * 设置输入框大小，可选值：large
    */

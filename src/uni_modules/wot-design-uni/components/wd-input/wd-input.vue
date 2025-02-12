@@ -1,20 +1,20 @@
 <template>
   <view :class="rootClass" :style="customStyle" @click="handleClick">
-    <view v-if="label || useLabelSlot" :class="labelClass" :style="labelStyle">
-      <view v-if="prefixIcon || usePrefixSlot" class="wd-input__prefix">
-        <wd-icon v-if="prefixIcon && !usePrefixSlot" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
+    <view v-if="label || $slots.label" :class="labelClass" :style="labelStyle">
+      <view v-if="prefixIcon || $slots.prefix" class="wd-input__prefix">
+        <wd-icon v-if="prefixIcon && !$slots.prefix" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
         <slot v-else name="prefix"></slot>
       </view>
       <view class="wd-input__label-inner">
-        <template v-if="label">{{ label }}</template>
+        <template v-if="label && !$slots.label">{{ label }}</template>
         <slot v-else name="label"></slot>
       </view>
     </view>
     <view class="wd-input__body">
       <view class="wd-input__value">
-        <view v-if="(prefixIcon || usePrefixSlot) && !label" class="wd-input__prefix">
-          <wd-icon v-if="prefixIcon" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
-          <slot name="prefix"></slot>
+        <view v-if="(prefixIcon || $slots.prefix) && !label" class="wd-input__prefix">
+          <wd-icon v-if="prefixIcon && !$slots.prefix" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
+          <slot v-else name="prefix"></slot>
         </view>
         <input
           :class="[
@@ -65,8 +65,8 @@
             </text>
             /{{ maxlength }}
           </view>
-          <wd-icon v-if="suffixIcon" custom-class="wd-input__icon" :name="suffixIcon" @click="onClickSuffixIcon" />
-          <slot name="suffix"></slot>
+          <wd-icon v-if="suffixIcon && !$slots.suffix" custom-class="wd-input__icon" :name="suffixIcon" @click="onClickSuffixIcon" />
+          <slot v-else name="suffix"></slot>
         </view>
       </view>
       <view v-if="errorMessage" class="wd-input__error-message">{{ errorMessage }}</view>
@@ -86,8 +86,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import { computed, ref, watch, useSlots, type Slots } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { computed, onBeforeMount, ref, watch } from 'vue'
 import { isDef, objToStyle, pause, isEqual } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
@@ -95,11 +95,16 @@ import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { inputProps } from './types'
 
+interface InputSlots extends Slots {
+  prefix?: () => any
+  suffix?: () => any
+  label?: () => any
+}
+
 const props = defineProps(inputProps)
 const emit = defineEmits([
   'update:modelValue',
   'clear',
-  'change',
   'blur',
   'focus',
   'input',
@@ -109,6 +114,7 @@ const emit = defineEmits([
   'clickprefixicon',
   'click'
 ])
+const slots = useSlots() as InputSlots
 const { translate } = useTranslate('input')
 
 const isPwdVisible = ref<boolean>(false)
@@ -185,9 +191,9 @@ const isRequired = computed(() => {
 })
 
 const rootClass = computed(() => {
-  return `wd-input  ${props.label || props.useLabelSlot ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${
-    cell.border.value ? 'is-border' : ''
-  } ${props.size ? 'is-' + props.size : ''} ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''}  ${
+  return `wd-input  ${props.label || slots.label ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${cell.border.value ? 'is-border' : ''} ${
+    props.size ? 'is-' + props.size : ''
+  } ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''}  ${
     inputValue.value && String(inputValue.value).length > 0 ? 'is-not-empty' : ''
   }  ${props.noBorder ? 'is-no-border' : ''} ${props.customClass}`
 })
@@ -241,9 +247,6 @@ async function handleClear() {
     focused.value = true
     focusing.value = true
   }
-  emit('change', {
-    value: ''
-  })
   emit('update:modelValue', inputValue.value)
   emit('clear')
 }

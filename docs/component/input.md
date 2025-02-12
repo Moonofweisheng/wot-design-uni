@@ -163,9 +163,6 @@ function handleChange(event) {
 | error | 设置输入框错误状态，错误状态时为红色 | boolean | - | false | - |
 | center | 当有label属性时，设置标题和输入框垂直居中，默认为顶部居中 | boolean | - | false | - |
 | label-width | 设置左侧标题宽度 | string | - | 33% | - |
-| use-label-slot | 使用 label 插槽 | boolean | - | false | - |
-| use-suffix-slot | 使用 后置图标 插槽 | boolean | - | false | - |
-| use-prefix-slot | 使用 前置图标 插槽 | boolean | - | false | - |
 | required | cell 类型下必填样式 | boolean | - | false | - |
 | no-border | 非 cell 类型下是否隐藏下划线 | boolean | - | false | - | - |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
@@ -209,7 +206,6 @@ function handleChange(event) {
 | input | 监听输入框input事件 | ` {value, cursor, keyCode}` | - |
 | focus | 监听输入框focus事件 | ` { value, height }`, height 为键盘高度 | - |
 | blur | 监听输入框blur事件 | ` { value }` | - |
-| change | 监听输入框修改事件 | ` { value }` | - |
 | clear | 监听输入框清空按钮事件 | - | - |
 | confirm | 点击完成时， 触发 confirm 事件 | ` { value }` | - |
 | keyboardheightchange | 键盘高度发生变化的时候触发此事件 | ` { height, duration }` | - |
@@ -217,9 +213,6 @@ function handleChange(event) {
 | clicksuffixicon | 点击后置图标时触发 | - | - |
 
 ## Slot
-:::tip 提示
-使用插槽需要配置是否启用对应的插槽，分别对应`use-label-slot`、`use-suffix-slot`、`use-prefix-slot`。
-:::
 
 | name | 说明 | 最低版本 |
 |------|-----|---------|
