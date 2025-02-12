@@ -124,7 +124,7 @@ export type UploadMethod = (
     onError: (res: UniApp.GeneralCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
     onProgress: (res: UniApp.OnProgressUpdateResult, file: UploadFileItem) => void
   }
-) => void
+) => void | Promise<void>
 
 export const uploadProps = {
   ...baseProps,

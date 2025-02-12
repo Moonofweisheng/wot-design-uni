@@ -178,7 +178,7 @@ watch(
 watch(
   () => props.beforePreview,
   (fn) => {
-    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforePreview must be Function')
     }
   },
@@ -191,7 +191,7 @@ watch(
 watch(
   () => props.onPreviewFail,
   (fn) => {
-    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of onPreviewFail must be Function')
     }
   },
@@ -204,7 +204,7 @@ watch(
 watch(
   () => props.beforeRemove,
   (fn) => {
-    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforeRemove must be Function')
     }
   },
@@ -217,7 +217,7 @@ watch(
 watch(
   () => props.beforeUpload,
   (fn) => {
-    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforeUpload must be Function')
     }
   },
@@ -230,7 +230,7 @@ watch(
 watch(
   () => props.beforeChoose,
   (fn) => {
-    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of beforeChoose must be Function')
     }
   },
@@ -243,7 +243,7 @@ watch(
 watch(
   () => props.buildFormData,
   (fn) => {
-    if (fn && !isFunction(fn) && getType(fn) !== 'asyncfunction') {
+    if (fn && !isFunction(fn)) {
       console.error('The type of buildFormData must be Function')
     }
   },
