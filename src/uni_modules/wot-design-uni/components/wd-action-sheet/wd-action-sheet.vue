@@ -123,13 +123,12 @@ function select(rowIndex: number, type: 'action' | 'panels', colIndex?: number) 
       colIndex
     })
   }
-  close()
+  if (props.closeOnClickAction) {
+    close()
+  }
 }
 function handleClickModal() {
   emit('click-modal')
-  // if (props.closeOnClickModal) {
-  //   close()
-  // }
 }
 function handleCancel() {
   emit('cancel')
