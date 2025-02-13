@@ -1,7 +1,7 @@
 <template>
   <view class="wd-curtain-wrapper">
     <wd-popup
-      v-model="show"
+      v-model="modelValue"
       transition="zoom-in"
       position="center"
       :close-on-click-modal="closeOnClickModal"
@@ -51,7 +51,6 @@ import { computed, ref, watch } from 'vue'
 import { curtainProps } from './types'
 
 const props = defineProps(curtainProps)
-
 const emit = defineEmits([
   'beforeenter',
   'enter',
@@ -64,27 +63,32 @@ const emit = defineEmits([
   'click-modal',
   'load',
   'error',
-  'click'
+  'click',
+  'update:modelValue'
 ])
 
-const show = ref<boolean>(false)
-const imgSucc = ref<boolean>(true)
-const imgScale = ref<number>(1)
+const modelValue = ref(props.modelValue || props.value)
+
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    modelValue.value = newVal
+  }
+)
 
 watch(
   () => props.value,
   (newVal) => {
-    if (newVal && imgSucc.value) {
-      show.value = true
-    } else {
-      show.value = false
-    }
-  },
-  {
-    deep: true,
-    immediate: true
+    modelValue.value = newVal
   }
 )
+
+watch(modelValue, (newVal) => {
+  emit('update:modelValue', newVal)
+})
+
+const imgSucc = ref<boolean>(true)
+const imgScale = ref<number>(1)
 
 const imgStyle = computed(() => {
   let style = ''
@@ -120,7 +124,7 @@ function afterleave() {
 }
 
 function close() {
-  show.value = false
+  modelValue.value = false
   emit('close')
 }
 

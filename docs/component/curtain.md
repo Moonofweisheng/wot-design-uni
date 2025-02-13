@@ -4,7 +4,7 @@
 
 ## 基本用法
 
-通过 `value` 属性设置显示隐藏，监听 `@close` 事件修改 `value`，必填项。
+通过 `v-model` 属性设置显示隐藏，必填项。
 
 `src` 为幕帘图片地址（只支持在线地址），值为 `string` 类型，必填项。
 
@@ -12,7 +12,7 @@
 
 ```html
 <wd-button @click="handleClick">展示幕帘</wd-button>
-<wd-curtain :value="value" :src="img " :to="link" @close="handleClose"></wd-curtain>
+<wd-curtain v-model="value" :src="img" :to="link"></wd-curtain>
 ```
 
 ```typescript
@@ -22,10 +22,6 @@ const link = ref<string>('/pages/index/index')
 
 function handleClick() {
   value.value = true
-}
-
-function handleClose() {
-  value.value = false
 }
 ```
 
@@ -35,7 +31,7 @@ function handleClose() {
 
 ```html
 <wd-button @click="handleClick">展示幕帘</wd-button>
-<wd-curtain :value="value" :src="img " :to="link" @close="handleClose" width="280"></wd-curtain>
+<wd-curtain v-model="value" :src="img" :to="link" width="280"></wd-curtain>
 ```
 
 ```typescript
@@ -45,10 +41,6 @@ const link = ref<string>('/pages/index/index')
 
 function handleClick() {
   value.value = true
-}
-
-function handleClose() {
-  value.value = false
 }
 ```
 
@@ -58,7 +50,7 @@ function handleClose() {
 
 ```html
 <wd-button @click="handleClick">展示幕帘</wd-button>
-<wd-curtain :value="value" :src="img " :to="link" @close="handleClose" close-position="top" width="280"></wd-curtain>
+<wd-curtain v-model="value" :src="img" :to="link" close-position="top" width="280"></wd-curtain>
 ```
 
 ```typescript
@@ -68,10 +60,6 @@ const link = ref<string>('/pages/index/index')
 
 function handleClick() {
   value.value = true
-}
-
-function handleClose() {
-  value.value = false
 }
 ```
 
@@ -81,7 +69,7 @@ function handleClose() {
 
 ```html
 <wd-button @click="handleClick">展示幕帘</wd-button>
-<wd-curtain :value="value" :src="img " :to="link" close-position="bottom-right" width="280" @close="handleClose" close-on-click-modal></wd-curtain>
+<wd-curtain v-model="value" :src="img" :to="link" close-position="bottom-right" width="280" close-on-click-modal></wd-curtain>
 ```
 
 ```typescript
@@ -92,24 +80,21 @@ const link = ref<string>('/pages/index/index')
 function handleClick() {
   value.value = true
 }
-
-function handleClose() {
-  value.value = false
-}
 ```
 
 ## Attributes
 
-| 参数                 | 说明                                      | 类型    | 可选值                                                                   | 默认值 | 最低版本 |
-| -------------------- | ----------------------------------------- | ------- | ------------------------------------------------------------------------ | ------ | -------- |
-| value                | 绑定值，展示/关闭幕帘                     | boolean | -                                                                        | -      | -        |
-| src                  | 幕帘图片地址，必须使用网络地址            | string  | -                                                                        | -      | -        |
-| width                | 幕帘图片宽度，默认单位 px                 | number  | -                                                                        | -      | -        |
-| to                   | 幕帘图片点击链接                          | string  | -                                                                        | -      | -        |
-| close-position       | 关闭按钮位置                              | string  | inset / top / bottom / top-left / top-right / bottom-left / bottom-right | inset  | -        |
-| close-on-click-modal | 点击遮罩是否关闭                          | boolean | -                                                                        | false  | -        |
-| hide-when-close      | 是否当关闭时将弹出层隐藏（display: none） | boolean | -                                                                        | true   | -        |
-| z-index              | 设置层级                                  | number  | -                                                                        | 10     | 1.4.0    |
+| 参数                 | 说明                                               | 类型    | 可选值                                                                   | 默认值 | 最低版本 |
+|----------------------|----------------------------------------------------|---------|--------------------------------------------------------------------------|--------|----------|
+| value                | 绑定值，展示/关闭幕帘（已废弃，请使用 modelValue） | boolean | -                                                                        | -      | -        |
+| modelValue           | 绑定值，展示/关闭幕帘                              | boolean | -                                                                        | -      | $LOWEST_VERSION$   |
+| src                  | 幕帘图片地址，必须使用网络地址                     | string  | -                                                                        | -      | -        |
+| width                | 幕帘图片宽度，默认单位 px                          | number  | -                                                                        | -      | -        |
+| to                   | 幕帘图片点击链接                                   | string  | -                                                                        | -      | -        |
+| close-position       | 关闭按钮位置                                       | string  | inset / top / bottom / top-left / top-right / bottom-left / bottom-right | inset  | -        |
+| close-on-click-modal | 点击遮罩是否关闭                                   | boolean | -                                                                        | false  | -        |
+| hide-when-close      | 是否当关闭时将弹出层隐藏（display: none）          | boolean | -                                                                        | true   | -        |
+| z-index              | 设置层级                                           | number  | -                                                                        | 10     | 1.4.0    |
 
 ## Events
 
