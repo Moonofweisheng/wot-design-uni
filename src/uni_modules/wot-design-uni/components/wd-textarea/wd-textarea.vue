@@ -1,12 +1,12 @@
 <template>
   <view :class="rootClass" :style="customStyle">
-    <view v-if="label || useLabelSlot" :class="labelClass" :style="labelStyle">
-      <view v-if="prefixIcon || usePrefixSlot" class="wd-textarea__prefix">
-        <wd-icon v-if="prefixIcon && !usePrefixSlot" custom-class="wd-textarea__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
+    <view v-if="label || $slots.label" :class="labelClass" :style="labelStyle">
+      <view v-if="prefixIcon || $slots.prefix" class="wd-textarea__prefix">
+        <wd-icon v-if="prefixIcon && !$slots.prefix" custom-class="wd-textarea__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
         <slot v-else name="prefix"></slot>
       </view>
       <view class="wd-textarea__label-inner">
-        <text v-if="label">{{ label }}</text>
+        <text v-if="label && !$slots.label">{{ label }}</text>
         <slot v-else name="label"></slot>
       </view>
     </view>
@@ -73,8 +73,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import { computed, onBeforeMount, ref, watch, useSlots, type Slots } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { computed, onBeforeMount, ref, watch } from 'vue'
 import { objToStyle, isDef, pause } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
@@ -82,13 +82,17 @@ import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { textareaProps } from './types'
 
+interface TextareaSlots extends Slots {
+  prefix?: () => any
+  label?: () => any
+}
+
 const { translate } = useTranslate('textarea')
 
 const props = defineProps(textareaProps)
 const emit = defineEmits([
   'update:modelValue',
   'clear',
-  'change',
   'blur',
   'focus',
   'input',
@@ -98,6 +102,7 @@ const emit = defineEmits([
   'clickprefixicon',
   'click'
 ])
+const slots = useSlots() as TextareaSlots
 
 const placeholderValue = computed(() => {
   return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
@@ -176,11 +181,11 @@ const currentLength = computed(() => {
 })
 
 const rootClass = computed(() => {
-  return `wd-textarea   ${props.label || props.useLabelSlot ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${
-    cell.border.value ? 'is-border' : ''
-  } ${props.size ? 'is-' + props.size : ''} ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''} ${
-    props.autoHeight ? 'is-auto-height' : ''
-  } ${currentLength.value > 0 ? 'is-not-empty' : ''}  ${props.noBorder ? 'is-no-border' : ''} ${props.customClass}`
+  return `wd-textarea   ${props.label || slots.label ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${cell.border.value ? 'is-border' : ''} ${
+    props.size ? 'is-' + props.size : ''
+  } ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''} ${props.autoHeight ? 'is-auto-height' : ''} ${
+    currentLength.value > 0 ? 'is-not-empty' : ''
+  }  ${props.noBorder ? 'is-no-border' : ''} ${props.customClass}`
 })
 
 const labelClass = computed(() => {
@@ -234,9 +239,6 @@ async function handleClear() {
     focused.value = true
     focusing.value = true
   }
-  emit('change', {
-    value: ''
-  })
   emit('update:modelValue', inputValue.value)
   emit('clear')
 }

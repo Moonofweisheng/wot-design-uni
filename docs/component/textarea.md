@@ -120,48 +120,46 @@ const value = ref<string>('')
 
 ## Attributes
 
-| 参数                    | 说明                                                                                          | 类型              | 可选值                           | 默认值    | 最低版本 |
-| ----------------------- | --------------------------------------------------------------------------------------------- | ----------------- | -------------------------------- | --------- | ----------- | 
-| v-model                 | 绑定值                                                                                                             | string/number   | -                                | -         | -        |
-| placeholder             | 占位文本                                                                                                           | string            | -                                | 请输入... | -        |
-| placeholderStyle        | 原生属性，指定 placeholder 的样式                                                                                  | string            | -                                | -         | -        |
-| placeholderClass        | 原生属性，指定 placeholder 的样式类                                                                                | string            | -                                | -         | -        |
-| disabled                | 原生属性，禁用                                                                                                     | boolean           | -                                | false     | -        |
-| maxlength               | 原生属性，最大输入长度，设置为 -1 的时候不限制最大长度                                                             | number            | -                                | -         | -        |
-| auto-focus              | 原生属性，自动聚焦，拉起键盘。                                                                                     | boolean           | -                                | false     | -        |
-| focus                   | 原生属性，获取焦点                                                                                                 | boolean           | -                                | false     | -        |
-| auto-height             | 原生属性，是否自动增高，设置 auto-height 时，style.height 不生效                                                   | boolean           | -                                | false     | -        |
-| fixed                   | 如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true                                       | -                 | false                            | -         |
-| cursorSpacing           | 原生属性，指定光标与键盘的距离。取 textarea 距离底部的距离和 cursor-spacing 指定的距离的最小值作为光标与键盘的距离 | number            | -                                | 0         | -        |
-| cursor                  | 原生属性，指定 focus 时的光标位置                                                                                  | number            | -                                | -1        | -        |
-| confirm-type            | 设置键盘右下角按钮的文字                                                                                           | string            | `done / go / next / search / send` | -      | -        |
-| confirm-hold            | 点击键盘右下角按钮时是否保持键盘不收起                                                                             | Boolean           | -                                | false     | -        |
-| show-confirm-bar        | 是否显示键盘上方带有”完成“按钮那一栏                                                                               | Boolean           | -                                | true      | -        |
-| selection-start         | 原生属性，光标起始位置，自动聚集时有效，需与 selection-end 搭配使用                                                | number            | -                                | -1        | -        |
-| selection-end           | 原生属性，光标结束位置，自动聚集时有效，需与 selection-start 搭配使用                                              | number            | -                                | -1        | -        |
-| adjust-position         | 原生属性，键盘弹起时，是否自动上推页面                                                                             | boolean           | -                                | true      | -        |
-| disable-default-padding | 原生属性，是否去掉 iOS 下的默认内边距                                                                              | boolean           | -                                | false     | -        |
-| hold-keyboard           | 原生属性，focus 时，点击页面的时候不收起键盘                                                                       | boolean           | -                                | false     | -        |
-| show-password           | 显示为密码框                                                                                                       | boolean           | -                                | false     | -        |
-| clearable               | 显示清空按钮                                                                                                       | boolean           | -                                | false     | -        |
-| readonly                | 只读                                                                                                               | boolean           | -                                | false     | -        |
-| prefix-icon             | 前置图标，icon 组件中的图标类名                                                                                    | string            | -                                | -         | -        |
-| use-prefix-slot         | 使用 前置图标 插槽                                                                                                 | boolean           | -                                | false     | -        |
-| show-word-limit         | 显示字数限制，需要同时设置 maxlength                                                                               | boolean           | -                                | false     | -        |
-| label                   | 设置左侧标题                                                                                                       | string            | -                                | -         | -        |
-| label-width             | 设置左侧标题宽度                                                                                                   | string            | -                                | 33%       | -        |
-| use-label-slot          | 使用 label 插槽                                                                                                    | boolean           | -                                | false     | -        |
-| size                    | 设置输入框大小                                                                                                     | string            | -                                | -         | -        |
-| error                   | 设置输入框错误状态，错误状态时为红色                                                                               | boolean           | -                                | false     | -        |
-| center                  | 当有 label 属性时，设置标题和输入框垂直居中，默认为顶部居中                                                        | boolean           | -                                | false     | -        |
-| no-border               | 非 cell 类型下是否隐藏下划线                                                                                       | boolean           | -                                | false     | -        | -   |
-| required                | cell 类型下必填样式                                                                                                | boolean           | -                                | false     | -        |
-| prop                    | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                  | string            | -                                | -         | -        |
-| rules                   | 表单验证规则        | `FormItemRule []` | -                                | `[]`      | -        |
-| clearTrigger | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示	 | `InputClearTrigger`	 | `focus` / `always` | `always` | 1.3.7 |
-| focusWhenClear | 是否在点击清除按钮时聚焦输入框 | boolean | -      | true  | 1.3.7   |
-| ignoreCompositionEvent | 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件。 | boolean | -      | true  | 1.3.11|
-| inputmode | 提供用户在编辑元素或其内容时可能输入的数据类型的提示。 | InputMode | -      | text  | 1.5.0 |
+| 参数                    | 说明                                                                                              | 类型              | 可选值                             | 默认值    | 最低版本 |
+|-------------------------|---------------------------------------------------------------------------------------------------|-------------------|------------------------------------|-----------|----------|
+| v-model                 | 绑定值                                                                                            | string\|number    | -                                  | -         | -        |
+| placeholder             | 占位文本                                                                                          | string            | -                                  | 请输入... | -        |
+| placeholderStyle        | 原生属性，指定 placeholder 的样式                                                                 | string            | -                                  | -         | -        |
+| placeholderClass        | 原生属性，指定 placeholder 的样式类                                                               | string            | -                                  | -         | -        |
+| disabled                | 原生属性，禁用                                                                                    | boolean           | -                                  | false     | -        |
+| maxlength               | 原生属性，最大输入长度，设置为 -1 时不限制最大长度                                                | number            | -                                  | -         | -        |
+| auto-focus              | 原生属性，自动聚焦，拉起键盘                                                                      | boolean           | -                                  | false     | -        |
+| focus                   | 原生属性，获取焦点                                                                                | boolean           | -                                  | false     | -        |
+| auto-height             | 原生属性，是否自动增高（设置时 style.height 不生效）                                              | boolean           | -                                  | false     | -        |
+| fixed                   | 在 position:fixed 区域时需要设置为 true                                                           | boolean           | -                                  | false     | -        |
+| cursorSpacing           | 原生属性，指定光标与键盘的距离（取 textarea 底部距离和该值的最小值）                              | number            | -                                  | 0         | -        |
+| cursor                  | 原生属性，指定 focus 时的光标位置                                                                 | number            | -                                  | -1        | -        |
+| confirm-type            | 设置键盘右下角按钮的文字                                                                          | string            | `done`/`go`/`next`/`search`/`send` | -         | -        |
+| confirm-hold            | 点击键盘右下角按钮时是否保持键盘不收起                                                            | boolean           | -                                  | false     | -        |
+| show-confirm-bar        | 是否显示键盘上方"完成"栏                                                                          | boolean           | -                                  | true      | -        |
+| selection-start         | 原生属性，光标起始位置（需与 selection-end 搭配使用）                                             | number            | -                                  | -1        | -        |
+| selection-end           | 原生属性，光标结束位置（需与 selection-start 搭配使用）                                           | number            | -                                  | -1        | -        |
+| adjust-position         | 原生属性，键盘弹起时是否自动上推页面                                                              | boolean           | -                                  | true      | -        |
+| disable-default-padding | 原生属性，是否去掉 iOS 默认内边距                                                                 | boolean           | -                                  | false     | -        |
+| hold-keyboard           | 原生属性，focus 时点击页面不收起键盘                                                              | boolean           | -                                  | false     | -        |
+| show-password           | 显示为密码框                                                                                      | boolean           | -                                  | false     | -        |
+| clearable               | 显示清空按钮                                                                                      | boolean           | -                                  | false     | -        |
+| readonly                | 只读                                                                                              | boolean           | -                                  | false     | -        |
+| prefix-icon             | 前置图标（使用 icon 组件类名）                                                                    | string            | -                                  | -         | -        |
+| show-word-limit         | 显示字数限制（需设置 maxlength）                                                                  | boolean           | -                                  | false     | -        |
+| label                   | 设置左侧标题                                                                                      | string            | -                                  | -         | -        |
+| label-width             | 设置左侧标题宽度                                                                                  | string            | -                                  | 33%       | -        |
+| size                    | 设置输入框大小                                                                                    | string            | -                                  | -         | -        |
+| error                   | 设置输入框错误状态（红色标识）                                                                    | boolean           | -                                  | false     | -        |
+| center                  | 有 label 时设置标题和输入框垂直居中（默认顶部居中）                                               | boolean           | -                                  | false     | -        |
+| no-border               | 非 cell 类型下是否隐藏下划线                                                                      | boolean           | -                                  | false     | -        |
+| required                | cell 类型下必填样式                                                                               | boolean           | -                                  | false     | -        |
+| prop                    | 表单域 `model` 字段名（表单校验必填）                                                             | string            | -                                  | -         | -        |
+| rules                   | 表单验证规则                                                                                      | FormItemRule[]    | -                                  | []        | -        |
+| clearTrigger            | 显示清除图标的时机：always（输入框非空时展示）/ focus（聚焦且非空时展示）                         | InputClearTrigger | `focus`/`always`                   | `always`  | 1.3.7    |
+| focusWhenClear          | 点击清除按钮时是否聚焦输入框                                                                      | boolean           | -                                  | true      | 1.3.7    |
+| ignoreCompositionEvent  | 是否忽略文本合成系统事件处理（为 false 时触发 composition 相关事件，且在合成期间触发 input 事件） | boolean           | -                                  | true      | 1.3.11   |
+| inputmode               | 输入数据类型提示                                                                                  | InputMode         | -                                  | text      | 1.5.0    |
 
 ### InputMode 可选值
 
@@ -197,7 +195,6 @@ const value = ref<string>('')
 | input                | 监听输入框 input 事件            | ` {value, cursor, keyCode}`                  | -        |
 | focus                | 监听输入框 focus 事件            | ` { value, height }`, height 为键盘高度      | -        |
 | blur                 | 监听输入框 blur 事件             | ` { value }`                                 | -        |
-| change               | 监听输入框修改事件               | ` { value }`                                 | -        |
 | clear                | 监听输入框清空按钮事件           | -                                            | -        |
 | linechange           | 监听输入框行数变化               | ` { height: 0, heightRpx: 0, lineCount: 0 }` | -        |
 | confirm              | 点击完成时， 触发 confirm 事件   | ` { value }`                                 | -        |
@@ -206,10 +203,6 @@ const value = ref<string>('')
 | clicksuffixicon      | 点击后置图标时触发               | -                                            | -        |
 
 ## Slot
-
-:::tip 提示
-使用插槽需要配置是否启用对应的插槽，分别对应`use-label-slot`、`use-prefix-slot`。
-:::
 
 | name   | 说明         | 最低版本 |
 | ------ | ------------ | -------- |

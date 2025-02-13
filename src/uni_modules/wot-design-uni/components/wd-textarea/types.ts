@@ -191,21 +191,12 @@ export const textareaProps = {
    * 类型：string
    */
   prefixIcon: String,
-
-  /**
-   * * 是否使用前置图标插槽。
-   * 类型：boolean
-   * 默认值：false
-   */
-  usePrefixSlot: makeBooleanProp(false),
-
   /**
    * * 是否显示字数限制，需要同时设置maxlength。
    * 类型：boolean
    * 默认值：false
    */
   showWordLimit: makeBooleanProp(false),
-
   /**
    * 设置左侧标题。
    * 类型：string
@@ -217,14 +208,6 @@ export const textareaProps = {
    * 类型：string
    */
   labelWidth: makeStringProp(''),
-
-  /**
-   * * 是否使用label插槽。
-   * 类型：boolean
-   * 默认值：false
-   */
-  useLabelSlot: makeBooleanProp(false),
-
   /**
    * * 设置输入框大小。
    * 类型：string
