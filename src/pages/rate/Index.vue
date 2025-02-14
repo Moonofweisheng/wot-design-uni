@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-07-29 17:03:39
- * @LastEditTime: 2024-03-17 20:19:52
+ * @LastEditTime: 2025-02-13 23:36:41
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/src/pages/rate/Index.vue
@@ -41,6 +41,10 @@
     <demo-block title="修改size、space">
       <wd-rate v-model="value7" space="10px" size="30px" />
     </demo-block>
+
+    <demo-block title="允许半选">
+      <wd-rate v-model="value8" allow-half />
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -53,6 +57,7 @@ const value4 = ref<number>(3)
 const value5 = ref<number>(4)
 const value6 = ref<number>(3)
 const value7 = ref<number>(5)
+const value8 = ref<number>(2.5)
 
 function changeValue1({ value }: any) {
   console.log(value)
