@@ -121,7 +121,7 @@ watch(
 watch(
   () => props.type,
   (target) => {
-    const type = ['date', 'year-month', 'time', 'datetime', 'year']
+    const type = ['date', 'year-month', 'time', 'datetime', 'year', 'date-hour']
     if (type.indexOf(target) === -1) {
       console.error(`type must be one of ${type}`)
     }
@@ -301,6 +301,7 @@ function getRanges(): Array<{ type: DatetimePickerViewColumnType; range: number[
   if (props.type === 'date') result.splice(3, 2)
   if (props.type === 'year-month') result.splice(2, 3)
   if (props.type === 'year') result.splice(1, 4)
+  if (props.type === 'date-hour') result.splice(4, 1)
   return result
 }
 
@@ -433,8 +434,10 @@ function updateInnerValue() {
     hour = Number(values[3]) && parseInt(values[3])
     minute = Number(values[4]) && parseInt(values[4])
   }
+  if (type === 'date-hour') {
+    hour = Number(values[3]) && parseInt(values[3])
+  }
   const value = new Date(Number(year), Number(month) - 1, Number(date), hour, minute).getTime()
-
   innerValue = correctValue(value)
   return innerValue
 }
@@ -459,6 +462,9 @@ function columnChange(picker: PickerViewInstance) {
   if (props.type === 'datetime') {
     hour = Number(values[3])
     minute = Number(values[4])
+  }
+  if (props.type === 'date-hour') {
+    hour = Number(values[3])
   }
   const value = new Date(year, month - 1, date, hour, minute).getTime()
   /** 根据计算选中项的时间戳，重新计算所有的选项列表 */
