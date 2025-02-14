@@ -127,7 +127,7 @@ export default {
   signature: {
     confirmText: 'Подтвердить',
     clearText: 'Очистить',
-    previousText: 'Отменить',
-    nextText: 'Восстановить'
+    undoText: 'Отменить',
+    redoText: 'Восстановить'
   }
 }

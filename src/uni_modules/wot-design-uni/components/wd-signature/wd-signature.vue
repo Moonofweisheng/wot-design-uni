@@ -30,11 +30,11 @@
       <!-- #endif  -->
     </view>
     <view class="wd-signature__footer">
-      <slot name="footer" :clear="clear" :confirm="confirmSignature" :currentStep="currentStep" :next="next" :previous="previous">
+      <slot name="footer" :clear="clear" :confirm="confirmSignature" :currentStep="currentStep" :undo="undo" :redo="redo">
         <block v-if="history">
-          <wd-button size="small" plain @click="previous" :disabled="currentStep <= 0">{{ previousText || translate('previousText') }}</wd-button>
-          <wd-button size="small" plain @click="next" :disabled="!(currentStep < historyList.length)">
-            {{ nextText || translate('nextText') }}
+          <wd-button size="small" plain @click="undo" :disabled="currentStep <= 0">{{ undoText || translate('undoText') }}</wd-button>
+          <wd-button size="small" plain @click="redo" :disabled="!(currentStep < historyList.length)">
+            {{ redoText || translate('redoText') }}
           </wd-button>
         </block>
         <wd-button size="small" plain @click="clear">{{ clearText || translate('clearText') }}</wd-button>
@@ -166,7 +166,7 @@ const draw = (e: any) => {
   emit('signing', e)
 }
 /* 点击上一步 */
-const previous = () => {
+const undo = () => {
   if (history.value) {
     if (isDef(props.step)) {
       currentStep.value = currentStep.value - props.step
@@ -181,7 +181,7 @@ const previous = () => {
   }
 }
 /* 点击下一步 */
-const next = () => {
+const redo = () => {
   if (history.value) {
     if (isDef(props.step)) {
       /* 是否可以点击下一步 */
@@ -419,8 +419,8 @@ function clearHistoryList() {
 defineExpose<SignatureExpose>({
   clear,
   confirm: confirmSignature,
-  next,
-  previous
+  redo,
+  undo
 })
 </script>
 <style scoped lang="scss">

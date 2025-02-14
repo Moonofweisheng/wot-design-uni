@@ -127,7 +127,7 @@ export default {
   signature: {
     confirmText: 'Signer',
     clearText: 'Effacer',
-    previousText: 'Annuler',
-    nextText: 'Restaurer'
+    undoText: 'Annuler', // 修改为撤回
+    redoText: 'Restaurer' // 修改为恢复
   }
 }

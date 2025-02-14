@@ -68,7 +68,7 @@ export default {
   signature: {
     confirmText: 'Xác nhận',
     clearText: 'Xóa',
-    previousText: 'Hoàn tác',
-    nextText: 'Khôi phục'
+    undoText: 'Hoàn tác',
+    redoText: 'Khôi phục'
   }
 }

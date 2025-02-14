@@ -116,7 +116,9 @@ export const signatureProps = {
   step: {
     type: Number,
     default: 1
-  }
+  },
+  undoText: String,
+  redoText: String
 }
 export type SignatureResult = {
   tempFilePath: string
@@ -129,8 +131,8 @@ export type SignatureExpose = {
   clear: () => void
   /** 点击确定按钮 */
   confirm: (result: SignatureResult) => void
-  /* 点击回退 */
-  next: () => void
+  /* 点击恢复 */
+  redo: () => void
   /* 点击撤回 */
-  previous: () => void
+  undo: () => void
 }

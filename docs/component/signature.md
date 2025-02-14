@@ -27,12 +27,10 @@ function confirm(result: SignatureResult) {
 }
 ```
 
-
 ## 开启历史记录
+
 ```html
-
 <wd-signature :history="true" background-color="lightgray" />
-
 ```
 
 ## 自定义画笔颜色
@@ -73,14 +71,14 @@ function confirm(result: SignatureResult) {
 
 ```html
 <wd-signature :disabled="disabled" :step="3">
-  <template  #footer="{ clear, confirm, currentStep, next, previous }">
+  <template #footer="{ clear, confirm, currentStep, next, undo, redo }">
     <wd-button block @click="changeDisabled" v-if="disabled">开始签名</wd-button>
-      <block v-if="!disabled">
-            <wd-button size="small" plain @click="previous()" v-if="currentStep >= 3">撤回三步</wd-button>
-            <wd-button size="small" plain @click="next()" v-if="currentStep >= 3">恢复三步</wd-button>
-            <wd-button size="small" plain @click="clear">清除</wd-button>
-            <wd-button size="small" style="margin-left: 4px" @click="confirm">确认</wd-button>
-       </block>
+    <block v-if="!disabled">
+      <wd-button size="small" plain @click="undo" :disabled="currentStep <= 0">撤销三步</wd-button>
+      <wd-button size="small" plain @click="redo" :disabled="!(currentStep < historyList.length)">恢复三步</wd-button>
+      <wd-button size="small" plain @click="clear">清除</wd-button>
+      <wd-button size="small" style="margin-left: 4px" @click="confirm">确认</wd-button>
+    </block>
   </template>
 </wd-signature>
 ```
@@ -109,14 +107,14 @@ function changeDisabled() {
 | disabled        | 是否禁用签名板                                                       | Boolean | --     | false    | --       |
 | backgroundColor | 画板的背景色                                                         | String  | --     | --       | --       |
 | disableScroll   | 是否禁用画布滚动                                                     | Boolean | --     | true     | --       |
-| history   | 是否开启历史记录                                                     | Boolean | --     | false     | --       |
-| step   | 开启历史记录之后的步长(撤回step步)                                                     | NUmber | --     | 1     | --       |
+| history         | 是否开启历史记录                                                     | Boolean | --     | false    | --       |
+| step            | 开启历史记录之后的步长(撤回step步)                                   | Number  | --     | 1        | --       |
 
 ## Slot
 
 | name   | 说明           | 参数                  | 最低版本 |
 |--------|----------------|-----------------------|----------|
-| footer | 自定义footer   | `{ clear, confirm,next(设置步长以后自动回退相应步数),previous(同next) }`  | -        |
+| footer | 自定义footer   | `{ clear, confirm, next, undo, redo }`  | -        |
 
 ## Events
 
@@ -136,5 +134,5 @@ function changeDisabled() {
 |-----------|--------------------|-------------------------------------------|----------|
 | confirm   | 点击确认按钮时触发 | `{tempFilePath, width, height, success}` 分别为生成文件的临时路径 (本地路径)、生成图片宽、生成图片高、是否成功 | -        |
 | clear     | 点击清空按钮时触发 | -                                         | -        |
-| next     | 暴露恢复方法 | -                                         | -        |
-| previous     | 暴露撤回方法 | -                                         | -        |
+| next      | 暴露恢复方法       | -                                         | -        |
+| undo      | 暴露撤回方法       | -                                         | -        |

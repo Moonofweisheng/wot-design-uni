@@ -127,7 +127,7 @@ export default {
   signature: {
     confirmText: 'İmzala',
     clearText: 'Temizle',
-    previousText: 'Geri Al',
-    nextText: 'Geri Yükle'
+    undoText: 'Geri Al',
+    redoText: 'Geri Yükle'
   }
 }

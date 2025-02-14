@@ -69,7 +69,7 @@ export default {
   signature: {
     confirmText: '確認',
     clearText: '清空',
-    previousText: '撤銷',
-    nextText: '恢復'
+    undoText: '撤銷',
+    redoText: '恢復'
   }
 }
