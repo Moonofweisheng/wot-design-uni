@@ -1,9 +1,9 @@
 /*
  * @Author: 810505339
  * @Date: 2025-01-10 20:03:57
- * @LastEditors: weisheng
- * @LastEditTime: 2025-01-17 16:43:19
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-signature/types.ts
+ * @LastEditors: 810505339
+ * @LastEditTime: 2025-02-12 01:23:47
+ * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-signature\types.ts
  * 记得注释
  */
 import { baseProps, numericProp } from '../common/props'
@@ -33,6 +33,16 @@ export const signatureProps = {
    * 类型：string
    */
   clearText: String,
+  /**
+   * 上一步按钮的文本
+   * 类型：string
+   */
+  nextText: String,
+  /**
+   * 下一步按钮的文本
+   * 类型：string
+   */
+  previousText: String,
   /**
    * 确认按钮的文本
    * 类型：string
@@ -97,19 +107,30 @@ export const signatureProps = {
   disableScroll: {
     type: Boolean,
     default: true
+  },
+  /* 是否开始历史记录 */
+  history: {
+    type: Boolean,
+    default: false
+  },
+  step: {
+    type: Number,
+    default: 1
   }
 }
-
 export type SignatureResult = {
   tempFilePath: string
   success: boolean
   width: number
   height: number
 }
-
 export type SignatureExpose = {
   /** 点击清除按钮清除签名 */
   clear: () => void
   /** 点击确定按钮 */
   confirm: (result: SignatureResult) => void
+  /* 点击回退 */
+  next: () => void
+  /* 点击撤回 */
+  previous: () => void
 }

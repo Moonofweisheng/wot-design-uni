@@ -126,6 +126,8 @@ export default {
   },
   signature: {
     confirmText: '確認',
-    clearText: 'クリア'
+    clearText: 'クリア',
+    previousText: '元に戻す',
+    nextText: '復元'
   }
 }

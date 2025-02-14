@@ -126,6 +126,8 @@ export default {
   },
   signature: {
     confirmText: '确认',
-    clearText: '清空'
+    clearText: '清空',
+    previousText: '撤销',
+    nextText: '恢复'
   }
 }

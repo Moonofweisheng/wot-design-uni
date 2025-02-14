@@ -30,14 +30,19 @@
       <!-- #endif  -->
     </view>
     <view class="wd-signature__footer">
-      <slot name="footer" :clear="clear" :confirm="confirmSignature">
+      <slot name="footer" :clear="clear" :confirm="confirmSignature" :currentStep="currentStep" :next="next" :previous="previous">
+        <block v-if="history">
+          <wd-button size="small" plain @click="previous" :disabled="currentStep <= 0">{{ previousText || translate('previousText') }}</wd-button>
+          <wd-button size="small" plain @click="next" :disabled="!(currentStep < historyList.length)">
+            {{ nextText || translate('nextText') }}
+          </wd-button>
+        </block>
         <wd-button size="small" plain @click="clear">{{ clearText || translate('clearText') }}</wd-button>
         <wd-button size="small" @click="confirmSignature">{{ confirmText || translate('confirmText') }}</wd-button>
       </slot>
     </view>
   </view>
 </template>
-
 <script lang="ts">
 export default {
   name: 'wd-signature',
@@ -65,6 +70,9 @@ const canvasId = ref<string>(`signature${uuid()}`) // canvas 组件的唯一标�
 let canvas: null = null //canvas对象 微信小程序生成图片必须传入
 const drawing = ref<boolean>(false) // 是否正在绘制
 const pixelRatio = ref<number>(1) // 像素比
+const historyList = ref<Array<ImageData>>([]) //历史记录
+const currentStep = ref(0) // 当前步骤
+
 const canvasState = reactive({
   canvasWidth: 0,
   canvasHeight: 0,
@@ -99,6 +107,7 @@ const canvasStyle = computed(() => {
 })
 
 const disableScroll = computed(() => props.disableScroll)
+const history = computed(() => props.history)
 
 /* 开始画线 */
 const startDrawing = (e: TouchEvent) => {
@@ -115,6 +124,7 @@ const stopDrawing = (e: TouchEvent) => {
   drawing.value = false
   const { ctx } = canvasState
   if (ctx) ctx.beginPath()
+  pushHistoryList()
   emit('end', e)
 }
 
@@ -132,15 +142,8 @@ const initCanvas = () => {
 
 // 清空 canvas
 const clear = () => {
-  const { canvasWidth, canvasHeight, ctx } = canvasState
-  if (ctx) {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-    if (isDef(props.backgroundColor)) {
-      ctx.setFillStyle(props.backgroundColor)
-      ctx.fillRect(0, 0, canvasWidth, canvasHeight)
-    }
-    ctx.draw()
-  }
+  clearHistoryList()
+  clearCanvas()
   emit('clear')
 }
 
@@ -161,6 +164,34 @@ const draw = (e: any) => {
   ctx.draw(true) //是否记住上一次画线
   ctx.moveTo(x, y)
   emit('signing', e)
+}
+/* 点击上一步 */
+const previous = () => {
+  if (history.value) {
+    if (isDef(props.step)) {
+      currentStep.value = currentStep.value - props.step
+      if (currentStep.value > props.step - 1) {
+        clearCanvas()
+        putCanvasImageData()
+      } else {
+        clearHistoryList()
+        clearCanvas()
+      }
+    }
+  }
+}
+/* 点击下一步 */
+const next = () => {
+  if (history.value) {
+    if (isDef(props.step)) {
+      /* 是否可以点击下一步 */
+      if (currentStep.value <= historyList.value.length - props.step) {
+        currentStep.value = currentStep.value + props.step
+        clearCanvas()
+        putCanvasImageData()
+      }
+    }
+  }
 }
 
 onMounted(() => {
@@ -271,10 +302,125 @@ function canvasToImage() {
     proxy
   )
 }
+/* canvas获取每一步的图片 */
+function getCanvasImageData(): Promise<ImageData> {
+  const { canvasWidth, canvasHeight, ctx } = canvasState
+  return new Promise((resolve, reject) => {
+    // #ifdef MP-WEIXIN
+    try {
+      // 获取图像数据
+      if (ctx) {
+        const imageData = (ctx as unknown as CanvasRenderingContext2D).getImageData(0, 0, canvasWidth, canvasHeight)
+
+        resolve(imageData)
+      }
+    } catch (error) {
+      console.error('获取 canvas 像素数据失败:', error)
+      reject(error)
+    }
+
+    // #endif
+
+    // #ifndef MP-WEIXIN
+    uni.canvasGetImageData({
+      canvasId: canvasId.value,
+      x: 0,
+      y: 0,
+      width: canvasWidth,
+      height: canvasHeight,
+      success: (res: any) => {
+        resolve(res)
+      },
+      fail: (err) => {
+        console.error('获取 canvas 像素数据失败:')
+        reject(err)
+      }
+    })
+    // #endif
+  })
+}
+/* 设置canvas的图片 step 步长 画第几个  */
+function putCanvasImageData(step: number = 1) {
+  const { canvasWidth, canvasHeight, ctx } = canvasState
+  const imagedata = historyList.value[currentStep.value - step]
+  return new Promise((resolve, reject) => {
+    // #ifdef MP-WEIXIN
+    try {
+      // 获取图像数据
+      if (ctx) {
+        const imageData = (ctx as unknown as CanvasRenderingContext2D).putImageData(imagedata, 0, 0)
+
+        resolve(imageData)
+      }
+    } catch (error) {
+      console.error('获取 canvas 像素数据失败:', error)
+      reject(error)
+    }
+
+    // #endif
+
+    // #ifndef MP-WEIXIN
+    uni.canvasPutImageData({
+      canvasId: canvasId.value,
+      x: 0,
+      y: 0,
+      width: canvasWidth,
+      height: canvasHeight,
+      data: imagedata.data,
+      success: (res) => {
+        console.log(res, 'res')
+        resolve(res)
+      },
+      fail: (err) => {
+        console.error('获取 canvas 像素数据失败:')
+        reject(err)
+      }
+    })
+    // #endif
+  })
+}
+
+function clearCanvas() {
+  const { canvasWidth, canvasHeight, ctx } = canvasState
+  if (ctx) {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+    if (isDef(props.backgroundColor)) {
+      ctx.setFillStyle(props.backgroundColor)
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+    }
+    ctx.draw()
+  }
+}
+/* pushHistoryList */
+function pushHistoryList() {
+  return new Promise((resolve, reject) => {
+    console.log(history.value)
+    if (history.value) {
+      getCanvasImageData()
+        .then((imageData) => {
+          historyList.value.push(imageData)
+          currentStep.value++
+          resolve(true)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    }
+  })
+}
+
+function clearHistoryList() {
+  if (history.value) {
+    historyList.value = []
+    currentStep.value = 0
+  }
+}
 
 defineExpose<SignatureExpose>({
   clear,
-  confirm: confirmSignature
+  confirm: confirmSignature,
+  next,
+  previous
 })
 </script>
 <style scoped lang="scss">
