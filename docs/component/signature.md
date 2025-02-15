@@ -70,7 +70,7 @@ function confirm(result: SignatureResult) {
 
 ```html
 <wd-signature :disabled="disabled" :step="3">
-  <template #footer="{ clear, confirm, currentStep, restore, revoke，historyList }">
+  <template #footer="{ clear, confirm, currentStep, restore, revoke,historyList }">
     <wd-button block @click="changeDisabled" v-if="disabled">开始签名</wd-button>
     <block v-if="!disabled">
       <wd-button size="small" plain @click="revoke()" :disabled="currentStep <= 0">撤回三步</wd-button>

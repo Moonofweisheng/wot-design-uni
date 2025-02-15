@@ -30,7 +30,15 @@
       <!-- #endif  -->
     </view>
     <view class="wd-signature__footer">
-      <slot name="footer" :clear="clear" :confirm="confirmSignature" :currentStep="currentStep" :revoke="revoke" :restore="restore">
+      <slot
+        name="footer"
+        :clear="clear"
+        :confirm="confirmSignature"
+        :currentStep="currentStep"
+        :revoke="revoke"
+        :restore="restore"
+        :historyList="historyList"
+      >
         <block v-if="history">
           <wd-button size="small" plain @click="revoke" :disabled="currentStep <= 0">{{ revokeText || translate('revokeText') }}</wd-button>
           <wd-button size="small" plain @click="restore" :disabled="!(currentStep < historyList.length)">
