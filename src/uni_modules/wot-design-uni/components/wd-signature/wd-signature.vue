@@ -72,6 +72,7 @@ const drawing = ref<boolean>(false) // 是否正在绘制
 const pixelRatio = ref<number>(1) // 像素比
 const historyList = ref<Array<ImageData>>([]) //历史记录
 const currentStep = ref(0) // 当前步骤
+const maxHistoryLength = ref<number>(100) // 历史记录的最大长度
 
 const canvasState = reactive({
   canvasWidth: 0,
@@ -406,6 +407,11 @@ function pushHistoryList() {
         .then((imageData) => {
           historyList.value.push(imageData)
           currentStep.value++
+          // 如果历史记录超过最大长度，则删除最早的记录
+          if (historyList.value.length > maxHistoryLength.value) {
+            historyList.value.shift()
+            currentStep.value--
+          }
           resolve(true)
         })
         .catch((err) => {
