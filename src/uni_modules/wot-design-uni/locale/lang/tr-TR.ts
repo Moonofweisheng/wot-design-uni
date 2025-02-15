@@ -1,3 +1,8 @@
+/**
+ * This file contains the default export for the Turkish localization of the application.
+ * It includes translations for various components such as calendar, datetime picker, pagination, etc.
+ */
+
 export default {
   calendar: {
     placeholder: 'Lütfen seçin',
@@ -127,7 +132,7 @@ export default {
   signature: {
     confirmText: 'İmzala',
     clearText: 'Temizle',
-    previousText: 'Geri Al',
-    nextText: 'Geri Yükle'
+    revokeText: 'Geri Al',
+    restoreText: 'Geri Yükle'
   }
 }

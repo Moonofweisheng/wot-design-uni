@@ -127,7 +127,7 @@ export default {
   signature: {
     confirmText: 'OK',
     clearText: 'Clear',
-    previousText: 'Undo',
-    nextText: 'Restore'
+    revokeText: 'Undo',
+    restoreText: 'Restore'
   }
 }

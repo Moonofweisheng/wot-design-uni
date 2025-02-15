@@ -2,7 +2,7 @@
  * @Author: 810505339
  * @Date: 2025-02-11 21:17:21
  * @LastEditors: 810505339
- * @LastEditTime: 2025-02-12 01:18:15
+ * @LastEditTime: 2025-02-15 21:38:52
  * @FilePath: \wot-design-uni\src\pages\signature\Index.vue
  * 记得注释
 -->
@@ -26,13 +26,13 @@
     </demo-block>
     <demo-block title="自定义插槽">
       <wd-signature :disabled="disabled" :history="true" :step="3">
-        <template #footer="{ clear, confirm, currentStep, next, previous }">
+        <template #footer="{ clear, confirm, currentStep, restore, revoke, historyList }">
           <wd-button block @click="changeDisabled" v-if="disabled">开始签名</wd-button>
           <block v-if="!disabled">
-            <wd-button size="small" plain @click="previous(3)" v-if="currentStep >= 3">撤回三步</wd-button>
-            <wd-button size="small" plain @click="next(3)" v-if="currentStep >= 3">恢复三步</wd-button>
+            <wd-button size="small" plain @click="revoke()" :disabled="currentStep <= 0">撤回三步</wd-button>
+            <wd-button size="small" plain @click="restore()" :disabled="!(currentStep < historyList.length)">恢复三步</wd-button>
             <wd-button size="small" plain @click="clear">清除</wd-button>
-            <wd-button size="small" style="margin-left: 4px" @click="confirm">确认</wd-button>
+            <wd-button size="small" style="margin-left: 4px" @click="confirm">确定</wd-button>
           </block>
         </template>
       </wd-signature>

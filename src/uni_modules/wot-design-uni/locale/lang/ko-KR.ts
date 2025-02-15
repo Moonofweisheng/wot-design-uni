@@ -127,7 +127,7 @@ export default {
   signature: {
     confirmText: '확인',
     clearText: '지우기',
-    previousText: '실행 취소',
-    nextText: '복원'
+    revokeText: '실행 취소',
+    restoreText: '복원'
   }
 }

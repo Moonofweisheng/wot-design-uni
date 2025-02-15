@@ -30,11 +30,11 @@
       <!-- #endif  -->
     </view>
     <view class="wd-signature__footer">
-      <slot name="footer" :clear="clear" :confirm="confirmSignature" :currentStep="currentStep" :next="next" :previous="previous">
+      <slot name="footer" :clear="clear" :confirm="confirmSignature" :currentStep="currentStep" :revoke="revoke" :restore="restore">
         <block v-if="history">
-          <wd-button size="small" plain @click="previous" :disabled="currentStep <= 0">{{ previousText || translate('previousText') }}</wd-button>
-          <wd-button size="small" plain @click="next" :disabled="!(currentStep < historyList.length)">
-            {{ nextText || translate('nextText') }}
+          <wd-button size="small" plain @click="revoke" :disabled="currentStep <= 0">{{ revokeText || translate('revokeText') }}</wd-button>
+          <wd-button size="small" plain @click="restore" :disabled="!(currentStep < historyList.length)">
+            {{ restoreText || translate('restoreText') }}
           </wd-button>
         </block>
         <wd-button size="small" plain @click="clear">{{ clearText || translate('clearText') }}</wd-button>
@@ -116,6 +116,14 @@ const startDrawing = (e: TouchEvent) => {
   setLine()
   emit('start', e)
   draw(e)
+  // 如果当前步骤不是最后一步，则替换历史记录
+  if (history.value) {
+    if (currentStep.value < historyList.value.length) {
+      historyList.value = historyList.value.slice(0, currentStep.value)
+    }
+  }
+  // 更新当前步骤
+  currentStep.value = historyList.value.length
 }
 
 /* 结束画线 */
@@ -166,29 +174,30 @@ const draw = (e: any) => {
   emit('signing', e)
 }
 /* 点击上一步 */
-const previous = () => {
+const revoke = () => {
   if (history.value) {
     if (isDef(props.step)) {
-      currentStep.value = currentStep.value - props.step
-      if (currentStep.value > props.step - 1) {
+      currentStep.value = Math.max(currentStep.value - props.step, 0)
+      if (currentStep.value > 0) {
         clearCanvas()
-        putCanvasImageData()
+        putCanvasImageData(props.step)
       } else {
-        clearHistoryList()
         clearCanvas()
+        currentStep.value = 0
       }
     }
   }
 }
 /* 点击下一步 */
-const next = () => {
+const restore = () => {
   if (history.value) {
     if (isDef(props.step)) {
       /* 是否可以点击下一步 */
+
       if (currentStep.value <= historyList.value.length - props.step) {
         currentStep.value = currentStep.value + props.step
         clearCanvas()
-        putCanvasImageData()
+        putCanvasImageData(props.step)
       }
     }
   }
@@ -339,24 +348,22 @@ function getCanvasImageData(): Promise<ImageData> {
     // #endif
   })
 }
-/* 设置canvas的图片 step 步长 画第几个  */
+
 function putCanvasImageData(step: number = 1) {
   const { canvasWidth, canvasHeight, ctx } = canvasState
   const imagedata = historyList.value[currentStep.value - step]
+
   return new Promise((resolve, reject) => {
     // #ifdef MP-WEIXIN
     try {
-      // 获取图像数据
       if (ctx) {
-        const imageData = (ctx as unknown as CanvasRenderingContext2D).putImageData(imagedata, 0, 0)
-
-        resolve(imageData)
+        ;(ctx as unknown as CanvasRenderingContext2D).putImageData(imagedata, 0, 0)
+        resolve(true)
       }
     } catch (error) {
       console.error('获取 canvas 像素数据失败:', error)
       reject(error)
     }
-
     // #endif
 
     // #ifndef MP-WEIXIN
@@ -368,11 +375,10 @@ function putCanvasImageData(step: number = 1) {
       height: canvasHeight,
       data: imagedata.data,
       success: (res) => {
-        console.log(res, 'res')
         resolve(res)
       },
       fail: (err) => {
-        console.error('获取 canvas 像素数据失败:')
+        console.error('获取 canvas 像素数据失败:', err)
         reject(err)
       }
     })
@@ -419,8 +425,8 @@ function clearHistoryList() {
 defineExpose<SignatureExpose>({
   clear,
   confirm: confirmSignature,
-  next,
-  previous
+  restore,
+  revoke
 })
 </script>
 <style scoped lang="scss">
