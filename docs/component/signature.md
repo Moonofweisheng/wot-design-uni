@@ -113,7 +113,7 @@ function changeDisabled() {
 
 | name   | 说明           | 参数                  | 最低版本 |
 |--------|----------------|-----------------------|----------|
-| footer | 自定义footer   | `{ clear, confirm, restore, revoke }`  | -        |
+| footer | 自定义footer   | `{ clear, confirm, restore, revoke, currentStep ,historyList }`  | -        |
 
 ## Events
 
