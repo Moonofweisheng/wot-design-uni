@@ -3,7 +3,7 @@
 轻提示组件，用于消息通知、加载提示、操作结果提示等场景，支持函数式调用。
 
 :::tip 提示
-`Toast` 自 $LOWEST_VERSION$ 版本起支持通过 `props` 属性控制组件样式，字段见[props](#props)，需要注意的是函数式调用api的`options`优先级高于`props`。
+`Toast` 自 1.7.0 版本起支持通过 `props` 属性控制组件样式，字段见[props](#props)，需要注意的是函数式调用api的`options`优先级高于`props`。
 :::
 
 ## 基本用法
@@ -124,21 +124,21 @@ toast.close()
 | 参数         | 说明                                     | 类型     | 可选值                                     | 默认值     | 最低版本         |
 |--------------|------------------------------------------|----------|--------------------------------------------|------------|------------------|
 | selector     | 选择器                                   | string   | -                                          | ''         | -                |
-| msg          | 提示信息                                 | string   | -                                          | ''         | $LOWEST_VERSION$ |
-| direction    | 排列方向                                 | string   | vertical / horizontal                      | horizontal | $LOWEST_VERSION$ |
-| iconName     | 图标类型                                 | string   | success / error / warning / loading / info | ''         | $LOWEST_VERSION$ |
-| iconSize     | 图标大小                                 | number   | -                                          | -          | $LOWEST_VERSION$ |
-| loadingType  | 加载类型                                 | string   | outline / ring                             | outline    | $LOWEST_VERSION$ |
-| loadingColor | 加载颜色                                 | string   | -                                          | #4D80F0    | $LOWEST_VERSION$ |
-| loadingSize  | 加载大小                                 | number   | -                                          | -          | $LOWEST_VERSION$ |
-| iconColor    | 图标颜色                                 | string   | -                                          | -          | $LOWEST_VERSION$ |
-| position     | 提示信息框的位置                         | string   | top / middle-top / middle / bottom         | middle-top | $LOWEST_VERSION$ |
-| zIndex       | 层级                                     | number   | -                                          | 100        | $LOWEST_VERSION$ |
-| cover        | 是否存在遮罩层                           | boolean  | -                                          | false      | $LOWEST_VERSION$ |
-| iconClass    | 图标类名                                 | string   | -                                          | ''         | $LOWEST_VERSION$ |
-| classPrefix  | 类名前缀，用于使用自定义图标             | string   | -                                          | wd-icon    | $LOWEST_VERSION$ |
-| opened       | 完全展示后的回调函数                     | Function | -                                          | -          | $LOWEST_VERSION$ |
-| closed       | 完全关闭时的回调函数                     | Function | -                                          | -          | $LOWEST_VERSION$ |
+| msg          | 提示信息                                 | string   | -                                          | ''         | 1.7.0 |
+| direction    | 排列方向                                 | string   | vertical / horizontal                      | horizontal | 1.7.0 |
+| iconName     | 图标类型                                 | string   | success / error / warning / loading / info | ''         | 1.7.0 |
+| iconSize     | 图标大小                                 | number   | -                                          | -          | 1.7.0 |
+| loadingType  | 加载类型                                 | string   | outline / ring                             | outline    | 1.7.0 |
+| loadingColor | 加载颜色                                 | string   | -                                          | #4D80F0    | 1.7.0 |
+| loadingSize  | 加载大小                                 | number   | -                                          | -          | 1.7.0 |
+| iconColor    | 图标颜色                                 | string   | -                                          | -          | 1.7.0 |
+| position     | 提示信息框的位置                         | string   | top / middle-top / middle / bottom         | middle-top | 1.7.0 |
+| zIndex       | 层级                                     | number   | -                                          | 100        | 1.7.0 |
+| cover        | 是否存在遮罩层                           | boolean  | -                                          | false      | 1.7.0 |
+| iconClass    | 图标类名                                 | string   | -                                          | ''         | 1.7.0 |
+| classPrefix  | 类名前缀，用于使用自定义图标             | string   | -                                          | wd-icon    | 1.7.0 |
+| opened       | 完全展示后的回调函数                     | Function | -                                          | -          | 1.7.0 |
+| closed       | 完全关闭时的回调函数                     | Function | -                                          | -          | 1.7.0 |
 
 ## Options
 
@@ -146,7 +146,7 @@ toast.close()
 |--------------|-----------------------------------------------------------------------------|----------|---------------------------|------------|----------|
 | msg          | 消息内容                                                                    | string   | -                         | ''         | -        |
 | duration     | 持续时间，单位 ms，为 0 时表示不自动关闭                                    | number   | -                         | 2000       | -        |
-| direction    | 排版方向                                                                    | string   | vertical / horizontal     | horizontal | $LOWEST_VERSION$        |
+| direction    | 排版方向                                                                    | string   | vertical / horizontal     | horizontal | 1.7.0        |
 | iconName     | 图标类型                                                                    | string   | success / error / warning | ''         | -        |
 | iconSize     | 左侧图标尺寸                                                                | number   | -                         | -          | -        |
 | iconClass    | 图标类目，自定义图标，可以使用 Icon 章节的那些图标类名，iconName 优先级更高 | string   | -                         | ''         | -        |

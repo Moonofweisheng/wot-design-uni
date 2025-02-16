@@ -1,6 +1,36 @@
 # 更新日志 
 
 
+## [1.7.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.6.1...v1.7.0) (2025-02-16)
+
+
+### ✨ Features | 新功能
+
+* ✨ 添加 web-type.json 支持 webstorm 代码提示 ([#871](https://github.com/Moonofweisheng/wot-design-uni/issues/871)) ([4575099](https://github.com/Moonofweisheng/wot-design-uni/commit/4575099b9ba580fee2c03e8f8660bbfd9aa70aa3)), closes [#819](https://github.com/Moonofweisheng/wot-design-uni/issues/819)
+* ✨ 重构 Curtain 优化控制展示隐藏的实现逻辑 ([#895](https://github.com/Moonofweisheng/wot-design-uni/issues/895)) ([0e31950](https://github.com/Moonofweisheng/wot-design-uni/commit/0e3195059e0843045533b7ff89b9a3613c5449a8))
+* ✨ ActionSheet 支持 close-on-click-action 控制点击选项后是否关闭菜单功能 ([#891](https://github.com/Moonofweisheng/wot-design-uni/issues/891)) ([a1b035a](https://github.com/Moonofweisheng/wot-design-uni/commit/a1b035a6fe3a9ae3a023032b6c33403853424559)), closes [#698](https://github.com/Moonofweisheng/wot-design-uni/issues/698)
+* ✨ NavbarCapsule 导航胶囊组件支持外部传入样式 ([fb980e7](https://github.com/Moonofweisheng/wot-design-uni/commit/fb980e7d9bd90c76570d2069a9d41a6c1187ef30))
+* ✨ Rate 评分新增支持半选和触摸滑动选中 ([#896](https://github.com/Moonofweisheng/wot-design-uni/issues/896)) ([9d34f2e](https://github.com/Moonofweisheng/wot-design-uni/commit/9d34f2e5d90cca1820d69100bca7c546ce16fb0e)), closes [#669](https://github.com/Moonofweisheng/wot-design-uni/issues/669)
+* ✨ Toast 支持设置布局方向 ([ed60852](https://github.com/Moonofweisheng/wot-design-uni/commit/ed60852432999d295e4af2efe9f1ee86e235e1ee)), closes [#780](https://github.com/Moonofweisheng/wot-design-uni/issues/780)
+* ✨ Toast 支持通过props设置组件属性并新增局中显示的配置 ([#888](https://github.com/Moonofweisheng/wot-design-uni/issues/888)) ([ebbe7e4](https://github.com/Moonofweisheng/wot-design-uni/commit/ebbe7e407904df428564dcf53e5141c14d9e7daa))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  标注 Form 组件支持不校验隐藏子组件的版本 ([e5a24c4](https://github.com/Moonofweisheng/wot-design-uni/commit/e5a24c4873baa9db62ad1ab6f3adb078dac89dc2))
+* ✏️  新增关于页面展示主要团队成员信息 ([031107d](https://github.com/Moonofweisheng/wot-design-uni/commit/031107d5888c2887ea40d47810239cd398f042ef))
+* ✏️  修复 SwipeAction 文档示例拼写错误的问题 ([1dc48cf](https://github.com/Moonofweisheng/wot-design-uni/commit/1dc48cfce9773a0ec60dd2b6cb8fd6c60bb63281))
+* ✏️  修复文档拼写的错误 ([8f8cb10](https://github.com/Moonofweisheng/wot-design-uni/commit/8f8cb1077aa318e9fb067dfeebdd04dfbdb12412))
+* ✏️ fix create-uni command error ([#874](https://github.com/Moonofweisheng/wot-design-uni/issues/874)) ([a0da88c](https://github.com/Moonofweisheng/wot-design-uni/commit/a0da88c5db21b7127de9342aabcf6961b611e22d))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 InputNumber 设置了precision后无法输入小数点的问题 ([#886](https://github.com/Moonofweisheng/wot-design-uni/issues/886)) ([dd1a005](https://github.com/Moonofweisheng/wot-design-uni/commit/dd1a00596472023c9b6e545dbf2a9a8238e67baf)), closes [#878](https://github.com/Moonofweisheng/wot-design-uni/issues/878)
+* 🐛 修复 Swiper 在微信小程序平台轮播视频时在iOS平台全屏展示异常的问题 ([#898](https://github.com/Moonofweisheng/wot-design-uni/issues/898)) ([34a15ac](https://github.com/Moonofweisheng/wot-design-uni/commit/34a15ac0786d003825491cc9fa2a8961b307c0d2)), closes [#885](https://github.com/Moonofweisheng/wot-design-uni/issues/885)
+* 🐛 修复 Tabs 组件导航地图标题不生效的问题 ([#869](https://github.com/Moonofweisheng/wot-design-uni/issues/869)) ([ccf976a](https://github.com/Moonofweisheng/wot-design-uni/commit/ccf976ad631b4ad0272d4897a6245cdd8f13fa4b))
+* 🐛 修复 Upload 组件自定义上传方法不支持asyncfunction的问题 ([#890](https://github.com/Moonofweisheng/wot-design-uni/issues/890)) ([25649db](https://github.com/Moonofweisheng/wot-design-uni/commit/25649dbca55059cb425ba7d7b4e0af7884366dce)), closes [#859](https://github.com/Moonofweisheng/wot-design-uni/issues/859)
+
 ### [1.6.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.6.0...v1.6.1) (2025-01-20)
 
 

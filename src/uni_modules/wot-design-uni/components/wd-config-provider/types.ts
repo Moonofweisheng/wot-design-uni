@@ -637,6 +637,7 @@ export type toastThemeVars = {
   toastWithIconMinWidth?: string
   toastIconSize?: string
   toastIconMarginRight?: string
+  toastIconMarginBottom?: string
   toastLoadingPadding?: string
   toastBoxShadow?: string
 }
