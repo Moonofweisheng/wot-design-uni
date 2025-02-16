@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-08-01 11:12:05
- * @LastEditTime: 2024-07-11 19:13:17
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\components\demo-block\demo-block.vue
- * 记得注释
--->
 <template>
   <view :class="['demo-block', transparent ? '' : 'is-white', customClass]">
     <view class="demo-title">{{ title }}</view>
@@ -69,7 +60,6 @@ function setStyle() {
 }
 
 .demo-block {
-  position: relative;
   color: #666;
 
   &:not(:first-child) {
