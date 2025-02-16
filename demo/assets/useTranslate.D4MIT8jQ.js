@@ -1,0 +1,1 @@
+import{z as s,B as r,q as a}from"./wd-cell.w1jiLT7E.js";import{L as t}from"./page-wraper.I9QPvznc.js";const e=e=>{const o=e?s(e)+".":"";return{translate:(s,...e)=>{const n=t.messages(),p=r(n,o+s);return a(p)?p(...e):p}}};export{e as u};

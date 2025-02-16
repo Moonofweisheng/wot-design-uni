@@ -1,0 +1,1 @@
+import{r as e,T as a}from"./index-DyIIDEY4.js";import{$ as t,C as n,i as o}from"./wd-cell.w1jiLT7E.js";function r(r){const s=e(null),l=()=>{t&&n(s.value)?cancelAnimationFrame(s.value):o(s.value)&&clearTimeout(s.value)};return a((()=>{l()})),{start:()=>{const e=e=>{r(e)};s.value=t?requestAnimationFrame(e):setTimeout((()=>e(Date.now())),1e3/30)},cancel:l}}export{r as u};
