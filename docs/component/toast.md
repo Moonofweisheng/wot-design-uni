@@ -125,7 +125,6 @@ toast.close()
 |--------------|------------------------------------------|----------|--------------------------------------------|------------|------------------|
 | selector     | 选择器                                   | string   | -                                          | ''         | -                |
 | msg          | 提示信息                                 | string   | -                                          | ''         | $LOWEST_VERSION$ |
-| duration     | 持续时间，单位 ms，为 0 时表示不自动关闭 | number   | -                                          | 2000       | $LOWEST_VERSION$ |
 | direction    | 排列方向                                 | string   | vertical / horizontal                      | horizontal | $LOWEST_VERSION$ |
 | iconName     | 图标类型                                 | string   | success / error / warning / loading / info | ''         | $LOWEST_VERSION$ |
 | iconSize     | 图标大小                                 | number   | -                                          | -          | $LOWEST_VERSION$ |

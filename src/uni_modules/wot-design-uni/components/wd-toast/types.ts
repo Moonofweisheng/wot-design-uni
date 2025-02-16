@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-06-19 12:47:57
- * @LastEditTime: 2025-02-11 21:34:01
+ * @LastEditTime: 2025-02-16 15:52:17
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-toast/types.ts
@@ -87,15 +87,6 @@ export const toastProps = {
   msg: {
     type: String,
     default: ''
-  },
-  /**
-   * 持续时间
-   * @type {number}
-   * @default 2000
-   */
-  duration: {
-    type: Number,
-    default: 2000
   },
   /**
    * 排列方向
