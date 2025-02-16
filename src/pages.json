@@ -850,14 +850,37 @@
         },
         "navigationBarTitleText": "感谢激励"
       }
+    },
+    {
+      "path": "pages/about/Index",
+      "name": "about",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "关于我们"
+      }
     }
   ],
-  // "tabBar": {
-  //   "color": "#7a7e83",
-  //   "selectedColor": "#1C64FD",
-  //   "backgroundColor": "#ffffff",
-  //   "list": [ ]
-  // },
+  "tabBar": {
+    "color": "#7a7e83",
+    "selectedColor": "#1C64FD",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/Index",
+        "text": "Demo",
+        "iconPath": "static/icon/app.png",
+        "selectedIconPath": "static/icon/app_selected.png"
+      },
+      {
+        "pagePath": "pages/about/Index",
+        "text": "关于",
+        "iconPath": "static/icon/about.png",
+        "selectedIconPath": "static/icon/about_selected.png"
+      }
+    ]
+  },
   "globalStyle": {
     "navigationBarBackgroundColor": "@navBgColor",
     "navigationBarTextStyle": "@navTxtStyle",
@@ -867,8 +890,5 @@
     "backgroundColorTop": "@bgColorTop",
     "backgroundColorBottom": "@bgColorBottom",
     "navigationStyle": "default"
-    // "navigationBarTextStyle": "black",
-    // "navigationBarBackgroundColor": "#FFF",
-    // "backgroundColor": "#F8F8F8"
   }
 }
