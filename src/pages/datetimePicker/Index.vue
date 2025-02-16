@@ -4,6 +4,7 @@
     <demo-block transparent>
       <wd-cell-group border>
         <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />
+        <wd-datetime-picker label="年月日时" v-model="value20" type="date-hour" @confirm="handleConfirm20" :formatter="formatter" />
         <wd-datetime-picker label="年月日" v-model="value2" type="date" @confirm="handleConfirm2" />
         <wd-datetime-picker label="年月" v-model="value3" type="year-month" @confirm="handleConfirm3" />
         <wd-datetime-picker label="年" v-model="value16" type="year" @confirm="handleConfirm16" />
@@ -62,6 +63,7 @@ const value14 = ref<any[]>(['', ''])
 const value15 = ref<any[]>(['', Date.now()])
 const value16 = ref(Date.now())
 const value17 = ref(Date.now())
+const value20 = ref(Date.now())
 
 const minDate = ref<number>(Date.now())
 const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
@@ -158,6 +160,10 @@ function handleConfirm15({ value }: any) {
 function handleConfirm16({ value }: any) {
   console.log(value)
 }
+function handleConfirm20({ value }: any) {
+  console.log(value)
+}
+
 /** picker触发cancel事件，同步触发cancel事件 */
 function onCancel() {}
 </script>
