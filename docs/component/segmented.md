@@ -142,18 +142,18 @@ function handlePopupShow() {
 
 | 参数                | 说明               | 类型                                        | 可选值                         | 默认值   | 最低版本 |
 | ------------------- | ------------------ | ------------------------------------------- | ------------------------------ | -------- | -------- |
-| value/v-model:value | 当前选中的值       | string \| number                            | -                              | -        | 0.1.23   |
-| disabled            | 是否禁用分段器     | boolean                                     | true \| false                  | `false`  | 0.1.23   |
-| size                | 控件尺寸           | string                                      | `large` \| `middle` \| `small` | `middle` | 0.1.23   |
-| options             | 数据集合           | `string[] \| number[] \| SegmentedOption[]` | -                              | []       | 0.1.23   |
-| vibrateShort        | 切换选项时是否振动 | boolean                                     | true \| false                  | `false`  | 0.1.23   |
+| value/v-model:value | 当前选中的值       | string / number                            | -                              | -        | 0.1.23   |
+| disabled            | 是否禁用分段器     | boolean                                     | true / false                  | `false`  | 0.1.23   |
+| size                | 控件尺寸           | string                                      | `large` / `middle` / `small` | `middle` | 0.1.23   |
+| options             | 数据集合           | `string[] / number[] / SegmentedOption[]` | -                              | []       | 0.1.23   |
+| vibrateShort        | 切换选项时是否振动 | boolean                                     | true / false                  | `false`  | 0.1.23   |
 
 ### SegmentedOption
 
 | 参数     | 说明     | 类型             | 可选值        | 默认值 | 最低版本 |
 | -------- | -------- | ---------------- | ------------- | ------ | -------- |
-| value    | 选中值   | string \| number | -             | -      | 0.1.23   |
-| disabled | 是否禁用 | boolean          | true \| false | -      | 0.1.23   |
+| value    | 选中值   | string / number | -             | -      | 0.1.23   |
+| disabled | 是否禁用 | boolean          | true / false | -      | 0.1.23   |
 | payload  | 更多数据 | any              | -             | -      | 0.1.23   |
 
 ## Events

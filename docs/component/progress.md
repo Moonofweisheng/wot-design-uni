@@ -77,8 +77,8 @@ const percentage = ref<number>(100)
 | ---------- | --------------------- | --------------------------------------- | ---------------- | ------ | -------- |
 | percentage | 进度数值，最大值 100  | `number`                                | -                | 0      | -        |
 | hide-text  | 隐藏进度文字          | `boolean`                               | -                | false  | -        |
-| color      | 进度条颜色            | `string \| ProgressColor[] \| string[]` | -                | -      | -        |
-| status     | 进度条状态            | `string`                                | success \| danger \| warning | -      | -        |
+| color      | 进度条颜色            | `string / ProgressColor[] / string[]` | -                | -      | -        |
+| status     | 进度条状态            | `string`                                | success / danger / warning | -      | -        |
 | duration   | 进度增加 1%所需毫秒数 | `number`                                | -                | 30     | -        |
 
 ### ProgressColor

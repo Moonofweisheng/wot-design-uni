@@ -297,7 +297,7 @@ function handleClear() {
 
 | 参数  | 说明     | 类型             | 可选值 | 默认值 | 最低版本 |
 | ----- | -------- | ---------------- | ------ | ------ | -------- |
-| index | 索引字符 | string \| number | -      | -      | -        |
+| index | 索引字符 | string / number | -      | -      | -        |
 
 ## IndexAnchor Slots
 
