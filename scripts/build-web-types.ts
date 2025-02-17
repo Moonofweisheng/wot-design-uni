@@ -43,15 +43,25 @@ const reWebTypesSource: ReWebTypesSource = (title) => {
   return { symbol }
 }
 
+// 获取纯净值（移除所有反引号和星号以及首尾的单双引号）
+const getPureValue = (value: string) => {
+  return value
+    .replace(/[`*]/g, '')
+    .replace(/^['"]|['"]$/g, '')
+    .trim()
+}
+
 // 重新定义 WebTypes 类型的函数
 const reWebTypesType: ReWebTypesType = (type) => {
-  const isPublicType = isCommonType(type)
-  const isNumber = /^\d+$/.test(type)
-  const symbol = getTypeSymbol(type)
+  const _type = getPureValue(type)
+
+  const isPublicType = isCommonType(_type)
+  const isNumber = /^\d+$/.test(_type)
+  const symbol = getTypeSymbol(_type)
   const isUnion = isUnionType(symbol)
   const module = findModule(symbol)
 
-  return isPublicType || isNumber || !symbol || isUnion ? type : { name: type, source: { symbol, module } }
+  return isPublicType || isNumber || !symbol || isUnion ? _type : { name: _type, source: { symbol, module } }
 }
 
 // 查找模块的函数
@@ -72,17 +82,27 @@ const toKebabCase = (str: string) => {
 
 // 重新定义属性名称的函数
 const reAttribute: ReAttribute = (value, key, row, title) => {
-  if (title.includes('Attributes') && key === '参数') {
-    if (value.includes('v-model:')) {
-      const part = value.split(/[\s/|]/).find((part) => part.startsWith('v-model:'))
-      if (part) {
-        const suffix = toKebabCase(part.split(':')[1].split(/[\s\W]/)[0])
-        return `v-model:${suffix}`
+  if (title.includes('Attributes')) {
+    if (key === '参数') {
+      if (value.includes('v-model:')) {
+        const part = value.split(/[\s/|]/).find((part) => part.startsWith('v-model:'))
+        if (part) {
+          const suffix = toKebabCase(part.split(':')[1].split(/[\s\W]/)[0])
+          return `v-model:${suffix}`
+        }
+      } else if (value.includes('v-model')) {
+        return 'v-model'
       }
-    } else if (value.includes('v-model')) {
-      return 'v-model'
+      return toKebabCase(value.replace(/[^\w\s-]/g, ''))
+    } else if (key === '可选值' || key === '默认值') {
+      const pureValue = getPureValue(value)
+
+      if (['', '-', '—'].includes(pureValue)) {
+        return undefined
+      } else {
+        return pureValue
+      }
     }
-    return toKebabCase(value.replace(/[^\w\s-]/g, ''))
   }
   return value
 }
