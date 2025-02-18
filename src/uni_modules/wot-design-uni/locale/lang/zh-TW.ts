@@ -2,7 +2,7 @@
  * @Author: 810505339
  * @Date: 2025-02-11 21:17:21
  * @LastEditors: 810505339
- * @LastEditTime: 2025-02-12 00:53:11
+ * @LastEditTime: 2025-02-18 13:05:10
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\locale\lang\zh-TW.ts
  * 记得注释
  */
@@ -69,7 +69,7 @@ export default {
   signature: {
     confirmText: '確認',
     clearText: '清空',
-    undoText: '撤銷',
-    redoText: '恢復'
+    revokeText: '撤銷',
+    restoreText: '恢復'
   }
 }

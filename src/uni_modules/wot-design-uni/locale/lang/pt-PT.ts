@@ -127,7 +127,7 @@ export default {
   signature: {
     confirmText: 'Concluir',
     clearText: 'Limpar',
-    undoText: 'Desfazer',
-    redoText: 'Restaurar'
+    revokeText: 'Desfazer',
+    restoreText: 'Restaurar'
   }
 }

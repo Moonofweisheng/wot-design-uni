@@ -127,7 +127,7 @@ export default {
   signature: {
     confirmText: 'ยืนยัน',
     clearText: 'ล้าง',
-    undoText: 'ย้อนกลับ',
-    redoText: 'เรียกคืน'
+    revokeText: 'ย้อนกลับ',
+    restoreText: 'เรียกคืน'
   }
 }

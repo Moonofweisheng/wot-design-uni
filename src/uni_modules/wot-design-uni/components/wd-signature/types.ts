@@ -2,7 +2,7 @@
  * @Author: 810505339
  * @Date: 2025-01-10 20:03:57
  * @LastEditors: 810505339
- * @LastEditTime: 2025-02-12 01:23:47
+ * @LastEditTime: 2025-02-18 13:04:45
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-signature\types.ts
  * 记得注释
  */
@@ -34,15 +34,15 @@ export const signatureProps = {
    */
   clearText: String,
   /**
-   * 上一步按钮的文本
+   * 撤回按钮的文本
    * 类型：string
    */
-  nextText: String,
+  revokeText: String,
   /**
-   * 下一步按钮的文本
+   * 恢复按钮的文本
    * 类型：string
    */
-  previousText: String,
+  restoreText: String,
   /**
    * 确认按钮的文本
    * 类型：string
@@ -132,7 +132,7 @@ export type SignatureExpose = {
   /** 点击确定按钮 */
   confirm: (result: SignatureResult) => void
   /* 点击恢复 */
-  redo: () => void
+  restore: () => void
   /* 点击撤回 */
-  undo: () => void
+  revoke: () => void
 }

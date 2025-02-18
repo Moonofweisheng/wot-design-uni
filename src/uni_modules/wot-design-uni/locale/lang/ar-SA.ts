@@ -127,7 +127,7 @@ export default {
   signature: {
     confirmText: 'تأكيد',
     clearText: 'مسح',
-    undoText: 'تراجع',
-    redoText: 'إعادة'
+    revokeText: 'تراجع',
+    restoreText: 'استعادة'
   }
 }
