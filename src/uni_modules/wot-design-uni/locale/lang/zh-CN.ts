@@ -1,3 +1,7 @@
+/**
+ * This file contains localization strings for various components.
+ */
+
 export default {
   calendar: {
     placeholder: '请选择',
@@ -126,6 +130,8 @@ export default {
   },
   signature: {
     confirmText: '确认',
-    clearText: '清空'
+    clearText: '清空',
+    revokeText: '撤销',
+    restoreText: '恢复'
   }
 }
