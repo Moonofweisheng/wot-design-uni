@@ -233,7 +233,7 @@ function handleSwitchChange({ value }) {
 | -------- | -------------- | ------- | ------ | ------ | -------- |
 | title    | 分组标题       | string  | -      | -      | -        |
 | value    | 分组右侧内容   | string  | -      | -      | -        |
-| border   | 是否展示边框线 | string  | -      | -      | -        |
+| border   | 是否展示边框线 | boolean  | -      | -      | -        |
 | use-slot | 分组启用插槽   | boolean | -      | false  | -        |
 
 ## Cell Attributes
