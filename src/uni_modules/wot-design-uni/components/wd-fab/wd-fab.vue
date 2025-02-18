@@ -103,7 +103,7 @@ const bounding = reactive({
 })
 
 async function getBounding() {
-  const sysInfo = uni.getSystemInfoSync()
+  const winInfo = uni.getWindowInfo()
   try {
     const trigerInfo = await getRect('#trigger', false, proxy)
     fabSize.width = trigerInfo.width || 56
@@ -113,9 +113,9 @@ async function getBounding() {
   }
 
   const { top = 16, left = 16, right = 16, bottom = 16 } = props.gap
-  screen.width = sysInfo.windowWidth
-  screen.height = isH5 ? sysInfo.windowTop + sysInfo.windowHeight : sysInfo.windowHeight
-  bounding.minTop = isH5 ? sysInfo.windowTop + top : top
+  screen.width = winInfo.windowWidth
+  screen.height = isH5 ? winInfo.windowTop + winInfo.windowHeight : winInfo.windowHeight
+  bounding.minTop = isH5 ? winInfo.windowTop + top : top
   bounding.minLeft = left
   bounding.maxLeft = screen.width - fabSize.width - right
   bounding.maxTop = screen.height - fabSize.height - bottom

@@ -45,7 +45,7 @@ const handleHeightChange = ({ height }: { height: number }) => {
 }
 
 onLoad(() => {
-  windowHeight.value = uni.getSystemInfoSync().windowHeight
+  windowHeight.value = uni.getWindowInfo().windowHeight
   anchors.value = [100, Math.round(0.4 * windowHeight.value), Math.round(0.7 * windowHeight.value)]
   height.value = anchors.value[1]
 })
