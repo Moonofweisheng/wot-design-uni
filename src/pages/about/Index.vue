@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2025-02-16 16:04:20
- * @LastEditTime: 2025-02-16 18:14:14
+ * @LastEditTime: 2025-02-19 22:51:30
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/src/pages/about/Index.vue
@@ -23,6 +23,7 @@
           </view>
         </view>
       </view>
+      <!-- #ifndef MP-ALIPAY -->
       <view class="additional-links">
         <view class="additional-links__title">更多信息</view>
         <wd-cell-group border>
@@ -33,6 +34,7 @@
           <!-- #endif -->
         </wd-cell-group>
       </view>
+      <!-- #endif -->
     </view>
   </view>
 </template>
