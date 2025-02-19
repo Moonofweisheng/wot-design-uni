@@ -22,7 +22,7 @@
       </view>
     </demo-block>
     <demo-block title="设置小数精度">
-      <wd-input-number v-model="value6" @change="handleChange6" :precision="2" :step="0.1" />
+      <wd-input-number v-model="value6" @change="handleChange6" :precision="1" :step="0.1" />
     </demo-block>
     <demo-block title="输入严格为步数的倍数">
       <wd-input-number v-model="value7" @change="handleChange7" step-strictly :step="2" />
@@ -49,7 +49,7 @@ const value2 = ref<number>(1)
 const value3 = ref<number>(1)
 const value4 = ref<number>(2)
 const value5 = ref<number>(1)
-const value6 = ref<string>('1.205')
+const value6 = ref<string>('1.2')
 const value7 = ref<number>(1)
 const value8 = ref<number>(2)
 const value9 = ref<string>('')
