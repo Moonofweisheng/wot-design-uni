@@ -1,6 +1,21 @@
 # 更新日志 
 
 
+### [1.7.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.7.0...v1.7.1) (2025-02-19)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 InputNumber 微信小程序设置了precision后无法输入小数点的问题 ([#902](https://github.com/Moonofweisheng/wot-design-uni/issues/902)) ([e3a03b1](https://github.com/Moonofweisheng/wot-design-uni/commit/e3a03b1dbb6640b76a3034daeebd88d42252508c)), closes [#878](https://github.com/Moonofweisheng/wot-design-uni/issues/878)
+* 🐛 修复 Upload 文档自定义唤起上传样式的示例错误的问题 ([3dfa69c](https://github.com/Moonofweisheng/wot-design-uni/commit/3dfa69c282514bd786d3822963f3f1dd18089eb9))
+* 🐛 修复分页组件为0时不更新页数问题 ([#903](https://github.com/Moonofweisheng/wot-design-uni/issues/903)) ([604faeb](https://github.com/Moonofweisheng/wot-design-uni/commit/604faebf4bb19eca96ba84ee48424be12ee72ba3)), closes [#897](https://github.com/Moonofweisheng/wot-design-uni/issues/897)
+* 🐛 修复web-types可选值/默认值类型识别错误 ([#899](https://github.com/Moonofweisheng/wot-design-uni/issues/899)) ([8b4d2ed](https://github.com/Moonofweisheng/wot-design-uni/commit/8b4d2ed14b6340003c63d10e31c02f058bed3ef0))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  优化demo项目的展示方便支付宝平台提审 ([c48a67b](https://github.com/Moonofweisheng/wot-design-uni/commit/c48a67b027b9b3f66f0b051ee34bde163feda6cf))
+
 ## [1.7.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.6.1...v1.7.0) (2025-02-16)
 
 
