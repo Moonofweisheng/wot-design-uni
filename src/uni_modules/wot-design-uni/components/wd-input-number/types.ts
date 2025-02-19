@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2025-02-11 18:38:54
+ * @LastEditTime: 2025-02-19 12:47:54
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-input-number/types.ts
@@ -10,7 +10,26 @@
 import type { PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeRequiredProp, makeStringProp, numericProp } from '../common/props'
 
+/**
+ * 输入框值变化前的回调函数类型定义
+ * @param value 输入框的新值
+ * @returns 返回布尔值或Promise<boolean>，用于控制是否允许值的变化
+ */
 export type InputNumberBeforeChange = (value: number | string) => boolean | Promise<boolean>
+
+/**
+ * 输入数字组件事件类型枚举
+ * Input: 用户输入事件
+ * Blur: 失焦事件
+ * Watch: 监听值变化事件
+ * Button: 按钮点击事件
+ */
+export enum InputNumberEventType {
+  Input = 'input',
+  Blur = 'blur',
+  Watch = 'watch',
+  Button = 'button'
+}
 
 export const inputNumberProps = {
   ...baseProps,
