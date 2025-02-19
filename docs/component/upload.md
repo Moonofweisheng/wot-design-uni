@@ -427,9 +427,7 @@ const buildFormData = ({ file, formData, resolve }) => {
 
 ```html
 <wd-upload :file-list="fileList" action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload" @change="handleChange">
-  <wd-upload :file-list="fileList" :limit="5" action="https://ftf.jd.com/api/uploadImg" @change="handleChange">
     <wd-button>上传</wd-button>
-  </wd-upload>
 </wd-upload>
 ```
 
