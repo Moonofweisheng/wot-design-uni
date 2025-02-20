@@ -98,6 +98,7 @@ function handleChange1({ value }) {
 ```
 
 ## 异步变更
+
 通过 `before-change` 可以在输入值变化前进行校验和拦截。
 
 ```html
@@ -123,7 +124,13 @@ const beforeChange: InputNumberBeforeChange = (value) => {
 }
 ```
 
- 
+## 长按加减
+
+设置 `long-press` 属性，允许长按加减。
+
+```html
+<wd-input-number v-model="value" long-press />
+```
 
 ## Attributes
 
@@ -145,6 +152,7 @@ const beforeChange: InputNumberBeforeChange = (value) => {
 | disable-minus | 禁用减少按钮 | boolean | - | false | 0.2.14 |
 | adjustPosition | 原生属性，键盘弹起时，是否自动上推页面 | boolean | - | true | 1.3.11 |
 | before-change | 输入框值改变前触发，返回 false 会阻止输入框值改变，支持返回 `Promise` | `(value: number \| string) => boolean \| Promise<boolean>` | - | - | 1.6.0 |
+| long-press | 是否允许长按进行加减 | boolean | - | false | $LOWEST_VERSION$ |
 
 
 ## Events
