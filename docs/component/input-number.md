@@ -12,7 +12,7 @@
 
 ```typescript
 const value = ref<number>(1)
-function handleChange1({ value }) {
+function handleChange({ value }) {
   console.log(value)
 }
 ```
@@ -129,7 +129,7 @@ const beforeChange: InputNumberBeforeChange = (value) => {
 设置 `long-press` 属性，允许长按加减。
 
 ```html
-<wd-input-number v-model="value" long-press />
+<wd-input-number v-model="value" long-press @change="handleChange" />
 ```
 
 ## Attributes

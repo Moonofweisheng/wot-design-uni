@@ -37,7 +37,7 @@
       <wd-input-number v-model="value11" :before-change="beforeChange" />
     </demo-block>
     <demo-block title="长按加减">
-      <wd-input-number v-model="value12" long-press />
+      <wd-input-number v-model="value12" long-press @change="handleChange12" />
     </demo-block>
   </page-wraper>
 </template>
@@ -85,6 +85,9 @@ function handleChange8({ value }: any) {
   console.log(value)
 }
 function handleChange9({ value }: any) {
+  console.log(value)
+}
+function handleChange12({ value }: any) {
   console.log(value)
 }
 
