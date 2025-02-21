@@ -3,7 +3,8 @@ import { useScrollLock } from '@vueuse/core'
 import { inBrowser } from 'vitepress'
 import { ref, watch } from 'vue'
 import VPSidebarGroup from 'vitepress/dist/client/theme-default/components/VPSidebarGroup.vue'
-import { useSidebar } from 'vitepress/theme';
+import { useSidebar } from 'vitepress/theme'
+import SidebarAds from './SidebarAds.vue'
 
 const { sidebarGroups, hasSidebar } = useSidebar()
 
@@ -58,6 +59,10 @@ watch(
       </span>
 
       <slot name="sidebar-nav-before" />
+      <!-- 添加广告位插槽 -->
+      <slot name="sidebar-ad">
+        <SidebarAds />
+      </slot>
       <VPSidebarGroup :items="sidebarGroups" :key="key" />
       <slot name="sidebar-nav-after" />
     </nav>
@@ -81,6 +86,7 @@ watch(
   transform: translateX(-100%);
   transition: opacity 0.5s, transform 0.25s ease;
   overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
 }
 
 .VPSidebar.open {
@@ -108,8 +114,6 @@ watch(
   }
 }
 
-
-
 @media (min-width: 960px) {
   .curtain {
     position: sticky;
@@ -127,4 +131,6 @@ watch(
 .nav {
   outline: 0;
 }
+
+
 </style>
