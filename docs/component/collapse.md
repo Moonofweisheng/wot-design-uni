@@ -147,7 +147,7 @@ Collapse 查看更多的模式下，可以使用插槽定义自己想要的折�
 ```
 
 ```html
-<wd-collapse viewmore v-model="value" @change="handleChange4" use-more-slot custom-more-slot-class="more-slot">
+<wd-collapse viewmore v-model="value" @change="handleChange" use-more-slot custom-more-slot-class="more-slot">
   具名插槽：这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
   <template #more>
     <view>显示全部</view>
