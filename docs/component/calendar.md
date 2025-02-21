@@ -351,7 +351,7 @@ function handleConfirm({ value }) {
 
 ```html
 <view style="margin-bottom: 10px;">当前选中日期：{{ formatValue }}</view>
-<wd-calendar v-model="value" @confirm="handleConfirm4">
+<wd-calendar v-model="value" @confirm="handleConfirm">
   <wd-button>选择日期</wd-button>
 </wd-calendar>
 ```
@@ -360,7 +360,7 @@ function handleConfirm({ value }) {
 const value = ref<string>('')
 const formatValue = ref<string>('')
 
-function handleConfirm4({ value }) {
+function handleConfirm({ value }) {
   formatValue.value = new Date(value).toString()
 }
 ```

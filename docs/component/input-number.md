@@ -12,7 +12,7 @@
 
 ```typescript
 const value = ref<number>(1)
-function handleChange1({ value }) {
+function handleChange({ value }) {
   console.log(value)
 }
 ```
@@ -92,7 +92,7 @@ function handleChange1({ value }) {
 
 ```typescript
 const value = ref<number|string>('')
-function handleChange1({ value }) {
+function handleChange({ value }) {
   console.log(value)
 }
 ```

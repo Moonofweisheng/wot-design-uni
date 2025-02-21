@@ -13,7 +13,7 @@
 ```typescript
 const value = ref<boolean>(true)
 
-function handleChange1({ value }) {
+function handleChange({ value }) {
   console.log(value)
 }
 ```

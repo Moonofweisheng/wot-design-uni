@@ -24,7 +24,7 @@ Popover 的属性与 [Tooltip](/component/tooltip.html) 很类似，因此对于
 import { useQueue } from '@/uni_modules/wot-design-uni'
 
 const { closeOutside } = useQueue()
-function handleChange1({ show }) {
+function handleChange({ show }) {
   console.log(show)
 }
 ```
