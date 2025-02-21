@@ -17,6 +17,8 @@ import { baseProps, makeBooleanProp, makeNumberProp, makeNumericProp, makeRequir
  */
 export type InputNumberBeforeChange = (value: number | string) => boolean | Promise<boolean>
 
+export type OperationType = 'add' | 'sub'
+
 /**
  * 输入数字组件事件类型枚举
  * Input: 用户输入事件
@@ -96,5 +98,9 @@ export const inputNumberProps = {
   /**
    * 输入值变化前的回调函数，返回 `false` 可阻止输入，支持返回 `Promise`
    */
-  beforeChange: Function as PropType<InputNumberBeforeChange>
+  beforeChange: Function as PropType<InputNumberBeforeChange>,
+  /**
+   * 是否开启长按加减手势
+   */
+  longPress: makeBooleanProp(false)
 }

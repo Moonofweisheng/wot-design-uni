@@ -36,6 +36,9 @@
     <demo-block title="异步变更">
       <wd-input-number v-model="value11" :before-change="beforeChange" />
     </demo-block>
+    <demo-block title="长按加减">
+      <wd-input-number v-model="value12" long-press @change="handleChange12" />
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -55,6 +58,7 @@ const value8 = ref<number>(2)
 const value9 = ref<string>('')
 const value10 = ref<number>(1)
 const value11 = ref<number>(1)
+const value12 = ref<number>(1)
 
 function handleChange1({ value }: any) {
   console.log(value)
@@ -81,6 +85,9 @@ function handleChange8({ value }: any) {
   console.log(value)
 }
 function handleChange9({ value }: any) {
+  console.log(value)
+}
+function handleChange12({ value }: any) {
   console.log(value)
 }
 
