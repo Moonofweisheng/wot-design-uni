@@ -19,7 +19,7 @@
 `action` 设置上传的地址；
 
 ```html
-<wd-upload :file-list="fileList1" image-mode="aspectFill" :action="action" @change="handleChange1"></wd-upload>
+<wd-upload :file-list="fileList" image-mode="aspectFill" :action="action" @change="handleChange"></wd-upload>
 ```
 
 ```typescript
