@@ -80,6 +80,9 @@ export function useChildren<
   const linkChildren = (value?: ProvideValue) => {
     const link = (child: ComponentInternalInstance) => {
       if (child.proxy) {
+        if ((value as any).props?.disabled) {
+          child.props.disabled = true
+        }
         internalChildren.push(child)
         publicChildren.push(child.proxy as Child)
         sortChildren(parent, publicChildren, internalChildren)
