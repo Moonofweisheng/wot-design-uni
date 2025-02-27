@@ -65,27 +65,29 @@
 扫描二维码访问演示，注意：因微信审核机制限制，当前的微信小程序示例可能不是最新版本，可以clone代码到本地预览。
 
 <p style="display:flex;gap:24px">
-<img src="https://wot-design-uni.pages.dev/wx.jpg" width="200" height="200"/>
-<img src="https://wot-design-uni.pages.dev/alipay.png" width="200" height="200" />
-<img src="https://wot-design-uni.pages.dev/h5.png" width="200" height="200" />
-<img src="https://wot-design-uni.pages.dev/android.png" width="200" height="200" />
+<img src="https://wot-design-uni.cn/wx.jpg" width="200" height="200"/>
+<img src="https://wot-design-uni.cn/alipay.png" width="200" height="200" />
+<img src="https://wot-design-uni.cn/h5.png" width="200" height="200" />
+<img src="https://wot-design-uni.cn/android.png" width="200" height="200" />
 
 </p>
 
 ## 快速上手
 
-详细说明见 [快速上手](https://wot-design-uni.pages.dev/guide/quick-use.html)。
+详细说明见 [快速上手](https://wot-design-uni.cn/guide/quick-use.html)。
 
 ## 链接
 
-- [常见问题](https://wot-design-uni.pages.dev/guide/common-problems.html)
-- [更新日志](https://wot-design-uni.pages.dev/guide/changelog.html)
+- [常见问题](https://wot-design-uni.cn/guide/common-problems.html)
+- [更新日志](https://wot-design-uni.cn/guide/changelog.html)
 - [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
-- [QQ 群](https://wot-design-uni.pages.dev/guide/join-group.html)
+- [QQ 群](https://wot-design-uni.cn/guide/join-group.html)
 
 ## 优秀案例
 
-我们非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16) 提交案例。
+[这里](https://wot-design-uni.cn/guide/cases.html)我们收集了一些优秀的案例，欢迎大家体验！
+
+我们也非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16) 提交案例。
 
 
 ## 周边生态
@@ -135,8 +137,8 @@
 ### 扫码捐赠
 
 <p>
-<img src="https://wot-design-uni.pages.dev/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
-<img src="https://wot-design-uni.pages.dev/alipayQrcode.jpg" width="200" height="200" />
+<img src="https://wot-design-uni.cn/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-design-uni.cn/alipayQrcode.jpg" width="200" height="200" />
 </p>
 
 

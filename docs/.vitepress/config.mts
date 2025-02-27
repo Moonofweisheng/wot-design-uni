@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-02-23 15:56:46
+ * @LastEditTime: 2025-02-27 12:47:41
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
+ * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
  * 记得注释
  */
 import { defineConfig } from 'vitepress';
@@ -123,6 +123,9 @@ export default defineConfig({
             text: '更新日志',
             link: '/guide/changelog',
           },{
+            text: '⭐ 案例',
+            link: '/guide/cases',
+          },{
             text: '加群沟通',
             link: '/guide/join-group',
           }
@@ -187,6 +190,9 @@ export default defineConfig({
           text: '更新日志',
           link: '/guide/changelog',
         },{
+          text: '⭐ 案例',
+          link: '/guide/cases',
+        },{
           text: '加群沟通',
           link: '/guide/join-group',
         }
@@ -199,11 +205,7 @@ export default defineConfig({
         {
           text: '榜上有名',
           link: '/reward/donor',
-        },
-        {
-          text: '🤖 生活小工具',
-          link: '/reward/living',
-        },
+        }
       ],
 
       '/component/': [

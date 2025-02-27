@@ -24,10 +24,9 @@ hero:
     - theme: brand
       text: 🥤一杯咖啡
       link: /reward/reward
-    - theme: brand
-      text: 🤖 生活小工具
-      link: /reward/living
-
+    - theme: alt
+      text: ⭐ 优秀案例
+      link: /guide/cases
 
 features:
   - icon: 🎯

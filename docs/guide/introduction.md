@@ -45,21 +45,9 @@
 - [更新日志](/guide/changelog)
 - [常见问题](/guide/common-problems)
 - [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
-- [QQ 群](/guide/join-group.html)
+- [互助交流群](/guide/join-group.html)
+- [优秀案例](/guide/cases)
 
-## 优秀案例
-
-我们非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16) 提交案例。
-
-  <el-card style="max-width: 250px" shadow="hover">
-    <template #header>
-    <span style=" font-size:18px;font-wight:500">薪资速算器</span>
-    </template>
-    <el-image
-      :src="salaryCalculator"
-      style="width: 100%"
-    />
-  </el-card>
 
 ## 赞助我们
 
@@ -67,7 +55,7 @@
 
 捐赠后您的昵称、留言等将会展示在[捐赠榜单](/reward/donor.html)中。
 
-## 周边生态
+## 生态推荐
 
 | 项目                                                                                                        | 描述                                                 |
 | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
@@ -97,5 +85,4 @@ import WxQrcode from '/wx.jpg'
 import AlipayQrcode from '/alipay.png'
 import H5Qrcode from '/h5.png'
 import AndroidQrcode from '/android.png'
-import salaryCalculator from '/salary-calculator.jpg'
 </script>
