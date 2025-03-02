@@ -2,9 +2,10 @@
 @import '../common/abstracts/mixin';
 
 @include b(switch) {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   position: relative;
-  width: $-switch-width;
+  min-width: $-switch-width;
   height: $-switch-height;
   border-radius: $-switch-circle-size;
   background: $-switch-inactive-color;
@@ -22,7 +23,7 @@
     box-sizing: border-box;
     position: absolute;
     display: inline-block;
-    width: $-switch-circle-size;
+    min-width: $-switch-circle-size;
     height: $-switch-circle-size;
     top: 2px;
     left: 2px;
@@ -34,7 +35,7 @@
     &::after {
       position: absolute;
       content: '';
-      width: calc(200% - 2px);
+      min-width: calc(200% - 2px);
       height: calc(200% - 2px);
       top: 50%;
       left: 50%;
@@ -43,13 +44,30 @@
       border-radius: 50%;
     }
   }
+  @include e(inner) {
+    color:#fff;
+    font-size: calc($-switch-circle-size/2.5);
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px 0 calc($-switch-circle-size * 2 + 8px);
+    user-select: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.3s;
+  }
   @include when(checked) {
     background: $-switch-active-color;
     border-color: $-switch-active-color;
 
     .wd-switch__circle {
-      left: calc($-switch-width - $-switch-circle-size - 2px);
+      left: calc(100% - $-switch-circle-size - 2px);
       box-shadow: 0 2px 4px 0 $-switch-active-shadow-color
+    }
+    .wd-switch__inner{
+      padding: 0 calc($-switch-circle-size * 2 + 8px) 0 4px;
     }
   }
   @include when(disabled) {

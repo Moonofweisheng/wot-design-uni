@@ -24,6 +24,9 @@
       <demo-block title="before-change 修改前钩子函数">
         <wd-switch v-model="checked7" :before-change="beforeChange" @change="handleChange5" />
       </demo-block>
+      <demo-block title="文字描述">
+        <wd-switch v-model="checked8" active-text="喜欢摸鱼" inactive-text="讨厌摸鱼" @change="handleChange6" />
+      </demo-block>
     </view>
   </page-wraper>
 </template>
@@ -39,6 +42,7 @@ const checked4 = ref<boolean>(true)
 const checked5 = ref<boolean>(true)
 const checked6 = ref<boolean>(false)
 const checked7 = ref<boolean>(false)
+const checked8 = ref<boolean>(true)
 
 const message = useMessage()
 
@@ -65,6 +69,9 @@ function handleChange4({ value }: any) {
   console.log(value)
 }
 function handleChange5({ value }: any) {
+  console.log(value)
+}
+function handleChange6({ value }: any) {
   console.log(value)
 }
 </script>
