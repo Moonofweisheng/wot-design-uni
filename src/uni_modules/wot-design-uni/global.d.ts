@@ -1,11 +1,3 @@
-/*
- * @Author: 810505339
- * @Date: 2025-01-11 23:03:12
- * @LastEditors: 810505339
- * @LastEditTime: 2025-01-11 23:03:24
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\global.d.ts
- * 记得注释
- */
 declare module 'vue' {
   // Helper for Volar
   export interface GlobalComponents {
@@ -88,6 +80,7 @@ declare module 'vue' {
     WdFab: typeof import('./components/wd-fab/wd-fab.vue')['default']
     WdCountDown: typeof import('./components/wd-count-down/wd-count-down.vue')['default']
     WdNumberKeyboard: typeof import('./components/wd-number-keyboard/wd-number-keyboard.vue')['default']
+    WdKeyboard: typeof import('./components/wd-keyboard/wd-keyboard.vue')['default']
     WdGap: typeof import('./components/wd-gap/wd-gap.vue')['default']
     WdPasswordInput: typeof import('./components/wd-password-input/wd-password-input.vue')['default']
     WdForm: typeof import('./components/wd-form/wd-form.vue')['default']
