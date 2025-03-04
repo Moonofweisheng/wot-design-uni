@@ -69,7 +69,7 @@
           <slot v-else name="suffix"></slot>
         </view>
       </view>
-      <view v-if="errorMessage" class="wd-input__error-message">{{ errorMessage }}</view>
+      <view class="wd-input__error-message">{{ errorMessage }}</view>
     </view>
   </view>
 </template>
