@@ -45,7 +45,7 @@
 通过设置 `close-on-click-modal` 属性为 `false`，你可以禁用用户点击遮罩层时关闭弹出层的功能。
 
 ```html
-<wd-popup v-model="show7" position="bottom" :close-on-click-modal="false" closable custom-style="height: 200px;" @close="handleClose7"></wd-popup>
+<wd-popup v-model="show" position="bottom" :close-on-click-modal="false" closable custom-style="height: 200px;" @close="handleClose"></wd-popup>
 ```
 
 
@@ -54,7 +54,7 @@
 通过设置 `modal` 属性为 `false`，你可以禁用遮罩层，使用户可以与底层内容进行交互。
 
 ```html
-<wd-popup v-model="show8" position="bottom" :modal="false" closable custom-style="height: 200px;" @close="handleClose8"></wd-popup>
+<wd-popup v-model="show" position="bottom" :modal="false" closable custom-style="height: 200px;" @close="handleClose"></wd-popup>
 ```
 
 
@@ -63,7 +63,7 @@
 通过设置 `safe-area-inset-bottom` 属性为 `true`，你可以确保弹出层在底部显示时不会被底部安全区域遮挡。
 
 ```html
-<wd-popup v-model="show9" position="bottom" :safe-area-inset-bottom="true" custom-style="height: 200px;" @close="handleClose9"></wd-popup>
+<wd-popup v-model="show" position="bottom" :safe-area-inset-bottom="true" custom-style="height: 200px;" @close="handleClose"></wd-popup>
 ```
 
 ## 禁止滚动穿透
@@ -75,9 +75,9 @@
 可以使用 [page-meta](https://uniapp.dcloud.net.cn/component/page-meta#page-meta) 组件动态修改 `page-meta` 的 `overflow` 属性。
 ```html
 <!-- page-meta 只能是页面内的第一个节点 -->
-<page-meta :page-style="`overflow:${show10 ? 'hidden' : 'visible'};`"></page-meta>
+<page-meta :page-style="`overflow:${show ? 'hidden' : 'visible'};`"></page-meta>
 
-<wd-popup v-model="show10" lock-scroll position="bottom" :safe-area-inset-bottom="true" custom-style="height: 200px;" @close="handleClose10"></wd-popup>
+<wd-popup v-model="show" lock-scroll position="bottom" :safe-area-inset-bottom="true" custom-style="height: 200px;" @close="handleClose"></wd-popup>
 ```
 
 :::tip 提示
