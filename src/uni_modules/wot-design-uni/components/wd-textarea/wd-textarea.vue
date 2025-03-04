@@ -47,7 +47,7 @@
       />
       <view v-if="errorMessage" class="wd-textarea__error-message">{{ errorMessage }}</view>
 
-      <view v-if="readonly" class="wd-textarea__readonly-mask" />
+      <view v-if="props.readonly" class="wd-textarea__readonly-mask" />
       <view class="wd-textarea__suffix">
         <wd-icon v-if="showClear" custom-class="wd-textarea__clear" name="error-fill" @click="handleClear" />
         <view v-if="showWordCount" class="wd-textarea__count">

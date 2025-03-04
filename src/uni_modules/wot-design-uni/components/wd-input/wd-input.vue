@@ -50,7 +50,7 @@
           @confirm="handleConfirm"
           @keyboardheightchange="handleKeyboardheightchange"
         />
-        <view v-if="readonly" class="wd-input__readonly-mask" />
+        <view v-if="props.readonly" class="wd-input__readonly-mask" />
         <view v-if="showClear || showPassword || suffixIcon || showWordCount || $slots.suffix" class="wd-input__suffix">
           <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="handleClear" />
           <wd-icon v-if="showPassword" custom-class="wd-input__icon" :name="isPwdVisible ? 'view' : 'eye-close'" @click="togglePwdVisible" />

@@ -4,7 +4,7 @@
       <slot v-if="useDefaultSlot"></slot>
       <view
         v-else
-        :class="`wd-select-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${alignRight && 'is-align-right'} ${
+        :class="`wd-select-picker__cell ${disabled && 'is-disabled'} ${props.readonly && 'is-readonly'} ${alignRight && 'is-align-right'} ${
           error && 'is-error'
         } ${size && 'is-' + size}`"
       >

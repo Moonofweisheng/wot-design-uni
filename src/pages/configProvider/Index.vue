@@ -163,7 +163,7 @@ const promotionlist = ref<any[]>([
 ])
 const threshold = ref<string>('')
 const price = ref<string>('')
-const date = ref<Date>(new Date())
+const date = ref<number>(new Date().getTime())
 const address = ref<any[]>([])
 
 const count = ref<number>(1)
