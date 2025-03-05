@@ -27,6 +27,12 @@ function confirm(result: SignatureResult) {
 }
 ```
 
+## 开启历史记录
+
+```html
+<wd-signature :history="true" background-color="lightgray" />
+```
+
 ## 自定义画笔颜色
 
 `pen-color`设置签名笔的颜色，默认为`黑色`。
@@ -64,11 +70,15 @@ function confirm(result: SignatureResult) {
 通过`footer`插槽可以自定义按钮。
 
 ```html
-<wd-signature :disabled="disabled">
-  <template #footer="{ clear, confirm }">
+<wd-signature :disabled="disabled" :step="3">
+  <template #footer="{ clear, confirm, currentStep, restore, revoke,historyList }">
     <wd-button block @click="changeDisabled" v-if="disabled">开始签名</wd-button>
-    <wd-button v-if="!disabled" size="small" plain @click="clear">清除</wd-button>
-    <wd-button v-if="!disabled" size="small" custom-style="margin-left: 4px" @click="confirm">确认</wd-button>
+    <block v-if="!disabled">
+      <wd-button size="small" plain @click="revoke()" :disabled="currentStep <= 0">撤回三步</wd-button>
+      <wd-button size="small" plain @click="restore()" :disabled="!(currentStep < historyList.length)">恢复三步</wd-button>
+      <wd-button size="small" plain @click="clear">清除</wd-button>
+      <wd-button size="small" style="margin-left: 4px" @click="confirm">确认</wd-button>
+    </block>
   </template>
 </wd-signature>
 ```
@@ -97,12 +107,14 @@ function changeDisabled() {
 | disabled        | 是否禁用签名板                                                       | Boolean | --     | false    | --       |
 | backgroundColor | 画板的背景色                                                         | String  | --     | --       | --       |
 | disableScroll   | 是否禁用画布滚动                                                     | Boolean | --     | true     | --       |
+| history         | 是否开启历史记录                                                     | Boolean | --     | false    | --       |
+| step            | 开启历史记录之后的步长(撤回step步)                                    | Number  | --     | 1        | --       |
 
 ## Slot
 
 | name   | 说明           | 参数                  | 最低版本 |
 |--------|----------------|-----------------------|----------|
-| footer | 自定义footer   | `{ clear, confirm }`  | -        |
+| footer | 自定义footer   | `{ clear, confirm, restore, revoke, currentStep ,historyList }`  | -        |
 
 ## Events
 
@@ -122,3 +134,5 @@ function changeDisabled() {
 |-----------|--------------------|-------------------------------------------|----------|
 | confirm   | 点击确认按钮时触发 | `{tempFilePath, width, height, success}` 分别为生成文件的临时路径 (本地路径)、生成图片宽、生成图片高、是否成功 | -        |
 | clear     | 点击清空按钮时触发 | -                                         | -        |
+| restore      | 暴露恢复方法       | -                                         | -        |
+| revoke  | 暴露撤回方法       | -                                         | -        |
