@@ -5,6 +5,10 @@
       <wd-datetime-picker-view v-model="value1" @change="onChange1" />
     </demo-block>
 
+    <demo-block title="年月日时" transparent>
+      <wd-datetime-picker-view type="date-hour" v-model="value20" @change="onChange20" />
+    </demo-block>
+
     <demo-block title="年月日" transparent>
       <wd-datetime-picker-view type="date" v-model="value2" @change="onChange2" />
     </demo-block>
@@ -42,6 +46,7 @@ const value4 = ref<string>('11:12')
 const value5 = ref<number>(Date.now())
 const value6 = ref<number>(Date.now())
 const value7 = ref<string>('')
+const value20 = ref<string>('')
 const formatter: DatetimePickerViewFormatter = (type, value) => {
   switch (type) {
     case 'year':
@@ -87,6 +92,9 @@ function onChange6({ value }: any) {
 }
 function onChange7({ value }: any) {
   console.log(new Date(value).getFullYear())
+}
+function onChange20({ value }: any) {
+  toast.show('选择了' + new Date(value))
 }
 </script>
 <style lang="scss" scoped></style>
