@@ -128,9 +128,10 @@ function choose(index: number) {
   if (props.disabled) return
   const { valueKey } = props
   const item = props.options[index]
-  emit('update:modelValue', item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item)
+  const newValue = item[valueKey] !== undefined ? item[valueKey] : item
+  emit('update:modelValue', newValue)
   emit('change', {
-    value: item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item,
+    value: newValue,
     selectedItem: item
   })
   close()
