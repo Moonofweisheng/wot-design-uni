@@ -87,6 +87,12 @@ mode 为小程序原生属性，参考[微信小程序 image 官方文档](https
 <wd-img :width="100" :height="100" :src="joy" :enable-preview="true" />
 ```
 
+也可以传入 `preview-src` 属性来预览另外的图片
+
+```html
+<wd-img :width="100" :height="100" :src="joy" :preview-src="img" :enable-preview="true" />
+```
+
 ## Attributes
 
 | 参数                   | 说明                                               | 类型            | 可选值                                                                                                                                                                             | 默认值        | 最低版本         |
