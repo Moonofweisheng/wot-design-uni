@@ -48,7 +48,7 @@ watch(
 const canvasId = ref<string>(`water${uuid()}`) // canvas 组件的唯一标识符
 const waterMarkUrl = ref<string>('') // canvas生成base64水印
 const canvasOffScreenable = ref<boolean>(uni.canIUse('createOffscreenCanvas') && Boolean(uni.createOffscreenCanvas)) // 是否可以使用离屏canvas
-const pixelRatio = ref<number>(uni.getSystemInfoSync().pixelRatio) // 像素比
+const pixelRatio = ref<number>(uni.getWindowInfo().pixelRatio) // 像素比
 const canvasHeight = ref<number>((props.height + props.gutterY) * pixelRatio.value) // canvas画布高度
 const canvasWidth = ref<number>((props.width + props.gutterX) * pixelRatio.value) // canvas画布宽度
 const showCanvas = ref<boolean>(true) // 是否展示canvas

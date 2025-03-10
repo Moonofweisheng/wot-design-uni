@@ -103,7 +103,7 @@ const bounding = reactive({
 })
 
 async function getBounding() {
-  const sysInfo = uni.getSystemInfoSync()
+  const sysInfo = uni.getWindowInfo()
   try {
     const trigerInfo = await getRect('#trigger', false, proxy)
     fabSize.width = trigerInfo.width || 56
