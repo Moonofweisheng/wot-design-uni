@@ -152,8 +152,14 @@ watch(
   (newValue) => {
     displayColumns.value = deepClone(newValue)
     resetColumns.value = deepClone(newValue)
-    // 获取初始选中项,并展示初始选中文案
-    handleShowValueUpdate(props.modelValue)
+    if (newValue.length === 0) {
+      // 当 columns 变为空时，清空 pickerValue 和 showValue
+      pickerValue.value = isArray(props.modelValue) ? [] : ''
+      showValue.value = ''
+    } else {
+      // 非空时正常更新显示值
+      handleShowValueUpdate(props.modelValue)
+    }
   },
   {
     deep: true,
