@@ -59,9 +59,11 @@ export function useMessage(selector: string = ''): Message {
       messageOption.value = deepMerge(options, {
         show: true,
         success: (res: MessageResult) => {
+          close()
           resolve(res)
         },
         fail: (res: MessageResult) => {
+          close()
           reject(res)
         }
       })
