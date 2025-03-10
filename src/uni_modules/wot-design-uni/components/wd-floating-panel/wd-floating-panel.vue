@@ -130,7 +130,7 @@ watch(
 )
 
 onBeforeMount(() => {
-  const { windowHeight: _windowHeight } = uni.getSystemInfoSync()
+  const { windowHeight: _windowHeight } = uni.getWindowInfo()
   windowHeight.value = _windowHeight
 })
 </script>
