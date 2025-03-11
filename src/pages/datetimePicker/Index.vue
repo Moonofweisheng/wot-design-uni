@@ -33,6 +33,13 @@
     <demo-block title="范围tab展示格式" transparent>
       <wd-datetime-picker label="日期选择" v-model="value15" @confirm="handleConfirm15" :display-format-tab-label="displayFormatTabLabel" />
     </demo-block>
+    <demo-block title="可清空的" transparent>
+      <wd-datetime-picker label="可清空的" v-model="value18">
+        <template #icon="{ disabled, readonly }">
+          <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" :name="iconName" @tap.stop="clear" />
+        </template>
+      </wd-datetime-picker>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -43,7 +50,7 @@ import type {
   DatetimePickerDisplayFormatTabLabel,
   DatetimePickerInstance
 } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker/types'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const value1 = ref<string>('')
 const value2 = ref<number>(Date.now())
@@ -62,9 +69,22 @@ const value14 = ref<any[]>(['', ''])
 const value15 = ref<any[]>(['', Date.now()])
 const value16 = ref(Date.now())
 const value17 = ref(Date.now())
+const value18 = ref<string>('')
 
 const minDate = ref<number>(Date.now())
 const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
+
+/* computed */
+const iconName = computed(() => {
+  return value18.value ? 'error-fill' : 'arrow-right'
+})
+
+const clear = () => {
+  if (iconName.value === 'arrow-right') {
+    return
+  }
+  value18.value = ''
+}
 
 const formatter: DatetimePickerViewFormatter = (type, value) => {
   switch (type) {
