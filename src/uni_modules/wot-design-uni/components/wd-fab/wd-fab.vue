@@ -124,18 +124,42 @@ async function getBounding() {
 function initPosition() {
   const pos = props.position
   const { minLeft, minTop, maxLeft, maxTop } = bounding
-  if (pos === 'left-top') {
-    top.value = minTop
-    left.value = minLeft
-  } else if (pos === 'right-top') {
-    top.value = minTop
-    left.value = maxLeft
-  } else if (pos === 'left-bottom') {
-    top.value = maxTop
-    left.value = minLeft
-  } else if (pos === 'right-bottom') {
-    top.value = maxTop
-    left.value = maxLeft
+  const centerY = (maxTop + minTop) / 2
+  const centerX = (maxLeft + minLeft) / 2
+
+  switch (pos) {
+    case 'left-top':
+      top.value = minTop
+      left.value = minLeft
+      break
+    case 'right-top':
+      top.value = minTop
+      left.value = maxLeft
+      break
+    case 'left-bottom':
+      top.value = maxTop
+      left.value = minLeft
+      break
+    case 'right-bottom':
+      top.value = maxTop
+      left.value = maxLeft
+      break
+    case 'left-center':
+      top.value = centerY
+      left.value = minLeft
+      break
+    case 'right-center':
+      top.value = centerY
+      left.value = maxLeft
+      break
+    case 'top-center':
+      top.value = minTop
+      left.value = centerX
+      break
+    case 'bottom-center':
+      top.value = maxTop
+      left.value = centerX
+      break
   }
 }
 

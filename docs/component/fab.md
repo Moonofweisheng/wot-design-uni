@@ -36,7 +36,14 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 const { show: showToast } = useToast()
 const type = ref<'primary' | 'success' | 'info' | 'warning' | 'error' | 'default'>('primary')
-const position = ref<'left-top' | 'right-top' | 'left-bottom' | 'right-bottom'>('left-bottom')
+const position = ref<'left-top'
+  | 'right-top'
+  | 'left-bottom'
+  | 'right-bottom'
+  | 'left-center'
+  | 'right-center'
+  | 'top-center'
+  | 'bottom-center'>('left-bottom')
 const direction = ref<'top' | 'right' | 'bottom' | 'left'>('top')
 const disabled = ref<boolean>(false)
 ```
@@ -100,20 +107,20 @@ const handleClick = () => {
 
 ## Attributes
 
-| 参数           | 说明                                                  | 类型         | 可选值                                                                                    | 默认值                                         | 最低版本         |
-| -------------- | ----------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------- |
-| v-model:active | 是否激活                                              | boolean      | -                                                                                         | false                                          | 0.1.57           |
-| type           | 类型                                                  | FabType      | 'primary' &#124; 'success' &#124; 'info' &#124; 'warning' &#124; 'error' &#124; 'default' | 'primary'                                      | 0.1.57           |
-| position       | 悬浮按钮位置                                          | FabPosition  | 'left-top' &#124; 'right-top' &#124; 'left-bottom' &#124; 'right-bottom'                  | 'right-bottom'                                 | 0.1.57           |
-| draggable      | 按钮能否拖动                                          | boolean      |                                                                                           | false                                          | 1.2.19           |
-| direction      | 悬浮按钮菜单弹出方向                                  | FabDirection | 'top' &#124; 'right' &#124; 'bottom' &#124; 'left'                                        | 'top'                                          | 0.1.57           |
-| disabled       | 是否禁用                                              | boolean      | -                                                                                         | false                                          | 0.1.57           |
-| inactiveIcon   | 悬浮按钮未展开时的图标                                | string       | -                                                                                         | 'add'                                          | 0.1.57           |
-| activeIcon     | 悬浮按钮展开时的图标                                  | string       | -                                                                                         | 'close'                                        | 0.1.57           |
-| zIndex         | 自定义悬浮按钮层级                                    | number       | -                                                                                         | 99                                             | 0.1.57           |
-| gap            | 自定义悬浮按钮与可视区域边缘的间距                    | FabGap       | -                                                                                         | \{ top: 16, left: 16, right: 16, bottom: 16 \} | 1.2.26           |
-| customStyle    | 自定义样式                                            | string       | -                                                                                         | ''                                             | 0.1.57           |
-| expandable     | 用于控制点击时是否展开菜单，设置为 false 时触发 click | boolean      | -                                                                                         | true                                           | 1.3.11 |
+| 参数           | 说明                                                  | 类型         | 可选值                                                                                                                                       | 默认值                                         | 最低版本         |
+| -------------- | ----------------------------------------------------- | ------------ |-------------------------------------------------------------------------------------------------------------------------------------------| ---------------------------------------------- | ---------------- |
+| v-model:active | 是否激活                                              | boolean      | -                                                                                                                                         | false                                          | 0.1.57           |
+| type           | 类型                                                  | FabType      | 'primary' &#124; 'success' &#124; 'info' &#124; 'warning' &#124; 'error' &#124; 'default'                                                 | 'primary'                                      | 0.1.57           |
+| position       | 悬浮按钮位置                                          | FabPosition  | 'left-top' &#124; 'right-top' &#124; 'left-bottom' &#124; 'right-bottom' &#124; left-center &#124; right-center &#124; top-center &#124; bottom-center | 'right-bottom'                                 | 0.1.57           |
+| draggable      | 按钮能否拖动                                          | boolean      |                                                                                                                                           | false                                          | 1.2.19           |
+| direction      | 悬浮按钮菜单弹出方向                                  | FabDirection | 'top' &#124; 'right' &#124; 'bottom' &#124; 'left'                                                                                        | 'top'                                          | 0.1.57           |
+| disabled       | 是否禁用                                              | boolean      | -                                                                                                                                         | false                                          | 0.1.57           |
+| inactiveIcon   | 悬浮按钮未展开时的图标                                | string       | -                                                                                                                                         | 'add'                                          | 0.1.57           |
+| activeIcon     | 悬浮按钮展开时的图标                                  | string       | -                                                                                                                                         | 'close'                                        | 0.1.57           |
+| zIndex         | 自定义悬浮按钮层级                                    | number       | -                                                                                                                                         | 99                                             | 0.1.57           |
+| gap            | 自定义悬浮按钮与可视区域边缘的间距                    | FabGap       | -                                                                                                                                         | \{ top: 16, left: 16, right: 16, bottom: 16 \} | 1.2.26           |
+| customStyle    | 自定义样式                                            | string       | -                                                                                                                                         | ''                                             | 0.1.57           |
+| expandable     | 用于控制点击时是否展开菜单，设置为 false 时触发 click | boolean      | -                                                                                                                                         | true                                           | 1.3.11 |
 
 ## Events
 
