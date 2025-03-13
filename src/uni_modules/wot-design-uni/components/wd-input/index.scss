@@ -26,10 +26,6 @@
       }
     }
 
-    @include e(placeholder) {
-      color: $-dark-color3;
-    }
-
     @include e(count) {
       color: $-dark-color3;
       background: transparent;
@@ -317,15 +313,6 @@
     color: $-input-count-current-color;
 
     @include when(error) {
-      color: $-input-error-color;
-    }
-  }
-
-
-  @include e(placeholder) {
-    color: $-input-placeholder-color;
-
-    &.is-error {
       color: $-input-error-color;
     }
   }
