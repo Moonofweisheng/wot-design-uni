@@ -114,7 +114,7 @@ watch(
 )
 
 onBeforeMount(() => {
-  pixelRatio.value = uni.getSystemInfoSync().pixelRatio
+  pixelRatio.value = uni.getWindowInfo().pixelRatio
 })
 
 onMounted(() => {

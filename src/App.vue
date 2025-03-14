@@ -17,7 +17,7 @@ onThemeChange((option) => {
 })
 
 onLaunch(() => {
-  const systemInfo = uni.getSystemInfoSync()
+  const systemInfo = uni.getAppBaseInfo()
   darkMode.setDark(systemInfo.theme === 'dark')
 
   // #ifdef H5
