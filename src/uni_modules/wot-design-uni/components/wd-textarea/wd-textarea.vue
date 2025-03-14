@@ -177,7 +177,11 @@ const isRequired = computed(() => {
 
 // 当前文本域文字长度
 const currentLength = computed(() => {
-  return String(formatValue(props.modelValue) || '').length
+  /**
+   * 使用Array.from处理多码元字符以获取正确的长度
+   * @link https://github.com/Moonofweisheng/wot-design-uni/issues/933
+   */
+  return Array.from(String(formatValue(props.modelValue) || '')).length
 })
 
 const rootClass = computed(() => {
