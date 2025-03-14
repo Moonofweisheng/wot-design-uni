@@ -293,3 +293,6 @@ function isValueEqual(value1: number | string, value2: number | string) {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+<style lang="scss">
+@import './placeholder.scss';
+</style>

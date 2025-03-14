@@ -1,0 +1,21 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+.wot-theme-dark {
+  @include b(input) {
+    @include e(placeholder) {
+      color: $-dark-color3;
+    }
+  }
+}
+
+
+@include b(input) {
+  @include e(placeholder) {
+    color: $-input-placeholder-color;
+
+    &.is-error {
+      color: $-input-error-color;
+    }
+  }
+}
