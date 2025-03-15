@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 
-export type DateTimeType = 'date' | 'year-month' | 'time' | 'datetime' | 'year'
+export type DateTimeType = 'date' | 'year-month' | 'time' | 'datetime' | 'year' | 'date-hour'
 
 /**
  * @description 根据传入的值和类型，获取当前的选项数组，便于传入 pickerView
@@ -21,6 +21,8 @@ export function getPickerValue(value: string | number, type: DateTimeType) {
       values.push(date.getDate())
     } else if (type === 'datetime') {
       values.push(date.getDate(), date.getHours(), date.getMinutes())
+    } else if (type === 'date-hour') {
+      values.push(date.getDate(), date.getHours())
     }
   }
   return values

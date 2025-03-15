@@ -630,7 +630,8 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
       datetime: ['year', 'month', 'date', 'hour', 'minute'],
       date: ['year', 'month', 'date'],
       time: ['hour', 'minute'],
-      'year-month': ['year', 'month']
+      'year-month': ['year', 'month'],
+      'date-hour': ['year', 'month', 'date', 'hour']
     }
     return items
       .map((item, index) => {
@@ -650,6 +651,8 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
       return `${items[0].label}:${items[1].label}`
     case 'datetime':
       return `${items[0].label}-${items[1].label}-${items[2].label} ${items[3].label}:${items[4].label}`
+    case 'date-hour':
+      return `${items[0].label}-${items[1].label}-${items[2].label} ${items[3].label}`
   }
 }
 
@@ -741,6 +744,24 @@ function columnDisabledRules(
     }
     if (column.type === 'minute' && currentValue[0] === hour) {
       return isStart ? value > minute : value < minute
+    }
+  } else if (type === 'date-hour') {
+    const year = boundary[0]
+    const month = boundary[1]
+    const date = boundary[2]
+    const hour = boundary[3]
+
+    if (column.type === 'year') {
+      return isStart ? value > year : value < year
+    }
+    if (column.type === 'month' && currentValue[0] === year) {
+      return isStart ? value > month : value < month
+    }
+    if (column.type === 'date' && currentValue[0] === year && currentValue[1] === month) {
+      return isStart ? value > date : value < date
+    }
+    if (column.type === 'hour' && currentValue[0] === year && currentValue[1] === month && currentValue[2] === date) {
+      return isStart ? value > hour : value < hour
     }
   }
 
