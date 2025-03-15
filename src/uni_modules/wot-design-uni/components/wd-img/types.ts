@@ -23,6 +23,10 @@ export const imgProps = {
    */
   src: String,
   /**
+   * 预览图片链接
+   */
+  previewSrc: String,
+  /**
    * 是否显示为圆形
    */
   round: makeBooleanProp(false),

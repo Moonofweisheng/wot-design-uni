@@ -48,7 +48,12 @@
     </demo-block>
 
     <demo-block title="可预览">
-      <wd-img :width="100" :height="100" :src="joy" :enable-preview="true" />
+      <view class="col">
+        <wd-img :width="100" :height="100" :src="joy" :enable-preview="true" />
+      </view>
+      <view class="col">
+        <wd-img :width="100" :height="100" :src="joy" :preview-src="img" :enable-preview="true" />
+      </view>
     </demo-block>
   </page-wraper>
 </template>
