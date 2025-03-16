@@ -41,6 +41,14 @@ Wot UI 已被很多公司和团队在生产环境使用，下面是一些优秀�
     </template>
     <el-image src="/cases/salary-calculator.jpg" />
   </el-card>
+  <el-card shadow="hover">
+    <template #header>
+      <span class="case-title">随享小栈</span>
+      <!-- 加一行介绍 -->
+      <span class="case-description">一个温暖、匿名、安全的树洞社交小程序。</span>
+    </template>
+    <el-image src="/cases/suixiangxiaozhan.png" />
+  </el-card>  
 </div>
 
 <style scoped>
@@ -54,6 +62,12 @@ Wot UI 已被很多公司和团队在生产环境使用，下面是一些优秀�
 .case-title {
   font-size: 18px;
   font-weight: 500;
+}
+
+.case-description {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #999;
 }
 
 :deep(.el-card__body .el-image) {
