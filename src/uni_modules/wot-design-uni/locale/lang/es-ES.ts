@@ -126,6 +126,8 @@ export default {
   },
   signature: {
     confirmText: 'Confirmar',
-    clearText: 'Limpiar'
+    clearText: 'Limpiar',
+    revokeText: 'Deshacer',
+    restoreText: 'Restaurar'
   }
 }
