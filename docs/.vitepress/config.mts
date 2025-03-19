@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-02-27 12:47:41
+ * @LastEditTime: 2025-03-19 18:53:23
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
+ * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
  * 记得注释
  */
 import { defineConfig } from 'vitepress';
@@ -66,9 +66,26 @@ export default defineConfig({
   description: '一个参照wot-design打造的uni-app组件库',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'stylesheet', href: '/petercatai/assistant.min.css' }],
+    ['script', {src: '/petercatai/react.development.js' }],
+    ['script', {src: '/petercatai/react-dom.development.js' }],
+    ['script', {src: '/petercatai/dayjs.min.js' }],
+    ['script', {src: '/petercatai/antd.js' }],
+    ['script', {src: '/petercatai/lottie.js' }],
+    ['script', {src: '/petercatai/assistant.min.js' }],
     ['script', {}, `
       !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"3J4q4tM6fN0n1fbZ",ck:"3J4q4tM6fN0n1fbZ"});
-   `]
+    `],
+    ['script', {}, `
+      window.onload = function() {
+        PetercatLUI.initAssistant({
+          apiDomain: 'https://api.petercat.ai',
+          token:"d673a0ef-73e3-46ff-9e08-e43eba4548d1",
+          helloMessage:"我可以处理任何 Wot UI 的问题，尽管放马过来~",
+          hideLogo: true,
+        });
+      }
+    `]
   ],
   themeConfig: {
     logo: '/logo.png',
