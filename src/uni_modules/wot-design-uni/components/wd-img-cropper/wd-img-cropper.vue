@@ -130,11 +130,11 @@ const imgScale = ref<number>(1)
 // imgWidth: null,
 // imgHeight: null,
 // 图片中心轴点距左的距离
-const imgLeft = ref<number>(uni.getSystemInfoSync().windowWidth / 2)
-const imgTop = ref<number>((uni.getSystemInfoSync().windowHeight / 2) * TOP_PERCENT)
+const imgLeft = ref<number>(uni.getWindowInfo().windowWidth / 2)
+const imgTop = ref<number>((uni.getWindowInfo().windowHeight / 2) * TOP_PERCENT)
 
 const imgInfo = ref<UniApp.GetImageInfoSuccessData | null>(null)
-const info = ref<UniApp.GetSystemInfoResult>(uni.getSystemInfoSync())
+const info = ref<UniApp.GetSystemInfoResult>(uni.getWindowInfo())
 
 // 是否移动中设置 同时控制背景颜色是否高亮
 const IS_TOUCH_END = ref<boolean>(true)
@@ -162,7 +162,7 @@ watch(
     if (newValue) {
       INIT_IMGWIDTH = props.imgWidth
       INIT_IMGHEIGHT = props.imgHeight
-      info.value = uni.getSystemInfoSync()
+      info.value = uni.getWindowInfo()
       const tempCutSize = info.value.windowWidth - offset.value * 2
       cutWidth.value = tempCutSize
       cutHeight.value = tempCutSize
@@ -276,7 +276,7 @@ function setRoate(angle: number) {
  * 初始化图片的大小和角度以及距离
  */
 function resetImg() {
-  const { windowHeight, windowWidth } = uni.getSystemInfoSync()
+  const { windowHeight, windowWidth } = uni.getWindowInfo()
   imgScale.value = 1
   imgAngle.value = 0
   imgLeft.value = windowWidth / 2
