@@ -204,10 +204,10 @@ function handleConfirm({ value }) {
 
 ## 唤起项插槽
 
-开启 `use-default-slot` ，设置默认插槽修改唤起picker组件的形式。
+设置默认插槽修改唤起picker组件的形式。
 
 ```html
-<wd-datetime-picker  v-model="value" use-default-slot>
+<wd-datetime-picker  v-model="value">
   <wd-button>插槽唤起</wd-button>
 </wd-datetime-picker>
 ```
@@ -285,8 +285,8 @@ const displayFormatTabLabel = (items) => {
 | label-width | 设置左侧标题宽度 | string | - | 33% | - |
 | error | 是否为错误状态，错误状态时右侧内容为红色 | boolean | - | false | - |
 | align-right | 选择器的值靠右展示 | boolean | - | false | - |
-| use-label-slot | label 使用插槽 | boolean | - | false | - |
-| use-default-slot | 使用默认插槽 | boolean | - | false | - |
+| <s>use-label-slot</s> | <s>label 使用插槽</s>，已废弃，直接使用label插槽即可 | boolean | - | false | - |
+| <s>use-default-slot</s> | <s>使用默认插槽</s>，已废弃，直接使用默认插槽即可 | boolean | - | false | - |
 | before-confirm | 确定前校验函数，接收 (value, resolve, picker) 参数，通过 resolve 继续执行 picker，resolve 接收1个boolean参数 | function | - | - | - |
 | close-on-click-modal | 点击遮罩是否关闭 | boolean | - | true | - |
 | z-index | 弹窗层级 | number | - | 15 | - |
