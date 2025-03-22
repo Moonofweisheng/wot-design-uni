@@ -742,6 +742,56 @@
       }
     },
     {
+      "path": "pages/msg/Index",
+      "name": "msg",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "Msg 提示页"
+      }
+    },
+    {
+      "path": "pages/msg/success",
+      "name": "msgSuccess",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "成功提示页"
+      }
+    },
+    {
+      "path": "pages/msg/warn",
+      "name": "msgWarn",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "警告提示页"
+      }
+    },
+    {
+      "path": "pages/msg/clear",
+      "name": "msgClear",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "错误提示页"
+      }
+    },
+    {
+      "path": "pages/msg/waiting",
+      "name": "msgWaiting",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "进行中提示页"
+      }
+    },
+    {
       "path": "pages/countDown/Index",
       "name": "countDown",
       "style": {

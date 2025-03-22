@@ -386,6 +386,10 @@ const list = ref([
       {
         id: 'table',
         name: 'Table 表格'
+      },
+      {
+        id: 'msg',
+        name: 'Msg 提示页'
       }
     ]
   }
