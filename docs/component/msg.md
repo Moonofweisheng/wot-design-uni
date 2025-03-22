@@ -27,7 +27,7 @@
 
 | 参数       | 说明                                                               | 类型    | 可选值                                                             | 默认值  | 最低版本         |
 | ---------- | ------------------------------------------------------------------ | ------- | ------------------------------------------------------------------ | ------- | ---------------- |
-| type       | 主题类型                                                           | string  | 'success' | 'warn' | 'clear' | 'waiting'                        | success | $LOWEST_VERSION$ |
+| type       | 主题类型                                                           | string  | 'success'、'warn'、'clear'、'waiting'                        | success | $LOWEST_VERSION$ |
 | title       | 文字                                                               | string  | -                                                                  |         | $LOWEST_VERSION$ |
 | desc       | 描述文字                                                           | string  | -                                                                  | -       | $LOWEST_VERSION$ |
 | size       | icon大小                                                           | number  | -                                                                  | 64       | $LOWEST_VERSION$ |
