@@ -1,5 +1,5 @@
 <template>
-  <view :class="rootClass" :style="rootStyle" @click="handleClick">
+  <view :class="rootClass" :style="rootStyle">
     <template v-if="isDef(props.src)">
       <wd-img :width="props.width" :height="props.height" :src="props.src" />
     </template>
@@ -28,9 +28,6 @@ import { msgProps, type MsgType } from './types'
 
 // 获取组件的 props 和 emit 函数
 const props = defineProps(msgProps)
-const emit = defineEmits<{
-  (e: 'click', event: MouseEvent): void
-}>()
 
 // 图标名称映射表，提高性能和可维护性
 const iconMap: Record<MsgType, string> = {
@@ -54,11 +51,6 @@ const rootClass = computed(() => {
 const rootStyle = computed(() => {
   return props.customStyle ? `${props.customStyle}` : ''
 })
-
-// 处理点击事件
-const handleClick = (event: MouseEvent) => {
-  emit('click', event)
-}
 </script>
 
 <style lang="scss" scoped>
