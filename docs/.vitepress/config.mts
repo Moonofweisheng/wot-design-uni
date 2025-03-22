@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-03-19 18:53:23
+ * @LastEditTime: 2025-03-22 14:00:12
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
@@ -481,6 +481,9 @@ export default defineConfig({
           }, {
             link: "/component/table",
             text: "Table 表格"
+          }, {
+            link: "/component/msg",
+            text: "Msg 提示页"
           }]
         }
       ]
