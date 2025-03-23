@@ -105,7 +105,7 @@ mode 为小程序原生属性，参考[微信小程序 image 官方文档](https
 | radius                 | 圆角大小，默认单位为 px                            | number / string | -                                                                                                                                                                                  | -             | -                |
 | enable-preview         | 是否支持点击预览                                   | boolean         | -                                                                                                                                                                                  | false         | 1.2.11           |
 | show-menu-by-longpress | 开启长按图片显示识别小程序码菜单，仅微信小程序支持 | boolean         | -                                                                                                                                                                                  | false         | 1.3.11 |
-| preview-src             | 预览图片链接                                     | string           |  -                                                                                 | -             | $LOWEST_VERSION$ |
+| preview-src             | 预览图片链接                                     | string           |  -                                                                                 | -             | 1.8.0 |
 
 ## Events
 

@@ -458,12 +458,12 @@ onMounted(() => {
 | disabled | 是否禁用签名板 | boolean | false | - |
 | background-color | 画板的背景色 | string | - | - |
 | disable-scroll | 是否禁用画布滚动 | boolean | true | - |
-| enable-history | 是否开启历史记录 | boolean | false | $LOWEST_VERSION$ |
-| step | 历史记录步长 | number | 1 | $LOWEST_VERSION$ |
-| pressure | 是否启用笔锋模式 | boolean | false | $LOWEST_VERSION$ |
-| min-width | 笔锋模式最小宽度 | number | 2 | $LOWEST_VERSION$ |
-| max-width | 笔锋模式最大宽度 | number | 6 | $LOWEST_VERSION$ |
-| min-speed | 笔锋模式速度阈值 | number | 1.5 | $LOWEST_VERSION$ |
+| enable-history | 是否开启历史记录 | boolean | false | 1.8.0 |
+| step | 历史记录步长 | number | 1 | 1.8.0 |
+| pressure | 是否启用笔锋模式 | boolean | false | 1.8.0 |
+| min-width | 笔锋模式最小宽度 | number | 2 | 1.8.0 |
+| max-width | 笔锋模式最大宽度 | number | 6 | 1.8.0 |
+| min-speed | 笔锋模式速度阈值 | number | 1.5 | 1.8.0 |
 
 ## Events
 

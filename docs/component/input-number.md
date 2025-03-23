@@ -152,7 +152,7 @@ const beforeChange: InputNumberBeforeChange = (value) => {
 | disable-minus | 禁用减少按钮 | boolean | - | false | 0.2.14 |
 | adjustPosition | 原生属性，键盘弹起时，是否自动上推页面 | boolean | - | true | 1.3.11 |
 | before-change | 输入框值改变前触发，返回 false 会阻止输入框值改变，支持返回 `Promise` | `(value: number \| string) => boolean \| Promise<boolean>` | - | - | 1.6.0 |
-| long-press | 是否允许长按进行加减 | boolean | - | false | $LOWEST_VERSION$ |
+| long-press | 是否允许长按进行加减 | boolean | - | false | 1.8.0 |
 
 
 ## Events
