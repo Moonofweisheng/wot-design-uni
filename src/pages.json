@@ -812,6 +812,17 @@
       }
     },
     {
+      "path": "pages/signature/Landscape",
+      "name": "signatureLandscape",
+      "style": {
+        "mp-alipay": {
+          "allowsBounceVertical": "NO"
+        },
+        "navigationBarTitleText": "横屏签名",
+        "pageOrientation": "landscape"
+      }
+    },
+    {
       "path": "pages/backtop/Index",
       "name": "backtop",
       "style": {
