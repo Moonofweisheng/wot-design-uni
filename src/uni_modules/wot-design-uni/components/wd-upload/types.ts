@@ -120,11 +120,13 @@ export type UploadMethod = (
     fileName: string
     fileType: 'image' | 'video' | 'audio'
     statusCode: number
+    // 添加是否自动中断之前上传的选项
+    abortPrevious?: boolean
     onSuccess: (res: UniApp.UploadFileSuccessCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
     onError: (res: UniApp.GeneralCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
     onProgress: (res: UniApp.OnProgressUpdateResult, file: UploadFileItem) => void
   }
-) => void | Promise<void>
+) => UniApp.UploadTask | void | Promise<void> // 修改这里,支持返回 UploadTask 类型
 
 export const uploadProps = {
   ...baseProps,
@@ -338,6 +340,11 @@ export type UploadExpose = {
    * 手动触发上传
    */
   submit: () => void
+  /**
+   * 取消上传
+   * @param task 上传任务
+   */
+  abort: (task?: UniApp.UploadTask) => void
 }
 
 export type UploadErrorEvent = {
