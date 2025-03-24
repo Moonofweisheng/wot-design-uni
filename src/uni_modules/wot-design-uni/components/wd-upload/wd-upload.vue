@@ -101,9 +101,10 @@ import wdVideoPreview from '../wd-video-preview/wd-video-preview.vue'
 import wdLoading from '../wd-loading/wd-loading.vue'
 
 import { computed, ref, watch } from 'vue'
-import { context, getType, isEqual, isImageUrl, isVideoUrl, isFunction, isDef, deepClone } from '../common/util'
+import { context, isEqual, isImageUrl, isVideoUrl, isFunction, isDef, deepClone } from '../common/util'
 import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
+import { useUpload } from '../composables/useUpload'
 import {
   uploadProps,
   type UploadFileItem,
@@ -133,7 +134,8 @@ const emit = defineEmits<{
 }>()
 
 defineExpose<UploadExpose>({
-  submit: () => startUploadFiles()
+  submit: () => startUploadFiles(),
+  abort: () => abort()
 })
 
 const { translate } = useTranslate('upload')
@@ -143,6 +145,8 @@ const uploadFiles = ref<UploadFileItem[]>([])
 const showUpload = computed(() => !props.limit || uploadFiles.value.length < props.limit)
 
 const videoPreview = ref<VideoPreviewInstance>()
+
+const { startUpload, abort, UPLOAD_STATUS } = useUpload()
 
 watch(
   () => props.fileList,
@@ -258,48 +262,55 @@ function emitFileList() {
 }
 
 /**
- * 组件内部上传方法
- * @param file 文件
- * @param formData
- * @param options
+ *  开始上传文件
  */
-const upload: UploadMethod = (file, formData, options) => {
-  const uploadTask = uni.uploadFile({
-    url: options.action,
-    header: options.header,
-    name: options.name,
-    fileName: options.name,
-    fileType: options.fileType as 'image' | 'video' | 'audio',
-    formData,
-    filePath: file.url,
-    success(res) {
-      if (res.statusCode === options.statusCode) {
-        // 上传成功进行文件列表拼接
-        options.onSuccess(res, file, formData)
-      } else {
-        // 上传失败处理
-        options.onError({ ...res, errMsg: res.errMsg || '' }, file, formData)
-      }
-    },
-    fail(err) {
-      // 上传失败处理
-      options.onError(err, file, formData)
-    }
-  })
-  // 获取当前文件加载的百分比
-  uploadTask.onProgressUpdate((res) => {
-    options.onProgress(res, file)
-  })
-}
+function startUploadFiles() {
+  const { buildFormData, formData = {}, statusKey } = props
+  const { action, name, header = {}, accept, successStatus, uploadMethod } = props
+  const statusCode = isDef(successStatus) ? successStatus : 200
 
-const startUpload: UploadMethod = (file, formData, options) => {
-  const { statusKey, uploadMethod } = props
-  // 设置上传中，防止重复发起上传
-  file[statusKey] = 'loading'
-  if (isFunction(uploadMethod)) {
-    uploadMethod(file, formData, options)
-  } else {
-    upload(file, formData, options)
+  for (const uploadFile of uploadFiles.value) {
+    // 仅开始未上传的文件
+    if (uploadFile[statusKey] === UPLOAD_STATUS.PENDING) {
+      if (buildFormData) {
+        buildFormData({
+          file: uploadFile,
+          formData,
+          resolve: (formData: Record<string, any>) => {
+            formData &&
+              startUpload(uploadFile, {
+                action,
+                header,
+                name,
+                formData,
+                fileType: accept as 'image' | 'video' | 'audio',
+                statusCode,
+                statusKey,
+                uploadMethod,
+                onSuccess: handleSuccess,
+                onError: handleError,
+                onProgress: handleProgress,
+                abortPrevious: true // 自动中断之前的上传
+              })
+          }
+        })
+      } else {
+        startUpload(uploadFile, {
+          action,
+          header,
+          name,
+          formData,
+          fileType: accept as 'image' | 'video' | 'audio',
+          statusCode,
+          statusKey,
+          uploadMethod,
+          onSuccess: handleSuccess,
+          onError: handleError,
+          onProgress: handleProgress,
+          abortPrevious: true
+        })
+      }
+    }
   }
 }
 
@@ -345,53 +356,6 @@ function initFile(file: ChooseFile, currentIndex?: number) {
   }
   if (props.autoUpload) {
     startUploadFiles()
-  }
-}
-
-/**
- *  开始上传文件
- */
-function startUploadFiles() {
-  const { buildFormData, formData = {}, statusKey } = props
-  const { action, name, header = {}, accept, successStatus } = props
-  const statusCode = isDef(successStatus) ? successStatus : 200
-
-  for (const uploadFile of uploadFiles.value) {
-    // 仅开始未上传的文件
-    if (uploadFile[statusKey] == 'pending') {
-      if (buildFormData) {
-        buildFormData({
-          file: uploadFile,
-          formData,
-          resolve: (formData: Record<string, any>) => {
-            formData &&
-              startUpload(uploadFile, formData, {
-                onSuccess: handleSuccess,
-                onError: handleError,
-                onProgress: handleProgress,
-                action,
-                header,
-                name,
-                fileName: name,
-                fileType: accept as 'image' | 'video' | 'audio',
-                statusCode
-              })
-          }
-        })
-      } else {
-        startUpload(uploadFile, formData, {
-          onSuccess: handleSuccess,
-          onError: handleError,
-          onProgress: handleProgress,
-          action,
-          header,
-          name,
-          fileName: name,
-          fileType: accept as 'image' | 'video' | 'audio',
-          statusCode
-        })
-      }
-    }
   }
 }
 
