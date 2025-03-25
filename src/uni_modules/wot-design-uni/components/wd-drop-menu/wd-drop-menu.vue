@@ -123,8 +123,8 @@ function toggle(child: any) {
     } else {
       closeOther(child)
     }
+    fold(child)
   }
-  fold(child)
 }
 
 /**
