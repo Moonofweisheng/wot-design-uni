@@ -1,16 +1,18 @@
 <template>
-  <view v-if="showWrapper" :class="`wd-drop-item  ${customClass}`" :style="`z-index: ${zIndex}; ${positionStyle};${customStyle}`">
+  <view
+    v-if="showWrapper"
+    :class="`wd-drop-item  ${customClass}`"
+    :style="`pointer-events: none; z-index: ${zIndex}; ${positionStyle};${customStyle}`"
+  >
     <wd-popup
       v-model="showPop"
       :z-index="zIndex"
       :duration="duration"
       :position="position"
-      :custom-style="`position: absolute; max-height: 80%;${customPopupStyle}`"
+      :custom-style="`position: absolute; pointer-events: auto; max-height: 80%;${customPopupStyle}`"
       :custom-class="customPopupClass"
-      modal-style="position: absolute;"
-      :modal="modal"
+      :modal="false"
       :close-on-click-modal="false"
-      @click-modal="closeOnClickModal && close()"
       @before-enter="beforeEnter"
       @after-enter="afterEnter"
       @before-leave="beforeLeave"
@@ -71,7 +73,6 @@ const showPop = ref<boolean>(false)
 const position = ref<PopupType>()
 const zIndex = ref<number>(12)
 const modal = ref<boolean>(true)
-const closeOnClickModal = ref<boolean>(true)
 const duration = ref<number>(0)
 
 const { parent: dropMenu } = useParent(DROP_MENU_KEY)
@@ -181,7 +182,6 @@ function handleOpen() {
   if (dropMenu) {
     modal.value = Boolean(dropMenu.props.modal)
     duration.value = Number(dropMenu.props.duration)
-    closeOnClickModal.value = Boolean(dropMenu.props.closeOnClickModal)
     position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
   }
   emit('open')

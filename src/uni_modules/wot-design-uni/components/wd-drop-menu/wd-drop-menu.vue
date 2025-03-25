@@ -1,5 +1,7 @@
 <template>
-  <view :style="customStyle" :class="`wd-drop-menu ${customClass}`" @click.stop="noop" :id="dropMenuId">
+  <view :style="customStyle" :class="`wd-drop-menu ${customClass}`" @click.stop.prevent="noop" :id="dropMenuId">
+    <wd-overlay :show="overlayVisible" :duration="duration" :z-index="12" :custom-style="modalStyle" @click="handleClickOverlay" @touchmove="noop" />
+
     <!-- #ifdef MP-DINGTALK -->
     <view :id="dropMenuId">
       <!-- #endif -->
@@ -34,22 +36,51 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { getCurrentInstance, inject, onBeforeMount, ref, watch } from 'vue'
+import { computed, getCurrentInstance, inject, onBeforeMount, ref, watch } from 'vue'
 import { closeOther } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { getRect, uuid } from '../common/util'
 import { useChildren } from '../composables/useChildren'
 import { DROP_MENU_KEY, dropMenuProps } from './types'
+import wdOverlay from '../wd-overlay/wd-overlay.vue'
 
 const props = defineProps(dropMenuProps)
 const queue = inject<Queue | null>(queueKey, null)
 const dropMenuId = ref<string>(`dropMenuId${uuid()}`)
 const offset = ref<number>(0)
 const windowHeight = ref<number>(0)
+const modalStyle = computed(() => {
+  return props.direction === 'down'
+    ? `top: calc(var(--window-top) + ${offset.value}px); bottom: 0;`
+    : `top: 0; bottom: calc(var(--window-bottom) + ${offset.value}px)`
+})
 
 const { proxy } = getCurrentInstance() as any
 
 const { linkChildren, children } = useChildren(DROP_MENU_KEY)
+
+const showOverlay = computed(() => {
+  return children.some((child) => child.$.exposed!.getShowPop())
+})
+
+const overlayVisible = ref(false)
+let overlayTimer: ReturnType<typeof setTimeout> | null
+
+// 延迟关闭遮罩层，避免闪烁
+// 小程序中，即使先 fold 再 closeOther 也会有闪烁，使用延迟关闭遮罩层处理
+watch(showOverlay, (newVal) => {
+  if (overlayTimer) {
+    clearTimeout(overlayTimer)
+  }
+  if (newVal) {
+    overlayVisible.value = true
+  } else {
+    overlayTimer = setTimeout(() => {
+      overlayVisible.value = false
+      overlayTimer = null
+    }, 16)
+  }
+})
 
 linkChildren({ props, fold, offset })
 
@@ -68,10 +99,7 @@ onBeforeMount(() => {
   windowHeight.value = uni.getSystemInfoSync().windowHeight
 })
 
-function noop(event: Event) {
-  event.preventDefault()
-  event.stopPropagation()
-}
+function noop() {}
 
 function getDisplayTitle(child: any) {
   const { title, modelValue, options, valueKey, labelKey } = child
@@ -95,8 +123,8 @@ function toggle(child: any) {
     } else {
       closeOther(child)
     }
-    fold(child)
   }
+  fold(child)
 }
 
 /**
@@ -113,6 +141,15 @@ function fold(child: any) {
     }
     child.$.exposed!.toggle()
   })
+}
+
+function handleClickOverlay() {
+  if (props.closeOnClickModal) {
+    // 关闭所有打开的菜单项
+    children.forEach((child) => {
+      child.$.exposed!.close()
+    })
+  }
 }
 </script>
 
