@@ -26,7 +26,7 @@ export interface UseUploadOptions {
   name?: string
   // 其它表单数据
   formData?: Record<string, any>
-  // 文件类型
+  // 文件类型 仅支付宝支持且在支付宝平台必填
   fileType?: 'image' | 'video' | 'audio'
   // 成功状态码
   statusCode?: number

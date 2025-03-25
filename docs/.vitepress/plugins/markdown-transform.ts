@@ -1,4 +1,3 @@
-
 import { Plugin } from 'vite';
 import { camelCase } from '../../../src/uni_modules/wot-design-uni/components/common/util'
 import path from 'path'
@@ -9,6 +8,7 @@ export function MarkdownTransform(): Plugin {
     async transform(code, id) {
       if (!id.endsWith('.md')) return
       if (!id.includes('/component')) return
+      if (id.includes('/use-')) return
       const GITHUB_URL = 'https://github.com/Moonofweisheng/wot-design-uni/tree/master'
       const componentId = path.basename(id, '.md') 
       const componentName = `wd-${componentId}`
