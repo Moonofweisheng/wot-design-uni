@@ -1,7 +1,7 @@
 {
   "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
-    "verbatimModuleSyntax":true,
+    "verbatimModuleSyntax": false,
     "ignoreDeprecations": "5.0",
     "lib": [
       "ESNext",
@@ -19,9 +19,11 @@
       "@dcloudio/types",
       "mini-types",
       "@uni-helper/uni-types",
-      "miniprogram-api-typings"
+      "miniprogram-api-typings",
+      "jest"
     ],
-    "sourceMap": true
+    "sourceMap": true,
+    "module": "ESNext"
   },
   "vueCompilerOptions": {
     "plugins": [
