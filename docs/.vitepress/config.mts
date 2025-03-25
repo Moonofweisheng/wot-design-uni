@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-03-19 18:53:23
+ * @LastEditTime: 2025-03-25 16:27:19
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
@@ -423,8 +423,8 @@ export default defineConfig({
             link: "/component/number-keyboard",
             text: "NumberKeyboard 数字键盘"
           }]
-        }, {
-
+        }, 
+        {
           text: "数据展示",
           collapsed: false,
           items: [{
@@ -482,6 +482,15 @@ export default defineConfig({
             link: "/component/table",
             text: "Table 表格"
           }]
+        },
+        {
+          text: '组合式API',
+          items: [
+            { text: 'useUpload', link: '/component/use-upload' },
+            { text: 'useCountDown', link: '/component/use-count-down' },
+            { text: 'useToast', link: '/component/use-toast' },
+            { text: 'useMessage', link: '/component/use-message' }
+          ]
         }
       ]
     }
