@@ -102,7 +102,6 @@ import wdLoading from '../wd-loading/wd-loading.vue'
 
 import { computed, ref, watch } from 'vue'
 import { context, isEqual, isImageUrl, isVideoUrl, isFunction, isDef, deepClone } from '../common/util'
-import { chooseFile } from './utils'
 import { useTranslate } from '../composables/useTranslate'
 import { useUpload } from '../composables/useUpload'
 import {
@@ -146,7 +145,7 @@ const showUpload = computed(() => !props.limit || uploadFiles.value.length < pro
 
 const videoPreview = ref<VideoPreviewInstance>()
 
-const { startUpload, abort, UPLOAD_STATUS } = useUpload()
+const { startUpload, abort, chooseFile, UPLOAD_STATUS } = useUpload()
 
 watch(
   () => props.fileList,
@@ -411,7 +410,7 @@ function handleProgress(res: UniApp.OnProgressUpdateResult, file: UploadFileItem
  */
 function onChooseFile(currentIndex?: number) {
   const { multiple, maxSize, accept, sizeType, limit, sourceType, compressed, maxDuration, camera, beforeUpload } = props
-  // 文件选择
+
   chooseFile({
     multiple,
     sizeType,
