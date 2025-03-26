@@ -1,13 +1,20 @@
 # useUpload
 
-用于处理文件上传相关的逻辑。
+用于处理文件上传和选择相关的逻辑。
 
 ## 基础用法
 
 ```ts
 import { useUpload } from '@/uni_modules/wot-design-uni'
 
-const { startUpload, abort, UPLOAD_STATUS } = useUpload()
+const { startUpload, abort, chooseFile, UPLOAD_STATUS } = useUpload()
+
+// 选择文件
+const files = await chooseFile({
+  accept: 'image',
+  multiple: true,
+  maxCount: 9
+})
 
 // 开始上传
 const file = {
@@ -41,6 +48,7 @@ abort()
 |-------|------|------|--------|
 | startUpload | 开始上传文件 | file: UploadFileItem, options: UseUploadOptions | UniApp.UploadTask \| void |
 | abort | 中断上传 | task?: UniApp.UploadTask | void |
+| chooseFile | 选择文件 | options: ChooseFileOption | Promise<ChooseFile[]> |
 
 ### UseUploadOptions
 
@@ -56,3 +64,16 @@ abort()
 | onSuccess | 上传成功回调 | Function | - |
 | onError | 上传失败回调 | Function | - |
 | onProgress | 上传进度回调 | Function | - |
+
+### ChooseFileOption
+
+| 参数 | 说明 | 类型 | 默认值 |
+|-----|------|------|--------|
+| multiple | 是否支持多选文件 | boolean | false |
+| sizeType | 所选的图片的尺寸 | Array | ['original', 'compressed'] |
+| sourceType | 选择文件的来源 | Array | ['album', 'camera'] |
+| maxCount | 最大可选数量 | number | 9 |
+| accept | 接受的文件类型 | 'image' \| 'video' \| 'media' \| 'file' \| 'all' | 'image' |
+| compressed | 是否压缩视频 | boolean | true |
+| maxDuration | 视频最大时长(秒) | number | 60 |
+| camera | 摄像头朝向 | 'back' \| 'front' | 'back' |

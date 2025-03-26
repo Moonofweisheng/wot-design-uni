@@ -1,5 +1,5 @@
-import { isFunction } from '../common/util'
-import type { UploadFileItem, UploadMethod, UploadStatusType } from '../wd-upload/types'
+import { isArray, isDef, isFunction } from '../common/util'
+import type { ChooseFile, ChooseFileOption, UploadFileItem, UploadMethod, UploadStatusType } from '../wd-upload/types'
 
 export const UPLOAD_STATUS: Record<string, UploadStatusType> = {
   PENDING: 'pending',
@@ -15,6 +15,8 @@ export interface UseUploadReturn {
   abort: (task?: UniApp.UploadTask) => void
   // 上传状态常量
   UPLOAD_STATUS: Record<string, UploadStatusType>
+  // 选择文件
+  chooseFile: (options: ChooseFileOption) => Promise<ChooseFile[]>
 }
 
 export interface UseUploadOptions {
@@ -155,9 +157,155 @@ export function useUpload(): UseUploadReturn {
     }
   }
 
+  /**
+   * 格式化图片信息
+   */
+  function formatImage(res: UniApp.ChooseImageSuccessCallbackResult): ChooseFile[] {
+    // #ifdef MP-DINGTALK
+    // 钉钉文件在files中
+    res.tempFiles = isDef((res as any).files) ? (res as any).files : res.tempFiles
+    // #endif
+    if (isArray(res.tempFiles)) {
+      return res.tempFiles.map((item: any) => ({
+        path: item.path || '',
+        name: item.name || '',
+        size: item.size,
+        type: 'image',
+        thumb: item.path || ''
+      }))
+    }
+    return [
+      {
+        path: (res.tempFiles as any).path || '',
+        name: (res.tempFiles as any).name || '',
+        size: (res.tempFiles as any).size,
+        type: 'image',
+        thumb: (res.tempFiles as any).path || ''
+      }
+    ]
+  }
+
+  /**
+   * 格式化视频信息
+   */
+  function formatVideo(res: UniApp.ChooseVideoSuccess): ChooseFile[] {
+    return [
+      {
+        path: res.tempFilePath || (res as any).filePath || '',
+        name: res.name || '',
+        size: res.size,
+        type: 'video',
+        thumb: (res as any).thumbTempFilePath || '',
+        duration: res.duration
+      }
+    ]
+  }
+
+  /**
+   * 格式化媒体信息
+   */
+  function formatMedia(res: UniApp.ChooseMediaSuccessCallbackResult): ChooseFile[] {
+    return res.tempFiles.map((item) => ({
+      type: item.fileType,
+      path: item.tempFilePath,
+      thumb: item.fileType === 'video' ? item.thumbTempFilePath : item.tempFilePath,
+      size: item.size,
+      duration: item.duration
+    }))
+  }
+
+  /**
+   * 选择文件
+   */
+  function chooseFile({
+    multiple,
+    sizeType,
+    sourceType,
+    maxCount,
+    accept,
+    compressed,
+    maxDuration,
+    camera
+  }: ChooseFileOption): Promise<ChooseFile[]> {
+    return new Promise((resolve, reject) => {
+      switch (accept) {
+        case 'image':
+          uni.chooseImage({
+            count: multiple ? Math.min(maxCount, 9) : 1,
+            sizeType,
+            sourceType,
+            success: (res) => resolve(formatImage(res)),
+            fail: reject
+          })
+          break
+        case 'video':
+          uni.chooseVideo({
+            sourceType,
+            compressed,
+            maxDuration,
+            camera,
+            success: (res) => resolve(formatVideo(res)),
+            fail: reject
+          })
+          break
+        // #ifdef MP-WEIXIN
+        case 'media':
+          uni.chooseMedia({
+            count: multiple ? Math.min(maxCount, 9) : 1,
+            sourceType,
+            sizeType,
+            camera,
+            maxDuration,
+            success: (res) => resolve(formatMedia(res)),
+            fail: reject
+          })
+          break
+        case 'file':
+          uni.chooseMessageFile({
+            count: multiple ? Math.min(maxCount, 100) : 1,
+            type: accept,
+            success: (res) => resolve(res.tempFiles),
+            fail: reject
+          })
+          break
+        // #endif
+        case 'all':
+          // #ifdef H5
+          uni.chooseFile({
+            count: multiple ? Math.min(maxCount, 100) : 1,
+            type: accept,
+            success: (res) => resolve(res.tempFiles as ChooseFile[]),
+            fail: reject
+          })
+          // #endif
+          // #ifdef MP-WEIXIN
+          uni.chooseMessageFile({
+            count: multiple ? Math.min(maxCount, 100) : 1,
+            type: accept,
+            success: (res) => resolve(res.tempFiles),
+            fail: reject
+          })
+          // #endif
+
+          break
+        default:
+          // 默认选择图片
+          uni.chooseImage({
+            count: multiple ? Math.min(maxCount, 9) : 1,
+            sizeType,
+            sourceType,
+            success: (res) => resolve(formatImage(res)),
+            fail: reject
+          })
+          break
+      }
+    })
+  }
+
   return {
     startUpload,
     abort,
-    UPLOAD_STATUS
+    UPLOAD_STATUS,
+    chooseFile
   }
 }

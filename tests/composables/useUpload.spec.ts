@@ -22,7 +22,7 @@ const mockUploadTask = {
 } as any
 
 describe('useUpload', () => {
-  const { startUpload, abort, UPLOAD_STATUS } = useUpload()
+  const { startUpload, abort, chooseFile, UPLOAD_STATUS } = useUpload()
 
   beforeEach(() => {
     jest.clearAllMocks()
@@ -283,5 +283,281 @@ describe('useUpload', () => {
       }),
       file
     )
+  })
+
+  // 测试选择图片文件
+  it('should choose image files', async () => {
+    const mockChooseImage = jest.fn().mockImplementation((options) => {
+      options.success({
+        tempFiles: [
+          { path: 'temp/image1.jpg', size: 1024, name: 'image1.jpg' },
+          { path: 'temp/image2.jpg', size: 2048, name: 'image2.jpg' }
+        ]
+      })
+    })
+    ;(global as any).uni.chooseImage = mockChooseImage
+
+    const files = await chooseFile({
+      accept: 'image',
+      multiple: true,
+      maxCount: 9,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      compressed: true,
+      maxDuration: 60,
+      camera: 'back'
+    })
+
+    expect(files).toHaveLength(2)
+    expect(files[0]).toEqual({
+      path: 'temp/image1.jpg',
+      size: 1024,
+      name: 'image1.jpg',
+      type: 'image',
+      thumb: 'temp/image1.jpg'
+    })
+  })
+
+  // 测试选择视频文件
+  it('should choose video file', async () => {
+    const mockChooseVideo = jest.fn().mockImplementation((options) => {
+      options.success({
+        tempFilePath: 'temp/video.mp4',
+        size: 10240,
+        duration: 15,
+        thumbTempFilePath: 'temp/thumb.jpg',
+        name: 'video.mp4'
+      })
+    })
+    ;(global as any).uni.chooseVideo = mockChooseVideo
+
+    const files = await chooseFile({
+      accept: 'video',
+      multiple: false,
+      maxCount: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      compressed: true,
+      maxDuration: 60,
+      camera: 'back'
+    })
+
+    expect(files).toHaveLength(1)
+    expect(files[0]).toEqual({
+      path: 'temp/video.mp4',
+      size: 10240,
+      name: 'video.mp4',
+      type: 'video',
+      thumb: 'temp/thumb.jpg',
+      duration: 15
+    })
+  })
+
+  // 测试选择媒体文件
+  it('should choose media files', async () => {
+    const mockChooseMedia = jest.fn().mockImplementation((options) => {
+      options.success({
+        tempFiles: [
+          {
+            fileType: 'image',
+            tempFilePath: 'temp/image.jpg',
+            size: 1024,
+            duration: 0
+          },
+          {
+            fileType: 'video',
+            tempFilePath: 'temp/video.mp4',
+            thumbTempFilePath: 'temp/thumb.jpg',
+            size: 10240,
+            duration: 15
+          }
+        ]
+      })
+    })
+    ;(global as any).uni.chooseMedia = mockChooseMedia
+
+    const files = await chooseFile({
+      accept: 'media',
+      multiple: true,
+      maxCount: 9,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      compressed: true,
+      maxDuration: 60,
+      camera: 'back'
+    })
+
+    expect(files).toHaveLength(2)
+    expect(files[1]).toEqual({
+      type: 'video',
+      path: 'temp/video.mp4',
+      thumb: 'temp/thumb.jpg',
+      size: 10240,
+      duration: 15
+    })
+  })
+
+  // 测试选择文件失败的情况
+  it('should handle choose file failure', async () => {
+    const mockChooseImage = jest.fn().mockImplementation((options) => {
+      options.fail(new Error('Permission denied'))
+    })
+    ;(global as any).uni.chooseImage = mockChooseImage
+
+    await expect(
+      chooseFile({
+        accept: 'image',
+        multiple: false,
+        maxCount: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        compressed: true,
+        maxDuration: 60,
+        camera: 'back'
+      })
+    ).rejects.toThrow('Permission denied')
+  })
+
+  // 测试多选限制
+  it('should respect maxCount limit', async () => {
+    const mockChooseImage = jest.fn().mockImplementation((options) => {
+      options.success({
+        tempFiles: [{ path: 'temp/image1.jpg', size: 1024, name: 'image1.jpg' }]
+      })
+    })
+    ;(global as any).uni.chooseImage = mockChooseImage
+
+    await chooseFile({
+      accept: 'image',
+      multiple: true,
+      maxCount: 3,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      compressed: true,
+      maxDuration: 60,
+      camera: 'back'
+    })
+
+    expect(mockChooseImage).toHaveBeenCalledWith(
+      expect.objectContaining({
+        count: 3,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera']
+      })
+    )
+
+    // 确保异步操作完成
+    await new Promise((resolve) => setTimeout(resolve, 0))
+  })
+
+  // 测试文件来源限制
+  it('should respect sourceType option', async () => {
+    const mockChooseImage = jest.fn().mockImplementation((options) => {
+      // 立即调用 success 回调，返回测试数据
+      options.success({
+        tempFiles: [{ path: 'temp/image1.jpg', size: 1024, name: 'image1.jpg' }]
+      })
+    })
+    ;(global as any).uni.chooseImage = mockChooseImage
+
+    await chooseFile({
+      accept: 'image',
+      multiple: false,
+      maxCount: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['camera'],
+      compressed: true,
+      maxDuration: 60,
+      camera: 'back'
+    })
+
+    expect(mockChooseImage).toHaveBeenCalledWith(
+      expect.objectContaining({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['camera']
+      })
+    )
+  })
+
+  // 测试选择消息文件(仅微信小程序)
+  // it('should choose message file in WeChat MP', async () => {
+  //   const mockChooseMessageFile = jest.fn().mockImplementation((options) => {
+  //     options.success({
+  //       tempFiles: [
+  //         {
+  //           path: 'temp/doc.pdf',
+  //           size: 1024,
+  //           name: 'doc.pdf',
+  //           type: 'file'
+  //         }
+  //       ]
+  //     })
+  //   })
+  //   ;(global as any).uni.chooseMessageFile = mockChooseMessageFile
+
+  //   const files = await chooseFile({
+  //     accept: 'file',
+  //     multiple: true,
+  //     maxCount: 100,
+  //     sizeType: ['original', 'compressed'],
+  //     sourceType: ['album', 'camera'],
+  //     compressed: true,
+  //     maxDuration: 60,
+  //     camera: 'back'
+  //   })
+
+  //   expect(mockChooseMessageFile).toHaveBeenCalledWith(
+  //     expect.objectContaining({
+  //       count: 100,
+  //       type: 'file'
+  //     })
+  //   )
+  //   expect(files[0]).toEqual({
+  //     path: 'temp/doc.pdf',
+  //     size: 1024,
+  //     name: 'doc.pdf',
+  //     type: 'file'
+  //   })
+  // })
+
+  // 测试选择全部类型文件(H5)
+  it('should choose all type files in H5', async () => {
+    const mockChooseFile = jest.fn().mockImplementation((options) => {
+      options.success({
+        tempFiles: [
+          {
+            path: 'temp/file.txt',
+            size: 512,
+            name: 'file.txt'
+            // 移除 type 属性，因为 H5 的 chooseFile 返回的数据不包含 type
+          }
+        ]
+      })
+    })
+    ;(global as any).uni.chooseFile = mockChooseFile
+
+    const files = await chooseFile({
+      accept: 'all',
+      multiple: true,
+      maxCount: 100,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      compressed: true,
+      maxDuration: 60,
+      camera: 'back'
+    })
+
+    expect(mockChooseFile).toHaveBeenCalledWith(
+      expect.objectContaining({
+        count: 100,
+        type: 'all'
+      })
+    )
+    expect(files[0]).toEqual({
+      path: 'temp/file.txt',
+      size: 512,
+      name: 'file.txt'
+    })
   })
 })
