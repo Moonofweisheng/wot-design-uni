@@ -601,6 +601,18 @@ const fileList = ref<UploadFile[]>([])
 const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload'
 ```
 
+## 根据文件拓展名过滤
+
+通过设置 `extension` 可以限制选择文件的格式。以下示例限制只能选择 jpg 和 png 格式的图片:
+
+```html
+<wd-upload
+  v-model:file-list="fileList"
+  :extension="['.jpg', '.png']"
+  action="https://mockapi.eolink.com/xxx"
+></wd-upload>
+```
+
 ## Attributes
 
 | 参数                          | 说明                                                                                                                                                                           | 类型                                   | 可选值                                         | 默认值                     | 最低版本         |
@@ -637,6 +649,7 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 | successStatus                 | 接口响应的成功状态（statusCode）值                                                                                                                                             | number                                 | -                                              | 200                        | 1.3.4            |
 | auto-upload                   | 是否选择文件后自动上传。为 false 时应手动调用 submit() 方法开始上传                                                                                                            | boolean                                | -                                              | true                       | 1.3.8 |
 | upload-method                 | 自定义上传方法                                                                                                                                                     | UploadMethod                                | -                                              | -                       | 1.3.8 |
+| extension | 根据文件拓展名过滤(H5支持全部类型过滤,微信小程序支持all和file时过滤,其余平台不支持) | string[] | - | - | $LOWEST_VERSION$ |
 
 ## accept 的合法值
 
@@ -692,3 +705,5 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 | custom-class         | 根节点样式类             | -        |
 | custom-evoke-class   | 自定义上传按钮样式类     | -        |
 | custom-preview-class | 自定义预览图片列表样式类 | -        |
+
+

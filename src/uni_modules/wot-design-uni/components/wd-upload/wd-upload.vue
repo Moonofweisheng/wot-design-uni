@@ -409,7 +409,7 @@ function handleProgress(res: UniApp.OnProgressUpdateResult, file: UploadFileItem
  * @description 选择文件的实际操作，将chooseFile自己用promise包了一层
  */
 function onChooseFile(currentIndex?: number) {
-  const { multiple, maxSize, accept, sizeType, limit, sourceType, compressed, maxDuration, camera, beforeUpload } = props
+  const { multiple, maxSize, accept, sizeType, limit, sourceType, compressed, maxDuration, camera, beforeUpload, extension } = props
 
   chooseFile({
     multiple,
@@ -419,7 +419,8 @@ function onChooseFile(currentIndex?: number) {
     accept,
     compressed,
     maxDuration,
-    camera
+    camera,
+    extension
   })
     .then((res) => {
       // 成功选择初始化file
