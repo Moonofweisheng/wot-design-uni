@@ -92,6 +92,23 @@
         </template>
       </wd-upload>
     </demo-block>
+    <!-- #ifdef H5 || MP-WEIXIN -->
+    <demo-block title="根据扩展名过滤">
+      <!-- #ifdef H5 -->
+      <wd-upload v-model:file-list="fileList18" :extension="['.jpg', '.png']" :action="action"></wd-upload>
+      <view style="margin: 10px 0">选择视频时过滤mp4</view>
+      <wd-upload accept="video" v-model:file-list="fileList19" :extension="['.mp4']" :action="action"></wd-upload>
+      <view style="margin: 10px 0">上传所有类型文件时过滤.pdf和.docx</view>
+      <wd-upload accept="all" v-model:file-list="fileList21" :extension="['.pdf', '.docx']" :action="action"></wd-upload>
+      <!-- #endif -->
+      <!-- #ifdef MP-WEIXIN -->
+      <view style="margin-bottom: 10px">选择文件时过滤.txt文件</view>
+      <wd-upload accept="file" v-model:file-list="fileList19" :extension="['.txt']" :action="action"></wd-upload>
+      <view style="margin: 10px 0">选择所有文件时过滤.jpg和.mp4</view>
+      <wd-upload accept="all" v-model:file-list="fileList20" :extension="['.jpg', '.mp4']" :action="action"></wd-upload>
+      <!-- #endif -->
+    </demo-block>
+    <!-- #endif -->
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -136,6 +153,10 @@ const fileList17 = ref<UploadFile[]>([
     url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg'
   }
 ])
+const fileList18 = ref<UploadFile[]>([])
+const fileList19 = ref<UploadFile[]>([])
+const fileList20 = ref<UploadFile[]>([])
+const fileList21 = ref<UploadFile[]>([])
 
 const upload14 = ref<UploadInstance>()
 
