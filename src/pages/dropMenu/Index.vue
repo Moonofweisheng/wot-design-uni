@@ -1,7 +1,9 @@
 <template>
   <page-wraper>
-    <wd-message-box></wd-message-box>
-    <view class="demo-body" @click="closeOutside">
+    <view @click.stop="">
+      <wd-message-box></wd-message-box>
+    </view>
+    <view class="demo-body">
       <demo-block title="基本用法" transparent>
         <wd-drop-menu>
           <wd-drop-menu-item v-model="value1" :options="option1" @change="handleChange1" />
@@ -64,7 +66,6 @@ import { ref } from 'vue'
 import { useMessage, useQueue } from '@/uni_modules/wot-design-uni'
 import type { SliderInstance } from '@/uni_modules/wot-design-uni/components/wd-slider/types'
 import type { DropMenuItemBeforeToggle } from '@/uni_modules/wot-design-uni/components/wd-drop-menu-item/types'
-const { closeOutside } = useQueue()
 const messageBox = useMessage()
 
 const dropMenu = ref()
