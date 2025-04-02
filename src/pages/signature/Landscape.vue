@@ -15,10 +15,10 @@
       <template #footer="{ clear, confirm, restore, revoke, canUndo, canRedo }">
         <view class="custom-actions">
           <view class="button-group">
-            <wd-button size="small" plain @click="revoke" :disabled="!canUndo">撤回</wd-button>
-            <wd-button size="small" plain @click="restore" :disabled="!canRedo">恢复</wd-button>
-            <wd-button size="small" plain @click="clear">清除</wd-button>
-            <wd-button size="small" type="primary" @click="confirm">完成</wd-button>
+            <wd-button size="small" plain @click="revoke" :disabled="!canUndo">{{ $t('che-hui') }}</wd-button>
+            <wd-button size="small" plain @click="restore" :disabled="!canRedo">{{ $t('hui-fu') }}</wd-button>
+            <wd-button size="small" plain @click="clear">{{ $t('qing-chu') }}</wd-button>
+            <wd-button size="small" type="primary" @click="confirm">{{ $t('wan-cheng') }}</wd-button>
           </view>
         </view>
       </template>

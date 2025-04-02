@@ -1,21 +1,14 @@
-<!--
- * @Author: weisheng
- * @Date: 2025-02-16 16:04:20
- * @LastEditTime: 2025-02-19 22:51:30
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-design-uni/src/pages/about/Index.vue
- * 记得注释
--->
 <template>
   <view class="page">
     <view class="page__hd">
-      <view class="page__title">关于我们</view>
-      <view class="page__desc">我是不如摸鱼去，一个前端打工仔，我和我的小伙伴们正在致力于开发轻量、高效的uni-app组件库。</view>
+      <view class="page__title">{{ $t('guanYuWoMen') }}</view>
+      <view class="page__desc">
+        {{ $t('woShiBuRuMoYuQuYiGeQianDuanDaGongZiWoHeWoDeXiaoHuoBanMenZhengZaiZhiLiYuKaiFaQingLiangGaoXiaoDeUniappZuJianKu') }}
+      </view>
     </view>
     <view class="page__bd">
       <view class="core-team">
-        <view class="core-team__title">核心团队</view>
+        <view class="core-team__title">{{ $t('heXinTuanDui') }}</view>
         <view class="core-team__list">
           <view v-for="(collaborator, index) in githubData.collaborators" :key="index" class="core-team__member">
             <image :src="collaborator.avatar_url" class="core-team__avatar" />
@@ -23,24 +16,84 @@
           </view>
         </view>
       </view>
-      <!-- #ifndef MP-ALIPAY -->
+
       <view class="additional-links">
-        <view class="additional-links__title">更多信息</view>
+        <view class="additional-links__title">{{ $t('gengDuoXinXi') }}</view>
         <wd-cell-group border>
-          <wd-cell title="关注公众号" title-width="200px" label="uni-app教程、组件库讯息一手掌握！" @click="openWeChat" is-link></wd-cell>
-          <wd-cell title="捐赠" title-width="200px" label="每一份捐赠都是对我们莫大的鼓励！" @click="donate" is-link></wd-cell>
+          <wd-cell
+            :title="$t('yuYanQieHuan')"
+            title-width="200px"
+            :label="$t('dangQianYuYan') + ': ' + (currentLang === 'zh-CN' ? '中文' : 'English')"
+            is-link
+            @click="showLanguageSwitch = true"
+          ></wd-cell>
+          <!-- #ifndef MP-ALIPAY -->
+
+          <wd-cell
+            :title="$t('guanZhuGongZhongHao')"
+            title-width="200px"
+            :label="$t('uniappJiaoChengZuJianKuXunXiYiShouZhangWo')"
+            @click="openWeChat"
+            is-link
+          ></wd-cell>
+          <wd-cell
+            :title="$t('juanZeng')"
+            title-width="200px"
+            :label="$t('meiYiFenJuanZengDuShiDuiWoMenMoDaDeGuLi')"
+            @click="donate"
+            is-link
+          ></wd-cell>
           <!-- #ifdef MP-WEIXIN -->
-          <wd-cell title="观看激励广告" title-width="200px" label="每次观看都是对我们的支持，谢谢！" @click="watchAd" is-link></wd-cell>
+          <wd-cell
+            :title="$t('guanKanJiLiGuangGao')"
+            title-width="200px"
+            :label="$t('meiCiGuanKanDuShiDuiWoMenDeZhiChiXieXie')"
+            @click="watchAd"
+            is-link
+          ></wd-cell>
+          <!-- #endif -->
           <!-- #endif -->
         </wd-cell-group>
       </view>
-      <!-- #endif -->
     </view>
+    <wd-action-sheet
+      v-model="showLanguageSwitch"
+      :actions="languageActions"
+      :cancel-text="$t('qu-xiao')"
+      :title="$t('yuYanQieHuan')"
+      @select="handleLanguageSelect"
+    />
   </view>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18nSync } from '../../hooks/useI18nSync'
+
+// 使用国际化钩子
+const { currentLang, setLocale } = useI18nSync()
+
+// 控制语言切换弹出层的显示
+const showLanguageSwitch = ref(false)
+
+// 语言切换选项
+const languageActions = computed(() => [
+  {
+    name: '中文 🇨🇳',
+    color: currentLang.value === 'zh-CN' ? '#0083ff' : ''
+  },
+  {
+    name: 'English 🇺🇸',
+    color: currentLang.value === 'en-US' ? '#0083ff' : ''
+  }
+])
+
+// 处理语言选择
+const handleLanguageSelect = ({ index }: { index: number }) => {
+  const locale = index === 0 ? 'zh-CN' : 'en-US'
+  switchLanguage(locale)
+}
+
 const githubData = ref<any>({
   collaborators: [
     {
@@ -75,6 +128,11 @@ const githubData = ref<any>({
     }
   ]
 })
+
+// 切换语言
+const switchLanguage = (locale: string) => {
+  setLocale(locale)
+}
 
 // 打开公众号二维码
 const openWeChat = () => {
@@ -178,6 +236,8 @@ const watchAd = () => {
   margin: 0 auto;
   color: #333;
 }
+
+// 移除了不再需要的language-switch相关样式
 
 .additional-links {
   margin-top: 20px;

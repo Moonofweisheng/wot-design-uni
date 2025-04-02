@@ -1,121 +1,125 @@
 <template>
   <page-wraper>
-    <demo-block title="基本用法">
+    <demo-block :title="$t('jiBenYongFa')">
       <view>
-        1、内容项在3项以内，且有比较重要的信息备选（如付款类型选择等）可考虑采用圆形组件。因为会跟圆形复选框容易混淆，且会造成当前表单页页面结构不统一，
-        <text style="color: #f0883a">一般情况不建议使用点状单选。</text>
+        {{
+          $t(
+            '1-nei-rong-xiang-zai-3-xiang-yi-nei-qie-you-bi-jiao-zhong-yao-de-xin-xi-bei-xuan-ru-fu-kuan-lei-xing-xuan-ze-deng-ke-kao-lv-cai-yong-yuan-xing-zu-jian-yin-wei-hui-gen-yuan-xing-fu-xuan-kuang-rong-yi-hun-xiao-qie-hui-zao-cheng-dang-qian-biao-dan-ye-ye-mian-jie-gou-bu-tong-yi'
+          )
+        }}
+        <text style="color: #f0883a">{{ $t('yi-ban-qing-kuang-bu-jian-yi-shi-yong-dian-zhuang-dan-xuan') }}</text>
       </view>
       <view style="margin-bottom: 10px">
-        2、单选框基本使用未对高度进行扩充，
-        <text style="color: #f0883a">一般情况建议使用表单--单选组。</text>
+        {{ $t('2-dan-xuan-kuang-ji-ben-shi-yong-wei-dui-gao-du-jin-hang-kuo-chong') }}
+        <text style="color: #f0883a">{{ $t('yi-ban-qing-kuang-jian-yi-shi-yong-biao-dan-dan-xuan-zu') }}</text>
       </view>
       <wd-radio-group v-model="value0" @change="change">
-        <wd-radio :value="1">单选框1</wd-radio>
-        <wd-radio :value="2">单选框2</wd-radio>
+        <wd-radio :value="1">{{ $t('dan-xuan-kuang-1') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('dan-xuan-kuang-2') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="修改形状--button">
+    <demo-block :title="$t('xiu-gai-xing-zhuang-button-0')">
       <wd-radio-group shape="button" v-model="value1" @change="change">
-        <wd-radio :value="1">选项1</wd-radio>
-        <wd-radio :value="2">选项2</wd-radio>
+        <wd-radio :value="1">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuanXiang_2-0') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="修改形状--dot">
+    <demo-block :title="$t('xiu-gai-xing-zhuang-dot')">
       <wd-radio-group shape="dot" v-model="value2" @change="change">
-        <wd-radio :value="1">选项1</wd-radio>
-        <wd-radio :value="2">选项2</wd-radio>
+        <wd-radio :value="1">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuanXiang_2-0') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="表单---单选组" transparent>
+    <demo-block :title="$t('biao-dan-dan-xuan-zu')" transparent>
       <wd-radio-group cell v-model="value3" @change="change">
-        <wd-radio :value="1">选项1</wd-radio>
-        <wd-radio :value="2">选项2</wd-radio>
+        <wd-radio :value="1">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuanXiang_2-0') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="表单--单选按钮组" transparent>
+    <demo-block :title="$t('biao-dan-dan-xuan-an-niu-zu')" transparent>
       <wd-radio-group v-model="value4" cell shape="button">
-        <wd-radio :value="1">选项一</wd-radio>
-        <wd-radio :value="2">选项二</wd-radio>
-        <wd-radio :value="3">选项三</wd-radio>
-        <wd-radio :value="4">选项四</wd-radio>
-        <wd-radio :value="5">选项五</wd-radio>
-        <wd-radio :value="6">选项六</wd-radio>
-        <wd-radio :value="7">选项七</wd-radio>
+        <wd-radio :value="1">{{ $t('xuan-xiang-yi') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuan-xiang-er') }}</wd-radio>
+        <wd-radio :value="3">{{ $t('xuan-xiang-san') }}</wd-radio>
+        <wd-radio :value="4">{{ $t('xuan-xiang-si') }}</wd-radio>
+        <wd-radio :value="5">{{ $t('xuan-xiang-wu') }}</wd-radio>
+        <wd-radio :value="6">{{ $t('xuan-xiang-liu') }}</wd-radio>
+        <wd-radio :value="7">{{ $t('xuan-xiang-qi') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="同行展示">
+    <demo-block :title="$t('tong-hang-zhan-shi')">
       <wd-radio-group v-model="value5" inline>
-        <wd-radio :value="1">单选框1</wd-radio>
-        <wd-radio :value="2">单选框2</wd-radio>
+        <wd-radio :value="1">{{ $t('dan-xuan-kuang-1') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('dan-xuan-kuang-2') }}</wd-radio>
       </wd-radio-group>
       <wd-divider dashed></wd-divider>
       <wd-radio-group v-model="value6" inline shape="dot">
-        <wd-radio :value="1">单选框1</wd-radio>
-        <wd-radio :value="2">单选框2</wd-radio>
+        <wd-radio :value="1">{{ $t('dan-xuan-kuang-1') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('dan-xuan-kuang-2') }}</wd-radio>
       </wd-radio-group>
       <wd-divider dashed></wd-divider>
       <wd-radio-group v-model="value13" inline shape="dot" icon-placement="right">
-        <wd-radio :value="1">单选框1</wd-radio>
-        <wd-radio :value="2">单选框2</wd-radio>
+        <wd-radio :value="1">{{ $t('dan-xuan-kuang-1') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('dan-xuan-kuang-2') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="修改选中颜色">
+    <demo-block :title="$t('xiu-gai-xuan-zhong-yan-se')">
       <wd-radio-group v-model="value7" @change="change" checked-color="#fa4350">
-        <wd-radio :value="1">选项1</wd-radio>
-        <wd-radio :value="2">选项2</wd-radio>
+        <wd-radio :value="1">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuanXiang_2-0') }}</wd-radio>
       </wd-radio-group>
 
       <wd-radio-group shape="dot" v-model="value12" @change="change" checked-color="#fa4350">
-        <wd-radio :value="1">选项1</wd-radio>
-        <wd-radio :value="2">选项2</wd-radio>
+        <wd-radio :value="1">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuanXiang_2-0') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="禁用">
+    <demo-block :title="$t('jinYong')">
       <wd-radio-group v-model="value1" disabled shape="dot">
-        <wd-radio :value="1">选项1</wd-radio>
-        <wd-radio :value="2">选项2</wd-radio>
+        <wd-radio :value="1">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuanXiang_2-0') }}</wd-radio>
       </wd-radio-group>
       <view class="divider"></view>
       <wd-radio-group v-model="value1" disabled>
-        <wd-radio :value="1">选项1</wd-radio>
-        <wd-radio :value="2">选项2</wd-radio>
+        <wd-radio :value="1">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuanXiang_2-0') }}</wd-radio>
       </wd-radio-group>
       <view class="divider"></view>
       <wd-radio-group v-model="value1" disabled shape="button">
-        <wd-radio :value="1">选项1</wd-radio>
-        <wd-radio :value="2">选项2</wd-radio>
+        <wd-radio :value="1">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('xuanXiang_2-0') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="大尺寸">
+    <demo-block :title="$t('da-chi-cun')">
       <wd-radio-group v-model="value8" size="large">
-        <wd-radio :value="1">单选框1</wd-radio>
-        <wd-radio :value="2">单选框2</wd-radio>
+        <wd-radio :value="1">{{ $t('dan-xuan-kuang-1') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('dan-xuan-kuang-2') }}</wd-radio>
       </wd-radio-group>
       <view class="divider"></view>
       <wd-radio-group v-model="value9" size="large" shape="dot">
-        <wd-radio :value="1">单选框1</wd-radio>
-        <wd-radio :value="2">单选框2</wd-radio>
+        <wd-radio :value="1">{{ $t('dan-xuan-kuang-1') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('dan-xuan-kuang-2') }}</wd-radio>
       </wd-radio-group>
       <view class="divider"></view>
       <wd-radio-group v-model="value10" size="large" inline custom-class="group">
-        <wd-radio :value="1">单选框1</wd-radio>
-        <wd-radio :value="2">单选框2</wd-radio>
+        <wd-radio :value="1">{{ $t('dan-xuan-kuang-1') }}</wd-radio>
+        <wd-radio :value="2">{{ $t('dan-xuan-kuang-2') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
 
-    <demo-block title="radio的props比radioGroup的优先级高">
+    <demo-block :title="$t('radio-de-props-bi-radiogroup-de-you-xian-ji-gao')">
       <wd-radio-group hape="button" disabled checked-color="#fa4350" v-model="value11" @change="change">
-        <wd-radio :value="1" checked-color="#000" :disabled="false">选项1</wd-radio>
-        <wd-radio :value="2" :disabled="false">选项2</wd-radio>
-        <wd-radio :value="3">选项3</wd-radio>
+        <wd-radio :value="1" checked-color="#000" :disabled="false">{{ $t('xuanXiang_1-0') }}</wd-radio>
+        <wd-radio :value="2" :disabled="false">{{ $t('xuanXiang_2-0') }}</wd-radio>
+        <wd-radio :value="3">{{ $t('xuanXiang_3-0') }}</wd-radio>
       </wd-radio-group>
     </demo-block>
   </page-wraper>

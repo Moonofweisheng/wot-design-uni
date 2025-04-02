@@ -1,19 +1,19 @@
 <template>
   <page-wraper>
     <view>
-      <demo-block title="基本使用" transparent>
+      <demo-block :title="$t('ji-ben-shi-yong')" transparent>
         <wd-gap bg-color="#FFFFFF"></wd-gap>
       </demo-block>
-      <demo-block title="自定义背景颜色" transparent>
+      <demo-block :title="$t('zi-ding-yi-bei-jing-yan-se')" transparent>
         <wd-gap bg-color="#4D80F0"></wd-gap>
       </demo-block>
-      <demo-block title="自定义高度" transparent>
+      <demo-block :title="$t('zi-ding-yi-gao-du')" transparent>
         <wd-gap bg-color="#4D80F0" height="120rpx"></wd-gap>
       </demo-block>
-      <demo-block title="自定义样式" transparent>
+      <demo-block :title="$t('ziDingYiYangShi')" transparent>
         <wd-gap custom-class="custom-gap"></wd-gap>
       </demo-block>
-      <demo-block custom-class="custom-safe-area-bottom" title="底部安全区" transparent>
+      <demo-block custom-class="custom-safe-area-bottom" :title="$t('di-bu-an-quan-qu')" transparent>
         <wd-gap bg-color="#FFFFFF" safe-area-bottom height="120rpx"></wd-gap>
       </demo-block>
     </view>

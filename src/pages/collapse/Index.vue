@@ -2,15 +2,17 @@
   <view class="collapse">
     <page-wraper>
       <demo-block title="toggleAll">
-        <wd-button custom-class="custom-button" type="info" @click="collapse?.toggleAll()">全部切换</wd-button>
-        <wd-button custom-class="custom-button" type="success" @click="collapse?.toggleAll(true)">全部展开</wd-button>
-        <wd-button custom-class="custom-button" type="primary" @click="collapse?.toggleAll(false)">全部收起</wd-button>
-        <wd-button custom-class="custom-button" type="warning" @click="collapse?.toggleAll({ skipDisabled: true })">全部切换跳过禁用</wd-button>
+        <wd-button custom-class="custom-button" type="info" @click="collapse?.toggleAll()">{{ $t('quan-bu-qie-huan') }}</wd-button>
+        <wd-button custom-class="custom-button" type="success" @click="collapse?.toggleAll(true)">{{ $t('quan-bu-zhan-kai') }}</wd-button>
+        <wd-button custom-class="custom-button" type="primary" @click="collapse?.toggleAll(false)">{{ $t('quan-bu-shou-qi') }}</wd-button>
+        <wd-button custom-class="custom-button" type="warning" @click="collapse?.toggleAll({ skipDisabled: true })">
+          {{ $t('quan-bu-qie-huan-tiao-guo-jin-yong') }}
+        </wd-button>
         <wd-button custom-class="custom-button" type="error" @click="collapse?.toggleAll({ expanded: true, skipDisabled: true })">
-          全部选中跳过禁用
+          {{ $t('quan-bu-xuan-zhong-tiao-guo-jin-yong') }}
         </wd-button>
       </demo-block>
-      <demo-block title="基础用法" transparent>
+      <demo-block :title="$t('ji-chu-yong-fa')" transparent>
         <wd-collapse ref="collapse" v-model="value1" @change="handleChange1">
           <wd-collapse-item
             :disabled="item.disabled"
@@ -25,12 +27,12 @@
         </wd-collapse>
       </demo-block>
 
-      <demo-block title="自定义title" transparent>
+      <demo-block :title="$t('zi-ding-yi-title')" transparent>
         <wd-collapse v-model="value7">
           <wd-collapse-item name="item1">
             <template #title="{ expanded }">
               <view class="header">
-                <text style="color: red">通过 slot 自定义标题</text>
+                <text style="color: red">{{ $t('tong-guo-slot-zi-ding-yi-biao-ti') }}</text>
                 <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
               </view>
             </template>
@@ -39,8 +41,8 @@
           <wd-collapse-item name="item2" disabled>
             <template #title="{ expanded, disabled }">
               <view class="header">
-                <text v-if="disabled">被禁用</text>
-                <text style="color: red" v-else>通过 slot 自定义 title</text>
+                <text v-if="disabled">{{ $t('bei-jin-yong') }}</text>
+                <text style="color: red" v-else>{{ $t('tong-guo-slot-zi-ding-yi-title') }}</text>
                 <text>{{ expanded ? '我展开了' : '我已收起' }}</text>
               </view>
             </template>
@@ -49,28 +51,44 @@
         </wd-collapse>
       </demo-block>
 
-      <demo-block title="手风琴" transparent>
+      <demo-block :title="$t('shou-feng-qin')" transparent>
         <wd-collapse v-model="value2" :accordion="accordion" @change="handleChange2">
-          <wd-collapse-item title="标签1" name="item1">这是一条简单的示例文字。</wd-collapse-item>
-          <wd-collapse-item title="标签2" name="item2">
-            这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
+          <wd-collapse-item :title="$t('biao-qian-1')" name="item1">{{ $t('zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi') }}</wd-collapse-item>
+          <wd-collapse-item :title="$t('biao-qian-2')" name="item2">
+            {{
+              $t(
+                'zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi'
+              )
+            }}
           </wd-collapse-item>
-          <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
+          <wd-collapse-item :title="$t('biao-qian-3')" name="item3">{{ $t('zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-0') }}</wd-collapse-item>
         </wd-collapse>
       </demo-block>
-      <demo-block title="禁用" transparent>
+      <demo-block :title="$t('jinYong')" transparent>
         <wd-collapse v-model="value3" @change="handleChange3">
-          <wd-collapse-item title="标签1" name="item1">
-            这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
+          <wd-collapse-item :title="$t('biao-qian-1-0')" name="item1">
+            {{
+              $t(
+                'zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-0'
+              )
+            }}
           </wd-collapse-item>
-          <wd-collapse-item title="标签2" name="item2" disabled>这是一条简单的示例文字。</wd-collapse-item>
-          <wd-collapse-item title="标签3" name="item3">这是一条简单的示例文字。</wd-collapse-item>
+          <wd-collapse-item :title="$t('biao-qian-2-0')" name="item2" disabled>
+            {{ $t('zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-1') }}
+          </wd-collapse-item>
+          <wd-collapse-item :title="$t('biao-qian-3-0')" name="item3">{{ $t('zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-2') }}</wd-collapse-item>
         </wd-collapse>
       </demo-block>
 
-      <demo-block title="嵌套" transparent>
+      <demo-block :title="$t('qian-tao')" transparent>
         <wd-collapse v-model="collapseRoot" @change="handleChange1">
-          <wd-collapse-item custom-body-style="padding:0 0 0 14px" v-for="item in 5" :key="item" :title="`标签${item}`" :name="`${item}`">
+          <wd-collapse-item
+            custom-body-style="padding:0 0 0 14px"
+            v-for="item in 5"
+            :key="item"
+            :title="$t('biao-qian-item') + item"
+            :name="`${item}`"
+          >
             <wd-collapse v-model="collapseList[item - 1]">
               <wd-collapse-item
                 :custom-class="index === 0 ? 'no-border' : ''"
@@ -86,21 +104,33 @@
         </wd-collapse>
       </demo-block>
 
-      <demo-block title="查看更多" transparent>
+      <demo-block :title="$t('cha-kan-geng-duo')" transparent>
         <wd-collapse viewmore v-model="value4" @change="handleChange4">
-          这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
+          {{
+            $t(
+              'zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-1'
+            )
+          }}
         </wd-collapse>
       </demo-block>
-      <demo-block title="查看更多-行数显示设置" transparent>
+      <demo-block :title="$t('cha-kan-geng-duo-hang-shu-xian-shi-she-zhi')" transparent>
         <wd-collapse viewmore v-model="value5" @change="handleChange5" :line-num="3">
-          行数显示设置：这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
+          {{
+            $t(
+              'hang-shu-xian-shi-she-zhi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi'
+            )
+          }}
         </wd-collapse>
       </demo-block>
-      <demo-block title="查看更多-具名插槽" transparent>
+      <demo-block :title="$t('cha-kan-geng-duo-ju-ming-cha-cao')" transparent>
         <wd-collapse viewmore v-model="value6" @change="handleChange6" use-more-slot custom-more-slot-class="more-slot">
-          具名插槽：这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。这是一条简单的示例文字。
+          {{
+            $t(
+              'ju-ming-cha-cao-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi-zhe-shi-yi-tiao-jian-dan-de-shi-li-wen-zi'
+            )
+          }}
           <template #more>
-            <view>显示全部</view>
+            <view>{{ $t('xian-shi-quan-bu') }}</view>
           </template>
         </wd-collapse>
       </demo-block>
@@ -111,34 +141,43 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 import type { CollapseInstance } from '@/uni_modules/wot-design-uni/components/wd-collapse/types'
 import { ref } from 'vue'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const toast = useToast()
 const itemList = ref<Record<string, any>[]>([
   {
-    title: '标签1',
+    title: t('biao-qian-1-1'),
     name: 'item1',
-    body: '如订单处于暂停状态，进入“我的订单”页面，找到要取消的订单，点击“取消订单”按钮；选择订单取消原因后，点击“下一步”提交申请即可。'
+    body: t(
+      'ru-ding-dan-chu-yu-zan-ting-zhuang-tai-jin-ru-wo-de-ding-dan-ye-mian-zhao-dao-yao-qu-xiao-de-ding-dan-dian-ji-qu-xiao-ding-dan-an-niu-xuan-ze-ding-dan-qu-xiao-yuan-yin-hou-dian-ji-xia-yi-bu-ti-jiao-shen-qing-ji-ke'
+    )
   },
   {
-    title: '标签2',
+    title: t('biao-qian-2-1'),
     name: 'item2',
-    body: '一般情况下，买家只能向商户申请退款，商户确认可以退款后，可以通过接口或者商户平台向微信支付发起退款申请。',
+    body: t(
+      'yi-ban-qing-kuang-xia-mai-jia-zhi-neng-xiang-shang-hu-shen-qing-tui-kuan-shang-hu-que-ren-ke-yi-tui-kuan-hou-ke-yi-tong-guo-jie-kou-huo-zhe-shang-hu-ping-tai-xiang-wei-xin-zhi-fu-fa-qi-tui-kuan-shen-qing'
+    ),
     disabled: true
   },
   {
-    title: '标签3',
+    title: t('biao-qian-3-1'),
     name: 'item3',
-    body: '将收到的有质量问题的商品照片或者订单截图上传到微信公众账号（微信关注联华华商公众号），我们的工作人员会尽快帮您处理。'
+    body: t(
+      'jiang-shou-dao-de-you-zhi-liang-wen-ti-de-shang-pin-zhao-pian-huo-zhe-ding-dan-jie-tu-shang-chuan-dao-wei-xin-gong-zhong-zhang-hao-wei-xin-guan-zhu-lian-hua-hua-shang-gong-zhong-hao-wo-men-de-gong-zuo-ren-yuan-hui-jin-kuai-bang-nin-chu-li'
+    )
   },
   {
-    title: '标签4',
+    title: t('biao-qian-4'),
     name: 'item4',
-    body: '七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。'
+    body: t(
+      'qi-tian-wu-li-you-tui-huan-huo-zhi-du-suo-you-shang-pin-zai-bu-ying-xiang-er-ci-xiao-shou-de-qing-kuang-xia-7-tian-nei-yi-kuai-di-dan-qian-shou-wei-zhun-jun-jie-shou-ke-hu-tui-huan-huo'
+    )
   },
   {
-    title: '标签5',
+    title: t('biao-qian-5'),
     name: 'item5',
-    body: 'Q1:优惠券使用详情？详情页面【我的】-【我的优惠】-【优惠券规则说明】。'
+    body: t('q1-you-hui-quan-shi-yong-xiang-qing-xiang-qing-ye-mian-wo-de-wo-de-you-hui-you-hui-quan-gui-ze-shuo-ming')
   }
 ])
 
@@ -151,7 +190,9 @@ const value4 = ref<boolean>(false)
 const value5 = ref<boolean>(false)
 const value6 = ref<boolean>(false)
 const value7 = ref<string[]>(['item1'])
-const desc7 = '如订单处于暂停状态，进入“我的订单”页面，找到要取消的订单，点击“取消订单”按钮；选择订单取消原因后，点击“下一步”提交申请即可。'
+const desc7 = t(
+  'ru-ding-dan-chu-yu-zan-ting-zhuang-tai-jin-ru-wo-de-ding-dan-ye-mian-zhao-dao-yao-qu-xiao-de-ding-dan-dian-ji-qu-xiao-ding-dan-an-niu-xuan-ze-ding-dan-qu-xiao-yuan-yin-hou-dian-ji-xia-yi-bu-ti-jiao-shen-qing-ji-ke-0'
+)
 const accordion = ref<boolean>(true)
 
 const collapseRoot = ref<string[]>(['0'])
@@ -188,12 +229,13 @@ function beforeExpend(name: string) {
     return item.name === name
   })
   if (index > -1) {
-    itemList.value[index].body =
-      'Q1:七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。七天无理由退换货制度，所有商品在不影响二次销售的情况下7天内（以快递单签收为准）均接受客户退换货。'
+    itemList.value[index].body = t(
+      'q1-qi-tian-wu-li-you-tui-huan-huo-zhi-du-suo-you-shang-pin-zai-bu-ying-xiang-er-ci-xiao-shou-de-qing-kuang-xia-7-tian-nei-yi-kuai-di-dan-qian-shou-wei-zhun-jun-jie-shou-ke-hu-tui-huan-huo-qi-tian-wu-li-you-tui-huan-huo-zhi-du-suo-you-shang-pin-zai-bu-ying-xiang-er-ci-xiao-shou-de-qing-kuang-xia-7-tian-nei-yi-kuai-di-dan-qian-shou-wei-zhun-jun-jie-shou-ke-hu-tui-huan-huo-qi-tian-wu-li-you-tui-huan-huo-zhi-du-suo-you-shang-pin-zai-bu-ying-xiang-er-ci-xiao-shou-de-qing-kuang-xia-7-tian-nei-yi-kuai-di-dan-qian-shou-wei-zhun-jun-jie-shou-ke-hu-tui-huan-huo-qi-tian-wu-li-you-tui-huan-huo-zhi-du-suo-you-shang-pin-zai-bu-ying-xiang-er-ci-xiao-shou-de-qing-kuang-xia-7-tian-nei-yi-kuai-di-dan-qian-shou-wei-zhun-jun-jie-shou-ke-hu-tui-huan-huo-qi-tian-wu-li-you-tui-huan-huo-zhi-du-suo-you-shang-pin-zai-bu-ying-xiang-er-ci-xiao-shou-de-qing-kuang-xia-7-tian-nei-yi-kuai-di-dan-qian-shou-wei-zhun-jun-jie-shou-ke-hu-tui-huan-huo-qi-tian-wu-li-you-tui-huan-huo-zhi-du-suo-you-shang-pin-zai-bu-ying-xiang-er-ci-xiao-shou-de-qing-kuang-xia-7-tian-nei-yi-kuai-di-dan-qian-shou-wei-zhun-jun-jie-shou-ke-hu-tui-huan-huo'
+    )
   }
 
   return new Promise((reslove, reject) => {
-    toast.loading('加载中')
+    toast.loading(t('jia-zai-zhong-0'))
     setTimeout(() => {
       toast.close()
       reslove(true)

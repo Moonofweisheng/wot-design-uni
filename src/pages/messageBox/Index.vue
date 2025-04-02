@@ -9,7 +9,7 @@
         <wd-button @click="alert">alert</wd-button>
       </demo-block>
 
-      <demo-block title="显示标题">
+      <demo-block :title="$t('xian-shi-biao-ti')">
         <wd-button @click="alertWithTitle">alert</wd-button>
       </demo-block>
 
@@ -21,19 +21,19 @@
         <wd-button @click="prompt">prompt</wd-button>
       </demo-block>
 
-      <demo-block title="当文案过长时，弹框的高度不再增加，而是将文案内容设置成滚动">
+      <demo-block :title="$t('dang-wen-an-guo-chang-shi-dan-kuang-de-gao-du-bu-zai-zeng-jia-er-shi-jiang-wen-an-nei-rong-she-zhi-cheng-gun-dong')">
         <wd-button @click="alertWithLongChar">alert</wd-button>
       </demo-block>
 
-      <demo-block title="使用wd-message-box组件，通过slot插入其他组件内容">
+      <demo-block :title="$t('shi-yong-wdmessagebox-zu-jian-tong-guo-slot-cha-ru-qi-ta-zu-jian-nei-rong')">
         <wd-button @click="withSlot">custom</wd-button>
       </demo-block>
 
-      <demo-block title="使用beforeConfirm钩子，在弹框确认前，可以进行一些操作">
+      <demo-block :title="$t('shi-yong-beforeconfirm-gou-zi-zai-dan-kuang-que-ren-qian-ke-yi-jin-hang-yi-xie-cao-zuo')">
         <wd-button @click="beforeConfirm">beforeConfirm</wd-button>
       </demo-block>
 
-      <demo-block title="通过button-props自定义按钮">
+      <demo-block :title="$t('tong-guo-buttonprops-zi-ding-yi-an-niu')">
         <wd-button @click="withButtonProps">withButtonProps</wd-button>
       </demo-block>
     </page-wraper>
@@ -42,6 +42,9 @@
 <script lang="ts" setup>
 import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const rate = ref<number>(1)
 const value1 = ref<string>('')
 
@@ -50,19 +53,19 @@ const message = useMessage()
 const message1 = useMessage('wd-message-box-slot')
 
 function alert() {
-  message.alert('操作成功')
+  message.alert(t('cao-zuo-cheng-gong'))
 }
 function alertWithTitle() {
   message.alert({
-    msg: '提示文案',
-    title: '标题'
+    msg: t('ti-shi-wen-an'),
+    title: t('biaoTi-0')
   })
 }
 function confirm() {
   message
     .confirm({
-      msg: '是否删除',
-      title: '提示'
+      msg: t('shi-fou-shan-chu'),
+      title: t('ti-shi')
     })
     .catch((error) => {
       console.log(error)
@@ -71,7 +74,7 @@ function confirm() {
 function prompt() {
   message
     .prompt({
-      title: '请输入邮箱',
+      title: t('qing-shu-ru-you-xiang'),
       inputValue: value1.value,
       inputPattern: /.+@.+\..+/i
     })
@@ -84,22 +87,22 @@ function prompt() {
 }
 function alertWithLongChar() {
   message.alert({
-    msg: '以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文字是示意以上文',
-    title: '标题'
+    msg: t('yi-shang-wen-zi-shi-shi-yi'),
+    title: t('biaoTi-0')
   })
 }
 
 function beforeConfirm() {
   message
     .confirm({
-      msg: '是否删除',
-      title: '提示',
+      msg: t('shi-fou-shan-chu-0'),
+      title: t('ti-shi-0'),
       beforeConfirm: ({ resolve }) => {
-        toast.loading('删除中...')
+        toast.loading(t('shan-chu-zhong'))
         setTimeout(() => {
           toast.close()
           resolve(true)
-          toast.success('删除成功')
+          toast.success(t('shan-chu-cheng-gong'))
         }, 3000)
       }
     })
@@ -112,8 +115,8 @@ function beforeConfirm() {
 function withButtonProps() {
   message
     .confirm({
-      msg: '自定义按钮样式',
-      title: '提示',
+      msg: t('zi-ding-yi-an-niu-yang-shi'),
+      title: t('ti-shi-1'),
       cancelButtonProps: {
         round: false,
         type: 'error',
@@ -134,10 +137,10 @@ function withButtonProps() {
 function withSlot() {
   message1
     .confirm({
-      title: '评分'
+      title: t('ping-fen')
     })
     .then(() => {
-      message.alert(`你的评分为：${rate.value}分`)
+      message.alert(t('ni-de-ping-fen-wei-ratevalue-fen', [rate.value]))
     })
     .catch((error) => {
       console.log(error)

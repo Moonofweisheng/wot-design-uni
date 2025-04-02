@@ -3,7 +3,7 @@
     <page-wraper>
       <wd-toast />
       <view class="grid">
-        <demo-block title="基本用法" transparent>
+        <demo-block :title="$t('jiBenYongFa')" transparent>
           <wd-grid>
             <wd-grid-item icon="picture" text="文字" />
             <wd-grid-item icon="picture" text="文字" />
@@ -11,7 +11,7 @@
             <wd-grid-item icon="picture" text="文字" />
           </wd-grid>
         </demo-block>
-        <demo-block title="自定义列数" transparent>
+        <demo-block :title="$t('zi-ding-yi-lie-shu')" transparent>
           <wd-grid :column="3">
             <wd-grid-item icon="picture" text="文字" />
             <wd-grid-item icon="picture" text="文字" />
@@ -21,7 +21,7 @@
             <wd-grid-item icon="picture" text="文字" />
           </wd-grid>
         </demo-block>
-        <demo-block title="自定义背景颜色">
+        <demo-block :title="$t('zi-ding-yi-bei-jing-yan-se')">
           <wd-grid bg-color="rgba(0, 0, 0, 0.02)">
             <wd-grid-item icon="picture" text="文字" />
             <wd-grid-item icon="picture" text="文字" />
@@ -29,7 +29,7 @@
             <wd-grid-item icon="picture" text="文字" />
           </wd-grid>
         </demo-block>
-        <demo-block title="显示border">
+        <demo-block :title="$t('xian-shi-border')">
           <wd-grid :column="3" border>
             <wd-grid-item icon="picture" text="文字" />
             <wd-grid-item icon="picture" text="文字" />
@@ -39,7 +39,7 @@
             <wd-grid-item icon="picture" text="文字" />
           </wd-grid>
         </demo-block>
-        <demo-block title="内容插槽" transparent>
+        <demo-block :title="$t('nei-rong-cha-cao')" transparent>
           <wd-grid>
             <wd-grid-item use-slot>
               <image class="img" :src="joy" />
@@ -52,7 +52,7 @@
             </wd-grid-item>
           </wd-grid>
         </demo-block>
-        <demo-block title="图标插槽" transparent>
+        <demo-block :title="$t('tu-biao-cha-cao')" transparent>
           <wd-grid>
             <wd-grid-item use-icon-slot text="文字" icon-size="36px">
               <template #icon>
@@ -71,26 +71,26 @@
             </wd-grid-item>
           </wd-grid>
         </demo-block>
-        <demo-block title="文字插槽" transparent>
+        <demo-block :title="$t('wen-zi-cha-cao')" transparent>
           <wd-grid>
             <wd-grid-item use-text-slot icon="picture">
               <template #text>
-                <view class="text">自定义文字插槽</view>
+                <view class="text">{{ $t('zi-ding-yi-wen-zi-cha-cao') }}</view>
               </template>
             </wd-grid-item>
             <wd-grid-item use-text-slot icon="picture">
               <template #text>
-                <view class="text">自定义文字插槽</view>
+                <view class="text">{{ $t('zi-ding-yi-wen-zi-cha-cao-0') }}</view>
               </template>
             </wd-grid-item>
             <wd-grid-item use-text-slot icon="picture">
               <template #text>
-                <view class="text">自定义文字插槽</view>
+                <view class="text">{{ $t('zi-ding-yi-wen-zi-cha-cao-1') }}</view>
               </template>
             </wd-grid-item>
           </wd-grid>
         </demo-block>
-        <demo-block title="自定义样式" transparent>
+        <demo-block :title="$t('ziDingYiYangShi')" transparent>
           <wd-grid>
             <wd-grid-item
               custom-class="custom-item"
@@ -100,7 +100,7 @@
             <wd-grid-item custom-class="custom-item" icon="setting" text="秉承客户为先的理念，京东所售商品为正品行货、全国联保、机打发票。" />
           </wd-grid>
         </demo-block>
-        <demo-block title="正方形格子" transparent>
+        <demo-block :title="$t('zheng-fang-xing-ge-zi')" transparent>
           <wd-grid square :column="4" :gutter="10">
             <wd-grid-item icon="picture" text="文字" />
             <wd-grid-item icon="picture" text="文字" />
@@ -112,7 +112,7 @@
             <wd-grid-item icon="picture" text="文字" />
           </wd-grid>
         </demo-block>
-        <demo-block title="设定格间隙" transparent>
+        <demo-block :title="$t('she-ding-ge-jian-xi')" transparent>
           <wd-grid :gutter="10" :column="4">
             <wd-grid-item icon="picture" text="文字" />
             <wd-grid-item icon="picture" text="文字" />
@@ -124,13 +124,13 @@
             <wd-grid-item icon="picture" text="文字" />
           </wd-grid>
         </demo-block>
-        <demo-block title="页面导航" transparent>
+        <demo-block :title="$t('ye-mian-dao-hang')" transparent>
           <wd-grid clickable>
             <wd-grid-item link-type="redirectTo" url="/pages/button/Index" @itemclick="click" icon="edit-outline" text="Redirect to ..." />
             <wd-grid-item link-type="navigateTo" url="/pages/button/Index" @itemclick="click" icon="edit-outline" text="Navigate to ..." />
           </wd-grid>
         </demo-block>
-        <demo-block title="提示信息" transparent>
+        <demo-block :title="$t('ti-shi-xin-xi')" transparent>
           <wd-grid>
             <wd-grid-item is-dot icon="goods" text="文字" />
             <wd-grid-item :value="100" :max="99" icon="computer" text="文字" />
@@ -144,12 +144,14 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { joy } from '../images/joy'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const img = ref<string>(joy)
 
 const toast = useToast()
 function click() {
-  toast.show('成功跳转')
+  toast.show(t('cheng-gong-tiao-zhuan'))
 }
 </script>
 <style lang="scss" scoped>

@@ -1,12 +1,12 @@
 <template>
   <page-wraper :use-wx-ad="false">
     <div class="ad-completion-message">
-      <div class="message-title">感谢你愿意来观看广告！</div>
-      <div class="message-content">观看成功就已经成功为我助力！</div>
-      <div class="message-content">观看一次即可在24h内免除页面贴片和插屏广告！</div>
+      <div class="message-title">{{ $t('gan-xie-ni-yuan-yi-lai-guan-kan-guang-gao') }}</div>
+      <div class="message-content">{{ $t('guan-kan-cheng-gong-jiu-yi-jing-cheng-gong-wei-wo-zhu-li') }}</div>
+      <div class="message-content">{{ $t('guan-kan-yi-ci-ji-ke-zai-24h-nei-mian-chu-ye-mian-tie-pian-he-cha-ping-guang-gao') }}</div>
       <view class="button-group">
-        <wd-button type="success" block @click="back">返回使用</wd-button>
-        <wd-button type="error" block @click="showAd">观看视频</wd-button>
+        <wd-button type="success" block @click="back">{{ $t('fan-hui-shi-yong') }}</wd-button>
+        <wd-button type="error" block @click="showAd">{{ $t('guan-kan-shi-pin') }}</wd-button>
       </view>
     </div>
   </page-wraper>

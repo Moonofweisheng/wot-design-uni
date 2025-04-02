@@ -2,17 +2,17 @@
   <wd-toast></wd-toast>
 
   <page-wraper>
-    <demo-block title="基本用法" transparent>
+    <demo-block :title="$t('jiBenYongFa')" transparent>
       <wd-cell-group border>
-        <wd-cell title="默认键盘" is-link @click="showKeyBoard(1)" />
-        <wd-cell title="带右侧栏的键盘" is-link @click="showKeyBoard(2)" />
-        <wd-cell title="身份证键盘" is-link @click="showKeyBoard(3)" />
-        <wd-cell title="带标题的键盘" is-link @click="showKeyBoard(4)" />
-        <wd-cell title="slot自定义标题" is-link @click="showKeyBoard(9)" />
-        <wd-cell title="多个额外按键" is-link @click="showKeyBoard(5)" />
-        <wd-cell title="随机数字键盘" is-link @click="showKeyBoard(6)" />
-        <wd-cell title="双向绑定" clickable :value="value1" @click="showKeyBoard(7)" />
-        <wd-cell title="展示蒙层" clickable @click="showKeyBoard(8)" />
+        <wd-cell :title="$t('mo-ren-jian-pan')" is-link @click="showKeyBoard(1)" />
+        <wd-cell :title="$t('dai-you-ce-lan-de-jian-pan')" is-link @click="showKeyBoard(2)" />
+        <wd-cell :title="$t('shen-fen-zheng-jian-pan')" is-link @click="showKeyBoard(3)" />
+        <wd-cell :title="$t('dai-biao-ti-de-jian-pan')" is-link @click="showKeyBoard(4)" />
+        <wd-cell :title="$t('slot-zi-ding-yi-biao-ti')" is-link @click="showKeyBoard(9)" />
+        <wd-cell :title="$t('duo-geewai-an-jian')" is-link @click="showKeyBoard(5)" />
+        <wd-cell :title="$t('sui-ji-shu-zi-jian-pan')" is-link @click="showKeyBoard(6)" />
+        <wd-cell :title="$t('shuang-xiang-bang-ding')" clickable :value="value1" @click="showKeyBoard(7)" />
+        <wd-cell :title="$t('zhan-shi-meng-ceng')" clickable @click="showKeyBoard(8)" />
       </wd-cell-group>
     </demo-block>
 
@@ -21,26 +21,33 @@
       v-model:visible="visible2"
       mode="custom"
       extra-key="."
-      close-text="完成"
+      :close-text="$t('wan-cheng')"
       @input="onInput"
       @delete="onDelete"
     ></wd-number-keyboard>
-    <wd-number-keyboard v-model:visible="visible3" extra-key="X" close-text="完成" @input="onInput" @delete="onDelete" />
+    <wd-number-keyboard v-model:visible="visible3" extra-key="X" :close-text="$t('wan-cheng')" @input="onInput" @delete="onDelete" />
     <wd-number-keyboard
       v-model:visible="visible4"
-      title="输入密码"
+      :title="$t('shu-ru-mi-ma')"
       extra-key="."
-      close-text="完成"
+      :close-text="$t('wan-cheng')"
       @input="onInput"
       @delete="onDelete"
     ></wd-number-keyboard>
-    <wd-number-keyboard v-model:visible="visible9" extra-key="." close-text="完成" @input="onInput" @delete="onDelete">
+    <wd-number-keyboard v-model:visible="visible9" extra-key="." :close-text="$t('wan-cheng')" @input="onInput" @delete="onDelete">
       <template #title>
-        <text style="color: red">自定义标题</text>
+        <text style="color: red">{{ $t('zi-ding-yi-biao-ti') }}</text>
       </template>
     </wd-number-keyboard>
 
-    <wd-number-keyboard v-model:visible="visible5" mode="custom" :extra-key="['00', '.']" close-text="完成" @input="onInput" @delete="onDelete" />
+    <wd-number-keyboard
+      v-model:visible="visible5"
+      mode="custom"
+      :extra-key="['00', '.']"
+      :close-text="$t('wan-cheng')"
+      @input="onInput"
+      @delete="onDelete"
+    />
 
     <wd-number-keyboard v-model:visible="visible6" random-key-order @input="onInput" @delete="onDelete" />
 
@@ -48,9 +55,9 @@
       v-model="value1"
       :maxlength="6"
       v-model:visible="visible7"
-      title="键盘标题"
+      :title="$t('jian-pan-biao-ti')"
       extra-key="."
-      close-text="完成"
+      :close-text="$t('wan-cheng')"
       @input="onInput"
       @delete="onDelete"
     ></wd-number-keyboard>
@@ -61,6 +68,8 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { show: showToast } = useToast()
 const visible1 = ref<boolean>(false)
 const visible2 = ref<boolean>(false)
@@ -81,6 +90,6 @@ function showKeyBoard(index: number) {
 }
 
 const onInput = (value: string) => showToast(`${value}`)
-const onDelete = () => showToast('删除')
+const onDelete = () => showToast(t('shan-chu'))
 </script>
 <style lang="scss" scoped></style>

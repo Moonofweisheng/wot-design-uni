@@ -1,11 +1,11 @@
 <template>
   <page-wraper>
     <demo-block>
-      <wd-checkbox shape="square" size="large" v-model="isSquare">显示方形</wd-checkbox>
-      <wd-checkbox shape="square" size="large" v-model="isCustomIcon">自定义图标</wd-checkbox>
-      <wd-checkbox shape="square" size="large" v-model="isTop">自定义距离</wd-checkbox>
-      <wd-checkbox shape="square" size="large" v-model="isStyle">自定义样式</wd-checkbox>
-      <wd-checkbox shape="square" size="large" v-model="isDuration">自定义返回顶部滚动时间</wd-checkbox>
+      <wd-checkbox shape="square" size="large" v-model="isSquare">{{ $t('xianShiFangXing') }}</wd-checkbox>
+      <wd-checkbox shape="square" size="large" v-model="isCustomIcon">{{ $t('ziDingYiTuBiao') }}</wd-checkbox>
+      <wd-checkbox shape="square" size="large" v-model="isTop">{{ $t('ziDingYiJuLi') }}</wd-checkbox>
+      <wd-checkbox shape="square" size="large" v-model="isStyle">{{ $t('ziDingYiYangShi') }}</wd-checkbox>
+      <wd-checkbox shape="square" size="large" v-model="isDuration">{{ $t('ziDingYiFanHuiDingBuGunDongShiJian') }}</wd-checkbox>
     </demo-block>
     <wd-backtop
       v-if="isCustomIcon"

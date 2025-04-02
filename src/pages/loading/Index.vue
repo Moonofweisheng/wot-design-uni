@@ -1,24 +1,24 @@
 <template>
   <page-wraper>
-    <demo-block title="基本用法（适用于按钮加载状态和页面轻提示）">
+    <demo-block :title="$t('ji-ben-yong-fa-shi-yong-yu-an-niu-jia-zai-zhuang-tai-he-ye-mian-qing-ti-shi')">
       <view class="flex">
         <wd-loading custom-class="loading" />
       </view>
     </demo-block>
 
-    <demo-block title="outline 类型（适用于通用模块加载）">
+    <demo-block :title="$t('outline-lei-xing-shi-yong-yu-tong-yong-mo-kuai-jia-zai')">
       <view class="flex">
         <wd-loading type="outline" custom-class="loading" />
       </view>
     </demo-block>
 
-    <demo-block title="修改颜色">
+    <demo-block :title="$t('xiu-gai-yan-se')">
       <view class="flex">
         <wd-loading custom-class="loading" color="#fa34aa" />
       </view>
     </demo-block>
 
-    <demo-block title="修改指示器大小">
+    <demo-block :title="$t('xiu-gai-zhi-shi-qi-da-xiao')">
       <view class="flex">
         <wd-loading custom-class="loading" :size="20" />
         <wd-loading custom-class="loading" :size="30" />

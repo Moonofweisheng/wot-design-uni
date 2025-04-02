@@ -7,7 +7,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Wot Design Uni"
+        // #ifdef MP
+        "navigationBarTitleText": "首页",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%index-title%"
+        // #endif
       }
     },
     {
@@ -17,7 +22,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Button 按钮"
+        // #ifdef MP
+        "navigationBarTitleText": "Button 按钮",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%button-title%"
+        // #endif
       }
     },
     {
@@ -27,7 +37,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Icon 图标"
+        // #ifdef MP
+        "navigationBarTitleText": "Icon 图标",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%icon-title%"
+        // #endif
       }
     },
     {
@@ -37,7 +52,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Badge 徽标"
+        // #ifdef MP
+        "navigationBarTitleText": "Badge 徽标",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%badge-title%"
+        // #endif
       }
     },
     {
@@ -47,7 +67,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Cell 单元格"
+        // #ifdef MP
+        "navigationBarTitleText": "Cell 单元格",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%cell-title%"
+        // #endif
       }
     },
     {
@@ -57,7 +82,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Rate 评分"
+        // #ifdef MP
+        "navigationBarTitleText": "Rate 评分",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%rate-title%"
+        // #endif
       }
     },
     {
@@ -67,7 +97,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Slider 滑块"
+        // #ifdef MP
+        "navigationBarTitleText": "Slider 滑块",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%slider-title%"
+        // #endif
       }
     },
     {
@@ -77,7 +112,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Layout 布局"
+        // #ifdef MP
+        "navigationBarTitleText": "Layout 布局",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%layout-title%"
+        // #endif
       }
     },
     {
@@ -87,7 +127,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Card 卡片"
+        // #ifdef MP
+        "navigationBarTitleText": "Card 卡片",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%card-title%"
+        // #endif
       }
     },
     {
@@ -97,7 +142,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Tag 标签"
+        // #ifdef MP
+        "navigationBarTitleText": "Tag 标签",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%tag-title%"
+        // #endif
       }
     },
     {
@@ -107,7 +157,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Search 搜索框"
+        // #ifdef MP
+        "navigationBarTitleText": "Search 搜索",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%search-title%"
+        // #endif
       }
     },
     {
@@ -117,7 +172,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Transition 动画"
+        // #ifdef MP
+        "navigationBarTitleText": "Transition 动画",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%transition-title%"
+        // #endif
       }
     },
     {
@@ -127,7 +187,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Popup 弹出层"
+        // #ifdef MP
+        "navigationBarTitleText": "Popup 弹出层",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%popup-title%"
+        // #endif
       }
     },
     {
@@ -137,7 +202,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Divider 分割线"
+        // #ifdef MP
+        "navigationBarTitleText": "Divider 分割线",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%divider-title%"
+        // #endif
       }
     },
     {
@@ -147,7 +217,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Switch 开关"
+        // #ifdef MP
+        "navigationBarTitleText": "Switch 开关",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%switch-title%"
+        // #endif
       }
     },
     {
@@ -157,7 +232,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Input 输入框"
+        // #ifdef MP
+        "navigationBarTitleText": "Input 输入框",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%input-title%"
+        // #endif
       }
     },
     {
@@ -167,7 +247,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Textarea 文本域"
+        // #ifdef MP
+        "navigationBarTitleText": "Textarea 多行输入框",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%textarea-title%"
+        // #endif
       }
     },
     {
@@ -177,7 +262,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "MessageBox 弹框"
+        // #ifdef MP
+        "navigationBarTitleText": "MessageBox 弹框",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%messagebox-title%"
+        // #endif
       }
     },
     {
@@ -187,7 +277,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Toast 轻提示"
+        // #ifdef MP
+        "navigationBarTitleText": "Toast 轻提示",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%toast-title%"
+        // #endif
       }
     },
     {
@@ -197,7 +292,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Notify 消息通知"
+        // #ifdef MP
+        "navigationBarTitleText": "Notify 消息通知",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%notify-title%"
+        // #endif
       }
     },
     {
@@ -207,7 +307,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Loading 加载指示器"
+        // #ifdef MP
+        "navigationBarTitleText": "Loading 加载",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%loading-title%"
+        // #endif
       }
     },
     {
@@ -217,7 +322,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Progress 进度条"
+        // #ifdef MP
+        "navigationBarTitleText": "Progress 进度条",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%progress-title%"
+        // #endif
       }
     },
     {
@@ -227,7 +337,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "StatusTip 缺省提示"
+        // #ifdef MP
+        "navigationBarTitleText": "StatusTip 缺省提示",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%statustip-title%"
+        // #endif
       }
     },
     {
@@ -237,7 +352,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "InputNumber 计数器"
+        // #ifdef MP
+        "navigationBarTitleText": "InputNumber 计数器",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%inputnumber-title%"
+        // #endif
       }
     },
     {
@@ -247,7 +367,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "loadmore 加载更多"
+        // #ifdef MP
+        "navigationBarTitleText": "Loadmore 加载更多",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%loadmore-title%"
+        // #endif
       }
     },
     {
@@ -257,7 +382,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Resize 监听元素尺寸变化"
+        // #ifdef MP
+        "navigationBarTitleText": "Resize 监听变化",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%resize-title%"
+        // #endif
       }
     },
     {
@@ -267,7 +397,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Sticky 粘性布局"
+        // #ifdef MP
+        "navigationBarTitleText": "Sticky 粘性布局",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%sticky-title%"
+        // #endif
       }
     },
     {
@@ -277,7 +412,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Img 图片"
+        // #ifdef MP
+        "navigationBarTitleText": "Img 图片",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%img-title%"
+        // #endif
       }
     },
     {
@@ -287,7 +427,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "ImgCropper 图片裁剪"
+        // #ifdef MP
+        "navigationBarTitleText": "ImgCropper 图片裁剪",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%imgcropper-title%"
+        // #endif
       }
     },
     {
@@ -297,7 +442,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Pagination 分页"
+        // #ifdef MP
+        "navigationBarTitleText": "Pagination 分页",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%pagination-title%"
+        // #endif
       }
     },
     {
@@ -307,7 +457,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "SortButton 排序按钮"
+        // #ifdef MP
+        "navigationBarTitleText": "SortButton 排序按钮",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%sortbutton-title%"
+        // #endif
       }
     },
     {
@@ -317,7 +472,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "ActionSheet 动作面板"
+        // #ifdef MP
+        "navigationBarTitleText": "ActionSheet 动作面板",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%actionsheet-title%"
+        // #endif
       }
     },
     {
@@ -327,7 +487,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Curtain 幕帘"
+        // #ifdef MP
+        "navigationBarTitleText": "Curtain 幕帘",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%curtain-title%"
+        // #endif
       }
     },
     {
@@ -337,7 +502,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "NoticeBar 通知栏"
+        // #ifdef MP
+        "navigationBarTitleText": "NoticeBar 通知栏",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%noticebar-title%"
+        // #endif
       }
     },
     {
@@ -347,7 +517,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "popover"
+        // #ifdef MP
+        "navigationBarTitleText": "Popover 气泡弹出框",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%popover-title%"
+        // #endif
       }
     },
     {
@@ -357,7 +532,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Tooltip 文字提示"
+        // #ifdef MP
+        "navigationBarTitleText": "Tooltip 文字提示",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%tooltip-title%"
+        // #endif
       }
     },
     {
@@ -367,7 +547,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "PickerView 选择器视图"
+        // #ifdef MP
+        "navigationBarTitleText": "PickerView 选择器视图",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%pickerview-title%"
+        // #endif
       }
     },
     {
@@ -377,7 +562,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Picker 选择器"
+        // #ifdef MP
+        "navigationBarTitleText": "Picker 选择器",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%picker-title%"
+        // #endif
       }
     },
     {
@@ -387,7 +577,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Tab 标签页"
+        // #ifdef MP
+        "navigationBarTitleText": "Tabs 标签页",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%tabs-title%"
+        // #endif
       }
     },
     {
@@ -397,7 +592,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Radio 单选框"
+        // #ifdef MP
+        "navigationBarTitleText": "Radio 单选框",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%radio-title%"
+        // #endif
       }
     },
     {
@@ -407,7 +607,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Checkbox 复选框"
+        // #ifdef MP
+        "navigationBarTitleText": "Checkbox 复选框",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%checkbox-title%"
+        // #endif
       }
     },
     {
@@ -417,7 +622,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "ColPicker 多列选择器"
+        // #ifdef MP
+        "navigationBarTitleText": "ColPicker 多列选择器",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%colpicker-title%"
+        // #endif
       }
     },
     {
@@ -427,7 +637,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "SelectPicker 单复选选择器"
+        // #ifdef MP
+        "navigationBarTitleText": "SelectPicker 选择器",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%selectpicker-title%"
+        // #endif
       }
     },
     {
@@ -437,7 +652,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "DropMenu 下拉菜单"
+        // #ifdef MP
+        "navigationBarTitleText": "DropMenu 下拉菜单",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%dropmenu-title%"
+        // #endif
       }
     },
     {
@@ -447,7 +667,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Grid 宫格"
+        // #ifdef MP
+        "navigationBarTitleText": "Grid 宫格",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%grid-title%"
+        // #endif
       }
     },
     {
@@ -457,7 +682,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "SwipeAction 滑动操作"
+        // #ifdef MP
+        "navigationBarTitleText": "SwipeAction 滑动操作",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%swipeaction-title%"
+        // #endif
       }
     },
     {
@@ -467,7 +697,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Skeleton 骨架屏"
+        // #ifdef MP
+        "navigationBarTitleText": "Skeleton 骨架屏",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%skeleton-title%"
+        // #endif
       }
     },
     {
@@ -477,7 +712,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Steps 标签页"
+        // #ifdef MP
+        "navigationBarTitleText": "Steps 步骤条",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%steps-title%"
+        // #endif
       }
     },
     {
@@ -487,7 +727,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Upload 上传"
+        // #ifdef MP
+        "navigationBarTitleText": "Upload 上传",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%upload-title%"
+        // #endif
       }
     },
     {
@@ -497,7 +742,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "CalendarView 日历面板组件"
+        // #ifdef MP
+        "navigationBarTitleText": "CalendarView 日历面板组件",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%calendarview-title%"
+        // #endif
       }
     },
     {
@@ -507,7 +757,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Calendar 日历选择器"
+        // #ifdef MP
+        "navigationBarTitleText": "Calendar 日历选择器",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%calendar-title%"
+        // #endif
       }
     },
     {
@@ -517,7 +772,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "DatetimePickerView 日期时间选择器视图"
+        // #ifdef MP
+        "navigationBarTitleText": "DatetimePickerView 日期时间选择器视图",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%datetimepickerview-title%"
+        // #endif
       }
     },
     {
@@ -527,7 +787,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "DatetimePicker 日期时间选择器"
+        // #ifdef MP
+        "navigationBarTitleText": "DatetimePicker 日期时间选择器",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%datetimepicker-title%"
+        // #endif
       }
     },
     {
@@ -537,7 +802,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Form 表单"
+        // #ifdef MP
+        "navigationBarTitleText": "Form 表单",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%form-title%"
+        // #endif
       }
     },
     {
@@ -547,7 +817,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "动态表单"
+        // #ifdef MP
+        "navigationBarTitleText": "动态表单",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%form-demo1-title%"
+        // #endif
       }
     },
     {
@@ -557,7 +832,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "失焦校验"
+        // #ifdef MP
+        "navigationBarTitleText": "失焦校验",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%form-demo2-title%"
+        // #endif
       }
     },
     {
@@ -567,7 +847,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "复杂表单"
+        // #ifdef MP
+        "navigationBarTitleText": "复杂表单",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%form-demo3-title%"
+        // #endif
       }
     },
     {
@@ -577,7 +862,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Collapse 折叠面板"
+        // #ifdef MP
+        "navigationBarTitleText": "Collapse 折叠面板",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%collapse-title%"
+        // #endif
       }
     },
     {
@@ -587,7 +877,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "ConfigProvider 全局配置"
+        // #ifdef MP
+        "navigationBarTitleText": "ConfigProvider 全局配置",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%configprovider-title%"
+        // #endif
       }
     },
     {
@@ -597,7 +892,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Watermark 水印"
+        // #ifdef MP
+        "navigationBarTitleText": "Watermark 水印",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%watermark-title%"
+        // #endif
       }
     },
     {
@@ -607,7 +907,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Circle 环形进度条"
+        // #ifdef MP
+        "navigationBarTitleText": "Circle 环形进度条",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%circle-title%"
+        // #endif
       }
     },
     {
@@ -617,7 +922,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Swiper 轮播图"
+        // #ifdef MP
+        "navigationBarTitleText": "Swiper 轮播",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%swiper-title%"
+        // #endif
       }
     },
     {
@@ -627,7 +937,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Segmented 分段器"
+        // #ifdef MP
+        "navigationBarTitleText": "Segmented 分段器",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%segmented-title%"
+        // #endif
       }
     },
     {
@@ -637,7 +952,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Tabbar 标签栏"
+        // #ifdef MP
+        "navigationBarTitleText": "Tabbar 标签栏",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%tabbar-title%"
+        // #endif
       }
     },
     {
@@ -647,7 +967,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Overlay 遮罩层"
+        // #ifdef MP
+        "navigationBarTitleText": "Overlay 遮罩层",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%overlay-title%"
+        // #endif
       }
     },
     {
@@ -657,7 +982,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
+        // #ifdef MP
         "navigationBarTitleText": "Navbar 导航栏",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%navbar-title%",
+        // #endif
         "navigationStyle": "custom"
       }
     },
@@ -668,7 +998,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Table 表格"
+        // #ifdef MP
+        "navigationBarTitleText": "Table 表格",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%table-title%"
+        // #endif
       }
     },
     {
@@ -678,7 +1013,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Sidebar 侧边栏"
+        // #ifdef MP
+        "navigationBarTitleText": "Sidebar 侧边栏",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%sidebar-title%"
+        // #endif
       }
     },
     {
@@ -688,7 +1028,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Sidebar 锚点用法"
+        // #ifdef MP
+        "navigationBarTitleText": "Sidebar 锚点用法",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%sidebar-demo1-title%"
+        // #endif
       }
     },
     {
@@ -698,7 +1043,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Sidebar 切换页面"
+        // #ifdef MP
+        "navigationBarTitleText": "Sidebar 切换页面",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%sidebar-demo2-title%"
+        // #endif
       }
     },
     {
@@ -708,7 +1058,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Sidebar 自定义图标"
+        // #ifdef MP
+        "navigationBarTitleText": "Sidebar 自定义图标",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%sidebar-demo3-title%"
+        // #endif
       }
     },
     {
@@ -718,7 +1073,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "校验提示方式"
+        // #ifdef MP
+        "navigationBarTitleText": "表单校验",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%form-demo4-title%"
+        // #endif
       }
     },
     {
@@ -728,7 +1088,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Fab 悬浮按钮"
+        // #ifdef MP
+        "navigationBarTitleText": "Fab 悬浮按钮",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%fab-title%"
+        // #endif
       }
     },
     {
@@ -738,7 +1103,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Text 文本"
+        // #ifdef MP
+        "navigationBarTitleText": "Text 文本",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%text-title%"
+        // #endif
       }
     },
     {
@@ -748,7 +1118,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "CountDown 倒计时"
+        // #ifdef MP
+        "navigationBarTitleText": "CountDown 倒计时",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%countdown-title%"
+        // #endif
       }
     },
     {
@@ -758,7 +1133,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "CountTo 数字滚动"
+        // #ifdef MP
+        "navigationBarTitleText": "CountTo 数字滚动",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%countto-title%"
+        // #endif
       }
     },
     {
@@ -768,7 +1148,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Keyboard 虚拟键盘"
+        // #ifdef MP
+        "navigationBarTitleText": "Keyboard 键盘",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%keyboard-title%"
+        // #endif
       }
     },
     {
@@ -778,7 +1163,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "NumberKeyboard 数字键盘"
+        // #ifdef MP
+        "navigationBarTitleText": "NumberKeyboard 数字键盘",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%numberkeyboard-title%"
+        // #endif
       }
     },
     {
@@ -788,7 +1178,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Gap 间隔槽"
+        // #ifdef MP
+        "navigationBarTitleText": "Gap 间隔",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%gap-title%"
+        // #endif
       }
     },
     {
@@ -798,7 +1193,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "PasswordInput 密码输入框"
+        // #ifdef MP
+        "navigationBarTitleText": "PasswordInput 密码输入框",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%passwordinput-title%"
+        // #endif
       }
     },
     {
@@ -808,7 +1208,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Signature 签名"
+        // #ifdef MP
+        "navigationBarTitleText": "Signature 签名",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%signature-title%"
+        // #endif
       }
     },
     {
@@ -818,7 +1223,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "横屏签名",
+        // #ifdef MP
+        "navigationBarTitleText": "Signature 横屏签名",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%signature-landscape-title%",
+        // #endif
         "pageOrientation": "landscape"
       }
     },
@@ -829,7 +1239,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "Backtop 回到顶部"
+        // #ifdef MP
+        "navigationBarTitleText": "Backtop 回到顶部",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%backtop-title%"
+        // #endif
       }
     },
     {
@@ -839,7 +1254,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "IndexBar 索引栏"
+        // #ifdef MP
+        "navigationBarTitleText": "IndexBar 索引栏",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%indexbar-title%"
+        // #endif
       }
     },
     {
@@ -849,7 +1269,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "floatingPanel 浮动面板"
+        // #ifdef MP
+        "navigationBarTitleText": "FloatingPanel 浮动面板",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%floatingpanel-title%"
+        // #endif
       }
     },
     {
@@ -859,7 +1284,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "感谢激励"
+        // #ifdef MP
+        "navigationBarTitleText": "激励一下",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%wxrewardad-title%"
+        // #endif
       }
     },
     {
@@ -869,7 +1299,12 @@
         "mp-alipay": {
           "allowsBounceVertical": "NO"
         },
-        "navigationBarTitleText": "关于我们"
+        // #ifdef MP
+        "navigationBarTitleText": "关于",
+        // #endif
+        // #ifndef MP
+        "navigationBarTitleText": "%about-title%"
+        // #endif
       }
     }
   ],
@@ -886,7 +1321,12 @@
       },
       {
         "pagePath": "pages/about/Index",
+        // #ifdef MP
         "text": "关于",
+        // #endif
+        // #ifndef MP
+        "text": "%about-title%",
+        // #endif
         "iconPath": "static/icon/about.png",
         "selectedIconPath": "static/icon/about_selected.png"
       }

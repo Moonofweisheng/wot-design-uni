@@ -1,31 +1,31 @@
 <template>
   <page-wraper>
     <wd-toast />
-    <demo-block title="日期选择" transparent>
+    <demo-block :title="$t('ri-qi-xuan-ze-0')" transparent>
       <wd-datetime-picker-view v-model="value1" @change="onChange1" />
     </demo-block>
 
-    <demo-block title="年月日" transparent>
+    <demo-block :title="$t('nian-yue-ri')" transparent>
       <wd-datetime-picker-view type="date" v-model="value2" @change="onChange2" />
     </demo-block>
 
-    <demo-block title="年月" transparent>
+    <demo-block :title="$t('nian-yue')" transparent>
       <wd-datetime-picker-view type="year-month" v-model="value3" @change="onChange3" />
     </demo-block>
 
-    <demo-block title="年" transparent>
+    <demo-block :title="$t('nian-0')" transparent>
       <wd-datetime-picker-view type="year" v-model="value7" @change="onChange7" />
     </demo-block>
 
-    <demo-block title="时分" transparent>
+    <demo-block :title="$t('shi-fen')" transparent>
       <wd-datetime-picker-view type="time" v-model="value4" @change="onChange4" />
     </demo-block>
 
-    <demo-block title="内部格式" transparent>
+    <demo-block :title="$t('nei-bu-ge-shi')" transparent>
       <wd-datetime-picker-view v-model="value5" :formatter="formatter" @change="onChange5" />
     </demo-block>
 
-    <demo-block title="过滤选项" transparent>
+    <demo-block :title="$t('guo-lv-xuan-xiang')" transparent>
       <wd-datetime-picker-view v-model="value6" :filter="filter" @change="onChange6" />
     </demo-block>
   </page-wraper>
@@ -34,6 +34,8 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 import type { DatetimePickerViewFilter, DatetimePickerViewFormatter } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/types'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const value1 = ref<string>('')
 const value2 = ref<number>(Date.now())
@@ -45,15 +47,15 @@ const value7 = ref<string>('')
 const formatter: DatetimePickerViewFormatter = (type, value) => {
   switch (type) {
     case 'year':
-      return value + '年'
+      return value + t('nian-0')
     case 'month':
-      return value + '月'
+      return value + t('yue')
     case 'date':
-      return value + '日'
+      return value + t('ri')
     case 'hour':
-      return value + '时'
+      return value + t('shi')
     case 'minute':
-      return value + '分'
+      return value + t('fen')
     default:
       return value
   }
@@ -68,7 +70,7 @@ const filter: DatetimePickerViewFilter = (type, values) => {
 const toast = useToast()
 
 function onChange1({ value }: any) {
-  toast.show('选择了' + new Date(value))
+  toast.show(t('xuan-ze-le') + new Date(value))
 }
 function onChange2({ value }: any) {
   console.log(value)

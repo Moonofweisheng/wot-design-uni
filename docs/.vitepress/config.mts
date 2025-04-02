@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-03-25 16:27:19
+ * @LastEditTime: 2025-03-29 15:02:23
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
@@ -10,8 +10,9 @@
 import { defineConfig } from 'vitepress';
 import viteCompression from 'vite-plugin-compression'
 import { fileURLToPath, URL } from 'node:url'
-
 import { MarkdownTransform } from './plugins/markdown-transform'
+import enUS from './locales/en-US'
+import zhCN from './locales/zh-CN'
 
 
 export default defineConfig({
@@ -64,6 +65,18 @@ export default defineConfig({
   },
   title: `Wot Design Uni`,
   description: '一个参照wot-design打造的uni-app组件库',
+  locales: {
+    root: {
+      label: '简体中文',
+      lang: 'zh-CN',
+      ...zhCN
+    },
+    'en-US': {
+      label: 'English', 
+      lang: 'en-US',
+      ...enUS,
+    }
+  },
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['link', { rel: 'stylesheet', href: '/petercatai/assistant.min.css' }],

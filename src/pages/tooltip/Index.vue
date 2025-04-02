@@ -1,7 +1,7 @@
 <template>
   <page-wraper>
     <view style="overflow: hidden" class="page-tooltip" @click.stop="closeOutside">
-      <demo-block title="基本用法">
+      <demo-block :title="$t('jiBenYongFa')">
         <view class="top">
           <wd-tooltip placement="bottom-start" content="bottom-start 提示文字" @change="handleChange1">
             <wd-button :round="false">bottom-start</wd-button>
@@ -50,28 +50,28 @@
           </wd-tooltip>
         </view>
       </demo-block>
-      <demo-block title="显示关闭按钮">
+      <demo-block :title="$t('xian-shi-guan-bi-an-niu')">
         <view class="demo-left">
           <wd-tooltip content="显示关闭按钮" placement="right" show-close @change="handleChange13">
-            <wd-button :round="false">显示关闭按钮</wd-button>
+            <wd-button :round="false">{{ $t('xian-shi-guan-bi-an-niu-0') }}</wd-button>
           </wd-tooltip>
         </view>
       </demo-block>
-      <demo-block title="多行文本">
+      <demo-block :title="$t('duo-hang-wen-ben')">
         <view class="demo-left lines-demo">
           <wd-tooltip placement="right" use-content-slot @change="handleChange14">
-            <wd-button :round="false">多行文本</wd-button>
+            <wd-button :round="false">{{ $t('duo-hang-wen-ben-0') }}</wd-button>
             <template #content>
               <view class="lines-content">
-                <view>多行文本1</view>
-                <view>多行文本2</view>
-                <view>多行文本3</view>
+                <view>{{ $t('duo-hang-wen-ben-1') }}</view>
+                <view>{{ $t('duo-hang-wen-ben-2') }}</view>
+                <view>{{ $t('duo-hang-wen-ben-3') }}</view>
               </view>
             </template>
           </wd-tooltip>
         </view>
       </demo-block>
-      <demo-block title="控制显隐">
+      <demo-block :title="$t('kong-zhi-xian-yin')">
         <view @click.stop="control">
           <wd-button plain size="small" class="button-control">{{ show ? '关闭' : '打开' }}</wd-button>
         </view>
@@ -81,17 +81,17 @@
           </wd-tooltip>
         </view>
       </demo-block>
-      <demo-block title="绑定change事件">
+      <demo-block :title="$t('bang-ding-change-shi-jian')">
         <view class="demo-left">
           <wd-tooltip placement="right-end" :content="content" @open="onShow" @close="onHide" @change="handleChange16">
-            <wd-button :round="false">事件</wd-button>
+            <wd-button :round="false">{{ $t('shi-jian-0') }}</wd-button>
           </wd-tooltip>
         </view>
       </demo-block>
-      <demo-block title="禁用">
+      <demo-block :title="$t('jinYong')">
         <view class="demo-left">
           <wd-tooltip placement="right-end" content="禁用" disabled @change="handleChange17">
-            <wd-button :round="false">禁用</wd-button>
+            <wd-button :round="false">{{ $t('jinYong') }}</wd-button>
           </wd-tooltip>
         </view>
       </demo-block>
@@ -101,9 +101,11 @@
 <script lang="ts" setup>
 import { useToast, useQueue } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const show = ref<boolean>(false)
-const content = ref<string>('显示内容')
+const content = ref<string>(t('xian-shi-nei-rong'))
 
 const toast = useToast()
 
@@ -116,7 +118,7 @@ function onShow() {
   console.log('显示')
 }
 function onHide() {
-  toast.show('文字提示关闭')
+  toast.show(t('wen-zi-ti-shi-guan-bi'))
 }
 function handleChange1(event: any) {
   console.log(event)

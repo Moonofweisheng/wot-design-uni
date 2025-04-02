@@ -3,6 +3,10 @@
 </p>
 <h1 align="center">Wot Design Uni</h1>
 
+<div align="center">
+<p>简体中文 | <a href="./README_en.md">English</a></p>
+</div>
+
 <p align="center">📱 一个基于vue3+Typescript构建，参照<a href="https://github.com/jd-ftf/wot-design-mini?tab=readme-ov-file">wot-design</a>打造的uni-app组件库</p>
 
 <p align="center">

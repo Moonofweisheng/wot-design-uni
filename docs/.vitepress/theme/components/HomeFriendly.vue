@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useFriendly } from '../composables/friendly'
+import { useData } from 'vitepress'
 import VPFeature from 'vitepress/dist/client/theme-default/components/VPFeature.vue'
 
 const { data } = useFriendly()
+const { lang } = useData()
 
 const links = computed(() => {
-  return data.value.length ? data.value : []
+  return lang.value === 'en-US' ? [] : (data.value.length ? data.value : [])
 })
 
 const grid = computed(() => {
