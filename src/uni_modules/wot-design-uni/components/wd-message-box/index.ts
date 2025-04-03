@@ -9,7 +9,7 @@
  */
 import { inject, provide, ref } from 'vue'
 import type { Message, MessageOptions, MessageOptionsWithCallBack, MessageResult, MessageType } from './types'
-import { deepMerge } from '../common/util'
+import { deepMerge, isDef } from '../common/util'
 
 const messageDefaultOptionKey = '__MESSAGE_OPTION__'
 
@@ -42,11 +42,12 @@ export function useMessage(selector: string = ''): Message {
   const createMethod = (type: MessageType) => {
     // 优先级：options->MessageOptions->defaultOptions
     return (options: MessageOptions | string) => {
-      const messageOptions = deepMerge({ type: type }, typeof options === 'string' ? { title: options } : options) as MessageOptions
+      const onlyTitle = typeof options === 'string'
+      const messageOptions = deepMerge({ type: type }, onlyTitle ? { title: options } : options) as MessageOptions
       if (messageOptions.type === 'confirm' || messageOptions.type === 'prompt') {
-        messageOptions.showCancelButton = true
+        messageOptions.showCancelButton = onlyTitle ? true : isDef(options.showCancelButton) ? options.showCancelButton : true
       } else {
-        messageOptions.showCancelButton = false
+        messageOptions.showCancelButton = onlyTitle ? false : isDef(options.showCancelButton) ? options.showCancelButton : false
       }
       return show(messageOptions)
     }
