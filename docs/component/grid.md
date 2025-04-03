@@ -9,7 +9,7 @@
 `icon` 为 `wd-icon` 标签中的 `name` 属性。
 
 ```html
-<wd-grid>
+<wd-grid clickable>
   <wd-grid-item icon="picture" text="文字" />
   <wd-grid-item icon="picture" text="文字" />
   <wd-grid-item icon="picture" text="文字" />
@@ -221,14 +221,15 @@
 
 ## Grid Attributes
 
-| 参数      | 说明                           | 类型    | 可选值 | 默认值  | 最低版本 |
-| --------- | ------------------------------ | ------- | ------ | ------- | -------- |
-| column    | 列数                           | number  | -      | -       | -        |
-| border    | 是否显示边框                   | boolean | -      | false   | -        |
-| gutter    | 格子之间的间距，默认单位为`px` | number  | -      | -       | -        |
-| square    | 是否将格子固定为正方形         | boolean | -      | false   | -        |
-| clickable | 是否开启格子点击反馈           | boolean | -      | false   | -        |
-| bg-color  | 背景颜色设置                   | string  | -      | #ffffff | -        |
+| 参数        | 说明                           | 类型    | 可选值 | 默认值                       | 最低版本         |
+| ----------- | ------------------------------ | ------- | ------ | ---------------------------- | ---------------- |
+| column      | 列数                           | number  | -      | -                            | -                |
+| border      | 是否显示边框                   | boolean | -      | false                        | -                |
+| gutter      | 格子之间的间距，默认单位为`px` | number  | -      | -                            | -                |
+| square      | 是否将格子固定为正方形         | boolean | -      | false                        | -                |
+| clickable   | 是否开启格子点击反馈           | boolean | -      | false                        | -                |
+| bg-color    | 背景颜色设置                   | string  | -      | #ffffff                      | -                |
+| hover-class | 指定grid-item按下去的样式类    | string  | -      | wd-grid-item__content--hover | $LOWEST_VERSION$ |
 
 ## GridItem Attributes
 
@@ -246,12 +247,12 @@
 | use-icon-slot | 是否开启 `GridItem` icon 插槽                                                                                             | boolean        | -                                           | false  | -        |
 | use-text-slot | 是否开启 `GridItem` text 内容插槽                                                                                         | boolean        | -                                           | false  | -        |
 | icon-size     | 图标大小                                                                                                                  | string         | -                                           | 26px   | -        |
-| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes)	| BadgeProps    | -      | -  | 0.1.50   |
+| badge-props   | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes)                                  | BadgeProps     | -                                           | -      | 0.1.50   |
 
 ## GridItem Events
 
-| 方法名         | 说明           | 参数  | 返回值 | 最低版本 |
-| -------------- | -------------- | ----- | ------ | -------- |
+| 方法名    | 说明           | 参数  | 返回值 | 最低版本 |
+| --------- | -------------- | ----- | ------ | -------- |
 | itemclick | 点击(跳转)事件 | event | -      | -        |
 
 ## Grid Slot

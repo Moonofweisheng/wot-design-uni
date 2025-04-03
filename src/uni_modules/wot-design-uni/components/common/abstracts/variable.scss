@@ -684,6 +684,8 @@ $-grid-item-fs: var(--wot-grid-item-fs, 12px) !default; // 字号
 $-grid-item-bg: var(--wot-grid-item-bg, $-color-white) !default; // 字号
 $-grid-item-padding: var(--wot-grid-item-padding, 14px 0px) !default; // 内容的 padding
 $-grid-item-border-color: var(--wot-grid-item-border-color, $-color-border-light) !default; // 边框颜色
+$-grid-item-hover-bg: var(--wot-grid-item-hover-bg, $-color-gray-3) !default; // hover背景色
+$-grid-item-hover-bg-dark: var(--wot-grid-item-hover-bg-dark, $-color-gray-7) !default; // 暗黑模式hover背景色
 
 /* statustip */
 $-statustip-fs: var(--wot-statustip-fs, $-fs-content) !default; // 字号
