@@ -1,27 +1,18 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-07-29 17:03:39
- * @LastEditTime: 2025-02-13 23:36:41
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-design-uni/src/pages/rate/Index.vue
- * 记得注释
--->
 <template>
   <page-wraper>
-    <demo-block title="基本用法">
+    <demo-block :title="$t('jiBenYongFa')">
       <wd-rate v-model="value1" @change="changeValue1" />
     </demo-block>
 
-    <demo-block title="只读状态 readonly">
+    <demo-block :title="$t('zhi-du-zhuang-tai-readonly')">
       <wd-rate v-model="value2" readonly />
     </demo-block>
 
-    <demo-block title="禁用状态">
+    <demo-block :title="$t('jin-yong-zhuang-tai')">
       <wd-rate v-model="value3" disabled />
     </demo-block>
 
-    <demo-block title="修改选中颜色">
+    <demo-block :title="$t('xiu-gai-xuan-zhong-yan-se')">
       <view style="margin-bottom: 10px">
         <wd-rate v-model="value4" active-color="linear-gradient(180deg, rgba(255,238,0,1) 0%,rgba(250,176,21,1) 100%)" @change="changeValue2" />
       </view>
@@ -34,15 +25,15 @@
       />
     </demo-block>
 
-    <demo-block title="修改icon和选中颜色">
+    <demo-block :title="$t('xiu-gai-icon-he-xuan-zhong-yan-se')">
       <wd-rate v-model="value6" icon="dong" active-icon="dong" active-color="#4D80F0" />
     </demo-block>
 
-    <demo-block title="修改size、space">
+    <demo-block :title="$t('xiu-gai-sizespace')">
       <wd-rate v-model="value7" space="10px" size="30px" />
     </demo-block>
 
-    <demo-block title="允许半选">
+    <demo-block :title="$t('yun-xu-ban-xuan')">
       <wd-rate v-model="value8" allow-half />
     </demo-block>
   </page-wraper>

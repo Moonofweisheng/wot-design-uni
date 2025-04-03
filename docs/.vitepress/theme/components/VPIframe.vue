@@ -100,18 +100,34 @@ function sendMessage() {
   }
 }
 
+// 发送语言信息给iframe
+function sendLanguageMessage() {
+  if (iframe.value?.contentWindow) {
+    iframe.value.contentWindow.postMessage(vitepressData.lang.value, href.value)
+  }
+}
+
 onMounted(() => {
   baseUrl.value = process.env.NODE_ENV === 'production'
     ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/`
     : 'http://localhost:5173/demo/#/'
 
   // 监听 iframe 加载完成事件
-  iframe.value?.addEventListener('load', sendMessage)
+  iframe.value?.addEventListener('load', () => {
+    sendMessage()
+    sendLanguageMessage()
+  })
 })
 
 watch(
   () => vitepressData.isDark.value,
   sendMessage
+)
+
+// 监听语言变化
+watch(
+  () => vitepressData.lang.value,
+  sendLanguageMessage
 )
 </script>
 

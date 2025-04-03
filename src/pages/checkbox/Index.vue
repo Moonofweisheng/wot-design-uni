@@ -1,107 +1,109 @@
 <template>
   <page-wraper>
-    <demo-block title="基本用法">
-      <wd-checkbox v-model="check1">沃特</wd-checkbox>
+    <demo-block :title="$t('jiBenYongFa')">
+      <wd-checkbox v-model="check1">{{ $t('wo-te') }}</wd-checkbox>
     </demo-block>
 
-    <demo-block title="修改形状: square">
-      <wd-checkbox v-model="check2" shape="square">沃特</wd-checkbox>
+    <demo-block :title="$t('xiu-gai-xing-zhuang-square')">
+      <wd-checkbox v-model="check2" shape="square">{{ $t('wo-te') }}</wd-checkbox>
     </demo-block>
 
-    <demo-block title="修改形状: button">
-      <wd-checkbox v-model="check3" shape="button">沃特</wd-checkbox>
+    <demo-block :title="$t('xiu-gai-xing-zhuang-button')">
+      <wd-checkbox v-model="check3" shape="button">{{ $t('wo-te') }}</wd-checkbox>
     </demo-block>
 
-    <demo-block title="修改选中颜色">
-      <wd-checkbox v-model="check4" checked-color="rgb(52, 209, 157)">沃特</wd-checkbox>
+    <demo-block :title="$t('xiu-gai-xuan-zhong-yan-se')">
+      <wd-checkbox v-model="check4" checked-color="rgb(52, 209, 157)">{{ $t('wo-te') }}</wd-checkbox>
     </demo-block>
 
-    <demo-block title="禁用状态">
+    <demo-block :title="$t('jin-yong-zhuang-tai')">
       <view style="margin-bottom: 10px">
         <wd-checkbox-group v-model="value1" disabled>
-          <wd-checkbox :modelValue="1">沃特</wd-checkbox>
-          <wd-checkbox :modelValue="2" :disabled="false">商家后台</wd-checkbox>
-          <wd-checkbox :modelValue="3" shape="square">沃特</wd-checkbox>
-          <wd-checkbox :modelValue="4" shape="square">商家后台</wd-checkbox>
+          <wd-checkbox :modelValue="1">{{ $t('wo-te') }}</wd-checkbox>
+          <wd-checkbox :modelValue="2" :disabled="false">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
+          <wd-checkbox :modelValue="3" shape="square">{{ $t('wo-te') }}</wd-checkbox>
+          <wd-checkbox :modelValue="4" shape="square">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
         </wd-checkbox-group>
       </view>
       <wd-checkbox-group v-model="value2" disabled>
-        <wd-checkbox :modelValue="1" shape="button">沃特</wd-checkbox>
-        <wd-checkbox :modelValue="2" shape="button">商家后台</wd-checkbox>
+        <wd-checkbox :modelValue="1" shape="button">{{ $t('wo-te') }}</wd-checkbox>
+        <wd-checkbox :modelValue="2" shape="button">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
       </wd-checkbox-group>
     </demo-block>
 
-    <demo-block :title="`修改 true-value 和 false-value ${value3}`">
-      <wd-checkbox v-model="value3" true-value="沃特" false-value="商家后台" @change="handleChange1">复选框</wd-checkbox>
+    <demo-block :title="$t('xiu-gai-truevalue-he-falsevalue-value3') + value3">
+      <wd-checkbox v-model="value3" :true-value="$t('wo-te')" :false-value="$t('shang-jia-hou-tai')" @change="handleChange1">
+        {{ $t('fu-xuan-kuang') }}
+      </wd-checkbox>
     </demo-block>
 
-    <demo-block title="同行展示">
+    <demo-block :title="$t('tong-hang-zhan-shi')">
       <wd-checkbox-group v-model="value4" inline>
-        <wd-checkbox :modelValue="1">沃特</wd-checkbox>
-        <wd-checkbox :modelValue="2">商家后台</wd-checkbox>
+        <wd-checkbox :modelValue="1">{{ $t('wo-te') }}</wd-checkbox>
+        <wd-checkbox :modelValue="2">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
       </wd-checkbox-group>
     </demo-block>
 
-    <demo-block title="复选框组">
+    <demo-block :title="$t('fu-xuan-kuang-zu')">
       <wd-checkbox-group v-model="value5">
-        <wd-checkbox :modelValue="1">沃特</wd-checkbox>
-        <wd-checkbox :modelValue="2">商家后台</wd-checkbox>
+        <wd-checkbox :modelValue="1">{{ $t('wo-te') }}</wd-checkbox>
+        <wd-checkbox :modelValue="2">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
       </wd-checkbox-group>
     </demo-block>
 
-    <demo-block title="表单模式---复选框组" transparent>
+    <demo-block :title="$t('biao-dan-mo-shi-fu-xuan-kuang-zu')" transparent>
       <wd-checkbox-group v-model="value6" cell>
-        <wd-checkbox :modelValue="1">沃特</wd-checkbox>
-        <wd-checkbox :modelValue="2">商家后台</wd-checkbox>
+        <wd-checkbox :modelValue="1">{{ $t('wo-te') }}</wd-checkbox>
+        <wd-checkbox :modelValue="2">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
       </wd-checkbox-group>
     </demo-block>
 
-    <demo-block title="表单模式---复选框按钮组" transparent>
+    <demo-block :title="$t('biao-dan-mo-shi-fu-xuan-kuang-an-niu-zu')" transparent>
       <wd-checkbox-group v-model="value7" cell shape="button">
-        <wd-checkbox :modelValue="1" disabled>选项一</wd-checkbox>
-        <wd-checkbox :modelValue="2">选项二</wd-checkbox>
-        <wd-checkbox :modelValue="3">选项三</wd-checkbox>
-        <wd-checkbox :modelValue="4">选项四</wd-checkbox>
-        <wd-checkbox :modelValue="5">选项五</wd-checkbox>
-        <wd-checkbox :modelValue="6">选项六</wd-checkbox>
-        <wd-checkbox :modelValue="7">选项七</wd-checkbox>
+        <wd-checkbox :modelValue="1" disabled>{{ $t('xuan-xiang-yi') }}</wd-checkbox>
+        <wd-checkbox :modelValue="2">{{ $t('xuan-xiang-er') }}</wd-checkbox>
+        <wd-checkbox :modelValue="3">{{ $t('xuan-xiang-san') }}</wd-checkbox>
+        <wd-checkbox :modelValue="4">{{ $t('xuan-xiang-si') }}</wd-checkbox>
+        <wd-checkbox :modelValue="5">{{ $t('xuan-xiang-wu') }}</wd-checkbox>
+        <wd-checkbox :modelValue="6">{{ $t('xuan-xiang-liu') }}</wd-checkbox>
+        <wd-checkbox :modelValue="7">{{ $t('xuan-xiang-qi') }}</wd-checkbox>
       </wd-checkbox-group>
     </demo-block>
 
-    <demo-block title="设置最小选中数量和最大选中数量" transparent>
+    <demo-block :title="$t('she-zhi-zui-xiao-xuan-zhong-shu-liang-he-zui-da-xuan-zhong-shu-liang')" transparent>
       <wd-checkbox-group v-model="value8" :min="1" :max="3" cell>
-        <wd-checkbox :modelValue="1">京东</wd-checkbox>
-        <wd-checkbox :modelValue="2">沃特</wd-checkbox>
-        <wd-checkbox :modelValue="3">商家后台</wd-checkbox>
-        <wd-checkbox :modelValue="4">营销中心</wd-checkbox>
+        <wd-checkbox :modelValue="1">{{ $t('jing-dong') }}</wd-checkbox>
+        <wd-checkbox :modelValue="2">{{ $t('wo-te') }}</wd-checkbox>
+        <wd-checkbox :modelValue="3">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
+        <wd-checkbox :modelValue="4">{{ $t('ying-xiao-zhong-xin') }}</wd-checkbox>
       </wd-checkbox-group>
     </demo-block>
 
-    <demo-block title="大尺寸">
+    <demo-block :title="$t('da-chi-cun')">
       <wd-checkbox-group v-model="value9" inline size="large">
-        <wd-checkbox modelValue="jingmai">沃特</wd-checkbox>
-        <wd-checkbox modelValue="shop">商家后台</wd-checkbox>
+        <wd-checkbox modelValue="jingmai">{{ $t('wo-te') }}</wd-checkbox>
+        <wd-checkbox modelValue="shop">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
       </wd-checkbox-group>
       <wd-checkbox-group v-model="value10" size="large" class="group">
-        <wd-checkbox modelValue="jingmai">沃特</wd-checkbox>
-        <wd-checkbox modelValue="shop">商家后台</wd-checkbox>
+        <wd-checkbox modelValue="jingmai">{{ $t('wo-te') }}</wd-checkbox>
+        <wd-checkbox modelValue="shop">{{ $t('shang-jia-hou-tai') }}</wd-checkbox>
       </wd-checkbox-group>
     </demo-block>
 
-    <demo-block title="结合Cell使用" transparent>
+    <demo-block :title="$t('jie-he-cell-shi-yong')" transparent>
       <wd-cell-group border>
         <wd-checkbox-group v-model="value10" size="large">
-          <wd-cell title="点赞" center clickable @click="handleCheck1">
+          <wd-cell :title="$t('dian-zan')" center clickable @click="handleCheck1">
             <view @click.stop="noop">
               <wd-checkbox model-value="1" ref="checkBox1" custom-style="margin:0;"></wd-checkbox>
             </view>
           </wd-cell>
-          <wd-cell title="投币" center clickable @click="handleCheck2">
+          <wd-cell :title="$t('tou-bi')" center clickable @click="handleCheck2">
             <view @click.stop="noop">
               <wd-checkbox model-value="2" ref="checkBox2" custom-style="margin:0;"></wd-checkbox>
             </view>
           </wd-cell>
-          <wd-cell title="一键三连" center clickable @click="handleCheck3">
+          <wd-cell :title="$t('yi-jian-san-lian')" center clickable @click="handleCheck3">
             <view @click.stop="noop">
               <wd-checkbox model-value="3" ref="checkBox3" custom-style="margin:0;"></wd-checkbox>
             </view>
@@ -114,6 +116,9 @@
 <script lang="ts" setup>
 import type { CheckboxInstance } from '@/uni_modules/wot-design-uni/components/wd-checkbox/types'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const checkBox1 = ref<CheckboxInstance>()
 const checkBox2 = ref<CheckboxInstance>()
@@ -143,7 +148,7 @@ const value0 = ref<number[]>([1, 2, 3])
 
 const value1 = ref<number[]>([1, 3])
 const value2 = ref<number[]>([1])
-const value3 = ref<string>('沃特')
+const value3 = ref<string>(t('wo-te-12'))
 
 const value4 = ref<number[]>([1])
 const value5 = ref<number[]>([])

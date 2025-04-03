@@ -1,24 +1,24 @@
 <template>
   <view>
     <page-wraper>
-      <demo-block title="Fade 动画">
+      <demo-block :title="$t('fade-dong-hua')">
         <wd-button @click="fade">fade</wd-button>
         <wd-button @click="fadeUp">fade-up</wd-button>
         <wd-button @click="fadeDown">fade-down</wd-button>
         <wd-button @click="fadeLeft">fade-left</wd-button>
         <wd-button @click="fadeRight">fade-right</wd-button>
       </demo-block>
-      <demo-block title="Slide 动画">
+      <demo-block :title="$t('slide-dong-hua')">
         <wd-button @click="slideUp">slide-up</wd-button>
         <wd-button @click="slideDown">slide-down</wd-button>
         <wd-button @click="slideLeft">slide-left</wd-button>
         <wd-button @click="slideRight">slide-right</wd-button>
       </demo-block>
-      <demo-block title="Zoom 动画">
+      <demo-block :title="$t('zoom-dong-hua')">
         <wd-button @click="zoomIn">zoom-in</wd-button>
         <wd-button @click="zoomOut">zoom-out</wd-button>
       </demo-block>
-      <demo-block title="自定义动画">
+      <demo-block :title="$t('zi-ding-yi-dong-hua')">
         <wd-button @click="custom">custom</wd-button>
       </demo-block>
 

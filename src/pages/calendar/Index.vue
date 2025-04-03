@@ -3,20 +3,20 @@
     <wd-toast />
     <view style="margin: 20px 0">
       <wd-cell-group border>
-        <wd-calendar label="单个日期选择" v-model="value1" @confirm="handleConfirm1" />
-        <wd-calendar label="多个日期选择" type="dates" v-model="value2" @confirm="handleConfirm2" />
-        <wd-calendar label="日期范围选择" type="daterange" v-model="value3" />
-        <wd-calendar label="日期时间选择" type="datetime" v-model="value4" />
-        <wd-calendar label="日期时间范围选择" type="datetimerange" v-model="value5" />
-        <wd-calendar label="周选择" type="week" v-model="value6" />
-        <wd-calendar label="月选择" type="month" :min-date="minDate" v-model="value7" />
-        <wd-calendar label="周范围选择" :first-day-of-week="1" type="weekrange" v-model="value8" />
-        <wd-calendar label="月范围选择" type="monthrange" v-model="value9" />
-        <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value10" />
-        <wd-calendar label="快捷操作" v-model="value16" :show-confirm="false" />
-        <wd-calendar label="日期格式化" type="daterange" v-model="value11" :formatter="formatter" />
+        <wd-calendar :label="$t('dan-ge-ri-qi-xuan-ze')" v-model="value1" @confirm="handleConfirm1" />
+        <wd-calendar :label="$t('duo-ge-ri-qi-xuan-ze')" type="dates" v-model="value2" @confirm="handleConfirm2" />
+        <wd-calendar :label="$t('ri-qi-fan-wei-xuan-ze')" type="daterange" v-model="value3" />
+        <wd-calendar :label="$t('ri-qi-shi-jian-xuan-ze')" type="datetime" v-model="value4" />
+        <wd-calendar :label="$t('ri-qi-shi-jian-fan-wei-xuan-ze')" type="datetimerange" v-model="value5" />
+        <wd-calendar :label="$t('zhou-xuan-ze')" type="week" v-model="value6" />
+        <wd-calendar :label="$t('yue-xuan-ze')" type="month" :min-date="minDate" v-model="value7" />
+        <wd-calendar :label="$t('zhou-fan-wei-xuan-ze')" :first-day-of-week="1" type="weekrange" v-model="value8" />
+        <wd-calendar :label="$t('yue-fan-wei-xuan-ze')" type="monthrange" v-model="value9" />
+        <wd-calendar :label="$t('ri-zhou-yue-qie-huan')" :first-day-of-week="1" show-type-switch v-model="value10" />
+        <wd-calendar :label="$t('kuai-jie-cao-zuo')" v-model="value16" :show-confirm="false" />
+        <wd-calendar :label="$t('ri-qi-ge-shi-hua')" type="daterange" v-model="value11" :formatter="formatter" />
         <wd-calendar
-          label="快捷选项"
+          :label="$t('kuai-jie-xuan-xiang')"
           :shortcuts="shortcuts"
           :on-shortcuts-click="onShortcutsClick"
           type="daterange"
@@ -25,7 +25,7 @@
           @confirm="handleConfirm3"
         />
         <wd-calendar
-          label="自定义展示"
+          :label="$t('zi-ding-yi-zhan-shi')"
           type="daterange"
           const
           v-model="value13"
@@ -36,16 +36,16 @@
       </wd-cell-group>
     </view>
 
-    <demo-block transparent title="自定义选择器">
+    <demo-block transparent :title="$t('zi-ding-yi-xuan-ze-qi')">
       <view style="margin: 0 15px">
-        <view style="margin-bottom: 10px">当前选中日期：{{ formatValue }}</view>
+        <view style="margin-bottom: 10px">{{ $t('dang-qian-xuan-zhong-ri-qi-formatvalue') + formatValue }}</view>
         <wd-calendar v-model="value15" use-default-slot @confirm="handleConfirm4">
-          <wd-button>选择日期</wd-button>
+          <wd-button>{{ $t('xuan-ze-ri-qi') }}</wd-button>
         </wd-calendar>
       </view>
     </demo-block>
-    <demo-block title="组件实例事件">
-      <wd-button @click="openCalendar">打开日历</wd-button>
+    <demo-block :title="$t('zu-jian-shi-li-shi-jian')">
+      <wd-button @click="openCalendar">{{ $t('da-kai-ri-li') }}</wd-button>
       <wd-calendar ref="calendarRef" v-model="value17" :with-cell="false" @confirm="handleConfirm5" />
     </demo-block>
   </page-wraper>
@@ -57,6 +57,8 @@ import { dayjs } from '@/uni_modules/wot-design-uni'
 import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
 import type { CalendarInstance, CalendarOnShortcutsClickOption } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const minDate = ref<number>(new Date(new Date().getFullYear() - 20, new Date().getMonth() - 6, new Date().getDate()).getTime())
 
@@ -97,42 +99,42 @@ const formatter: CalendarFormatter = (day: CalendarDayItem) => {
   const nowDa = now.getDate()
 
   if (year === nowYear && month === nowMonth && da === nowDa) {
-    day.topInfo = '今天'
+    day.topInfo = t('jin-tian')
   }
 
   if (month === 5 && da === 18) {
-    day.topInfo = '618大促'
+    day.topInfo = t('618-da-cu')
   }
 
   if (month === 10 && da === 11) {
-    day.topInfo = '京东双11'
+    day.topInfo = t('jing-dong-shuang-11')
   }
 
   if (day.type === 'start') {
-    day.bottomInfo = '开始'
+    day.bottomInfo = t('kai-shi')
   }
 
   if (day.type === 'end') {
-    day.bottomInfo = '结束'
+    day.bottomInfo = t('jie-shu')
   }
 
   if (day.type === 'same') {
-    day.bottomInfo = '开始/结束'
+    day.bottomInfo = t('kai-shi-jie-shu')
   }
 
   return day
 }
 const shortcuts = ref<Record<string, any>[]>([
   {
-    text: '近7天',
+    text: t('jin-7-tian'),
     id: 7
   },
   {
-    text: '近15天',
+    text: t('jin-15-tian'),
     id: 15
   },
   {
-    text: '近30天',
+    text: t('jin-30-tian'),
     id: 30
   }
 ])
@@ -146,18 +148,18 @@ const onShortcutsClick = ({ item }: CalendarOnShortcutsClickOption) => {
   return [startDate, endDate]
 }
 const displayFormat = (value: any) => {
-  return dayjs(value[0]).format('YY年MM月DD日') + ' - ' + dayjs(value[1]).format('YY年MM月DD日')
+  return dayjs(value[0]).format(t('yy-nian-mm-yue-dd-ri')) + ' - ' + dayjs(value[1]).format(t('yy-nian-mm-yue-dd-ri-0'))
 }
 const innerDisplayFormat = (value: string | number | Date | undefined, rangeType: string) => {
   if (!value) {
-    return rangeType === 'start' ? '活动开始时间' : '活动结束时间'
+    return rangeType === 'start' ? t('huo-dong-kai-shi-shi-jian') : t('huo-dong-jie-shu-shi-jian')
   }
 
-  return dayjs(value).format('YY年MM月DD日')
+  return dayjs(value).format(t('yy-nian-mm-yue-dd-ri-1'))
 }
 const beforeConfirm = ({ value, resolve }: any) => {
   if (value > Date.now()) {
-    toast.error('该日期暂无数据')
+    toast.error(t('gai-ri-qi-zan-wu-shu-ju'))
     resolve(false)
   } else {
     resolve(true)
@@ -179,7 +181,7 @@ function handleConfirm4({ value }: any) {
 }
 
 function handleConfirm5({ value }: any) {
-  toast.success('已选择' + dayjs(value).format('YYYY年MM月DD日'))
+  toast.success(t('yi-xuan-ze') + dayjs(value).format(t('yyyy-nian-mm-yue-dd-ri')))
 }
 </script>
 <style lang="scss" scoped></style>

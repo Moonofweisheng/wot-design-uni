@@ -2,54 +2,54 @@
  * @Author: 810505339
  * @Date: 2025-02-11 21:17:21
  * @LastEditors: weisheng
- * @LastEditTime: 2025-03-23 14:12:32
+ * @LastEditTime: 2025-03-30 21:43:38
  * @FilePath: /wot-design-uni/src/pages/signature/Index.vue
  * 记得注释
 -->
 <template>
   <page-wraper>
-    <demo-block title="基础用法">
+    <demo-block :title="$t('ji-chu-yong-fa-0')">
       <wd-signature @confirm="confirm" @clear="clear" :export-scale="2" background-color="#ffffff" />
     </demo-block>
 
-    <demo-block title="历史记录">
+    <demo-block :title="$t('li-shi-ji-lu')">
       <wd-signature enable-history background-color="#f5f5f5" />
     </demo-block>
 
-    <demo-block title="笔锋模式-基础">
+    <demo-block :title="$t('bi-feng-mo-shi-ji-chu')">
       <wd-signature pressure :height="300" />
     </demo-block>
 
-    <demo-block title="笔锋模式-自定义">
+    <demo-block :title="$t('bi-feng-mo-shi-zi-ding-yi')">
       <wd-signature pressure :height="300" :min-width="1" :max-width="6" :min-speed="1.5" background-color="#f5f5f5" />
-      <view class="tip-text">快速书写产生细线条，慢速书写产生粗线条</view>
+      <view class="tip-text">{{ $t('kuai-su-shu-xie-chan-sheng-xi-xian-tiao-man-su-shu-xie-chan-sheng-cu-xian-tiao') }}</view>
     </demo-block>
 
-    <demo-block title="笔锋模式 + 历史记录">
+    <demo-block :title="$t('bi-feng-mo-shi-li-shi-ji-lu')">
       <wd-signature pressure enable-history :height="300" :min-width="1" :max-width="6" background-color="#f5f5f5" />
-      <view class="tip-text">结合历史记录，支持笔锋效果的撤销与恢复</view>
+      <view class="tip-text">{{ $t('jie-he-li-shi-ji-lu-zhi-chi-bi-feng-xiao-guo-de-che-xiao-yu-hui-fu') }}</view>
     </demo-block>
 
-    <demo-block title="自定义按钮">
+    <demo-block :title="$t('zi-ding-yi-an-niu')">
       <wd-signature :disabled="disabled" enable-history :step="3">
         <template #footer="{ clear, confirm, currentStep, restore, revoke, historyList }">
-          <wd-button block @click="changeDisabled" v-if="disabled">开始签名</wd-button>
+          <wd-button block @click="changeDisabled" v-if="disabled">{{ $t('kai-shi-qian-ming') }}</wd-button>
           <block v-if="!disabled">
-            <wd-button size="small" plain @click="revoke" :disabled="currentStep <= 0">撤回</wd-button>
-            <wd-button size="small" plain @click="restore" :disabled="currentStep >= historyList.length">恢复</wd-button>
-            <wd-button size="small" plain @click="clear">清除</wd-button>
-            <wd-button size="small" @click="confirm">确定</wd-button>
+            <wd-button size="small" plain @click="revoke" :disabled="currentStep <= 0">{{ $t('che-hui') }}</wd-button>
+            <wd-button size="small" plain @click="restore" :disabled="currentStep >= historyList.length">{{ $t('hui-fu') }}</wd-button>
+            <wd-button size="small" plain @click="clear">{{ $t('qing-chu') }}</wd-button>
+            <wd-button size="small" @click="confirm">{{ $t('que-ding') }}</wd-button>
           </block>
         </template>
       </wd-signature>
     </demo-block>
 
-    <demo-block title="自定义画笔">
+    <demo-block :title="$t('zi-ding-yi-hua-bi')">
       <wd-signature pen-color="#0083ff" :line-width="4" />
     </demo-block>
 
-    <demo-block title="弹窗中使用">
-      <wd-button type="primary" @click="showPopup = true">打开签名板</wd-button>
+    <demo-block :title="$t('dan-chuang-zhong-shi-yong')">
+      <wd-button type="primary" @click="showPopup = true">{{ $t('da-kai-qian-ming-ban') }}</wd-button>
 
       <wd-popup
         v-model="showPopup"
@@ -63,8 +63,8 @@
       </wd-popup>
     </demo-block>
 
-    <demo-block title="横屏签名">
-      <wd-button type="primary" @click="toSignatureLandscape">使用横屏签名</wd-button>
+    <demo-block :title="$t('heng-ping-qian-ming')">
+      <wd-button type="primary" @click="toSignatureLandscape">{{ $t('shi-yong-heng-ping-qian-ming') }}</wd-button>
     </demo-block>
   </page-wraper>
 </template>

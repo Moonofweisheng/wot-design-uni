@@ -1,29 +1,29 @@
 <template>
   <page-wraper>
-    <demo-block title="基本用法">
+    <demo-block :title="$t('jiBenYongFa')">
       <wd-progress :percentage="percentageZero" />
     </demo-block>
 
-    <demo-block title="不显示进度文字">
+    <demo-block :title="$t('bu-xian-shi-jin-du-wen-zi')">
       <wd-progress :percentage="60" hide-text />
     </demo-block>
 
-    <demo-block title="进度条状态">
+    <demo-block :title="$t('jin-du-tiao-zhuang-tai')">
       <wd-progress :percentage="100" hide-text status="success" />
       <wd-progress :percentage="80" hide-text status="danger" />
       <wd-progress :percentage="90" hide-text status="warning" />
     </demo-block>
 
-    <demo-block title="修改颜色">
+    <demo-block :title="$t('xiu-gai-yan-se')">
       <wd-progress :percentage="80" color="#00c740" />
     </demo-block>
 
-    <demo-block title="颜色数组">
+    <demo-block :title="$t('yan-se-shu-zu')">
       <wd-progress :percentage="100" :color="['#00c740', '#ffb300', '#e2231a', '#0083ff']" />
       <wd-progress :percentage="percentage" :color="colorObject" />
     </demo-block>
 
-    <demo-block title="动态设置">
+    <demo-block :title="$t('dong-tai-she-zhi')">
       <wd-progress :percentage="percentageDynamic" />
       <wd-button custom-style="margin-right: 10px;" @click="add" type="success" size="small">+10</wd-button>
       <wd-button @click="reduce" type="error" size="small">-10</wd-button>
