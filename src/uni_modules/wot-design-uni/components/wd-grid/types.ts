@@ -11,7 +11,15 @@ import { type ExtractPropTypes, type InjectionKey } from 'vue'
 import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
 
 export type GridProvide = {
-  props: { clickable?: boolean; square?: boolean; column?: number; border?: boolean; bgColor?: string; gutter?: number }
+  props: {
+    clickable?: boolean
+    square?: boolean
+    column?: number
+    border?: boolean
+    bgColor?: string
+    gutter?: number
+    hoverClass?: string
+  }
 }
 
 export const GRID_KEY: InjectionKey<GridProvide> = Symbol('wd-grid')
@@ -41,7 +49,11 @@ export const gridProps = {
   /**
    * 格子之间的间距，默认单位为px
    */
-  gutter: Number
+  gutter: Number,
+  /**
+   * 自定义内容区域hover-class
+   */
+  hoverClass: String
 }
 
 export type GridProps = ExtractPropTypes<typeof gridProps>
