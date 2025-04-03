@@ -4,7 +4,7 @@
       <wd-toast />
       <view class="grid">
         <demo-block :title="$t('jiBenYongFa')" transparent>
-          <wd-grid>
+          <wd-grid clickable>
             <wd-grid-item icon="picture" text="文字" />
             <wd-grid-item icon="picture" text="文字" />
             <wd-grid-item icon="picture" text="文字" />
