@@ -26,6 +26,25 @@ interface IframeMessageOptions {
 export function useIframeMessage(options: IframeMessageOptions = {}) {
   const { onLocaleChange, onThemeChange } = options
 
+  // 支持的语言列表
+  const SUPPORTED_LOCALES = [
+    'zh-CN',
+    'en-US',
+    'zh-TW',
+    'zh-HK',
+    'th-TH',
+    'vi-VN',
+    'ar-SA',
+    'de-DE',
+    'es-ES',
+    'pt-PT',
+    'fr-FR',
+    'ja-JP',
+    'ko-KR',
+    'tr-TR',
+    'ru-RU'
+  ]
+
   // 处理接收到的消息
   function handleMessage(event: MessageEvent) {
     // 确保消息来源是父窗口
@@ -34,7 +53,7 @@ export function useIframeMessage(options: IframeMessageOptions = {}) {
     const data = event.data
 
     // 处理语言切换消息
-    if (typeof data === 'string' && (data === 'zh-CN' || data === 'en-US')) {
+    if (typeof data === 'string' && SUPPORTED_LOCALES.includes(data)) {
       onLocaleChange?.(data)
     }
 

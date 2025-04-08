@@ -2,25 +2,36 @@
   <page-wraper>
     <view>
       <demo-block :title="$t('jiBenYongFa')">
-        <wd-notice-bar text="这是一条消息提示信息这是一条消息提示信息这是一条消息提示信息" prefix="warn-bold" />
+        <wd-notice-bar
+          :text="$t('zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi')"
+          prefix="warn-bold"
+        />
       </demo-block>
 
       <demo-block :title="$t('lei-xing-xiu-gai')">
         <wd-notice-bar
           type="danger"
-          text="当前网络不可用，请检查你的网络设置。当前网络不可用，请检查你的网络设置。"
+          :text="
+            $t(
+              'dang-qian-wang-luo-bu-ke-yong-qing-jian-cha-ni-de-wang-luo-she-zhi-dang-qian-wang-luo-bu-ke-yong-qing-jian-cha-ni-de-wang-luo-she-zhi'
+            )
+          "
           prefix="wifi-error"
           custom-class="space"
         />
         <wd-notice-bar
           type="info"
-          text="pc-win沃特已登录，可在“设备管理”中查看详情。pc-win沃特已登录，可在“设备管理”中查看详情。"
+          :text="
+            $t(
+              'dian-ji-cha-kan-xin-xi-xiang-qing-dian-ji-cha-kan-xin-xi-xiang-qing-dian-ji-cha-kan-xin-xi-xiang-qing-dian-ji-cha-kan-xin-xi-xiang-qing-dian-ji-cha-kan-xin-xi-xiang-qing'
+            )
+          "
           prefix="check-outline"
         />
       </demo-block>
 
       <demo-block :title="$t('jin-zhi-gun-dong')">
-        <wd-notice-bar :scrollable="false" text="通知被禁或时段内消息屏蔽可能造成消…" prefix="warn-bold"></wd-notice-bar>
+        <wd-notice-bar :scrollable="false" :text="$t('yu-mai-gui-hua-tong-zai-jiu-zhong-bu-si-shao-nian-you')" prefix="warn-bold"></wd-notice-bar>
       </demo-block>
 
       <demo-block :title="$t('cha-cao')">
@@ -36,12 +47,20 @@
       </demo-block>
 
       <demo-block :title="$t('ke-guan-bi-de')">
-        <wd-notice-bar text="挂起后，电脑与手机均不会有新客户接入。挂起后，电脑与手机均不会有新客户接入。" closable prefix="warn-bold" />
+        <wd-notice-bar
+          :text="$t('zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-0')"
+          closable
+          prefix="warn-bold"
+        />
       </demo-block>
 
       <demo-block :title="$t('duo-hang-zhan-shi')">
         <wd-notice-bar
-          text="这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息"
+          :text="
+            $t(
+              'zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi'
+            )
+          "
           wrapable
           :scrollable="false"
         />
@@ -49,7 +68,7 @@
 
       <demo-block :title="$t('zi-ding-yi-yan-se-0')">
         <wd-notice-bar
-          text="这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息"
+          :text="$t('zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-zhe-shi-yi-tiao-xiao-xi-ti-shi-xin-xi-1')"
           prefix="check-outline"
           color="#34D19D"
           background-color="#f0f9eb"
@@ -62,7 +81,14 @@
 
       <demo-block :title="$t('chui-zhi-gun-dong')">
         <wd-notice-bar @click="handleClick" prefix="warn-bold" direction="vertical" :text="textArray" :delay="3" custom-class="space" />
-        <wd-notice-bar @click="handleClick" prefix="warn-bold" direction="vertical" text="只有一条消息不会滚动" :delay="3" custom-class="space" />
+        <wd-notice-bar
+          @click="handleClick"
+          prefix="warn-bold"
+          direction="vertical"
+          :text="$t('zhi-you-yi-tiao-xiao-xi-bu-hui-gun-dong')"
+          :delay="3"
+          custom-class="space"
+        />
       </demo-block>
 
       <demo-block :title="$t('zhong-zhi-bo-fang-dong-hua')">

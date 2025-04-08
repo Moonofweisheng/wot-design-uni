@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2024-10-12 13:07:08
- * @LastEditTime: 2025-03-31 15:05:05
+ * @LastEditTime: 2025-04-08 11:13:02
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/src/App.vue
@@ -12,18 +12,15 @@ import { onLaunch, onShow, onHide, onThemeChange } from '@dcloudio/uni-app'
 import { useDark } from './store'
 import { useI18nSync } from './hooks/useI18nSync'
 import { useIframeMessage } from './hooks/useIframeMessage'
-import { Locale } from './uni_modules/wot-design-uni/locale'
-import enUS from './uni_modules/wot-design-uni/locale/lang/en-US'
-Locale.use('en-US', enUS)
 
+// 初始化国际化
 const darkMode = useDark()
-const { setLocale } = useI18nSync({ listenIframeMessage: false }) // 禁用内置的iframe消息监听，使用专门的hook处理
+const { setLocale } = useI18nSync() // 禁用内置的iframe消息监听，使用专门的hook处理
 
 // 使用专门的iframe消息处理hook
 useIframeMessage({
   onLocaleChange: (locale) => {
     setLocale(locale)
-    Locale.use(locale)
   },
   onThemeChange: (isDark) => {
     darkMode.setDark(isDark)
@@ -37,7 +34,6 @@ onThemeChange((option) => {
 onLaunch(() => {
   const systemInfo = uni.getSystemInfoSync()
   darkMode.setDark(systemInfo.theme === 'dark')
-  console.log('App Launch')
 })
 onShow(() => {
   console.log('App Show')

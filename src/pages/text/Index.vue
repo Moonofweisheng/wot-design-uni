@@ -6,11 +6,11 @@
 
     <demo-block :title="$t('she-zhi-zhu-ti')">
       <view style="display: flex">
-        <wd-text type="primary" text="主色"></wd-text>
-        <wd-text type="error" text="错误"></wd-text>
-        <wd-text type="success" text="成功"></wd-text>
-        <wd-text type="warning" text="警告"></wd-text>
-        <wd-text text="默认"></wd-text>
+        <wd-text type="primary" :text="$t('zhu-se')"></wd-text>
+        <wd-text type="error" :text="$t('cuo-wu')"></wd-text>
+        <wd-text type="success" :text="$t('cheng-gong')"></wd-text>
+        <wd-text type="warning" :text="$t('jing-gao')"></wd-text>
+        <wd-text :text="$t('mo-ren')"></wd-text>
       </view>
     </demo-block>
 
@@ -28,7 +28,7 @@
 
     <demo-block :title="$t('tuo-min')">
       <view style="display: flex; align-items: center">
-        <wd-text text="张长三" mode="name" :format="true"></wd-text>
+        <wd-text :text="$t('zhang-chang-san')" mode="name" :format="true"></wd-text>
         <wd-text text="18888888888" mode="phone" :format="true"></wd-text>
       </view>
     </demo-block>
@@ -46,7 +46,7 @@
     <demo-block title="mode">
       <view>
         <view><wd-text text="18888888888" mode="phone"></wd-text></view>
-        <view><wd-text text="王三" mode="name"></wd-text></view>
+        <view><wd-text :text="$t('wang-san')" mode="name"></wd-text></view>
         <view><wd-text text="1719976636911" mode="date"></wd-text></view>
       </view>
     </demo-block>

@@ -29,9 +29,9 @@
       ></wd-count-to>
 
       <wd-grid clickable border>
-        <wd-grid-item text="开始" icon="play-circle-stroke" @itemclick="start" />
-        <wd-grid-item text="暂停" icon="pause-circle" @itemclick="pause" />
-        <wd-grid-item text="重置" icon="refresh" @itemclick="reset" />
+        <wd-grid-item :text="$t('kai-shi')" icon="play-circle-stroke" @itemclick="start" />
+        <wd-grid-item :text="$t('zan-ting')" icon="pause-circle" @itemclick="pause" />
+        <wd-grid-item :text="$t('zhong-zhi')" icon="refresh" @itemclick="reset" />
       </wd-grid>
     </demo-block>
   </page-wraper>

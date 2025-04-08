@@ -43,43 +43,27 @@
   "i18n-ally.refactor.templates": [
     {
       "source": "html-inline",
-      "template": "{{ $t('{key}') }}"  // 不带参数的情况
-    },
-    {
-      "source": "html-inline-with-params",  // 带参数的情况
-      "template": "{{ $t('{key}', {injectionParameters}) }}"
+      "template": "{{ $t('{key}'{args}) }}"  // 不带参数的情况
     },
     {
       "source": "html-attribute",
-      "template": "$t('{key}')",
-      "include": [
-        "value",
-        "placeholder",
-        "label",
-        "title",
-        "desc",
-        "content", 
-        "text",
-        "message"
-      ]
+      "template": "$t('{key}'{args})",
     },
     {
       "source": "js-string",
-      "template": "t('{key}')"
-    },
-    {
-      "source": "js-string-with-params",
-      "template": "t('{key}', {injectionParameters})"
+      "template": "t('{key}'{args})"
     },
     {
       "source": "js-template",
-      "template": "t('{key}')"
+      "template": "t('{key}'{args})"
     },
-    {
-      "source": "js-template-with-params",  // 给js-template添加带参数的模板
-      "template": "t('{key}', {injectionParameters})"
-    }
   ],
+  "i18n-ally.extract.parsers.html": {
+    "attributes": ["text", "title", "alt", "placeholder", "label", "aria-label", "cancel-text", "close-text", "left-text", "right-text"],
+    "ignoredTags": ["script", "style"],
+    "vBind": true,
+    "inlineText": true
+  },
   "i18n-ally.keysInUse": [
     "zh-CN",
     "en-US"
@@ -111,8 +95,5 @@
     "`${item}`"
   ],
   "i18n-ally.extract.ignoredByFiles": {
-  },
-  "i18n-ally.translate.engines": [
-    "baidu"
-  ]
+  }
 }

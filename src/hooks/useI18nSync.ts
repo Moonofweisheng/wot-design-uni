@@ -3,12 +3,9 @@
  * @Date: 2025-03-31 16:28:38
  * @Description: 国际化同步hook，用于处理示例项目和docs项目之间的国际化同步
  */
-import { onMounted } from 'vue'
-import { useCurrentLang, Locale } from '../uni_modules/wot-design-uni/locale'
+import { computed, onBeforeMount } from 'vue'
+import { Locale } from '../uni_modules/wot-design-uni/locale'
 import i18n from '../locale'
-
-// 当前语言引用
-const currentLang = useCurrentLang()
 
 // 支持的语言列表
 const SUPPORTED_LOCALES = [
@@ -46,13 +43,7 @@ function setLocale(locale: string, syncComponentLib: boolean = true) {
   // 设置应用语言
   i18n.global.locale.value = locale
 
-  // 存储语言设置
-  // #ifdef H5
-  process.env.NODE_ENV === 'development' && uni.setStorageSync('currentLang', locale)
-  // #endif
-  // #ifndef H5
   uni.setStorageSync('currentLang', locale)
-  // #endif
 
   // 同步组件库语言设置
   if (syncComponentLib) {
@@ -62,9 +53,17 @@ function setLocale(locale: string, syncComponentLib: boolean = true) {
   return locale
 }
 
+/**
+ * 初始化语言设置
+ * @param defaultLocale 默认语言
+ * @param syncComponentLib 是否同步组件库语言设置
+ */
+function initLocale(defaultLocale: string, syncComponentLib: boolean) {
+  const storedLocale = uni.getStorageSync('currentLang') || defaultLocale
+  setLocale(storedLocale, syncComponentLib)
+}
+
 interface I18nSyncOptions {
-  /** 是否监听iframe消息 */
-  listenIframeMessage?: boolean
   /** 是否同步组件库语言设置 */
   syncComponentLib?: boolean
   /** 默认语言 */
@@ -77,42 +76,10 @@ interface I18nSyncOptions {
  * @returns 国际化相关方法和状态
  */
 export function useI18nSync(options?: I18nSyncOptions) {
-  const { listenIframeMessage = true, syncComponentLib = true, defaultLocale = 'zh-CN' } = options || {}
-
-  // 初始化语言设置
-  function initLocale() {
-    // #ifdef H5
-    // 在H5环境下，开发模式使用本地存储的语言，生产模式直接使用默认语言
-    process.env.NODE_ENV === 'development'
-      ? setLocale(uni.getStorageSync('currentLang') || defaultLocale, syncComponentLib)
-      : setLocale(defaultLocale, syncComponentLib)
-    // #endif
-    // #ifndef H5
-    // 在非H5环境下，使用本地存储的语言
-    setLocale(uni.getStorageSync('currentLang') || defaultLocale, syncComponentLib)
-    // #endif
-  }
-
-  // 监听iframe消息
-  function setupIframeMessageListener() {
-    // 仅在H5环境下且启用了iframe消息监听时执行
-    // #ifdef H5
-    if (listenIframeMessage) {
-      window.addEventListener('message', function (event) {
-        if (event.source !== parent) return
-        // 处理收到的消息
-        if (typeof event.data === 'string' && SUPPORTED_LOCALES.includes(event.data)) {
-          // 处理语言切换消息
-          setLocale(event.data, syncComponentLib)
-        }
-      })
-    }
-    // #endif
-  }
-
-  onMounted(() => {
-    initLocale()
-    setupIframeMessageListener()
+  const { syncComponentLib = true, defaultLocale = 'zh-CN' } = options || {}
+  const currentLang = computed(() => i18n.global.locale.value)
+  onBeforeMount(() => {
+    initLocale(defaultLocale, syncComponentLib)
   })
 
   return {

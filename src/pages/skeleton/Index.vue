@@ -37,11 +37,11 @@
       <view style="height: 20px"></view>
       <wd-skeleton :row-col="grid" :loading="showContent">
         <wd-grid>
-          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
-          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
-          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
-          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
-          <wd-grid-item icon-size="32px" icon="picture" text="文字" />
+          <wd-grid-item icon-size="32px" icon="picture" :text="$t('wen-zi-10')" />
+          <wd-grid-item icon-size="32px" icon="picture" :text="$t('wen-zi-10')" />
+          <wd-grid-item icon-size="32px" icon="picture" :text="$t('wen-zi-10')" />
+          <wd-grid-item icon-size="32px" icon="picture" :text="$t('wen-zi-10')" />
+          <wd-grid-item icon-size="32px" icon="picture" :text="$t('wen-zi-10')" />
         </wd-grid>
       </wd-skeleton>
     </demo-block>

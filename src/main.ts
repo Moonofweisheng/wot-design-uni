@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-03-09 19:23:03
- * @LastEditTime: 2025-03-29 22:40:30
+ * @LastEditTime: 2025-04-08 11:18:04
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/main.ts
@@ -18,8 +18,6 @@ export function createApp() {
   const app = createSSRApp(App)
   app.use(i18n)
   app.config.globalProperties.$t = i18n.global.t
-
-  // app.config.warnHandler = () => null
   return {
     app
   }

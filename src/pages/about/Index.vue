@@ -71,7 +71,7 @@ import { computed, ref } from 'vue'
 import { useI18nSync } from '../../hooks/useI18nSync'
 
 // 使用国际化钩子
-const { currentLang, setLocale } = useI18nSync()
+const { setLocale, currentLang } = useI18nSync()
 
 // 控制语言切换弹出层的显示
 const showLanguageSwitch = ref(false)
