@@ -1,26 +1,26 @@
 <template>
   <page-wraper>
-    <demo-block :title="`基本用法，数值: ${value1}`">
+    <demo-block :title="$t('ji-ben-yong-fa-shu-zhi-value1') + value1">
       <wd-picker-view v-model="value1" :columns="columns1" />
     </demo-block>
 
-    <demo-block :title="`禁用选项，数值: ${value2}`">
+    <demo-block :title="$t('jin-yong-xuan-xiang-shu-zhi-value2') + value2">
       <wd-picker-view v-model="value2" :columns="columns2" />
     </demo-block>
 
-    <demo-block :title="`立即触发 change，数值: ${value6}`">
+    <demo-block :title="$t('li-ji-chu-fa-change-shu-zhi-value6') + value6">
       <wd-picker-view v-model="value6" :immediate-change="true" :columns="columns2" />
     </demo-block>
 
-    <demo-block :title="`加载中，数值: ${value3}`">
+    <demo-block :title="$t('jia-zai-zhong-shu-zhi-value3') + value3">
       <wd-picker-view v-model="value3" :columns="columns3" loading />
     </demo-block>
 
-    <demo-block :title="`多列，数值: [${value4}]`">
+    <demo-block :title="$t('duo-lie-shu-zhi-value4') + `[${value4}]`">
       <wd-picker-view v-model="value4" :columns="columns4" />
     </demo-block>
 
-    <demo-block :title="`多级联动，数值: [${value5}]`">
+    <demo-block :title="$t('duo-ji-lian-dong-shu-zhi-value5') + `[${value5}]`">
       <wd-picker-view v-model="value5" :columns="columns5" :column-change="onChangeDistrict" />
     </demo-block>
   </page-wraper>
@@ -28,74 +28,91 @@
 <script lang="ts" setup>
 import type { PickerViewColumnChange } from '@/uni_modules/wot-design-uni/components/wd-picker-view/types'
 import { ref } from 'vue'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const district: Record<string, Array<{ label: string; value: string }>> = {
   0: [
-    { label: '北京', value: '110000' },
-    { label: '广东省', value: '440000' }
+    { label: t('bei-jing'), value: '110000' },
+    { label: t('guang-dong-sheng'), value: '440000' }
   ],
-  110000: [{ label: '北京', value: '110100' }],
+  110000: [{ label: t('bei-jing'), value: '110100' }],
   440000: [
-    { label: '广州市', value: '440100' },
-    { label: '韶关市', value: '440200' },
-    { label: '深圳市', value: '440300' },
-    { label: '珠海市', value: '440400' },
-    { label: '汕头市', value: '440500' }
+    { label: t('guang-zhou-shi'), value: '440100' },
+    { label: t('shao-guan-shi'), value: '440200' },
+    { label: t('shen-zhen-shi'), value: '440300' },
+    { label: t('zhu-hai-shi'), value: '440400' },
+    { label: t('shan-tou-shi'), value: '440500' }
   ],
   110100: [
-    { label: '东城区', value: '110101' },
-    { label: '西城区', value: '110102' },
-    { label: '朝阳区', value: '110105' },
-    { label: '丰台区', value: '110106' },
-    { label: '石景山区', value: '110107' }
+    { label: t('dong-cheng-qu'), value: '110101' },
+    { label: t('xi-cheng-qu'), value: '110102' },
+    { label: t('zhao-yang-qu'), value: '110105' },
+    { label: t('feng-tai-qu'), value: '110106' },
+    { label: t('shi-jing-shan-qu'), value: '110107' }
   ],
   440100: [
-    { label: '荔湾区', value: '440103' },
-    { label: '越秀区', value: '440104' },
-    { label: '海珠区', value: '440105' }
+    { label: t('li-wan-qu'), value: '440103' },
+    { label: t('yue-xiu-qu'), value: '440104' },
+    { label: t('hai-zhu-qu'), value: '440105' }
   ],
-  440200: [{ label: '武江区', value: '440203' }],
+  440200: [{ label: t('wu-jiang-qu'), value: '440203' }],
   440300: [
-    { label: '罗湖区', value: '440303' },
-    { label: '福田区', value: '440304' }
+    { label: t('luo-hu-qu'), value: '440303' },
+    { label: t('fu-tian-qu'), value: '440304' }
   ],
   440400: [
-    { label: '香洲区', value: '440402' },
-    { label: '斗门区', value: '440403' },
-    { label: '金湾区', value: '440404' }
+    { label: t('xiang-zhou-qu'), value: '440402' },
+    { label: t('dou-men-qu'), value: '440403' },
+    { label: t('jin-wan-qu'), value: '440404' }
   ],
   440500: [
-    { label: '龙湖区', value: '440507' },
-    { label: '金平区', value: '440511' }
+    { label: t('long-hu-qu'), value: '440507' },
+    { label: t('jin-ping-qu'), value: '440511' }
   ]
 }
 
-const value1 = ref<string>('选项1')
-const columns1 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
-
-const value2 = ref<string>('选项1')
-const value6 = ref<string>('选项1')
-
-const columns2 = ref([
-  { label: '选项1' },
-  { label: '选项2' },
-  {
-    label: '选项3',
-    disabled: true
-  },
-  { label: '选项4' },
-  { label: '选项5' },
-  { label: '选项6' },
-  { label: '选项7' }
+const value1 = ref<string>(t('xuanXiang_1-0'))
+const columns1 = ref([
+  t('xuanXiang_1-0'),
+  t('xuanXiang_2-0'),
+  t('xuanXiang_3-0'),
+  t('xuan-xiang-4'),
+  t('xuan-xiang-5'),
+  t('xuan-xiang-6'),
+  t('xuan-xiang-7')
 ])
 
-const value3 = ref<string>('选项1')
-const columns3 = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
+const value2 = ref<string>(t('xuanXiang_1-0'))
+const value6 = ref<string>(t('xuanXiang_1-0'))
 
-const value4 = ref(['中南大学', '软件工程'])
+const columns2 = ref([
+  { label: t('xuanXiang_1-0') },
+  { label: t('xuanXiang_2-0') },
+  {
+    label: t('xuanXiang_3-0'),
+    disabled: true
+  },
+  { label: t('xuan-xiang-4') },
+  { label: t('xuan-xiang-5') },
+  { label: t('xuan-xiang-6') },
+  { label: t('xuan-xiang-7') }
+])
+
+const value3 = ref<string>(t('xuanXiang_1-0'))
+const columns3 = ref([
+  t('xuanXiang_1-0'),
+  t('xuanXiang_2-0'),
+  t('xuanXiang_3-0'),
+  t('xuan-xiang-4'),
+  t('xuan-xiang-5'),
+  t('xuan-xiang-6'),
+  t('xuan-xiang-7')
+])
+
+const value4 = ref([t('zhong-nan-da-xue-0'), t('ruan-jian-gong-cheng-0')])
 const columns4 = ref([
-  ['中山大学', '中南大学', '华南理工大学'],
-  ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
+  [t('zhong-shan-da-xue-0'), t('zhong-nan-da-xue-0'), t('hua-nan-li-gong-da-xue-0')],
+  [t('ji-suan-ji-ke-xue-yu-ji-shu-0'), t('ruan-jian-gong-cheng-0'), t('tong-xin-gong-cheng-0'), t('fa-xue-0'), t('jing-ji-xue-0')]
 ])
 
 const value5 = ref(['110000', '110100', '110102'])

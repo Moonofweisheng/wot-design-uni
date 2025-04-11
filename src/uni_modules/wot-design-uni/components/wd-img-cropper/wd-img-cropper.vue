@@ -7,11 +7,11 @@
       <view class="wd-img-cropper__cut">
         <!-- 上方阴影块 -->
         <view :class="`wd-img-cropper__cut--top ${IS_TOUCH_END ? '' : 'is-hightlight'}`" :style="`height: ${cutTop}px;`"></view>
-        <view class="wd-img-cropper__cut--middle">
+        <view class="wd-img-cropper__cut--middle" :style="`height: ${cutHeight}px;`">
           <!-- 左侧阴影块 -->
           <view
             :class="`wd-img-cropper__cut--left ${IS_TOUCH_END ? '' : 'is-hightlight'}`"
-            :style="`width: ${cutLeft}px; height: ${cutWidth}px;`"
+            :style="`width: ${cutLeft}px; height: ${cutHeight}px;`"
           ></view>
           <!-- 裁剪框 -->
           <view class="wd-img-cropper__cut--body" :style="`width: ${cutWidth}px; height: ${cutHeight}px;`">
@@ -48,8 +48,8 @@
     </view>
     <!-- 绘制的图片canvas -->
     <canvas
-      canvas-id="wd-img-cropper-canvas"
-      id="wd-img-cropper-canvas"
+      :canvas-id="canvasId"
+      :id="canvasId"
       class="wd-img-cropper__canvas"
       :disable-scroll="true"
       :style="`width: ${Number(canvasWidth) * canvasScale}px; height: ${Number(canvasHeight) * canvasScale}px;`"
@@ -80,9 +80,11 @@ export default {
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdButton from '../wd-button/wd-button.vue'
 import { computed, getCurrentInstance, ref, watch } from 'vue'
-import { addUnit, objToStyle } from '../common/util'
+import { addUnit, objToStyle, uuid } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import { imgCropperProps, type ImgCropperExpose } from './types'
+
+const canvasId = ref<string>(`cropper${uuid()}`) // canvas 组件的唯一标识符
 
 // 延时动画设置
 let CHANGE_TIME: any | null = null
@@ -163,14 +165,21 @@ watch(
       INIT_IMGWIDTH = props.imgWidth
       INIT_IMGHEIGHT = props.imgHeight
       info.value = uni.getSystemInfoSync()
-      const tempCutSize = info.value.windowWidth - offset.value * 2
-      cutWidth.value = tempCutSize
-      cutHeight.value = tempCutSize
-      cutTop.value = (info.value.windowHeight * TOP_PERCENT - tempCutSize) / 2
+
+      // 根据aspectRatio计算裁剪框尺寸
+      const [widthRatio, heightRatio] = props.aspectRatio.split(':').map(Number)
+      const tempCutWidth = info.value.windowWidth - offset.value * 2
+      const tempCutHeight = (tempCutWidth * heightRatio) / widthRatio
+
+      cutWidth.value = tempCutWidth
+      cutHeight.value = tempCutHeight
+      cutTop.value = (info.value.windowHeight * TOP_PERCENT - tempCutHeight) / 2
       cutLeft.value = offset.value
+
       canvasScale.value = props.exportScale
-      canvasHeight.value = tempCutSize
-      canvasWidth.value = tempCutSize
+      canvasHeight.value = tempCutHeight
+      canvasWidth.value = tempCutWidth
+
       // 根据开发者设置的图片目标尺寸计算实际尺寸
       initImageSize()
       // 初始化canvas
@@ -268,7 +277,23 @@ function setRoate(angle: number) {
   if (!angle || props.disabledRotate) return
   revertIsAnimation(true)
   imgAngle.value = angle
-  // 设置旋转后需要判定旋转后宽高是否不符合贴边的标准
+
+  // 重新计算缩放比例
+  let tempPicWidth = picWidth.value
+  let tempPicHeight = picHeight.value
+
+  // 旋转后宽高互换
+  if ((angle / 90) % 2) {
+    tempPicWidth = picHeight.value
+    tempPicHeight = picWidth.value
+  }
+
+  // 计算新的缩放比例
+  const widthRatio = cutWidth.value / tempPicWidth
+  const heightRatio = cutHeight.value / tempPicHeight
+  imgScale.value = Math.max(widthRatio, heightRatio)
+
+  // 检测边缘位置
   detectImgPosIsEdge()
 }
 
@@ -306,39 +331,43 @@ function loadImg() {
 }
 
 /**
- *  设置图片尺寸，使其有一边小于裁剪框尺寸
- * 1、图片宽或高 小于裁剪框，自动放大至一边与高平齐
- * 2、图片宽或高 大于裁剪框，自动缩小至一边与高平齐
+ *  设置图片尺寸，使其短边完全显示并填满裁剪框
  */
 function computeImgSize() {
   let tempPicWidth: number = picWidth.value
   let tempPicHeight: number = picHeight.value
 
   if (!INIT_IMGHEIGHT && !INIT_IMGWIDTH) {
-    // 没有设置宽高，写入图片的真实宽高
-    tempPicWidth = imgInfo.value!.width
-    tempPicHeight = imgInfo.value!.height
-    /**
-     * 设 a = imgWidth; b = imgHeight; x = cutWidth; y = cutHeight
-     * 共有三种宽高比：1、a/b > x/y 2、a/b < x/y 3、a/b = x/y
-     * 1、已知 b = y => a = a/b*y
-     * 2、已知 a = x => b = b/a*x
-     * 3、可用上方任意公式
-     */
-    if (picWidth.value / picHeight.value > cutWidth.value / cutHeight.value) {
+    // 计算图片与裁剪框的宽高比
+    const imgRatio = imgInfo.value!.width / imgInfo.value!.height
+    const cropRatio = cutWidth.value / cutHeight.value
+
+    if (imgRatio > cropRatio) {
+      // 图片更宽，以高度为准
       tempPicHeight = cutHeight.value
-      tempPicWidth = (imgInfo.value!.width / imgInfo.value!.height) * cutHeight.value
+      tempPicWidth = tempPicHeight * imgRatio
     } else {
+      // 图片更高，以宽度为准
       tempPicWidth = cutWidth.value
-      tempPicHeight = (imgInfo.value!.height / imgInfo.value!.width) * cutWidth.value
+      tempPicHeight = tempPicWidth / imgRatio
     }
   } else if (INIT_IMGHEIGHT && !INIT_IMGWIDTH) {
-    tempPicWidth = (imgInfo.value!.width / imgInfo.value!.height) * Number(INIT_IMGHEIGHT)
+    tempPicHeight = Number(INIT_IMGHEIGHT)
+    tempPicWidth = (imgInfo.value!.width / imgInfo.value!.height) * tempPicHeight
   } else if ((!INIT_IMGHEIGHT && INIT_IMGWIDTH) || (INIT_IMGHEIGHT && INIT_IMGWIDTH)) {
-    tempPicHeight = (imgInfo.value!.height / imgInfo.value!.width) * Number(INIT_IMGWIDTH)
+    tempPicWidth = Number(INIT_IMGWIDTH)
+    tempPicHeight = (imgInfo.value!.height / imgInfo.value!.width) * tempPicWidth
   }
+
+  // 确保计算后的尺寸至少有一边等于裁剪框尺寸
+  const widthRatio = cutWidth.value / tempPicWidth
+  const heightRatio = cutHeight.value / tempPicHeight
+  const scale = Math.max(widthRatio, heightRatio)
+
   picWidth.value = tempPicWidth
   picHeight.value = tempPicHeight
+  // 设置初始缩放以适应裁剪框
+  imgScale.value = scale
 }
 
 /**
@@ -346,7 +375,7 @@ function computeImgSize() {
  */
 function initCanvas() {
   if (!ctx.value) {
-    ctx.value = uni.createCanvasContext('wd-img-cropper-canvas', proxy)
+    ctx.value = uni.createCanvasContext(canvasId.value, proxy)
   }
 }
 
@@ -548,7 +577,7 @@ function canvasToImage() {
       destHeight: Math.round(cutHeight.value * exportScale),
       fileType,
       quality,
-      canvasId: 'wd-img-cropper-canvas',
+      canvasId: canvasId.value,
       success: (res: any) => {
         const result = { tempFilePath: res.tempFilePath, width: cutWidth.value * exportScale, height: cutHeight.value * exportScale }
         // #ifdef MP-DINGTALK

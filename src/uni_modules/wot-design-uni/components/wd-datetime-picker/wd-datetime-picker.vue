@@ -7,15 +7,15 @@
   >
     <!--文案-->
     <view class="wd-picker__field" @click="showPopup">
-      <slot v-if="useDefaultSlot"></slot>
+      <slot v-if="$slots.default"></slot>
       <view v-else :class="['wd-picker__cell', customCellClass]">
         <view
-          v-if="label || useLabelSlot"
+          v-if="label || $slots.label"
           :class="`wd-picker__label ${customLabelClass} ${isRequired ? 'is-required' : ''}`"
           :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
         >
-          <block v-if="label">{{ label }}</block>
-          <slot v-else name="label"></slot>
+          <slot v-if="$slots.label" name="label"></slot>
+          <block v-else>{{ label }}</block>
         </view>
         <view class="wd-picker__body">
           <view class="wd-picker__value-wraper">
@@ -319,33 +319,105 @@ const isRequired = computed(() => {
 })
 
 /**
- * @description 自定义列项筛选规则，对每列单项进行禁用校验，最终返回传入PickerView的columns数组
- * @param {Component} picker datetimePickerView对象
- * @return {Array} columns
+ * @description 处理时间边界值判断
+ * @param isStart 是否是开始时间
+ * @param columnType 当前列类型
+ * @param value 当前值
+ * @param currentArray 当前完整选择的数组
+ * @param boundary 边界值数组
+ * @returns 是否超出边界
+ */
+function handleBoundaryValue(
+  isStart: boolean,
+  columnType: DatetimePickerViewColumnType,
+  value: number,
+  currentArray: number[],
+  boundary: number[]
+): boolean {
+  const { type } = props
+
+  switch (type) {
+    case 'datetime': {
+      const [year, month, date, hour, minute] = boundary
+      if (columnType === 'year') {
+        return isStart ? value > year : value < year
+      }
+      if (columnType === 'month' && currentArray[0] === year) {
+        return isStart ? value > month : value < month
+      }
+      if (columnType === 'date' && currentArray[0] === year && currentArray[1] === month) {
+        return isStart ? value > date : value < date
+      }
+      if (columnType === 'hour' && currentArray[0] === year && currentArray[1] === month && currentArray[2] === date) {
+        return isStart ? value > hour : value < hour
+      }
+      if (columnType === 'minute' && currentArray[0] === year && currentArray[1] === month && currentArray[2] === date && currentArray[3] === hour) {
+        return isStart ? value > minute : value < minute
+      }
+      break
+    }
+    case 'year-month': {
+      const [year, month] = boundary
+      if (columnType === 'year') {
+        return isStart ? value > year : value < year
+      }
+      if (columnType === 'month' && currentArray[0] === year) {
+        return isStart ? value > month : value < month
+      }
+      break
+    }
+    case 'year': {
+      const [year] = boundary
+      if (columnType === 'year') {
+        return isStart ? value > year : value < year
+      }
+      break
+    }
+    case 'date': {
+      const [year, month, date] = boundary
+      if (columnType === 'year') {
+        return isStart ? value > year : value < year
+      }
+      if (columnType === 'month' && currentArray[0] === year) {
+        return isStart ? value > month : value < month
+      }
+      if (columnType === 'date' && currentArray[0] === year && currentArray[1] === month) {
+        return isStart ? value > date : value < date
+      }
+      break
+    }
+    case 'time': {
+      const [hour, minute] = boundary
+      if (columnType === 'hour') {
+        return isStart ? value > hour : value < hour
+      }
+      if (columnType === 'minute' && currentArray[0] === hour) {
+        return isStart ? value > minute : value < minute
+      }
+      break
+    }
+  }
+  return false
+}
+
+/**
+ * @description 自定义列项筛选规则
  */
 const customColumnFormatter: DatetimePickerViewColumnFormatter = (picker) => {
-  if (!picker) {
-    return []
-  }
+  if (!picker) return []
+
   const { type } = props
   const { startSymbol, formatter } = picker
-  // 校准上下方picker的value值，与内部innerValue对应
   const start = picker.correctValue(innerValue.value)
   const end = picker.correctValue(endInnerValue.value)
 
-  /**
-   * 如果是上方picekr 那么将下方picker的值作为下边界
-   * 如果是下方picekr 那么将上方picker的值作为上边界
-   */
   const currentValue = startSymbol ? picker.getPickerValue(start, type) : picker.getPickerValue(end, type)
   const boundary = startSymbol ? picker.getPickerValue(end, type) : picker.getPickerValue(start, type)
-  // 获取当前picekr中的源列数组
   const columns = picker.getOriginColumns()
 
-  // 此时index是最外层知道当前的索引即可得到当前是哪个时间段
-  return columns.map((column, cIndex) => {
+  return columns.map((column, _) => {
     return column.values.map((value) => {
-      const disabled = columnDisabledRules(startSymbol, columns, cIndex, value, currentValue, boundary)
+      const disabled = handleBoundaryValue(startSymbol, column.type, value, currentValue, boundary)
       return {
         label: formatter ? formatter(column.type, padZero(value)) : padZero(value),
         value,
@@ -415,9 +487,6 @@ function close() {
   onCancel()
 }
 
-/**
- * @description 展示popup，小程序有个bug，在picker-view弹出时设置value，会触发change事件，而且会将picker-view的value多次触发change重置为第一项
- */
 function showPopup() {
   if (props.disabled || props.readonly) return
 
@@ -450,15 +519,34 @@ function tabChange() {
  * @description datetimePickerView change 事件
  */
 function onChangeStart({ value }: { value: number | string }) {
-  innerValue.value = deepClone(value)
+  if (!datetimePickerView.value) return
+  if (region.value && !datetimePickerView1.value) return
+
   if (region.value) {
-    showTabLabel.value = [setTabLabel(), deepClone(showTabLabel.value[1])]
-    emit('change', {
-      value: [value, endInnerValue.value]
+    // 区间选择才需要处理边界值
+    const currentArray = datetimePickerView.value.getPickerValue(value, props.type)
+    const boundaryArray = datetimePickerView.value.getPickerValue(endInnerValue.value, props.type)
+    const columns = datetimePickerView.value.getOriginColumns()
+
+    // 检查是否有任何列超出边界
+    const needsAdjust = columns.some((column, index) => {
+      return handleBoundaryValue(true, column.type, currentArray[index], currentArray, boundaryArray)
     })
-    datetimePickerView.value && datetimePickerView.value.setColumns(datetimePickerView.value.updateColumns())
-    datetimePickerView1.value && datetimePickerView1.value.setColumns(datetimePickerView1.value.updateColumns())
+
+    innerValue.value = deepClone(needsAdjust ? endInnerValue.value : value)
+
+    nextTick(() => {
+      showTabLabel.value = [setTabLabel(), deepClone(showTabLabel.value[1])]
+      emit('change', {
+        value: [innerValue.value, endInnerValue.value]
+      })
+      // 更新两个picker的列
+      datetimePickerView.value && datetimePickerView.value.setColumns(datetimePickerView.value.updateColumns())
+      datetimePickerView1.value && datetimePickerView1.value.setColumns(datetimePickerView1.value.updateColumns())
+    })
   } else {
+    // 非区间选择直接设置值即可
+    innerValue.value = deepClone(value)
     emit('change', {
       value: innerValue.value
     })
@@ -469,13 +557,28 @@ function onChangeStart({ value }: { value: number | string }) {
  * @description 区域选择 下方 datetimePickerView change 事件
  */
 function onChangeEnd({ value }: { value: number | string }) {
-  endInnerValue.value = deepClone(value)
-  showTabLabel.value = [deepClone(showTabLabel.value[0]), setTabLabel(1)]
-  emit('change', {
-    value: [innerValue.value, value]
+  if (!datetimePickerView.value || !datetimePickerView1.value) return
+
+  const currentArray = datetimePickerView1.value.getPickerValue(value, props.type)
+  const boundaryArray = datetimePickerView1.value.getPickerValue(innerValue.value, props.type)
+  const columns = datetimePickerView1.value.getOriginColumns()
+
+  // 检查是否有任何列超出边界
+  const needsAdjust = columns.some((column, index) => {
+    return handleBoundaryValue(false, column.type, currentArray[index], currentArray, boundaryArray)
   })
-  datetimePickerView.value && datetimePickerView.value.setColumns(datetimePickerView.value.updateColumns())
-  datetimePickerView1.value && datetimePickerView1.value.setColumns(datetimePickerView1.value.updateColumns())
+
+  endInnerValue.value = deepClone(needsAdjust ? innerValue.value : value)
+
+  nextTick(() => {
+    showTabLabel.value = [deepClone(showTabLabel.value[0]), setTabLabel(1)]
+    emit('change', {
+      value: [innerValue.value, endInnerValue.value]
+    })
+    // 更新两个picker的列
+    datetimePickerView.value && datetimePickerView.value.setColumns(datetimePickerView.value.updateColumns())
+    datetimePickerView1.value && datetimePickerView1.value.setColumns(datetimePickerView1.value.updateColumns())
+  })
 }
 
 /**
@@ -620,11 +723,6 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
 
   // 如果使用了自定义的的formatter，defaultDisplayFormat无效
   if (props.formatter) {
-    /**
-     * 不建议使用 this.picker.picker.getLabels() 拉取
-     * 在初始展示时，需要使用模拟 nextTick 来等待内部 pickerView 渲染后labels才可得到format后的labels
-     * 但使用模拟nextTick会造成页面延迟展示问题，对用户感知来讲不友好，因此不适用该方法
-     */
     const typeMaps = {
       year: ['year'],
       datetime: ['year', 'month', 'date', 'hour', 'minute'],
@@ -651,100 +749,6 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
     case 'datetime':
       return `${items[0].label}-${items[1].label}-${items[2].label} ${items[3].label}:${items[4].label}`
   }
-}
-
-/**
- * @description 区域选择time禁用规则，根据传入的位置标志以及日期类型 返回该节点是否禁用
- * @param {Boolean} isStart 时间段类型 true：start | false：end
- * @param {Array} column 当前遍历到的列数组
- * @param {Number} cindex 外层column的索引（对应每一个类型）
- * @param {Number / String} value 遍历到的当前值
- * @param {Array} currentValue 当前选中的值 this.pickerValue
- * @param {Array} boundary 当前变量的限制值，决定禁用的边界值
- * @return {Boolean} disabled
- */
-function columnDisabledRules(
-  isStart: boolean,
-  columns: {
-    type: DatetimePickerViewColumnType
-    values: number[]
-  }[],
-  cIndex: number,
-  value: number,
-  currentValue: number[],
-  boundary: number[]
-) {
-  const { type } = props
-  // 0年 1月 2日 3時 4分
-  // startPicker 除最小值外 还需要有一个时间限制, endPicker 时间选择后, startPicker 的 添加一个时间限制boundary min->boundary
-  // endPicker 除最小值外 还需要有一个时间限制, startPicker 时间选择后, endPicker 的 添加一个时间限制boundary boundary->max
-  const column = columns[cIndex]
-  // 根据当前选择年确认 ranges[0][0] minYear ranges[0][1] maxYear 以此类推
-  if (type === 'datetime') {
-    const year = boundary[0]
-    const month = boundary[1]
-    const date = boundary[2]
-    const hour = boundary[3]
-    const minute = boundary[4]
-
-    if (column.type === 'year') {
-      return isStart ? value > year : value < year
-    }
-    if (column.type === 'month' && currentValue[0] === year) {
-      return isStart ? value > month : value < month
-    }
-    if (column.type === 'date' && currentValue[0] === year && currentValue[1] === month) {
-      return isStart ? value > date : value < date
-    }
-    if (column.type === 'hour' && currentValue[0] === year && currentValue[1] === month && currentValue[2] === date) {
-      return isStart ? value > hour : value < hour
-    }
-    if (column.type === 'minute' && currentValue[0] === year && currentValue[1] === month && currentValue[2] === date && currentValue[3] === hour) {
-      return isStart ? value > minute : value < minute
-    }
-  } else if (type === 'year-month') {
-    const year = boundary[0]
-    const month = boundary[1]
-
-    if (column.type === 'year') {
-      return isStart ? value > year : value < year
-    }
-    if (column.type === 'month' && currentValue[0] === year) {
-      return isStart ? value > month : value < month
-    }
-  } else if (type === 'year') {
-    const year = boundary[0]
-
-    if (column.type === 'year') {
-      return isStart ? value > year : value < year
-    }
-  } else if (type === 'date') {
-    const year = boundary[0]
-    const month = boundary[1]
-    const date = boundary[2]
-
-    if (column.type === 'year') {
-      return isStart ? value > year : value < year
-    }
-    if (column.type === 'month' && currentValue[0] === year) {
-      return isStart ? value > month : value < month
-    }
-    if (column.type === 'date' && currentValue[0] === year && currentValue[1] === month) {
-      return isStart ? value > date : value < date
-    }
-  } else if (type === 'time') {
-    const hour = boundary[0]
-    const minute = boundary[1]
-
-    if (column.type === 'hour') {
-      return isStart ? value > hour : value < hour
-    }
-    if (column.type === 'minute' && currentValue[0] === hour) {
-      return isStart ? value > minute : value < minute
-    }
-  }
-
-  return false
 }
 
 function setLoading(loading: boolean) {

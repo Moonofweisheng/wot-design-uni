@@ -1,17 +1,18 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-02-27 12:47:41
+ * @LastEditTime: 2025-03-29 15:02:23
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\docs\.vitepress\config.mts
+ * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
  * 记得注释
  */
 import { defineConfig } from 'vitepress';
 import viteCompression from 'vite-plugin-compression'
 import { fileURLToPath, URL } from 'node:url'
-
 import { MarkdownTransform } from './plugins/markdown-transform'
+import enUS from './locales/en-US'
+import zhCN from './locales/zh-CN'
 
 
 export default defineConfig({
@@ -64,11 +65,40 @@ export default defineConfig({
   },
   title: `Wot Design Uni`,
   description: '一个参照wot-design打造的uni-app组件库',
+  locales: {
+    root: {
+      label: '简体中文',
+      lang: 'zh-CN',
+      ...zhCN
+    },
+    'en-US': {
+      label: 'English', 
+      lang: 'en-US',
+      ...enUS,
+    }
+  },
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'stylesheet', href: '/petercatai/assistant.min.css' }],
+    ['script', {src: '/petercatai/react.development.js' }],
+    ['script', {src: '/petercatai/react-dom.development.js' }],
+    ['script', {src: '/petercatai/dayjs.min.js' }],
+    ['script', {src: '/petercatai/antd.js' }],
+    ['script', {src: '/petercatai/lottie.js' }],
+    ['script', {src: '/petercatai/assistant.min.js' }],
     ['script', {}, `
       !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"3J4q4tM6fN0n1fbZ",ck:"3J4q4tM6fN0n1fbZ"});
-   `]
+    `],
+    ['script', {}, `
+      window.onload = function() {
+        PetercatLUI.initAssistant({
+          apiDomain: 'https://api.petercat.ai',
+          token:"d673a0ef-73e3-46ff-9e08-e43eba4548d1",
+          helloMessage:"我可以处理任何 Wot UI 的问题，尽管放马过来~",
+          hideLogo: true,
+        });
+      }
+    `]
   ],
   themeConfig: {
     logo: '/logo.png',
@@ -406,8 +436,8 @@ export default defineConfig({
             link: "/component/number-keyboard",
             text: "NumberKeyboard 数字键盘"
           }]
-        }, {
-
+        }, 
+        {
           text: "数据展示",
           collapsed: false,
           items: [{
@@ -465,6 +495,15 @@ export default defineConfig({
             link: "/component/table",
             text: "Table 表格"
           }]
+        },
+        {
+          text: '组合式API',
+          items: [
+            { text: 'useUpload', link: '/component/use-upload' },
+            { text: 'useCountDown', link: '/component/use-count-down' },
+            { text: 'useToast', link: '/component/use-toast' },
+            { text: 'useMessage', link: '/component/use-message' }
+          ]
         }
       ]
     }

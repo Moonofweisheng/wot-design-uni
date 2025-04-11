@@ -3,34 +3,49 @@
     <wd-toast />
     <view style="margin: 20px 0">
       <wd-cell-group border>
-        <wd-col-picker label="选择地址" v-model="value1" :columns="areaData1" :column-change="columnChange1" @confirm="handleValue" />
-        <wd-col-picker label="初始选项" v-model="value2" :columns="areaData2" :column-change="columnChange" auto-complete />
-        <wd-col-picker label="禁用" disabled v-model="value3" :columns="areaData3" :column-change="columnChange1" />
-        <wd-col-picker label="只读" readonly v-model="value3" :columns="areaData3" :column-change="columnChange1" />
-        <wd-col-picker label="禁用选项" v-model="value4" :columns="areaData4" :column-change="columnChange1" />
-        <wd-col-picker label="选项提示信息" v-model="value5" :columns="areaData5" :column-change="columnChange1" />
-        <wd-col-picker label="展示格式化" v-model="value6" :columns="areaData3" :column-change="columnChange1" :display-format="displayFormat" />
-        <wd-col-picker label="标题" v-model="value7" title="选择地址" :columns="areaData1" :column-change="columnChange1" />
+        <wd-col-picker :label="$t('xuan-ze-di-zhi')" v-model="value1" :columns="areaData1" :column-change="columnChange1" @confirm="handleValue" />
+        <wd-col-picker :label="$t('chu-shi-xuan-xiang')" v-model="value2" :columns="areaData2" :column-change="columnChange" auto-complete />
+        <wd-col-picker :label="$t('jinYong')" disabled v-model="value3" :columns="areaData3" :column-change="columnChange1" />
+        <wd-col-picker :label="$t('zhi-du')" readonly v-model="value3" :columns="areaData3" :column-change="columnChange1" />
+        <wd-col-picker :label="$t('jin-yong-xuan-xiang')" v-model="value4" :columns="areaData4" :column-change="columnChange1" />
+        <wd-col-picker :label="$t('xuan-xiang-ti-shi-xin-xi')" v-model="value5" :columns="areaData5" :column-change="columnChange1" />
+        <wd-col-picker
+          :label="$t('zhan-shi-ge-shi-hua')"
+          v-model="value6"
+          :columns="areaData3"
+          :column-change="columnChange1"
+          :display-format="displayFormat"
+        />
+        <wd-col-picker :label="$t('biaoTi-0')" v-model="value7" :title="$t('xuan-ze-di-zhi')" :columns="areaData1" :column-change="columnChange1" />
         <wd-col-picker label="before-confirm" v-model="value8" :columns="areaData1" :column-change="columnChange1" :before-confirm="beforeConfirm" />
-        <wd-col-picker label="错误" error v-model="value9" :columns="areaData1" :column-change="columnChange1" />
-        <wd-col-picker label="必填" required v-model="value10" :columns="areaData1" :column-change="columnChange1" />
+        <wd-col-picker :label="$t('cuo-wu')" error v-model="value9" :columns="areaData1" :column-change="columnChange1" />
+        <wd-col-picker :label="$t('bi-tian')" required v-model="value10" :columns="areaData1" :column-change="columnChange1" />
       </wd-cell-group>
     </view>
-    <demo-block title="一般column-change是个异步获取数据的操作，触发column-change组件会有默认loading，数据响应后关闭loading" transparent>
-      <wd-col-picker label="选择地址" v-model="value11" :columns="areaData1" :column-change="columnChange2" />
+    <demo-block
+      :title="
+        $t(
+          'yi-ban-columnchange-shi-ge-yi-bu-huo-qu-shu-ju-de-cao-zuo-chu-fa-columnchange-zu-jian-hui-you-mo-ren-loading-shu-ju-xiang-ying-hou-guan-bi-loading'
+        )
+      "
+      transparent
+    >
+      <wd-col-picker :label="$t('xuan-ze-di-zhi')" v-model="value11" :columns="areaData1" :column-change="columnChange2" />
     </demo-block>
-    <demo-block title="label不传" transparent>
+    <demo-block :title="$t('label-bu-chuan')" transparent>
       <wd-col-picker v-model="value12" :columns="areaData1" :column-change="columnChange1" />
     </demo-block>
-    <demo-block title="大小" transparent>
-      <wd-col-picker label="选择地址" v-model="value13" size="large" :columns="areaData1" :column-change="columnChange1" />
+    <demo-block :title="$t('da-xiao')" transparent>
+      <wd-col-picker :label="$t('xuan-ze-di-zhi')" v-model="value13" size="large" :columns="areaData1" :column-change="columnChange1" />
     </demo-block>
-    <demo-block title="值靠右展示" transparent>
-      <wd-col-picker label="选择地址" align-right v-model="value14" :columns="areaData1" :column-change="columnChange1" />
+    <demo-block :title="$t('zhi-kao-you-zhan-shi')" transparent>
+      <wd-col-picker :label="$t('xuan-ze-di-zhi')" align-right v-model="value14" :columns="areaData1" :column-change="columnChange1" />
     </demo-block>
-    <demo-block title="自定义选择器" transparent>
+    <demo-block :title="$t('zi-ding-yi-xuan-ze-qi')" transparent>
       <view style="margin-left: 15px">
-        <view style="margin-bottom: 10px">当前选中项: {{ displayValue }}</view>
+        <view style="margin-bottom: 10px"></view>
+        <view style="margin-bottom: 10px">{{ $t('dang-qian-xuan-zhong-xiang-displayvalue') }} {{ displayValue }}</view>
+
         <wd-col-picker
           v-model="value15"
           use-default-slot
@@ -39,7 +54,7 @@
           style="display: inline-block"
           @confirm="handleConfirm"
         >
-          <wd-button>选择地址</wd-button>
+          <wd-button>{{ $t('xuan-ze-di-zhi') }}</wd-button>
         </wd-col-picker>
       </view>
     </demo-block>
@@ -50,12 +65,13 @@ import { onMounted, ref } from 'vue'
 import { useToast } from '@/uni_modules/wot-design-uni'
 import type { ColPickerColumnChange } from '@/uni_modules/wot-design-uni/components/wd-col-picker/types'
 import { useColPickerData } from '@/hooks/useColPickerData'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { colPickerData, findChildrenByCode } = useColPickerData()
 const toast = useToast()
 
 onMounted(async () => {
-  toast.loading('数据加载中')
+  toast.loading(t('shu-ju-jia-zai-zhong'))
   await sleep()
   toast.close()
   value2.value = ['150000', '150100', '150121']
@@ -122,7 +138,12 @@ const areaData5 = ref<any[]>([
       value: item.value,
       label: item.text,
       disabled: item.value === '140000',
-      tip: item.value === '140000' ? '该地区无货，暂时无法选择' : item.value === '150000' ? '该地区配送时间可能较长' : ''
+      tip:
+        item.value === '140000'
+          ? t('gai-di-qu-wu-huo-zan-shi-wu-fa-xuan-ze')
+          : item.value === '150000'
+          ? t('gai-di-qu-pei-song-shi-jian-ke-neng-jiao-chang')
+          : ''
     }
   })
 ])
@@ -164,7 +185,7 @@ const columnChange2: ColPickerColumnChange = ({ selectedItem, resolve, finish })
   setTimeout(() => {
     if (Math.random() > 0.7) {
       finish(false)
-      toast.error('数据请求失败，请重试')
+      toast.error(t('shu-ju-qing-qiu-shi-bai-qing-zhong-shi'))
       return
     }
     const areaData = findChildrenByCode(colPickerData, selectedItem.value)
@@ -187,7 +208,7 @@ const displayFormat = (selectedItems: Record<string, any>[]) => {
 }
 const beforeConfirm = (value: (string | number)[], selectedItems: Record<string, any>[], resolve: (isPass: boolean) => void) => {
   if (parseInt(String(value[2])) > 120000) {
-    toast.error('该地区库存不足')
+    toast.error(t('gai-di-qu-ku-cun-bu-zu'))
     resolve(false)
   } else {
     resolve(true)

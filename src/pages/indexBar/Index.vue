@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <wd-search hide-cancel placeholder="我要去哪里？" v-model="keyword" @search="handleSearch" @clear="handleClear" />
+    <wd-search hide-cancel :placeholder="$t('wo-yao-qu-na-li')" v-model="keyword" @search="handleSearch" @clear="handleClear" />
     <view class="wraper">
       <wd-index-bar sticky v-if="showList.length">
         <view v-for="item in showList" :key="item.index">
@@ -14,8 +14,17 @@
 
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 const { show: showToast } = useToast()
+const { t, locale } = useI18n()
+
+watch(
+  () => locale.value,
+  () => {
+    handleSearch()
+  }
+)
 
 onMounted(() => {
   handleSearch()
@@ -25,114 +34,152 @@ const keyword = ref('')
 
 const showList = ref<any>([])
 
-const indexList = [
+const indexList = computed(() => [
   {
     index: 'A',
-    data: ['阿坝', '阿拉善', '阿里', '安康', '安庆', '鞍山', '安顺', '安阳', '澳门']
+    data: [t('a-ba'), t('a-la-shan'), t('a-li'), t('an-kang'), t('an-qing'), t('an-shan'), t('an-shun'), t('an-yang'), t('ao-men')]
   },
   {
     index: 'B',
-    data: ['北京', '白银', '保定', '宝鸡', '保山', '包头', '巴中', '北海', '蚌埠', '本溪', '毕节', '滨州', '百色', '亳州']
+    data: [
+      t('bei-jing'),
+      t('bai-yin'),
+      t('bao-ding'),
+      t('bao-ji'),
+      t('bao-shan'),
+      t('bao-tou'),
+      t('ba-zhong'),
+      t('bei-hai'),
+      t('bang-bu'),
+      t('ben-xi'),
+      t('bi-jie'),
+      t('bin-zhou'),
+      t('bai-se'),
+      t('bo-zhou')
+    ]
   },
   {
     index: 'C',
     data: [
-      '重庆',
-      '成都',
-      '长沙',
-      '长春',
-      '沧州',
-      '常德',
-      '昌都',
-      '长治',
-      '常州',
-      '巢湖',
-      '潮州',
-      '承德',
-      '郴州',
-      '赤峰',
-      '池州',
-      '崇左',
-      '楚雄',
-      '滁州',
-      '朝阳'
+      t('zhong-qing'),
+      t('cheng-du'),
+      t('chang-sha'),
+      t('chang-chun'),
+      t('cang-zhou'),
+      t('chang-de'),
+      t('chang-du'),
+      t('chang-zhi'),
+      t('chang-zhou'),
+      t('chao-hu'),
+      t('chao-zhou'),
+      t('cheng-de'),
+      t('chen-zhou'),
+      t('chi-feng'),
+      t('chi-zhou'),
+      t('chong-zuo'),
+      t('chu-xiong'),
+      t('chu-zhou'),
+      t('zhao-yang')
     ]
   },
   {
     index: 'D',
-    data: ['大连', '东莞', '大理', '丹东', '大庆', '大同', '大兴安岭', '德宏', '德阳', '德州', '定西', '迪庆', '东营']
+    data: [
+      t('da-lian'),
+      t('dong-guan'),
+      t('da-li'),
+      t('dan-dong'),
+      t('da-qing'),
+      t('da-tong'),
+      t('da-xing-an-ling'),
+      t('de-hong'),
+      t('de-yang'),
+      t('de-zhou'),
+      t('ding-xi'),
+      t('di-qing'),
+      t('dong-ying')
+    ]
   },
   {
     index: 'E',
-    data: ['鄂尔多斯', '恩施', '鄂州']
+    data: [t('e-er-duo-si'), t('en-shi'), t('e-zhou')]
   },
   {
     index: 'F',
-    data: ['福州', '防城港', '佛山', '抚顺', '抚州', '阜新', '阜阳']
+    data: [t('fu-zhou'), t('fang-cheng-gang'), t('fo-shan'), t('fu-shun'), t('fu-zhou-0'), t('fu-xin'), t('fu-yang')]
   },
   {
     index: 'G',
-    data: ['广州', '桂林', '贵阳', '甘南', '赣州', '甘孜', '广安', '广元', '贵港', '果洛']
+    data: [
+      t('guang-zhou'),
+      t('gui-lin'),
+      t('gui-yang'),
+      t('gan-nan'),
+      t('gan-zhou'),
+      t('gan-zi'),
+      t('guang-an'),
+      t('guang-yuan'),
+      t('gui-gang'),
+      t('guo-luo')
+    ]
   },
   {
     index: 'H',
     data: [
-      '杭州',
-      '哈尔滨',
-      '合肥',
-      '海口',
-      '呼和浩特',
-      '海北',
-      '海东',
-      '海南',
-      '海西',
-      '邯郸',
-      '汉中',
-      '鹤壁',
-      '河池',
-      '鹤岗',
-      '黑河',
-      '衡水',
-      '衡阳',
-      '河源',
-      '贺州',
-      '红河',
-      '淮安',
-      '淮北',
-      '怀化',
-      '淮南',
-      '黄冈',
-      '黄南',
-      '黄山',
-      '黄石',
-      '惠州',
-      '葫芦岛',
-      '呼伦贝尔',
-      '湖州',
-      '菏泽'
+      t('hang-zhou'),
+      t('ha-er-bin'),
+      t('he-fei'),
+      t('hai-kou'),
+      t('hu-he-hao-te'),
+      t('hai-bei'),
+      t('hai-dong'),
+      t('hai-nan'),
+      t('hai-xi'),
+      t('han-dan'),
+      t('han-zhong'),
+      t('he-bi'),
+      t('he-chi'),
+      t('he-gang'),
+      t('hei-he'),
+      t('heng-shui'),
+      t('heng-yang'),
+      t('he-yuan'),
+      t('he-zhou'),
+      t('hong-he'),
+      t('huai-an'),
+      t('huai-bei'),
+      t('huai-hua'),
+      t('huai-nan'),
+      t('huang-gang'),
+      t('huang-nan'),
+      t('huang-shan'),
+      t('huang-shi'),
+      t('hui-zhou'),
+      t('hu-lu-dao'),
+      t('hu-lun-bei-er'),
+      t('hu-zhou'),
+      t('he-ze')
     ]
   }
-]
+])
 
 function handleClick(index: string, city: string) {
-  showToast(`当前点击项：${index}，城市：${city}`)
+  showToast(t('dang-qian-dian-ji-xiang-index-cheng-shi-city', [index, city]))
 }
 
 function handleSearch() {
   showList.value = []
   nextTick(() => {
     if (keyword.value) {
-      showList.value = indexList.filter((item) => {
+      showList.value = indexList.value.filter((item) => {
         return item.data.some((city) => {
           return city.includes(keyword.value)
         })
       })
     } else {
-      showList.value = indexList
+      showList.value = indexList.value
     }
   })
-
-  // 筛选indexList项中data包含keyword的项
 }
 
 function handleClear() {

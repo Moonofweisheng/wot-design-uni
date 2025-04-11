@@ -9,7 +9,13 @@
             <text class="version">@{{ packageConfig.version }}</text>
           </view>
         </view>
-        <view class="page__desc">Wot Design Uni 是一个基于Vue3+TS开发的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。</view>
+        <view class="page__desc">
+          {{
+            $t(
+              'wot-design-uni-shi-yi-ge-ji-yu-vue3ts-kai-fa-de-uniapp-zu-jian-ku-ti-gong-70-gao-zhi-liang-zu-jian-zhi-chi-an-hei-mo-shi-guo-ji-hua-he-zi-ding-yi-zhu-ti'
+            )
+          }}
+        </view>
       </view>
       <view class="page__bd">
         <block v-for="(item, index) in list" :key="index">
@@ -18,8 +24,8 @@
               <view class="wd-flex__item title">{{ item.name }}</view>
               <image class="kind-list__img" :src="item.icon"></image>
             </view>
-            <view :class="['kind-list__item-bd', item.open ? 'kind-list__item-bd_show' : '']">
-              <view :class="['wd-cells', item.open ? 'wd-cells_show' : '']">
+            <view :class="['kind-list__item-bd', openState[item.id] ? 'kind-list__item-bd_show' : '']">
+              <view :class="['wd-cells', openState[item.id] ? 'wd-cells_show' : '']">
                 <wd-cell
                   v-for="(page, j) in item.pages"
                   :key="j"
@@ -37,355 +43,358 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import packageConfig from '../../../package.json'
 import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const imgModules: any = import.meta.glob('../images/*.png', { eager: true })
 
-const list = ref([
+// 使用computed使list响应语言变化
+const list = computed(() => [
   {
     id: 'widget',
-    name: '基础',
+    name: t('ji-chu'),
     open: false,
     icon: imgModules['../images/icon_nav_widget.png'].default,
     pages: [
       {
         id: 'button',
-        name: 'Button 按钮'
+        name: t('button-an-niu')
       },
       {
         id: 'icon',
-        name: 'Icon 图标'
+        name: t('icon-tu-biao')
       },
       {
         id: 'layout',
-        name: 'Layout 布局'
+        name: t('layout-bu-ju')
       },
       {
         id: 'configProvider',
-        name: 'ConfigProvider 全局配置'
+        name: t('configprovider-quan-ju-pei-zhi')
       },
       {
         id: 'popup',
-        name: 'Popup 弹出层'
+        name: t('popup-dan-chu-ceng')
       },
       {
         id: 'resize',
-        name: 'Resize 监听元素尺寸变化'
+        name: t('resize-jian-ting-yuan-su-chi-cun-bian-hua')
       },
       {
         id: 'transition',
-        name: 'Transition 动画'
+        name: t('transition-dong-hua')
       },
       {
         id: 'fab',
-        name: 'Fab 悬浮按钮'
+        name: t('fab-xuan-fu-an-niu')
       },
       {
         id: 'text',
-        name: 'Text 文本'
+        name: t('text-wen-ben')
       }
     ]
   },
   {
     id: 'nav',
-    name: '导航',
+    name: t('dao-hang'),
     open: false,
     icon: imgModules['../images/icon_nav_nav.png'].default,
 
     pages: [
       {
         id: 'pagination',
-        name: 'Pagination 分页'
+        name: t('pagination-fen-ye')
       },
       {
         id: 'popover',
-        name: 'Popover 气泡'
+        name: t('popover-qi-pao')
       },
       {
         id: 'tabs',
-        name: 'Tabs 标签页'
+        name: t('tabs-biao-qian-ye')
       },
       {
         id: 'segmented',
-        name: 'Segmented 分段器'
+        name: t('segmented-fen-duan-qi')
       },
       {
         id: 'tabbar',
-        name: 'Tabbar 标签栏'
+        name: t('tabbar-biao-qian-lan')
       },
       {
         id: 'navbar',
-        name: 'Navbar 导航栏'
+        name: t('navbar-dao-hang-lan')
       },
       {
         id: 'sidebar',
-        name: 'Sidebar 侧边栏'
+        name: t('sidebar-ce-bian-lan')
       },
       {
         id: 'backtop',
-        name: 'Backtop 回到顶部'
+        name: t('backtop-hui-dao-ding-bu')
       },
       {
         id: 'indexBar',
-        name: 'IndexBar 索引栏'
+        name: t('indexbar-suo-yin-lan')
       }
     ]
   },
   {
     id: 'form',
-    name: '数据输入',
+    name: t('shu-ju-shu-ru'),
     open: false,
     icon: imgModules['../images/icon_nav_form.png'].default,
     pages: [
       {
         id: 'calendar',
-        name: 'Calendar 日历选择器'
+        name: t('calendar-ri-li-xuan-ze-qi')
       },
       {
         id: 'calendarView',
-        name: 'CalendarView 日历面板'
+        name: t('calendarview-ri-li-mian-ban')
       },
       {
         id: 'checkbox',
-        name: 'Checkbox 复选框'
+        name: t('checkbox-fu-xuan-kuang')
       },
       {
         id: 'colPicker',
-        name: 'ColPicker 多列选择器'
+        name: t('colpicker-duo-lie-xuan-ze-qi')
       },
       {
         id: 'datetimePicker',
-        name: 'DatetimePicker 时间选择器'
+        name: t('datetimepicker-shi-jian-xuan-ze-qi')
       },
       {
         id: 'datetimePickerView',
-        name: 'DatetimePickerView 时间选择器视图'
+        name: t('datetimepickerview-shi-jian-xuan-ze-qi-shi-tu')
       },
       {
         id: 'input',
-        name: 'Input 输入框'
+        name: t('input-shu-ru-kuang')
       },
       {
         id: 'textarea',
-        name: 'Textarea 文本域'
+        name: t('textarea-wen-ben-yu')
       },
       {
         id: 'inputNumber',
-        name: 'InputNumber 计数器'
+        name: t('inputnumber-ji-shu-qi')
       },
       {
         id: 'picker',
-        name: 'Picker 选择器'
+        name: t('picker-xuan-ze-qi')
       },
       {
         id: 'pickerView',
-        name: 'PickerView 选择器视图'
+        name: t('pickerview-xuan-ze-qi-shi-tu')
       },
       {
         id: 'radio',
-        name: 'Radio 单选框'
+        name: t('radio-dan-xuan-kuang')
       },
       {
         id: 'rate',
-        name: 'Rate 评分'
+        name: t('rate-ping-fen')
       },
       {
         id: 'search',
-        name: 'Search 搜索'
+        name: t('search-sou-suo')
       },
       {
         id: 'selectPicker',
-        name: 'SelectPicker 单复选选择器'
+        name: t('selectpicker-dan-fu-xuan-xuan-ze-qi')
       },
       {
         id: 'slider',
-        name: 'Slider 滑块'
+        name: t('slider-hua-kuai')
       },
       {
         id: 'switch',
-        name: 'Switch 开关'
+        name: t('switch-kai-guan')
       },
       {
         id: 'form',
-        name: 'Form 表单'
+        name: t('form-biao-dan')
       },
       {
         id: 'upload',
-        name: 'Upload 上传'
+        name: t('upload-shang-chuan')
       },
       {
         id: 'passwordInput',
-        name: 'PasswordInput 密码输入框'
+        name: t('passwordinput-mi-ma-shu-ru-kuang')
       },
       {
         id: 'signature',
-        name: 'Signature 签名'
+        name: t('signature-qian-ming')
       }
     ]
   },
   {
     id: 'feedback',
-    name: '反馈',
+    name: t('fan-kui'),
     open: false,
     icon: imgModules['../images/icon_nav_feedback.png'].default,
     pages: [
       {
         id: 'actionSheet',
-        name: 'ActionSheet 上拉菜单'
+        name: t('actionsheet-shang-la-cai-dan')
       },
       {
         id: 'dropMenu',
-        name: 'DropMenu 下拉菜单'
+        name: t('dropmenu-xia-la-cai-dan')
       },
       {
         id: 'floatingPanel',
-        name: 'FloatingPanel 浮动面板'
+        name: t('floatingpanel-fu-dong-mian-ban')
       },
       {
         id: 'loading',
-        name: 'Loading 加载指示器'
+        name: t('loading-jia-zai-zhi-shi-qi')
       },
       {
         id: 'messageBox',
-        name: 'MessageBox 弹框'
+        name: t('messagebox-dan-kuang')
       },
       {
         id: 'overlay',
-        name: 'Overlay 遮罩层'
+        name: t('overlay-zhe-zhao-ceng')
       },
       {
         id: 'noticeBar',
-        name: 'NoticeBar 通知栏'
+        name: t('noticebar-tong-zhi-lan')
       },
       {
         id: 'progress',
-        name: 'Progress 进度条'
+        name: t('progress-jin-du-tiao')
       },
       {
         id: 'circle',
-        name: 'Circle 环形进度条'
+        name: t('circle-huan-xing-jin-du-tiao')
       },
       {
         id: 'sortButton',
-        name: 'SortButton 排序按钮'
+        name: t('sortbutton-pai-xu-an-niu')
       },
       {
         id: 'statusTip',
-        name: 'StatusTip 缺省提示'
+        name: t('statustip-que-sheng-ti-shi')
       },
       {
         id: 'swipeAction',
-        name: 'SwipeAction 滑动操作'
+        name: t('swipeaction-hua-dong-cao-zuo')
       },
       {
         id: 'toast',
-        name: 'Toast 轻提示'
+        name: t('toast-qing-ti-shi')
       },
       {
         id: 'notify',
-        name: 'Notify 消息通知'
+        name: t('notify-xiao-xi-tong-zhi')
       },
       {
         id: 'tooltip',
-        name: 'Tooltip 文字提示'
+        name: t('tooltip-wen-zi-ti-shi')
       },
       {
         id: 'countDown',
-        name: 'CountDown 倒计时'
+        name: t('countdown-dao-ji-shi')
       },
       {
         id: 'countTo',
-        name: 'CountTo 数字滚动'
+        name: t('countto-shu-zi-gun-dong')
       },
       {
         id: 'keyboard',
-        name: 'Keyboard 虚拟键盘'
+        name: t('keyboard-xu-ni-jian-pan')
       },
       {
         id: 'numberKeyboard',
-        name: 'NumberKeyboard 数字键盘'
+        name: t('numberkeyboard-shu-zi-jian-pan')
       }
     ]
   },
   {
     id: 'show',
-    name: '数据展示',
+    name: t('shu-ju-zhan-shi'),
     open: false,
     icon: imgModules['../images/icon_nav_show.png'].default,
     pages: [
       {
         id: 'badge',
-        name: 'Badge 徽标'
+        name: t('badge-hui-biao')
       },
       {
         id: 'card',
-        name: 'Card 卡片'
+        name: t('card-ka-pian')
       },
       {
         id: 'cell',
-        name: 'Cell 单元格'
+        name: t('cell-dan-yuan-ge')
       },
       {
         id: 'collapse',
-        name: 'Collapse 折叠面板'
+        name: t('collapse-zhe-die-mian-ban')
       },
       {
         id: 'curtain',
-        name: 'Curtain 幕帘'
+        name: t('curtain-mu-lian')
       },
       {
         id: 'divider',
-        name: 'Divider 分割线'
+        name: t('divider-fen-ge-xian')
       },
       {
         id: 'gap',
-        name: 'Gap 间隔槽'
+        name: t('gap-jian-ge-cao')
       },
       {
         id: 'img',
-        name: 'Img 图片'
+        name: t('img-tu-pian')
       },
       {
         id: 'imgCropper',
-        name: 'imgCropper 图片裁剪'
+        name: t('imgcropper-tu-pian-cai-jian')
       },
       {
         id: 'grid',
-        name: 'Grid 宫格'
+        name: t('grid-gong-ge')
       },
       {
         id: 'loadmore',
-        name: 'Loadmore 加载更多'
+        name: t('loadmore-jia-zai-geng-duo')
       },
       {
         id: 'skeleton',
-        name: 'Skeleton 骨架屏'
+        name: t('skeleton-gu-jia-ping')
       },
       {
         id: 'steps',
-        name: 'Steps 步骤条'
+        name: t('steps-bu-zhou-tiao')
       },
       {
         id: 'sticky',
-        name: 'Sticky 吸顶布局'
+        name: t('sticky-xi-ding-bu-ju')
       },
       {
         id: 'tag',
-        name: 'Tag 标签'
+        name: t('tag-biao-qian')
       },
       {
         id: 'watermark',
-        name: 'Watermark 水印'
+        name: t('watermark-shui-yin')
       },
       {
         id: 'swiper',
-        name: 'Swiper 轮播图'
+        name: t('swiper-lun-bo-tu')
       },
       {
         id: 'table',
-        name: 'Table 表格'
+        name: t('table-biao-ge')
       }
     ]
   }
@@ -397,20 +406,16 @@ function handleClick(url: string) {
   })
 }
 
+// 创建一个状态来跟踪每个分类的打开状态
+const openState = ref<Record<string, boolean>>({})
+
 function kindToggle(id: string) {
-  const listValue = list.value
-  for (let i = 0, len = listValue.length; i < len; ++i) {
-    if (listValue[i].id === id) {
-      listValue[i].open = !listValue[i].open
-      break
-    }
-  }
-  list.value = listValue
+  openState.value[id] = !openState.value[id]
 }
 
 onShareAppMessage(() => {
   return {
-    title: '一个基于Vue3+TS的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。',
+    title: t('yi-ge-ji-yu-vue3ts-de-uniapp-zu-jian-ku-ti-gong-70-gao-zhi-liang-zu-jian-zhi-chi-an-hei-mo-shi-guo-ji-hua-he-zi-ding-yi-zhu-ti'),
     path: '/pages/index/Index',
     imageUrl: imgModules['../images/share.png'].default
   }
@@ -418,7 +423,7 @@ onShareAppMessage(() => {
 
 onShareTimeline(() => {
   return {
-    title: '一个基于Vue3+TS的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。',
+    title: t('yi-ge-ji-yu-vue3ts-de-uniapp-zu-jian-ku-ti-gong-70-gao-zhi-liang-zu-jian-zhi-chi-an-hei-mo-shi-guo-ji-hua-he-zi-ding-yi-zhu-ti-0'),
     path: '/pages/index/Index',
     imageUrl: imgModules['../images/share.png'].default
   }

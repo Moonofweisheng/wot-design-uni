@@ -23,6 +23,10 @@
 
     @include e(content) {
       background-color: $-dark-background2;
+
+      @include m(hover) {
+        background-color: $-grid-item-hover-bg-dark !important;
+      }
     }
   }
 }
@@ -128,6 +132,10 @@
         transform: scale(0.5);
         box-sizing: border-box;
       }
+    }
+
+    @include m(hover) {
+      background-color: $-grid-item-hover-bg !important;
     }
   }
 

@@ -1,64 +1,117 @@
 <template>
   <page-wraper>
-    <demo-block title="基本用法" transparent>
-      <wd-textarea v-model="value1" placeholder="请填写评价" />
+    <demo-block :title="$t('jiBenYongFa')" transparent>
+      <wd-textarea v-model="value1" :placeholder="$t('qing-tian-xie-ping-jia')" />
     </demo-block>
-    <demo-block title="只读" transparent>
+    <demo-block :title="$t('zhi-du')" transparent>
       <wd-textarea v-model="value8" readonly clearable></wd-textarea>
     </demo-block>
-    <demo-block title="禁用" transparent>
+    <demo-block :title="$t('jinYong')" transparent>
       <wd-textarea v-model="value11" disabled clearable></wd-textarea>
     </demo-block>
-    <demo-block title="清空按钮 和 字数限制" transparent>
+    <demo-block :title="$t('qing-kong-an-niu-he-zi-shu-xian-zhi')" transparent>
       <wd-textarea v-model="value2" :maxlength="120" clearable show-word-limit />
     </demo-block>
-    <demo-block title="有值且聚焦时展示清空按钮" transparent>
+    <demo-block :title="$t('you-zhi-qie-ju-jiao-shi-zhan-shi-qing-kong-an-niu')" transparent>
       <wd-textarea clear-trigger="focus" v-model="value14" :maxlength="120" clearable show-word-limit />
     </demo-block>
-    <demo-block title="点击清除按钮时不自动聚焦" transparent>
+    <demo-block :title="$t('dian-ji-qing-chu-an-niu-shi-bu-zi-dong-ju-jiao')" transparent>
       <wd-textarea v-model="value15" :focus-when-clear="false" :maxlength="120" clearable show-word-limit />
     </demo-block>
-    <demo-block title="大尺寸" transparent>
+    <demo-block :title="$t('da-chi-cun')" transparent>
       <wd-textarea v-model="value7" size="large" :maxlength="120" clearable show-word-limit></wd-textarea>
     </demo-block>
-    <demo-block title="高度自适应">
+    <demo-block :title="$t('gao-du-zi-shi-ying')">
       <wd-textarea v-model="value3" auto-height clearable></wd-textarea>
     </demo-block>
 
-    <demo-block title="cell 类型" transparent>
+    <demo-block :title="$t('cell-lei-xing')" transparent>
       <wd-cell-group border>
-        <wd-textarea label="高度自适应" auto-height clearable v-model="value5" placeholder="请输入..." prefix-icon="location" />
-        <wd-textarea label="清空按钮" clearable v-model="value4" placeholder="请输入..." required />
-        <wd-textarea label="字数限制" :maxlength="240" clearable show-word-limit v-model="value6" placeholder="请输入..." required />
-        <wd-textarea label="只读" readonly clearable :maxlength="240" show-word-limit v-model="value12" placeholder="请输入..." required />
-        <wd-textarea label="禁用" disabled clearable :maxlength="240" show-word-limit v-model="value13" placeholder="请输入..." required />
+        <wd-textarea
+          :label="$t('gao-du-zi-shi-ying-0')"
+          auto-height
+          clearable
+          v-model="value5"
+          :placeholder="$t('qing-shu-ru-0')"
+          prefix-icon="location"
+        />
+        <wd-textarea :label="$t('qing-kong-an-niu')" clearable v-model="value4" :placeholder="$t('qing-shu-ru-0')" required />
+        <wd-textarea
+          :label="$t('zi-shu-xian-zhi-0')"
+          :maxlength="240"
+          clearable
+          show-word-limit
+          v-model="value6"
+          :placeholder="$t('qing-shu-ru-0')"
+          required
+        />
+        <wd-textarea
+          :label="$t('zhi-du')"
+          readonly
+          clearable
+          :maxlength="240"
+          show-word-limit
+          v-model="value12"
+          :placeholder="$t('qing-shu-ru-0')"
+          required
+        />
+        <wd-textarea
+          :label="$t('jinYong')"
+          disabled
+          clearable
+          :maxlength="240"
+          show-word-limit
+          v-model="value13"
+          :placeholder="$t('qing-shu-ru-0')"
+          required
+        />
       </wd-cell-group>
     </demo-block>
 
-    <demo-block title="大尺寸" transparent>
+    <demo-block :title="$t('da-chi-cun')" transparent>
       <wd-cell-group border>
-        <wd-textarea label="高度自适应" auto-height size="large" clearable v-model="value9" placeholder="请输入..." required />
-        <wd-textarea label="字数限制" size="large" :maxlength="240" clearable show-word-limit v-model="value10" placeholder="请输入..." required />
+        <wd-textarea
+          :label="$t('gao-du-zi-shi-ying-1')"
+          auto-height
+          size="large"
+          clearable
+          v-model="value9"
+          :placeholder="$t('qing-shu-ru-0')"
+          required
+        />
+        <wd-textarea
+          :label="$t('zi-shu-xian-zhi-0')"
+          size="large"
+          :maxlength="240"
+          clearable
+          show-word-limit
+          v-model="value10"
+          :placeholder="$t('qing-shu-ru-0')"
+          required
+        />
       </wd-cell-group>
     </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const value1 = ref<string>('')
-const value2 = ref<string>('支持清空和字数限制的文本域')
-const value3 = ref<string>('输入文字后，输入框高度跟随字数多少变化')
+const value2 = ref<string>(t('zhi-chi-qing-kong-he-zi-shu-xian-zhi-de-wen-ben-yu'))
+const value3 = ref<string>(t('shu-ru-wen-zi-hou-shu-ru-kuang-gao-du-gen-sui-zi-shu-duo-shao-bian-hua'))
 const value4 = ref<string>('')
 const value5 = ref<string>('')
 const value6 = ref<string>('')
 const value7 = ref<string>('')
-const value8 = ref<string>('只读只读只度')
+const value8 = ref<string>(t('zhi-du-zhi-du-zhi-du'))
 const value9 = ref<string>('')
 const value10 = ref<string>('')
-const value11 = ref<string>('禁用禁用禁用')
-const value12 = ref<string>('只读只读只度')
-const value13 = ref<string>('禁用禁用禁用')
+const value11 = ref<string>(t('jin-yong-jin-yong-jin-yong'))
+const value12 = ref<string>(t('zhi-du-zhi-du-zhi-du-0'))
+const value13 = ref<string>(t('jin-yong-jin-yong-jin-yong-0'))
 const value14 = ref<string>('')
 const value15 = ref<string>('')
 </script>

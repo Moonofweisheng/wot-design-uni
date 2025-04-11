@@ -1,19 +1,19 @@
 <template>
   <page-wraper>
-    <demo-block title="基础用法">
-      <wd-sort-button v-model="value1" title="价格" @change="handleChange1" />
+    <demo-block :title="$t('ji-chu-yong-fa-0')">
+      <wd-sort-button v-model="value1" :title="$t('jia-ge')" @change="handleChange1" />
     </demo-block>
 
-    <demo-block title="设置 allow-reset 允许重置按钮">
-      <wd-sort-button v-model="value2" title="价格" allow-reset @change="handleChange2" />
+    <demo-block :title="$t('she-zhi-allowreset-yun-xu-zhong-zhi-an-niu')">
+      <wd-sort-button v-model="value2" :title="$t('jia-ge-0')" allow-reset @change="handleChange2" />
     </demo-block>
 
-    <demo-block title="设置 desc-first 优先切换为降序">
-      <wd-sort-button v-model="value3" title="价格" desc-first @change="handleChange3" />
+    <demo-block :title="$t('she-zhi-descfirst-you-xian-qie-huan-wei-jiang-xu')">
+      <wd-sort-button v-model="value3" :title="$t('jia-ge-1')" desc-first @change="handleChange3" />
     </demo-block>
 
-    <demo-block title="不展示下划线（当只有一个排序按钮时，应取消展示下划线）">
-      <wd-sort-button v-model="value4" title="价格" :line="false" @change="handleChange4" />
+    <demo-block :title="$t('bu-zhan-shi-xia-hua-xian-dang-zhi-you-yi-ge-pai-xu-an-niu-shi-ying-qu-xiao-zhan-shi-xia-hua-xian')">
+      <wd-sort-button v-model="value4" :title="$t('jia-ge-2')" :line="false" @change="handleChange4" />
     </demo-block>
   </page-wraper>
 </template>

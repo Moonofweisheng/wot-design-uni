@@ -1,26 +1,26 @@
 <template>
   <page-wraper>
-    <demo-block title="基本用法">
-      <wd-button @click="handleClick1">关闭按钮在内部</wd-button>
+    <demo-block :title="$t('jiBenYongFa')">
+      <wd-button @click="handleClick1">{{ $t('guan-bi-an-niu-zai-nei-bu') }}</wd-button>
     </demo-block>
-    <demo-block title="修改按钮位置">
+    <demo-block :title="$t('xiu-gai-an-niu-wei-zhi')">
       <view>
-        <wd-button @click="handleClick2">左上</wd-button>
-        <wd-button @click="handleClick3">顶部</wd-button>
-        <wd-button @click="handleClick4">右上</wd-button>
+        <wd-button @click="handleClick2">{{ $t('zuo-shang') }}</wd-button>
+        <wd-button @click="handleClick3">{{ $t('ding-bu') }}</wd-button>
+        <wd-button @click="handleClick4">{{ $t('you-shang') }}</wd-button>
       </view>
       <view>
-        <wd-button @click="handleClick5">左下</wd-button>
-        <wd-button @click="handleClick6">底部</wd-button>
-        <wd-button @click="handleClick7">右下</wd-button>
+        <wd-button @click="handleClick5">{{ $t('zuo-xia') }}</wd-button>
+        <wd-button @click="handleClick6">{{ $t('di-bu') }}</wd-button>
+        <wd-button @click="handleClick7">{{ $t('you-xia') }}</wd-button>
       </view>
     </demo-block>
-    <demo-block title="点击遮罩关闭">
-      <wd-button @click="handleClick8">点击遮罩关闭</wd-button>
+    <demo-block :title="$t('dian-ji-zhe-zhao-guan-bi')">
+      <wd-button @click="handleClick8">{{ $t('dian-ji-zhe-zhao-guan-bi-0') }}</wd-button>
     </demo-block>
 
-    <demo-block title="自定义关闭按钮">
-      <wd-button @click="handleClick9">自定义关闭按钮</wd-button>
+    <demo-block :title="$t('zi-ding-yi-guan-bi-an-niu')">
+      <wd-button @click="handleClick9">{{ $t('zi-ding-yi-guan-bi-an-niu-0') }}</wd-button>
     </demo-block>
 
     <wd-curtain v-model="value1" :src="img" :to="link" :width="280"></wd-curtain>
@@ -33,7 +33,7 @@
     <wd-curtain v-model="value8" :src="img" :to="link" close-position="bottom-right" :width="240" :close-on-click-modal="true"></wd-curtain>
     <wd-curtain v-model="value9" :src="img" :width="280">
       <template #close>
-        <view class="custom-close" @click="handleClose9">关闭</view>
+        <view class="custom-close" @click="handleClose9">{{ $t('guan-bi') }}</view>
       </template>
     </wd-curtain>
   </page-wraper>

@@ -85,6 +85,9 @@ watch(
 
 watch(modelValue, (newVal) => {
   emit('update:modelValue', newVal)
+  if (!newVal) {
+    emit('close')
+  }
 })
 
 const imgSucc = ref<boolean>(true)
@@ -125,7 +128,6 @@ function afterleave() {
 
 function close() {
   modelValue.value = false
-  emit('close')
 }
 
 function clickModal() {

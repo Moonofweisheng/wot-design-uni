@@ -3,7 +3,7 @@
     <wd-toast />
 
     <view @click="closeOutside" class="wrapper">
-      <demo-block title="位置">
+      <demo-block :title="$t('wei-zhi')">
         <wd-radio-group v-model="placement" inline shape="dot">
           <wd-radio value="bottom" custom-class="custom-radio">bottom</wd-radio>
           <wd-radio value="bottom-start" custom-class="custom-radio">bottom-start</wd-radio>
@@ -19,29 +19,29 @@
           <wd-radio value="right-end" custom-class="custom-radio">right-end</wd-radio>
         </wd-radio-group>
       </demo-block>
-      <demo-block custom-class="pop" title="基本用法">
+      <demo-block custom-class="pop" :title="$t('jiBenYongFa')">
         <view class="center">
-          <wd-popover id="pop1" content="这是一段内容。" :placement="placement" v-model="show1" @change="handleChange1">
-            <wd-button data-id="pop1">点击展示</wd-button>
+          <wd-popover id="pop1" :content="$t('zhe-shi-yi-duan-nei-rong')" :placement="placement" v-model="show1" @change="handleChange1">
+            <wd-button data-id="pop1">{{ $t('dian-ji-zhan-shi') }}</wd-button>
           </wd-popover>
         </view>
       </demo-block>
 
-      <demo-block custom-class="pop" title="嵌套信息">
+      <demo-block custom-class="pop" :title="$t('qian-tao-xin-xi')">
         <view class="center list">
           <wd-popover v-model="show2" use-content-slot :placement="placement" @change="handleChange2">
             <template #content>
-              <view class="pop-content">这是一段自定义样式的内容。</view>
+              <view class="pop-content">{{ $t('zhe-shi-yi-duan-zi-ding-yi-yang-shi-de-nei-rong') }}</view>
             </template>
-            <wd-button>点击展示</wd-button>
+            <wd-button>{{ $t('dian-ji-zhan-shi-0') }}</wd-button>
           </wd-popover>
         </view>
       </demo-block>
 
-      <demo-block custom-class="pop" title="列表展示">
+      <demo-block custom-class="pop" :title="$t('lie-biao-zhan-shi')">
         <view class="center list">
           <wd-popover v-model="show3" mode="menu" :placement="placement" :content="menu" @menuclick="link" @change="handleChange3">
-            <wd-button>列表</wd-button>
+            <wd-button>{{ $t('lie-biao') }}</wd-button>
           </wd-popover>
         </view>
       </demo-block>
@@ -53,7 +53,8 @@ import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
 import { useQueue } from '@/uni_modules/wot-design-uni'
 import type { PlacementType } from '@/uni_modules/wot-design-uni/components/wd-popover/types'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { closeOutside } = useQueue()
 const toast = useToast()
 
@@ -66,24 +67,24 @@ const show3 = ref<boolean>(false)
 const menu = ref<Array<Record<string, any>>>([
   {
     iconClass: 'read',
-    content: '全部标记已读'
+    content: t('quan-bu-biao-ji-yi-du')
   },
   {
     iconClass: 'delete',
-    content: '清空最近会话'
+    content: t('qing-kong-zui-jin-hui-hua')
   },
   {
     iconClass: 'detection',
-    content: '消息订阅设置'
+    content: t('xiao-xi-ding-yue-she-zhi')
   },
   {
     iconClass: 'subscribe',
-    content: '消息异常检测'
+    content: t('xiao-xi-yi-chang-jian-ce')
   }
 ])
 
 function link(e: any) {
-  toast.show('选择了' + e.item.content)
+  toast.show(t('xuan-ze-le') + e.item.content)
 }
 
 function showPop(index: number) {

@@ -4,7 +4,7 @@ import type { FormItemRule } from '../wd-form/types'
 
 export type InputClearTrigger = 'focus' | 'always'
 
-export type InputType = 'text' | 'number' | 'digit' | 'idcard'
+export type InputType = 'text' | 'number' | 'digit' | 'idcard' | 'safe-password' | 'nickname' | 'tel'
 
 export type InputConfirmType = 'send' | 'search' | 'next' | 'go' | 'done'
 
@@ -66,7 +66,7 @@ export const inputProps = {
    */
   focus: makeBooleanProp(false),
   /**
-   * 类型，可选值：text / number / digit / idcard
+   * 类型，可选值：text / number / digit / idcard / safe-password / nickname / tel
    */
   type: makeStringProp<InputType>('text'),
   /**

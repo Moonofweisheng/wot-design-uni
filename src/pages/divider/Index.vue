@@ -1,44 +1,53 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2025-03-31 11:23:58
+ * @LastEditTime: 2025-04-02 20:11:32
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/src/pages/divider/Index.vue
+ * 记得注释
+-->
 <template>
   <page-wraper>
-    <demo-block title="基本用法" transparent>
+    <demo-block :title="$t('jiBenYongFa')" transparent>
       <wd-divider></wd-divider>
     </demo-block>
 
-    <demo-block title="展示文本" transparent>
-      <wd-divider>展示文本</wd-divider>
+    <demo-block :title="$t('zhan-shi-wen-ben')" transparent>
+      <wd-divider>{{ $t('zhan-shi-wen-ben-0') }}</wd-divider>
     </demo-block>
 
-    <demo-block title="自定义渲染内容" transparent>
+    <demo-block :title="$t('zi-ding-yi-xuan-ran-nei-rong')" transparent>
       <wd-divider>
         <wd-icon name="arrow-down" size="20" />
       </wd-divider>
     </demo-block>
 
-    <demo-block title="内容位置" transparent>
-      <wd-divider>中间</wd-divider>
-      <wd-divider content-position="left">左侧</wd-divider>
-      <wd-divider content-position="right">右侧</wd-divider>
+    <demo-block :title="$t('nei-rong-wei-zhi')" transparent>
+      <wd-divider>{{ $t('zhong-jian') }}</wd-divider>
+      <wd-divider content-position="left">{{ $t('zuo-ce') }}</wd-divider>
+      <wd-divider content-position="right">{{ $t('you-ce') }}</wd-divider>
     </demo-block>
 
-    <demo-block title="虚线" transparent>
-      <wd-divider dashed>虚线分割</wd-divider>
+    <demo-block :title="$t('xu-xian')" transparent>
+      <wd-divider dashed>{{ $t('xu-xian-fen-ge') }}</wd-divider>
     </demo-block>
 
-    <demo-block title="自定义颜色" transparent>
-      <wd-divider color="#4D80F0">自定义颜色</wd-divider>
+    <demo-block :title="$t('zi-ding-yi-yan-se')" transparent>
+      <wd-divider color="#4D80F0">{{ $t('zi-ding-yi-yan-se-0') }}</wd-divider>
     </demo-block>
 
-    <demo-block title="垂直分割线" transparent>
+    <demo-block :title="$t('chui-zhi-fen-ge-xian')" transparent>
       <view class="content">
-        文本
+        {{ $t('wen-ben') }}
         <wd-divider vertical />
-        文本
+        {{ $t('wen-ben') }}
         <wd-divider vertical dashed />
-        文本
+        {{ $t('wen-ben') }}
         <wd-divider vertical :hairline="false" />
-        文本
+        {{ $t('wen-ben') }}
         <wd-divider vertical color="#1989fa" />
-        文本
+        {{ $t('wen-ben') }}
       </view>
     </demo-block>
   </page-wraper>

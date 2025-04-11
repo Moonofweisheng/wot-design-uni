@@ -1,30 +1,30 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-10-10 17:02:32
- * @LastEditTime: 2023-10-10 18:08:19
+ * @LastEditTime: 2025-03-30 21:45:09
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\pages\slider\Index.vue
+ * @FilePath: /wot-design-uni/src/pages/slider/Index.vue
  * 记得注释
 -->
 <template>
   <page-wraper>
-    <demo-block title="基础用法">
+    <demo-block :title="$t('ji-chu-yong-fa-0')">
       <wd-slider v-model="value1" />
     </demo-block>
-    <demo-block title="指定选择范围">
+    <demo-block :title="$t('zhi-ding-xuan-ze-fan-wei')">
       <wd-slider v-model="value2" :min="-10" :max="10" />
     </demo-block>
-    <demo-block title="指定步长">
+    <demo-block :title="$t('zhi-ding-bu-chang')">
       <wd-slider v-model="value4" hide-min-max :step="10" />
     </demo-block>
-    <demo-block title="指定最大值和最小值">
+    <demo-block :title="$t('zhi-ding-zui-da-zhi-he-zui-xiao-zhi')">
       <wd-slider v-model="value7" :min="5" :max="50" />
     </demo-block>
-    <demo-block title="禁用状态">
+    <demo-block :title="$t('jin-yong-zhuang-tai')">
       <wd-slider v-model="value5" disabled />
     </demo-block>
-    <demo-block title="双向滑块">
+    <demo-block :title="$t('shuang-xiang-hua-kuai')">
       <wd-slider v-model="value6" :min="10" :max="80" />
     </demo-block>
   </page-wraper>

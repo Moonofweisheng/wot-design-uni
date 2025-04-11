@@ -2,12 +2,12 @@
   <page-meta :page-style="`overflow:${show ? 'hidden' : 'visible'};`"></page-meta>
   <view>
     <page-wraper>
-      <demo-block title="基础用法">
-        <wd-button type="primary" @click="show = true">显示遮罩层</wd-button>
+      <demo-block :title="$t('ji-chu-yong-fa-0')">
+        <wd-button type="primary" @click="show = true">{{ $t('xian-shi-zhe-zhao-ceng') }}</wd-button>
       </demo-block>
 
-      <demo-block title="嵌入内容">
-        <wd-button type="primary" @click="show1 = true">嵌入内容</wd-button>
+      <demo-block :title="$t('qian-ru-nei-rong')">
+        <wd-button type="primary" @click="show1 = true">{{ $t('qian-ru-nei-rong-0') }}</wd-button>
       </demo-block>
     </page-wraper>
     <wd-overlay :show="show" @click="show = false" />

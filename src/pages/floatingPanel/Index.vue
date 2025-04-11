@@ -3,21 +3,21 @@
   <view class="floating-panel">
     <page-wraper>
       <wd-tabs v-model="tab">
-        <wd-tab :title="`基础用法`">
+        <wd-tab :title="$t('ji-chu-yong-fa-1')">
           <wd-floating-panel safeAreaInsetBottom>
             <wd-cell-group border>
               <wd-cell v-for="item in data" :key="item" :title="item" />
             </wd-cell-group>
           </wd-floating-panel>
         </wd-tab>
-        <wd-tab :title="`自定义锚点`">
+        <wd-tab :title="$t('zi-ding-yi-mao-dian-0')">
           <wd-floating-panel v-model:height="height" :anchors="anchors" safeAreaInsetBottom @heightChange="handleHeightChange">
-            <view class="inner-content">自定义锚点 {{ anchors.map(addUnit) }} - {{ addUnit(height.toFixed(0)) }}</view>
+            <view class="inner-content">{{ $t('"zi-ding-yi-mao-dian"') }} {{ anchors.map(addUnit) }} - {{ addUnit(height.toFixed(0)) }}</view>
           </wd-floating-panel>
         </wd-tab>
-        <wd-tab :title="`仅头部拖拽`">
+        <wd-tab :title="$t('jin-tou-bu-tuo-zhuai-0')">
           <wd-floating-panel :contentDraggable="false">
-            <view class="inner-content">内容区不可以拖拽</view>
+            <view class="inner-content">{{ $t('nei-rong-qu-bu-ke-yi-tuo-zhuai') }}</view>
           </wd-floating-panel>
         </wd-tab>
       </wd-tabs>

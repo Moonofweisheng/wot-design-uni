@@ -1,12 +1,12 @@
 <template>
   <page-wraper>
-    <demo-block title="基本用法" transparent>
+    <demo-block :title="$t('jiBenYongFa')" transparent>
       <wd-pagination v-model="page1" :total="total1" @change="handleChange1"></wd-pagination>
     </demo-block>
-    <demo-block title="Icon图标" transparent>
+    <demo-block :title="$t('icon-tu-biao-0')" transparent>
       <wd-pagination v-model="page2" :total="total2" show-icon @change="handleChange2"></wd-pagination>
     </demo-block>
-    <demo-block title="文字提示" transparent>
+    <demo-block :title="$t('wen-zi-ti-shi')" transparent>
       <wd-pagination v-model="page3" :total="total3" :page-size="pageSize3" @change="handleChange3" show-icon show-message></wd-pagination>
     </demo-block>
   </page-wraper>

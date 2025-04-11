@@ -15,7 +15,9 @@ const { hasSidebar, hasAside, leftAside } = useSidebar()
 const pageName = computed(() =>
   route.path.replace(/[./]+/g, '_').replace(/_html$/, '')
 )
-const isComponent = computed(() => route.path.startsWith('/component'))
+const isComponent = computed(() => 
+  (route.path.startsWith('/component') || route.path.startsWith('/en-US/component')) && !route.path.includes('/use-')
+)
 const expanded = ref(true)
 
 </script>

@@ -188,10 +188,10 @@ const { theme, themeVars } = useTheme({
 
 <template>
   <div>Hello AppKuVue</div>
-  <!-- 假设已注册 WdConfigProvider 组件 -->
-  <WdConfigProvider :theme="theme" :theme-vars="themeVars">
+  <!-- 需要确保已注册 WdConfigProvider 组件 -->
+  <wd-config-provider :theme="theme" :theme-vars="themeVars">
     <KuRootView />
-  </WdConfigProvider>
+  </wd-config-provider>
 </template>
 ```
 
@@ -203,7 +203,7 @@ const { theme, themeVars } = useTheme({
 import type { ConfigProviderThemeVars } from 'wot-design-uni'
 import { ref } from 'vue'
 
-const theme = ref<'light' | 'dark'>(false)
+const theme = ref<'light' | 'dark'>()
 const themeVars = ref<ConfigProviderThemeVars>()
 
 export function useTheme(vars?: ConfigProviderThemeVars) {

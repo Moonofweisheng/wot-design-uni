@@ -23,23 +23,77 @@
   "prettier.singleQuote": true,
   //  #让函数(名)和后面的括号之间加个空格
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-  // #这个按用户自身习惯选择
-  "vetur.format.defaultFormatter.html": "js-beautify-html",
-  // #让vue中的js按编辑器自带的ts格式进行格式化
-  "vetur.format.defaultFormatter.js": "vscode-typescript",
-  "vetur.format.options.tabSize": 2,
-  "vetur.format.defaultFormatterOptions": {
-    "js-beautify-html": {
-      "wrap_line_length": 150,
-      "wrap_attributes": true,
-      "end_with_newline": true
-      // #vue组件中html代码格式化样式
-    }
-  },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "i18n-ally.localesPaths": [
-    "src/uni_modules/wot-design-uni/locale",
-    "src/uni_modules/wot-design-uni/locale/lang"
+  "i18n-ally.keystyle": "flat",
+  "i18n-ally.sourceLanguage": "zh-CN",
+  "i18n-ally.displayLanguage": "zh-CN",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.namespace": true,
+  "i18n-ally.keepFulfilled": true,
+  "i18n-ally.enabledParsers": [
+    "ts",
+    "js",
+    "json"
   ],
-  "common-intellisense.ui": []
+  "i18n-ally.enabledFrameworks": [
+    "vue",
+    "vue-sfc"
+  ],
+  "i18n-ally.extract.autoDetect": true,
+  "i18n-ally.refactor.templates": [
+    {
+      "source": "html-inline",
+      "template": "{{ $t('{key}'{args}) }}"  // 不带参数的情况
+    },
+    {
+      "source": "html-attribute",
+      "template": "$t('{key}'{args})",
+    },
+    {
+      "source": "js-string",
+      "template": "t('{key}'{args})"
+    },
+    {
+      "source": "js-template",
+      "template": "t('{key}'{args})"
+    },
+  ],
+  "i18n-ally.extract.parsers.html": {
+    "attributes": ["text", "title", "alt", "placeholder", "label", "aria-label", "cancel-text", "close-text", "left-text", "right-text"],
+    "ignoredTags": ["script", "style"],
+    "vBind": true,
+    "inlineText": true
+  },
+  "i18n-ally.keysInUse": [
+    "zh-CN",
+    "en-US"
+  ],
+  "common-intellisense.ui": [],
+  "i18n-ally.localesPaths": [
+    "src/locale"
+  ],
+  "i18n-ally.extract.ignored": [
+    "不如摸鱼去",
+    "二狗",
+    "<wd-icon name=\"${icon}\" size=\"22px\"></wd-icon>",
+    "top left",
+    "top right",
+    "bottom left",
+    "bottom left",
+    "bottom right",
+    "bottom right",
+    "\n            Wot Design Uni\n            ",
+    "\n            Wot Design Uni\n            ",
+    "@{{ packageConfig.version }}",
+    "span: 24",
+    "span: 12",
+    "span: 8",
+    "span: 4",
+    "span: 8 offset: 4",
+    "span: 6",
+    "芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。黄鹤断矶头，故人曾到否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。",
+    "`${item}`"
+  ],
+  "i18n-ally.extract.ignoredByFiles": {
+  }
 }
