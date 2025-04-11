@@ -181,7 +181,7 @@ const currentLength = computed(() => {
    * 使用Array.from处理多码元字符以获取正确的长度
    * @link https://github.com/Moonofweisheng/wot-design-uni/issues/933
    */
-  return Array.from(String(formatValue(props.modelValue) || '')).length
+  return Array.from(String(formatValue(props.modelValue))).length
 })
 
 const rootClass = computed(() => {
@@ -224,6 +224,7 @@ function initState() {
 }
 
 function formatValue(value: string | number) {
+  if (value === null || value === undefined) return ''
   const { maxlength, showWordLimit } = props
   if (showWordLimit && maxlength !== -1 && String(value).length > maxlength) {
     return value.toString().substring(0, maxlength)
