@@ -1,16 +1,18 @@
 import { useUpload } from '@/uni_modules/wot-design-uni/components/composables/useUpload'
 import type { UploadFileItem } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Mock uni API
 const mockUploadTask = {
-  abort: jest.fn(),
-  onProgressUpdate: jest.fn((callback) => {
+  abort: vi.fn(),
+  onProgressUpdate: vi.fn((callback) => {
     callback({ progress: 50 })
   })
 }
 
-;(global as any).uni = {
-  uploadFile: jest.fn((options) => {
+// 使用 vi.stubGlobal 来模拟全局对象
+vi.stubGlobal('uni', {
+  uploadFile: vi.fn((options) => {
     const { success, fail } = options
     if (options.url.includes('success')) {
       success?.({ statusCode: 200, data: 'success' })
@@ -19,13 +21,13 @@ const mockUploadTask = {
     }
     return mockUploadTask
   })
-} as any
+})
 
 describe('useUpload', () => {
   const { startUpload, abort, chooseFile, UPLOAD_STATUS } = useUpload()
 
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   // 测试基本上传功能
@@ -37,8 +39,8 @@ describe('useUpload', () => {
       uid: 1
     }
 
-    const onSuccess = jest.fn()
-    const onProgress = jest.fn()
+    const onSuccess = vi.fn()
+    const onProgress = vi.fn()
 
     await startUpload(file, {
       action: 'https://api.example.com/success',
@@ -61,7 +63,7 @@ describe('useUpload', () => {
       uid: 1
     }
 
-    const onError = jest.fn()
+    const onError = vi.fn()
 
     await startUpload(file, {
       action: 'https://api.example.com/fail',
@@ -83,7 +85,7 @@ describe('useUpload', () => {
       uid: 1
     }
 
-    const customUpload = jest.fn()
+    const customUpload = vi.fn()
 
     await startUpload(file, {
       action: 'https://api.example.com',
@@ -202,8 +204,8 @@ describe('useUpload', () => {
       uid: 1
     }
 
-    const onSuccess = jest.fn()
-    const onError = jest.fn()
+    const onSuccess = vi.fn()
+    const onError = vi.fn()
 
     await startUpload(file, {
       action: 'https://api.example.com/success',
@@ -260,9 +262,9 @@ describe('useUpload', () => {
       uid: 1
     }
 
-    const onProgress = jest.fn()
+    const onProgress = vi.fn()
 
-    mockUploadTask.onProgressUpdate = jest.fn((callback) => {
+    mockUploadTask.onProgressUpdate = vi.fn((callback) => {
       callback({
         progress: 50,
         totalBytesSent: 5000,
@@ -287,7 +289,7 @@ describe('useUpload', () => {
 
   // 测试选择图片文件
   it('should choose image files', async () => {
-    const mockChooseImage = jest.fn().mockImplementation((options) => {
+    const mockChooseImage = vi.fn().mockImplementation((options) => {
       options.success({
         tempFiles: [
           { path: 'temp/image1.jpg', size: 1024, name: 'image1.jpg' },
@@ -320,7 +322,7 @@ describe('useUpload', () => {
 
   // 测试选择视频文件
   it('should choose video file', async () => {
-    const mockChooseVideo = jest.fn().mockImplementation((options) => {
+    const mockChooseVideo = vi.fn().mockImplementation((options) => {
       options.success({
         tempFilePath: 'temp/video.mp4',
         size: 10240,
@@ -355,7 +357,7 @@ describe('useUpload', () => {
 
   // 测试选择媒体文件
   it('should choose media files', async () => {
-    const mockChooseMedia = jest.fn().mockImplementation((options) => {
+    const mockChooseMedia = vi.fn().mockImplementation((options) => {
       options.success({
         tempFiles: [
           {
@@ -399,7 +401,7 @@ describe('useUpload', () => {
 
   // 测试选择文件失败的情况
   it('should handle choose file failure', async () => {
-    const mockChooseImage = jest.fn().mockImplementation((options) => {
+    const mockChooseImage = vi.fn().mockImplementation((options) => {
       options.fail(new Error('Permission denied'))
     })
     ;(global as any).uni.chooseImage = mockChooseImage
@@ -420,7 +422,7 @@ describe('useUpload', () => {
 
   // 测试多选限制
   it('should respect maxCount limit', async () => {
-    const mockChooseImage = jest.fn().mockImplementation((options) => {
+    const mockChooseImage = vi.fn().mockImplementation((options) => {
       options.success({
         tempFiles: [{ path: 'temp/image1.jpg', size: 1024, name: 'image1.jpg' }]
       })
@@ -452,7 +454,7 @@ describe('useUpload', () => {
 
   // 测试文件来源限制
   it('should respect sourceType option', async () => {
-    const mockChooseImage = jest.fn().mockImplementation((options) => {
+    const mockChooseImage = vi.fn().mockImplementation((options) => {
       // 立即调用 success 回调，返回测试数据
       options.success({
         tempFiles: [{ path: 'temp/image1.jpg', size: 1024, name: 'image1.jpg' }]
@@ -482,7 +484,7 @@ describe('useUpload', () => {
 
   // 测试选择消息文件(仅微信小程序)
   // it('should choose message file in WeChat MP', async () => {
-  //   const mockChooseMessageFile = jest.fn().mockImplementation((options) => {
+  //   const mockChooseMessageFile = vi.fn().mockImplementation((options) => {
   //     options.success({
   //       tempFiles: [
   //         {
@@ -523,7 +525,7 @@ describe('useUpload', () => {
 
   // 测试选择全部类型文件(H5)
   it('should choose all type files in H5', async () => {
-    const mockChooseFile = jest.fn().mockImplementation((options) => {
+    const mockChooseFile = vi.fn().mockImplementation((options) => {
       options.success({
         tempFiles: [
           {

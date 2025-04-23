@@ -1,6 +1,20 @@
 import { useTranslate } from '@/uni_modules/wot-design-uni/components/composables/useTranslate'
 import Locale from '@/uni_modules/wot-design-uni/locale'
 import enUS from '@/uni_modules/wot-design-uni/locale/lang/en-US'
+import viVN from '@/uni_modules/wot-design-uni/locale/lang/vi-VN'
+import zhTW from '@/uni_modules/wot-design-uni/locale/lang/zh-TW'
+import zhHK from '@/uni_modules/wot-design-uni/locale/lang/zh-HK'
+import arSA from '@/uni_modules/wot-design-uni/locale/lang/ar-SA'
+import deDE from '@/uni_modules/wot-design-uni/locale/lang/de-DE'
+import esES from '@/uni_modules/wot-design-uni/locale/lang/es-ES'
+import frFR from '@/uni_modules/wot-design-uni/locale/lang/fr-FR'
+import jaJP from '@/uni_modules/wot-design-uni/locale/lang/ja-JP'
+import koKR from '@/uni_modules/wot-design-uni/locale/lang/ko-KR'
+import ptPT from '@/uni_modules/wot-design-uni/locale/lang/pt-PT'
+import ruRU from '@/uni_modules/wot-design-uni/locale/lang/ru-RU'
+import thTH from '@/uni_modules/wot-design-uni/locale/lang/th-TH'
+import trTR from '@/uni_modules/wot-design-uni/locale/lang/tr-TR'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('useTranslate', () => {
   beforeEach(() => {
@@ -101,5 +115,123 @@ describe('useTranslate', () => {
     expect(uploadTranslate('error')).toBe('Failed to upload')
     expect(searchTranslate('search')).toBe('Search')
     expect(signatureTranslate('confirmText')).toBe('OK')
+  })
+
+  it('should handle Vietnamese translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('vi-VN', viVN)
+    expect(translate('placeholder')).toBe('Vui lòng chọn')
+    expect(translate('confirm')).toBe('Xác nhận')
+
+    const { translate: calendarViewTranslate } = useTranslate('calendarView')
+    expect(calendarViewTranslate('weeks.mon')).toBe('T2')
+    expect(calendarViewTranslate('hour', 10)).toBe('10 giờ')
+  })
+
+  it('should handle Traditional Chinese translations', () => {
+    const { translate } = useTranslate('calendar')
+    Locale.use('zh-TW', zhTW)
+    expect(translate('placeholder')).toBe('請選擇')
+    expect(translate('confirm')).toBe('確定')
+
+    const { translate: calendarViewTranslate } = useTranslate('calendarView')
+    expect(calendarViewTranslate('weeks.mon')).toBe('一')
+    expect(calendarViewTranslate('hour', 10)).toBe('10 時')
+  })
+
+  it('should handle Arabic translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('ar-SA', arSA)
+    expect(translate('placeholder')).toBe('حدد التاريخ')
+    expect(translate('confirm')).toBe('تأكيد')
+  })
+
+  it('should handle German translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('de-DE', deDE)
+    expect(translate('placeholder')).toBe('Wählen Sie')
+    expect(translate('confirm')).toBe('Bestätigen')
+  })
+
+  it('should handle Spanish translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('es-ES', esES)
+    expect(translate('placeholder')).toBe('Seleccionar')
+    expect(translate('confirm')).toBe('Confirmar')
+  })
+
+  it('should handle French translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('fr-FR', frFR)
+    expect(translate('placeholder')).toBe('Sélectionner')
+    expect(translate('confirm')).toBe('Confirmer')
+  })
+
+  it('should handle Japanese translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('ja-JP', jaJP)
+    expect(translate('placeholder')).toBe('選択してください')
+    expect(translate('confirm')).toBe('確認')
+  })
+
+  it('should handle Korean translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('ko-KR', koKR)
+    expect(translate('placeholder')).toBe('선택')
+    expect(translate('confirm')).toBe('확인')
+  })
+
+  it('should handle Portuguese translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('pt-PT', ptPT)
+    expect(translate('placeholder')).toBe('Por favor selecione')
+    expect(translate('confirm')).toBe('Confirmar')
+  })
+
+  it('should handle Russian translations', () => {
+    const { translate } = useTranslate('calendar')
+    Locale.use('ru-RU', ruRU)
+    expect(translate('placeholder')).toBe('Выберите, пожалуйста')
+    expect(translate('confirm')).toBe('Ок')
+  })
+
+  it('should handle Thai translations', () => {
+    const { translate } = useTranslate('calendar')
+
+    Locale.use('th-TH', thTH)
+    expect(translate('placeholder')).toBe('เลือก')
+    expect(translate('confirm')).toBe('ยืนยัน')
+  })
+
+  it('should handle Turkish translations', () => {
+    const { translate } = useTranslate('calendar')
+    Locale.use('tr-TR', trTR)
+    expect(translate('placeholder')).toBe('Lütfen seçin')
+    expect(translate('confirm')).toBe('Tamam')
+  })
+
+  it('should handle Hong Kong Traditional Chinese translations', () => {
+    const { translate } = useTranslate('calendar')
+    Locale.use('zh-HK', zhHK)
+    expect(translate('placeholder')).toBe('請選擇')
+    expect(translate('confirm')).toBe('確定')
+
+    const { translate: calendarViewTranslate } = useTranslate('calendarView')
+    expect(calendarViewTranslate('weeks.mon')).toBe('一')
+    expect(calendarViewTranslate('hour', 10)).toBe('10時')
+    expect(calendarViewTranslate('minute', 30)).toBe('30分')
+    expect(calendarViewTranslate('second', 45)).toBe('45秒')
+
+    const { translate: paginationTranslate } = useTranslate('pagination')
+    expect(paginationTranslate('prev')).toBe('上一頁')
+    expect(paginationTranslate('next')).toBe('下一頁')
   })
 })

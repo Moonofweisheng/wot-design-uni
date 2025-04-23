@@ -1,8 +1,8 @@
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue'
 import { makeArrayProp, makeBooleanProp, makeStringProp } from '../common/props'
 
-type SkeletonTheme = 'text' | 'avatar' | 'paragraph' | 'image'
-type SkeletonAnimation = 'gradient' | 'flashed'
+export type SkeletonTheme = 'text' | 'avatar' | 'paragraph' | 'image'
+export type SkeletonAnimation = 'gradient' | 'flashed'
 export type SkeletonRowColObj = {
   [key: string]: any
   type?: 'rect' | 'circle' | 'text'

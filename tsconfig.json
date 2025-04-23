@@ -20,7 +20,8 @@
       "mini-types",
       "@uni-helper/uni-types",
       "miniprogram-api-typings",
-      "jest"
+      "@types/node",
+      "vitest/jsdom"
     ],
     "sourceMap": true,
     "module": "ESNext"
