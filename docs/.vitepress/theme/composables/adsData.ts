@@ -2,13 +2,11 @@ import { ref, onMounted } from 'vue'
 
 export type AdData = {
   image: string
+  title?: string
   link?: string
 }
 
-const data = ref<AdData[]>([{
-  image: '/tiaojiads.png',
-  link: '/ads/tiaojibao.html'
-}])
+const data = ref<AdData[]>([])
 
 export function useAds() {
   onMounted(async () => {

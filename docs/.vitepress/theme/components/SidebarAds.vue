@@ -3,7 +3,7 @@ import { ElImageViewer } from 'element-plus'
 import { ref } from 'vue'
 import { useAds } from '../composables/adsData'
 
-const {data} = useAds()
+const { data } = useAds()
 
 
 const showViewer = ref(false)
@@ -20,7 +20,7 @@ const handleClick = (ad: any) => {
 </script>
 
 <template>
-  <div class="sidebar-ad-container" v-if="data">
+  <div class="sidebar-ad-container" v-if="data && data.length">
     <slot name="sidebar-ad-content">
       <!-- 默认广告内容 -->
       <div class="sidebar-ad-list">

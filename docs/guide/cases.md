@@ -44,11 +44,31 @@ Wot UI 已被很多公司和团队在生产环境使用，下面是一些优秀�
   <el-card shadow="hover">
     <template #header>
       <span class="case-title">随享小栈</span>
-      <!-- 加一行介绍 -->
       <span class="case-description">一个温暖、匿名、安全的树洞社交小程序。</span>
     </template>
     <el-image src="/cases/suixiangxiaozhan.png" />
-  </el-card>  
+  </el-card>
+  <el-card shadow="hover">
+    <template #header>
+      <span class="case-title">安维到家师傅版</span>
+      <span class="case-description">一个家具安装, 维修上门服务, 师傅接单平台。</span>
+    </template>
+    <el-image src="/cases/anxiudaojia.png" />
+  </el-card>    
+  <el-card shadow="hover">
+    <template #header>
+      <span class="case-title">轻便万物迹</span>
+      <span class="case-description">记录饮食，日记等。</span>
+    </template>
+    <el-image src="/cases/qingbianwanwuji.png" />
+  </el-card>    
+  <el-card shadow="hover">
+    <template #header>
+      <span class="case-title">人情礼记</span>
+      <span class="case-description">你贴心的人情往来数字记账伙伴。</span>
+    </template>
+    <el-image src="/cases/renqingliji.jpeg" />
+  </el-card>    
 </div>
 
 <style scoped>
