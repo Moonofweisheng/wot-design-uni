@@ -1,3 +1,11 @@
+<!--
+ * @Author: 810505339
+ * @Date: 2024-12-20 14:11:10
+ * @LastEditors: 810505339
+ * @LastEditTime: 2025-01-07 15:30:02
+ * @FilePath: \wot-design-uni\docs\component\switch.md
+ * 记得注释
+-->
 #  Switch 开关
 
 用来打开或关闭选项。
@@ -50,21 +58,11 @@ const checked = ref<boolean>(true)
 <wd-switch v-model="checked" :before-change="beforeChange" @change="handleChange" />
 ```
 
-```typescript
-import { useMessage } from '@/uni_modules/wot-design-uni'
+## 文字描述
+通过 `active-text` 属性修改开关打开时的文字，`inactive-text` 属性修改开关关闭时的文字。
 
-const message = useMessage()
-
-const beforeChange = ({ value, resolve }) => {
-  message
-    .confirm('是否切换开关')
-    .then(() => {
-      resolve(true)
-    })
-    .catch(() => {
-      resolve(false)
-    })
-}
+```html
+ <wd-switch  active-text="喜欢摸鱼" inactive-text="讨厌摸鱼"  />
 ```
 
 ## Attributes
@@ -78,6 +76,8 @@ const beforeChange = ({ value, resolve }) => {
 | active-color | 打开时的背景色 | string | - | #4D80F0 | - |
 | inactive-color | 关闭时的背景色，默认为白色，所以有灰色边框，如果设置了该值，则会自动去除灰色边框 | string | - | #fff | - |
 | size | 开关大小，可以为任何单位的字符串尺寸 | string/number | - | 28px | - |
+| active-text   | 打开时的内部文字 | string | - | - | - |
+| inactive-text | 关闭时的内部文字 | string | - | - | - |
 | before-change | 修改前钩子 | function | - | - | - |
 
 ## Events
