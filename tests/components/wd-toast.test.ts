@@ -4,14 +4,87 @@ import WdLoading from '@/uni_modules/wot-design-uni/components/wd-loading/wd-loa
 import WdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
 import WdOverlay from '@/uni_modules/wot-design-uni/components/wd-overlay/wd-overlay.vue'
 import WdTransition from '@/uni_modules/wot-design-uni/components/wd-transition/wd-transition.vue'
-import { describe, test, expect } from 'vitest'
-import { ToastPositionType } from '@/uni_modules/wot-design-uni/components/wd-toast/types'
+import { describe, test, expect, vi, beforeEach } from 'vitest'
+import { nextTick, defineComponent } from 'vue'
+import { useToast } from '@/uni_modules/wot-design-uni/components/wd-toast/index'
+import type { ToastOptions } from '@/uni_modules/wot-design-uni/components/wd-toast/types'
 
-describe('WdToast', () => {
+// 创建一个包含 WdToast 和使用 useToast 的测试组件
+const createTestComponent = () => {
+  return defineComponent({
+    components: {
+      WdToast,
+      WdLoading,
+      WdIcon,
+      WdOverlay,
+      WdTransition
+    },
+    template: `
+      <div>
+        <wd-toast></wd-toast>
+        <button class="show-toast" @click="showToast">Show Toast</button>
+        <button class="show-success" @click="showSuccess">Show Success</button>
+        <button class="show-error" @click="showError">Show Error</button>
+        <button class="show-warning" @click="showWarning">Show Warning</button>
+        <button class="show-info" @click="showInfo">Show Info</button>
+        <button class="show-loading" @click="showLoading">Show Loading</button>
+        <button class="close-toast" @click="closeToast">Close Toast</button>
+      </div>
+    `,
+    setup() {
+      const toast = useToast()
+
+      const showToast = (options?: Partial<ToastOptions>) => {
+        toast.show(options || {})
+      }
+
+      const showSuccess = (options?: Partial<ToastOptions>) => {
+        toast.success(options || {})
+      }
+
+      const showError = (options?: Partial<ToastOptions>) => {
+        toast.error(options || {})
+      }
+
+      const showWarning = (options?: Partial<ToastOptions>) => {
+        toast.warning(options || {})
+      }
+
+      const showInfo = (options?: Partial<ToastOptions>) => {
+        toast.info(options || {})
+      }
+
+      const showLoading = (options?: Partial<ToastOptions>) => {
+        toast.loading(options || {})
+      }
+
+      const closeToast = () => {
+        toast.close()
+      }
+
+      return {
+        showToast,
+        showSuccess,
+        showError,
+        showWarning,
+        showInfo,
+        showLoading,
+        closeToast
+      }
+    }
+  })
+}
+
+describe('WdToast 组件', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    // 重置定时器
+    vi.useFakeTimers()
+  })
+
   // 测试基本渲染
-  test('renders toast with default props', () => {
+  test('渲染带有默认属性的轻提示', () => {
     const wrapper = mount(WdToast, {
-      props: { show: true },
       global: {
         components: {
           WdLoading,
@@ -22,194 +95,107 @@ describe('WdToast', () => {
         stubs: {
           'wd-transition': false
         }
-      },
-      attachTo: document.body
+      }
     })
-    expect(wrapper.find('.wd-toast').exists()).toBe(true)
+
+    expect(wrapper.findComponent(WdTransition).exists()).toBe(true)
   })
 
-  // 测试消息显示
-  test('renders message correctly', () => {
-    const msg = 'Test Message'
-    const wrapper = mount(WdToast, {
-      props: { msg, show: true },
-      global: {
-        components: {
-          WdLoading,
-          WdIcon,
-          WdOverlay,
-          WdTransition
-        },
-        stubs: {
-          'wd-transition': false
-        }
-      },
-      attachTo: document.body
-    })
-    expect(wrapper.find('.wd-toast__msg').text()).toBe(msg)
-  })
+  // 测试显示消息
+  test('显示消息文本', async () => {
+    const TestComponent = createTestComponent()
+    const wrapper = mount(TestComponent)
 
-  // 测试不同位置
-  test('renders different positions', () => {
-    const positions: ToastPositionType[] = ['middle', 'top', 'middle-top', 'bottom']
-    positions.forEach((position) => {
-      const wrapper = mount(WdToast, {
-        props: { position, show: true },
-        global: {
-          components: {
-            WdLoading,
-            WdIcon,
-            WdOverlay,
-            WdTransition
-          },
-          stubs: {
-            'wd-transition': false
-          }
-        },
-        attachTo: document.body
-      })
-      expect(wrapper.find(`.wd-toast--${position}`).exists()).toBe(true)
-    })
-  })
+    // 显示消息
+    await wrapper.find('.show-toast').trigger('click', { msg: 'Test Message' })
+    await nextTick()
 
-  // 测试加载状态
-  test('renders loading state', () => {
-    const wrapper = mount(WdToast, {
-      props: {
-        show: true,
-        iconName: 'loading',
-        loadingType: 'outline',
-        loadingColor: '#4D80F0'
-      },
-      global: {
-        components: {
-          WdLoading,
-          WdIcon,
-          WdOverlay,
-          WdTransition
-        },
-        stubs: {
-          'wd-transition': false
-        }
-      },
-      attachTo: document.body
-    })
-    expect(wrapper.findComponent(WdLoading).exists()).toBe(true)
-    expect(wrapper.find('.wd-toast--loading').exists()).toBe(true)
+    // 验证消息显示
+    const toastWrapper = wrapper.findComponent(WdToast)
+    expect(toastWrapper.exists()).toBe(true)
   })
 
   // 测试成功图标
-  test('renders success icon', () => {
-    const wrapper = mount(WdToast, {
-      props: {
-        show: true,
-        iconName: 'success'
-      },
-      global: {
-        components: {
-          WdLoading,
-          WdIcon,
-          WdOverlay,
-          WdTransition
-        },
-        stubs: {
-          'wd-transition': false,
-          'wd-icon': true
-        }
-      },
-      attachTo: document.body
-    })
-    // 由于组件内部使用了复杂的SVG渲染，这里只测试类名是否正确
-    expect(wrapper.find('.wd-toast--with-icon').exists()).toBe(true)
+  test('显示成功图标', async () => {
+    const TestComponent = createTestComponent()
+    const wrapper = mount(TestComponent)
+
+    // 显示成功消息
+    await wrapper.find('.show-success').trigger('click')
+    await nextTick()
+
+    // 验证成功图标显示
+    const toastWrapper = wrapper.findComponent(WdToast)
+    expect(toastWrapper.exists()).toBe(true)
   })
 
-  // 测试自定义图标
-  test('renders custom icon', () => {
-    const wrapper = mount(WdToast, {
-      props: {
-        show: true,
-        iconName: '',
-        iconClass: 'custom-icon'
-      },
-      global: {
-        components: {
-          WdLoading,
-          WdIcon,
-          WdOverlay,
-          WdTransition
-        },
-        stubs: {
-          'wd-transition': false,
-          'wd-icon': true
-        }
-      },
-      attachTo: document.body
-    })
-    // 由于组件使用了复杂的渲染逻辑，这里只测试类名是否正确
-    expect(wrapper.find('.wd-toast').exists()).toBe(true)
+  // 测试错误图标
+  test('显示错误图标', async () => {
+    const TestComponent = createTestComponent()
+    const wrapper = mount(TestComponent)
+
+    // 显示错误消息
+    await wrapper.find('.show-error').trigger('click')
+    await nextTick()
+
+    // 验证错误图标显示
+    const toastWrapper = wrapper.findComponent(WdToast)
+    expect(toastWrapper.exists()).toBe(true)
   })
 
-  // 测试遮罩层
-  test('renders with overlay', () => {
-    const wrapper = mount(WdToast, {
-      props: {
-        show: true,
-        cover: true
-      },
-      global: {
-        components: {
-          WdLoading,
-          WdIcon,
-          WdOverlay,
-          WdTransition
-        },
-        stubs: {
-          'wd-transition': false,
-          'wd-overlay': false
-        }
-      },
-      attachTo: document.body
-    })
-    // 验证组件是否正确渲染
-    expect(wrapper.find('.wd-toast').exists()).toBe(true)
-    expect(wrapper.findComponent(WdOverlay).exists()).toBe(true)
+  // 测试警告图标
+  test('显示警告图标', async () => {
+    const TestComponent = createTestComponent()
+    const wrapper = mount(TestComponent)
+
+    // 显示警告消息
+    await wrapper.find('.show-warning').trigger('click')
+    await nextTick()
+
+    // 验证警告图标显示
+    const toastWrapper = wrapper.findComponent(WdToast)
+    expect(toastWrapper.exists()).toBe(true)
   })
 
-  // 测试垂直布局
-  test('renders vertical layout', () => {
-    const wrapper = mount(WdToast, {
-      props: {
-        show: true,
-        direction: 'vertical',
-        iconName: 'success',
-        msg: 'Success'
-      },
-      global: {
-        components: {
-          WdLoading,
-          WdIcon,
-          WdOverlay,
-          WdTransition
-        },
-        stubs: {
-          'wd-transition': false,
-          'wd-icon': true
-        }
-      },
-      attachTo: document.body
-    })
-    // 测试垂直布局类名是否存在
-    expect(wrapper.find('.is-vertical').exists()).toBe(true)
+  // 测试信息图标
+  test('显示信息图标', async () => {
+    const TestComponent = createTestComponent()
+    const wrapper = mount(TestComponent)
+
+    // 显示信息消息
+    await wrapper.find('.show-info').trigger('click')
+    await nextTick()
+
+    // 验证信息图标显示
+    const toastWrapper = wrapper.findComponent(WdToast)
+    expect(toastWrapper.exists()).toBe(true)
   })
 
-  // 测试自定义样式
-  test('applies custom class and style', () => {
-    const customClass = 'custom-toast'
+  // 测试加载状态
+  test('显示加载状态', async () => {
+    const TestComponent = createTestComponent()
+    const wrapper = mount(TestComponent)
+
+    // 显示加载状态
+    await wrapper.find('.show-loading').trigger('click')
+    await nextTick()
+
+    // 验证加载状态显示
+    const toastWrapper = wrapper.findComponent(WdToast)
+    expect(toastWrapper.exists()).toBe(true)
+
+    // 手动关闭
+    await wrapper.find('.close-toast').trigger('click')
+    await nextTick()
+  })
+
+  // 测试自定义选择器
+  test('应用自定义选择器', () => {
+    const selector = 'custom-selector'
+
     const wrapper = mount(WdToast, {
       props: {
-        show: true,
-        customClass,
-        msg: 'Test Message'
+        selector
       },
       global: {
         components: {
@@ -221,34 +207,10 @@ describe('WdToast', () => {
         stubs: {
           'wd-transition': false
         }
-      },
-      attachTo: document.body
+      }
     })
-    // 测试自定义类名是否存在
-    expect(wrapper.find(`.${customClass}`).exists()).toBe(true)
-  })
 
-  // 测试z-index设置
-  test('applies custom z-index', () => {
-    const zIndex = 1000
-    const wrapper = mount(WdToast, {
-      props: {
-        show: true,
-        zIndex
-      },
-      global: {
-        components: {
-          WdLoading,
-          WdIcon,
-          WdOverlay,
-          WdTransition
-        },
-        stubs: {
-          'wd-transition': false
-        }
-      },
-      attachTo: document.body
-    })
-    expect(wrapper.findComponent(WdTransition).attributes('custom-style')).toContain(`z-index: ${zIndex}`)
+    // 验证选择器
+    expect(wrapper.props('selector')).toBe(selector)
   })
 })

@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
-import WdColPicker from '@/uni_modules/wot-design-uni/components/wd-col-picker/wd-col-picker.vue'
+import '../mocks/wd-transition.mock'
 import { describe, expect, test, vi } from 'vitest'
+import WdColPicker from '@/uni_modules/wot-design-uni/components/wd-col-picker/wd-col-picker.vue'
 import type {
   ColPickerColumnChange,
   ColPickerDisplayFormat,
@@ -35,7 +36,7 @@ describe('WdColPicker', () => {
       }
     })
 
-    expect(wrapper.vm.modelValue).toEqual(['1', '2'])
+    expect(wrapper.props('modelValue')).toEqual(['1', '2'])
     expect(wrapper.find('.wd-col-picker__value').text()).not.toBe('请选择')
   })
 
@@ -83,11 +84,11 @@ describe('WdColPicker', () => {
     const wrapper = mount(WdColPicker, {
       props: {
         modelValue: [],
+        label: '测试',
         required: true,
         columns: [[{ value: '1', label: '选项1' }]]
       }
     })
-
     expect(wrapper.find('.wd-col-picker__label').classes()).toContain('is-required')
   })
 
@@ -115,8 +116,8 @@ describe('WdColPicker', () => {
         columns: [[{ value: '1', label: '选项1' }]]
       }
     })
-
-    expect(wrapper.find('.wd-action-sheet__title').text()).toBe('自定义标题')
+    wrapper.find('.wd-col-picker__field').trigger('click')
+    expect(wrapper.find('.wd-action-sheet__header').text()).toBe('自定义标题')
   })
 
   test('自定义值和标签键名', async () => {
@@ -207,8 +208,9 @@ describe('WdColPicker', () => {
       }
     })
 
-    expect(typeof wrapper.vm.open).toBe('function')
-    expect(typeof wrapper.vm.close).toBe('function')
+    // 检查组件实例是否有 open 和 close 方法
+    expect('open' in wrapper.vm).toBe(true)
+    expect('close' in wrapper.vm).toBe(true)
   })
 
   test('自定义尺寸', async () => {
@@ -234,8 +236,8 @@ describe('WdColPicker', () => {
     })
 
     const labelStyle = wrapper.find('.wd-col-picker__label').attributes('style')
-    expect(labelStyle).toContain('min-width:100px')
-    expect(labelStyle).toContain('max-width:100px')
+    expect(labelStyle).toContain('min-width: 100px')
+    expect(labelStyle).toContain('max-width: 100px')
   })
 
   test('使用插槽', async () => {
@@ -257,6 +259,7 @@ describe('WdColPicker', () => {
   test('自定义样式类', async () => {
     const wrapper = mount(WdColPicker, {
       props: {
+        label: '选择地址',
         modelValue: [],
         customLabelClass: 'custom-label-class',
         customValueClass: 'custom-value-class',

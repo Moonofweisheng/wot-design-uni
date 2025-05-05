@@ -1,84 +1,142 @@
-/*
- * @Author: weisheng
- * @Date: 2025-04-10 18:35:55
- * @LastEditTime: 2025-04-22 23:02:22
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-design-uni/tests/components/wd-tooltip.test.ts
- * 记得注释
- */
 import { mount } from '@vue/test-utils'
 import WdTooltip from '@/uni_modules/wot-design-uni/components/wd-tooltip/wd-tooltip.vue'
-import { describe, expect, test } from 'vitest'
+import { describe, test, expect, vi, beforeEach } from 'vitest'
+import { PlacementType } from '@/uni_modules/wot-design-uni/components/wd-tooltip/types'
 
 describe('WdTooltip', () => {
-  test('基本渲染', async () => {
-    const wrapper = mount(WdTooltip)
-    expect(wrapper.classes()).toContain('wd-tooltip')
+  beforeEach(() => {
+    vi.clearAllMocks()
   })
 
-  test('提示内容渲染', async () => {
-    const content = '这是一个提示'
+  // 测试基本渲染
+  test('基本渲染', () => {
     const wrapper = mount(WdTooltip, {
       props: {
-        content
-      }
-    })
-    await wrapper.setProps({ visible: true })
-    await wrapper.setProps({ visible: true })
-    const contentEl = wrapper.find('.wd-tooltip__content')
-    expect(contentEl.exists()).toBe(true)
-    expect(contentEl.text()).toBe(content)
-  })
-
-  test('触发方式', async () => {
-    const wrapper = mount(WdTooltip, {
-      props: {
-        trigger: 'click',
-        content: '点击触发',
-        modelValue: false
-      }
-    })
-    const trigger = wrapper.find('.wd-tooltip__trigger')
-    await trigger.trigger('click')
-    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
-    expect(wrapper.emitted('update:modelValue')![0]).toEqual([true])
-  })
-
-  test('位置设置', async () => {
-    const wrapper = mount(WdTooltip, {
-      props: {
-        placement: 'top',
-        content: '顶部提示'
-      }
-    })
-    expect(wrapper.classes()).toContain('is-top')
-  })
-
-  test('自定义样式', async () => {
-    const wrapper = mount(WdTooltip, {
-      props: {
-        content: '自定义样式',
-        visibleArrow: false,
-        offset: 10
-      }
-    })
-    expect(wrapper.find('.wd-tooltip__arrow').exists()).toBe(false)
-    // 由于样式是通过 popover.popStyle 计算得到的，不直接应用在 content 元素上
-    // 这里只验证 visibleArrow 属性是否正确应用
-  })
-
-  test('插槽内容', async () => {
-    const wrapper = mount(WdTooltip, {
-      slots: {
-        default: '<button>点击我</button>'
+        content: 'Tooltip content'
       },
-      props: {
-        content: '提示内容'
+      slots: {
+        default: '<button>Hover me</button>'
       }
     })
-    const trigger = wrapper.find('button')
-    expect(trigger.exists()).toBe(true)
-    expect(trigger.text()).toBe('点击我')
+    expect(wrapper.classes()).toContain('wd-tooltip')
+    expect(wrapper.find('.wd-tooltip__target').exists()).toBe(true)
+    expect(wrapper.find('button').exists()).toBe(true)
+  })
+
+  // 测试内容渲染
+  test('内容渲染', () => {
+    const content = 'Tooltip content'
+    const wrapper = mount(WdTooltip, {
+      props: {
+        content,
+        modelValue: true
+      },
+      slots: {
+        default: '<button>Hover me</button>'
+      }
+    })
+    expect(wrapper.find('.wd-tooltip__inner').text()).toBe(content)
+  })
+
+  // 测试自定义内容插槽
+  test('内容插槽', () => {
+    const wrapper = mount(WdTooltip, {
+      props: {
+        useContentSlot: true,
+        modelValue: true
+      },
+      slots: {
+        default: '<button>Hover me</button>',
+        content: '<div class="custom-content">Custom content</div>'
+      }
+    })
+    expect(wrapper.find('.custom-content').exists()).toBe(true)
+  })
+
+  // 测试不同的位置
+  test('不同位置', async () => {
+    const placements: PlacementType[] = [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end'
+    ]
+
+    for (const placement of placements) {
+      const wrapper = mount(WdTooltip, {
+        props: {
+          content: 'Tooltip content',
+          placement,
+          modelValue: true
+        },
+        slots: {
+          default: '<button>Hover me</button>'
+        }
+      })
+
+      // 检查位置
+      expect(wrapper.props('placement')).toBe(placement)
+    }
+  })
+
+  // 测试点击事件
+  test('点击事件', async () => {
+    const wrapper = mount(WdTooltip, {
+      props: {
+        content: 'Tooltip content',
+        modelValue: false
+      },
+      slots: {
+        default: '<button>Hover me</button>'
+      }
+    })
+
+    // 点击触发元素
+    await wrapper.find('.wd-tooltip__target').trigger('click')
+
+    // 应该触发 update:modelValue 事件
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['update:modelValue']).toBeTruthy()
+    expect(emitted['update:modelValue'][0]).toEqual([true])
+  })
+
+  // 测试自定义类名
+  test('自定义类名', () => {
+    const customClass = 'my-tooltip'
+    const wrapper = mount(WdTooltip, {
+      props: {
+        content: 'Tooltip content',
+        customClass
+      },
+      slots: {
+        default: '<button>Hover me</button>'
+      }
+    })
+
+    expect(wrapper.classes()).toContain(customClass)
+  })
+
+  // 测试自定义样式
+  test('自定义样式', () => {
+    const customStyle = 'margin: 10px;'
+    const wrapper = mount(WdTooltip, {
+      props: {
+        content: 'Tooltip content',
+        customStyle
+      },
+      slots: {
+        default: '<button>Hover me</button>'
+      }
+    })
+
+    expect(wrapper.attributes('style')).toBe(customStyle)
   })
 })

@@ -1,102 +1,193 @@
 import { mount } from '@vue/test-utils'
-import WdPopup from '../../src/uni_modules/wot-design-uni/components/wd-popup/wd-popup.vue'
-import { describe, expect, test } from 'vitest'
-import { PopupType } from '@/uni_modules/wot-design-uni/components/wd-popup/types'
+import '../mocks/wd-transition.mock'
+import WdOverlay from '@/uni_modules/wot-design-uni/components/wd-overlay/wd-overlay.vue'
+import WdPopup from '@/uni_modules/wot-design-uni/components/wd-popup/wd-popup.vue'
+import { describe, test, expect, vi, beforeEach } from 'vitest'
+
+const globalComponents = {
+  WdOverlay
+}
 
 describe('WdPopup', () => {
-  test('基本渲染', async () => {
-    const wrapper = mount(WdPopup)
-    expect(wrapper.classes()).toContain('wd-popup')
+  // 测试基本渲染
+  test('基本渲染', () => {
+    const wrapper = mount(WdPopup, {
+      global: {
+        components: globalComponents
+      }
+    })
+
+    expect(wrapper.findComponent({ name: 'wd-transition' }).exists()).toBe(true)
+    expect(wrapper.findComponent({ name: 'wd-overlay' }).exists()).toBe(true)
   })
 
-  test('显示状态', async () => {
+  // 测试显示状态
+  test('显示和隐藏弹出层', async () => {
     const wrapper = mount(WdPopup, {
       props: {
         modelValue: true
-      }
-    })
-    expect(wrapper.isVisible()).toBeTruthy()
-    await wrapper.setProps({ modelValue: false })
-    expect(wrapper.isVisible()).toBeFalsy()
-  })
-
-  test('弹出位置', async () => {
-    const positions: PopupType[] = ['top', 'right', 'bottom', 'left', 'center']
-    for (const position of positions) {
-      const wrapper = mount(WdPopup, {
-        props: {
-          position,
-          modelValue: true
-        }
-      })
-      expect(wrapper.find(`.wd-popup--${position}`).exists()).toBeTruthy()
-    }
-  })
-
-  test('关闭按钮', async () => {
-    const wrapper = mount(WdPopup, {
-      props: {
-        closable: true,
-        show: true
-      }
-    })
-    expect(wrapper.find('.wd-popup__close').exists()).toBeTruthy()
-    await wrapper.find('.wd-popup__close').trigger('click')
-    expect(wrapper.emitted('close')).toBeTruthy()
-  })
-
-  test('自定义样式', async () => {
-    const wrapper = mount(WdPopup, {
-      props: {
-        customStyle: 'background: red;',
-        customClass: 'custom-popup'
-      }
-    })
-    expect(wrapper.classes()).toContain('custom-popup')
-    expect(wrapper.attributes('style')).toBe('background: red;')
-  })
-
-  test('遮罩层点击', async () => {
-    const wrapper = mount(WdPopup, {
-      props: {
-        show: true
-      }
-    })
-    await wrapper.find('.wd-popup__mask').trigger('click')
-    expect(wrapper.emitted('clickMask')).toBeTruthy()
-  })
-
-  test('禁用遮罩层点击', async () => {
-    const wrapper = mount(WdPopup, {
-      props: {
-        show: true,
-        closeOnClickMask: false
-      }
-    })
-    await wrapper.find('.wd-popup__mask').trigger('click')
-    expect(wrapper.emitted('close')).toBeFalsy()
-  })
-
-  test('插槽内容', async () => {
-    const wrapper = mount(WdPopup, {
-      slots: {
-        default: '<div class="custom-content">自定义内容</div>'
       },
-      props: {
-        show: true
+      global: {
+        components: globalComponents
       }
     })
-    expect(wrapper.find('.custom-content').exists()).toBeTruthy()
-    expect(wrapper.find('.custom-content').text()).toBe('自定义内容')
+
+    // 检查 wd-transition 组件的 show 属性
+    expect(wrapper.findComponent({ name: 'wd-transition' }).props('show')).toBe(true)
+
+    // 更新 modelValue
+    await wrapper.setProps({ modelValue: false })
+
+    // 检查 wd-transition 组件的 show 属性
+    expect(wrapper.findComponent({ name: 'wd-transition' }).props('show')).toBe(false)
   })
 
-  test('动画时长', async () => {
-    const duration = 300
+  // 测试自定义过渡动画
+  test('自定义过渡动画', () => {
+    const transition = 'fade'
+
     const wrapper = mount(WdPopup, {
       props: {
-        duration
+        transition,
+        modelValue: true
+      },
+      global: {
+        components: globalComponents
       }
     })
-    expect(wrapper.attributes('style')).toContain(`transition-duration: ${duration}ms`)
+
+    // 检查过渡名称
+    expect(wrapper.findComponent({ name: 'wd-transition' }).props('name')).toBe(transition)
+  })
+
+  // 测试点击遮罩层
+  test('点击遮罩层触发事件', async () => {
+    const wrapper = mount(WdPopup, {
+      props: {
+        modelValue: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    // 点击遮罩层
+    await wrapper.findComponent({ name: 'wd-overlay' }).vm.$emit('click')
+
+    // 验证事件
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['click-modal']).toBeTruthy()
+    expect(emitted['close']).toBeTruthy()
+    expect(emitted['update:modelValue']).toBeTruthy()
+    expect(emitted['update:modelValue'][0][0]).toBe(false)
+  })
+
+  // 测试禁用点击遮罩层关闭
+  test('禁用点击遮罩层关闭', async () => {
+    const wrapper = mount(WdPopup, {
+      props: {
+        modelValue: true,
+        closeOnClickModal: false
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    // 点击遮罩层
+    await wrapper.findComponent({ name: 'wd-overlay' }).vm.$emit('click')
+
+    // 验证事件
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['click-modal']).toBeTruthy()
+    expect(emitted['close']).toBeFalsy()
+    expect(emitted['update:modelValue']).toBeFalsy()
+  })
+
+  // 测试动画时长
+  test('动画时长', () => {
+    const duration = 500
+
+    const wrapper = mount(WdPopup, {
+      props: {
+        duration,
+        modelValue: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    // 检查动画时长
+    expect(wrapper.findComponent({ name: 'wd-transition' }).props('duration')).toBe(duration)
+    expect(wrapper.findComponent({ name: 'wd-overlay' }).props('duration')).toBe(duration)
+  })
+
+  // 测试禁用遮罩层
+  test('禁用遮罩层', () => {
+    const wrapper = mount(WdPopup, {
+      props: {
+        modal: false,
+        modelValue: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    // 检查遮罩层是否存在
+    expect(wrapper.findComponent({ name: 'wd-overlay' }).exists()).toBe(false)
+  })
+
+  // 测试关闭时隐藏
+  test('关闭时隐藏', async () => {
+    const wrapper = mount(WdPopup, {
+      props: {
+        hideWhenClose: true,
+        modelValue: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+    await wrapper.vm.$nextTick()
+    const popTransition = wrapper.findAllComponents({ name: 'wd-transition' }).filter((c) => c.find('.wd-popup').exists() === true)
+
+    // 检查 hideWhenClose
+    expect(popTransition.length > 0 && popTransition[0].props('destroy')).toBe(true)
+  })
+
+  // 测试遮罩层样式
+  test('遮罩层样式', () => {
+    const modalStyle = 'background: rgba(0, 0, 0, 0.5);'
+
+    const wrapper = mount(WdPopup, {
+      props: {
+        modalStyle,
+        modelValue: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    // 检查遮罩层样式
+    expect(wrapper.findComponent({ name: 'wd-overlay' }).props('customStyle')).toBe(modalStyle)
+  })
+
+  // 测试锁定滚动
+  test('锁定滚动', () => {
+    const wrapper = mount(WdPopup, {
+      props: {
+        lockScroll: true,
+        modelValue: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    // 检查锁定滚动
+    expect(wrapper.findComponent({ name: 'wd-overlay' }).props('lockScroll')).toBe(true)
   })
 })

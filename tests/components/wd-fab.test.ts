@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdFab from '../../src/uni_modules/wot-design-uni/components/wd-fab/wd-fab.vue'
+import WdFab from '@/uni_modules/wot-design-uni/components/wd-fab/wd-fab.vue'
 import { describe, expect, test } from 'vitest'
 
 describe('WdFab', () => {
@@ -57,12 +57,17 @@ describe('WdFab', () => {
       }
     })
 
-    await wrapper.vm.$emit('update:active', true)
-    expect(wrapper.emitted('update:active')).toBeTruthy()
-    expect(wrapper.emitted('update:active')![0]).toEqual([true])
+    // 直接触发事件
+    wrapper.vm.$emit('update:active', true)
 
-    await wrapper.vm.$emit('update:active', false)
-    expect(wrapper.emitted('update:active')![1]).toEqual([false])
+    // 使用类型安全的方式访问 emitted
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['update:active']).toBeTruthy()
+    expect(emitted['update:active'][0]).toEqual([true])
+
+    // 再次触发事件
+    wrapper.vm.$emit('update:active', false)
+    expect(emitted['update:active'][1]).toEqual([false])
   })
 
   test('禁用状态', async () => {

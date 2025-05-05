@@ -1,4 +1,4 @@
-import { baseProps, makeRequiredProp, makeStringProp } from '../common/props'
+import { baseProps, makeRequiredProp, makeStringProp, numericProp } from '../common/props'
 
 export const iconProps = {
   ...baseProps,
@@ -13,7 +13,7 @@ export const iconProps = {
   /**
    * 图标的字体大小
    */
-  size: String,
+  size: numericProp,
   /**
    * 类名前缀，用于使用自定义图标
    */

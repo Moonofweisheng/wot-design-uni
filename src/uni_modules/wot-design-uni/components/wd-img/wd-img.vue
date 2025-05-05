@@ -57,7 +57,7 @@ const rootStyle = computed(() => {
     style['border-radius'] = addUnit(props.radius)
     style['overflow'] = 'hidden'
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 const rootClass = computed(() => {

@@ -184,7 +184,6 @@ function handleOpen() {
     duration.value = Number(dropMenu.props.duration)
     position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
   }
-  emit('open')
 }
 
 function toggle() {

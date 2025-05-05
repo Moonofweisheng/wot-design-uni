@@ -5,13 +5,13 @@ import { TransitionName } from '@/uni_modules/wot-design-uni/components/wd-trans
 
 describe('WdTransition', () => {
   // 测试基本渲染
-  test('renders transition with default props', () => {
+  test('基本渲染', () => {
     const wrapper = mount(WdTransition)
     expect(wrapper.classes()).toContain('wd-transition')
   })
 
   // 测试显示和隐藏
-  test('renders visibility state', async () => {
+  test('显示和隐藏状态', async () => {
     const wrapper = mount(WdTransition, {
       props: { show: true }
     })
@@ -22,7 +22,7 @@ describe('WdTransition', () => {
   })
 
   // 测试不同动画名称
-  test('renders with different animation names', () => {
+  test('不同动画名称', () => {
     const name = 'fade'
     const wrapper = mount(WdTransition, {
       props: { name }
@@ -31,7 +31,7 @@ describe('WdTransition', () => {
   })
 
   // 测试多个动画名称数组
-  test('renders with multiple animation names', () => {
+  test('多个动画名称数组', () => {
     const names: TransitionName[] = ['fade', 'slide-up']
     const wrapper = mount(WdTransition, {
       props: { name: names }
@@ -41,25 +41,25 @@ describe('WdTransition', () => {
   })
 
   // 测试动画持续时间
-  test('renders with custom duration', () => {
+  test('自定义动画持续时间', () => {
     const duration = 500
     const wrapper = mount(WdTransition, {
       props: { duration }
     })
-    expect(wrapper.vm.duration).toBe(duration)
+    expect((wrapper.vm as any).duration).toBe(duration)
   })
 
   // 测试对象形式的动画持续时间
-  test('renders with duration object', () => {
+  test('对象形式的动画持续时间', () => {
     const durationObj = { enter: 300, leave: 500 }
     const wrapper = mount(WdTransition, {
       props: { duration: durationObj }
     })
-    expect(wrapper.vm.duration).toEqual(durationObj)
+    expect((wrapper.vm as any).duration).toEqual(durationObj)
   })
 
   // 测试默认插槽内容
-  test('renders default slot content', () => {
+  test('默认插槽内容', () => {
     const slotContent = '<div class="custom-content">过渡内容</div>'
     const wrapper = mount(WdTransition, {
       slots: {
@@ -70,31 +70,35 @@ describe('WdTransition', () => {
   })
 
   // 测试进入动画事件
-  test('emits enter events', async () => {
+  test('触发进入动画事件', async () => {
     const wrapper = mount(WdTransition)
     await wrapper.setProps({ show: true })
+
     // 手动触发事件，因为在测试环境中动画生命周期可能不会自动触发
-    wrapper.vm.$emit('before-enter')
-    wrapper.vm.$emit('enter')
-    expect(wrapper.emitted('before-enter')).toBeTruthy()
-    expect(wrapper.emitted('enter')).toBeTruthy()
+    ;(wrapper.vm as any).$emit('before-enter')
+    ;(wrapper.vm as any).$emit('enter')
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['before-enter']).toBeTruthy()
+    expect(emitted['enter']).toBeTruthy()
   })
 
   // 测试离开动画事件
-  test('emits leave events', async () => {
+  test('触发离开动画事件', async () => {
     const wrapper = mount(WdTransition, {
       props: { show: true }
     })
     await wrapper.setProps({ show: false })
+
     // 手动触发事件，因为在测试环境中动画生命周期可能不会自动触发
-    wrapper.vm.$emit('before-leave')
-    wrapper.vm.$emit('leave')
-    expect(wrapper.emitted('before-leave')).toBeTruthy()
-    expect(wrapper.emitted('leave')).toBeTruthy()
+    ;(wrapper.vm as any).$emit('before-leave')
+    ;(wrapper.vm as any).$emit('leave')
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['before-leave']).toBeTruthy()
+    expect(emitted['leave']).toBeTruthy()
   })
 
   // 测试自定义类名
-  test('applies custom class', () => {
+  test('自定义类名', () => {
     const customClass = 'custom-transition'
     const wrapper = mount(WdTransition, {
       props: { customClass }
@@ -103,7 +107,7 @@ describe('WdTransition', () => {
   })
 
   // 测试自定义样式
-  test('applies custom style', () => {
+  test('自定义样式', () => {
     const customStyle = 'opacity: 0.8;'
     const wrapper = mount(WdTransition, {
       props: { customStyle }
@@ -112,19 +116,20 @@ describe('WdTransition', () => {
   })
 
   // 测试动画完成事件
-  test('emits after events', async () => {
+  test('触发动画完成事件', async () => {
     const wrapper = mount(WdTransition)
     await wrapper.setProps({ show: true })
-    wrapper.vm.$emit('after-enter')
-    expect(wrapper.emitted('after-enter')).toBeTruthy()
+    ;(wrapper.vm as any).$emit('after-enter')
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['after-enter']).toBeTruthy()
 
     await wrapper.setProps({ show: false })
-    wrapper.vm.$emit('after-leave')
-    expect(wrapper.emitted('after-leave')).toBeTruthy()
+    ;(wrapper.vm as any).$emit('after-leave')
+    expect(emitted['after-leave']).toBeTruthy()
   })
 
   // 测试懒加载渲染
-  test('handles lazy render', async () => {
+  test('懒加载渲染', async () => {
     const wrapper = mount(WdTransition, {
       props: { lazyRender: true, show: false }
     })
@@ -140,7 +145,7 @@ describe('WdTransition', () => {
   })
 
   // 测试销毁机制
-  test('handles destroy property', async () => {
+  test('销毁属性', async () => {
     const wrapper = mount(WdTransition, {
       props: { destroy: true, show: true }
     })
@@ -153,7 +158,7 @@ describe('WdTransition', () => {
   })
 
   // 测试自定义过渡类名
-  test('applies custom transition classes', () => {
+  test('自定义过渡类名', async () => {
     const enterClass = 'custom-enter'
     const enterActiveClass = 'custom-enter-active'
     const enterToClass = 'custom-enter-to'
@@ -174,12 +179,56 @@ describe('WdTransition', () => {
     })
 
     // 触发进入过渡
-    wrapper.vm.$emit('before-enter')
-    expect(wrapper.emitted('before-enter')).toBeTruthy()
+    ;(wrapper.vm as any).$emit('before-enter')
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['before-enter']).toBeTruthy()
 
     // 触发离开过渡
-    wrapper.setProps({ show: false })
-    wrapper.vm.$emit('before-leave')
-    expect(wrapper.emitted('before-leave')).toBeTruthy()
+    await wrapper.setProps({ show: false })
+    ;(wrapper.vm as any).$emit('before-leave')
+    expect(emitted['before-leave']).toBeTruthy()
+  })
+
+  // 测试点击事件
+  test('点击事件', async () => {
+    const wrapper = mount(WdTransition, {
+      props: {
+        show: true
+      },
+      slots: {
+        default: '<div>内容</div>'
+      }
+    })
+
+    // 点击组件
+    await wrapper.trigger('click')
+
+    // 验证事件
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['click']).toBeTruthy()
+  })
+
+  // 测试过渡结束事件
+  test('过渡结束事件', async () => {
+    const wrapper = mount(WdTransition, {
+      props: {
+        show: true
+      },
+      slots: {
+        default: '<div>内容</div>'
+      }
+    })
+
+    // 触发过渡结束事件
+    await wrapper.trigger('transitionend')
+
+    // 设置为隐藏状态
+    await wrapper.setProps({ show: false })
+
+    // 再次触发过渡结束事件
+    await wrapper.trigger('transitionend')
+
+    // 验证样式变化
+    expect(wrapper.attributes('style')).toContain('display: none')
   })
 })

@@ -108,7 +108,7 @@ const { translate } = useTranslate('img-cropper')
 const imgAngle = ref<number>(0)
 // 是否开启动画
 const isAnimation = ref<boolean>(false)
-// #ifdef MP-ALIPAY || APP-PLUS
+// #ifdef MP-ALIPAY || APP-PLUS || H5
 // hack 避免钉钉小程序、支付宝小程序、app抛出相关异常
 const animation: any = null
 // #endif
@@ -636,7 +636,7 @@ defineExpose<ImgCropperExpose>({
 })
 </script>
 
-<!-- #ifdef MP-WEIXIN || MP-QQ || H5  -->
+<!-- #ifdef MP-WEIXIN || MP-QQ  -->
 <script module="animation" lang="wxs">
 
 function setAnimation(newValue, oldValue, ownerInstance){

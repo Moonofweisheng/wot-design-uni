@@ -163,7 +163,7 @@ const tableStyle = computed(() => {
   if (isDef(props.height)) {
     style['max-height'] = addUnit(props.height)
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 const realWidthStyle = computed(() => {
@@ -183,7 +183,7 @@ const bodyStyle = computed(() => {
   if (isDef(props.height)) {
     style['height'] = isDef(props.rowHeight) ? `calc(${props.data.length} * ${addUnit(props.rowHeight)})` : `calc(${props.data.length} * 50px)`
   }
-  return `${objToStyle(style)};`
+  return `${objToStyle(style)}`
 })
 
 /**

@@ -46,6 +46,7 @@ const BEGIN_ANGLE = -Math.PI / 2
 const STEP = 1
 
 const props = defineProps(circleProps)
+const { proxy } = getCurrentInstance() as any
 
 const progressColor = ref<string | CanvasGradient>('') // 进度条颜色
 
@@ -80,7 +81,7 @@ const canvasStyle = computed(() => {
     width: addUnit(props.size),
     height: addUnit(props.size)
   }
-  return `${objToStyle(style)};`
+  return `${objToStyle(style)}`
 })
 
 // 监听目标数值变化
@@ -126,7 +127,6 @@ onUnmounted(() => {
   clearTimeInterval()
 })
 
-const { proxy } = getCurrentInstance() as any
 /**
  * 获取canvas上下文
  */

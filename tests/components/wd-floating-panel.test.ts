@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdFloatingPanel from '../../src/uni_modules/wot-design-uni/components/wd-floating-panel/wd-floating-panel.vue'
+import WdFloatingPanel from '@/uni_modules/wot-design-uni/components/wd-floating-panel/wd-floating-panel.vue'
 import { describe, expect, test } from 'vitest'
 
 describe('WdFloatingPanel', () => {
@@ -74,21 +74,25 @@ describe('WdFloatingPanel', () => {
     expect(wrapper.vm.contentDraggable).toBe(false)
   })
 
-  test('高度变化事件', async () => {
+  test('高度变化事件', () => {
     const wrapper = mount(WdFloatingPanel)
 
     // 模拟高度变化事件
-    await wrapper.vm.$emit('height-change', { height: 200 })
-    expect(wrapper.emitted('height-change')).toBeTruthy()
-    expect(wrapper.emitted('height-change')![0][0]).toEqual({ height: 200 })
+    wrapper.vm.$emit('height-change', { height: 200 })
+
+    // 使用类型安全的方式访问 emitted
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['height-change']).toBeTruthy()
+    expect(emitted['height-change'][0][0]).toEqual({ height: 200 })
   })
 
-  test('更新高度事件', async () => {
+  test('更新高度事件', () => {
     const wrapper = mount(WdFloatingPanel)
 
-    // 模拟更新高度事件
-    await wrapper.vm.$emit('update:height', 200)
-    expect(wrapper.emitted('update:height')).toBeTruthy()
-    expect(wrapper.emitted('update:height')![0][0]).toBe(200)
+    // 模拟组件高度变化
+    wrapper.vm.$emit('update:height', 200)
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['update:height']).toBeTruthy()
+    expect(emitted['update:height'][emitted['update:height'].length - 1][0]).toBe(200)
   })
 })

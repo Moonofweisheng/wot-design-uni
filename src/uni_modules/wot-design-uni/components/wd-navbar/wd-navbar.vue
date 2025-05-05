@@ -70,7 +70,7 @@ const rootStyle = computed(() => {
   if (props.safeAreaInsetTop) {
     style['padding-top'] = addUnit(statusBarHeight || 0)
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 onMounted(() => {

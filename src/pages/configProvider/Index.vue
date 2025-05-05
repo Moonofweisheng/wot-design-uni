@@ -121,12 +121,13 @@ import type { ColPickerColumnChangeOption } from '@/uni_modules/wot-design-uni/c
 import { ref } from 'vue'
 import { useColPickerData } from '@/hooks/useColPickerData'
 import { useI18n } from 'vue-i18n'
+import { Action } from '@/uni_modules/wot-design-uni/components/wd-action-sheet/types'
 const { colPickerData, findChildrenByCode } = useColPickerData()
 
 const { t } = useI18n()
 
 const showAction = ref<boolean>(false)
-const actions = ref<any[]>([])
+const actions = ref<Action[]>([])
 
 const couponName = ref<string>('')
 const couponNameErr = ref<boolean>(false)

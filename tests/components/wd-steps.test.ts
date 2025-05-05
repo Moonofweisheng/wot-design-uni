@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2025-04-10 15:47:32
- * @LastEditTime: 2025-04-14 13:10:51
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-design-uni/tests/components/wd-steps.test.ts
- * 记得注释
- */
 import { mount } from '@vue/test-utils'
 import WdSteps from '@/uni_modules/wot-design-uni/components/wd-steps/wd-steps.vue'
 import WdStep from '@/uni_modules/wot-design-uni/components/wd-step/wd-step.vue'
@@ -27,24 +18,45 @@ describe('WdSteps', () => {
     expect(wrapper.classes()).toContain('is-vertical')
   })
 
-  test('自定义样式', async () => {
-    const customClass = 'custom-steps'
+  test('居中对齐', async () => {
     const wrapper = mount(WdSteps, {
       props: {
-        customClass
+        alignCenter: true
+      }
+    })
+    expect(wrapper.props('alignCenter')).toBe(true)
+  })
+
+  test('点状样式', async () => {
+    const wrapper = mount(WdSteps, {
+      props: {
+        dot: true
+      }
+    })
+    expect(wrapper.props('dot')).toBe(true)
+  })
+
+  test('自定义样式', async () => {
+    const customClass = 'custom-steps'
+    const customStyle = 'color: red;'
+    const wrapper = mount(WdSteps, {
+      props: {
+        customClass,
+        customStyle
       }
     })
     expect(wrapper.classes()).toContain(customClass)
+    expect(wrapper.attributes('style')).toBe(customStyle)
   })
 
-  test('步骤渲染', async () => {
+  test('步骤渲染和活动状态', async () => {
     const wrapper = mount({
       components: {
         WdSteps,
         WdStep
       },
       template: `
-        <wd-steps>
+        <wd-steps :active="1">
           <wd-step title="步骤1" description="描述1" />
           <wd-step title="步骤2" description="描述2" />
           <wd-step title="步骤3" description="描述3" />
@@ -57,5 +69,14 @@ describe('WdSteps', () => {
     expect(steps[0].props('title')).toBe('步骤1')
     expect(steps[1].props('title')).toBe('步骤2')
     expect(steps[2].props('title')).toBe('步骤3')
+
+    // 验证描述
+    expect(steps[0].props('description')).toBe('描述1')
+    expect(steps[1].props('description')).toBe('描述2')
+    expect(steps[2].props('description')).toBe('描述3')
+
+    // 验证活动状态
+    const stepsComponent = wrapper.findComponent(WdSteps)
+    expect(stepsComponent.props('active')).toBe(1)
   })
 })

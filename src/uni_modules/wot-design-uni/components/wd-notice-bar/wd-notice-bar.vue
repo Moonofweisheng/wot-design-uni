@@ -70,7 +70,7 @@ const rootStyle = computed(() => {
     style.background = props.backgroundColor
   }
 
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 const noticeBarClass = computed(() => {
   const { type, wrapable, scrollable } = props
