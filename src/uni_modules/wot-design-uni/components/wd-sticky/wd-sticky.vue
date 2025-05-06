@@ -55,7 +55,7 @@ const rootStyle = computed(() => {
   if (!stickyState.boxLeaved) {
     style['position'] = 'relative'
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 const stickyStyle = computed(() => {
@@ -67,7 +67,7 @@ const stickyStyle = computed(() => {
   if (!stickyState.boxLeaved) {
     style['position'] = 'relative'
   }
-  return `${objToStyle(style)};`
+  return `${objToStyle(style)}`
 })
 
 const containerStyle = computed(() => {
@@ -143,7 +143,7 @@ function observerContentScroll() {
  */
 function handleRelativeTo({ boundingClientRect }: any) {
   // sticky 高度大于或等于 wd-sticky-box，使用 wd-sticky-box 无任何意义
-  if (stickyBox && stickyState.height >= stickyBox.boxStyle.height) {
+  if (stickyBox && stickyBox.boxStyle && stickyState.height >= stickyBox.boxStyle.height) {
     stickyState.position = 'absolute'
     stickyState.top = 0
     return

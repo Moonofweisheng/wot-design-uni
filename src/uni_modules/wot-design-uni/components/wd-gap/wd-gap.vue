@@ -28,7 +28,7 @@ const rootStyle = computed(() => {
   if (isDef(props.height)) {
     rootStyle['height'] = addUnit(props.height)
   }
-  return `${objToStyle(rootStyle)};${props.customStyle}`
+  return `${objToStyle(rootStyle)}${props.customStyle}`
 })
 </script>
 <style lang="scss" scoped>

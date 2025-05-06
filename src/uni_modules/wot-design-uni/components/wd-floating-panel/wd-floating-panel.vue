@@ -66,7 +66,7 @@ const rootStyle = computed(() => {
     transition: !dragging.value ? `transform ${props.duration}ms cubic-bezier(0.18, 0.89, 0.32, 1.28)` : 'none'
   }
 
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 const updateHeight = (value: number) => {

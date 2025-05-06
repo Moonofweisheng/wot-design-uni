@@ -1,0 +1,277 @@
+name: Component Testing (H5)
+
+on:
+  # 在推送到主分支时运行测试
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/uni_modules/wot-design-uni/components/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/component-testing.yml'
+
+  # 在创建 Pull Request 时运行测试
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'src/uni_modules/wot-design-uni/components/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/component-testing.yml'
+
+  # 允许手动触发工作流
+  workflow_dispatch:
+    inputs:
+      component:
+        description: '要测试的组件名称（例如：wd-button）'
+        required: false
+        type: string
+
+  # 定时运行测试，每周一凌晨3点
+  schedule:
+    - cron: '0 3 * * 1'
+
+# 设置环境变量
+env:
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+jobs:
+  # 确定要测试的组件
+  determine-test-matrix:
+    name: Determine Test Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      components: ${{ steps.set-components.outputs.components }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: https://registry.npmjs.org
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
+      - name: Determine changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        with:
+          files: |
+            src/uni_modules/wot-design-uni/components/**
+            tests/**
+
+      - name: Set components to test
+        id: set-components
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ github.event.inputs.component }}" != "" ]]; then
+            # 如果是手动触发并指定了组件，则只测试该组件
+            echo "components=[\"${{ github.event.inputs.component }}\"]" >> $GITHUB_OUTPUT
+          elif [[ "${{ steps.changed-files.outputs.all_changed_files }}" == "" || "${{ github.event_name }}" == "schedule" ]]; then
+            # 如果是定时任务或没有变更文件，则测试所有组件
+            COMPONENTS=$(find tests/components -name "*.test.ts" | sed -e 's/tests\/components\///' -e 's/\.test\.ts//' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+            echo "components=$COMPONENTS" >> $GITHUB_OUTPUT
+          else
+            # 根据变更文件确定要测试的组件
+            COMPONENTS=()
+            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              if [[ $file == src/uni_modules/wot-design-uni/components/* ]]; then
+                COMPONENT_NAME=$(echo $file | sed -n 's/.*components\/\([^\/]*\)\/.*/\1/p')
+                if [[ ! -z "$COMPONENT_NAME" && ! " ${COMPONENTS[@]} " =~ " ${COMPONENT_NAME} " ]]; then
+                  COMPONENTS+=("$COMPONENT_NAME")
+                fi
+              elif [[ $file == tests/components/*.test.ts ]]; then
+                COMPONENT_NAME=$(echo $file | sed -n 's/tests\/components\/\(.*\)\.test\.ts/\1/p')
+                if [[ ! -z "$COMPONENT_NAME" && ! " ${COMPONENTS[@]} " =~ " ${COMPONENT_NAME} " ]]; then
+                  COMPONENTS+=("$COMPONENT_NAME")
+                fi
+              elif [[ $file == tests/* ]]; then
+                # 如果是 tests 目录下的其他文件变化，则测试所有组件
+                echo "检测到 tests 目录下的文件变化，将测试所有组件"
+                COMPONENTS=$(find tests/components -name "*.test.ts" | sed -e 's/tests\/components\///' -e 's/\.test\.ts//' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+                echo "components=$COMPONENTS" >> $GITHUB_OUTPUT
+                exit 0
+              fi
+            done
+
+            if [[ ${#COMPONENTS[@]} -eq 0 ]]; then
+              # 如果没有找到组件，则测试所有组件
+              COMPONENTS=$(find tests/components -name "*.test.ts" | sed -e 's/tests\/components\///' -e 's/\.test\.ts//' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+            else
+              # 将数组转换为 JSON
+              COMPONENTS_JSON=$(printf '%s\n' "${COMPONENTS[@]}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+              COMPONENTS="$COMPONENTS_JSON"
+            fi
+            echo "components=$COMPONENTS" >> $GITHUB_OUTPUT
+          fi
+
+  # 运行 ESLint 检查
+  lint:
+    name: ESLint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: https://registry.npmjs.org
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run ESLint
+        run: pnpm lint
+
+  # 运行组件测试
+  test-components:
+    name: Test Components
+    needs: [determine-test-matrix, lint]
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        component: ${{ fromJson(needs.determine-test-matrix.outputs.components) }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: https://registry.npmjs.org
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run component test
+        env:
+          UNI_PLATFORM: h5
+          COMPONENT_TEST: true
+        run: |
+          if [[ "${{ matrix.component }}" == "all" ]]; then
+            pnpm test:h5 --coverage
+          else
+            pnpm vitest run tests/components/${{ matrix.component }}.test.ts --coverage
+          fi
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ env.CODECOV_TOKEN }}
+          directory: ./coverage
+          flags: ${{ matrix.component }},h5
+          name: ${{ matrix.component }}-h5
+          fail_ci_if_error: false
+
+      - name: Generate test report
+        run: |
+          echo "# 组件测试报告" > test-report-${{ matrix.component }}.md
+          echo "## 测试时间: $(date)" >> test-report-${{ matrix.component }}.md
+          echo "## 测试组件: ${{ matrix.component }}" >> test-report-${{ matrix.component }}.md
+          echo "## 测试平台: H5" >> test-report-${{ matrix.component }}.md
+
+          if [ -f "./coverage/coverage-summary.json" ]; then
+            echo "## 覆盖率数据:" >> test-report-${{ matrix.component }}.md
+            echo "\`\`\`json" >> test-report-${{ matrix.component }}.md
+            cat ./coverage/coverage-summary.json >> test-report-${{ matrix.component }}.md
+            echo "\`\`\`" >> test-report-${{ matrix.component }}.md
+          fi
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report-${{ matrix.component }}
+          path: |
+            ./test-report-${{ matrix.component }}.md
+            ./coverage
+
+  # 生成测试摘要
+  test-summary:
+    name: Generate Test Summary
+    needs: [test-components]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all test reports
+        uses: actions/download-artifact@v4
+
+      - name: Generate summary report
+        run: |
+          echo "# 组件测试摘要 (H5 平台)" > test-summary.md
+          echo "## 测试时间: $(date)" >> test-summary.md
+          echo "## 测试结果" >> test-summary.md
+          echo "| 组件 | 状态 | 覆盖率 |" >> test-summary.md
+          echo "| ---- | ---- | ------ |" >> test-summary.md
+
+          for report_dir in test-report-*; do
+            if [[ -d "$report_dir" ]]; then
+              component=$(echo $report_dir | sed -n 's/test-report-\(.*\)/\1/p')
+
+              if [[ -f "$report_dir/coverage/coverage-summary.json" ]]; then
+                coverage=$(cat "$report_dir/coverage/coverage-summary.json" | jq -r '.total.lines.pct')
+                echo "| $component | ✅ 通过 | $coverage% |" >> test-summary.md
+              else
+                echo "| $component | ❌ 失败 | - |" >> test-summary.md
+              fi
+            fi
+          done
+
+      - name: Upload summary report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-summary
+          path: ./test-summary.md
+
+      - name: Add PR comment with test results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('./test-summary.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });

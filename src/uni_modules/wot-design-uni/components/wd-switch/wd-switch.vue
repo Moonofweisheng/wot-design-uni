@@ -34,7 +34,7 @@ const rootStyle = computed(() => {
   if (props.size) {
     rootStyle['font-size'] = addUnit(props.size)
   }
-  return `${objToStyle(rootStyle)};${props.customStyle}`
+  return `${objToStyle(rootStyle)}${props.customStyle}`
 })
 
 const circleStyle = computed(() => {

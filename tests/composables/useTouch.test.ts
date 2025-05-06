@@ -1,4 +1,5 @@
 import { useTouch } from '@/uni_modules/wot-design-uni/components/composables/useTouch'
+import { describe, expect, it } from 'vitest'
 
 describe('useTouch', () => {
   const touch = useTouch()

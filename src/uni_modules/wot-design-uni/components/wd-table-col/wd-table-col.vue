@@ -100,7 +100,7 @@ const columnStyle = computed(() => {
  */
 const cellStyle = computed(() => {
   let style: CSSProperties = {}
-  const rowHeight: string | number = isDef(table) ? table.props.rowHeight : 50 // 自定义行高
+  const rowHeight: string | number = isDef(table) && isDef(table.props) ? table.props.rowHeight : 50 // 自定义行高
   if (isDef(rowHeight)) {
     style['height'] = addUnit(rowHeight)
   }
@@ -112,7 +112,7 @@ const cellStyle = computed(() => {
 
 // 列数据
 const column = computed(() => {
-  if (!isDef(table)) {
+  if (!isDef(table) || !isDef(table.props) || !isDef(table.props.data) || !Array.isArray(table.props.data)) {
     return []
   }
 
@@ -135,7 +135,7 @@ function handleRowClick(index: number) {
 
 // 行数据
 function getScope(index: number) {
-  if (!isDef(table)) {
+  if (!isDef(table) || !isDef(table.props) || !isDef(table.props.data) || !Array.isArray(table.props.data)) {
     return {}
   }
   return table.props.data[index] || {}

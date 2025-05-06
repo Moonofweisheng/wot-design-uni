@@ -96,7 +96,7 @@ const rootStyle = computed(() => {
   if (props.bgColor) {
     rootStyle['border-color'] = props.bgColor
   }
-  return `${objToStyle(rootStyle)};${props.customStyle}`
+  return `${objToStyle(rootStyle)}${props.customStyle}`
 })
 
 const textStyle = computed(() => {

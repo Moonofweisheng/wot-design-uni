@@ -123,7 +123,7 @@ export function rgbToHex(r: number, g: number, b: number): string {
  * @param hex 十六进制颜色代码（例如：'#RRGGBB'）
  * @returns 包含红、绿、蓝三个颜色分量的数组
  */
-function hexToRgb(hex: string): number[] {
+export function hexToRgb(hex: string): number[] {
   const rgb: number[] = []
 
   // 从第一个字符开始，每两个字符代表一个颜色分量
@@ -402,7 +402,7 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
   if (isArray(styles)) {
     // 使用过滤函数去除空值和 null 值的元素
     // 对每个非空元素递归调用 objToStyle，然后通过分号连接
-    return styles
+    const result = styles
       .filter(function (item) {
         return item != null && item !== ''
       })
@@ -410,10 +410,14 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
         return objToStyle(item)
       })
       .join(';')
+
+    // 如果结果不为空，确保末尾有分号
+    return result ? (result.endsWith(';') ? result : result + ';') : ''
   }
 
   if (isString(styles)) {
-    return styles
+    // 如果是字符串且不为空，确保末尾有分号
+    return styles ? (styles.endsWith(';') ? styles : styles + ';') : ''
   }
 
   // 如果 styles 是对象类型
@@ -421,7 +425,7 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
     // 使用 Object.keys 获取所有属性名
     // 使用过滤函数去除值为 null 或空字符串的属性
     // 对每个属性名和属性值进行格式化，通过分号连接
-    return Object.keys(styles)
+    const result = Object.keys(styles)
       .filter(function (key) {
         return styles[key] != null && styles[key] !== ''
       })
@@ -431,9 +435,36 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
         return [kebabCase(key), styles[key]].join(':')
       })
       .join(';')
+
+    // 如果结果不为空，确保末尾有分号
+    return result ? (result.endsWith(';') ? result : result + ';') : ''
   }
   // 如果 styles 不是对象也不是数组，则直接返回
   return ''
+}
+
+/**
+ * 判断一个对象是否包含任何字段
+ * @param obj 要检查的对象
+ * @returns {boolean} 如果对象为空（不包含任何字段）则返回 true，否则返回 false
+ */
+export function hasFields(obj: unknown): boolean {
+  // 如果不是对象类型或为 null，则认为没有字段
+  if (!isObj(obj) || obj === null) {
+    return false
+  }
+
+  // 使用 Object.keys 检查对象是否有属性
+  return Object.keys(obj).length > 0
+}
+
+/**
+ * 判断一个对象是否为空对象（不包含任何字段）
+ * @param obj 要检查的对象
+ * @returns {boolean} 如果对象为空（不包含任何字段）则返回 true，否则返回 false
+ */
+export function isEmptyObj(obj: unknown): boolean {
+  return !hasFields(obj)
 }
 
 export const requestAnimationFrame = (cb = () => {}) => {

@@ -10,7 +10,7 @@
     @click-modal="handleClose"
   >
     <view :class="`wd-keyboard ${customClass}`" :style="customStyle">
-      <view class="wd-keyboard__header" v-if="showTitle">
+      <view class="wd-keyboard__header" v-if="showTitle || $slots.title">
         <slot name="title">
           <text class="wd-keyboard__title">{{ title }}</text>
         </slot>

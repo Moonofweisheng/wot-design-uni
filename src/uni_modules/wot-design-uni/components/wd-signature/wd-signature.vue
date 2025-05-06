@@ -115,7 +115,7 @@ const canvasStyle = computed(() => {
     style.height = addUnit(props.height)
   }
 
-  return `${objToStyle(style)};`
+  return `${objToStyle(style)}`
 })
 
 const disableScroll = computed(() => props.disableScroll)

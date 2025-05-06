@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-04-05 21:32:56
- * @LastEditTime: 2025-01-16 21:43:47
+ * @LastEditTime: 2025-04-28 19:41:17
  * @LastEditors: weisheng
  * @Description: 水印组件
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-watermark/wd-watermark.vue
@@ -75,7 +75,7 @@ const rootStyle = computed(() => {
   if (waterMarkUrl.value) {
     style['backgroundImage'] = `url('${waterMarkUrl.value}')`
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 onMounted(() => {

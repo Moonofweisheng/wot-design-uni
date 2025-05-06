@@ -72,7 +72,7 @@ const rootStyle = computed(() => {
   if (props.decoration) {
     rootStyle['text-decoration'] = `${props.decoration}`
   }
-  return `${objToStyle(rootStyle)};${props.customStyle}`
+  return `${objToStyle(rootStyle)}${props.customStyle}`
 })
 
 // 计算文本类名的函数

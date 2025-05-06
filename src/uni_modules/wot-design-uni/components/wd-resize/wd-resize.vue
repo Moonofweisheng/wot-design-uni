@@ -62,7 +62,7 @@ const rootStyle = computed(() => {
     width: addUnit(width.value),
     height: addUnit(height.value)
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 let onScrollHandler = () => {}
 const { proxy } = getCurrentInstance() as any
