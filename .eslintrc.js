@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2023-03-14 16:06:21
- * @LastEditTime: 2023-03-28 16:52:32
+ * @LastEditTime: 2025-05-06 21:14:16
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\.eslintrc.js
+ * @FilePath: /wot-design-uni/.eslintrc.js
  * 记得注释
  */
 module.exports = {
@@ -37,6 +37,14 @@ module.exports = {
     'no-inner-declarations': 'off',
     '@typescript-eslint/no-this-alias': 'off',
     '@typescript-eslint/no-empty-function': 'off',
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      {
+        prefer: 'type-imports',
+        disallowTypeAnnotations: false,
+        fixStyle: 'inline-type-imports'
+      }
+    ]
   }
 }
