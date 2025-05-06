@@ -99,7 +99,7 @@ jobs:
                 echo "检测到 tests 目录下的文件变化，将测试所有组件"
                 COMPONENTS=$(find tests/components -name "*.test.ts" | sed -e 's/tests\/components\///' -e 's/\.test\.ts//' | jq -R -s -c 'split("\n") | map(select(length > 0))')
                 echo "components=$COMPONENTS" >> $GITHUB_OUTPUT
-                break
+                exit 0
               fi
             done
 
