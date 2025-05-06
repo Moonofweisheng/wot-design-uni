@@ -121,7 +121,7 @@ import type { ColPickerColumnChangeOption } from '@/uni_modules/wot-design-uni/c
 import { ref } from 'vue'
 import { useColPickerData } from '@/hooks/useColPickerData'
 import { useI18n } from 'vue-i18n'
-import { Action } from '@/uni_modules/wot-design-uni/components/wd-action-sheet/types'
+import { type Action } from '@/uni_modules/wot-design-uni/components/wd-action-sheet/types'
 const { colPickerData, findChildrenByCode } = useColPickerData()
 
 const { t } = useI18n()
