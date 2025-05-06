@@ -1,9 +1,9 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-03-29 15:02:23
+ * @LastEditTime: 2025-05-06 15:18:36
  * @LastEditors: weisheng
- * @Description: 
+ * @Description:
  * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
  * 记得注释
  */
@@ -11,13 +11,16 @@ import { defineConfig } from 'vitepress';
 import viteCompression from 'vite-plugin-compression'
 import { fileURLToPath, URL } from 'node:url'
 import { MarkdownTransform } from './plugins/markdown-transform'
+import llmstxt from 'vitepress-plugin-llms'
 import enUS from './locales/en-US'
 import zhCN from './locales/zh-CN'
-
-
 export default defineConfig({
   vite: {
     plugins: [
+      llmstxt({
+        ignoreFiles: ['reward/*', 'index.md', 'README.md', 'en-US/*.md', 'en-US/**/*.md', 'ads/*', 'guide/cases.md', 'guide/changelog.md', 'guide/join-group.md', 'guide/typography.md'],
+        domain: 'https://wot-design-uni.cn',
+      }),
       MarkdownTransform(),
       viteCompression({
         verbose: true,
@@ -25,7 +28,7 @@ export default defineConfig({
         threshold: 10240,
         algorithm: 'gzip',
         ext: '.gz',
-      })
+      }),
     ],
     ssr: { noExternal: ['element-plus'] },
     resolve: {
@@ -72,7 +75,7 @@ export default defineConfig({
       ...zhCN
     },
     'en-US': {
-      label: 'English', 
+      label: 'English',
       lang: 'en-US',
       ...enUS,
     }
@@ -80,12 +83,12 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['link', { rel: 'stylesheet', href: '/petercatai/assistant.min.css' }],
-    ['script', {src: '/petercatai/react.development.js' }],
-    ['script', {src: '/petercatai/react-dom.development.js' }],
-    ['script', {src: '/petercatai/dayjs.min.js' }],
-    ['script', {src: '/petercatai/antd.js' }],
-    ['script', {src: '/petercatai/lottie.js' }],
-    ['script', {src: '/petercatai/assistant.min.js' }],
+    ['script', { src: '/petercatai/react.development.js' }],
+    ['script', { src: '/petercatai/react-dom.development.js' }],
+    ['script', { src: '/petercatai/dayjs.min.js' }],
+    ['script', { src: '/petercatai/antd.js' }],
+    ['script', { src: '/petercatai/lottie.js' }],
+    ['script', { src: '/petercatai/assistant.min.js' }],
     ['script', {}, `
       !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"3J4q4tM6fN0n1fbZ",ck:"3J4q4tM6fN0n1fbZ"});
     `],
@@ -152,10 +155,10 @@ export default defineConfig({
           }, {
             text: '更新日志',
             link: '/guide/changelog',
-          },{
+          }, {
             text: '⭐ 案例',
             link: '/guide/cases',
-          },{
+          }, {
             text: '加群沟通',
             link: '/guide/join-group',
           }
@@ -219,10 +222,10 @@ export default defineConfig({
         {
           text: '更新日志',
           link: '/guide/changelog',
-        },{
+        }, {
           text: '⭐ 案例',
           link: '/guide/cases',
-        },{
+        }, {
           text: '加群沟通',
           link: '/guide/join-group',
         }
@@ -369,12 +372,10 @@ export default defineConfig({
           }, {
             link: "/component/password-input",
             text: "PasswordInput 密码输入框"
-          },
-          , {
+          }, {
             link: "/component/signature",
             text: "Signature 签名"
-          }
-        ]
+          }]
         }, {
           text: "反馈",
           collapsed: false,
@@ -436,7 +437,7 @@ export default defineConfig({
             link: "/component/number-keyboard",
             text: "NumberKeyboard 数字键盘"
           }]
-        }, 
+        },
         {
           text: "数据展示",
           collapsed: false,
