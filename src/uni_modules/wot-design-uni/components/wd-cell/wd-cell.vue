@@ -3,7 +3,7 @@
     :class="['wd-cell', isBorder ? 'is-border' : '', size ? 'is-' + size : '', center ? 'is-center' : '', customClass]"
     :style="customStyle"
     :hover-class="isLink || clickable ? 'is-hover' : 'none'"
-    hover-stay-time="70"
+    :hover-stay-time="70"
     @click="onClick"
   >
     <view :class="['wd-cell__wrapper', vertical ? 'is-vertical' : '']">
@@ -71,7 +71,7 @@ const emit = defineEmits(['click'])
 const cell = useCell()
 
 const isBorder = computed(() => {
-  return isDef(cell.border.value) ? cell.border.value : props.border
+  return Boolean(isDef(props.border) ? props.border : cell.border.value)
 })
 
 const { parent: form } = useParent(FORM_KEY)

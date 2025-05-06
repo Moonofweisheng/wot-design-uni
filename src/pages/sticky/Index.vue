@@ -1,40 +1,40 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2024-02-26 14:42:16
+ * @LastEditTime: 2025-04-02 20:17:36
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\pages\sticky\Index.vue
+ * @FilePath: /wot-design-uni/src/pages/sticky/Index.vue
  * 记得注释
 -->
 <template>
   <page-wraper>
     <view style="height: 250vh">
       <view class="demo-block">
-        <view class="demo-title">基本用法</view>
+        <view class="demo-title">{{ $t('jiBenYongFa') }}</view>
         <view class="demo-container">
           <wd-sticky custom-style="margin-left: 20px">
-            <wd-button type="success">基础用法</wd-button>
+            <wd-button type="success">{{ $t('ji-chu-yong-fa-0') }}</wd-button>
           </wd-sticky>
         </view>
       </view>
 
       <view class="demo-block">
-        <view class="demo-title">吸顶距离</view>
+        <view class="demo-title">{{ $t('xi-ding-ju-li') }}</view>
         <view class="demo-container">
           <wd-sticky :offset-top="50" custom-style="margin-left: 120px">
-            <wd-button>吸顶距离</wd-button>
+            <wd-button>{{ $t('xi-ding-ju-li-0') }}</wd-button>
           </wd-sticky>
         </view>
       </view>
 
       <view class="demo-block">
-        <view class="demo-title">相对容器</view>
+        <view class="demo-title">{{ $t('xiang-dui-rong-qi') }}</view>
         <view class="demo-container">
           <wd-sticky-box>
             <view class="custom-container">
               <wd-sticky custom-style="margin-left: 220px">
-                <wd-button type="warning">相对容器</wd-button>
+                <wd-button type="warning">{{ $t('xiang-dui-rong-qi') }}</wd-button>
               </wd-sticky>
             </view>
           </wd-sticky-box>
@@ -42,22 +42,22 @@
       </view>
 
       <view class="demo-block">
-        <view class="demo-title">动态插入</view>
+        <view class="demo-title">{{ $t('dong-tai-cha-ru') }}</view>
         <view class="demo-container">
-          <wd-button type="info" plain @click="insert">点击插入</wd-button>
+          <wd-button type="info" plain @click="insert">{{ $t('dian-ji-cha-ru') }}</wd-button>
           <wd-sticky custom-style="margin-left: 220px">
-            <wd-button type="error" v-if="show">动态生成</wd-button>
+            <wd-button type="error" v-if="show">{{ $t('dong-tai-sheng-cheng') }}</wd-button>
           </wd-sticky>
         </view>
       </view>
 
       <view class="demo-block">
-        <view class="demo-title">相对容器+吸顶距离</view>
+        <view class="demo-title">{{ $t('xiang-dui-rong-qi-xi-ding-ju-li') }}</view>
         <view class="demo-container">
           <wd-sticky-box>
             <view class="custom-container">
               <wd-sticky :offset-top="150">
-                <wd-button type="warning">相对容器+吸顶距离</wd-button>
+                <wd-button type="warning">{{ $t('xiang-dui-rong-qi-xi-ding-ju-li') }}</wd-button>
               </wd-sticky>
             </view>
           </wd-sticky-box>

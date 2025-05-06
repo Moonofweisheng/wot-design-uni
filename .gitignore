@@ -1,4 +1,5 @@
 .DS_Store
+coverage/
 node_modules/
 unpackage/
 dist/
@@ -26,3 +27,6 @@ yarn-error.log*
 *.sln
 *.sw*
 .history
+tags.json
+attributes.json
+web-types.json

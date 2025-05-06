@@ -14,6 +14,7 @@
           :range-prompt="rangePrompt"
           :allow-same-day="allowSameDay"
           :default-time="defaultTime"
+          :showTitle="index !== 0"
           @change="handleDateChange"
         />
       </view>
@@ -33,7 +34,7 @@ export default {
 <script lang="ts" setup>
 import { computed, ref, onMounted } from 'vue'
 import { compareYear, formatYearTitle, getYears } from '../utils'
-import { isArray, isNumber, requestAnimationFrame } from '../../common/util'
+import { isArray, isNumber, pause } from '../../common/util'
 import Year from '../year/year.vue'
 import { yearPanelProps, type YearInfo, type YearPanelExpose } from './types'
 
@@ -45,16 +46,16 @@ const scrollIndex = ref<number>(0) // 当前显示的年份索引
 
 // 滚动区域的高度
 const scrollHeight = computed(() => {
-  const scrollHeight: number = (props.panelHeight || 378) + (props.showPanelTitle ? 26 : 16)
+  const scrollHeight: number = props.panelHeight + (props.showPanelTitle ? 26 : 16)
   return scrollHeight
 })
 
 // 年份信息
 const years = computed<YearInfo[]>(() => {
-  return getYears(props.minDate, props.maxDate).map((year) => {
+  return getYears(props.minDate, props.maxDate).map((year, index) => {
     return {
       date: year,
-      height: 237
+      height: index === 0 ? 200 : 245
     }
   })
 })
@@ -68,38 +69,38 @@ onMounted(() => {
   scrollIntoView()
 })
 
-function scrollIntoView() {
-  requestAnimationFrame(() => {
-    let activeDate: number | null = null
-    if (isArray(props.value)) {
-      activeDate = props.value![0]
-    } else if (isNumber(props.value)) {
-      activeDate = props.value
-    }
+async function scrollIntoView() {
+  await pause()
+  let activeDate: number | null = null
+  if (isArray(props.value)) {
+    activeDate = props.value![0]
+  } else if (isNumber(props.value)) {
+    activeDate = props.value
+  }
 
-    if (!activeDate) {
-      activeDate = Date.now()
-    }
+  if (!activeDate) {
+    activeDate = Date.now()
+  }
 
-    let top: number = 0
-    for (let index = 0; index < years.value.length; index++) {
-      if (compareYear(years.value[index].date, activeDate) === 0) {
-        break
-      }
-      top += years.value[index] ? Number(years.value[index].height) : 0
+  let top: number = 0
+  for (let index = 0; index < years.value.length; index++) {
+    if (compareYear(years.value[index].date, activeDate) === 0) {
+      break
     }
-    scrollTop.value = 0
-    requestAnimationFrame(() => {
-      scrollTop.value = top
-    })
-  })
+    top += years.value[index] ? Number(years.value[index].height) : 0
+  }
+  scrollTop.value = 0
+  if (top > 0) {
+    await pause()
+    scrollTop.value = top + 45
+  }
 }
 
-const yearScroll = (e: Event) => {
+const yearScroll = (event: { detail: { scrollTop: number } }) => {
   if (years.value.length <= 1) {
     return
   }
-  const scrollTop = Math.max(0, (e.target as Element).scrollTop)
+  const scrollTop = Math.max(0, event.detail.scrollTop)
   doSetSubtitle(scrollTop)
 }
 
@@ -111,7 +112,7 @@ function doSetSubtitle(scrollTop: number) {
   let height: number = 0 // 月份高度和
   for (let index = 0; index < years.value.length; index++) {
     height = height + years.value[index].height
-    if (scrollTop < height + 45) {
+    if (scrollTop < height) {
       scrollIndex.value = index
       return
     }

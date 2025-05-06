@@ -31,6 +31,8 @@
 
     @include when(fixed) {
       position: absolute;
+      top: 0px;
+      right: 0px;
       transform: translateY(-50%) translateX(50%);
     }
 

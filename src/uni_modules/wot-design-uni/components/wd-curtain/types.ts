@@ -1,5 +1,14 @@
+/*
+ * @Author: weisheng
+ * @Date: 2025-01-25 23:46:29
+ * @LastEditTime: 2025-02-13 13:16:45
+ * @LastEditors: weisheng
+ * @Description:
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-curtain/types.ts
+ * 记得注释
+ */
 import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeBooleanProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type ClosePosition = 'inset' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 
@@ -7,8 +16,13 @@ export const curtainProps = {
   ...baseProps,
   /**
    * 绑定值，展示/关闭幕帘
+   * @deprecated 请使用 modelValue
    */
   value: makeBooleanProp(false),
+  /**
+   * 绑定值，展示/关闭幕帘
+   */
+  modelValue: makeBooleanProp(false),
   /**
    * 关闭按钮位置，可选值：inset / top / bottom / top-left / top-right / bottom-left / bottom-right
    */
@@ -32,7 +46,25 @@ export const curtainProps = {
   /**
    * 是否当关闭时将弹出层隐藏（display: none)
    */
-  hideWhenClose: makeBooleanProp(true)
+  hideWhenClose: makeBooleanProp(true),
+  /**
+   * 设置层级
+   * 类型：number
+   * 默认值：10
+   */
+  zIndex: makeNumberProp(10),
+  /**
+   * 自定义关闭按钮的类名
+   * 类型：string
+   * 默认值：''
+   */
+  customCloseClass: makeStringProp(''),
+  /**
+   * 自定义关闭按钮的样式
+   * 类型：string
+   * 默认值：''
+   */
+  customCloseStyle: makeStringProp('')
 }
 
 export type CurtainProps = ExtractPropTypes<typeof curtainProps>

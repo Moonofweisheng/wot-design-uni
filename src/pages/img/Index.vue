@@ -1,24 +1,15 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-11-02 18:57:41
- * @LastEditTime: 2023-11-02 19:02:24
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: \wot-design-uni\src\pages\img\Index.vue
- * 记得注释
--->
 <template>
   <page-wraper>
-    <demo-block title="基本用法">
+    <demo-block :title="$t('jiBenYongFa')">
       <wd-img :width="100" :height="100" :src="joy" />
       <!-- 以组件位置为定位原点 -->
       <wd-img :width="100" :height="100" :src="img" custom-class="border" />
     </demo-block>
 
-    <demo-block title="插槽用法">
+    <demo-block :title="$t('cha-cao-yong-fa')">
       <wd-img :width="100" :height="100" src="https://www.123.com/a.jpg">
         <template #error>
-          <view class="error-wrap">加载失败</view>
+          <view class="error-wrap">{{ $t('jia-zai-shi-bai') }}</view>
         </template>
         <template #loading>
           <view class="loading-wrap">
@@ -28,27 +19,32 @@
       </wd-img>
     </demo-block>
 
-    <demo-block title="填充">
+    <demo-block :title="$t('tian-chong')">
       <view class="col" v-for="(mode, index) in modes" :key="index">
         <wd-img width="100%" height="27vw" :src="joy" :mode="mode" />
         <view class="center">{{ mode }}</view>
       </view>
     </demo-block>
-    <demo-block title="圆形">
+    <demo-block :title="$t('yuan-xing')">
       <view class="col" v-for="(mode, index) in modes" :key="index">
         <wd-img round width="100%" height="27vw" :src="joy" :mode="mode" />
         <view class="center">{{ mode }}</view>
       </view>
     </demo-block>
-    <demo-block title="圆角">
+    <demo-block :title="$t('yuan-jiao')">
       <view class="col" v-for="(mode, index) in modes" :key="index">
         <wd-img width="100%" height="27vw" :radius="5" :src="joy" :mode="mode" />
         <view class="center">{{ mode }}</view>
       </view>
     </demo-block>
 
-    <demo-block title="可预览">
-      <wd-img :width="100" :height="100" :src="joy" :enable-preview="true" />
+    <demo-block :title="$t('ke-yu-lan')">
+      <view class="col">
+        <wd-img :width="100" :height="100" :src="joy" :enable-preview="true" />
+      </view>
+      <view class="col">
+        <wd-img :width="100" :height="100" :src="joy" :preview-src="img" :enable-preview="true" />
+      </view>
     </demo-block>
   </page-wraper>
 </template>

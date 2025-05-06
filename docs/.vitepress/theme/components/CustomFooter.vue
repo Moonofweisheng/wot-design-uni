@@ -1,19 +1,18 @@
 <!--
  * @Author: weisheng
  * @Date: 2024-01-07 00:46:50
- * @LastEditTime: 2024-01-07 01:57:00
+ * @LastEditTime: 2024-12-07 14:23:56
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/CustomFooter.vue
  * 记得注释
 -->
 <script setup lang="ts">
-import { useData } from 'vitepress/dist/client/theme-default/composables/data';
-import { useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar';
 import { computed, onMounted, ref } from 'vue';
+import { useData} from 'vitepress'
+import { useSidebar } from 'vitepress/theme'
 
-
-const { theme } = useData()
+const { theme }:any = useData()
 const { hasSidebar } = useSidebar()
 
 const isNetlify = ref<boolean>(false)

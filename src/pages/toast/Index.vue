@@ -1,56 +1,63 @@
 <template>
   <view>
     <page-wraper>
-      <demo-block title="基本用法">
+      <demo-block :title="$t('jiBenYongFa')">
         <wd-button @click="showToast">toast</wd-button>
-        <wd-button @click="showLongToast">长文案</wd-button>
+        <wd-button @click="showLongToast">{{ $t('chang-wen-an') }}</wd-button>
       </demo-block>
-      <demo-block title="类型toast">
-        <wd-button @click="showSuccessToast">成功toast</wd-button>
-        <wd-button @click="showErrorToast">错误toast</wd-button>
-        <wd-button @click="showWarnToast">警告toast</wd-button>
-        <wd-button @click="showNormalToast">常规toast</wd-button>
+      <demo-block :title="$t('lei-xing-toast')">
+        <wd-button @click="showSuccessToast">{{ $t('cheng-gong-toast') }}</wd-button>
+        <wd-button @click="showErrorToast">{{ $t('cuo-wu-toast') }}</wd-button>
+        <wd-button @click="showWarnToast">{{ $t('jing-gao-toast') }}</wd-button>
+        <wd-button @click="showNormalToast">{{ $t('chang-gui-toast') }}</wd-button>
       </demo-block>
-      <demo-block title="使用图标">
-        <wd-button @click="showInnerIconToast">内部图标</wd-button>
-        <wd-button @click="showCustomIconToast">自定义图标</wd-button>
+      <demo-block :title="$t('shi-yong-tu-biao')">
+        <wd-button @click="showInnerIconToast">{{ $t('nei-bu-tu-biao') }}</wd-button>
+        <wd-button @click="showCustomIconToast">{{ $t('ziDingYiTuBiao') }}</wd-button>
       </demo-block>
-      <demo-block title="提示位置">
-        <wd-button @click="showTopToast">顶部toast</wd-button>
-        <wd-button @click="showBottomToast">底部toast</wd-button>
+      <demo-block :title="$t('ti-shi-wei-zhi')">
+        <wd-button @click="showTopToast">{{ $t('ding-bu-toast') }}</wd-button>
+        <wd-button @click="showMiddletoast">{{ $t('ju-zhong-toast') }}</wd-button>
+        <wd-button @click="showBottomToast">{{ $t('di-bu-toast') }}</wd-button>
       </demo-block>
-      <demo-block title="Loading">
-        <wd-button @click="showLoadingToast">Loading加载</wd-button>
-        <wd-button @click="showLoadingToast2">ring类型loading</wd-button>
+      <demo-block :title="$t('loading')">
+        <wd-button @click="showLoadingToast">{{ $t('loading-jia-zai') }}</wd-button>
+        <wd-button @click="showLoadingToast2">{{ $t('ring-lei-xing-loading') }}</wd-button>
+        <wd-button @click="showLoadingToast3">{{ $t('zong-xiang-bu-ju-loading') }}</wd-button>
+      </demo-block>
+      <demo-block :title="$t('pai-ban-fang-xiang')">
+        <wd-button @click="showHorizonToast">{{ $t('heng-xiang-pai-ban') }}</wd-button>
+        <wd-button @click="showVerticalToast">{{ $t('zong-xiang-pai-ban') }}</wd-button>
       </demo-block>
     </page-wraper>
   </view>
 </template>
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const toast = useToast()
 
 function showToast() {
-  toast.show('提示信息')
+  toast.show(t('ti-shi-xin-xi'))
 }
 function showSuccessToast() {
-  toast.success('操作成功')
+  toast.success(t('cao-zuo-cheng-gong'))
 }
 function showErrorToast() {
-  toast.error('错误提示错误提示')
+  toast.error(t('cuo-wu-ti-shi-cuo-wu-ti-shi'))
 }
 function showWarnToast() {
-  toast.warning('提示信息')
+  toast.warning(t('ti-shi-xin-xi'))
 }
 function showNormalToast() {
-  toast.info('常规提示常规提示')
+  toast.info(t('chang-gui-ti-shi-chang-gui-ti-shi'))
 }
 function showTopToast() {
   toast.show({
     position: 'top',
     iconClass: 'star',
-    msg: '提示信息',
+    msg: t('ti-shi-xin-xi'),
     closed() {
       console.log(232)
     },
@@ -59,21 +66,36 @@ function showTopToast() {
     }
   })
 }
+
+function showMiddletoast() {
+  toast.show({
+    position: 'middle',
+    iconClass: 'star',
+    msg: t('ti-shi-xin-xi'),
+    closed() {
+      console.log(232)
+    },
+    opened() {
+      console.log(2323232)
+    }
+  })
+}
+
 function showBottomToast() {
   toast.show({
     position: 'bottom',
-    msg: '提示信息'
+    msg: t('ti-shi-xin-xi')
   })
 }
 function showLoadingToast() {
-  toast.loading('3s后调用close关闭')
+  toast.loading(t('3s-hou-tiao-yong-close-guan-bi'))
   setTimeout(() => {
     toast.close()
   }, 3000)
 }
 function showLoadingToast2() {
   toast.loading({
-    msg: '3s后调用close关闭',
+    msg: t('3s-hou-tiao-yong-close-guan-bi-0'),
     loadingType: 'ring',
     loadingColor: '#fff'
   })
@@ -81,14 +103,28 @@ function showLoadingToast2() {
     toast.close()
   }, 3000)
 }
+
+function showLoadingToast3() {
+  toast.loading({
+    msg: '芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。黄鹤断矶头，故人曾到否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。',
+    direction: 'vertical'
+  })
+  setTimeout(() => {
+    toast.close()
+  }, 3000)
+}
 function showLongToast() {
-  toast.show('这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文案')
+  toast.show(
+    t(
+      'zhe-shi-yi-duan-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-hen-chang-de-wen-an'
+    )
+  )
 }
 
 function showInnerIconToast() {
   toast.show({
     iconClass: 'star',
-    msg: '使用组件库内部图标'
+    msg: t('shi-yong-zu-jian-ku-nei-bu-tu-biao')
   })
 }
 
@@ -96,7 +132,18 @@ function showCustomIconToast() {
   toast.show({
     iconClass: 'kehuishouwu',
     classPrefix: 'fish',
-    msg: '使用自定义图标'
+    msg: t('shi-yong-zi-ding-yi-tu-biao')
+  })
+}
+
+function showHorizonToast() {
+  toast.success(t('heng-xiang-pai-ban-0'))
+}
+
+function showVerticalToast() {
+  toast.success({
+    msg: '芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。黄鹤断矶头，故人曾到否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。',
+    direction: 'vertical'
   })
 }
 </script>

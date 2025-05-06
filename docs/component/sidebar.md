@@ -1,5 +1,3 @@
-<frame/>
-
 # Sidebar 侧边导航 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.49</el-tag>
 
 垂直展示的导航栏，用于在不同的内容区域之间进行切换。
@@ -67,27 +65,58 @@ function handleChange({ value, label }) {
 }
 ```
 
+## 异步切换
+
+通过 `before-change` 属性可以在切换标签前执行特定的逻辑。它接收 `{ value, resolve }` 参数，通过 `resolve` `继续执行，resolve` 接收 1 个 boolean 参数
+
+```html
+<wd-sidebar v-model="active" :before-change="beforeChange">
+  <wd-sidebar-item :value="0" label="标签名称" />
+  <wd-sidebar-item :value="1" label="标签名称" disabled />
+  <wd-sidebar-item :value="2" label="标签名称" />
+</wd-sidebar>
+```
+```typescript
+import { useToast } from '@/uni_modules/wot-design-uni'
+import type { SidebarBeforeChange } from '@/uni_modules/wot-design-uni/components/wd-sidebar/types'
+import { ref } from 'vue'
+const { loading: showLoading, close: closeLoading } = useToast()
+
+const toast = useToast()
+const active = ref<number>(1)
+
+const beforeChange: SidebarBeforeChange = ({ value, resolve }) => {
+  showLoading('切换中')
+  setTimeout(() => {
+    closeLoading()
+    resolve(true)
+  }, 2000)
+}
+```
+
+
 ## 锚点用法示例
 
-sidebar组件的锚点用法可以帮助用户在长页面上快速导航到特定的部分。
+sidebar 组件的锚点用法可以帮助用户在长页面上快速导航到特定的部分。
 
 ::: details 查看锚点用法示例
 ::: code-group
-``` html [vue]
-  <view class="wraper">
-      <wd-sidebar v-model="active" @change="handleChange">
-        <wd-sidebar-item v-for="(item, index) in categories" :key="index" :value="index" :label="item.label" />
-      </wd-sidebar>
-      <scroll-view class="content" scroll-y scroll-with-animation :scroll-top="scrollTop" :throttle="false" @scroll="onScroll">
-        <view v-for="(item, index) in categories" :key="index" class="category">
-          <wd-cell-group :title="item.title" border>
-            <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
-              <wd-icon name="github-filled" size="24px"></wd-icon>
-            </wd-cell>
-          </wd-cell-group>
-        </view>
-      </scroll-view>
+
+```html [vue]
+<view class="wraper">
+  <wd-sidebar v-model="active" @change="handleChange">
+    <wd-sidebar-item v-for="(item, index) in categories" :key="index" :value="index" :label="item.label" />
+  </wd-sidebar>
+  <scroll-view class="content" scroll-y scroll-with-animation :scroll-top="scrollTop" :throttle="false" @scroll="onScroll">
+    <view v-for="(item, index) in categories" :key="index" class="category">
+      <wd-cell-group :title="item.title" border>
+        <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
+          <wd-icon name="github-filled" size="24px"></wd-icon>
+        </wd-cell>
+      </wd-cell-group>
     </view>
+  </scroll-view>
+</view>
 ```
 
 ```typescript [typescript]
@@ -179,45 +208,47 @@ function onScroll(e) {
   background: #fff;
 }
 ```
+
 :::
 
 ## 切换页面用法示例
 
-sidebar组件在每次切换激活项时，跳转到指定的页面，且无法通过滚动导航到下一个sidebar项。
+sidebar 组件在每次切换激活项时，跳转到指定的页面，且无法通过滚动导航到下一个 sidebar 项。
 
 ::: details 查看切换页面用法示例
 ::: code-group
-``` html [vue]
- <view class="wraper">
-      <wd-sidebar v-model="active" @change="handleChange">
-        <wd-sidebar-item
-          v-for="(item, index) in categories"
-          :key="index"
-          :value="index"
-          :label="item.label"
-          :icon="item.icon"
-          :disabled="item.disabled"
-        />
-      </wd-sidebar>
-      <view class="content" :style="`transform: translateY(-${active * 100}%)`">
-        <scroll-view
-          v-for="(item, index) in categories"
-          :key="index"
-          class="category"
-          scroll-y
-          scroll-with-animation
-          :show-scrollbar="false"
-          :scroll-top="scrollTop"
-          :throttle="false"
-        >
-          <wd-cell-group :title="item.title" border>
-            <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
-              <wd-icon name="github-filled" size="24px"></wd-icon>
-            </wd-cell>
-          </wd-cell-group>
-        </scroll-view>
-      </view>
-    </view>
+
+```html [vue]
+<view class="wraper">
+  <wd-sidebar v-model="active" @change="handleChange">
+    <wd-sidebar-item
+      v-for="(item, index) in categories"
+      :key="index"
+      :value="index"
+      :label="item.label"
+      :icon="item.icon"
+      :disabled="item.disabled"
+    />
+  </wd-sidebar>
+  <view class="content" :style="`transform: translateY(-${active * 100}%)`">
+    <scroll-view
+      v-for="(item, index) in categories"
+      :key="index"
+      class="category"
+      scroll-y
+      scroll-with-animation
+      :show-scrollbar="false"
+      :scroll-top="scrollTop"
+      :throttle="false"
+    >
+      <wd-cell-group :title="item.title" border>
+        <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
+          <wd-icon name="github-filled" size="24px"></wd-icon>
+        </wd-cell>
+      </wd-cell-group>
+    </scroll-view>
+  </view>
+</view>
 ```
 
 ```typescript [typescript]
@@ -307,6 +338,7 @@ function handleChange({ value }) {
   height: 100%;
 }
 ```
+
 :::
 
 ## 自定义图标用法示例
@@ -315,21 +347,22 @@ function handleChange({ value }) {
 
 ::: details 自定义图标用法示例
 ::: code-group
-``` html [vue]
-    <view class="wraper">
-      <wd-sidebar v-model="active" @change="handleChange">
-        <wd-sidebar-item v-for="(item, index) in categories" :key="index" :value="index" :label="item.label" :icon="item.icon" />
-      </wd-sidebar>
-      <scroll-view class="content" scroll-y scroll-with-animation :scroll-top="scrollTop" :throttle="false" @scroll="onScroll">
-        <view v-for="(item, index) in categories" :key="index" class="category">
-          <wd-cell-group :title="item.title" border>
-            <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
-              <wd-icon name="github-filled" size="24px"></wd-icon>
-            </wd-cell>
-          </wd-cell-group>
-        </view>
-      </scroll-view>
+
+```html [vue]
+<view class="wraper">
+  <wd-sidebar v-model="active" @change="handleChange">
+    <wd-sidebar-item v-for="(item, index) in categories" :key="index" :value="index" :label="item.label" :icon="item.icon" />
+  </wd-sidebar>
+  <scroll-view class="content" scroll-y scroll-with-animation :scroll-top="scrollTop" :throttle="false" @scroll="onScroll">
+    <view v-for="(item, index) in categories" :key="index" class="category">
+      <wd-cell-group :title="item.title" border>
+        <wd-cell v-for="(cell, index) in item.items" :key="index" :title="cell.title" :label="cell.label">
+          <wd-icon name="github-filled" size="24px"></wd-icon>
+        </wd-cell>
+      </wd-cell-group>
     </view>
+  </scroll-view>
+</view>
 ```
 
 ```typescript [typescript]
@@ -427,14 +460,15 @@ function onScroll(e) {
   background: #fff;
 }
 ```
-:::
 
+:::
 
 ## Attributes
 
-| 参数               | 说明             | 类型             | 可选值 | 默认值 | 最低版本 |
-| ------------------ | ---------------- | ---------------- | ------ | ------ | -------- |
-| modelValue/v-model | 当前导航项的索引 | string \| number | -      | 0      | 0.1.49   |
+| 参数               | 说明                                                                                                                                  | 类型             | 可选值 | 默认值 | 最低版本         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------ | ------ | ---------------- |
+| modelValue / v-model | 当前导航项的索引                                                                                                                      | string / number | -      | 0      | 0.1.49           |
+| before-change      | 切换导航项前钩子，可以在切换标签前执行特定的逻辑，接收 { value, resolve } 参数，通过 resolve 继续执行，resolve 接收 1 个 boolean 参数 | function         | -      | -      | 1.4.0 |
 
 ## Events
 
@@ -457,17 +491,16 @@ function onScroll(e) {
 
 ## SidebarItem Attributes
 
-| 参数     | 说明                   | 类型                       | 可选值 | 默认值 | 最低版本 |
-| -------- | ---------------------- | -------------------------- | ------ | ------ | -------- |
-| label    | 当前选项标题           | string                     | -      | -      | 0.1.49   |
-| value    | 当前选项的值，唯一标识 | `number \| string`         | -      | -      | 0.1.49   |
-| icon     | 图标                   | string                     | -      | -      | 0.1.49   |
-| badge    | 徽标属性，徽标显示值             | `number \| string \| null` | -      | -      | 0.1.49   |
-| isDot    | 徽标属性，是否点状徽标           | boolean                    | -      | false  | 0.1.49   |
-| max      | 徽标属性，徽标最大值             | number                     | -      | 99     | 0.1.49   |
-| disabled | 是否禁用               | boolean                    | -      | false  | 0.1.49   |
-| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes)	| BadgeProps    | -      | -  | 0.1.50   |
-
+| 参数        | 说明                                                                                     | 类型                       | 可选值 | 默认值 | 最低版本 |
+| ----------- | ---------------------------------------------------------------------------------------- | -------------------------- | ------ | ------ | -------- |
+| label       | 当前选项标题                                                                             | string                     | -      | -      | 0.1.49   |
+| value       | 当前选项的值，唯一标识                                                                   | `number / string`         | -      | -      | 0.1.49   |
+| icon        | 图标                                                                                     | string                     | -      | -      | 0.1.49   |
+| badge       | 徽标属性，徽标显示值                                                                     | `number / string / null` | -      | -      | 0.1.49   |
+| isDot       | 徽标属性，是否点状徽标                                                                   | boolean                    | -      | false  | 0.1.49   |
+| max         | 徽标属性，徽标最大值                                                                     | number                     | -      | 99     | 0.1.49   |
+| disabled    | 是否禁用                                                                                 | boolean                    | -      | false  | 0.1.49   |
+| badge-props | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes) | BadgeProps                 | -      | -      | 0.1.50   |
 
 ## SidebarItem Slots
 

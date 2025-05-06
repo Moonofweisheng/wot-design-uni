@@ -3,27 +3,27 @@
     <wd-form ref="form" :model="model" errorType="toast">
       <wd-cell-group border>
         <wd-input
-          label="用户名"
+          :label="$t('wai-bi-ba-bu')"
           label-width="100px"
           prop="value1"
           clearable
           v-model="model.value1"
-          placeholder="请输入用户名"
-          :rules="[{ required: true, message: '请填写用户名' }]"
+          :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')"
+          :rules="[{ required: true, message: $t('qing-shu-ru-wai-bi-ba-bu') }]"
         />
         <wd-input
-          label="密码"
+          :label="$t('sha-ka-la-ka')"
           label-width="100px"
           prop="value2"
           show-password
           clearable
           v-model="model.value2"
-          placeholder="请输入密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
+          :placeholder="$t('qing-shu-ru-sha-ka-la-ka')"
+          :rules="[{ required: true, message: $t('qing-shu-ru-sha-ka-la-ka') }]"
         />
       </wd-cell-group>
       <view class="footer">
-        <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
+        <wd-button type="primary" size="large" @click="handleSubmit" block>{{ $t('ti-jiao') }}</wd-button>
       </view>
     </wd-form>
   </page-wraper>
@@ -32,7 +32,8 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 import type { FormInstance } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import { reactive, ref } from 'vue'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { success: showSuccess } = useToast()
 const model = reactive<{
   value1: string
@@ -50,7 +51,7 @@ function handleSubmit() {
     .then(({ valid, errors }) => {
       if (valid) {
         showSuccess({
-          msg: '校验通过'
+          msg: t('xiao-yan-tong-guo')
         })
       }
     })

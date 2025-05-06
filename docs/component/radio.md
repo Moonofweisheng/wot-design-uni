@@ -1,7 +1,6 @@
-<frame/>
-
 #  Radio 单选框
 
+单选框，用于在一组备选项中进行单选。
 
 ## 基本用法
 
@@ -149,28 +148,29 @@ radio设置的props优先级比radioGroup上设置的props优先级更高
 
 ## RadioGroup Attributes
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-|-----|------|-----|-------|-------|--------|
-| v-model | 会自动选中value对应的单选框 | string / number / boolean | - | - | - |
-| shape | 单选框形状 | string | dot / button / check | check | - |
-| size | 设置大小 | string | large | - | - |
-| checked-color | 选中的颜色 | string | - | #4D80F0 | - |
-| disabled | 禁用 | boolean | - | false | - |
-| max-width | 文字位置最大宽度 | string | - | - | - |
-| inline | 同行展示 | boolean | - | false | - |
-| cell | 表单模式 | boolean | - | false | - |
+| 参数           | 说明                        | 类型                      | 可选值               | 默认值  | 最低版本         |
+| -------------- | --------------------------- | ------------------------- | -------------------- | ------- | ---------------- |
+| v-model        | 会自动选中value对应的单选框 | string / number / boolean | -                    | -       | -                |
+| shape          | 单选框形状                  | string                    | dot / button / check | check   | -                |
+| size           | 设置大小                    | string                    | large                | -       | -                |
+| checked-color  | 选中的颜色                  | string                    | -                    | #4D80F0 | -                |
+| disabled       | 禁用                        | boolean                   | -                    | false   | -                |
+| max-width      | 文字位置最大宽度            | string                    | -                    | -       | -                |
+| inline         | 同行展示                    | boolean                   | -                    | false   | -                |
+| cell           | 表单模式                    | boolean                   | -                    | false   | -                |
+| icon-placement | 勾选图标对齐方式            | string                    | left / right/ auto   | auto    | 1.5.0 |
 
 ## RadioGroup Events
 
-| 事件名称 | 说明 | 参数 | 最低版本 |
-|---------|-----|-----|---------|
-| change | 绑定值变化时触发 | `{ value }`  | - |
+| 事件名称 | 说明             | 参数        | 最低版本 |
+| -------- | ---------------- | ----------- | -------- |
+| change   | 绑定值变化时触发 | `{ value }` | -        |
 
 ## Radio Attributes
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-|-----|------|-----|-------|-------|---------|
-| value | 单选框选中时的值。会自动匹配radioGroup的value | string / number / boolean | - | - | - |
-| shape | 单选框形状 | string | dot / button / check | check | - |
-| checked-color | 选中的颜色 | string | - | #4D80F0 | - |
-| disabled | 禁用 | boolean | - | false | - |
+| 参数          | 说明                                          | 类型                      | 可选值               | 默认值  | 最低版本 |
+| ------------- | --------------------------------------------- | ------------------------- | -------------------- | ------- | -------- |
+| value         | 单选框选中时的值。会自动匹配radioGroup的value | string / number / boolean | -                    | -       | -        |
+| shape         | 单选框形状                                    | string                    | dot / button / check | check   | -        |
+| checked-color | 选中的颜色                                    | string                    | -                    | #4D80F0 | -        |
+| disabled      | 禁用                                          | boolean                   | -                    | false   | -        |

@@ -1,23 +1,27 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:47:12
- * @LastEditTime: 2023-08-11 18:49:11
+ * @LastEditTime: 2025-04-02 21:24:38
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\pages\card\Index.vue
+ * @FilePath: /wot-design-uni/src/pages/card/Index.vue
  * 记得注释
 -->
 <template>
   <page-wraper>
     <view>
-      <demo-block title="基本使用" transparent>
-        <wd-card title="经营分析">
-          一般的，检举内容由承办的党的委员会或纪律检查委员会将处理意见或复议、复查结论同申诉人见面，听取其意见。复议、复查的结论和决定，应交给申诉人一份。
+      <demo-block :title="$t('ji-ben-shi-yong')" transparent>
+        <wd-card :title="$t('jing-ying-fen-xi')">
+          {{
+            $t(
+              'yi-ban-de-jian-ju-nei-rong-you-cheng-ban-de-dang-de-wei-yuan-hui-huo-ji-lv-jian-cha-wei-yuan-hui-jiang-chu-li-yi-jian-huo-fu-yi-fu-cha-jie-lun-tong-shen-su-ren-jian-mian-ting-qu-qi-yi-jian-fu-yi-fu-cha-de-jie-lun-he-jue-ding-ying-jiao-gei-shen-su-ren-yi-fen'
+            )
+          }}
           <template #footer>
-            <wd-button size="small" plain>查看详情</wd-button>
+            <wd-button size="small" plain>{{ $t('cha-kan-xiang-qing') }}</wd-button>
           </template>
         </wd-card>
-        <wd-card title="新订单">
+        <wd-card :title="$t('xin-ding-dan')">
           <view class="content">
             <image
               src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg"
@@ -25,46 +29,35 @@
               style="width: 70px; height: 70px; border-radius: 4px; margin-right: 12px"
             />
             <view>
-              <view>蜜滋兰(mizland)新西兰进口多花种…</view>
-              <view>数量：1件</view>
-              <view>金额：29.08</view>
-              <view>买家昵称：Joy</view>
+              <view>{{ $t('mi-zi-lan-mizland-xin-xi-lan-jin-kou-duo-hua-zhong') }}</view>
+              <view>{{ $t('shu-liang-1-jian') }}</view>
+              <view>{{ $t('jine2908') }}</view>
+              <view>{{ $t('mai-jia-ni-cheng-joy') }}</view>
             </view>
           </view>
           <template #footer>
-            <wd-button size="small" plain>查看详情</wd-button>
+            <wd-button size="small" plain>{{ $t('cha-kan-xiang-qing-0') }}</wd-button>
           </template>
         </wd-card>
       </demo-block>
-      <demo-block title="矩形卡片" transparent>
-        <wd-card title="2020-02-03服务到期" type="rectangle">
-          <view style="height: 40px" class="content">
+      <demo-block :title="$t('qu-chu-footer')" transparent>
+        <wd-card :title="$t('wang-ming')" type="rectangle">
+          <view>
             <image
-              src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg"
-              width="40"
-              height="40"
+              src="https://avatars.githubusercontent.com/u/26426873?v=4"
               alt="joy"
               style="width: 40px; height: 40px; border-radius: 4px; margin-right: 12px"
             />
-            <view>
-              <view class="custom-main">智云好客CRM短信_催评营销</view>
-              <view class="custom-sub">高级版-快速吸粉 | 周期一年</view>
-            </view>
+            {{ $t('da-jia-hao-wo-jiao-mo-yu') }}
           </view>
-          <template #footer>
-            <view>
-              <wd-button size="small" plain custom-style="margin-right: 8px">评价</wd-button>
-              <wd-button size="small">立即使用</wd-button>
-            </view>
-          </template>
         </wd-card>
         <wd-card type="rectangle">
           <template #title>
             <view class="title">
-              <view>2020-02-03服务到期</view>
+              <view>{{ $t('20200203-fu-wu-dao-qi') }}</view>
               <view class="title-tip">
                 <wd-icon name="warning" size="14px" custom-style="vertical-align: bottom" />
-                您可以去电脑上使用该服务
+                {{ $t('nin-ke-yi-qu-dian-nao-shang-shi-yong-gai-fu-wu') }}
               </view>
             </view>
           </template>
@@ -78,14 +71,68 @@
               style="width: 40px; height: 40px; border-radius: 4px; margin-right: 12px"
             />
             <view>
-              <view class="custom-main">智云好客CRM短信_催评营销</view>
-              <view class="custom-sub">高级版-快速吸粉 | 周期一年</view>
+              <view class="custom-main">{{ $t('zhi-yun-hao-ke-crm-duan-xin-cui-ping-ying-xiao') }}</view>
+              <view class="custom-sub">{{ $t('gao-ji-ban-kuai-su-xi-fen-zhou-qi-yi-nian') }}</view>
             </view>
           </view>
           <template #footer>
             <view>
-              <wd-button size="small" plain custom-style="margin-right: 8px">评价</wd-button>
-              <wd-button size="small">立即使用</wd-button>
+              <wd-button size="small" plain custom-style="margin-right: 8px">{{ $t('ping-jia') }}</wd-button>
+              <wd-button size="small">{{ $t('li-ji-shi-yong') }}</wd-button>
+            </view>
+          </template>
+        </wd-card>
+      </demo-block>
+      <demo-block :title="$t('ju-xing-ka-pian')" transparent>
+        <wd-card :title="$t('20200203-fu-wu-dao-qi-0')" type="rectangle">
+          <view style="height: 40px" class="content">
+            <image
+              src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg"
+              width="40"
+              height="40"
+              alt="joy"
+              style="width: 40px; height: 40px; border-radius: 4px; margin-right: 12px"
+            />
+            <view>
+              <view class="custom-main">{{ $t('zhi-yun-hao-ke-crm-duan-xin-cui-ping-ying-xiao') }}</view>
+              <view class="custom-sub">{{ $t('gao-ji-ban-kuai-su-xi-fen-zhou-qi-yi-nian-0') }}</view>
+            </view>
+          </view>
+          <template #footer>
+            <view>
+              <wd-button size="small" plain custom-style="margin-right: 8px">{{ $t('ping-jia-0') }}</wd-button>
+              <wd-button size="small">{{ $t('li-ji-shi-yong') }}</wd-button>
+            </view>
+          </template>
+        </wd-card>
+        <wd-card type="rectangle">
+          <template #title>
+            <view class="title">
+              <view>{{ $t('20200203-fu-wu-dao-qi-1') }}</view>
+              <view class="title-tip">
+                <wd-icon name="warning" size="14px" custom-style="vertical-align: bottom" />
+                {{ $t('nin-ke-yi-qu-dian-nao-shang-shi-yong-gai-fu-wu') }}
+              </view>
+            </view>
+          </template>
+
+          <view style="height: 40px" class="content">
+            <image
+              src="https://img11.360buyimg.com/imagetools/jfs/t1/143248/37/5695/265818/5f3a8546E98d998a4/745897ca9c9e474b.jpg"
+              width="40"
+              height="40"
+              alt="joy"
+              style="width: 40px; height: 40px; border-radius: 4px; margin-right: 12px"
+            />
+            <view>
+              <view class="custom-main">{{ $t('zhi-yun-hao-ke-crm-duan-xin-cui-ping-ying-xiao') }}</view>
+              <view class="custom-sub">{{ $t('gao-ji-ban-kuai-su-xi-fen-zhou-qi-yi-nian-1') }}</view>
+            </view>
+          </view>
+          <template #footer>
+            <view>
+              <wd-button size="small" plain custom-style="margin-right: 8px">{{ $t('ping-jia-1') }}</wd-button>
+              <wd-button size="small">{{ $t('li-ji-shi-yong') }}</wd-button>
             </view>
           </template>
         </wd-card>
@@ -103,6 +150,7 @@
   .custom-main {
     color: $-dark-color;
   }
+
   .custom-sub {
     color: $-dark-color-gray;
   }
@@ -115,12 +163,15 @@
   justify-content: flex-start;
   align-items: center;
 }
+
 .content {
   justify-content: flex-start;
 }
+
 .title {
   justify-content: space-between;
 }
+
 .title-tip {
   color: rgba(0, 0, 0, 0.25);
   font-size: 12px;
@@ -130,6 +181,7 @@
   color: rgba(0, 0, 0, 0.85);
   font-size: 16px;
 }
+
 .custom-sub {
   color: rgba(0, 0, 0, 0.25);
   font-size: 12px;

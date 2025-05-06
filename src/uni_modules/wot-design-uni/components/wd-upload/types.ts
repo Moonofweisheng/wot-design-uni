@@ -5,27 +5,33 @@ import type { ImageMode } from '../wd-img/types'
 
 export interface ChooseFileOption {
   // 是否支持多选文件
-  multiple: boolean
+  multiple?: boolean
   // 所选的图片的尺寸
   sizeType?: UploadSizeType[]
   // 选择文件的来源
-  sourceType: UploadSourceType[]
+  sourceType?: UploadSourceType[]
   // 最大允许上传个数
-  maxCount: number
+  maxCount?: number
   // 接受文件类型
-  accept: UploadFileType
+  accept?: UploadFileType
   /**
    * 是否压缩视频，当 accept 为 video 时生效。
    */
-  compressed: boolean
+  compressed?: boolean
   /**
    * 拍摄视频最长拍摄时间，当 accept 为 video | media 时生效，单位秒。
    */
-  maxDuration: number
+  maxDuration?: number
   /**
    * 使用前置或者后置相机，当 accept 为 video | media 时生效，可选值为：back｜front。
    */
-  camera: UploadCameraType
+  camera?: UploadCameraType
+  /**
+   * 根据文件拓展名过滤,H5、微信小程序支持
+   * 每一项都不能是空字符串, 默认不过滤
+   * 例如: ['.jpg'] 表示只选择.jpg文件
+   */
+  extension?: string[]
 }
 
 export type UploadFileItem = {
@@ -64,8 +70,10 @@ export type UploadCameraType = 'front' | 'back'
 export type UploadStatusType = 'pending' | 'loading' | 'success' | 'fail'
 
 export type UploadBeforePreviewOption = {
+  file: UploadFileItem
   index: number
   imgList: string[]
+  fileList: UploadFileItem[]
   resolve: (isPass: boolean) => void
 }
 export type UploadBeforePreview = (option: UploadBeforePreviewOption) => void
@@ -118,11 +126,13 @@ export type UploadMethod = (
     fileName: string
     fileType: 'image' | 'video' | 'audio'
     statusCode: number
+    // 添加是否自动中断之前上传的选项
+    abortPrevious?: boolean
     onSuccess: (res: UniApp.UploadFileSuccessCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
     onError: (res: UniApp.GeneralCallbackResult, file: UploadFileItem, formData: UploadFormData) => void
     onProgress: (res: UniApp.OnProgressUpdateResult, file: UploadFileItem) => void
   }
-) => void
+) => UniApp.UploadTask | void | Promise<void> // 修改这里,支持返回 UploadTask 类型
 
 export const uploadProps = {
   ...baseProps,
@@ -143,7 +153,7 @@ export const uploadProps = {
    * 类型：object
    * 默认值：{}
    */
-  header: { type: Object as PropType<Record<string, any>>, default: () => {} },
+  header: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
   /**
    * 是否支持多选文件
    * 类型：boolean
@@ -316,11 +326,23 @@ export const uploadProps = {
    */
   autoUpload: makeBooleanProp(true),
   /**
+   * 点击已上传时是否可以重新上传
+   * 类型：boolean
+   * 默认值：false
+   */
+  reupload: makeBooleanProp(false),
+  /**
    * 自定义上传文件的请求方法
    * 类型：UploadMethod
    * 默认值：-
    */
-  uploadMethod: Function as PropType<UploadMethod>
+  uploadMethod: Function as PropType<UploadMethod>,
+  /**
+   * 根据文件拓展名过滤,每一项都不能是空字符串。默认不过滤。
+   * H5支持全部类型过滤。
+   * 微信小程序支持all和file时过滤,其余平台不支持。
+   */
+  extension: Array as PropType<string[]>
 }
 
 export type UploadProps = ExtractPropTypes<typeof uploadProps>
@@ -330,6 +352,11 @@ export type UploadExpose = {
    * 手动触发上传
    */
   submit: () => void
+  /**
+   * 取消上传
+   * @param task 上传任务
+   */
+  abort: (task?: UniApp.UploadTask) => void
 }
 
 export type UploadErrorEvent = {

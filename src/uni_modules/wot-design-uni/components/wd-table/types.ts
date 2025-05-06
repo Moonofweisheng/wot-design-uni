@@ -1,14 +1,14 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 11:36:12
- * @LastEditTime: 2024-07-18 19:02:32
+ * @LastEditTime: 2024-12-08 23:22:26
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-table\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-table/types.ts
  * 记得注释
  */
 import type { CSSProperties, ExtractPropTypes, InjectionKey } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumericProp, makeRequiredProp, numericProp } from '../common/props'
 import type { TableColumnProps } from '../wd-table-col/types'
 import type { PropType } from 'vue'
 
@@ -29,11 +29,11 @@ export const tableProps = {
   /**
    * Table 的高度
    */
-  height: makeStringProp('80vh'),
+  height: numericProp,
   /**
    * 行高
    */
-  rowHeight: makeNumberProp(50),
+  rowHeight: makeNumericProp(50),
   /**
    * 是否显示表头
    */
@@ -48,14 +48,17 @@ export const tableProps = {
   index: {
     type: [Object, Boolean] as PropType<boolean | Omit<Partial<TableColumnProps>, 'prop'>>,
     default: false
-  }
+  },
+  fixedHeader: makeBooleanProp(true)
 }
 
 export type TableProps = ExtractPropTypes<typeof tableProps>
 
 export type TableProvide = {
   props: Omit<TableProps, 'index' | 'customStyle' | 'customClass'>
-  scrollLeft: number
+  state: {
+    scrollLeft: number
+  }
   rowClick: (index: number) => void
   getIsLastFixed: (column: { fixed: boolean; prop: string }) => boolean
   getFixedStyle: (index: number, style: CSSProperties) => CSSProperties

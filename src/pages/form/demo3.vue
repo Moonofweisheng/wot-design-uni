@@ -2,11 +2,10 @@
   <view>
     <page-wraper>
       <wd-message-box />
-      <wd-toast />
       <wd-form ref="form" :model="model" :rules="rules">
-        <wd-cell-group custom-class="group" title="基础信息" border>
+        <wd-cell-group custom-class="group" :title="$t('ji-chu-xin-xi')" border>
           <wd-input
-            label="优惠券名称"
+            :label="$t('you-hui-quan-ming-cheng')"
             label-width="100px"
             :maxlength="20"
             show-word-limit
@@ -15,51 +14,57 @@
             suffix-icon="warn-bold"
             clearable
             v-model="model.couponName"
-            placeholder="请输入优惠券名称"
+            :placeholder="$t('qing-shu-ru-you-hui-quan-ming-cheng')"
             @clicksuffixicon="handleIconClick"
           />
           <wd-select-picker
-            label="推广平台"
+            :label="$t('tui-guang-ping-tai')"
             label-width="100px"
             prop="platform"
             v-model="model.platform"
             :columns="platformList"
-            placeholder="请选择推广平台"
+            :placeholder="$t('qing-xuan-ze-tui-guang-ping-tai')"
           />
           <wd-picker
-            label="优惠方式"
-            placeholder="请选择优惠方式"
+            :label="$t('you-hui-fang-shi')"
+            :placeholder="$t('qing-xuan-ze-you-hui-fang-shi')"
             label-width="100px"
             prop="promotion"
             v-model="model.promotion"
             :columns="promotionlist"
           />
-          <wd-cell prop="threshold" title="券面额" required title-width="100px" custom-value-class="cell-left">
+          <wd-cell prop="threshold" :title="$t('quan-mian-e')" required title-width="100px" custom-value-class="cell-left">
             <view style="text-align: left">
-              <view class="inline-txt" style="margin-left: 0">满</view>
+              <view class="inline-txt" style="margin-left: 0">{{ $t('man') }}</view>
               <wd-input
                 no-border
                 custom-style="display: inline-block; width: 70px; vertical-align: middle"
-                placeholder="请输入金额"
+                :placeholder="$t('qing-shu-ru-jin-e-0')"
                 v-model="model.threshold"
               />
-              <view class="inline-txt">减</view>
+              <view class="inline-txt">{{ $t('jian') }}</view>
               <wd-input
                 no-border
                 custom-style="display: inline-block; width: 70px; vertical-align: middle"
-                placeholder="请输入金额"
+                :placeholder="$t('qing-shu-ru-jin-e-0')"
                 v-model="model.price"
               />
             </view>
           </wd-cell>
         </wd-cell-group>
-        <wd-cell-group custom-class="group" title="时间和地址" border>
-          <wd-datetime-picker label="时间" label-width="100px" placeholder="请选择时间" prop="time" v-model="model.time" />
-          <wd-calendar label="日期" label-width="100px" placeholder="请选择日期" prop="date" v-model="model.date" />
+        <wd-cell-group custom-class="group" :title="$t('shi-jian-he-di-zhi')" border>
+          <wd-datetime-picker
+            :label="$t('shi-jian')"
+            label-width="100px"
+            :placeholder="$t('qing-xuan-ze-shi-jian')"
+            prop="time"
+            v-model="model.time"
+          />
+          <wd-calendar :label="$t('ri-qi')" label-width="100px" :placeholder="$t('qing-xuan-ze-ri-qi')" prop="date" v-model="model.date" />
 
           <wd-col-picker
-            label="地址"
-            placeholder="请选择地址"
+            :label="$t('di-zhi')"
+            :placeholder="$t('qing-xuan-ze-di-zhi')"
             label-width="100px"
             prop="address"
             v-model="model.address"
@@ -67,50 +72,70 @@
             :column-change="areaChange"
           />
         </wd-cell-group>
-        <wd-cell-group custom-class="group" title="其他信息" border>
+        <wd-cell-group custom-class="group" :title="$t('qi-ta-xin-xi')" border>
           <wd-textarea
-            label="活动细则"
+            :label="$t('huo-dong-xi-ze')"
             label-width="100px"
             type="textarea"
             v-model="model.content"
             :maxlength="300"
             show-word-limit
-            placeholder="请输入活动细则信息"
+            :placeholder="$t('qing-shu-ru-huo-dong-xi-ze-xin-xi')"
             clearable
             prop="content"
           />
-          <wd-cell title="发货数量" title-width="100px" prop="count">
+          <wd-cell :title="$t('fa-huo-shu-liang')" title-width="100px" prop="count">
             <view style="text-align: left">
               <wd-input-number v-model="model.count" />
             </view>
           </wd-cell>
-          <wd-cell title="开启折扣" title-width="100px" prop="switchVal" center>
+          <wd-cell :title="$t('kai-qi-zhe-kou')" title-width="100px" prop="switchVal" center>
             <view style="text-align: left">
               <wd-switch v-model="model.switchVal" />
             </view>
           </wd-cell>
           <wd-input
-            label="歪比巴卜"
+            :label="$t('zhe-kou')"
+            v-if="model.switchVal"
+            label-width="100px"
+            prop="discount"
+            :placeholder="$t('qing-shu-ru-you-hui-jin-e')"
+            clearable
+            v-model="model.discount"
+          />
+          <wd-input
+            :label="$t('wai-bi-ba-bu')"
             label-width="100px"
             prop="cardId"
             suffix-icon="camera"
-            placeholder="请输入歪比巴卜"
+            :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')"
             clearable
             v-model="model.cardId"
           />
-          <wd-input label="玛卡巴卡" label-width="100px" prop="phone" placeholder="请输入玛卡巴卡" clearable v-model="model.phone" />
-          <wd-cell title="活动图片" title-width="100px" prop="fileList">
-            <wd-upload :file-list="model.fileList" action="https://ftf.jd.com/api/uploadImg" @change="handleFileChange"></wd-upload>
+          <wd-input
+            :label="$t('ma-ka-ba-ka')"
+            label-width="100px"
+            prop="phone"
+            :placeholder="$t('qing-shu-ru-ma-ka-ba-ka')"
+            clearable
+            v-model="model.phone"
+          />
+          <wd-cell :title="$t('huo-dong-tu-pian')" title-width="100px" prop="fileList">
+            <wd-upload
+              :file-list="model.fileList"
+              action="https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86eb04dc1e8fd64865cb5/upload"
+              @change="handleFileChange"
+            ></wd-upload>
           </wd-cell>
         </wd-cell-group>
         <view class="tip">
           <wd-checkbox v-model="model.read" prop="read" custom-label-class="label-class">
-            已阅读并同意
-            <text style="color: #4d80f0">《巴拉巴拉吧啦协议》</text>
+            {{ $t('yi-yue-du-bing-tong-yi') }}
+            <text style="color: #4d80f0">{{ $t('ba-la-ba-la-ba-la-xie-yi') }}</text>
           </wd-checkbox>
         </view>
         <view class="footer">
-          <wd-button type="primary" size="large" @click="handleSubmit" block>提交</wd-button>
+          <wd-button type="primary" size="large" @click="handleSubmit" block>{{ $t('ti-jiao') }}</wd-button>
         </view>
       </wd-form>
     </page-wraper>
@@ -123,10 +148,11 @@ import type { ColPickerColumnChange } from '@/uni_modules/wot-design-uni/compone
 import { type FormInstance, type FormRules } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import type { UploadFileItem } from '@/uni_modules/wot-design-uni/components/wd-upload/types'
 import { useColPickerData } from '@/hooks/useColPickerData'
-
+const { t } = useI18n()
 const { colPickerData, findChildrenByCode } = useColPickerData()
 
 import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const model = reactive<{
   couponName: string
@@ -144,6 +170,7 @@ const model = reactive<{
   phone: string
   read: boolean
   fileList: UploadFileItem[]
+  discount: number
 }>({
   couponName: '',
   platform: [],
@@ -159,7 +186,8 @@ const model = reactive<{
   cardId: '',
   phone: '',
   read: false,
-  fileList: []
+  fileList: [],
+  discount: 1
 })
 
 const rules: FormRules = {
@@ -167,12 +195,12 @@ const rules: FormRules = {
     {
       required: true,
       pattern: /\d{6}/,
-      message: '优惠券名称6个字以上',
+      message: t('you-hui-quan-ming-cheng-6-ge-zi-yi-shang'),
       validator: (value) => {
         if (value) {
           return Promise.resolve()
         } else {
-          return Promise.reject('请输入优惠券名称')
+          return Promise.reject(t('qing-shu-ru-you-hui-quan-ming-cheng'))
         }
       }
     }
@@ -180,12 +208,12 @@ const rules: FormRules = {
   content: [
     {
       required: true,
-      message: '请输入活动细则信息',
+      message: t('qing-shu-ru-huo-dong-xi-ze-xin-xi'),
       validator: (value) => {
         if (value && value.length > 2) {
           return Promise.resolve()
         } else {
-          return Promise.reject('请输入活动细则信息')
+          return Promise.reject(t('qing-shu-ru-huo-dong-xi-ze-xin-xi'))
         }
       }
     }
@@ -193,7 +221,7 @@ const rules: FormRules = {
   threshold: [
     {
       required: true,
-      message: '请输入满减金额',
+      message: t('qing-shu-ru-man-jian-jin-e'),
       validator: (value) => {
         if (value && model.price) {
           return Promise.resolve()
@@ -206,12 +234,12 @@ const rules: FormRules = {
   platform: [
     {
       required: true,
-      message: '请选择推广平台',
+      message: t('qing-xuan-ze-tui-guang-ping-tai'),
       validator: (value) => {
         if (value && isArray(value) && value.length) {
           return Promise.resolve()
         } else {
-          return Promise.reject('请选择推广平台')
+          return Promise.reject(t('qing-xuan-ze-tui-guang-ping-tai'))
         }
       }
     }
@@ -219,12 +247,12 @@ const rules: FormRules = {
   promotion: [
     {
       required: true,
-      message: '请选择推广平台',
+      message: t('qing-xuan-ze-tui-guang-ping-tai'),
       validator: (value) => {
         if (value) {
           return Promise.resolve()
         } else {
-          return Promise.reject('请选择推广平台')
+          return Promise.reject(t('qing-xuan-ze-tui-guang-ping-tai'))
         }
       }
     }
@@ -232,12 +260,12 @@ const rules: FormRules = {
   time: [
     {
       required: true,
-      message: '请选择时间',
+      message: t('qing-xuan-ze-shi-jian-0'),
       validator: (value) => {
         if (value) {
           return Promise.resolve()
         } else {
-          return Promise.reject('请选择时间')
+          return Promise.reject(t('qing-xuan-ze-shi-jian-1'))
         }
       }
     }
@@ -245,7 +273,7 @@ const rules: FormRules = {
   date: [
     {
       required: true,
-      message: '请选择日期',
+      message: t('qing-xuan-ze-ri-qi-0'),
       validator: (value) => {
         if (value) {
           return Promise.resolve()
@@ -258,12 +286,12 @@ const rules: FormRules = {
   address: [
     {
       required: true,
-      message: '请选择地址',
+      message: t('qing-xuan-ze-di-zhi-0'),
       validator: (value) => {
         if (isArray(value) && value.length) {
           return Promise.resolve()
         } else {
-          return Promise.reject('请选择地址')
+          return Promise.reject(t('qing-xuan-ze-di-zhi-1'))
         }
       }
     }
@@ -271,12 +299,12 @@ const rules: FormRules = {
   count: [
     {
       required: true,
-      message: '发货数量需要大于1',
+      message: t('fa-huo-shu-liang-xu-yao-da-yu-1'),
       validator: (value) => {
         if (Number(value) > 1) {
           return Promise.resolve()
         } else {
-          return Promise.reject('发货数量需要大于1')
+          return Promise.reject(t('fa-huo-shu-liang-xu-yao-da-yu-1-0'))
         }
       }
     }
@@ -284,12 +312,12 @@ const rules: FormRules = {
   cardId: [
     {
       required: true,
-      message: '请输入歪比巴卜',
+      message: t('qing-shu-ru-wai-bi-ba-bu'),
       validator: (value) => {
         if (value) {
           return Promise.resolve()
         } else {
-          return Promise.reject('请输入歪比巴卜')
+          return Promise.reject(t('qing-shu-ru-wai-bi-ba-bu'))
         }
       }
     }
@@ -297,7 +325,7 @@ const rules: FormRules = {
   phone: [
     {
       required: true,
-      message: '请输入玛卡巴卡',
+      message: t('qing-shu-ru-ma-ka-ba-ka'),
       validator: (value) => {
         if (value) {
           return Promise.resolve()
@@ -310,9 +338,22 @@ const rules: FormRules = {
   fileList: [
     {
       required: true,
-      message: '请选择活动图片',
+      message: t('qing-xuan-ze-huo-dong-tu-pian'),
       validator: (value) => {
         if (isArray(value) && value.length) {
+          return Promise.resolve()
+        } else {
+          return Promise.reject()
+        }
+      }
+    }
+  ],
+  discount: [
+    {
+      required: true,
+      message: t('qing-shu-ru-you-hui-jin-e-0'),
+      validator: (value) => {
+        if (value) {
           return Promise.resolve()
         } else {
           return Promise.reject()
@@ -325,41 +366,41 @@ const rules: FormRules = {
 const platformList = ref<any>([
   {
     value: '1',
-    label: '京东'
+    label: t('jing-dong')
   },
   {
     value: '2',
-    label: '开普勒'
+    label: t('kai-pu-le')
   },
   {
     value: '3',
-    label: '手Q'
+    label: t('shou-q')
   },
   {
     value: '4',
-    label: '微信'
+    label: t('wei-xin')
   },
   {
     value: '5',
-    label: '1号店'
+    label: t('1-hao-dian')
   },
   {
     value: '6',
-    label: '十元街'
+    label: t('shi-yuan-jie')
   },
   {
     value: '7',
-    label: '京东极速版'
+    label: t('jing-dong-ji-su-ban')
   }
 ])
 const promotionlist = ref<any[]>([
   {
     value: '1',
-    label: '满减'
+    label: t('man-jian')
   },
   {
     value: '2',
-    label: '无门槛'
+    label: t('wu-men-jian')
   }
 ])
 
@@ -397,6 +438,9 @@ function handleSubmit() {
   form
     .value!.validate()
     .then(({ valid, errors }) => {
+      if (valid) {
+        toast.success(t('ti-jiao-cheng-gong'))
+      }
       console.log(valid)
       console.log(errors)
     })
@@ -406,7 +450,7 @@ function handleSubmit() {
 }
 
 function handleIconClick() {
-  toast.info('优惠券提示信息')
+  toast.info(t('you-hui-quan-ti-shi-xin-xi'))
 }
 </script>
 <style lang="scss" scoped>

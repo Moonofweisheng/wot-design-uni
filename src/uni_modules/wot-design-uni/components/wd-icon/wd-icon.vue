@@ -17,14 +17,14 @@ export default {
 
 <script lang="ts" setup>
 import { computed, type CSSProperties } from 'vue'
-import { addUnit, isDef, objToStyle, isImageUrl } from '../common/util'
+import { addUnit, isDef, objToStyle } from '../common/util'
 import { iconProps } from './types'
 
 const props = defineProps(iconProps)
 const emit = defineEmits(['click', 'touch'])
 
 const isImage = computed(() => {
-  return isDef(props.name) && isImageUrl(props.name)
+  return isDef(props.name) && props.name.includes('/')
 })
 
 const rootClass = computed(() => {
@@ -40,7 +40,7 @@ const rootStyle = computed(() => {
   if (props.size) {
     style['font-size'] = addUnit(props.size)
   }
-  return `${objToStyle(style)}; ${props.customStyle}`
+  return `${objToStyle(style)} ${props.customStyle}`
 })
 
 function handleClick(event: any) {

@@ -21,7 +21,10 @@
             <view :class="`wd-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${showValue ? '' : 'wd-picker__placeholder'}`">
               {{ showValue ? showValue : placeholder || translate('placeholder') }}
             </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
+            <wd-icon v-if="showArrow" custom-class="wd-picker__arrow" name="arrow-right" />
+            <view v-else-if="showClear" @click.stop="handleClear">
+              <wd-icon custom-class="wd-picker__clear" name="error-fill" />
+            </view>
           </view>
           <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
         </view>
@@ -94,7 +97,7 @@ import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
 
 const props = defineProps(pickerProps)
-const emit = defineEmits(['confirm', 'open', 'cancel', 'update:modelValue'])
+const emit = defineEmits(['confirm', 'open', 'cancel', 'clear', 'update:modelValue'])
 
 const pickerViewWd = ref<PickerViewInstance | null>(null)
 const cell = useCell()
@@ -149,8 +152,14 @@ watch(
   (newValue) => {
     displayColumns.value = deepClone(newValue)
     resetColumns.value = deepClone(newValue)
-    // 获取初始选中项,并展示初始选中文案
-    handleShowValueUpdate(props.modelValue)
+    if (newValue.length === 0) {
+      // 当 columns 变为空时，清空 pickerValue 和 showValue
+      pickerValue.value = isArray(props.modelValue) ? [] : ''
+      showValue.value = ''
+    } else {
+      // 非空时正常更新显示值
+      handleShowValueUpdate(props.modelValue)
+    }
   },
   {
     deep: true,
@@ -383,6 +392,22 @@ function onPickEnd() {
 function setLoading(loading: boolean) {
   innerLoading.value = loading
 }
+
+// 是否展示清除按钮
+const showClear = computed(() => {
+  return props.clearable && !props.disabled && !props.readonly && showValue.value.length
+})
+
+function handleClear() {
+  const clearValue = isArray(pickerValue.value) ? [] : ''
+  emit('update:modelValue', clearValue)
+  emit('clear')
+}
+
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly && !showClear.value
+})
 
 defineExpose<PickerExpose>({
   close,

@@ -1,5 +1,3 @@
-<frame/>
-
 # Circle 环形进度条 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.19</el-tag>
 
 圆环形的进度条组件，支持进度渐变动画。
@@ -69,17 +67,17 @@ const gradientColor = {
 
 | 参数              | 说明                         | 类型                        | 可选值                                     | 默认值          | 最低版本 |
 | ----------------- | ---------------------------- | --------------------------- | ------------------------------------------ | --------------- | -------- |
-| `v-model` \|`modelValue`     | 当前进度                     | number                      | -                                          | `0`             | 0.1.19   |
+| `v-model` / `modelValue`     | 当前进度                     | number                      | -                                          | `0`             | 0.1.19   |
 | `customClass`     | 自定义class                  | string                      | -                                          | -            | 0.1.19   |
 | `customStyle`     | 自定义style                  | string                      | -                                          | -            | 0.1.19   |
 | `size`            | 圆环直径，默认单位为 px     | number                      | -                                          | `100`           | 0.1.19   |
-| `color`           | 进度条颜色                   | string \| Record<string, string> | -                                      | `#4d80f0`     | 0.1.19   |
+| `color`           | 进度条颜色                   | string / Record<string, string> | -                                      | `#4d80f0`     | 0.1.19   |
 | `layerColor`      | 轨道颜色                     | string                      | -                                          | `#EBEEF5`     | 0.1.19   |
 | `fill`            | 填充颜色                     | string                      | -                                          | `#ffffff`     | 0.1.19   |
 | `speed`           | 动画速度（单位为 rate/s）    | number                      | -                                          | `50`            | 0.1.19   |
 | `text`            | 文字                         | string                      | -                                          | -               | 0.1.19   |
 | `strokeWidth`     | 进度条宽度，单位px           | number                      | -                                          | `10`            | 0.1.19   |
-| `strokeLinecap`   | 进度条端点的形状             | string                      | `butt` \| `round` \| `square`             | `round`       | 0.1.19   |
+| `strokeLinecap`   | 进度条端点的形状             | string                      | `butt` / `round` / `square`             | `round`       | 0.1.19   |
 | `clockwise`       | 是否顺时针增加               | boolean                     | -                                          | `true`          | 0.1.19   |
 
 

@@ -1,10 +1,6 @@
 <template>
-  <view :class="`wd-divider ${customClass}`" :style="customStyle">
-    <view class="wd-divider__line" :style="color ? 'background: ' + color : ''"></view>
-    <view class="wd-divider__content" :style="color ? 'color: ' + color : ''">
-      <slot></slot>
-    </view>
-    <view class="wd-divider__line" :style="color ? 'background: ' + color : ''"></view>
+  <view :class="rootClass" :style="rootStyle">
+    <slot v-if="!vertical"></slot>
   </view>
 </template>
 <script lang="ts">
@@ -19,9 +15,36 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import { computed, useSlots, type CSSProperties } from 'vue'
 import { dividerProps } from './types'
+import { objToStyle } from '../common/util'
 
-defineProps(dividerProps)
+const props = defineProps(dividerProps)
+const slots = useSlots()
+
+const rootStyle = computed(() => {
+  const { color, customStyle } = props
+  const style: CSSProperties = {}
+  if (color) {
+    style.color = color
+  }
+  return `${objToStyle(style)}${customStyle}`
+})
+
+const rootClass = computed(() => {
+  const prefixCls = 'wd-divider'
+  const classes: Record<string, boolean> = {
+    [prefixCls]: true,
+    ['is-dashed']: props.dashed,
+    ['is-hairline']: props.hairline,
+    [`${prefixCls}--vertical`]: props.vertical,
+    [`${prefixCls}--center`]: !props.vertical && props.contentPosition === 'center' && !!slots.default,
+    [`${prefixCls}--left`]: !props.vertical && props.contentPosition === 'left',
+    [`${prefixCls}--right`]: !props.vertical && props.contentPosition === 'right',
+    [props.customClass]: !!props.customClass
+  }
+  return classes
+})
 </script>
 
 <style lang="scss" scoped>

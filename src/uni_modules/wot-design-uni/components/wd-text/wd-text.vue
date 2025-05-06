@@ -43,8 +43,9 @@ watch(
   }),
   ({ type }) => {
     // 验证 type 属性
-    if (type && !['primary', 'error', 'warning', 'success', 'default'].includes(type)) {
-      console.error(`type must be one of ${type.toString()}`)
+    const types = ['primary', 'error', 'warning', 'success', 'default']
+    if (type && !types.includes(type)) {
+      console.error(`type must be one of ${types.toString()}`)
     }
     computeTextClass()
   },
@@ -71,7 +72,7 @@ const rootStyle = computed(() => {
   if (props.decoration) {
     rootStyle['text-decoration'] = `${props.decoration}`
   }
-  return `${objToStyle(rootStyle)};${props.customStyle}`
+  return `${objToStyle(rootStyle)}${props.customStyle}`
 })
 
 // 计算文本类名的函数

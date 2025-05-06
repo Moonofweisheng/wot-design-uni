@@ -24,7 +24,7 @@ export default {
 <script lang="ts" setup>
 import wdResize from '../wd-resize/wd-resize.vue'
 import { computed, getCurrentInstance, reactive, ref, type CSSProperties } from 'vue'
-import { addUnit, getRect, objToStyle, requestAnimationFrame, uuid } from '../common/util'
+import { addUnit, getRect, objToStyle, pause, uuid } from '../common/util'
 import { stickyProps } from './types'
 import { useParent } from '../composables/useParent'
 import { STICKY_BOX_KEY } from '../wd-sticky-box/types'
@@ -55,7 +55,7 @@ const rootStyle = computed(() => {
   if (!stickyState.boxLeaved) {
     style['position'] = 'relative'
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 const stickyStyle = computed(() => {
@@ -67,7 +67,7 @@ const stickyStyle = computed(() => {
   if (!stickyState.boxLeaved) {
     style['position'] = 'relative'
   }
-  return `${objToStyle(style)};`
+  return `${objToStyle(style)}`
 })
 
 const containerStyle = computed(() => {
@@ -108,14 +108,13 @@ function createObserver() {
 /**
  *  当前内容高度发生变化时重置监听
  */
-function handleResize(detail: any) {
+async function handleResize(detail: any) {
   stickyState.width = detail.width
   stickyState.height = detail.height
-  requestAnimationFrame(() => {
-    observerContentScroll()
-    if (!stickyBox || !stickyBox.observerForChild) return
-    stickyBox.observerForChild(proxy)
-  })
+  await pause()
+  observerContentScroll()
+  if (!stickyBox || !stickyBox.observerForChild) return
+  stickyBox.observerForChild(proxy)
 }
 /**
  *  监听吸顶元素滚动事件
@@ -144,7 +143,7 @@ function observerContentScroll() {
  */
 function handleRelativeTo({ boundingClientRect }: any) {
   // sticky 高度大于或等于 wd-sticky-box，使用 wd-sticky-box 无任何意义
-  if (stickyBox && stickyState.height >= stickyBox.boxStyle.height) {
+  if (stickyBox && stickyBox.boxStyle && stickyState.height >= stickyBox.boxStyle.height) {
     stickyState.position = 'absolute'
     stickyState.top = 0
     return

@@ -1,0 +1,31 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(signature) {
+  @include e(content) {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    background: $-signature-bg;
+    border-radius: $-signature-radius;
+    border: $-signature-border;
+  }
+
+  @include e(content-canvas) {
+    width: 100%;
+  }
+
+
+  @include e(footer) {
+    margin-top: $-signature-footer-margin-top;
+    justify-content: flex-end;
+    display: flex;
+
+    :deep(){
+      .wd-button{
+        margin-left: $-signature-button-margin-left;
+      }
+    }
+  }
+}

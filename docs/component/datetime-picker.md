@@ -1,8 +1,6 @@
-<frame/>
-
 # DatetimePicker 日期时间选择器
 
-为 Picker 组件的封装，在其内部构建好日期时间选项。
+为 DatetimePickerView 组件的封装，在其内部构建好日期时间选项。
 
 ## 基本用法
 
@@ -206,10 +204,10 @@ function handleConfirm({ value }) {
 
 ## 唤起项插槽
 
-开启 `use-default-slot` ，设置默认插槽修改唤起picker组件的形式。
+设置默认插槽修改唤起picker组件的形式。
 
 ```html
-<wd-datetime-picker  v-model="value" use-default-slot>
+<wd-datetime-picker  v-model="value">
   <wd-button>插槽唤起</wd-button>
 </wd-datetime-picker>
 ```
@@ -259,8 +257,8 @@ const displayFormatTabLabel = (items) => {
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 |-----|------|-----|-------|-------|---------|
-| v-model | 选中项，当 type 为 time 时，类型为字符串；当 type 为 Array 时，类型为范围选择；否则为 Date | string / date / array | - | - | - |
-| default-value | 默认日期，类型保持与 value 一致，打开面板时面板自动选到默认日期 | string / date / array | - | - | - |
+| v-model | 选中项，当 type 为 time 时，类型为字符串；当 type 为 Array 时，类型为范围选择；否则为 `timestamp` | `string` / `timestamp` / `array` | - | - |
+| default-value | 默认日期，类型保持与 value 一致，打开面板时面板自动选到默认日期 | `string` / `timestamp` / `array` | - | - | - |
 | type | 选择器类型 | string | date / year-month / time / year | datetime | - |
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |
@@ -270,7 +268,7 @@ const displayFormatTabLabel = (items) => {
 | confirm-button-text | 确认按钮文案 | string | - | 完成 | - |
 | label | 选择器左侧文案，label可以不传 | string | - | - | - |
 | placeholder | 选择器占位符 | string | - | 请选择 | - |
-| disabled | 禁用 | boolean | - | fasle | - |
+| disabled | 禁用 | boolean | - | false | - |
 | readonly | 只读 | boolean | - | false | - |
 | display-format | 自定义展示文案的格式化函数，返回一个字符串 | function | - | - | - |
 | formatter | 自定义弹出层选项文案的格式化函数，返回一个字符串 | function | - | - | - |
@@ -287,8 +285,8 @@ const displayFormatTabLabel = (items) => {
 | label-width | 设置左侧标题宽度 | string | - | 33% | - |
 | error | 是否为错误状态，错误状态时右侧内容为红色 | boolean | - | false | - |
 | align-right | 选择器的值靠右展示 | boolean | - | false | - |
-| use-label-slot | label 使用插槽 | boolean | - | false | - |
-| use-default-slot | 使用默认插槽 | boolean | - | false | - |
+| <s>use-label-slot</s> | <s>label 使用插槽</s>，已废弃，直接使用label插槽即可 | boolean | - | false | - |
+| <s>use-default-slot</s> | <s>使用默认插槽</s>，已废弃，直接使用默认插槽即可 | boolean | - | false | - |
 | before-confirm | 确定前校验函数，接收 (value, resolve, picker) 参数，通过 resolve 继续执行 picker，resolve 接收1个boolean参数 | function | - | - | - |
 | close-on-click-modal | 点击遮罩是否关闭 | boolean | - | true | - |
 | z-index | 弹窗层级 | number | - | 15 | - |

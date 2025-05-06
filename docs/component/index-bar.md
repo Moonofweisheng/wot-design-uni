@@ -1,6 +1,4 @@
-<frame/>
-
-# IndexBar 索引栏 `1.2.21`
+# IndexBar 索引栏 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.2.21</el-tag>
 
 用于列表的索引分类显示和快速定位。
 
@@ -299,7 +297,7 @@ function handleClear() {
 
 | 参数  | 说明     | 类型             | 可选值 | 默认值 | 最低版本 |
 | ----- | -------- | ---------------- | ------ | ------ | -------- |
-| index | 索引字符 | string \| number | -      | -      | -        |
+| index | 索引字符 | string / number | -      | -      | -        |
 
 ## IndexAnchor Slots
 

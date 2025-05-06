@@ -1,7 +1,6 @@
-<frame/>
-
 #  Icon 图标 <el-tag text style="vertical-align: middle;margin-left:8px;" type="warning">0.1.27 更新</el-tag>
 
+基于字体的图标集。
 
 ## 基本用法
 

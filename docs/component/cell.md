@@ -1,6 +1,6 @@
-<frame/>
+# Cell 单元格
 
-# Cell 单格
+单元格为列表中的单个展示项。
 
 ## 基本用法
 
@@ -69,7 +69,8 @@
 
 ```html
 <wd-cell-group title="交易管理" border>
-  <wd-cell title="标题文字" value="内容"></wd-cell>
+  <wd-cell title="标题文字" value="内容" />
+  <wd-cell :border="false" title="标题文字" label="这一个cell不想要边框" value="内容" />
   <wd-cell title="标题文字" label="描述信息" value="内容"></wd-cell>
 </wd-cell-group>
 ```
@@ -232,7 +233,7 @@ function handleSwitchChange({ value }) {
 | -------- | -------------- | ------- | ------ | ------ | -------- |
 | title    | 分组标题       | string  | -      | -      | -        |
 | value    | 分组右侧内容   | string  | -      | -      | -        |
-| border   | 是否展示边框线 | string  | -      | -      | -        |
+| border   | 是否展示边框线 | boolean  | -      | -      | -        |
 | use-slot | 分组启用插槽   | boolean | -      | false  | -        |
 
 ## Cell Attributes
@@ -245,7 +246,7 @@ function handleSwitchChange({ value }) {
 | label       | 描述信息                       | string  | -      | -      | -        |
 | is-link     | 是否为跳转链接                 | boolean | -      | false  | -        |
 | to          | 跳转地址                       | string  | -      | -      | -        |
-| clickable   | 开启点击反馈，is-link 默认开启 | boolean | -      | false  | -        |
+| clickable   | 点击反馈，开启 is-link 时，默认开启此选项 | boolean | -      | false  | -        |
 | replace     | 跳转时是否替换栈顶页面         | boolean | -      | false  | -        |
 | size        | 设置单元格大小                 | string  | large  | -      | -        |
 | title-width | 设置左侧标题宽度               | string  | -      | -      | -        |
@@ -254,6 +255,7 @@ function handleSwitchChange({ value }) {
 | vertical    | 表单属性，上下结构             | boolean | -      | false  | -        |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
+| border | 是否展示边框线，优先级高于`cell-group`的`border` | boolean | - | - | - |
 
 ### FormItemRule 数据结构
 
@@ -300,7 +302,7 @@ function handleSwitchChange({ value }) {
 | 类名               | 说明                           | 最低版本 |
 | ------------------ | ------------------------------ | -------- |
 | custom-class       | 根节点样式                     | -        |
-| custom-icon-class  | icon 使用 slot 时的自定义样式  | -        |
-| custom-label-class | label 使用 slot 时的自定义样式 | -        |
-| custom-value-class | value 使用 slot 时的自定义样式 | -        |
-| custom-title-class | title 使用 slot 时的自定义样式 | -        |
+| custom-icon-class  | icon 外部自定义样式  | -        |
+| custom-label-class | label 外部自定义样式 | -        |
+| custom-value-class | value 外部自定义样式 | -        |
+| custom-title-class | title 外部自定义样式 | -        |

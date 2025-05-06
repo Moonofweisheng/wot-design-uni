@@ -1,29 +1,39 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2024-10-12 13:07:08
+ * @LastEditTime: 2025-04-08 11:13:02
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/src/App.vue
+ * 记得注释
+-->
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onThemeChange } from '@dcloudio/uni-app'
 import { useDark } from './store'
+import { useI18nSync } from './hooks/useI18nSync'
+import { useIframeMessage } from './hooks/useIframeMessage'
+
+// 初始化国际化
 const darkMode = useDark()
+const { setLocale } = useI18nSync() // 禁用内置的iframe消息监听，使用专门的hook处理
+
+// 使用专门的iframe消息处理hook
+useIframeMessage({
+  onLocaleChange: (locale) => {
+    setLocale(locale)
+  },
+  onThemeChange: (isDark) => {
+    darkMode.setDark(isDark)
+  }
+})
 
 onThemeChange((option) => {
   darkMode.setDark(option.theme === 'dark')
 })
 
-onLaunch((ctx) => {
+onLaunch(() => {
   const systemInfo = uni.getSystemInfoSync()
   darkMode.setDark(systemInfo.theme === 'dark')
-
-  // #ifdef H5
-
-  window.addEventListener('message', function (event) {
-    if (event.source !== parent) return
-    // 处理收到的消息
-    if (typeof event.data === 'boolean') {
-      darkMode.setDark(event.data)
-    } else {
-      darkMode.setDark(false)
-    }
-  })
-  // #endif
-  console.log('App Launch')
 })
 onShow(() => {
   console.log('App Show')

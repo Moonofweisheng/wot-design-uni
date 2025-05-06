@@ -59,7 +59,12 @@ export const tooltipProps = {
    * 类型：number
    * 默认值：0
    */
-  offset: makeNumberProp(0),
+  // offset: makeNumberProp(0),
+  offset: {
+    // 需要支持数字、数组、对象类型
+    type: [Number, Array, Object] as PropType<number | Array<number> | Record<'x' | 'y', number>>,
+    default: 0
+  },
 
   /**
    * 是否使用slot来传入content内容

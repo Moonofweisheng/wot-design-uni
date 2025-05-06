@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="`wd-table-col ${fixed ? 'wd-table-col--fixed' : ''} ${isLastFixed && isDef(table) && table.scrollLeft ? 'is-shadow' : ''}`"
+    :class="`wd-table-col ${fixed ? 'wd-table-col--fixed' : ''} ${isLastFixed && isDef(table) && table.state.scrollLeft ? 'is-shadow' : ''}`"
     :style="columnStyle"
   >
     <view
@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { type CSSProperties, computed, ref, watch } from 'vue'
+import { type CSSProperties, computed, ref } from 'vue'
 import { addUnit, isDef, objToStyle, isOdd, isFunction } from '../common/util'
 import { tableColumnProps, type SortDirection } from './types'
 import { useParent } from '../composables/useParent'
@@ -100,7 +100,7 @@ const columnStyle = computed(() => {
  */
 const cellStyle = computed(() => {
   let style: CSSProperties = {}
-  const rowHeight: string | number = isDef(table) ? table.props.rowHeight : '80rpx' // 自定义行高
+  const rowHeight: string | number = isDef(table) && isDef(table.props) ? table.props.rowHeight : 50 // 自定义行高
   if (isDef(rowHeight)) {
     style['height'] = addUnit(rowHeight)
   }
@@ -112,7 +112,7 @@ const cellStyle = computed(() => {
 
 // 列数据
 const column = computed(() => {
-  if (!isDef(table)) {
+  if (!isDef(table) || !isDef(table.props) || !isDef(table.props.data) || !Array.isArray(table.props.data)) {
     return []
   }
 
@@ -135,7 +135,7 @@ function handleRowClick(index: number) {
 
 // 行数据
 function getScope(index: number) {
-  if (!isDef(table)) {
+  if (!isDef(table) || !isDef(table.props) || !isDef(table.props.data) || !Array.isArray(table.props.data)) {
     return {}
   }
   return table.props.data[index] || {}

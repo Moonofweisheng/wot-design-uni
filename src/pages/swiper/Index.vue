@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <demo-block title="点状指示器">
+    <demo-block :title="$t('dian-zhuang-zhi-shi-qi')">
       <wd-swiper
         :list="swiperList"
         autoplay
@@ -11,7 +11,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block title="点条状指示器">
+    <demo-block :title="$t('dian-tiao-zhuang-zhi-shi-qi')">
       <wd-swiper
         :list="swiperList"
         autoplay
@@ -22,7 +22,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block title="数字指示器">
+    <demo-block :title="$t('shu-zi-zhi-shi-qi')">
       <wd-swiper
         :list="swiperList"
         autoplay
@@ -34,7 +34,45 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block title="手动切换">
+    <!-- #ifdef MP-WEIXIN || H5 || MP-DINGTALK -->
+    <demo-block :title="$t('shi-pin-lun-bo')">
+      <wd-swiper
+        :list="videoList"
+        autoplay
+        :indicator="{ type: 'fraction' }"
+        indicator-position="top-right"
+        @click="handleClick"
+        @change="onChange"
+      ></wd-swiper>
+    </demo-block>
+
+    <demo-block :title="$t('shou-dong-bo-fang-shi-pin')">
+      <wd-swiper
+        :list="videoList"
+        autoplay
+        :autoplayVideo="false"
+        :indicator="{ type: 'fraction' }"
+        indicator-position="top-right"
+        @click="handleClick"
+        @change="onChange"
+      ></wd-swiper>
+    </demo-block>
+
+    <demo-block :title="$t('bo-fang-shi-pin-shi-ting-zhi-lun-bo')">
+      <wd-swiper
+        :list="videoList"
+        autoplay
+        stopAutoplayWhenVideoPlay
+        :autoplayVideo="false"
+        :indicator="{ type: 'fraction' }"
+        indicator-position="top-right"
+        @click="handleClick"
+        @change="onChange"
+      ></wd-swiper>
+    </demo-block>
+    <!-- #endif -->
+
+    <demo-block :title="$t('shou-dong-qie-huan')">
       <wd-swiper
         :list="swiperList"
         :autoplay="false"
@@ -46,7 +84,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block title="卡片样式">
+    <demo-block :title="$t('ka-pian-yang-shi')">
       <view class="card-swiper">
         <wd-swiper
           autoplay
@@ -63,7 +101,7 @@
       </view>
     </demo-block>
 
-    <demo-block title="同时展示2个滑块">
+    <demo-block :title="$t('tong-shi-zhan-shi-2-ge-hua-kuai')">
       <view class="card-swiper">
         <wd-swiper
           autoplay
@@ -81,7 +119,7 @@
       </view>
     </demo-block>
 
-    <demo-block title="垂直方向">
+    <demo-block :title="$t('chui-zhi-fang-xiang')">
       <wd-swiper
         :list="swiperList"
         direction="vertical"
@@ -94,7 +132,7 @@
       ></wd-swiper>
     </demo-block>
 
-    <demo-block title="自定义指示器">
+    <demo-block :title="$t('zi-ding-yi-zhi-shi-qi')">
       <wd-swiper
         :list="swiperList"
         direction="vertical"
@@ -110,11 +148,19 @@
       </wd-swiper>
     </demo-block>
 
-    <demo-block title="指定valueKey">
-      <wd-swiper value-key="url" :list="customSwiperList" autoplay v-model:current="current9" @click="handleClick" @change="onChange"></wd-swiper>
+    <demo-block :title="$t('zhi-ding-valuekey-he-textkey')">
+      <wd-swiper
+        value-key="url"
+        text-key="title"
+        :list="customSwiperList"
+        autoplay
+        v-model:current="current9"
+        @click="handleClick"
+        @change="onChange"
+      ></wd-swiper>
     </demo-block>
 
-    <demo-block title="属性控制切换">
+    <demo-block :title="$t('shu-xing-kong-zhi-qie-huan')">
       <wd-swiper :loop="isLoop" :autoplay="false" :list="swiperList" v-model:current="current8" />
       <wd-gap />
       <wd-cell-group>
@@ -133,6 +179,9 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const swiperList = ref([
   'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg',
@@ -143,10 +192,17 @@ const swiperList = ref([
 ])
 
 const customSwiperList = ref([
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg' }
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg', title: t('xiao-xiong-mao') },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg', title: t('ka-pi-ba-la') },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg', title: t('da-xiong-mao') },
+  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg', title: t('shi-hua-zhong-guo') }
+])
+
+const videoList = ref([
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_115503.mp4',
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_150752.mp4',
+  'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_155516.mp4',
+  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg'
 ])
 
 const current = ref<number>(0)
@@ -185,6 +241,11 @@ function onChange(e: any) {
   :deep(.custom-image-prev) {
     height: 168px !important;
   }
+}
+
+.custom-slot-image {
+  width: 100%;
+  height: 100%;
 }
 
 .custom-indicator {

@@ -1,5 +1,3 @@
-<frame/>
-
 # ColPicker 多列选择器
 
 使用多列选择器来做级联，交互效果较好，多列选择器支持无限级选择。
@@ -214,13 +212,13 @@ const area = ref<any[]>([
       label: item.text
     }
   }),
-  findChildrenByCode(colPickerData, '130000')!.map((item) => {
+  findChildrenByCode(colPickerData, '150000')!.map((item) => {
     return {
       value: item.value,
       label: item.text
     }
   }),
-  findChildrenByCode(colPickerData, '130200')!.map((item) => {
+  findChildrenByCode(colPickerData, '150100')!.map((item) => {
     return {
       value: item.value,
       label: item.text
@@ -632,7 +630,7 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | title                  | 弹出层标题                                                                                                                     | string            | -      | -       | -        |
 | label                  | 选择器左侧文案                                                                                                                 | string            | -      | -       | -        |
 | placeholder            | 选择器占位符                                                                                                                   | string            | -      | 请选择  | -        |
-| disabled               | 禁用                                                                                                                           | boolean           | -      | fasle   | -        |
+| disabled               | 禁用                                                                                                                           | boolean           | -      | false   | -        |
 | readonly               | 只读                                                                                                                           | boolean           | -      | false   | -        |
 | display-format         | 自定义展示文案的格式化函数，返回一个字符串                                                                                     | function          | -      | -       | -        |
 | column-change          | 接收当前列的选中项 item、当前列下标、当前列选中项下标下一列数据处理函数 resolve、结束选择 finish                               | function          | -      | -       | -        |

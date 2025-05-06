@@ -125,74 +125,55 @@ export type badgeThemeVars = {
 
 export type buttonThemeVars = {
   buttonDisabledOpacity?: string
-
   buttonSmallHeight?: string
   buttonSmallPadding?: string
   buttonSmallFs?: string
   buttonSmallRadius?: string
   buttonSmallLoading?: string
-
   buttonMediumHeight?: string
   buttonMediumPadding?: string
   buttonMediumFs?: string
   buttonMediumRadius?: string
   buttonMediumLoading?: string
   buttonMediumBoxShadowSize?: string
-
   buttonLargeHeight?: string
   buttonLargePadding?: string
   buttonLargeFs?: string
   buttonLargeRadius?: string
   buttonLargeLoading?: string
   buttonLargeBoxShadowSize?: string
-
   buttonIconFs?: string
   buttonIconSize?: string
   buttonIconColor?: string
   buttonIconDisabledColor?: string
-
   buttonNormalColor?: string
   buttonNormalDisabledColor?: string
-
   buttonPlainBgColor?: string
-
   buttonPrimaryColor?: string
   buttonPrimaryBgColor?: string
-  buttonPrimaryBoxShadowColor?: string
-
   buttonSuccessColor?: string
   buttonSuccessBgColor?: string
-  buttonSuccessBoxShadowColor?: string
-
   buttonInfoColor?: string
   buttonInfoBgColor?: string
   buttonInfoPlainBorderColor?: string
   buttonInfoPlainNormalColor?: string
-
   buttonWarningColor?: string
   buttonWarningBgColor?: string
-  buttonWarningBoxShadowColor?: string
-
   buttonErrorColor?: string
   buttonErrorBgColor?: string
-  buttonErrorBoxShadowColor?: string
-
   buttonTextHoverOpacity?: string
 }
 
 export type cellThemeVars = {
   cellPadding?: string
   cellLineHeight?: string
-
   cellGroupTitleFs?: string
   cellGroupPadding?: string
   cellGroupTitleColor?: string
   cellGroupValueFs?: string
   cellGroupValueColor?: string
-
   cellWrapperPadding?: string
   cellWrapperPaddingLarge?: string
-
   cellWrapperPaddingWithLabel?: string
   cellIconRight?: string
   cellIconSize?: string
@@ -204,12 +185,11 @@ export type cellThemeVars = {
   cellValueColor?: string
   cellArrowSize?: string
   cellArrowColor?: string
+  cellClearColor?: string
   cellTapBg?: string
-
   cellTitleFsLarge?: string
   cellLabelFsLarge?: string
   cellIconSizeLarge?: string
-
   cellRequiredColor?: string
   cellRequiredSize?: string
   cellVerticalTop?: string
@@ -229,10 +209,12 @@ export type calendarThemeVars = {
   calendarDayHeight?: string
   calendarMonthWidth?: string
   calendarActiveColor?: string
+  calendarSelectedColor?: string
   calendarDisabledColor?: string
   calendarRangeColor?: string
   calendarActiveBorder?: string
   calendarInfoFs?: string
+  calendarItemMarginBottom?: string
 }
 
 export type checkboxThemeVars = {
@@ -246,16 +228,13 @@ export type checkboxThemeVars = {
   checkboxLabelFs?: string
   checkboxLabelColor?: string
   checkboxCheckedColor?: string
-
   checkboxDisabledColor?: string
   checkboxDisabledLabelColor?: string
   checkboxDisabledCheckColor?: string
   checkboxDisabledCheckBg?: string
   checkboxSquareRadius?: string
-
   checkboxLargeSize?: string
   checkboxLargeLabelFs?: string
-
   checkboxButtonHeight?: string
   checkboxButtonMinWidth?: string
   checkboxButtonRadius?: string
@@ -282,9 +261,18 @@ export type collapseThemeVars = {
 
 export type dividerThemeVars = {
   dividerPadding?: string
+  dividerMargin?: string
   dividerColor?: string
   dividerLineColor?: string
+  dividerLineHeight?: string
   dividerFs?: string
+  dividerContentLeftWidth?: string
+  dividerContentLeftMargin?: string
+  dividerContentRightMargin?: string
+  dividerContentRightWidth?: string
+  dividerVerticalHeight?: string
+  dividerVerticalContentMargin?: string
+  dividerVerticalLineWidth?: string
 }
 
 export type dropMenuThemeVars = {
@@ -292,7 +280,6 @@ export type dropMenuThemeVars = {
   dropMenuColor?: string
   dropMenuFs?: string
   dropMenuArrowFs?: string
-
   dropMenuSidePadding?: string
   dropMenuDisabledColor?: string
   dropMenuItemHeight?: string
@@ -335,7 +322,6 @@ export type inputThemeVars = {
   inputCountColor?: string
   inputCountCurrentColor?: string
   inputBg?: string
-
   inputCellBg?: string
   inputCellBorderColor?: string
   inputCellPadding?: string
@@ -447,16 +433,13 @@ export type pickerThemeVars = {
   pickerColumnSelectBg?: string
   pickerLoadingButtonColor?: string
   pickerColumnPadding?: string
-
   pickerColumnDisabledColor?: string
   pickerMask?: string
   pickerLoadingBg?: string
   pickerRegionSeparatorColor?: string
   pickerCellArrowSizeLarge?: string
-
   pickerRegionColor?: string
   pickerRegionBgActiveColor?: string
-
   pickerRegionFs?: string
 }
 
@@ -497,9 +480,8 @@ export type progressThemeVars = {
   progressBg?: string
   progressDangerColor?: string
   progressSuccessColor?: string
+  progressWarningColor?: string
   progressColor?: string
-  progressLinearSuccessColor?: string
-  progressLinearDangerColor?: string
   progressHeight?: string
   progressLabelColor?: string
   progressLabelFs?: string
@@ -516,10 +498,8 @@ export type radioThemeVars = {
   radioCheckedColor?: string
   radioDisabledColor?: string
   radioDisabledLabelColor?: string
-
   radioLargeSize?: string
   radioLargeLabelFs?: string
-
   radioButtonHeight?: string
   radioButtonMinWidth?: string
   radioButtonMaxWidth?: string
@@ -528,7 +508,6 @@ export type radioThemeVars = {
   radioButtonFs?: string
   radioButtonBorder?: string
   radioButtonDisabledBorder?: string
-
   radioDotSize?: string
   radioDotLargeSize?: string
   radioDotCheckedBg?: string
@@ -658,6 +637,7 @@ export type toastThemeVars = {
   toastWithIconMinWidth?: string
   toastIconSize?: string
   toastIconMarginRight?: string
+  toastIconMarginBottom?: string
   toastLoadingPadding?: string
   toastBoxShadow?: string
 }
@@ -783,20 +763,19 @@ export type circleThemeVars = {
 export type swiperThemeVars = {
   swiperRadius?: string
   swiperItemPadding?: string
+  swiperItemTextColor?: string
+  swiperItemTextFs?: string
 }
 
 export type swiperNavThemeVars = {
-  // dot & dots-bar
   swiperNavDotColor?: string
   swiperNavDotActiveColor?: string
   swiperNavDotSize?: string
   swiperNavDotsBarActiveWidth?: string
-  // fraction
   swiperNavFractionColor?: string
   swiperNavFractionBgColor?: string
   swiperNavFractionHeight?: string
   swiperNavFractionFontSize?: string
-  // button
   swiperNavBtnColor?: string
   swiperNavBtnBgColor?: string
   swiperNavBtnSize?: string
@@ -886,6 +865,26 @@ export type countDownThemeVars = {
   countDownLineHeight?: string
 }
 
+export type keyboardThemeVars = {
+  keyboardKeyHeight?: string
+  keyboardKeyFontSize?: string
+  keyboardKeyBackground?: string
+  keyboardKeyBorderRadius?: string
+  keyboardDeleteFontSize?: string
+  keyboardKeyActiveColor?: string
+  keyboardButtonTextColor?: string
+  keyboardButtonBackground?: string
+  keyboardButtonActiveOpacity?: string
+  keyboardBackground?: string
+  keyboardTitleHeight?: string
+  keyboardTitleColor?: string
+  keyboardTitleFontSize?: string
+  keyboardClosePadding?: string
+  keyboardCloseColor?: string
+  keyboardCloseFontSize?: string
+  keyboardIconSize?: string
+}
+
 export type numberKeyboardThemeVars = {
   numberKeyboardKeyHeight?: string
   numberKeyboardKeyFontSize?: string
@@ -959,6 +958,26 @@ export type imgCropperThemeVars = {
   imgCropperIconColor?: string
 }
 
+export type floatingPanelThemeVars = {
+  floatingPanelBg?: string
+  floatingPanelRadius?: string
+  floatingPanelZIndex?: string
+  floatingPanelHeaderHeight?: string
+  floatingPanelBarWidth?: string
+  floatingPanelBarHeight?: string
+  floatingPanelBarBg?: string
+  floatingPanelBarRadius?: string
+  floatingPanelContentBg?: string
+}
+
+export type signatureThemeVars = {
+  signatureBg?: string
+  signatureRadius?: string
+  signatureBorder?: string
+  signatureFooterMarginTop?: string
+  signatureButtonMarginLeft?: string
+}
+
 export type ConfigProviderThemeVars = baseThemeVars &
   actionSheetThemeVars &
   badgeThemeVars &
@@ -1013,6 +1032,7 @@ export type ConfigProviderThemeVars = baseThemeVars &
   sidebarItemThemeVars &
   fabThemeVars &
   countDownThemeVars &
+  keyboardThemeVars &
   numberKeyboardThemeVars &
   passwodInputThemeVars &
   formItemThemeVars &
@@ -1020,4 +1040,6 @@ export type ConfigProviderThemeVars = baseThemeVars &
   indexBarThemeVars &
   textThemeVars &
   videoPreviewThemeVars &
-  imgCropperThemeVars
+  imgCropperThemeVars &
+  floatingPanelThemeVars &
+  signatureThemeVars

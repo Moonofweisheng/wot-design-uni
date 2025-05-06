@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-03-21 22:49:24
- * @LastEditTime: 2024-04-10 11:29:27
+ * @LastEditTime: 2024-09-23 13:25:53
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\vite.config.ts
@@ -13,10 +13,12 @@ import viteCompression from 'vite-plugin-compression'
 // #endif
 
 import uni from '@dcloudio/vite-plugin-uni'
+import Components from '@uni-helper/vite-plugin-uni-components'
 
 export default defineConfig({
   base: './',
   plugins: [
+    Components(),
     uni(),
     // #ifdef H5
     viteCompression()

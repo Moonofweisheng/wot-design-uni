@@ -1,113 +1,113 @@
 <template>
   <page-wraper>
-    <demo-block title="基础表单" transparent>
+    <demo-block :title="$t('ji-chu-biao-dan')" transparent>
       <wd-form ref="form1" :model="model1">
         <wd-cell-group border>
           <wd-input
-            label="用户名"
+            :label="$t('wai-bi-ba-bu')"
             label-width="100px"
             prop="value1"
             clearable
             v-model="model1.value1"
-            placeholder="请输入用户名"
-            :rules="[{ required: true, message: '请填写用户名' }]"
+            :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')"
+            :rules="[{ required: true, message: $t('qing-shu-ru-wai-bi-ba-bu') }]"
           />
           <wd-input
-            label="密码"
+            :label="$t('sha-ka-la-ka')"
             label-width="100px"
             prop="value2"
             show-password
             clearable
             v-model="model1.value2"
-            placeholder="请输入密码"
-            :rules="[{ required: true, message: '请填写密码' }]"
+            :placeholder="$t('qing-shu-ru-sha-ka-la-ka')"
+            :rules="[{ required: true, message: $t('qing-shu-ru-sha-ka-la-ka') }]"
           />
         </wd-cell-group>
         <view class="footer">
-          <wd-button type="primary" size="large" @click="handleSubmit1" block>提交</wd-button>
+          <wd-button type="primary" size="large" @click="handleSubmit1" block>{{ $t('ti-jiao') }}</wd-button>
         </view>
       </wd-form>
     </demo-block>
 
-    <demo-block title="校验规则" transparent>
+    <demo-block :title="$t('xiao-yan-gui-ze')" transparent>
       <wd-form ref="form2" :model="model2">
         <wd-cell-group border>
           <wd-input
-            label="校验"
+            :label="$t('xiao-yan')"
             label-width="100px"
             prop="value1"
             clearable
             v-model="model2.value1"
-            placeholder="正则校验"
-            :rules="[{ required: false, pattern: /\d{6}/, message: '请输入6位字符' }]"
+            :placeholder="$t('zheng-ze-xiao-yan')"
+            :rules="[{ required: false, pattern: /\d{6}/, message: $t('qing-shu-ru-6-wei-zi-fu') }]"
           />
           <wd-input
-            label="校验"
+            :label="$t('xiao-yan')"
             label-width="100px"
             prop="value2"
             clearable
             v-model="model2.value2"
-            placeholder="函数校验"
+            :placeholder="$t('han-shu-xiao-yan')"
             :rules="[
               {
                 required: false,
                 validator: validatorMessage,
-                message: '请输入正确的玛卡巴卡'
+                message: $t('qing-shu-ru-zheng-que-de-ma-ka-ba-ka')
               }
             ]"
           />
           <wd-input
-            label="校验"
+            :label="$t('xiao-yan-1')"
             label-width="100px"
             prop="value3"
             clearable
             v-model="model2.value3"
-            placeholder="校验函数返回错误提示"
+            :placeholder="$t('xiao-yan-han-shu-fan-hui-cuo-wu-ti-shi')"
             :rules="[
               {
                 required: false,
-                message: '请输入内容',
+                message: $t('qing-shu-ru-nei-rong'),
                 validator: validator
               }
             ]"
           />
           <wd-input
-            label="校验"
+            :label="$t('xiao-yan')"
             label-width="100px"
             prop="value4"
             clearable
             v-model="model2.value4"
-            placeholder="异步函数校验"
-            :rules="[{ required: false, validator: asyncValidator, message: '请输入1234' }]"
+            :placeholder="$t('yi-bu-han-shu-xiao-yan')"
+            :rules="[{ required: false, validator: asyncValidator, message: $t('qing-shu-ru-1234') }]"
           />
         </wd-cell-group>
         <view class="footer">
-          <wd-button type="primary" size="large" @click="handleSubmit2" block>提交</wd-button>
+          <wd-button type="primary" size="large" @click="handleSubmit2" block>{{ $t('ti-jiao') }}</wd-button>
         </view>
       </wd-form>
     </demo-block>
 
-    <demo-block title="动态表单" transparent>
+    <demo-block :title="$t('dong-tai-biao-dan')" transparent>
       <view class="demo-button">
-        <wd-button @click="handleClick1" :round="false" block size="large">动态表单</wd-button>
+        <wd-button @click="handleClick1" :round="false" block size="large">{{ $t('dong-tai-biao-dan-0') }}</wd-button>
       </view>
     </demo-block>
 
-    <demo-block title="失焦校验" transparent>
+    <demo-block :title="$t('shi-jiao-xiao-yan')" transparent>
       <view class="demo-button">
-        <wd-button @click="handleClick2" :round="false" block size="large">失焦校验</wd-button>
+        <wd-button @click="handleClick2" :round="false" block size="large">{{ $t('shi-jiao-xiao-yan-0') }}</wd-button>
       </view>
     </demo-block>
 
-    <demo-block title="复杂表单" transparent>
+    <demo-block :title="$t('fu-za-biao-dan')" transparent>
       <view class="demo-button">
-        <wd-button @click="handleClick3" :round="false" block size="large">复杂表单</wd-button>
+        <wd-button @click="handleClick3" :round="false" block size="large">{{ $t('fu-za-biao-dan-0') }}</wd-button>
       </view>
     </demo-block>
 
-    <demo-block title="校验提示方式" transparent>
+    <demo-block :title="$t('xiao-yan-ti-shi-fang-shi')" transparent>
       <view class="demo-button">
-        <wd-button @click="handleClick4" :round="false" block size="large">校验提示方式</wd-button>
+        <wd-button @click="handleClick4" :round="false" block size="large">{{ $t('xiao-yan-ti-shi-fang-shi') }}</wd-button>
       </view>
     </demo-block>
   </page-wraper>
@@ -116,6 +116,9 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 import type { FormInstance } from '@/uni_modules/wot-design-uni/components/wd-form/types'
 import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const model1 = reactive<{
   value1: string
@@ -149,14 +152,14 @@ const validator = (val: any) => {
   if (String(val).length >= 4) {
     return Promise.resolve()
   } else {
-    return Promise.reject('长度不得小于4')
+    return Promise.reject(new Error(t('chang-du-bu-de-xiao-yu-4')))
   }
 }
 
 // 校验函数可以返回 Promise，实现异步校验
 const asyncValidator = (val: string) =>
   new Promise((resolve) => {
-    showLoading('验证中...')
+    showLoading(t('yan-zheng-zhong'))
 
     setTimeout(() => {
       closeToast()
@@ -170,7 +173,7 @@ function handleSubmit1() {
     .then(({ valid, errors }) => {
       if (valid) {
         showSuccess({
-          msg: '提交成功'
+          msg: t('ti-jiao-cheng-gong')
         })
       }
     })
@@ -185,7 +188,7 @@ function handleSubmit2() {
     .then(({ valid, errors }) => {
       if (valid) {
         showSuccess({
-          msg: '提交成功'
+          msg: t('ti-jiao-cheng-gong')
         })
       }
     })

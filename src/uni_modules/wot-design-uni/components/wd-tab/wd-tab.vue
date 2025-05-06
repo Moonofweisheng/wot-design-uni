@@ -1,6 +1,6 @@
 <template>
   <view :class="`wd-tab ${customClass}`" :style="customStyle">
-    <view v-if="painted" class="wd-tab__body" :style="isShow ? '' : 'display: none;'">
+    <view :class="['wd-tab__body', { 'wd-tab__body--inactive': !active }]" v-if="shouldBeRender" :style="tabBodyStyle">
       <slot />
     </view>
   </view>
@@ -16,8 +16,8 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { getCurrentInstance, ref, watch } from 'vue'
-import { isDef, isNumber, isString } from '../common/util'
+import { getCurrentInstance, ref, watch, type CSSProperties } from 'vue'
+import { isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { TABS_KEY } from '../wd-tabs/types'
 import { computed } from 'vue'
@@ -25,14 +25,28 @@ import { tabProps } from './types'
 
 const props = defineProps(tabProps)
 
-const painted = ref<boolean>(false) // 初始状态tab不会渲染，必须通过tabs来设置painted使tab渲染
-const isShow = ref<boolean>(false)
 const { proxy } = getCurrentInstance() as any
 const { parent: tabs, index } = useParent(TABS_KEY)
 
 // 激活项下标
-const activeIndex = computed(() => {
-  return isDef(tabs) ? tabs.state.activeIndex : 0
+const active = computed(() => {
+  return isDef(tabs) ? tabs.state.activeIndex === index.value : false
+})
+
+const painted = ref<boolean>(active.value) // 初始状态tab不会渲染，必须通过tabs来设置painted使tab渲染
+
+const tabBodyStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (!active.value && (!isDef(tabs) || !tabs.props.animated)) {
+    style.display = 'none'
+  }
+  return objToStyle(style)
+})
+
+const shouldBeRender = computed(() => !props.lazy || painted.value || active.value)
+
+watch(active, (val) => {
+  if (val) painted.value = true
 })
 
 watch(
@@ -52,18 +66,6 @@ watch(
   }
 )
 
-watch(
-  () => activeIndex.value,
-  (newValue) => {
-    if (newValue === index.value) {
-      setShow(true, true)
-    } else {
-      setShow(painted.value, false)
-    }
-  },
-  { deep: true, immediate: true }
-)
-
 /**
  * @description 检测tab绑定的name是否和其它tab的name冲突
  * @param {Object} self 自身
@@ -80,21 +82,6 @@ function checkName(self: any) {
       }
     })
 }
-
-/**
- * 设置子组件展示
- * @param setPainted
- * @param setIsShow
- */
-function setShow(setPainted: boolean, setIsShow: boolean) {
-  painted.value = setPainted
-  isShow.value = setIsShow
-}
-
-defineExpose({
-  setShow,
-  painted
-})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

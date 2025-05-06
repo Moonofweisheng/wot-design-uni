@@ -1,7 +1,7 @@
 import { getCurrentInstance, ref } from 'vue'
-import { getRect } from '../common/util'
+import { getRect, isObj } from '../common/util'
 
-export function usePopover() {
+export function usePopover(visibleArrow = true) {
   const { proxy } = getCurrentInstance() as any
   const popStyle = ref<string>('')
   const arrowStyle = ref<string>('')
@@ -77,10 +77,10 @@ export function usePopover() {
       | 'right'
       | 'right-start'
       | 'right-end',
-    offset: number
+    offset: number | number[] | Record<'x' | 'y', number>
   ) {
     // arrow size
-    const arrowSize = 9
+    const arrowSize = visibleArrow ? 9 : 0
     // 上下位（纵轴）对应的距离左边的距离
     const verticalX = width.value / 2
     // 上下位（纵轴）对应的距离底部的距离
@@ -90,8 +90,20 @@ export function usePopover() {
     // 左右位（横轴）对应的距离底部的距离
     const horizontalY = height.value / 2
 
-    const offsetX = (verticalX - 17 > 0 ? 0 : verticalX - 25) + offset
-    const offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + offset
+    let offsetX = 0
+    let offsetY = 0
+    if (Array.isArray(offset)) {
+      offsetX = (verticalX - 17 > 0 ? 0 : verticalX - 25) + offset[0]
+      offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + (offset[1] ? offset[1] : offset[0])
+    } else if (isObj(offset)) {
+      offsetX = (verticalX - 17 > 0 ? 0 : verticalX - 25) + offset.x
+      offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + offset.y
+    } else {
+      offsetX = (verticalX - 17 > 0 ? 0 : verticalX - 25) + offset
+      offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + offset
+    }
+    // const offsetX = (verticalX - 17 > 0 ? 0 : verticalX - 25) + offset
+    // const offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + offset
 
     const placements = new Map([
       // 上

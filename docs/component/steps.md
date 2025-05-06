@@ -1,6 +1,6 @@
-<frame/>
-
 #  Steps 步骤条
+
+用于引导用户按照流程完成任务或向用户展示当前状态。
 
 :::tip 破坏性更新提醒
 `1.2.10`版本`step`组件废弃了`title-slot`、`icon-slot`和`description-slot`等三个控制插槽使用的字段，新增支持直接使用`title`、`icon`和`description`插槽，同时废弃了`default`插槽。

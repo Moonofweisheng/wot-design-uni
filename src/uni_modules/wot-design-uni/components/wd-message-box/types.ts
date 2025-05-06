@@ -1,13 +1,15 @@
 /*
  * @Author: weisheng
  * @Date: 2024-04-08 22:34:01
- * @LastEditTime: 2024-04-10 12:58:10
+ * @LastEditTime: 2024-12-05 13:26:50
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\types.ts
  * 记得注释
  */
-import { baseProps } from '../common/props'
+import { baseProps, makeStringProp } from '../common/props'
+import type { ButtonProps } from '../wd-button/types'
+import { type InputSize, type InputType } from '../wd-input/types'
 
 export type MessageType = 'alert' | 'confirm' | 'prompt'
 
@@ -24,8 +26,6 @@ export type MessageOptions = {
    * 是否展示取消按钮
    */
   showCancelButton?: boolean
-
-  show?: boolean
   /**
    * 是否支持点击蒙层进行关闭，点击蒙层回调传入的action为'modal'
    */
@@ -49,7 +49,11 @@ export type MessageOptions = {
   /**
    * 当type为prompt时，输入框类型
    */
-  inputType?: string
+  inputType?: InputType
+  /**
+   * 设置输入框大小，可选值：large
+   */
+  inputSize?: InputSize
   /**
    * 当type为prompt时，输入框初始值
    */
@@ -65,7 +69,7 @@ export type MessageOptions = {
   /**
    * 当type为prompt时，输入框校验函数，点击确定按钮时进行校验
    */
-  inputValidate?: InputValidate | null
+  inputValidate?: InputValidate
   /**
    * 当type为prompt时，输入框检验不通过时的错误提示文案
    */
@@ -86,6 +90,20 @@ export type MessageOptions = {
    * 确认前钩子
    */
   beforeConfirm?: (options: MessageBeforeConfirmOption) => void
+  /**
+   * 取消按钮Props
+   */
+  cancelButtonProps?: Partial<ButtonProps>
+  /**
+   * 确认按钮Props
+   */
+  confirmButtonProps?: Partial<ButtonProps>
+}
+
+export type MessageOptionsWithCallBack = MessageOptions & {
+  show?: boolean
+  success?: (res: MessageResult) => void
+  fail?: (res: MessageResult) => void
 }
 
 export type ActionType = 'confirm' | 'cancel' | 'modal'
@@ -112,5 +130,8 @@ export interface Message {
 
 export const messageBoxProps = {
   ...baseProps,
-  selector: String
+  /**
+   * 指定唯一标识
+   */
+  selector: makeStringProp('')
 }

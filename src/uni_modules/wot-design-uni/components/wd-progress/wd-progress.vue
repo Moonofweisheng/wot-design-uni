@@ -1,15 +1,13 @@
 <template>
   <view :class="`wd-progress ${customClass}`" :style="customStyle">
-    <!--进度条-->
     <view class="wd-progress__outer">
-      <view :class="`wd-progress__inner ${progressClass}`" :style="rootStyle"></view>
+      <view :class="`wd-progress__inner ${innerClass}`" :style="rootStyle"></view>
     </view>
-    <!--文案、图标-->
     <view v-if="!hideText" class="wd-progress__label">{{ percentage }}%</view>
     <wd-icon
       v-else-if="status"
-      :custom-class="`wd-progress__label wd-progress__icon ${progressClass}`"
-      :name="status == 'danger' ? 'close-outline' : 'check-outline'"
+      :custom-class="`wd-progress__label wd-progress__icon ${innerClass}`"
+      :name="iconName"
       :color="typeof color === 'string' ? color : ''"
     ></wd-icon>
   </view>
@@ -29,163 +27,171 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, ref, watch } from 'vue'
-import { checkNumRange, isArray, objToStyle } from '../common/util'
-import { progressProps } from './types'
+import { isArray, isDef, isObj, objToStyle, pause } from '../common/util'
+import { progressProps, type ProgressColor } from './types'
 
 const props = defineProps(progressProps)
-// 进度条展示的颜色
 const showColor = ref<string>('')
-// 进度条展示的进度
 const showPercent = ref<number>(0)
-// newPercent - oldPercent 的绝对值
 const changeCount = ref<number>(0)
-const progressClass = ref<string>('')
-
-let timer: NodeJS.Timeout | null = null // 定时器
+let timer: ReturnType<typeof setTimeout> | null = null
 
 const rootStyle = computed(() => {
-  const style: Record<string, string | number> = {
+  return objToStyle({
     background: showColor.value,
-    width: showPercent.value + '%',
-    'transition-duration': changeCount.value * props.duration * 0.001 + 's'
+    width: `${showPercent.value}%`,
+    'transition-duration': `${changeCount.value * props.duration * 0.001}s`
+  })
+})
+
+const innerClass = computed(() => (props.status ? `is-${props.status}` : ''))
+
+const iconName = computed(() => {
+  let icon: string = ''
+  switch (props.status) {
+    case 'danger':
+      icon = 'close-outline'
+      break
+    case 'success':
+      icon = 'check-outline'
+      break
+    case 'warning':
+      icon = 'warn-bold'
+      break
+    default:
+      break
   }
-  return objToStyle(style)
+  return icon
 })
 
 watch(
-  () => props.percentage,
-  (newValue) => {
-    // 校验类型
-    if (Number.isNaN(newValue) || newValue < 0 || newValue > 100) {
-      console.error('The value of percentage must be between 0 and 100')
-    }
-    controlProgress()
-  }
-)
-
-watch(
-  () => props.color,
+  () => [props.percentage, props.color, props.duration],
   () => {
-    controlProgress()
+    validatePercentage(props.percentage)
+    updateProgress()
   },
-  {
-    deep: true,
-    immediate: true
-  }
+  { immediate: true }
 )
 
-watch(
-  () => props.status,
-  () => {
-    computeProgressClass()
-  },
-  {
-    deep: true,
-    immediate: true
+function validatePercentage(value: number) {
+  if (Number.isNaN(value) || value < 0 || value > 100) {
+    console.error('The value of percentage must be between 0 and 100')
   }
-)
-
-watch(
-  () => props.duration,
-  (newValue) => {
-    checkNumRange(newValue)
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-function computeProgressClass() {
-  const { status } = props
-  let progressClasses: string[] = []
-  status && progressClasses.push(`is-${status}`)
-  progressClass.value = progressClasses.join(' ')
 }
 
 /**
- * @description
- * @param {Number} targetPercent 目标值
- * @param {String} color 目标颜色
+ * 进度条前进
+ * @param partList 颜色数组
+ * @param percentage 进度值
  */
+function updateProgressForward(partList: ProgressColor[], percentage: number) {
+  return partList.some((part, index) => {
+    if (showPercent.value < part.percentage && part.percentage <= percentage) {
+      update(part.percentage, part.color)
+      return true
+    } else if (index === partList.length - 1) {
+      update(percentage, part.color)
+    }
+  })
+}
+
+/**
+ * 进度条后退
+ * @param partList 颜色数组
+ * @param percentage 进度值
+ */
+function updateProgressBackward(partList: ProgressColor[], percentage: number) {
+  return partList.some((part) => {
+    if (percentage <= part.percentage) {
+      update(percentage, part.color)
+      return true
+    }
+  })
+}
+
+/**
+ * 更新进度条
+ */
+async function updateProgress() {
+  const { percentage, color } = props
+  if (!isDef(color) || (isArray(color) && color.length === 0)) {
+    changeCount.value = Math.abs(percentage - showPercent.value)
+    await pause()
+    showPercent.value = percentage
+    return
+  }
+  if (showPercent.value === percentage) return
+
+  const colorArray = isArray(color) ? color : [color]
+  validateColorArray(colorArray)
+  const partList = createPartList(colorArray)
+  showPercent.value > percentage ? updateProgressBackward(partList, percentage) : updateProgressForward(partList, percentage)
+}
+
+/**
+ * 判断是否是颜色数组
+ * @param array 颜色数组
+ */
+function isProgressColorArray(array: string[] | ProgressColor[]): array is ProgressColor[] {
+  return array.every(
+    (color) => isObj(color) && Object.prototype.hasOwnProperty.call(color, 'color') && Object.prototype.hasOwnProperty.call(color, 'percentage')
+  )
+}
+
+/**
+ * 判断是否是字符串数组
+ * @param array 颜色数组
+ */
+function isStringArray(array: string[] | ProgressColor[]): array is string[] {
+  return array.every((item) => typeof item === 'string')
+}
+
+/**
+ * 颜色数组校验
+ * @param colorArray 颜色数组
+ */
+function validateColorArray(colorArray: string[] | ProgressColor[]) {
+  const isStrArray = isStringArray(colorArray)
+  const isObjArray = isProgressColorArray(colorArray)
+  if (!isStrArray && !isObjArray) {
+    throw Error('Color must be String or Object with color and percentage')
+  }
+  if (isObjArray && colorArray.some(({ percentage }) => Number.isNaN(percentage))) {
+    throw Error('All the percentage must can be formatted to Number')
+  }
+}
+
+/**
+ * 创建颜色数组
+ * @param colorArray 颜色数组
+ * @return 颜色数组
+ */
+function createPartList(colorArray: string[] | ProgressColor[]) {
+  const partNum = 100 / colorArray.length
+  return isProgressColorArray(colorArray)
+    ? colorArray.sort((a, b) => a.percentage - b.percentage)
+    : colorArray.map((item, index) => ({
+        color: item,
+        percentage: (index + 1) * partNum
+      }))
+}
+
 function update(targetPercent: number, color: string) {
-  // 需要等上一个定时器跑完
   if (timer) return
   const { duration } = props
-  // transition-duration的优先更高
   changeCount.value = Math.abs(targetPercent - showPercent.value)
   setTimeout(() => {
     showPercent.value = targetPercent
     showColor.value = color
     timer = setTimeout(() => {
-      clearTimeout(timer as any)
+      timer && clearTimeout(timer)
       timer = null
-      controlProgress()
+      updateProgress()
     }, changeCount.value * duration)
   }, 50)
 }
-
-/**
- * @description 控制进度条的进度和每段的颜色
- */
-function controlProgress() {
-  const {
-    // 目标百分比
-    percentage,
-    // 传入的color数组
-    color
-  } = props
-  // 锁
-  if (showPercent.value === percentage || !percentage) return
-  /**
-   * 数组边界安全判断
-   */
-  let colorArray: string[] | Record<string, any>[] = (isArray(color) ? color : [color]) as string[] | Record<string, any>[]
-  if (colorArray.length === 0) throw Error('The colorArray is empty')
-  const isStrArray = (colorArray as any).every((item: any) => typeof item === 'string')
-  // eslint-disable-next-line no-prototype-builtins
-  const isObjArray = (colorArray as any).every((color: any) => color.hasOwnProperty('color') && color.hasOwnProperty('percentage'))
-  if (!isStrArray && !isObjArray) {
-    throw Error('Color must be String or Object with color and percentage')
-  }
-  if (isObjArray && (colorArray as any).some(({ percentage }: any) => Number.isNaN(parseInt(percentage)))) {
-    throw Error('All the percentage must can be formatted to Number')
-  }
-  /**
-   * 根据colorArray平均分布每段color值，或使用用户自定义的值
-   */
-  const partNum = parseInt(`${100 / colorArray.length}`)
-  const partList = isObjArray
-    ? colorArray.sort((a: any, b: any) => a.percentage - b.percentage)
-    : colorArray.map((item, index) => {
-        return {
-          color: item,
-          percentage: (index + 1) * partNum
-        }
-      })
-  /**
-   * 找到当前目标
-   */
-  showPercent.value > percentage
-    ? // 减小不加动画，找到第一个比target大的锚点，取锚点颜色并设置target值
-      partList.some((part: any) => {
-        if (percentage <= part.percentage) {
-          update(percentage, part.color)
-          return true
-        }
-      })
-    : // 增加使用分段动画
-      partList.some((part: any, index: number) => {
-        if (showPercent.value < part.percentage && part.percentage <= percentage) {
-          // 找到第一个比now大的点，如果这个点比target小或等，就把这个点设置为下一个即将展示的点
-          update(part.percentage, part.color)
-          return true
-        } else if (index === partList.length - 1) {
-          update(percentage, part.color)
-        }
-      })
-}
 </script>
+
 <style lang="scss" scoped>
 @import './index.scss';
 </style>

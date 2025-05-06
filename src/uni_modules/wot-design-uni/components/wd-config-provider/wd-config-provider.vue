@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-06-13 11:34:35
- * @LastEditTime: 2024-03-15 17:00:16
+ * @LastEditTime: 2025-04-28 22:26:25
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-config-provider\wd-config-provider.vue
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-config-provider/wd-config-provider.vue
  * 记得注释
 -->
 <template>
@@ -37,7 +37,7 @@ const themeClass = computed(() => {
 
 const themeStyle = computed(() => {
   const styleObj = mapThemeVarsToCSSVars(props.themeVars)
-  return styleObj ? `${objToStyle(styleObj)};${props.customStyle}` : props.customStyle
+  return styleObj ? `${objToStyle(styleObj)}${props.customStyle}` : props.customStyle
 })
 
 const kebabCase = (str: string): string => {

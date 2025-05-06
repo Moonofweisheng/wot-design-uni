@@ -1,5 +1,3 @@
-<frame/>
-
 # Badge 徽标
 
 

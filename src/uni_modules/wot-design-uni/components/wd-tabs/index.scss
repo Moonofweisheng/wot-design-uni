@@ -33,7 +33,7 @@
         border: 1px solid $-tabs-nav-active-color;
         background-color: $-dark-background;
       }
-  
+
       @include when(disabled) {
         color: $-dark-color-gray;
         border-color: #f4f4f4;
@@ -91,15 +91,16 @@
   }
 
   @include e(nav-item) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 1;
     min-width: 0;
-    text-align: center;
     height: $-tabs-nav-height;
-    line-height: $-tabs-nav-height;
     font-size: $-tabs-nav-fs;
     color: $-tabs-nav-color;
     transition: color .3s;
-    @include lineEllipsis();
 
     @include when(active) {
       font-weight: 600;
@@ -108,6 +109,18 @@
     @include when(disabled) {
       color: $-tabs-nav-disabled-color;
     }
+  }
+
+  @include e(nav-item-text) {
+    @include lineEllipsis();
+  }
+
+  @include edeep(nav-item-badge){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    min-width: 0;
   }
 
   @include e(line) {
@@ -119,6 +132,11 @@
     width: $-tabs-nav-line-width;
     background: $-tabs-nav-line-bg-color;
     border-radius: calc($-tabs-nav-line-height / 2);
+
+    @include m(inner) {
+      left: 50%;
+      transform: translateX(-50%)
+    }
   }
 
   @include e(container) {

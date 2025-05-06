@@ -1,20 +1,20 @@
 <template>
   <view :class="rootClass" :style="customStyle" @click="handleClick">
-    <view v-if="label || useLabelSlot" :class="labelClass" :style="labelStyle">
-      <view v-if="prefixIcon || usePrefixSlot" class="wd-input__prefix">
-        <wd-icon v-if="prefixIcon && !usePrefixSlot" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
+    <view v-if="label || $slots.label" :class="labelClass" :style="labelStyle">
+      <view v-if="prefixIcon || $slots.prefix" class="wd-input__prefix">
+        <wd-icon v-if="prefixIcon && !$slots.prefix" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
         <slot v-else name="prefix"></slot>
       </view>
       <view class="wd-input__label-inner">
-        <template v-if="label">{{ label }}</template>
+        <template v-if="label && !$slots.label">{{ label }}</template>
         <slot v-else name="label"></slot>
       </view>
     </view>
     <view class="wd-input__body">
       <view class="wd-input__value">
-        <view v-if="(prefixIcon || usePrefixSlot) && !label" class="wd-input__prefix">
-          <wd-icon v-if="prefixIcon" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
-          <slot name="prefix"></slot>
+        <view v-if="(prefixIcon || $slots.prefix) && !label" class="wd-input__prefix">
+          <wd-icon v-if="prefixIcon && !$slots.prefix" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
+          <slot v-else name="prefix"></slot>
         </view>
         <input
           :class="[
@@ -43,29 +43,30 @@
           :always-embed="alwaysEmbed"
           :placeholder-class="inputPlaceholderClass"
           :ignoreCompositionEvent="ignoreCompositionEvent"
+          :inputmode="inputmode"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
           @confirm="handleConfirm"
           @keyboardheightchange="handleKeyboardheightchange"
         />
-        <view v-if="readonly" class="wd-input__readonly-mask" />
+        <view v-if="props.readonly" class="wd-input__readonly-mask" />
         <view v-if="showClear || showPassword || suffixIcon || showWordCount || $slots.suffix" class="wd-input__suffix">
           <wd-icon v-if="showClear" custom-class="wd-input__clear" name="error-fill" @click="handleClear" />
           <wd-icon v-if="showPassword" custom-class="wd-input__icon" :name="isPwdVisible ? 'view' : 'eye-close'" @click="togglePwdVisible" />
           <view v-if="showWordCount" class="wd-input__count">
             <text
               :class="[
-                inputValue && String(inputValue).length > 0 ? 'wd-input__count-current' : '',
-                String(inputValue).length > maxlength! ? 'is-error' : ''
-              ]"
+              inputValue && String(inputValue).length > 0 ? 'wd-input__count-current' : '',
+              String(inputValue).length > maxlength! ? 'is-error' : ''
+            ]"
             >
               {{ String(inputValue).length }}
             </text>
             /{{ maxlength }}
           </view>
-          <wd-icon v-if="suffixIcon" custom-class="wd-input__icon" :name="suffixIcon" @click="onClickSuffixIcon" />
-          <slot name="suffix"></slot>
+          <wd-icon v-if="suffixIcon && !$slots.suffix" custom-class="wd-input__icon" :name="suffixIcon" @click="onClickSuffixIcon" />
+          <slot v-else name="suffix"></slot>
         </view>
       </view>
       <view v-if="errorMessage" class="wd-input__error-message">{{ errorMessage }}</view>
@@ -85,20 +86,25 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import { computed, ref, watch, useSlots, type Slots } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { computed, onBeforeMount, ref, watch } from 'vue'
-import { isDef, objToStyle, pause, requestAnimationFrame } from '../common/util'
+import { isDef, objToStyle, pause, isEqual } from '../common/util'
 import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { inputProps } from './types'
 
+interface InputSlots extends Slots {
+  prefix?: () => any
+  suffix?: () => any
+  label?: () => any
+}
+
 const props = defineProps(inputProps)
 const emit = defineEmits([
   'update:modelValue',
   'clear',
-  'change',
   'blur',
   'focus',
   'input',
@@ -108,13 +114,14 @@ const emit = defineEmits([
   'clickprefixicon',
   'click'
 ])
+const slots = useSlots() as InputSlots
 const { translate } = useTranslate('input')
 
 const isPwdVisible = ref<boolean>(false)
 const clearing = ref<boolean>(false) // 是否正在清空操作，避免重复触发失焦
 const focused = ref<boolean>(false) // 控制聚焦
 const focusing = ref<boolean>(false) // 当前是否激活状态
-const inputValue = ref<string | number>('') // 输入框的值
+const inputValue = ref<string | number>(getInitValue()) // 输入框的值
 const cell = useCell()
 
 watch(
@@ -129,8 +136,7 @@ watch(
   () => props.modelValue,
   (newValue) => {
     inputValue.value = isDef(newValue) ? String(newValue) : ''
-  },
-  { immediate: true, deep: true }
+  }
 )
 
 const { parent: form } = useParent(FORM_KEY)
@@ -185,9 +191,9 @@ const isRequired = computed(() => {
 })
 
 const rootClass = computed(() => {
-  return `wd-input  ${props.label || props.useLabelSlot ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${
-    cell.border.value ? 'is-border' : ''
-  } ${props.size ? 'is-' + props.size : ''} ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''}  ${
+  return `wd-input  ${props.label || slots.label ? 'is-cell' : ''} ${props.center ? 'is-center' : ''} ${cell.border.value ? 'is-border' : ''} ${
+    props.size ? 'is-' + props.size : ''
+  } ${props.error ? 'is-error' : ''} ${props.disabled ? 'is-disabled' : ''}  ${
     inputValue.value && String(inputValue.value).length > 0 ? 'is-not-empty' : ''
   }  ${props.noBorder ? 'is-no-border' : ''} ${props.customClass}`
 })
@@ -209,14 +215,13 @@ const labelStyle = computed(() => {
     : ''
 })
 
-onBeforeMount(() => {
-  initState()
-})
-
 // 状态初始化
-function initState() {
-  inputValue.value = formatValue(inputValue.value)
-  emit('update:modelValue', inputValue.value)
+function getInitValue() {
+  const formatted = formatValue(props.modelValue)
+  if (!isValueEqual(formatted, props.modelValue)) {
+    emit('update:modelValue', formatted)
+  }
+  return formatted
 }
 
 function formatValue(value: string | number) {
@@ -230,24 +235,20 @@ function formatValue(value: string | number) {
 function togglePwdVisible() {
   isPwdVisible.value = !isPwdVisible.value
 }
-function handleClear() {
+async function handleClear() {
   clearing.value = true
   focusing.value = false
   inputValue.value = ''
   if (props.focusWhenClear) {
     focused.value = false
   }
-  requestAnimationFrame(() => {
-    if (props.focusWhenClear) {
-      focused.value = true
-      focusing.value = true
-    }
-    emit('change', {
-      value: ''
-    })
-    emit('update:modelValue', inputValue.value)
-    emit('clear')
-  })
+  await pause()
+  if (props.focusWhenClear) {
+    focused.value = true
+    focusing.value = true
+  }
+  emit('update:modelValue', inputValue.value)
+  emit('clear')
 }
 async function handleBlur() {
   // 等待150毫秒，clear执行完毕
@@ -284,8 +285,14 @@ function onClickPrefixIcon() {
 function handleClick(event: MouseEvent) {
   emit('click', event)
 }
+function isValueEqual(value1: number | string, value2: number | string) {
+  return isEqual(String(value1), String(value2))
+}
 </script>
 
 <style lang="scss" scoped>
 @import './index.scss';
+</style>
+<style lang="scss">
+@import './placeholder.scss';
 </style>

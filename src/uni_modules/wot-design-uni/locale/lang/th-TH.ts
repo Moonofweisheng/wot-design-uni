@@ -123,5 +123,11 @@ export default {
   },
   tableCol: {
     indexLabel: 'หมายเลขซีเรียล'
+  },
+  signature: {
+    confirmText: 'ยืนยัน',
+    clearText: 'ล้าง',
+    revokeText: 'ย้อนกลับ',
+    restoreText: 'เรียกคืน'
   }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-06-03 23:43:43
- * @LastEditTime: 2024-06-06 21:40:53
+ * @LastEditTime: 2025-03-25 17:28:13
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-img-cropper/types.ts
@@ -57,7 +57,11 @@ export const imgCropperProps = {
   /**
    * 最大缩放
    */
-  maxScale: makeNumberProp(3)
+  maxScale: makeNumberProp(3),
+  /**
+   * 裁剪框宽高比，格式为 width:height
+   */
+  aspectRatio: makeStringProp('1:1')
 }
 
 export type ImgCropperProps = ExtractPropTypes<typeof imgCropperProps>

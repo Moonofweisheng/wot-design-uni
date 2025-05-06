@@ -1,27 +1,18 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-08-09 10:12:54
- * @LastEditTime: 2024-08-09 13:10:34
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: \wot-design-uni\src\pages\countDown\Index.vue
- * 记得注释
--->
 <template>
   <page-wraper>
-    <demo-block title="基本用法">
+    <demo-block :title="$t('jiBenYongFa')">
       <wd-count-down :time="time" />
     </demo-block>
 
-    <demo-block title="自定义格式">
+    <demo-block :title="$t('zi-ding-yi-ge-shi')">
       <wd-count-down :time="time" format="DD 天 HH 时 mm 分 ss 秒" />
     </demo-block>
 
-    <demo-block title="毫秒级渲染">
+    <demo-block :title="$t('hao-miao-ji-xuan-ran')">
       <wd-count-down :time="time" millisecond format="HH:mm:ss:SS" />
     </demo-block>
 
-    <demo-block title="自定义样式">
+    <demo-block :title="$t('ziDingYiYangShi')">
       <wd-count-down :time="time">
         <template #default="{ current }">
           <span class="custom-count-down">{{ current.hours }}</span>
@@ -33,12 +24,12 @@
       </wd-count-down>
     </demo-block>
 
-    <demo-block title="手动控制">
+    <demo-block :title="$t('shou-dong-kong-zhi')">
       <wd-count-down ref="countDown" :time="3000" millisecond :auto-start="false" format="ss:SSS" @finish="onFinish"></wd-count-down>
       <wd-grid clickable border>
-        <wd-grid-item text="开始" icon="play-circle-stroke" @itemclick="start" />
-        <wd-grid-item text="暂停" icon="pause-circle" @itemclick="pause" />
-        <wd-grid-item text="重置" icon="refresh" @itemclick="reset" />
+        <wd-grid-item :text="$t('kai-shi')" icon="play-circle-stroke" @itemclick="start" />
+        <wd-grid-item :text="$t('zan-ting')" icon="pause-circle" @itemclick="pause" />
+        <wd-grid-item :text="$t('zhong-zhi')" icon="refresh" @itemclick="reset" />
       </wd-grid>
     </demo-block>
     <wd-toast></wd-toast>
@@ -48,7 +39,10 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 import type { CountDownInstance } from '@/uni_modules/wot-design-uni/components/wd-count-down/types'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 const { show: showToast } = useToast()
+
+const { t } = useI18n()
 
 const time = ref(30 * 60 * 60 * 1000)
 
@@ -63,7 +57,7 @@ const pause = () => {
 const reset = () => {
   countDown.value!.reset()
 }
-const onFinish = () => showToast('倒计时结束')
+const onFinish = () => showToast(t('dao-ji-shi-jie-shu'))
 </script>
 <style lang="scss" scoped>
 .custom-count-down {

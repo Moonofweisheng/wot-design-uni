@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         在向我们提交 Bug 报告前，请优先使用以下方式尝试解决问题：
-        - 在组件文档 [wot-design-uni](https://wot-design-uni.pages.dev/) 确认使用方法是否正确
+        - 在组件文档 [wot-design-uni](https://wot-design-uni.cn/) 确认使用方法是否正确
         - 尝试在 [Issue](https://github.com/Moonofweisheng/wot-design-uni/issues) 列表中搜索相同问题
         - 如果不是反馈 Bug，请到 [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions) 发帖。
 
@@ -39,9 +39,9 @@ body:
   - type: input
     id: reproduce
     attributes:
-      label: 复现Demo地址（如不提供，issue将被直接关闭）
+      label: 复现Demo地址（如不提供，将被直接关闭）
       description: |
-        请提供一个尽可能简单的 GitHub 仓库链接。不要随便填写一个链接，这会导致你的 issue 被直接关闭。
+        我们需要你提供一个最小重现demo，以便于我们帮你排查问题。你可以通过 [create-uni](https://github.com/uni-helper/create-uni) 快速创建一个wot-design-uni项目，并添加相关复现逻辑来提供。不要随便填写一个东西，这会导致你的 issue 被直接关闭。即使在你看来问题很容易复现，也请认真对待，因为一个完整复现demo可以大大提高我们排查问题的效率。
     validations:
       required: true
 

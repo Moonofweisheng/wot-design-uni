@@ -80,6 +80,7 @@ declare module 'vue' {
     WdFab: typeof import('./components/wd-fab/wd-fab.vue')['default']
     WdCountDown: typeof import('./components/wd-count-down/wd-count-down.vue')['default']
     WdNumberKeyboard: typeof import('./components/wd-number-keyboard/wd-number-keyboard.vue')['default']
+    WdKeyboard: typeof import('./components/wd-keyboard/wd-keyboard.vue')['default']
     WdGap: typeof import('./components/wd-gap/wd-gap.vue')['default']
     WdPasswordInput: typeof import('./components/wd-password-input/wd-password-input.vue')['default']
     WdForm: typeof import('./components/wd-form/wd-form.vue')['default']
@@ -91,6 +92,8 @@ declare module 'vue' {
     WdIndexAnchor: typeof import('./components/wd-index-anchor/wd-index-anchor.vue')['default']
     WdText: typeof import('./components/wd-text/wd-text.vue')['default']
     WdCountTo: typeof import('./components/wd-count-to/wd-count-to.vue')['default']
+    WdFloatingPanel: typeof import('./components/wd-floating-panel/wd-floating-panel.vue')['default']
+    WdSignature: typeof import('./components/wd-signature/wd-signature.vue')['default']
   }
 }
 

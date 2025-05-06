@@ -3,35 +3,46 @@
     <wd-toast />
     <demo-block transparent>
       <wd-cell-group border>
-        <wd-datetime-picker label="日期选择" v-model="value1" @confirm="handleConfirm1" />
-        <wd-datetime-picker label="年月日" v-model="value2" type="date" @confirm="handleConfirm2" />
-        <wd-datetime-picker label="年月" v-model="value3" type="year-month" @confirm="handleConfirm3" />
-        <wd-datetime-picker label="年" v-model="value16" type="year" @confirm="handleConfirm16" />
-        <wd-datetime-picker label="时分" v-model="value4" type="time" @confirm="handleConfirm4" />
-        <wd-datetime-picker label="展示格式" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
-        <wd-datetime-picker label="内部格式" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
-        <wd-datetime-picker label="过滤选项" v-model="value7" :filter="filter" @confirm="handleConfirm7" />
+        <wd-datetime-picker :label="$t('ri-qi-xuan-ze')" v-model="value1" @confirm="handleConfirm1" />
+        <wd-datetime-picker :label="$t('nian-yue-ri')" v-model="value2" type="date" @confirm="handleConfirm2" />
+        <wd-datetime-picker :label="$t('nian-yue')" v-model="value3" type="year-month" @confirm="handleConfirm3" />
+        <wd-datetime-picker :label="$t('nian')" v-model="value16" type="year" @confirm="handleConfirm16" />
+        <wd-datetime-picker :label="$t('shi-fen')" v-model="value4" type="time" @confirm="handleConfirm4" />
+        <wd-datetime-picker :label="$t('zhan-shi-ge-shi')" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
+        <wd-datetime-picker :label="$t('nei-bu-ge-shi')" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
+        <wd-datetime-picker :label="$t('guo-lv-xuan-xiang')" v-model="value7" :filter="filter" @confirm="handleConfirm7" />
         <wd-datetime-picker label="before-confirm" v-model="value8" :before-confirm="beforeConfirm" @confirm="handleConfirm8" />
-        <wd-datetime-picker label="错误" v-model="value9" error @confirm="handleConfirm9" />
-        <wd-datetime-picker label="必填" v-model="value10" required @confirm="handleConfirm10" />
-        <wd-datetime-picker label="默认日期" v-model="value2" :default-value="value2" />
-        <wd-datetime-picker label="时间范围一年" :minDate="minDate" :maxDate="maxDate" v-model="value17" @confirm="handleConfirm1" />
+        <wd-datetime-picker :label="$t('cuo-wu')" v-model="value9" error @confirm="handleConfirm9" />
+        <wd-datetime-picker :label="$t('bi-tian')" v-model="value10" required @confirm="handleConfirm10" />
+        <wd-datetime-picker :label="$t('mo-ren-ri-qi')" v-model="value2" :default-value="value2" />
+        <wd-datetime-picker
+          :label="$t('shi-jian-fan-wei-yi-nian')"
+          :minDate="minDate"
+          :maxDate="maxDate"
+          v-model="value17"
+          @confirm="handleConfirm1"
+        />
       </wd-cell-group>
     </demo-block>
-    <demo-block title="label 不传" transparent>
+    <demo-block :title="$t('label-bu-chuan-0')" transparent>
       <wd-datetime-picker v-model="value11" @confirm="handleConfirm11" />
     </demo-block>
-    <demo-block title="大小" transparent>
-      <wd-datetime-picker label="日期选择" size="large" v-model="value12" @confirm="handleConfirm12" />
+    <demo-block :title="$t('da-xiao')" transparent>
+      <wd-datetime-picker :label="$t('ri-qi-xuan-ze-0')" size="large" v-model="value12" @confirm="handleConfirm12" />
     </demo-block>
-    <demo-block title="值靠右展示" transparent>
-      <wd-datetime-picker label="日期选择" align-right v-model="value13" @confirm="handleConfirm13" />
+    <demo-block :title="$t('zhi-kao-you-zhan-shi')" transparent>
+      <wd-datetime-picker :label="$t('ri-qi-xuan-ze-1')" align-right v-model="value13" @confirm="handleConfirm13" />
     </demo-block>
-    <demo-block title="区域选择" transparent>
-      <wd-datetime-picker label="日期选择" title="请选择区间" v-model="value14" @confirm="handleConfirm14" />
+    <demo-block :title="$t('qu-yu-xuan-ze')" transparent>
+      <wd-datetime-picker :label="$t('ri-qi-xuan-ze-2')" :title="$t('qing-xuan-ze-qu-jian')" v-model="value14" @confirm="handleConfirm14" />
     </demo-block>
-    <demo-block title="范围tab展示格式" transparent>
-      <wd-datetime-picker label="日期选择" v-model="value15" @confirm="handleConfirm15" :display-format-tab-label="displayFormatTabLabel" />
+    <demo-block :title="$t('fan-wei-tab-zhan-shi-ge-shi')" transparent>
+      <wd-datetime-picker
+        :label="$t('ri-qi-xuan-ze-3')"
+        v-model="value15"
+        @confirm="handleConfirm15"
+        :display-format-tab-label="displayFormatTabLabel"
+      />
     </demo-block>
   </page-wraper>
 </template>
@@ -44,6 +55,9 @@ import type {
   DatetimePickerInstance
 } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker/types'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const value1 = ref<string>('')
 const value2 = ref<number>(Date.now())
@@ -69,15 +83,15 @@ const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().ge
 const formatter: DatetimePickerViewFormatter = (type, value) => {
   switch (type) {
     case 'year':
-      return value + '年'
+      return value + t('nian-0')
     case 'month':
-      return value + '月'
+      return value + t('yue')
     case 'date':
-      return value + '日'
+      return value + t('ri')
     case 'hour':
-      return value + '时'
+      return value + t('shi')
     case 'minute':
-      return value + '分'
+      return value + t('fen')
     default:
       return value
   }
@@ -89,7 +103,13 @@ const filter: DatetimePickerViewFilter = (type, values) => {
   return values
 }
 const displayFormat: DatetimePickerDisplayFormat = (items) => {
-  return `${items[0].label}年${items[1].label}月${items[2].label}日 ${items[3].label}:${items[4].label}`
+  return t('items0label-nian-items1label-yue-items2label-ri-items3labelitems4label-0', [
+    items[0].label,
+    items[1].label,
+    items[2].label,
+    items[3].label,
+    items[4].label
+  ])
 }
 const toast = useToast()
 const beforeConfirm = (value: number | string | (number | string)[], resolve: (isPass: boolean) => void, picker: DatetimePickerInstance) => {
@@ -98,14 +118,20 @@ const beforeConfirm = (value: number | string | (number | string)[], resolve: (i
     picker.setLoading(false)
     if ((value as number) > Date.now()) {
       resolve(false)
-      toast.error('不能选择大于今天的日期')
+      toast.error(t('bu-neng-xuan-ze-da-yu-jin-tian-de-ri-qi'))
     } else {
       resolve(true)
     }
   }, 2000)
 }
 const displayFormatTabLabel: DatetimePickerDisplayFormatTabLabel = (items) => {
-  return `${items[0].label}年${items[1].label}月${items[2].label}日 ${items[3].label}:${items[4].label}`
+  return t('items0label-nian-items1label-yue-items2label-ri-items3labelitems4label', [
+    items[0].label,
+    items[1].label,
+    items[2].label,
+    items[3].label,
+    items[4].label
+  ])
 }
 
 /** picker触发confirm事件，同步触发confirm事件 */

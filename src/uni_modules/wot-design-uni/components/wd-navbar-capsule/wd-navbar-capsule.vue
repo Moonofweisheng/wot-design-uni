@@ -1,5 +1,5 @@
 <template>
-  <view class="wd-navbar-capsule">
+  <view :class="`wd-navbar-capsule ${customClass}`" :style="customStyle">
     <wd-icon @click="handleBack" name="chevron-left" custom-class="wd-navbar-capsule__icon" />
     <wd-icon @click="handleBackHome" name="home" custom-class="wd-navbar-capsule__icon" />
   </view>
@@ -17,7 +17,10 @@ export default {
 
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
+import { navbarCapsuleProps } from './types'
+
 const emit = defineEmits(['back', 'back-home'])
+defineProps(navbarCapsuleProps)
 
 function handleBack() {
   emit('back')

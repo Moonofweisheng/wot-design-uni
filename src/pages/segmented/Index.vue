@@ -2,36 +2,36 @@
   <view>
     <wd-toast />
     <page-wraper>
-      <demo-block title="大型分段器" transparent>
+      <demo-block :title="$t('da-xing-fen-duan-qi')" transparent>
         <view class="section">
           <wd-segmented :options="list" v-model:value="current" size="large" @change="handleChange"></wd-segmented>
         </view>
       </demo-block>
-      <demo-block title="默认分段器" transparent>
+      <demo-block :title="$t('mo-ren-fen-duan-qi')" transparent>
         <view class="section">
           <wd-segmented :options="list" v-model:value="current1"></wd-segmented>
         </view>
       </demo-block>
 
-      <demo-block title="小型分段器" transparent>
+      <demo-block :title="$t('xiao-xing-fen-duan-qi')" transparent>
         <view class="section">
           <wd-segmented :options="list" v-model:value="current2" size="small"></wd-segmented>
         </view>
       </demo-block>
 
-      <demo-block title="带振动效果的分段器" transparent>
+      <demo-block :title="$t('dai-zhen-dong-xiao-guo-de-fen-duan-qi')" transparent>
         <view class="section">
           <wd-segmented :options="list" v-model:value="current3" :vibrate-short="true"></wd-segmented>
         </view>
       </demo-block>
 
-      <demo-block title="禁用分段器" transparent>
+      <demo-block :title="$t('jin-yong-fen-duan-qi')" transparent>
         <view class="section">
           <wd-segmented :options="list" v-model:value="current5" disabled></wd-segmented>
         </view>
       </demo-block>
 
-      <demo-block title="自定义渲染分段器标签" transparent>
+      <demo-block :title="$t('zi-ding-yi-xuan-ran-fen-duan-qi-biao-qian')" transparent>
         <view class="section">
           <wd-segmented :options="list1" v-model:value="current4" :vibrate-short="true" @change="handleChange">
             <template #label="{ option }">
@@ -46,39 +46,53 @@
           </wd-segmented>
         </view>
       </demo-block>
+
+      <demo-block :title="$t('zai-dan-chu-kuang-zhong-shi-yong')" transparent>
+        <view class="section">
+          <wd-button @click="handleClick">{{ $t('da-kai-dan-chuang') }}</wd-button>
+        </view>
+      </demo-block>
+
+      <wd-popup v-model="showPopup" position="bottom" @after-enter="handlePopupShow" closable custom-style="height: 200px;padding: 0 24rpx;">
+        <view class="title">{{ $t('zai-dan-chu-kuang-zhong-shi-yong-0') }}</view>
+        <wd-segmented :options="list" v-model:value="current6" @change="handleChange" ref="segmentedRef"></wd-segmented>
+      </wd-popup>
     </page-wraper>
   </view>
 </template>
 <script lang="ts" setup>
-import type { SegmentedOption } from '@/uni_modules/wot-design-uni/components/wd-segmented/types'
-import { ref } from 'vue'
+import type { SegmentedInstance, SegmentedOption } from '@/uni_modules/wot-design-uni/components/wd-segmented/types'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const list = ref<string[]>(['评论', '点赞', '贡献', '打赏'])
+const { t } = useI18n()
 
-const list1 = ref([
+const list = computed(() => [t('pingLun'), t('dian-zan'), t('gong-xian'), t('da-shang')])
+
+const list1 = computed(() => [
   {
-    value: '李雷',
+    value: t('li-lei'),
     disabled: false,
     payload: {
       avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg'
     }
   },
   {
-    value: '韩梅梅',
+    value: t('han-mei-mei'),
     disabled: false,
     payload: {
       avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg'
     }
   },
   {
-    value: '林涛',
+    value: t('lin-tao'),
     disabled: true,
     payload: {
       avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg'
     }
   },
   {
-    value: 'Tom',
+    value: t('tom'),
     disabled: false,
     payload: {
       avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/meng.jpg'
@@ -86,20 +100,30 @@ const list1 = ref([
   }
 ])
 
-const current = ref('简介')
+const current = ref(t('jian-jie'))
 
-const current1 = ref('详情')
+const current1 = ref(t('xiang-qing'))
 
-const current2 = ref('评论')
+const current2 = ref(t('pingLun'))
 
-const current3 = ref('打赏')
+const current3 = ref(t('da-shang-0'))
 
-const current4 = ref('韩梅梅')
+const current4 = ref(t('han-mei-mei-0'))
 
-const current5 = ref('评论')
+const current5 = ref(t('pingLun'))
 
 function handleChange(option: SegmentedOption) {
   console.log(option)
+}
+
+const current6 = ref(t('dian-zan'))
+const segmentedRef = ref<SegmentedInstance>()
+const showPopup = ref(false)
+function handleClick() {
+  showPopup.value = true
+}
+function handlePopupShow() {
+  segmentedRef.value?.updateActiveStyle()
 }
 </script>
 <style lang="scss" scoped>
@@ -110,5 +134,12 @@ function handleChange(option: SegmentedOption) {
   &-slot {
     padding: 4px;
   }
+}
+.title {
+  display: flex;
+  font-size: 32rpx;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0;
 }
 </style>

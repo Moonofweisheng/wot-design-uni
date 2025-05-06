@@ -2,30 +2,30 @@
   <page-wraper>
     <wd-toast />
     <view>
-      <demo-block title="基本用法">
-        <wd-button @click="showActions1">弹出菜单</wd-button>
+      <demo-block :title="$t('jiBenYongFa')">
+        <wd-button @click="showActions1">{{ $t('danChuCaiDan') }}</wd-button>
         <wd-action-sheet v-model="show" :actions="actions" />
       </demo-block>
-      <demo-block title="选项状态">
-        <wd-button @click="showActions2">弹出菜单</wd-button>
+      <demo-block :title="$t('xuanXiangZhuangTai')">
+        <wd-button @click="showActions2">{{ $t('danChuCaiDan') }}</wd-button>
       </demo-block>
-      <demo-block title="取消按钮">
-        <wd-button @click="showActions3">弹出菜单</wd-button>
-        <wd-action-sheet v-model="show1" :actions="actions" cancel-text="取消" @close="close1" />
+      <demo-block :title="$t('quXiaoAnNiu')">
+        <wd-button @click="showActions3">{{ $t('danChuCaiDan') }}</wd-button>
+        <wd-action-sheet v-model="show1" :actions="actions" :cancel-text="$t('qu-xiao')" @close="close1" />
       </demo-block>
-      <demo-block title="自定义面板单行">
-        <wd-button @click="showActions4">弹出菜单</wd-button>
-        <wd-action-sheet v-model="show2" :panels="panels" cancel-text="取消" @close="close2" @select="select" />
+      <demo-block :title="$t('ziDingYiMianBanDanHang')">
+        <wd-button @click="showActions4">{{ $t('danChuCaiDan') }}</wd-button>
+        <wd-action-sheet v-model="show2" :panels="panels" :cancel-text="$t('qu-xiao')" @close="close2" @select="select" />
       </demo-block>
-      <demo-block title="自定义面板多行">
-        <wd-button @click="showActions5">弹出菜单</wd-button>
-        <wd-action-sheet v-model="show3" :panels="panels" cancel-text="取消" @close="close3" @select="select1" />
+      <demo-block :title="$t('ziDingYiMianBanDuoHang')">
+        <wd-button @click="showActions5">{{ $t('danChuCaiDan') }}</wd-button>
+        <wd-action-sheet v-model="show3" :panels="panels" :cancel-text="$t('qu-xiao')" @close="close3" @select="select1" />
       </demo-block>
-      <demo-block title="标题">
-        <wd-button @click="showActions6">弹出菜单</wd-button>
+      <demo-block :title="$t('biaoTi-0')">
+        <wd-button @click="showActions6">{{ $t('danChuCaiDan') }}</wd-button>
       </demo-block>
-      <wd-action-sheet v-model="show4" title="标题" @close="close4" :cancelText="cancelText">
-        <view style="padding: 15px 15px 150px 15px">内容</view>
+      <wd-action-sheet v-model="show4" :title="$t('biaoTi-0')" @close="close4" :cancelText="cancelText">
+        <view style="padding: 15px 15px 150px 15px">{{ $t('neiRong') }}</view>
       </wd-action-sheet>
     </view>
   </page-wraper>
@@ -33,7 +33,8 @@
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
 import { ref } from 'vue'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const show = ref<boolean>(false)
 const actions = ref<any[]>([])
 const panels = ref<any[]>([])
@@ -47,14 +48,14 @@ function showActions1() {
   show.value = true
   actions.value = [
     {
-      name: '选项1'
+      name: t('xuanXiang_1-0')
     },
     {
-      name: '选项2'
+      name: t('xuanXiang_2-0')
     },
     {
-      name: '选项3',
-      subname: '描述信息'
+      name: t('xuanXiang_3-0'),
+      subname: t('miaoShuXinXi-0')
     }
   ]
 }
@@ -62,11 +63,11 @@ function showActions2() {
   show.value = true
   actions.value = [
     {
-      name: '颜色',
+      name: t('yanSe'),
       color: '#0083ff'
     },
     {
-      name: '禁用',
+      name: t('jinYong'),
       disabled: true
     },
     {
@@ -78,14 +79,14 @@ function showActions3() {
   show1.value = true
   actions.value = [
     {
-      name: '选项1'
+      name: t('xuanXiang_1-0')
     },
     {
-      name: '选项2'
+      name: t('xuanXiang_2-0')
     },
     {
-      name: '选项3',
-      subname: '描述信息'
+      name: t('xuanXiang_3-0'),
+      subname: t('miaoShuXinXi-0')
     }
   ]
 }
@@ -94,27 +95,27 @@ function showActions4() {
   panels.value = [
     {
       iconUrl: 'https://img12.360buyimg.com/imagetools/jfs/t1/122016/33/6657/1362/5f0692a1E8708d245/e47299e5945a6956.png',
-      title: '微信好友'
+      title: t('weiXinHaoYou')
     },
     {
       iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/111572/11/11734/1245/5f0692a1E39d13d21/b35dfe9243bd6c2a.png',
-      title: '微信朋友圈'
+      title: t('weiXinPengYouQuan')
     },
     {
       iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/132639/25/4003/945/5f069336E18778248/fa181913030bed8a.png',
-      title: 'QQ好友'
+      title: t('qqHaoYou')
     },
     {
       iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/134807/4/3950/1256/5f069336E76949e27/d20641da8e699f07.png',
-      title: '微信收藏'
+      title: t('weiXinShouCang')
     },
     {
       iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/111572/11/11734/1245/5f0692a1E39d13d21/b35dfe9243bd6c2a.png',
-      title: '微信朋友圈'
+      title: t('weiXinPengYouQuan')
     },
     {
       iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/132639/25/4003/945/5f069336E18778248/fa181913030bed8a.png',
-      title: 'QQ好友'
+      title: t('qqHaoYou')
     }
   ]
 }
@@ -124,49 +125,49 @@ function showActions5() {
     [
       {
         iconUrl: 'https://img12.360buyimg.com/imagetools/jfs/t1/122016/33/6657/1362/5f0692a1E8708d245/e47299e5945a6956.png',
-        title: '微信好友'
+        title: t('weiXinHaoYou')
       },
       {
         iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/111572/11/11734/1245/5f0692a1E39d13d21/b35dfe9243bd6c2a.png',
-        title: '微信朋友圈'
+        title: t('weiXinPengYouQuan')
       },
       {
         iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/132639/25/4003/945/5f069336E18778248/fa181913030bed8a.png',
-        title: 'QQ好友'
+        title: t('qqHaoYou')
       },
       {
         iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/134807/4/3950/1256/5f069336E76949e27/d20641da8e699f07.png',
-        title: '微信收藏'
+        title: t('weiXinShouCang')
       },
       {
         iconUrl: 'https://img12.360buyimg.com/imagetools/jfs/t1/122016/33/6657/1362/5f0692a1E8708d245/e47299e5945a6956.png',
-        title: '微信好友'
+        title: t('weiXinHaoYou')
       },
       {
         iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/111572/11/11734/1245/5f0692a1E39d13d21/b35dfe9243bd6c2a.png',
-        title: '微信朋友圈'
+        title: t('weiXinPengYouQuan')
       },
       {
         iconUrl: 'https://img12.360buyimg.com/imagetools/jfs/t1/122016/33/6657/1362/5f0692a1E8708d245/e47299e5945a6956.png',
-        title: '微信好友'
+        title: t('weiXinHaoYou')
       },
       {
         iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/111572/11/11734/1245/5f0692a1E39d13d21/b35dfe9243bd6c2a.png',
-        title: '微信朋友圈'
+        title: t('weiXinPengYouQuan')
       }
     ],
     [
       {
         iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/132639/25/4003/945/5f069336E18778248/fa181913030bed8a.png',
-        title: 'QQ好友'
+        title: t('qqHaoYou')
       },
       {
         iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/134807/4/3950/1256/5f069336E76949e27/d20641da8e699f07.png',
-        title: '微信收藏'
+        title: t('weiXinShouCang')
       },
       {
         iconUrl: 'https://img12.360buyimg.com/imagetools/jfs/t1/122016/33/6657/1362/5f0692a1E8708d245/e47299e5945a6956.png',
-        title: '微信好友'
+        title: t('weiXinHaoYou')
       }
     ]
   ]
@@ -192,10 +193,10 @@ function close4() {
 
 const toast = useToast()
 function select({ item, index }: { item: any; index: number }) {
-  toast.show(`当前选中项: ${item.title}, 下标: ${index}`)
+  toast.show(t('dangQianXuanZhongXiangItemtitleXiaBiaoIndex', [item.title, index]))
 }
 function select1({ item, rowIndex, colIndex }: { item: any; rowIndex: number; colIndex: number }) {
-  toast.show(`当前选中项: ${item.title}, 行下标: ${rowIndex}, 列下标: ${colIndex}`)
+  toast.show(t('dangQianXuanZhongXiangItemtitleHangXiaBiaoRowindexLieXiaBiaoColindex', [item.title, rowIndex, colIndex]))
 }
 </script>
 <style lang="scss" scoped></style>

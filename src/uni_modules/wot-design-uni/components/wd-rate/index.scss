@@ -9,16 +9,17 @@
   @include e(item) {
     position: relative;
     display: inline-block;
+    touch-action: none; // 禁用默认触摸行为
   }
-  @include e(item-star) {
-    display: inline-block;
-    vertical-align: top;
-
-    @include m(active) {
-      position: absolute;
-      left: 0;
-      top: 0;
-      overflow: hidden;
-    }
+  @include edeep(item-star) {
+    -webkit-background-clip: text !important;
+    color: transparent;
+  }
+  @include e(item-half) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    width: 50%;
   }
 }

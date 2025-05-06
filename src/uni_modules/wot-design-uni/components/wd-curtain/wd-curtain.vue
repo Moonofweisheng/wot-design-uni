@@ -1,11 +1,12 @@
 <template>
-  <view>
+  <view class="wd-curtain-wrapper">
     <wd-popup
-      v-model="show"
+      v-model="modelValue"
       transition="zoom-in"
       position="center"
       :close-on-click-modal="closeOnClickModal"
       :hide-when-close="hideWhenClose"
+      :z-index="zIndex"
       @before-enter="beforeenter"
       @enter="enter"
       @after-enter="afterenter"
@@ -19,7 +20,14 @@
     >
       <view class="wd-curtain__content">
         <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
-        <wd-icon name="close-outline" :custom-class="`wd-curtain__content-close ${closePosition}`" @click="close" />
+        <slot name="close">
+          <wd-icon
+            name="close-outline"
+            :custom-class="`wd-curtain__content-close ${closePosition} ${customCloseClass}`"
+            :custom-style="customCloseStyle"
+            @click="close"
+          />
+        </slot>
       </view>
     </wd-popup>
   </view>
@@ -39,11 +47,10 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { curtainProps } from './types'
 
 const props = defineProps(curtainProps)
-
 const emit = defineEmits([
   'beforeenter',
   'enter',
@@ -56,53 +63,44 @@ const emit = defineEmits([
   'click-modal',
   'load',
   'error',
-  'click'
+  'click',
+  'update:modelValue'
 ])
 
-const show = ref<boolean>(false)
-const imgSucc = ref<boolean>(true)
-const imgStyle = ref<string>('')
-const imgScale = ref<number>(1)
+const modelValue = ref(props.modelValue || props.value)
+
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    modelValue.value = newVal
+  }
+)
 
 watch(
   () => props.value,
-  () => {
-    computedShowImg()
-  },
-  {
-    deep: true,
-    immediate: true
+  (newVal) => {
+    modelValue.value = newVal
   }
 )
 
-watch(
-  () => props.width,
-  () => {
-    computeImgStyle()
-  },
-  {
-    deep: true,
-    immediate: true
+watch(modelValue, (newVal) => {
+  emit('update:modelValue', newVal)
+  if (!newVal) {
+    emit('close')
   }
-)
+})
 
-function computedShowImg() {
-  if (props.value && imgSucc.value) {
-    show.value = true
-  } else {
-    show.value = false
-    close()
-  }
-}
+const imgSucc = ref<boolean>(true)
+const imgScale = ref<number>(1)
 
-function computeImgStyle() {
+const imgStyle = computed(() => {
   let style = ''
   if (props.width) {
     style += `width: ${props.width}px ;`
     style += `height: ${props.width / imgScale.value}px`
   }
-  imgStyle.value = style
-}
+  return style
+})
 
 function beforeenter() {
   emit('beforeenter')
@@ -129,8 +127,7 @@ function afterleave() {
 }
 
 function close() {
-  show.value = false
-  emit('close')
+  modelValue.value = false
 }
 
 function clickModal() {
@@ -141,7 +138,6 @@ function imgLoad(event: any) {
   const { height, width } = event.detail
   imgScale.value = width / height
   imgSucc.value = true
-  computeImgStyle()
   emit('load')
 }
 function imgErr() {

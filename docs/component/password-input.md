@@ -1,5 +1,3 @@
-<frame/>
-
 # PasswordInput 密码输入框 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.0</el-tag>
 
 带网格的输入框组件，可以用于输入密码、短信验证码等场景，通常与[数字键盘](./number-keyboard.md)组件配合使用。
@@ -85,7 +83,7 @@ watch(value, (newVal) => {
 | info       | 输入框下方文字提示                               | string           | -      | -      | -        |
 | error-info | 输入框下方错误提示                               | string           | -      | -      | -        |
 | length     | 密码最大长度                                     | number           | -      | 6      | -        |
-| gutter     | 输入框格子之间的间距，如 20px 2em，默认单位为 px | number \| string | -      | 0      | -        |
+| gutter     | 输入框格子之间的间距，如 20px 2em，默认单位为 px | number / string | -      | 0      | -        |
 | mask       | 是否隐藏密码内容                                 | boolean          | -      | true   | -        |
 | focused    | 是否已聚焦，聚焦时会显示光标                     | boolean          | -      | false  | -        |
 

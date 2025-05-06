@@ -1,16 +1,18 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-03-18 16:01:19
+ * @LastEditTime: 2024-12-07 18:52:34
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-radio\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-radio/types.ts
  * 记得注释
  */
 import type { PropType } from 'vue'
-import { baseProps, makeRequiredProp } from '../common/props'
+import { baseProps, makeRequiredProp, makeStringProp } from '../common/props'
 
 export type RadioShape = 'dot' | 'button' | 'check'
+
+export type RadioIconPlacement = 'left' | 'right' | 'auto'
 
 export const radioProps = {
   ...baseProps,
@@ -38,5 +40,12 @@ export const radioProps = {
     default: null
   },
   /** 最大宽度 */
-  maxWidth: String
+  maxWidth: String,
+  /**
+   * 图标位置
+   * 可选值: 'left' | 'right' | 'auto'
+   */
+  iconPlacement: {
+    type: String as PropType<RadioIconPlacement>
+  }
 }

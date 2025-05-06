@@ -26,6 +26,7 @@
           :range-prompt="rangePrompt"
           :allow-same-day="allowSameDay"
           :default-time="defaultTime"
+          :showTitle="index !== 0"
           @change="handleDateChange"
         />
       </view>
@@ -63,7 +64,7 @@ export default {
 <script lang="ts" setup>
 import wdPickerView from '../../wd-picker-view/wd-picker-view.vue'
 import { computed, ref, watch, onMounted } from 'vue'
-import { debounce, isArray, isEqual, isNumber, requestAnimationFrame } from '../../common/util'
+import { debounce, isArray, isEqual, isNumber, pause } from '../../common/util'
 import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData, getWeekLabel } from '../utils'
 import Month from '../month/month.vue'
 import { monthPanelProps, type MonthInfo, type MonthPanelTimeType, type MonthPanelExpose } from './types'
@@ -131,17 +132,18 @@ const weekLabel = computed(() => {
 
 // 滚动区域的高度
 const scrollHeight = computed(() => {
-  const scrollHeight: number = timeType.value ? (props.panelHeight || 378) - 125 : props.panelHeight || 378
+  const scrollHeight: number = timeType.value ? props.panelHeight - 125 : props.panelHeight
   return scrollHeight
 })
 
 // 月份日期和月份高度
 const months = computed<MonthInfo[]>(() => {
-  return getMonths(props.minDate, props.maxDate).map((month) => {
+  return getMonths(props.minDate, props.maxDate).map((month, index) => {
     const offset = (7 + new Date(month).getDay() - props.firstDayOfWeek) % 7
     const totalDay = getMonthEndDay(new Date(month).getFullYear(), new Date(month).getMonth() + 1)
+    const rows = Math.ceil((offset + totalDay) / 7)
     return {
-      height: (offset + totalDay > 35 ? 64 * 6 : 64 * 5) + 45,
+      height: rows * 64 + (rows - 1) * 4 + (index === 0 ? 0 : 45), // 每行64px高度,除最后一行外每行加4px margin,加上标题45px
       date: month
     }
   })
@@ -185,31 +187,45 @@ onMounted(() => {
 /**
  * 使当前日期或者选中日期滚动到可视区域
  */
-function scrollIntoView() {
-  requestAnimationFrame(() => {
-    let activeDate: number | null = 0
-    if (isArray(props.value)) {
-      activeDate = props.value![0]
-    } else if (isNumber(props.value)) {
-      activeDate = props.value
-    }
+async function scrollIntoView() {
+  // 等待渲染完毕
+  await pause()
+  let activeDate: number | null = 0
+  if (isArray(props.value)) {
+    // 对数组按时间排序,取第一个值
+    const sortedValue = [...props.value].sort((a, b) => (a || 0) - (b || 0))
+    activeDate = sortedValue[0]
+  } else if (isNumber(props.value)) {
+    activeDate = props.value
+  }
 
-    if (!activeDate) {
-      activeDate = Date.now()
-    }
+  if (!activeDate) {
+    activeDate = Date.now()
+  }
 
-    let top: number = 0
-    for (let index = 0; index < months.value.length; index++) {
-      if (compareMonth(months.value[index].date, activeDate) === 0) {
-        break
-      }
-      top += months.value[index] ? Number(months.value[index].height) : 0
+  let top: number = 0
+  let activeMonthIndex = -1
+  for (let index = 0; index < months.value.length; index++) {
+    if (compareMonth(months.value[index].date, activeDate) === 0) {
+      activeMonthIndex = index
+      // 找到选中月份后,计算选中日期在月份中的位置
+      const date = new Date(activeDate)
+      const day = date.getDate()
+      const firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
+      const offset = (7 + firstDay.getDay() - props.firstDayOfWeek) % 7
+      const row = Math.floor((offset + day - 1) / 7)
+      // 每行高度64px,每行加4px margin
+      top += row * 64 + row * 4
+      break
     }
-    scrollTop.value = 0
-    requestAnimationFrame(() => {
-      scrollTop.value = top
-    })
-  })
+    top += months.value[index] ? Number(months.value[index].height) : 0
+  }
+  scrollTop.value = 0
+  if (top > 0) {
+    await pause()
+    // 如果不是第一个月才加45
+    scrollTop.value = top + (activeMonthIndex > 0 ? 45 : 0)
+  }
 }
 /**
  * 获取时间 picker 的数据
@@ -341,7 +357,7 @@ function doSetSubtitle(scrollTop: number) {
   let height: number = 0 // 月份高度和
   for (let index = 0; index < months.value.length; index++) {
     height = height + months.value[index].height
-    if (scrollTop < height + 45) {
+    if (scrollTop < height) {
       scrollIndex.value = index
       return
     }

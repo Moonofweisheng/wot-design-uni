@@ -2,42 +2,43 @@
   <template v-if="sticky">
     <wd-sticky-box>
       <view
-        :class="`wd-tabs ${customClass} ${slidableNum < items.length ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`"
+        :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < children.length && mapNum !== 0 ? 'is-map' : ''}`"
         :style="customStyle"
       >
         <wd-sticky :offset-top="offsetTop">
-          <!--头部导航容器-->
           <view class="wd-tabs__nav wd-tabs__nav--sticky">
             <view class="wd-tabs__nav--wrap">
-              <scroll-view :scroll-x="slidableNum < items.length" scroll-with-animation :scroll-left="state.scrollLeft">
+              <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">
                 <view class="wd-tabs__nav-container">
-                  <!--nav列表-->
                   <view
                     @click="handleSelect(index)"
-                    v-for="(item, index) in items"
+                    v-for="(item, index) in children"
                     :key="index"
                     :class="`wd-tabs__nav-item  ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
                     :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
                   >
-                    {{ item.title }}
+                    <wd-badge v-if="item.badgeProps" v-bind="item.badgeProps">
+                      <text class="wd-tabs__nav-item-text">{{ item.title }}</text>
+                    </wd-badge>
+                    <text v-else class="wd-tabs__nav-item-text">{{ item.title }}</text>
+
+                    <view class="wd-tabs__line wd-tabs__line--inner" v-if="state.activeIndex === index && state.useInnerLine"></view>
                   </view>
-                  <!--下划线-->
                   <view class="wd-tabs__line" :style="state.lineStyle"></view>
                 </view>
               </scroll-view>
             </view>
-            <!--map表-->
-            <view class="wd-tabs__map" v-if="mapNum < items.length && mapNum !== 0">
+            <view class="wd-tabs__map" v-if="mapNum < children.length && mapNum !== 0">
               <view :class="`wd-tabs__map-btn  ${state.animating ? 'is-open' : ''}`" @click="toggleMap">
                 <view :class="`wd-tabs__map-arrow  ${state.animating ? 'is-open' : ''}`">
                   <wd-icon name="arrow-down" />
                 </view>
               </view>
               <view class="wd-tabs__map-header" :style="`${state.mapShow ? '' : 'display:none;'}  ${state.animating ? 'opacity:1;' : ''}`">
-                {{ translate('all') }}
+                {{ mapTitle || translate('all') }}
               </view>
               <view :class="`wd-tabs__map-body  ${state.animating ? 'is-open' : ''}`" :style="state.mapShow ? '' : 'display:none'">
-                <view class="wd-tabs__map-nav-item" v-for="(item, index) in items" :key="index" @click="handleSelect(index)">
+                <view class="wd-tabs__map-nav-item" v-for="(item, index) in children" :key="index" @click="handleSelect(index)">
                   <view
                     :class="`wd-tabs__map-nav-btn ${state.activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`"
                     :style="
@@ -58,14 +59,12 @@
           </view>
         </wd-sticky>
 
-        <!--标签页-->
         <view class="wd-tabs__container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchEnd">
           <view :class="['wd-tabs__body', animated ? 'is-animated' : '']" :style="bodyStyle">
             <slot />
           </view>
         </view>
 
-        <!--map表的阴影浮层-->
         <view
           class="wd-tabs__mask"
           :style="`${state.mapShow ? '' : 'display:none;'} ${state.animating ? 'opacity:1;' : ''}`"
@@ -76,39 +75,39 @@
   </template>
 
   <template v-else>
-    <view :class="`wd-tabs  ${customClass} ${slidableNum < items.length ? 'is-slide' : ''} ${mapNum < items.length && mapNum !== 0 ? 'is-map' : ''}`">
-      <!--头部导航容器-->
+    <view :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < children.length && mapNum !== 0 ? 'is-map' : ''}`">
       <view class="wd-tabs__nav">
         <view class="wd-tabs__nav--wrap">
-          <scroll-view :scroll-x="slidableNum < items.length" scroll-with-animation :scroll-left="state.scrollLeft">
+          <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">
             <view class="wd-tabs__nav-container">
-              <!--nav列表-->
               <view
-                v-for="(item, index) in items"
+                v-for="(item, index) in children"
                 @click="handleSelect(index)"
                 :key="index"
                 :class="`wd-tabs__nav-item ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
                 :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
               >
-                {{ item.title }}
+                <wd-badge custom-class="wd-tabs__nav-item-badge" v-if="item.badgeProps" v-bind="item.badgeProps">
+                  <text class="wd-tabs__nav-item-text">{{ item.title }}</text>
+                </wd-badge>
+                <text v-else class="wd-tabs__nav-item-text">{{ item.title }}</text>
+                <view class="wd-tabs__line wd-tabs__line--inner" v-if="state.activeIndex === index && state.useInnerLine"></view>
               </view>
-              <!--下划线-->
               <view class="wd-tabs__line" :style="state.lineStyle"></view>
             </view>
           </scroll-view>
         </view>
-        <!--map表-->
-        <view class="wd-tabs__map" v-if="mapNum < items.length && mapNum !== 0">
+        <view class="wd-tabs__map" v-if="mapNum < children.length && mapNum !== 0">
           <view class="wd-tabs__map-btn" @click="toggleMap">
             <view :class="`wd-tabs__map-arrow ${state.animating ? 'is-open' : ''}`">
               <wd-icon name="arrow-down" />
             </view>
           </view>
           <view class="wd-tabs__map-header" :style="`${state.mapShow ? '' : 'display:none;'}  ${state.animating ? 'opacity:1;' : ''}`">
-            {{ translate('all') }}
+            {{ mapTitle || translate('all') }}
           </view>
           <view :class="`wd-tabs__map-body ${state.animating ? 'is-open' : ''}`" :style="state.mapShow ? '' : 'display:none'">
-            <view class="wd-tabs__map-nav-item" v-for="(item, index) in items" :key="index" @click="handleSelect(index)">
+            <view class="wd-tabs__map-nav-item" v-for="(item, index) in children" :key="index" @click="handleSelect(index)">
               <view :class="`wd-tabs__map-nav-btn ${state.activeIndex === index ? 'is-active' : ''}  ${item.disabled ? 'is-disabled' : ''}`">
                 {{ item.title }}
               </view>
@@ -117,14 +116,12 @@
         </view>
       </view>
 
-      <!--标签页-->
       <view class="wd-tabs__container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchEnd">
         <view :class="['wd-tabs__body', animated ? 'is-animated' : '']" :style="bodyStyle">
           <slot />
         </view>
       </view>
 
-      <!--map表的阴影浮层-->
       <view class="wd-tabs__mask" :style="`${state.mapShow ? '' : 'display:none;'}  ${state.animating ? 'opacity:1' : ''}`" @click="toggleMap"></view>
     </view>
   </template>
@@ -143,15 +140,15 @@ export default {
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdSticky from '../wd-sticky/wd-sticky.vue'
 import wdStickyBox from '../wd-sticky-box/wd-sticky-box.vue'
-
-import { computed, getCurrentInstance, onMounted, watch, nextTick, reactive, type CSSProperties } from 'vue'
+import { computed, getCurrentInstance, onMounted, watch, nextTick, reactive, type CSSProperties, type ComponentInstance } from 'vue'
 import { addUnit, checkNumRange, debounce, getRect, isDef, isNumber, isString, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
-import { TABS_KEY, tabsProps } from './types'
+import { TABS_KEY, tabsProps, type TabsExpose } from './types'
 import { useChildren } from '../composables/useChildren'
 import { useTranslate } from '../composables/useTranslate'
 
 const $item = '.wd-tabs__nav-item'
+const $itemText = '.wd-tabs__nav-item-text'
 const $container = '.wd-tabs__nav-container'
 
 const props = defineProps(tabsProps)
@@ -162,26 +159,22 @@ const { translate } = useTranslate('tabs')
 const state = reactive({
   activeIndex: 0, // 选中值的索引，默认第一个
   lineStyle: 'display:none;', // 激活项边框线样式
+  useInnerLine: false, // 是否使用内部激活项边框线，当外部激活下划线未成功渲染时显示内部定位的
   inited: false, // 是否初始化
   animating: false, // 是否动画中
   mapShow: false, // map的开关
   scrollLeft: 0 // scroll-view偏移量
 })
 
-// map的开关
-
 const { children, linkChildren } = useChildren(TABS_KEY)
-linkChildren({ state })
+linkChildren({ state, props })
 
 const { proxy } = getCurrentInstance() as any
 
 const touch = useTouch()
 
-// tabs数据
-const items = computed(() => {
-  return children.map((child, index) => {
-    return { disabled: child.disabled, title: child.title, name: isDef(child.name) ? child.name : index }
-  })
+const innerSlidable = computed(() => {
+  return props.slidable === 'always' || children.length > props.slidableNum
 })
 
 const bodyStyle = computed(() => {
@@ -196,29 +189,37 @@ const bodyStyle = computed(() => {
   })
 })
 
+const getTabName = (tab: ComponentInstance<any>, index: number) => {
+  return isDef(tab.name) ? tab.name : index
+}
+
+/**
+ * 更新激活项
+ * @param value 激活值
+ * @param init 是否已初始化
+ * @param setScroll // 是否设置scroll-view滚动
+ */
+const updateActive = (value: number | string = 0, init: boolean = false, setScroll: boolean = true) => {
+  // 没有tab子元素，不执行任何操作
+  if (children.length === 0) return
+
+  value = getActiveIndex(value)
+  // 被禁用，不执行任何操作
+  if (children[value].disabled) return
+  state.activeIndex = value
+  if (setScroll) {
+    updateLineStyle(init === false)
+    scrollIntoView()
+  }
+  setActiveTab()
+}
+
 /**
  * @description 修改选中的tab Index
  * @param {String |Number } value - radio绑定的value或者tab索引，默认值0
  * @param {Boolean } init - 是否伴随初始化操作
  */
-const setActive = debounce(
-  function (value: number | string = 0, init: boolean = false, setScroll: boolean = true) {
-    // 没有tab子元素，不执行任何操作
-    if (items.value.length === 0) return
-
-    value = getActiveIndex(value)
-    // 被禁用，不执行任何操作
-    if (items.value[value].disabled) return
-    state.activeIndex = value
-    if (setScroll) {
-      updateLineStyle(init === false)
-      scrollIntoView()
-    }
-    setActiveTab()
-  },
-  100,
-  { leading: false }
-)
+const setActive = debounce(updateActive, 100, { leading: true })
 
 watch(
   () => props.modelValue,
@@ -282,15 +283,12 @@ watch(
 onMounted(() => {
   state.inited = true
   nextTick(() => {
-    setActive(props.modelValue, true)
+    updateActive(props.modelValue, true)
+    state.useInnerLine = true
   })
 })
 
-/**
- * @description nav map list 开关
- */
 function toggleMap() {
-  // 必须保证display和transition不在同一个帧
   if (state.mapShow) {
     state.animating = false
     setTimeout(() => {
@@ -305,47 +303,55 @@ function toggleMap() {
 }
 
 /**
- * @description 更新navBar underline的偏移量
- * @param {Boolean} animation 是否伴随动画
+ * 更新 underline的偏移量
+ * @param animation 是否开启动画
  */
-function updateLineStyle(animation: boolean = true) {
+async function updateLineStyle(animation: boolean = true) {
   if (!state.inited) return
-  const { lineWidth, lineHeight } = props
-  getRect($item, true, proxy).then((rects) => {
+  const { autoLineWidth, lineWidth, lineHeight } = props
+  try {
     const lineStyle: CSSProperties = {}
-
     if (isDef(lineWidth)) {
       lineStyle.width = addUnit(lineWidth)
+    } else {
+      if (autoLineWidth) {
+        const textRects = await getRect($itemText, true, proxy)
+        const textWidth = Number(textRects[state.activeIndex].width)
+        lineStyle.width = addUnit(textWidth)
+      }
     }
     if (isDef(lineHeight)) {
       lineStyle.height = addUnit(lineHeight)
       lineStyle.borderRadius = `calc(${addUnit(lineHeight)} / 2)`
     }
+    const rects = await getRect($item, true, proxy)
     const rect = rects[state.activeIndex]
     let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + Number(curr.width), 0) + Number(rect.width) / 2
-    lineStyle.transform = `translateX(${left}px) translateX(-50%)`
-    if (animation) {
-      lineStyle.transition = 'width 300ms ease, transform 300ms ease'
+    if (left) {
+      lineStyle.transform = `translateX(${left}px) translateX(-50%)`
+      if (animation) {
+        lineStyle.transition = 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);'
+      }
+      state.useInnerLine = false
+      state.lineStyle = objToStyle(lineStyle)
     }
-    state.lineStyle = objToStyle(lineStyle)
-  })
-}
-/**
- * @description 通过控制tab的active来展示选定的tab
- */
-function setActiveTab() {
-  if (!state.inited) return
-  if (items.value[state.activeIndex].name !== props.modelValue) {
-    emit('change', {
-      index: state.activeIndex,
-      name: items.value[state.activeIndex].name
-    })
-    emit('update:modelValue', items.value[state.activeIndex].name)
+  } catch (error) {
+    console.error('[wot design] error(wd-tabs): update line style failed', error)
   }
 }
-/**
- * @description scroll-view滑动到active的tab_nav
- */
+
+function setActiveTab() {
+  if (!state.inited) return
+  const name = getTabName(children[state.activeIndex], state.activeIndex)
+  if (name !== props.modelValue) {
+    emit('change', {
+      index: state.activeIndex,
+      name: name
+    })
+    emit('update:modelValue', name)
+  }
+}
+
 function scrollIntoView() {
   if (!state.inited) return
   Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)]).then(([navItemsRects, navRect]) => {
@@ -362,13 +368,16 @@ function scrollIntoView() {
     }
   })
 }
+
 /**
  * @description 单击tab的处理
  * @param index
  */
 function handleSelect(index: number) {
   if (index === undefined) return
-  const { name, disabled } = items.value[index]
+  const { disabled } = children[index]
+  const name = getTabName(children[index], index)
+
   if (disabled) {
     emit('disabled', {
       index,
@@ -383,10 +392,6 @@ function handleSelect(index: number) {
     name
   })
 }
-/**
- * @description touch handle
- * @param event
- */
 function onTouchStart(event: any) {
   if (!props.swipeable) return
   touch.touchStart(event)
@@ -402,29 +407,28 @@ function onTouchEnd() {
   if (direction.value === 'horizontal' && offsetX.value >= minSwipeDistance) {
     if (deltaX.value > 0 && state.activeIndex !== 0) {
       setActive(state.activeIndex - 1)
-    } else if (deltaX.value < 0 && state.activeIndex !== items.value.length - 1) {
-      setActive(state.activeIndex + 1)
+    } else if (deltaX.value < 0 && state.activeIndex !== children.length - 1) {
       setActive(state.activeIndex + 1)
     }
   }
 }
 function getActiveIndex(value: number | string) {
-  // name代表的索引超过了items的边界，自动用0兜底
-  if (isNumber(value) && value >= items.value.length) {
+  // name代表的索引超过了children长度的边界，自动用0兜底
+  if (isNumber(value) && value >= children.length) {
     // eslint-disable-next-line prettier/prettier
     console.error('[wot design] warning(wd-tabs): the type of tabs\' value is Number shouldn\'t be less than its children')
     value = 0
   }
   // 如果是字符串直接匹配，匹配不到用0兜底
   if (isString(value)) {
-    const index = items.value.findIndex((item) => item.name === value)
+    const index = children.findIndex((item) => item.name === value)
     value = index === -1 ? 0 : index
   }
 
   return value
 }
 
-defineExpose({
+defineExpose<TabsExpose>({
   setActive,
   scrollIntoView,
   updateLineStyle

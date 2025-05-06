@@ -2,35 +2,41 @@
   <view>
     <wd-popup
       transition="zoom-in"
-      v-model="show"
-      :close-on-click-modal="closeOnClickModal"
-      :lazy-render="lazyRender"
+      v-model="messageState.show"
+      :close-on-click-modal="messageState.closeOnClickModal"
+      :lazy-render="messageState.lazyRender"
       custom-class="wd-message-box"
       @click-modal="toggleModal('modal')"
-      :z-index="zIndex"
+      :z-index="messageState.zIndex"
       :duration="200"
     >
       <view :class="rootClass">
         <view :class="bodyClass">
-          <view v-if="title" class="wd-message-box__title">
-            {{ title }}
+          <view v-if="messageState.title" class="wd-message-box__title">
+            {{ messageState.title }}
           </view>
           <view class="wd-message-box__content">
-            <block v-if="type === 'prompt'">
-              <wd-input v-model="inputValue" :type="inputType" size="large" :placeholder="inputPlaceholder || '请输入'" @input="inputValChange" />
-              <view v-if="showErr" class="wd-message-box__input-error">
-                {{ inputError || translate('inputNoValidate') }}
+            <block v-if="messageState.type === 'prompt'">
+              <wd-input
+                v-model="messageState.inputValue"
+                :type="messageState.inputType"
+                :size="messageState.inputSize"
+                :placeholder="messageState.inputPlaceholder"
+                @input="inputValChange"
+              />
+              <view v-if="messageState.showErr" class="wd-message-box__input-error">
+                {{ messageState.inputError || translate('inputNoValidate') }}
               </view>
             </block>
-            <slot>{{ msg }}</slot>
+            <slot>{{ messageState.msg }}</slot>
           </view>
         </view>
-        <view :class="`wd-message-box__actions ${showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`">
-          <wd-button type="info" block v-if="showCancelButton" custom-style="margin-right: 16px;" @click="toggleModal('cancel')">
-            {{ cancelButtonText || translate('cancel') }}
+        <view :class="`wd-message-box__actions ${messageState.showCancelButton ? 'wd-message-box__flex' : 'wd-message-box__block'}`">
+          <wd-button v-bind="customCancelProps" v-if="messageState.showCancelButton" @click="toggleModal('cancel')">
+            {{ messageState.cancelButtonText || translate('cancel') }}
           </wd-button>
-          <wd-button block @click="toggleModal('confirm')">
-            {{ confirmButtonText || translate('confirm') }}
+          <wd-button v-bind="customConfirmProps" @click="toggleModal('confirm')">
+            {{ messageState.confirmButtonText || translate('confirm') }}
           </wd-button>
         </view>
       </view>
@@ -52,18 +58,12 @@ export default {
 import wdPopup from '../wd-popup/wd-popup.vue'
 import wdButton from '../wd-button/wd-button.vue'
 import wdInput from '../wd-input/wd-input.vue'
-import { computed, inject, ref, watch } from 'vue'
-import {
-  messageBoxProps,
-  type InputValidate,
-  type MessageBeforeConfirmOption,
-  type MessageOptions,
-  type MessageResult,
-  type MessageType
-} from './types'
-import { defaultOptions, messageDefaultOptionKey } from '.'
-import { isDef, isFunction } from '../common/util'
+import { computed, inject, reactive, ref, watch } from 'vue'
+import { messageBoxProps, type MessageOptionsWithCallBack, type MessageResult } from './types'
+import { defaultOptions, getMessageDefaultOptionKey } from '.'
+import { deepAssign, isDef, isFunction, isUndefined, omitBy } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
+import type { ButtonProps } from '../wd-button/types'
 
 const props = defineProps(messageBoxProps)
 
@@ -74,89 +74,63 @@ const rootClass = computed(() => {
 })
 
 const bodyClass = computed(() => {
-  return `wd-message-box__body ${!title.value ? 'is-no-title' : ''} ${type.value === 'prompt' ? 'is-prompt' : ''}`
+  return `wd-message-box__body ${!messageState.title ? 'is-no-title' : ''} ${messageState.type === 'prompt' ? 'is-prompt' : ''}`
 })
 
-const messageOptionKey = props.selector ? messageDefaultOptionKey + props.selector : messageDefaultOptionKey
-const messageOption = inject(messageOptionKey, ref<MessageOptions>(defaultOptions)) // message选项
+const messageOptionKey = getMessageDefaultOptionKey(props.selector)
+const messageOption = inject(messageOptionKey, ref<MessageOptionsWithCallBack>(defaultOptions)) // message选项
+
+const messageState = reactive<MessageOptionsWithCallBack>({
+  msg: '', // 消息内容
+  show: false, // 是否显示弹框
+  title: '', // 标题
+  showCancelButton: false, // 是否展示取消按钮
+  closeOnClickModal: true, // 是否支持点击蒙层关闭
+  confirmButtonText: '', // 确定按钮文案
+  cancelButtonText: '', // 取消按钮文案
+  type: 'alert', // 弹框类型
+  inputType: 'text', // 输入框类型
+  inputValue: '', // 输入框初始值
+  inputPlaceholder: '', // 输入框placeholder
+  inputError: '', // 输入框错误提示文案
+  showErr: false, // 是否显示错误提示
+  zIndex: 99, // 弹窗层级
+  lazyRender: true // 弹层内容懒渲染
+})
 
 /**
- * 消息文案
+ * 确认按钮属性
  */
-const msg = ref<string>('')
-let onConfirm: ((res: MessageResult) => void) | null = null
-let onCancel: ((res: MessageResult) => void) | null = null
-let beforeConfirm: ((options: MessageBeforeConfirmOption) => void) | null = null
-const show = ref<boolean>(false)
-/**
- * 标题
- */
-const title = ref<string>('')
-/**
- * 是否展示取消按钮
- */
-const showCancelButton = ref<boolean>(false)
-/**
- * 是否支持点击蒙层进行关闭，点击蒙层回调传入的action为'modal'
- */
-const closeOnClickModal = ref<boolean>(true)
-/**
- * 确定按钮文案
- */
-const confirmButtonText = ref<string>('')
-/**
- * 取消按钮文案
- */
-const cancelButtonText = ref<string>('')
+const customConfirmProps = computed(() => {
+  const buttonProps: Partial<ButtonProps> = deepAssign(
+    {
+      block: true
+    },
+    isDef(messageState.confirmButtonProps) ? omitBy(messageState.confirmButtonProps, isUndefined) : {}
+  )
+  buttonProps.customClass = `${buttonProps.customClass || ''} wd-message-box__actions-btn`
+  return buttonProps
+})
 
 /**
- * 弹框类型
+ * 取消按钮属性
  */
-const type = ref<MessageType>('alert')
-
-/**
- * 当type为prompt时，输入框类型
- */
-const inputType = ref<string>('text')
-
-/**
- * 当type为prompt时，输入框初始值
- */
-const inputValue = ref<string | number>('')
-
-/**
- * 当type为prompt时，输入框placeholder
- */
-const inputPlaceholder = ref<string>('')
-
-/**
- * 当type为prompt时，输入框正则校验，点击确定按钮时进行校验
- */
-const inputPattern = ref<RegExp>()
-
-/**
- * 当type为prompt时，输入框校验函数，点击确定按钮时进行校验
- */
-let inputValidate: InputValidate | null = null
-
-/**
- * 当type为prompt时，输入框检验不通过时的错误提示文案
- */
-const inputError = ref<string>('')
-const showErr = ref<boolean>(false)
-/**
- * 弹窗层级
- */
-const zIndex = ref<number>(99)
-/**
- * 弹层内容懒渲染，触发展示时才渲染内容
- */
-const lazyRender = ref<boolean>(true)
+const customCancelProps = computed(() => {
+  const buttonProps: Partial<ButtonProps> = deepAssign(
+    {
+      block: true,
+      type: 'info'
+    },
+    isDef(messageState.cancelButtonProps) ? omitBy(messageState.cancelButtonProps, isUndefined) : {}
+  )
+  buttonProps.customClass = `${buttonProps.customClass || ''} wd-message-box__actions-btn`
+  return buttonProps
+})
 
 // 监听options变化展示
 watch(
   () => messageOption.value,
-  (newVal: MessageOptions) => {
+  (newVal: MessageOptionsWithCallBack) => {
     reset(newVal)
   },
   {
@@ -166,9 +140,9 @@ watch(
 )
 
 watch(
-  () => show.value,
+  () => messageState.show,
   (newValue) => {
-    resetErr(newValue)
+    resetErr(!!newValue)
   },
   {
     deep: true,
@@ -181,21 +155,21 @@ watch(
  * @param action
  */
 function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
-  if (action === 'modal' && !closeOnClickModal.value) {
+  if (action === 'modal' && !messageState.closeOnClickModal) {
     return
   }
-  if (type.value === 'prompt' && action === 'confirm' && !validate()) {
+  if (messageState.type === 'prompt' && action === 'confirm' && !validate()) {
     return
   }
   switch (action) {
     case 'confirm':
-      if (beforeConfirm) {
-        beforeConfirm({
+      if (messageState.beforeConfirm) {
+        messageState.beforeConfirm({
           resolve: (isPass) => {
             if (isPass) {
               handleConfirm({
                 action: action,
-                value: inputValue.value
+                value: messageState.inputValue
               })
             }
           }
@@ -203,7 +177,7 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
       } else {
         handleConfirm({
           action: action,
-          value: inputValue.value
+          value: messageState.inputValue
         })
       }
       break
@@ -225,9 +199,9 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
  * @param result
  */
 function handleConfirm(result: MessageResult) {
-  show.value = false
-  if (isFunction(onConfirm)) {
-    onConfirm(result)
+  messageState.show = false
+  if (isFunction(messageState.success)) {
+    messageState.success(result)
   }
 }
 
@@ -236,74 +210,77 @@ function handleConfirm(result: MessageResult) {
  * @param result
  */
 function handleCancel(result: MessageResult) {
-  show.value = false
-  if (isFunction(onCancel)) {
-    onCancel(result)
+  messageState.show = false
+  if (isFunction(messageState.fail)) {
+    messageState.fail(result)
   }
 }
 
 /**
- * @description 如果存在校验规则行为，则进行判断校验是否通过规则。默认不存在校验直接铜鼓。
- * @return {Boolean} 是否通过校验
+ * 如果存在校验规则行为，则进行判断校验是否通过规则。默认不存在校验直接铜鼓。
  */
 function validate() {
-  if (inputPattern.value && !inputPattern.value.test(String(inputValue.value))) {
-    showErr.value = true
+  if (messageState.inputPattern && !messageState.inputPattern.test(String(messageState.inputValue))) {
+    messageState.showErr = true
     return false
   }
-  if (typeof inputValidate === 'function') {
-    const validateResult = inputValidate(inputValue.value)
+  if (typeof messageState.inputValidate === 'function') {
+    const validateResult = messageState.inputValidate(messageState.inputValue!)
     if (!validateResult) {
-      showErr.value = true
+      messageState.showErr = true
       return false
     }
   }
-  showErr.value = false
+  messageState.showErr = false
   return true
 }
+
 /**
  * @description show关闭时，销毁错误提示
  * @param val
  */
 function resetErr(val: boolean) {
   if (val === false) {
-    showErr.value = false
+    messageState.showErr = false
   }
 }
 function inputValChange({ value }: { value: string | number }) {
   if (value === '') {
-    showErr.value = false
+    messageState.showErr = false
     return
   }
-  inputValue.value = value
+  messageState.inputValue = value
 }
 
 /**
  * 重置message选项值
  * @param option message选项值
  */
-function reset(option: MessageOptions) {
+function reset(option: MessageOptionsWithCallBack) {
   if (option) {
-    title.value = isDef(option.title) ? option.title : ''
-    showCancelButton.value = isDef(option.showCancelButton) ? option.showCancelButton : false
-    show.value = option.show!
-    closeOnClickModal.value = option.closeOnClickModal!
-    confirmButtonText.value = option.confirmButtonText!
-    cancelButtonText.value = option.cancelButtonText!
-    msg.value = option.msg!
-    type.value = option.type!
-    inputType.value = option.inputType!
-    inputValue.value = option.inputValue!
-    inputPlaceholder.value = option.inputPlaceholder!
-    inputPattern.value = option.inputPattern!
-    inputValidate = option.inputValidate!
-    onConfirm = (option as any).onConfirm
-    onCancel = (option as any).onCancel
-    beforeConfirm = option.beforeConfirm!
-    inputError.value = option.inputError!
-    showErr.value = option.showErr!
-    zIndex.value = option.zIndex!
-    lazyRender.value = option.lazyRender!
+    messageState.title = isDef(option.title) ? option.title : ''
+    messageState.showCancelButton = isDef(option.showCancelButton) ? option.showCancelButton : false
+    messageState.show = option.show
+    messageState.closeOnClickModal = option.closeOnClickModal
+    messageState.confirmButtonText = option.confirmButtonText
+    messageState.cancelButtonText = option.cancelButtonText
+    messageState.msg = option.msg
+    messageState.type = option.type
+    messageState.inputType = option.inputType
+    messageState.inputSize = option.inputSize
+    messageState.inputValue = option.inputValue
+    messageState.inputPlaceholder = option.inputPlaceholder
+    messageState.inputPattern = option.inputPattern!
+    messageState.inputValidate = option.inputValidate
+    messageState.success = option.success
+    messageState.fail = option.fail
+    messageState.beforeConfirm = option.beforeConfirm
+    messageState.inputError = option.inputError
+    messageState.showErr = option.showErr
+    messageState.zIndex = option.zIndex
+    messageState.lazyRender = option.lazyRender
+    messageState.confirmButtonProps = option.confirmButtonProps
+    messageState.cancelButtonProps = option.cancelButtonProps
   }
 }
 </script>

@@ -45,7 +45,7 @@ const rootStyle = computed(() => {
   if (isDef(props.zIndex)) {
     style['z-index'] = props.zIndex
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 watch(

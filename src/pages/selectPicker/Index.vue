@@ -3,37 +3,66 @@
     <wd-toast />
     <view style="margin: 20px 0">
       <wd-cell-group border>
-        <wd-select-picker label="选择地址" v-model="value1" :columns="columns1" @confirm="handleConfirm1" />
-        <wd-select-picker label="类型切换" type="radio" v-model="value2" :columns="columns1" @confirm="handleConfirm2" />
-        <wd-select-picker label="禁用" disabled v-model="value3" :columns="columns1" @confirm="handleConfirm3" />
-        <wd-select-picker label="只读" readonly v-model="value4" :columns="columns1" @confirm="handleConfirm4" />
-        <wd-select-picker label="禁用选项" v-model="value5" :columns="columns2" @confirm="handleConfirm5" />
+        <wd-select-picker :label="$t('xuan-ze-di-zhi')" v-model="value1" :columns="columns1" @confirm="handleConfirm1" />
+        <wd-select-picker :label="$t('lei-xing-qie-huan')" type="radio" v-model="value2" :columns="columns1" @confirm="handleConfirm2" />
+        <wd-select-picker :label="$t('jinYong')" disabled v-model="value3" :columns="columns1" @confirm="handleConfirm3" />
+        <wd-select-picker :label="$t('zhi-du')" readonly v-model="value4" :columns="columns1" @confirm="handleConfirm4" />
+        <wd-select-picker :label="$t('jin-yong-xuan-xiang')" v-model="value5" :columns="columns2" @confirm="handleConfirm5" />
         <wd-select-picker label="loading" loading v-model="value6" :columns="columns1" @confirm="handleConfirm6" />
-        <wd-select-picker label="选择器change" v-model="value6" :columns="columns1" @change="handleChange" @confirm="handleConfirm7" />
-        <wd-select-picker label="展示格式化" v-model="value8" :columns="columns1" @confirm="handleConfirm8" :display-format="displayFormat" />
+        <wd-select-picker :label="$t('xuan-ze-qi-change')" v-model="value6" :columns="columns1" @change="handleChange" @confirm="handleConfirm7" />
+        <wd-select-picker
+          :label="$t('zhan-shi-ge-shi-hua')"
+          v-model="value8"
+          :columns="columns1"
+          @confirm="handleConfirm8"
+          :display-format="displayFormat"
+        />
         <wd-select-picker label="before-confirm" v-model="value9" :columns="columns1" @confirm="handleConfirm9" :before-confirm="beforeConfirm" />
-        <wd-select-picker label="标题" v-model="value10" title="多选" :columns="columns1" @confirm="handleConfirm10" />
-        <wd-select-picker label="错误" error v-model="value11" :columns="columns1" @confirm="handleConfirm11" />
-        <wd-select-picker label="必填" required v-model="value12" :columns="columns1" @confirm="handleConfirm12" />
-        <wd-select-picker label="可搜索" filterable v-model="value13" :columns="columns1" @confirm="handleConfirm13" />
-        <wd-select-picker label="单选可搜索" filterable v-model="value18" type="radio" :columns="columns1" @confirm="handleConfirm13" />
-        <wd-select-picker label="自动完成" type="radio" :show-confirm="false" v-model="value19" :columns="columns1" @confirm="handleConfirm2" />
+        <wd-select-picker :label="$t('biaoTi-0')" v-model="value10" :title="$t('duo-xuan')" :columns="columns1" @confirm="handleConfirm10" />
+        <wd-select-picker :label="$t('cuo-wu')" error v-model="value11" :columns="columns1" @confirm="handleConfirm11" />
+        <wd-select-picker clearable :label="$t('bi-tian')" required v-model="value12" :columns="columns1" @confirm="handleConfirm12" />
+        <wd-select-picker :label="$t('ke-sou-suo')" filterable v-model="value13" :columns="columns1" @confirm="handleConfirm13" />
+        <wd-select-picker
+          :label="$t('dan-xuan-ke-sou-suo')"
+          filterable
+          v-model="value18"
+          type="radio"
+          :columns="columns1"
+          @confirm="handleConfirm13"
+        />
+        <wd-select-picker
+          :label="$t('zi-dong-wan-cheng')"
+          type="radio"
+          :show-confirm="false"
+          v-model="value19"
+          :columns="columns1"
+          @confirm="handleConfirm2"
+        />
+        <wd-select-picker
+          :label="$t('ke-qing-kong')"
+          clearable
+          type="radio"
+          :show-confirm="false"
+          v-model="value20"
+          :columns="columns1"
+          @confirm="handleConfirm2"
+        />
       </wd-cell-group>
     </view>
-    <demo-block title="label不传" transparent>
+    <demo-block :title="$t('label-bu-chuan')" transparent>
       <wd-select-picker v-model="value14" :columns="columns1" @confirm="handleConfirm14" />
     </demo-block>
-    <demo-block title="大小" transparent>
-      <wd-select-picker label="大尺寸" v-model="value15" size="large" :columns="columns1" @confirm="handleConfirm15" />
+    <demo-block :title="$t('da-xiao')" transparent>
+      <wd-select-picker :label="$t('da-chi-cun')" v-model="value15" size="large" :columns="columns1" @confirm="handleConfirm15" />
     </demo-block>
-    <demo-block title="值靠右展示" transparent>
-      <wd-select-picker label="值靠右展示" align-right v-model="value16" :columns="columns1" @confirm="handleConfirm16" />
+    <demo-block :title="$t('zhi-kao-you-zhan-shi')" transparent>
+      <wd-select-picker :label="$t('zhi-kao-you-zhan-shi')" align-right v-model="value16" :columns="columns1" @confirm="handleConfirm16" />
     </demo-block>
-    <demo-block title="自定义选择器" transparent>
+    <demo-block :title="$t('zi-ding-yi-xuan-ze-qi')" transparent>
       <view style="margin-left: 15px">
-        <view style="margin-bottom: 10px">当前选中项: {{ customShow }}</view>
+        <view style="margin-bottom: 10px">{{ $t('dang-qian-xuan-zhong-xiang-displayvalue') + customShow }}</view>
         <wd-select-picker v-model="value17" use-default-slot :columns="columns1" @confirm="handleConfirm17" style="display: inline-block">
-          <wd-button>唤起多选</wd-button>
+          <wd-button>{{ $t('huan-qi-duo-xuan') }}</wd-button>
         </wd-select-picker>
       </view>
     </demo-block>
@@ -43,70 +72,73 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 import type { SelectPickerBeforeConfirm, SelectPickerDisplayFormat } from '@/uni_modules/wot-design-uni/components/wd-select-picker/types'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const columns1 = ref<Record<string, any>[]>([
   {
     value: '101',
-    label: '男装'
+    label: t('nan-zhuang')
   },
   {
     value: '102',
-    label: '奢侈品'
+    label: t('she-chi-pin')
   },
   {
     value: '103',
-    label: '女装'
+    label: t('nv-zhuang')
   },
   {
     value: '104',
-    label: '鞋靴'
+    label: t('xie-xue')
   },
   {
     value: '105',
-    label: '内衣配饰'
+    label: t('nei-yi-pei-shi')
   },
   {
     value: '106',
-    label: '箱包'
+    label: t('xiang-bao')
   },
   {
     value: '107',
-    label: '美妆护肤'
+    label: t('mei-zhuang-hu-fu')
   },
   {
     value: '108',
-    label: '个性清洁'
+    label: t('ge-xing-qing-jie')
   },
   {
     value: '109',
-    label: '钟表珠宝'
+    label: t('zhong-biao-zhu-bao')
   },
   {
     value: '110',
-    label: '手机'
+    label: t('shou-ji')
   },
   {
     value: '111',
-    label: '数码'
+    label: t('shu-ma')
   },
   {
     value: '112',
-    label: '电脑办公'
+    label: t('dian-nao-ban-gong')
   }
 ])
 const columns2 = ref<Record<string, any>[]>([
   {
     value: '101',
-    label: '男装',
+    label: t('nan-zhuang-0'),
     disabled: true
   },
   {
     value: '102',
-    label: '奢侈品'
+    label: t('she-chi-pin')
   },
   {
     value: '103',
-    label: '女装'
+    label: t('nv-zhuang-0')
   }
 ])
 const value1 = ref<string[]>(['101'])
@@ -128,8 +160,9 @@ const value16 = ref<string[]>(['103'])
 const value17 = ref<string[]>(['102'])
 const value18 = ref<string>('102')
 const value19 = ref<string>('101')
+const value20 = ref<string>('101')
 
-const customShow = ref<string>('奢侈品')
+const customShow = ref<string>(t('she-chi-pin'))
 
 const toast = useToast()
 
@@ -147,7 +180,7 @@ const displayFormat: SelectPickerDisplayFormat = (items, columns) => {
 
 const beforeConfirm: SelectPickerBeforeConfirm = (value, resolve) => {
   if ((value as string[]).length > 0) {
-    toast.error('暂时无法选择商品')
+    toast.error(t('zan-shi-wu-fa-xuan-ze-shang-pin'))
     resolve(false)
   } else {
     resolve(true)
@@ -155,7 +188,7 @@ const beforeConfirm: SelectPickerBeforeConfirm = (value, resolve) => {
 }
 
 function handleChange({ value }: any) {
-  toast.show('选择了' + value)
+  toast.show(t('xuan-ze-le') + value)
 }
 function handleConfirm1({ value }: any) {
   console.log(value)

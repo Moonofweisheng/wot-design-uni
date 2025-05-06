@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2023-11-05 12:09:52
- * @LastEditTime: 2024-03-18 21:33:59
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-design-uni/src/pages/sidebar/demo3.vue
- * 记得注释
--->
 <template>
   <page-wraper>
     <view class="wraper">
@@ -26,56 +17,73 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { getRect, isArray } from '@/uni_modules/wot-design-uni/components/common/util'
+import { onMounted, ref, computed } from 'vue'
+import { getRect } from '@/uni_modules/wot-design-uni/components/common/util'
+import { useI18n } from 'vue-i18n'
 
+interface CategoryItem {
+  title: string
+  label: string
+}
+
+interface Category {
+  label: string
+  title: string
+  icon: string
+  items: CategoryItem[]
+}
+
+const { t } = useI18n()
 const active = ref<number>(1)
 const scrollTop = ref<number>(0)
 const itemScrollTop = ref<number[]>([])
 
-const subCategories = new Array(24).fill({ title: '标题文字', label: '这是描述这是描述' }, 0, 24)
-const categories = ref([
+const subCategories = computed<CategoryItem[]>(() =>
+  new Array(24).fill({ title: t('biao-ti-wen-zi-10'), label: t('zhe-shi-miao-shu-zhe-shi-miao-shu') }, 0, 24)
+)
+
+const categories = computed<Category[]>(() => [
   {
-    label: '分类一',
-    title: '标题一',
+    label: t('fen-lei-yi'),
+    title: t('biao-ti-yi'),
     icon: 'thumb-up',
-    items: subCategories
+    items: subCategories.value
   },
   {
-    label: '分类二',
-    title: '标题二',
+    label: t('fen-lei-er'),
+    title: t('biao-ti-er'),
     icon: 'qrcode',
-    items: subCategories
+    items: subCategories.value
   },
   {
-    label: '分类三',
-    title: '标题三',
+    label: t('fen-lei-san'),
+    title: t('biao-ti-san'),
     icon: 'location',
-    items: subCategories.slice(0, 18)
+    items: subCategories.value.slice(0, 18)
   },
   {
-    label: '分类四',
-    title: '标题四',
+    label: t('fen-lei-si'),
+    title: t('biao-ti-si'),
     icon: 'ie',
-    items: subCategories.slice(0, 21)
+    items: subCategories.value.slice(0, 21)
   },
   {
-    label: '分类五',
-    title: '标题五',
+    label: t('fen-lei-wu'),
+    title: t('biao-ti-wu'),
     icon: 'github-filled',
-    items: subCategories
+    items: subCategories.value
   },
   {
-    label: '分类六',
-    title: '标题六',
+    label: t('fen-lei-liu'),
+    title: t('biao-ti-liu'),
     icon: 'chrome',
-    items: subCategories.slice(0, 18)
+    items: subCategories.value.slice(0, 18)
   },
   {
-    label: '分类七',
-    title: '标题七',
+    label: t('fen-lei-qi'),
+    title: t('biao-ti-qi'),
     icon: 'android',
-    items: subCategories
+    items: subCategories.value
   }
 ])
 

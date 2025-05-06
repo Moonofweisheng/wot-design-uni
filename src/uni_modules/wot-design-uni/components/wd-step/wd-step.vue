@@ -76,7 +76,7 @@ const rootStyle = computed(() => {
       style['width'] = space || 100 / steps.children.length + '%'
     }
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 const canAlignCenter = computed(() => {

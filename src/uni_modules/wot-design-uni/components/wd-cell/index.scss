@@ -111,7 +111,6 @@
     margin-top: 2px;
     font-size: $-cell-label-fs;
     color: $-cell-label-color;
-    @include lineEllipsis;
   }
 
   @include edeep(icon) {

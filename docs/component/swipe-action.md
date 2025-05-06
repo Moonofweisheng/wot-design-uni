@@ -1,6 +1,6 @@
-<frame/>
-
 # SwipeAction 滑动操作
+
+常用于单元格左右滑删除等手势操作。
 
 :::warning
 滑动操作组件对页面的功能隐藏较深，用户难以发现，建议使用其他交互方式来实现操作功能，比如列表项有个按钮，点击按钮弹出 ActionSheet。
@@ -24,7 +24,7 @@
     <wd-cell title="标题文字" value="内容"/>
     <template #right>
       <view class="action">
-        <view class="button" style="background: #C8C7CD;" @click="handleAction("操作1")">操作1</view>
+        <view class="button" style="background: #C8C7CD;" @click="handleAction('操作1')">操作1</view>
         <view class="button" style="background: #FFB300;" @click="handleAction('操作2')">操作2</view>
         <view class="button" style="background: #E2231A;" @click="handleAction('操作3')">操作3</view>
       </view>
@@ -62,7 +62,7 @@ function handleAction(action: string) {
 
 ## 左右滑动
 
-> `wd-swipe-action`组件提供`left`/`right`两个滑动按钮，通过设置插槽`v-slot:left`和`v-slot:right`开启
+> `wd-swipe-action`组件提供`left`/`right`两个滑动按钮，通过设置插槽`left`和`right`开启
 
 ```html
 <wd-swipe-action>

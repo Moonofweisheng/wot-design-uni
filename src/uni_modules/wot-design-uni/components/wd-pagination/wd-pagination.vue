@@ -101,9 +101,7 @@ function sub() {
 
 function updateTotalPage() {
   const { total, pageSize } = props
-  if (total) {
-    totalPageNum.value = Math.ceil(total / pageSize)
-  }
+  totalPageNum.value = Math.ceil(total / pageSize)
 }
 </script>
 

@@ -12,7 +12,7 @@
       </view>
       <view class="wd-privacy-popup__footer">
         <wd-button custom-class="wd-privacy-popup__footer-disagree " size="medium" round plain buttonId="disagree-btn" @click="handleDisagree">
-          拒绝
+          {{ $t('ju-jue') }}
         </wd-button>
         <wd-button
           class="wd-privacy-popup__footer-agree"
@@ -22,7 +22,7 @@
           open-type="agreePrivacyAuthorization"
           @agreeprivacyauthorization="handleAgree"
         >
-          同意
+          {{ $t('tong-yi') }}
         </wd-button>
       </view>
     </wd-popup>
@@ -41,7 +41,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 interface Props {
   title?: string // 标题
@@ -50,12 +52,27 @@ interface Props {
   protocol?: string // 协议名称
 }
 
-withDefaults(defineProps<Props>(), {
-  title: '用户隐私保护提示',
-  desc: '感谢您使用本应用，您使用本应用的服务之前请仔细阅读并同意',
-  subDesc: '。当您点击同意并开始使用产品服务时，即表示你已理解并同息该条款内容，该条款将对您产生法律约束力。如您拒绝，将无法使用相应服务。',
-  protocol: '《用户隐私保护指引》'
+// 定义props，不在默认值中使用t函数
+const props = withDefaults(defineProps<Props>(), {
+  title: '',
+  desc: '',
+  subDesc: '',
+  protocol: ''
 })
+
+// 使用计算属性提供默认值
+const title = computed(() => props.title || t('yong-hu-yin-si-bao-hu-ti-shi'))
+const desc = computed(
+  () => props.desc || t('gan-xie-nin-shi-yong-ben-ying-yong-nin-shi-yong-ben-ying-yong-de-fu-wu-zhi-qian-qing-zi-xi-yue-du-bing-tong-yi')
+)
+const subDesc = computed(
+  () =>
+    props.subDesc ||
+    t(
+      'dang-nin-dian-ji-tong-yi-bing-kai-shi-shi-yong-chan-pin-fu-wu-shi-ji-biao-shi-ni-yi-li-jie-bing-tong-xi-gai-tiao-kuan-nei-rong-gai-tiao-kuan-jiang-dui-nin-chan-sheng-fa-lv-yue-shu-li-ru-nin-ju-jue-jiang-wu-fa-shi-yong-xiang-ying-fu-wu'
+    )
+)
+const protocol = computed(() => props.protocol || t('yong-hu-yin-si-bao-hu-zhi-yin'))
 const emit = defineEmits(['agree', 'disagree'])
 
 const showPopup = ref<boolean>(false) // 是否展示popup
@@ -69,8 +86,8 @@ const privacyHandler = (resolve: any) => {
 
 onBeforeMount(() => {
   // 注册监听
-  if ((wx as any).onNeedPrivacyAuthorization) {
-    ;(wx as any).onNeedPrivacyAuthorization((resolve: any) => {
+  if (wx.onNeedPrivacyAuthorization) {
+    wx.onNeedPrivacyAuthorization((resolve: any) => {
       if (typeof privacyHandler === 'function') {
         privacyHandler(resolve)
       }

@@ -1,3 +1,7 @@
+/**
+ * This file contains the default export for various UI components in Traditional Chinese.
+ */
+
 export default {
   calendar: {
     placeholder: '請選擇',
@@ -57,5 +61,11 @@ export default {
   textarea: { placeholder: '請輸入...' },
   tableCol: {
     indexLabel: '序號'
+  },
+  signature: {
+    confirmText: '確認',
+    clearText: '清空',
+    revokeText: '撤銷',
+    restoreText: '恢復'
   }
 }

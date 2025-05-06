@@ -1,23 +1,24 @@
 <template>
   <view>
     <page-wraper>
-      <demo-block title="Fade 动画">
+      <demo-block :title="$t('fade-dong-hua')">
         <wd-button @click="fade">fade</wd-button>
         <wd-button @click="fadeUp">fade-up</wd-button>
         <wd-button @click="fadeDown">fade-down</wd-button>
         <wd-button @click="fadeLeft">fade-left</wd-button>
         <wd-button @click="fadeRight">fade-right</wd-button>
       </demo-block>
-      <demo-block title="Slide 动画">
+      <demo-block :title="$t('slide-dong-hua')">
         <wd-button @click="slideUp">slide-up</wd-button>
         <wd-button @click="slideDown">slide-down</wd-button>
         <wd-button @click="slideLeft">slide-left</wd-button>
         <wd-button @click="slideRight">slide-right</wd-button>
       </demo-block>
-      <demo-block title="Zoom 动画">
+      <demo-block :title="$t('zoom-dong-hua')">
         <wd-button @click="zoomIn">zoom-in</wd-button>
+        <wd-button @click="zoomOut">zoom-out</wd-button>
       </demo-block>
-      <demo-block title="自定义动画">
+      <demo-block :title="$t('zi-ding-yi-dong-hua')">
         <wd-button @click="custom">custom</wd-button>
       </demo-block>
 
@@ -25,7 +26,6 @@
 
       <wd-transition
         :show="customShow"
-        name=""
         :duration="{ enter: 700, leave: 1000 }"
         enter-class="custom-enter"
         enter-active-class="custom-enter-active"
@@ -39,10 +39,11 @@
   </view>
 </template>
 <script lang="ts" setup>
+import type { TransitionName } from '@/uni_modules/wot-design-uni/components/wd-transition/types'
 import { ref } from 'vue'
 
 const show = ref<boolean>(false)
-const name = ref<any>('')
+const name = ref<TransitionName>()
 const customShow = ref<boolean>(false)
 function fade() {
   transition('fade')
@@ -74,13 +75,16 @@ function slideRight() {
 function zoomIn() {
   transition('zoom-in')
 }
+function zoomOut() {
+  transition('zoom-out')
+}
 function custom() {
   customShow.value = true
   setTimeout(() => {
     customShow.value = false
   }, 1200)
 }
-function transition(transition: string) {
+function transition(transition: TransitionName) {
   name.value = transition
   show.value = true
   setTimeout(() => {

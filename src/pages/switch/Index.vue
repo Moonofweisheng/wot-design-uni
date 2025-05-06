@@ -2,26 +2,26 @@
   <page-wraper>
     <wd-message-box></wd-message-box>
     <view>
-      <demo-block title="基本用法">
+      <demo-block :title="$t('jiBenYongFa')">
         <wd-switch v-model="checked1" @change="handleChange1" />
       </demo-block>
-      <demo-block title="修改值 active-value 、 inactive-value">
+      <demo-block :title="$t('xiu-gai-zhi-activevalue-inactivevalue')">
         <view style="margin-bottom: 10px">{{ checked2 }}</view>
         <wd-switch v-model="checked2" active-value="沃特" inactive-value="商家后台" @change="handleChange2" />
       </demo-block>
-      <demo-block title="自定义颜色 active-color 、 inactive-color">
+      <demo-block :title="$t('zi-ding-yi-yan-se-activecolor-inactivecolor')">
         <wd-switch v-model="checked3" active-color="#13ce66" inactive-color="#f00" @change="handleChange3" />
       </demo-block>
-      <demo-block title="自定义大小">
+      <demo-block :title="$t('zi-ding-yi-da-xiao')">
         <wd-switch v-model="checked4" :size="24" @change="handleChange4" />
       </demo-block>
-      <demo-block title="选中禁用">
+      <demo-block :title="$t('xuan-zhong-jin-yong')">
         <wd-switch v-model="checked5" disabled />
       </demo-block>
-      <demo-block title="非选中禁用">
+      <demo-block :title="$t('fei-xuan-zhong-jin-yong')">
         <wd-switch v-model="checked6" disabled />
       </demo-block>
-      <demo-block title="before-change 修改前钩子函数">
+      <demo-block :title="$t('beforechange-xiu-gai-qian-gou-zi-han-shu')">
         <wd-switch v-model="checked7" :before-change="beforeChange" @change="handleChange5" />
       </demo-block>
     </view>
@@ -31,9 +31,12 @@
 import { useMessage } from '@/uni_modules/wot-design-uni'
 import type { SwitchBeforeChange } from '@/uni_modules/wot-design-uni/components/wd-switch/types'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const checked1 = ref<boolean>(true)
-const checked2 = ref<string>('沃特')
+const checked2 = ref<string>(t('wo-te'))
 const checked3 = ref<boolean>(true)
 const checked4 = ref<boolean>(true)
 const checked5 = ref<boolean>(true)
@@ -44,7 +47,7 @@ const message = useMessage()
 
 const beforeChange: SwitchBeforeChange = ({ value, resolve }) => {
   message
-    .confirm('是否切换开关')
+    .confirm(t('shi-fou-qie-huan-kai-guan'))
     .then(() => {
       resolve(true)
     })

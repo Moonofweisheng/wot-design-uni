@@ -85,5 +85,12 @@ export const rateProps = {
    * 类型: string
    * 默认值: 'linear-gradient(315deg, rgba(177,177,177,1) 0%,rgba(199,199,199,1) 100%)'
    */
-  disabledColor: makeStringProp('linear-gradient(315deg, rgba(177,177,177,1) 0%,rgba(199,199,199,1) 100%)')
+  disabledColor: makeStringProp('linear-gradient(315deg, rgba(177,177,177,1) 0%,rgba(199,199,199,1) 100%)'),
+
+  /**
+   * 是否允许半选
+   * 类型: boolean
+   * 默认值: false
+   */
+  allowHalf: makeBooleanProp(false)
 }

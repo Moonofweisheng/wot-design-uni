@@ -13,6 +13,10 @@
   box-sizing: border-box;
   box-shadow: $-toast-box-shadow;
 
+  @include when(vertical) {
+    flex-direction: column;
+  }
+
   @include e(msg) {
     font-size: $-toast-fs;
     line-height: 20px;
@@ -23,6 +27,11 @@
     display: inline-block;
     margin-right: $-toast-icon-margin-right;
     font-size: $-toast-icon-size;
+
+    @include when(vertical) {
+      margin-right: 0;
+      margin-bottom: $-toast-icon-margin-bottom;
+    }
   }
   @include e(iconWrap){
     font-size: 0;
@@ -47,7 +56,7 @@
   @include m(top) {
     transform: translate3d(0, -40vh, 0);
   }
-  @include m(middle){
+  @include m(middle-top){
     transform: translate3d(0%,-18.8vh,0);
   }
   @include m(bottom) {

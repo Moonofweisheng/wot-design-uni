@@ -1,7 +1,6 @@
-<frame/>
-
 #  Rate 评分
 
+用于快速的评价操作，或对评价进行展示。
 
 ## 基本用法
 
@@ -12,7 +11,6 @@
 ```
 
 ```typescript
-
 const value = ref<number>(1)
 
 function changeValue({ value }) {
@@ -61,6 +59,14 @@ function changeValue({ value }) {
 <wd-rate v-model="value" size="30px" space="10px"/>
 ```
 
+## 允许半选
+
+设置 `allowHalf` 属性。
+
+```html
+<wd-rate v-model="value" allow-half />
+```
+
 ## Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
@@ -76,6 +82,7 @@ function changeValue({ value }) {
 | active-icon | 选中的图标类名 | string | - | wd-icon-star-on | - |
 | disabled | 是否禁用 | boolean | - | false | - |
 | disabled-color | 禁用的图标颜色 | string | - | linear-gradient(315deg, rgba(177,177,177,1) 0%,rgba(199,199,199,1) 100%) | - |
+| allow-half | 是否允许半选 | boolean | - | false | 1.7.0 |
 
 ## Events
 

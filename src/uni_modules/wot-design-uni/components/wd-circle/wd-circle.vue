@@ -31,7 +31,9 @@ export default {
 import { computed, getCurrentInstance, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue'
 import { addUnit, isObj, objToStyle, uuid } from '../common/util'
 import { circleProps } from './types'
+// #ifdef MP-WEIXIN
 import { canvas2dAdapter } from '../common/canvasHelper'
+// #endif
 
 // 大于等于0且小于等于100
 function format(rate: number) {
@@ -44,6 +46,7 @@ const BEGIN_ANGLE = -Math.PI / 2
 const STEP = 1
 
 const props = defineProps(circleProps)
+const { proxy } = getCurrentInstance() as any
 
 const progressColor = ref<string | CanvasGradient>('') // 进度条颜色
 
@@ -78,7 +81,7 @@ const canvasStyle = computed(() => {
     width: addUnit(props.size),
     height: addUnit(props.size)
   }
-  return `${objToStyle(style)};`
+  return `${objToStyle(style)}`
 })
 
 // 监听目标数值变化
@@ -124,7 +127,6 @@ onUnmounted(() => {
   clearTimeInterval()
 })
 
-const { proxy } = getCurrentInstance() as any
 /**
  * 获取canvas上下文
  */

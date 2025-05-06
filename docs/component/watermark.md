@@ -1,5 +1,3 @@
-<frame/>
-
   
 # Watermark 水印 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.16</el-tag>
 
@@ -19,7 +17,7 @@
 **注意：钉钉小程序平台仅支持网络图片。**
 
 ```html
-<wd-watermark image="https://wot-design-uni.cn/wot-design.png" :image-width="38" :image-height="38"></wd-watermark>
+<wd-watermark image="https://wot-design-uni.cn/logo.png" :image-width="38" :image-height="38"></wd-watermark>
 
 ```
 

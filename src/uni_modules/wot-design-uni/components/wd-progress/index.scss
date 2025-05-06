@@ -37,10 +37,13 @@
     font-size: $-progress-icon-fs;
 
     @include when(danger) {
-      background: $-progress-linear-danger-color;
+      background: $-progress-danger-color;
     }
     @include when(success) {
-      background: $-progress-linear-success-color;
+      background: $-progress-success-color;
+    }
+    @include when(warning) {
+      background: $-progress-warning-color;
     }
   }
   @include edeep(label) {
@@ -57,6 +60,9 @@
     }
     @include when(success) {
       color: $-progress-success-color;
+    }
+    @include when(warning) {
+      color: $-progress-warning-color;
     }
   }
 }

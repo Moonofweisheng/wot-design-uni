@@ -8,11 +8,13 @@
     @click.stop=""
   >
     <view @click.stop="" :style="{ visibility: inited ? 'visible' : 'hidden' }" id="trigger">
-      <wd-button @click="handleClick" custom-class="wd-fab__trigger" round :type="type" :disabled="disabled">
+      <slot name="trigger" v-if="$slots.trigger"></slot>
+      <wd-button v-else @click="handleClick" custom-class="wd-fab__trigger" round :type="type" :disabled="disabled">
         <wd-icon custom-class="wd-fab__icon" :name="isActive ? activeIcon : inactiveIcon"></wd-icon>
       </wd-button>
     </view>
     <wd-transition
+      v-if="expandable"
       :enter-class="`wd-fab__transition-enter--${fabDirection}`"
       enter-active-class="wd-fab__transition-enter-active"
       :leave-to-class="`wd-fab__transition-leave-to--${fabDirection}`"
@@ -20,7 +22,6 @@
       :custom-class="`wd-fab__actions wd-fab__actions--${fabDirection}`"
       :show="isActive"
       :duration="300"
-      name=""
     >
       <slot></slot>
     </wd-transition>
@@ -48,9 +49,10 @@ import { type Queue, queueKey } from '../composables/useQueue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { fabProps, type FabExpose } from './types'
 import { reactive } from 'vue'
+import { useRaf } from '../composables/useRaf'
 
 const props = defineProps(fabProps)
-const emit = defineEmits(['update:active'])
+const emit = defineEmits(['update:active', 'click'])
 const inited = ref<boolean>(false) // 是否初始化完成
 const isActive = ref<boolean>(false) // 是否激活状态
 const queue = inject<Queue | null>(queueKey, null)
@@ -92,7 +94,7 @@ watch(
 const top = ref<number>(0)
 const left = ref<number>(0)
 const screen = reactive({ width: 0, height: 0 })
-const fabSize = ref<number>(56)
+const fabSize = reactive({ width: 56, height: 56 })
 const bounding = reactive({
   minTop: 0,
   minLeft: 0,
@@ -104,7 +106,8 @@ async function getBounding() {
   const sysInfo = uni.getSystemInfoSync()
   try {
     const trigerInfo = await getRect('#trigger', false, proxy)
-    fabSize.value = trigerInfo.width || 56
+    fabSize.width = trigerInfo.width || 56
+    fabSize.height = trigerInfo.height || 56
   } catch (error) {
     console.log(error)
   }
@@ -114,25 +117,49 @@ async function getBounding() {
   screen.height = isH5 ? sysInfo.windowTop + sysInfo.windowHeight : sysInfo.windowHeight
   bounding.minTop = isH5 ? sysInfo.windowTop + top : top
   bounding.minLeft = left
-  bounding.maxLeft = screen.width - fabSize.value - right
-  bounding.maxTop = screen.height - fabSize.value - bottom
+  bounding.maxLeft = screen.width - fabSize.width - right
+  bounding.maxTop = screen.height - fabSize.height - bottom
 }
 
 function initPosition() {
   const pos = props.position
   const { minLeft, minTop, maxLeft, maxTop } = bounding
-  if (pos === 'left-top') {
-    top.value = minTop
-    left.value = minLeft
-  } else if (pos === 'right-top') {
-    top.value = minTop
-    left.value = maxLeft
-  } else if (pos === 'left-bottom') {
-    top.value = maxTop
-    left.value = minLeft
-  } else if (pos === 'right-bottom') {
-    top.value = maxTop
-    left.value = maxLeft
+  const centerY = (maxTop + minTop) / 2
+  const centerX = (maxLeft + minLeft) / 2
+
+  switch (pos) {
+    case 'left-top':
+      top.value = minTop
+      left.value = minLeft
+      break
+    case 'right-top':
+      top.value = minTop
+      left.value = maxLeft
+      break
+    case 'left-bottom':
+      top.value = maxTop
+      left.value = minLeft
+      break
+    case 'right-bottom':
+      top.value = maxTop
+      left.value = maxLeft
+      break
+    case 'left-center':
+      top.value = centerY
+      left.value = minLeft
+      break
+    case 'right-center':
+      top.value = centerY
+      left.value = maxLeft
+      break
+    case 'top-center':
+      top.value = minTop
+      left.value = centerX
+      break
+    case 'bottom-center':
+      top.value = maxTop
+      left.value = centerX
+      break
   }
 }
 
@@ -170,7 +197,7 @@ function handleTouchEnd() {
   if (props.draggable === false) return
 
   const screenCenterX = screen.width / 2
-  const fabCenterX = left.value + fabSize.value / 2
+  const fabCenterX = left.value + fabSize.width / 2
   attractTransition.value = true
   if (fabCenterX < screenCenterX) {
     left.value = bounding.minLeft
@@ -190,7 +217,7 @@ const rootStyle = computed(() => {
   if (isDef(props.zIndex)) {
     style['z-index'] = props.zIndex
   }
-  return `${objToStyle(style)};${props.customStyle}`
+  return `${objToStyle(style)}${props.customStyle}`
 })
 
 onMounted(() => {
@@ -200,11 +227,12 @@ onMounted(() => {
     pushToQueue(proxy)
   }
 
-  nextTick(async () => {
+  const { start } = useRaf(async () => {
     await getBounding()
     initPosition()
     inited.value = true
   })
+  start()
 })
 
 onBeforeUnmount(() => {
@@ -217,6 +245,10 @@ onBeforeUnmount(() => {
 
 function handleClick() {
   if (props.disabled) {
+    return
+  }
+  if (!props.expandable) {
+    emit('click')
     return
   }
   isActive.value = !isActive.value

@@ -87,6 +87,12 @@
   @include e(actions) {
     padding: 24px;
   }
+  
+  @include edeep(actions-btn) {
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
 
   @include e(flex) {
     display: flex;
@@ -99,23 +105,4 @@
   @include e(cancel) {
     margin-right: 16px;
   }
-}
-
-.zoomIn-enter-active,
-.zoomIn-leave-active {
-  opacity: 1;
-  transform: translate3d(-50%, -50%, 0) scale(1);
-  transition: all .2s;
-}
-
-.zoomIn-enter {
-  opacity: 0;
-  transform: translate3d(-50%, -50%, 0) scale(0.7);
-  transition: all .2s ease-out;
-}
-
-.zoomIn-leave-to {
-  opacity: 0;
-  transform: translate3d(-50%, -50%, 0) scale(0.9);
-  transition: all .2s ease-out;
 }

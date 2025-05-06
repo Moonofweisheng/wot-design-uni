@@ -69,7 +69,7 @@ const rootStyle = computed(() => {
     style.height = addUnit(iconSize.value)
     style.width = addUnit(iconSize.value)
   }
-  return `${objToStyle(style)}; ${props.customStyle}`
+  return `${objToStyle(style)} ${props.customStyle}`
 })
 
 onBeforeMount(() => {

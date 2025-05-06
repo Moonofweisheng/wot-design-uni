@@ -32,9 +32,9 @@ export default {
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, reactive, watch } from 'vue'
-import { requestAnimationFrame, getRect, isObj, objToStyle, addUnit } from '../common/util'
+import { getRect, isObj, objToStyle, addUnit, pause } from '../common/util'
 import type { CSSProperties } from 'vue'
-import { segmentedProps, type SegmentedOption } from './types'
+import { segmentedProps, type SegmentedExpose, type SegmentedOption } from './types'
 const $item = '.wd-segmented__item'
 
 const props = defineProps(segmentedProps)
@@ -65,11 +65,10 @@ watch(
 
 const { proxy } = getCurrentInstance() as any
 
-onMounted(() => {
+onMounted(async () => {
   updateCurrentIndex()
-  requestAnimationFrame(() => {
-    updateActiveStyle(false)
-  })
+  await pause()
+  updateActiveStyle(false)
 })
 
 /**
@@ -124,6 +123,10 @@ function handleClick(option: string | number | SegmentedOption, index: number) {
   emit('change', isObj(option) ? option : { value })
   emit('click', isObj(option) ? option : { value })
 }
+
+defineExpose<SegmentedExpose>({
+  updateActiveStyle
+})
 </script>
 
 <style lang="scss" scoped>

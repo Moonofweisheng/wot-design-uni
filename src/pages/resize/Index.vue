@@ -1,6 +1,6 @@
 <template>
   <page-wraper>
-    <demo-block title="基础用法">
+    <demo-block :title="$t('ji-chu-yong-fa-0')">
       <wd-resize @resize="handleResize">
         <view :style="`background: #4d80f0; width: ${width};height: ${height}`"></view>
       </wd-resize>

@@ -1,6 +1,6 @@
-<frame/>
-
 # Checkbox 复选框
+
+复选框用于在一组备选项中进行多选。
 
 ## 基本用法
 
@@ -13,7 +13,7 @@
 ```typescript
 const value = ref<boolean>(true)
 
-function handleChange1({ value }) {
+function handleChange({ value }) {
   console.log(value)
 }
 ```

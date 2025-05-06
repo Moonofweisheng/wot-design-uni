@@ -15,18 +15,86 @@
   position: relative;
   display: flex;
   padding: $-divider-padding;
+  margin: $-divider-margin;
   align-items: center;
   color: $-divider-color;
   font-size: $-divider-fs;
 
-  @include e(line) {
-    display: block;
+  &::after,
+  &::before {
     flex: 1;
-    height: 1px;
-    transform: scaleY(0.5);
-    background: $-divider-line-color;
+    display: block;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: $-divider-line-color;
+    border-width: $-divider-line-height 0 0;
   }
-  @include e(content) {
-    padding: 0 12px;
+
+  &::before {
+    content: '';
   }
+
+  @include m(center, left, right) {
+    &::after {
+      content: '';
+      margin-left: $-divider-content-left-margin;
+    }
+
+    &::before {
+      margin-right: $-divider-content-right-margin;
+    }
+  }
+
+  @include m(left) {
+    &::before {
+      max-width: $-divider-content-left-width;
+    }
+  }
+
+  @include m(right) {
+    &::after {
+      max-width: $-divider-content-right-width;
+    }
+  }
+
+  @include when(hairline) {
+
+    &::before,
+    &::after {
+      transform: scaleY(0.5);
+    }
+  }
+
+  @include when(dashed) {
+
+    &::before,
+    &::after {
+      border-style: dashed;
+    }
+  }
+
+  @include m(vertical) {
+    display: inline-block;
+    width: $-divider-vertical-line-width;
+    height: $-divider-vertical-height;
+    margin: $-divider-vertical-content-margin;
+    padding: 0;
+    vertical-align: middle;
+
+    &::before {
+      height: 100%;
+      border-width: 0 0 0 $-divider-vertical-line-width;
+    }
+
+    &::after {
+      display: none;
+    }
+
+    @include when(hairline) {
+      &::before {
+        transform: scaleX(0.5);
+      }
+    }
+  }
+
 }

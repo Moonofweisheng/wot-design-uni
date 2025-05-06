@@ -1,13 +1,13 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 11:22:03
- * @LastEditTime: 2024-07-25 22:17:56
+ * @LastEditTime: 2024-11-24 23:04:55
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-segmented/types.ts
  * 记得注释
  */
-import type { PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeRequiredProp, makeStringProp } from '../common/props'
 
 export type SegmentedType = 'large' | 'middle' | 'small'
@@ -66,3 +66,15 @@ export const segmentedProps = {
    */
   vibrateShort: makeBooleanProp(false)
 }
+
+export type SegmentedExpose = {
+  /**
+   * 更新滑块偏移量
+   * @param animation 是否开启动画，默认开启
+   */
+  updateActiveStyle: (animation?: boolean) => void
+}
+
+export type SegmentedProps = ExtractPropTypes<typeof segmentedProps>
+
+export type SegmentedInstance = ComponentPublicInstance<SegmentedProps, SegmentedExpose>

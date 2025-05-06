@@ -15,5 +15,6 @@ export const monthProps = {
   allowSameDay: makeBooleanProp(false),
   defaultTime: {
     type: [Array] as PropType<Array<number[]>>
-  }
+  },
+  showTitle: makeBooleanProp(true)
 }

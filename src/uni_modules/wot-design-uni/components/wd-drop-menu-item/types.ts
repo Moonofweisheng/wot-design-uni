@@ -67,7 +67,15 @@ export const dorpMenuItemProps = {
   /**
    * 选项对象中，选项说明对应的 key
    */
-  tipKey: makeStringProp('tip')
+  tipKey: makeStringProp('tip'),
+  /**
+   * 自定义下拉菜单popup样式类
+   */
+  customPopupClass: makeStringProp(''),
+  /**
+   * 自定义下拉菜单popup样式
+   */
+  customPopupStyle: makeStringProp('')
 }
 
 export type DropMenuItemProps = ExtractPropTypes<typeof dorpMenuItemProps>
@@ -79,4 +87,4 @@ export type DropMenuItemExpose = {
   toggle: () => void
 }
 
-export type DropMenuItemInstance = ComponentPublicInstance<DropMenuItemProps>
+export type DropMenuItemInstance = ComponentPublicInstance<DropMenuItemProps, DropMenuItemExpose>

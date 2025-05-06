@@ -29,7 +29,7 @@ export default {
 <script lang="ts" setup>
 import wdPickerView from '../wd-picker-view/wd-picker-view.vue'
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
-import { debounce, isFunction, isDef, padZero, range, isArray } from '../common/util'
+import { debounce, isFunction, isDef, padZero, range, isArray, isString } from '../common/util'
 import {
   getPickerValue,
   datetimePickerViewProps,
@@ -322,7 +322,7 @@ function correctValue(value: string | number | Date): string | number {
   // 当type为time时
   if (!isDateType) {
     // 非Date类型，直接走此逻辑
-    let [hour, minute] = (value as string).split(':')
+    let [hour, minute] = (isString(value) ? value : value.toString()).split(':')
     hour = padZero(range(Number(hour), props.minHour, props.maxHour))
     minute = padZero(range(Number(minute), props.minMinute, props.maxMinute))
     return `${hour}:${minute}`

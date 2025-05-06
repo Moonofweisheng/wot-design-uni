@@ -123,7 +123,7 @@ export function rgbToHex(r: number, g: number, b: number): string {
  * @param hex 十六进制颜色代码（例如：'#RRGGBB'）
  * @returns 包含红、绿、蓝三个颜色分量的数组
  */
-function hexToRgb(hex: string): number[] {
+export function hexToRgb(hex: string): number[] {
   const rgb: number[] = []
 
   // 从第一个字符开始，每两个字符代表一个颜色分量
@@ -237,9 +237,10 @@ export type RectResultType<T extends boolean> = T extends true ? UniApp.NodeInfo
  * @param selector 节点选择器 #id,.class
  * @param all 是否返回所有 selector 对应的节点
  * @param scope 作用域（支付宝小程序无效）
+ * @param useFields 是否使用 fields 方法获取节点信息
  * @returns 节点信息或节点信息数组
  */
-export function getRect<T extends boolean>(selector: string, all: T, scope?: any): Promise<RectResultType<T>> {
+export function getRect<T extends boolean>(selector: string, all: T, scope?: any, useFields?: boolean): Promise<RectResultType<T>> {
   return new Promise<RectResultType<T>>((resolve, reject) => {
     let query: UniNamespace.SelectorQuery | null = null
     if (scope) {
@@ -247,17 +248,24 @@ export function getRect<T extends boolean>(selector: string, all: T, scope?: any
     } else {
       query = uni.createSelectorQuery()
     }
-    query[all ? 'selectAll' : 'select'](selector)
-      .boundingClientRect((rect) => {
-        if (all && isArray(rect) && rect.length > 0) {
-          resolve(rect as RectResultType<T>)
-        } else if (!all && rect) {
-          resolve(rect as RectResultType<T>)
-        } else {
-          reject(new Error('No nodes found'))
-        }
-      })
-      .exec()
+
+    const method = all ? 'selectAll' : 'select'
+
+    const callback = (rect: UniApp.NodeInfo | UniApp.NodeInfo[]) => {
+      if (all && isArray(rect) && rect.length > 0) {
+        resolve(rect as RectResultType<T>)
+      } else if (!all && rect) {
+        resolve(rect as RectResultType<T>)
+      } else {
+        reject(new Error('No nodes found'))
+      }
+    }
+
+    if (useFields) {
+      query[method](selector).fields({ size: true, node: true }, callback).exec()
+    } else {
+      query[method](selector).boundingClientRect(callback).exec()
+    }
   })
 }
 
@@ -307,7 +315,7 @@ export function isArray(value: any): value is Array<any> {
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function isFunction<T extends Function>(value: any): value is T {
-  return getType(value) === 'function'
+  return getType(value) === 'function' || getType(value) === 'asyncfunction'
 }
 
 /**
@@ -394,7 +402,7 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
   if (isArray(styles)) {
     // 使用过滤函数去除空值和 null 值的元素
     // 对每个非空元素递归调用 objToStyle，然后通过分号连接
-    return styles
+    const result = styles
       .filter(function (item) {
         return item != null && item !== ''
       })
@@ -402,10 +410,14 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
         return objToStyle(item)
       })
       .join(';')
+
+    // 如果结果不为空，确保末尾有分号
+    return result ? (result.endsWith(';') ? result : result + ';') : ''
   }
 
   if (isString(styles)) {
-    return styles
+    // 如果是字符串且不为空，确保末尾有分号
+    return styles ? (styles.endsWith(';') ? styles : styles + ';') : ''
   }
 
   // 如果 styles 是对象类型
@@ -413,7 +425,7 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
     // 使用 Object.keys 获取所有属性名
     // 使用过滤函数去除值为 null 或空字符串的属性
     // 对每个属性名和属性值进行格式化，通过分号连接
-    return Object.keys(styles)
+    const result = Object.keys(styles)
       .filter(function (key) {
         return styles[key] != null && styles[key] !== ''
       })
@@ -423,9 +435,36 @@ export function objToStyle(styles: Record<string, any> | Record<string, any>[]):
         return [kebabCase(key), styles[key]].join(':')
       })
       .join(';')
+
+    // 如果结果不为空，确保末尾有分号
+    return result ? (result.endsWith(';') ? result : result + ';') : ''
   }
   // 如果 styles 不是对象也不是数组，则直接返回
   return ''
+}
+
+/**
+ * 判断一个对象是否包含任何字段
+ * @param obj 要检查的对象
+ * @returns {boolean} 如果对象为空（不包含任何字段）则返回 true，否则返回 false
+ */
+export function hasFields(obj: unknown): boolean {
+  // 如果不是对象类型或为 null，则认为没有字段
+  if (!isObj(obj) || obj === null) {
+    return false
+  }
+
+  // 使用 Object.keys 检查对象是否有属性
+  return Object.keys(obj).length > 0
+}
+
+/**
+ * 判断一个对象是否为空对象（不包含任何字段）
+ * @param obj 要检查的对象
+ * @returns {boolean} 如果对象为空（不包含任何字段）则返回 true，否则返回 false
+ */
+export function isEmptyObj(obj: unknown): boolean {
+  return !hasFields(obj)
 }
 
 export const requestAnimationFrame = (cb = () => {}) => {
@@ -443,7 +482,7 @@ export const requestAnimationFrame = (cb = () => {}) => {
  * @param ms 延迟时间
  * @returns
  */
-export const pause = (ms: number) => {
+export const pause = (ms: number = 1000 / 30) => {
   return new AbortablePromise((resolve) => {
     const timer = setTimeout(() => {
       clearTimeout(timer)
@@ -459,7 +498,7 @@ export const pause = (ms: number) => {
  * @returns 深拷贝后的对象副本
  */
 export function deepClone<T>(obj: T, cache: Map<any, any> = new Map()): T {
-  // 如果对象为 null 或者不是对象类型，则直接返回该对象
+  // 如果对象为 null 或或者不是对象类型，则直接返回该对象
   if (obj === null || typeof obj !== 'object') {
     return obj
   }
@@ -695,7 +734,13 @@ export function isImageUrl(url: string): boolean {
 /**
  * 判断环境是否是H5
  */
-export const isH5 = process.env.UNI_PLATFORM === 'h5'
+export const isH5 = (() => {
+  let isH5 = false
+  // #ifdef H5
+  isH5 = true
+  // #endif
+  return isH5
+})()
 
 /**
  * 剔除对象中的某些属性
@@ -719,4 +764,15 @@ export function omitBy<O extends Record<string, any>>(obj: O, predicate: (value:
  */
 export function easingFn(t: number = 0, b: number = 0, c: number = 0, d: number = 0): number {
   return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b
+}
+
+/**
+ * 从数组中寻找最接近目标值的元素
+ *
+ * @param arr 数组
+ * @param target 目标值
+ * @returns 最接近目标值的元素
+ */
+export function closest(arr: number[], target: number) {
+  return arr.reduce((prev, curr) => (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev))
 }

@@ -3,21 +3,31 @@
 
 @include b(swiper) {
   position: relative;
-  @include e(track){
+
+  @include e(track) {
     border-radius: $-swiper-radius;
     overflow: hidden;
     transform: translateY(0);
   }
 
-  @include e(item){
+  @include e(item) {
     display: flex;
     align-items: center;
     box-sizing: border-box;
     padding: $-swiper-item-padding;
   }
 
-  @include e(image){
+  @include e(image, video) {
     width: 100%;
     transition: all 0.3s ease;
+  }
+
+  @include e(text) {
+    // 随便搞个样式，反正用户还是会覆盖的
+    position: absolute;
+    right: 24rpx;
+    top: 24rpx;
+    color: $-swiper-item-text-color;
+    font-size: $-swiper-item-text-fs;
   }
 }

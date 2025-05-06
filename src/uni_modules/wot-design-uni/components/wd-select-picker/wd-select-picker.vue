@@ -4,7 +4,7 @@
       <slot v-if="useDefaultSlot"></slot>
       <view
         v-else
-        :class="`wd-select-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${alignRight && 'is-align-right'} ${
+        :class="`wd-select-picker__cell ${disabled && 'is-disabled'} ${props.readonly && 'is-readonly'} ${alignRight && 'is-align-right'} ${
           error && 'is-error'
         } ${size && 'is-' + size}`"
       >
@@ -25,7 +25,10 @@
             >
               {{ showValue || placeholder || translate('placeholder') }}
             </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-select-picker__arrow" name="arrow-right" />
+            <wd-icon v-if="showArrow" custom-class="wd-select-picker__arrow" name="arrow-right" />
+            <view v-else-if="showClear" @click.stop="handleClear">
+              <wd-icon custom-class="wd-select-picker__clear" name="error-fill" />
+            </view>
           </view>
 
           <view v-if="errorMessage" class="wd-select-picker__error-message">{{ errorMessage }}</view>
@@ -82,7 +85,7 @@
               <wd-radio :value="item[valueKey]" :disabled="item.disabled">
                 <block v-if="filterable && filterVal">
                   <block v-for="text in item[labelKey]" :key="text.label">
-                    <text :clsss="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
+                    <text :class="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
                   </block>
                 </block>
                 <block v-else>
@@ -125,7 +128,7 @@ import wdLoading from '../wd-loading/wd-loading.vue'
 
 import { getCurrentInstance, onBeforeMount, ref, watch, nextTick, computed } from 'vue'
 import { useCell } from '../composables/useCell'
-import { getRect, isArray, isDef, isFunction, requestAnimationFrame } from '../common/util'
+import { getRect, isArray, isDef, isFunction, pause } from '../common/util'
 import { useParent } from '../composables/useParent'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useTranslate } from '../composables/useTranslate'
@@ -134,7 +137,7 @@ import { selectPickerProps, type SelectPickerExpose } from './types'
 const { translate } = useTranslate('select-picker')
 
 const props = defineProps(selectPickerProps)
-const emit = defineEmits(['change', 'cancel', 'confirm', 'update:modelValue', 'open', 'close'])
+const emit = defineEmits(['change', 'cancel', 'confirm', 'clear', 'update:modelValue', 'open', 'close'])
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
@@ -142,7 +145,7 @@ const isConfirm = ref<boolean>(false)
 const lastSelectList = ref<Array<number | boolean | string> | number | boolean | string>([])
 const filterVal = ref<string>('')
 const filterColumns = ref<Array<Record<string, any>>>([])
-const scrollTop = ref<number | null>(0) // 滚动位置
+const scrollTop = ref<number>(0) // 滚动位置
 const cell = useCell()
 
 const showValue = computed(() => {
@@ -258,9 +261,9 @@ onBeforeMount(() => {
 
 const { proxy } = getCurrentInstance() as any
 
-function setScrollIntoView() {
+async function setScrollIntoView() {
   let wraperSelector: string = ''
-  let selectorPromise: Promise<UniApp.NodeInfo | UniApp.NodeInfo[]>[] = []
+  let selectorPromise: Promise<UniApp.NodeInfo>[] = []
   if (isDef(selectList.value) && selectList.value !== '' && !isArray(selectList.value)) {
     wraperSelector = '#wd-radio-group'
     selectorPromise = [getRect(`#radio${selectList.value}`, false, proxy)]
@@ -271,31 +274,24 @@ function setScrollIntoView() {
     wraperSelector = '#wd-checkbox-group'
   }
   if (wraperSelector) {
-    requestAnimationFrame().then(() => {
-      requestAnimationFrame().then(() => {
-        Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise])
-          .then((res: any[]) => {
-            if (isDef(res) && isArray(res)) {
-              const scrollView = res[0]
-              const wraper = res[1]
-              const target = res.slice(2) || []
-              if (isDef(wraper) && isDef(scrollView)) {
-                const index = target.findIndex((item) => {
-                  return item.top >= scrollView.top && item.bottom <= scrollView.bottom
-                })
-                if (index < 0) {
-                  scrollTop.value = -1
-                  nextTick(() => {
-                    scrollTop.value = Math.max(0, target[0].top - wraper.top - scrollView.height / 2)
-                  })
-                }
-              }
-            }
+    await pause(2000 / 30)
+    Promise.all([getRect('.wd-select-picker__wrapper', false, proxy), getRect(wraperSelector, false, proxy), ...selectorPromise]).then((res) => {
+      if (isDef(res) && isArray(res)) {
+        const scrollView = res[0]
+        const wraper = res[1]
+        const target = res.slice(2) || []
+        if (isDef(wraper) && isDef(scrollView)) {
+          const index = target.findIndex((item) => {
+            return item.bottom! > scrollView.top! && item.top! < scrollView.bottom!
           })
-          .catch((error) => {
-            console.log(error)
-          })
-      })
+          if (index < 0) {
+            scrollTop.value = -1
+            nextTick(() => {
+              scrollTop.value = Math.max(0, target[0].top! - wraper.top! - scrollView.height! / 2)
+            })
+          }
+        }
+      }
     })
   }
 }
@@ -428,6 +424,21 @@ function formatFilterColumns(columns: Record<string, any>[], filterVal: string) 
 
 const showConfirm = computed(() => {
   return (props.type === 'radio' && props.showConfirm) || props.type === 'checkbox'
+})
+
+// 是否展示清除按钮
+const showClear = computed(() => {
+  return props.clearable && !props.disabled && !props.readonly && showValue.value.length
+})
+
+function handleClear() {
+  emit('update:modelValue', props.type === 'checkbox' ? [] : '')
+  emit('clear')
+}
+
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly && !showClear.value
 })
 
 defineExpose<SelectPickerExpose>({
