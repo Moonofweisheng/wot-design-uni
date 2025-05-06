@@ -135,9 +135,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Update ESLint and TypeScript ESLint packages
-        run: pnpm update @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint
-
       - name: Run ESLint
         run: pnpm lint
 
