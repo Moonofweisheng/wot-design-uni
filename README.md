@@ -17,8 +17,7 @@
 
 
 <a href="https://github.com/Moonofweisheng/wot-design-uni">
-  <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-design-uni?style=flat-square
-  ">
+  <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-design-uni?style=flat-square">
  </a>
 
 <a href="https://www.npmjs.com/package/wot-design-uni">

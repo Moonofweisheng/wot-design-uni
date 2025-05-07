@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-05-06 22:21:18
+ * @LastEditTime: 2025-05-07 13:27:31
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
@@ -82,23 +82,6 @@ export default defineConfig({
   },
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['link', { rel: 'stylesheet', href: '/petercatai/assistant.min.css' }],
-    ['script', { src: '/petercatai/react.development.js' }],
-    ['script', { src: '/petercatai/react-dom.development.js' }],
-    ['script', { src: '/petercatai/dayjs.min.js' }],
-    ['script', { src: '/petercatai/antd.js' }],
-    ['script', { src: '/petercatai/lottie.js' }],
-    ['script', { src: '/petercatai/assistant.min.js' }],
-    ['script', {}, `
-      window.onload = function() {
-        PetercatLUI.initAssistant({
-          apiDomain: 'https://api.petercat.ai',
-          token:"d673a0ef-73e3-46ff-9e08-e43eba4548d1",
-          helloMessage:"我可以处理任何 Wot UI 的问题，尽管放马过来~",
-          hideLogo: true,
-        });
-      }
-    `],
     ['script', {}, `
       var _hmt = _hmt || [];
       (function() {
