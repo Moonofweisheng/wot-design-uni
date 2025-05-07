@@ -163,11 +163,14 @@ function handleFilterChange({ value }: { value: string }) {
 
 function formatFilterOptions(options: Record<string, any>[], filterVal: string) {
   const filterOptionsTemp = options.filter((item) => {
-    return item[props.labelKey].indexOf(filterVal) > -1
+    const label = item?.[props.labelKey]
+    return typeof label === 'string' && label.includes(filterVal)
   })
   filterOptions.value = []
   nextTick(() => {
     filterOptions.value = filterOptionsTemp
+  })
+}
   })
 }
 
