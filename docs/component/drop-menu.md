@@ -183,6 +183,18 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 </wd-drop-menu>
 ```
 
+## 本地搜索
+
+设置 `filterable` 属性支持本地搜索，设置 `filter-placeholder` 属性设置搜索框的提示占位文本。
+
+```html
+<wd-drop-menu>
+  <wd-drop-menu-item v-model="value1" :options="option1" @change="handleChange1" />
+  <wd-drop-menu-item v-model="value2" :options="option2" @change="handleChange2" filterable />
+  <wd-drop-menu-item v-model="value2" :options="option2" @change="handleChange2" filterable filter-placeholder="检索"/>
+</wd-drop-menu>
+```
+
 ## DropMenu Attributes
 
 | 参数                 | 说明                                 | 类型    | 可选值    | 默认值 | 最低版本 |
@@ -207,6 +219,8 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 | value-key     | 选项对象中，value 对应的 key                                           | string                        | -      | value      | -        |
 | label-key     | 选项对象中，展示的文本对应的 key                                       | string                        | -      | label      | -        |
 | tip-key       | 选项对象中，选项说明对应的 key                                         | string                        | -      | tip        | -        |
+| filterable    | 是否开启本地数据检索                                                   | boolean                         | -      | false       | -        |
+| filter-placeholder | 本地数据检索提示文字                                               | string                        | -      | -          | -        |
 
 ## DropdownItem Events
 

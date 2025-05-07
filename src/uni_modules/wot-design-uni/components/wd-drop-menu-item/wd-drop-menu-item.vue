@@ -19,8 +19,16 @@
       @after-leave="afterLeave"
     >
       <view v-if="options.length">
+        <wd-search
+          v-if="filterable"
+          v-model="filterVal"
+          :placeholder="filterPlaceholder || translate('filterPlaceholder')"
+          hide-cancel
+          placeholder-left
+          @change="handleFilterChange"
+        />
         <view
-          v-for="(item, index) in options"
+          v-for="(item, index) in filterOptions"
           :key="index"
           @click="choose(index)"
           :class="`wd-drop-item__option ${(item[valueKey] !== '' ? item[valueKey] : item) === modelValue ? 'is-active' : ''}`"
@@ -55,6 +63,7 @@ export default {
 <script lang="ts" setup>
 import wdPopup from '../wd-popup/wd-popup.vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
+import wdSearch from '../wd-search/wd-search.vue'
 import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
@@ -63,6 +72,9 @@ import { useParent } from '../composables/useParent'
 import { DROP_MENU_KEY } from '../wd-drop-menu/types'
 import { isDef, isFunction } from '../common/util'
 import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
+import { useTranslate } from '../composables/useTranslate'
+  
+const { translate } = useTranslate('drop-menu')
 
 const props = defineProps(dorpMenuItemProps)
 const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
@@ -74,6 +86,9 @@ const position = ref<PopupType>()
 const zIndex = ref<number>(12)
 const modal = ref<boolean>(true)
 const duration = ref<number>(0)
+
+const filterVal = ref<string>('')
+const filterOptions = ref<Array<Record<string, any>>>([])
 
 const { parent: dropMenu } = useParent(DROP_MENU_KEY)
 
@@ -91,6 +106,21 @@ const positionStyle = computed(() => {
   }
   return style
 })
+
+watch(
+  () => props.options,
+  (newValue) => {
+    if (props.filterable && filterVal.value) {
+      formatFilterOptions(newValue, filterVal.value)
+    } else {
+      filterOptions.value = newValue
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 
 watch(
   () => props.modelValue,
@@ -124,11 +154,37 @@ onBeforeUnmount(() => {
 function getShowPop() {
   return showPop.value
 }
+
+
+function formatFilterOptions(
+  options: Record<string, any>[],
+  filterVal: string
+) {
+  const filterOptionsTemp = options.filter((item) => {
+    const label = item?.[props.labelKey]
+    return typeof label === 'string'
+      ? label.toLowerCase().includes(filterVal.toLowerCase())
+      : String(label).toLowerCase().includes(filterVal.toLowerCase())
+  })
+  filterOptions.value = filterOptionsTemp
+}
+
+function handleFilterChange({ value }: { value: string }) {
+  if (value === '') {
+    filterOptions.value = []
+    filterVal.value = value
+    filterOptions.value = props.options
+  } else {
+    filterVal.value = value
+    formatFilterOptions(props.options, value)
+  }
+}
+  
 // 模拟单选操作 默认根据 value 选中操作
 function choose(index: number) {
   if (props.disabled) return
   const { valueKey } = props
-  const item = props.options[index]
+  const item = filterOptions.value[index]
   const newValue = item[valueKey] !== undefined ? item[valueKey] : item
   emit('update:modelValue', newValue)
   emit('change', {
@@ -173,6 +229,13 @@ function open() {
     })
   } else {
     handleOpen()
+  }
+  
+  //关闭弹窗清空搜索 延迟避免清空画面闪过
+  if (filterVal.value !== '') {
+    setTimeout(() => {
+      handleFilterChange({ value: '' })
+    }, 300)
   }
 }
 

@@ -71,7 +71,12 @@ export const dorpMenuItemProps = {
   /**
    * 自定义下拉菜单popup样式
    */
-  customPopupStyle: makeStringProp('')
+  customPopupStyle: makeStringProp(''),
+  
+  /** 可搜索（目前只支持本地搜索） */
+  filterable: makeBooleanProp(false),
+  /** 搜索框占位符 */
+  filterPlaceholder: String,
 }
 
 export type DropMenuItemProps = ExtractPropTypes<typeof dorpMenuItemProps>
