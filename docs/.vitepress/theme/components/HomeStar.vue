@@ -1,12 +1,3 @@
-<!--
- * @Author: weisheng
- * @Date: 2024-04-01 17:10:05
- * @LastEditTime: 2025-05-07 15:02:18
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/HomeStar.vue
- * 记得注释
--->
 <script setup lang="ts"></script>
 
 <template>
