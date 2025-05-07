@@ -177,7 +177,7 @@ async function handleConfirmUpload(event) {
 | confirm-button-text | 确认按钮文案 | string | - | 完成 | - |
 | quality | 生成的图片质量 [wx.canvasToTempFilePath属性介绍](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/wx.canvasToTempFilePath.html#%E5%8F%82%E6%95%B0) | number | 0/1 | 1 | - |
 | file-type | 目标文件的类型，[wx.canvasToTempFilePath属性介绍](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/wx.canvasToTempFilePath.html#%E5%8F%82%E6%95%B0) | string | - | png | - |
-| aspect-ratio | 裁剪框宽高比，格式为 width:height | string | - | 1:1 | $LOWEST_VERSION$ |
+| aspect-ratio | 裁剪框宽高比，格式为 width:height | string | - | 1:1 | 1.9.0 |
 
 ## Events
 

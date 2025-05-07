@@ -678,6 +678,8 @@ export type gridItemThemeVars = {
   gridItemBg?: string
   gridItemPadding?: string
   gridItemBorderColor?: string
+  gridItemHoverBg?: string
+  gridItemHoverBgDark?: string
 }
 
 export type statustipThemeVars = {

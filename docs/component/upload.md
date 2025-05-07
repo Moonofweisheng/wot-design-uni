@@ -649,7 +649,7 @@ const action: string = 'https://mockapi.eolink.com/zhTuw2P8c29bc981a741931bdd86e
 | successStatus                 | 接口响应的成功状态（statusCode）值                                                                                                                                             | number                                 | -                                              | 200                        | 1.3.4            |
 | auto-upload                   | 是否选择文件后自动上传。为 false 时应手动调用 submit() 方法开始上传                                                                                                            | boolean                                | -                                              | true                       | 1.3.8 |
 | upload-method                 | 自定义上传方法                                                                                                                                                     | UploadMethod                                | -                                              | -                       | 1.3.8 |
-| extension | 根据文件拓展名过滤(H5支持全部类型过滤,微信小程序支持all和file时过滤,其余平台不支持) | string[] | - | - | $LOWEST_VERSION$ |
+| extension | 根据文件拓展名过滤(H5支持全部类型过滤,微信小程序支持all和file时过滤,其余平台不支持) | string[] | - | - | 1.9.0 |
 
 ## accept 的合法值
 

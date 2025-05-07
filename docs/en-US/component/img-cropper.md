@@ -177,7 +177,7 @@ async function handleConfirmUpload(event) {
 | confirm-button-text | Confirm button text | string | - | Complete | - |
 | quality | Generated image quality [wx.canvasToTempFilePath property introduction](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/wx.canvasToTempFilePath.html#%E5%8F%82%E6%95%B0) | number | 0/1 | 1 | - |
 | file-type | Target file type, [wx.canvasToTempFilePath property introduction](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/wx.canvasToTempFilePath.html#%E5%8F%82%E6%95%B0) | string | - | png | - |
-| aspect-ratio | Crop box aspect ratio, format is width:height | string | - | 1:1 | $LOWEST_VERSION$ |
+| aspect-ratio | Crop box aspect ratio, format is width:height | string | - | 1:1 | 1.9.0 |
 
 ## Events
 

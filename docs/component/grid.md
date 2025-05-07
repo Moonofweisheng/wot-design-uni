@@ -229,7 +229,7 @@
 | square      | 是否将格子固定为正方形         | boolean | -      | false                        | -                |
 | clickable   | 是否开启格子点击反馈           | boolean | -      | false                        | -                |
 | bg-color    | 背景颜色设置                   | string  | -      | #ffffff                      | -                |
-| hover-class | 指定grid-item按下去的样式类    | string  | -      | wd-grid-item__content--hover | $LOWEST_VERSION$ |
+| hover-class | 指定grid-item按下去的样式类    | string  | -      | wd-grid-item__content--hover | 1.9.0 |
 
 ## GridItem Attributes
 
