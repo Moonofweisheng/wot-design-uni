@@ -1,187 +1,323 @@
 <template>
-  <page-wraper>
-    <view @click.stop="">
-      <wd-message-box></wd-message-box>
-    </view>
-    <view class="demo-body">
-      <demo-block :title="$t('jiBenYongFa')" transparent>
-        <wd-drop-menu>
-          <wd-drop-menu-item v-model="value1" :options="option1" @change="handleChange1" />
-          <wd-drop-menu-item v-model="value2" :options="option2" @change="handleChange2" />
-        </wd-drop-menu>
-      </demo-block>
-      <demo-block :title="$t('zi-ding-yi-cai-dan-nei-rong')" transparent>
-        <wd-drop-menu>
-          <wd-drop-menu-item v-model="value3" :options="option1" @change="handleChange3" />
-          <wd-drop-menu-item ref="dropMenu" :title="$t('shai-xuan')" @opened="handleOpened">
-            <view>
-              <wd-slider v-model="valuetest" ref="slider" />
-              <wd-cell :title="$t('biao-ti-wen-zi-10')" value="内容" />
-              <wd-cell :title="$t('biao-ti-wen-zi-10')" label="$t('miaoShuXinXi-0')" value="内容" />
-              <view style="padding: 0 10px 20px; box-sizing: border-box">
-                <wd-button block size="large" @click="confirm">{{ $t('zhu-yao-an-niu') }}</wd-button>
-              </view>
-            </view>
-          </wd-drop-menu-item>
-        </wd-drop-menu>
-      </demo-block>
-      <demo-block :title="$t('zi-ding-yi-cai-dan-xuan-xiang')" transparent>
-        <view class="custom-menu">
-          <wd-drop-menu custom-style="flex: 1; min-width: 0">
-            <wd-drop-menu-item v-model="value4" :options="option1" @change="handleChange4" />
-          </wd-drop-menu>
-          <view style="flex: 1">
-            <wd-sort-button v-model="value5" :title="$t('shang-jia-shi-jian')" @change="handleChange5" />
+  <view
+    v-if="showWrapper"
+    :class="`wd-drop-item  ${customClass}`"
+    :style="`pointer-events: none; z-index: ${zIndex}; ${positionStyle};${customStyle}`"
+  >
+    <wd-popup
+      v-model="showPop"
+      :z-index="zIndex"
+      :duration="duration"
+      :position="position"
+      :custom-style="`position: absolute; pointer-events: auto; max-height: 80%;${customPopupStyle}`"
+      :custom-class="customPopupClass"
+      modal-style="position: absolute;"
+      :modal="modal"
+      :close-on-click-modal="false"
+      @click-modal="closeOnClickModal && close()"
+      @before-enter="beforeEnter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @after-leave="afterLeave"
+    >
+      <view v-if="options.length">
+        <wd-search
+          v-if="filterable"
+          v-model="filterVal"
+          :placeholder="
+            filterPlaceholder || translate('filterPlaceholder')
+          "
+          hide-cancel
+          placeholder-left
+          @change="handleFilterChange"
+        />
+        <view
+          v-for="(item, index) in filterOptions"
+          :key="index"
+          @click="choose(index)"
+          :class="`wd-drop-item__option ${(item[valueKey] !== '' ? item[valueKey] : item) === modelValue ? 'is-active' : ''}`"
+        >
+          <view :class="`wd-drop-item__title ${customTitle}`">
+            <text>{{ item[labelKey] ? item[labelKey] : item }}</text>
+            <text v-if="item[tipKey]" class="wd-drop-item__tip">{{
+              item[tipKey]
+            }}</text>
           </view>
+          <wd-icon
+            v-if="
+              (item[valueKey] !== '' ? item[valueKey] : item) ===
+              modelValue
+            "
+            :name="iconName"
+            size="20px"
+            :class="`wd-drop-item__icon ${customIcon}`"
+          />
         </view>
-      </demo-block>
-      <demo-block :title="$t('zi-ding-yi-cai-dan-tu-biao')" transparent>
-        <wd-drop-menu>
-          <wd-drop-menu-item :title="$t('di-tu')" icon="location" icon-size="24px" />
-        </wd-drop-menu>
-      </demo-block>
-      <demo-block :title="$t('yi-bu-da-kai-guan-bi')" transparent>
-        <wd-drop-menu>
-          <wd-drop-menu-item v-model="value10" :options="option1" @change="handleChange1" :before-toggle="handleBeforeToggle" />
-        </wd-drop-menu>
-      </demo-block>
-      <demo-block :title="$t('xiang-shang-dan-chu')" transparent>
-        <wd-drop-menu direction="up">
-          <wd-drop-menu-item v-model="value6" :options="option1" @change="handleChange6" />
-          <wd-drop-menu-item v-model="value7" :options="option2" @change="handleChange7" />
-        </wd-drop-menu>
-      </demo-block>
-      <demo-block :title="$t('jinYong')" transparent>
-        <wd-drop-menu direction="up">
-          <wd-drop-menu-item v-model="value8" disabled :options="option1" @change="handleChange8" />
-          <wd-drop-menu-item v-model="value9" :options="option2" @change="handleChange9" />
-        </wd-drop-menu>
-      </demo-block>
-      <demo-block title="可搜索" transparent>
-        <wd-drop-menu>
-          <wd-drop-menu-item v-model="value11" :options="option1" @change="handleChange11" />
-          <wd-drop-menu-item v-model="value12" :options="option2" @change="handleChange12" filterable />
-          <wd-drop-menu-item v-model="value13" :options="option2" @change="handleChange13" filterable filter-placeholder=“检索” />
-        </wd-drop-menu>
-      </demo-block>
-    </view>
-  </page-wraper>
+      </view>
+      <slot v-else />
+    </wd-popup>
+  </view>
 </template>
-<script lang="ts" setup>
-import { ref } from 'vue'
-
-import { useMessage } from '@/uni_modules/wot-design-uni'
-import type { SliderInstance } from '@/uni_modules/wot-design-uni/components/wd-slider/types'
-import type { DropMenuItemBeforeToggle } from '@/uni_modules/wot-design-uni/components/wd-drop-menu-item/types'
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
-const messageBox = useMessage()
-
-const dropMenu = ref()
-const slider = ref<SliderInstance>()
-
-const valuetest = ref<number>(30)
-
-const value1 = ref<number>(1)
-const value2 = ref<number>(0)
-const value3 = ref<number>(0)
-const value4 = ref<number>(0)
-const value5 = ref<number>(0)
-const value6 = ref<number>(0)
-const value7 = ref<number>(0)
-const value8 = ref<number>(0)
-const value9 = ref<number>(0)
-const value10 = ref<number>(0)
-  
-const value11 = ref<number>(0)
-const value12 = ref<number>(0)
-const value13 = ref<number>(0)
-
-const option1 = ref<Record<string, any>[]>([
-  { label: t('quan-bu-shang-pin'), value: 0 },
-  { label: t('xin-kuan-shang-pin'), value: 1, tip: t('zhe-shi-bu-chong-xin-xi') },
-  { label: t('zhe-shi-bi-jiao-chang-de-shai-xuan-tiao-jian-zhe-shi-bi-jiao-chang-de-shai-xuan-tiao-jian'), value: 2 }
-])
-const option2 = ref<Record<string, any>[]>([
-  { label: t('zong-he'), value: 0 },
-  { label: t('xiao-liang'), value: 1 },
-  { label: t('shang-jia-shi-jian'), value: 2 }
-])
-
-function handleOpened() {
-  slider.value?.initSlider()
-}
-
-function handleChange1({ value }: any) {
-  console.log(value)
-}
-function handleChange2({ value }: any) {
-  console.log(value)
-}
-function handleChange3({ value }: any) {
-  console.log(value)
-}
-function handleChange4({ value }: any) {
-  console.log(value)
-}
-function handleChange5({ value }: any) {
-  console.log(value)
-}
-function handleChange6({ value }: any) {
-  console.log(value)
-}
-function handleChange7({ value }: any) {
-  console.log(value)
-}
-function handleChange8({ value }: any) {
-  console.log(value)
-}
-function handleChange9({ value }: any) {
-  console.log(value)
-}
-
-function handleChange11({ value }: any) {
-  console.log(value)
-}
-function handleChange12({ value }: any) {
-  console.log(value)
-}
-function handleChange13({ value }: any) {
-  console.log(value)
-}
-
-function confirm() {
-  dropMenu.value.close()
-}
-
-const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
-  messageBox
-    .confirm({
-      title: `${status ? t('yi-bu-da-kai') : t('yi-bu-guan-bi')}`,
-      msg: `${status ? t('que-ding-yao-da-kai-xia-la-cai-dan-ma') : t('que-ding-yao-guan-bi-xia-la-cai-dan-ma')}`
-    })
-    .then(() => {
-      resolve(true)
-    })
-    .catch(() => {
-      resolve(false)
-    })
-}
-</script>
-<style lang="scss" scoped>
-.wot-theme-dark {
-  .custom-menu {
-    background: $-dark-background2;
+<script lang="ts">
+export default {
+  name: 'wd-drop-menu-item',
+  options: {
+    virtualHost: true,
+    addGlobalClass: true,
+    styleIsolation: 'shared'
   }
 }
-.demo-body {
-  height: 100vh;
+</script>
+
+<script lang="ts" setup>
+import wdPopup from '../wd-popup/wd-popup.vue'
+import wdIcon from '../wd-icon/wd-icon.vue'
+import wdSearch from '../wd-search/wd-search.vue'
+import {
+  computed,
+  getCurrentInstance,
+  inject,
+  onBeforeMount,
+  onBeforeUnmount,
+  ref,
+  watch,
+  nextTick
+} from 'vue'
+import { pushToQueue, removeFromQueue } from '../common/clickoutside'
+import { type Queue, queueKey } from '../composables/useQueue'
+import type { PopupType } from '../wd-popup/types'
+import { useParent } from '../composables/useParent'
+import { DROP_MENU_KEY } from '../wd-drop-menu/types'
+import { isDef, isFunction } from '../common/util'
+import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
+
+import { useTranslate } from '../composables/useTranslate'
+const { translate } = useTranslate('drop-menu')
+
+const props = defineProps(dorpMenuItemProps)
+const emit = defineEmits([
+  'change',
+  'update:modelValue',
+  'open',
+  'opened',
+  'closed',
+  'close'
+])
+
+const queue = inject<Queue | null>(queueKey, null)
+const showWrapper = ref<boolean>(false)
+const showPop = ref<boolean>(false)
+const position = ref<PopupType>()
+const zIndex = ref<number>(12)
+const modal = ref<boolean>(true)
+const closeOnClickModal = ref<boolean>(true)
+const duration = ref<number>(0)
+
+const filterVal = ref<string>('')
+const filterOptions = ref<Array<Record<string, any>>>([])
+
+const { parent: dropMenu } = useParent(DROP_MENU_KEY)
+
+const { proxy } = getCurrentInstance() as any
+
+const positionStyle = computed(() => {
+  let style: string = ''
+  if (showWrapper.value && dropMenu) {
+    style =
+      dropMenu.props.direction === 'down'
+        ? `top: calc(var(--window-top) + ${dropMenu.offset.value}px); bottom: 0;`
+        : `top: 0; bottom: calc(var(--window-bottom) + ${dropMenu.offset.value}px)`
+  } else {
+    style = ''
+  }
+  return style
+})
+
+watch(
+  () => props.options,
+  (newValue) => {
+    if (props.filterable && filterVal.value) {
+      formatFilterOptions(newValue, filterVal.value)
+    } else {
+      filterOptions.value = newValue
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (
+      isDef(newValue) &&
+      typeof newValue !== 'number' &&
+      typeof newValue !== 'string'
+    ) {
+      console.error(
+        '[wot-design] warning(wd-drop-menu-item): the type of value should be a number or a string.'
+      )
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+onBeforeMount(() => {
+  if (queue && queue.pushToQueue) {
+    queue.pushToQueue(proxy)
+  } else {
+    pushToQueue(proxy)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (queue && queue.removeFromQueue) {
+    queue.removeFromQueue(proxy)
+  } else {
+    removeFromQueue(proxy)
+  }
+})
+
+function getShowPop() {
+  return showPop.value
 }
 
-.custom-menu {
-  display: flex;
-  background: #fff;
-  text-align: center;
+function formatFilterOptions(
+  options: Record<string, any>[],
+  filterVal: string
+) {
+  const filterOptionsTemp = options.filter((item) => {
+    const label = item?.[props.labelKey]
+    return (
+      typeof label === 'string' &&
+      label.toLowerCase().includes(filterVal.toLowerCase())
+    )
+  })
+  filterOptions.value = []
+  nextTick(() => {
+    filterOptions.value = filterOptionsTemp
+  })
 }
+
+function handleFilterChange({ value }: { value: string }) {
+  if (value === '') {
+    filterOptions.value = []
+    filterVal.value = value
+    nextTick(() => {
+      filterOptions.value = props.options
+    })
+  } else {
+    filterVal.value = value
+    formatFilterOptions(props.options, value)
+  }
+}
+
+// 模拟单选操作 默认根据 value 选中操作
+function choose(index: number) {
+  if (props.disabled) return
+  const { valueKey } = props
+  const item = filterOptions.value[index]
+  const newValue =
+    item[valueKey] !== undefined ? item[valueKey] : item
+  emit('update:modelValue', newValue)
+  emit('change', {
+    value: newValue,
+    selectedItem: item
+  })
+  close()
+}
+// 外部关闭弹出框
+function close() {
+  if (!showPop.value) {
+    return
+  }
+  if (isFunction(props.beforeToggle)) {
+    props.beforeToggle({
+      status: false,
+      resolve: (isPass: boolean) => {
+        isPass && handleClose()
+      }
+    })
+  } else {
+    handleClose()
+  }
+}
+
+function handleClose() {
+  if (showPop.value) {
+    showPop.value = false
+  }
+}
+
+function open() {
+  if (showPop.value) {
+    return
+  }
+
+  //关闭清空搜索 避免清空画面闪过
+  if (filterVal.value !== '') {
+    setTimeout(() => {
+      handleFilterChange({ value: '' })
+    }, 300)
+  }
+
+  if (isFunction(props.beforeToggle)) {
+    props.beforeToggle({
+      status: true,
+      resolve: (isPass) => {
+        isPass && handleOpen()
+      }
+    })
+  } else {
+    handleOpen()
+  }
+}
+
+function handleOpen() {
+  showWrapper.value = true
+  showPop.value = true
+  if (dropMenu) {
+    modal.value = Boolean(dropMenu.props.modal)
+    duration.value = Number(dropMenu.props.duration)
+    closeOnClickModal.value = Boolean(
+      dropMenu.props.closeOnClickModal
+    )
+    position.value =
+      dropMenu.props.direction === 'down' ? 'top' : 'bottom'
+  }
+  emit('open')
+}
+
+function toggle() {
+  if (showPop.value) {
+    close()
+  } else {
+    open()
+  }
+}
+
+function afterLeave() {
+  showWrapper.value = false
+  emit('closed')
+}
+function beforeEnter() {
+  emit('open')
+}
+function afterEnter() {
+  emit('opened')
+}
+function beforeLeave() {
+  emit('close')
+}
+
+defineExpose<DropMenuItemExpose>({ getShowPop, open, close, toggle })
+</script>
+
+<style lang="scss" scoped>
+@import './index.scss';
 </style>
