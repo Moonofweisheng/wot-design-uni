@@ -5,16 +5,40 @@ on:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
+  # 允许手动触发工作流
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '版本号 (例如: 1.0.0)'
+        required: true
+        type: string
+        default: ''
+      description:
+        description: '版本描述'
+        required: false
+        type: string
+        default: '手动发布版本'
+      branch:
+        description: '要使用的分支'
+        required: false
+        type: string
+        default: 'master'
+
 jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.branch || 'master' }}
     - shell: bash
       env:
         TOOLID: ${{ secrets.ALI_TOOL_ID }}
         APPID: ${{ secrets.ALI_APPID }}
         PRIVATE_KEY: ${{ secrets.ALI_PRIVATE_KEY }}
+        VERSION: ${{ github.event.inputs.version || '' }}
+        DESCRIPTION: ${{ github.event.inputs.description || '自动发布版本' }}
       run: |
         if [[ -z $PRIVATE_KEY ]]; then
           echo "##########"
@@ -24,17 +48,32 @@ jobs:
           echo "##########"
           exit 1
         else
-          echo '{
-            "alipay": {
-              "appid": "'$APPID'",
-              "toolId":"'$TOOLID'",
-              "privateKey": "'$PRIVATE_KEY'",
-              "projectPath": "dist/build/mp-alipay",
-              "autoincrement":true
-            },
-            "version": "",
-            "desc": ""
-          }' > .minicirc
+          # 如果是手动触发，使用输入的版本号和描述
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "$VERSION" ]]; then
+            echo '{
+              "alipay": {
+                "appid": "'$APPID'",
+                "toolId":"'$TOOLID'",
+                "privateKey": "'$PRIVATE_KEY'",
+                "projectPath": "dist/build/mp-alipay",
+                "autoincrement":true
+              },
+              "version": "'$VERSION'",
+              "desc": "'$DESCRIPTION'"
+            }' > .minicirc
+          else
+            echo '{
+              "alipay": {
+                "appid": "'$APPID'",
+                "toolId":"'$TOOLID'",
+                "privateKey": "'$PRIVATE_KEY'",
+                "projectPath": "dist/build/mp-alipay",
+                "autoincrement":true
+              },
+              "version": "",
+              "desc": ""
+            }' > .minicirc
+          fi
         fi
 
     - name: Setup Node.js
