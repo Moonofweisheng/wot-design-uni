@@ -1,5 +1,9 @@
 <template>
-  <view v-if="showWrapper" :class="`wd-drop-item  ${customClass}`" :style="`z-index: ${zIndex}; ${positionStyle};${customStyle}`">
+  <view
+    v-if="showWrapper"
+    :class="`wd-drop-item  ${customClass}`"
+    :style="`z-index: ${zIndex}; ${positionStyle};${customStyle}`"
+  >
     <wd-popup
       v-model="showPop"
       :z-index="zIndex"
@@ -20,7 +24,9 @@
         <wd-search
           v-if="filterable"
           v-model="filterVal"
-          :placeholder="filterPlaceholder || translate('filterPlaceholder')"
+          :placeholder="
+            filterPlaceholder || translate('filterPlaceholder')
+          "
           hide-cancel
           placeholder-left
           @change="handleFilterChange"
@@ -33,10 +39,15 @@
         >
           <view :class="`wd-drop-item__title ${customTitle}`">
             <text>{{ item[labelKey] ? item[labelKey] : item }}</text>
-            <text v-if="item[tipKey]" class="wd-drop-item__tip">{{ item[tipKey] }}</text>
+            <text v-if="item[tipKey]" class="wd-drop-item__tip">{{
+              item[tipKey]
+            }}</text>
           </view>
           <wd-icon
-            v-if="(item[valueKey] !== '' ? item[valueKey] : item) === modelValue"
+            v-if="
+              (item[valueKey] !== '' ? item[valueKey] : item) ===
+              modelValue
+            "
             :name="iconName"
             size="20px"
             :class="`wd-drop-item__icon ${customIcon}`"
@@ -61,7 +72,17 @@ export default {
 <script lang="ts" setup>
 import wdPopup from '../wd-popup/wd-popup.vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { computed, getCurrentInstance, inject, onBeforeMount, onBeforeUnmount, ref, watch, nextTick } from 'vue'
+import wdSearch from '../wd-search/wd-search.vue'
+import {
+  computed,
+  getCurrentInstance,
+  inject,
+  onBeforeMount,
+  onBeforeUnmount,
+  ref,
+  watch,
+  nextTick
+} from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
 import type { PopupType } from '../wd-popup/types'
@@ -69,12 +90,19 @@ import { useParent } from '../composables/useParent'
 import { DROP_MENU_KEY } from '../wd-drop-menu/types'
 import { isDef, isFunction } from '../common/util'
 import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
-import { useTranslate } from '../composables/useTranslate'
 
+import { useTranslate } from '../composables/useTranslate'
 const { translate } = useTranslate('drop-menu')
 
 const props = defineProps(dorpMenuItemProps)
-const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
+const emit = defineEmits([
+  'change',
+  'update:modelValue',
+  'open',
+  'opened',
+  'closed',
+  'close'
+])
 
 const queue = inject<Queue | null>(queueKey, null)
 const showWrapper = ref<boolean>(false)
@@ -84,6 +112,7 @@ const zIndex = ref<number>(12)
 const modal = ref<boolean>(true)
 const closeOnClickModal = ref<boolean>(true)
 const duration = ref<number>(0)
+
 const filterVal = ref<string>('')
 const filterOptions = ref<Array<Record<string, any>>>([])
 
@@ -105,10 +134,12 @@ const positionStyle = computed(() => {
 })
 
 watch(
-  () => props.modelValue,
+  () => props.options,
   (newValue) => {
-    if (isDef(newValue) && typeof newValue !== 'number' && typeof newValue !== 'string') {
-      console.error('[wot-design] warning(wd-drop-menu-item): the type of value should be a number or a string.')
+    if (props.filterable && filterVal.value) {
+      formatFilterOptions(newValue, filterVal.value)
+    } else {
+      filterOptions.value = newValue
     }
   },
   {
@@ -118,12 +149,16 @@ watch(
 )
 
 watch(
-  () => props.options,
+  () => props.modelValue,
   (newValue) => {
-    if (props.filterable && filterVal.value) {
-      formatFilterOptions(newValue, filterVal.value)
-    } else {
-      filterOptions.value = newValue
+    if (
+      isDef(newValue) &&
+      typeof newValue !== 'number' &&
+      typeof newValue !== 'string'
+    ) {
+      console.error(
+        '[wot-design] warning(wd-drop-menu-item): the type of value should be a number or a string.'
+      )
     }
   },
   {
@@ -148,6 +183,27 @@ onBeforeUnmount(() => {
   }
 })
 
+function getShowPop() {
+  return showPop.value
+}
+
+function formatFilterOptions(
+  options: Record<string, any>[],
+  filterVal: string
+) {
+  const filterOptionsTemp = options.filter((item) => {
+    const label = item?.[props.labelKey]
+    return (
+      typeof label === 'string' &&
+      label.toLowerCase().includes(filterVal.toLowerCase())
+    )
+  })
+  filterOptions.value = []
+  nextTick(() => {
+    filterOptions.value = filterOptionsTemp
+  })
+}
+
 function handleFilterChange({ value }: { value: string }) {
   if (value === '') {
     filterOptions.value = []
@@ -161,29 +217,13 @@ function handleFilterChange({ value }: { value: string }) {
   }
 }
 
-function formatFilterOptions(options: Record<string, any>[], filterVal: string) {
-  const filterOptionsTemp = options.filter((item) => {
-    const label = item?.[props.labelKey]
-    return typeof label === 'string' && label.includes(filterVal)
-  })
-  filterOptions.value = []
-  nextTick(() => {
-    filterOptions.value = filterOptionsTemp
-  })
-}
-  })
-}
-
-
-function getShowPop() {
-  return showPop.value
-}
 // 模拟单选操作 默认根据 value 选中操作
 function choose(index: number) {
   if (props.disabled) return
   const { valueKey } = props
   const item = filterOptions.value[index]
-  const newValue = item[valueKey] !== '' && item[valueKey] !== undefined ? item[valueKey] : item
+  const newValue =
+    item[valueKey] !== undefined ? item[valueKey] : item
   emit('update:modelValue', newValue)
   emit('change', {
     value: newValue,
@@ -218,6 +258,14 @@ function open() {
   if (showPop.value) {
     return
   }
+
+  //关闭清空搜索 避免清空画面闪过
+  if (filterVal.value !== '') {
+    setTimeout(() => {
+      handleFilterChange({ value: '' })
+    }, 300)
+  }
+
   if (isFunction(props.beforeToggle)) {
     props.beforeToggle({
       status: true,
@@ -236,8 +284,11 @@ function handleOpen() {
   if (dropMenu) {
     modal.value = Boolean(dropMenu.props.modal)
     duration.value = Number(dropMenu.props.duration)
-    closeOnClickModal.value = Boolean(dropMenu.props.closeOnClickModal)
-    position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
+    closeOnClickModal.value = Boolean(
+      dropMenu.props.closeOnClickModal
+    )
+    position.value =
+      dropMenu.props.direction === 'down' ? 'top' : 'bottom'
   }
   emit('open')
 }
