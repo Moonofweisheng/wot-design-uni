@@ -12,28 +12,22 @@
 <p align="center">
 
 <a href="https://github.com/Moonofweisheng/wot-design-uni">
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Moonofweisheng/wot-design-uni?logo=github&color=%234d80f0&link=https%3A%2F%2Fgithub.com%2FMoonofweisheng%2Fwot-design-uni">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Moonofweisheng/wot-design-uni?logo=github&color=%234d80f0&link=https%3A%2F%2Fgithub.com%2FMoonofweisheng%2Fwot-design-uni&style=flat-square">
  </a>
 
-<a href='https://gitee.com/wot-design-uni/wot-design-uni/stargazers'>
-<img src='https://gitee.com/wot-design-uni/wot-design-uni/badge/star.svg?theme=gray' alt='star'>
-</a>
-
-<a href="https://www.npmjs.com/package/wot-design-uni">
-  <img alt="npm" src="https://img.shields.io/npm/v/wot-design-uni?logo=npm&color=%234d80f0&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-design-uni">
-</a>
-
-<a href="https://www.npmjs.com/package/wot-design-uni">
-  <img alt="npm" src="https://img.shields.io/npm/dw/wot-design-uni?logo=npm&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-design-uni">
-</a>
-
-<a href="https://www.npmjs.com/package/wot-design-uni">
-  <img src="https://img.shields.io/npm/dt/wot-design-uni?style=flat-square">
-</a>
 
 <a href="https://github.com/Moonofweisheng/wot-design-uni">
-  <img alt="GitHub" src="https://img.shields.io/github/license/Moonofweisheng/wot-design-uni?logo=github">
+  <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-design-uni?style=flat-square
+  ">
  </a>
+
+<a href="https://www.npmjs.com/package/wot-design-uni">
+  <img alt="npm" src="https://img.shields.io/npm/dm/wot-design-uni?logo=npm&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-design-uni&style=flat-square">
+</a>
+
+ <a href="https://www.npmjs.com/package/wot-design-uni">
+  <img alt="npm" src="https://img.shields.io/npm/v/wot-design-uni?logo=npm&color=%234d80f0&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-design-uni&style=flat-square">
+</a>
 
 <a href="https://github.com/actions-cool/" target="_blank" referrerpolicy="no-referrer">
   <img src="https://img.shields.io/badge/using-actions--cool-red?style=flat-square" alt="actions-cool" />

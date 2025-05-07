@@ -16,6 +16,7 @@
   height: $-tabbar-height;
 
   @include e(placeholder) {
+    box-sizing: content-box;
     padding-bottom: constant(safe-area-inset-bottom);
     padding-bottom: env(safe-area-inset-bottom);
   }
@@ -39,6 +40,7 @@
 
     @include when(fixed) {
       @include when(safe) {
+        box-sizing: content-box;
         padding-bottom: constant(safe-area-inset-bottom);
         padding-bottom: env(safe-area-inset-bottom);
       }

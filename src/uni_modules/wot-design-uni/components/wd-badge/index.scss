@@ -17,6 +17,7 @@
 
   @include e(content) {
     display: inline-block;
+    box-sizing: content-box;
     height: $-badge-height;
     line-height: $-badge-height;
     padding: $-badge-padding;
