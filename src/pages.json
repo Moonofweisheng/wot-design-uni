@@ -16,1283 +16,6 @@
       }
     },
     {
-      "path": "pages/button/Index",
-      "name": "button",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Button 按钮",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%button-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/icon/Index",
-      "name": "icon",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Icon 图标",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%icon-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/badge/Index",
-      "name": "badge",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Badge 徽标",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%badge-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/cell/Index",
-      "name": "cell",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Cell 单元格",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%cell-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/rate/Index",
-      "name": "rate",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Rate 评分",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%rate-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/slider/Index",
-      "name": "slider",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Slider 滑块",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%slider-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/layout/Index",
-      "name": "layout",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Layout 布局",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%layout-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/card/Index",
-      "name": "card",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Card 卡片",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%card-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/tag/Index",
-      "name": "tag",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Tag 标签",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%tag-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/search/Index",
-      "name": "search",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Search 搜索",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%search-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/transition/Index",
-      "name": "transition",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Transition 动画",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%transition-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/popup/Index",
-      "name": "popup",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Popup 弹出层",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%popup-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/divider/Index",
-      "name": "divider",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Divider 分割线",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%divider-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/switch/Index",
-      "name": "switch",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Switch 开关",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%switch-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/input/Index",
-      "name": "input",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Input 输入框",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%input-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/textarea/Index",
-      "name": "textarea",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Textarea 多行输入框",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%textarea-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/messageBox/Index",
-      "name": "messageBox",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "MessageBox 弹框",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%messagebox-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/toast/Index",
-      "name": "toast",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Toast 轻提示",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%toast-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/notify/Index",
-      "name": "toast",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Notify 消息通知",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%notify-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/loading/Index",
-      "name": "loading",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Loading 加载",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%loading-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/progress/Index",
-      "name": "progress",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Progress 进度条",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%progress-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/statusTip/Index",
-      "name": "statusTip",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "StatusTip 缺省提示",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%statustip-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/inputNumber/Index",
-      "name": "inputNumber",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "InputNumber 计数器",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%inputnumber-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/loadmore/Index",
-      "name": "loadmore",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Loadmore 加载更多",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%loadmore-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/resize/Index",
-      "name": "resize",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Resize 监听变化",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%resize-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/sticky/Index",
-      "name": "sticky",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Sticky 粘性布局",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%sticky-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/img/Index",
-      "name": "img",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Img 图片",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%img-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/imgCropper/Index",
-      "name": "imgCropper",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "ImgCropper 图片裁剪",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%imgcropper-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/pagination/Index",
-      "name": "pagination",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Pagination 分页",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%pagination-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/sortButton/Index",
-      "name": "sortButton",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "SortButton 排序按钮",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%sortbutton-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/actionSheet/Index",
-      "name": "actionSheet",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "ActionSheet 动作面板",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%actionsheet-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/curtain/Index",
-      "name": "curtain",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Curtain 幕帘",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%curtain-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/noticeBar/Index",
-      "name": "noticeBar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "NoticeBar 通知栏",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%noticebar-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/popover/Index",
-      "name": "popover",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Popover 气泡弹出框",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%popover-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/tooltip/Index",
-      "name": "tooltip",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Tooltip 文字提示",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%tooltip-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/pickerView/Index",
-      "name": "pickerView",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "PickerView 选择器视图",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%pickerview-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/picker/Index",
-      "name": "picker",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Picker 选择器",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%picker-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/tabs/Index",
-      "name": "tabs",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Tabs 标签页",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%tabs-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/radio/Index",
-      "name": "radio",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Radio 单选框",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%radio-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/checkbox/Index",
-      "name": "checkbox",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Checkbox 复选框",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%checkbox-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/colPicker/Index",
-      "name": "colPicker",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "ColPicker 多列选择器",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%colpicker-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/selectPicker/Index",
-      "name": "selectPicker",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "SelectPicker 选择器",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%selectpicker-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/dropMenu/Index",
-      "name": "dropMenu",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "DropMenu 下拉菜单",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%dropmenu-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/grid/Index",
-      "name": "grid",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Grid 宫格",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%grid-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/swipeAction/Index",
-      "name": "swipeAction",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "SwipeAction 滑动操作",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%swipeaction-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/skeleton/Index",
-      "name": "skeleton",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Skeleton 骨架屏",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%skeleton-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/steps/Index",
-      "name": "steps",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Steps 步骤条",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%steps-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/upload/Index",
-      "name": "upload",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Upload 上传",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%upload-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/calendarView/Index",
-      "name": "calendarView",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "CalendarView 日历面板组件",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%calendarview-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/calendar/Index",
-      "name": "calendar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Calendar 日历选择器",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%calendar-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/datetimePickerView/Index",
-      "name": "datetimePickerView",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "DatetimePickerView 日期时间选择器视图",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%datetimepickerview-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/datetimePicker/Index",
-      "name": "datetimePicker",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "DatetimePicker 日期时间选择器",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%datetimepicker-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/form/Index",
-      "name": "form",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Form 表单",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%form-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/form/demo1",
-      "name": "formDemo1",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "动态表单",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%form-demo1-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/form/demo2",
-      "name": "formDemo2",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "失焦校验",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%form-demo2-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/form/demo3",
-      "name": "formDemo3",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "复杂表单",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%form-demo3-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/collapse/Index",
-      "name": "collapse",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Collapse 折叠面板",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%collapse-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/configProvider/Index",
-      "name": "configProvider",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "ConfigProvider 全局配置",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%configprovider-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/watermark/Index",
-      "name": "watermark",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Watermark 水印",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%watermark-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/circle/Index",
-      "name": "circle",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Circle 环形进度条",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%circle-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/swiper/Index",
-      "name": "swiper",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Swiper 轮播",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%swiper-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/segmented/Index",
-      "name": "segmented",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Segmented 分段器",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%segmented-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/tabbar/Index",
-      "name": "tabbar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Tabbar 标签栏",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%tabbar-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/overlay/Index",
-      "name": "overlay",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Overlay 遮罩层",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%overlay-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/navbar/Index",
-      "name": "navbar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Navbar 导航栏",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%navbar-title%",
-        // #endif
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/table/Index",
-      "name": "table",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Table 表格",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%table-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/sidebar/Index",
-      "name": "sidebar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Sidebar 侧边栏",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%sidebar-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/sidebar/demo1",
-      "name": "sidebar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Sidebar 锚点用法",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%sidebar-demo1-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/sidebar/demo2",
-      "name": "sidebar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Sidebar 切换页面",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%sidebar-demo2-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/sidebar/demo3",
-      "name": "sidebar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Sidebar 自定义图标",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%sidebar-demo3-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/form/demo4",
-      "name": "formDemo4",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "表单校验",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%form-demo4-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/fab/Index",
-      "name": "fab",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Fab 悬浮按钮",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%fab-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/text/Index",
-      "name": "text",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Text 文本",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%text-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/countDown/Index",
-      "name": "countDown",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "CountDown 倒计时",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%countdown-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/countTo/Index",
-      "name": "countTo",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "CountTo 数字滚动",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%countto-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/keyboard/Index",
-      "name": "keyboard",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Keyboard 键盘",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%keyboard-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/numberKeyboard/Index",
-      "name": "numberKeyboard",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "NumberKeyboard 数字键盘",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%numberkeyboard-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/gap/Index",
-      "name": "gap",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Gap 间隔",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%gap-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/passwordInput/Index",
-      "name": "passwordInput",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "PasswordInput 密码输入框",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%passwordinput-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/signature/Index",
-      "name": "signature",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Signature 签名",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%signature-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/signature/Landscape",
-      "name": "signatureLandscape",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Signature 横屏签名",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%signature-landscape-title%",
-        // #endif
-        "pageOrientation": "landscape"
-      }
-    },
-    {
-      "path": "pages/backtop/Index",
-      "name": "backtop",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "Backtop 回到顶部",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%backtop-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/indexBar/Index",
-      "name": "indexBar",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "IndexBar 索引栏",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%indexbar-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/floatingPanel/Index",
-      "name": "floatingPanel",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "FloatingPanel 浮动面板",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%floatingpanel-title%"
-        // #endif
-      }
-    },
-    {
-      "path": "pages/wxRewardAd/Index",
-      "name": "wxRewardAd",
-      "style": {
-        "mp-alipay": {
-          "allowsBounceVertical": "NO"
-        },
-        // #ifdef MP
-        "navigationBarTitleText": "激励一下",
-        // #endif
-        // #ifndef MP
-        "navigationBarTitleText": "%wxrewardad-title%"
-        // #endif
-      }
-    },
-    {
       "path": "pages/about/Index",
       "name": "about",
       "style": {
@@ -1306,6 +29,1290 @@
         "navigationBarTitleText": "%about-title%"
         // #endif
       }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "subPages",
+      "pages": [
+        {
+          "path": "button/Index",
+          "name": "button",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Button 按钮",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%button-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "icon/Index",
+          "name": "icon",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Icon 图标",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%icon-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "badge/Index",
+          "name": "badge",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Badge 徽标",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%badge-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "cell/Index",
+          "name": "cell",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Cell 单元格",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%cell-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "rate/Index",
+          "name": "rate",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Rate 评分",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%rate-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "slider/Index",
+          "name": "slider",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Slider 滑块",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%slider-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "layout/Index",
+          "name": "layout",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Layout 布局",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%layout-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "card/Index",
+          "name": "card",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Card 卡片",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%card-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "tag/Index",
+          "name": "tag",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Tag 标签",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%tag-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "search/Index",
+          "name": "search",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Search 搜索",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%search-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "transition/Index",
+          "name": "transition",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Transition 动画",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%transition-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "popup/Index",
+          "name": "popup",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Popup 弹出层",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%popup-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "divider/Index",
+          "name": "divider",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Divider 分割线",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%divider-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "switch/Index",
+          "name": "switch",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Switch 开关",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%switch-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "input/Index",
+          "name": "input",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Input 输入框",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%input-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "textarea/Index",
+          "name": "textarea",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Textarea 多行输入框",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%textarea-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "messageBox/Index",
+          "name": "messageBox",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "MessageBox 弹框",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%messagebox-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "toast/Index",
+          "name": "toast",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Toast 轻提示",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%toast-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "notify/Index",
+          "name": "toast",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Notify 消息通知",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%notify-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "loading/Index",
+          "name": "loading",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Loading 加载",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%loading-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "progress/Index",
+          "name": "progress",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Progress 进度条",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%progress-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "statusTip/Index",
+          "name": "statusTip",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "StatusTip 缺省提示",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%statustip-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "inputNumber/Index",
+          "name": "inputNumber",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "InputNumber 计数器",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%inputnumber-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "loadmore/Index",
+          "name": "loadmore",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Loadmore 加载更多",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%loadmore-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "resize/Index",
+          "name": "resize",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Resize 监听变化",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%resize-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "sticky/Index",
+          "name": "sticky",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Sticky 粘性布局",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%sticky-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "img/Index",
+          "name": "img",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Img 图片",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%img-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "imgCropper/Index",
+          "name": "imgCropper",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "ImgCropper 图片裁剪",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%imgcropper-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "pagination/Index",
+          "name": "pagination",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Pagination 分页",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%pagination-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "sortButton/Index",
+          "name": "sortButton",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "SortButton 排序按钮",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%sortbutton-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "actionSheet/Index",
+          "name": "actionSheet",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "ActionSheet 动作面板",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%actionsheet-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "curtain/Index",
+          "name": "curtain",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Curtain 幕帘",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%curtain-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "noticeBar/Index",
+          "name": "noticeBar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "NoticeBar 通知栏",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%noticebar-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "popover/Index",
+          "name": "popover",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Popover 气泡弹出框",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%popover-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "tooltip/Index",
+          "name": "tooltip",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Tooltip 文字提示",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%tooltip-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "pickerView/Index",
+          "name": "pickerView",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "PickerView 选择器视图",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%pickerview-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "picker/Index",
+          "name": "picker",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Picker 选择器",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%picker-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "tabs/Index",
+          "name": "tabs",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Tabs 标签页",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%tabs-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "radio/Index",
+          "name": "radio",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Radio 单选框",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%radio-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "checkbox/Index",
+          "name": "checkbox",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Checkbox 复选框",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%checkbox-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "colPicker/Index",
+          "name": "colPicker",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "ColPicker 多列选择器",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%colpicker-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "selectPicker/Index",
+          "name": "selectPicker",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "SelectPicker 选择器",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%selectpicker-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "dropMenu/Index",
+          "name": "dropMenu",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "DropMenu 下拉菜单",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%dropmenu-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "grid/Index",
+          "name": "grid",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Grid 宫格",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%grid-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "swipeAction/Index",
+          "name": "swipeAction",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "SwipeAction 滑动操作",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%swipeaction-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "skeleton/Index",
+          "name": "skeleton",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Skeleton 骨架屏",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%skeleton-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "steps/Index",
+          "name": "steps",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Steps 步骤条",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%steps-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "upload/Index",
+          "name": "upload",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Upload 上传",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%upload-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "calendarView/Index",
+          "name": "calendarView",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "CalendarView 日历面板组件",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%calendarview-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "calendar/Index",
+          "name": "calendar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Calendar 日历选择器",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%calendar-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "datetimePickerView/Index",
+          "name": "datetimePickerView",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "DatetimePickerView 日期时间选择器视图",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%datetimepickerview-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "datetimePicker/Index",
+          "name": "datetimePicker",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "DatetimePicker 日期时间选择器",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%datetimepicker-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "form/Index",
+          "name": "form",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Form 表单",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%form-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "form/demo1",
+          "name": "formDemo1",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "动态表单",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%form-demo1-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "form/demo2",
+          "name": "formDemo2",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "失焦校验",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%form-demo2-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "form/demo3",
+          "name": "formDemo3",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "复杂表单",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%form-demo3-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "collapse/Index",
+          "name": "collapse",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Collapse 折叠面板",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%collapse-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "configProvider/Index",
+          "name": "configProvider",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "ConfigProvider 全局配置",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%configprovider-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "watermark/Index",
+          "name": "watermark",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Watermark 水印",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%watermark-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "circle/Index",
+          "name": "circle",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Circle 环形进度条",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%circle-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "swiper/Index",
+          "name": "swiper",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Swiper 轮播",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%swiper-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "segmented/Index",
+          "name": "segmented",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Segmented 分段器",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%segmented-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "tabbar/Index",
+          "name": "tabbar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Tabbar 标签栏",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%tabbar-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "overlay/Index",
+          "name": "overlay",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Overlay 遮罩层",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%overlay-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "navbar/Index",
+          "name": "navbar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Navbar 导航栏",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%navbar-title%",
+            // #endif
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "table/Index",
+          "name": "table",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Table 表格",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%table-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "sidebar/Index",
+          "name": "sidebar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Sidebar 侧边栏",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%sidebar-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "sidebar/demo1",
+          "name": "sidebar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Sidebar 锚点用法",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%sidebar-demo1-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "sidebar/demo2",
+          "name": "sidebar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Sidebar 切换页面",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%sidebar-demo2-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "sidebar/demo3",
+          "name": "sidebar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Sidebar 自定义图标",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%sidebar-demo3-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "form/demo4",
+          "name": "formDemo4",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "表单校验",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%form-demo4-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "fab/Index",
+          "name": "fab",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Fab 悬浮按钮",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%fab-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "text/Index",
+          "name": "text",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Text 文本",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%text-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "countDown/Index",
+          "name": "countDown",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "CountDown 倒计时",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%countdown-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "countTo/Index",
+          "name": "countTo",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "CountTo 数字滚动",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%countto-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "keyboard/Index",
+          "name": "keyboard",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Keyboard 键盘",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%keyboard-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "numberKeyboard/Index",
+          "name": "numberKeyboard",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "NumberKeyboard 数字键盘",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%numberkeyboard-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "gap/Index",
+          "name": "gap",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Gap 间隔",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%gap-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "passwordInput/Index",
+          "name": "passwordInput",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "PasswordInput 密码输入框",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%passwordinput-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "signature/Index",
+          "name": "signature",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Signature 签名",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%signature-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "signature/Landscape",
+          "name": "signatureLandscape",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Signature 横屏签名",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%signature-landscape-title%",
+            // #endif
+            "pageOrientation": "landscape"
+          }
+        },
+        {
+          "path": "backtop/Index",
+          "name": "backtop",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Backtop 回到顶部",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%backtop-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "indexBar/Index",
+          "name": "indexBar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "IndexBar 索引栏",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%indexbar-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "floatingPanel/Index",
+          "name": "floatingPanel",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "FloatingPanel 浮动面板",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%floatingpanel-title%"
+            // #endif
+          }
+        },
+        {
+          "path": "wxRewardAd/Index",
+          "name": "wxRewardAd",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "激励一下",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%wxrewardad-title%"
+            // #endif
+          }
+        }
+      ]
     }
   ],
   "tabBar": {

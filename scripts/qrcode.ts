@@ -30,6 +30,13 @@ try {
 }
 
 const pages = pagesJson.pages.filter((page: { path: string }) => page.path.endsWith('Index'))
+if (pagesJson.subPackages) {
+  pagesJson.subPackages.forEach((subPackage: { root: string; pages: Record<string, any>[] }) => {
+    subPackage.pages.forEach((page: Record<string, any>) => {
+      pages.push({ path: `${subPackage.root}/${page.path}` })
+    })
+  })
+}
 
 function camelToKebabCase(str: string): string {
   return str

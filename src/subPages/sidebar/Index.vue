@@ -1,10 +1,10 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-11-06 20:08:34
- * @LastEditTime: 2025-04-02 19:59:55
+ * @LastEditTime: 2025-05-07 18:55:52
  * @LastEditors: weisheng
  * @Description: 
- * @FilePath: /wot-design-uni/src/pages/sidebar/Index.vue
+ * @FilePath: /wot-design-uni/src/subPages/sidebar/Index.vue
  * 记得注释
 -->
 <template>
@@ -68,14 +68,14 @@ const beforeChange: SidebarBeforeChange = ({ value, resolve }) => {
 }
 
 function handleClick1() {
-  uni.navigateTo({ url: '/pages/sidebar/demo1' })
+  uni.navigateTo({ url: '/subPages/sidebar/demo1' })
 }
 function handleClick2() {
-  uni.navigateTo({ url: '/pages/sidebar/demo2' })
+  uni.navigateTo({ url: '/subPages/sidebar/demo2' })
 }
 
 function handleClick3() {
-  uni.navigateTo({ url: '/pages/sidebar/demo3' })
+  uni.navigateTo({ url: '/subPages/sidebar/demo3' })
 }
 </script>
 <style lang="scss" scoped>

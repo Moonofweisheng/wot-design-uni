@@ -2,8 +2,8 @@
  * @Author: 810505339
  * @Date: 2025-02-11 21:17:21
  * @LastEditors: weisheng
- * @LastEditTime: 2025-03-30 21:43:38
- * @FilePath: /wot-design-uni/src/pages/signature/Index.vue
+ * @LastEditTime: 2025-05-07 18:55:55
+ * @FilePath: /wot-design-uni/src/subPages/signature/Index.vue
  * 记得注释
 -->
 <template>
@@ -107,10 +107,8 @@ function handlePopupConfirm(result: SignatureResult) {
 }
 
 function toSignatureLandscape() {
-  console.log(232)
-
   uni.navigateTo({
-    url: '/pages/signature/Landscape'
+    url: '/subPages/signature/Landscape'
   })
 }
 </script>

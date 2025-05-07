@@ -49,8 +49,8 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-import { joy } from '../images/joy'
-import img from '../images/jd.png'
+import { joy } from '../../pages/images/joy'
+import img from '../../pages/images/jd.png'
 import type { ImageMode } from '@/uni_modules/wot-design-uni/components/wd-img/types'
 
 const modes: ImageMode[] = [

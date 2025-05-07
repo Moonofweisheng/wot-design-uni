@@ -137,23 +137,21 @@ const switchLanguage = (locale: string) => {
 // 打开公众号二维码
 const openWeChat = () => {
   uni.previewImage({
-    urls: ['/static/WeChatOfficialAccounts.jpg']
+    urls: ['https://wot-design-uni.cn/wechatPublicAccount.png']
   })
 }
 
 // 打开捐赠二维码
 const donate = () => {
-  uni.getImageInfo({ src: '/static/weixinQrcode.jpg' }).then((res) => {
-    uni.previewImage({
-      urls: [res.path]
-    })
+  uni.previewImage({
+    urls: ['https://wot-design-uni.cn/weixinQrcode.jpg']
   })
   // 打开捐赠页面
 }
 
 const watchAd = () => {
   uni.navigateTo({
-    url: '/pages/wxRewardAd/Index'
+    url: '/subPages/wxRewardAd/Index'
   })
 }
 </script>

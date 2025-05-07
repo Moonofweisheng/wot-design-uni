@@ -54,7 +54,7 @@ const href = computed(() => {
 
   if (!paths.length) return baseUrl.value
 
-  return baseUrl.value + `pages/${kebabToCamel(paths[paths.length - 1])}/Index`
+  return baseUrl.value + `subPages/${kebabToCamel(paths[paths.length - 1])}/Index`
 })
 
 const qrcode = computed(() => {

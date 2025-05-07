@@ -198,19 +198,19 @@ function handleSubmit2() {
 }
 
 function handleClick1() {
-  uni.navigateTo({ url: '/pages/form/demo1' })
+  uni.navigateTo({ url: '/subPages/form/demo1' })
 }
 
 function handleClick2() {
-  uni.navigateTo({ url: '/pages/form/demo2' })
+  uni.navigateTo({ url: '/subPages/form/demo2' })
 }
 
 function handleClick3() {
-  uni.navigateTo({ url: '/pages/form/demo3' })
+  uni.navigateTo({ url: '/subPages/form/demo3' })
 }
 
 function handleClick4() {
-  uni.navigateTo({ url: '/pages/form/demo4' })
+  uni.navigateTo({ url: '/subPages/form/demo4' })
 }
 </script>
 <style lang="scss" scoped>

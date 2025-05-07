@@ -31,7 +31,7 @@
                   :key="j"
                   is-link
                   :label="page.name"
-                  @click="handleClick(`/pages/${page.id}/Index`)"
+                  @click="handleClick(`/subPages/${page.id}/Index`)"
                 ></wd-cell>
               </view>
             </view>

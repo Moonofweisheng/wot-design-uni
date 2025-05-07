@@ -93,7 +93,7 @@ const theme = computed(() => {
 function goToReward() {
   fabActive.value = false
   uni.navigateTo({
-    url: '/pages/wxRewardAd/Index'
+    url: '/subPages/wxRewardAd/Index'
   })
 }
 
