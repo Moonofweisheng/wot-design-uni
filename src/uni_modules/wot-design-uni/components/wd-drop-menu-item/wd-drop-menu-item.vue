@@ -2,14 +2,14 @@
   <view
     v-if="showWrapper"
     :class="`wd-drop-item  ${customClass}`"
-    :style="`z-index: ${zIndex}; ${positionStyle};${customStyle}`"
+    :style="wrapperStyles"
   >
     <wd-popup
       v-model="showPop"
       :z-index="zIndex"
       :duration="duration"
       :position="position"
-      :custom-style="`position: absolute; max-height: 80%;${customPopupStyle}`"
+      :custom-style="`position: absolute; pointer-events: auto; max-height: 80%;${customPopupStyle}`"
       :custom-class="customPopupClass"
       modal-style="position: absolute;"
       :modal="modal"
@@ -80,8 +80,7 @@ import {
   onBeforeMount,
   onBeforeUnmount,
   ref,
-  watch,
-  nextTick
+  watch
 } from 'vue'
 import { pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
@@ -131,6 +130,10 @@ const positionStyle = computed(() => {
     style = ''
   }
   return style
+})
+
+const wrapperStyles = computed(() => {
+  return `pointer-events: none; z-index: ${zIndex.value}; ${positionStyle.value};${props.customStyle}`
 })
 
 watch(
@@ -193,24 +196,18 @@ function formatFilterOptions(
 ) {
   const filterOptionsTemp = options.filter((item) => {
     const label = item?.[props.labelKey]
-    return (
-      typeof label === 'string' &&
-      label.toLowerCase().includes(filterVal.toLowerCase())
-    )
+    return typeof label === 'string'
+      ? label.toLowerCase().includes(filterVal.toLowerCase())
+      : String(label).toLowerCase().includes(filterVal.toLowerCase())
   })
-  filterOptions.value = []
-  nextTick(() => {
-    filterOptions.value = filterOptionsTemp
-  })
+  filterOptions.value = filterOptionsTemp
 }
 
 function handleFilterChange({ value }: { value: string }) {
   if (value === '') {
     filterOptions.value = []
     filterVal.value = value
-    nextTick(() => {
-      filterOptions.value = props.options
-    })
+    filterOptions.value = props.options
   } else {
     filterVal.value = value
     formatFilterOptions(props.options, value)
@@ -289,6 +286,12 @@ function handleOpen() {
     )
     position.value =
       dropMenu.props.direction === 'down' ? 'top' : 'bottom'
+  } else {
+    // 设置默认值，避免在没有父组件时出现问题
+    modal.value = true
+    duration.value = 0
+    closeOnClickModal.value = true
+    position.value = 'top'
   }
   emit('open')
 }
