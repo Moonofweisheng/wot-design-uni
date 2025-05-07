@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2024-04-01 17:10:05
- * @LastEditTime: 2025-05-07 10:23:20
+ * @LastEditTime: 2025-05-07 15:02:18
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/HomeStar.vue
@@ -17,8 +17,7 @@
 
 
 <a href="https://github.com/Moonofweisheng/wot-design-uni">
-  <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-design-uni?style=flat-square
-  ">
+  <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-design-uni?style=flat-square">
  </a>
 
 <a href="https://www.npmjs.com/package/wot-design-uni">
