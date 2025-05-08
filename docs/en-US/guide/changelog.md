@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [1.9.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.9.0...v1.9.1) (2025-05-08)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  处理小程序超包 ([08e9ee1](https://github.com/Moonofweisheng/wot-design-uni/commit/08e9ee1cb366e4c5ec87d989795d58399cb1df32))
+* ✏️  修复部分组件二维码显示异常的问题 ([eea9bf7](https://github.com/Moonofweisheng/wot-design-uni/commit/eea9bf7aac36cfd9b7b476392c35e3db097e4891))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Upload 开启 multiple 后只能成功上传最后一个文件的问题 ([#1044](https://github.com/Moonofweisheng/wot-design-uni/issues/1044)) ([f2ae0d3](https://github.com/Moonofweisheng/wot-design-uni/commit/f2ae0d3aacab3b95b48f623623c5bf1f9acecf18)), closes [#1043](https://github.com/Moonofweisheng/wot-design-uni/issues/1043)
+
 ## [1.9.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.8.0...v1.9.0) (2025-05-07)
 
 
