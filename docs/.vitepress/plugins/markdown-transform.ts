@@ -16,7 +16,7 @@ export function MarkdownTransform(): Plugin {
       const componentId = path.basename(id, '.md')
       const componentName = `wd-${componentId}`
       const camelComponentId = camelCase(componentId)
-      const demoUrl = `${GITHUB_URL}/src/pages/${camelComponentId}`
+      const demoUrl = `${GITHUB_URL}/src/subPages/${camelComponentId}`
       const componentUrl = `${GITHUB_URL}/src/uni_modules/wot-design-uni/components/${componentName}`
       
       // 根据文件路径判断当前语言
