@@ -60,6 +60,10 @@ export const tabsProps = {
    */
   lineHeight: numericProp,
   /**
+   * 底部条颜色
+   */
+  lineBgColor: makeStringProp(''),
+  /**
    * 颜色
    */
   color: makeStringProp(''),
