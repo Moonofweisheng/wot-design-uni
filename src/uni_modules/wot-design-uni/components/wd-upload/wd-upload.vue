@@ -288,8 +288,7 @@ function startUploadFiles() {
                 uploadMethod,
                 onSuccess: handleSuccess,
                 onError: handleError,
-                onProgress: handleProgress,
-                abortPrevious: true // 自动中断之前的上传
+                onProgress: handleProgress
               })
           }
         })
@@ -305,8 +304,7 @@ function startUploadFiles() {
           uploadMethod,
           onSuccess: handleSuccess,
           onError: handleError,
-          onProgress: handleProgress,
-          abortPrevious: true
+          onProgress: handleProgress
         })
       }
     }

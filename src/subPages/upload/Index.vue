@@ -43,6 +43,10 @@
     <demo-block :title="$t('jinYong')">
       <wd-upload :file-list="fileList8" disabled :action="action" @change="handleChange8"></wd-upload>
     </demo-block>
+    <demo-block :title="$t('duo-xuan')">
+      <wd-upload :file-list="fileList2" multiple :action="action" @change="handleChange2"></wd-upload>
+    </demo-block>
+
     <demo-block :title="$t('zi-ding-yi-huan-qi-shang-chuan-yang-shi-bing-xian-zhi-shang-chuan-5-zhang')">
       <wd-upload :file-list="fileList9" :action="action" @change="handleChange9" :limit="5">
         <wd-button>{{ $t('zi-ding-yi-huan-qi-yang-shi') }}</wd-button>
@@ -241,16 +245,6 @@ const buildFormData = ({ file, formData, resolve }: any) => {
     success_action_status: success_action_status
   }
   resolve(formData)
-}
-
-const handleSuccess1 = (res: any) => {
-  console.log('成功', res)
-}
-const handleFail1 = (res: any) => {
-  console.log('失败', res)
-}
-const handleProgess1 = (res: any) => {
-  console.log('加载中', res)
 }
 
 function handleSuccess(event: any) {
