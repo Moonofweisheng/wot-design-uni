@@ -61,7 +61,7 @@ const qrcode = computed(() => {
   const path = route.path
   const paths = path ? path.split('.')[0].split('/') : []
   if (!paths.length) return ''
-  return `/wxqrcode/${kebabToCamel(paths[paths.length - 1])}.png`
+  return `/wxqrcode/${paths[paths.length - 1]}.png`
 })
 
 // 工具函数：转换 kebab-case 为 camelCase
