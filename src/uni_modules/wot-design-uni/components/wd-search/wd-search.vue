@@ -7,24 +7,24 @@
           <wd-icon name="search" custom-class="wd-search__search-icon"></wd-icon>
           <text :class="`wd-search__placeholder-txt ${placeholderClass}`">{{ placeholder || translate('search') }}</text>
         </view>
-        <wd-icon v-if="showInput || str || placeholderLeft" name="search" custom-class="wd-search__search-left-icon"></wd-icon>
+        <wd-icon v-if="showInput || inputValue || placeholderLeft" name="search" custom-class="wd-search__search-left-icon"></wd-icon>
         <input
-          v-if="showInput || str || placeholderLeft"
+          v-if="showInput || inputValue || placeholderLeft"
           :placeholder="placeholder || translate('search')"
           :placeholder-class="`wd-search__placeholder-txt ${placeholderClass}`"
           :placeholder-style="placeholderStyle"
           confirm-type="search"
-          v-model="str"
+          v-model="inputValue"
           :class="['wd-search__input', customInputClass]"
-          @focus="searchFocus"
-          @input="inputValue"
-          @blur="searchBlur"
-          @confirm="search"
+          @focus="handleFocus"
+          @input="handleInput"
+          @blur="handleBlur"
+          @confirm="handleConfirm"
           :disabled="disabled"
           :maxlength="maxlength"
           :focus="isFocused"
         />
-        <wd-icon v-if="str" custom-class="wd-search__clear wd-search__clear-icon" name="error-fill" @click="clearSearch" />
+        <wd-icon v-if="inputValue" custom-class="wd-search__clear wd-search__clear-icon" name="error-fill" @click="handleClear" />
       </view>
     </view>
 
@@ -61,14 +61,14 @@ const { translate } = useTranslate('search')
 
 const isFocused = ref<boolean>(false) // 是否聚焦中
 const showInput = ref<boolean>(false) // 是否显示输入框 用于实现聚焦的hack
-const str = ref('')
+const inputValue = ref<string>('') // 输入框的值
 const showPlaceHolder = ref<boolean>(true)
 const clearing = ref<boolean>(false)
 
 watch(
   () => props.modelValue,
   (newValue) => {
-    str.value = newValue
+    inputValue.value = newValue
     if (newValue) {
       showInput.value = true
     }
@@ -98,7 +98,7 @@ const rootClass = computed(() => {
 
 const coverStyle = computed(() => {
   const coverStyle: CSSProperties = {
-    display: str.value === '' && showPlaceHolder.value ? 'flex' : 'none'
+    display: inputValue.value === '' && showPlaceHolder.value ? 'flex' : 'none'
   }
 
   return objToStyle(coverStyle)
@@ -116,27 +116,22 @@ async function closeCover() {
   showPlaceHolder.value = false
   hackFocus(true)
 }
-/**
- * @description input的input事件handle
- * @param value
- */
-function inputValue(event: any) {
-  str.value = event.detail.value
+
+function handleInput(event: any) {
+  inputValue.value = event.detail.value
   emit('update:modelValue', event.detail.value)
   emit('change', {
     value: event.detail.value
   })
 }
-/**
- * @description 点击清空icon的handle
- */
-async function clearSearch() {
-  str.value = ''
-  clearing.value = true
+
+async function handleClear() {
+  inputValue.value = ''
   if (props.focusWhenClear) {
+    clearing.value = true
     isFocused.value = false
   }
-  await pause(100)
+  await pause()
   if (props.focusWhenClear) {
     showPlaceHolder.value = false
     hackFocus(true)
@@ -150,49 +145,40 @@ async function clearSearch() {
   emit('update:modelValue', '')
   emit('clear')
 }
-/**
- * @description 点击搜索按钮时的handle
- * @param value
- */
-function search({ detail: { value } }: any) {
+
+function handleConfirm({ detail: { value } }: any) {
   // 组件触发search事件
   emit('search', {
     value
   })
 }
-/**
- * @description 输入框聚焦时的handle
- */
-function searchFocus() {
+
+function handleFocus() {
+  showPlaceHolder.value = false
+  emit('focus', {
+    value: inputValue.value
+  })
+}
+
+async function handleBlur() {
+  // 等待150毫秒，clear执行完毕
+  await pause(150)
   if (clearing.value) {
     clearing.value = false
     return
   }
-  showPlaceHolder.value = false
-  emit('focus', {
-    value: str.value
-  })
-}
-/**
- * @description 输入框失焦的handle
- */
-function searchBlur() {
-  if (clearing.value) return
   // 组件触发blur事件
-  showPlaceHolder.value = !str.value
+  showPlaceHolder.value = !inputValue.value
   showInput.value = !showPlaceHolder.value
   isFocused.value = false
   emit('blur', {
-    value: str.value
+    value: inputValue.value
   })
 }
-/**
- * @description 点击取消搜索按钮的handle
- */
+
 function handleCancel() {
-  // 组件触发cancel事件
   emit('cancel', {
-    value: str.value
+    value: inputValue.value
   })
 }
 </script>

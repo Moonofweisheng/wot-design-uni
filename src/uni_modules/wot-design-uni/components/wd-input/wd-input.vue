@@ -236,10 +236,10 @@ function togglePwdVisible() {
   isPwdVisible.value = !isPwdVisible.value
 }
 async function handleClear() {
-  clearing.value = true
   focusing.value = false
   inputValue.value = ''
   if (props.focusWhenClear) {
+    clearing.value = true
     focused.value = false
   }
   await pause()

@@ -233,10 +233,10 @@ function formatValue(value: string | number) {
 }
 
 async function handleClear() {
-  clearing.value = true
   focusing.value = false
   inputValue.value = ''
   if (props.focusWhenClear) {
+    clearing.value = true
     focused.value = false
   }
   await pause()
