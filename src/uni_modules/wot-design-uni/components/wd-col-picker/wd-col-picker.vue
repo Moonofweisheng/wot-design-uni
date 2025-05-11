@@ -177,7 +177,7 @@ watch(
   () => props.columns,
   (newValue, oldValue) => {
     if (newValue.length && !isArray(newValue[0])) {
-      console.error('[wot design] error(wd-col-picker): the columns props of wd-col-picker should be a two-dimensional array')
+      console.error('[wot ui] error(wd-col-picker): the columns props of wd-col-picker should be a two-dimensional array')
       return
     }
     if (newValue.length === 0 && !oldValue) return
@@ -357,7 +357,7 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
       rowIndex: index,
       resolve: (nextColumn: Record<string, any>[]) => {
         if (!isArray(nextColumn)) {
-          console.error('[wot design] error(wd-col-picker): the data of each column of wd-col-picker should be an array')
+          console.error('[wot ui] error(wd-col-picker): the data of each column of wd-col-picker should be an array')
           return
         }
 

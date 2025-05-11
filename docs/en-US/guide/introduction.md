@@ -50,7 +50,7 @@ Please refer to the [Quick Start](/en-US/guide/quick-use.html) documentation.
 
 ## Sponsor Us
 
-If you feel that Wot Design Uni has helped your development work, you can choose to [sponsor](/en-US/reward/reward.html) us. There is no threshold for sponsorship, even a glass of lemonade would be appreciated.
+If you feel that Wot UI has helped your development work, you can choose to [sponsor](/en-US/reward/reward.html) us. There is no threshold for sponsorship, even a glass of lemonade would be appreciated.
 
 After donation, your nickname and message will be displayed in the [donation list](/en-US/reward/donor.html).
 
@@ -62,7 +62,7 @@ After donation, your nickname and message will be displayed in the [donation lis
 | [create-uni](https://github.com/uni-helper/create-uni) | Quickly create uni-app projects |
 | [wot-demo](https://github.com/Moonofweisheng/wot-demo) | A quick-start demo for wot-design-uni based on [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) |
 | [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail) | A uni-app retail industry template based on wot-design-uni |
-| [Wot Design Uni Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot Design Uni code snippets |
+| [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot UI code snippets |
 | [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci) | A plugin that supports CI (Continuous Integration) for uni-app mini program after build |
 | [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router) | A lightweight uni-app router library based on vue3 and Typescript |
 | [unibest](https://github.com/codercup/unibest) | A uni-app template based on wot-design-uni |

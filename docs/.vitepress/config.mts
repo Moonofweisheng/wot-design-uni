@@ -66,7 +66,7 @@ export default defineConfig({
       ]
     }
   },
-  title: `Wot Design Uni`,
+  title: `Wot UI`,
   description: '一个参照wot-design打造的uni-app组件库',
   locales: {
     root: {

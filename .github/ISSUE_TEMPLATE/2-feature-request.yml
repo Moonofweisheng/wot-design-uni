@@ -1,4 +1,4 @@
-name: 向 Wot Design Uni 提出新功能需求
+name: 向 Wot UI 提出新功能需求
 description: 创建一个 Issue 描述一下你的功能需求。
 title: "[新功能需求] 请在此填写标题"
 labels: ["feature: need confirm"]

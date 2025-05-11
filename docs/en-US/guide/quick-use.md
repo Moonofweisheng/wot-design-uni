@@ -1,6 +1,6 @@
 # Quick Start
 
-This section introduces how to install, configure, and use `Wot Design Uni` in your `uni-app` project.
+This section introduces how to install, configure, and use `Wot UI` in your `uni-app` project.
 
 ## Before Using
 
@@ -10,7 +10,7 @@ Before using, please make sure you have learned Vue's official [Quick Start](htt
 
 :::warning About Installation
 
-`Wot Design Uni` provides two installation methods: `uni_modules` and `npm`. Choose according to your needs.
+`Wot UI` provides two installation methods: `uni_modules` and `npm`. Choose according to your needs.
 
 - Using `uni_modules` installation requires no additional configuration, it's plug-and-play, but updating the component library requires handling code differences (generally just overwriting is fine).
 - Using `npm` installation requires additional configuration, but updating the component library doesn't require handling code differences.
@@ -37,9 +37,9 @@ pnpm add wot-design-uni
 
 ### uni_modules Installation
 
-`Wot Design Uni` supports the [uni_modules](https://uniapp.dcloud.net.cn/plugin/uni_modules.html#uni-modules) specification and is available in the uni-app plugin market.
+`Wot UI` supports the [uni_modules](https://uniapp.dcloud.net.cn/plugin/uni_modules.html#uni-modules) specification and is available in the uni-app plugin market.
 
-In the `uni-app plugin market`, choose to import using `HBuildX`, or manually create a uni_modules folder in the src directory and extract `Wot Design Uni` into uni_modules, with the following structure:
+In the `uni-app plugin market`, choose to import using `HBuildX`, or manually create a uni_modules folder in the src directory and extract `Wot UI` into uni_modules, with the following structure:
 
 ```bash
 - uni_modules
@@ -50,7 +50,7 @@ Download link: <a href="https://ext.dcloud.net.cn/plugin?id=13889"><span>wot-des
 
 ## Sass
 
-`Wot Design Uni` depends on `sass`, so before using it, you need to confirm whether `sass` is already installed in your project. If not, you can install it using the following command:
+`Wot UI` depends on `sass`, so before using it, you need to confirm whether `sass` is already installed in your project. If not, you can install it using the following command:
 
 ::: code-group
 
@@ -77,7 +77,7 @@ pnpm add sass -D
 ### Import Components
 
 ::: tip Reminder
-When using `uni_modules` installation, `Wot Design Uni` components naturally support the `easycom` specification, requiring no additional configuration for automatic component import. When using `npm installation`, you need to follow this step. Choose one of the following two solutions.
+When using `uni_modules` installation, `Wot UI` components naturally support the `easycom` specification, requiring no additional configuration for automatic component import. When using `npm installation`, you need to follow this step. Choose one of the following two solutions.
 :::
 
 #### Configure easycom for Automatic Component Import<el-tag type="primary" style="vertical-align: middle;margin-left:8px;" effect="dark" >Solution 1</el-tag>
@@ -182,7 +182,7 @@ For cli projects using `uni_modules` installation, no configuration is needed as
 
 ## Usage
 
-After installing and configuring `Wot Design Uni`, it supports automatic component import, so you can use it directly in SFC without importing in the page or declaring in components. It's worth noting that the `uni-app` platform doesn't support global component mounting, so components like `Message`, `Toast`, etc., still need to be explicitly used in SFC, for example:
+After installing and configuring `Wot UI`, it supports automatic component import, so you can use it directly in SFC without importing in the page or declaring in components. It's worth noting that the `uni-app` platform doesn't support global component mounting, so components like `Message`, `Toast`, etc., still need to be explicitly used in SFC, for example:
 
 ``` html
 <wd-toast></wd-toast>
@@ -190,7 +190,7 @@ After installing and configuring `Wot Design Uni`, it supports automatic compone
 
 ## Scaffolding
 
-We provide a quick start project [wot-demo](https://github.com/Moonofweisheng/wot-demo), which integrates `Wot Design Uni` and many excellent plugins, you can clone this project directly.
+We provide a quick start project [wot-demo](https://github.com/Moonofweisheng/wot-demo), which integrates `Wot UI` and many excellent plugins, you can clone this project directly.
 
 You can also use [create-uni](https://github.com/uni-helper/create-uni) to quickly create a starter project through the following command:  
 

@@ -1,6 +1,6 @@
 # 快速上手
 
-本节介绍如何在 `uni-app` 项目中安装、配置并使用 `Wot Design Uni`。
+本节介绍如何在 `uni-app` 项目中安装、配置并使用 `Wot UI`。
 
 ## 使用之前
 
@@ -10,7 +10,7 @@
 
 :::warning 关于安装
 
-`Wot Design Uni` 提供了 `uni_modules` 和 `npm` 两种安装方式，按需选择。
+`Wot UI` 提供了 `uni_modules` 和 `npm` 两种安装方式，按需选择。
 
 - 使用`uni_modules`安装无需额外配置，即插即用，但是每次更新组件库需要处理代码差异（一般直接覆盖就可以）。
 - 使用`npm`安装需要额外配置，更新组件库时无需处理代码差异。
@@ -37,9 +37,9 @@ pnpm add wot-design-uni
 
 ### uni_modules 安装
 
-`Wot Design Uni` 支持 [uni_modules](https://uniapp.dcloud.net.cn/plugin/uni_modules.html#uni-modules) 规范，已经上架到 uni-app 的插件市场。
+`Wot UI` 支持 [uni_modules](https://uniapp.dcloud.net.cn/plugin/uni_modules.html#uni-modules) 规范，已经上架到 uni-app 的插件市场。
 
-在 `uni-app 插件市场` 选择使用 `HBuildX` 导入，或者选择手动在 src 目录下创建 uni_modules 文件夹并将 `Wot Design Uni` 解压到 uni_modules 中，结构如下：
+在 `uni-app 插件市场` 选择使用 `HBuildX` 导入，或者选择手动在 src 目录下创建 uni_modules 文件夹并将 `Wot UI` 解压到 uni_modules 中，结构如下：
 
 ```bash
 - uni_modules
@@ -50,7 +50,7 @@ pnpm add wot-design-uni
 
 ## Sass
 
-`Wot Design Uni` 依赖 `sass` ，因此在使用之前需要确认项目中是否已经安装了 `sass`，如果没有安装，可以通过以下命令进行安装：
+`Wot UI` 依赖 `sass` ，因此在使用之前需要确认项目中是否已经安装了 `sass`，如果没有安装，可以通过以下命令进行安装：
 
 ::: code-group
 
@@ -77,7 +77,7 @@ pnpm add sass -D
 ### 导入组件
 
 ::: tip 提醒
-使用 `uni_modules` 安装时 `Wot Design Uni` 的组件天然支持 `easycom` 规范，无需额外配置就可以自动引入组件，而使用 `npm 安装` 需按照此步骤配置，以下两种方案二选一即可。
+使用 `uni_modules` 安装时 `Wot UI` 的组件天然支持 `easycom` 规范，无需额外配置就可以自动引入组件，而使用 `npm 安装` 需按照此步骤配置，以下两种方案二选一即可。
 :::
 
 #### 配置 easycom 自动引入组件<el-tag type="primary" style="vertical-align: middle;margin-left:8px;" effect="dark" >方案 1</el-tag>
@@ -182,7 +182,7 @@ cli 项目使用 `uni_modules` 安装无需配置，对 `Volar` 的支持自动�
 
 ## 使用
 
-`Wot Design Uni` 安装、配置完成之后，支持组件自动引入，故可以直接在 SFC 中使用，无需在页面内 import，也不需要在 components 内声明，即可在任意页面使用。值得注意的是，`uni-app` 平台不支持全局挂载组件，所以 `Message`、`Toast` 等组件仍需在 SFC 中显式使用，例如：
+`Wot UI` 安装、配置完成之后，支持组件自动引入，故可以直接在 SFC 中使用，无需在页面内 import，也不需要在 components 内声明，即可在任意页面使用。值得注意的是，`uni-app` 平台不支持全局挂载组件，所以 `Message`、`Toast` 等组件仍需在 SFC 中显式使用，例如：
 
 ``` html
 <wd-toast></wd-toast>
@@ -190,7 +190,7 @@ cli 项目使用 `uni_modules` 安装无需配置，对 `Volar` 的支持自动�
 
 ## 脚手架
 
-我们提供了快速上手项目 [wot-demo](https://github.com/Moonofweisheng/wot-demo)，它集成了 `Wot Design Uni` 和众多优秀插件，你可以直接克隆该项目。
+我们提供了快速上手项目 [wot-demo](https://github.com/Moonofweisheng/wot-demo)，它集成了 `Wot UI` 和众多优秀插件，你可以直接克隆该项目。
 
 你也可以使用[create-uni](https://github.com/uni-helper/create-uni)，通过以下命令快速创建一个起手项目：  
 

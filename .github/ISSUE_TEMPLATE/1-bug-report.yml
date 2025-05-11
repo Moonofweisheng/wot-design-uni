@@ -1,4 +1,4 @@
-name: 向 Wot Design Uni 反馈 Bug
+name: 向 Wot UI 反馈 Bug
 description: 创建一个 Issue 描述你遇到的问题。
 title: "[Bug 上报] 请在此填写标题"
 labels: ["🐞bug: need confirm"]
@@ -14,7 +14,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: Wot Design Uni 版本号
+      label: Wot UI 版本号
       description: 你正在使用的组件库版本号（请填写 wot-design-uni/package.json 里实际安装的版本）
       placeholder: 例如：0.1.1
     validations:

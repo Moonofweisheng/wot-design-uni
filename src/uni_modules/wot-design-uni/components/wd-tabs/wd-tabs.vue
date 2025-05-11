@@ -225,16 +225,16 @@ watch(
   () => props.modelValue,
   (newValue) => {
     if (!isNumber(newValue) && !isString(newValue)) {
-      console.error('[wot design] error(wd-tabs): the type of value should be number or string')
+      console.error('[wot ui] error(wd-tabs): the type of value should be number or string')
     }
     // 保证不为非空字符串，小于0的数字
     if (newValue === '' || !isDef(newValue)) {
       // eslint-disable-next-line quotes
-      console.error("[wot design] error(wd-tabs): tabs's value cannot be '' null or undefined")
+      console.error("[wot ui] error(wd-tabs): tabs's value cannot be '' null or undefined")
     }
     if (typeof newValue === 'number' && newValue < 0) {
       // eslint-disable-next-line quotes
-      console.error("[wot design] error(wd-tabs): tabs's value cannot be less than zero")
+      console.error("[wot ui] error(wd-tabs): tabs's value cannot be less than zero")
     }
   },
   {
@@ -336,7 +336,7 @@ async function updateLineStyle(animation: boolean = true) {
       state.lineStyle = objToStyle(lineStyle)
     }
   } catch (error) {
-    console.error('[wot design] error(wd-tabs): update line style failed', error)
+    console.error('[wot ui] error(wd-tabs): update line style failed', error)
   }
 }
 
@@ -416,7 +416,7 @@ function getActiveIndex(value: number | string) {
   // name代表的索引超过了children长度的边界，自动用0兜底
   if (isNumber(value) && value >= children.length) {
     // eslint-disable-next-line prettier/prettier
-    console.error('[wot design] warning(wd-tabs): the type of tabs\' value is Number shouldn\'t be less than its children')
+    console.error('[wot ui] warning(wd-tabs): the type of tabs\' value is Number shouldn\'t be less than its children')
     value = 0
   }
   // 如果是字符串直接匹配，匹配不到用0兜底

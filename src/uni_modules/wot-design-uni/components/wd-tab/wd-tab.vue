@@ -53,7 +53,7 @@ watch(
   () => props.name,
   (newValue) => {
     if (isDef(newValue) && !isNumber(newValue) && !isString(newValue)) {
-      console.error('[wot design] error(wd-tab): the type of name should be number or string')
+      console.error('[wot ui] error(wd-tab): the type of name should be number or string')
       return
     }
     if (tabs) {

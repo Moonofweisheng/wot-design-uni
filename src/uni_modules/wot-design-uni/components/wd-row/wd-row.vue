@@ -29,7 +29,7 @@ const rowStyle = computed(() => {
   const style: CSSProperties = {}
   const { gutter } = props
   if (gutter < 0) {
-    console.error('[wot design] warning(wd-row): attribute gutter must be greater than or equal to 0')
+    console.error('[wot ui] warning(wd-row): attribute gutter must be greater than or equal to 0')
   } else if (gutter) {
     style.marginLeft = addUnit(gutter / 2)
     style.marginRight = addUnit(gutter / 2)

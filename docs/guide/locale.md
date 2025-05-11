@@ -1,6 +1,6 @@
 # 国际化<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.20</el-tag>
 
-Wot Design Uni 默认使用中文语言，同时支持多语言切换，如果你希望使用其他语言，你可以参考下面的方案。
+Wot UI 默认使用中文语言，同时支持多语言切换，如果你希望使用其他语言，你可以参考下面的方案。
 
 :::warning 注意点
 目前组件库发布到 npm 上的包是未经编译的`vue`与`ts`，而 Vite 会将[预构建](https://cn.vitejs.dev/guide/dep-pre-bundling.html)的依赖项缓存到 `node_modules/.vite`，组件库的国际化的实现是基于`reactive`实现的数据共享，在`dev`阶段就会出现页面使用预构建产物中的国际化数据，而组件库使用组件库内部的国际化数据，所以在非`uni_modules`模式引入时，需要在`vite.config.ts`中增加以下配置:

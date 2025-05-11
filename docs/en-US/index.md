@@ -1,11 +1,11 @@
 ---
 layout: home
 
-title: Wot Design Uni
+title: Wot UI
 titleTemplate: A uni-app component library based on Vue3+TS, providing 70+ high-quality components, supporting dark mode, internationalization, and custom themes.
 
 hero:
-  name: Wot Design Uni
+  name: Wot UI
   text: A Beautiful and Lightweight uni-app Component Library
   tagline: Built with Vue3+TS, providing 70+ high-quality components, supporting dark mode, internationalization, and custom themes.
   image:

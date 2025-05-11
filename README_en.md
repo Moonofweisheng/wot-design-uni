@@ -1,7 +1,7 @@
 <p align="center">
     <img alt="logo" src="https://wot-design-uni.cn/logo.png" width="200">
 </p>
-<h1 align="center">Wot Design Uni</h1>
+<h1 align="center">Wot UI</h1>
 
 <div align="center">
 <p><a href="./README.md">简体中文</a> | English</p>
@@ -90,7 +90,7 @@ If you encounter any issues, please feel free to submit an [Issue](https://githu
 
 ## Contributors
 
-Thanks to all the [developers](https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors) who have contributed to Wot Design Uni.
+Thanks to all the [developers](https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors) who have contributed to Wot UI.
 
 <a href="https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Moonofweisheng/wot-design-uni" />
@@ -98,9 +98,9 @@ Thanks to all the [developers](https://github.com/Moonofweisheng/wot-design-uni/
 
 ## Donate
 
-Developing a UI component library is time-consuming work, especially when it needs to be adapted for multiple platforms. The Wot Design Uni team often works late into the night...
+Developing a UI component library is time-consuming work, especially when it needs to be adapted for multiple platforms. The Wot UI team often works late into the night...
 
-If you find Wot Design Uni helpful in your development work, you can donate to support our development work. Any amount is welcome, even if it's just a cola.
+If you find Wot UI helpful in your development work, you can donate to support our development work. Any amount is welcome, even if it's just a cola.
 
 After donating, your nickname and message will be displayed on the [donor list](https://wot-design-uni.cn/reward/donor.html).
 
@@ -119,7 +119,7 @@ After donating, your nickname and message will be displayed on the [donor list](
 
 - [wot-design](https://github.com/jd-ftf/wot-design-mini) - Thanks to the wot-design team for their years of maintenance.
 - [uni-helper](https://github.com/uni-helper) - Thanks to the uni-helper team for providing uni-app tool libraries.
-- [Donors](https://wot-design-uni.cn/reward/donor.html) - Thanks to all donors who help Wot Design Uni grow better.
+- [Donors](https://wot-design-uni.cn/reward/donor.html) - Thanks to all donors who help Wot UI grow better.
 
 ## License
 

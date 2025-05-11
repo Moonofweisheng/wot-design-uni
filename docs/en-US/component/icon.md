@@ -34,7 +34,7 @@ Set the `size` attribute to customize the icon size.
 
 ## Custom Icon
 
-Wot Design Uni allows you to use custom icons in two ways:
+Wot UI allows you to use custom icons in two ways:
 
 ### 1. Using Custom Font Icons
 

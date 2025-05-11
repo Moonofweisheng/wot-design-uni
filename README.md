@@ -1,7 +1,7 @@
 <p align="center">
     <img alt="logo" src="https://wot-design-uni.cn/logo.png" width="200">
 </p>
-<h1 align="center">Wot Design Uni</h1>
+<h1 align="center">Wot UI</h1>
 
 <div align="center">
 <p>简体中文 | <a href="./README_en.md">English</a></p>
@@ -92,7 +92,7 @@
 | [create-uni](https://github.com/uni-helper/create-uni)                                                      | 快速创建 uni-app 项目                                |
 | [wot-demo](https://github.com/Moonofweisheng/wot-demo)                  | 基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 的wot-design-uni快速起手demo     |
 | [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | 基于 wot-design-uni 的 uni-app 零售行业模板          |
-| [Wot Design Uni Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot Design Uni 代码块提示                            |
+| [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot UI 代码块提示                            |
 | [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci)                                                | 一个 uni-app 小程序端构建后支持 CI（持续集成）的插件 |
 | [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router)                                        | 一个基于 vue3 和 Typescript 的轻量级 uni-app 路由库  |
 | [unibest](https://github.com/codercup/unibest)                                                              | 基于 wot-design-uni 的 uni-app 模板                  |
@@ -107,7 +107,7 @@
 
 ## 贡献者们
 
-感谢以下所有给 Wot Design Uni 贡献过代码的 [开发者](https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors)。
+感谢以下所有给 Wot UI 贡献过代码的 [开发者](https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors)。
 
 <a href="https://github.com/Moonofweisheng/wot-design-uni/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Moonofweisheng/wot-design-uni" />
@@ -115,9 +115,9 @@
 
 ## 捐赠本项目
 
-开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。为此 Wot Design Uni 经常肝到深夜 ……  
+开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。为此 Wot UI 经常肝到深夜 ……  
 
-如果您认为 Wot Design Uni 帮助到了您的开发工作，您可以捐赠 Wot Design Uni 的研发工作，捐赠无门槛，哪怕是一杯可乐也好。
+如果您认为 Wot UI 帮助到了您的开发工作，您可以捐赠 Wot UI 的研发工作，捐赠无门槛，哪怕是一杯可乐也好。
 
 捐赠后您的昵称、留言等将会展示在[捐赠榜单](https://wot-design-uni.cn/reward/donor.html)中。
 

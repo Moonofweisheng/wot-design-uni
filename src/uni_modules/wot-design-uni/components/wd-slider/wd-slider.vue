@@ -97,7 +97,7 @@ watch(
     if (newValue <= props.min) {
       maxValue.value = props.min // 交换最大值和最小值
       minValue.value = newValue
-      console.warn('[wot design] warning(wd-slider): max value must be greater than min value')
+      console.warn('[wot ui] warning(wd-slider): max value must be greater than min value')
     } else {
       maxValue.value = newValue // 更新最大值
     }
@@ -112,7 +112,7 @@ watch(
     if (newValue >= props.max) {
       minValue.value = props.max // 交换最小值和最大值
       maxValue.value = newValue
-      console.warn('[wot design] warning(wd-slider): min value must be less than max value')
+      console.warn('[wot ui] warning(wd-slider): min value must be less than max value')
     } else {
       minValue.value = newValue // 更新最小值
     }
@@ -126,7 +126,7 @@ watch(
   (newValue) => {
     if (newValue < 1) {
       stepValue.value = 1
-      console.warn('[wot design] warning(wd-slider): step must be greater than 0')
+      console.warn('[wot ui] warning(wd-slider): step must be greater than 0')
     } else {
       stepValue.value = Math.floor(newValue)
     }
@@ -138,14 +138,14 @@ watch(
   () => props.modelValue,
   (newValue) => {
     // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
-    if (newValue === null || newValue === undefined) {
+    if (!isDef(newValue)) {
       emit('update:modelValue', currentValue.value)
-      console.warn('[wot design] warning(wd-slider): value can nott be null or undefined')
+      console.warn('[wot ui] warning(wd-slider): value can nott be null or undefined')
     } else if (isArray(newValue) && newValue.length !== 2) {
-      console.warn('[wot design] warning(wd-slider): value must be dyadic array')
+      console.warn('[wot ui] warning(wd-slider): value must be dyadic array')
     } else if (!isNumber(newValue) && !isArray(newValue)) {
       emit('update:modelValue', currentValue.value)
-      console.warn('[wot design] warning(wd-slider): value must be dyadic array Or Number')
+      console.warn('[wot ui] warning(wd-slider): value must be dyadic array Or Number')
     }
     // 动态传值后修改
     if (isArray(newValue)) {

@@ -12,7 +12,7 @@ Currently, no. First, the plugin market lacks CI/CD tools, making automated publ
 
 ## How to enable dark mode?
 
-`Wot Design Uni` supports dark mode, theme customization, and other capabilities. See the [ConfigProvider](/en-US/component/config-provider.html) component for details.
+`Wot UI` supports dark mode, theme customization, and other capabilities. See the [ConfigProvider](/en-US/component/config-provider.html) component for details.
 
 ## Is there a technical communication group?
 
@@ -37,7 +37,7 @@ pnpm add sass@1.78.0 -D
 
 ## Mini Program Style Isolation
 
-### When using Wot Design Uni components in pages, you can directly override styles in the page's style file
+### When using Wot UI components in pages, you can directly override styles in the page's style file
 
 ```vue
 <wd-button type="primary">Primary Button</wd-button>
@@ -52,7 +52,7 @@ pnpm add sass@1.78.0 -D
 
 ### Why can't I override component library styles in components?
 
-When using Wot Design Uni components in custom components, you need to enable the `styleIsolation: 'shared'` option
+When using Wot UI components in custom components, you need to enable the `styleIsolation: 'shared'` option
 
 ```vue
 <wd-button type="primary">Primary Button</wd-button>
@@ -91,10 +91,10 @@ defineOptions({
 
 ## Mini Program External Style Classes
 
-Wot Design Uni provides many custom style classes for developers to use. The specific style class names can be found in the "External Style Classes" section of the corresponding component. Note that the priority of regular style classes and custom style classes is undefined, so please add `!important` when using to ensure the priority of external style classes.
+Wot UI provides many custom style classes for developers to use. The specific style class names can be found in the "External Style Classes" section of the corresponding component. Note that the priority of regular style classes and custom style classes is undefined, so please add `!important` when using to ensure the priority of external style classes.
 
 ::: tip Please Note
-`Wot Design Uni` components are all set with `scoped`, so its CSS will only affect the elements of the current component, similar to style encapsulation in Shadow DOM. If selectors in `scoped` styles want to make "deeper" selections, that is, affect child components, you can use the `:deep()` pseudo-class:
+`Wot UI` components are all set with `scoped`, so its CSS will only affect the elements of the current component, similar to style encapsulation in Shadow DOM. If selectors in `scoped` styles want to make "deeper" selections, that is, affect child components, you can use the `:deep()` pseudo-class:
 ```css
 <style scoped>
 .a :deep(.b) {

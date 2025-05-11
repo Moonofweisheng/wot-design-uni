@@ -2,9 +2,9 @@
 
 ### 介绍
 
-感谢你使用 Wot Design Uni。
+感谢你使用 Wot UI。
 
-以下是关于向 Wot Design Uni 提交反馈或代码的指南。在向 Wot Design Uni 提交 issue 或者 PR 之前，请先花几分钟时间阅读以下内容。
+以下是关于向 Wot UI 提交反馈或代码的指南。在向 Wot UI 提交 issue 或者 PR 之前，请先花几分钟时间阅读以下内容。
 
 ### Issue 规范
 
@@ -20,7 +20,7 @@
 
 ### 镜像仓库
 
-如果 GitHub 克隆速度较慢，你也可以直接克隆 Wot Design Uni 在 gitee 上的[镜像仓库](https://gitee.com/wot-design-uni/wot-design-uni)：
+如果 GitHub 克隆速度较慢，你也可以直接克隆 Wot UI 在 gitee 上的[镜像仓库](https://gitee.com/wot-design-uni/wot-design-uni)：
 
 ```bash
 git clone https://gitee.com/wot-design-uni/wot-design-uni.git

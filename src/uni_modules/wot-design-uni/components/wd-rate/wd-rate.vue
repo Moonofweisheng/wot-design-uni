@@ -95,7 +95,7 @@ function computeRateList() {
   // value和num都准备好才能计算
   if (modelValue === null || !num) return
   if (typeof modelValue !== 'number') {
-    console.error('[Wot Design] error(wd-rate): the value of wd-rate should be a number')
+    console.error('[wot ui] error(wd-rate): the value of wd-rate should be a number')
     return
   }
   const tempRateList: string[] = []

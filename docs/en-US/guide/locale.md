@@ -1,6 +1,6 @@
 # Internationalization<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.20</el-tag>
 
-Wot Design Uni uses Chinese by default and supports multi-language switching. If you want to use other languages, you can refer to the solutions below.
+Wot UI uses Chinese by default and supports multi-language switching. If you want to use other languages, you can refer to the solutions below.
 
 :::warning Note
 Currently, the package published on npm is uncompiled `vue` and `ts`. Vite will cache [pre-built](https://vitejs.dev/guide/dep-pre-bundling.html) dependencies in `node_modules/.vite`. The component library's internationalization is implemented based on `reactive` for data sharing. During the `dev` stage, the page will use internationalization data from the pre-built product, while the component library uses its internal internationalization data. Therefore, when importing in non-`uni_modules` mode, you need to add the following configuration in `vite.config.ts`:

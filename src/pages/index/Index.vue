@@ -5,7 +5,7 @@
         <view class="page__title">
           <view class="logo"></view>
           <view class="inline">
-            Wot Design Uni
+            Wot UI
             <text class="version">@{{ packageConfig.version }}</text>
           </view>
         </view>

@@ -1,6 +1,6 @@
 # Custom Theme
 
-Every component in Wot Design Uni basically has a custom class name custom-class, which can be added to your page's class name at the component's root node for style modification.
+Every component in Wot UI basically has a custom class name custom-class, which can be added to your page's class name at the component's root node for style modification.
 
 ## Theme Introduction
 
