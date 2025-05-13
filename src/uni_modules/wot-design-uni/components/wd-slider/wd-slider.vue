@@ -3,39 +3,51 @@
     <!-- #ifdef MP-DINGTALK -->
     <view :id="sliderId" style="flex: 1" :class="rootClass">
       <!-- #endif -->
-      <view :class="`wd-slider__label-min ${customMinClass}`" v-if="!hideMinMax">
-        {{ minValue }}
-      </view>
-      <view class="wd-slider__bar-wrapper" :style="barWrapperStyle">
-        <view class="wd-slider__bar" :style="barCustomStyle"></view>
-        <!-- 左边 -->
-        <view
-          class="wd-slider__button-wrapper"
-          :style="buttonLeftStyle"
-          @touchstart="onTouchStart"
-          @touchmove="onTouchMove"
-          @touchend="onTouchEnd"
-          @touchcancel="onTouchEnd"
-        >
-          <view class="wd-slider__label" v-if="!hideLabel">{{ leftNewValue }}</view>
-          <view class="wd-slider__button" />
-        </view>
-        <!-- 右边 -->
-        <view
-          v-if="showRight"
-          class="wd-slider__button-wrapper"
-          :style="buttonRightStyle"
-          @touchstart="onTouchStartRight"
-          @touchmove="onTouchMoveRight"
-          @touchend="onTouchEndRight"
-          @touchcancel="onTouchEndRight"
-        >
-          <view class="wd-slider__label" v-if="!hideLabel">{{ rightNewValue }}</view>
-          <view class="wd-slider__button" />
+      <view :class="`wd-slider__label-min ${customMinClass}`" v-if="!hideMinMax">{{ minProp }}</view>
+      <view class="wd-slider__bar-wrapper" :style="wrapperStyle">
+        <view class="wd-slider__bar" :style="barStyle">
+          <template v-if="isRange">
+            <!-- 左边滑块 -->
+            <view
+              class="wd-slider__button-wrapper wd-slider__button-wrapper--left"
+              :style="sliderButtonStyle"
+              @touchstart="(event) => onSliderTouchStart(event, 0)"
+              @touchmove="onSliderTouchMove"
+              @touchend="onSliderTouchEnd"
+              @touchcancel="onSliderTouchEnd"
+            >
+              <view class="wd-slider__label" v-if="!hideLabel">{{ firstValue }}</view>
+              <view class="wd-slider__button" />
+            </view>
+            <!-- 右边滑块 -->
+            <view
+              class="wd-slider__button-wrapper wd-slider__button-wrapper--right"
+              :style="sliderButtonStyle"
+              @touchstart="(event) => onSliderTouchStart(event, 1)"
+              @touchmove="onSliderTouchMove"
+              @touchend="onSliderTouchEnd"
+              @touchcancel="onSliderTouchEnd"
+            >
+              <view class="wd-slider__label" v-if="!hideLabel">{{ secondValue }}</view>
+              <view class="wd-slider__button" />
+            </view>
+          </template>
+          <view
+            v-else
+            class="wd-slider__button-wrapper"
+            :style="sliderButtonStyle"
+            @touchstart="(event) => onSliderTouchStart(event, 0)"
+            @touchmove="onSliderTouchMove"
+            @touchend="onSliderTouchEnd"
+            @touchcancel="onSliderTouchEnd"
+          >
+            <view class="wd-slider__label" v-if="!hideLabel">{{ firstValue }}</view>
+            <view class="wd-slider__button" />
+          </view>
         </view>
       </view>
       <view :class="`wd-slider__label-max ${customMaxClass}`" v-if="!hideMinMax">
-        {{ maxValue }}
+        {{ maxProp }}
       </view>
       <!-- #ifdef MP-DINGTALK -->
     </view>
@@ -55,298 +67,282 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, ref } from 'vue'
-import { getRect, isArray, isDef, isNumber, uuid } from '../common/util'
+import { computed, type CSSProperties, getCurrentInstance, onMounted, ref, watch } from 'vue'
+import { deepClone, getRect, isArray, isDef, isEqual, objToStyle, uuid } from '../common/util'
 import { useTouch } from '../composables/useTouch'
-import { watch } from 'vue'
-import { sliderProps, type SliderExpose } from './types'
+import { sliderProps, type SliderExpose, type SliderEmits, type SliderDragEvent, type SliderValue } from './types'
 
 const props = defineProps(sliderProps)
-const emit = defineEmits(['dragstart', 'dragmove', 'dragend', 'update:modelValue'])
+const emit = defineEmits<SliderEmits>()
 
-// 存放右滑轮中的所有属性
-const rightSlider = {
-  startValue: 0,
-  deltaX: 0,
-  newValue: 0
-}
+// ----------- 基础状态 -----------
 const sliderId = ref<string>(`sliderId${uuid()}`)
+const touch = useTouch()
+const touchIndex = ref<number>(0)
+const { proxy } = getCurrentInstance() as any
 
-const touchLeft = useTouch()
-const touchRight = useTouch()
-
-const showRight = ref<boolean>(false)
-const barStyle = ref<string>('')
-const leftNewValue = ref<number>(0)
-const rightNewValue = ref<number>(0)
-const rightBarPercent = ref<number>(0)
-const leftBarPercent = ref<number>(0)
+// ----------- 轨道尺寸状态 -----------
 const trackWidth = ref<number>(0)
 const trackLeft = ref<number>(0)
-const startValue = ref<number>(0)
-const currentValue = ref<number | number[]>(0)
-const newValue = ref<number>(0)
 
-const maxValue = ref<number>(100) // 最大值
-const minValue = ref<number>(0) // 最小值
-const stepValue = ref<number>(1) // 步长
+// ----------- 值相关状态 -----------
+/**
+ * 最小值 - 直接使用props，减少状态同步
+ */
+const minProp = computed(() => props.min)
 
-watch(
-  () => props.max,
-  (newValue) => {
-    if (newValue <= props.min) {
-      maxValue.value = props.min // 交换最大值和最小值
-      minValue.value = newValue
-      console.warn('[wot ui] warning(wd-slider): max value must be greater than min value')
-    } else {
-      maxValue.value = newValue // 更新最大值
-    }
-    calcBarPercent()
-  },
-  { immediate: true }
-)
+/**
+ * 最大值 - 直接使用props，减少状态同步
+ */
+const maxProp = computed(() => props.max)
 
-watch(
-  () => props.min,
-  (newValue) => {
-    if (newValue >= props.max) {
-      minValue.value = props.max // 交换最小值和最大值
-      maxValue.value = newValue
-      console.warn('[wot ui] warning(wd-slider): min value must be less than max value')
-    } else {
-      minValue.value = newValue // 更新最小值
-    }
-    calcBarPercent()
-  },
-  { immediate: true }
-)
+/**
+ * 步长值 - 直接使用props，减少状态同步
+ */
+const stepProp = computed(() => {
+  if (props.step <= 0) {
+    console.warn('[wot ui] warning(wd-slider): step must be greater than 0')
+    return 1
+  }
+  return props.step
+})
 
-watch(
-  () => props.step,
-  (newValue) => {
-    if (newValue < 1) {
-      stepValue.value = 1
-      console.warn('[wot ui] warning(wd-slider): step must be greater than 0')
-    } else {
-      stepValue.value = Math.floor(newValue)
-    }
-  },
-  { immediate: true }
-)
+const startValue = ref<SliderValue>(0)
+const modelValue = ref<SliderValue>(getInitValue())
 
+// ----------- 计算属性 -----------
+
+/**
+ * 是否为双滑块模式
+ */
+const isRange = computed(() => isArray(modelValue.value))
+
+/**
+ * 计算滑块的取值范围大小
+ */
+const scope = computed(() => maxProp.value - minProp.value)
+
+/**
+ * 获取左侧滑块的值
+ */
+const firstValue = computed(() => (isRange.value ? (modelValue.value as number[])[0] : (modelValue.value as number)))
+
+/**
+ * 获取右侧滑块的值（仅双滑块模式有效）
+ */
+const secondValue = computed(() => (isRange.value ? (modelValue.value as number[])[1] : 0))
+
+/**
+ * 根类名计算
+ */
+const rootClass = computed(() => {
+  return `wd-slider ${!props.hideLabel ? 'wd-slider__has-label' : ''} ${props.disabled ? 'wd-slider--disabled' : ''} ${props.customClass}`
+})
+
+/**
+ * 滑块按钮样式
+ */
+const sliderButtonStyle = computed(() => {
+  return objToStyle({
+    visibility: !props.disabled ? 'visible' : 'hidden'
+  })
+})
+
+/**
+ * 轨道包装器样式
+ */
+const wrapperStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (props.inactiveColor) {
+    style.background = props.inactiveColor
+  }
+  return objToStyle(style)
+})
+
+/**
+ * 进度条样式计算
+ */
+const barStyle = computed(() => {
+  const style: CSSProperties = {}
+
+  if (isRange.value) {
+    // 双滑块模式
+    const [left, right] = normalizeRangeValues(modelValue.value as number[])
+    style.width = `${((right - left) * 100) / scope.value}%`
+    style.left = `${((left - minProp.value) * 100) / scope.value}%`
+  } else {
+    // 单滑块模式
+    style.width = `${(((modelValue.value as number) - minProp.value) * 100) / scope.value}%`
+    style.left = '0'
+  }
+
+  // 添加自定义颜色
+  if (props.activeColor) {
+    style.background = props.activeColor
+  }
+
+  return objToStyle(style)
+})
+
+// ----------- 监听器 -----------
+/**
+ * 监听 modelValue 属性变化
+ */
 watch(
   () => props.modelValue,
   (newValue) => {
-    // 类型校验，支持所有值(除null、undefined。undefined建议统一写成void (0)防止全局undefined被覆盖)
-    if (!isDef(newValue)) {
-      emit('update:modelValue', currentValue.value)
-      console.warn('[wot ui] warning(wd-slider): value can nott be null or undefined')
-    } else if (isArray(newValue) && newValue.length !== 2) {
-      console.warn('[wot ui] warning(wd-slider): value must be dyadic array')
-    } else if (!isNumber(newValue) && !isArray(newValue)) {
-      emit('update:modelValue', currentValue.value)
-      console.warn('[wot ui] warning(wd-slider): value must be dyadic array Or Number')
-    }
-    // 动态传值后修改
-    if (isArray(newValue)) {
-      if (currentValue.value && isArray(currentValue.value) && equal(newValue, currentValue.value)) return
-      currentValue.value = newValue
-      showRight.value = true
-      if (leftBarPercent.value <= rightBarPercent.value) {
-        leftBarSlider(newValue[0])
-        rightBarSlider(newValue[1])
-      } else {
-        leftBarSlider(newValue[1])
-        rightBarSlider(newValue[0])
-      }
-    } else {
-      if (newValue === currentValue.value) return
-      currentValue.value = newValue
-      leftBarSlider(newValue)
+    if (!isEqual(newValue, modelValue.value)) {
+      modelValue.value = getInitValue()
     }
   },
-  { deep: true, immediate: true }
+  { deep: true }
 )
 
-const { proxy } = getCurrentInstance() as any
-
-const rootClass = computed(() => {
-  const rootClass = `wd-slider ${!props.hideLabel ? 'wd-slider__has-label' : ''} ${props.disabled ? 'wd-slider--disabled' : ''} ${props.customClass}`
-  return rootClass
+/**
+ * 向上发射模型值变化
+ */
+watch(modelValue, (newVal) => {
+  emit('update:modelValue', newVal)
 })
 
-const barWrapperStyle = computed(() => {
-  const barWrapperStyle = `${props.inactiveColor ? 'background:' + props.inactiveColor : ''}`
-  return barWrapperStyle
-})
-
-const barCustomStyle = computed(() => {
-  const barWrapperStyle = `${barStyle.value};${props.activeColor ? 'background:' + props.activeColor : ''}`
-  return barWrapperStyle
-})
-
-const buttonLeftStyle = computed(() => {
-  const buttonLeftStyle = `left: ${leftBarPercent.value}%; visibility: ${!props.disabled ? 'show' : 'hidden'};`
-  return buttonLeftStyle
-})
-
-const buttonRightStyle = computed(() => {
-  const buttonRightStyle = `left: ${rightBarPercent.value}%; visibility: ${!props.disabled ? 'show' : 'hidden'}`
-  return buttonRightStyle
-})
-
+// ----------- 生命周期钩子 -----------
 onMounted(() => {
   initSlider()
 })
 
+// ----------- 工具方法 -----------
 /**
- * 初始化slider宽度
+ * 检查组件是否处于禁用状态
+ */
+function isDisabled(): boolean {
+  return props.disabled
+}
+
+/**
+ * 限制值在指定范围内
+ */
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max)
+}
+
+// ----------- 核心方法 -----------
+/**
+ * 初始化滑块宽度
  */
 function initSlider() {
   getRect(`#${sliderId.value}`, false, proxy).then((data) => {
-    // trackWidth: 轨道全长
     trackWidth.value = Number(data.width)
-    // trackLeft: 轨道距离左侧的距离
     trackLeft.value = Number(data.left)
   })
 }
 
-function onTouchStart(event: any) {
-  const { disabled, modelValue } = props
-  if (disabled) return
-  touchLeft.touchStart(event)
-  startValue.value = !isArray(modelValue)
-    ? format(modelValue)
-    : leftBarPercent.value < rightBarPercent.value
-    ? format(modelValue[0])
-    : format(modelValue[1])
-  emit('dragstart', {
-    value: currentValue.value
-  })
-}
-function onTouchMove(event: any) {
-  const { disabled } = props
-  if (disabled) return
-  touchLeft.touchMove(event)
-  // 移动间距 deltaX 就是向左(-)向右(+)
-  const diff = (touchLeft.deltaX.value / trackWidth.value) * (maxValue.value - minValue.value)
-  newValue.value = startValue.value + diff
-
-  // 左滑轮滑动控制
-  leftBarSlider(newValue.value)
-  emit('dragmove', {
-    value: currentValue.value
-  })
-}
-function onTouchEnd() {
-  if (props.disabled) return
-  emit('dragend', {
-    value: currentValue.value
-  })
-}
-// 右边滑轮滑动状态监听
-function onTouchStartRight(event: any) {
-  if (props.disabled) return
-  const { modelValue } = props
-  // 右滑轮移动时数据绑定
-  touchRight.touchStart(event)
-  // 记录开始数据值
-  rightSlider.startValue = leftBarPercent.value < rightBarPercent.value ? format((modelValue as number[])[1]) : format((modelValue as number[])[0])
-  emit('dragstart', {
-    value: currentValue.value
-  })
-}
-function onTouchMoveRight(event: any) {
-  if (props.disabled) return
-  touchRight.touchMove(event)
-  // 移动间距 deltaX 就是向左向右
-  const diff = (touchRight.deltaX.value / trackWidth.value) * (maxValue.value - minValue.value)
-  rightSlider.newValue = format(rightSlider.startValue + diff)
-  // 右滑轮滑动控制
-  rightBarSlider(rightSlider.newValue)
-  emit('dragmove', {
-    value: currentValue.value
-  })
-}
-function onTouchEndRight() {
-  if (props.disabled) return
-  emit('dragend', {
-    value: currentValue.value
-  })
-}
 /**
- * 控制右侧滑轮滑动， value校验
- * @param {Number} value 当前滑轮绑定值
+ * 获取初始值
  */
-function rightBarSlider(value: number) {
-  value = format(value)
-  rightNewValue.value = value
-  emit('update:modelValue', [Math.min(leftNewValue.value, rightNewValue.value), Math.max(leftNewValue.value, rightNewValue.value)])
-  rightBarPercent.value = formatPercent(value)
-  styleControl()
-}
-/**
- * 控制左滑轮滑动，更新渲染数据，对 value 进行校验取整
- * @param {Number} value 当前滑轮绑定值
- */
-function leftBarSlider(value: number) {
-  value = format(value)
-
-  // 把 value 转换成百分比
-  const percent = formatPercent(value)
-  if (!showRight.value) {
-    emit('update:modelValue', value)
-    leftNewValue.value = value
-    leftBarPercent.value = percent
-    barStyle.value = `width: ${percent}%; `
+function getInitValue(): SliderValue {
+  if (isArray(props.modelValue)) {
+    return normalizeRangeValues(props.modelValue as number[])
   } else {
-    leftNewValue.value = value
-    leftBarPercent.value = percent
-    emit('update:modelValue', [Math.min(leftNewValue.value, rightNewValue.value), Math.max(leftNewValue.value, rightNewValue.value)])
-    styleControl()
+    return clamp(props.modelValue as number, minProp.value, maxProp.value)
   }
 }
-// 样式控制
-function styleControl() {
-  // 左右滑轮距离左边最短为当前激活条所处位置
-  const barLeft =
-    leftBarPercent.value < rightBarPercent.value ? [leftBarPercent.value, rightBarPercent.value] : [rightBarPercent.value, leftBarPercent.value]
-  // 通过左右滑轮的间距控制 激活条宽度 barLeft[1] - barLeft[0]
-  const barStyleTemp = `width: ${barLeft[1] - barLeft[0]}%;  left: ${barLeft[0]}%`
-  currentValue.value =
-    leftNewValue.value < rightNewValue.value ? [leftNewValue.value, rightNewValue.value] : [rightNewValue.value, leftNewValue.value]
-  barStyle.value = barStyleTemp
-}
 
-function equal(arr1: number[], arr2: number[]) {
-  if (!isDef(arr1) || !isDef(arr2)) {
-    return false
+/**
+ * 处理双滑块模式下的值，确保值有效
+ */
+function normalizeRangeValues(value: number[]): [number, number] {
+  // 检查输入是否为有效的双滑块数组
+  if (!Array.isArray(value) || value.length < 2) {
+    console.warn('[wot ui] warning(wd-slider): range value should be an array with at least 2 elements')
+    return [minProp.value, maxProp.value]
   }
-  let i = 0
-  arr1.forEach((item, index) => {
-    item === arr2[index] && i++
-  })
-  return i === 2
-}
-function format(value: number) {
-  const formatValue = Math.round(Math.max(minValue.value, Math.min(value, maxValue.value)) / stepValue.value) * stepValue.value
-  return formatValue
+
+  const left = clamp(value[0], minProp.value, maxProp.value)
+  const right = clamp(value[1], minProp.value, maxProp.value)
+
+  return left > right ? [right, left] : [left, right]
 }
 
-// 计算占比
-function formatPercent(value: number) {
-  const percentage = ((value - minValue.value) / (maxValue.value - minValue.value)) * 100
-  return percentage
+/**
+ * 将值对齐到最近的步长倍数
+ */
+function snapValueToStep(value: number): number {
+  // 确保值在范围内
+  value = clamp(value, minProp.value, maxProp.value)
+
+  // 计算最接近的步长倍数
+  const steps = Math.round((value - minProp.value) / stepProp.value)
+
+  // 计算最终值并处理精度问题
+  return parseFloat((minProp.value + steps * stepProp.value).toFixed(10))
 }
-// 计算滑块位置和进度长度
-function calcBarPercent() {
-  const { modelValue } = props
-  let value = !isArray(modelValue) ? format(modelValue) : leftBarPercent.value < rightBarPercent.value ? format(modelValue[0]) : format(modelValue[1])
-  value = format(value)
-  // 把 value 转换成百分比
-  const percent = formatPercent(value)
-  leftBarPercent.value = percent
-  barStyle.value = `width: ${percent}%; `
+
+/**
+ * 统一更新滑块值的函数
+ */
+function updateValue(value: SliderValue) {
+  let newValue: SliderValue = deepClone(value)
+
+  if (isArray(value)) {
+    newValue = normalizeRangeValues(value as number[]).map((v) => snapValueToStep(v)) as [number, number]
+  } else {
+    newValue = snapValueToStep(value as number)
+  }
+
+  if (!isEqual(newValue, modelValue.value)) {
+    modelValue.value = newValue
+  }
+}
+
+// ----------- 事件处理 -----------
+/**
+ * 滑块触摸开始事件处理
+ */
+function onSliderTouchStart(event: any, index: number) {
+  if (isDisabled()) return
+
+  touchIndex.value = index
+  touch.touchStart(event)
+
+  // 保存触摸开始时的滑块值
+  startValue.value = deepClone(modelValue.value)
+
+  // 触发拖动开始事件
+  emit('dragstart', { value: modelValue.value })
+}
+
+/**
+ * 滑块触摸移动事件处理
+ */
+function onSliderTouchMove(event: any) {
+  if (isDisabled()) return
+
+  // 更新触摸状态
+  touch.touchMove(event)
+
+  // 计算滑动距离对应的值变化
+  const diff = (touch.deltaX.value / trackWidth.value) * scope.value
+  let newValue = deepClone(startValue.value)
+
+  if (isArray(newValue)) {
+    ;(newValue as number[])[touchIndex.value] += diff
+  } else {
+    newValue = (newValue as number) + diff
+  }
+
+  updateValue(newValue)
+
+  // 触发拖动事件
+  emit('dragmove', { value: modelValue.value })
+}
+
+/**
+ * 滑块触摸结束事件处理
+ */
+function onSliderTouchEnd() {
+  if (isDisabled()) return
+
+  emit('dragend', { value: modelValue.value })
 }
 
 defineExpose<SliderExpose>({

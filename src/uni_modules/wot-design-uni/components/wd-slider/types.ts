@@ -1,14 +1,10 @@
-/*
- * @Author: weisheng
- * @Date: 2024-06-03 23:43:43
- * @LastEditTime: 2024-06-06 22:03:57
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-slider/types.ts
- * 记得注释
- */
-import type { ComponentPublicInstance, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
+
+/**
+ * 滑块值类型 - 单滑块为数字，双滑块为数组
+ */
+export type SliderValue = number | number[]
 
 export const sliderProps = {
   ...baseProps,
@@ -89,9 +85,45 @@ export const sliderProps = {
    * 默认值: 0
    */
   modelValue: {
-    type: [Number, Array] as PropType<number | number[]>,
+    type: [Number, Array] as PropType<SliderValue>,
     default: 0
   }
+}
+
+/**
+ * 滑块拖动事件参数
+ */
+export interface SliderDragEvent {
+  /**
+   * 当前滑块的值
+   * 单滑块模式为数字，双滑块模式为数组
+   */
+  value: SliderValue
+}
+
+/**
+ * 滑块组件事件类型定义
+ */
+export type SliderEmits = {
+  /**
+   * 开始拖动滑块时触发
+   */
+  dragstart: [event: SliderDragEvent]
+
+  /**
+   * 拖动滑块过程中触发
+   */
+  dragmove: [event: SliderDragEvent]
+
+  /**
+   * 结束拖动滑块时触发
+   */
+  dragend: [event: SliderDragEvent]
+
+  /**
+   * 更新滑块值时触发，用于v-model绑定
+   */
+  'update:modelValue': [value: SliderValue]
 }
 
 export type SliderExpose = {
@@ -101,4 +133,6 @@ export type SliderExpose = {
   initSlider: () => void
 }
 
-export type SliderInstance = ComponentPublicInstance<SliderExpose>
+export type SliderProps = ExtractPropTypes<typeof sliderProps>
+
+export type SliderInstance = ComponentPublicInstance<SliderProps, SliderExpose>

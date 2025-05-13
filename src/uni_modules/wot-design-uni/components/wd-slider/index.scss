@@ -58,10 +58,14 @@
   }
   @include e(button-wrapper) {
     width: calc($-slider-handle-radius * 2);
+    transform: translate3d(50%, -50%, 0);
     position: absolute;
     right: 0;
-    top: 0;
-    transform: translate3d(-50%, -50%, 0);
+
+    @include m(left){
+      left: 0;
+      transform: translate3d(-50%, -50%, 0);
+    }
   }
   @include e(has-label) {
     padding-top: calc($-slider-fs * 1.2 + 8px);
