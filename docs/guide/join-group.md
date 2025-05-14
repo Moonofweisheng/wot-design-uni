@@ -26,11 +26,19 @@
 
 我们提供了 微信公众号、微信群 和 QQ 群，欢迎加入，一起交流学习。
 
-## 微信公众号
+### 加群凭证
+
+为了提升加群后沟通的效率，我们添加了加群前的资格测验，有两种测验方式：  
+1. 通过[WotUI 常见问题知识测验](https://wj.qq.com/s2/22106509/3c37/)考试，拿到80分以上即可获得加群资格，悄悄告诉你，答案都来自[常见问题](./common-problems)（强烈推荐此方式）。
+2. 打赏5元以上获得[上榜](../reward/donor)和加群资格，打赏时请备注加群或者留言中包含加群（沙某不懂技术，但沙某尊重技术）。
+
+通过以上2种测验方式获得加群资格后可以通过接下来的方式加群，加群时请提供资格凭证：问卷答题账号ID或者打赏账号。
+
+### 微信公众号
 
 欢迎关注公众号【阿鱼聊前端】，我是不如摸鱼去，将会在此公众号分享前端、uni-app与wot-ui组件库相关知识与经验。
 
-微信群可以通过公众号添加【摸鱼小助手】的微信，备注【加群】即可加入。
+微信群可以通过公众号添加【摸鱼小助手】的微信，备注[加群凭证](#加群凭证)章节获得的加群凭证即可。
 
 <div style="display: flex;gap:24px;">
   <img style="min-width: 250px;max-width:400px; height: auto;" :src="wechatPublicAccount" />
@@ -38,7 +46,7 @@
 
 ### QQ 群
 
-目前 1、2 群已满，请加 3 群。
+目前 1、2 群已满，请加 3 群，加群时备注[加群凭证](#加群凭证)章节获得的加群凭证即可。
 
 <div style="display: flex;gap:24px;flex-wrap: wrap;">
   <img style="width: 250px; height: auto;" :src="QQ1" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
@@ -70,7 +78,7 @@ const checked = ref(false)
 
 function handleClick() {
   if (!checked.value) {
-  ElMessageBox.alert('请阅读以上沟通案例和小技巧并在下方勾选我已阅读，保证提问时遵守相关规范后可以加群。以任何形式加入到群聊，即表示同意遵守相关规范，请知悉', '提示', {
+  ElMessageBox.alert('请阅读以上沟通案例和小技巧并在下方勾选我已阅读，加群前请通过加群资格测验获得加群凭证，保证提问时遵守相关规范后可以加群。以任何形式加入到群聊，即表示同意遵守相关规范，请知悉', '提示', {
     confirmButtonText: '我知道了',
   })
   }

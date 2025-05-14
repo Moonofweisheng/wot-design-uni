@@ -24,11 +24,19 @@ I encountered an issue where custom styles don't take effect when using the `But
 
 We provide WeChat Official Account, WeChat Groups, and QQ Groups. Welcome to join and exchange learning experiences.
 
-## WeChat Official Account
+### Group Joining Credentials
+
+To improve communication efficiency after joining the group, we have added a qualification test before joining the group. There are two testing methods:  
+1. Take the [WotUI Common Issues Knowledge Test](https://wj.qq.com/s2/22106509/3c37/) and score above 80 points to qualify for joining the group. Just between us, all the answers come from the [Common Problems](./common-problems) (Highly recommended).
+2. Donate 5 yuan or more to get [listed](../reward/donor) and qualify for joining the group. When donating, please note "join group" or include "join group" in your message (沙某 may not understand technology, but 沙某 respect it).
+
+After obtaining joining qualifications through either of these two methods, you can join the group through the following ways. When joining, please provide your qualification credentials: survey answer account ID or donation account.
+
+### WeChat Official Account
 
 Welcome to follow the official account 【阿鱼聊前端】(Fish Talks Frontend). I'm 不如摸鱼去 (Rather Go Fish), and I will share knowledge and experience about frontend, uni-app, and wot-ui component library on this official account.
 
-You can join the WeChat group by adding 【摸鱼小助手】(Fish Assistant) on WeChat through the official account, note "Join Group".
+You can join the WeChat group by adding 【摸鱼小助手】(Fish Assistant) on WeChat through the official account, note the group joining credentials obtained from the [Group Joining Credentials](#group-joining-credentials) section.
 
 <div style="display: flex;gap:24px;">
   <img style="min-width: 250px;max-width:400px; height: auto;" :src="wechatPublicAccount" />
@@ -36,7 +44,7 @@ You can join the WeChat group by adding 【摸鱼小助手】(Fish Assistant) on
 
 ### QQ Groups
 
-Currently, Groups 1 and 2 are full, please join Group 3.
+Currently, Groups 1 and 2 are full, please join Group 3. When joining, note the group joining credentials obtained from the [Group Joining Credentials](#group-joining-credentials) section.
 
 <div style="display: flex;gap:24px;flex-wrap: wrap;">
   <img style="width: 250px; height: auto;" :src="QQ1" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
@@ -66,7 +74,7 @@ const checked = ref(false)
 
 function handleClick() {
   if (!checked.value) {
-  ElMessageBox.alert('Please read the communication examples and tips above and check "I have read" below, promising to follow the relevant guidelines when asking questions. By joining the group chat in any form, you agree to comply with the relevant guidelines, please be aware', 'Tip', {
+  ElMessageBox.alert('Please read the communication examples and tips above and check "I have read" below. Before joining the group, please obtain group joining credentials through the qualification test. By joining the group chat in any form, you agree to comply with the relevant guidelines, please be aware', 'Tip', {
     confirmButtonText: 'I understand',
   })
   }
