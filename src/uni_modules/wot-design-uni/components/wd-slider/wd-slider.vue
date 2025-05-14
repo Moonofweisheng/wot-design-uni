@@ -165,6 +165,8 @@ const wrapperStyle = computed(() => {
 const barStyle = computed(() => {
   const style: CSSProperties = {}
 
+  if (scope.value === 0) return objToStyle(style)
+
   if (isRange.value) {
     // 双滑块模式
     const [left, right] = normalizeRangeValues(modelValue.value as number[])
