@@ -5,50 +5,13 @@ We warmly welcome everyone to contribute excellent demos and cases. Feel free to
 Wot UI is being used in production environments by many companies and teams. Here are some excellent cases:
 
 <div class="cases-container">
-  <el-card shadow="hover">
+  <el-card v-for="(item, index) in cases" :key="index" shadow="hover">
     <template #header>
-      <span class="case-title">Tiaojibao</span>
+      <span class="case-title">{{ item.name }}</span>
+      <span class="case-description">{{ item.description }}</span>
     </template>
-    <el-image src="/cases/tiaojibao.jpg" />
+    <el-image :src="item.image" />
   </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">BodyLang Posture Assessment</span>
-    </template>
-    <el-image src="/cases/BodyLang.png" />
-  </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">Chencai Consulting</span>
-    </template>
-    <el-image src="/cases/chencaizixun.png" />
-  </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">Daily Counter</span>
-    </template>
-    <el-image src="/cases/richangjishuqi.jpg" />
-  </el-card> 
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">Woqu Bookkeeping</span>
-    </template>
-    <el-image src="/cases/woqujizhang.jpg" />
-  </el-card> 
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">Salary Calculator</span>
-    </template>
-    <el-image src="/cases/salary-calculator.jpg" />
-  </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">Suixiang Xiaozhan</span>
-      <!-- Add a description line -->
-      <span class="case-description">A warm, anonymous, and safe social mini program for sharing thoughts.</span>
-    </template>
-    <el-image src="/cases/suixiangxiaozhan.png" />
-  </el-card>  
 </div>
 
 <style scoped>
@@ -77,4 +40,6 @@ Wot UI is being used in production environments by many companies and teams. Her
 </style>
 
 <script setup>
+import { useCaseData } from '../../.vitepress/theme/composables/cases'
+const { data:cases } = useCaseData()
 </script>
