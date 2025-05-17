@@ -36,15 +36,33 @@ After obtaining joining qualifications through either of these two methods, you 
 
 Welcome to follow the official account 【阿鱼聊前端】(Fish Talks Frontend). I'm 不如摸鱼去 (Rather Go Fish), and I will share knowledge and experience about frontend, uni-app, and wot-ui component library on this official account.
 
-You can join the WeChat group by adding 【摸鱼小助手】(Fish Assistant) on WeChat through the official account, note the group joining credentials obtained from the [Group Joining Credentials](#group-joining-credentials) section.
-
 <div style="display: flex;gap:24px;">
   <img style="min-width: 250px;max-width:400px; height: auto;" :src="wechatPublicAccount" />
 </div>
 
+### WeChat Groups
+
+You can join the WeChat group by adding 【摸鱼小助手】(Fish Assistant) on WeChat through the official account, When joining, please provide your group joining credentials obtained from the [Group Joining Credentials](#group-joining-credentials) section.
+
+:::danger Important Note for Joining Groups
+To improve communication efficiency after joining the group, we have added a qualification test before joining the group. There are two testing methods:  
+1. Take the [WotUI Common Issues Knowledge Test](https://wj.qq.com/s2/22106509/3c37/) and score above 80 points to qualify for joining the group. Just between us, all the answers come from the [Common Problems](./common-problems) (Highly recommended).
+2. Donate 5 yuan or more to get [listed](../reward/donor) and qualify for joining the group. When donating, please note "join group" or include "join group" in your message (沙某 may not understand technology, but 沙某 respect it).
+
+After obtaining joining qualifications through either of these two methods, you can join the group through the following ways. When joining, please provide your qualification credentials: survey answer account ID or donation account.
+:::
+
 ### QQ Groups
 
-Currently, Groups 1 and 2 are full, please join Group 3. When joining, note the group joining credentials obtained from the [Group Joining Credentials](#group-joining-credentials) section.
+Currently, Groups 1 and 2 are full, please join Group 3. When joining, please provide your group joining credentials obtained from the [Group Joining Credentials](#group-joining-credentials) section.
+
+:::danger Important Note for Joining Groups
+To improve communication efficiency after joining the group, we have added a qualification test before joining the group. There are two testing methods:  
+1. Take the [WotUI Common Issues Knowledge Test](https://wj.qq.com/s2/22106509/3c37/) and score above 80 points to qualify for joining the group. Just between us, all the answers come from the [Common Problems](./common-problems) (Highly recommended).
+2. Donate 5 yuan or more to get [listed](../reward/donor) and qualify for joining the group. When donating, please note "join group" or include "join group" in your message (沙某 may not understand technology, but 沙某 respect it).
+
+After obtaining joining qualifications through either of these two methods, you can join the group through the following ways. When joining, please provide your qualification credentials: survey answer account ID or donation account.
+:::
 
 <div style="display: flex;gap:24px;flex-wrap: wrap;">
   <img style="width: 250px; height: auto;" :src="QQ1" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
@@ -59,6 +77,14 @@ Currently, Groups 1 and 2 are full, please join Group 3. When joining, note the 
 4. Review [Changelog](/en-US/guide/changelog) for relevant updates.
 5. Learn [How To Ask Questions The Smart Way](https://lug.ustc.edu.cn/wiki/doc/smart-questions/), how to quickly ask the right questions.
 6. The communication groups mainly provide a platform for mutual assistance and exchange. Please communicate friendly and don't be a freeloader. Thank you for your support.
+
+:::danger Important Note for Joining Groups
+To improve communication efficiency after joining the group, we have added a qualification test before joining the group. There are two testing methods:  
+1. Take the [WotUI Common Issues Knowledge Test](https://wj.qq.com/s2/22106509/3c37/) and score above 80 points to qualify for joining the group. Just between us, all the answers come from the [Common Problems](./common-problems) (Highly recommended).
+2. Donate 5 yuan or more to get [listed](../reward/donor) and qualify for joining the group. When donating, please note "join group" or include "join group" in your message (沙某 may not understand technology, but 沙某 respect it).
+
+After obtaining joining qualifications through either of these two methods, you can join the group through the following ways. When joining, please provide your qualification credentials: survey answer account ID or donation account.
+:::
 
 <el-checkbox v-model="checked" label="I have read and promise to follow the above guidelines when asking questions" />
 
