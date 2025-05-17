@@ -5,70 +5,13 @@
 Wot UI 已被很多公司和团队在生产环境使用，下面是一些优秀的案例：
 
 <div class="cases-container">
-  <el-card shadow="hover">
+  <el-card v-for="(item, index) in cases" :key="index" shadow="hover">
     <template #header>
-      <span class="case-title">调剂宝</span>
+      <span class="case-title">{{ item.name }}</span>
+      <span class="case-description">{{ item.description }}</span>
     </template>
-    <el-image src="/cases/tiaojibao.jpg" />
+    <el-image :src="item.image" />
   </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">BodyLang体态评估</span>
-    </template>
-    <el-image src="/cases/BodyLang.png" />
-  </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">尘才咨询</span>
-    </template>
-    <el-image src="/cases/chencaizixun.png" />
-  </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">日常计数器</span>
-    </template>
-    <el-image src="/cases/richangjishuqi.jpg" />
-  </el-card> 
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">蜗趣记账</span>
-    </template>
-    <el-image src="/cases/woqujizhang.jpg" />
-  </el-card> 
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">薪资速算器</span>
-    </template>
-    <el-image src="/cases/salary-calculator.jpg" />
-  </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">随享小栈</span>
-      <span class="case-description">一个温暖、匿名、安全的树洞社交小程序。</span>
-    </template>
-    <el-image src="/cases/suixiangxiaozhan.png" />
-  </el-card>
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">安维到家师傅版</span>
-      <span class="case-description">一个家具安装, 维修上门服务, 师傅接单平台。</span>
-    </template>
-    <el-image src="/cases/anxiudaojia.png" />
-  </el-card>    
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">轻便万物迹</span>
-      <span class="case-description">记录饮食，日记等。</span>
-    </template>
-    <el-image src="/cases/qingbianwanwuji.png" />
-  </el-card>    
-  <el-card shadow="hover">
-    <template #header>
-      <span class="case-title">人情礼记</span>
-      <span class="case-description">你贴心的人情往来数字记账伙伴。</span>
-    </template>
-    <el-image src="/cases/renqingliji.jpeg" />
-  </el-card>    
 </div>
 
 <style scoped>
@@ -97,4 +40,7 @@ Wot UI 已被很多公司和团队在生产环境使用，下面是一些优秀�
 </style>
 
 <script setup>
+import { useCaseData } from '../.vitepress/theme/composables/cases'
+const { data:cases } = useCaseData()
 </script>
+
