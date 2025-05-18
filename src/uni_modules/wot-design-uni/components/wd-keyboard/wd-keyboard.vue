@@ -10,8 +10,8 @@
     @click-modal="handleClose"
   >
     <view :class="`wd-keyboard ${customClass}`" :style="customStyle">
-      <view class="wd-keyboard__header" v-if="showTitle || $slots.title">
-        <slot name="title">
+      <view class="wd-keyboard__header" v-if="showHeader">
+        <slot name="title" v-if="showTitle">
           <text class="wd-keyboard__title">{{ title }}</text>
         </slot>
         <view class="wd-keyboard__close" hover-class="wd-keyboard__close--hover" v-if="showClose" @click="handleClose">
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, useSlots } from 'vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
 import WdKey from './key/index.vue'
 import { keyboardProps, type Key } from './types'
@@ -60,6 +60,7 @@ import { CAR_KEYBOARD_AREAS, CAR_KEYBOARD_KEYS } from './constants'
 
 const props = defineProps(keyboardProps)
 const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue'])
+const slots = useSlots()
 
 const show = ref(props.visible)
 watch(
@@ -77,7 +78,11 @@ const showClose = computed(() => {
 })
 
 const showTitle = computed(() => {
-  return props.title || showClose.value
+  return !!props.title || !!slots.title
+})
+
+const showHeader = computed(() => {
+  return showTitle.value || showClose.value
 })
 
 /**
