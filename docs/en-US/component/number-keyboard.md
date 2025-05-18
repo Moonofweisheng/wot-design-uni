@@ -2,6 +2,10 @@
 
 Virtual numeric keyboard, used for inputting numbers, passwords, or ID cards and other scenarios.
 
+:::danger Warning⚠️
+The virtual numeric keyboard functionality has been moved to the [KeyBoard](./keyboard) component. Please migrate as soon as possible. This component will be deprecated in version `1.10`.
+:::
+
 ## Basic Usage
 
 You can control whether the keyboard is displayed through `v-model:visible`.
