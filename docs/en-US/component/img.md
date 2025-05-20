@@ -95,17 +95,22 @@ You can also pass in the `preview-src` property to preview another image
 
 ## Attributes
 
-| Parameter | Description | Type | Options | Default | Version |
-|-----------|-------------|------|----------|---------|----------|
-| src | Image URL | string | - | - | - |
-| width | Width, default unit is px | number / string | - | - | - |
-| height | Height, default unit is px | number / string | - | - | - |
-| mode | Fill mode | ImageMode | 'top left' / 'top right' / 'bottom left' / 'bottom right' / 'right' / 'left' / 'center' / 'bottom' / 'top' / 'heightFix' / 'widthFix' / 'aspectFill' / 'aspectFit' / 'scaleToFill' | 'scaleToFill' | - |
-| round | Whether to display as circle | boolean | - | false | - |
-| radius | Border radius size, default unit is px | number / string | - | - | - |
-| enable-preview | Whether to support click preview | boolean | - | false | 1.2.11 |
-| show-menu-by-longpress | Enable long press image to show Mini Program code recognition menu, only supported in WeChat Mini Program | boolean | - | false | 1.3.11 |
-| preview-src | Preview image URL | string | - | - | 1.8.0 |
+| Parameter                | Description                                                                                   | Type            | Options                                                                                                                                                                             | Default        | Version  |
+|--------------------------|-----------------------------------------------------------------------------------------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------|
+| src                      | Image URL                                                                                    | string          | -                                                                                                                                                                                   | -              | -        |
+| width                    | Width, default unit is px                                                                    | number/string   | -                                                                                                                                                                                   | -              | -        |
+| height                   | Height, default unit is px                                                                   | number/string   | -                                                                                                                                                                                   | -              | -        |
+| mode                     | Fill mode                                                                                    | ImageMode       | 'top left' / 'top right' / 'bottom left' / 'bottom right' / 'right' / 'left' / 'center' / 'bottom' / 'top' / 'heightFix' / 'widthFix' / 'aspectFill' / 'aspectFit' / 'scaleToFill' | 'scaleToFill'  | -        |
+| round                    | Whether to display as circle                                                                 | boolean         | -                                                                                                                                                                                   | false          | -        |
+| radius                   | Border radius size, default unit is px                                                       | number/string   | -                                                                                                                                                                                   | -              | -        |
+| enable-preview           | Whether to support click preview                                                             | boolean         | -                                                                                                                                                                                   | false          | 1.2.11   |
+| show-menu-by-longpress   | Enable long press image to show Mini Program code recognition menu, only WeChat Mini Program  | boolean         | -                                                                                                                                                                                   | false          | 1.3.11   |
+| preview-src              | Preview image URL                                                                            | string          | -                                                                                                                                                                                   | -              | 1.8.0    |
+| fade-show                | Image display animation effect                                                               | boolean         | -                                                                                                                                                                                   | true           | 1.9.2    |
+| webp                     | Enable webp separately if the system does not support webp. Only supports network resources. | boolean         | -                                                                                                                                                                                   | false          | 1.9.2    |
+| draggable                | Whether the image can be dragged                                                             | boolean         | -                                                                                                                                                                                   | false          | 1.9.2    |
+| lazy-load                | Image lazy loading. Only effective under page and scroll-view image                          | string          | -                                                                                                                                                                                   | -              | -        |
+
 
 ## Events
 

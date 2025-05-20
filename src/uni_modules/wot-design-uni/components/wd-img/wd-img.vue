@@ -15,6 +15,9 @@
       :mode="mode"
       :show-menu-by-longpress="showMenuByLongpress"
       :lazy-load="lazyLoad"
+      :fade-show="fadeShow"
+      :webp="webp"
+      :draggable="draggable"
       @load="handleLoad"
       @error="handleError"
     />
