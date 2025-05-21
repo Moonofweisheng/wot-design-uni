@@ -7,7 +7,7 @@
   padding: $-toast-padding;
   background-color: $-toast-bg;
   border-radius: $-toast-radius;
-  color: #fff;
+  color: $-toast-color;
   transition: all 0.2s;
   font-size: $-toast-fs;
   box-sizing: border-box;
@@ -19,7 +19,8 @@
 
   @include e(msg) {
     font-size: $-toast-fs;
-    line-height: 20px;
+    word-break: break-all;
+    line-height: $-toast-line-height;
     text-align: left;
     font-family: "San Francisco", Rotobo, arial, "PingFang SC", "Noto SansCJK", "Microsoft Yahei", sans-serif;
   }
@@ -50,7 +51,7 @@
     background-repeat: no-repeat;
   }
   @include e(loading) {
-    margin-bottom: 16px;
+    margin-bottom: $-toast-loading-margin-bottom;
     display: inline-block;
   }
   @include m(top) {

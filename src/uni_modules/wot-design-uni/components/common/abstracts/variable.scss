@@ -639,16 +639,19 @@ $-tag-close-color: var(--wot-tag-close-color, $-tag-info-color) !default; // 关
 $-tag-close-active-color: var(--wot-tag-close-active-color, rgba(0, 0, 0, 0.45)) !default; // 关闭按钮 active 颜色
 
 /* toast */
+$-toast-color: var(--wot-toast-color, $-color-white) !default; // 文字颜色
 $-toast-padding: var(--wot-toast-padding, 16px 24px) !default; // padding
 $-toast-max-width: var(--wot-toast-max-width, 300px) !default; // 最大宽度
 $-toast-radius: var(--wot-toast-radius, 8px) !default; // 圆角大小
 $-toast-bg: var(--wot-toast-bg, $-overlay-bg) !default; // 背景色
 $-toast-fs: var(--wot-toast-fs, $-fs-content) !default; // 字号
+$-toast-line-height: var(--wot-toast-line-height, 20px) !default; // 行高
 $-toast-with-icon-min-width: var(--wot-toast-with-icon-min-width, 150px) !default; // 有图标的情况下最小宽度
 $-toast-icon-size: var(--wot-toast-icon-size, 32px) !default; // 图标大小
 $-toast-icon-margin-right: var(--wot-toast-icon-margin-right, 12px) !default; // 图标右边距
 $-toast-icon-margin-bottom: var(--wot-toast-icon-margin-bottom, 12px) !default; // 图标下边距
-$-toast-loading-padding: var(--wot-toast-loading-padding, 10px) !default; // loading 下的padding
+$-toast-loading-padding: var(--wot-toast-loading-padding, 10px) !default; // loading状态下的padding
+$-toast-loading-margin-bottom: var(--wot-toast-loading-margin-bottom, 16px) !default; // loading动画的margin-bottom
 $-toast-box-shadow: var(--wot-toast-box-shadow, 0px 6px 16px 0px rgba(0, 0, 0, 0.08)) !default; // 外部阴影
 
 /* loading */
