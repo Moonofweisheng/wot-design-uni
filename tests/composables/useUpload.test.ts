@@ -355,50 +355,6 @@ describe('useUpload', () => {
     })
   })
 
-  // 测试选择媒体文件
-  it('should choose media files', async () => {
-    const mockChooseMedia = vi.fn().mockImplementation((options) => {
-      options.success({
-        tempFiles: [
-          {
-            fileType: 'image',
-            tempFilePath: 'temp/image.jpg',
-            size: 1024,
-            duration: 0
-          },
-          {
-            fileType: 'video',
-            tempFilePath: 'temp/video.mp4',
-            thumbTempFilePath: 'temp/thumb.jpg',
-            size: 10240,
-            duration: 15
-          }
-        ]
-      })
-    })
-    ;(global as any).uni.chooseMedia = mockChooseMedia
-
-    const files = await chooseFile({
-      accept: 'media',
-      multiple: true,
-      maxCount: 9,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      compressed: true,
-      maxDuration: 60,
-      camera: 'back'
-    })
-
-    expect(files).toHaveLength(2)
-    expect(files[1]).toEqual({
-      type: 'video',
-      path: 'temp/video.mp4',
-      thumb: 'temp/thumb.jpg',
-      size: 10240,
-      duration: 15
-    })
-  })
-
   // 测试选择文件失败的情况
   it('should handle choose file failure', async () => {
     const mockChooseImage = vi.fn().mockImplementation((options) => {

@@ -78,6 +78,28 @@ const value = ref<number>(Date.now())
 const value4 = ref<string>('09:20')
 ```
 
+## time 类型（带秒）
+
+`time` 类型设置 `use-second` 属性可以展示时分秒，绑定值为 `HH:mm:ss` 格式。
+
+```html
+<wd-datetime-picker type="time" v-model="value" label="时分秒" use-second />
+```
+```typescript
+const value = ref<string>('09:20:30')
+```
+
+## datetime 类型（带秒）
+
+`datetime` 类型设置 `use-second` 属性可以展示年月日时分秒，绑定值为时间戳。
+
+```html
+<wd-datetime-picker type="datetime" v-model="value" label="年月日时分秒" use-second />
+```
+```typescript
+const value = ref<number>(Date.now())
+```
+
 ## 修改展示格式
 
 
@@ -295,6 +317,7 @@ const displayFormatTabLabel = (items) => {
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
 | immediate-change | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。 | boolean | - | false | 1.2.25 |
+| use-second | 是否显示秒选择，仅在 time 和 datetime 类型下生效 | boolean | - | false | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 
