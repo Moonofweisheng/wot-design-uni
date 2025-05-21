@@ -3,7 +3,6 @@
     <div class="ad-completion-message">
       <div class="message-title">{{ $t('gan-xie-ni-yuan-yi-lai-guan-kan-guang-gao') }}</div>
       <div class="message-content">{{ $t('guan-kan-cheng-gong-jiu-yi-jing-cheng-gong-wei-wo-zhu-li') }}</div>
-      <div class="message-content">{{ $t('guan-kan-yi-ci-ji-ke-zai-24h-nei-mian-chu-ye-mian-tie-pian-he-cha-ping-guang-gao') }}</div>
       <view class="button-group">
         <wd-button type="success" block @click="back">{{ $t('fan-hui-shi-yong') }}</wd-button>
         <wd-button type="error" block @click="showAd">{{ $t('guan-kan-shi-pin') }}</wd-button>
