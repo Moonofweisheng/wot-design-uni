@@ -134,6 +134,7 @@
     margin-right: $-cell-padding;
     color: $-cell-title-color;
     box-sizing: border-box;
+    flex-shrink: 0;
 
     @include when(required) {
       padding-left: 12px;
@@ -152,13 +153,16 @@
 
   @include e(value-wraper) {
     display: flex;
+    min-width: 0;
+    overflow: hidden;
   }
 
   @include e(value) {
     flex: 1;
     margin-right: 10px;
     color: $-cell-value-color;
-    
+    min-width: 0;
+
     @include when(ellipsis) {
       @include lineEllipsis;
     }
@@ -166,6 +170,8 @@
 
   @include e(body) {
     flex: 1;
+    min-width: 0;
+    overflow: hidden;
   }
 
   @include e(placeholder) {
