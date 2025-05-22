@@ -123,6 +123,11 @@ const formattedText = computed(() => {
     // 判断是否为纯数字字符串，优先当作时间戳处理
     const isTimestamp = /^\d+$/.test(`${text}`)
     const date = isTimestamp ? dayjs(Number(text)) : dayjs(text)
+    // 若为无效日期则返回占位符 "-"
+    if (!date.isValid()) {
+      return '-'
+    }
+    // 返回格式化后的日期
     return date.format('YYYY-MM-DD')
   }
   if (mode === 'price') {
