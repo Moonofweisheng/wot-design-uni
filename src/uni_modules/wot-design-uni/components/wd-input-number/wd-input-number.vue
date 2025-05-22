@@ -145,9 +145,12 @@ function toStrictlyStep(value: number | string) {
 }
 
 // 内部更新处理函数
-function doUpdate(value: string | number) {
+function doUpdate(value: string | number, eventType: InputNumberEventType) {
   inputValue.value = value
-  const formatted = formatValue(value)
+  let formatted = value
+  if (eventType !== InputNumberEventType.Input) {
+    formatted = formatValue(value)
+  }
   nextTick(() => {
     inputValue.value = formatted
     emit('update:modelValue', inputValue.value)
@@ -201,7 +204,7 @@ function updateValue(value: string | number, eventType: InputNumberEventType = I
     return
   }
 
-  const update = () => doUpdate(value)
+  const update = () => doUpdate(value, eventType)
 
   if (fromUser) {
     callInterceptor(props.beforeChange, {
