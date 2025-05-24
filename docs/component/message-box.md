@@ -189,6 +189,44 @@ function beforeConfirm() {
 }
 ```
 
+## 确认前置处理获取输入的值<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+
+设置 `beforeConfirm` 函数，在用户点击确认后，会执行 `beforeConfirm` 函数，接收 { resolve, value }，开发者可以在确认前进行处理，并通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受 1 个 `boolean` 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会完成确认操作。
+
+```html
+<wd-toast />
+<wd-message-box />
+<wd-button @click="beforeConfirmWithInputValue">beforeConfirmWithInputValue</wd-button>
+```
+
+```typescript
+import { useMessage, useToast } from '@/uni_modules/wot-design-uni'
+const message = useMessage()
+const toast = useToast()
+
+function beforeConfirmWithInputValue() {
+  message
+    .prompt({
+      title: '请输入邮箱',
+      inputValue: value1.value,
+      beforeConfirm: ({ resolve, value }) => {
+        if (!value) {
+          toast.error('请输入邮箱')
+          resolve(false)
+        } else {
+          resolve(true)
+        }
+      }
+    })
+    .then((resp) => {
+      console.log(resp)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+```
+
 ## 自定义操作按钮<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.5.0</el-tag>
 
 可以通过按钮属性 `cancel-button-props` 和 `confirm-button-props` 自定义操作按钮的样式，具体参考 [Button Attributes](/component/button.html#attributes)。

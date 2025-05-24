@@ -1040,6 +1040,7 @@
   "shi-jing-shan-qu": "SHIJINGSHAN",
   "shi-pin-lun-bo": "Video carousel",
   "shi-yong-beforeconfirm-gou-zi-zai-dan-kuang-que-ren-qian-ke-yi-jin-hang-yi-xie-cao-zuo": "Using the before Confirm hook, some operations can be performed before the pop-up confirmation",
+  "shi-yong-beforeconfirm-gou-zi-zai-dan-kuang-que-ren-qian-ke-yi-huo-qu-shu-ru-zhi-jin-xing-yi-xie-cao-zuo": "Using the beforeConfirm hook, you can get the input value and perform some operations before pop-up confirmation",
   "shi-yong-cha-cao": "Using slots",
   "shi-yong-heng-ping-qian-ming": "Use landscape signature",
   "shi-yong-hui-biao": "Use Badge",

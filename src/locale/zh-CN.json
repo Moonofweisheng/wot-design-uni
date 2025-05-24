@@ -1040,6 +1040,7 @@
   "shi-jing-shan-qu": "石景山区",
   "shi-pin-lun-bo": "视频轮播",
   "shi-yong-beforeconfirm-gou-zi-zai-dan-kuang-que-ren-qian-ke-yi-jin-hang-yi-xie-cao-zuo": "使用beforeConfirm钩子，在弹框确认前，可以进行一些操作",
+  "shi-yong-beforeconfirm-gou-zi-zai-dan-kuang-que-ren-qian-ke-yi-huo-qu-shu-ru-zhi-jin-xing-yi-xie-cao-zuo": "使用beforeConfirm钩子，在弹框确认前，可以获取输入值进行一些操作",
   "shi-yong-cha-cao": "使用插槽",
   "shi-yong-heng-ping-qian-ming": "使用横屏签名",
   "shi-yong-hui-biao": "使用徽标",

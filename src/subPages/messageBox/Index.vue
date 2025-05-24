@@ -33,6 +33,10 @@
         <wd-button @click="beforeConfirm">beforeConfirm</wd-button>
       </demo-block>
 
+      <demo-block :title="$t('shi-yong-beforeconfirm-gou-zi-zai-dan-kuang-que-ren-qian-ke-yi-huo-qu-shu-ru-zhi-jin-xing-yi-xie-cao-zuo')">
+        <wd-button @click="beforeConfirmWithInputValue">beforeConfirmWithInputValue</wd-button>
+      </demo-block>
+
       <demo-block :title="$t('tong-guo-buttonprops-zi-ding-yi-an-niu')">
         <wd-button @click="withButtonProps">withButtonProps</wd-button>
       </demo-block>
@@ -107,6 +111,28 @@ function beforeConfirm() {
       }
     })
     .then(() => {})
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
+function beforeConfirmWithInputValue() {
+  message
+    .prompt({
+      title: t('qing-shu-ru-you-xiang'),
+      inputValue: value1.value,
+      beforeConfirm: ({ resolve, value }) => {
+        if (!value) {
+          toast.error(t('qing-shu-ru-you-xiang'))
+          resolve(false)
+        } else {
+          resolve(true)
+        }
+      }
+    })
+    .then((resp) => {
+      console.log(resp)
+    })
     .catch((error) => {
       console.log(error)
     })
