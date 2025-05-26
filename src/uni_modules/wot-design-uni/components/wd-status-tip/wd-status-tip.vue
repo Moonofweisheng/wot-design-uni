@@ -12,6 +12,9 @@
     <slot name="image" v-if="$slots.image"></slot>
     <wd-img v-else-if="imgUrl" :mode="imageMode" :src="imgUrl" custom-class="wd-status-tip__image" :custom-style="imgStyle"></wd-img>
     <view v-if="tip" class="wd-status-tip__text">{{ tip }}</view>
+    <view v-if="$slots.bottom" class="wd-status-tip__bottom">
+      <slot name="bottom" />
+    </view>
   </view>
 </template>
 

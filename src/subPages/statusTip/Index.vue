@@ -1,5 +1,13 @@
 <template>
   <page-wraper>
+    <demo-block :title="$t('di-bu-cha-cao')">
+      <wd-status-tip image="content" tip="当前搜索无结果">
+        <template #bottom>
+          <wd-button type="info">重新加载</wd-button>
+        </template>
+      </wd-status-tip>
+    </demo-block>
+
     <demo-block :title="$t('sou-suo-wu-jie-guo')">
       <wd-status-tip image="search" tip="当前搜索无结果" />
     </demo-block>
