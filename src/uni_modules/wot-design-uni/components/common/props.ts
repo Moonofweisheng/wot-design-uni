@@ -1,4 +1,5 @@
 import type { PropType } from 'vue'
+import type { StyleValue } from 'vue'
 
 export const unknownProp = null as unknown as PropType<unknown>
 
@@ -39,13 +40,21 @@ export const makeStringProp = <T>(defaultVal: T) => ({
   default: defaultVal
 })
 
+export type ICustomClass = string | Array<string> | Record<string, boolean>
+
 export const baseProps = {
   /**
    * 自定义根节点样式
    */
-  customStyle: makeStringProp(''),
+  customStyle: {
+    type: [String, Object, Array, null] as unknown as PropType<StyleValue>,
+    default: ''
+  },
   /**
    * 自定义根节点样式类
    */
-  customClass: makeStringProp('')
+  customClass: {
+    type: [String, Array, Object, null] as unknown as PropType<ICustomClass>,
+    default: ''
+  }
 }
