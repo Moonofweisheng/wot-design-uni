@@ -1,4 +1,5 @@
 import { AbortablePromise } from './AbortablePromise'
+import { type ICustomClass } from './props'
 
 type NotUndefined<T> = T extends undefined ? never : T
 
@@ -775,4 +776,19 @@ export function easingFn(t: number = 0, b: number = 0, c: number = 0, d: number 
  */
 export function closest(arr: number[], target: number) {
   return arr.reduce((prev, curr) => (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev))
+}
+
+export function toClass(cx: ICustomClass): string {
+  if (typeof cx == 'string') return cx
+  if (Array.isArray(cx)) return cx.join(' ')
+  if (isObj(cx)) {
+    const result = []
+    for (const [key, value] of Object.entries(cx)) {
+      if (value) {
+        result.push(key)
+      }
+    }
+    return result.join(' ')
+  }
+  return ''
 }
