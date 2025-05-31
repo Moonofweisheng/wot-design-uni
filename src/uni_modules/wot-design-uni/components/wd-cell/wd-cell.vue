@@ -12,7 +12,7 @@
         :style="titleWidth ? 'min-width:' + titleWidth + ';max-width:' + titleWidth + ';' : ''"
       >
         <!--左侧icon部位-->
-        <wd-icon v-if="icon" :name="icon" :custom-class="`wd-cell__icon  ${customIconClass}`"></wd-icon>
+        <wd-icon v-if="icon" :name="icon" :size="iconSize" :custom-class="`wd-cell__icon  ${customIconClass}`"></wd-icon>
         <slot v-else name="icon" />
 
         <view class="wd-cell__title">

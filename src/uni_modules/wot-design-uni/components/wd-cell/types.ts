@@ -18,6 +18,10 @@ export const cellProps = {
    */
   icon: String,
   /**
+   * 图标大小
+   */
+  iconSize: makeNumericProp(16),
+  /**
    * 描述信息
    */
   label: String,
