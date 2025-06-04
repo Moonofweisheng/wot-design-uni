@@ -35,18 +35,6 @@ export const gridItemProps = {
    */
   linkType: makeStringProp<LinkType>('navigateTo'),
   /**
-   * 是否开启 GridItem 内容插槽
-   */
-  useSlot: makeBooleanProp(false),
-  /**
-   * 是否开启 GridItem icon 插槽
-   */
-  useIconSlot: makeBooleanProp(false),
-  /**
-   * 是否开启 GridItem text 内容插槽
-   */
-  useTextSlot: makeBooleanProp(false),
-  /**
    * 是否显示图标右上角小红点
    */
   isDot: {
