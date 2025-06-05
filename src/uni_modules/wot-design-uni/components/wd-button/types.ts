@@ -20,7 +20,7 @@ export type ButtonOpenType =
   | 'getUserInfo'
   | 'contact'
   | 'getPhoneNumber'
-  | 'getrealtimephonenumber'
+  | 'getRealtimePhoneNumber'
   | 'launchApp'
   | 'openSetting'
   | 'chooseAvatar'
