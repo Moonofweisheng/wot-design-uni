@@ -32,6 +32,7 @@
     @getuserinfo="handleGetuserinfo"
     @contact="handleConcat"
     @getphonenumber="handleGetphonenumber"
+    @getrealtimephonenumber="handleGetrealtimephonenumber"
     @error="handleError"
     @launchapp="handleLaunchapp"
     @opensetting="handleOpensetting"
@@ -81,6 +82,7 @@ const emit = defineEmits([
   'getuserinfo',
   'contact',
   'getphonenumber',
+  'getrealtimephonenumber',
   'error',
   'launchapp',
   'opensetting',
@@ -132,6 +134,10 @@ function handleConcat(event: any) {
 
 function handleGetphonenumber(event: any) {
   emit('getphonenumber', event.detail)
+}
+
+function handleGetrealtimephonenumber(event: any) {
+  emit('getrealtimephonenumber', event.detail)
 }
 
 function handleError(event: any) {
