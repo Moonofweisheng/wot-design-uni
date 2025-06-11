@@ -215,7 +215,7 @@ export const uploadProps = {
    * 类型：object
    * 默认值：{}
    */
-  formData: { type: Object as PropType<UploadFormData>, default: () => {} },
+  formData: { type: Object as PropType<UploadFormData>, default: () => ({}) },
   /**
    * 预览失败执行操作
    * 类型：function({index,imgList})
