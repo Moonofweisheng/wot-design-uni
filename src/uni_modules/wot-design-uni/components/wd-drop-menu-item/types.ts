@@ -71,7 +71,11 @@ export const dorpMenuItemProps = {
   /**
    * 自定义下拉菜单popup样式
    */
-  customPopupStyle: makeStringProp('')
+  customPopupStyle: makeStringProp(''),
+  /**
+   * 弹出层高度  这里设置了 就取这里的
+   */
+  popupHeight: makeStringProp('')
 }
 
 export type DropMenuItemProps = ExtractPropTypes<typeof dorpMenuItemProps>
