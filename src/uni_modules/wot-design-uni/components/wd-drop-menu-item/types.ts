@@ -13,6 +13,10 @@ export type DropMenuItemBeforeToggle = (option: DropMenuItemBeforeToggleOption) 
 export const dorpMenuItemProps = {
   ...baseProps,
   /**
+   * 弹出层高度  这里设置了 就取这里的
+   */
+  popupHeight: makeStringProp(''),
+  /**
    * DropMenuItem 左侧文字样式
    */
   customTitle: makeStringProp(''),
