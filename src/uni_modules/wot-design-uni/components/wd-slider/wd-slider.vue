@@ -1,10 +1,10 @@
 <template>
-  <view :class="rootClass" :style="customStyle" :id="sliderId">
+  <view :class="rootClass" :style="customStyle">
     <!-- #ifdef MP-DINGTALK -->
-    <view :id="sliderId" style="flex: 1" :class="rootClass">
+    <view style="flex: 1" :class="rootClass">
       <!-- #endif -->
       <view :class="`wd-slider__label-min ${customMinClass}`" v-if="!hideMinMax">{{ minProp }}</view>
-      <view class="wd-slider__bar-wrapper" :style="wrapperStyle">
+      <view class="wd-slider__bar-wrapper" :style="wrapperStyle" :id="sliderBarWrapperId">
         <view class="wd-slider__bar" :style="barStyle">
           <template v-if="isRange">
             <!-- 左边滑块 -->
@@ -76,7 +76,7 @@ const props = defineProps(sliderProps)
 const emit = defineEmits<SliderEmits>()
 
 // ----------- 基础状态 -----------
-const sliderId = ref<string>(`sliderId${uuid()}`)
+const sliderBarWrapperId = ref<string>(`sliderBarWrapperId${uuid()}`)
 const touch = useTouch()
 const touchIndex = ref<number>(0)
 const { proxy } = getCurrentInstance() as any
@@ -232,7 +232,7 @@ function clamp(value: number, min: number, max: number): number {
  * 初始化滑块宽度
  */
 function initSlider() {
-  getRect(`#${sliderId.value}`, false, proxy).then((data) => {
+  getRect(`#${sliderBarWrapperId.value}`, false, proxy).then((data) => {
     trackWidth.value = Number(data.width)
     trackLeft.value = Number(data.left)
   })
