@@ -25,7 +25,7 @@ export const dorpMenuItemProps = {
    */
   modelValue: [String, Number],
   /**
-   * 列表数据，对应数据结构 [{text: '标题', value: '0', tip: '提示文字'}]
+   * 列表数据，对应数据结构 [{label: '标题', value: '0', tip: '提示文字'}]
    */
   options: makeArrayProp<Record<string, any>>(),
   /**
