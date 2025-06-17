@@ -207,6 +207,7 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 | value-key     | 选项对象中，value 对应的 key                                           | string                        | -      | value      | -        |
 | label-key     | 选项对象中，展示的文本对应的 key                                       | string                        | -      | label      | -        |
 | tip-key       | 选项对象中，选项说明对应的 key                                         | string                        | -      | tip        | -        |
+| popup-height  | popup弹出容器的高度，不设置默认为80%                                       | string                        | -      | -        | $LOWEST_VERSION$ |
 
 ## DropdownItem Events
 
