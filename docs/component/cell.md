@@ -243,6 +243,7 @@ function handleSwitchChange({ value }) {
 | title       | 标题                           | string  | -      | -      | -        |
 | value       | 右侧内容                       | string  | -      | -      | -        |
 | icon        | 图标类名                       | string  | -      | -      | -        |
+| iconSize    | 图标的字体大小                 | string  | -       | inherit | -       |
 | label       | 描述信息                       | string  | -      | -      | -        |
 | is-link     | 是否为跳转链接                 | boolean | -      | false  | -        |
 | to          | 跳转地址                       | string  | -      | -      | -        |
