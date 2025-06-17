@@ -172,7 +172,8 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
                 value: messageState.inputValue
               })
             }
-          }
+          },
+          value: messageState.inputValue
         })
       } else {
         handleConfirm({
