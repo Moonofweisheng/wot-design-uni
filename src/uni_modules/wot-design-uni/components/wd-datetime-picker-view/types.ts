@@ -74,11 +74,11 @@ export const datetimePickerViewProps = {
    */
   useSecond: makeBooleanProp(false),
   /**
-   * 最小秒数，time类型时生效
+   * 最小秒数，仅在 time 和 datetime 类型下生效
    */
   minSecond: makeNumberProp(0),
   /**
-   * 最大秒数，time类型时生效
+   * 最大秒数，仅在 time 和 datetime 类型下生效
    */
   maxSecond: makeNumberProp(59),
   /**
