@@ -78,6 +78,28 @@ const value = ref<number>(Date.now())
 const value4 = ref<string>('09:20')
 ```
 
+## Time Type (with Seconds)
+
+`time` type with `use-second` property displays hour, minute and second, the binding value is in `HH:mm:ss` format.
+
+```html
+<wd-datetime-picker type="time" v-model="value" label="Hour Minute Second" use-second />
+```
+```typescript
+const value = ref<string>('09:20:30')
+```
+
+## Datetime Type (with Seconds)
+
+`datetime` type with `use-second` property displays year, month, day, hour, minute and second, the binding value is timestamp.
+
+```html
+<wd-datetime-picker type="datetime" v-model="value" label="Year Month Day Hour Minute Second" use-second />
+```
+```typescript
+const value = ref<number>(Date.now())
+```
+
 ## Modify Display Format
 
 Pass a function to the `display-format` property, which receives an array of all selected items and returns the display text content.
@@ -290,6 +312,7 @@ const displayFormatTabLabel = (items) => {
 | prop | Form field `model` field name, required when using form validation | string | - | - | - |
 | rules | Form validation rules, used with `wd-form` component | `FormItemRule []` | - | `[]` | - |
 | immediate-change | Whether to trigger the picker-view's change event immediately when the finger is released. If not enabled, the change event will be triggered after the scrolling animation ends. Available from version 1.2.25, only supported on WeChat Mini Program and Alipay Mini Program. | boolean | - | false | 1.2.25 |
+| use-second | Whether to display the second selection, only effective for time and datetime types | boolean | - | false | $LOWEST_VERSION$ |
 
 ### FormItemRule Data Structure
 

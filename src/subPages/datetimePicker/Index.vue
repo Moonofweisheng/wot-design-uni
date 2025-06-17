@@ -4,10 +4,12 @@
     <demo-block transparent>
       <wd-cell-group border>
         <wd-datetime-picker :label="$t('ri-qi-xuan-ze')" v-model="value1" @confirm="handleConfirm1" />
+        <wd-datetime-picker :label="$t('ri-qi-xuan-ze-dai-miao')" use-second v-model="value18" />
         <wd-datetime-picker :label="$t('nian-yue-ri')" v-model="value2" type="date" @confirm="handleConfirm2" />
         <wd-datetime-picker :label="$t('nian-yue')" v-model="value3" type="year-month" @confirm="handleConfirm3" />
         <wd-datetime-picker :label="$t('nian')" v-model="value16" type="year" @confirm="handleConfirm16" />
         <wd-datetime-picker :label="$t('shi-fen')" v-model="value4" type="time" @confirm="handleConfirm4" />
+        <wd-datetime-picker :label="$t('shi-jian-xuan-ze-dai-miao')" v-model="value19" type="time" use-second />
         <wd-datetime-picker :label="$t('zhan-shi-ge-shi')" v-model="value5" :display-format="displayFormat" @confirm="handleConfirm5" />
         <wd-datetime-picker :label="$t('nei-bu-ge-shi')" v-model="value6" :formatter="formatter" @confirm="handleConfirm6" />
         <wd-datetime-picker :label="$t('guo-lv-xuan-xiang')" v-model="value7" :filter="filter" @confirm="handleConfirm7" />
@@ -34,7 +36,13 @@
       <wd-datetime-picker :label="$t('ri-qi-xuan-ze-1')" align-right v-model="value13" @confirm="handleConfirm13" />
     </demo-block>
     <demo-block :title="$t('qu-yu-xuan-ze')" transparent>
-      <wd-datetime-picker :label="$t('ri-qi-xuan-ze-2')" :title="$t('qing-xuan-ze-qu-jian')" v-model="value14" @confirm="handleConfirm14" />
+      <wd-datetime-picker
+        :label="$t('ri-qi-xuan-ze-2')"
+        :title="$t('qing-xuan-ze-qu-jian')"
+        v-model="value14"
+        use-second
+        @confirm="handleConfirm14"
+      />
     </demo-block>
     <demo-block :title="$t('fan-wei-tab-zhan-shi-ge-shi')" transparent>
       <wd-datetime-picker
@@ -76,7 +84,8 @@ const value14 = ref<any[]>(['', ''])
 const value15 = ref<any[]>(['', Date.now()])
 const value16 = ref(Date.now())
 const value17 = ref(Date.now())
-
+const value18 = ref(Date.now())
+const value19 = ref('09:20:26')
 const minDate = ref<number>(Date.now())
 const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
 

@@ -54,14 +54,6 @@ export const datetimePickerProps = {
    */
   labelWidth: makeStringProp('33%'),
   /**
-   * 使用默认插槽
-   */
-  useDefaultSlot: makeBooleanProp(false),
-  /**
-   * label 使用插槽
-   */
-  useLabelSlot: makeBooleanProp(false),
-  /**
    * 是否为错误状态，错误状态时右侧内容为红色
    */
   error: makeBooleanProp(false),
@@ -85,7 +77,13 @@ export const datetimePickerProps = {
    * picker内部滚筒高
    */
   columnsHeight: makeNumberProp(217),
+  /**
+   * 选项的key
+   */
   valueKey: makeStringProp('value'),
+  /**
+   * 选项的label
+   */
   labelKey: makeStringProp('label'),
   /**
    * 选中项，当 type 为 time 时，类型为字符串；当 type 为 Array 时，类型为范围选择；否则为 时间戳
@@ -119,6 +117,18 @@ export const datetimePickerProps = {
    * 最大分钟，time类型时生效
    */
   maxMinute: makeNumberProp(59),
+  /**
+   * 是否启用秒选择，仅在 time 和 datetime 类型下生效
+   */
+  useSecond: makeBooleanProp(false),
+  /**
+   * 最小秒数，仅在 time 和 datetime 类型下生效
+   */
+  minSecond: makeNumberProp(0),
+  /**
+   * 最大秒数，仅在 time 和 datetime 类型下生效
+   */
+  maxSecond: makeNumberProp(59),
   /**
    * 自定义过滤选项的函数，返回列的选项数组
    */

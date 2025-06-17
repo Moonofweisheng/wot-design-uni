@@ -101,6 +101,9 @@
             :min-date="minDate"
             :max-minute="maxMinute"
             :min-minute="minMinute"
+            :use-second="useSecond"
+            :min-second="minSecond"
+            :max-second="maxSecond"
             :start-symbol="true"
             :immediate-change="immediateChange"
             @change="onChangeStart"
@@ -128,6 +131,9 @@
             :min-date="minDate"
             :max-minute="maxMinute"
             :min-minute="minMinute"
+            :use-second="useSecond"
+            :min-second="minSecond"
+            :max-second="maxSecond"
             :start-symbol="false"
             :immediate-change="immediateChange"
             @change="onChangeEnd"
@@ -158,7 +164,6 @@ import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, 
 import { deepClone, isArray, isDef, isEqual, isFunction, padZero } from '../common/util'
 import { useCell } from '../composables/useCell'
 import {
-  getPickerValue,
   type DatetimePickerViewInstance,
   type DatetimePickerViewColumnFormatter,
   type DatetimePickerViewColumnType
@@ -168,6 +173,7 @@ import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { datetimePickerProps, type DatetimePickerExpose } from './types'
 import { dayjs } from '../common/dayjs'
+import { getPickerValue } from '../wd-datetime-picker-view/util'
 
 const props = defineProps(datetimePickerProps)
 const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
@@ -334,11 +340,11 @@ function handleBoundaryValue(
   currentArray: number[],
   boundary: number[]
 ): boolean {
-  const { type } = props
+  const { type, useSecond } = props
 
   switch (type) {
     case 'datetime': {
-      const [year, month, date, hour, minute] = boundary
+      const [year, month, date, hour, minute, second] = boundary
       if (columnType === 'year') {
         return isStart ? value > year : value < year
       }
@@ -353,6 +359,17 @@ function handleBoundaryValue(
       }
       if (columnType === 'minute' && currentArray[0] === year && currentArray[1] === month && currentArray[2] === date && currentArray[3] === hour) {
         return isStart ? value > minute : value < minute
+      }
+      if (
+        useSecond &&
+        columnType === 'second' &&
+        currentArray[0] === year &&
+        currentArray[1] === month &&
+        currentArray[2] === date &&
+        currentArray[3] === hour &&
+        currentArray[4] === minute
+      ) {
+        return isStart ? value > second : value < second
       }
       break
     }
@@ -387,12 +404,15 @@ function handleBoundaryValue(
       break
     }
     case 'time': {
-      const [hour, minute] = boundary
+      const [hour, minute, second] = boundary
       if (columnType === 'hour') {
         return isStart ? value > hour : value < hour
       }
       if (columnType === 'minute' && currentArray[0] === hour) {
         return isStart ? value > minute : value < minute
+      }
+      if (useSecond && columnType === 'second' && currentArray[0] === hour && currentArray[1] === minute) {
+        return isStart ? value > second : value < second
       }
       break
     }
@@ -725,9 +745,9 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
   if (props.formatter) {
     const typeMaps = {
       year: ['year'],
-      datetime: ['year', 'month', 'date', 'hour', 'minute'],
+      datetime: props.useSecond ? ['year', 'month', 'date', 'hour', 'minute', 'second'] : ['year', 'month', 'date', 'hour', 'minute'],
       date: ['year', 'month', 'date'],
-      time: ['hour', 'minute'],
+      time: props.useSecond ? ['hour', 'minute', 'second'] : ['hour', 'minute'],
       'year-month': ['year', 'month']
     }
     return items
@@ -745,9 +765,11 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
     case 'year-month':
       return `${items[0].label}-${items[1].label}`
     case 'time':
-      return `${items[0].label}:${items[1].label}`
+      return props.useSecond ? `${items[0].label}:${items[1].label}:${items[2].label}` : `${items[0].label}:${items[1].label}`
     case 'datetime':
-      return `${items[0].label}-${items[1].label}-${items[2].label} ${items[3].label}:${items[4].label}`
+      return props.useSecond
+        ? `${items[0].label}-${items[1].label}-${items[2].label} ${items[3].label}:${items[4].label}:${items[5].label}`
+        : `${items[0].label}-${items[1].label}-${items[2].label} ${items[3].label}:${items[4].label}`
   }
 }
 

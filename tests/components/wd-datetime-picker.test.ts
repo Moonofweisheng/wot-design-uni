@@ -668,4 +668,148 @@ describe('WdDatetimePicker 日期时间选择器', () => {
     expect(wrapper.props('prop')).toBe('date')
     expect(wrapper.props('rules')).toEqual(rules)
   })
+
+  test('useSecond 属性 - 时间类型', async () => {
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: '12:30:45',
+        type: 'time',
+        useSecond: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('type')).toBe('time')
+    expect(wrapper.props('modelValue')).toBe('12:30:45')
+    expect(wrapper.find('.wd-picker__value').text()).toBe('12:30:45')
+  })
+
+  test('useSecond 属性 - 日期时间类型', async () => {
+    const now = Date.now()
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: now,
+        type: 'datetime',
+        useSecond: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('type')).toBe('datetime')
+    expect(wrapper.props('modelValue')).toBe(now)
+  })
+
+  test('useSecond 属性 - 时间范围限制', async () => {
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: '12:30:45',
+        type: 'time',
+        useSecond: true,
+        minSecond: 0,
+        maxSecond: 30
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('minSecond')).toBe(0)
+    expect(wrapper.props('maxSecond')).toBe(30)
+  })
+
+  test('useSecond 属性 - 日期时间范围限制', async () => {
+    const now = Date.now()
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: now,
+        type: 'datetime',
+        useSecond: true,
+        minSecond: 0,
+        maxSecond: 30
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('minSecond')).toBe(0)
+    expect(wrapper.props('maxSecond')).toBe(30)
+  })
+
+  test('useSecond 属性 - 自定义显示格式', async () => {
+    const displayFormat = vi.fn((items) => {
+      return `${items[0].label}时${items[1].label}分${items[2].label}秒`
+    })
+
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: '12:30:45',
+        type: 'time',
+        useSecond: true,
+        displayFormat
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('displayFormat')).toBe(displayFormat)
+    expect(displayFormat).toHaveBeenCalled()
+  })
+
+  test('useSecond 属性 - 范围选择', async () => {
+    const startDate = new Date(2024, 0, 1, 12, 30, 45).getTime()
+    const endDate = new Date(2024, 0, 1, 13, 30, 45).getTime()
+
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: [startDate, endDate],
+        type: 'datetime',
+        useSecond: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(Array.isArray(wrapper.props('modelValue'))).toBe(true)
+    expect(wrapper.props('modelValue')).toEqual([startDate, endDate])
+  })
+
+  test('useSecond 属性 - 表单验证', async () => {
+    const rules = [{ required: true, message: '请选择时间' }]
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: '',
+        type: 'time',
+        useSecond: true,
+        prop: 'time',
+        rules
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('prop')).toBe('time')
+    expect(wrapper.props('rules')).toEqual(rules)
+  })
 })
