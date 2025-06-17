@@ -265,8 +265,12 @@ const imageStyle = computed(() => {
 /**
  * 逆转是否使用动画
  */
-function revertIsAnimation(animation: boolean) {
-  isAnimation.value = animation
+function revertIsAnimation(animation: boolean | { value: boolean }) {
+  if (typeof animation === 'boolean') {
+    isAnimation.value = animation
+  } else {
+    isAnimation.value = animation.value
+  }
 }
 
 /**
@@ -642,7 +646,7 @@ defineExpose<ImgCropperExpose>({
 function setAnimation(newValue, oldValue, ownerInstance){
   if (newValue) {
     var id = ownerInstance.setTimeout(function() {
-    ownerInstance.callMethod('revertIsAnimation',false)
+    ownerInstance.callMethod('revertIsAnimation',{value:false})
     ownerInstance.clearTimeout(id)
   },300)
   }
