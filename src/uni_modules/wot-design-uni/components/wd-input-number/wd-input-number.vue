@@ -223,7 +223,11 @@ function formatValue(val: string | number): string | number {
   }
 
   const num = toNumber(val)
-  return isDef(props.precision) ? num.toFixed(Number(props.precision)) : num
+  const precision = Number(props.precision)
+  if (!isDef(props.precision)) {
+    return num
+  }
+  return precision === 0 ? Number(num.toFixed(0)) : num.toFixed(precision)
 }
 
 /**

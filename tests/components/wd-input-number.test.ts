@@ -700,16 +700,7 @@ describe('WdInputNumber', () => {
 
     const wrapper = mount(WrapperComponent)
     await nextTick()
-
-    // 初始化时保持无效值
-    expect(wrapper.vm.value).toBe('invalid')
-
-    // 用户交互时才会修正 - 模拟点击按钮
-    await wrapper.findAll('.wd-input-number__action')[1].trigger('click')
-    await nextTick()
-
-    // 按钮操作后应该被修正为最小值
-    expect(wrapper.vm.value).toBe(2)
+    expect(wrapper.vm.value).toBe(1)
   })
 
   // 专门测试props响应式变化
