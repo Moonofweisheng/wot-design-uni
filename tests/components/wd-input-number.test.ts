@@ -30,7 +30,7 @@ function createWrapper(props: Partial<InputNumberProps> = {}, vModelValue: numbe
       beforeChange: { type: Function, default: undefined },
       customClass: { type: String, default: '' },
       customStyle: { type: String, default: '' },
-      formatOnInit: { type: Boolean, default: false }
+      updateOnInit: { type: Boolean, default: false }
     },
     setup(componentProps) {
       const value = ref(vModelValue)
@@ -62,7 +62,7 @@ function createWrapper(props: Partial<InputNumberProps> = {}, vModelValue: numbe
       :before-change="beforeChange"
       :custom-class="customClass"
       :custom-style="customStyle"
-      :format-on-init="formatOnInit"
+      :update-on-init="updateOnInit"
     />`
   })
 
@@ -361,7 +361,7 @@ describe('WdInputNumber', () => {
       max: 15,
       step: 2,
       stepStrictly: true,
-      formatOnInit: true
+      updateOnInit: true
     })
 
     await nextTick()
@@ -380,7 +380,7 @@ describe('WdInputNumber', () => {
       max: 15,
       step: 2,
       stepStrictly: true,
-      formatOnInit: false
+      updateOnInit: false
     })
 
     await nextTick()

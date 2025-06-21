@@ -128,21 +128,24 @@ function handleChange({ value }) {
 }
 ```
 
-## Auto-format on Initialization
+## Auto-update on Initialization
 
-Set the `format-on-init` property to control whether to automatically correct the value to the valid range during initialization.
+Set the `update-on-init` property to control whether to update the `v-model` with the corrected value during initialization.
+
+- When `update-on-init="true"` (default), the initial value will be corrected to comply with `min`, `max`, `step`, `precision` and other rules, and the `v-model` will be updated synchronously
+- When `update-on-init="false"`, the initial value remains unchanged, only display formatting (such as precision processing) is performed, without updating the `v-model`
 
 ```html
-<!-- Auto-format initial value (default) -->
-<wd-input-number v-model="value1" @change="handleChange" :format-on-init="true" :min="3" :max="15" :step="2" step-strictly />
+<!-- Auto-update initial value (default) -->
+<wd-input-number v-model="value1" @change="handleChange" :update-on-init="true" :min="3" :max="15" :step="2" step-strictly />
 
-<!-- Don't format initial value -->
-<wd-input-number v-model="value2" @change="handleChange" :format-on-init="false" :min="3" :max="15" :step="2" step-strictly />
+<!-- Don't update initial value, keep original value -->
+<wd-input-number v-model="value2" @change="handleChange" :update-on-init="false" :min="3" :max="15" :step="2" step-strictly />
 ```
 
 ```typescript
 const value1 = ref<number>(1) // Will be auto-corrected to 4 (minimum multiple of 2 that is ≥3)
-const value2 = ref<number>(1) // Will not be auto-corrected
+const value2 = ref<number>(1) // Remains 1, will not be auto-corrected, but will be formatted for display according to precision
 function handleChange({ value }) {
   console.log(value)
 }
@@ -205,7 +208,7 @@ Set the `long-press` property to allow long press for increment/decrement.
 | before-change | Triggered before input box value changes, returning false will prevent input box value from changing, supports returning `Promise` | `(value: number \| string) => boolean \| Promise<boolean>` | - | - | 1.6.0 |
 | long-press | Whether to allow long press for increment/decrement | boolean | - | false | 1.8.0 |
 | immediate-change | Whether to respond to input changes immediately, false will only update on blur and button clicks | boolean | - | true | $LOWEST_VERSION$ |
-| format-on-init | Whether to automatically correct value to valid range during initialization | boolean | - | true | $LOWEST_VERSION$ |
+| update-on-init | Whether to update v-model with corrected value during initialization | boolean | - | true | $LOWEST_VERSION$ |
 
 ## Events
 

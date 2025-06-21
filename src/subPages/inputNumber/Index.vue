@@ -76,9 +76,9 @@
     <demo-block title="初始化时自动修正">
       <view class="format-init-demo">
         <view class="demo-title">自动修正初始值 - 值：{{ value20 }}</view>
-        <wd-input-number v-model="value20" @change="handleChange20" :format-on-init="true" :min="3" :max="15" :step="2" step-strictly />
+        <wd-input-number v-model="value20" @change="handleChange20" :update-on-init="true" :min="3" :max="15" :step="2" step-strictly />
         <view class="demo-title">不修正初始值 - 值：{{ value21 }}</view>
-        <wd-input-number v-model="value21" @change="handleChange21" :format-on-init="false" :min="3" :max="15" :step="2" step-strictly />
+        <wd-input-number v-model="value21" @change="handleChange21" :update-on-init="false" :min="3" :max="15" :step="2" step-strictly />
         <view class="demo-note">上方组件会在初始化时自动将值1修正为4（≥3的最小2的倍数），下方组件不会自动修正</view>
       </view>
     </demo-block>

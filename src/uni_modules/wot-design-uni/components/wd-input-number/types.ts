@@ -94,9 +94,11 @@ export const inputNumberProps = {
    */
   immediateChange: makeBooleanProp(true),
   /**
-   * 是否在初始化时自动修正值到有效范围
+   * 是否在初始化时更新 v-model 为修正后的值
+   * true: 自动修正并更新 v-model
+   * false: 保持原始值不变，仅做显示格式化
    */
-  formatOnInit: makeBooleanProp(true)
+  updateOnInit: makeBooleanProp(true)
 }
 
 export type InputNumberProps = ExtractPropTypes<typeof inputNumberProps>

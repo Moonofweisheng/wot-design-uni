@@ -128,21 +128,24 @@ function handleChange({ value }) {
 }
 ```
 
-## 初始化时自动修正
+## 初始化时自动更新
 
-设置 `format-on-init` 属性控制是否在初始化时自动修正值到有效范围。
+设置 `update-on-init` 属性控制是否在初始化时更新 `v-model` 为修正后的值。
+
+- 当 `update-on-init="true"`（默认）时，会将初始值修正到符合 `min`、`max`、`step`、`precision` 等规则的有效值，并同步更新 `v-model`
+- 当 `update-on-init="false"` 时，保持初始值不变，仅进行显示格式化（如精度处理），不更新 `v-model`
 
 ```html
-<!-- 自动修正初始值（默认） -->
-<wd-input-number v-model="value1" @change="handleChange" :format-on-init="true" :min="3" :max="15" :step="2" step-strictly />
+<!-- 自动更新初始值（默认） -->
+<wd-input-number v-model="value1" @change="handleChange" :update-on-init="true" :min="3" :max="15" :step="2" step-strictly />
 
-<!-- 不修正初始值 -->
-<wd-input-number v-model="value2" @change="handleChange" :format-on-init="false" :min="3" :max="15" :step="2" step-strictly />
+<!-- 不更新初始值，保持原始值 -->
+<wd-input-number v-model="value2" @change="handleChange" :update-on-init="false" :min="3" :max="15" :step="2" step-strictly />
 ```
 
 ```typescript
 const value1 = ref<number>(1) // 会自动修正为4（≥3的最小2的倍数）
-const value2 = ref<number>(1) // 不会自动修正
+const value2 = ref<number>(1) // 保持为1，不会自动修正，但会按精度格式化显示
 function handleChange({ value }) {
   console.log(value)
 }
@@ -205,7 +208,7 @@ const beforeChange: InputNumberBeforeChange = (value) => {
 | before-change | 输入框值改变前触发，返回 false 会阻止输入框值改变，支持返回 `Promise` | `(value: number \| string) => boolean \| Promise<boolean>` | - | - | 1.6.0 |
 | long-press | 是否允许长按进行加减 | boolean | - | false | 1.8.0 |
 | immediate-change | 是否立即响应输入变化，false 时仅在失焦和按钮点击时更新 | boolean | - | true | $LOWEST_VERSION$ |
-| format-on-init | 是否在初始化时自动修正值到有效范围 | boolean | - | true | $LOWEST_VERSION$ |
+| update-on-init | 是否在初始化时更新 v-model 为修正后的值 | boolean | - | true | $LOWEST_VERSION$ |
 
 
 ## Events

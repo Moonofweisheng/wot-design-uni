@@ -95,18 +95,17 @@ watch([() => props.max, () => props.min, () => props.precision], () => {
  * 获取初始值
  */
 function getInitValue() {
-  // 根据formatOnInit配置决定是否在初始化时修正值
-  if (props.formatOnInit) {
-    const formatted = formatValue(props.modelValue)
+  const formatted = formatValue(props.modelValue)
+
+  // 根据updateOnInit配置决定是否在初始化时更新v-model
+  if (props.updateOnInit) {
     // 如果格式化后的值与原始值不同，同步到外部
     if (!isEqual(String(formatted), String(props.modelValue))) {
       emit('update:modelValue', formatted)
     }
-    return formatted
   }
 
-  // 不自动修正时，直接显示原始值的格式化版本
-  return formatValue(props.modelValue)
+  return formatted
 }
 
 /**
@@ -215,7 +214,7 @@ function applyStrictBounds(val: number, min: number, max: number): number {
 }
 
 /**
- * 格式化值用于显示
+ * 格式化值用于显示（包含修正逻辑）
  */
 function formatValue(val: string | number): string | number {
   if (props.allowNull && (!isDef(val) || val === '')) {
