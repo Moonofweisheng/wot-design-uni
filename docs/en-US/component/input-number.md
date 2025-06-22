@@ -133,7 +133,7 @@ function handleChange({ value }) {
 Set the `update-on-init` property to control whether to update the `v-model` with the corrected value during initialization.
 
 - When `update-on-init="true"` (default), the initial value will be corrected to comply with `min`, `max`, `step`, `precision` and other rules, and the `v-model` will be updated synchronously
-- When `update-on-init="false"`, the initial value remains unchanged, only display formatting (such as precision processing) is performed, without updating the `v-model`
+- When `update-on-init="false"`, the initial value will not be corrected (v-model unchanged), but display formatting (such as precision) will still be applied
 
 ```html
 <!-- Auto-update initial value (default) -->
@@ -145,7 +145,7 @@ Set the `update-on-init` property to control whether to update the `v-model` wit
 
 ```typescript
 const value1 = ref<number>(1) // Will be auto-corrected to 4 (minimum multiple of 2 that is ≥3)
-const value2 = ref<number>(1) // Remains 1, will not be auto-corrected, but will be formatted for display according to precision
+const value2 = ref<number>(1) // Remains 1, will not be corrected but will be formatted for display
 function handleChange({ value }) {
   console.log(value)
 }
@@ -209,6 +209,7 @@ Set the `long-press` property to allow long press for increment/decrement.
 | long-press | Whether to allow long press for increment/decrement | boolean | - | false | 1.8.0 |
 | immediate-change | Whether to respond to input changes immediately, false will only update on blur and button clicks | boolean | - | true | $LOWEST_VERSION$ |
 | update-on-init | Whether to update v-model with corrected value during initialization | boolean | - | true | $LOWEST_VERSION$ |
+| input-type | Input field type | string | number / digit | digit | $LOWEST_VERSION$ |
 
 ## Events
 

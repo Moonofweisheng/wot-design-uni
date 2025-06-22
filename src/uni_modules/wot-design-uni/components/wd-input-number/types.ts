@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2025-06-13 12:35:59
+ * @LastEditTime: 2025-06-21 18:23:35
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-input-number/types.ts
@@ -96,9 +96,15 @@ export const inputNumberProps = {
   /**
    * 是否在初始化时更新 v-model 为修正后的值
    * true: 自动修正并更新 v-model
-   * false: 保持原始值不变，仅做显示格式化
+   * false: 保持原始值不修正，但仍会进行显示格式化
    */
-  updateOnInit: makeBooleanProp(true)
+  updateOnInit: makeBooleanProp(true),
+  /**
+   * 输入框类型
+   * number: 数字输入
+   * digit: 整数输入
+   */
+  inputType: makeStringProp<'number' | 'digit'>('digit')
 }
 
 export type InputNumberProps = ExtractPropTypes<typeof inputNumberProps>

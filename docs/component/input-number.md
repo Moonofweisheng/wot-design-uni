@@ -133,7 +133,7 @@ function handleChange({ value }) {
 设置 `update-on-init` 属性控制是否在初始化时更新 `v-model` 为修正后的值。
 
 - 当 `update-on-init="true"`（默认）时，会将初始值修正到符合 `min`、`max`、`step`、`precision` 等规则的有效值，并同步更新 `v-model`
-- 当 `update-on-init="false"` 时，保持初始值不变，仅进行显示格式化（如精度处理），不更新 `v-model`
+- 当 `update-on-init="false"` 时，保持初始值不修正（不改变 `v-model`），但仍会进行显示格式化（如精度处理）
 
 ```html
 <!-- 自动更新初始值（默认） -->
@@ -145,7 +145,7 @@ function handleChange({ value }) {
 
 ```typescript
 const value1 = ref<number>(1) // 会自动修正为4（≥3的最小2的倍数）
-const value2 = ref<number>(1) // 保持为1，不会自动修正，但会按精度格式化显示
+const value2 = ref<number>(1) // 保持为1，不会修正但会格式化显示
 function handleChange({ value }) {
   console.log(value)
 }
@@ -209,6 +209,7 @@ const beforeChange: InputNumberBeforeChange = (value) => {
 | long-press | 是否允许长按进行加减 | boolean | - | false | 1.8.0 |
 | immediate-change | 是否立即响应输入变化，false 时仅在失焦和按钮点击时更新 | boolean | - | true | $LOWEST_VERSION$ |
 | update-on-init | 是否在初始化时更新 v-model 为修正后的值 | boolean | - | true | $LOWEST_VERSION$ |
+| input-type | 输入框类型 | string | number / digit | digit | $LOWEST_VERSION$ |
 
 
 ## Events

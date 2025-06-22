@@ -14,7 +14,7 @@
       <input
         class="wd-input-number__input"
         :style="`${inputWidth ? 'width: ' + inputWidth : ''}`"
-        type="number"
+        :type="inputType"
         :input-mode="precision ? 'decimal' : 'numeric'"
         :disabled="disabled || disableInput"
         :value="String(inputValue)"
@@ -57,7 +57,24 @@ import { inputNumberProps, type OperationType } from './types'
 import { callInterceptor } from '../common/interceptor'
 
 const props = defineProps(inputNumberProps)
-const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue'])
+const emit = defineEmits<{
+  /**
+   * 数值变化事件
+   */
+  (e: 'change', value: { value: number | string }): void
+  /**
+   * 输入框聚焦事件
+   */
+  (e: 'focus', detail: any): void
+  /**
+   * 输入框失焦事件
+   */
+  (e: 'blur', value: { value: string | number }): void
+  /**
+   * v-model 更新事件
+   */
+  (e: 'update:modelValue', value: number | string): void
+}>()
 const inputValue = ref<string | number>(getInitValue())
 let longPressTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -95,16 +112,17 @@ watch([() => props.max, () => props.min, () => props.precision], () => {
  * 获取初始值
  */
 function getInitValue() {
-  const formatted = formatValue(props.modelValue)
-
-  // 根据updateOnInit配置决定是否在初始化时更新v-model
-  if (props.updateOnInit) {
-    // 如果格式化后的值与原始值不同，同步到外部
-    if (!isEqual(String(formatted), String(props.modelValue))) {
-      emit('update:modelValue', formatted)
-    }
+  if (!props.updateOnInit) {
+    // 不自动修正时，仅做显示格式化，不修正值
+    return formatDisplay(props.modelValue)
   }
 
+  const formatted = formatValue(props.modelValue)
+
+  // 如果格式化后的值与原始值不同，同步到外部
+  if (!isEqual(String(formatted), String(props.modelValue))) {
+    emit('update:modelValue', formatted)
+  }
   return formatted
 }
 
@@ -222,6 +240,30 @@ function formatValue(val: string | number): string | number {
   }
 
   const num = toNumber(val)
+  const precision = Number(props.precision)
+  if (!isDef(props.precision)) {
+    return num
+  }
+  return precision === 0 ? Number(num.toFixed(0)) : num.toFixed(precision)
+}
+
+/**
+ * 仅做显示格式化，不包含值修正逻辑
+ */
+function formatDisplay(val: string | number): string | number {
+  if (props.allowNull && (!isDef(val) || val === '')) {
+    return ''
+  }
+
+  if (!isDef(val) || val === '') {
+    return props.min
+  }
+
+  let num = Number(val)
+  if (isNaN(num)) {
+    return props.min
+  }
+
   const precision = Number(props.precision)
   if (!isDef(props.precision)) {
     return num

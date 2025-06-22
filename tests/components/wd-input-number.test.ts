@@ -903,7 +903,7 @@ describe('WdInputNumber', () => {
   // 测试输入框类型属性
   test('输入框类型属性', () => {
     const wrapper = createWrapper({}, 1)
-    expect(wrapper.find('.wd-input-number__input').attributes('type')).toBe('number')
+    expect(wrapper.find('.wd-input-number__input').attributes('type')).toBe('digit')
   })
 
   // 测试组件在极端值下的稳定性

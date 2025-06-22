@@ -120,61 +120,61 @@ const value19 = ref<number>(4)
 const value20 = ref<number>(1)
 const value21 = ref<number>(1)
 
-function handleChange1({ value }: any) {
+function handleChange1({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange2({ value }: any) {
+function handleChange2({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange3({ value }: any) {
+function handleChange3({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange4({ value }: any) {
+function handleChange4({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange5({ value }: any) {
+function handleChange5({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange6({ value }: any) {
+function handleChange6({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange7({ value }: any) {
+function handleChange7({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange8({ value }: any) {
+function handleChange8({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange9({ value }: any) {
+function handleChange9({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange12({ value }: any) {
+function handleChange12({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange13({ value }: any) {
+function handleChange13({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange14({ value }: any) {
+function handleChange14({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange15({ value }: any) {
+function handleChange15({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange16({ value }: any) {
+function handleChange16({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange17({ value }: any) {
+function handleChange17({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange18({ value }: any) {
+function handleChange18({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange19({ value }: any) {
+function handleChange19({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange20({ value }: any) {
+function handleChange20({ value }: { value: number | string }) {
   console.log(value)
 }
-function handleChange21({ value }: any) {
+function handleChange21({ value }: { value: number | string }) {
   console.log(value)
 }
 
