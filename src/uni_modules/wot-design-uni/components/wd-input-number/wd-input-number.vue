@@ -14,7 +14,8 @@
       <input
         class="wd-input-number__input"
         :style="`${inputWidth ? 'width: ' + inputWidth : ''}`"
-        type="digit"
+        :type="inputType"
+        :input-mode="precision ? 'decimal' : 'numeric'"
         :disabled="disabled || disableInput"
         :value="String(inputValue)"
         :placeholder="placeholder"
@@ -52,262 +53,409 @@ export default {
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, nextTick, ref, watch } from 'vue'
 import { isDef, isEqual } from '../common/util'
-import { inputNumberProps, InputNumberEventType, type OperationType } from './types'
+import { inputNumberProps, type OperationType } from './types'
 import { callInterceptor } from '../common/interceptor'
 
 const props = defineProps(inputNumberProps)
-const emit = defineEmits(['focus', 'blur', 'change', 'update:modelValue'])
-const inputValue = ref<string | number>(getInitValue()) // 输入框的值
-let longPressTimer: ReturnType<typeof setTimeout> | null = null // 长按定时器
+const emit = defineEmits<{
+  /**
+   * 数值变化事件
+   */
+  (e: 'change', value: { value: number | string }): void
+  /**
+   * 输入框聚焦事件
+   */
+  (e: 'focus', detail: any): void
+  /**
+   * 输入框失焦事件
+   */
+  (e: 'blur', value: { value: string | number }): void
+  /**
+   * v-model 更新事件
+   */
+  (e: 'update:modelValue', value: number | string): void
+}>()
+const inputValue = ref<string | number>(getInitValue())
+let longPressTimer: ReturnType<typeof setTimeout> | null = null
 
 /**
  * 判断数字是否达到最小值限制
  */
 const minDisabled = computed(() => {
-  const value = formatValue(inputValue.value)
-  const { disabled, min, step } = props
-  return disabled || Number(value) <= min || changeStep(value, -step) < min
+  const val = toNumber(inputValue.value)
+  return props.disabled || val <= props.min || addStep(val, -props.step) < props.min
 })
 
 /**
  * 判断数字是否达到最大值限制
  */
 const maxDisabled = computed(() => {
-  const value = formatValue(inputValue.value)
-  const { disabled, max, step } = props
-  return disabled || Number(value) >= max || changeStep(value, step) > max
+  const val = toNumber(inputValue.value)
+  return props.disabled || val >= props.max || addStep(val, props.step) > props.max
 })
 
 // 监听 modelValue 变化
 watch(
   () => props.modelValue,
-  (value) => {
-    updateValue(value, InputNumberEventType.Watch)
+  (val) => {
+    inputValue.value = formatValue(val)
   }
 )
 
-// 监听 max, min, precision 变化
+// 监听 max, min, precision 变化时重新格式化当前值
 watch([() => props.max, () => props.min, () => props.precision], () => {
-  const value = formatValue(inputValue.value)
-  updateValue(value, InputNumberEventType.Watch)
+  const val = toNumber(inputValue.value)
+  inputValue.value = formatValue(val)
 })
 
 /**
- * 对比两个值是否相等
- * @param value1 第一个值
- * @param value2 第二个值
- * @returns 是否相等
+ * 获取初始值
  */
-function isValueEqual(value1: number | string, value2: number | string) {
-  return isEqual(String(value1), String(value2))
-}
-
-// 获取初始值
 function getInitValue() {
+  if (!props.updateOnInit) {
+    // 不自动修正时，仅做显示格式化，不修正值
+    return formatDisplay(props.modelValue)
+  }
+
   const formatted = formatValue(props.modelValue)
-  if (!isValueEqual(formatted, props.modelValue)) {
+
+  // 如果格式化后的值与原始值不同，同步到外部
+  if (!isEqual(String(formatted), String(props.modelValue))) {
     emit('update:modelValue', formatted)
   }
   return formatted
 }
 
-// 将值转换为指定精度
-function toPrecision(value: number) {
-  const precision = Number(props.precision)
-  return Number(parseFloat(`${Math.round(value * Math.pow(10, precision)) / Math.pow(10, precision)}`).toFixed(precision))
-}
-
 /**
  * 获取数字的小数位数
- * @param value 需要计算精度的数字
- * @returns 小数位数
  */
-function getPrecision(value?: number) {
-  if (!isDef(value)) return 0
-  const valueString = value.toString()
-  const dotPosition = valueString.indexOf('.')
-  let precision = 0
-  if (dotPosition !== -1) {
-    precision = valueString.length - dotPosition - 1
-  }
-  return precision
+function getPrecision(val?: number) {
+  if (!isDef(val)) return 0
+  const str = val.toString()
+  const dotIndex = str.indexOf('.')
+  return dotIndex === -1 ? 0 : str.length - dotIndex - 1
 }
 
 /**
- * 按步进值严格递增或递减
- * @param value 当前值
- * @returns 按步进值调整后的值
+ * 按指定精度处理数值
  */
-function toStrictlyStep(value: number | string) {
-  const stepPrecision = getPrecision(props.step)
-  const precisionFactory = Math.pow(10, stepPrecision)
-  return (Math.round(Number(value) / props.step) * precisionFactory * props.step) / precisionFactory
+function toPrecision(val: number) {
+  const precision = Number(props.precision)
+  return Math.round(val * Math.pow(10, precision)) / Math.pow(10, precision)
 }
 
-// 内部更新处理函数
-function doUpdate(value: string | number) {
-  inputValue.value = value
-  const formatted = formatValue(value)
+/**
+ * 将字符串或数字转换为标准数值
+ */
+function toNumber(val: string | number): number {
+  // 空值处理
+  if (props.allowNull && (!isDef(val) || val === '')) {
+    return NaN
+  }
+
+  if (!isDef(val) || val === '') {
+    return props.min
+  }
+
+  let str = String(val)
+
+  // 处理中间输入状态
+  if (str.endsWith('.')) str = str.slice(0, -1)
+  if (str.startsWith('.')) str = '0' + str
+  if (str.startsWith('-.')) str = '-0' + str.substring(1)
+  if (str === '-' || str === '') return props.min
+
+  let num = Number(str)
+  if (isNaN(num)) num = props.min
+
+  return normalizeValue(num)
+}
+
+/**
+ * 标准化数值（应用步进、边界、精度规则）
+ */
+function normalizeValue(val: number): number {
+  let result = val
+
+  // 严格步进
+  if (props.stepStrictly) {
+    const stepPrecision = getPrecision(props.step)
+    const factor = Math.pow(10, stepPrecision)
+    result = (Math.round(result / props.step) * factor * props.step) / factor
+  }
+
+  // 边界限制
+  if (props.stepStrictly) {
+    result = applyStrictBounds(result, props.min, props.max)
+  } else {
+    result = Math.min(Math.max(result, props.min), props.max)
+  }
+
+  // 精度处理
+  if (isDef(props.precision)) {
+    result = toPrecision(result)
+  }
+
+  return result
+}
+
+/**
+ * 严格步进模式下的边界处理
+ */
+function applyStrictBounds(val: number, min: number, max: number): number {
+  if (val >= min && val <= max) return val
+
+  const stepPrecision = getPrecision(props.step)
+  const factor = Math.pow(10, stepPrecision)
+
+  if (val < min) {
+    const minSteps = Math.ceil((min * factor) / (props.step * factor))
+    const candidate = toPrecision((minSteps * props.step * factor) / factor)
+    if (candidate > max) {
+      const maxSteps = Math.floor((max * factor) / (props.step * factor))
+      return toPrecision((maxSteps * props.step * factor) / factor)
+    }
+    return candidate
+  }
+
+  if (val > max) {
+    const maxSteps = Math.floor((max * factor) / (props.step * factor))
+    const candidate = toPrecision((maxSteps * props.step * factor) / factor)
+    if (candidate < min) {
+      const minSteps = Math.ceil((min * factor) / (props.step * factor))
+      return toPrecision((minSteps * props.step * factor) / factor)
+    }
+    return candidate
+  }
+
+  return val
+}
+
+/**
+ * 格式化值用于显示（包含修正逻辑）
+ */
+function formatValue(val: string | number): string | number {
+  if (props.allowNull && (!isDef(val) || val === '')) {
+    return ''
+  }
+
+  const num = toNumber(val)
+  const precision = Number(props.precision)
+  if (!isDef(props.precision)) {
+    return num
+  }
+  return precision === 0 ? Number(num.toFixed(0)) : num.toFixed(precision)
+}
+
+/**
+ * 仅做显示格式化，不包含值修正逻辑
+ */
+function formatDisplay(val: string | number): string | number {
+  if (props.allowNull && (!isDef(val) || val === '')) {
+    return ''
+  }
+
+  if (!isDef(val) || val === '') {
+    return props.min
+  }
+
+  let num = Number(val)
+  if (isNaN(num)) {
+    return props.min
+  }
+
+  const precision = Number(props.precision)
+  if (!isDef(props.precision)) {
+    return num
+  }
+  return precision === 0 ? Number(num.toFixed(0)) : num.toFixed(precision)
+}
+
+/**
+ * 检查是否为中间输入状态
+ */
+function isIntermediate(val: string): boolean {
+  if (!val) return false
+  const str = String(val)
+  return str.endsWith('.') || str.startsWith('.') || str.startsWith('-.') || str === '-' || (Number(props.precision) > 0 && str.indexOf('.') === -1)
+}
+
+/**
+ * 清理输入值
+ */
+function cleanInput(val: string): string {
+  if (!val) return ''
+
+  // 清理非数字、小数点、负号
+  let cleaned = val.replace(/[^\d.-]/g, '')
+
+  // 处理负号，保证负号只出现在最前面
+  const hasNegative = cleaned.startsWith('-')
+  cleaned = cleaned.replace(/-/g, '')
+  if (hasNegative) cleaned = '-' + cleaned
+
+  // 处理小数点
+  const precision = Number(props.precision)
+  if (precision > 0) {
+    const parts = cleaned.split('.')
+    if (parts.length > 2) {
+      cleaned = parts[0] + '.' + parts.slice(1).join('')
+    }
+  } else {
+    cleaned = cleaned.split('.')[0]
+  }
+
+  // 处理以点开头的情况
+  if (cleaned.startsWith('.')) return '0' + cleaned
+  if (cleaned.startsWith('-.')) return '-0' + cleaned.substring(1)
+
+  return cleaned
+}
+
+/**
+ * 更新值并触发事件
+ */
+function updateValue(val: string | number) {
+  // 空值处理
+  if (props.allowNull && (!isDef(val) || val === '')) {
+    if (isEqual('', String(props.modelValue))) {
+      inputValue.value = ''
+      return
+    }
+
+    const doUpdate = () => {
+      inputValue.value = ''
+      emit('update:modelValue', '')
+      emit('change', { value: '' })
+    }
+
+    callInterceptor(props.beforeChange, { args: [''], done: doUpdate })
+    return
+  }
+
+  const num = toNumber(val)
+  const display = formatValue(val)
+
+  if (isEqual(String(num), String(props.modelValue))) {
+    inputValue.value = display
+    return
+  }
+
+  const doUpdate = () => {
+    inputValue.value = display
+    emit('update:modelValue', num)
+    emit('change', { value: num })
+  }
+
+  callInterceptor(props.beforeChange, { args: [num], done: doUpdate })
+}
+
+/**
+ * 按步进值增减
+ */
+function addStep(val: string | number, step: number) {
+  const num = Number(val)
+  if (isNaN(num)) return normalizeValue(props.min)
+
+  const precision = Math.max(getPrecision(num), getPrecision(step))
+  const factor = Math.pow(10, precision)
+  const result = (num * factor + step * factor) / factor
+  return normalizeValue(result)
+}
+
+/**
+ * 处理按钮点击
+ */
+function handleClick(type: OperationType) {
+  const step = type === 'add' ? props.step : -props.step
+  if ((step < 0 && (minDisabled.value || props.disableMinus)) || (step > 0 && (maxDisabled.value || props.disablePlus))) return
+
+  const newVal = addStep(inputValue.value, step)
+  updateValue(newVal)
+}
+
+/**
+ * 处理输入事件
+ */
+function handleInput(event: any) {
+  const rawVal = event.detail.value || ''
+
+  // 立即更新显示
+  inputValue.value = rawVal
+
   nextTick(() => {
-    inputValue.value = formatted
-    emit('update:modelValue', inputValue.value)
-    emit('change', { value: inputValue.value })
+    // 空值处理
+    if (rawVal === '') {
+      inputValue.value = ''
+      if (props.immediateChange && props.allowNull) {
+        updateValue('')
+      }
+      return
+    }
+
+    // 清理输入
+    const cleaned = cleanInput(rawVal)
+
+    // 中间状态处理
+    if (Number(props.precision) > 0 && isIntermediate(cleaned)) {
+      inputValue.value = cleaned
+      return
+    }
+
+    // 正常输入处理
+    inputValue.value = cleaned
+    if (props.immediateChange) {
+      updateValue(cleaned)
+    }
   })
 }
 
 /**
- * 清理输入字符串中多余的小数点
- * @param value 输入的字符串
- * @returns 清理后的字符串
+ * 处理失焦事件
  */
-function cleanExtraDecimal(value: string): string {
-  const precisionAllowed = Number(props.precision) > 0
-  if (precisionAllowed) {
-    const dotIndex = value.indexOf('.')
-    if (dotIndex === -1) {
-      return value
-    } else {
-      const integerPart = value.substring(0, dotIndex + 1)
-      // 去除后续出现的'.'
-      const decimalPart = value.substring(dotIndex + 1).replace(/\./g, '')
-      return integerPart + decimalPart
-    }
-  } else {
-    // 不允许小数：保留整数部分
-    const dotIndex = value.indexOf('.')
-    return dotIndex !== -1 ? value.substring(0, dotIndex) : value
-  }
+function handleBlur(event: any) {
+  const val = event.detail.value || ''
+  updateValue(val)
+  emit('blur', { value: val })
 }
 
 /**
- * 更新输入框的值
- * @param value 新的值
- * @param eventType 触发更新的事件类型
+ * 处理聚焦事件
  */
-function updateValue(value: string | number, eventType: InputNumberEventType = InputNumberEventType.Input) {
-  const fromUser = eventType !== InputNumberEventType.Watch // watch时不认为是用户直接输入
-  const forceFormat = eventType === InputNumberEventType.Blur || eventType === InputNumberEventType.Button
-  // 对于 Input 和 Watch 类型，如果值以'.'结尾，则直接更新，不进行格式化
-  if ((eventType === InputNumberEventType.Input || eventType === InputNumberEventType.Watch) && String(value).endsWith('.') && props.precision) {
-    inputValue.value = value
-    nextTick(() => {
-      inputValue.value = cleanExtraDecimal(String(value))
-      emit('update:modelValue', inputValue.value)
-      emit('change', { value: inputValue.value })
-    })
-    return
-  }
-  if (!forceFormat && isValueEqual(value, inputValue.value)) {
-    return
-  }
-
-  const update = () => doUpdate(value)
-
-  if (fromUser) {
-    callInterceptor(props.beforeChange, {
-      args: [value],
-      done: update
-    })
-  } else {
-    update()
-  }
+function handleFocus(event: any) {
+  emit('focus', event.detail)
 }
 
-// 根据步进值改变值
-function changeStep(val: string | number, step: number) {
-  val = Number(val)
-  if (isNaN(val)) {
-    return props.min
-  }
-  const precision = Math.max(getPrecision(val), getPrecision(step))
-  const precisionFactor = Math.pow(10, precision)
-  return toPrecision((val * precisionFactor + step * precisionFactor) / precisionFactor)
-}
-
-function changeValue(step: number) {
-  if ((step < 0 && (minDisabled.value || props.disableMinus)) || (step > 0 && (maxDisabled.value || props.disablePlus))) return
-  const value = changeStep(inputValue.value, step)
-  updateValue(value, InputNumberEventType.Button)
-}
-
-// 增减值
-function handleClick(type: OperationType) {
-  const diff = type === 'add' ? props.step : -props.step
-  changeValue(diff)
-}
-
-function handleInput(event: any) {
-  const rawValue = event.detail.value || ''
-  updateValue(rawValue, InputNumberEventType.Input)
-}
-
-function handleBlur(event: any) {
-  const value = event.detail.value || ''
-  updateValue(value, InputNumberEventType.Blur)
-  emit('blur', { value })
-}
-
-// 每隔一段时间，重新调用自身，达到长按加减效果
+/**
+ * 长按逻辑
+ */
 function longPressStep(type: OperationType) {
-  clearlongPressTimer()
+  clearLongPressTimer()
   longPressTimer = setTimeout(() => {
     handleClick(type)
     longPressStep(type)
   }, 250)
 }
 
-// 按下一段时间后，达到长按状态
 function handleTouchStart(type: OperationType) {
   if (!props.longPress) return
-  clearlongPressTimer()
+  clearLongPressTimer()
   longPressTimer = setTimeout(() => {
     handleClick(type)
     longPressStep(type)
   }, 600)
 }
 
-// 触摸结束，清除定时器，停止长按加减
 function handleTouchEnd() {
   if (!props.longPress) return
-  clearlongPressTimer()
+  clearLongPressTimer()
 }
 
-// 清除定时器
-function clearlongPressTimer() {
+function clearLongPressTimer() {
   if (longPressTimer) {
     clearTimeout(longPressTimer)
     longPressTimer = null
   }
-}
-
-// 处理聚焦事件
-function handleFocus(event: any) {
-  emit('focus', event.detail)
-}
-
-// 格式化值
-function formatValue(value: string | number) {
-  if (props.allowNull && (!isDef(value) || value === '')) {
-    return ''
-  }
-
-  let formatted = Number(value)
-
-  if (isNaN(formatted)) {
-    formatted = props.min
-  }
-
-  if (props.stepStrictly) {
-    formatted = toStrictlyStep(value)
-  }
-
-  formatted = Math.min(Math.max(formatted, props.min), props.max)
-
-  if (isDef(props.precision)) {
-    formatted = toPrecision(formatted)
-  }
-
-  return formatted
 }
 </script>
 
