@@ -32,8 +32,7 @@
           <wd-icon
             v-if="(item[valueKey] !== '' ? item[valueKey] : item) === modelValue"
             :name="iconName"
-            size="20px"
-            :class="`wd-drop-item__icon ${customIcon}`"
+            :custom-class="`wd-drop-item__icon ${customIcon}`"
           />
         </view>
       </view>
@@ -65,7 +64,14 @@ import { isDef, isFunction } from '../common/util'
 import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
 
 const props = defineProps(dorpMenuItemProps)
-const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string | number): void
+  (e: 'change', event: { value: string | number; selectedItem: Record<string, any> }): void
+  (e: 'open'): void
+  (e: 'opened'): void
+  (e: 'close'): void
+  (e: 'closed'): void
+}>()
 
 const queue = inject<Queue | null>(queueKey, null)
 const showWrapper = ref<boolean>(false)

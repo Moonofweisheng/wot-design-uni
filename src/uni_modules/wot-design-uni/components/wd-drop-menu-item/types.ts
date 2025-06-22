@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeArrayProp, makeBooleanProp, makeStringProp } from '../common/props'
+import { baseProps, makeArrayProp, makeBooleanProp, makeNumericProp, makeStringProp, numericProp } from '../common/props'
 
 export type DropMenuItemBeforeToggleOption = {
   // 操作状态：true 打开下拉菜单，false 关闭下拉菜单
@@ -47,7 +47,7 @@ export const dorpMenuItemProps = {
   /**
    * 菜单图标大小
    */
-  iconSize: makeStringProp('14px'),
+  iconSize: numericProp,
   /**
    * 自定义点击事件
    */

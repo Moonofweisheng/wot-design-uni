@@ -21,7 +21,7 @@
   width: 100%;
   z-index: 101;
   
-  .wd-drop-item__popup {
+  @include e(popup){
     position: absolute;
     max-height: 80%;
   }
