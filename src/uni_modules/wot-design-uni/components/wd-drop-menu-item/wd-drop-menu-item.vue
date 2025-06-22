@@ -78,7 +78,6 @@ const showWrapper = ref<boolean>(false)
 const showPop = ref<boolean>(false)
 const position = ref<PopupType>()
 const zIndex = ref<number>(12)
-const modal = ref<boolean>(true)
 const duration = ref<number>(0)
 
 const { parent: dropMenu } = useParent(DROP_MENU_KEY)
@@ -186,7 +185,6 @@ function handleOpen() {
   showWrapper.value = true
   showPop.value = true
   if (dropMenu) {
-    modal.value = Boolean(dropMenu.props.modal)
     duration.value = Number(dropMenu.props.duration)
     position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
   }
