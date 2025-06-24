@@ -1,7 +1,7 @@
 import { type ExtractPropTypes, type InjectionKey, type Ref } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
-export type DropDirction = 'up' | 'down'
+export type DropDirection = 'up' | 'down'
 
 export type DropMenuProvide = {
   props: Partial<DropMenuProps>
@@ -20,7 +20,7 @@ export const dropMenuProps = {
   /**
    * 菜单展开方向，可选值为up 或 down
    */
-  direction: makeStringProp<DropDirction>('down'),
+  direction: makeStringProp<DropDirection>('down'),
   /**
    * 是否展示蒙层
    */
