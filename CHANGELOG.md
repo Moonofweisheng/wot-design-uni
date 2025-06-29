@@ -1,6 +1,38 @@
 # 更新日志 
 
 
+## [1.10.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.9.1...v1.10.0) (2025-06-29)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  调整微信小程序演示demo激励按钮的文案以应对微信审核 ([06323a9](https://github.com/Moonofweisheng/wot-design-uni/commit/06323a9b3228299fa9cf4ff6cd826514ced1dc32))
+* ✏️  简化组件库通用名称为 WotUI ([8177978](https://github.com/Moonofweisheng/wot-design-uni/commit/817797801de1228d39ff399c7792d76c2652e94d))
+* ✏️  添加 WotUI 加群凭证相关介绍 ([341b9e1](https://github.com/Moonofweisheng/wot-design-uni/commit/341b9e1c1e98699510bbdc4587782b3647d2c4ba))
+* ✏️  修正示例 demo 源码链接地址 ([1ccdb4a](https://github.com/Moonofweisheng/wot-design-uni/commit/1ccdb4a7468ce7984ac4f17305212aebc54f62c3)), closes [#1045](https://github.com/Moonofweisheng/wot-design-uni/issues/1045)
+* ✏️  优化加群文档使其更加清晰明确 ([207dfb8](https://github.com/Moonofweisheng/wot-design-uni/commit/207dfb8c9bbf4434ec51e186886ad8dba6289153))
+* ✏️  优秀案例改为取线上资源 ([053485b](https://github.com/Moonofweisheng/wot-design-uni/commit/053485b470419b5a451b73aec0dc03d12b7dde56))
+* ✏️  update cases ([f1ad2fa](https://github.com/Moonofweisheng/wot-design-uni/commit/f1ad2fa05efba00d89958adba5ca967eead01cfe))
+
+
+### ✨ Features | 新功能
+
+* ✨ DatetimePicker 支持time和date-time类型下配置选择到秒 ([#1117](https://github.com/Moonofweisheng/wot-design-uni/issues/1117)) ([f2e8fda](https://github.com/Moonofweisheng/wot-design-uni/commit/f2e8fdad8026b4b8ce5d11a2e80d5a565031cdc5)), closes [#844](https://github.com/Moonofweisheng/wot-design-uni/issues/844)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 DropDownItem 自定义样式类 CustomIcon 无效的问题 ([cb408f5](https://github.com/Moonofweisheng/wot-design-uni/commit/cb408f553a2e5d84225b5dcdb447dd784992aa6b)), closes [#1119](https://github.com/Moonofweisheng/wot-design-uni/issues/1119)
+* 🐛 修复 DropMenu 设置 Modal 无效的问题 ([#1125](https://github.com/Moonofweisheng/wot-design-uni/issues/1125)) ([eddbd5d](https://github.com/Moonofweisheng/wot-design-uni/commit/eddbd5d22e6cb413e5bf06a642f60f6e081a9074)), closes [#1121](https://github.com/Moonofweisheng/wot-design-uni/issues/1121)
+* 🐛 修复 Input、Textarea、Search 组件设置清空后不聚焦时无法触发失焦事件的问题 ([#1046](https://github.com/Moonofweisheng/wot-design-uni/issues/1046)) ([33b5565](https://github.com/Moonofweisheng/wot-design-uni/commit/33b556546a03e240cfcb3662286cc6dc70b70263))
+* 🐛 修复 Slider 处理边界值异常的问题，优化样式和事件处理逻辑 ([#1050](https://github.com/Moonofweisheng/wot-design-uni/issues/1050)) ([0d7ed81](https://github.com/Moonofweisheng/wot-design-uni/commit/0d7ed8129c623c0b423fe8da6814417417ea3114)), closes [#1023](https://github.com/Moonofweisheng/wot-design-uni/issues/1023)
+* 🐛 修复 Toast 英文断行样式错误问题 ([#1067](https://github.com/Moonofweisheng/wot-design-uni/issues/1067)) ([09dde62](https://github.com/Moonofweisheng/wot-design-uni/commit/09dde6278ed9bb0a57709c15ea4dff8da6e786cd))
+* 🐛 修复 wd-img-cropper 组件在微信小程序中旋转图片后操作卡顿的问题 ([#1112](https://github.com/Moonofweisheng/wot-design-uni/issues/1112)) ([50782a1](https://github.com/Moonofweisheng/wot-design-uni/commit/50782a16717d483f4dc7095e2f6096591999df01))
+* 🐛 修复 wd-slider 滑块不跟手的问题 ([#1114](https://github.com/Moonofweisheng/wot-design-uni/issues/1114)) ([e3dc36e](https://github.com/Moonofweisheng/wot-design-uni/commit/e3dc36e832a74029348a859adb53f06054e9eea6))
+* 🐛 修复NumberKeyboard组件使用 title 插槽未传入关闭文本时不展示头部的问题 ([#1060](https://github.com/Moonofweisheng/wot-design-uni/issues/1060)) ([875e072](https://github.com/Moonofweisheng/wot-design-uni/commit/875e072b3ea8dff270cb2214f94b95e03fa210db)), closes [#760](https://github.com/Moonofweisheng/wot-design-uni/issues/760)
+* 🐛 优化 InputNumbe 处理中间状态值的逻辑，支持配置不立即响应输入变化 ([#1116](https://github.com/Moonofweisheng/wot-design-uni/issues/1116)) ([ff99b22](https://github.com/Moonofweisheng/wot-design-uni/commit/ff99b22a6930ea500539f403f23d46cd836e8bca))
+* 修复 wd-upload 组件的 formData 属性的 ts 类型为 void 的问题 ([#1106](https://github.com/Moonofweisheng/wot-design-uni/issues/1106)) ([6026137](https://github.com/Moonofweisheng/wot-design-uni/commit/60261374acb99f64298c724e1f8d1df3061bd85a))
+
 ### [1.9.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.9.0...v1.9.1) (2025-05-08)
 
 
