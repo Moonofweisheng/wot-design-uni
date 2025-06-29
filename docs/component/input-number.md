@@ -207,9 +207,9 @@ const beforeChange: InputNumberBeforeChange = (value) => {
 | adjustPosition | 原生属性，键盘弹起时，是否自动上推页面 | boolean | - | true | 1.3.11 |
 | before-change | 输入框值改变前触发，返回 false 会阻止输入框值改变，支持返回 `Promise` | `(value: number \| string) => boolean \| Promise<boolean>` | - | - | 1.6.0 |
 | long-press | 是否允许长按进行加减 | boolean | - | false | 1.8.0 |
-| immediate-change | 是否立即响应输入变化，false 时仅在失焦和按钮点击时更新 | boolean | - | true | $LOWEST_VERSION$ |
-| update-on-init | 是否在初始化时更新 v-model 为修正后的值 | boolean | - | true | $LOWEST_VERSION$ |
-| input-type | 输入框类型 | string | number / digit | digit | $LOWEST_VERSION$ |
+| immediate-change | 是否立即响应输入变化，false 时仅在失焦和按钮点击时更新 | boolean | - | true | 1.10.0 |
+| update-on-init | 是否在初始化时更新 v-model 为修正后的值 | boolean | - | true | 1.10.0 |
+| input-type | 输入框类型 | string | number / digit | digit | 1.10.0 |
 
 
 ## Events

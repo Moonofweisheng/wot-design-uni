@@ -312,7 +312,7 @@ const displayFormatTabLabel = (items) => {
 | prop | Form field `model` field name, required when using form validation | string | - | - | - |
 | rules | Form validation rules, used with `wd-form` component | `FormItemRule []` | - | `[]` | - |
 | immediate-change | Whether to trigger the picker-view's change event immediately when the finger is released. If not enabled, the change event will be triggered after the scrolling animation ends. Available from version 1.2.25, only supported on WeChat Mini Program and Alipay Mini Program. | boolean | - | false | 1.2.25 |
-| use-second | Whether to display the second selection, only effective for time and datetime types | boolean | - | false | $LOWEST_VERSION$ |
+| use-second | Whether to display the second selection, only effective for time and datetime types | boolean | - | false | 1.10.0 |
 
 ### FormItemRule Data Structure
 

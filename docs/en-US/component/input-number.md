@@ -207,9 +207,9 @@ Set the `long-press` property to allow long press for increment/decrement.
 | adjustPosition | Native property, whether to automatically push up the page when keyboard pops up | boolean | - | true | 1.3.11 |
 | before-change | Triggered before input box value changes, returning false will prevent input box value from changing, supports returning `Promise` | `(value: number \| string) => boolean \| Promise<boolean>` | - | - | 1.6.0 |
 | long-press | Whether to allow long press for increment/decrement | boolean | - | false | 1.8.0 |
-| immediate-change | Whether to respond to input changes immediately, false will only update on blur and button clicks | boolean | - | true | $LOWEST_VERSION$ |
-| update-on-init | Whether to update v-model with corrected value during initialization | boolean | - | true | $LOWEST_VERSION$ |
-| input-type | Input field type | string | number / digit | digit | $LOWEST_VERSION$ |
+| immediate-change | Whether to respond to input changes immediately, false will only update on blur and button clicks | boolean | - | true | 1.10.0 |
+| update-on-init | Whether to update v-model with corrected value during initialization | boolean | - | true | 1.10.0 |
+| input-type | Input field type | string | number / digit | digit | 1.10.0 |
 
 ## Events
 

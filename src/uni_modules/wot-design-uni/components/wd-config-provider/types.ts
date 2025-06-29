@@ -629,16 +629,19 @@ export type tagThemeVars = {
 }
 
 export type toastThemeVars = {
+  toastColor?: string
   toastPadding?: string
   toastMaxWidth?: string
   toastRadius?: string
   toastBg?: string
   toastFs?: string
+  toastLineHeight?: string
   toastWithIconMinWidth?: string
   toastIconSize?: string
   toastIconMarginRight?: string
   toastIconMarginBottom?: string
   toastLoadingPadding?: string
+  toastLoadingMarginBottom?: string
   toastBoxShadow?: string
 }
 
