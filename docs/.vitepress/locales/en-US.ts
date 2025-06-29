@@ -77,13 +77,14 @@ export default defineConfig({
         ]
       },
       { text: '🥤Buy Me a Coffee', link: '/en-US/reward/reward', activeMatch: '/reward/' },
+      { text: 'Quick Start Project', link: 'https://github.com/Moonofweisheng/wot-demo' },
       {
         text: 'Ecosystem',
         items: [
-          { text: 'Quick Start Project', link: 'https://github.com/Moonofweisheng/wot-demo' },
           { text: 'Vue3 uni-app Router', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: 'Mini Program CI Tool', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
+          { text: 'uni-ku', link: 'https://github.com/uni-ku' },
         ],
       },
     ],

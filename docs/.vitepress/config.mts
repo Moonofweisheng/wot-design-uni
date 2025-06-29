@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-05-07 13:27:31
+ * @LastEditTime: 2025-06-29 17:05:24
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
@@ -176,13 +176,14 @@ export default defineConfig({
         ]
       },
       { text: '🥤一杯咖啡', link: '/reward/reward', activeMatch: '/reward/' },
+      { text: '快速上手项目', link: 'https://github.com/Moonofweisheng/wot-demo' },
       {
         text: '周边生态',
         items: [
-          { text: '快速上手项目', link: 'https://github.com/Moonofweisheng/wot-demo' },
           { text: 'Vue3 uni-app路由库', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: '多平台小程序CI工具', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
+          { text: 'uni-ku', link: 'https://github.com/uni-ku' },
         ],
       },
     ],
