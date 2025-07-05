@@ -74,12 +74,30 @@
 
 ## Attributes
 
-| 参数         | 说明         | 类型             | 可选值                                                                                                           | 默认值  | 最低版本 |
-| ------------ | ------------ | ---------------- | ---------------------------------------------------------------------------------------------------------------- | ------- | -------- |
-| show         | 是否展示组件 | boolean          | -                                                                                                                | -       | -        |
-| name         | 动画类型     | string           | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | -       | -        |
-| duration     | 动画执行时间 | number / boolean | -                                                                                                                | 300(ms) | -        |
-| custom-style | 自定义样式   | string           | -                                                                                                                | -       | -        |
+| 参数         | 说明         | 类型             | 可选值         | 默认值  | 最低版本 |
+|--------------|--------------|------------------|----------------|---------|----------|
+| show         | 是否展示组件 | boolean          | -              | -       | -        |
+| name         | 动画类型     | string           | `TransitionName` | -       | -        |
+| duration     | 动画执行时间 | number / boolean | -              | 300(ms) | -        |
+| custom-style | 自定义样式   | string           | -              | -       | -        |
+| disable-touch-move | 是否阻止触摸滚动 | boolean | -              | false   | $LOWEST_VERSION$ |
+
+### TransitionName 动画类型
+
+| 名称        | 说明         | 最低版本 |
+|-------------|--------------|----------|
+| fade        | 淡入淡出     | -        |
+| fade-down   | 向下淡入淡出 | -        |
+| fade-left   | 向左淡入淡出 | -        |
+| fade-right  | 向右淡入淡出 | -        |
+| fade-up     | 向上淡入淡出 | -        |
+| slide-down  | 向下滑动     | -        |
+| slide-left  | 向左滑动     | -        |
+| slide-right | 向右滑动     | -        |
+| slide-up    | 向上滑动     | -        |
+| zoom-in     | 缩放进入     | -        |
+| zoom-out    | 缩放离开     | -        |
+
 
 ## Events
 
