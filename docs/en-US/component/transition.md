@@ -72,14 +72,31 @@ When the animation leaves, the tag will be set with `leave-class` and `leave-act
 }
 ```
 
-## Attributes
+## Attributes  
 
-| Parameter | Description | Type | Options | Default | Version |
-|-----------|-------------|------|----------|---------|----------|
-| show | Whether to display component | boolean | - | - | - |
-| name | Animation type | string | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | - | - |
-| duration | Animation execution time | number / boolean | - | 300(ms) | - |
-| custom-style | Custom style | string | - | - | - |
+| Parameter          | Description                        | Type             | Optional Values  | Default Value | Minimum Version  |
+|--------------------|------------------------------------|------------------|------------------|---------------|------------------|
+| show               | Whether to display the component   | boolean          | -                | -             | -                |
+| name               | Animation type                     | string           | `TransitionName` | -             | -                |
+| duration           | Animation duration                 | number / boolean | -                | 300(ms)       | -                |
+| custom-style       | Custom styles                      | string           | -                | -             | -                |
+| disable-touch-move | Whether to prevent touch scrolling | boolean          | -                | false         | $LOWEST_VERSION$ |
+
+### TransitionName Animation Types  
+
+| Name        | Description     | Minimum Version |
+|-------------|-----------------|-----------------|
+| fade        | Fade in and out | -               |
+| fade-down   | Fade down       | -               |
+| fade-left   | Fade left       | -               |
+| fade-right  | Fade right      | -               |
+| fade-up     | Fade up         | -               |
+| slide-down  | Slide down      | -               |
+| slide-left  | Slide left      | -               |
+| slide-right | Slide right     | -               |
+| slide-up    | Slide up        | -               |
+| zoom-in     | Zoom in         | -               |
+| zoom-out    | Zoom out        | -               |
 
 ## Events
 

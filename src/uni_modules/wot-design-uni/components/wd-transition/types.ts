@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-09-01 15:42:04
- * @LastEditTime: 2024-11-06 23:50:08
+ * @LastEditTime: 2025-07-04 18:33:43
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-transition\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-transition/types.ts
  * 记得注释
  */
 import type { ExtractPropTypes, PropType } from 'vue'
@@ -95,7 +95,13 @@ export const transitionProps = {
    * 离开过渡的结束状态
    * 类型：string
    */
-  leaveToClass: makeStringProp('')
+  leaveToClass: makeStringProp(''),
+  /**
+   * 是否阻止触摸滚动
+   * 类型：boolean
+   * 默认值：false
+   */
+  disableTouchMove: makeBooleanProp(false)
 }
 
 export type TransitionProps = ExtractPropTypes<typeof transitionProps>
