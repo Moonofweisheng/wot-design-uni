@@ -18,7 +18,7 @@
           v-for="(child, index) in children"
           :key="index"
           @click="toggle(child)"
-          :class="`wd-drop-menu__item ${child.disabled ? 'is-disabled' : ''} ${child.$.exposed!.getShowPop() ? 'is-active' : ''}`"
+          :class="`wd-drop-menu__item ${child.disabled ? 'is-disabled' : ''} ${child.$.exposed!.getShowPop() ? 'is-active' : ''} ${child.customMenuTitleClass}`"
         >
           <view class="wd-drop-menu__item-title">
             <view class="wd-drop-menu__item-title-text">{{ getDisplayTitle(child) }}</view>
