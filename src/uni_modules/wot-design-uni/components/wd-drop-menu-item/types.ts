@@ -75,7 +75,7 @@ export const dorpMenuItemProps = {
   /**
    * 自定义下拉菜单标题样式类
    */
-  customTitleClass: makeStringProp('')
+  customMenuTitleClass: makeStringProp('')
 }
 
 export type DropMenuItemProps = ExtractPropTypes<typeof dorpMenuItemProps>
