@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2024-03-18 11:22:03
- * @LastEditTime: 2024-04-04 22:35:25
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-action-sheet/types.ts
- * 记得注释
- */
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 
@@ -115,7 +106,13 @@ export const actionSheetProps = {
    * @default true
    * @type {boolean}
    */
-  safeAreaInsetBottom: makeBooleanProp(true)
+  safeAreaInsetBottom: makeBooleanProp(true),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   * 类型：boolean
+   * 默认值：false
+   */
+  rootPortal: makeBooleanProp(false)
 }
 
 export type ActionSheetProps = ExtractPropTypes<typeof actionSheetProps>

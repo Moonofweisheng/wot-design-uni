@@ -74,6 +74,26 @@ Set the `close-on-click-modal` attribute to `false` to disable closing the popup
 </wd-popup>
 ```
 
+## root-portal
+
+When the `root-portal` attribute is set to `true`, the popup will be teleported to the page root node, which can avoid the influence of parent component's transform, filter and other CSS properties on the fixed positioning of the popup.
+
+Different platforms use different implementation schemes:
+- **H5**: Use Vue 3's teleport feature
+- **APP**: Use renderjs to move elements to the uni-app root node
+- **WeChat Mini Program/Alipay Mini Program**: Use root-portal component
+- **Other platforms**: root-portal feature is not supported
+
+```html
+<wd-popup v-model="show" root-portal position="center" custom-style="height: 200px;" @close="handleClose">
+  <text class="custom-txt">I'm teleported to the root node</text>
+</wd-popup>
+```
+
+:::tip Tip
+This feature is mainly used to solve layering and positioning issues of popups in complex layouts, and it is recommended to enable it only when needed.
+:::
+
 ## Attributes
 
 | Attribute | Description | Type | Default | Version |
@@ -93,6 +113,7 @@ Set the `close-on-click-modal` attribute to `false` to disable closing the popup
 | custom-style | Custom popup style | object | - | - |
 | border-radius | Border radius of the popup | string | 0 | - |
 | safe-area-inset-bottom | Whether to enable bottom safe area adaptation | boolean | false | - |
+| root-portal | Whether to break away from the page to solve various fixed failure issues | boolean | false | $LOWEST_VERSION$ |
 
 ## Events
 

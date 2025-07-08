@@ -652,6 +652,7 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                            | `FormItemRule []` | -      | `[]`    | -        |
 | lineWidth              | 底部条宽度，单位像素                                                                                                           | number            | -      | -       | 1.3.7    |
 | lineHeight             | 底部条高度，单位像素                                                                                                           | number            | -      | -       | 1.3.7    |
+| root-portal            | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                                                                             | boolean           | -      | false   | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 

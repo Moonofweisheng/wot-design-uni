@@ -7,7 +7,7 @@
  * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-message-box\types.ts
  * 记得注释
  */
-import { baseProps, makeStringProp } from '../common/props'
+import { baseProps, makeStringProp, makeBooleanProp } from '../common/props'
 import type { ButtonProps } from '../wd-button/types'
 import { type InputSize, type InputType } from '../wd-input/types'
 
@@ -133,5 +133,9 @@ export const messageBoxProps = {
   /**
    * 指定唯一标识
    */
-  selector: makeStringProp('')
+  selector: makeStringProp(''),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false)
 }

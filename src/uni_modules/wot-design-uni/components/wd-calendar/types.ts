@@ -181,7 +181,11 @@ export const calendarProps = {
    * 是否使用内置单元格
    * 默认为 true，使用内置单元格
    */
-  withCell: makeBooleanProp(true)
+  withCell: makeBooleanProp(true),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false)
 }
 
 export type CalendarDisplayFormat = (value: number | number[], type: CalendarType) => string

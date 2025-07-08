@@ -1609,5 +1609,16 @@
   "zuo-shang": "Top Left",
   "zuo-xia": "lower left",
   "zuo-you-hua-dong": "Slide left and right",
-  "zuo-zhong": "Middle Left"
+  "zuo-zhong": "Middle Left",
+  "xian-shi-tan-chuang": "Show Modal",
+  "yu-zhe-zhao-ceng-jie-he": "Combined with Overlay",
+  "xian-shi-mo-tai-kuang": "Show Modal",
+  "quan-ju-tong-zhi": "Global Notification",
+  "xian-shi-tong-zhi": "Show Notification",
+  "quan-ju-jia-zai": "Global Loading",
+  "xian-shi-jia-zai": "Show Loading",
+  "zhe-shi-yi-ge-quan-ju-tan-chuang": "This is a global modal",
+  "mo-tai-kuang-biao-ti": "Modal Title",
+  "zhe-shi-mo-tai-kuang-de-nei-rong": "This is modal content",
+  "rootportal-title": "Root Portal"
 }

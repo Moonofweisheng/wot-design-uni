@@ -173,6 +173,10 @@ export default defineConfig({
             {
               link: '/en-US/component/text',
               text: 'Text'
+            },
+            {
+              link: '/en-US/component/root-portal',
+              text: 'RootPortal'
             }
           ]
         },

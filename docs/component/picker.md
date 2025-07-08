@@ -272,6 +272,7 @@ function handleConfirm({ value }) {
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                                                                   | `FormItemRule []`                 | -      | `[]`    | -                |
 | immediate-change       | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。                   | boolean                           | -      | false   | 1.2.25           |
 | clearable              | 显示清空按钮                                                                                                                                                          | boolean                           | -      | false   | 1.3.13 |
+| root-portal            | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                                                                                                                     | boolean                           | -      | false   | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 

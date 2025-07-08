@@ -254,9 +254,10 @@ const onDelete = () => showToast('删除')
 | closeButtonLoading  | 关闭按钮是否显示加载状态 | `boolean`             | -                          | `false`    | 1.3.10           |
 | modal               | 是否显示蒙层遮罩         | `boolean`             | -                          | `false`    | 1.3.10           |
 | hideOnClickOutside  | 是否在点击外部时收起键盘 | `boolean`             | -                          | `true`     | 1.3.10           |
-| lockScroll          | 是否锁定滚动             | `boolean`             | -                          | `true`     | 1.3.10           |
+| lockScroll          | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动 | `boolean`             | -                          | `true`     | 1.3.10           |
 | safeAreaInsetBottom | 是否在底部安全区域内     | `boolean`             | -                          | `true`     | 1.3.10           |
 | extraKey            | 额外按键                 | `string` / `string[]` | -                          | -          | 1.3.10           |
+| root-portal         | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | `boolean`             | -                          | `false`    | $LOWEST_VERSION$ |
 
 ## Slot
 

@@ -361,6 +361,7 @@ function handleConfirm({ value, selectedItems }) {
 | prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                        | string                            | -                | -        | -                |
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                      | `FormItemRule []`                 | -                | `[]`     | -                |
 | clearable              | 显示清空按钮                                                                                             | boolean                           | -                | false    | 1.3.13 |
+| root-portal            | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                                                       | boolean                           | -                | false    | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 

@@ -66,6 +66,26 @@
 <wd-popup v-model="show" position="bottom" :safe-area-inset-bottom="true" custom-style="height: 200px;" @close="handleClose"></wd-popup>
 ```
 
+## root-portal
+
+当使用 `root-portal` 属性为 `true` 时，弹出层会从页面中脱离出来，这可以避免父组件的 transform、filter 等 CSS 属性影响弹出层的 fixed 定位。
+
+不同平台采用不同的实现方案：
+- **H5端**：使用 Vue 3 的 teleport 特性
+- **APP端**：使用 renderjs 将元素移动到 uni-app 根节点
+- **微信小程序/支付宝小程序**：使用 root-portal 组件
+- **其他平台**：不支持此功能
+
+```html
+<wd-popup v-model="show" root-portal position="center" custom-style="height: 200px;" @close="handleClose">
+  <text class="custom-txt">我被传送到了根节点中</text>
+</wd-popup>
+```
+
+:::tip 提示
+该功能主要用于解决复杂布局中弹窗的层级和定位问题，在需要时才建议开启。
+:::
+
 ## 禁止滚动穿透
 
 使用组件时，会发现内容部分滚动到底时，继续划动会导致底层页面的滚动，这就是滚动穿透。
@@ -103,7 +123,8 @@ h5 滚动穿透不需要处理，组件已默认开启 `lock-scroll`。
 | lazy-render | 弹层内容懒渲染，触发展示时才渲染内容 | boolean | - | true | - |
 | safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型） | boolean | - | false | - |
 | transition | 动画类型，参见 wd-transition 组件的name | string | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | - | - |
-| lockScroll | 是否锁定背景滚动 | boolean | - | true | 0.1.30 |
+| lockScroll | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动 | boolean | - | true | 0.1.30 |
+| root-portal | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | - | false | $LOWEST_VERSION$ |
 
 ## Events
 

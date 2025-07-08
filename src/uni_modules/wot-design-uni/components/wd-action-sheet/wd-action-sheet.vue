@@ -9,6 +9,7 @@
       :close-on-click-modal="closeOnClickModal"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :lazy-render="lazyRender"
+      :root-portal="rootPortal"
       @enter="handleOpen"
       @close="close"
       @after-enter="handleOpened"

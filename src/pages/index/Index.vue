@@ -94,6 +94,10 @@ const list = computed(() => [
       {
         id: 'text',
         name: t('text-wen-ben')
+      },
+      {
+        id: 'rootPortal',
+        name: t('rootportal-title')
       }
     ]
   },

@@ -87,7 +87,11 @@ export const selectPickerProps = {
   /**
    * 显示清空按钮
    */
-  clearable: makeBooleanProp(false)
+  clearable: makeBooleanProp(false),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false)
 }
 export type SelectPickerProps = ExtractPropTypes<typeof selectPickerProps>
 

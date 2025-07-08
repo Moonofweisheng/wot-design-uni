@@ -6,6 +6,7 @@
     :z-index="state.zIndex"
     :duration="250"
     :modal="false"
+    :root-portal="state.rootPortal"
     @leave="onClosed"
     @enter="onOpened"
   >

@@ -34,6 +34,7 @@
       :close-on-click-modal="closeOnClickModal"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :z-index="zIndex"
+      :root-portal="rootPortal"
       @close="close"
     >
       <view class="wd-calendar__header">
