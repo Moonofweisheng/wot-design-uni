@@ -95,6 +95,7 @@ function handleClick() {
 | close-on-click-modal | 点击遮罩是否关闭                                   | boolean | -                                                                        | false  | -        |
 | hide-when-close      | 是否当关闭时将弹出层隐藏（display: none）          | boolean | -                                                                        | true   | -        |
 | z-index              | 设置层级                                           | number  | -                                                                        | 10     | 1.4.0    |
+| root-portal          | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | -                                                                        | false  | $LOWEST_VERSION$ |
 
 ## Events
 

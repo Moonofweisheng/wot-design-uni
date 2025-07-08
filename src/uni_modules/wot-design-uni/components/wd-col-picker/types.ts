@@ -132,7 +132,11 @@ export const colPickerProps = {
    * value 外部自定义样式
    */
   customLabelClass: makeStringProp(''),
-  customValueClass: makeStringProp('')
+  customValueClass: makeStringProp(''),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false)
 }
 
 export type ColPickerProps = ExtractPropTypes<typeof colPickerProps>

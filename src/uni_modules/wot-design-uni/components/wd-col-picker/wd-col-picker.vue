@@ -36,6 +36,7 @@
       :close-on-click-modal="closeOnClickModal"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
+      :root-portal="rootPortal"
       @open="handlePickerOpend"
       @close="handlePickerClose"
       @closed="handlePickerClosed"

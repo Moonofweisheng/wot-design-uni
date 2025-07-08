@@ -71,7 +71,11 @@ export const dorpMenuItemProps = {
   /**
    * 自定义下拉菜单popup样式
    */
-  customPopupStyle: makeStringProp('')
+  customPopupStyle: makeStringProp(''),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false)
 }
 
 export type DropMenuItemProps = ExtractPropTypes<typeof dorpMenuItemProps>

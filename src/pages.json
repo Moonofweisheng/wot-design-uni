@@ -1311,6 +1311,21 @@
             "navigationBarTitleText": "%wxrewardad-title%"
             // #endif
           }
+        },
+        {
+          "path": "rootPortal/Index",
+          "name": "rootPortal",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Root Portal 根节点传送门",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%rootportal-title%"
+            // #endif
+          }
         }
       ]
     }

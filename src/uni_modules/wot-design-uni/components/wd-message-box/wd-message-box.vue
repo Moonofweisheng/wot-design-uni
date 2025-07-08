@@ -9,6 +9,7 @@
       @click-modal="toggleModal('modal')"
       :z-index="messageState.zIndex"
       :duration="200"
+      :root-portal="rootPortal"
     >
       <view :class="rootClass">
         <view :class="bodyClass">

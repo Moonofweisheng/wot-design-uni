@@ -7,6 +7,7 @@
     :modal-style="modal ? '' : 'opacity: 0;'"
     :modal="hideOnClickOutside"
     :lockScroll="lockScroll"
+    :root-portal="rootPortal"
     @click-modal="handleClose"
   >
     <view :class="`wd-keyboard ${customClass}`" :style="customStyle">

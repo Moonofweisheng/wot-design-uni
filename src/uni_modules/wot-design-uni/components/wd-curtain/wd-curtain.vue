@@ -7,6 +7,7 @@
       :close-on-click-modal="closeOnClickModal"
       :hide-when-close="hideWhenClose"
       :z-index="zIndex"
+      :root-portal="rootPortal"
       @before-enter="beforeenter"
       @enter="enter"
       @after-enter="afterenter"

@@ -42,6 +42,7 @@
       :close-on-click-modal="closeOnClickModal"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
+      :root-portal="rootPortal"
       @close="close"
       @opened="scrollIntoView ? setScrollIntoView() : ''"
       custom-header-class="wd-select-picker__header"

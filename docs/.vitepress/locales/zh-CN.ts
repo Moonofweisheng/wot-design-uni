@@ -173,6 +173,10 @@ export default defineConfig({
             {
               link: '/component/text',
               text: 'Text 文本'
+            },
+            {
+              link: '/component/root-portal',
+              text: 'RootPortal 根节点'
             }
           ]
         },

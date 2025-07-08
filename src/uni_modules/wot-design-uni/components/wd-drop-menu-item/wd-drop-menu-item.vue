@@ -13,6 +13,7 @@
       :custom-class="customPopupClass"
       :modal="false"
       :close-on-click-modal="false"
+      :root-portal="rootPortal"
       @before-enter="beforeEnter"
       @after-enter="afterEnter"
       @before-leave="beforeLeave"

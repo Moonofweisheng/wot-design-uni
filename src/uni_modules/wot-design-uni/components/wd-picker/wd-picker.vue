@@ -37,6 +37,7 @@
       :close-on-click-modal="closeOnClickModal"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
+      :root-portal="rootPortal"
       @close="onCancel"
       custom-class="wd-picker__popup"
     >
