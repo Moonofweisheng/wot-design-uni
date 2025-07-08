@@ -1,4 +1,7 @@
-# Signature <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.6.0</el-tag>
+---
+version: 1.6.0
+---
+# Signature
 
 A signature component based on Canvas for signature scenarios. Provides basic signature, history record, and pressure effect features.
 

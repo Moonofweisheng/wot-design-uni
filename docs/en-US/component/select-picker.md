@@ -1,4 +1,4 @@
-# SelectPicker <el-tag text style="vertical-align: middle;margin-left:8px;" type="warning">0.1.34 Update</el-tag>
+# SelectPicker
 
 Used for single or multiple selection from a set of options.
 

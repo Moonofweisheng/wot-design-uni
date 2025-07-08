@@ -1,4 +1,4 @@
-# PasswordInput 密码输入框 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.0</el-tag>
+# PasswordInput 密码输入框
 
 带网格的输入框组件，可以用于输入密码、短信验证码等场景，通常与[数字键盘](./number-keyboard.md)组件配合使用。
 

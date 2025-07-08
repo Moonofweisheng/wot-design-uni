@@ -1,4 +1,4 @@
-# Overlay 遮罩层 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.30</el-tag>
+# Overlay 遮罩层
 
 创建一个遮罩层，用于强调特定的页面元素，并阻止用户进行其他操作。
 

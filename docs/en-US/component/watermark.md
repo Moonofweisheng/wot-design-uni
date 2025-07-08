@@ -1,4 +1,4 @@
-# Watermark <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.16</el-tag>
+# Watermark
 
 Add specified images or text on pages or components, which can be used for copyright protection, brand promotion, and other scenarios.
 

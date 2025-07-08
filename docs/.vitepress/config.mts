@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-07-07 20:46:21
+ * @LastEditTime: 2025-07-08 17:45:58
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
@@ -11,6 +11,7 @@ import { defineConfig } from 'vitepress';
 import viteCompression from 'vite-plugin-compression'
 import { fileURLToPath, URL } from 'node:url'
 import { MarkdownTransform } from './plugins/markdown-transform'
+import { VersionBadgePlugin } from './plugins/version-badge'
 import llmstxt from 'vitepress-plugin-llms'
 import enUS from './locales/en-US'
 import zhCN from './locales/zh-CN'
@@ -22,6 +23,7 @@ export default defineConfig({
         domain: 'https://wot-design-uni.cn',
       }),
       MarkdownTransform(),
+      VersionBadgePlugin(),
       viteCompression({
         verbose: true,
         disable: false,
@@ -61,6 +63,12 @@ export default defineConfig({
           find: /^.*\/VPNavBar\.vue$/,
           replacement: fileURLToPath(
             new URL('./theme/components/VPNavBar.vue', import.meta.url)
+          )
+        },
+        {
+          find: /^.*\/VPSidebarItem\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/VPSidebarItem.vue', import.meta.url)
           )
         }
       ]

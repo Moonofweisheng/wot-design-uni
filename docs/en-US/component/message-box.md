@@ -1,4 +1,4 @@
-# MessageBox <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.10</el-tag>
+# MessageBox
 
 A dialog box that pops up, commonly used for message prompts, message confirmation, etc., supports function calls.
 

@@ -1,4 +1,7 @@
-# Root Portal<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+---
+version: $LOWEST_VERSION$
+---
+# Root Portal
 
 Whether to break out of the page, used to solve various fixed positioning issues, mainly used for making popups and overlays.
 

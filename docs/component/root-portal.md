@@ -1,4 +1,7 @@
-# Root Portal 根节点传送<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">$LOWEST_VERSION$</el-tag>
+---
+version: $LOWEST_VERSION$
+---
+# Root Portal 根节点传送
 
 是否从页面中脱离出来，用于解决各种 fixed 失效问题，主要用于制作弹窗、弹出层等。
 

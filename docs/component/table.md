@@ -1,4 +1,4 @@
-# Table 表格 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.39</el-tag>
+# Table 表格
 
 用于展示多条结构类似的数据， 可对数据进行排序等操作。
 

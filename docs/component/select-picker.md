@@ -1,4 +1,4 @@
-# SelectPicker 单复选选择器 <el-tag text style="vertical-align: middle;margin-left:8px;" type="warning">0.1.34 更新</el-tag>
+# SelectPicker 单复选选择器
 
 用于从一组选项中进行单选或多选。
 

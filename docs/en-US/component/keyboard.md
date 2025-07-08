@@ -1,4 +1,7 @@
-# Keyboard <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.10</el-tag>
+---
+version: 1.3.10
+---
+# Keyboard
 
 Virtual keyboard for inputting numbers, passwords, ID cards, or license plate numbers.
 

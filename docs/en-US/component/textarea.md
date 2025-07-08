@@ -1,4 +1,4 @@
-'# Textarea <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.0</el-tag>
+# Textarea
 
 Used for inputting multi-line text information.
 

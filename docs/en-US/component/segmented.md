@@ -1,4 +1,4 @@
-# Segmented <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.23</el-tag>
+# Segmented
 
 Segmented is used to display multiple options and allow users to select a single option.
 
