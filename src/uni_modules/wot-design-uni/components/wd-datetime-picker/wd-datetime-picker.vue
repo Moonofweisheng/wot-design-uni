@@ -173,7 +173,7 @@ import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { datetimePickerProps, type DatetimePickerExpose } from './types'
-import { dayjs } from '../common/dayjs'
+import dayjs from '../../dayjs'
 import { getPickerValue } from '../wd-datetime-picker-view/util'
 
 const props = defineProps(datetimePickerProps)

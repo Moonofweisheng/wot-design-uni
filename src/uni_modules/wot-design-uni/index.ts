@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2021-12-21 14:22:03
- * @LastEditTime: 2025-03-25 14:01:43
+ * @LastEditTime: 2025-07-10 16:25:42
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/index.ts
@@ -15,7 +15,7 @@ export { useUpload } from './components/composables/useUpload'
 export { useTouch } from './components/composables/useTouch'
 export * from './components/wd-notify'
 
-export { dayjs } from './components/common/dayjs'
+export { default as dayjs } from './dayjs'
 
 export * as CommonUtil from './components/common/util'
 export * as clickOut from './components/common/clickoutside'
