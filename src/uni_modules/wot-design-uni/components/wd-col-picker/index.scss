@@ -3,30 +3,7 @@
 
 .wot-theme-dark {
   @include b(col-picker) {
-
-    @include when(border) {
-      .wd-col-picker__cell {
-        @include halfPixelBorder('top', $-cell-padding, $-dark-border-color);
-      }
-    }
-
-    @include e(label) {
-      color: $-dark-color;
-    }
-
-    @include e(cell) {
-      background-color: $-dark-background2;
-      color: $-dark-color;
-
-      @include when(disabled) {
-        .wd-col-picker__value {
-          color: $-dark-color3;
-        }
-      }
-    }
-
     @include e(list-item) {
-  
       @include when(disabled) {
         color: $-dark-color3;
       }
@@ -34,14 +11,6 @@
 
     @include e(list-item-tip) {
       color: $-dark-color-gray;
-    }
-
-    @include e(value) {
-      color: $-dark-color;
-  
-      @include m(placeholder) {
-        color: $-dark-color-gray;
-      }
     }
 
     :deep(.wd-col-picker__arrow) {
@@ -55,117 +24,65 @@
     @include e(selected) {
       color: $-dark-color;
     }
+
+    :deep(.wd-col-picker__cell--placeholder) {
+      .wd-cell__value {
+        color: $-dark-color-gray;
+      }
+    }
   }
 }
 
 @include b(col-picker) {
-  @include when(border) {
-    .wd-col-picker__cell {
-      @include halfPixelBorder('top', $-cell-padding);
-    }
-  }
-  @include e(cell) {
-    position: relative;
-    display: flex;
-    padding: $-cell-wrapper-padding $-cell-padding;
-    align-items: flex-start;
-    background-color: $-color-white;
-    text-decoration: none;
-    color: $-cell-title-color;
-    font-size: $-cell-title-fs;
-    overflow: hidden;
-    line-height: $-cell-line-height;
-  }
-  @include e(cell) {
+  @include edeep(cell) {
     @include when(disabled) {
-      .wd-col-picker__value {
+      .wd-cell__value {
         color: $-input-disabled-color;
-      }
-    }
-    @include when(align-right) {
-      .wd-col-picker__value {
-        text-align: right;
+        cursor: not-allowed;
       }
     }
     @include when(error) {
-      .wd-col-picker__value {
+      .wd-cell__value {
         color: $-input-error-color;
       }
-      :deep(.wd-col-picker__arrow) {
+      .wd-col-picker__arrow {
         color: $-input-error-color;
       }
     }
     @include when(large) {
-      font-size: $-cell-title-fs-large;
-
-      :deep(.wd-col-picker__arrow) {
+      .wd-col-picker__arrow {
         font-size: $-cell-icon-size-large;
       }
     }
-  }
-  @include e(error-message){
-    color: $-form-item-error-message-color;
-    font-size: $-form-item-error-message-font-size;
-    line-height: $-form-item-error-message-line-height;
-    text-align: left;
-    vertical-align: middle;
-  }
-  @include e(label) {
-    position: relative;
-    width: $-input-cell-label-width;
-    margin-right: $-cell-padding;
-    color: $-cell-title-color;
-    box-sizing: border-box;
 
-    @include when(required) {
-      padding-left: 12px;
-
-      &::after {
-        position: absolute;
-        left: 0;
-        top: 2px;
-        content: '*';
-        font-size: $-cell-required-size;
-        line-height: 1.1;
-        color: $-cell-required-color;
+    @include m(placeholder) {
+      .wd-cell__value {
+        color: $-input-placeholder-color;
       }
     }
+  
   }
-  @include e(value-wraper) {
-    display: flex;
-  }
-  @include e(value) {
-    flex: 1;
-    margin-right: 10px;
-    color: $-cell-value-color;
-
-    @include when(ellipsis) {
-      @include lineEllipsis;
-    }
-    @include m(placeholder) {
-      color: $-input-placeholder-color;
-    }
-  }
-  @include e(body) {
-    flex: 1;
-  }
+  
   @include edeep(arrow) {
     display: block;
     font-size: $-cell-icon-size;
     color: $-cell-arrow-color;
     line-height: $-cell-line-height;
   }
+
   @include e(selected) {
     height: $-col-picker-selected-height;
     font-size: $-col-picker-selected-fs;
     color: $-col-picker-selected-color;
     overflow: hidden;
   }
+  
   @include e(selected-container){
     position: relative;
     display: flex;
     user-select: none;
   }
+  
   @include e(selected-item) {
     flex: 0 0 auto;
     height: $-col-picker-selected-height;
@@ -176,6 +93,7 @@
       font-weight: $-col-picker-selected-fw;
     }
   }
+  
   @include e(selected-line) {
     position: absolute;
     bottom: 5px;
@@ -187,9 +105,11 @@
     border-radius: calc($-col-picker-line-height / 2);
     box-shadow: $-col-picker-line-box-shadow;
   }
+  
   @include e(list-container){
     position: relative;
   }
+  
   @include e(list) {
     height: $-col-picker-list-height;
     padding-bottom: $-col-picker-list-padding-bottom;
@@ -199,6 +119,7 @@
     font-size: $-col-picker-list-fs;
     -webkit-overflow-scrolling: touch;
   }
+  
   @include e(list-item) {
     display: flex;
     padding: $-col-picker-list-item-padding;
@@ -215,14 +136,17 @@
       color: $-col-picker-list-color-disabled;
     }
   }
+  
   @include e(list-item-label) {
     line-height: 1.285;
   }
+  
   @include e(list-item-tip) {
     margin-top: 2px;
     font-size: $-col-picker-list-fs-tip;
     color: $-col-picker-list-color-tip;
   }
+  
   @include edeep(checked) {
     display: block;
     margin-left: 4px;
@@ -230,6 +154,7 @@
     color: $-col-picker-list-color-checked;
     opacity: 0;
   }
+  
   @include e(loading) {
     display: flex;
     position: absolute;

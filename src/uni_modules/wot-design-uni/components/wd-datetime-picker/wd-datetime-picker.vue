@@ -1,48 +1,54 @@
 <template>
-  <view
-    :class="`wd-picker ${disabled ? 'is-disabled' : ''} ${size ? 'is-' + size : ''}  ${cell.border.value ? 'is-border' : ''} ${
-      alignRight ? 'is-align-right' : ''
-    } ${error ? 'is-error' : ''} ${customClass}`"
-    :style="customStyle"
-  >
-    <!--文案-->
-    <view class="wd-picker__field" @click="showPopup">
-      <slot v-if="$slots.default"></slot>
-      <view v-else :class="['wd-picker__cell', customCellClass]">
-        <view
-          v-if="label || $slots.label"
-          :class="`wd-picker__label ${customLabelClass} ${isRequired ? 'is-required' : ''}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <slot v-if="$slots.label" name="label"></slot>
-          <block v-else>{{ label }}</block>
-        </view>
-        <view class="wd-picker__body">
-          <view class="wd-picker__value-wraper">
-            <view :class="`wd-picker__value ${customValueClass}`">
-              <template v-if="region">
-                <view v-if="isArray(showValue)">
-                  <text :class="showValue[0] ? '' : 'wd-picker__placeholder'">
-                    {{ showValue[0] ? showValue[0] : placeholder || translate('placeholder') }}
-                  </text>
-                  {{ translate('to') }}
-                  <text :class="showValue[1] ? '' : 'wd-picker__placeholder'">
-                    {{ showValue[1] ? showValue[1] : placeholder || translate('placeholder') }}
-                  </text>
-                </view>
-                <view v-else class="wd-picker__placeholder">
-                  {{ placeholder || translate('placeholder') }}
-                </view>
-              </template>
-              <view v-else :class="showValue ? '' : 'wd-picker__placeholder'">
-                {{ showValue ? showValue : placeholder || translate('placeholder') }}
-              </view>
-            </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-picker__arrow" name="arrow-right" />
+  <view :class="`wd-datetime-picker ${customClass}`" :style="customStyle">
+    <wd-cell
+      v-if="!$slots.default"
+      :title="label"
+      :required="isRequired"
+      :size="size"
+      :title-width="labelWidth"
+      :prop="prop"
+      :rules="rules"
+      :clickable="!disabled && !readonly"
+      :value-align="alignRight ? 'right' : 'left'"
+      :custom-class="`wd-datetime-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'}`"
+      :custom-style="customStyle"
+      :custom-title-class="customLabelClass"
+      :custom-value-class="customValueClass"
+      :ellipsis="ellipsis"
+      :use-title-slot="!!$slots.label"
+      @click="showPopup"
+    >
+      <template v-if="$slots.label" #title>
+        <slot name="label"></slot>
+      </template>
+      <template #default>
+        <template v-if="region">
+          <view v-if="isArray(showValue)">
+            <text :class="showValue[0] ? '' : 'wd-datetime-picker__placeholder'">
+              {{ showValue[0] ? showValue[0] : placeholder || translate('placeholder') }}
+            </text>
+            {{ translate('to') }}
+            <text :class="showValue[1] ? '' : 'wd-datetime-picker__placeholder'">
+              {{ showValue[1] ? showValue[1] : placeholder || translate('placeholder') }}
+            </text>
           </view>
-          <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
+          <view v-else class="wd-datetime-picker__cell-placeholder">
+            {{ placeholder || translate('placeholder') }}
+          </view>
+        </template>
+        <view v-else :class="showValue ? '' : 'wd-datetime-picker__placeholder'">
+          {{ showValue ? showValue : placeholder || translate('placeholder') }}
         </view>
-      </view>
+      </template>
+      <template #right-icon>
+        <wd-icon v-if="showArrow" custom-class="wd-datetime-picker__arrow" name="arrow-right" />
+        <view v-else-if="showClear" @click.stop="handleClear">
+          <wd-icon custom-class="wd-datetime-picker__clear" name="error-fill" />
+        </view>
+      </template>
+    </wd-cell>
+    <view v-else @click="showPopup">
+      <slot></slot>
     </view>
     <!--弹出层，picker-view 在隐藏时修改值，会触发多次change事件，从而导致所有列选中第一项，因此picker在关闭时不隐藏 -->
     <wd-popup
@@ -54,35 +60,35 @@
       :z-index="zIndex"
       :root-portal="rootPortal"
       @close="onCancel"
-      custom-class="wd-picker__popup"
+      custom-class="wd-datetime-picker__popup"
     >
-      <view class="wd-picker__wraper">
+      <view class="wd-datetime-picker__wraper">
         <!--toolBar-->
-        <view class="wd-picker__toolbar" @touchmove="noop">
+        <view class="wd-datetime-picker__toolbar" @touchmove="noop">
           <!--取消按钮-->
-          <view class="wd-picker__action wd-picker__action--cancel" @click="onCancel">
+          <view class="wd-datetime-picker__action wd-datetime-picker__action--cancel" @click="onCancel">
             {{ cancelButtonText || translate('cancel') }}
           </view>
           <!--标题-->
-          <view v-if="title" class="wd-picker__title">{{ title }}</view>
+          <view v-if="title" class="wd-datetime-picker__title">{{ title }}</view>
           <!--确定按钮-->
-          <view :class="`wd-picker__action ${loading || isLoading ? 'is-loading' : ''}`" @click="onConfirm">
+          <view :class="`wd-datetime-picker__action ${loading || isLoading ? 'is-loading' : ''}`" @click="onConfirm">
             {{ confirmButtonText || translate('confirm') }}
           </view>
         </view>
         <!-- 区域选择tab展示 -->
-        <view v-if="region" class="wd-picker__region-tabs">
-          <view :class="`wd-picker__region ${showStart ? 'is-active' : ''} `" @click="tabChange">
+        <view v-if="region" class="wd-datetime-picker__region-tabs">
+          <view :class="`wd-datetime-picker__region ${showStart ? 'is-active' : ''} `" @click="tabChange">
             <view>{{ translate('start') }}</view>
-            <view class="wd-picker__region-time">{{ showTabLabel[0] }}</view>
+            <view class="wd-datetime-picker__region-time">{{ showTabLabel[0] }}</view>
           </view>
-          <view :class="`wd-picker__region ${showStart ? '' : 'is-active'}`" @click="tabChange">
+          <view :class="`wd-datetime-picker__region ${showStart ? '' : 'is-active'}`" @click="tabChange">
             <view>{{ translate('end') }}</view>
-            <view class="wd-picker__region-time">{{ showTabLabel[1] }}</view>
+            <view class="wd-datetime-picker__region-time">{{ showTabLabel[1] }}</view>
           </view>
         </view>
         <!--datetimePickerView-->
-        <view :class="showStart ? 'wd-picker__show' : 'wd-picker__hidden'">
+        <view :class="showStart ? 'wd-datetime-picker__show' : 'wd-datetime-picker__hidden'">
           <wd-datetime-picker-view
             :custom-class="customViewClass"
             ref="datetimePickerView"
@@ -112,7 +118,7 @@
             @pickend="onPickEnd"
           />
         </view>
-        <view :class="showStart ? 'wd-picker__hidden' : 'wd-picker__show'">
+        <view :class="showStart ? 'wd-datetime-picker__hidden' : 'wd-datetime-picker__show'">
           <wd-datetime-picker-view
             :custom-class="customViewClass"
             ref="datetimePickerView1"
@@ -161,9 +167,9 @@ export default {
 <script lang="ts" setup>
 import wdPopup from '../wd-popup/wd-popup.vue'
 import wdDatetimePickerView from '../wd-datetime-picker-view/wd-datetime-picker-view.vue'
+import wdCell from '../wd-cell/wd-cell.vue'
 import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { deepClone, isArray, isDef, isEqual, isFunction, padZero } from '../common/util'
-import { useCell } from '../composables/useCell'
 import {
   type DatetimePickerViewInstance,
   type DatetimePickerViewColumnFormatter,
@@ -177,7 +183,7 @@ import dayjs from '../../dayjs'
 import { getPickerValue } from '../wd-datetime-picker-view/util'
 
 const props = defineProps(datetimePickerProps)
-const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'update:modelValue'])
+const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'clear', 'update:modelValue'])
 
 const { translate } = useTranslate('datetime-picker')
 
@@ -197,8 +203,6 @@ const hasConfirmed = ref<boolean>(false) // 判断用户是否点击了确认按
 
 const isLoading = ref<boolean>(false) // 加载
 const { proxy } = getCurrentInstance() as any
-
-const cell = useCell()
 
 watch(
   () => props.modelValue,
@@ -325,6 +329,21 @@ const isRequired = computed(() => {
   return props.required || props.rules.some((rule) => rule.required) || formRequired
 })
 
+// 是否展示清除按钮
+const showClear = computed(() => {
+  return (
+    props.clearable &&
+    !props.disabled &&
+    !props.readonly &&
+    ((!isArray(showValue.value) && showValue.value) || (isArray(showValue.value) && (showValue.value[0] || showValue.value[1])))
+  )
+})
+
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly && !showClear.value
+})
+
 /**
  * @description 处理时间边界值判断
  * @param isStart 是否是开始时间
@@ -432,8 +451,8 @@ const customColumnFormatter: DatetimePickerViewColumnFormatter = (picker) => {
   const start = picker.correctValue(innerValue.value)
   const end = picker.correctValue(endInnerValue.value)
 
-  const currentValue = startSymbol ? picker.getPickerValue(start, type) : picker.getPickerValue(end, type)
-  const boundary = startSymbol ? picker.getPickerValue(end, type) : picker.getPickerValue(start, type)
+  const currentValue = startSymbol ? getPickerValue(start, type) : getPickerValue(end, type)
+  const boundary = startSymbol ? getPickerValue(end, type) : getPickerValue(start, type)
   const columns = picker.getOriginColumns()
 
   return columns.map((column, _) => {
@@ -545,8 +564,8 @@ function onChangeStart({ value }: { value: number | string }) {
 
   if (region.value) {
     // 区间选择才需要处理边界值
-    const currentArray = datetimePickerView.value.getPickerValue(value, props.type)
-    const boundaryArray = datetimePickerView.value.getPickerValue(endInnerValue.value, props.type)
+    const currentArray = getPickerValue(value, props.type)
+    const boundaryArray = getPickerValue(endInnerValue.value, props.type)
     const columns = datetimePickerView.value.getOriginColumns()
 
     // 检查是否有任何列超出边界
@@ -580,8 +599,8 @@ function onChangeStart({ value }: { value: number | string }) {
 function onChangeEnd({ value }: { value: number | string }) {
   if (!datetimePickerView.value || !datetimePickerView1.value) return
 
-  const currentArray = datetimePickerView1.value.getPickerValue(value, props.type)
-  const boundaryArray = datetimePickerView1.value.getPickerValue(innerValue.value, props.type)
+  const currentArray = getPickerValue(value, props.type)
+  const boundaryArray = getPickerValue(innerValue.value, props.type)
   const columns = datetimePickerView1.value.getOriginColumns()
 
   // 检查是否有任何列超出边界
@@ -751,6 +770,7 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
       time: props.useSecond ? ['hour', 'minute', 'second'] : ['hour', 'minute'],
       'year-month': ['year', 'month']
     }
+
     return items
       .map((item, index) => {
         return props.formatter!(typeMaps[props.type][index], item.value)
@@ -776,6 +796,12 @@ function defaultDisplayFormat(items: Record<string, any>[], tabLabel: boolean = 
 
 function setLoading(loading: boolean) {
   isLoading.value = loading
+}
+
+function handleClear() {
+  emit('clear')
+  emit('update:modelValue', '')
+  setShowValue(false, true)
 }
 
 defineExpose<DatetimePickerExpose>({

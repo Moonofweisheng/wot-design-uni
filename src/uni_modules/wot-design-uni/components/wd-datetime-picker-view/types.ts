@@ -108,7 +108,6 @@ export type DatetimePickerViewExpose = {
   setColumns: (columnList: DatetimePickerViewOption[][]) => void
   getSelects: () => Record<string, any> | Record<string, any>[] | undefined
   correctValue: (value: string | number) => string | number
-  getPickerValue: (value: string | number, type: DateTimeType) => number[]
   getOriginColumns: () => {
     type: DatetimePickerViewColumnType
     values: number[]

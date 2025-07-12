@@ -322,46 +322,46 @@ function handleConfirm({ value, selectedItems }) {
 
 ## Attributes
 
-| 参数                   | 说明                                                                                                     | 类型                              | 可选值           | 默认值   | 最低版本         |
-| ---------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------- | ---------------- | -------- | ---------------- |
-| v-model                | 选中项，`type`类型为`checkbox`时，类型为 array；`type`为`radio` 时 ，类型为 number / boolean / string    | array / number / boolean / string | -                | -        | -                |
-| columns                | 选择器数据，一维数组                                                                                     | array                             | -                | -        | -                |
-| type                   | 单复选选择器类型                                                                                         | string                            | checkbox / radio | checkbox | -                |
-| value-key              | 选项对象中，value 对应的 key                                                                             | string                            | -                | value    | -                |
-| label-key              | 选项对象中，展示的文本对应的 key                                                                         | string                            | -                | label    | -                |
-| title                  | 弹出层标题                                                                                               | string                            | -                | -        | -                |
-| label                  | 选择器左侧文案                                                                                           | string                            | -                | -        | -                |
-| placeholder            | 选择器占位符                                                                                             | string                            | -                | 请选择   | -                |
-| disabled               | 禁用                                                                                                     | boolean                           | -                | false    | -                |
-| loading                | 加载中                                                                                                   | boolean                           | -                | false    | -                |
-| loading-color          | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写                                                   | String                            | -                | #4D80F0  | -                |
-| readonly               | 只读                                                                                                     | boolean                           | -                | false    | -                |
-| display-format         | 自定义展示文案的格式化函数，返回一个字符串                                                               | function                          | -                | -        | -                |
-| confirm-button-text    | 确认按钮文案                                                                                             | string                            | -                | 确认     | -                |
-| size                   | 设置选择器大小                                                                                           | string                            | large            | -        | -                |
-| label-width            | 设置左侧标题宽度                                                                                         | string                            | -                | 33%      | -                |
-| error                  | 是否为错误状态，错误状态时右侧内容为红色                                                                 | boolean                           | -                | false    | -                |
-| required               | 必填样式                                                                                                 | boolean                           | -                | false    | -                |
-| align-right            | 选择器的值靠右展示                                                                                       | boolean                           | -                | false    | -                |
-| before-confirm         | 确定前校验函数，接收 (value, resolve) 参数，通过 resolve 继续执行 picker，resolve 接收 1 个 boolean 参数 | function                          | -                | -        | -                |
-| select-size            | 设置 picker 内部的选项组尺寸大小 （单/复选框）                                                           | string                            | large            | -        | -                |
-| min                    | 最小选中的数量（仅在复选框类型下生效，`type`类型为`checkbox`）                                           | number                            | -                | 0        | -                |
-| max                    | 最大选中的数量，0 为无限数量，默认为 0（仅在复选框类型下生效，`type`类型为`checkbox`）                   | number                            | -                | 0        | -                |
-| checked-color          | 选中的颜色（单/复选框）                                                                                  | string                            | -                | #4D80F0  | -                |
-| use-default-slot       | 使用默认插槽时设置该选项                                                                                 | boolean                           | -                | false    | -                |
-| use-label-slot         | 使用 label 插槽时设置该选项                                                                              | boolean                           | -                | false    | -                |
-| close-on-click-modal   | 点击遮罩是否关闭                                                                                         | boolean                           | -                | true     | -                |
-| z-index                | 弹窗层级                                                                                                 | number                            | -                | 15       | -                |
-| safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型）                                                      | boolean                           | -                | true     | -                |
-| filterable             | 可搜索（目前只支持本地搜索）                                                                             | boolean                           | -                | false    | -                |
-| filter-placeholder     | 搜索框占位符                                                                                             | string                            | -                | 搜索     | -                |
-| ellipsis               | 是否超出隐藏                                                                                             | boolean                           | -                | false    | -                |
-| scroll-into-view       | 重新打开是否滚动到选中项                                                                                 | boolean                           | -                | true     | 0.1.34           |
-| show-confirm           | 是否显示确认按钮（仅`radio`类型生效）                                                                    | boolean                           |                  | true     | 1.2.8            |
-| prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                        | string                            | -                | -        | -                |
-| rules                  | 表单验证规则，结合`wd-form`组件使用                                                                      | `FormItemRule []`                 | -                | `[]`     | -                |
-| clearable              | 显示清空按钮                                                                                             | boolean                           | -                | false    | 1.3.13 |
-| root-portal            | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                                                       | boolean                           | -                | false    | $LOWEST_VERSION$ |
+| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
+|------|------|------|--------|--------|----------|
+| v-model | 选中项，`type`为`checkbox`时类型为array；`type`为`radio`时类型为number/boolean/string | array/number/boolean/string | - | - | - |
+| columns | 选择器数据，一维数组 | array | - | - | - |
+| type | 单复选选择器类型 | string | checkbox/radio | checkbox | - |
+| value-key | 选项对象中value对应的key | string | - | value | - |
+| label-key | 选项对象中展示文本对应的key | string | - | label | - |
+| title | 弹出层标题 | string | - | - | - |
+| label | 选择器左侧文案 | string | - | - | - |
+| placeholder | 选择器占位符 | string | - | 请选择 | - |
+| disabled | 禁用 | boolean | - | false | - |
+| loading | 加载中 | boolean | - | false | - |
+| loading-color | 加载颜色（十六进制，不能缩写） | String | - | #4D80F0 | - |
+| readonly | 只读 | boolean | - | false | - |
+| display-format | 自定义展示文案的格式化函数 | function | - | - | - |
+| confirm-button-text | 确认按钮文案 | string | - | 确认 | - |
+| size | 选择器大小 | string | large | - | - |
+| label-width | 左侧标题宽度 | string | - | 33% | - |
+| error | 错误状态（右侧内容红色） | boolean | - | false | - |
+| required | 必填样式 | boolean | - | false | - |
+| align-right | 值靠右展示 | boolean | - | false | - |
+| before-confirm | 确定前校验函数，接收(value,resolve)参数 | function | - | - | - |
+| select-size | picker内部选项组尺寸 | string | large | - | - |
+| min | 最小选中数量（仅checkbox） | number | - | 0 | - |
+| max | 最大选中数量（0为无限，仅checkbox） | number | - | 0 | - |
+| checked-color | 选中颜色（单/复选框） | string | - | #4D80F0 | - |
+| use-default-slot | 使用默认插槽 | boolean | - | false | - |
+| use-label-slot | 使用label插槽 | boolean | - | false | - |
+| close-on-click-modal | 点击遮罩关闭 | boolean | - | true | - |
+| z-index | 弹窗层级 | number | - | 15 | - |
+| safe-area-inset-bottom | 底部安全距离（iPhone X类机型） | boolean | - | true | - |
+| filterable | 可搜索（仅本地） | boolean | - | false | - |
+| filter-placeholder | 搜索框占位符 | string | - | 搜索 | - |
+| ellipsis | 超出隐藏 | boolean | - | false | - |
+| scroll-into-view | 重新打开时滚动到选中项 | boolean | - | true | 0.1.34 |
+| show-confirm | 是否显示确认按钮（仅radio） | boolean | - | true | 1.2.8 |
+| prop | 表单域model字段名（校验必填） | string | - | - | - |
+| rules | 表单验证规则（配合wd-form） | `FormItemRule[]` | - | `[]` | - |
+| clearable | 显示清空按钮 | boolean | - | false | $LOWEST_VERSION$ |
+| root-portal | 脱离页面解决fixed失效问题 | boolean | - | false | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 
@@ -389,7 +389,7 @@ function handleConfirm({ value, selectedItems }) {
 | cancel   | 点击关闭按钮或者蒙层时触发 | -                                                                                                          | -        |
 | close    | 弹窗关闭时触发             | -                                                                                                          | 1.2.29   |
 | open     | 弹窗打开时触发             | -                                                                                                          | 1.2.29   |
-| clear    | 点击清空按钮时触发     | -                                                                                                    | 1.3.13    |
+| clear    | 点击清空按钮时触发     | -                                                                                                    | $LOWEST_VERSION$    |
 
 ## Methods
 

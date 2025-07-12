@@ -252,6 +252,8 @@ Set the `label-key` property to customize the key name of the option label.
 | display-format | Display format function | function | - | - |
 | close-on-click-modal | Whether to close when clicking modal | boolean | true | - |
 | safe-area-inset-bottom | Whether to enable bottom safe area adaptation | boolean | true | - |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | false | $LOWEST_VERSION$ |
+| clearable | Show clear button | boolean | false | $LOWEST_VERSION$ |
 
 ## Events
 
@@ -262,6 +264,7 @@ Set the `label-key` property to customize the key name of the option label.
 | change | Triggered when value changes | value | - |
 | focus | Triggered when focusing | - | - |
 | blur | Triggered when blurring | - | - |
+| clear | Triggered when clicking clear button | - | $LOWEST_VERSION$ |
 
 ## Methods
 
