@@ -188,7 +188,11 @@ export const datetimePickerProps = {
   /**
    * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
    */
-  rootPortal: makeBooleanProp(false)
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 显示清空按钮
+   */
+  clearable: makeBooleanProp(false)
 }
 
 export type DatetimePickerDisplayFormat = (items: Record<string, any>[]) => string

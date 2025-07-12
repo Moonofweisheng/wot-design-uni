@@ -1,7 +1,6 @@
 <template>
   <page-wraper>
-    <wd-toast />
-    <view style="margin: 20px 0">
+    <view>
       <wd-cell-group border>
         <wd-select-picker :label="$t('xuan-ze-di-zhi')" v-model="value1" :columns="columns1" @confirm="handleConfirm1" />
         <wd-select-picker :label="$t('lei-xing-qie-huan')" type="radio" v-model="value2" :columns="columns1" @confirm="handleConfirm2" />
@@ -66,6 +65,7 @@
         </wd-select-picker>
       </view>
     </demo-block>
+    <wd-toast />
   </page-wraper>
 </template>
 <script lang="ts" setup>

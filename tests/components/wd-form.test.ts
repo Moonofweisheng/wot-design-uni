@@ -356,7 +356,7 @@ describe('WdForm 和 WdFormItem', () => {
     expect(result.valid).toBe(false)
     expect(result.errors[0].message).toBe('请选择水果')
     await nextTick()
-    expect(wrapper.find('.wd-select-picker__error-message').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(true)
 
     // Set value and validate again
     const vm = wrapper.vm as any
@@ -365,7 +365,7 @@ describe('WdForm 和 WdFormItem', () => {
     const result2 = await form.vm.validate()
     expect(result2.valid).toBe(true)
     await nextTick()
-    expect(wrapper.find('.wd-select-picker__error-message').exists()).toBe(false)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(false)
   })
 
   // 测试与 WdPicker 集成
@@ -402,7 +402,7 @@ describe('WdForm 和 WdFormItem', () => {
     expect(result.valid).toBe(false)
     expect(result.errors[0].message).toBe('请选择城市')
     await nextTick()
-    expect(wrapper.find('.wd-picker__error-message').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(true)
 
     // Set value and validate again
     const vm = wrapper.vm as any
@@ -411,7 +411,7 @@ describe('WdForm 和 WdFormItem', () => {
     const result2 = await form.vm.validate()
     expect(result2.valid).toBe(true)
     await nextTick()
-    expect(wrapper.find('.wd-picker__error-message').exists()).toBe(false)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(false)
   })
 
   // 测试与 WdTextarea 集成
@@ -487,7 +487,7 @@ describe('WdForm 和 WdFormItem', () => {
     expect(result.valid).toBe(false)
     expect(result.errors[0].message).toBe('请选择日期')
     await nextTick()
-    expect(wrapper.find('.wd-calendar__error-message').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(true)
 
     // Set value and validate again
     const vm = wrapper.vm as any
@@ -496,7 +496,7 @@ describe('WdForm 和 WdFormItem', () => {
     const result2 = await form.vm.validate()
     expect(result2.valid).toBe(true)
     await nextTick()
-    expect(wrapper.find('.wd-calendar__error-message').exists()).toBe(false)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(false)
   })
 
   // 测试与 WdDatetimePicker 集成
@@ -529,7 +529,7 @@ describe('WdForm 和 WdFormItem', () => {
     expect(result.valid).toBe(false)
     expect(result.errors[0].message).toBe('请选择日期时间')
     await nextTick()
-    expect(wrapper.find('.wd-picker__error-message').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(true)
 
     // Set value and validate again
     const vm = wrapper.vm as any
@@ -538,7 +538,7 @@ describe('WdForm 和 WdFormItem', () => {
     const result2 = await form.vm.validate()
     expect(result2.valid).toBe(true)
     await nextTick()
-    expect(wrapper.find('.wd-picker__error-message').exists()).toBe(false)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(false)
   })
 
   // 测试与 WdColPicker 集成
@@ -580,7 +580,7 @@ describe('WdForm 和 WdFormItem', () => {
     expect(result.valid).toBe(false)
     expect(result.errors[0].message).toBe('请选择地区')
     await nextTick()
-    expect(wrapper.find('.wd-col-picker__error-message').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(true)
 
     // Set value and validate again
     const vm = wrapper.vm as any
@@ -589,7 +589,7 @@ describe('WdForm 和 WdFormItem', () => {
     const result2 = await form.vm.validate()
     expect(result2.valid).toBe(true)
     await nextTick()
-    expect(wrapper.find('.wd-col-picker__error-message').exists()).toBe(false)
+    expect(wrapper.find('.wd-cell__error-message').exists()).toBe(false)
   })
 
   // 测试与 WdCheckboxGroup 集成

@@ -1,6 +1,5 @@
 <template>
   <page-wraper>
-    <wd-toast />
     <demo-block transparent>
       <wd-cell-group border>
         <wd-datetime-picker :label="$t('ri-qi-xuan-ze')" v-model="value1" @confirm="handleConfirm1" />
@@ -32,6 +31,24 @@
     <demo-block :title="$t('da-xiao')" transparent>
       <wd-datetime-picker :label="$t('ri-qi-xuan-ze-0')" size="large" v-model="value12" @confirm="handleConfirm12" />
     </demo-block>
+    <demo-block :title="$t('ke-qing-kong')" transparent>
+      <wd-cell-group border>
+        <wd-datetime-picker
+          :label="$t('ri-qi-xuan-ze-ke-qing-kong')"
+          v-model="valueClear1"
+          clearable
+          @clear="handleClear1"
+          @confirm="handleConfirmClear1"
+        />
+        <wd-datetime-picker
+          :label="$t('qu-yu-xuan-ze-ke-qing-kong')"
+          v-model="valueClear2"
+          clearable
+          @clear="handleClear2"
+          @confirm="handleConfirmClear2"
+        />
+      </wd-cell-group>
+    </demo-block>
     <demo-block :title="$t('zhi-kao-you-zhan-shi')" transparent>
       <wd-datetime-picker :label="$t('ri-qi-xuan-ze-1')" align-right v-model="value13" @confirm="handleConfirm13" />
     </demo-block>
@@ -52,6 +69,7 @@
         :display-format-tab-label="displayFormatTabLabel"
       />
     </demo-block>
+    <wd-toast />
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -86,24 +104,32 @@ const value16 = ref(Date.now())
 const value17 = ref(Date.now())
 const value18 = ref(Date.now())
 const value19 = ref('09:20:26')
+const valueClear1 = ref<number>(Date.now())
+const valueClear2 = ref<any[]>([Date.now(), Date.now()])
 const minDate = ref<number>(Date.now())
 const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
 
 const formatter: DatetimePickerViewFormatter = (type, value) => {
+  let formatValue = ''
+
   switch (type) {
     case 'year':
-      return value + t('nian-0')
+      formatValue = value + t('nian-0')
+      break
     case 'month':
-      return value + t('yue')
+      formatValue = value + t('yue')
+      break
     case 'date':
-      return value + t('ri')
+      formatValue = value + t('ri')
+      break
     case 'hour':
-      return value + t('shi')
+      formatValue = value + t('shi')
+      break
     case 'minute':
-      return value + t('fen')
-    default:
-      return value
+      formatValue = value + t('fen')
+      break
   }
+  return formatValue
 }
 const filter: DatetimePickerViewFilter = (type, values) => {
   if (type === 'minute') {
@@ -192,6 +218,22 @@ function handleConfirm15({ value }: any) {
 }
 function handleConfirm16({ value }: any) {
   console.log(value)
+}
+
+function handleClear1() {
+  console.log('datetime picker 1 cleared')
+}
+
+function handleConfirmClear1({ value }: any) {
+  console.log('datetime picker 1 confirmed:', value)
+}
+
+function handleClear2() {
+  console.log('datetime picker 2 cleared')
+}
+
+function handleConfirmClear2({ value }: any) {
+  console.log('datetime picker 2 confirmed:', value)
 }
 /** picker触发cancel事件，同步触发cancel事件 */
 function onCancel() {}

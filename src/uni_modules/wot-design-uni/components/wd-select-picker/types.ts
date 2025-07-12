@@ -24,12 +24,22 @@ export const selectPickerProps = {
   error: makeBooleanProp(false),
   /** 必填样式 */
   required: makeBooleanProp(false),
-  /** 使用 label 插槽时设置该选项 */
+  /**
+   * 使用 label 插槽时设置该选项
+   * @deprecated 可以直接使用标签插槽，无需配置此选项
+   */
   useLabelSlot: makeBooleanProp(false),
-  /** 使用默认插槽时设置该选项 */
+  /**
+   * 使用默认插槽时设置该选项
+   * @deprecated 可以直接使用默认插槽，无需配置此选项
+   */
   useDefaultSlot: makeBooleanProp(false),
   /** 设置选择器大小 */
   size: String,
+  /**
+   * 是否垂直居中
+   */
+  center: makeBooleanProp(false),
   /** 选中的颜色（单/复选框） */
   checkedColor: String,
   /** 最小选中的数量（仅在复选框类型下生效，`type`类型为`checkbox`） */

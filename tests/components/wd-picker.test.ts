@@ -38,7 +38,8 @@ describe('WdPicker', () => {
         label
       }
     })
-    expect(wrapper.find('.wd-picker__label').text()).toBe(label)
+    // Picker使用wd-cell，检查cell的title属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('title')).toBe(label)
   })
 
   // 测试占位符
@@ -49,7 +50,8 @@ describe('WdPicker', () => {
         placeholder
       }
     })
-    expect(wrapper.find('.wd-picker__value').text()).toBe(placeholder)
+    // 检查cell的value属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('value')).toBe(placeholder)
   })
 
   // 测试自定义类名
@@ -115,7 +117,8 @@ describe('WdPicker', () => {
         labelWidth
       }
     })
-    expect(wrapper.find('.wd-picker__label').attributes('style')).toContain(labelWidth)
+    // 检查cell组件的titleWidth属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('titleWidth')).toBe(labelWidth)
   })
 
   // 测试单列数据

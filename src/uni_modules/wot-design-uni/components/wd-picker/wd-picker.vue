@@ -1,34 +1,43 @@
 <template>
   <view
-    :class="`wd-picker ${disabled ? 'is-disabled' : ''} ${size ? 'is-' + size : ''}  ${cell.border.value ? 'is-border' : ''} ${
-      alignRight ? 'is-align-right' : ''
-    } ${error ? 'is-error' : ''} ${customClass}`"
+    :class="`wd-picker ${disabled ? 'is-disabled' : ''} ${size ? 'is-' + size : ''} ${alignRight ? 'is-align-right' : ''} ${
+      error ? 'is-error' : ''
+    } ${customClass}`"
     :style="customStyle"
   >
-    <view class="wd-picker__field" @click="showPopup">
-      <slot v-if="useDefaultSlot"></slot>
-      <view v-else class="wd-picker__cell">
-        <view
-          v-if="label || useLabelSlot"
-          :class="`wd-picker__label ${customLabelClass}  ${isRequired ? 'is-required' : ''}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <template v-if="label">{{ label }}</template>
-          <slot v-else name="label"></slot>
+    <wd-cell
+      v-if="!$slots.default"
+      :title="label"
+      :value="showValue ? showValue : placeholder || translate('placeholder')"
+      :required="required"
+      :size="size"
+      :title-width="labelWidth"
+      :prop="prop"
+      :rules="rules"
+      :clickable="!disabled && !readonly"
+      :value-align="alignRight ? 'right' : 'left'"
+      :custom-class="`wd-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'} ${
+        !showValue ? 'wd-picker__cell--placeholder' : ''
+      }`"
+      :custom-style="customStyle"
+      :custom-title-class="customLabelClass"
+      :custom-value-class="customValueClass"
+      :ellipsis="ellipsis"
+      :use-title-slot="!!$slots.label"
+      @click="showPopup"
+    >
+      <template v-if="$slots.label" #title>
+        <slot name="label"></slot>
+      </template>
+      <template #right-icon>
+        <wd-icon v-if="showArrow" custom-class="wd-picker__arrow" name="arrow-right" />
+        <view v-else-if="showClear" @click.stop="handleClear">
+          <wd-icon custom-class="wd-picker__clear" name="error-fill" />
         </view>
-        <view class="wd-picker__body">
-          <view class="wd-picker__value-wraper">
-            <view :class="`wd-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${showValue ? '' : 'wd-picker__placeholder'}`">
-              {{ showValue ? showValue : placeholder || translate('placeholder') }}
-            </view>
-            <wd-icon v-if="showArrow" custom-class="wd-picker__arrow" name="arrow-right" />
-            <view v-else-if="showClear" @click.stop="handleClear">
-              <wd-icon custom-class="wd-picker__clear" name="error-fill" />
-            </view>
-          </view>
-          <view v-if="errorMessage" class="wd-picker__error-message">{{ errorMessage }}</view>
-        </view>
-      </view>
+      </template>
+    </wd-cell>
+    <view v-else @click="showPopup">
+      <slot></slot>
     </view>
     <wd-popup
       v-model="popupShow"
@@ -87,9 +96,9 @@ export default {
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
 import wdPickerView from '../wd-picker-view/wd-picker-view.vue'
+import wdCell from '../wd-cell/wd-cell.vue'
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
 import { deepClone, defaultDisplayFormat, getType, isArray, isDef, isFunction } from '../common/util'
-import { useCell } from '../composables/useCell'
 import { type ColumnItem, formatArray, type PickerViewInstance } from '../wd-picker-view/types'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
@@ -101,7 +110,6 @@ const props = defineProps(pickerProps)
 const emit = defineEmits(['confirm', 'open', 'cancel', 'clear', 'update:modelValue'])
 
 const pickerViewWd = ref<PickerViewInstance | null>(null)
-const cell = useCell()
 
 const innerLoading = ref<boolean>(false) // 内部控制是否loading
 
@@ -181,29 +189,14 @@ watch(
   }
 )
 
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
+// 是否展示清除按钮
+const showClear = computed(() => {
+  return props.clearable && !props.disabled && !props.readonly && showValue.value.length > 0
 })
 
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly && !showClear.value
 })
 
 const { proxy } = getCurrentInstance() as any
@@ -394,21 +387,11 @@ function setLoading(loading: boolean) {
   innerLoading.value = loading
 }
 
-// 是否展示清除按钮
-const showClear = computed(() => {
-  return props.clearable && !props.disabled && !props.readonly && showValue.value.length
-})
-
 function handleClear() {
   const clearValue = isArray(pickerValue.value) ? [] : ''
   emit('update:modelValue', clearValue)
   emit('clear')
 }
-
-// 是否展示箭头
-const showArrow = computed(() => {
-  return !props.disabled && !props.readonly && !showClear.value
-})
 
 defineExpose<PickerExpose>({
   close,

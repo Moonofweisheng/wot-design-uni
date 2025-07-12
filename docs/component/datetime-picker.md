@@ -318,6 +318,7 @@ const displayFormatTabLabel = (items) => {
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
 | immediate-change | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。 | boolean | - | false | 1.2.25 |
 | use-second | 是否显示秒选择，仅在 time 和 datetime 类型下生效 | boolean | - | false | 1.10.0 |
+| clearable | 显示清空按钮 | boolean | - | false | $LOWEST_VERSION$ |
 | root-portal | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | - | false | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
@@ -336,6 +337,7 @@ const displayFormatTabLabel = (items) => {
 | confirm | 点击右侧按钮触发 | `{ value }`, value 为当前选中日期的时间戳，'time' 类型则为字符串 | - |
 | cancel | 点击左侧按钮触发 | - | - |
 | toggle | 在区域选择模式下，tab标签切换时触发 | 切换到当前picker选中的值 | - |
+| clear | 点击清空按钮触发 | - | $LOWEST_VERSION$ |
 
 ## Methods
 

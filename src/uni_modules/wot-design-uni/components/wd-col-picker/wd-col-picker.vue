@@ -1,33 +1,35 @@
 <template>
-  <view :class="`wd-col-picker ${cell.border.value ? 'is-border' : ''} ${customClass}`" :style="customStyle">
-    <view class="wd-col-picker__field" @click="showPicker">
-      <slot v-if="useDefaultSlot"></slot>
-      <view
-        v-else
-        :class="`wd-col-picker__cell ${disabled && 'is-disabled'} ${props.readonly && 'is-readonly'} ${alignRight && 'is-align-right'} ${
-          error && 'is-error'
-        }  ${size && 'is-' + size}`"
-      >
-        <view
-          v-if="label || useLabelSlot"
-          :class="`wd-col-picker__label ${isRequired && 'is-required'} ${customLabelClass}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <block v-if="label">{{ label }}</block>
-          <slot v-else name="label"></slot>
-        </view>
-        <view class="wd-col-picker__body">
-          <view class="wd-col-picker__value-wraper">
-            <view
-              :class="`wd-col-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${showValue ? '' : 'wd-col-picker__value--placeholder'}`"
-            >
-              {{ showValue || placeholder || translate('placeholder') }}
-            </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-col-picker__arrow" name="arrow-right" />
-          </view>
-          <view v-if="errorMessage" class="wd-col-picker__error-message">{{ errorMessage }}</view>
-        </view>
-      </view>
+  <view :class="`wd-col-picker ${customClass}`" :style="customStyle">
+    <wd-cell
+      v-if="!$slots.default"
+      :title="label"
+      :value="showValue || placeholder || translate('placeholder')"
+      :required="isRequired"
+      :size="size"
+      :title-width="labelWidth"
+      :prop="prop"
+      :rules="rules"
+      :clickable="!disabled && !readonly"
+      :value-align="alignRight ? 'right' : 'left'"
+      :custom-class="`wd-col-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'} ${
+        !showValue ? 'wd-col-picker__cell--placeholder' : ''
+      }`"
+      :custom-style="customStyle"
+      :custom-title-class="customLabelClass"
+      :custom-value-class="customValueClass"
+      :ellipsis="ellipsis"
+      :use-title-slot="!!$slots.label"
+      @click="showPicker"
+    >
+      <template v-if="$slots.label" #title>
+        <slot name="label"></slot>
+      </template>
+      <template #right-icon>
+        <wd-icon v-if="showArrow" custom-class="wd-col-picker__arrow" name="arrow-right" />
+      </template>
+    </wd-cell>
+    <view v-else @click="showPicker">
+      <slot></slot>
     </view>
     <wd-action-sheet
       v-model="pickerShow"
@@ -100,9 +102,9 @@ export default {
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdLoading from '../wd-loading/wd-loading.vue'
 import wdActionSheet from '../wd-action-sheet/wd-action-sheet.vue'
+import wdCell from '../wd-cell/wd-cell.vue'
 import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties, reactive, nextTick } from 'vue'
 import { addUnit, debounce, getRect, isArray, isBoolean, isDef, isFunction, objToStyle } from '../common/util'
-import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
@@ -134,8 +136,6 @@ const state = reactive({
 })
 
 const { proxy } = getCurrentInstance() as any
-
-const cell = useCell()
 
 const updateLineAndScroll = debounce(function (animation = true) {
   setLineStyle(animation)
@@ -264,6 +264,11 @@ const isRequired = computed(() => {
     }
   }
   return props.required || props.rules.some((rule) => rule.required) || formRequired
+})
+
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly
 })
 
 onMounted(() => {

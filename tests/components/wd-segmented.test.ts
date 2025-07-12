@@ -11,7 +11,7 @@ describe('分段器组件', () => {
       let isSelectAll = false
       let boundingClientRectCallback: ((rect: any) => void) | null = null
 
-      const mockQuery = {
+      const mockQuery: any = {
         // 简化 in 方法，直接返回 mockQuery 自身
         in: vi.fn(() => {
           return mockQuery

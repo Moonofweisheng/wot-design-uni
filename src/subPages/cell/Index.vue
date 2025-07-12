@@ -3,15 +3,15 @@
     <wd-toast />
     <demo-block :title="$t('jiBenYongFa')" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi')" value="内容" />
-        <wd-cell :title="$t('biao-ti-wen-zi-0')" :label="$t('miaoShuXinXi-0')" value="内容" />
+        <wd-cell :title="$t('biao-ti-wen-zi')" :value="$t('nei-rong')" />
+        <wd-cell :title="$t('biao-ti-wen-zi-0')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
       </wd-cell-group>
     </demo-block>
 
     <demo-block :title="$t('tu-biao')" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi-1')" value="内容" icon="setting" />
-        <wd-cell :title="$t('biao-ti-wen-zi-2')" value="内容">
+        <wd-cell :title="$t('biao-ti-wen-zi-1')" :value="$t('nei-rong')" icon="setting" />
+        <wd-cell :title="$t('biao-ti-wen-zi-2')" :value="$t('nei-rong')">
           <template #icon>
             <view class="cell-icon"></view>
           </template>
@@ -20,49 +20,49 @@
     </demo-block>
 
     <demo-block :title="$t('fen-zu-biao-ti')" transparent>
-      <wd-cell-group :title="$t('jiao-yi-guan-li')" value="内容">
-        <wd-cell :title="$t('biao-ti-wen-zi-3')" value="内容" />
+      <wd-cell-group :title="$t('jiao-yi-guan-li')" :value="$t('nei-rong')">
+        <wd-cell :title="$t('biao-ti-wen-zi-3')" :value="$t('nei-rong')" />
         <wd-cell
           :title="$t('biao-ti-wen-zi-4')"
           :label="$t('huang-he-duan-ji-tou-gu-ren-jin-zai-fou-jiu-jiang-shan-hun-shi-xin-chou-yu-mai-gui-hua-tong-zai-jiu-zhong-bu-si-shao-nian-you')"
-          value="内容"
+          :value="$t('nei-rong')"
         ></wd-cell>
       </wd-cell-group>
     </demo-block>
 
     <demo-block :title="$t('da-chi-cun')" transparent>
       <wd-cell-group>
-        <wd-cell size="large" :title="$t('biao-ti-wen-zi-5')" value="内容" />
-        <wd-cell :title="$t('biao-ti-wen-zi-6')" value="内容" size="large" icon="setting" is-link />
-        <wd-cell size="large" :title="$t('biao-ti-wen-zi-7')" :label="$t('miaoShuXinXi-0')" value="内容" />
+        <wd-cell size="large" :title="$t('biao-ti-wen-zi-5')" :value="$t('nei-rong')" />
+        <wd-cell :title="$t('biao-ti-wen-zi-6')" :value="$t('nei-rong')" size="large" icon="setting" is-link />
+        <wd-cell size="large" :title="$t('biao-ti-wen-zi-7')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
       </wd-cell-group>
     </demo-block>
 
     <demo-block :title="$t('zhan-shi-bian-kuang-xian')" transparent>
       <wd-cell-group :title="$t('jiao-yi-guan-li-0')" border>
-        <wd-cell :title="$t('biao-ti-wen-zi-8')" value="内容" />
-        <wd-cell :border="false" :title="$t('biao-ti-wen-zi-9')" :label="$t('zhe-yi-ge-cell-bu-xiang-yao-bian-kuang')" value="内容" />
-        <wd-cell :title="$t('biao-ti-wen-zi-10')" :label="$t('miaoShuXinXi-0')" value="内容"></wd-cell>
+        <wd-cell :title="$t('biao-ti-wen-zi-8')" :value="$t('nei-rong')" />
+        <wd-cell :border="false" :title="$t('biao-ti-wen-zi-9')" :label="$t('zhe-yi-ge-cell-bu-xiang-yao-bian-kuang')" :value="$t('nei-rong')" />
+        <wd-cell :title="$t('biao-ti-wen-zi-10')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')"></wd-cell>
       </wd-cell-group>
     </demo-block>
 
     <demo-block :title="$t('dian-ji-shi-jian')" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi-11')" value="内容" clickable @click="showToast" />
+        <wd-cell :title="$t('biao-ti-wen-zi-11')" :value="$t('nei-rong')" clickable @click="showToast" />
       </wd-cell-group>
     </demo-block>
 
     <demo-block :title="$t('ye-mian-tiao-zhuan')" transparent>
       <wd-cell-group>
         <wd-cell :title="$t('bang-zhu-yu-fan-kui')" is-link to="/pages/index/Index" />
-        <wd-cell :title="$t('she-zhi')" value="内容" is-link to="/pages/button/Index" replace></wd-cell>
+        <wd-cell :title="$t('she-zhi')" :value="$t('nei-rong')" is-link to="/pages/button/Index" replace></wd-cell>
       </wd-cell-group>
     </demo-block>
 
     <demo-block :title="$t('chui-zhi-ju-zhong')" transparent>
       <wd-cell-group>
-        <wd-cell :title="$t('biao-ti-wen-zi-12')" value="内容" center />
-        <wd-cell :title="$t('biao-ti-wen-zi-13')" :label="$t('miaoShuXinXi-0')" value="内容" center />
+        <wd-cell :title="$t('biao-ti-wen-zi-12')" :value="$t('nei-rong')" center />
+        <wd-cell :title="$t('biao-ti-wen-zi-13')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" center />
       </wd-cell-group>
     </demo-block>
 
@@ -83,7 +83,27 @@
           :title="$t('biao-ti-wen-zi-14')"
           :label="$t('zhe-li-shi-wen-zi-miao-shu-zhe-li-shi-wen-zi-miao-shu-zhe-li-shi-wen-zi-miao-shu')"
           title-width="200px"
-          value="内容"
+          :value="$t('nei-rong')"
+        />
+      </wd-cell-group>
+    </demo-block>
+
+    <demo-block :title="$t('sheng-lve-hao-xian-shi')" transparent>
+      <wd-cell-group>
+        <wd-cell
+          :title="$t('zheng-chang-xian-shi')"
+          :value="$t('zhe-shi-yi-duan-hen-chang-de-wen-zi-nei-rong-tong-chang-qing-kuang-xia-hui-wan-zheng-xian-shi')"
+        />
+        <wd-cell
+          :title="$t('sheng-lve-hao-xian-shi')"
+          :value="$t('zhe-shi-yi-duan-hen-chang-de-wen-zi-nei-rong-dang-qi-yong-ellipsis-shu-xing-shi-chao-chu-bu-fen-jiang-xian-shi-sheng-lve-hao')"
+          ellipsis
+        />
+        <wd-cell
+          :title="$t('zuo-dui-qi-sheng-lve')"
+          :value="$t('zhe-shi-yi-duan-hen-chang-de-wen-zi-nei-rong-zuo-dui-qi-bing-qi-yong-sheng-lve-hao-gong-neng')"
+          value-align="left"
+          ellipsis
         />
       </wd-cell-group>
     </demo-block>

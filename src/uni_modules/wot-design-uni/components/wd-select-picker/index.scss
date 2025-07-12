@@ -3,134 +3,51 @@
 
 .wot-theme-dark {
   @include b(select-picker) {
-    @include when(border) {
-      .wd-select-picker__cell {
-        @include halfPixelBorder('top', $-cell-padding, $-dark-border-color);
-      }
-    }
-
-    @include e(cell) {
-      background-color: $-dark-background2;
-      color: $-dark-color;
-      @include when(disabled) {
-        .wd-select-picker__value {
-          color: $-dark-color3;
-        }
-      }
-    }
-
-    @include e(label) {
-      color: $-dark-color;
-    }
-    @include e(value) {
-      color: $-dark-color;
-      @include m(placeholder) {
-        color: $-dark-color-gray;
-      }
-    }
-
     :deep(.wd-select-picker__arrow),
     :deep(.wd-select-picker__close),
     :deep(.wd-select-picker__clear) {
       color: $-dark-color;
     }
 
+    :deep(.wd-select-picker__cell--placeholder) {
+      .wd-cell__value {
+        color: $-dark-color-gray;
+      }
+    }
   }
-
 }
 
 @include b(select-picker) {
-  @include when(border) {
-    .wd-select-picker__cell {
-      @include halfPixelBorder('top', $-cell-padding);
-    }
-  }
-  @include e(cell) {
-    position: relative;
-    display: flex;
-    padding: $-cell-wrapper-padding $-cell-padding;
-    align-items: flex-start;
-    background-color: $-color-white;
-    text-decoration: none;
-    color: $-cell-title-color;
-    font-size: $-cell-title-fs;
-    overflow: hidden;
-    line-height: $-cell-line-height;
-  }
-  @include e(cell) {
+   @include edeep(cell) {
     @include when(disabled) {
-      .wd-select-picker__value {
+      .wd-cell__value {
         color: $-input-disabled-color;
-      }
-    }
-    @include when(align-right) {
-      .wd-select-picker__value {
-        text-align: right;
+        cursor: not-allowed;
       }
     }
     @include when(error) {
-      .wd-select-picker__value {
+      .wd-cell__value {
         color: $-input-error-color;
       }
-      :deep(.wd-select-picker__arrow) {
+      .wd-select-picker__arrow {
         color: $-input-error-color;
       }
     }
-    @include when(large) {
-      font-size: $-cell-title-fs-large;
 
-      :deep(.wd-select-picker__arrow),
-      :deep(.wd-select-picker__clear) {
+    @include m(placeholder) {
+      .wd-cell__value {
+        color: $-input-placeholder-color;
+      }
+    }
+
+    @include when(large) {
+      .wd-select-picker__arrow,
+      .wd-select-picker__clear {
         font-size: $-cell-icon-size-large;
       }
     }
   }
-  @include e(error-message){
-    color: $-form-item-error-message-color;
-    font-size: $-form-item-error-message-font-size;
-    line-height: $-form-item-error-message-line-height;
-    text-align: left;
-    vertical-align: middle;
-  }
-  @include e(label) {
-    position: relative;
-    width: $-input-cell-label-width;
-    color: $-cell-title-color;
-    margin-right: $-cell-padding;
-    box-sizing: border-box;
-
-    @include when(required) {
-      padding-left: 12px;
-
-      &::after {
-        position: absolute;
-        left: 0;
-        top: 2px;
-        content: '*';
-        font-size: $-cell-required-size;
-        line-height: 1.1;
-        color: $-cell-required-color;
-      }
-    }
-  }
-  @include e(value-wraper) {
-    display: flex;
-  }
-  @include e(value) {
-    flex: 1;
-    margin-right: 10px;
-    color: $-cell-value-color;
-    
-    @include when(ellipsis) {
-      @include lineEllipsis;
-    }
-    @include m(placeholder) {
-      color: $-input-placeholder-color;
-    }
-  }
-  @include e(body) {
-    flex: 1;
-  }
+  
   @include edeep(arrow, clear) {
     display: block;
     font-size: $-cell-icon-size;
@@ -154,7 +71,7 @@
     z-index: 3;
     background: $-picker-loading-bg;
   }
-  // selectPiceker多出的样式
+  
   @include edeep(header) {
     height: 72px;
     line-height: 72px;

@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { dayjs } from '../common/dayjs'
+import dayjs from '../../dayjs'
 import { isArray, isFunction, padZero } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import type { CalendarDayType, CalendarItem, CalendarTimeFilter, CalendarType } from './types'

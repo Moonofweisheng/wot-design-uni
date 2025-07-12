@@ -525,7 +525,6 @@ defineExpose<DatetimePickerViewExpose>({
   setColumns,
   getSelects,
   correctValue,
-  getPickerValue,
   getOriginColumns
 })
 </script>

@@ -4,7 +4,6 @@ import { type DateTimeType } from './types'
  * @description 根据传入的值和类型，获取当前的选项数组，便于传入 pickerView
  * @param value
  * @param type picker类型
- * @return {Array} pickerValue
  */
 export function getPickerValue(value: string | number, type: DateTimeType) {
   const values: number[] = []
