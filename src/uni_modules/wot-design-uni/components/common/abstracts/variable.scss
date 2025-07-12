@@ -191,6 +191,7 @@ $-cell-title-color: var(--wot-cell-title-color, rgba(0, 0, 0, 0.85)) !default; /
 $-cell-label-fs: var(--wot-cell-label-fs, 12px) !default; // 描述信息字号
 $-cell-label-color: var(--wot-cell-label-color, rgba(0, 0, 0, 0.45)) !default; // 描述信息文字颜色
 $-cell-value-fs: var(--wot-cell-value-fs, 14px) !default; // 右侧内容字号
+$-cell-value-fs-large: var(--wot-cell-value-fs-large, 16px) !default; // 大尺寸右侧内容字号
 $-cell-value-color: var(--wot-cell-value-color, rgba(0, 0, 0, 0.85)) !default; // 右侧内容文字颜色
 $-cell-arrow-size: var(--wot-cell-arrow-size, 18px) !default; // 右箭头大小
 $-cell-arrow-color: var(--wot-cell-arrow-color, rgba(0, 0, 0, 0.25)) !default; // 右箭头颜色

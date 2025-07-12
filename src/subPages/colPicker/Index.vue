@@ -1,7 +1,6 @@
 <template>
   <page-wraper>
-    <wd-toast />
-    <view style="margin: 20px 0">
+    <view>
       <wd-cell-group border>
         <wd-col-picker :label="$t('xuan-ze-di-zhi')" v-model="value1" :columns="areaData1" :column-change="columnChange1" @confirm="handleValue" />
         <wd-col-picker :label="$t('chu-shi-xuan-xiang')" v-model="value2" :columns="areaData2" :column-change="columnChange" auto-complete />
@@ -41,6 +40,7 @@
     <demo-block :title="$t('zhi-kao-you-zhan-shi')" transparent>
       <wd-col-picker :label="$t('xuan-ze-di-zhi')" align-right v-model="value14" :columns="areaData1" :column-change="columnChange1" />
     </demo-block>
+
     <demo-block :title="$t('zi-ding-yi-xuan-ze-qi')" transparent>
       <view style="margin-left: 15px">
         <view style="margin-bottom: 10px"></view>
@@ -58,6 +58,7 @@
         </wd-col-picker>
       </view>
     </demo-block>
+    <wd-toast />
   </page-wraper>
 </template>
 <script lang="ts" setup>

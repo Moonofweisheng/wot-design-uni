@@ -7,7 +7,7 @@
     color: $-dark-color;
 
     @include e(value) {
-      color: $-dark-color3;
+      color: $-dark-color;
     }
 
     @include e(label) {
@@ -38,6 +38,9 @@
   color: $-cell-title-color;
   line-height: $-cell-line-height;
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
 
   @include when(border) {
     .wd-cell__wrapper {
@@ -51,6 +54,7 @@
     padding: $-cell-wrapper-padding $-cell-padding $-cell-wrapper-padding 0;
     justify-content: space-between;
     align-items: flex-start;
+    overflow: hidden;
 
     @include when(vertical) {
       display: block;
@@ -99,6 +103,7 @@
   @include e(right) {
     position: relative;
     flex: 1;
+    min-width: 0;
   }
 
   @include e(title) {
@@ -124,6 +129,7 @@
 
   @include e(body){
     display: flex;
+    min-width: 0;
   }
 
   @include e(value) {
@@ -131,8 +137,20 @@
     flex: 1;
     font-size: $-cell-value-fs;
     color: $-cell-value-color;
-    text-align: right;
     vertical-align: middle;
+    
+    @include m(left) {
+      text-align: left;
+    }
+    
+    @include m(right) {
+      text-align: right;
+    }
+    
+    @include m(ellipsis) {
+      @include lineEllipsis;
+      min-width: 0;
+    }
   }
 
   @include edeep(arrow-right) {
@@ -173,6 +191,10 @@
 
     .wd-cell__label {
       font-size: $-cell-label-fs-large;
+    }
+
+    .wd-cell__value {
+      font-size: $-cell-value-fs-large;
     }
 
     :deep(.wd-cell__icon) {

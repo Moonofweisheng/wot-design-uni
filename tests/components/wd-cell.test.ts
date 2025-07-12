@@ -203,7 +203,10 @@ describe('WdCell', () => {
     const titleWidth = '100px'
 
     const wrapper = mount(WdCell, {
-      props: { titleWidth },
+      props: {
+        title: '标题',
+        titleWidth
+      },
       global: {
         components: {
           WdIcon
@@ -212,14 +215,18 @@ describe('WdCell', () => {
     })
 
     const leftElement = wrapper.find('.wd-cell__left')
+    expect(leftElement.exists()).toBe(true)
     expect(leftElement.attributes('style')).toContain('min-width')
-    expect(leftElement.attributes('style')).toContain('max-width:')
+    expect(leftElement.attributes('style')).toContain('max-width')
   })
 
   // 测试必填状态
   test('必填状态', () => {
     const wrapper = mount(WdCell, {
-      props: { required: true },
+      props: {
+        title: '标题',
+        required: true
+      },
       global: {
         components: {
           WdIcon
@@ -227,7 +234,7 @@ describe('WdCell', () => {
       }
     })
 
-    expect(wrapper.find('.is-required').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__left').classes()).toContain('is-required')
   })
 
   // 测试垂直布局
@@ -241,7 +248,7 @@ describe('WdCell', () => {
       }
     })
 
-    expect(wrapper.find('.is-vertical').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__wrapper').classes()).toContain('is-vertical')
   })
 
   // 测试表单验证规则
@@ -250,6 +257,7 @@ describe('WdCell', () => {
 
     const wrapper = mount(WdCell, {
       props: {
+        title: '标题',
         prop: 'name',
         rules
       },
@@ -261,7 +269,7 @@ describe('WdCell', () => {
     })
 
     expect(wrapper.props('rules')).toEqual(rules)
-    expect(wrapper.find('.is-required').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__left').classes()).toContain('is-required')
   })
 
   // 测试插槽
@@ -394,5 +402,61 @@ describe('WdCell', () => {
     })
 
     expect(wrapper.find('.wd-cell__value').classes()).toContain(customValueClass)
+  })
+
+  // 测试ellipsis属性
+  test('ellipsis属性', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        value: '这是一段很长的内容，需要省略号显示',
+        ellipsis: true
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.props('ellipsis')).toBe(true)
+    expect(wrapper.find('.wd-cell__value').classes()).toContain('wd-cell__value--ellipsis')
+  })
+
+  // 测试use-title-slot属性
+  test('use-title-slot属性', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        title: '标题',
+        useTitleSlot: false
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.props('useTitleSlot')).toBe(false)
+  })
+
+  // 测试use-title-slot为true时使用插槽
+  test('use-title-slot为true时使用插槽', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        title: '标题',
+        useTitleSlot: true
+      },
+      slots: {
+        title: '<div class="custom-title-slot">自定义标题插槽</div>'
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.props('useTitleSlot')).toBe(true)
+    expect(wrapper.find('.custom-title-slot').exists()).toBe(true)
   })
 })

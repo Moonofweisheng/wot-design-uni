@@ -63,15 +63,17 @@ export const pickerProps = {
    */
   size: String,
   /**
-   * 标签宽度
+   * 设置左侧标题宽度
    */
-  labelWidth: String,
+  labelWidth: makeStringProp('33%'),
   /**
    * 使用默认插槽
+   * @deprecated 可以直接使用默认插槽，无需配置此选项
    */
   useDefaultSlot: makeBooleanProp(false),
   /**
    * 使用标签插槽
+   * @deprecated 可以直接使用标签插槽，无需配置此选项
    */
   useLabelSlot: makeBooleanProp(false),
   /**
@@ -149,13 +151,13 @@ export const pickerProps = {
    */
   immediateChange: makeBooleanProp(false),
   /**
-   * 显示清空按钮
-   */
-  clearable: makeBooleanProp(false),
-  /**
    * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
    */
-  rootPortal: makeBooleanProp(false)
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 显示清空按钮
+   */
+  clearable: makeBooleanProp(false)
 }
 
 export type PickerProps = ExtractPropTypes<typeof pickerProps>

@@ -1,33 +1,43 @@
 <template>
-  <view :class="`wd-calendar ${cell.border.value ? 'is-border' : ''} ${customClass}`">
-    <view class="wd-calendar__field" @click="open" v-if="withCell">
-      <slot v-if="$slots.default"></slot>
-      <view
-        v-else
-        :class="`wd-calendar__cell ${disabled ? 'is-disabled' : ''} ${props.readonly ? 'is-readonly' : ''} ${alignRight ? 'is-align-right' : ''} ${
-          error ? 'is-error' : ''
-        } ${size ? 'is-' + size : ''} ${center ? 'is-center' : ''}`"
+  <view :class="`wd-calendar ${customClass}`">
+    <template v-if="withCell">
+      <wd-cell
+        v-if="!$slots.default"
+        :title="label"
+        :value="showValue || placeholder || translate('placeholder')"
+        :required="required"
+        :size="size"
+        :title-width="labelWidth"
+        :prop="prop"
+        :rules="rules"
+        :clickable="!disabled && !readonly"
+        :value-align="alignRight ? 'right' : 'left'"
+        :center="center"
+        :custom-class="`wd-calendar__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'} ${
+          !showValue ? 'wd-calendar__cell--placeholder' : ''
+        }`"
+        :custom-style="customStyle"
+        :custom-title-class="customLabelClass"
+        :custom-value-class="customValueClass"
+        :ellipsis="ellipsis"
+        :use-title-slot="!!$slots.label"
+        @click="open"
       >
-        <view
-          v-if="label || $slots.label"
-          :class="`wd-calendar__label ${isRequired ? 'is-required' : ''} ${customLabelClass}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <slot name="label">{{ label }}</slot>
-        </view>
-        <view class="wd-calendar__body">
-          <view class="wd-calendar__value-wraper">
-            <view
-              :class="`wd-calendar__value ${ellipsis ? 'is-ellipsis' : ''} ${customValueClass} ${showValue ? '' : 'wd-calendar__value--placeholder'}`"
-            >
-              {{ showValue || placeholder || translate('placeholder') }}
-            </view>
-            <wd-icon v-if="!disabled && !readonly" custom-class="wd-calendar__arrow" name="arrow-right" />
+        <template #title v-if="$slots.label">
+          <slot name="label"></slot>
+        </template>
+
+        <template #right-icon>
+          <wd-icon v-if="showArrow" custom-class="wd-calendar__arrow" name="arrow-right" />
+          <view v-else-if="showClear" @click.stop="handleClear">
+            <wd-icon custom-class="wd-calendar__clear" name="error-fill" />
           </view>
-          <view v-if="errorMessage" class="wd-calendar__error-message">{{ errorMessage }}</view>
-        </view>
+        </template>
+      </wd-cell>
+      <view v-else @click="open">
+        <slot></slot>
       </view>
-    </view>
+    </template>
     <wd-action-sheet
       v-model="pickerShow"
       :duration="250"
@@ -120,11 +130,11 @@ import wdIcon from '../wd-icon/wd-icon.vue'
 import wdCalendarView from '../wd-calendar-view/wd-calendar-view.vue'
 import wdActionSheet from '../wd-action-sheet/wd-action-sheet.vue'
 import wdButton from '../wd-button/wd-button.vue'
+import wdCell from '../wd-cell/wd-cell.vue'
 import { ref, computed, watch } from 'vue'
 import dayjs from '../../dayjs'
 import { deepClone, isArray, isEqual, padZero, pause } from '../common/util'
 import { getWeekNumber, isRange } from '../wd-calendar-view/utils'
-import { useCell } from '../composables/useCell'
 import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
@@ -223,7 +233,7 @@ const formatRange = (value: number, rangeType: 'start' | 'end', type: CalendarTy
 }
 
 const props = defineProps(calendarProps)
-const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm', 'open'])
+const emit = defineEmits(['cancel', 'change', 'update:modelValue', 'confirm', 'open', 'clear'])
 
 const pickerShow = ref<boolean>(false)
 const calendarValue = ref<null | number | number[]>(null)
@@ -235,7 +245,6 @@ const lastTab = ref<number>(0)
 const currentType = ref<CalendarType>('date')
 const lastCurrentType = ref<CalendarType>()
 const inited = ref<boolean>(false)
-const cell = useCell()
 const calendarView = ref()
 const calendarTabs = ref()
 
@@ -296,36 +305,26 @@ watch(
   }
 )
 
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
-})
-
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
-})
-
 const range = computed(() => {
   return (type: CalendarType) => {
     return isRange(type)
   }
 })
+
+// 是否展示清除按钮
+const showClear = computed(() => {
+  return props.clearable && !props.disabled && !props.readonly && showValue.value.length > 0
+})
+
+// 是否展示箭头
+const showArrow = computed(() => {
+  return !props.disabled && !props.readonly && !showClear.value
+})
+
+function handleClear() {
+  emit('clear')
+  emit('update:modelValue', null)
+}
 
 function scrollIntoView() {
   calendarView.value && calendarView.value && calendarView.value.$.exposed.scrollIntoView()
