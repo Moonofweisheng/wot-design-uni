@@ -25,6 +25,10 @@ export default defineConfig({
             link: '/en-US/guide/quick-use',
           },
           {
+            text: 'CLI & Templates',
+            link: '/en-US/guide/cli-templates',
+          },
+          {
             text: 'Custom Theme',
             link: '/en-US/guide/custom-theme',
           },
@@ -97,6 +101,10 @@ export default defineConfig({
         {
           text: 'Quick Start',
           link: '/en-US/guide/quick-use',
+        },
+        {
+          text: 'CLI & Templates',
+          link: '/en-US/guide/cli-templates',
         },
         {
           text: 'Custom Theme',

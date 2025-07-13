@@ -197,3 +197,4 @@ You can also use [create-uni](https://github.com/uni-helper/create-uni) to quick
 ```bash
 pnpm create uni@latest -t wot-demo <your project name>
 ```
+For more scaffolding and templates, see [CLI & Templates](./cli-templates.html).

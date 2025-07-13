@@ -25,6 +25,10 @@ export default defineConfig({
             link: '/guide/quick-use',
           },
           {
+            text: '脚手架与模板',
+            link: '/guide/cli-templates',
+          },
+          {
             text: '定制主题',
             link: '/guide/custom-theme',
           },
@@ -97,6 +101,10 @@ export default defineConfig({
         {
           text: '快速上手',
           link: '/guide/quick-use',
+        },
+        {
+          text: '脚手架与模板',
+          link: '/guide/cli-templates',
         },
         {
           text: '定制主题',
