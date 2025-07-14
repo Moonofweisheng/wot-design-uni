@@ -15,6 +15,7 @@ export type MessageType = 'alert' | 'confirm' | 'prompt'
 
 export type MessageBeforeConfirmOption = {
   resolve: (isPass: boolean) => void
+  value: MessageOptions['inputValue']
 }
 
 export type MessageOptions = {
