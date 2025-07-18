@@ -103,8 +103,6 @@
 :::tip 提示
 h5 滚动穿透不需要处理，组件已默认开启 `lock-scroll`。
 :::
-### H5平台
-
 
 ## Attributes
 
