@@ -119,7 +119,7 @@ function handleConfirm({ value }) {
 
 ## 日周月切换
 
-设置 `show-type-switch` 属性，展示 日周月 切换功能，支持在日周月类型 `date、week、month` 之间进行来回切换，可以通过 `type` 属性设置初始类型。如果 `type` 为 range 类型如 `daterange`，则日历可以在 `daterange、weekrange、monthrang` 之间进行来回切换。
+设置 `show-type-switch` 属性，展示 日周月 切换功能，支持在日周月类型 `date、week、month` 之间进行来回切换，可以通过 `type` 属性设置初始类型。如果 `type` 为 range 类型如 `daterange`，则日历可以在 `daterange、weekrange、monthrange` 之间进行来回切换。
 
 ```html
 <wd-calendar label="日周月切换" :first-day-of-week="1" show-type-switch v-model="value" @confirm="handleConfirm" />
