@@ -532,8 +532,8 @@ function canvasToImage() {
   const { canvasWidth, canvasHeight } = canvasState
   uni.canvasToTempFilePath(
     {
-      width: canvasWidth * exportScale,
-      height: canvasHeight * exportScale,
+      width: canvasWidth,
+      height: canvasHeight,
       destWidth: canvasWidth * exportScale,
       destHeight: canvasHeight * exportScale,
       fileType,
