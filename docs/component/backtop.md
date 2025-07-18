@@ -42,7 +42,7 @@ onPageScroll((e) => {
 | zIndex    | 组件z-index属性                  | number | -      | 10     | -        |
 | iconStyle | 自定义`icon`样式                 | string | -      | -      | -        |
 | shape     | 按钮形状                         | string | square | circle | -        |
-| bottom    | 距离屏幕顶部的距离，单位`px`     | number | -      | 100    | -        |
+| bottom    | 距离屏幕底部的距离，单位`px`     | number | -      | 100    | -        |
 | right     | 距离屏幕右边距离，单位`px`       | number | -      | 20     | -        |
 
 ## 外部样式类
