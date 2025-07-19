@@ -197,6 +197,10 @@ Set the `align-right` property to display the picker's value aligned to the righ
 
 Set the `before-confirm` function, which will be executed when the user clicks the 'confirm' button. It receives `value` (string for time type, timestamp for others, array when picker is in range selection mode), `resolve`, and `picker` parameters. You can validate the `value` and use the `resolve` function to tell the component whether to confirm. `resolve` accepts a boolean value, `resolve(true)` means the option is approved, `resolve(false)` means the option is not approved, and the picker popup won't close when not approved. You can directly set properties like `loading` through the `picker` parameter.
 
+:::tip Note
+Before calling `resolve`, ensure that the `picker` parameter's `loading` state is set to `false`, otherwise the component's `@confirm` event cannot be triggered correctly.
+:::
+
 ```html
 <wd-toast></wd-toast>
 <wd-datetime-picker label="before-confirm" v-model="value" :before-confirm="beforeConfirm" @confirm="handleConfirm" />

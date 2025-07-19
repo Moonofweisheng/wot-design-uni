@@ -42,7 +42,7 @@ onPageScroll((e) => {
 | zIndex     | Component z-index property                                 | number | -       | 10      | -       |
 | iconStyle  | Custom `icon` style                                        | string | -       | -       | -       |
 | shape      | Button shape                                               | string | square  | circle  | -       |
-| bottom     | Distance from screen top, unit `px`                        | number | -       | 100     | -       |
+| bottom     | Distance from screen bottom, unit `px`                        | number | -       | 100     | -       |
 | right      | Distance from screen right, unit `px`                      | number | -       | 20      | -       |
 
 ## External Classes

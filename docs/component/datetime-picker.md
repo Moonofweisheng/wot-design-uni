@@ -197,6 +197,10 @@ const filter = (type, values) => {
 
 设置 `before-confirm` 函数，在用户点击`确定`按钮时，会执行 `before-confirm` 函数，并传入 `value`(time 类型为字符串，其他为时间戳，当picker为区间选择时，`value`为数组) 、 `resolve` 和 `picker` 参数，可以对 `value` 进行校验，并通过 `resolve` 函数告知组件是否确定通过，`resolve` 接受1个 boolean 值，`resolve(true)` 表示选项通过，`resolve(false)` 表示选项不通过，不通过时不会关闭 `picker`弹窗。可以通过 `picker` 参数直接设置 `loading` 等属性。
 
+:::tip 提示
+在调用 `resolve` 之前须确保 `picker` 参数 `loading` 的加载状态为 `false` ，否则无法正确触发组件的 `@confirm` 事件。
+:::
+
 ```html
 <wd-toast></wd-toast>
 <wd-datetime-picker label="before-confirm" v-model="value" :before-confirm="beforeConfirm" @confirm="handleConfirm" />
