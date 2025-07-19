@@ -299,6 +299,24 @@ const current = ref <number>(0)
 const isLoop = ref(false)
 ```
 
+
+## slot插槽自定义内容
+```html
+<wd-swiper
+  :list="swiperList"
+  autoplay
+  v-model:current="current"
+  :indicator="{ type: 'dots' }"
+  @click="handleClick"
+  @change="onChange"
+>
+  <template v-slot="{ item, index }">
+    <view class="custom-indicator" style="position: absolute; bottom: 24rpx; right: 24rpx">{{ index + 1 }}/{{ item }}</view>
+  </template>
+</wd-swiper>
+```
+
+
 ## Attributes
 
 | 参数                      | 说明                                                               | 类型                              | 可选值                                                                                                 | 默认值       | 最低版本         |
@@ -384,6 +402,7 @@ const isLoop = ref(false)
 | name      | 说明         | 参数                                 | 最低版本 |
 | --------- | ------------ | ------------------------------------ | -------- |
 | indicator | 自定义指示器 | `{ current: number, total: number }` | 0.1.22   |
+| default   | item展示内容 | `{ item: any, index: number }`       | 0.1.22   |
 
 
 ## 外部样式类
