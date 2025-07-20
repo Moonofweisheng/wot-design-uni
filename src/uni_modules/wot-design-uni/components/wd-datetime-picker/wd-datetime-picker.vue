@@ -3,7 +3,6 @@
     <wd-cell
       v-if="!$slots.default"
       :title="label"
-      :required="isRequired"
       :size="size"
       :title-width="labelWidth"
       :prop="prop"
@@ -101,7 +100,7 @@
             :label-key="labelKey"
             :formatter="formatter"
             :filter="filter"
-            :column-formatter="isArray(modelValue) ? customColumnFormatter : undefined"
+            :column-formatter="isArray(modelValue) ? startColumnFormatter : undefined"
             :max-hour="maxHour"
             :min-hour="minHour"
             :max-date="maxDate"
@@ -111,7 +110,6 @@
             :use-second="useSecond"
             :min-second="minSecond"
             :max-second="maxSecond"
-            :start-symbol="true"
             :immediate-change="immediateChange"
             @change="onChangeStart"
             @pickstart="onPickStart"
@@ -131,7 +129,7 @@
             :label-key="labelKey"
             :formatter="formatter"
             :filter="filter"
-            :column-formatter="isArray(modelValue) ? customColumnFormatter : undefined"
+            :column-formatter="isArray(modelValue) ? endColumnFormatter : undefined"
             :max-hour="maxHour"
             :min-hour="minHour"
             :max-date="maxDate"
@@ -141,7 +139,6 @@
             :use-second="useSecond"
             :min-second="minSecond"
             :max-second="maxSecond"
-            :start-symbol="false"
             :immediate-change="immediateChange"
             @change="onChangeEnd"
             @pickstart="onPickStart"
@@ -170,13 +167,7 @@ import wdDatetimePickerView from '../wd-datetime-picker-view/wd-datetime-picker-
 import wdCell from '../wd-cell/wd-cell.vue'
 import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { deepClone, isArray, isDef, isEqual, isFunction, padZero } from '../common/util'
-import {
-  type DatetimePickerViewInstance,
-  type DatetimePickerViewColumnFormatter,
-  type DatetimePickerViewColumnType
-} from '../wd-datetime-picker-view/types'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
-import { useParent } from '../composables/useParent'
+import { type DatetimePickerViewInstance, type DatetimePickerViewColumnType, type DatetimePickerViewExpose } from '../wd-datetime-picker-view/types'
 import { useTranslate } from '../composables/useTranslate'
 import { datetimePickerProps, type DatetimePickerExpose } from './types'
 import dayjs from '../../dayjs'
@@ -304,31 +295,6 @@ watch(
   }
 )
 
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
-})
-
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
-})
-
 // 是否展示清除按钮
 const showClear = computed(() => {
   return (
@@ -361,7 +327,6 @@ function handleBoundaryValue(
   boundary: number[]
 ): boolean {
   const { type, useSecond } = props
-
   switch (type) {
     case 'datetime': {
       const [year, month, date, hour, minute, second] = boundary
@@ -440,21 +405,28 @@ function handleBoundaryValue(
   return false
 }
 
+function startColumnFormatter(picker: DatetimePickerViewExpose) {
+  return customColumnFormatter(picker, 'start')
+}
+
+function endColumnFormatter(picker: DatetimePickerViewExpose) {
+  return customColumnFormatter(picker, 'end')
+}
+
 /**
  * @description 自定义列项筛选规则
  */
-const customColumnFormatter: DatetimePickerViewColumnFormatter = (picker) => {
+const customColumnFormatter = (picker: DatetimePickerViewExpose, pickerType: 'start' | 'end') => {
   if (!picker) return []
 
   const { type } = props
-  const { startSymbol, formatter } = picker
+  const startSymbol = pickerType === 'start'
+  const { formatter } = props
   const start = picker.correctValue(innerValue.value)
   const end = picker.correctValue(endInnerValue.value)
-
-  const currentValue = startSymbol ? getPickerValue(start, type) : getPickerValue(end, type)
-  const boundary = startSymbol ? getPickerValue(end, type) : getPickerValue(start, type)
+  const currentValue = startSymbol ? getPickerValue(start, type, props.useSecond) : getPickerValue(end, type, props.useSecond)
+  const boundary = startSymbol ? getPickerValue(end, type, props.useSecond) : getPickerValue(start, type, props.useSecond)
   const columns = picker.getOriginColumns()
-
   return columns.map((column, _) => {
     return column.values.map((value) => {
       const disabled = handleBoundaryValue(startSymbol, column.type, value, currentValue, boundary)
@@ -489,7 +461,7 @@ function getSelects(picker: 'before' | 'after') {
   let value = picker === 'before' ? innerValue.value : endInnerValue.value
   let selected: number[] = []
   if (value) {
-    selected = getPickerValue(value, props.type)
+    selected = getPickerValue(value, props.type, props.useSecond)
   }
 
   let selects = selected.map((value) => {
@@ -564,8 +536,10 @@ function onChangeStart({ value }: { value: number | string }) {
 
   if (region.value) {
     // 区间选择才需要处理边界值
-    const currentArray = getPickerValue(value, props.type)
-    const boundaryArray = getPickerValue(endInnerValue.value, props.type)
+    // 区间选择才需要处理边界值
+    const currentArray = getPickerValue(value, props.type, props.useSecond)
+    const boundaryArray = getPickerValue(endInnerValue.value, props.type, props.useSecond)
+
     const columns = datetimePickerView.value.getOriginColumns()
 
     // 检查是否有任何列超出边界
