@@ -3,6 +3,7 @@
     <wd-cell
       v-if="!$slots.default"
       :title="label"
+      :required="required"
       :size="size"
       :title-width="labelWidth"
       :prop="prop"
