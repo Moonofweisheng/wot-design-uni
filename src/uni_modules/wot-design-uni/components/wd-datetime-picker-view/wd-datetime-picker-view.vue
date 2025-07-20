@@ -27,7 +27,7 @@ export default {
 <script lang="ts" setup>
 import wdPickerView from '../wd-picker-view/wd-picker-view.vue'
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
-import { debounce, isFunction, isDef, padZero, range, isArray, isString } from '../common/util'
+import { debounce, isDef, padZero, range, isArray, isString } from '../common/util'
 import { datetimePickerViewProps, type DatetimePickerViewColumnType, type DatetimePickerViewOption, type DatetimePickerViewExpose } from './types'
 import type { PickerViewInstance } from '../wd-picker-view/types'
 import { getPickerValue } from './util'
@@ -80,7 +80,6 @@ const { proxy } = getCurrentInstance() as any
  * @description updateValue 防抖函数的占位符
  */
 const updateValue = debounce(() => {
-  // 只有等created hook初始化数据之后，observer才能执行此操作
   if (!created.value) return
   const val = correctValue(props.modelValue)
   const isEqual = val === innerValue.value
@@ -109,47 +108,16 @@ watch(
     if (type.indexOf(target) === -1) {
       console.error(`type must be one of ${type}`)
     }
-    // 每次type更新时都需要刷新整个列表
-    updateValue()
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  () => props.filter,
-  (fn) => {
-    if (fn && !isFunction(fn)) {
-      console.error('The type of filter must be Function')
-    }
-    updateValue()
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  () => props.formatter,
-  (fn) => {
-    if (fn && !isFunction(fn)) {
-      console.error('The type of formatter must be Function')
-    }
-    updateValue()
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  () => props.columnFormatter,
-  (fn) => {
-    if (fn && !isFunction(fn)) {
-      console.error('The type of columnFormatter must be Function')
-    }
-    updateValue()
   },
   { deep: true, immediate: true }
 )
 
 watch(
   [
+    () => props.type,
+    () => props.filter,
+    () => props.formatter,
+    () => props.columnFormatter,
     () => props.minDate,
     () => props.maxDate,
     () => props.minHour,
@@ -392,7 +360,7 @@ function getBoundary(type: 'min' | 'max', innerValue: number) {
  * @return {Array}
  */
 function updateColumnValue(value: string | number) {
-  const values = getPickerValue(value, props.type)
+  const values = getPickerValue(value, props.type, props.useSecond)
   // 更新pickerView的value,columns
   if (props.modelValue !== value) {
     emit('update:modelValue', value)
@@ -486,8 +454,8 @@ function columnChange(picker: PickerViewInstance) {
   /** 根据计算选中项的时间戳，重新计算所有的选项列表 */
   // 更新选中时间戳
   innerValue.value = correctValue(value)
-  // 根据innerValue获取最新的时间表，重新生成对应的数据源
 
+  // 根据innerValue获取最新的时间表，重新生成对应的数据源
   const newColumns = updateColumns()
   // 深拷贝联动之前的选中项
   const selectedIndex = picker.getSelectedIndex().slice(0)
