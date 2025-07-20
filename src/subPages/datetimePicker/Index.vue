@@ -69,6 +69,12 @@
         :display-format-tab-label="displayFormatTabLabel"
       />
     </demo-block>
+    <demo-block title="超出隐藏" transparent>
+      <wd-cell-group border>
+        <wd-datetime-picker label="日期选择器超出隐藏" v-model="valueEllipsis" ellipsis @confirm="handleConfirmEllipsis" />
+        <wd-datetime-picker label="日期区间超出隐藏" v-model="valueRangeEllipsis" ellipsis @confirm="handleConfirmRangeEllipsis" />
+      </wd-cell-group>
+    </demo-block>
     <wd-toast />
   </page-wraper>
 </template>
@@ -106,6 +112,8 @@ const value18 = ref(Date.now())
 const value19 = ref('09:20:26')
 const valueClear1 = ref<number>(Date.now())
 const valueClear2 = ref<any[]>([Date.now(), Date.now()])
+const valueEllipsis = ref<number>(Date.now())
+const valueRangeEllipsis = ref<any[]>([Date.now(), Date.now() + 7 * 24 * 60 * 60 * 1000])
 const minDate = ref<number>(Date.now())
 const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
 
@@ -235,6 +243,15 @@ function handleClear2() {
 function handleConfirmClear2({ value }: any) {
   console.log('datetime picker 2 confirmed:', value)
 }
+
+function handleConfirmEllipsis({ value }: any) {
+  console.log('ellipsis datetime picker confirmed:', value)
+}
+
+function handleConfirmRangeEllipsis({ value }: any) {
+  console.log('range ellipsis datetime picker confirmed:', value)
+}
+
 /** picker触发cancel事件，同步触发cancel事件 */
 function onCancel() {}
 </script>
