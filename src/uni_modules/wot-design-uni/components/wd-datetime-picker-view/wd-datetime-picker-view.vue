@@ -521,6 +521,7 @@ function getSelects() {
 }
 
 defineExpose<DatetimePickerViewExpose>({
+  startSymbol: props.startSymbol,
   updateColumns,
   setColumns,
   getSelects,

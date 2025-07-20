@@ -104,6 +104,7 @@ export type DatetimePickerViewColumnFormatter = (picker: DatetimePickerViewInsta
 export type DatetimePickerViewProps = ExtractPropTypes<typeof datetimePickerViewProps>
 
 export type DatetimePickerViewExpose = {
+  startSymbol: boolean | undefined
   updateColumns: () => DatetimePickerViewOption[][]
   setColumns: (columnList: DatetimePickerViewOption[][]) => void
   getSelects: () => Record<string, any> | Record<string, any>[] | undefined
