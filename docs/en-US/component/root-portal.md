@@ -1,5 +1,5 @@
 ---
-version: $LOWEST_VERSION$
+version: 1.11.0
 ---
 # Root Portal
 

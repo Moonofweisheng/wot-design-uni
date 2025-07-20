@@ -113,7 +113,7 @@ This feature is mainly used to solve layering and positioning issues of popups i
 | custom-style | Custom popup style | object | - | - |
 | border-radius | Border radius of the popup | string | 0 | - |
 | safe-area-inset-bottom | Whether to enable bottom safe area adaptation | boolean | false | - |
-| root-portal | Whether to break away from the page to solve various fixed failure issues | boolean | false | $LOWEST_VERSION$ |
+| root-portal | Whether to break away from the page to solve various fixed failure issues | boolean | false | 1.11.0 |
 
 ## Events
 

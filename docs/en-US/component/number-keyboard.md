@@ -217,7 +217,7 @@ Currently, `modal` only controls whether the overlay is transparent, while `hide
 | random-key-order | Whether to shuffle keyboard keys | boolean | - | `false` | - |
 | hide-on-click-outside | Whether to hide keyboard when clicking outside | boolean | - | `true` | - |
 | modal | Whether to show transparent modal | boolean | - | `true` | - |
-| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | `false` | $LOWEST_VERSION$ |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | `false` | 1.11.0 |
 
 ## Events
 | Event Name | Description | Parameters | Version |

@@ -274,7 +274,7 @@ MessageBox.prompt(options)
 | 参数          | 说明     | 类型    | 可选值 | 默认值 | 最低版本 |
 | ------------- | -------- | ------- | ------ | ------ | -------- |
 | selector      | 指定唯一标识 | string  | -      | -     | -   |
-| root-portal   | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | -      | false | $LOWEST_VERSION$ |
+| root-portal   | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | -      | false | 1.11.0 |
 
 ## 外部样式类
 

@@ -1,6 +1,37 @@
 # 更新日志 
 
 
+## [1.11.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.10.0...v1.11.0) (2025-07-20)
+
+
+### ✨ Features | 新功能
+
+* ✨ 结合Cell组件重构Picker相关组件的触发器 ([4a50f2d](https://github.com/Moonofweisheng/wot-design-uni/commit/4a50f2db5956134d579b3be5830f786deb272364))
+* ✨ 新增 root-portal 组件支持从页面中脱离出来，用于解决各种 fixed 失效问题 ([#1155](https://github.com/Moonofweisheng/wot-design-uni/issues/1155)) ([372735a](https://github.com/Moonofweisheng/wot-design-uni/commit/372735a16af7d9a9f3a1a75a8493c2293f2aa216))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 DatetimePicker 超出隐藏 ellipsis 无效的问题 ([cdf1f78](https://github.com/Moonofweisheng/wot-design-uni/commit/cdf1f78513e6116a5f837237af766d00e1244668))
+* 🐛 修复 DatetimePicker 区间选择时无法选择绑定值范围以外的时间的问题 ([3c1023c](https://github.com/Moonofweisheng/wot-design-uni/commit/3c1023c9f6e07b17f684f7a62c5c8ffc462b9808)), closes [#1170](https://github.com/Moonofweisheng/wot-design-uni/issues/1170)
+* 🐛 修复 Overlay 组件锁定背景滚动属性 lock-scroll 无法取消的问题 ([#1149](https://github.com/Moonofweisheng/wot-design-uni/issues/1149)) ([f3ccf3d](https://github.com/Moonofweisheng/wot-design-uni/commit/f3ccf3d936d7224468a29f869c326d98ea8c87f8))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  更新微信小程序演示二维码 ([28d5970](https://github.com/Moonofweisheng/wot-design-uni/commit/28d5970a4f6a9548469fcdc2be48737c13d4014c))
+* ✏️  添加脚手架与模板的介绍 ([27243c1](https://github.com/Moonofweisheng/wot-design-uni/commit/27243c134114a7c5c52395f22c07a33760427a33))
+* ✏️  添加快速上手项目链接 ([ed923ec](https://github.com/Moonofweisheng/wot-design-uni/commit/ed923ecf99728813410164fe4963c520592a12a4))
+* ✏️  文档侧边栏新增版本号显示 ([6c6d5c9](https://github.com/Moonofweisheng/wot-design-uni/commit/6c6d5c9ea3a3016bd4eb9e85e0a6ae1472c02b13))
+* ✏️  新增咨询服务章节 ([66f796e](https://github.com/Moonofweisheng/wot-design-uni/commit/66f796e4406309c0f5ad09d1b521aab6962047c9))
+* ✏️  修复快速上手页面存在死链的问题 ([722103c](https://github.com/Moonofweisheng/wot-design-uni/commit/722103c46dcfec530c7675f5fac4d6b4e8d6c4ea))
+* ✏️ 修复文档中 calendar 类型名 `monthrang` → `monthrange` 的拼写错误。 ([41a6fe3](https://github.com/Moonofweisheng/wot-design-uni/commit/41a6fe3647c9837e0a6cb964882e9e5812ed7b7f))
+* **backtop:** ✏️ 修正文档中 BackTop 组件的 bottom 属性描述从「距离屏幕顶部的距离」修改为「距离屏幕底部的距离」 ([5a458fc](https://github.com/Moonofweisheng/wot-design-uni/commit/5a458fc723fe0745dc7de8ffc7e50b5c7f75654d))
+* **backtop:** ✏️ 修正文档中 bottom 属性的描述 ([b0cd321](https://github.com/Moonofweisheng/wot-design-uni/commit/b0cd321c5ed4e8f6042bd85551b7efe96e891156))
+* **component:** ✏️  移除多余的 H5 平台标题 ([f851d13](https://github.com/Moonofweisheng/wot-design-uni/commit/f851d139b1b00967fc5f2bcb1d7517a58f40adf7))
+* **datetime-picker:** 添加 before-confirm 回调中使用loading的提示 ([c61b33f](https://github.com/Moonofweisheng/wot-design-uni/commit/c61b33f51a3a8e00900ba765b72d6056b1299c0c))
+* unibest 链接地址更新 ([645e022](https://github.com/Moonofweisheng/wot-design-uni/commit/645e022094122ef3afee81c5f8059429e950a68a))
+
 ## [1.10.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.9.1...v1.10.0) (2025-06-29)
 
 

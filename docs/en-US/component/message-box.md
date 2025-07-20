@@ -214,7 +214,7 @@ You can customize the style of operation buttons through the button properties `
 | close-on-click-modal | Whether to close when clicking modal | boolean | - | true | - |
 | before-confirm | Function executed before confirmation | function({ resolve }) | - | - | - |
 | selector | Component unique identifier | string | - | wd-message-box | - |
-| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | $LOWEST_VERSION$ |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | 1.11.0 |
 
 ## Events
 

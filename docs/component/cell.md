@@ -261,8 +261,8 @@ function handleSwitchChange({ value }) {
 | center      | 是否垂直居中，默认顶部居中     | boolean | -      | false  | -        |
 | required    | 表单属性，必填                 | boolean | -      | false  | -        |
 | vertical    | 表单属性，上下结构             | boolean | -      | false  | -        |
-| ellipsis    | 内容省略，右侧内容超出时会以省略号显示 | boolean | -      | false  | $LOWEST_VERSION$ |
-| use-title-slot | 是否启用title插槽，默认启用，用来解决插槽传递时v-slot和v-if冲突问题 | boolean | -      | true  | $LOWEST_VERSION$ |
+| ellipsis    | 内容省略，右侧内容超出时会以省略号显示 | boolean | -      | false  | 1.11.0 |
+| use-title-slot | 是否启用title插槽，默认启用，用来解决插槽传递时v-slot和v-if冲突问题 | boolean | -      | true  | 1.11.0 |
 | prop | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的 | string | - | - | - |
 | rules | 表单验证规则，结合`wd-form`组件使用	 | `FormItemRule []`	 | - | `[]` | - |
 | border | 是否展示边框线，优先级高于`cell-group`的`border` | boolean | - | - | - |

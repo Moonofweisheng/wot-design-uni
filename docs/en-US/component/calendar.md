@@ -208,8 +208,8 @@ Set the `formatter` parameter, which is a function type that receives an `object
 | rules | Form validation rules, used with `wd-form` component | `FormItemRule []` | - | `[]` | - |
 | immediate-change | Whether to trigger the picker-view's change event immediately when the finger is released. If not enabled, the change event will be triggered after the scrolling animation ends. Available from version 1.2.25, only supported on WeChat Mini Program and Alipay Mini Program. | boolean | - | false | 1.2.25 |
 | with-cell | Whether to use built-in cell picker | boolean | - | true | 1.5.0 |
-| clearable | Show clear button | boolean | - | false | $LOWEST_VERSION$ |
-| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | $LOWEST_VERSION$ |
+| clearable | Show clear button | boolean | - | false | 1.11.0 |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | 1.11.0 |
 
 ### FormItemRule Data Structure
 
@@ -228,7 +228,7 @@ Set the `formatter` parameter, which is a function type that receives an `object
 | change | Triggered when clicking panel date | `{ value }` | - |
 | cancel | Triggered when clicking close button or mask | - | - |
 | open | Triggered when calendar opens | - | - |
-| clear | Triggered when clicking clear button | - | $LOWEST_VERSION$ |
+| clear | Triggered when clicking clear button | - | 1.11.0 |
 
 ## Methods
 
