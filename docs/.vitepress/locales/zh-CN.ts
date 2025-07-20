@@ -29,6 +29,10 @@ export default defineConfig({
             link: '/guide/cli-templates',
           },
           {
+            text: '咨询服务',
+            link: '/guide/consultation',
+          },
+          {
             text: '定制主题',
             link: '/guide/custom-theme',
           },
@@ -105,6 +109,10 @@ export default defineConfig({
         {
           text: '脚手架与模板',
           link: '/guide/cli-templates',
+        },
+        {
+          text: '咨询服务',
+          link: '/guide/consultation',
         },
         {
           text: '定制主题',
