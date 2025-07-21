@@ -84,8 +84,7 @@ export const datetimePickerViewProps = {
   /**
    * 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
    */
-  immediateChange: makeBooleanProp(false),
-  startSymbol: makeBooleanProp(false)
+  immediateChange: makeBooleanProp(false)
 }
 
 export type DatetimePickerViewColumnType = 'year' | 'month' | 'date' | 'hour' | 'minute' | 'second'
@@ -99,7 +98,7 @@ export type DatetimePickerViewFilter = (type: DatetimePickerViewColumnType, valu
 
 export type DatetimePickerViewFormatter = (type: string, value: string) => string
 
-export type DatetimePickerViewColumnFormatter = (picker: DatetimePickerViewInstance) => DatetimePickerViewOption[][]
+export type DatetimePickerViewColumnFormatter = (picker: DatetimePickerViewExpose) => DatetimePickerViewOption[][]
 
 export type DatetimePickerViewProps = ExtractPropTypes<typeof datetimePickerViewProps>
 

@@ -120,8 +120,8 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | on | Whether to show the on icon on the right | boolean | false | - |
 | bordered | Whether to show the bottom border | boolean | true | - |
 | center-title | Whether to center the title | boolean | false | 0.1.1 |
-| ellipsis | Whether to truncate content with ellipsis when it overflows | boolean | false | $LOWEST_VERSION$ |
-| use-title-slot | Whether to enable title slot, enabled by default to solve v-slot and v-if conflict issues | boolean | true | $LOWEST_VERSION$ |
+| ellipsis | Whether to truncate content with ellipsis when it overflows | boolean | false | 1.11.0 |
+| use-title-slot | Whether to enable title slot, enabled by default to solve v-slot and v-if conflict issues | boolean | true | 1.11.0 |
 
 ## Cell Events
 

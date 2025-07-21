@@ -122,7 +122,7 @@ h5 滚动穿透不需要处理，组件已默认开启 `lock-scroll`。
 | safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型） | boolean | - | false | - |
 | transition | 动画类型，参见 wd-transition 组件的name | string | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | - | - |
 | lockScroll | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动 | boolean | - | true | 0.1.30 |
-| root-portal | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | - | false | $LOWEST_VERSION$ |
+| root-portal | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | - | false | 1.11.0 |
 
 ## Events
 

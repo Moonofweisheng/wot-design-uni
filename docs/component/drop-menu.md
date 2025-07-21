@@ -207,7 +207,7 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 | value-key     | 选项对象中，value 对应的 key                                           | string                        | -      | value      | -        |
 | label-key     | 选项对象中，展示的文本对应的 key                                       | string                        | -      | label      | -        |
 | tip-key       | 选项对象中，选项说明对应的 key                                         | string                        | -      | tip        | -        |
-| root-portal    | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                     | boolean                       | -      | false      | $LOWEST_VERSION$ |
+| root-portal    | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                     | boolean                       | -      | false      | 1.11.0 |
 
 ## DropdownItem Events
 

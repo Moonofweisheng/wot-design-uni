@@ -206,7 +206,7 @@ Set the `direction` property value to `up`, and the menu will expand upward
 | value-key | Key for value in options object | string | - | value | - |
 | label-key | Key for display text in options object | string | - | label | - |
 | tip-key | Key for option description in options object | string | - | tip | - |
-| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | $LOWEST_VERSION$ |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | 1.11.0 |
 | icon-name | Selected icon name (available names in wd-icon component) | string | - | check | - |
 
 ## DropMenu Slot

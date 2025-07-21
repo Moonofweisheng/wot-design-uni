@@ -80,7 +80,7 @@ When the animation leaves, the tag will be set with `leave-class` and `leave-act
 | name               | Animation type                     | string           | `TransitionName` | -             | -                |
 | duration           | Animation duration                 | number / boolean | -                | 300(ms)       | -                |
 | custom-style       | Custom styles                      | string           | -                | -             | -                |
-| disable-touch-move | Whether to prevent touch scrolling | boolean          | -                | false         | $LOWEST_VERSION$ |
+| disable-touch-move | Whether to prevent touch scrolling | boolean          | -                | false         | 1.11.0 |
 
 ### TransitionName Animation Types  
 

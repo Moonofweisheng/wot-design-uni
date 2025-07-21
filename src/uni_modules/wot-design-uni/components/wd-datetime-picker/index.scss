@@ -52,6 +52,18 @@
         font-size: $-cell-icon-size-large;
       }
     }
+    
+    .wd-cell__value--ellipsis {
+      view {
+        @include lineEllipsis;
+        width: 100%;
+      }
+      
+      text {
+        @include lineEllipsis;
+        max-width: 100%;
+      }
+    }
   }
 
   @include e(placeholder) {

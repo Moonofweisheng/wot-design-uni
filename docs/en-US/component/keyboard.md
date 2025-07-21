@@ -216,7 +216,7 @@ You can bind the keyboard's current input value through `v-model` and limit the 
 | show-close-button | Whether to show close button | boolean | true | - |
 | safe-area-inset-bottom | Whether to enable bottom safe area adaptation | boolean | true | - |
 | z-index | Keyboard z-index | number | 100 | - |
-| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | false | $LOWEST_VERSION$ |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | false | 1.11.0 |
 
 ## Events
 

@@ -95,7 +95,7 @@ function handleClick() {
 | close-on-click-modal| Close on mask click                                         | boolean | -                                                                         | false   | -        |
 | hide-when-close     | Hide popup layer when closed (display: none)                 | boolean | -                                                                         | true    | -        |
 | z-index             | Set layer level                                              | number  | -                                                                         | 10      | 1.4.0    |
-| root-portal         | Whether to detach from the page, used to solve various fixed positioning issues | boolean | -                                                                         | false   | $LOWEST_VERSION$ |
+| root-portal         | Whether to detach from the page, used to solve various fixed positioning issues | boolean | -                                                                         | false   | 1.11.0 |
 
 ## Events
 

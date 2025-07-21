@@ -193,7 +193,7 @@ export default {
 | background | Background color | string | - | - | - |
 | safeHeight | Top safe height | number / string | - | - | - |
 | selector | Unique identifier | number | - | - | - |
-| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | $LOWEST_VERSION$ |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | 1.11.0 |
 
 ## Events
 | Event Name | Description | Parameters | Version |

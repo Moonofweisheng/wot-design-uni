@@ -260,7 +260,7 @@ const onDelete = () => showToast('删除')
 | lockScroll          | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动 | `boolean`             | -                          | `true`     | 1.3.10           |
 | safeAreaInsetBottom | 是否在底部安全区域内     | `boolean`             | -                          | `true`     | 1.3.10           |
 | extraKey            | 额外按键                 | `string` / `string[]` | -                          | -          | 1.3.10           |
-| root-portal         | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | `boolean`             | -                          | `false`    | $LOWEST_VERSION$ |
+| root-portal         | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | `boolean`             | -                          | `false`    | 1.11.0 |
 
 ## Slot
 
