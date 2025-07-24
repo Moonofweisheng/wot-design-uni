@@ -11,9 +11,7 @@
       :rules="rules"
       :clickable="!disabled && !readonly"
       :value-align="alignRight ? 'right' : 'left'"
-      :custom-class="`wd-col-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'} ${
-        !showValue ? 'wd-col-picker__cell--placeholder' : ''
-      }`"
+      :custom-class="cellClass"
       :custom-style="customStyle"
       :custom-title-class="customLabelClass"
       :custom-value-class="customValueClass"
@@ -156,6 +154,15 @@ const showValue = computed(() => {
       })
       .join('')
   }
+})
+
+const cellClass = computed(() => {
+  const classes = ['wd-col-picker__cell']
+  if (props.disabled) classes.push('is-disabled')
+  if (props.readonly) classes.push('is-readonly')
+  if (props.error) classes.push('is-error')
+  if (!showValue.value) classes.push('wd-col-picker__cell--placeholder')
+  return classes.join(' ')
 })
 
 watch(

@@ -29,6 +29,7 @@ export default {
   }
 }
 </script>
+<script lang="ts" setup></script>
 
 <!-- #ifdef APP-PLUS -->
 <script module="render" lang="renderjs">
