@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.11.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.11.0...v1.11.1) (2025-07-25)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 RootPortal 及 Picker 相关组件 type-check 错误的问题 ([1859294](https://github.com/Moonofweisheng/wot-design-uni/commit/185929461c56d596b6a9d0dabe117e229ceda601))
+
 ## [1.11.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.10.0...v1.11.0) (2025-07-20)
 
 
