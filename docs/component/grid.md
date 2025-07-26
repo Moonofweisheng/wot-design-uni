@@ -63,17 +63,15 @@
 
 通过默认插槽可以自定义 `GridItem` 的内容。
 
-使用默认插槽过程中, 开启 `GridItem` 上的属性 `use-slot`。
-
 ```html
 <wd-grid>
-  <wd-grid-item use-slot>
+  <wd-grid-item>
     <image class="img" :src="joy" />
   </wd-grid-item>
-  <wd-grid-item use-slot>
+  <wd-grid-item>
     <image class="img" :src="joy" />
   </wd-grid-item>
-  <wd-grid-item use-slot>
+  <wd-grid-item>
     <image class="img" :src="joy" />
   </wd-grid-item>
 </wd-grid>
@@ -88,9 +86,9 @@
 
 ## 单个插槽
 
-通过插槽 `icon` 可以插入 `GridItem` 中的图标位。通过 `use-icon-slot` 开启图标插槽。
+通过插槽 `icon` 可以插入 `GridItem` 中的图标位。
 
-通过插槽 `text` 可以插入 `GridItem` 中的文字位。通过 `use-text-slot` 开启文字插槽。
+通过插槽 `text` 可以插入 `GridItem` 中的文字位。
 
 注意:
 
@@ -100,14 +98,14 @@
 
 ```html
 <wd-grid>
-  <wd-grid-item use-icon-slot text="文字" v-for="index in 3" :key="index" icon-size="36px">
+  <wd-grid-item text="文字" v-for="index in 3" :key="index" icon-size="36px">
     <template #icon>
       <image class="slot-img" :src="joy" />
     </template>
   </wd-grid-item>
 </wd-grid>
 <wd-grid>
-  <wd-grid-item use-text-slot icon="picture" v-for="index in 3" :key="index">
+  <wd-grid-item icon="picture" v-for="index in 3" :key="index">
     <template #text>
       <view class="text">自定义文字插槽</view>
     </template>
