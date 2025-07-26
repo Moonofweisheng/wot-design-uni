@@ -230,9 +230,9 @@ Set jump link through `url` property.
 | icon-size | Icon size | string | '26px' | - |
 | url | Page jump link | string | - | - |
 | link-type | Page jump type | string | 'navigateTo' | - |
-| use-slot | Whether to use slot | boolean | false | - |
-| use-icon-slot | Whether to use icon slot | boolean | false | - |
-| use-text-slot | Whether to use text slot | boolean | false | - |
+| <s>use-slot</s> | Whether to use slot **($LOWEST_VERSION$Deprecated, use default slot directly)** | boolean | false | - |
+| <s>use-icon-slot</s> | Whether to use icon slot **($LOWEST_VERSION$Deprecated, component auto-detects icon slot existence)** | boolean | false | - |
+| <s>use-text-slot</s> | Whether to use text slot **($LOWEST_VERSION$Deprecated, component auto-detects text slot existence)** | boolean | false | - |
 | clickable | Whether clickable | boolean | false | - |
 
 ## GridItem Events
