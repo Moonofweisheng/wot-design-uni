@@ -5,6 +5,6 @@
 export const versionData = {
   "/component/count-to": "1.3.8",
   "/component/keyboard": "1.3.10",
-  "/component/root-portal": "$LOWEST_VERSION$",
+  "/component/root-portal": "1.11.0",
   "/component/signature": "1.6.0"
 }

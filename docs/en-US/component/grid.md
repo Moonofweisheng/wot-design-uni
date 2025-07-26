@@ -63,17 +63,15 @@ Basic usage requires binding the `icon` value and `text` property. By default, i
 
 The content of `GridItem` can be customized through the default slot.
 
-When using the default slot, enable the `use-slot` property on `GridItem`.
-
 ```html
 <wd-grid>
-  <wd-grid-item use-slot>
+  <wd-grid-item>
     <image class="img" :src="joy" />
   </wd-grid-item>
-  <wd-grid-item use-slot>
+  <wd-grid-item>
     <image class="img" :src="joy" />
   </wd-grid-item>
-  <wd-grid-item use-slot>
+  <wd-grid-item>
     <image class="img" :src="joy" />
   </wd-grid-item>
 </wd-grid>
@@ -88,9 +86,9 @@ When using the default slot, enable the `use-slot` property on `GridItem`.
 
 ## Individual Slots
 
-The `icon` slot can be inserted into the icon position of `GridItem`. Enable the icon slot through `use-icon-slot`.
+The `icon` slot can be inserted into the icon position of `GridItem`.
 
-The `text` slot can be inserted into the text position of `GridItem`. Enable the text slot through `use-text-slot`.
+The `text` slot can be inserted into the text position of `GridItem`.
 
 Note:
 
@@ -100,14 +98,14 @@ Note:
 
 ```html
 <wd-grid>
-  <wd-grid-item use-icon-slot text="Text" v-for="index in 3" :key="index" icon-size="36px">
+  <wd-grid-item text="Text" v-for="index in 3" :key="index" icon-size="36px">
     <template #icon>
       <image class="slot-img" :src="joy" />
     </template>
   </wd-grid-item>
 </wd-grid>
 <wd-grid>
-  <wd-grid-item use-text-slot icon="picture" v-for="index in 3" :key="index">
+  <wd-grid-item icon="picture" v-for="index in 3" :key="index">
     <template #text>
       <view class="text">Custom Text Slot</view>
     </template>
@@ -230,9 +228,9 @@ Set jump link through `url` property.
 | icon-size | Icon size | string | '26px' | - |
 | url | Page jump link | string | - | - |
 | link-type | Page jump type | string | 'navigateTo' | - |
-| use-slot | Whether to use slot | boolean | false | - |
-| use-icon-slot | Whether to use icon slot | boolean | false | - |
-| use-text-slot | Whether to use text slot | boolean | false | - |
+| <s>use-slot</s> | Whether to use slot **($LOWEST_VERSION$Deprecated, use default slot directly)** | boolean | false | - |
+| <s>use-icon-slot</s> | Whether to use icon slot **($LOWEST_VERSION$Deprecated, component auto-detects icon slot existence)** | boolean | false | - |
+| <s>use-text-slot</s> | Whether to use text slot **($LOWEST_VERSION$Deprecated, component auto-detects text slot existence)** | boolean | false | - |
 | clickable | Whether clickable | boolean | false | - |
 
 ## GridItem Events
