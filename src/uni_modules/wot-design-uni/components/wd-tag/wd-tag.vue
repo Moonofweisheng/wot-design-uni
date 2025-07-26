@@ -73,7 +73,7 @@ watch(
     if (type.indexOf(newValue) === -1) console.error(`type must be one of ${type.toString()}`)
     computeTagClass()
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 )
 
 watch(
@@ -81,7 +81,7 @@ watch(
   () => {
     computeTagClass()
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 )
 
 const rootClass = computed(() => {
