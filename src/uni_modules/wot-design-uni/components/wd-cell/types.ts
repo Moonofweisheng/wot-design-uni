@@ -99,7 +99,7 @@ export const cellProps = {
    */
   useTitleSlot: makeBooleanProp(true),
   /**
-   * 必填标记位置，可选值：left、right
+   * 必填标记位置，可选值：before（标签前）、after（标签后）
    */
   markerSide: makeStringProp<'before' | 'after'>('before')
 }

@@ -248,7 +248,7 @@ Set the `label-key` property to customize the key name of the option label.
 | error | Whether to be in error state | boolean | false | - |
 | error-message | Error message | string | - | - |
 | required | Whether to display the required asterisk | boolean | false | - |
-| marker-side | Position of the required marker | 'before' \| 'after' | 'after' | $LOWEST_VERSION$ |
+| marker-side | Position of the required marker | 'before' \| 'after' | 'before' | $LOWEST_VERSION$ |
 | align | Alignment of right content | string | 'left' | - |
 | before-confirm | Validation function before confirming | function | - | - |
 | display-format | Display format function | function | - | - |
