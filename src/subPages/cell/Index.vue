@@ -71,7 +71,10 @@
         <wd-cell :title="$t('bi-tian')" required>
           <wd-rate v-model="rate" icon="dong" active-icon="dong" @change="handleRateChange" />
         </wd-cell>
-        <wd-cell :title="$t('shang-xia-jie-gou')" vertical>
+        <wd-cell :title="$t('bi-tian-xing-hao-zai-you-ce')" required marker-side="after">
+          <wd-rate v-model="rate1" icon="dong" active-icon="dong" @change="handleRateChange" />
+        </wd-cell>
+        <wd-cell :title="$t('shang-xia-jie-gou')" vertical required marker-side="after">
           <wd-slider v-model="slider" @change="handleSliderChange" />
         </wd-cell>
       </wd-cell-group>
@@ -139,6 +142,8 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const rate = ref(0)
+const rate1 = ref(0)
+const rate2 = ref(0)
 const slider = ref(0)
 const switchValue = ref('')
 

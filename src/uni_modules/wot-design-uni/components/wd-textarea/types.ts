@@ -278,7 +278,11 @@ export const textareaProps = {
    * 可选值: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search" | "password"
    * 默认值: "text"
    */
-  inputmode: makeStringProp<InputMode>('text')
+  inputmode: makeStringProp<InputMode>('text'),
+  /**
+   * 必填标记位置，可选值：left、right
+   */
+  markerSide: makeStringProp<'before' | 'after'>('before')
 }
 
 export type TextareaProps = ExtractPropTypes<typeof textareaProps>

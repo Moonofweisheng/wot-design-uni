@@ -15,6 +15,7 @@
         <wd-datetime-picker label="before-confirm" v-model="value8" :before-confirm="beforeConfirm" @confirm="handleConfirm8" />
         <wd-datetime-picker :label="$t('cuo-wu')" v-model="value9" error @confirm="handleConfirm9" />
         <wd-datetime-picker :label="$t('bi-tian')" v-model="value10" required @confirm="handleConfirm10" />
+        <wd-datetime-picker :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value20" required marker-side="after" @confirm="handleConfirm20" />
         <wd-datetime-picker :label="$t('mo-ren-ri-qi')" v-model="value2" :default-value="value2" />
         <wd-datetime-picker
           :label="$t('shi-jian-fan-wei-yi-nian')"
@@ -110,6 +111,7 @@ const value16 = ref(Date.now())
 const value17 = ref(Date.now())
 const value18 = ref(Date.now())
 const value19 = ref('09:20:26')
+const value20 = ref<number>(Date.now())
 const valueClear1 = ref<number>(Date.now())
 const valueClear2 = ref<any[]>([Date.now(), Date.now()])
 const valueEllipsis = ref<number>(Date.now())
@@ -225,6 +227,9 @@ function handleConfirm15({ value }: any) {
   console.log(value)
 }
 function handleConfirm16({ value }: any) {
+  console.log(value)
+}
+function handleConfirm20({ value }: any) {
   console.log(value)
 }
 

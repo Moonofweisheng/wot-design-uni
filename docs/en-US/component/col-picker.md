@@ -91,7 +91,89 @@ Pass in the `column-change` property, which is of type `function` and receives a
 <wd-col-picker label="Select Address" v-model="value" :columns="area" :column-change="columnChange" @confirm="handleConfirm"></wd-col-picker>
 ```
 
-```typescript
+## Attributes
+
+| Attribute | Description | Type | Options | Default | Version |
+|-----------|-------------|------|----------|---------|----------|
+| v-model | Selected value | array | - | - | - |
+| columns | Picker data, 2D array | array | - | - | - |
+| value-key | Key for the `value` property in option objects | string | - | value | - |
+| label-key | Key for the `label` property in option objects | string | - | label | - |
+| tip-key | Key for the `tip` property in option objects | string | - | tip | - |
+| title | Popup title | string | - | - | - |
+| label | Left-side text label | string | - | - | - |
+| placeholder | Placeholder text | string | - | Select | - |
+| disabled | Disabled state | boolean | - | false | - |
+| readonly | Readonly state | boolean | - | false | - |
+| display-format | Custom display text formatting function (returns a string) | function | - | - | - |
+| column-change | Function to handle column changes, receives current column's selected item, column index, selected item index, next column data handler resolve, and finish selection function | function | - | - | - |
+| size | Picker size | string | large | - | - |
+| label-width | Left-side label width | string | - | 33% | - |
+| error | Error state (displays value in red) | boolean | - | false | - |
+| required | Whether to display the required asterisk | boolean | - | false | - |
+| marker-side | Position of the required marker | string | before / after | after | $LOWEST_VERSION$ |
+| align-right | Right-align the picker value | boolean | - | false | - |
+| before-confirm | Validation function before confirming, receives (value, resolve) parameters, continue execution through resolve, resolve accepts 1 boolean parameter | function | - | - | - |
+| loading-color | Loading icon color | string | - | #4D80F0 | - |
+| use-default-slot | Set this option when using default slot | boolean | - | false | - |
+| use-label-slot | Set this option when using label slot | boolean | - | false | - |
+| close-on-click-modal | Whether to close when clicking modal | boolean | - | true | - |
+| auto-complete | Automatically trigger column-change event to complete data, triggers column-change when columns is empty array or columns array length is less than value array length | boolean | - | false | - |
+| z-index | Popup z-index | number | - | 15 | - |
+| safe-area-inset-bottom | Whether to enable bottom safe area adaptation for popup panel (iPhone X type models) | boolean | - | true | - |
+| ellipsis | Whether to hide overflow | boolean | - | false | - |
+| prop | Form field `model` property name, required when using form validation | string | - | - | - |
+| rules | Form validation rules, used with `wd-form` component | `FormItemRule []` | - | `[]` | - |
+| lineWidth | Bottom line width in pixels | number | - | - | 1.3.7 |
+| lineHeight | Bottom line height in pixels | number | - | - | 1.3.7 |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | 1.11.0 |
+
+### FormItemRule Data Structure
+
+| Key | Description | Type |
+|-----|-------------|------|
+| required | Whether it's a required field | `boolean` |
+| message | Error message | `string` |
+| validator | Validation through function, can return a `Promise` for async validation | `(value, rule) => boolean \| Promise` |
+| pattern | Validation through regular expression, regex mismatch indicates validation failure | `RegExp` |
+
+## Option Data Structure
+
+| Key | Description | Type | Required | Version |
+|-----|-------------|------|----------|----------|
+| value | Option value | string | Yes | - |
+| label | Option name | string | Yes | - |
+| tip | Option tip | string | No | - |
+| disabled | Disable option | boolean | No | - |
+
+## Events
+
+| Event Name | Description | Parameters | Version |
+|------------|-------------|------------|----------|
+| confirm | Triggered when the last column option is selected | `{ value(option value array), selectedItems(option array) }` | - |
+| close | Triggered when close button or overlay is clicked | - | - |
+
+## Methods
+
+| Method Name | Description | Parameters | Version |
+|-------------|-------------|------------|----------|
+| open | Open picker popup | - | - |
+| close | Close picker popup | - | - |
+
+## Slots
+
+| Name | Description | Version |
+|------|-------------|----------|
+| default | Custom display | - |
+| label | Left slot | - |
+
+## External Style Classes
+
+| Class Name | Description | Version |
+|------------|-------------|----------|
+| custom-class | Root node style | - |
+| custom-label-class | Label external custom style | - |
+| custom-value-class | Value external custom style | - |typescript
 // useColPickerData can be referenced from the introduction at the top of this section
 // Adjust the import path according to your actual situation, don't just copy and paste
 import { useColPickerData } from '@/hooks/useColPickerData'
