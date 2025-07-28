@@ -156,6 +156,9 @@
   @include e(value) {
     @include when(ellipsis) {
       word-break: break-all;
+      // #ifdef MP-WEIXIN
+      white-space: normal;
+      // #endif
       @include multiEllipsis(2);
     }
   }
