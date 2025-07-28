@@ -157,7 +157,11 @@ export const pickerProps = {
   /**
    * 显示清空按钮
    */
-  clearable: makeBooleanProp(false)
+  clearable: makeBooleanProp(false),
+  /**
+   * 必填标记位置，可选值：before、after
+   */
+  markerSide: makeStringProp<'before' | 'after'>('before')
 }
 
 export type PickerProps = ExtractPropTypes<typeof pickerProps>

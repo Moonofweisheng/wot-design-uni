@@ -315,4 +315,53 @@ describe('WdColPicker', () => {
     expect(wrapper.props('lineWidth')).toBe(100)
     expect(wrapper.props('lineHeight')).toBe(4)
   })
+
+  // 测试 markerSide 属性
+  test('markerSide 属性 - before', async () => {
+    const wrapper = mount(WdColPicker, {
+      props: {
+        modelValue: [],
+        label: '选择地址',
+        required: true,
+        markerSide: 'before',
+        columns: [[{ value: '1', label: '选项1' }]]
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
+
+  test('markerSide 属性 - after', async () => {
+    const wrapper = mount(WdColPicker, {
+      props: {
+        modelValue: [],
+        label: '选择地址',
+        required: true,
+        markerSide: 'after',
+        columns: [[{ value: '1', label: '选项1' }]]
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('after')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('after')
+  })
+
+  test('markerSide 默认值', async () => {
+    const wrapper = mount(WdColPicker, {
+      props: {
+        modelValue: [],
+        label: '选择地址',
+        required: true,
+        columns: [[{ value: '1', label: '选项1' }]]
+      }
+    })
+
+    // 默认值应该是 'before'
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
 })

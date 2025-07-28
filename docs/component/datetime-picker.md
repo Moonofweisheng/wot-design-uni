@@ -307,6 +307,7 @@ const displayFormatTabLabel = (items) => {
 | minMinute | 最小分钟，time类型时生效 | number | - | 0 | - |
 | maxMinute | 最大分钟，time类型时生效 | number | - | 59 | - |
 | required | 表单属性，必填 | boolean | - | false | - |
+| marker-side | 必填标记位置 | string | before / after | before | $LOWEST_VERSION$ |
 | size | 设置选择器大小 | string | large | - | - |
 | label-width | 设置左侧标题宽度 | string | - | 33% | - |
 | error | 是否为错误状态，错误状态时右侧内容为红色 | boolean | - | false | - |

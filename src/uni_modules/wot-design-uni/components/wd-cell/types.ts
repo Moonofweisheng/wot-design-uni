@@ -97,7 +97,11 @@ export const cellProps = {
    * 是否启用title插槽，默认启用，用来解决插槽传递时v-slot和v-if冲突问题。
    * 问题见：https://github.com/dcloudio/uni-app/issues/4847
    */
-  useTitleSlot: makeBooleanProp(true)
+  useTitleSlot: makeBooleanProp(true),
+  /**
+   * 必填标记位置，可选值：before（标签前）、after（标签后）
+   */
+  markerSide: makeStringProp<'before' | 'after'>('before')
 }
 
 export type CellProps = ExtractPropTypes<typeof cellProps>

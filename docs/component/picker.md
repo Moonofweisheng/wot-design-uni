@@ -260,6 +260,7 @@ function handleConfirm({ value }) {
 | label-width | 设置左侧标题宽度 | string | - | 33% | - |
 | error | 是否为错误状态，错误状态时右侧内容为红色 | boolean | - | false | - |
 | required | 表单属性，必填 | boolean | - | false | - |
+| marker-side | 必填标记位置 | string | before / after | before | $LOWEST_VERSION$ |
 | align-right | 选择器的值靠右展示 | boolean | - | false | - |
 | use-label-slot | label 使用插槽 | boolean | - | false | - |
 | use-default-slot | 使用默认插槽 | boolean | - | false | - |

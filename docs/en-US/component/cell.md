@@ -117,6 +117,7 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | title-width | Title width, with unit | string | - | - |
 | center | Whether to vertically center the left and right content | boolean | false | - |
 | required | Whether to show the required asterisk | boolean | false | - |
+| marker-side | Position of the required marker | 'before' \| 'after' | 'before' | $LOWEST_VERSION$ |
 | on | Whether to show the on icon on the right | boolean | false | - |
 | bordered | Whether to show the bottom border | boolean | true | - |
 | center-title | Whether to center the title | boolean | false | 0.1.1 |

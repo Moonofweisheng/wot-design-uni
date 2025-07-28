@@ -4,7 +4,7 @@
       v-if="!$slots.default"
       :title="label"
       :value="showValue || placeholder || translate('placeholder')"
-      :required="isRequired"
+      :required="required"
       :size="size"
       :title-width="labelWidth"
       :prop="prop"
@@ -17,6 +17,7 @@
       :custom-value-class="customValueClass"
       :ellipsis="ellipsis"
       :use-title-slot="!!$slots.label"
+      :marker-side="markerSide"
       @click="showPicker"
     >
       <template v-if="$slots.label" #title>
@@ -101,10 +102,8 @@ import wdIcon from '../wd-icon/wd-icon.vue'
 import wdLoading from '../wd-loading/wd-loading.vue'
 import wdActionSheet from '../wd-action-sheet/wd-action-sheet.vue'
 import wdCell from '../wd-cell/wd-cell.vue'
-import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties, reactive, nextTick } from 'vue'
+import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties, reactive } from 'vue'
 import { addUnit, debounce, getRect, isArray, isBoolean, isDef, isFunction, objToStyle } from '../common/util'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
-import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { colPickerProps, type ColPickerExpose } from './types'
 
@@ -247,31 +246,6 @@ watch(
     immediate: true
   }
 )
-
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
-})
-
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
-})
 
 // 是否展示箭头
 const showArrow = computed(() => {

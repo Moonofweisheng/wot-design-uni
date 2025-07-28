@@ -22,6 +22,7 @@
       :custom-value-class="customValueClass"
       :ellipsis="ellipsis"
       :use-title-slot="!!$slots.label"
+      :marker-side="markerSide"
       @click="showPopup"
     >
       <template v-if="$slots.label" #title>

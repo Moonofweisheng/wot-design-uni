@@ -738,4 +738,62 @@ describe('WdDatetimePicker 日期时间选择器', () => {
     expect(wrapper.props('prop')).toBe('time')
     expect(wrapper.props('rules')).toEqual(rules)
   })
+
+  // 测试 markerSide 属性
+  test('markerSide 属性 - before', async () => {
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true,
+        markerSide: 'before'
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
+
+  test('markerSide 属性 - after', async () => {
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true,
+        markerSide: 'after'
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.props('markerSide')).toBe('after')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('after')
+  })
+
+  test('markerSide 默认值', async () => {
+    const wrapper = mount(WdDatetimePicker, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    // 默认值应该是 'before'
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
 })
