@@ -13,14 +13,14 @@ export default {
     startTime: 'باشلىنىش ۋاقتى',
     endTime: 'ئاخىرلىشىش ۋاقتى',
     to: 'دىن',
-    timeFormat: 'YY-يىل MM-ئاي DD-كۈن HH:mm:ss',
-    dateFormat: 'YYYY-يىل MM-ئاي DD-كۈن',
-    weekFormat: (year: number, week: number) => `${year}-يىلى ${week}-ھەپتە`,
+    timeFormat: 'YY-MM-DD HH:mm:ss',
+    dateFormat: 'YYYY-MM-DD',
+    weekFormat: (year: number, week: number) => `${year}يىلى ${week}ھەپتە`,
     startWeek: 'باشلىنىش ھەپتىسى',
     endWeek: 'ئاخىرلىشىش ھەپتىسى',
     startMonth: 'باشلىنىش ئېيى',
     endMonth: 'ئاخىرلىشىش ئېيى',
-    monthFormat: 'YYYY-يىل MM-ئاي'
+    monthFormat: 'YYYYيىل MMئاي'
   },
   calendarView: {
     startTime: 'باشلا',
@@ -37,9 +37,9 @@ export default {
     rangePrompt: (maxRange: number) => `تاللىغان كۈن سانى ${maxRange} كۈندىن ئېشىپ كەتمىسۇن`,
     rangePromptWeek: (maxRange: number) => `تاللىغان ھەپتە سانى ${maxRange} ھەپتىدىن ئېشىپ كەتمىسۇن`,
     rangePromptMonth: (maxRange: number) => `تاللىغان ئاي سانى ${maxRange} ئايدىن ئېشىپ كەتمىسۇن`,
-    monthTitle: 'YYYY-يىل M-ئاي',
-    yearTitle: 'YYYY-يىل',
-    month: 'M-ئاي',
+    monthTitle: 'YYYYيىل Mئاي',
+    yearTitle: 'YYYYيىل',
+    month: 'Mئاي',
     hour: (value: number) => `${value} سائەت`,
     minute: (value: number) => `${value} مىنۇت`,
     second: (value: number) => `${value} سېكۇنت`
@@ -81,7 +81,7 @@ export default {
     next: 'كېيىنكى بەت',
     page: (value: number) => `نۆۋەتتىكى بەت: ${value}`,
     total: (total: number) => `نۆۋەتتىكى سانلىق مەلۇمات: ${total} تۈر`,
-    size: (size: number) => `بەت سانى: ${size}`
+    size: (size: number) => `ھەر بەتتىكى تۈر سانى: ${size}`
   },
   picker: {
     cancel: 'بىكار قىلىش',
