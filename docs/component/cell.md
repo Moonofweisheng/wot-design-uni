@@ -260,6 +260,7 @@ function handleSwitchChange({ value }) {
 | title-width | 设置左侧标题宽度               | string  | -      | -      | -        |
 | center      | 是否垂直居中，默认顶部居中     | boolean | -      | false  | -        |
 | required    | 表单属性，必填                 | boolean | -      | false  | -        |
+| marker-side | 必填标记的位置                 | string  | before / after | before | $LOWEST_VERSION$ |
 | vertical    | 表单属性，上下结构             | boolean | -      | false  | -        |
 | ellipsis    | 内容省略，右侧内容超出时会以省略号显示 | boolean | -      | false  | 1.11.0 |
 | use-title-slot | 是否启用title插槽，默认启用，用来解决插槽传递时v-slot和v-if冲突问题 | boolean | -      | true  | 1.11.0 |

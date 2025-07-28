@@ -13,6 +13,7 @@
         <wd-picker label="before-confirm" :columns="columns0" v-model="value7" :before-confirm="beforeConfirm" />
         <wd-picker :label="$t('cuo-wu')" v-model="value10" error :columns="columns0" />
         <wd-picker :label="$t('bi-tian')" v-model="value11" :columns="columns0" required />
+        <wd-picker :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value16" :columns="columns0" required marker-side="after" />
         <wd-picker
           :label="$t('duo-ji-lian-dong-ke-qing-kong')"
           clearable
@@ -163,6 +164,7 @@ const value11 = ref(t('xuanXiang_3-0'))
 const value12 = ref(t('xuanXiang_3-0'))
 const value13 = ref(t('xuanXiang_3-0'))
 const value14 = ref(t('xuanXiang_3-0'))
+const value16 = ref(t('xuanXiang_2-0'))
 
 const columns6 = ref([
   [t('zhong-shan-da-xue-0'), t('zhong-nan-da-xue-1'), t('hua-nan-li-gong-da-xue-0')],

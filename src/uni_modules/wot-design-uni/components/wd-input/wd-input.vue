@@ -1,14 +1,16 @@
 <template>
   <view :class="rootClass" :style="customStyle" @click="handleClick">
     <view v-if="label || $slots.label" :class="labelClass" :style="labelStyle">
+      <text v-if="isRequired && markerSide === 'before'" class="wd-input__required wd-input__required--left">*</text>
       <view v-if="prefixIcon || $slots.prefix" class="wd-input__prefix">
         <wd-icon v-if="prefixIcon && !$slots.prefix" custom-class="wd-input__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
         <slot v-else name="prefix"></slot>
       </view>
       <view class="wd-input__label-inner">
-        <template v-if="label && !$slots.label">{{ label }}</template>
-        <slot v-else name="label"></slot>
+        <text v-if="label && !$slots.label">{{ label }}</text>
+        <slot v-else-if="$slots.label" name="label"></slot>
       </view>
+      <text v-if="isRequired && markerSide === 'after'" class="wd-input__required">*</text>
     </view>
     <view class="wd-input__body">
       <view class="wd-input__value">
@@ -199,7 +201,7 @@ const rootClass = computed(() => {
 })
 
 const labelClass = computed(() => {
-  return `wd-input__label ${props.customLabelClass} ${isRequired.value ? 'is-required' : ''}`
+  return `wd-input__label ${props.customLabelClass}`
 })
 
 const inputPlaceholderClass = computed(() => {

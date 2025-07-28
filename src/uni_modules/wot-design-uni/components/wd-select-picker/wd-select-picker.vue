@@ -18,6 +18,7 @@
       :custom-value-class="customValueClass"
       :ellipsis="ellipsis"
       :use-title-slot="!!$slots.label"
+      :marker-side="markerSide"
       @click="open"
     >
       <template v-if="$slots.label" #title>

@@ -152,6 +152,7 @@ When a `label` title is set, it defaults to top alignment. Set the `center` prop
 | center | Vertically center title and input box when label is set (defaults to top alignment) | boolean | - | false | - |
 | no-border | Whether to hide underline in non-cell type | boolean | - | false | - |
 | required | Required style in cell type | boolean | - | false | - |
+| marker-side | Position of the required marker | 'before' \| 'after' | - | 'before' | $LOWEST_VERSION$ |
 | prop | Form field model name (required for form validation) | string | - | - | - |
 | rules | Form validation rules | FormItemRule[] | - | [] | - |
 | clearTrigger | When to show clear icon: always (show when input is not empty) / focus (show when focused and not empty) | InputClearTrigger | `focus`/`always` | `always` | 1.3.7 |

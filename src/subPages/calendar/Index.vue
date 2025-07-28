@@ -47,6 +47,7 @@
           @clear="handleClear2"
           @confirm="handleConfirmClear2"
         />
+        <wd-calendar :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value18" required marker-side="after" @confirm="handleConfirm6" />
       </wd-cell-group>
     </view>
 
@@ -95,6 +96,7 @@ const value14 = ref<number | null>(null)
 const value15 = ref<number | null>(null)
 const value16 = ref<number>(Date.now())
 const value17 = ref<number>(Date.now())
+const value18 = ref<number>(Date.now())
 const valueClear1 = ref<number | null>(Date.now())
 const valueClear2 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])
 
@@ -200,6 +202,10 @@ function handleConfirm4({ value }: any) {
 
 function handleConfirm5({ value }: any) {
   toast.success(t('yi-xuan-ze') + dayjs(value).format(t('yyyy-nian-mm-yue-dd-ri')))
+}
+
+function handleConfirm6({ value }: any) {
+  console.log(value)
 }
 
 function handleClear1() {

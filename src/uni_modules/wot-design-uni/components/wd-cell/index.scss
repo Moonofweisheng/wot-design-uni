@@ -85,19 +85,6 @@
     font-size: $-cell-title-fs;
     box-sizing: border-box;
     margin-right: $-cell-padding;
-
-    @include when(required) {
-      padding-left: 12px;
-
-      &::after {
-        position: absolute;
-        content: '*';
-        top: 0;
-        left: 0;
-        font-size: $-cell-required-size;
-        color: $-cell-required-color;
-      }
-    }
   }
 
   @include e(right) {
@@ -107,9 +94,18 @@
   }
 
   @include e(title) {
-    flex: 1;
-    width: 100%;
     font-size: $-cell-title-fs;
+  }
+
+  @include e(required) {
+    font-size: $-cell-required-size;
+    color: $-cell-required-color;
+    margin-left: $-cell-required-margin;
+
+    @include m(left) {
+      margin-left: 0;
+      margin-right: $-cell-required-margin;
+    }
   }
 
   @include e(label) {

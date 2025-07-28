@@ -258,6 +258,7 @@ Enable `use-default-slot` and use the default slot to customize the picker trigg
 | label-width | Left-side label width | string | - | 33% | - |
 | error | Error state (displays value in red) | boolean | - | false | - |
 | required | Required field style | boolean | - | false | - |
+| marker-side | Position of the required marker | 'before' \| 'after' | - | 'before' | $LOWEST_VERSION$ |
 | align-right | Right-align the picker value | boolean | - | false | - |
 | use-label-slot | Use label slot | boolean | - | false | - |
 | use-default-slot | Use default slot | boolean | - | false | - |

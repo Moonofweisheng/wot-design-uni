@@ -607,4 +607,86 @@ describe('WdCalendar', () => {
     expect(emitted['clear']).toBeTruthy()
     expect(emitted['update:modelValue']).toBeTruthy()
   })
+
+  // 测试 markerSide 属性
+  test('markerSide 属性 - before', async () => {
+    const wrapper = mount(WdCalendar, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true,
+        markerSide: 'before'
+      },
+      global: {
+        components: {
+          WdActionSheet,
+          WdCalendarView,
+          WdButton,
+          WdIcon,
+          WdTag,
+          WdTabs,
+          WdTab
+        }
+      }
+    })
+
+    await nextTick()
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
+
+  test('markerSide 属性 - after', async () => {
+    const wrapper = mount(WdCalendar, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true,
+        markerSide: 'after'
+      },
+      global: {
+        components: {
+          WdActionSheet,
+          WdCalendarView,
+          WdButton,
+          WdIcon,
+          WdTag,
+          WdTabs,
+          WdTab
+        }
+      }
+    })
+
+    await nextTick()
+    expect(wrapper.props('markerSide')).toBe('after')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('after')
+  })
+
+  test('markerSide 默认值', async () => {
+    const wrapper = mount(WdCalendar, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true
+      },
+      global: {
+        components: {
+          WdActionSheet,
+          WdCalendarView,
+          WdButton,
+          WdIcon,
+          WdTag,
+          WdTabs,
+          WdTab
+        }
+      }
+    })
+
+    await nextTick()
+    // 默认值应该是 'before'
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
 })

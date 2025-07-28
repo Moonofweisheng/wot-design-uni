@@ -187,6 +187,10 @@ export const calendarProps = {
    */
   rootPortal: makeBooleanProp(false),
   /**
+   * 必填标记位置，可选值：before、after
+   */
+  markerSide: makeStringProp<'before' | 'after'>('before'),
+  /**
    * 显示清空按钮
    */
   clearable: makeBooleanProp(false)

@@ -425,6 +425,7 @@ function handleConfirm({ value }) {
 | label-width | 设置左侧标题宽度 | string | - | 33% | - |
 | error | 是否为错误状态，错误状态时右侧内容为红色 | boolean | - | false | - |
 | required | 必填样式 | boolean | - | false | - |
+| marker-side | 必填标记位置 | string | before / after | before | $LOWEST_VERSION$ |
 | center | 是否垂直居中 | boolean | - | false | - |
 | ellipsis | 是否超出隐藏 | boolean | - | false | - |
 | align-right | 选择器的值靠右展示 | boolean | - | false | - |

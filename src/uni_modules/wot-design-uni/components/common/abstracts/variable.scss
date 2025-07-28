@@ -149,7 +149,7 @@ $-button-large-fs: var(--wot-button-large-fs, $-fs-title) !default; // 大型按
 $-button-large-radius: var(--wot-button-large-radius, 8px) !default; // 大型按钮圆角大小
 $-button-large-loading: var(--wot-button-large-loading, 24px) !default; // 大小按钮loading图标大小
 $-button-large-box-shadow-size: var(--wot-button-large-box-shadow-size, 0px 4px 8px 0px) !default; // 大尺寸阴影尺寸
-$-button-icon-fs: var(--wot-button-icon-fs, 1.18em) !default; // 带图标的按钮的图标大小
+$-button-icon-fs: var(--wot-button-icon-fs, 18px) !default; // 带图标的按钮的图标大小
 $-button-icon-size: var(--wot-button-icon-size, 40px) !default; // icon 类型按钮尺寸
 $-button-icon-color: var(--wot-button-icon-color, rgba(0, 0, 0, 0.65)) !default; // icon 类型按钮颜色
 $-button-icon-disabled-color: var(--wot-button-icon-disabled-color, $-color-icon-disabled) !default; // icon 类型按钮禁用颜色
@@ -204,6 +204,7 @@ $-cell-icon-size-large: var(--wot-cell-icon-size-large, 18px) !default; // 图�
 
 $-cell-required-color: var(--wot-cell-required-color, $-color-danger) !default; // 要求必填*颜色
 $-cell-required-size: var(--wot-cell-required-size, 18px) !default; // 必填*字号
+$-cell-required-margin: var(--wot-cell-required-margin, 4px) !default; // 必填*间距
 $-cell-vertical-top: var(--wot-cell-vertical-top, 16px) !default; // 表单类型-上下结构的间距
 
 /* calendar */
