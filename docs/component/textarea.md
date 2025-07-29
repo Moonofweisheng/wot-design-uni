@@ -154,6 +154,7 @@ const value = ref<string>('')
 | center                  | 有 label 时设置标题和输入框垂直居中（默认顶部居中）                                               | boolean           | -                                  | false     | -        |
 | no-border               | 非 cell 类型下是否隐藏下划线                                                                      | boolean           | -                                  | false     | -        |
 | required                | cell 类型下必填样式                                                                               | boolean           | -                                  | false     | -        |
+| marker-side             | 必填标记的位置                                                                                    | string            | before / after                     | before    | $LOWEST_VERSION$ |
 | prop                    | 表单域 `model` 字段名（表单校验必填）                                                             | string            | -                                  | -         | -        |
 | rules                   | 表单验证规则                                                                                      | FormItemRule[]    | -                                  | []        | -        |
 | clearTrigger            | 显示清除图标的时机：always（输入框非空时展示）/ focus（聚焦且非空时展示）                         | InputClearTrigger | `focus`/`always`                   | `always`  | 1.3.7    |

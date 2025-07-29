@@ -13,14 +13,13 @@
         :clickable="!disabled && !readonly"
         :value-align="alignRight ? 'right' : 'left'"
         :center="center"
-        :custom-class="`wd-calendar__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'} ${
-          !showValue ? 'wd-calendar__cell--placeholder' : ''
-        }`"
+        :custom-class="cellClass"
         :custom-style="customStyle"
         :custom-title-class="customLabelClass"
         :custom-value-class="customValueClass"
         :ellipsis="ellipsis"
         :use-title-slot="!!$slots.label"
+        :marker-side="markerSide"
         @click="open"
       >
         <template #title v-if="$slots.label">
@@ -261,6 +260,15 @@ const showValue = computed(() => {
   } else {
     return ''
   }
+})
+
+const cellClass = computed(() => {
+  const classes = ['wd-calendar__cell']
+  if (props.disabled) classes.push('is-disabled')
+  if (props.readonly) classes.push('is-readonly')
+  if (props.error) classes.push('is-error')
+  if (!showValue.value) classes.push('wd-calendar__cell--placeholder')
+  return classes.join(' ')
 })
 
 watch(

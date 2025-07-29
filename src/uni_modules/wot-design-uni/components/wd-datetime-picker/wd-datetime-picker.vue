@@ -10,12 +10,13 @@
       :rules="rules"
       :clickable="!disabled && !readonly"
       :value-align="alignRight ? 'right' : 'left'"
-      :custom-class="`wd-datetime-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'}`"
+      :custom-class="cellClass"
       :custom-style="customStyle"
       :custom-title-class="customLabelClass"
       :custom-value-class="customValueClass"
       :ellipsis="ellipsis"
       :use-title-slot="!!$slots.label"
+      :marker-side="markerSide"
       @click="showPopup"
     >
       <template v-if="$slots.label" #title>
@@ -195,6 +196,14 @@ const hasConfirmed = ref<boolean>(false) // 判断用户是否点击了确认按
 
 const isLoading = ref<boolean>(false) // 加载
 const { proxy } = getCurrentInstance() as any
+
+const cellClass = computed(() => {
+  const classes = ['wd-datetime-picker__cell']
+  if (props.disabled) classes.push('is-disabled')
+  if (props.readonly) classes.push('is-readonly')
+  if (props.error) classes.push('is-error')
+  return classes.join(' ')
+})
 
 watch(
   () => props.modelValue,

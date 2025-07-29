@@ -19,6 +19,14 @@
         <wd-col-picker label="before-confirm" v-model="value8" :columns="areaData1" :column-change="columnChange1" :before-confirm="beforeConfirm" />
         <wd-col-picker :label="$t('cuo-wu')" error v-model="value9" :columns="areaData1" :column-change="columnChange1" />
         <wd-col-picker :label="$t('bi-tian')" required v-model="value10" :columns="areaData1" :column-change="columnChange1" />
+        <wd-col-picker
+          :label="$t('bi-tian-xing-hao-zai-you-ce')"
+          required
+          v-model="value16"
+          :columns="areaData1"
+          :column-change="columnChange1"
+          marker-side="after"
+        />
       </wd-cell-group>
     </view>
     <demo-block
@@ -93,6 +101,7 @@ const value12 = ref<any[]>([])
 const value13 = ref<any[]>([])
 const value14 = ref<any[]>([])
 const value15 = ref<any[]>([])
+const value16 = ref<any[]>([])
 const displayValue = ref<string>('')
 const areaData1 = ref<any[]>([
   colPickerData.map((item) => {

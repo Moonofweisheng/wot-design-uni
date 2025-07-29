@@ -100,26 +100,25 @@
     box-sizing: border-box;
     font-size: $-input-fs;
     flex-shrink: 0;
-
-    @include when(required) {
-      padding-left: 12px;
-
-      &::after {
-        position: absolute;
-        left: 0;
-        top: 2px;
-        content: "*";
-        font-size: $-cell-required-size;
-        line-height: 1.1;
-        color: $-cell-required-color;
-      }
-    }
   }
 
   @include e(label-inner) {
     display: inline-block;
     font-size: $-input-fs;
     line-height: $-cell-line-height;
+  }
+
+
+
+  @include e(required) {
+    font-size: $-cell-required-size;
+    color: $-cell-required-color;
+    margin-left: $-cell-required-margin;
+
+    @include m(left) {
+      margin-left: 0;
+      margin-right: $-cell-required-margin;
+    }
   }
 
   @include e(body) {

@@ -36,14 +36,17 @@ export const gridItemProps = {
   linkType: makeStringProp<LinkType>('navigateTo'),
   /**
    * 是否开启 GridItem 内容插槽
+   * @deprecated 已废弃，直接使用默认插槽即可
    */
   useSlot: makeBooleanProp(false),
   /**
    * 是否开启 GridItem icon 插槽
+   * @deprecated 已废弃，组件会自动根据 icon 插槽是否存在来显示
    */
   useIconSlot: makeBooleanProp(false),
   /**
    * 是否开启 GridItem text 内容插槽
+   * @deprecated 已废弃，组件会自动根据 text 插槽是否存在来显示
    */
   useTextSlot: makeBooleanProp(false),
   /**

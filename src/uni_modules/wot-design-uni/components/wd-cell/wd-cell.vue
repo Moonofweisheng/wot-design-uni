@@ -7,11 +7,8 @@
     @click="onClick"
   >
     <view :class="['wd-cell__wrapper', vertical ? 'is-vertical' : '']">
-      <view
-        v-if="showLeft"
-        :class="['wd-cell__left', isRequired ? 'is-required' : '']"
-        :style="titleWidth ? 'min-width:' + titleWidth + ';max-width:' + titleWidth + ';' : ''"
-      >
+      <view v-if="showLeft" class="wd-cell__left" :style="titleWidth ? 'min-width:' + titleWidth + ';max-width:' + titleWidth + ';' : ''">
+        <text v-if="isRequired && markerSide === 'before'" class="wd-cell__required wd-cell__required--left">*</text>
         <!--左侧icon部位-->
         <slot name="icon">
           <wd-icon v-if="icon" :name="icon" :custom-class="`wd-cell__icon  ${customIconClass}`"></wd-icon>
@@ -19,8 +16,9 @@
 
         <view class="wd-cell__title">
           <!--title BEGIN-->
-          <slot name="title" v-if="useTitleSlot && $slots.title"></slot>
-          <view v-else-if="title" :class="customTitleClass">{{ title }}</view>
+          <slot v-if="useTitleSlot && $slots.title" name="title"></slot>
+          <text v-else-if="title" :class="customTitleClass">{{ title }}</text>
+
           <!--title END-->
 
           <!--label BEGIN-->
@@ -29,6 +27,7 @@
           </slot>
           <!--label END-->
         </view>
+        <text v-if="isRequired && markerSide === 'after'" class="wd-cell__required">*</text>
       </view>
       <!--right content BEGIN-->
       <view class="wd-cell__right">

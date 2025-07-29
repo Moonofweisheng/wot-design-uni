@@ -12,14 +12,13 @@
       :clickable="!disabled && !readonly"
       :value-align="alignRight ? 'right' : 'left'"
       :center="center"
-      :custom-class="`wd-select-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'} ${
-        showValue ? '' : 'wd-select-picker__cell--placeholder'
-      }`"
+      :custom-class="cellClass"
       :custom-style="customStyle"
       :custom-title-class="customLabelClass"
       :custom-value-class="customValueClass"
       :ellipsis="ellipsis"
       :use-title-slot="!!$slots.label"
+      :marker-side="markerSide"
       @click="open"
     >
       <template v-if="$slots.label" #title>
@@ -171,6 +170,15 @@ const showValue = computed(() => {
     }
   }
   return showValueTemp
+})
+
+const cellClass = computed(() => {
+  const classes = ['wd-select-picker__cell']
+  if (props.disabled) classes.push('is-disabled')
+  if (props.readonly) classes.push('is-readonly')
+  if (props.error) classes.push('is-error')
+  if (!showValue.value) classes.push('wd-select-picker__cell--placeholder')
+  return classes.join(' ')
 })
 
 watch(

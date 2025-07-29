@@ -197,6 +197,7 @@ Set the `formatter` parameter, which is a function type that receives an `object
 | label-width | Set left title width | string | - | 33% | - |
 | error | Whether in error state, right content is red in error state | boolean | - | false | - |
 | required | Required style | boolean | - | false | - |
+| marker-side | Position of the required marker | 'before' \| 'after' | - | 'before' | $LOWEST_VERSION$ |
 | center | Whether to vertically center | boolean | - | false | - |
 | ellipsis | Whether to hide overflow | boolean | - | false | - |
 | align-right | Display picker value aligned to the right | boolean | - | false | - |

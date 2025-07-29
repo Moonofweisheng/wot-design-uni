@@ -302,6 +302,7 @@ const displayFormatTabLabel = (items) => {
 | minMinute | Minimum minute, effective for time type | number | - | 0 | - |
 | maxMinute | Maximum minute, effective for time type | number | - | 59 | - |
 | required | Form attribute, required | boolean | - | false | - |
+| marker-side | Position of the required marker | 'before' \| 'after' | - | 'before' | $LOWEST_VERSION$ |
 | size | Set picker size | string | large | - | - |
 | label-width | Set left title width | string | - | 33% | - |
 | error | Whether in error state, right content is red in error state | boolean | - | false | - |

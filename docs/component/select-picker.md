@@ -342,6 +342,7 @@ function handleConfirm({ value, selectedItems }) {
 | label-width | 左侧标题宽度 | string | - | 33% | - |
 | error | 错误状态（右侧内容红色） | boolean | - | false | - |
 | required | 必填样式 | boolean | - | false | - |
+| marker-side | 必填标记位置 | string | before / after | before | $LOWEST_VERSION$ |
 | align-right | 值靠右展示 | boolean | - | false | - |
 | before-confirm | 确定前校验函数，接收(value,resolve)参数 | function | - | - | - |
 | select-size | picker内部选项组尺寸 | string | large | - | - |

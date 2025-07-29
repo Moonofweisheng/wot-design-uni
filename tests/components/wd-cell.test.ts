@@ -234,7 +234,9 @@ describe('WdCell', () => {
       }
     })
 
-    expect(wrapper.find('.wd-cell__left').classes()).toContain('is-required')
+    // 检查必填星号存在（默认在前面）
+    expect(wrapper.find('.wd-cell__required--left').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__required--left').text()).toBe('*')
   })
 
   // 测试垂直布局
@@ -269,7 +271,9 @@ describe('WdCell', () => {
     })
 
     expect(wrapper.props('rules')).toEqual(rules)
-    expect(wrapper.find('.wd-cell__left').classes()).toContain('is-required')
+    // 检查必填星号存在（默认在前面）
+    expect(wrapper.find('.wd-cell__required--left').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__required--left').text()).toBe('*')
   })
 
   // 测试插槽
@@ -363,7 +367,10 @@ describe('WdCell', () => {
       }
     })
 
-    expect(wrapper.find('.wd-cell__title > view').classes()).toContain(customTitleClass)
+    // 查找标题文本元素，它应该有自定义类名
+    const titleText = wrapper.find('.wd-cell__title text')
+    expect(titleText.exists()).toBe(true)
+    expect(titleText.classes()).toContain(customTitleClass)
   })
 
   // 测试自定义标签类名
@@ -458,5 +465,67 @@ describe('WdCell', () => {
 
     expect(wrapper.props('useTitleSlot')).toBe(true)
     expect(wrapper.find('.custom-title-slot').exists()).toBe(true)
+  })
+
+  // 测试 markerSide 属性
+  test('markerSide 属性 - before', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        title: '标题',
+        required: true,
+        markerSide: 'before'
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查必填星号在前面
+    expect(wrapper.find('.wd-cell__required--left').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__required--left').text()).toBe('*')
+  })
+
+  test('markerSide 属性 - after', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        title: '标题',
+        required: true,
+        markerSide: 'after'
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('after')
+    // 检查必填星号在后面（没有 --left 类）
+    expect(wrapper.find('.wd-cell__required').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__required--left').exists()).toBe(false)
+    expect(wrapper.find('.wd-cell__required').text()).toBe('*')
+  })
+
+  test('markerSide 默认值', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        title: '标题',
+        required: true
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    // 默认值应该是 'before'
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查必填星号在前面
+    expect(wrapper.find('.wd-cell__required--left').exists()).toBe(true)
+    expect(wrapper.find('.wd-cell__required--left').text()).toBe('*')
   })
 })

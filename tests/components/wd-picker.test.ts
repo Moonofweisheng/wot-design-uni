@@ -263,4 +263,47 @@ describe('WdPicker', () => {
     // 检查值是否被清空
     expect(emitted['update:modelValue'][0]).toEqual([''])
   })
+
+  // 测试 markerSide 属性
+  test('markerSide 属性 - before', () => {
+    const wrapper = mount(WdPicker, {
+      props: {
+        label: '选择日期',
+        required: true,
+        markerSide: 'before'
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
+
+  test('markerSide 属性 - after', () => {
+    const wrapper = mount(WdPicker, {
+      props: {
+        label: '选择日期',
+        required: true,
+        markerSide: 'after'
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('after')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('after')
+  })
+
+  test('markerSide 默认值', () => {
+    const wrapper = mount(WdPicker, {
+      props: {
+        label: '选择日期',
+        required: true
+      }
+    })
+
+    // 默认值应该是 'before'
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
 })

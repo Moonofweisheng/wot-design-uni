@@ -242,6 +242,7 @@ Set the `error-message` attribute to display an error message below the input.
 | label-width | Label width | string | 33% | - |
 | cell | Whether to display in cell style | boolean | false | - |
 | required | Whether to display the required asterisk | boolean | false | - |
+| marker-side | Position of the required marker | 'before' \| 'after' | 'before' | $LOWEST_VERSION$ |
 | center | Whether to vertically center the content | boolean | false | - |
 | active-color | Active color when focused | string | - | - |
 | adjust-position | Whether to adjust the position when the keyboard is displayed | boolean | true | - |

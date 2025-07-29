@@ -16,14 +16,13 @@
       :rules="rules"
       :clickable="!disabled && !readonly"
       :value-align="alignRight ? 'right' : 'left'"
-      :custom-class="`wd-picker__cell ${disabled && 'is-disabled'} ${readonly && 'is-readonly'} ${error && 'is-error'} ${
-        !showValue ? 'wd-picker__cell--placeholder' : ''
-      }`"
+      :custom-class="cellClass"
       :custom-style="customStyle"
       :custom-title-class="customLabelClass"
       :custom-value-class="customValueClass"
       :ellipsis="ellipsis"
       :use-title-slot="!!$slots.label"
+      :marker-side="markerSide"
       @click="showPopup"
     >
       <template v-if="$slots.label" #title>
@@ -197,6 +196,15 @@ const showClear = computed(() => {
 // 是否展示箭头
 const showArrow = computed(() => {
   return !props.disabled && !props.readonly && !showClear.value
+})
+
+const cellClass = computed(() => {
+  const classes = ['wd-picker__cell']
+  if (props.disabled) classes.push('is-disabled')
+  if (props.readonly) classes.push('is-readonly')
+  if (props.error) classes.push('is-error')
+  if (!showValue.value) classes.push('wd-picker__cell--placeholder')
+  return classes.join(' ')
 })
 
 const { proxy } = getCurrentInstance() as any

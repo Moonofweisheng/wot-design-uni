@@ -28,9 +28,14 @@
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
+  line-height: 1;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  &::before {
+    display: inline-block;
+  }
 
   @include m(image) {
     width: 1em;
