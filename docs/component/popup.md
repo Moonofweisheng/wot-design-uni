@@ -1,4 +1,4 @@
-#  Popup 弹出层
+# Popup 弹出层
 
 弹出层组件，用于展示弹窗、信息提示等内容。
 
@@ -47,7 +47,6 @@
 ```html
 <wd-popup v-model="show" position="bottom" :close-on-click-modal="false" closable custom-style="height: 200px;" @close="handleClose"></wd-popup>
 ```
-
 
 ## 禁用遮罩
 
@@ -117,11 +116,11 @@ h5 滚动穿透不需要处理，组件已默认开启 `lock-scroll`。
 | custom-style | 自定义弹出层样式 | string | - | - | - |
 | modal | 是否显示遮罩 | boolean | - | true | - |
 | modal-style | 自定义modal蒙层样式 | string | - | - | - |
-| hide-when-close | 是否当关闭时将弹出层隐藏（display: none) | boolean | - | true | - |
+| hide-when-close | 是否当关闭时将弹出层隐藏(display: none) | boolean | - | true | - |
 | lazy-render | 弹层内容懒渲染，触发展示时才渲染内容 | boolean | - | true | - |
 | safe-area-inset-bottom | 弹出面板是否设置底部安全距离（iphone X 类型的机型） | boolean | - | false | - |
 | transition | 动画类型，参见 wd-transition 组件的name | string | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | - | - |
-| lockScroll | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动 | boolean | - | true | 0.1.30 |
+| lock-scroll | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动 | boolean | - | true | 0.1.30 |
 | root-portal | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | - | false | 1.11.0 |
 
 ## Events
