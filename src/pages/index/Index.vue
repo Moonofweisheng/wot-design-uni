@@ -319,6 +319,10 @@ const list = computed(() => [
       {
         id: 'numberKeyboard',
         name: t('numberkeyboard-shu-zi-jian-pan')
+      },
+      {
+        id: 'pullRefresh',
+        name: t('pullrefresh-xia-la-shua-xin')
       }
     ]
   },

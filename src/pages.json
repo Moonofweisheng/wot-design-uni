@@ -1326,6 +1326,21 @@
             "navigationBarTitleText": "%rootportal-title%"
             // #endif
           }
+        },
+        {
+          "path": "pullRefresh/Index",
+          "name": "pullRefresh",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "PullRefresh 下拉刷新",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%pullrefresh-title%"
+            // #endif
+          }
         }
       ]
     }

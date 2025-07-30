@@ -658,7 +658,14 @@ $-toast-loading-margin-bottom: var(--wot-toast-loading-margin-bottom, 16px) !def
 $-toast-box-shadow: var(--wot-toast-box-shadow, 0px 6px 16px 0px rgba(0, 0, 0, 0.08)) !default; // 外部阴影
 
 /* loading */
-$-loading-size: var(--wot-loading-size, 32px) !default; // loading 大小
+$-loading-size: var(--wot-loading-size, 30px) !default; // loading图标大小
+
+/* pull-refresh */
+$-pull-refresh-head-height: var(--wot-pull-refresh-head-height, 50px) !default; // 头部高度
+$-pull-refresh-head-font-size: var(--wot-pull-refresh-head-font-size, 14px) !default; // 头部字体大小
+$-pull-refresh-head-color: var(--wot-pull-refresh-head-color, rgba(0, 0, 0, 0.6)) !default; // 头部字体颜色
+$-pull-refresh-loading-size: var(--wot-pull-refresh-loading-size, 20px) !default; // 加载图标大小
+$-pull-refresh-animation-duration: var(--wot-pull-refresh-animation-duration, 300ms) !default; // 动画持续时间 大小
 
 /* tooltip */
 $-tooltip-bg: var(--wot-tooltip-bg, rgba(38, 39, 40, 0.8)) !default; // 背景色
@@ -969,6 +976,17 @@ $-signature-radius: var(--wot-signature-radius, 4px) !default; // 圆角
 $-signature-border: var(--wot-signature-border, 1px solid $-color-gray-5) !default; // 边框圆角
 $-signature-footer-margin-top: var(--wot-signature-footer-margin-top, 8px) !default; // 底部按钮上边距
 $-signature-button-margin-left: var(--wot-signature-button-margin-left, 8px) !default; // 底部按钮左边距
+
+/* pull-refresh */
+$-pull-refresh-head-height: var(--wot-pull-refresh-head-height, 50px) !default; // 头部高度
+$-pull-refresh-head-bg: var(--wot-pull-refresh-head-bg, $-color-white) !default; // 头部背景色
+$-pull-refresh-content-bg: var(--wot-pull-refresh-content-bg, $-color-white) !default; // 内容背景色
+$-pull-refresh-text-fs: var(--wot-pull-refresh-text-fs, $-fs-content) !default; // 文字字体大小
+$-pull-refresh-text-color: var(--wot-pull-refresh-text-color, $-color-secondary) !default; // 文字颜色
+$-pull-refresh-text-line-height: var(--wot-pull-refresh-text-line-height, 1.5) !default; // 文字行高
+$-pull-refresh-loading-margin: var(--wot-pull-refresh-loading-margin, 8px) !default; // 加载状态文字左边距
+$-pull-refresh-loading-size: var(--wot-pull-refresh-loading-size, 16px) !default; // 加载图标大小
+$-pull-refresh-animation-duration: var(--wot-pull-refresh-animation-duration, 300ms) !default; // 动画持续时间
 
 
 

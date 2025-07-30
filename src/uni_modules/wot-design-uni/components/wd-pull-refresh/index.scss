@@ -1,0 +1,42 @@
+@import "../common/abstracts/_mixin.scss";
+@import "../common/abstracts/variable.scss";
+
+@include b(pull-refresh) {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  
+  @include e(head) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $-pull-refresh-head-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $-color-white;
+  }
+  
+  @include e(content) {
+    position: relative;
+    background-color: $-pull-refresh-content-bg;
+  }
+  
+  @include e(text) {
+    font-size: $-pull-refresh-text-fs;
+    color: $-pull-refresh-text-color;
+    line-height: $-pull-refresh-text-line-height;
+  }
+  
+  @include e(loading) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    
+    .wd-pull-refresh__text {
+      margin-left: $-pull-refresh-loading-margin;
+    }
+  }
+}

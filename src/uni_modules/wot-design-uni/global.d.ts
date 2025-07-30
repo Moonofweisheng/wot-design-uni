@@ -40,6 +40,7 @@ declare module 'vue' {
     WdPopover: typeof import('./components/wd-popover/wd-popover.vue')['default']
     WdPopup: typeof import('./components/wd-popup/wd-popup.vue')['default']
     WdProgress: typeof import('./components/wd-progress/wd-progress.vue')['default']
+    WdPullRefresh: typeof import('./components/wd-pull-refresh/wd-pull-refresh.vue')['default']
     WdRadio: typeof import('./components/wd-radio/wd-radio.vue')['default']
     WdRadioGroup: typeof import('./components/wd-radio-group/wd-radio-group.vue')['default']
     WdRate: typeof import('./components/wd-rate/wd-rate.vue')['default']
@@ -95,6 +96,7 @@ declare module 'vue' {
     WdFloatingPanel: typeof import('./components/wd-floating-panel/wd-floating-panel.vue')['default']
     WdSignature: typeof import('./components/wd-signature/wd-signature.vue')['default']
     WdRootPortal: typeof import('./components/wd-root-portal/wd-root-portal.vue')['default']
+    WdPullRefresh: typeof import('./components/wd-pull-refresh/wd-pull-refresh.vue')['default']
   }
 }
 
