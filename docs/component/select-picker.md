@@ -386,46 +386,47 @@ function handleConfirm({ value, selectedItems }) {
 
 ## Attributes
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-|------|------|------|--------|--------|----------|
-| v-model | 选中项，`type`为`checkbox`时类型为array；`type`为`radio`时类型为number/boolean/string | array/number/boolean/string | - | - | - |
-| columns | 选择器数据，一维数组 | array | - | - | - |
-| type | 单复选选择器类型 | string | checkbox/radio | checkbox | - |
-| value-key | 选项对象中value对应的key | string | - | value | - |
-| label-key | 选项对象中展示文本对应的key | string | - | label | - |
-| title | 弹出层标题 | string | - | - | - |
-| label | 选择器左侧文案 | string | - | - | - |
-| placeholder | 选择器占位符 | string | - | 请选择 | - |
-| disabled | 禁用 | boolean | - | false | - |
-| loading | 加载中 | boolean | - | false | - |
-| loading-color | 加载颜色（十六进制，不能缩写） | String | - | #4D80F0 | - |
-| readonly | 只读 | boolean | - | false | - |
-| display-format | 自定义展示文案的格式化函数 | function | - | - | - |
-| confirm-button-text | 确认按钮文案 | string | - | 确认 | - |
-| size | 选择器大小 | string | large | - | - |
-| label-width | 左侧标题宽度 | string | - | 33% | - |
-| error | 错误状态（右侧内容红色） | boolean | - | false | - |
-| required | 必填样式 | boolean | - | false | - |
-| align-right | 值靠右展示 | boolean | - | false | - |
-| before-confirm | 确定前校验函数，接收(value,resolve)参数 | function | - | - | - |
-| select-size | picker内部选项组尺寸 | string | large | - | - |
-| min | 最小选中数量（仅checkbox） | number | - | 0 | - |
-| max | 最大选中数量（0为无限，仅checkbox） | number | - | 0 | - |
-| checked-color | 选中颜色（单/复选框） | string | - | #4D80F0 | - |
-| use-default-slot | 使用默认插槽 | boolean | - | false | - |
-| use-label-slot | 使用label插槽 | boolean | - | false | - |
-| close-on-click-modal | 点击遮罩关闭 | boolean | - | true | - |
-| z-index | 弹窗层级 | number | - | 15 | - |
-| safe-area-inset-bottom | 底部安全距离（iPhone X类机型） | boolean | - | true | - |
-| filterable | 可搜索（仅本地） | boolean | - | false | - |
-| filter-placeholder | 搜索框占位符 | string | - | 搜索 | - |
-| ellipsis | 超出隐藏 | boolean | - | false | - |
-| scroll-into-view | 重新打开时滚动到选中项 | boolean | - | true | 0.1.34 |
-| show-confirm | 是否显示确认按钮（仅radio） | boolean | - | true | 1.2.8 |
-| prop | 表单域model字段名（校验必填） | string | - | - | - |
-| rules | 表单验证规则（配合wd-form） | `FormItemRule[]` | - | `[]` | - |
-| clearable | 显示清空按钮 | boolean | - | false | 1.11.0 |
-| root-portal | 脱离页面解决fixed失效问题 | boolean | - | false | 1.11.0 |
+| 参数                     | 说明                                                                     | 类型 | 可选值 | 默认值 | 最低版本 |
+|------------------------|------------------------------------------------------------------------|------|--------|--------|---------|
+| v-model                | 选中项，`type`为`checkbox`时类型为array；`type`为`radio`时类型为number/boolean/string | array/number/boolean/string | - | - | - |
+| columns                | 选择器数据，一维数组                                                             | array | - | - | - |
+| type                   | 单复选选择器类型                                                               | string | checkbox/radio | checkbox | - |
+| value-key              | 选项对象中value对应的key                                                       | string | - | value | - |
+| label-key              | 选项对象中展示文本对应的key                                                        | string | - | label | - |
+| title                  | 弹出层标题                                                                  | string | - | - | - |
+| label                  | 选择器左侧文案                                                                | string | - | - | - |
+| placeholder            | 选择器占位符                                                                 | string | - | 请选择 | - |
+| disabled               | 禁用                                                                     | boolean | - | false | - |
+| loading                | 加载中                                                                    | boolean | - | false | - |
+| loading-color          | 加载颜色（十六进制，不能缩写）                                                        | String | - | #4D80F0 | - |
+| readonly               | 只读                                                                     | boolean | - | false | - |
+| display-format         | 自定义展示文案的格式化函数                                                          | function | - | - | - |
+| confirm-button-text    | 确认按钮文案                                                                 | string | - | 确认 | - |
+| size                   | 选择器大小                                                                  | string | large | - | - |
+| label-width            | 左侧标题宽度                                                                 | string | - | 33% | - |
+| error                  | 错误状态（右侧内容红色）                                                           | boolean | - | false | - |
+| required               | 必填样式                                                                   | boolean | - | false | - |
+| align-right            | 值靠右展示                                                                  | boolean | - | false | - |
+| before-confirm         | 确定前校验函数，接收(value,resolve)参数                                            | function | - | - | - |
+| select-size            | picker内部选项组尺寸                                                          | string | large | - | - |
+| min                    | 最小选中数量（仅checkbox）                                                      | number | - | 0 | - |
+| max                    | 最大选中数量（0为无限，仅checkbox）                                                 | number | - | 0 | - |
+| checked-color          | 选中颜色（单/复选框）                                                            | string | - | #4D80F0 | - |
+| use-default-slot       | 使用默认插槽                                                                 | boolean | - | false | - |
+| use-label-slot         | 使用label插槽                                                              | boolean | - | false | - |
+| close-on-click-modal   | 点击遮罩关闭                                                                 | boolean | - | true | - |
+| z-index                | 弹窗层级                                                                   | number | - | 15 | - |
+| safe-area-inset-bottom | 底部安全距离（iPhone X类机型）                                                    | boolean | - | true | - |
+| filterable             | 可搜索（仅本地）                                                               | boolean | - | false | - |
+| remote                 | 远程搜索                                                                   | boolean | - | false | $LOWEST_VERSION$ |
+| filter-placeholder     | 搜索框占位符                                                                 | string | - | 搜索 | - |
+| ellipsis               | 超出隐藏                                                                   | boolean | - | false | - |
+| scroll-into-view       | 重新打开时滚动到选中项                                                            | boolean | - | true | 0.1.34 |
+| show-confirm           | 是否显示确认按钮（仅radio）                                                       | boolean | - | true | 1.2.8 |
+| prop                   | 表单域model字段名（校验必填）                                                      | string | - | - | - |
+| rules                  | 表单验证规则（配合wd-form）                                                      | `FormItemRule[]` | - | `[]` | - |
+| clearable              | 显示清空按钮                                                                 | boolean | - | false | 1.11.0 |
+| root-portal            | 脱离页面解决fixed失效问题                                                        | boolean | - | false | 1.11.0 |
 
 ### FormItemRule 数据结构
 
@@ -446,14 +447,15 @@ function handleConfirm({ value, selectedItems }) {
 
 ## Events
 
-| 事件名称 | 说明                       | 参数                                                                                                       | 最低版本 |
-| -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------- | -------- |
-| confirm  | 点击确认时触发             | event.detail = { value, selectedItems }, checkbox 类型时 value 和 selectedItems 为数组，radio 类型为非数组 | -        |
-| change   | picker 内选项更改时触发    | `{ value }`, checkbox 类型时 value 为数组，radio 类型为非数组                                              | -        |
-| cancel   | 点击关闭按钮或者蒙层时触发 | -                                                                                                          | -        |
-| close    | 弹窗关闭时触发             | -                                                                                                          | 1.2.29   |
-| open     | 弹窗打开时触发             | -                                                                                                          | 1.2.29   |
-| clear    | 点击清空按钮时触发     | -                                                                                                    | 1.11.0    |
+| 事件名称       | 说明                     | 参数                                                                                           | 最低版本              |
+|------------|------------------------|----------------------------------------------------------------------------------------------|-------------------|
+| confirm    | 点击确认时触发                | event.detail = { value, selectedItems }, checkbox 类型时 value 和 selectedItems 为数组，radio 类型为非数组 | -                 |
+| change     | picker 内选项更改时触发        | `{ value }`, checkbox 类型时 value 为数组，radio 类型为非数组                                             | -                 |
+| cancel     | 点击关闭按钮或者蒙层时触发          | -                                                                                            | -                 |
+| close      | 弹窗关闭时触发                | -                                                                                            | 1.2.29            |
+| open       | 弹窗打开时触发                | -                                                                                            | 1.2.29            |
+| clear      | 点击清空按钮时触发              | -                                                                                            | 1.11.0            |
+| remoteFunc | 自定义远程搜索方法(使用remote时必需) | val，搜索的文字内容                                                                                  | $LOWEST_VERSION$  |
 
 ## Methods
 
