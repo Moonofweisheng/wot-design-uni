@@ -234,7 +234,71 @@ const beforeConfirm = (value, resolve) => {
 设置 `filterable` 属性支持本地搜索，设置 `filter-placeholder` 属性设置搜索框的占位符。
 
 ```html
-<wd-select-picker label="可搜索" v-model="value" :columns="columns" filterable></wd-select-picker>
+<wd-select-picker label="可搜索" v-model="value" :columns="columns" filterable remote @remoteFunc="remoteFunc"></wd-select-picker>
+```
+
+## 远程搜索
+
+设置 `remote` 属性支持远程搜索，设置 `remoteFunc` 方法来自定义远程搜索的操作。
+
+```html
+<wd-select-picker label="远程搜索" v-model="value" :columns="columns" filterable></wd-select-picker>
+```
+```typescript
+const value = ref<string[]>(['101'])
+
+const columns = ref<Record<string, any>>([
+  {
+    value: '101',
+    label: '男装'
+  },
+  {
+    value: '102',
+    label: '奢侈品'
+  },
+  {
+    value: '103',
+    label: '女装'
+  },
+  {
+    value: '104',
+    label: '鞋靴'
+  }
+])
+
+// 远程搜索函数demo
+const remoteFunc = (val: string) => {
+  console.log(val)
+  remoteLoading.value = true
+
+  // 模拟远程请求，正常需要执行接口获取数据并对columns赋值
+  setTimeout(() => {
+    columns3.value = [
+      {
+        value: '101',
+        label: '男装'
+      },
+      {
+        value: '102',
+        label: '奢侈品'
+      },
+      {
+        value: '103',
+        label: '女装'
+      },
+      {
+        value: '104',
+        label: '鞋靴'
+      }
+    ]
+    if (val) {
+      columns3.value = columns3.value.filter((item: any) => {
+        return item.label.includes(val)
+      })
+    }
+    remoteLoading.value = false
+  }, 1500)
+}
 ```
 
 ## 自动完成

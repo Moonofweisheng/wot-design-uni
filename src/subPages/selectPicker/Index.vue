@@ -167,38 +167,6 @@ const columns3 = ref<Record<string, any>[]>([
   {
     value: '104',
     label: t('xie-xue')
-  },
-  {
-    value: '105',
-    label: t('nei-yi-pei-shi')
-  },
-  {
-    value: '106',
-    label: t('xiang-bao')
-  },
-  {
-    value: '107',
-    label: t('mei-zhuang-hu-fu')
-  },
-  {
-    value: '108',
-    label: t('ge-xing-qing-jie')
-  },
-  {
-    value: '109',
-    label: t('zhong-biao-zhu-bao')
-  },
-  {
-    value: '110',
-    label: t('shou-ji')
-  },
-  {
-    value: '111',
-    label: t('shu-ma')
-  },
-  {
-    value: '112',
-    label: t('dian-nao-ban-gong')
   }
 ])
 const value1 = ref<string[]>(['101'])
@@ -333,38 +301,6 @@ const remoteFunc = (val: string) => {
       {
         value: '104',
         label: t('xie-xue')
-      },
-      {
-        value: '105',
-        label: t('nei-yi-pei-shi')
-      },
-      {
-        value: '106',
-        label: t('xiang-bao')
-      },
-      {
-        value: '107',
-        label: t('mei-zhuang-hu-fu')
-      },
-      {
-        value: '108',
-        label: t('ge-xing-qing-jie')
-      },
-      {
-        value: '109',
-        label: t('zhong-biao-zhu-bao')
-      },
-      {
-        value: '110',
-        label: t('shou-ji')
-      },
-      {
-        value: '111',
-        label: t('shu-ma')
-      },
-      {
-        value: '112',
-        label: t('dian-nao-ban-gong')
       }
     ]
     if (val) {
