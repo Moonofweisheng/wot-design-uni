@@ -66,7 +66,7 @@
           <wd-checkbox-group v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" :min="min" :max="max" @change="handleChange">
             <view v-for="item in filterColumns" :key="item[valueKey]" :id="'check' + item[valueKey]">
               <wd-checkbox :modelValue="item[valueKey]" :disabled="item.disabled">
-                <block v-if="filterable && filterVal">
+                <block v-if="filterable && filterVal && !props.remote">
                   <block v-for="text in item[labelKey]" :key="text.label">
                     <text v-if="text.type === 'active'" class="wd-select-picker__text-active">{{ text.label }}</text>
                     <block v-else>{{ text.label }}</block>
@@ -84,7 +84,7 @@
           <wd-radio-group v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" @change="handleChange">
             <view v-for="(item, index) in filterColumns" :key="index" :id="'radio' + item[valueKey]">
               <wd-radio :value="item[valueKey]" :disabled="item.disabled">
-                <block v-if="filterable && filterVal">
+                <block v-if="filterable && filterVal && !props.remote">
                   <block v-for="text in item[labelKey]" :key="text.label">
                     <text :class="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
                   </block>
@@ -102,7 +102,9 @@
       </scroll-view>
       <!-- 确认按钮 -->
       <view v-if="showConfirm" class="wd-select-picker__footer">
-        <wd-button block size="large" @click="onConfirm" :disabled="loading">{{ confirmButtonText || translate('confirm') }}</wd-button>
+        <wd-button block size="large" @click="onConfirm" :disabled="loading">
+          {{ confirmButtonText || translate('confirm') }}
+        </wd-button>
       </view>
     </wd-action-sheet>
   </view>
@@ -136,7 +138,7 @@ import { selectPickerProps, type SelectPickerExpose } from './types'
 const { translate } = useTranslate('select-picker')
 
 const props = defineProps(selectPickerProps)
-const emit = defineEmits(['change', 'cancel', 'confirm', 'clear', 'update:modelValue', 'open', 'close'])
+const emit = defineEmits(['change', 'cancel', 'confirm', 'clear', 'update:modelValue', 'open', 'close', 'remoteFunc'])
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
@@ -189,7 +191,7 @@ watch(
 watch(
   () => props.columns,
   (newValue) => {
-    if (props.filterable && filterVal.value) {
+    if (props.filterable && filterVal.value && !props.remote) {
       formatFilterColumns(newValue, filterVal.value)
     } else {
       filterColumns.value = newValue
@@ -366,6 +368,11 @@ function getFilterText(label: string, filterVal: string) {
 }
 
 function handleFilterChange({ value }: { value: string }) {
+  if (props.remote) {
+    filterColumns.value = []
+    emit('remoteFunc', value)
+    return
+  }
   if (value === '') {
     filterColumns.value = []
     filterVal.value = value
@@ -389,6 +396,7 @@ function formatFilterColumns(columns: Record<string, any>[], filterVal: string) 
       [props.labelKey]: getFilterText(item[props.labelKey], filterVal)
     }
   })
+  console.log(formatFilterColumns)
   filterColumns.value = []
   nextTick(() => {
     filterColumns.value = formatFilterColumns

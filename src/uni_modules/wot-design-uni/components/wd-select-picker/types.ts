@@ -101,7 +101,11 @@ export const selectPickerProps = {
   /**
    * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
    */
-  rootPortal: makeBooleanProp(false)
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 是否支持远程搜索
+   * */
+  remote: makeBooleanProp(false)
 }
 export type SelectPickerProps = ExtractPropTypes<typeof selectPickerProps>
 

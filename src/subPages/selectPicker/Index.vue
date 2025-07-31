@@ -22,6 +22,16 @@
         <wd-select-picker clearable :label="$t('bi-tian')" required v-model="value12" :columns="columns1" @confirm="handleConfirm12" />
         <wd-select-picker :label="$t('ke-sou-suo')" filterable v-model="value13" :columns="columns1" @confirm="handleConfirm13" />
         <wd-select-picker
+          :label="$t('yuan-cheng-sou-suo')"
+          :loading="remoteLoading"
+          filterable
+          remote
+          v-model="value21"
+          :columns="columns3"
+          @confirm="handleConfirm1"
+          @remoteFunc="remoteFunc"
+        />
+        <wd-select-picker
           :label="$t('dan-xuan-ke-sou-suo')"
           filterable
           v-model="value18"
@@ -141,6 +151,56 @@ const columns2 = ref<Record<string, any>[]>([
     label: t('nv-zhuang-0')
   }
 ])
+const columns3 = ref<Record<string, any>[]>([
+  {
+    value: '101',
+    label: t('nan-zhuang')
+  },
+  {
+    value: '102',
+    label: t('she-chi-pin')
+  },
+  {
+    value: '103',
+    label: t('nv-zhuang')
+  },
+  {
+    value: '104',
+    label: t('xie-xue')
+  },
+  {
+    value: '105',
+    label: t('nei-yi-pei-shi')
+  },
+  {
+    value: '106',
+    label: t('xiang-bao')
+  },
+  {
+    value: '107',
+    label: t('mei-zhuang-hu-fu')
+  },
+  {
+    value: '108',
+    label: t('ge-xing-qing-jie')
+  },
+  {
+    value: '109',
+    label: t('zhong-biao-zhu-bao')
+  },
+  {
+    value: '110',
+    label: t('shou-ji')
+  },
+  {
+    value: '111',
+    label: t('shu-ma')
+  },
+  {
+    value: '112',
+    label: t('dian-nao-ban-gong')
+  }
+])
 const value1 = ref<string[]>(['101'])
 const value2 = ref<string>('101')
 const value3 = ref<string[]>(['102'])
@@ -161,10 +221,13 @@ const value17 = ref<string[]>(['102'])
 const value18 = ref<string>('102')
 const value19 = ref<string>('101')
 const value20 = ref<string>('101')
+const value21 = ref<string[]>(['101'])
 
 const customShow = ref<string>(t('she-chi-pin'))
 
 const toast = useToast()
+
+const remoteLoading = ref(false)
 
 const displayFormat: SelectPickerDisplayFormat = (items, columns) => {
   let showValue = ''
@@ -245,6 +308,72 @@ function handleConfirm17({ value, selectedItems }: any) {
       return item.label
     })
     .join(', ')
+}
+
+// 远程搜索函数demo
+const remoteFunc = (val: string) => {
+  console.log(val)
+  remoteLoading.value = true
+
+  // 模拟远程请求，正常需要执行接口获取数据并对columns赋值
+  setTimeout(() => {
+    columns3.value = [
+      {
+        value: '101',
+        label: t('nan-zhuang')
+      },
+      {
+        value: '102',
+        label: t('she-chi-pin')
+      },
+      {
+        value: '103',
+        label: t('nv-zhuang')
+      },
+      {
+        value: '104',
+        label: t('xie-xue')
+      },
+      {
+        value: '105',
+        label: t('nei-yi-pei-shi')
+      },
+      {
+        value: '106',
+        label: t('xiang-bao')
+      },
+      {
+        value: '107',
+        label: t('mei-zhuang-hu-fu')
+      },
+      {
+        value: '108',
+        label: t('ge-xing-qing-jie')
+      },
+      {
+        value: '109',
+        label: t('zhong-biao-zhu-bao')
+      },
+      {
+        value: '110',
+        label: t('shou-ji')
+      },
+      {
+        value: '111',
+        label: t('shu-ma')
+      },
+      {
+        value: '112',
+        label: t('dian-nao-ban-gong')
+      }
+    ]
+    if (val) {
+      columns3.value = columns3.value.filter((item: any) => {
+        return item.label.includes(val)
+      })
+    }
+    remoteLoading.value = false
+  }, 1500)
 }
 </script>
 <style lang="scss" scoped></style>
