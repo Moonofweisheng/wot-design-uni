@@ -137,8 +137,8 @@
 | hover-stop-propagation | 指定是否阻止本节点的祖先节点出现点击态                                                                                                                         | boolean     | -                                                        | false        | -        |
 | lang                   | 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文                                                                                                | string      | zh_CN / zh_TW                                            | en           | -        |
 | session-from           | 会话来源，open-type="contact"时有效                                                                                                                            | string      | -                                                        | -            | -        |
-| session-message-title  | 会话内消息卡片标题，open-type="contact"时有效                                                                                                                  | string      | -                                                        | 当前标题     | -        |
-| session-message-path   | 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效                                                                                                    | string      | -                                                        | 当前分享路径 | -        |
+| send-message-title     | 会话内消息卡片标题，open-type="contact"时有效                                                                                                                  | string      | -                                                        | 当前标题     | -        |
+| send-message-path      | 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效                                                                                                    | string      | -                                                        | 当前分享路径 | -        |
 | send-message-img       | 会话内消息卡片图片，open-type="contact"时有效                                                                                                                  | string      | -                                                        | 截图         | -        |
 | app-parameter          | 打开 APP 时，向 APP 传递的参数，open-type=launchApp 时有效                                                                                                     | string      | -                                                        | -            | -        |
 | show-message-card      | 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 | boolean     | -                                                        | false        | -        |
@@ -174,6 +174,8 @@
 | error          | 当使用开放能力时，发生错误的回调，open-type=launchApp 时有效 | `detail` | -        |
 | launchapp      | 打开 APP 成功的回调，open-type=launchApp 时有效              | `detail` | -        |
 | opensetting    | 在打开授权设置页后回调，open-type=openSetting 时有效         | `detail` | -        |
+| chooseavatar   | 获取用户头像回调，open-type=chooseAvatar 时有效              | `detail` | -        |
+| agreeprivacyauthorization | 用户同意隐私协议回调，open-type=agreePrivacyAuthorization 时有效 | `detail` | -        |
 
 ## 外部样式类
 

@@ -8,10 +8,6 @@ Set the `name` attribute to use the built-in icons.
 
 ```html
 <wd-icon name="add-circle"></wd-icon>
-<wd-icon name="add"></wd-icon>
-<wd-icon name="arrow-down"></wd-icon>
-<wd-icon name="arrow-right"></wd-icon>
-<wd-icon name="camera"></wd-icon>
 ```
 
 ## Icon Color
@@ -46,34 +42,30 @@ First, you need to define your own font icon library, and then set the `class-pr
 
 ### 2. Using Image Icons
 
-Set the `custom` attribute to use image icons, and set the `name` attribute to the image URL.
+Set the `name` attribute to an image URL to use image icons. The component automatically detects URLs containing `/`.
 
 ```html
-<wd-icon custom name="https://example.com/icon.png"></wd-icon>
+<wd-icon name="https://example.com/icon.png"></wd-icon>
 ```
-
-## Icon List
-
-<icon-list></icon-list>
 
 ## Attributes
 
-| Attribute | Description | Type | Default | Version |
-|---------|---------|---------|---------|------|
-| name | Icon name | string | - | - |
-| color | Icon color | string | - | - |
-| size | Icon size | string | - | - |
-| class-prefix | Custom icon class prefix | string | wd-icon | - |
-| custom | Whether to use custom image icon | boolean | false | - |
+| Attribute    | Description              | Type   | Default | Version |
+| ------------ | ------------------------ | ------ | ------- | ------- |
+| name         | Icon name or image URL   | string | -       | -       |
+| color        | Icon color               | string | -       | -       |
+| size         | Icon size                | string | -       | -       |
+| class-prefix | Custom icon class prefix | string | wd-icon | -       |
+| custom-style | Custom root node style   | string | -       | -       |
 
 ## Events
 
-| Event Name | Description | Parameters | Version |
-|---------|---------|---------|------|
-| click | Triggered when the icon is clicked | event: Event | - |
+| Event Name | Description                        | Parameters   | Version |
+| ---------- | ---------------------------------- | ------------ | ------- |
+| click      | Triggered when the icon is clicked | event: Event | -       |
 
 ## External Style Classes
 
-| Class Name | Description | Version |
-|---------|---------|------|
-| custom-class | Root node custom class | - |
+| Class Name   | Description            | Version |
+| ------------ | ---------------------- | ------- |
+| custom-class | Root node custom class | -       |
