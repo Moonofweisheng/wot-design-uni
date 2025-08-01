@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import { getType, isArray, isObj } from '../common/util'
 
@@ -7,6 +7,7 @@ export type ColumnItem = {
   value?: string | number | boolean
   label?: string
   disabled?: boolean
+  icon?: string
 }
 
 export type PickerViewColumnChange = (
@@ -129,8 +130,8 @@ export function formatArray(
        */
       // eslint-disable-next-line no-prototype-builtins
       if (!row.hasOwnProperty(valueKey) && !row.hasOwnProperty(labelKey)) {
-        // eslint-disable-next-line prettier/prettier
-      throw Error('Can\'t find valueKey and labelKey in columns')
+        // eslint-disable-next-line prettier/prettier, quotes
+        throw Error("Can't find valueKey and labelKey in columns")
       }
       // eslint-disable-next-line no-prototype-builtins
       if (!row.hasOwnProperty(labelKey)) {
