@@ -8,7 +8,7 @@
     <wd-cell
       v-if="!$slots.default"
       :title="label"
-      :value="showValue ? showValue : placeholder || translate('placeholder')"
+      :value="showValue ? showValue : placeholderValue"
       :required="required"
       :size="size"
       :title-width="labelWidth"
@@ -22,7 +22,6 @@
       :custom-value-class="customValueClass"
       :ellipsis="ellipsis"
       :use-title-slot="!!$slots.label"
-      :marker-side="markerSide"
       @click="showPopup"
     >
       <template v-if="$slots.label" #title>
@@ -143,6 +142,26 @@ watch(
 )
 
 watch(
+  () => props.columns,
+  (newValue) => {
+    displayColumns.value = deepClone(newValue)
+    resetColumns.value = deepClone(newValue)
+    if (newValue.length === 0) {
+      // 当 columns 变为空时，清空 pickerValue 和 showValue
+      pickerValue.value = isArray(props.modelValue) ? [] : ''
+      // showValue.value = ''
+    } else {
+      // 非空时正常更新显示值
+      handleShowValueUpdate(props.modelValue)
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
+
+watch(
   () => props.modelValue,
   (newValue) => {
     pickerValue.value = newValue
@@ -155,25 +174,7 @@ watch(
   }
 )
 
-watch(
-  () => props.columns,
-  (newValue) => {
-    displayColumns.value = deepClone(newValue)
-    resetColumns.value = deepClone(newValue)
-    if (newValue.length === 0) {
-      // 当 columns 变为空时，清空 pickerValue 和 showValue
-      pickerValue.value = isArray(props.modelValue) ? [] : ''
-      showValue.value = ''
-    } else {
-      // 非空时正常更新显示值
-      handleShowValueUpdate(props.modelValue)
-    }
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
+
 
 watch(
   () => props.columnChange,
@@ -227,10 +228,10 @@ function handleShowValueUpdate(value: string | number | Array<string | number>) 
   if ((isArray(value) && value.length > 0) || (isDef(value) && !isArray(value) && value !== '')) {
     if (pickerViewWd.value) {
       nextTick(() => {
-        setShowValue(pickerViewWd.value!.getSelects())
+        setShowValue(pickerViewWd.value!.getSelects(),value)
       })
     } else {
-      setShowValue(getSelects(value)!)
+      setShowValue(getSelects(value)!,value)
     }
   } else {
     showValue.value = ''
@@ -367,9 +368,12 @@ function pickerViewChange({ value }: any) {
  * 设置展示值
  * @param  items
  */
-function setShowValue(items: ColumnItem | ColumnItem[]) {
+function setShowValue(items: ColumnItem | ColumnItem[],value?:any) {
   // 避免值为空时调用自定义展示函数
-  if ((isArray(items) && !items.length) || !items) return
+  if ((isArray(items) && !items.length) || !items) {
+    showValue.value = value
+    return
+  }
 
   const { valueKey, labelKey } = props
   showValue.value = (props.displayFormat || defaultDisplayFormat)(items, { valueKey, labelKey })
@@ -400,6 +404,10 @@ function handleClear() {
   emit('update:modelValue', clearValue)
   emit('clear')
 }
+
+const placeholderValue = computed(() => {
+  return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
+})
 
 defineExpose<PickerExpose>({
   close,
