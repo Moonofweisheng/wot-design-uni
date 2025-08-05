@@ -22,6 +22,7 @@
       :custom-value-class="customValueClass"
       :ellipsis="ellipsis"
       :use-title-slot="!!$slots.label"
+      :marker-side="markerSide"
       @click="showPopup"
     >
       <template v-if="$slots.label" #title>
@@ -142,26 +143,6 @@ watch(
 )
 
 watch(
-  () => props.columns,
-  (newValue) => {
-    displayColumns.value = deepClone(newValue)
-    resetColumns.value = deepClone(newValue)
-    if (newValue.length === 0) {
-      // 当 columns 变为空时，清空 pickerValue 和 showValue
-      pickerValue.value = isArray(props.modelValue) ? [] : ''
-      // showValue.value = ''
-    } else {
-      // 非空时正常更新显示值
-      handleShowValueUpdate(props.modelValue)
-    }
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
-
-watch(
   () => props.modelValue,
   (newValue) => {
     pickerValue.value = newValue
@@ -174,7 +155,25 @@ watch(
   }
 )
 
-
+watch(
+  () => props.columns,
+  (newValue) => {
+    displayColumns.value = deepClone(newValue)
+    resetColumns.value = deepClone(newValue)
+    if (newValue.length === 0) {
+      // 当 columns 变为空时，清空 pickerValue 和 showValue
+      pickerValue.value = isArray(props.modelValue) ? [] : ''
+      showValue.value = ''
+    } else {
+      // 非空时正常更新显示值
+      handleShowValueUpdate(props.modelValue)
+    }
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 
 watch(
   () => props.columnChange,
@@ -197,6 +196,11 @@ const showClear = computed(() => {
 // 是否展示箭头
 const showArrow = computed(() => {
   return !props.disabled && !props.readonly && !showClear.value
+})
+
+//自定义placeholder
+const placeholderValue = computed(() => {
+  return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
 })
 
 const cellClass = computed(() => {
@@ -404,10 +408,6 @@ function handleClear() {
   emit('update:modelValue', clearValue)
   emit('clear')
 }
-
-const placeholderValue = computed(() => {
-  return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
-})
 
 defineExpose<PickerExpose>({
   close,
