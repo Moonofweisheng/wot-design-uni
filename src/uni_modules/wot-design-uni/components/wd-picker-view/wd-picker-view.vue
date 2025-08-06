@@ -281,8 +281,11 @@ function getValues() {
 
   if (values.length === 1) {
     return values[0]
+  } else if (!values?.length) {
+    return undefined
+  } else {
+    return values
   }
-  return values
 }
 
 /**
