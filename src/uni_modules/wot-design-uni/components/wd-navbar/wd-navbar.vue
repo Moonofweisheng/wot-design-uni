@@ -52,7 +52,7 @@ const emit = defineEmits(['click-left', 'click-right'])
 
 const height = ref<number | ''>('') // 占位高度
 
-const { statusBarHeight } = uni.getWindowInfo()
+const { statusBarHeight } = typeof uni.getWindowInfo === 'function'? uni.getWindowInfo(): uni.getSystemInfoSync()
 
 watch(
   [() => props.fixed, () => props.placeholder],
