@@ -14,25 +14,28 @@ function isVNode(value: any): value is VNode {
   return value ? value.__v_isVNode === true : false
 }
 
-export function flattenVNodes(children: VNodeNormalizedChildren) {
+export function flattenVNodes(children: VNode | VNodeNormalizedChildren) {
   const result: VNode[] = []
+  const traverse = (children: VNode | VNodeNormalizedChildren) => {
+    if (!isVNode(children)) return
 
-  const traverse = (children: VNodeNormalizedChildren) => {
-    if (Array.isArray(children)) {
-      children.forEach((child) => {
+    if (Array.isArray(children?.children)) {
+      children.children.forEach((child) => {
         if (isVNode(child)) {
           result.push(child)
 
           if (child.component?.subTree) {
             result.push(child.component.subTree)
-            traverse(child.component.subTree.children)
+            traverse(child.component.subTree)
           }
 
           if (child.children) {
-            traverse(child.children)
+            traverse(child)
           }
         }
       })
+    } else if (children.component?.subTree) {
+      traverse(children.component.subTree)
     }
   }
 
@@ -55,15 +58,19 @@ export function sortChildren(
   publicChildren: ComponentPublicInstance[],
   internalChildren: ComponentInternalInstance[]
 ) {
-  const vnodes = parent && parent.subTree && parent.subTree.children ? flattenVNodes(parent.subTree.children) : []
-
+  const vnodes = parent && parent.subTree && parent.subTree.children ? flattenVNodes(parent.subTree) : []
   internalChildren.sort((a, b) => findVNodeIndex(vnodes, a.vnode) - findVNodeIndex(vnodes, b.vnode))
 
   const orderedPublicChildren = internalChildren.map((item) => item.proxy!)
 
   publicChildren.sort((a, b) => {
-    const indexA = orderedPublicChildren.indexOf(a)
-    const indexB = orderedPublicChildren.indexOf(b)
+    const getIndex = (comp: ComponentPublicInstance) => {
+      const uid = comp.$.uid
+      return orderedPublicChildren.findIndex((i) => i.$.uid === uid)
+    }
+
+    const indexA = getIndex(a)
+    const indexB = getIndex(b)
     return indexA - indexB
   })
 }
