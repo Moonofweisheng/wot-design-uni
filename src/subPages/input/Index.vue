@@ -50,6 +50,10 @@
       />
       <text class="custom-txt">{{ $t('yuan') }}</text>
     </demo-block>
+    <!--格式化formatter，转换成金额-->
+    <demo-block :title="$t('zhan-shi-ge-shi-hua')">
+      <wd-input type="text" v-model="value23" :formatter="amountFormatter" :parser="amountParse" />
+    </demo-block>
     <demo-block :title="$t('cell-lei-xing')" transparent>
       <wd-cell-group border>
         <wd-input type="text" :label="$t('jiBenYongFa')" v-model="value12" @input="handleInput" :placeholder="$t('qing-shu-ru-0')" />
@@ -142,6 +146,7 @@ const value19 = ref<string>('')
 const value20 = ref<string>('')
 const value21 = ref<string>('')
 const value22 = ref<string>('')
+const value23 = ref<string>('')
 
 function handleChange(event: any) {
   console.log(event)
@@ -161,6 +166,15 @@ function handleBlur(event: any) {
 
 function handleInput(event: any) {
   console.log(event)
+}
+function amountFormatter(value: string | number) {
+  console.log(value)
+  value = String(value)
+  return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+function amountParse(value: string | number) {
+  value = String(value)
+  return value.replace(/[^\d.]/g, '')
 }
 </script>
 <style lang="scss" scoped>

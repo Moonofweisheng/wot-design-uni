@@ -135,7 +135,11 @@ watch(
 watch(
   () => props.modelValue,
   (newValue) => {
-    inputValue.value = isDef(newValue) ? String(newValue) : ''
+    // 当modelValue变化时，使用formatter格式化显示值
+    const formatted = formatValue(newValue)
+    if (!isValueEqual(formatted, inputValue.value)) {
+      inputValue.value = formatted
+    }
   }
 )
 
@@ -224,10 +228,29 @@ function getInitValue() {
   return formatted
 }
 
+// 格式化显示值
 function formatValue(value: string | number) {
-  const { maxlength } = props
-  if (isDef(maxlength) && maxlength !== -1 && String(value).length > maxlength) {
-    return value.toString().slice(0, maxlength)
+  const { maxlength, formatter } = props
+  let formattedValue = value
+
+  // 如果有formatter函数，则使用formatter格式化显示值
+  if (formatter && typeof formatter === 'function') {
+    formattedValue = formatter(value)
+  }
+
+  // 处理maxlength限制
+  if (isDef(maxlength) && maxlength !== -1 && String(formattedValue).length > maxlength) {
+    return formattedValue.toString().slice(0, maxlength)
+  }
+  return formattedValue
+}
+
+// 解析输入值
+function parseValue(value: string | number) {
+  const { parser } = props
+  // 如果有parser函数，则使用parser解析实际值
+  if (parser && typeof parser === 'function') {
+    return parser(value)
   }
   return value
 }
@@ -247,7 +270,8 @@ async function handleClear() {
     focused.value = true
     focusing.value = true
   }
-  emit('update:modelValue', inputValue.value)
+  // 清空时，同时更新显示值和实际值
+  emit('update:modelValue', parseValue(''))
   emit('clear')
 }
 async function handleBlur() {
@@ -258,23 +282,41 @@ async function handleBlur() {
     return
   }
   focusing.value = false
+  // 失焦时，将解析后的值传递给blur事件
   emit('blur', {
-    value: inputValue.value
+    value: parseValue(inputValue.value)
   })
 }
 function handleFocus({ detail }: any) {
   focusing.value = true
-  emit('focus', detail)
+  // 聚焦时，将解析后的值传递给focus事件
+  emit('focus', {
+    ...detail,
+    value: parseValue(inputValue.value)
+  })
 }
 function handleInput({ detail }: any) {
-  emit('update:modelValue', inputValue.value)
-  emit('input', detail)
+  // 使用formatter格式化显示值
+  const formatted = formatValue(detail.value)
+  inputValue.value = formatted
+
+  // 使用parser解析实际值并更新modelValue
+  const parsed = parseValue(detail.value)
+  emit('update:modelValue', parsed)
+  emit('input', {
+    value: parsed,
+    formattedValue: formatted
+  })
 }
 function handleKeyboardheightchange({ detail }: any) {
   emit('keyboardheightchange', detail)
 }
 function handleConfirm({ detail }: any) {
-  emit('confirm', detail)
+  // 确认时，将解析后的值传递给confirm事件
+  emit('confirm', {
+    ...detail,
+    value: parseValue(inputValue.value)
+  })
 }
 function onClickSuffixIcon() {
   emit('clicksuffixicon')

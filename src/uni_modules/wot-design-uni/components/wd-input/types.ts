@@ -179,5 +179,17 @@ export const inputProps = {
    * 可选值: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search" | "password"
    * 默认值: "text"
    */
-  inputmode: makeStringProp<InputMode>('text')
+  inputmode: makeStringProp<InputMode>('text'),
+  /**
+   * 自定义格式化函数，用于格式化输入内容
+   */
+  formatter: Function as PropType<InputFormatter>,
+  /**
+   * 解析输入的值，通常和formatter一起使用
+   * */
+  parser: Function as PropType<Parser>
 }
+
+// 添加 InputFormatter 类型定义
+export type InputFormatter = (value: string | number) => string | number
+export type Parser = (value: string | number) => string | number
