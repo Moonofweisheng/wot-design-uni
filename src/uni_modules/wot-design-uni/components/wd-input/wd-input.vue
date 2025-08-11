@@ -304,6 +304,7 @@ function handleInput({ detail }: any) {
   const parsed = parseValue(detail.value)
   emit('update:modelValue', parsed)
   emit('input', {
+    ...detail,
     value: parsed,
     formattedValue: formatted
   })

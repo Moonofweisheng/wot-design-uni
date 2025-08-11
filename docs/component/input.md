@@ -133,6 +133,31 @@ function handleChange(event) {
 <wd-input type="text" label="基本用法" v-model="value" center />
 ```
 
+## 数据格式化
+
+使用 `formatter` 属性格式化输入内容，使用 `parser` 属性解析格式化后的内容。通常两者需要成对使用。
+
+```html
+<wd-input type="text" v-model="value" :formatter="amountFormatter" :parser="amountParse"/>
+```
+
+```typescript
+const value = ref<string>('')
+
+// 格式化函数，将输入的值格式化为金额显示格式
+const amountFormatter = (value: string | number): string => {
+  // 移除非数字字符，并格式化为金额显示格式
+  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  return value
+}
+
+// 解析函数，将格式化后的值解析为原始值
+const amountParse = (value: string | number): string => {
+  // 移除所有逗号，返回原始数字字符串
+  return value.toString().replace(/,/g, '')
+}
+```
+
 ## Attributes
 
 | 参数                   | 说明                                                                                                                                                    | 类型                | 可选值                                                          | 默认值                                 | 最低版本 |
@@ -172,6 +197,8 @@ function handleChange(event) {
 | focusWhenClear         | 是否在点击清除按钮时聚焦输入框                                                                                                                          | boolean             | -                                                               | true                                   | 1.3.7    |
 | ignoreCompositionEvent | 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件。 | boolean             | -                                                               | true                                   | 1.3.11   |
 | inputmode              | 提供用户在编辑元素或其内容时可能输入的数据类型的提示。                                                                                                  | InputMode           | -                                                               | text                                   | 1.5.0    |
+| formatter              | 自定义格式化函数，用于格式化输入内容                                                                                                                    | Function            | -                                                               | -                                      | -        |
+| parser                 | 自定义解析函数，用于解析格式化后的内容，通常和 formatter 一起使用                                                                                       | Function            | -                                                               | -                                      | -        |
 
 ### InputMode 可选值
 
@@ -203,7 +230,7 @@ function handleChange(event) {
 
 | 事件名称             | 说明                             | 参数                                   | 最低版本 |
 | -------------------- | -------------------------------- | -------------------------------------- | -------- |
-| input                | 监听输入框input事件              | `{value, cursor, keyCode}`             | -        |
+| input                | 监听输入框input事件              | `{value, cursor, keyCode, formattedValue}` | -        |
 | focus                | 监听输入框focus事件              | `{ value, height }`, height 为键盘高度 | -        |
 | blur                 | 监听输入框blur事件               | `{ value }`                            | -        |
 | clear                | 监听输入框清空按钮事件           | -                                      | -        |
