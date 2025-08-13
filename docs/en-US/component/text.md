@@ -148,18 +148,19 @@ function clickTest() {
 
 | Parameter | Description | Type | Options | Default | Version |
 |-----------|-------------|------|----------|---------|----------|
-| type | Theme type | string | 'primary' / 'error' / 'warning' / 'success' | default | 1.3.4 |
-| text | Text content | string / number | - | | 1.3.4 |
+| type | Theme type | string | 'primary' / 'error' / 'warning' / 'success' / 'default' | default | 1.3.4 |
+| text | Text content | string / number | - | - | 1.3.4 |
 | size | Font size | string | - | - | 1.3.4 |
-| mode | Text processing mode | string | 'text-normal text' / 'date' / 'phone' / 'name' / 'price' | text | 1.3.4+ |
+| mode | Text processing mode | string | 'text' / 'date' / 'phone' / 'name' / 'price' | text | 1.3.4+ |
 | bold | Whether bold, default normal | boolean | - | false | 1.3.4 |
 | format | Whether to mask data | boolean | Effective when mode is phone or name | false | 1.3.4 |
 | color | Text color | string | - | - | 1.3.4 |
-| lines | Number of lines to display, if set, ellipsis will show when exceeding. Max value is 5. | Number | - | - | 1.3.4 |
-| lineHeight | Text line height | string | - | | 1.3.4 |
-| decoration | Text decoration, underline, line-through, etc. | string | underline/line-through/overline | | 1.3.4+ |
-| prefix | Prefix slot | string | - | | 1.3.4+ |
-| suffix | Suffix slot | string | - | | 1.3.4+ |
+| lines | Number of lines to display, if set, ellipsis will show when exceeding. Max value is 5. | number | - | - | 1.3.4 |
+| lineHeight | Text line height | string | - | - | 1.3.4 |
+| decoration | Text decoration, underline, line-through, etc. | string | 'underline' / 'line-through' / 'overline' | none | 1.3.4+ |
+| prefix | Prefix content | string | - | - | 1.3.4+ |
+| suffix | Suffix content | string | - | - | 1.3.4+ |
+| call | Whether to make a call when clicking text in phone mode | boolean | - | false | 1.3.4 |
 
 ## Events
 
@@ -168,6 +169,11 @@ function clickTest() {
 | click | Triggered when text is clicked | event | 1.3.4 |
 
 ## Slots
+
+| Slot Name | Description | Version |
+|-----------|-------------|---------|
+| prefix | Prefix slot | 1.3.4 |
+| suffix | Suffix slot | 1.3.4 |
 
 ## External Classes
 
