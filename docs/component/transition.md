@@ -77,9 +77,18 @@
 | 参数         | 说明         | 类型             | 可选值         | 默认值  | 最低版本 |
 |--------------|--------------|------------------|----------------|---------|----------|
 | show         | 是否展示组件 | boolean          | -              | -       | -        |
-| name         | 动画类型     | string           | `TransitionName` | -       | -        |
-| duration     | 动画执行时间 | number / boolean | -              | 300(ms) | -        |
+| name         | 动画类型     | string / array   | `TransitionName` | -       | -        |
+| duration     | 动画执行时间 | number / object / boolean | -              | 300(ms) | -        |
 | custom-style | 自定义样式   | string           | -              | -       | -        |
+| custom-class | 自定义根节点样式类 | string     | -              | -       | -        |
+| lazy-render  | 弹层内容懒渲染 | boolean        | -              | false   | -        |
+| destroy      | 是否在动画结束时销毁子节点 | boolean | -              | true    | -        |
+| enter-class  | 进入过渡的开始状态 | string     | -              | -       | -        |
+| enter-active-class | 进入过渡的激活状态 | string | -              | -       | -        |
+| enter-to-class | 进入过渡的结束状态 | string   | -              | -       | -        |
+| leave-class  | 离开过渡的开始状态 | string     | -              | -       | -        |
+| leave-active-class | 离开过渡的激活状态 | string | -              | -       | -        |
+| leave-to-class | 离开过渡的结束状态 | string   | -              | -       | -        |
 | disable-touch-move | 是否阻止触摸滚动 | boolean | -              | false   | 1.11.0 |
 
 ### TransitionName 动画类型
@@ -103,12 +112,19 @@
 
 | 事件名称         | 说明       | 参数 | 最低版本 |
 | ---------------- | ---------- | ---- | -------- |
-| beforeenter | 进入前触发 | -    | -        |
+| before-enter | 进入前触发 | -    | -        |
 | enter       | 进入时触发 | -    | -        |
-| afterenter  | 进入后触发 | -    | -        |
-| beforeleave | 离开前触发 | -    | -        |
+| after-enter  | 进入后触发 | -    | -        |
+| before-leave | 离开前触发 | -    | -        |
 | leave       | 离开时触发 | -    | -        |
-| afterleave  | 离开后触发 | -    | -        |
+| after-leave  | 离开后触发 | -    | -        |
+| click       | 点击时触发 | -    | -        |
+
+## Slots
+
+| 插槽名称 | 说明 | 最低版本 |
+|---------|------|---------|
+| default | 需要应用动画效果的内容 | - |
 
 ## 外部样式类
 

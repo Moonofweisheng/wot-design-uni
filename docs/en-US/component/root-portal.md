@@ -54,8 +54,16 @@ Use `wd-root-portal` to render content to the root node, avoiding style interfer
 }
 ```
 
+## Attributes
+
+This component has no attribute configuration.
+
+## Events
+
+This component has no events.
+
 ## Slots
 
 | Name    | Description                    | Version |
 | ------- | ------------------------------ | ------- |
-| default | Default slot for portal content | -       | 
+| default | Default slot for portal content | 1.11.0  | 

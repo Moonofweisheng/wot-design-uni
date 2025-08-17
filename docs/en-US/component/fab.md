@@ -115,7 +115,7 @@ const handleClick = () => {
 | activeIcon     | Icon when floating button is expanded                                                                | string       | -                                                                                                                                             | 'close'                                        | 0.1.57   |
 | zIndex        | Custom floating button layer level                                                                   | number       | -                                                                                                                                             | 99                                             | 0.1.57   |
 | gap           | Custom gap between floating button and viewport edges                                                | FabGap       | -                                                                                                                                             | \{ top: 16, left: 16, right: 16, bottom: 16 \} | 1.2.26   |
-| customStyle   | Custom style                                                                                        | string       | -                                                                                                                                             | ''                                             | 0.1.57   |
+| custom-style   | Custom style                                                                                        | string       | -                                                                                                                                             | ''                                             | 0.1.57   |
 | expandable    | Controls whether to expand menu when clicked, triggers click when set to false                      | boolean      | -                                                                                                                                             | true                                           | 1.3.11   |
 
 ## Events
@@ -124,10 +124,18 @@ const handleClick = () => {
 |------------|----------------------------------------------------------------|------------|----------|
 | click      | Triggered when clicking the floating button when expandable is false | —          | 1.3.11   |
 
+## Methods
+
+| Method Name | Description | Parameters | Version |
+|-------------|-------------|------------|----------|
+| open | Expand menu | - | 0.1.57 |
+| close | Collapse menu | - | 0.1.57 |
+
 ## Slot
 
 | name    | Description                                                                                                | Version |
 |---------|------------------------------------------------------------------------------------------------------------|----------|
+| default | Action buttons, usually contains multiple buttons                                                           | 0.1.57   |
 | trigger | Trigger slot, used for custom click button, component won't emit click when using this slot                  | 1.3.11   |
 
 ## External Classes

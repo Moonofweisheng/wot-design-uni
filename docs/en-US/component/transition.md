@@ -77,9 +77,18 @@ When the animation leaves, the tag will be set with `leave-class` and `leave-act
 | Parameter          | Description                        | Type             | Optional Values  | Default Value | Minimum Version  |
 |--------------------|------------------------------------|------------------|------------------|---------------|------------------|
 | show               | Whether to display the component   | boolean          | -                | -             | -                |
-| name               | Animation type                     | string           | `TransitionName` | -             | -                |
-| duration           | Animation duration                 | number / boolean | -                | 300(ms)       | -                |
+| name               | Animation type                     | string / array   | `TransitionName` | -             | -                |
+| duration           | Animation duration                 | number / object / boolean | -                | 300(ms)       | -                |
 | custom-style       | Custom styles                      | string           | -                | -             | -                |
+| custom-class       | Custom root node style class       | string           | -                | -             | -                |
+| lazy-render        | Lazy render content                | boolean          | -                | false         | -                |
+| destroy            | Whether to destroy child nodes after animation ends | boolean | -                | true          | -                |
+| enter-class        | Starting state of enter transition | string           | -                | -             | -                |
+| enter-active-class | Active state of enter transition   | string           | -                | -             | -                |
+| enter-to-class     | Ending state of enter transition   | string           | -                | -             | -                |
+| leave-class        | Starting state of leave transition | string           | -                | -             | -                |
+| leave-active-class | Active state of leave transition   | string           | -                | -             | -                |
+| leave-to-class     | Ending state of leave transition   | string           | -                | -             | -                |
 | disable-touch-move | Whether to prevent touch scrolling | boolean          | -                | false         | 1.11.0 |
 
 ### TransitionName Animation Types  
@@ -102,12 +111,19 @@ When the animation leaves, the tag will be set with `leave-class` and `leave-act
 
 | Event Name | Description | Parameters | Version |
 |------------|-------------|------------|----------|
-| beforeenter | Triggered before enter | - | - |
+| before-enter | Triggered before enter | - | - |
 | enter | Triggered during enter | - | - |
-| afterenter | Triggered after enter | - | - |
-| beforeleave | Triggered before leave | - | - |
+| after-enter | Triggered after enter | - | - |
+| before-leave | Triggered before leave | - | - |
 | leave | Triggered during leave | - | - |
-| afterleave | Triggered after leave | - | - |
+| after-leave | Triggered after leave | - | - |
+| click | Triggered when clicked | - | - |
+
+## Slots
+
+| Slot Name | Description | Version |
+|-----------|-------------|---------|
+| default | Content to apply animation effects | - |
 
 ## External Style Classes
 
