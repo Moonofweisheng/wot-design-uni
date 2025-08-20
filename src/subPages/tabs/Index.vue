@@ -137,6 +137,25 @@
         </wd-tab>
       </wd-tabs>
     </wd-popup>
+
+    <demo-block :title="$t('tong-guo-slot-zi-ding-yi-biao-ti')" transparent>
+      <wd-tabs v-model="tab11">
+        <template #title="{ item, title, index }">
+          <view style="display: flex; align-items: center; gap: 8rpx" :style="{ color: index === 2 ? 'red' : '' }">
+            {{ title }}
+            ({{ index === 2 ? 10 : 0 }})
+            <wd-icon name="caret-down" color="#0083ff" v-if="item.name === tab11" />
+          </view>
+        </template>
+        <template #default>
+          <block v-for="item in tabs" :key="item">
+            <wd-tab :title="item" :name="item">
+              <view class="content">{{ $t('nei-rong') }}{{ tab }}</view>
+            </wd-tab>
+          </block>
+        </template>
+      </wd-tabs>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -192,6 +211,7 @@ const tab7 = ref<number>(0)
 const tab8 = ref<number>(0)
 const tab9 = ref<number>(0)
 const tab10 = ref<number>(3)
+const tab11 = ref<number>(0)
 
 const toast = useToast()
 function handleClick({ index, name }: any) {
