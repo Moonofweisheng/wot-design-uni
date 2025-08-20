@@ -46,6 +46,17 @@
           :columns="columns1"
           @confirm="handleConfirm2"
         />
+        <!--滚动加载 / 分页-->
+        <wd-select-picker
+          :label="$t('gun-dong-jia-zai')"
+          type="radio"
+          v-model="value20"
+          :loading="scrollLoading"
+          :columns="columns3"
+          :finished="loadFinished"
+          @confirm="handleConfirm1"
+          @scrollLoad="handleScrollingLoad"
+        />
       </wd-cell-group>
     </view>
     <demo-block :title="$t('label-bu-chuan')" transparent>
@@ -141,6 +152,48 @@ const columns2 = ref<Record<string, any>[]>([
     label: t('nv-zhuang-0')
   }
 ])
+const columns3 = ref<Record<string, any>[]>([
+  {
+    value: '101',
+    label: t('nan-zhuang')
+  },
+  {
+    value: '102',
+    label: t('she-chi-pin')
+  },
+  {
+    value: '103',
+    label: t('nv-zhuang')
+  },
+  {
+    value: '104',
+    label: t('xie-xue')
+  },
+  {
+    value: '105',
+    label: t('nei-yi-pei-shi')
+  },
+  {
+    value: '106',
+    label: t('xiang-bao')
+  },
+  {
+    value: '107',
+    label: t('mei-zhuang-hu-fu')
+  },
+  {
+    value: '108',
+    label: t('ge-xing-qing-jie')
+  },
+  {
+    value: '109',
+    label: t('zhong-biao-zhu-bao')
+  },
+  {
+    value: '110',
+    label: t('shou-ji')
+  }
+])
 const value1 = ref<string[]>(['101'])
 const value2 = ref<string>('101')
 const value3 = ref<string[]>(['102'])
@@ -161,6 +214,8 @@ const value17 = ref<string[]>(['102'])
 const value18 = ref<string>('102')
 const value19 = ref<string>('101')
 const value20 = ref<string>('101')
+const value21 = ref<string[]>(['101'])
+const value22 = ref<string[]>(['101'])
 
 const customShow = ref<string>(t('she-chi-pin'))
 
@@ -245,6 +300,95 @@ function handleConfirm17({ value, selectedItems }: any) {
       return item.label
     })
     .join(', ')
+}
+
+// 远程搜索函数
+const remoteFunc = (val: string) => {
+  console.log(val)
+  remoteLoading.value = true
+
+  // 模拟远程请求，正常需要执行接口获取数据并对columns赋值
+  setTimeout(() => {
+    columns3.value = [
+      {
+        value: '101',
+        label: t('nan-zhuang')
+      },
+      {
+        value: '102',
+        label: t('she-chi-pin')
+      },
+      {
+        value: '103',
+        label: t('nv-zhuang')
+      },
+      {
+        value: '104',
+        label: t('xie-xue')
+      },
+      {
+        value: '105',
+        label: t('nei-yi-pei-shi')
+      },
+      {
+        value: '106',
+        label: t('xiang-bao')
+      },
+      {
+        value: '107',
+        label: t('mei-zhuang-hu-fu')
+      },
+      {
+        value: '108',
+        label: t('ge-xing-qing-jie')
+      },
+      {
+        value: '109',
+        label: t('zhong-biao-zhu-bao')
+      },
+      {
+        value: '110',
+        label: t('shou-ji')
+      }
+    ]
+    // 这里模拟的是后端接口筛选后的列
+    if (val) {
+      columns3.value = columns3.value.filter((item: any) => {
+        return item.label.includes(val)
+      })
+    }
+    remoteLoading.value = false
+  }, 1500)
+}
+
+// 滚动加载（可自定义分页数据）
+const loadFinished = ref(false)
+const scrollLoading = ref(false)
+
+// 模拟滚动加载
+const handleScrollingLoad = () => {
+  if (!loadFinished.value) scrollLoading.value = true
+  setTimeout(() => {
+    // 加载的数据
+    const arr = [
+      {
+        value: '111',
+        label: t('shu-ma')
+      },
+      {
+        value: '112',
+        label: t('dian-nao-ban-gong')
+      }
+    ]
+    columns3.value = [...columns3.value, ...arr]
+    scrollLoading.value = false
+
+    // 检查是否还有更多数据，假设总共就12条数据，需要将loadFinished设定为true，防止再次滚动加载
+    if (columns3.value.length >= 12) {
+      loadFinished.value = true
+      return
+    }
+  }, 1500)
 }
 </script>
 <style lang="scss" scoped></style>

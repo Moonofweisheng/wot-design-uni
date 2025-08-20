@@ -60,6 +60,7 @@
         :scroll-y="!loading"
         :scroll-top="scrollTop"
         :scroll-with-animation="true"
+        @scrolltolower="handleScrollToLower"
       >
         <!-- 多选 -->
         <view v-if="type === 'checkbox' && isArray(selectList)" id="wd-checkbox-group">
@@ -136,7 +137,7 @@ import { selectPickerProps, type SelectPickerExpose } from './types'
 const { translate } = useTranslate('select-picker')
 
 const props = defineProps(selectPickerProps)
-const emit = defineEmits(['change', 'cancel', 'confirm', 'clear', 'update:modelValue', 'open', 'close'])
+const emit = defineEmits(['change', 'cancel', 'confirm', 'clear', 'update:modelValue', 'open', 'close', 'scrollLoad'])
 
 const pickerShow = ref<boolean>(false)
 const selectList = ref<Array<number | boolean | string> | number | boolean | string>([])
@@ -413,6 +414,13 @@ function handleClear() {
 const showArrow = computed(() => {
   return !props.disabled && !props.readonly && !showClear.value
 })
+
+// 滚动加载
+function handleScrollToLower() {
+  if (!props.loading && !props.finished) {
+    emit('scrollLoad')
+  }
+}
 
 defineExpose<SelectPickerExpose>({
   close,

@@ -245,6 +245,98 @@ const beforeConfirm = (value, resolve) => {
 <wd-select-picker label="自动完成" type="radio" :show-confirm="false" v-model="value19" :columns="columns" />
 ```
 
+## 滚动加载
+
+设置 `finished` 属性和监听 `scrollLoad` 事件可以实现滚动加载数据。
+
+```html
+<wd-select-picker
+  :label="滚动加载"
+  type="radio"
+  v-model="value"
+  :loading="scrollLoading"
+  :columns="columns"
+  :finished="loadFinished"
+  @confirm="handleConfirm"
+  @scrollLoad="handleScrollingLoad"
+/>
+```
+
+```typescript
+const value = ref<string>('101')
+const columns = ref<Record<string, any>>([
+  {
+    value: '101',
+    label: '男装'
+  },
+  {
+    value: '102',
+    label: '奢侈品'
+  },
+  {
+    value: '103',
+    label: '女装'
+  },
+  {
+    value: '104',
+    label: '鞋靴'
+  },
+  {
+    value: '105',
+    label: '内衣配饰'
+  },
+  {
+    value: '106',
+    label: '箱包'
+  },
+  {
+    value: '107',
+    label: '美妆护肤'
+  },
+  {
+    value: '108',
+    label: '个性清洁'
+  },
+  {
+    value: '109',
+    label: '钟表珠宝'
+  },
+  {
+    value: '110',
+    label: '手机'
+  }
+])
+
+const loadFinished = ref(false)
+const scrollLoading = ref(false)
+
+// 模拟滚动加载
+const handleScrollingLoad = () => {
+  if (!loadFinished.value) scrollLoading.value = true
+  setTimeout(() => {
+    // 加载的数据
+    const arr = [
+      {
+        value: '111',
+        label: '数码'
+      },
+      {
+        value: '112',
+        label: '电脑办公'
+      }
+    ]
+    columns3.value = [...columns3.value, ...arr]
+    scrollLoading.value = false
+
+    // 检查是否还有更多数据，假设总共就12条数据，需要将loadFinished设定为true，防止再次滚动加载
+    if (columns3.value.length >= 12) {
+      loadFinished.value = true
+      return
+    }
+  }, 1500)
+}
+```
+
 ## 自定义选择器
 
 如果默认的 cell 类型的展示格式不满足需求，可以通过默认插槽进行自定义选择器样式。
@@ -323,7 +415,7 @@ function handleConfirm({ value, selectedItems }) {
 ## Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
-|------|------|------|--------|--------|----------|
+|------|------|------|--------|--------|---------|
 | v-model | 选中项，`type`为`checkbox`时类型为array；`type`为`radio`时类型为number/boolean/string | array/number/boolean/string | - | - | - |
 | columns | 选择器数据，一维数组 | array | - | - | - |
 | type | 单复选选择器类型 | string | checkbox/radio | checkbox | - |
@@ -362,6 +454,7 @@ function handleConfirm({ value, selectedItems }) {
 | rules | 表单验证规则（配合wd-form） | `FormItemRule[]` | - | `[]` | - |
 | clearable | 显示清空按钮 | boolean | - | false | 1.11.0 |
 | root-portal | 脱离页面解决fixed失效问题 | boolean | - | false | 1.11.0 |
+| finished               | 滚动加载是否已完成，true表示已加载完所有数据                                           | boolean | - | false | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 
@@ -382,14 +475,16 @@ function handleConfirm({ value, selectedItems }) {
 
 ## Events
 
-| 事件名称 | 说明                       | 参数                                                                                                       | 最低版本 |
-| -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------- | -------- |
-| confirm  | 点击确认时触发             | event.detail = { value, selectedItems }, checkbox 类型时 value 和 selectedItems 为数组，radio 类型为非数组 | -        |
-| change   | picker 内选项更改时触发    | `{ value }`, checkbox 类型时 value 为数组，radio 类型为非数组                                              | -        |
-| cancel   | 点击关闭按钮或者蒙层时触发 | -                                                                                                          | -        |
-| close    | 弹窗关闭时触发             | -                                                                                                          | 1.2.29   |
-| open     | 弹窗打开时触发             | -                                                                                                          | 1.2.29   |
-| clear    | 点击清空按钮时触发     | -                                                                                                    | 1.11.0    |
+| 事件名称       | 说明                     | 参数                                                                                           | 最低版本             |
+|------------|------------------------|----------------------------------------------------------------------------------------------|------------------|
+| confirm    | 点击确认时触发                | event.detail = { value, selectedItems }, checkbox 类型时 value 和 selectedItems 为数组，radio 类型为非数组 | -                |
+| change     | picker 内选项更改时触发        | `{ value }`, checkbox 类型时 value 为数组，radio 类型为非数组                                             | -                |
+| cancel     | 点击关闭按钮或者蒙层时触发          | -                                                                                            | -                |
+| close      | 弹窗关闭时触发                | -                                                                                            | 1.2.29           |
+| open       | 弹窗打开时触发                | -                                                                                            | 1.2.29           |
+| clear      | 点击清空按钮时触发              | -                                                                                            | 1.11.0           |
+| scrollLoad | 滚动加载事件，滚动到底部时触发      | -                                                                                            | $LOWEST_VERSION$                 |
+
 
 ## Methods
 
