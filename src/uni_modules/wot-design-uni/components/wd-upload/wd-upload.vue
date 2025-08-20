@@ -413,7 +413,7 @@ function onChooseFile(currentIndex?: number) {
     multiple,
     sizeType,
     sourceType,
-    maxCount: limit ? limit - uploadFiles.value.length : 9,
+    maxCount: limit ? limit - uploadFiles.value.length : limit,
     accept,
     compressed,
     maxDuration,
