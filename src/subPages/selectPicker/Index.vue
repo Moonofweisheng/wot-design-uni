@@ -302,65 +302,6 @@ function handleConfirm17({ value, selectedItems }: any) {
     .join(', ')
 }
 
-// 远程搜索函数
-const remoteFunc = (val: string) => {
-  console.log(val)
-  remoteLoading.value = true
-
-  // 模拟远程请求，正常需要执行接口获取数据并对columns赋值
-  setTimeout(() => {
-    columns3.value = [
-      {
-        value: '101',
-        label: t('nan-zhuang')
-      },
-      {
-        value: '102',
-        label: t('she-chi-pin')
-      },
-      {
-        value: '103',
-        label: t('nv-zhuang')
-      },
-      {
-        value: '104',
-        label: t('xie-xue')
-      },
-      {
-        value: '105',
-        label: t('nei-yi-pei-shi')
-      },
-      {
-        value: '106',
-        label: t('xiang-bao')
-      },
-      {
-        value: '107',
-        label: t('mei-zhuang-hu-fu')
-      },
-      {
-        value: '108',
-        label: t('ge-xing-qing-jie')
-      },
-      {
-        value: '109',
-        label: t('zhong-biao-zhu-bao')
-      },
-      {
-        value: '110',
-        label: t('shou-ji')
-      }
-    ]
-    // 这里模拟的是后端接口筛选后的列
-    if (val) {
-      columns3.value = columns3.value.filter((item: any) => {
-        return item.label.includes(val)
-      })
-    }
-    remoteLoading.value = false
-  }, 1500)
-}
-
 // 滚动加载（可自定义分页数据）
 const loadFinished = ref(false)
 const scrollLoading = ref(false)
