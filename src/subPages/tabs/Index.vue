@@ -150,7 +150,7 @@
         <template #default>
           <block v-for="item in tabs" :key="item">
             <wd-tab :title="item" :name="item">
-              <view class="content">{{ $t('nei-rong') }}{{ tab }}</view>
+              <view class="content">{{ $t('nei-rong') }}{{ tab11 }}</view>
             </wd-tab>
           </block>
         </template>
@@ -211,7 +211,7 @@ const tab7 = ref<number>(0)
 const tab8 = ref<number>(0)
 const tab9 = ref<number>(0)
 const tab10 = ref<number>(3)
-const tab11 = ref<number>(0)
+const tab11 = ref<string>(tabs.value[0])
 
 const toast = useToast()
 function handleClick({ index, name }: any) {
