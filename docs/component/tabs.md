@@ -255,6 +255,17 @@ function handlePopupShow() {
 
 使用插槽 `title` 可以自定义渲染标签页标题。
 
+使用插槽 `map-nav-item` 可以自定义渲染导航地图中的标签项。
+
+插槽参数：
+
+| 参数         | 说明       | 最低版本 |
+| ------------ | ---------- | -------- |
+| item | 标签对象 | -        |
+| title | 标题文本 | -        |
+| index | 标签索引 | -        |
+| active | 是否选中 | -        |
+
 ```html
 <wd-tabs v-model="tab">
   <template #title="{ item, title, index }">
@@ -263,6 +274,18 @@ function handlePopupShow() {
       {{ title }}
       <wd-icon name="caret-down" />
       ({{ index }})
+    </view>
+  </template>
+  <template #map-nav-item="{ item, title, index, active }">
+    <view
+      style="display: flex; align-items: center; gap: 8rpx; width: 200rpx; height: 64rpx; position: relative"
+      :style="{ color: active ? '#0083ff' : index === 2 ? 'red' : '' }"
+    >
+      <wd-icon name="caret-right" color="#0083ff" v-if="active" style="position: absolute; left: 0" />
+      <view style="text-align: center; flex: 1">
+        {{ title }}
+      </view>
+      <wd-icon name="caret-left" color="#0083ff" v-if="active" style="position: absolute; right: 0" />
     </view>
   </template>
   <template #default>
