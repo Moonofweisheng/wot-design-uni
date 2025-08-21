@@ -77,43 +77,9 @@ abort()
 | compressed | Whether to compress video | boolean | true | - |
 | maxDuration | Maximum video duration (seconds) | number | 60 | - |
 | camera | Camera direction | 'back' \| 'front' | 'back' | - |
-| extension | Filter by file extension (H5 supports all types, WeChat Mini Program supports filtering when all and file, other platforms do not support) | string[] | - |
+| extension | Filter by file extension (H5 supports all types; WeChat Mini Program supports filtering when accept is 'all' or 'file'; other platforms do not support) | string[] | - | - |
 
-## File Selection Quantity Limits
 
-Different platforms have different limits on file selection quantity, which are determined by the uni-app platform APIs themselves:
-
-### WeChat Platform
-
-| Selection Method | Max Count | Description | Use Case |
-|-----------------|-----------|-------------|----------|
-| `chooseMedia` | 20 | Maximum selection count for images and videos | Used when accept is `image`, `video`, `media` |
-| `chooseMessageFile` | 100 | Maximum selection count for files | Used when accept is `file`, `all` |
-
-### H5 Platform
-
-| Selection Method | Max Count | Description | Use Case |
-|-----------------|-----------|-------------|----------|
-| `chooseImage` | 9 | Maximum selection count for images | Used when accept is `image` |
-| `chooseVideo` | 1 | Does not support multiple selection, single file only | Used when accept is `video` |
-| `chooseFile` | 100 | Maximum selection count for files | Used when accept is `all` |
-
-::: warning H5 Platform Special Note
-The behavior of the count value on the H5 platform is based on the browser's own specifications. Current test results show that it can only limit single/multiple selection, but cannot limit the specific quantity. Moreover, very few mobile browsers actually support multiple selection.
-:::
-
-### Other Platforms
-
-| Selection Method | Max Count | Description | Use Case |
-|-----------------|-----------|-------------|----------|
-| `chooseImage` | 9 | Maximum selection count for images | Used when accept is `image` |
-| `chooseVideo` | 1 | Does not support multiple selection, single file only | Used when accept is `video` |
-
-::: tip Tips
-- WeChat platform prioritizes `chooseMedia` and `chooseMessageFile`, which have higher selection count limits
-- Video selection does not support multiple selection on most platforms
-- The actual selectable quantity is further limited by the `maxCount` parameter
-:::
 
 ## File Selection Quantity Limits
 

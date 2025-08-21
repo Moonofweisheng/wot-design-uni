@@ -410,7 +410,7 @@ function onChooseFile(currentIndex?: number) {
   const { multiple, maxSize, accept, sizeType, limit, sourceType, compressed, maxDuration, camera, beforeUpload, extension } = props
 
   chooseFile({
-    multiple,
+    multiple: isDef(currentIndex) ? false : multiple,
     sizeType,
     sourceType,
     maxCount: limit ? limit - uploadFiles.value.length : limit,
