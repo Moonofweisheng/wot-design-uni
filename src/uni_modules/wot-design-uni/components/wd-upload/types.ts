@@ -34,6 +34,8 @@ export interface ChooseFileOption {
   extension?: string[]
 }
 
+export type UploadFileItemType = 'image' | 'video'
+
 export type UploadFileItem = {
   [key: string]: any
   // 	当前上传文件在列表中的唯一标识
@@ -52,6 +54,8 @@ export type UploadFileItem = {
   percent?: number
   // 后端返回的内容，可能是对象，也可能是字符串
   response?: string | Record<string, any>
+  // 文件的类型
+  type?: UploadFileItemType
 }
 
 export interface ChooseFile {

@@ -655,11 +655,11 @@ function onPreviewFile(file: UploadFileItem) {
 }
 
 function isVideo(file: UploadFileItem) {
-  return (file.name && isVideoUrl(file.name)) || isVideoUrl(file.url)
+  return file.type ==='video' || (file.name && isVideoUrl(file.name)) || isVideoUrl(file.url)
 }
 
 function isImage(file: UploadFileItem) {
-  return (file.name && isImageUrl(file.name)) || isImageUrl(file.url)
+  return file.type === 'image' || (file.name && isImageUrl(file.name)) || isImageUrl(file.url)
 }
 </script>
 <style lang="scss" scoped>
