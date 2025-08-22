@@ -81,7 +81,7 @@ const emit = defineEmits(['start', 'end', 'signing', 'confirm', 'clear'])
 const { translate } = useTranslate('signature')
 const { proxy } = getCurrentInstance() as any
 const canvasId = ref<string>(`signature${uuid()}`) // canvas 组件的唯一标识符
-let canvas: null = null //canvas对象 微信小程序生成图片必须传入
+let canvas: any = null //canvas对象 微信小程序生成图片必须传入
 const drawing = ref<boolean>(false) // 是否正在绘制
 const pixelRatio = ref<number>(1) // 像素比
 
@@ -528,23 +528,65 @@ function setLine() {
  *  canvas 绘制图片输出成文件类型
  */
 function canvasToImage() {
-  const { fileType, quality, exportScale } = props
+  const { fileType, quality, exportScale, angle } = props
   const { canvasWidth, canvasHeight } = canvasState
+  // #ifdef MP-WEIXIN
+  let exportCanvas = canvas
+  let exportWidth = canvasWidth
+  let exportHeight = canvasHeight
+  console.log(angle, 'angle')
+  if (angle && angle % 360 !== 0 && canvas) {
+    try {
+      let rad = (angle * Math.PI) / 180
+      let newWidth = canvasWidth
+      let newHeight = canvasHeight
+      if (angle % 180 !== 0) {
+        newWidth = canvasHeight
+        newHeight = canvasWidth
+      }
+      // 创建离屏canvas
+      const offScreenCanvas = wx.createOffscreenCanvas({
+        type: '2d',
+        width: newWidth,
+        height: newHeight
+      })
+      const offContext = offScreenCanvas.getContext('2d')
+      offContext.save()
+      // 旋转中心平移
+      if (angle === 90 || angle === -270) {
+        offContext.translate(newWidth, 0)
+      } else if (angle === 180 || angle === -180) {
+        offContext.translate(newWidth, newHeight)
+      } else if (angle === 270 || angle === -90) {
+        offContext.translate(0, newHeight)
+      }
+      offContext.rotate(rad)
+      // 绘制原始内容
+      offContext.drawImage(canvas, 0, 0)
+      offContext.restore()
+      exportCanvas = offScreenCanvas
+      exportWidth = newWidth
+      exportHeight = newHeight
+    } catch (error) {
+      console.error('旋转画布时出错：', error)
+    }
+  }
+  // #endif
   uni.canvasToTempFilePath(
     {
-      width: canvasWidth,
-      height: canvasHeight,
-      destWidth: canvasWidth * exportScale,
-      destHeight: canvasHeight * exportScale,
+      width: exportWidth,
+      height: exportHeight,
+      destWidth: exportWidth * exportScale,
+      destHeight: exportHeight * exportScale,
       fileType,
       quality,
       canvasId: canvasId.value,
-      canvas: canvas,
+      canvas: exportCanvas,
       success: (res) => {
         const result: SignatureResult = {
           tempFilePath: res.tempFilePath,
-          width: (canvasWidth * exportScale) / pixelRatio.value,
-          height: (canvasHeight * exportScale) / pixelRatio.value,
+          width: (exportWidth * exportScale) / pixelRatio.value,
+          height: (exportHeight * exportScale) / pixelRatio.value,
           success: true
         }
         // #ifdef MP-DINGTALK
@@ -555,8 +597,8 @@ function canvasToImage() {
       fail: () => {
         const result: SignatureResult = {
           tempFilePath: '',
-          width: (canvasWidth * exportScale) / pixelRatio.value,
-          height: (canvasHeight * exportScale) / pixelRatio.value,
+          width: (exportWidth * exportScale) / pixelRatio.value,
+          height: (exportHeight * exportScale) / pixelRatio.value,
           success: false
         }
         emit('confirm', result)
