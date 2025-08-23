@@ -46,7 +46,7 @@ export const guideProps = {
    * 引导框与高亮元素之间的间距
    */
   offset: {
-    type: [String, Number],
+    type: Number,
     default: 20
   },
   /**
@@ -60,14 +60,14 @@ export const guideProps = {
    * 高亮区域的圆角大小
    */
   borderRadius: {
-    type: [String, Number],
+    type: Number,
     default: 8
   },
   /**
    * 高亮区域的内边距
    */
   padding: {
-    type: [String, Number],
+    type: Number,
     default: 10
   },
   /**
@@ -102,14 +102,14 @@ export const guideProps = {
    * 安全偏移量，用于滚动计算时确保元素周围有足够的空间
    */
   bottomSafetyOffset: {
-    type: [String, Number],
+    type:  Number,
     default: 100
   },
   /**
    * 顶部安全偏移量，用于滚动计算时确保元素周围有足够的空间
    */
   topSafetyOffset: {
-    type: [String, Number],
+    type: Number,
     default: 0
   },
   /**
