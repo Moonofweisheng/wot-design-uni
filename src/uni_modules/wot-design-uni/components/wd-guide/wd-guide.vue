@@ -114,13 +114,13 @@ const highlightStyle = computed(() => {
     width: elementInfo.value.width + "px",
     transition: props.duration + "ms all",
     borderRadius: props.borderRadius + "px",
-    padding: props.padding + "rpx",
+    padding: padding + "px",
     boxShadow: boxShadow,
   };
 });
 
 const popoverStyle = computed(() => {
-  const style: Record<string, string> = {
+  const style = {
     transition: props.duration + "ms all",
     position: "fixed",
     left: "50%",
@@ -135,7 +135,7 @@ const popoverStyle = computed(() => {
       elementInfo.value.top +
       elementInfo.value.height +
       Number(props.offset) +
-      "px";
+      "px"
   } else {
     // 提示在元素上方
     style.bottom =
@@ -143,7 +143,7 @@ const popoverStyle = computed(() => {
       windowTop.value -
       elementInfo.value.top +
       Number(props.offset) +
-      "px";
+      "px"
   }
 
   return style;
@@ -170,16 +170,12 @@ function updateElementInfo() {
 
         // 初始化元素信息
         initializeElementInfo(res);
-
         // 获取有效的页面边界
         const effectiveBoundaries = getEffectiveBoundaries();
-
         // 检查是否需要滚动
         const scrollNeeds = checkScrollNeeds(res, effectiveBoundaries);
-
         // 处理滚动逻辑
         handleScrolling(res, scrollNeeds, effectiveBoundaries);
-
         // 计算提示框显示位置
         calculateTipPosition(res, effectiveBoundaries);
       })
@@ -199,7 +195,6 @@ function getEffectiveBoundaries() {
   let effectiveWindowTop = windowTop.value + Number(topOffset.value);
   // 有效底部边界为窗口高度
   let effectiveWindowBottom = windowHeight.value;
-
   return {
     top: effectiveWindowTop,
     bottom: effectiveWindowBottom,
@@ -212,13 +207,11 @@ function checkScrollNeeds(
 ) {
   // 判断元素是否被顶部遮挡（需要向上滚动）
   const needScrollUp = res.top < boundaries.top;
-
   // 判断元素是否被底部遮挡（需要向下滚动）
   const needScrollDown =
     (res.bottom !== undefined ? res.bottom : 0) +
       Number(props.bottomSafetyOffset) >
     boundaries.bottom;
-
   return {
     up: needScrollUp, //提示框往上走
     down: needScrollDown, //提示框往下走
@@ -255,7 +248,7 @@ function scrollUp(
     duration: Number(props.duration),
     success: () => {
       // 更新已滚动距离
-      oldscrollTop.value = scrollDistance;
+      oldscrollTop.value = scrollDistance
     },
   });
 }
@@ -274,17 +267,16 @@ function scrollDown(res: ElementRect) {
     windowHeight.value -
     res.height -
     props.padding -
-    Number(props.bottomSafetyOffset); // 应该是减去安全偏移量
-
+    Number(props.bottomSafetyOffset) // 应该是减去安全偏移量
   elementInfo.value.bottom =
-    windowHeight.value - props.padding - Number(props.bottomSafetyOffset);
+    windowHeight.value - props.padding - Number(props.bottomSafetyOffset)
 
   uni.pageScrollTo({
     scrollTop: scrollDistance + oldscrollTop.value,
     duration: Number(props.duration),
     success: () => {
       // 更新已滚动距离
-      oldscrollTop.value = scrollDistance + oldscrollTop.value;
+      oldscrollTop.value = scrollDistance + oldscrollTop.value
     },
   });
 }
