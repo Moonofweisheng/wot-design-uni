@@ -58,14 +58,14 @@ function onFinish() {
 | mask-color | 蒙版颜色（支持 rgba 格式） | string | - | rgba(0, 0, 0, 0.5) |
 | offset | 引导框与高亮元素之间的间距 | string / number | - | 20 |
 | duration | 动画持续时间（毫秒） | number | - | 300 |
-| border-radius | 高亮区域的圆角大小 | string / number | - | 8 |
-| padding | 高亮区域的内边距 | string / number | - | 10 |
+| border-radius | 高亮区域的圆角大小 | number | - | 8 |
+| padding | 高亮区域的内边距 | number | - | 10 |
 | prev-text | 上一步按钮文字 | string | - | 上一步 |
 | next-text | 下一步按钮文字 | string | - | 下一步 |
 | skip-text | 跳过按钮文字 | string | - | 跳过 |
 | finish-text | 完成按钮文字 | string | - | 完成 |
-| bottom-safety-offset | 底部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | string / number | - | 100 |
-| top-safety-offset | 顶部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | string / number | - | 0 |
+| bottom-safety-offset | 底部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | number | - | 100 |
+| top-safety-offset | 顶部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | number | - | 0 |
 | custom-nav | 是否自定义顶部导航栏 | boolean | - | false |
 | click-mask-next | 点击蒙版是否可以下一步 | boolean | - | false |
 
