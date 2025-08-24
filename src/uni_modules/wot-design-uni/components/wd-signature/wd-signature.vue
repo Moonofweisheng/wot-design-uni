@@ -530,10 +530,11 @@ function setLine() {
 function canvasToImage() {
   const { fileType, quality, exportScale, angle } = props
   const { canvasWidth, canvasHeight } = canvasState
-  // #ifdef MP-WEIXIN
+  // 修复：所有平台都要定义exportCanvas、exportWidth、exportHeight
   let exportCanvas = canvas
   let exportWidth = canvasWidth
   let exportHeight = canvasHeight
+  // #ifdef MP-WEIXIN
   console.log(angle, 'angle')
   if (angle && angle % 360 !== 0 && canvas) {
     try {
