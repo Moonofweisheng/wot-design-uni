@@ -198,7 +198,7 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
 | ------------- | ---------------------------------------------------------------------- | ----------------------------- | ------ | ---------- | -------- |
 | v-model       | 当前选中项对应选中的 value                                             | string / number               | -      | -          | -        |
 | disabled      | 禁用菜单                                                               | boolean                       | -      | false      | -        |
-| options       | 列表数据，对应数据结构 `[{text: '标题', value: '0', tip: '提示文字'}]` | array                         | -      | -          | -        |
+| options       | 列表数据，对应数据结构 `[{label: '标题', value: '0', tip: '提示文字'}]` | array                         | -      | -          | -        |
 | icon-name     | 选中的图标名称(可选名称在 wd-icon 组件中)                              | string                        | -      | check      | -        |
 | title         | 菜单标题                                                               | string                        | -      | -          | -        |
 | icon          | 菜单图标                                                               | string                        | -      | arrow-down | -        |
