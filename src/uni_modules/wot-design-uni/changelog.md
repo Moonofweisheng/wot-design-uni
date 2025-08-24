@@ -1,6 +1,30 @@
 # 更新日志 
 
 
+## [1.12.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.11.1...v1.12.0) (2025-08-24)
+
+
+### ✨ Features | 新功能
+
+* ✨ 为 Cell、Input、Textarea 等组件添加 marker-side 属性控制必填*位置 ([#1181](https://github.com/Moonofweisheng/wot-design-uni/issues/1181)) ([cade06f](https://github.com/Moonofweisheng/wot-design-uni/commit/cade06fe4a776e55a862a58f1eddc1fe0f055a88)), closes [#555](https://github.com/Moonofweisheng/wot-design-uni/issues/555)
+* ✨ 新增维语本地化支持 ([b4e8605](https://github.com/Moonofweisheng/wot-design-uni/commit/b4e86053b4bb73ef89ae91330d50b6e68349ad20))
+* ✨ Upload 上传组件调信小程序端使用chooseMedia替换掉chooseImage等 ([57d89f3](https://github.com/Moonofweisheng/wot-design-uni/commit/57d89f33d769362c198048d37b44f7d67ed384f4)), closes [#1193](https://github.com/Moonofweisheng/wot-design-uni/issues/1193)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 签字版组件设置exportScale < 1时在支付宝上导出图片不完整 ([#1129](https://github.com/Moonofweisheng/wot-design-uni/issues/1129)) ([555ae5f](https://github.com/Moonofweisheng/wot-design-uni/commit/555ae5f40049ffd958ec4e58e80ccd3ba4f524f3))
+* 🐛 修复 grid-item 组件 custom-text 失效的问题 ([#1180](https://github.com/Moonofweisheng/wot-design-uni/issues/1180)) ([5abc3b5](https://github.com/Moonofweisheng/wot-design-uni/commit/5abc3b5344bd2f880ef94350e10c2ef9e9f9250f)), closes [#995](https://github.com/Moonofweisheng/wot-design-uni/issues/995)
+* 🐛 修复 signature 组件设置background-color为透明色导致撤销无效 ([#1224](https://github.com/Moonofweisheng/wot-design-uni/issues/1224)) ([2e67adf](https://github.com/Moonofweisheng/wot-design-uni/commit/2e67adf2bae212a03f3cef3113326f4d942b0b55)), closes [#1223](https://github.com/Moonofweisheng/wot-design-uni/issues/1223)
+* 🐛 修复 Upload 多选时配置为覆盖上传图片达到上限无法替换图片的问题 ([00ab76b](https://github.com/Moonofweisheng/wot-design-uni/commit/00ab76bd91e91a3d0fabdb8b80e00df764055519))
+
+
+### ✏️ Documentation | 文档
+
+* ✏️ 修复基础组件文档问题 - 阶段一完成 ([#1220](https://github.com/Moonofweisheng/wot-design-uni/issues/1220)) ([9132174](https://github.com/Moonofweisheng/wot-design-uni/commit/9132174b11c539d2ec5f8d0aec2044ac1affaaff))
+* ✏️ 修正 drop-menu-item options 默认数据结构注释 ([#1087](https://github.com/Moonofweisheng/wot-design-uni/issues/1087)) ([7a2cd2d](https://github.com/Moonofweisheng/wot-design-uni/commit/7a2cd2da93746761b05e068083b171312c4af0e3))
+* 修复 Button/Icon/ConfigProvider/Popup 组件文档不一致问题 ([#1190](https://github.com/Moonofweisheng/wot-design-uni/issues/1190)) ([04d0d11](https://github.com/Moonofweisheng/wot-design-uni/commit/04d0d1184957bb1ae5b1ee2ddfaa978a989427b3))
+
 ### [1.11.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.11.0...v1.11.1) (2025-07-25)
 
 

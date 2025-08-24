@@ -490,7 +490,7 @@ const handleConfirm = ({ selectedItems: items }) => {
 | label-width | Left-side label width | string | - | 33% | - |
 | error | Error state (displays value in red) | boolean | - | false | - |
 | required | Whether to display the required asterisk | boolean | - | false | - |
-| marker-side | Position of the required marker | string | before / after | before | $LOWEST_VERSION$ |
+| marker-side | Position of the required marker | string | before / after | before | 1.12.0 |
 | align-right | Right-align the picker value | boolean | - | false | - |
 | before-confirm | Validation function before confirming, receives (value, resolve) parameters, continue execution through resolve, resolve accepts 1 boolean parameter | function | - | - | - |
 | loading-color | Loading icon color | string | - | #4D80F0 | - |
