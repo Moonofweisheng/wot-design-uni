@@ -535,39 +535,41 @@ function canvasToImage() {
   let exportWidth = canvasWidth
   let exportHeight = canvasHeight
   // #ifdef MP-WEIXIN
-  console.log(angle, 'angle')
-  if (angle && angle % 360 !== 0 && canvas) {
+  if (angle && canvas) {
     try {
-      let rad = (angle * Math.PI) / 180
-      let newWidth = canvasWidth
-      let newHeight = canvasHeight
-      if (angle % 180 !== 0) {
-        newWidth = canvasHeight
-        newHeight = canvasWidth
+      // 1) 角度归一化到 [0, 360)
+      const angleNorm = ((angle % 360) + 360) % 360
+      if (angleNorm === 0) {
+        // 不旋转，沿用原始画布
+        exportCanvas = canvas
+        exportWidth = canvasWidth
+        exportHeight = canvasHeight
+      } else {
+        const rad = (angleNorm * Math.PI) / 180
+        const w = canvasWidth
+        const h = canvasHeight
+        // 2) 通用包围盒尺寸（避免非直角被裁剪）
+        const sin = Math.abs(Math.sin(rad))
+        const cos = Math.abs(Math.cos(rad))
+        const newWidth = Math.round(w * cos + h * sin)
+        const newHeight = Math.round(w * sin + h * cos)
+        const offScreenCanvas = wx.createOffscreenCanvas({
+          type: '2d',
+          width: newWidth,
+          height: newHeight
+        })
+        const offContext = offScreenCanvas.getContext('2d')
+        offContext.save()
+        // 3) 以新画布中心为原点旋转，避免任何角度的裁剪/偏移
+        offContext.translate(newWidth / 2, newHeight / 2)
+        offContext.rotate(rad)
+        // 将原始画布以其中心对齐到旋转中心
+        offContext.drawImage(canvas, -w / 2, -h / 2, w, h)
+        offContext.restore()
+        exportCanvas = offScreenCanvas
+        exportWidth = newWidth
+        exportHeight = newHeight
       }
-      // 创建离屏canvas
-      const offScreenCanvas = wx.createOffscreenCanvas({
-        type: '2d',
-        width: newWidth,
-        height: newHeight
-      })
-      const offContext = offScreenCanvas.getContext('2d')
-      offContext.save()
-      // 旋转中心平移
-      if (angle === 90 || angle === -270) {
-        offContext.translate(newWidth, 0)
-      } else if (angle === 180 || angle === -180) {
-        offContext.translate(newWidth, newHeight)
-      } else if (angle === 270 || angle === -90) {
-        offContext.translate(0, newHeight)
-      }
-      offContext.rotate(rad)
-      // 绘制原始内容
-      offContext.drawImage(canvas, 0, 0)
-      offContext.restore()
-      exportCanvas = offScreenCanvas
-      exportWidth = newWidth
-      exportHeight = newHeight
     } catch (error) {
       console.error('旋转画布时出错：', error)
     }
