@@ -1,0 +1,1 @@
+import{b as o,g as s,D as a,al as t}from"./index-JobnMapm.js";import{_ as r}from"./base64.BT9oLDu_.js";const e=r({name:"wd-root-portal",options:{virtualHost:!0,addGlobalClass:!0,styleIsolation:"shared"}},[["render",function(r,e,l,n,d,i){return s(),o(t,{to:"body"},[a(r.$slots,"default")])}]]);export{e as _};
