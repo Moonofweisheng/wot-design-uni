@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.12.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.12.0...v1.12.1) (2025-08-25)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 DropDown 图标垂直居中异常的问题 ([37042c7](https://github.com/Moonofweisheng/wot-design-uni/commit/37042c7766bfe366828f51201c6023aeb4cfaec6))
+
 ## [1.12.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.11.1...v1.12.0) (2025-08-24)
 
 
