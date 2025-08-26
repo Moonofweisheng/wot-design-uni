@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [1.12.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.12.1...v1.12.2) (2025-08-26)
+
+
+### ✨ Features | 新功能
+
+* ✨ 调整 composables 的导出，新增 useCountDown 的导出 ([#1242](https://github.com/Moonofweisheng/wot-design-uni/issues/1242)) ([93fafa1](https://github.com/Moonofweisheng/wot-design-uni/commit/93fafa180fcfb3fa07deab0393449e822179d43b)), closes [#1239](https://github.com/Moonofweisheng/wot-design-uni/issues/1239)
+* ✨ DroMenu 图标大小和位置样式逻辑调整为不缩放且不使用绝对定位 ([#1243](https://github.com/Moonofweisheng/wot-design-uni/issues/1243)) ([e59fd56](https://github.com/Moonofweisheng/wot-design-uni/commit/e59fd568be9284b7eb91575a3f59194cd681828c))
+
 ### [1.12.1](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.12.0...v1.12.1) (2025-08-25)
 
 
