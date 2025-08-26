@@ -294,7 +294,7 @@ $-divider-vertical-line-width: var(--wot-divider-vertical-line-width, 1px) !defa
 $-drop-menu-height: var(--wot-drop-menu-height, 48px) !default; // 展示选中项的高度
 $-drop-menu-color: var(--wot-drop-menu-color, $-color-content) !default; // 展示选中项的颜色
 $-drop-menu-fs: var(--wot-drop-menu-fs, $-fs-content) !default; // 展示选中项的字号
-$-drop-menu-arrow-fs: var(--wot-drop-menu-arrow-fs, $-fs-content) !default; // 箭头图标大小
+$-drop-menu-arrow-fs: var(--wot-drop-menu-arrow-fs, $-fs-secondary) !default; // 箭头图标大小
 
 $-drop-menu-side-padding: var(--wot-drop-menu-side-padding, $-size-side-padding) !default; // 两边留白间距
 $-drop-menu-disabled-color: var(--wot-drop-menu-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用颜色
