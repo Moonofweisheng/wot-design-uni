@@ -116,7 +116,7 @@ function handleOpened() {
 
 ```html
 <wd-drop-menu>
-  <wd-drop-menu-item title="地图" icon="location" icon-size="24px" />
+  <wd-drop-menu-item title="地图" icon="location" icon-size="14px" />
 </wd-drop-menu>
 ```
 
@@ -137,22 +137,24 @@ function handleOpened() {
 
 ```typescript
 import { useMessage } from '@/uni_modules/wot-design-uni'
+import type { DropMenuItemBeforeToggle } from '@/uni_modules/wot-design-uni/components/wd-drop-menu-item/types'
+
 const messageBox = useMessage()
 
 const value = ref<number>(0)
 
 const option = ref<Record<string, any>[]>([
   { label: '全部商品', value: 0 },
-  { label: '新款商品', value: 1 },
-  { label: '活动商品', value: 2 }
+  { label: '新款商品', value: 1, tip: '这是补充信息' },
+  { label: '这是比较长的筛选条件这是比较长的筛选条件', value: 2 }
 ])
 
 // 通过对话框确认是否打开/关闭下拉菜单
 const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
   messageBox
     .confirm({
-      title: `异步${status ? '打开' : '关闭'}`,
-      msg: `确定要${status ? '打开' : '关闭'}下拉菜单吗？`
+      title: `${status ? '异步打开' : '异步关闭'}`,
+      msg: `${status ? '确定要打开下拉菜单吗' : '确定要关闭下拉菜单吗'}`
     })
     .then(() => {
       resolve(true)

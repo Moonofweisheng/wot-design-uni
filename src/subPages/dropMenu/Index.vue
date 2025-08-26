@@ -37,7 +37,7 @@
       </demo-block>
       <demo-block :title="$t('zi-ding-yi-cai-dan-tu-biao')" transparent>
         <wd-drop-menu>
-          <wd-drop-menu-item :title="$t('di-tu')" icon="location" icon-size="24px" />
+          <wd-drop-menu-item :title="$t('di-tu')" icon="location" icon-size="14px" />
         </wd-drop-menu>
       </demo-block>
       <demo-block :title="$t('yi-bu-da-kai-guan-bi')" transparent>
