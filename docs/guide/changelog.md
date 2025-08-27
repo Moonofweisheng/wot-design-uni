@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.12.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.12.2...v1.12.3) (2025-08-27)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Fab、Cell组件 Icon 垂直居中异常的问题 ([#1249](https://github.com/Moonofweisheng/wot-design-uni/issues/1249)) ([d7dac97](https://github.com/Moonofweisheng/wot-design-uni/commit/d7dac979982513c88363dd6224352ab099b7d0c3))
+
 ### [1.12.2](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.12.1...v1.12.2) (2025-08-26)
 
 
