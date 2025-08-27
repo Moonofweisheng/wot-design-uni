@@ -17,6 +17,7 @@ export default {
     day: 'Ngày',
     week: 'Tuần',
     month: 'Tháng',
+    quarter: 'Quý',
     confirm: 'Xác nhận',
     startTime: 'Thời gian bắt đầu',
     endTime: 'Thời gian kết thúc',
@@ -24,10 +25,13 @@ export default {
     timeFormat: 'YY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     weekFormat: (year: number, week: number) => `Tuần thứ ${week} năm ${year}`,
+    quarterFormat: (year: number, quarter: number) => `Quý ${quarter} năm ${year}`,
     startWeek: 'Tuần bắt đầu',
     endWeek: 'Tuần kết thúc',
     startMonth: 'Tháng bắt đầu',
     endMonth: 'Tháng kết thúc',
+    startQuarter: 'Quý bắt đầu',
+    endQuarter: 'Quý kết thúc',
     monthFormat: 'Tháng YYYY MM'
   },
   calendarView: {

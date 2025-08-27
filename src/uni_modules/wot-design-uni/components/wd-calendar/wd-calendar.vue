@@ -199,6 +199,22 @@ const defaultDisplayFormat = (value: number | number[], type: CalendarType): str
       return `${(value as number[])[0] ? dayjs((value as number[])[0]).format('YYYY / MM') : translate('startMonth')} ${translate('to')} ${
         (value as number[])[1] ? dayjs((value as number[])[1]).format('YYYY / MM') : translate('endMonth')
       }`
+    case 'quarter': {
+      const date = new Date(value as number)
+      const year = date.getFullYear()
+      const month = date.getMonth()
+      const quarter = Math.floor(month / 3) + 1
+      return translate('quarterFormat', year, quarter)
+    }
+    case 'quarterrange': {
+      if (!value || !isArray(value)) return ''
+      const [start, end] = value as number[]
+      if (!start && !end) return ''
+
+      return `${
+        start ? translate('quarterFormat', new Date(start).getFullYear(), Math.floor(new Date(start).getMonth() / 3) + 1) : translate('startQuarter')
+      } - ${end ? translate('quarterFormat', new Date(end).getFullYear(), Math.floor(new Date(end).getMonth() / 3) + 1) : translate('endQuarter')}`
+    }
   }
 }
 

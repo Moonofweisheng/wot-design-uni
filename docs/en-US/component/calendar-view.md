@@ -67,10 +67,24 @@ function handleChange({ value }) {
   console.log(value)
 }
 ```
+## Month Type Selection
 
+Set `type` to `quarter` type. When `value` has a value, its value is the first day of the quarter.
+
+```html
+<wd-calendar-view type="quarter" v-model="value" @change="handleChange" />
+```
+
+```typescript
+const value = ref(Date.now())
+
+function handleChange({ value }) {
+  console.log(value)
+}
+```
 ## Range Selection
 
-`type` supports `daterange` (date range selection), `weekrange` (week range selection), `monthrange` (month range selection) types. At this time, `value` is in array format.
+`type` supports `daterange` (date range selection), `weekrange` (week range selection), `monthrange` (month range selection), `quarterrange` (quarter range selection) types. At this time, `value` is in array format.
 
 ```html
 <wd-calendar-view type="daterange" v-model="value" @change="handleChange" />
