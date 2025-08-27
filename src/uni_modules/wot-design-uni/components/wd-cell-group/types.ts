@@ -35,7 +35,11 @@ export const cellGroupProps = {
   /**
    * 是否展示边框线
    */
-  border: makeBooleanProp(false)
+  border: makeBooleanProp(false),
+  /**
+   * 是否展示圆角
+   */
+  round: makeBooleanProp(false)
 }
 
 export type CellGroupProps = ExtractPropTypes<typeof cellGroupProps>
