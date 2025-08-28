@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.12.4](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.12.3...v1.12.4) (2025-08-28)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 🐛 修复 Upload 设置 multiple 无效的问题 ([#1250](https://github.com/Moonofweisheng/wot-design-uni/issues/1250)) ([784aab4](https://github.com/Moonofweisheng/wot-design-uni/commit/784aab4aa156e2a440db7d1a0a10e36358851763))
+
 ### [1.12.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.12.2...v1.12.3) (2025-08-27)
 
 
