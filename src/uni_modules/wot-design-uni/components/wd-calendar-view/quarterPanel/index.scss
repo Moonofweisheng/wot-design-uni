@@ -1,0 +1,24 @@
+@import '../../common/abstracts/variable';
+@import '../../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(quarter-panel) {
+    @include e(title) {
+      color: $-dark-color;
+      box-shadow: 0px 4px 8px 0 rgba(255, 255,255, 0.02);
+    }
+  }
+}
+
+@include b(quarter-panel) {
+  font-size: $-calendar-fs;
+  padding: $-calendar-panel-padding;
+
+  @include e(title) {
+    padding: 5px 0;
+    text-align: center;
+    font-size: $-calendar-panel-title-fs;
+    color: $-calendar-panel-title-color;
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.02);
+  }
+}

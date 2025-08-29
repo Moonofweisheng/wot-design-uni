@@ -1,7 +1,18 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 
-export type CalendarType = 'date' | 'dates' | 'datetime' | 'week' | 'month' | 'daterange' | 'datetimerange' | 'weekrange' | 'monthrange'
+export type CalendarType =
+  | 'date'
+  | 'dates'
+  | 'datetime'
+  | 'week'
+  | 'month'
+  | 'daterange'
+  | 'datetimerange'
+  | 'weekrange'
+  | 'monthrange'
+  | 'quarter'
+  | 'quarterrange'
 
 export const calendarViewProps = {
   ...baseProps,
