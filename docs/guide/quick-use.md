@@ -190,12 +190,12 @@ cli 项目使用 `uni_modules` 安装无需配置，对 `Volar` 的支持自动�
 
 ## 脚手架
 
-我们提供了快速上手项目 [wot-demo](https://github.com/Moonofweisheng/wot-demo)，它集成了 `Wot UI` 和众多优秀插件，你可以直接克隆该项目。
+我们提供了快速上手项目 [wot-starter](https://github.com/wot-ui/wot-starter)，它集成了 `Wot UI` 和众多优秀插件，你可以直接克隆该项目。
 
 你也可以使用[create-uni](https://github.com/uni-helper/create-uni)，通过以下命令快速创建一个起手项目：  
 
 ```bash
-pnpm create uni@latest -t wot-demo <你的项目名称>
+pnpm create uni@latest -t wot-starter <你的项目名称>
 ```
 
 更多脚手架与模板，请参见[脚手架与模板](./cli-templates.html)。

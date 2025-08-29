@@ -60,7 +60,7 @@ After donation, your nickname and message will be displayed in the [donation lis
 | --- | --- |
 | [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app) | A collection of excellent development resources for the multi-platform unified development framework uni-app |
 | [create-uni](https://github.com/uni-helper/create-uni) | Quickly create uni-app projects |
-| [wot-demo](https://github.com/Moonofweisheng/wot-demo) | A quick-start demo for wot-design-uni based on [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) |
+| [wot-starter](https://github.com/wot-ui/wot-starter) | A quick-start demo for wot-design-uni based on [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) |
 | [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail) | A uni-app retail industry template based on wot-design-uni |
 | [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot UI code snippets |
 | [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci) | A plugin that supports CI (Continuous Integration) for uni-app mini program after build |

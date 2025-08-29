@@ -190,11 +190,11 @@ After installing and configuring `Wot UI`, it supports automatic component impor
 
 ## Scaffolding
 
-We provide a quick start project [wot-demo](https://github.com/Moonofweisheng/wot-demo), which integrates `Wot UI` and many excellent plugins, you can clone this project directly.
+We provide a quick start project [wot-starter](https://github.com/wot-ui/wot-starter), which integrates `Wot UI` and many excellent plugins, you can clone this project directly.
 
 You can also use [create-uni](https://github.com/uni-helper/create-uni) to quickly create a starter project through the following command:  
 
 ```bash
-pnpm create uni@latest -t wot-demo <your project name>
+pnpm create uni@latest -t wot-starter <your project name>
 ```
 For more scaffolding and templates, see [CLI & Templates](./cli-templates.html).

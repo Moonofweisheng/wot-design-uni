@@ -23,14 +23,14 @@ For more information, please refer to [create-uni](https://github.com/uni-helper
 
 There are many excellent templates that have chosen Wot UI as their base component library. We've selected 3 templates to introduce here, and you can compare and choose for yourself.
 
-### wot-demo
+### wot-starter
 
-🍀 [wot-demo](https://github.com/Moonofweisheng/wot-demo) is a `uni-app` quick-start project based on [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) with deep integration of the `Wot UI` component library. It's maintained by the `Wot UI` team, saying goodbye to `HBuilderX` and embracing modern frontend development toolchains. If you're a loyal user of `Wot UI`, this template is perfect for you.
+🍀 [wot-starter](https://github.com/wot-ui/wot-starter) is a `uni-app` quick-start project based on [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) with deep integration of the `Wot UI` component library. It's maintained by the `Wot UI` team, saying goodbye to `HBuilderX` and embracing modern frontend development toolchains. If you're a loyal user of `Wot UI`, this template is perfect for you.
 
 You can also combine it with the CLI section [create-uni](https://github.com/uni-helper/create-uni) to create a project. Open the terminal and use the following command:
 
 ```bash
-pnpm create uni <project-name> -t wot-demo
+pnpm create uni <project-name> -t wot-starter
 ```
 
 Open the project folder in VS Code:
@@ -67,7 +67,7 @@ If you're developing a `uni-app` template integrated with `Wot UI`, you can send
 
 | Template | Stars | Description |
 |----------|-------|-------------|
-| [wot-demo](https://github.com/Moonofweisheng/wot-demo) | ![stars](https://img.shields.io/github/stars/Moonofweisheng/wot-demo) | 🍀 A uni-app quick-start project based on vitesse-uni-app with deep integration of Wot UI component library, maintained by the `Wot UI` team, saying goodbye to `HBuilderX` and embracing modern frontend development toolchains. |
+| [wot-starter](https://github.com/wot-ui/wot-starter) | ![stars](https://img.shields.io/github/stars/wot-ui/wot-starter) | 🍀 A uni-app quick-start project based on vitesse-uni-app with deep integration of Wot UI component library, maintained by the `Wot UI` team, saying goodbye to `HBuilderX` and embracing modern frontend development toolchains. |
 | [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) | ![stars](https://img.shields.io/github/stars/uni-helper/vitesse-uni-app) | A cross-platform quick-start template powered by Vite & uni-app, backed by the Uni Helper team, saying goodbye to HBuilderX and embracing modern frontend development. |
 | [unibest](https://github.com/unibest-tech/unibest) | ![stars](https://img.shields.io/github/stars/unibest-tech/unibest) | Uses the latest frontend technology stack, doesn't need to rely on `HBuilderX`, runs through command line, with built-in extensive basic functionality and auxiliary features, giving you the `best` experience when writing `uniapp`. |
 | [vite-uniapp-template](https://github.com/viarotel-org/vite-uniapp-template) | ![stars](https://img.shields.io/github/stars/viarotel-org/vite-uniapp-template) | A practical-first uni-app starter template. |

@@ -23,14 +23,14 @@ pnpm create uni <你的项目名称> --ts -m pinia -u wot -e
 
 有非常多的优秀模板选择了 Wot UI 作为基础组件库，我们选取其中的3个模板模板来介绍一番，大家可以自行对比、选择。
 
-### wot-demo
+### wot-starter
 
-🍀  [wot-demo](https://github.com/Moonofweisheng/wot-demo) 是一个基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 深度整合 `Wot UI` 组件库的 `uni-app` 快速起手项目。它由 `Wot UI` 团队维护，告别 `HBuilderX` ，拥抱现代前端开发工具链。如果你是 `Wot UI` 的忠实用户，那么这个模板非常适合你。
+🍀  [wot-starter](https://github.com/wot-ui/wot-starter) 是一个基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 深度整合 `Wot UI` 组件库的 `uni-app` 快速起手项目。它由 `Wot UI` 团队维护，告别 `HBuilderX` ，拥抱现代前端开发工具链。如果你是 `Wot UI` 的忠实用户，那么这个模板非常适合你。
 
 也可以结合脚手架章节 [create-uni](https://github.com/uni-helper/create-uni) 来创建项目，打开终端，然后使用以下命令：
 
 ```bash
-pnpm create uni <project-name> -t wot-demo
+pnpm create uni <project-name> -t wot-starter
 ```
 
 在 VS Code 中打开项目文件夹：
@@ -69,7 +69,7 @@ pnpm dev
 
 | 模板 | Stars | 描述 |
 |------|-------|-------------|
-| [wot-demo](https://github.com/Moonofweisheng/wot-demo) | ![stars](https://img.shields.io/github/stars/Moonofweisheng/wot-demo) | 🍀 基于 vitesse-uni-app 深度整合 Wot UI 组件库的 uni-app 快速起手项目，它由 `Wot UI` 团队维护，告别 `HBuilderX` ，拥抱现代前端开发工具链。 |
+| [wot-starter](https://github.com/wot-ui/wot-starter) | ![stars](https://img.shields.io/github/stars/wot-ui/wot-starter) | 🍀 基于 vitesse-uni-app 深度整合 Wot UI 组件库的 uni-app 快速起手项目，它由 `Wot UI` 团队维护，告别 `HBuilderX` ，拥抱现代前端开发工具链。 |
 | [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) | ![stars](https://img.shields.io/github/stars/uni-helper/vitesse-uni-app) | 由 Vite & uni-app 驱动的跨端快速启动模板，背靠 Uni Helper 团队，告别 HBuilderX ，拥抱现代前端开发。 |
 | [unibest](https://github.com/unibest-tech/unibest) | ![stars](https://img.shields.io/github/stars/unibest-tech/unibest) | 使用了最新的前端技术栈，无需依靠 `HBuilderX`，通过命令行方式运行，内置大量基础功能，提供大量辅助功能，让你编写 `uniapp` 拥有 `best` 体验。 |
 | [vite-uniapp-template](https://github.com/viarotel-org/vite-uniapp-template) | ![stars](https://img.shields.io/github/stars/viarotel-org/vite-uniapp-template) | 以实用为先的 uni-app 起手模板。 |
