@@ -29,6 +29,13 @@ export const guideProps = {
     default: () => []
   },
   /**
+   * 引导框的current
+   */
+  current: {
+    type: Number,
+    default: 0
+  },
+  /**
    * 蒙版是否显示
    */
   mask: {
@@ -102,7 +109,7 @@ export const guideProps = {
    * 安全偏移量，用于滚动计算时确保元素周围有足够的空间
    */
   bottomSafetyOffset: {
-    type:  Number,
+    type: Number,
     default: 100
   },
   /**
@@ -125,16 +132,28 @@ export const guideProps = {
   clickMaskNext: {
     type: Boolean,
     default: false
+  },
+  /**
+   * 高亮区域样式
+   */
+  highlightStyle: {
+    type: Object as PropType<Record<string, any>>,
+    default: () => ({})
+  },
+  /**
+   * 引导框的层级
+   */
+  zIndex: {
+    type: Number,
+    default: 999998
+  },
+  /**
+   * 是否显示引导按钮
+   */
+  showGuideButtons: {
+    type: Boolean,
+    default: true
   }
 }
 
 export type GuideProps = typeof guideProps
-
-export interface ElementRect {
-  top: number;
-  left: number;
-  width: number;
-  height: number;
-  bottom?: number;
-  right?: number;
-}

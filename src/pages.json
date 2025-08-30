@@ -1326,6 +1326,21 @@
             "navigationBarTitleText": "%rootportal-title%"
             // #endif
           }
+        },
+        {
+          "path": "guide/Index",
+          "name": "guide",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Guide 页面引导",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%guide-title%"
+            // #endif
+          }
         }
       ]
     }

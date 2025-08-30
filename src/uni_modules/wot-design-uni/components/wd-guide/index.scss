@@ -15,10 +15,6 @@
     bottom: 0;
     left: 0;
     right: 0;
-    
-    @include when(show) {
-      // background-color: rgba(0, 0, 0, 0.8);
-    }
   }
 
   @include e(highlight) {
@@ -56,38 +52,45 @@
   }
 
   @include e(prev) {
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 5px 8px;
-    white-space: nowrap;
+    @include e(default){
+      font-size: 12px;
+      border-radius: 4px;
+      padding: 5px 8px;
+      white-space: nowrap;
+    }
   }
 
   @include e(next) {
-    font-size: 12px;
-    border-radius: 4px;
-    border-radius: 8rpx;
-    padding: 5px 8px;
-    background-color: $-button-primary-bg-color;
-    color: $-color-white;
-    white-space: nowrap;
+    @include e(default) {
+      font-size: 12px;
+      border-radius: 4px;
+      padding: 5px 8px;
+      background-color: $-button-primary-bg-color;
+      color: $-color-white;
+      white-space: nowrap;
+    }
   }
 
   @include e(finish) {
-    height: fit-content;
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 5px 8px;
-    background-color: $-button-primary-bg-color;
-    color: $-color-white;
-    white-space: nowrap;
+    @include e(default) {
+      font-size: 12px;
+      border-radius: 4px;
+      padding: 5px 8px;
+      background-color: $-button-primary-bg-color;
+      color: $-color-white;
+      white-space: nowrap;
+    }
   }
 
   @include e(skip) {
-    background-color: $-color-white;
-    color: $-color-black;
-    font-size: 12px;
-    padding: 5px 8px;
-    white-space: nowrap;
+    
+    @include e(default){
+      background-color: $-color-white;
+      color: $-color-black;
+      font-size: 12px;
+      padding: 5px 8px;
+      white-space: nowrap;
+    }
   }
 }
 
