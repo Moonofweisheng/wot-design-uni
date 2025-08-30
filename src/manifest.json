@@ -56,7 +56,7 @@
     "mp-weixin" : {
         "darkmode" : true,
         "themeLocation" : "theme.json",
-        "appid" : "wxf81518e7b11ea8d8",
+        "appid" : "wx18107b71aa1672e2",
         "setting" : {
             "urlCheck" : false
         },
