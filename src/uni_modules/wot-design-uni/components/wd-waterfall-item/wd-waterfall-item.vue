@@ -113,6 +113,9 @@ function useTimeout<CallbackFn extends (...args: any[]) => any>(
  * 包含添加/移除项目、加载回调、列宽等信息
  */
 const context = inject(waterfallContextKey)!
+if (!context) {
+  throw new Error('[wd-waterfall-item] 缺少瀑布流上下文，请确保组件仅在 <wd-waterfall> 内使用。')
+}
 // 生成唯一的项目ID，用于DOM查询
 const itemId = `wd-item-${uuid()}`
 const slotId = ref(uuid())
@@ -122,7 +125,7 @@ const currHeight = ref(props.height || 240)
 
 const ratio = computed(() => currHeight.value / currWidth.value)
 // 图片加载重试次数
-let retryCount = context?.retryCount
+let retryCount = context?.retryCount ?? 0
 
 const FALLBACK_HEIGHT = 120 // 异常默认高度
 
@@ -237,6 +240,7 @@ async function handleFailurePlaceholder() {
 // 模式3：重试模式 - 重试指定次数
 async function handleFailureRetry() {
   if (retryCount > 0) {
+    retryCount--
     // 还有重试次数，重新加载
     await item.refreshImage(false)
   } else {
@@ -245,19 +249,17 @@ async function handleFailureRetry() {
     await item.updateHeight()
     item.loaded = true
   }
-  retryCount--
 }
 
 // 模式4：完整模式 - 原有的三层处理机制
 async function handleFailureFinal() {
   if (retryCount > 0) {
-    // 重试
+    retryCount--
     await item.refreshImage(false)
   } else {
     // 进入占位图片阶段
     setStatus(ItemStatus.ORIGINAL_FAILED, '原始内容加载失败')
   }
-  retryCount--
 }
 /**
  * 第一层：原始内容加载完成回调
@@ -452,13 +454,7 @@ defineExpose<WaterfallItemExpose>({})
 <template>
   <!-- 瀑布流项目容器：绝对定位，通过 transform 控制位置 -->
   <view
-    :class="{
-      'wd-waterfall-item': true,
-      'is-show': item.visible || context.isReflowing,
-      'is-reflowing': context.isReflowing,
-      [itemId]: true,
-      customClass
-    }"
+    :class="['wd-waterfall-item', itemId, customClass, { 'is-show': item.visible || context.isReflowing, 'is-reflowing': context.isReflowing }]"
     :style="[waterfallItemStyle, customStyle]"
   >
     <slot :key="slotId" :loaded="loaded" :column-width="context.columnWidth" :image-height="context.columnWidth * ratio" :error-info="errorInfo" />
