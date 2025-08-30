@@ -73,7 +73,7 @@ After donation, your nickname and message will be displayed in the [donation lis
 
 - [wot-design](https://github.com/jd-ftf/wot-design-mini) - Thanks to the wot-design team for their continuous maintenance over the years, allowing wot-design-uni to stand on the shoulders of giants.
 - [uni-helper](https://github.com/uni-helper) - Thanks to the uni-helper team for providing the uni-app tool library, making wot-design-uni easier to use.
-- [Donors](https://wot-design-uni.cn/reward/donor.html) - Thanks to all donors, your donations help wot-design-uni develop better.
+- [Donors](https://wot-ui.cn/reward/donor.html) - Thanks to all donors, your donations help wot-design-uni develop better.
 
 ## License
 

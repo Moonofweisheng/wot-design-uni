@@ -16,7 +16,7 @@ Set the network image address or Base64 image through the `image` field, and set
 **Note: DingTalk Mini Program platform only supports network images.**
 
 ```html
-<wd-watermark image="https://wot-design-uni.cn/logo.png" :image-width="38" :image-height="38"></wd-watermark>
+<wd-watermark image="https://wot-ui.cn/logo.png" :image-width="38" :image-height="38"></wd-watermark>
 ```
 
 ### Local Watermark

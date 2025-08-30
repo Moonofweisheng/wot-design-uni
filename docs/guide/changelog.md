@@ -1082,7 +1082,7 @@
 ### ✏️ Documentation | 文档
 
 * ✏️  调整组件库基于vite配置自动引入组件的介绍 ([2d23607](https://github.com/Moonofweisheng/wot-design-uni/commit/2d2360706fbe2a5d4024ceebd82720014c6b1ea2))
-* ✏️  文档推荐用户从wot-design-uni.cn迁移至wot-design-uni.gitee.io ([72a567c](https://github.com/Moonofweisheng/wot-design-uni/commit/72a567c44867f049c1526f5d682e46155047516a))
+* ✏️  文档推荐用户从wot-ui.cn迁移至wot-design-uni.gitee.io ([72a567c](https://github.com/Moonofweisheng/wot-design-uni/commit/72a567c44867f049c1526f5d682e46155047516a))
 * ✏️  增加steps设置激活项的介绍 ([7c0d36c](https://github.com/Moonofweisheng/wot-design-uni/commit/7c0d36c36214517d959aa27e284aacf59d2b074b))
 
 ### [1.2.3](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.2.2...v1.2.3) (2024-03-20)

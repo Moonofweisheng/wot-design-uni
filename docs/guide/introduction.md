@@ -74,7 +74,7 @@
 
 - [wot-design](https://github.com/jd-ftf/wot-design-mini) - 感谢 wot-design 团队多年来的不断维护，让 wot-design-uni 能够站在巨人的肩膀上。
 - [uni-helper](https://github.com/uni-helper) - 感谢 uni-helper 团队提供的 uni-app 工具库，让 wot-design-uni 能够更方便地使用。
-- [捐赠者](https://wot-design-uni.cn/reward/donor.html) - 感谢所有捐赠者，是你们的捐赠让 wot-design-uni 能够更好地发展。
+- [捐赠者](https://wot-ui.cn/reward/donor.html) - 感谢所有捐赠者，是你们的捐赠让 wot-design-uni 能够更好地发展。
 
 ## 开源协议
 

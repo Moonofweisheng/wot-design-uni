@@ -137,14 +137,14 @@ const switchLanguage = (locale: string) => {
 // 打开公众号二维码
 const openWeChat = () => {
   uni.previewImage({
-    urls: ['https://wot-design-uni.cn/wechatPublicAccount.png']
+    urls: ['https://wot-ui.cn/wechatPublicAccount.png']
   })
 }
 
 // 打开捐赠二维码
 const donate = () => {
   uni.previewImage({
-    urls: ['https://wot-design-uni.cn/weixinQrcode.jpg']
+    urls: ['https://wot-ui.cn/weixinQrcode.jpg']
   })
   // 打开捐赠页面
 }
