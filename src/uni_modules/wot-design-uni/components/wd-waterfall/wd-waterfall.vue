@@ -1,3 +1,13 @@
+<script lang="ts">
+export default {
+  name: 'wd-waterfall',
+  options: {
+    addGlobalClass: true,
+    virtualHost: true,
+    styleIsolation: 'shared'
+  }
+}
+</script>
 <script setup lang="ts">
 /**
  * 瀑布流组件 - 主容器组件
@@ -21,15 +31,6 @@ import {
   waterfallContextKey
 } from './types'
 import type { WaterfallItemInfo } from '../wd-waterfall-item/types'
-
-// 组件配置：启用虚拟主机和样式隔离
-defineOptions({
-  name: 'wd-waterfall',
-  options: {
-    virtualHost: true,
-    styleIsolation: 'shared'
-  }
-})
 
 // 组件属性定义
 const props = withDefaults(defineProps<WaterfallProps>(), defaultWaterfallProps)
