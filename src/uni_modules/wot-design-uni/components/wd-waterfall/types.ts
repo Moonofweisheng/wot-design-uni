@@ -50,7 +50,7 @@ export const waterfallProps = {
    */
   retryCount: {
     type: Number,
-    default: 2
+    default: 1
   },
   /**
    * 最大等待时间（毫秒）
@@ -84,6 +84,7 @@ export const defaultWaterfallProps: Partial<WaterfallProps> = {
   columns: 2,
   columnGap: 8,
   rowGap: 8,
+  show: undefined,
   errorMode: 'none',
   retryCount: 1
 }
