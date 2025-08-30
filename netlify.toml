@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/*"
+  to = "https://wot-ui.cn/:splat"
+  status = 301
+  force = true
