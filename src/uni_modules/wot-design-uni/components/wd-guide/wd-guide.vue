@@ -84,7 +84,7 @@ const windowTop = ref(0)
 const isUp = ref(1) // 判断元素位置，确定提示信息在该元素的上方还是下方
 const oldscrollTop = ref(0) //记录上一次滚动位置
 const statusBarHeight = ref(0)
-const menuButtonInfo = ref(null)
+const menuButtonInfo = ref(null as UniNamespace.GetMenuButtonBoundingClientRectRes | null)
 const topOffset = ref(0)
 
 // 计算属性
@@ -184,7 +184,6 @@ function updateElementInfo() {
           })
           return
         }
-        console.log('进来6', res)
         // 初始化元素信息
         initializeElementInfo(res)
         // 获取有效的页面边界
@@ -378,7 +377,6 @@ watch(
 watch(
   () => currentIndex.value,
   (newVal) => {
-    console.log('currentIndex.value', currentIndex.value)
     emit('update:current', newVal)
   }
 )
@@ -399,7 +397,6 @@ if (props.customNav) {
     // #ifdef MP
     // 微信小程序平台获取菜单按钮信息并使用其顶部位置
     menuButtonInfo.value = uni.getMenuButtonBoundingClientRect() || null
-    console.log('menuButtonInfo', menuButtonInfo.value)
     topOffset.value = menuButtonInfo.value ? menuButtonInfo.value.top : 0
     // #endif
     // #ifndef MP
