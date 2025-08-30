@@ -91,32 +91,43 @@ const topOffset = ref(0)
 const currentStep = computed(() => {
   return props.steps[currentIndex.value] || {}
 })
-
-const highlightStyle = computed(() => {
-  // 如果元素信息尚未获取到，返回空样式避免闪烁
-  if (!elementInfo.value.width && !elementInfo.value.height) {
-    return {
-      top: '0px',
-      left: '0px',
-      width: '100vw',
-      height: '0',
-      transition: props.duration + 'ms all',
-      borderRadius: '0px',
-      padding: '0px'
-    }
-  }
-  const padding = props.padding
-  // 根据是否显示蒙版来设置阴影效果
-  const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : 'none'
+// 提取公共的默认样式函数
+function getDefaultStyle() {
   return {
-    top: elementInfo.value.top - padding + 'px',
-    left: elementInfo.value.left - padding + 'px',
-    height: elementInfo.value.height + 'px',
-    width: elementInfo.value.width + 'px',
+    top: '0px',
+    left: '0px',
+    width: '100vw',
+    height: '0',
+    transition: props.duration + 'ms all',
+    borderRadius: '0px',
+    padding: '0px'
+  }
+}
+// 提取公共的高亮样式计算函数
+function calculateHighlightStyle(padding: number, boxShadow: string) {
+  return {
     transition: props.duration + 'ms all,boxShadow 0s,height 0s,width 0s',
     borderRadius: props.borderRadius + 'px',
     padding: padding + 'px',
     boxShadow: boxShadow
+  }
+}
+const highlightStyle = computed(() => {
+  // 如果元素信息尚未获取到，返回空样式避免闪烁
+  if (!elementInfo.value.width && !elementInfo.value.height) {
+    return getDefaultStyle()
+  }
+  const padding = props.padding
+  // 根据是否显示蒙版来设置阴影效果
+  const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : 'none'
+
+  const baseStyle = calculateHighlightStyle(padding, boxShadow)
+  return {
+    ...baseStyle,
+    top: elementInfo.value.top - padding + 'px',
+    left: elementInfo.value.left - padding + 'px',
+    height: elementInfo.value.height + 'px',
+    width: elementInfo.value.width + 'px'
   }
 })
 
@@ -147,24 +158,16 @@ const highlightElementInfo = computed(() => {
   const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : 'none'
   // 如果元素信息尚未获取到，返回空样式避免闪烁
   if (!elementInfo.value.width && !elementInfo.value.height) {
-    return {
-      top: '0px',
-      left: '0px',
-      width: '100vw',
-      height: '0',
-      transition: props.duration + 'ms all',
-      borderRadius: '0px',
-      padding: '0px'
-    }
+    return getDefaultStyle()
   }
+
+  const baseStyle = calculateHighlightStyle(padding, boxShadow)
   return {
+    ...baseStyle,
     top: elementInfo.value.top - padding + 'px',
     left: elementInfo.value.left - padding + 'px',
     width: elementInfo.value.width + padding * 2 + 'px', // 加上左右padding
-    height: elementInfo.value.height + padding * 2 + 'px', // 加上上下padding
-    transition: props.duration + 'ms all,boxShadow 0s,height 0s,width 0s',
-    borderRadius: props.borderRadius + 'px',
-    boxShadow: boxShadow
+    height: elementInfo.value.height + padding * 2 + 'px' // 加上上下padding
   }
 })
 // 方法
