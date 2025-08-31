@@ -5,7 +5,7 @@ import { baseProps } from '../common/props'
 /**
  * 错误处理模式
  */
-export type ErrorMode = 'none' | 'placeholder' | 'retry' | 'fallback' | 'ignore'
+export type ErrorMode = 'none' | 'placeholder' | 'retry' | 'fallback'
 /**
  * 瀑布流组件属性
  */
