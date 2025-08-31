@@ -18,11 +18,11 @@
 const current = ref<number>(0)
 
 const swiperList = ref([
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/meng.jpg'
+  'https://wot-ui.cn/assets/redpanda.jpg',
+  'https://wot-ui.cn/assets/capybara.jpg',
+  'https://wot-ui.cn/assets/panda.jpg',
+  'https://wot-ui.cn/assets/moon.jpg',
+  'https://wot-ui.cn/assets/meng.jpg'
 ])
 function handleClick(e) {
   console.log(e)
@@ -67,7 +67,7 @@ const videoList = ref([
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_115503.mp4',
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_150752.mp4',
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_155516.mp4',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg'
+  'https://wot-ui.cn/assets/moon.jpg'
 ])
 ```
 
@@ -259,10 +259,10 @@ const videoList = ref([
 const current = ref<number>(0)
 
 const customSwiperList = ref([
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg', title: '小熊猫！' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg', title: '卡！皮！巴！拉！' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg', title: '大熊猫！' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg', title: '诗画中国！' }
+  { url: 'https://wot-ui.cn/assets/redpanda.jpg', title: '小熊猫！' },
+  { url: 'https://wot-ui.cn/assets/capybara.jpg', title: '卡！皮！巴！拉！' },
+  { url: 'https://wot-ui.cn/assets/panda.jpg', title: '大熊猫！' },
+  { url: 'https://wot-ui.cn/assets/moon.jpg', title: '诗画中国！' }
 ])
 ```
 ```scss

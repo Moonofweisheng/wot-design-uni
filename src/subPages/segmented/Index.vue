@@ -74,28 +74,28 @@ const list1 = computed(() => [
     value: t('li-lei'),
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg'
+      avatar: 'https://wot-ui.cn/assets/redpanda.jpg'
     }
   },
   {
     value: t('han-mei-mei'),
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg'
+      avatar: 'https://wot-ui.cn/assets/capybara.jpg'
     }
   },
   {
     value: t('lin-tao'),
     disabled: true,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg'
+      avatar: 'https://wot-ui.cn/assets/panda.jpg'
     }
   },
   {
     value: t('tom'),
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/meng.jpg'
+      avatar: 'https://wot-ui.cn/assets/meng.jpg'
     }
   }
 ])

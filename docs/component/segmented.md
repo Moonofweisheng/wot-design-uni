@@ -74,14 +74,14 @@ const list = ref([
     value: '李雷',
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg'
+      avatar: 'https://wot-ui.cn/assets/redpanda.jpg'
     }
   },
   {
     value: '韩梅梅',
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg'
+      avatar: 'https://wot-ui.cn/assets/capybara.jpg'
     }
   }
 ])

@@ -83,7 +83,7 @@ By using `<template #icon>`, you can customize the tab's icon.
   <wd-tabbar-item :value="2" title="Home" icon="home"></wd-tabbar-item>
   <wd-tabbar-item :value="2" icon="cart" title="Category">
     <template #icon>
-      <wd-img round height="40rpx" width="40rpx" src="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg"></wd-img>
+      <wd-img round height="40rpx" width="40rpx" src="https://wot-ui.cn/assets/panda.jpg"></wd-img>
     </template>
   </wd-tabbar-item>
   <wd-tabbar-item :value="3" title="My" icon="user"></wd-tabbar-item>

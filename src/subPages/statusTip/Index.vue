@@ -40,7 +40,7 @@
     </demo-block>
 
     <demo-block :title="$t('zi-ding-yi-tu-pian')">
-      <wd-status-tip image="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg" tip="查看我的头像" />
+      <wd-status-tip image="https://wot-ui.cn/assets/panda.jpg" tip="查看我的头像" />
     </demo-block>
 
     <demo-block :title="$t('cha-cao-zi-ding-yi-tu-pian-nei-rong')">
