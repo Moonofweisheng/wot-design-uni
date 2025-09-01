@@ -186,7 +186,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 
 const showBasicGuide = ref(false)
 const showClickMaskGuide = ref(false)
@@ -296,12 +296,6 @@ const customContentSteps = [
     content: '这是最后一步，完成引导流程'
   }
 ]
-watch(
-  () => current.value,
-  (newVal) => {
-    console.log('current.value11111', current.value)
-  }
-)
 // 自定义高亮样式
 const customHighlightStyle = {
   border: '2px dashed #ff0000',
@@ -311,16 +305,18 @@ const customHighlightStyle = {
 }
 
 // 滑动到最上面
-function scrollToTop() {
-  uni.pageScrollTo({
+async function scrollToTop() {
+  await uni.pageScrollTo({
     scrollTop: 0,
     duration: 0
   })
 }
 // 启动不同类型引导的方法
-function startBasicGuide() {
-  scrollToTop()
-  showBasicGuide.value = true
+async function startBasicGuide() {
+  await scrollToTop()
+  nextTick(() => {
+    showBasicGuide.value = true
+  })
 }
 
 function startMaskNextGuide() {
@@ -328,7 +324,7 @@ function startMaskNextGuide() {
   showClickMaskGuide.value = true
 }
 
-function startCustomMaskGuide() {
+async function startCustomMaskGuide() {
   scrollToTop()
   showCustomMaskGuide.value = true
 }
@@ -350,7 +346,7 @@ function startCustomContentGuide() {
 
 function startControlGuide() {
   scrollToTop()
-  controlCurrent.value = 2
+  controlCurrent.value = 6
   showControlGuide.value = true
 }
 
@@ -377,7 +373,7 @@ function handleSkip() {
   showControlGuide.value = false
 }
 
-function handleChange(currentIndex) {
+function handleChange(currentIndex: number) {
   console.log('当前步骤:', currentIndex)
 }
 </script>

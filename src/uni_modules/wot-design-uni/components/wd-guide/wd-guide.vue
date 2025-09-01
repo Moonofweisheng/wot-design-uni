@@ -1,5 +1,5 @@
 <template>
-  <view class="wd-guide" v-if="modelValue" :style="{ zIndex: zIndex }" @touchmove.stop.prevent>
+  <view class="wd-guide" v-if="modelValue" :style="{ zIndex: zIndex }" @touchmove.stop.prevent="noop">
     <view class="wd-guide__mask" @click.stop="handleMask">
       <slot name="highlight" :elementInfo="highlightElementInfo">
         <view class="wd-guide__highlight" :style="highlightStyle"></view>
@@ -60,6 +60,10 @@ export default {
 <script lang="ts" setup>
 import { ref, computed, watch, nextTick } from 'vue'
 import { guideProps } from './types'
+// #ifdef H5
+import useLockScroll from '../composables/useLockScroll'
+// #endif
+
 interface ElementRect {
   top: number
   left: number
@@ -70,6 +74,9 @@ interface ElementRect {
 }
 const props = defineProps(guideProps)
 const emit = defineEmits(['update:modelValue', 'update:current', 'change', 'prev', 'next', 'finish', 'skip', 'error'])
+// #ifdef H5
+useLockScroll(() => props.modelValue)
+// #endif
 
 // 响应式数据
 const currentIndex = ref(0)
@@ -170,8 +177,12 @@ const highlightElementInfo = computed(() => {
     height: elementInfo.value.height + padding * 2 + 'px' // 加上上下padding
   }
 })
+function noop() {}
 // 方法
 function updateElementInfo() {
+  // 每次更新元素信息时重新获取系统信息，确保准确性
+  updateSystemInfo()
+
   const element = currentStep.value.element
   if (!element) return
   try {
@@ -203,6 +214,15 @@ function updateElementInfo() {
     console.error('updateElementInfo error:', error)
   }
 }
+
+// 更新系统信息
+function updateSystemInfo() {
+  const sysInfo = uni.getSystemInfoSync()
+  windowHeight.value = sysInfo.windowHeight
+  windowTop.value = sysInfo.windowTop || 0
+  statusBarHeight.value = sysInfo.statusBarHeight || 0
+}
+
 // 初始化元素信息
 function initializeElementInfo(res: ElementRect) {
   elementInfo.value = res
@@ -320,7 +340,6 @@ function handlePrev() {
       isUp: isUp.value
     })
     emit('change', currentIndex.value)
-    updateElementInfo()
   }
 }
 
@@ -335,7 +354,6 @@ function handleNext() {
       isUp: isUp.value
     })
     emit('change', currentIndex.value)
-    updateElementInfo()
   } else {
     handleFinish()
   }
@@ -347,6 +365,7 @@ function handleFinish() {
     total: props.steps.length
   })
   currentIndex.value = 0
+  oldscrollTop.value = 0 // 重置滚动位置
   emit('update:modelValue', false)
 }
 
@@ -356,6 +375,7 @@ function handleSkip() {
     total: props.steps.length
   })
   currentIndex.value = 0
+  oldscrollTop.value = 0 // 重置滚动位置
   emit('update:modelValue', false)
 }
 function handleMask() {
@@ -368,26 +388,44 @@ watch(
   () => props.current,
   (newVal) => {
     currentIndex.value = newVal
-    nextTick(() => {
-      setTimeout(() => {
-        updateElementInfo()
-      }, 50)
-    })
-  },
-  { immediate: true }
+  }
 )
 // 监听 currentIndex 变化，同步到父组件
 watch(
   () => currentIndex.value,
   (newVal) => {
+    nextTick(() => {
+      setTimeout(() => {
+        updateElementInfo()
+      }, 50)
+    })
     emit('update:current', newVal)
   }
 )
+
+// 监听 modelValue 变化，当组件显示时更新系统信息
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    if (newVal) {
+      // 组件显示时重置滚动位置并更新系统信息
+      oldscrollTop.value = 0
+      updateSystemInfo()
+      nextTick(() => {
+        setTimeout(() => {
+          updateElementInfo()
+          emit('update:current', currentIndex.value)
+        }, 50)
+      })
+    }
+  },
+  {
+    immediate: true
+  }
+)
+
 // 初始化
-const sysInfo = uni.getSystemInfoSync()
-windowHeight.value = sysInfo.windowHeight
-windowTop.value = sysInfo.windowTop || 0
-statusBarHeight.value = sysInfo.statusBarHeight || 0
+// updateSystemInfo()
 
 // 所有平台统一处理逻辑
 if (props.customNav) {

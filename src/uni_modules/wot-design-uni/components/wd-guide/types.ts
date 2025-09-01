@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { baseProps } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp } from '../common/props'
 
 export interface GuideStep {
   /**
@@ -14,69 +14,76 @@ export interface GuideStep {
 
 export const guideProps = {
   ...baseProps,
+
   /**
    * 是否显示引导组件，使用 v-model 绑定
+   * 类型：boolean
+   * 默认值：false
    */
-  modelValue: {
-    type: Boolean,
-    default: false
-  },
+  modelValue: makeBooleanProp(false),
+
   /**
    * 引导步骤列表
+   * 类型：array
+   * 默认值：[]
    */
   steps: {
     type: Array as PropType<GuideStep[]>,
     default: () => []
   },
+
   /**
    * 引导框的current
+   * 类型：number
+   * 默认值：0
    */
-  current: {
-    type: Number,
-    default: 0
-  },
+  current: makeNumberProp(0),
+
   /**
    * 蒙版是否显示
+   * 类型：boolean
+   * 默认值：true
    */
-  mask: {
-    type: Boolean,
-    default: true
-  },
+  mask: makeBooleanProp(true),
+
   /**
    * 蒙版颜色（支持 rgba 格式）
+   * 类型：string
+   * 默认值：'rgba(0, 0, 0, 0.5)'
    */
   maskColor: {
     type: String,
     default: 'rgba(0, 0, 0, 0.5)'
   },
+
   /**
    * 引导框与高亮元素之间的间距
+   * 类型：number
+   * 默认值：20
    */
-  offset: {
-    type: Number,
-    default: 20
-  },
+  offset: makeNumberProp(20),
+
   /**
    * 动画持续时间（毫秒）
+   * 类型：number
+   * 默认值：300
    */
-  duration: {
-    type: Number,
-    default: 300
-  },
+  duration: makeNumberProp(300),
+
   /**
    * 高亮区域的圆角大小
+   * 类型：number
+   * 默认值：8
    */
-  borderRadius: {
-    type: Number,
-    default: 8
-  },
+  borderRadius: makeNumberProp(8),
+
   /**
    * 高亮区域的内边距
+   * 类型：number
+   * 默认值：8
    */
-  padding: {
-    type: Number,
-    default: 10
-  },
+  padding: makeNumberProp(8),
+
   /**
    * 上一步按钮文字
    */
@@ -84,6 +91,7 @@ export const guideProps = {
     type: String,
     default: '上一步'
   },
+
   /**
    * 下一步按钮文字
    */
@@ -91,6 +99,7 @@ export const guideProps = {
     type: String,
     default: '下一步'
   },
+
   /**
    * 跳过按钮文字
    */
@@ -98,6 +107,7 @@ export const guideProps = {
     type: String,
     default: '跳过'
   },
+
   /**
    * 完成按钮文字
    */
@@ -105,55 +115,58 @@ export const guideProps = {
     type: String,
     default: '完成'
   },
+
   /**
    * 安全偏移量，用于滚动计算时确保元素周围有足够的空间
+   * 类型：number
+   * 默认值：100
    */
-  bottomSafetyOffset: {
-    type: Number,
-    default: 100
-  },
+  bottomSafetyOffset: makeNumberProp(100),
+
   /**
    * 顶部安全偏移量，用于滚动计算时确保元素周围有足够的空间
+   * 类型：number
+   * 默认值：0
    */
-  topSafetyOffset: {
-    type: Number,
-    default: 0
-  },
+  topSafetyOffset: makeNumberProp(0),
+
   /**
    * 是否自定义顶部导航栏
+   * 类型：boolean
+   * 默认值：false
    */
-  customNav: {
-    type: Boolean,
-    default: false
-  },
+  customNav: makeBooleanProp(false),
+
   /**
    * 点击蒙版是否可以下一步
+   * 类型：boolean
+   * 默认值：false
    */
-  clickMaskNext: {
-    type: Boolean,
-    default: false
-  },
+  clickMaskNext: makeBooleanProp(false),
+
   /**
    * 高亮区域样式
+   * 类型：object
+   * 默认值：{}
    */
   highlightStyle: {
     type: Object as PropType<Record<string, any>>,
     default: () => ({})
   },
+
   /**
    * 引导框的层级
+   * 类型：number
+   * 默认值：999998
    */
-  zIndex: {
-    type: Number,
-    default: 999998
-  },
+  zIndex: makeNumberProp(999998),
+
   /**
    * 是否显示引导按钮
+   * 类型：boolean
+   * 默认值：true
    */
-  showGuideButtons: {
-    type: Boolean,
-    default: true
-  }
+  showGuideButtons: makeBooleanProp(true)
 }
 
 export type GuideProps = typeof guideProps
