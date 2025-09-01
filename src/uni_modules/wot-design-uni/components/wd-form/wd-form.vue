@@ -204,6 +204,4 @@ function reset() {
 defineExpose<FormExpose>({ validate, reset })
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
-</style>
+<style lang="scss" scoped></style>
