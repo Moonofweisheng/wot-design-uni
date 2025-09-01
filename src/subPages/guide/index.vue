@@ -346,7 +346,7 @@ function startCustomContentGuide() {
 
 function startControlGuide() {
   scrollToTop()
-  controlCurrent.value = 6
+  controlCurrent.value = 2
   showControlGuide.value = true
 }
 
