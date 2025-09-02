@@ -29,8 +29,12 @@ const joy = 'data:image/jpeg;base64,...' // 图片文件base64
 ```typescript
 // vite.config.(js|ts)
 
+import uni from '@dcloudio/vite-plugin-uni'
+import { defineConfig } from 'vite'
+
 export default defineConfig({
   plugins: [
+    // ...
     uni({
       vueOptions: {
         template: {
@@ -46,7 +50,7 @@ export default defineConfig({
 })
 ```
 
-查看 [uni-app issues#4997](https://github.com/dcloudio/uni-app/issues/4997#issuecomment-2456851123) 了解更多。
+修改完成后重启开发服务即可生效，查看 [uni-app issue#4997](https://github.com/dcloudio/uni-app/issues/4997#issuecomment-2456851123) 了解更多。
 :::
 
 ## 插槽
