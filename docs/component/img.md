@@ -23,6 +23,36 @@
 const joy = 'data:image/jpeg;base64,...' // 图片文件base64
 ```
 
+:::tip 提示
+可以配置 `transformAssetUrls` 使 `src` 属性获得与原生 `image` 一致的体验。
+
+```typescript
+// vite.config.(js|ts)
+
+import uni from '@dcloudio/vite-plugin-uni'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  plugins: [
+    // ...
+    uni({
+      vueOptions: {
+        template: {
+          transformAssetUrls: {
+            tags: {
+              'wd-img': ['src']
+            }
+          }
+        }
+      }
+    })
+  ]
+})
+```
+
+修改完成后重启开发服务即可生效，查看 [uni-app issue#4997](https://github.com/dcloudio/uni-app/issues/4997#issuecomment-2456851123) 了解更多。
+:::
+
 ## 插槽
 
 使用`loading` `error`插槽设置在图片加载时、加载失败后的展示内容
