@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-10-12 22:09:33
- * @LastEditTime: 2025-09-03 00:00:30
+ * @LastEditTime: 2025-09-03 16:11:27
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/index.ts
@@ -20,6 +20,7 @@ import CustomFooter from './components/CustomFooter.vue'
 import SvgImage from './components/SvgImage.vue'
 import HomeStar from './components/HomeStar.vue'
 import ExternalLink from './components/ExternalLink.vue'
+import WwAds from './components/WwAds.vue'
 import ElementPlus, { ElMessageBox } from 'element-plus'
 import 'element-plus/dist/index.css'
 
@@ -39,6 +40,7 @@ export default {
       'home-features-after': () => h(HomeFriendly),
       'layout-bottom':() => h(CustomFooter),
       'nav-bar-title-after': () => h(NavBarTitleAfter),
+      'aside-outline-after': () => h(WwAds),
     })
   },
   enhanceApp({ app, router }) {
