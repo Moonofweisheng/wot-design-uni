@@ -242,11 +242,11 @@ watch(
   opacity: 0;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
   .demo-model {
-    width: 310px;
-    height: calc(310px * 143.6 / 70.9 + 56px);
-    right: 48px;
+    width: 280px;
+    height: calc(320px * 143.6 / 70.9);
+    right: 12px;
   }
 
   .collapsed {
@@ -254,10 +254,10 @@ watch(
   }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1600px) {
   .demo-model {
-    width: 360px;
-    height: calc(360px * 143.6 / 70.9 + 56px);
+    width: 340px;
+    height: calc(340px * 143.6 / 70.9);
     right: 64px;
   }
 
@@ -266,7 +266,7 @@ watch(
   }
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1439px) {
   .demo-model {
     display: none;
   }
