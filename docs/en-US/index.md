@@ -24,6 +24,9 @@ hero:
     - theme: brand
       text: 🥤Buy Me a Coffee
       link: /en-US/reward/reward
+    - theme: brand
+      text: Consultation Service
+      link: /en-US/guide/consultation
     - theme: alt
       text: ⭐ Showcase
       link: /en-US/guide/cases
@@ -35,6 +38,11 @@ features:
   - icon: 🚀
     title: 70+ Components
     details: Over 70 high-quality components covering mainstream mobile scenarios.
+  - icon: 💖
+    title: Quick Start Template
+    details: Wot UI provides a quick start template based on vitesse-uni-app with deep integration of Wot UI component library.
+    link: "https://starter.wot-ui.cn/"
+    linkText: "View Wot Starter"
   - icon: 💪
     title: TypeScript Support
     details: Built with TypeScript, providing a robust component type system.
@@ -47,6 +55,11 @@ features:
   - icon: 🍭
     title: Dark Mode and Theme Customization
     details: Customize CSS variables and component styles for your needs.
+  - icon: 🍿
+    title: Best Practices Sharing
+    details: Regularly share best practices related to using Wot UI through the WeChat public account 'A Yu Talks Frontend'.
+    link: "./guide/join-group.html#wechat-official-account"
+    linkText: "View Public Account"
 
 footer: false
 ---
