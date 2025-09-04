@@ -88,7 +88,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch, useSlots, type Slots } from 'vue'
+import { computed, ref, watch, useSlots, type Slots, nextTick } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { isDef, objToStyle, pause, isEqual } from '../common/util'
 import { useCell } from '../composables/useCell'
@@ -268,8 +268,9 @@ function handleFocus({ detail }: any) {
   focusing.value = true
   emit('focus', detail)
 }
-function handleInput({ detail }: any) {
+async function handleInput({ detail }: any) {
   emit('update:modelValue', inputValue.value)
+  await nextTick()
   emit('input', detail)
 }
 function handleKeyboardheightchange({ detail }: any) {
