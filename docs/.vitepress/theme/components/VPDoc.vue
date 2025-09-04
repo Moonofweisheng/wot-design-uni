@@ -3,8 +3,8 @@ import { useRoute } from 'vitepress'
 import { computed, ref } from 'vue'
 import VPDocAside from 'vitepress/dist/client/theme-default/components/VPDocAside.vue'
 import VPDocFooter from 'vitepress/dist/client/theme-default/components/VPDocFooter.vue'
-import { useData } from 'vitepress';
-import { useSidebar } from 'vitepress/theme';
+import { useData } from 'vitepress'
+import { useSidebar } from 'vitepress/theme'
 import VPIframe from './VPIframe.vue'
 
 const { theme }: any = useData()
@@ -12,23 +12,18 @@ const { theme }: any = useData()
 const route = useRoute()
 const { hasSidebar, hasAside, leftAside } = useSidebar()
 
-const pageName = computed(() =>
-  route.path.replace(/[./]+/g, '_').replace(/_html$/, '')
-)
-const isComponent = computed(() => 
-  (route.path.startsWith('/component') || route.path.startsWith('/en-US/component')) && !route.path.includes('/use-')
+const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html$/, ''))
+const isComponent = computed(
+  () => (route.path.startsWith('/component') || route.path.startsWith('/en-US/component')) && !route.path.includes('/use-')
 )
 const expanded = ref(true)
-
 </script>
 
 <template>
-  <div class="VPDoc"
-    :class="{ 'has-sidebar': hasSidebar, 'has-aside': hasAside, 'is-component': isComponent, 'is-expanded': expanded }">
+  <div class="VPDoc" :class="{ 'has-sidebar': hasSidebar, 'has-aside': hasAside, 'is-component': isComponent, 'is-expanded': expanded }">
     <slot name="doc-top" />
     <div class="container">
       <div v-if="hasAside" class="aside" :class="{ 'left-aside': leftAside }">
-        <div class="aside-curtain" />
         <div class="aside-container">
           <div class="aside-content">
             <VPDocAside>
@@ -59,10 +54,7 @@ const expanded = ref(true)
         <div class="content-container">
           <slot name="doc-before" />
           <main class="main">
-            <Content class="vp-doc" :class="[
-              pageName,
-              theme.externalLinkIcon && 'external-link-icon-enabled'
-            ]" />
+            <Content class="vp-doc" :class="[pageName, theme.externalLinkIcon && 'external-link-icon-enabled']" />
             <VPIframe v-if="isComponent" v-model:expanded="expanded" />
           </main>
           <VPDocFooter>
@@ -163,15 +155,6 @@ const expanded = ref(true)
   display: none;
 }
 
-.aside-curtain {
-  position: fixed;
-  bottom: 0;
-  z-index: 10;
-  width: 224px;
-  height: 32px;
-  background: linear-gradient(transparent, var(--vp-c-bg) 70%);
-}
-
 .aside-content {
   display: flex;
   flex-direction: column;
@@ -199,7 +182,6 @@ const expanded = ref(true)
   }
 }
 
-
 @media (min-width: 1280px) {
   .VPDoc.is-component.is-expanded .container {
     padding-right: 358px;
@@ -218,9 +200,7 @@ const expanded = ref(true)
   .VPDoc.is-component:not(.is-expanded) .container {
     padding-right: 64px;
   }
-
 }
-
 
 .content-container {
   margin: 0 auto;

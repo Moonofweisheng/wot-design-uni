@@ -1,21 +1,25 @@
 <template>
   <!-- 主容器：根据展开状态和过渡状态添加对应类名 -->
-  <div v-if="href" class="demo-model" :class="{
-    'collapsed': !expanded,
-    'transition-end': transitionEnd
-  }" @transitionend="onTransitionEnd">
+  <div
+    v-if="href"
+    class="demo-model"
+    :class="{
+      collapsed: !expanded,
+      'transition-end': transitionEnd
+    }"
+    @transitionend="onTransitionEnd"
+  >
     <!-- 头部控制栏 -->
     <div class="demo-header">
-      <ExternalLink :href="href" class="demo-link" :style="`${expanded ? '' : 'height:0;width:0;opacity:0'}`">
-      </ExternalLink>
-      <QrCode class="demo-qrcode" :src="qrcode" v-if="expanded&&qrcode"></QrCode>
-      <el-icon class="expand-icon" style="cursor: pointer;" @click="toggleExpand">
+      <ExternalLink :href="href" class="demo-link" :style="`${expanded ? '' : 'height:0;width:0;opacity:0'}`"></ExternalLink>
+      <QrCode class="demo-qrcode" :src="qrcode" v-if="expanded && qrcode"></QrCode>
+      <el-icon class="expand-icon" style="cursor: pointer" @click="toggleExpand">
         <component :is="expanded ? Fold : Expand" />
       </el-icon>
     </div>
     <!-- iframe 容器 -->
     <div class="iframe-container">
-      <iframe v-if="expanded&&transitionEnd" ref="iframe" id="demo" class="iframe" scrolling="auto" frameborder="0" :src="href" />
+      <iframe v-if="expanded && transitionEnd" ref="iframe" id="demo" class="iframe" scrolling="auto" frameborder="0" :src="href" />
     </div>
   </div>
 </template>
@@ -41,8 +45,8 @@ const iframe = ref<HTMLIFrameElement | null>(null)
 const transitionEnd = ref(true)
 
 const emit = defineEmits<{
-  'update:expanded': [boolean]  // 更新展开状态
-  'state-change': [boolean]     // 状态变化通知
+  'update:expanded': [boolean] // 更新展开状态
+  'state-change': [boolean] // 状态变化通知
 }>()
 
 const route = useRoute()
@@ -90,7 +94,6 @@ function toggleExpand() {
 // 过渡结束处理
 function onTransitionEnd() {
   transitionEnd.value = true
-
 }
 
 // iframe 消息通信
@@ -108,9 +111,8 @@ function sendLanguageMessage() {
 }
 
 onMounted(() => {
-  baseUrl.value = process.env.NODE_ENV === 'production'
-    ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/`
-    : 'http://localhost:5173/demo/#/'
+  baseUrl.value =
+    process.env.NODE_ENV === 'production' ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/` : 'http://localhost:5173/demo/#/'
 
   // 监听 iframe 加载完成事件
   iframe.value?.addEventListener('load', () => {
@@ -119,16 +121,10 @@ onMounted(() => {
   })
 })
 
-watch(
-  () => vitepressData.isDark.value,
-  sendMessage
-)
+watch(() => vitepressData.isDark.value, sendMessage)
 
 // 监听语言变化
-watch(
-  () => vitepressData.lang.value,
-  sendLanguageMessage
-)
+watch(() => vitepressData.lang.value, sendLanguageMessage)
 </script>
 
 <style scoped>
@@ -202,7 +198,7 @@ watch(
   color: var(--color);
 }
 
-.demo-qrcode{
+.demo-qrcode {
   font-size: 28px !important;
   transition: all 0.3s ease-in-out;
   position: absolute;
@@ -237,8 +233,7 @@ watch(
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active in <2.1.8 */
-  {
+/* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
 }
 
@@ -257,7 +252,7 @@ watch(
 @media screen and (min-width: 1440px) {
   .demo-model {
     width: 360px;
-    height: calc(360px * 143.6 / 70.9 + 56px);
+    height: calc(360px * 143.6 / 70.9 - 56px);
     right: 64px;
   }
 
