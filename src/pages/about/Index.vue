@@ -1,69 +1,71 @@
 <template>
-  <view class="page">
-    <view class="page__hd">
-      <view class="page__title">{{ $t('guanYuWoMen') }}</view>
-      <view class="page__desc">
-        {{ $t('woShiBuRuMoYuQuYiGeQianDuanDaGongZiWoHeWoDeXiaoHuoBanMenZhengZaiZhiLiYuKaiFaQingLiangGaoXiaoDeUniappZuJianKu') }}
-      </view>
-    </view>
-    <view class="page__bd">
-      <view class="core-team">
-        <view class="core-team__title">{{ $t('heXinTuanDui') }}</view>
-        <view class="core-team__list">
-          <view v-for="(collaborator, index) in githubData.collaborators" :key="index" class="core-team__member">
-            <image :src="collaborator.avatar_url" class="core-team__avatar" />
-            <view class="core-team__name" :title="collaborator.login">{{ collaborator.login }}</view>
-          </view>
+  <page-wraper :use-wx-ad="false" :use-reward-fab="true">
+    <view class="page">
+      <view class="page__hd">
+        <view class="page__title">{{ $t('guanYuWoMen') }}</view>
+        <view class="page__desc">
+          {{ $t('woShiBuRuMoYuQuYiGeQianDuanDaGongZiWoHeWoDeXiaoHuoBanMenZhengZaiZhiLiYuKaiFaQingLiangGaoXiaoDeUniappZuJianKu') }}
         </view>
       </view>
+      <view class="page__bd">
+        <view class="core-team">
+          <view class="core-team__title">{{ $t('heXinTuanDui') }}</view>
+          <view class="core-team__list">
+            <view v-for="(collaborator, index) in githubData.collaborators" :key="index" class="core-team__member">
+              <image :src="collaborator.avatar_url" class="core-team__avatar" />
+              <view class="core-team__name" :title="collaborator.login">{{ collaborator.login }}</view>
+            </view>
+          </view>
+        </view>
 
-      <view class="additional-links">
-        <view class="additional-links__title">{{ $t('gengDuoXinXi') }}</view>
-        <wd-cell-group border>
-          <wd-cell
-            :title="$t('yuYanQieHuan')"
-            title-width="200px"
-            :label="$t('dangQianYuYan') + ': ' + (currentLang === 'zh-CN' ? '中文' : 'English')"
-            is-link
-            @click="showLanguageSwitch = true"
-          ></wd-cell>
-          <!-- #ifndef MP-ALIPAY -->
+        <view class="additional-links">
+          <view class="additional-links__title">{{ $t('gengDuoXinXi') }}</view>
+          <wd-cell-group border>
+            <wd-cell
+              :title="$t('yuYanQieHuan')"
+              title-width="200px"
+              :label="$t('dangQianYuYan') + ': ' + (currentLang === 'zh-CN' ? '中文' : 'English')"
+              is-link
+              @click="showLanguageSwitch = true"
+            ></wd-cell>
+            <!-- #ifndef MP-ALIPAY -->
 
-          <wd-cell
-            :title="$t('guanZhuGongZhongHao')"
-            title-width="200px"
-            :label="$t('uniappJiaoChengZuJianKuXunXiYiShouZhangWo')"
-            @click="openWeChat"
-            is-link
-          ></wd-cell>
-          <wd-cell
-            :title="$t('juanZeng')"
-            title-width="200px"
-            :label="$t('meiYiFenJuanZengDuShiDuiWoMenMoDaDeGuLi')"
-            @click="donate"
-            is-link
-          ></wd-cell>
-          <!-- #ifdef MP-WEIXIN -->
-          <wd-cell
-            :title="$t('guanKanJiLiGuangGao')"
-            title-width="200px"
-            :label="$t('meiCiGuanKanDuShiDuiWoMenDeZhiChiXieXie')"
-            @click="watchAd"
-            is-link
-          ></wd-cell>
-          <!-- #endif -->
-          <!-- #endif -->
-        </wd-cell-group>
+            <wd-cell
+              :title="$t('guanZhuGongZhongHao')"
+              title-width="200px"
+              :label="$t('uniappJiaoChengZuJianKuXunXiYiShouZhangWo')"
+              @click="openWeChat"
+              is-link
+            ></wd-cell>
+            <wd-cell
+              :title="$t('juanZeng')"
+              title-width="200px"
+              :label="$t('meiYiFenJuanZengDuShiDuiWoMenMoDaDeGuLi')"
+              @click="donate"
+              is-link
+            ></wd-cell>
+            <!-- #ifdef MP-WEIXIN -->
+            <wd-cell
+              :title="$t('guanKanJiLiGuangGao')"
+              title-width="200px"
+              :label="$t('meiCiGuanKanDuShiDuiWoMenDeZhiChiXieXie')"
+              @click="watchAd"
+              is-link
+            ></wd-cell>
+            <!-- #endif -->
+            <!-- #endif -->
+          </wd-cell-group>
+        </view>
       </view>
+      <wd-action-sheet
+        v-model="showLanguageSwitch"
+        :actions="languageActions"
+        :cancel-text="$t('qu-xiao')"
+        :title="$t('yuYanQieHuan')"
+        @select="handleLanguageSelect"
+      />
     </view>
-    <wd-action-sheet
-      v-model="showLanguageSwitch"
-      :actions="languageActions"
-      :cancel-text="$t('qu-xiao')"
-      :title="$t('yuYanQieHuan')"
-      @select="handleLanguageSelect"
-    />
-  </view>
+  </page-wraper>
 </template>
 
 <script lang="ts" setup>
@@ -175,7 +177,6 @@ const watchAd = () => {
 
 .page__intro {
   margin-top: 10px;
-  color: #333;
   text-align: left;
   font-size: 14px;
 }
@@ -183,7 +184,6 @@ const watchAd = () => {
 .page__bd {
   padding: 0 15px 30px 20px;
   user-select: none;
-  background: #f9f9f9;
   border-radius: 10px;
 }
 
@@ -195,7 +195,6 @@ const watchAd = () => {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #333;
 }
 
 .core-team__list {
@@ -232,7 +231,6 @@ const watchAd = () => {
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0 auto;
-  color: #333;
 }
 
 // 移除了不再需要的language-switch相关样式
@@ -245,7 +243,6 @@ const watchAd = () => {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #333;
 }
 
 .additional-links__icon {
