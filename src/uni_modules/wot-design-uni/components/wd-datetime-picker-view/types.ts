@@ -22,6 +22,10 @@ export const datetimePickerViewProps = {
    */
   columnsHeight: makeNumberProp(217),
   /**
+   * picker item的高度
+   */
+  itemHeight: makeNumberProp(35),
+  /**
    * 选项的key
    */
   valueKey: makeStringProp('value'),

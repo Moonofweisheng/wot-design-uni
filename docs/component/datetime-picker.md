@@ -289,6 +289,7 @@ const displayFormatTabLabel = (items) => {
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |
 | columns-height | picker内部滚筒高 | number | - | 231 | - |
+| item-height | picker item的高度 | number | - | 35 | - |
 | title | 弹出层标题 | string | - | - | - |
 | cancel-button-text | 取消按钮文案 | string | - | 取消 | - |
 | confirm-button-text | 确认按钮文案 | string | - | 完成 | - |

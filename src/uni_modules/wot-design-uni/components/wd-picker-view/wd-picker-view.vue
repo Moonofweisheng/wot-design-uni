@@ -52,7 +52,6 @@ const props = defineProps(pickerViewProps)
 const emit = defineEmits(['change', 'pickstart', 'pickend', 'update:modelValue'])
 
 const formatColumns = ref<ColumnItem[][]>([]) // 格式化后的列数据
-const itemHeight = ref<number>(35)
 const selectedIndex = ref<Array<number>>([]) // 格式化之后，每列选中的下标集合
 
 watch(
