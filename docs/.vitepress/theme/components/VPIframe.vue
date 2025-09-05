@@ -258,7 +258,7 @@ watch(
   .demo-model {
     width: 340px;
     height: calc(340px * 143.6 / 70.9);
-    right: 64px;
+    right: 24px;
   }
 
   .collapsed {
