@@ -95,6 +95,8 @@ declare module 'vue' {
     WdFloatingPanel: typeof import('./components/wd-floating-panel/wd-floating-panel.vue')['default']
     WdSignature: typeof import('./components/wd-signature/wd-signature.vue')['default']
     WdRootPortal: typeof import('./components/wd-root-portal/wd-root-portal.vue')['default']
+    WdWaterfall: typeof import('./components/wd-waterfall/wd-waterfall.vue')['default']
+    WdWaterfallItem: typeof import('./components/wd-waterfall-item/wd-waterfall-item.vue')['default']
   }
 }
 

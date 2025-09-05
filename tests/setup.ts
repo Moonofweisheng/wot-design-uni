@@ -567,6 +567,15 @@ config.global.stubs = config.global.components
 ;(global as any).onUnload = vi.fn()
 ;(global as any).onError = vi.fn()
 
+// 模拟 @dcloudio/uni-app 的生命周期钩子
+vi.mock('@dcloudio/uni-app', () => ({
+  onShow: vi.fn(),
+  onHide: vi.fn(),
+  onLaunch: vi.fn(),
+  onUnload: vi.fn(),
+  onError: vi.fn()
+}))
+
 // 模拟触摸事件
 class TouchEvent extends Event {
   touches: Array<{ clientX: number; clientY: number }>
