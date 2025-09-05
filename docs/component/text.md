@@ -61,7 +61,7 @@
 
 ## 脱敏
 
-设置 `format` 属性,当 `mode` 为 ` phone``name `时生效。
+设置 `format` 属性,当 `mode` 为 `phone`或`name`时生效。
 
 ```html
 <wd-text text="李四" mode="name" :format="true"></wd-text>
