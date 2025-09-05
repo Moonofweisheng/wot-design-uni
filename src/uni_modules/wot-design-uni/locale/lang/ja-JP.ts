@@ -5,6 +5,7 @@ export default {
     day: '日',
     week: '週',
     month: '月',
+    quarter: '四半期',
     confirm: '確認',
     startTime: '開始時間',
     endTime: '終了時間',
@@ -12,10 +13,13 @@ export default {
     timeFormat: 'YY年MM月DD日 HH:mm:ss',
     dateFormat: 'YYYY年MM月DD日',
     weekFormat: (year: number, week: number) => `${year}年 第${week}週`,
+    quarterFormat: (year: number, quarter: number) => `${year}年 第${quarter}四半期`,
     startWeek: '開始週',
     endWeek: '終了週',
     startMonth: '開始月',
     endMonth: '終了月',
+    startQuarter: '開始四半期',
+    endQuarter: '終了四半期',
     monthFormat: 'YYYY年MM月'
   },
   calendarView: {
