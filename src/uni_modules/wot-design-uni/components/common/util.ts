@@ -716,7 +716,7 @@ export const isDate = (val: unknown): val is Date => Object.prototype.toString.c
  */
 export function isVideoUrl(url: string): boolean {
   // 使用正则表达式匹配视频文件类型的URL
-  const videoRegex = /\.(mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv|video)/i
+  const videoRegex = /\.(ogm|webm|ogv|asx|m4v|mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv|video)/i
   return videoRegex.test(url)
 }
 
@@ -727,7 +727,7 @@ export function isVideoUrl(url: string): boolean {
  */
 export function isImageUrl(url: string): boolean {
   // 使用正则表达式匹配图片URL
-  const imageRegex = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg|image)/i
+  const imageRegex = /\.(xbm|tif|pjp|apng|svgz|jpeg|jpg|heif|ico|tiff|heic|pjpeg|avif|gif|png|svg|webp|jfif|bmp|dpg|image)/i
   return imageRegex.test(url)
 }
 
