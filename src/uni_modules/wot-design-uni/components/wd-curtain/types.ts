@@ -68,7 +68,11 @@ export const curtainProps = {
   /**
    * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
    */
-  rootPortal: makeBooleanProp(false)
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 开启长按图片显示识别小程序码菜单，仅在微信小程序平台有效
+   */
+  showMenuByLongpress: makeBooleanProp(false)
 }
 
 export type CurtainProps = ExtractPropTypes<typeof curtainProps>
