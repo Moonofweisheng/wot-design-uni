@@ -96,6 +96,7 @@ function handleClick() {
 | hide-when-close     | Hide popup layer when closed (display: none)                 | boolean | -                                                                         | true    | -        |
 | z-index             | Set layer level                                              | number  | -                                                                         | 10      | 1.4.0    |
 | root-portal         | Whether to detach from the page, used to solve various fixed positioning issues | boolean | -                                                                         | false   | 1.11.0 |
+| show-menu-by-longpress         | Enable long press image to show Mini Program code recognition menu, only supported in WeChat Mini Program | boolean | -                                                                         | false   | $LOWEST_VERSION$ |
 
 ## Events
 

@@ -96,6 +96,7 @@ function handleClick() {
 | hide-when-close      | 是否当关闭时将弹出层隐藏（display: none）          | boolean | -                                                                        | true   | -        |
 | z-index              | 设置层级                                           | number  | -                                                                        | 10     | 1.4.0    |
 | root-portal          | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | -                                                                        | false  | 1.11.0 |
+| show-menu-by-longpress          | 开启长按图片显示识别小程序码菜单，仅微信小程序支持 | boolean | -                                                                        | false  | $LOWEST_VERSION$ |
 
 ## Events
 
