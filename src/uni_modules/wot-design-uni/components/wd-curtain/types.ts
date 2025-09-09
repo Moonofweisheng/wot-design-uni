@@ -1,8 +1,8 @@
 /*
  * @Author: weisheng
  * @Date: 2025-01-25 23:46:29
- * @LastEditTime: 2025-02-13 13:16:45
- * @LastEditors: weisheng
+ * @LastEditTime: 2025-09-09 10:00:00
+ * @LastEditors: rusheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-curtain/types.ts
  * 记得注释
@@ -68,7 +68,15 @@ export const curtainProps = {
   /**
    * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
    */
-  rootPortal: makeBooleanProp(false)
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 开启长按图片显示识别小程序码菜单，仅在微信小程序平台有效
+   */
+  showMenuByLongpress: makeBooleanProp(false),
+  /**
+   * 点击图片是否关闭幕帘，默认为 true
+   */
+  closeOnClick: makeBooleanProp(true)
 }
 
 export type CurtainProps = ExtractPropTypes<typeof curtainProps>
