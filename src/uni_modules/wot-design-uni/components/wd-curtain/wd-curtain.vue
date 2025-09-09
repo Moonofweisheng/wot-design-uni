@@ -161,7 +161,9 @@ function clickImage() {
     })
   }
   emit('click')
-  close()
+  if (props.closeOnClick) {
+    close()
+  }
 }
 </script>
 
