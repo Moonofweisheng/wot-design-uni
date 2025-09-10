@@ -5,6 +5,7 @@ export default {
     day: 'Dia',
     week: 'Semana',
     month: 'Mês',
+    quarter: 'Trimestre',
     confirm: 'Confirmar',
     startTime: 'Hora de início',
     endTime: 'Hora de término',
@@ -12,10 +13,13 @@ export default {
     timeFormat: 'DD/MM/YYYY HH:mm:ss',
     dateFormat: 'DD/MM/YYYY',
     weekFormat: (year: number, week: number) => `${year} Semana ${week}`,
+    quarterFormat: (year: number, quarter: number) => `${year} Trimestre ${quarter}`,
     startWeek: 'Semana de início',
     endWeek: 'Semana de término',
     startMonth: 'Mês de início',
     endMonth: 'Mês de término',
+    startQuarter: 'Trimestre de início',
+    endQuarter: 'Trimestre de término',
     monthFormat: 'MM/YYYY'
   },
   calendarView: {

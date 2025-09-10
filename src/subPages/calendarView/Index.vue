@@ -7,6 +7,7 @@
           <wd-radio value="date">date</wd-radio>
           <wd-radio value="week">week</wd-radio>
           <wd-radio value="month">month</wd-radio>
+          <wd-radio value="quarter">quarter</wd-radio>
         </wd-radio-group>
       </view>
       <wd-calendar-view :type="type1" v-model="value1" @change="handleChange1"></wd-calendar-view>
@@ -21,6 +22,7 @@
           <wd-radio value="daterange">daterange</wd-radio>
           <wd-radio value="weekrange">weekrange</wd-radio>
           <wd-radio value="monthrange">monthrange</wd-radio>
+          <wd-radio value="quarterrange">quarterrange</wd-radio>
         </wd-radio-group>
       </view>
       <wd-calendar-view :type="type2" allow-same-day v-model="value3" @change="handleChange3"></wd-calendar-view>
