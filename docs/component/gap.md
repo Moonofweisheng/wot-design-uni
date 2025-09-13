@@ -3,7 +3,7 @@
 
 ## 基本使用
 
-通过 `height` 属性设置标题 `background` 属性设置背景色。
+通过 `height` 属性设置高度 `background` 属性设置背景色。
 
 
 ```html
