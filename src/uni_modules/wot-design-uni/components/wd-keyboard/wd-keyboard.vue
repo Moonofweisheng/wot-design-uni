@@ -71,7 +71,7 @@ watch(
   }
 )
 
-const internalLang = ref<KeyboardLang>(props.lang ? props.lang : 'zh')
+const internalLang = ref<KeyboardLang>('zh')
 const carKeyboardLang = computed({
   get: () => (props.lang ? props.lang : internalLang.value),
   set: (value: KeyboardLang) => {
@@ -184,11 +184,8 @@ const handlePress = (text: string, type: NumberKeyType) => {
     emit('delete')
     const newValue = value.slice(0, value.length - 1)
     emit('update:modelValue', newValue)
-
-    if (props.mode === 'car') {
-      if (newValue.length === 0) {
-        carKeyboardLang.value = 'zh'
-      }
+    if (props.mode === 'car' && newValue.length === 0) {
+      carKeyboardLang.value = 'zh'
     }
   } else if (type === 'close') {
     handleClose()
@@ -196,12 +193,9 @@ const handlePress = (text: string, type: NumberKeyType) => {
     emit('input', text)
     const newValue = value + text
     emit('update:modelValue', newValue)
-
-    if (props.mode === 'car') {
-      if (newValue.length === 1) {
-        // 输入第一位（省份）后，自动切换到英文
-        carKeyboardLang.value = 'en'
-      }
+    if (props.mode === 'car' && newValue.length === 1) {
+      // 输入第一位（省份）后，自动切换到英文
+      carKeyboardLang.value = 'en'
     }
   }
 }
