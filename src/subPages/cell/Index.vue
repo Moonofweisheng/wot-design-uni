@@ -1,6 +1,7 @@
 <template>
   <page-wraper>
     <wd-toast />
+
     <demo-block :title="$t('jiBenYongFa')" transparent>
       <wd-cell-group>
         <wd-cell :title="$t('biao-ti-wen-zi')" :value="$t('nei-rong')" />
@@ -132,6 +133,13 @@
             </view>
           </template>
         </wd-cell>
+      </wd-cell-group>
+    </demo-block>
+
+    <demo-block :title="$t('yuan-jiao')" transparent>
+      <wd-cell-group round>
+        <wd-cell :title="$t('biao-ti-wen-zi')" :value="$t('nei-rong')" />
+        <wd-cell :title="$t('biao-ti-wen-zi-0')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
       </wd-cell-group>
     </demo-block>
   </page-wraper>
