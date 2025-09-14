@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-10-12 22:09:33
- * @LastEditTime: 2025-09-03 16:11:27
+ * @LastEditTime: 2025-09-10 23:37:53
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/index.ts
@@ -9,7 +9,6 @@
  */
 import { h } from 'vue'
 import Theme from 'vitepress/theme'
-import { useRouter } from 'vitepress'
 import './styles/vars.css'
 import './styles/custom.css'
 import './styles/scrollbar.scss'
@@ -23,6 +22,7 @@ import ExternalLink from './components/ExternalLink.vue'
 import WwAds from './components/WwAds.vue'
 import ElementPlus, { ElMessageBox } from 'element-plus'
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 // 声明百度统计全局变量
 declare global {
