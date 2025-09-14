@@ -60,12 +60,12 @@ After donation, your nickname and message will be displayed in the [donation lis
 | --- | --- |
 | [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app) | A collection of excellent development resources for the multi-platform unified development framework uni-app |
 | [create-uni](https://github.com/uni-helper/create-uni) | Quickly create uni-app projects |
-| [wot-demo](https://github.com/Moonofweisheng/wot-demo) | A quick-start demo for wot-design-uni based on [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) |
+| [wot-starter](https://github.com/wot-ui/wot-starter) | A quick-start demo for wot-design-uni based on [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) |
 | [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail) | A uni-app retail industry template based on wot-design-uni |
 | [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot UI code snippets |
 | [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci) | A plugin that supports CI (Continuous Integration) for uni-app mini program after build |
 | [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router) | A lightweight uni-app router library based on vue3 and Typescript |
-| [unibest](https://github.com/codercup/unibest) | A uni-app template based on wot-design-uni |
+| [unibest](https://github.com/unibest-tech/unibest) | A uni-app template based on wot-design-uni |
 | [wot-design-uni AI Assistant](https://www.coze.cn/store/bot/7347916532258701363) | An intelligent assistant that can answer your questions about the wot-design-uni component library |
 | [uni-ku-root](https://github.com/uni-ku/root) | A root component plugin that simulates App.vue's original capabilities |
 
@@ -73,7 +73,7 @@ After donation, your nickname and message will be displayed in the [donation lis
 
 - [wot-design](https://github.com/jd-ftf/wot-design-mini) - Thanks to the wot-design team for their continuous maintenance over the years, allowing wot-design-uni to stand on the shoulders of giants.
 - [uni-helper](https://github.com/uni-helper) - Thanks to the uni-helper team for providing the uni-app tool library, making wot-design-uni easier to use.
-- [Donors](https://wot-design-uni.cn/reward/donor.html) - Thanks to all donors, your donations help wot-design-uni develop better.
+- [Donors](https://wot-ui.cn/reward/donor.html) - Thanks to all donors, your donations help wot-design-uni develop better.
 
 ## License
 

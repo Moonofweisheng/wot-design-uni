@@ -1,10 +1,10 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-18 11:22:03
- * @LastEditTime: 2024-11-08 12:55:58
+ * @LastEditTime: 2025-07-06 21:00:04
  * @LastEditors: weisheng
  * @Description:
- * @FilePath: \wot-design-uni\src\uni_modules\wot-design-uni\components\wd-popup\types.ts
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-popup/types.ts
  * 记得注释
  */
 import type { PropType } from 'vue'
@@ -94,5 +94,11 @@ export const popupProps = {
    * 类型：boolean
    * 默认值：true
    */
-  lockScroll: makeBooleanProp(true)
+  lockScroll: makeBooleanProp(true),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   * 类型：boolean
+   * 默认值：false
+   */
+  rootPortal: makeBooleanProp(false)
 }

@@ -91,6 +91,45 @@ const canvasState = reactive({
   ctx: null as UniApp.CanvasContext | null // canvas上下文
 })
 
+/**
+ * 判断颜色是否为透明色
+ * @param color 颜色值（支持 rgba/hsla/hex/transparent）
+ */
+function isTransparentColor(color: string | undefined): boolean {
+  if (!color) return true
+  const transparentKeywords = ['transparent', '#0000', '#00000000']
+
+  // 标准透明关键字
+  if (transparentKeywords.includes(color.toLowerCase())) {
+    return true
+  }
+
+  // 匹配 rgba(r, g, b, a)
+  const rgbaMatch = color.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*(\d*\.?\d+))?\)$/i)
+  if (rgbaMatch) {
+    const alpha = rgbaMatch[4] ? parseFloat(rgbaMatch[4]) : 1
+    return alpha === 0
+  }
+
+  // 匹配 hsla(h, s, l, a)
+  const hslaMatch = color.match(/^hsla?\(\s*(\d+)(?:deg)?\s*,\s*(\d+)%\s*,\s*(\d+)%(?:\s*,\s*(\d*\.?\d+))?\)$/i)
+  if (hslaMatch) {
+    const alpha = hslaMatch[4] ? parseFloat(hslaMatch[4]) : 1
+    return alpha === 0
+  }
+
+  // 匹配 #RRGGBBAA 或 #RGBA
+  const hexMatch = color.match(/^#([0-9a-f]{8}|[0-9a-f]{4})$/i)
+  if (hexMatch) {
+    const hex = hexMatch[1]
+    const alphaHex = hex.length === 8 ? hex.slice(6, 8) : hex.slice(3, 4).repeat(2)
+    const alpha = parseInt(alphaHex, 16)
+    return alpha === 0
+  }
+
+  return false
+}
+
 watch(
   () => props.penColor,
   () => {
@@ -302,8 +341,8 @@ const redrawCanvas = () => {
   if (!ctx) return
 
   // 清除画布并设置背景
-  if (isDef(props.backgroundColor)) {
-    ctx.setFillStyle(props.backgroundColor)
+  if (!isTransparentColor(props.backgroundColor)) {
+    ctx.setFillStyle(props.backgroundColor as string)
     ctx.fillRect(0, 0, canvasState.canvasWidth, canvasState.canvasHeight)
   } else {
     ctx.clearRect(0, 0, canvasState.canvasWidth, canvasState.canvasHeight)
@@ -532,8 +571,8 @@ function canvasToImage() {
   const { canvasWidth, canvasHeight } = canvasState
   uni.canvasToTempFilePath(
     {
-      width: canvasWidth * exportScale,
-      height: canvasHeight * exportScale,
+      width: canvasWidth,
+      height: canvasHeight,
       destWidth: canvasWidth * exportScale,
       destHeight: canvasHeight * exportScale,
       fileType,
@@ -570,8 +609,8 @@ function clearCanvas() {
   const { canvasWidth, canvasHeight, ctx } = canvasState
   if (ctx) {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-    if (isDef(props.backgroundColor)) {
-      ctx.setFillStyle(props.backgroundColor)
+    if (!isTransparentColor(props.backgroundColor)) {
+      ctx.setFillStyle(props.backgroundColor as string)
       ctx.fillRect(0, 0, canvasWidth, canvasHeight)
     }
     ctx.draw()

@@ -1,7 +1,6 @@
 <template>
   <page-wraper>
-    <wd-toast />
-    <view style="margin: 20px 0">
+    <view>
       <wd-cell-group border>
         <wd-calendar :label="$t('dan-ge-ri-qi-xuan-ze')" v-model="value1" @confirm="handleConfirm1" />
         <wd-calendar :label="$t('duo-ge-ri-qi-xuan-ze')" type="dates" v-model="value2" @confirm="handleConfirm2" />
@@ -33,6 +32,22 @@
           :inner-display-format="innerDisplayFormat"
         />
         <wd-calendar label="before-confirm" v-model="value14" :before-confirm="beforeConfirm" />
+        <wd-calendar
+          :label="$t('dan-ge-ri-qi-xuan-ze-ke-qing-kong')"
+          v-model="valueClear1"
+          clearable
+          @clear="handleClear1"
+          @confirm="handleConfirmClear1"
+        />
+        <wd-calendar
+          :label="$t('ri-qi-fan-wei-xuan-ze-ke-qing-kong')"
+          type="daterange"
+          v-model="valueClear2"
+          clearable
+          @clear="handleClear2"
+          @confirm="handleConfirmClear2"
+        />
+        <wd-calendar :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value18" required marker-side="after" @confirm="handleConfirm6" />
       </wd-cell-group>
     </view>
 
@@ -49,6 +64,8 @@
       <wd-calendar ref="calendarRef" v-model="value17" :with-cell="false" @confirm="handleConfirm5" />
     </demo-block>
   </page-wraper>
+  <wd-toast />
+
   <wd-message-box />
 </template>
 <script lang="ts" setup>
@@ -79,6 +96,9 @@ const value14 = ref<number | null>(null)
 const value15 = ref<number | null>(null)
 const value16 = ref<number>(Date.now())
 const value17 = ref<number>(Date.now())
+const value18 = ref<number>(Date.now())
+const valueClear1 = ref<number | null>(Date.now())
+const valueClear2 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])
 
 const calendarRef = ref<CalendarInstance>()
 
@@ -182,6 +202,26 @@ function handleConfirm4({ value }: any) {
 
 function handleConfirm5({ value }: any) {
   toast.success(t('yi-xuan-ze') + dayjs(value).format(t('yyyy-nian-mm-yue-dd-ri')))
+}
+
+function handleConfirm6({ value }: any) {
+  console.log(value)
+}
+
+function handleClear1() {
+  console.log('calendar 1 cleared')
+}
+
+function handleConfirmClear1({ value }: any) {
+  console.log('calendar 1 confirmed:', value)
+}
+
+function handleClear2() {
+  console.log('calendar 2 cleared')
+}
+
+function handleConfirmClear2({ value }: any) {
+  console.log('calendar 2 confirmed:', value)
 }
 </script>
 <style lang="scss" scoped></style>

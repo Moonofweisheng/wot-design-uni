@@ -182,6 +182,7 @@ export type cellThemeVars = {
   cellLabelFs?: string
   cellLabelColor?: string
   cellValueFs?: string
+  cellValueFsLarge?: string
   cellValueColor?: string
   cellArrowSize?: string
   cellArrowColor?: string
@@ -192,6 +193,7 @@ export type cellThemeVars = {
   cellIconSizeLarge?: string
   cellRequiredColor?: string
   cellRequiredSize?: string
+  cellRequiredMargin?: string
   cellVerticalTop?: string
 }
 
@@ -629,16 +631,19 @@ export type tagThemeVars = {
 }
 
 export type toastThemeVars = {
+  toastColor?: string
   toastPadding?: string
   toastMaxWidth?: string
   toastRadius?: string
   toastBg?: string
   toastFs?: string
+  toastLineHeight?: string
   toastWithIconMinWidth?: string
   toastIconSize?: string
   toastIconMarginRight?: string
   toastIconMarginBottom?: string
   toastLoadingPadding?: string
+  toastLoadingMarginBottom?: string
   toastBoxShadow?: string
 }
 

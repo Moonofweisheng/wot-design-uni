@@ -59,7 +59,7 @@
     },
   ],
   "i18n-ally.extract.parsers.html": {
-    "attributes": ["text", "title", "alt", "placeholder", "label", "aria-label", "cancel-text", "close-text", "left-text", "right-text"],
+    "attributes": ["text", "title", "alt", "placeholder", "label", "aria-label", "cancel-text", "close-text", "left-text", "right-text", "value"],
     "ignoredTags": ["script", "style"],
     "vBind": true,
     "inlineText": true

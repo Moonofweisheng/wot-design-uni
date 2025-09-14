@@ -1,5 +1,4 @@
-  
-# Watermark 水印 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.16</el-tag>
+# Watermark 水印
 
 在页面或组件上添加指定的图片或文字，可用于版权保护、品牌宣传等场景。
 
@@ -17,7 +16,7 @@
 **注意：钉钉小程序平台仅支持网络图片。**
 
 ```html
-<wd-watermark image="https://wot-design-uni.cn/logo.png" :image-width="38" :image-height="38"></wd-watermark>
+<wd-watermark image="https://wot-ui.cn/logo.png" :image-width="38" :image-height="38"></wd-watermark>
 
 ```
 

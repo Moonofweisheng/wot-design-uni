@@ -7,6 +7,7 @@
       :close-on-click-modal="closeOnClickModal"
       :hide-when-close="hideWhenClose"
       :z-index="zIndex"
+      :root-portal="rootPortal"
       @before-enter="beforeenter"
       @enter="enter"
       @after-enter="afterenter"
@@ -19,7 +20,15 @@
       :custom-style="customStyle"
     >
       <view class="wd-curtain__content">
-        <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
+        <image
+          :src="src"
+          class="wd-curtain__content-img"
+          :style="imgStyle"
+          :show-menu-by-longpress="showMenuByLongpress"
+          @click="clickImage"
+          @error="imgErr"
+          @load="imgLoad"
+        ></image>
         <slot name="close">
           <wd-icon
             name="close-outline"
@@ -152,7 +161,9 @@ function clickImage() {
     })
   }
   emit('click')
-  close()
+  if (props.closeOnClick) {
+    close()
+  }
 }
 </script>
 

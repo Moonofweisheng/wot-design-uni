@@ -23,6 +23,37 @@ When using `file import`, note that WeChat Mini Program image tag paths accept b
 const joy = 'data:image/jpeg;base64,...' // Image file base64
 ```
 
+:::tip
+You can configure `transformAssetUrls` so that the `src` attribute works consistently with the native `image` component.
+
+```typescript
+// vite.config.(js|ts)
+
+import uni from '@dcloudio/vite-plugin-uni'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  plugins: [
+    // ...
+    uni({
+      vueOptions: {
+        template: {
+          transformAssetUrls: {
+            tags: {
+              'wd-img': ['src']
+            }
+          }
+        }
+      }
+    })
+  ]
+})
+```
+
+After updating the configuration, restart the development server to apply the changes.
+For more details, see [uni-app issue#4997](https://github.com/dcloudio/uni-app/issues/4997#issuecomment-2456851123).
+:::
+
 ## Slots
 
 Use `loading` and `error` slots to set display content during image loading and after loading failure

@@ -1,4 +1,4 @@
-# Table <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.39</el-tag>
+# Table
 
 Used to display multiple pieces of data with similar structures, allowing operations such as sorting.
 

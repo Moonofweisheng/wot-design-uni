@@ -1,14 +1,16 @@
 <template>
   <view :class="rootClass" :style="customStyle">
-    <view v-if="label || $slots.label" :class="labelClass" :style="labelStyle">
+    <view v-if="label || $slots.label" class="wd-textarea__label" :style="labelStyle">
+      <text v-if="isRequired && markerSide === 'before'" class="wd-textarea__required wd-textarea__required--left">*</text>
       <view v-if="prefixIcon || $slots.prefix" class="wd-textarea__prefix">
         <wd-icon v-if="prefixIcon && !$slots.prefix" custom-class="wd-textarea__icon" :name="prefixIcon" @click="onClickPrefixIcon" />
         <slot v-else name="prefix"></slot>
       </view>
       <view class="wd-textarea__label-inner">
         <text v-if="label && !$slots.label">{{ label }}</text>
-        <slot v-else name="label"></slot>
+        <slot v-else-if="$slots.label" name="label"></slot>
       </view>
+      <text v-if="isRequired && markerSide === 'after'" class="wd-textarea__required">*</text>
     </view>
 
     <!-- 文本域 -->
@@ -193,7 +195,7 @@ const rootClass = computed(() => {
 })
 
 const labelClass = computed(() => {
-  return `wd-textarea__label ${props.customLabelClass} ${isRequired.value ? 'is-required' : ''}`
+  return `wd-textarea__label ${props.customLabelClass}`
 })
 
 const inputPlaceholderClass = computed(() => {

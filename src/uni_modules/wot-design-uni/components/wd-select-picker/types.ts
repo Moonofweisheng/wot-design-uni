@@ -24,12 +24,22 @@ export const selectPickerProps = {
   error: makeBooleanProp(false),
   /** 必填样式 */
   required: makeBooleanProp(false),
-  /** 使用 label 插槽时设置该选项 */
+  /**
+   * 使用 label 插槽时设置该选项
+   * @deprecated 可以直接使用标签插槽，无需配置此选项
+   */
   useLabelSlot: makeBooleanProp(false),
-  /** 使用默认插槽时设置该选项 */
+  /**
+   * 使用默认插槽时设置该选项
+   * @deprecated 可以直接使用默认插槽，无需配置此选项
+   */
   useDefaultSlot: makeBooleanProp(false),
   /** 设置选择器大小 */
   size: String,
+  /**
+   * 是否垂直居中
+   */
+  center: makeBooleanProp(false),
   /** 选中的颜色（单/复选框） */
   checkedColor: String,
   /** 最小选中的数量（仅在复选框类型下生效，`type`类型为`checkbox`） */
@@ -87,7 +97,15 @@ export const selectPickerProps = {
   /**
    * 显示清空按钮
    */
-  clearable: makeBooleanProp(false)
+  clearable: makeBooleanProp(false),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 必填标记位置，可选值：before、after
+   */
+  markerSide: makeStringProp<'before' | 'after'>('before')
 }
 export type SelectPickerProps = ExtractPropTypes<typeof selectPickerProps>
 

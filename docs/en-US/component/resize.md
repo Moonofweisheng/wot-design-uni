@@ -1,6 +1,6 @@
 # Resize
 
-When the size of the document flow wrapped by the component changes, it triggers the `size` event. Generally used to monitor changes in DOM dimensions and positions caused by DOM content updates, re-acquire DOM dimensions and positions, and perform calculations for content display.
+When the size of the document flow wrapped by the component changes, it triggers the `resize` event. Generally used to monitor changes in DOM dimensions and positions caused by DOM content updates, re-acquire DOM dimensions and positions, and perform calculations for content display.
 
 ## Basic Usage
 
@@ -29,8 +29,22 @@ function handleResize(detail: Record<string, string | number>) {
 }
 ```
 
+## Attributes
+
+| Parameter              | Description                  | Type   | Optional Values | Default | Version |
+| ---------------------- | ---------------------------- | ------ | --------------- | ------- | ------- |
+| custom-style           | Custom root node style       | string | -               | -       | -       |
+| custom-class           | Custom root node style class | string | -               | -       | -       |
+| custom-container-class | Custom container style class | string | -               | -       | -       |
+
 ## Events
 
-| Event Name | Description | Parameters | Version |
-|------------|-------------|------------|----------|
-| resize | Triggered when size changes | `{width: number, height: number, top: number, right: number, bottom: number, left: number}` | - |
+| Event Name | Description                 | Parameters                                                                                  | Version |
+| ---------- | --------------------------- | ------------------------------------------------------------------------------------------- | ------- |
+| resize     | Triggered when size changes | `{width: number, height: number, top: number, right: number, bottom: number, left: number}` | -       |
+
+## Slots
+
+| Slot Name | Description                         | Version |
+| --------- | ----------------------------------- | ------- |
+| default   | Content to monitor for size changes | -       |

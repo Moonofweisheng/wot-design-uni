@@ -1,4 +1,4 @@
-# Circle 环形进度条 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.19</el-tag>
+# Circle 环形进度条
 
 圆环形的进度条组件，支持进度渐变动画。
 

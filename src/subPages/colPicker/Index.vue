@@ -1,7 +1,6 @@
 <template>
   <page-wraper>
-    <wd-toast />
-    <view style="margin: 20px 0">
+    <view>
       <wd-cell-group border>
         <wd-col-picker :label="$t('xuan-ze-di-zhi')" v-model="value1" :columns="areaData1" :column-change="columnChange1" @confirm="handleValue" />
         <wd-col-picker :label="$t('chu-shi-xuan-xiang')" v-model="value2" :columns="areaData2" :column-change="columnChange" auto-complete />
@@ -20,6 +19,14 @@
         <wd-col-picker label="before-confirm" v-model="value8" :columns="areaData1" :column-change="columnChange1" :before-confirm="beforeConfirm" />
         <wd-col-picker :label="$t('cuo-wu')" error v-model="value9" :columns="areaData1" :column-change="columnChange1" />
         <wd-col-picker :label="$t('bi-tian')" required v-model="value10" :columns="areaData1" :column-change="columnChange1" />
+        <wd-col-picker
+          :label="$t('bi-tian-xing-hao-zai-you-ce')"
+          required
+          v-model="value16"
+          :columns="areaData1"
+          :column-change="columnChange1"
+          marker-side="after"
+        />
       </wd-cell-group>
     </view>
     <demo-block
@@ -41,6 +48,7 @@
     <demo-block :title="$t('zhi-kao-you-zhan-shi')" transparent>
       <wd-col-picker :label="$t('xuan-ze-di-zhi')" align-right v-model="value14" :columns="areaData1" :column-change="columnChange1" />
     </demo-block>
+
     <demo-block :title="$t('zi-ding-yi-xuan-ze-qi')" transparent>
       <view style="margin-left: 15px">
         <view style="margin-bottom: 10px"></view>
@@ -58,6 +66,7 @@
         </wd-col-picker>
       </view>
     </demo-block>
+    <wd-toast />
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -92,6 +101,7 @@ const value12 = ref<any[]>([])
 const value13 = ref<any[]>([])
 const value14 = ref<any[]>([])
 const value15 = ref<any[]>([])
+const value16 = ref<any[]>([])
 const displayValue = ref<string>('')
 const areaData1 = ref<any[]>([
   colPickerData.map((item) => {

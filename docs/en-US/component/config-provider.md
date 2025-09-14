@@ -104,10 +104,11 @@ export default {
 ```
 
 ### Using with TypeScript
-When defining `themeVars` in TypeScript, it's recommended to use the __ConfigProviderThemeVars__ type provided by __wot-design-uni__, which can provide comprehensive type hints:
+
+When defining `themeVars` in TypeScript, it's recommended to use the **ConfigProviderThemeVars** type provided by **wot-design-uni**, which can provide comprehensive type hints:
 
 ```ts
-import type { ConfigProviderThemeVars } from 'wot-design-uni';
+import type { ConfigProviderThemeVars } from 'wot-design-uni'
 
 const themeVars: ConfigProviderThemeVars = {
   colorTheme: 'red'
@@ -125,6 +126,7 @@ Note: ConfigProvider only affects the styles of its child components, not the gl
 ### Installation
 
 ::: code-group
+
 ```bash [npm]
 npm i -D @uni-ku/root
 ```
@@ -136,6 +138,7 @@ yarn add -D @uni-ku/root
 ```bash [pnpm]
 pnpm add -D @uni-ku/root
 ```
+
 :::
 
 ### Import
@@ -188,11 +191,65 @@ const { theme, themeVars } = useTheme({
 
 <template>
   <div>Hello AppKuVue</div>
-  <!-- Assuming WdConfigProvider component is registered -->
-  <WdConfigProvider :theme="theme" :theme-vars="themeVars">
+  <!-- Ensure WdConfigProvider component is registered -->
+  <wd-config-provider :theme="theme" :theme-vars="themeVars">
     <KuRootView />
-  </WdConfigProvider>
+  </wd-config-provider>
 </template>
 ```
 
 2. Write a composable function for theme control
+
+```ts
+// src/composables/useTheme.ts
+
+import type { ConfigProviderThemeVars } from 'wot-design-uni'
+import { ref } from 'vue'
+
+const theme = ref<'light' | 'dark'>()
+const themeVars = ref<ConfigProviderThemeVars>()
+
+export function useTheme(vars?: ConfigProviderThemeVars) {
+  vars && (themeVars.value = vars)
+
+  function toggleTheme(mode?: 'light' | 'dark') {
+    theme.value = mode || (theme.value === 'light' ? 'dark' : 'light')
+  }
+
+  return {
+    theme,
+    themeVars,
+    toggleTheme
+  }
+}
+```
+
+3. Use theme switching in any view file
+
+```vue
+<!-- src/pages/*.vue -->
+
+<script setup lang="ts">
+import { useTheme } from '@/composables/useTheme'
+
+const { theme, toggleTheme } = useTheme()
+</script>
+
+<template>
+  <button @click="toggleTheme">Toggle theme, current mode: {{ theme }}</button>
+</template>
+```
+
+## Attributes
+
+| Parameter  | Description                                                           | Type                      | Options        | Default | Version |
+| ---------- | --------------------------------------------------------------------- | ------------------------- | -------------- | ------- | ------- |
+| theme      | Theme style, set to `dark` to enable dark mode, takes effect globally | string                    | `dark`/`light` | -       | -       |
+| theme-vars | Custom theme variables                                                | `ConfigProviderThemeVars` | -              | -       | -       |
+
+## External Style Classes
+
+| Class Name   | Description     | Version |
+| ------------ | --------------- | ------- |
+| custom-class | Root node style | 1.3.9   |
+| custom-style | Root node style | 1.3.9   |

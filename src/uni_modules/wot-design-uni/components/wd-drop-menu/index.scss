@@ -41,7 +41,7 @@
         opacity: 1;
       }
       :deep(.wd-drop-menu__arrow) {
-        transform: scale(0.6) rotate(-180deg);
+        transform: rotate(-180deg);
         transform-origin: center center;
       }
     }
@@ -52,7 +52,9 @@
 
   @include e(item-title) {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     max-width: 100%;
     padding: 0 $-drop-menu-side-padding;
     box-sizing: border-box;
@@ -78,12 +80,7 @@
   }
 
   @include edeep(arrow) {
-    position: absolute;
-    display: inline-block;
-    top: 0;
-    right: -4px;
-    transition: transform 0.3s;
-    transform: scale(0.6);
     font-size: $-drop-menu-arrow-fs;
+    margin-left: 2px;
   }
 }

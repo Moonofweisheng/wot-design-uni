@@ -1,4 +1,4 @@
-# Overlay 遮罩层 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.30</el-tag>
+# Overlay 遮罩层
 
 创建一个遮罩层，用于强调特定的页面元素，并阻止用户进行其他操作。
 
@@ -45,6 +45,6 @@
 | ----------- | ------------------ | ----------------- | ------ | ------ | -------- |
 | show        | 是否展示遮罩层     | `boolean`         | true   | false  | -        |
 | duration    | 动画时长，单位毫秒 | `string / number` | -      | 300    | -        |
-| lockScroll  | 是否锁定滚动       | `boolean`         | false  | true   | -        |
+| lockScroll  | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动 | `boolean`         | false  | true   | -        |
 | zIndex      | 层级               | `number`          | -      | 10     | -        |
 | customStyle | 自定义样式         | `string`          | -      | -      | -        |

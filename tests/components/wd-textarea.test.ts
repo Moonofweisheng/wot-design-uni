@@ -147,4 +147,51 @@ describe('WdTextarea', () => {
     // 组件不支持直接设置 autosize 对象，跳过此测试
     expect(true).toBe(true)
   })
+
+  // 测试 markerSide 属性
+  test('markerSide 属性 - before', () => {
+    const wrapper = mount(WdTextarea, {
+      props: {
+        label: '标签',
+        required: true,
+        markerSide: 'before'
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查必填星号在前面
+    expect(wrapper.find('.wd-textarea__required--left').exists()).toBe(true)
+    expect(wrapper.find('.wd-textarea__required--left').text()).toBe('*')
+  })
+
+  test('markerSide 属性 - after', () => {
+    const wrapper = mount(WdTextarea, {
+      props: {
+        label: '标签',
+        required: true,
+        markerSide: 'after'
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('after')
+    // 检查必填星号在后面（没有 --left 类）
+    expect(wrapper.find('.wd-textarea__required').exists()).toBe(true)
+    expect(wrapper.find('.wd-textarea__required--left').exists()).toBe(false)
+    expect(wrapper.find('.wd-textarea__required').text()).toBe('*')
+  })
+
+  test('markerSide 默认值', () => {
+    const wrapper = mount(WdTextarea, {
+      props: {
+        label: '标签',
+        required: true
+      }
+    })
+
+    // 默认值应该是 'before'
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查必填星号在前面
+    expect(wrapper.find('.wd-textarea__required--left').exists()).toBe(true)
+    expect(wrapper.find('.wd-textarea__required--left').text()).toBe('*')
+  })
 })

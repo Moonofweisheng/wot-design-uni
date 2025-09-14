@@ -116,7 +116,7 @@ You can set the menu's right icon through `icon`, equivalent to the `name` prope
 
 ```html
 <wd-drop-menu>
-  <wd-drop-menu-item title="Map" icon="location" icon-size="24px" />
+  <wd-drop-menu-item title="Map" icon="location" icon-size="14px" />
 </wd-drop-menu>
 ```
 
@@ -137,6 +137,8 @@ The `before-toggle` function cannot prevent the expansion/closure operations of 
 
 ```typescript
 import { useMessage } from '@/uni_modules/wot-design-uni'
+import type { DropMenuItemBeforeToggle } from '@/uni_modules/wot-design-uni/components/wd-drop-menu-item/types'
+
 const messageBox = useMessage()
 
 const value = ref<number>(0)
@@ -206,6 +208,7 @@ Set the `direction` property value to `up`, and the menu will expand upward
 | value-key | Key for value in options object | string | - | value | - |
 | label-key | Key for display text in options object | string | - | label | - |
 | tip-key | Key for option description in options object | string | - | tip | - |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | 1.11.0 |
 | icon-name | Selected icon name (available names in wd-icon component) | string | - | check | - |
 
 ## DropMenu Slot

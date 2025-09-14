@@ -86,6 +86,7 @@
 
   @include edeep(badge) {
     z-index: 2;
+    word-break: break-all;
   }
 
   @include edeep(icon) {

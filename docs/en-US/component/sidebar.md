@@ -1,4 +1,4 @@
-# Sidebar <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.49</el-tag>
+# Sidebar
 
 A vertical navigation bar used to switch between different content areas.
 

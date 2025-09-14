@@ -93,6 +93,7 @@
     font-size: $-radio-label-fs;
     color: $-radio-label-color;
     line-height: 20px;
+    word-break: break-all;
   }
   @include when(checked) {
     .wd-radio__shape {

@@ -105,6 +105,7 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | title | Left title | string | - | - |
 | value | Right content | string | - | - |
 | icon | Left icon class name, see Icon component for optional values | string | - | - |
+| icon-size | Icon size | string \| number | - | $LOWEST_VERSION$ |
 | icon-prefix | Icon class name prefix, same as Icon component | string | 'wd-icon' | - |
 | label | Description below the title | string | - | - |
 | is-link | Whether to show the right arrow and click effect | boolean | false | - |
@@ -117,9 +118,12 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | title-width | Title width, with unit | string | - | - |
 | center | Whether to vertically center the left and right content | boolean | false | - |
 | required | Whether to show the required asterisk | boolean | false | - |
+| marker-side | Position of the required marker | 'before' \| 'after' | 'before' | 1.12.0 |
 | on | Whether to show the on icon on the right | boolean | false | - |
 | bordered | Whether to show the bottom border | boolean | true | - |
 | center-title | Whether to center the title | boolean | false | 0.1.1 |
+| ellipsis | Whether to truncate content with ellipsis when it overflows | boolean | false | 1.11.0 |
+| use-title-slot | Whether to enable title slot, enabled by default to solve v-slot and v-if conflict issues | boolean | true | 1.11.0 |
 
 ## Cell Events
 

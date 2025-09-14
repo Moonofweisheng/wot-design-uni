@@ -49,6 +49,18 @@ Set the `disable-input` property.
 <wd-input-number v-model="value" @change="handleChange" disable-input />
 ```
 
+## Disable Buttons
+
+You can disable the increase or decrease buttons individually.
+
+```html
+<!-- Disable minus button -->
+<wd-input-number v-model="value" @change="handleChange" disable-minus />
+
+<!-- Disable plus button -->
+<wd-input-number v-model="value" @change="handleChange" disable-plus />
+```
+
 ## Without Input Box
 
 Set `without-input` to hide the input box.
@@ -91,6 +103,49 @@ Set the `allow-null` property to allow empty values, set `placeholder` to prompt
 
 ```typescript
 const value = ref<number|string>('')
+function handleChange({ value }) {
+  console.log(value)
+}
+```
+
+## Non-Immediate Update Mode
+
+Set `immediate-change` to `false`, the `change` event will not be triggered immediately when the input box content changes, only when it loses focus or buttons are clicked.
+
+```html
+<!-- Immediate update mode (default) -->
+<wd-input-number v-model="value1" @change="handleChange" :immediate-change="true" />
+
+<!-- Non-immediate update mode -->
+<wd-input-number v-model="value2" @change="handleChange" :immediate-change="false" />
+```
+
+```typescript
+const value1 = ref<number>(1)
+const value2 = ref<number>(1)
+function handleChange({ value }) {
+  console.log(value)
+}
+```
+
+## Auto-update on Initialization
+
+Set the `update-on-init` property to control whether to update the `v-model` with the corrected value during initialization.
+
+- When `update-on-init="true"` (default), the initial value will be corrected to comply with `min`, `max`, `step`, `precision` and other rules, and the `v-model` will be updated synchronously
+- When `update-on-init="false"`, the initial value will not be corrected (v-model unchanged), but display formatting (such as precision) will still be applied
+
+```html
+<!-- Auto-update initial value (default) -->
+<wd-input-number v-model="value1" @change="handleChange" :update-on-init="true" :min="3" :max="15" :step="2" step-strictly />
+
+<!-- Don't update initial value, keep original value -->
+<wd-input-number v-model="value2" @change="handleChange" :update-on-init="false" :min="3" :max="15" :step="2" step-strictly />
+```
+
+```typescript
+const value1 = ref<number>(1) // Will be auto-corrected to 4 (minimum multiple of 2 that is ≥3)
+const value2 = ref<number>(1) // Remains 1, will not be corrected but will be formatted for display
 function handleChange({ value }) {
   console.log(value)
 }
@@ -152,6 +207,9 @@ Set the `long-press` property to allow long press for increment/decrement.
 | adjustPosition | Native property, whether to automatically push up the page when keyboard pops up | boolean | - | true | 1.3.11 |
 | before-change | Triggered before input box value changes, returning false will prevent input box value from changing, supports returning `Promise` | `(value: number \| string) => boolean \| Promise<boolean>` | - | - | 1.6.0 |
 | long-press | Whether to allow long press for increment/decrement | boolean | - | false | 1.8.0 |
+| immediate-change | Whether to respond to input changes immediately, false will only update on blur and button clicks | boolean | - | true | 1.10.0 |
+| update-on-init | Whether to update v-model with corrected value during initialization | boolean | - | true | 1.10.0 |
+| input-type | Input field type | string | number / digit | digit | 1.10.0 |
 
 ## Events
 

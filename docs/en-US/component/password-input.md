@@ -1,4 +1,4 @@
-# PasswordInput <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.0</el-tag>
+# PasswordInput
 
 A grid input box component that can be used for inputting passwords, SMS verification codes, and other scenarios. Usually used in conjunction with the [number keyboard](./number-keyboard.md) component.
 

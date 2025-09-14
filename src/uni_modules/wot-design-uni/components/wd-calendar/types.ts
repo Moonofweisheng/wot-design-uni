@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-03-15 20:40:34
- * @LastEditTime: 2024-12-08 19:13:33
+ * @LastEditTime: 2025-07-11 16:00:26
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-calendar/types.ts
@@ -71,7 +71,7 @@ export const calendarProps = {
   /**
    * 设置左侧标题宽度
    */
-  labelWidth: String,
+  labelWidth: makeStringProp('33%'),
   /**
    * 禁用
    */
@@ -181,7 +181,19 @@ export const calendarProps = {
    * 是否使用内置单元格
    * 默认为 true，使用内置单元格
    */
-  withCell: makeBooleanProp(true)
+  withCell: makeBooleanProp(true),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 必填标记位置，可选值：before、after
+   */
+  markerSide: makeStringProp<'before' | 'after'>('before'),
+  /**
+   * 显示清空按钮
+   */
+  clearable: makeBooleanProp(false)
 }
 
 export type CalendarDisplayFormat = (value: number | number[], type: CalendarType) => string

@@ -1,4 +1,7 @@
-# Signature 签名 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.6.0</el-tag>
+---
+version: 1.6.0
+---
+# Signature 签名
 
 用于签名场景，基于 Canvas 实现的签名组件。提供了基础签名、历史记录、笔锋效果等功能。
 

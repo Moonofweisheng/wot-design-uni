@@ -5,19 +5,18 @@
       :style="gutterContentStyle"
       :hover-class="hoverClass"
     >
-      <slot v-if="useSlot" />
-      <block v-else>
-        <view :style="'width:' + iconSize + '; height: ' + iconSize" class="wd-grid-item__wrapper">
-          <wd-badge custom-class="badge" v-bind="customBadgeProps">
-            <template v-if="useIconSlot">
-              <slot name="icon" />
-            </template>
-            <wd-icon v-else :name="icon" :size="iconSize" :custom-class="customIcon" />
+      <slot>
+        <view class="wd-grid-item__wrapper">
+          <wd-badge v-bind="customBadgeProps">
+            <slot name="icon">
+              <wd-icon :name="icon" :size="iconSize" :custom-class="customIcon" />
+            </slot>
           </wd-badge>
         </view>
-        <slot name="text" v-if="useTextSlot" />
-        <view v-else class="wd-grid-item__text custom-text">{{ text }}</view>
-      </block>
+        <slot name="text">
+          <view :class="`wd-grid-item__text ${customText}`">{{ text }}</view>
+        </slot>
+      </slot>
     </view>
   </view>
 </template>

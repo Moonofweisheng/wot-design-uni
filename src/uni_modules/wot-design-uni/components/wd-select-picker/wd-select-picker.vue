@@ -1,39 +1,38 @@
 <template>
-  <view :class="`wd-select-picker ${cell.border.value ? 'is-border' : ''} ${customClass}`" :style="customStyle">
-    <view class="wd-select-picker__field" @click="open">
-      <slot v-if="useDefaultSlot"></slot>
-      <view
-        v-else
-        :class="`wd-select-picker__cell ${disabled && 'is-disabled'} ${props.readonly && 'is-readonly'} ${alignRight && 'is-align-right'} ${
-          error && 'is-error'
-        } ${size && 'is-' + size}`"
-      >
-        <view
-          v-if="label || useLabelSlot"
-          :class="`wd-select-picker__label ${isRequired && 'is-required'} ${customLabelClass}`"
-          :style="labelWidth ? 'min-width:' + labelWidth + ';max-width:' + labelWidth + ';' : ''"
-        >
-          <block v-if="label">{{ label }}</block>
-          <slot v-else name="label"></slot>
+  <view :class="`wd-select-picker ${customClass}`" :style="customStyle">
+    <wd-cell
+      v-if="!$slots.default"
+      :title="label"
+      :value="showValue || placeholder || translate('placeholder')"
+      :required="required"
+      :size="size"
+      :title-width="labelWidth"
+      :prop="prop"
+      :rules="rules"
+      :clickable="!disabled && !readonly"
+      :value-align="alignRight ? 'right' : 'left'"
+      :center="center"
+      :custom-class="cellClass"
+      :custom-style="customStyle"
+      :custom-title-class="customLabelClass"
+      :custom-value-class="customValueClass"
+      :ellipsis="ellipsis"
+      :use-title-slot="!!$slots.label"
+      :marker-side="markerSide"
+      @click="open"
+    >
+      <template v-if="$slots.label" #title>
+        <slot name="label"></slot>
+      </template>
+      <template #right-icon>
+        <wd-icon v-if="showArrow" custom-class="wd-select-picker__arrow" name="arrow-right" />
+        <view v-else-if="showClear" @click.stop="handleClear">
+          <wd-icon custom-class="wd-select-picker__clear" name="error-fill" />
         </view>
-        <view class="wd-select-picker__body">
-          <view class="wd-select-picker__value-wraper">
-            <view
-              :class="`wd-select-picker__value ${ellipsis && 'is-ellipsis'} ${customValueClass} ${
-                showValue ? '' : 'wd-select-picker__value--placeholder'
-              }`"
-            >
-              {{ showValue || placeholder || translate('placeholder') }}
-            </view>
-            <wd-icon v-if="showArrow" custom-class="wd-select-picker__arrow" name="arrow-right" />
-            <view v-else-if="showClear" @click.stop="handleClear">
-              <wd-icon custom-class="wd-select-picker__clear" name="error-fill" />
-            </view>
-          </view>
-
-          <view v-if="errorMessage" class="wd-select-picker__error-message">{{ errorMessage }}</view>
-        </view>
-      </view>
+      </template>
+    </wd-cell>
+    <view v-else @click="open">
+      <slot></slot>
     </view>
     <wd-action-sheet
       v-model="pickerShow"
@@ -42,6 +41,7 @@
       :close-on-click-modal="closeOnClickModal"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
+      :root-portal="rootPortal"
       @close="close"
       @opened="scrollIntoView ? setScrollIntoView() : ''"
       custom-header-class="wd-select-picker__header"
@@ -125,12 +125,10 @@ import wdRadio from '../wd-radio/wd-radio.vue'
 import wdRadioGroup from '../wd-radio-group/wd-radio-group.vue'
 import wdButton from '../wd-button/wd-button.vue'
 import wdLoading from '../wd-loading/wd-loading.vue'
+import wdCell from '../wd-cell/wd-cell.vue'
 
 import { getCurrentInstance, onBeforeMount, ref, watch, nextTick, computed } from 'vue'
-import { useCell } from '../composables/useCell'
 import { getRect, isArray, isDef, isFunction, pause } from '../common/util'
-import { useParent } from '../composables/useParent'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
 import { useTranslate } from '../composables/useTranslate'
 import { selectPickerProps, type SelectPickerExpose } from './types'
 
@@ -146,7 +144,6 @@ const lastSelectList = ref<Array<number | boolean | string> | number | boolean |
 const filterVal = ref<string>('')
 const filterColumns = ref<Array<Record<string, any>>>([])
 const scrollTop = ref<number>(0) // 滚动位置
-const cell = useCell()
 
 const showValue = computed(() => {
   const value = valueFormat(props.modelValue)
@@ -173,6 +170,15 @@ const showValue = computed(() => {
     }
   }
   return showValueTemp
+})
+
+const cellClass = computed(() => {
+  const classes = ['wd-select-picker__cell']
+  if (props.disabled) classes.push('is-disabled')
+  if (props.readonly) classes.push('is-readonly')
+  if (props.error) classes.push('is-error')
+  if (!showValue.value) classes.push('wd-select-picker__cell--placeholder')
+  return classes.join(' ')
 })
 
 watch(
@@ -228,31 +234,6 @@ watch(
     immediate: true
   }
 )
-
-const { parent: form } = useParent(FORM_KEY)
-
-// 表单校验错误信息
-const errorMessage = computed(() => {
-  if (form && props.prop && form.errorMessages && form.errorMessages[props.prop]) {
-    return form.errorMessages[props.prop]
-  } else {
-    return ''
-  }
-})
-
-// 是否展示必填
-const isRequired = computed(() => {
-  let formRequired = false
-  if (form && form.props.rules) {
-    const rules = form.props.rules
-    for (const key in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, key) && key === props.prop && Array.isArray(rules[key])) {
-        formRequired = rules[key].some((rule: FormItemRule) => rule.required)
-      }
-    }
-  }
-  return props.required || props.rules.some((rule) => rule.required) || formRequired
-})
 
 onBeforeMount(() => {
   selectList.value = valueFormat(props.modelValue)

@@ -152,7 +152,7 @@
   }
 
   .custom-sub {
-    color: $-dark-color-gray;
+    color: $-dark-color;
   }
 }
 

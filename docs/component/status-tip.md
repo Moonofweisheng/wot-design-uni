@@ -49,7 +49,7 @@
 需要自定义图片时，可以在 `image` 属性中传入任意图片 URL。
 
 ```html
-<wd-status-tip image="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg" tip="查看我的头像" />
+<wd-status-tip image="https://wot-ui.cn/assets/panda.jpg" tip="查看我的头像" />
 ```
 
 ## 自定义图片内容

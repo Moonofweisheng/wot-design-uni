@@ -2,35 +2,14 @@
 @import "./../common/abstracts/variable.scss";
 
 .wot-theme-dark {
-  @include b(picker) {
-    @include e(cell) {
-      background-color: $-dark-background2;
-      color: $-dark-color;
-    }
-
-    @include e(title) {
-      color: $-dark-color;
-    }
-
-    @include e(label) {
-      color: $-dark-color;
-    }
-    @include e(value) {
-      color: $-dark-color;
-    }
+  @include b(datetime-picker) {
 
     @include e(placeholder) {
       color: $-dark-color-gray;
     }
-  
 
-    @include when(border) {
-      .wd-picker__cell {
-        @include halfPixelBorder('top', $-cell-padding, $-dark-border-color);
-      }
-    }
-
-    :deep(.wd-picker__arrow){
+    :deep(.wd-datetime-picker__arrow),
+    :deep(.wd-datetime-picker__clear) {
       color: $-dark-color;
     }
 
@@ -48,129 +27,69 @@
         color: $-dark-color;
       }
     }
-
   }
 }
+ 
 
-@include b(picker) {
+@include b(datetime-picker) {
+  @include edeep(cell) {
+    @include when(disabled) {
+      .wd-cell__value {
+        color: $-input-disabled-color;
+        cursor: not-allowed;
+      }
+    }
+    @include when(error) {
+      .wd-cell__value {
+        color: $-input-error-color;
+      }
+      .wd-datetime-picker__arrow {
+        color: $-input-error-color;
+      }
+    }
+    @include when(large) {
+      .wd-datetime-picker__arrow {
+        font-size: $-cell-icon-size-large;
+      }
+    }
+    
+    .wd-cell__value--ellipsis {
+      view {
+        @include lineEllipsis;
+        width: 100%;
+      }
+      
+      text {
+        @include lineEllipsis;
+        max-width: 100%;
+      }
+    }
+  }
+
+  @include e(placeholder) {
+    color: $-input-placeholder-color;
+  }
+  
+  @include edeep(arrow) {
+    display: block;
+    font-size: $-cell-icon-size;
+    color: $-cell-arrow-color;
+    line-height: $-cell-line-height;
+  }
+
+  @include edeep(clear) {
+    display: block;
+    font-size: $-cell-icon-size;
+    color: $-cell-clear-color;
+    line-height: $-cell-line-height;
+  }
+
   @include edeep(popup) {
     border-radius: 16px 16px 0px 0px;
   }
 
   @include e(wraper) {
     padding-bottom: var(--window-bottom);
-  }
-
-  @include when(border) {
-    .wd-picker__cell {
-      @include halfPixelBorder("top", $-cell-padding);
-    }
-  }
-  @include when(large) {
-    .wd-picker__cell {
-      font-size: $-cell-title-fs-large;
-    }
-    :deep(.wd-picker__arrow) {
-      font-size: $-cell-icon-size-large;
-    }
-  }
-  @include when(error) {
-    .wd-picker__value,
-    .wd-picker__placeholder {
-      color: $-input-error-color;
-    }
-
-    :deep(.wd-picker__arrow){
-      color: $-input-error-color;
-    }
-  }
-  @include when(align-right) {
-    .wd-picker__value {
-      text-align: right;
-    }
-  }
-  @include e(cell) {
-    position: relative;
-    display: flex;
-    padding: $-cell-wrapper-padding $-cell-padding;
-    align-items: flex-start;
-    background-color: $-color-white;
-    text-decoration: none;
-    color: $-cell-title-color;
-    font-size: $-cell-title-fs;
-    overflow: hidden;
-    line-height: $-cell-line-height;
-
-    @include when(disabled) {
-      .wd-picker__value {
-        color: $-input-disabled-color;
-      }
-    }
-  }
-
-  @include when(disabled) {
-    .wd-picker__value {
-      color: $-picker-column-disabled-color;
-    }
-  }
-
-  @include e(error-message){
-    color: $-form-item-error-message-color;
-    font-size: $-form-item-error-message-font-size;
-    line-height: $-form-item-error-message-line-height;
-    text-align: left;
-    vertical-align: middle;
-  }
-
-  @include e(label) {
-    position: relative;
-    width: $-input-cell-label-width;
-    margin-right: $-cell-padding;
-    color: $-cell-title-color;
-    box-sizing: border-box;
-
-    @include when(required) {
-      padding-left: 12px;
-
-      &::after {
-        position: absolute;
-        left: 0;
-        top: 2px;
-        content: "*";
-        font-size: $-cell-required-size;
-        line-height: 1.1;
-        color: $-cell-required-color;
-      }
-    }
-  }
-
-  @include e(value-wraper) {
-    display: flex;
-  }
-
-  @include e(value) {
-    flex: 1;
-    margin-right: 10px;
-    color: $-cell-value-color;
-    
-    @include when(ellipsis) {
-      @include lineEllipsis;
-    }
-  }
-
-  @include e(body) {
-    flex: 1;
-  }
-
-  @include e(placeholder) {
-    color: $-input-placeholder-color;
-  }
-
-  @include edeep(arrow) {
-    display: block;
-    font-size: $-cell-icon-size;
-    color: $-cell-arrow-color;
-    line-height: $-cell-line-height;
   }
 
   @include e(toolbar) {

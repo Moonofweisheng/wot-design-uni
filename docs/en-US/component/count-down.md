@@ -1,4 +1,4 @@
-# CountDown<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.58</el-tag>
+# CountDown
 
 Used to display countdown values in real-time, supporting millisecond precision.
 

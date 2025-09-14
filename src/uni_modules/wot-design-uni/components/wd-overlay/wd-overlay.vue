@@ -5,8 +5,8 @@
     custom-class="wd-overlay"
     :duration="duration"
     :custom-style="`z-index: ${zIndex}; ${customStyle}`"
+    :disable-touch-move="lockScroll"
     @click="handleClick"
-    @touchmove.stop.prevent="lockScroll ? noop : ''"
   >
     <slot></slot>
   </wd-transition>
@@ -26,7 +26,7 @@ export default {
 import wdTransition from '../wd-transition/wd-transition.vue'
 import { overlayProps } from './types'
 // #ifdef H5
-import useLockScroll from '../composables/useLockScroll'
+import { useLockScroll } from '../composables/useLockScroll'
 // #endif
 
 const props = defineProps(overlayProps)
@@ -36,8 +36,6 @@ const emit = defineEmits(['click'])
 function handleClick() {
   emit('click')
 }
-
-function noop() {}
 
 // #ifdef H5
 useLockScroll(() => props.show && props.lockScroll)

@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://wot-ui.cn/$1",
+      "permanent": true
+    }
+  ]
+}

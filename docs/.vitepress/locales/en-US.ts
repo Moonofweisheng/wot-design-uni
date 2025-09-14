@@ -25,6 +25,10 @@ export default defineConfig({
             link: '/en-US/guide/quick-use',
           },
           {
+            text: 'CLI & Templates',
+            link: '/en-US/guide/cli-templates',
+          },
+          {
             text: 'Custom Theme',
             link: '/en-US/guide/custom-theme',
           },
@@ -77,14 +81,15 @@ export default defineConfig({
         ]
       },
       { text: '🥤Buy Me a Coffee', link: '/en-US/reward/reward', activeMatch: '/reward/' },
+      { text: 'Blog', link: 'https://blog.wot-ui.cn/' },
       {
-        text: 'Ecosystem',
-        items: [
-          { text: 'Quick Start Project', link: 'https://github.com/Moonofweisheng/wot-demo' },
+        text: 'Resources', items: [
+          { text: 'Quick Start Template', link: 'https://github.com/wot-ui/wot-starter' },
           { text: 'Vue3 uni-app Router', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: 'Mini Program CI Tool', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
-        ],
+          { text: 'uni-ku', link: 'https://github.com/uni-ku' },
+        ]
       },
     ],
     sidebar: {
@@ -96,6 +101,10 @@ export default defineConfig({
         {
           text: 'Quick Start',
           link: '/en-US/guide/quick-use',
+        },
+        {
+          text: 'CLI & Templates',
+          link: '/en-US/guide/cli-templates',
         },
         {
           text: 'Custom Theme',
@@ -172,6 +181,10 @@ export default defineConfig({
             {
               link: '/en-US/component/text',
               text: 'Text'
+            },
+            {
+              link: '/en-US/component/root-portal',
+              text: 'RootPortal'
             }
           ]
         },

@@ -1,4 +1,4 @@
-# Watermark <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.16</el-tag>
+# Watermark
 
 Add specified images or text on pages or components, which can be used for copyright protection, brand promotion, and other scenarios.
 
@@ -16,7 +16,7 @@ Set the network image address or Base64 image through the `image` field, and set
 **Note: DingTalk Mini Program platform only supports network images.**
 
 ```html
-<wd-watermark image="https://wot-design-uni.cn/logo.png" :image-width="38" :image-height="38"></wd-watermark>
+<wd-watermark image="https://wot-ui.cn/logo.png" :image-width="38" :image-height="38"></wd-watermark>
 ```
 
 ### Local Watermark

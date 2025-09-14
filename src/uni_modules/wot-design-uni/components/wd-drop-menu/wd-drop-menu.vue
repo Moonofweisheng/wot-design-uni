@@ -1,6 +1,14 @@
 <template>
   <view :style="customStyle" :class="`wd-drop-menu ${customClass}`" @click.stop.prevent="noop" :id="dropMenuId">
-    <wd-overlay :show="overlayVisible" :duration="duration" :z-index="12" :custom-style="modalStyle" @click="handleClickOverlay" @touchmove="noop" />
+    <wd-overlay
+      :show="overlayVisible"
+      :duration="duration"
+      :z-index="12"
+      :custom-style="modalStyle"
+      @click="handleClickOverlay"
+      @touchmove="noop"
+      v-if="modal"
+    />
 
     <!-- #ifdef MP-DINGTALK -->
     <view :id="dropMenuId">

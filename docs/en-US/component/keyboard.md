@@ -1,4 +1,7 @@
-# Keyboard <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.10</el-tag>
+---
+version: 1.3.10
+---
+# Keyboard
 
 Virtual keyboard for inputting numbers, passwords, ID cards, or license plate numbers.
 
@@ -213,6 +216,7 @@ You can bind the keyboard's current input value through `v-model` and limit the 
 | show-close-button | Whether to show close button | boolean | true | - |
 | safe-area-inset-bottom | Whether to enable bottom safe area adaptation | boolean | true | - |
 | z-index | Keyboard z-index | number | 100 | - |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | false | 1.11.0 |
 
 ## Events
 

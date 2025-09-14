@@ -1,4 +1,4 @@
-# IndexBar <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.2.21</el-tag>
+# IndexBar
 
 Used for displaying index classification and quick positioning of lists.
 
