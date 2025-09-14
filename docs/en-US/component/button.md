@@ -157,6 +157,7 @@ WeChat Mini Program open capabilities, see [WeChat Mini Program Button](https://
 | getUserInfo               | Get user information, which can be obtained from the @getuserinfo callback                                      |
 | contact                   | Open customer service session, if the user returns to the application after clicking the message card in the session, specific information can be obtained from the @contact callback   |
 | getPhoneNumber            | Get the user's phone number, which can be obtained from the @getphonenumber callback                                 |
+| getRealtimePhoneNumber    | Get user phone number in real time, user information can be obtained from @getrealtimephonenumber callback, WeChat Mini Program only          |
 | launchApp                 | Open APP in Mini Program, parameters can be passed to the APP through the app-parameter attribute                           |
 | openSetting               | Open authorization settings page                                                                             |
 | chooseAvatar              | Get user avatar, avatar information can be obtained from the @chooseavatar callback                                     |
@@ -173,6 +174,7 @@ WeChat Mini Program open capabilities, see [WeChat Mini Program Button](https://
 | getuserinfo    | Get user information                                                 | `detail` | -        |
 | contact        | Customer service message callback, valid when open-type="contact"                      | `detail` | -        |
 | getphonenumber | Get user phone number callback, valid when open-type=getPhoneNumber          | `detail` | -        |
+| getrealtimephonenumber | Get user phone number in real time callback, valid when open-type=getRealtimePhoneNumber          | `detail` | -        |
 | error          | Error callback when using open capabilities, valid when open-type=launchApp | `detail` | -        |
 | launchapp      | Callback for successfully opening APP, valid when open-type=launchApp              | `detail` | -        |
 | opensetting    | Callback after opening authorization settings page, valid when open-type=openSetting         | `detail` | -        |
