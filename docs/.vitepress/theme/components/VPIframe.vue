@@ -164,7 +164,8 @@ function onTransitionEnd() {
 function sendMessage() {
   const targetIframe = isSmallScreen.value ? drawerIframe.value : iframe.value
   if (targetIframe?.contentWindow) {
-    targetIframe.contentWindow.postMessage(vitepressData.isDark.value, href.value)
+    const targetOrigin = new URL(href.value, location.origin).origin
+    targetIframe.contentWindow.postMessage(vitepressData.isDark.value, targetOrigin)
   }
 }
 
@@ -172,7 +173,8 @@ function sendMessage() {
 function sendLanguageMessage() {
   const targetIframe = isSmallScreen.value ? drawerIframe.value : iframe.value
   if (targetIframe?.contentWindow) {
-    targetIframe.contentWindow.postMessage(vitepressData.lang.value, href.value)
+    const targetOrigin = new URL(href.value, location.origin).origin
+    targetIframe.contentWindow.postMessage(vitepressData.lang.value, targetOrigin)
   }
 }
 
