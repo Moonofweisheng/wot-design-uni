@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeArrayProp, makeBooleanProp, makeStringProp, makeNumericProp } from '../common/props'
+import { baseProps, makeArrayProp, makeBooleanProp, makeStringProp, makeNumericProp, numericProp } from '../common/props'
 
 import { type FormItemRule } from '../wd-form/types'
 
@@ -17,6 +17,10 @@ export const cellProps = {
    * 图标类名
    */
   icon: String,
+  /**
+   * 图标大小
+   */
+  iconSize: numericProp,
   /**
    * 描述信息
    */
