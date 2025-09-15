@@ -1,43 +1,43 @@
 <template>
-  <view class="wd-guide" v-if="modelValue" :style="{ zIndex: zIndex }" @touchmove.stop.prevent="noop">
-    <view class="wd-guide__mask" @click.stop="handleMask">
+  <view class="wd-tour" v-if="modelValue" :style="{ zIndex: zIndex }" @touchmove.stop.prevent="noop">
+    <view class="wd-tour__mask" @click.stop="handleMask">
       <slot name="highlight" :elementInfo="highlightElementInfo">
-        <view class="wd-guide__highlight" :style="highlightStyle"></view>
+        <view class="wd-tour__highlight" :style="highlightStyle"></view>
       </slot>
-      <view class="wd-guide__popover" :style="popoverStyle">
+      <view class="wd-tour__popover" :style="popoverStyle">
         <slot name="content">
-          <view class="wd-guide__info">
+          <view class="wd-tour__info">
             <rich-text :nodes="currentStep.content"></rich-text>
           </view>
         </slot>
 
-        <view class="wd-guide__buttons" v-if="showGuideButtons">
+        <view class="wd-tour__buttons" v-if="showTourButtons">
           <!-- 上一步按钮 -->
-          <view class="wd-guide__prev" v-if="currentIndex > 0" @click.stop="handlePrev">
+          <view class="wd-tour__prev" v-if="currentIndex > 0" @click.stop="handlePrev">
             <slot name="prev">
-              <view class="wd-guide__prev__default">{{ prevText }}</view>
+              <view class="wd-tour__prev__default">{{ prevText }}</view>
             </slot>
           </view>
 
           <!-- 跳过按钮 -->
-          <view class="wd-guide__skip" @click.stop="handleSkip">
+          <view class="wd-tour__skip" @click.stop="handleSkip">
             <slot name="skip" v-if="$slots.skip"></slot>
-            <view class="wd-guide__skip__default" v-else>{{ skipText }}</view>
+            <view class="wd-tour__skip__default" v-else>{{ skipText }}</view>
           </view>
 
           <!-- 下一步按钮 -->
-          <view class="wd-guide__next" v-if="currentIndex !== steps.length - 1" @click.stop="handleNext">
+          <view class="wd-tour__next" v-if="currentIndex !== steps.length - 1" @click.stop="handleNext">
             <slot name="next">
-              <view class="wd-guide__next__default">
+              <view class="wd-tour__next__default">
                 {{ `${nextText}(${currentIndex + 1}/${steps.length})` }}
               </view>
             </slot>
           </view>
 
           <!-- 完成按钮 -->
-          <view class="wd-guide__finish" v-if="currentIndex === steps.length - 1" @click.stop="handleFinish">
+          <view class="wd-tour__finish" v-if="currentIndex === steps.length - 1" @click.stop="handleFinish">
             <slot name="finish">
-              <view class="wd-guide__finish__default">{{ finishText }}</view>
+              <view class="wd-tour__finish__default">{{ finishText }}</view>
             </slot>
           </view>
         </view>
@@ -48,7 +48,7 @@
 
 <script lang="ts">
 export default {
-  name: 'wd-guide',
+  name: 'wd-tour',
   options: {
     addGlobalClass: true,
     virtualHost: true,
@@ -59,7 +59,7 @@ export default {
 
 <script lang="ts" setup>
 import { ref, computed, watch, nextTick } from 'vue'
-import { guideProps } from './types'
+import { tourProps } from './types'
 // #ifdef H5
 import useLockScroll from '../composables/useLockScroll'
 // #endif
@@ -72,7 +72,7 @@ interface ElementRect {
   bottom?: number
   right?: number
 }
-const props = defineProps(guideProps)
+const props = defineProps(tourProps)
 const emit = defineEmits(['update:modelValue', 'update:current', 'change', 'prev', 'next', 'finish', 'skip', 'error'])
 // #ifdef H5
 useLockScroll(() => props.modelValue)

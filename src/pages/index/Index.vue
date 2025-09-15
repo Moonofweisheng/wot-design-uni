@@ -401,8 +401,8 @@ const list = computed(() => [
         name: t('table-biao-ge')
       },
       {
-        id: 'guide',
-        name: t('guide-title')
+        id: 'tour',
+        name: t('tour-title')
       }
     ]
   }

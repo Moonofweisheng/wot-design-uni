@@ -95,7 +95,7 @@ declare module 'vue' {
     WdFloatingPanel: typeof import('./components/wd-floating-panel/wd-floating-panel.vue')['default']
     WdSignature: typeof import('./components/wd-signature/wd-signature.vue')['default']
     WdRootPortal: typeof import('./components/wd-root-portal/wd-root-portal.vue')['default']
-    WdGuide: typeof import('./components/wd-guide/wd-guide.vue')['default']
+    WdTour: typeof import('./components/wd-tour/wd-tour.vue')['default']
   }
 }
 

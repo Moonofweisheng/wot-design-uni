@@ -1,7 +1,7 @@
 @import './../common/abstracts/_mixin.scss';
 @import './../common/abstracts/variable.scss';
 
-@include b(guide) {
+@include b(tour) {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -94,7 +94,7 @@
   }
 }
 
-@keyframes guide-show {
+@keyframes tour-show {
   0% {
     opacity: 0;
   }
@@ -104,7 +104,7 @@
 }
 
 .wot-theme-dark {
-  @include b(guide) {
+  @include b(tour) {
     @include e(popover) {
       background-color: $-dark-background2;
     }

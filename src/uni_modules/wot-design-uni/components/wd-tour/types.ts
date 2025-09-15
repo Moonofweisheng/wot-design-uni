@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp } from '../common/props'
 
-export interface GuideStep {
+export interface TourStep {
   /**
    * 需要高亮的元素选择器
    */
@@ -12,7 +12,7 @@ export interface GuideStep {
   content: string
 }
 
-export const guideProps = {
+export const tourProps = {
   ...baseProps,
 
   /**
@@ -28,7 +28,7 @@ export const guideProps = {
    * 默认值：[]
    */
   steps: {
-    type: Array as PropType<GuideStep[]>,
+    type: Array as PropType<TourStep[]>,
     default: () => []
   },
 
@@ -166,7 +166,7 @@ export const guideProps = {
    * 类型：boolean
    * 默认值：true
    */
-  showGuideButtons: makeBooleanProp(true)
+  showTourButtons: makeBooleanProp(true)
 }
 
-export type GuideProps = typeof guideProps
+export type TourProps = typeof tourProps

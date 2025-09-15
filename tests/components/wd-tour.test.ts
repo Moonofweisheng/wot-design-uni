@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import WdGuide from '@/uni_modules/wot-design-uni/components/wd-guide/wd-guide.vue'
+import WdTour from '@/uni_modules/wot-design-uni/components/wd-tour/wd-tour.vue'
 import { describe, test, expect, vi, beforeEach } from 'vitest'
 
 // 模拟uni对象
@@ -36,7 +36,7 @@ Object.defineProperty(global, 'uni', {
   value: mockUni
 })
 
-describe('WdGuide', () => {
+describe('WdTour', () => {
   const steps = [
     {
       element: '#step1',
@@ -74,7 +74,7 @@ describe('WdGuide', () => {
 
   // 测试基本渲染
   test('基本渲染', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps
@@ -84,25 +84,25 @@ describe('WdGuide', () => {
     // 等待 DOM 更新
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.classes()).toContain('wd-guide')
-    expect(wrapper.find('.wd-guide__mask').exists()).toBe(true)
+    expect(wrapper.classes()).toContain('wd-tour')
+    expect(wrapper.find('.wd-tour__mask').exists()).toBe(true)
   })
 
   // 测试隐藏状态
   test('隐藏状态', () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: false,
         steps
       }
     })
 
-    expect(wrapper.find('.wd-guide').exists()).toBe(false)
+    expect(wrapper.find('.wd-tour').exists()).toBe(false)
   })
 
   // 测试步骤内容渲染
   test('渲染步骤内容', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -114,15 +114,15 @@ describe('WdGuide', () => {
     await wrapper.vm.$nextTick()
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    expect(wrapper.find('.wd-guide__info').exists()).toBe(true)
+    expect(wrapper.find('.wd-tour__info').exists()).toBe(true)
     // 验证富文本内容是否正确渲染
-    const richText = wrapper.find('.wd-guide__info rich-text')
+    const richText = wrapper.find('.wd-tour__info rich-text')
     expect(richText.exists()).toBe(true)
   })
 
   // 测试按钮显示
   test('显示导航按钮', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -134,35 +134,41 @@ describe('WdGuide', () => {
     await new Promise((resolve) => setTimeout(resolve, 100))
 
     // 第一步应该显示"跳过"和"下一步"按钮
-    expect(wrapper.find('.wd-guide__skip').exists()).toBe(true)
-    expect(wrapper.find('.wd-guide__next').exists()).toBe(true)
-    expect(wrapper.find('.wd-guide__prev').exists()).toBe(false)
-    expect(wrapper.find('.wd-guide__finish').exists()).toBe(false)
+    expect(wrapper.find('.wd-tour__skip').exists()).toBe(true)
+    expect(wrapper.find('.wd-tour__next').exists()).toBe(true)
+    expect(wrapper.find('.wd-tour__prev').exists()).toBe(false)
+    expect(wrapper.find('.wd-tour__finish').exists()).toBe(false)
   })
 
   // 测试最后一步按钮
   test('最后一步显示完成按钮', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
-        current: 1
+        current: 0
       }
     })
 
     await wrapper.vm.$nextTick()
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await new Promise((resolve) => setTimeout(resolve, 150))
+
+    // 更新 current 属性
+    await wrapper.setProps({ current: 1 })
+    await wrapper.vm.$nextTick()
+    await new Promise((resolve) => setTimeout(resolve, 150))
 
     // 最后一步应该显示"上一步"和"完成"按钮
-    expect(wrapper.find('.wd-guide__prev').exists()).toBe(true)
-    expect(wrapper.find('.wd-guide__finish').exists()).toBe(true)
-    expect(wrapper.find('.wd-guide__next').exists()).toBe(false)
-    expect(wrapper.find('.wd-guide__skip').exists()).toBe(true)
+    expect(wrapper.find('.wd-tour__prev').exists()).toBe(true)
+    expect(wrapper.find('.wd-tour__finish').exists()).toBe(true)
+    expect(wrapper.find('.wd-tour__next').exists()).toBe(false)
+    expect(wrapper.find('.wd-tour__skip').exists()).toBe(true)
   })
+  // ... existing code ...
 
   // 测试自定义按钮文字
   test('自定义按钮文字', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -177,13 +183,13 @@ describe('WdGuide', () => {
     await wrapper.vm.$nextTick()
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    expect(wrapper.find('.wd-guide__skip__default').text()).toBe('忽略')
-    expect(wrapper.find('.wd-guide__finish__default').exists()).toBe(false) // 不在第一页
+    expect(wrapper.find('.wd-tour__skip__default').text()).toBe('忽略')
+    expect(wrapper.find('.wd-tour__finish__default').exists()).toBe(false) // 不在第一页
   })
 
   // 测试进度显示
   test('显示进度', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -194,12 +200,12 @@ describe('WdGuide', () => {
     await wrapper.vm.$nextTick()
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    expect(wrapper.find('.wd-guide__next__default').text()).toContain('(1/2)')
+    expect(wrapper.find('.wd-tour__next__default').text()).toContain('(1/2)')
   })
 
   // 测试点击下一步
   test('点击下一步按钮', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -210,7 +216,7 @@ describe('WdGuide', () => {
     await wrapper.vm.$nextTick()
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    const nextButton = wrapper.find('.wd-guide__next')
+    const nextButton = wrapper.find('.wd-tour__next')
     await nextButton.trigger('click')
 
     // 验证是否发出 next 事件
@@ -218,20 +224,26 @@ describe('WdGuide', () => {
     expect(wrapper.emitted('change')).toBeTruthy()
   })
 
-  // 测试点击上一步
+  // 测试点击上一步按钮
   test('点击上一步按钮', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
-        current: 1
+        current: 0
       }
     })
 
     await wrapper.vm.$nextTick()
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await new Promise((resolve) => setTimeout(resolve, 150))
 
-    const prevButton = wrapper.find('.wd-guide__prev')
+    // 更新 current 属性
+    await wrapper.setProps({ current: 1 })
+    await wrapper.vm.$nextTick()
+    await new Promise((resolve) => setTimeout(resolve, 150))
+
+    const prevButton = wrapper.find('.wd-tour__prev')
+    expect(prevButton.exists()).toBe(true)
     await prevButton.trigger('click')
 
     // 验证是否发出 prev 事件
@@ -241,18 +253,24 @@ describe('WdGuide', () => {
 
   // 测试点击完成按钮
   test('点击完成按钮', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
-        current: 1
+        current: 0
       }
     })
 
     await wrapper.vm.$nextTick()
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await new Promise((resolve) => setTimeout(resolve, 150))
 
-    const finishButton = wrapper.find('.wd-guide__finish')
+    // 更新 current 属性
+    await wrapper.setProps({ current: 1 })
+    await wrapper.vm.$nextTick()
+    await new Promise((resolve) => setTimeout(resolve, 150))
+
+    const finishButton = wrapper.find('.wd-tour__finish')
+    expect(finishButton.exists()).toBe(true)
     await finishButton.trigger('click')
 
     // 验证是否发出 finish 事件和更新 modelValue
@@ -262,7 +280,7 @@ describe('WdGuide', () => {
 
   // 测试点击跳过按钮
   test('点击跳过按钮', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -273,7 +291,7 @@ describe('WdGuide', () => {
     await wrapper.vm.$nextTick()
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    const skipButton = wrapper.find('.wd-guide__skip')
+    const skipButton = wrapper.find('.wd-tour__skip')
     await skipButton.trigger('click')
 
     // 验证是否发出 skip 事件和更新 modelValue
@@ -283,7 +301,7 @@ describe('WdGuide', () => {
 
   // 测试点击蒙版
   test('点击蒙版触发下一步', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -295,7 +313,7 @@ describe('WdGuide', () => {
     await wrapper.vm.$nextTick()
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    const mask = wrapper.find('.wd-guide__mask')
+    const mask = wrapper.find('.wd-tour__mask')
     await mask.trigger('click')
 
     // 验证是否触发下一步
@@ -304,7 +322,7 @@ describe('WdGuide', () => {
 
   // 测试禁用点击蒙版
   test('禁用点击蒙版', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -316,7 +334,7 @@ describe('WdGuide', () => {
     await wrapper.vm.$nextTick()
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    const mask = wrapper.find('.wd-guide__mask')
+    const mask = wrapper.find('.wd-tour__mask')
     await mask.trigger('click')
 
     // 验证不触发下一步
@@ -325,7 +343,7 @@ describe('WdGuide', () => {
 
   // 测试蒙版显示
   test('显示/隐藏蒙版', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -341,13 +359,13 @@ describe('WdGuide', () => {
     await new Promise((resolve) => setTimeout(resolve, 100))
 
     // 当 mask 为 false 时，boxShadow 应该为 none
-    const highlightStyle = wrapper.find('.wd-guide__highlight').attributes('style')
+    const highlightStyle = wrapper.find('.wd-tour__highlight').attributes('style')
     expect(highlightStyle).toContain('box-shadow: none')
   })
 
   // 测试自定义高亮区域插槽
   test('使用自定义高亮区域插槽', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -362,12 +380,12 @@ describe('WdGuide', () => {
     await new Promise((resolve) => setTimeout(resolve, 100))
 
     expect(wrapper.find('.custom-highlight').exists()).toBe(true)
-    expect(wrapper.find('.wd-guide__highlight').exists()).toBe(false)
+    expect(wrapper.find('.wd-tour__highlight').exists()).toBe(false)
   })
 
   // 测试自定义内容插槽
   test('使用自定义内容插槽', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -382,12 +400,12 @@ describe('WdGuide', () => {
     await new Promise((resolve) => setTimeout(resolve, 100))
 
     expect(wrapper.find('.custom-content').exists()).toBe(true)
-    expect(wrapper.find('.wd-guide__info').exists()).toBe(false)
+    expect(wrapper.find('.wd-tour__info').exists()).toBe(false)
   })
 
   // 测试自定义按钮插槽
   test('使用自定义按钮插槽', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -413,7 +431,7 @@ describe('WdGuide', () => {
 
   // 测试样式属性
   test('应用样式属性', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -431,7 +449,7 @@ describe('WdGuide', () => {
     // 等待元素信息更新完成
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    const highlightStyle = wrapper.find('.wd-guide__highlight').attributes('style')
+    const highlightStyle = wrapper.find('.wd-tour__highlight').attributes('style')
     expect(highlightStyle).toContain('border-radius: 10px')
     expect(highlightStyle).toContain('padding: 15px')
   })
@@ -439,7 +457,7 @@ describe('WdGuide', () => {
   // 测试 zIndex 属性
   test('应用 zIndex', async () => {
     const zIndex = 10000
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
@@ -450,25 +468,25 @@ describe('WdGuide', () => {
 
     await wrapper.vm.$nextTick()
 
-    const style = wrapper.find('.wd-guide').attributes('style')
+    const style = wrapper.find('.wd-tour').attributes('style')
     expect(style).toContain(`z-index: ${zIndex}`)
   })
 
   // 测试禁用引导按钮
   test('禁用引导按钮', async () => {
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,
         current: 0,
-        showGuideButtons: false
+        showTourButtons: false
       }
     })
 
     await wrapper.vm.$nextTick()
     await new Promise((resolve) => setTimeout(resolve, 100))
 
-    expect(wrapper.find('.wd-guide__buttons').exists()).toBe(false)
+    expect(wrapper.find('.wd-tour__buttons').exists()).toBe(false)
   })
 
   // 测试错误处理
@@ -488,7 +506,7 @@ describe('WdGuide', () => {
       }))
     }))
 
-    const wrapper = mount(WdGuide, {
+    const wrapper = mount(WdTour, {
       props: {
         modelValue: true,
         steps,

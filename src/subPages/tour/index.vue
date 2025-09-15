@@ -1,31 +1,31 @@
 <template>
   <page-wraper>
-    <view class="guide-container">
-      <view class="guide-step" id="step1">
-        <view class="guide-item">
-          <text class="guide-title">第一步</text>
-          <text class="guide-content">这是引导的第一步，介绍基本功能</text>
+    <view class="tour-container">
+      <view class="tour-step" id="step1">
+        <view class="tour-item">
+          <text class="tour-title">第一步</text>
+          <text class="tour-content">这是引导的第一步，介绍基本功能</text>
         </view>
       </view>
 
-      <view class="guide-step" id="step2">
-        <view class="guide-item">
-          <text class="guide-title">第二步</text>
-          <text class="guide-content">这是引导的第二步，展示更多功能</text>
+      <view class="tour-step" id="step2">
+        <view class="tour-item">
+          <text class="tour-title">第二步</text>
+          <text class="tour-content">这是引导的第二步，展示更多功能</text>
         </view>
       </view>
 
-      <view class="guide-step" id="step3">
-        <view class="guide-item">
-          <text class="guide-title">第三步</text>
-          <text class="guide-content">这是引导的第三步，深入功能介绍</text>
+      <view class="tour-step" id="step3">
+        <view class="tour-item">
+          <text class="tour-title">第三步</text>
+          <text class="tour-content">这是引导的第三步，深入功能介绍</text>
         </view>
       </view>
 
-      <view class="guide-step" id="step4">
-        <view class="guide-item">
-          <text class="guide-title">第四步</text>
-          <text class="guide-content">这是引导的最后一步，总结功能</text>
+      <view class="tour-step" id="step4">
+        <view class="tour-item">
+          <text class="tour-title">第四步</text>
+          <text class="tour-content">这是引导的最后一步，总结功能</text>
         </view>
       </view>
     </view>
@@ -33,42 +33,42 @@
     <!-- 基本用法 -->
     <demo-block title="基本用法">
       <view class="button-group">
-        <wd-button type="primary" @click="startBasicGuide">开始引导</wd-button>
+        <wd-button type="primary" @click="startBasicTour">开始引导</wd-button>
       </view>
     </demo-block>
 
     <!-- 点击蒙版继续 -->
     <demo-block title="点击蒙版继续">
       <view class="button-group">
-        <wd-button type="primary" @click="startMaskNextGuide">点击蒙版继续</wd-button>
+        <wd-button type="primary" @click="startMaskNextTour">点击蒙版继续</wd-button>
       </view>
     </demo-block>
 
     <!-- 自定义蒙版 -->
     <demo-block title="自定义蒙版">
       <view class="button-group">
-        <wd-button type="primary" @click="startCustomMaskGuide">自定义蒙版</wd-button>
+        <wd-button type="primary" @click="startCustomMaskTour">自定义蒙版</wd-button>
       </view>
     </demo-block>
 
     <!-- 关闭蒙版 -->
     <demo-block title="关闭蒙版">
       <view class="button-group">
-        <wd-button type="primary" @click="startNoMaskGuide">关闭蒙版</wd-button>
+        <wd-button type="primary" @click="startNoMaskTour">关闭蒙版</wd-button>
       </view>
     </demo-block>
 
     <!-- 自定义高亮区域 -->
     <demo-block title="自定义高亮区域">
       <view class="button-group">
-        <wd-button type="primary" @click="startCustomHighlightGuide">自定义高亮</wd-button>
+        <wd-button type="primary" @click="startCustomHighlightTour">自定义高亮</wd-button>
       </view>
     </demo-block>
 
     <!-- 自定义内容和按钮 -->
     <demo-block title="自定义内容和按钮">
       <view class="button-group">
-        <wd-button type="primary" @click="startCustomContentGuide">自定义内容</wd-button>
+        <wd-button type="primary" @click="startCustomContentTour">自定义内容</wd-button>
       </view>
     </demo-block>
 
@@ -76,35 +76,35 @@
     <demo-block title="控制当前步骤">
       <view class="button-group">
         <wd-button-group>
-          <wd-button type="primary" @click="startControlGuide">跳转到第三步开始引导</wd-button>
+          <wd-button type="primary" @click="startControlTour">跳转到第三步开始引导</wd-button>
         </wd-button-group>
       </view>
     </demo-block>
 
     <!-- 基本用法组件 -->
-    <wd-guide
-      v-model="showBasicGuide"
+    <wd-tour
+      v-model="showBasicTour"
       :steps="basicSteps"
       v-model:current="current"
       :padding="10"
       @finish="handleFinish"
       @skip="handleSkip"
       @change="handleChange"
-    ></wd-guide>
+    ></wd-tour>
 
     <!-- 点击蒙版继续组件 -->
-    <wd-guide
-      v-model="showClickMaskGuide"
+    <wd-tour
+      v-model="showClickMaskTour"
       :steps="basicSteps"
       :click-mask-next="true"
       @finish="handleFinish"
       @skip="handleSkip"
       @change="handleChange"
-    ></wd-guide>
+    ></wd-tour>
 
     <!-- 自定义蒙版组件 -->
-    <wd-guide
-      v-model="showCustomMaskGuide"
+    <wd-tour
+      v-model="showCustomMaskTour"
       :steps="customMaskSteps"
       :mask="true"
       mask-color="#7eb2f87d"
@@ -118,21 +118,14 @@
       @finish="handleFinish"
       @skip="handleSkip"
       @change="handleChange"
-    ></wd-guide>
+    ></wd-tour>
 
     <!-- 关闭蒙版组件 -->
-    <wd-guide
-      v-model="showNoMaskGuide"
-      :steps="noMaskSteps"
-      :mask="false"
-      @finish="handleFinish"
-      @skip="handleSkip"
-      @change="handleChange"
-    ></wd-guide>
+    <wd-tour v-model="showNoMaskTour" :steps="noMaskSteps" :mask="false" @finish="handleFinish" @skip="handleSkip" @change="handleChange"></wd-tour>
 
     <!-- 自定义高亮区域组件 -->
-    <wd-guide
-      v-model="showCustomHighlightGuide"
+    <wd-tour
+      v-model="showCustomHighlightTour"
       :steps="customHighlightSteps"
       :padding="10"
       @finish="handleFinish"
@@ -142,11 +135,11 @@
       <template #highlight="{ elementInfo }">
         <view class="custom-highlight" :style="{ ...elementInfo, ...customHighlightStyle }"></view>
       </template>
-    </wd-guide>
+    </wd-tour>
 
     <!-- 自定义内容和按钮组件 -->
-    <wd-guide
-      v-model="showCustomContentGuide"
+    <wd-tour
+      v-model="showCustomContentTour"
       :steps="customContentSteps"
       :next-text="nextText"
       :prev-text="prevText"
@@ -170,31 +163,31 @@
       <template #finish>
         <view class="custom-button custom-finish">完成</view>
       </template>
-    </wd-guide>
+    </wd-tour>
 
     <!-- 控制当前步骤组件 -->
-    <wd-guide
-      v-model="showControlGuide"
+    <wd-tour
+      v-model="showControlTour"
       :steps="basicSteps"
       v-model:current="controlCurrent"
       :padding="10"
       @finish="handleFinish"
       @skip="handleSkip"
       @change="handleChange"
-    ></wd-guide>
+    ></wd-tour>
   </page-wraper>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch, nextTick } from 'vue'
 
-const showBasicGuide = ref(false)
-const showClickMaskGuide = ref(false)
-const showCustomMaskGuide = ref(false)
-const showNoMaskGuide = ref(false)
-const showCustomHighlightGuide = ref(false)
-const showCustomContentGuide = ref(false)
-const showControlGuide = ref(false)
+const showBasicTour = ref(false)
+const showClickMaskTour = ref(false)
+const showCustomMaskTour = ref(false)
+const showNoMaskTour = ref(false)
+const showCustomHighlightTour = ref(false)
+const showCustomContentTour = ref(false)
+const showControlTour = ref(false)
 const nextText = ref('继续')
 const prevText = ref('返回')
 const skipText = ref('跳过')
@@ -312,65 +305,65 @@ async function scrollToTop() {
   })
 }
 // 启动不同类型引导的方法
-async function startBasicGuide() {
+async function startBasicTour() {
   await scrollToTop()
   nextTick(() => {
-    showBasicGuide.value = true
+    showBasicTour.value = true
   })
 }
 
-function startMaskNextGuide() {
+function startMaskNextTour() {
   scrollToTop()
-  showClickMaskGuide.value = true
+  showClickMaskTour.value = true
 }
 
-async function startCustomMaskGuide() {
+async function startCustomMaskTour() {
   scrollToTop()
-  showCustomMaskGuide.value = true
+  showCustomMaskTour.value = true
 }
 
-function startNoMaskGuide() {
+function startNoMaskTour() {
   scrollToTop()
-  showNoMaskGuide.value = true
+  showNoMaskTour.value = true
 }
 
-function startCustomHighlightGuide() {
+function startCustomHighlightTour() {
   scrollToTop()
-  showCustomHighlightGuide.value = true
+  showCustomHighlightTour.value = true
 }
 
-function startCustomContentGuide() {
+function startCustomContentTour() {
   scrollToTop()
-  showCustomContentGuide.value = true
+  showCustomContentTour.value = true
 }
 
-function startControlGuide() {
+function startControlTour() {
   scrollToTop()
   controlCurrent.value = 2
-  showControlGuide.value = true
+  showControlTour.value = true
 }
 
 // 通用事件处理
 function handleFinish() {
   console.log('引导完成')
-  showBasicGuide.value = false
-  showClickMaskGuide.value = false
-  showCustomMaskGuide.value = false
-  showNoMaskGuide.value = false
-  showCustomHighlightGuide.value = false
-  showCustomContentGuide.value = false
-  showControlGuide.value = false
+  showBasicTour.value = false
+  showClickMaskTour.value = false
+  showCustomMaskTour.value = false
+  showNoMaskTour.value = false
+  showCustomHighlightTour.value = false
+  showCustomContentTour.value = false
+  showControlTour.value = false
 }
 
 function handleSkip() {
   console.log('引导跳过')
-  showBasicGuide.value = false
-  showClickMaskGuide.value = false
-  showCustomMaskGuide.value = false
-  showNoMaskGuide.value = false
-  showCustomHighlightGuide.value = false
-  showCustomContentGuide.value = false
-  showControlGuide.value = false
+  showBasicTour.value = false
+  showClickMaskTour.value = false
+  showCustomMaskTour.value = false
+  showNoMaskTour.value = false
+  showCustomHighlightTour.value = false
+  showCustomContentTour.value = false
+  showControlTour.value = false
 }
 
 function handleChange(currentIndex: number) {
@@ -379,14 +372,14 @@ function handleChange(currentIndex: number) {
 </script>
 
 <style lang="scss" scoped>
-.guide-container {
+.tour-container {
   padding: 0;
 
-  .guide-step {
+  .tour-step {
     width: fit-content;
     margin: 20px auto;
 
-    .guide-item {
+    .tour-item {
       padding: 20px;
       border: 1px solid #e5e5e5;
       border-radius: 8px;
@@ -394,7 +387,7 @@ function handleChange(currentIndex: number) {
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       min-width: 250px;
 
-      .guide-title {
+      .tour-title {
         font-size: 18px;
         font-weight: bold;
         color: #333;
@@ -402,7 +395,7 @@ function handleChange(currentIndex: number) {
         display: block;
       }
 
-      .guide-content {
+      .tour-content {
         font-size: 14px;
         color: #666;
         line-height: 1.5;

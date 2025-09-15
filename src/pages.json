@@ -1328,17 +1328,17 @@
           }
         },
         {
-          "path": "guide/Index",
-          "name": "guide",
+          "path": "tour/Index",
+          "name": "tour",
           "style": {
             "mp-alipay": {
               "allowsBounceVertical": "NO"
             },
             // #ifdef MP
-            "navigationBarTitleText": "Guide 页面引导",
+            "navigationBarTitleText": "Tour 页面引导",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "%guide-title%"
+            "navigationBarTitleText": "%tour-title%"
             // #endif
           }
         }
