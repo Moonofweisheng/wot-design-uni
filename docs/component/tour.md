@@ -1,32 +1,26 @@
-# Guide 引导组件
+# Guide 漫游组件
 
 ## 介绍
 
-引导组件用于引导用户逐步了解应用功能的组件，可以高亮显示页面中的特定元素并提供说明。
-
-## 引入
-
-```typescript
-import { WdGuide } from 'wot-design-uni/components/wd-guide'
-```
+漫游组件用于引导用户逐步了解应用功能的组件，可以高亮显示页面中的特定元素并提供说明。
 
 ## 基本用法
 
 ```vue
 <template>
   <view>
-    <view class="guide-item" id="step1">
-      <text class="guide-title">第一步</text>
-      <text class="guide-content">这是引导的第一步，介绍基本功能</text>
+    <view class="tour-item" id="step1">
+      <text class="tour-title">第一步</text>
+      <text class="tour-content">这是引导的第一步，介绍基本功能</text>
     </view>
     
-    <view class="guide-item" id="step2">
-      <text class="guide-title">第二步</text>
-      <text class="guide-content">这是引导的第二步，展示更多功能</text>
+    <view class="tour-item" id="step2">
+      <text class="tour-title">第二步</text>
+      <text class="tour-content">这是引导的第二步，展示更多功能</text>
     </view>
     
-    <wd-guide 
-      v-model="showGuide" 
+    <wd-tour 
+      v-model="showTour" 
       :steps="steps" 
       v-model:current="current"
       @finish="onFinish"
@@ -37,7 +31,7 @@ import { WdGuide } from 'wot-design-uni/components/wd-guide'
 <script setup>
 import { ref } from 'vue'
 
-const showGuide = ref(true)
+const showTour = ref(true)
 const current = ref(0)
 
 const steps = [
@@ -61,14 +55,14 @@ function onFinish() {
 
 ```vue
 <template>
-  <wd-guide v-model="showGuide" :steps="steps">
+  <wd-tour v-model="showTour" :steps="steps">
     <template #content>
       <view class="custom-content">
         <wd-icon name="help-circle-filled" size="22px"></wd-icon>
         <text class="custom-text">自定义引导内容区域</text>
       </view>
     </template>
-  </wd-guide>
+  </wd-tour>
 </template>
 ```
 
@@ -76,11 +70,11 @@ function onFinish() {
 
 ```vue
 <template>
-  <wd-guide v-model="showGuide" :steps="steps">
+  <wd-tour v-model="showTour" :steps="steps">
     <template #highlight="{ elementInfo }">
       <view class="custom-highlight" :style="getCustomHighlightStyle(elementInfo)"></view>
     </template>
-  </wd-guide>
+  </wd-tour>
 </template>
 
 <script setup>
@@ -106,14 +100,14 @@ function getCustomHighlightStyle(elementInfo) {
 
 ```vue
 <template>
-  <wd-guide v-model="showGuide" :steps="steps" :next-text="'继续'" :finish-text="'知道了'">
+  <wd-tour v-model="showTour" :steps="steps" :next-text="'继续'" :finish-text="'知道了'">
     <template #next>
       <view class="custom-button custom-next">下一步</view>
     </template>
     <template #finish>
       <view class="custom-button custom-finish">完成</view>
     </template>
-  </wd-guide>
+  </wd-tour>
 </template>
 ```
 
@@ -121,8 +115,8 @@ function getCustomHighlightStyle(elementInfo) {
 
 ```vue
 <template>
-  <wd-guide 
-    v-model="showGuide" 
+  <wd-tour 
+    v-model="showTour" 
     :steps="steps" 
     :click-mask-next="true"
   />
@@ -133,8 +127,8 @@ function getCustomHighlightStyle(elementInfo) {
 
 ```vue
 <template>
-  <wd-guide 
-    v-model="showGuide" 
+  <wd-tour 
+    v-model="showTour" 
     :steps="steps" 
     :mask-color="'rgba(255, 0, 0, 0.6)'"
     :offset="40"
@@ -148,8 +142,8 @@ function getCustomHighlightStyle(elementInfo) {
 
 ```vue
 <template>
-  <wd-guide 
-    v-model="showGuide" 
+  <wd-tour 
+    v-model="showTour" 
     :steps="steps" 
     :mask="false"
   />
@@ -162,8 +156,8 @@ function getCustomHighlightStyle(elementInfo) {
 <template>
   <view>
     <wd-button @click="current = 2">跳转到第三步</wd-button>
-    <wd-guide 
-      v-model="showGuide" 
+    <wd-tour 
+      v-model="showTour" 
       :steps="steps" 
       v-model:current="current"
     />
@@ -173,7 +167,7 @@ function getCustomHighlightStyle(elementInfo) {
 <script setup>
 import { ref } from 'vue'
 
-const showGuide = ref(true)
+const showTour = ref(true)
 const current = ref(0)
 
 const steps = [
@@ -189,7 +183,7 @@ const steps = [
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|--------|--------|
 | v-model | 是否显示引导组件 | boolean | - | false |
-| steps | 引导步骤列表 | GuideStep[] | - | [] |
+| steps | 引导步骤列表 | array | - | [] |
 | current | 当前步骤索引，支持 v-model:current 双向绑定 | number | - | 0 |
 | mask | 蒙版是否显示 | boolean | - | true |
 | mask-color | 蒙版颜色（支持 rgba 格式） | string | - | rgba(0, 0, 0, 0.5) |
@@ -206,9 +200,9 @@ const steps = [
 | custom-nav | 是否自定义顶部导航栏 | boolean | - | false |
 | click-mask-next | 点击蒙版是否可以下一步 | boolean | - | false |
 | z-index | 引导组件的层级 | number | - | 999998 |
-| show-guide-buttons | 是否显示引导按钮 | boolean | - | true |
+| show-tour-buttons | 是否显示引导按钮 | boolean | - | true |
 
-## GuideStep 数据结构
+## Steps 数据结构
 
 | 属性 | 说明 | 类型 |
 |------|------|------|
@@ -219,8 +213,6 @@ const steps = [
 
 | 事件名 | 说明 | 参数 |
 |--------|------|------|
-| update:modelValue | 引导显示状态改变时触发 | value: boolean |
-| update:current | 步骤索引改变时触发 | currentIndex: number |
 | change | 步骤改变时触发 | currentIndex: number |
 | prev | 点击上一步按钮时触发 | { oldCurrent: number, current: number, total: number, isUp: number } |
 | next | 点击下一步按钮时触发 | { oldCurrent: number, current: number, total: number, isUp: number } |
@@ -266,16 +258,16 @@ const steps = [
 
 ```scss
 // 蒙版颜色
---wd-guide-mask-color: rgba(0, 0, 0, 0.5);
+--wd-tour-mask-color: rgba(0, 0, 0, 0.5);
 
 // 引导框背景色
---wd-guide-popover-bg-color: #ffffff;
+--wd-tour-popover-bg-color: #ffffff;
 
 // 按钮背景色
---wd-guide-button-primary-bg-color: #007aff;
+--wd-tour-button-primary-bg-color: #007aff;
 
 // 按钮文字颜色
---wd-guide-button-color: #ffffff;
+--wd-tour-button-color: #ffffff;
 ```
 
 ## 常见问题

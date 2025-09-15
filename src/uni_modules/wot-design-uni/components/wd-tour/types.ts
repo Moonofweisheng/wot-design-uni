@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { baseProps, makeBooleanProp, makeNumberProp } from '../common/props'
+import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp, makeArrayProp } from '../common/props'
 
 export interface TourStep {
   /**
@@ -27,11 +27,7 @@ export const tourProps = {
    * 类型：array
    * 默认值：[]
    */
-  steps: {
-    type: Array as PropType<TourStep[]>,
-    default: () => []
-  },
-
+  steps: makeArrayProp<TourStep>(),
   /**
    * 引导框的current
    * 类型：number
@@ -51,10 +47,7 @@ export const tourProps = {
    * 类型：string
    * 默认值：'rgba(0, 0, 0, 0.5)'
    */
-  maskColor: {
-    type: String,
-    default: 'rgba(0, 0, 0, 0.5)'
-  },
+  maskColor: makeStringProp('rgba(0, 0, 0, 0.5)'),
 
   /**
    * 引导框与高亮元素之间的间距
@@ -87,34 +80,22 @@ export const tourProps = {
   /**
    * 上一步按钮文字
    */
-  prevText: {
-    type: String,
-    default: '上一步'
-  },
+  prevText: makeStringProp('上一步'),
 
   /**
    * 下一步按钮文字
    */
-  nextText: {
-    type: String,
-    default: '下一步'
-  },
+  nextText: makeStringProp('下一步'),
 
   /**
    * 跳过按钮文字
    */
-  skipText: {
-    type: String,
-    default: '跳过'
-  },
+  skipText: makeStringProp('跳过'),
 
   /**
    * 完成按钮文字
    */
-  finishText: {
-    type: String,
-    default: '完成'
-  },
+  finishText: makeStringProp('完成'),
 
   /**
    * 安全偏移量，用于滚动计算时确保元素周围有足够的空间
