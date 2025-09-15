@@ -22,7 +22,7 @@
         @change="handleChange"
         @animationfinish="handleAnimationfinish"
       >
-        <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item">
+        <swiper-item v-for="(item, index) in list" :key="index" :class="swiperItemClass">
           <slot :item="item" :index="index">
             <video
               v-if="isVideo(item)"
@@ -88,10 +88,11 @@ export default {
 
 <script lang="ts" setup>
 import wdSwiperNav from '../wd-swiper-nav/wd-swiper-nav.vue'
-import { computed, watch, ref, getCurrentInstance } from 'vue'
+import { computed, watch, ref, getCurrentInstance, useSlots } from 'vue'
 import { addUnit, isObj, isImageUrl, isVideoUrl, uuid, isDef } from '../common/util'
 import { swiperProps, type SwiperList } from './types'
 import type { SwiperNavProps } from '../wd-swiper-nav/types'
+const slots = useSlots()
 
 const props = defineProps(swiperProps)
 const emit = defineEmits(['click', 'change', 'animationfinish', 'update:current'])
@@ -129,6 +130,10 @@ watch(
     }
   }
 )
+
+const swiperItemClass = computed(() => {
+  return `wd-swiper__item ${slots.default ? 'wd-swiper__item--slot' : ''}`
+})
 
 const swiperIndicator = computed(() => {
   const { list, direction, indicatorPosition, indicator } = props
