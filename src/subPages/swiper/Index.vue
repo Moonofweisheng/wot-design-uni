@@ -175,6 +175,14 @@
         <wd-button type="success" @click="current8++">next</wd-button>
       </view>
     </demo-block>
+
+    <demo-block :title="$t('cha-cao-yong-fa')">
+      <wd-swiper :list="swiperList" autoplay v-model:current="current1" :indicator="{ type: 'dots-bar' }" @click="handleClick" @change="onChange">
+        <template #default="{ item }">
+          <image :src="item as string" mode="aspectFill" style="width: 100%; height: 100%" />
+        </template>
+      </wd-swiper>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>

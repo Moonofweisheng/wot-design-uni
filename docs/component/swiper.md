@@ -300,18 +300,21 @@ const isLoop = ref(false)
 ```
 
 
-## slot插槽自定义内容
+## 插槽用法
+
+通过默认插槽可以自定义轮播项的内容。
+
 ```html
 <wd-swiper
   :list="swiperList"
   autoplay
   v-model:current="current"
-  :indicator="{ type: 'dots' }"
+  :indicator="{ type: 'dots-bar' }"
   @click="handleClick"
   @change="onChange"
 >
-  <template v-slot="{ item, index }">
-    <view class="custom-indicator" style="position: absolute; bottom: 24rpx; right: 24rpx">{{ index + 1 }}/{{ item }}</view>
+  <template #default="{ item }">
+    <image :src="item as string" mode="aspectFill" style="width: 100%; height: 100%" />
   </template>
 </wd-swiper>
 ```
@@ -401,8 +404,8 @@ const isLoop = ref(false)
 
 | name      | 说明         | 参数                                 | 最低版本 |
 | --------- | ------------ | ------------------------------------ | -------- |
-| indicator | 自定义指示器 | `{ current: number, total: number }` | 0.1.22   |
-| default   | item展示内容 | `{ item: any, index: number }`       | 0.1.22   |
+| indicator | 自定义指示器 | `{ current: number, total: number }` | $LOWEST_VERSION$   |
+| default   | item展示内容 | `{ item: string | SwiperList, index: number }`       | $LOWEST_VERSION$   |
 
 
 ## 外部样式类
