@@ -130,7 +130,7 @@ function computeActiveValue() {
  */
 function changeRate(index: number, isHalf: boolean) {
   if (props.readonly || props.disabled) return
-  const value = isHalf ? index + 0.5 : index + 1
+  const value = index === -1 ? 0 : isHalf ? index + 0.5 : index + 1
   emit('update:modelValue', value)
   emit('change', {
     value
@@ -138,8 +138,14 @@ function changeRate(index: number, isHalf: boolean) {
 }
 
 async function onTouchMove(event: TouchEvent) {
+  if (props.readonly || props.disabled) return
   const { clientX } = event.touches[0]
   const rateItems = await getRect('.wd-rate__item', true, proxy)
+  if (rateItems.length && clientX < rateItems[0].left!) {
+    changeRate(-1, false)
+    return
+  }
+
   const targetIndex = Array.from(rateItems).findIndex((rect) => {
     return clientX >= rect.left! && clientX <= rect.right!
   })
