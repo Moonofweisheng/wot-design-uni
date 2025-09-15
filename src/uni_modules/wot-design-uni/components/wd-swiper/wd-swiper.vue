@@ -23,32 +23,35 @@
         @animationfinish="handleAnimationfinish"
       >
         <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item">
-          <video
-            v-if="isVideo(item)"
-            :id="`video-${index}-${uid}`"
-            :style="{ height: addUnit(height) }"
-            :src="isObj(item) ? item[valueKey] : item"
-            :poster="isObj(item) ? item.poster : ''"
-            :class="`wd-swiper__video ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
-            @play="handleVideoPaly"
-            @pause="handleVideoPause"
-            :enable-progress-gesture="false"
-            :loop="videoLoop"
-            :muted="muted"
-            :autoplay="autoplayVideo"
-            objectFit="cover"
-            @click="handleClick(index, item)"
-          />
-          <image
-            v-else
-            :src="isObj(item) ? item[valueKey] : item"
-            :class="`wd-swiper__image ${customImageClass} ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
-            :style="{ height: addUnit(height) }"
-            :mode="imageMode"
-            @click="handleClick(index, item)"
-          />
-
-          <text v-if="isObj(item) && item[textKey]" :class="`wd-swiper__text ${customTextClass}`" :style="customTextStyle">{{ item[textKey] }}</text>
+          <slot :item="item" :index="index">
+            <video
+              v-if="isVideo(item)"
+              :id="`video-${index}-${uid}`"
+              :style="{ height: addUnit(height) }"
+              :src="isObj(item) ? item[valueKey] : item"
+              :poster="isObj(item) ? item.poster : ''"
+              :class="`wd-swiper__video ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
+              @play="handleVideoPaly"
+              @pause="handleVideoPause"
+              :enable-progress-gesture="false"
+              :loop="videoLoop"
+              :muted="muted"
+              :autoplay="autoplayVideo"
+              objectFit="cover"
+              @click="handleClick(index, item)"
+            />
+            <image
+              v-else
+              :src="isObj(item) ? item[valueKey] : item"
+              :class="`wd-swiper__image ${customImageClass} ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
+              :style="{ height: addUnit(height) }"
+              :mode="imageMode"
+              @click="handleClick(index, item)"
+            />
+            <text v-if="isObj(item) && item[textKey]" :class="`wd-swiper__text ${customTextClass}`" :style="customTextStyle">
+              {{ item[textKey] }}
+            </text>
+          </slot>
         </swiper-item>
       </swiper>
       <!-- #ifdef MP-WEIXIN -->
