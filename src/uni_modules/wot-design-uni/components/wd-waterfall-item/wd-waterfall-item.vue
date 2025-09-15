@@ -352,7 +352,7 @@ async function updateHeight(flag = false) {
 
     if (!rectHeight || rectHeight === 0) {
       item.height = FALLBACK_HEIGHT // 出错了，使用默认高度
-      item.heightError = true // 设置特殊高度与默认240高度区别开，避免误伤正常240的情况
+      item.heightError = true
       // console.warn('高度异常-a heightError', item.heightError, item)
     } else {
       // 注意 纯图片加载加载失败，图片容器可能也是240
@@ -370,7 +370,7 @@ async function updateHeight(flag = false) {
     // 查询失败时静默处理，避免报错
     console.error('error高度获取失败', item, error)
     item.height = FALLBACK_HEIGHT // 出错了，使用默认高度
-    item.heightError = true // 设置特殊高度与默认240高度区别开，避免误伤正常240的情况
+    item.heightError = true
     // void error
     // 移除已处理的项目
     if (flag) {
