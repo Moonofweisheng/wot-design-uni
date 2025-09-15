@@ -2,13 +2,15 @@ import { mount } from '@vue/test-utils'
 import WdWaterfall from '@/uni_modules/wot-design-uni/components/wd-waterfall/wd-waterfall.vue'
 import { describe, test, expect, vi } from 'vitest'
 import { nextTick } from 'vue'
-import type { ErrorMode } from '@/uni_modules/wot-design-uni/components/wd-waterfall/types'
+import type { ErrorStrategy } from '@/uni_modules/wot-design-uni/components/wd-waterfall/types'
 
 describe('WdWaterfall', () => {
   // 测试基本渲染
   test('基本渲染', () => {
     const wrapper = mount(WdWaterfall)
-    expect(wrapper.find('view').classes()).toContain('wd-waterfall')
+    // 检查容器是否存在（使用动态生成的 containerId）
+    expect(wrapper.find('view').exists()).toBe(true)
+    expect(wrapper.find('view').attributes('class')).toMatch(/wd-waterfall-/)
   })
 
   // 测试默认属性
@@ -51,15 +53,15 @@ describe('WdWaterfall', () => {
     expect(wrapper.props('show')).toBe(false)
   })
 
-  // 测试错误处理模式
-  test('错误处理模式', () => {
-    const errorModes: ErrorMode[] = ['none', 'placeholder', 'retry']
+  // 测试错误处理策略
+  test('错误处理策略', () => {
+    const errorStrategies: ErrorStrategy[] = ['default', 'placeholder', 'retry', 'retryHard', 'pass']
 
-    errorModes.forEach((mode) => {
+    errorStrategies.forEach((strategy) => {
       const wrapper = mount(WdWaterfall, {
-        props: { errorMode: mode }
+        props: { errorStrategy: strategy }
       })
-      expect(wrapper.props('errorMode')).toBe(mode)
+      expect(wrapper.props('errorStrategy')).toBe(strategy)
     })
   })
 
