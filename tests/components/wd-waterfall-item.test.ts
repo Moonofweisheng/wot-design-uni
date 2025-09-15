@@ -12,8 +12,7 @@ describe('WdWaterfallItem', () => {
     onItemLoad: vi.fn(),
     columnWidth: 150,
     isReflowing: false,
-    isLayoutInterrupted: false,
-    errorMode: 'none' as const,
+    errorStrategy: 'default' as const,
     retryCount: 1,
     maxWait: 3000
   }
@@ -41,7 +40,7 @@ describe('WdWaterfallItem', () => {
       }
     })
 
-    expect(wrapper.props('index')).toBeUndefined()
+    expect(wrapper.props('order')).toBeUndefined()
     expect(wrapper.props('width')).toBeUndefined()
     expect(wrapper.props('height')).toBeUndefined()
   })
@@ -49,7 +48,7 @@ describe('WdWaterfallItem', () => {
   // 测试索引属性
   test('索引属性', () => {
     const wrapper = mount(WdWaterfallItem, {
-      props: { index: 5 },
+      props: { order: 5 },
       global: {
         provide: {
           [waterfallContextKey as symbol]: mockWaterfallContext
@@ -57,7 +56,7 @@ describe('WdWaterfallItem', () => {
       }
     })
 
-    expect(wrapper.props('index')).toBe(5)
+    expect(wrapper.props('order')).toBe(5)
   })
 
   // 测试宽度属性
@@ -188,14 +187,14 @@ describe('WdWaterfallItem', () => {
   test('边界情况处理', () => {
     // 测试负数索引
     const wrapper1 = mount(WdWaterfallItem, {
-      props: { index: -1 },
+      props: { order: -1 },
       global: {
         provide: {
           [waterfallContextKey as symbol]: mockWaterfallContext
         }
       }
     })
-    expect(wrapper1.props('index')).toBe(-1)
+    expect(wrapper1.props('order')).toBe(-1)
 
     // 测试零尺寸
     const wrapper2 = mount(WdWaterfallItem, {
