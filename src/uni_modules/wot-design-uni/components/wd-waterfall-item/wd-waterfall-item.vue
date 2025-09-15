@@ -17,9 +17,7 @@ export default {
  * 2. 自动获取内容高度并报告给父组件
  * 3. 根据父组件计算的位置进行定位
  * 4. 提供加载完成回调给内容组件
- * 5. 支持平滑的显示动画效果
  */
-
 import {
   computed,
   getCurrentInstance,
@@ -31,26 +29,25 @@ import {
   shallowReactive,
   shallowReadonly,
   watch,
-  shallowRef
+  shallowRef,
+  toRef,
+  type Ref
 } from 'vue'
-import { getRect, objToStyle, uuid } from '../common/util'
-import type {
-  // WaterfallItemEmits,
-  WaterfallItemExpose,
-  WaterfallItemInfo,
-  WaterfallItemProps,
-  WaterfallItemSlots
-} from './types'
+import { getRect, uuid } from '../common/util'
+import type { WaterfallItemExpose, WaterfallItemInfo, WaterfallItemProps, WaterfallItemSlots } from './types'
 import { waterfallContextKey } from '../wd-waterfall/types'
 
 // 组件属性定义
 const props = withDefaults(defineProps<WaterfallItemProps>(), {})
 
-// 事件定义
+// // 事件定义
 // defineEmits<WaterfallItemEmits>()
 
 // 插槽定义
 defineSlots<WaterfallItemSlots>()
+
+// 暴露给父组件的方法和属性
+defineExpose<WaterfallItemExpose>({})
 
 // ==================== 内联工具函数 ====================
 
@@ -117,7 +114,7 @@ if (!context) {
   throw new Error('[wd-waterfall-item] 缺少瀑布流上下文，请确保组件仅在 <wd-waterfall> 内使用。')
 }
 // 生成唯一的项目ID，用于DOM查询
-const itemId = `wd-item-${uuid()}`
+const itemId = `wd-waterfall-item-${uuid()}`
 const slotId = ref(uuid())
 
 const currWidth = ref(props.width || 320)
@@ -131,18 +128,17 @@ const FALLBACK_HEIGHT = 120 // 异常默认高度
 
 // 错误状态枚举
 const ItemStatus = {
-  NONE: 'none',
-  ORIGINAL_FAILED: 'fail',
-  PLACEHOLDER_SUCCESS: 'phok',
+  SUCCESS: 'success',
+  FAIL: 'fail',
   TIMEOUT: 'timeout',
-  FINAL_FALLBACK: 'final'
+  OVER: 'over'
 } as const
 
 type ItemStatusType = (typeof ItemStatus)[keyof typeof ItemStatus]
 
-// 单一真相源：错误状态
+// 错误状态
 const errorState = shallowReactive({
-  status: ItemStatus.NONE as ItemStatusType,
+  status: ItemStatus.SUCCESS as ItemStatusType,
   message: ''
 })
 
@@ -151,18 +147,6 @@ function setStatus(status: ItemStatusType, message = '') {
   errorState.status = status
   errorState.message = message
 }
-
-// 语义化的 errorInfo slot 结构
-const errorInfo = computed(() => ({
-  status: errorState.status,
-  message: errorState.message,
-  placeholder: {
-    load: onPlaceholderLoad,
-    error: onPlaceholderError
-  }
-  // retry: refreshImage,
-}))
-
 // ==================== 项目信息管理 ====================
 
 // 获取当前组件实例，用于DOM操作
@@ -177,11 +161,11 @@ const item = shallowReactive<WaterfallItemInfo>({
   loadSuccess: false, // 是否加载成功
   visible: false, // 是否可见（由父组件控制）
   isInserted: false, // 是否插入项目
-  heightError: false, // 是否高度异常
   height: 0, // 项目高度（DOM 实际高度）
   top: 0, // 垂直位置（由父组件计算）
   left: 0, // 水平位置（由父组件计算）
-  index: props.index,
+  heightError: false, // 是否高度异常
+  order: toRef(props, 'order') as Ref<number>, //用于插入控制项目顺序
   updateHeight,
   refreshImage
 })
@@ -192,8 +176,8 @@ const { start: startTimeout } = useTimeout(async () => {
   if (!item.loaded && !overtime) {
     overtime = true
     // 根据模式决定超时后的处理方式
-    switch (context.errorMode) {
-      case 'none':
+    switch (context.errorStrategy) {
+      case 'default':
         setStatus(ItemStatus.TIMEOUT, '加载超时')
         break
 
@@ -205,7 +189,7 @@ const { start: startTimeout } = useTimeout(async () => {
         setStatus(ItemStatus.TIMEOUT, '重试超时')
         break
 
-      case 'fallback':
+      case 'retryHard':
         setStatus(ItemStatus.TIMEOUT, '加载超时')
         break
     }
@@ -219,47 +203,68 @@ async function onLoadKnownSize() {
   await item.updateHeight()
   item.loaded = true
   // 如果高度有问题，单独处理
-  if (!item.height || item.heightError) {
-    console.warn('项目高度异常，但仍标记为已加载')
-  }
+  // if (!item.height || item.heightError) {
+  //   console.warn('已知高度-项目高度异常，但仍标记为已加载')
+  // }
   // todo 如果已知高度也加载失败了呢
 }
 // 模式1：默认模式 - 失败就结束
 async function handleFailureNone() {
-  setStatus(ItemStatus.FINAL_FALLBACK, '加载失败')
+  setStatus(ItemStatus.OVER, '加载失败')
   await item.updateHeight()
   item.loaded = true
 }
 
 // 模式2：占位图模式 - 失败后直接显示占位图片
 async function handleFailurePlaceholder() {
-  setStatus(ItemStatus.ORIGINAL_FAILED, '原始内容加载失败，显示占位图片')
+  setStatus(ItemStatus.FAIL, '原始内容加载失败，显示占位图片')
   // 不设置 loaded = true，让占位图片的加载回调来处理
 }
 
 // 模式3：重试模式 - 重试指定次数
 async function handleFailureRetry() {
+  // #ifdef MP-WEIXIN || MP-ALIPAY
+  // 微信小程序不支持重试，直接进入最终状态
+  setStatus(ItemStatus.OVER, `重试${context.retryCount}次后仍然失败`)
+  await item.updateHeight()
+  item.loaded = true
+  // #endif
+  // #ifndef MP-WEIXIN || MP-ALIPAY
   if (retryCount > 0) {
     retryCount--
     // 还有重试次数，重新加载
     await item.refreshImage(false)
   } else {
     // 重试次数用完，结束处理
-    setStatus(ItemStatus.FINAL_FALLBACK, `重试${context.retryCount}次后仍然失败`)
+    setStatus(ItemStatus.OVER, `重试${context.retryCount}次后仍然失败`)
     await item.updateHeight()
     item.loaded = true
   }
+  // #endif
 }
 
 // 模式4：完整模式 - 原有的三层处理机制
 async function handleFailureFinal() {
+  if (overtime) return // 已超时，忽略后续加载事件
+  // #ifdef MP-WEIXIN || MP-ALIPAY
+  // 微信小程序不支持重试，直接进入失败状态
+  setStatus(ItemStatus.FAIL, '原始内容加载失败')
+  await item.updateHeight()
+  item.loaded = true
+  console.log('handleFailureFinal', item.loaded, item)
+
+  // #endif
+  // #ifndef MP-WEIXIN || MP-ALIPAY
   if (retryCount > 0) {
     retryCount--
     await item.refreshImage(false)
   } else {
     // 进入占位图片阶段
-    setStatus(ItemStatus.ORIGINAL_FAILED, '原始内容加载失败')
+    setStatus(ItemStatus.FAIL, '原始内容加载失败')
+    await item.updateHeight()
+    item.loaded = true
   }
+  // #endif
 }
 /**
  * 第一层：原始内容加载完成回调
@@ -267,25 +272,22 @@ async function handleFailureFinal() {
  * 通知父组件进行重新布局
  */
 async function loaded(event?: any) {
+  // console.log('event', event)
   if (props.width && props.height) return
   if (overtime) return // 已超时，忽略后续加载事件
-  item.loadSuccess = event?.type === 'load'
-  // 检查是否加载成功
+  item.loadSuccess = event?.type === 'load' || event?.type === 'onLoad'
   if (item.loadSuccess) {
-    // 加载成功：更新高度并完成
-    setStatus(ItemStatus.NONE)
+    setStatus(ItemStatus.SUCCESS)
     await item.updateHeight()
     item.loaded = true
-    // 如果高度有问题，单独处理
-    if (!item.height || item.heightError) {
-      console.warn('项目高度异常，但仍标记为已加载')
-    }
+    // if (!item.height || item.heightError) {
+    //   console.warn('高度异常-b，但仍标记为已加载', item.height, item) // 如果高度有问题，单独处理
+    // }
     return
   }
-
-  // 加载失败：根据模式处理
-  switch (context.errorMode) {
-    case 'none':
+  // 加载失败：根据异常处理策略处理
+  switch (context.errorStrategy) {
+    case 'default':
       // 默认模式：失败就结束，使用默认高度
       await handleFailureNone()
       break
@@ -299,7 +301,7 @@ async function loaded(event?: any) {
       await handleFailureRetry()
       break
 
-    case 'fallback':
+    case 'retryHard':
       // 完整模式：重试 + 占位图 + 兜底
       await handleFailureFinal()
       break
@@ -308,10 +310,13 @@ async function loaded(event?: any) {
 
 /**
  * 第二层：占位图片加载成功
+ * 支付宝小程序未解决的bug: 其他项加载太快，会导致这个方法不执行
  */
 async function onPlaceholderLoad() {
   if (overtime) return // 已超时，忽略后续加载事件
-  setStatus(ItemStatus.PLACEHOLDER_SUCCESS, '占位图片加载成功')
+  // #ifdef MP-WEIXIN || MP-ALIPAY
+  await new Promise((resolve) => setTimeout(resolve, 100))
+  // #endif
   await item.updateHeight()
   item.loaded = true
 }
@@ -321,7 +326,7 @@ async function onPlaceholderLoad() {
  */
 async function onPlaceholderError() {
   if (overtime) return // 已超时，忽略后续加载事件
-  setStatus(ItemStatus.FINAL_FALLBACK, '占位图片也加载失败')
+  setStatus(ItemStatus.OVER, '占位图片也加载失败')
   // 最后显示最终兜底方案结束处理
   await item.updateHeight()
   item.loaded = true
@@ -334,25 +339,39 @@ async function onPlaceholderError() {
 
 async function updateHeight(flag = false) {
   try {
-    // 如果父级排版中断，停止获取dom信息
-    if (context.isLayoutInterrupted) return
+    // console.log('context.removalProcessing', context.removalProcessing)
+    // if (context.isLayoutInterrupted) return
+    // console.log('触发了获取dom信息')
     await nextTick() // 很重要不然会导致获取高度错误
+    // #ifdef MP-WEIXIN || MP-ALIPAY || APP-PLUS
+    await new Promise((resolve) => setTimeout(resolve, 200))
+    // #endif
     // 查询 DOM 元素的边界信息，获取实际高度
     const rect = await getRect(`.${itemId}`, false, instance?.proxy)
     const rectHeight = rect?.height
+
     if (!rectHeight || rectHeight === 0) {
       item.height = FALLBACK_HEIGHT // 出错了，使用默认高度
       item.heightError = true // 设置特殊高度与默认240高度区别开，避免误伤正常240的情况
+      // console.warn('高度异常-a heightError', item.heightError, item)
     } else {
-      // 纯图片加载加载失败，图片容器可能也是240
+      // 注意 纯图片加载加载失败，图片容器可能也是240
       item.height = rectHeight
+      item.heightError = false
+      // if (rectHeight === 240) {
+      //   console.warn('240高度可能是异常 heightError', item)
+      // }
+    }
+    // 移除已处理的项目
+    if (flag) {
+      item.loaded = true
     }
   } catch (error) {
     // 查询失败时静默处理，避免报错
-    console.error(error, `error高度获取失败，${item.height}`)
-
-    // void 0
-  } finally {
+    console.error('error高度获取失败', item, error)
+    item.height = FALLBACK_HEIGHT // 出错了，使用默认高度
+    item.heightError = true // 设置特殊高度与默认240高度区别开，避免误伤正常240的情况
+    // void error
     // 移除已处理的项目
     if (flag) {
       item.loaded = true
@@ -368,8 +387,8 @@ async function refreshImage(isReset = true) {
   item.loaded = false
   item.loadSuccess = false
   item.heightError = false
-  setStatus(ItemStatus.NONE)
   slotId.value = uuid()
+
   // 重新启动超时计时器 todo 这里应该打开吗？需要使用参数控制是否重新启动定时器吗？
   if (isReset && context?.maxWait) {
     overtime = false
@@ -382,13 +401,15 @@ async function refreshImage(isReset = true) {
 /**
  * 组件挂载时：将自己注册到父组件的项目列表中，并启动超时计时器
  */
-context.addItem(item)
 onMounted(async () => {
+  context.addItem(item)
   // 判断是否开启固定宽度高度
   if (props.width && props.height) {
-    onLoadKnownSize()
+    // 解决小程序app的bug
+    setTimeout(() => {
+      onLoadKnownSize()
+    }, 16)
   }
-  // 只有在 fallback 模式下才启动超时计时器
   if (context?.maxWait) {
     startTimeout()
   }
@@ -428,37 +449,37 @@ watch(
  */
 const waterfallItemStyle = computed(() => {
   return {
-    // 宽度：使用父组件计算的列宽
     width: `${context.columnWidth}px`,
-    // 高度
-    // paddingTop: props?.width && props?.height ? paddingTop.value : '0',
-    // 位置：使用 3D 变换进行定位（性能更好）
     transform: `translate3d(${item.left}px,${item.top}px,0px)`,
-
-    // 过渡动画：根据延迟状态决定是否包含 transform 动画
     transition: laterVisible.value
       ? 'opacity var(--wd-waterfall-duration) ease-out,transform var(--wd-waterfall-duration) ease-out' // 包含位置动画，使用缓出效果
       : 'opacity var(--wd-waterfall-duration) ease-out' // 仅包含透明度动画
   }
 })
-
-// ==================== 组件暴露接口 ====================
-
-/**
- * 暴露给父组件的方法和属性
- * 当前为空，可根据需要扩展
- */
-defineExpose<WaterfallItemExpose>({})
 </script>
 
 <template>
-  <!-- 瀑布流项目容器：绝对定位，通过 transform 控制位置 -->
-  <view
-    :class="['wd-waterfall-item', itemId, customClass, { 'is-show': item.visible || context.isReflowing, 'is-reflowing': context.isReflowing }]"
-    :style="[waterfallItemStyle, customStyle]"
-  >
-    <slot :key="slotId" :loaded="loaded" :column-width="context.columnWidth" :image-height="context.columnWidth * ratio" :error-info="errorInfo" />
+  <!-- #ifdef MP-DINGTALK -->
+  <view>
+    <!-- #endif -->
+    <view
+      :class="['wd-waterfall-item', itemId, customClass, { 'is-show': item.visible, 'is-reflowing': context.isReflowing }]"
+      :style="[waterfallItemStyle, customStyle]"
+    >
+      <slot
+        :key="slotId"
+        :loaded="loaded"
+        :column-width="context.columnWidth"
+        :image-height="context.columnWidth * ratio"
+        :status="errorState.status"
+        :message="errorState.message"
+        :onPlaceholderLoad="onPlaceholderLoad"
+        :onPlaceholderError="onPlaceholderError"
+      />
+    </view>
+    <!-- #ifdef MP-DINGTALK -->
   </view>
+  <!-- #endif -->
 </template>
 
 <style lang="scss" scoped>

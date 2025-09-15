@@ -2,7 +2,6 @@
 
 @include b(waterfall-item) {
   --wd-waterfall-duration: 0.25s;
-  --wd-waterfall-reflow-duration: 0.15s;
   
   position: relative;
   box-sizing: border-box;
