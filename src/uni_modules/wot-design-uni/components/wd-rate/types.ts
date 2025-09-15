@@ -92,5 +92,12 @@ export const rateProps = {
    * 类型: boolean
    * 默认值: false
    */
-  allowHalf: makeBooleanProp(false)
+  allowHalf: makeBooleanProp(false),
+
+  /**
+   * 是否允许评分为0
+   * 类型: boolean
+   * 默认值: false
+   */
+  allowZero: makeBooleanProp(false)
 }

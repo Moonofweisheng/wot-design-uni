@@ -142,7 +142,9 @@ async function onTouchMove(event: TouchEvent) {
   const { clientX } = event.touches[0]
   const rateItems = await getRect('.wd-rate__item', true, proxy)
   if (rateItems.length && clientX < rateItems[0].left!) {
-    changeRate(-1, false)
+    if (props.allowZero) {
+      changeRate(-1, false)
+    }
     return
   }
 
