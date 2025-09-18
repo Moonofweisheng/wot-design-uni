@@ -1,0 +1,28 @@
+@import '../common/abstracts/mixin';
+
+@include b(waterfall-item) {
+  --wd-waterfall-duration: 0.25s;
+  
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  transition: opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  @include when(show) {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @include when(reflowing) {
+    opacity: 1;
+    transition: opacity 0.15s ease-out,
+      transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
