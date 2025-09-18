@@ -36,6 +36,15 @@
     <demo-block :title="$t('yun-xu-ban-xuan')">
       <wd-rate v-model="value8" allow-half />
     </demo-block>
+
+    <demo-block :title="$t('yun-xu-qing-kong-ping-fen')">
+      <view style="margin-bottom: 24rpx">
+        <wd-rate v-model="value9" clearable />
+      </view>
+      <view>
+        <wd-rate v-model="value10" clearable allow-half />
+      </view>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -49,6 +58,8 @@ const value5 = ref<number>(4)
 const value6 = ref<number>(3)
 const value7 = ref<number>(5)
 const value8 = ref<number>(2.5)
+const value9 = ref<number>(3)
+const value10 = ref<number>(3.5)
 
 function changeValue1({ value }: any) {
   console.log(value)
