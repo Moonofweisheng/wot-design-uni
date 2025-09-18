@@ -67,7 +67,7 @@
     <wd-keyboard :modal="true" v-model:visible="visible8" @input="onInput" @delete="onDelete" />
 
     <wd-keyboard v-model="value10" v-model:visible="visible10" mode="car" @input="onInput" @delete="onDelete" :autoSwitchLang="false" />
-    <wd-keyboard v-model="value11" v-model:visible="visible11" v-model:lang="lang" mode="car" @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model="value11" v-model:visible="visible11" v-model:carLang="carLang" mode="car" @input="onInput" @delete="onDelete" />
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -93,7 +93,7 @@ const visibleArr = [visible1, visible2, visible3, visible4, visible5, visible6, 
 const value1 = ref<string>('')
 const value10 = ref<string>('')
 const value11 = ref<string>('')
-const lang = ref<'zh' | 'en'>('zh')
+const carLang = ref<'zh' | 'en'>('zh')
 function showKeyBoard(index: number) {
   visibleArr.forEach((item, i) => (i === index - 1 ? (item.value = true) : (item.value = false)))
 }
