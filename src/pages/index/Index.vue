@@ -399,6 +399,10 @@ const list = computed(() => [
       {
         id: 'table',
         name: t('table-biao-ge')
+      },
+      {
+        id: 'tour',
+        name: t('tour-title')
       }
     ]
   }
