@@ -60,7 +60,7 @@ import type { NumberKeyType } from './key/types'
 import { CAR_KEYBOARD_AREAS, CAR_KEYBOARD_KEYS } from './constants'
 
 const props = defineProps(keyboardProps)
-const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue', 'update:lang'])
+const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue', 'update:carLang'])
 const slots = useSlots()
 
 const show = ref(props.visible)
@@ -171,7 +171,7 @@ const handlePress = (text: string, type: NumberKeyType) => {
     } else if (text === 'ABC' || text === '省份') {
       const newLang = carKeyboardLang.value === 'zh' ? 'en' : 'zh'
       if (props.carLang) {
-        emit('update:lang', newLang)
+        emit('update:carLang', newLang)
       } else {
         carKeyboardLang.value = newLang
       }
