@@ -66,7 +66,7 @@
 
     <wd-keyboard :modal="true" v-model:visible="visible8" @input="onInput" @delete="onDelete" />
 
-    <wd-keyboard v-model="value10" v-model:visible="visible10" mode="car" @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model="value10" v-model:visible="visible10" mode="car" @input="onInput" @delete="onDelete" :autoSwitchLang="false" />
     <wd-keyboard v-model="value11" v-model:visible="visible11" v-model:lang="lang" mode="car" @input="onInput" @delete="onDelete" />
   </page-wraper>
 </template>
