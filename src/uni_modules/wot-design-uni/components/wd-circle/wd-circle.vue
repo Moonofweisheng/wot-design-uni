@@ -88,6 +88,7 @@ const canvasStyle = computed(() => {
 watch(
   () => props.modelValue,
   () => {
+    currentValue.value = props.modelValue
     reRender()
   },
   { immediate: true }
