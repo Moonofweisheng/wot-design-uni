@@ -55,7 +55,7 @@ export default {
 import { computed, ref, watch, useSlots } from 'vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
 import WdKey from './key/index.vue'
-import { keyboardProps, type Key, type KeyboardLang } from './types'
+import { keyboardProps, type Key, type CarKeyboardLang } from './types'
 import type { NumberKeyType } from './key/types'
 import { CAR_KEYBOARD_AREAS, CAR_KEYBOARD_KEYS } from './constants'
 
@@ -71,11 +71,11 @@ watch(
   }
 )
 
-const internalLang = ref<KeyboardLang>('zh')
+const carLang = ref<CarKeyboardLang>('zh')
 const carKeyboardLang = computed({
-  get: () => (props.lang ? props.lang : internalLang.value),
-  set: (value: KeyboardLang) => {
-    internalLang.value = value
+  get: () => (props.carLang ? props.carLang : carLang.value),
+  set: (value: CarKeyboardLang) => {
+    carLang.value = value
   }
 })
 
@@ -148,7 +148,7 @@ function genCarKeys(): Array<Key> {
   const [keys, remainKeys] = splitCarKeys()
   return [
     ...keys,
-    { text: carKeyboardLang.value === 'zh' ? 'ABC' : '返回', type: 'extra', wider: true },
+    { text: carKeyboardLang.value === 'zh' ? 'ABC' : '省份', type: 'extra', wider: true },
     ...remainKeys,
     { text: props.deleteText, type: 'delete', wider: true }
   ]
@@ -168,9 +168,9 @@ const handlePress = (text: string, type: NumberKeyType) => {
   if (type === 'extra') {
     if (text === '') {
       return handleClose()
-    } else if (text === 'ABC' || text === '返回') {
+    } else if (text === 'ABC' || text === '省份') {
       const newLang = carKeyboardLang.value === 'zh' ? 'en' : 'zh'
-      if (props.lang) {
+      if (props.carLang) {
         emit('update:lang', newLang)
       } else {
         carKeyboardLang.value = newLang
@@ -184,7 +184,7 @@ const handlePress = (text: string, type: NumberKeyType) => {
     emit('delete')
     const newValue = value.slice(0, value.length - 1)
     emit('update:modelValue', newValue)
-    if (props.mode === 'car' && newValue.length === 0) {
+    if (props.mode === 'car' && newValue.length === 0 && props.autoSwitchLang) {
       carKeyboardLang.value = 'zh'
     }
   } else if (type === 'close') {
@@ -193,7 +193,7 @@ const handlePress = (text: string, type: NumberKeyType) => {
     emit('input', text)
     const newValue = value + text
     emit('update:modelValue', newValue)
-    if (props.mode === 'car' && newValue.length === 1) {
+    if (props.mode === 'car' && newValue.length === 1 && props.autoSwitchLang) {
       // 输入第一位（省份）后，自动切换到英文
       carKeyboardLang.value = 'en'
     }
