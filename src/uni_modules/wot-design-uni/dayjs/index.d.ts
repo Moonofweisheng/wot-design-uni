@@ -414,6 +414,8 @@ declare namespace dayjs {
     locale(): string
 
     locale(preset: string | ILocale, object?: Partial<ILocale>): Dayjs
+
+    quarter():string
   }
 
   export type PluginFunc<T = unknown> = (option: T, c: typeof Dayjs, d: typeof dayjs) => void

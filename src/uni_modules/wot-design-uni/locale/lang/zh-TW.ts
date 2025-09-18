@@ -13,6 +13,7 @@ export default {
     day: '日',
     week: '週',
     month: '月',
+    quarter: '季度',
     confirm: '確定',
     startTime: '開始時間',
     endTime: '結束時間',
@@ -20,10 +21,13 @@ export default {
     timeFormat: 'YY年MM月DD日 HH:mm:ss',
     dateFormat: 'YYYY年MM月DD日',
     weekFormat: (year: number, week: number) => `${year} 第 ${week} 週`,
+    quarterFormat: (year: number, quarter: number) => `${year} 第 ${quarter} 季度`,
     startWeek: '開始週',
     endWeek: '結束週',
     startMonth: '開始月',
     endMonth: '結束月',
+    startQuarter: '開始季度',
+    endQuarter: '結束季度',
     monthFormat: 'YYYY年MM月'
   },
   calendarView: {

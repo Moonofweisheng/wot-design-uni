@@ -5,6 +5,7 @@ export default {
     day: '일',
     week: '주',
     month: '월',
+    quarter: '분기',
     confirm: '확인',
     startTime: '시작 시간',
     endTime: '종료 시간',
@@ -12,10 +13,13 @@ export default {
     timeFormat: 'YY년 MM월 DD일 HH:mm:ss',
     dateFormat: 'YYYY년 MM월 DD일',
     weekFormat: (year: number, week: number) => `${year}년 ${week}주`,
+    quarterFormat: (year: number, quarter: number) => `${year}년 ${quarter}분기`,
     startWeek: '주 시작',
     endWeek: '주 종료',
     startMonth: '월 시작',
     endMonth: '월 종료',
+    startQuarter: '분기 시작',
+    endQuarter: '분기 종료',
     monthFormat: 'YYYY년 MM월'
   },
   calendarView: {

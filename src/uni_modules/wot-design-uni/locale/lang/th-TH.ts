@@ -5,6 +5,7 @@ export default {
     day: 'วันที่',
     week: 'สัปดาห์',
     month: 'เดือน',
+    quarter: 'ไตรมาส',
     confirm: 'ยืนยัน',
     startTime: 'วันที่เริ่มต้น',
     endTime: 'วันที่สิ้นสุด',
@@ -12,10 +13,13 @@ export default {
     timeFormat: 'YY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     weekFormat: (year: number, week: number) => `${year} W${week}`,
+    quarterFormat: (year: number, quarter: number) => `${year} Q${quarter}`,
     startWeek: 'เริ่มต้นสัปดาห์',
     endWeek: 'สิ้นสุดสัปดาห์',
     startMonth: 'เดือนเริ่มต้น',
     endMonth: 'สิ้นเดือน',
+    startQuarter: 'ไตรมาสเริ่มต้น',
+    endQuarter: 'สิ้นสุดไตรมาส',
     monthFormat: 'YYYY-MM'
   },
   calendarView: {
