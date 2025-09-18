@@ -11,6 +11,11 @@
       }
     }
 
+    @include when(round) {
+      border-radius: $-cell-group-value-round;
+      overflow: hidden;
+    }
+
     @include e(title) {
       background: $-dark-background2;
       color: $-dark-color;
@@ -23,7 +28,6 @@
     @include e(body) {
       background: $-dark-background2;
     }
-
   }
 }
 
@@ -34,6 +38,10 @@
     .wd-cell-group__title {
       @include halfPixelBorder;
     }
+  }
+  @include when(round) {
+    border-radius: $-cell-group-value-round;
+    overflow: hidden;
   }
   @include e(title) {
     position: relative;
