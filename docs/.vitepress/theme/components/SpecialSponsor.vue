@@ -7,7 +7,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  title: '超级赞助',
+  title: '铂金赞助商',
 })
 
 const { data } = useAdSponsor()
