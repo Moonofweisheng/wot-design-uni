@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2025-09-21 19:12:03
- * @LastEditTime: 2025-09-21 19:37:14
+ * @LastEditTime: 2025-09-21 19:52:54
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/composables/adSponsor.ts
@@ -38,7 +38,7 @@ export function useAdSponsor() {
     const fetchData = async () => {
       for (const url of urls) {
         try {
-          const response = await axios.get(url, {
+          const response = await axios.get(url + '?t=' + Date.now(), {
             timeout: 5000 // 设置5秒超时
           })
           return response?.data?.data // 成功获取数据后直接返回

@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2025-09-21 17:13:45
- * @LastEditTime: 2025-09-21 19:33:17
+ * @LastEditTime: 2025-09-21 19:53:54
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/AsideSponsors.vue
@@ -30,6 +30,7 @@ const isGoldSponsorsOdd = computed(() => {
 
 <template>
 <div class="VPDocAsideSponsors">
+  <a class="sponsors-aside-text" href="/reward/sponsor">赞助位</a>
   <div class="VPSponsors vp-sponsor aside">
     <!-- 超级赞助：一行一个 -->
     <section class="vp-sponsor-section" v-if="superSponsors?.items.length">
@@ -86,10 +87,6 @@ const isGoldSponsorsOdd = computed(() => {
 </template>
 
 <style>
-.VPDocAsideSponsors{
-  margin-top: 12px;
-}
-
 .vp-sponsor-grid-text {
   color: var(--vp-c-text-2);
   font-size: 12px;
@@ -97,5 +94,15 @@ const isGoldSponsorsOdd = computed(() => {
 
 .dark .vp-sponsor-grid-text {
   color: var(--vp-c-gray-1);
+}
+
+a.sponsors-aside-text {
+  color: var(--vp-c-text-3);
+  display: block;
+  margin: 2em 0 1em;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 </style>

@@ -26,7 +26,7 @@ export function useFriendly() {
     const fetchData = async () => {
       for (const url of urls) {
         try {
-          const response = await axios.get(url, {
+          const response = await axios.get(url + '?t=' + Date.now(), {
             timeout: 5000 // 设置5秒超时
           })
           return response.data && response.data.links ? response.data.links : [] // 成功获取数据后直接返回

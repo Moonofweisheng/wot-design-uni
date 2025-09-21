@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2025-08-30 13:06:10
- * @LastEditTime: 2025-09-21 15:07:39
+ * @LastEditTime: 2025-09-21 19:53:02
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/composables/cases.ts
@@ -31,7 +31,7 @@ export function useCaseData() {
       for (const url of urls) {
         try {
           const path = '/cases.json'
-          const response = await axios.get(url + path, {
+          const response = await axios.get(url + path + '?t=' + Date.now(), {
             timeout: 5000 // 设置5秒超时
           })
           const data = response.data && response.data.data ? response.data.data : []
