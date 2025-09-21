@@ -41,12 +41,11 @@ onMounted(() => {
 </script>
 
 <template>
+  <AsideSponsors></AsideSponsors>
   <div class="wwads-container" v-if="!showTemp">
     <div class="wwads-cn wwads-vertical" data-id="372"></div>
   </div>
   <div class="aside-temp wwads-vertical" v-if="showTemp"></div>
-
-  <AsideSponsors></AsideSponsors>
 </template>
 
 <style>
