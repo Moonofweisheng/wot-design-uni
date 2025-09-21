@@ -139,6 +139,11 @@ export default defineConfig({
         {
           text: 'Donor List',
           link: '/en-US/reward/donor',
+        },
+        // 赞助渠道
+        {
+          text: 'Sponsor',
+          link: '/reward/sponsor',
         }
       ],
       '/en-US/component/': [

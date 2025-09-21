@@ -1,28 +1,28 @@
-/*
- * @Author: weisheng
- * @Date: 2025-09-21 15:01:29
- * @LastEditTime: 2025-09-21 18:00:09
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/theme/composables/sponsor.ts
- * 记得注释
- */
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
+export type GridSize = 'xmini' | 'mini' | 'small' | 'medium' | 'big'
 
-const data = ref()
+export interface Sponsor {
+  name: string
+  img: string
+  url: string
+}
+export interface Sponsors {
+  tier?: string
+  size?: GridSize
+  items: Sponsor[]
+}
 
-export function useSponsor() {
+
+const data = ref<Sponsors[]>([])
+
+export function useAdSponsor() {
   onMounted(async () => {
-    if (data.value) {
-      return
-    }
-
     // 定义数据源URL列表，按优先级排序
     const urls = [
-      'https://sponsor.wot-ui.cn/wot-design-uni.json',
-      'https://wot-sponsors.pages.dev/wot-design-uni.json'
+      'https://sponsor.wot-ui.cn/sponsor.json',
+      'https://wot-sponsors.pages.dev/sponsor.json'
     ]
 
     // 尝试从多个数据源获取数据
@@ -32,13 +32,13 @@ export function useSponsor() {
           const response = await axios.get(url, {
             timeout: 5000 // 设置5秒超时
           })
-          return response.data // 成功获取数据后直接返回
+          return response?.data?.data // 成功获取数据后直接返回
         } catch (error) {
           console.warn(`Failed to fetch from ${url}`)
           // 继续尝试下一个URL
         }
       }
-      return null // 所有数据源都失败时返回null
+      return [] // 所有数据源都失败时返回null
     }
 
     data.value = await fetchData()

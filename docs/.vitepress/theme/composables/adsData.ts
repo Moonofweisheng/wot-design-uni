@@ -13,7 +13,7 @@ export function useAds() {
   onMounted(async () => {
     // 定义数据源URL列表，按优先级排序
     const urls = [
-      'https://sponsor.wot-design-uni.cn/ads.json',
+      'https://sponsor.wot-ui.cn/ads.json',
       'https://wot-sponsors.pages.dev/ads.json'
     ]
 
