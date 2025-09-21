@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2025-08-30 13:06:10
+ * @LastEditTime: 2025-09-21 15:07:39
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/docs/.vitepress/theme/composables/cases.ts
+ * 记得注释
+ */
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
@@ -13,7 +22,7 @@ export function useCaseData() {
   onMounted(async () => {
     // 定义数据源URL列表，按优先级排序
     const urls = [
-      'https://sponsor.wot-design-uni.cn',
+      'https://sponsor.wot-ui.cn',
       'https://wot-sponsors.pages.dev'
     ]
 

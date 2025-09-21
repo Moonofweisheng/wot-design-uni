@@ -147,7 +147,11 @@ export default defineConfig({
         {
           text: '榜上有名',
           link: '/reward/donor',
-        }
+        },
+        {
+          text: '成为赞助者',
+          link: '/reward/sponsor',
+        },
       ],
       '/component/': [
         {

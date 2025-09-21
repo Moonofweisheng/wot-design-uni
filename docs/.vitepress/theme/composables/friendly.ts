@@ -18,7 +18,7 @@ export function useFriendly() {
 
     // 定义数据源URL列表，按优先级排序
     const urls = [
-      'https://sponsor.wot-design-uni.cn/friendly.json',
+      'https://sponsor.wot-ui.cn/friendly.json',
       'https://wot-sponsors.pages.dev/friendly.json'
     ]
 
