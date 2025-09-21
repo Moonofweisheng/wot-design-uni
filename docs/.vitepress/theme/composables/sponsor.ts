@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2025-09-21 15:01:29
- * @LastEditTime: 2025-09-21 18:00:09
- * @LastEditors: weisheng
- * @Description: 
- * @FilePath: /wot-design-uni/docs/.vitepress/theme/composables/sponsor.ts
- * 记得注释
- */
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
@@ -29,7 +20,7 @@ export function useSponsor() {
     const fetchData = async () => {
       for (const url of urls) {
         try {
-          const response = await axios.get(url, {
+          const response = await axios.get(url + '?t=' + Date.now(), {
             timeout: 5000 // 设置5秒超时
           })
           return response.data // 成功获取数据后直接返回
