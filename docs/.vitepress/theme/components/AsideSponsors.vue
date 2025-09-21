@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2025-09-21 17:13:45
- * @LastEditTime: 2025-09-21 19:08:34
+ * @LastEditTime: 2025-09-21 19:33:17
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/AsideSponsors.vue
@@ -86,6 +86,10 @@ const isGoldSponsorsOdd = computed(() => {
 </template>
 
 <style>
+.VPDocAsideSponsors{
+  margin-top: 12px;
+}
+
 .vp-sponsor-grid-text {
   color: var(--vp-c-text-2);
   font-size: 12px;

@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-10-12 22:09:33
- * @LastEditTime: 2025-09-21 19:12:31
+ * @LastEditTime: 2025-09-21 19:40:24
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/index.ts
@@ -24,7 +24,6 @@ import SpecialSponsor from './components/SpecialSponsor.vue'
 import ElementPlus, { ElMessageBox } from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import AsideSponsors from './components/AsideSponsors.vue'
 // 声明百度统计全局变量
 declare global {
   interface Window {
@@ -39,7 +38,6 @@ export default {
     return h(Theme.Layout, null, {
       'home-hero-info-after':()=>h(HomeStar),
       'home-hero-after': () => h(SpecialSponsor),
-      'aside-ads-before': () => h(AsideSponsors),
       'home-features-after': () => h(HomeFriendly),
       'layout-bottom':() => h(CustomFooter),
       'nav-bar-title-after': () => h(NavBarTitleAfter),

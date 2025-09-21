@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import AsideSponsors from './AsideSponsors.vue'
+
+
+const showTemp = ref(false)
 
 // function called if wwads is blocked
 function ABDetected() {
@@ -28,6 +32,7 @@ onMounted(() => {
   docReady(() => {
     setTimeout(() => {
       if ((window as any)._AdBlockInit === undefined) {
+        showTemp.value = true
         ABDetected()
       }
     }, 3000)
@@ -36,10 +41,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="wwads-container">
+  <div class="wwads-container" v-if="!showTemp">
     <div class="wwads-cn wwads-vertical" data-id="372"></div>
   </div>
-  <div class="aside-temp wwads-vertical"></div>
+  <div class="aside-temp wwads-vertical" v-if="showTemp"></div>
+
+  <AsideSponsors></AsideSponsors>
 </template>
 
 <style>

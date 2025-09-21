@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2025-09-21 19:12:03
+ * @LastEditTime: 2025-09-21 19:37:14
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/docs/.vitepress/theme/composables/adSponsor.ts
+ * 记得注释
+ */
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
