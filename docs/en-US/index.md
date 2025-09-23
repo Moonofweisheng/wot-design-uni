@@ -25,11 +25,8 @@ hero:
       text: 🥤Buy Me a Coffee
       link: /en-US/reward/reward
     - theme: brand
-      text: Consultation Service
-      link: /en-US/guide/consultation
-    - theme: alt
-      text: ⭐ Showcase
-      link: /en-US/guide/cases
+      text: ✨Starter
+      link: "https://starter.wot-ui.cn/"
 
 features:
   - icon: 🎯

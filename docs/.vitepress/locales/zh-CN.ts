@@ -87,8 +87,16 @@ export default defineConfig({
       { text: '🥤一杯咖啡', link: '/reward/reward', activeMatch: '/reward/' },
       { text: '博客', link: 'https://blog.wot-ui.cn/' },
       {
+        text: '模板', items: [
+          { text: '快速上手模板 wot-starter', link: 'https://start.wot-ui.cn/' },
+          { text: 'vitesse-uni-app', link: 'https://vitesse-docs.netlify.app/' },
+          { text: 'wot-starter-retail', link: 'https://github.com/wot-ui/wot-starter-retail' },
+          { text: 'unibest', link: 'https://unibest.tech/' },
+        ]
+      },
+      {
         text: '资源', items: [
-          { text: '快速上手模板', link: 'https://github.com/wot-ui/wot-starter' },
+          { text: '快速上手模板', link: 'https://start.wot-ui.cn/' },
           { text: 'Vue3 uni-app路由库', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: '多平台小程序CI工具', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
