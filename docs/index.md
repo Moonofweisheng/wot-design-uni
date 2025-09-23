@@ -25,8 +25,8 @@ hero:
       text: 🥤一杯咖啡
       link: /reward/reward
     - theme: brand
-      text: 咨询服务
-      link: /guide/consultation
+      text: ✨上手模板
+      link: "https://starter.wot-ui.cn/"
 
 features:
   - icon: 🎯
