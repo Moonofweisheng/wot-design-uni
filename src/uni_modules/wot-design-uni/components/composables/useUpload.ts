@@ -233,8 +233,20 @@ export function useUpload(): UseUploadReturn {
     return new Promise((resolve, reject) => {
       switch (accept) {
         case 'image':
+          // #ifdef MP-WEIXIN
+          uni.chooseMedia({
+            count: multiple ? maxCount : 1,
+            mediaType: ['image'],
+            sourceType,
+            sizeType,
+            camera,
+            success: (res) => resolve(formatMedia(res)),
+            fail: reject
+          })
+          // #endif
+          // #ifndef MP-WEIXIN
           uni.chooseImage({
-            count: multiple ? Math.min(maxCount || 9, 9) : 1, // 默认9,最大9
+            count: multiple ? maxCount : 1,
             sizeType,
             sourceType,
             // #ifdef H5
@@ -243,8 +255,21 @@ export function useUpload(): UseUploadReturn {
             success: (res) => resolve(formatImage(res)),
             fail: reject
           })
+          // #endif
           break
         case 'video':
+          // #ifdef MP-WEIXIN
+          uni.chooseMedia({
+            count: multiple ? maxCount : 1,
+            mediaType: ['video'],
+            sourceType,
+            camera,
+            maxDuration,
+            success: (res) => resolve(formatMedia(res)),
+            fail: reject
+          })
+          // #endif
+          // #ifndef MP-WEIXIN
           uni.chooseVideo({
             sourceType,
             compressed,
@@ -256,11 +281,12 @@ export function useUpload(): UseUploadReturn {
             success: (res) => resolve(formatVideo(res)),
             fail: reject
           })
+          // #endif
           break
         // #ifdef MP-WEIXIN
         case 'media':
           uni.chooseMedia({
-            count: multiple ? Math.min(maxCount || 9, 9) : 1, // 默认9,最大9
+            count: multiple ? maxCount : 1,
             sourceType,
             sizeType,
             camera,
@@ -271,7 +297,7 @@ export function useUpload(): UseUploadReturn {
           break
         case 'file':
           uni.chooseMessageFile({
-            count: multiple ? Math.min(maxCount || 100, 100) : 1, // 默认100,最大100
+            count: multiple ? (isDef(maxCount) ? maxCount : 100) : 1,
             type: accept,
             extension,
             success: (res) => resolve(res.tempFiles),
@@ -282,7 +308,7 @@ export function useUpload(): UseUploadReturn {
         case 'all':
           // #ifdef H5
           uni.chooseFile({
-            count: multiple ? Math.min(maxCount || 100, 100) : 1, // 默认100,最大100
+            count: multiple ? maxCount : 1,
             type: accept,
             extension,
             success: (res) => resolve(res.tempFiles as ChooseFile[]),
@@ -291,7 +317,7 @@ export function useUpload(): UseUploadReturn {
           // #endif
           // #ifdef MP-WEIXIN
           uni.chooseMessageFile({
-            count: multiple ? Math.min(maxCount || 100, 100) : 1, // 默认100,最大100
+            count: multiple ? Number(maxCount) : 1,
             type: accept,
             extension,
             success: (res) => resolve(res.tempFiles),
@@ -301,9 +327,20 @@ export function useUpload(): UseUploadReturn {
 
           break
         default:
-          // 默认选择图片
+          // #ifdef MP-WEIXIN
+          uni.chooseMedia({
+            count: multiple ? maxCount : 1,
+            mediaType: ['image'],
+            sourceType,
+            sizeType,
+            camera,
+            success: (res) => resolve(formatMedia(res)),
+            fail: reject
+          })
+          // #endif
+          // #ifndef MP-WEIXIN
           uni.chooseImage({
-            count: multiple ? Math.min(maxCount || 9, 9) : 1, // 默认9,最大9
+            count: multiple ? maxCount : 1,
             sizeType,
             sourceType,
             // #ifdef H5
@@ -312,6 +349,7 @@ export function useUpload(): UseUploadReturn {
             success: (res) => resolve(formatImage(res)),
             fail: reject
           })
+          // #endif
           break
       }
     })

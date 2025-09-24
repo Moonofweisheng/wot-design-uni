@@ -175,6 +175,14 @@
         <wd-button type="success" @click="current8++">next</wd-button>
       </view>
     </demo-block>
+
+    <demo-block :title="$t('cha-cao-yong-fa')">
+      <wd-swiper :list="swiperList" autoplay v-model:current="current1" :indicator="{ type: 'dots-bar' }" @click="handleClick" @change="onChange">
+        <template #default="{ item }">
+          <image :src="item as string" mode="aspectFill" style="width: 100%; height: 100%" />
+        </template>
+      </wd-swiper>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -184,25 +192,25 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const swiperList = ref([
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/meng.jpg'
+  'https://wot-ui.cn/assets/redpanda.jpg',
+  'https://wot-ui.cn/assets/capybara.jpg',
+  'https://wot-ui.cn/assets/panda.jpg',
+  'https://wot-ui.cn/assets/moon.jpg',
+  'https://wot-ui.cn/assets/meng.jpg'
 ])
 
 const customSwiperList = ref([
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg', title: t('xiao-xiong-mao') },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg', title: t('ka-pi-ba-la') },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg', title: t('da-xiong-mao') },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg', title: t('shi-hua-zhong-guo') }
+  { url: 'https://wot-ui.cn/assets/redpanda.jpg', title: t('xiao-xiong-mao') },
+  { url: 'https://wot-ui.cn/assets/capybara.jpg', title: t('ka-pi-ba-la') },
+  { url: 'https://wot-ui.cn/assets/panda.jpg', title: t('da-xiong-mao') },
+  { url: 'https://wot-ui.cn/assets/moon.jpg', title: t('shi-hua-zhong-guo') }
 ])
 
 const videoList = ref([
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_115503.mp4',
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_150752.mp4',
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_155516.mp4',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg'
+  'https://wot-ui.cn/assets/moon.jpg'
 ])
 
 const current = ref<number>(0)

@@ -1,6 +1,5 @@
 <template>
   <page-wraper>
-    <wd-toast />
     <demo-block transparent>
       <wd-cell-group border>
         <wd-picker :label="$t('dan-lie-xuan-xiang')" v-model="value0" :columns="columns0" />
@@ -14,7 +13,16 @@
         <wd-picker label="before-confirm" :columns="columns0" v-model="value7" :before-confirm="beforeConfirm" />
         <wd-picker :label="$t('cuo-wu')" v-model="value10" error :columns="columns0" />
         <wd-picker :label="$t('bi-tian')" v-model="value11" :columns="columns0" required />
-        <wd-picker :label="$t('ke-qing-kong')" :clearable="true" v-model="value15" :columns="columns5" :column-change="onChangeDistrict" />
+        <wd-picker :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value16" :columns="columns0" required marker-side="after" />
+        <wd-picker
+          :label="$t('duo-ji-lian-dong-ke-qing-kong')"
+          clearable
+          v-model="value15"
+          :columns="columns5"
+          :column-change="onChangeDistrict"
+          @clear="handleClear"
+          @confirm="handleConfirmClear"
+        />
       </wd-cell-group>
     </demo-block>
     <demo-block :title="$t('label-bu-chuan-0')" transparent>
@@ -37,6 +45,7 @@
         </wd-picker>
       </view>
     </demo-block>
+    <wd-toast />
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -155,6 +164,7 @@ const value11 = ref(t('xuanXiang_3-0'))
 const value12 = ref(t('xuanXiang_3-0'))
 const value13 = ref(t('xuanXiang_3-0'))
 const value14 = ref(t('xuanXiang_3-0'))
+const value16 = ref(t('xuanXiang_2-0'))
 
 const columns6 = ref([
   [t('zhong-shan-da-xue-0'), t('zhong-nan-da-xue-1'), t('hua-nan-li-gong-da-xue-0')],
@@ -207,6 +217,16 @@ const beforeConfirm: PickerBeforeConfirm = (value, resolve, picker) => {
 
 function handleConfirm({ value }: any) {
   value8.value = value
+}
+
+function handleClear() {
+  value15.value = []
+  toast.success(t('xuan-xiang-yi-jing-qing-kong'))
+}
+
+function handleConfirmClear({ value }: any) {
+  value15.value = value
+  toast.success(t('xuan-xiang-yi-jing-qing-kong'))
 }
 </script>
 <style lang="scss" scoped>

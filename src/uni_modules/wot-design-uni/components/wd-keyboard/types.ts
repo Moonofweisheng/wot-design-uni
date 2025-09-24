@@ -3,6 +3,7 @@ import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../c
 
 export type KeyboardMode = 'default' | 'custom' | 'car'
 export type KeyType = '' | 'delete' | 'extra' | 'close'
+export type CarKeyboardLang = 'zh' | 'en'
 
 export interface Key {
   text?: number | string // key文本
@@ -75,5 +76,17 @@ export const keyboardProps = {
   /**
    * 额外按键
    */
-  extraKey: [String, Array] as PropType<string | Array<string>>
+  extraKey: [String, Array] as PropType<string | Array<string>>,
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 车牌键盘语言模式 当mode=car时生效
+   */
+  carLang: String as PropType<CarKeyboardLang>,
+  /**
+   * 是否自动切换车牌键盘语言 当mode=car且carLang是非受控状态时生效
+   */
+  autoSwitchLang: makeBooleanProp(false)
 }

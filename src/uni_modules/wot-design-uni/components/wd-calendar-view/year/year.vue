@@ -36,7 +36,7 @@ import { deepClone, isArray, isFunction } from '../../common/util'
 import { compareMonth, formatYearTitle, getDateByDefaultTime, getItemClass, getMonthByOffset, getMonthOffset } from '../utils'
 import { useToast } from '../../wd-toast'
 import { useTranslate } from '../../composables/useTranslate'
-import { dayjs } from '../../common/dayjs'
+import dayjs from '../../../dayjs'
 import { yearProps } from './types'
 import type { CalendarDayItem, CalendarDayType } from '../types'
 

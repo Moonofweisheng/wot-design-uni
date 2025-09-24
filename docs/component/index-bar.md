@@ -1,4 +1,4 @@
-# IndexBar 索引栏 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.2.21</el-tag>
+# IndexBar 索引栏
 
 用于列表的索引分类显示和快速定位。
 

@@ -16,8 +16,8 @@
           <wd-drop-menu-item ref="dropMenu" :title="$t('shai-xuan')" @opened="handleOpened">
             <view>
               <wd-slider v-model="valuetest" ref="slider" />
-              <wd-cell :title="$t('biao-ti-wen-zi-10')" value="内容" />
-              <wd-cell :title="$t('biao-ti-wen-zi-10')" label="$t('miaoShuXinXi-0')" value="内容" />
+              <wd-cell :title="$t('biao-ti-wen-zi-10')" :value="$t('nei-rong')" />
+              <wd-cell :title="$t('biao-ti-wen-zi-10')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
               <view style="padding: 0 10px 20px; box-sizing: border-box">
                 <wd-button block size="large" @click="confirm">{{ $t('zhu-yao-an-niu') }}</wd-button>
               </view>
@@ -37,7 +37,7 @@
       </demo-block>
       <demo-block :title="$t('zi-ding-yi-cai-dan-tu-biao')" transparent>
         <wd-drop-menu>
-          <wd-drop-menu-item :title="$t('di-tu')" icon="location" icon-size="24px" />
+          <wd-drop-menu-item :title="$t('di-tu')" icon="location" icon-size="14px" />
         </wd-drop-menu>
       </demo-block>
       <demo-block :title="$t('yi-bu-da-kai-guan-bi')" transparent>
@@ -47,7 +47,7 @@
       </demo-block>
       <demo-block :title="$t('xiang-shang-dan-chu')" transparent>
         <wd-drop-menu direction="up">
-          <wd-drop-menu-item v-model="value6" :options="option1" @change="handleChange6" />
+          <wd-drop-menu-item v-model="value6" :options="option1" @change="handleChange6" custom-title="custom-title" custom-icon="custom-icon" />
           <wd-drop-menu-item v-model="value7" :options="option2" @change="handleChange7" />
         </wd-drop-menu>
       </demo-block>
@@ -162,5 +162,12 @@ const handleBeforeToggle: DropMenuItemBeforeToggle = ({ status, resolve }) => {
   display: flex;
   background: #fff;
   text-align: center;
+}
+
+:deep(.custom-title) {
+  color: red;
+}
+:deep(.custom-icon) {
+  color: red;
 }
 </style>

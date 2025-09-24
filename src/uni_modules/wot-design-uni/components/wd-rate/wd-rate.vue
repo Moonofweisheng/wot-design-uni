@@ -12,9 +12,9 @@
         :name="isActive(rate) ? activeIcon : icon"
         :size="size"
         :custom-style="rate === '100%' ? iconActiveStyle : iconStyle"
-        @click="changeRate(index, false)"
+        @click="handleClick(index, false)"
       />
-      <view v-if="props.allowHalf" class="wd-rate__item-half" @click.stop="changeRate(index, true)">
+      <view v-if="props.allowHalf" class="wd-rate__item-half" @click.stop="handleClick(index, true)">
         <wd-icon
           custom-class="wd-rate__item-star"
           :name="isActive(rate) ? activeIcon : icon"
@@ -125,12 +125,30 @@ function computeActiveValue() {
   }
   activeValue.value = tempActiveValue
 }
+
 /**
- * @description 点击icon触发组件的change事件
+ * @description 处理点击事件
+ * @param index 点击的索引
+ * @param isHalf 是否为半星
  */
-function changeRate(index: number, isHalf: boolean) {
-  if (props.readonly || props.disabled) return
-  const value = isHalf ? index + 0.5 : index + 1
+function handleClick(index: number, isHalf: boolean) {
+  const { readonly, disabled, clearable, allowHalf, modelValue } = props
+  if (readonly || disabled) return
+  let value = isHalf ? index + 0.5 : index + 1
+  // 点击清空逻辑：当点击的值与当前modelValue相等且等于最小值时允许清空
+  if (clearable) {
+    const minValue = allowHalf ? 0.5 : 1
+    if (value === modelValue && value === minValue) {
+      value = 0
+    }
+  }
+  updateValue(value)
+}
+
+/**
+ * @description 设置评分值并触发事件
+ */
+function updateValue(value: number) {
   emit('update:modelValue', value)
   emit('change', {
     value
@@ -149,7 +167,8 @@ async function onTouchMove(event: TouchEvent) {
     const isHalf = props.allowHalf && clientX - target.left! < itemWidth / 2
     const value = isHalf ? targetIndex + 0.5 : targetIndex + 1
     if (value >= 0.5) {
-      changeRate(targetIndex, isHalf)
+      const value = isHalf ? targetIndex + 0.5 : targetIndex + 1
+      updateValue(value)
     }
   }
 }

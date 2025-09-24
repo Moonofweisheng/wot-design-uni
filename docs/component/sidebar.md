@@ -1,4 +1,4 @@
-# Sidebar 侧边导航 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.49</el-tag>
+# Sidebar 侧边导航
 
 垂直展示的导航栏，用于在不同的内容区域之间进行切换。
 

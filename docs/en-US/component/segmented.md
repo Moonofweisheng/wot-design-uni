@@ -1,4 +1,4 @@
-# Segmented <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.23</el-tag>
+# Segmented
 
 Segmented is used to display multiple options and allow users to select a single option.
 
@@ -74,14 +74,14 @@ const list = ref([
     value: 'Li Lei',
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg'
+      avatar: 'https://wot-ui.cn/assets/redpanda.jpg'
     }
   },
   {
     value: 'Han Meimei',
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg'
+      avatar: 'https://wot-ui.cn/assets/capybara.jpg'
     }
   }
 ])

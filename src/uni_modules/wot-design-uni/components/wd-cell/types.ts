@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { baseProps, makeArrayProp, makeBooleanProp, makeStringProp, makeNumericProp } from '../common/props'
+import { baseProps, makeArrayProp, makeBooleanProp, makeStringProp, makeNumericProp, numericProp } from '../common/props'
 
 import { type FormItemRule } from '../wd-form/types'
 
@@ -17,6 +17,10 @@ export const cellProps = {
    * 图标类名
    */
   icon: String,
+  /**
+   * 图标大小
+   */
+  iconSize: numericProp,
   /**
    * 描述信息
    */
@@ -84,7 +88,24 @@ export const cellProps = {
   /**
    * title 使用 slot 时的自定义样式
    */
-  customTitleClass: makeStringProp('')
+  customTitleClass: makeStringProp(''),
+  /**
+   * value 文字对齐方式，可选值：left、right、center
+   */
+  valueAlign: makeStringProp<'left' | 'right'>('right'),
+  /**
+   * 是否超出隐藏，显示省略号
+   */
+  ellipsis: makeBooleanProp(false),
+  /**
+   * 是否启用title插槽，默认启用，用来解决插槽传递时v-slot和v-if冲突问题。
+   * 问题见：https://github.com/dcloudio/uni-app/issues/4847
+   */
+  useTitleSlot: makeBooleanProp(true),
+  /**
+   * 必填标记位置，可选值：before（标签前）、after（标签后）
+   */
+  markerSide: makeStringProp<'before' | 'after'>('before')
 }
 
 export type CellProps = ExtractPropTypes<typeof cellProps>

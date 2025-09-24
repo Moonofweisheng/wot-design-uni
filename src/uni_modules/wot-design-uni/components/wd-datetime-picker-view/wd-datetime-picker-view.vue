@@ -1,21 +1,19 @@
 <template>
-  <view>
-    <wd-picker-view
-      ref="datePickerview"
-      :custom-class="customClass"
-      :custom-style="customStyle"
-      :immediate-change="immediateChange"
-      v-model="pickerValue"
-      :columns="columns"
-      :columns-height="columnsHeight"
-      :columnChange="columnChange"
-      :loading="loading"
-      :loading-color="loadingColor"
-      @change="onChange"
-      @pickstart="onPickStart"
-      @pickend="onPickEnd"
-    ></wd-picker-view>
-  </view>
+  <wd-picker-view
+    ref="datePickerview"
+    :custom-class="customClass"
+    :custom-style="customStyle"
+    :immediate-change="immediateChange"
+    v-model="pickerValue"
+    :columns="columns"
+    :columns-height="columnsHeight"
+    :columnChange="columnChange"
+    :loading="loading"
+    :loading-color="loadingColor"
+    @change="onChange"
+    @pickstart="onPickStart"
+    @pickend="onPickEnd"
+  ></wd-picker-view>
 </template>
 <script lang="ts">
 export default {
@@ -29,15 +27,10 @@ export default {
 <script lang="ts" setup>
 import wdPickerView from '../wd-picker-view/wd-picker-view.vue'
 import { getCurrentInstance, onBeforeMount, ref, watch } from 'vue'
-import { debounce, isFunction, isDef, padZero, range, isArray, isString } from '../common/util'
-import {
-  getPickerValue,
-  datetimePickerViewProps,
-  type DatetimePickerViewColumnType,
-  type DatetimePickerViewOption,
-  type DatetimePickerViewExpose
-} from './types'
+import { debounce, isDef, padZero, range, isArray, isString } from '../common/util'
+import { datetimePickerViewProps, type DatetimePickerViewColumnType, type DatetimePickerViewOption, type DatetimePickerViewExpose } from './types'
 import type { PickerViewInstance } from '../wd-picker-view/types'
+import { getPickerValue } from './util'
 
 // 本地时间戳
 /** @description 判断时间戳是否合法 */
@@ -78,25 +71,15 @@ const innerValue = ref<null | string | number>(null)
 const columns = ref<DatetimePickerViewOption[][]>([])
 // 传递给pickerView的value的数据
 const pickerValue = ref<string | number | boolean | string[] | number[] | boolean[]>([])
-// 自定义组件是否已经调用created hook
+// 是否已经初始化
 const created = ref<boolean>(false)
 
 const { proxy } = getCurrentInstance() as any
 
-defineExpose<DatetimePickerViewExpose>({
-  updateColumns,
-  setColumns,
-  getSelects,
-  correctValue,
-  getPickerValue,
-  getOriginColumns,
-  ...props
-})
 /**
  * @description updateValue 防抖函数的占位符
  */
 const updateValue = debounce(() => {
-  // 只有等created hook初始化数据之后，observer才能执行此操作
   if (!created.value) return
   const val = correctValue(props.modelValue)
   const isEqual = val === innerValue.value
@@ -125,54 +108,25 @@ watch(
     if (type.indexOf(target) === -1) {
       console.error(`type must be one of ${type}`)
     }
-    // 每次type更新时都需要刷新整个列表
-    updateValue()
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  () => props.filter,
-  (fn) => {
-    if (fn && !isFunction(fn)) {
-      console.error('The type of filter must be Function')
-    }
-    updateValue()
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  () => props.formatter,
-  (fn) => {
-    if (fn && !isFunction(fn)) {
-      console.error('The type of formatter must be Function')
-    }
-    updateValue()
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  () => props.columnFormatter,
-  (fn) => {
-    if (fn && !isFunction(fn)) {
-      console.error('The type of columnFormatter must be Function')
-    }
-    updateValue()
   },
   { deep: true, immediate: true }
 )
 
 watch(
   [
+    () => props.type,
+    () => props.filter,
+    () => props.formatter,
+    () => props.columnFormatter,
     () => props.minDate,
     () => props.maxDate,
     () => props.minHour,
     () => props.maxHour,
     () => props.minMinute,
-    () => props.minMinute,
-    () => props.maxMinute
+    () => props.maxMinute,
+    () => props.minSecond,
+    () => props.maxSecond,
+    () => props.useSecond
   ],
   () => {
     updateValue()
@@ -260,7 +214,7 @@ function getOriginColumns() {
  */
 function getRanges(): Array<{ type: DatetimePickerViewColumnType; range: number[] }> {
   if (props.type === 'time') {
-    return [
+    const result: Array<{ type: DatetimePickerViewColumnType; range: number[] }> = [
       {
         type: 'hour',
         range: [props.minHour, props.maxHour]
@@ -270,10 +224,17 @@ function getRanges(): Array<{ type: DatetimePickerViewColumnType; range: number[
         range: [props.minMinute, props.maxMinute]
       }
     ]
+    if (props.useSecond) {
+      result.push({
+        type: 'second',
+        range: [props.minSecond, props.maxSecond]
+      })
+    }
+    return result
   }
 
-  const { maxYear, maxDate, maxMonth, maxHour, maxMinute } = getBoundary('max', innerValue.value as number)
-  const { minYear, minDate, minMonth, minHour, minMinute } = getBoundary('min', innerValue.value as number)
+  const { maxYear, maxDate, maxMonth, maxHour, maxMinute, maxSecond } = getBoundary('max', innerValue.value as number)
+  const { minYear, minDate, minMonth, minHour, minMinute, minSecond } = getBoundary('min', innerValue.value as number)
 
   const result: Array<{ type: DatetimePickerViewColumnType; range: number[] }> = [
     {
@@ -298,6 +259,13 @@ function getRanges(): Array<{ type: DatetimePickerViewColumnType; range: number[
     }
   ]
 
+  if (props.type === 'datetime' && props.useSecond) {
+    result.push({
+      type: 'second',
+      range: [minSecond, maxSecond]
+    })
+  }
+
   if (props.type === 'date') result.splice(3, 2)
   if (props.type === 'year-month') result.splice(2, 3)
   if (props.type === 'year') result.splice(1, 4)
@@ -316,15 +284,19 @@ function correctValue(value: string | number | Date): string | number {
     value = props.minDate
   } else if (!isDateType && !value) {
     // 非Date类型，无入参，使用最小小时代替
-    value = `${padZero(props.minHour)}:00`
+    value = props.useSecond ? `${padZero(props.minHour)}:00:00` : `${padZero(props.minHour)}:00`
   }
 
   // 当type为time时
   if (!isDateType) {
     // 非Date类型，直接走此逻辑
-    let [hour, minute] = (isString(value) ? value : value.toString()).split(':')
+    let [hour, minute, second = '00'] = (isString(value) ? value : value.toString()).split(':')
     hour = padZero(range(Number(hour), props.minHour, props.maxHour))
     minute = padZero(range(Number(minute), props.minMinute, props.maxMinute))
+    if (props.useSecond) {
+      second = padZero(range(Number(second), props.minSecond, props.maxSecond))
+      return `${hour}:${minute}:${second}`
+    }
     return `${hour}:${minute}`
   }
 
@@ -347,12 +319,14 @@ function getBoundary(type: 'min' | 'max', innerValue: number) {
   let date: number = 1
   let hour: number = 0
   let minute: number = 0
+  let second: number = 0
 
   if (type === 'max') {
     month = 12
     date = getMonthEndDay(value.getFullYear(), value.getMonth() + 1)
     hour = 23
     minute = 59
+    second = 59
   }
 
   if (value.getFullYear() === year) {
@@ -363,6 +337,9 @@ function getBoundary(type: 'min' | 'max', innerValue: number) {
         hour = boundary.getHours()
         if (value.getHours() === hour) {
           minute = boundary.getMinutes()
+          if (value.getMinutes() === minute) {
+            second = boundary.getSeconds()
+          }
         }
       }
     }
@@ -372,7 +349,8 @@ function getBoundary(type: 'min' | 'max', innerValue: number) {
     [`${type}Month`]: month,
     [`${type}Date`]: date,
     [`${type}Hour`]: hour,
-    [`${type}Minute`]: minute
+    [`${type}Minute`]: minute,
+    [`${type}Second`]: second
   }
 }
 
@@ -382,7 +360,7 @@ function getBoundary(type: 'min' | 'max', innerValue: number) {
  * @return {Array}
  */
 function updateColumnValue(value: string | number) {
-  const values = getPickerValue(value, props.type)
+  const values = getPickerValue(value, props.type, props.useSecond)
   // 更新pickerView的value,columns
   if (props.modelValue !== value) {
     emit('update:modelValue', value)
@@ -401,13 +379,17 @@ function updateColumnValue(value: string | number) {
  * @return {date} innerValue
  */
 function updateInnerValue() {
-  const { type } = props
+  const { type, useSecond } = props
   let innerValue: string | number = ''
   const pickerVal = datePickerview.value?.getValues() || []
   const values = isArray(pickerVal) ? pickerVal : [pickerVal]
 
   if (type === 'time') {
-    innerValue = `${padZero(values[0])}:${padZero(values[1])}`
+    if (useSecond) {
+      innerValue = `${padZero(values[0])}:${padZero(values[1])}:${padZero(values[2])}`
+    } else {
+      innerValue = `${padZero(values[0])}:${padZero(values[1])}`
+    }
     return innerValue
   }
 
@@ -425,15 +407,19 @@ function updateInnerValue() {
     date = (Number(values[2]) && parseInt(String(values[2]))) > maxDate ? maxDate : values[2] && parseInt(String(values[2]))
   }
 
-  // 处理 时分 索引位3，4
+  // 处理 时分秒 索引位3，4，5
   let hour = 0
   let minute = 0
+  let second = 0
 
   if (type === 'datetime') {
     hour = Number(values[3]) && parseInt(values[3])
     minute = Number(values[4]) && parseInt(values[4])
+    if (useSecond) {
+      second = Number(values[5]) && parseInt(values[5])
+    }
   }
-  const value = new Date(Number(year), Number(month) - 1, Number(date), hour, minute).getTime()
+  const value = new Date(Number(year), Number(month) - 1, Number(date), hour, minute, second).getTime()
 
   innerValue = correctValue(value)
   return innerValue
@@ -456,16 +442,20 @@ function columnChange(picker: PickerViewInstance) {
   date = date > maxDate ? maxDate : date
   let hour: number = 0
   let minute: number = 0
+  let second: number = 0
   if (props.type === 'datetime') {
     hour = Number(values[3])
     minute = Number(values[4])
+    if (props.useSecond) {
+      second = Number(values[5])
+    }
   }
-  const value = new Date(year, month - 1, date, hour, minute).getTime()
+  const value = new Date(year, month - 1, date, hour, minute, second).getTime()
   /** 根据计算选中项的时间戳，重新计算所有的选项列表 */
   // 更新选中时间戳
   innerValue.value = correctValue(value)
-  // 根据innerValue获取最新的时间表，重新生成对应的数据源
 
+  // 根据innerValue获取最新的时间表，重新生成对应的数据源
   const newColumns = updateColumns()
   // 深拷贝联动之前的选中项
   const selectedIndex = picker.getSelectedIndex().slice(0)
@@ -497,8 +487,12 @@ function getSelects() {
   if (isArray(pickerVal)) return pickerVal
   return [pickerVal]
 }
-</script>
 
-<style lang="scss" scoped>
-@import './index.scss';
-</style>
+defineExpose<DatetimePickerViewExpose>({
+  updateColumns,
+  setColumns,
+  getSelects,
+  correctValue,
+  getOriginColumns
+})
+</script>

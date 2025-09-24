@@ -1,7 +1,6 @@
 <template>
   <page-wraper>
-    <wd-toast />
-    <view style="margin: 20px 0">
+    <view>
       <wd-cell-group border>
         <wd-select-picker :label="$t('xuan-ze-di-zhi')" v-model="value1" :columns="columns1" @confirm="handleConfirm1" />
         <wd-select-picker :label="$t('lei-xing-qie-huan')" type="radio" v-model="value2" :columns="columns1" @confirm="handleConfirm2" />
@@ -21,6 +20,14 @@
         <wd-select-picker :label="$t('biaoTi-0')" v-model="value10" :title="$t('duo-xuan')" :columns="columns1" @confirm="handleConfirm10" />
         <wd-select-picker :label="$t('cuo-wu')" error v-model="value11" :columns="columns1" @confirm="handleConfirm11" />
         <wd-select-picker clearable :label="$t('bi-tian')" required v-model="value12" :columns="columns1" @confirm="handleConfirm12" />
+        <wd-select-picker
+          :label="$t('bi-tian-xing-hao-zai-you-ce')"
+          required
+          v-model="value21"
+          :columns="columns1"
+          marker-side="after"
+          @confirm="handleConfirm21"
+        />
         <wd-select-picker :label="$t('ke-sou-suo')" filterable v-model="value13" :columns="columns1" @confirm="handleConfirm13" />
         <wd-select-picker
           :label="$t('dan-xuan-ke-sou-suo')"
@@ -66,6 +73,7 @@
         </wd-select-picker>
       </view>
     </demo-block>
+    <wd-toast />
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -161,6 +169,7 @@ const value17 = ref<string[]>(['102'])
 const value18 = ref<string>('102')
 const value19 = ref<string>('101')
 const value20 = ref<string>('101')
+const value21 = ref<string[]>(['102'])
 
 const customShow = ref<string>(t('she-chi-pin'))
 
@@ -245,6 +254,9 @@ function handleConfirm17({ value, selectedItems }: any) {
       return item.label
     })
     .join(', ')
+}
+function handleConfirm21({ value }: any) {
+  console.log(value)
 }
 </script>
 <style lang="scss" scoped></style>

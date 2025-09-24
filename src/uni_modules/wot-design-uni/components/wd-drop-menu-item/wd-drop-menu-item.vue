@@ -13,6 +13,7 @@
       :custom-class="customPopupClass"
       :modal="false"
       :close-on-click-modal="false"
+      :root-portal="rootPortal"
       @before-enter="beforeEnter"
       @after-enter="afterEnter"
       @before-leave="beforeLeave"
@@ -32,8 +33,7 @@
           <wd-icon
             v-if="(item[valueKey] !== '' ? item[valueKey] : item) === modelValue"
             :name="iconName"
-            size="20px"
-            :class="`wd-drop-item__icon ${customIcon}`"
+            :custom-class="`wd-drop-item__icon ${customIcon}`"
           />
         </view>
       </scroll-view>
@@ -65,14 +65,20 @@ import { isDef, isFunction } from '../common/util'
 import { dorpMenuItemProps, type DropMenuItemExpose } from './types'
 
 const props = defineProps(dorpMenuItemProps)
-const emit = defineEmits(['change', 'update:modelValue', 'open', 'opened', 'closed', 'close'])
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string | number): void
+  (e: 'change', event: { value: string | number; selectedItem: Record<string, any> }): void
+  (e: 'open'): void
+  (e: 'opened'): void
+  (e: 'close'): void
+  (e: 'closed'): void
+}>()
 
 const queue = inject<Queue | null>(queueKey, null)
 const showWrapper = ref<boolean>(false)
 const showPop = ref<boolean>(false)
 const position = ref<PopupType>()
 const zIndex = ref<number>(12)
-const modal = ref<boolean>(true)
 const duration = ref<number>(0)
 
 const { parent: dropMenu } = useParent(DROP_MENU_KEY)
@@ -180,7 +186,6 @@ function handleOpen() {
   showWrapper.value = true
   showPop.value = true
   if (dropMenu) {
-    modal.value = Boolean(dropMenu.props.modal)
     duration.value = Number(dropMenu.props.duration)
     position.value = dropMenu.props.direction === 'down' ? 'top' : 'bottom'
   }

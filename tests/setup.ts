@@ -92,7 +92,7 @@ vi.stubGlobal('uni', {
       scrollLeft: 0
     }
 
-    const mockQuery = {
+    const mockQuery: any = {
       // 支持 in 方法，用于组件内查询
       in: vi.fn((scope) => {
         currentScope = scope
@@ -235,7 +235,7 @@ vi.stubGlobal('uni', {
     let relativeToOptions: any = null
     let relativeToViewportOptions: any = null
 
-    const mockObserver = {
+    const mockObserver: any = {
       relativeTo: vi.fn((selector, margins) => {
         relativeToOptions = { selector, margins }
         return mockObserver

@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2025-06-29 14:38:23
+ * @LastEditTime: 2025-06-29 17:05:39
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/docs/.vitepress/theme/components/HomeStar.vue
+ * 记得注释
+-->
 <script setup lang="ts"></script>
 
 <template>
@@ -7,9 +16,9 @@
  </a>
 
 
-<a href="https://github.com/Moonofweisheng/wot-design-uni">
+<!-- <a href="https://github.com/Moonofweisheng/wot-design-uni">
   <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-design-uni?style=flat-square">
- </a>
+ </a> -->
 
 <a href="https://www.npmjs.com/package/wot-design-uni">
   <img alt="npm" src="https://img.shields.io/npm/dm/wot-design-uni?logo=npm&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwot-design-uni&style=flat-square">

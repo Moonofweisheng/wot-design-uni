@@ -1,4 +1,4 @@
-# Circle Progress Bar <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.19</el-tag>
+# Circle Progress Bar
 
 A circular progress bar component that supports progress gradient animation.
 

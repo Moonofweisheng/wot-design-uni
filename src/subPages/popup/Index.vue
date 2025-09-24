@@ -45,6 +45,12 @@
         </wd-cell-group>
       </demo-block>
 
+      <demo-block title="嵌套弹窗" transparent>
+        <wd-cell-group border>
+          <wd-cell title="嵌套弹窗测试" is-link @click="handleClick11" />
+        </wd-cell-group>
+      </demo-block>
+
       <wd-popup v-model="show1" @close="handleClose1" custom-style="border-radius:32rpx;">
         <text class="custom-txt">{{ $t('dan-dan-dan') }}</text>
       </wd-popup>
@@ -72,6 +78,36 @@
         custom-style="height: 200px;"
         @close="handleClose10"
       ></wd-popup>
+
+      <!-- 嵌套弹窗测试：父弹窗 -->
+      <wd-popup v-model="show11" position="center" custom-style="padding: 20px; border-radius: 16px;" @close="handleClose11">
+        <view class="nested-popup-content">
+          <text class="nested-title">父弹窗（普通模式）</text>
+          <text class="nested-desc">这是一个普通的弹窗，点击下面的按钮会打开子弹窗</text>
+          <view class="nested-buttons">
+            <wd-button type="primary" size="small" @click="openChildPopup(false)">打开普通子弹窗</wd-button>
+            <wd-button type="success" size="small" @click="openChildPopup(true)">打开传送子弹窗</wd-button>
+          </view>
+        </view>
+
+        <!-- 嵌套弹窗测试：子弹窗（普通） -->
+        <wd-popup v-model="showChild1" position="center" custom-style="padding: 20px; border-radius: 16px;" @close="handleCloseChild1">
+          <view class="nested-popup-content">
+            <text class="nested-title">子弹窗（普通模式）</text>
+            <text class="nested-desc">这个子弹窗可能会被父弹窗的层级影响</text>
+            <wd-button type="primary" size="small" @click="handleCloseChild1">关闭</wd-button>
+          </view>
+        </wd-popup>
+
+        <!-- 嵌套弹窗测试：子弹窗（传送） -->
+        <wd-popup v-model="showChild2" root-portal position="center" custom-style="padding: 20px; border-radius: 16px;" @close="handleCloseChild2">
+          <view class="nested-popup-content">
+            <text class="nested-title">子弹窗（传送模式）</text>
+            <text class="nested-desc">这个子弹窗使用传送功能，避免了层级问题</text>
+            <wd-button type="success" size="small" @click="handleCloseChild2">关闭</wd-button>
+          </view>
+        </wd-popup>
+      </wd-popup>
     </page-wraper>
   </view>
 </template>
@@ -160,6 +196,37 @@ function handleClick10() {
 function handleClose10() {
   show10.value = false
 }
+
+const show11 = ref<boolean>(false)
+const showChild1 = ref<boolean>(false)
+const showChild2 = ref<boolean>(false)
+
+function handleClick11() {
+  show11.value = true
+}
+
+function handleClose11() {
+  show11.value = false
+  // 关闭父弹窗时也关闭子弹窗
+  showChild1.value = false
+  showChild2.value = false
+}
+
+function openChildPopup(useTeleport: boolean) {
+  if (useTeleport) {
+    showChild2.value = true
+  } else {
+    showChild1.value = true
+  }
+}
+
+function handleCloseChild1() {
+  showChild1.value = false
+}
+
+function handleCloseChild2() {
+  showChild2.value = false
+}
 </script>
 <style lang="scss" scoped>
 .wot-theme-dark {
@@ -177,5 +244,55 @@ function handleClose10() {
   align-items: center;
   font-size: 40rpx;
   border-radius: 32rpx;
+}
+
+.teleport-demo-txt {
+  color: black;
+  width: 300rpx;
+  height: 150rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.nested-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.nested-title {
+  color: black;
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+.nested-desc {
+  color: #666;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 1.5;
+  margin: 10rpx 0;
+}
+
+.nested-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.wot-theme-dark {
+  .nested-title {
+    color: $-dark-color;
+  }
+
+  .nested-desc {
+    color: $-dark-color3;
+  }
 }
 </style>

@@ -3,29 +3,6 @@ import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStrin
 
 export type DateTimeType = 'date' | 'year-month' | 'time' | 'datetime' | 'year'
 
-/**
- * @description 根据传入的值和类型，获取当前的选项数组，便于传入 pickerView
- * @param value
- * @param type picker类型
- * @return {Array} pickerValue
- */
-export function getPickerValue(value: string | number, type: DateTimeType) {
-  const values: number[] = []
-  const date = new Date(value)
-  if (type === 'time') {
-    const pair = String(value).split(':')
-    values.push(parseInt(pair[0]), parseInt(pair[1]))
-  } else {
-    values.push(date.getFullYear(), date.getMonth() + 1)
-    if (type === 'date') {
-      values.push(date.getDate())
-    } else if (type === 'datetime') {
-      values.push(date.getDate(), date.getHours(), date.getMinutes())
-    }
-  }
-  return values
-}
-
 export const datetimePickerViewProps = {
   ...baseProps,
   /**
@@ -44,7 +21,13 @@ export const datetimePickerViewProps = {
    * picker内部滚筒高
    */
   columnsHeight: makeNumberProp(217),
+  /**
+   * 选项的key
+   */
   valueKey: makeStringProp('value'),
+  /**
+   * 选项的label
+   */
   labelKey: makeStringProp('label'),
   /**
    * 选择器类型，可选值：date / year-month / time
@@ -87,13 +70,24 @@ export const datetimePickerViewProps = {
    */
   maxMinute: makeNumberProp(59),
   /**
+   * 是否显示秒选择，仅在 time 和 datetime 类型下生效
+   */
+  useSecond: makeBooleanProp(false),
+  /**
+   * 最小秒数，仅在 time 和 datetime 类型下生效
+   */
+  minSecond: makeNumberProp(0),
+  /**
+   * 最大秒数，仅在 time 和 datetime 类型下生效
+   */
+  maxSecond: makeNumberProp(59),
+  /**
    * 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
    */
-  immediateChange: makeBooleanProp(false),
-  startSymbol: makeBooleanProp(false)
+  immediateChange: makeBooleanProp(false)
 }
 
-export type DatetimePickerViewColumnType = 'year' | 'month' | 'date' | 'hour' | 'minute'
+export type DatetimePickerViewColumnType = 'year' | 'month' | 'date' | 'hour' | 'minute' | 'second'
 
 export type DatetimePickerViewOption = {
   label: string
@@ -104,7 +98,7 @@ export type DatetimePickerViewFilter = (type: DatetimePickerViewColumnType, valu
 
 export type DatetimePickerViewFormatter = (type: string, value: string) => string
 
-export type DatetimePickerViewColumnFormatter = (picker: DatetimePickerViewInstance) => DatetimePickerViewOption[][]
+export type DatetimePickerViewColumnFormatter = (picker: DatetimePickerViewExpose) => DatetimePickerViewOption[][]
 
 export type DatetimePickerViewProps = ExtractPropTypes<typeof datetimePickerViewProps>
 
@@ -113,7 +107,6 @@ export type DatetimePickerViewExpose = {
   setColumns: (columnList: DatetimePickerViewOption[][]) => void
   getSelects: () => Record<string, any> | Record<string, any>[] | undefined
   correctValue: (value: string | number) => string | number
-  getPickerValue: (value: string | number, type: DateTimeType) => number[]
   getOriginColumns: () => {
     type: DatetimePickerViewColumnType
     values: number[]

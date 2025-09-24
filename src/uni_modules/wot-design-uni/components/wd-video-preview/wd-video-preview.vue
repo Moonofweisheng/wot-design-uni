@@ -32,7 +32,7 @@ export default {
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { nextTick, reactive, ref } from 'vue'
 import { videoPreviewProps, type PreviewVideo, type VideoPreviewExpose } from './types'
-import useLockScroll from '../composables/useLockScroll'
+import { useLockScroll } from '../composables/useLockScroll'
 defineProps(videoPreviewProps)
 
 const showPopup = ref<boolean>(false)

@@ -1,4 +1,4 @@
-# Overlay <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.30</el-tag>
+# Overlay
 
 Create a mask layer to emphasize specific page elements and prevent users from performing other operations.
 

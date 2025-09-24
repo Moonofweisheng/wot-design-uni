@@ -36,6 +36,15 @@
           prefix-icon="location"
         />
         <wd-textarea :label="$t('qing-kong-an-niu')" clearable v-model="value4" :placeholder="$t('qing-shu-ru-0')" required />
+
+        <wd-textarea
+          :label="$t('bi-tian-xing-hao-zai-you-ce')"
+          clearable
+          v-model="value16"
+          :placeholder="$t('qing-shu-ru-0')"
+          required
+          marker-side="after"
+        />
         <wd-textarea
           :label="$t('zi-shu-xian-zhi-0')"
           :maxlength="240"
@@ -114,6 +123,7 @@ const value12 = ref<string>(t('zhi-du-zhi-du-zhi-du-0'))
 const value13 = ref<string>(t('jin-yong-jin-yong-jin-yong-0'))
 const value14 = ref<string>('')
 const value15 = ref<string>('')
+const value16 = ref<string>('')
 </script>
 <style lang="scss" scoped>
 .wot-theme-dark {

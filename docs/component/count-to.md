@@ -1,4 +1,7 @@
-# CountTo 数字滚动<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.3.8</el-tag>
+---
+version: 1.3.8
+---
+# CountTo 数字滚动
 
 数字滚动组件。
 

@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="logo" src="https://wot-design-uni.cn/logo.png" width="200">
+    <img alt="logo" src="https://wot-ui.cn/logo.png" width="200">
 </p>
 <h1 align="center">Wot UI</h1>
 
@@ -39,7 +39,7 @@
 </p>
 
 <p align="center">
-  🚀 <a href="https://wot-design-uni.cn">Documentation (Recommended)</a>&nbsp;
+  🚀 <a href="https://wot-ui.cn">Documentation (Recommended)</a>&nbsp;
   ✈️ <a href="https://wot-design-uni.pages.dev/">Documentation (Cloudflare)</a>&nbsp;
   🔥 <a href="https://wot-design-uni.netlify.app/">Documentation (Netlify)</a>&nbsp;
 </p>
@@ -59,26 +59,26 @@
 Scan the QR code to view the demo. Note: Due to WeChat review restrictions, the current WeChat Mini Program demo may not be the latest version. You can clone the code locally for preview.
 
 <p style="display:flex;gap:24px">
-<img src="https://wot-design-uni.cn/wx.jpg" width="200" height="200"/>
-<img src="https://wot-design-uni.cn/alipay.png" width="200" height="200" />
-<img src="https://wot-design-uni.cn/h5.png" width="200" height="200" />
-<img src="https://wot-design-uni.cn/android.png" width="200" height="200" />
+<img src="https://wot-ui.cn/wx.jpg" width="200" height="200"/>
+<img src="https://wot-ui.cn/alipay.png" width="200" height="200" />
+<img src="https://wot-ui.cn/h5.png" width="200" height="200" />
+<img src="https://wot-ui.cn/android.png" width="200" height="200" />
 </p>
 
 ## Quick Start
 
-For detailed instructions, see [Quick Start](https://wot-design-uni.cn/guide/quick-use.html).
+For detailed instructions, see [Quick Start](https://wot-ui.cn/guide/quick-use.html).
 
 ## Links
 
-- [FAQ](https://wot-design-uni.cn/guide/common-problems.html)
-- [Changelog](https://wot-design-uni.cn/guide/changelog.html)
+- [FAQ](https://wot-ui.cn/guide/common-problems.html)
+- [Changelog](https://wot-ui.cn/guide/changelog.html)
 - [Discussions](https://github.com/Moonofweisheng/wot-design-uni/discussions)
-- [QQ Group](https://wot-design-uni.cn/guide/join-group.html)
+- [QQ Group](https://wot-ui.cn/guide/join-group.html)
 
 ## Showcase
 
-Check out some excellent [examples](https://wot-design-uni.cn/guide/cases.html) here!
+Check out some excellent [examples](https://wot-ui.cn/guide/cases.html) here!
 
 We welcome contributions of excellent demos and cases. Feel free to submit your case in this [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16).
 
@@ -102,7 +102,7 @@ Developing a UI component library is time-consuming work, especially when it nee
 
 If you find Wot UI helpful in your development work, you can donate to support our development work. Any amount is welcome, even if it's just a cola.
 
-After donating, your nickname and message will be displayed on the [donor list](https://wot-design-uni.cn/reward/donor.html).
+After donating, your nickname and message will be displayed on the [donor list](https://wot-ui.cn/reward/donor.html).
 
 ### Afdian Donation
 
@@ -111,15 +111,15 @@ After donating, your nickname and message will be displayed on the [donor list](
 ### Scan to Donate
 
 <p>
-<img src="https://wot-design-uni.cn/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
-<img src="https://wot-design-uni.cn/alipayQrcode.jpg" width="200" height="200" />
+<img src="https://wot-ui.cn/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-ui.cn/alipayQrcode.jpg" width="200" height="200" />
 </p>
 
 ## Acknowledgments
 
 - [wot-design](https://github.com/jd-ftf/wot-design-mini) - Thanks to the wot-design team for their years of maintenance.
 - [uni-helper](https://github.com/uni-helper) - Thanks to the uni-helper team for providing uni-app tool libraries.
-- [Donors](https://wot-design-uni.cn/reward/donor.html) - Thanks to all donors who help Wot UI grow better.
+- [Donors](https://wot-ui.cn/reward/donor.html) - Thanks to all donors who help Wot UI grow better.
 
 ## License
 

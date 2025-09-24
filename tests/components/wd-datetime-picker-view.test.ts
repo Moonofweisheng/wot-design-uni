@@ -1,7 +1,10 @@
 import { mount } from '@vue/test-utils'
 import WdDatetimePickerView from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/wd-datetime-picker-view.vue'
 import { describe, expect, test, vi } from 'vitest'
-import { DatetimePickerViewFilter, DatetimePickerViewFormatter } from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/types'
+import {
+  type DatetimePickerViewFilter,
+  type DatetimePickerViewFormatter
+} from '@/uni_modules/wot-design-uni/components/wd-datetime-picker-view/types'
 import { nextTick } from 'vue'
 
 describe('WdDatetimePickerView 日期时间选择器视图', () => {
@@ -313,5 +316,109 @@ describe('WdDatetimePickerView 日期时间选择器视图', () => {
     await wrapper.setProps({ type: 'year-month' })
 
     expect(wrapper.props('type')).toBe('year-month')
+  })
+
+  test('useSecond 属性 - 时间类型', async () => {
+    const wrapper = mount(WdDatetimePickerView, {
+      props: {
+        modelValue: '12:30:45',
+        type: 'time',
+        useSecond: true
+      }
+    })
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('type')).toBe('time')
+    expect(wrapper.props('modelValue')).toBe('12:30:45')
+  })
+
+  test('useSecond 属性 - 日期时间类型', async () => {
+    const now = Date.now()
+    const wrapper = mount(WdDatetimePickerView, {
+      props: {
+        modelValue: now,
+        type: 'datetime',
+        useSecond: true
+      }
+    })
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('type')).toBe('datetime')
+    expect(wrapper.props('modelValue')).toBe(now)
+  })
+
+  test('useSecond 属性 - 时间范围限制', async () => {
+    const wrapper = mount(WdDatetimePickerView, {
+      props: {
+        modelValue: '12:30:45',
+        type: 'time',
+        useSecond: true,
+        minSecond: 0,
+        maxSecond: 30
+      }
+    })
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('minSecond')).toBe(0)
+    expect(wrapper.props('maxSecond')).toBe(30)
+  })
+
+  test('useSecond 属性 - 日期时间范围限制', async () => {
+    const now = Date.now()
+    const wrapper = mount(WdDatetimePickerView, {
+      props: {
+        modelValue: now,
+        type: 'datetime',
+        useSecond: true,
+        minSecond: 0,
+        maxSecond: 30
+      }
+    })
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('minSecond')).toBe(0)
+    expect(wrapper.props('maxSecond')).toBe(30)
+  })
+
+  test('useSecond 属性 - 时间格式化', async () => {
+    const formatter: DatetimePickerViewFormatter = (type, value) => {
+      if (type === 'second') {
+        return value + '秒'
+      }
+      return value
+    }
+
+    const wrapper = mount(WdDatetimePickerView, {
+      props: {
+        modelValue: '12:30:45',
+        type: 'time',
+        useSecond: true,
+        formatter
+      }
+    })
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('formatter')).toBe(formatter)
+  })
+
+  test('useSecond 属性 - 时间过滤', async () => {
+    const filter: DatetimePickerViewFilter = (type, values) => {
+      if (type === 'second') {
+        return values.filter((value) => value % 5 === 0)
+      }
+      return values
+    }
+
+    const wrapper = mount(WdDatetimePickerView, {
+      props: {
+        modelValue: '12:30:45',
+        type: 'time',
+        useSecond: true,
+        filter
+      }
+    })
+
+    expect(wrapper.props('useSecond')).toBe(true)
+    expect(wrapper.props('filter')).toBe(filter)
   })
 })

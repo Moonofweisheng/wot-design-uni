@@ -1,4 +1,4 @@
-# Segmented 分段器 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.1.23</el-tag>
+# Segmented 分段器
 
 分段器用于展示多个选项并允许用户选择其中单个选项。
 
@@ -74,14 +74,14 @@ const list = ref([
     value: '李雷',
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg'
+      avatar: 'https://wot-ui.cn/assets/redpanda.jpg'
     }
   },
   {
     value: '韩梅梅',
     disabled: false,
     payload: {
-      avatar: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg'
+      avatar: 'https://wot-ui.cn/assets/capybara.jpg'
     }
   }
 ])

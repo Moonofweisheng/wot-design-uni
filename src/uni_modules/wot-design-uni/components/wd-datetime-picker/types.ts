@@ -54,14 +54,6 @@ export const datetimePickerProps = {
    */
   labelWidth: makeStringProp('33%'),
   /**
-   * 使用默认插槽
-   */
-  useDefaultSlot: makeBooleanProp(false),
-  /**
-   * label 使用插槽
-   */
-  useLabelSlot: makeBooleanProp(false),
-  /**
    * 是否为错误状态，错误状态时右侧内容为红色
    */
   error: makeBooleanProp(false),
@@ -85,7 +77,13 @@ export const datetimePickerProps = {
    * picker内部滚筒高
    */
   columnsHeight: makeNumberProp(217),
+  /**
+   * 选项的key
+   */
   valueKey: makeStringProp('value'),
+  /**
+   * 选项的label
+   */
   labelKey: makeStringProp('label'),
   /**
    * 选中项，当 type 为 time 时，类型为字符串；当 type 为 Array 时，类型为范围选择；否则为 时间戳
@@ -119,6 +117,18 @@ export const datetimePickerProps = {
    * 最大分钟，time类型时生效
    */
   maxMinute: makeNumberProp(59),
+  /**
+   * 是否启用秒选择，仅在 time 和 datetime 类型下生效
+   */
+  useSecond: makeBooleanProp(false),
+  /**
+   * 最小秒数，仅在 time 和 datetime 类型下生效
+   */
+  minSecond: makeNumberProp(0),
+  /**
+   * 最大秒数，仅在 time 和 datetime 类型下生效
+   */
+  maxSecond: makeNumberProp(59),
   /**
    * 自定义过滤选项的函数，返回列的选项数组
    */
@@ -174,7 +184,19 @@ export const datetimePickerProps = {
   /**
    * 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持。
    */
-  immediateChange: makeBooleanProp(false)
+  immediateChange: makeBooleanProp(false),
+  /**
+   * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
+   */
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 显示清空按钮
+   */
+  clearable: makeBooleanProp(false),
+  /**
+   * 必填标记位置，可选值：before、after
+   */
+  markerSide: makeStringProp<'before' | 'after'>('before')
 }
 
 export type DatetimePickerDisplayFormat = (items: Record<string, any>[]) => string

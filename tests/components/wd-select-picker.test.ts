@@ -3,6 +3,7 @@ import WdSelectPicker from '@/uni_modules/wot-design-uni/components/wd-select-pi
 import { describe, expect, test } from 'vitest'
 import WdSearch from '@/uni_modules/wot-design-uni/components/wd-search/wd-search.vue'
 import WdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
+import { nextTick } from 'vue'
 
 const globalComponents = {
   WdSearch,
@@ -181,5 +182,99 @@ describe('WdSelectPicker', () => {
     // 检查模板中是否包含自定义文案
     const template = wrapper.html()
     expect(template).toContain(label)
+  })
+
+  test('clearable 属性', async () => {
+    const wrapper = mount(WdSelectPicker, {
+      props: {
+        modelValue: '1',
+        clearable: true,
+        columns: [{ value: '1', label: '选项1' }]
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    expect(wrapper.props('clearable')).toBe(true)
+  })
+
+  test('clearable 清空功能', async () => {
+    const wrapper = mount(WdSelectPicker, {
+      props: {
+        modelValue: '1',
+        clearable: true,
+        columns: [{ value: '1', label: '选项1' }]
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    const vm = wrapper.vm as any
+
+    // 调用清空方法
+    vm.handleClear()
+    await nextTick()
+
+    // 验证事件
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['clear']).toBeTruthy()
+    expect(emitted['update:modelValue']).toBeTruthy()
+  })
+
+  // 测试 markerSide 属性
+  test('markerSide 属性 - before', () => {
+    const wrapper = mount(WdSelectPicker, {
+      props: {
+        label: '选择项目',
+        required: true,
+        markerSide: 'before',
+        modelValue: ''
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
+
+  test('markerSide 属性 - after', () => {
+    const wrapper = mount(WdSelectPicker, {
+      props: {
+        label: '选择项目',
+        required: true,
+        markerSide: 'after',
+        modelValue: ''
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    expect(wrapper.props('markerSide')).toBe('after')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('after')
+  })
+
+  test('markerSide 默认值', () => {
+    const wrapper = mount(WdSelectPicker, {
+      props: {
+        label: '选择项目',
+        required: true,
+        modelValue: ''
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    // 默认值应该是 'before'
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
   })
 })

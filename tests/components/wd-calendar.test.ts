@@ -8,7 +8,7 @@ import WdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
 import WdTag from '@/uni_modules/wot-design-uni/components/wd-tag/wd-tag.vue'
 import { describe, expect, test, vi } from 'vitest'
 import { nextTick } from 'vue'
-import { CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
+import { type CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
 import { pause } from '@/uni_modules/wot-design-uni/components/common/util'
 import WdTabs from '@/uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue'
 import WdTab from '@/uni_modules/wot-design-uni/components/wd-tab/wd-tab.vue'
@@ -35,7 +35,8 @@ describe('WdCalendar', () => {
 
     await nextTick()
     expect(wrapper.classes()).toContain('wd-calendar')
-    expect(wrapper.find('.wd-calendar__label').text()).toBe('日期选择')
+    // Calendar组件使用wd-cell，所以应该查找cell的title
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('title')).toBe('日期选择')
   })
 
   test('禁用状态', async () => {
@@ -488,7 +489,8 @@ describe('WdCalendar', () => {
 
     await nextTick()
 
-    expect(wrapper.find('.wd-calendar__value').text()).toBe('自定义日期格式')
+    // 检查cell组件的value属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('value')).toBe('自定义日期格式')
     expect(displayFormat).toHaveBeenCalled()
   })
 
@@ -547,6 +549,144 @@ describe('WdCalendar', () => {
       }
     })
     await nextTick()
-    expect(wrapper.find('.wd-calendar__label').classes()).toContain('is-required')
+    // 检查cell组件的required属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('required')).toBe(true)
+  })
+
+  test('clearable 属性', async () => {
+    const wrapper = mount(WdCalendar, {
+      props: {
+        modelValue: Date.now(),
+        clearable: true
+      },
+      global: {
+        components: {
+          WdActionSheet,
+          WdCalendarView,
+          WdButton,
+          WdIcon,
+          WdTag,
+          WdTabs,
+          WdTab
+        }
+      }
+    })
+    await nextTick()
+
+    expect(wrapper.props('clearable')).toBe(true)
+  })
+
+  test('clearable 清空功能', async () => {
+    const wrapper = mount(WdCalendar, {
+      props: {
+        modelValue: Date.now(),
+        clearable: true
+      },
+      global: {
+        components: {
+          WdActionSheet,
+          WdCalendarView,
+          WdButton,
+          WdIcon,
+          WdTag,
+          WdTabs,
+          WdTab
+        }
+      }
+    })
+    await nextTick()
+
+    const vm = wrapper.vm as any
+
+    // 调用清空方法
+    vm.handleClear()
+    await nextTick()
+
+    // 验证事件
+    const emitted = wrapper.emitted() as Record<string, any[]>
+    expect(emitted['clear']).toBeTruthy()
+    expect(emitted['update:modelValue']).toBeTruthy()
+  })
+
+  // 测试 markerSide 属性
+  test('markerSide 属性 - before', async () => {
+    const wrapper = mount(WdCalendar, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true,
+        markerSide: 'before'
+      },
+      global: {
+        components: {
+          WdActionSheet,
+          WdCalendarView,
+          WdButton,
+          WdIcon,
+          WdTag,
+          WdTabs,
+          WdTab
+        }
+      }
+    })
+
+    await nextTick()
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
+  })
+
+  test('markerSide 属性 - after', async () => {
+    const wrapper = mount(WdCalendar, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true,
+        markerSide: 'after'
+      },
+      global: {
+        components: {
+          WdActionSheet,
+          WdCalendarView,
+          WdButton,
+          WdIcon,
+          WdTag,
+          WdTabs,
+          WdTab
+        }
+      }
+    })
+
+    await nextTick()
+    expect(wrapper.props('markerSide')).toBe('after')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('after')
+  })
+
+  test('markerSide 默认值', async () => {
+    const wrapper = mount(WdCalendar, {
+      props: {
+        modelValue: Date.now(),
+        label: '日期选择',
+        required: true
+      },
+      global: {
+        components: {
+          WdActionSheet,
+          WdCalendarView,
+          WdButton,
+          WdIcon,
+          WdTag,
+          WdTabs,
+          WdTab
+        }
+      }
+    })
+
+    await nextTick()
+    // 默认值应该是 'before'
+    expect(wrapper.props('markerSide')).toBe('before')
+    // 检查传递给 wd-cell 的 markerSide 属性
+    expect(wrapper.findComponent({ name: 'wd-cell' }).props('markerSide')).toBe('before')
   })
 })

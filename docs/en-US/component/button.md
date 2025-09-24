@@ -137,8 +137,8 @@ Use the `custom-class` and `custom-style` attributes to customize the button's s
 | hover-stop-propagation | Specifies whether to prevent the ancestor node of this node from appearing in the clicked state                                                                                                                         | boolean     | -                                                        | false        | -        |
 | lang                   | Specifies the language of the returned user information, zh_CN for Simplified Chinese, zh_TW for Traditional Chinese, en for English                                                                                                | string      | zh_CN / zh_TW                                            | en           | -        |
 | session-from           | Session source, valid when open-type="contact"                                                                                                            | string      | -                                                        | -            | -        |
-| session-message-title  | Session message card title, valid when open-type="contact"                                                                                                                  | string      | -                                                        | Current title     | -        |
-| session-message-path   | Session message card click jump Mini Program path, valid when open-type="contact"                                                                                                    | string      | -                                                        | Current share path | -        |
+| send-message-title     | Session message card title, valid when open-type="contact"                                                                                                                  | string      | -                                                        | Current title     | -        |
+| send-message-path      | Session message card click jump Mini Program path, valid when open-type="contact"                                                                                                    | string      | -                                                        | Current share path | -        |
 | send-message-img       | Session message card image, valid when open-type="contact"                                                                                                                  | string      | -                                                        | Screenshot         | -        |
 | app-parameter          | Parameters passed to the APP when opening the APP, valid when open-type=launchApp                                                                                                     | string      | -                                                        | -            | -        |
 | show-message-card      | Whether to display the message card in the session, setting this parameter to true will show a prompt "May want to send Mini Program" in the bottom right corner when the user enters the customer service session, and the user can quickly send the Mini Program message after clicking, valid when open-type="contact" | boolean     | -                                                        | false        | -        |
@@ -157,6 +157,7 @@ WeChat Mini Program open capabilities, see [WeChat Mini Program Button](https://
 | getUserInfo               | Get user information, which can be obtained from the @getuserinfo callback                                      |
 | contact                   | Open customer service session, if the user returns to the application after clicking the message card in the session, specific information can be obtained from the @contact callback   |
 | getPhoneNumber            | Get the user's phone number, which can be obtained from the @getphonenumber callback                                 |
+| getRealtimePhoneNumber    | Get user phone number in real time, user information can be obtained from @getrealtimephonenumber callback, WeChat Mini Program only          |
 | launchApp                 | Open APP in Mini Program, parameters can be passed to the APP through the app-parameter attribute                           |
 | openSetting               | Open authorization settings page                                                                             |
 | chooseAvatar              | Get user avatar, avatar information can be obtained from the @chooseavatar callback                                     |
@@ -173,9 +174,12 @@ WeChat Mini Program open capabilities, see [WeChat Mini Program Button](https://
 | getuserinfo    | Get user information                                                 | `detail` | -        |
 | contact        | Customer service message callback, valid when open-type="contact"                      | `detail` | -        |
 | getphonenumber | Get user phone number callback, valid when open-type=getPhoneNumber          | `detail` | -        |
+| getrealtimephonenumber | Get user phone number in real time callback, valid when open-type=getRealtimePhoneNumber          | `detail` | -        |
 | error          | Error callback when using open capabilities, valid when open-type=launchApp | `detail` | -        |
 | launchapp      | Callback for successfully opening APP, valid when open-type=launchApp              | `detail` | -        |
 | opensetting    | Callback after opening authorization settings page, valid when open-type=openSetting         | `detail` | -        |
+| chooseavatar   | Get user avatar callback, valid when open-type=chooseAvatar              | `detail` | -        |
+| agreeprivacyauthorization | User agrees to privacy agreement callback, valid when open-type=agreePrivacyAuthorization | `detail` | -        |
 
 ## External Style Classes
 

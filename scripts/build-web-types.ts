@@ -27,7 +27,7 @@ const reComponentName: ReComponentName = (title: string) => {
 
 // 重新定义文档 URL 的函数
 const reDocUrl: ReDocUrl = (fileName, header) => {
-  const docs = 'https://wot-design-uni.cn/component/'
+  const docs = 'https://wot-ui.cn/component/'
   const _header = header ? removeHtmlTagsAndNonEnglish(header).replace(/\s+/g, '-').toLowerCase() : ''
 
   return `${docs}${fileName}.html${_header ? '#' : ''}${_header}`

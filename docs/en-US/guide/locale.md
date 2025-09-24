@@ -1,4 +1,4 @@
-# Internationalization<el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">0.2.20</el-tag>
+# Internationalization
 
 Wot UI uses Chinese by default and supports multi-language switching. If you want to use other languages, you can refer to the solutions below.
 

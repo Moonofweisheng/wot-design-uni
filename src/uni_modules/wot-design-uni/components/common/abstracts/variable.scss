@@ -84,6 +84,7 @@ $-fw-semibold: var(--wot-fw-semibold, 600) !default; // PingFangSC-Semibold
 
 /* 尺寸 */
 $-size-side-padding: var(--wot-size-side-padding, 15px) !default; // 屏幕两边留白
+$-size-side-padding-small: var(--wot-size-side-padding-small, 6px) !default; // 屏幕两边留白小值
 
 /*-------------------------------- Theme color application size.  end --------------------------------*/
 
@@ -148,7 +149,7 @@ $-button-large-fs: var(--wot-button-large-fs, $-fs-title) !default; // 大型按
 $-button-large-radius: var(--wot-button-large-radius, 8px) !default; // 大型按钮圆角大小
 $-button-large-loading: var(--wot-button-large-loading, 24px) !default; // 大小按钮loading图标大小
 $-button-large-box-shadow-size: var(--wot-button-large-box-shadow-size, 0px 4px 8px 0px) !default; // 大尺寸阴影尺寸
-$-button-icon-fs: var(--wot-button-icon-fs, 1.18em) !default; // 带图标的按钮的图标大小
+$-button-icon-fs: var(--wot-button-icon-fs, 18px) !default; // 带图标的按钮的图标大小
 $-button-icon-size: var(--wot-button-icon-size, 40px) !default; // icon 类型按钮尺寸
 $-button-icon-color: var(--wot-button-icon-color, rgba(0, 0, 0, 0.65)) !default; // icon 类型按钮颜色
 $-button-icon-disabled-color: var(--wot-button-icon-disabled-color, $-color-icon-disabled) !default; // icon 类型按钮禁用颜色
@@ -190,6 +191,7 @@ $-cell-title-color: var(--wot-cell-title-color, rgba(0, 0, 0, 0.85)) !default; /
 $-cell-label-fs: var(--wot-cell-label-fs, 12px) !default; // 描述信息字号
 $-cell-label-color: var(--wot-cell-label-color, rgba(0, 0, 0, 0.45)) !default; // 描述信息文字颜色
 $-cell-value-fs: var(--wot-cell-value-fs, 14px) !default; // 右侧内容字号
+$-cell-value-fs-large: var(--wot-cell-value-fs-large, 16px) !default; // 大尺寸右侧内容字号
 $-cell-value-color: var(--wot-cell-value-color, rgba(0, 0, 0, 0.85)) !default; // 右侧内容文字颜色
 $-cell-arrow-size: var(--wot-cell-arrow-size, 18px) !default; // 右箭头大小
 $-cell-arrow-color: var(--wot-cell-arrow-color, rgba(0, 0, 0, 0.25)) !default; // 右箭头颜色
@@ -202,6 +204,7 @@ $-cell-icon-size-large: var(--wot-cell-icon-size-large, 18px) !default; // 图�
 
 $-cell-required-color: var(--wot-cell-required-color, $-color-danger) !default; // 要求必填*颜色
 $-cell-required-size: var(--wot-cell-required-size, 18px) !default; // 必填*字号
+$-cell-required-margin: var(--wot-cell-required-margin, 4px) !default; // 必填*间距
 $-cell-vertical-top: var(--wot-cell-vertical-top, 16px) !default; // 表单类型-上下结构的间距
 
 /* calendar */
@@ -291,7 +294,7 @@ $-divider-vertical-line-width: var(--wot-divider-vertical-line-width, 1px) !defa
 $-drop-menu-height: var(--wot-drop-menu-height, 48px) !default; // 展示选中项的高度
 $-drop-menu-color: var(--wot-drop-menu-color, $-color-content) !default; // 展示选中项的颜色
 $-drop-menu-fs: var(--wot-drop-menu-fs, $-fs-content) !default; // 展示选中项的字号
-$-drop-menu-arrow-fs: var(--wot-drop-menu-arrow-fs, $-fs-content) !default; // 箭头图标大小
+$-drop-menu-arrow-fs: var(--wot-drop-menu-arrow-fs, $-fs-secondary) !default; // 箭头图标大小
 
 $-drop-menu-side-padding: var(--wot-drop-menu-side-padding, $-size-side-padding) !default; // 两边留白间距
 $-drop-menu-disabled-color: var(--wot-drop-menu-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用颜色
@@ -438,7 +441,7 @@ $-picker-column-height: var(--wot-picker-column-height, 210px) !default; // 列�
 $-picker-column-item-height: var(--wot-picker-column-item-height, 35px) !default; // 列高 滚筒外部的高度
 $-picker-column-select-bg: var(--wot-picker-column-select-bg, #f5f5f5) !default;
 $-picker-loading-button-color: var(--wot-picker-loading-button-color, rgba(0, 0, 0, 0.25)) !default; // loading 背景颜色
-$-picker-column-padding: var(--wot-picker-column-padding, 0 $-size-side-padding) !default; // 选项内间距
+$-picker-column-padding: var(--wot-picker-column-padding, 0 $-size-side-padding-small) !default; // 选项内间距
 
 $-picker-column-disabled-color: var(--wot-picker-column-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 选择器选项禁用的颜色
 $-picker-mask: var(--wot-picker-mask, linear-gradient(180deg, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.25)))

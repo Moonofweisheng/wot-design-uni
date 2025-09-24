@@ -638,6 +638,7 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | label-width            | 设置左侧标题宽度                                                                                                               | string            | -      | 33%     | -        |
 | error                  | 是否为错误状态，错误状态时右侧内容为红色                                                                                       | boolean           | -      | false   | -        |
 | required               | 必填样式                                                                                                                       | boolean           | -      | false   | -        |
+| marker-side            | 必填标记位置                                                                                                                   | string            | before / after | before  | 1.12.0 |
 | align-right            | 选择器的值靠右展示                                                                                                             | boolean           | -      | false   | -        |
 | before-confirm         | 确定前校验函数，接收 (value, resolve) 参数，通过 resolve 继续执行 picker，resolve 接收 1 个 boolean 参数                       | function          | -      | -       | -        |
 | loading-color          | loading 图标的颜色                                                                                                             | string            | -      | #4D80F0 | -        |
@@ -652,6 +653,7 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                            | `FormItemRule []` | -      | `[]`    | -        |
 | lineWidth              | 底部条宽度，单位像素                                                                                                           | number            | -      | -       | 1.3.7    |
 | lineHeight             | 底部条高度，单位像素                                                                                                           | number            | -      | -       | 1.3.7    |
+| root-portal            | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                                                                             | boolean           | -      | false   | 1.11.0 |
 
 ### FormItemRule 数据结构
 

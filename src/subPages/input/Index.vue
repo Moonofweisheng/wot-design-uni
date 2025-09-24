@@ -74,6 +74,15 @@
         <wd-input type="text" :label="$t('bi-tian')" v-model="value16" @input="handleInput" :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')" required />
         <wd-input
           type="text"
+          :label="$t('bi-tian-xing-hao-zai-you-ce')"
+          v-model="value23"
+          @input="handleInput"
+          :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')"
+          required
+          marker-side="after"
+        />
+        <wd-input
+          type="text"
           :label="$t('zi-shu-xian-zhi-0')"
           v-model="value22"
           :placeholder="$t('qing-shu-ru-0')"
@@ -142,6 +151,7 @@ const value19 = ref<string>('')
 const value20 = ref<string>('')
 const value21 = ref<string>('')
 const value22 = ref<string>('')
+const value23 = ref<string>('')
 
 function handleChange(event: any) {
   console.log(event)

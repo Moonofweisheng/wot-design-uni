@@ -1311,14 +1311,30 @@
             "navigationBarTitleText": "%wxrewardad-title%"
             // #endif
           }
+        },
+        {
+          "path": "rootPortal/Index",
+          "name": "rootPortal",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Root Portal 根节点传送门",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%rootportal-title%"
+            // #endif
+          }
         }
       ]
     }
   ],
   "tabBar": {
-    "color": "#7a7e83",
-    "selectedColor": "#1C64FD",
-    "backgroundColor": "#ffffff",
+    "color": "@color",
+    "selectedColor": "@selectedColor",
+    "backgroundColor": "@backgroundColor",
+    "borderStyle": "@borderStyle",
     "list": [
       {
         "pagePath": "pages/index/Index",
