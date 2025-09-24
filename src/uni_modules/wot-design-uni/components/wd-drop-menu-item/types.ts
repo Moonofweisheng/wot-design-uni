@@ -73,6 +73,10 @@ export const dorpMenuItemProps = {
    */
   customPopupStyle: makeStringProp(''),
   /**
+   * 弹出层高度  这里设置了 就取这里的
+   */
+  popupHeight: makeStringProp(''),
+  /**
    * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
    */
   rootPortal: makeBooleanProp(false)
