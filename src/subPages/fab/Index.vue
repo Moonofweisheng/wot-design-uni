@@ -32,7 +32,7 @@
           </view>
           <view class="control-item">
             <text class="control-label">Y {{ $t('fab-pian-yi-liang') }}: {{ offsetY }}</text>
-            <wd-slider v-model="offsetY" :min="0" :max="100" />
+            <wd-slider v-model="offsetY" :min="0" :max="maxOffsetY" />
           </view>
         </view>
         <wd-button @click="reRenderFab">重新渲染</wd-button>
