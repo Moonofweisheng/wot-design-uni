@@ -143,6 +143,10 @@ const list = computed(() => [
       {
         id: 'indexBar',
         name: t('indexbar-suo-yin-lan')
+      },
+      {
+        id: 'tour',
+        name: t('tour-title')
       }
     ]
   },
@@ -399,10 +403,6 @@ const list = computed(() => [
       {
         id: 'table',
         name: t('table-biao-ge')
-      },
-      {
-        id: 'tour',
-        name: t('tour-title')
       }
     ]
   }
