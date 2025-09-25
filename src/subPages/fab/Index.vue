@@ -79,7 +79,6 @@
         :offset-x="position === 'custom' ? offsetX : undefined"
         :offset-y="position === 'custom' ? offsetY : undefined"
         @click="showToast('我被点了')"
-        custom-class="fab-demo"
       >
         <wd-button @click="showToast('一键三连')" :disabled="disabled" custom-class="custom-button" type="primary" round>
           <wd-icon name="github-filled" size="22px"></wd-icon>
@@ -155,8 +154,5 @@ function reRenderFab() {
     height: 32px !important;
     line-height: 32px !important;
   }
-}
-.fab-demo {
-  padding: 60px;
 }
 </style>
