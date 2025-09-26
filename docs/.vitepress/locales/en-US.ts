@@ -81,15 +81,23 @@ export default defineConfig({
         ]
       },
       { text: '🥤Buy Me a Coffee', link: '/en-US/reward/reward', activeMatch: '/reward/' },
-      { text: 'Quick Start Project', link: 'https://github.com/Moonofweisheng/wot-demo' },
+      { text: 'Blog', link: 'https://blog.wot-ui.cn/' },
       {
-        text: 'Ecosystem',
-        items: [
+        text: 'Templates', items: [
+          { text: 'Quick Start Template wot-starter', link: 'https://start.wot-ui.cn/' },
+          { text: 'vitesse-uni-app', link: 'https://vitesse-docs.netlify.app/' },
+          { text: 'wot-starter-retail', link: 'https://github.com/wot-ui/wot-starter-retail' },
+          { text: 'unibest', link: 'https://unibest.tech/' },
+        ]
+      },
+      {
+        text: 'Resources', items: [
+          { text: 'Quick Start Template', link: 'https://start.wot-ui.cn/' },
           { text: 'Vue3 uni-app Router', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: 'Mini Program CI Tool', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
           { text: 'uni-ku', link: 'https://github.com/uni-ku' },
-        ],
+        ]
       },
     ],
     sidebar: {
@@ -139,6 +147,11 @@ export default defineConfig({
         {
           text: 'Donor List',
           link: '/en-US/reward/donor',
+        },
+        // 赞助渠道
+        {
+          text: 'Sponsor',
+          link: '/reward/sponsor',
         }
       ],
       '/en-US/component/': [

@@ -1,6 +1,6 @@
 <template>
-  <!-- 主容器：根据展开状态和过渡状态添加对应类名 -->
-  <div v-if="href" class="demo-model" :class="{
+  <!-- 大屏幕：原有的固定容器 -->
+  <div v-if="href && !isSmallScreen" class="demo-model" :class="{
     'collapsed': !expanded,
     'transition-end': transitionEnd
   }" @transitionend="onTransitionEnd">
@@ -18,12 +18,42 @@
       <iframe v-if="expanded&&transitionEnd" ref="iframe" id="demo" class="iframe" scrolling="auto" frameborder="0" :src="href" />
     </div>
   </div>
+
+  <!-- 小屏幕：触发按钮 -->
+  <div v-if="href && isSmallScreen && !isTinyScreen" class="demo-trigger" @click="openDrawer">
+    <el-icon class="trigger-icon">
+      <component :is="Expand" />
+    </el-icon>
+  </div>
+
+  <!-- 小屏幕：Drawer抽屉 -->
+<view  v-if="isSmallScreen && !isTinyScreen" class="drawer-container">  
+    <el-drawer
+   
+    v-model="drawerVisible"
+    direction="rtl"
+    size="380px"
+    :modal="false"
+    :lock-scroll="false"
+    :before-close="closeDrawer"
+  >
+    <div class="demo-header">
+        <ExternalLink :href="href" class="demo-link">
+        </ExternalLink>
+        <QrCode class="demo-qrcode" :src="qrcode" v-if="qrcode"></QrCode>
+    </div>
+    <div class="drawer-content">
+      <iframe v-if="drawerVisible" ref="drawerIframe" class="drawer-iframe" scrolling="auto" frameborder="0" :src="href" />
+    </div>
+  </el-drawer>
+</view>
 </template>
 
 <script setup lang="ts">
 import { Expand, Fold } from '@element-plus/icons-vue'
+import { ElDrawer, ElIcon } from 'element-plus'
 import { useRoute, useData } from 'vitepress'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch, onUnmounted } from 'vue'
 import QrCode from './QrCode.vue'
 
 interface Props {
@@ -38,7 +68,11 @@ const props = withDefaults(defineProps<Props>(), {
 // 状态管理
 const baseUrl = ref('')
 const iframe = ref<HTMLIFrameElement | null>(null)
+const drawerIframe = ref<HTMLIFrameElement | null>(null)
 const transitionEnd = ref(true)
+const drawerVisible = ref(false)
+const isSmallScreen = ref(false)
+const isTinyScreen = ref(false)
 
 const emit = defineEmits<{
   'update:expanded': [boolean]  // 更新展开状态
@@ -64,6 +98,19 @@ const qrcode = computed(() => {
   return `/wxqrcode/${paths[paths.length - 1]}.png`
 })
 
+// 获取页面标题
+const pageTitle = computed(() => {
+  const path = route.path
+  const paths = path ? path.split('.')[0].split('/') : []
+  if (!paths.length) return '预览Demo'
+  
+  // 将kebab-case转换为更友好的标题格式
+  const pageName = paths[paths.length - 1]
+  return pageName.split('-').map(word => 
+    word.charAt(0).toUpperCase() + word.slice(1)
+  ).join(' ')
+})
+
 // 工具函数：转换 kebab-case 为 camelCase
 function kebabToCamel(input: string): string {
   return input.replace(/-([a-z])/g, (match, group) => group.toUpperCase())
@@ -87,6 +134,26 @@ function toggleExpand() {
   transitionEnd.value = false
 }
 
+// 小屏幕抽屉控制
+function openDrawer() {
+  drawerVisible.value = true
+}
+
+function closeDrawer() {
+  drawerVisible.value = false
+}
+
+// 检查屏幕尺寸
+function checkScreenSize() {
+  isSmallScreen.value = window.innerWidth <= 1439
+  isTinyScreen.value = window.innerWidth < 1280
+}
+
+// 监听窗口大小变化
+function handleResize() {
+  checkScreenSize()
+}
+
 // 过渡结束处理
 function onTransitionEnd() {
   transitionEnd.value = true
@@ -95,15 +162,19 @@ function onTransitionEnd() {
 
 // iframe 消息通信
 function sendMessage() {
-  if (iframe.value?.contentWindow) {
-    iframe.value.contentWindow.postMessage(vitepressData.isDark.value, href.value)
+  const targetIframe = isSmallScreen.value ? drawerIframe.value : iframe.value
+  if (targetIframe?.contentWindow) {
+    const targetOrigin = new URL(href.value, location.origin).origin
+    targetIframe.contentWindow.postMessage(vitepressData.isDark.value, targetOrigin)
   }
 }
 
 // 发送语言信息给iframe
 function sendLanguageMessage() {
-  if (iframe.value?.contentWindow) {
-    iframe.value.contentWindow.postMessage(vitepressData.lang.value, href.value)
+  const targetIframe = isSmallScreen.value ? drawerIframe.value : iframe.value
+  if (targetIframe?.contentWindow) {
+    const targetOrigin = new URL(href.value, location.origin).origin
+    targetIframe.contentWindow.postMessage(vitepressData.lang.value, targetOrigin)
   }
 }
 
@@ -112,11 +183,29 @@ onMounted(() => {
     ? `${location.origin}/demo/?timestamp=${new Date().getTime()}#/`
     : 'http://localhost:5173/demo/#/'
 
+  // 初始化屏幕尺寸检查
+  checkScreenSize()
+  window.addEventListener('resize', handleResize)
+
   // 监听 iframe 加载完成事件
   iframe.value?.addEventListener('load', () => {
     sendMessage()
     sendLanguageMessage()
   })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
+// 监听抽屉iframe加载完成
+watch(drawerIframe, (newVal) => {
+  if (newVal) {
+    newVal.addEventListener('load', () => {
+      sendMessage()
+      sendLanguageMessage()
+    })
+  }
 })
 
 watch(
@@ -242,23 +331,11 @@ watch(
   opacity: 0;
 }
 
-@media screen and (min-width: 1280px) {
-  .demo-model {
-    width: 310px;
-    height: calc(310px * 143.6 / 70.9 + 56px);
-    right: 48px;
-  }
-
-  .collapsed {
-    height: 48px;
-  }
-}
-
 @media screen and (min-width: 1440px) {
   .demo-model {
-    width: 360px;
-    height: calc(360px * 143.6 / 70.9 + 56px);
-    right: 64px;
+    width: 280px;
+    height: calc(320px * 143.6 / 70.9);
+    right: 12px;
   }
 
   .collapsed {
@@ -266,8 +343,114 @@ watch(
   }
 }
 
-@media (max-width: 1279px) {
+@media screen and (min-width: 1600px) {
   .demo-model {
+    width: 340px;
+    height: calc(340px * 143.6 / 70.9);
+    right: 24px;
+  }
+
+  .collapsed {
+    height: 48px;
+  }
+}
+
+/* 小屏幕触发按钮样式 */
+.demo-trigger {
+  position: fixed;
+  z-index: 10;
+  right: 16px;
+  top: calc(var(--vp-nav-height) + 32px);
+  width: 48px;
+  height: 48px;
+  background: var(--vp-c-bg-alt);
+  border-radius: 12px;
+  box-shadow: var(--vp-shadow-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.demo-trigger:hover {
+  transform: scale(1.05);
+}
+
+.trigger-icon {
+  font-size: 24px;
+  color: var(--vp-c-text-1);
+}
+
+/* 抽屉内容样式 */
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--vp-c-divider);
+  margin-bottom: 16px;
+}
+
+.drawer-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  flex: 1;
+}
+
+.drawer-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.drawer-actions .demo-link {
+  font-size: 20px !important;
+  color: var(--vp-c-text-2);
+  transition: color 0.3s ease;
+}
+
+.drawer-actions .demo-link:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.drawer-actions .demo-qrcode {
+  font-size: 20px !important;
+  color: var(--vp-c-text-2);
+}
+
+.drawer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 340px;
+  height: calc(340px * 143.6 / 70.9);
+}
+
+.drawer-iframe {
+  width: 340px;
+  height: calc(340px * 143.6 / 70.9);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  background: var(--vp-c-bg);
+  overflow: hidden;
+}
+
+.drawer-container {
+  --el-drawer-bg-color: var(--vp-c-bg);
+  :deep() {
+    .el-drawer {
+      background-color: var(--vp-c-bg) !important;
+    }
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .demo-trigger {
     display: none;
   }
 }

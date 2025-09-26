@@ -92,5 +92,12 @@ export const rateProps = {
    * 类型: boolean
    * 默认值: false
    */
-  allowHalf: makeBooleanProp(false)
+  allowHalf: makeBooleanProp(false),
+
+  /**
+   * 当 clearable 属性设置为 true，再次点击相同的值时，可以将值重置为 0。
+   * 类型: boolean
+   * 默认值: false
+   */
+  clearable: makeBooleanProp(false)
 }

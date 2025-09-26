@@ -116,7 +116,7 @@ You can set the menu's right icon through `icon`, equivalent to the `name` prope
 
 ```html
 <wd-drop-menu>
-  <wd-drop-menu-item title="Map" icon="location" icon-size="24px" />
+  <wd-drop-menu-item title="Map" icon="location" icon-size="14px" />
 </wd-drop-menu>
 ```
 
@@ -137,6 +137,8 @@ The `before-toggle` function cannot prevent the expansion/closure operations of 
 
 ```typescript
 import { useMessage } from '@/uni_modules/wot-design-uni'
+import type { DropMenuItemBeforeToggle } from '@/uni_modules/wot-design-uni/components/wd-drop-menu-item/types'
+
 const messageBox = useMessage()
 
 const value = ref<number>(0)

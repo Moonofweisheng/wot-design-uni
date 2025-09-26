@@ -70,7 +70,7 @@
 |-----|------|-----|-------|-------|---------|
 | name | 图标名称或图片链接 |	string | - | - | - |
 | color	| 图标的颜色 | string |	- |	inherit | - |
-| size | 图标的字体大小 | string | - | inherit | - |
+| size | 图标的字体大小 | string \| number | - | inherit | - |
 | classPrefix | 类名前缀，用于使用自定义图标 | string | - | 'wd-icon' | 0.1.27 |
 | custom-style | 根节点样式 | string | - | - | - |
 

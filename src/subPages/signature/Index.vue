@@ -2,7 +2,7 @@
  * @Author: 810505339
  * @Date: 2025-02-11 21:17:21
  * @LastEditors: weisheng
- * @LastEditTime: 2025-05-07 18:55:55
+ * @LastEditTime: 2025-09-21 19:35:08
  * @FilePath: /wot-design-uni/src/subPages/signature/Index.vue
  * 记得注释
 -->
@@ -78,7 +78,6 @@ const img = ref<Partial<SignatureResult>>({})
 const disabled = ref(true)
 
 function confirm(result: SignatureResult) {
-  debugger
   if (result.success) {
     uni.previewImage({
       urls: [result.tempFilePath]

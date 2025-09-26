@@ -241,9 +241,9 @@
 | max           | 图标右上角 `badge` 最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型                                           | number         | -                                           | -      | -        |
 | url           | 点击后跳转的链接地址                                                                                                      | string         | -                                           | -      | -        |
 | link-type     | 页面跳转方式, 参考[微信小程序路由文档](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html) | string         | navigateTo / switchTab / reLaunch           | -      | -        |
-| <s>use-slot</s> | 是否开启 `GridItem` 内容插槽 **（$LOWEST_VERSION$已废弃，直接使用默认插槽即可）**                                                          | boolean        | -                                           | false  | -        |
-| <s>use-icon-slot</s> | 是否开启 `GridItem` icon 插槽 **（$LOWEST_VERSION$已废弃，组件会自动检测icon插槽的存在）**                                                | boolean        | -                                           | false  | -        |
-| <s>use-text-slot</s> | 是否开启 `GridItem` text 内容插槽 **（$LOWEST_VERSION$已废弃，组件会自动检测text插槽的存在）**                                            | boolean        | -                                           | false  | -        |
+| <s>use-slot</s> | 是否开启 `GridItem` 内容插槽 **（1.12.0已废弃，直接使用默认插槽即可）**                                                          | boolean        | -                                           | false  | -        |
+| <s>use-icon-slot</s> | 是否开启 `GridItem` icon 插槽 **（1.12.0已废弃，组件会自动检测icon插槽的存在）**                                                | boolean        | -                                           | false  | -        |
+| <s>use-text-slot</s> | 是否开启 `GridItem` text 内容插槽 **（1.12.0已废弃，组件会自动检测text插槽的存在）**                                            | boolean        | -                                           | false  | -        |
 | icon-size     | 图标大小                                                                                                                  | string         | -                                           | 26px   | -        |
 | badge-props   | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes)                                  | BadgeProps     | -                                           | -      | 0.1.50   |
 

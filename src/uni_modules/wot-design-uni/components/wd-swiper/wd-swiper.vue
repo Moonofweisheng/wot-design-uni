@@ -22,33 +22,36 @@
         @change="handleChange"
         @animationfinish="handleAnimationfinish"
       >
-        <swiper-item v-for="(item, index) in list" :key="index" class="wd-swiper__item">
-          <video
-            v-if="isVideo(item)"
-            :id="`video-${index}-${uid}`"
-            :style="{ height: addUnit(height) }"
-            :src="isObj(item) ? item[valueKey] : item"
-            :poster="isObj(item) ? item.poster : ''"
-            :class="`wd-swiper__video ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
-            @play="handleVideoPaly"
-            @pause="handleVideoPause"
-            :enable-progress-gesture="false"
-            :loop="videoLoop"
-            :muted="muted"
-            :autoplay="autoplayVideo"
-            objectFit="cover"
-            @click="handleClick(index, item)"
-          />
-          <image
-            v-else
-            :src="isObj(item) ? item[valueKey] : item"
-            :class="`wd-swiper__image ${customImageClass} ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
-            :style="{ height: addUnit(height) }"
-            :mode="imageMode"
-            @click="handleClick(index, item)"
-          />
-
-          <text v-if="isObj(item) && item[textKey]" :class="`wd-swiper__text ${customTextClass}`" :style="customTextStyle">{{ item[textKey] }}</text>
+        <swiper-item v-for="(item, index) in list" :key="index" :class="swiperItemClass">
+          <slot :item="item" :index="index">
+            <video
+              v-if="isVideo(item)"
+              :id="`video-${index}-${uid}`"
+              :style="{ height: addUnit(height) }"
+              :src="isObj(item) ? item[valueKey] : item"
+              :poster="isObj(item) ? item.poster : ''"
+              :class="`wd-swiper__video ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
+              @play="handleVideoPaly"
+              @pause="handleVideoPause"
+              :enable-progress-gesture="false"
+              :loop="videoLoop"
+              :muted="muted"
+              :autoplay="autoplayVideo"
+              objectFit="cover"
+              @click="handleClick(index, item)"
+            />
+            <image
+              v-else
+              :src="isObj(item) ? item[valueKey] : item"
+              :class="`wd-swiper__image ${customImageClass} ${customItemClass} ${getCustomItemClass(currentValue, index, list)}`"
+              :style="{ height: addUnit(height) }"
+              :mode="imageMode"
+              @click="handleClick(index, item)"
+            />
+            <text v-if="isObj(item) && item[textKey]" :class="`wd-swiper__text ${customTextClass}`" :style="customTextStyle">
+              {{ item[textKey] }}
+            </text>
+          </slot>
         </swiper-item>
       </swiper>
       <!-- #ifdef MP-WEIXIN -->
@@ -85,10 +88,11 @@ export default {
 
 <script lang="ts" setup>
 import wdSwiperNav from '../wd-swiper-nav/wd-swiper-nav.vue'
-import { computed, watch, ref, getCurrentInstance } from 'vue'
+import { computed, watch, ref, getCurrentInstance, useSlots } from 'vue'
 import { addUnit, isObj, isImageUrl, isVideoUrl, uuid, isDef } from '../common/util'
 import { swiperProps, type SwiperList } from './types'
 import type { SwiperNavProps } from '../wd-swiper-nav/types'
+const slots = useSlots()
 
 const props = defineProps(swiperProps)
 const emit = defineEmits(['click', 'change', 'animationfinish', 'update:current'])
@@ -126,6 +130,10 @@ watch(
     }
   }
 )
+
+const swiperItemClass = computed(() => {
+  return `wd-swiper__item ${slots.default ? 'wd-swiper__item--slot' : ''}`
+})
 
 const swiperIndicator = computed(() => {
   const { list, direction, indicatorPosition, indicator } = props

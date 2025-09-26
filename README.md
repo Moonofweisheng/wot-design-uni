@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="logo" src="https://wot-design-uni.cn/logo.png" width="200">
+    <img alt="logo" src="https://wot-ui.cn/logo.png" width="200">
 </p>
 <h1 align="center">Wot UI</h1>
 
@@ -39,10 +39,9 @@
 </p>
 
 <p align="center">
-  🚀 <a href="https://wot-design-uni.cn">文档网站 (推荐)</a>&nbsp;
+  🚀 <a href="https://wot-ui.cn">文档网站 (推荐)</a>&nbsp;
   ✈️ <a href="https://wot-design-uni.pages.dev/">文档网站（cloudflare）</a>&nbsp;
-  🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (Netlify)</a>&nbsp;
-  🚫 <a href="https://wot-design-uni.gitee.io/">文档网站 (Gitee暂时下线)</a>
+  🔥 <a href="https://wot-design-uni.netlify.app/">文档网站 (Netlify)</a>
 </p>
 
 ## ✨ 特性
@@ -60,27 +59,27 @@
 扫描二维码访问演示，注意：因微信审核机制限制，当前的微信小程序示例可能不是最新版本，可以 clone 代码到本地预览。
 
 <p style="display:flex;gap:24px">
-<img src="https://wot-design-uni.cn/wx.jpg" width="200" height="200"/>
-<img src="https://wot-design-uni.cn/alipay.png" width="200" height="200" />
-<img src="https://wot-design-uni.cn/h5.png" width="200" height="200" />
-<img src="https://wot-design-uni.cn/android.png" width="200" height="200" />
+<img src="https://wot-ui.cn/wx.jpg" width="200" height="200"/>
+<img src="https://wot-ui.cn/alipay.png" width="200" height="200" />
+<img src="https://wot-ui.cn/h5.png" width="200" height="200" />
+<img src="https://wot-ui.cn/android.png" width="200" height="200" />
 
 </p>
 
 ## 快速上手
 
-详细说明见 [快速上手](https://wot-design-uni.cn/guide/quick-use.html)。
+详细说明见 [快速上手](https://wot-ui.cn/guide/quick-use.html)。
 
 ## 链接
 
-- [常见问题](https://wot-design-uni.cn/guide/common-problems.html)
-- [更新日志](https://wot-design-uni.cn/guide/changelog.html)
+- [常见问题](https://wot-ui.cn/guide/common-problems.html)
+- [更新日志](https://wot-ui.cn/guide/changelog.html)
 - [Discussions 讨论区](https://github.com/Moonofweisheng/wot-design-uni/discussions)
-- [QQ 群](https://wot-design-uni.cn/guide/join-group.html)
+- [QQ 群](https://wot-ui.cn/guide/join-group.html)
   
 ## 优秀案例
 
-[这里](https://wot-design-uni.cn/guide/cases.html)我们收集了一些优秀的案例，欢迎大家体验！
+[这里](https://wot-ui.cn/guide/cases.html)我们收集了一些优秀的案例，欢迎大家体验！
 
 我们也非常欢迎大家一起贡献优秀的 Demo 与案例，欢迎在此 [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16) 提交案例。
 
@@ -90,7 +89,7 @@
 | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app)                                            | 多端统一开发框架 uni-app 优秀开发资源汇总            |
 | [create-uni](https://github.com/uni-helper/create-uni)                                                      | 快速创建 uni-app 项目                                |
-| [wot-demo](https://github.com/Moonofweisheng/wot-demo)                  | 基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 的wot-design-uni快速起手demo     |
+| [wot-starter](https://github.com/wot-ui/wot-starter)                  | 基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 的 wot-ui 快速起手项目     |
 | [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | 基于 wot-design-uni 的 uni-app 零售行业模板          |
 | [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot UI 代码块提示                            |
 | [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci)                                                | 一个 uni-app 小程序端构建后支持 CI（持续集成）的插件 |
@@ -119,7 +118,7 @@
 
 如果您认为 Wot UI 帮助到了您的开发工作，您可以捐赠 Wot UI 的研发工作，捐赠无门槛，哪怕是一杯可乐也好。
 
-捐赠后您的昵称、留言等将会展示在[捐赠榜单](https://wot-design-uni.cn/reward/donor.html)中。
+捐赠后您的昵称、留言等将会展示在[捐赠榜单](https://wot-ui.cn/reward/donor.html)中。
 
 
 ### 爱发电捐赠
@@ -129,15 +128,15 @@
 ### 扫码捐赠
 
 <p>
-<img src="https://wot-design-uni.cn/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
-<img src="https://wot-design-uni.cn/alipayQrcode.jpg" width="200" height="200" />
+<img src="https://wot-ui.cn/weixinQrcode.jpg" width="200" height="200" style="margin-right:30px"/>
+<img src="https://wot-ui.cn/alipayQrcode.jpg" width="200" height="200" />
 </p>
 
 ## 鸣谢
 
 - [wot-design](https://github.com/jd-ftf/wot-design-mini) - 感谢 wot-design 团队多年来的不断维护，让 wot-design-uni 能够站在巨人的肩膀上。
 - [uni-helper](https://github.com/uni-helper) - 感谢 uni-helper 团队提供的 uni-app 工具库，让 wot-design-uni 能够更方便地使用。
-- [捐赠者](https://wot-design-uni.cn/reward/donor.html) - 感谢所有捐赠者，是你们的捐赠让 wot-design-uni 能够更好地发展。
+- [捐赠者](https://wot-ui.cn/reward/donor.html) - 感谢所有捐赠者，是你们的捐赠让 wot-design-uni 能够更好地发展。
 
 
 ## 开源协议

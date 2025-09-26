@@ -251,6 +251,7 @@ function handleSwitchChange({ value }) {
 | title       | 标题                           | string  | -      | -      | -        |
 | value       | 右侧内容                       | string  | -      | -      | -        |
 | icon        | 图标类名                       | string  | -      | -      | -        |
+| icon-size   | 图标大小                       | string \| number  | -      | -      | $LOWEST_VERSION$ |
 | label       | 描述信息                       | string  | -      | -      | -        |
 | is-link     | 是否为跳转链接                 | boolean | -      | false  | -        |
 | to          | 跳转地址                       | string  | -      | -      | -        |
@@ -260,7 +261,7 @@ function handleSwitchChange({ value }) {
 | title-width | 设置左侧标题宽度               | string  | -      | -      | -        |
 | center      | 是否垂直居中，默认顶部居中     | boolean | -      | false  | -        |
 | required    | 表单属性，必填                 | boolean | -      | false  | -        |
-| marker-side | 必填标记的位置                 | string  | before / after | before | $LOWEST_VERSION$ |
+| marker-side | 必填标记的位置                 | string  | before / after | before | 1.12.0 |
 | vertical    | 表单属性，上下结构             | boolean | -      | false  | -        |
 | ellipsis    | 内容省略，右侧内容超出时会以省略号显示 | boolean | -      | false  | 1.11.0 |
 | use-title-slot | 是否启用title插槽，默认启用，用来解决插槽传递时v-slot和v-if冲突问题 | boolean | -      | true  | 1.11.0 |

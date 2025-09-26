@@ -193,6 +193,7 @@ export type cellThemeVars = {
   cellIconSizeLarge?: string
   cellRequiredColor?: string
   cellRequiredSize?: string
+  cellRequiredMargin?: string
   cellVerticalTop?: string
 }
 

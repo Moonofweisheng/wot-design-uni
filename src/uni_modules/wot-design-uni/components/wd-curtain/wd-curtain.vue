@@ -20,7 +20,15 @@
       :custom-style="customStyle"
     >
       <view class="wd-curtain__content">
-        <image :src="src" class="wd-curtain__content-img" :style="imgStyle" @click="clickImage" @error="imgErr" @load="imgLoad"></image>
+        <image
+          :src="src"
+          class="wd-curtain__content-img"
+          :style="imgStyle"
+          :show-menu-by-longpress="showMenuByLongpress"
+          @click="clickImage"
+          @error="imgErr"
+          @load="imgLoad"
+        ></image>
         <slot name="close">
           <wd-icon
             name="close-outline"
@@ -153,7 +161,9 @@ function clickImage() {
     })
   }
   emit('click')
-  close()
+  if (props.closeOnClick) {
+    close()
+  }
 }
 </script>
 

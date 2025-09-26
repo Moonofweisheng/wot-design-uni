@@ -154,6 +154,7 @@
   }
 
   @include e(value) {
+    white-space: normal;
     @include when(ellipsis) {
       word-break: break-all;
       @include multiEllipsis(2);

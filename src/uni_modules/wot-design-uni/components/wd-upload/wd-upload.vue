@@ -69,11 +69,11 @@
     </view>
 
     <block v-if="showUpload">
-      <view :class="['wd-upload__evoke-slot', customEvokeClass]" v-if="$slots.default" @click="handleChoose">
+      <view :class="['wd-upload__evoke-slot', customEvokeClass]" v-if="$slots.default" @click="onEvokeClick">
         <slot></slot>
       </view>
       <!-- 唤起项 -->
-      <view v-else @click="handleChoose" :class="['wd-upload__evoke', disabled ? 'is-disabled' : '', customEvokeClass]">
+      <view v-else @click="onEvokeClick" :class="['wd-upload__evoke', disabled ? 'is-disabled' : '', customEvokeClass]">
         <!-- 唤起项图标 -->
         <wd-icon class="wd-upload__evoke-icon" name="fill-camera"></wd-icon>
         <!-- 有限制个数时确认是否展示限制个数 -->
@@ -408,7 +408,6 @@ function handleProgress(res: UniApp.OnProgressUpdateResult, file: UploadFileItem
  */
 function onChooseFile(currentIndex?: number) {
   const { multiple, maxSize, accept, sizeType, limit, sourceType, compressed, maxDuration, camera, beforeUpload, extension } = props
-
   chooseFile({
     multiple: isDef(currentIndex) ? false : multiple,
     sizeType,
@@ -455,6 +454,13 @@ function onChooseFile(currentIndex?: number) {
     .catch((error) => {
       emit('chooseerror', { error })
     })
+}
+
+/**
+ * @description 处理唤起选择文件的点击事件
+ */
+function onEvokeClick() {
+  handleChoose()
 }
 
 /**

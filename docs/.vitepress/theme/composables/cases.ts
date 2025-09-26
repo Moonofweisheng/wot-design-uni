@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2025-08-30 13:06:10
+ * @LastEditTime: 2025-09-21 19:53:02
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/docs/.vitepress/theme/composables/cases.ts
+ * 记得注释
+ */
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
@@ -13,7 +22,7 @@ export function useCaseData() {
   onMounted(async () => {
     // 定义数据源URL列表，按优先级排序
     const urls = [
-      'https://sponsor.wot-design-uni.cn',
+      'https://sponsor.wot-ui.cn',
       'https://wot-sponsors.pages.dev'
     ]
 
@@ -22,7 +31,7 @@ export function useCaseData() {
       for (const url of urls) {
         try {
           const path = '/cases.json'
-          const response = await axios.get(url + path, {
+          const response = await axios.get(url + path + '?t=' + Date.now(), {
             timeout: 5000 // 设置5秒超时
           })
           const data = response.data && response.data.data ? response.data.data : []

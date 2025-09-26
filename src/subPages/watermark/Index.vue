@@ -16,13 +16,7 @@
         </wd-badge>
       </demo-block>
       <demo-block :title="$t('ju-bu-shui-yin')">
-        <wd-watermark
-          :opacity="0.8"
-          image="https://wot-design-uni.cn/logo.png"
-          :image-width="38"
-          :image-height="38"
-          :full-screen="false"
-        ></wd-watermark>
+        <wd-watermark :opacity="0.8" image="https://wot-ui.cn/logo.png" :image-width="38" :image-height="38" :full-screen="false"></wd-watermark>
         <wd-badge custom-class="badge" :modelValue="12">
           <wd-button :round="false" type="info" size="small">{{ $t('pingLun') }}</wd-button>
         </wd-badge>
@@ -74,7 +68,7 @@ import { computed, ref } from 'vue'
 const showImage = ref(false) // 是否展示图片
 
 const image = computed(() => {
-  return showImage.value ? 'https://wot-design-uni.cn/logo.png' : ''
+  return showImage.value ? 'https://wot-ui.cn/logo.png' : ''
 })
 
 function doSetImage(show: boolean) {

@@ -167,6 +167,7 @@ export default {
 import wdPopup from '../wd-popup/wd-popup.vue'
 import wdDatetimePickerView from '../wd-datetime-picker-view/wd-datetime-picker-view.vue'
 import wdCell from '../wd-cell/wd-cell.vue'
+import wdIcon from '../wd-icon/wd-icon.vue'
 import { computed, getCurrentInstance, nextTick, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { deepClone, isArray, isDef, isEqual, isFunction, padZero } from '../common/util'
 import { type DatetimePickerViewInstance, type DatetimePickerViewColumnType, type DatetimePickerViewExpose } from '../wd-datetime-picker-view/types'

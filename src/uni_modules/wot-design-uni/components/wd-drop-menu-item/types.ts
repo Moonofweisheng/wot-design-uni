@@ -25,7 +25,7 @@ export const dorpMenuItemProps = {
    */
   modelValue: [String, Number],
   /**
-   * 列表数据，对应数据结构 [{text: '标题', value: '0', tip: '提示文字'}]
+   * 列表数据，对应数据结构 [{label: '标题', value: '0', tip: '提示文字'}]
    */
   options: makeArrayProp<Record<string, any>>(),
   /**
@@ -72,6 +72,10 @@ export const dorpMenuItemProps = {
    * 自定义下拉菜单popup样式
    */
   customPopupStyle: makeStringProp(''),
+  /**
+   * 弹出层高度  这里设置了 就取这里的
+   */
+  popupHeight: makeStringProp(''),
   /**
    * 是否从页面中脱离出来，用于解决各种 fixed 失效问题 (H5: teleport, APP: renderjs, 小程序: root-portal)
    */

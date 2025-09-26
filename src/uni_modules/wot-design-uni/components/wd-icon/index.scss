@@ -10,7 +10,7 @@
   font-style: normal;
 }
 
-/*  #ifdef  APP-PLUS  */
+/*  #ifdef  APP-PLUS || H5  */
 @font-face {
   font-family: 'wd-icons';
   src:
@@ -28,7 +28,6 @@
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: 1;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

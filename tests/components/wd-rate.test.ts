@@ -302,9 +302,9 @@ describe('评分组件', () => {
 
     await nextTick()
 
-    // 直接调用组件的 changeRate 方法，模拟点击第一个星星
+    // 直接调用组件的 handleClick 方法，模拟点击第一个星星
     // 这比模拟触摸事件更可靠，因为触摸事件依赖于 DOM 元素的位置
-    await (wrapper.vm as any).changeRate(0, false)
+    await (wrapper.vm as any).handleClick(0, false)
 
     // 验证事件
     const emitted = wrapper.emitted() as Record<string, any[]>
@@ -326,9 +326,9 @@ describe('评分组件', () => {
 
     await nextTick()
 
-    // 直接调用组件的 changeRate 方法，模拟点击第一个半星
+    // 直接调用组件的 handleClick 方法，模拟点击第一个半星
     // 这比模拟触摸事件更可靠，因为触摸事件依赖于 DOM 元素的位置
-    await (wrapper.vm as any).changeRate(0, true)
+    await (wrapper.vm as any).handleClick(0, true)
 
     // 验证事件
     const emitted = wrapper.emitted() as Record<string, any[]>
@@ -412,5 +412,209 @@ describe('评分组件', () => {
     await nextTick()
 
     expect(wrapper.attributes('style')).toBe(customStyle)
+  })
+
+  // 测试清空功能
+  describe('clearable 功能测试', () => {
+    // 测试基本清空功能
+    test('clearable 为 true 时，点击相同的最小值可以清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 1,
+          clearable: true
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第一个星星（当前值为1，最小值为1）
+      await (wrapper.vm as any).handleClick(0, false)
+
+      // 验证清空事件
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeTruthy()
+      expect(emitted['update:modelValue'][0][0]).toBe(0)
+
+      expect(emitted['change']).toBeTruthy()
+      expect(emitted['change'][0][0]).toEqual({ value: 0 })
+    })
+
+    test('clearable 为 false 时，点击相同值不会清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 1,
+          clearable: false
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第一个星星
+      await (wrapper.vm as any).handleClick(0, false)
+
+      // 验证不会清空，而是设置为1
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeTruthy()
+      expect(emitted['update:modelValue'][0][0]).toBe(1)
+
+      expect(emitted['change']).toBeTruthy()
+      expect(emitted['change'][0][0]).toEqual({ value: 1 })
+    })
+
+    // 测试半星模式下的清空
+    test('clearable + allowHalf 组合下，点击 0.5 可以清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 0.5,
+          clearable: true,
+          allowHalf: true
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第一个半星（当前值为0.5，最小值为0.5）
+      await (wrapper.vm as any).handleClick(0, true)
+
+      // 验证清空事件
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeTruthy()
+      expect(emitted['update:modelValue'][0][0]).toBe(0)
+
+      expect(emitted['change']).toBeTruthy()
+      expect(emitted['change'][0][0]).toEqual({ value: 0 })
+    })
+
+    test('非最小值时点击不会清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 2,
+          clearable: true
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第一个星星（当前值为2，点击值为1，不等于当前值）
+      await (wrapper.vm as any).handleClick(0, false)
+
+      // 验证不会清空，而是设置为1
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeTruthy()
+      expect(emitted['update:modelValue'][0][0]).toBe(1)
+
+      expect(emitted['change']).toBeTruthy()
+      expect(emitted['change'][0][0]).toEqual({ value: 1 })
+    })
+
+    // 测试边界情况
+    test('当前值为 0 时点击不会触发清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 0,
+          clearable: true
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第一个星星
+      await (wrapper.vm as any).handleClick(0, false)
+
+      // 验证设置为1，而不是保持0
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeTruthy()
+      expect(emitted['update:modelValue'][0][0]).toBe(1)
+
+      expect(emitted['change']).toBeTruthy()
+      expect(emitted['change'][0][0]).toEqual({ value: 1 })
+    })
+
+    test('点击非最小值时不会清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 3,
+          clearable: true
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第三个星星（当前值为3，点击值为3，但不是最小值）
+      await (wrapper.vm as any).handleClick(2, false)
+
+      // 验证不会清空，而是保持为3
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeTruthy()
+      expect(emitted['update:modelValue'][0][0]).toBe(3)
+
+      expect(emitted['change']).toBeTruthy()
+      expect(emitted['change'][0][0]).toEqual({ value: 3 })
+    })
+
+    // 测试与其他状态的组合
+    test('readonly + clearable 时不会清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 1,
+          clearable: true,
+          readonly: true
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第一个星星
+      await (wrapper.vm as any).handleClick(0, false)
+
+      // 验证在只读状态下不会触发任何事件
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeFalsy()
+      expect(emitted['change']).toBeFalsy()
+    })
+
+    test('disabled + clearable 时不会清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 1,
+          clearable: true,
+          disabled: true
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第一个星星
+      await (wrapper.vm as any).handleClick(0, false)
+
+      // 验证在禁用状态下不会触发任何事件
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeFalsy()
+      expect(emitted['change']).toBeFalsy()
+    })
+
+    // 测试半星模式下非最小值不会清空
+    test('半星模式下点击非最小值不会清空', async () => {
+      const wrapper = mount(WdRate, {
+        props: {
+          modelValue: 1.5,
+          clearable: true,
+          allowHalf: true
+        }
+      })
+
+      await nextTick()
+
+      // 调用 handleClick 方法，模拟点击第二个半星（当前值为1.5，点击值为1.5，但不是最小值0.5）
+      await (wrapper.vm as any).handleClick(1, true)
+
+      // 验证不会清空，而是保持为1.5
+      const emitted = wrapper.emitted() as Record<string, any[]>
+      expect(emitted['update:modelValue']).toBeTruthy()
+      expect(emitted['update:modelValue'][0][0]).toBe(1.5)
+
+      expect(emitted['change']).toBeTruthy()
+      expect(emitted['change'][0][0]).toEqual({ value: 1.5 })
+    })
   })
 })
