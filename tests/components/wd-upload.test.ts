@@ -133,17 +133,62 @@ describe('WdUpload', () => {
   })
 
   test('文件预览功能', async () => {
-    const beforePreview = vi.fn()
+    const beforePreview = vi.fn((options) => {
+      // 立即调用 resolve 确保预览继续
+      options.resolve(true)
+    })
+    
     const wrapper = mount(WdUpload, {
       props: {
-        fileList: [{ url: 'https://example.com/image1.jpg', name: 'image1.jpg' }],
-        beforePreview
+        fileList: [{ 
+          url: 'https://example.com/image1.jpg', 
+          name: 'image1.jpg' 
+        }],
+        beforePreview,
+        reupload: false // 明确设置为 false，确保走预览分支
       }
     })
     
-    // 触发预览点击
-    const previewItem = wrapper.find('.wd-upload__preview')
-    await previewItem.trigger('click')
+    await nextTick() // 等待组件渲染完成
+    
+    // 更精确地查找图片元素（而不是整个预览容器）
+    const imageItem = wrapper.find('.wd-upload__picture')
+    expect(imageItem.exists()).toBe(true) // 确保元素存在
+    
+    // 触发点击事件
+    await imageItem.trigger('click')
+    
+    // 添加短暂延迟确保异步操作完成
+    await nextTick()
+    
+    expect(beforePreview).toHaveBeenCalled()
+  })
+
+  test('视频预览功能', async () => {
+    const beforePreview = vi.fn((options) => {
+      options.resolve(true)
+    })
+    
+    const wrapper = mount(WdUpload, {
+      props: {
+        fileList: [{
+          url: 'https://example.com/video1.mp4',
+          name: 'video1.mp4',
+          thumb: 'https://example.com/thumb1.jpg'
+        }],
+        beforePreview,
+        reupload: false
+      }
+    })
+    
+    await nextTick()
+    
+    // 对于视频，查找视频预览元素
+    const videoThumb = wrapper.find('.wd-upload__video')
+    expect(videoThumb.exists()).toBe(true)
+    
+    await videoThumb.trigger('click')
+    await nextTick()
     
     expect(beforePreview).toHaveBeenCalled()
   })
