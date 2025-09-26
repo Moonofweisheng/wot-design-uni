@@ -133,7 +133,7 @@ const emit = defineEmits<{
 }>()
 
 defineExpose<UploadExpose>({
-  submit: () => startUploadFiles(),
+  submit: () => startUploadFiles(), // 这里会返回 Promise
   abort: () => abort()
 })
 
@@ -261,9 +261,9 @@ function emitFileList() {
 }
 
 /**
- *  开始上传文件
+ *  开始上传文件，返回 Promise
  */
-function startUploadFiles(): Promise<{ success: boolean; results: Array<{ file: UploadFileItem; success: boolean; response?: any; error?: any }> }> {
+function startUploadFiles(): Promise<{ success: boolean; fileList: UploadFileItem[] }> {
   return new Promise((resolve) => {
     const { buildFormData, formData = {}, statusKey } = props
     const { action, name, header = {}, accept, successStatus, uploadMethod } = props
@@ -275,36 +275,29 @@ function startUploadFiles(): Promise<{ success: boolean; results: Array<{ file: 
     if (pendingFiles.length === 0) {
       // 如果没有待上传的文件，直接返回成功
       resolve({ 
-        success: true, 
-        results: uploadFiles.value.map(file => ({ 
-          file, 
-          success: file[statusKey] === 'success',
-          response: file.response 
-        })) 
+        success: uploadFiles.value.every(file => file[statusKey] === 'success'),
+        fileList: uploadFiles.value 
       })
       return
     }
 
     let completedCount = 0
     const totalCount = pendingFiles.length
-    const results: Array<{ file: UploadFileItem; success: boolean; response?: any; error?: any }> = []
 
-    // 处理单个文件上传完成
-    const handleFileComplete = (file: UploadFileItem, success: boolean, response?: any, error?: any) => {
-      results.push({ file, success, response, error })
+    const checkCompletion = () => {
       completedCount++
-
-      // 所有文件都上传完成
       if (completedCount === totalCount) {
-        const allSuccess = results.every(result => result.success)
+        const allSuccess = uploadFiles.value
+          .filter(file => pendingFiles.includes(file))
+          .every(file => file[statusKey] === 'success')
+        
         resolve({
           success: allSuccess,
-          results
+          fileList: uploadFiles.value
         })
       }
     }
 
-    // 上传每个文件
     for (const uploadFile of pendingFiles) {
       const uploadSingleFile = (customFormData?: Record<string, any>) => {
         const finalFormData = customFormData || formData
@@ -320,11 +313,11 @@ function startUploadFiles(): Promise<{ success: boolean; results: Array<{ file: 
           uploadMethod,
           onSuccess: (res, file, formData) => {
             handleSuccess(res, file, formData)
-            handleFileComplete(file, true, res)
+            checkCompletion()
           },
           onError: (err, file, formData) => {
             handleError(err, file, formData)
-            handleFileComplete(file, false, undefined, err)
+            checkCompletion()
           },
           onProgress: handleProgress
         })
@@ -335,12 +328,7 @@ function startUploadFiles(): Promise<{ success: boolean; results: Array<{ file: 
           file: uploadFile,
           formData,
           resolve: (formData: Record<string, any>) => {
-            if (formData) {
-              uploadSingleFile(formData)
-            } else {
-              // 如果 buildFormData 没有返回 formData，视为上传失败
-              handleFileComplete(uploadFile, false, undefined, { message: 'buildFormData returned no formData' })
-            }
+            formData ? uploadSingleFile(formData) : checkCompletion()
           }
         })
       } else {

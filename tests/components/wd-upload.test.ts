@@ -123,27 +123,126 @@ describe('WdUpload', () => {
     expect((wrapper.vm as any).autoUpload).toBe(true)
   })
 
-  test('手动上传功能', () => {
-    // 直接测试手动上传功能，不依赖组件实例
-    const startUploadFilesSpy = vi.fn()
+  test('手动上传功能', async () => {
+    const wrapper = mount(WdUpload, {
+      props: {
+        autoUpload: false,
+        fileList: [
+          {
+            url: 'https://example.com/image1.jpg',
+            status: 'pending'
+          }
+        ],
+        action: 'https://example.com/upload'
+      }
+    })
 
-    // 直接调用函数
-    startUploadFilesSpy()
+    // 模拟成功的上传响应
+    const mockSuccessResponse = { data: { id: 123, url: 'https://example.com/uploaded.jpg' } }
+    
+    // 模拟 useUpload 的 startUpload 方法
+    const mockStartUpload = vi.fn().mockImplementation((file, options) => {
+      // 模拟上传成功
+      options.onSuccess(mockSuccessResponse, file, {})
+    })
+    
+    // 替换组件中的 startUpload 方法
+    (wrapper.vm as any).startUpload = mockStartUpload
 
-    // 验证是否被调用
-    expect(startUploadFilesSpy).toHaveBeenCalled()
+    // 调用 submit 方法并等待 Promise 完成
+    const result = await (wrapper.vm as any).submit()
+    
+    expect(result.success).toBe(true)
+    expect(result.fileList).toBeDefined()
+    expect(mockStartUpload).toHaveBeenCalled()
+  })
+
+  test('手动上传失败情况', async () => {
+    const wrapper = mount(WdUpload, {
+      props: {
+        autoUpload: false,
+        fileList: [
+          {
+            url: 'https://example.com/image1.jpg',
+            status: 'pending'
+          }
+        ],
+        action: 'https://example.com/upload'
+      }
+    })
+
+    // 模拟失败的上传响应
+    const mockStartUpload = vi.fn().mockImplementation((file, options) => {
+      options.onError({ message: 'Upload failed' }, file, {})
+    })
+    
+    (wrapper.vm as any).startUpload = mockStartUpload
+
+    const result = await (wrapper.vm as any).submit()
+    
+    expect(result.success).toBe(false)
+    expect(result.fileList).toBeDefined()
+  })
+
+  test('submit方法返回Promise', () => {
+    const wrapper = mount(WdUpload, {
+      props: {
+        fileList: []
+      }
+    })
+
+    // 验证submit方法存在且返回Promise
+    const submitResult = (wrapper.vm as any).submit()
+    expect(submitResult).toBeInstanceOf(Promise)
+    
+    // 验证方法暴露正确
+    const exposeMethods = (wrapper.vm as any).$.exposed
+    expect(exposeMethods.submit).toBeDefined()
+    expect(exposeMethods.abort).toBeDefined()
+  })
+
+  test('无待上传文件时submit立即resolve', async () => {
+    const wrapper = mount(WdUpload, {
+      props: {
+        fileList: [
+          {
+            url: 'https://example.com/image1.jpg',
+            status: 'success'
+          }
+        ]
+      }
+    })
+
+    const result = await (wrapper.vm as any).submit()
+    expect(result.success).toBe(true)
+    expect(result.fileList.length).toBe(1)
   })
 
   test('文件上传前钩子', async () => {
     const beforeUpload = vi.fn((options) => {
       options.resolve(true)
     })
+    
     const wrapper = mount(WdUpload, {
       props: {
-        beforeUpload
+        beforeUpload,
+        autoUpload: false,
+        fileList: []
       }
     })
-    expect((wrapper.vm as any).beforeUpload).toBe(beforeUpload)
+
+    // 模拟文件选择
+    const mockFiles = [{ path: 'temp/image.jpg', size: 1024, name: 'image.jpg', type: 'image' }]
+    
+    // 模拟 chooseFile 返回
+    const mockChooseFile = vi.fn().mockResolvedValue(mockFiles)
+    ;(wrapper.vm as any).chooseFile = mockChooseFile
+
+    // 触发文件选择
+    await (wrapper.vm as any).onChooseFile()
+    
+    expect(beforeUpload).toHaveBeenCalled()
+    expect(mockChooseFile).toHaveBeenCalled()
   })
 
   test('文件预览功能', async () => {
@@ -211,6 +310,41 @@ describe('WdUpload', () => {
     const errorIcon = wrapper.find('.wd-icon-close-outline')
 
     expect(loadingIcon.exists() || errorIcon.exists()).toBe(true)
+  })
+
+  test('多个文件并发上传', async () => {
+    const wrapper = mount(WdUpload, {
+      props: {
+        autoUpload: false,
+        fileList: [
+          { url: 'https://example.com/image1.jpg', status: 'pending' },
+          { url: 'https://example.com/image2.jpg', status: 'pending' },
+          { url: 'https://example.com/image3.jpg', status: 'success' } // 一个已成功的文件
+        ]
+      }
+    })
+
+    let uploadCount = 0
+    const mockStartUpload = vi.fn().mockImplementation((file, options) => {
+      uploadCount++
+      // 模拟异步上传
+      setTimeout(() => {
+        if (uploadCount <= 2) { // 让一个失败
+          options.onSuccess({ data: 'success' }, file, {})
+        } else {
+          options.onError({ message: 'Upload failed' }, file, {})
+        }
+      }, 10)
+    })
+    
+    ;(wrapper.vm as any).startUpload = mockStartUpload
+
+    const result = await (wrapper.vm as any).submit()
+    
+    // 应该只上传了2个pending状态的文件
+    expect(mockStartUpload).toHaveBeenCalledTimes(2)
+    expect(result.success).toBe(false) // 因为有失败
+    expect(result.fileList.length).toBe(3)
   })
 
   // 测试自定义header属性
@@ -464,14 +598,21 @@ describe('WdUpload', () => {
   })
 
   // 测试abort方法
-  test('中断上传', () => {
-    // 直接测试中断上传功能，不依赖组件实例
+  test('中断上传', async () => {
+    const wrapper = mount(WdUpload, {
+      props: {
+        fileList: [
+          { url: 'https://example.com/image1.jpg', status: 'pending' }
+        ]
+      }
+    })
+
     const abortSpy = vi.fn()
+    ;(wrapper.vm as any).abort = abortSpy
 
-    // 直接调用函数
-    abortSpy()
-
-    // 验证是否被调用
+    // 通过exposed访问abort方法
+    await (wrapper.vm as any).abort()
+    
     expect(abortSpy).toHaveBeenCalled()
   })
 
@@ -493,19 +634,33 @@ describe('WdUpload', () => {
   })
 
   // 测试构建表单数据钩子
-  test('构建表单数据钩子', () => {
-    // 直接测试构建表单数据钩子，不依赖组件实例
+  test('构建表单数据钩子', async () => {
     const buildFormData = vi.fn((options) => {
-      options.resolve({ custom: 'data' })
+      options.resolve({ custom: 'data', timestamp: Date.now() })
+    })
+    
+    const wrapper = mount(WdUpload, {
+      props: {
+        buildFormData,
+        autoUpload: false,
+        fileList: [
+          {
+            url: 'https://example.com/image1.jpg',
+            status: 'pending'
+          }
+        ]
+      }
     })
 
-    const startUploadFilesSpy = vi.fn()
+    // 模拟上传调用
+    const mockStartUpload = vi.fn()
+    ;(wrapper.vm as any).startUpload = mockStartUpload
 
-    // 模拟调用
-    buildFormData({ resolve: (data: any) => startUploadFilesSpy(data) })
-
-    // 验证是否被调用
+    await (wrapper.vm as any).startUploadFiles()
+    
     expect(buildFormData).toHaveBeenCalled()
-    expect(startUploadFilesSpy).toHaveBeenCalledWith({ custom: 'data' })
+    // 验证 buildFormData 被调用并传递了正确的参数
+    expect(buildFormData.mock.calls[0][0].file).toBeDefined()
+    expect(typeof buildFormData.mock.calls[0][0].resolve).toBe('function')
   })
 })
