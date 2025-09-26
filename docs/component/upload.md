@@ -739,7 +739,7 @@ count 值在 H5 平台的表现基于浏览器本身的规范。目前测试结�
 
 | 方法名称 | 说明         | 参数 | 最低版本         |
 | -------- | ------------ | ---- | ---------------- |
-| submit   | 手动开始上传 | 返回 Promise, result = { success, fileList } success 上传是否成功, 'fileList' 上传图片列表 | 1.12.4 |
+| submit   | 手动开始上传 | Promise<{ success: boolean; fileList: UploadFile[] }> success 为所有待上传文件均成功, 'fileList' 为上传图片列表 | 1.12.4 |
 
 ## Upload 外部样式类
 
