@@ -263,52 +263,91 @@ function emitFileList() {
 /**
  *  开始上传文件
  */
-function startUploadFiles() {
-  const { buildFormData, formData = {}, statusKey } = props
-  const { action, name, header = {}, accept, successStatus, uploadMethod } = props
-  const statusCode = isDef(successStatus) ? successStatus : 200
+function startUploadFiles(): Promise<{ success: boolean; results: Array<{ file: UploadFileItem; success: boolean; response?: any; error?: any }> }> {
+  return new Promise((resolve) => {
+    const { buildFormData, formData = {}, statusKey } = props
+    const { action, name, header = {}, accept, successStatus, uploadMethod } = props
+    const statusCode = isDef(successStatus) ? successStatus : 200
 
-  for (const uploadFile of uploadFiles.value) {
-    // 仅开始未上传的文件
-    if (uploadFile[statusKey] === UPLOAD_STATUS.PENDING) {
+    // 获取所有待上传的文件
+    const pendingFiles = uploadFiles.value.filter(file => file[statusKey] === UPLOAD_STATUS.PENDING)
+    
+    if (pendingFiles.length === 0) {
+      // 如果没有待上传的文件，直接返回成功
+      resolve({ 
+        success: true, 
+        results: uploadFiles.value.map(file => ({ 
+          file, 
+          success: file[statusKey] === 'success',
+          response: file.response 
+        })) 
+      })
+      return
+    }
+
+    let completedCount = 0
+    const totalCount = pendingFiles.length
+    const results: Array<{ file: UploadFileItem; success: boolean; response?: any; error?: any }> = []
+
+    // 处理单个文件上传完成
+    const handleFileComplete = (file: UploadFileItem, success: boolean, response?: any, error?: any) => {
+      results.push({ file, success, response, error })
+      completedCount++
+
+      // 所有文件都上传完成
+      if (completedCount === totalCount) {
+        const allSuccess = results.every(result => result.success)
+        resolve({
+          success: allSuccess,
+          results
+        })
+      }
+    }
+
+    // 上传每个文件
+    for (const uploadFile of pendingFiles) {
+      const uploadSingleFile = (customFormData?: Record<string, any>) => {
+        const finalFormData = customFormData || formData
+        
+        startUpload(uploadFile, {
+          action,
+          header,
+          name,
+          formData: finalFormData,
+          fileType: accept as 'image' | 'video' | 'audio',
+          statusCode,
+          statusKey,
+          uploadMethod,
+          onSuccess: (res, file, formData) => {
+            handleSuccess(res, file, formData)
+            handleFileComplete(file, true, res)
+          },
+          onError: (err, file, formData) => {
+            handleError(err, file, formData)
+            handleFileComplete(file, false, undefined, err)
+          },
+          onProgress: handleProgress
+        })
+      }
+
       if (buildFormData) {
         buildFormData({
           file: uploadFile,
           formData,
           resolve: (formData: Record<string, any>) => {
-            formData &&
-              startUpload(uploadFile, {
-                action,
-                header,
-                name,
-                formData,
-                fileType: accept as 'image' | 'video' | 'audio',
-                statusCode,
-                statusKey,
-                uploadMethod,
-                onSuccess: handleSuccess,
-                onError: handleError,
-                onProgress: handleProgress
-              })
+            if (formData) {
+              uploadSingleFile(formData)
+            } else {
+              // 如果 buildFormData 没有返回 formData，视为上传失败
+              handleFileComplete(uploadFile, false, undefined, { message: 'buildFormData returned no formData' })
+            }
           }
         })
       } else {
-        startUpload(uploadFile, {
-          action,
-          header,
-          name,
-          formData,
-          fileType: accept as 'image' | 'video' | 'audio',
-          statusCode,
-          statusKey,
-          uploadMethod,
-          onSuccess: handleSuccess,
-          onError: handleError,
-          onProgress: handleProgress
-        })
+        uploadSingleFile()
       }
     }
-  }
+  })
 }
 
 /**
