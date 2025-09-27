@@ -2,6 +2,14 @@ import { mount } from '@vue/test-utils'
 import WdTour from '@/uni_modules/wot-design-uni/components/wd-tour/wd-tour.vue'
 import { describe, test, expect, vi, beforeEach } from 'vitest'
 
+// 模拟 useLockScroll 函数
+vi.mock('@/uni_modules/wot-design-uni/components/composables/useLockScroll', () => ({
+  default: vi.fn(() => ({
+    lock: vi.fn(),
+    unlock: vi.fn()
+  }))
+}))
+
 // 模拟uni对象
 const mockUni = {
   createSelectorQuery: vi.fn(() => ({

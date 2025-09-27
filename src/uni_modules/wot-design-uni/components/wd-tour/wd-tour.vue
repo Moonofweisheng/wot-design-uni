@@ -75,7 +75,7 @@ interface ElementRect {
 const props = defineProps(tourProps)
 const emit = defineEmits(['update:modelValue', 'update:current', 'change', 'prev', 'next', 'finish', 'skip', 'error'])
 // #ifdef H5
-useLockScroll(() => props.modelValue)
+const { lock, unlock } = useLockScroll(() => props.modelValue)
 // #endif
 
 // 响应式数据
@@ -139,7 +139,17 @@ const highlightStyle = computed(() => {
 })
 
 const popoverStyle = computed(() => {
-  const style = {
+  const style: {
+    transition: string
+    position: string
+    left: string
+    transform: string
+    maxWidth: string
+    textAlign: string
+    zIndex: number
+    top?: string
+    bottom?: string
+  } = {
     transition: props.duration + 'ms all',
     position: 'fixed',
     left: '50%',
