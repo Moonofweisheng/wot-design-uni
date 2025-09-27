@@ -1,0 +1,123 @@
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
+
+@include b(tour) {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+
+  @include e(mask) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  @include e(highlight) {
+    position: fixed;
+    background-color: transparent;
+    box-sizing: content-box;
+    animation: tour-show 0.3s ease-in-out;
+  }
+
+  @include e(popover) {
+    z-index: 10000;
+    background-color: $-color-white;
+    padding: 10px 12px;
+    border-radius: 8px;
+    width: fit-content;
+    min-width: 200px;
+    animation: tour-show 0.3s ease;
+  }
+
+  @include e(info) {
+    font-size: 12px;
+    background-color: $-color-white;
+    border-radius: 16rpx;
+    border: 1px solid $-color-white;
+    color: $-color-black;
+    width: fit-content;
+    text-align: left;
+  }
+
+  @include e(buttons) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 5px;
+  }
+
+  @include e(prev) {
+    @include e(default){
+      font-size: 12px;
+      border-radius: 4px;
+      padding: 5px 8px;
+      white-space: nowrap;
+    }
+  }
+
+  @include e(next) {
+    @include e(default) {
+      font-size: 12px;
+      border-radius: 4px;
+      padding: 5px 8px;
+      background-color: $-button-primary-bg-color;
+      color: $-color-white;
+      white-space: nowrap;
+    }
+  }
+
+  @include e(finish) {
+    @include e(default) {
+      font-size: 12px;
+      border-radius: 4px;
+      padding: 5px 8px;
+      background-color: $-button-primary-bg-color;
+      color: $-color-white;
+      white-space: nowrap;
+    }
+  }
+
+  @include e(skip) {
+    
+    @include e(default){
+      background-color: $-color-white;
+      color: $-color-black;
+      font-size: 12px;
+      padding: 5px 8px;
+      white-space: nowrap;
+    }
+  }
+}
+
+@keyframes tour-show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.wot-theme-dark {
+  @include b(tour) {
+    @include e(popover) {
+      background-color: $-dark-background2;
+    }
+    
+    @include e(info) {
+      background-color: $-dark-background2;
+      border-color: $-dark-background2;
+      color: $-dark-color;
+    }
+    
+    @include e(skip) {
+      background-color: $-dark-background2;
+      color: $-dark-color;
+    }
+  }
+}

@@ -240,6 +240,10 @@ export default defineConfig({
             {
               link: '/en-US/component/index-bar',
               text: 'IndexBar'
+            },
+            {
+              link: '/en-US/component/tour',
+              text: 'Tour'
             }
           ]
         },
