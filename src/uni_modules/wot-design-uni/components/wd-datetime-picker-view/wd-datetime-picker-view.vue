@@ -7,6 +7,7 @@
     v-model="pickerValue"
     :columns="columns"
     :columns-height="columnsHeight"
+    :item-height="itemHeight"
     :columnChange="columnChange"
     :loading="loading"
     :loading-color="loadingColor"
