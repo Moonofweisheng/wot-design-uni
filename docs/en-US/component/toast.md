@@ -2,6 +2,12 @@
 
 A lightweight feedback component that appears in the middle of the page.
 
+:::tip Note
+`Toast` supports controlling component styles through the `props` attribute since version 1.7.0. See [props](#props) for fields. Note that the `options` priority of functional call API is higher than `props`.
+
+For global calling solutions, see [wot-starter](https://starter.wot-ui.cn/guide/feedback.html), which supports globally callable feedback components for use in scenarios like route navigation guards and network request interceptors.
+:::
+
 ## Basic Usage
 
 The Toast component is a functional component that can be used by calling the `$toast` method on the current instance.
