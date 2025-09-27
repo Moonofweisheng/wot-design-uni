@@ -107,7 +107,7 @@ You can control the language mode of the license plate keyboard through the `car
 <!-- Uncontrolled mode: Disable auto-switching -->
 <wd-cell title="License Plate Keyboard (No Auto-switch)" :value="value2" is-link @click="showKeyBoard2" />
 
-<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" :auto-switch-lang="false" @input="onInput" @delete="onDelete"></wd-keyboard>
+<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" auto-switch-lang @input="onInput" @delete="onDelete"></wd-keyboard>
 ```
 
 ```ts

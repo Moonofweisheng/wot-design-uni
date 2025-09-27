@@ -105,9 +105,9 @@ const onDelete = () => showToast('删除')
 <wd-keyboard v-model="value" v-model:visible="visible" v-model:car-lang="lang" mode="car" @input="onInput" @delete="onDelete"></wd-keyboard>
 
 <!-- 非受控模式：禁用自动切换 -->
-<wd-cell title="车牌号键盘（非自动切换）" :value="value2" is-link @click="showKeyBoard2" />
+<wd-cell title="车牌号键盘（非受控）" :value="value2" is-link @click="showKeyBoard2" />
 
-<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" :auto-switch-lang="false" @input="onInput" @delete="onDelete"></wd-keyboard>
+<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" auto-switch-lang @input="onInput" @delete="onDelete"></wd-keyboard>
 ```
 
 ```ts
