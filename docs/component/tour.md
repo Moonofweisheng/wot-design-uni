@@ -1,12 +1,12 @@
 # Guide 漫游组件
 
-## 介绍
+用于引导用户逐步了解应用功能的组件，可以高亮显示页面中的特定元素并提供说明。
 
-漫游组件用于引导用户逐步了解应用功能的组件，可以高亮显示页面中的特定元素并提供说明。
+## 基本使用
 
-## 基本用法
+通过 `steps` 属性设置引导步骤，通过 `v-model` 控制显示隐藏。
 
-```vue
+```html
 <template>
   <view>
     <view class="tour-item" id="step1">
@@ -20,7 +20,7 @@
     </view>
     
     <wd-tour 
-      v-model="showTour" 
+      :model-value="showTour" 
       :steps="steps" 
       v-model:current="current"
       @finish="onFinish"
@@ -28,7 +28,7 @@
   </view>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 
 const showTour = ref(true)
@@ -53,132 +53,101 @@ function onFinish() {
 
 ### 自定义引导内容
 
-```vue
-<template>
-  <wd-tour v-model="showTour" :steps="steps">
-    <template #content>
-      <view class="custom-content">
-        <wd-icon name="help-circle-filled" size="22px"></wd-icon>
-        <text class="custom-text">自定义引导内容区域</text>
-      </view>
-    </template>
-  </wd-tour>
-</template>
+通过 `content` 插槽可以自定义引导内容。
+
+```html
+<wd-tour :model-value="showTour" :steps="steps">
+  <template #content>
+    <view class="custom-content">
+      <wd-icon name="help-circle-filled" size="22px"></wd-icon>
+      <text class="custom-text">自定义引导内容区域</text>
+    </view>
+  </template>
+</wd-tour>
 ```
 
 ### 自定义高亮区域
 
-```vue
-<template>
-  <wd-tour v-model="showTour" :steps="steps">
-    <template #highlight="{ elementInfo }">
-      <view class="custom-highlight" :style="getCustomHighlightStyle(elementInfo)"></view>
-    </template>
-  </wd-tour>
-</template>
+通过 `highlight` 插槽可以自定义高亮区域样式。
 
-<script setup>
-function getCustomHighlightStyle(elementInfo) {
-  if (!elementInfo) return {}
-
-  return {
-    position: 'fixed',
-    top: elementInfo.top - 15 + 'px',
-    left: elementInfo.left - 15 + 'px',
-    width: elementInfo.width + 30 + 'px',
-    height: elementInfo.height + 30 + 'px',
-    border: '2px dashed #ff0000',
-    borderRadius: '8px',
-    background: 'rgba(255, 0, 0, 0.1)',
-    boxSizing: 'border-box'
-  }
-}
-</script>
+```html
+<wd-tour :model-value="showTour" :steps="steps">
+  <template #highlight="{ elementInfo }">
+    <view class="custom-highlight" :style="getCustomHighlightStyle(elementInfo)"></view>
+  </template>
+</wd-tour>
 ```
 
 ### 自定义按钮
 
-```vue
-<template>
-  <wd-tour v-model="showTour" :steps="steps" :next-text="'继续'" :finish-text="'知道了'">
-    <template #next>
-      <view class="custom-button custom-next">下一步</view>
-    </template>
-    <template #finish>
-      <view class="custom-button custom-finish">完成</view>
-    </template>
-  </wd-tour>
-</template>
+通过 `prev`、`next`、`skip`、`finish` 插槽可以自定义按钮。
+
+```html
+<wd-tour :model-value="showTour" :steps="steps" next-text="继续" finish-text="知道了">
+  <template #next>
+    <view class="custom-button custom-next">下一步</view>
+  </template>
+  <template #finish>
+    <view class="custom-button custom-finish">完成</view>
+  </template>
+</wd-tour>
 ```
 
 ### 点击蒙版继续
 
-```vue
-<template>
-  <wd-tour 
-    v-model="showTour" 
-    :steps="steps" 
-    :click-mask-next="true"
-  />
-</template>
+通过 `click-mask-next` 属性可以设置点击蒙版是否可以下一步。
+
+```html
+<wd-tour 
+  :model-value="showTour" 
+  :steps="steps" 
+  :click-mask-next="true"
+/>
 ```
 
 ### 自定义蒙版样式
 
-```vue
-<template>
-  <wd-tour 
-    v-model="showTour" 
-    :steps="steps" 
-    :mask-color="'rgba(255, 0, 0, 0.6)'"
-    :offset="40"
-    :border-radius="15"
-    :padding="20"
-  />
-</template>
+通过 `mask-color`、`offset`、`border-radius`、`padding` 属性可以自定义蒙版样式。
+
+```html
+<wd-tour 
+  :model-value="showTour" 
+  :steps="steps" 
+  mask-color="rgba(255, 0, 0, 0.6)"
+  :offset="40"
+  :border-radius="15"
+  :padding="20"
+/>
 ```
 
 ### 关闭蒙版
 
-```vue
-<template>
-  <wd-tour 
-    v-model="showTour" 
-    :steps="steps" 
-    :mask="false"
-  />
-</template>
+通过 `mask` 属性可以控制是否显示蒙版。
+
+```html
+<wd-tour 
+  :model-value="showTour" 
+  :steps="steps" 
+  :mask="false"
+/>
 ```
 
 ### 控制当前步骤
 
-```vue
-<template>
-  <view>
-    <wd-button @click="current = 2">跳转到第三步</wd-button>
-    <wd-tour 
-      v-model="showTour" 
-      :steps="steps" 
-      v-model:current="current"
-    />
-  </view>
-</template>
+通过 `v-model:current` 可以控制当前步骤。
 
-<script setup>
-import { ref } from 'vue'
-
-const showTour = ref(true)
-const current = ref(0)
-
-const steps = [
-  { element: '#step1', content: '第一步' },
-  { element: '#step2', content: '第二步' },
-  { element: '#step3', content: '第三步' },
-  { element: '#step4', content: '第四步' }
-]
-</script>
+```html
+<view>
+  <wd-button @click="current = 2">跳转到第三步</wd-button>
+  <wd-tour 
+    :model-value="showTour" 
+    :steps="steps" 
+    v-model:current="current"
+  />
+</view>
 ```
-## Props 属性
+
+## Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|--------|--------|
@@ -187,16 +156,16 @@ const steps = [
 | current | 当前步骤索引，支持 v-model:current 双向绑定 | number | - | 0 |
 | mask | 蒙版是否显示 | boolean | - | true |
 | mask-color | 蒙版颜色（支持 rgba 格式） | string | - | rgba(0, 0, 0, 0.5) |
-| offset | 引导提示框与高亮框的间距 | string / number | - | 20 |
+| offset | 引导提示框与高亮框的间距 | number | - | 20 |
 | duration | 动画持续时间（毫秒） | number | - | 300 |
-| border-radius | 高亮区域的圆角大小 | string / number | - | 8 |
-| padding | 高亮区域的内边距 | string / number | - | 10 |
+| border-radius | 高亮区域的圆角大小 | number | - | 8 |
+| padding | 高亮区域的内边距 | number | - | 10 |
 | prev-text | 上一步按钮文字 | string | - | 上一步 |
 | next-text | 下一步按钮文字 | string | - | 下一步 |
 | skip-text | 跳过按钮文字 | string | - | 跳过 |
 | finish-text | 完成按钮文字 | string | - | 完成 |
-| bottom-safety-offset | 底部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | string / number | - | 100 |
-| top-safety-offset | 顶部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | string / number | - | 0 |
+| bottom-safety-offset | 底部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | number | - | 100 |
+| top-safety-offset | 顶部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | number | - | 0 |
 | custom-nav | 是否自定义顶部导航栏 | boolean | - | false |
 | click-mask-next | 点击蒙版是否可以下一步 | boolean | - | false |
 | z-index | 引导组件的层级 | number | - | 999998 |
@@ -209,18 +178,18 @@ const steps = [
 | element | 需要高亮的元素选择器 | string |
 | content | 引导文字内容（支持富文本） | string |
 
-## Events 事件
+## Events
 
 | 事件名 | 说明 | 参数 |
 |--------|------|------|
-| change | 步骤改变时触发 | currentIndex: number |
-| prev | 点击上一步按钮时触发 | { oldCurrent: number, current: number, total: number, isUp: number } |
-| next | 点击下一步按钮时触发 | { oldCurrent: number, current: number, total: number, isUp: number } |
-| finish | 点击完成按钮时触发 | { current: number, total: number } |
-| skip | 点击跳过按钮时触发 | { current: number, total: number } |
-| error | 查找引导元素出错时触发 | { message: string, element: string } |
+| change | 步骤改变时触发 | `{currentIndex: number }` |
+| prev | 点击上一步按钮时触发 | `{ oldCurrent: number, current: number, total: number, isUp: number }` |
+| next | 点击下一步按钮时触发 | `{ oldCurrent: number, current: number, total: number, isUp: number }` |
+| finish | 点击完成按钮时触发 | `{ current: number, total: number }` |
+| skip | 点击跳过按钮时触发 | `{ current: number, total: number }` |
+| error | 查找引导元素出错时触发 | `{ message: string, element: string }` |
 
-## Slots 插槽
+## Slots
 
 | 插槽名 | 说明 | 参数 |
 |--------|------|------|
@@ -231,7 +200,7 @@ const steps = [
 | skip | 自定义跳过按钮 | - |
 | finish | 自定义完成按钮 | - |
 
-## 方法
+## Methods
 
 通过 ref 可以获取到组件实例，调用组件提供的方法：
 
