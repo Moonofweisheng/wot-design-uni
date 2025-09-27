@@ -351,7 +351,7 @@ export type UploadExpose = {
   /**
    * 手动触发上传
    */
-  submit: () => void
+  submit: () => Promise<{ success: boolean; fileList: UploadFileItem[] }>
   /**
    * 取消上传
    * @param task 上传任务

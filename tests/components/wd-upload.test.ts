@@ -123,15 +123,22 @@ describe('WdUpload', () => {
     expect((wrapper.vm as any).autoUpload).toBe(true)
   })
 
-  test('手动上传功能', () => {
-    // 直接测试手动上传功能，不依赖组件实例
-    const startUploadFilesSpy = vi.fn()
+  test('手动上传功能', async () => {
+    // 创建一个返回 Promise 的模拟函数
+    const startUploadFilesSpy = vi.fn().mockResolvedValue('上传成功')
 
-    // 直接调用函数
-    startUploadFilesSpy()
+    // 直接调用函数并获取返回的 Promise
+    const resultPromise = startUploadFilesSpy()
 
     // 验证是否被调用
     expect(startUploadFilesSpy).toHaveBeenCalled()
+
+    // 验证返回的是 Promise
+    expect(resultPromise).toBeInstanceOf(Promise)
+
+    // 等待 Promise 完成并验证结果
+    const result = await resultPromise
+    expect(result).toBe('上传成功')
   })
 
   test('文件上传前钩子', async () => {
