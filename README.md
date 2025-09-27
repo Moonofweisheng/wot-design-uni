@@ -52,7 +52,7 @@
 - 🌍 支持国际化，内置 15 种语言包.
 - 📖 提供丰富的文档和组件示例.
 - 🎨 支持修改 CSS 变量实现主题定制.
-- 🍭 支持暗黑模式
+- 🍭 支持暗黑模式.
 
 ## 📱 预览
 
@@ -87,15 +87,16 @@
 
 | 项目                                                                                                        | 描述                                                 |
 | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [wot-starter](https://github.com/wot-ui/wot-starter)                  | 基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 的 wot-ui 快速起手项目     |
+| [wot-ui-intellisense](https://github.com/wot-ui/wot-ui-intellisense)                  | wot-ui vscode 代码提示插件     |
 | [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app)                                            | 多端统一开发框架 uni-app 优秀开发资源汇总            |
 | [create-uni](https://github.com/uni-helper/create-uni)                                                      | 快速创建 uni-app 项目                                |
-| [wot-starter](https://github.com/wot-ui/wot-starter)                  | 基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 的 wot-ui 快速起手项目     |
-| [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | 基于 wot-design-uni 的 uni-app 零售行业模板          |
-| [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot UI 代码块提示                            |
+| [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | 基于 wot-ui 的 uni-app 零售行业模板          |
+| [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | wot-ui 代码块提示                            |
 | [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci)                                                | 一个 uni-app 小程序端构建后支持 CI（持续集成）的插件 |
 | [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router)                                        | 一个基于 vue3 和 Typescript 的轻量级 uni-app 路由库  |
-| [unibest](https://github.com/unibest-tech/unibest)                                                              | 基于 wot-design-uni 的 uni-app 模板                  |
-| [wot-design-uni AI 助手](https://www.coze.cn/store/bot/7347916532258701363)                                 | 一个能回答你关于 wot-design-uni 组件库问题的智能助手 |
+| [unibest](https://github.com/unibest-tech/unibest)                                                              | 基于 wot-ui 的 uni-app 模板                  |
+| [wot-design-uni AI 助手](https://www.coze.cn/store/bot/7347916532258701363)                                 | 一个能回答你关于 wot-ui 组件库问题的智能助手 |
 | [uni-ku-root](https://github.com/uni-ku/root)                                                               | 一个模拟 App.vue 原有能力的根组件插件                  |
 
 ## 贡献指南
