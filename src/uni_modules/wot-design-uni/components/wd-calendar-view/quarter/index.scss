@@ -1,0 +1,153 @@
+@import '../../common/abstracts/variable';
+@import '../../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(year) {
+    @include e(title) {
+      color: $-dark-color;
+    }
+
+    @include e(quarters) {
+      color: $-dark-color;
+    }
+
+    @include e(quarter) {
+
+      @include when(disabled) {
+        .wd-year__quarter-text {
+          color: $-dark-color-gray;
+        }
+      }
+    }
+  }
+}
+
+@include b(year) {
+  @include e(title) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    font-size: $-calendar-panel-title-fs;
+    color: $-calendar-panel-title-color;
+  }
+
+  @include e(quarters) {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: $-calendar-day-fs;
+    color: $-calendar-day-color;
+  }
+
+  @include e(quarter) {
+    position: relative;
+    width: 50%;
+    height: $-calendar-day-height;
+    line-height: $-calendar-day-height;
+    text-align: center;
+    margin-bottom: $-calendar-item-margin-bottom;
+
+    @include when(disabled) {
+      .wd-year__quarter-text {
+        color: $-calendar-disabled-color;
+      }
+    }
+
+    @include when(current) {
+      color: $-calendar-active-color;
+    }
+
+    @include when(selected) {
+      color: #fff;
+
+      .wd-year__quarter-text {
+        border-radius: $-calendar-active-border;
+        background: $-calendar-active-color;
+      }
+    }
+
+    @include when(middle) {
+      background: $-calendar-range-color;
+    }
+
+    @include when(start) {
+      color: $-calendar-selected-color;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 50%;
+        bottom: 0;
+        content: '';
+        background: $-calendar-range-color;
+      }
+
+      .wd-year__quarter-text {
+        background: $-calendar-active-color;
+        border-radius: $-calendar-active-border 0 0 $-calendar-active-border;
+      }
+
+      &.is-without-end::after {
+        display: none;
+      }
+    }
+
+    @include when(end) {
+      color: $-calendar-selected-color;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 50%;
+        bottom: 0;
+        content: '';
+        background: $-calendar-range-color;
+      }
+
+      .wd-year__quarter-text {
+        background: $-calendar-active-color;
+        border-radius: 0 $-calendar-active-border $-calendar-active-border 0;
+      }
+    }
+
+    @include when(same) {
+      color: $-calendar-selected-color;
+
+      .wd-year__quarter-text {
+        background: $-calendar-active-color;
+        border-radius: $-calendar-active-border;
+      }
+    }
+    @include when(last-row){
+      margin-bottom: 0;
+    }
+  }
+
+  @include e(quarter-text) {
+    width: $-calendar-quarter-width;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  @include e(quarter-top) {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    line-height: 1.1;
+    font-size: $-calendar-info-fs;
+    text-align: center;
+  }
+
+  @include e(quarter-bottom) {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    line-height: 1.1;
+    font-size: $-calendar-info-fs;
+    text-align: center;
+  }
+}
