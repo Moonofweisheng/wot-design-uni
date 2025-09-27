@@ -298,37 +298,37 @@ function startUploadFiles(): Promise<{ success: boolean; fileList: UploadFileIte
       }
     }
 
-    for (const uploadFile of pendingFiles) {
-      const uploadSingleFile = (customFormData?: Record<string, any>) => {
-        const finalFormData = customFormData || formData
-        
-        startUpload(uploadFile, {
-          action,
-          header,
-          name,
-          formData: finalFormData,
-          fileType: accept as 'image' | 'video' | 'audio',
-          statusCode,
-          statusKey,
-          uploadMethod,
-          onSuccess: (res, file, formData) => {
-            handleSuccess(res, file, formData)
-            checkCompletion()
-          },
-          onError: (err, file, formData) => {
-            handleError(err, file, formData)
-            checkCompletion()
-          },
-          onProgress: handleProgress
-        })
-      }
+    const uploadSingleFile = (customFormData?: Record<string, any>) => {
+      const finalFormData = customFormData ?? formData
+      
+      startUpload(uploadFile, {
+        action,
+        header,
+        name,
+        formData: finalFormData,
+        fileType: accept as 'image' | 'video' | 'audio',
+        statusCode,
+        statusKey,
+        uploadMethod,
+        onSuccess: (res, file, formData) => {
+          handleSuccess(res, file, formData)
+          checkCompletion()
+        },
+        onError: (err, file, formData) => {
+          handleError(err, file, formData)
+          checkCompletion()
+        },
+        onProgress: handleProgress
+      })
+    }
 
+    for (const uploadFile of pendingFiles) {
       if (buildFormData) {
         buildFormData({
           file: uploadFile,
           formData,
-          resolve: (formData: Record<string, any>) => {
-            formData ? uploadSingleFile(formData) : checkCompletion()
+          resolve: (customFormData?: Record<string, any>) => {
+            uploadSingleFile(customFormData)
           }
         })
       } else {
