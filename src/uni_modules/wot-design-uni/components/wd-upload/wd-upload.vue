@@ -133,7 +133,7 @@ const emit = defineEmits<{
 }>()
 
 defineExpose<UploadExpose>({
-  submit: () => startUploadFiles(),
+  submit: () => startUploadFiles(), // 这里会返回 Promise
   abort: () => abort()
 })
 
@@ -261,54 +261,84 @@ function emitFileList() {
 }
 
 /**
- *  开始上传文件
+ *  开始上传文件，返回 Promise
  */
-function startUploadFiles() {
-  const { buildFormData, formData = {}, statusKey } = props
-  const { action, name, header = {}, accept, successStatus, uploadMethod } = props
-  const statusCode = isDef(successStatus) ? successStatus : 200
+function startUploadFiles(): Promise<{ success: boolean; fileList: UploadFileItem[] }> {
+  return new Promise((resolve) => {
+    const { buildFormData, formData = {}, statusKey } = props
+    const { action, name, header = {}, accept, successStatus, uploadMethod } = props
+    const statusCode = isDef(successStatus) ? successStatus : 200
 
-  for (const uploadFile of uploadFiles.value) {
-    // 仅开始未上传的文件
-    if (uploadFile[statusKey] === UPLOAD_STATUS.PENDING) {
-      if (buildFormData) {
-        buildFormData({
-          file: uploadFile,
-          formData,
-          resolve: (formData: Record<string, any>) => {
-            formData &&
-              startUpload(uploadFile, {
-                action,
-                header,
-                name,
-                formData,
-                fileType: accept as 'image' | 'video' | 'audio',
-                statusCode,
-                statusKey,
-                uploadMethod,
-                onSuccess: handleSuccess,
-                onError: handleError,
-                onProgress: handleProgress
-              })
-          }
+    // 获取所有待上传的文件
+    const pendingFiles = uploadFiles.value.filter(file => file[statusKey] === UPLOAD_STATUS.PENDING)
+    
+    if (pendingFiles.length === 0) {
+      // 如果没有待上传的文件，直接返回成功
+      resolve({ 
+        success: uploadFiles.value.every(file => file[statusKey] === 'success'),
+        fileList: uploadFiles.value 
+      })
+      return
+    }
+
+    let completedCount = 0
+    const totalCount = pendingFiles.length
+
+    const checkCompletion = () => {
+      completedCount++
+      if (completedCount === totalCount) {
+        const allSuccess = uploadFiles.value
+          .filter(file => pendingFiles.includes(file))
+          .every(file => file[statusKey] === 'success')
+        
+        resolve({
+          success: allSuccess,
+          fileList: uploadFiles.value
         })
-      } else {
-        startUpload(uploadFile, {
+      }
+    }
+
+    // 遍历所有待上传的文件
+    for (const uploadFile of pendingFiles) {
+      const uploadSingleFile = (currentFile: UploadFileItem, customFormData?: Record<string, any>) => {
+        const finalFormData = customFormData ?? formData
+        
+        // 调用底层的 startUpload 方法，传入当前文件对象
+        startUpload(currentFile, {
           action,
           header,
           name,
-          formData,
+          formData: finalFormData,
           fileType: accept as 'image' | 'video' | 'audio',
           statusCode,
           statusKey,
           uploadMethod,
-          onSuccess: handleSuccess,
-          onError: handleError,
+          onSuccess: (res, file, formData) => {
+            handleSuccess(res, file, formData)
+            checkCompletion()
+          },
+          onError: (err, file, formData) => {
+            handleError(err, file, formData)
+            checkCompletion()
+          },
           onProgress: handleProgress
         })
       }
+
+      // 判断是否需要构建自定义表单数据
+      if (buildFormData) {
+        buildFormData({
+          file: uploadFile,
+          formData,
+          resolve: (customFormData?: Record<string, any>) => {
+            uploadSingleFile(uploadFile, customFormData)
+          }
+        })
+      } else {
+        uploadSingleFile(uploadFile)
+      }
     }
-  }
+  })
 }
 
 /**

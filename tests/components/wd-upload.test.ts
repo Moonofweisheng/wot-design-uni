@@ -123,15 +123,39 @@ describe('WdUpload', () => {
     expect((wrapper.vm as any).autoUpload).toBe(true)
   })
 
-  test('手动上传功能', () => {
-    // 直接测试手动上传功能，不依赖组件实例
-    const startUploadFilesSpy = vi.fn()
+  test('手动上传功能', async () => {
+    const wrapper = mount(WdUpload, {
+      props: {
+        autoUpload: false, // 关闭自动上传，便于测试手动上传
+        fileList: [
+          {
+            url: 'https://example.com/image1.jpg',
+            name: 'image1.jpg',
+            status: 'pending' // 有待上传的文件
+          }
+        ],
+        action: 'https://example.com/upload'
+      }
+    })
 
-    // 直接调用函数
-    startUploadFilesSpy()
-
-    // 验证是否被调用
-    expect(startUploadFilesSpy).toHaveBeenCalled()
+    // 调用组件暴露的submit方法
+    const resultPromise = wrapper.vm.submit()
+    
+    // 验证返回的是Promise
+    expect(resultPromise).toBeInstanceOf(Promise)
+    
+    // 等待Promise完成并验证结果结构
+    const result = await resultPromise
+    
+    // 断言返回对象的结构和内容
+    expect(result).toEqual({
+      success: expect.any(Boolean), // 可能是true或false，但必须有这个字段
+      fileList: expect.any(Array) // 必须有fileList数组
+    })
+    
+    // 可以进一步验证fileList的内容
+    expect(result.fileList).toHaveLength(1)
+    expect(result.fileList[0]).toHaveProperty('url', 'https://example.com/image1.jpg')
   })
 
   test('文件上传前钩子', async () => {
