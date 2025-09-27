@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeNumericProp, makeStringProp } from '../common/props'
 import type { FormItemRule } from '../wd-form/types'
 
@@ -185,3 +185,5 @@ export const inputProps = {
    */
   markerSide: makeStringProp<'before' | 'after'>('before')
 }
+
+export type InputProps = ExtractPropTypes<typeof inputProps>
