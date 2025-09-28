@@ -117,10 +117,13 @@ function handleClick(option: string | number | SegmentedOption, index: number) {
     return
   }
   const value = isObj(option) ? option.value : option
+  const isIndexChanged = state.activeIndex !== index
   state.activeIndex = index
   updateActiveStyle()
   emit('update:value', value)
-  emit('change', isObj(option) ? option : { value })
+  if (isIndexChanged) {
+    emit('change', isObj(option) ? option : { value })
+  }
   emit('click', isObj(option) ? option : { value })
 }
 
