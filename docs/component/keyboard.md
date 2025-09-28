@@ -298,8 +298,8 @@ const onDelete = () => showToast('删除')
 | safeAreaInsetBottom | 是否在底部安全区域内                                                 | `boolean`             | -                          | `true`     | 1.3.10   |
 | extraKey            | 额外按键                                                             | `string` / `string[]` | -                          | -          | 1.3.10   |
 | root-portal         | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                    | `boolean`             | -                          | `false`    | 1.11.0   |
-| v-model:carLang    | 车牌键盘语言模式，当 mode=car 时生效                                 | `string`              | `zh`, `en`                 | -          | $LOWEST_VERSION$   |
-| autoSwitchLang    | 是否自动切换车牌键盘语言，当 mode=car 且 car-lang 是非受控状态时生效 | `boolean`             | -                          | `false`    | $LOWEST_VERSION$   |
+| v-model:carLang    | 车牌键盘语言模式，当 mode=car 时生效                                 | `string`              | `zh`, `en`                 | -          | 1.13.0   |
+| autoSwitchLang    | 是否自动切换车牌键盘语言，当 mode=car 且 car-lang 是非受控状态时生效 | `boolean`             | -                          | `false`    | 1.13.0   |
 
 ## Slot
 

@@ -91,7 +91,7 @@ function changeValue({ value }) {
 | disabled | 是否禁用 | boolean | - | false | - |
 | disabled-color | 禁用的图标颜色 | string | - | linear-gradient(315deg, rgba(177,177,177,1) 0%,rgba(199,199,199,1) 100%) | - |
 | allow-half | 是否允许半选 | boolean | - | false | 1.7.0 |
-| clearable | 是否允许再次点击后清除 | boolean | - | false | $LOWEST_VERSION$ |
+| clearable | 是否允许再次点击后清除 | boolean | - | false | 1.13.0 |
 
 ## Events
 

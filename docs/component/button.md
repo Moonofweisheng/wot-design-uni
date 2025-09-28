@@ -172,7 +172,7 @@
 | getuserinfo    | 获取用户信息                                                 | `detail` | -        |
 | contact        | 客服消息回调，open-type="contact"时有效                      | `detail` | -        |
 | getphonenumber | 获取用户手机号回调，open-type=getPhoneNumber 时有效          | `detail` | -        |
-| getrealtimephonenumber | 实时获取用户手机号回调，open-type=getRealtimePhoneNumber 时有效          | `detail` | $LOWEST_VERSION$ |
+| getrealtimephonenumber | 实时获取用户手机号回调，open-type=getRealtimePhoneNumber 时有效          | `detail` | 1.13.0 |
 | error          | 当使用开放能力时，发生错误的回调，open-type=launchApp 时有效 | `detail` | -        |
 | launchapp      | 打开 APP 成功的回调，open-type=launchApp 时有效              | `detail` | -        |
 | opensetting    | 在打开授权设置页后回调，open-type=openSetting 时有效         | `detail` | -        |
