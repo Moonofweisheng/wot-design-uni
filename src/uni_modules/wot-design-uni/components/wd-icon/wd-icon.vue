@@ -38,7 +38,9 @@ const rootStyle = computed(() => {
     style['color'] = props.color
   }
   if (props.size) {
-    style['font-size'] = addUnit(props.size)
+    const fontSize = addUnit(props.size)
+    style['font-size'] = fontSize
+    style['line-height'] = fontSize
   }
   return `${objToStyle(style)} ${props.customStyle}`
 })
