@@ -3,6 +3,7 @@ import dayjs from '../../dayjs'
 import { isArray, isFunction, padZero } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import type { CalendarDayType, CalendarItem, CalendarTimeFilter, CalendarType } from './types'
+
 const { translate } = useTranslate('calendar-view')
 
 const weeks = computed(() => {
@@ -70,6 +71,28 @@ export function compareMonth(date1: number, date2: number) {
   }
 
   return year1 > year2 ? 1 : -1
+}
+/**
+ * 比较两个日期的季度
+ * @param {timestamp} date1 - 第一个时间戳
+ * @param {timestamp} date2 - 第二个时间戳
+ * @returns {number} 0:同一季度，1:date1季度较晚，-1:date2季度较晚
+ */
+export function compareQuarter(date1: number, date2: number): number {
+  const getQuarter = (date: Date): number => Math.floor(date.getMonth() / 3) + 1
+
+  const d1 = new Date(date1)
+  const d2 = new Date(date2)
+
+  const year1 = d1.getFullYear()
+  const year2 = d2.getFullYear()
+  const quarter1 = getQuarter(d1)
+  const quarter2 = getQuarter(d2)
+
+  if (year1 === year2 && quarter1 === quarter2) return 0
+
+  // 先比较年份，再比较季度
+  return year1 > year2 || (year1 === year2 && quarter1 > quarter2) ? 1 : -1
 }
 
 /**
@@ -225,7 +248,49 @@ export function getMonthOffset(date1: number, date2: number) {
 
   return month1 - month2 + 1
 }
+/**
+ * 获取偏移指定季度数后的日期
+ * @param {timestamp} date - 基准日期的时间戳
+ * @param {number} offset - 要偏移的季度数（正数为未来，负数为过去）
+ * @returns {number} 偏移后的日期时间戳
+ */
+export function getQuarterByOffset(date: number, offset: number): number {
+  const dateValue = new Date(date)
 
+  // 计算要增加的月份数（每个季度3个月）
+  const monthsToAdd = offset * 3
+
+  // 设置新的月份
+  dateValue.setMonth(dateValue.getMonth() + monthsToAdd)
+
+  return dateValue.getTime()
+}
+/**
+ * 获取两个日期之间的季度偏移量
+ * @param {timestamp} date1 - 第一个时间戳
+ * @param {timestamp} date2 - 第二个时间戳
+ * @returns {number} 两个日期之间的季度差值
+ */
+export function getQuarterOffset(date1: number, date2: number): number {
+  // 获取日期所在季度（1-4）
+  const getQuarter = (date: Date): number => {
+    const month = date.getMonth() // 0-11 (0代表一月)
+    return Math.floor(month / 3) + 1
+  }
+
+  const dateValue1 = new Date(date1)
+  const dateValue2 = new Date(date2)
+
+  const year1 = dateValue1.getFullYear()
+  const year2 = dateValue2.getFullYear()
+  const quarter1 = getQuarter(dateValue1)
+  const quarter2 = getQuarter(dateValue2)
+
+  // 计算总季度差
+  const totalQuarterOffset = (year1 - year2) * 4 + (quarter1 - quarter2)
+
+  return totalQuarterOffset
+}
 /**
  * 获取偏移月份
  * @param {timestamp} date

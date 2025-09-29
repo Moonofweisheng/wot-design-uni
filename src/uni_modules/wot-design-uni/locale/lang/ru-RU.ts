@@ -5,6 +5,7 @@ export default {
     day: 'День',
     week: 'Неделя',
     month: 'Месяц',
+    quarter: 'Квартал',
     confirm: 'Ок',
     startTime: 'Начало',
     endTime: 'Конец',
@@ -12,10 +13,13 @@ export default {
     timeFormat: 'DD.MM.YY HH:mm:ss',
     dateFormat: 'DD.MM.YYYY',
     weekFormat: (year: number, week: number) => `${year} Неделя ${week}`,
+    quarterFormat: (year: number, quarter: number) => `${year} Квартал ${quarter}`,
     startWeek: 'Начало недели',
     endWeek: 'Конец недели',
     startMonth: 'Начало месяца',
     endMonth: 'Конец месяца',
+    startQuarter: 'Начало квартала',
+    endQuarter: 'Конец квартала',
     monthFormat: 'MM.YYYY'
   },
   calendarView: {
