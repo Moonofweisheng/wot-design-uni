@@ -23,10 +23,10 @@
     line-height: $-toast-line-height;
     text-align: left;
     font-family: "San Francisco", Rotobo, arial, "PingFang SC", "Noto SansCJK", "Microsoft Yahei", sans-serif;
+    margin-left: $-toast-msg-margin-left;
   }
   @include edeep(icon) {
     display: inline-block;
-    margin-right: $-toast-icon-margin-right;
     font-size: $-toast-icon-size;
 
     @include when(vertical) {
