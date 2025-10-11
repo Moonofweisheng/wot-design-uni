@@ -34,7 +34,6 @@
     font-size: $-toast-icon-size;
 
     @include when(vertical) {
-      margin-right: 0;
       margin-bottom: $-toast-icon-margin-bottom;
     }
   }
