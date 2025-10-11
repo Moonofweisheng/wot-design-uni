@@ -24,7 +24,11 @@
     text-align: left;
     font-family: "San Francisco", Rotobo, arial, "PingFang SC", "Noto SansCJK", "Microsoft Yahei", sans-serif;
     margin-left: $-toast-msg-margin-left;
+    @include when(vertical) {
+      margin-left: 0;
+    }
   }
+  
   @include edeep(icon) {
     display: inline-block;
     font-size: $-toast-icon-size;
