@@ -26,7 +26,7 @@
         :name="iconClass"
       ></wd-icon>
       <!--文本-->
-      <view v-if="msg" class="wd-toast__msg">{{ msg }}</view>
+      <view v-if="msg" :class="`wd-toast__msg ${direction === 'vertical' ? 'is-vertical' : ''}`">{{ msg }}</view>
     </view>
   </wd-transition>
 </template>

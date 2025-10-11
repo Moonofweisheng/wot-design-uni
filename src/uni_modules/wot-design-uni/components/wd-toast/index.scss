@@ -24,13 +24,11 @@
     text-align: left;
     font-family: "San Francisco", Rotobo, arial, "PingFang SC", "Noto SansCJK", "Microsoft Yahei", sans-serif;
   }
+  
   @include edeep(icon) {
     display: inline-block;
-    margin-right: $-toast-icon-margin-right;
     font-size: $-toast-icon-size;
-
     @include when(vertical) {
-      margin-right: 0;
       margin-bottom: $-toast-icon-margin-bottom;
     }
   }
@@ -67,6 +65,12 @@
     min-width: $-toast-with-icon-min-width;
     display: inline-flex;
     align-items: center;
+    @include me(msg) {
+      margin-left: $-toast-msg-margin-left;
+      @include when(vertical) {
+        margin-left: 0;
+      }
+    }
   }
   @include m(loading) {
     min-width: auto;
