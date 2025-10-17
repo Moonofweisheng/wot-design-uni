@@ -3,13 +3,13 @@
     <view class="wd-video-preview__video" @click.stop="">
       <video
         class="wd-video-preview__video"
-        v-if="previdewVideo.url"
+        v-if="previewVideo.url"
         :controls="true"
-        :poster="previdewVideo.poster"
-        :title="previdewVideo.title"
+        :poster="previewVideo.poster"
+        :title="previewVideo.title"
         play-btn-position="center"
         :enableNative="true"
-        :src="previdewVideo.url"
+        :src="previewVideo.url"
         :enable-progress-gesture="false"
       ></video>
     </view>
@@ -36,13 +36,13 @@ import { useLockScroll } from '../composables/useLockScroll'
 defineProps(videoPreviewProps)
 
 const showPopup = ref<boolean>(false)
-const previdewVideo = reactive<PreviewVideo>({ url: '', poster: '', title: '' })
+const previewVideo = reactive<PreviewVideo>({ url: '', poster: '', title: '' })
 
 function open(video: PreviewVideo) {
   showPopup.value = true
-  previdewVideo.url = video.url
-  previdewVideo.poster = video.poster
-  previdewVideo.title = video.title
+  previewVideo.url = video.url
+  previewVideo.poster = video.poster
+  previewVideo.title = video.title
 }
 
 function close() {
@@ -53,9 +53,9 @@ function close() {
 }
 
 function handleClosed() {
-  previdewVideo.url = ''
-  previdewVideo.poster = ''
-  previdewVideo.title = ''
+  previewVideo.url = ''
+  previewVideo.poster = ''
+  previewVideo.title = ''
 }
 
 // #ifdef H5
