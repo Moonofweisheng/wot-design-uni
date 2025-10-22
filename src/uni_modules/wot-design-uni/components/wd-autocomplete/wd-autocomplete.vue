@@ -33,7 +33,7 @@
           }"
         ></view>
         <scroll-view scroll-y class="wd-autocomplete__scroll" :style="scrollListStyle" @tap.stop>
-          <!-- <slot name="menuTop"></slot> -->
+          <slot v-if="$slots?.menuTop" name="menuTop"></slot>
           <view v-show="displaySuggestions.length" class="wd-autocomplete__suggestions custom-suggestions-class" @tap.stop>
             <view v-for="(item, index) in displaySuggestions" :key="index" @tap.stop="handleClickItem(item)">
               <slot name="menuItem" :item="item">
@@ -75,7 +75,6 @@ function handleFocus() {
   })
 }
 function handleBlur() {
-  console.log('blur')
   inputIsFocus.value = false
 }
 

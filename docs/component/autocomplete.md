@@ -101,40 +101,40 @@ const fetchSuggestions = (): Promise<typeof list.value> => {
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
 | --- | --- | --- | --- | --- | --- |
-| v-model | 绑定值 | string | - | - | - |
-| is-autocomplete | 在点击菜单后，是否自动将值回填进输入框 | boolean | - | true | - |
-| is-exact-match | 建议是否完全匹配 | boolean | - | false | - |
-| z-index | 组件的整体z-index值 | number / string | - | inherit | - |
-| menu-z-index | 下拉列表的z-index值 | number / string | - | 3 | - |
-| fetch-suggestions | 获取下拉列表的函数，可以是Promise/普通函数，也可以是数组 | [`FetchSuggestions`](#types-section) | - | [] | - |
-| value-key | 列表展示元素的键名 | string | - | value | - |
-| always-visible | 建议列表是否常驻显示 | boolean | - | false | - |
-| position | 菜单弹出位置 | string | top / bottom | bottom | - |
-| suggestion-max-height | 建议列表最大高度 | string / number | - | 300px | - |
-| visible-arrow | 列表与输入框之间是否显示小三角 | boolean | - | true | - |
-| offset | 建议列表的偏移量 | number / string | - | 0 | - |
-| fetch-debounce | 执行搜索时的防抖时间(ms) | number / string | - | 100 | - |
-| match-debounce | 执行搜索后，进行匹配的防抖时间(ms) | number / string | - | 200 | - |
-| clearable | 显示清空按钮 | boolean | - | false | - |
-| placeholder | 占位文本 | string | - | 请输入... | - |
-| no-border | 非 cell 类型下是否隐藏下划线 | boolean | - | false | - |
-| disabled | 禁用 | boolean | - | false | - |
+| v-model | 绑定值 | string | - | - | $LOWEST_VERSION$ |
+| is-autocomplete | 在点击菜单后，是否自动将值回填进输入框 | boolean | - | true | $LOWEST_VERSION$ |
+| is-exact-match | 建议是否完全匹配 | boolean | - | false | $LOWEST_VERSION$ |
+| z-index | 组件的整体z-index值 | number / string | - | inherit | $LOWEST_VERSION$ |
+| menu-z-index | 下拉列表的z-index值 | number / string | - | 3 | $LOWEST_VERSION$ |
+| fetch-suggestions | 获取下拉列表的函数，可以是Promise/普通函数，也可以是数组 | [`FetchSuggestions`](#types-section) | - | [] | $LOWEST_VERSION$ |
+| value-key | 列表展示元素的键名 | string | - | value | $LOWEST_VERSION$ |
+| always-visible | 建议列表是否常驻显示 | boolean | - | false | $LOWEST_VERSION$ |
+| position | 菜单弹出位置 | string | top / bottom | bottom | $LOWEST_VERSION$ |
+| suggestion-max-height | 建议列表最大高度 | string / number | - | 300px | $LOWEST_VERSION$ |
+| visible-arrow | 列表与输入框之间是否显示小三角 | boolean | - | true | $LOWEST_VERSION$ |
+| offset | 建议列表的偏移量 | number / string | - | 0 | $LOWEST_VERSION$ |
+| fetch-debounce | 执行搜索时的防抖时间(ms) | number / string | - | 100 | $LOWEST_VERSION$ |
+| match-debounce | 执行搜索后，进行匹配的防抖时间(ms) | number / string | - | 200 | $LOWEST_VERSION$ |
+| clearable | 显示清空按钮 | boolean | - | false | $LOWEST_VERSION$ |
+| placeholder | 占位文本 | string | - | 请输入... | $LOWEST_VERSION$ |
+| no-border | 非 cell 类型下是否隐藏下划线 | boolean | - | false | $LOWEST_VERSION$ |
+| disabled | 禁用 | boolean | - | false | $LOWEST_VERSION$ |
 
 ## Events
 
 | 事件名称 | 说明 | 参数 | 最低版本 |
 | --- | --- | --- | --- |
-| update:modelValue | 绑定值变化时触发 | value: string | - |
-| select | 点击选中建议项时触发 | item: Record<string, any> | - |
-| clear | 清空按钮点击时触发 | - | - |
-| input | 输入框内容变化时触发 | `{ value: string, cursor: number, keyCode: number }` | - |
+| update:modelValue | 绑定值变化时触发 | value: string | $LOWEST_VERSION$ |
+| select | 点击选中建议项时触发 | item: Record<string, any> | $LOWEST_VERSION$ |
+| clear | 清空按钮点击时触发 | - | $LOWEST_VERSION$ |
+| input | 输入框内容变化时触发 | `{ value: string, cursor: number, keyCode: number }` | $LOWEST_VERSION$ |
 
 ## Slots
 
 | name | 说明 | 参数 | 最低版本 |
 | --- | --- | --- | --- |
-| menuItem | 自定义建议列表项内容 | item: 列表项数据 | - |
-| menuTop | 自定义建议列表顶部内容 | - | - |
+| menuItem | 自定义建议列表项内容 | item: 列表项数据 | $LOWEST_VERSION$ |
+| menuTop | 自定义建议列表顶部内容 | - | $LOWEST_VERSION$ |
 
 ## Types {#types-section}
 相关类型数据
@@ -164,6 +164,6 @@ const list = ref<AutocompleteData>([])
 
 | 类名 | 说明 | 最低版本 |
 | --- | --- | --- |
-| custom-class | 根节点样式 | - |
-| custom-arrow-class | 三角箭头样式 | - |
-| custom-suggestions-class | 建议列表样式 | - |
+| custom-class | 根节点样式 | $LOWEST_VERSION$ |
+| custom-arrow-class | 三角箭头样式 | $LOWEST_VERSION$ |
+| custom-suggestions-class | 建议列表样式 | $LOWEST_VERSION$ |
