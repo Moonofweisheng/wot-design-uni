@@ -970,5 +970,13 @@ $-signature-border: var(--wot-signature-border, 1px solid $-color-gray-5) !defau
 $-signature-footer-margin-top: var(--wot-signature-footer-margin-top, 8px) !default; // 底部按钮上边距
 $-signature-button-margin-left: var(--wot-signature-button-margin-left, 8px) !default; // 底部按钮左边距
 
-
-
+/* autocomplete */
+$-autocomplete-fs: var(--wot-autocomplete-fs, 14px);
+$-autocomplete-bg: var(--wot-autocomplete-bg, #ffffff);
+$-autocomplete-radius: var(--wot-autocomplete-radius, 4px);
+$-autocomplete-shadow: var(--wot-autocomplete-shadow, 0 2px 12px 0 rgb(0 0 0 / 10%));
+$-autocomplete-item-color: var(--wot-autocomplete-item-color, $-color-content);
+$-autocomplete-item-padding: var(--wot-autocomplete-item-padding, 0 8px);
+$-autocomplete-item-height: var(--wot-autocomplete-item-height, 32px);
+$-autocomplete-suggestions-padding: var(--wot-autocomplete-suggestions-padding, 8px 0);
+$-autocomplete-disabled-color: var(--wot-drop-menu-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 禁用颜色

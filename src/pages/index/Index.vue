@@ -153,6 +153,10 @@ const list = computed(() => [
     icon: imgModules['../images/icon_nav_form.png'].default,
     pages: [
       {
+        id: 'autocomplete',
+        name: t('autocomplete-shu-ru-kuang')
+      },
+      {
         id: 'calendar',
         name: t('calendar-ri-li-xuan-ze-qi')
       },

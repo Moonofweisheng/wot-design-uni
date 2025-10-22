@@ -1326,7 +1326,22 @@
             "navigationBarTitleText": "%rootportal-title%"
             // #endif
           }
-        }
+        },
+        {
+          "path": "autocomplete/Index",
+          "name": "autocomplete",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Autocomplete 自动补全输入框",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%autocomplete-title%"
+            // #endif
+          }
+        },
       ]
     }
   ],
