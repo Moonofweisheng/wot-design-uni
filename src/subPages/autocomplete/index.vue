@@ -43,7 +43,7 @@ const list = ref([
     value: t('xuanXiang_3-0')
   }
 ])
-const list2 = ref<any[]>([...list.value])
+const list2 = ref<any[]>(JSON.parse(JSON.stringify(list.value)))
 onMounted(() => {
   list2.value[1].disabled = true
 })

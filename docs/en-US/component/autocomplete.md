@@ -35,10 +35,26 @@ Set the `clearable` attribute.
 
 ## Disabled
 
-Set the `disabled` attribute.
+Set the `disabled` attribute, or individually set the `disabled` property to disable a single option.
 
 ```html
 <wd-autocomplete v-model="keyword" :fetch-suggestions="list" disabled></wd-autocomplete>
+<wd-autocomplete v-model="keyword" :fetch-suggestions="list2"></wd-autocomplete>
+```
+
+```typescript
+const list2 = ref([
+  {
+    value: 'Option 1'
+  },
+  {
+    value: 'Option 2',
+    disabled: true
+  },
+  {
+    value: 'Option 3'
+  }
+])
 ```
 
 ## Remote Search

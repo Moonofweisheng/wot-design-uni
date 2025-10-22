@@ -35,10 +35,26 @@ const list = ref([
 
 ## 禁用
 
-设置 `disabled` 属性。
+设置 `disabled` 属性，或单独设置 `disabled` 属性来禁用单个选项。
 
 ```html
 <wd-autocomplete v-model="keyword" :fetch-suggestions="list" disabled></wd-autocomplete>
+<wd-autocomplete v-model="keyword" :fetch-suggestions="list2"></wd-autocomplete>
+```
+
+```typescript
+const list2 = ref([
+  {
+    value: '选项1'
+  },
+  {
+    value: '选项2',
+    disabled: true
+  },
+  {
+    value: '选项3'
+  }
+])
 ```
 
 ## 远程搜索
