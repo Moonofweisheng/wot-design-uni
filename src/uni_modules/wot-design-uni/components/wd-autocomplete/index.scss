@@ -1,0 +1,87 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+.wot-theme-dark {
+  @include b(autocomplete) {
+    color: $-dark-color;
+    @include e(arrow) {
+      background-color: $-dark-background2;
+    }
+    @include e(scroll) {
+      background-color: $-dark-background2;
+    }
+  }
+}
+@include b(autocomplete) {
+  box-sizing: border-box;
+  position: relative;
+  margin: 0 auto;
+  color: $-autocomplete-item-color;
+
+  @include e(menu) {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 300ms;
+
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0 !important;
+      height: 0 !important;
+      appearance: none;
+      background: transparent;
+    }
+    @include when(active) {
+      opacity: 1 !important;
+    }
+  }
+
+  @include e(item) {
+    display: flex;
+    align-items: center;
+    padding: $-autocomplete-item-padding;
+    height: $-autocomplete-item-height;
+
+    @include when(disabled) {
+      color: $-autocomplete-disabled-color;
+    }
+  }
+
+  @include e(arrow) {
+    position: absolute;
+    left: 50%;
+    z-index: 2;
+    width: 10px;
+    height: 10px;
+    background-color: $-autocomplete-bg;
+
+    &::after {
+      position: absolute;
+      border: 0 solid #cccccc;
+      border-top-width: 1px;
+      border-left-width: 1px;
+      inset: -50%;
+      content: ' ';
+      pointer-events: none;
+      box-sizing: border-box;
+      -webkit-transform-origin: center;
+      transform-origin: center;
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5);
+    }
+  }
+  @include e(container) {
+    position: relative;
+    border-radius: $-autocomplete-radius;
+    box-shadow: $-autocomplete-shadow;
+  }
+  @include e(scroll) {
+    box-sizing: border-box;
+    font-size: $-autocomplete-fs;
+    border-radius: $-autocomplete-radius;
+    background-color: $-autocomplete-bg;
+  }
+  @include e(suggestions) {
+    padding: $-autocomplete-suggestions-padding;
+  }
+}
