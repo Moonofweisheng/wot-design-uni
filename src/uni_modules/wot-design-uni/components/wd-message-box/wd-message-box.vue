@@ -12,7 +12,9 @@
       :root-portal="rootPortal"
     >
       <view :class="rootClass">
-        <view class="wd-message-box__close" v-if="messageState.showClose" @click="toggleModal('close')"><wd-icon name="close" size="14px"></wd-icon></view>
+        <view class="wd-message-box__close" v-if="messageState.showClose" @click="toggleModal('close')">
+          <wd-icon name="close" size="14px"></wd-icon>
+        </view>
         <view :class="bodyClass">
           <view v-if="messageState.title" class="wd-message-box__title">
             {{ messageState.title }}
