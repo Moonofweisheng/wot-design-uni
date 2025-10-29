@@ -286,7 +286,7 @@ function reset(option: MessageOptionsWithCallBack) {
     messageState.lazyRender = option.lazyRender
     messageState.confirmButtonProps = option.confirmButtonProps
     messageState.cancelButtonProps = option.cancelButtonProps
-    messageState.showClose = option.showClose
+    messageState.showClose = isDef(option.showClose) ? option.showClose : false
   }
 }
 </script>
