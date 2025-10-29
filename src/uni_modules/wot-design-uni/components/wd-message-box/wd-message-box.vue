@@ -191,6 +191,11 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal' | 'close') {
         action: action
       })
       break
+    case 'close':
+      handleCancel({
+        action: 'close'
+      })
+      break
     default:
       handleCancel({
         action: 'modal'
