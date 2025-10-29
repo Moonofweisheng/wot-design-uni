@@ -96,6 +96,7 @@ function prompt() {
 | title | 标题 | string | - | - |
 | msg | 消息文案 | string | - | - |
 | type | 弹框类型 | string | alert / confirm / prompt | alert |
+| showClose | 是否展示关闭按钮 | boolean | - | false |
 | closeOnClickModal | 是否支持点击蒙层进行关闭 | boolean | - | true |
 | inputType | 当type为prompt时，输入框类型 | string | - | text |
 | inputValue | 当type为prompt时，输入框初始值 | string / number | - | - |

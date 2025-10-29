@@ -18,6 +18,14 @@
         background: $-dark-border-color;
       }
     }
+    
+    @include e(close) {
+      color: $-dark-color3;
+
+      &:hover {
+        color: $-dark-color;
+      }
+    }
   }
 }
 
@@ -29,6 +37,7 @@
 @include b(message-box) {
   border-radius: $-message-box-radius;
   overflow: hidden;
+  position: relative;
 
   @include e(container) {
     width: $-message-box-width;
@@ -41,6 +50,19 @@
 
     @include when(no-title) {
       padding: 25px 24px 0px;
+    }
+  }
+
+  @include e(close) {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    color: #666;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.2s ease;
+    &:hover {
+      color: #333;
     }
   }
 
