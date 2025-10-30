@@ -14,13 +14,6 @@ const currentBanner = computed(() => {
   return bannerData.value && bannerData.value.length > 0 ? bannerData.value[0] : null
 })
 
-onMounted(() => {
-  // 默认添加 banner-dismissed class，避免布局闪烁
-  if (typeof window !== 'undefined') {
-    document.documentElement.classList.add('banner-dismissed')
-  }
-})
-
 /**
  * 检查是否应该显示横幅
  */
@@ -29,8 +22,8 @@ function checkShouldShowBanner() {
   
   const dismissedTime = localStorage.getItem(BANNER_STORAGE_KEY)
   if (!dismissedTime) {
-    // 首次访问，移除 banner-dismissed class 以显示横幅
-    document.documentElement.classList.remove('banner-dismissed')
+    // 首次访问，添加 banner-show class 以显示横幅
+    document.documentElement.classList.add('banner-show')
     return true
   }
   
@@ -40,17 +33,18 @@ function checkShouldShowBanner() {
   // 如果超过24小时，清除记录并显示横幅
   if (currentTime - dismissedTimestamp > TWENTY_FOUR_HOURS) {
     localStorage.removeItem(BANNER_STORAGE_KEY)
-    document.documentElement.classList.remove('banner-dismissed')
+    document.documentElement.classList.add('banner-show')
     return true
   }
   
-  // 未超过24小时，保持 banner-dismissed class（已经默认添加了）
+  // 未超过24小时，确保不显示横幅
+  document.documentElement.classList.remove('banner-show')
   return false
 }
 
 function dismiss() {
   open.value = false
-  document.documentElement.classList.add('banner-dismissed')
+  document.documentElement.classList.remove('banner-show')
   
   // 存储当前时间戳到 localStorage
   if (typeof window !== 'undefined') {
@@ -103,7 +97,7 @@ watch(currentBanner, (newBanner) => {
 </template>
 
 <style>
-html:not(.banner-dismissed) {
+html.banner-show {
   --vp-layout-top-height: 64px;
 }
 </style>
@@ -116,17 +110,21 @@ html:not(.banner-dismissed) {
   top: 0;
   left: 0;
   right: 0;
-  height: var(--vp-layout-top-height);
-  line-height: var(--vp-layout-top-height);
+  height: var(--vp-layout-top-height, 64px);
+  line-height: var(--vp-layout-top-height, 64px);
   text-align: center;
   font-size: 18px;
   font-weight: 600;
   color: white;
   background: #131A24;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+html.banner-show .banner {
+  display: flex;
 }
 
 .glow.glow--purple {
@@ -185,9 +183,7 @@ html:not(.banner-dismissed) {
   }
 }
 
-.banner-dismissed .banner {
-  display: none;
-}
+
 
 button {
   position: absolute;
