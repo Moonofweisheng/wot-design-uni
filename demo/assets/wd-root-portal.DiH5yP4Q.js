@@ -1,0 +1,1 @@
+import{b as s,g as o,D as a,al as t}from"./index-CO5J-Q2S.js";import{_ as r}from"./base64.DhmryiS1.js";const e=r({name:"wd-root-portal",options:{virtualHost:!0,addGlobalClass:!0,styleIsolation:"shared"}},[["render",function(r,e,l,n,d,i){return o(),s(t,{to:"body"},[a(r.$slots,"default")])}]]);export{e as _};
