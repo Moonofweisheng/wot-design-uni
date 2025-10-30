@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
 import { useBanner } from '../composables/banner'
 
 const open = ref(false) // 默认不显示，避免闪烁
@@ -14,10 +14,12 @@ const currentBanner = computed(() => {
   return bannerData.value && bannerData.value.length > 0 ? bannerData.value[0] : null
 })
 
-// 默认添加 banner-dismissed class，避免布局闪烁
-if (typeof window !== 'undefined') {
-  document.documentElement.classList.add('banner-dismissed')
-}
+onMounted(() => {
+  // 默认添加 banner-dismissed class，避免布局闪烁
+  if (typeof window !== 'undefined') {
+    document.documentElement.classList.add('banner-dismissed')
+  }
+})
 
 /**
  * 检查是否应该显示横幅
