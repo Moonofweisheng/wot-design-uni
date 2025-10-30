@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-10-12 22:09:33
- * @LastEditTime: 2025-09-21 19:40:24
+ * @LastEditTime: 2025-10-30 11:09:04
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/index.ts
@@ -21,6 +21,7 @@ import HomeStar from './components/HomeStar.vue'
 import ExternalLink from './components/ExternalLink.vue'
 import WwAds from './components/WwAds.vue'
 import SpecialSponsor from './components/SpecialSponsor.vue'
+import Banner from './components/Banner.vue'
 import ElementPlus, { ElMessageBox } from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
@@ -36,6 +37,7 @@ export default {
   ...Theme,
   Layout() {
     return h(Theme.Layout, null, {
+      'layout-top': () => h(Banner),
       'home-hero-info-after':()=>h(HomeStar),
       'home-hero-after': () => h(SpecialSponsor),
       'home-features-after': () => h(HomeFriendly),
