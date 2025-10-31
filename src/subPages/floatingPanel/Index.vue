@@ -1,3 +1,12 @@
+<!--
+ * @Author: weisheng
+ * @Date: 2025-07-17 10:27:32
+ * @LastEditTime: 2025-10-31 13:46:40
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/src/subPages/floatingPanel/Index.vue
+ * 记得注释
+-->
 <template>
   <wd-toast></wd-toast>
   <view class="floating-panel">
@@ -29,7 +38,7 @@
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { useToast } from '@/uni_modules/wot-design-uni'
-import { addUnit } from '@/uni_modules/wot-design-uni/components/common/util'
+import { addUnit, getSystemInfo } from '@/uni_modules/wot-design-uni/components/common/util'
 
 const { show } = useToast()
 
@@ -45,7 +54,7 @@ const handleHeightChange = ({ height }: { height: number }) => {
 }
 
 onLoad(() => {
-  windowHeight.value = uni.getSystemInfoSync().windowHeight
+  windowHeight.value = getSystemInfo().windowHeight
   anchors.value = [100, Math.round(0.4 * windowHeight.value), Math.round(0.7 * windowHeight.value)]
   height.value = anchors.value[1]
 })
