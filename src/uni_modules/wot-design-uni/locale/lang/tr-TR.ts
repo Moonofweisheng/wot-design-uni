@@ -10,6 +10,7 @@ export default {
     day: 'Gün',
     week: 'Hafta',
     month: 'Ay',
+    quarter: 'Çeyrek',
     confirm: 'Tamam',
     startTime: 'Başlangıç zamanı',
     endTime: 'Bitiş zamanı',
@@ -17,10 +18,13 @@ export default {
     timeFormat: 'YY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     weekFormat: (year: number, week: number) => `${year} ${week}. Hafta`,
+    quarterFormat: (year: number, quarter: number) => `${year} ${quarter}. Çeyrek`,
     startWeek: 'Başlangıç hafta',
     endWeek: 'Bitiş hafta',
     startMonth: 'Başlangıç ay',
     endMonth: 'Bitiş ay',
+    startQuarter: 'Başlangıç çeyrek',
+    endQuarter: 'Bitiş çeyrek',
     monthFormat: 'YYYY-MM'
   },
   calendarView: {

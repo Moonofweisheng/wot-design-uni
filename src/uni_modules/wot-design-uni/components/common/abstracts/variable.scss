@@ -220,6 +220,7 @@ $-calendar-day-color: var(--wot-calendar-day-color, rgba(0, 0, 0, 0.85)) !defaul
 $-calendar-day-fw: var(--wot-calendar-day-fw, 500) !default;
 $-calendar-day-height: var(--wot-calendar-day-height, 64px) !default;
 $-calendar-month-width: var(--wot-calendar-month-width, 50px) !default;
+$-calendar-quarter-width: var(--wot-calendar-quarter-width, 50px) !default;
 $-calendar-active-color: var(--wot-calendar-active-color, $-color-theme) !default;
 $-calendar-selected-color: var(--wot-calendar-selected-color, $-color-white) !default;
 $-calendar-disabled-color: var(--wot-calendar-disabled-color, rgba(0, 0, 0, 0.25)) !default;
