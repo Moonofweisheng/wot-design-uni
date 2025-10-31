@@ -44,7 +44,7 @@ import wdButton from '../wd-button/wd-button.vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdTransition from '../wd-transition/wd-transition.vue'
 import { type CSSProperties, computed, ref, watch, inject, getCurrentInstance, onBeforeUnmount, onMounted, nextTick } from 'vue'
-import { getRect, isDef, isH5, objToStyle } from '../common/util'
+import { getRect, getSystemInfo, isDef, isH5, objToStyle } from '../common/util'
 import { type Queue, queueKey } from '../composables/useQueue'
 import { closeOther, pushToQueue, removeFromQueue } from '../common/clickoutside'
 import { fabProps, type FabExpose } from './types'
@@ -103,7 +103,7 @@ const bounding = reactive({
 })
 
 async function getBounding() {
-  const sysInfo = uni.getSystemInfoSync()
+  const sysInfo = getSystemInfo()
   try {
     const trigerInfo = await getRect('#trigger', false, proxy)
     fabSize.width = trigerInfo.width || 56

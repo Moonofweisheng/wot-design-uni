@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2024-10-12 13:07:08
- * @LastEditTime: 2025-04-08 11:13:02
+ * @LastEditTime: 2025-10-31 13:47:04
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/src/App.vue
@@ -12,6 +12,7 @@ import { onLaunch, onShow, onHide, onThemeChange } from '@dcloudio/uni-app'
 import { useDark } from './store'
 import { useI18nSync } from './hooks/useI18nSync'
 import { useIframeMessage } from './hooks/useIframeMessage'
+import { getSystemInfo } from './uni_modules/wot-design-uni/components/common/util'
 
 // 初始化国际化
 const darkMode = useDark()
@@ -32,7 +33,7 @@ onThemeChange((option) => {
 })
 
 onLaunch(() => {
-  const systemInfo = uni.getSystemInfoSync()
+  const systemInfo = getSystemInfo()
   darkMode.setDark(systemInfo.theme === 'dark')
 })
 onShow(() => {

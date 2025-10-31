@@ -47,7 +47,7 @@ export default {
 import { computed, getCurrentInstance, inject, onBeforeMount, ref, watch } from 'vue'
 import { closeOther } from '../common/clickoutside'
 import { type Queue, queueKey } from '../composables/useQueue'
-import { getRect, uuid } from '../common/util'
+import { getRect, getSystemInfo, uuid } from '../common/util'
 import { useChildren } from '../composables/useChildren'
 import { DROP_MENU_KEY, dropMenuProps } from './types'
 import wdOverlay from '../wd-overlay/wd-overlay.vue'
@@ -104,7 +104,7 @@ watch(
 )
 
 onBeforeMount(() => {
-  windowHeight.value = uni.getSystemInfoSync().windowHeight
+  windowHeight.value = getSystemInfo().windowHeight
 })
 
 function noop() {}

@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { pause } from '@/uni_modules/wot-design-uni/components/common/util'
+import { getSystemInfo, pause } from '@/uni_modules/wot-design-uni/components/common/util'
 import type { SignatureInstance, SignatureResult } from '@/uni_modules/wot-design-uni/components/wd-signature/types'
 import { ref, onMounted } from 'vue'
 
@@ -38,7 +38,7 @@ const width = ref(0)
 const inited = ref(false)
 
 onMounted(() => {
-  const { windowWidth, windowHeight } = uni.getSystemInfoSync()
+  const { windowWidth, windowHeight } = getSystemInfo()
   // #ifdef MP-WEIXIN
   // 微信小程序下不需要预留按钮空间，使用全屏尺寸
   width.value = windowWidth

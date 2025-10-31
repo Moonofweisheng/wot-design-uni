@@ -37,7 +37,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onBeforeMount, ref, watch, type CSSProperties } from 'vue'
 import { floatingPanelProps } from './type'
-import { addUnit, closest, objToStyle } from '../common/util'
+import { addUnit, closest, getSystemInfo, objToStyle } from '../common/util'
 import { useTouch } from '../composables/useTouch'
 
 const touch = useTouch()
@@ -130,7 +130,7 @@ watch(
 )
 
 onBeforeMount(() => {
-  const { windowHeight: _windowHeight } = uni.getSystemInfoSync()
+  const { windowHeight: _windowHeight } = getSystemInfo()
   windowHeight.value = _windowHeight
 })
 </script>

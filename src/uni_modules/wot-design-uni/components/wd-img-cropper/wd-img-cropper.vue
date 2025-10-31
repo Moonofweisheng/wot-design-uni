@@ -80,7 +80,7 @@ export default {
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdButton from '../wd-button/wd-button.vue'
 import { computed, getCurrentInstance, ref, watch } from 'vue'
-import { addUnit, objToStyle, uuid } from '../common/util'
+import { addUnit, getSystemInfo, objToStyle, uuid } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import { imgCropperProps, type ImgCropperExpose } from './types'
 
@@ -132,11 +132,11 @@ const imgScale = ref<number>(1)
 // imgWidth: null,
 // imgHeight: null,
 // 图片中心轴点距左的距离
-const imgLeft = ref<number>(uni.getSystemInfoSync().windowWidth / 2)
-const imgTop = ref<number>((uni.getSystemInfoSync().windowHeight / 2) * TOP_PERCENT)
+const imgLeft = ref<number>(getSystemInfo().windowWidth / 2)
+const imgTop = ref<number>((getSystemInfo().windowHeight / 2) * TOP_PERCENT)
 
 const imgInfo = ref<UniApp.GetImageInfoSuccessData | null>(null)
-const info = ref<UniApp.GetSystemInfoResult>(uni.getSystemInfoSync())
+const info = ref(getSystemInfo())
 
 // 是否移动中设置 同时控制背景颜色是否高亮
 const IS_TOUCH_END = ref<boolean>(true)
@@ -164,7 +164,7 @@ watch(
     if (newValue) {
       INIT_IMGWIDTH = props.imgWidth
       INIT_IMGHEIGHT = props.imgHeight
-      info.value = uni.getSystemInfoSync()
+      info.value = getSystemInfo()
 
       // 根据aspectRatio计算裁剪框尺寸
       const [widthRatio, heightRatio] = props.aspectRatio.split(':').map(Number)
@@ -305,7 +305,7 @@ function setRoate(angle: number) {
  * 初始化图片的大小和角度以及距离
  */
 function resetImg() {
-  const { windowHeight, windowWidth } = uni.getSystemInfoSync()
+  const { windowHeight, windowWidth } = getSystemInfo()
   imgScale.value = 1
   imgAngle.value = 0
   imgLeft.value = windowWidth / 2

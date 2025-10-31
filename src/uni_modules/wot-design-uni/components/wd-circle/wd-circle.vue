@@ -29,7 +29,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue'
-import { addUnit, isObj, objToStyle, uuid } from '../common/util'
+import { addUnit, isObj, objToStyle, uuid, getSystemInfo } from '../common/util'
 import { circleProps } from './types'
 // #ifdef MP-WEIXIN
 import { canvas2dAdapter } from '../common/canvasHelper'
@@ -115,7 +115,7 @@ watch(
 )
 
 onBeforeMount(() => {
-  pixelRatio.value = uni.getSystemInfoSync().pixelRatio
+  pixelRatio.value = getSystemInfo().pixelRatio
 })
 
 onMounted(() => {

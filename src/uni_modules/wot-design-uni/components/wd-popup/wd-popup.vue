@@ -84,6 +84,7 @@ import wdTransition from '../wd-transition/wd-transition.vue'
 import wdRootPortal from '../wd-root-portal/wd-root-portal.vue'
 import { popupProps } from './types'
 import type { TransitionName } from '../wd-transition/types'
+import { getSystemInfo } from '../common/util'
 
 const props = defineProps(popupProps)
 const emit = defineEmits([
@@ -135,7 +136,7 @@ const rootClass = computed(() => {
 
 onBeforeMount(() => {
   if (props.safeAreaInsetBottom) {
-    const { safeArea, screenHeight, safeAreaInsets } = uni.getSystemInfoSync()
+    const { safeArea, screenHeight, safeAreaInsets } = getSystemInfo()
 
     if (safeArea) {
       // #ifdef MP-WEIXIN

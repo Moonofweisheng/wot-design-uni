@@ -1,7 +1,7 @@
 <!--
  * @Author: weisheng
  * @Date: 2023-04-05 21:32:56
- * @LastEditTime: 2025-04-28 19:41:17
+ * @LastEditTime: 2025-10-31 13:46:23
  * @LastEditors: weisheng
  * @Description: 水印组件
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-watermark/wd-watermark.vue
@@ -32,7 +32,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch, nextTick, type CSSProperties } from 'vue'
-import { addUnit, buildUrlWithParams, isBase64Image, objToStyle, uuid } from '../common/util'
+import { addUnit, buildUrlWithParams, getSystemInfo, isBase64Image, objToStyle, uuid } from '../common/util'
 import { watermarkProps } from './types'
 
 const props = defineProps(watermarkProps)
@@ -48,7 +48,7 @@ watch(
 const canvasId = ref<string>(`water${uuid()}`) // canvas 组件的唯一标识符
 const waterMarkUrl = ref<string>('') // canvas生成base64水印
 const canvasOffScreenable = ref<boolean>(uni.canIUse('createOffscreenCanvas') && Boolean(uni.createOffscreenCanvas)) // 是否可以使用离屏canvas
-const pixelRatio = ref<number>(uni.getSystemInfoSync().pixelRatio) // 像素比
+const pixelRatio = ref<number>(getSystemInfo().pixelRatio) // 像素比
 const canvasHeight = ref<number>((props.height + props.gutterY) * pixelRatio.value) // canvas画布高度
 const canvasWidth = ref<number>((props.width + props.gutterX) * pixelRatio.value) // canvas画布宽度
 const showCanvas = ref<boolean>(true) // 是否展示canvas
