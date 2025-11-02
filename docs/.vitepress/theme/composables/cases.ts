@@ -25,7 +25,7 @@ export function useCaseData() {
           const response = await axios.get(url + path + '?t=' + Date.now(), {
             timeout: 5000 // 设置5秒超时
           })
-          const data:CaseData[] = response.data && response.data.data ? response.data.data : []
+          const data: CaseData[] = response.data && response.data.data ? response.data.data : []
           return data.map(item => {
             return {
               name: item.name,
