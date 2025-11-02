@@ -821,17 +821,7 @@ export function getSystemInfo(): SystemInfo {
     systemInfo = {
       ...deviceInfo,
       ...windowInfo,
-      ...appBaseInfo,
-      windowWidth: windowInfo.windowWidth,
-      windowHeight: windowInfo.windowHeight,
-      windowTop: windowInfo.windowTop,
-      pixelRatio: windowInfo.pixelRatio,
-      platform: deviceInfo.platform,
-      theme: appBaseInfo.theme,
-      statusBarHeight: windowInfo.statusBarHeight,
-      safeArea: windowInfo.safeArea,
-      screenHeight: windowInfo.screenHeight,
-      safeAreaInsets: windowInfo.safeAreaInsets
+      ...appBaseInfo
     }
   } catch (error) {
     console.warn('获取系统信息失败，降级使用uni.getSystemInfoSync:', error)
