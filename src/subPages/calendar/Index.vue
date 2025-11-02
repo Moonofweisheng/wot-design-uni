@@ -77,7 +77,8 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
-const minDate = ref<number>(new Date(new Date().getFullYear() - 20, new Date().getMonth() - 6, new Date().getDate()).getTime())
+const now = new Date()
+const minDate = ref<number>(new Date(now.getFullYear() - 20, now.getMonth() - 6, now.getDate()).getTime())
 
 const value1 = ref<number>(Date.now())
 const value2 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])

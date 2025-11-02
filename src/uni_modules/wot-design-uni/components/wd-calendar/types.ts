@@ -12,6 +12,10 @@ import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequired
 import type { CalendarFormatter, CalendarTimeFilter, CalendarType } from '../wd-calendar-view/types'
 import type { FormItemRule } from '../wd-form/types'
 
+const now = new Date()
+const defaultMinDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate()).getTime()
+const defaultMaxDate = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate(), 23, 59, 59).getTime()
+
 export const calendarProps = {
   ...baseProps,
   /**
@@ -25,11 +29,11 @@ export const calendarProps = {
   /**
    * 最小日期，为 13 位时间戳
    */
-  minDate: makeNumberProp(new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()).getTime()),
+  minDate: makeNumberProp(defaultMinDate),
   /**
    * 最大日期，为 13 位时间戳
    */
-  maxDate: makeNumberProp(new Date(new Date().getFullYear(), new Date().getMonth() + 6, new Date().getDate(), 23, 59, 59).getTime()),
+  maxDate: makeNumberProp(defaultMaxDate),
   /**
    * 周起始天
    */
