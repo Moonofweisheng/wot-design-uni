@@ -9,6 +9,7 @@ export default {
     day: 'كۈن',
     week: 'ھەپتە',
     month: 'ئاي',
+    quarter: 'چوڭ پەسىل',
     confirm: 'جەزملەش',
     startTime: 'باشلىنىش ۋاقتى',
     endTime: 'ئاخىرلىشىش ۋاقتى',
@@ -16,10 +17,13 @@ export default {
     timeFormat: 'YY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     weekFormat: (year: number, week: number) => `${year}يىلى ${week}ھەپتە`,
+    quarterFormat: (year: number, quarter: number) => `${year}يىلى ${quarter}چوڭ پەسىل`,
     startWeek: 'باشلىنىش ھەپتىسى',
     endWeek: 'ئاخىرلىشىش ھەپتىسى',
     startMonth: 'باشلىنىش ئېيى',
     endMonth: 'ئاخىرلىشىش ئېيى',
+    startQuarter: 'باشلىنىش چوڭ پەسىلى',
+    endQuarter: 'ئاخىرلىشىش چوڭ پەسىلى',
     monthFormat: 'YYYYيىل MMئاي'
   },
   calendarView: {

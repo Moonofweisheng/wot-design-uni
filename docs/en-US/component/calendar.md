@@ -63,10 +63,23 @@ function handleConfirm({ value }) {
   console.log(value)
 }
 ```
+## Quarter Selection
 
+Set `type` to `quarter` type. When `value` has a value, its value is the first day of the quarter.
+
+```html
+<wd-calendar type="quarter" v-model="value" @confirm="handleConfirm" />
+```
+
+```typescript
+const value = ref<number>(Date.now())
+function handleConfirm({ value }) {
+  console.log(value)
+}
+```
 ## Range Selection
 
-`type` supports `daterange` (date range selection), `weekrange` (week range selection), `monthrange` (month range selection) types. At this time, `value` is in array format.
+`type` supports `daterange` (date range selection), `weekrange` (week range selection), `monthrange` (month range selection), `quarterrange` (quarter range selection) types. At this time, `value` is in array format.
 
 ```html
 <wd-calendar type="daterange" v-model="value" @confirm="handleConfirm" />
@@ -169,48 +182,48 @@ Set the `formatter` parameter, which is a function type that receives an `object
 
 ## Attributes
 
-| Attribute | Description | Type | Options | Default | Version |
-|-----------|-------------|------|----------|---------|----------|
-| v-model | Selected value, 13-digit timestamp or timestamp array | null / number / array | - | - | - |
-| type | Date type | string | date / dates / datetime / week / month / daterange / datetimerange / weekrange / monthrange | date | - |
-| min-date | Minimum date, 13-digit timestamp | number | - | 6 months before current date | - |
-| max-date | Maximum date, 13-digit timestamp | number | - | 6 months after current date | - |
-| first-day-of-week | Week start day | number | - | 0 | - |
-| formatter | Date formatting function | function | - | - | - |
-| max-range | Maximum date range for range selection types | number | - | - | - |
-| range-prompt | Error message when selection exceeds maximum date range | string | - | Selection cannot exceed x days | - |
-| allow-same-day | Whether to allow selecting the same day in range selection | boolean | - | false | - |
-| default-time | Specific time of day for selected date | string / array | - | 00:00:00 | - |
-| time-filter | Filter function for time picker data, effective for 'datetime' or 'datetimerange' types | function | - | - | - |
-| hide-second | Whether to hide second modification for 'datetime' or 'datetimerange' types | boolean | - | false | - |
-| show-confirm | Whether to show confirm button | boolean | - | true | - |
-| show-type-switch | Whether to show type switch function | boolean | - | false | - |
-| shortcuts | Quick options, array of objects with required 'text' property | array | - | - | - |
-| title | Popup title | string | - | Select Date | - |
-| label | Picker left text | string | - | - | - |
-| placeholder | Picker placeholder | string | - | Please select | - |
-| disabled | Disabled state | boolean | - | false | - |
-| readonly | Read-only state | boolean | - | false | - |
-| display-format | Custom display text formatting function, returns a string | function | - | - | - |
-| inner-display-format | Custom panel internal display for range selection types, returns a string | function | - | - | - |
-| size | Set picker size | string | large | - | - |
-| label-width | Set left title width | string | - | 33% | - |
-| error | Whether in error state, right content is red in error state | boolean | - | false | - |
-| required | Required style | boolean | - | false | - |
-| marker-side | Position of the required marker | 'before' \| 'after' | - | 'before' | 1.12.0 |
-| center | Whether to vertically center | boolean | - | false | - |
-| ellipsis | Whether to hide overflow | boolean | - | false | - |
-| align-right | Display picker value aligned to the right | boolean | - | false | - |
-| before-confirm | Validation function before confirmation, receives { value, resolve } parameters, continue through resolve, resolve accepts a boolean parameter | function | - | - | - |
-| close-on-click-modal | Whether to close when clicking mask | boolean | - | true | - |
-| z-index | Popup layer z-index | number | - | 15 | - |
-| safe-area-inset-bottom | Whether to set bottom safe area for popup panel (iPhone X type devices) | boolean | - | true | - |
-| prop | Form field `model` field name, required when using form validation | string | - | - | - |
-| rules | Form validation rules, used with `wd-form` component | `FormItemRule []` | - | `[]` | - |
-| immediate-change | Whether to trigger the picker-view's change event immediately when the finger is released. If not enabled, the change event will be triggered after the scrolling animation ends. Available from version 1.2.25, only supported on WeChat Mini Program and Alipay Mini Program. | boolean | - | false | 1.2.25 |
-| with-cell | Whether to use built-in cell picker | boolean | - | true | 1.5.0 |
-| clearable | Show clear button | boolean | - | false | 1.11.0 |
-| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | 1.11.0 |
+| Attribute | Description | Type | Options                                                                                                              | Default | Version |
+|-----------|-------------|------|----------------------------------------------------------------------------------------------------------------------|---------|----------|
+| v-model | Selected value, 13-digit timestamp or timestamp array | null / number / array | -                                                                                                                    | - | - |
+| type | Date type | string | date / dates / datetime / week / month / daterange / datetimerange / weekrange / monthrange / quarter / quarterrange | date | - |
+| min-date | Minimum date, 13-digit timestamp | number | -                                                                                                                    | 6 months before current date | - |
+| max-date | Maximum date, 13-digit timestamp | number | -                                                                                                                    | 6 months after current date | - |
+| first-day-of-week | Week start day | number | -                                                                                                                    | 0 | - |
+| formatter | Date formatting function | function | -                                                                                                                    | - | - |
+| max-range | Maximum date range for range selection types | number | -                                                                                                                    | - | - |
+| range-prompt | Error message when selection exceeds maximum date range | string | -                                                                                                                    | Selection cannot exceed x days | - |
+| allow-same-day | Whether to allow selecting the same day in range selection | boolean | -                                                                                                                    | false | - |
+| default-time | Specific time of day for selected date | string / array | -                                                                                                                    | 00:00:00 | - |
+| time-filter | Filter function for time picker data, effective for 'datetime' or 'datetimerange' types | function | -                                                                                                                    | - | - |
+| hide-second | Whether to hide second modification for 'datetime' or 'datetimerange' types | boolean | -                                                                                                                    | false | - |
+| show-confirm | Whether to show confirm button | boolean | -                                                                                                                    | true | - |
+| show-type-switch | Whether to show type switch function | boolean | -                                                                                                                    | false | - |
+| shortcuts | Quick options, array of objects with required 'text' property | array | -                                                                                                                    | - | - |
+| title | Popup title | string | -                                                                                                                    | Select Date | - |
+| label | Picker left text | string | -                                                                                                                    | - | - |
+| placeholder | Picker placeholder | string | -                                                                                                                    | Please select | - |
+| disabled | Disabled state | boolean | -                                                                                                                    | false | - |
+| readonly | Read-only state | boolean | -                                                                                                                    | false | - |
+| display-format | Custom display text formatting function, returns a string | function | -                                                                                                                    | - | - |
+| inner-display-format | Custom panel internal display for range selection types, returns a string | function | -                                                                                                                    | - | - |
+| size | Set picker size | string | large                                                                                                                | - | - |
+| label-width | Set left title width | string | -                                                                                                                    | 33% | - |
+| error | Whether in error state, right content is red in error state | boolean | -                                                                                                                    | false | - |
+| required | Required style | boolean | -                                                                                                                    | false | - |
+| marker-side | Position of the required marker | 'before' \| 'after' | -                                                                                                                    | 'before' | 1.12.0 |
+| center | Whether to vertically center | boolean | -                                                                                                                    | false | - |
+| ellipsis | Whether to hide overflow | boolean | -                                                                                                                    | false | - |
+| align-right | Display picker value aligned to the right | boolean | -                                                                                                                    | false | - |
+| before-confirm | Validation function before confirmation, receives { value, resolve } parameters, continue through resolve, resolve accepts a boolean parameter | function | -                                                                                                                    | - | - |
+| close-on-click-modal | Whether to close when clicking mask | boolean | -                                                                                                                    | true | - |
+| z-index | Popup layer z-index | number | -                                                                                                                    | 15 | - |
+| safe-area-inset-bottom | Whether to set bottom safe area for popup panel (iPhone X type devices) | boolean | -                                                                                                                    | true | - |
+| prop | Form field `model` field name, required when using form validation | string | -                                                                                                                    | - | - |
+| rules | Form validation rules, used with `wd-form` component | `FormItemRule []` | -                                                                                                                    | `[]` | - |
+| immediate-change | Whether to trigger the picker-view's change event immediately when the finger is released. If not enabled, the change event will be triggered after the scrolling animation ends. Available from version 1.2.25, only supported on WeChat Mini Program and Alipay Mini Program. | boolean | -                                                                                                                    | false | 1.2.25 |
+| with-cell | Whether to use built-in cell picker | boolean | -                                                                                                                    | true | 1.5.0 |
+| clearable | Show clear button | boolean | -                                                                                                                    | false | 1.11.0 |
+| root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | -                                                                                                                    | false | 1.11.0 |
 
 ### FormItemRule Data Structure
 

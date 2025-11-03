@@ -9,8 +9,10 @@
         <wd-calendar :label="$t('ri-qi-shi-jian-fan-wei-xuan-ze')" type="datetimerange" v-model="value5" />
         <wd-calendar :label="$t('zhou-xuan-ze')" type="week" v-model="value6" />
         <wd-calendar :label="$t('yue-xuan-ze')" type="month" :min-date="minDate" v-model="value7" />
+        <wd-calendar :label="$t('ji-du-xuan-ze')" type="quarter" :min-date="minDate" v-model="value19" />
         <wd-calendar :label="$t('zhou-fan-wei-xuan-ze')" :first-day-of-week="1" type="weekrange" v-model="value8" />
         <wd-calendar :label="$t('yue-fan-wei-xuan-ze')" type="monthrange" v-model="value9" />
+        <wd-calendar :label="$t('ji-du-fan-wei-xuan-ze')" type="quarterrange" :min-date="minDate" v-model="value20" />
         <wd-calendar :label="$t('ri-zhou-yue-qie-huan')" :first-day-of-week="1" show-type-switch v-model="value10" />
         <wd-calendar :label="$t('kuai-jie-cao-zuo')" v-model="value16" :show-confirm="false" />
         <wd-calendar :label="$t('ri-qi-ge-shi-hua')" type="daterange" v-model="value11" :formatter="formatter" />
@@ -69,12 +71,12 @@
   <wd-message-box />
 </template>
 <script lang="ts" setup>
-import { useToast } from '@/uni_modules/wot-design-uni'
-import { dayjs } from '@/uni_modules/wot-design-uni'
+import { dayjs, useToast } from '@/uni_modules/wot-design-uni'
 import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
 import type { CalendarInstance, CalendarOnShortcutsClickOption } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+
 const { t } = useI18n()
 
 const minDate = ref<number>(new Date(new Date().getFullYear() - 20, new Date().getMonth() - 6, new Date().getDate()).getTime())
@@ -97,6 +99,9 @@ const value15 = ref<number | null>(null)
 const value16 = ref<number>(Date.now())
 const value17 = ref<number>(Date.now())
 const value18 = ref<number>(Date.now())
+const value19 = ref<number>(Date.now())
+const value20 = ref<number>([Date.now() - 24 * 60 * 60 * 1000 * 33 * 4, Date.now()])
+
 const valueClear1 = ref<number | null>(Date.now())
 const valueClear2 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])
 

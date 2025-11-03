@@ -5,6 +5,7 @@ export default {
     day: 'Tag',
     week: 'Woche',
     month: 'Monat',
+    quarter: 'Quartal',
     confirm: 'Bestätigen',
     startTime: 'Startdatum',
     endTime: 'Enddatum',
@@ -12,10 +13,13 @@ export default {
     timeFormat: 'YY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     weekFormat: (year: number, week: number) => `Woche ${week} ${year}`,
+    quarterFormat: (year: number, quarter: number) => `Quartal ${quarter} ${year}`,
     startWeek: 'Startwoche',
     endWeek: 'Endwoche',
     startMonth: 'Startmonat',
     endMonth: 'Endmonat',
+    startQuarter: 'Startquartal',
+    endQuarter: 'Endquartal',
     monthFormat: 'YYYY-MM'
   },
   calendarView: {

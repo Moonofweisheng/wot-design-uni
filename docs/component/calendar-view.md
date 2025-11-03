@@ -67,10 +67,24 @@ function handleChange({ value }) {
   console.log(value)
 }
 ```
+## 季度选择
 
+设置 `type` 为 `quarter` 类型，此时 `value` 有值时其值为季度的第一天。
+
+```html
+<wd-calendar-view type="quarter" v-model="value" @change="handleChange" />
+```
+
+```typescript
+const value = ref(Date.now())
+
+function handleChange({ value }) {
+  console.log(value)
+}
+```
 ## 范围选择
 
-`type` 支持 `daterange`（日期范围选择）、`weekrange`（周范围选择）、`monthrange`（月范围选择） 类型，此时 `value` 为数组格式。
+`type` 支持 `daterange`（日期范围选择）、`weekrange`（周范围选择）、`monthrange`（月范围选择）、`quarterrange`（季度范围选择） 类型，此时 `value` 为数组格式。
 
 ```html
 <wd-calendar-view type="daterange" v-model="value" @change="handleChange" />

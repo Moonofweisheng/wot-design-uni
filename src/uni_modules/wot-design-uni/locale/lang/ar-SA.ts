@@ -5,6 +5,7 @@ export default {
     day: 'يوم',
     week: 'أسبوع',
     month: 'شهر',
+    quarter: 'ربع',
     confirm: 'تأكيد',
     startTime: 'وقت البداية',
     endTime: 'وقت النهاية',
@@ -12,10 +13,13 @@ export default {
     timeFormat: 'YY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     weekFormat: (year: number, week: number) => `${year} الأسبوع ${week}`,
+    quarterFormat: (year: number, quarter: number) => `${year} الربع ${quarter}`,
     startWeek: 'بداية الأسبوع',
     endWeek: 'نهاية الأسبوع',
     startMonth: 'بداية الشهر',
     endMonth: 'نهاية الشهر',
+    startQuarter: 'بداية الربع',
+    endQuarter: 'نهاية الربع',
     monthFormat: 'YYYY-MM'
   },
   calendarView: {
