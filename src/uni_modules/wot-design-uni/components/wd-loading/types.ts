@@ -10,12 +10,12 @@
 import type { ExtractPropTypes } from 'vue'
 import { baseProps, makeNumericProp, makeStringProp } from '../common/props'
 
-export type LoadingType = 'outline' | 'ring' // 提示信息加载状态类型
+export type LoadingType = 'outline' | 'ring' | 'spinner' // 提示信息加载状态类型
 
 export const loadingProps = {
   ...baseProps,
   /**
-   * 加载指示器类型，可选值：'outline' | 'ring'
+   * 加载指示器类型，可选值：'outline' | 'ring' | 'spinner'
    */
   type: makeStringProp<LoadingType>('ring'),
   /**
