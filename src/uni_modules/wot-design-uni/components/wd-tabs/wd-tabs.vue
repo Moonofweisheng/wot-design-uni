@@ -6,7 +6,7 @@
         :style="customStyle"
       >
         <wd-sticky :offset-top="offsetTop">
-          <view class="wd-tabs__nav wd-tabs__nav--sticky">
+          <view class="wd-tabs__nav wd-tabs__nav--sticky" :class="{ 'wd-tabs__nav--shrink': shrink }">
             <view class="wd-tabs__nav--wrap">
               <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">
                 <view class="wd-tabs__nav-container">
@@ -14,7 +14,9 @@
                     @click="handleSelect(index)"
                     v-for="(item, index) in children"
                     :key="index"
-                    :class="`wd-tabs__nav-item  ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
+                    :class="`wd-tabs__nav-item ${shrink ? 'is-shrink' : ''} ${state.activeIndex === index ? 'is-active' : ''} ${
+                      item.disabled ? 'is-disabled' : ''
+                    }`"
                     :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
                   >
                     <wd-badge v-if="item.badgeProps" v-bind="item.badgeProps">
@@ -76,7 +78,7 @@
 
   <template v-else>
     <view :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < children.length && mapNum !== 0 ? 'is-map' : ''}`">
-      <view class="wd-tabs__nav">
+      <view class="wd-tabs__nav" :class="{ 'wd-tabs__nav--shrink': shrink }">
         <view class="wd-tabs__nav--wrap">
           <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">
             <view class="wd-tabs__nav-container">
@@ -84,7 +86,9 @@
                 v-for="(item, index) in children"
                 @click="handleSelect(index)"
                 :key="index"
-                :class="`wd-tabs__nav-item ${state.activeIndex === index ? 'is-active' : ''} ${item.disabled ? 'is-disabled' : ''}`"
+                :class="`wd-tabs__nav-item ${shrink ? 'is-shrink' : ''} ${state.activeIndex === index ? 'is-active' : ''} ${
+                  item.disabled ? 'is-disabled' : ''
+                }`"
                 :style="state.activeIndex === index ? (color ? 'color:' + color : '') : inactiveColor ? 'color:' + inactiveColor : ''"
               >
                 <wd-badge custom-class="wd-tabs__nav-item-badge" v-if="item.badgeProps" v-bind="item.badgeProps">

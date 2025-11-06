@@ -80,7 +80,11 @@ export const tabsProps = {
    * 可选值：'auto' | 'always'
    * @default auto
    */
-  slidable: makeStringProp<TabsSlidable>('auto')
+  slidable: makeStringProp<TabsSlidable>('auto'),
+  /** 是否开启左侧收缩布局
+   * @default false
+   */
+  shrink: makeBooleanProp(false)
 }
 
 export type TabsExpose = {

@@ -227,7 +227,6 @@ $-calendar-range-color: var(--wot-calendar-range-color, rgba(#4d80f0, 0.09)) !de
 $-calendar-active-border: var(--wot-calendar-active-border, 8px) !default;
 $-calendar-info-fs: var(--wot-calendar-info-fs, 10px) !default;
 $-calendar-item-margin-bottom: var(--wot-calendar-item-margin-bottom, 4px) !default;
- 
 
 /* checkbox */
 $-checkbox-margin: var(--wot-checkbox-margin, 10px) !default; // 多个复选框距离
@@ -600,10 +599,12 @@ $-tabs-nav-arrow-fs: var(--wot-tabs-nav-arrow-fs, 18px) !default; // 全部Icon�
 $-tabs-nav-arrow-open-fs: var(--wot-tabs-nav-arrow-open-fs, 14px) !default; // 展开Icon字号
 $-tabs-nav-width: var(--wot-tabs-nav-width, 100vw) !default; // tabs 头部切换宽度
 $-tabs-nav-height: var(--wot-tabs-nav-height, 42px) !default; // 头部切换高度
+$-tabs-nav-item-padding: var(--wot-tabs-nav-item-padding, 8px) !default; // shrink 布局时，nav-item 左右 padding
 $-tabs-nav-fs: var(--wot-tabs-nav-fs, $-fs-content) !default; // 头部切换文字大小
 $-tabs-nav-color: var(--wot-tabs-nav-color, rgba(0, 0, 0, 0.85)) !default; // 头部切换文字颜色
 $-tabs-nav-bg: var(--wot-tabs-nav-bg, $-color-white) !default; // 背景颜色
 $-tabs-nav-active-color: var(--wot-tabs-nav-active-color, $-color-theme) !default; // 头部高亮颜色
+$-tabs-nav-horizontal-padding: var(--wot-tabs-nav-horizontal-padding, 12px) !default; // shrink 布局时，tab nav 左右间距
 $-tabs-nav-disabled-color: var(--wot-tabs-nav-disabled-color, rgba(0, 0, 0, 0.25)) !default; // 头部禁用颜色
 $-tabs-nav-line-height: var(--wot-tabs-nav-line-height, 3px) !default; // 高亮边框高度
 $-tabs-nav-line-width: var(--wot-tabs-nav-line-width, 19px) !default; // 高亮边框宽度

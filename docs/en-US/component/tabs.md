@@ -187,6 +187,20 @@ Set the `animated` property to enable transition animation when switching tab co
 </wd-tabs>
 ```
 
+## Shrink Layout
+
+set the `shrink` property to enable left-aligned shrink layout, tabs are aligned from the left side.
+
+```html
+<wd-tabs v-model="tab" shrink>
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`Tab ${item}`">
+      <view class="content">Content {{ item }}</view>
+    </wd-tab>
+  </block>
+</wd-tabs>
+```
+
 ## Left-aligned with Scrolling <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.4.0</el-tag>
 
 When `slidable` is set to `always`, all tabs will be aligned to the left and can be scrolled when they overflow.

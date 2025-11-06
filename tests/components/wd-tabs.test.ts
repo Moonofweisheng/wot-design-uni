@@ -427,4 +427,39 @@ describe('WdTabs 和 WdTab 组件', () => {
     // 检查组件是否正确渲染
     expect(wrapper.find('.wd-tabs').exists()).toBe(true)
   })
+
+  // 测试 shrink 左侧收缩布局
+  test('shrink 左侧收缩布局', async () => {
+    const wrapper = mount(
+      {
+        template: `
+        <wd-tabs v-model="activeTab" shrink>
+          <wd-tab title="标签1">内容1</wd-tab>
+          <wd-tab title="标签2">内容2</wd-tab>
+        </wd-tabs>
+      `,
+        data() {
+          return {
+            activeTab: 0
+          }
+        }
+      },
+      {
+        global: {
+          components: globalComponents
+        }
+      }
+    )
+
+    await nextTick()
+
+    const nav = wrapper.find('.wd-tabs__nav')
+    expect(nav.classes()).toContain('wd-tabs__nav--shrink')
+
+    const navItems = wrapper.findAll('.wd-tabs__nav-item')
+    expect(navItems.length).toBeGreaterThan(0)
+    navItems.forEach((item) => {
+      expect(item.classes()).toContain('is-shrink')
+    })
+  })
 })

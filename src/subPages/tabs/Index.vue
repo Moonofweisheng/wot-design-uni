@@ -137,6 +137,16 @@
         </wd-tab>
       </wd-tabs>
     </wd-popup>
+
+    <demo-block :title="$t('shou-suo-bu-ju')" transparent>
+      <wd-tabs v-model="tab11" @change="handleChange" shrink>
+        <block v-for="item in 4" :key="item">
+          <wd-tab :title="$t('biao-qian-item') + item">
+            <view class="content">{{ $t('nei-rong') }}{{ tab11 + 1 }}</view>
+          </wd-tab>
+        </block>
+      </wd-tabs>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -192,6 +202,7 @@ const tab7 = ref<number>(0)
 const tab8 = ref<number>(0)
 const tab9 = ref<number>(0)
 const tab10 = ref<number>(3)
+const tab11 = ref<number>(0)
 
 const toast = useToast()
 function handleClick({ index, name }: any) {
