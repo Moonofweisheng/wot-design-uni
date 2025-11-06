@@ -338,6 +338,10 @@ export default defineConfig({
             {
               link: '/component/signature',
               text: 'Signature 签名'
+            },
+            {
+              link: '/component/autocomplete',
+              text: 'Autocomplete 自动补全输入框'
             }
           ]
         },
