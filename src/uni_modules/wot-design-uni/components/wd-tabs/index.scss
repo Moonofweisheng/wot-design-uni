@@ -79,6 +79,10 @@
       overflow: hidden;
     }
 
+    @include m(shrink) {
+      padding: 0 $-tabs-nav-horizontal-padding;
+    }
+
     @include m(sticky) {
       width: 100vw;
     }
@@ -104,6 +108,11 @@
 
     @include when(active) {
       font-weight: 600;
+    }
+
+    @include when(shrink) {
+      flex: none;
+      padding: 0 $-tabs-nav-item-padding;
     }
 
     @include when(disabled) {
