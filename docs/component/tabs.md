@@ -187,6 +187,20 @@ const tab = ref('Design')
 </wd-tabs>
 ```
 
+## 收缩布局
+
+设置 `shrink` 属性，开启左侧收缩布局，标签从左侧开始排列。
+
+```html
+<wd-tabs v-model="tab" shrink>
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`">
+      <view class="content">内容{{ item }}</view>
+    </wd-tab>
+  </block>
+</wd-tabs>
+```
+
 ## 左对齐超出即可滚动 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.4.0</el-tag>
 
 `slidable`设置为`always`时，所有的标签会向左侧收缩对齐，超出即可滑动。
@@ -260,6 +274,7 @@ function handlePopupShow() {
 | map-num       | 显示导航地图的标签数阈值                                                                 | number          | -        | 10     | -        |
 | map-title     | 导航地图标题                                                                             | string          | -        | -      | 1.4.0    |
 | sticky        | 粘性布局                                                                                 | boolean         | -        | false  | -        |
+| shrink       | 是否开启左侧收缩布局                                                                        | boolean         | -        | false  | $LOWEST_VERSION$       |
 | offset-top    | 粘性布局时距离窗口顶部距离                                                               | number          | -        | 0      | -        |
 | swipeable     | 开启手势滑动                                                                             | boolean         | -        | false  | -        |
 | autoLineWidth | 底部条宽度跟随文字，指定`lineWidth`时此选项不生效                                        | boolean         | -        | false  | 1.4.0    |
