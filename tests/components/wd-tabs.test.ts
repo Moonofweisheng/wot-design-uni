@@ -68,6 +68,71 @@ describe('WdTabs 和 WdTab 组件', () => {
     expect(tabContent.text()).toBe('内容1')
   })
 
+  /** 验证导航左侧插槽渲染 */
+  test('自定义导航左侧插槽', async () => {
+    /** 组件包装器 */
+    const wrapper = mount(
+      {
+        template: `
+        <wd-tabs v-model="activeTab">
+          <template #nav-left>
+            <view class="custom-left">左侧操作</view>
+          </template>
+          <wd-tab title="标签1">内容1</wd-tab>
+        </wd-tabs>
+      `,
+        data() {
+          return {
+            activeTab: 0
+          }
+        }
+      },
+      {
+        global: {
+          components: globalComponents
+        }
+      }
+    )
+
+    await nextTick()
+
+    expect(wrapper.find('.custom-left').exists()).toBe(true)
+    expect(wrapper.find('.custom-left').text()).toBe('左侧操作')
+  })
+
+  /** 验证导航右侧插槽渲染 */
+  test('自定义导航右侧插槽', async () => {
+    /** 组件包装器 */
+    const wrapper = mount(
+      {
+        template: `
+        <wd-tabs v-model="activeTab">
+          <template #nav-right>
+            <view class="custom-right">右侧按钮</view>
+          </template>
+          <wd-tab title="标签1">内容1</wd-tab>
+          <wd-tab title="标签2">内容2</wd-tab>
+        </wd-tabs>
+      `,
+        data() {
+          return {
+            activeTab: 0
+          }
+        }
+      },
+      {
+        global: {
+          components: globalComponents
+        }
+      }
+    )
+
+    await nextTick()
+
+    expect(wrapper.find('.custom-right').exists()).toBe(true)
+    expect(wrapper.find('.custom-right').text()).toBe('右侧按钮')
+  })
+
   // 测试切换标签页
   test('切换标签页', async () => {
     const onChange = vi.fn()
