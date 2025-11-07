@@ -8,6 +8,13 @@
       </wd-cell-group>
     </demo-block>
 
+    <demo-block :title="$t('card-style')" transparent>
+      <wd-cell-group insert>
+        <wd-cell :title="$t('biao-ti-wen-zi')" :value="$t('nei-rong')" />
+        <wd-cell :title="$t('biao-ti-wen-zi-0')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
+      </wd-cell-group>
+    </demo-block>
+
     <demo-block :title="$t('tu-biao')" transparent>
       <wd-cell-group>
         <wd-cell :title="$t('biao-ti-wen-zi-1')" :value="$t('nei-rong')" icon="setting" />

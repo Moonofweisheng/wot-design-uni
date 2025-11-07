@@ -179,6 +179,8 @@ $-cell-group-padding: var(--wot-cell-group-padding, 13px $-cell-padding) !defaul
 $-cell-group-title-color: var(--wot-cell-group-title-color, rgba(0, 0, 0, 0.85)) !default; // 组标题文字颜色
 $-cell-group-value-fs: var(--wot-cell-group-value-fs, $-fs-content) !default; // 组值字号
 $-cell-group-value-color: var(--wot-cell-group-value-color, $-color-content) !default; // 组值文字颜色
+$-cell-group-insert-radius: var(--wot-cell-group-insert-radius, 8px) !default; // insert 模式圆角大小
+$-cell-group-insert-margin: var(--wot-cell-group-insert-margin, 0 16px) !default; // insert 模式外边距
 
 $-cell-wrapper-padding: var(--wot-cell-wrapper-padding, 10px) !default; // cell 容器padding
 $-cell-wrapper-padding-large: var(--wot-cell-wrapper-padding-large, 12px) !default; // large类型cell容器padding
@@ -227,7 +229,7 @@ $-calendar-range-color: var(--wot-calendar-range-color, rgba(#4d80f0, 0.09)) !de
 $-calendar-active-border: var(--wot-calendar-active-border, 8px) !default;
 $-calendar-info-fs: var(--wot-calendar-info-fs, 10px) !default;
 $-calendar-item-margin-bottom: var(--wot-calendar-item-margin-bottom, 4px) !default;
- 
+
 
 /* checkbox */
 $-checkbox-margin: var(--wot-checkbox-margin, 10px) !default; // 多个复选框距离
