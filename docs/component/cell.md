@@ -121,6 +121,17 @@ function showToast() {
 <wd-cell title="帮助与反馈" is-link></wd-cell>
 ```
 
+## 箭头方向
+
+通过设置 `arrow-direction` 属性可以控制箭头的方向，可选值为 `left`、`up`、`down`，默认为向右箭头。该属性只在 `is-link` 为 `true` 时生效。
+
+```html
+<wd-cell title="向上箭头" is-link arrow-direction="up" />
+<wd-cell title="向下箭头" is-link arrow-direction="down" />
+<wd-cell title="向左箭头" is-link arrow-direction="left" />
+<wd-cell title="默认箭头(向右)" is-link />
+```
+
 ## 垂直居中
 
 通过设置 `center` 设置内容垂直居中对齐，默认顶部居中。
@@ -274,6 +285,7 @@ function handleSwitchChange({ value }) {
 | center      | 是否垂直居中，默认顶部居中     | boolean | -      | false  | -        |
 | required    | 表单属性，必填                 | boolean | -      | false  | -        |
 | marker-side | 必填标记的位置                 | string  | before / after | before | 1.12.0 |
+| arrow-direction | 箭头方向，只在 is-link 为 true 时生效 | string  | left / up / down | -      | $LOWEST_VERSION$ |
 | vertical    | 表单属性，上下结构             | boolean | -      | false  | -        |
 | ellipsis    | 内容省略，右侧内容超出时会以省略号显示 | boolean | -      | false  | 1.11.0 |
 | use-title-slot | 是否启用title插槽，默认启用，用来解决插槽传递时v-slot和v-if冲突问题 | boolean | -      | true  | 1.11.0 |
