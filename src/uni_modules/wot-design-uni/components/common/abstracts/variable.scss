@@ -659,7 +659,7 @@ $-toast-box-shadow: var(--wot-toast-box-shadow, 0px 6px 16px 0px rgba(0, 0, 0, 0
 
 /* loading */
 $-loading-size: var(--wot-loading-size, 32px) !default; // loading 大小
-$-loading-duration: var(--wot-loading-duration, 0.8s) !default; // loading 动画时长
+$-loading-duration: var(--wot-loading-duration, 2s) !default; // loading 动画时长
 
 /* tooltip */
 $-tooltip-bg: var(--wot-tooltip-bg, rgba(38, 39, 40, 0.8)) !default; // 背景色
