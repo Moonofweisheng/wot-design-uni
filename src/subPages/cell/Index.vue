@@ -66,6 +66,15 @@
       </wd-cell-group>
     </demo-block>
 
+    <demo-block title="箭头方向" transparent>
+      <wd-cell-group>
+        <wd-cell title="向上箭头" is-link arrow-direction="up" />
+        <wd-cell title="向下箭头" is-link arrow-direction="down" />
+        <wd-cell title="向左箭头" is-link arrow-direction="left" />
+        <wd-cell title="默认箭头(向右)" is-link />
+      </wd-cell-group>
+    </demo-block>
+
     <demo-block :title="$t('chui-zhi-ju-zhong')" transparent>
       <wd-cell-group>
         <wd-cell :title="$t('biao-ti-wen-zi-12')" :value="$t('nei-rong')" center />
