@@ -41,6 +41,17 @@ Cells can be grouped using the `wd-cell-group` component.
 </wd-cell-group>
 ```
 
+## Card Style
+
+Set the `insert` attribute on `wd-cell-group` to display it in card style with rounded corners and side margins.
+
+```html
+<wd-cell-group title="Card Style Group" insert>
+  <wd-cell title="Title" value="Content"></wd-cell>
+  <wd-cell title="Title" value="Content"></wd-cell>
+</wd-cell-group>
+```
+
 ## Custom Content
 
 The cell component provides three slots: default slot, title slot, and icon slot, which can be used to customize the content.
@@ -97,6 +108,8 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | title | Group title | string | - | - |
 | value | Group value | string | - | - |
 | border | Whether to show the outer border | boolean | true | - |
+| insert | Whether to display in card style with rounded corners | boolean | false | $LOWEST_VERSION$ |
+| use-slot | Enable custom slots for group | boolean | false | - |
 
 ## Cell Attributes
 

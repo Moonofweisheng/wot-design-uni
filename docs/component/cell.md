@@ -75,6 +75,17 @@
 </wd-cell-group>
 ```
 
+## 圆角卡片风格
+
+在 `wd-cell-group` 上设置 `insert` 属性，展示为圆角卡片风格，带有圆角和左右边距。
+
+```html
+<wd-cell-group title="交易管理" insert>
+  <wd-cell title="标题文字" value="内容" />
+  <wd-cell title="标题文字" label="描述信息" value="内容" />
+</wd-cell-group>
+```
+
 ## 点击反馈
 
 通过设置 `clickable` 开启点击反馈，之后可以监听`click`事件。
@@ -242,6 +253,7 @@ function handleSwitchChange({ value }) {
 | title    | 分组标题       | string  | -      | -      | -        |
 | value    | 分组右侧内容   | string  | -      | -      | -        |
 | border   | 是否展示边框线 | boolean  | -      | -      | -        |
+| insert   | 是否展示为圆角卡片风格 | boolean | -      | false  | $LOWEST_VERSION$        |
 | use-slot | 分组启用插槽   | boolean | -      | false  | -        |
 
 ## Cell Attributes
