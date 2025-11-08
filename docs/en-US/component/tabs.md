@@ -200,3 +200,58 @@ When `slidable` is set to `always`, all tabs will be aligned to the left and can
   </block>
 </wd-tabs>
 ```
+
+## Tabs Attributes
+
+| Parameter      | Description                                                                        | Type            | Options      | Default | Version |
+| -------------- | ---------------------------------------------------------------------------------- | --------------- | ------------ | ------- | ------- |
+| v-model        | Binding value                                                                      | string / number | -            | -       | -       |
+| slidable-num   | Threshold count of tabs to enable scrolling when `slidable` is `auto`              | number          | -            | `6`     | -       |
+| map-num        | Threshold count of tabs to show navigation map                                     | number          | -            | `10`    | -       |
+| map-title      | Title of the navigation map                                                        | string          | -            | -       | 1.4.0   |
+| sticky         | Enable sticky layout                                                               | boolean         | -            | `false` | -       |
+| offset-top     | Distance from the top when sticky                                                  | number          | -            | `0`     | -       |
+| swipeable      | Enable gesture swipe                                                               | boolean         | -            | `false` | -       |
+| autoLineWidth  | Bottom line width follows text; invalid when `lineWidth` is specified              | boolean         | -            | `false` | 1.4.0   |
+| lineWidth      | Bottom line width, unit px                                                         | number          | -            | `19`    | -       |
+| lineHeight     | Bottom line height, unit px                                                        | number          | -            | `3`     | -       |
+| color          | Text color                                                                         | string          | -            | -       | -       |
+| inactiveColor  | Text color of inactive tabs                                                        | string          | -            | -       | -       |
+| animated       | Enable transition animation when switching tab content                             | boolean         | -            | `false` | -       |
+| duration       | Transition duration in ms                                                          | number          | -            | `300`   | -       |
+| slidable       | Enable scrollable navigation                                                       | TabsSlidable    | `always`     | `auto`  | 1.4.0   |
+| showScrollbar  | Whether to show scrollbar when tabs are slidable (nav)                             | boolean         | -            | `false` | $LOWEST_VERSION$ |
+| badge-props    | Props passed to [Badge component props](/component/badge#attributes)               | BadgeProps      | -            | -       | 1.4.0   |
+
+## Tab Attributes
+
+| Parameter | Description                                                     | Type    | Options | Default | Version |
+| --------- | --------------------------------------------------------------- | ------- | ------- | ------- | ------- |
+| name      | Tab name                                                        | string  | -       | -       | -       |
+| title     | Title                                                           | string  | -       | -       | -       |
+| disabled  | Disable                                                         | boolean | -       | `false` | -       |
+| lazy      | Lazy render; when `animated` is enabled this is always `false`  | boolean | -       | `true`  | 1.4.0   |
+
+## Tabs Events
+
+| Event Name | Description             | Parameters                                                     | Version |
+| ---------- | ----------------------- | --------------------------------------------------------------- | ------- |
+| change     | Triggered when value changes | `event = { index, name }`                                   | -       |
+| click      | Triggered when title is clicked | `event = { index, name }`                               | -       |
+| disabled   | Triggered when clicking a disabled title | `event = { index, name }`                            | -       |
+
+## Methods
+
+Exposed methods
+
+| Method           | Description                                                                                   | Signature                                                              | Version |
+| ---------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------- |
+| setActive        | Set active tab; params: `value` active value, `init` initialized, `setScroll` set scroll-view | `(value: number \| string, init: boolean, setScroll: boolean) => void` | -       |
+| scrollIntoView   | Scroll the selected tab into view                                                             | `() => void`                                                           | -       |
+| updateLineStyle  | Update active underline style; `animation` determines whether to animate, default enabled     | `(animation?: boolean) => void`                                        | -       |
+
+## External Classes
+
+| Class Name   | Description      | Version |
+| ------------ | ---------------- | ------- |
+| custom-class | Root node style  | -       |

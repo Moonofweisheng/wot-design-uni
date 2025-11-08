@@ -270,6 +270,7 @@ function handlePopupShow() {
 | animated      | 是否开启切换标签内容时的转场动画                                                         | boolean         | -        | false  | -        |
 | duration      | 切换动画过渡时间，单位毫秒                                                               | number          | -        | 300    | -        |
 | slidable      | 是否开启滚动导航                                                                         | TabsSlidable    | `always` | `auto` | 1.4.0    |
+| showScrollbar | 标签可滑动时是否显示滚动条                                                               | boolean         | -        | false  | $LOWEST_VERSION$ |
 | badge-props   | 自定义徽标的属性，传入的对象会被透传给 [Badge 组件的 props](/component/badge#attributes) | BadgeProps      | -        | -      | 1.4.0    |
 
 ## Tab Attributes
