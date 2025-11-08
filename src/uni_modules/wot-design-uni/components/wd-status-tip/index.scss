@@ -34,10 +34,4 @@
     text-align: center;
     overflow-wrap: break-word;
   }
-  @include e(bottom) {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
 }

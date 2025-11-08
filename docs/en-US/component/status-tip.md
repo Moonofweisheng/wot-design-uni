@@ -64,6 +64,31 @@ Use the `image` slot to customize image content.
 </wd-status-tip>
 ```
 
+## Custom Bottom Content
+
+Use the `bottom` slot to render custom content at the bottom (e.g., action buttons). It’s recommended to wrap slot content with a container for layout and spacing control.
+
+```html
+<wd-status-tip image="content" tip="No search results">
+  <template #bottom>
+    <view class="bottom-actions">
+      <wd-button type="info">Reload</wd-button>
+    </view>
+  </template>
+</wd-status-tip>
+```
+
+Suggested styles (add to page or global styles):
+
+```css
+.bottom-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+```
+
 ## Attributes
 
 | Parameter | Description | Type | Options | Default | Version |
@@ -86,3 +111,4 @@ Use the `image` slot to customize image content.
 | Name | Description | Version |
 |------|-------------|----------|
 | image | Image content | 1.3.12 |
+| bottom | Bottom content | $LOWEST_VERSION$ |
