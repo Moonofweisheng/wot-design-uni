@@ -100,6 +100,19 @@ watch(currentBanner, (newBanner) => {
 html.banner-show {
   --vp-layout-top-height: 64px;
 }
+
+/* 移动端优化高度 */
+@media (max-width: 768px) {
+  html.banner-show {
+    --vp-layout-top-height: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  html.banner-show {
+    --vp-layout-top-height: 48px;
+  }
+}
 </style>
 
 <style scoped>
@@ -111,7 +124,7 @@ html.banner-show {
   left: 0;
   right: 0;
   height: var(--vp-layout-top-height, 64px);
-  line-height: var(--vp-layout-top-height, 64px);
+  padding: 0 48px 0 12px;
   text-align: center;
   font-size: 18px;
   font-weight: 600;
@@ -155,55 +168,51 @@ html.banner-show .banner {
   opacity: 0.3;
 }
 
-@media (min-width: 768px) {
-  .glow.glow--blue {
-    top: -15%;
-    right: -40%;
-    width: 80%;
-  }
-
-  .glow.glow--purple {
-    bottom: -15%;
-    left: -40%;
-    width: 80%;
-  }
-}
-
-@media (min-width: 1025px) {
-  .glow.glow--blue {
-    top: -15%;
-    right: -40%;
-    width: 80%;
-  }
-
-  .glow.glow--purple {
-    bottom: -15%;
-    left: -40%;
-    width: 80%;
-  }
-}
-
-
-
 button {
   position: absolute;
-  right: 0;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  padding: 5px 5px;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  opacity: 0.6;
 }
 
 .close {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   fill: #fff;
   transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+button:hover .close {
+  transform: rotate(45deg) scale(1.1);
 }
 
 .vt-banner-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
   color: #fff;
-  font-size: 20px;
-  margin-left: 0.75rem;
+  font-size: 18px;
+  line-height: 1.4;
+  padding: 8px 0;
 }
 
 .vt-banner-title {
@@ -217,55 +226,160 @@ button {
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
 .vt-primary-action {
+  display: inline-block;
   background:
     radial-gradient(140.35% 140.35% at 175% 94.74%, #2bfdd2, #bd34fe00),
     radial-gradient(89.94% 89.94% at 18.42% 15.79%, #4d80f0, #41d1ff00);
   color: #fff;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-size: 18px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
   text-decoration: none;
-  margin: 0 0.75rem;
   transition: all 0.2s ease-in-out;
+  white-space: nowrap;
 }
 
-@media (max-width: 1280px) {
-  .banner .vt-banner-text,
-  .banner .vt-primary-action {
-    font-size: 10px;
+.vt-primary-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(77, 128, 240, 0.4);
+}
+
+.vt-primary-action:active {
+  transform: translateY(0);
+}
+
+/* 桌面端优化 */
+@media (min-width: 769px) {
+  .banner {
+    padding: 0 60px 0 20px;
   }
 
-  .vt-tagline {
-    display: none;
+  .glow.glow--blue {
+    top: -15%;
+    right: -40%;
+    width: 80%;
+  }
+
+  .glow.glow--purple {
+    bottom: -15%;
+    left: -40%;
+    width: 80%;
+  }
+
+  .vt-banner-text {
+    gap: 12px;
   }
 }
 
-@media (max-width: 780px) {
-  .vt-tagline {
-    display: none;
+/* 平板端优化 */
+@media (max-width: 768px) {
+  .banner {
+    padding: 0 40px 0 10px;
   }
 
-  .vt-coupon {
-    display: none;
+  button {
+    right: 6px;
+  }
+
+  .close {
+    width: 24px;
+    height: 24px;
+  }
+
+  .vt-banner-text {
+    font-size: 16px;
+    gap: 6px;
+  }
+
+  .vt-banner-title {
+    font-size: 16px;
   }
 
   .vt-primary-action {
-    margin: 0 10px;
-    padding: 4px 8px;
-  }
-
-  .vt-time-now {
-    display: none;
+    font-size: 14px;
+    padding: 5px 10px;
   }
 }
 
-@media (max-width: 560px) {
-  .vt-place {
-    display: none;
+/* 手机端优化 */
+@media (max-width: 640px) {
+  .banner {
+    padding: 0 36px 0 8px;
+  }
+
+  .vt-banner-text {
+    font-size: 14px;
+    gap: 6px;
+  }
+
+  .vt-banner-title {
+    font-size: 14px;
+  }
+
+  .vt-primary-action {
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+}
+
+/* 小屏手机优化 */
+@media (max-width: 480px) {
+  .banner {
+    padding: 0 32px 0 6px;
+  }
+
+  button {
+    right: 4px;
+    padding: 2px;
+  }
+
+  .close {
+    width: 20px;
+    height: 20px;
+  }
+
+  .vt-banner-text {
+    font-size: 12px;
+    gap: 4px;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .vt-banner-title {
+    font-size: 12px;
+  }
+
+  .vt-primary-action {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+}
+
+/* 超小屏优化 */
+@media (max-width: 375px) {
+  .banner {
+    padding: 0 28px 0 4px;
+  }
+
+  .vt-banner-text {
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .vt-banner-title {
+    font-size: 11px;
+  }
+
+  .vt-primary-action {
+    font-size: 11px;
+    padding: 2px 6px;
   }
 }
 </style>
