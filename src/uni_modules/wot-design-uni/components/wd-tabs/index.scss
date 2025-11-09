@@ -66,6 +66,14 @@
   background: #fff;
   width: 100%;
 
+  @include when(hide-scrollbar) {
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      -webkit-appearance: none;
+    }
+  }
+
   @include e(nav) {
     left: 0;
     right: 0;
@@ -115,7 +123,7 @@
     @include lineEllipsis();
   }
 
-  @include edeep(nav-item-badge){
+  @include edeep(nav-item-badge) {
     display: flex;
     align-items: center;
     justify-content: center;

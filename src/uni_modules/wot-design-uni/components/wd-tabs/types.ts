@@ -80,7 +80,11 @@ export const tabsProps = {
    * 可选值：'auto' | 'always'
    * @default auto
    */
-  slidable: makeStringProp<TabsSlidable>('auto')
+  slidable: makeStringProp<TabsSlidable>('auto'),
+  /**
+   * 标签可滑动时是否显示滚动条
+   */
+  showScrollbar: makeBooleanProp(false)
 }
 
 export type TabsExpose = {
