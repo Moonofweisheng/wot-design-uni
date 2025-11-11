@@ -247,4 +247,21 @@ describe('WdCellGroup', () => {
     const cellWrapper = wrapper.findComponent(WdCell)
     expect(cellWrapper.classes()).toContain('is-border')
   })
+
+  // --- Insert Prop Tests ---
+  test('测试 insert 为 false 时不显示圆角卡片风格', () => {
+    const wrapper = mount(WdCellGroup, {
+      props: { insert: false }
+    })
+
+    expect(wrapper.classes()).not.toContain('wd-cell-group--insert')
+  })
+
+  test('测试 insert 为 true 时显示圆角卡片风格', () => {
+    const wrapper = mount(WdCellGroup, {
+      props: { insert: true }
+    })
+
+    expect(wrapper.classes()).toContain('wd-cell-group--insert')
+  })
 })

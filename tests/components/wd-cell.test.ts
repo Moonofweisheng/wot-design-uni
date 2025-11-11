@@ -97,6 +97,101 @@ describe('WdCell', () => {
     expect(wrapper.emitted('click')).toBeTruthy()
   })
 
+  // 测试箭头方向 - left
+  test('箭头方向 - left', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        isLink: true,
+        arrowDirection: 'left'
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.findComponent(WdIcon).exists()).toBe(true)
+    expect(wrapper.findComponent(WdIcon).props('name')).toBe('arrow-left')
+  })
+
+  // 测试箭头方向 - up
+  test('箭头方向 - up', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        isLink: true,
+        arrowDirection: 'up'
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.findComponent(WdIcon).exists()).toBe(true)
+    expect(wrapper.findComponent(WdIcon).props('name')).toBe('arrow-up')
+  })
+
+  // 测试箭头方向 - down
+  test('箭头方向 - down', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        isLink: true,
+        arrowDirection: 'down'
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.findComponent(WdIcon).exists()).toBe(true)
+    expect(wrapper.findComponent(WdIcon).props('name')).toBe('arrow-down')
+  })
+
+  // 测试箭头方向 - 默认值(arrow-right)
+  test('箭头方向 - 默认值', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        isLink: true
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    expect(wrapper.findComponent(WdIcon).exists()).toBe(true)
+    expect(wrapper.findComponent(WdIcon).props('name')).toBe('arrow-right')
+  })
+
+  // 测试箭头方向在非link状态下不生效
+  test('箭头方向在非link状态下不显示', () => {
+    const wrapper = mount(WdCell, {
+      props: {
+        isLink: false,
+        arrowDirection: 'left'
+      },
+      global: {
+        components: {
+          WdIcon
+        }
+      }
+    })
+
+    // 由于 isLink 为 false，不应该渲染箭头图标
+    const icons = wrapper.findAllComponents(WdIcon)
+    // 过滤掉可能的其他图标，只检查箭头相关的
+    const arrowIcons = icons.filter((icon) => {
+      const name = icon.props('name')
+      return name && name.startsWith('arrow-')
+    })
+    expect(arrowIcons.length).toBe(0)
+  })
+
   // 测试点击跳转
   test('处理点击导航', async () => {
     const to = '/pages/index/index'
