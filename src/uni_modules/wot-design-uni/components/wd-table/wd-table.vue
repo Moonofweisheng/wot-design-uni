@@ -163,6 +163,9 @@ const tableStyle = computed(() => {
   if (isDef(props.height)) {
     style['max-height'] = addUnit(props.height)
   }
+  if (isDef(props.rowHeight)) {
+    style['--wd-table-row-height'] = addUnit(props.rowHeight)
+  }
   return `${objToStyle(style)}${props.customStyle}`
 })
 

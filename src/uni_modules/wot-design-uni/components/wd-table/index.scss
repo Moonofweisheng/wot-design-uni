@@ -53,9 +53,25 @@
     }
   }
 
+  @include e(header){
+    .wd-table__cell:last-child{
+      @include when(border) {
+        border-right: none;
+      }
+    }
+  }
+
+  @include e(header-row){
+    .wd-table__cell:last-child{
+      @include when(border) {
+        border-right: none;
+      }
+    }
+  }
+
   @include e(header) {
     width: 100%;
-    height: 50px;
+    height: var(--wd-table-row-height, 50px);
     position: sticky;
     top: 0;
     z-index: 2;
@@ -85,7 +101,7 @@
     box-sizing: border-box;
     background: $-table-bg;
     width: 100px;
-    min-height: 50px;
+    min-height: var(--wd-table-row-height, 50px);
     padding: 8px 10px;
     font-size: $-table-font-size;
     color: $-table-color;
