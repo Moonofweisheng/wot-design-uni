@@ -28,6 +28,7 @@
           :default-time="defaultTime"
           :showTitle="index !== 0"
           @change="handleDateChange"
+          @date-click="handleDateClick"
         />
       </view>
     </scroll-view>
@@ -69,10 +70,10 @@ import { compareMonth, formatMonthTitle, getMonthEndDay, getMonths, getTimeData,
 import Month from '../month/month.vue'
 import { monthPanelProps, type MonthInfo, type MonthPanelTimeType, type MonthPanelExpose } from './types'
 import { useTranslate } from '../../composables/useTranslate'
-import type { CalendarItem } from '../types'
+import type { CalendarDayItem, CalendarItem } from '../types'
 
 const props = defineProps(monthPanelProps)
-const emit = defineEmits(['change', 'pickstart', 'pickend'])
+const emit = defineEmits(['change', 'date-click', 'pickstart', 'pickend'])
 
 const { translate } = useTranslate('calendar-view')
 
@@ -290,6 +291,9 @@ function setTime(value: number | (number | null)[], type?: MonthPanelTimeType) {
   }
   timeType.value = type || ''
   timeValue.value = getTimeValue(value, type || '')
+}
+function handleDateClick(obj: CalendarDayItem) {
+  emit('date-click', obj)
 }
 function handleDateChange({ value, type }: { value: number | (number | null)[]; type?: MonthPanelTimeType }) {
   if (!isEqual(value, props.value)) {
