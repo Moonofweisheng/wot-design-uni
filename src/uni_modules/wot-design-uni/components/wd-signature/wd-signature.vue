@@ -574,7 +574,6 @@ function canvasToImage() {
   let exportWidth = canvasWidth
   let exportHeight = canvasHeight
   // #ifdef MP-WEIXIN
-  console.log(angle, 'angle')
   if (angle && angle % 360 !== 0 && canvas) {
     try {
       let rad = (angle * Math.PI) / 180
