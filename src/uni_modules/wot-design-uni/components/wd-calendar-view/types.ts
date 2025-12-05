@@ -1,6 +1,10 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 
+const now = new Date()
+const defaultMinDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate()).getTime()
+const defaultMaxDate = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate(), 23, 59, 59).getTime()
+
 export type CalendarType = 'date' | 'dates' | 'datetime' | 'week' | 'month' | 'daterange' | 'datetimerange' | 'weekrange' | 'monthrange'
 
 export const calendarViewProps = {
@@ -16,11 +20,11 @@ export const calendarViewProps = {
   /**
    * 最小日期，为 13 位时间戳
    */
-  minDate: makeNumberProp(new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()).getTime()),
+  minDate: makeNumberProp(defaultMinDate),
   /**
    * 最大日期，为 13 位时间戳
    */
-  maxDate: makeNumberProp(new Date(new Date().getFullYear(), new Date().getMonth() + 6, new Date().getDate(), 23, 59, 59).getTime()),
+  maxDate: makeNumberProp(defaultMaxDate),
   /**
    * 周起始天
    */

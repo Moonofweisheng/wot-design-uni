@@ -144,6 +144,7 @@ const filter = (type, values) => {
 | loading | Loading state | boolean | - | false | - |
 | loading-color | Loading color, can only use hexadecimal color values and cannot use abbreviated format | string | - | #4D80F0 | - |
 | columns-height | Height of picker's internal roller | number | - | 231 | - |
+| item-height | Height of picker item | number | - | 35 | 1.13.0 |
 | formatter | Custom formatting function for popup layer option text, returns a string | function | - | - | - |
 | filter | Custom function for filtering options, returns column's option array | function | - | - | - |
 | minDate | Minimum date, 13-digit timestamp | `timestamp` | - | Current date - 10 years | - |

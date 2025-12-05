@@ -107,7 +107,7 @@ You can control the language mode of the license plate keyboard through the `car
 <!-- Uncontrolled mode: Disable auto-switching -->
 <wd-cell title="License Plate Keyboard (No Auto-switch)" :value="value2" is-link @click="showKeyBoard2" />
 
-<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" :auto-switch-lang="false" @input="onInput" @delete="onDelete"></wd-keyboard>
+<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" auto-switch-lang @input="onInput" @delete="onDelete"></wd-keyboard>
 ```
 
 ```ts
@@ -298,8 +298,8 @@ const onDelete = () => showToast('Delete')
 | safeAreaInsetBottom | Whether to enable bottom safe area                                                                                    | `boolean`             | -                          | `true`     | 1.3.10  |
 | extraKey            | Extra key                                                                                                             | `string` / `string[]` | -                          | -          | 1.3.10  |
 | root-portal         | Whether to detach from the page, used to solve various fixed positioning issues                                       | `boolean`             | -                          | `false`    | 1.11.0  |
-| v-model:carLang     | License plate keyboard language mode, effective when mode=car                                                         | `string`              | `zh`, `en`                 | -          | 1.12.4  |
-| autoSwitchLang      | Whether to automatically switch license plate keyboard language, effective when mode=car and car-lang is uncontrolled | `boolean`             | -                          | `false`    | 1.12.4  |
+| v-model:carLang     | License plate keyboard language mode, effective when mode=car                                                         | `string`              | `zh`, `en`                 | -          | 1.13.0  |
+| autoSwitchLang      | Whether to automatically switch license plate keyboard language, effective when mode=car and car-lang is uncontrolled | `boolean`             | -                          | `false`    | 1.13.0  |
 
 ## Slot
 

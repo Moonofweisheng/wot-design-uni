@@ -82,6 +82,22 @@ Check out some excellent [examples](https://wot-ui.cn/guide/cases.html) here!
 
 We welcome contributions of excellent demos and cases. Feel free to submit your case in this [issue](https://github.com/Moonofweisheng/wot-design-uni/issues/16).
 
+## Ecosystem
+
+| Project                                                                                                        | Description                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [wot-starter](https://github.com/wot-ui/wot-starter)                  | A wot-ui quick start project based on [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app)     |
+| [wot-ui-intellisense](https://github.com/wot-ui/wot-ui-intellisense)                  | wot-ui vscode code completion plugin     |
+| [awesome-uni-app](https://github.com/uni-helper/awesome-uni-app)                                            | A collection of excellent development resources for uni-app multi-platform unified development framework            |
+| [create-uni](https://github.com/uni-helper/create-uni)                                                      | Quickly create uni-app projects                                |
+| [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | A uni-app retail industry template based on wot-ui          |
+| [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | wot-ui code snippets                            |
+| [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci)                                                | A uni-app mini-program build plugin that supports CI (Continuous Integration) |
+| [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router)                                        | A lightweight uni-app router library based on vue3 and TypeScript  |
+| [unibest](https://github.com/unibest-tech/unibest)                                                              | A uni-app template based on wot-ui                  |
+| [wot-design-uni AI Assistant](https://www.coze.cn/store/bot/7347916532258701363)                                 | An intelligent assistant that can answer your questions about wot-ui component library |
+| [uni-ku-root](https://github.com/uni-ku/root)                                                               | A root component plugin that simulates the original capabilities of App.vue                  |
+
 ## Contributing
 
 Please read our [Contributing Guide](./.github/CONTRIBUTING.md) before making changes to the code.

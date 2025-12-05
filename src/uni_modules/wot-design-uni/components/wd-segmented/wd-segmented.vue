@@ -32,7 +32,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, reactive, watch } from 'vue'
-import { getRect, isObj, objToStyle, addUnit, pause } from '../common/util'
+import { getRect, isObj, objToStyle, addUnit, pause, isEqual } from '../common/util'
 import type { CSSProperties } from 'vue'
 import { segmentedProps, type SegmentedExpose, type SegmentedOption } from './types'
 const $item = '.wd-segmented__item'
@@ -95,19 +95,28 @@ function updateActiveStyle(animation: boolean = true) {
 }
 
 /**
+ * 更新值
+ */
+function updateValue(newValue: string | number, option: string | number | SegmentedOption) {
+  if (!isEqual(newValue, props.value)) {
+    emit('update:value', newValue)
+    emit('change', isObj(option) ? option : { value: newValue })
+  }
+}
+
+/**
  * 更新当前下标
  */
 function updateCurrentIndex() {
   const index = props.options.findIndex((option: string | number | SegmentedOption) => {
     const value = isObj(option) ? option.value : option
-    return value == props.value
+    return isEqual(value, props.value)
   })
   if (index >= 0) {
     state.activeIndex = index
   } else {
     const value = isObj(props.options[0]) ? props.options[0].value : props.options[0]
-    emit('update:value', value)
-    emit('change', isObj(props.options[0]) ? props.options[0] : { value })
+    updateValue(value, props.options[0])
   }
 }
 
@@ -117,10 +126,10 @@ function handleClick(option: string | number | SegmentedOption, index: number) {
     return
   }
   const value = isObj(option) ? option.value : option
+
   state.activeIndex = index
   updateActiveStyle()
-  emit('update:value', value)
-  emit('change', isObj(option) ? option : { value })
+  updateValue(value, option)
   emit('click', isObj(option) ? option : { value })
 }
 

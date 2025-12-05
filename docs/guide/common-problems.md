@@ -6,6 +6,9 @@
 
 目前支持 微信小程序、支付宝小程序、钉钉小程序、H5、APP 等平台。
 
+## 有没有最佳实践分享？
+有，可以关注我的公众号「不如摸鱼去」，也可以访问我的博客[不如摸鱼去](https://blog.wot-ui.cn/)，分享无数干货，等你来看。
+
 ## 组件库有没有提供可以单独引入的组件？
 
 目前是没有的，首先在插件市场缺少`CI/CD`工具，无法实现自动化发布，维护一套单独引入的组件费时费力，其次组件库提供的安装方式均可以实现按需引入，所以是无需提供单独引入的组件的。
@@ -313,6 +316,9 @@ function handleOpened() {
 ## 为何messageBox弹出了多个？
 检查一下弹出多个`messageBox`的页面是否存在多个相同`selector`或无`selector`的`<wd-message-box></wd-message-box>`标签(当前页面包括页面中使用的组件)。`toast`亦是同理，在子组件中使用`messageBox`等组件需要指定`selector`并确保`selector`唯一。
 
+## Toast、Message、Loading 等如何全局调用？
+
+全局调用方案见 [wot-starter](https://starter.wot-ui.cn/guide/feedback.html)，支持在路由导航守卫和网络请求拦截器等场景使用的可全局调用的反馈组件。
 
 
 ## 如何快速解决你的问题？

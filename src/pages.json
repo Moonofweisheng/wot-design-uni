@@ -1326,6 +1326,21 @@
             "navigationBarTitleText": "%rootportal-title%"
             // #endif
           }
+        },
+        {
+          "path": "tour/Index",
+          "name": "tour",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Tour 页面引导",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%tour-title%"
+            // #endif
+          }
         }
       ]
     }

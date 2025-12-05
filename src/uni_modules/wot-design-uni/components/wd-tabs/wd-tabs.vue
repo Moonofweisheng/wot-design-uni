@@ -2,7 +2,9 @@
   <template v-if="sticky">
     <wd-sticky-box>
       <view
-        :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < children.length && mapNum !== 0 ? 'is-map' : ''}`"
+        :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < children.length && mapNum !== 0 ? 'is-map' : ''} ${
+          !showScrollbar ? 'is-hide-scrollbar' : ''
+        }`"
         :style="customStyle"
       >
         <wd-sticky :offset-top="offsetTop">
@@ -75,7 +77,11 @@
   </template>
 
   <template v-else>
-    <view :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < children.length && mapNum !== 0 ? 'is-map' : ''}`">
+    <view
+      :class="`wd-tabs ${customClass} ${innerSlidable ? 'is-slide' : ''} ${mapNum < children.length && mapNum !== 0 ? 'is-map' : ''} ${
+        !showScrollbar ? 'is-hide-scrollbar' : ''
+      }`"
+    >
       <view class="wd-tabs__nav">
         <view class="wd-tabs__nav--wrap">
           <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">

@@ -84,7 +84,7 @@ export default defineConfig({
       { text: 'Blog', link: 'https://blog.wot-ui.cn/' },
       {
         text: 'Templates', items: [
-          { text: 'Quick Start Template wot-starter', link: 'https://start.wot-ui.cn/' },
+          { text: 'Quick Start Template wot-starter', link: 'https://starter.wot-ui.cn/' },
           { text: 'vitesse-uni-app', link: 'https://vitesse-docs.netlify.app/' },
           { text: 'wot-starter-retail', link: 'https://github.com/wot-ui/wot-starter-retail' },
           { text: 'unibest', link: 'https://unibest.tech/' },
@@ -92,7 +92,8 @@ export default defineConfig({
       },
       {
         text: 'Resources', items: [
-          { text: 'Quick Start Template', link: 'https://start.wot-ui.cn/' },
+          { text: 'Quick Start Template', link: 'https://starter.wot-ui.cn/' },
+          { text: 'VS Code IntelliSense Plugin', link: 'https://marketplace.visualstudio.com/items?itemName=wot-ui.wot-ui-intellisense' },
           { text: 'Vue3 uni-app Router', link: 'https://moonofweisheng.github.io/uni-mini-router/' },
           { text: 'Mini Program CI Tool', link: 'https://github.com/Moonofweisheng/uni-mini-ci' },
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
@@ -240,6 +241,10 @@ export default defineConfig({
             {
               link: '/en-US/component/index-bar',
               text: 'IndexBar'
+            },
+            {
+              link: '/en-US/component/tour',
+              text: 'Tour'
             }
           ]
         },

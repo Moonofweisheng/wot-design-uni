@@ -716,7 +716,7 @@ export const isDate = (val: unknown): val is Date => Object.prototype.toString.c
  */
 export function isVideoUrl(url: string): boolean {
   // 使用正则表达式匹配视频文件类型的URL
-  const videoRegex = /\.(mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv|video)/i
+  const videoRegex = /\.(ogm|webm|ogv|asx|m4v|mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv|video)(?=$|[?#])/i
   return videoRegex.test(url)
 }
 
@@ -727,7 +727,7 @@ export function isVideoUrl(url: string): boolean {
  */
 export function isImageUrl(url: string): boolean {
   // 使用正则表达式匹配图片URL
-  const imageRegex = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg|image)/i
+  const imageRegex = /\.(xbm|tif|pjp|apng|svgz|jpeg|jpg|heif|ico|tiff|heic|pjpeg|avif|gif|png|svg|webp|jfif|bmp|dpg|image)(?=$|[?#])/i
   return imageRegex.test(url)
 }
 
@@ -775,4 +775,62 @@ export function easingFn(t: number = 0, b: number = 0, c: number = 0, d: number 
  */
 export function closest(arr: number[], target: number) {
   return arr.reduce((prev, curr) => (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev))
+}
+
+/**
+ * 系统信息接口，包含项目中实际使用的字段
+ */
+export interface SystemInfo {
+  /** 窗口宽度 */
+  windowWidth: number
+  /** 窗口高度 */
+  windowHeight: number
+  /** 窗口顶部位置 */
+  windowTop: number
+  /** 设备像素比 */
+  pixelRatio: number
+  /** 平台信息 */
+  platform: string
+  /** 主题模式 */
+  theme?: string
+  /** 状态栏高度 */
+  statusBarHeight?: number
+  /** 安全区域信息 */
+  safeArea?: UniApp.SafeArea
+  /** 屏幕高度 */
+  screenHeight: number
+  /** 安全区域插入信息 */
+  safeAreaInsets?: UniApp.SafeAreaInsets
+  // 未尽字段
+  [key: string]: any
+}
+
+/**
+ * 兼容微信小程序端获取系统信息的方法
+ * 在微信小程序端使用新的API替代getSystemInfoSync，在其他端仍然使用getSystemInfoSync
+ * @returns 系统信息对象
+ */
+export function getSystemInfo(): SystemInfo {
+  let systemInfo: SystemInfo
+  // #ifdef MP-WEIXIN
+  try {
+    // const systemSetting = uni.getSystemSetting() // 暂时不需要
+    const deviceInfo = uni.getDeviceInfo()
+    const windowInfo = uni.getWindowInfo()
+    const appBaseInfo = uni.getAppBaseInfo()
+    systemInfo = {
+      ...deviceInfo,
+      ...windowInfo,
+      ...appBaseInfo
+    }
+  } catch (error) {
+    console.warn('获取系统信息失败，降级使用uni.getSystemInfoSync:', error)
+    // 降级处理，使用原来的方法
+    systemInfo = uni.getSystemInfoSync()
+  }
+  // #endif
+  // #ifndef MP-WEIXIN
+  systemInfo = uni.getSystemInfoSync()
+  // #endif
+  return systemInfo
 }

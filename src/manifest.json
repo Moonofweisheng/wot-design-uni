@@ -46,8 +46,8 @@
             /* SDK配置 */
             "sdkConfigs" : {}
         },
-        "compatible": {  
-          "ignoreVersion": true 
+        "compatible" : {
+            "ignoreVersion" : true
         }
     },
     /* 快应用特有相关 */

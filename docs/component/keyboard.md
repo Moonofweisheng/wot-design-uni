@@ -105,9 +105,9 @@ const onDelete = () => showToast('删除')
 <wd-keyboard v-model="value" v-model:visible="visible" v-model:car-lang="lang" mode="car" @input="onInput" @delete="onDelete"></wd-keyboard>
 
 <!-- 非受控模式：禁用自动切换 -->
-<wd-cell title="车牌号键盘（非自动切换）" :value="value2" is-link @click="showKeyBoard2" />
+<wd-cell title="车牌号键盘（非受控）" :value="value2" is-link @click="showKeyBoard2" />
 
-<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" :auto-switch-lang="false" @input="onInput" @delete="onDelete"></wd-keyboard>
+<wd-keyboard v-model="value2" v-model:visible="visible2" mode="car" auto-switch-lang @input="onInput" @delete="onDelete"></wd-keyboard>
 ```
 
 ```ts
@@ -298,8 +298,8 @@ const onDelete = () => showToast('删除')
 | safeAreaInsetBottom | 是否在底部安全区域内                                                 | `boolean`             | -                          | `true`     | 1.3.10   |
 | extraKey            | 额外按键                                                             | `string` / `string[]` | -                          | -          | 1.3.10   |
 | root-portal         | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                    | `boolean`             | -                          | `false`    | 1.11.0   |
-| v-model:carLang    | 车牌键盘语言模式，当 mode=car 时生效                                 | `string`              | `zh`, `en`                 | -          | 1.12.4   |
-| autoSwitchLang    | 是否自动切换车牌键盘语言，当 mode=car 且 car-lang 是非受控状态时生效 | `boolean`             | -                          | `false`    | 1.12.4   |
+| v-model:carLang    | 车牌键盘语言模式，当 mode=car 时生效                                 | `string`              | `zh`, `en`                 | -          | 1.13.0   |
+| autoSwitchLang    | 是否自动切换车牌键盘语言，当 mode=car 且 car-lang 是非受控状态时生效 | `boolean`             | -                          | `false`    | 1.13.0   |
 
 ## Slot
 

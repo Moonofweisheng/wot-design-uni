@@ -397,8 +397,8 @@ Carousel item list configuration, including image or video address `value`, vide
 
 | name      | Description         | Parameters                           | Minimum Version |
 | --------- | ------------------- | ------------------------------------ | --------------- |
-| indicator | Custom indicator    | `{ current: number, total: number }` | $LOWEST_VERSION$          |
-| default   | Item display content | `{ item: string | SwiperList, index: number }`       | $LOWEST_VERSION$          |
+| indicator | Custom indicator    | `{ current: number, total: number }` | 1.13.0          |
+| default   | Item display content | `{ item: string | SwiperList, index: number }`       | 1.13.0          |
 
 ## External Style Classes
 

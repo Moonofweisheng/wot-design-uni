@@ -117,7 +117,8 @@ const valueClear2 = ref<any[]>([Date.now(), Date.now()])
 const valueEllipsis = ref<number>(Date.now())
 const valueRangeEllipsis = ref<any[]>([Date.now(), Date.now() + 7 * 24 * 60 * 60 * 1000])
 const minDate = ref<number>(Date.now())
-const maxDate = ref<number>(new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).getTime())
+const now = new Date()
+const maxDate = ref<number>(new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()).getTime())
 
 const formatter: DatetimePickerViewFormatter = (type, value) => {
   let formatValue = ''

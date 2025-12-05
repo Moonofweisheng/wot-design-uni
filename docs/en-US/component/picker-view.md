@@ -108,6 +108,7 @@ const onChangeDistrict = (pickerView, value, columnIndex, resolve) => {
 | loading | Loading state | boolean | - | false | - |
 | loading-color | Loading color, can only use hexadecimal color values and cannot use abbreviated form | string | - | #4D80F0 | - |
 | columns-height | Height of picker's internal cylinder | number | - | 231 | - |
+| item-height | Height of picker item | number | - | 35 | 1.13.0 |
 | value-key | Key for value in option object | string | - | value | - |
 | label-key | Key for display text in option object | string | - | label | - |
 | column-change | Function that receives pickerView instance, selected item, current modified column index, resolve as parameters | function | - | - | - |

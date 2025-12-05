@@ -404,8 +404,8 @@ const isLoop = ref(false)
 
 | name      | 说明         | 参数                                 | 最低版本 |
 | --------- | ------------ | ------------------------------------ | -------- |
-| indicator | 自定义指示器 | `{ current: number, total: number }` | $LOWEST_VERSION$   |
-| default   | item展示内容 | `{ item: string | SwiperList, index: number }`       | $LOWEST_VERSION$   |
+| indicator | 自定义指示器 | `{ current: number, total: number }` | 1.13.0   |
+| default   | item展示内容 | `{ item: string | SwiperList, index: number }`       | 1.13.0   |
 
 
 ## 外部样式类

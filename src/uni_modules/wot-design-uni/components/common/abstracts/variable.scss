@@ -651,7 +651,7 @@ $-toast-fs: var(--wot-toast-fs, $-fs-content) !default; // 字号
 $-toast-line-height: var(--wot-toast-line-height, 20px) !default; // 行高
 $-toast-with-icon-min-width: var(--wot-toast-with-icon-min-width, 150px) !default; // 有图标的情况下最小宽度
 $-toast-icon-size: var(--wot-toast-icon-size, 32px) !default; // 图标大小
-$-toast-icon-margin-right: var(--wot-toast-icon-margin-right, 12px) !default; // 图标右边距
+$-toast-msg-margin-left: var(--wot-toast-msg-margin-left, 12px) !default; // 消息内容左边距
 $-toast-icon-margin-bottom: var(--wot-toast-icon-margin-bottom, 12px) !default; // 图标下边距
 $-toast-loading-padding: var(--wot-toast-loading-padding, 10px) !default; // loading状态下的padding
 $-toast-loading-margin-bottom: var(--wot-toast-loading-margin-bottom, 16px) !default; // loading动画的margin-bottom
