@@ -62,6 +62,7 @@ import { ref, computed, watch, nextTick } from 'vue'
 import { tourProps } from './types'
 // #ifdef H5
 import useLockScroll from '../composables/useLockScroll'
+import { getSystemInfo } from '@/uni_modules/wot-design-uni/components/common/util'
 // #endif
 
 interface ElementRect {
@@ -227,7 +228,7 @@ function updateElementInfo() {
 
 // 更新系统信息
 function updateSystemInfo() {
-  const sysInfo = uni.getSystemInfoSync()
+  const sysInfo = getSystemInfo()
   windowHeight.value = sysInfo.windowHeight
   windowTop.value = sysInfo.windowTop || 0
   statusBarHeight.value = sysInfo.statusBarHeight || 0
