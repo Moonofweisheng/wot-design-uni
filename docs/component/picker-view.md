@@ -27,6 +27,7 @@ function onChange({picker, value, index}) {
 | value | string / number / boolean | 选项值，如果 value 属性不存在，则使用 label 作为选项的值 | - |
 | label | string | 选项文本内容 | - |
 | disabled | boolean | 选项是否禁用 | - |
+| icon | string | 选项图标 | $LOWEST_VERSION$ |
 
 ## 禁用选项
 
