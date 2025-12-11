@@ -55,7 +55,7 @@
 
 ### QQ 群
 
-目前 1、2 群已满，请加 3 群，加群时请提供[加群凭证](#加群凭证)章节获得的加群凭证：问卷答题账号ID或者打赏账号。
+目前 1、2、3 群都已满，请加微信群。
 
 :::danger 加群必看
 为了提升加群后沟通的效率，我们添加了加群前的资格测验，有两种测验方式获得加群凭证：  
@@ -66,9 +66,18 @@
 :::
 
 <div style="display: flex;gap:24px;flex-wrap: wrap;">
-  <img style="width: 250px; height: auto;" :src="QQ1" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
-  <img style="width: 250px; height: auto;" :src="QQ2" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
-  <img style="width: 250px; height: auto;" :src="QQ3" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
+  <div style="position: relative; width: 250px;" @click="handleClick">
+    <img style="width: 100%; height: auto;" :src="QQ1" :style="{filter: checked ? 'grayscale(100%)' : 'blur(5px) grayscale(100%)'}" />
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); color: #fff; font-size: 24px; font-weight: bold;" :style="{filter: checked ? 'none' : 'blur(5px)'}">已满，请加微信群</div>
+  </div>
+  <div style="position: relative; width: 250px;" @click="handleClick">
+    <img style="width: 100%; height: auto;" :src="QQ2" :style="{filter: checked ? 'grayscale(100%)' : 'blur(5px) grayscale(100%)'}" />
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); color: #fff; font-size: 24px; font-weight: bold;" :style="{filter: checked ? 'none' : 'blur(5px)'}">已满，请加微信群</div>
+  </div>
+  <div style="position: relative; width: 250px;" @click="handleClick">
+    <img style="width: 100%; height: auto;" :src="QQ3" :style="{filter: checked ? 'grayscale(100%)' : 'blur(5px) grayscale(100%)'}" />
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); color: #fff; font-size: 24px; font-weight: bold;" :style="{filter: checked ? 'none' : 'blur(5px)'}">已满，请加微信群</div>
+  </div>
 </div>
 
 ***快速定位问题小技巧***
