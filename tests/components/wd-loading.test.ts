@@ -49,6 +49,21 @@ describe('WdLoading', () => {
     expect(wrapper.find('.wd-loading__svg').exists()).toBe(true)
   })
 
+  // 测试 spinner 类型的 loading
+  test('spinner类型加载', async () => {
+    const wrapper = mount(WdLoading, {
+      props: {
+        type: 'spinner',
+        customStyle: ''
+      }
+    })
+
+    await nextTick()
+
+    // 检查 SVG 元素是否存在
+    expect(wrapper.find('.wd-loading__svg').exists()).toBe(true)
+  })
+
   // 测试自定义颜色 - ring 类型
   test('ring类型自定义颜色', async () => {
     const color = '#ff0000'
