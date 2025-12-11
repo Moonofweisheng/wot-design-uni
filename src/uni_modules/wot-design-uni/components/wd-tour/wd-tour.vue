@@ -61,7 +61,7 @@ export default {
 import { ref, computed, watch, nextTick } from 'vue'
 import { tourProps } from './types'
 // #ifdef H5
-import useLockScroll from '../composables/useLockScroll'
+import { useLockScroll } from '../composables/useLockScroll'
 // #endif
 
 interface ElementRect {
