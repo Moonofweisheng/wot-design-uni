@@ -92,7 +92,7 @@ export const keyboardProps = {
    */
   autoSwitchLang: makeBooleanProp(false),
   /**
-   * 是否使用 QWERTY 布局 当mode=car且carLang是非受控状态时生效
+   * 是否使用 QWERTY 布局 当mode=car时生效
    */
   qwertyLayout: makeBooleanProp(false)
 }
