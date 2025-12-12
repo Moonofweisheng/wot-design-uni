@@ -7,15 +7,15 @@
         <wd-cell :title="$t('mo-ren-jian-pan')" is-link @click="showKeyBoard(1)" />
         <wd-cell :title="$t('dai-you-ce-lan-de-jian-pan')" is-link @click="showKeyBoard(2)" />
         <wd-cell :title="$t('shen-fen-zheng-jian-pan')" is-link @click="showKeyBoard(3)" />
+        <wd-cell :title="$t('che-pai-jian-pan-shou-kong')" :value="value10" is-link @click="showKeyBoard(10)" />
+        <wd-cell :title="$t('che-pai-jian-pan-fei-shou-kong')" :value="value11" is-link @click="showKeyBoard(11)" />
+        <wd-cell :title="$t('che-pai-jian-pan-qwerty')" :value="value12" is-link @click="showKeyBoard(12)" />
         <wd-cell :title="$t('dai-biao-ti-de-jian-pan')" is-link @click="showKeyBoard(4)" />
-        <wd-cell :title="$t('slot-zi-ding-yi-biao-ti')" is-link @click="showKeyBoard(9)" />
         <wd-cell :title="$t('duo-geewai-an-jian')" is-link @click="showKeyBoard(5)" />
         <wd-cell :title="$t('sui-ji-shu-zi-jian-pan')" is-link @click="showKeyBoard(6)" />
-        <wd-cell :title="$t('che-pai-jian-pan-fei-shou-kong')" :value="value10" is-link @click="showKeyBoard(10)" />
-        <wd-cell :title="$t('che-pai-jian-pan-shou-kong')" :value="value11" is-link @click="showKeyBoard(11)" />
-        <wd-cell :title="$t('che-pai-jian-pan-qwerty')" :value="value12" is-link @click="showKeyBoard(12)" />
         <wd-cell :title="$t('shuang-xiang-bang-ding')" clickable :value="value1" @click="showKeyBoard(7)" />
         <wd-cell :title="$t('zhan-shi-meng-ceng')" clickable @click="showKeyBoard(8)" />
+        <wd-cell :title="$t('slot-zi-ding-yi-biao-ti')" is-link @click="showKeyBoard(9)" />
       </wd-cell-group>
     </demo-block>
 
@@ -67,8 +67,8 @@
 
     <wd-keyboard :modal="true" v-model:visible="visible8" @input="onInput" @delete="onDelete" />
 
-    <wd-keyboard v-model="value10" v-model:visible="visible10" mode="car" auto-switch-lang @input="onInput" @delete="onDelete" />
-    <wd-keyboard v-model="value11" v-model:visible="visible11" v-model:car-lang="carLang" mode="car" @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model="value10" v-model:visible="visible10" v-model:car-lang="carLang" mode="car" @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model="value11" v-model:visible="visible11" mode="car" auto-switch-lang @input="onInput" @delete="onDelete" />
     <wd-keyboard v-model="value12" v-model:visible="visible12" mode="car" qwerty-layout @input="onInput" @delete="onDelete" />
   </page-wraper>
 </template>
