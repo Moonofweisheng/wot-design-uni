@@ -11,43 +11,36 @@
     "source.fixAll.eslint": "explicit"
   },
   // 添加 vue 支持
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "vue"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   //  #去掉代码结尾的分号
   "prettier.semi": true,
   //  #使用单引号替代双引号
   "prettier.singleQuote": true,
   //  #让函数(名)和后面的括号之间加个空格
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+
+  "typescript.validate.enable": true,
   "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.suggestionActions.enabled": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
   "i18n-ally.keystyle": "flat",
   "i18n-ally.sourceLanguage": "zh-CN",
   "i18n-ally.displayLanguage": "zh-CN",
   "i18n-ally.sortKeys": true,
   "i18n-ally.namespace": true,
   "i18n-ally.keepFulfilled": true,
-  "i18n-ally.enabledParsers": [
-    "ts",
-    "js",
-    "json"
-  ],
-  "i18n-ally.enabledFrameworks": [
-    "vue",
-    "vue-sfc"
-  ],
+  "i18n-ally.enabledParsers": ["ts", "js", "json"],
+  "i18n-ally.enabledFrameworks": ["vue", "vue-sfc"],
   "i18n-ally.extract.autoDetect": true,
   "i18n-ally.refactor.templates": [
     {
       "source": "html-inline",
-      "template": "{{ $t('{key}'{args}) }}"  // 不带参数的情况
+      "template": "{{ $t('{key}'{args}) }}" // 不带参数的情况
     },
     {
       "source": "html-attribute",
-      "template": "$t('{key}'{args})",
+      "template": "$t('{key}'{args})"
     },
     {
       "source": "js-string",
@@ -56,7 +49,7 @@
     {
       "source": "js-template",
       "template": "t('{key}'{args})"
-    },
+    }
   ],
   "i18n-ally.extract.parsers.html": {
     "attributes": ["text", "title", "alt", "placeholder", "label", "aria-label", "cancel-text", "close-text", "left-text", "right-text", "value"],
@@ -64,14 +57,9 @@
     "vBind": true,
     "inlineText": true
   },
-  "i18n-ally.keysInUse": [
-    "zh-CN",
-    "en-US"
-  ],
+  "i18n-ally.keysInUse": ["zh-CN", "en-US"],
   "common-intellisense.ui": [],
-  "i18n-ally.localesPaths": [
-    "src/locale"
-  ],
+  "i18n-ally.localesPaths": ["src/locale"],
   "i18n-ally.extract.ignored": [
     "不如摸鱼去",
     "二狗",
@@ -94,6 +82,5 @@
     "芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。黄鹤断矶头，故人曾到否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。",
     "`${item}`"
   ],
-  "i18n-ally.extract.ignoredByFiles": {
-  }
+  "i18n-ally.extract.ignoredByFiles": {}
 }

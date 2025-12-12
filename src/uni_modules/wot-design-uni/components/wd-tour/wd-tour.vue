@@ -58,10 +58,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, type CSSProperties } from 'vue'
 import { tourProps } from './types'
 // #ifdef H5
-import useLockScroll from '../composables/useLockScroll'
+import { useLockScroll } from '../composables/useLockScroll'
 // #endif
 
 interface ElementRect {
@@ -80,7 +80,7 @@ const { lock, unlock } = useLockScroll(() => props.modelValue)
 
 // 响应式数据
 const currentIndex = ref(0)
-const elementInfo = ref({
+const elementInfo = ref<ElementRect>({
   top: 0,
   left: 0,
   width: 0,
@@ -141,11 +141,11 @@ const highlightStyle = computed(() => {
 const popoverStyle = computed(() => {
   const style: {
     transition: string
-    position: string
+    position: CSSProperties['position']
     left: string
     transform: string
     maxWidth: string
-    textAlign: string
+    textAlign: CSSProperties['text-align']
     zIndex: number
     top?: string
     bottom?: string
@@ -238,7 +238,7 @@ function initializeElementInfo(res: ElementRect) {
   elementInfo.value = res
   // 调整元素位置信息，加上窗口顶部偏移量
   elementInfo.value.top = res.top + windowTop.value
-  elementInfo.value.bottom = res.bottom + windowTop.value
+  elementInfo.value.bottom = (res.bottom !== undefined ? res.bottom : 0) + windowTop.value
 }
 // 获取有效的页面边界（顶部和底部安全区域）
 function getEffectiveBoundaries() {
@@ -264,7 +264,7 @@ function checkScrollNeeds(res: ElementRect, boundaries: { top: number; bottom: n
 }
 
 // 处理滚动逻辑
-function handleScrolling(res: ElementRect, scrollNeeds, boundaries: { top: number; bottom: number }) {
+function handleScrolling(res: ElementRect, scrollNeeds: ReturnType<typeof checkScrollNeeds>, boundaries: { top: number; bottom: number }) {
   if (scrollNeeds.up) {
     // 元素被顶部遮挡，需要提示框往上走，页面往下走
     scrollUp(res, boundaries)
