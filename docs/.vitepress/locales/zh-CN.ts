@@ -85,7 +85,7 @@ export default defineConfig({
         ]
       },
       { text: '🥤一杯咖啡', link: '/reward/reward', activeMatch: '/reward/' },
-      { text: '博客', link: 'https://blog.wot-ui.cn/' },
+      { text: '关于作者', link: 'https://blog.wot-ui.cn/about' },
       {
         text: '模板', items: [
           { text: '快速上手模板 wot-starter', link: 'https://starter.wot-ui.cn/' },

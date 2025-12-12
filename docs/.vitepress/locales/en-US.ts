@@ -81,7 +81,7 @@ export default defineConfig({
         ]
       },
       { text: '🥤Buy Me a Coffee', link: '/en-US/reward/reward', activeMatch: '/reward/' },
-      { text: 'Blog', link: 'https://blog.wot-ui.cn/' },
+      { text: 'Blog', link: 'https://blog.wot-ui.cn/about' },
       {
         text: 'Templates', items: [
           { text: 'Quick Start Template wot-starter', link: 'https://starter.wot-ui.cn/' },
