@@ -40,6 +40,7 @@
               objectFit="cover"
               @click="handleClick(index, item)"
             />
+            <slot name="default" :current="currentValue" :item="item" v-else-if="$slots.default"></slot>
             <image
               v-else
               :src="isObj(item) ? item[valueKey] : item"
