@@ -149,8 +149,9 @@ const highlightStyle = computed(() => {
 const popoverStyle = computed(() => {
   const style: CSSProperties = {}
   if (isDef(props.zIndex)) {
-    style.zIndex = props.zIndex + 1
-    style.transitionDuration = props.duration + 'ms'
+    const zIndex = Number(props.zIndex)
+    style.zIndex = zIndex + 1
+    style.transitionDuration = `${props.duration}ms`
   }
   const stepPadding = Number(isDef(currentStep.value.offset) ? currentStep.value.offset : props.offset)
   const placement = isDef(currentStep.value.placement) ? currentStep.value.placement : 'auto'
