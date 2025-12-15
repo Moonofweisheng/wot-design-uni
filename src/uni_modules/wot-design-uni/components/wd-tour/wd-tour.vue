@@ -190,20 +190,7 @@ async function updateElementInfo() {
   const element = currentStep.value.element
   if (!element) return
   try {
-    const res = (await getRect(element, false, props.scope)) as UniApp.NodeInfo | null
-    if (!res) {
-      console.error('无法找到元素:', element)
-      emit('error', {
-        message: '无法找到指定的引导元素',
-        element: element
-      })
-      if (props.missingStrategy === 'skip') {
-        handleNext()
-      } else if (props.missingStrategy === 'hide') {
-        emit('update:modelValue', false)
-      }
-      return
-    }
+    const res = (await getRect(element, false, props.scope)) as UniApp.NodeInfo
     initializeElementInfo(res)
     const effectiveBoundaries = getEffectiveBoundaries()
     const scrollNeeds = checkScrollNeeds(res, effectiveBoundaries)
@@ -215,6 +202,11 @@ async function updateElementInfo() {
       message: '无法找到指定的引导元素',
       element: element
     })
+    if (props.missingStrategy === 'skip') {
+      handleNext()
+    } else if (props.missingStrategy === 'hide') {
+      emit('update:modelValue', false)
+    }
   }
 }
 
