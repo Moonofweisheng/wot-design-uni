@@ -377,7 +377,7 @@ describe('WdTour', () => {
 
     // 当 mask 为 false 时，boxShadow 应该为 none
     const highlightStyle = wrapper.find('.wd-tour__highlight').attributes('style')
-    expect(highlightStyle).toContain('box-shadow: none')
+    expect(highlightStyle).not.toContain('box-shadow')
   })
 
   // 测试自定义高亮区域插槽
