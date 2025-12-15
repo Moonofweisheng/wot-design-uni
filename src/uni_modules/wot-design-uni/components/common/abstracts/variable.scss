@@ -992,4 +992,6 @@ $-tour-button-padding: var(--wot-tour-button-padding, 4px 8px) !default; // 按�
 $-tour-primary-button-bg-color: var(--wot-tour-primary-button-bg-color, $-button-primary-bg-color) !default; // 主按钮背景色
 $-tour-primary-button-text-color: var(--wot-tour-primary-button-text-color, $-color-white) !default; // 主按钮文字颜色
 $-tour-skip-bg-color: var(--wot-tour-skip-bg-color, $-color-white) !default; // 跳过按钮背景色
-$-tour-skip-text-color: var(--wot-tour-skip-text-color, $-color-black) !default; // 跳过按钮文字颜色
+$-tour-button-text-color: var(--wot-tour-button-text-color, $-color-black) !default; // 按钮文字默认颜色
+$-tour-highlight-shadow-color: var(--wot-tour-highlight-shadow-color, rgba(0, 0, 0, 0.65)) !default; // 高亮阴影颜色
+

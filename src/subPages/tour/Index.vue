@@ -373,12 +373,41 @@ function handleChange({ current }: TourChangeDetail) {
 </script>
 
 <style lang="scss" scoped>
+.wot-theme-dark {
+  :deep() {
+    .page-wraper {
+      background: $-dark-background2 !important;
+    }
+  }
+  .tour-item {
+    background: $-dark-background2 !important;
+    border: 1px solid $-dark-border-color !important;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .tour-title {
+    color: $-dark-color !important;
+  }
+
+  .tour-content {
+    color: $-dark-color3 !important;
+  }
+
+  .custom-text {
+    color: $-dark-color !important;
+  }
+
+  :deep(.wd-icon) {
+    color: $-dark-color !important;
+  }
+}
+
 .tour-container {
-  padding: 0;
+  padding-top: 20px;
 
   .tour-step {
     width: fit-content;
-    margin: 20px auto;
+    margin: 0 auto 20px;
 
     .tour-item {
       padding: 20px;

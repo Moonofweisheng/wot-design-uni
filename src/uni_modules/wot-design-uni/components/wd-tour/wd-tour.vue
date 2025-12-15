@@ -2,7 +2,7 @@
   <view class="wd-tour" v-if="modelValue" :style="rootStyle" @touchmove.stop.prevent="noop">
     <view class="wd-tour__mask" @click.stop="handleMask">
       <slot name="highlight" :elementInfo="highlightElementInfo">
-        <view class="wd-tour__highlight" :style="highlightStyle"></view>
+        <view :class="highlightClass" :style="highlightStyle"></view>
       </slot>
       <view class="wd-tour__popover" :style="popoverStyle">
         <slot name="content">
@@ -107,6 +107,10 @@ const rootStyle = computed(() => {
   return objToStyle(style)
 })
 
+const highlightClass = computed(() => {
+  return `wd-tour__highlight ${props.mask ? 'wd-tour__highlight--mask' : ''}`
+})
+
 // 计算属性
 const currentStep = computed(() => {
   return props.steps[currentIndex.value] || {}
@@ -118,12 +122,11 @@ function getDefaultStyle(): CSSProperties {
   }
 }
 // 提取公共的高亮样式计算函数
-function calculateHighlightStyle(padding: number, boxShadow: string): CSSProperties {
+function calculateHighlightStyle(padding: number): CSSProperties {
   return {
     transition: props.duration + 'ms all,boxShadow 0s,height 0s,width 0s',
     borderRadius: props.borderRadius + 'px',
-    padding: padding + 'px',
-    boxShadow: boxShadow
+    padding: padding + 'px'
   }
 }
 const highlightStyle = computed(() => {
@@ -133,17 +136,20 @@ const highlightStyle = computed(() => {
   }
   const stepPadding = Number(isDef(currentStep.value.padding) ? currentStep.value.padding : props.padding)
   // 根据是否显示蒙版来设置阴影效果
-  const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : 'none'
+  const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : undefined
 
-  const baseStyle = calculateHighlightStyle(stepPadding, boxShadow)
-  const styleObj = {
+  const baseStyle = calculateHighlightStyle(stepPadding)
+  const style: CSSProperties = {
     ...baseStyle,
     top: addUnit((elementInfo.value.top || 0) - stepPadding),
     left: addUnit((elementInfo.value.left || 0) - stepPadding),
     height: addUnit(elementInfo.value.height || 0),
     width: addUnit(elementInfo.value.width || 0)
   }
-  return objToStyle([{ ...styleObj }, props.highlightStyle])
+  if (isDef(props.mask) && props.mask) {
+    style.boxShadow = boxShadow
+  }
+  return objToStyle([{ ...style }, props.highlightStyle])
 })
 
 const popoverStyle = computed(() => {
@@ -169,20 +175,24 @@ const popoverStyle = computed(() => {
 
 const highlightElementInfo = computed(() => {
   const stepPadding = Number(isDef(currentStep.value.padding) ? currentStep.value.padding : props.padding)
-  const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : 'none'
+  const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : undefined
   // 如果元素信息尚未获取到，返回空样式避免闪烁
   if (!elementInfo.value.width && !elementInfo.value.height) {
     return getDefaultStyle()
   }
 
-  const baseStyle = calculateHighlightStyle(stepPadding, boxShadow)
-  return {
+  const baseStyle = calculateHighlightStyle(stepPadding)
+  const style: CSSProperties = {
     ...baseStyle,
     top: addUnit((elementInfo.value.top || 0) - stepPadding),
     left: addUnit((elementInfo.value.left || 0) - stepPadding),
     width: addUnit((elementInfo.value.width || 0) + stepPadding * 2),
     height: addUnit((elementInfo.value.height || 0) + stepPadding * 2)
   }
+  if (isDef(props.mask) && props.mask) {
+    style.boxShadow = boxShadow
+  }
+  return style
 })
 function noop() {}
 // 方法

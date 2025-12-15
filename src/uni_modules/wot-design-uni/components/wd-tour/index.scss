@@ -1,6 +1,32 @@
 @import './../common/abstracts/_mixin.scss';
 @import './../common/abstracts/variable.scss';
 
+.wot-theme-dark {
+  @include b(tour) {
+    @include e(popover) {
+      background: $-dark-background2;
+    }
+
+    @include e(info) {
+      background: $-dark-background2;
+      border-color: $-dark-background2;
+      color: $-dark-color;
+    }
+
+    @include e(skip) {
+      color: $-dark-color;
+    }
+
+    @include e(highlight) {
+
+      @include m(mask) {
+        box-shadow: 0 0 0 100vh rgba(0, 0, 0, 0.7);
+      }
+    }
+
+  }
+}
+
 @include b(tour) {
   position: fixed;
   top: 0;
@@ -28,6 +54,10 @@
     height: 0;
     border-radius: 0;
     padding: 0;
+
+    @include m(mask) {
+      box-shadow: 0 0 0 100vh $-tour-highlight-shadow-color;
+    }
   }
 
   @include e(popover) {
@@ -42,7 +72,7 @@
     padding: $-tour-popover-padding;
     border-radius: $-tour-popover-radius;
     width: fit-content;
-    min-width: $-tour-popover-min-width ;
+    min-width: $-tour-popover-min-width;
   }
 
   @include e(info) {
@@ -59,10 +89,11 @@
     justify-content: flex-end;
     align-items: center;
     padding-top: 6px;
+    color: $-tour-button-text-color;
   }
 
   @include e(prev) {
-    @include edeep(default){
+    @include edeep(default) {
       font-size: $-tour-button-font-size;
       border-radius: $-tour-button-radius;
       padding: $-tour-button-padding;
@@ -93,11 +124,10 @@
   }
 
   @include e(skip) {
-    
-    @include edeep(default){
-      background: $-tour-skip-bg-color;
-      color: $-tour-skip-text-color;
+
+    @include edeep(default) {
       font-size: $-tour-button-font-size;
+      border-radius: $-tour-button-radius;
       padding: $-tour-button-padding;
       white-space: nowrap;
     }
@@ -108,26 +138,8 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
-  }
-}
-
-.wot-theme-dark {
-  @include b(tour) {
-    @include e(popover) {
-      background: $-dark-background2;
-    }
-    
-    @include e(info) {
-      background: $-dark-background2;
-      border-color: $-dark-background2;
-      color: $-dark-color;
-    }
-    
-    @include e(skip) {
-      background: $-dark-background2;
-      color: $-dark-color;
-    }
   }
 }

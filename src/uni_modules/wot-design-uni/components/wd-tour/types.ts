@@ -52,10 +52,8 @@ export const tourProps = {
   /**
    * 蒙版颜色（支持 rgba 格式）
    * 类型：string
-   * 默认值：'rgba(0, 0, 0, 0.5)'
    */
-  maskColor: makeStringProp('rgba(0, 0, 0, 0.5)'),
-
+  maskColor: String,
   /**
    * 引导框与高亮元素之间的间距，单位 px
    * 类型：number
