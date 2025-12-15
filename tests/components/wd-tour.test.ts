@@ -36,11 +36,13 @@ const mockUni = {
     windowTop: 0,
     statusBarHeight: 20
   })),
-  getSystemInfo: vi.fn(() => ({
-    windowHeight: 600,
-    windowTop: 0,
-    statusBarHeight: 20
-  })),
+  getSystemInfo: vi.fn(({ success }) => {
+    success?.({
+      windowHeight: 600,
+      windowTop: 0,
+      statusBarHeight: 20
+    })
+  }),
   getMenuButtonBoundingClientRect: vi.fn()
 }
 

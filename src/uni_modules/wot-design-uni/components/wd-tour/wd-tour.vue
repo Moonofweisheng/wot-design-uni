@@ -179,8 +179,8 @@ const highlightElementInfo = computed(() => {
     ...baseStyle,
     top: addUnit((elementInfo.value.top || 0) - stepPadding),
     left: addUnit((elementInfo.value.left || 0) - stepPadding),
-    width: addUnit(elementInfo.value.width || 0) + stepPadding * 2,
-    height: addUnit(elementInfo.value.height || 0) + stepPadding * 2
+    width: addUnit((elementInfo.value.width || 0) + stepPadding * 2),
+    height: addUnit((elementInfo.value.height || 0) + stepPadding * 2)
   }
 })
 function noop() {}
