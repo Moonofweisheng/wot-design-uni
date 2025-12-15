@@ -195,7 +195,7 @@ async function updateElementInfo() {
     const effectiveBoundaries = getEffectiveBoundaries()
     const scrollNeeds = checkScrollNeeds(res, effectiveBoundaries)
     handleScrolling(res, scrollNeeds, effectiveBoundaries)
-    calculateTipPosition(res, effectiveBoundaries)
+    calculateTipPosition(res)
   } catch (error) {
     console.error('updateElementInfo error:', error)
     emit('error', {
@@ -279,10 +279,11 @@ function scrollUp(res: UniApp.NodeInfo, boundaries: { top: number; bottom: numbe
 // 引导向下滚动处理
 function scrollDown(res: UniApp.NodeInfo) {
   // 计算需要滚动的距离
-  let scrollDistance = Number(res.bottom) - windowHeight.value + props.padding + Number(props.bottomSafetyOffset)
+  const bottom = res.bottom || 0
+  let scrollDistance = bottom - windowHeight.value + props.padding + Number(props.bottomSafetyOffset)
 
   // 更新元素位置信息（滚动后）
-  elementInfo.value.top = windowHeight.value - Number(res.bottom) - props.padding - Number(props.bottomSafetyOffset) // 应该是减去安全偏移量
+  elementInfo.value.top = windowHeight.value - bottom - props.padding - Number(props.bottomSafetyOffset) // 应该是减去安全偏移量
   elementInfo.value.bottom = windowHeight.value - props.padding - Number(props.bottomSafetyOffset)
 
   uni.pageScrollTo({
@@ -296,14 +297,14 @@ function scrollDown(res: UniApp.NodeInfo) {
 }
 
 // 计算提示框显示位置（上方或下方）
-function calculateTipPosition(res: UniApp.NodeInfo, boundaries: { top: number; bottom: number }) {
+function calculateTipPosition(res: UniApp.NodeInfo) {
   // 计算导航区域总高度
   let totalNavHeight = statusBarHeight.value
   // 计算屏幕中心点位置
   const screenCenter = (windowHeight.value + totalNavHeight) / 2 + windowTop.value
 
   // 计算元素中心点位置
-  const elementCenter = Number(res.top) + Number(res.height) / 2 + windowTop.value
+  const elementCenter = (res.top || 0) + (res.height || 0) / 2 + windowTop.value
 
   // 根据元素位置决定提示框显示在上方还是下方
   if (elementCenter < screenCenter) {
