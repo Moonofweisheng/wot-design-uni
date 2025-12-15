@@ -135,9 +135,6 @@ const highlightStyle = computed(() => {
     return getDefaultStyle()
   }
   const stepPadding = Number(isDef(currentStep.value.padding) ? currentStep.value.padding : props.padding)
-  // 根据是否显示蒙版来设置阴影效果
-  const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : undefined
-
   const baseStyle = calculateHighlightStyle(stepPadding)
   const style: CSSProperties = {
     ...baseStyle,
@@ -146,8 +143,8 @@ const highlightStyle = computed(() => {
     height: addUnit(elementInfo.value.height || 0),
     width: addUnit(elementInfo.value.width || 0)
   }
-  if (isDef(props.mask) && props.mask) {
-    style.boxShadow = boxShadow
+  if (isDef(props.mask) && isDef(props.maskColor)) {
+    style.boxShadow = `0 0 0 100vh ${props.maskColor}`
   }
   return objToStyle([{ ...style }, props.highlightStyle])
 })
@@ -175,7 +172,6 @@ const popoverStyle = computed(() => {
 
 const highlightElementInfo = computed(() => {
   const stepPadding = Number(isDef(currentStep.value.padding) ? currentStep.value.padding : props.padding)
-  const boxShadow = props.mask ? `0 0 0 100vh ${props.maskColor}` : undefined
   // 如果元素信息尚未获取到，返回空样式避免闪烁
   if (!elementInfo.value.width && !elementInfo.value.height) {
     return getDefaultStyle()
@@ -189,8 +185,8 @@ const highlightElementInfo = computed(() => {
     width: addUnit((elementInfo.value.width || 0) + stepPadding * 2),
     height: addUnit((elementInfo.value.height || 0) + stepPadding * 2)
   }
-  if (isDef(props.mask) && props.mask) {
-    style.boxShadow = boxShadow
+  if (isDef(props.mask) && isDef(props.maskColor)) {
+    style.boxShadow = `0 0 0 100vh ${props.maskColor}`
   }
   return style
 })
