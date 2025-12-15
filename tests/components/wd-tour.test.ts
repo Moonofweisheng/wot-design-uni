@@ -36,6 +36,11 @@ const mockUni = {
     windowTop: 0,
     statusBarHeight: 20
   })),
+  getSystemInfo: vi.fn(() => ({
+    windowHeight: 600,
+    windowTop: 0,
+    statusBarHeight: 20
+  })),
   getMenuButtonBoundingClientRect: vi.fn()
 }
 
@@ -230,6 +235,8 @@ describe('WdTour', () => {
     // 验证是否发出 next 事件
     expect(wrapper.emitted('next')).toBeTruthy()
     expect(wrapper.emitted('change')).toBeTruthy()
+    const changePayload = (wrapper.emitted('change') || [])[0]?.[0]
+    expect(changePayload).toHaveProperty('current')
   })
 
   // 测试点击上一步按钮

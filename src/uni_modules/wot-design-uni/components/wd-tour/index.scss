@@ -7,7 +7,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: $-tour-z-index;
 
   @include e(mask) {
     position: fixed;
@@ -19,27 +19,37 @@
 
   @include e(highlight) {
     position: fixed;
-    background-color: transparent;
+    background: transparent;
     box-sizing: content-box;
-    animation: tour-show 0.3s ease-in-out;
+    animation: tour-show $-tour-animation-duration $-tour-highlight-animation-timing;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 0;
+    border-radius: 0;
+    padding: 0;
   }
 
   @include e(popover) {
-    z-index: 10000;
-    background-color: $-color-white;
-    padding: 10px 12px;
-    border-radius: 8px;
+    z-index: $-tour-popover-z-index;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: $-tour-popover-max-width;
+    text-align: center;
+    transition: $-tour-animation-duration all;
+    background-color: $-tour-popover-bg;
+    padding: $-tour-popover-padding;
+    border-radius: $-tour-popover-radius;
     width: fit-content;
-    min-width: 200px;
-    animation: tour-show 0.3s ease;
+    min-width: $-tour-popover-min-width ;
   }
 
   @include e(info) {
-    font-size: 12px;
-    background-color: $-color-white;
-    border-radius: 16rpx;
-    border: 1px solid $-color-white;
-    color: $-color-black;
+    font-size: $-tour-popover-info-font-size;
+    background: $-tour-info-bg;
+    border: $-tour-info-border-width solid $-tour-info-border-color;
+    color: $-tour-info-text-color;
     width: fit-content;
     text-align: left;
   }
@@ -48,47 +58,47 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-top: 5px;
+    padding-top: 6px;
   }
 
   @include e(prev) {
-    @include e(default){
-      font-size: 12px;
-      border-radius: 4px;
-      padding: 5px 8px;
+    @include edeep(default){
+      font-size: $-tour-button-font-size;
+      border-radius: $-tour-button-radius;
+      padding: $-tour-button-padding;
       white-space: nowrap;
     }
   }
 
   @include e(next) {
-    @include e(default) {
-      font-size: 12px;
-      border-radius: 4px;
-      padding: 5px 8px;
-      background-color: $-button-primary-bg-color;
-      color: $-color-white;
+    @include edeep(default) {
+      font-size: $-tour-button-font-size;
+      border-radius: $-tour-button-radius;
+      padding: $-tour-button-padding;
+      background: $-tour-primary-button-bg-color;
+      color: $-tour-primary-button-text-color;
       white-space: nowrap;
     }
   }
 
   @include e(finish) {
-    @include e(default) {
-      font-size: 12px;
-      border-radius: 4px;
-      padding: 5px 8px;
-      background-color: $-button-primary-bg-color;
-      color: $-color-white;
+    @include edeep(default) {
+      font-size: $-tour-button-font-size;
+      border-radius: $-tour-button-radius;
+      padding: $-tour-button-padding;
+      background: $-tour-primary-button-bg-color;
+      color: $-tour-primary-button-text-color;
       white-space: nowrap;
     }
   }
 
   @include e(skip) {
     
-    @include e(default){
-      background-color: $-color-white;
-      color: $-color-black;
-      font-size: 12px;
-      padding: 5px 8px;
+    @include edeep(default){
+      background: $-tour-skip-bg-color;
+      color: $-tour-skip-text-color;
+      font-size: $-tour-button-font-size;
+      padding: $-tour-button-padding;
       white-space: nowrap;
     }
   }
@@ -106,17 +116,17 @@
 .wot-theme-dark {
   @include b(tour) {
     @include e(popover) {
-      background-color: $-dark-background2;
+      background: $-dark-background2;
     }
     
     @include e(info) {
-      background-color: $-dark-background2;
+      background: $-dark-background2;
       border-color: $-dark-background2;
       color: $-dark-color;
     }
     
     @include e(skip) {
-      background-color: $-dark-background2;
+      background: $-dark-background2;
       color: $-dark-color;
     }
   }

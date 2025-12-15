@@ -1,12 +1,3 @@
-/*
- * @Author: weisheng
- * @Date: 2023-07-27 10:26:09
- * @LastEditTime: 2025-09-23 10:35:39
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-design-uni/docs/.vitepress/config.mts
- * 记得注释
- */
 import { defineConfig } from 'vitepress';
 import viteCompression from 'vite-plugin-compression'
 import { fileURLToPath, URL } from 'node:url'
@@ -21,7 +12,7 @@ export default defineConfig({
       llmstxt({
         ignoreFiles: ['reward/*', 'index.md', 'README.md', 'en-US/*.md', 'en-US/**/*.md', 'ads/*', 'guide/cases.md', 'guide/changelog.md', 'guide/join-group.md', 'guide/typography.md'],
         domain: 'https://wot-ui.cn',
-      }),
+      }) as any,
       MarkdownTransform(),
       VersionBadgePlugin(),
       viteCompression({

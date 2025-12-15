@@ -107,7 +107,7 @@
       v-model="showCustomMaskTour"
       :steps="customMaskSteps"
       :mask="true"
-      mask-color="#7eb2f87d"
+      mask-color="red"
       :offset="40"
       :border-radius="15"
       :padding="10"
@@ -179,6 +179,7 @@
 </template>
 
 <script lang="ts" setup>
+import { type TourChangeDetail } from '@/uni_modules/wot-design-uni/components/wd-tour/types'
 import { ref, watch, nextTick } from 'vue'
 
 const showBasicTour = ref(false)
@@ -366,8 +367,8 @@ function handleSkip() {
   showControlTour.value = false
 }
 
-function handleChange(currentIndex: number) {
-  console.log('当前步骤:', currentIndex)
+function handleChange({ current }: TourChangeDetail) {
+  console.log('当前步骤:', current)
 }
 </script>
 
