@@ -124,6 +124,12 @@ export default {
   tableCol: {
     indexLabel: 'Número'
   },
+  tour: {
+    prev: 'Anterior',
+    next: 'Próximo',
+    finish: 'Concluir',
+    skip: 'Pular'
+  },
   signature: {
     confirmText: 'Concluir',
     clearText: 'Limpar',

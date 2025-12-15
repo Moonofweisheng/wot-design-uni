@@ -66,6 +66,12 @@ export default {
   tableCol: {
     indexLabel: '序號'
   },
+  tour: {
+    prev: '上一步',
+    next: '下一步',
+    finish: '完成',
+    skip: '跳過'
+  },
   signature: {
     confirmText: '確認',
     clearText: '清空',

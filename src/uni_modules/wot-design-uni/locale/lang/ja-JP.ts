@@ -124,6 +124,12 @@ export default {
   tableCol: {
     indexLabel: '索引'
   },
+  tour: {
+    prev: '前へ',
+    next: '次へ',
+    finish: '完了',
+    skip: 'スキップ'
+  },
   signature: {
     confirmText: '確認',
     clearText: 'クリア',

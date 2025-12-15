@@ -84,22 +84,22 @@ export const tourProps = {
   /**
    * 上一步按钮文字
    */
-  prevText: makeStringProp('上一步'),
+  prevText: String,
 
   /**
    * 下一步按钮文字
    */
-  nextText: makeStringProp('下一步'),
+  nextText: String,
 
   /**
    * 跳过按钮文字
    */
-  skipText: makeStringProp('跳过'),
+  skipText: String,
 
   /**
    * 完成按钮文字
    */
-  finishText: makeStringProp('完成'),
+  finishText: String,
 
   /**
    * 安全偏移量，用于滚动计算时确保元素周围有足够的空间

@@ -124,6 +124,12 @@ export default {
   tableCol: {
     indexLabel: 'หมายเลขซีเรียล'
   },
+  tour: {
+    prev: 'ก่อนหน้า',
+    next: 'ถัดไป',
+    finish: 'เสร็จสิ้น',
+    skip: 'ข้าม'
+  },
   signature: {
     confirmText: 'ยืนยัน',
     clearText: 'ล้าง',

@@ -62,9 +62,27 @@ import { ref, computed, watch, nextTick, type CSSProperties } from 'vue'
 import { addUnit, getRect, getSystemInfo, isDef, objToStyle } from '../common/util'
 import { tourProps, type TourEmits } from './types'
 import { useRaf } from '../composables/useRaf'
+import { useTranslate } from '../composables/useTranslate'
 
 const props = defineProps(tourProps)
 const emit = defineEmits<TourEmits>()
+const { translate } = useTranslate('tour')
+
+const prevText = computed(() => {
+  return isDef(props.prevText) ? props.prevText : translate('prev')
+})
+
+const nextText = computed(() => {
+  return isDef(props.nextText) ? props.nextText : translate('next')
+})
+
+const skipText = computed(() => {
+  return isDef(props.skipText) ? props.skipText : translate('skip')
+})
+
+const finishText = computed(() => {
+  return isDef(props.finishText) ? props.finishText : translate('finish')
+})
 
 const currentIndex = ref<number>(0) // 当前步骤索引
 const elementInfo = ref<UniApp.NodeInfo>({

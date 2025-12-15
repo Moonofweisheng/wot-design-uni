@@ -124,6 +124,12 @@ export default {
   tableCol: {
     indexLabel: '인덱스'
   },
+  tour: {
+    prev: '이전',
+    next: '다음',
+    finish: '완료',
+    skip: '건너뛰기'
+  },
   signature: {
     confirmText: '확인',
     clearText: '지우기',
