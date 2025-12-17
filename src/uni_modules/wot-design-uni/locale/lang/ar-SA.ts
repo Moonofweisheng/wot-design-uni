@@ -124,6 +124,12 @@ export default {
   tableCol: {
     indexLabel: 'فهرس'
   },
+  tour: {
+    prev: 'السابق',
+    next: 'التالي',
+    finish: 'إنهاء',
+    skip: 'تخطي'
+  },
   signature: {
     confirmText: 'تأكيد',
     clearText: 'مسح',

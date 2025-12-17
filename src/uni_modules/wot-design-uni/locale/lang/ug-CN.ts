@@ -128,6 +128,12 @@ export default {
   tableCol: {
     indexLabel: 'تەرتىپ نومۇرى'
   },
+  tour: {
+    prev: 'ئالدىنقى قەدەم',
+    next: 'كېيىنكى قەدەم',
+    finish: 'تاماملاش',
+    skip: 'ئاتلاش'
+  },
   signature: {
     confirmText: 'جەزملەش',
     clearText: 'تازىلاش',

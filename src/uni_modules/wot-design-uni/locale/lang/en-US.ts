@@ -124,6 +124,12 @@ export default {
   tableCol: {
     indexLabel: 'index'
   },
+  tour: {
+    prev: 'Previous',
+    next: 'Next',
+    finish: 'Finish',
+    skip: 'Skip'
+  },
   signature: {
     confirmText: 'OK',
     clearText: 'Clear',

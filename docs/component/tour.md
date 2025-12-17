@@ -1,4 +1,7 @@
-# Guide 漫游组件
+---
+version: 1.14.0
+---
+# Tour 漫游组件
 
 用于引导用户逐步了解应用功能的组件，可以高亮显示页面中的特定元素并提供说明。
 
@@ -159,17 +162,20 @@ function onFinish() {
 | offset | 引导提示框与高亮框的间距 | number | - | 20 |
 | duration | 动画持续时间（毫秒） | number | - | 300 |
 | border-radius | 高亮区域的圆角大小 | number | - | 8 |
-| padding | 高亮区域的内边距 | number | - | 10 |
+| padding | 高亮区域的内边距 | number | - | 8 |
 | prev-text | 上一步按钮文字 | string | - | 上一步 |
 | next-text | 下一步按钮文字 | string | - | 下一步 |
 | skip-text | 跳过按钮文字 | string | - | 跳过 |
 | finish-text | 完成按钮文字 | string | - | 完成 |
+| highlight-style | 高亮区域样式 | object | - | - |
 | bottom-safety-offset | 底部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | number | - | 100 |
 | top-safety-offset | 顶部安全偏移量，用于滚动计算时确保元素周围有足够的空间 | number | - | 0 |
 | custom-nav | 是否自定义顶部导航栏 | boolean | - | false |
 | click-mask-next | 点击蒙版是否可以下一步 | boolean | - | false |
-| z-index | 引导组件的层级 | number | - | 999998 |
+| z-index | 引导组件的层级 | number | - | 999 |
 | show-tour-buttons | 是否显示引导按钮 | boolean | - | true |
+| scope | 查询作用域（限定选择器范围） | object | - | - |
+| missing-strategy | 缺失元素处理策略 | 'skip' \| 'stop' \| 'hide' | - | stop |
 
 ## Steps 数据结构
 
@@ -177,14 +183,17 @@ function onFinish() {
 |------|------|------|
 | element | 需要高亮的元素选择器 | string |
 | content | 引导文字内容（支持富文本） | string |
+| padding | 覆盖当前步骤的内边距 | number |
+| offset | 覆盖当前步骤的提示与高亮间距 | number |
+| placement | 强制提示位置 | 'auto' \| 'top' \| 'bottom' \| 'left' \| 'right' |
 
 ## Events
 
 | 事件名 | 说明 | 参数 |
 |--------|------|------|
-| change | 步骤改变时触发 | `{currentIndex: number }` |
-| prev | 点击上一步按钮时触发 | `{ oldCurrent: number, current: number, total: number, isUp: number }` |
-| next | 点击下一步按钮时触发 | `{ oldCurrent: number, current: number, total: number, isUp: number }` |
+| change | 步骤改变时触发 | `{ current: number }` |
+| prev | 点击上一步按钮时触发 | `{ prevCurrent: number, current: number, total: number, isElementInTop: boolean }` |
+| next | 点击下一步按钮时触发 | `{ prevCurrent: number, current: number, total: number, isElementInTop: boolean }` |
 | finish | 点击完成按钮时触发 | `{ current: number, total: number }` |
 | skip | 点击跳过按钮时触发 | `{ current: number, total: number }` |
 | error | 查找引导元素出错时触发 | `{ message: string, element: string }` |

@@ -36,6 +36,13 @@ const mockUni = {
     windowTop: 0,
     statusBarHeight: 20
   })),
+  getSystemInfo: vi.fn(({ success }) => {
+    success?.({
+      windowHeight: 600,
+      windowTop: 0,
+      statusBarHeight: 20
+    })
+  }),
   getMenuButtonBoundingClientRect: vi.fn()
 }
 
@@ -230,6 +237,8 @@ describe('WdTour', () => {
     // 验证是否发出 next 事件
     expect(wrapper.emitted('next')).toBeTruthy()
     expect(wrapper.emitted('change')).toBeTruthy()
+    const changePayload = (wrapper.emitted('change') || [])[0]?.[0]
+    expect(changePayload).toHaveProperty('current')
   })
 
   // 测试点击上一步按钮
@@ -368,7 +377,7 @@ describe('WdTour', () => {
 
     // 当 mask 为 false 时，boxShadow 应该为 none
     const highlightStyle = wrapper.find('.wd-tour__highlight').attributes('style')
-    expect(highlightStyle).toContain('box-shadow: none')
+    expect(highlightStyle).not.toContain('box-shadow')
   })
 
   // 测试自定义高亮区域插槽
