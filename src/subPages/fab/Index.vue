@@ -21,7 +21,21 @@
           <wd-radio value="bottom-center" custom-class="custom-radio">{{ $t('xia-zhong') }}</wd-radio>
           <wd-radio value="left-bottom" custom-class="custom-radio">{{ $t('zuo-xia') }}</wd-radio>
           <wd-radio value="right-bottom" custom-class="custom-radio">{{ $t('you-xia') }}</wd-radio>
+          <wd-radio value="custom" custom-class="custom-radio">{{ $t('zi-ding-yi') }}</wd-radio>
         </wd-radio-group>
+      </demo-block>
+      <demo-block v-if="position === 'custom'" :title="$t('fab-zi-ding-yi-wei-zhi') + ' ' + $t('fab-pian-yi-liang')">
+        <view class="custom-position-controls">
+          <view class="control-item">
+            <text class="control-label">X {{ $t('fab-pian-yi-liang') }}: {{ offsetX }}</text>
+            <wd-slider v-model="offsetX" :min="0" :max="maxOffsetX" />
+          </view>
+          <view class="control-item">
+            <text class="control-label">Y {{ $t('fab-pian-yi-liang') }}: {{ offsetY }}</text>
+            <wd-slider v-model="offsetY" :min="0" :max="maxOffsetY" />
+          </view>
+        </view>
+        <wd-button @click="reRenderFab">重新渲染</wd-button>
       </demo-block>
       <demo-block :title="$t('cai-dan-dan-chu-fang-xiang')">
         <wd-radio-group v-model="direction" inline shape="dot">
@@ -55,12 +69,15 @@
       </demo-block>
       <wd-fab
         v-if="!useTriggerSlot"
+        :key="fabKey"
         v-model:active="active"
         :disabled="disabled"
         :type="type"
         :position="position"
         :direction="direction"
         :draggable="draggable"
+        :offset-x="position === 'custom' ? offsetX : undefined"
+        :offset-y="position === 'custom' ? offsetY : undefined"
         @click="showToast('我被点了')"
       >
         <wd-button @click="showToast('一键三连')" :disabled="disabled" custom-class="custom-button" type="primary" round>
@@ -77,7 +94,6 @@
           <wd-icon name="thumb-up" size="22px"></wd-icon>
         </wd-button>
       </wd-fab>
-
       <wd-fab v-else position="left-bottom" :draggable="draggable" :expandable="false">
         <template #trigger>
           <wd-button @click="handleCustomClick" icon="share" type="error">{{ $t('fen-xiang-gei-peng-you') }}</wd-button>
@@ -94,18 +110,28 @@ const { t } = useI18n()
 const { show: showToast } = useToast()
 const active = ref<boolean>(false)
 const type = ref<'primary' | 'success' | 'info' | 'warning' | 'error' | 'default'>('primary')
-const position = ref<'left-top' | 'right-top' | 'left-bottom' | 'right-bottom' | 'left-center' | 'right-center' | 'top-center' | 'bottom-center'>(
-  'left-bottom'
-)
+const position = ref<
+  'left-top' | 'right-top' | 'left-bottom' | 'right-bottom' | 'left-center' | 'right-center' | 'top-center' | 'bottom-center' | 'custom'
+>('custom')
+
 const direction = ref<'top' | 'right' | 'bottom' | 'left'>('top')
 const disabled = ref<boolean>(false)
 const draggable = ref<boolean>(false)
 const useTriggerSlot = ref<boolean>(false)
 
 const { closeOutside } = useQueue()
-
+const fabKey = ref<number>(0)
+const sysInfo = uni.getSystemInfoSync()
+const offsetX = ref<number>(0)
+const offsetY = ref<number>(0)
+const maxOffsetX = sysInfo.windowWidth
+const maxOffsetY = sysInfo.windowHeight
 function handleCustomClick() {
   showToast(t('fen-xiang-gei-peng-you-0'))
+}
+
+function reRenderFab() {
+  fabKey.value++
 }
 </script>
 <style lang="scss" scoped>
@@ -124,7 +150,6 @@ function handleCustomClick() {
     border-radius: 16px !important;
     margin: 8rpx;
   }
-
   :deep(.custom-radio) {
     height: 32px !important;
     line-height: 32px !important;
