@@ -156,6 +156,7 @@ function updateValue(value: number) {
 }
 
 async function onTouchMove(event: TouchEvent) {
+  if (props.readonly || props.disabled) return
   const { clientX } = event.touches[0]
   const rateItems = await getRect('.wd-rate__item', true, proxy)
   const targetIndex = Array.from(rateItems).findIndex((rect) => {
