@@ -70,6 +70,11 @@ It can be used in combination with `hide-cancel` to only display the search box 
 ```html
 <wd-search hide-cancel disabled />
 ```
+You can listen to click events in the disabled state.
+
+```html
+<wd-search disabled @click="handleDisabledClick" />
+```
 
 ## Custom Left Slot
 
@@ -169,6 +174,7 @@ Modify the input box placeholder text through the `placeholder` property and the
 | clear | Input box clear button event | - | - |
 | cancel | Input box right text click event | `{ value }` | - |
 | change | Input box content change event | `{ value }` | - |
+| click    | Click event in disabled state | -           |  $LOWEST_VERSION$       |
 
 ## Slots
 

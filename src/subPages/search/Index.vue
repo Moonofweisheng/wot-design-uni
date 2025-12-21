@@ -15,7 +15,7 @@
       </demo-block>
 
       <demo-block :title="$t('jin-yong-qie-yin-cang-qu-xiao-an-niu')" transparent>
-        <wd-search disabled hide-cancel />
+        <wd-search disabled hide-cancel @click="handleDisabledClick" />
       </demo-block>
 
       <view style="margin: 15px 0; color: #666">
@@ -77,6 +77,10 @@ const menu = computed(() => {
     }
   ]
 })
+
+function handleDisabledClick() {
+  uni.showToast({ title: t('jin-yong-dian-ji') })
+}
 
 function search(e: any) {
   uni.showToast({ title: t('sou-suo') + e.value })
