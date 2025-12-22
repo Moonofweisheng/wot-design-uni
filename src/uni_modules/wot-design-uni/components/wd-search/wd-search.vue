@@ -1,6 +1,6 @@
 <template>
   <view :class="rootClass" :style="customStyle">
-    <view class="wd-search__block">
+    <view class="wd-search__block" @click="handleClick">
       <slot name="prefix"></slot>
       <view class="wd-search__field">
         <view v-if="!placeholderLeft" :style="coverStyle" class="wd-search__cover" @click="closeCover">
@@ -55,7 +55,7 @@ import { useTranslate } from '../composables/useTranslate'
 import { searchProps } from './types'
 
 const props = defineProps(searchProps)
-const emit = defineEmits(['update:modelValue', 'change', 'clear', 'search', 'focus', 'blur', 'cancel'])
+const emit = defineEmits(['update:modelValue', 'change', 'clear', 'search', 'focus', 'blur', 'cancel', 'click'])
 
 const { translate } = useTranslate('search')
 
@@ -180,6 +180,12 @@ function handleCancel() {
   emit('cancel', {
     value: inputValue.value
   })
+}
+
+function handleClick() {
+  if (props.disabled) {
+    emit('click')
+  }
 }
 </script>
 <style lang="scss" scoped>
