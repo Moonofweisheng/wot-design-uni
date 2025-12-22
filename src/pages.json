@@ -1328,6 +1328,66 @@
           }
         },
         {
+          "path": "waterfall/Index",
+          "name": "waterfall-demo1",
+          "style": {
+            // #ifdef MP
+            "navigationBarTitleText": "demo1",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "demo1"
+            // #endif
+          }
+        },
+        {
+          "path": "waterfall/demo2",
+          "name": "waterfall-demo2",
+          "style": {
+            // #ifdef MP
+            "navigationBarTitleText": "demo2",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "demo2"
+            // #endif
+          }
+        },
+        {
+          "path": "waterfall/demo3",
+          "name": "waterfall-demo3",
+          "style": {
+            // #ifdef MP
+            "navigationBarTitleText": "demo3",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "demo3"
+            // #endif
+          }
+        },
+        {
+          "path": "waterfall/demo4",
+          "name": "waterfall-known",
+          "style": {
+            // #ifdef MP
+            "navigationBarTitleText": "demo3",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "demo3"
+            // #endif
+          }
+        },
+        {
+          "path": "waterfall/demo5",
+          "name": "waterfall-demo5",
+          "style": {
+            // #ifdef MP
+            "navigationBarTitleText": "demo5",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "demo5"
+            // #endif
+          }
+        },
+        {      
           "path": "tour/Index",
           "name": "tour",
           "style": {
@@ -1341,7 +1401,6 @@
             "navigationBarTitleText": "%tour-title%"
             // #endif
           }
-        }
       ]
     }
   ],
