@@ -352,9 +352,7 @@ function handleConfirm({ value }) {
 ```html
 <wd-calendar v-model="value">
   <template #confirm-right>
-    <view style="padding: 0 10px; line-height: 40px;">
-      <wd-button block plain custom-style="margin-left: 10px;" @click="selectToday">选择今天</wd-button>
-    </view>
+    <wd-button block plain custom-style="margin-left: 10px;" @click="selectToday">选择今天</wd-button>
   </template>
 </wd-calendar>
 ```
