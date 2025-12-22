@@ -12,6 +12,7 @@
             <view class="wd-tabs__nav--wrap">
               <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">
                 <view class="wd-tabs__nav-container">
+                  <slot name="nav-left" />
                   <view
                     @click="handleSelect(index)"
                     v-for="(item, index) in children"
@@ -26,6 +27,7 @@
 
                     <view class="wd-tabs__line wd-tabs__line--inner" v-if="state.activeIndex === index && state.useInnerLine"></view>
                   </view>
+                  <slot name="nav-right" />
                   <view class="wd-tabs__line" :style="state.lineStyle"></view>
                 </view>
               </scroll-view>
@@ -86,6 +88,7 @@
         <view class="wd-tabs__nav--wrap">
           <scroll-view :scroll-x="innerSlidable" scroll-with-animation :scroll-left="state.scrollLeft">
             <view class="wd-tabs__nav-container">
+              <slot name="nav-left" />
               <view
                 v-for="(item, index) in children"
                 @click="handleSelect(index)"
@@ -99,6 +102,7 @@
                 <text v-else class="wd-tabs__nav-item-text">{{ item.title }}</text>
                 <view class="wd-tabs__line wd-tabs__line--inner" v-if="state.activeIndex === index && state.useInnerLine"></view>
               </view>
+              <slot name="nav-right" />
               <view class="wd-tabs__line" :style="state.lineStyle"></view>
             </view>
           </scroll-view>
@@ -332,7 +336,12 @@ async function updateLineStyle(animation: boolean = true) {
     }
     const rects = await getRect($item, true, proxy)
     const rect = rects[state.activeIndex]
-    let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + Number(curr.width), 0) + Number(rect.width) / 2
+
+    // 计算激活标签中心点的偏移量: 前面所有标签的宽度 + 第一个标签的左边距 + 当前标签宽度的一半
+    const previousItemsWidth = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + Number(curr.width), 0)
+    const firstItemLeft = rects[0]?.left ?? 0
+    const left = previousItemsWidth + firstItemLeft + Number(rect.width) / 2
+
     if (left) {
       lineStyle.transform = `translateX(${left}px) translateX(-50%)`
       if (animation) {
