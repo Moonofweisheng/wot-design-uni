@@ -55,12 +55,12 @@ export default {
 import { computed, ref, watch, useSlots } from 'vue'
 import wdPopup from '../wd-popup/wd-popup.vue'
 import WdKey from './key/index.vue'
-import { keyboardProps, type Key } from './types'
+import { keyboardProps, type Key, type CarKeyboardLang } from './types'
 import type { NumberKeyType } from './key/types'
 import { CAR_KEYBOARD_AREAS, CAR_KEYBOARD_KEYS } from './constants'
 
 const props = defineProps(keyboardProps)
-const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue'])
+const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue', 'update:carLang'])
 const slots = useSlots()
 
 const show = ref(props.visible)
@@ -71,7 +71,14 @@ watch(
   }
 )
 
-const carKeyboardLang = ref('zh')
+const carLang = ref<CarKeyboardLang>('zh')
+const carKeyboardLang = computed({
+  get: () => (props.carLang ? props.carLang : carLang.value),
+  set: (value: CarKeyboardLang) => {
+    carLang.value = value
+  }
+})
+
 const keys = computed(() => (props.mode !== 'car' ? (props.mode === 'custom' ? genCustomKeys() : genDefaultKeys()) : genCarKeys()))
 
 const showClose = computed(() => {
@@ -141,7 +148,7 @@ function genCarKeys(): Array<Key> {
   const [keys, remainKeys] = splitCarKeys()
   return [
     ...keys,
-    { text: carKeyboardLang.value === 'zh' ? 'ABC' : '返回', type: 'extra', wider: true },
+    { text: carKeyboardLang.value === 'zh' ? 'ABC' : '省份', type: 'extra', wider: true },
     ...remainKeys,
     { text: props.deleteText, type: 'delete', wider: true }
   ]
@@ -161,8 +168,13 @@ const handlePress = (text: string, type: NumberKeyType) => {
   if (type === 'extra') {
     if (text === '') {
       return handleClose()
-    } else if (text === 'ABC' || text === '返回') {
-      carKeyboardLang.value = carKeyboardLang.value === 'zh' ? 'en' : 'zh'
+    } else if (text === 'ABC' || text === '省份') {
+      const newLang = carKeyboardLang.value === 'zh' ? 'en' : 'zh'
+      if (props.carLang) {
+        emit('update:carLang', newLang)
+      } else {
+        carKeyboardLang.value = newLang
+      }
       return
     }
   }
@@ -170,12 +182,21 @@ const handlePress = (text: string, type: NumberKeyType) => {
   const value = props.modelValue
   if (type === 'delete') {
     emit('delete')
-    emit('update:modelValue', value.slice(0, value.length - 1))
+    const newValue = value.slice(0, value.length - 1)
+    emit('update:modelValue', newValue)
+    if (props.mode === 'car' && newValue.length === 0 && props.autoSwitchLang) {
+      carKeyboardLang.value = 'zh'
+    }
   } else if (type === 'close') {
     handleClose()
   } else if (value.length < +props.maxlength) {
     emit('input', text)
-    emit('update:modelValue', value + text)
+    const newValue = value + text
+    emit('update:modelValue', newValue)
+    if (props.mode === 'car' && newValue.length === 1 && props.autoSwitchLang) {
+      // 输入第一位（省份）后，自动切换到英文
+      carKeyboardLang.value = 'en'
+    }
   }
 }
 </script>

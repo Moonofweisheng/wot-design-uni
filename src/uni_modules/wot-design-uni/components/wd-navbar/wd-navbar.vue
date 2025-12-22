@@ -44,7 +44,7 @@ export default {
 <script lang="ts" setup>
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { type CSSProperties, computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
-import { getRect, addUnit, isDef, objToStyle } from '../common/util'
+import { getRect, addUnit, isDef, objToStyle, getSystemInfo } from '../common/util'
 import { navbarProps } from './types'
 
 const props = defineProps(navbarProps)
@@ -52,7 +52,7 @@ const emit = defineEmits(['click-left', 'click-right'])
 
 const height = ref<number | ''>('') // 占位高度
 
-const { statusBarHeight } = uni.getSystemInfoSync()
+const { statusBarHeight } = getSystemInfo()
 
 watch(
   [() => props.fixed, () => props.placeholder],

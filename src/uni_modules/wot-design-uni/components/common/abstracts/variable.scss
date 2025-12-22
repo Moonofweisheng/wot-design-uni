@@ -651,7 +651,7 @@ $-toast-fs: var(--wot-toast-fs, $-fs-content) !default; // 字号
 $-toast-line-height: var(--wot-toast-line-height, 20px) !default; // 行高
 $-toast-with-icon-min-width: var(--wot-toast-with-icon-min-width, 150px) !default; // 有图标的情况下最小宽度
 $-toast-icon-size: var(--wot-toast-icon-size, 32px) !default; // 图标大小
-$-toast-icon-margin-right: var(--wot-toast-icon-margin-right, 12px) !default; // 图标右边距
+$-toast-msg-margin-left: var(--wot-toast-msg-margin-left, 12px) !default; // 消息内容左边距
 $-toast-icon-margin-bottom: var(--wot-toast-icon-margin-bottom, 12px) !default; // 图标下边距
 $-toast-loading-padding: var(--wot-toast-loading-padding, 10px) !default; // loading状态下的padding
 $-toast-loading-margin-bottom: var(--wot-toast-loading-margin-bottom, 16px) !default; // loading动画的margin-bottom
@@ -970,5 +970,28 @@ $-signature-border: var(--wot-signature-border, 1px solid $-color-gray-5) !defau
 $-signature-footer-margin-top: var(--wot-signature-footer-margin-top, 8px) !default; // 底部按钮上边距
 $-signature-button-margin-left: var(--wot-signature-button-margin-left, 8px) !default; // 底部按钮左边距
 
-
+/* tour */
+$-tour-z-index: var(--wot-tour-z-index, 999) !default; // 层级
+$-tour-popover-z-index: var(--wot-tour-popover-z-index, $-tour-z-index + 1) !default; // 层级
+$-tour-popover-padding: var(--wot-tour-popover-padding, 10px 12px) !default; // 内边距
+$-tour-popover-radius: var(--wot-tour-popover-radius, 8px) !default; // 圆角
+$-tour-popover-min-width: var(--wot-tour-popover-min-width, 200px) !default; // 最小宽度
+$-tour-popover-max-width: var(--wot-tour-popover-max-width, 340px) !default; // 最大宽度
+$-tour-popover-info-font-size: var(--wot-tour-popover-info-font-size, $-fs-secondary) !default; // 字体大小
+$-tour-popover-bg: var(--wot-tour-popover-bg, $-color-white) !default; // 弹层背景色
+$-tour-info-bg: var(--wot-tour-info-bg, $-color-white) !default; // 信息框背景色
+$-tour-info-border-color: var(--wot-tour-info-border-color, $-color-white) !default; // 信息框边框颜色
+$-tour-info-border-width: var(--wot-tour-info-border-width, 1px) !default; // 信息框边框宽度
+$-tour-info-text-color: var(--wot-tour-info-text-color, $-color-title) !default; // 信息框文字颜色
+$-tour-animation-duration: var(--wot-tour-animation-duration, 0.3s) !default; // 动画时长
+$-tour-popover-animation-timing: var(--wot-tour-popover-animation-timing, ease) !default; // 弹层动画缓动
+$-tour-highlight-animation-timing: var(--wot-tour-highlight-animation-timing, ease-in-out) !default; // 高亮动画缓动
+$-tour-button-font-size: var(--wot-tour-button-font-size, $-fs-secondary) !default; // 按钮字体大小
+$-tour-button-radius: var(--wot-tour-button-radius, 4px) !default; // 按钮圆角
+$-tour-button-padding: var(--wot-tour-button-padding, 4px 8px) !default; // 按钮内边距
+$-tour-primary-button-bg-color: var(--wot-tour-primary-button-bg-color, $-button-primary-bg-color) !default; // 主按钮背景色
+$-tour-primary-button-text-color: var(--wot-tour-primary-button-text-color, $-color-white) !default; // 主按钮文字颜色
+$-tour-skip-bg-color: var(--wot-tour-skip-bg-color, $-color-white) !default; // 跳过按钮背景色
+$-tour-button-text-color: var(--wot-tour-button-text-color, $-color-black) !default; // 按钮文字默认颜色
+$-tour-highlight-shadow-color: var(--wot-tour-highlight-shadow-color, rgba(0, 0, 0, 0.65)) !default; // 高亮阴影颜色
 

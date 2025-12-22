@@ -251,6 +251,7 @@ function handleSwitchChange({ value }) {
 | title       | 标题                           | string  | -      | -      | -        |
 | value       | 右侧内容                       | string  | -      | -      | -        |
 | icon        | 图标类名                       | string  | -      | -      | -        |
+| icon-size   | 图标大小                       | string \| number  | -      | -      | 1.13.0 |
 | label       | 描述信息                       | string  | -      | -      | -        |
 | is-link     | 是否为跳转链接                 | boolean | -      | false  | -        |
 | to          | 跳转地址                       | string  | -      | -      | -        |

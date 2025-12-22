@@ -11,7 +11,8 @@
         <wd-cell :title="$t('slot-zi-ding-yi-biao-ti')" is-link @click="showKeyBoard(9)" />
         <wd-cell :title="$t('duo-geewai-an-jian')" is-link @click="showKeyBoard(5)" />
         <wd-cell :title="$t('sui-ji-shu-zi-jian-pan')" is-link @click="showKeyBoard(6)" />
-        <wd-cell :title="$t('che-pai-hao-jian-pan')" is-link @click="showKeyBoard(10)" />
+        <wd-cell :title="$t('che-pai-hao-jian-pan-fei-shou-kong')" :value="value10" is-link @click="showKeyBoard(10)" />
+        <wd-cell :title="$t('che-pai-hao-jian-pan-shou-kong')" :value="value11" is-link @click="showKeyBoard(11)" />
         <wd-cell :title="$t('shuang-xiang-bang-ding')" clickable :value="value1" @click="showKeyBoard(7)" />
         <wd-cell :title="$t('zhan-shi-meng-ceng')" clickable @click="showKeyBoard(8)" />
       </wd-cell-group>
@@ -65,7 +66,8 @@
 
     <wd-keyboard :modal="true" v-model:visible="visible8" @input="onInput" @delete="onDelete" />
 
-    <wd-keyboard v-model:visible="visible10" mode="car" @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model="value10" v-model:visible="visible10" mode="car" auto-switch-lang @input="onInput" @delete="onDelete" />
+    <wd-keyboard v-model="value11" v-model:visible="visible11" v-model:car-lang="carLang" mode="car" @input="onInput" @delete="onDelete" />
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -84,11 +86,14 @@ const visible7 = ref<boolean>(false)
 const visible8 = ref<boolean>(false)
 const visible9 = ref<boolean>(false)
 const visible10 = ref<boolean>(false)
+const visible11 = ref<boolean>(false)
 
-const visibleArr = [visible1, visible2, visible3, visible4, visible5, visible6, visible7, visible8, visible9, visible10]
+const visibleArr = [visible1, visible2, visible3, visible4, visible5, visible6, visible7, visible8, visible9, visible10, visible11]
 
 const value1 = ref<string>('')
-
+const value10 = ref<string>('')
+const value11 = ref<string>('')
+const carLang = ref<'zh' | 'en'>('zh')
 function showKeyBoard(index: number) {
   visibleArr.forEach((item, i) => (i === index - 1 ? (item.value = true) : (item.value = false)))
 }

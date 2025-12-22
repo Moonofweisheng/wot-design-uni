@@ -195,7 +195,7 @@ const expanded = ref(true)
   .content {
     order: 1;
     margin: 0;
-    min-width: 640px;
+    min-width: 600px;
   }
 }
 

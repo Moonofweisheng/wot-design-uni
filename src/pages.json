@@ -1386,14 +1386,29 @@
             "navigationBarTitleText": "demo5"
             // #endif
           }
-        }
+        },
+        {      
+          "path": "tour/Index",
+          "name": "tour",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Tour 页面引导",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%tour-title%"
+            // #endif
+          }
       ]
     }
   ],
   "tabBar": {
-    "color": "#7a7e83",
-    "selectedColor": "#1C64FD",
-    "backgroundColor": "#ffffff",
+    "color": "@color",
+    "selectedColor": "@selectedColor",
+    "backgroundColor": "@backgroundColor",
+    "borderStyle": "@borderStyle",
     "list": [
       {
         "pagePath": "pages/index/Index",

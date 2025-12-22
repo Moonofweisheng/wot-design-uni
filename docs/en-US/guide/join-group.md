@@ -54,7 +54,7 @@ After obtaining joining qualifications through either of these two methods, you 
 
 ### QQ Groups
 
-Currently, Groups 1 and 2 are full, please join Group 3. When joining, please provide your group joining credentials obtained from the [Group Joining Credentials](#group-joining-credentials) section.
+Currently, Groups 1, 2, and 3 are full, please join the WeChat group. When joining, please provide your group joining credentials obtained from the [Group Joining Credentials](#group-joining-credentials) section.
 
 :::danger Important Note for Joining Groups
 To improve communication efficiency after joining the group, we have added a qualification test before joining the group. There are two testing methods:  
@@ -65,9 +65,18 @@ After obtaining joining qualifications through either of these two methods, you 
 :::
 
 <div style="display: flex;gap:24px;flex-wrap: wrap;">
-  <img style="width: 250px; height: auto;" :src="QQ1" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
-  <img style="width: 250px; height: auto;" :src="QQ2" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
-  <img style="width: 250px; height: auto;" :src="QQ3" @click="handleClick" :style="{filter: checked ? 'none' : 'blur(5px)'}" />
+  <div style="position: relative; width: 250px;" @click="handleClick">
+    <img style="width: 100%; height: auto;" :src="QQ1" :style="{filter: checked ? 'grayscale(100%)' : 'blur(5px) grayscale(100%)'}" />
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); color: #fff; font-size: 24px; font-weight: bold; text-align: center; padding: 10px;" :style="{filter: checked ? 'none' : 'blur(5px)'}">Full, please join WeChat group</div>
+  </div>
+  <div style="position: relative; width: 250px;" @click="handleClick">
+    <img style="width: 100%; height: auto;" :src="QQ2" :style="{filter: checked ? 'grayscale(100%)' : 'blur(5px) grayscale(100%)'}" />
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); color: #fff; font-size: 24px; font-weight: bold; text-align: center; padding: 10px;" :style="{filter: checked ? 'none' : 'blur(5px)'}">Full, please join WeChat group</div>
+  </div>
+  <div style="position: relative; width: 250px;" @click="handleClick">
+    <img style="width: 100%; height: auto;" :src="QQ3" :style="{filter: checked ? 'grayscale(100%)' : 'blur(5px) grayscale(100%)'}" />
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); color: #fff; font-size: 24px; font-weight: bold; text-align: center; padding: 10px;" :style="{filter: checked ? 'none' : 'blur(5px)'}">Full, please join WeChat group</div>
+  </div>
 </div>
 
 ***Quick Problem Location Tips***

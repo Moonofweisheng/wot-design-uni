@@ -18,11 +18,11 @@
 const current = ref<number>(0)
 
 const swiperList = ref([
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/meng.jpg'
+  'https://wot-ui.cn/assets/redpanda.jpg',
+  'https://wot-ui.cn/assets/capybara.jpg',
+  'https://wot-ui.cn/assets/panda.jpg',
+  'https://wot-ui.cn/assets/moon.jpg',
+  'https://wot-ui.cn/assets/meng.jpg'
 ])
 function handleClick(e) {
   console.log(e)
@@ -67,7 +67,7 @@ const videoList = ref([
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_115503.mp4',
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_150752.mp4',
   'https://unpkg.com/wot-design-uni-assets@1.0.3/VID_155516.mp4',
-  'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg'
+  'https://wot-ui.cn/assets/moon.jpg'
 ])
 ```
 
@@ -259,10 +259,10 @@ const videoList = ref([
 const current = ref<number>(0)
 
 const customSwiperList = ref([
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/redpanda.jpg', title: '小熊猫！' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/capybara.jpg', title: '卡！皮！巴！拉！' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg', title: '大熊猫！' },
-  { url: 'https://registry.npmmirror.com/wot-design-uni-assets/*/files/moon.jpg', title: '诗画中国！' }
+  { url: 'https://wot-ui.cn/assets/redpanda.jpg', title: '小熊猫！' },
+  { url: 'https://wot-ui.cn/assets/capybara.jpg', title: '卡！皮！巴！拉！' },
+  { url: 'https://wot-ui.cn/assets/panda.jpg', title: '大熊猫！' },
+  { url: 'https://wot-ui.cn/assets/moon.jpg', title: '诗画中国！' }
 ])
 ```
 ```scss
@@ -298,6 +298,27 @@ const customSwiperList = ref([
 const current = ref <number>(0)
 const isLoop = ref(false)
 ```
+
+
+## 插槽用法
+
+通过默认插槽可以自定义轮播项的内容。
+
+```html
+<wd-swiper
+  :list="swiperList"
+  autoplay
+  v-model:current="current"
+  :indicator="{ type: 'dots-bar' }"
+  @click="handleClick"
+  @change="onChange"
+>
+  <template #default="{ item }">
+    <image :src="item as string" mode="aspectFill" style="width: 100%; height: 100%" />
+  </template>
+</wd-swiper>
+```
+
 
 ## Attributes
 
@@ -383,7 +404,8 @@ const isLoop = ref(false)
 
 | name      | 说明         | 参数                                 | 最低版本 |
 | --------- | ------------ | ------------------------------------ | -------- |
-| indicator | 自定义指示器 | `{ current: number, total: number }` | 0.1.22   |
+| indicator | 自定义指示器 | `{ current: number, total: number }` | 1.13.0   |
+| default   | item展示内容 | `{ item: string | SwiperList, index: number }`       | 1.13.0   |
 
 
 ## 外部样式类

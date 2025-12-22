@@ -15,6 +15,26 @@
     align-items: center;
     box-sizing: border-box;
     padding: $-swiper-item-padding;
+
+    @include m(slot) {
+      // 问题来自 https://github.com/dcloudio/uni-app/issues/4629，支付宝小程序不支持属性选择器
+      /* #ifdef MP */
+      :deep() {
+        /* #ifdef MP-WEIXIN */
+        view:not([class]) {
+          width: 100%;
+          height: 100%;
+        }
+        /* #endif */
+        /* #ifndef MP-WEIXIN */
+        view {
+          width: 100%;
+          height: 100%;
+        }
+        /* #endif */
+      }
+      /* #endif */
+    }
   }
 
   @include e(image, video) {

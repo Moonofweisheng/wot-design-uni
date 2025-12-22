@@ -54,7 +54,7 @@ Set the `name` attribute to an image URL to use image icons. The component autom
 | ------------ | ------------------------ | ------ | ------- | ------- |
 | name         | Icon name or image URL   | string | -       | -       |
 | color        | Icon color               | string | -       | -       |
-| size         | Icon size                | string | -       | -       |
+| size         | Icon size                | string \| number | -       | -       |
 | class-prefix | Custom icon class prefix | string | wd-icon | -       |
 | custom-style | Custom root node style   | string | -       | -       |
 

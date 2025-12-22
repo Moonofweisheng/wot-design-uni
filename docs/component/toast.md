@@ -4,6 +4,8 @@
 
 :::tip 提示
 `Toast` 自 1.7.0 版本起支持通过 `props` 属性控制组件样式，字段见[props](#props)，需要注意的是函数式调用api的`options`优先级高于`props`。
+
+全局调用方案见 [wot-starter](https://starter.wot-ui.cn/guide/feedback.html)，支持在路由导航守卫和网络请求拦截器等场景使用的可全局调用的反馈组件。
 :::
 
 ## 基本用法

@@ -105,6 +105,7 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | title | Left title | string | - | - |
 | value | Right content | string | - | - |
 | icon | Left icon class name, see Icon component for optional values | string | - | - |
+| icon-size | Icon size | string \| number | - | 1.13.0 |
 | icon-prefix | Icon class name prefix, same as Icon component | string | 'wd-icon' | - |
 | label | Description below the title | string | - | - |
 | is-link | Whether to show the right arrow and click effect | boolean | false | - |

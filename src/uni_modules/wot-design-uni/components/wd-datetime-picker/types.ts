@@ -3,6 +3,10 @@ import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequired
 import type { DateTimeType, DatetimePickerViewFilter, DatetimePickerViewFormatter } from '../wd-datetime-picker-view/types'
 import type { FormItemRule } from '../wd-form/types'
 
+const now = new Date()
+const defaultMinDate = new Date(now.getFullYear() - 10, 0, 1).getTime()
+const defaultMaxDate = new Date(now.getFullYear() + 10, 11, 31, 23, 59, 59).getTime()
+
 export const datetimePickerProps = {
   ...baseProps,
   /**
@@ -96,11 +100,11 @@ export const datetimePickerProps = {
   /**
    * 最小日期
    */
-  minDate: makeNumberProp(new Date(new Date().getFullYear() - 10, 0, 1).getTime()),
+  minDate: makeNumberProp(defaultMinDate),
   /**
    * 最大日期
    */
-  maxDate: makeNumberProp(new Date(new Date().getFullYear() + 10, 11, 31, 23, 59, 59).getTime()),
+  maxDate: makeNumberProp(defaultMaxDate),
   /**
    * 最小小时，time类型时生效
    */

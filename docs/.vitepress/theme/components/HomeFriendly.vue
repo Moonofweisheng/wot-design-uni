@@ -16,7 +16,7 @@ const grid = computed(() => {
   if (!length) {
     return
   } else {
-    return 'grid-3'
+    return 'grid-4'
   }
 })
 </script>
@@ -105,12 +105,12 @@ const grid = computed(() => {
 }
 
 @media (min-width: 768px) {
-  .item.grid-2,
-  .item.grid-4 {
+  .item.grid-2 {
     width: calc(100% / 2);
   }
 
   .item.grid-3,
+  .item.grid-4,
   .item.grid-6 {
     width: calc(100% / 3);
   }

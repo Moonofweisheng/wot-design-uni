@@ -144,6 +144,7 @@ const filter = (type, values) => {
 | loading | 加载中 | boolean | - | false | - |
 | loading-color | 加载的颜色，只能使用十六进制的色值写法，且不能使用缩写 | string | - | #4D80F0 | - |
 | columns-height | picker内部滚筒高 | number | - | 231 | - |
+| item-height | picker item的高度 | number | - | 35 | 1.13.0 |
 | formatter | 自定义弹出层选项文案的格式化函数，返回一个字符串 | function | - | - | - |
 | filter | 自定义过滤选项的函数，返回列的选项数组 | function | - | - | - |
 | minDate | 最小日期，13 位的时间戳    | `timestamp` | - | 当前日期 - 10年 | - |

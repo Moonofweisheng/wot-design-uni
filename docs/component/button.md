@@ -155,6 +155,7 @@
 | getUserInfo               | 获取用户信息，可以从@getuserinfo 回调中获取到用户信息                                      |
 | contact                   | 打开客服会话，如果用户在会话中点击消息卡片后返回应用，可以从 @contact 回调中获得具体信息   |
 | getPhoneNumber            | 获取用户手机号，可以从@getphonenumber 回调中获取到用户信息                                 |
+| getRealtimePhoneNumber    | 实时获取用户手机号，可以从@getrealtimephonenumber 回调中获取到用户信息，仅微信小程序          |
 | launchApp                 | 小程序中打开 APP，可以通过 app-parameter 属性设定向 APP 传的参数                           |
 | openSetting               | 打开授权设置页                                                                             |
 | chooseAvatar              | 获取用户头像，可以从@chooseavatar 回调中获取到头像信息                                     |
@@ -171,6 +172,7 @@
 | getuserinfo    | 获取用户信息                                                 | `detail` | -        |
 | contact        | 客服消息回调，open-type="contact"时有效                      | `detail` | -        |
 | getphonenumber | 获取用户手机号回调，open-type=getPhoneNumber 时有效          | `detail` | -        |
+| getrealtimephonenumber | 实时获取用户手机号回调，open-type=getRealtimePhoneNumber 时有效          | `detail` | 1.13.0 |
 | error          | 当使用开放能力时，发生错误的回调，open-type=launchApp 时有效 | `detail` | -        |
 | launchapp      | 打开 APP 成功的回调，open-type=launchApp 时有效              | `detail` | -        |
 | opensetting    | 在打开授权设置页后回调，open-type=openSetting 时有效         | `detail` | -        |

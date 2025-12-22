@@ -67,6 +67,14 @@ Set the `allowHalf` property.
 <wd-rate v-model="value" allow-half />
 ```
 
+## Allow Clear Rating
+
+Set the `clearable` property. When clearable is set to true, clicking the same value again can reset the value to 0.
+
+```html
+<wd-rate v-model="value" clearable />
+```
+
 ## Attributes
 
 | Parameter | Description | Type | Options | Default | Version |
@@ -83,6 +91,7 @@ Set the `allowHalf` property.
 | disabled | Whether it's disabled | boolean | - | false | - |
 | disabled-color | Disabled icon color | string | - | linear-gradient(315deg, rgba(177,177,177,1) 0%,rgba(199,199,199,1) 100%) | - |
 | allow-half | Whether to allow half selection | boolean | - | false | 1.7.0 |
+| clearable | Whether to allow clear rating | boolean | - | false | 1.13.0 |
 
 ## Events
 

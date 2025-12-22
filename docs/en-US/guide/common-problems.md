@@ -6,6 +6,9 @@ This section introduces some **common problems** encountered during development 
 
 Currently supports WeChat Mini Program, Alipay Mini Program, DingTalk Mini Program, H5, APP, and other platforms.
 
+## Are there any best practice sharing?
+Yes, you can follow my WeChat public account "不如摸鱼去", or visit my blog [不如摸鱼去](https://blog.wot-ui.cn/), sharing countless dry goods, waiting for you to see.
+
 ## Does the component library provide components that can be imported individually?
 
 Currently, no. First, the plugin market lacks CI/CD tools, making automated publishing impossible. Maintaining a set of individually importable components is time and effort-consuming. Secondly, the installation methods provided by the component library can already achieve on-demand importing, so there's no need to provide individually importable components.
@@ -198,3 +201,10 @@ First, check if the usage is correct. The `uni-app` platform doesn't support glo
 ```
 
 The functional calls of `Message` and `Toast` are implemented based on `provide/inject`, so your calls must be made within `setup`.
+
+## Why are multiple messageBoxes popping up?
+Check if the page with multiple `messageBox` popups has multiple `<wd-message-box></wd-message-box>` tags with the same `selector` or no `selector` (including components used in the current page). The same applies to `toast`. When using components like `messageBox` in child components, you need to specify a `selector` and ensure the `selector` is unique.
+
+## How to call Toast, Message, Loading globally?
+
+For global calling solutions, see [wot-starter](https://starter.wot-ui.cn/guide/feedback.html), which supports globally callable feedback components for use in scenarios like route navigation guards and network request interceptors.

@@ -49,7 +49,7 @@
 需要自定义图片时，可以在 `image` 属性中传入任意图片 URL。
 
 ```html
-<wd-status-tip image="https://registry.npmmirror.com/wot-design-uni-assets/*/files/panda.jpg" tip="查看我的头像" />
+<wd-status-tip image="https://wot-ui.cn/assets/panda.jpg" tip="查看我的头像" />
 ```
 
 ## 自定义图片内容
@@ -63,6 +63,32 @@
   </template>
 </wd-status-tip>
 ```
+
+## 自定义底部内容
+
+使用插槽 `bottom` 可以在提示底部渲染自定义内容（如操作按钮）。推荐在插槽中包一层容器，便于控制布局与与上方内容的间距。
+
+```html
+<wd-status-tip image="content" tip="当前搜索无结果">
+  <template #bottom>
+    <view class="bottom-actions">
+      <wd-button type="info">重新加载</wd-button>
+    </view>
+  </template>
+</wd-status-tip>
+```
+
+建议样式（可在页面或全局样式中添加）：
+
+```css
+.bottom-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+```
+
 
 ## Attributes
 
@@ -86,3 +112,4 @@
 | name    | 说明                     | 最低版本 |
 | ------- | ------------------------ | -------- |
 | image   | 图片内容                  | 1.3.12 |
+| bottom  | 底部内容                  | $LOWEST_VERSION$ |

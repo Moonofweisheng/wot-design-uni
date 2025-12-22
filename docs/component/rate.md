@@ -67,6 +67,14 @@ function changeValue({ value }) {
 <wd-rate v-model="value" allow-half />
 ```
 
+## 允许清空评分
+
+设置 `clearable` 属性，当 clearable 属性设置为 true，再次点击相同的值时，可以将值重置为 0。
+
+```html
+<wd-rate v-model="value" clearable />
+```
+
 ## Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
@@ -83,6 +91,7 @@ function changeValue({ value }) {
 | disabled | 是否禁用 | boolean | - | false | - |
 | disabled-color | 禁用的图标颜色 | string | - | linear-gradient(315deg, rgba(177,177,177,1) 0%,rgba(199,199,199,1) 100%) | - |
 | allow-half | 是否允许半选 | boolean | - | false | 1.7.0 |
+| clearable | 是否允许再次点击后清除 | boolean | - | false | 1.13.0 |
 
 ## Events
 

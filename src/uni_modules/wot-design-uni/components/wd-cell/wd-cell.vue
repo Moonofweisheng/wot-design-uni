@@ -11,7 +11,7 @@
         <text v-if="isRequired && markerSide === 'before'" class="wd-cell__required wd-cell__required--left">*</text>
         <!--左侧icon部位-->
         <slot name="icon">
-          <wd-icon v-if="icon" :name="icon" :custom-class="`wd-cell__icon  ${customIconClass}`"></wd-icon>
+          <wd-icon v-if="icon" :name="icon" :size="iconSize" :custom-class="`wd-cell__icon  ${customIconClass}`"></wd-icon>
         </slot>
 
         <view class="wd-cell__title">

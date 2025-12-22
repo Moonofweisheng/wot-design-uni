@@ -2,6 +2,10 @@
 
 A dialog box that pops up, commonly used for message prompts, message confirmation, etc., supports function calls.
 
+:::tip Note
+For global calling solutions, see [wot-starter](https://starter.wot-ui.cn/guide/feedback.html), which supports globally callable feedback components for use in scenarios like route navigation guards and network request interceptors.
+:::
+
 ## Alert Dialog
 
 Alert dialog only has a confirm button, used for strong reminders.

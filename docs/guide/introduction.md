@@ -63,6 +63,7 @@
 | [create-uni](https://github.com/uni-helper/create-uni)                                                      | 快速创建 uni-app 项目                                |
 | [wot-starter](https://github.com/wot-ui/wot-starter)                  | 基于 [vitesse-uni-app](https://github.com/uni-helper/vitesse-uni-app) 的 wot-ui 快速起手项目     |
 | [wot-starter-retail](https://github.com/Moonofweisheng/wot-starter-retail)                                  | 基于 wot-design-uni 的 uni-app 零售行业模板          |
+| [wot-ui-intellisense](https://github.com/wot-ui/wot-ui-intellisense)                                        | wot-ui vscode 代码提示插件                           |
 | [Wot UI Snippets](https://marketplace.visualstudio.com/items?itemName=kiko.wot-design-uni-snippets) | Wot UI 代码块提示                            |
 | [uni-mini-ci](https://github.com/Moonofweisheng/uni-mini-ci)                                                | 一个 uni-app 小程序端构建后支持 CI（持续集成）的插件 |
 | [uni-mini-router](https://github.com/Moonofweisheng/uni-mini-router)                                        | 一个基于 vue3 和 Typescript 的轻量级 uni-app 路由库  |

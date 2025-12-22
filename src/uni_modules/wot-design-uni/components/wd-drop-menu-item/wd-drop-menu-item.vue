@@ -9,7 +9,7 @@
       :z-index="zIndex"
       :duration="duration"
       :position="position"
-      :custom-style="`position: absolute; pointer-events: auto; max-height: 80%;${customPopupStyle}`"
+      :custom-style="`position: absolute; pointer-events: auto; max-height: ${popupHeight ? popupHeight : '80%'}; ${customPopupStyle}`"
       :custom-class="customPopupClass"
       :modal="false"
       :close-on-click-modal="false"
@@ -19,7 +19,7 @@
       @before-leave="beforeLeave"
       @after-leave="afterLeave"
     >
-      <view v-if="options.length">
+      <scroll-view v-if="options.length" :style="popupHeight ? { height: popupHeight } : ''" scroll-y scroll-with-animation :show-scrollbar="true">
         <view
           v-for="(item, index) in options"
           :key="index"
@@ -36,7 +36,7 @@
             :custom-class="`wd-drop-item__icon ${customIcon}`"
           />
         </view>
-      </view>
+      </scroll-view>
       <slot v-else />
     </wd-popup>
   </view>

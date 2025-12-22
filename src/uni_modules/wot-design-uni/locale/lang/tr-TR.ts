@@ -129,6 +129,12 @@ export default {
   tableCol: {
     indexLabel: 'Sıra No'
   },
+  tour: {
+    prev: 'Önceki',
+    next: 'Sonraki',
+    finish: 'Bitir',
+    skip: 'Atla'
+  },
   signature: {
     confirmText: 'İmzala',
     clearText: 'Temizle',
