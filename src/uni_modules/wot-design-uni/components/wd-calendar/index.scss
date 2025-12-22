@@ -111,6 +111,8 @@
   }
 
   @include e(confirm) {
+    display: flex;
+    align-items: center;
     padding: 12px 25px 14px;
   }
 
