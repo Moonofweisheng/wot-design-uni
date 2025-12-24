@@ -12,9 +12,16 @@
       </view>
     </demo-block>
 
+    <demo-block :title="$t('spinner-lie-xing')">
+      <view class="flex">
+        <wd-loading type="spinner" custom-class="loading" />
+      </view>
+    </demo-block>
+
     <demo-block :title="$t('xiu-gai-yan-se')">
       <view class="flex">
         <wd-loading custom-class="loading" color="#fa34aa" />
+        <wd-loading custom-class="loading" type="spinner" color="#fa34aa" />
       </view>
     </demo-block>
 
@@ -24,6 +31,11 @@
         <wd-loading custom-class="loading" :size="30" />
         <wd-loading custom-class="loading" size="50px" />
       </view>
+      <view class="flex my-4">
+        <wd-loading type="spinner" custom-class="loading" :size="20" />
+        <wd-loading type="spinner" custom-class="loading" :size="30" />
+        <wd-loading type="spinner" custom-class="loading" size="50px" />
+      </view>
     </demo-block>
   </page-wraper>
 </template>
@@ -32,6 +44,10 @@
 .flex {
   display: flex;
   align-items: center;
+}
+.my-4 {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 :deep(.loading) {
   margin-right: 20px;

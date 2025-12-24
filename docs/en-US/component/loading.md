@@ -12,10 +12,11 @@ Basic usage, suitable for button loading states and page light prompts.
 
 ## Modify Indicator Type
 
-Modify the indicator type through the `type` property, with optional value 'outline', suitable for general module loading.
+Adjust the indicator appearance with the `type` property. Available values are `'ring'` (default ring), `'outline'` (outlined ring), and `'spinner'` (windmill spinner for stronger motion feedback).
 
 ```html
 <wd-loading type="outline" />
+<wd-loading type="spinner" />
 ```
 
 ## Modify Color
@@ -57,7 +58,7 @@ Set the indicator size through the `size` property, default size is '32px', prop
 
 | Parameter | Description | Type | Options | Default | Version |
 |-----------|-------------|------|----------|---------|----------|
-| type | Loading indicator type | string | outline | ring | - |
+| type | Loading indicator type | string | ring / outline / spinner | ring | - |
 | color | Set loading indicator color | string | - | #4D80F0 | - |
 | size | Set loading indicator size | number / string | - | 32px | - |
 
