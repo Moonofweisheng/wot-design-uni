@@ -55,13 +55,19 @@
 
   @include e(header) {
     width: 100%;
-    height: 50px;
+    height: var(--wd-table-row-height, 50px);
     position: sticky;
     top: 0;
     z-index: 2;
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
+
+    .wd-table__cell:last-child{
+      @include when(border) {
+        border-right: none;
+      }
+    }
   }
 
   @include e(body) {
@@ -85,7 +91,7 @@
     box-sizing: border-box;
     background: $-table-bg;
     width: 100px;
-    min-height: 50px;
+    min-height: var(--wd-table-row-height, 50px);
     padding: 8px 10px;
     font-size: $-table-font-size;
     color: $-table-color;
@@ -146,6 +152,12 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+
+    .wd-table__cell:last-child{
+      @include when(border) {
+        border-right: none;
+      }
+    }
   }
 
   @include e(body) {
