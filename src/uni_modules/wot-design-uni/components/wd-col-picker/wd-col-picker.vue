@@ -121,6 +121,7 @@ const selectList = ref<Record<string, any>[][]>([])
 const pickerColSelected = ref<(string | number)[]>([])
 const selectShowList = ref<Record<string, any>[]>([])
 const loading = ref<boolean>(false)
+const loadingCount = ref<number>(0)
 const isChange = ref<boolean>(false)
 const lastSelectList = ref<Record<string, any>[][]>([])
 const lastPickerColSelected = ref<(string | number)[]>([])
@@ -288,6 +289,7 @@ function handlePickerOpend() {
 function handlePickerClose() {
   pickerSession++
   loading.value = false
+  loadingCount.value = 0
   pickerShow.value = false
   emit('close')
 }
@@ -295,7 +297,7 @@ function handlePickerClose() {
 function handlePickerClosed() {
   if (isChange.value) {
     setTimeout(() => {
-      selectList.value = lastSelectList.value.slice(0)
+      selectList.value = JSON.parse(JSON.stringify(lastSelectList.value))
       pickerColSelected.value = lastPickerColSelected.value.slice(0)
       selectShowList.value = lastPickerColSelected.value.map((item, colIndex) => {
         return getSelectedItem(item, colIndex, lastSelectList.value)[props.labelKey]
@@ -313,7 +315,7 @@ function showPicker() {
   pickerSession++
   pickerShow.value = true
   lastPickerColSelected.value = pickerColSelected.value.slice(0)
-  lastSelectList.value = selectList.value.slice(0)
+  lastSelectList.value = JSON.parse(JSON.stringify(selectList.value))
 }
 
 function getSelectedItem(value: string | number, colIndex: number, selectList: Record<string, any>[][]) {
@@ -346,7 +348,6 @@ function chooseItem(colIndex: number, index: number) {
   if ((typeof cachedV === 'string' || typeof cachedV === 'number') && typeof cachedL === 'string') {
     labelCache.set(cachedV, cachedL)
   }
-
   const newPickerColSelected = pickerColSelected.value.slice(0, colIndex)
   newPickerColSelected.push(item[props.valueKey])
   isChange.value = true
@@ -368,6 +369,7 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
   colChangeSeq[colIndex] = (colChangeSeq[colIndex] || 0) + 1
   const seq = colChangeSeq[colIndex]
   loading.value = true
+  loadingCount.value++
   const { columnChange, beforeConfirm } = props
   columnChange &&
     columnChange({
@@ -393,7 +395,10 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
         newSelectList[colIndex + 1] = nextColumn
 
         selectList.value = newSelectList
-        loading.value = false
+        if (loadingCount.value > 0) {
+          loadingCount.value--
+        }
+        loading.value = loadingCount.value > 0
         currentCol.value = colIndex + 1
 
         updateLineAndScroll(true)
@@ -409,7 +414,10 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
         if (colChangeSeq[colIndex] !== seq) return
         // 每设置展示数据回显
         if (typeof callback === 'function') {
-          loading.value = false
+          if (loadingCount.value > 0) {
+            loadingCount.value--
+          }
+          loading.value = loadingCount.value > 0
           if (isCompleting.value) {
             isCompleting.value = false
             if (autoCompletePending.value) {
@@ -420,7 +428,10 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
           return
         }
         if (isBoolean(isOk) && !isOk) {
-          loading.value = false
+          if (loadingCount.value > 0) {
+            loadingCount.value--
+          }
+          loading.value = loadingCount.value > 0
           return
         }
 
@@ -434,7 +445,10 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
               if (isPass) {
                 onConfirm()
               } else {
-                loading.value = false
+                if (loadingCount.value > 0) {
+                  loadingCount.value--
+                }
+                loading.value = loadingCount.value > 0
               }
             }
           )
@@ -447,6 +461,7 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
 function onConfirm() {
   isChange.value = false
   loading.value = false
+  loadingCount.value = 0
   pickerShow.value = false
 
   emit('update:modelValue', pickerColSelected.value.slice(0))
@@ -558,7 +573,6 @@ function handleAutoComplete() {
   const seq = ++autoCompleteSeq
   diffColumns(missingAt - 1, seq)
 }
-
 defineExpose<ColPickerExpose>({
   close,
   open
