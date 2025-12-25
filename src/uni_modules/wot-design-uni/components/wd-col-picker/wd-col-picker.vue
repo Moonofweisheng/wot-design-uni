@@ -103,7 +103,7 @@ import wdLoading from '../wd-loading/wd-loading.vue'
 import wdActionSheet from '../wd-action-sheet/wd-action-sheet.vue'
 import wdCell from '../wd-cell/wd-cell.vue'
 import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties, reactive } from 'vue'
-import { addUnit, debounce, getRect, isArray, isBoolean, isDef, isFunction, objToStyle } from '../common/util'
+import { addUnit, debounce, getRect, isArray, isBoolean, isDef, isEqual, isFunction, objToStyle } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
 import { colPickerProps, type ColPickerExpose } from './types'
 
@@ -127,6 +127,11 @@ const lastPickerColSelected = ref<(string | number)[]>([])
 const scrollLeft = ref<number>(0)
 const inited = ref<boolean>(false)
 const isCompleting = ref<boolean>(false)
+const autoCompletePending = ref<boolean>(false)
+let autoCompleteSeq = 0
+const colChangeSeq: Record<number, number> = {}
+let pickerSession = 0
+const labelCache = new Map<string | number, string>()
 
 const state = reactive({
   lineStyle: 'display:none;' // 激活项边框线样式
@@ -167,9 +172,10 @@ const cellClass = computed(() => {
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (newValue === pickerColSelected.value) return
-    pickerColSelected.value = newValue
-    newValue.map((item, colIndex) => {
+    const normalized = Array.isArray(newValue) ? newValue.slice(0) : []
+    if (isEqual(normalized, pickerColSelected.value)) return
+    pickerColSelected.value = normalized
+    selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
       return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
     })
     handleAutoComplete()
@@ -192,6 +198,16 @@ watch(
     const newSelectedList = newValue.slice(0)
 
     selectList.value = newSelectedList
+    newSelectedList.forEach((col) => {
+      if (!Array.isArray(col)) return
+      col.forEach((item) => {
+        const v = item?.[props.valueKey]
+        const l = item?.[props.labelKey]
+        if ((typeof v === 'string' || typeof v === 'number') && typeof l === 'string') {
+          labelCache.set(v, l)
+        }
+      })
+    })
 
     selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
       return getSelectedItem(item, colIndex, newSelectedList)[props.labelKey]
@@ -201,6 +217,7 @@ watch(
     if (newSelectedList.length > 0) {
       currentCol.value = newSelectedList.length - 1
     }
+    handleAutoComplete()
   },
   {
     deep: true,
@@ -269,6 +286,8 @@ function handlePickerOpend() {
 }
 
 function handlePickerClose() {
+  pickerSession++
+  loading.value = false
   pickerShow.value = false
   emit('close')
 }
@@ -291,6 +310,7 @@ function showPicker() {
   const { disabled, readonly } = props
 
   if (disabled || readonly) return
+  pickerSession++
   pickerShow.value = true
   lastPickerColSelected.value = pickerColSelected.value.slice(0)
   lastSelectList.value = selectList.value.slice(0)
@@ -308,15 +328,24 @@ function getSelectedItem(value: string | number, colIndex: number, selectList: R
     }
   }
 
+  const cachedLabel = labelCache.get(value)
   return {
     [valueKey]: value,
-    [labelKey]: ''
+    [labelKey]: cachedLabel || ''
   }
 }
 
 function chooseItem(colIndex: number, index: number) {
+  autoCompletePending.value = false
+  isCompleting.value = false
+  autoCompleteSeq++
   const item = selectList.value[colIndex][index]
   if (item.disabled) return
+  const cachedV = item?.[props.valueKey]
+  const cachedL = item?.[props.labelKey]
+  if ((typeof cachedV === 'string' || typeof cachedV === 'number') && typeof cachedL === 'string') {
+    labelCache.set(cachedV, cachedL)
+  }
 
   const newPickerColSelected = pickerColSelected.value.slice(0, colIndex)
   newPickerColSelected.push(item[props.valueKey])
@@ -335,6 +364,9 @@ function chooseItem(colIndex: number, index: number) {
 }
 
 function handleColChange(colIndex: number, item: Record<string, any>, index: number, callback?: () => void) {
+  const session = pickerSession
+  colChangeSeq[colIndex] = (colChangeSeq[colIndex] || 0) + 1
+  const seq = colChangeSeq[colIndex]
   loading.value = true
   const { columnChange, beforeConfirm } = props
   columnChange &&
@@ -343,10 +375,19 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
       index: colIndex,
       rowIndex: index,
       resolve: (nextColumn: Record<string, any>[]) => {
+        if (pickerSession !== session) return
+        if (colChangeSeq[colIndex] !== seq) return
         if (!isArray(nextColumn)) {
           console.error('[wot ui] error(wd-col-picker): the data of each column of wd-col-picker should be an array')
           return
         }
+        nextColumn.forEach((item) => {
+          const v = item?.[props.valueKey]
+          const l = item?.[props.labelKey]
+          if ((typeof v === 'string' || typeof v === 'number') && typeof l === 'string') {
+            labelCache.set(v, l)
+          }
+        })
 
         const newSelectList = selectList.value.slice(0)
         newSelectList[colIndex + 1] = nextColumn
@@ -357,7 +398,6 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
 
         updateLineAndScroll(true)
         if (typeof callback === 'function') {
-          isCompleting.value = false
           selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
             return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
           })
@@ -365,10 +405,18 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
         }
       },
       finish: (isOk?: boolean) => {
+        if (pickerSession !== session) return
+        if (colChangeSeq[colIndex] !== seq) return
         // 每设置展示数据回显
         if (typeof callback === 'function') {
           loading.value = false
-          isCompleting.value = false
+          if (isCompleting.value) {
+            isCompleting.value = false
+            if (autoCompletePending.value) {
+              autoCompletePending.value = false
+              handleAutoComplete()
+            }
+          }
           return
         }
         if (isBoolean(isOk) && !isOk) {
@@ -401,9 +449,9 @@ function onConfirm() {
   loading.value = false
   pickerShow.value = false
 
-  emit('update:modelValue', pickerColSelected.value)
+  emit('update:modelValue', pickerColSelected.value.slice(0))
   emit('confirm', {
-    value: pickerColSelected.value,
+    value: pickerColSelected.value.slice(0),
     selectedItems: pickerColSelected.value.map((item, colIndex) => {
       return getSelectedItem(item, colIndex, selectList.value)
     })
@@ -462,29 +510,53 @@ function lineScrollIntoView() {
 }
 
 // 递归列数据补齐
-function diffColumns(colIndex: number) {
+function diffColumns(colIndex: number, seq: number) {
   // colIndex 为 -1 时，item 为空对象，>=0 时则具有 value 属性
-  const item = colIndex === -1 ? {} : { [props.valueKey]: props.modelValue[colIndex] }
+  if (seq !== autoCompleteSeq) return
+  const modelValue = Array.isArray(props.modelValue) ? props.modelValue : []
+  const item = colIndex === -1 ? {} : { [props.valueKey]: modelValue[colIndex] }
   handleColChange(colIndex, item, -1, () => {
-    // 如果 columns 长度还小于 value 长度，colIndex + 1，继续递归补齐
-    if (selectList.value.length < props.modelValue.length) {
-      diffColumns(colIndex + 1)
+    if (seq !== autoCompleteSeq) return
+    const nextIndex = colIndex + 1
+    if (nextIndex < modelValue.length - 1) {
+      diffColumns(nextIndex, seq)
+      return
+    }
+    isCompleting.value = false
+    if (autoCompletePending.value) {
+      autoCompletePending.value = false
+      handleAutoComplete()
     }
   })
 }
 function handleAutoComplete() {
-  if (props.autoComplete) {
-    // 如果 columns 数组长度为空，或者长度小于 value 的长度，自动触发 columnChange 来补齐数据
-    if (selectList.value.length < props.modelValue.length || selectList.value.length === 0) {
-      // isCompleting 是否在自动补全，锁操作
-      if (!isCompleting.value) {
-        // 如果 columns 长度为空，则传入的 colIndex 为 -1
-        const colIndex = selectList.value.length === 0 ? -1 : selectList.value.length - 1
-        diffColumns(colIndex)
-      }
-      isCompleting.value = true
+  if (!props.autoComplete) return
+  const modelValue = Array.isArray(props.modelValue) ? props.modelValue : []
+  if (modelValue.length === 0) return
+  if (isCompleting.value) {
+    autoCompletePending.value = true
+    return
+  }
+
+  let missingAt = -1
+  for (let i = 0; i < modelValue.length; i++) {
+    const col = selectList.value[i]
+    if (!Array.isArray(col)) {
+      missingAt = i
+      break
+    }
+    const v = modelValue[i]
+    const ok = col.some((item) => item?.[props.valueKey] === v)
+    if (!ok) {
+      missingAt = i
+      break
     }
   }
+  if (missingAt === -1) return
+
+  isCompleting.value = true
+  const seq = ++autoCompleteSeq
+  diffColumns(missingAt - 1, seq)
 }
 
 defineExpose<ColPickerExpose>({
