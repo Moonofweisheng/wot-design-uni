@@ -1,0 +1,7 @@
+@import "./../common/abstracts/_mixin.scss";
+
+@include b(picker) {
+  @include e(popup) {
+    border-radius: 16px 16px 0px 0px;
+  }
+}

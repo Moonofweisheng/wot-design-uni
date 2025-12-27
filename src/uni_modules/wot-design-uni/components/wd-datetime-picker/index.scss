@@ -84,10 +84,6 @@
     line-height: $-cell-line-height;
   }
 
-  @include edeep(popup) {
-    border-radius: 16px 16px 0px 0px;
-  }
-
   @include e(wraper) {
     padding-bottom: var(--window-bottom);
   }
