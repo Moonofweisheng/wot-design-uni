@@ -55,7 +55,8 @@ export default {
   colPicker: {
     title: 'حدد لون',
     placeholder: 'حدد لون',
-    select: 'حدد'
+    select: 'حدد',
+    search: 'الرجاء إدخال'
   },
   loadmore: {
     loading: 'جارٍ التحميل...',

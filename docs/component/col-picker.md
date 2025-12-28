@@ -617,6 +617,241 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
   }
 }
 ```
+## 本地搜索
+
+设置 `filterable` 属性，开启本地模糊搜索功能。
+
+```html
+<wd-col-picker label="选择地址" v-model="value" filterable :columns="area" :column-change="columnChange" @confirm="handleConfirm"></wd-col-picker>
+```
+## 远程搜索
+设置 `filterable` 属性，开启远程搜索功能。
+设置 `filter-type="remote"`，当搜索框内容发生变化时，会触发 `search` 事件。
+
+```html
+<wd-col-picker
+  label="远程搜索"
+  filterable
+  filterType="remote"
+  v-model="valueSearch"
+  :columns="areaDataSearch"
+  :column-change="columnChange1"
+  @search="handleSearch"
+  ></wd-col-picker>
+```
+```typescript
+const valueSearch = ref<string[]>([])
+const areaDataSearch = ref<any[]>([])
+
+// 搜索事件
+const handleSearch = ({ searchText, colIndex }) => {
+  console.log(`正在搜索第${colIndex}列，关键词：${searchText}`)
+  // 模拟异步请求更新 columns 数据
+  // setTimeout(() => {
+  //   const newCols = [...areaDataSearch.value]
+  //   newCols[colIndex] = mockResult
+  //   areaDataSearch.value = newCols
+  // }, 300)
+}
+
+const columnChange1 = ({ selectedItem, resolve, finish }) => {
+  const areaData = findChildrenByCode(colPickerData, selectedItem.value)
+  if (areaData && areaData.length) {
+    resolve(
+      areaData.map((item) => {
+        return {
+          value: item.value,
+          label: item.text
+        }
+      })
+    )
+  } else {
+    finish()
+  }
+}
+```
+
+## 下拉刷新与上拉加载
+通过设置 `refresher-enabled` 开启下拉刷新，`scroll-to-lower-enabled` 开启上拉加载更多。
+
+```html
+<wd-col-picker
+  label="加载更多"
+  v-model="valueLoad"
+  :columns="columnsLoad"
+  :column-change="columnChangeLoad"
+  refresher-enabled
+  scroll-to-lower-enabled
+  @refresh="onRefresh"
+  @scroll-to-lower="onScrollToLower"
+/>
+```
+
+```typescript
+const valueLoad = ref([])
+const columnsLoad = ref([])
+const loadPicker = ref()
+
+const onRefresh = ({ colIndex }) => {
+  console.log('下拉刷新', colIndex)
+  setTimeout(() => {
+    // 刷新数据逻辑...
+    loadPicker.value?.stopRefresh()
+  }, 1000)
+}
+
+const onScrollToLower = ({ colIndex }) => {
+  console.log('上拉加载更多', colIndex)
+  // 加载更多数据逻辑...
+  // const newCols = [...columnsLoad.value]
+  // newCols[colIndex] = [...oldData, ...newData]
+  // columnsLoad.value = newCols
+}
+```
+
+## 综合案例：搜索+刷新+加载
+这是一个结合了远程搜索、下拉刷新和上拉加载的完整示例。
+
+```html
+<wd-col-picker
+  label="综合案例"
+  title="支持搜索/刷新/加载"
+  v-model="valueComplex"
+  :columns="columnsComplex"
+  :column-change="columnChangeComplex"
+  filterable
+  filter-type="remote"
+  refresher-enabled
+  scroll-to-lower-enabled
+  @search="onSearchComplex"
+  @search-clear="onSearchClearComplex"
+  @refresh="onRefreshComplex"
+  @scroll-to-lower="onScrollToLowerComplex"
+/>
+```
+
+```typescript
+// 详细代码实现参考示例
+import { ref, onMounted } from 'vue'
+import { useToast } from '@/uni_modules/wot-design-uni'
+
+const toast = useToast()
+const valueComplex = ref<string[]>([])
+const columnsComplex = ref<any[][]>([])
+const complexPicker = ref()
+
+// 模拟“数据库”
+const getComplexMockData = (() => {
+  const TOTAL_COUNT = 100
+  const DB: any[] = []
+  
+  return (colIndex: number, page: number, pageSize: number = 15, keyword: string = '') => {
+    return new Promise<any[]>((resolve) => {
+      setTimeout(() => {
+        const fullTable: any[] = []
+        for (let i = 1; i <= TOTAL_COUNT; i++) {
+          const label = colIndex === 0 ? `省份${i}` : colIndex === 1 ? `城市${i}` : `区县${i}`
+          fullTable.push({
+            label,
+            value: colIndex === 0 ? `${i}` : `${colIndex}-${i}`
+          })
+        }
+
+        // 1. 过滤
+        let filteredData = fullTable
+        if (keyword) {
+          filteredData = fullTable.filter(item => item.label.includes(keyword))
+        }
+
+        // 2. 分页
+        const start = (page - 1) * pageSize
+        const end = start + pageSize
+        const pageData = filteredData.slice(start, end)
+
+        resolve(pageData)
+      }, 500)
+    })
+  }
+})()
+
+// 记录每一列的当前页码
+const pageMapComplex = ref<Record<number, number>>({})
+
+// 综合案例：列变化
+const columnChangeComplex = ({ selectedItem, index, resolve, finish }) => {
+  console.log(`[综合-列变化] 层级: ${index}, 选中: ${selectedItem.label}`)
+  
+  // 重置下一列的页码
+  const nextColIndex = index + 1
+  pageMapComplex.value[nextColIndex] = 1
+
+  getComplexMockData(nextColIndex, 1).then((data) => {
+    if (data.length > 0) {
+      resolve(data)
+    } else {
+      finish()
+    }
+  })
+}
+
+const onSearchComplex = ({ searchText, colIndex }) => {
+  console.log(`[综合-搜索] 层级: ${colIndex}, 关键词: "${searchText}"`)
+  pageMapComplex.value[colIndex] = 1
+  getComplexMockData(colIndex, 1, 15, searchText).then((data) => {
+    const newCols = [...columnsComplex.value]
+    newCols[colIndex] = data
+    columnsComplex.value = newCols
+  })
+}
+
+const onSearchClearComplex = ({ colIndex }) => {
+  onSearchComplex({ searchText: '', colIndex })
+}
+
+const onRefreshComplex = ({ searchText, colIndex }) => {
+  console.log(`[综合-刷新] 层级: ${colIndex}`)
+  pageMapComplex.value[colIndex] = 1
+  getComplexMockData(colIndex, 1, 15, searchText).then((data) => {
+    const newCols = [...columnsComplex.value]
+    newCols[colIndex] = data
+    columnsComplex.value = newCols
+    
+    // 停止刷新
+    complexPicker.value?.stopRefresh()
+  })
+}
+
+const onScrollToLowerComplex = ({ searchText, colIndex }) => {
+  console.log(`[综合-加载更多] 层级: ${colIndex}`)
+  const nextPage = (pageMapComplex.value[colIndex] || 1) + 1
+  pageMapComplex.value[colIndex] = nextPage
+  
+  toast.loading('加载中...')
+  
+  getComplexMockData(colIndex, nextPage, 15, searchText).then((newData) => {
+    toast.close()
+    if (newData.length === 0) {
+      toast.info('没有更多数据了')
+      return
+    }
+    
+    const currentData = columnsComplex.value[colIndex] || []
+    const combinedData = [...currentData, ...newData]
+
+    const newCols = [...columnsComplex.value]
+    newCols[colIndex] = combinedData
+    columnsComplex.value = newCols
+  })
+}
+
+// 初始化第一列
+onMounted(() => {
+  pageMapComplex.value[0] = 1
+  getComplexMockData(0, 1).then((data) => {
+    columnsComplex.value = [data]
+  })
+})
+```
 
 ## Attributes
 
@@ -654,6 +889,15 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | lineWidth              | 底部条宽度，单位像素                                                                                                           | number            | -      | -       | 1.3.7    |
 | lineHeight             | 底部条高度，单位像素                                                                                                           | number            | -      | -       | 1.3.7    |
 | root-portal            | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                                                                             | boolean           | -      | false   | 1.11.0 |
+| filterable             | 是否开启搜索功能（本地/远程）                                                                                                 | boolean           | -      | false   | -        |
+| filter-type            | 搜索类型：'local' (本地过滤) 或 'remote' (远程搜索)                                                                           | string            | -      | 'local' | -        |
+| filter-placeholder     | 搜索输入框占位符                                                                                                             | string            | -      | -       | -        |
+| refresher-enabled      | 是否开启下拉刷新                                                                                                              | boolean           | -      | false   | -        |
+| refresher-default-style| 下拉刷新默认样式                                                                                                              | string            | 'black' / 'white' / 'none' | 'white' | - |
+| refresher-background   | 下拉刷新区域背景颜色                                                                                                          | string            | -      | transparent | -    |
+| scroll-to-lower-enabled| 是否开启上拉加载更多                                                                                                          | boolean           | -      | false   | -        |
+| refresher-background   | 下拉刷新区域背景颜色                                                                                                          | string            | -      | transparent | -    |
+| refresher-default-style| 下拉刷新默认样式                                                                                                              | string            | 'black' / 'white' / 'none' | 'white' | - |
 
 ### FormItemRule 数据结构
 
@@ -679,6 +923,11 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | -------- | -------------------------- | ------------------------------------------------ | -------- |
 | confirm  | 最后一列选项选中时触发     | `{ value(选项值数组), selectedItems(选项数组) }` | -        |
 | close    | 点击关闭按钮或者蒙层时触发 | -                                                | -        |
+| search   | 搜索时触发（filter-type="remote"） | `{ searchText, colIndex, selectedValues, selectedItems }` | - |
+| search-change | 搜索文本改变时触发（filter-type="remote"） | `{ searchText, colIndex, selectedValues, selectedItems }` | - |
+| search-clear | 清空搜索时触发（filter-type="remote"） | `{ searchText, colIndex, selectedValues, selectedItems }` | - |
+| refresh  | 下拉刷新时触发 | `{ searchText, colIndex, isRefresh: true }` | - |
+| scroll-to-lower | 上拉加载更多时触发 | `{ searchText, colIndex, isRefresh: false }` | - |
 
 ## Methods
 
@@ -686,6 +935,9 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | -------- | ---------------- | ---- | -------- |
 | open     | 打开 picker 弹框 | -    |
 | close    | 关闭 picker 弹框 | -    |
+| stopRefresh | 停止下拉刷新 | - | - |
+| getCurrentColData | 获取当前列数据 | colIndex | - |
+| getAllColData | 获取所有列数据 | - | - |
 
 ## Slots
 
@@ -693,6 +945,8 @@ const columnChange = ({ selectedItem, resolve, finish }) => {
 | ------- | ---------- | -------- |
 | default | 自定义展示 | -        |
 | label   | 左侧插槽   | -        |
+| search  | 搜索插槽   | -        |
+| empty   | 空数据提示插槽 | -        |
 
 ## 外部样式类
 

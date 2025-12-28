@@ -47,7 +47,8 @@ export default {
   colPicker: {
     title: 'Por favor selecione',
     placeholder: 'Por favor selecione',
-    select: 'Por favor selecione'
+    select: 'Por favor selecione',
+    search: 'Por favor insira'
   },
   datetimePicker: {
     start: 'Hora de início',

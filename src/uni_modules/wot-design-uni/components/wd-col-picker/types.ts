@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import { handleError, type ComponentPublicInstance, type ExtractPropTypes, type PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp, numericProp } from '../common/props'
 import type { FormItemRule } from '../wd-form/types'
 
@@ -140,7 +140,37 @@ export const colPickerProps = {
   /**
    * 必填标记位置，可选值：before、after
    */
-  markerSide: makeStringProp<'before' | 'after'>('before')
+  markerSide: makeStringProp<'before' | 'after'>('before'),
+  /**
+   * 搜索过滤类型，可选值：local、remote 开启filterable时有效
+   */
+  filterType: makeStringProp<'local' | 'remote'>('local'),
+  /**
+   * 可搜索
+   *
+   */
+  filterable: makeBooleanProp(false),
+  /** 搜索框占位符 */
+  filterPlaceholder: String,
+  /**
+   * 开启下拉刷新
+   */
+  refresherEnabled: makeBooleanProp(false),
+  /**
+   * 开启上拉加载更多
+   */
+  scrollToLowerEnabled: makeBooleanProp(false),
+  /**
+   * 设置自定义下拉刷新默认样式，支持设置 black，white，none，none 表示不使用默认样式
+   */
+  refresherDefaultStyle: {
+    type: String as PropType<'black' | 'white' | 'none'>,
+    default: 'white'
+  },
+  /**
+   * 设置自定义下拉刷新区域背景颜色
+   */
+  refresherBackground: makeStringProp('transparent')
 }
 
 export type ColPickerProps = ExtractPropTypes<typeof colPickerProps>
@@ -152,15 +182,47 @@ export type ColPickerColumnChangeOption = {
   resolve: (nextColumn: Record<string, any>[]) => void
   finish: (isOk?: boolean) => void
 }
+export type ColPickerHandleScrollToLowerOption = {
+  /** 是否刷新 */
+  isRefresh: boolean
+  /** 搜索文本 */
+  searchText: string
+  colIndex: number
+}
+export type ColPickerHandleRefreshOption = {
+  /** 搜索文本 */
+  searchText: string
+  colIndex: number
+}
+export type ColPickerPureSearchOption = {
+  /** 搜索文本 */
+  searchText: string
+  /** 当前列索引 */
+  colIndex: number
+  /** 当前选中的值数组 */
+  selectedValues: (string | number)[]
+  /** 当前选中的项目数组 */
+  selectedItems: Record<string, any>[]
+}
+
 export type ColPickerColumnChange = (option: ColPickerColumnChangeOption) => void
 export type ColPickerDisplayFormat = (selectedItems: Record<string, any>[]) => string
 export type ColPickerBeforeConfirm = (value: (string | number)[], selectedItems: Record<string, any>[], resolve: (isPass: boolean) => void) => void
-
+/** 监听输入框内容变化事件*/
+export type ColPickerHandleSearchChange = (option: ColPickerPureSearchOption) => void
+export type ColPickerHandleSearch = (option: ColPickerPureSearchOption) => void
+export type ColPickerHandleClear = (option: ColPickerPureSearchOption) => void
+/** 下拉刷新 */
+export type ColPickerHandleRefresh = (option: ColPickerHandleRefreshOption) => void
+/** 上拉加载更多 */
+export type ColPickerHandleScrollToLower = (option: ColPickerHandleScrollToLowerOption) => void
 export type ColPickerExpose = {
   // 关闭picker弹框
   close: () => void
   // 打开picker弹框
   open: () => void
+  // 停止下拉刷新
+  stopRefresh: () => void
 }
 
 export type ColPickerInstance = ComponentPublicInstance<ColPickerExpose, ColPickerProps>

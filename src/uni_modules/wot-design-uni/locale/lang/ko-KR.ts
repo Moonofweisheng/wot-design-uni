@@ -47,7 +47,8 @@ export default {
   colPicker: {
     title: '선택',
     placeholder: '선택',
-    select: '선택'
+    select: '선택',
+    search: '입력해주세요'
   },
   datetimePicker: {
     start: '시작',

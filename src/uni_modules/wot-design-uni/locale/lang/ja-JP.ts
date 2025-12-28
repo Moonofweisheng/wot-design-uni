@@ -47,7 +47,8 @@ export default {
   colPicker: {
     title: '選択してください',
     placeholder: '選択してください',
-    select: '選択'
+    select: '選択',
+    search: '入力してください'
   },
   datetimePicker: {
     start: '開始時間',

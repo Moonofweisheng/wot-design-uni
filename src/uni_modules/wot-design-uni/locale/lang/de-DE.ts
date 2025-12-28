@@ -55,7 +55,8 @@ export default {
   colPicker: {
     title: 'Wählen',
     placeholder: 'Wählen',
-    select: 'Wählen'
+    select: 'Wählen',
+    search: 'Bitte eingeben'
   },
   loadmore: {
     loading: 'Laden...',

@@ -57,30 +57,65 @@
           </view>
         </scroll-view>
       </view>
+      <!-- 搜索框 -->
+      <view class="wd-col-picker__search" v-if="filterable">
+        <slot name="search">
+          <wd-search
+            v-model="searchText"
+            :placeholder="translate('search')"
+            hide-cancel
+            :clearable="true"
+            @change="handleSearchChange"
+            @search="handleSearch"
+            @clear="handleClear"
+          />
+        </slot>
+      </view>
       <view class="wd-col-picker__list-container">
         <view
-          v-for="(col, colIndex) in selectList"
+          v-for="(col, colIndex) in filterData"
           :key="colIndex"
           class="wd-col-picker__list"
           :style="colIndex === currentCol ? 'display: block;' : 'display: none;'"
         >
-          <view
-            v-for="(item, index) in col"
-            :key="index"
-            :class="`wd-col-picker__list-item ${pickerColSelected[colIndex] && item[valueKey] === pickerColSelected[colIndex] && 'is-selected'} ${
-              item.disabled && 'is-disabled'
-            }`"
-            @click="chooseItem(colIndex, index)"
+          <scroll-view
+            scroll-y
+            class="wd-col-picker__list-scroll-view"
+            :scroll-with-animation="true"
+            show-scrollbar
+            :refresher-enabled="refresherEnabled && colIndex === currentCol"
+            :refresher-triggered="refreshTriggered"
+            :refresher-default-style="refresherDefaultStyle"
+            :refresher-background="refresherBackground"
+            @scrolltolower="(e) => handleScrollToLower(e, colIndex)"
+            @refresherrefresh="(e) => handleRefresh(e, colIndex)"
           >
-            <view>
-              <view class="wd-col-picker__list-item-label">{{ item[labelKey] }}</view>
-              <view v-if="item[tipKey]" class="wd-col-picker__list-item-tip">{{ item[tipKey] }}</view>
-            </view>
-            <wd-icon custom-class="wd-col-picker__checked" name="check"></wd-icon>
-          </view>
-          <view v-if="loading" class="wd-col-picker__loading">
-            <wd-loading :color="loadingColor" />
-          </view>
+            <template v-if="col.length > 0">
+              <view
+                v-for="(item, index) in col"
+                :key="index"
+                :class="`wd-col-picker__list-item ${pickerColSelected[colIndex] && item[valueKey] === pickerColSelected[colIndex] && 'is-selected'} ${
+                  item.disabled && 'is-disabled'
+                }`"
+                :id="`item-${colIndex}-${item[valueKey]}`"
+                @click="chooseItem(colIndex, index)"
+              >
+                <view>
+                  <view class="wd-col-picker__list-item-label">{{ item[labelKey] }}</view>
+                  <view v-if="item[tipKey]" class="wd-col-picker__list-item-tip">{{ item[tipKey] }}</view>
+                </view>
+                <wd-icon custom-class="wd-col-picker__checked" name="check"></wd-icon>
+              </view>
+              <view v-if="loading" class="wd-col-picker__loading">
+                <wd-loading :color="loadingColor" />
+              </view>
+            </template>
+            <template v-else>
+              <slot name="empty">
+                <wd-status-tip image="content" tip="暂无内容" />
+              </slot>
+            </template>
+          </scroll-view>
         </view>
       </view>
     </wd-action-sheet>
@@ -102,6 +137,8 @@ import wdIcon from '../wd-icon/wd-icon.vue'
 import wdLoading from '../wd-loading/wd-loading.vue'
 import wdActionSheet from '../wd-action-sheet/wd-action-sheet.vue'
 import wdCell from '../wd-cell/wd-cell.vue'
+import wdSearch from '../wd-search/wd-search.vue'
+import wdStatusTip from '../wd-status-tip/wd-status-tip.vue'
 import { computed, getCurrentInstance, onMounted, ref, watch, type CSSProperties, reactive } from 'vue'
 import { addUnit, debounce, getRect, isArray, isBoolean, isDef, isFunction, objToStyle } from '../common/util'
 import { useTranslate } from '../composables/useTranslate'
@@ -113,13 +150,27 @@ const $container = '.wd-col-picker__selected-container'
 const $item = '.wd-col-picker__selected-item'
 
 const props = defineProps(colPickerProps)
-const emit = defineEmits(['close', 'update:modelValue', 'confirm'])
+const emit = defineEmits([
+  'close',
+  'update:modelValue',
+  'confirm',
+  // 纯净解耦事件：只负责事件抛出，不负责数据处理
+  'search-change', // 搜索内容变化
+  'search', // 执行搜索
+  'search-clear', // 清空搜索
+  'refresh', // 下拉刷新
+  'scroll-to-lower' // 上拉加载更多
+])
 
 const pickerShow = ref<boolean>(false)
 const currentCol = ref<number>(0)
 const selectList = ref<Record<string, any>[][]>([])
 const pickerColSelected = ref<(string | number)[]>([])
-const selectShowList = ref<Record<string, any>[]>([])
+const selectShowList = computed(() => {
+  return pickerColSelected.value.map((item, colIndex) => {
+    return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
+  })
+})
 const loading = ref<boolean>(false)
 const isChange = ref<boolean>(false)
 const lastSelectList = ref<Record<string, any>[][]>([])
@@ -127,7 +178,8 @@ const lastPickerColSelected = ref<(string | number)[]>([])
 const scrollLeft = ref<number>(0)
 const inited = ref<boolean>(false)
 const isCompleting = ref<boolean>(false)
-
+const searchText = ref<string>('') // 搜索文本
+const refreshTriggered = ref<boolean>(false) // 是否触发了下拉刷新
 const state = reactive({
   lineStyle: 'display:none;' // 激活项边框线样式
 })
@@ -164,6 +216,24 @@ const cellClass = computed(() => {
   return classes.join(' ')
 })
 
+const filterData = computed(() => {
+  if (props.filterType === 'local') {
+    return selectList.value.map((col, colIndex) => {
+      // 只过滤当前显示的列
+      if (colIndex === currentCol.value) {
+        return col.filter((item) => {
+          const label = item[props.labelKey]
+          return label && label.toString().toLowerCase().includes(searchText.value.toLowerCase())
+        })
+      }
+      return col
+    })
+  } else {
+    // 远程搜索模式下，computed 只负责返回原始数据，不触发事件
+    return selectList.value
+  }
+})
+
 watch(
   () => props.modelValue,
   (newValue) => {
@@ -193,12 +263,9 @@ watch(
 
     selectList.value = newSelectedList
 
-    selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
-      return getSelectedItem(item, colIndex, newSelectedList)[props.labelKey]
-    })
     lastSelectList.value = newSelectedList
 
-    if (newSelectedList.length > 0) {
+    if (newSelectedList.length > 0 && (!oldValue || newSelectedList.length > oldValue.length)) {
       currentCol.value = newSelectedList.length - 1
     }
   },
@@ -246,7 +313,6 @@ watch(
     immediate: true
   }
 )
-
 // 是否展示箭头
 const showArrow = computed(() => {
   return !props.disabled && !props.readonly
@@ -255,7 +321,46 @@ const showArrow = computed(() => {
 onMounted(() => {
   inited.value = true
 })
+type SearchEventName = 'search-change' | 'search' | 'search-clear'
 
+/**
+ * 通用搜索事件emit函数
+ * @param eventName 事件名称
+ * @param searchText 搜索文本
+ */
+function emitSearchEvent(eventName: SearchEventName, searchText: string) {
+  emit(eventName, {
+    searchText,
+    colIndex: currentCol.value,
+    selectedValues: pickerColSelected.value,
+    selectedItems: pickerColSelected.value.map((value, index) => {
+      const colData = selectList.value[index] || []
+      return colData.find((item) => item[props.valueKey] === value) || { [props.valueKey]: value, [props.labelKey]: value }
+    })
+  })
+}
+
+/**
+ * 搜索内容变化处理 - 纯净事件抛出模式
+ */
+function handleSearchChange({ value }: { value: string }) {
+  if (props.filterType === 'local') return
+  emitSearchEvent('search-change', value)
+}
+/**
+ * 搜索执行处理 - 纯净事件抛出模式
+ */
+function handleSearch({ value }: { value: string }) {
+  if (props.filterType === 'local') return
+  emitSearchEvent('search', value)
+}
+/**
+ * 清空搜索处理 - 简化事件抛出模式
+ */
+function handleClear() {
+  if (props.filterType === 'local') return
+  emitSearchEvent('search-clear', '')
+}
 // 打开弹框
 function open() {
   showPicker()
@@ -278,9 +383,6 @@ function handlePickerClosed() {
     setTimeout(() => {
       selectList.value = lastSelectList.value.slice(0)
       pickerColSelected.value = lastPickerColSelected.value.slice(0)
-      selectShowList.value = lastPickerColSelected.value.map((item, colIndex) => {
-        return getSelectedItem(item, colIndex, lastSelectList.value)[props.labelKey]
-      })
       currentCol.value = lastSelectList.value.length - 1
       isChange.value = false
     }, 250)
@@ -315,7 +417,10 @@ function getSelectedItem(value: string | number, colIndex: number, selectList: R
 }
 
 function chooseItem(colIndex: number, index: number) {
-  const item = selectList.value[colIndex][index]
+  if (refreshTriggered.value || loading.value) return
+  // 使用filterData获取当前显示的项目
+  const currentFilteredCol = filterData.value[colIndex]
+  const item = currentFilteredCol[index]
   if (item.disabled) return
 
   const newPickerColSelected = pickerColSelected.value.slice(0, colIndex)
@@ -323,13 +428,13 @@ function chooseItem(colIndex: number, index: number) {
   isChange.value = true
   pickerColSelected.value = newPickerColSelected
   selectList.value = selectList.value.slice(0, colIndex + 1)
-  selectShowList.value = newPickerColSelected.map((item, colIndex) => {
-    return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
-  })
 
   if (selectShowList.value[colIndex] && colIndex === currentCol.value) {
     updateLineAndScroll(true)
   }
+
+  // 清除搜索文本
+  searchText.value = ''
 
   handleColChange(colIndex, item, index)
 }
@@ -358,9 +463,6 @@ function handleColChange(colIndex: number, item: Record<string, any>, index: num
         updateLineAndScroll(true)
         if (typeof callback === 'function') {
           isCompleting.value = false
-          selectShowList.value = pickerColSelected.value.map((item, colIndex) => {
-            return getSelectedItem(item, colIndex, selectList.value)[props.labelKey]
-          })
           callback()
         }
       },
@@ -409,10 +511,20 @@ function onConfirm() {
     })
   })
 }
+/**
+ * 列点击处理
+ * @param {Number} index 点击的列索引
+ */
 function handleColClick(index: number) {
+  searchText.value = ''
   isChange.value = true
   currentCol.value = index
   updateLineAndScroll(true)
+  // 切换列时搜索框被清空，通知外部更新状态
+  // 注意：这里是在切换到新列之后抛出的，所以 colIndex 是新列的索引
+  if (props.filterType !== 'local') {
+    emitSearchEvent('search-clear', '')
+  }
 }
 /**
  * @description 更新navBar underline的偏移量
@@ -487,9 +599,56 @@ function handleAutoComplete() {
   }
 }
 
+/*
+ * @description 滚动加载数据
+ * @param {Event} e scroll-view滚动到底部的事件对象
+ * @param {Number} colIndex 当前列的索引
+ */
+function handleScrollToLower(e: any, colIndex: number) {
+  if (!props.scrollToLowerEnabled) {
+    return
+  }
+
+  // 直接抛出事件，不再处理handler逻辑
+  emit('scroll-to-lower', {
+    searchText: searchText.value,
+    colIndex: colIndex,
+    isRefresh: false
+  })
+}
+
+/**
+ * @description 下拉刷新 - 纯净事件模式
+ * @param {Event} e scroll-view滚动到顶部的事件对象
+ * @param {Number} colIndex 当前列的索引
+ */
+function handleRefresh(e: any, colIndex: number) {
+  if (!props.refresherEnabled) {
+    return
+  }
+  // 开始刷新状态
+  refreshTriggered.value = true
+  // 直接抛出事件，不再处理handler逻辑
+  emit('refresh', {
+    searchText: searchText.value,
+    colIndex: colIndex,
+    isRefresh: true
+  })
+}
+
+/**
+ * 停止刷新状态 - 用于下拉刷新完成后
+ */
+function stopRefresh() {
+  refreshTriggered.value = false
+  console.log('[wd-col-picker] 停止刷新状态')
+}
+
 defineExpose<ColPickerExpose>({
   close,
-  open
+  open,
+  // 新增：外部数据更新API
+  stopRefresh
 })
 </script>
 

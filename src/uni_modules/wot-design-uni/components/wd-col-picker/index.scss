@@ -60,9 +60,8 @@
         color: $-input-placeholder-color;
       }
     }
-  
   }
-  
+
   @include edeep(arrow) {
     display: block;
     font-size: $-cell-icon-size;
@@ -76,13 +75,13 @@
     color: $-col-picker-selected-color;
     overflow: hidden;
   }
-  
-  @include e(selected-container){
+
+  @include e(selected-container) {
     position: relative;
     display: flex;
     user-select: none;
   }
-  
+
   @include e(selected-item) {
     flex: 0 0 auto;
     height: $-col-picker-selected-height;
@@ -93,7 +92,7 @@
       font-weight: $-col-picker-selected-fw;
     }
   }
-  
+
   @include e(selected-line) {
     position: absolute;
     bottom: 5px;
@@ -105,21 +104,23 @@
     border-radius: calc($-col-picker-line-height / 2);
     box-shadow: $-col-picker-line-box-shadow;
   }
-  
-  @include e(list-container){
+
+  @include e(list-container) {
     position: relative;
   }
-  
+
   @include e(list) {
-    height: $-col-picker-list-height;
+    // height: $-col-picker-list-height;
     padding-bottom: $-col-picker-list-padding-bottom;
     box-sizing: border-box;
-    overflow: auto;
+    overflow: hidden;
     color: $-col-picker-list-color;
     font-size: $-col-picker-list-fs;
     -webkit-overflow-scrolling: touch;
   }
-  
+  @include e(list-scroll-view) {
+    height: $-col-picker-list-height;
+  }
   @include e(list-item) {
     display: flex;
     padding: $-col-picker-list-item-padding;
@@ -136,17 +137,17 @@
       color: $-col-picker-list-color-disabled;
     }
   }
-  
+
   @include e(list-item-label) {
     line-height: 1.285;
   }
-  
+
   @include e(list-item-tip) {
     margin-top: 2px;
     font-size: $-col-picker-list-fs-tip;
     color: $-col-picker-list-color-tip;
   }
-  
+
   @include edeep(checked) {
     display: block;
     margin-left: 4px;
@@ -154,15 +155,20 @@
     color: $-col-picker-list-color-checked;
     opacity: 0;
   }
-  
+
   @include e(loading) {
     display: flex;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     align-items: center;
     justify-content: center;
+    padding: 10px 0;
+  }
+  
+  @include e(empty) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: $-col-picker-list-color-tip;
+    font-size: $-col-picker-list-fs-tip;
   }
 }

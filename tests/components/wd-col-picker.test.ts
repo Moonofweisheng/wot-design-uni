@@ -253,7 +253,6 @@ describe('WdColPicker', () => {
     const wrapper = mount(WdColPicker, {
       props: {
         modelValue: [],
-        useLabelSlot: true,
         columns: [[{ value: '1', label: '选项1' }]]
       },
       slots: {
@@ -261,7 +260,6 @@ describe('WdColPicker', () => {
       }
     })
 
-    expect(wrapper.props('useLabelSlot')).toBe(true)
     expect(wrapper.find('.custom-label').exists()).toBeTruthy()
   })
 

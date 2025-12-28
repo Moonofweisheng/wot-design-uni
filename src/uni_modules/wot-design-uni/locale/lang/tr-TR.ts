@@ -52,7 +52,8 @@ export default {
   colPicker: {
     title: 'Lütfen seçin',
     placeholder: 'Lütfen seçin',
-    select: 'Seç'
+    select: 'Seç',
+    search: 'Ara'
   },
   datetimePicker: {
     start: 'Başlangıç zamanı',

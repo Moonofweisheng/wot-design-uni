@@ -55,7 +55,8 @@ export default {
   colPicker: {
     title: 'Select',
     placeholder: 'Select',
-    select: 'Select'
+    select: 'Select',
+    search: 'Search'
   },
   loadmore: {
     loading: 'Loading...',

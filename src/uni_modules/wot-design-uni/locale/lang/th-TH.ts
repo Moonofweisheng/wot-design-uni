@@ -47,7 +47,8 @@ export default {
   colPicker: {
     title: 'เลือก',
     placeholder: 'เลือก',
-    select: 'เลือก'
+    select: 'เลือก',
+    search: 'กรุณาใส่ข้อมูล'
   },
   datetimePicker: {
     start: 'จาก',

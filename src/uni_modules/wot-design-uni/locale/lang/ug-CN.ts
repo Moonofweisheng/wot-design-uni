@@ -51,7 +51,8 @@ export default {
   colPicker: {
     title: 'تاللاڭ',
     placeholder: 'تاللاڭ',
-    select: 'تاللاڭ'
+    select: 'تاللاڭ',
+    search: 'كىرگۈزۈڭ'
   },
   datetimePicker: {
     start: 'باشلىنىش ۋاقتى',
