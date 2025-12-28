@@ -936,8 +936,6 @@ onMounted(() => {
 | open     | 打开 picker 弹框 | -    |
 | close    | 关闭 picker 弹框 | -    |
 | stopRefresh | 停止下拉刷新 | - | - |
-| getCurrentColData | 获取当前列数据 | colIndex | - |
-| getAllColData | 获取所有列数据 | - | - |
 
 ## Slots
 
