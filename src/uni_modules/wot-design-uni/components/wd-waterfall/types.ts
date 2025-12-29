@@ -57,7 +57,7 @@ export const waterfallProps = {
    */
   maxWait: {
     type: Number,
-    default: 3000
+    default: 1500
   },
   ...baseProps
 }
@@ -86,7 +86,8 @@ export const defaultWaterfallProps: Partial<WaterfallProps> = {
   rowGap: 8,
   show: undefined,
   errorStrategy: 'default',
-  retryCount: 1
+  retryCount: 1,
+  maxWait: 1500
 }
 
 /**
