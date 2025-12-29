@@ -495,6 +495,10 @@ export default defineConfig({
             {
               link: '/en-US/component/table',
               text: 'Table'
+            },
+            {
+              link: '/en-US/component/waterfall',
+              text: 'Waterfall'
             }
           ]
         },
