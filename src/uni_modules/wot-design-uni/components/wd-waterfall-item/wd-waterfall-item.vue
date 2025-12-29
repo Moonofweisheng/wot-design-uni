@@ -106,7 +106,7 @@ const instance = getCurrentInstance()
  * 包含项目的所有状态信息，会被父组件用于布局计算
  */
 const item = shallowReactive<WaterfallItemInfo>({
-  loaded: false, // 是否加载完成（图片等资源）
+  finished: false, // 是否处理完成
   loadSuccess: false, // 是否加载成功
   visible: false, // 是否可见（由父组件控制）
   isInserted: false, // 是否插入项目
@@ -122,7 +122,7 @@ const item = shallowReactive<WaterfallItemInfo>({
 let overtime = false
 
 const timeoutTask = useDelayTask(async () => {
-  if (!item.loaded && !overtime) {
+  if (!item.finished && !overtime) {
     overtime = true
     // 根据模式决定超时后的处理方式
     switch (context.errorStrategy) {
@@ -143,14 +143,14 @@ const timeoutTask = useDelayTask(async () => {
         break
     }
     await item.updateHeight()
-    item.loaded = true
+    item.finished = true
   }
-}, context?.maxWait)
+}, context?.maxWait || 3000)
 
 // 如果是已知高度
 async function onLoadKnownSize() {
   await item.updateHeight()
-  item.loaded = true
+  item.finished = true
   // 如果高度有问题，单独处理
   // if (!item.height || item.heightError) {
   //   console.warn('已知高度-项目高度异常，但仍标记为已加载')
@@ -161,13 +161,13 @@ async function onLoadKnownSize() {
 async function handleFailureNone() {
   setStatus(ItemStatus.OVER, '加载失败')
   await item.updateHeight()
-  item.loaded = true
+  item.finished = true
 }
 
 // 模式2：占位图模式 - 失败后直接显示占位图片
 async function handleFailurePlaceholder() {
   setStatus(ItemStatus.FAIL, '原始内容加载失败，显示占位图片')
-  // 不设置 loaded = true，让占位图片的加载回调来处理
+  // 不设置 finished = true，让占位图片的加载回调来处理
 }
 
 // 模式3：重试模式 - 重试指定次数
@@ -176,7 +176,7 @@ async function handleFailureRetry() {
   // 微信小程序不支持重试，直接进入最终状态
   setStatus(ItemStatus.OVER, `重试${context.retryCount}次后仍然失败`)
   await item.updateHeight()
-  item.loaded = true
+  item.finished = true
   // #endif
   // #ifndef MP-WEIXIN || MP-ALIPAY
   if (retryCount > 0) {
@@ -187,7 +187,7 @@ async function handleFailureRetry() {
     // 重试次数用完，结束处理
     setStatus(ItemStatus.OVER, `重试${context.retryCount}次后仍然失败`)
     await item.updateHeight()
-    item.loaded = true
+    item.finished = true
   }
   // #endif
 }
@@ -199,8 +199,8 @@ async function handleFailureFinal() {
   // 微信小程序不支持重试，直接进入失败状态
   setStatus(ItemStatus.FAIL, '原始内容加载失败')
   await item.updateHeight()
-  item.loaded = true
-  console.log('handleFailureFinal', item.loaded, item)
+  item.finished = true
+  console.log('handleFailureFinal', item.finished, item)
 
   // #endif
   // #ifndef MP-WEIXIN || MP-ALIPAY
@@ -211,7 +211,7 @@ async function handleFailureFinal() {
     // 进入占位图片阶段
     setStatus(ItemStatus.FAIL, '原始内容加载失败')
     await item.updateHeight()
-    item.loaded = true
+    item.finished = true
   }
   // #endif
 }
@@ -228,7 +228,7 @@ async function loaded(event?: any) {
   if (item.loadSuccess) {
     setStatus(ItemStatus.SUCCESS)
     await item.updateHeight()
-    item.loaded = true
+    item.finished = true
     // if (!item.height || item.heightError) {
     //   console.warn('高度异常-b，但仍标记为已加载', item.height, item) // 如果高度有问题，单独处理
     // }
@@ -267,7 +267,7 @@ async function onPlaceholderLoad() {
   await new Promise((resolve) => setTimeout(resolve, 100))
   // #endif
   await item.updateHeight()
-  item.loaded = true
+  item.finished = true
 }
 
 /**
@@ -278,7 +278,7 @@ async function onPlaceholderError() {
   setStatus(ItemStatus.OVER, '占位图片也加载失败')
   // 最后显示最终兜底方案结束处理
   await item.updateHeight()
-  item.loaded = true
+  item.finished = true
 }
 
 /**
@@ -313,7 +313,7 @@ async function updateHeight(flag = false) {
     }
     // 移除已处理的项目
     if (flag) {
-      item.loaded = true
+      item.finished = true
     }
   } catch (error) {
     // 查询失败时静默处理，避免报错
@@ -323,7 +323,7 @@ async function updateHeight(flag = false) {
     // void error
     // 移除已处理的项目
     if (flag) {
-      item.loaded = true
+      item.finished = true
     }
   }
 }
@@ -333,7 +333,7 @@ async function updateHeight(flag = false) {
  */
 async function refreshImage(isReset = true) {
   // 重新加载图片，重置所有错误状态
-  item.loaded = false
+  item.finished = false
   item.loadSuccess = false
   item.heightError = false
   slotId.value = uuid()

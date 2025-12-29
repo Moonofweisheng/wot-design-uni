@@ -355,7 +355,7 @@ async function waitItemLoaded(item: WaterfallItemInfo) {
 
   return new Promise<void>((resolve, reject) => {
     const stop = watch(
-      () => item.loaded,
+      () => item.finished,
       (v) => {
         if (v) {
           stop()
@@ -432,7 +432,7 @@ async function processQueue() {
     while (pendingItems.length > 0) {
       const item = pendingItems[0] // 取队列第一个项目
       // 检查项目是否已加载
-      if (!item.loaded) {
+      if (!item.finished) {
         console.log('pendingItems', pendingItems)
         await waitItemLoaded(item)
       }
@@ -440,7 +440,7 @@ async function processQueue() {
       if (!isActive.value) {
         setTimeout(() => {
           pendingItems.forEach((item) => {
-            item.loaded = false
+            item.finished = false
             item.heightError = false
           })
           // 页面失活，兜底清理
@@ -523,7 +523,7 @@ function resetItemsForReflow() {
 
   // 重置项目状态
   items.forEach((item) => {
-    item.loaded = false
+    item.finished = false
     item.updateHeight(true)
   })
 }
@@ -623,7 +623,7 @@ watch(
       isLayoutInterrupted.value = true
       setTimeout(() => {
         pendingItems.forEach((item) => {
-          item.loaded = false
+          item.finished = false
           item.heightError = false
         })
         // 页面失活，兜底清理

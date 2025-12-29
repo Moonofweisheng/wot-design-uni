@@ -88,9 +88,9 @@ export interface WaterfallItemExpose {
  */
 export interface WaterfallItemInfo {
   /**
-   * 是否加载完成（图片等资源）
+   * 是否处理完成（包括成功、失败、超时等所有终态）
    */
-  loaded: boolean
+  finished: boolean
   /**
    * 是否加载成功
    */
