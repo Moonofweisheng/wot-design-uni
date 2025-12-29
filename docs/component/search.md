@@ -70,6 +70,12 @@ function change({ value }) {
 ```html
 <wd-search hide-cancel disabled />
 ```
+可以监听禁用状态下的点击事件。
+
+```html
+<wd-search disabled @click="handleDisabledClick" />
+```
+
 
 ## 自定义左侧插槽
 
@@ -170,6 +176,7 @@ function changeSearchType({ item, index }) {
 | clear    | 监听输入框清空按钮事件     | -           | -        |
 | cancel   | 监听输入框右侧文本点击事件 | `{ value }` | -        |
 | change   | 监听输入框内容变化事件     | `{ value }` | -        |
+| click    | 禁用状态下点击事件         | -           |  $LOWEST_VERSION$       |
 
 ## Slots
 
