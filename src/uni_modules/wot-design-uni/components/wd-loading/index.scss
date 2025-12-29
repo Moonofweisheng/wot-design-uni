@@ -12,9 +12,7 @@
   @include e(body) {
     width: 100%;
     height: 100%;
-    animation: wd-rotate 0.8s linear infinite;
-    animation-duration: 2s;
-
+    animation: wd-rotate $-loading-duration linear infinite;
   }
   @include e(svg) {
     width: 100%;
