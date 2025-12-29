@@ -18,21 +18,7 @@ export default {
  * 3. 根据父组件计算的位置进行定位
  * 4. 提供加载完成回调给内容组件
  */
-import {
-  computed,
-  getCurrentInstance,
-  inject,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  shallowReactive,
-  shallowReadonly,
-  watch,
-  shallowRef,
-  toRef,
-  type Ref
-} from 'vue'
+import { computed, getCurrentInstance, inject, nextTick, onBeforeUnmount, onMounted, ref, shallowReactive, watch, toRef, type Ref } from 'vue'
 import { getRect, uuid } from '../common/util'
 import { useDelayTask } from '../composables'
 import type { WaterfallItemExpose, WaterfallItemInfo, WaterfallItemProps, WaterfallItemSlots } from './types'
@@ -66,10 +52,10 @@ if (!context) {
 const itemId = `wd-waterfall-item-${uuid()}`
 const slotId = ref(uuid())
 
-const currWidth = ref(props.width || 320)
-const currHeight = ref(props.height || 240)
+const itemWidth = ref(props.width || 320)
+const itemHeight = ref(props.height || 240)
 
-const ratio = computed(() => currHeight.value / currWidth.value)
+const aspectRatio = computed(() => itemHeight.value / itemWidth.value)
 // 图片加载重试次数
 let retryCount = context?.retryCount ?? 0
 
@@ -119,11 +105,11 @@ const item = shallowReactive<WaterfallItemInfo>({
   refreshImage
 })
 
-let overtime = false
+let isTimeout = false
 
-const timeoutTask = useDelayTask(async () => {
-  if (!item.finished && !overtime) {
-    overtime = true
+const loadTimeoutTask = useDelayTask(async () => {
+  if (!item.finished && !isTimeout) {
+    isTimeout = true
     // 根据模式决定超时后的处理方式
     switch (context.errorStrategy) {
       case 'default':
@@ -148,7 +134,7 @@ const timeoutTask = useDelayTask(async () => {
 }, context?.maxWait)
 
 // 如果是已知高度
-async function onLoadKnownSize() {
+async function handleKnownSizeLoad() {
   await item.updateHeight()
   item.finished = true
   // 如果高度有问题，单独处理
@@ -158,7 +144,7 @@ async function onLoadKnownSize() {
   // todo 如果已知高度也加载失败了呢
 }
 // 模式1：默认模式 - 失败就结束
-async function handleFailureNone() {
+async function handleDefaultFailure() {
   setStatus(ItemStatus.OVER, '加载失败')
   await item.updateHeight()
   item.finished = true
@@ -193,14 +179,13 @@ async function handleFailureRetry() {
 }
 
 // 模式4：完整模式 - 原有的三层处理机制
-async function handleFailureFinal() {
-  if (overtime) return // 已超时，忽略后续加载事件
+async function handleRetryHardFailure() {
+  if (isTimeout) return // 已超时，忽略后续加载事件
   // #ifdef MP-WEIXIN || MP-ALIPAY
   // 微信小程序不支持重试，直接进入失败状态
   setStatus(ItemStatus.FAIL, '原始内容加载失败')
   await item.updateHeight()
   item.finished = true
-  console.log('handleFailureFinal', item.finished, item)
 
   // #endif
   // #ifndef MP-WEIXIN || MP-ALIPAY
@@ -223,7 +208,7 @@ async function handleFailureFinal() {
 async function loaded(event?: any) {
   // console.log('event', event)
   if (props.width && props.height) return
-  if (overtime) return // 已超时，忽略后续加载事件
+  if (isTimeout) return // 已超时，忽略后续加载事件
   item.loadSuccess = event?.type === 'load' || event?.type === 'onLoad'
   if (item.loadSuccess) {
     setStatus(ItemStatus.SUCCESS)
@@ -238,7 +223,7 @@ async function loaded(event?: any) {
   switch (context.errorStrategy) {
     case 'default':
       // 默认模式：失败就结束，使用默认高度
-      await handleFailureNone()
+      await handleDefaultFailure()
       break
 
     case 'placeholder':
@@ -252,7 +237,7 @@ async function loaded(event?: any) {
 
     case 'retryHard':
       // 完整模式：重试 + 占位图 + 兜底
-      await handleFailureFinal()
+      await handleRetryHardFailure()
       break
   }
 }
@@ -261,8 +246,8 @@ async function loaded(event?: any) {
  * 第二层：占位图片加载成功
  * 支付宝小程序未解决的bug: 其他项加载太快，会导致这个方法不执行
  */
-async function onPlaceholderLoad() {
-  if (overtime) return // 已超时，忽略后续加载事件
+async function onFallbackLoad() {
+  if (isTimeout) return // 已超时，忽略后续加载事件
   // #ifdef MP-WEIXIN || MP-ALIPAY
   await new Promise((resolve) => setTimeout(resolve, 100))
   // #endif
@@ -273,8 +258,8 @@ async function onPlaceholderLoad() {
 /**
  * 第二层失败：占位图片也加载失败，进入第三层（文字兜底）
  */
-async function onPlaceholderError() {
-  if (overtime) return // 已超时，忽略后续加载事件
+async function onFallbackError() {
+  if (isTimeout) return // 已超时，忽略后续加载事件
   setStatus(ItemStatus.OVER, '占位图片也加载失败')
   // 最后显示最终兜底方案结束处理
   await item.updateHeight()
@@ -288,7 +273,7 @@ async function onPlaceholderError() {
 
 async function updateHeight(flag = false) {
   try {
-    // console.log('context.removalProcessing', context.removalProcessing)
+    // console.log('context.isProcessingRemoval', context.isProcessingRemoval)
     // if (context.isLayoutInterrupted) return
     // console.log('触发了获取dom信息')
     await nextTick() // 很重要不然会导致获取高度错误
@@ -340,8 +325,8 @@ async function refreshImage(isReset = true) {
 
   // 重新启动超时计时器 todo 这里应该打开吗？需要使用参数控制是否重新启动定时器吗？
   if (isReset && context?.maxWait) {
-    overtime = false
-    timeoutTask.run()
+    isTimeout = false
+    loadTimeoutTask.run()
   }
 }
 
@@ -356,11 +341,11 @@ onMounted(async () => {
   if (props.width && props.height) {
     // 解决小程序app的bug
     setTimeout(() => {
-      onLoadKnownSize()
+      handleKnownSizeLoad()
     }, 16)
   }
   if (context?.maxWait) {
-    timeoutTask.run()
+    loadTimeoutTask.run()
   }
 })
 
@@ -373,19 +358,19 @@ onBeforeUnmount(() => {
 
 // ==================== 动画效果管理 ====================
 
-const laterVisible = ref(false)
+const isVisibleDelayed = ref(false)
 
-const visibleTask = useDelayTask(() => {
-  laterVisible.value = true
+const visibilityDelayTask = useDelayTask(() => {
+  isVisibleDelayed.value = true
 }, 100)
 
 watch(
   () => item.visible,
   () => {
     if (item.visible) {
-      visibleTask.run()
+      visibilityDelayTask.run()
     } else {
-      laterVisible.value = false
+      isVisibleDelayed.value = false
     }
   }
 )
@@ -400,7 +385,7 @@ const waterfallItemStyle = computed(() => {
   return {
     width: `${context.columnWidth}px`,
     transform: `translate3d(${item.left}px,${item.top}px,0px)`,
-    transition: laterVisible.value
+    transition: isVisibleDelayed.value
       ? 'opacity var(--wd-waterfall-duration) ease-out,transform var(--wd-waterfall-duration) ease-out' // 包含位置动画，使用缓出效果
       : 'opacity var(--wd-waterfall-duration) ease-out' // 仅包含透明度动画
   }
@@ -419,11 +404,11 @@ const waterfallItemStyle = computed(() => {
         :key="slotId"
         :loaded="loaded"
         :column-width="context.columnWidth"
-        :image-height="context.columnWidth * ratio"
+        :image-height="context.columnWidth * aspectRatio"
         :status="errorState.status"
         :message="errorState.message"
-        :onPlaceholderLoad="onPlaceholderLoad"
-        :onPlaceholderError="onPlaceholderError"
+        :onFallbackLoad="onFallbackLoad"
+        :onFallbackError="onFallbackError"
       />
     </view>
     <!-- #ifdef MP-DINGTALK -->

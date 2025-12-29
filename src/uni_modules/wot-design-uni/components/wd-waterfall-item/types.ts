@@ -56,8 +56,8 @@ export interface WaterfallItemSlots {
    * @param imageHeight 图片高度
    * @param status 错误状态
    * @param message 错误信息
-   * @param onPlaceholderLoad 占位符加载回调
-   * @param onPlaceholderError 占位符错误回调
+   * @param onFallbackLoad 降级图片加载回调
+   * @param onFallbackError 降级图片错误回调
    */
   default(props: {
     key: string
@@ -66,8 +66,8 @@ export interface WaterfallItemSlots {
     imageHeight: number
     status: Status
     message: string
-    onPlaceholderLoad: () => void
-    onPlaceholderError: () => void
+    onFallbackLoad: () => void
+    onFallbackError: () => void
   }): any
 }
 
