@@ -145,7 +145,7 @@ const timeoutTask = useDelayTask(async () => {
     await item.updateHeight()
     item.finished = true
   }
-}, context?.maxWait || 3000)
+}, context?.maxWait)
 
 // 如果是已知高度
 async function onLoadKnownSize() {
