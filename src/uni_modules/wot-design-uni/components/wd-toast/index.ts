@@ -15,6 +15,10 @@ export const defaultOptions: ToastOptions = {
 
 const None = Symbol('None')
 
+// 使用map存储定时器，避免先前的定时器覆盖后续的定时器
+// 如果同一个 selector 多次调用 toast，则会清除之前的定时器，重新计时
+const toastTimerMap = new Map<string, ReturnType<typeof setTimeout>>()
+
 export function useToast(selector: string = ''): Toast {
   const toastOptionKey = getToastOptionKey(selector)
   const toastOption = inject(toastOptionKey, ref<ToastOptions | typeof None>(None)) // toast选项
@@ -22,7 +26,6 @@ export function useToast(selector: string = ''): Toast {
     toastOption.value = defaultOptions
     provide(toastOptionKey, toastOption)
   }
-  let timer: ReturnType<typeof setTimeout> | null = null
 
   const createMethod = (toastOptions: ToastOptions) => {
     return (options: ToastOptions | string) => {
@@ -36,12 +39,17 @@ export function useToast(selector: string = ''): Toast {
       show: true
     }) as ToastOptions
     // 开始渲染，并在 duration ms之后执行清除
-    timer && clearTimeout(timer)
-    if (toastOption.value.duration && toastOption.value.duration > 0) {
-      timer = setTimeout(() => {
-        timer && clearTimeout(timer)
+    const prevTimer = toastTimerMap.get(toastOptionKey)
+    if (prevTimer) {
+      clearTimeout(prevTimer)
+      toastTimerMap.delete(toastOptionKey)
+    }
+    if (options.duration && options.duration > 0) {
+      const nextTimer = setTimeout(() => {
+        toastTimerMap.delete(toastOptionKey)
         close()
       }, options.duration)
+      toastTimerMap.set(toastOptionKey, nextTimer)
     }
   }
 
@@ -59,6 +67,11 @@ export function useToast(selector: string = ''): Toast {
   const info = createMethod({ iconName: 'info' })
 
   const close = () => {
+    const timer = toastTimerMap.get(toastOptionKey)
+    if (timer) {
+      clearTimeout(timer)
+      toastTimerMap.delete(toastOptionKey)
+    }
     toastOption.value = { show: false }
   }
   return {
