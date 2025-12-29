@@ -1344,10 +1344,10 @@
           "name": "waterfall-demo2",
           "style": {
             // #ifdef MP
-            "navigationBarTitleText": "完整示例",
+            "navigationBarTitleText": "基础使用2",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "完整示例"
+            "navigationBarTitleText": "基础使用2"
             // #endif
           }
         },
@@ -1356,10 +1356,10 @@
           "name": "waterfall-demo3",
           "style": {
             // #ifdef MP
-            "navigationBarTitleText": "异常加载策略示例",
+            "navigationBarTitleText": "列数切换示例",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "异常加载策略示例"
+            "navigationBarTitleText": "列数切换示例"
             // #endif
           }
         },
@@ -1380,10 +1380,10 @@
           "name": "waterfall-demo5",
           "style": {
             // #ifdef MP
-            "navigationBarTitleText": "最大等待时间",
+            "navigationBarTitleText": "Mock 加载成功/失败演示",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "最大等待时间"
+            "navigationBarTitleText": "Mock 加载成功/失败演示"
             // #endif
           }
         },
@@ -1401,6 +1401,7 @@
             "navigationBarTitleText": "%tour-title%"
             // #endif
           }
+        }
       ]
     }
   ],

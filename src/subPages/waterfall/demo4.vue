@@ -3,7 +3,8 @@ import { onMounted, ref } from 'vue'
 import { onReachBottom } from '@dcloudio/uni-app'
 
 import NavTab from './components/NavTab.vue'
-import { mockImages, text } from './utils/mock'
+import MockImage from './components/MockImage.vue'
+import { mockImages, text, random } from './utils/mock'
 
 interface ListItem {
   title: string
@@ -17,7 +18,7 @@ interface ListItem {
 
 const list = ref<ListItem[]>([])
 let uuid = 0
-const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
+
 function getData() {
   return new Promise<ListItem[]>((resolve) => {
     const data = Array(20)
@@ -56,7 +57,15 @@ onReachBottom(async () => {
       <wd-waterfall-item v-for="(item, index) in list" :order="index" :key="item.id" :width="item.img.width" :height="item.img.height">
         <template #default="{ imageHeight }">
           <view class="waterfall-item">
-            <image class="waterfall-image" mode="aspectFill" :style="{ height: `${imageHeight}px` }" :src="item.url" />
+            <view class="image-container" :style="{ height: `${imageHeight}px` }">
+              <MockImage
+                :url="item.url"
+                :meta="{ width: item.img.width, height: item.img.height }"
+                mode="aspectFill"
+                :error-rate="0.2"
+                :load-delay="{ min: 100, max: 500 }"
+              />
+            </view>
             <view class="waterfall-content">
               {{ item.title }}
             </view>
@@ -86,9 +95,9 @@ onReachBottom(async () => {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.waterfall-image {
+.image-container {
   width: 100%;
-  padding-top: 0;
+  overflow: hidden;
 }
 
 .waterfall-content {

@@ -257,7 +257,9 @@ function clearAll() {
       <wd-waterfall-item v-for="(item, index) in list" :key="item.id" :order="index" :id="item.id">
         <template #default="{ loaded, status, onFallbackLoad, onFallbackError, message }">
           <view class="waterfall-item">
-            <!-- bug 这里用v-if,删除的item的时候会触发正儿for循环的模板重新渲染 -->
+            <!-- !!! 由于框架原因，微信小程序、支付宝小程序、钉钉小程序等平台不支持动态增删item，H5和APP平台支持 -->
+            <!-- !!! 注意由于微信小程序 支付宝小程序  钉钉小程序等for循环中同时使用slot和v-if还有异常问题，这里在slot中用v-if的，删除的item的时候会触发for循环的模板重新渲染 -->
+            <!-- !!! 参考uniap的仓库issues：https://github.com/dcloudio/uni-app/issues/4847 -->
             <image v-if="status === 'success'" mode="widthFix" class="waterfall-image" :src="item.url" @load="loaded" @error="loaded" />
             <!--占位图片 -->
             <view v-else-if="status === 'fail'" class="fallback-container">
@@ -267,7 +269,6 @@ function clearAll() {
             <view v-else class="final-fallback">
               {{ message || '图片加载失败' }}
             </view>
-
             <view class="item-content">
               {{ item.title }}
             </view>
