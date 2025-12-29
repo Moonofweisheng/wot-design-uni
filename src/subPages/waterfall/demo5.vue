@@ -39,7 +39,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <view title="最大等待时间">
+  <view>
     <wd-waterfall class="waterfall-container" :max-wait="1000" @load-end="loadEnd">
       <wd-waterfall-item v-for="(item, index) in list" :key="item.id" :order="index">
         <template #default="{ loaded, status }">
@@ -118,7 +118,7 @@ onMounted(async () => {
   "name": "waterfall-demo5",
   "layout": "default",
   "style": {
-    "navigationBarTitleText": "demo5"
+    "navigationBarTitleText": "最大等待时间"
   }
 }
 </route>

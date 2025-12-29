@@ -99,7 +99,7 @@ onReachBottom(async () => {
   "name": "waterfall-demo1",
   "layout": "default",
   "style": {
-    "navigationBarTitleText": "demo1"
+    "navigationBarTitleText": "基础使用"
   }
 }
 </route>

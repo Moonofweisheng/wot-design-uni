@@ -353,7 +353,7 @@ function clearAll() {
   "name": "waterfall-demo2",
   "layout": "default",
   "style": {
-    "navigationBarTitleText": "demo2",
+    "navigationBarTitleText": "完整示例",
     "enablePullDownRefresh ": true
   }
 }

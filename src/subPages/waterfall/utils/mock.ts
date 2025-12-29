@@ -3,7 +3,6 @@ export const random = (min: number, max: number) => Math.floor(Math.random() * (
 export const mockImages = [
   'https://wot-ui.cn/assets/redpanda.jpg',
   'https://wot-ui.cn/assets/capybara.jpg',
-  'https://wot-ui.cnxxx/assets/capybaraxxx.jpg',
   'https://wot-ui.cn/assets/panda.jpg',
   'https://wot-ui.cn/assets/moon.jpg',
   'https://wot-ui.cn/assets/meng.jpg'

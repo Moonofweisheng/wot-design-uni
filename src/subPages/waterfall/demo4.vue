@@ -107,7 +107,7 @@ onReachBottom(async () => {
   "name": "waterfall-known",
   "layout": "default",
   "style": {
-    "navigationBarTitleText": "demo4"
+    "navigationBarTitleText": "已知高度示例"
   }
 }
 </route>

@@ -1332,10 +1332,10 @@
           "name": "waterfall-demo1",
           "style": {
             // #ifdef MP
-            "navigationBarTitleText": "demo1",
+            "navigationBarTitleText": "基础使用",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "demo1"
+            "navigationBarTitleText": "基础使用"
             // #endif
           }
         },
@@ -1344,10 +1344,10 @@
           "name": "waterfall-demo2",
           "style": {
             // #ifdef MP
-            "navigationBarTitleText": "demo2",
+            "navigationBarTitleText": "完整示例",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "demo2"
+            "navigationBarTitleText": "完整示例"
             // #endif
           }
         },
@@ -1356,10 +1356,10 @@
           "name": "waterfall-demo3",
           "style": {
             // #ifdef MP
-            "navigationBarTitleText": "demo3",
+            "navigationBarTitleText": "异常加载策略示例",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "demo3"
+            "navigationBarTitleText": "异常加载策略示例"
             // #endif
           }
         },
@@ -1368,10 +1368,10 @@
           "name": "waterfall-known",
           "style": {
             // #ifdef MP
-            "navigationBarTitleText": "demo3",
+            "navigationBarTitleText": "已知高度示例",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "demo3"
+            "navigationBarTitleText": "已知高度示例"
             // #endif
           }
         },
@@ -1380,10 +1380,10 @@
           "name": "waterfall-demo5",
           "style": {
             // #ifdef MP
-            "navigationBarTitleText": "demo5",
+            "navigationBarTitleText": "最大等待时间",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "demo5"
+            "navigationBarTitleText": "最大等待时间"
             // #endif
           }
         },

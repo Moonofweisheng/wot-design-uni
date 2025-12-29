@@ -92,7 +92,7 @@ onReachBottom(async () => {
   "name": "waterfall-demo3",
   "layout": "default",
   "style": {
-    "navigationBarTitleText": "demo3",
+    "navigationBarTitleText": "异常加载策略示例",
     "enablePullDownRefresh ": true
   }
 }
