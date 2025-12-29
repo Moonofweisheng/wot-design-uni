@@ -406,7 +406,7 @@ const list = computed(() => [
       },
       {
         id: 'waterfall',
-        name: '瀑布流'
+        name: t('waterfall-pu-bu-liu')
       }
     ]
   }
