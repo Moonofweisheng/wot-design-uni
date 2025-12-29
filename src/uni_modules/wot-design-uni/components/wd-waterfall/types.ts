@@ -126,13 +126,15 @@ export interface WaterfallEmits {
  */
 export interface WaterfallExpose {
   /**
-   * 完整重排（重置所有状态）
+   * 重新布局（保留现有数据，重新计算位置）
+   * 使用场景：列数、列间距、行间距等布局参数变化时
    */
   reflow: () => void
   /**
-   * 刷新重排（重置所有状态，包括数据）
+   * 清空并重置（清除所有数据，准备接收新数据）
+   * 使用场景：下拉刷新、切换数据源等需要完全重新加载的情况
    */
-  refreshReflow: () => void
+  reset: () => void
   /**
    * 注册加载完成回调
    */
@@ -190,7 +192,7 @@ export interface WaterfallContext {
   /**
    * 是否在删除状态
    */
-  removalProcessing: boolean
+  isProcessingRemoval: boolean
 }
 
 /**

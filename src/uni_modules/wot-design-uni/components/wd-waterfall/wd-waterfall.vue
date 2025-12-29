@@ -107,10 +107,10 @@ const isLayoutInterrupted = ref(false)
 // 队列处理状态通过 queueProcessing 变量管理，删除操作等待队列完成
 
 /**
- * 加载完成后的回调函数队列
- * 当所有项目加载完成时，会依次执行这些回调
+ * 空闲状态回调函数队列
+ * 当所有项目加载完成（进入空闲状态）时，会依次执行这些回调
  */
-let loadedHandlers: (() => void)[] = []
+let idleCallbacks: (() => void)[] = []
 
 /**
  * 注册加载完成回调
@@ -123,8 +123,8 @@ function loadDone(handler: () => void) {
       handler()
     } else {
       // 如果正在加载中，将回调加入队列
-      if (!loadedHandlers.includes(handler)) {
-        loadedHandlers.push(handler)
+      if (!idleCallbacks.includes(handler)) {
+        idleCallbacks.push(handler)
       }
     }
   })
@@ -139,16 +139,16 @@ function loadDone(handler: () => void) {
 const items: WaterfallItemInfo[] = []
 
 /**
- * 待排版项目队列
+ * 布局队列
  * 存储需要排版的项目，按顺序排版
  */
-const pendingItems: WaterfallItemInfo[] = []
+const layoutQueue: WaterfallItemInfo[] = []
 
 /**
- * 待删除项目队列
+ * 删除队列
  * 存储需要删除的项目，在排版队列为空时执行删除
  */
-const pendingRemovalItems: WaterfallItemInfo[] = []
+const removalQueue: WaterfallItemInfo[] = []
 
 /**
  * 列高度状态管理
@@ -161,10 +161,10 @@ const columns = reactive<{ colIndex: number; height: number }[]>([])
  * 检查所有项目的加载状态，更新整体加载状态并触发相应事件
  */
 function updateLoadStatus() {
-  if (pendingItems.length === 0) {
+  if (layoutQueue.length === 0) {
     // 执行所有等待的回调函数
-    loadedHandlers.forEach((handler) => handler())
-    loadedHandlers = []
+    idleCallbacks.forEach((handler) => handler())
+    idleCallbacks = []
     loadStatus.value = 'idle'
     emit('loadEnd') // 触发加载完成事件
   } else {
@@ -205,7 +205,7 @@ function getMinColumn() {
  */
 function addItem(item: WaterfallItemInfo) {
   // 直接加入待排版队列
-  pendingItems.push(item)
+  layoutQueue.push(item)
 
   // 检查是否为插入项目（而非末尾追加）
   const isInsertItem = item.order?.value !== undefined && item.order.value < items.length
@@ -231,25 +231,25 @@ function addItem(item: WaterfallItemInfo) {
  */
 async function removeItem(item: WaterfallItemInfo) {
   // 将项目加入删除队列，等待排版队列为空时执行
-  pendingRemovalItems.push(item)
+  removalQueue.push(item)
 
   // 如果当前没有待排版项目，立即处理删除队列
-  if (pendingItems.length === 0) {
-    processPendingRemovals()
+  if (layoutQueue.length === 0) {
+    processRemovalQueue()
   }
 }
 
 /**
- * 处理待删除项目队列
+ * 处理删除队列
  * 批量执行删除操作并重新计算布局
  */
-function processPendingRemovals() {
-  if (pendingRemovalItems.length === 0 || removalProcessing.value) return
+function processRemovalQueue() {
+  if (removalQueue.length === 0 || isProcessingRemoval.value) return
 
-  removalProcessing.value = true
+  isProcessingRemoval.value = true
 
   // 批量删除所有待删除项目
-  pendingRemovalItems.forEach((item) => {
+  removalQueue.forEach((item) => {
     const arrayIndex = items.indexOf(item)
     if (arrayIndex !== -1) {
       items.splice(arrayIndex, 1)
@@ -257,7 +257,7 @@ function processPendingRemovals() {
   })
 
   // 清空删除队列
-  pendingRemovalItems.length = 0
+  removalQueue.length = 0
   // 重新计算布局
   recalculateItemsAfterRemoval()
 }
@@ -271,10 +271,10 @@ function recalculateItemsAfterRemoval() {
     containerHeight.value = 0
     initColumns()
     // 释放删除锁
-    removalProcessing.value = false
+    isProcessingRemoval.value = false
     // 🔥 删除完成后检查是否需要加载更多
     nextTick(() => {
-      checkAndNotifyLoadMore()
+      checkAndTriggerLoadMore()
     })
     return
   }
@@ -312,15 +312,15 @@ function recalculateItemsAfterRemoval() {
   containerHeight.value = newContainerHeight
 
   // 释放删除锁
-  removalProcessing.value = false
+  isProcessingRemoval.value = false
 
   // 🔥 删除完成后检查是否需要加载更多
   nextTick(() => {
-    checkAndNotifyLoadMore()
+    checkAndTriggerLoadMore()
   })
 
   // 检查是否有待处理的排版队列
-  if (pendingItems.length > 0) {
+  if (layoutQueue.length > 0) {
     processQueue()
   }
 }
@@ -333,7 +333,7 @@ function onItemLoad(item: WaterfallItemInfo) {
   void item.height
 }
 
-const liveTasks = new Map<
+const pendingWatchers = new Map<
   WaterfallItemInfo /* item.id */,
   {
     resolve: () => void
@@ -344,10 +344,10 @@ const liveTasks = new Map<
 
 async function waitItemLoaded(item: WaterfallItemInfo) {
   const key = item
-  if (liveTasks.has(key)) {
+  if (pendingWatchers.has(key)) {
     // 复用旧 Promise
     return new Promise<void>((resolve, reject) => {
-      const old = liveTasks.get(key)!
+      const old = pendingWatchers.get(key)!
       old.resolve = resolve // 覆盖，防止旧的回调被调用
       old.reject = reject
     })
@@ -359,14 +359,14 @@ async function waitItemLoaded(item: WaterfallItemInfo) {
       (v) => {
         if (v) {
           stop()
-          liveTasks.delete(key)
+          pendingWatchers.delete(key)
           resolve()
         }
       },
       { immediate: true }
     )
 
-    liveTasks.set(key, { resolve, reject, stop })
+    pendingWatchers.set(key, { resolve, reject, stop })
   })
 }
 
@@ -407,48 +407,47 @@ function fullReflowAfterInsert() {
   containerHeight.value = newContainerHeight
 }
 /**
- * 队列状态
+ * 布局处理状态
  */
-let queueProcessing = false
+let isProcessingLayout = false
 
 /**
  * 删除处理状态
  */
-const removalProcessing = ref(false)
+const isProcessingRemoval = ref(false)
 
 /**
  * 处理排版队列
- * 从 pendingItems 队列中取出项目进行排版
+ * 从 layoutQueue 队列中取出项目进行排版
  */
 
 async function processQueue() {
   try {
-    if (queueProcessing || removalProcessing.value) return
-    queueProcessing = true
+    if (isProcessingLayout || isProcessingRemoval.value) return
+    isProcessingLayout = true
     updateLoadStatus()
-    if (pendingItems.length === 0) return
+    if (layoutQueue.length === 0) return
 
     // 处理队列中的项目
-    while (pendingItems.length > 0) {
-      const item = pendingItems[0] // 取队列第一个项目
+    while (layoutQueue.length > 0) {
+      const item = layoutQueue[0] // 取队列第一个项目
       // 检查项目是否已加载
       if (!item.finished) {
-        console.log('pendingItems', pendingItems)
         await waitItemLoaded(item)
       }
 
       if (!isActive.value) {
         setTimeout(() => {
-          pendingItems.forEach((item) => {
+          layoutQueue.forEach((item) => {
             item.finished = false
             item.heightError = false
           })
           // 页面失活，兜底清理
-          liveTasks.forEach(({ reject, stop }) => {
+          pendingWatchers.forEach(({ reject, stop }) => {
             reject(new Error('页面失活，排版中断，错误码1001'))
             stop()
           })
-          liveTasks.clear()
+          pendingWatchers.clear()
         }, 0)
         return
       }
@@ -456,11 +455,11 @@ async function processQueue() {
       if (item.heightError) {
         setTimeout(() => {
           // 页面不可见，统一清理 watch 和 拒绝 promise 兜底清理：全部 reject + stop
-          liveTasks.forEach(({ reject, stop }) => {
+          pendingWatchers.forEach(({ reject, stop }) => {
             reject(new Error('高度异常，排版中断，错误码1002'))
             stop()
           })
-          liveTasks.clear()
+          pendingWatchers.clear()
         }, 0)
         return
       }
@@ -481,39 +480,39 @@ async function processQueue() {
       // 设置可见状态
       item.visible = true
       containerHeight.value = Math.max(...columns.map((col) => col.height), 0)
-      pendingItems.shift()
+      layoutQueue.shift()
     }
     // 全部排完后，兜底清理残余 watch
-    liveTasks.forEach(({ reject, stop }) => {
+    pendingWatchers.forEach(({ reject, stop }) => {
       reject(new Error('未知错误，排版中断，错误码1003'))
       stop()
     })
-    liveTasks.clear()
+    pendingWatchers.clear()
     // 所有项目处理完成后，清除全局重排状态
-    if (pendingItems.length === 0) {
+    if (layoutQueue.length === 0) {
       isReflowing.value = false
     }
     // 更新加载状态
     updateLoadStatus()
 
     // 🔥 排版完成后检查是否需要加载更多
-    if (pendingItems.length === 0) {
+    if (layoutQueue.length === 0) {
       nextTick(() => {
-        checkAndNotifyLoadMore()
+        checkAndTriggerLoadMore()
       })
     }
 
     setTimeout(() => {
       // 处理待删除项目队列
-      if (pendingRemovalItems.length > 0) {
-        processPendingRemovals()
+      if (removalQueue.length > 0) {
+        processRemovalQueue()
       }
     }, 0)
   } catch (error) {
     isLayoutInterrupted.value = true
     // console.error('error', error)
   } finally {
-    queueProcessing = false
+    isProcessingLayout = false
   }
 }
 
@@ -528,40 +527,41 @@ function resetItemsForReflow() {
   })
 }
 /**
- * 完整重排函数
- * 重置所有状态，重新排版所有项目
- * 主要用于: 当列数、列间距、行间距发生变化时，需要完整重新排版
+ * 重新布局（保留现有数据）
+ * 重新计算并排版所有现有项目的位置
+ * 使用场景：列数、列间距、行间距等布局参数变化时
  */
 const reflow = debounce(async () => {
   // 重置列
   initColumns()
 
   // 重新构建待排版队列
-  pendingItems.length = 0
+  layoutQueue.length = 0
 
   // 重置所有项目状态
   resetItemsForReflow()
 
   // 将所有项目加入待排版队列
-  pendingItems.push(...items)
+  layoutQueue.push(...items)
 
   // 开始处理队列
   processQueue()
 }, 16)
 
 /**
- * 刷新重排
- * 主要用于下拉刷新，基础容器参数没变化的情况
+ * 清空并重置（清除所有数据）
+ * 清空所有项目数据和队列，准备接收全新数据
+ * 使用场景：下拉刷新、切换数据源等需要完全重新加载的情况
  */
-async function refreshReflow() {
+async function reset() {
   // 重置列
   initColumns()
 
   // 重新构建待排版队列
-  pendingItems.length = 0
+  layoutQueue.length = 0
   // 清空删除队列
-  pendingRemovalItems.length = 0
-  // 如果是刷新数据，items要重置
+  removalQueue.length = 0
+  // 清空所有项目数据
   items.length = 0
 }
 
@@ -569,7 +569,7 @@ async function refreshReflow() {
 
 /**
  * 监听布局相关属性变化
- * 当列数、列间距、行间距发生变化时，需要完整重新排版
+ * 当列数、列间距、行间距发生变化时，重新计算布局
  */
 watch([() => props.columns, () => props.columnGap, () => props.rowGap], () => {
   setTimeout(() => {
@@ -584,24 +584,24 @@ watch([() => props.columns, () => props.columnGap, () => props.rowGap], () => {
 watch(
   () => isActive.value,
   (newActive, oldActive) => {
-    if (newActive && !oldActive && pendingItems.length > 0) {
+    if (newActive && !oldActive && layoutQueue.length > 0) {
       isLayoutInterrupted.value = false // 重置中断信号
       // 必须要用 nextTick
       nextTick(() => {
-        // pendingItems.forEach((item) => {})
+        // layoutQueue.forEach((item) => {})
         // #ifdef MP-ALIPAY
         const promise = []
         // #endif
-        for (let i = 0; i < pendingItems.length; i++) {
+        for (let i = 0; i < layoutQueue.length; i++) {
           // #ifdef MP-ALIPAY
-          // 这里不应该执行updateHeight(true)才对呀,为什么可以？
-          promise.push(pendingItems[i].updateHeight(true))
+          // 注意：这里好像不应该执行updateHeight(true)，待检测
+          promise.push(layoutQueue[i].updateHeight(true))
           // #endif
           // #ifndef WEB || MP-ALIPAY
-          pendingItems[i].updateHeight(true)
+          layoutQueue[i].updateHeight(true)
           // #endif
           // #ifdef WEB
-          pendingItems[i].refreshImage()
+          layoutQueue[i].refreshImage()
           // #endif
         }
         // #ifdef MP-ALIPAY
@@ -622,16 +622,16 @@ watch(
     if (!newActive && oldActive) {
       isLayoutInterrupted.value = true
       setTimeout(() => {
-        pendingItems.forEach((item) => {
+        layoutQueue.forEach((item) => {
           item.finished = false
           item.heightError = false
         })
         // 页面失活，兜底清理
-        liveTasks.forEach(({ reject, stop }) => {
+        pendingWatchers.forEach(({ reject, stop }) => {
           reject(new Error('页面失活，排版中断，错误码1000'))
           stop()
         })
-        liveTasks.clear()
+        pendingWatchers.clear()
       }, 0)
     }
   },
@@ -669,7 +669,7 @@ provide(
     errorStrategy: props.errorStrategy, // 错误处理模式
     retryCount: props.retryCount, // 重试次数
     maxWait: props.maxWait, // 最大等待时间
-    removalProcessing // 删除处理中状态（响应式）
+    isProcessingRemoval // 删除处理中状态（响应式）
   })
 )
 
@@ -702,7 +702,7 @@ function shouldLoadMore(buffer = 100): boolean {
  * @param immediate 是否立即执行
  */
 let notifyTimer: ReturnType<typeof setTimeout> | null = null
-function checkAndNotifyLoadMore(immediate = false) {
+function checkAndTriggerLoadMore(immediate = false) {
   // 只在空闲状态下检查
   if (loadStatus.value !== 'idle') {
     return
@@ -716,10 +716,6 @@ function checkAndNotifyLoadMore(immediate = false) {
 
   const check = () => {
     if (shouldLoadMore()) {
-      console.log('🔥 检测到内容不足，通知加载更多', {
-        containerHeight: containerHeight.value,
-        itemsCount: items.length
-      })
       emit('needLoadMore')
     }
   }
@@ -739,7 +735,7 @@ watch(
     // 高度减少时（可能是删除导致）
     if (newHeight < oldHeight && newHeight > 0) {
       nextTick(() => {
-        checkAndNotifyLoadMore()
+        checkAndTriggerLoadMore()
       })
     }
   }
@@ -752,10 +748,10 @@ watch(
  * 父组件可以通过 ref 调用这些方法
  */
 defineExpose<WaterfallExpose>({
-  reflow, // 完整重排（重置所有状态）
-  refreshReflow, // 刷新重排（重置所有状态，包括数据）
+  reflow, // 重新布局（保留现有数据，重新计算位置）
+  reset, // 清空并重置（清除所有数据，准备接收新数据）
   loadDone, // 注册加载完成回调
-  checkAndLoadMore: checkAndNotifyLoadMore, // 🔥 检查并触发加载更多
+  checkAndLoadMore: checkAndTriggerLoadMore, // 检查并触发加载更多
   get loadStatus() {
     return loadStatus.value
   }
