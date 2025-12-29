@@ -600,7 +600,7 @@ watch(
           // #ifndef WEB || MP-ALIPAY
           pendingItems[i].updateHeight(true)
           // #endif
-          // #ifdef WEB || APP-PLUS
+          // #ifdef WEB
           pendingItems[i].refreshImage()
           // #endif
         }
