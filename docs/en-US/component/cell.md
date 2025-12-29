@@ -41,6 +41,17 @@ Cells can be grouped using the `wd-cell-group` component.
 </wd-cell-group>
 ```
 
+## Card Style
+
+Set the `insert` attribute on `wd-cell-group` to display it in card style with rounded corners and side margins.
+
+```html
+<wd-cell-group title="Card Style Group" insert>
+  <wd-cell title="Title" value="Content"></wd-cell>
+  <wd-cell title="Title" value="Content"></wd-cell>
+</wd-cell-group>
+```
+
 ## Custom Content
 
 The cell component provides three slots: default slot, title slot, and icon slot, which can be used to customize the content.
@@ -82,6 +93,17 @@ The `is-link` attribute sets whether the cell is a link. If set to `true`, a rig
 <wd-cell title="Title" value="Content" is-link url="/pages/index/index" link-type="switchTab"></wd-cell>
 ```
 
+## Arrow Direction
+
+The `arrow-direction` attribute controls the direction of the arrow. Available values are `left`, `up`, `down`. The default is right arrow. This attribute only takes effect when `is-link` is `true`.
+
+```html
+<wd-cell title="Up Arrow" is-link arrow-direction="up" />
+<wd-cell title="Down Arrow" is-link arrow-direction="down" />
+<wd-cell title="Left Arrow" is-link arrow-direction="left" />
+<wd-cell title="Default Arrow (Right)" is-link />
+```
+
 ## Vertical Alignment
 
 The `center` attribute sets whether the left and right content of the cell is vertically centered.
@@ -97,6 +119,8 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | title | Group title | string | - | - |
 | value | Group value | string | - | - |
 | border | Whether to show the outer border | boolean | true | - |
+| insert | Whether to display in card style with rounded corners | boolean | false | $LOWEST_VERSION$ |
+| use-slot | Enable custom slots for group | boolean | false | - |
 
 ## Cell Attributes
 
@@ -119,6 +143,7 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | center | Whether to vertically center the left and right content | boolean | false | - |
 | required | Whether to show the required asterisk | boolean | false | - |
 | marker-side | Position of the required marker | 'before' \| 'after' | 'before' | 1.12.0 |
+| arrow-direction | Arrow direction, only effective when is-link is true | 'left' \| 'up' \| 'down' | - | $LOWEST_VERSION$ |
 | on | Whether to show the on icon on the right | boolean | false | - |
 | bordered | Whether to show the bottom border | boolean | true | - |
 | center-title | Whether to center the title | boolean | false | 0.1.1 |
