@@ -115,6 +115,10 @@ export interface WaterfallEmits {
    * 显示状态更新事件
    */
   (e: 'update:show', value: boolean): void
+  /**
+   * 需要加载更多事件（内容不足时自动触发）
+   */
+  (e: 'needLoadMore'): void
 }
 
 /**
@@ -137,6 +141,10 @@ export interface WaterfallExpose {
    * 队列状态
    */
   loadStatus: 'idle' | 'busy'
+  /**
+   * 检查并触发加载更多（手动调用）
+   */
+  checkAndLoadMore: () => void
 }
 
 /**

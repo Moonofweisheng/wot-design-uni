@@ -58,6 +58,8 @@ const refreshing = ref(false)
 type LoadMoreState = 'loading' | 'error' | 'finished'
 // 加载更多
 const loadMoreStatus = ref<LoadMoreState>('loading')
+const loading = ref(false)
+
 // 监听下拉刷新
 onPullDownRefresh(async () => {
   refreshing.value = true
@@ -78,9 +80,6 @@ onPullDownRefresh(async () => {
     // 停止下拉刷新动画
     uni.stopPullDownRefresh()
   }
-})
-onPullDownRefresh(() => {
-  waterfallRef.value?.refreshReflow()
 })
 
 function loadMoreFetch(page: number) {
@@ -105,12 +104,60 @@ function onReload() {
   }
 }
 
-// 触底加载更多
-onReachBottom(() => {
-  if (waterfallRef.value?.loadStatus === 'busy') return
-  if (!refreshing.value && loadMoreStatus.value === 'loading') {
-    loadMoreFetch(++currentPage.value)
+// 🔥 统一的加载更多处理函数
+async function handleLoadMore() {
+  // 防止重复加载
+  if (loading.value || refreshing.value) {
+    console.log('⏸️ 跳过加载（正在加载中）', { loading: loading.value, refreshing: refreshing.value })
+    return
   }
+
+  // 检查是否还有更多数据
+  if (loadMoreStatus.value !== 'loading') {
+    console.log('⏸️ 跳过加载（无更多数据）', { loadMoreStatus: loadMoreStatus.value })
+    return
+  }
+
+  // 检查瀑布流是否正在排版
+  if (waterfallRef.value?.loadStatus === 'busy') {
+    console.log('⏸️ 跳过加载（瀑布流排版中）')
+    return
+  }
+
+  loading.value = true
+  console.log('📦 开始加载第', currentPage.value + 1, '页')
+
+  try {
+    const res = await fetchApi(currentPage.value + 1)
+
+    if (res.list.length === 0) {
+      loadMoreStatus.value = 'finished'
+      console.log('✅ 没有更多数据了')
+      return
+    }
+
+    list.value.push(...res.list)
+    currentPage.value++
+
+    // 等待瀑布流排版完成后更新状态
+    waterfallRef.value?.loadDone(() => {
+      setTimeout(() => {
+        loadMoreStatus.value = res.page < res.total ? 'loading' : 'finished'
+        console.log('✅ 加载完成', { page: res.page, total: res.total })
+      }, 300)
+    })
+  } catch (error) {
+    console.error('❌ 加载失败:', error)
+    loadMoreStatus.value = 'error'
+  } finally {
+    loading.value = false
+  }
+}
+
+// 触底加载更多（保留原有逻辑）
+onReachBottom(() => {
+  console.log('📍 触底事件触发')
+  handleLoadMore()
 })
 
 onMounted(() => {
@@ -119,7 +166,12 @@ onMounted(() => {
 
 // 删除
 function onDelete(item: ListItem) {
-  list.value.splice(list.value.indexOf(item), 1)
+  const index = list.value.indexOf(item)
+  if (index !== -1) {
+    list.value.splice(index, 1)
+    console.log('🗑️ 删除了 item:', item.id, '剩余数量:', list.value.length)
+    // ✅ 不需要手动调用 checkAndLoadMore，组件会自动检查
+  }
 }
 
 // 头部插入
@@ -200,7 +252,7 @@ function clearAll() {
       <wd-button size="small" @click="insertAtEnd">添加数据</wd-button>
       <wd-button size="small" @click="clearAll">清空数据</wd-button>
     </view>
-    <wd-waterfall ref="waterfallRef" custom-class="waterfall-container" error-strategy="retryHard">
+    <wd-waterfall ref="waterfallRef" custom-class="waterfall-container" error-strategy="retryHard" @needLoadMore="handleLoadMore">
       <wd-waterfall-item v-for="(item, index) in list" :key="item.id" :order="index" :id="item.id">
         <template #default="{ loaded, status, onPlaceholderLoad, onPlaceholderError, message }">
           <view class="waterfall-item">

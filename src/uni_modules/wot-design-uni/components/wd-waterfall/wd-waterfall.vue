@@ -272,6 +272,10 @@ function recalculateItemsAfterRemoval() {
     initColumns()
     // 释放删除锁
     removalProcessing.value = false
+    // 🔥 删除完成后检查是否需要加载更多
+    nextTick(() => {
+      checkAndNotifyLoadMore()
+    })
     return
   }
 
@@ -309,6 +313,11 @@ function recalculateItemsAfterRemoval() {
 
   // 释放删除锁
   removalProcessing.value = false
+
+  // 🔥 删除完成后检查是否需要加载更多
+  nextTick(() => {
+    checkAndNotifyLoadMore()
+  })
 
   // 检查是否有待处理的排版队列
   if (pendingItems.length > 0) {
@@ -486,6 +495,14 @@ async function processQueue() {
     }
     // 更新加载状态
     updateLoadStatus()
+
+    // 🔥 排版完成后检查是否需要加载更多
+    if (pendingItems.length === 0) {
+      nextTick(() => {
+        checkAndNotifyLoadMore()
+      })
+    }
+
     setTimeout(() => {
       // 处理待删除项目队列
       if (pendingRemovalItems.length > 0) {
@@ -656,6 +673,78 @@ provide(
   })
 )
 
+// ==================== 自动加载更多机制 ====================
+
+/**
+ * 检查是否需要加载更多内容
+ * @param buffer 缓冲距离（px），默认 100
+ * @returns 是否需要加载更多
+ */
+function shouldLoadMore(buffer = 100): boolean {
+  const currentHeight = containerHeight.value
+  let viewportHeight
+  // 获取可视区域高度
+  // #ifdef H5
+  viewportHeight = window.innerHeight
+  // #endif
+  // #ifndef H5
+  const systemInfo = uni.getSystemInfoSync()
+  viewportHeight = systemInfo.windowHeight
+  // #endif
+
+  // 容器高度 + 缓冲 < 可视区域高度 = 内容不足
+  return currentHeight + buffer < viewportHeight
+}
+
+/**
+ * 检查并通知父组件加载更多
+ * 带防抖，避免频繁触发
+ * @param immediate 是否立即执行
+ */
+let notifyTimer: ReturnType<typeof setTimeout> | null = null
+function checkAndNotifyLoadMore(immediate = false) {
+  // 只在空闲状态下检查
+  if (loadStatus.value !== 'idle') {
+    return
+  }
+
+  // 清除之前的定时器
+  if (notifyTimer) {
+    clearTimeout(notifyTimer)
+    notifyTimer = null
+  }
+
+  const check = () => {
+    if (shouldLoadMore()) {
+      console.log('🔥 检测到内容不足，通知加载更多', {
+        containerHeight: containerHeight.value,
+        itemsCount: items.length
+      })
+      emit('needLoadMore')
+    }
+  }
+
+  // 立即执行 or 延迟执行
+  if (immediate) {
+    check()
+  } else {
+    notifyTimer = setTimeout(check, 300) // 300ms 防抖
+  }
+}
+
+// 监听容器高度变化
+watch(
+  () => containerHeight.value,
+  (newHeight, oldHeight) => {
+    // 高度减少时（可能是删除导致）
+    if (newHeight < oldHeight && newHeight > 0) {
+      nextTick(() => {
+        checkAndNotifyLoadMore()
+      })
+    }
+  }
+)
+
 // ==================== 组件暴露接口 ====================
 
 /**
@@ -666,6 +755,7 @@ defineExpose<WaterfallExpose>({
   reflow, // 完整重排（重置所有状态）
   refreshReflow, // 刷新重排（重置所有状态，包括数据）
   loadDone, // 注册加载完成回调
+  checkAndLoadMore: checkAndNotifyLoadMore, // 🔥 检查并触发加载更多
   get loadStatus() {
     return loadStatus.value
   }
