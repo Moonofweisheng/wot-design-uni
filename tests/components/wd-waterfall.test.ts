@@ -121,8 +121,8 @@ describe('WdWaterfall', () => {
     // 测试 reflow 方法存在
     expect(typeof vm.reflow).toBe('function')
 
-    // 测试 refreshReflow 方法存在
-    expect(typeof vm.refreshReflow).toBe('function')
+    // 测试 reset 方法存在
+    expect(typeof vm.reset).toBe('function')
 
     // 测试 loadDone 方法存在
     expect(typeof vm.loadDone).toBe('function')
