@@ -34,6 +34,7 @@ import {
   type Ref
 } from 'vue'
 import { getRect, uuid } from '../common/util'
+import { useDelayTask } from '../composables'
 import type { WaterfallItemExpose, WaterfallItemInfo, WaterfallItemProps, WaterfallItemSlots } from './types'
 import { waterfallContextKey } from '../wd-waterfall/types'
 
@@ -50,58 +51,6 @@ defineSlots<WaterfallItemSlots>()
 defineExpose<WaterfallItemExpose>({})
 
 // ==================== 内联工具函数 ====================
-
-/**
- * 超时函数
- * 提供延迟执行、立即执行、清除和停止计时器的功能
- */
-function useTimeout<CallbackFn extends (...args: any[]) => any>(
-  cb: CallbackFn,
-  interval: number,
-  options: { immediate?: boolean; immediateCallback?: boolean } = {}
-) {
-  const { immediate = false, immediateCallback = false } = options
-
-  const isPending = shallowRef(false)
-  let timer: ReturnType<typeof setTimeout> | null = null
-
-  function clear() {
-    if (timer) {
-      clearTimeout(timer)
-      timer = null
-    }
-  }
-
-  function stop() {
-    isPending.value = false
-    clear()
-  }
-
-  function start(...args: Parameters<CallbackFn> | []) {
-    if (immediateCallback) cb()
-    clear()
-    isPending.value = true
-    timer = setTimeout(() => {
-      isPending.value = false
-      timer = null
-      cb(...args)
-    }, interval)
-  }
-
-  if (immediate) {
-    start()
-  }
-
-  onBeforeUnmount(() => {
-    stop()
-  })
-
-  return {
-    isPending: shallowReadonly(isPending),
-    start,
-    stop
-  }
-}
 
 // ==================== 上下文通信 ====================
 
@@ -172,7 +121,7 @@ const item = shallowReactive<WaterfallItemInfo>({
 
 let overtime = false
 
-const { start: startTimeout } = useTimeout(async () => {
+const timeoutTask = useDelayTask(async () => {
   if (!item.loaded && !overtime) {
     overtime = true
     // 根据模式决定超时后的处理方式
@@ -392,7 +341,7 @@ async function refreshImage(isReset = true) {
   // 重新启动超时计时器 todo 这里应该打开吗？需要使用参数控制是否重新启动定时器吗？
   if (isReset && context?.maxWait) {
     overtime = false
-    startTimeout()
+    timeoutTask.run()
   }
 }
 
@@ -411,7 +360,7 @@ onMounted(async () => {
     }, 16)
   }
   if (context?.maxWait) {
-    startTimeout()
+    timeoutTask.run()
   }
 })
 
@@ -426,7 +375,7 @@ onBeforeUnmount(() => {
 
 const laterVisible = ref(false)
 
-const { start } = useTimeout(() => {
+const visibleTask = useDelayTask(() => {
   laterVisible.value = true
 }, 100)
 
@@ -434,7 +383,7 @@ watch(
   () => item.visible,
   () => {
     if (item.visible) {
-      start()
+      visibleTask.run()
     } else {
       laterVisible.value = false
     }
