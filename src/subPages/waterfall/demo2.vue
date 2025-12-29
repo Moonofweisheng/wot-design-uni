@@ -163,7 +163,7 @@ onReachBottom(() => {
 onMounted(() => {
   loadMoreFetch(currentPage.value)
 })
-
+// #ifdef WEB || APP-PLUS
 // 删除
 function onDelete(item: ListItem) {
   const index = list.value.indexOf(item)
@@ -195,16 +195,6 @@ function insertAtMiddle() {
   list.value.splice(middleIndex, 0, newItem)
 }
 
-// 尾部插入
-function insertAtEnd() {
-  const newItem: ListItem = {
-    id: uuid++,
-    title: generateTitle(),
-    url: mockImages[Math.floor(Math.random() * mockImages.length)]
-  }
-  list.value.push(newItem)
-}
-
 // 随机插入
 function insertRandom() {
   const newItem: ListItem = {
@@ -230,6 +220,17 @@ function insertBatch() {
   // 随机插入位置
   const randomIndex = Math.floor(Math.random() * (list.value.length + 1))
   list.value.splice(randomIndex, 0, ...newItems)
+}
+// #endif
+
+// 尾部插入
+function insertAtEnd() {
+  const newItem: ListItem = {
+    id: uuid++,
+    title: generateTitle(),
+    url: mockImages[Math.floor(Math.random() * mockImages.length)]
+  }
+  list.value.push(newItem)
 }
 
 // 清空数据
@@ -270,7 +271,9 @@ function clearAll() {
             <view class="item-content">
               {{ item.title }}
             </view>
+            <!-- #ifdef WEB || APP-PLUS -->
             <wd-button type="error" block :round="false" @click="onDelete(item)">删除-{{ index }}</wd-button>
+            <!-- #endif -->
           </view>
         </template>
       </wd-waterfall-item>
