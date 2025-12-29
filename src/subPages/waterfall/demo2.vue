@@ -71,8 +71,8 @@ onPullDownRefresh(async () => {
     // 重置加载状态
     loadMoreStatus.value = res.page < res.total ? 'loading' : 'finished'
 
-    // 刷新瀑布流布局
-    waterfallRef.value?.refreshReflow()
+    // 清空并重置瀑布流
+    waterfallRef.value?.reset()
   } catch (error) {
     console.log('刷新失败', error)
   } finally {
