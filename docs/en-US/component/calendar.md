@@ -167,6 +167,271 @@ Set the `formatter` parameter, which is a function type that receives an `object
 | multiple-middle  | Multiple date range selection, dates between start and end | 1.5.0   |
 | multiple-selected| Multiple date range selection, selected dates         | 1.5.0   |
 
+```html
+<wd-calendar type="daterange" v-model="value" allow-same-day :formatter="formatter" @confirm="handleConfirm" />
+```
+
+```typescript
+const value = ref<number[]>([])
+
+function handleConfirm({ value }) {
+  console.log(value)
+}
+
+const formatter = (day) => {
+  const date = new Date(day.date)
+  const now = new Date()
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const da = date.getDate()
+  const nowYear = now.getFullYear()
+  const nowMonth = now.getMonth()
+  const nowDa = now.getDate()
+
+  if (year === nowYear && month === nowMonth && da === nowDa) {
+    day.topInfo = 'Today'
+  }
+
+  if (month === 5 && da === 18) {
+    day.topInfo = '618 Sale'
+  }
+
+  if (month === 10 && da === 11) {
+    day.topInfo = 'JD Double 11'
+  }
+
+  if (day.type === 'start') {
+    day.bottomInfo = 'Start'
+  }
+
+  if (day.type === 'end') {
+    day.bottomInfo = 'End'
+  }
+
+  if (day.type === 'same') {
+    day.bottomInfo = 'Start/End'
+  }
+
+  return day
+}
+```
+
+## Quick Options
+
+Set the `shortcuts` property to configure a list of quick options. Pass the `on-shortcuts-click` property, which is a function that receives `{ item, index }` parameters, where `item` is the current option and `index` is the index of the current option. When a quick option is clicked, `on-shortcuts-click` is called and receives the new selected value of the calendar. The `text` field is required for options, and other fields can be passed as needed.
+
+```html
+<wd-calendar
+  label="Quick Options"
+  :shortcuts="shortcuts"
+  :on-shortcuts-click="onShortcutsClick"
+  type="daterange"
+  v-model="value"
+  @confirm="handleConfirm"
+/>
+```
+
+```typescript
+const shortcuts = ref<Record<string, any>[]>([
+  {
+    text: 'Last 7 days',
+    id: 7
+  },
+  {
+    text: 'Last 15 days',
+    id: 15
+  },
+  {
+    text: 'Last 30 days',
+    id: 30
+  }
+])
+const value = ref<string>('')
+
+const onShortcutsClick = ({ item }) => {
+  const dayDiff = item.id
+  const endDate = Date.now() - 24 * 60 * 60 * 1000
+  const startDate = endDate - dayDiff * 24 * 60 * 60 * 1000
+
+  return [startDate, endDate]
+}
+
+function handleConfirm({ value }) {
+  console.log(value)
+}
+```
+
+## Custom Display
+
+Set the `display-format` property to customize the form display, and set the `inner-display-format` property to customize the internal panel display for range selection types.
+
+`display-format` is a function that receives two parameters: `value` (current value, which is a timestamp array when type is a range type, otherwise it is a number) and `type` (current calendar type).
+
+`inner-display-format` is a function that will be called twice, receiving three parameters: `value` (start date or end date, type is number), `rangeType` ('start' - start date, 'end' - end date), and `type` (current calendar type).
+
+```html
+<wd-calendar
+  label="Custom Display"
+  type="daterange"
+  v-model="value"
+  :display-format="displayFormat"
+  :inner-display-format="innerDisplayFormat"
+  @confirm="handleConfirm"
+/>
+```
+
+```typescript
+import { dayjs } from '@/uni_modules/wot-design-uni'
+
+const value = ref<string>('')
+
+const displayFormat = (value) => {
+  return dayjs(value[0]).format('YY年MM月DD日') + ' - ' + dayjs(value[1]).format('YY年MM月DD日')
+}
+
+const innerDisplayFormat = (value, rangeType) => {
+  if (!value) {
+    return rangeType === 'start' ? 'Start Time' : 'End Time'
+  }
+
+  return dayjs(value).format('YY年MM月DD日')
+}
+
+function handleConfirm({ value }) {
+  console.log(value)
+}
+```
+
+## Validation Before Confirmation
+
+Set the `before-confirm` function. When the user clicks the `confirm` button, the `before-confirm` function will be executed and passed `value` and `resolve` parameters. You can validate `value` and inform the component whether to confirm through the `resolve` function. `resolve` accepts 1 boolean value: `resolve(true)` means the option passes, `resolve(false)` means the option does not pass, and the popup will not close when it does not pass.
+
+```html
+<wd-toast />
+
+<wd-calendar label="before-confirm" v-model="value" :before-confirm="beforeConfirm" />
+```
+
+```typescript
+import { useToast } from '@/uni_modules/wot-design-uni'
+
+const toast = useToast()
+
+const value = ref<string>('')
+
+const beforeConfirm = ({ value, resolve }) => {
+  if (value > Date.now()) {
+    toast.error('No data available for this date')
+    resolve(false)
+  } else {
+    resolve(true)
+  }
+}
+
+function handleConfirm({ value }) {
+  console.log(value)
+}
+```
+
+## Maximum Range Limit
+
+Set the `max-range` property to set the maximum limit for range selection.
+
+```html
+<wd-calendar type="daterange" :max-range="3" v-model="value" @confirm="handleConfirm" />
+```
+
+## Set Week Start Day
+
+Set the `first-day-of-week` property. The default is 0, which is Sunday. Setting it to 1 means Monday, and so on.
+
+## Extend Confirm Area Controls
+
+If you need to extend the confirm area controls, you can use the `confirm-left` and `confirm-right` slots, which correspond to the left and right positions of the confirm button respectively.
+
+```html
+<wd-calendar v-model="value">
+  <template #confirm-right>
+    <wd-button block plain custom-style="margin-left: 10px;" @click="selectToday">Select Today</wd-button>
+  </template>
+</wd-calendar>
+```
+
+```typescript
+import { ref, nextTick } from 'vue'
+
+const value = ref<number>(Date.now())
+
+const selectToday = () => {
+  value.value = Date.now()
+  nextTick(() => {
+    value.value = getToday(false)
+  })
+}
+
+const getToday = <R extends boolean = false>(range?: R): R extends true ? [number, number] : number => {
+  const now = new Date()
+  now.setHours(0, 0, 0, 0)
+
+  if (!range) {
+    return now.getTime() as any
+  }
+  const end = new Date(now)
+  end.setHours(23, 59, 59, 999)
+  return [now.getTime(), end.getTime()] as any
+}
+```
+
+## Custom Picker
+
+If the default cell type display format does not meet your needs, you can customize the picker style through the default slot.
+
+```html
+<view style="margin-bottom: 10px;">Current selected date: {{ formatValue }}</view>
+<wd-calendar v-model="value" @confirm="handleConfirm">
+  <wd-button>Select Date</wd-button>
+</wd-calendar>
+```
+
+```typescript
+const value = ref<string>('')
+const formatValue = ref<string>('')
+
+function handleConfirm({ value }) {
+  formatValue.value = new Date(value).toString()
+}
+```
+
+## Using Component Instance Methods
+
+You can get the Calendar instance through ref and call instance methods. You can hide the internal cell picker through `with-cell`.
+
+```html
+<wd-button @click="openCalendar">Open Calendar</wd-button>
+
+<wd-calendar ref="calendar" :with-cell="false" v-model="value" @confirm="handleConfirm" />
+```
+
+```typescript
+import { ref } from 'vue'
+import type { CalendarInstance } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
+
+const calendar = ref<CalendarInstance>()
+const value = ref<number>(Date.now())
+
+function openCalendar() {
+  calendar.value?.open()
+}
+
+function closeCalendar() {
+  calendar.value?.close()
+}
+
+function handleConfirm({ value }) {
+  console.log(value)
+}
+```
+
 ## Attributes
 
 | Attribute | Description | Type | Options | Default | Version |
@@ -244,6 +509,8 @@ Set the `formatter` parameter, which is a function type that receives an `object
 |------|-------------|----------|
 | default | Custom display | - |
 | label | Left slot | - |
+| confirm-left | Left slot of confirm button | $LOWEST_VERSION$ |
+| confirm-right | Right slot of confirm button | $LOWEST_VERSION$ |
 
 ## External Classes
 
