@@ -43,7 +43,7 @@ export const waterfallProps = {
    */
   errorStrategy: {
     type: String as () => ErrorStrategy,
-    default: 'none'
+    default: 'default'
   },
   /**
    * 重试次数
