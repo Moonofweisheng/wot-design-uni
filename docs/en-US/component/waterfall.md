@@ -299,10 +299,10 @@ function switchCategory(category: string) {
 
 ## Auto Load More
 
-When content height is insufficient to fill the viewport, the component will automatically trigger the `need-load-more` event to request more data.
+When content height is insufficient to fill the viewport, the component will automatically trigger the `auto-load-more` event to request more data.
 
 ```html
-<wd-waterfall ref="waterfallRef" @need-load-more="handleLoadMore">
+<wd-waterfall ref="waterfallRef" @auto-load-more="handleLoadMore">
   <!-- ... -->
 </wd-waterfall>
 <wd-loadmore :state="loadMoreStatus" />
@@ -419,7 +419,7 @@ Error handling strategy types:
 |-------|-------------|------------|---------|
 | load-start | Triggered when loading starts | - | $LOWEST_VERSION$ |
 | load-end | Triggered when batch loading completes | - | $LOWEST_VERSION$ |
-| need-load-more | Triggered when more content is needed | - | $LOWEST_VERSION$ |
+| auto-load-more | Triggered when content is insufficient to fill viewport | - | $LOWEST_VERSION$ |
 
 ## Waterfall Methods
 

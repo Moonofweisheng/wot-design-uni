@@ -232,7 +232,7 @@ function clearAll() {
       <wd-button size="small" @click="insertAtEnd">添加数据</wd-button>
       <wd-button size="small" @click="clearAll">清空数据</wd-button>
     </view>
-    <wd-waterfall ref="waterfallRef" custom-class="waterfall-container" error-strategy="retryHard" @needLoadMore="handleLoadMore">
+    <wd-waterfall ref="waterfallRef" custom-class="waterfall-container" error-strategy="retryHard" @auto-load-more="handleLoadMore">
       <wd-waterfall-item v-for="(item, index) in list" :key="item.id" :order="index" :id="item.id">
         <template #default="{ loaded, status, onFallbackLoad, onFallbackError, message }">
           <view class="waterfall-item">

@@ -717,7 +717,7 @@ function checkAndTriggerLoadMore(immediate = false) {
 
   const check = () => {
     if (shouldLoadMore()) {
-      emit('needLoadMore')
+      emit('autoLoadMore')
     }
   }
 

@@ -117,9 +117,9 @@ export interface WaterfallEmits {
    */
   (e: 'update:show', value: boolean): void
   /**
-   * 需要加载更多事件（内容不足时自动触发）
+   * 内容不足时自动触发加载更多事件
    */
-  (e: 'needLoadMore'): void
+  (e: 'autoLoadMore'): void
 }
 
 /**

@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import NavTab from './components/NavTab.vue'
 import { mockImages } from './utils/mock'
 
-const columns = ref(3)
+const columns = ref(2)
 
 interface ListItem {
   id: number
@@ -17,7 +17,7 @@ const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, tim
 
 async function getData() {
   await sleep(300)
-  return Array.from({ length: 10 }, (_, i) => {
+  return Array.from({ length: 20 }, (_, i) => {
     return {
       id: uuid++,
       url: mockImages[i % mockImages.length]
@@ -26,6 +26,9 @@ async function getData() {
 }
 
 function loadEnd() {}
+async function handleLoadMore() {
+  list.value.push(...(await getData()))
+}
 function sliderChange({ detail: { value } }: any) {
   columns.value = value
 }
@@ -51,6 +54,7 @@ onReachBottom(async () => {
       :max-wait="1000"
       error-strategy="retryHard"
       @load-end="loadEnd"
+      @auto-load-more="handleLoadMore"
     >
       <wd-waterfall-item v-for="(item, index) in list" :key="item.id" :index="index">
         <template #default="{ loaded }">

@@ -299,10 +299,10 @@ function switchCategory(category: string) {
 
 ## 自动加载更多
 
-当内容高度不足以填满可视区域时，组件会自动触发 `need-load-more` 事件，通知加载更多数据。
+当内容高度不足以填满可视区域时，组件会自动触发 `auto-load-more` 事件，通知加载更多数据。
 
 ```html
-<wd-waterfall ref="waterfallRef" @need-load-more="handleLoadMore">
+<wd-waterfall ref="waterfallRef" @auto-load-more="handleLoadMore">
   <!-- ... -->
 </wd-waterfall>
 <wd-loadmore :state="loadMoreStatus" />
@@ -419,7 +419,7 @@ function deleteItem(item: ListItem) {
 |--------|------|------|----------|
 | load-start | 开始加载时触发 | - | $LOWEST_VERSION$ |
 | load-end | 本批次加载完成时触发 | - | $LOWEST_VERSION$ |
-| need-load-more | 内容不足需要加载更多时触发 | - | $LOWEST_VERSION$ |
+| auto-load-more | 内容不足时自动触发加载更多 | - | $LOWEST_VERSION$ |
 
 ## Waterfall Methods
 
