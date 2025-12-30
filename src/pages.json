@@ -1335,7 +1335,7 @@
             "navigationBarTitleText": "基础使用",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "基础使用"
+            "navigationBarTitleText": "%waterfall-demo1%"
             // #endif
           }
         },
@@ -1347,8 +1347,10 @@
             "navigationBarTitleText": "基础使用2",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "基础使用2"
+            "navigationBarTitleText": "%waterfall-demo2%",
             // #endif
+            "enablePullDownRefresh": true
+
           }
         },
         {
@@ -1359,7 +1361,7 @@
             "navigationBarTitleText": "列数切换示例",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "列数切换示例"
+            "navigationBarTitleText": "%waterfall-demo3%"
             // #endif
           }
         },
@@ -1371,7 +1373,7 @@
             "navigationBarTitleText": "已知高度示例",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "已知高度示例"
+            "navigationBarTitleText": "%waterfall-known%"
             // #endif
           }
         },
@@ -1383,11 +1385,12 @@
             "navigationBarTitleText": "Mock 加载成功/失败演示",
             // #endif
             // #ifndef MP
-            "navigationBarTitleText": "Mock 加载成功/失败演示"
+            "navigationBarTitleText": "%waterfall-demo5%",
             // #endif
+            "enablePullDownRefresh": true
           }
         },
-        {      
+        {
           "path": "tour/Index",
           "name": "tour",
           "style": {
