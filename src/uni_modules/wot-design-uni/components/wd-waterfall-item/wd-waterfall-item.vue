@@ -18,9 +18,10 @@ export default {
  * 3. 根据父组件计算的位置进行定位
  * 4. 提供加载完成回调给内容组件
  */
-import { computed, getCurrentInstance, inject, nextTick, onBeforeUnmount, onMounted, ref, shallowReactive, watch, toRef, type Ref } from 'vue'
+import { computed, getCurrentInstance, nextTick, onBeforeUnmount, onMounted, ref, shallowReactive, watch, toRef, type Ref } from 'vue'
 import { getRect, uuid } from '../common/util'
 import { useDelayTask } from '../composables'
+import { useParent } from '../composables/useParent'
 import type { WaterfallItemExpose, WaterfallItemInfo, WaterfallItemProps, WaterfallItemSlots } from './types'
 import { waterfallContextKey } from '../wd-waterfall/types'
 
@@ -41,13 +42,14 @@ defineExpose<WaterfallItemExpose>({})
 // ==================== 上下文通信 ====================
 
 /**
- * 注入父组件提供的瀑布流上下文
+ * 使用 useParent 获取父组件提供的瀑布流上下文
  * 包含添加/移除项目、加载回调、列宽等信息
  */
-const context = inject(waterfallContextKey)!
-if (!context) {
+const { parent } = useParent(waterfallContextKey)
+if (!parent) {
   throw new Error('[wd-waterfall-item] 缺少瀑布流上下文，请确保组件仅在 <wd-waterfall> 内使用。')
 }
+// 经过上面的检查，context 一定存在
 // 生成唯一的项目ID，用于DOM查询
 const itemId = `wd-waterfall-item-${uuid()}`
 const slotId = ref(uuid())
@@ -57,7 +59,7 @@ const itemHeight = ref(props.height || 240)
 
 const aspectRatio = computed(() => itemHeight.value / itemWidth.value)
 // 图片加载重试次数
-let retryCount = context?.retryCount ?? 0
+let retryCount = parent?.retryCount ?? 0
 
 const FALLBACK_HEIGHT = 120 // 异常默认高度
 
@@ -111,7 +113,7 @@ const loadTimeoutTask = useDelayTask(async () => {
   if (!item.finished && !isTimeout) {
     isTimeout = true
     // 根据模式决定超时后的处理方式
-    switch (context.errorStrategy) {
+    switch (parent.errorStrategy) {
       case 'default':
         setStatus(ItemStatus.TIMEOUT, '加载超时')
         break
@@ -131,7 +133,7 @@ const loadTimeoutTask = useDelayTask(async () => {
     await item.updateHeight()
     item.finished = true
   }
-}, context?.maxWait)
+}, parent?.maxWait)
 
 // 如果是已知高度
 async function handleKnownSizeLoad() {
@@ -160,7 +162,7 @@ async function handleFailurePlaceholder() {
 async function handleFailureRetry() {
   // #ifdef MP-WEIXIN || MP-ALIPAY
   // 微信小程序不支持重试，直接进入最终状态
-  setStatus(ItemStatus.OVER, `重试${context.retryCount}次后仍然失败`)
+  setStatus(ItemStatus.OVER, `重试${parent!.retryCount}次后仍然失败`)
   await item.updateHeight()
   item.finished = true
   // #endif
@@ -171,7 +173,7 @@ async function handleFailureRetry() {
     await item.refreshImage(false)
   } else {
     // 重试次数用完，结束处理
-    setStatus(ItemStatus.OVER, `重试${context.retryCount}次后仍然失败`)
+    setStatus(ItemStatus.OVER, `重试${parent!.retryCount}次后仍然失败`)
     await item.updateHeight()
     item.finished = true
   }
@@ -220,7 +222,7 @@ async function loaded(event?: any) {
     return
   }
   // 加载失败：根据异常处理策略处理
-  switch (context.errorStrategy) {
+  switch (parent!.errorStrategy) {
     case 'default':
       // 默认模式：失败就结束，使用默认高度
       await handleDefaultFailure()
@@ -273,9 +275,6 @@ async function onFallbackError() {
 
 async function updateHeight(flag = false) {
   try {
-    // console.log('context.isProcessingRemoval', context.isProcessingRemoval)
-    // if (context.isLayoutInterrupted) return
-    // console.log('触发了获取dom信息')
     await nextTick() // 很重要不然会导致获取高度错误
     // #ifdef MP-WEIXIN || MP-ALIPAY || APP-PLUS
     await new Promise((resolve) => setTimeout(resolve, 200))
@@ -324,7 +323,7 @@ async function refreshImage(isReset = true) {
   slotId.value = uuid()
 
   // 重新启动超时计时器 todo 这里应该打开吗？需要使用参数控制是否重新启动定时器吗？
-  if (isReset && context?.maxWait) {
+  if (isReset && parent?.maxWait) {
     isTimeout = false
     loadTimeoutTask.run()
   }
@@ -336,7 +335,7 @@ async function refreshImage(isReset = true) {
  * 组件挂载时：将自己注册到父组件的项目列表中，并启动超时计时器
  */
 onMounted(async () => {
-  context.addItem(item)
+  parent.addItem(item)
   // 判断是否开启固定宽度高度
   if (props.width && props.height) {
     // 解决小程序app的bug
@@ -344,7 +343,7 @@ onMounted(async () => {
       handleKnownSizeLoad()
     }, 16)
   }
-  if (context?.maxWait) {
+  if (parent?.maxWait) {
     loadTimeoutTask.run()
   }
 })
@@ -353,7 +352,7 @@ onMounted(async () => {
  * 组件卸载前：从父组件的项目列表中移除自己
  */
 onBeforeUnmount(() => {
-  context.removeItem(item)
+  parent.removeItem(item)
 })
 
 // ==================== 动画效果管理 ====================
@@ -383,7 +382,7 @@ watch(
  */
 const waterfallItemStyle = computed(() => {
   return {
-    width: `${context.columnWidth}px`,
+    width: `${parent.columnWidth.value}px`,
     transform: `translate3d(${item.left}px,${item.top}px,0px)`,
     transition: isVisibleDelayed.value
       ? 'opacity var(--wd-waterfall-duration) ease-out,transform var(--wd-waterfall-duration) ease-out' // 包含位置动画，使用缓出效果
@@ -397,14 +396,14 @@ const waterfallItemStyle = computed(() => {
   <view>
     <!-- #endif -->
     <view
-      :class="['wd-waterfall-item', itemId, customClass, { 'is-show': item.visible, 'is-reflowing': context.isReflowing }]"
+      :class="['wd-waterfall-item', itemId, customClass, { 'is-show': item.visible, 'is-reflowing': parent.isReflowing.value }]"
       :style="[waterfallItemStyle, customStyle]"
     >
       <slot
         :key="slotId"
         :loaded="loaded"
-        :column-width="context.columnWidth"
-        :image-height="context.columnWidth * aspectRatio"
+        :column-width="parent.columnWidth.value"
+        :image-height="parent.columnWidth.value * aspectRatio"
         :status="errorState.status"
         :message="errorState.message"
         :onFallbackLoad="onFallbackLoad"

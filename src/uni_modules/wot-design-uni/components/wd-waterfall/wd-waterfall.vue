@@ -18,9 +18,10 @@ export default {
  * 3. 监听项目加载状态，动态调整布局
  * 4. 提供上下文给子组件使用
  */
-import { computed, getCurrentInstance, nextTick, onMounted, provide, reactive, ref, watch } from 'vue'
+import { computed, getCurrentInstance, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { onHide, onShow } from '@dcloudio/uni-app'
 import { debounce, getRect, uuid } from '../common/util'
+import { useChildren } from '../composables/useChildren'
 
 import {
   type WaterfallEmits,
@@ -655,23 +656,23 @@ onHide(() => {
 // ==================== 上下文提供 ====================
 
 /**
- * 向子组件提供瀑布流上下文
- * 子组件可以通过 inject 获取这些方法和数据
+ * 使用 useChildren 向子组件提供瀑布流上下文
+ * 子组件通过 useParent 获取这些方法和数据
+ * 使用 { sort: false } 跳过 DOM 排序，因为瀑布流项目顺序由 item.order 控制
  */
-provide(
-  waterfallContextKey,
-  reactive({
-    addItem, // 添加项目方法
-    removeItem, // 移除项目方法
-    onItemLoad, // 项目加载完成回调
-    columnWidth, // 列宽度（响应式）
-    isReflowing, // 全局重排状态（响应式）
-    errorStrategy: props.errorStrategy, // 错误处理模式
-    retryCount: props.retryCount, // 重试次数
-    maxWait: props.maxWait, // 最大等待时间
-    isProcessingRemoval // 删除处理中状态（响应式）
-  })
-)
+const { linkChildren } = useChildren(waterfallContextKey, { sort: false })
+
+linkChildren({
+  addItem, // 添加项目方法
+  removeItem, // 移除项目方法
+  onItemLoad, // 项目加载完成回调
+  columnWidth, // 列宽度（响应式）
+  isReflowing, // 全局重排状态（响应式）
+  errorStrategy: props.errorStrategy, // 错误处理模式
+  retryCount: props.retryCount, // 重试次数
+  maxWait: props.maxWait, // 最大等待时间
+  isProcessingRemoval // 删除处理中状态（响应式）
+})
 
 // ==================== 自动加载更多机制 ====================
 

@@ -1,4 +1,4 @@
-import type { InjectionKey } from 'vue'
+import type { InjectionKey, ComputedRef, Ref } from 'vue'
 import type { WaterfallItemInfo } from '../wd-waterfall-item/types'
 import { baseProps } from '../common/props'
 
@@ -169,11 +169,11 @@ export interface WaterfallContext {
   /**
    * 列宽度（响应式）
    */
-  columnWidth: number
+  columnWidth: ComputedRef<number>
   /**
    * 全局重排状态（响应式）
    */
-  isReflowing: boolean
+  isReflowing: Ref<boolean>
   /**
    * 排版中断状态（响应式）
    */
@@ -193,10 +193,10 @@ export interface WaterfallContext {
   /**
    * 是否在删除状态
    */
-  isProcessingRemoval: boolean
+  isProcessingRemoval: Ref<boolean>
 }
 
 /**
- * 瀑布流上下文注入键
+ * 瀑布流上下文注入键（用于 useChildren/useParent）
  */
 export const waterfallContextKey: InjectionKey<WaterfallContext> = Symbol('waterfallContext')
