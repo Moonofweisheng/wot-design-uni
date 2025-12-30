@@ -427,4 +427,42 @@ describe('WdTabs 和 WdTab 组件', () => {
     // 检查组件是否正确渲染
     expect(wrapper.find('.wd-tabs').exists()).toBe(true)
   })
+
+  // 测试tab变化时，tabs-nav是否顺序是否正确
+  test('tab变化时，tabs-nav是否顺序是否正确', async () => {
+    const wrapper = mount(
+      {
+        template: `
+        <wd-tabs v-model="activeTab">
+          <wd-tab v-for="item in tabData" :key="item" :title="item">{{ item }}</wd-tab>
+        </wd-tabs>
+      `,
+        data() {
+          return {
+            tabData: ['Wot Design Uni'],
+            activeTab: 'Wot Design Uni'
+          }
+        }
+      },
+      {
+        global: { components: globalComponents }
+      }
+    )
+    await nextTick()
+    // 检查组件是否正确渲染
+    expect(wrapper.find('.wd-tabs').exists()).toBe(true)
+
+    // 调整数据
+    await wrapper.setData({ tabData: ['Wot', 'Design', 'Uni'], activeTab: 'Wot' })
+    await nextTick()
+
+    const items = wrapper.findAll('.wd-tabs__nav-item-text')
+    expect(items.length).toBe(3)
+    // 按顺序断言每个元素的文本内容
+    expect(items[0].text()).toBe('Wot')
+    expect(items[1].text()).toBe('Design')
+    expect(items[2].text()).toBe('Uni')
+
+    wrapper.unmount()
+  })
 })

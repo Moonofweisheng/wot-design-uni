@@ -14,26 +14,23 @@ function isVNode(value: any): value is VNode {
   return value ? value.__v_isVNode === true : false
 }
 
-export function flattenVNodes(children: VNodeNormalizedChildren) {
+export function flattenVNodes(children: VNode) {
   const result: VNode[] = []
 
-  const traverse = (children: VNodeNormalizedChildren) => {
-    if (Array.isArray(children)) {
-      children.forEach((child) => {
-        if (isVNode(child)) {
-          result.push(child)
-
-          if (child.component?.subTree) {
-            result.push(child.component.subTree)
-            traverse(child.component.subTree.children)
-          }
-
-          if (child.children) {
-            traverse(child.children)
-          }
-        }
-      })
-    }
+  const traverse = (children: VNode | VNodeNormalizedChildren) => {
+    const vNode = Array.isArray(children) ? children : [children]
+    vNode.forEach((child) => {
+      if (Array.isArray(child)) {
+        traverse(child)
+      } else if (isVNode(child) && child.component?.subTree) {
+        result.push(child)
+        traverse(child.component.subTree)
+      } else if (isVNode(child) && Array.isArray(child.children)) {
+        traverse(child.children)
+      } else if (isVNode(child)) {
+        result.push(child)
+      }
+    })
   }
 
   traverse(children)
@@ -55,15 +52,19 @@ export function sortChildren(
   publicChildren: ComponentPublicInstance[],
   internalChildren: ComponentInternalInstance[]
 ) {
-  const vnodes = parent && parent.subTree && parent.subTree.children ? flattenVNodes(parent.subTree.children) : []
-
+  const vnodes = parent && parent.subTree && parent.subTree.children ? flattenVNodes(parent.subTree) : []
   internalChildren.sort((a, b) => findVNodeIndex(vnodes, a.vnode) - findVNodeIndex(vnodes, b.vnode))
 
   const orderedPublicChildren = internalChildren.map((item) => item.proxy!)
 
   publicChildren.sort((a, b) => {
-    const indexA = orderedPublicChildren.indexOf(a)
-    const indexB = orderedPublicChildren.indexOf(b)
+    const getIndex = (comp: ComponentPublicInstance) => {
+      const uid = comp.$.uid
+      return orderedPublicChildren.findIndex((i) => i.$.uid === uid)
+    }
+
+    const indexA = getIndex(a)
+    const indexB = getIndex(b)
     return indexA - indexB
   })
 }
