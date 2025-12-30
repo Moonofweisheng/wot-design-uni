@@ -410,3 +410,6 @@ defineExpose<PickerExpose>({
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
+<style lang="scss" noscoped>
+@import './popup.scss';
+</style>

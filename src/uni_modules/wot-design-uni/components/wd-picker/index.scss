@@ -26,10 +26,6 @@
 }
 
 @include b(picker) {
-  @include edeep(popup) {
-    border-radius: 16px 16px 0px 0px;
-  }
-
   @include edeep(cell) {
     @include when(disabled) {
       .wd-cell__value {
