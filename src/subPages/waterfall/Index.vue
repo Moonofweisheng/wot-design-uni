@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { onReachBottom } from '@dcloudio/uni-app'
-
+import { onLoad, onReachBottom } from '@dcloudio/uni-app'
+import { ref } from 'vue'
+import { uuid } from '@/uni_modules/wot-design-uni/components/common/util'
 import NavTab from './components/NavTab.vue'
 import { mockImages, random, text } from './utils/mock'
-import { uuid } from '@/uni_modules/wot-design-uni/components/common/util'
 
 interface ListItem {
   title: string
@@ -13,31 +12,26 @@ interface ListItem {
 }
 
 const list = ref<ListItem[]>([])
-const placeholderSrc = 'https://wot-ui.cn/logo.png'
-function getData() {
-  return new Promise<ListItem[]>((resolve) => {
-    const data = Array(10)
-      .fill(0)
-      .map((_, i) => {
-        const min = 20
-        const max = 50
-        const startIndex = random(0, text.length - max)
-        const length = random(min, max)
-        return {
-          title: text.slice(startIndex, startIndex + length),
-          url: mockImages[i % mockImages.length],
-          id: uuid()
-        }
-      })
-    resolve(data)
+const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time))
+
+async function getData() {
+  await sleep(300)
+  return Array.from({ length: 10 }, (_, i) => {
+    const min = 20
+    const max = 50
+    const startIndex = random(0, text.length - max)
+    const length = random(min, max)
+    return {
+      title: text.slice(startIndex, startIndex + length),
+      url: mockImages[i % mockImages.length],
+      id: uuid()
+    }
   })
 }
 
-function loadEnd() {
-  console.log('加载结束')
-}
+function loadEnd() {}
 
-onMounted(async () => {
+onLoad(async () => {
   list.value.push(...(await getData()))
 })
 

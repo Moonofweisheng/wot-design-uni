@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import NavTab from './components/NavTab.vue'
+import { onLoad, onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app'
+import { ref } from 'vue'
+import { type WaterfallExpose } from '@/uni_modules/wot-design-uni/components/wd-waterfall/types'
 import MockImage from './components/MockImage.vue'
-import { mockImages, text, random } from './utils/mock'
-import { onReachBottom } from '@dcloudio/uni-app'
+import NavTab from './components/NavTab.vue'
+import { mockImages, random, text } from './utils/mock'
 
 interface ListItem {
   title: string
@@ -14,33 +15,44 @@ interface ListItem {
 }
 
 const list = ref<ListItem[]>([])
+const waterfallRef = ref<WaterfallExpose>()
 let uuid = 0
 
-function getData() {
-  return new Promise<ListItem[]>((resolve) => {
-    const data = Array(20)
-      .fill(0)
-      .map((_, i) => {
-        const min = 20
-        const max = 50
-        const startIndex = random(0, text.length - max)
-        const length = random(min, max)
-        return {
-          id: uuid++,
-          title: text.slice(startIndex, startIndex + length),
-          url: mockImages[i % mockImages.length],
-          width: random(200, 400),
-          height: random(200, 500)
-        }
-      })
-    resolve(data)
+const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time))
+
+async function getData() {
+  await sleep(300)
+  return Array.from({ length: 10 }, (_, i) => {
+    const min = 20
+    const max = 50
+    const startIndex = random(0, text.length - max)
+    const length = random(min, max)
+    return {
+      id: uuid++,
+      title: text.slice(startIndex, startIndex + length),
+      url: mockImages[i % mockImages.length],
+      width: random(200, 400),
+      height: random(200, 500)
+    }
   })
 }
 
 function loadEnd() {}
 
-onMounted(async () => {
+onLoad(async () => {
   list.value.push(...(await getData()))
+})
+
+onPullDownRefresh(async () => {
+  try {
+    const data = await getData()
+    list.value = data
+    waterfallRef.value?.reset()
+  } catch (error) {
+    console.error(error)
+  } finally {
+    uni.stopPullDownRefresh()
+  }
 })
 
 onReachBottom(async () => {
@@ -50,7 +62,7 @@ onReachBottom(async () => {
 
 <template>
   <view>
-    <wd-waterfall class="waterfall-container" :max-wait="500" @load-end="loadEnd">
+    <wd-waterfall ref="waterfallRef" class="waterfall-container" :max-wait="500" @load-end="loadEnd">
       <wd-waterfall-item v-for="(item, index) in list" :key="item.id" :order="index">
         <template #default="{ loaded, status }">
           <view class="waterfall-item">
@@ -177,7 +189,8 @@ onReachBottom(async () => {
   "name": "waterfall-demo5",
   "layout": "default",
   "style": {
-    "navigationBarTitleText": "Mock 加载成功/失败演示"
+    "navigationBarTitleText": "Mock 加载成功/失败演示",
+    "enablePullDownRefresh": true
   }
 }
 </route>

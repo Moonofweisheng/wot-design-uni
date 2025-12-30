@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { onReachBottom } from '@dcloudio/uni-app'
-
-import NavTab from './components/NavTab.vue'
+import { onLoad, onReachBottom } from '@dcloudio/uni-app'
+import { ref } from 'vue'
 import MockImage from './components/MockImage.vue'
-import { mockImages, text, random } from './utils/mock'
+import NavTab from './components/NavTab.vue'
+import { mockImages, random, text } from './utils/mock'
 
 interface ListItem {
   title: string
@@ -19,30 +18,28 @@ interface ListItem {
 const list = ref<ListItem[]>([])
 let uuid = 0
 
-function getData() {
-  return new Promise<ListItem[]>((resolve) => {
-    const data = Array(20)
-      .fill(0)
-      .map((_, i) => {
-        const min = 20
-        const max = 50
-        const startIndex = random(0, text.length - max)
-        const length = random(min, max)
-        return {
-          title: i + text.slice(startIndex, startIndex + length),
-          id: uuid++,
-          img: {
-            width: random(100, 400),
-            height: random(100, 400)
-          },
-          url: mockImages[i % mockImages.length]
-        }
-      })
-    resolve(data)
+const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time))
+
+async function getData() {
+  await sleep(300)
+  return Array.from({ length: 10 }, (_, i) => {
+    const min = 20
+    const max = 50
+    const startIndex = random(0, text.length - max)
+    const length = random(min, max)
+    return {
+      title: i + text.slice(startIndex, startIndex + length),
+      id: uuid++,
+      img: {
+        width: random(100, 400),
+        height: random(100, 400)
+      },
+      url: mockImages[i % mockImages.length]
+    }
   })
 }
 
-onMounted(async () => {
+onLoad(async () => {
   list.value.push(...(await getData()))
 })
 

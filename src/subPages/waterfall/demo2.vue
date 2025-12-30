@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-import { onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app'
-import { onMounted, ref } from 'vue'
-
+import { onLoad, onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app'
+import { ref } from 'vue'
+import { type WaterfallExpose } from '@/uni_modules/wot-design-uni/components/wd-waterfall/types'
 import NavTab from './components/NavTab.vue'
 import { mockImages, random, text } from './utils/mock'
-import { type WaterfallExpose } from '@/uni_modules/wot-design-uni/components/wd-waterfall/types'
 
-// api
 interface ListItem {
   id: number
   title: string
@@ -74,7 +72,7 @@ onPullDownRefresh(async () => {
     // 清空并重置瀑布流
     waterfallRef.value?.reset()
   } catch (error) {
-    console.log('刷新失败', error)
+    console.error('刷新失败', error)
   } finally {
     refreshing.value = false
     // 停止下拉刷新动画
@@ -82,20 +80,28 @@ onPullDownRefresh(async () => {
   }
 })
 
-function loadMoreFetch(page: number) {
+async function loadMoreFetch(page: number) {
   loadMoreStatus.value = 'loading'
-  fetchApi(page)
-    .then((res) => {
-      list.value = [...list.value, ...res.list]
-      waterfallRef.value?.loadDone(() => {
-        setTimeout(() => {
-          loadMoreStatus.value = res.page < res.total ? 'loading' : 'finished'
-        }, 300)
-      })
+  loading.value = true
+  try {
+    const res = await fetchApi(page)
+    if (res.list.length === 0) {
+      loadMoreStatus.value = 'finished'
+      return
+    }
+    list.value.push(...res.list)
+    currentPage.value = page
+
+    waterfallRef.value?.loadDone(() => {
+      setTimeout(() => {
+        loadMoreStatus.value = res.page < res.total ? 'loading' : 'finished'
+      }, 300)
     })
-    .catch(() => {
-      loadMoreStatus.value = 'error'
-    })
+  } catch (error) {
+    loadMoreStatus.value = 'error'
+  } finally {
+    loading.value = false
+  }
 }
 
 function onReload() {
@@ -108,59 +114,32 @@ function onReload() {
 async function handleLoadMore() {
   // 防止重复加载
   if (loading.value || refreshing.value) {
-    console.log('⏸️ 跳过加载（正在加载中）', { loading: loading.value, refreshing: refreshing.value })
+    // console.log('⏸️ 跳过加载（正在加载中）', { loading: loading.value, refreshing: refreshing.value })
     return
   }
 
   // 检查是否还有更多数据
   if (loadMoreStatus.value !== 'loading') {
-    console.log('⏸️ 跳过加载（无更多数据）', { loadMoreStatus: loadMoreStatus.value })
+    // console.log('⏸️ 跳过加载（无更多数据）', { loadMoreStatus: loadMoreStatus.value })
     return
   }
 
   // 检查瀑布流是否正在排版
   if (waterfallRef.value?.loadStatus === 'busy') {
-    console.log('⏸️ 跳过加载（瀑布流排版中）')
+    // console.log('⏸️ 跳过加载（瀑布流排版中）')
     return
   }
 
-  loading.value = true
-  console.log('📦 开始加载第', currentPage.value + 1, '页')
-
-  try {
-    const res = await fetchApi(currentPage.value + 1)
-
-    if (res.list.length === 0) {
-      loadMoreStatus.value = 'finished'
-      console.log('✅ 没有更多数据了')
-      return
-    }
-
-    list.value.push(...res.list)
-    currentPage.value++
-
-    // 等待瀑布流排版完成后更新状态
-    waterfallRef.value?.loadDone(() => {
-      setTimeout(() => {
-        loadMoreStatus.value = res.page < res.total ? 'loading' : 'finished'
-        console.log('✅ 加载完成', { page: res.page, total: res.total })
-      }, 300)
-    })
-  } catch (error) {
-    console.error('❌ 加载失败:', error)
-    loadMoreStatus.value = 'error'
-  } finally {
-    loading.value = false
-  }
+  // console.log('📦 开始加载第', currentPage.value + 1, '页')
+  await loadMoreFetch(currentPage.value + 1)
 }
 
-// 触底加载更多（保留原有逻辑）
 onReachBottom(() => {
-  console.log('📍 触底事件触发')
+  // console.log('📍 触底事件触发')
   handleLoadMore()
 })
 
-onMounted(() => {
+onLoad(() => {
   loadMoreFetch(currentPage.value)
 })
 // #ifdef WEB || APP-PLUS
@@ -169,7 +148,7 @@ function onDelete(item: ListItem) {
   const index = list.value.indexOf(item)
   if (index !== -1) {
     list.value.splice(index, 1)
-    console.log('🗑️ 删除了 item:', item.id, '剩余数量:', list.value.length)
+    // console.log('🗑️ 删除了 item:', item.id, '剩余数量:', list.value.length)
     // ✅ 不需要手动调用 checkAndLoadMore，组件会自动检查
   }
 }
@@ -355,7 +334,7 @@ function clearAll() {
   "layout": "default",
   "style": {
     "navigationBarTitleText": "完整示例",
-    "enablePullDownRefresh ": true
+    "enablePullDownRefresh": true
   }
 }
 </route>

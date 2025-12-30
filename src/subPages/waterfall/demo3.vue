@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { onReachBottom } from '@dcloudio/uni-app'
-import { mockImages } from './utils/mock'
+import { onLoad, onReachBottom } from '@dcloudio/uni-app'
+import { ref } from 'vue'
 import NavTab from './components/NavTab.vue'
+import { mockImages } from './utils/mock'
 
 const columns = ref(3)
 
@@ -13,26 +13,23 @@ interface ListItem {
 
 const list = ref<ListItem[]>([])
 let uuid = 0
-function getData() {
-  return new Promise<ListItem[]>((resolve) => {
-    const data = Array(30)
-      .fill(0)
-      .map((_, i) => {
-        return {
-          id: uuid++,
-          url: mockImages[i % mockImages.length]
-        }
-      })
-    resolve(data)
+const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time))
+
+async function getData() {
+  await sleep(300)
+  return Array.from({ length: 10 }, (_, i) => {
+    return {
+      id: uuid++,
+      url: mockImages[i % mockImages.length]
+    }
   })
 }
 
 function loadEnd() {}
 function sliderChange({ detail: { value } }: any) {
-  console.log('value', value)
   columns.value = value
 }
-onMounted(async () => {
+onLoad(async () => {
   list.value.push(...(await getData()))
 })
 let i = 0
@@ -57,7 +54,7 @@ onReachBottom(async () => {
     >
       <wd-waterfall-item v-for="(item, index) in list" :key="item.id" :index="index">
         <template #default="{ loaded }">
-          <image mode="widthFix" class="iamge-node" :src="item.url" @load="loaded" @error="loaded" />
+          <image mode="widthFix" class="image-node" :src="item.url" @load="loaded" @error="loaded" />
         </template>
       </wd-waterfall-item>
     </wd-waterfall>
@@ -82,7 +79,7 @@ onReachBottom(async () => {
   padding: 40px;
 }
 
-.iamge-node {
+.image-node {
   width: 100%;
 }
 </style>
@@ -93,7 +90,7 @@ onReachBottom(async () => {
   "layout": "default",
   "style": {
     "navigationBarTitleText": "列数切换示例",
-    "enablePullDownRefresh ": true
+    "enablePullDownRefresh": true
   }
 }
 </route>
