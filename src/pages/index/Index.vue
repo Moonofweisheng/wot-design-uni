@@ -403,6 +403,10 @@ const list = computed(() => [
       {
         id: 'table',
         name: t('table-biao-ge')
+      },
+      {
+        id: 'waterfall',
+        name: t('waterfall-pu-bu-liu')
       }
     ]
   }
