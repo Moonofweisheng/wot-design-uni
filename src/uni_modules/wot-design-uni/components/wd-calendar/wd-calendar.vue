@@ -107,7 +107,11 @@
         />
       </view>
       <view v-if="showConfirm" class="wd-calendar__confirm">
-        <wd-button block :disabled="confirmBtnDisabled" @click="handleConfirm">{{ confirmText || translate('confirm') }}</wd-button>
+        <slot name="confirm-left"></slot>
+        <view style="flex-grow: 1">
+          <wd-button block :disabled="confirmBtnDisabled" @click="handleConfirm">{{ confirmText || translate('confirm') }}</wd-button>
+        </view>
+        <slot name="confirm-right"></slot>
       </view>
     </wd-action-sheet>
   </view>

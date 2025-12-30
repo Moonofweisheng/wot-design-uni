@@ -48,6 +48,11 @@
           @confirm="handleConfirmClear2"
         />
         <wd-calendar :label="$t('bi-tian-xing-hao-zai-you-ce')" v-model="value18" required marker-side="after" @confirm="handleConfirm6" />
+        <wd-calendar :label="$t('tuo-zhan-que-ding-qu-yu')" v-model="value19">
+          <template #confirm-right>
+            <wd-button block plain custom-style="margin-left: 10px;" @click="selectToday">{{ $t('xuan-ze-jin-tian') }}</wd-button>
+          </template>
+        </wd-calendar>
       </wd-cell-group>
     </view>
 
@@ -73,7 +78,7 @@ import { useToast } from '@/uni_modules/wot-design-uni'
 import { dayjs } from '@/uni_modules/wot-design-uni'
 import type { CalendarDayItem, CalendarFormatter } from '@/uni_modules/wot-design-uni/components/wd-calendar-view/types'
 import type { CalendarInstance, CalendarOnShortcutsClickOption } from '@/uni_modules/wot-design-uni/components/wd-calendar/types'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
@@ -98,6 +103,7 @@ const value15 = ref<number | null>(null)
 const value16 = ref<number>(Date.now())
 const value17 = ref<number>(Date.now())
 const value18 = ref<number>(Date.now())
+const value19 = ref<number>(Date.now())
 const valueClear1 = ref<number | null>(Date.now())
 const valueClear2 = ref<number[]>([Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now()])
 
@@ -159,6 +165,25 @@ const shortcuts = ref<Record<string, any>[]>([
     id: 30
   }
 ])
+
+const getToday = <R extends boolean = false>(range?: R): R extends true ? [number, number] : number => {
+  const now = new Date()
+  now.setHours(0, 0, 0, 0)
+
+  if (!range) {
+    return now.getTime() as any
+  }
+  const end = new Date(now)
+  end.setHours(23, 59, 59, 999)
+  return [now.getTime(), end.getTime()] as any
+}
+
+function selectToday() {
+  value19.value = Date.now()
+  nextTick(() => {
+    value19.value = getToday(false)
+  })
+}
 
 const toast = useToast()
 const onShortcutsClick = ({ item }: CalendarOnShortcutsClickOption) => {
