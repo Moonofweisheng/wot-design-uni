@@ -67,7 +67,7 @@ export const tabbarProps = {
   /**
    * 自定义组件的层级
    */
-  zIndex: makeNumberProp(99)
+  zIndex: makeNumberProp(14)
 }
 
 export type TabbarProps = ExtractPropTypes<typeof tabbarProps>
