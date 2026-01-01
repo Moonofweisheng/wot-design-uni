@@ -66,7 +66,8 @@ const isShow = computed(() => {
     return true
   }
   const count = typeof maxCount === 'number' ? maxCount : parseInt(maxCount, 10)
-  if (count <= 0) {
+  // 检查 count 是否为有效数字
+  if (isNaN(count) || count <= 0) {
     return true
   }
   return index.value < count
@@ -135,9 +136,11 @@ const rootStyle = computed(() => {
   } else if (isDef(sizeValue)) {
     size = addUnit(sizeValue)
   }
-  style.width = size
-  style.height = size
-  style.fontSize = `calc(${size} * 0.45)`
+  if (size) {
+    style.width = size
+    style.height = size
+    style.fontSize = `calc(${size} * 0.45)`
+  }
 
   // 形状 - 在 avatar-group 中优先使用 parent 的 shape
   const shape = parent && isDef(parent.props.shape) ? parent.props.shape : props.shape
