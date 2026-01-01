@@ -173,7 +173,7 @@ Use `size` and `shape` props to uniformly set the size and shape of all avatars 
 </wd-avatar-group>
 
 <!-- Unified Shape -->
-<wd-avatar-group shape="square" :max-count="3">
+<wd-avatar-group shape="square" :max-count="3" :collapse-avatar="'+N'">
   <wd-avatar :src="avatarURL" />
   <wd-avatar icon="star-on" />
   <wd-avatar text="A" bg-color="#1E90FF" />

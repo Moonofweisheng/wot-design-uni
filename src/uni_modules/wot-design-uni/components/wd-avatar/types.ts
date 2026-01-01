@@ -8,7 +8,7 @@
  * 记得注释
  */
 import type { ExtractPropTypes, PropType } from 'vue'
-import { baseProps, makeStringProp, numericProp } from '../common/props'
+import { baseProps, makeNumericProp, makeStringProp, numericProp } from '../common/props'
 import type { ImageMode } from '../wd-img/types'
 
 export type AvatarSize = 'large' | 'medium' | 'normal' | 'small'
@@ -36,7 +36,7 @@ export const avatarProps = {
    * 类型: string | number
    * 默认值: 'normal'
    */
-  size: numericProp,
+  size: makeNumericProp('normal'),
 
   /**
    * 头像形状，可选值: round(圆形) / square(方形)
