@@ -333,6 +333,10 @@ const list = computed(() => [
     icon: imgModules['../images/icon_nav_show.png'].default,
     pages: [
       {
+        id: 'avatar',
+        name: t('avatar-tou-xiang')
+      },
+      {
         id: 'badge',
         name: t('badge-hui-biao')
       },
