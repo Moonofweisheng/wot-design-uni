@@ -1,5 +1,6 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
+@import './common';
 
 .wot-theme-dark {
   @include b(avatar) {
@@ -70,22 +71,5 @@
 
   @include edeep(img) {
     border-radius: inherit;
-  }
-}
-
-// 在 avatar-group 中的样式
-.wd-avatar-group__item {
-  position: relative;
-  flex-shrink: 0;
-  box-sizing: border-box;
-
-  // 第一个元素不需要负 margin
-  &:first-child {
-    margin-left: 0;
-  }
-
-  // 其他元素使用负 margin 实现重叠效果
-  & + & {
-    margin-left: var(--wot-avatar-group-overlap, -12px);
   }
 }

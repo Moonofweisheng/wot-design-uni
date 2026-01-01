@@ -154,7 +154,8 @@ const rootStyle = computed(() => {
     } else if (cascading === 'right-up') {
       // 右侧在上，越前面越大
       const maxCount = parent.props.maxCount
-      const count = isDef(maxCount) && typeof maxCount === 'number' ? maxCount : isDef(maxCount) ? parseInt(maxCount as string, 10) : 999
+      const count =
+        isDef(maxCount) && typeof maxCount === 'number' ? maxCount : isDef(maxCount) ? parseInt(maxCount as string, 10) : parent.children?.length ?? 0
       style.zIndex = count - index.value
     }
   }

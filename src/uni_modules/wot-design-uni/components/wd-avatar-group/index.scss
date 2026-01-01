@@ -1,5 +1,6 @@
 @import '../common/abstracts/variable';
 @import '../common/abstracts/mixin';
+@import '../wd-avatar/common';
 
 @include b(avatar-group) {
   display: inline-flex;
@@ -7,17 +8,7 @@
   gap: 0;
 
   @include e(item) {
-    position: relative;
-    flex-shrink: 0;
-    box-sizing: border-box;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    & + & {
-      margin-left: var(--wot-avatar-group-overlap, -12px);
-    }
+    // 样式已在 common.scss 中定义
   }
 
   @include edeep(collapse) {
