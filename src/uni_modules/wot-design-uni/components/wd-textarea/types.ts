@@ -282,7 +282,12 @@ export const textareaProps = {
   /**
    * 必填标记位置，可选值：before（标签前）、after（标签后）
    */
-  markerSide: makeStringProp<'before' | 'after'>('before')
+  markerSide: makeStringProp<'before' | 'after'>('before'),
+
+  /**
+   * 支付宝小程序，可以在 input / textarea 组件中加上 enableNative="{{false}}"，避免 textarea 弹出键盘后出现内容上移
+   */
+  enableNative: makeBooleanProp(true)
 }
 
 export type TextareaProps = ExtractPropTypes<typeof textareaProps>
