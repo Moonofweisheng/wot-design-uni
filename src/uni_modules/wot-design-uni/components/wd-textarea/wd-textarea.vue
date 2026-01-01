@@ -21,6 +21,7 @@
         :show-count="false"
         :placeholder="placeholderValue"
         :disabled="disabled || readonly"
+        :enable-native="enableNative"
         :maxlength="maxlength"
         :focus="focused"
         :auto-focus="autoFocus"
