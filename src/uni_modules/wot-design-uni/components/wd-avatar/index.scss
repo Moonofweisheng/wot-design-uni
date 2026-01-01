@@ -1,0 +1,91 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wot-theme-dark {
+  @include b(avatar) {
+    background-color: $-dark-background4;
+    color: $-dark-color;
+  }
+}
+
+@include b(avatar) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--wot-avatar-size, 54px);
+  height: var(--wot-avatar-size, 54px);
+  color: var(--wot-avatar-text-color, #fff);
+  font-weight: var(--wot-avatar-font-weight, $-fw-medium);
+  font-size: var(--wot-avatar-font-size, 20px);
+  line-height: var(--wot-avatar-line-height, 1.2);
+  text-align: center;
+  background-color: var(--wot-avatar-bg-color, $-color-gray-5);
+  border-radius: var(--wot-avatar-border-radius, 8px);
+  overflow: hidden;
+  user-select: none;
+  vertical-align: middle;
+  flex-shrink: 0;
+
+  @include when(round) {
+    border-radius: 50%;
+  }
+
+  @include when(square) {
+    border-radius: var(--wot-avatar-border-radius, 8px);
+  }
+
+  @include when(large) {
+    width: var(--wot-avatar-size-large, 76px);
+    height: var(--wot-avatar-size-large, 76px);
+    font-size: var(--wot-avatar-font-size-large, 28px);
+  }
+
+  @include when(medium) {
+    width: var(--wot-avatar-size-medium, 64px);
+    height: var(--wot-avatar-size-medium, 64px);
+    font-size: var(--wot-avatar-font-size-medium, 24px);
+  }
+
+  @include when(normal) {
+    width: var(--wot-avatar-size, 54px);
+    height: var(--wot-avatar-size, 54px);
+    font-size: var(--wot-avatar-font-size, 20px);
+  }
+
+  @include when(small) {
+    width: var(--wot-avatar-size-small, 48px);
+    height: var(--wot-avatar-size-small, 48px);
+    font-size: var(--wot-avatar-font-size-small, 18px);
+  }
+
+  @include e(text) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include edeep(icon) {
+    font-size: inherit;
+  }
+
+  @include edeep(img) {
+    border-radius: inherit;
+  }
+}
+
+// 在 avatar-group 中的样式
+.wd-avatar-group__item {
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  // 第一个元素不需要负 margin
+  &:first-child {
+    margin-left: 0;
+  }
+
+  // 其他元素使用负 margin 实现重叠效果
+  & + & {
+    margin-left: var(--wot-avatar-group-overlap, -12px);
+  }
+}
