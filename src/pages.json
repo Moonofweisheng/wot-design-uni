@@ -81,6 +81,21 @@
           }
         },
         {
+          "path": "avatar/Index",
+          "name": "avatar",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "Avatar 头像",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%avatar-title%"
+            // #endif
+          }
+        },
+        {
           "path": "cell/Index",
           "name": "cell",
           "style": {
