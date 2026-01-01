@@ -1,0 +1,26 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(avatar-group) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+
+  @include e(item) {
+    position: relative;
+    flex-shrink: 0;
+    box-sizing: border-box;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    & + & {
+      margin-left: var(--wot-avatar-group-overlap, -12px);
+    }
+  }
+
+  @include edeep(collapse) {
+    font-size: 12px;
+  }
+}
