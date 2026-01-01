@@ -431,6 +431,10 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
+              link: '/component/avatar',
+              text: 'Avatar 头像'
+            },
+            {
               link: '/component/badge',
               text: 'Badge 徽标'
             },

@@ -425,6 +425,10 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
+              link: '/en-US/component/avatar',
+              text: 'Avatar'
+            },
+            {
               link: '/en-US/component/badge',
               text: 'Badge'
             },
