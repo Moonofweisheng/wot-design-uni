@@ -5,7 +5,6 @@
  * @LastEditors: North
  * @Description: Avatar 头像组件，支持图片、文本或图标展示
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-avatar/wd-avatar.vue
- * 记得注释
 -->
 <template>
   <view v-if="isShow" :class="rootClass" :style="rootStyle" @click="handleClick">
@@ -44,6 +43,7 @@ const props = defineProps(avatarProps)
 const emit = defineEmits(['error', 'click'])
 const slots = useSlots()
 
+// _internal 用于 avatar-group 内部的溢出计数头像，跳过父组件上下文
 const { parent, index } = props._internal ? { parent: null, index: ref(-1) } : useParent(AVATAR_GROUP_KEY)
 
 const SIZE_MAP: Record<AvatarSize, number> = {
@@ -140,6 +140,10 @@ const rootStyle = computed(() => {
     style.width = size
     style.height = size
     style.fontSize = `calc(${size} * 0.45)`
+
+    if (parent) {
+      style['--wot-avatar-group-overlap' as any] = `calc(${size} * -0.22)`
+    }
   }
 
   // 形状 - 在 avatar-group 中优先使用 parent 的 shape

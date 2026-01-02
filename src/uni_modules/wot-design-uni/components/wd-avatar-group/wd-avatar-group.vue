@@ -5,7 +5,6 @@
  * @LastEditors: North
  * @Description: AvatarGroup 头像组组件，用于将多个头像组合展示
  * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-avatar-group/wd-avatar-group.vue
- * 记得注释
 -->
 <template>
   <view :class="rootClass" :style="customStyle">
@@ -29,14 +28,14 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, type CSSProperties } from 'vue'
+import { computed, type CSSProperties, type ComponentPublicInstance } from 'vue'
 import wdAvatar from '../wd-avatar/wd-avatar.vue'
 import { avatarGroupProps, AVATAR_GROUP_KEY, type AvatarGroupProvide } from './types'
 import { useChildren } from '../composables/useChildren'
 
 const props = defineProps(avatarGroupProps)
 
-const { children, linkChildren } = useChildren<any, AvatarGroupProvide>(AVATAR_GROUP_KEY)
+const { children, linkChildren } = useChildren<ComponentPublicInstance, AvatarGroupProvide>(AVATAR_GROUP_KEY)
 
 linkChildren({ props })
 
@@ -47,32 +46,29 @@ const rootClass = computed(() => {
   return `wd-avatar-group wd-avatar-group--${props.cascading} ${props.customClass}`
 })
 
+const maxCountValue = computed(() => {
+  if (!props.maxCount) {
+    return 0
+  }
+  const count = typeof props.maxCount === 'number' ? props.maxCount : parseInt(props.maxCount, 10)
+  return isNaN(count) || count <= 0 ? 0 : count
+})
+
 /**
  * 是否显示折叠头像
  */
 const showCollapse = computed(() => {
-  if (!props.maxCount) {
-    return false
-  }
-  const maxCountValue = typeof props.maxCount === 'number' ? props.maxCount : parseInt(props.maxCount, 10)
-  if (maxCountValue <= 0) {
-    return false
-  }
-  return children.length > maxCountValue
+  return maxCountValue.value > 0 && children.length > maxCountValue.value
 })
 
 /**
  * 剩余未显示的数量
  */
 const restCount = computed(() => {
-  if (!props.maxCount) {
+  if (maxCountValue.value <= 0) {
     return 0
   }
-  const maxCountValue = typeof props.maxCount === 'number' ? props.maxCount : parseInt(props.maxCount, 10)
-  if (maxCountValue <= 0) {
-    return 0
-  }
-  return Math.max(0, children.length - maxCountValue)
+  return Math.max(0, children.length - maxCountValue.value)
 })
 
 /**
@@ -88,8 +84,8 @@ const collapseText = computed(() => {
 const collapseStyle = computed(() => {
   const style: CSSProperties = {}
   if (props.cascading === 'left-up') {
-    const maxCountValue = props.maxCount ? (typeof props.maxCount === 'number' ? props.maxCount : parseInt(props.maxCount, 10)) : children.length
-    style.zIndex = maxCountValue + 1
+    const count = maxCountValue.value > 0 ? maxCountValue.value : children.length
+    style.zIndex = count + 1
   } else {
     style.zIndex = 0
   }

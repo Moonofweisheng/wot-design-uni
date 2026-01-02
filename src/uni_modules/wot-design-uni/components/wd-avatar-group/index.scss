@@ -12,6 +12,6 @@
   }
 
   @include edeep(collapse) {
-    font-size: 12px;
+    font-size: var(--wot-avatar-group-collapse-font-size, 12px);
   }
 }
