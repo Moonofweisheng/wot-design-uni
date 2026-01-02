@@ -161,8 +161,15 @@ const rootStyle = computed(() => {
     } else if (cascading === 'right-up') {
       // 右侧在上，越前面越大
       const maxCount = parent.props.maxCount
-      const count =
-        isDef(maxCount) && typeof maxCount === 'number' ? maxCount : isDef(maxCount) ? parseInt(maxCount as string, 10) : parent.children?.length ?? 0
+      let count = parent.children?.length ?? 0
+
+      if (isDef(maxCount)) {
+        const parsedCount = typeof maxCount === 'number' ? maxCount : parseInt(maxCount, 10)
+        if (!isNaN(parsedCount) && parsedCount > 0) {
+          count = parsedCount
+        }
+      }
+
       style.zIndex = count - index.value
     }
   }
