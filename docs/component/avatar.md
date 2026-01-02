@@ -161,7 +161,7 @@ const handleClick = () => {
 
 ### 统一尺寸和形状
 
-使用 `size` 和 `shape` 属性统一设置头像组中所有头像的尺寸和形状。
+使用 `size` 和 `shape` 属性统一设置头像组中所有头像的尺寸和形状。使用 `max-count` 限制显示数量，超出部分会显示折叠头像。通过 `collapse-avatar` 可自定义折叠头像的文本内容。
 
 ```html
 <!-- 统一尺寸 -->
@@ -172,7 +172,7 @@ const handleClick = () => {
   <wd-avatar text="B" bg-color="#228B22" />
 </wd-avatar-group>
 
-<!-- 统一形状 -->
+<!-- 统一形状，自定义折叠文本 -->
 <wd-avatar-group shape="square" :max-count="3" :collapse-avatar="'+N'">
   <wd-avatar :src="avatarURL" />
   <wd-avatar icon="star-on" />
