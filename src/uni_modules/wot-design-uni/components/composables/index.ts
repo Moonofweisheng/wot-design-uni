@@ -1,7 +1,6 @@
 export { useCell } from './useCell'
 export { useChildren, flattenVNodes, sortChildren } from './useChildren'
 export { useCountDown } from './useCountDown'
-export { useDelayTask } from './useDelayTask'
 export { useLockScroll } from './useLockScroll'
 export { useParent } from './useParent'
 export { usePopover } from './usePopover'

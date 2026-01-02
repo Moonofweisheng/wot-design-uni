@@ -501,10 +501,6 @@ export default defineConfig({
             {
               link: '/component/table',
               text: 'Table 表格'
-            },
-            {
-              link: '/component/waterfall',
-              text: 'Waterfall 瀑布流'
             }
           ]
         },

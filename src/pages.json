@@ -1328,69 +1328,6 @@
           }
         },
         {
-          "path": "waterfall/Index",
-          "name": "waterfall-demo1",
-          "style": {
-            // #ifdef MP
-            "navigationBarTitleText": "基础使用",
-            // #endif
-            // #ifndef MP
-            "navigationBarTitleText": "%waterfall-demo1%"
-            // #endif
-          }
-        },
-        {
-          "path": "waterfall/demo2",
-          "name": "waterfall-demo2",
-          "style": {
-            // #ifdef MP
-            "navigationBarTitleText": "基础使用2",
-            // #endif
-            // #ifndef MP
-            "navigationBarTitleText": "%waterfall-demo2%",
-            // #endif
-            "enablePullDownRefresh": true
-
-          }
-        },
-        {
-          "path": "waterfall/demo3",
-          "name": "waterfall-demo3",
-          "style": {
-            // #ifdef MP
-            "navigationBarTitleText": "列数切换示例",
-            // #endif
-            // #ifndef MP
-            "navigationBarTitleText": "%waterfall-demo3%"
-            // #endif
-          }
-        },
-        {
-          "path": "waterfall/demo4",
-          "name": "waterfall-known",
-          "style": {
-            // #ifdef MP
-            "navigationBarTitleText": "已知高度示例",
-            // #endif
-            // #ifndef MP
-            "navigationBarTitleText": "%waterfall-known%"
-            // #endif
-          }
-        },
-        {
-          "path": "waterfall/demo5",
-          "name": "waterfall-demo5",
-          "style": {
-            // #ifdef MP
-            "navigationBarTitleText": "Mock 加载成功/失败演示",
-            // #endif
-            // #ifndef MP
-            "navigationBarTitleText": "%waterfall-demo5%",
-            // #endif
-            "enablePullDownRefresh": true
-          }
-        },
-        {
           "path": "tour/Index",
           "name": "tour",
           "style": {
