@@ -161,7 +161,7 @@ Use `cascading` prop to set the cascading direction, supports `left-up` (left av
 
 ### Unified Size and Shape
 
-Use `size` and `shape` props to uniformly set the size and shape of all avatars in the group.
+Use `size` and `shape` props to uniformly set the size and shape of all avatars in the group. Use `max-count` to limit the number of displayed avatars, and excess avatars will show a collapsed avatar. Customize the collapsed avatar text using `collapse-avatar`.
 
 ```html
 <!-- Unified Size -->
@@ -172,7 +172,7 @@ Use `size` and `shape` props to uniformly set the size and shape of all avatars 
   <wd-avatar text="B" bg-color="#228B22" />
 </wd-avatar-group>
 
-<!-- Unified Shape -->
+<!-- Unified Shape with Custom Collapse Text -->
 <wd-avatar-group shape="square" :max-count="3" :collapse-avatar="'+N'">
   <wd-avatar :src="avatarURL" />
   <wd-avatar icon="star-on" />
