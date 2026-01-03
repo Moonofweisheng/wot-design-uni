@@ -93,19 +93,19 @@ Supports customizing content through slots.
 
 ## Attributes
 
-| Parameter               | Description                                                                                           | Type            | Options | Default               | Version          |
-| ----------------------- | ----------------------------------------------------------------------------------------------------- | --------------- | ------- | --------------------- | ---------------- |
-| width                   | Width of slide bar (unit: px)                                                                         | number / string | -       | 300                   | $LOWEST_VERSION$ |
-| height                  | Height of slider (unit: px)                                                                           | number / string | -       | 40                    | $LOWEST_VERSION$ |
-| tolerance               | Tolerance range (unit: px), distance from endpoint within which verification is considered successful | number / string | -       | 10                    | $LOWEST_VERSION$ |
-| text                    | Prompt text                                                                                           | string          | -       | 向右滑动验证          | $LOWEST_VERSION$ |
-| success-text            | Success prompt text                                                                                   | string          | -       | 验证通过              | $LOWEST_VERSION$ |
-| disabled                | Whether to disable                                                                                    | boolean         | -       | false                 | $LOWEST_VERSION$ |
-| background-color        | Background color                                                                                      | string          | -       | #F5F7FA               | $LOWEST_VERSION$ |
-| active-background-color | Active background color                                                                               | string          | -       | #49C75F               | $LOWEST_VERSION$ |
-| icon                    | Slider icon name                                                                                      | string          | -       | a-chevron-rightdouble | $LOWEST_VERSION$ |
-| success-icon            | Success icon name                                                                                     | string          | -       | check                 | $LOWEST_VERSION$ |
-| icon-size               | Icon size (unit: px)                                                                                  | number / string | -       | 20                    | $LOWEST_VERSION$ |
+| Parameter               | Description                                                                                           | Type            | Options | Default                              | Version          |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- | --------------- | ------- | ------------------------------------ | ---------------- |
+| width                   | Width of slide bar (unit: px)                                                                         | number / string | -       | 300                                  | $LOWEST_VERSION$ |
+| height                  | Height of slider (unit: px)                                                                           | number / string | -       | 40                                   | $LOWEST_VERSION$ |
+| tolerance               | Tolerance range (unit: px), distance from endpoint within which verification is considered successful | number / string | -       | 10                                   | $LOWEST_VERSION$ |
+| text                    | Prompt text                                                                                           | string          | -       | Slide right to complete verification | $LOWEST_VERSION$ |
+| success-text            | Success prompt text                                                                                   | string          | -       | Verification passed                  | $LOWEST_VERSION$ |
+| disabled                | Whether to disable                                                                                    | boolean         | -       | false                                | $LOWEST_VERSION$ |
+| background-color        | Background color                                                                                      | string          | -       | #F5F7FA                              | $LOWEST_VERSION$ |
+| active-background-color | Active background color                                                                               | string          | -       | #49C75F                              | $LOWEST_VERSION$ |
+| icon                    | Slider icon name                                                                                      | string          | -       | a-chevron-rightdouble                | $LOWEST_VERSION$ |
+| success-icon            | Success icon name                                                                                     | string          | -       | check                                | $LOWEST_VERSION$ |
+| icon-size               | Icon size (unit: px)                                                                                  | number / string | -       | 20                                   | $LOWEST_VERSION$ |
 
 ## Events
 
