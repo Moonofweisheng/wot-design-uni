@@ -74,7 +74,7 @@ export default {
     inputNoValidate: 'กรุณาตรวจสอบว่าคุณได้ใส่ข้อมูลที่ถูกต้อง'
   },
   numberKeyboard: {
-    confir: 'ตกลง'
+    confirm: 'ตกลง'
   },
   pagination: {
     prev: 'ก่อนหน้า',
