@@ -27,6 +27,9 @@ hero:
     - theme: brand
       text: ✨Starter
       link: "https://starter.wot-ui.cn/"
+    - theme: brand
+      text: 🐟 About Author
+      link: "https://blog.wot-ui.cn/about"
 
 features:
   - icon: 🎯

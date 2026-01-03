@@ -29,10 +29,6 @@ export default defineConfig({
             link: '/guide/cli-templates',
           },
           {
-            text: '咨询服务',
-            link: '/guide/consultation',
-          },
-          {
             text: '定制主题',
             link: '/guide/custom-theme',
           },
@@ -86,6 +82,8 @@ export default defineConfig({
       },
       { text: '🥤一杯咖啡', link: '/reward/reward', activeMatch: '/reward/' },
       { text: '关于作者', link: 'https://blog.wot-ui.cn/about' },
+      { text: "wot-starter", link: 'https://starter.wot-ui.cn/' },
+      { text: "摸鱼插件", link: 'https://my-uni.wot-ui.cn/' },
       {
         text: '模板', items: [
           { text: '快速上手模板 wot-starter', link: 'https://starter.wot-ui.cn/' },
