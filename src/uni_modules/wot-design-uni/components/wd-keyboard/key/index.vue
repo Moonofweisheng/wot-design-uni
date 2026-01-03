@@ -1,5 +1,11 @@
 <template>
-  <view :class="`wd-key-wrapper ${wider ? 'wd-key-wrapper--wider' : ''}`" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+  <view
+    :class="`wd-key-wrapper ${wider ? 'wd-key-wrapper--wider' : ''}`"
+    :style="customStyle"
+    @touchstart="onTouchStart"
+    @touchmove="onTouchMove"
+    @touchend="onTouchEnd"
+  >
     <view :class="keyClass">
       <wd-loading custom-class="wd-key__loading-icon" v-if="props.loading" />
       <template v-if="type === 'delete'">
@@ -43,10 +49,11 @@ const active = ref<boolean>(false)
 const keyClass = computed(() => {
   return `wd-key ${props.large ? 'wd-key--large' : ''} ${props.type === 'delete' ? 'wd-key--delete' : ''} ${
     props.type === 'close' ? 'wd-key--close' : ''
-  }`
+  } ${active.value ? 'wd-key--active' : ''} ${props.type === 'spacer' ? 'wd-key--spacer' : ''} ${props.disabled ? 'wd-key--disabled' : ''}`
 })
 
 function onTouchStart(event: TouchEvent) {
+  if (props.disabled) return
   touch.touchStart(event)
   active.value = true
 }
