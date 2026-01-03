@@ -1,0 +1,19 @@
+/**
+ * Avatar Group Item 共享样式
+ * 用于 wd-avatar 和 wd-avatar-group 组件中的重叠效果
+ */
+.wd-avatar-group__item {
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  // 第一个元素不需要负 margin
+  &:first-child {
+    margin-left: 0;
+  }
+
+  // 其他元素使用负 margin 实现重叠效果
+  & + & {
+    margin-left: $-avatar-group-overlap;
+  }
+}

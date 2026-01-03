@@ -996,3 +996,22 @@ $-tour-skip-bg-color: var(--wot-tour-skip-bg-color, $-color-white) !default; // 
 $-tour-button-text-color: var(--wot-tour-button-text-color, $-color-black) !default; // 按钮文字默认颜色
 $-tour-highlight-shadow-color: var(--wot-tour-highlight-shadow-color, rgba(0, 0, 0, 0.65)) !default; // 高亮阴影颜色
 
+/* avatar */
+$-avatar-size: var(--wot-avatar-size, 54px) !default; // 默认尺寸
+$-avatar-size-large: var(--wot-avatar-size-large, 76px) !default; // 大尺寸
+$-avatar-size-medium: var(--wot-avatar-size-medium, 64px) !default; // 中尺寸
+$-avatar-size-small: var(--wot-avatar-size-small, 48px) !default; // 小尺寸
+$-avatar-text-color: var(--wot-avatar-text-color, #fff) !default; // 文字颜色
+$-avatar-font-weight: var(--wot-avatar-font-weight, $-fw-medium) !default; // 字重
+$-avatar-font-size: var(--wot-avatar-font-size, 20px) !default; // 默认字号
+$-avatar-font-size-large: var(--wot-avatar-font-size-large, 28px) !default; // 大尺寸字号
+$-avatar-font-size-medium: var(--wot-avatar-font-size-medium, 24px) !default; // 中尺寸字号
+$-avatar-font-size-small: var(--wot-avatar-font-size-small, 18px) !default; // 小尺寸字号
+$-avatar-line-height: var(--wot-avatar-line-height, 1.2) !default; // 行高
+$-avatar-bg-color: var(--wot-avatar-bg-color, $-color-gray-5) !default; // 背景颜色
+$-avatar-border-radius: var(--wot-avatar-border-radius, 8px) !default; // 圆角大小
+
+/* avatar-group */
+$-avatar-group-overlap: var(--wot-avatar-group-overlap, -12px) !default; // 重叠距离
+$-avatar-group-collapse-font-size: var(--wot-avatar-group-collapse-font-size, 12px) !default; // 折叠文字字号
+

@@ -1,0 +1,75 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+@import './common';
+
+.wot-theme-dark {
+  @include b(avatar) {
+    background-color: $-dark-background4;
+    color: $-dark-color;
+  }
+}
+
+@include b(avatar) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $-avatar-size;
+  height: $-avatar-size;
+  color: $-avatar-text-color;
+  font-weight: $-avatar-font-weight;
+  font-size: $-avatar-font-size;
+  line-height: $-avatar-line-height;
+  text-align: center;
+  background-color: $-avatar-bg-color;
+  border-radius: $-avatar-border-radius;
+  overflow: hidden;
+  user-select: none;
+  vertical-align: middle;
+  flex-shrink: 0;
+
+  @include when(round) {
+    border-radius: 50%;
+  }
+
+  @include when(square) {
+    border-radius: $-avatar-border-radius;
+  }
+
+  @include when(large) {
+    width: $-avatar-size-large;
+    height: $-avatar-size-large;
+    font-size: $-avatar-font-size-large;
+  }
+
+  @include when(medium) {
+    width: $-avatar-size-medium;
+    height: $-avatar-size-medium;
+    font-size: $-avatar-font-size-medium;
+  }
+
+  @include when(normal) {
+    width: $-avatar-size;
+    height: $-avatar-size;
+    font-size: $-avatar-font-size;
+  }
+
+  @include when(small) {
+    width: $-avatar-size-small;
+    height: $-avatar-size-small;
+    font-size: $-avatar-font-size-small;
+  }
+
+  @include e(text) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include edeep(icon) {
+    font-size: inherit;
+  }
+
+  @include edeep(img) {
+    border-radius: inherit;
+  }
+}
