@@ -135,5 +135,9 @@ export default {
     clearText: 'Clear',
     revokeText: 'Undo',
     restoreText: 'Restore'
+  },
+  slideVerify: {
+    text: 'Slide right to verify',
+    successText: 'Verification passed'
   }
 }

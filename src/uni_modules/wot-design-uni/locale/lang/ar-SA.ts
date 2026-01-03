@@ -135,5 +135,9 @@ export default {
     clearText: 'مسح',
     revokeText: 'تراجع',
     restoreText: 'استعادة'
+  },
+  slideVerify: {
+    text: 'اسحب لليمين للتحقق',
+    successText: 'تم التحقق بنجاح'
   }
 }

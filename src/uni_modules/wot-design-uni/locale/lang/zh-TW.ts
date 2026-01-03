@@ -77,5 +77,9 @@ export default {
     clearText: '清空',
     revokeText: '撤銷',
     restoreText: '恢復'
+  },
+  slideVerify: {
+    text: '向右滑動驗證',
+    successText: '驗證通過'
   }
 }

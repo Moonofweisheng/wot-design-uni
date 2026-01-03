@@ -4,7 +4,7 @@
     <view class="wd-slide-verify__text">
       <slot name="text">
         <text class="wd-slide-verify__text-inner">
-          {{ text }}
+          {{ slideVerifyText }}
         </text>
       </slot>
     </view>
@@ -14,7 +14,7 @@
       <view class="wd-slide-verify__track-text">
         <slot name="success-text">
           <text class="wd-slide-verify__track-text--success">
-            {{ successText }}
+            {{ slideVerifySuccessText }}
           </text>
         </slot>
       </view>
@@ -64,12 +64,22 @@ import { ref, computed, onBeforeUnmount, type CSSProperties } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { slideVerifyProps } from './type'
 import { useTouch } from '../composables/useTouch'
-import { objToStyle, addUnit } from '../common/util'
+import { useTranslate } from '../composables/useTranslate'
+import { objToStyle, addUnit, isDef } from '../common/util'
 
 const props = defineProps(slideVerifyProps)
 const emit = defineEmits(['success', 'fail'])
 
 const touch = useTouch()
+const { translate } = useTranslate('slideVerify')
+
+const slideVerifyText = computed(() => {
+  return isDef(props.text) && props.text !== '' ? props.text : translate('text')
+})
+
+const slideVerifySuccessText = computed(() => {
+  return isDef(props.successText) && props.successText !== '' ? props.successText : translate('successText')
+})
 
 const rootClass = computed(() => {
   return [

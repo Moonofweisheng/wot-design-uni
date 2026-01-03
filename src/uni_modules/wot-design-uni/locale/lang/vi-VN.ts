@@ -88,5 +88,9 @@ export default {
     clearText: 'Xóa',
     revokeText: 'Hoàn tác',
     restoreText: 'Khôi phục'
+  },
+  slideVerify: {
+    text: 'Vuốt sang phải để xác minh',
+    successText: 'Xác minh thành công'
   }
 }

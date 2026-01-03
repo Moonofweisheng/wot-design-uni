@@ -25,13 +25,13 @@ export const slideVerifyProps = {
    * 提示文字
    * @default '向右滑动验证'
    */
-  text: makeStringProp('向右滑动验证'),
+  text: makeStringProp(''),
 
   /**
    * 验证成功提示文字
    * @default '验证通过'
    */
-  successText: makeStringProp('验证通过'),
+  successText: makeStringProp(''),
 
   /**
    * 是否禁用
