@@ -73,7 +73,6 @@
     @include m(success) {
       width: calc(var(--wd-slide-verify-button-size, 40px) * 0.5);
       height: calc(var(--wd-slide-verify-button-size, 40px) * 0.5);
-      background-color: var(--wd-color-success, #07c160);
       border-radius: 50%;
       display: flex;
       align-items: center;

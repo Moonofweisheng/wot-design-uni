@@ -29,7 +29,12 @@
       :style="buttonStyle"
     >
       <slot v-if="isPass" name="success-icon">
-        <view class="wd-slide-verify__button-icon--success">
+        <view
+          class="wd-slide-verify__button-icon--success"
+          :style="{
+            backgroundColor: activeBackgroundColor
+          }"
+        >
           <wd-icon :name="successIcon" :size="12" color="#fff" />
         </view>
       </slot>
@@ -59,7 +64,7 @@ import { ref, computed, onBeforeUnmount, type CSSProperties } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { slideVerifyProps } from './type'
 import { useTouch } from '../composables/useTouch'
-import { objToStyle } from '../common/util'
+import { objToStyle, addUnit } from '../common/util'
 
 const props = defineProps(slideVerifyProps)
 const emit = defineEmits(['success', 'fail'])
@@ -80,8 +85,8 @@ const rootClass = computed(() => {
 
 const rootStyle = computed(() => {
   const style: CSSProperties = {
-    width: `${props.width}px`,
-    height: `${props.height}px`,
+    width: addUnit(props.width),
+    height: addUnit(props.height),
     backgroundColor: props.backgroundColor
   }
 
@@ -91,11 +96,11 @@ const rootStyle = computed(() => {
 const buttonStyle = computed(() => {
   const size = props.height
   const style: CSSProperties = {
-    width: `${size}px`,
-    height: `${size}px`,
+    width: addUnit(size),
+    height: addUnit(size),
     transform: `translate(${currentPosition.value}px, 0)`,
     transition: isResetting.value ? 'all 0.3s ease' : 'none',
-    '--wd-slide-verify-button-size': `${size}px`
+    '--wd-slide-verify-button-size': addUnit(size)
   }
   return objToStyle(style)
 })
@@ -104,7 +109,7 @@ const trackStyle = computed(() => {
   const style: CSSProperties = {
     width: `${currentPosition.value}px`,
     backgroundColor: props.activeBackgroundColor,
-    '--track-width': `${props.width}px`
+    '--track-width': addUnit(props.width)
   }
   return objToStyle(style)
 })
