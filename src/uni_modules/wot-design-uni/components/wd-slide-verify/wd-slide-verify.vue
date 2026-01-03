@@ -35,7 +35,7 @@
             backgroundColor: activeBackgroundColor
           }"
         >
-          <wd-icon :name="successIcon" :size="12" color="#fff" />
+          <wd-icon :name="successIcon" :size="iconSize" color="#fff" />
         </view>
       </slot>
 
@@ -153,7 +153,7 @@ const maxPosition = computed(() => {
 // 完成状态判断
 const isComplete = computed(() => {
   const distance = Math.abs(maxPosition.value - currentPosition.value)
-  return distance <= Number(props.tolerance) // 容差范围内完成
+  return distance <= parseNumber(props.tolerance) // 容差范围内完成
 })
 
 // 位置状态
@@ -216,6 +216,28 @@ onBeforeUnmount(() => {
     clearTimeout(timer.value)
     timer.value = null
   }
+})
+
+/**
+ * 重置验证组件到初始状态
+ */
+const reset = () => {
+  if (timer.value !== null) {
+    clearTimeout(timer.value)
+    timer.value = null
+  }
+  isResetting.value = true
+  currentPosition.value = 0
+  startPosition.value = 0
+  isPass.value = false
+  isDragging.value = false
+  timer.value = setTimeout(() => {
+    isResetting.value = false
+  }, 300)
+}
+
+defineExpose({
+  reset
 })
 </script>
 

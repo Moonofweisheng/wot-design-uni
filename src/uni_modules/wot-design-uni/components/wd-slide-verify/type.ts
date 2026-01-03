@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
 import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
 
 export const slideVerifyProps = {
@@ -71,3 +71,12 @@ export const slideVerifyProps = {
 }
 
 export type SlideVerifyProps = ExtractPropTypes<typeof slideVerifyProps>
+
+export type SlideVerifyExpose = {
+  /**
+   * 重置验证组件到初始状态
+   */
+  reset: () => void
+}
+
+export type SlideVerifyInstance = ComponentPublicInstance<SlideVerifyProps, SlideVerifyExpose>
