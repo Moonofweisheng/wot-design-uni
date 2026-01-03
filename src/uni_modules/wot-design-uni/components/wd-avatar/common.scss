@@ -14,6 +14,6 @@
 
   // 其他元素使用负 margin 实现重叠效果
   & + & {
-    margin-left: var(--wot-avatar-group-overlap, -12px);
+    margin-left: $-avatar-group-overlap;
   }
 }
