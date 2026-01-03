@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2024-10-12 22:09:33
- * @LastEditTime: 2025-12-11 18:20:59
+ * @LastEditTime: 2026-01-03 17:24:50
  * @LastEditors: weisheng
  * @Description: 
  * @FilePath: /wot-design-uni/docs/.vitepress/theme/index.ts
@@ -14,6 +14,7 @@ import './styles/custom.css'
 import './styles/scrollbar.scss'
 
 import HomeFriendly from './components/HomeFriendly.vue'
+import HomeCases from './components/HomeCases.vue'
 import NavBarTitleAfter from './components/NavBarTitleAfter.vue'
 import CustomFooter from './components/CustomFooter.vue'
 import SvgImage from './components/SvgImage.vue'
@@ -39,9 +40,9 @@ export default {
   Layout() {
     return h(Theme.Layout, null, {
       'layout-top': () => h(Banner),
-      'home-hero-info-after':()=>h(HomeStar),
+      // 'home-hero-info-after':()=>h(HomeStar),
       'home-hero-after': () => h(SpecialSponsor),
-      'home-features-after': () => h(HomeFriendly),
+      'home-features-after': () => [h(HomeFriendly), h(HomeCases)],
       'layout-bottom':() => h(CustomFooter),
       'nav-bar-title-after': () => h(NavBarTitleAfter),
       'aside-outline-after': () => h(WwAds),
@@ -57,6 +58,10 @@ export default {
       const showVotingNotification = () => {
         const key = 'gitee-vote-2025'
         if (localStorage.getItem(key)) return
+
+        const deadline = new Date('2026-01-10T00:00:00+08:00').getTime()
+        const now = Date.now()
+        if (now > deadline) return
 
         ElMessageBox.confirm(
           '朋友们，我正在参加 Gitee 2025 最受欢迎的开源软件投票活动，马上跌出前 3 了😂，不得已加了这个弹框，快来给我投票吧！ <a href="https://gitee.com/activity/2025opensource?ident=IEVXGS" target="_blank" style="color: var(--vp-c-brand);">https://gitee.com/activity/2025opensource?ident=IEVXGS</a>',
