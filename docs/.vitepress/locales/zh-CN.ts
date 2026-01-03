@@ -325,6 +325,10 @@ export default defineConfig({
               text: 'Slider 滑块'
             },
             {
+              link: '/component/slide-verify',
+              text: 'SlideVerify 滑动验证'
+            },
+            {
               link: '/component/switch',
               text: 'Switch 开关'
             },

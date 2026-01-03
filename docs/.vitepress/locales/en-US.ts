@@ -321,6 +321,10 @@ export default defineConfig({
               text: 'Slider'
             },
             {
+              link: '/en-US/component/slide-verify',
+              text: 'SlideVerify'
+            },
+            {
               link: '/en-US/component/switch',
               text: 'Switch'
             },
