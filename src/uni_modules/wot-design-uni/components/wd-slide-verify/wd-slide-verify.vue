@@ -1,5 +1,5 @@
 <template>
-  <view :class="rootClass" :style="rootStyle" id="wdSlideVerifyRoot">
+  <view :class="rootClass" :style="rootStyle">
     <!-- 背景提示文字 -->
     <view class="wd-slide-verify__text">
       <slot name="text">
