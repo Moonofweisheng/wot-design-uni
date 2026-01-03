@@ -28,6 +28,11 @@
       <wd-slide-verify disabled />
     </demo-block>
 
+    <demo-block :title="$t('zhong-zhi-fang-fa')">
+      <wd-slide-verify ref="slideVerifyRef" @success="handleSuccess" @fail="handleFail" />
+      <wd-button type="primary" @click="handleReset" style="margin-top: 20px">{{ $t('zhong-zhi') }}</wd-button>
+    </demo-block>
+
     <demo-block :title="$t('cha-cao-yong-fa')">
       <wd-slide-verify>
         <template #text>
@@ -49,10 +54,14 @@
 
 <script lang="ts" setup>
 import { useToast } from '@/uni_modules/wot-design-uni'
+import type { SlideVerifyInstance } from '@/uni_modules/wot-design-uni/components/wd-slide-verify/type'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const toast = useToast()
 const { t } = useI18n()
+
+const slideVerifyRef = ref<SlideVerifyInstance>()
 
 function handleSuccess() {
   toast.success(t('yan-zheng-cheng-gong'))
@@ -60,6 +69,11 @@ function handleSuccess() {
 
 function handleFail() {
   toast.error(t('yan-zheng-shi-bai-qing-chong-shi'))
+}
+
+function handleReset() {
+  slideVerifyRef.value?.reset()
+  toast.info(t('yi-zhong-zhi'))
 }
 </script>
 

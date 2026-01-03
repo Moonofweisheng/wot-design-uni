@@ -70,6 +70,26 @@ Set the `disabled` property to disable slide verification.
 <wd-slide-verify disabled />
 ```
 
+## Reset Method
+
+Get the component instance through `ref` and call the `reset` method to reset the verification state.
+
+```html
+<wd-slide-verify ref="slideVerifyRef" />
+<wd-button @click="handleReset">Reset</wd-button>
+```
+
+```typescript
+import { ref } from 'vue'
+import type { SlideVerifyInstance } from 'wot-design-uni'
+
+const slideVerifyRef = ref<SlideVerifyInstance>()
+
+function handleReset() {
+  slideVerifyRef.value?.reset()
+}
+```
+
 ## Slots
 
 Supports customizing content through slots.
@@ -114,7 +134,15 @@ Supports customizing content through slots.
 | success    | Triggered when verification succeeds | -          | $LOWEST_VERSION$ |
 | fail       | Triggered when verification fails    | -          | $LOWEST_VERSION$ |
 
-## Slots
+## Methods
+
+You can get the component instance through ref and call the methods provided by the component:
+
+| Method | Description                                           | Parameters | Version          |
+| ------ | ----------------------------------------------------- | ---------- | ---------------- |
+| reset  | Reset the verification component to its initial state | -          | $LOWEST_VERSION$ |
+
+## Slots API
 
 | Slot Name    | Description                        | Version          |
 | ------------ | ---------------------------------- | ---------------- |

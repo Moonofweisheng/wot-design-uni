@@ -72,6 +72,26 @@ function handleFail() {
 <wd-slide-verify disabled />
 ```
 
+## 重置方法
+
+通过 `ref` 获取组件实例，调用 `reset` 方法重置验证状态。
+
+```html
+<wd-slide-verify ref="slideVerifyRef" />
+<wd-button @click="handleReset">重置</wd-button>
+```
+
+```typescript
+import { ref } from 'vue'
+import type { SlideVerifyInstance } from 'wot-design-uni'
+
+const slideVerifyRef = ref<SlideVerifyInstance>()
+
+function handleReset() {
+  slideVerifyRef.value?.reset()
+}
+```
+
 ## 插槽
 
 支持通过插槽自定义内容。
@@ -118,7 +138,15 @@ function handleFail() {
 | success  | 验证成功时触发 | -    | $LOWEST_VERSION$ |
 | fail     | 验证失败时触发 | -    | $LOWEST_VERSION$ |
 
-## Slots
+## Methods
+
+通过 ref 可以获取到组件实例，调用组件提供的方法：
+
+| 方法名 | 说明                   | 参数 | 最低版本         |
+| ------ | ---------------------- | ---- | ---------------- |
+| reset  | 重置验证组件到初始状态 | -    | $LOWEST_VERSION$ |
+
+## Slots API
 
 | 插槽名称     | 说明                       | 最低版本         |
 | ------------ | -------------------------- | ---------------- |
