@@ -3,6 +3,7 @@
 // 如需修改版本信息，请在对应的 Markdown 文件 frontmatter 中修改
 
 export const versionData = {
+  "/component/avatar": "$LOWEST_VERSION$",
   "/component/count-to": "1.3.8",
   "/component/keyboard": "1.3.10",
   "/component/root-portal": "1.11.0",
