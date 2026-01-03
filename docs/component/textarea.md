@@ -161,6 +161,7 @@ const value = ref<string>('')
 | focusWhenClear          | 点击清除按钮时是否聚焦输入框                                                                      | boolean           | -                                  | true      | 1.3.7    |
 | ignoreCompositionEvent  | 是否忽略文本合成系统事件处理（为 false 时触发 composition 相关事件，且在合成期间触发 input 事件） | boolean           | -                                  | true      | 1.3.11   |
 | inputmode               | 输入数据类型提示                                                                                  | InputMode         | -                                  | text      | 1.5.0    |
+| enableNative  | 支付宝小程序使用，设置为false可以避免textarea弹出键盘后出现内容上移 | boolean           | -                                  | true      | $LOWEST_VERSION$   |
 
 ### InputMode 可选值
 

@@ -159,6 +159,7 @@ When a `label` title is set, it defaults to top alignment. Set the `center` prop
 | focusWhenClear | Whether to focus input box when clicking clear button | boolean | - | true | 1.3.7 |
 | ignoreCompositionEvent | Whether to ignore text composition system events (when false, triggers composition events and input events during composition) | boolean | - | true | 1.3.11 |
 | inputmode | Input data type hint | InputMode | - | text | 1.5.0 |
+| enableNative | For Alipay Mini Program, setting to false can avoid content shifting up after textarea keyboard pops up | boolean | - | true | $LOWEST_VERSION$ |
 
 ### InputMode Options
 
@@ -196,3 +197,6 @@ This property can be used in web and app-vue platforms of uni-app in compatible 
 | clear | Listen to input box clear button event | - | - |
 | linechange | Listen to input box line number change | `{ height: 0, heightRpx: 0, lineCount: 0 }` | - |
 | confirm | Triggered when clicking done, triggers confirm event | `{ value }` | - |
+| keyboardheightchange | Triggered when keyboard height changes | `{ height, duration }` | - |
+| clickprefixicon | Triggered when clicking prefix icon | - | - |
+| clicksuffixicon | Triggered when clicking suffix icon | - | - |
