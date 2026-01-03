@@ -159,7 +159,7 @@ When a `label` title is set, it defaults to top alignment. Set the `center` prop
 | focusWhenClear | Whether to focus input box when clicking clear button | boolean | - | true | 1.3.7 |
 | ignoreCompositionEvent | Whether to ignore text composition system events (when false, triggers composition events and input events during composition) | boolean | - | true | 1.3.11 |
 | inputmode | Input data type hint | InputMode | - | text | 1.5.0 |
-| enableNative | For Alipay Mini Program, setting to false can avoid content shifting up after textarea keyboard pops up | boolean | - | - | $LOWEST_VERSION$ |
+| enableNative | For Alipay Mini Program, setting to false can avoid content shifting up after textarea keyboard pops up | boolean | - | true | $LOWEST_VERSION$ |
 
 ### InputMode Options
 
