@@ -139,5 +139,9 @@ export default {
     clearText: '清空',
     revokeText: '撤销',
     restoreText: '恢复'
+  },
+  slideVerify: {
+    text: '向右滑动验证',
+    successText: '验证通过'
   }
 }

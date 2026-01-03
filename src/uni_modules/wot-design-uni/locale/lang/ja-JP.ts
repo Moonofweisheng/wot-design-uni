@@ -135,5 +135,9 @@ export default {
     clearText: 'クリア',
     revokeText: '元に戻す',
     restoreText: '復元'
+  },
+  slideVerify: {
+    text: '右にスライドして確認',
+    successText: '検証成功'
   }
 }

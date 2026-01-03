@@ -135,5 +135,9 @@ export default {
     clearText: '지우기',
     revokeText: '실행 취소',
     restoreText: '복원'
+  },
+  slideVerify: {
+    text: '오른쪽으로 슬라이드하여 확인',
+    successText: '확인 성공'
   }
 }

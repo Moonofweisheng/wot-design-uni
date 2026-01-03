@@ -135,5 +135,9 @@ export default {
     clearText: 'Löschen',
     revokeText: 'Rückgängig machen',
     restoreText: 'Wiederherstellen'
+  },
+  slideVerify: {
+    text: 'Nach rechts schieben zur Verifizierung',
+    successText: 'Verifizierung erfolgreich'
   }
 }

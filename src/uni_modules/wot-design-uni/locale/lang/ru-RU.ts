@@ -135,5 +135,9 @@ export default {
     clearText: 'Очистить',
     revokeText: 'Отменить',
     restoreText: 'Восстановить'
+  },
+  slideVerify: {
+    text: 'Проведите вправо для проверки',
+    successText: 'Проверка прошла успешно'
   }
 }

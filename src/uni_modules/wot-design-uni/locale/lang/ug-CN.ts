@@ -139,5 +139,9 @@ export default {
     clearText: 'تازىلاش',
     revokeText: 'بىكار قىلىش',
     restoreText: 'ئەسلىگە كەلتۈرۈش'
+  },
+  slideVerify: {
+    text: 'دەلىللەش ئۈچۈن ئوڭغا سۈرۈڭ',
+    successText: 'دەلىللەش مۇۋەپپەقىيەتلىك بولدى'
   }
 }

@@ -741,6 +741,21 @@
           }
         },
         {
+          "path": "slideVerify/Index",
+          "name": "slideVerify",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "SlideVerify 滑动验证",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%slide-verify-title%"
+            // #endif
+          }
+        },
+        {
           "path": "steps/Index",
           "name": "steps",
           "style": {
