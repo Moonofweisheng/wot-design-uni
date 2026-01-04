@@ -108,7 +108,7 @@
     "@types/node": "^18.15.3",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "@uni-helper/uni-types": "1.0.0-alpha.4",
+    "@uni-helper/uni-types": "1.0.0-alpha.7",
     "@uni-helper/vite-plugin-uni-components": "^0.1.0",
     "@vant/area-data": "^1.4.1",
     "@vant/touch-emulator": "^1.4.0",

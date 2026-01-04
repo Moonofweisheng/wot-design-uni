@@ -1,7 +1,7 @@
 /*
  * @Author: weisheng
  * @Date: 2025-04-09 00:02:58
- * @LastEditTime: 2025-07-10 15:33:49
+ * @LastEditTime: 2026-01-04 15:00:52
  * @LastEditors: weisheng
  * @Description:
  * @FilePath: /wot-design-uni/vitest.config.ts
@@ -19,7 +19,7 @@ export default defineConfig({
   plugins: [
     vitePluginUniConditionalCompile({
       platform
-    }),
+    }) as any,
     vue()
   ],
   resolve: {
