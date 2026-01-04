@@ -35,7 +35,7 @@
             backgroundColor: activeBackgroundColor
           }"
         >
-          <wd-icon :name="successIcon" :size="iconSize" color="#fff" />
+          <wd-icon :name="successIcon" :size="successIconSize" color="#fff" />
         </view>
       </slot>
 

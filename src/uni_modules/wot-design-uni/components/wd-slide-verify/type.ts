@@ -67,7 +67,13 @@ export const slideVerifyProps = {
    * 图标大小(单位:px)
    * @default 20
    */
-  iconSize: makeNumericProp(20)
+  iconSize: makeNumericProp(20),
+
+  /**
+   * 成功图标大小(单位:px)
+   * @default 12
+   */
+  successIconSize: makeNumericProp(12)
 }
 
 export type SlideVerifyProps = ExtractPropTypes<typeof slideVerifyProps>
