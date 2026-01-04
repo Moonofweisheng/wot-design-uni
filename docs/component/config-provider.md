@@ -239,6 +239,41 @@ const { theme, toggleTheme } = useTheme()
 </template>
 ```
 
+## 组合式函数
+
+### useConfigProvider
+
+详细文档请查看 [useConfigProvider](/component/use-config-provider)
+
+在微信小程序等环境中，由于组件渲染机制的限制（如原生插槽的作用域隔离），被渲染在插槽中的组件可能无法获取到包裹在插槽出口（slot outlet）外部的 `ConfigProvider` 组件的 Provide。此外，使用 `root-portal` 将节点移动到根节点时也可能导致上下文丢失。
+
+为了解决这个问题，`wot-design-uni` 提供了 `useConfigProvider` 组合式函数，允许你在 JS 逻辑中直接注入配置，确保深层嵌套或跨组件树的组件也能正确获取主题样式。
+
+#### 引入
+
+```ts
+import { useConfigProvider } from 'wot-design-uni'
+```
+
+#### 使用
+
+`useConfigProvider` 接受一个包含 `themeVars` 的对象，`themeVars` 支持普通对象、`reactive` 对象或 `Ref` 对象，能够实现响应式更新。
+
+```vue
+<script setup lang="ts">
+import { reactive } from 'vue'
+import { useConfigProvider } from 'wot-design-uni'
+
+const themeVars = reactive({
+  buttonPrimaryBgColor: '#07c160',
+  buttonPrimaryColor: '#07c160'
+})
+
+// 在当前组件提供配置，使其对子组件（包括插槽内容和 root-portal）可见
+useConfigProvider({ themeVars })
+</script>
+```
+
 ## Attributes
 
 | 参数       | 说明                                             | 类型   | 可选值         | 默认值 | 最低版本 |

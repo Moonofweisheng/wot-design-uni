@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, PropType, InjectionKey, ComputedRef } from 'vue'
 import { makeStringProp, baseProps } from '../common/props'
 
 export type ConfigProviderTheme = 'light' | 'dark'
@@ -19,6 +19,12 @@ export const configProviderProps = {
 }
 
 export type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>
+
+export type ConfigProviderProvide = {
+  themeStyle: ComputedRef<string>
+}
+
+export const CONFIG_PROVIDER_KEY: InjectionKey<ConfigProviderProvide> = Symbol('wd-config-provider')
 
 export type baseThemeVars = {
   colorTheme?: string // 主题色
@@ -640,7 +646,7 @@ export type toastThemeVars = {
   toastLineHeight?: string
   toastWithIconMinWidth?: string
   toastIconSize?: string
-  toastIconMarginRight?: string
+  toastMsgMarginLeft?: string
   toastIconMarginBottom?: string
   toastLoadingPadding?: string
   toastLoadingMarginBottom?: string
@@ -649,6 +655,7 @@ export type toastThemeVars = {
 
 export type loadingThemeVars = {
   loadingSize?: string
+  loadingDuration?: string
 }
 
 export type tooltipThemeVars = {
@@ -985,6 +992,53 @@ export type signatureThemeVars = {
   signatureButtonMarginLeft?: string
 }
 
+export type tourThemeVars = {
+  tourZIndex?: string
+  tourPopoverZIndex?: string
+  tourPopoverPadding?: string
+  tourPopoverRadius?: string
+  tourPopoverMinWidth?: string
+  tourPopoverMaxWidth?: string
+  tourPopoverInfoFontSize?: string
+  tourPopoverBg?: string
+  tourInfoBg?: string
+  tourInfoBorderColor?: string
+  tourInfoBorderWidth?: string
+  tourInfoTextColor?: string
+  tourAnimationDuration?: string
+  tourPopoverAnimationTiming?: string
+  tourHighlightAnimationTiming?: string
+  tourButtonFontSize?: string
+  tourButtonRadius?: string
+  tourButtonPadding?: string
+  tourPrimaryButtonBgColor?: string
+  tourPrimaryButtonTextColor?: string
+  tourSkipBgColor?: string
+  tourButtonTextColor?: string
+  tourHighlightShadowColor?: string
+}
+
+export type avatarThemeVars = {
+  avatarSize?: string
+  avatarSizeLarge?: string
+  avatarSizeMedium?: string
+  avatarSizeSmall?: string
+  avatarTextColor?: string
+  avatarFontWeight?: string
+  avatarFontSize?: string
+  avatarFontSizeLarge?: string
+  avatarFontSizeMedium?: string
+  avatarFontSizeSmall?: string
+  avatarLineHeight?: string
+  avatarBgColor?: string
+  avatarBorderRadius?: string
+}
+
+export type avatarGroupThemeVars = {
+  avatarGroupOverlap?: string
+  avatarGroupCollapseFontSize?: string
+}
+
 export type ConfigProviderThemeVars = baseThemeVars &
   actionSheetThemeVars &
   badgeThemeVars &
@@ -1049,4 +1103,7 @@ export type ConfigProviderThemeVars = baseThemeVars &
   videoPreviewThemeVars &
   imgCropperThemeVars &
   floatingPanelThemeVars &
-  signatureThemeVars
+  signatureThemeVars &
+  tourThemeVars &
+  avatarThemeVars &
+  avatarGroupThemeVars

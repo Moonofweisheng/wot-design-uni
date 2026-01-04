@@ -508,7 +508,8 @@ export default defineConfig({
             { text: 'useUpload', link: '/en-US/component/use-upload' },
             { text: 'useCountDown', link: '/en-US/component/use-count-down' },
             { text: 'useToast', link: '/en-US/component/use-toast' },
-            { text: 'useMessage', link: '/en-US/component/use-message' }
+            { text: 'useMessage', link: '/en-US/component/use-message' },
+            { text: 'useConfigProvider', link: '/en-US/component/use-config-provider' }
           ]
         }
       ]

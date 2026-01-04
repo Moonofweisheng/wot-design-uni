@@ -253,3 +253,13 @@ const { theme, toggleTheme } = useTheme()
 | ------------ | --------------- | ------- |
 | custom-class | Root node style | 1.3.9   |
 | custom-style | Root node style | 1.3.9   |
+
+## Composables
+
+### useConfigProvider
+
+For detailed documentation, please refer to [useConfigProvider](/en-US/component/use-config-provider).
+
+In environments like WeChat Mini Program, due to component rendering limitations (such as native slot scope isolation), components rendered in slots may not be able to access the context of the `ConfigProvider` component wrapped outside the slot outlet. In addition, using `root-portal` to move nodes to the root node may also cause context loss.
+
+To solve this problem, `wot-design-uni` provides the `useConfigProvider` composable function, allowing you to inject configuration directly in JS logic, ensuring that deeply nested or cross-component tree components can also correctly obtain theme styles.
