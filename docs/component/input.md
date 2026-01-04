@@ -3,7 +3,7 @@
 用户可以在文本框里输入内容。
 
 ::: tip 提示
-`0.2.0`版本已将 `Input` 组件的 `textarea 文本域`功能迁移至 [Textarea](/component/textarea)组件，所有API保持一致。
+`0.2.0`版本已将 `Input` 组件的 `textarea 文本域`功能迁移至 [Textarea](/component/textarea)组件，所有 API 保持一致。
 :::
 
 ## 基本用法
@@ -12,13 +12,13 @@
 
 ```typescript
 const value = ref<string>('')
-function handleChange(event) {
+function handleInput(event) {
   console.log(event)
 }
 ```
 
 ```html
-<wd-input type="text" v-model="value" placeholder="请输入用户名" @change="handleChange" />
+<wd-input type="text" v-model="value" placeholder="请输入用户名" @input="handleInput" />
 ```
 
 ## 禁用
@@ -42,7 +42,7 @@ function handleChange(event) {
 设置 `clearable` 属性。
 
 ```html
-<wd-input v-model="value" clearable @change="handleChange"/>
+<wd-input v-model="value" clearable @input="handleInput" />
 ```
 
 ## 有值且聚焦时展示清空按钮
@@ -50,11 +50,11 @@ function handleChange(event) {
 设置 `clear-trigger` 属性，可以控制是否聚焦时才展示清空按钮。
 
 :::warning 注意
-支付宝小程序暂不支持 `clear-trigger` 属性，且某种情况下清空按钮无法点击，原因参考此[issue](https://github.com/ant-design/ant-design-mini/issues/1255)（希望可以早点解决，所以直接给蚂蚁的组件库提了个issue）。
+支付宝小程序暂不支持 `clear-trigger` 属性，且某种情况下清空按钮无法点击，原因参考此[issue](https://github.com/ant-design/ant-design-mini/issues/1255)（希望可以早点解决，所以直接给蚂蚁的组件库提了个 issue）。
 :::
 
 ```html
-<wd-input v-model="value" clear-trigger="focus" clearable @change="handleChange"/>
+<wd-input v-model="value" clear-trigger="focus" clearable @input="handleInput" />
 ```
 
 ## 点击清除按钮时不自动聚焦
@@ -70,19 +70,15 @@ function handleChange(event) {
 设置 `show-password` 属性。
 
 ```html
-<wd-input v-model="value" clearable show-password @change="handleChange"/>
+<wd-input v-model="value" clearable show-password @input="handleInput" />
 ```
 
-## 前后icon
+## 前后 icon
 
-设置前置icon `prefix-icon`，设置后置icon `suffix-icon`，icon 为 [icon](/component/icon) 章节中的图标，如果没有你需要的图标，则使用 `prefix`、`suffix` 插槽进行自定义插入。
+设置前置 icon `prefix-icon`，设置后置 icon `suffix-icon`，icon 为 [icon](/component/icon) 章节中的图标，如果没有你需要的图标，则使用 `prefix`、`suffix` 插槽进行自定义插入。
 
 ```html
-<wd-input
-  v-model="value"
-  prefix-icon="dong"
-  suffix-icon="list"
-  @change="handleChange"/>
+<wd-input v-model="value" prefix-icon="dong" suffix-icon="list" @input="handleInput" />
 ```
 
 ## 限制字数输入
@@ -90,10 +86,10 @@ function handleChange(event) {
 设置 `maxlength` 属性，如果要显示字数限制，设置 `show-word-limit` 属性。
 
 ```html
-<wd-input v-model="value" :maxlength="20" show-word-limit @change="handleChange"/>
+<wd-input v-model="value" :maxlength="20" show-word-limit @input="handleInput" />
 ```
 
-## 设置label标题
+## 设置 label 标题
 
 设置 `label` 标题，可以和 `cell-group` 组合使用，形成 `cell` 展示类型。可以通过 `label-width` 设置标题宽度，默认为 '33%'。
 
@@ -135,51 +131,51 @@ function handleChange(event) {
 
 ## Attributes
 
-| 参数                   | 说明                                                                                                                                                    | 类型                | 可选值                                                          | 默认值                                 | 最低版本 |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | --------------------------------------------------------------- | -------------------------------------- | -------- |
-| type                   | 类型                                                                                                                                                    | string              | text / number / digit / idcard / safe-password / nickname / tel | text                                   | -        |
-| v-model                | 绑定值                                                                                                                                                  | string / number     | -                                                               | -                                      | -        |
-| placeholder            | 占位文本                                                                                                                                                | string              | -                                                               | 请输入...                              | -        |
-| clearable              | 显示清空按钮                                                                                                                                            | boolean             | -                                                               | false                                  | -        |
-| maxlength              | 原生属性，最大长度                                                                                                                                      | number              | -                                                               | 支付宝小程序无默认值，其余平台默认为-1 | -        |
-| showPassword           | 显示为密码框                                                                                                                                            | boolean             | -                                                               | false                                  | -        |
-| disabled               | 原生属性，禁用                                                                                                                                          | boolean             | -                                                               | false                                  | -        |
-| readonly               | 只读                                                                                                                                                    | boolean             | -                                                               | false                                  | -        |
-| prefixIcon             | 前置图标，icon组件中的图标类名                                                                                                                          | string              | -                                                               | -                                      | -        |
-| suffixIcon             | 后置图标，icon组件中的图标类名                                                                                                                          | string              | -                                                               | -                                      | -        |
-| showWordLimit          | 显示字数限制，需要同时设置 maxlength                                                                                                                    | boolean             | -                                                               | false                                  | -        |
-| confirm-type           | 设置键盘右下角按钮的文字，仅在type='text'时生效                                                                                                         | string              | done / go / next / search / send                                | done                                   | -        |
-| confirm-hold           | 点击键盘右下角按钮时是否保持键盘不收起                                                                                                                  | Boolean             | -                                                               | false                                  | -        |
-| always-embed           | 微信小程序原生属性，强制 input 处于同层状态，默认 focus 时 input 会切到非同层状态 (仅在 iOS 下生效)                                                     | Boolean             | -                                                               | false                                  | -        |
-| placeholderStyle       | 原生属性，指定 placeholder 的样式，目前仅支持color,font-size和font-weight                                                                               | string              | -                                                               | -                                      | -        |
-| placeholderClass       | 原生属性，指定 placeholder 的样式类                                                                                                                     | string              | -                                                               | -                                      | -        |
-| focus                  | 原生属性，获取焦点                                                                                                                                      | boolean             | -                                                               | false                                  | -        |
-| cursorSpacing          | 原生属性，指定光标与键盘的距离。取 input 距离底部的距离和cursor-spacing指定的距离的最小值作为光标与键盘的距离                                           | number              | -                                                               | 0                                      | -        |
-| cursor                 | 原生属性，指定focus时的光标位置                                                                                                                         | number              | -                                                               | -1                                     | -        |
-| selectionStart         | 原生属性，光标起始位置，自动聚集时有效，需与selection-end搭配使用                                                                                       | number              | -                                                               | -1                                     | -        |
-| selectionEnd           | 原生属性，光标结束位置，自动聚集时有效，需与selection-start搭配使用                                                                                     | number              | -                                                               | -1                                     | -        |
-| adjustPosition         | 原生属性，键盘弹起时，是否自动上推页面                                                                                                                  | boolean             | -                                                               | true                                   | -        |
-| label                  | 设置左侧标题                                                                                                                                            | string              | -                                                               | -                                      | -        |
-| size                   | 设置输入框大小                                                                                                                                          | string              | -                                                               | -                                      | -        |
-| error                  | 设置输入框错误状态，错误状态时为红色                                                                                                                    | boolean             | -                                                               | false                                  | -        |
-| center                 | 当有label属性时，设置标题和输入框垂直居中，默认为顶部居中                                                                                               | boolean             | -                                                               | false                                  | -        |
-| label-width            | 设置左侧标题宽度                                                                                                                                        | string              | -                                                               | 33%                                    | -        |
-| required               | cell 类型下必填样式                                                                                                                                     | boolean             | -                                                               | false                                  | -        |
-| marker-side            | 必填标记的位置                                                                                                                                          | string              | before / after                                                  | before                                 | 1.12.0 |
-| no-border              | 非 cell 类型下是否隐藏下划线                                                                                                                            | boolean             | -                                                               | false                                  | -        |
-| prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                                                       | string              | -                                                               | -                                      | -        |
-| rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                                                     | `FormItemRule []`   | -                                                               | `[]`                                   | -        |
-| clearTrigger           | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示                                                                   | `InputClearTrigger` | `focus` / `always`                                              | `always`                               | 1.3.7    |
-| focusWhenClear         | 是否在点击清除按钮时聚焦输入框                                                                                                                          | boolean             | -                                                               | true                                   | 1.3.7    |
-| ignoreCompositionEvent | 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件。 | boolean             | -                                                               | true                                   | 1.3.11   |
-| enable-native          | 支付宝小程序，可以在 input 组件中加上 enableNative="false"，避免弹出键盘后出现内容上移 | boolean             | -       | true                                   | $LOWEST_VERSION$ |
-| inputmode              | 提供用户在编辑元素或其内容时可能输入的数据类型的提示。                                                                                                  | InputMode           | -                                                               | text                                   | 1.5.0    |
+| 参数                   | 说明                                                                                                                                                    | 类型                | 可选值                                                          | 默认值                                 | 最低版本         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | --------------------------------------------------------------- | -------------------------------------- | ---------------- |
+| type                   | 类型                                                                                                                                                    | string              | text / number / digit / idcard / safe-password / nickname / tel | text                                   | -                |
+| v-model                | 绑定值                                                                                                                                                  | string / number     | -                                                               | -                                      | -                |
+| placeholder            | 占位文本                                                                                                                                                | string              | -                                                               | 请输入...                              | -                |
+| clearable              | 显示清空按钮                                                                                                                                            | boolean             | -                                                               | false                                  | -                |
+| maxlength              | 原生属性，最大长度                                                                                                                                      | number              | -                                                               | 支付宝小程序无默认值，其余平台默认为-1 | -                |
+| showPassword           | 显示为密码框                                                                                                                                            | boolean             | -                                                               | false                                  | -                |
+| disabled               | 原生属性，禁用                                                                                                                                          | boolean             | -                                                               | false                                  | -                |
+| readonly               | 只读                                                                                                                                                    | boolean             | -                                                               | false                                  | -                |
+| prefixIcon             | 前置图标，icon 组件中的图标类名                                                                                                                         | string              | -                                                               | -                                      | -                |
+| suffixIcon             | 后置图标，icon 组件中的图标类名                                                                                                                         | string              | -                                                               | -                                      | -                |
+| showWordLimit          | 显示字数限制，需要同时设置 maxlength                                                                                                                    | boolean             | -                                                               | false                                  | -                |
+| confirm-type           | 设置键盘右下角按钮的文字，仅在 type='text'时生效                                                                                                        | string              | done / go / next / search / send                                | done                                   | -                |
+| confirm-hold           | 点击键盘右下角按钮时是否保持键盘不收起                                                                                                                  | Boolean             | -                                                               | false                                  | -                |
+| always-embed           | 微信小程序原生属性，强制 input 处于同层状态，默认 focus 时 input 会切到非同层状态 (仅在 iOS 下生效)                                                     | Boolean             | -                                                               | false                                  | -                |
+| placeholderStyle       | 原生属性，指定 placeholder 的样式，目前仅支持 color,font-size 和 font-weight                                                                            | string              | -                                                               | -                                      | -                |
+| placeholderClass       | 原生属性，指定 placeholder 的样式类                                                                                                                     | string              | -                                                               | -                                      | -                |
+| focus                  | 原生属性，获取焦点                                                                                                                                      | boolean             | -                                                               | false                                  | -                |
+| cursorSpacing          | 原生属性，指定光标与键盘的距离。取 input 距离底部的距离和 cursor-spacing 指定的距离的最小值作为光标与键盘的距离                                         | number              | -                                                               | 0                                      | -                |
+| cursor                 | 原生属性，指定 focus 时的光标位置                                                                                                                       | number              | -                                                               | -1                                     | -                |
+| selectionStart         | 原生属性，光标起始位置，自动聚集时有效，需与 selection-end 搭配使用                                                                                     | number              | -                                                               | -1                                     | -                |
+| selectionEnd           | 原生属性，光标结束位置，自动聚集时有效，需与 selection-start 搭配使用                                                                                   | number              | -                                                               | -1                                     | -                |
+| adjustPosition         | 原生属性，键盘弹起时，是否自动上推页面                                                                                                                  | boolean             | -                                                               | true                                   | -                |
+| label                  | 设置左侧标题                                                                                                                                            | string              | -                                                               | -                                      | -                |
+| size                   | 设置输入框大小                                                                                                                                          | string              | -                                                               | -                                      | -                |
+| error                  | 设置输入框错误状态，错误状态时为红色                                                                                                                    | boolean             | -                                                               | false                                  | -                |
+| center                 | 当有 label 属性时，设置标题和输入框垂直居中，默认为顶部居中                                                                                             | boolean             | -                                                               | false                                  | -                |
+| label-width            | 设置左侧标题宽度                                                                                                                                        | string              | -                                                               | 33%                                    | -                |
+| required               | cell 类型下必填样式                                                                                                                                     | boolean             | -                                                               | false                                  | -                |
+| marker-side            | 必填标记的位置                                                                                                                                          | string              | before / after                                                  | before                                 | 1.12.0           |
+| no-border              | 非 cell 类型下是否隐藏下划线                                                                                                                            | boolean             | -                                                               | false                                  | -                |
+| prop                   | 表单域 `model` 字段名，在使用表单校验功能的情况下，该属性是必填的                                                                                       | string              | -                                                               | -                                      | -                |
+| rules                  | 表单验证规则，结合`wd-form`组件使用                                                                                                                     | `FormItemRule []`   | -                                                               | `[]`                                   | -                |
+| clearTrigger           | 显示清除图标的时机，always 表示输入框不为空时展示，focus 表示输入框聚焦且不为空时展示                                                                   | `InputClearTrigger` | `focus` / `always`                                              | `always`                               | 1.3.7            |
+| focusWhenClear         | 是否在点击清除按钮时聚焦输入框                                                                                                                          | boolean             | -                                                               | true                                   | 1.3.7            |
+| ignoreCompositionEvent | 是否忽略组件内对文本合成系统事件的处理。为 false 时将触发 compositionstart、compositionend、compositionupdate 事件，且在文本合成期间会触发 input 事件。 | boolean             | -                                                               | true                                   | 1.3.11           |
+| enable-native          | 支付宝小程序，可以在 input 组件中加上 enableNative="false"，避免弹出键盘后出现内容上移                                                                  | boolean             | -                                                               | true                                   | $LOWEST_VERSION$ |
+| inputmode              | 提供用户在编辑元素或其内容时可能输入的数据类型的提示。                                                                                                  | InputMode           | -                                                               | text                                   | 1.5.0            |
 
 ### InputMode 可选值
 
->新增于 uni-app 3.6.16+ inputmode是html规范后期更新的内容。各家小程序还未支持此属性。
+> 新增于 uni-app 3.6.16+ inputmode 是 html 规范后期更新的内容。各家小程序还未支持此属性。
 
-在符合条件的高版本webview里，uni-app的web和app-vue平台中可使用本属性，参见[inputmode](https://uniapp.dcloud.net.cn/component/input.html#inputmode)。
+在符合条件的高版本 webview 里，uni-app 的 web 和 app-vue 平台中可使用本属性，参见[inputmode](https://uniapp.dcloud.net.cn/component/input.html#inputmode)。
 
 | 值      | 说明                                                                                                                 |
 | ------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -187,7 +183,7 @@ function handleChange(event) {
 | text    | 使用用户本地区域设置的标准文本输入键盘。                                                                             |
 | decimal | 小数输入键盘，包含数字和分隔符（通常是“ . ”或者“ , ”），设备可能也可能不显示减号键。                                 |
 | numeric | 数字输入键盘，所需要的就是 0 到 9 的数字，设备可能也可能不显示减号键。                                               |
-| tel     | 电话输入键盘，包含 0 到 9 的数字、星号（*）和井号（#）键。表单输入里面的电话输入通常应该使用 <input type="tel"> 。   |
+| tel     | 电话输入键盘，包含 0 到 9 的数字、星号（\*）和井号（#）键。表单输入里面的电话输入通常应该使用 <input type="tel"> 。  |
 | search  | 为搜索输入优化的虚拟键盘，比如，返回键可能被重新标记为“搜索”，也可能还有其他的优化。                                 |
 | email   | 为邮件地址输入优化的虚拟键盘，通常包含"@"符号和其他优化。表单里面的邮件地址输入应该使用 <input type="email">。       |
 | url     | 为网址输入优化的虚拟键盘，比如，“/”键会更加明显、历史记录访问等。表单里面的网址输入通常应该使用 <input type="url">。 |
@@ -205,9 +201,9 @@ function handleChange(event) {
 
 | 事件名称             | 说明                             | 参数                                   | 最低版本 |
 | -------------------- | -------------------------------- | -------------------------------------- | -------- |
-| input                | 监听输入框input事件              | `{value, cursor, keyCode}`             | -        |
-| focus                | 监听输入框focus事件              | `{ value, height }`, height 为键盘高度 | -        |
-| blur                 | 监听输入框blur事件               | `{ value }`                            | -        |
+| input                | 监听输入框 input 事件            | `{value, cursor, keyCode}`             | -        |
+| focus                | 监听输入框 focus 事件            | `{ value, height }`, height 为键盘高度 | -        |
+| blur                 | 监听输入框 blur 事件             | `{ value }`                            | -        |
 | clear                | 监听输入框清空按钮事件           | -                                      | -        |
 | confirm              | 点击完成时， 触发 confirm 事件   | `{ value }`                            | -        |
 | keyboardheightchange | 键盘高度发生变化的时候触发此事件 | `{ height, duration }`                 | -        |
