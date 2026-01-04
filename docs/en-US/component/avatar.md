@@ -1,5 +1,5 @@
 ---
-version: $LOWEST_VERSION$
+version: 1.14.0
 ---
 
 # Avatar
@@ -185,55 +185,55 @@ Use `size` and `shape` props to uniformly set the size and shape of all avatars 
 
 | Name     | Description                                              | Type             | Accepted Values                 | Default    | Version          |
 | -------- | -------------------------------------------------------- | ---------------- | ------------------------------- | ---------- | ---------------- |
-| src      | Image URL                                                | string           | -                               | -          | $LOWEST_VERSION$ |
-| text     | Text content                                             | string           | -                               | -          | $LOWEST_VERSION$ |
-| icon     | Icon name, using wd-icon component                       | string           | -                               | -          | $LOWEST_VERSION$ |
-| size     | Avatar size, supports preset sizes or strings with units | string \| number | large / medium / normal / small | normal     | $LOWEST_VERSION$ |
-| shape    | Avatar shape                                             | string           | round / square                  | round      | $LOWEST_VERSION$ |
-| bg-color | Background color                                         | string           | -                               | -          | $LOWEST_VERSION$ |
-| color    | Text color                                               | string           | -                               | -          | $LOWEST_VERSION$ |
-| alt      | Placeholder text when image fails to load                | string           | -                               | -          | $LOWEST_VERSION$ |
-| mode     | Image fill mode, same as uni-app image component's mode  | string           | -                               | aspectFill | $LOWEST_VERSION$ |
+| src      | Image URL                                                | string           | -                               | -          | 1.14.0 |
+| text     | Text content                                             | string           | -                               | -          | 1.14.0 |
+| icon     | Icon name, using wd-icon component                       | string           | -                               | -          | 1.14.0 |
+| size     | Avatar size, supports preset sizes or strings with units | string \| number | large / medium / normal / small | normal     | 1.14.0 |
+| shape    | Avatar shape                                             | string           | round / square                  | round      | 1.14.0 |
+| bg-color | Background color                                         | string           | -                               | -          | 1.14.0 |
+| color    | Text color                                               | string           | -                               | -          | 1.14.0 |
+| alt      | Placeholder text when image fails to load                | string           | -                               | -          | 1.14.0 |
+| mode     | Image fill mode, same as uni-app image component's mode  | string           | -                               | aspectFill | 1.14.0 |
 
 ## Avatar Events
 
 | Event Name | Description                        | Parameters | Version          |
 | ---------- | ---------------------------------- | ---------- | ---------------- |
-| click      | Triggered when avatar is clicked   | -          | $LOWEST_VERSION$ |
-| error      | Triggered when image fails to load | event      | $LOWEST_VERSION$ |
+| click      | Triggered when avatar is clicked   | -          | 1.14.0 |
+| error      | Triggered when image fails to load | event      | 1.14.0 |
 
 ## Avatar Slots
 
 | Name    | Description           | Version          |
 | ------- | --------------------- | ---------------- |
-| default | Custom avatar content | $LOWEST_VERSION$ |
+| default | Custom avatar content | 1.14.0 |
 
 ## Avatar External Classes
 
 | Class Name   | Description     | Version          |
 | ------------ | --------------- | ---------------- |
-| custom-class | Root node style | $LOWEST_VERSION$ |
-| custom-style | Root node style | $LOWEST_VERSION$ |
+| custom-class | Root node style | 1.14.0 |
+| custom-style | Root node style | 1.14.0 |
 
 ## AvatarGroup Attributes
 
 | Name            | Description                                         | Type             | Accepted Values                 | Default | Version          |
 | --------------- | --------------------------------------------------- | ---------------- | ------------------------------- | ------- | ---------------- |
-| max-count       | Maximum display count                               | number           | -                               | -       | $LOWEST_VERSION$ |
-| cascading       | Cascading direction                                 | string           | left-up / right-up              | -       | $LOWEST_VERSION$ |
-| shape           | Uniform avatar shape                                | string           | round / square                  | round   | $LOWEST_VERSION$ |
-| size            | Uniform avatar size                                 | string \| number | large / medium / normal / small | normal  | $LOWEST_VERSION$ |
-| collapse-avatar | Collapsed avatar content when exceeds maximum count | string           | -                               | -       | $LOWEST_VERSION$ |
+| max-count       | Maximum display count                               | number           | -                               | -       | 1.14.0 |
+| cascading       | Cascading direction                                 | string           | left-up / right-up              | -       | 1.14.0 |
+| shape           | Uniform avatar shape                                | string           | round / square                  | round   | 1.14.0 |
+| size            | Uniform avatar size                                 | string \| number | large / medium / normal / small | normal  | 1.14.0 |
+| collapse-avatar | Collapsed avatar content when exceeds maximum count | string           | -                               | -       | 1.14.0 |
 
 ## AvatarGroup Slots
 
 | Name    | Description                             | Version          |
 | ------- | --------------------------------------- | ---------------- |
-| default | Avatar list, place wd-avatar components | $LOWEST_VERSION$ |
+| default | Avatar list, place wd-avatar components | 1.14.0 |
 
 ## AvatarGroup External Classes
 
 | Class Name   | Description     | Version          |
 | ------------ | --------------- | ---------------- |
-| custom-class | Root node style | $LOWEST_VERSION$ |
-| custom-style | Root node style | $LOWEST_VERSION$ |
+| custom-class | Root node style | 1.14.0 |
+| custom-style | Root node style | 1.14.0 |

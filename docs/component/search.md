@@ -176,7 +176,7 @@ function changeSearchType({ item, index }) {
 | clear    | 监听输入框清空按钮事件     | -           | -        |
 | cancel   | 监听输入框右侧文本点击事件 | `{ value }` | -        |
 | change   | 监听输入框内容变化事件     | `{ value }` | -        |
-| click    | 禁用状态下点击事件         | -           |  $LOWEST_VERSION$       |
+| click    | 禁用状态下点击事件         | -           |  1.14.0       |
 
 ## Slots
 

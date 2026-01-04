@@ -220,7 +220,7 @@ When `slidable` is set to `always`, all tabs will be aligned to the left and can
 | animated       | Enable transition animation when switching tab content                             | boolean         | -            | `false` | -       |
 | duration       | Transition duration in ms                                                          | number          | -            | `300`   | -       |
 | slidable       | Enable scrollable navigation                                                       | TabsSlidable    | `always`     | `auto`  | 1.4.0   |
-| showScrollbar  | Whether to show scrollbar when tabs are slidable (nav)                             | boolean         | -            | `false` | $LOWEST_VERSION$ |
+| showScrollbar  | Whether to show scrollbar when tabs are slidable (nav)                             | boolean         | -            | `false` | 1.14.0 |
 | badge-props    | Props passed to [Badge component props](/component/badge#attributes)               | BadgeProps      | -            | -       | 1.4.0   |
 
 ## Tab Attributes
