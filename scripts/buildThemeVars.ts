@@ -55,8 +55,6 @@ export const configProviderProps = {
 export type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>
 
 export type ConfigProviderProvide = {
-  theme: ComputedRef<ConfigProviderTheme>
-  themeVars: ComputedRef<ConfigProviderThemeVars>
   themeStyle: ComputedRef<string>
 }
 

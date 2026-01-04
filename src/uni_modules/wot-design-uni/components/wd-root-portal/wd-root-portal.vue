@@ -42,8 +42,6 @@ const hooksProvider = inject<ConfigProviderProvide | typeof None>(USE_CONFIG_PRO
 const { parent: configProvider } = useParent(CONFIG_PROVIDER_KEY)
 
 const configProviderStyle = computed(() => {
-  console.log(hooksProvider !== None ? hooksProvider.themeStyle.value || '' : configProvider?.themeStyle.value || '')
-
   return hooksProvider !== None ? hooksProvider.themeStyle.value || '' : configProvider?.themeStyle.value || ''
 })
 </script>
