@@ -249,6 +249,7 @@ Set the `error-message` attribute to display an error message below the input.
 | cursor-spacing | The distance from the cursor to the keyboard when focused | number | 0 | - |
 | auto-focus | Whether to auto focus | boolean | false | - |
 | always-embed | Whether to always embed the input in a native input element | boolean | false | - |
+| enable-native | Alipay mini program, you can add enableNative="{{false}}" to the input / textarea component to avoid the content moving up after the textarea pops up the keyboard | boolean | true | - |
 | confirm-type | The text of the confirm button on the keyboard, can be 'send', 'search', 'next', 'go', 'done' | string | done | - |
 | confirm-hold | Whether to keep the keyboard displayed after the confirm button is pressed | boolean | false | - |
 | cursor | The initial position of the cursor | number | - | - |

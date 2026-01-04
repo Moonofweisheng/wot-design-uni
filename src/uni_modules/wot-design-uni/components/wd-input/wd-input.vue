@@ -46,6 +46,7 @@
           :placeholder-class="inputPlaceholderClass"
           :ignoreCompositionEvent="ignoreCompositionEvent"
           :inputmode="inputmode"
+          :enable-native="enableNative"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
