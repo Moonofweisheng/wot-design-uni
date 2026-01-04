@@ -9,7 +9,7 @@
     </demo-block>
 
     <demo-block :title="$t('zi-ding-yi-chi-cun')">
-      <wd-slide-verify :width="250" :height="50" />
+      <wd-slide-verify :width="250" :height="50" iconSize="60rpx" successIconSize="30rpx" />
     </demo-block>
 
     <demo-block :title="$t('zi-ding-yi-yan-se')">

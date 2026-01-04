@@ -33,9 +33,10 @@ Customize prompt text through `text` and `success-text` properties.
 ## Custom Size
 
 Customize the width and height of the slide bar through `width` and `height` properties.
+Set the corresponding icon sizes through `icon-size` and `success-icon-size` properties.
 
 ```html
-<wd-slide-verify :width="250" :height="50" />
+<wd-slide-verify :width="250" :height="50" icon-size="60rpx" success-icon-size="30rpx" />
 ```
 
 ## Custom Color
@@ -126,6 +127,7 @@ Supports customizing content through slots.
 | icon                    | Slider icon name                                                                                      | string          | -       | a-chevron-rightdouble                | $LOWEST_VERSION$ |
 | success-icon            | Success icon name                                                                                     | string          | -       | check                                | $LOWEST_VERSION$ |
 | icon-size               | Icon size (unit: px)                                                                                  | number / string | -       | 20                                   | $LOWEST_VERSION$ |
+| success-icon-size       | Success icon size (unit: px)                                                                          | number / string | -       | 12                                   | $LOWEST_VERSION$ |
 
 ## Events
 

@@ -35,9 +35,10 @@ function handleFail() {
 ## 自定义尺寸
 
 通过 `width` 和 `height` 属性自定义滑动条的宽度和高度。
+通过 `icon-size` 和 `success-icon-size` 属性设置对应图标大小。
 
 ```html
-<wd-slide-verify :width="250" :height="50" />
+<wd-slide-verify :width="250" :height="50" icon-size="60rpx" success-icon-size="30rpx" />
 ```
 
 ## 自定义颜色
@@ -130,6 +131,7 @@ function handleReset() {
 | icon                    | 滑块图标名称                                      | string          | -      | a-chevron-rightdouble | $LOWEST_VERSION$ |
 | success-icon            | 成功图标名称                                      | string          | -      | check                 | $LOWEST_VERSION$ |
 | icon-size               | 图标大小(单位:px)                                 | number / string | -      | 20                    | $LOWEST_VERSION$ |
+| success-icon-size       | 成功图标大小(单位:px)                             | number / string | -      | 12                    | $LOWEST_VERSION$ |
 
 ## Events
 
