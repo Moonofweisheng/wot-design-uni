@@ -1,6 +1,46 @@
 # 更新日志 
 
 
+## [1.14.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.13.0...v1.14.0) (2026-01-04)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* ✨ Loading 组件新增 spinner 类型 ([25c4332](https://github.com/Moonofweisheng/wot-design-uni/commit/25c43324b09beb45a21a8418511e77f3952191cc))
+* ✨ Search 组件支持禁用状态下的点击事件 ([#1406](https://github.com/Moonofweisheng/wot-design-uni/issues/1406)) ([e7c2d93](https://github.com/Moonofweisheng/wot-design-uni/commit/e7c2d9353bdfc25e739e84f2fcb9c4ea47f68243)), closes [#801](https://github.com/Moonofweisheng/wot-design-uni/issues/801)
+* 🐛 修复 Rate 组件在禁用和只读状态下可以拖动调整的问题 ([#1405](https://github.com/Moonofweisheng/wot-design-uni/issues/1405)) ([1d7572d](https://github.com/Moonofweisheng/wot-design-uni/commit/1d7572d126c42d9fd1f0a2233a3c6939a5187278)), closes [#1404](https://github.com/Moonofweisheng/wot-design-uni/issues/1404)
+* 🐛 修复多处调用 useToast 时旧定时器提前关闭当前 Toast 的问题 ([#1408](https://github.com/Moonofweisheng/wot-design-uni/issues/1408)) ([4ea00cf](https://github.com/Moonofweisheng/wot-design-uni/commit/4ea00cf2bc391897a38d491224b1e2100cf16462)), closes [#1312](https://github.com/Moonofweisheng/wot-design-uni/issues/1312)
+* 🐛 修复children为函数时，wd-tabs渲染错误 ([#1211](https://github.com/Moonofweisheng/wot-design-uni/issues/1211)) ([1b64d86](https://github.com/Moonofweisheng/wot-design-uni/commit/1b64d860b3553e8c6e149d203c87b00137ecedb3)), closes [#1312](https://github.com/Moonofweisheng/wot-design-uni/issues/1312)
+* 🐛 修正泰语语言包中的拼写错误 ([#1429](https://github.com/Moonofweisheng/wot-design-uni/issues/1429)) ([52197e7](https://github.com/Moonofweisheng/wot-design-uni/commit/52197e7bc3bdede1bc6944ae697404880532c770))
+
+
+### ✨ Features | 新功能
+
+* ✨ 为 cell-group 添加 insert 属性，为 cell 添加 arrowDirection 属性 ([#1360](https://github.com/Moonofweisheng/wot-design-uni/issues/1360)) ([c7c8a66](https://github.com/Moonofweisheng/wot-design-uni/commit/c7c8a66bcd6fd5d503d32583373adcc2a24da768))
+* ✨ 新增 Avatar 头像组件 ([#1426](https://github.com/Moonofweisheng/wot-design-uni/issues/1426)) ([510a106](https://github.com/Moonofweisheng/wot-design-uni/commit/510a1060ba54744965bd8991d912c8b52a6e24e7)), closes [#1008](https://github.com/Moonofweisheng/wot-design-uni/issues/1008)
+* ✨ 新增 slide-verify 滑动验证组件 ([#1428](https://github.com/Moonofweisheng/wot-design-uni/issues/1428)) ([d5b71cf](https://github.com/Moonofweisheng/wot-design-uni/commit/d5b71cffba3a7380d50bac0a14861d3807876dd6))
+* ✨ 新增 tour 漫游组件 ([4aaf257](https://github.com/Moonofweisheng/wot-design-uni/commit/4aaf257166337fff45d7f54d7159f4aad6e1c324))
+* ✨ 支持在开启 root-portal 时使用 config-provider 自定义主题变量 ([#1430](https://github.com/Moonofweisheng/wot-design-uni/issues/1430)) ([a0b461b](https://github.com/Moonofweisheng/wot-design-uni/commit/a0b461b6e7a582793e4ad05fd1d48beabacc62fe))
+* ✨ calendar 组件 confirm 区域新增左、右拓展插槽 ([#1410](https://github.com/Moonofweisheng/wot-design-uni/issues/1410)) ([6426071](https://github.com/Moonofweisheng/wot-design-uni/commit/64260719b2786c062e12350e8856372cc230a81b)), closes [#1409](https://github.com/Moonofweisheng/wot-design-uni/issues/1409)
+* ✨ Input 组件添加 enable-native 属性 ([#1434](https://github.com/Moonofweisheng/wot-design-uni/issues/1434)) ([b89cbe9](https://github.com/Moonofweisheng/wot-design-uni/commit/b89cbe94b0fb5546d40b184cacbc4f39f82d32e2)), closes [#1421](https://github.com/Moonofweisheng/wot-design-uni/issues/1421)
+* ✨ StatusTip 添加底部插槽 ([cd2e74a](https://github.com/Moonofweisheng/wot-design-uni/commit/cd2e74ad6146fd18c57a9b4643d78bcd2914f806)), closes [#1070](https://github.com/Moonofweisheng/wot-design-uni/issues/1070)
+* ✨ Tabs 组件添加 show-scrollbar 属性用于控制展示滚动条 ([#1363](https://github.com/Moonofweisheng/wot-design-uni/issues/1363)) ([e185a8b](https://github.com/Moonofweisheng/wot-design-uni/commit/e185a8b291fde856f4c3704132664eac34b0d588)), closes [#643](https://github.com/Moonofweisheng/wot-design-uni/issues/643)
+* ✨ Textarea 组件支持支付宝小程序 enableNative 属性 ([#1425](https://github.com/Moonofweisheng/wot-design-uni/issues/1425)) ([3ea5c92](https://github.com/Moonofweisheng/wot-design-uni/commit/3ea5c92b82f58f319fb5b7b62c60918c01e08f43)), closes [#1422](https://github.com/Moonofweisheng/wot-design-uni/issues/1422)
+
+
+### ✏️ Documentation | 文档
+
+* ✏️  补充 Calendar 组件英文文档 ([b87b0bb](https://github.com/Moonofweisheng/wot-design-uni/commit/b87b0bbfa040786cc63f5dae8cf8a29201180544))
+* ✏️  更新组件库演示 demo 各页面的小程序二维码 ([0cee787](https://github.com/Moonofweisheng/wot-design-uni/commit/0cee7870d42a3807b5c392264018f7925f34e3a0))
+* ✏️  首页新增优秀案例入口与摸鱼插件入口 ([#1427](https://github.com/Moonofweisheng/wot-design-uni/issues/1427)) ([cb9972f](https://github.com/Moonofweisheng/wot-design-uni/commit/cb9972f147538e12ab8ae072a9178772fbeec652))
+* ✏️  添加 banner 显示逻辑 ([#1347](https://github.com/Moonofweisheng/wot-design-uni/issues/1347)) ([5c4d8dd](https://github.com/Moonofweisheng/wot-design-uni/commit/5c4d8dd8dce6f1fbdafdeb37d3c30112c29b999d))
+* ✏️  优化 banner 闪烁的问题 ([722c460](https://github.com/Moonofweisheng/wot-design-uni/commit/722c46077e071bf69a2bdc37c49fe07c4fdc953e))
+* ✏️  优化侧边演示样式 ([1e14e32](https://github.com/Moonofweisheng/wot-design-uni/commit/1e14e325717c6f88e0b8554b8dc03e23bd4600b3))
+* ✏️  add about me ([09c9b23](https://github.com/Moonofweisheng/wot-design-uni/commit/09c9b237c906f1c71ee993e791b2bb35a57dad34))
+* ✏️  add gitee vote 2025 ([2797577](https://github.com/Moonofweisheng/wot-design-uni/commit/27975774c7a5cacea1875db7e057c93ea07ee3fa))
+* ✏️  QQ Groups Full ([7e3e248](https://github.com/Moonofweisheng/wot-design-uni/commit/7e3e248755f0e9b1f6a43f5eec630667b563e4b5))
+* ✏️ 修复 swiper 文档中 default 参数类型定义的格式问题 ([#1435](https://github.com/Moonofweisheng/wot-design-uni/issues/1435)) ([2593472](https://github.com/Moonofweisheng/wot-design-uni/commit/2593472ffb7bca5f3960f9262b7bc83863ec99c0))
+
 ## [1.13.0](https://github.com/Moonofweisheng/wot-design-uni/compare/v1.12.4...v1.13.0) (2025-09-28)
 
 
