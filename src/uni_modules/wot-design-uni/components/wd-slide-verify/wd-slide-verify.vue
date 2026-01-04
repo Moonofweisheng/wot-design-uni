@@ -62,7 +62,7 @@ export default {
 <script lang="ts" setup>
 import { ref, computed, onBeforeUnmount, type CSSProperties } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { slideVerifyProps } from './type'
+import { slideVerifyProps, type SlideVerifyExpose } from './type'
 import { useTouch } from '../composables/useTouch'
 import { useTranslate } from '../composables/useTranslate'
 import { objToStyle, addUnit, isDef } from '../common/util'
@@ -236,9 +236,7 @@ const reset = () => {
   }, 300)
 }
 
-defineExpose({
-  reset
-})
+defineExpose<SlideVerifyExpose>({ reset })
 </script>
 
 <style lang="scss" scoped>
