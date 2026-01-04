@@ -99,20 +99,18 @@ function handleReset() {
 
 ```html
 <wd-slide-verify>
-  <wd-slide-verify>
-    <template #text>
-      <text>向右滑动完成验证</text>
-    </template>
-    <template #success-text>
-      <text>验证通过</text>
-    </template>
-    <template #icon>
-      <view>ICON</view>
-    </template>
-    <template #success-icon>
-      <view style="color: red">OK</view>
-    </template>
-  </wd-slide-verify>
+  <template #text>
+    <text>向右滑动完成验证</text>
+  </template>
+  <template #success-text>
+    <text>验证通过</text>
+  </template>
+  <template #icon>
+    <view>ICON</view>
+  </template>
+  <template #success-icon>
+    <view style="color: red">OK</view>
+  </template>
 </wd-slide-verify>
 ```
 

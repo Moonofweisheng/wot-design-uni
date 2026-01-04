@@ -9,7 +9,7 @@
     </demo-block>
 
     <demo-block :title="$t('zi-ding-yi-chi-cun')">
-      <wd-slide-verify :width="250" :height="50" iconSize="60rpx" successIconSize="30rpx" />
+      <wd-slide-verify :width="250" :height="50" icon-size="60rpx" success-icon-size="30rpx" />
     </demo-block>
 
     <demo-block :title="$t('zi-ding-yi-yan-se')">
@@ -17,7 +17,7 @@
     </demo-block>
 
     <demo-block :title="$t('zi-ding-yi-tu-biao')">
-      <wd-slide-verify icon="arrow-right" success-icon="read" :icon-size="24" />
+      <wd-slide-verify icon="arrow-right" success-icon="read" :icon-size="24" :success-icon-size="14" />
     </demo-block>
 
     <demo-block :title="$t('zi-ding-yi-rong-cuo-fan-wei')">
