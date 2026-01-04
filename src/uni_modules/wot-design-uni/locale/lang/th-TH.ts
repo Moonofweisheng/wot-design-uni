@@ -135,5 +135,9 @@ export default {
     clearText: 'ล้าง',
     revokeText: 'ย้อนกลับ',
     restoreText: 'เรียกคืน'
+  },
+  slideVerify: {
+    text: 'เลื่อนไปทางขวาเพื่อตรวจสอบ',
+    successText: 'ตรวจสอบสำเร็จ'
   }
 }

@@ -221,6 +221,10 @@ const list = computed(() => [
         name: t('slider-hua-kuai')
       },
       {
+        id: 'slideVerify',
+        name: t('slide-verify-hua-dong-yan-zheng')
+      },
+      {
         id: 'switch',
         name: t('switch-kai-guan')
       },

@@ -1,0 +1,82 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+@include b(slide-verify) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+
+  @include when(disabled) {
+    cursor: not-allowed;
+
+    & {
+      opacity: 0.8;
+
+      @include e(button) {
+        color: var(--wd-slide-verify-disabled-color, #cccccc);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  @include e(text-inner) {
+    color: var(--wd-slide-verify-text-color, #333333);
+    font-size: var(--wd-slide-verify-text-size, 12px);
+    transition: color 0.3s ease;
+  }
+
+  @include e(track) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    transition: background-color 0.2s ease;
+    overflow: hidden;
+  }
+
+  @include e(track-text) {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    min-width: var(--track-width, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    pointer-events: none;
+
+    @include m(success) {
+      color: var(--wd-slide-verify-success-text-color, #ffffff);
+    }
+  }
+
+  @include e(button) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--wd-slide-verify-button-bg, #ffffff);
+    box-shadow: 0 2px 8px var(--wd-slide-verify-button-shadow, rgba(0, 0, 0, 0.15));
+    color: var(--wd-slide-verify-button-color, #666666);
+    cursor: grab;
+    will-change: transform;
+  }
+
+  // 按钮图标
+  @include e(button-icon) {
+    @include m(success) {
+      width: calc(var(--wd-slide-verify-button-size, 40px) * 0.5);
+      height: calc(var(--wd-slide-verify-button-size, 40px) * 0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
