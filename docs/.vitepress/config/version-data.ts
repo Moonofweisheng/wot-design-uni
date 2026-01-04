@@ -8,6 +8,7 @@ export const versionData = {
   "/component/keyboard": "1.3.10",
   "/component/root-portal": "1.11.0",
   "/component/signature": "1.6.0",
+  "/component/slide-verify": "$LOWEST_VERSION$",
   "/component/tour": "1.14.0",
   "/component/use-config-provider": "$LOWEST_VERSION$"
 }

@@ -62,7 +62,7 @@ export default {
 <script lang="ts" setup>
 import { ref, computed, onBeforeUnmount, type CSSProperties } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
-import { slideVerifyProps, type SlideVerifyExpose } from './type'
+import { slideVerifyProps, type SlideVerifyExpose } from './types'
 import { useTouch } from '../composables/useTouch'
 import { useTranslate } from '../composables/useTranslate'
 import { objToStyle, addUnit, isDef } from '../common/util'
@@ -118,8 +118,8 @@ const buttonStyle = computed(() => {
 const trackStyle = computed(() => {
   const style: CSSProperties = {
     width: `${currentPosition.value}px`,
-    backgroundColor: props.activeBackgroundColor,
-    '--track-width': addUnit(props.width)
+    background: props.activeBackgroundColor,
+    '--wot-slide-verify-track-width': addUnit(props.width)
   }
   return objToStyle(style)
 })

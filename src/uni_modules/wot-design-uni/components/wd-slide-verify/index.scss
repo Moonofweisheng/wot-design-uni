@@ -16,15 +16,15 @@
       opacity: 0.8;
 
       @include e(button) {
-        color: var(--wd-slide-verify-disabled-color, #cccccc);
+        color: $-slide-verify-disabled-color;
         cursor: not-allowed;
       }
     }
   }
 
   @include e(text-inner) {
-    color: var(--wd-slide-verify-text-color, #333333);
-    font-size: var(--wd-slide-verify-text-size, 12px);
+    color: $-slide-verify-text-color;
+    font-size: $-slide-verify-text-size;
     transition: color 0.3s ease;
   }
 
@@ -34,7 +34,7 @@
     top: 0;
     width: 0;
     height: 100%;
-    transition: background-color 0.2s ease;
+    transition: background 0.2s ease;
     overflow: hidden;
   }
 
@@ -42,7 +42,7 @@
     position: absolute;
     left: 0;
     height: 100%;
-    min-width: var(--track-width, 100%);
+    min-width: $-slide-verify-track-width;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,7 +50,7 @@
     pointer-events: none;
 
     @include m(success) {
-      color: var(--wd-slide-verify-success-text-color, #ffffff);
+      color: $-slide-verify-success-text-color;
     }
   }
 
@@ -61,9 +61,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--wd-slide-verify-button-bg, #ffffff);
-    box-shadow: 0 2px 8px var(--wd-slide-verify-button-shadow, rgba(0, 0, 0, 0.15));
-    color: var(--wd-slide-verify-button-color, #666666);
+    background: $-slide-verify-button-bg;
+    box-shadow: 0 2px 8px $-slide-verify-button-shadow;
+    color: $-slide-verify-button-color;
     cursor: grab;
     will-change: transform;
   }
@@ -71,8 +71,8 @@
   // 按钮图标
   @include e(button-icon) {
     @include m(success) {
-      width: calc(var(--wd-slide-verify-button-size, 40px) * 0.5);
-      height: calc(var(--wd-slide-verify-button-size, 40px) * 0.5);
+      width: calc($-slide-verify-button-size * 0.5);
+      height: calc($-slide-verify-button-size * 0.5);
       border-radius: 50%;
       display: flex;
       align-items: center;

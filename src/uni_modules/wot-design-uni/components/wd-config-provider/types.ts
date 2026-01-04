@@ -1039,6 +1039,18 @@ export type avatarGroupThemeVars = {
   avatarGroupCollapseFontSize?: string
 }
 
+export type slideVerifyThemeVars = {
+  slideVerifyDisabledColor?: string
+  slideVerifyTextColor?: string
+  slideVerifyTextSize?: string
+  slideVerifySuccessTextColor?: string
+  slideVerifyButtonBg?: string
+  slideVerifyButtonShadow?: string
+  slideVerifyButtonColor?: string
+  slideVerifyButtonSize?: string
+  slideVerifyTrackWidth?: string
+}
+
 export type ConfigProviderThemeVars = baseThemeVars &
   actionSheetThemeVars &
   badgeThemeVars &
@@ -1106,4 +1118,5 @@ export type ConfigProviderThemeVars = baseThemeVars &
   signatureThemeVars &
   tourThemeVars &
   avatarThemeVars &
-  avatarGroupThemeVars
+  avatarGroupThemeVars &
+  slideVerifyThemeVars

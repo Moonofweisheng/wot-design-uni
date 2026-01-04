@@ -1015,3 +1015,14 @@ $-avatar-border-radius: var(--wot-avatar-border-radius, 8px) !default; // 圆角
 $-avatar-group-overlap: var(--wot-avatar-group-overlap, -12px) !default; // 重叠距离
 $-avatar-group-collapse-font-size: var(--wot-avatar-group-collapse-font-size, 12px) !default; // 折叠文字字号
 
+/* slide-verify */
+$-slide-verify-disabled-color: var(--wot-slide-verify-disabled-color, #cccccc) !default; // 禁用文字颜色
+$-slide-verify-text-color: var(--wot-slide-verify-text-color, #333333) !default; // 提示文字颜色
+$-slide-verify-text-size: var(--wot-slide-verify-text-size, 12px) !default; // 提示文字大小
+$-slide-verify-success-text-color: var(--wot-slide-verify-success-text-color, #ffffff) !default; // 成功提示文字颜色
+$-slide-verify-button-bg: var(--wot-slide-verify-button-bg, #ffffff) !default; // 滑块背景色
+$-slide-verify-button-shadow: var(--wot-slide-verify-button-shadow, rgba(0, 0, 0, 0.15)) !default; // 滑块阴影
+$-slide-verify-button-color: var(--wot-slide-verify-button-color, #666666) !default; // 滑块图标颜色
+$-slide-verify-button-size: var(--wot-slide-verify-button-size, 40px) !default; // 滑块尺寸
+$-slide-verify-track-width: var(--wot-slide-verify-track-width, 100%) !default; // 滑道宽度
+
