@@ -84,7 +84,7 @@ function handleFail() {
 
 ```typescript
 import { ref } from 'vue'
-import type { SlideVerifyInstance } from 'wot-design-uni'
+import type { SlideVerifyInstance } from '@/uni_modules/wot-design-uni/components/wd-slide-verify/type'
 
 const slideVerifyRef = ref<SlideVerifyInstance>()
 
