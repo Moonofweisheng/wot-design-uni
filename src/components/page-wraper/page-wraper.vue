@@ -1,5 +1,5 @@
 <template>
-  <wd-config-provider :theme="theme" :theme-vars="isRed ? themeVars : {}">
+  <wd-config-provider :theme="theme">
     <view class="page-wraper" @click="closeOutside">
       <wd-cell :title="$t('qie-huan-an-hei')" title-width="240px" center v-if="showDarkMode">
         <wd-switch v-model="isDark" />
@@ -47,7 +47,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, ref, onMounted, nextTick } from 'vue'
-import { setNotifyDefaultOptions, useQueue, type ConfigProviderThemeVars } from '@/uni_modules/wot-design-uni'
+import { setNotifyDefaultOptions, useQueue, type ConfigProviderThemeVars, useConfigProvider } from '@/uni_modules/wot-design-uni'
 import { useDark } from '../../store'
 import { useRewardAd } from '@/store/useRewardAd'
 
@@ -82,9 +82,11 @@ const showWxAd3 = ref<boolean>(Math.random() > 0.66) // 插屏广告
 let interstitialAd: UniApp.InterstitialAdContext | null = null
 // #endif
 
-const themeVars: ConfigProviderThemeVars = {
-  colorTheme: 'red'
-}
+const themeVars = computed<ConfigProviderThemeVars>(() => {
+  return isRed.value ? { colorTheme: 'red' } : {}
+})
+
+useConfigProvider({ themeVars })
 
 const theme = computed(() => {
   return darkMode.isDark.value || isDark.value ? 'dark' : 'light'

@@ -32,7 +32,7 @@ const extractSCSSVariables = (scssFilePath: string): Record<string, string> => {
  * @returns {string} - TypeScript 文件内容
  */
 const generateTSFileContent = (variables: Record<string, string>) => {
-  let tsContent = `import type { ExtractPropTypes, PropType } from 'vue'
+  let tsContent = `import type { ExtractPropTypes, PropType, InjectionKey, ComputedRef } from 'vue'
 import { makeStringProp, baseProps } from '../common/props'
 
 export type ConfigProviderTheme = 'light' | 'dark'
@@ -53,6 +53,14 @@ export const configProviderProps = {
 }
 
 export type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>
+
+export type ConfigProviderProvide = {
+  theme: ComputedRef<ConfigProviderTheme>
+  themeVars: ComputedRef<ConfigProviderThemeVars>
+  themeStyle: ComputedRef<string>
+}
+
+export const CONFIG_PROVIDER_KEY: InjectionKey<ConfigProviderProvide> = Symbol('wd-config-provider')
 
 export type baseThemeVars = {
   colorTheme?: string // 主题色

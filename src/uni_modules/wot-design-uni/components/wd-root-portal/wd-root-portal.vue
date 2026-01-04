@@ -9,7 +9,9 @@
     <root-portal>
       <!-- #endif -->
       <!-- #endif -->
-      <slot />
+      <view :style="configProviderStyle">
+        <slot />
+      </view>
       <!-- #ifdef MP-WEIXIN || MP-ALIPAY -->
       <!-- #ifndef MP-DINGTALK -->
     </root-portal>
@@ -19,7 +21,7 @@
   </teleport>
   <!-- #endif -->
 </template>
-<script>
+<script lang="ts">
 export default {
   name: 'wd-root-portal',
   options: {
@@ -29,7 +31,22 @@ export default {
   }
 }
 </script>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { computed, inject } from 'vue'
+import { useParent } from '../composables/useParent'
+import { USE_CONFIG_PROVIDER_KEY } from '../composables/useConfigProvider'
+import { CONFIG_PROVIDER_KEY, type ConfigProviderProvide } from '../wd-config-provider/types'
+
+const None = Symbol('None')
+const hooksProvider = inject<ConfigProviderProvide | typeof None>(USE_CONFIG_PROVIDER_KEY, None)
+const { parent: configProvider } = useParent(CONFIG_PROVIDER_KEY)
+
+const configProviderStyle = computed(() => {
+  console.log(hooksProvider !== None ? hooksProvider.themeStyle.value || '' : configProvider?.themeStyle.value || '')
+
+  return hooksProvider !== None ? hooksProvider.themeStyle.value || '' : configProvider?.themeStyle.value || ''
+})
+</script>
 
 <!-- #ifdef APP-PLUS -->
 <script module="render" lang="renderjs">
