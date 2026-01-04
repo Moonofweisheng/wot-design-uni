@@ -1,0 +1,70 @@
+@import '../common/abstracts/variable'; 
+@import '../common/abstracts/mixin';
+
+@include b(week-date) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include e(nav) {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  @include e(btn) {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 18px;
+  }
+
+  @include e(week) {
+    display: flex;
+    flex: 1;
+  }
+
+  @include e(item) {
+    flex: 1;
+    padding: 8px 0;
+    text-align: center;
+    border-radius: 4px;
+    transition: background-color .2s;
+
+    &:active {
+      opacity: .8;
+    }
+  }
+
+  @include e(week-label) {
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: #666;
+  }
+
+  @include e(date) {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  /* ===== 状态 ===== */
+
+  @include when(active) {
+    @include e(item) {
+      background: #e6f4ff;
+    }
+
+    @include e(date) {
+      color: #1677ff;
+    }
+  }
+
+  @include when(today) {
+    @include e(date) {
+      font-weight: 700;
+    }
+  }
+}
