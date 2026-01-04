@@ -178,6 +178,8 @@ export type cellThemeVars = {
   cellGroupTitleColor?: string
   cellGroupValueFs?: string
   cellGroupValueColor?: string
+  cellGroupInsertRadius?: string
+  cellGroupInsertMargin?: string
   cellWrapperPadding?: string
   cellWrapperPaddingLarge?: string
   cellWrapperPaddingWithLabel?: string
