@@ -1,5 +1,5 @@
 <template>
-  <view :class="themeClass" :style="`${themeStyle};${customStyle}`">
+  <view :class="themeClass" :style="rootStyle">
     <slot />
   </view>
 </template>
@@ -39,6 +39,11 @@ const themeStyle = computed(() => {
   }
   const styleObj = mapThemeVarsToCSSVars(props.themeVars)
   return styleObj ? `${objToStyle(styleObj)}` : ''
+})
+
+const rootStyle = computed(() => {
+  const style = `${themeStyle.value}${props.customStyle}`
+  return style
 })
 
 linkChildren({

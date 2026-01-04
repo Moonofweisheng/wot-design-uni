@@ -54,8 +54,8 @@
     background: $-color-white;
   }
   @include m(insert) {
-    border-radius: 8px;
+    border-radius: $-cell-group-insert-radius;
     overflow: hidden;
-    margin: 0 16px;
+    margin: $-cell-group-insert-margin;
   }
 }
