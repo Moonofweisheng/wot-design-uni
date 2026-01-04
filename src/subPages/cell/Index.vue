@@ -8,6 +8,13 @@
       </wd-cell-group>
     </demo-block>
 
+    <demo-block :title="$t('card-style')" transparent>
+      <wd-cell-group insert>
+        <wd-cell :title="$t('biao-ti-wen-zi')" :value="$t('nei-rong')" />
+        <wd-cell :title="$t('biao-ti-wen-zi-0')" :label="$t('miaoShuXinXi-0')" :value="$t('nei-rong')" />
+      </wd-cell-group>
+    </demo-block>
+
     <demo-block :title="$t('tu-biao')" transparent>
       <wd-cell-group>
         <wd-cell :title="$t('biao-ti-wen-zi-1')" :value="$t('nei-rong')" icon="setting" />
@@ -56,6 +63,15 @@
       <wd-cell-group>
         <wd-cell :title="$t('bang-zhu-yu-fan-kui')" is-link to="/pages/index/Index" />
         <wd-cell :title="$t('she-zhi')" :value="$t('nei-rong')" is-link to="/pages/button/Index" replace></wd-cell>
+      </wd-cell-group>
+    </demo-block>
+
+    <demo-block title="箭头方向" transparent>
+      <wd-cell-group>
+        <wd-cell title="向上箭头" is-link arrow-direction="up" />
+        <wd-cell title="向下箭头" is-link arrow-direction="down" />
+        <wd-cell title="向左箭头" is-link arrow-direction="left" />
+        <wd-cell title="默认箭头(向右)" is-link />
       </wd-cell-group>
     </demo-block>
 

@@ -37,7 +37,7 @@
             <slot>{{ value }}</slot>
           </view>
           <!--箭头-->
-          <wd-icon v-if="isLink" custom-class="wd-cell__arrow-right" name="arrow-right" />
+          <wd-icon v-if="isLink" custom-class="wd-cell__arrow-right" :name="`arrow-${arrowDirection || 'right'}`" />
           <slot v-else name="right-icon" />
         </view>
         <view v-if="errorMessage" class="wd-cell__error-message">{{ errorMessage }}</view>

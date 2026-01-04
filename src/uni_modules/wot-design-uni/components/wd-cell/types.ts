@@ -3,6 +3,8 @@ import { baseProps, makeArrayProp, makeBooleanProp, makeStringProp, makeNumericP
 
 import { type FormItemRule } from '../wd-form/types'
 
+type CellArrowDirection = 'left' | 'up' | 'down' | 'right'
+
 export const cellProps = {
   ...baseProps,
   /**
@@ -103,9 +105,13 @@ export const cellProps = {
    */
   useTitleSlot: makeBooleanProp(true),
   /**
-   * 必填标记位置，可选值：before（标签前）、after（标签后）
+   * 必填标记位置,可选值:before(标签前)、after(标签后)
    */
-  markerSide: makeStringProp<'before' | 'after'>('before')
+  markerSide: makeStringProp<'before' | 'after'>('before'),
+  /**
+   * 箭头方向,可选值:left、up、down、right,只在 is-link 为 true 时生效
+   */
+  arrowDirection: makeStringProp<CellArrowDirection>('right')
 }
 
 export type CellProps = ExtractPropTypes<typeof cellProps>

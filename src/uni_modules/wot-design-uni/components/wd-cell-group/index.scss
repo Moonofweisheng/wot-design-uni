@@ -53,4 +53,9 @@
   @include e(body) {
     background: $-color-white;
   }
+  @include m(insert) {
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 16px;
+  }
 }
