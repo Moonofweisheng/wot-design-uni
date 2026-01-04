@@ -119,7 +119,7 @@ const trackStyle = computed(() => {
   const style: CSSProperties = {
     width: `${currentPosition.value}px`,
     background: props.activeBackgroundColor,
-    '--wd-slide-verify-track-width': addUnit(props.width)
+    '--wot-slide-verify-track-width': addUnit(props.width)
   }
   return objToStyle(style)
 })

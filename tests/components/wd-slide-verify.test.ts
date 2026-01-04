@@ -33,7 +33,7 @@ describe('wd-slide-verify', () => {
     expect(root.attributes('style')).toContain('background-color: rgb(0, 0, 0)')
 
     const track = wrapper.find('.wd-slide-verify__track')
-    expect(track.attributes('style')).toContain('--wd-slide-verify-track-width: 400px')
+    expect(track.attributes('style')).toContain('--wot-slide-verify-track-width: 400px')
 
     expect(wrapper.find('.wd-slide-verify__text').text()).toBe('Custom Text')
 
