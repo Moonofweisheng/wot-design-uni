@@ -133,7 +133,7 @@
       @change="handleChange"
     >
       <template #highlight="{ elementInfo }">
-        <view class="custom-highlight" :style="{ ...elementInfo, ...customHighlightStyle }"></view>
+        <view class="custom-highlight" :style="`${objToStyle(elementInfo)};${objToStyle(customHighlightStyle)}`"></view>
       </template>
     </wd-tour>
 
@@ -179,6 +179,7 @@
 </template>
 
 <script lang="ts" setup>
+import { objToStyle } from '@/uni_modules/wot-design-uni/components/common/util'
 import { type TourChangeDetail } from '@/uni_modules/wot-design-uni/components/wd-tour/types'
 import { ref, watch, nextTick } from 'vue'
 

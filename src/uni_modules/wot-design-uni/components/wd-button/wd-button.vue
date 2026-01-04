@@ -17,7 +17,7 @@
     ]"
     :hover-start-time="hoverStartTime"
     :hover-stay-time="hoverStayTime"
-    :open-type="disabled || loading ? undefined : openType"
+    :open-type="openTypeValue"
     :send-message-title="sendMessageTitle"
     :send-message-path="sendMessagePath"
     :send-message-img="sendMessageImg"
@@ -96,6 +96,10 @@ const loadingIconSvg = ref<string>('')
 
 const loadingStyle = computed(() => {
   return `background-image: url(${loadingIconSvg.value});`
+})
+
+const openTypeValue = computed(() => {
+  return props.disabled || props.loading ? undefined : props.openType
 })
 
 watch(
