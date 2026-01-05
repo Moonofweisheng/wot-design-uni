@@ -29,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import dayjs from '../../dayjs'
+import { computed, ref, watch } from 'vue'
+import dayjs, { type Dayjs } from '../../dayjs'
 import { weekDateProps } from './types'
 
 const props = defineProps(weekDateProps)
@@ -40,36 +40,66 @@ const emit = defineEmits<{
   (e: 'change', date: string): void
 }>()
 
-/**
- * 当前选中日期
- */
-const currentDate = computed(() => {
-  return props.modelValue ? dayjs(props.modelValue) : dayjs()
-})
+const WEEK_LABELS = ['日', '一', '二', '三', '四', '五', '六'] as const
+
+const normalizeDate = (value?: string | number | Date | null): Dayjs | null => {
+  if (value === null || value === undefined || value === '') {
+    return null
+  }
+
+  const date = dayjs(value)
+
+  if (!date.isValid()) {
+    console.warn(`[WeekDate] Invalid date value: ${value}`)
+    return null
+  }
+
+  return date.startOf('day')
+}
+
+const anchorDate = ref(normalizeDate(props.modelValue) ?? dayjs())
+watch(
+  () => props.modelValue,
+  (val) => {
+    const normalized = normalizeDate(val)
+    anchorDate.value = normalized ?? dayjs()
+  },
+  { immediate: true }
+)
 
 /**
  * 当前周起始日
  */
 const startOfWeek = computed(() => {
-  const day = currentDate.value.day()
-  const diff = props.weekStart === 1 ? (day === 0 ? -6 : 1 - day) : -day
+  const day = anchorDate.value.day()
+  const weekStart = Number(props.weekStart) === 1 ? 1 : 0
 
-  return currentDate.value.add(diff, 'day')
+  const diff = (day - weekStart + 7) % 7
+
+  return anchorDate.value.subtract(diff, 'day')
 })
 
 /**
- * 周列表（7 天）
+ * 当前选中的日期(已标准化)
+ * 空值时默认为今天,用于高亮显示
  */
+const selectedDate = computed(() => {
+  return normalizeDate(props.modelValue) ?? dayjs().startOf('day')
+})
+
 const weekList = computed(() => {
-  return Array.from({ length: 7 }).map((_, index) => {
+  const today = dayjs().startOf('day')
+  const selected = selectedDate.value
+
+  return Array.from({ length: 7 }, (_, index) => {
     const date = startOfWeek.value.add(index, 'day')
 
     return {
       fullDate: date.format('YYYY-MM-DD'),
       date: date.format('DD'),
-      week: '日一二三四五六'[date.day()],
-      isToday: date.isSame(dayjs(), 'day'),
-      isActive: date.isSame(currentDate.value, 'day')
+      week: WEEK_LABELS[date.day()],
+      isToday: date.isSame(today, 'day'),
+      isActive: date.isSame(selected, 'day')
     }
   })
 })
@@ -78,6 +108,8 @@ const weekList = computed(() => {
  * 选择日期
  */
 const onSelect = (date: string) => {
+  console.log('date', date)
+
   emit('update:modelValue', date)
   emit('change', date)
 }
@@ -86,18 +118,18 @@ const onSelect = (date: string) => {
  * 上一周
  */
 const prevWeek = () => {
-  const date = currentDate.value.subtract(7, 'day').format('YYYY-MM-DD')
-  emit('update:modelValue', date)
-  emit('change', date)
+  anchorDate.value = anchorDate.value.subtract(1, 'week')
+  // emit('update:modelValue')
+  // emit('change', date)
 }
 
 /**
  * 下一周
  */
 const nextWeek = () => {
-  const date = currentDate.value.add(7, 'day').format('YYYY-MM-DD')
-  emit('update:modelValue', date)
-  emit('change', date)
+  anchorDate.value = anchorDate.value.add(1, 'week')
+  // emit('update:modelValue')
+  // emit('change', date)
 }
 </script>
 

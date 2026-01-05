@@ -1,10 +1,30 @@
-@import '../common/abstracts/variable'; 
-@import '../common/abstracts/mixin';
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
 
 @include b(week-date) {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 8px 0;
+
+  /* item - active 状态 */
+  @include e(item) {
+    @include when(active) {
+      background: $-button-primary-bg-color;
+      color: $-button-primary-color;
+
+      .wd-week-date__week-label,
+      .wd-week-date__date {
+        color: $-button-primary-color;
+      }
+    }
+  }
+
+  @include when(today) {
+    @include e(date) {
+      font-weight: 700;
+    }
+  }
 
   @include e(nav) {
     display: flex;
@@ -19,6 +39,8 @@
     text-align: center;
     border-radius: 4px;
     font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s;
   }
 
   @include e(week) {
@@ -31,11 +53,8 @@
     padding: 8px 0;
     text-align: center;
     border-radius: 4px;
-    transition: background-color .2s;
-
-    &:active {
-      opacity: .8;
-    }
+    cursor: pointer;
+    transition: background-color 0.2s;
   }
 
   @include e(week-label) {
@@ -48,23 +67,5 @@
     font-size: 16px;
     font-weight: 500;
     color: #333;
-  }
-
-  /* ===== 状态 ===== */
-
-  @include when(active) {
-    @include e(item) {
-      background: #e6f4ff;
-    }
-
-    @include e(date) {
-      color: #1677ff;
-    }
-  }
-
-  @include when(today) {
-    @include e(date) {
-      font-weight: 700;
-    }
   }
 }

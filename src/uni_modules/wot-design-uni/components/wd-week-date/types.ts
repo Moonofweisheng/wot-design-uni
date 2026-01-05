@@ -1,4 +1,5 @@
-import { baseProps, makeNumberProp, makeNumericProp, makeRequiredProp } from '../common/props'
+import type { PropType } from 'vue'
+import { baseProps, makeNumberProp, makeNumericProp, makeRequiredProp, numericProp } from '../common/props'
 
 export type WeekStart = 0 | 1
 
@@ -7,7 +8,7 @@ export const weekDateProps = {
   /**
    * 双向绑定值
    */
-  modelValue: makeRequiredProp(String),
+  modelValue: makeRequiredProp([Number, String, Date] as PropType<number | string | Date>),
 
   /**
    * 周起始日
