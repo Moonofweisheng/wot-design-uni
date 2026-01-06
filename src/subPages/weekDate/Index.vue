@@ -19,31 +19,31 @@
     </demo-block>
 
     <demo-block :title="$t('jin-yong-zhi-hou-de-ri-qi')">
-      <wd-week-date v-model="value4" :disabled-date="disableAfterToday" />
+      <wd-week-date v-model="value5" :disabled-date="disableAfterToday" />
     </demo-block>
 
     <demo-block :title="$t('jin-yong-xing-qi-san-he-xing-qi-wu')">
-      <wd-week-date v-model="value4" :disabled-date="disableWedFri" />
+      <wd-week-date v-model="value6" :disabled-date="disableWedFri" />
     </demo-block>
 
     <!-- 选择回调 -->
     <demo-block :title="$t('xuan-ze-hui-diao')">
-      <wd-week-date v-model="value5" :disabled-date="disableBeforeToday" @select="handleSelect5" />
+      <wd-week-date v-model="value7" :disabled-date="disableBeforeToday" @select="handleSelect" />
     </demo-block>
 
     <!-- 切换周事件 -->
     <demo-block :title="$t('qie-huan-zhou-shi-jian')">
-      <wd-week-date v-model="value6" @change="handleChange6" />
+      <wd-week-date v-model="value8" @change="handleChange1" />
     </demo-block>
 
     <!-- 切换周日期跟随 -->
     <demo-block :title="$t('qie-huan-zhou-ri-qi-gen-sui')">
-      <wd-week-date v-model="value7" @change="handleChange7" />
+      <wd-week-date v-model="value9" @change="handleChange2" />
     </demo-block>
 
     <!-- 自定义图标 插槽 -->
     <demo-block :title="$t('zi-ding-yi-tu-biao-cha-zhi')">
-      <wd-week-date v-model="value8" shape="circle">
+      <wd-week-date v-model="value10" shape="circle">
         <template #prev>
           <wd-icon name="caret-left" size="22px" color="#ff5722" />
         </template>
@@ -58,10 +58,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { dayjs, useToast } from '@/uni_modules/wot-design-uni'
 import type { WeekChangeEvent, WeekDateItem } from '@/uni_modules/wot-design-uni/components/wd-week-date'
 
 const { success } = useToast()
+const { t } = useI18n()
 
 const disableBeforeToday = (date: Date) => {
   return dayjs(date).isBefore(dayjs(), 'day')
@@ -86,18 +88,20 @@ const value5 = ref(new Date())
 const value6 = ref(new Date('2023-01-01'))
 const value7 = ref('')
 const value8 = ref('')
+const value9 = ref('')
+const value10 = ref('')
 
-const handleSelect5 = (date: WeekDateItem) => {
-  success(`切换日期：${date.fullDate}`)
+const handleSelect = (date: WeekDateItem) => {
+  success(`${t('qie-huan-ri-qi')}${date.fullDate}`)
 }
 
-const handleChange6 = (date: WeekChangeEvent) => {
-  success(`日期：${date.date}，类型：${date.type}`)
+const handleChange1 = (date: WeekChangeEvent) => {
+  success(`${t('ri-qi')}：${date.date}，${t('lei-xing')}：${date.type}`)
 }
 
-const handleChange7 = (date: WeekChangeEvent) => {
-  success(`日期：${date.date}，类型：${date.type}`)
-  value7.value = date.date as string
+const handleChange2 = (date: WeekChangeEvent) => {
+  success(`${t('ri-qi')}：${date.date}，${t('lei-xing')}：${date.type}`)
+  value7.value = date.date
 }
 </script>
 

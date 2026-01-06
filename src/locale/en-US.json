@@ -1673,5 +1673,7 @@
   "xuan-ze-hui-diao": "Select Callback",
   "qie-huan-zhou-shi-jian": "Week Change Event",
   "qie-huan-zhou-ri-qi-gen-sui": "Week Change Date Follow",
-  "zi-ding-yi-tu-biao-cha-zhi": "Custom Icons (Slots)"
+  "zi-ding-yi-tu-biao-cha-zhi": "Custom Icons (Slots)",
+  "qie-huan-ri-qi": "Selected date: ",
+  "lei-xing": "Type"
 }

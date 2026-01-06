@@ -51,7 +51,9 @@ const value3 = ref(1767600387123)
 ```
 
 ```typescript
-const value4 = ref(Date.now())
+import dayjs from 'dayjs'
+
+const value4 = ref<number | string>(Date.now())
 
 const disableBeforeToday = (date: Date) => {
   return dayjs(date).isBefore(dayjs(), 'day')
@@ -61,11 +63,13 @@ const disableBeforeToday = (date: Date) => {
 ## 禁用之后的日期
 
 ```html
-<wd-week-date v-model="value4" :disabled-date="disableAfterToday" />
+<wd-week-date v-model="valueAfter" :disabled-date="disableAfterToday" />
 ```
 
 ```typescript
-const value4 = ref(Date.now())
+import dayjs from 'dayjs'
+
+const valueAfter = ref(Date.now())
 
 const disableAfterToday = (date: Date) => {
   return dayjs(date).isAfter(dayjs(), 'day')
@@ -75,11 +79,13 @@ const disableAfterToday = (date: Date) => {
 ## 禁用星期三和星期五
 
 ```html
-<wd-week-date v-model="value4" :disabled-date="disableWedFri" />
+<wd-week-date v-model="valueWeekdays" :disabled-date="disableWedFri" />
 ```
 
 ```typescript
-const value4 = ref(Date.now())
+import dayjs from 'dayjs'
+
+const valueWeekdays = ref<number | string>(Date.now())
 
 const disableWedFri = (date: Date) => {
   const day = dayjs(date).day()
@@ -87,13 +93,20 @@ const disableWedFri = (date: Date) => {
 }
 ```
 
+const disableWedFri = (date: Date) => {
+const day = dayjs(date).day()
+return day === 3 || day === 5
+}
+
+````
+
 ## 选择回调
 
 监听 `@select` 事件，在用户选择日期时触发，返回选中的日期信息。
 
 ```html
 <wd-week-date v-model="value5" :disabled-date="disableBeforeToday" @select="handleSelect5" />
-```
+````
 
 ```typescript
 import { useToast } from '@/uni_modules/wot-design-uni'

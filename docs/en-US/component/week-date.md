@@ -51,7 +51,9 @@ Use the `disabled-date` attribute to disable specific dates. The parameter is a 
 ```
 
 ```typescript
-const value4 = ref(Date.now())
+import dayjs from 'dayjs'
+
+const value4 = ref<number | string>(Date.now())
 
 const disableBeforeToday = (date: Date) => {
   return dayjs(date).isBefore(dayjs(), 'day')
@@ -61,11 +63,12 @@ const disableBeforeToday = (date: Date) => {
 ## Disable Dates After Today
 
 ```html
-<wd-week-date v-model="value4" :disabled-date="disableAfterToday" />
+<wd-week-date v-model="valueAfter" :disabled-date="disableAfterToday" />
 ```
 
 ```typescript
-const value4 = ref(Date.now())
+import dayjs from 'dayjs'
+const valueAfter = ref<number | string>(Date.now())
 
 const disableAfterToday = (date: Date) => {
   return dayjs(date).isAfter(dayjs(), 'day')
@@ -75,11 +78,13 @@ const disableAfterToday = (date: Date) => {
 ## Disable Wednesday and Friday
 
 ```html
-<wd-week-date v-model="value4" :disabled-date="disableWedFri" />
+<wd-week-date v-model="valueWeekdays" :disabled-date="disableWedFri" />
 ```
 
 ```typescript
-const value4 = ref(Date.now())
+import dayjs from 'dayjs'
+
+const valueWeekdays = ref<number | string>(Date.now())
 
 const disableWedFri = (date: Date) => {
   const day = dayjs(date).day()
