@@ -1,3 +1,7 @@
+---
+version: $LOWEST_VERSION$
+---
+
 # WeekDate 周日期选择器
 
 横向展示一周日期，支持左右切换周和选择日期。

@@ -1,3 +1,7 @@
+---
+version: $LOWEST_VERSION$
+---
+
 # WeekDate
 
 Display a week horizontally, supporting left and right week switching and date selection.
