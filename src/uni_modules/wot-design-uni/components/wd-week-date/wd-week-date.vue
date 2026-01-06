@@ -1,3 +1,12 @@
+<!--
+ * @Author: North
+ * @Date: 2026-01-06
+ * @LastEditTime: 2026-01-06
+ * @LastEditors: North
+ * @Description: Week Date 周日期组件，支持选择一周内的日期
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-week-date/wd-week-date.vue
+-->
+
 <template>
   <view class="wd-week-date" :class="customClass" :style="customStyle">
     <!-- 上一周 -->

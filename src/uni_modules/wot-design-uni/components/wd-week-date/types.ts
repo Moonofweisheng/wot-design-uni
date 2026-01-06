@@ -1,3 +1,12 @@
+/**
+ * @Author: North
+ * @Date: 2026-01-06
+ * @LastEditTime: 2026-01-06
+ * @LastEditors: North
+ * @Description: Week Date 周日期组件类型定义
+ * @FilePath: /wot-design-uni/src/uni_modules/wot-design-uni/components/wd-week-date/types.ts
+ */
+
 import type { PropType } from 'vue'
 import { baseProps, makeNumericProp, makeRequiredProp, makeStringProp } from '../common/props'
 
