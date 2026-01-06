@@ -1,18 +1,24 @@
 <template>
   <view class="wd-week-date">
+    <!-- 上一周 -->
     <view class="wd-week-date__btn" @click="prevWeek">
-      <wd-icon name="arrow-left"></wd-icon>
+      <slot name="prev">
+        <wd-icon name="arrow-left" />
+      </slot>
     </view>
+
+    <!-- 周列表 -->
     <view class="wd-week-date__week">
       <view
         v-for="item in weekList"
         :key="item.fullDate"
         class="wd-week-date__item"
         :class="{
+          'is-disabled': item.isDisabled,
           'is-active': item.isActive,
-          'is-today': item.isToday
+          'is-circle': shape === 'circle'
         }"
-        @click="onSelect(item.fullDate)"
+        @click="onSelect(item)"
       >
         <view class="wd-week-date__week-label">
           {{ item.week }}
@@ -22,25 +28,30 @@
         </view>
       </view>
     </view>
+
+    <!-- 下一周 -->
     <view class="wd-week-date__btn" @click="nextWeek">
-      <wd-icon name="arrow-right"></wd-icon>
+      <slot name="next">
+        <wd-icon name="arrow-right" />
+      </slot>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import dayjs, { type Dayjs } from '../../dayjs'
-import { weekDateProps } from './types'
+import { weekDateProps, type WeekChangeEvent, type WeekDateItem } from './types'
 
 const props = defineProps(weekDateProps)
 
 const emit = defineEmits<{
   (e: 'update:modelValue', date: string): void
-  (e: 'change', date: string): void
+  // change用于切换
+  (e: 'change', item: WeekChangeEvent): void
+  // select用于选择日期
+  (e: 'select', item: WeekDateItem): void
 }>()
-
-const WEEK_LABELS = ['日', '一', '二', '三', '四', '五', '六'] as const
 
 const normalizeDate = (value?: string | number | Date | null): Dayjs | null => {
   if (value === null || value === undefined || value === '') {
@@ -50,15 +61,18 @@ const normalizeDate = (value?: string | number | Date | null): Dayjs | null => {
   const date = dayjs(value)
 
   if (!date.isValid()) {
-    console.warn(`[WeekDate] Invalid date value: ${value}`)
+    console.warn(`[wot ui] warning(wd-week-date): Invalid date value: ${value}`)
     return null
   }
 
   return date.startOf('day')
 }
 
+const WEEK_LABELS = ['日', '一', '二', '三', '四', '五', '六'] as const
+
 const anchorDate = ref(normalizeDate(props.modelValue) ?? dayjs())
-watch(
+
+const stopModelValueWatch = watch(
   () => props.modelValue,
   (val) => {
     const normalized = normalizeDate(val)
@@ -72,34 +86,37 @@ watch(
  */
 const startOfWeek = computed(() => {
   const day = anchorDate.value.day()
-  const weekStart = Number(props.weekStart) === 1 ? 1 : 0
-
+  const weekStart = props.weekStart === 1 ? 1 : 0
   const diff = (day - weekStart + 7) % 7
-
   return anchorDate.value.subtract(diff, 'day')
 })
 
 /**
- * 当前选中的日期(已标准化)
- * 空值时默认为今天,用于高亮显示
+ * 当前选中日期（用于高亮）
  */
 const selectedDate = computed(() => {
   return normalizeDate(props.modelValue) ?? dayjs().startOf('day')
 })
 
-const weekList = computed(() => {
-  const today = dayjs().startOf('day')
+/**
+ * 一周 7 天数据
+ */
+const weekList = computed<WeekDateItem[]>(() => {
   const selected = selectedDate.value
+  const start = startOfWeek.value
 
   return Array.from({ length: 7 }, (_, index) => {
-    const date = startOfWeek.value.add(index, 'day')
+    const current = start.add(index, 'day')
+    const rawDate = current.toDate()
+
+    const isDisabled = props.disabledDate?.(rawDate) ?? false
 
     return {
-      fullDate: date.format('YYYY-MM-DD'),
-      date: date.format('DD'),
-      week: WEEK_LABELS[date.day()],
-      isToday: date.isSame(today, 'day'),
-      isActive: date.isSame(selected, 'day')
+      fullDate: current.format('YYYY-MM-DD'),
+      date: current.format('DD'),
+      week: WEEK_LABELS[current.day()],
+      isActive: selected ? current.isSame(selected, 'day') : false,
+      isDisabled
     }
   })
 })
@@ -107,30 +124,35 @@ const weekList = computed(() => {
 /**
  * 选择日期
  */
-const onSelect = (date: string) => {
-  console.log('date', date)
+const onSelect = (item: (typeof weekList.value)[number]) => {
+  if (item.isDisabled) return
 
-  emit('update:modelValue', date)
-  emit('change', date)
+  emit('update:modelValue', item.fullDate)
+  emit('select', item)
 }
 
 /**
- * 上一周
+ * 周切换
  */
 const prevWeek = () => {
   anchorDate.value = anchorDate.value.subtract(1, 'week')
-  // emit('update:modelValue')
-  // emit('change', date)
+  emit('change', {
+    date: anchorDate.value.format('YYYY-MM-DD'),
+    type: 'prev'
+  })
 }
 
-/**
- * 下一周
- */
 const nextWeek = () => {
   anchorDate.value = anchorDate.value.add(1, 'week')
-  // emit('update:modelValue')
-  // emit('change', date)
+  emit('change', {
+    date: anchorDate.value.format('YYYY-MM-DD'),
+    type: 'next'
+  })
 }
+
+onBeforeUnmount(() => {
+  stopModelValueWatch()
+})
 </script>
 
 <style lang="scss" scoped>

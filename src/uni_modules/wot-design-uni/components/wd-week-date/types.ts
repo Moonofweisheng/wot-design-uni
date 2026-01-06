@@ -1,7 +1,27 @@
 import type { PropType } from 'vue'
-import { baseProps, makeNumberProp, makeNumericProp, makeRequiredProp, numericProp } from '../common/props'
+import { baseProps, makeNumberProp, makeNumericProp, makeRequiredProp, makeStringProp, numericProp } from '../common/props'
 
 export type WeekStart = 0 | 1
+
+export type WeekDateItem = {
+  /** 完整日期字符串，格式为 YYYY-MM-DD */
+  fullDate: string
+  /** 日期，格式为 DD */
+  date: string
+  /** 星期标签，如 '一'、'二' */
+  week: string
+  /** 是否为选中日期 */
+  isActive: boolean
+  /** 是否为禁用日期 */
+  isDisabled: boolean
+}
+
+export type WeekChangeEvent = {
+  /** 当前周的日期字符串，格式为 YYYY-MM-DD */
+  date: string
+  /** 切换类型 'prev'（上一周） 'next'（下一周） */
+  type: 'prev' | 'next'
+}
 
 export const weekDateProps = {
   ...baseProps,
@@ -16,5 +36,19 @@ export const weekDateProps = {
    * 1: 周一
    * @default 1
    */
-  weekStart: makeNumericProp<WeekStart>(1)
+  weekStart: makeNumericProp<WeekStart>(1),
+
+  /**
+   * 选中形状，可选值为 square、circle
+   * @default square
+   */
+  shape: makeStringProp<'square' | 'circle'>('square'),
+
+  /**
+   * 禁用日期函数，参数为日期对象，返回值为布尔值，返回 true 则表示该日期被禁用
+   */
+  disabledDate: {
+    type: Function as PropType<(date: Date) => boolean>,
+    default: undefined
+  }
 }
