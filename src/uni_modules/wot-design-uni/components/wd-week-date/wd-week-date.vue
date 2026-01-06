@@ -41,6 +41,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import dayjs, { type Dayjs } from '../../dayjs'
+import { useTranslate } from '../composables/useTranslate'
 import { weekDateProps, type WeekChangeEvent, type WeekDateItem } from './types'
 
 const props = defineProps(weekDateProps)
@@ -52,6 +53,8 @@ const emit = defineEmits<{
   // select用于选择日期
   (e: 'select', item: WeekDateItem): void
 }>()
+
+const { translate } = useTranslate('calendarView')
 
 const normalizeDate = (value?: string | number | Date | null): Dayjs | null => {
   if (value === null || value === undefined || value === '') {
@@ -68,7 +71,12 @@ const normalizeDate = (value?: string | number | Date | null): Dayjs | null => {
   return date.startOf('day')
 }
 
-const WEEK_LABELS = ['日', '一', '二', '三', '四', '五', '六'] as const
+// 使用项目国际化获取本地化的周标签
+const getWeekLabels = () => {
+  const weekKeys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
+  return weekKeys.map((key) => translate(`weeks.${key}`))
+}
+const WEEK_LABELS = getWeekLabels()
 
 const anchorDate = ref(normalizeDate(props.modelValue) ?? dayjs())
 

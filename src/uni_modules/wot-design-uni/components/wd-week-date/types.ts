@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { baseProps, makeNumberProp, makeNumericProp, makeRequiredProp, makeStringProp, numericProp } from '../common/props'
+import { baseProps, makeNumericProp, makeRequiredProp, makeStringProp } from '../common/props'
 
 export type WeekStart = 0 | 1
 
