@@ -1,5 +1,5 @@
 <template>
-  <view class="wd-week-date">
+  <view class="wd-week-date" :class="customClass" :style="customStyle">
     <!-- 上一周 -->
     <view class="wd-week-date__btn" @click="prevWeek">
       <slot name="prev">
