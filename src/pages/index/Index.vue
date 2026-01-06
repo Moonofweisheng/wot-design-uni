@@ -165,6 +165,10 @@ const list = computed(() => [
         name: t('calendarview-ri-li-mian-ban')
       },
       {
+        id: 'weekDate',
+        name: t('weekdate-zhou-ri-qi-xuan-ze')
+      },
+      {
         id: 'checkbox',
         name: t('checkbox-fu-xuan-kuang')
       },

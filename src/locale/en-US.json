@@ -1661,5 +1661,17 @@
   "zuo-shang": "Top Left",
   "zuo-xia": "lower left",
   "zuo-you-hua-dong": "Slide left and right",
-  "zuo-zhong": "Middle Left"
+  "zuo-zhong": "Middle Left",
+  "week-date-title": "WeekDate",
+  "weekdate-zhou-ri-qi-xuan-ze": "WeekDate",
+  "qi-shi-zhou-qi-zhou-ri": "Start of Week (Sunday)",
+  "xing-zhuang": "Shape",
+  "jin-yong-ri-qi": "Disabled Date",
+  "jin-yong-zhi-qian-de-ri-qi": "Disable Dates Before Today",
+  "jin-yong-zhi-hou-de-ri-qi": "Disable Dates After Today",
+  "jin-yong-xing-qi-san-he-xing-qi-wu": "Disable Wednesday and Friday",
+  "xuan-ze-hui-diao": "Select Callback",
+  "qie-huan-zhou-shi-jian": "Week Change Event",
+  "qie-huan-zhou-ri-qi-gen-sui": "Week Change Date Follow",
+  "zi-ding-yi-tu-biao-cha-zhi": "Custom Icons (Slots)"
 }
