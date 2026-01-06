@@ -166,7 +166,7 @@ const list = computed(() => [
       },
       {
         id: 'weekDate',
-        name: t('weekdate-zhou-ri-qi-xuan-ze')
+        name: t('week-date-zhou-ri-qi-xuan-ze')
       },
       {
         id: 'checkbox',

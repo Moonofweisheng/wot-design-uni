@@ -9,7 +9,7 @@
     </demo-block>
 
     <!-- 形状 -->
-    <demo-block :title="$t('xing-zhuang')">
+    <demo-block :title="$t('week-date-xing-zhuang')">
       <wd-week-date v-model="value3" shape="circle" />
     </demo-block>
 
