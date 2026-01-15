@@ -40,14 +40,16 @@
     </view>
     <wd-popup
       v-model="popupShow"
+      custom-class="wd-picker__popup"
       position="bottom"
       :hide-when-close="false"
       :close-on-click-modal="closeOnClickModal"
       :z-index="zIndex"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :root-portal="rootPortal"
+      :backpress="backpress"
+      @backpress="onBackpress"
       @close="onCancel"
-      custom-class="wd-picker__popup"
     >
       <view class="wd-picker__wraper">
         <view class="wd-picker__toolbar" @touchmove="noop">
@@ -99,14 +101,12 @@ import wdCell from '../wd-cell/wd-cell.vue'
 import { getCurrentInstance, onBeforeMount, ref, watch, computed, onMounted, nextTick } from 'vue'
 import { deepClone, defaultDisplayFormat, getType, isArray, isDef, isFunction } from '../common/util'
 import { type ColumnItem, formatArray, type PickerViewInstance } from '../wd-picker-view/types'
-import { FORM_KEY, type FormItemRule } from '../wd-form/types'
-import { useParent } from '../composables/useParent'
 import { useTranslate } from '../composables/useTranslate'
 import { pickerProps, type PickerExpose } from './types'
 const { translate } = useTranslate('picker')
 
 const props = defineProps(pickerProps)
-const emit = defineEmits(['confirm', 'open', 'cancel', 'clear', 'update:modelValue'])
+const emit = defineEmits(['confirm', 'open', 'cancel', 'clear', 'update:modelValue', 'backpress'])
 
 const pickerViewWd = ref<PickerViewInstance | null>(null)
 
@@ -399,6 +399,13 @@ function handleClear() {
   const clearValue = isArray(pickerValue.value) ? [] : ''
   emit('update:modelValue', clearValue)
   emit('clear')
+}
+
+function onBackpress() {
+  emit('backpress')
+  if (props.backpress === 'close') {
+    onCancel()
+  }
 }
 
 defineExpose<PickerExpose>({

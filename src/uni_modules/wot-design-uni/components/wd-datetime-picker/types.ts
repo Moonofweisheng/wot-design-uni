@@ -2,6 +2,7 @@ import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp } from '../common/props'
 import type { DateTimeType, DatetimePickerViewFilter, DatetimePickerViewFormatter } from '../wd-datetime-picker-view/types'
 import type { FormItemRule } from '../wd-form/types'
+import type { BackpressType } from '../wd-popup/types'
 
 const now = new Date()
 const defaultMinDate = new Date(now.getFullYear() - 10, 0, 1).getTime()
@@ -200,7 +201,14 @@ export const datetimePickerProps = {
   /**
    * 必填标记位置，可选值：before、after
    */
-  markerSide: makeStringProp<'before' | 'after'>('before')
+  markerSide: makeStringProp<'before' | 'after'>('before'),
+  /**
+   * 返回拦截（仅小程序）
+   * 类型：string
+   * 默认值：back
+   * 可选值：back / close / stop
+   */
+  backpress: makeStringProp<BackpressType>('back')
 }
 
 export type DatetimePickerDisplayFormat = (items: Record<string, any>[]) => string
