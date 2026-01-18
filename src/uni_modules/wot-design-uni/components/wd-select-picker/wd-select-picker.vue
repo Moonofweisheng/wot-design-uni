@@ -74,6 +74,9 @@
                 <block v-else>
                   {{ item[labelKey] }}
                 </block>
+                <view class="addition">
+                  <slot name="addition" :item="item" />
+                </view>
               </wd-checkbox>
             </view>
           </wd-checkbox-group>
@@ -91,6 +94,9 @@
                 <block v-else>
                   {{ item[labelKey] }}
                 </block>
+                <view class="addition">
+                  <slot name="addition" :item="item" />
+                </view>
               </wd-radio>
             </view>
           </wd-radio-group>
