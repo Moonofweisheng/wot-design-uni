@@ -69,6 +69,8 @@ const PUZZLE_BOUNDARY = 8
 const PUZZLE_SPACING = 10
 const PUZZLE_BORDER_WIDTH = 1
 
+const RESET_DURATION = 300
+
 const canvasId = `canvas-${uuid()}`
 const trackId = `track-${uuid()}`
 const trackerId = `tracker-${uuid()}`
@@ -76,8 +78,6 @@ const trackerId = `tracker-${uuid()}`
 const state = reactive({
   // 状态
   status: 'pending' as PuzzleCaptchaStatus,
-  // 是否正在重置
-  resetting: false,
   // 背景图片
   image: null as string | null,
   // 拼图图片
@@ -87,7 +87,9 @@ const state = reactive({
   // 拼图 Y 坐标
   puzzleY: 0,
   // 滑块 X 坐标
-  trackerX: 0
+  trackerX: 0,
+  // 是否正在重置
+  resetting: false
 })
 
 const shallowState = {
@@ -140,13 +142,15 @@ const puzzleStyle = computed<CSSProperties>(() => {
   return {
     width: addUnit(parseNumber(props.puzzleWidth) + PUZZLE_BORDER_WIDTH * 2),
     height: addUnit(parseNumber(props.puzzleHeight) + PUZZLE_BORDER_WIDTH * 2),
-    transform: `translate3d(${state.puzzleX - PUZZLE_BORDER_WIDTH}px, ${state.puzzleY - PUZZLE_BORDER_WIDTH}px, 0)`
+    transform: `translate3d(${state.puzzleX - PUZZLE_BORDER_WIDTH}px, ${state.puzzleY - PUZZLE_BORDER_WIDTH}px, 0)`,
+    transition: state.resetting ? `transform ${RESET_DURATION}ms ease-in` : 'none'
   }
 })
 
 const trackerStyle = computed<CSSProperties>(() => {
   return {
-    transform: `translate3d(${state.trackerX}px, 0, 0)`
+    transform: `translate3d(${state.trackerX}px, 0, 0)`,
+    transition: state.resetting ? `transform ${RESET_DURATION}ms ease-in` : 'none'
   }
 })
 
@@ -488,7 +492,14 @@ function reset(update = false) {
     emit('update-image')
   }
 
-  // TODO 重置拼图位置
+  state.status = 'pending'
+  state.puzzleX = PUZZLE_BOUNDARY
+  state.trackerX = 0
+  state.resetting = true
+
+  setTimeout(() => {
+    state.resetting = false
+  }, RESET_DURATION)
 }
 
 function onTouchStart(event: TouchEvent) {
