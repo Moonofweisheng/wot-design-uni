@@ -1,6 +1,7 @@
 /**
  * This file contains localization strings for various components.
  */
+import { puzzleCaptchaProps } from '@/uni_modules/wot-design-uni/components/wd-puzzle-captcha/types'
 
 export default {
   calendar: {
@@ -143,5 +144,11 @@ export default {
   slideVerify: {
     text: '向右滑动验证',
     successText: '验证通过'
+  },
+  puzzleCaptcha: {
+    title: '安全验证',
+    placeholder: '拖动下方滑块完成拼图',
+    successText: '验证成功',
+    failText: '验证失败，请重试'
   }
 }

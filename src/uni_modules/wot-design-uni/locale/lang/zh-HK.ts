@@ -77,5 +77,11 @@ export default {
   slideVerify: {
     text: '向右滑動驗證',
     successText: '驗證通過'
+  },
+  puzzleCaptcha: {
+    title: '安全驗證',
+    placeholder: '拖動下方滑塊完成拼圖',
+    successText: '驗證成功',
+    failText: '驗證失敗，請重試'
   }
 }

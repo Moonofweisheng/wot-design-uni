@@ -1,0 +1,139 @@
+@import "../common/abstracts/variable";
+@import "../common/abstracts/mixin";
+
+@keyframes wd-shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(3px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(2px, 0, 0);
+  }
+}
+
+@include b(puzzle-captcha) {
+  display: flex;
+  flex-direction: column;
+  background: $-puzzle-captcha-background;
+  border-radius: $-puzzle-captcha-radius;
+
+  $block: &;
+
+  @include e(header) {
+    display: flex;
+    flex-direction: column;
+    padding: $-puzzle-captcha-header-padding;
+  }
+
+  @include e(title) {
+    font-size: $-puzzle-captcha-title-size;
+    font-weight: $-puzzle-captcha-title-weight;
+    color: $-puzzle-captcha-title-color;
+  }
+
+  @include e(description) {
+    margin-top: $-puzzle-captcha-description-margin-top;
+    font-size: $-puzzle-captcha-description-size;
+    color: $-puzzle-captcha-description-color;
+  }
+
+  @include e(operation) {
+    display: flex;
+    flex-direction: column;
+
+    @include when(shake) {
+      animation: wd-shake 400ms;
+    }
+  }
+
+  @include e(main) {
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    background: $-puzzle-captcha-main-background;
+    border-radius: $-puzzle-captcha-main-radius;
+  }
+
+  @include e(image) {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(puzzle) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 0;
+    height: 0;
+  }
+
+  @include e(canvas) {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  @include e(footer) {
+    padding: $-puzzle-captcha-footer-padding;
+  }
+
+  @include e(track) {
+    box-sizing: border-box;
+    width: 100%;
+    height: $-puzzle-captcha-track-height;
+    padding: $-puzzle-captcha-track-padding;
+    background: $-puzzle-captcha-track-background;
+    border-radius: $-puzzle-captcha-track-radius;
+
+    @include e(inner) {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @include e(tracker) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $-puzzle-captcha-tracker-width;
+    height: 100%;
+    font-size: $-puzzle-captcha-tracker-icon-size;
+    color: $-puzzle-captcha-tracker-color;
+    background: $-puzzle-captcha-tracker-background;
+    border-radius: $-puzzle-captcha-tracker-radius;
+  }
+
+  @include when(success) {
+    #{$block} {
+      @include e(description) {
+        color: $-color-success;
+      }
+    }
+  }
+
+  @include when(fail) {
+    #{$block} {
+      @include e(description) {
+        color: $-color-danger;
+      }
+    }
+  }
+
+  @include when(disabled) {
+    #{$block} {
+      @include e(tracker) {
+        cursor: not-allowed;
+        opacity: $-puzzle-captcha-tracker-disabled-opacity;
+      }
+    }
+  }
+}
