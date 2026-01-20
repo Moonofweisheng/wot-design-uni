@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, ComponentPublicInstance } from 'vue'
 import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../common/props'
 
-export type PuzzleCaptchaShape = 'puzzle' | 'rect' | 'triangle' | 'shield'
+export type PuzzleCaptchaShape = 'puzzle' | 'shield' | 'rect' | 'triangle'
 
 export type PuzzleCaptchaStatus = 'pending' | 'dragging' | 'verifying' | 'success' | 'fail'
 

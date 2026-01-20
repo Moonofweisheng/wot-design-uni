@@ -69,6 +69,7 @@ const PUZZLE_BOUNDARY = 8
 const PUZZLE_SPACING = 10
 const PUZZLE_BORDER_WIDTH = 1
 
+const FAIL_DURATION = 400
 const RESET_DURATION = 300
 
 const canvasId = `canvas-${uuid()}`
@@ -140,9 +141,9 @@ const canvasStyle = computed<CSSProperties>(() => {
 
 const puzzleStyle = computed<CSSProperties>(() => {
   return {
-    width: addUnit(parseNumber(props.puzzleWidth) + PUZZLE_BORDER_WIDTH * 2),
-    height: addUnit(parseNumber(props.puzzleHeight) + PUZZLE_BORDER_WIDTH * 2),
-    transform: `translate3d(${state.puzzleX - PUZZLE_BORDER_WIDTH}px, ${state.puzzleY - PUZZLE_BORDER_WIDTH}px, 0)`,
+    width: addUnit(props.puzzleWidth),
+    height: addUnit(props.puzzleHeight),
+    transform: `translate3d(${state.puzzleX}px, ${state.puzzleY}px, 0)`,
     transition: state.resetting ? `transform ${RESET_DURATION}ms ease-in` : 'none'
   }
 })
@@ -303,37 +304,81 @@ function drawCanvasPuzzle(
 
   context.beginPath()
 
-  // FIXME 图形绘制不正确
+  const sw = width - PUZZLE_BORDER_WIDTH * 2
+  const sh = height - PUZZLE_BORDER_WIDTH * 2
+
+  const tl: Coordinate = [x + PUZZLE_BORDER_WIDTH, y + PUZZLE_BORDER_WIDTH]
+  const tr: Coordinate = [x + sw, y + PUZZLE_BORDER_WIDTH]
+  const br: Coordinate = [x + sw, y + sh]
+  const bl: Coordinate = [x + PUZZLE_BORDER_WIDTH, y + sh]
+
   switch (shape) {
     case 'puzzle': {
-      const radius = Math.min(width, height) / 4
-      context.moveTo(x, y + radius)
-      context.arcTo(x, y, x + radius, y, radius)
-      context.lineTo(x + width - radius, y)
-      context.arcTo(x + width, y, x + width, y + radius, radius)
-      context.lineTo(x + width, y + height - radius)
-      context.arcTo(x + width, y + height, x + width - radius, y + height, radius)
-      context.lineTo(x + radius, y + height)
-      context.arcTo(x, y + height, x, y + height - radius, radius)
-      break
-    }
-    case 'rect': {
-      context.rect(x, y, width, height)
-      break
-    }
-    case 'triangle': {
-      context.moveTo(x + width / 2, y)
-      context.lineTo(x + width, y + height)
-      context.lineTo(x, y + height)
+      const radius = Math.min(sw, sh) / 3 / 2
+
+      const sw2 = sw - radius
+      const sh2 = sh - radius
+
+      const tl2: Coordinate = [tl[0], tl[1] + radius]
+      const tr2: Coordinate = [tr[0] - radius, tr[1] + radius]
+      const br2: Coordinate = [br[0] - radius, br[1]]
+      const bl2: Coordinate = [bl[0], bl[1]]
+
+      const tw = (sw2 - radius * 2) / 2
+      const th = (sh2 - radius * 2) / 2
+
+      context.moveTo(tl2[0], tl2[1])
+      context.lineTo(tl2[0] + tw, tl2[1])
+      context.arc((tl2[0] + tr2[0]) / 2, tl2[1], radius, Math.PI, 0)
+      context.lineTo(tr2[0], tr2[1])
+      context.lineTo(tr2[0], tr2[1] + th)
+      context.arc(tr2[0], (tr2[1] + br2[1]) / 2, radius, -Math.PI / 2, Math.PI / 2)
+      context.lineTo(br2[0], br2[1])
+      context.lineTo(bl2[0], bl2[1])
+      context.lineTo(bl2[0], bl2[1] - th)
+      context.arc(bl2[0], (tl2[1] + bl2[1]) / 2, radius, Math.PI / 2, -Math.PI / 2, true)
       break
     }
     case 'shield': {
-      const midX = x + width / 2
-      context.moveTo(x, y)
-      context.lineTo(x + width, y)
-      context.lineTo(midX + width / 4, y + height * 0.75)
-      context.quadraticCurveTo(midX, y + height, midX - width / 4, y + height * 0.75)
-      context.lineTo(x, y + height * 0.75)
+      const dt = sh * 0.2
+
+      /* eslint-disable prettier/prettier */
+      context.moveTo(tl[0], tl[1] + dt)
+      context.quadraticCurveTo(
+        (tl[0] + (tl[0] + tr[0]) / 2) / 2 + dt * 0.3,
+        (tl[1] + dt + tl[1]) / 2 + dt * 0.3,
+        (tl[0] + tr[0]) / 2,
+        tl[1]
+      )
+      context.quadraticCurveTo(
+        (tr[0] + (tl[0] + tr[0]) / 2) / 2 - dt * 0.3,
+        (tr[1] + dt + tl[1]) / 2 + dt * 0.3,
+        tr[0],
+        tr[1] + dt
+      )
+      context.quadraticCurveTo(
+        (tr[0] + (bl[0] + br[0]) / 2) / 2 + dt,
+        (tr[1] + dt + br[1]) / 2 + dt,
+        (bl[0] + br[0]) / 2,
+        br[1]
+      )
+      context.quadraticCurveTo(
+        (tl[0] + (bl[0] + br[0]) / 2) / 2 - dt,
+        (tl[1] + dt + br[1]) / 2 + dt,
+        tl[0],
+        tl[1] + dt
+      )
+      /* eslint-enable prettier/prettier */
+      break
+    }
+    case 'rect': {
+      context.rect(tl[0], tl[1], sw, sh)
+      break
+    }
+    case 'triangle': {
+      context.moveTo(tl[0] + sw / 2, tl[1])
+      context.lineTo(br[0], br[1])
+      context.lineTo(bl[0], bl[1])
       break
     }
   }
@@ -472,10 +517,10 @@ async function generate() {
   const { tempFilePath: puzzlePath } = await uni.canvasToTempFilePath({
     canvasId: canvasId,
     canvas: canvasState.node,
-    x: shallowState.puzzle[0] - PUZZLE_BORDER_WIDTH,
-    y: shallowState.puzzle[1] - PUZZLE_BORDER_WIDTH,
-    width: puzzleWidth + PUZZLE_BORDER_WIDTH * 2,
-    height: puzzleHeight + PUZZLE_BORDER_WIDTH * 2,
+    x: shallowState.puzzle[0],
+    y: shallowState.puzzle[1],
+    width: puzzleWidth,
+    height: puzzleHeight,
     quality: 1
   })
   state.puzzle = puzzlePath
@@ -484,7 +529,27 @@ async function generate() {
 function verify() {
   state.status = 'verifying'
 
-  // TODO 校验拼图是否正确
+  if (props.strictMode) {
+    // TODO 校验轨迹
+  }
+
+  // TODO 校验最终位置
+}
+
+function success() {
+  emit('success')
+
+  state.status = 'success'
+}
+
+function fail() {
+  emit('fail')
+
+  state.status = 'fail'
+
+  setTimeout(() => {
+    state.status = 'pending'
+  }, FAIL_DURATION)
 }
 
 function reset(update = false) {
@@ -566,9 +631,19 @@ function onTouchEnd() {
 }
 
 watch(
-  () => props.imageUrl,
-  () => {
-    generate()
+  // eslint-disable-next-line prettier/prettier
+  () => [
+    props.imageUrl,
+    props.imageWidth,
+    props.imageHeight,
+    props.puzzleShape,
+    props.puzzleWidth,
+    props.puzzleHeight,
+    props.decoyMode
+  ],
+  async () => {
+    await generate()
+    reset()
   }
 )
 

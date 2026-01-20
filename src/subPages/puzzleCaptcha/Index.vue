@@ -2,7 +2,7 @@
   <page-wraper>
     <demo-block :title="t('ji-chu-yong-fa')">
       <wd-puzzle-captcha
-        puzzle-shape="rect"
+        puzzle-shape="puzzle"
         decoy-mode
         image-url="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
         @success="onSuccess()"
