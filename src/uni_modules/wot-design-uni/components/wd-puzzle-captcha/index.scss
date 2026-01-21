@@ -76,7 +76,7 @@
     height: 0;
   }
 
-  @include e(loading) {
+  @include e(status) {
     position: absolute;
     top: 0;
     left: 0;
@@ -86,7 +86,11 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background: $-puzzle-captcha-loading-background;
+    font-size: $-puzzle-captcha-status-icon-size;
+    color: $-puzzle-captcha-status-icon-color;
+    background: $-puzzle-captcha-status-background;
+
+    --wot-loading-size: #{$-puzzle-captcha-status-icon-size};
   }
 
   @include e(canvas) {
