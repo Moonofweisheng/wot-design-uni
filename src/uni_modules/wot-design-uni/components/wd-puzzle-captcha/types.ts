@@ -3,7 +3,7 @@ import { baseProps, makeBooleanProp, makeNumericProp, makeStringProp } from '../
 
 export type PuzzleCaptchaShape = 'puzzle' | 'shield' | 'rect' | 'triangle'
 
-export type PuzzleCaptchaStatus = 'pending' | 'dragging' | 'verifying' | 'success' | 'fail'
+export type PuzzleCaptchaStatus = 'loading' | 'error' | 'pending' | 'dragging' | 'verifying' | 'success' | 'fail'
 
 export type PuzzleCaptchaTrackItem = {
   type: 'down' | 'move' | 'up'
@@ -56,6 +56,11 @@ export const puzzleCaptchaProps = {
    * @default 60
    */
   puzzleHeight: makeNumericProp(40),
+  /**
+   * 是否为加载状态
+   * @default false
+   */
+  loading: makeBooleanProp(false),
   /**
    * 容错范围(单位:px)
    * @default 10

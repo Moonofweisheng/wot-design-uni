@@ -76,6 +76,19 @@
     height: 0;
   }
 
+  @include e(loading) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: $-puzzle-captcha-loading-background;
+  }
+
   @include e(canvas) {
     position: fixed;
     top: -9999px;

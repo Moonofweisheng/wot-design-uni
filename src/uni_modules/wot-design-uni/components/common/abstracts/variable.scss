@@ -1040,6 +1040,7 @@ $-puzzle-captcha-description-size: var(--wot-puzzle-captcha-description-size, $-
 $-puzzle-captcha-description-color: var(--wot-puzzle-captcha-description-color, $-color-secondary) !default; // 描述文字颜色
 $-puzzle-captcha-main-background: var(--wot-puzzle-captcha-main-background, $-color-gray-2) !default; // 主内容背景颜色
 $-puzzle-captcha-main-radius: var(--wot-puzzle-captcha-main-radius, 6px) !default; // 主内容圆角大小
+$-puzzle-captcha-loading-background: var(--wot-puzzle-captcha-loading-background, $-color-gray-2) !default; // 加载状态背景颜色
 $-puzzle-captcha-footer-padding: var(--wot-puzzle-captcha-footer-padding, 12px) !default; // 底部内边距
 $-puzzle-captcha-track-height: var(--wot-puzzle-captcha-track-height, 40px) !default; // 滑道高度
 $-puzzle-captcha-track-padding: var(--wot-puzzle-captcha-track-padding, 4px) !default; // 滑道内边距

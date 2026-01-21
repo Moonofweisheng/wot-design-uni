@@ -11,6 +11,10 @@
 
         <image v-if="state.puzzle" class="wd-puzzle-captcha__puzzle" :style="puzzleStyle" :src="state.puzzle"></image>
 
+        <view v-if="innerLoading" class="wd-puzzle-captcha__loading">
+          <wd-loading></wd-loading>
+        </view>
+
         <!-- #ifdef MP-WEIXIN -->
         <canvas :id="canvasId" class="wd-puzzle-captcha__canvas" :style="canvasStyle" type="2d"></canvas>
         <!-- #endif -->
@@ -49,6 +53,7 @@ import { canvas2dAdapter } from '../common/canvasHelper'
 import { addUnit, uuid, getRect, getSystemInfo } from '../common/util'
 import { useTouch, useTranslate } from '../composables'
 import WdIcon from '../wd-icon/wd-icon.vue'
+import WdLoading from '../wd-loading/wd-loading.vue'
 import type { PuzzleCaptchaStatus, PuzzleCaptchaExpose, PuzzleCaptchaTrackItem, PuzzleCaptchaShape } from './types'
 import { puzzleCaptchaProps } from './types'
 
@@ -78,7 +83,7 @@ const trackerId = `tracker-${uuid()}`
 
 const state = reactive({
   // 状态
-  status: 'pending' as PuzzleCaptchaStatus,
+  status: 'loading' as PuzzleCaptchaStatus,
   // 背景图片
   image: null as string | null,
   // 拼图图片
@@ -101,13 +106,19 @@ const shallowState = {
   // 滑块宽度
   trackerWidth: 0,
   // 滑动行为记录
-  tracks: [] as PuzzleCaptchaTrackItem[]
+  tracks: [] as PuzzleCaptchaTrackItem[],
+  // 失败次数
+  failCount: 0
 }
 
 const canvasState = {
   node: null as any,
   context: null as UniApp.CanvasContext | null
 }
+
+const innerLoading = computed(() => {
+  return props.loading || state.status === 'loading'
+})
 
 const rootClass = computed(() => {
   return [
@@ -471,75 +482,133 @@ async function generate() {
     return
   }
 
-  const context = await getCanvasContext()
+  state.status = 'loading'
 
-  const imageWidth = parseNumber(props.imageWidth)
-  const imageHeight = parseNumber(props.imageHeight)
+  try {
+    const context = await getCanvasContext()
 
-  context.clearRect(0, 0, imageWidth, imageHeight)
+    const imageWidth = parseNumber(props.imageWidth)
+    const imageHeight = parseNumber(props.imageHeight)
 
-  const image = await createCanvasImage(props.imageUrl)
-  drawCanvasImage(context, image, 'aspectFill', 0, 0, image.width, image.height, 0, 0, imageWidth, imageHeight)
+    context.clearRect(0, 0, imageWidth, imageHeight)
 
-  const puzzleWidth = parseNumber(props.puzzleWidth)
-  const puzzleHeight = parseNumber(props.puzzleHeight)
+    const image = await createCanvasImage(props.imageUrl)
+    drawCanvasImage(context, image, 'aspectFill', 0, 0, image.width, image.height, 0, 0, imageWidth, imageHeight)
 
-  shallowState.puzzle = createPuzzle(imageWidth, imageHeight, puzzleWidth, puzzleHeight)
+    const puzzleWidth = parseNumber(props.puzzleWidth)
+    const puzzleHeight = parseNumber(props.puzzleHeight)
 
-  state.puzzleX = PUZZLE_BOUNDARY
-  state.puzzleY = shallowState.puzzle[1]
+    shallowState.puzzle = createPuzzle(imageWidth, imageHeight, puzzleWidth, puzzleHeight)
 
-  drawCanvasPuzzle(context, shallowState.puzzle[0], shallowState.puzzle[1], puzzleWidth, puzzleHeight, props.puzzleShape, false)
+    state.puzzleX = PUZZLE_BOUNDARY
+    state.puzzleY = shallowState.puzzle[1]
 
-  if (props.decoyMode) {
-    const decoy = createPuzzle(imageWidth, imageHeight, puzzleWidth, puzzleHeight, shallowState.puzzle)
+    drawCanvasPuzzle(context, shallowState.puzzle[0], shallowState.puzzle[1], puzzleWidth, puzzleHeight, props.puzzleShape, false)
 
-    drawCanvasPuzzle(context, decoy[0], decoy[1], puzzleWidth, puzzleHeight, props.puzzleShape, false)
+    if (props.decoyMode) {
+      const decoy = createPuzzle(imageWidth, imageHeight, puzzleWidth, puzzleHeight, shallowState.puzzle)
+
+      drawCanvasPuzzle(context, decoy[0], decoy[1], puzzleWidth, puzzleHeight, props.puzzleShape, false)
+    }
+
+    await drawCanvas(context)
+
+    const { tempFilePath: imagePath } = await uni.canvasToTempFilePath({
+      canvasId: canvasId,
+      canvas: canvasState.node,
+      quality: 1
+    })
+    state.image = imagePath
+
+    context.clearRect(0, 0, imageWidth, imageHeight)
+
+    drawCanvasPuzzle(context, shallowState.puzzle[0], shallowState.puzzle[1], puzzleWidth, puzzleHeight, props.puzzleShape, true, () => {
+      drawCanvasImage(context, image, 'aspectFill', 0, 0, image.width, image.height, 0, 0, imageWidth, imageHeight)
+    })
+
+    await drawCanvas(context)
+
+    const { tempFilePath: puzzlePath } = await uni.canvasToTempFilePath({
+      canvasId: canvasId,
+      canvas: canvasState.node,
+      x: shallowState.puzzle[0],
+      y: shallowState.puzzle[1],
+      width: puzzleWidth,
+      height: puzzleHeight,
+      quality: 1
+    })
+    state.puzzle = puzzlePath
+
+    state.status = 'pending'
+  } catch (error) {
+    state.status = 'error'
+  }
+}
+
+function verifyTouchTracks(tracks: PuzzleCaptchaTrackItem[]) {
+  if (tracks.length < 3) {
+    // 轨迹点过少
+    return false
   }
 
-  await drawCanvas(context)
+  const first = tracks[0]
+  const last = tracks[tracks.length - 1]
 
-  const { tempFilePath: imagePath } = await uni.canvasToTempFilePath({
-    canvasId: canvasId,
-    canvas: canvasState.node,
-    quality: 1
-  })
-  state.image = imagePath
+  if (first.type !== 'down' || last.type !== 'up') {
+    // 轨迹结构异常
+    return false
+  }
 
-  context.clearRect(0, 0, imageWidth, imageHeight)
+  const duration = last.t - first.t
 
-  drawCanvasPuzzle(context, shallowState.puzzle[0], shallowState.puzzle[1], puzzleWidth, puzzleHeight, props.puzzleShape, true, () => {
-    drawCanvasImage(context, image, 'aspectFill', 0, 0, image.width, image.height, 0, 0, imageWidth, imageHeight)
-  })
+  if (duration < 200) {
+    // 操作耗时过短
+    return false
+  }
 
-  await drawCanvas(context)
+  const moves = tracks.slice(1, -1)
 
-  const { tempFilePath: puzzlePath } = await uni.canvasToTempFilePath({
-    canvasId: canvasId,
-    canvas: canvasState.node,
-    x: shallowState.puzzle[0],
-    y: shallowState.puzzle[1],
-    width: puzzleWidth,
-    height: puzzleHeight,
-    quality: 1
-  })
-  state.puzzle = puzzlePath
+  if (new Set(moves.map((item) => Math.round(item.y))).size <= 2) {
+    // Y 轴几乎无变化
+    return false
+  }
+
+  const deltas = moves.slice(1).map((item, index) => Math.abs(item.y - moves[index].y))
+  const average = deltas.reduce((s, d) => s + d, 0) / deltas.length
+
+  const variance = deltas.reduce((s, d) => s + Math.pow(d - average, 2), 0) / deltas.length
+
+  if (variance < 0.01) {
+    // Y 轴变化方差过小
+    return false
+  }
+
+  return true
 }
 
 function verify() {
   state.status = 'verifying'
 
   if (props.strictMode) {
-    // TODO 校验轨迹
+    if (!verifyTouchTracks(shallowState.tracks)) {
+      fail()
+      return
+    }
   }
 
-  // TODO 校验最终位置
+  if (Math.abs(state.puzzleX - shallowState.puzzle[0]) <= parseNumber(props.tolerance)) {
+    success()
+  } else {
+    fail()
+  }
 }
 
 function success() {
   emit('success')
 
   state.status = 'success'
+
+  shallowState.failCount = 0
 }
 
 function fail() {
@@ -547,8 +616,15 @@ function fail() {
 
   state.status = 'fail'
 
+  shallowState.failCount += 1
+
   setTimeout(() => {
-    state.status = 'pending'
+    if (shallowState.failCount >= parseNumber(props.retryCount)) {
+      shallowState.failCount = 0
+      reset(true)
+    } else {
+      reset()
+    }
   }, FAIL_DURATION)
 }
 
@@ -568,7 +644,7 @@ function reset(update = false) {
 }
 
 function onTouchStart(event: TouchEvent) {
-  if (props.disabled || state.status !== 'pending' || state.resetting) {
+  if (props.disabled || state.status !== 'pending' || innerLoading.value || state.resetting) {
     return
   }
 
@@ -591,7 +667,7 @@ function onTouchStart(event: TouchEvent) {
 }
 
 function onTouchMove(event: TouchEvent) {
-  if (props.disabled || state.status !== 'dragging' || state.resetting) {
+  if (props.disabled || state.status !== 'dragging' || innerLoading.value || state.resetting) {
     return
   }
 
@@ -614,7 +690,7 @@ function onTouchMove(event: TouchEvent) {
 }
 
 function onTouchEnd() {
-  if (props.disabled || state.status !== 'dragging' || state.resetting) {
+  if (props.disabled || state.status !== 'dragging' || innerLoading.value || state.resetting) {
     return
   }
 

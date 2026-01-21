@@ -4,9 +4,12 @@
       <wd-puzzle-captcha
         puzzle-shape="puzzle"
         decoy-mode
-        image-url="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
+        strict-mode
+        :image-url="state.image"
+        :loading="state.loading"
         @success="onSuccess()"
         @fail="onFail()"
+        @update-image="onUpdateImage()"
       ></wd-puzzle-captcha>
     </demo-block>
   </page-wraper>
@@ -14,18 +17,30 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { useToast } from '@/uni_modules/wot-design-uni'
+import { reactive } from 'vue'
 
 const { t } = useI18n()
 
-const toast = useToast()
+const state = reactive({
+  image: `https://picsum.photos/320/200?t=${Date.now()}`,
+  loading: false
+})
 
 function onSuccess() {
-  toast.success(t('yan-zheng-cheng-gong'))
+  console.log('验证成功')
 }
 
 function onFail() {
-  toast.error(t('yan-zheng-shi-bai-qing-chong-shi'))
+  console.log('验证失败')
+}
+
+function onUpdateImage() {
+  state.loading = true
+
+  setTimeout(() => {
+    state.image = `https://picsum.photos/320/200?t=${Date.now()}`
+    state.loading = false
+  }, 500)
 }
 </script>
 
