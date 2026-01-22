@@ -63,9 +63,9 @@ export const puzzleCaptchaProps = {
   loading: makeBooleanProp(false),
   /**
    * 容错范围(单位:px)
-   * @default 10
+   * @default 6
    */
-  tolerance: makeNumericProp(10),
+  tolerance: makeNumericProp(6),
   /**
    * 是否启用严格模式
    * @default false
