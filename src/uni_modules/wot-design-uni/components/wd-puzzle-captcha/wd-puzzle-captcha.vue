@@ -7,7 +7,7 @@
       </view>
 
       <view class="wd-puzzle-captcha__actions">
-        <view v-if="props.refreshable" class="wd-puzzle-captcha__action" @tap="refresh()">
+        <view v-if="refreshVisible" class="wd-puzzle-captcha__action" @tap="refresh()">
           <wd-icon name="refresh"></wd-icon>
         </view>
 
@@ -187,6 +187,14 @@ const trackerStyle = computed<CSSProperties>(() => {
 
 const innerTrackerIcon = computed(() => {
   return state.status === 'success' ? props.successIcon : props.trackerIcon
+})
+
+const refreshVisible = computed(() => {
+  if (props.refreshable === false) {
+    return false
+  }
+
+  return state.status !== 'success'
 })
 
 const titleText = computed(() => {
