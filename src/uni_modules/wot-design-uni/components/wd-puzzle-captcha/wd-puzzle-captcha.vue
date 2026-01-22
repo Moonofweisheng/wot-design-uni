@@ -37,7 +37,7 @@
               @touchmove.prevent="onTouchMove"
               @touchend="onTouchEnd"
             >
-              <wd-icon :name="props.trackerIcon"></wd-icon>
+              <wd-icon :name="innerTrackerIcon"></wd-icon>
             </view>
           </view>
         </view>
@@ -166,6 +166,10 @@ const trackerStyle = computed<CSSProperties>(() => {
     transform: `translate3d(${state.trackerX}px, 0, 0)`,
     transition: state.resetting ? `transform ${RESET_DURATION}ms ease-in` : 'none'
   }
+})
+
+const innerTrackerIcon = computed(() => {
+  return state.status === 'success' ? props.successIcon : props.trackerIcon
 })
 
 const titleText = computed(() => {
