@@ -592,6 +592,8 @@ async function generate() {
 
     state.status = 'pending'
   } catch (error) {
+    console.error('[wot ui] error(wd-puzzle-captcha): failed to generate puzzle', error)
+
     state.status = 'error'
   }
 }
