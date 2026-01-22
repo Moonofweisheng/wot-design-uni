@@ -84,11 +84,16 @@ const touch = reactive(useTouch())
 
 const { translate } = useTranslate('puzzleCaptcha')
 
+// 拼图边界
 const PUZZLE_BOUNDARY = 8
+// 拼图间距
 const PUZZLE_SPACING = 10
+// 拼图边框大小
 const PUZZLE_BORDER_WIDTH = 1
 
+// 失败动画时长
 const FAIL_DURATION = 400
+// 重置动画时长
 const RESET_DURATION = 300
 
 const canvasId = `canvas-${uuid()}`
@@ -478,14 +483,14 @@ function createPuzzle(imageWidth: number, imageHeight: number, puzzleWidth: numb
 
   let r = Math.random() * total
 
-  for (const a of areas) {
-    const area = a.w * a.h
+  for (const item of areas) {
+    const area = item.w * item.h
 
     if (r <= area) {
       // eslint-disable-next-line prettier/prettier
       return [
-        Math.floor(a.x + Math.random() * a.w),
-        Math.floor(a.y + Math.random() * a.h)
+        Math.floor(item.x + Math.random() * item.w),
+        Math.floor(item.y + Math.random() * item.h)
       ]
     }
 
