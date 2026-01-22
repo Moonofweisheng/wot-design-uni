@@ -13,8 +13,8 @@
         @update-image="onUpdateImage()"
       ></wd-puzzle-captcha>
 
-      <wd-popup v-model="state.visible" custom-style="border-radius: 32rpx">
-        <wd-puzzle-captcha image-url="https://picsum.photos/320/200" closable @close="state.visible = false"></wd-puzzle-captcha>
+      <wd-popup v-model="state.visible" custom-style="border-radius: 32rpx" @after-enter="state.render = true" @after-leave="state.render = false">
+        <wd-puzzle-captcha v-if="state.render" image-url="https://picsum.photos/320/200" closable @close="state.visible = false"></wd-puzzle-captcha>
       </wd-popup>
 
       <wd-button icon="jump" @click="state.visible = true"></wd-button>
@@ -30,6 +30,7 @@ const { t } = useI18n()
 
 const state = reactive({
   visible: false,
+  render: false,
   image: `https://picsum.photos/320/200?t=${Date.now()}`,
   loading: false
 })
