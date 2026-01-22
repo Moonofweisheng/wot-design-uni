@@ -240,23 +240,25 @@ function updateRect() {
 }
 
 function getCanvasContext(): Promise<UniApp.CanvasContext> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const dpr = getSystemInfo().pixelRatio
 
     // #ifdef MP-WEIXIN
-    getRect(`#${canvasId}`, false, instance.proxy, true).then((res) => {
-      // @ts-expect-error whatever
-      const { width, height, node } = res
+    getRect(`#${canvasId}`, false, instance.proxy, true)
+      .then((res) => {
+        // @ts-expect-error whatever
+        const { width, height, node } = res
 
-      canvasState.node = node
-      canvasState.context = canvas2dAdapter(node.getContext('2d'))
+        canvasState.node = node
+        canvasState.context = canvas2dAdapter(node.getContext('2d'))
 
-      canvasState.node.width = width! * dpr
-      canvasState.node.height = height! * dpr
-      canvasState.context.scale(dpr, dpr)
+        canvasState.node.width = width! * dpr
+        canvasState.node.height = height! * dpr
+        canvasState.context.scale(dpr, dpr)
 
-      resolve(canvasState.context)
-    })
+        resolve(canvasState.context)
+      })
+      .catch(reject)
     // #endif
 
     // #ifndef MP-WEIXIN
