@@ -87,6 +87,16 @@ export const puzzleCaptchaProps = {
    */
   disabled: makeBooleanProp(false),
   /**
+   * 是否显示刷新按钮
+   * @default false
+   */
+  refreshable: makeBooleanProp(false),
+  /**
+   * 是否显示关闭按钮
+   * @default false
+   */
+  closable: makeBooleanProp(false),
+  /**
    * 滑块图标
    * @default 'a-chevron-rightdouble'
    */

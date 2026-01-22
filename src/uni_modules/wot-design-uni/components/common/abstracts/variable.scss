@@ -1038,6 +1038,9 @@ $-puzzle-captcha-title-color: var(--wot-puzzle-captcha-title-color, $-color-titl
 $-puzzle-captcha-description-margin-top: var(--wot-puzzle-captcha-description-margin-top, 4px) !default; // 描述文字上外边距
 $-puzzle-captcha-description-size: var(--wot-puzzle-captcha-description-size, $-fs-content) !default; // 描述文字大小
 $-puzzle-captcha-description-color: var(--wot-puzzle-captcha-description-color, $-color-secondary) !default; // 描述文字颜色
+$-puzzle-captcha-action-size: var(--wot-puzzle-captcha-action-size, 18px) !default; // 操作图标大小
+$-puzzle-captcha-action-gap: var(--wot-puzzle-captcha-action-gap, 10px) !default; // 操作图标间距
+$-puzzle-captcha-main-margin: var(--wot-puzzle-captcha-main-margin, 0 12px) !default; // 主内容外边距
 $-puzzle-captcha-main-background: var(--wot-puzzle-captcha-main-background, $-color-gray-2) !default; // 主内容背景颜色
 $-puzzle-captcha-main-radius: var(--wot-puzzle-captcha-main-radius, 6px) !default; // 主内容圆角大小
 $-puzzle-captcha-status-icon-size: var(--wot-puzzle-captcha-status-icon-size, 30px) !default; // 状态蒙层图标大小

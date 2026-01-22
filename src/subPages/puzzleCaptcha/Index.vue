@@ -7,10 +7,17 @@
         strict-mode
         :image-url="state.image"
         :loading="state.loading"
+        refreshable
         @success="onSuccess()"
         @fail="onFail()"
         @update-image="onUpdateImage()"
       ></wd-puzzle-captcha>
+
+      <wd-popup v-model="state.visible" custom-style="border-radius: 32rpx">
+        <wd-puzzle-captcha image-url="https://picsum.photos/320/200" closable @close="state.visible = false"></wd-puzzle-captcha>
+      </wd-popup>
+
+      <wd-button icon="jump" @click="state.visible = true"></wd-button>
     </demo-block>
   </page-wraper>
 </template>
@@ -22,6 +29,7 @@ import { reactive } from 'vue'
 const { t } = useI18n()
 
 const state = reactive({
+  visible: false,
   image: `https://picsum.photos/320/200?t=${Date.now()}`,
   loading: false
 })

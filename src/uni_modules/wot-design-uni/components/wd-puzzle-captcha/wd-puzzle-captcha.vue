@@ -1,8 +1,20 @@
 <template>
   <view class="wd-puzzle-captcha" :class="rootClass" :style="props.customStyle">
     <view class="wd-puzzle-captcha__header">
-      <text class="wd-puzzle-captcha__title">{{ titleText }}</text>
-      <text class="wd-puzzle-captcha__description">{{ descriptionText }}</text>
+      <view class="wd-puzzle-captcha__profile">
+        <text class="wd-puzzle-captcha__title">{{ titleText }}</text>
+        <text class="wd-puzzle-captcha__description">{{ descriptionText }}</text>
+      </view>
+
+      <view class="wd-puzzle-captcha__actions">
+        <view v-if="props.refreshable" class="wd-puzzle-captcha__action" @tap="refresh()">
+          <wd-icon name="refresh"></wd-icon>
+        </view>
+
+        <view v-if="props.closable" class="wd-puzzle-captcha__action" @tap="close()">
+          <wd-icon name="close"></wd-icon>
+        </view>
+      </view>
     </view>
 
     <view class="wd-puzzle-captcha__operation" :class="operationClass">
@@ -64,7 +76,7 @@ type CanvasImage = HTMLImageElement | UniApp.GetImageInfoSuccessData
 
 const props = defineProps(puzzleCaptchaProps)
 
-const emit = defineEmits(['update-image', 'success', 'fail'])
+const emit = defineEmits(['update-image', 'success', 'fail', 'close'])
 
 const instance = getCurrentInstance()!
 
@@ -649,6 +661,14 @@ function reset(update = false) {
   }, RESET_DURATION)
 }
 
+function refresh() {
+  if (innerLoading.value) {
+    return
+  }
+
+  reset(true)
+}
+
 function onTouchStart(event: TouchEvent) {
   if (props.disabled || state.status !== 'pending' || innerLoading.value || state.resetting) {
     return
@@ -710,6 +730,10 @@ function onTouchEnd() {
   }
 
   verify()
+}
+
+function close() {
+  emit('close')
 }
 
 watch(

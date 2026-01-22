@@ -29,8 +29,13 @@
 
   @include e(header) {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     padding: $-puzzle-captcha-header-padding;
+  }
+
+  @include e(profile) {
+    display: flex;
+    flex-direction: column;
   }
 
   @include e(title) {
@@ -45,6 +50,17 @@
     color: $-puzzle-captcha-description-color;
   }
 
+  @include e(actions) {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    font-size: $-puzzle-captcha-action-size;
+  }
+
+  @include e(action) {
+    margin-left: $-puzzle-captcha-action-gap;
+  }
+
   @include e(operation) {
     display: flex;
     flex-direction: column;
@@ -56,7 +72,8 @@
 
   @include e(main) {
     position: relative;
-    margin: 0 auto;
+    align-self: center;
+    margin: $-puzzle-captcha-main-margin;
     overflow: hidden;
     background: $-puzzle-captcha-main-background;
     border-radius: $-puzzle-captcha-main-radius;
