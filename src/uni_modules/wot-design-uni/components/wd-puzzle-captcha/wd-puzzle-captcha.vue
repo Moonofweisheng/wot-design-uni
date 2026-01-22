@@ -23,7 +23,7 @@
 
         <image v-if="state.puzzle" class="wd-puzzle-captcha__puzzle" :style="puzzleStyle" :src="state.puzzle"></image>
 
-        <view v-if="innerLoading || state.status === 'error'" class="wd-puzzle-captcha__status">
+        <view v-if="innerLoading || state.status === 'error'" class="wd-puzzle-captcha__mask">
           <wd-loading v-if="innerLoading"></wd-loading>
 
           <wd-icon v-else name="close-circle"></wd-icon>
