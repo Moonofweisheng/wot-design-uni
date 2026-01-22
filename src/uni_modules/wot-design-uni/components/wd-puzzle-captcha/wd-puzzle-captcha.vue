@@ -426,6 +426,9 @@ function drawCanvasPuzzle(
 
   context.setLineWidth(PUZZLE_BORDER_WIDTH)
   context.setStrokeStyle('#ffffff')
+  if (clip) {
+    context.setShadow(0, 0, 4, 'rgba(0, 0, 0, 0.4)')
+  }
   context.stroke()
 
   if (clip) {
@@ -448,56 +451,81 @@ function drawCanvas(context: UniApp.CanvasContext): Promise<void> {
 }
 
 function createPuzzle(imageWidth: number, imageHeight: number, puzzleWidth: number, puzzleHeight: number, exclude?: Coordinate): Coordinate {
-  const limit = {
-    t: PUZZLE_BOUNDARY,
-    r: imageWidth - puzzleWidth - PUZZLE_BOUNDARY * 2,
-    b: imageHeight - puzzleHeight - PUZZLE_BOUNDARY * 2,
-    l: puzzleWidth + PUZZLE_BOUNDARY * 2
-  }
+  const minX = puzzleWidth + PUZZLE_BOUNDARY * 2
+  const minY = PUZZLE_BOUNDARY
+  const maxX = imageWidth - puzzleWidth - PUZZLE_BOUNDARY * 2
+  const maxY = imageHeight - puzzleHeight - PUZZLE_BOUNDARY * 2
 
   if (exclude == null) {
     // eslint-disable-next-line prettier/prettier
     return [
-      Math.floor(Math.random() * (limit.r - limit.l) + limit.l),
-      Math.floor(Math.random() * (limit.b - limit.t) + limit.t)
+      Math.floor(Math.random() * (maxX - minX) + minX),
+      Math.floor(Math.random() * (maxY - minY) + minY)
     ]
   }
 
   const [exX, exY] = exclude
 
-  const ban = {
-    t: Math.max(limit.t, exY - PUZZLE_SPACING),
-    r: Math.min(limit.r, exX + puzzleWidth + PUZZLE_SPACING),
-    b: Math.min(limit.b, exY + puzzleHeight + PUZZLE_SPACING),
-    l: Math.max(limit.l, exX - PUZZLE_SPACING)
+  const ranges: [number, number][] = []
+
+  if (exY - PUZZLE_SPACING > minY) {
+    ranges.push([minY, exY - PUZZLE_SPACING])
+  }
+  if (exY + PUZZLE_SPACING < maxY) {
+    ranges.push([exY + PUZZLE_SPACING, maxY])
   }
 
-  const areas = [
-    { x: limit.l, y: limit.t, w: limit.r - limit.l, h: ban.t - limit.t },
-    { x: ban.r, y: ban.t, w: limit.r - ban.r, h: ban.b - ban.t },
-    { x: limit.l, y: ban.b, w: limit.r - limit.l, h: limit.b - ban.b },
-    { x: limit.l, y: ban.t, w: ban.l - limit.l, h: ban.b - ban.t }
-  ].filter((a) => a.w > puzzleWidth && a.h > puzzleHeight)
+  const areas: { x0: number; y0: number; x1: number; y1: number }[] = []
 
-  const total = areas.reduce((s, a) => s + a.w * a.h, 0)
+  for (const [y0, y1] of ranges) {
+    const overlapY = y0 < exY + puzzleHeight + PUZZLE_SPACING && y1 > exY - PUZZLE_SPACING
+
+    if (!overlapY) {
+      areas.push({ x0: minX, x1: maxX, y0, y1 })
+    } else {
+      const leftX = exX - PUZZLE_SPACING
+      const rightX = exX + puzzleWidth + PUZZLE_SPACING
+
+      if (leftX > minX) {
+        areas.push({ x0: minX, x1: leftX, y0, y1 })
+      }
+      if (rightX < maxX) {
+        areas.push({ x0: rightX, x1: maxX, y0, y1 })
+      }
+    }
+  }
+
+  const candidates = areas
+    .map((item) => ({
+      ...item,
+      w: item.x1 - item.x0,
+      h: item.y1 - item.y0
+    }))
+    .filter((item) => item.w > 0 && item.h > 0)
+
+  if (candidates.length === 0) {
+    return [minX, minY]
+  }
+
+  const total = candidates.reduce((sum, item) => sum + item.w * item.h, 0)
 
   let r = Math.random() * total
 
-  for (const item of areas) {
+  for (const item of candidates) {
     const area = item.w * item.h
 
-    if (r <= area) {
+    if (r < area) {
       // eslint-disable-next-line prettier/prettier
       return [
-        Math.floor(item.x + Math.random() * item.w),
-        Math.floor(item.y + Math.random() * item.h)
+        Math.floor(item.x0 + Math.random() * item.w),
+        Math.floor(item.y0 + Math.random() * item.h)
       ]
     }
 
     r -= area
   }
 
-  return [limit.l, limit.t]
+  return [minX, minY]
 }
 
 async function generate() {
