@@ -15,15 +15,15 @@
     </demo-block>
 
     <demo-block :title="t('pin-tu-xing-zhuang')">
-      <wd-puzzle-captcha puzzle-shape="shield" image-url="https://picsum.photos/320/200?t=2" @success="onSuccess()"></wd-puzzle-captcha>
+      <wd-puzzle-captcha image-url="https://picsum.photos/320/200?t=2" puzzle-shape="shield" @success="onSuccess()"></wd-puzzle-captcha>
     </demo-block>
 
     <demo-block :title="t('gan-rao-mo-shi')">
-      <wd-puzzle-captcha decoy-mode image-url="https://picsum.photos/320/200?t=3" @success="onSuccess()"></wd-puzzle-captcha>
+      <wd-puzzle-captcha image-url="https://picsum.photos/320/200?t=3" decoy-mode @success="onSuccess()"></wd-puzzle-captcha>
     </demo-block>
 
     <demo-block :title="t('yan-ge-mo-shi')">
-      <wd-puzzle-captcha strict-mode image-url="https://picsum.photos/320/200?t=4" @success="onSuccess()"></wd-puzzle-captcha>
+      <wd-puzzle-captcha image-url="https://picsum.photos/320/200?t=4" strict-mode @success="onSuccess()"></wd-puzzle-captcha>
     </demo-block>
 
     <demo-block :title="t('jin-yong-zhuang-tai')">
@@ -31,7 +31,7 @@
     </demo-block>
 
     <demo-block :title="t('zhong-zhi-fang-fa')">
-      <wd-puzzle-captcha ref="captchaEl" image-url="https://picsum.photos/320/200?t=1" @success="onSuccess()"></wd-puzzle-captcha>
+      <wd-puzzle-captcha ref="captchaEl" image-url="https://picsum.photos/320/200?t=6" @success="onSuccess()"></wd-puzzle-captcha>
 
       <wd-button style="margin-top: 20px" type="primary" @click="reset()">{{ $t('zhong-zhi') }}</wd-button>
     </demo-block>
@@ -40,7 +40,7 @@
       <wd-popup v-model="state.visible" custom-style="border-radius: 32rpx" @after-enter="state.render = true" @after-leave="state.render = false">
         <wd-puzzle-captcha
           v-if="state.render"
-          image-url="https://picsum.photos/320/200?t=6"
+          image-url="https://picsum.photos/320/200?t=7"
           closable
           @success="onSuccess()"
           @close="state.visible = false"

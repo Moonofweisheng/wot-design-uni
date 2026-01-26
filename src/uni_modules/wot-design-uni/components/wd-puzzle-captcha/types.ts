@@ -32,27 +32,27 @@ export const puzzleCaptchaProps = {
     required: true
   },
   /**
-   * 背景图片宽度(单位:px)
+   * 背景图片宽度（单位：px）
    * @default 300
    */
   imageWidth: makeNumericProp(320),
   /**
-   * 背景图片高度(单位:px)
+   * 背景图片高度（单位：px）
    * @default 200
    */
   imageHeight: makeNumericProp(200),
   /**
-   * 拼图块形状
+   * 拼图形状
    * @default 'puzzle'
    */
   puzzleShape: makeStringProp<PuzzleCaptchaShape>('puzzle'),
   /**
-   * 拼图块宽度(单位:px)
+   * 拼图宽度（单位：px）
    * @default 60
    */
   puzzleWidth: makeNumericProp(40),
   /**
-   * 拼图块高度(单位:px)
+   * 拼图高度（单位：px）
    * @default 60
    */
   puzzleHeight: makeNumericProp(40),
@@ -62,7 +62,7 @@ export const puzzleCaptchaProps = {
    */
   loading: makeBooleanProp(false),
   /**
-   * 容错范围(单位:px)
+   * 容错范围（单位：px）
    * @default 6
    */
   tolerance: makeNumericProp(6),
