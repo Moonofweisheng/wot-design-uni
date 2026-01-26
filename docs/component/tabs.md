@@ -251,6 +251,53 @@ function handlePopupShow() {
 }
 ```
 
+## 自定义标题插槽 <el-tag text style="vertical-align: middle;margin-left:8px;" effect="plain">1.12.0</el-tag>
+
+使用插槽 `title` 可以自定义渲染标签页标题。
+
+使用插槽 `map-nav-item` 可以自定义渲染导航地图中的标签项。
+
+插槽参数：
+
+| 参数         | 说明       | 最低版本 |
+| ------------ | ---------- | -------- |
+| item | 标签对象 | -        |
+| title | 标题文本 | -        |
+| index | 标签索引 | -        |
+| active | 是否选中 | -        |
+
+```html
+<wd-tabs v-model="tab">
+  <template #title="{ item, title, index }">
+    <!-- item:标签对象; title: 标题文本; index: 标签索引; -->
+    <view style="display: flex; align-items: center; gap: 8rpx">
+      {{ title }}
+      <wd-icon name="caret-down" />
+      ({{ index }})
+    </view>
+  </template>
+  <template #map-nav-item="{ item, title, index, active }">
+    <view
+      style="display: flex; align-items: center; gap: 8rpx; width: 200rpx; height: 64rpx; position: relative"
+      :style="{ color: active ? '#0083ff' : index === 2 ? 'red' : '' }"
+    >
+      <wd-icon name="caret-right" color="#0083ff" v-if="active" style="position: absolute; left: 0" />
+      <view style="text-align: center; flex: 1">
+        {{ title }}
+      </view>
+      <wd-icon name="caret-left" color="#0083ff" v-if="active" style="position: absolute; right: 0" />
+    </view>
+  </template>
+  <template #default>
+    <block v-for="item in tabs" :key="item">
+      <wd-tab :title="item" :name="item">
+        <view class="content">内容{{ tab }}</view>
+      </wd-tab>
+    </block>
+  </template>
+</wd-tabs>
+```
+
 ## Tabs Attributes
 
 | 参数          | 说明                                                                                     | 类型            | 可选值   | 默认值 | 最低版本 |
@@ -289,6 +336,13 @@ function handlePopupShow() {
 | change   | 绑定值变化时触发     | event = { index, name },index 为 tab 下标，name 为 tab 绑定的值 | -        |
 | click    | 点击标题时触发       | event = { index, name },index 为 tab 下标，name 为 tab 绑定的值 | -        |
 | disabled | 点击禁用的标题时触发 | event = { index, name },index 为 tab 下标，name 为 tab 绑定的值 | -        |
+
+## Tabs Slot
+
+| name  | 说明                | 最低版本   |
+| ----- |-------------------|--------|
+| title | 标题，便于开发者自定义标题 | 1.12.0 |
+| default  | 内容                | -      |
 
 ## Methods
 
