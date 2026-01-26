@@ -6,7 +6,7 @@ titleTemplate: 一个基于Vue3+TS开发的uni-app组件库，提供70+高质量
 
 hero:
   name: Wot UI
-  text: 高颜值、轻量化的uni-app组件库
+  text: "高颜值、轻量化的\nuni-app 组件库"
   tagline: 基于Vue3+TS开发，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。
   image:
     src: /logo.png

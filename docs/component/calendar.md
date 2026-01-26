@@ -511,8 +511,8 @@ function handleConfirm({ value }) {
 |---------------|----------|------------------|
 | default       | 自定义展示    | -                |
 | label         | 左侧插槽     | -                |
-| confirm-left  | 确定区域左侧插槽 | $LOWEST_VERSION$ |
-| confirm-right | 确定区域右侧插槽 | $LOWEST_VERSION$ |
+| confirm-left  | 确定区域左侧插槽 | 1.14.0 |
+| confirm-right | 确定区域右侧插槽 | 1.14.0 |
 
 ## 外部样式类
 

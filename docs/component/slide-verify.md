@@ -1,5 +1,5 @@
 ---
-version: $LOWEST_VERSION$
+version: 1.14.0
 ---
 
 # SlideVerify 滑动验证
@@ -118,25 +118,25 @@ function handleReset() {
 
 | 参数                    | 说明                                              | 类型            | 可选值 | 默认值                | 最低版本         |
 | ----------------------- | ------------------------------------------------- | --------------- | ------ | --------------------- | ---------------- |
-| width                   | 滑动条宽度(单位:px)                               | number / string | -      | 300                   | $LOWEST_VERSION$ |
-| height                  | 滑块高度(单位:px)                                 | number / string | -      | 40                    | $LOWEST_VERSION$ |
-| tolerance               | 容错范围(单位:px)，距离终点多少距离内视为验证通过 | number / string | -      | 10                    | $LOWEST_VERSION$ |
-| text                    | 提示文字                                          | string          | -      | 向右滑动验证          | $LOWEST_VERSION$ |
-| success-text            | 验证成功提示文字                                  | string          | -      | 验证通过              | $LOWEST_VERSION$ |
-| disabled                | 是否禁用                                          | boolean         | -      | false                 | $LOWEST_VERSION$ |
-| background-color        | 背景颜色                                          | string          | -      | #F5F7FA               | $LOWEST_VERSION$ |
-| active-background-color | 激活时的背景颜色                                  | string          | -      | #49C75F               | $LOWEST_VERSION$ |
-| icon                    | 滑块图标名称                                      | string          | -      | a-chevron-rightdouble | $LOWEST_VERSION$ |
-| success-icon            | 成功图标名称                                      | string          | -      | check                 | $LOWEST_VERSION$ |
-| icon-size               | 图标大小(单位:px)                                 | number / string | -      | 20                    | $LOWEST_VERSION$ |
-| success-icon-size       | 成功图标大小(单位:px)                             | number / string | -      | 12                    | $LOWEST_VERSION$ |
+| width                   | 滑动条宽度(单位:px)                               | number / string | -      | 300                   | 1.14.0 |
+| height                  | 滑块高度(单位:px)                                 | number / string | -      | 40                    | 1.14.0 |
+| tolerance               | 容错范围(单位:px)，距离终点多少距离内视为验证通过 | number / string | -      | 10                    | 1.14.0 |
+| text                    | 提示文字                                          | string          | -      | 向右滑动验证          | 1.14.0 |
+| success-text            | 验证成功提示文字                                  | string          | -      | 验证通过              | 1.14.0 |
+| disabled                | 是否禁用                                          | boolean         | -      | false                 | 1.14.0 |
+| background-color        | 背景颜色                                          | string          | -      | #F5F7FA               | 1.14.0 |
+| active-background-color | 激活时的背景颜色                                  | string          | -      | #49C75F               | 1.14.0 |
+| icon                    | 滑块图标名称                                      | string          | -      | a-chevron-rightdouble | 1.14.0 |
+| success-icon            | 成功图标名称                                      | string          | -      | check                 | 1.14.0 |
+| icon-size               | 图标大小(单位:px)                                 | number / string | -      | 20                    | 1.14.0 |
+| success-icon-size       | 成功图标大小(单位:px)                             | number / string | -      | 12                    | 1.14.0 |
 
 ## Events
 
 | 事件名称 | 说明           | 参数 | 最低版本         |
 | -------- | -------------- | ---- | ---------------- |
-| success  | 验证成功时触发 | -    | $LOWEST_VERSION$ |
-| fail     | 验证失败时触发 | -    | $LOWEST_VERSION$ |
+| success  | 验证成功时触发 | -    | 1.14.0 |
+| fail     | 验证失败时触发 | -    | 1.14.0 |
 
 ## Methods
 
@@ -144,20 +144,20 @@ function handleReset() {
 
 | 方法名 | 说明                   | 参数 | 最低版本         |
 | ------ | ---------------------- | ---- | ---------------- |
-| reset  | 重置验证组件到初始状态 | -    | $LOWEST_VERSION$ |
+| reset  | 重置验证组件到初始状态 | -    | 1.14.0 |
 
 ## Slots API
 
 | 插槽名称     | 说明                       | 最低版本         |
 | ------------ | -------------------------- | ---------------- |
-| text         | 自定义提示文字内容         | $LOWEST_VERSION$ |
-| success-text | 自定义验证成功提示文字内容 | $LOWEST_VERSION$ |
-| icon         | 自定义滑块图标             | $LOWEST_VERSION$ |
-| success-icon | 自定义成功图标             | $LOWEST_VERSION$ |
+| text         | 自定义提示文字内容         | 1.14.0 |
+| success-text | 自定义验证成功提示文字内容 | 1.14.0 |
+| icon         | 自定义滑块图标             | 1.14.0 |
+| success-icon | 自定义成功图标             | 1.14.0 |
 
 ## 外部样式类
 
 | 类名         | 说明       | 最低版本         |
 | ------------ | ---------- | ---------------- |
-| custom-class | 根节点样式 | $LOWEST_VERSION$ |
-| custom-style | 根节点样式 | $LOWEST_VERSION$ |
+| custom-class | 根节点样式 | 1.14.0 |
+| custom-style | 根节点样式 | 1.14.0 |

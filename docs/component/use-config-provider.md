@@ -1,5 +1,5 @@
 ---
-version: $LOWEST_VERSION$
+version: 1.14.0
 ---
 # useConfigProvider
 
@@ -37,4 +37,4 @@ useConfigProvider({ themeVars: themeVarsRef })
 
 | 参数 | 说明 | 类型 | 默认值 | 最低版本 |
 |-----|------|------|--------|---------|
-| themeVars | 主题变量对象，支持响应式更新 | `ConfigProviderThemeVars` \| `Ref<ConfigProviderThemeVars>` | - | $LOWEST_VERSION$ |
+| themeVars | 主题变量对象，支持响应式更新 | `ConfigProviderThemeVars` \| `Ref<ConfigProviderThemeVars>` | - | 1.14.0 |

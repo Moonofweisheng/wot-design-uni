@@ -264,7 +264,7 @@ function handleSwitchChange({ value }) {
 | title    | 分组标题       | string  | -      | -      | -        |
 | value    | 分组右侧内容   | string  | -      | -      | -        |
 | border   | 是否展示边框线 | boolean  | -      | -      | -        |
-| insert   | 是否展示为圆角卡片风格 | boolean | -      | false  | $LOWEST_VERSION$        |
+| insert   | 是否展示为圆角卡片风格 | boolean | -      | false  | 1.14.0        |
 | use-slot | 分组启用插槽   | boolean | -      | false  | -        |
 
 ## Cell Attributes
@@ -285,7 +285,7 @@ function handleSwitchChange({ value }) {
 | center      | 是否垂直居中，默认顶部居中     | boolean | -      | false  | -        |
 | required    | 表单属性，必填                 | boolean | -      | false  | -        |
 | marker-side | 必填标记的位置                 | string  | before / after | before | 1.12.0 |
-| arrow-direction | 箭头方向，只在 is-link 为 true 时生效 | string  | left / up / down | -      | $LOWEST_VERSION$ |
+| arrow-direction | 箭头方向，只在 is-link 为 true 时生效 | string  | left / up / down | -      | 1.14.0 |
 | vertical    | 表单属性，上下结构             | boolean | -      | false  | -        |
 | ellipsis    | 内容省略，右侧内容超出时会以省略号显示 | boolean | -      | false  | 1.11.0 |
 | use-title-slot | 是否启用title插槽，默认启用，用来解决插槽传递时v-slot和v-if冲突问题 | boolean | -      | true  | 1.11.0 |

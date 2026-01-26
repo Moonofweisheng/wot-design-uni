@@ -111,4 +111,4 @@ Suggested styles (add to page or global styles):
 | Name | Description | Version |
 |------|-------------|----------|
 | image | Image content | 1.3.12 |
-| bottom | Bottom content | $LOWEST_VERSION$ |
+| bottom | Bottom content | 1.14.0 |

@@ -1,5 +1,5 @@
 ---
-version: $LOWEST_VERSION$
+version: 1.14.0
 ---
 # useConfigProvider
 
@@ -37,4 +37,4 @@ useConfigProvider({ themeVars: themeVarsRef })
 
 | Parameter | Description | Type | Default | Minimum Version |
 |-----|------|------|--------|---------|
-| themeVars | Theme variable object, supports reactive updates | `ConfigProviderThemeVars` \| `Ref<ConfigProviderThemeVars>` | - | $LOWEST_VERSION$ |
+| themeVars | Theme variable object, supports reactive updates | `ConfigProviderThemeVars` \| `Ref<ConfigProviderThemeVars>` | - | 1.14.0 |

@@ -119,7 +119,7 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | title | Group title | string | - | - |
 | value | Group value | string | - | - |
 | border | Whether to show the outer border | boolean | true | - |
-| insert | Whether to display in card style with rounded corners | boolean | false | $LOWEST_VERSION$ |
+| insert | Whether to display in card style with rounded corners | boolean | false | 1.14.0 |
 | use-slot | Enable custom slots for group | boolean | false | - |
 
 ## Cell Attributes
@@ -143,7 +143,7 @@ The `center` attribute sets whether the left and right content of the cell is ve
 | center | Whether to vertically center the left and right content | boolean | false | - |
 | required | Whether to show the required asterisk | boolean | false | - |
 | marker-side | Position of the required marker | 'before' \| 'after' | 'before' | 1.12.0 |
-| arrow-direction | Arrow direction, only effective when is-link is true | 'left' \| 'up' \| 'down' | - | $LOWEST_VERSION$ |
+| arrow-direction | Arrow direction, only effective when is-link is true | 'left' \| 'up' \| 'down' | - | 1.14.0 |
 | on | Whether to show the on icon on the right | boolean | false | - |
 | bordered | Whether to show the bottom border | boolean | true | - |
 | center-title | Whether to center the title | boolean | false | 0.1.1 |

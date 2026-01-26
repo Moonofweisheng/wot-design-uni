@@ -509,8 +509,8 @@ function handleConfirm({ value }) {
 |------|-------------|----------|
 | default | Custom display | - |
 | label | Left slot | - |
-| confirm-left | Left slot of confirm button | $LOWEST_VERSION$ |
-| confirm-right | Right slot of confirm button | $LOWEST_VERSION$ |
+| confirm-left | Left slot of confirm button | 1.14.0 |
+| confirm-right | Right slot of confirm button | 1.14.0 |
 
 ## External Classes
 

@@ -1,5 +1,5 @@
 ---
-version: $LOWEST_VERSION$
+version: 1.14.0
 ---
 
 # SlideVerify
@@ -116,25 +116,25 @@ Supports customizing content through slots.
 
 | Parameter               | Description                                                                                           | Type            | Options | Default                              | Version          |
 | ----------------------- | ----------------------------------------------------------------------------------------------------- | --------------- | ------- | ------------------------------------ | ---------------- |
-| width                   | Width of slide bar (unit: px)                                                                         | number / string | -       | 300                                  | $LOWEST_VERSION$ |
-| height                  | Height of slider (unit: px)                                                                           | number / string | -       | 40                                   | $LOWEST_VERSION$ |
-| tolerance               | Tolerance range (unit: px), distance from endpoint within which verification is considered successful | number / string | -       | 10                                   | $LOWEST_VERSION$ |
-| text                    | Prompt text                                                                                           | string          | -       | Slide right to complete verification | $LOWEST_VERSION$ |
-| success-text            | Success prompt text                                                                                   | string          | -       | Verification passed                  | $LOWEST_VERSION$ |
-| disabled                | Whether to disable                                                                                    | boolean         | -       | false                                | $LOWEST_VERSION$ |
-| background-color        | Background color                                                                                      | string          | -       | #F5F7FA                              | $LOWEST_VERSION$ |
-| active-background-color | Active background color                                                                               | string          | -       | #49C75F                              | $LOWEST_VERSION$ |
-| icon                    | Slider icon name                                                                                      | string          | -       | a-chevron-rightdouble                | $LOWEST_VERSION$ |
-| success-icon            | Success icon name                                                                                     | string          | -       | check                                | $LOWEST_VERSION$ |
-| icon-size               | Icon size (unit: px)                                                                                  | number / string | -       | 20                                   | $LOWEST_VERSION$ |
-| success-icon-size       | Success icon size (unit: px)                                                                          | number / string | -       | 12                                   | $LOWEST_VERSION$ |
+| width                   | Width of slide bar (unit: px)                                                                         | number / string | -       | 300                                  | 1.14.0 |
+| height                  | Height of slider (unit: px)                                                                           | number / string | -       | 40                                   | 1.14.0 |
+| tolerance               | Tolerance range (unit: px), distance from endpoint within which verification is considered successful | number / string | -       | 10                                   | 1.14.0 |
+| text                    | Prompt text                                                                                           | string          | -       | Slide right to complete verification | 1.14.0 |
+| success-text            | Success prompt text                                                                                   | string          | -       | Verification passed                  | 1.14.0 |
+| disabled                | Whether to disable                                                                                    | boolean         | -       | false                                | 1.14.0 |
+| background-color        | Background color                                                                                      | string          | -       | #F5F7FA                              | 1.14.0 |
+| active-background-color | Active background color                                                                               | string          | -       | #49C75F                              | 1.14.0 |
+| icon                    | Slider icon name                                                                                      | string          | -       | a-chevron-rightdouble                | 1.14.0 |
+| success-icon            | Success icon name                                                                                     | string          | -       | check                                | 1.14.0 |
+| icon-size               | Icon size (unit: px)                                                                                  | number / string | -       | 20                                   | 1.14.0 |
+| success-icon-size       | Success icon size (unit: px)                                                                          | number / string | -       | 12                                   | 1.14.0 |
 
 ## Events
 
 | Event Name | Description                          | Parameters | Version          |
 | ---------- | ------------------------------------ | ---------- | ---------------- |
-| success    | Triggered when verification succeeds | -          | $LOWEST_VERSION$ |
-| fail       | Triggered when verification fails    | -          | $LOWEST_VERSION$ |
+| success    | Triggered when verification succeeds | -          | 1.14.0 |
+| fail       | Triggered when verification fails    | -          | 1.14.0 |
 
 ## Methods
 
@@ -142,20 +142,20 @@ You can get the component instance through ref and call the methods provided by 
 
 | Method | Description                                           | Parameters | Version          |
 | ------ | ----------------------------------------------------- | ---------- | ---------------- |
-| reset  | Reset the verification component to its initial state | -          | $LOWEST_VERSION$ |
+| reset  | Reset the verification component to its initial state | -          | 1.14.0 |
 
 ## Slots API
 
 | Slot Name    | Description                        | Version          |
 | ------------ | ---------------------------------- | ---------------- |
-| text         | Custom prompt text content         | $LOWEST_VERSION$ |
-| success-text | Custom success prompt text content | $LOWEST_VERSION$ |
-| icon         | Custom slider icon                 | $LOWEST_VERSION$ |
-| success-icon | Custom success icon                | $LOWEST_VERSION$ |
+| text         | Custom prompt text content         | 1.14.0 |
+| success-text | Custom success prompt text content | 1.14.0 |
+| icon         | Custom slider icon                 | 1.14.0 |
+| success-icon | Custom success icon                | 1.14.0 |
 
 ## External Style Classes
 
 | Class Name   | Description     | Version          |
 | ------------ | --------------- | ---------------- |
-| custom-class | Root node style | $LOWEST_VERSION$ |
-| custom-style | Root node style | $LOWEST_VERSION$ |
+| custom-class | Root node style | 1.14.0 |
+| custom-style | Root node style | 1.14.0 |

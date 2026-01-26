@@ -174,7 +174,7 @@ Modify the input box placeholder text through the `placeholder` property and the
 | clear | Input box clear button event | - | - |
 | cancel | Input box right text click event | `{ value }` | - |
 | change | Input box content change event | `{ value }` | - |
-| click    | Click event in disabled state | -           |  $LOWEST_VERSION$       |
+| click    | Click event in disabled state | -           |  1.14.0       |
 
 ## Slots
 
