@@ -5,13 +5,12 @@
   @include b(key) {
     background: $-dark-background2;
     color: $-dark-color;
-
-    &:active {
-      background-color: $-dark-background4;
-    }
-
     @include m(active) {
       background-color: $-dark-background4;
+    }
+    @include m(disabled) {
+      background-color: $-dark-background4;
+      color: $-dark-color3;
     }
   }
 }
@@ -38,10 +37,6 @@
   background: $-keyboard-key-background;
   border-radius: $-keyboard-key-border-radius;
 
-  &:active {
-    background-color: $-keyboard-key-active-color;
-  }
-
   @include m(large) {
     position: absolute;
     top: 0;
@@ -53,6 +48,16 @@
 
   @include m(delete, close) {
     font-size: $-keyboard-delete-font-size;
+  }
+
+  @include m(spacer) {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  @include m(disabled) {
+    background-color: $-keyboard-key-disabled-background;
+    color: $-keyboard-key-disabled-color;
   }
 
   @include m(active) {
