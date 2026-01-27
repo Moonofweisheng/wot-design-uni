@@ -165,9 +165,9 @@ function reset() {
     @success="onSuccess()"
     @close="state.visible = false"
   ></wd-puzzle-captcha>
-
-  <wd-button @click="state.visible = true">验证</wd-button>
 </wd-popup>
+
+<wd-button @click="state.visible = true">验证</wd-button>
 ```
 
 ```ts

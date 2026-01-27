@@ -171,9 +171,9 @@ component should be mounted only after the popup animation has finished.
     @success="onSuccess()"
     @close="state.visible = false"
   ></wd-puzzle-captcha>
-
-  <wd-button @click="state.visible = true">Verify</wd-button>
 </wd-popup>
+
+<wd-button @click="state.visible = true">Verify</wd-button>
 ```
 
 ```ts

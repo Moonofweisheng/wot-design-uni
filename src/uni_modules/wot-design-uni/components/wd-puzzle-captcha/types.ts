@@ -48,12 +48,12 @@ export const puzzleCaptchaProps = {
   puzzleShape: makeStringProp<PuzzleCaptchaShape>('puzzle'),
   /**
    * 拼图宽度（单位：px）
-   * @default 60
+   * @default 40
    */
   puzzleWidth: makeNumericProp(40),
   /**
    * 拼图高度（单位：px）
-   * @default 60
+   * @default 40
    */
   puzzleHeight: makeNumericProp(40),
   /**

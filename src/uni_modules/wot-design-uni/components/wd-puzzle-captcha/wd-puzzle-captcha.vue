@@ -745,6 +745,11 @@ function onTouchMove(event: TouchEvent) {
   touch.touchMove(event)
 
   const trackerLimit = shallowState.trackWidth - shallowState.trackerWidth
+
+  if (trackerLimit <= 0) {
+    return
+  }
+
   const puzzleLimit = parseNumber(props.imageWidth) - parseNumber(props.puzzleWidth) - PUZZLE_BOUNDARY * 2
 
   state.trackerX = clamp(touch.deltaX, 0, trackerLimit)
