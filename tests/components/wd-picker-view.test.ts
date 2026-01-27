@@ -1,12 +1,14 @@
 import { mount } from '@vue/test-utils'
 import WdPickerView from '@/uni_modules/wot-design-uni/components/wd-picker-view/wd-picker-view.vue'
 import WdLoading from '@/uni_modules/wot-design-uni/components/wd-loading/wd-loading.vue'
+import WdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
 import { describe, expect, test } from 'vitest'
 
 describe('WdPickerView', () => {
   // 在每个测试前设置全局组件
   const globalComponents = {
-    'wd-loading': WdLoading
+    'wd-loading': WdLoading,
+    'wd-icon': WdIcon
   }
 
   test('基本渲染', () => {
@@ -149,6 +151,36 @@ describe('WdPickerView', () => {
 
     // 检查内部的 formatColumns 是否正确设置了 disabled 属性
     expect((wrapper.vm as any).formatColumns[0][1].disabled).toBe(true)
+  })
+
+  test('带图标的选项', () => {
+    const columns = [
+      { value: '1', label: '选项1', icon: 'home' },
+      { value: '2', label: '选项2', icon: 'settings' }
+    ]
+    const wrapper = mount(WdPickerView, {
+      props: {
+        columns,
+        modelValue: '1'
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    // 检查是否正确设置了 columns
+    expect(wrapper.props('columns')).toEqual(columns)
+
+    // 检查是否渲染了图标组件
+    const iconComponents = wrapper.findAllComponents(WdIcon)
+    expect(iconComponents.length).toBe(2)
+
+    // 检查第一个图标的属性
+    expect(iconComponents[0].props('name')).toBe('home')
+
+    // 检查图标和标签是否都被渲染
+    const items = wrapper.findAll('.wd-picker-view-column__item')
+    expect(items.length).toBe(2)
   })
 
   test('自定义样式', () => {

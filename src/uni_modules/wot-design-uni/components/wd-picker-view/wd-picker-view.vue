@@ -24,6 +24,7 @@
             }`"
             :style="`line-height: ${itemHeight}px;`"
           >
+            <wd-icon v-if="row.icon" :name="row.icon" />
             {{ row[labelKey] }}
           </view>
         </picker-view-column>
