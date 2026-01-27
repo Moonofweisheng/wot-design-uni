@@ -19,6 +19,33 @@
   }
 }
 
+.wot-theme-dark {
+  @include b(puzzle-captcha) {
+    background: $-dark-background;
+
+    @include e(title) {
+      color: $-font-white-1;
+    }
+
+    @include e(description) {
+      color: $-font-white-2;
+    }
+
+    @include e(main) {
+      background: $-dark-background2;
+    }
+
+    @include e(mask) {
+      color: $-font-white-2;
+      background: $-dark-background2;
+    }
+
+    @include e(track) {
+      background: $-dark-background2;
+    }
+  }
+}
+
 @include b(puzzle-captcha) {
   display: flex;
   flex-direction: column;
