@@ -1,7 +1,6 @@
 /**
  * This file contains localization strings for various components.
  */
-import { puzzleCaptchaProps } from '@/uni_modules/wot-design-uni/components/wd-puzzle-captcha/types'
 
 export default {
   calendar: {
