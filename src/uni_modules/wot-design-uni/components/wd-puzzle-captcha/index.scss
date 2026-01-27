@@ -86,6 +86,7 @@
 
   @include e(action) {
     margin-left: $-puzzle-captcha-action-gap;
+    cursor: pointer;
   }
 
   @include e(operation) {
@@ -169,6 +170,7 @@
     height: 100%;
     font-size: $-puzzle-captcha-tracker-icon-size;
     color: $-puzzle-captcha-tracker-color;
+    cursor: grab;
     background: $-puzzle-captcha-tracker-background;
     border-radius: $-puzzle-captcha-tracker-radius;
   }
