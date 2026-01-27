@@ -12,7 +12,7 @@
       :range-prompt="rangePrompt"
       :allow-same-day="allowSameDay"
       :show-panel-title="showPanelTitle"
-      :default-time="formatDefauleTime"
+      :default-time="formatDefaultTime"
       :panel-height="panelHeight"
       @change="handleChange"
     />
@@ -29,12 +29,13 @@
       :range-prompt="rangePrompt"
       :allow-same-day="allowSameDay"
       :show-panel-title="showPanelTitle"
-      :default-time="formatDefauleTime"
+      :default-time="formatDefaultTime"
       :panel-height="panelHeight"
       :immediate-change="immediateChange"
       :time-filter="timeFilter"
       :hide-second="hideSecond"
       @change="handleChange"
+      @date-click="handleDateClick"
       @pickstart="handlePickStart"
       @pickend="handlePickEnd"
     />
@@ -57,10 +58,11 @@ import { getDefaultTime } from './utils'
 import yearPanel from './yearPanel/year-panel.vue'
 import MonthPanel from './monthPanel/month-panel.vue'
 import { calendarViewProps, type CalendarViewExpose } from './types'
+import type { CalendarDayItem } from './types'
 
 const props = defineProps(calendarViewProps)
-const emit = defineEmits(['change', 'update:modelValue', 'pickstart', 'pickend'])
-const formatDefauleTime = ref<number[][]>([])
+const emit = defineEmits(['change', 'date-click', 'update:modelValue', 'pickstart', 'pickend'])
+const formatDefaultTime = ref<number[][]>([])
 
 const yearPanelRef = ref()
 const monthPanelRef = ref()
@@ -68,7 +70,7 @@ const monthPanelRef = ref()
 watch(
   () => props.defaultTime,
   (newValue) => {
-    formatDefauleTime.value = getDefaultTime(newValue)
+    formatDefaultTime.value = getDefaultTime(newValue)
   },
   {
     deep: true,
@@ -86,6 +88,10 @@ function scrollIntoView() {
 
 function getPanel() {
   return props.type.indexOf('month') > -1 ? yearPanelRef.value : monthPanelRef.value
+}
+
+function handleDateClick(obj: CalendarDayItem) {
+  emit('date-click', obj)
 }
 
 function handleChange({ value }: { value: number | number[] | null }) {
