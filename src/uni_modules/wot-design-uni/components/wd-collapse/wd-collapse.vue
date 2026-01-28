@@ -83,8 +83,8 @@ watch(
 )
 
 onBeforeMount(() => {
-  const { lineNum, viewmore, modelValue } = props
-  contentLineNum.value = viewmore && !modelValue ? lineNum : 0
+  const { lineNum, viewmore } = props
+  contentLineNum.value = viewmore ? lineNum : 0
 })
 
 function updateChange(activeNames: string | string[] | boolean) {
