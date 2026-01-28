@@ -111,7 +111,7 @@ export default defineConfig({
       provider: 'algolia',
       options: {
         appId: 'A74X2RFXSU',
-        apiKey: '6961856d63f5181bf71cb4fa3e4398d2',
+        apiKey: '4a4ec3a94d2f41432f21c3ebc90e164d',
         indexName: 'wot-ui',
       },
     },
