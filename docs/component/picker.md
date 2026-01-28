@@ -274,6 +274,7 @@ function handleConfirm({ value }) {
 | immediate-change | 是否在手指松开时立即触发picker-view的 change 事件。若不开启则会在滚动动画结束后触发 change 事件，1.2.25版本起提供，仅微信小程序和支付宝小程序支持 | boolean | - | false | 1.2.25 |
 | clearable | 显示清空按钮 | boolean | - | false | 1.11.0 |
 | root-portal | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | - | false | 1.11.0 |
+| backpress | 返回拦截（仅小程序） | string | back / close / stop | back | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 
@@ -292,6 +293,7 @@ function handleConfirm({ value }) {
 | cancel   | 点击左侧按钮触发       | -                                                                                                           | -        |
 | open     | 打开选择器弹出层时触发 | -                                                                                                           | -        |
 | clear    | 点击清空按钮时触发     | -                                                                                                    | 1.11.0    |
+| backpress | 返回触发（仅小程序） | - | $LOWEST_VERSION$ |
 
 ## Methods
 
