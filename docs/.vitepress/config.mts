@@ -81,6 +81,7 @@ export default defineConfig({
   },
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['meta', { name: 'algolia-site-verification', content: '7C5B0F4AF42C48FE' }],
     ['script', {}, `
       var _hmt = _hmt || [];
       (function() {
@@ -110,8 +111,8 @@ export default defineConfig({
       provider: 'algolia',
       options: {
         appId: 'A74X2RFXSU',
-        apiKey: '6961856d63f5181bf71cb4fa3e4398d2',
-        indexName: 'wot-design-uni2',
+        apiKey: '4a4ec3a94d2f41432f21c3ebc90e164d',
+        indexName: 'wot-ui',
       },
     },
 
