@@ -43,7 +43,11 @@ export function canvas2dAdapter(ctx: CanvasRenderingContext2D): UniApp.CanvasCon
       ctx.textBaseline = textBaseline
     },
     createCircularGradient() {},
-    draw() {},
+    draw(reserve?: boolean, callback?: () => void) {
+      if (typeof callback === 'function') {
+        callback()
+      }
+    },
     addColorStop() {}
   }) as unknown as UniApp.CanvasContext
 }

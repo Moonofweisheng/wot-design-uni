@@ -139,5 +139,11 @@ export default {
   slideVerify: {
     text: 'Nach rechts schieben zur Verifizierung',
     successText: 'Verifizierung erfolgreich'
+  },
+  puzzleCaptcha: {
+    title: 'Sicherheitsüberprüfung',
+    placeholder: 'Ziehen Sie den Schieberegler unten, um das Puzzle zu vervollständigen',
+    successText: 'Verifizierung erfolgreich',
+    failText: 'Verifizierung fehlgeschlagen, bitte erneut versuchen'
   }
 }

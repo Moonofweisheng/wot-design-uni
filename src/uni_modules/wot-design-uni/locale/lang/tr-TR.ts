@@ -144,5 +144,11 @@ export default {
   slideVerify: {
     text: 'Doğrulamak için sağa kaydırın',
     successText: 'Doğrulama başarılı'
+  },
+  puzzleCaptcha: {
+    title: 'Güvenlik Doğrulaması',
+    placeholder: 'Bulmacayı tamamlamak için aşağıdaki kaydırıcıyı sürükleyin',
+    successText: 'Doğrulama Başarılı',
+    failText: 'Doğrulama Başarısız, lütfen tekrar deneyin'
   }
 }

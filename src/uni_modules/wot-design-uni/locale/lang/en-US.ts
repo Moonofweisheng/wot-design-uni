@@ -139,5 +139,11 @@ export default {
   slideVerify: {
     text: 'Slide right to verify',
     successText: 'Verification passed'
+  },
+  puzzleCaptcha: {
+    title: 'Security Verification',
+    placeholder: 'Drag the slider below to complete the puzzle',
+    successText: 'Verification Successful',
+    failText: 'Verification Failed, please try again'
   }
 }

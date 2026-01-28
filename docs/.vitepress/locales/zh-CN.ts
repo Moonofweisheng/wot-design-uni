@@ -305,6 +305,10 @@ export default defineConfig({
               text: 'PickerView 选择器视图'
             },
             {
+              link: '/component/puzzle-captcha',
+              text: 'PuzzleCaptcha 拼图验证'
+            },
+            {
               link: '/component/radio',
               text: 'Radio 单选框'
             },
