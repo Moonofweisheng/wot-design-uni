@@ -260,8 +260,10 @@ export default defineConfig({
               link: '/en-US/component/calendar-view',
               text: 'CalendarView'
             },
-            {
-              link: '/en-US/component/checkbox',
+            {              link: '/en-US/component/week-date',
+              text: 'WeekDate'
+            },
+            {              link: '/en-US/component/checkbox',
               text: 'Checkbox'
             },
             {

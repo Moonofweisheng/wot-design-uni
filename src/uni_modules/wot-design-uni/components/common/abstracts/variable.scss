@@ -230,7 +230,6 @@ $-calendar-active-border: var(--wot-calendar-active-border, 8px) !default;
 $-calendar-info-fs: var(--wot-calendar-info-fs, 10px) !default;
 $-calendar-item-margin-bottom: var(--wot-calendar-item-margin-bottom, 4px) !default;
 
-
 /* checkbox */
 $-checkbox-margin: var(--wot-checkbox-margin, 10px) !default; // 多个复选框距离
 $-checkbox-bg: var(--wot-checkbox-bg, $-color-white) !default; // 多个复选框距离
@@ -288,9 +287,6 @@ $-divider-content-right-width: var(--wot-divider-content-right-width, 10%) !defa
 $-divider-vertical-height: var(--wot-divider-vertical-height, 16px) !default; // 垂直分割线高度
 $-divider-vertical-content-margin: var(--wot-divider-vertical-content-margin, 0 8px) !default; // 垂直分割线内容间距
 $-divider-vertical-line-width: var(--wot-divider-vertical-line-width, 1px) !default; // 线条高度
-
-
-
 
 /* drop-menu */
 $-drop-menu-height: var(--wot-drop-menu-height, 48px) !default; // 展示选中项的高度
@@ -775,7 +771,6 @@ $-swiper-item-padding: var(--wot-swiper-item-padding, 0);
 $-swiper-item-text-color: var(--wot-swiper-item-text-color, #ffffff);
 $-swiper-item-text-fs: var(--wot-swiper-item-text-fs, $-fs-title);
 
-
 /* swiper-nav */
 // dot & dots-bar
 $-swiper-nav-dot-color: var(--wot-swiper-nav-dot-color, $-font-white-2) !default;
@@ -1028,3 +1023,14 @@ $-slide-verify-button-color: var(--wot-slide-verify-button-color, #666666) !defa
 $-slide-verify-button-size: var(--wot-slide-verify-button-size, 40px) !default; // 滑块尺寸
 $-slide-verify-track-width: var(--wot-slide-verify-track-width, 100%) !default; // 滑道宽度
 
+/* week-date */
+$-week-date-bg: var(--wot-week-date-bg, transparent) !default; // 背景色
+$-week-date-btn-color: var(--wot-week-date-btn-color, $-color-gray-5) !default; // 按钮颜色
+$-week-date-btn-size: var(--wot-week-date-btn-size, 16px) !default; // 按钮尺寸
+$-week-date-label-size: var(--wot-week-date-label-size, $-fs-secondary) !default; // label字号
+$-week-date-label-color: var(--wot-week-date-label-color, $-color-gray-7) !default; // label颜色
+$-week-date-date-size: var(--wot-week-date-date-size, $-fs-title) !default; // 日期字号
+$-week-date-date-color: var(--wot-week-date-date-color, $-color-gray-7) !default; // 日期颜色
+$-week-date-active-bg: var(--wot-week-date-active-bg, $-color-theme) !default; // #4d80f0
+$-week-date-active-color: var(--wot-week-date-active-color, $-color-white) !default; // #ffffff
+$-week-date-disabled-color: var(--wot-week-date-disabled-color, rgba(54, 54, 54, 0.1)) !default; // rgba(0,0,0,0.26)

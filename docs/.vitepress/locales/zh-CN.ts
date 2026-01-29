@@ -265,6 +265,10 @@ export default defineConfig({
               text: 'CalendarView 日历面板'
             },
             {
+              link: '/component/week-date',
+              text: 'WeekDate 周日期选择器'
+            },
+            {
               link: '/component/checkbox',
               text: 'Checkbox 复选框'
             },
