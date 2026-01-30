@@ -325,8 +325,10 @@ function onConfirm() {
 
   const { beforeConfirm } = props
   if (beforeConfirm && isFunction(beforeConfirm)) {
+    // 获取pickerView中当前最新的值，防止在第一次modelValue值为undefined的时候，用户打开面板不滑动pickerView，直接点击确认按，拿到的pickerValue.value为空
+    const values = pickerViewWd.value!.getValues()
     beforeConfirm(
-      pickerValue.value,
+      values,
       (isPass: boolean) => {
         isPass && handleConfirm()
       },
