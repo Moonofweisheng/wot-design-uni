@@ -1,14 +1,7 @@
 <template>
   <page-wraper>
     <demo-block :title="$t('jiBenYongFa')">
-      <wd-input
-        type="text"
-        @input="handleInput"
-        v-model="value"
-        :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')"
-        @change="handleChange"
-        @blur="handleBlur"
-      />
+      <wd-input type="text" @input="handleInput" v-model="value" :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')" @blur="handleBlur" />
     </demo-block>
     <demo-block :title="$t('jin-yong-zhuang-tai')">
       <wd-input type="text" @input="handleInput" v-model="value1" disabled />
@@ -20,22 +13,22 @@
       <wd-input type="text" @input="handleInput" v-model="value3" :placeholder="$t('qing-shu-ru-wai-bi-ba-bu')" error />
     </demo-block>
     <demo-block :title="$t('qing-kong-an-niu')">
-      <wd-input type="text" @input="handleInput" v-model="value4" clearable @change="handleChange1" />
+      <wd-input type="text" @input="handleInput" v-model="value4" clearable />
     </demo-block>
     <demo-block :title="$t('you-zhi-qie-ju-jiao-shi-zhan-shi-qing-kong-an-niu')">
-      <wd-input type="text" clear-trigger="focus" @input="handleInput" v-model="value20" clearable @change="handleChange1" />
+      <wd-input type="text" clear-trigger="focus" @input="handleInput" v-model="value20" clearable />
     </demo-block>
     <demo-block :title="$t('dian-ji-qing-chu-an-niu-shi-bu-zi-dong-ju-jiao')">
-      <wd-input type="text" :focus-when-clear="false" @input="handleInput" v-model="value21" clearable @change="handleChange1" />
+      <wd-input type="text" :focus-when-clear="false" @input="handleInput" v-model="value21" clearable />
     </demo-block>
     <demo-block :title="$t('mi-ma-kuang')">
-      <wd-input type="text" @input="handleInput" v-model="value5" clearable show-password @change="handleChange2" />
+      <wd-input type="text" @input="handleInput" v-model="value5" clearable show-password />
     </demo-block>
     <demo-block :title="$t('shu-zi-lei-xing')">
       <wd-input type="number" @input="handleInput" v-model="value9" />
     </demo-block>
     <demo-block :title="$t('she-zhi-qian-hou-icon')">
-      <wd-input type="text" v-model="value6" @input="handleInput" prefix-icon="dong" suffix-icon="list" clearable @change="handleChange3" />
+      <wd-input type="text" v-model="value6" @input="handleInput" prefix-icon="dong" suffix-icon="list" clearable />
     </demo-block>
     <demo-block :title="$t('zi-shu-xian-zhi-0')">
       <wd-input type="text" v-model="value7" @input="handleInput" :maxlength="20" show-word-limit />
@@ -153,18 +146,6 @@ const value21 = ref<string>('')
 const value22 = ref<string>('')
 const value23 = ref<string>('')
 
-function handleChange(event: any) {
-  console.log(event)
-}
-function handleChange1(event: any) {
-  console.log(event)
-}
-function handleChange2(event: any) {
-  console.log(event)
-}
-function handleChange3(event: any) {
-  console.log(event)
-}
 function handleBlur(event: any) {
   console.log('失焦', event)
 }
