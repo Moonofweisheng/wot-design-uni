@@ -123,6 +123,26 @@
       </wd-tabs>
     </demo-block>
 
+    <demo-block :title="$t('cha-cao-yan-shi')" transparent>
+      <wd-tabs v-model="tab12" sticky>
+        <template #nav-left>
+          <view class="tab-nav-slot">
+            <wd-icon name="filter" size="16px"></wd-icon>
+          </view>
+        </template>
+        <block v-for="item in 4" :key="item">
+          <wd-tab :title="$t('biao-qian-item') + item">
+            <view class="large">{{ $t('nei-rong') }}{{ tab12 + 1 }}</view>
+          </wd-tab>
+        </block>
+        <template #nav-right>
+          <view class="tab-nav-slot">
+            <wd-icon name="add-circle1" size="16px"></wd-icon>
+          </view>
+        </template>
+      </wd-tabs>
+    </demo-block>
+
     <demo-block :title="$t('zai-dan-chu-kuang-zhong-shi-yong-0')" transparent>
       <view class="section">
         <wd-button @click="handleOpenClick">{{ $t('da-kai-dan-chuang') }}</wd-button>
@@ -192,6 +212,7 @@ const tab7 = ref<number>(0)
 const tab8 = ref<number>(0)
 const tab9 = ref<number>(0)
 const tab10 = ref<number>(3)
+const tab12 = ref<number>(0)
 
 const toast = useToast()
 function handleClick({ index, name }: any) {
@@ -236,5 +257,13 @@ function handlePopupShow() {
   align-items: center;
   justify-content: center;
   padding: 24rpx 0;
+}
+.tab-nav-slot {
+  align-self: stretch;
+  padding: 0 8px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
