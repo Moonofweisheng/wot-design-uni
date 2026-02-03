@@ -1028,3 +1028,32 @@ $-slide-verify-button-color: var(--wot-slide-verify-button-color, #666666) !defa
 $-slide-verify-button-size: var(--wot-slide-verify-button-size, 40px) !default; // 滑块尺寸
 $-slide-verify-track-width: var(--wot-slide-verify-track-width, 100%) !default; // 滑道宽度
 
+/* puzzle-captcha */
+$-puzzle-captcha-background: var(--wot-puzzle-captcha-background, $-color-white) !default; // 背景颜色
+$-puzzle-captcha-radius: var(--wot-puzzle-captcha-radius, 8px) !default; // 圆角大小
+$-puzzle-captcha-header-padding: var(--wot-puzzle-captcha-header-padding, 10px 12px) !default; // 顶部内边距
+$-puzzle-captcha-title-size: var(--wot-puzzle-captcha-title-size, $-fs-title) !default; // 标题文字大小
+$-puzzle-captcha-title-weight: var(--wot-puzzle-captcha-title-weight, $-fw-medium) !default; // 标题文字粗细
+$-puzzle-captcha-title-color: var(--wot-puzzle-captcha-title-color, $-color-title) !default; // 标题文字颜色
+$-puzzle-captcha-description-margin-top: var(--wot-puzzle-captcha-description-margin-top, 4px) !default; // 描述文字上外边距
+$-puzzle-captcha-description-size: var(--wot-puzzle-captcha-description-size, $-fs-content) !default; // 描述文字大小
+$-puzzle-captcha-description-color: var(--wot-puzzle-captcha-description-color, $-color-secondary) !default; // 描述文字颜色
+$-puzzle-captcha-action-size: var(--wot-puzzle-captcha-action-size, 18px) !default; // 操作图标大小
+$-puzzle-captcha-action-gap: var(--wot-puzzle-captcha-action-gap, 10px) !default; // 操作图标间距
+$-puzzle-captcha-main-margin: var(--wot-puzzle-captcha-main-margin, 0 12px) !default; // 主内容外边距
+$-puzzle-captcha-main-background: var(--wot-puzzle-captcha-main-background, $-color-gray-2) !default; // 主内容背景颜色
+$-puzzle-captcha-main-radius: var(--wot-puzzle-captcha-main-radius, 6px) !default; // 主内容圆角大小
+$-puzzle-captcha-mask-icon-size: var(--wot-puzzle-captcha-mask-icon-size, 30px) !default; // 状态蒙层图标大小
+$-puzzle-captcha-mask-icon-color: var(--wot-puzzle-captcha-mask-icon-color, $-color-gray-6) !default; // 状态蒙层图标颜色
+$-puzzle-captcha-mask-background: var(--wot-puzzle-captcha-mask-background, $-color-gray-2) !default; // 状态蒙层背景颜色
+$-puzzle-captcha-footer-padding: var(--wot-puzzle-captcha-footer-padding, 12px) !default; // 底部内边距
+$-puzzle-captcha-track-height: var(--wot-puzzle-captcha-track-height, 40px) !default; // 滑道高度
+$-puzzle-captcha-track-padding: var(--wot-puzzle-captcha-track-padding, 4px) !default; // 滑道内边距
+$-puzzle-captcha-track-background: var(--wot-puzzle-captcha-track-background, $-color-gray-2) !default; // 滑道背景颜色
+$-puzzle-captcha-track-radius: var(--wot-puzzle-captcha-track-radius, 6px) !default; // 滑道圆角大小
+$-puzzle-captcha-tracker-width: var(--wot-puzzle-captcha-tracker-width, 40px) !default; // 滑块宽度
+$-puzzle-captcha-tracker-color: var(--wot-puzzle-captcha-tracker-color, $-color-white) !default; // 滑块颜色
+$-puzzle-captcha-tracker-background: var(--wot-puzzle-captcha-tracker-background, $-color-theme) !default; // 滑块背景颜色
+$-puzzle-captcha-tracker-radius: var(--wot-puzzle-captcha-tracker-radius, 4px) !default; // 滑块圆角大小
+$-puzzle-captcha-tracker-disabled-opacity: var(--wot-puzzle-captcha-tracker-disabled-opacity, 0.6) !default; // 滑块禁用时透明度
+$-puzzle-captcha-tracker-icon-size: var(--wot-puzzle-captcha-tracker-icon-size, 18px) !default; // 滑块图标大小

@@ -139,5 +139,11 @@ export default {
   slideVerify: {
     text: '右にスライドして確認',
     successText: '検証成功'
+  },
+  puzzleCaptcha: {
+    title: 'セキュリティ確認',
+    placeholder: '下のスライダーをドラッグしてパズルを完成させてください',
+    successText: '確認成功',
+    failText: '確認に失敗しました。もう一度お試しください'
   }
 }

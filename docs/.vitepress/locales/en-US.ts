@@ -301,6 +301,10 @@ export default defineConfig({
               text: 'PickerView'
             },
             {
+              link: '/en-US/component/puzzle-captcha',
+              text: 'PuzzleCaptcha'
+            },
+            {
               link: '/en-US/component/radio',
               text: 'Radio'
             },
