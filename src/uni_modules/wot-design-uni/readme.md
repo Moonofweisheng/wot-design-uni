@@ -11,6 +11,10 @@
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Moonofweisheng/wot-design-uni?logo=github&color=%234d80f0&link=https%3A%2F%2Fgithub.com%2FMoonofweisheng%2Fwot-design-uni&style=flat-square">
  </a>
 
+<a href="https://atomgit.com/Moonofweisheng/wot-design-uni">
+  <img alt="Atomgit Repo stars" src="https://atomgit.com/Moonofweisheng/wot-design-uni/star/badge.svg">
+</a>
+
 
 <a href="https://github.com/Moonofweisheng/wot-design-uni">
   <img alt="GitHub" src="https://img.shields.io/codecov/c/github/Moonofweisheng/wot-design-uni?style=flat-square">
