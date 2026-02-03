@@ -1,0 +1,1 @@
+import{ap as s,aq as a,ar as r,a8 as t,C as e}from"./index-Bxqg77pZ.js";const n=n=>{const o=n?s(n)+".":"";return{translate:(s,...n)=>{const c=a.messages(),m=r(c,o+s);return t(m)?m(...n):e(m)?m:`${o}${s}`}}};export{n as u};
