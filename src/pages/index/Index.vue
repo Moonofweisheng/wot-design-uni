@@ -323,6 +323,10 @@ const list = computed(() => [
       {
         id: 'numberKeyboard',
         name: t('numberkeyboard-shu-zi-jian-pan')
+      },
+      {
+        id: 'dragSort',
+        name: t('dragSort')
       }
     ]
   },

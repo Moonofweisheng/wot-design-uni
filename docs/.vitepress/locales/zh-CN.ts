@@ -410,7 +410,11 @@ export default defineConfig({
             {
               link: '/component/number-keyboard',
               text: 'NumberKeyboard 数字键盘'
-            }
+            },
+            {
+      link: '/component/drag-sort',
+      text: 'DragSort 拖拽排序'
+    }
           ]
         },
         {

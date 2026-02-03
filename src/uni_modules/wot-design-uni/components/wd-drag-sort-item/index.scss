@@ -1,0 +1,16 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wd-drag-sort-item {
+  display: block;
+  box-sizing: border-box;
+  transition: opacity 0.1s;
+  /* 允许页面滚动 */
+  touch-action: pan-y;
+
+  &.is-dragging-active {
+    opacity: 1 !important;
+    /* 拖拽时禁止页面滚动 */
+    touch-action: none !important;
+  }
+}

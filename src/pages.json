@@ -1341,6 +1341,21 @@
             "navigationBarTitleText": "%tour-title%"
             // #endif
           }
+        },
+        {
+          "path": "dragSort/Index",
+          "name": "dragSort",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "DragSort 拖拽排序",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "DragSort 拖拽排序"
+            // #endif
+          }
         }
       ]
     }

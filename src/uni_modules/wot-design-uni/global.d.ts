@@ -96,6 +96,9 @@ declare module 'vue' {
     WdSignature: typeof import('./components/wd-signature/wd-signature.vue')['default']
     WdRootPortal: typeof import('./components/wd-root-portal/wd-root-portal.vue')['default']
     WdTour: typeof import('./components/wd-tour/wd-tour.vue')['default']
+    WdDragSort: typeof import('./components/wd-drag-sort/wd-drag-sort.vue')['default']
+    WdDragSortItem: typeof import('./components/wd-drag-sort-item/wd-drag-sort-item.vue')['default']
+    WdDragHandle: typeof import('./components/wd-drag-handle/wd-drag-handle.vue')['default']
   }
 }
 
