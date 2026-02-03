@@ -1,0 +1,25 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wd-drag-sort {
+  width: 100%;
+  position: relative;
+
+  &.is-dragging {
+    touch-action: none;
+  }
+
+  &__placeholder {
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 2rpx dashed #ddd;
+    box-sizing: border-box;
+    border-radius: 12rpx;
+    z-index: 0;
+    transition: left 0.3s, top 0.3s;
+  }
+}
+
+.renderjs-trigger {
+  display: none;
+}
+
