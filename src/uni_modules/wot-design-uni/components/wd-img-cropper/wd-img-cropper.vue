@@ -108,7 +108,7 @@ const { translate } = useTranslate('img-cropper')
 const imgAngle = ref<number>(0)
 // 是否开启动画
 const isAnimation = ref<boolean>(false)
-// #ifdef MP-ALIPAY || APP-PLUS || H5
+// #ifdef MP-ALIPAY || APP || H5
 // hack 避免钉钉小程序、支付宝小程序、app抛出相关异常
 const animation: any = null
 // #endif

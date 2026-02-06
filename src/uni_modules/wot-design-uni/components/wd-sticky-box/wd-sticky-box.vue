@@ -139,7 +139,7 @@ function handleRelativeTo(exposed: any, { boundingClientRect }: any) {
   // #endif
   const offset = exposed.stickyState.height + childOffsetTop
   let isAbsolute = boundingClientRect.bottom <= offset
-  // #ifdef H5 || APP-PLUS
+  // #ifdef H5 || APP
   isAbsolute = boundingClientRect.bottom < offset
   // #endif
   if (isAbsolute) {
