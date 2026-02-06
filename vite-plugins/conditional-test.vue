@@ -15,7 +15,7 @@
     <view class="weixin-or-h5">微信小程序或H5平台显示</view>
     <!-- #endif -->
 
-    <!-- #ifndef APP-PLUS -->
+    <!-- #ifndef APP -->
     <view class="not-app">非APP平台显示</view>
     <!-- #endif -->
   </view>
@@ -35,7 +35,7 @@ export default {
       platform: '微信小程序平台',
       // #endif
 
-      // #ifdef APP-PLUS
+      // #ifdef APP
       // eslint-disable-next-line no-dupe-keys, vue/no-dupe-keys
       platform: 'APP平台',
       // #endif
@@ -104,7 +104,7 @@ export default {
 }
 /* #endif */
 
-/* #ifndef APP-PLUS */
+/* #ifndef APP */
 .not-app {
   color: purple;
   font-size: 16px;
