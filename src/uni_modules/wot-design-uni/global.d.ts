@@ -99,6 +99,7 @@ declare module 'vue' {
     WdDragSort: typeof import('./components/wd-drag-sort/wd-drag-sort.vue')['default']
     WdDragSortItem: typeof import('./components/wd-drag-sort-item/wd-drag-sort-item.vue')['default']
     WdDragHandle: typeof import('./components/wd-drag-handle/wd-drag-handle.vue')['default']
+    WdQrCode: typeof import('./components/wd-qr-code/wd-qr-code.vue')['default']
   }
 }
 

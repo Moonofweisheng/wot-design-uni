@@ -632,6 +632,7 @@
   "ji-suan-ji-ke-xue-yu-ji-shu-zhuan-ye-9": "计算机科学与技术专业",
   "ji-yu-vue3ts-kai-fa-ti-gong-70-gao-zhi-liang-zu-jian-zhi-chi-an-hei-mo-shi-guo-ji-hua-he-zi-ding-yi-zhu-ti": "基于Vue3+TS开发，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。",
   "jiBenYongFa": "基本用法",
+  "jian-bian": "渐变",
   "jia-ge": "价格",
   "jia-ge-0": "价格",
   "jia-ge-1": "价格",
@@ -1643,5 +1644,15 @@
   "zuo-shang": "左上",
   "zuo-xia": "左下",
   "zuo-you-hua-dong": "左右滑动",
-  "zuo-zhong": "左中"
+  "zuo-zhong": "左中",
+  "qrcode-er-wei-ma": "QRCode 二维码",
+  "zi-ding-yi-chi-cun": "自定义尺寸",
+  "dai-logo": "带Logo",
+  "dao-chu-tu-pian": "导出图片",
+  "dian-zhuang": "点状",
+  "yuan-jiao": "圆角",
+  "ye-hua": "液化",
+  "dao-chu-jie-guo": "导出结果：",
+  "dao-chu-cheng-gong": "导出成功",
+  "dao-chu-shi-bai": "导出失败"
 }

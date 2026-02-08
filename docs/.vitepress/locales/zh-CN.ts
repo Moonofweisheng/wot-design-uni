@@ -492,6 +492,10 @@ export default defineConfig({
             {
               link: '/component/table',
               text: 'Table 表格'
+            },
+            {
+              link: '/component/qr-code',
+              text: 'QRCode 二维码'
             }
           ]
         },

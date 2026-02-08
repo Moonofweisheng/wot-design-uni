@@ -407,6 +407,10 @@ const list = computed(() => [
       {
         id: 'table',
         name: t('table-biao-ge')
+      },
+      {
+        id: 'qrCode',
+        name: t('qrcode-er-wei-ma')
       }
     ]
   }

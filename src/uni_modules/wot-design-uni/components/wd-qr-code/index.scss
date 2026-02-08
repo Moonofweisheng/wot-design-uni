@@ -1,0 +1,12 @@
+@import '../common/abstracts/variable';
+@import '../common/abstracts/mixin';
+
+.wd-qrcode {
+  position: relative;
+  display: inline-block;
+  
+  &__canvas {
+    width: 100%;
+    height: 100%;
+  }
+}

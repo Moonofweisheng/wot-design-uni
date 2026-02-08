@@ -1,4 +1,4 @@
-import { handleError, type ComponentPublicInstance, type ExtractPropTypes, type PropType } from 'vue'
+import { type ComponentPublicInstance, type ExtractPropTypes, type PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeRequiredProp, makeStringProp, numericProp } from '../common/props'
 import type { FormItemRule } from '../wd-form/types'
 

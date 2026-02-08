@@ -632,6 +632,7 @@
   "ji-suan-ji-ke-xue-yu-ji-shu-zhuan-ye-9": "Computer Science and Technology",
   "ji-yu-vue3ts-kai-fa-ti-gong-70-gao-zhi-liang-zu-jian-zhi-chi-an-hei-mo-shi-guo-ji-hua-he-zi-ding-yi-zhu-ti": "Developed based on Vue 3+TS, providing 70+high-quality components, supporting dark mode, internationalization, and custom themes.",
   "jiBenYongFa": "usage",
+  "jian-bian": "Gradient",
   "jia-ge": "price",
   "jia-ge-0": "price",
   "jia-ge-1": "price",
@@ -1643,5 +1644,15 @@
   "zuo-shang": "Top Left",
   "zuo-xia": "lower left",
   "zuo-you-hua-dong": "Slide left and right",
-  "zuo-zhong": "Middle Left"
+  "zuo-zhong": "Middle Left",
+  "qrcode-er-wei-ma": "QRCode",
+  "zi-ding-yi-chi-cun": "Custom Size",
+  "dai-logo": "With Logo",
+  "dao-chu-tu-pian": "Export Image",
+  "dian-zhuang": "Dots",
+  "yuan-jiao": "Rounded",
+  "ye-hua": "Liquid",
+  "dao-chu-jie-guo": "Export Result:",
+  "dao-chu-cheng-gong": "Export Success",
+  "dao-chu-shi-bai": "Export Failed"
 }
