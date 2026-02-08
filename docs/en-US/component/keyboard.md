@@ -130,6 +130,28 @@ const onInput = (value) => showToast(`${value}`)
 const onDelete = () => showToast('Delete')
 ```
 
+## License Plate Keyboard QWERTY Layout
+
+Use the `qwerty-layout` property to enable QWERTY layout for the license plate keyboard.
+
+```html
+<wd-cell title="License Plate Keyboard (QWERTY Layout)" is-link @click="showKeyBoard" />
+
+<wd-keyboard v-model:visible="visible" mode="car" qwerty-layout @input="onInput" @delete="onDelete"></wd-keyboard>
+```
+
+```ts
+const { show: showToast } = useToast()
+const visible = ref<boolean>(false)
+
+function showKeyBoard() {
+  visible.value = true
+}
+
+const onInput = (value) => showToast(`${value}`)
+const onDelete = () => showToast('Delete')
+```
+
 ## Keyboard with Title
 
 You can set the keyboard title through the `title` property.
@@ -300,6 +322,7 @@ const onDelete = () => showToast('Delete')
 | root-portal         | Whether to detach from the page, used to solve various fixed positioning issues                                       | `boolean`             | -                          | `false`    | 1.11.0  |
 | v-model:carLang     | License plate keyboard language mode, effective when mode=car                                                         | `string`              | `zh`, `en`                 | -          | 1.13.0  |
 | autoSwitchLang      | Whether to automatically switch license plate keyboard language, effective when mode=car and car-lang is uncontrolled | `boolean`             | -                          | `false`    | 1.13.0  |
+| qwerty-layout       | Whether to use QWERTY layout, effective when mode=car                                                                 | `boolean`             | -                          | `false`    | 1.13.0  |
 
 ## Slot
 
