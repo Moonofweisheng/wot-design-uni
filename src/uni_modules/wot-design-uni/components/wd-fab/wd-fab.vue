@@ -90,6 +90,12 @@ watch(
   () => props.position,
   () => initPosition()
 )
+watch(
+  () => props.draggable,
+  () => {
+    fabDirection.value = props.direction
+  }
+)
 
 const top = ref<number>(0)
 const left = ref<number>(0)
@@ -160,6 +166,14 @@ function initPosition() {
       top.value = maxTop
       left.value = centerX
       break
+    case 'custom': {
+      // 自定义初始化位置逻辑，使用offsetX和offsetY，并判断是否超过边界
+      const customTop = minTop + (props.offsetY || 0)
+      const customLeft = minLeft + (props.offsetX || 0)
+      top.value = Math.max(minTop, Math.min(customTop, maxTop))
+      left.value = Math.max(minLeft, Math.min(customLeft, maxLeft))
+      break
+    }
   }
 }
 
