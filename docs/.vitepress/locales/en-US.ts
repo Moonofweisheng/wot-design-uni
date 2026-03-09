@@ -108,6 +108,10 @@ export default defineConfig({
           link: '/en-US/guide/introduction',
         },
         {
+          text: 'AI Assistant',
+          link: '/en-US/guide/ai',
+        },
+        {
           text: 'Quick Start',
           link: '/en-US/guide/quick-use',
         },

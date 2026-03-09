@@ -2,12 +2,12 @@
 layout: home
 
 title: Wot UI
-titleTemplate: A uni-app component library based on Vue3+TS, providing 70+ high-quality components, supporting dark mode, internationalization, and custom themes.
+titleTemplate: A uni-app component library based on Vue3+TS, providing 80+ high-quality components, supporting dark mode, internationalization, and custom themes.
 
 hero:
   name: Wot UI
   text: A Beautiful and Lightweight uni-app Component Library
-  tagline: Built with Vue3+TS, providing 70+ high-quality components, supporting dark mode, internationalization, and custom themes.
+  tagline: Built with Vue3+TS, providing 80+ high-quality components, supporting dark mode, internationalization, and custom themes.
   image:
     src: /logo.png
     alt: Wot Design
@@ -22,8 +22,8 @@ hero:
       text: Components
       link: /en-US/component/button
     - theme: brand
-      text: 🥤Buy Me a Coffee
-      link: /en-US/reward/reward
+      text: 🤖 AI Programming
+      link: /en-US/guide/ai
     - theme: brand
       text: ✨Starter
       link: "https://starter.wot-ui.cn/"
@@ -36,7 +36,7 @@ features:
     title: Multi-Platform Support
     details: Supports WeChat Mini Program, Alipay Mini Program, DingTalk Mini Program, H5, APP, and more platforms.
   - icon: 🚀
-    title: 70+ Components
+    title: 80+ Components
     details: Over 70 high-quality components covering mainstream mobile scenarios.
   - icon: 💖
     title: Quick Start Template

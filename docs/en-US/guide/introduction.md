@@ -1,6 +1,6 @@
 # Introduction
 
-The `wot-design-uni` component library is built on `vue3` + `Typescript`, following the design specifications of `wot design`. It provides 70+ high-quality components, supports dark mode, internationalization, and custom themes, aiming to provide developers with unified UI interactions while improving development efficiency.
+The `wot-design-uni` component library is built on `vue3` + `Typescript`, following the design specifications of `wot design`. It provides 80+ high-quality components, supports dark mode, internationalization, and custom themes, aiming to provide developers with unified UI interactions while improving development efficiency.
 
 ## Quick Start
 
@@ -33,7 +33,7 @@ Please refer to the [Quick Start](/en-US/guide/quick-use.html) documentation.
 ## ✨ Features
 
 - 🎯 Multi-platform coverage, supporting WeChat Mini Program, Alipay Mini Program, DingTalk Mini Program, H5, APP, etc.
-- 🚀 70+ high-quality components covering mainstream mobile scenarios.
+- 🚀 80+ high-quality components covering mainstream mobile scenarios.
 - 💪 Built with Typescript, providing a robust component type system.
 - 🌍 Internationalization support with 15 built-in language packs.
 - 📖 Comprehensive documentation and component examples.

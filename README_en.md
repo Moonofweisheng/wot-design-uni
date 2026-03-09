@@ -51,7 +51,7 @@
 ## ✨ Features
 
 - 🎯 Multi-platform support: WeChat Mini Program, Alipay Mini Program, DingTalk Mini Program, H5, APP, etc.
-- 🚀 70+ high-quality components covering mainstream mobile scenarios.
+- 🚀 80+ high-quality components covering mainstream mobile scenarios.
 - 💪 Built with TypeScript, providing a robust component type system.
 - 🌍 Internationalization support with 15 built-in language packs.
 - 📖 Rich documentation and component examples.
