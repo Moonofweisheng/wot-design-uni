@@ -2,12 +2,12 @@
 layout: home
 
 title: Wot UI
-titleTemplate: 一个基于Vue3+TS开发的uni-app组件库，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。
+titleTemplate: 一个基于Vue3+TS开发的 AI 友好型 uni-app 组件库，提供 80+ 高质量组件，支持暗黑模式、国际化和自定义主题。
 
 hero:
   name: Wot UI
   text: "高颜值、轻量化的\nuni-app 组件库"
-  tagline: 基于Vue3+TS开发，提供70+高质量组件，支持暗黑模式、国际化和自定义主题。
+  tagline: 基于Vue3+TS开发，AI友好度 Max，提供 80+ 高质量组件，支持暗黑模式、国际化和自定义主题。
   image:
     src: /logo.png
     alt: Wot Design
@@ -22,8 +22,8 @@ hero:
       text: 组件列表
       link: /component/button
     - theme: brand
-      text: 🥤一杯咖啡
-      link: /reward/reward
+      text: 🤖 AI 编程
+      link: /guide/ai
     - theme: brand
       text: 🐟 关于作者
       link: "https://blog.wot-ui.cn/about"
@@ -33,8 +33,8 @@ features:
     title: 多平台覆盖
     details: 支持 微信小程序、支付宝小程序、钉钉小程序、H5、APP 等平台。
   - icon: 🚀
-    title: 70+ 组件
-    details: 超过 70 个高质量组件，覆盖移动端主流场景。
+    title: 80+ 组件
+    details: 超过 80 个高质量组件，覆盖移动端主流场景。
   - icon: 💖
     title: 提供快速上手模板
     details: Wot UI 提供了基于 vitesse-uni-app 深度整合 Wot UI 组件库的快速启动模板。
