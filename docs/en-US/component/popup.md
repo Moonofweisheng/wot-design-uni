@@ -124,6 +124,7 @@ H5 scroll penetration does not need to be handled, the component has enabled `lo
 |transition|Transition type|string|fade/fade-up/fade-down/fade-left/fade-right/slide-up/slide-down/slide-left/slide-right/zoom-in|-|-|
 |lock-scroll|Whether to lock background scroll|boolean|-|true|0.1.30|
 |root-portal|Whether to mount to root node|boolean|-|false|1.11.0|
+|backpress|handle back(only mp)|string|back/close/stop|back|$LOWEST_VERSION$|
 
 ## Events
 
@@ -137,6 +138,7 @@ H5 scroll penetration does not need to be handled, the component has enabled `lo
 |before-leave|Triggered before leave transition starts|-|-|
 |leave|Triggered when leave transition starts|-|-|
 |after-leave|Triggered when leave transition ends|-|-|
+|backpress|Triggered when back(only mp)|-|$LOWEST_VERSION$|
 
 ## External Style Classes
 

@@ -2,6 +2,7 @@ import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseProps, makeArrayProp, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 import type { ColumnItem, PickerViewColumnChange } from '../wd-picker-view/types'
 import type { FormItemRule } from '../wd-form/types'
+import type { BackpressType } from '../wd-popup/types'
 
 export const pickerProps = {
   ...baseProps,
@@ -161,7 +162,14 @@ export const pickerProps = {
   /**
    * 必填标记位置，可选值：before、after
    */
-  markerSide: makeStringProp<'before' | 'after'>('before')
+  markerSide: makeStringProp<'before' | 'after'>('before'),
+  /**
+   * 返回拦截（仅小程序）
+   * 类型：string
+   * 默认值：back
+   * 可选值：back / close / stop
+   */
+  backpress: makeStringProp<BackpressType>('back')
 }
 
 export type PickerProps = ExtractPropTypes<typeof pickerProps>

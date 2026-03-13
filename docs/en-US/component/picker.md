@@ -272,6 +272,7 @@ Enable `use-default-slot` and use the default slot to customize the picker trigg
 | immediate-change | Trigger picker-view change event immediately on touch release (supported in WeChat Mini Program and Alipay Mini Program from v1.2.25) | boolean | - | false | 1.2.25 |
 | clearable | Show clear button | boolean | - | false | 1.11.0 |
 | root-portal | Detach from page to resolve fixed positioning issues | boolean | - | false | 1.11.0 |
+|backpress|handle back(only mp)|string|back/close/stop|back|$LOWEST_VERSION$|
 
 ### FormItemRule Structure
 
@@ -290,6 +291,7 @@ Enable `use-default-slot` and use the default slot to customize the picker trigg
 | cancel     | Triggered on cancel button click | -                                                                                                        | -               |
 | open       | Triggered when picker popup opens | -                                                                                                        | -               |
 | clear      | Triggered on clear button click | -                                                                                                        | 1.11.0 |
+|backpress|Triggered when back(only mp)|-|$LOWEST_VERSION$|
 
 ## Methods
 

@@ -12,6 +12,19 @@ import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../c
 import type { TransitionName } from '../wd-transition/types'
 
 export type PopupType = 'center' | 'top' | 'right' | 'bottom' | 'left'
+export type BackpressType =
+  /**
+   * 返回上一页（即不做拦截，原本行为）
+   */
+  | 'back'
+  /**
+   * 关闭弹窗
+   */
+  | 'close'
+  /**
+   * 不关闭也不返回
+   */
+  | 'stop'
 
 export const popupProps = {
   ...baseProps,
@@ -100,5 +113,12 @@ export const popupProps = {
    * 类型：boolean
    * 默认值：false
    */
-  rootPortal: makeBooleanProp(false)
+  rootPortal: makeBooleanProp(false),
+  /**
+   * 返回拦截（仅小程序）
+   * 类型：string
+   * 默认值：back
+   * 可选值：back / close / stop
+   */
+  backpress: makeStringProp<BackpressType>('back')
 }

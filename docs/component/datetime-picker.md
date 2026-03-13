@@ -326,6 +326,7 @@ const displayFormatTabLabel = (items) => {
 | use-second | 是否显示秒选择，仅在 time 和 datetime 类型下生效 | boolean | - | false | 1.10.0 |
 | clearable | 显示清空按钮 | boolean | - | false | 1.11.0 |
 | root-portal | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | - | false | 1.11.0 |
+| backpress | 返回拦截（仅小程序） | string | back / close / stop | back | $LOWEST_VERSION$ |
 
 ### FormItemRule 数据结构
 
@@ -344,6 +345,7 @@ const displayFormatTabLabel = (items) => {
 | cancel | 点击左侧按钮触发 | - | - |
 | toggle | 在区域选择模式下，tab标签切换时触发 | 切换到当前picker选中的值 | - |
 | clear | 点击清空按钮触发 | - | 1.11.0 |
+| backpress | 返回触发（仅小程序） | - | $LOWEST_VERSION$ |
 
 ## Methods
 
