@@ -11,7 +11,7 @@
             <view
               class="wd-slider__button-wrapper wd-slider__button-wrapper--left"
               :style="sliderButtonStyle"
-              @touchstart="(event) => onSliderTouchStart(event, 0)"
+              @touchstart="onSliderTouchStart($event, 0)"
               @touchmove="onSliderTouchMove"
               @touchend="onSliderTouchEnd"
               @touchcancel="onSliderTouchEnd"
@@ -23,7 +23,7 @@
             <view
               class="wd-slider__button-wrapper wd-slider__button-wrapper--right"
               :style="sliderButtonStyle"
-              @touchstart="(event) => onSliderTouchStart(event, 1)"
+              @touchstart="onSliderTouchStart($event, 1)"
               @touchmove="onSliderTouchMove"
               @touchend="onSliderTouchEnd"
               @touchcancel="onSliderTouchEnd"
@@ -36,7 +36,7 @@
             v-else
             class="wd-slider__button-wrapper"
             :style="sliderButtonStyle"
-            @touchstart="(event) => onSliderTouchStart(event, 0)"
+            @touchstart="onSliderTouchStart($event, 0)"
             @touchmove="onSliderTouchMove"
             @touchend="onSliderTouchEnd"
             @touchcancel="onSliderTouchEnd"
