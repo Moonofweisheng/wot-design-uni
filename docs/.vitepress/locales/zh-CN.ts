@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import packageConfig from '../../../package.json'
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -101,6 +102,13 @@ export default defineConfig({
           { text: 'Uni Helper', link: 'https://uni-helper.js.org/' },
           { text: 'uni-ku', link: 'https://github.com/uni-ku' },
         ]
+      },
+      {
+        text: `${packageConfig.version}`,
+        items: [
+          { text: 'V2', link: 'https://v2.wot-ui.cn/' },
+          { text: '更新日志', link: '/guide/changelog' },
+        ],
       },
     ],
     sidebar: {

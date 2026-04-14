@@ -19,5 +19,5 @@ export const versionData = {
   "/en-US/component/tour": "1.14.0",
   "/en-US/component/use-config-provider": "1.14.0",
   "/en-US/guide/ai": "New",
-  "/guide/ai": "新增"
+  "/guide/ai": "New"
 }
