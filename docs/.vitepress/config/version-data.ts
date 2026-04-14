@@ -1,3 +1,12 @@
+/*
+ * @Author: weisheng
+ * @Date: 2026-04-14 16:06:16
+ * @LastEditTime: 2026-04-14 16:06:27
+ * @LastEditors: weisheng
+ * @Description: 
+ * @FilePath: /wot-design-uni/docs/.vitepress/config/version-data.ts
+ * 记得注释
+ */
 // 自动生成的版本数据
 // 此文件由插件自动生成，请勿手动修改
 // 如需修改版本信息，请在对应的 Markdown 文件 frontmatter 中修改
@@ -19,5 +28,5 @@ export const versionData = {
   "/en-US/component/tour": "1.14.0",
   "/en-US/component/use-config-provider": "1.14.0",
   "/en-US/guide/ai": "New",
-  "/guide/ai": "新增"
+  "/guide/ai": "New"
 }

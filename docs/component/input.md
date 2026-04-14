@@ -3,7 +3,7 @@
 用户可以在文本框里输入内容。
 
 ::: tip 提示
-`0.2.0`版本已将 `Input` 组件的 `textarea 文本域`功能迁移至 [Textarea](/component/textarea)组件，所有API保持一致。
+`0.2.0`版本已将 `Input` 组件的 `textarea 文本域`功能迁移至 [Textarea](/component/textarea)组件，所有 API 保持一致。
 :::
 
 ## 基本用法
@@ -12,13 +12,13 @@
 
 ```typescript
 const value = ref<string>('')
-function handleChange(event) {
+function handleInput(event) {
   console.log(event)
 }
 ```
 
 ```html
-<wd-input type="text" v-model="value" placeholder="请输入用户名" @change="handleChange" />
+<wd-input type="text" v-model="value" placeholder="请输入用户名" @input="handleInput" />
 ```
 
 ## 禁用
@@ -42,7 +42,7 @@ function handleChange(event) {
 设置 `clearable` 属性。
 
 ```html
-<wd-input v-model="value" clearable @change="handleChange"/>
+<wd-input v-model="value" clearable @input="handleInput" />
 ```
 
 ## 有值且聚焦时展示清空按钮
@@ -50,11 +50,11 @@ function handleChange(event) {
 设置 `clear-trigger` 属性，可以控制是否聚焦时才展示清空按钮。
 
 :::warning 注意
-支付宝小程序暂不支持 `clear-trigger` 属性，且某种情况下清空按钮无法点击，原因参考此[issue](https://github.com/ant-design/ant-design-mini/issues/1255)（希望可以早点解决，所以直接给蚂蚁的组件库提了个issue）。
+支付宝小程序暂不支持 `clear-trigger` 属性，且某种情况下清空按钮无法点击，原因参考此[issue](https://github.com/ant-design/ant-design-mini/issues/1255)（希望可以早点解决，所以直接给蚂蚁的组件库提了个 issue）。
 :::
 
 ```html
-<wd-input v-model="value" clear-trigger="focus" clearable @change="handleChange"/>
+<wd-input v-model="value" clear-trigger="focus" clearable @input="handleInput" />
 ```
 
 ## 点击清除按钮时不自动聚焦
@@ -70,19 +70,15 @@ function handleChange(event) {
 设置 `show-password` 属性。
 
 ```html
-<wd-input v-model="value" clearable show-password @change="handleChange"/>
+<wd-input v-model="value" clearable show-password @input="handleInput" />
 ```
 
-## 前后icon
+## 前后 icon
 
-设置前置icon `prefix-icon`，设置后置icon `suffix-icon`，icon 为 [icon](/component/icon) 章节中的图标，如果没有你需要的图标，则使用 `prefix`、`suffix` 插槽进行自定义插入。
+设置前置 icon `prefix-icon`，设置后置 icon `suffix-icon`，icon 为 [icon](/component/icon) 章节中的图标，如果没有你需要的图标，则使用 `prefix`、`suffix` 插槽进行自定义插入。
 
 ```html
-<wd-input
-  v-model="value"
-  prefix-icon="dong"
-  suffix-icon="list"
-  @change="handleChange"/>
+<wd-input v-model="value" prefix-icon="dong" suffix-icon="list" @input="handleInput" />
 ```
 
 ## 限制字数输入
@@ -90,10 +86,10 @@ function handleChange(event) {
 设置 `maxlength` 属性，如果要显示字数限制，设置 `show-word-limit` 属性。
 
 ```html
-<wd-input v-model="value" :maxlength="20" show-word-limit @change="handleChange"/>
+<wd-input v-model="value" :maxlength="20" show-word-limit @input="handleInput" />
 ```
 
-## 设置label标题
+## 设置 label 标题
 
 设置 `label` 标题，可以和 `cell-group` 组合使用，形成 `cell` 展示类型。可以通过 `label-width` 设置标题宽度，默认为 '33%'。
 
@@ -177,9 +173,9 @@ function handleChange(event) {
 
 ### InputMode 可选值
 
->新增于 uni-app 3.6.16+ inputmode是html规范后期更新的内容。各家小程序还未支持此属性。
+> 新增于 uni-app 3.6.16+ inputmode 是 html 规范后期更新的内容。各家小程序还未支持此属性。
 
-在符合条件的高版本webview里，uni-app的web和app-vue平台中可使用本属性，参见[inputmode](https://uniapp.dcloud.net.cn/component/input.html#inputmode)。
+在符合条件的高版本 webview 里，uni-app 的 web 和 app-vue 平台中可使用本属性，参见[inputmode](https://uniapp.dcloud.net.cn/component/input.html#inputmode)。
 
 | 值      | 说明                                                                                                                 |
 | ------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -187,7 +183,7 @@ function handleChange(event) {
 | text    | 使用用户本地区域设置的标准文本输入键盘。                                                                             |
 | decimal | 小数输入键盘，包含数字和分隔符（通常是“ . ”或者“ , ”），设备可能也可能不显示减号键。                                 |
 | numeric | 数字输入键盘，所需要的就是 0 到 9 的数字，设备可能也可能不显示减号键。                                               |
-| tel     | 电话输入键盘，包含 0 到 9 的数字、星号（*）和井号（#）键。表单输入里面的电话输入通常应该使用 <input type="tel"> 。   |
+| tel     | 电话输入键盘，包含 0 到 9 的数字、星号（\*）和井号（#）键。表单输入里面的电话输入通常应该使用 <input type="tel"> 。  |
 | search  | 为搜索输入优化的虚拟键盘，比如，返回键可能被重新标记为“搜索”，也可能还有其他的优化。                                 |
 | email   | 为邮件地址输入优化的虚拟键盘，通常包含"@"符号和其他优化。表单里面的邮件地址输入应该使用 <input type="email">。       |
 | url     | 为网址输入优化的虚拟键盘，比如，“/”键会更加明显、历史记录访问等。表单里面的网址输入通常应该使用 <input type="url">。 |
@@ -205,9 +201,9 @@ function handleChange(event) {
 
 | 事件名称             | 说明                             | 参数                                   | 最低版本 |
 | -------------------- | -------------------------------- | -------------------------------------- | -------- |
-| input                | 监听输入框input事件              | `{value, cursor, keyCode}`             | -        |
-| focus                | 监听输入框focus事件              | `{ value, height }`, height 为键盘高度 | -        |
-| blur                 | 监听输入框blur事件               | `{ value }`                            | -        |
+| input                | 监听输入框 input 事件            | `{value, cursor, keyCode}`             | -        |
+| focus                | 监听输入框 focus 事件            | `{ value, height }`, height 为键盘高度 | -        |
+| blur                 | 监听输入框 blur 事件             | `{ value }`                            | -        |
 | clear                | 监听输入框清空按钮事件           | -                                      | -        |
 | confirm              | 点击完成时， 触发 confirm 事件   | `{ value }`                            | -        |
 | keyboardheightchange | 键盘高度发生变化的时候触发此事件 | `{ height, duration }`                 | -        |
