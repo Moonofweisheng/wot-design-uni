@@ -47,7 +47,12 @@
         <view v-if="formatPanels && formatPanels.length">
           <view v-for="(panel, rowIndex) in formatPanels" :key="rowIndex" class="wd-action-sheet__panels">
             <view class="wd-action-sheet__panels-content">
-              <view v-for="(col, colIndex) in panel" :key="colIndex" class="wd-action-sheet__panel" @click="select(rowIndex, 'panels', colIndex)">
+              <view
+                v-for="(col, colIndex) in panel"
+                :key="colIndex"
+                class="wd-action-sheet__panel"
+                @click="select(rowIndex, 'panels', colIndex as number)"
+              >
                 <image class="wd-action-sheet__panel-img" :src="(col as any).iconUrl" />
                 <view class="wd-action-sheet__panel-title">{{ (col as any).title }}</view>
               </view>
