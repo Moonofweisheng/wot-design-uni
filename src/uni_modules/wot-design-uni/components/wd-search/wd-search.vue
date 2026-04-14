@@ -3,6 +3,7 @@
     <view class="wd-search__block" @click="handleClick">
       <slot name="prefix"></slot>
       <view class="wd-search__field">
+        <view v-if="disabled" class="wd-search__disabled-mask"></view>
         <view v-if="!placeholderLeft" :style="coverStyle" class="wd-search__cover" @click="closeCover">
           <wd-icon name="search" custom-class="wd-search__search-icon"></wd-icon>
           <text :class="`wd-search__placeholder-txt ${placeholderClass}`">{{ placeholder || translate('search') }}</text>
