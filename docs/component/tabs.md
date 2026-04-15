@@ -201,6 +201,41 @@ const tab = ref('Design')
 </wd-tabs>
 ```
 
+## 插槽演示
+
+可以通过 `nav-left` 和 `nav-right` 插槽，分别在标签导航栏的左侧和右侧添加自定义内容。
+
+```html
+<wd-tabs v-model="tab" sticky>
+  <template #nav-left>
+    <view class="tab-nav-slot">
+      <wd-icon name="filter" size="16px"></wd-icon>
+    </view>
+  </template>
+  <block v-for="item in 4" :key="item">
+    <wd-tab :title="`标签${item}`">
+      <view class="large">内容{{ item }}</view>
+    </wd-tab>
+  </block>
+  <template #nav-right>
+    <view class="tab-nav-slot">
+      <wd-icon name="add-circle1" size="16px"></wd-icon>
+    </view>
+  </template>
+</wd-tabs>
+```
+
+```scss
+.tab-nav-slot {
+  align-self: stretch;
+  padding: 0 8px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+```
+
 ---
 
 标签页在标签数大于等于 6 个时，可以滑动；当标签数大于等于 10 个时，将会显示导航地图，便于快速定位到某个标签。可以通过设置 `slidable-num` 修改可滑动的数量阈值；设置 `map-num` 修改显示导航地图的阈值。`slidable`设置为`always`时，所有的标签会向左侧收缩对齐，超出即可滑动。
@@ -299,6 +334,13 @@ function handlePopupShow() {
 | setActive       | 设置激活项，参数分别为：`value` 激活值，`init` 是否已初始化 ，`setScroll` 是否设置 scroll-view 滚动 | `(value: number \| string, init: boolean, setScroll: boolean) => void` | -        |
 | scrollIntoView  | 使选中项滚动到可视区域                                                                              | -                                                                      | -        |
 | updateLineStyle | 更新激活项边框线样式，参数`animation`用于是否开启动画，默认开启                                     | `(animation: boolean) => void`                                         | -        |
+
+## Tabs Slots
+| name   | 说明                 | 参数                    | 最低版本 |
+| ------ | -------------------- | ----------------------- | -------- |
+| nav-left | 标签栏左侧内容         | - | $LOWEST_VERSION$   |
+| nav-right | 标签栏右侧内容         | - | $LOWEST_VERSION$   |
+
 
 ## 外部样式类
 
