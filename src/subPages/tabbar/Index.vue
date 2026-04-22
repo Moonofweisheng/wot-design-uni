@@ -40,7 +40,7 @@
         <wd-tabbar-item :value="2" :title="$t('shou-ye')" icon="home"></wd-tabbar-item>
         <wd-tabbar-item :value="2" icon="cart" :title="$t('fen-lei')">
           <template #icon>
-            <wd-img round height="40rpx" width="40rpx" src="https://wot-ui.cn/assets/panda.jpg"></wd-img>
+            <wd-img round height="40rpx" width="40rpx" src="https://v1.wot-ui.cn/assets/panda.jpg"></wd-img>
           </template>
         </wd-tabbar-item>
         <wd-tabbar-item :value="3" :title="$t('wo-de')" icon="user"></wd-tabbar-item>

@@ -106,7 +106,7 @@ export default defineConfig({
       {
         text: `${packageConfig.version}`,
         items: [
-          { text: 'V2', link: 'https://v2.wot-ui.cn/' },
+          { text: 'V2', link: 'https://wot-ui.cn/' },
           { text: '更新日志', link: '/guide/changelog' },
         ],
       },

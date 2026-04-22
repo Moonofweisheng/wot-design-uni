@@ -156,7 +156,7 @@ import { useToast } from '../../uni_modules/wot-design-uni/components/wd-toast'
 
 const toast = useToast()
 
-const avatarURL = 'https://wot-ui.cn/assets/panda.jpg'
+const avatarURL = 'https://v1.wot-ui.cn/assets/panda.jpg'
 const sizes = ['large', 'medium', 'normal', 'small']
 const customColors = [
   { bgColor: '#DC143C', color: '#fff', text: 'W' },

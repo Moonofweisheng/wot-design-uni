@@ -108,7 +108,7 @@ export default {
             )
             // 用户点击确认后跳转
             // 保持当前路径，只替换域名
-            const newUrl = `https://wot-ui.cn${window.location.pathname}${window.location.search}${window.location.hash}`
+            const newUrl = `https://v1.wot-ui.cn${window.location.pathname}${window.location.search}${window.location.hash}`
             window.location.href = newUrl
           } catch {
             // 用户点击取消或关闭对话框，不做任何操作

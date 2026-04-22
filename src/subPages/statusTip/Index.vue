@@ -41,7 +41,7 @@
     </demo-block>
 
     <demo-block :title="$t('zi-ding-yi-tu-pian')">
-      <wd-status-tip image="https://wot-ui.cn/assets/panda.jpg" tip="查看我的头像" />
+      <wd-status-tip image="https://v1.wot-ui.cn/assets/panda.jpg" tip="查看我的头像" />
     </demo-block>
 
     <demo-block :title="$t('cha-cao-zi-ding-yi-tu-pian-nei-rong')">
@@ -65,7 +65,7 @@
   </page-wraper>
 </template>
 <script lang="ts" setup>
-const urlPrefix = 'https://wot-ui.cn/assets/'
+const urlPrefix = 'https://v1.wot-ui.cn/assets/'
 </script>
 <style lang="scss" scoped>
 .bottom-actions {

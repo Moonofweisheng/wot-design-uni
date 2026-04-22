@@ -13,8 +13,8 @@ Wot UI 是一个 AI 友好型的组件库，本指南旨在介绍如何让 VSCod
 
 我们提供 2 个 llms.txt 路由来帮助 AI 工具访问文档：
 
-- [llms.txt](https://wot-ui.cn/llms.txt) - 包含所有组件及其文档链接的结构化概览
-- [llms-full.txt](https://wot-ui.cn/llms-full.txt) - 提供包含实现细节和示例的完整文档
+- [llms.txt](https://v1.wot-ui.cn/llms.txt) - 包含所有组件及其文档链接的结构化概览
+- [llms-full.txt](https://v1.wot-ui.cn/llms-full.txt) - 提供包含实现细节和示例的完整文档
 
 ### 在 AI 工具中使用
 #### Cursor

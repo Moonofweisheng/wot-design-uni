@@ -11,7 +11,7 @@ version: 1.14.0
 头像支持三种类型：图片、文本、图标。
 
 ```typescript
-const avatarURL = 'https://wot-ui.cn/assets/panda.jpg'
+const avatarURL = 'https://v1.wot-ui.cn/assets/panda.jpg'
 ```
 
 ```html

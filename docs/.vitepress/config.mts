@@ -11,7 +11,7 @@ export default defineConfig({
     plugins: [
       llmstxt({
         ignoreFiles: ['reward/*', 'index.md', 'README.md', 'en-US/*.md', 'en-US/**/*.md', 'ads/*', 'guide/cases.md', 'guide/changelog.md', 'guide/join-group.md', 'guide/typography.md'],
-        domain: 'https://wot-ui.cn',
+        domain: 'https://v1.wot-ui.cn',
       }) as any,
       MarkdownTransform(),
       VersionBadgePlugin(),

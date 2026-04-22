@@ -11,7 +11,7 @@ Used to represent users or objects, supporting images, text, or icons.
 Avatar supports three types: image, text, and icon.
 
 ```typescript
-const avatarURL = 'https://wot-ui.cn/assets/panda.jpg'
+const avatarURL = 'https://v1.wot-ui.cn/assets/panda.jpg'
 ```
 
 ```html

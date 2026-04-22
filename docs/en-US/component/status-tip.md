@@ -49,7 +49,7 @@ Customize the image size through the `image-size` property.
 When you need to customize the image, you can pass any image URL in the `image` property.
 
 ```html
-<wd-status-tip image="https://wot-ui.cn/assets/panda.jpg" tip="View my avatar" />
+<wd-status-tip image="https://v1.wot-ui.cn/assets/panda.jpg" tip="View my avatar" />
 ```
 
 ## Custom Image Content

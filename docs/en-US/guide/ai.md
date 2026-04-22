@@ -13,8 +13,8 @@ Wot UI is an AI-friendly component library. This guide aims to introduce how to 
 
 We provide 2 llms.txt routes to help AI tools access documentation:
 
-- [llms.txt](https://wot-ui.cn/llms.txt) - A structured overview containing all components and their documentation links
-- [llms-full.txt](https://wot-ui.cn/llms-full.txt) - Full documentation including implementation details and examples
+- [llms.txt](https://v1.wot-ui.cn/llms.txt) - A structured overview containing all components and their documentation links
+- [llms-full.txt](https://v1.wot-ui.cn/llms-full.txt) - Full documentation including implementation details and examples
 
 ### Usage in AI Tools
 
