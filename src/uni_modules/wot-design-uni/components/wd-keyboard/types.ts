@@ -2,13 +2,15 @@ import type { PropType } from 'vue'
 import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../common/props'
 
 export type KeyboardMode = 'default' | 'custom' | 'car'
-export type KeyType = '' | 'delete' | 'extra' | 'close'
+export type KeyType = '' | 'delete' | 'extra' | 'close' | 'spacer'
 export type CarKeyboardLang = 'zh' | 'en'
 
 export interface Key {
   text?: number | string // key文本
   type?: KeyType // key的类型
   wider?: boolean // 是否占2个key的宽度
+  disabled?: boolean // 是否禁用
+  customStyle?: string // 自定义样式
 }
 
 export const keyboardProps = {
@@ -88,5 +90,9 @@ export const keyboardProps = {
   /**
    * 是否自动切换车牌键盘语言 当mode=car且carLang是非受控状态时生效
    */
-  autoSwitchLang: makeBooleanProp(false)
+  autoSwitchLang: makeBooleanProp(false),
+  /**
+   * 是否使用 QWERTY 布局 当mode=car时生效
+   */
+  qwertyLayout: makeBooleanProp(false)
 }

@@ -33,7 +33,16 @@
       <template v-if="mode === 'car'">
         <view class="wd-keyboard-car__body">
           <view class="wd-keyboard-car__keys">
-            <wd-key v-for="key in keys" :key="key.text" :text="key.text" :type="key.type" :wider="key.wider" @press="handlePress"></wd-key>
+            <wd-key
+              v-for="(key, index) in keys"
+              :key="index"
+              :text="key.text"
+              :type="key.type"
+              :wider="key.wider"
+              :customStyle="key.customStyle"
+              :disabled="key.disabled"
+              @press="handlePress"
+            ></wd-key>
           </view>
         </view>
       </template>
@@ -57,7 +66,7 @@ import wdPopup from '../wd-popup/wd-popup.vue'
 import WdKey from './key/index.vue'
 import { keyboardProps, type Key, type CarKeyboardLang } from './types'
 import type { NumberKeyType } from './key/types'
-import { CAR_KEYBOARD_AREAS, CAR_KEYBOARD_KEYS } from './constants'
+import { CAR_KEYBOARD_AREAS, CAR_KEYBOARD_KEYS, CAR_KEYBOARD_KEYS_OLD } from './constants'
 
 const props = defineProps(keyboardProps)
 const emit = defineEmits(['update:visible', 'input', 'close', 'delete', 'update:modelValue', 'update:carLang'])
@@ -145,18 +154,46 @@ function genCustomKeys(): Key[] {
 
 // 生成车牌键盘
 function genCarKeys(): Array<Key> {
-  const [keys, remainKeys] = splitCarKeys()
-  return [
-    ...keys,
-    { text: carKeyboardLang.value === 'zh' ? 'ABC' : '省份', type: 'extra', wider: true },
-    ...remainKeys,
-    { text: props.deleteText, type: 'delete', wider: true }
-  ]
-}
+  const isZh = carKeyboardLang.value === 'zh'
 
-function splitCarKeys(): Array<Array<Key>> {
-  const keys = carKeyboardLang.value === 'zh' ? CAR_KEYBOARD_AREAS.map((key) => ({ text: key })) : CAR_KEYBOARD_KEYS.map((key) => ({ text: key }))
-  return [keys.slice(0, 30), keys.slice(30)]
+  if (props.qwertyLayout) {
+    // QWERTY 布局逻辑
+    if (isZh) {
+      const keys = CAR_KEYBOARD_AREAS.map((key) => ({ text: key }))
+      return [
+        ...keys.slice(0, 30),
+        { text: 'ABC', type: 'extra', wider: true },
+        ...keys.slice(30),
+        { text: props.deleteText, type: 'delete', wider: true }
+      ]
+    } else {
+      const keys = CAR_KEYBOARD_KEYS.map((key) => ({ text: key, disabled: key === 'I' || key === 'O' }))
+      const row1 = keys.slice(0, 10)
+      const row2 = keys.slice(10, 20)
+      const row3 = keys.slice(20, 29)
+      const row4 = keys.slice(29)
+
+      return [
+        ...row1,
+        ...row2,
+        { type: 'spacer', customStyle: 'flex-basis: 5%' },
+        ...row3,
+        { type: 'spacer', customStyle: 'flex-basis: 5%' },
+        { text: '省份', type: 'extra', customStyle: 'flex-basis: 15%' },
+        ...row4,
+        { text: props.deleteText, type: 'delete', customStyle: 'flex-basis: 15%' }
+      ]
+    }
+  } else {
+    // 旧版布局逻辑
+    const keys = isZh ? CAR_KEYBOARD_AREAS.map((key) => ({ text: key })) : CAR_KEYBOARD_KEYS_OLD.map((key) => ({ text: key }))
+    return [
+      ...keys.slice(0, 30),
+      { text: isZh ? 'ABC' : '省份', type: 'extra', wider: true },
+      ...keys.slice(30),
+      { text: props.deleteText, type: 'delete', wider: true }
+    ]
+  }
 }
 
 const handleClose = () => {
