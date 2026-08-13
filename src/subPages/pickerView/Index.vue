@@ -16,6 +16,10 @@
       <wd-picker-view v-model="value3" :columns="columns3" loading />
     </demo-block>
 
+    <demo-block :title="$t('tu-biao-yong-fa-shu-zhi-value7') + value7">
+      <wd-picker-view v-model="value7" :columns="columns7" />
+    </demo-block>
+
     <demo-block :title="$t('duo-lie-shu-zhi-value4') + `[${value4}]`">
       <wd-picker-view v-model="value4" :columns="columns4" />
     </demo-block>
@@ -117,6 +121,16 @@ const columns4 = ref([
 
 const value5 = ref(['110000', '110100', '110102'])
 const columns5 = ref([district[0], district[district[0][0].value], district[district[district[0][0].value][0].value]])
+
+const value7 = ref<string>(t('xuanXiang_1-0'))
+const columns7 = ref([
+  { label: t('xuanXiang_1-0'), icon: 'apple' },
+  { label: t('xuanXiang_2-0'), icon: 'windows' },
+  {
+    label: t('xuanXiang_3-0'),
+    icon: 'android'
+  }
+])
 
 const onChangeDistrict: PickerViewColumnChange = (picker, value, columnIndex, resolve) => {
   const item = (value as Record<string, any>[])[columnIndex]
