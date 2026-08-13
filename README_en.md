@@ -114,6 +114,31 @@ Thanks to all the [developers](https://github.com/Moonofweisheng/wot-design-uni/
   <img src="https://contrib.rocks/image?repo=Moonofweisheng/wot-design-uni" />
 </a>
 
+## ❤️ Sponsors
+
+Thank you to our sponsors for supporting the Wot UI open-source project!
+
+> [Want to showcase your brand here?](https://v1.wot-ui.cn/reward/sponsor.html)
+
+<table>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://license.ruoyi.plus/flm/s/100003">
+        <img src="https://sponsor.wot-ui.cn/assets/sponsor/ruoyi-uniapp.png" alt="AI-Native Java Full-Stack Framework" width="180">
+      </a>
+    </td>
+    <td><a href="https://license.ruoyi.plus/flm/s/100003"><strong>AI-Native Java Full-Stack Framework</strong></a></td>
+  </tr>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://torchai.ai/">
+        <img src="https://sponsor.wot-ui.cn/assets/sponsor/TorchAI.png" alt="TorchAI" width="180">
+      </a>
+    </td>
+    <td><a href="https://torchai.ai/"><strong>TorchAI</strong></a> — A fast and reliable unified LLM API gateway for developers and teams.</td>
+  </tr>
+</table>
+
 ## Donate
 
 Developing a UI component library is time-consuming work, especially when it needs to be adapted for multiple platforms. The Wot UI team often works late into the night...

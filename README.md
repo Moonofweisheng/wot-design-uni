@@ -117,6 +117,31 @@
   <img src="https://contrib.rocks/image?repo=Moonofweisheng/wot-design-uni" />
 </a>
 
+## ❤️ 赞助商
+
+感谢赞助商对 Wot UI 开源项目的支持！
+
+> [想在这里展示您的品牌？](https://v1.wot-ui.cn/reward/sponsor.html)
+
+<table>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://license.ruoyi.plus/flm/s/100003">
+        <img src="https://sponsor.wot-ui.cn/assets/sponsor/ruoyi-uniapp.png" alt="AI原生架构 Java全栈框架" width="180">
+      </a>
+    </td>
+    <td><a href="https://license.ruoyi.plus/flm/s/100003"><strong>AI原生架构 Java全栈框架</strong></a></td>
+  </tr>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://torchai.ai/">
+        <img src="https://sponsor.wot-ui.cn/assets/sponsor/TorchAI.png" alt="TorchAI" width="180">
+      </a>
+    </td>
+    <td><a href="https://torchai.ai/"><strong>TorchAI</strong></a> — 面向开发者与团队的高速、稳定大模型统一 API 网关。</td>
+  </tr>
+</table>
+
 ## 捐赠本项目
 
 开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。为此 Wot UI 经常肝到深夜 ……  
