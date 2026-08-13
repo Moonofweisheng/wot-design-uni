@@ -59,7 +59,7 @@
       </view>
       <!-- 上传状态为上传中时不展示移除按钮 -->
       <wd-icon
-        v-if="file[props.statusKey] !== 'loading' && !disabled"
+        v-if="file[props.statusKey] !== 'loading' && !disabled && !file?.hideRemoveIcon"
         name="error-fill"
         custom-class="wd-upload__close"
         @click="removeFile(index)"
@@ -344,7 +344,9 @@ function initFile(file: ChooseFile, currentIndex?: number) {
     [statusKey]: 'pending',
     size: file.size || 0,
     url: file.path,
-    percent: 0
+    percent: 0,
+    // 是否隐藏删除按钮 默认展示
+    hideRemoveIcon: false
   }
   if (typeof currentIndex === 'number') {
     uploadFiles.value.splice(currentIndex, 1, initState)
@@ -353,6 +355,8 @@ function initFile(file: ChooseFile, currentIndex?: number) {
   }
   if (props.autoUpload) {
     startUploadFiles()
+  } else {
+    emitFileList()
   }
 }
 
