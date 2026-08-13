@@ -2,37 +2,63 @@ import { vi } from 'vitest'
 import { config } from '@vue/test-utils'
 import './suppress-warnings'
 
+const systemInfo = {
+  brand: 'devtools',
+  model: 'iPhone',
+  pixelRatio: 2,
+  screenWidth: 375,
+  screenHeight: 800,
+  windowWidth: 375,
+  windowHeight: 667,
+  windowTop: 0,
+  statusBarHeight: 20,
+  language: 'zh-CN',
+  version: '1.0.0',
+  platform: 'ios',
+  safeArea: {
+    bottom: 780,
+    height: 667,
+    left: 0,
+    right: 375,
+    top: 20,
+    width: 375
+  },
+  safeAreaInsets: {
+    bottom: 20,
+    left: 0,
+    right: 0,
+    top: 20
+  },
+  theme: 'light'
+}
+
 // 全局设置 uni 相关 API 的 mock
 vi.stubGlobal('uni', {
   // 设置 getSystemInfoSync 方法
-  getSystemInfoSync: vi.fn().mockReturnValue({
-    brand: 'devtools',
-    model: 'iPhone',
-    pixelRatio: 2,
-    screenWidth: 375,
-    screenHeight: 800,
-    windowWidth: 375,
-    windowHeight: 667,
-    windowTop: 0,
-    statusBarHeight: 20,
-    language: 'zh-CN',
-    version: '1.0.0',
-    platform: 'ios',
-    safeArea: {
-      bottom: 780,
-      height: 667,
-      left: 0,
-      right: 375,
-      top: 20,
-      width: 375
-    },
-    safeAreaInsets: {
-      bottom: 20,
-      left: 0,
-      right: 0,
-      top: 20
-    },
-    theme: 'light'
+  getSystemInfoSync: vi.fn().mockReturnValue(systemInfo),
+  // 设置 getDeviceInfo 方法
+  getDeviceInfo: vi.fn().mockReturnValue({
+    brand: systemInfo.brand,
+    model: systemInfo.model,
+    pixelRatio: systemInfo.pixelRatio,
+    platform: systemInfo.platform
+  }),
+  // 设置 getWindowInfo 方法
+  getWindowInfo: vi.fn().mockReturnValue({
+    screenWidth: systemInfo.screenWidth,
+    screenHeight: systemInfo.screenHeight,
+    windowWidth: systemInfo.windowWidth,
+    windowHeight: systemInfo.windowHeight,
+    windowTop: systemInfo.windowTop,
+    statusBarHeight: systemInfo.statusBarHeight,
+    safeArea: systemInfo.safeArea,
+    safeAreaInsets: systemInfo.safeAreaInsets
+  }),
+  // 设置 getAppBaseInfo 方法
+  getAppBaseInfo: vi.fn().mockReturnValue({
+    language: systemInfo.language,
+    version: systemInfo.version,
+    theme: systemInfo.theme
   }),
   // 模拟 Canvas 相关 API
   createCanvasContext: vi.fn().mockReturnValue({
@@ -40,10 +66,12 @@ vi.stubGlobal('uni', {
     setStrokeStyle: vi.fn(),
     setLineWidth: vi.fn(),
     setLineCap: vi.fn(),
+    setShadow: vi.fn(),
     beginPath: vi.fn(),
     arc: vi.fn(),
     stroke: vi.fn(),
     fill: vi.fn(),
+    clip: vi.fn(),
     clearRect: vi.fn(),
     draw: vi.fn((_, callback) => {
       callback && callback()
@@ -52,20 +80,25 @@ vi.stubGlobal('uni', {
       addColorStop: vi.fn()
     }),
     scale: vi.fn(),
+    rect: vi.fn(),
     fillRect: vi.fn(),
     moveTo: vi.fn(),
     lineTo: vi.fn(),
+    quadraticCurveTo: vi.fn(),
     closePath: vi.fn(),
     translate: vi.fn(),
     rotate: vi.fn(),
     drawImage: vi.fn(),
-    restore: vi.fn()
+    restore: vi.fn(),
+    save: vi.fn()
   }),
   // 模拟 Canvas 导出图片 API
   canvasToTempFilePath: vi.fn().mockImplementation(({ success }) => {
-    success?.({
+    const result = {
       tempFilePath: 'cropped-image.jpg'
-    })
+    }
+    success && success(result)
+    return Promise.resolve(result)
   }),
   // 模拟 SelectorQuery 相关 API
   createSelectorQuery: vi.fn().mockImplementation(() => {

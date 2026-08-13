@@ -92,5 +92,11 @@ export default {
   slideVerify: {
     text: 'Vuốt sang phải để xác minh',
     successText: 'Xác minh thành công'
+  },
+  puzzleCaptcha: {
+    title: 'Xác minh bảo mật',
+    placeholder: 'Kéo thanh trượt bên dưới để hoàn thành trò ghép hình',
+    successText: 'Xác minh thành công',
+    failText: 'Xác minh thất bại, vui lòng thử lại'
   }
 }

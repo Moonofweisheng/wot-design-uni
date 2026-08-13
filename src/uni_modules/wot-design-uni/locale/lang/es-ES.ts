@@ -139,5 +139,11 @@ export default {
   slideVerify: {
     text: 'Desliza a la derecha para verificar',
     successText: 'Verificación exitosa'
+  },
+  puzzleCaptcha: {
+    title: 'Verificación de seguridad',
+    placeholder: 'Arrastra el control deslizante abajo para completar el puzzle',
+    successText: 'Verificación exitosa',
+    failText: 'Verificación fallida, por favor inténtalo de nuevo'
   }
 }
