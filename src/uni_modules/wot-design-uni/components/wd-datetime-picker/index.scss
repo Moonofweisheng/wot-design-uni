@@ -89,6 +89,7 @@
   }
 
   @include e(wraper) {
+    position: relative;
     padding-bottom: var(--window-bottom);
   }
 
@@ -152,9 +153,9 @@
   }
 
   @include e(hidden) {
+    position: absolute;
     visibility: hidden;
-    overflow: hidden;
-    height: 0;
+    pointer-events: none;
   }
 
   @include e(show) {
