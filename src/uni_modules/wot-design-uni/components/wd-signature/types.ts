@@ -77,6 +77,14 @@ export const signatureProps = {
     default: 1
   },
   /**
+   * 在横屏的模式下保存图片的方向
+   * ps:签名横向的时候
+   */
+  angle: {
+    type: Number,
+    default: 0
+  },
+  /**
    * 是否禁用签名板
    * 类型：boolean
    * 默认值：false
