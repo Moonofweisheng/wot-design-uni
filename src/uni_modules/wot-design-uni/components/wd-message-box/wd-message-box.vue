@@ -12,6 +12,9 @@
       :root-portal="rootPortal"
     >
       <view :class="rootClass">
+        <view class="wd-message-box__close" v-if="messageState.showClose" @click="toggleModal('close')">
+          <wd-icon name="close" size="14px"></wd-icon>
+        </view>
         <view :class="bodyClass">
           <view v-if="messageState.title" class="wd-message-box__title">
             {{ messageState.title }}
@@ -96,7 +99,8 @@ const messageState = reactive<MessageOptionsWithCallBack>({
   inputError: '', // 输入框错误提示文案
   showErr: false, // 是否显示错误提示
   zIndex: 99, // 弹窗层级
-  lazyRender: true // 弹层内容懒渲染
+  lazyRender: true, // 弹层内容懒渲染
+  showClose: false // 是否展示关闭按钮
 })
 
 /**
@@ -155,7 +159,7 @@ watch(
  * 点击操作
  * @param action
  */
-function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
+function toggleModal(action: 'confirm' | 'cancel' | 'modal' | 'close') {
   if (action === 'modal' && !messageState.closeOnClickModal) {
     return
   }
@@ -185,6 +189,11 @@ function toggleModal(action: 'confirm' | 'cancel' | 'modal') {
     case 'cancel':
       handleCancel({
         action: action
+      })
+      break
+    case 'close':
+      handleCancel({
+        action: 'close'
       })
       break
     default:
@@ -282,6 +291,7 @@ function reset(option: MessageOptionsWithCallBack) {
     messageState.lazyRender = option.lazyRender
     messageState.confirmButtonProps = option.confirmButtonProps
     messageState.cancelButtonProps = option.cancelButtonProps
+    messageState.showClose = isDef(option.showClose) ? option.showClose : false
   }
 }
 </script>

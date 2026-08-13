@@ -43,6 +43,25 @@ function alert() {
 }
 ```
 
+显示关闭按钮的 alert 弹框。
+
+```html
+<wd-message-box />
+<wd-button @click="showClose">showClose</wd-button>
+```
+
+```typescript
+import { useMessage } from '@/uni_modules/wot-design-uni'
+const message = useMessage()
+
+function showClose() {
+  message.alert({
+    title: '显示关闭按钮',
+    showClose: true
+  })
+}
+```
+
 如果内容文案过长，弹框高度不再增加，而是展示滚动条。
 
 ```html
@@ -259,6 +278,7 @@ MessageBox.prompt(options)
 | title                | 标题                                                                            | string          | -                        | -                | -                |
 | msg                  | 消息文案                                                                        | string          | -                        | -                | -                |
 | type                 | 弹框类型                                                                        | string          | alert / confirm / prompt | alert            | -                |
+| showClose            | 是否展示关闭按钮                                                                | boolean         | -                        | false            | -                |
 | closeOnClickModal    | 是否支持点击蒙层进行关闭，点击蒙层回调传入的 action 为'modal'                   | boolean         | -                        | true             | -                |
 | inputType            | 当 type 为 prompt 时，输入框类型                                                | string          | -                        | text             | -                |
 | inputValue           | 当 type 为 prompt 时，输入框初始值                                              | string / number | -                        | -                | -                |
