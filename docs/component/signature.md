@@ -457,6 +457,7 @@ onMounted(() => {
 | confirm-text | 确认按钮的文本 | string | - | - |
 | file-type | 导出图片类型 | string | png | - |
 | quality | 导出图片质量(0-1) | number | 1 | - |
+| angle | 导出图片旋转角度 | number | 0 | - |
 | export-scale | 导出图片的缩放比例 | number | 1 | - |
 | disabled | 是否禁用签名板 | boolean | false | - |
 | background-color | 画板的背景色 | string | - | - |
