@@ -1661,5 +1661,19 @@
   "zuo-shang": "左上",
   "zuo-xia": "左下",
   "zuo-you-hua-dong": "左右滑动",
-  "zuo-zhong": "左中"
+  "zuo-zhong": "左中",
+  "week-date-title": "WeekDate 周日期选择器组件",
+  "week-date-zhou-ri-qi-xuan-ze": "WeekDate 周日期选择",
+  "qi-shi-zhou-qi-zhou-ri": "起始周期（周日）",
+  "week-date-xing-zhuang": "WeekDate 形状",
+  "jin-yong-ri-qi": "禁用日期",
+  "jin-yong-zhi-qian-de-ri-qi": "禁用之前的日期",
+  "jin-yong-zhi-hou-de-ri-qi": "禁用之后的日期",
+  "jin-yong-xing-qi-san-he-xing-qi-wu": "禁用星期三和星期五",
+  "xuan-ze-hui-diao": "选择回调",
+  "qie-huan-zhou-shi-jian": "切换周事件",
+  "qie-huan-zhou-ri-qi-gen-sui": "切换周日期跟随",
+  "zi-ding-yi-tu-biao-cha-zhi": "自定义图标（插槽）",
+  "qie-huan-ri-qi": "切换日期：",
+  "lei-xing": "类型"
 }
