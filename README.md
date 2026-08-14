@@ -174,4 +174,4 @@
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源。
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Moonofweisheng/wot-design-uni&type=Date)](https://star-history.com/#Moonofweisheng/wot-design-uni&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=Moonofweisheng/wot-design-uni&type=Date)](https://star-history.dera.page/#Moonofweisheng/wot-design-uni&Date)
