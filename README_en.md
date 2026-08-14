@@ -168,4 +168,4 @@ After donating, your nickname and message will be displayed on the [donor list](
 
 This project is licensed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License). Feel free to enjoy and participate in open source.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Moonofweisheng/wot-design-uni&type=Date)](https://star-history.com/#Moonofweisheng/wot-design-uni&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=Moonofweisheng/wot-design-uni&type=Date)](https://star-history.dera.page/#Moonofweisheng/wot-design-uni&Date)
