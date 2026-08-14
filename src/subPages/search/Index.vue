@@ -16,6 +16,7 @@
 
       <demo-block :title="$t('jin-yong-qie-yin-cang-qu-xiao-an-niu')" transparent>
         <wd-search disabled hide-cancel @click="handleDisabledClick" />
+        <wd-search placeholder-left disabled hide-cancel @click="handleDisabledClick" />
       </demo-block>
 
       <view style="margin: 15px 0; color: #666">
