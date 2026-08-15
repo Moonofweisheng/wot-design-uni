@@ -3,7 +3,16 @@ import { baseProps, makeBooleanProp, makeNumberProp, makeStringProp } from '../c
 import type { PropType } from 'vue'
 
 export type FabType = 'primary' | 'success' | 'info' | 'warning' | 'error' | 'default'
-export type FabPosition = 'left-top' | 'right-top' | 'left-bottom' | 'right-bottom' | 'left-center' | 'right-center' | 'top-center' | 'bottom-center'
+export type FabPosition =
+  | 'left-top'
+  | 'right-top'
+  | 'left-bottom'
+  | 'right-bottom'
+  | 'left-center'
+  | 'right-center'
+  | 'top-center'
+  | 'bottom-center'
+  | 'custom'
 export type FabDirection = 'top' | 'right' | 'bottom' | 'left'
 export type FabGap = Partial<Record<FabDirection, number>>
 export const fabProps = {
@@ -51,7 +60,15 @@ export const fabProps = {
   /**
    * 用于控制点击时是否展开菜单
    */
-  expandable: makeBooleanProp(true)
+  expandable: makeBooleanProp(true),
+  /**
+   * 悬浮按钮的x偏移量，在position为custom时作为初始x位置，在展开时作为展开方向的x偏移量
+   */
+  offsetX: makeNumberProp(0),
+  /**
+   * 悬浮按钮的y轴偏移量，在position为custom时作为初始y位置，在展开时作为展开方向的y偏移量
+   */
+  offsetY: makeNumberProp(0)
 }
 
 export type FabProps = ExtractPropTypes<typeof fabProps>
