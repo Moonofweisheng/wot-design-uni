@@ -46,7 +46,7 @@ const configProviderStyle = computed(() => {
 })
 </script>
 
-<!-- #ifdef APP-PLUS -->
+<!-- #ifdef APP -->
 <script module="render" lang="renderjs">
 export default {
   mounted() {

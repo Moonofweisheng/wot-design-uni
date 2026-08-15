@@ -100,7 +100,7 @@ watch(
 
 onMounted(() => {
   startTransition()
-  // #ifdef APP-PLUS
+  // #ifdef APP
   const pages = getCurrentPages()
   const currentPage = pages[pages.length - 1]
   const currentWebview = currentPage.$getAppWebview!()

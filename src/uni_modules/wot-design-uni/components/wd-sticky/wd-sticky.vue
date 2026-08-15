@@ -150,7 +150,7 @@ function handleRelativeTo({ boundingClientRect }: any) {
   }
 
   let isStycky = boundingClientRect.top <= innerOffsetTop.value
-  // #ifdef H5 || APP-PLUS
+  // #ifdef H5 || APP
   isStycky = boundingClientRect.top < innerOffsetTop.value
   // #endif
 
