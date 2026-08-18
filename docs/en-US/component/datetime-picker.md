@@ -320,6 +320,7 @@ const displayFormatTabLabel = (items) => {
 | use-second | Whether to display the second selection, only effective for time and datetime types | boolean | - | false | 1.10.0 |
 | clearable | Show clear button | boolean | - | false | 1.11.0 |
 | root-portal | Whether to detach from the page, used to solve various fixed positioning issues | boolean | - | false | 1.11.0 |
+|backpress|handle back(only mp)|string|back/close/stop|back|$LOWEST_VERSION$|
 
 ### FormItemRule Data Structure
 
@@ -338,6 +339,7 @@ const displayFormatTabLabel = (items) => {
 | cancel | Triggered when clicking left button | - | - |
 | toggle | In range selection mode, triggered when switching tab labels | Currently selected value of the switched picker | - |
 | clear | Triggered when clicking clear button | - | 1.11.0 |
+|backpress|Triggered when back(only mp)|-|$LOWEST_VERSION$|
 
 ## Methods
 

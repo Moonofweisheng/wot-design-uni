@@ -122,6 +122,7 @@ h5 滚动穿透不需要处理，组件已默认开启 `lock-scroll`。
 | transition | 动画类型，参见 wd-transition 组件的name | string | fade / fade-up / fade-down / fade-left / fade-right / slide-up / slide-down / slide-left / slide-right / zoom-in | - | - |
 | lock-scroll | 是否锁定背景滚动，锁定时蒙层里的内容也将无法滚动 | boolean | - | true | 0.1.30 |
 | root-portal | 是否从页面中脱离出来，用于解决各种 fixed 失效问题 | boolean | - | false | 1.11.0 |
+| backpress | 返回拦截（仅小程序） | string | back / close / stop | back | $LOWEST_VERSION$ |
 
 ## Events
 
@@ -135,6 +136,7 @@ h5 滚动穿透不需要处理，组件已默认开启 `lock-scroll`。
 | before-leave | 离开前触发 | - | - |
 | leave | 离开时触发 | - | - |
 | after-leave | 离开后触发| - | - |
+| backpress | 返回触发（仅小程序） | - | $LOWEST_VERSION$ |
 
 ## 外部样式类
 
