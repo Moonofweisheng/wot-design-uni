@@ -89,7 +89,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch, useSlots, type Slots } from 'vue'
+import { computed, ref, watch, useSlots, type Slots, nextTick } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
 import { isDef, objToStyle, pause, isEqual } from '../common/util'
 import { useCell } from '../composables/useCell'
@@ -272,6 +272,15 @@ function handleFocus({ detail }: any) {
 function handleInput({ detail }: any) {
   emit('update:modelValue', inputValue.value)
   emit('input', detail)
+
+  // 等待父组件处理完毕
+  nextTick(() => {
+    // 检查父组件是否修改了值（例如限制小数位、格式化等）
+    const newVal = isDef(props.modelValue) ? String(props.modelValue) : ''
+    if (newVal !== inputValue.value) {
+      inputValue.value = newVal
+    }
+  })
 }
 function handleKeyboardheightchange({ detail }: any) {
   emit('keyboardheightchange', detail)
