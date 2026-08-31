@@ -77,6 +77,14 @@ export type CalendarViewProps = ExtractPropTypes<typeof calendarViewProps>
 export type CalendarDayType = '' | 'start' | 'middle' | 'end' | 'selected' | 'same' | 'current' | 'multiple-middle' | 'multiple-selected'
 
 export type CalendarDayItem = {
+  meta?: {
+    [k: string]: any
+  } | null
+  clickAble?: boolean
+  color?: string
+  customStyle?: string
+  customDayClass?: string
+  customTextClass?: string
   date: number
   text?: number | string
   topInfo?: string
