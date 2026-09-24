@@ -190,7 +190,7 @@ watch(
 
 // 是否展示清除按钮
 const showClear = computed(() => {
-  return props.clearable && !props.disabled && !props.readonly && showValue.value.length > 0
+  return props.clearable && !props.disabled && !props.readonly && showValue.value?.length > 0
 })
 
 // 是否展示箭头
