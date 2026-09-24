@@ -52,6 +52,8 @@ export type UploadFileItem = {
   percent?: number
   // 后端返回的内容，可能是对象，也可能是字符串
   response?: string | Record<string, any>
+  // 单独控制是否显示删除按钮true不显示
+  hideRemoveIcon?: boolean
 }
 
 export interface ChooseFile {

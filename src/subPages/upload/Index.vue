@@ -113,6 +113,10 @@
       <!-- #endif -->
     </demo-block>
     <!-- #endif -->
+
+    <demo-block :title="$t('shiFouYinCangShanChuAnNiu')">
+      <wd-upload v-model:file-list="fileList22" :action="action"></wd-upload>
+    </demo-block>
   </page-wraper>
 </template>
 <script lang="ts" setup>
@@ -162,6 +166,12 @@ const fileList18 = ref<UploadFile[]>([])
 const fileList19 = ref<UploadFile[]>([])
 const fileList20 = ref<UploadFile[]>([])
 const fileList21 = ref<UploadFile[]>([])
+const fileList22 = ref<UploadFile[]>([
+  {
+    url: 'https://wot-ui.cn/assets/panda.jpg',
+    hideRemoveIcon: true
+  }
+])
 
 const upload14 = ref<UploadInstance>()
 
