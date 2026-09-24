@@ -139,5 +139,11 @@ export default {
   slideVerify: {
     text: 'اسحب لليمين للتحقق',
     successText: 'تم التحقق بنجاح'
+  },
+  puzzleCaptcha: {
+    title: 'التحقق الأمني',
+    placeholder: 'اسحب الشريحة أدناه لإكمال اللغز',
+    successText: 'تم التحقق بنجاح',
+    failText: 'فشل التحقق، يرجى المحاولة مرة أخرى'
   }
 }

@@ -366,6 +366,21 @@
           }
         },
         {
+          "path": "puzzleCaptcha/Index",
+          "name": "puzzleCaptcha",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "PuzzleCaptcha 拼图验证",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%puzzlecaptcha-title%"
+            // #endif
+          }
+        },
+        {
           "path": "statusTip/Index",
           "name": "statusTip",
           "style": {

@@ -241,6 +241,10 @@ const list = computed(() => [
         name: t('passwordinput-mi-ma-shu-ru-kuang')
       },
       {
+        id: 'puzzleCaptcha',
+        name: t('puzzlecaptcha-pin-tu-yan-zheng')
+      },
+      {
         id: 'signature',
         name: t('signature-qian-ming')
       }
