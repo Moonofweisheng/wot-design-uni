@@ -816,6 +816,21 @@
           }
         },
         {
+          "path": "weekDate/Index",
+          "name": "weekDate",
+          "style": {
+            "mp-alipay": {
+              "allowsBounceVertical": "NO"
+            },
+            // #ifdef MP
+            "navigationBarTitleText": "WeekDate 周日期选择器",
+            // #endif
+            // #ifndef MP
+            "navigationBarTitleText": "%week-date-title%"
+            // #endif
+          }
+        },
+        {
           "path": "datetimePickerView/Index",
           "name": "datetimePickerView",
           "style": {

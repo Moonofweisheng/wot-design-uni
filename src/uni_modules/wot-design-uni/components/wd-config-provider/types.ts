@@ -1053,6 +1053,19 @@ export type slideVerifyThemeVars = {
   slideVerifyTrackWidth?: string
 }
 
+export type weekDateThemeVars = {
+  weekDateBg?: string
+  weekDateBtnColor?: string
+  weekDateBtnSize?: string
+  weekDateLabelSize?: string
+  weekDateLabelColor?: string
+  weekDateDateSize?: string
+  weekDateDateColor?: string
+  weekDateActiveBg?: string
+  weekDateActiveColor?: string
+  weekDateDisabledColor?: string
+}
+
 export type ConfigProviderThemeVars = baseThemeVars &
   actionSheetThemeVars &
   badgeThemeVars &
@@ -1121,4 +1134,5 @@ export type ConfigProviderThemeVars = baseThemeVars &
   tourThemeVars &
   avatarThemeVars &
   avatarGroupThemeVars &
-  slideVerifyThemeVars
+  slideVerifyThemeVars &
+  weekDateThemeVars

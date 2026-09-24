@@ -1,0 +1,89 @@
+@import './../common/abstracts/_mixin.scss';
+@import './../common/abstracts/variable.scss';
+
+@include b(week-date) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  background-color: $-week-date-bg;
+
+  @include e(week) {
+    display: flex;
+    flex: 1;
+  }
+
+  @include e(item) {
+    flex: 1;
+    padding: 4px 0;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    @include when(disabled) {
+      cursor: not-allowed;
+      background: transparent;
+      color: $-week-date-disabled-color;
+      opacity: 0.6;
+    }
+
+    @include when(active) {
+      background: $-week-date-active-bg;
+      color: $-week-date-active-color;
+
+      .wd-week-date__week-label,
+      .wd-week-date__date {
+        color: $-week-date-active-color;
+      }
+    }
+
+    @include when(circle) {
+      .wd-week-date__date {
+        padding: 6px;
+      }
+
+      @include when(active) {
+        background: transparent;
+
+        .wd-week-date__date {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: $-week-date-active-bg;
+          color: $-week-date-active-color;
+          transition: background-color 0.2s, color 0.2s;
+        }
+
+        .wd-week-date__week-label {
+          color: $-week-date-active-bg;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  @include e(week-label) {
+    font-size: $-week-date-label-size;
+    margin-bottom: 6px;
+    color: $-week-date-label-color;
+  }
+
+  @include e(date) {
+    font-size: $-week-date-date-size;
+    font-weight: 500;
+    color: $-week-date-date-color;
+  }
+
+  @include e(btn) {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: $-week-date-btn-size;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: $-week-date-btn-color;
+  }
+}
