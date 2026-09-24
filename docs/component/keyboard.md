@@ -130,6 +130,28 @@ const onInput = (value) => showToast(`${value}`)
 const onDelete = () => showToast('删除')
 ```
 
+## 车牌号键盘 QWERTY 布局
+
+通过 `qwerty-layout` 属性可以使用 QWERTY 布局的车牌键盘。
+
+```html
+<wd-cell title="车牌号键盘（QWERTY 布局）" is-link @click="showKeyBoard" />
+
+<wd-keyboard v-model:visible="visible" mode="car" qwerty-layout @input="onInput" @delete="onDelete"></wd-keyboard>
+```
+
+```ts
+const { show: showToast } = useToast()
+const visible = ref<boolean>(false)
+
+function showKeyBoard() {
+  visible.value = true
+}
+
+const onInput = (value) => showToast(`${value}`)
+const onDelete = () => showToast('删除')
+```
+
 ## 带标题的键盘
 
 通过 `title` 属性可以设置键盘标题。
@@ -300,6 +322,7 @@ const onDelete = () => showToast('删除')
 | root-portal         | 是否从页面中脱离出来，用于解决各种 fixed 失效问题                    | `boolean`             | -                          | `false`    | 1.11.0   |
 | v-model:carLang    | 车牌键盘语言模式，当 mode=car 时生效                                 | `string`              | `zh`, `en`                 | -          | 1.13.0   |
 | autoSwitchLang    | 是否自动切换车牌键盘语言，当 mode=car 且 car-lang 是非受控状态时生效 | `boolean`             | -                          | `false`    | 1.13.0   |
+| qwerty-layout     | 是否使用 QWERTY 布局，当 mode=car 时生效                             | `boolean`             | -                          | `false`    | 1.13.0   |
 
 ## Slot
 

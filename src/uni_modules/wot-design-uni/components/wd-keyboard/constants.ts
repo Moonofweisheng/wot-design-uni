@@ -41,7 +41,7 @@ export const CAR_KEYBOARD_AREAS = [
 ]
 
 /**
- * 车牌号键盘-数字和字母（不包含I和O，因为车牌号规则中不使用这两个字母）
+ * 车牌号键盘-数字和字母
  */
 export const CAR_KEYBOARD_KEYS = [
   1,
@@ -61,6 +61,8 @@ export const CAR_KEYBOARD_KEYS = [
   'T',
   'Y',
   'U',
+  'I',
+  'O',
   'P',
   'A',
   'S',
@@ -79,3 +81,8 @@ export const CAR_KEYBOARD_KEYS = [
   'N',
   'M'
 ]
+
+/**
+ * 车牌号键盘-数字和字母（旧版，不包含I和O）
+ */
+export const CAR_KEYBOARD_KEYS_OLD = CAR_KEYBOARD_KEYS.filter((key) => key !== 'I' && key !== 'O')
