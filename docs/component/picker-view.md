@@ -13,7 +13,7 @@
 import { useToast } from '@/uni_modules/wot-design-uni'
 const toast = useToast()
 const columns = ref(['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'])
-const value3 = ref<string>('')
+const value = ref<string>('')
 function onChange({picker, value, index}) {
   toast.show(`当前选中项: ${value}, 下标: ${index}`)
 }
