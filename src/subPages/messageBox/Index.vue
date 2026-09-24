@@ -13,6 +13,10 @@
         <wd-button @click="alertWithTitle">alert</wd-button>
       </demo-block>
 
+      <demo-block :title="$t('xian-shi-guan-bi-an-niu')">
+        <wd-button @click="showClose">showClose</wd-button>
+      </demo-block>
+
       <demo-block title="confirm">
         <wd-button @click="confirm">confirm</wd-button>
       </demo-block>
@@ -59,6 +63,12 @@ function alertWithTitle() {
   message.alert({
     msg: t('ti-shi-wen-an'),
     title: t('biaoTi-0')
+  })
+}
+function showClose() {
+  message.alert({
+    title: t('xian-shi-guan-bi-an-niu'),
+    showClose: true
   })
 }
 function confirm() {
