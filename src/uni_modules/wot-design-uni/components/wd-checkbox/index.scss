@@ -71,7 +71,7 @@
 }
 
 @include b(checkbox) {
-  display: block;
+  display: flex;
   margin-bottom: $-checkbox-margin;
   font-size: 0;
   -webkit-tap-highlight-color: transparent;
@@ -86,11 +86,14 @@
     display: inline-block;
     width: $-checkbox-size;
     height: $-checkbox-size;
+    min-width: $-checkbox-size;
+    min-height: $-checkbox-size;
+    flex-shrink: 0;
     border: 2px solid $-checkbox-border-color;
     border-radius: 50%;
     color: $-checkbox-check-color;
     background: $-checkbox-bg;
-    vertical-align: middle;
+    vertical-align: top;
     transition: background 0.2s;
     box-sizing: border-box;
 
@@ -116,9 +119,9 @@
 
   @include e(txt) {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
     line-height: 20px;
-    @include lineEllipsis;
+    @include multiEllipsis(2);
   }
 
   @include e(label) {
