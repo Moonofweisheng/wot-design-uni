@@ -320,6 +320,41 @@ function handleConfirm({ value, selectedItems }) {
 }
 ```
 
+## 附加数据
+
+通过插槽在显示选项的附加数据。在这个例子中，显示 additional 的数据
+
+```javascript
+const columns3 = ref<Record<string, any>[]>([
+  {
+    value: '101',
+    label: '男装',
+    additional: {
+      mobile: 13800138000,
+      position: 'manager'
+    }
+  },
+  ...
+])
+```
+
+```vue
+<wd-select-picker
+  :label="$t('fu-jia-shu-ju')"
+  type="radio"
+  :show-confirm="false"
+  v-model="value20"
+  :columns="columns3"
+  @confirm="handleConfirm2"
+>
+  <template #addition="{ item }">
+    <wd-tag type="primary" round>{{ item.additional.position }}</wd-tag>
+    <wd-tag icon="phone" type="success" round>{{ item.additional.mobile }}</wd-tag>
+  </template>
+</wd-select-picker>
+
+```
+
 ## Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |

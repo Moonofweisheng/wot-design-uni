@@ -54,6 +54,19 @@
           :columns="columns1"
           @confirm="handleConfirm2"
         />
+        <wd-select-picker
+          :label="$t('fu-jia-shu-ju')"
+          type="radio"
+          :show-confirm="false"
+          v-model="value20"
+          :columns="columns3"
+          @confirm="handleConfirm2"
+        >
+          <template #addition="{ item }">
+            <wd-tag type="primary" round>{{ item.additional.position }}</wd-tag>
+            <wd-tag icon="phone" type="success" round>{{ item.additional.mobile }}</wd-tag>
+          </template>
+        </wd-select-picker>
       </wd-cell-group>
     </view>
     <demo-block :title="$t('label-bu-chuan')" transparent>
@@ -147,6 +160,104 @@ const columns2 = ref<Record<string, any>[]>([
   {
     value: '103',
     label: t('nv-zhuang-0')
+  }
+])
+const columns3 = ref<Record<string, any>[]>([
+  {
+    value: '101',
+    label: t('nan-zhuang'),
+    additional: {
+      mobile: 13800138000,
+      position: 'manager'
+    }
+  },
+  {
+    value: '102',
+    label: t('she-chi-pin'),
+    additional: {
+      mobile: 10000,
+      position: 'telecom'
+    }
+  },
+  {
+    value: '103',
+    label: t('nv-zhuang'),
+    additional: {
+      mobile: 10010,
+      position: 'unicom'
+    }
+  },
+  {
+    value: '104',
+    label: t('xie-xue'),
+    additional: {
+      mobile: 10086,
+      position: 'mobile'
+    }
+  },
+  {
+    value: '105',
+    label: t('nei-yi-pei-shi'),
+    additional: {
+      mobile: 110,
+      position: 'police'
+    }
+  },
+  {
+    value: '106',
+    label: t('xiang-bao'),
+    additional: {
+      mobile: 120,
+      position: 'ambulance'
+    }
+  },
+  {
+    value: '107',
+    label: t('mei-zhuang-hu-fu'),
+    additional: {
+      mobile: 510000,
+      position: 'postcode'
+    }
+  },
+  {
+    value: '108',
+    label: t('ge-xing-qing-jie'),
+    additional: {
+      mobile: 13800138000,
+      position: 'staff'
+    }
+  },
+  {
+    value: '109',
+    label: t('zhong-biao-zhu-bao'),
+    additional: {
+      mobile: 13800138000,
+      position: 'manager'
+    }
+  },
+  {
+    value: '110',
+    label: t('shou-ji'),
+    additional: {
+      mobile: 13800138000,
+      position: 'manager'
+    }
+  },
+  {
+    value: '111',
+    label: t('shu-ma'),
+    additional: {
+      mobile: 13800138000,
+      position: 'manager'
+    }
+  },
+  {
+    value: '112',
+    label: t('dian-nao-ban-gong'),
+    additional: {
+      mobile: 13800138000,
+      position: 'manager'
+    }
   }
 ])
 const value1 = ref<string[]>(['101'])
