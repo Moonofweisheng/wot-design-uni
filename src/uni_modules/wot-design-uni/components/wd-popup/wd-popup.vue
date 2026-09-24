@@ -1,4 +1,17 @@
 <template>
+  <!-- #ifdef MP -->
+  <page-container
+    v-if="backpress !== 'back' && isTopPopup && backpressVisible"
+    :show="modelValue"
+    :duration="0"
+    :z-index="0"
+    :overlay="false"
+    custom-style="display: none"
+    @beforeleave="onBackpressBeforeLeave"
+    @before-leave="onBackpressBeforeLeave"
+  />
+  <!-- #endif -->
+
   <wd-root-portal v-if="rootPortal">
     <view class="wd-popup-wrapper">
       <wd-overlay
@@ -77,7 +90,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, ref, watch } from 'vue'
 import wdIcon from '../wd-icon/wd-icon.vue'
 import wdOverlay from '../wd-overlay/wd-overlay.vue'
 import wdTransition from '../wd-transition/wd-transition.vue'
@@ -85,6 +98,7 @@ import wdRootPortal from '../wd-root-portal/wd-root-portal.vue'
 import { popupProps } from './types'
 import type { TransitionName } from '../wd-transition/types'
 import { getSystemInfo } from '../common/util'
+import { useTimeout, useTopPopup } from '../composables'
 
 const props = defineProps(popupProps)
 const emit = defineEmits([
@@ -96,7 +110,8 @@ const emit = defineEmits([
   'after-leave',
   'after-enter',
   'click-modal',
-  'close'
+  'close',
+  'backpress'
 ])
 
 /**
@@ -162,7 +177,44 @@ function close() {
   emit('close')
   emit('update:modelValue', false)
 }
+
 function noop() {}
+
+const { isTopPopup } = useTopPopup(
+  () => props.modelValue,
+  () => props.backpress === 'back',
+  () => {
+    emit('backpress')
+    close()
+  }
+)
+
+const backpressVisible = ref<boolean>(false)
+const onBackpressBeforeLeave = () => {
+  emit('backpress')
+  if (props.backpress === 'stop') {
+    backpressVisible.value = false
+    setTimeout(() => {
+      backpressVisible.value = true
+    }, 50)
+  } else {
+    close()
+  }
+}
+const { start: setVisibleLater, stop: cancelDelayVisible } = useTimeout(() => {
+  backpressVisible.value = true
+}, 50)
+watch(
+  () => props.modelValue,
+  (nv) => {
+    if (nv) {
+      setVisibleLater()
+    } else {
+      backpressVisible.value = false
+      cancelDelayVisible()
+    }
+  }
+)
 </script>
 
 <style lang="scss" scoped>

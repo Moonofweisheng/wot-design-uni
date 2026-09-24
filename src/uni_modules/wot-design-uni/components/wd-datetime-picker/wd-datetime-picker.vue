@@ -54,14 +54,16 @@
     <!--弹出层，picker-view 在隐藏时修改值，会触发多次change事件，从而导致所有列选中第一项，因此picker在关闭时不隐藏 -->
     <wd-popup
       v-model="popupShow"
+      custom-class="wd-datetime-picker__popup"
       position="bottom"
       :hide-when-close="false"
       :close-on-click-modal="closeOnClickModal"
       :safe-area-inset-bottom="safeAreaInsetBottom"
       :z-index="zIndex"
       :root-portal="rootPortal"
+      :backpress="backpress"
+      @backpress="onBackpress"
       @close="onCancel"
-      custom-class="wd-datetime-picker__popup"
     >
       <view class="wd-datetime-picker__wraper">
         <!--toolBar-->
@@ -177,7 +179,7 @@ import dayjs from '../../dayjs'
 import { getPickerValue } from '../wd-datetime-picker-view/util'
 
 const props = defineProps(datetimePickerProps)
-const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'clear', 'update:modelValue'])
+const emit = defineEmits(['change', 'open', 'toggle', 'cancel', 'confirm', 'clear', 'update:modelValue', 'backpress'])
 
 const { translate } = useTranslate('datetime-picker')
 
@@ -787,6 +789,13 @@ function handleClear() {
   emit('clear')
   emit('update:modelValue', '')
   setShowValue(false, true)
+}
+
+function onBackpress() {
+  emit('backpress')
+  if (props.backpress === 'close') {
+    onCancel()
+  }
 }
 
 defineExpose<DatetimePickerExpose>({

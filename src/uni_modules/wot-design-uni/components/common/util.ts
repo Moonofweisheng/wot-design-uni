@@ -230,6 +230,10 @@ export const context = {
   id: 1000
 }
 
+export function uniqID(prefix = '__wot_'): string {
+  return prefix + (~~(Math.random() * 10e8)).toString(36) + '-' + (++context.id).toString(36)
+}
+
 export type RectResultType<T extends boolean> = T extends true ? UniApp.NodeInfo[] : UniApp.NodeInfo
 
 /**
