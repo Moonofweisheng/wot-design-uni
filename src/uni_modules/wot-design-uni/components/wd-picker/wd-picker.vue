@@ -8,7 +8,7 @@
     <wd-cell
       v-if="!$slots.default"
       :title="label"
-      :value="showValue ? showValue : placeholder || translate('placeholder')"
+      :value="showValue ? showValue : placeholderValue"
       :required="required"
       :size="size"
       :title-width="labelWidth"
@@ -198,6 +198,11 @@ const showArrow = computed(() => {
   return !props.disabled && !props.readonly && !showClear.value
 })
 
+//自定义placeholder
+const placeholderValue = computed(() => {
+  return isDef(props.placeholder) ? props.placeholder : translate('placeholder')
+})
+
 const cellClass = computed(() => {
   const classes = ['wd-picker__cell']
   if (props.disabled) classes.push('is-disabled')
@@ -227,10 +232,10 @@ function handleShowValueUpdate(value: string | number | Array<string | number>) 
   if ((isArray(value) && value.length > 0) || (isDef(value) && !isArray(value) && value !== '')) {
     if (pickerViewWd.value) {
       nextTick(() => {
-        setShowValue(pickerViewWd.value!.getSelects())
+        setShowValue(pickerViewWd.value!.getSelects(),value)
       })
     } else {
-      setShowValue(getSelects(value)!)
+      setShowValue(getSelects(value)!,value)
     }
   } else {
     showValue.value = ''
@@ -367,9 +372,12 @@ function pickerViewChange({ value }: any) {
  * 设置展示值
  * @param  items
  */
-function setShowValue(items: ColumnItem | ColumnItem[]) {
+function setShowValue(items: ColumnItem | ColumnItem[],value?:any) {
   // 避免值为空时调用自定义展示函数
-  if ((isArray(items) && !items.length) || !items) return
+  if ((isArray(items) && !items.length) || !items) {
+    showValue.value = value
+    return
+  }
 
   const { valueKey, labelKey } = props
   showValue.value = (props.displayFormat || defaultDisplayFormat)(items, { valueKey, labelKey })
