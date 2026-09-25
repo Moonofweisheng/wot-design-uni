@@ -42,7 +42,7 @@ describe('条件编译测试', () => {
     }
 
     // 非 APP 平台显示的组件
-    if (currentPlatform.toUpperCase() !== 'APP-PLUS') {
+    if (currentPlatform.toUpperCase() !== 'APP') {
       expect(wrapper.find('.not-app').exists()).toBe(true)
       expect(wrapper.find('.not-app').text()).toBe('非APP平台显示')
     }

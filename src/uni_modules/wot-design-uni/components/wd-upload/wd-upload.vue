@@ -11,10 +11,10 @@
             <wd-icon name="play-circle-filled" custom-class="wd-upload__video-paly"></wd-icon>
           </view>
           <view v-else class="wd-upload__video" @click="onPreviewVideo(file)">
-            <!-- #ifdef APP-PLUS || MP-DINGTALK -->
+            <!-- #ifdef APP || MP-DINGTALK -->
             <wd-icon custom-class="wd-upload__video-icon" name="video"></wd-icon>
             <!-- #endif -->
-            <!-- #ifndef APP-PLUS -->
+            <!-- #ifndef APP -->
             <!-- #ifndef MP-DINGTALK -->
             <video
               :src="file.url"
