@@ -166,9 +166,24 @@ function initPosition() {
 // 按下时坐标相对于元素的偏移量
 const touchOffset = reactive({ x: 0, y: 0 })
 const attractTransition = ref<boolean>(false)
+
+//解决App端拖动和下拉刷新冲突问题
+// #ifdef APP-PLUS
+const pages = getCurrentPages()
+const page = pages[pages.length - 1]
+const currentWebview = page?.$getAppWebview?.()
+// #endif
+
 function handleTouchStart(e: TouchEvent) {
   if (props.draggable === false) return
-
+  if (currentWebview) {
+    currentWebview.setStyle({
+      pullToRefresh: {
+        support: false,
+        style: plus.os.name === 'Android' ? 'circle' : 'default'
+      }
+    })
+  }
   const touch = e.touches[0]
   touchOffset.x = touch.clientX - left.value
   touchOffset.y = touch.clientY - top.value
@@ -195,7 +210,14 @@ function handleTouchMove(e: TouchEvent) {
 
 function handleTouchEnd() {
   if (props.draggable === false) return
-
+  if (currentWebview) {
+    currentWebview.setStyle({
+      pullToRefresh: {
+        support: true,
+        style: plus.os.name === 'Android' ? 'circle' : 'default'
+      }
+    })
+  }
   const screenCenterX = screen.width / 2
   const fabCenterX = left.value + fabSize.width / 2
   attractTransition.value = true
