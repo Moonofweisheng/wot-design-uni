@@ -11,12 +11,12 @@
             :class="`wd-month__day ${item.disabled ? 'is-disabled' : ''} ${item.isLastRow ? 'is-last-row' : ''} ${
               item.type ? dayTypeClass(item.type) : ''
             }`"
-            :style="index === 0 ? firstDayStyle : ''"
+            :style="[index === 0 ? firstDayStyle : '', item.customStyle]"
             @click="handleDateClick(index)"
           >
-            <view class="wd-month__day-container">
+            <view class="wd-month__day-container" :class="item.customDayClass">
               <view class="wd-month__day-top">{{ item.topInfo }}</view>
-              <view class="wd-month__day-text">
+              <view class="wd-month__day-text" :class="item.customTextClass">
                 {{ item.text }}
               </view>
               <view class="wd-month__day-bottom">{{ item.bottomInfo }}</view>
@@ -60,7 +60,8 @@ import type { CalendarDayItem, CalendarDayType } from '../types'
 import { monthProps } from './types'
 
 const props = defineProps(monthProps)
-const emit = defineEmits(['change'])
+
+const emit = defineEmits(['change', 'date-click'])
 
 const { translate } = useTranslate('calendar-view')
 
@@ -237,6 +238,12 @@ function getWeekValue() {
 }
 function handleDateClick(index: number) {
   const date = days.value[index]
+
+  if (date.clickAble) {
+    emit('date-click', date)
+    return
+  }
+
   switch (props.type) {
     case 'date':
     case 'datetime':
