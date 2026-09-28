@@ -674,7 +674,6 @@ function handleConfirm() {
   emit('confirm', {
     value
   })
-  setShowValue(false, true)
 }
 
 /**
