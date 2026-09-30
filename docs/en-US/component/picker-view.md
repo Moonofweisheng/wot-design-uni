@@ -26,6 +26,7 @@ When `columns` options are objects, their data structure is:
 | value | string / number / boolean | Option value, if value property doesn't exist, label is used as the option's value | - |
 | label | string | Option text content | - |
 | disabled | boolean | Whether the option is disabled | - |
+| icon | string | Option icon | $LOWEST_VERSION$ |
 
 ## Disabled Options
 
