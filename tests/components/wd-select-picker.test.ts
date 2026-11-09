@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import WdSelectPicker from '@/uni_modules/wot-design-uni/components/wd-select-picker/wd-select-picker.vue'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 import WdSearch from '@/uni_modules/wot-design-uni/components/wd-search/wd-search.vue'
 import WdIcon from '@/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue'
 import { nextTick } from 'vue'
@@ -101,6 +101,34 @@ describe('WdSelectPicker', () => {
 
     const emitted = wrapper.emitted() as Record<string, any[]>
     expect(emitted['cancel']).toBeTruthy()
+  })
+
+  test('打开后禁用时不会选择选项', async () => {
+    const wrapper = mount(WdSelectPicker, {
+      props: {
+        modelValue: 'apple',
+        columns: [
+          { value: 'apple', label: 'Apple' },
+          { value: 'orange', label: 'Orange' }
+        ],
+        type: 'radio',
+        showConfirm: false
+      },
+      global: {
+        components: globalComponents
+      }
+    })
+
+    await wrapper.get('.wd-select-picker__cell').trigger('click')
+    expect(wrapper.emitted('open')).toHaveLength(1)
+    await vi.waitFor(() => expect(wrapper.findAll('.wd-radio')).toHaveLength(2))
+    await wrapper.setProps({ disabled: true })
+    const orange = wrapper.findAll('.wd-radio').find((radio) => radio.text() === 'Orange')!
+    await orange.trigger('click')
+
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    expect(wrapper.emitted('confirm')).toBeUndefined()
+    wrapper.unmount()
   })
 
   test('禁用状态', async () => {

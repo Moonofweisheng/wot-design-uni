@@ -64,7 +64,7 @@
         <view v-if="type === 'checkbox' && isArray(selectList)" id="wd-checkbox-group">
           <wd-checkbox-group v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" :min="min" :max="max" @change="handleChange">
             <view v-for="item in filterColumns" :key="item[valueKey]" :id="'check' + item[valueKey]">
-              <wd-checkbox :modelValue="item[valueKey]" :disabled="item.disabled">
+              <wd-checkbox :modelValue="item[valueKey]" :disabled="disabled || item.disabled">
                 <block v-if="filterable && filterVal">
                   <block v-for="text in item[labelKey]" :key="text.label">
                     <text v-if="text.type === 'active'" class="wd-select-picker__text-active">{{ text.label }}</text>
@@ -82,7 +82,7 @@
         <view v-if="type === 'radio' && !isArray(selectList)" id="wd-radio-group">
           <wd-radio-group v-model="selectList" cell :size="selectSize" :checked-color="checkedColor" @change="handleChange">
             <view v-for="(item, index) in filterColumns" :key="index" :id="'radio' + item[valueKey]">
-              <wd-radio :value="item[valueKey]" :disabled="item.disabled">
+              <wd-radio :value="item[valueKey]" :disabled="disabled || item.disabled">
                 <block v-if="filterable && filterVal">
                   <block v-for="text in item[labelKey]" :key="text.label">
                     <text :class="`${text.type === 'active' ? 'wd-select-picker__text-active' : ''}`">{{ text.label }}</text>
@@ -101,7 +101,7 @@
       </scroll-view>
       <!-- 确认按钮 -->
       <view v-if="showConfirm" class="wd-select-picker__footer">
-        <wd-button block size="large" @click="onConfirm" :disabled="loading">{{ confirmButtonText || translate('confirm') }}</wd-button>
+        <wd-button block size="large" @click="onConfirm" :disabled="disabled || loading">{{ confirmButtonText || translate('confirm') }}</wd-button>
       </view>
     </wd-action-sheet>
   </view>
