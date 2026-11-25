@@ -3,6 +3,36 @@ import WdSlider from '@/uni_modules/wot-design-uni/components/wd-slider/wd-slide
 import { describe, test, expect } from 'vitest'
 
 describe('WdSlider', () => {
+  test.each([
+    { modelValue: 85, bounds: { max: 60 }, expected: 60 },
+    { modelValue: 15, bounds: { min: 40 }, expected: 40 },
+    { modelValue: [20, 85], bounds: { max: 60 }, expected: [20, 60] },
+    { modelValue: [15, 80], bounds: { min: 40 }, expected: [40, 80] }
+  ])('clamps dragend to bounds changed during a drag', async ({ modelValue, bounds, expected }) => {
+    const wrapper = mount(WdSlider, { props: { modelValue } })
+    const buttons = wrapper.findAll('.wd-slider__button-wrapper')
+    const button = buttons[buttons.length - 1]
+    await button.trigger('touchstart', { touches: [{ clientX: 0, clientY: 0 }] })
+    await wrapper.setProps(bounds)
+    await button.trigger('touchend')
+
+    expect(wrapper.emitted('dragend')?.[0]).toEqual([{ value: expected }])
+    expect(wrapper.emitted('update:modelValue')).toContainEqual([expected])
+    wrapper.unmount()
+  })
+
+  test('preserves an in-range drag value without emitting a duplicate model update', async () => {
+    const wrapper = mount(WdSlider, { props: { modelValue: 50, step: 7 } })
+    const button = wrapper.find('.wd-slider__button-wrapper')
+    await button.trigger('touchstart', { touches: [{ clientX: 0, clientY: 0 }] })
+    await wrapper.setProps({ max: 60 })
+    await button.trigger('touchend')
+
+    expect(wrapper.emitted('dragend')?.[0]).toEqual([{ value: 50 }])
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    wrapper.unmount()
+  })
+
   // 测试基本渲染
   test('基本渲染', () => {
     const wrapper = mount(WdSlider)

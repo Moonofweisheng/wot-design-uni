@@ -344,6 +344,12 @@ function onSliderTouchMove(event: any) {
 function onSliderTouchEnd() {
   if (isDisabled()) return
 
+  const value = modelValue.value
+  const normalizedValue = isArray(value) ? normalizeRangeValues(value) : clamp(value, minProp.value, maxProp.value)
+  if (!isEqual(value, normalizedValue)) {
+    modelValue.value = normalizedValue
+  }
+
   emit('dragend', { value: modelValue.value })
 }
 
